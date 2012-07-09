@@ -1,0 +1,247 @@
+body {
+background-image:url(img/fondo.jpg);
+background-color: #726d6d;
+font-family: Tahoma, Verdana, sans-serif;
+color: #FFFFFF;
+font-size: 10px;
+font-weight: normal;
+margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 2px;
+margin-left: 0px;
+}
+
+table.TextosEscritorio {
+font-family: Tahoma, Verdana, sans-serif;
+color: #FFFFFF;
+font-size: 10px;
+font-weight: normal;
+}
+
+img.IconosEscritorio {
+   border:0px solid #726d6d;
+   margin-top: 20px;
+   margin-right: 20px;
+   margin-bottom: 20px;
+   margin-left: 20px;
+}
+
+img.IconosEscritorio:hover {
+   XXborder:1px solid #9D7777;
+   XXbackground-color:#726d6d;
+}
+
+table.EstiloVentana {
+font-family: Tahoma, Verdana, sans-serif;
+color: #000000;
+font-size: 10px;
+font-weight: normal;
+padding: 10px;
+}
+
+table.TextosVentana {
+font-family: Tahoma, Verdana, sans-serif;
+color: #000000;
+font-size: 10px;
+font-weight: normal;
+padding: 0px;
+}
+
+table.EstiloBarraEstado {
+font-family: Tahoma, Verdana, sans-serif;
+color: #000000;
+font-size: 10px;
+font-weight: normal;
+padding: 0px;
+background-image:url(img/barra_estado.jpg);
+}
+
+table.MarcoSuperior {
+background-image:url(img/fondo_superior.jpg);
+background-color: #000000;
+font-family: Tahoma, Verdana, sans-serif;
+color: #FFFFFF;
+font-size: 10px;
+font-weight: normal;
+}
+
+table.MarcoInferior {
+background-color: #726d6d;
+font-family: Tahoma, Verdana, sans-serif;
+color: #FFFFFF;
+font-size: 10px;
+font-weight: normal;
+}
+
+table.MenuSuperior {
+background-image:url(img/fondo_menu.jpg);
+background-color: #362D2D;
+font-family: Tahoma, Verdana, sans-serif;
+color: #ffffff;
+font-size: 10px;
+font-weight: normal;
+}
+
+table.MenuSuperior a{
+text-decoration: none;
+color: #ffffff;
+}
+
+table.MenuSuperior a:hover{
+color: #000000;
+font-weight: bold;
+}
+
+/* DEFINICIONES PARA FORMULARIOS EN GENERAL */
+input.CampoTexto {
+background-color: #D4D4D4;
+font-family: Tahoma, Verdana, sans-serif;
+color: #000000;
+font-size: 10px;
+border-width: 1px;
+border-radius: 5px  1px;
+padding: 2px;
+}
+
+input.Botones {
+background-color: #A2A4B6;
+font-family: Tahoma, Verdana, sans-serif;
+color: #ffffff;
+font-size: 10px;
+border-width: 2px;
+border-radius: 1px  10px;
+padding: 2px;
+}
+
+input.BotonesEstado {
+background-color: #A2A4B6;
+font-family: Tahoma, Verdana, sans-serif;
+color: #ffffff;
+font-size: 10px;
+border-width: 1px;
+border-radius: 5px 5px;
+padding: 0px;
+margin-top: 2px;
+margin-right: 10px;
+margin-bottom: 2px;
+margin-left: 10px;
+font-weight: bold;
+}
+
+input.BotonesEstadoCuidado {
+background-color: #ff0000;
+font-family: Tahoma, Verdana, sans-serif;
+color: #ffff00;
+font-size: 10px;
+border-width: 1px;
+border-radius: 5px 5px;
+padding: 0px;
+margin-top: 2px;
+margin-right: 10px;
+margin-bottom: 2px;
+margin-left: 10px;
+font-weight: bold;
+}
+
+TEXTAREA {
+background-color: #D4D4D4;
+font-family: Tahoma, Verdana, sans-serif;
+color: #000000;
+font-size: 10px;
+border-width: 1px;
+border-radius: 5px  1px;
+padding: 2px;
+}
+
+SELECT {
+font-family: Verdana, Tahoma, Arial;
+font-size: 10px;
+font-weight: normal;
+background-color: #D4D4D4;
+}
+
+SELECT.Combos {
+color: #000000;
+}
+
+input.Combos {
+background-color: #A2A4B6;
+font-family: Tahoma, Verdana, sans-serif;
+color: #ffffff;
+font-size: 10px;
+border-width: 2px;
+border-radius: 1px  10px;
+padding: 2px;
+}
+
+
+input.BotonesCuidado {
+background-color: #ff0000;
+font-family: Tahoma, Verdana, sans-serif;
+color: #ffff00;
+font-size: 10px;
+border-width: 2px;
+border-radius: 1px  10px;
+padding: 2px;
+}
+
+input:hover,
+textarea:hover,
+select:hover,
+input:focus,
+textarea:focus,
+select:focus {
+  background-color: #3A3B44;
+  color: #ffffff;
+}
+
+div.nicetitle {
+    position: absolute;
+    padding: 4px;
+    top: 0px;
+    left: 0px;
+    color: yellow;
+    font-size: 10px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    width: 25em;
+    font-weight: bold;
+    background: url(img/tooltips_back.png);
+    /* Mozilla proprietary */
+    -moz-border-radius: 12px;
+    z-index:999;
+}
+div.nicetitle p {
+    margin: 0; padding: 0 3px;
+}
+div.nicetitle p.destination {
+    font-size: 9px;
+    text-align: left;
+    padding-top: 3px;
+    font-weight: normal;
+}
+
+
+.FormularioPopUps
+{
+   padding:0;
+   position:absolute;
+   z-index:999;
+   cursor:default;   
+   display:none;
+}
+
+.FondoOscuroPopUps
+{
+   position: fixed; 
+   top:0; 
+   left:0; 
+   bottom:0; 
+   right:0;
+   
+   background:#000000;
+   opacity: .5;
+   -moz-opacity: .5;
+   filter: alpha(opacity=50);
+   z-index:1;
+   display:none;
+}
