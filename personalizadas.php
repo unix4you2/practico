@@ -13,7 +13,7 @@
 			*/
 			
 			/* Agregue en este archivo las funciones o acciones que desee vincular a menues especificos o realizacion de operaciones internas.
-			   Utilice el condicional para diferenciar la accion recibida y ser asi ejecutada. Puede vincularlos mediante forms*/			
+			   Utilice el condicional para diferenciar la accion recibida y ser asi ejecutada. Puede vincularlos mediante forms.*/			
 			
 ?>
 
