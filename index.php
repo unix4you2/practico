@@ -4,7 +4,6 @@
 		Ubicacion *[index.php]*.  Archivo que contiene llamados a los demas modulos y procesos de validacion de cabeceras.
 	*/
 
-
 	// Inicio de la sesion
 	session_start();
 	
@@ -34,6 +33,7 @@
 	if (!isset($accion)) $accion="";
 	if (!isset($Sesion_abierta)) $Sesion_abierta=0;
 
+	// Establece la zona horaria por defecto para la aplicacion - A definir como parametro
 	//date_default_timezone_set("America/Bogota");
 
 	//Cargar archivo de configuracion principal
@@ -45,7 +45,7 @@
 	// Incluye archivo con algunas funciones comunes usadas por la herramienta
 	include("core/comunes.php");
 
-	// Verifica autenticidad de la sesion
+	// Verifica autenticidad de la sesion mediante llave de paso
 	if ($accion!= "" && $accion!="Iniciar_login" && $accion!="Terminar_sesion" && $accion!="Mensaje_cierre_sesion")
 		if (MD5($LlaveDePaso)!=$LlaveDePasoUsuario)
 			{
@@ -210,7 +210,7 @@
 				
 	} 
 /* ################################################################## */
-	// Incluye archivo que puede tener funciones personalizadas
+	// Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios
 	include("personalizadas.php");  
 
 	// Finaliza el contenido central y presenta el pie de pagina de aplicacion

@@ -3,6 +3,7 @@
 
 		function TextoAleatorio($longitud)
 			{
+				// Plantilla para el captcha, a definir como parametro de aplicacion
 				$plantilla = "23456789abcdefghijkmnpqrstuvwxyz";
 				for($i=0;$i<$longitud;$i++)
 					{
@@ -11,7 +12,7 @@
 				return $clave;
 			}
 
-	$longitud=6;
+	$longitud=6; // A definir como parametro
 	$fuente=1;
 	$_SESSION['captcha_temporal'] = TextoAleatorio($longitud);
 	$captcha = imagecreatefromgif("../img/captcha.gif");
