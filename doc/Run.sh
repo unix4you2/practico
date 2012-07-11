@@ -1,1 +1,1 @@
-perl ./NaturalDocs/NaturalDocs -ro -i /mnt/datos/WebServer/Practico/core -i /mnt/datos/WebServer/Practico/js  -i /mnt/datos/WebServer/Practico/sql -o HTML /mnt/datos/WebServer/Practico/doc/Salida_DOC -p /mnt/datos/WebServer/Practico/doc/Proyecto_DOC
+perl ./NaturalDocs/NaturalDocs -ro -i ../core -i ../js  -i ../sql -o HTML ../doc/Salida_DOC -p ../doc/Proyecto_DOC

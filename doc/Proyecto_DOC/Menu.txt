@@ -47,16 +47,17 @@ Footer: Copyright (c) 2012 - John F. Arroyave Gutierrez.
 # --------------------------------------------------------------------------
 
 
-File: Conexiones PDO  (/mnt/datos/WebServer/Practico/core/conexiones.php)
-File: Configuracion base  (/mnt/datos/WebServer/Practico/core/configuracion.php)
-File: Libreria base  (/mnt/datos/WebServer/Practico/core/comunes.php)
+File: Conexiones PDO  (/mnt/datos/jwf/Desarrollo/WebServer/practico/core/conexiones.php)
+File: Configuracion base  (/mnt/datos/jwf/Desarrollo/WebServer/practico/core/configuracion.php)
+File: Libreria base  (/mnt/datos/jwf/Desarrollo/WebServer/practico/core/comunes.php)
 
 Group: Modulos Principales  {
 
-   File: Modulo formularios  (/mnt/datos/WebServer/Practico/core/formularios.php)
-   File: Modulo menues  (/mnt/datos/WebServer/Practico/core/menus.php)
-   File: Modulo tablas  (/mnt/datos/WebServer/Practico/core/tablas.php)
-   File: Modulo usuarios  (/mnt/datos/WebServer/Practico/core/usuarios.php)
+   File: Modulo formularios  (/mnt/datos/jwf/Desarrollo/WebServer/practico/core/formularios.php)
+   File: Modulo menues  (/mnt/datos/jwf/Desarrollo/WebServer/practico/core/menus.php)
+   File: Modulo sesion  (/mnt/datos/jwf/Desarrollo/WebServer/practico/core/sesion.php)
+   File: Modulo tablas  (/mnt/datos/jwf/Desarrollo/WebServer/practico/core/tablas.php)
+   File: Modulo usuarios  (/mnt/datos/jwf/Desarrollo/WebServer/practico/core/usuarios.php)
    }  # Group: Modulos Principales
 
 Group: Index  {
@@ -68,6 +69,6 @@ Group: Index  {
 
 
 ##### Do not change or remove these lines. #####
-Data: 1(D3333E\t3fptu63_GYrGH/GH3gHp9t89u39uHG)
-Data: 1(h3333E\t3fptu63_GYrGH/GH3gHp9t89u3l6)
-Data: 1(T3333E\t3fptu63_GYrGH/GH3gHp9t89u36do)
+Data: 1(D3333E\t3fptu63l7c3BG6pHHuoou3_GYrGH/GH3IHp9t89u39uHG)
+Data: 1(h3333E\t3fptu63l7c3BG6pHHuoou3_GYrGH/GH3IHp9t89u3l6)
+Data: 1(T3333E\t3fptu63l7c3BG6pHHuoou3_GYrGH/GH3IHp9t89u36do)
