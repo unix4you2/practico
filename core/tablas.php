@@ -20,8 +20,6 @@
 	if ($accion=="eliminar_campo")
 		{ 
 			$mensaje_error="";
-			$mysql_enlace = mysql_connect($Servidor, $UsuarioBD, $PasswordBD);
-			mysql_select_db($BaseDatos, $mysql_enlace);
 			
 			// Busca si existen formularios utilizando el campo de la tabla antes de ser eliminado
 			//$consulta = "SELECT * FROM ".$TablasCore."formulario_campo WHERE id='$formulario'";
@@ -30,12 +28,10 @@
 
 			if ($mensaje_error=="")
 				{
-					// Crea la tabla temporal
-					$consulta = "ALTER TABLE $nombre_tabla DROP COLUMN $nombre_campo";
-					$resultado = mysql_query($consulta,$mysql_enlace);
+					// Realiza la operacion
+					ejecutar_sql_unaria("ALTER TABLE $nombre_tabla DROP COLUMN $nombre_campo");
 					// Lleva a auditoria
-					$consulta = "INSERT INTO auditoria VALUES (0,'$Id_usuario','Elimina la tabla de datos $nombre_tabla','$fecha_operacion','$hora_operacion')";
-					$resultado = mysql_query($consulta,$mysql_enlace);
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina campo $nombre_campo de tabla $nombre_tabla','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="accion" value="editar_tabla">
 					<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -76,6 +72,7 @@
 					$consulta .= "$autoincremento ";
 					if ($despues_campo!="")
 						$consulta .= " AFTER $despues_campo ";
+
 					$resultado = mysql_query($consulta,$mysql_enlace);
 					$error_mysql=mysql_error($mysql_enlace);
 					if ($error_mysql!="")
@@ -91,8 +88,7 @@
 					else
 						{
 							// Lleva a auditoria
-							$consulta = "INSERT INTO auditoria VALUES (0,'$Id_usuario','Agrega campo $nombre_campo tipo $tipo a $nombre_tabla','$fecha_operacion','$hora_operacion')";
-							$resultado = mysql_query($consulta,$mysql_enlace);
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Agrega campo $nombre_campo tipo $tipo a tabla $nombre_tabla','$fecha_operacion','$hora_operacion')");
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 								<input type="Hidden" name="accion" value="editar_tabla">
 								<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -281,16 +277,12 @@
 	if ($accion=="eliminar_tabla")
 		{
 			$mensaje_error="";
-			$mysql_enlace = mysql_connect($Servidor, $UsuarioBD, $PasswordBD);
-			mysql_select_db($BaseDatos, $mysql_enlace);
 			if ($mensaje_error=="")
 				{
-					// Crea la tabla temporal
-					$consulta = "DROP TABLE $nombre_tabla";
-					$resultado = mysql_query($consulta,$mysql_enlace);
+					// Realiza la operacion
+					ejecutar_sql_unaria("DROP TABLE $nombre_tabla");
 					// Lleva a auditoria
-					$consulta = "INSERT INTO auditoria VALUES (0,'$Id_usuario','Elimina la tabla de datos $nombre_tabla','$fecha_operacion','$hora_operacion')";
-					$resultado = mysql_query($consulta,$mysql_enlace);
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Id_usuario','Elimina tabla $nombre_tabla','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_tablas"></form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -328,8 +320,7 @@
 					else
 						{
 							// Lleva a auditoria
-							$consulta = "INSERT INTO auditoria VALUES (0,'$Id_usuario','Crea tabla de datos $nombre_tabla','$fecha_operacion','$hora_operacion')";
-							$resultado = mysql_query($consulta,$mysql_enlace);
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Id_usuario','Crea tabla $nombre_tabla','$fecha_operacion','$hora_operacion')");
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_tablas"></form>
 									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 						}
@@ -348,7 +339,6 @@
 <!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <?php if ($accion=="administrar_tablas")
 	{
-			
 			abrir_ventana('Crear/Listar tablas de datos definidias en el sistema','f2f2f2','95%'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_crear_tabla">

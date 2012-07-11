@@ -57,4 +57,20 @@
 	$MotorTablasApp="MyISAM";
 
 	$LlaveDePaso=""; // Valor unico para firmar los usuarios del aplicativo.  No debe ser cambiado despues de puesto en marcha a menos que se haga un update manual el usuario que no coincida con la llave no podra ingresar.
+
+
+/*
+PDO_CUBRID Cubrid
+PDO_DBLIB FreeTDS / Microsoft SQL Server / Sybase
+PDO_FIREBIRD Firebird/Interbase 6
+PDO_IBM IBM DB2
+PDO_INFORMIX IBM Informix Dynamic Server
+PDO_MYSQL MySQL 3.x/4.x/5.x
+PDO_OCI Oracle Call Interface
+PDO_ODBC ODBC v3 (IBM DB2, unixODBC and win32 ODBC)
+PDO_PGSQL PostgreSQL
+PDO_SQLITE SQLite 3 and SQLite 2
+PDO_4D
+*/
+
 ?>
