@@ -43,7 +43,8 @@
 	include("core/conexiones.php");
 	
 	// Incluye archivo con algunas funciones comunes usadas por la herramienta
-	include("core/comunes.php");
+	include_once("core/comunes.php");
+
 
 	// Verifica autenticidad de la sesion mediante llave de paso
 	if ($accion!= "" && $accion!="Iniciar_login" && $accion!="Terminar_sesion" && $accion!="Mensaje_cierre_sesion")
