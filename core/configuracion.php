@@ -19,10 +19,12 @@
 		(end)
 	*/
 	
-	$Servidor="localhost";
-	$BaseDatos="unixlandia_org";
+	$ServidorBD="localhost";
+	$BaseDatos="unixlandia_org";  // Path completo cuando se trata de sqlite2, ej: "/path/to/database.sdb"
 	$UsuarioBD="root";
 	$PasswordBD="";
+	$MotorBD="mysql";
+	$PuertoBD="";
 
 	/*
 		Section: Variables para aplicacion
