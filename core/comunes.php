@@ -10,52 +10,21 @@
 	*/
 
 /* ################################################################## */
-	function ejecutar_sql_unaria($query,$param="")
-	  {
-		/*
-			Function: ejecutar_sql_unaria
-			Ejecuta consultas que no retornan registros tales como CREATE, INSERT, DELETE, UPDATE entre otros.
-
-			Variables de entrada:
-
-				query - Consulta preformateada para ser ejecutada en el motor
-				param - Lista de parametros que deben ser preparados para el query separados por coma
-
-			Salida:
-				Retorna una cadena que contiene una descripcion de error PDO en caso de error y agrega un mensaje en pantalla con la descripcion devuelta por el driver
-				Retorna una cadena vacia si la consulta es ejecutada sin problemas.
-		*/
-			global $ConexionPDO;
-			try
-				{
-					$consulta = $ConexionPDO->prepare($query);
-					$consulta->execute();
-					return "";
-				}
-			catch( PDOException $ErrorPDO)
-				{
-					echo '<script language="JavaScript"> alert("Ha ocurrido un error interno durante la ejecucion del Query: '.$query.'\n\nEl motor ha devuelto: '.$ErrorPDO->getMessage().'.\n\nPongase en contacto con el administrador del sistema y comunique este mensaje.");  </script>';					
-					//mensaje('Error durante la ejecuci&oacute;n',$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
-					return $ErrorPDO->getMessage();
-				}
-	  }
-
-/* ################################################################## */
 	function ejecutar_sql($query,$param="")
-	  {
-		/*
-			Function: ejecutar_sql
-			Ejecuta consultas que retornan registros (SELECTs).
+		{
+			/*
+				Function: ejecutar_sql
+				Ejecuta consultas que retornan registros (SELECTs).
 
-			Variables de entrada:
+				Variables de entrada:
 
-				query - Consulta preformateada para ser ejecutada en el motor
-				param - Lista de parametros que deben ser preparados para el query separados por coma
-				
-			Salida:
-				Retorna mensaje en pantalla con la descripcion devuelta por el driver en caso de error
-				Retorna una variable con el arreglo de resultados en caso de ser exitosa la consulta
-		*/
+					query - Consulta preformateada para ser ejecutada en el motor
+					param - Lista de parametros que deben ser preparados para el query separados por coma
+					
+				Salida:
+					Retorna mensaje en pantalla con la descripcion devuelta por el driver en caso de error
+					Retorna una variable con el arreglo de resultados en caso de ser exitosa la consulta
+			*/
 			global $ConexionPDO;
 			try
 				{
@@ -69,25 +38,83 @@
 					mensaje('Error durante la ejecuci&oacute;n',$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
 					return 1;
 				}
-	  }
+		}
+
+/* ################################################################## */
+	function ejecutar_sql_unaria($query,$param="")
+		{
+			/*
+				Function: ejecutar_sql_unaria
+				Ejecuta consultas que no retornan registros tales como CREATE, INSERT, DELETE, UPDATE entre otros.
+
+				Variables de entrada:
+
+					query - Consulta preformateada para ser ejecutada en el motor
+					param - Lista de parametros que deben ser preparados para el query separados por coma
+
+				Salida:
+					Retorna una cadena que contiene una descripcion de error PDO en caso de error y agrega un mensaje en pantalla con la descripcion devuelta por el driver
+					Retorna una cadena vacia si la consulta es ejecutada sin problemas.
+			*/
+			global $ConexionPDO;
+			try
+				{
+					$consulta = $ConexionPDO->prepare($query);
+					$consulta->execute();
+					return "";
+				}
+			catch( PDOException $ErrorPDO)
+				{
+					echo '<script language="JavaScript"> alert("Ha ocurrido un error interno durante la ejecucion del Query: '.$query.'\n\nEl motor ha devuelto: '.$ErrorPDO->getMessage().'.\n\nPongase en contacto con el administrador del sistema y comunique este mensaje.");  </script>';					
+					//mensaje('Error durante la ejecuci&oacute;n',$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
+					return $ErrorPDO->getMessage();
+				}
+		}
+
+/* ################################################################## */
+	function ejecutar_sql_procedimiento($procedimiento)
+		{
+			/*
+				Function: ejecutar_sql_procedimiento
+				Ejecuta procedimientos almacenados por la base de datos
+
+				Variables de entrada:
+
+					procedimiento - Procedimiento que debe residir en la base de datos y que ha de ser ejecutado
+
+				Salida:
+					Retorna 0 en caso de tener problemas con la ejecucion del procedimiento
+					Retorna una cadena vacia si el procedimiento es llamado y ejecutado sin problemas
+			*/
+			global $ConexionPDO;
+			try
+				{
+					$ConexionPDO->exec($procedimiento);
+					return "";
+				}
+			catch(PDOException $e)
+				{
+					return $e->getMessage();
+				}
+		}
 
 /* ################################################################## */
 	function existe_valor($tabla,$campo,$valor)
-	  {
-		/*
-			Function: existe_valor
-			Busca dentro de alguna tabla para verificar si existe o no un valor determinado.  Funcion utilizada para validacion de unicidad de valores en formularios de datos.
-			
-			Variables de entrada:
-
-				tabla - Nombre de la tabla donde se desea buscar.
-				campo - Campo de la tabla sobre el cual se desea comparar la existencia del valor.
-				valor - Valor a buscar dentro del campo.
+		{
+			/*
+				Function: existe_valor
+				Busca dentro de alguna tabla para verificar si existe o no un valor determinado.  Funcion utilizada para validacion de unicidad de valores en formularios de datos.
 				
-			Salida:
-				Retorna 1 en caso de encontrar un valor dentro de la tabla y campo especificadas y que coincida con el parametro buscado
-				Retorna 0 cuando no se encuentra un valor en la tabla que coincida con el buscado
-		*/
+				Variables de entrada:
+
+					tabla - Nombre de la tabla donde se desea buscar.
+					campo - Campo de la tabla sobre el cual se desea comparar la existencia del valor.
+					valor - Valor a buscar dentro del campo.
+					
+				Salida:
+					Retorna 1 en caso de encontrar un valor dentro de la tabla y campo especificadas y que coincida con el parametro buscado
+					Retorna 0 cuando no se encuentra un valor en la tabla que coincida con el buscado
+			*/
 			global $ConexionPDO;
 			$consulta = $ConexionPDO->prepare("SELECT $campo FROM $tabla WHERE $campo='$valor'");
 			$consulta->execute();
@@ -100,20 +127,13 @@
 				{
 					return 0;
 				}
-	  }
-
-
-
-
-
-
-
-
+		}
 
 /* ################################################################## */
 	/*
 		Section: Funciones asociadas al retorno de informacion sobre la conexion y estructura de la BD
 	*/
+
 /* ################################################################## */
 	function informacion_conexion()
 		{
@@ -132,6 +152,7 @@
 			echo "Informaci&oacute;n adicional: ".$ConexionPDO->getAttribute(PDO::ATTR_SERVER_INFO)."<hr>";
 		}
 
+/* ################################################################## */
 	function imprimir_drivers_disponibles()
 		{
 			/*
@@ -151,30 +172,49 @@
 				}*/
 			print_r(PDO::getAvailableDrivers());
 		}
-		
-	function consultar_tablas($driver_activo_pdo)
+
+/* ################################################################## */
+	function consultar_tablas()
 		{
 			/*
 				Function: consultar_tablas
-				Para operaciones no soportadas por PDO.  Consulta las tablas disponibles dentro de una base de datos y las devuelve como listado.
+				Determina las tablas en la base de datos activa para la conexion dependiendo del motor utilizado.
 
-				Variables de entrada:
-
-					driver_activo_pdo - El driver detectado en la conexion activa de PDO
-					
 				Salida:
-					Listado estandarizado de las tablas disponibles
+					Resultado de un query con las tablas  o falso en caso de error
 				
 				Ver tambien:
 				<Definicion de conexion PDO>
 			*/
-			if ($driver_activo_pdo=="mysql")
+			global $ConexionPDO;
+			global $MotorBD;
+			global $BaseDatos;
+
+			if($MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc" || $MotorBD=="sqlite2" || $MotorBD=="sqlite3")
+					$consulta = "SELECT name FROM sysobjects WHERE xtype='U';";
+			if($MotorBD=="oracle")
+					$consulta = "SELECT table_name FROM cat;";  //  Si falla probar con esta:  $consulta = "SELECT table_name FROM tabs;";
+			if($MotorBD=="ifmx" || $MotorBD=="fbd")
+					$consulta = "SELECT RDB$RELATION_NAME FROM RDB$RELATIONS WHERE RDB$SYSTEM_FLAG = 0 AND RDB$VIEW_BLR IS NULL ORDER BY RDB$RELATION_NAME;";
+			if($MotorBD=="mysql")
+					$consulta = "SHOW tables FROM ".$BaseDatos.";";
+			if($MotorBD=="pg")
+					$consulta = "SELECT relname AS name FROM pg_stat_user_tables ORDER BY relname;";
+
+			try
 				{
-					
+					$consulta_tablas = $ConexionPDO->prepare($consulta);
+					$consulta_tablas->execute();
+					return $consulta_tablas;
+				}
+			catch( PDOException $ErrorPDO)
+				{
+					mensaje('Error durante la ejecuci&oacute;n',$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
+					return false;
 				}
 		}
 
-	//Return name columns as vector
+/* ################################################################## */
 	function consultar_columnas($tabla)
 		{
 			/*
@@ -193,21 +233,55 @@
 			*/
 			$resultado=ejecutar_sql("SELECT * FROM ".$tabla);
 			$columnas = array();
-			foreach($resultado->fetch(PDO::FETCH_ASSOC) as $key=>$val){
-				$columnas[] = $key;
-			}
+			foreach($resultado->fetch(PDO::FETCH_ASSOC) as $key=>$val)
+				{
+					$columnas[] = $key;
+				}
 			return $columnas;
 		}
 
+/* ################################################################## */
+	function consultar_bases_de_datos()
+		{
+			/*
+				Function: consultar_bases_de_datos
+				Determina las bases de datos existentes dependiendo del motor utilizado.
 
+				Salida:
+					Resultado de un query con las bases de datos o falso en caso de error
+				
+				Ver tambien:
+				<Definicion de conexion PDO> | <consultar_tablas>
+			*/
+			global $ConexionPDO;
+			global $MotorBD;
+			global $BaseDatos;
 
+			if($MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc" || $MotorBD=="sqlite2" || $MotorBD=="sqlite3")
+				$consulta = "SELECT name FROM sys.Databases;";
+			if($MotorBD=="oracle")
+				$consulta = 'SELECT * FROM v$database;';  //Si falla intentar con este: $consulta = "SELECT * FROM user_tablespaces";
+			if($MotorBD=="ifmx" || $dbtype=="fbd")
+				$consulta = "";
+			if($MotorBD=="mysql")
+				$consulta = "SHOW DATABASES;";
+			if($MotorBD=="pg")
+				$consulta = "SELECT datname AS name FROM pg_database;";
 
+			try
+				{
+					$consulta_basesdatos = $ConexionPDO->prepare($consulta);
+					$consulta_basesdatos->execute();
+					return $consulta_basesdatos;
+				}
+			catch( PDOException $ErrorPDO)
+				{
+					mensaje('Error durante la ejecuci&oacute;n',$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
+					return false;
+				}
+	}
 
-
-
-
-
-
+/* ################################################################## */
 
 
 
@@ -280,24 +354,6 @@
 	}
 
 
-	//Select single table cell from first record
-	function query_single($sql_statement){
-		$this->err_msg = "";
-		if($this->con!=null){
-			try{
-				$sttmnt = $this->con->prepare($sql_statement);
-				$sttmnt->execute();
-				return $sttmnt->fetchColumn();
-			}catch(PDOException $e){
-				$this->err_msg = "Error: ". $e->getMessage();
-				return false;
-			}
-		}else{
-			$this->err_msg = "Error: Connection to database lost.";
-			return false;
-		}
-	}
-
 	//Return total records from query as integer
 	function rowcount(){
 		$this->err_msg = "";
@@ -319,8 +375,6 @@
 			return false;
 		}
 	}
-
-
 
 	//Insert and get newly created id
 	function insert($table, $data){
@@ -347,54 +401,8 @@
 		}
 	}
 
-	//Update tables
-	function update($table, $data, $condition=""){
-		$this->err_msg = "";
-		if($this->con!=null){
-			try{
-				return (trim($condition)!="") ? $this->con->exec("UPDATE ".$table." SET ".$data." WHERE ".$condition.";") : $this->con->exec("UPDATE ".$table." SET ".$data.";");
-			}catch(PDOException $e){
-				$this->err_msg = "Error: ". $e->getMessage();
-				return false;
-			}
-		}else{
-			$this->err_msg = "Error: Connection to database lost.";
-			return false;
-		}
-	}
 
-	//Delete records from tables
-	function delete($table, $condition=""){
-		$this->err_msg = "";
-		if($this->con!=null){
-			try{
-				return (trim($condition)!="") ? $this->con->exec("DELETE FROM ".$table." WHERE ".$condition.";") : $this->con->exec("DELETE FROM ".$table.";");
-			}catch(PDOException $e){
-				$this->err_msg = "Error: ". $e->getMessage();
-				return false;
-			}
-		}else{
-			$this->err_msg = "Error: Connection to database lost.";
-			return false;
-		}
-	}
 
-	//Execute Store Procedures
-	function execute($sp_query){
-		$this->err_msg = "";
-		if($this->con!=null){
-			try{
-				$this->con->exec($sp_query);
-				return true;
-			}catch(PDOException $e){
-				$this->err_msg = "Error: ". $e->getMessage();
-				return false;
-			}
-		}else{
-			$this->err_msg = "Error: Connection to database lost.";
-			return false;
-		}
-	}
 
 	//Get latest specified id from specified table
 	function getLatestId($db_table, $table_field){
@@ -427,92 +435,9 @@
 		}
 	}
 
-	//Get all tables from specified database
-	function ShowTables($database){
-		$this->err_msg = "";
-		$complete = "";
-		$sql_statement = "";
-		$dbtype = $this->database_type;
 
-		if($dbtype=="sqlsrv" || $dbtype=="mssql" || $dbtype=="ibm" || $dbtype=="dblib" || $dbtype=="odbc" || $dbtype=="sqlite2" || $dbtype=="sqlite3"){
-			$sql_statement = "SELECT name FROM sysobjects WHERE xtype='U';";
-		}elseif($dbtype=="oracle"){
-			//If the query statement fail, try with uncomment the next line:
-			//$sql_statement = "SELECT table_name FROM tabs;";
-			$sql_statement = "SELECT table_name FROM cat;";
-		}elseif($dbtype=="ifmx" || $dbtype=="fbd"){
-			$sql_statement = 'SELECT RDB$RELATION_NAME FROM RDB$RELATIONS WHERE RDB$SYSTEM_FLAG = 0 AND RDB$VIEW_BLR IS NULL ORDER BY RDB$RELATION_NAME;';
-		}elseif($dbtype=="mysql"){
-			if($database!="") $complete=" FROM $database";
-			$sql_statement = "SHOW tables ".$complete.";";
-		}elseif($dbtype=="pg"){
-			$sql_statement = "SELECT relname AS name FROM pg_stat_user_tables ORDER BY relname;";
-		}
 
-		if($this->con!=null){
-			try{
-				$this->sql=$sql_statement;
-				return $this->con->query($this->sql);
-			}catch(PDOException $e){
-				$this->err_msg = "Error: ". $e->getMessage();
-				return false;
-			}
-		}else{
-			$this->err_msg = "Error: Connection to database lost.";
-			return false;
-		}
-	}
 
-	//Get all databases from your server
-	function ShowDBS(){
-		$this->err_msg = "";
-		$sql_statement = "";
-		$dbtype = $this->database_type;
-
-		if($dbtype=="sqlsrv" || $dbtype=="mssql" || $dbtype=="ibm" || $dbtype=="dblib" || $dbtype=="odbc" || $dbtype=="sqlite2" || $dbtype=="sqlite3"){
-			$sql_statement = "SELECT name FROM sys.Databases;";
-		}elseif($dbtype=="oracle"){
-			//If the query statement fail, try with uncomment the next line:
-			//$sql_statement = "SELECT * FROM user_tablespaces";
-			$sql_statement = 'SELECT * FROM v$database;';
-		}elseif($dbtype=="ifmx" || $dbtype=="fbd"){
-			$sql_statement = "";
-		}elseif($dbtype=="mysql"){
-			$sql_statement = "SHOW DATABASES;";
-		}elseif($dbtype=="pg"){
-			$sql_statement = "SELECT datname AS name FROM pg_database;";
-		}
-
-		if($this->con!=null){
-			try{
-				$this->sql=$sql_statement;
-				return $this->con->query($this->sql);
-			}catch(PDOException $e){
-				$this->err_msg = "Error: ". $e->getMessage();
-				return false;
-			}
-		}else{
-			$this->err_msg = "Error: Connection to database lost.";
-			return false;
-		}
-	}
-
-	//Get the latest error ocurred in the connection
-	function getError(){
-		return trim($this->err_msg)!="" ? "<span style='display:block;color:#FF0000;background:#FFEDED;font-weight:bold;border:2px solid #FF0000;padding:2px 4px 2px 4px;margin-bottom:5px'>".$this->err_msg."</span><br />" : "";
-	}
-
-	//Disconnect database
-	function disconnect(){
-		$this->err_msg = "";
-		if($this->con){
-			$this->con = null;
-			return true;
-		}else{
-			$this->err_msg = "Error: Connection to database lost.";
-			return false;
-		}
-	}
 
 	//Build the query neccesary for the count(*) in rowcount method
 	function stmntCount($query_stmnt){

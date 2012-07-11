@@ -45,7 +45,6 @@
 	// Incluye archivo con algunas funciones comunes usadas por la herramienta
 	include_once("core/comunes.php");
 
-
 	// Verifica autenticidad de la sesion mediante llave de paso
 	if ($accion!= "" && $accion!="Iniciar_login" && $accion!="Terminar_sesion" && $accion!="Mensaje_cierre_sesion")
 		if (MD5($LlaveDePaso)!=$LlaveDePasoUsuario)
@@ -65,10 +64,7 @@
 /* ################################################################## */
 	// Cuando no se tiene ninguna accion para procesar se carga la pagina de inicio de sesion
 	if ($accion=="")
-		{
-			ventana_login();
-		}
-
+		ventana_login();
 	// Incluye los archivos necesarios dependiendo de las funciones requeridas
 	if ($accion=="agregar_usuario" || $accion=="guardar_usuario" || $accion=="listar_usuarios" || $accion=="eliminar_usuario" || $accion=="cambiar_estado_usuario" || $accion=="permisos_usuario" || $accion=="agregar_permiso" || $accion=="eliminar_permiso")
 		include("core/usuarios.php");
@@ -80,7 +76,6 @@
 		include("core/formularios.php");
 	if ($accion=="Iniciar_login" || $accion=="Terminar_sesion" || $accion=="Mensaje_cierre_sesion")
 		include("core/sesion.php");
-
 
 /* ################################################################## */
 	// Si la accion es presentar el menu de inicio o escritorio
