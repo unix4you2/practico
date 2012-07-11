@@ -30,6 +30,81 @@
 		Ver tambien:
 		<Definicion de conexion PDO> | <Configuracion base>
 	*/
+
+
+/*
+
+//Initialize class and connects to the database
+	public function __construct($database_type,$host,$database,$user,$password,$port){
+		$this->database_type = strtolower($database_type);
+		$this->host = $host;
+		$this->database = $database;
+		$this->user = $user;
+		$this->password = $password;
+		$this->port = $port;
+	}
+
+	//Initialize class and connects to the database
+	public function Cnxn(){
+		if(in_array($this->database_type, $this->database_types)){
+			try{
+				switch($this->database_type){
+					case "mssql":
+						$this->con = new PDO("mssql:host=".$this->host.";dbname=".$this->database, $this->user, $this->password);
+						break;
+					case "sqlsrv":
+						$this->con = new PDO("sqlsrv:server=".$this->host.";database=".$this->database, $this->user, $this->password);
+						break;
+					case "ibm": //default port = ?
+						$this->con = new PDO("ibm:DRIVER={IBM DB2 ODBC DRIVER};DATABASE=".$this->database."; HOSTNAME=".$this->host.";PORT=".$this->port.";PROTOCOL=TCPIP;", $this->user, $this->password);
+						break;
+					case "dblib": //default port = 10060
+						$this->con = new PDO("dblib:host=".$this->host.":".$this->port.";dbname=".$this->database,$this->user,$this->password);
+						break;
+					case "odbc":
+						$this->con = new PDO("odbc:Driver={Microsoft Access Driver (*.mdb)};Dbq=C:\accounts.mdb;Uid=".$this->user);
+						break;
+					case "oracle":
+						$this->con = new PDO("OCI:dbname=".$this->database.";charset=UTF-8", $this->user, $this->password);
+						break;
+					case "ifmx":
+						$this->con = new PDO("informix:DSN=InformixDB", $this->user, $this->password);
+						break;
+					case "fbd":
+						$this->con = new PDO("firebird:dbname=".$this->host.":".$this->database, $this->user, $this->password);
+						break;
+					case "mysql":
+						$this->con = (is_numeric($this->port)) ? new PDO("mysql:host=".$this->host.";port=".$this->port.";dbname=".$this->database, $this->user, $this->password) : new PDO("mysql:host=".$this->host.";dbname=".$this->database, $this->user, $this->password);
+						break;
+					case "sqlite2": //ej: "sqlite:/path/to/database.sdb"
+						$this->con = new PDO("sqlite:".$this->host);
+						break;
+					case "sqlite3":
+						$this->con = new PDO("sqlite::memory");
+						break;
+					case "pg":
+						$this->con = (is_numeric($this->port)) ? new PDO("pgsql:dbname=".$this->database.";port=".$this->port.";host=".$this->host, $this->user, $this->password) : new PDO("pgsql:dbname=".$this->database.";host=".$this->host, $this->user, $this->password);
+						break;
+					default:
+						$this->con = null;
+						break;
+
+
+
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
 	try
 		{
 			$ConexionPDO = new PDO("mysql:dbname=$BaseDatos;host=$Servidor","$UsuarioBD","$PasswordBD");
