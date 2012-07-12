@@ -337,6 +337,92 @@
 		}
 ?>
 <!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<?php
+	if ($accion=="administrar_tablas")
+		{
+			abrir_ventana('Crear/Listar tablas de datos definidias en el sistema','f2f2f2',''); ?>
+			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<input type="Hidden" name="accion" value="guardar_crear_tabla">
+			<div align=center>
+			<br>Crear una nueva tabla de datos en <b><?php echo $BaseDatos; ?></b>:
+				<table class="TextosVentana">
+					<tr>
+						<td align="center">Nombre:</td>
+						<td><?php echo $TablasApp; ?><input type="text" name="nombre_tabla" size="20" class="CampoTexto">
+						<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
+						<a href="#" title="Ayuda general de tablas" name="Una tabla de datos es una estrctura que le permite almacenar informaci&oacute;n. Ingrese en este espacio el nombre de la tabla sin guiones, puntos, espacios o caracteres especiales. SENSIBLE A MAYUSCULAS"><img src="img/icn_10.gif" border=0></a></td>
+					</tr>
+					<tr>
+						<td>
+							</form>
+						</td>
+						<td>
+							<input type="Button"  class="Botones" value="Crear tabla y definir campos" onClick="document.datos.submit()">
+							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="Volver al menu" class="Botones">
+						</td>
+					</tr>
+				</table>
+			<br><hr>
+
+		<font face="" size="3" color="Navy"><b>Tablas definidas en la base de datos</b></font><br><br>
+				<table width="100%" border="0" cellspacing="5" align="CENTER"  class="TextosVentana" >
+					<tr>
+						<td bgcolor="#d6d6d6"><b>Nombre</b></td>
+						<td bgcolor="#d6d6d6"><b>Registros</b></td>
+						<td></td>
+						<td></td>
+					</tr>
+
+
+		<?php
+			$resultado=consultar_tablas();
+
+			while ($registro = $resultado->fetch())
+				{
+					
+					if (strpos($registro[0],$TablasApp)!==FALSE) // Booleana requiere === o !==
+						{
+							$PrefijoRegistro=$TablasApp;
+						}
+					if (strpos($registro[0],$TablasCore)!==FALSE) // Booleana requiere === o !==
+						{
+							$PrefijoRegistro=$TablasCore;
+						}
+
+						echo '<tr>
+								<td><font color=gray>'.$PrefijoRegistro.'</font><b><font size=2>'.str_replace($PrefijoRegistro,'',$registro[0]).'</font></b></td>
+								<td>'.$registro[1].'</td>
+								<td align="center">
+										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["Name"].'" id="f'.$registro["Name"].'">
+												<input type="hidden" name="accion" value="eliminar_tabla">
+												<input type="hidden" name="nombre_tabla" value="'.$registro["Name"].'">
+												<input type="button" value="Eliminar"  class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar la tabla de datos '.$registro["Name"].' se eliminar&aacute;n tambi&eacute;n todos los registros en ella almacenados y luego no podr&aacute; deshacer esta operaci&oacute;n.\nEst&aacute; seguro que desea continuar ?\',f'.$registro["Name"].');">
+												&nbsp;&nbsp;
+										</form>
+								</td>
+								<td align="center">
+										<form action="'.$ArchivoCORE.'" method="POST">
+												<input type="hidden" name="accion" value="editar_tabla">
+												<input type="hidden" name="nombre_tabla" value="'.$registro["Name"].'">
+												<input type="Submit" value="Editar"  class="Botones">
+												&nbsp;&nbsp;
+										</form>
+								</td>
+							</tr>';					
+					
+					
+				}
+				echo '</table>';	
+
+
+
+		?>		
+<?php
+			cerrar_ventana();
+	}
+?>
+
+<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <?php if ($accion=="administrar_tablas")
 	{
 			abrir_ventana('Crear/Listar tablas de datos definidias en el sistema','f2f2f2','95%'); ?>
@@ -361,7 +447,6 @@
 						</td>
 					</tr>
 				</table>
-
 		<br><hr>
 		<font face="" size="3" color="Navy"><b>Tablas de datos definidas por el dise&ntilde;ador para la aplicaci&oacute;n</b></font><br><br>
 				<table width="100%" border="0" cellspacing="5" align="CENTER"  class="TextosVentana" >
@@ -469,6 +554,10 @@
 			cerrar_ventana();
 	}
 ?>
+
+
+
+
 
 
 

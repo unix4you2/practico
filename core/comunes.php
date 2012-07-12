@@ -174,11 +174,15 @@
 		}
 
 /* ################################################################## */
-	function consultar_tablas()
+	function consultar_tablas($prefijo)
 		{
 			/*
 				Function: consultar_tablas
 				Determina las tablas en la base de datos activa para la conexion dependiendo del motor utilizado.
+
+				Variables de entrada:
+
+					prefijo - Prefijo del nombre de tablas que seran retornadas
 
 				Salida:
 					Resultado de un query con las tablas  o falso en caso de error
@@ -197,14 +201,13 @@
 			if($MotorBD=="ifmx" || $MotorBD=="fbd")
 					$consulta = "SELECT RDB$RELATION_NAME FROM RDB$RELATIONS WHERE RDB$SYSTEM_FLAG = 0 AND RDB$VIEW_BLR IS NULL ORDER BY RDB$RELATION_NAME;";
 			if($MotorBD=="mysql")
-					$consulta = "SHOW tables FROM ".$BaseDatos.";";
+					$consulta = "SHOW tables FROM ".$BaseDatos." ";
 			if($MotorBD=="pg")
 					$consulta = "SELECT relname AS name FROM pg_stat_user_tables ORDER BY relname;";
 
 			try
 				{
-					$consulta_tablas = $ConexionPDO->prepare($consulta);
-					$consulta_tablas->execute();
+					$consulta_tablas=ejecutar_sql($consulta);
 					return $consulta_tablas;
 				}
 			catch( PDOException $ErrorPDO)
