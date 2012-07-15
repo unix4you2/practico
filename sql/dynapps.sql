@@ -56,14 +56,15 @@ CREATE TABLE Core_menu (
   posible_arriba int(1) default '0',
   posible_centro int(1) default '1',
   posible_escritorio int(1) default '0',
+  seccion varchar(250) default '',  #Cuando Posible centro=1 define la seccion donde va por agrupacion
   imagen varchar(250) default '',
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM;
 
-INSERT INTO Core_menu VALUES (0,1,'Menus'   ,0,0,'',1,'Interno','administrar_menu',5,2,1,1,1,'icono_menus.png');
-INSERT INTO Core_menu VALUES (0,2,'Usuarios',0,0,'',1,'Interno','listar_usuarios' ,5,1,1,1,1,'icono_usuarios.png');
-INSERT INTO Core_menu VALUES (0,3,'Tablas de datos',0,0,'',1,'Interno','administrar_tablas' ,5,3,1,1,1,'icono_tabla.png');
-INSERT INTO Core_menu VALUES (0,3,'Formularios',0,0,'',1,'Interno','administrar_formularios' ,5,3,1,1,1,'icono_form.png');
+INSERT INTO Core_menu VALUES (0,1,'Menus'   ,0,0,'',1,'Interno','administrar_menu',5,2,1,1,1,'Administrativas de Práctico','icono_menus.png');
+INSERT INTO Core_menu VALUES (0,2,'Usuarios',0,0,'',1,'Interno','listar_usuarios' ,5,1,1,1,1,'Administrativas de Práctico','icono_usuarios.png');
+INSERT INTO Core_menu VALUES (0,3,'Tablas de datos',0,0,'',1,'Interno','administrar_tablas' ,5,3,1,1,1,'Administrativas de Práctico','icono_tabla.png');
+INSERT INTO Core_menu VALUES (0,3,'Formularios',0,0,'',1,'Interno','administrar_formularios' ,5,3,1,1,1,'Administrativas de Práctico','icono_form.png');
 
 DROP TABLE IF EXISTS Core_formulario;
 CREATE TABLE Core_formulario (

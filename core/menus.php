@@ -18,7 +18,7 @@
 	if ($accion=="actualizar_menu")
 		{
 			// Actualiza los datos del item
-			ejecutar_sql_unaria("UPDATE ".$TablasCore."menu SET formulario='$formulario', accion='$accion_int', columna='$columna', peso=$peso, texto='$texto', imagen='$imagen', padre=$padre, url='$url' WHERE id=$id");
+			ejecutar_sql_unaria("UPDATE ".$TablasCore."menu SET formulario='$formulario', accion='$accion_int', columna='$columna', peso=$peso, texto='$texto', seccion='$seccion', imagen='$imagen', padre=$padre, url='$url' WHERE id=$id");
 			// Lleva a auditoria
 			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Actualiza en menu item $texto c&oacute;digo $id','$fecha_operacion','$hora_operacion')");
 			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
@@ -98,6 +98,10 @@
 						<tr>
 							<td align="RIGHT"><b>Texto</b></td><td width="10"></td>
 							<td><input type="text" name="texto" value="<?php echo $registro["texto"]; ?>" size="40" maxlength="250" class="texto_01"></td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b>Secci&oacute;n</b></td><td width="10"></td>
+							<td><input type="text" name="seccion" value="<?php echo $registro["seccion"]; ?>" size="40" maxlength="250" class="texto_01"></td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b>Imagen</b></td><td width="10"></td>
@@ -201,7 +205,7 @@ if ($accion=="eliminar_menu")
 			if ($mensaje_error=="")
 				{
 					// Guarda los datos del comando o item de menu
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."menu VALUES (0,'$texto','$padre','$peso','$url','$posible_clic','$tipo_comando','$comando','$nivel_usuario','$columna','$posible_arriba','$posible_escritorio','$posible_centro','$imagen')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."menu VALUES (0,'$texto','$padre','$peso','$url','$posible_clic','$tipo_comando','$comando','$nivel_usuario','$columna','$posible_arriba','$posible_escritorio','$posible_centro','$seccion','$imagen')");
 					// Lleva a auditoria
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Agrega en menu: $texto','$fecha_operacion','$hora_operacion')");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
@@ -303,6 +307,10 @@ if ($accion=="eliminar_menu")
 										<option value="S">Si</option>
 									</select>
 							</td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b>Secci&oacute;n</b></td><td width="10"></td>
+							<td><input class="CampoTexto" type="text" name="seccion" size="40" maxlength="250" class="texto_01"></td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b>Imagen</b></td><td width="10"></td>
