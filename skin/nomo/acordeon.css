@@ -1,7 +1,9 @@
-body {
-	font: 13px Arial, Helvetica, sans-serif;
-	color: #1e1e1e;
-}
+/*Esto debe obedecer al body del template*/
+/*body {*/
+/*	font: 13px Arial, Helvetica, sans-serif;*/
+/*	color: #1e1e1e;*/
+/*}*/
+
 #container {
 	width: 600px;
 	margin: 20px auto;
