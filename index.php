@@ -202,7 +202,43 @@
 								</td>
 						</tr></table>';
 				cerrar_ventana();
-				echo '<br>';
+				echo '<br>
+				
+				
+				
+				
+				
+
+<div id="container">
+
+	<div id="accordion">
+		<div class="item">
+			<a href="#">Products</a>
+			<p>S1</p>
+		</div>
+		<div class="item">
+			<a href="#">Highlight</a>
+			<p>Lorem ipsum nec ex prompta tractatos. Ea elit sale admodum vim, at velit nemore rationibus per. Ullum qualisque dissentias ei qui, in putent doctus cotidieque mei. Mel legere mucius ne, adhuc impetus signiferumque cu eos. Has an zzril soluta impetus. An nisl graece inciderint nec, ea per rebum animal, prodesset accommodare ex eam.</p>
+		</div>
+		<div class="item">
+			<a href="#">News</a>
+			<p>Lorem ipsum nec ex prompta tractatos. Ea elit sale admodum vim, at velit nemore rationibus per. Ullum qualisque dissentias ei qui, in putent doctus cotidieque mei. Mel legere mucius ne, adhuc impetus signiferumque cu eos. Has an zzril soluta impetus. An nisl graece inciderint nec, ea per rebum animal, prodesset accommodare ex eam.</p>
+		</div>
+		<div class="item">
+			<a href="#">Contact</a>
+			<p>Lorem ipsum nec ex prompta tractatos. Ea elit sale admodum vim, at velit nemore rationibus per. Ullum qualisque dissentias ei qui, in putent doctus cotidieque mei. Mel legere mucius ne, adhuc impetus signiferumque cu eos. Has an zzril soluta impetus. An nisl graece inciderint nec, ea per rebum animal, prodesset accommodare ex eam.</p>
+		</div>
+	</div>
+</div>				
+				
+				
+				
+				
+				
+				
+				
+				
+				';
 				
 	} 
 /* ################################################################## */
