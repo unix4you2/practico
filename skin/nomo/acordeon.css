@@ -4,14 +4,15 @@
 /*	color: #1e1e1e;*/
 /*}*/
 
-#container {
+#contenedor_acordeon {
 	width: 600px;
 	margin: 20px auto;
 }
-#accordion {
+
+#acordeon {
 	margin-top: 20px;
 }
-#accordion .item {
+#acordeon .item {
 	width: 400px;
 	height: 30px; /* height = total height of A child element */
 	overflow: hidden;
@@ -28,7 +29,7 @@
 	
 	margin-bottom: 2px;
 }
-#accordion a {
+#acordeon a {
 	display: block;
 	height: 20px;
 	line-height: 20px;
@@ -38,14 +39,14 @@
 	color: #1e1e1e;
 	text-decoration: none;
 }
-#accordion p {
+#acordeon p {
 	height: 150px;
 	padding: 5px;
 }
-#accordion div:hover {
+#acordeon div:hover {
 	height: 180px; /* height = total height of A and P elements */
 }
-#accordion div:hover a {
+#acordeon div:hover a {
 	border-bottom: 1px solid #ccc;
 	font-weight: bold;
 }
