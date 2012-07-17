@@ -285,8 +285,15 @@
 	}
 
 /* ################################################################## */
-
-
+	function ContarRegistros($tabla)
+		{
+			global $ConexionPDO;
+			$consulta = $ConexionPDO->prepare("SELECT count(*) FROM $tabla");
+			$consulta->execute();
+			$filas = $consulta->fetchColumn();
+			return $filas;
+		}
+/* ################################################################## */
 
 
 /*
@@ -436,46 +443,6 @@
 			$this->err_msg = "Error: Connection to database lost.";
 			return false;
 		}
-	}
-
-
-
-
-
-	//Build the query neccesary for the count(*) in rowcount method
-	function stmntCount($query_stmnt){
-		if(trim($query_stmnt)!=""){
-			$query_stmnt = trim($query_stmnt);
-			$query_split = explode(" ",$query_stmnt);
-			$query_flag = false;
-			$query_final = "";
-
-			for($x=0;$x<count($query_split);$x++){
-				//Checking "SELECT"
-				if($x==0 && strtoupper(trim($query_split[$x]))=="SELECT")
-					$query_final = "SELECT count(*) ";
-				if($x==0 && strtoupper(trim($query_split[$x]))!="SELECT")
-					return false;
-
-				//Checking "FROM"
-				if(strtoupper(trim($query_split[$x]))=="FROM"){
-					$query_final .= "FROM ";
-					$query_flag = true;
-					continue;
-				}
-
-				//Checking "ORDER"
-				if(strtoupper(trim($query_split[$x]))=="ORDER" || strtoupper(trim($query_split[$x]))=="GROUP"){
-					break;
-				}
-
-				//Building the query
-				if(trim($query_split[$x])!="" && $query_flag)
-					$query_final .= " " . trim($query_split[$x]) . " ";
-			}
-			return trim($query_final);
-		}
-		return false;
 	}
 
 

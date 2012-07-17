@@ -379,7 +379,7 @@
 
 			while ($registro = $resultado->fetch())
 				{
-					
+					$total_registros=ContarRegistros($registro["0"]);
 					if (strpos($registro[0],$TablasApp)!==FALSE) // Booleana requiere === o !==
 						{
 							$PrefijoRegistro=$TablasApp;
@@ -388,29 +388,32 @@
 						{
 							$PrefijoRegistro=$TablasCore;
 						}
-
 						echo '<tr>
 								<td><font color=gray>'.$PrefijoRegistro.'</font><b><font size=2>'.str_replace($PrefijoRegistro,'',$registro[0]).'</font></b></td>
-								<td>'.$registro[1].'</td>
-								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["Name"].'" id="f'.$registro["Name"].'">
+								<td>'.$total_registros.'</td>
+								<td align="center">';
+					if ($PrefijoRegistro!=$TablasCore && $total_registros==0)							
+						echo '
+										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["0"].'" id="f'.$registro["0"].'">
 												<input type="hidden" name="accion" value="eliminar_tabla">
-												<input type="hidden" name="nombre_tabla" value="'.$registro["Name"].'">
-												<input type="button" value="Eliminar"  class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar la tabla de datos '.$registro["Name"].' se eliminar&aacute;n tambi&eacute;n todos los registros en ella almacenados y luego no podr&aacute; deshacer esta operaci&oacute;n.\nEst&aacute; seguro que desea continuar ?\',f'.$registro["Name"].');">
+												<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
+												<input type="button" value="Eliminar"  class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar la tabla de datos '.$registro["0"].' se eliminar&aacute;n tambi&eacute;n todos los registros en ella almacenados y luego no podr&aacute; deshacer esta operaci&oacute;n.\nEst&aacute; seguro que desea continuar ?\',f'.$registro["0"].');">
 												&nbsp;&nbsp;
-										</form>
+										</form>';
+						echo '
 								</td>
-								<td align="center">
+								<td align="center">';
+					if ($PrefijoRegistro!=$TablasCore)
+						echo '
 										<form action="'.$ArchivoCORE.'" method="POST">
 												<input type="hidden" name="accion" value="editar_tabla">
-												<input type="hidden" name="nombre_tabla" value="'.$registro["Name"].'">
+												<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
 												<input type="Submit" value="Editar"  class="Botones">
 												&nbsp;&nbsp;
-										</form>
+										</form>';
+						echo '
 								</td>
-							</tr>';					
-					
-					
+							</tr>';
 				}
 				echo '</table>';	
 
@@ -423,7 +426,7 @@
 ?>
 
 <!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<?php if ($accion=="administrar_tablas")
+<?php if ($accion=="administrar_tablas_solo_mysql")
 	{
 			abrir_ventana('Crear/Listar tablas de datos definidias en el sistema','f2f2f2','95%'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
