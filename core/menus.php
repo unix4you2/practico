@@ -5,34 +5,67 @@
 			*/
 ?>
 
-
-<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <?php
 			/*
 				Section: Operaciones basicas de administracion
 				Funciones asociadas al mantenimiento de menues en el sistema.
 			*/
 ?>
-<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<?php
-	if ($accion=="actualizar_menu")
-		{
-			// Actualiza los datos del item
-			ejecutar_sql_unaria("UPDATE ".$TablasCore."menu SET formulario='$formulario', accion='$accion_int', columna='$columna', peso=$peso, texto='$texto', seccion='$seccion', imagen='$imagen', padre=$padre, url='$url' WHERE id=$id");
-			// Lleva a auditoria
-			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Actualiza en menu item $texto c&oacute;digo $id','$fecha_operacion','$hora_operacion')");
-			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
-		}
-?>
-<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-		<?php if ($accion=="detalles_menu")
-				{
-						echo '<div align="center">';
-						abrir_ventana('Edici&oacute;n del item de menu','','90%');
 
-					// Busca detalles del item
-			$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE id=$id");
-			$registro = $resultado->fetch();
+<?php
+/* ################################################################## */
+/*
+	Function: actualizar_menu
+	Cambia el registro asociado a un menu de la aplicacion
+
+	Variables de entrada:
+
+		id - ID del menu que se desea cambiarse
+
+		(start code)
+			UPDATE ".$TablasCore."menu SET formulario='$formulario', accion='$accion_int', columna='$columna', peso=$peso, texto='$texto', seccion='$seccion', imagen='$imagen', padre=$padre, url='$url' WHERE id=$id
+		(end)
+
+	Salida:
+		Registro de menu actualizado
+
+	Ver tambien:
+
+		<detalles_menu>
+*/
+if ($accion=="actualizar_menu")
+	{
+		// Actualiza los datos del item
+		ejecutar_sql_unaria("UPDATE ".$TablasCore."menu SET formulario='$formulario', accion='$accion_int', columna='$columna', peso=$peso, texto='$texto', seccion='$seccion', imagen='$imagen', padre=$padre, url='$url' WHERE id=$id");
+		// Lleva a auditoria
+		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Actualiza en menu item $texto c&oacute;digo $id','$fecha_operacion','$hora_operacion')");
+		echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+	}
+/* ################################################################## */
+/*
+	Function: detalles_menu
+	Presenta la ficha de edicion para el registro asociado a un menu de la aplicacion
+
+	Variables de entrada:
+
+		id - ID del menu que se desea cambiarse
+
+		(start code)
+			SELECT * FROM ".$TablasCore."menu WHERE id=$id
+		(end)
+
+	Ver tambien:
+
+		<actualizar_menu>
+*/
+if ($accion=="detalles_menu")
+	{
+		echo '<div align="center">';
+		abrir_ventana('Edici&oacute;n del item de menu','','90%');
+
+		// Busca detalles del item
+		$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE id=$id");
+		$registro = $resultado->fetch();
 
 		?>
 
@@ -164,10 +197,10 @@
 		</DIV>
 		</div>
 
-		 <?php
-		 				cerrar_ventana();
-		 		}
-		 ?>
+ <?php
+		cerrar_ventana();
+	}
+ ?>
 <?php
 /* ################################################################## */
 if ($accion=="eliminar_menu")
@@ -184,7 +217,7 @@ if ($accion=="eliminar_menu")
 				Entradas de menu actualizadas.
 
 			Ver tambien:
-			<administrar_menu>
+			<administrar_menu>  <detalles_menu>
 		*/
 		// Elimina los datos de la opcion
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."menu WHERE id=$id");
@@ -285,8 +318,8 @@ if ($accion=="eliminar_menu")
 							<td align="RIGHT"><b>Posible arriba?</b></td><td width="10"></td>
 							<td>
 									<select  name="posible_arriba" class="Combos" >
-										<option value="N">No</option>
-										<option value="S">Si</option>
+										<option value="0">No</option>
+										<option value="1">Si</option>
 									</select>
 							</td>
 						</tr>
@@ -294,8 +327,8 @@ if ($accion=="eliminar_menu")
 							<td align="RIGHT"><b>Posible escritorio?</b></td><td width="10"></td>
 							<td>
 									<select  name="posible_escritorio" class="Combos" >
-										<option value="N">No</option>
-										<option value="S">Si</option>
+										<option value="0">No</option>
+										<option value="1">Si</option>
 									</select>
 							</td>
 						</tr>
@@ -303,8 +336,8 @@ if ($accion=="eliminar_menu")
 							<td align="RIGHT"><b>Posible en el centro?</b></td><td width="10"></td>
 							<td>
 									<select  name="posible_centro" class="Combos" >
-										<option value="N">No</option>
-										<option value="S">Si</option>
+										<option value="0">No</option>
+										<option value="1">Si</option>
 									</select>
 							</td>
 						</tr>

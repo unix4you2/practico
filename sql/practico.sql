@@ -43,7 +43,6 @@ CREATE TABLE Core_auditoria (
 DROP TABLE IF EXISTS Core_menu;
 CREATE TABLE Core_menu (
   id int(10) AUTO_INCREMENT,
-  codigo int(10),
   texto varchar(250) default '',
   padre int(10) default '0',
   peso int(3) default '0',

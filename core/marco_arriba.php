@@ -69,7 +69,7 @@
 
 						// Si el usuario es el administrador muestra todas las opciones
 						if ($Login_usuario=="admin")
-							$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE posible_arriba='S'");
+							$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE posible_arriba");
 						//else
 						//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE  posible_arriba='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Id_usuario' AND nivel>0";
 					
@@ -117,7 +117,7 @@
 
 						// Si el usuario es el administrador muestra todas las opciones
 						if ($Login_usuario=="admin")
-							$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE posible_escritorio='S'");
+							$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE posible_escritorio");
 						//else
 						//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Id_usuario' AND nivel>0";
 						// Imprime los formularios
