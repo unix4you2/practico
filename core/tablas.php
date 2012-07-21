@@ -54,53 +54,44 @@
 <?php
 	if ($accion=="guardar_crear_campo")
 		{
-			$mensaje_error="";
-			$mysql_enlace = mysql_connect($Servidor, $UsuarioBD, $PasswordBD);
-			mysql_select_db($BaseDatos, $mysql_enlace);
-			if ($mensaje_error=="")
-				{
-					// Crea el campo
-					$consulta = "ALTER TABLE $nombre_tabla ADD COLUMN $nombre_campo $tipo";
-					if ($longitud!="")
-						$consulta .= "($longitud) ";
-					$consulta .= " $valores_nulos ";
-					if ($predeterminado!="")
-						if ($predeterminado!="USER_DEFINED")
-							$consulta .= " DEFAULT $predeterminado ";
-						else
-							$consulta .= " DEFAULT $predeterminado_valor ";
-					$consulta .= "$autoincremento ";
-					if ($despues_campo!="")
-						$consulta .= " AFTER $despues_campo ";
+			// Construye la consulta para la creacion del campo (sintaxis mysql por ahora)
+			$consulta = "ALTER TABLE $nombre_tabla ADD COLUMN $nombre_campo $tipo";
+			if ($longitud!="")
+				$consulta .= "($longitud) ";
+			$consulta .= " $valores_nulos ";
+			if ($predeterminado!="")
+				if ($predeterminado!="USER_DEFINED")
+					$consulta .= " DEFAULT $predeterminado ";
+				else
+					$consulta .= " DEFAULT $predeterminado_valor ";
+			$consulta .= "$autoincremento ";
+			if ($despues_campo!="")
+				$consulta .= " AFTER $despues_campo ";
 
-					$resultado = mysql_query($consulta,$mysql_enlace);
-					$error_mysql=mysql_error($mysql_enlace);
-					if ($error_mysql!="")
-						{
-							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-								<input type="Hidden" name="accion" value="editar_tabla">
-								<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-								<input type="Hidden" name="error_titulo" value="ERROR DE BASE DE DATOS">
-								<input type="Hidden" name="error_descripcion" value="Durante la ejecucion el motor ha retornado lo siguiente: <i>'.$error_mysql.'</i>">
-								</form>
-									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-						}
-					else
-						{
-							// Lleva a auditoria
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Agrega campo $nombre_campo tipo $tipo a tabla $nombre_tabla','$fecha_operacion','$hora_operacion')");
-							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-								<input type="Hidden" name="accion" value="editar_tabla">
-								<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-								</form>
-									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-						}
+			// Realiza la operacion
+			ejecutar_sql_unaria($consulta);
+
+			$ultimo_error=$ConexionPDO->errorInfo();
+			$descripcion_ultimo_error=$ultimo_error[2];
+			if ($descripcion_ultimo_error!="")
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="editar_tabla">
+						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+						<input type="Hidden" name="error_titulo" value="ERROR DE BASE DE DATOS">
+						<input type="Hidden" name="error_descripcion" value="Durante la ejecucion el motor ha retornado lo siguiente: <i>'.$descripcion_ultimo_error.'</i>">
+						</form>
+							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
 				{
-					mensaje('<blink>Error creando tabla de datos!</blink>','La tabla especificada no se puede crear en la base de datos de aplicaci&oacute;n.  Algunas causas comunes son:<br><li>La tabla ya existe, en ese caso puede intentar editarla.<br><li>La configuracion de usuario en <b>configuracion.php</b> hace referencia a un usuario sin los privilegios suficientes en el motor.<br><li>El rol de usuario definido para el usuario con sesi&oacute;n activa no permite creaci&oacute;n de objetos en DynApps.','60%','icono_error.png','TextosEscritorio');
-					echo '<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="accion" value="administrar_tablas"></form>
-						<br /><input type="Button" onclick="document.cancelar.submit()" name="" value="Cerrar" class="Botones">';
+					// Lleva a auditoria
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Agrega campo $nombre_campo tipo $tipo a tabla $nombre_tabla','$fecha_operacion','$hora_operacion')");
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="editar_tabla">
+						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+						</form>
+							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 		}
 ?>
@@ -177,11 +168,8 @@
 							<select name="despues_campo">
 								<option value="" >Al final de todo</option>
 								<?php
-									$mysql_enlace = mysql_connect($Servidor, $UsuarioBD, $PasswordBD);
-									mysql_select_db($BaseDatos, $mysql_enlace);
-									$consulta = "DESCRIBE $nombre_tabla ";
-									$resultado = mysql_query($consulta,$mysql_enlace);
-									while($registro = mysql_fetch_array($resultado))
+									$resultado=ejecutar_sql("DESCRIBE $nombre_tabla ");
+									while($registro = $resultado->fetch())
 										{
 											echo '<option value="'.$registro["Field"].'" >Despu&eacute;s de '.$registro["Field"].'</option>';
 										}							
@@ -218,9 +206,8 @@
 						<td></td>
 					</tr>
 		 <?php
-				$consulta = "DESCRIBE $nombre_tabla ";
-				$resultado = mysql_query($consulta,$mysql_enlace);
-				while($registro = mysql_fetch_array($resultado))
+				$resultado=ejecutar_sql("DESCRIBE $nombre_tabla ");
+				while($registro = $resultado->fetch())
 					{
 						$imagen="";
 						if ($registro["Key"] != "") $imagen=" <img src='img/key.gif' border=0 align=absmiddle>";
@@ -299,16 +286,12 @@
 	if ($accion=="guardar_crear_tabla")
 		{
 			$mensaje_error="";
-			$mysql_enlace = mysql_connect($Servidor, $UsuarioBD, $PasswordBD);
-			mysql_select_db($BaseDatos, $mysql_enlace);
 			if ($nombre_tabla=="") $mensaje_error="Debe indicar un nombre v&aacute;lido para la tabla.  Este no debe contener guiones, puntos, espacios o caracteres especiales.";
 			if ($mensaje_error=="")
 				{
 					// Crea la tabla temporal
-					$consulta = "CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))ENGINE=$MotorTablasApp";
-					$resultado = mysql_query($consulta,$mysql_enlace);
-					$error_mysql=mysql_error($mysql_enlace);
-					if ($error_mysql!="")
+					$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))ENGINE=$MotorTablasApp");
+					if ($error_consulta!="")
 						{
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 								<input type="Hidden" name="accion" value="administrar_tablas">
@@ -425,8 +408,18 @@
 	}
 ?>
 
-<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<?php if ($accion=="administrar_tablas_solo_mysql")
+
+
+
+
+
+
+
+
+
+<?php
+/* AQUI EMPIEZA CODIGO DE VERSIONES ANTERIORES ESPECIFICAS PARA MYSQL ------ EN DESUSO-----   */
+ if ($accion=="administrar_tablas_solo_mysql")
 	{
 			abrir_ventana('Crear/Listar tablas de datos definidias en el sistema','f2f2f2','95%'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">

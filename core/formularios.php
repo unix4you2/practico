@@ -24,25 +24,18 @@
 			$mensaje_error="";
 
 			// Busca datos del formulario
-			$consulta_formulario = $ConexionPDO->prepare("SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'");
-			$consulta_formulario->execute();
+			$consulta_formulario=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'");
 			$registro_formulario = $consulta_formulario->fetch();
-			
 
 			// Busca los campos del form marcados como valor unico y verifica que no existan valores en la tabla
 			$tabla=$registro_formulario["tabla_datos"];
-			$consulta_campos_unicos = $ConexionPDO->prepare("SELECT * FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario' AND visible=1 AND valor_unico=1");
-			$consulta_campos_unicos->execute();
-
-		
+			$consulta_campos_unicos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario' AND visible=1 AND valor_unico=1");
 			while ($registro_campos_unicos = $consulta_campos_unicos->fetch())
 				{
 					$campo=$registro_campos_unicos["campo"];
 					$valor=$$campo;
-
 					// Busca si el campo cuenta con el valor en la tabla
-					$consulta_existente = $ConexionPDO->prepare("SELECT id FROM ".$tabla." WHERE $campo='$valor'");
-					$consulta_existente->execute();
+					$consulta_existente=ejecutar_sql("SELECT id FROM ".$tabla." WHERE $campo='$valor'");
 					$registro_existente = $consulta_existente->fetch();
 					if ($registro_existente["id"]!="")
 						$mensaje_error.="Ha ocurrido un error de valor duplicado en los campo(s): $campo . El valor ingresado ya existe en la base de datos.";
@@ -59,8 +52,7 @@
 					$lista_valores="";
 					$existe_id=0; // Define si dentro de los valores recibidos esta o no el ID autonumerico.  Sino se agrega
 
-					$consulta_campos = $ConexionPDO->prepare("SELECT * FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario' AND visible=1");
-					$consulta_campos->execute();
+					$consulta_campos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario' AND visible=1");
 					while ($registro_campos = $consulta_campos->fetch())
 						{
 							$lista_campos.=$registro_campos["campo"].",";
@@ -108,8 +100,7 @@
 				global $ConexionPDO,$ArchivoCORE,$TablasCore;
 
 				// Busca datos del formulario
-				$consulta_formulario = $ConexionPDO->prepare("SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'");
-				$consulta_formulario->execute();
+				$consulta_formulario=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'");
 				$registro_formulario = $consulta_formulario->fetch();
 
 				// En caso de recibir un campo base y valor base se hace la busqueda para recuperar la informacion
@@ -139,9 +130,7 @@
 						echo '<td valign=top align=center>';
 							// Crea los campos definidos por cada columna de formulario
 							echo '<table class="TextosVentana">';
-
-							$consulta_campos = $ConexionPDO->prepare("SELECT * FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario' AND columna='$cl' AND visible=1 ORDER BY peso");
-							$consulta_campos->execute();
+							$consulta_campos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario' AND columna='$cl' AND visible=1 ORDER BY peso");
 							while ($registro_campos = $consulta_campos->fetch())
 								{
 									$nombre_campo=$registro_campos["campo"];
@@ -386,11 +375,8 @@
 								<select  name="campo" class="Combos" >
 									<option value="">Seleccione uno</option>
 									<?php
-										$mysql_enlace = mysql_connect($Servidor, $UsuarioBD, $PasswordBD);
-										mysql_select_db($BaseDatos, $mysql_enlace);
-										$consulta = "DESCRIBE $nombre_tabla ";
-										$resultado = mysql_query($consulta,$mysql_enlace);
-										while($registro = mysql_fetch_array($resultado))
+										$resultado=ejecutar_sql("DESCRIBE $nombre_tabla ");
+										while($registro = $resultado->fetch())
 											{
 												echo '<option value="'.$registro["Field"].'" >'.$registro["Field"].'&nbsp;&nbsp;&nbsp;['.$registro["Type"].']</option>';
 											}							
@@ -460,8 +446,7 @@
 									<select name="columna" class="selector_01" >
 										<?php
 											// Obtiene numero de columnas para el formulario
-											$consulta_columnas = $ConexionPDO->prepare("SELECT columnas FROM ".$TablasCore."formulario WHERE id='$formulario' ");
-											$consulta_columnas->execute();
+											$consulta_columnas=ejecutar_sql("SELECT columnas FROM ".$TablasCore."formulario WHERE id='$formulario' ");
 											$registro_columnas = $consulta_columnas->fetch();
 											$columnas_formulario=$registro_columnas["columnas"];
 											for ($i=1;$i<=$columnas_formulario;$i++)
@@ -662,8 +647,8 @@
 						</tr>
 			 <?php
 
-				$consulta = $ConexionPDO->prepare("SELECT * FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario' ORDER BY columna,peso,titulo");
-				$consulta->execute();
+
+				$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario' ORDER BY columna,peso,titulo");
 				while($registro = $consulta->fetch())
 					{
 						$peso_aumentado=$registro["peso"]+1;
@@ -826,8 +811,7 @@
 							<td></td>
 						</tr>
 			 <?php
-				$consulta_botones = $ConexionPDO->prepare("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario' ORDER BY peso,titulo");
-				$consulta_botones->execute();
+				$consulta_botones=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario' ORDER BY peso,titulo");
 				while($registro = $consulta_botones->fetch())
 					{
 						$peso_aumentado=$registro["peso"]+1;
@@ -992,8 +976,7 @@
 			if ($tabla_datos=="") $mensaje_error.="Debe indicar un nombre v&aacute;lido para la tabla de datos asociada al formulario.<br>";
 			if ($mensaje_error=="")
 				{
-					$consulta = $ConexionPDO->prepare("INSERT INTO ".$TablasCore."formulario VALUES (0, '$titulo','$ayuda_titulo','$ayuda_texto','$ayuda_imagen','$tabla_datos','$columnas')");
-					$consulta->execute();
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario VALUES (0, '$titulo','$ayuda_titulo','$ayuda_texto','$ayuda_imagen','$tabla_datos','$columnas')");
 					$id=$ConexionPDO->lastInsertId();
 					// Crea primer campo
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_campo VALUES (0, 'Id','id','','','$id','0','1','1','0','','numerico') ");
@@ -1019,8 +1002,6 @@
 <!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <?php if ($accion=="administrar_formularios")
 	{
-		// POR CORREGIR:  LA LISTA DE TABLAS DE DATOS DEBE GENERALIZARCE PARA PDO Y CUALQUIER MOTOR
-
 		 ?>
 
 		<table class="TextosVentana"><tr><td valign=top>
@@ -1062,13 +1043,12 @@
 							<select  name="tabla_datos" class="Combos" >
 								<option value="">Seleccione una</option>
 								 <?php
-										$mysql_enlace = mysql_connect($Servidor, $UsuarioBD, $PasswordBD);
-										mysql_select_db($BaseDatos, $mysql_enlace);
-										$consulta = "SHOW TABLE STATUS FROM $BaseDatos WHERE Name LIKE '$TablasApp%'";
-										$resultado = mysql_query($consulta,$mysql_enlace);
-										while($registro = mysql_fetch_array($resultado))
+										$resultado=consultar_tablas();
+										while ($registro = $resultado->fetch())
 											{
-												echo '<option value="'.$registro["Name"].'" >'.str_replace($TablasApp,'',$registro["Name"]).'</option>';
+												// Imprime solamente las tablas de aplicacion
+												if (strpos($registro[0],$TablasApp)!==FALSE)  // Booleana requiere === o !==
+													echo '<option value="'.$registro[0].'" >'.str_replace($TablasApp,'',$registro[0]).'</option>';
 											}		
 								?>
 							</select><a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
@@ -1114,8 +1094,7 @@
 					</tr>
 		 <?php
 
-				$consulta_forms = $ConexionPDO->prepare("SELECT * FROM ".$TablasCore."formulario ORDER BY titulo");
-				$consulta_forms->execute();
+				$consulta_forms=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario ORDER BY titulo");
 				while($registro = $consulta_forms->fetch())
 					{
 						echo '<tr>
