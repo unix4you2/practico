@@ -1,16 +1,16 @@
 <?php
-	$ServidorBD="localhost";
-	$BaseDatos="unixlandia_org";
-	$UsuarioBD="root";
-	$PasswordBD="";
-	$MotorBD="mysql";
-	$PuertoBD="";
-	$NombreRAD="Pr&aacute;ctico";
-	$VersionRAD="12.05";
-	$PlantillaActiva="nomo";
-	$ArchivoCORE="";
-	$TablasCore="Core_";
-	$TablasApp="App_";
-	$MotorTablasApp="MyISAM";
-	$LlaveDePaso="";
+	$ServidorBD='127.0.0.ssd';
+	$BaseDatos='pruebadb';
+	$UsuarioBD='unix4you2@gmail.com';
+	$PasswordBD='sdsdd';
+	$MotorBD='mysql';
+	$PuertoBD='2321';
+	$NombreRAD='Pr&aacute;ctico';
+	$VersionRAD='12.05';
+	$PlantillaActiva='nomo';
+	$ArchivoCORE='';
+	$TablasCore='Core_';
+	$TablasApp='App_';
+	$MotorTablasApp='MyISAM';
+	$LlaveDePaso='';
 ?>

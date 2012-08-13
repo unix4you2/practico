@@ -9,6 +9,10 @@
 	</tr>
 </table>
 <hr>
+
+
+
+<form name="continuar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 <table cellspacing=10>
 	<tr>
 		<td valign=top align=right>
@@ -17,7 +21,7 @@
 			</font>
 		</td>
 		<td valign=top>
-			<select  name="campo" class="Combos" >
+			<select name="motor" class="Combos" >
 				<option value="">Seleccione uno</option>
 				<option value="sqlite2">SQLite2</option>
 				<option value="sqlite3">SQLite3</option>
@@ -41,7 +45,10 @@
 			</font>
 		</td>
 		<td valign=top>
+			<font size=2 color=black>
 			<input type="text" name="servidor" size="20" class="CampoTexto" class="keyboardInput">
+			Puerto: <input type="text" name="puerto" size="4" class="CampoTexto" class="keyboardInput">
+			</font>
 		</td>
 	</tr>
 	<tr>
@@ -91,7 +98,7 @@
 			</font>
 		</td>
 		<td valign=top>
-			<input type="text" name="prefijocore" size="7" value="App_" class="CampoTexto" class="keyboardInput">
+			<input type="text" name="prefijoapp" size="7" value="App_" class="CampoTexto" class="keyboardInput">
 		</td>
 	</tr>
 
@@ -110,12 +117,7 @@
 
 	$anterior=$paso-1;
 	$siguiente=$paso+1;
-	echo '<form name="regresar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-			<input type="Hidden" name="paso" value="'.$anterior.'">
-			<input type="Button" class="BotonesEstado" value=" <<< Anterior " onclick="document.regresar.submit();">
-		  </form>';
 
-	echo '<form name="continuar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';	
 	if ($hay_error)
 		{
 			echo '<input type="Hidden" name="paso" value="1">';
@@ -127,7 +129,10 @@
 			echo '<input type="Button" class="BotonesEstadoCuidado" value=" Continuar >>> " onclick="document.continuar.submit();">';
 		}
 	echo '</form>';
-
+	echo '<form name="regresar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+			<input type="Hidden" name="paso" value="'.$anterior.'">
+			<input type="Button" class="BotonesEstado" value=" <<< Anterior " onclick="document.regresar.submit();">
+		  </form>';
 	cerrar_barra_estado();
 ?>
 

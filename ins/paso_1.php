@@ -14,7 +14,7 @@
 	<div align=left>
 		<?php
 			$hay_error=0;
-			informar_prueba_escritura("..");
+			//informar_prueba_escritura("..");
 			informar_prueba_escritura("../core");
 			informar_prueba_escritura("../ins");
 			informar_prueba_escritura("../tmp");
