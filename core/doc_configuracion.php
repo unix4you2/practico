@@ -1,6 +1,7 @@
 <?php
 	/*
 		// ESTE ARCHIVO SE MANTIENE COMO DOCUMENTACION ASOCIADA AL ARCHIVO configuracion.php, EL CUAL SOLO INCLUYE LAS DEFINICIONES DE VARIABLES
+		// GENERADAS DURANTE EL PROCESO DE INSTALACION.  LOS VALORES AQUI PROPUESTOS SON SOLAMENTE EJEMPLOS.
 		Title: Configuracion base 
 		Ubicacion *[/core/configuracion.php]*.  Archivo que contiene la declaracion de variables basicas para conexion a bases de datos y otros
 	*/
@@ -21,9 +22,9 @@
 	*/
 	
 	$ServidorBD="localhost";
-	$BaseDatos="unixlandia_org";  // Path completo cuando se trata de sqlite2, ej: "/path/to/database.sdb"
+	$BaseDatos="practico_db";  // Path completo cuando se trata de sqlite2, ej: "/path/to/database.sdb"
 	$UsuarioBD="root";
-	$PasswordBD="";
+	$PasswordBD="miclave";
 	$MotorBD="mysql";
 	$PuertoBD="";
 
@@ -60,20 +61,4 @@
 	$MotorTablasApp="MyISAM";
 
 	$LlaveDePaso=""; // Valor unico para firmar los usuarios del aplicativo.  No debe ser cambiado despues de puesto en marcha a menos que se haga un update manual el usuario que no coincida con la llave no podra ingresar.
-
-
-/*
-PDO_CUBRID Cubrid
-PDO_DBLIB FreeTDS / Microsoft SQL Server / Sybase
-PDO_FIREBIRD Firebird/Interbase 6
-PDO_IBM IBM DB2
-PDO_INFORMIX IBM Informix Dynamic Server
-PDO_MYSQL MySQL 3.x/4.x/5.x
-PDO_OCI Oracle Call Interface
-PDO_ODBC ODBC v3 (IBM DB2, unixODBC and win32 ODBC)
-PDO_PGSQL PostgreSQL
-PDO_SQLITE SQLite 3 and SQLite 2
-PDO_4D
-*/
-
 ?>

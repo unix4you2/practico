@@ -82,6 +82,7 @@
 	catch( PDOException $ErrorPDO)
 		{
 			echo "<hr><center><blink><b><font color=yellow>ATENCION:</font></b></blink> Error de conexion con la base de datos.<br>Verifique los valores existentes en el archivo <b>configuracion.php</b> y la disponibilidad de PDO y modulos asociados a su motor de bases de datos en su <b>php.ini</b>.  <br><b>Detalles:</b> ".$ErrorPDO->getMessage()."</center><hr>";
+			$hay_error=1; //usada globalmente durante el proceso de instalacion
 		}
 
 ?>

@@ -1,15 +1,11 @@
 <html>
 <head>
 	<title>
-		<?php echo $NombreRAD; ?> - Instalaci&oacute;n
+		Pr&aacute;ctico - Instalaci&oacute;n
   	</title>
-	<link rel="stylesheet" type="text/css" href="../skin/<?php echo $PlantillaActiva; ?>/general.css">
+	<link rel="stylesheet" type="text/css" href="../skin/nomo/general.css">
 </head>
 <body leftmargin="0"  margin="0" topmargin="0" oncontextmenu="return false;">
-
-<form action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;" name="core_ver_menu">
-	<input type="Hidden" name="accion" value="Ver_menu">
-</form>
 
 <!-- INICIA LA TABLA PRINCIPAL -->
 <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="left">
@@ -17,7 +13,7 @@
 	<tr><td>
 		<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MarcoSuperior"><tr>
 			<td valign="bottom" width="20%">
-				<img src="<?php echo 'skin/'.$PlantillaActiva.'/img/logo.png'; ?>" border="0">
+				<img src="../skin/nomo/img/logo.png" border="0">
 			</td>
 			<td align="center" valign="middle" width="60%">
 				<b>

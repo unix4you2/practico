@@ -7,6 +7,9 @@
 	// Inicio de la sesion
 	session_start();
 	
+	//Determina si es un primer inicio 
+	if (!file_exists("core/configuracion.php")) { header("Location: ins/"); die();}
+
 	// Datos de fecha, hora y direccion IP para algunas operaciones
 	$fecha_operacion=date("Ymd");
 	$fecha_operacion_guiones=date("Y-m-d");

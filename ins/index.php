@@ -1,8 +1,7 @@
 <?php 
-	// Inicio de la sesion
-	session_start();
-	$Sesion_abierta=1;
-	if (!isset($_SESSION["Sesion_abierta"])) $_SESSION["Sesion_abierta"]=$Sesion_abierta;
+	$NombreRAD="Pr&aacute;ctico";
+	$VersionRAD="12.05";
+	$PlantillaActiva="nomo";
 
 	$fecha_operacion=date("Ymd");
 	$fecha_operacion_guiones=date("Y-m-d");
@@ -27,8 +26,40 @@
 		//foreach($HTTP_GET_VARS as $getvar => $getval){ ${$getvar} = $getval; }		  
 	}
 
-	//Cargar archivo de configuracion principal
-	include("../core/configuracion.php");
+	//Divide los queries de un cadena
+	function split_sql($sql)
+		{
+			$sql = trim($sql);
+			$sql = ereg_replace("\n#[^\n]*\n", "\n", $sql);
+
+			$buffer = array();
+			$ret = array();
+			$in_string = false;
+
+			for($i=0; $i<strlen($sql)-1; $i++) {
+				if($sql[$i] == ";" && !$in_string) {
+					$ret[] = substr($sql, 0, $i);
+					$sql = substr($sql, $i + 1);
+					$i = 0;
+				}
+
+				if($in_string && ($sql[$i] == $in_string) && $buffer[1] != "\\") {
+					$in_string = false;
+				}
+				elseif(!$in_string && ($sql[$i] == '"' || $sql[$i] == "'") && (!isset($buffer[0]) || $buffer[0] != "\\")) {
+					$in_string = $sql[$i];
+				}
+				if(isset($buffer[1])) {
+					$buffer[0] = $buffer[1];
+				}
+				$buffer[1] = $sql[$i];
+			}
+
+			if(!empty($sql)) {
+				$ret[] = $sql;
+			}
+			return($ret);
+		}
 
 	//Crea un archivo para probar acceso de escritura, luego lo elimina
 	function temp_file($archivo)
@@ -45,20 +76,27 @@
 		}
 		
 	// Determina si se puede escribir en un directorio
-	function puede_escribirse($archivo) // dir pass with / 
+	function puede_escribirse($archivo,$tipo=1) // dir pass with /   1=si es carpeta,2=si es archivo
 		{
-			if (is_dir($archivo))
+			if ($tipo==1)
 				{
-					$archivo.="/temp";
-					return temp_file($archivo);
+					if (is_dir($archivo))
+						{
+							$archivo.="/temp";
+							return temp_file($archivo);
+						}
+					else
+						if(is_file($archivo))
+							{
+								return temp_file($archivo);
+							}
+						else
+							return false;
 				}
-			else
-				if(is_file($archivo))
-					{
-						return temp_file($archivo);
-					}
-				else
-					return false;
+			if ($tipo==2)
+				{
+					return is_writable ($archivo);
+				}
 		}
 
 	function informar_prueba_escritura($path_a_probar) // dir pass with / 

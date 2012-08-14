@@ -21,20 +21,19 @@
 			</font>
 		</td>
 		<td valign=top>
-			<select name="motor" class="Combos" >
-				<option value="">Seleccione uno</option>
+			<select name="MotorBD" class="Combos" >
+				<option value="mysql">MySQL (3.x/4.x/5.x)</option>
 				<option value="sqlite2">SQLite2</option>
 				<option value="sqlite3">SQLite3</option>
-				<option value="sqlsrv">Microsoft SQL Server: Win32 [max version 2008]</option>
-				<option value="mssql">Microsoft SQL Server: Win32&Linux, [max version 2000]</option>
-				<option value="mysql">MySQL</option>
+				<option value="sqlsrv">FreeTDS/Microsoft SQL Server: Win32 [max version 2008]</option>
+				<option value="mssql">FreeTDS/Microsoft SQL Server: Win32&Linux, [max version 2000]</option>
 				<option value="pg">PostgreSQL</option>
-				<option value="ibm">IBM</option>
+				<option value="ibm">IBM (DB2)</option>
 				<option value="dblib">DBLIB</option>
-				<option value="odbc">Microsoft Access (ODBC)</option>
-				<option value="oracle">ORACLE</option>
-				<option value="ifmx">Informix</option>
-				<option value="fbd">Firebird</option>
+				<option value="odbc">Microsoft Access (ODBC v3: IBM DB2, unixODBC, Win32 ODBC)</option>
+				<option value="oracle">ORACLE (OCI Oracle Call Interface)</option>
+				<option value="ifmx">Informix (IBM Informix Dynamic Server)</option>
+				<option value="fbd">Firebird (Firebird/Interbase 6)</option>
 			</select>
 		</td>
 	</tr>
@@ -46,8 +45,8 @@
 		</td>
 		<td valign=top>
 			<font size=2 color=black>
-			<input type="text" name="servidor" size="20" class="CampoTexto" class="keyboardInput">
-			Puerto: <input type="text" name="puerto" size="4" class="CampoTexto" class="keyboardInput">
+			<input type="text" name="Servidor" size="20" class="CampoTexto" class="keyboardInput">
+			Puerto: <input type="text" name="PuertoBD" size="4" class="CampoTexto" class="keyboardInput"> (si no es el predeterminado)
 			</font>
 		</td>
 	</tr>
@@ -58,7 +57,9 @@
 			</font>
 		</td>
 		<td valign=top>
-			<input type="text" name="basedatos" size="20" class="CampoTexto" class="keyboardInput">
+			<font size=2 color=black>
+			<input type="text" name="BaseDatos" size="20" class="CampoTexto" class="keyboardInput"> (debe existir)
+			</font>
 		</td>
 	</tr>
 	<tr>
@@ -68,7 +69,7 @@
 			</font>
 		</td>
 		<td valign=top>
-			<input type="text" name="usuario" size="20" class="CampoTexto" class="keyboardInput">
+			<input type="text" name="UsuarioBD" size="20" class="CampoTexto" class="keyboardInput">
 		</td>
 	</tr>
 	<tr>
@@ -78,7 +79,7 @@
 			</font>
 		</td>
 		<td valign=top>
-			<input type="password" name="contrasena" size="20" class="CampoTexto" class="keyboardInput">
+			<input type="password" name="PasswordBD" size="20" class="CampoTexto" class="keyboardInput">
 		</td>
 	</tr>
 	<tr>
@@ -88,7 +89,7 @@
 			</font>
 		</td>
 		<td valign=top>
-			<input type="text" name="prefijocore" size="7" value="Core_" class="CampoTexto" class="keyboardInput">
+			<input type="text" name="TablasCore" size="7" value="Core_" class="CampoTexto" class="keyboardInput">
 		</td>
 	</tr>
 	<tr>
@@ -98,17 +99,11 @@
 			</font>
 		</td>
 		<td valign=top>
-			<input type="text" name="prefijoapp" size="7" value="App_" class="CampoTexto" class="keyboardInput">
+			<input type="text" name="TablasApp" size="7" value="App_" class="CampoTexto" class="keyboardInput">
 		</td>
 	</tr>
-
 </table>
-<?php
-	if ($hay_error)
-		{
-			echo '<b>Se han encontrado errores al tratar de escribir en los directorios de instalaci&oacute;n !!!</b>:<br>Las rutas indicadas deben pertenecer al usuario del webserver que ejecuta los scripts de Pr&aacute;ctico (generalmente apache)<br> y contar con permisos 755 para el caso de carpetas y 644 para los archivos.<br>Una forma r&aacute;pida de actualizar estos permisos puede ser ejecutando desde la raiz de Pr&aacute;ctico los comandos:<li>find . -type d -exec chmod 755 {} \;<li>find . -type f -exec chmod 644 {} \;';
-		}
-?>
+
 <br><br>
 </div>
 
