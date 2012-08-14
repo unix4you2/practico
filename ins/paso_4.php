@@ -11,6 +11,7 @@
 
 <?php
 	// Ejecuta los scripts de creacion de la BD si se requiere
+	$total_ejecutadas=0;
 	if ($aplicar_script_basedatos)
 		{
 			include("../core/configuracion.php");
@@ -22,7 +23,6 @@
 			$total_consultas= fread($archivo_consultas,filesize("sql/practico.sql"));
 			fclose($archivo_consultas);
  
-			$total_ejecutadas=0;
 			$arreglo_consultas = split_sql($total_consultas);
 			foreach($arreglo_consultas as $consulta)
 				{
@@ -51,6 +51,7 @@
 	if (!$hay_error)
 		{
 			echo '<form name="continuar" action="../" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+				<input type="Hidden" name="accion" value="Terminar_sesion">
 				<input type="Submit" class="BotonesEstadoCuidado" value=" Ir a su instalaci&oacute;n de Pr&aacute;ctico " onclick="document.continuar.submit();">
 				</form>';
 		}

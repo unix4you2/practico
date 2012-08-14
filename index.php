@@ -7,7 +7,7 @@
 	// Inicio de la sesion
 	session_start();
 	
-	//Determina si es un primer inicio 
+	//Determina si es un primer inicio o no hay configuracion
 	if (!file_exists("core/configuracion.php")) { header("Location: ins/"); die();}
 
 	// Datos de fecha, hora y direccion IP para algunas operaciones
