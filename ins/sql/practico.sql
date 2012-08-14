@@ -57,10 +57,10 @@ CREATE TABLE Core_menu (
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM;
 
-INSERT INTO Core_menu VALUES (0,1,'Menus'   ,0,0,'',1,'Interno','administrar_menu',5,2,1,1,1,'Administrativas de Práctico','icono_menus.png');
-INSERT INTO Core_menu VALUES (0,2,'Usuarios',0,0,'',1,'Interno','listar_usuarios' ,5,1,1,1,1,'Administrativas de Práctico','icono_usuarios.png');
-INSERT INTO Core_menu VALUES (0,3,'Tablas de datos',0,0,'',1,'Interno','administrar_tablas' ,5,3,1,1,1,'Administrativas de Práctico','icono_tabla.png');
-INSERT INTO Core_menu VALUES (0,3,'Formularios',0,0,'',1,'Interno','administrar_formularios' ,5,3,1,1,1,'Administrativas de Práctico','icono_form.png');
+INSERT INTO Core_menu VALUES (0,'Menus'   ,0,0,'',1,'Interno','administrar_menu',5,2,1,1,1,'Administrativas de Práctico','icono_menus.png');
+INSERT INTO Core_menu VALUES (0,'Usuarios',0,0,'',1,'Interno','listar_usuarios' ,5,1,1,1,1,'Administrativas de Práctico','icono_usuarios.png');
+INSERT INTO Core_menu VALUES (0,'Tablas de datos',0,0,'',1,'Interno','administrar_tablas' ,5,3,1,1,1,'Administrativas de Práctico','icono_tabla.png');
+INSERT INTO Core_menu VALUES (0,'Formularios',0,0,'',1,'Interno','administrar_formularios' ,5,3,1,1,1,'Administrativas de Práctico','icono_form.png');
 
 DROP TABLE IF EXISTS Core_formulario;
 CREATE TABLE Core_formulario (
