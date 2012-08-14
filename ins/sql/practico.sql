@@ -12,6 +12,8 @@ CREATE TABLE Core_parametros (
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM;
 
+INSERT INTO Core_parametros VALUES (0,'Nombre completo de su empresa','Nombre corto de su empresa','Nombre Aplicacion','0.1B','20120101','Texto de su licencia','Texto asociado a los creditos de su aplicacion');
+
 DROP TABLE IF EXISTS Core_usuario;
 CREATE TABLE Core_usuario (
   login varchar(20) NOT NULL,
@@ -19,13 +21,15 @@ CREATE TABLE Core_usuario (
   nombre varchar(100) NOT NULL default '',
   descripcion varchar(250) NOT NULL default '',
   estado int(1) NOT NULL default '1',
-  nivel_usuario int(10) NOT NULL default '0',
+  nivel int(10) NOT NULL default '0',
   correo varchar(200) NOT NULL default '',
   ultimo_acceso date NOT NULL default '20000101',
   llave_paso varchar(50) NOT NULL default 'd41d8cd98f00b204e9800998ecf8427e',
   PRIMARY KEY  (login)
 ) ENGINE=MyISAM;
 INSERT INTO Core_usuario VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','John Arroyave','Administrador del sistema',1,5,'unix4you2@gmail.com','20110601','d41d8cd98f00b204e9800998ecf8427e');
+
+UPDATE Core_usuario SET ultimo_acceso=CURDATE();
 
 DROP TABLE IF EXISTS Core_auditoria;
 CREATE TABLE Core_auditoria (

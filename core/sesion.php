@@ -64,7 +64,7 @@
 						if (!isset($_SESSION["Nombre_Empresa_Corto"])) $_SESSION["Nombre_Empresa_Corto"]=$registro_parametros["nombre_empresa_corto"];
 						if (!isset($_SESSION["Nombre_Aplicacion"])) $_SESSION["Nombre_Aplicacion"]=$registro_parametros["nombre_aplicacion"];
 						if (!isset($_SESSION["Version_Aplicacion"])) $_SESSION["Version_Aplicacion"]=$registro_parametros["version"];
-						
+
 						// Lleva a auditoria
 						ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$uid','Ingresa al sistema desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");
 						// Actualiza fecha del ultimo ingreso para el usuario

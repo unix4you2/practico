@@ -26,6 +26,9 @@
 			$arreglo_consultas = split_sql($total_consultas);
 			foreach($arreglo_consultas as $consulta)
 				{
+					//Cambia el prefijo predeterminado en caso que haya sido personalizado en la instalacion
+					$consulta=str_replace("Core_",$TablasCore,$consulta);
+					//Ejecuta el query
 					$consulta_enviar = $ConexionPDO->prepare($consulta);
 					$consulta_enviar->execute();
 					$total_ejecutadas++;

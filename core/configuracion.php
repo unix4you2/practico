@@ -4,7 +4,7 @@
 		$UsuarioBD='root';
 		$PasswordBD='';
 		$MotorBD='mysql';
-		$PuertoBD='3306';
+		$PuertoBD='';
 		$NombreRAD='Pr&aacute;ctico';
 		$VersionRAD='12.05';
 		$PlantillaActiva='nomo';
