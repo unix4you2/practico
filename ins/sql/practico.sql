@@ -1,6 +1,3 @@
-DROP DATABASE IF EXISTS practico;
-CREATE DATABASE practico;
-USE practico;
 
 DROP TABLE IF EXISTS Core_parametros;
 CREATE TABLE Core_parametros (
