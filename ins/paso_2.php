@@ -10,10 +10,8 @@
 </table>
 <hr>
 
-
-
 <form name="continuar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-<table cellspacing=10>
+<table cellspacing=10 width="700">
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
@@ -22,7 +20,7 @@
 		</td>
 		<td valign=top>
 			<select name="MotorBD" class="Combos" >
-				<option value="mysql">MySQL (3.x/4.x/5.x)</option>
+				<option value="mysql">MySQL - MariaDB (3.x/4.x/5.x)</option>
 				<option value="sqlite2">SQLite2</option>
 				<option value="sqlite3">SQLite3</option>
 				<option value="sqlsrv">FreeTDS/Microsoft SQL Server: Win32 [max version 2008]</option>
@@ -102,8 +100,28 @@
 			<input type="text" name="TablasApp" size="7" value="App_" class="CampoTexto" class="keyboardInput">
 		</td>
 	</tr>
+	<tr>
+		<td valign=top align=right>
+			<font size=2 color=black>
+				Llave de paso
+			</font>
+		</td>
+		<td valign=top>
+			<font size=2 color=black>
+				<input type="text" name="LlaveDePaso" size="12" value="<?php echo TextoAleatorio(10); ?>" class="CampoTexto" class="keyboardInput">
+				(valor para firmar cuentas de usuario)
+			</font>
+		</td>
+	</tr>
+	<tr>
+		<td valign=top colspan=2>
+			<font size=1 color=darkblue>
+				<u>IMPORTANTE 1</u>: La base de datos debe existir previamente para que Pr&aacute;ctico pueda conectarse a ella y generar las estructuras requeridas.  Consulte con su proveedor de hosting o administrador de sistemas c&oacute;mo crear una base de datos con privilegios suficientes para trabajar con Pr&aacute;ctico.<br><br>
+				<u>IMPORTANTE 2</u>: El instalador eliminar&aacute; todas las tablas existentes sobre la base de datos indicada y que coincidan con los nombres de tablas que utilizar&aacute; Pr&aacute;ctico.  Si usted considera que puede tener informaci&oacute;n importante en ellas se recomienda realizar una copia de seguridad antes de continuar.  Si desea compartir una misma base de datos entre diferentes instalaciones de Pr&aacute;ctico puede cambiar los prefijos de tabla utilizados por cada una.
+			</font>
+		</td>
+	</tr>
 </table>
-
 <br><br>
 </div>
 

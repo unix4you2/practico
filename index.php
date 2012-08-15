@@ -52,9 +52,7 @@
 	if ($accion!= "" && $accion!="Iniciar_login" && $accion!="Terminar_sesion" && $accion!="Mensaje_cierre_sesion")
 		if (MD5($LlaveDePaso)!=$LlaveDePasoUsuario)
 			{
-				echo '<script language="JavaScript">
-				document.location="'.$ArchivoCORE.'?accion=Mensaje_cierre_sesion";
-				</script>';
+				header("Location: index.php?accion=Terminar_sesion");
 				exit(1);
 			}
 

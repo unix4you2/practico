@@ -55,7 +55,7 @@
 			if ($MotorBD=="sqlite2")
 						$ConexionPDO = new PDO("sqlite:$BaseDatos");
 			if ($MotorBD=="sqlite3")
-						$ConexionPDO = new PDO("sqlite::memory");
+						$ConexionPDO = new PDO("sqlite:$BaseDatos");  //$ConexionPDO = new PDO("sqlite::memory");
 			if ($MotorBD=="fbd")
 						$ConexionPDO = new PDO("firebird:dbname=$Servidor".":"."$BaseDatos","$UsuarioBD","$PasswordBD");
 			if ($MotorBD=="oracle")

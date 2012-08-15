@@ -618,7 +618,7 @@ if ($accion=="eliminar_permiso")
 				echo '</table>';
 				
 			} // Fin sino filtro
-				
+
 	echo '
 		</div>';
 				abrir_barra_estado();

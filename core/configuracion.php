@@ -11,6 +11,5 @@
 		$ArchivoCORE='';
 		$TablasCore='Core_';
 		$TablasApp='App_';
-		$MotorTablasApp='MyISAM';
-		$LlaveDePaso='';
+		$LlaveDePaso='7BV58KGSCP';
 	?>

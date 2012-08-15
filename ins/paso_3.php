@@ -27,9 +27,8 @@
 		\$ArchivoCORE='';
 		\$TablasCore='%s';
 		\$TablasApp='%s';
-		\$MotorTablasApp='MyISAM';
-		\$LlaveDePaso='';
-	?>",$Servidor,$BaseDatos,$UsuarioBD,$PasswordBD,$MotorBD,$PuertoBD,$TablasCore,$TablasApp);
+		\$LlaveDePaso='%s';
+	?>",$Servidor,$BaseDatos,$UsuarioBD,$PasswordBD,$MotorBD,$PuertoBD,$TablasCore,$TablasApp,$LlaveDePaso);
 	// Escribe el archivo de configuracion
 	$archivo_config=fopen("../core/configuracion.php","w");
 	if($archivo_config==null)

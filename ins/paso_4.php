@@ -33,6 +33,11 @@
 					$consulta_enviar->execute();
 					$total_ejecutadas++;
 				}
+
+			//Actualiza las llaves de paso de los usuarios insertados
+			$consulta="UPDATE ".$TablasCore."usuario SET llave_paso=MD5('".$LlaveDePaso."')";
+			$consulta_enviar = $ConexionPDO->prepare($consulta);
+			$consulta_enviar->execute();
 		}
 ?>
 </div>

@@ -103,7 +103,7 @@
 	{
 		@session_destroy();
 		echo '<br><br><div align="center">';
-		abrir_ventana('Alerta de seguridad','FFFFFF','50%');
+		abrir_ventana('Alerta de seguridad','FFFFFF','');
 			echo '
 			<br><div align="center" class="TextosVentana"><strong><font size="3">Su sesi&oacute;n ha sido cerrada</font></strong>					
 			<table width="100%"><tr>
@@ -111,15 +111,24 @@
 
 					</div><br>
 					<table width="90%" border="0" cellspacing="0" cellpadding="0" align="center" class="TextosVentana"><tr><td>
-						<strong>Esto puede ocasionarse por:</strong><br>
+						<font color="#000000">
+						<strong>Esto puede ocasionarse por acciones ejecutadas por el usuario como:</strong><br>
 						<font color="#808080">
 						<li>Cerrar de manera voluntaria su sesi&oacute;n</li>
 						<li>Dejar de usar el sistema durante un tiempo prolongado</li>
-						<li>Tener abiertas varias ventanas del sistema al mismo tiempo</li>
+						<li>Tener abiertas varias ventanas del sistema al mismo tiempo en secciones restringidas por el administrador</li>
 						<li>Su usuario o contrase&ntilde;a son inv&aacute;lidos para realizar alguna operaci&oacute;n</li>
+						<li>Navegar utilizando enlaces o botones diferentes a los permitidos</li>
+						<font color="#000000">
+						<br><strong>Tambi&eacute;n por configuraciones o acciones de su equipo como:</strong><br>
+						<font color="#808080">
 						<li>Su navegador no est&aacute; soportando cookies</li>
 						<li>Se ha lipiado la cach&eacute; cookies o sesiones del navegador mientras se usaba el sistema</li>
-						<li>Navegar utilizando enlaces o botones diferentes a los permitidos</li>
+						<font color="#000000">
+						<br><strong>Tambi&eacute;n por configuraciones del sistema como:</strong><br>
+						<font color="#808080">
+						<li>Haber finalizado un proceso de instalaci&oacute;n de la plataforma que requiere un reinicio de sesi&oacute;n</li>
+						<li>La llave de paso de su usuario no corresponde a la llave solicitada por este sistema</li>
 						<li>Las credenciales para firmar un registro de operaci&oacute;n no son v&aacute;lidas</li>
 						</font>
 					</td></tr></table>
