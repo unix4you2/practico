@@ -290,7 +290,7 @@
 			if ($mensaje_error=="")
 				{
 					// Crea la tabla temporal
-					$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))ENGINE=$MotorTablasApp");
+					$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
 					if ($error_consulta!="")
 						{
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">

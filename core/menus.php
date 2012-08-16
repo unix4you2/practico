@@ -232,8 +232,8 @@ if ($accion=="detalles_menu")
 									</form>
 							</td><td width="5"></td>
 							<td align="RIGHT">
-									<input type="Button" name="" value="Actualizar datos" style="border-width: 1px; font-family: Verdana, Tahoma, Arial; font-size: 9px; background-color: e1e1e1; color: Teal; border-color: Gray; border-style: ridge; height: 17px; padding-top: 1px; font-weight: bold;" onClick="document.datos.submit()">
-									&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" name="" value="Cerrar" style="border-width: 1px; font-family: Verdana, Tahoma, Arial; font-size: 9px; background-color: e1e1e1; color: Teal; border-color: Gray; border-style: ridge; height: 17px; padding-top: 1px; font-weight: bold;">
+									<input type="Button" name="" value="Actualizar datos"  class="Botones" onClick="document.datos.submit()">
+									&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" name="" value="Cerrar" class="Botones">
 							</td>
 						</tr>
 					</table>
