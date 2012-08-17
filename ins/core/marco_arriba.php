@@ -3,6 +3,7 @@
 	<title>
 		Pr&aacute;ctico - Instalaci&oacute;n
   	</title>
+	<script type="text/javascript" src="js/tooltips.js"></script>
 	<link rel="stylesheet" type="text/css" href="../skin/nomo/general.css">
 </head>
 <body leftmargin="0"  margin="0" topmargin="0" oncontextmenu="return false;">

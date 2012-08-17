@@ -18,7 +18,7 @@
 				Tipo de motor
 			</font>
 		</td>
-		<td valign=top>
+		<td valign=top width="380">
 			<select name="MotorBD" class="Combos" >
 				<option value="mysql">MySQL - MariaDB (3.x/4.x/5.x)</option>
 				<option value="sqlite2">SQLite2</option>
@@ -33,6 +33,7 @@
 				<option value="ifmx">Informix (IBM Informix Dynamic Server)</option>
 				<option value="fbd">Firebird (Firebird/Interbase 6)</option>
 			</select>
+			<a href="#" title="MySQL y MariaDB" name="Son los motores oficiales.  Sobre ellos se hace el desarrollo y pruebas de la herramienta y aunque gracias a PDO usted podr&aacute; utilizar la herramienta en otros motores es probable que deba hacer ajustes a operaciones espec&iacute;ficas de &eacute;stos."><img src="img/icn_10.gif" border=0></a>
 		</td>
 	</tr>
 	<tr>
