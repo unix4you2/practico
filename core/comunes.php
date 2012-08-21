@@ -745,7 +745,7 @@ foreach($rs as $row){
 /* ################################################################## */
 	function abrir_ventana($titulo,$fondo,$ancho='100%')
 	  {
-		 global $PlantillaActiva;
+		global $PlantillaActiva;
 		/*
 			Procedure: abrir_ventana
 			Abre los espacios de trabajo dinamicos sobre el contenedor principal donde se despliega informacion
@@ -753,12 +753,20 @@ foreach($rs as $row){
 			Variables de entrada:
 
 				titulo - Nombre de la ventana a visualizar en la parte superior.  Acepta modificadores HTML.
-				fondo - Color de fondo de la ventana en formato Hexadecimal. Si no es enviado se crea transparente.
+				fondo - Color de fondo de la ventana en formato Hexadecimal. Si no es enviado se crea transparente.  Si llega un nombre de imagen es usado.
 				ancho - Ancho del espacio de trabajo definido en pixels o porcentaje sobre el contenedor principal.
 				
 			Ver tambien:
 			<cerrar_ventana>	
 		*/
+
+		// Determina si fue enviado un nombre de archivo como fondo y lo usa
+		$ruta_fondo_imagen='';
+		$color_fondo='';
+		if (strpos($fondo, ".png") || strpos($fondo, ".jpg") || strpos($fondo, ".gif"))
+			$ruta_fondo_imagen='skin/'.$PlantillaActiva.'/img/'.$fondo;
+		else
+			$color_fondo=$fondo;
 
 		echo '
 			<table width="'.$ancho.'" border="0" cellspacing="0" cellpadding="0" class="EstiloVentana">
@@ -767,7 +775,7 @@ foreach($rs as $row){
 							<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
 									<td><img src="skin/'.$PlantillaActiva.'/img/bar_i.gif" border=0 alt=" "></td>
 									<td width="100%" align="CENTER" background="skin/'.$PlantillaActiva.'/img/bar_c.jpg">
-										<font face="" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; color: White;"><b>
+										<font face="" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; color: Black;"><b>
 												'.$titulo.'
 										</b></font>
 									</td>
@@ -777,10 +785,10 @@ foreach($rs as $row){
 				</tr>
 				<tr>
 					<td width="100%" align="CENTER">
-							<table width="100%" border="1" cellspacing="0" cellpadding="0" align="center"  bgcolor="'.$fondo.'"  class="TextosVentana"><tr><td>
+							<table width="100%" border="1" cellspacing="0" cellpadding="0" align="center"  bgcolor="'.$color_fondo.'" BACKGROUND="'.$ruta_fondo_imagen.'" class="TextosVentana"><tr><td>
 				';
 	  }
-		  
+
 /* ################################################################## */
 	function cerrar_ventana()
 	  {

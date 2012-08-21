@@ -48,7 +48,6 @@ Footer: Copyright (c) 2012 - John F. Arroyave Gutierrez.
 
 
 File: Conexiones PDO  (/mnt/webcube/webserver/cubepy/pdccion/practico/core/conexiones.php)
-File: Configuracion base  (/mnt/webcube/webserver/cubepy/pdccion/practico/core/configuracion.php)
 File: Libreria base  (/mnt/webcube/webserver/cubepy/pdccion/practico/core/comunes.php)
 
 Group: Modulos Principales  {
@@ -58,6 +57,7 @@ Group: Modulos Principales  {
    File: Modulo sesion  (/mnt/webcube/webserver/cubepy/pdccion/practico/core/sesion.php)
    File: Modulo tablas  (/mnt/webcube/webserver/cubepy/pdccion/practico/core/tablas.php)
    File: Modulo usuarios  (/mnt/webcube/webserver/cubepy/pdccion/practico/core/usuarios.php)
+   File: Variables de conexion  (/mnt/webcube/webserver/cubepy/pdccion/practico/core/doc_configuracion.php)
    }  # Group: Modulos Principales
 
 Group: Index  {
@@ -71,4 +71,4 @@ Group: Index  {
 ##### Do not change or remove these lines. #####
 Data: 1(D3333E\t37GY9NYG37GY6GH/GH39NYGIQ3If998u\3IHp9t89u39uHG)
 Data: 1(h3333E\t37GY9NYG37GY6GH/GH39NYGIQ3If998u\3IHp9t89u3l6)
-Data: 1(T3333E\t37GY9NYG37GY6GH/GH39NYGIQ3If998u\3IHp9t89u36do)
+Data: 1(T3333E\t37GY9NYG37GY6GH/GH39NYGIQ3If998u\3IHp9t89u38\6)

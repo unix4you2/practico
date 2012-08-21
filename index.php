@@ -83,167 +83,72 @@
 
 /* ################################################################## */
 	// Si la accion es presentar el menu de inicio o escritorio
-	if ($accion=="Ver_menu") { 
-				// Carga el panel de acuerdo al usuario
-				// Formularios de las opciones
-				// Si el usuario es el administrador muestra todas las opciones
-				if ($Login_usuario=="admin")
-					$resultado=ejecutar_sql("SELECT menu.* FROM ".$TablasCore."menu WHERE nivel>0");
-				else
-					$resultado=ejecutar_sql("SELECT menu.* FROM ".$TablasCore."menu,".$TablasCore."usuario_menu WHERE usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel>0");
-				// Imprime los formularios correspondientes a cada opcion
-				while($registro = $resultado->fetch())
-					{
-						echo '<form action="'.$ArchivoCORE.'" method="post" name="'.$registro["formulario"].'" id="'.$registro["formulario"].'" style="height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;"><input type="hidden" name="accion" value="'.$registro["accion"].'"></form>';
-					}
-
-
-				echo '<div align="center">';
-
-				abrir_ventana('- Menus de usuario -','','90%');
-				// Estructura de la tabla del menu
-				echo '
-					<div id="marco_cerrar_sesion" style="position: absolute; left: 660px;">
-						<form action="'.$ArchivoCORE.'" method="post" name="caducidad" id="caducidad" style="height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-						<input type="hidden" name="accion" value="Terminar_sesion">
-						
-						</form>			
-						<img src="../img/cerrar.gif" alt="" border="0" onClick="document.caducidad.submit()">
-				</font></div>
-
-						<table width="100%" border="0" cellspacing="0" cellpadding="0" align="CENTER"><tr>
-								<td width="33%" align="CENTER" valign="TOP">
-										<table width="100%" border="0" cellspacing="2" cellpadding="0" align="CENTER" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;" class="link_menu">';
-				// Busca secciones de la izquierda
-				// Si el usuario es administrador muestra todas las secciones
-				if ($Login_usuario=="admin")
-					$resultado=ejecutar_sql("SELECT menu.* FROM menu WHERE  nivel=0 AND columna='Izquierda' ORDER BY peso");
-				else
-					$resultado=ejecutar_sql("SELECT menu.* FROM menu,usuario_menu WHERE usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel=0 AND columna='Izquierda' ORDER BY peso");
-
-				// Imprime opciones encontradas en la izquierda
-				while($registro = $resultado->fetch())
-					{
-						echo '<tr><td><br><img src="'.$registro["imagen"].'" alt="" border="0" align="middle">&nbsp;<b><font face="" color="Navy">'.$registro["texto"].'</font></b></td></tr>';
-							
-							// Imprime las opciones dentro de la seccion
-							$padre=$registro["id"];
-							// Si el usuario es administrador muestra todas las opciones
-							if ($Id_usuario=="admin")
-								$resultado_nivel1=ejecutar_sql("SELECT menu.* FROM menu WHERE nivel=1 AND padre=$padre ORDER BY peso");
-							else
-								$resultado_nivel1=ejecutar_sql("SELECT menu.* FROM menu,usuario_menu WHERE usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel=1 AND padre=$padre ORDER BY peso");
-
-							while($registro_nivel1 = $resultado_nivel1->fetch())
+	if ($accion=="Ver_menu" && $Sesion_abierta)
+		{ 
+			// Carga las opciones del ESCRITORIO
+			echo '<table width="100%" border=0><tr><td valign=top>';
+			// Si el usuario es el administrador muestra todas las opciones
+			if ($Login_usuario=="admin")
+				$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE posible_escritorio");
+			//else
+			//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Id_usuario' AND nivel>0";
+			// Imprime las opciones con sus formularios
+			while($registro = $resultado->fetch())
+				{
+					// Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
+					if ($registro["tipo_comando"]=="Interno" || $registro["tipo_comando"]=="Personal")
+						{
+							// Imprime la imagen asociada si esta definida
+							if ($registro["imagen"]!="") 
 								{
-									echo '<tr><td>&nbsp;&nbsp;&nbsp;<a href="'.$registro_nivel1["url"].'">'.$registro_nivel1["texto"].'</a></td></tr>';
+									echo '<form action="'.$ArchivoCORE.'" method="post" name="desk_'.$registro["id"].'" id="desk_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;"><input type="hidden" name="accion" value="'.$registro["comando"].'"></form>';
+									echo '<a title="'.$registro["texto"].'" name="" href="javascript:document.desk_'.$registro["id"].'.submit();">';
+									echo '<img src="img/'.$registro["imagen"].'" alt="'.$registro["texto"].'" class="IconosEscritorio" valign="absmiddle" align="absmiddle">';
+									echo '</a>';
 								}
-					}
-					
-				// Estructura de la tabla del menu (continuacion)
-				echo '
-										</table>
-								</td>
-								<td width="33%" align="CENTER" valign="TOP">
-										<table width="100%" border="0" cellspacing="2" cellpadding="0" align="CENTER" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;" class="link_menu">';
-				// Busca secciones del centro
-				// Si el usuario es administrador muestra todas las secciones
-				if ($Login_usuario=="admin")
-					$resultado=ejecutar_sql("SELECT menu.* FROM menu WHERE  nivel=0 AND columna='Centro' ORDER BY peso");
-				else
-					$resultado=ejecutar_sql("SELECT menu.* FROM menu,usuario_menu WHERE usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel=0 AND columna='Centro' ORDER BY peso");
+						}
+				}
+			echo '</td></tr></table>';
 
-				// Imprime opciones encontradas en el centro
-				while($registro = $resultado->fetch())
-					{
-						echo '<tr><td><br><img src="'.$registro["imagen"].'" alt="" border="0" align="middle">&nbsp;<b><font face="" color="Navy">'.$registro["texto"].'</font></b></td></tr>';
-							// Imprime las opciones dentro de la seccion
-							$padre=$registro["id"];
-							// Si el usuario es administrador muestra todas las opciones
-							if ($Id_usuario=="admin")
-								$resultado_nivel1=ejecutar_sql("SELECT menu.* FROM menu WHERE nivel=1 AND padre=$padre ORDER BY peso");
-							else
-								$resultado_nivel1=ejecutar_sql("SELECT menu.* FROM menu,usuario_menu WHERE usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel=1 AND padre=$padre ORDER BY peso");
 
-							while($registro_nivel1 = $resultado_nivel1->fetch())
+			// Carga las opciones del ACORDEON
+			echo '<div align="center">';
+			// Si el usuario es el administrador muestra todas las opciones
+			if ($Login_usuario=="admin")
+				$resultado=ejecutar_sql("SELECT COUNT(*) as conteo,seccion FROM ".$TablasCore."menu WHERE posible_centro GROUP BY seccion ORDER BY seccion");
+			//else
+			//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Id_usuario' AND nivel>0";
+			// Imprime las secciones encontradas para el usuario
+			while($registro = $resultado->fetch())
+				{
+					//Crea la seccion en el acordeon
+					$seccion_menu_activa=$registro["seccion"];
+					$conteo_opciones=$registro["conteo"];
+					abrir_ventana($seccion_menu_activa.' ('.$conteo_opciones.')','fondo_ventanas2.gif','85%');
+					// Busca las opciones dentro de la seccion
+					// Si el usuario es el administrador muestra todas las opciones
+					if ($Login_usuario=="admin")
+						$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE posible_centro AND seccion='".$seccion_menu_activa."' ORDER BY peso ");
+					//else
+					//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Id_usuario' AND nivel>0";
+					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
+						{
+							// Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
+							if ($registro_opciones_acordeon["tipo_comando"]=="Interno" || $registro_opciones_acordeon["tipo_comando"]=="Personal")
 								{
-									echo '<tr><td>&nbsp;&nbsp;&nbsp;<a href="'.$registro_nivel1["url"].'">'.$registro_nivel1["texto"].'</a></td></tr>';
+									// Imprime la imagen asociada si esta definida
+									if ($registro_opciones_acordeon["imagen"]!="") 
+										{
+											echo '<form action="'.$ArchivoCORE.'" method="post" name="acorde_'.$registro_opciones_acordeon["id"].'" id="acorde_'.$registro_opciones_acordeon["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;"><input type="hidden" name="accion" value="'.$registro_opciones_acordeon["comando"].'"></form>';
+											echo '<a title="'.$registro_opciones_acordeon["texto"].'" name="" href="javascript:document.acorde_'.$registro_opciones_acordeon["id"].'.submit();">';
+											echo '<img src="img/'.$registro_opciones_acordeon["imagen"].'" alt="'.$registro_opciones_acordeon["texto"].'" class="IconosEscritorio" valign="absmiddle" align="absmiddle">';
+											echo '</a>';
+										}
 								}
-					}
-				// Estructura de la tabla del menu (continuacion)
-				echo '
-										</table>
-								</td>
-								<td width="33%" align="CENTER" valign="TOP">
-										<table width="100%" border="0" cellspacing="2" cellpadding="0" align="CENTER" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;" class="link_menu">';
-				// Busca secciones del centro
-				// Si el usuario es administrador muestra todas las secciones
-				if ($Login_usuario=="admin")
-					$resultado=ejecutar_sql("SELECT menu.* FROM menu WHERE  nivel=0 AND columna='Derecha' ORDER BY peso");
-				else
-					$resultado=ejecutar_sql("SELECT menu.* FROM menu,usuario_menu WHERE usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel=0 AND columna='Derecha' ORDER BY peso");
-
-				// Imprime opciones encontradas en la derecha
-				while($registro = $resultado->fetch())
-					{
-						echo '<tr><td><br><img src="'.$registro["imagen"].'" alt="" border="0" align="middle">&nbsp;<b><font face="" color="Navy">'.$registro["texto"].'</font></b></td></tr>';
-							// Imprime las opciones dentro de la seccion
-							$padre=$registro["id"];
-							// Si el usuario es administrador muestra todas las opciones
-							if ($Id_usuario=="admin")
-								$resultado_nivel1=ejecutar_sql("SELECT menu.* FROM menu WHERE nivel=1 AND padre=$padre ORDER BY peso");
-							else
-								$resultado_nivel1=ejecutar_sql("SELECT menu.* FROM menu,usuario_menu WHERE usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel=1 AND padre=$padre ORDER BY peso");
-
-							while($registro_nivel1 = $resultado_nivel1->fetch())
-								{
-									echo '<tr><td>&nbsp;&nbsp;&nbsp;<a href="'.$registro_nivel1["url"].'">'.$registro_nivel1["texto"].'</a></td></tr>';
-								}
-					}
-				// Estructura de la tabla del menu (continuacion)
-				echo '
-									</table>
-								</td>
-						</tr></table>';
-				cerrar_ventana();
-				echo '<br>
-				
-				
-				
-				
-				
-
-<div id="contenedor_acordeon">
-
-	<div id="acordeon">
-		<div class="item">
-			<a href="#">Seccion definida 1</a>
-			<p>Iconos de seccion...</p>
-		</div>
-		<div class="item">
-			<a href="#">Otra seccion...</a>
-			<p>Iconos de seccion...</p>
-		</div>
-		<div class="item">
-			<a href="#">Otra mas...</a>
-			<p>Iconos de seccion...</p>
-		</div>
-		<div class="item">
-			<a href="#">Ultima seccion</a>
-			<p>Iconos de seccion...</p>
-		</div>
-	</div>
-</div>				
-				
-				
-				
-				
-				
-				
-				
-				
-				';
-				
+						}
+					cerrar_ventana();
+				}
+			echo '</div>';
 	} 
 /* ################################################################## */
 	// Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios

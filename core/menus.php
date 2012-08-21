@@ -146,6 +146,7 @@ if ($accion=="detalles_menu")
 										<option value="0">No</option>
 										<option value="1" <?php if ($registro["posible_arriba"]) echo 'selected'; ?> >Si</option>
 									</select>
+									<a href="#" title="Ubicaci&oacute;n de esta opci&oacute;n" name="Se debe habilitar esta opci&oacute;n para ser desplegada en la barra de menu superior-horizontal?"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 						<tr>
@@ -155,6 +156,7 @@ if ($accion=="detalles_menu")
 										<option value="0">No</option>
 										<option value="1" <?php if ($registro["posible_escritorio"]) echo 'selected'; ?> >Si</option>
 									</select>
+									<a href="#" title="Ubicaci&oacute;n de esta opci&oacute;n" name="Se debe habilitar esta opci&oacute;n para ser desplegada como un icono en el escritorio del usuario?"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 						<tr>
@@ -164,6 +166,7 @@ if ($accion=="detalles_menu")
 										<option value="0">No</option>
 										<option value="1" <?php if ($registro["posible_centro"]) echo 'selected'; ?> >Si</option>
 									</select>
+									<a href="#" title="Ubicaci&oacute;n de esta opci&oacute;n" name="Se debe habilitar esta opci&oacute;n para ser desplegada en la parte central del aplicativo, dentro de ventanas clasificadas/agrupadas por el valor definido en el campo Seccion?"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 						<tr>
@@ -191,7 +194,7 @@ if ($accion=="detalles_menu")
 						<tr>
 							<td align="RIGHT"><b>URL est&aacute;tica</b></td><td width="10"></td>
 							<td><input value="<?php echo $registro["url"]; ?>"  class="CampoTexto" type="text" name="url" size="35" maxlength="250" class="texto_01">
-								<a href="#" title="Llevar a una URL o ejecutar un javascript?" name="ingrese una URL completa o un comando javascript definido por javascript:comando para ser reemplazadas dentro de un HREF de un ancla generada alrededor del objeto."><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="Llevar a una URL o ejecutar un javascript?" name="ingrese una URL completa o un comando javascript definido por javascript:comando para ser reemplazadas dentro de un HREF de un ancla generada alrededor del objeto."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 						<tr>
@@ -206,7 +209,9 @@ if ($accion=="detalles_menu")
 						</tr>
 						<tr>
 							<td align="RIGHT"><b>Acci&oacute;n interna/comando/objeto</b></td><td width="10"></td>
-							<td><input value="<?php echo $registro["comando"]; ?>"  class="CampoTexto" type="text" name="comando" size="30" maxlength="250" class="texto_01"></td>
+							<td><input value="<?php echo $registro["comando"]; ?>"  class="CampoTexto" type="text" name="comando" size="30" maxlength="250" class="texto_01">
+								<a href="#" title="Indique uno de tres valores posibles as&iacute;" name="1) EL OBJETO dise&ntilde;ado en Pr&aacute;ctico y al cual se quiere enlazar la opci&oacute;n mediante el formato frm:XXX &oacute; inf:XXX donde debe reemplazar XXX por el identificador &uacute;nico del objeto que se obtiene despu&eacute;s de haber sido creado (ID del formulario o del informe),  2) LA ACCION INTERNA de Pr&aacute;ctico hacia la cual debe ser direccionado el usuario (normalmente se encuentra en la parte inferior de la pantalla), &oacute; 3) COMANDO PERSONALIZADO: La secuencia de comandos definida/programada por el usuario y existente en el archivo personalizadas.php"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT" valign="TOP"><strong>Nivel de usuario</strong></td><td width="10"></td>
@@ -219,7 +224,7 @@ if ($accion=="detalles_menu")
 									<option value="4"  <?php if ($registro["nivel_usuario"]=="4") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;</option>
 									<option value="5"  <?php if ($registro["nivel_usuario"]=="5") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
 								</select>
-								<a href="#" title="Quienes pueden ver esta opci&oacute;n?" name="Indique el perfil de usuario que se debe tener para ver esta opci&oacute;n como disponible."><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="Quienes pueden ver esta opci&oacute;n?" name="Indique el perfil de usuario que se debe tener para ver esta opci&oacute;n como disponible."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 					</table>
@@ -369,6 +374,7 @@ if ($accion=="eliminar_menu")
 										<option value="0">No</option>
 										<option value="1">Si</option>
 									</select>
+									<a href="#" title="Ubicaci&oacute;n de esta opci&oacute;n" name="Se debe habilitar esta opci&oacute;n para ser desplegada en la barra de menu superior-horizontal?"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 						<tr>
@@ -376,8 +382,9 @@ if ($accion=="eliminar_menu")
 							<td>
 									<select  name="posible_escritorio" class="Combos" >
 										<option value="0">No</option>
-										<option value="1">Si</option>
+										<option value="1" selected>Si</option>
 									</select>
+									<a href="#" title="Ubicaci&oacute;n de esta opci&oacute;n" name="Se debe habilitar esta opci&oacute;n para ser desplegada como un icono en el escritorio del usuario?"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 						<tr>
@@ -387,6 +394,7 @@ if ($accion=="eliminar_menu")
 										<option value="0">No</option>
 										<option value="1">Si</option>
 									</select>
+									<a href="#" title="Ubicaci&oacute;n de esta opci&oacute;n" name="Se debe habilitar esta opci&oacute;n para ser desplegada en la parte central del aplicativo, dentro de ventanas clasificadas/agrupadas por el valor definido en el campo Seccion?"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 						<tr>
@@ -414,7 +422,7 @@ if ($accion=="eliminar_menu")
 						<tr>
 							<td align="RIGHT"><b>URL est&aacute;tica</b></td><td width="10"></td>
 							<td><input class="CampoTexto" type="text" name="url" size="35" maxlength="250" class="texto_01">
-								<a href="#" title="Llevar a una URL o ejecutar un javascript?" name="ingrese una URL completa o un comando javascript definido por javascript:comando para ser reemplazadas dentro de un HREF de un ancla generada alrededor del objeto."><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="Llevar a una URL o ejecutar un javascript?" name="ingrese una URL completa o un comando javascript definido por javascript:comando para ser reemplazadas dentro de un HREF de un ancla generada alrededor del objeto."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 						<tr>
@@ -430,7 +438,7 @@ if ($accion=="eliminar_menu")
 						<tr>
 							<td align="RIGHT"><b>Acci&oacute;n interna/comando/objeto</b></td><td width="10"></td>
 							<td><input class="CampoTexto" type="text" name="comando" size="30" maxlength="250" class="texto_01">
-								<a href="#" title="Indique uno de tres valores posibles as&iacute;" name="1) EL OBJETO dise&ntilde;ado en Pr&aacute;ctico y al cual se quiere enlazar la opci&oacute;n mediante el formato frm:XXX &oacute; inf:XXX donde debe reemplazar XXX por el identificador &uacute;nico del objeto que se obtiene despu&eacute;s de haber sido creado (ID del formulario o del informe),  2) LA ACCION INTERNA de Pr&aacute;ctico hacia la cual debe ser direccionado el usuario (normalmente se encuentra en la parte inferior de la pantalla), &oacute; 3) COMANDO PERSONALIZADO: La secuencia de comandos definida/programada por el usuario y existente en el archivo personalizadas.php"><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="Indique uno de tres valores posibles as&iacute;" name="1) EL OBJETO dise&ntilde;ado en Pr&aacute;ctico y al cual se quiere enlazar la opci&oacute;n mediante el formato frm:XXX &oacute; inf:XXX donde debe reemplazar XXX por el identificador &uacute;nico del objeto que se obtiene despu&eacute;s de haber sido creado (ID del formulario o del informe),  2) LA ACCION INTERNA de Pr&aacute;ctico hacia la cual debe ser direccionado el usuario (normalmente se encuentra en la parte inferior de la pantalla), &oacute; 3) COMANDO PERSONALIZADO: La secuencia de comandos definida/programada por el usuario y existente en el archivo personalizadas.php"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 						<tr>
@@ -444,7 +452,7 @@ if ($accion=="eliminar_menu")
 									<option value="4">&#9733;&#9733;&#9733;&#9733;</option>
 									<option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
 								</select>
-								<a href="#" title="Quienes pueden ver esta opci&oacute;n?" name="Indique el perfil de usuario que se debe tener para ver esta opci&oacute;n como disponible."><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="Quienes pueden ver esta opci&oacute;n?" name="Indique el perfil de usuario que se debe tener para ver esta opci&oacute;n como disponible."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 					</table>
@@ -542,8 +550,6 @@ if ($accion=="eliminar_menu")
 											</td>
 										</tr>';
 								}
-								
-								
 					}
 				echo '</table><br><br>';
 		 ?>

@@ -3,7 +3,7 @@
 	<title>
 		<?php echo $NombreRAD; ?> <?php echo $VersionRAD; ?>
   	</title>
-  	
+
 	<script type="text/javascript" src="js/tooltips.js"></script>
 	<script type="text/javascript" src="js/validaform.js"></script>
 	<script type="text/javascript" src="js/popup.js"></script>
@@ -13,7 +13,6 @@
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/general.css">
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/calendario.css">
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/tecladovirtual.css">
-	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/acordeon.css">
 </head>
 <body leftmargin="0"  margin="0" topmargin="0" oncontextmenu="return false;">
 
@@ -61,8 +60,8 @@
 
 		<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MenuSuperior"><tr>
 			<td valign="top">
-				<?php 
-					
+				<?php
+
 					if ($Sesion_abierta && $accion=="Ver_menu") {
 						echo '&nbsp;<b>@'.@$Login_usuario.'</b>>&nbsp;&nbsp;&nbsp;';
 						// Carga las opciones del menu superior
@@ -81,14 +80,13 @@
 								// Verifica si se trata de un comando interno y crea formulario y enlace correspondiente
 								if ($registro["tipo_comando"]=="Interno")
 									{
-										echo '<form action="'.$ArchivoCORE.'" method="post" name="a_'.$registro["id"].'" id="a_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;"><input type="hidden" name="accion" value="'.$registro["comando"].'"></form>';
-										echo '<a href="javascript:document.a_'.$registro["id"].'.submit();">'.$registro["texto"].'</a>';
+										echo '<form action="'.$ArchivoCORE.'" method="post" name="top_'.$registro["id"].'" id="top_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;"><input type="hidden" name="accion" value="'.$registro["comando"].'"></form>';
+										echo '<a href="javascript:document.top_'.$registro["id"].'.submit();">'.$registro["texto"].'</a>';
 									}
 
 								// Agrega un separador de menu
 								echo '<img src="skin/'.$PlantillaActiva.'/img/sep1.gif" border=0 alt="" valign="absmiddle" align="absmiddle" >';
 							}
-
 				?>
 				<?php 
 					}
@@ -109,45 +107,3 @@
 	<tr><td height="100%" valign="<?php if ($accion=="Ver_menu") echo 'TOP'; else echo 'MIDDLE'; ?>" align="center">
 	<!-- INICIO DEL CONTENIDO CENTRAL -->
 
-		<table width="100%" border=0>
-			<tr><td valign=top>
-				<?php 
-					if ($Sesion_abierta && $accion=="Ver_menu") {
-						// Carga las opciones del escritorio
-
-						// Si el usuario es el administrador muestra todas las opciones
-						if ($Login_usuario=="admin")
-							$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE posible_escritorio");
-						//else
-						//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Id_usuario' AND nivel>0";
-						// Imprime los formularios
-						while($registro = $resultado->fetch())
-							{
-								// Verifica si se trata de un comando interno y crea formulario y enlace correspondiente
-								if ($registro["tipo_comando"]=="Interno")
-									{
-										// Imprime la imagen asociada si esta definida
-										if ($registro["imagen"]!="") 
-											{
-												echo '<form action="'.$ArchivoCORE.'" method="post" name="b_'.$registro["id"].'" id="b_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;"><input type="hidden" name="accion" value="'.$registro["comando"].'"></form>';
-												echo '<a title="'.$registro["texto"].'" name="" href="javascript:document.b_'.$registro["id"].'.submit();">';
-												echo '<img src="img/'.$registro["imagen"].'" alt="'.$registro["texto"].'" class="IconosEscritorio" valign="absmiddle" align="absmiddle">';
-												echo '</a>';
-											}
-									}
-							}
-
-						} //Finsi
-
-				?>
-			</td>
-			<td align=right valign=top>
-				<?php 
-					if ($Sesion_abierta && $accion=="Ver_menu") {
-						//Imprime una imagen en el escritorio - en desuso
-						//echo '<img src="img/lagartin.png" alt="" valign="top">';
-					}
-				?>
-			</td>
-		</tr>
-	</table>

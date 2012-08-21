@@ -1,20 +1,30 @@
 1.5
 PHP
-/mnt/webcube/webserver/cubepy/pdccion/practico/js/tecladovirtual.js	1342027792	0	/mnt/webcube/webserver/cubepy/pdccion/practico/js/tecladovirtual.js
-/mnt/webcube/webserver/cubepy/pdccion/practico/js/validaform.js	1342027792	0	/mnt/webcube/webserver/cubepy/pdccion/practico/js/validaform.js
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/marco_abajo.php	1342027792	0	/mnt/webcube/webserver/cubepy/pdccion/practico/core/marco_abajo.php
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/configuracion.php	1342027792	1	Configuracion base
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/formularios.php	1342027792	1	Modulo formularios
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/marco_arriba.php	1342027792	0	/mnt/webcube/webserver/cubepy/pdccion/practico/core/marco_arriba.php
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/tablas.php	1342027792	1	Modulo tablas
-/mnt/webcube/webserver/cubepy/pdccion/practico/js/calendario.js	1342027792	0	/mnt/webcube/webserver/cubepy/pdccion/practico/js/calendario.js
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/usuarios.php	1342027792	1	Modulo usuarios
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/captcha.php	1342027792	0	/mnt/webcube/webserver/cubepy/pdccion/practico/core/captcha.php
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/conexiones.php	1342035076	1	Conexiones PDO
-/mnt/webcube/webserver/cubepy/pdccion/practico/sql/dynapps.sql	1342027792	0	/mnt/webcube/webserver/cubepy/pdccion/practico/sql/dynapps.sql
-/mnt/webcube/webserver/cubepy/pdccion/practico/js/tooltips.js	1342027792	0	/mnt/webcube/webserver/cubepy/pdccion/practico/js/tooltips.js
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/menus.php	1342027792	1	Modulo menues
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/sesion.php	1342027792	1	Modulo sesion
-/mnt/webcube/webserver/cubepy/pdccion/practico/js/popup.js	1342027792	0	/mnt/webcube/webserver/cubepy/pdccion/practico/js/popup.js
-/mnt/webcube/webserver/cubepy/pdccion/practico/sql/Backup_20110628_1209.sql	1342027792	0	/mnt/webcube/webserver/cubepy/pdccion/practico/sql/Backup_20110628_1209.sql
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/comunes.php	1342035416	1	Libreria base
+/mnt/webcube/webserver/cubepy/pdccion/practico/js/tecladovirtual.js	1344889283	0	/mnt/webcube/webserver/cubepy/pdccion/practico/js/tecladovirtual.js
+/mnt/webcube/webserver/cubepy/pdccion/practico/ins/index.php	1345566754	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/index.php
+/mnt/webcube/webserver/cubepy/pdccion/practico/js/validaform.js	1344889283	0	/mnt/webcube/webserver/cubepy/pdccion/practico/js/validaform.js
+/mnt/webcube/webserver/cubepy/pdccion/practico/core/marco_abajo.php	1344889283	0	/mnt/webcube/webserver/cubepy/pdccion/practico/core/marco_abajo.php
+/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_0.php	1344868394	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_0.php
+/mnt/webcube/webserver/cubepy/pdccion/practico/core/configuracion.php	1345581072	0	Configuracion base
+/mnt/webcube/webserver/cubepy/pdccion/practico/core/formularios.php	1344889283	1	Modulo formularios
+/mnt/webcube/webserver/cubepy/pdccion/practico/core/doc_configuracion.php	1345037465	1	Variables de conexion
+/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_3.php	1345037667	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_3.php
+/mnt/webcube/webserver/cubepy/pdccion/practico/core/marco_arriba.php	1345581554	0	/mnt/webcube/webserver/cubepy/pdccion/practico/core/marco_arriba.php
+/mnt/webcube/webserver/cubepy/pdccion/practico/core/tablas.php	1345129135	1	Modulo tablas
+/mnt/webcube/webserver/cubepy/pdccion/practico/js/calendario.js	1344889283	0	/mnt/webcube/webserver/cubepy/pdccion/practico/js/calendario.js
+/mnt/webcube/webserver/cubepy/pdccion/practico/ins/js/tooltips.js	1344889283	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/js/tooltips.js
+/mnt/webcube/webserver/cubepy/pdccion/practico/core/usuarios.php	1345042805	1	Modulo usuarios
+/mnt/webcube/webserver/cubepy/pdccion/practico/ins/core/marco_arriba.php	1345222696	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/core/marco_arriba.php
+/mnt/webcube/webserver/cubepy/pdccion/practico/core/conexiones.php	1345036498	1	Conexiones PDO
+/mnt/webcube/webserver/cubepy/pdccion/practico/core/captcha.php	1344973183	0	/mnt/webcube/webserver/cubepy/pdccion/practico/core/captcha.php
+/mnt/webcube/webserver/cubepy/pdccion/practico/js/tooltips.js	1344889283	0	/mnt/webcube/webserver/cubepy/pdccion/practico/js/tooltips.js
+/mnt/webcube/webserver/cubepy/pdccion/practico/core/menus.php	1345583312	1	Modulo menues
+/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_4.php	1345565965	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_4.php
+/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_2.php	1345222803	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_2.php
+/mnt/webcube/webserver/cubepy/pdccion/practico/ins/sql/practico.sql	1345581747	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/sql/practico.sql
+/mnt/webcube/webserver/cubepy/pdccion/practico/ins/core/marco_abajo.php	1344867353	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/core/marco_abajo.php
+/mnt/webcube/webserver/cubepy/pdccion/practico/core/sesion.php	1345039944	1	Modulo sesion
+/mnt/webcube/webserver/cubepy/pdccion/practico/ins/gpl-2.0.txt	1344696195	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/gpl-2.0.txt
+/mnt/webcube/webserver/cubepy/pdccion/practico/js/popup.js	1344889283	0	/mnt/webcube/webserver/cubepy/pdccion/practico/js/popup.js
+/mnt/webcube/webserver/cubepy/pdccion/practico/core/comunes.php	1345581577	1	Libreria base
+/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_1.php	1345567845	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_1.php
