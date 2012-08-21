@@ -11,5 +11,5 @@
 		$ArchivoCORE='';
 		$TablasCore='Core_';
 		$TablasApp='App_';
-		$LlaveDePaso='7BV58KGSCP';
+		$LlaveDePaso='WMNCGFL9PG';
 	?>

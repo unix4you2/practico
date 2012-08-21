@@ -10,7 +10,7 @@ CREATE TABLE Core_parametros (
   licencia text,
   creditos text,
   PRIMARY KEY  (id)
-) ENGINE=MyISAM;
+);
 
 INSERT INTO Core_parametros VALUES (0,'Nombre completo de su empresa','Nombre corto de su empresa','Nombre Aplicacion','0.1B','20120101','Texto de su licencia','Texto asociado a los creditos de su aplicacion');
 
@@ -26,7 +26,7 @@ CREATE TABLE Core_usuario (
   ultimo_acceso date NOT NULL default '20000101',
   llave_paso varchar(50) NOT NULL default 'd41d8cd98f00b204e9800998ecf8427e',
   PRIMARY KEY  (login)
-) ENGINE=MyISAM;
+);
 INSERT INTO Core_usuario VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','John Arroyave','Administrador del sistema',1,5,'unix4you2@gmail.com','20110601','d41d8cd98f00b204e9800998ecf8427e');
 
 UPDATE Core_usuario SET ultimo_acceso=CURDATE();
@@ -39,7 +39,7 @@ CREATE TABLE Core_auditoria (
   fecha date NOT NULL,
   hora time NOT NULL,
   PRIMARY KEY  (id)
-) ENGINE=MyISAM;
+);
 
 DROP TABLE IF EXISTS Core_menu;
 CREATE TABLE Core_menu (
@@ -59,7 +59,7 @@ CREATE TABLE Core_menu (
   seccion varchar(250) default '',  #Cuando Posible centro=1 define la seccion donde va por agrupacion
   imagen varchar(250) default '',
   PRIMARY KEY  (id)
-) ENGINE=MyISAM;
+);
 
 INSERT INTO Core_menu VALUES (0,'Menus'   ,0,0,'',1,'Interno','administrar_menu',5,2,1,1,1,'Administrativas de Práctico','icono_menus.png');
 INSERT INTO Core_menu VALUES (0,'Usuarios',0,0,'',1,'Interno','listar_usuarios' ,5,1,1,1,1,'Administrativas de Práctico','icono_usuarios.png');
@@ -76,7 +76,7 @@ CREATE TABLE Core_formulario (
   tabla_datos varchar(250) default '',
   columnas int(10) default '1',
   PRIMARY KEY  (id)
-) ENGINE=MyISAM;
+);
 
 DROP TABLE IF EXISTS Core_formulario_campo;
 CREATE TABLE Core_formulario_campo (
@@ -98,7 +98,7 @@ CREATE TABLE Core_formulario_campo (
   solo_lectura varchar(10) default '',
   teclado_virtual int(1) default '0',
   PRIMARY KEY  (id)
-) ENGINE=MyISAM;
+);
 
 
 DROP TABLE IF EXISTS Core_formulario_boton;
@@ -115,7 +115,7 @@ CREATE TABLE Core_formulario_boton (
   retorno_texto text,
   confirmacion_texto varchar(250) default '',
   PRIMARY KEY  (id)
-) ENGINE=MyISAM;
+);
 
 DROP TABLE IF EXISTS Core_informes;
 CREATE TABLE Core_informes (
@@ -136,4 +136,5 @@ CREATE TABLE Core_informes (
   filtro_texto varchar(50),
   signo_texto varchar(10),
   PRIMARY KEY  (id)
-) ENGINE=MyISAM;
+);
+

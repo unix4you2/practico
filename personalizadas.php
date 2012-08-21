@@ -1,7 +1,7 @@
 <?php
 			/*
 				Title: Funciones personalizadas
-				Ubicacion *[/dynapps/funciones_personalizadas.php]*.  Archivo que contiene la declaracion de variables y funciones por parte del usuario o administrador del sistema
+				Ubicacion *[/personalizadas.php]*.  Archivo que contiene la declaracion de variables y funciones por parte del usuario o administrador del sistema
 				Codigo de ejemplo:
 					(start code)
 						<?php if ($accion=="Mi_accion_XYZ") 

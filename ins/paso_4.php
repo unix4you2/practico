@@ -19,8 +19,9 @@
 			include("../core/comunes.php");
 
 			//Abre el archivo con los queries
-			$archivo_consultas=fopen("sql/practico.sql","r");
-			$total_consultas= fread($archivo_consultas,filesize("sql/practico.sql"));
+			$RutaScriptSQL="sql/practico.sql";
+			$archivo_consultas=fopen($RutaScriptSQL,"r");
+			$total_consultas= fread($archivo_consultas,filesize($RutaScriptSQL));
 			fclose($archivo_consultas);
  
 			$arreglo_consultas = split_sql($total_consultas);
@@ -49,10 +50,17 @@
 		Si esta es una instalaci&oacute;n nueva puede ingresar al sistema mediante las credenciales<b> admin/admin</b> y cambiarlas luego por las que usted desee.<br>
 		<br>
 		<font size=4 color=red><b>IMPORTANTE:</b></font><br>
-		Recuerde eliminar por completo el directorio de instalaci&oacute;n para evitar que otra persona ejecute nuevamente estos scripts sobre un sistema en producci&oacute;n pudiendo ocasionar alg&uacute;n tipo de da&ntilde;o.
+		<u><b>Recuerde eliminar por completo el directorio de instalaci&oacute;n (carpeta /ins)</b></u> para evitar que otra persona ejecute nuevamente estos scripts sobre un sistema en producci&oacute;n pudiendo ocasionar alg&uacute;n tipo de da&ntilde;o.
 		<br><br>
+	<b>Resumen de operaciones ejecutadas</b> (archivo '.$RutaScriptSQL.'):<br>
+	<textarea cols="120" rows="7" class="AreaTexto">
+		'.$total_consultas.'
+	</textarea>
 	</td></tr></table>
 	';
+
+
+
 
 	abrir_barra_estado();
 
