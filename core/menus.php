@@ -1,7 +1,7 @@
 <?php
 			/*
 				Title: Modulo menues
-				Ubicacion *[/dynapps/menus.php]*.  Archivo de funciones relacionadas con la administracion de opciones de menu.
+				Ubicacion *[/core/menus.php]*.  Archivo de funciones relacionadas con la administracion de opciones de menu.
 			*/
 ?>
 

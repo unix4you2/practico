@@ -1,7 +1,7 @@
 <?php
 			/*
 				Title: Modulo formularios
-				Ubicacion *[/dynapps/formularios.php]*.  Archivo de funciones relacionadas con la administracion de formularios de la aplicacion.
+				Ubicacion *[/core/formularios.php]*.  Archivo de funciones relacionadas con la administracion de formularios de la aplicacion.
 			*/
 ?>
 

@@ -1,7 +1,7 @@
 <?php
 			/*
 				Title: Modulo tablas
-				Ubicacion *[/dynapps/tablas.php]*.  Archivo de funciones relacionadas con la administracion de tablas de la aplicacion.
+				Ubicacion *[/core/tablas.php]*.  Archivo de funciones relacionadas con la administracion de tablas de la aplicacion.
 			*/
 ?>
 
