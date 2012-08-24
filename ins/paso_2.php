@@ -3,14 +3,16 @@
 	<tr>
 		<td width=100><img src="../img/practico_login.png" border=0 ALT="Logo Practico" width="116" height="80"></td>
 		<td valign=top><font size=2 color=black><br><b>
-			[Configuraci&oacute;n de Base de Datos]</b><br><br>
-			Indique la configuraci&oacute;n deseada para el almacenamiento de aplicaciones e informaci&oacute;n de usuario generada por Pr&aacute;ctico:
+			[Configuraci&oacute;n General]</b><br><br>
+			Indique la configuraci&oacute;n deseada para el almacenamiento de aplicaciones e informaci&oacute;n de usuario generada por Pr&aacute;ctico, as&iacute; como otras opciones importantes de la herramienta.  Esta ventana ser&aacute; presentada s&oacute;lo una vez as&iacute; que aseg&uacute;rese de diligenciar y confirmar toda la informaci&oacute;n requerida:
 		</font></td>
 	</tr>
 </table>
-<hr>
-
 <form name="continuar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+<hr>
+<font size=2 color=black><br><b>
+	[Configuraci&oacute;n de Base de Datos]</b>
+</font>
 <table cellspacing=10 width="700">
 	<tr>
 		<td valign=top align=right>
@@ -120,6 +122,26 @@
 				<u>IMPORTANTE 1</u>: La base de datos debe existir previamente para que Pr&aacute;ctico pueda conectarse a ella y generar las estructuras requeridas.  Consulte con su proveedor de hosting o administrador de sistemas c&oacute;mo crear una base de datos con privilegios suficientes para trabajar con Pr&aacute;ctico.<br><br>
 				<u>IMPORTANTE 2</u>: El instalador eliminar&aacute; todas las tablas existentes sobre la base de datos indicada y que coincidan con los nombres de tablas que utilizar&aacute; Pr&aacute;ctico.  Si usted considera que puede tener informaci&oacute;n importante en ellas se recomienda realizar una copia de seguridad antes de continuar.  Si desea compartir una misma base de datos entre diferentes instalaciones de Pr&aacute;ctico puede cambiar los prefijos de tabla utilizados por cada una.
 			</font>
+		</td>
+	</tr>
+</table>
+<hr>
+<font size=2 color=black><br><b>
+	[Configuraci&oacute;n de opciones varias para el desarrollador]</b>
+</font>
+<table cellspacing=10 width="700">
+	<tr>
+		<td valign=top align=right>
+			<font size=2 color=black>
+				Activar modo de depuraci&oacute;n?
+			</font>
+		</td>
+		<td valign=top width="380">
+			<select name="ModoDepuracion" class="Combos" >
+				<option value="1">Encendido</option>
+				<option value="0" selected>Apagado</option>
+			</select>
+			<a href="#" title="Presentar errores y advertencias" name="Para sitios en producci&oacute;n esta opci&oacute;n debe estar apagada.  Cuando se enciende ense&ntilde;a durante la ejecuci&oacute;n de la aplicaci&oacute;n todos los errores y mensajes que puedan ser generados por el preprocesador de hipertexto - PHP"><img src="img/icn_10.gif" border=0></a>
 		</td>
 	</tr>
 </table>

@@ -28,13 +28,14 @@
 		\$TablasCore='%s';
 		\$TablasApp='%s';
 		\$LlaveDePaso='%s';
-	?>",$Servidor,$BaseDatos,$UsuarioBD,$PasswordBD,$MotorBD,$PuertoBD,$TablasCore,$TablasApp,$LlaveDePaso);
+		\$ModoDepuracion=%s;
+	?>",$Servidor,$BaseDatos,$UsuarioBD,$PasswordBD,$MotorBD,$PuertoBD,$TablasCore,$TablasApp,$LlaveDePaso,$ModoDepuracion);
 	// Escribe el archivo de configuracion
 	$archivo_config=fopen("../core/configuracion.php","w");
 	if($archivo_config==null)
 		{
 			$hay_error=1;
-			echo '<b>Se han encontrado errores al tratar de escribir el archivo de configuraci&oacute;n !!!</b>:<br>Si lo desea una alternativa puede ser cambiar usted mismo los valores por defecto incluidos en el archivo core/configuracion.php';
+			echo '<b>Se han encontrado errores al tratar de escribir el archivo de configuraci&oacute;n !!!</b>:<br>Si lo desea una alternativa puede ser cambiar usted mismo los valores por defecto incluidos en el archivo core/configuracion.php.<br><br>Tambi&eacute;n puede cambiar los permisos al archivo de configuraci&oacute;n y probar nuevamente con este asistente.';
 		}
 	else
 		{

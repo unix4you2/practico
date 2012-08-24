@@ -829,7 +829,16 @@ foreach($rs as $row){
 					<td width="100%" align="'.$alineacion.'">
 				';
 	  }
-
+/* ################################################################## */
+	function obtener_microtime()
+		{
+		/*
+			Function: obtener_microtime
+			Obtiene un tiempo en microsegundos utilizado para calcular tiempos de inicio y fin de operaciones
+		*/
+			list($useg, $seg) = explode(" ", microtime());
+			return ((float)$useg + (float)$seg);
+		}
 /* ################################################################## */
 	function cerrar_barra_estado()
 	  {

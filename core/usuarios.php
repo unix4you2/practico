@@ -72,7 +72,111 @@
 
 
 
+<!--   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+		<?php if ($accion=="cambiar_clave")
+				{
+						echo '<div align="center">';
+		?>
 
+		<div align="center">
+		<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; ">
+
+			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+
+			<?php
+				ayuda('Tenga presente','Las contrase&ntilde;as con condiciones m&iacute;nimas de seguridad deben tener una longitud de <b>al menos 8 caracteres</b>, n&uacute;meros, letras en may&uacute;scula y en min&uacute;scula o s&iacute;mbolos como <font color=blue>! # $ % & - *</font>.  Para que su contrase&ntilde;a sea considerada segura <b>debe cumplir al menos con un nivel de seguridad del 81%</b>.','','65%','img_05.gif');
+			?>
+
+			<input type="hidden" name="accion" value="actualizar_clave">
+					<br><font face="" size="3" color="Navy"><b>Cambio de contrase&ntilde;a</b></font>
+			<table border="0" cellspacing="0" cellpadding="0"><tr>
+				<td align="CENTER" valign="TOP">
+					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;" class="link_menu">
+						<tr>
+							<td align="RIGHT"><b>Contrase&ntilde;a anterior</b></td><td width="10"></td>
+							<td>***********</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b>Nueva contrase&ntilde;a</b></td><td width="10"></td>
+							<td><input class="texto_01" type="password" name="clave1" size="27" maxlength="20" onkeyup="muestra_seguridad_clave(this.value, this.form)"></td>
+							<td>Nivel de seguridad: <input id="seguridad" value="0" size="3" name="seguridad" style="border: 0px; background-color:ffffff; text-decoration:italic;" class="texto_01" type="text" readonly onfocus="blur()">%</td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b>Rectificar contrase&ntilde;a</b></td><td width="10"></td>
+							<td><input class="texto_01" type="password" name="clave2" size="27" maxlength="20" onkeypress="return FiltrarTeclas(this, event)"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td align="RIGHT">
+									</form>
+									<form action="<?php echo $ArchivoCORE; ?>" method="POST" style="height: 0px; padding-bottom: 0px; padding-top: 0px; margin-top: 0px; margin-bottom: 0px;" name="cancelar"><input type="Hidden" name="accion" value="Ver_menu"></form>
+							</td><td width="5"></td>
+							<td align="RIGHT">
+									<input type="Button" name="" value="Actualizar" style="border-width: 1px; font-family: Verdana, Tahoma, Arial; font-size: 9px; background-color: ffff00; color: Black; border-color: Gray; border-style: ridge; height: 17px; padding-top: 1px; font-weight: bold;" onClick="if (datos.clave1.value!=datos.clave2.value) {alert ('Las claves son diferentes!')} else { if (datos.seguridad.value>=81) document.datos.submit(); else alert('La clave por usted ingresada no cumple con las recomendaciones minimas de seguridad.') }">
+									&nbsp;&nbsp;<input type="Button" onclick="document.cancelar.submit()" name="" value="Cancelar" style="border-width: 1px; font-family: Verdana, Tahoma, Arial; font-size: 9px; background-color: e1e1e1; color: Teal; border-color: Gray; border-style: ridge; height: 17px; padding-top: 1px; font-weight: bold;">
+							</td>
+							<td></td>
+						</tr>
+					</table>
+				</td>
+			</tr></table>
+
+			<div align="center" style="width: 80%;">
+					<font color="#808080"><strong><blink>Importante:</blink></strong>  Recuerde que su nombre de usuario y contrase&ntilde;a es personal e intransferible.<br>
+					Todos los movimientos que realice con estos ser&aacute;n auditados por nuestro sistema.</font>
+			</div>
+
+		</DIV>
+		</div>
+
+		 <?php
+		 				
+		 		}
+		 ?>
+<!--   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<?php
+	if ($accion=="actualizar_clave")
+		{
+			$mensaje_error="";
+			// Verifica campos nulos
+			if ($clave1=="" || $clave2=="")
+				$mensaje_error="Usted ha olvidado ingresar alguno de los datos solicitados.";
+			// Verifica contrasena diferentes
+			if ($clave1 != $clave2)
+				$mensaje_error="Usted ha ingresado dos contrase&ntilde;as diferentes.";
+
+			if ($mensaje_error=="")
+				{
+					$mysql_enlace = mysql_connect($Servidor, $UsuarioBD, $PasswordBD);
+					mysql_select_db($BaseDatos, $mysql_enlace);
+					// Actualiza el usuario
+					$consulta = "UPDATE usuario SET clave='$clave1' WHERE uid='$Id_usuario'";
+					$resultado = mysql_query($consulta,$mysql_enlace);
+
+					// Lleva a auditoria
+					$fecha_operacion=date("Ymd");
+					$hora_operacion=date("His");
+					$consulta = "INSERT INTO auditoria VALUES (0,'$Id_usuario','Cambia su contrase&ntilde;a','$fecha_operacion','$hora_operacion')";
+					$resultado = mysql_query($consulta,$mysql_enlace);
+					echo '
+						<form action="'.$ArchivoCORE.'" method="POST" style="height: 0px; padding-bottom: 0px; padding-top: 0px; margin-top: 0px; margin-bottom: 0px;" name="cancelar"><input type="Hidden" name="accion" value="Ver_menu"></form>
+						<script language="javascript"> document.cancelar.submit(); </script>';
+				}
+			else
+				{
+					echo '<div align="center">';
+					abrir_ventana("Error al ejecutar proceso","","#0080C0","");
+					echo '<div align="center"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$mensaje_error.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
+						<form action="'.$ArchivoCORE.'" method="POST" style="height: 0px; padding-bottom: 0px; padding-top: 0px; margin-top: 0px; margin-bottom: 0px;" name="cancelar"><input type="Hidden" name="accion" value="Ver_menu"></form>
+						<input type="Button" onclick="document.cancelar.submit()" name="" value="Regresar al panel principal" style="border-width: 1px; font-family: Verdana, Tahoma, Arial; font-size: 9px; background-color: e1e1e1; color: Teal; border-color: Gray; border-style: ridge; height: 17px; padding-top: 1px; font-weight: bold;">
+						<br><br></div>
+						';
+					cerrar_ventana();
+					echo '</div>';
+				}
+		  }
+?>
 <?php
 /* ################################################################## */
 /*

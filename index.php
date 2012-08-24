@@ -6,9 +6,17 @@
 
 	// Inicio de la sesion
 	session_start();
-	
+
 	//Determina si es un primer inicio o no hay configuracion
 	if (!file_exists("core/configuracion.php")) { header("Location: ins/"); die();}
+	else include("core/configuracion.php");
+
+	//Si esta establecido el modo de depuracion en configuracion.php activa errores del preprocesador
+	ini_set("display_errors", 1);
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
+	// Establece la zona horaria por defecto para la aplicacion
+	//date_default_timezone_set("America/Bogota");
 
 	// Datos de fecha, hora y direccion IP para algunas operaciones
 	$fecha_operacion=date("Ymd");
@@ -36,17 +44,14 @@
 	if (!isset($accion)) $accion="";
 	if (!isset($Sesion_abierta)) $Sesion_abierta=0;
 
-	// Establece la zona horaria por defecto para la aplicacion - A definir como parametro
-	//date_default_timezone_set("America/Bogota");
-
-	//Cargar archivo de configuracion principal
-	include("core/configuracion.php");
-
 	// Inicia las conexiones con la BD y las deja listas para las operaciones
 	include("core/conexiones.php");
 	
 	// Incluye archivo con algunas funciones comunes usadas por la herramienta
 	include_once("core/comunes.php");
+
+	// Almacena tiempo de inicio para calculo de tiempos de ejecucion del script
+	$tiempo_inicio_script = obtener_microtime();
 
 	// Verifica autenticidad de la sesion mediante llave de paso
 	if ($accion!= "" && $accion!="Iniciar_login" && $accion!="Terminar_sesion" && $accion!="Mensaje_cierre_sesion")
@@ -70,7 +75,7 @@
 	if ($accion=="")
 		ventana_login();
 	// Incluye los archivos necesarios dependiendo de las funciones requeridas
-	if ($accion=="agregar_usuario" || $accion=="guardar_usuario" || $accion=="listar_usuarios" || $accion=="eliminar_usuario" || $accion=="cambiar_estado_usuario" || $accion=="permisos_usuario" || $accion=="agregar_permiso" || $accion=="eliminar_permiso")
+	if ($accion=="actualizar_clave" || $accion=="cambiar_clave" || $accion=="agregar_usuario" || $accion=="guardar_usuario" || $accion=="listar_usuarios" || $accion=="eliminar_usuario" || $accion=="cambiar_estado_usuario" || $accion=="permisos_usuario" || $accion=="agregar_permiso" || $accion=="eliminar_permiso")
 		include("core/usuarios.php");
 	if ($accion=="administrar_menu" || $accion=="guardar_menu" || $accion=="eliminar_menu" || $accion=="detalles_menu" || $accion=="actualizar_menu")
 		include("core/menus.php");
@@ -153,6 +158,10 @@
 /* ################################################################## */
 	// Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios
 	include("personalizadas.php");  
+
+	// Calcula tiempos de ejecucion del script
+	$tiempo_final_script = obtener_microtime();
+	$tiempo_total_script = $tiempo_final_script - $tiempo_inicio_script;
 
 	// Finaliza el contenido central y presenta el pie de pagina de aplicacion
 	include("core/marco_abajo.php");
