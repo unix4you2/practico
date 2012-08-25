@@ -910,7 +910,7 @@ foreach($rs as $row){
 			if ($mensaje_error=="")
 				{
 					ejecutar_sql_unaria("UPDATE ".$TablasCore."$tabla SET $campo = $valor WHERE id = '$id'");
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Id_usuario','Cambia estado del campo $campo en formulario $formulario','$fecha_operacion','$hora_operacion')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Cambia estado del campo $campo en formulario $formulario','$fecha_operacion','$hora_operacion')");
 
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="'.$accion_retorno.'">

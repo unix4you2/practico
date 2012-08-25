@@ -12,11 +12,14 @@
 	else include("core/configuracion.php");
 
 	//Si esta establecido el modo de depuracion en configuracion.php activa errores del preprocesador
-	ini_set("display_errors", 1);
-	error_reporting(E_ERROR | E_WARNING | E_PARSE);
+	if ($ModoDepuracion)
+		{
+			ini_set("display_errors", 1);
+			error_reporting(E_ERROR | E_WARNING | E_PARSE);
+		}
 
 	// Establece la zona horaria por defecto para la aplicacion
-	//date_default_timezone_set("America/Bogota");
+	date_default_timezone_set($ZonaHoraria);
 
 	// Datos de fecha, hora y direccion IP para algunas operaciones
 	$fecha_operacion=date("Ymd");
@@ -96,7 +99,7 @@
 			if ($Login_usuario=="admin")
 				$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE posible_escritorio");
 			//else
-			//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Id_usuario' AND nivel>0";
+			//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel>0";
 			// Imprime las opciones con sus formularios
 			while($registro = $resultado->fetch())
 				{
@@ -122,7 +125,7 @@
 			if ($Login_usuario=="admin")
 				$resultado=ejecutar_sql("SELECT COUNT(*) as conteo,seccion FROM ".$TablasCore."menu WHERE posible_centro GROUP BY seccion ORDER BY seccion");
 			//else
-			//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Id_usuario' AND nivel>0";
+			//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel>0";
 			// Imprime las secciones encontradas para el usuario
 			while($registro = $resultado->fetch())
 				{
@@ -135,7 +138,7 @@
 					if ($Login_usuario=="admin")
 						$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE posible_centro AND seccion='".$seccion_menu_activa."' ORDER BY peso ");
 					//else
-					//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Id_usuario' AND nivel>0";
+					//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel>0";
 					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
 						{
 							// Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)

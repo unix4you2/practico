@@ -307,11 +307,48 @@ if ($accion=="eliminar_menu")
 				}
 		}
 /* ################################################################## */
-		 if ($accion=="administrar_menu")
+if ($accion=="administrar_menu")
+	{
+		echo '<div align="center"><br>';
+		abrir_ventana('Administraci&oacute;n del men&uacute; principal','f2f2f2','');
+?>
+
+		<!-- INICIO DE MARCOS POPUP -->
+		<div id='FormularioImagenes' class="FormularioPopUps">
+			<?php
+			abrir_ventana('Haga clic sobre una im&aacute;gen para seleccionarla','BDB9B9','');
+
+			//Busca en el directorio de iconos por imagenes listas para ser usadas
+			$columnas=20;
+			$columna_actual=0;
+			$directorio="img/";
+			$dh = opendir($directorio);
+			echo '<table border=1 cellspacing=2>';
+			while (($file = readdir($dh)) !== false)
 				{
-						echo '<div align="center"><br>';
-						abrir_ventana('Administraci&oacute;n del men&uacute; principal','f2f2f2','');
-		?>
+					$impreso=0;
+					if ($columna_actual==0)	echo '<tr>';
+					if (($file != ".") && ($file != "..") && stristr($file,"tango_"))
+						{
+							//echo '<td>'.$columna_actual.'<a href="#" title="'.$file.'"><img src='.$directorio.$file.' border=0></a></td>';
+							echo '<td>'.$columna_actual.'</td>';
+							$impreso=1;
+						}
+					if ($columna_actual==0)	echo '</tr>';
+					if ($impreso) $columna_actual++;
+					if ($columna_actual==$columnas) $columna_actual=0;
+				}
+			echo '</table>';
+
+				abrir_barra_estado();
+					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioImagenes\')">';
+				cerrar_barra_estado();
+				cerrar_ventana();		// Cierra adicion de botones
+			?>
+		<!-- FIN DE MARCOS POPUP -->
+		</div>
+		<div id='FondoPopUps' class="FondoOscuroPopUps"></div>
+
 
 
 		<div align="center">
@@ -403,7 +440,10 @@ if ($accion=="eliminar_menu")
 						</tr>
 						<tr>
 							<td align="RIGHT"><b>Imagen</b></td><td width="10"></td>
-							<td><input class="CampoTexto" type="text" name="imagen" size="40" maxlength="250" class="texto_01"></td>
+							<td>
+								<input class="CampoTexto" type="text" name="imagen" size="34" maxlength="250" class="texto_01">
+								<a href='javascript:AbrirPopUp("FormularioImagenes");' title="Desplegar una lista de im&aacute;genes disponibles en el sistema">[...]</a>
+								</td>
 						</tr>
 					</table>
 				</td>
@@ -554,6 +594,7 @@ if ($accion=="eliminar_menu")
 				echo '</table><br><br>';
 		 ?>
 		</div>
+
 
 		 <?php
 		 				cerrar_ventana();

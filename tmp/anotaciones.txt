@@ -1,0 +1,19 @@
+			
+uso de parametros y tipos de dato
+//, PDO::PARAM_INT, PARAM_STR
+			/*
+			$sql = "SET @latitude=:lat;
+			SET @longitude=:lon;
+			SET @radius=20;
+			SET @lng_min=@longitude - @radius/abs(cos(radians(@latitude))*69);
+			SET @lng_max=@longitude + @radius/abs(cos(radians(@latitude))*69);
+			SET @lat_min=@latitude - (@radius/69);
+			SET @lat_max=@latitude + (@radius/69);"; 
+			$this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+			$stmt = $this->_db->prepare($sql);
+			$stmt->bindParam(':lat', $lat, PDO::PARAM_STR);
+			$stmt->bindParam(':lon', $lon, PDO::PARAM_STR);
+			$stmt->execute();
+
+
+

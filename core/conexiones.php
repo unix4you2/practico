@@ -22,7 +22,7 @@
 		Proceso simplificado para MySQL (ver detalles sobre el codigo para otros motores):
 			(start code)
 				$ConexionPDO = new PDO("mysql:dbname=$BaseDatos;host=$Servidor","$UsuarioBD","$PasswordBD");
-				$ConexionPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION, PDO::PARAM_INT);
+				$ConexionPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			(end)
 
 		Salida:
@@ -74,7 +74,7 @@
 						$ConexionPDO = new PDO("informix:DSN=InformixDB","$UsuarioBD","$PasswordBD");
 
 			// Establece parametros para la conexion
-			$ConexionPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION, PDO::PARAM_INT);
+			$ConexionPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			//$this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 			//$this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
 			//$this->con->setAttribute(PDO::SQLSRV_ATTR_DIRECT_QUERY => true);

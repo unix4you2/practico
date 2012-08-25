@@ -234,7 +234,7 @@
 					// Crea la tabla temporal
 					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_boton WHERE id='$boton' ");
 					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Id_usuario','Elimina accion del formulario $formulario','$fecha_operacion','$hora_operacion')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina accion del formulario $formulario','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="accion" value="editar_formulario">
 					<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -261,7 +261,7 @@
 					// Crea la tabla temporal
 					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_campo WHERE id='$campo' ");
 					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Id_usuario','Elimina campo del formulario $formulario','$fecha_operacion','$hora_operacion')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina campo del formulario $formulario','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="accion" value="editar_formulario">
 					<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -289,7 +289,7 @@
 				{
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_campo VALUES (0, '$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual')");
 					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Id_usuario','Crea campo $id para formulario $formulario','$fecha_operacion','$hora_operacion')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea campo $id para formulario $formulario','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
@@ -320,7 +320,7 @@
 				{
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton VALUES (0, '$titulo','$estilo','$formulario','$tipo_accion','$accion_usuario','$visible','$peso','$retorno_titulo','$retorno_texto','$confirmacion_texto')");
 					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Id_usuario','Crea boton $id para formulario $formulario','$fecha_operacion','$hora_operacion')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea boton $id para formulario $formulario','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
@@ -955,7 +955,7 @@
 					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario WHERE id='$formulario'");
 					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario'");
 					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO auditoria VALUES (0,'$Id_usuario','Elimina formulario $id','$fecha_operacion','$hora_operacion')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina formulario $id','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_formularios"></form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -981,7 +981,7 @@
 					// Crea primer campo
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_campo VALUES (0, 'Id','id','','','$id','0','1','1','0','','numerico') ");
 					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Id_usuario','Crea formulario $id para $tabla_datos','$fecha_operacion','$hora_operacion')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea formulario $id para $tabla_datos','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
 					<input type="Hidden" name="accion" value="editar_formulario">
