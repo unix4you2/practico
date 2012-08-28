@@ -61,6 +61,14 @@ CREATE TABLE Core_menu (
   PRIMARY KEY  (id)
 );
 
+DROP TABLE IF EXISTS Core_usuario_menu;
+CREATE TABLE Core_usuario_menu (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  usuario varchar(20) NOT NULL default '',
+  menu int(10) NOT NULL default '0',
+  PRIMARY KEY  (id)
+);
+
 INSERT INTO Core_menu VALUES (0,'Menus'   ,0,0,'',1,'Interno','administrar_menu',5,2,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','icono_menus.png');
 INSERT INTO Core_menu VALUES (0,'Usuarios',0,0,'',1,'Interno','listar_usuarios' ,5,1,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','icono_usuarios.png');
 INSERT INTO Core_menu VALUES (0,'Tablas de datos',0,0,'',1,'Interno','administrar_tablas' ,5,3,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','icono_tabla.png');

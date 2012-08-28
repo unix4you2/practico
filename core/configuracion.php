@@ -1,6 +1,6 @@
 <?php
 		$ServidorBD='127.0.0.1';
-		$BaseDatos='practico';
+		$BaseDatos='pr';
 		$UsuarioBD='root';
 		$PasswordBD='';
 		$MotorBD='mysql';
@@ -11,7 +11,7 @@
 		$ArchivoCORE='';
 		$TablasCore='Core_';
 		$TablasApp='App_';
-		$LlaveDePaso='FGSEUM6XF2';
-		$ModoDepuracion=1;
+		$LlaveDePaso='ZQBYBOAJZE';
+		$ModoDepuracion=0;
 		$ZonaHoraria='America/Bogota';
 	?>

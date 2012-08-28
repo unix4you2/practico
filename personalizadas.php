@@ -19,8 +19,8 @@
 
 <?php if ($accion=="Mi_accion_XYZ") 
 	{
-		
-		
+
+
 	}
 ?>
 

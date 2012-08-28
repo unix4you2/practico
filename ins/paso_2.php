@@ -35,7 +35,7 @@
 				<option value="ifmx">Informix (IBM Informix Dynamic Server)</option>
 				<option value="fbd">Firebird (Firebird/Interbase 6)</option>
 			</select>
-			<a href="#" title="MySQL y MariaDB" name="Son los motores oficiales.  Sobre ellos se hace el desarrollo y pruebas de la herramienta y aunque gracias a PDO usted podr&aacute; utilizar la herramienta en otros motores es probable que deba hacer ajustes a operaciones espec&iacute;ficas de &eacute;stos."><img src="img/icn_10.gif" border=0></a>
+			<a href="#" title="MySQL y MariaDB" name="Son los motores oficiales.  Sobre ellos se hace el desarrollo y pruebas de la herramienta y aunque gracias a PDO usted podr&aacute; utilizar la herramienta en otros motores es probable que deba hacer ajustes a operaciones espec&iacute;ficas de &eacute;stos."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 	<tr>
@@ -91,6 +91,7 @@
 		</td>
 		<td valign=top>
 			<input type="text" name="TablasCore" size="7" value="Core_" class="CampoTexto" class="keyboardInput">
+			<a href="#" title="Se recomienda NO vac&iacute;o" name=""><img src="img/icn_12.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 	<tr>
@@ -101,6 +102,7 @@
 		</td>
 		<td valign=top>
 			<input type="text" name="TablasApp" size="7" value="App_" class="CampoTexto" class="keyboardInput">
+			<a href="#" title="Importante" name="El prefijo utilizado para las tablas de aplicaci&oacute;n puede ser utilizado para separar diferentes instalaciones de Pr&aacute;ctico sobre una misma base de datos o tambi&eacute;n puede ser dejado vac&iacute;o para enlazar/integrar a Pr&aacute;ctico con otras aplicaciones pre-existentes."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 	<tr>
@@ -125,6 +127,15 @@
 		</td>
 	</tr>
 </table>
+<!--
+<hr>
+<font size=2 color=black><br><b>
+	[Autenticaci&oacute;n de credenciales personalizada]</b>
+</font>
+-->
+
+
+
 <hr>
 <font size=2 color=black><br><b>
 	[Configuraci&oacute;n de opciones varias]</b>
@@ -174,6 +185,21 @@
 		</td>
 	</tr>
 </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <br><br>
 </div>
 

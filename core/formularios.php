@@ -17,6 +17,40 @@
 
 <!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <?php
+	if ($accion=="eliminar_datos_formulario")
+		{
+			$mensaje_error="";
+
+			// Busca datos del formulario
+			$consulta_formulario=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'");
+			$registro_formulario = $consulta_formulario->fetch();
+
+			// Busca los campos del form marcados como valor unico y verifica que no existan valores en la tabla
+			$tabla=$registro_formulario["tabla_datos"];
+
+			$consulta_campos_unicos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario' AND visible=1 AND valor_unico=1");
+			while ($registro_campos_unicos = $consulta_campos_unicos->fetch())
+				{
+					$campo=$registro_campos_unicos["campo"];
+					$valor=$$campo;
+					// Busca si el campo cuenta con el valor en la tabla
+
+					// Inserta los datos
+					ejecutar_sql_unaria("DELETE FROM ".$tabla." WHERE $campo='$valor'");
+					// Lleva a auditoria
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Inserta registro en ".$registro_formulario["tabla_datos"]."','$fecha_operacion','$hora_operacion')");
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="editar_formulario">
+						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="popup_activo" value="FormularioCampos">
+					<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+				}
+		}
+?>
+
+<?php
+/* ################################################################## */
 	if ($accion=="guardar_datos_formulario")
 		{
 			// POR CORREGIR:  Si el diseno cuenta con varios campos que ven hacia un mismo campo de base de datos el query no es valido
@@ -38,15 +72,12 @@
 					$consulta_existente=ejecutar_sql("SELECT id FROM ".$tabla." WHERE $campo='$valor'");
 					$registro_existente = $consulta_existente->fetch();
 					if ($registro_existente["id"]!="")
-						$mensaje_error.="Ha ocurrido un error de valor duplicado en los campo(s): $campo . El valor ingresado ya existe en la base de datos.";
+						$mensaje_error.="Ha ocurrido un error de valor duplicado en el(los) campo(s): $campo . El valor ingresado ya existe en la base de datos.";
 				}
 
 			//Ejecuta consulta de insercion de datos
-			//if ($titulo=="") $mensaje_error="Debe indicar un t&iacute;tulo o etiqueta v&aacute;lida para el campo.";
-			//if ($campo=="") $mensaje_error="Debe indicar un campo v&aacute;lido para vincular con la tabla de datos asociada al formulario.";
 			if ($mensaje_error=="")
 				{
-
 					// Busca los campos del form y construye cadenas de valores para consulta
 					$lista_campos="";
 					$lista_valores="";
@@ -74,16 +105,18 @@
 					ejecutar_sql_unaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores.")");
 					// Lleva a auditoria
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Inserta registro en ".$registro_formulario["tabla_datos"]."','$fecha_operacion','$hora_operacion')");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="popup_activo" value="FormularioCampos">
-						<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+					<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="editar_formulario">
+						<!-- <input type="Hidden" name="accion" value="editar_formulario"> -->
+						<input type="Hidden" name="accion" value="Ver_menu">
 						<input type="Hidden" name="error_titulo" value="Problema en los datos ingresados">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
@@ -174,9 +207,9 @@
 										}
 
 									// Muestra indicadores de obligatoriedad o ayuda
-									if ($registro_campos["valor_unico"] == "1") echo '<a href="#" title="El valor ingresado no acepta duplicados" name="El sistema validar&aacute; la informaci&oacute;n ingresada en este campo, en caso de ya existir en la base de datos no se permitir&aacute; su ingreso."><img src="img/key.gif" border=0></a>';
-									if ($registro_campos["obligatorio"]) echo '<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>';
-									if ($registro_campos["ayuda_titulo"] != "") echo '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0></a>';
+									if ($registro_campos["valor_unico"] == "1") echo '<a href="#" title="El valor ingresado no acepta duplicados" name="El sistema validar&aacute; la informaci&oacute;n ingresada en este campo, en caso de ya existir en la base de datos no se permitir&aacute; su ingreso."><img src="img/key.gif" border=0 border=0 align="absmiddle"></a>';
+									if ($registro_campos["obligatorio"]) echo '<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
+									if ($registro_campos["ayuda_titulo"] != "") echo '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0 border=0 align="absmiddle"></a>';
 									echo '</td></tr>';
 								}
 							// Cierra tabla de campos en la columna
@@ -210,9 +243,25 @@
 									$tipo_boton="Button";
 									$comando_javascript="document.core_ver_menu.submit()";
 								}
-
+							if ($registro_botones["tipo_accion"]=="interna_eliminar")
+								{
+									$tipo_boton="Button";
+									$comando_javascript="document.datos.accion.value='eliminar_datos_formulario';document.datos.submit()";
+								}
+							if ($registro_botones["tipo_accion"]=="externa_formulario")
+								{
+									$tipo_boton="Button";
+									$comando_javascript="document.datos.accion.value='".$registro_botones["accion_usuario"]."';document.datos.submit()";
+								}
+							if ($registro_botones["tipo_accion"]=="externa_javascript")
+								{
+									$tipo_boton="Button";
+									$comando_javascript=$registro_botones["accion_usuario"];
+								}
 							if ($comando_javascript!="" && $tipo_boton!="Reset")
-								$cadena_javascript='onclick="'.@$comando_javascript.'"';
+								{
+									$cadena_javascript='onclick="'.@$comando_javascript.'"';
+								}
 							echo '<input type="'.$tipo_boton.'"  class="'.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.$cadena_javascript.' >';
 						}
 					cerrar_barra_estado();
@@ -220,7 +269,6 @@
 
 			//Cierra todo el formulario
 			echo '</form>';
-
 		  }
 ?>
 
@@ -318,6 +366,7 @@
 			if ($tipo_accion=="") $mensaje_error="Debe indicar una acci&oacute;n v&aacute;lido para ser ejecutada cuando se active el control.";
 			if ($mensaje_error=="")
 				{
+					$accion_usuario=addslashes($accion_usuario);
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton VALUES (0, '$titulo','$estilo','$formulario','$tipo_accion','$accion_usuario','$visible','$peso','$retorno_titulo','$retorno_texto','$confirmacion_texto')");
 					// Lleva a auditoria
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea boton $id para formulario $formulario','$fecha_operacion','$hora_operacion')");
@@ -343,9 +392,6 @@
 <!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <?php if ($accion=="editar_formulario")
 	{
-
-		// POR HACER:   GENERALIZAR CONSULTA DONDE SE TOMAN NOMBRES DE CAMPO DE LA TABLA PARA QUE SIRVA CON PDO Y CUALQUIER BASE
-
 		  ?>
 
 
@@ -516,7 +562,6 @@
 		</div>
 
 
-
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioBotones' class="FormularioPopUps">
 			<?php
@@ -568,7 +613,7 @@
 						<tr>
 							<td align="right">Comando del usuario:</td>
 							<td ><input type="text" name="accion_usuario" size="20" class="CampoTexto">
-								<a href="#" title="Ayuda r&aacute;pida:" name="Nombre de la acci&oacute;n definida en el archivo de personalizaci&oacute;n que procesar&aacute; la informaci&oacute;n o comando enn JavaScript a ser ejecutado de manera inmediata en la p&aacute;gina."><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="Ayuda r&aacute;pida:" name="Nombre de la acci&oacute;n definida en el archivo de personalizaci&oacute;n que procesar&aacute; la informaci&oacute;n o comando en JavaScript a ser ejecutado de manera inmediata en la p&aacute;gina (si requiere par&aacute;metros dentro de su comando utilice comillas sencillas para encerrarlos)."><img src="img/icn_10.gif" border=0></a>
 							</td>
 						</tr>
 						<tr>
@@ -978,8 +1023,6 @@
 				{
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario VALUES (0, '$titulo','$ayuda_titulo','$ayuda_texto','$ayuda_imagen','$tabla_datos','$columnas')");
 					$id=$ConexionPDO->lastInsertId();
-					// Crea primer campo
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_campo VALUES (0, 'Id','id','','','$id','0','1','1','0','','numerico') ");
 					// Lleva a auditoria
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea formulario $id para $tabla_datos','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -1046,8 +1089,8 @@
 										$resultado=consultar_tablas();
 										while ($registro = $resultado->fetch())
 											{
-												// Imprime solamente las tablas de aplicacion
-												if (strpos($registro[0],$TablasApp)!==FALSE)  // Booleana requiere === o !==
+												// Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
+												if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
 													echo '<option value="'.$registro[0].'" >'.str_replace($TablasApp,'',$registro[0]).'</option>';
 											}		
 								?>

@@ -74,7 +74,7 @@
 			// Si la clave es incorrecta muestra de nuevo la ventana de ingreso
 			if (!$clave_correcta)
 				{
-					mensaje('<blink>ACCESO NEGADO!</blink>','Las credenciales suministradas para el acceso al sistema no fueron aceptadas.  Algunas causas comunes son:<br><li>El nombre de usuario o contrase&ntilde;a son incorrectos.<br><li>C&oacute;digo de seguridad ingresado de manera incorrecta.<br><li>Su usuario est&aacute; deshabilitado.<br><li>Cuenta bloqueada por multiples intentos de acceso con clave incorrecta.','60%','../img/tango/32x32/status/dialog-error.png','TextosEscritorio');
+					mensaje('<blink>ACCESO NEGADO!</blink>','Las credenciales suministradas para el acceso al sistema no fueron aceptadas.  Algunas causas comunes son:<br><li>El nombre de usuario o contrase&ntilde;a son incorrectos.<br><li>C&oacute;digo de seguridad ingresado de manera incorrecta.<br><li>Su usuario est&aacute; deshabilitado.<br><li>Cuenta bloqueada por multiples intentos de acceso con clave incorrecta.','60%','../img/tango_dialog-error.png','TextosEscritorio');
 					ventana_login();
 					@session_destroy();
 				}

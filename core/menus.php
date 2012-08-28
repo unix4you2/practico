@@ -68,7 +68,47 @@ if ($accion=="detalles_menu")
 		$registro = $resultado->fetch();
 		?>
 
+		<!-- INICIO DE MARCOS POPUP -->
+		<div id='FormularioImagenes' class="FormularioPopUps">
+			<?php
+			abrir_ventana('Haga clic sobre una im&aacute;gen para seleccionarla','BDB9B9','');
+
+			//Busca en el directorio de iconos por imagenes listas para ser usadas
+			$columnas=15;
+			$columna_actual=1;
+			$directorio="img/";
+			$dh = opendir($directorio);
+			echo '
+			<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 350px">
+			<table border=0 cellspacing=4>';
+			while (($file = readdir($dh)) !== false)
+				{
+					$impreso=0;
+					if ($columna_actual==1)	echo '<tr>';
+					if (($file != ".") && ($file != "..") && stristr($file,"tango_"))
+						{
+							echo '<td><a href="javascript:document.datos.imagen.value=\''.$file.'\';OcultarPopUp(\'FormularioImagenes\');" title="'.$file.'"><img src='.$directorio.$file.' border=0></a></td>';	
+							$impreso=1;
+						}
+					if ($columna_actual==$columnas)	echo '</tr>';
+					if ($impreso) $columna_actual++;
+					if ($columna_actual==$columnas) $columna_actual=1;
+				}
+			echo '</table></DIV>';
+
+				abrir_barra_estado();
+					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioImagenes\')">';
+				cerrar_barra_estado();
+				cerrar_ventana();		// Cierra adicion de botones
+			?>
+		</div>
+		<!-- FIN DE MARCOS POPUP -->
+		<div id='FondoPopUps' class="FondoOscuroPopUps"></div>
+
+
+
 		<div align="center">
+			
 		<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative;">
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="hidden" name="accion" value="actualizar_menu">
@@ -175,7 +215,7 @@ if ($accion=="detalles_menu")
 						</tr>
 						<tr>
 							<td align="RIGHT"><b>Imagen</b></td><td width="10"></td>
-							<td><input value="<?php echo $registro["imagen"]; ?>" class="CampoTexto" type="text" name="imagen" size="40" maxlength="250" class="texto_01"></td>
+							<td><input value="<?php echo $registro["imagen"]; ?>" class="CampoTexto" type="text" name="imagen" size="34" maxlength="250" class="texto_01"><a href='javascript:AbrirPopUp("FormularioImagenes");' title="Desplegar una lista de im&aacute;genes disponibles en el sistema">[...]</a></td>
 						</tr>
 					</table>
 				</td>
@@ -319,37 +359,36 @@ if ($accion=="administrar_menu")
 			abrir_ventana('Haga clic sobre una im&aacute;gen para seleccionarla','BDB9B9','');
 
 			//Busca en el directorio de iconos por imagenes listas para ser usadas
-			$columnas=20;
-			$columna_actual=0;
+			$columnas=15;
+			$columna_actual=1;
 			$directorio="img/";
 			$dh = opendir($directorio);
-			echo '<table border=1 cellspacing=2>';
+			echo '
+			<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 350px">
+			<table border=0 cellspacing=4>';
 			while (($file = readdir($dh)) !== false)
 				{
 					$impreso=0;
-					if ($columna_actual==0)	echo '<tr>';
+					if ($columna_actual==1)	echo '<tr>';
 					if (($file != ".") && ($file != "..") && stristr($file,"tango_"))
 						{
-							//echo '<td>'.$columna_actual.'<a href="#" title="'.$file.'"><img src='.$directorio.$file.' border=0></a></td>';
-							echo '<td>'.$columna_actual.'</td>';
+							echo '<td><a href="javascript:document.datos.imagen.value=\''.$file.'\';OcultarPopUp(\'FormularioImagenes\');" title="'.$file.'"><img src='.$directorio.$file.' border=0></a></td>';	
 							$impreso=1;
 						}
-					if ($columna_actual==0)	echo '</tr>';
+					if ($columna_actual==$columnas)	echo '</tr>';
 					if ($impreso) $columna_actual++;
-					if ($columna_actual==$columnas) $columna_actual=0;
+					if ($columna_actual==$columnas) $columna_actual=1;
 				}
-			echo '</table>';
+			echo '</table></DIV>';
 
 				abrir_barra_estado();
 					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioImagenes\')">';
 				cerrar_barra_estado();
 				cerrar_ventana();		// Cierra adicion de botones
 			?>
-		<!-- FIN DE MARCOS POPUP -->
 		</div>
+		<!-- FIN DE MARCOS POPUP -->
 		<div id='FondoPopUps' class="FondoOscuroPopUps"></div>
-
-
 
 		<div align="center">
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
