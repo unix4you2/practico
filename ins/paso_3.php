@@ -13,6 +13,7 @@
 
 <?php
 	$hay_error=0;
+
 	// Crea la cadena de salida con la configuracion de practico
 	$salida=sprintf("<?php
 		\$ServidorBD='%s';
@@ -22,7 +23,6 @@
 		\$MotorBD='%s';
 		\$PuertoBD='%s';
 		\$NombreRAD='Pr&aacute;ctico';
-		\$VersionRAD='12.05';
 		\$PlantillaActiva='nomo';
 		\$ArchivoCORE='';
 		\$TablasCore='%s';

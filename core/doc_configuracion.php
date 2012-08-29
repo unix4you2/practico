@@ -52,7 +52,6 @@
 	*/
 
 	$NombreRAD="Pr&aacute;ctico";
-	$VersionRAD="12.05";
 	$PlantillaActiva="nomo";
 	$ArchivoCORE="";
 	

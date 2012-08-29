@@ -5,8 +5,15 @@
 			<td align="left" valign="bottom" width="50%">
 				&nbsp;&nbsp;Instante:&nbsp;&nbsp;<?php echo $fecha_operacion_guiones;?>&nbsp;&nbsp;<?php echo $hora_operacion_puntos;?>
 				<?php 
-				// Muestra la accion actual si el usuario es administrador y la accion no es vacia - Sirve como guia a la hora de crear objetos
-				if($Login_usuario=="admin" && $accion!="") echo " - <font color=yellow>Accion: ".$accion."</font> <font color=black>Usados (seg):";  echo round($tiempo_total_script,3); ?>
+					// Muestra la accion actual si el usuario es administrador y la accion no es vacia - Sirve como guia a la hora de crear objetos
+					if($Login_usuario=="admin" && $accion!="")
+						{
+							// Calcula tiempos de ejecucion del script
+							$tiempo_final_script = obtener_microtime();
+							$tiempo_total_script = $tiempo_final_script - $tiempo_inicio_script;
+							echo " - <font color=yellow>Accion: ".$accion."</font> <font color=black>Usados (seg):";  echo round($tiempo_total_script,3);
+						}
+				?>
 			</td>
 			<td align="right" valign="bottom" width="50%">
 				Software por John F. Arroyave Guti&eacute;rrez&nbsp;&nbsp;

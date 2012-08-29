@@ -53,8 +53,8 @@
 	// Incluye archivo con algunas funciones comunes usadas por la herramienta
 	include_once("core/comunes.php");
 
-	// Almacena tiempo de inicio para calculo de tiempos de ejecucion del script
-	$tiempo_inicio_script = obtener_microtime();
+	// Almacena tiempo de inicio para calculo de tiempos de ejecucion del script (informados al admin)
+	if($Login_usuario=="admin" && $accion!="") $tiempo_inicio_script = obtener_microtime();
 
 	// Verifica autenticidad de la sesion mediante llave de paso
 	if ($accion!= "" && $accion!="Iniciar_login" && $accion!="Terminar_sesion" && $accion!="Mensaje_cierre_sesion")
@@ -90,14 +90,12 @@
 		include("core/sesion.php");
 	if ($accion=="cargar_objeto")
 		include("core/objetos.php");
+	if ($accion=="actualizar_practico" || $accion=="cargar_archivo")
+		include("core/actualizacion.php");
 
 /* ################################################################## */
 	// Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios
 	include("personalizadas.php");  
-
-	// Calcula tiempos de ejecucion del script
-	$tiempo_final_script = obtener_microtime();
-	$tiempo_total_script = $tiempo_final_script - $tiempo_inicio_script;
 
 	// Finaliza el contenido central y presenta el pie de pagina de aplicacion
 	include("core/marco_abajo.php");

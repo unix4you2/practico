@@ -74,6 +74,7 @@ INSERT INTO Core_menu VALUES (0,'Usuarios',0,0,'',1,'Interno','listar_usuarios' 
 INSERT INTO Core_menu VALUES (0,'Tablas de datos',0,0,'',1,'Interno','administrar_tablas' ,5,3,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','icono_tabla.png');
 INSERT INTO Core_menu VALUES (0,'Formularios',0,0,'',1,'Interno','administrar_formularios' ,5,3,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','icono_form.png');
 INSERT INTO Core_menu VALUES (0,'Cambio de clave',0,0,'',1,'Interno','cambiar_clave' ,5,3,1,0,0,'Opciones generales de usuario','icono_llave.png');
+INSERT INTO Core_menu VALUES (0,'Actualizaciones',0,0,'',1,'Interno','actualizar_practico' ,5,3,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','bajar.png');
 
 DROP TABLE IF EXISTS Core_formulario;
 CREATE TABLE Core_formulario (

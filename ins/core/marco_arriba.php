@@ -14,7 +14,7 @@
 	<tr><td>
 		<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MarcoSuperior"><tr>
 			<td valign="bottom" width="20%">
-				<img src="../skin/nomo/img/logo.png" border="0">
+				<img src="../skin/nomo/img/logo.png" border="0"><b><font color=yellow> Versi&oacute;n <?php include("../inc/version_actual.txt"); ?></font></b>
 			</td>
 			<td align="center" valign="middle" width="60%">
 				<b>

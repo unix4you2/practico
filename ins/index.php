@@ -1,8 +1,6 @@
 <?php 
 	$NombreRAD="Pr&aacute;ctico";
-	$VersionRAD="12.05";
 	$PlantillaActiva="nomo";
-
 	$fecha_operacion=date("Ymd");
 	$fecha_operacion_guiones=date("Y-m-d");
 	$hora_operacion=date("His");
