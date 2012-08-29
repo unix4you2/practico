@@ -30,6 +30,10 @@
 		<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MarcoSuperior"><tr>
 			<td valign="bottom" width="20%">
 				<img src="<?php echo 'skin/'.$PlantillaActiva.'/img/logo.png'; ?>" border="0">
+				<?php 
+					if ($accion!="Ver_menu")
+						echo '<a href="javascript:document.core_ver_menu.submit();" title="Ir a mi escritorio"><img src="img/tango_user-desktop.png" width="24" height="24" border=0></a>';
+				?>
 			</td>
 			<td align="center" valign="middle" width="60%">
 				<b>
@@ -63,7 +67,7 @@
 				<?php
 
 					if ($Sesion_abierta && $accion=="Ver_menu") {
-						echo '&nbsp;<b>@'.@$Login_usuario.'</b>>&nbsp;&nbsp;&nbsp;';
+						echo '&nbsp;@<b>'.@$Login_usuario.'</b>>&nbsp;&nbsp;&nbsp;';
 						// Carga las opciones del menu superior
 
 						// Si el usuario es el administrador muestra todas las opciones

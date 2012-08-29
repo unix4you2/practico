@@ -80,7 +80,7 @@
 	// Incluye los archivos necesarios dependiendo de las funciones requeridas
 	if ($accion=="actualizar_clave" || $accion=="cambiar_clave" || $accion=="agregar_usuario" || $accion=="guardar_usuario" || $accion=="listar_usuarios" || $accion=="eliminar_usuario" || $accion=="cambiar_estado_usuario" || $accion=="permisos_usuario" || $accion=="agregar_permiso" || $accion=="eliminar_permiso")
 		include("core/usuarios.php");
-	if ($accion=="administrar_menu" || $accion=="guardar_menu" || $accion=="eliminar_menu" || $accion=="detalles_menu" || $accion=="actualizar_menu")
+	if ($accion=="Ver_menu" || $accion=="administrar_menu" || $accion=="guardar_menu" || $accion=="eliminar_menu" || $accion=="detalles_menu" || $accion=="actualizar_menu")
 		include("core/menus.php");
 	if ($accion=="administrar_tablas" || $accion=="guardar_crear_tabla" || $accion=="eliminar_tabla" || $accion=="editar_tabla" || $accion=="guardar_crear_campo" || $accion=="eliminar_campo")
 		include("core/tablas.php");
@@ -88,76 +88,9 @@
 		include("core/formularios.php");
 	if ($accion=="Iniciar_login" || $accion=="Terminar_sesion" || $accion=="Mensaje_cierre_sesion")
 		include("core/sesion.php");
+	if ($accion=="cargar_objeto")
+		include("core/objetos.php");
 
-/* ################################################################## */
-	// Si la accion es presentar el menu de inicio o escritorio
-	if ($accion=="Ver_menu" && $Sesion_abierta)
-		{ 
-			// Carga las opciones del ESCRITORIO
-			echo '<table width="100%" border=0><tr><td valign=top>';
-			// Si el usuario es el administrador muestra todas las opciones
-			if ($Login_usuario=="admin")
-				$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE posible_escritorio");
-			//else
-			//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel>0";
-			// Imprime las opciones con sus formularios
-			while($registro = $resultado->fetch())
-				{
-					// Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
-					if ($registro["tipo_comando"]=="Interno" || $registro["tipo_comando"]=="Personal")
-						{
-							// Imprime la imagen asociada si esta definida
-							if ($registro["imagen"]!="") 
-								{
-									echo '<form action="'.$ArchivoCORE.'" method="post" name="desk_'.$registro["id"].'" id="desk_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;"><input type="hidden" name="accion" value="'.$registro["comando"].'"></form>';
-									echo '<a title="'.$registro["texto"].'" name="" href="javascript:document.desk_'.$registro["id"].'.submit();">';
-									echo '<img src="img/'.$registro["imagen"].'" alt="'.$registro["texto"].'" class="IconosEscritorio" valign="absmiddle" align="absmiddle">';
-									echo '</a>';
-								}
-						}
-				}
-			echo '</td></tr></table>';
-
-
-			// Carga las opciones del ACORDEON
-			echo '<div align="center">';
-			// Si el usuario es el administrador muestra todas las opciones
-			if ($Login_usuario=="admin")
-				$resultado=ejecutar_sql("SELECT COUNT(*) as conteo,seccion FROM ".$TablasCore."menu WHERE posible_centro GROUP BY seccion ORDER BY seccion");
-			//else
-			//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel>0";
-			// Imprime las secciones encontradas para el usuario
-			while($registro = $resultado->fetch())
-				{
-					//Crea la seccion en el acordeon
-					$seccion_menu_activa=$registro["seccion"];
-					$conteo_opciones=$registro["conteo"];
-					abrir_ventana($seccion_menu_activa.' ('.$conteo_opciones.')','fondo_ventanas2.gif','85%');
-					// Busca las opciones dentro de la seccion
-					// Si el usuario es el administrador muestra todas las opciones
-					if ($Login_usuario=="admin")
-						$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE posible_centro AND seccion='".$seccion_menu_activa."' ORDER BY peso ");
-					//else
-					//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel>0";
-					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
-						{
-							// Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
-							if ($registro_opciones_acordeon["tipo_comando"]=="Interno" || $registro_opciones_acordeon["tipo_comando"]=="Personal")
-								{
-									// Imprime la imagen asociada si esta definida
-									if ($registro_opciones_acordeon["imagen"]!="") 
-										{
-											echo '<form action="'.$ArchivoCORE.'" method="post" name="acorde_'.$registro_opciones_acordeon["id"].'" id="acorde_'.$registro_opciones_acordeon["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;"><input type="hidden" name="accion" value="'.$registro_opciones_acordeon["comando"].'"></form>';
-											echo '<a title="'.$registro_opciones_acordeon["texto"].'" name="" href="javascript:document.acorde_'.$registro_opciones_acordeon["id"].'.submit();">';
-											echo '<img src="img/'.$registro_opciones_acordeon["imagen"].'" alt="'.$registro_opciones_acordeon["texto"].'" class="IconosEscritorio" valign="absmiddle" align="absmiddle">';
-											echo '</a>';
-										}
-								}
-						}
-					cerrar_ventana();
-				}
-			echo '</div>';
-	} 
 /* ################################################################## */
 	// Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios
 	include("personalizadas.php");  

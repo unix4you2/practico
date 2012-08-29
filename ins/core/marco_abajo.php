@@ -11,7 +11,7 @@
 				?>
 			</td>
 			<td align="right" valign="bottom" width="50%">
-				Software por John F. Arroyave Gutierrez - Proyecto de maestr&iacute;a UNAB&nbsp;&nbsp;
+				Software por John F. Arroyave Guti&eacute;rrez&nbsp;&nbsp;
 			</td>
 		</tr></table>
 	</td></tr>

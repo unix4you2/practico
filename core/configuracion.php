@@ -11,7 +11,7 @@
 		$ArchivoCORE='';
 		$TablasCore='Core_';
 		$TablasApp='App_';
-		$LlaveDePaso='ZQBYBOAJZE';
+		$LlaveDePaso='C2S7VKSUMR';
 		$ModoDepuracion=0;
 		$ZonaHoraria='America/Bogota';
 	?>

@@ -126,151 +126,7 @@
 				}
 		}
 ?>
-<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<?php
-		function cargar_formulario($formulario,$campobase="",$valorbase="")
-		  {
-				global $ConexionPDO,$ArchivoCORE,$TablasCore;
 
-				// Busca datos del formulario
-				$consulta_formulario=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'");
-				$registro_formulario = $consulta_formulario->fetch();
-
-				// En caso de recibir un campo base y valor base se hace la busqueda para recuperar la informacion
-				if ($campobase!="" && $valorbase!="")
-					{
-						$consulta_datos_formulario = $ConexionPDO->prepare("SELECT * FROM ".$registro_formulario["tabla_datos"]." WHERE $campobase='$valorbase'");
-						$consulta_datos_formulario->execute();
-						$registro_datos_formulario = $consulta_datos_formulario->fetch();
-					}
-
-				// Muestra ayuda en caso de tenerla
-				$imagen_ayuda="info_icon.png";
-				if ($registro_formulario["ayuda_imagen"]!="") $imagen_ayuda=$registro_formulario["ayuda_imagen"];
-				if ($registro_formulario["ayuda_titulo"]!="" || $registro_formulario["ayuda_texto"]!="" || $registro_formulario["ayuda_imagen"]!="")
-					mensaje($registro_formulario["ayuda_titulo"],$registro_formulario["ayuda_texto"],'100%',$imagen_ayuda,'TextosVentana');
-
-				//Inicia el formulario de datos
-				echo '<form name="datos" action="'.$ArchivoCORE.'" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="Hidden" name="accion" value="guardar_datos_formulario">
-					<input type="Hidden" name="formulario" value="'.$formulario.'">';
-
-				// Inicia la tabla con los campos
-				echo '<table class="TextosVentana" width="100%"><tr>';
-				for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
-					{
-						//Inicia columna de formulario
-						echo '<td valign=top align=center>';
-							// Crea los campos definidos por cada columna de formulario
-							echo '<table class="TextosVentana">';
-							$consulta_campos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario' AND columna='$cl' AND visible=1 ORDER BY peso");
-							while ($registro_campos = $consulta_campos->fetch())
-								{
-									$nombre_campo=$registro_campos["campo"];
-									$tipo_entrada="text";
-									echo '<tr>
-											<td align="right" valign=top>'.$registro_campos["titulo"].'</td>
-											<td valign=top>';
-
-									// Define cadenas de longitud de campo
-									$cadena_longitud_visual=' size="20" ';
-									$cadena_longitud_permitida='';
-
-									// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
-									$cadena_valor='';
-									if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
-									if ($campobase!="" && $valorbase!="") $cadena_valor=' value="'.$registro_datos_formulario["$nombre_campo"].'" ';
-
-									// Define cadenas en caso de tener validaciones
-									$cadena_validacion='';
-									$cadena_fechas='';
-									if ($registro_campos["validacion_datos"]!="" && $registro_campos["validacion_datos"]!="fecha")
-										$cadena_validacion=' onkeypress="return validar_teclado(event, \''.$registro_campos["validacion_datos"].'\');" ';
-									if ($registro_campos["validacion_datos"]=="fecha")
-										{
-											$cadena_longitud_visual=' size="10" ';
-											$tipo_entrada="date";
-										}						
-
-									// Define si muestra o no teclado virtual
-									$cadena_clase_teclado="";
-									if ($registro_campos["teclado_virtual"])
-										$cadena_clase_teclado="keyboardInput";
-
-									// Muestra el campo
-									echo '<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="CampoTexto '.$cadena_clase_teclado.'" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].'  >';
-
-									// Muestra boton de busqueda cuando el campo sea usado para esto
-									if ($registro_campos["etiqueta_busqueda"]!="")
-										{
-											echo '<input type="Button" class="BotonesEstado" value="'.$registro_campos["etiqueta_busqueda"].'" >';
-										}
-
-									// Muestra indicadores de obligatoriedad o ayuda
-									if ($registro_campos["valor_unico"] == "1") echo '<a href="#" title="El valor ingresado no acepta duplicados" name="El sistema validar&aacute; la informaci&oacute;n ingresada en este campo, en caso de ya existir en la base de datos no se permitir&aacute; su ingreso."><img src="img/key.gif" border=0 border=0 align="absmiddle"></a>';
-									if ($registro_campos["obligatorio"]) echo '<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
-									if ($registro_campos["ayuda_titulo"] != "") echo '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0 border=0 align="absmiddle"></a>';
-									echo '</td></tr>';
-								}
-							// Cierra tabla de campos en la columna
-							echo '</table>';
-						echo '</td>';
-					}
-				// Finaliza la tabla con los campos
-				echo '</tr></table>';
-
-			// Si tiene botones agrega barra de estado y los ubica
-			$consulta_botones = $ConexionPDO->prepare("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario' AND visible=1 ORDER BY peso");
-			$consulta_botones->execute();
-
-			if($consulta_botones->rowCount()>0)
-				{
-					abrir_barra_estado();
-					while ($registro_botones = $consulta_botones->fetch())
-						{
-							//Define el tipo de boton de acuerdo al tipo de accion como Submit, Reset o Button
-							$tipo_boton="Button";
-							if ($registro_botones["tipo_accion"]=="interna_guardar")
-								{
-									$tipo_boton="Submit";
-								}
-							if ($registro_botones["tipo_accion"]=="interna_limpiar")
-								{
-									$tipo_boton="Reset";
-								}
-							if ($registro_botones["tipo_accion"]=="interna_escritorio")
-								{
-									$tipo_boton="Button";
-									$comando_javascript="document.core_ver_menu.submit()";
-								}
-							if ($registro_botones["tipo_accion"]=="interna_eliminar")
-								{
-									$tipo_boton="Button";
-									$comando_javascript="document.datos.accion.value='eliminar_datos_formulario';document.datos.submit()";
-								}
-							if ($registro_botones["tipo_accion"]=="externa_formulario")
-								{
-									$tipo_boton="Button";
-									$comando_javascript="document.datos.accion.value='".$registro_botones["accion_usuario"]."';document.datos.submit()";
-								}
-							if ($registro_botones["tipo_accion"]=="externa_javascript")
-								{
-									$tipo_boton="Button";
-									$comando_javascript=$registro_botones["accion_usuario"];
-								}
-							if ($comando_javascript!="" && $tipo_boton!="Reset")
-								{
-									$cadena_javascript='onclick="'.@$comando_javascript.'"';
-								}
-							echo '<input type="'.$tipo_boton.'"  class="'.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.$cadena_javascript.' >';
-						}
-					cerrar_barra_estado();
-				}
-
-			//Cierra todo el formulario
-			echo '</form>';
-		  }
-?>
 
 <!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <?php
@@ -600,7 +456,7 @@
 										<option value="interna_limpiar">Limpiar datos</option>
 										<option value="interna_eliminar">Eliminar datos</option>
 										<option value="interna_escritorio">Regresar a escritorio</option>
-										<option value="interna_cargar">Ejecutar</option>
+										<option value="interna_cargar">Cargar un objeto</option>
 									</optgroup>
 									<optgroup label="Definidas por el usuario">
 										<option value="externa_formulario">En personalizadas.php</option>
@@ -984,9 +840,7 @@
 			
 		<?php
 		echo '</td><td valign=top align=center>';  // Inicia segunda columna del diseñador
-			abrir_ventana('VISTA PREVIA:  Formulario para '.$nombre_tabla,'f2f2f2','');
 			cargar_formulario($formulario);
-			cerrar_ventana();		
 		echo '</td></tr></table>'; // Cierra la tabla de dos columnas
 	}
 ?>

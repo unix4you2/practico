@@ -134,7 +134,57 @@
 </font>
 -->
 
-
+<hr>
+<font size=2 color=black><br><b>
+	[Par&aacute;metros para su primera aplicaci&oacute;n]</b>
+</font>
+<table cellspacing=10 width="700">
+	<tr>
+		<td valign=top align=right>
+			<font size=2 color=black>
+				Nombre corto de su Organizaci&oacute;n o empresa
+			</font>
+		</td>
+		<td valign=top>
+			<font size=2 color=black>
+			<input type="text" name="NombreCortoEmpresa" size="50" class="CampoTexto" value="Nombre corto de su empresa">
+			<a href="#" title="Nombre a desplegar en la parte superior" name="Este texto ser&aacute; utilizado en informes y espacios de la aplicaci&oacute;n que requieran un nombre corto para identificar su organizaci&oacute;n."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+			</font>
+		</td>
+	</tr>
+	<tr>
+		<td valign=top align=right>
+			<font size=2 color=black>
+				Nombre de su aplicaci&oacute;n
+			</font>
+		</td>
+		<td valign=top>
+			<font size=2 color=black>
+			<input type="text" name="NombreAplicacion" size="50" class="CampoTexto" value="Nombre Aplicacion">
+			<a href="#" title="Nombre descriptivo" name="El nombre especificado aparecer&aacute; siempre en la parte superior de su aplicaci&oacute;n."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+			</font>
+		</td>
+	</tr>
+	<tr>
+		<td valign=top align=right>
+			<font size=2 color=black>
+				Versi&oacute;n inicial de su aplicaci&oacute;n
+			</font>
+		</td>
+		<td valign=top>
+			<font size=2 color=black>
+			<input type="text" name="VersionAplicacion" size="10" class="CampoTexto" value="1.0">
+			</font>
+		</td>
+	</tr>
+	<tr>
+		<td valign=top colspan=2>
+			<font size=1 color=darkblue>
+				<u>IMPORTANTE</u>: Otros parametros como nombre largo y corto de su empresa, fecha de lanzamiento, textos de licencia y creditos podran ser modificados posteriormente mediante las opciones disponibles para el usuario administrador.<br><br>
+			</font>
+		</td>
+	</tr>
+</table>
 
 <hr>
 <font size=2 color=black><br><b>

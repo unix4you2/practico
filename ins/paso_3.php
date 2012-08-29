@@ -88,6 +88,9 @@
 			echo '<form name="continuar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="paso" value="'.$siguiente.'">
 				<input type="Hidden" name="aplicar_script_basedatos" value="1">
+				<input type="Hidden" name="NombreCortoEmpresa" value="'.$NombreCortoEmpresa.'">
+				<input type="Hidden" name="NombreAplicacion" value="'.$NombreAplicacion.'">
+				<input type="Hidden" name="VersionAplicacion" value="'.$VersionAplicacion.'">
 				<input type="Submit" class="BotonesEstadoCuidado" value=" 1. Agregar info inicial a la BD >>> " onclick="document.continuar.submit();">
 				</form>';
 
