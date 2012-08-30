@@ -90,7 +90,7 @@
 		include("core/sesion.php");
 	if ($accion=="cargar_objeto")
 		include("core/objetos.php");
-	if ($accion=="actualizar_practico" || $accion=="cargar_archivo")
+	if ($accion=="actualizar_practico" || $accion=="cargar_archivo" || $accion=="analizar_parche" || $accion=="aplicar_parche")
 		include("core/actualizacion.php");
 
 /* ################################################################## */

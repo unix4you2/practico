@@ -11,6 +11,6 @@
 		$TablasCore='Core_';
 		$TablasApp='App_';
 		$LlaveDePaso='Z6AGUJTD2D';
-		$ModoDepuracion=0;
+		$ModoDepuracion=1;
 		$ZonaHoraria='America/Bogota';
 	?>

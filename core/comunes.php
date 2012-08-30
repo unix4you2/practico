@@ -174,7 +174,7 @@
 		}
 
 /* ################################################################## */
-	function consultar_tablas($prefijo)
+	function consultar_tablas($prefijo="")
 		{
 			/*
 				Function: consultar_tablas
