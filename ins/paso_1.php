@@ -15,6 +15,7 @@
 		<?php
 			$hay_error=0;
 			//informar_prueba_escritura("..");
+			informar_prueba_escritura("../bkp",1);
 			informar_prueba_escritura("../core",1);
 			//informar_prueba_escritura("../core/configuracion.php",2);
 			informar_prueba_escritura("../tmp",1);

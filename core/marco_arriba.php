@@ -31,13 +31,13 @@
 			<td valign="bottom" width="20%">
 				<img src="<?php echo 'skin/'.$PlantillaActiva.'/img/logo.png'; ?>" border="0">
 				<?php 
-					if ($accion!="Ver_menu")
+					if ($accion!="Ver_menu" && $Sesion_abierta)
 						echo '<a href="javascript:document.core_ver_menu.submit();" title="Ir a mi escritorio"><img src="img/tango_user-desktop.png" width="24" height="24" border=0></a>';
 				?>
 			</td>
 			<td align="center" valign="middle" width="60%">
 				<b>
-				<?php 
+				<?php
 					if ($Sesion_abierta)
 						echo '<font color="#d4dce4">'.$Nombre_Empresa_Corto.'</font> - '.$Nombre_Aplicacion.' </b> <i> v'.$Version_Aplicacion.'</i>';
 					else

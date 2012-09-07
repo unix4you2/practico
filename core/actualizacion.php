@@ -113,7 +113,7 @@ if ($accion=="analizar_parche")
 		$archivo = fopen($archivo_origen, "r");
 		if ($archivo)
 			{
-				$version_actual = fgets($archivo, 1024);
+				$version_actual = trim(fgets($archivo, 1024));
 				fclose($archivo);
 			}
 		else
@@ -124,22 +124,28 @@ if ($accion=="analizar_parche")
 		$archivo = new PclZip($archivo_cargado);
 		
 		//Obtiene archivo compat.txt con el numero de version compatible del parche
-		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "compat.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
-		$version_compatible=$lista_contenido[0]['content'];
+		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "tmp/par_compat.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
+		$version_compatible=trim($lista_contenido[0]['content']);
 		if ($lista_contenido == 0 || $version_compatible=="")
-			$mensaje_error.="<br>El archivo cargado parece no ser un paquete de actualizacion v&aacute;lido.  No se encuentra el archivo compat.txt"."<br>";
+			$mensaje_error.="<br>El archivo cargado parece no ser un paquete de actualizacion v&aacute;lido.  No se encuentra el archivo tmp/par_compat.txt"."<br>";
 
 		//Obtiene archivo version.txt con la version que se aplicaria al sistema
-		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "version.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
-		$version_final=$lista_contenido[0]['content'];
+		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "inc/version_actual.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
+		$version_final=trim($lista_contenido[0]['content']);
 		if ($lista_contenido == 0 || $version_final=="")
-			$mensaje_error.="<br>El archivo cargado parece no ser un paquete de actualizacion v&aacute;lido.  No se encuentra el archivo version.txt"."<br>";
+			$mensaje_error.="<br>El archivo cargado parece no ser un paquete de actualizacion v&aacute;lido.  No se encuentra el archivo inc/version_actual.txt"."<br>";
 
 		//Obtiene archivo cambios.txt con la informacion de funcionalidades implementadas por el parche
-		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "cambios.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
+		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "tmp/par_cambios.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
 		$resumen_cambios=$lista_contenido[0]['content'];
 		if ($lista_contenido == 0 || $resumen_cambios=="")
-			$mensaje_error.="<br>El archivo cargado parece no ser un paquete de actualizacion v&aacute;lido.  No se encuentra el archivo cambios.txt"."<br>";
+			$mensaje_error.="<br>El archivo cargado parece no ser un paquete de actualizacion v&aacute;lido.  No se encuentra el archivo tmp/par_cambios.txt"."<br>";
+
+		//Obtiene archivo sql.txt con las instrucciones a ejecutar
+		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "tmp/par_sql.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
+		$resumen_sql=$lista_contenido[0]['content'];
+		if ($lista_contenido == 0)
+			$mensaje_error.="<br>El archivo cargado parece no ser un paquete de actualizacion v&aacute;lido.  No se encuentra el archivo tmp/par_sql.txt"."<br>";
 
 		//Verifica que no sea un parche mas viejo que la version actual
 		if ($mensaje_error=="")
@@ -152,8 +158,7 @@ if ($accion=="analizar_parche")
 				$mensaje_error.="<br>El archivo de parche cargado requiere la version ".$version_compatible." y usted cuenta con la version ".$version_actual."<br>Debe aplicar primero los parches incrementales requeridos hasta elevar su sistema a la versi&oacute;n minima que necesita el parche.";
 
 		if ($mensaje_error=="")
-			{				
-				$carpeta_destino='tmp/';
+			{
 				//Presenta contenido del archivo
 				if (($lista_contenido = $archivo->listContent()) == 0)
 					echo "ERROR: ".$archivo->errorInfo(true);
@@ -164,6 +169,8 @@ if ($accion=="analizar_parche")
 				echo '<center>
 				<hr><b>Resumen de los cambios y funcionalidades suministradas por el parche</b>:<br>
 				<textarea cols="100" rows="7" class="AreaTexto">'.$resumen_cambios.'</textarea>
+				<hr><b>Instrucciones a ser ejecutadas sobre las tablas de Pr&aacute;ctico</b>:<br>
+				<textarea cols="100" rows="7" class="AreaTexto">'.$resumen_sql.'</textarea>
 				<br><br><b>PROCESO DE REVISION FINALIZADO.<br>
 				 <font color=blue>- Al aplicar los archivos listados arriba se actualizar&aacute; su sistema a la versi&oacute;n '.$version_final.' -</font></b><br>
 				 <br><br>
@@ -205,20 +212,64 @@ if ($accion=="aplicar_parche")
 		//Libreria necesaria para extraer el archivo
 		include("inc/pclzip.lib.php");
 		$archivo = new PclZip($archivo_cargado);
-
+		
 		if ($mensaje_error=="")
 			{				
-				$carpeta_destino='tmp/';
-				//Trata de renombrar los archivos y carpetas existentes en el parche y que pueden coincidir con unas en produccion para tener una copia
-				if (($lista_contenido = $archivo->listContent()) == 0)
-					echo "ERRROR: ".$archivo->errorInfo(true);
-				for ($i=0; $i<sizeof($lista_contenido); $i++)
-					@rename ($carpeta_destino.$lista_contenido[$i][filename], $carpeta_destino."bkp_".$fecha_operacion."_".$lista_contenido[$i][filename]);
+				//Hace una copia de seguridad de los archivos a reemplazar por el parche
+				$archivo_destino_backup_app="bkp/bkp_".$fecha_operacion."-".date("Hi")."_app.zip";
+				$archivo_destino_backup_bdd="bkp/bkp_".$fecha_operacion."-".date("Hi")."_bdd.gz";
+				$archivo_backup = new PclZip($archivo_destino_backup_app);
 
+				if (($lista_contenido = $archivo->listContent()) == 0)
+					echo "Error cargando lista de archivos para backup: ".$archivo->errorInfo(true);
+
+				$lista_archivos_a_comprimir="";
+				for ($i=0; $i<sizeof($lista_contenido); $i++)
+					{
+						//Si el archivo destino existe entonces lo agrega a la lista de archivos del backup
+						if (file_exists($lista_contenido[$i][filename]) && !is_dir($lista_contenido[$i][filename]))
+							{
+								$lista_archivos_a_comprimir.=$lista_contenido[$i][filename].",";
+								echo "<li> Haciendo backup de: ".$lista_contenido[$i][filename];
+							}
+					}
+				$lista_archivos_a_comprimir=substr($lista_archivos_a_comprimir, 0, strlen($lista_archivos_a_comprimir)-1);
+				$lista_archivos_backup = $archivo_backup->create($lista_archivos_a_comprimir);				
+
+				//Hace copia de seguridad de la base de datos
+				include("core/backups.php");
+				$objeto_backup_db = new DBBackup(array(
+					'driver' => $MotorBD,
+					'host' => $ServidorBD,
+					'user' => $UsuarioBD,
+					'password' => $PasswordBD,
+					'database' => $BaseDatos,
+					'prefix' => $TablasCore
+				));
+				$resultado_backup = $objeto_backup_db->backup();
+				if(!$resultado_backup['error'])
+					{
+						// Un echo nl2br($backup['msg']); podría mostrar contenido
+						// Por ahora, comprime el archivo resultante y lo guarda.
+						$resultado_backup_comprimido = gzencode($resultado_backup['msg'], 9);
+						$puntero_archivo_destino_backup_bdd = fopen($archivo_destino_backup_bdd, "w");
+						fwrite($puntero_archivo_destino_backup_bdd, $resultado_backup_comprimido);
+						fclose($puntero_archivo_destino_backup_bdd);
+					}
+				else
+					{
+						echo '<hr><b>Ha ocurrido un error durante la copia de seguridad de la base de datos.</b>';
+					}
+
+				//Descomprime el archivo de parche
+				$carpeta_destino='';
 				//Extrae el archivo
-				if ($archivo->extract(PCLZIP_OPT_PATH, $carpeta_destino) == 0)
+				if ($archivo->extract(PCLZIP_OPT_PATH, $carpeta_destino, PCLZIP_OPT_REPLACE_NEWER) == 0)
 					echo "ERROR: ".$archivo->errorInfo(true)."<br>";
+
+
 				echo '<center>
+				<hr><font color=blue>- Si alguno de los archivos no ha podido ser escrito por este asistente por problemas de permisos el parche tambien puede ser aplicado manualmente por el administrador o escribiendo solamente los archivos faltantes. -</font></b>
 				<hr>
 				<b>PROCESO FINALIZADO<br>';
 				// Lleva a auditoria

@@ -1,3 +1,6 @@
+comillas dobles indican que las variables deben ser interpretadas. comillas sencillas no.
+
+
 esto valida si existe la constante...
 	defined( '_VALID_MOS' ) or die( 'Direct Access to this location is not allowed.' );
 esto define la constante...  al ser constante que puede estar desde iniciod e sesion no se puede enviar por URL
@@ -5,6 +8,18 @@ esto define la constante...  al ser constante que puede estar desde iniciod e se
 
 
 Revisar el uso de CANVAS para html5
+
+
+ENLACE1: http://blog-indomita.blogspot.com/2008/08/realizar-backup-mysql-desde-php.html
+ENLACE2: http://www.forosdelweb.com/f18/backup-bd-yodumpeo-1-0b-166532/
+ENLACE3: http://webelop.com.ar/php/como-hacer-un-backup-de-mysql-desde-php/
+ENLACE3: http://webelop.com.ar/php/como-hacer-un-backup-de-mysql-desde-php/
+ENLACE4: http://www.elwebmaster.com/articulos/10-opciones-para-un-backup-rapido-de-tu-base-de-datos-de-mysql
+ENLACE5: http://www.codenb.com/backups-mysql-con-php-66/
+ENLACE6 - PDO: http://webdevrefinery.com/forums/topic/4021-sql-backup-with-pdo/
+ENLACE7 - PDO: http://www.forosdelweb.com/f86/metadatos-usando-pdo-785782/
+ENLACE8 - PDO Excelente:  http://www.phpkode.com/scripts/item/db-backup-class/
+ENLACE9 - PDO: Excelente (igual?): http://www.phpclasses.org/browse/file/33388.html
 
 
 
