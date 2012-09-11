@@ -240,36 +240,29 @@ if ($accion=="eliminar_permiso")
 		<?php if ($accion=="permisos_usuario")
 				{
 						echo '<div align="center"><br>';
-						abrir_ventana('Administraci&oacute;n de permisos del usuario','','90%');
+						abrir_ventana('Administraci&oacute;n de permisos del usuario','f2f2f2','60%');
 		?>
 
-		<div align="center">
+		<div align="center" class="TextosVentana">
 		<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 290px">
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
 			<input type="hidden" name="accion" value="agregar_permiso">
 			<br><font face="" size="3" color="Navy"><b>Agregar opci&oacute;n al men&uacute; del usuario  <?php echo $usuario; ?></b></font>
 			<br><br>
-				<select name="menu" class="selector_01" >
-						<?php
-							$resultado=ejecutar_sql("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE nivel=0");
-							while($registro = $resultado->fetch())
-								{
-									echo '<option value="'.$registro["id"].'">'.$registro["texto"].'</option>';
-									// Imprime las opciones dentro de la seccion
-									$padre=$registro["id"];
-									$resultado_nivel1=ejecutar_sql("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE nivel=1 AND padre=$padre ORDER BY peso");
-									while($registro_nivel1 = $resultado_nivel1->fetch())
-										{
-											echo '<option value="'.$registro_nivel1["id"].'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$registro_nivel1["texto"].' ('.$registro_nivel1["accion"].')</option>';
-										}
-								}
-						?>
+				<select name="menu" class="Combos">
+					<?php
+						//Despliega opciones de menu para agregar, aunque solamente las que este por debajo del perfil del usuario
+						//No se permite agregar opciones por encima del perfil actual del usuario
+						$resultado=ejecutar_sql("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE nivel_usuario<=".$Nivel_usuario." ");
+						while($registro = $resultado->fetch())
+							{
+								echo '<option value="'.$registro["id"].'">'.$registro["texto"].'</option>';
+							}
+					?>
 				</select>
 
-			<br><br><strong><blink>Importante:</blink></strong>  recuerde que si usted agrega una opci&oacute;n del men&uacute; al usuario, tambi&eacute;n <br>deber&aacute; agregar la secci&oacute;n que contiene dicha opci&oacute;n o comando para que pueda ser<br> visualizada correctamente.
-
-			<table width="90%" border="0" cellspacing="0" cellpadding="0"><tr>
+			<table width="90%" border="0" cellspacing="0" cellpadding="0" class="TextosVentana"><tr>
 				<td align="RIGHT" valign="TOP">
 					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;" class="link_menu">
 						<tr>
@@ -277,8 +270,8 @@ if ($accion=="eliminar_permiso")
 									</form>
 							</td><td width="5"></td>
 							<td align="RIGHT">
-									<input type="Button" name="" value="Agregar" style="border-width: 1px; font-family: Verdana, Tahoma, Arial; font-size: 9px; background-color: e1e1e1; color: Teal; border-color: Gray; border-style: ridge; height: 17px; padding-top: 1px; font-weight: bold;" onClick="document.datos.submit()">
-									&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" name="" value="Cancelar" style="border-width: 1px; font-family: Verdana, Tahoma, Arial; font-size: 9px; background-color: e1e1e1; color: Teal; border-color: Gray; border-style: ridge; height: 17px; padding-top: 1px; font-weight: bold;">
+									<input type="Button" name="" value=" Agregar " class="BotonesCuidado" onClick="document.datos.submit()">
+									&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" name="" value=" Cancelar " class="Botones">
 							</td>
 						</tr>
 					</table>
@@ -286,67 +279,39 @@ if ($accion=="eliminar_permiso")
 			</tr></table>
 
 		<font face="" size="3" color="Navy"><b>Secciones ya disponibles</b></font><br><br>
-		 <?php
-				echo '
-				<table width="100%" border="0" cellspacing="0" align="CENTER" style="font-size: 9px; font-family: Verdana, Tahoma, Arial;">
-					<tr>
-						<td align="LEFT" bgcolor="#D6D6D6"><b>&nbsp;&nbsp;ID&nbsp;&nbsp;</b></td>
-						<td align="LEFT" bgcolor="#D6D6D6"><b>&nbsp;&nbsp;Nivel&nbsp;&nbsp;</b></td>
-						<td align="LEFT" bgcolor="#D6D6D6"><b>&nbsp;&nbsp;Ubicaci&oacute;n&nbsp;&nbsp;</b></td>
-						<td align="left" bgcolor="#d6d6d6"><b>&nbsp;&nbsp;&nbsp;Texto&nbsp;&nbsp;&nbsp;</b></td>
-						<td align="left" bgcolor="#d6d6d6"><b>&nbsp;&nbsp;&nbsp;Peso&nbsp;&nbsp;&nbsp;</b></td>
-						<td align="left" bgcolor="#d6d6d6"></td>
-						<td align="left" bgcolor="#d6d6d6"></td>
-					</tr>
-					<tr><td></td><td></td><td></td>	<td></td></tr>
-					';
+		<?php
+			echo '
+			<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
+				<tr>
+					<td align="LEFT" bgcolor="#D6D6D6"><b>ID</b></td>
+					<td align="LEFT"></td>
+					<td align="left" bgcolor="#d6d6d6"><b>Etiqueta</b></td>
+					<td align="LEFT" bgcolor="#D6D6D6"><b>Tipo</b></td>
+					<td align="left" bgcolor="#d6d6d6"><b>Comando</b></td>
+					<td align="left"></td>
+				</tr>';
 
-				$resultado=ejecutar_sql("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu,".$TablasCore."usuario_menu WHERE ".$TablasCore."usuario_menu.".$TablasCore."menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$usuario' AND ".$TablasCore."menu.nivel=0");
-				while($registro = $resultado->fetch())
-					{
-						echo '<tr>
-								<td >&nbsp;&nbsp;'.$registro["id"].'&nbsp;&nbsp;</td>
-								<td >&nbsp;&nbsp;'.$registro["nivel"].'&nbsp;&nbsp;</td>
-								<td>&nbsp;&nbsp;'.$registro["columna"].'&nbsp;&nbsp;</td>
-								<td>&nbsp;&nbsp;<strong>'.$registro["texto"].'</strong>&nbsp;&nbsp;</td>
-								<td>&nbsp;&nbsp;'.$registro["peso"].'&nbsp;&nbsp;</td>
-								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
-												<input type="hidden" name="accion" value="eliminar_permiso">
-												<input type="hidden" name="usuario" value="'.$usuario.'">
-												<input type="hidden" name="menu" value="'.$registro["id"].'">
-												<input type="button" value="Eliminar" style="border-width: 1px; font-family: Verdana, Tahoma, Arial; font-size: 9px; background-color: e1e1e1; color: Teal; border-color: Gray; border-style: ridge; height: 17px; padding-top: 1px; width: 55px;" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar el registro pueden quedar sin vincular algunas opciones del sistema.\nEst&aacute; seguro que desea continuar ?\',f'.$registro["id"].');">
-												&nbsp;&nbsp;
-										</form>
-								</td>
-							</tr>';
-
-							// Imprime las opciones dentro de la seccion
-							$padre=$registro["id"];
-							$resultado_nivel1=ejecutar_sql("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu,".$TablasCore."usuario_menu WHERE ".$TablasCore."usuario_menu.usuario='$usuario' AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."menu.padre=$padre ORDER BY peso");
-							while($registro_nivel1 = $resultado_nivel1->fetch())
-								{
-
-						echo '<tr>
-								<td >&nbsp;&nbsp;'.$registro_nivel1["id"].'&nbsp;&nbsp;</td>
-								<td >&nbsp;&nbsp;'.$registro_nivel1["nivel"].'&nbsp;&nbsp;</td>
-								<td></td>
-								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$registro_nivel1["texto"].'&nbsp;&nbsp;</td>
-								<td>&nbsp;&nbsp;'.$registro_nivel1["peso"].'&nbsp;&nbsp;</td>
-								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro_nivel1["id"].'" id="f'.$registro_nivel1["id"].'">
-												<input type="hidden" name="accion" value="eliminar_permiso">
-												<input type="hidden" name="usuario" value="'.$usuario.'">
-												<input type="hidden" name="menu" value="'.$registro_nivel1["id"].'">
-												<input type="button" value="Eliminar" style="border-width: 1px; font-family: Verdana, Tahoma, Arial; font-size: 9px; background-color: e1e1e1; color: Teal; border-color: Gray; border-style: ridge; height: 17px; padding-top: 1px; width: 55px;" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar el registro pueden quedar sin vincular algunas opciones del sistema.\nEst&aacute; seguro que desea continuar ?\',f'.$registro_nivel1["id"].');">
-												&nbsp;&nbsp;
-										</form>
-								</td>
-							</tr>';
-								}
-					}
-				echo '</table><br><br>';
-		 ?>
+			$resultado=ejecutar_sql("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu,".$TablasCore."usuario_menu WHERE ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$usuario'");
+			while($registro = $resultado->fetch())
+				{
+					echo '<tr>
+							<td>'.$registro["id"].'</td>
+							<td align=right><img src="img/'.$registro["imagen"].'" border=0 alt="" valign="absmiddle" align="absmiddle" width="14" height="13" ></td>
+							<td><strong>'.$registro["texto"].'</strong></td>
+							<td>'.$registro["tipo_comando"].'</td>
+							<td>'.$registro["comando"].'</td>
+							<td align="center">
+									<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
+											<input type="hidden" name="accion" value="eliminar_permiso">
+											<input type="hidden" name="usuario" value="'.$usuario.'">
+											<input type="hidden" name="menu" value="'.$registro["id"].'">
+											<input type="button" value="Eliminar" class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar el registro pueden quedar sin vincular algunas opciones del sistema para este usuario.\nEst&aacute; seguro que desea continuar ?\',f'.$registro["id"].');">
+									</form>
+							</td>
+						</tr>';
+				}
+			echo '</table>';
+		?>
 		</DIV>
 		</div>
 
@@ -354,10 +319,7 @@ if ($accion=="eliminar_permiso")
 		 				cerrar_ventana();
 		 		}
 		 ?>
-		 
-		 
-		 
-		 
+
 <!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <?php
 			/*

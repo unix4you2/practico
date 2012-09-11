@@ -70,7 +70,7 @@ CREATE TABLE Core_usuario_menu (
 );
 
 INSERT INTO Core_menu VALUES (0,'Menus'   ,0,0,'',1,'Interno','administrar_menu',5,2,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','icono_menus.png');
-INSERT INTO Core_menu VALUES (0,'Usuarios',0,0,'',1,'Interno','listar_usuarios' ,5,1,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','icono_usuarios.png');
+INSERT INTO Core_menu VALUES (0,'Usuarios y permisos',0,0,'',1,'Interno','listar_usuarios' ,5,1,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','icono_usuarios.png');
 INSERT INTO Core_menu VALUES (0,'Tablas de datos',0,0,'',1,'Interno','administrar_tablas' ,5,3,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','icono_tabla.png');
 INSERT INTO Core_menu VALUES (0,'Formularios',0,0,'',1,'Interno','administrar_formularios' ,5,3,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','icono_form.png');
 INSERT INTO Core_menu VALUES (0,'Cambio de clave',0,0,'',1,'Interno','cambiar_clave' ,5,3,1,0,0,'Opciones generales de usuario','icono_llave.png');

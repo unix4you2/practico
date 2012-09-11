@@ -188,7 +188,7 @@ if ($accion=="analizar_parche")
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="accion" value="Ver_menu">
-					<input type="Hidden" name="error_titulo" value="Archivo con estructura o tipo no compatible">
+					<input type="Hidden" name="error_titulo" value="Archivo con estructura, tipo o versi&oacute;n no compatible">
 					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 					</form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -202,6 +202,41 @@ if ($accion=="analizar_parche")
 /* ################################################################## */
 if ($accion=="aplicar_parche")
 	{
+		//Divide los queries de un cadena
+		function split_sql($sql)
+			{
+				$sql = trim($sql);
+				$sql = ereg_replace("\n#[^\n]*\n", "\n", $sql);
+
+				$buffer = array();
+				$ret = array();
+				$in_string = false;
+
+				for($i=0; $i<strlen($sql)-1; $i++) {
+					if($sql[$i] == ";" && !$in_string) {
+						$ret[] = substr($sql, 0, $i);
+						$sql = substr($sql, $i + 1);
+						$i = 0;
+					}
+
+					if($in_string && ($sql[$i] == $in_string) && $buffer[1] != "\\") {
+						$in_string = false;
+					}
+					elseif(!$in_string && ($sql[$i] == '"' || $sql[$i] == "'") && (!isset($buffer[0]) || $buffer[0] != "\\")) {
+						$in_string = $sql[$i];
+					}
+					if(isset($buffer[1])) {
+						$buffer[0] = $buffer[1];
+					}
+					$buffer[1] = $sql[$i];
+				}
+
+				if(!empty($sql)) {
+					$ret[] = $sql;
+				}
+				return($ret);
+			}
+
 		abrir_ventana('Aplicando actualizacion desde '.$archivo_cargado,'f2f2f2','700');
 		echo '<table border="0" width="100%"  cellspacing="15" cellpadding="0" align="center" class="TextosVentana"><tr height="100%"><td align=left height="100%">
 		<u>Actualizando desde version '.$version_actual.' hacia '.$version_final.':</u><br><br>';
@@ -267,6 +302,29 @@ if ($accion=="aplicar_parche")
 				if ($archivo->extract(PCLZIP_OPT_PATH, $carpeta_destino, PCLZIP_OPT_REPLACE_NEWER) == 0)
 					echo "ERROR: ".$archivo->errorInfo(true)."<br>";
 
+				//Abre el archivo con los queries
+				$RutaScriptSQL="tmp/par_sql.txt";
+				$archivo_consultas=fopen($RutaScriptSQL,"r");
+				$total_consultas= fread($archivo_consultas,filesize($RutaScriptSQL));
+				fclose($archivo_consultas);
+
+				$arreglo_consultas = split_sql($total_consultas);
+				foreach($arreglo_consultas as $consulta)
+					{
+						try
+							{
+								//Cambia el prefijo predeterminado en caso que haya sido personalizado en la instalacion
+								$consulta=str_replace("Core_",$TablasCore,$consulta);
+								//Ejecuta el query
+								$consulta_enviar = $ConexionPDO->prepare($consulta);
+								$estado_ok = $consulta_enviar->execute();
+							}
+						catch( PDOException $ErrorPDO)
+							{
+								echo "<hr><b><font color=red>ATENCION: </font>Error ejecutando la consulta</b> $consulta <b>sobre la base de datos. DETALLES: ".$ErrorPDO->getMessage()."</b>";
+								$hay_error=1; //usada globalmente durante el proceso de instalacion
+							}
+					}
 
 				echo '<center>
 				<hr><font color=blue>- Si alguno de los archivos no ha podido ser escrito por este asistente por problemas de permisos el parche tambien puede ser aplicado manualmente por el administrador o escribiendo solamente los archivos faltantes. -</font></b>

@@ -21,7 +21,6 @@
 </form>
 
 
-
 <!-- INICIA LA TABLA PRINCIPAL -->
 <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="left">
 
@@ -70,11 +69,13 @@
 						echo '&nbsp;@<b>'.@$Login_usuario.'</b>>&nbsp;&nbsp;&nbsp;';
 						// Carga las opciones del menu superior
 
-						// Si el usuario es el administrador muestra todas las opciones
-						if ($Login_usuario=="admin")
-							$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE posible_arriba");
-						//else
-						//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE  posible_arriba='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel>0";
+						// Si el usuario es diferente al administrador agrega condiciones al query
+						if ($Login_usuario!="admin")
+							{
+								$Complemento_tablas=",".$TablasCore."usuario_menu";
+								$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$Login_usuario'";  // AND nivel>0
+							}
+						$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".$Complemento_tablas." WHERE posible_arriba ".$Complemento_condicion);
 					
 						while($registro = $resultado->fetch())
 							{
@@ -103,11 +104,10 @@
 			<input type="Hidden" name="accion" value="Terminar_sesion">
 		</form>
 	</td></tr>
-		
+
 	<!-- INICIO  DE CONTENIDOS DE APLICACION -->
-	
-	
+
+
 	<!-- INICIO DEL CONTENIDO CENTRAL -->
 	<tr><td height="100%" valign="<?php if ($accion=="Ver_menu") echo 'TOP'; else echo 'MIDDLE'; ?>" align="center">
 	<!-- INICIO DEL CONTENIDO CENTRAL -->
-

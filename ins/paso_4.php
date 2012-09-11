@@ -27,17 +27,25 @@
 			$arreglo_consultas = split_sql($total_consultas);
 			foreach($arreglo_consultas as $consulta)
 				{
-					//Cambia el prefijo predeterminado en caso que haya sido personalizado en la instalacion
-					$consulta=str_replace("Core_",$TablasCore,$consulta);
-					//Cambia parametros iniciales de aplicacion
-					$consulta=str_replace("PAR_NombreCortoEmpresa",$NombreCortoEmpresa,$consulta);
-					$consulta=str_replace("PAR_NombreAplicacion",$NombreAplicacion,$consulta);
-					$consulta=str_replace("PAR_VersionAplicacion",$VersionAplicacion,$consulta);
+					try
+						{
+							//Cambia el prefijo predeterminado en caso que haya sido personalizado en la instalacion
+							$consulta=str_replace("Core_",$TablasCore,$consulta);
+							//Cambia parametros iniciales de aplicacion
+							$consulta=str_replace("PAR_NombreCortoEmpresa",$NombreCortoEmpresa,$consulta);
+							$consulta=str_replace("PAR_NombreAplicacion",$NombreAplicacion,$consulta);
+							$consulta=str_replace("PAR_VersionAplicacion",$VersionAplicacion,$consulta);
 
-					//Ejecuta el query
-					$consulta_enviar = $ConexionPDO->prepare($consulta);
-					$consulta_enviar->execute();
-					$total_ejecutadas++;
+							//Ejecuta el query
+							$consulta_enviar = $ConexionPDO->prepare($consulta);
+							$consulta_enviar->execute();
+							$total_ejecutadas++;
+						}
+					catch( PDOException $ErrorPDO)
+						{
+							echo "<hr><b><font color=red>ATENCION: </font>Error ejecutando la consulta</b> $consulta <b>sobre la base de datos. DETALLES: ".$ErrorPDO->getMessage()."</b>";
+							$hay_error=1; //usada globalmente durante el proceso de instalacion
+						}
 				}
 
 			//Actualiza las llaves de paso de los usuarios insertados
