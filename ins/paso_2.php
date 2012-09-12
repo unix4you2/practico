@@ -223,6 +223,24 @@
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
+				N&uacute;mero de caracteres para captcha?
+			</font>
+		</td>
+		<td valign=top width="380">
+			<select name="CaracteresCaptcha" class="Combos" >
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4" selected>4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+			</select>
+			<a href="#" title="Longitud de la palabra" name="Indica el n&uacute;mero de s&iacute;mbolos utilizados en la palabra de seguridad que deben ingresar los usuarios para cada acceso al sistema."><img src="img/icn_10.gif" border=0></a>
+		</td>
+	</tr>
+	<tr>
+		<td valign=top align=right>
+			<font size=2 color=black>
 				Activar modo de depuraci&oacute;n?
 			</font>
 		</td>

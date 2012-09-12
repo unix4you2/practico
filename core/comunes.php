@@ -508,6 +508,9 @@
 				$consulta_formulario=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'");
 				$registro_formulario = $consulta_formulario->fetch();
 
+				//Si no encuentra formulario presenta error
+				if ($registro_formulario["id"]=="")	mensaje("ERROR EN TIEMPO DE EJECUCION","El objeto (formulario $formulario) asociado a esta solicitud no existe.  Consulte con su administrador del sistema.<br>","70%","icono_error.png","TextosEscritorio");
+
 				// En caso de recibir un campo base y valor base se hace la busqueda para recuperar la informacion
 				if ($campobase!="" && $valorbase!="")
 					{

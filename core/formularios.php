@@ -417,7 +417,6 @@
 		<!-- FIN DE MARCOS POPUP -->
 		</div>
 
-
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioBotones' class="FormularioPopUps">
 			<?php

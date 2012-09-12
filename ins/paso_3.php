@@ -30,7 +30,8 @@
 		\$LlaveDePaso='%s';
 		\$ModoDepuracion=%s;
 		\$ZonaHoraria='%s';
-	?>",$Servidor,$BaseDatos,$UsuarioBD,$PasswordBD,$MotorBD,$PuertoBD,$TablasCore,$TablasApp,$LlaveDePaso,$ModoDepuracion,$ZonaHoraria);
+		\$CaracteresCaptcha=%s;
+	?>",$Servidor,$BaseDatos,$UsuarioBD,$PasswordBD,$MotorBD,$PuertoBD,$TablasCore,$TablasApp,$LlaveDePaso,$ModoDepuracion,$ZonaHoraria,$CaracteresCaptcha);
 	// Escribe el archivo de configuracion
 	$archivo_config=fopen("../core/configuracion.php","w");
 	if($archivo_config==null)

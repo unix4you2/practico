@@ -11,8 +11,8 @@
 					}
 				return $clave;
 			}
-
-	$longitud=6; // A definir como parametro
+	include("configuracion.php");
+	$longitud=$CaracteresCaptcha; // A definir como parametro
 	$fuente=1;
 	$_SESSION['captcha_temporal'] = TextoAleatorio($longitud);
 	$captcha = imagecreatefromgif("../img/captcha.gif");

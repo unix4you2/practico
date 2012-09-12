@@ -414,7 +414,7 @@ if ($accion=="administrar_menu")
 													echo '<option value="'.$registro["id"].'">'.$registro["texto"].'</option>';
 												}
 										?>
-									</select>
+									</select> (beta)
 							</td>
 						</tr>
 						<tr>
@@ -427,7 +427,7 @@ if ($accion=="administrar_menu")
 																echo '<option value="'.$i.'">'.$i.'</option>';
 														}
 											?>
-									</select> (si aplica)
+									</select> (beta)
 							</td>
 						</tr>
 						<tr>
@@ -517,7 +517,7 @@ if ($accion=="administrar_menu")
 						<tr>
 							<td align="RIGHT"><b>Acci&oacute;n interna/comando/objeto</b></td><td width="10"></td>
 							<td><input class="CampoTexto" type="text" name="comando" size="30" maxlength="250" class="texto_01">
-								<a href="#" title="Indique uno de tres valores posibles as&iacute;" name="1) EL OBJETO dise&ntilde;ado en Pr&aacute;ctico y al cual se quiere enlazar la opci&oacute;n mediante el formato frm:XXX &oacute; inf:XXX donde debe reemplazar XXX por el identificador &uacute;nico del objeto que se obtiene despu&eacute;s de haber sido creado (ID del formulario o del informe),  2) LA ACCION INTERNA de Pr&aacute;ctico hacia la cual debe ser direccionado el usuario (normalmente se encuentra en la parte inferior de la pantalla), &oacute; 3) COMANDO PERSONALIZADO: La secuencia de comandos definida/programada por el usuario y existente en el archivo personalizadas.php"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+								<a href="#" title="Indique uno de tres valores posibles as&iacute;" name="1) EL OBJETO dise&ntilde;ado en Pr&aacute;ctico y al cual se quiere enlazar la opci&oacute;n mediante el formato frm:XXX:Par1:Par2:ParN &oacute; inf:XXX donde debe reemplazar XXX por el identificador &uacute;nico del objeto que se obtiene despu&eacute;s de haber sido creado (ID del formulario o del informe) y los parametros que se deseen enviar,  2) LA ACCION INTERNA de Pr&aacute;ctico hacia la cual debe ser direccionado el usuario (normalmente se encuentra en la parte inferior de la pantalla), &oacute; 3) COMANDO PERSONALIZADO: La secuencia de comandos definida/programada por el usuario y existente en el archivo personalizadas.php"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 						<tr>
@@ -557,34 +557,34 @@ if ($accion=="administrar_menu")
 		<font face="" size="3" color="Navy"><b>Secciones y comandos de men&uacute; definidos</b></font><br><br>
 		 <?php
 				echo '
-				<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
+				<table width="100%" border="0" cellspacing="3" align="CENTER" class="TextosVentana">
 					<tr>
 						<td align="left" bgcolor="#d6d6d6"><b>Id</b></td>
 						<td align="LEFT" bgcolor="#D6D6D6"><b>Nivel</b></td>
-						<td align="LEFT" bgcolor="#D6D6D6"><b>Ubicaci&oacute;n</b></td>
+						<td></td>
 						<td align="left" bgcolor="#d6d6d6"><b>Texto</b></td>
-						<td align="left" bgcolor="#d6d6d6"><b>Peso</b></td>
-						<td align="left" bgcolor="#d6d6d6"><b>Padre</b></td>
-						<td align="left" bgcolor="#d6d6d6"></td>
-						<td align="left" bgcolor="#d6d6d6"></td>
+						<td align="LEFT" bgcolor="#D6D6D6"><b>Comando</b></td>
+						<td></td>
+						<td></td>
 					</tr>	';
 
-				$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE padre=0");
+				$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE 1");
 				while($registro = $resultado->fetch())
 					{
+						$cadena_nivel="";
+						for ($i=1;$i<=$registro["nivel_usuario"];$i++)
+							$cadena_nivel.="&#9733;";
 						echo '<tr>
 								<td>'.$registro["id"].'</td>
-								<td>'.$registro["nivel_usuario"].'</td>
-								<td>'.$registro["columna"].'</td>
+								<td>'.$cadena_nivel.'</td>
+								<td><img src="img/'.$registro["imagen"].'" border=0 alt="" valign="absmiddle" align="absmiddle" width="14" height="13" ></td>
 								<td><strong>'.$registro["texto"].'</strong></td>
-								<td>'.$registro["peso"].'</td>
-								<td>'.$registro["padre"].'</td>
+								<td>'.$registro["comando"].'</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
 												<input type="hidden" name="accion" value="eliminar_menu">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
 												<input type="button" value="Eliminar" class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar el registro pueden quedar sin vincular algunas opciones del sistema.\nEst&aacute; seguro que desea continuar ?\',f'.$registro["id"].');">
-												&nbsp;&nbsp;
 										</form>
 								</td>
 								<td align="center">
@@ -592,45 +592,11 @@ if ($accion=="administrar_menu")
 												<input type="hidden" name="accion" value="detalles_menu">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
 												<input type="Submit" value="Detalles" class="Botones">
-												&nbsp;&nbsp;
 										</form>
 								</td>
 							</tr>';
-
-
-							// Imprime las opciones dentro de la seccion
-							$padre=$registro["id"];
-
-							$resultado_nivel1=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE padre=$padre ORDER BY peso");
-							while($registro_nivel1 = $resultado_nivel1->fetch())
-								{
-									echo '<tr>
-											<td>'.$registro_nivel1["id"].'</td>
-											<td>'.$registro_nivel1["nivel"].'</td>
-											<td></td>
-											<td>&nbsp;&nbsp;&nbsp;'.$registro_nivel1["texto"].'</td>
-											<td>'.$registro_nivel1["peso"].'</td>
-											<td>'.$registro_nivel1["padre"].'</td>
-											<td align="center">
-													<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro_nivel1["id"].'" id="f'.$registro_nivel1["id"].'">
-															<input type="hidden" name="accion" value="eliminar_menu">
-															<input type="hidden" name="id" value="'.$registro_nivel1["id"].'">
-															<input type="button" value="Eliminar" class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar el registro pueden quedar sin vincular algunas opciones del sistema.\nEst&aacute; seguro que desea continuar ?\',f'.$registro_nivel1["id"].');">
-															&nbsp;&nbsp;
-													</form>
-											</td>
-											<td align="center">
-													<form action="'.$ArchivoCORE.'" method="POST">
-															<input type="hidden" name="accion" value="detalles_menu">
-															<input type="hidden" name="id" value="'.$registro_nivel1["id"].'">
-															<input type="Submit" value="Detalles" class="Botones">
-															&nbsp;&nbsp;
-													</form>
-											</td>
-										</tr>';
-								}
 					}
-				echo '</table><br><br>';
+				echo '</table>';
 		 ?>
 		</div>
 
@@ -647,11 +613,14 @@ if ($accion=="administrar_menu")
 		{ 
 			// Carga las opciones del ESCRITORIO
 			echo '<table width="100%" border=0><tr><td valign=top>';
-			// Si el usuario es el administrador muestra todas las opciones
-			if ($Login_usuario=="admin")
-				$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE posible_escritorio");
-			//else
-			//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel>0";
+			// Si el usuario es diferente al administrador agrega condiciones al query
+			if ($Login_usuario!="admin")
+				{
+					$Complemento_tablas=",".$TablasCore."usuario_menu";
+					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$Login_usuario'";  // AND nivel>0
+				}
+			$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".$Complemento_tablas." WHERE posible_escritorio ".$Complemento_condicion);
+
 			// Imprime las opciones con sus formularios
 			while($registro = $resultado->fetch())
 				{
@@ -678,14 +647,16 @@ if ($accion=="administrar_menu")
 				}
 			echo '</td></tr></table>';
 
-
 			// Carga las opciones del ACORDEON
 			echo '<div align="center">';
-			// Si el usuario es el administrador muestra todas las opciones
-			if ($Login_usuario=="admin")
-				$resultado=ejecutar_sql("SELECT COUNT(*) as conteo,seccion FROM ".$TablasCore."menu WHERE posible_centro GROUP BY seccion ORDER BY seccion");
-			//else
-			//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel>0";
+			// Si el usuario es diferente al administrador agrega condiciones al query
+			if ($Login_usuario!="admin")
+				{
+					$Complemento_tablas=",".$TablasCore."usuario_menu";
+					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$Login_usuario'";  // AND nivel>0
+				}
+			$resultado=ejecutar_sql("SELECT COUNT(*) as conteo,seccion FROM ".$TablasCore."menu ".$Complemento_tablas." WHERE posible_centro ".$Complemento_condicion." GROUP BY seccion ORDER BY seccion");
+
 			// Imprime las secciones encontradas para el usuario
 			while($registro = $resultado->fetch())
 				{
@@ -694,11 +665,15 @@ if ($accion=="administrar_menu")
 					$conteo_opciones=$registro["conteo"];
 					abrir_ventana($seccion_menu_activa.' ('.$conteo_opciones.')','fondo_ventanas2.gif','85%');
 					// Busca las opciones dentro de la seccion
-					// Si el usuario es el administrador muestra todas las opciones
-					if ($Login_usuario=="admin")
-						$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE posible_centro AND seccion='".$seccion_menu_activa."' ORDER BY peso ");
-					//else
-					//	$consulta = "SELECT menu.* FROM menu,usuario_menu WHERE posible_escritorio='S' AND usuario_menu.menu=menu.id AND usuario_menu.usuario='$Login_usuario' AND nivel>0";
+
+					// Si el usuario es diferente al administrador agrega condiciones al query
+					if ($Login_usuario!="admin")
+						{
+							$Complemento_tablas=",".$TablasCore."usuario_menu";
+							$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$Login_usuario'";  // AND nivel>0
+						}
+					$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".$Complemento_tablas." WHERE posible_centro AND seccion='".$seccion_menu_activa."' ".$Complemento_condicion." GROUP BY seccion ORDER BY peso");
+
 					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
 						{
 							// Esta seccion solamente opera con opciones que tienen imagen definida
@@ -727,4 +702,3 @@ if ($accion=="administrar_menu")
 			echo '</div>';
 	} 
 ?>
-

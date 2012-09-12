@@ -76,7 +76,7 @@
 								$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$Login_usuario'";  // AND nivel>0
 							}
 						$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".$Complemento_tablas." WHERE posible_arriba ".$Complemento_condicion);
-					
+
 						while($registro = $resultado->fetch())
 							{
 								// Imprime la imagen asociada si esta definida
