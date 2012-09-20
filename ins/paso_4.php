@@ -12,11 +12,13 @@
 <?php
 	// Ejecuta los scripts de creacion de la BD si se requiere
 	$total_ejecutadas=0;
+
 	if ($aplicar_script_basedatos)
 		{
-			include("../core/configuracion.php");
-			include("../core/conexiones.php");
-			include("../core/comunes.php");
+
+			include_once("../core/configuracion.php");
+			include_once("../core/conexiones.php");
+			include_once("../core/comunes.php");
 
 			//Abre el archivo con los queries
 			$RutaScriptSQL="sql/practico.sql";

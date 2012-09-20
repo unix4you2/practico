@@ -1,7 +1,7 @@
 <html>
 <head>
 	<title>
-		<?php echo $NombreRAD; ?> <?php include("../inc/version_actual.txt"); ?>
+		<?php echo $NombreRAD; ?> <?php include("inc/version_actual.txt"); ?>
   	</title>
 
 	<script type="text/javascript" src="js/tooltips.js"></script>

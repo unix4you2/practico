@@ -7,6 +7,10 @@
 	$hora_operacion_puntos=date("H:i");
 	$direccion_auditoria=$_SERVER ['REMOTE_ADDR'];
 
+	// Quitar comentario si se desea modo depuracion en proceso de instalacion
+	ini_set("display_errors", 1);
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
 	// Recupera variables recibidas para su uso como globales (como si tuviese register_globals=on en php.ini)
 	if (!ini_get('register_globals'))
 	{

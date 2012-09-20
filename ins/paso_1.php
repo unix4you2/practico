@@ -1,28 +1,42 @@
 <div align=center>
+	
+
 <table width="700" cellspacing=10>
 	<tr>
-		<td width=100><img src="../img/practico_login.png" border=0 ALT="Logo Practico" width="116" height="80"></td>
-		<td valign=top><font size=2 color=black><br><b>
-			[Chequeo de directorios]</b><br><br>
-			Los siguientes archivos y directorios deben contar con permisos de escritura para que el aplicativo	pueda operar correctamente:
-		</font></td>
+		<td width=100 valign=top><img src="../img/practico_login.png" border=0 ALT="Logo Practico" width="116" height="80"></td>
+		<td valign=top>
+			<font size=2 color=black><br>
+			<b>[Chequeo configuraci&oacute;n de preprocesador]</b><br>
+			Una vista de su configuraci&oacute;n de PHP se encuentra disponible en <b><a target="_blank" href="paso_i.php">[este enlace]</a></b>.
+				<table width="100%" cellspacing=10><tr><td valign=top><font size=2 color=black>
+					<div align=left>
+						<u>Debe cumplir con lo siguiente:</u>
+						<li>Extensi&oacute;n PDO activada
+						<li>Driver PDO para el tipo de base de datos deseada
+						<li>Extensi&oacute;n GD para manipulaci&oacute;n de gr&aacute;ficos
+					</div>
+				</font></td></tr></table>
+
+			
+			<hr><b>[Chequeo de directorios]</b><br>
+				Los siguientes archivos y directorios deben contar con permisos de escritura para que el aplicativo	pueda operar correctamente:
+			</font>
+				<table width="100%" cellspacing=10><tr><td valign=top><font size=2 color=black>
+					<div align=left>
+						<?php
+							$hay_error=0;
+							//informar_prueba_escritura("..");
+							informar_prueba_escritura("../bkp",1);
+							informar_prueba_escritura("../core",1);
+							//informar_prueba_escritura("../core/configuracion.php",2);
+							informar_prueba_escritura("../tmp",1);
+						?>
+					</div>
+				</font></td></tr></table>
+		</td>
 	</tr>
 </table>
-<hr>
-<table width="700" cellspacing=10><tr><td valign=top><font size=2 color=black>
 
-	<div align=left>
-		<?php
-			$hay_error=0;
-			//informar_prueba_escritura("..");
-			informar_prueba_escritura("../bkp",1);
-			informar_prueba_escritura("../core",1);
-			//informar_prueba_escritura("../core/configuracion.php",2);
-			informar_prueba_escritura("../tmp",1);
-		?>
-	</div>
-
-</font></td></tr></table>
 <?php
 	if ($hay_error)
 		{

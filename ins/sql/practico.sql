@@ -27,6 +27,7 @@ CREATE TABLE Core_usuario (
   llave_paso varchar(50) NOT NULL default 'd41d8cd98f00b204e9800998ecf8427e',
   PRIMARY KEY  (login)
 );
+
 INSERT INTO Core_usuario VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','Super usuario','Administrador del sistema',1,5,'unix4you2@gmail.com','20110601','d41d8cd98f00b204e9800998ecf8427e');
 
 UPDATE Core_usuario SET ultimo_acceso=CURDATE();
@@ -75,6 +76,7 @@ INSERT INTO Core_menu VALUES (0,'Tablas de datos',0,0,'',1,'Interno','administra
 INSERT INTO Core_menu VALUES (0,'Formularios',0,0,'',1,'Interno','administrar_formularios' ,5,3,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','icono_form.png');
 INSERT INTO Core_menu VALUES (0,'Cambio de clave',0,0,'',1,'Interno','cambiar_clave' ,5,3,1,0,0,'Opciones generales de usuario','icono_llave.png');
 INSERT INTO Core_menu VALUES (0,'Actualizaciones',0,0,'',1,'Interno','actualizar_practico' ,5,3,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','bajar.png');
+INSERT INTO Core_menu VALUES (0,'Informes',0,0,'',1,'Interno','administrar_informes' ,5,3,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','compfile.png');
 
 DROP TABLE IF EXISTS Core_formulario;
 CREATE TABLE Core_formulario (
@@ -126,24 +128,28 @@ CREATE TABLE Core_formulario_boton (
   PRIMARY KEY  (id)
 );
 
-DROP TABLE IF EXISTS Core_informes;
-CREATE TABLE Core_informes (
+DROP TABLE IF EXISTS Core_informe;
+CREATE TABLE Core_informe (
   id int(10) AUTO_INCREMENT,
-  acceso_directo varchar(250),
   titulo varchar(250),
   descripcion varchar(250),
-  categoria varchar(250),
-  usuarios text,
+  categoria varchar(250),  # define la seccion donde va por agrupacion en la seccion de informes
   campos text,
-  alias text,
   tablas varchar(250),
-  condiciones text,
+  condiciones_adicionales text,
   agrupamiento varchar(250),
   ordenamiento varchar(250),
-  filtro_fecha varchar(50),
-  filtro_cliente varchar(50),
-  filtro_texto varchar(50),
-  signo_texto varchar(10),
+  nivel_usuario int(10) default '0', # -1=No aplica, sino Rol minimo de usuario que accesan la opcion 
   PRIMARY KEY  (id)
+);
+
+DROP TABLE IF EXISTS Core_informe_condiciones;
+CREATE TABLE Core_informe_condiciones (
+  id int(10) AUTO_INCREMENT,
+  informe int(10),
+  valor_izq varchar(250),
+  valor_der varchar(250),
+  signo varchar(250),
+  PRIMARY KEY (id)
 );
 

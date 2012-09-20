@@ -1,17 +1,17 @@
 <?php
-		$ServidorBD='192.168.1.23';
-		$BaseDatos='prac';
-		$UsuarioBD='postgres';
-		$PasswordBD='postgres';
-		$MotorBD='pg';
-		$PuertoBD='5432';
+		$ServidorBD='127.0.0.1';
+		$BaseDatos='practico';
+		$UsuarioBD='root';
+		$PasswordBD='';
+		$MotorBD='mysql';
+		$PuertoBD='';
 		$NombreRAD='Pr&aacute;ctico';
 		$PlantillaActiva='nomo';
 		$ArchivoCORE='';
 		$TablasCore='Core_';
 		$TablasApp='App_';
-		$LlaveDePaso='8OFE5JXRE9';
-		$ModoDepuracion=0;
+		$LlaveDePaso='NA69PNHAT6';
+		$ModoDepuracion=1;
 		$ZonaHoraria='America/Bogota';
-		$CaracteresCaptcha=4;
+		$CaracteresCaptcha=1;
 	?>
