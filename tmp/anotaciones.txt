@@ -1,3 +1,9 @@
+condiciones manuales
+tablas manuales
+campos manuales
+
+
+
 comillas dobles indican que las variables deben ser interpretadas. comillas sencillas no.
 
 
