@@ -60,6 +60,41 @@ if ($accion=="actualizar_informe")
 	}
 
 
+
+/* ################################################################## */
+/* ################################################################## */
+
+
+	if ($accion=="guardar_tabla_informe")
+		{
+			$mensaje_error="";
+			if ($titulo=="") $mensaje_error="Debe indicar un t&iacute;tulo o etiqueta v&aacute;lida para el campo.";
+			if ($campo=="") $mensaje_error="Debe indicar un campo v&aacute;lido para vincular con la tabla de datos asociada al formulario.";
+			if ($mensaje_error=="")
+				{
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_campo VALUES (0, '$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual')");
+					// Lleva a auditoria
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea campo $id para formulario $formulario','$fecha_operacion','$hora_operacion')");
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
+						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="popup_activo" value="FormularioCampos">
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="editar_formulario">
+						<input type="Hidden" name="error_titulo" value="Problema en los datos ingresados">
+						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+		}
+
+
 /* ################################################################## */
 /* ################################################################## */
 
@@ -71,10 +106,64 @@ if ($accion=="editar_informe")
 		$registro_informe = $resultado_informe->fetch();
   ?>
 
+		<!-- INICIO DE MARCOS POPUP -->
+
+		<div id='FormularioTablas' class="FormularioPopUps">
+				<?php
+				abrir_ventana('Agregar una nueva tabla al informe','#BDB9B9',''); 
+				?>
+				<form name="datosform" id="datosform" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+				<input type="Hidden" name="accion" value="guardar_tabla_informe">
+				<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
+				<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">
+				<div align=center>
+
+					<table class="TextosVentana">
+						<tr>
+							<td align="right">Tabla de datos:</td>
+							<td>
+								<select  name="tabla_datos" class="Combos" >
+									<option value="">Seleccione una</option>
+									 <?php
+											$resultado=consultar_tablas();
+											while ($registro = $resultado->fetch())
+												{
+													// Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
+													if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
+														echo '<option value="'.$registro[0].'" >'.str_replace($TablasApp,'',$registro[0]).'</option>';
+												}		
+									?>
+								</select><a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								</form>
+								
+							</td>
+							<td>
+								<input type="Button"  class="Botones" value="Agregar tabla" onClick="document.datosform.submit()">
+							</td>
+						</tr>
+					</table>
+			<?php
+				abrir_barra_estado();
+					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioTablas\')">';
+				cerrar_barra_estado();
+			cerrar_ventana();
+			?>
+		<!-- FIN DE MARCOS POPUP -->
+		</div>
+
+
+
+
+
+
 		<div id='FondoPopUps' class="FondoOscuroPopUps"></div>
 		<?php
 			// Habilita el popup activo
-			if (@$popup_activo=="FormularioCampos")	echo '<script type="text/javascript">	AbrirPopUp("FormularioCampos"); </script>';
+			if (@$popup_activo=="FormularioTablas")	echo '<script type="text/javascript">	AbrirPopUp("FormularioTablas"); </script>';
 			//if (@$popup_activo=="FormularioBotones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioBotones"); </script>';
 			//if (@$popup_activo=="FormularioDiseno")	echo '<script type="text/javascript">	AbrirPopUp("FormularioDiseno"); </script>';
 			//if (@$popup_activo=="FormularioAcciones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioAcciones"); </script>';
@@ -85,6 +174,13 @@ if ($accion=="editar_informe")
 				abrir_ventana('Barra de herramientas','#BDB9B9',''); 
 			?>
 				<div align=center>
+				Tablas de datos origen<br>
+				<a href='javascript:AbrirPopUp("FormularioTablas");' title="Agregar tabla de datos al informe" name=" "><img border='0' src='img/icono_tabla.png'/></a>
+				<hr>
+
+
+
+
 				Campos de datos<br>
 				<a href='javascript:AbrirPopUp("FormularioCampos");' title="Agregar campo de datos" name=" "><img border='0' src='img/icono_campo.png'/></a>
 				&nbsp;&nbsp;
