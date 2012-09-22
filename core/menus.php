@@ -14,6 +14,7 @@
 
 <?php
 /* ################################################################## */
+/* ################################################################## */
 /*
 	Function: actualizar_menu
 	Cambia el registro asociado a un menu de la aplicacion
@@ -41,6 +42,10 @@ if ($accion=="actualizar_menu")
 		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Actualiza menu item $texto c&oacute;digo $id','$fecha_operacion','$hora_operacion')");
 		echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 	}
+
+
+
+/* ################################################################## */
 /* ################################################################## */
 /*
 	Function: detalles_menu
@@ -293,8 +298,10 @@ if ($accion=="detalles_menu")
  <?php
 		cerrar_ventana();
 	}
- ?>
-<?php
+
+
+
+/* ################################################################## */
 /* ################################################################## */
 if ($accion=="eliminar_menu")
 	{
@@ -320,6 +327,10 @@ if ($accion=="eliminar_menu")
 		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina en menu $id','$fecha_operacion','$hora_operacion')");
 		echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 	}
+
+
+
+/* ################################################################## */
 /* ################################################################## */
 	if ($accion=="guardar_menu")
 		{
@@ -346,6 +357,10 @@ if ($accion=="eliminar_menu")
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 		}
+
+
+
+/* ################################################################## */
 /* ################################################################## */
 if ($accion=="administrar_menu")
 	{
@@ -604,9 +619,9 @@ if ($accion=="administrar_menu")
 		 <?php
 		 				cerrar_ventana();
 		 		}
-		 ?>
 
-<?php
+
+/* ################################################################## */
 /* ################################################################## */
 	// Si la accion es presentar el menu de inicio o escritorio
 	if ($accion=="Ver_menu" && $Sesion_abierta)

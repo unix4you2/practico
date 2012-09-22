@@ -4,8 +4,6 @@
 				Ubicacion *[/core/sesion.php]*.  Archivo de funciones relacionadas con la administracion de sesiones en el sistema.
 			*/
 ?>
-
-
 <?php
 			/*
 				Section: Administracion de permisos
@@ -15,7 +13,8 @@
 
 
 <?php
-/* ################################################################# */
+/* ################################################################## */
+/* ################################################################## */
 	if ($accion=="Iniciar_login") 
 		{
 			//Verifica el captcha ingresado por el usuario
@@ -83,10 +82,11 @@
 					echo '<form name="Acceso" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="Ver_menu"></form><script type="" language="JavaScript">	document.Acceso.submit();  </script>';
 				}
 		}
-?>
 
-<?php
-/* ################################################################# */
+
+
+/* ################################################################## */
+/* ################################################################## */
 	if ($accion=="Terminar_sesion")
 	{
 		// Lleva a auditoria
@@ -95,10 +95,11 @@
 		session_destroy();
 		echo '<form name="Redireccion" method="POST"><input type="Hidden" name="accion" value="Mensaje_cierre_sesion"></form><script type="" language="JavaScript">	document.Redireccion.submit();  </script>';
 	}
-?>
 
-<?php
-/* ################################################################# */
+
+
+/* ################################################################## */
+/* ################################################################## */
 	if ($accion=="Mensaje_cierre_sesion")
 	{
 		@session_destroy();

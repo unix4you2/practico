@@ -4,14 +4,12 @@
 				Ubicacion *[/core/usuarios.php]*.  Archivo de funciones relacionadas con la administracion de usuarios y permisos del sistema.
 			*/
 ?>
-
 <?php
 			/*
 				Section: Administracion de permisos
 				Funciones asociadas a la gestion de permisos, roles y demas posibilidades de acceso que puedan tener los usuarios en el aplicativo.
 			*/
 ?>
-
 <script language="Javascript">
 	function buscar_texto_en_plantilla(texto,plantilla){
 	   for(i=0; i<texto.length; i++){
@@ -75,6 +73,7 @@
 
 <?php
 /* ################################################################## */
+/* ################################################################## */
 /*
 	Function: cambiar_clave
 	Presenta formulario para actualizar la clave de un usuario
@@ -130,6 +129,10 @@ if ($accion=="cambiar_clave")
 		</div>
 <?php
 	}
+
+
+
+/* ################################################################## */
 /* ################################################################## */
 /*
 	Function: actualizar_clave
@@ -177,6 +180,10 @@ if ($accion=="actualizar_clave")
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 			}
 	}
+	
+	
+	
+/* ################################################################## */
 /* ################################################################## */
 /*
 	Function: eliminar_permiso
@@ -203,9 +210,11 @@ if ($accion=="eliminar_permiso")
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="permisos_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
-?>
-<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<?php
+
+
+
+/* ################################################################## */
+/* ################################################################## */
 	if ($accion=="agregar_permiso")
 		{
 			$mensaje_error="";
@@ -235,9 +244,12 @@ if ($accion=="eliminar_permiso")
 							document.cancelar.submit();  </script>';
 				}
 		}
-?>
-<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-		<?php if ($accion=="permisos_usuario")
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+if ($accion=="permisos_usuario")
 				{
 						echo '<div align="center"><br>';
 						abrir_ventana('Administraci&oacute;n de permisos del usuario','f2f2f2','60%');
@@ -318,17 +330,17 @@ if ($accion=="eliminar_permiso")
 		 <?php
 		 				cerrar_ventana();
 		 		}
-		 ?>
 
-<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<?php
+
+
+/* ################################################################## */
+/* ################################################################## */
 			/*
 				Section: Operaciones basicas de administracion
 				Funciones asociadas al mantenimiento de la informacion de usuarios: Adicion, edicio, eliminacion, cambios de estado.
 			*/
-?>	 
-<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<?php
+/* ################################################################## */
+/* ################################################################## */
 	if ($accion=="eliminar_usuario")
 		{
 			/*
@@ -358,9 +370,11 @@ if ($accion=="eliminar_permiso")
 			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina el usuario $uid_especifico','$fecha_operacion','$hora_operacion')");
 			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 		}
-?>
-<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<?php
+
+
+
+/* ################################################################## */
+/* ################################################################## */
 	if ($accion=="cambiar_estado_usuario")
 		{
 			/*
@@ -393,10 +407,11 @@ if ($accion=="eliminar_permiso")
 			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Cambia estado del usuario $uid_especifico y actualiza ultimo acceso a $fecha_operacion','$fecha_operacion','$hora_operacion')");
 			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 		}
-?>
 
-<!--   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<?php
+
+
+/* ################################################################## */
+/* ################################################################## */
 	if ($accion=="guardar_usuario")
 		{
 			/*
@@ -458,10 +473,12 @@ if ($accion=="eliminar_permiso")
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 		}
-?>
 
-<!--   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<?php if ($accion=="agregar_usuario")
+
+
+/* ################################################################## */
+/* ################################################################## */
+if ($accion=="agregar_usuario")
 	{
 			/*
 				Function: agregar_usuario
@@ -567,15 +584,16 @@ if ($accion=="eliminar_permiso")
 		 		}
 		 ?>
 
-<!--   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <?php
+/* ################################################################## */
+/* ################################################################## */
 			/*
 				Section: Informes
 				Funciones que presentan informacion de los usuarios o permisos como listados.
 			*/
-?>
-<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-		<?php if ($accion=="listar_usuarios")
+/* ################################################################## */
+/* ################################################################## */
+if ($accion=="listar_usuarios")
 				{
 			/*
 				Function: listar_usuarios

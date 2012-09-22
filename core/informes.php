@@ -4,9 +4,6 @@
 				Ubicacion *[/core/informes.php]*.  Archivo de funciones relacionadas con la administracion de informes de la aplicacion.
 			*/
 ?>
-
-
-<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <?php
 			/*
 				Section: Operaciones basicas de administracion
@@ -15,10 +12,64 @@
 ?>
 
 
-<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<?php if ($accion=="editar_informe")
+<?php 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: actualizar_informe
+	Cambia el registro asociado a un informe de la aplicacion
+
+	Variables de entrada:
+
+		id - ID del informe que se desea cambiarse
+
+		(start code)
+			UPDATE ".$TablasCore."informe SET ... WHERE id=$id
+		(end)
+
+	Salida:
+		Registro de informe actualizado
+
+	Ver tambien:
+
+		<detalles_informe>
+*/
+if ($accion=="actualizar_informe")
 	{
-		  ?>
+		$mensaje_error="";
+		if ($titulo=="") $mensaje_error.="Debe indicar un t&iacute;tulo v&aacute;lido para el informe.<br>";
+		if ($categoria=="") $mensaje_error.="Debe indicar un nombre v&aacute;lido para la categor&iacute;a asociada al informe.<br>";
+		if ($mensaje_error=="")
+			{
+				// Actualiza los datos
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET titulo='$titulo',descripcion='$descripcion',categoria='$categoria',nivel_usuario='$nivel_usuario' WHERE id='$id'");
+				// Lleva a auditoria
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Actualiza informe $id','$fecha_operacion','$hora_operacion')");
+				echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+			}
+		else
+			{
+				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="accion" value="editar_informe">
+					<input type="Hidden" name="informe" value="'.$id.'">
+					<input type="Hidden" name="error_titulo" value="Problema en los datos ingresados">
+					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+					</form>
+					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+			}
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+
+
+if ($accion=="editar_informe")
+	{
+		// Busca datos del informe
+		$resultado_informe=ejecutar_sql("SELECT * FROM ".$TablasCore."informe WHERE id=$informe");
+		$registro_informe = $resultado_informe->fetch();
+  ?>
 
 		<div id='FondoPopUps' class="FondoOscuroPopUps"></div>
 		<?php
@@ -53,66 +104,136 @@
 			
 		<?php
 		echo '</td><td valign=top align=center>';  // Inicia segunda columna del diseñador
-			cargar_formulario($formulario);
+		?>
+
+
+			<?php abrir_ventana('Editar par&aacute;metros generales del informe','f2f2f2',''); ?>
+			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<input type="Hidden" name="accion" value="actualizar_informe">
+			<input type="Hidden" name="id" value="<?php echo $registro_informe['id']; ?>">
+
+				<table class="TextosVentana">
+					<tr>
+						<td align="right">T&iacute;tulo del informe:</td>
+						<td><input type="text" name="titulo" value="<?php echo $registro_informe['titulo']; ?>" size="20" class="CampoTexto">
+							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
+							<a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; en la parte superior del informe generado"><img src="img/icn_10.gif" border=0></a>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">Descripci&oacute;n</td>
+						<td><input type="text" name="descripcion" size="20" value="<?php echo $registro_informe['descripcion']; ?>" class="CampoTexto"><a href="#" title="Ayuda r&aacute;pida:" name="Texto descriptivo del informe.  No aparece en su generaci&oacute;n pero es usado para orientar al usuario en su selecci&oacute;n"><img src="img/icn_10.gif" border=0></a>	</td>
+					</tr>
+					<tr>
+						<td align="right">Categor&iacute;a</td>
+						<td><input type="text" name="categoria" value="<?php echo $registro_informe['categoria']; ?>" size="20" class="CampoTexto">
+							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
+							<a href="#" title="Ayuda r&aacute;pida:" name="Cuando el usuario tiene acceso al panel de informes del sistema estos son clasificados por categor&iacute;as.  Ingrese aqui un nombre de categor&iacute;a bajo el cual desee presentar este informe a los usuarios."><img src="img/icn_10.gif" border=0></a>
+						</td>
+					</tr>
+					<tr>
+						<td align="RIGHT" valign="TOP"><strong>Nivel de usuario</strong></td>
+						<td>
+							<select  name="nivel_usuario" id="nivel_usuario" class="Combos">
+								<option value="-1" <?php if ($registro_informe["nivel_usuario"]=="-1") echo 'selected'; ?> >Todos los usuarios</option>
+								<option value="1"  <?php if ($registro_informe["nivel_usuario"]=="1") echo 'selected'; ?> >&#9733;</option>
+								<option value="2"  <?php if ($registro_informe["nivel_usuario"]=="2") echo 'selected'; ?> >&#9733;&#9733;</option>
+								<option value="3"  <?php if ($registro_informe["nivel_usuario"]=="3") echo 'selected'; ?> >&#9733;&#9733;&#9733;</option>
+								<option value="4"  <?php if ($registro_informe["nivel_usuario"]=="4") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;</option>
+								<option value="5"  <?php if ($registro_informe["nivel_usuario"]=="5") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
+							</select>
+							<a href="#" title="Quienes pueden ver este informe?" name="Indique el perfil de usuario que se debe tener para ver este informe como disponible."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">Im&aacute;gen de ayuda</td>
+						<td>
+							<select  name="ayuda_imagen" class="Combos" >
+								<option value="">Deshabilitado</option>
+							</select>
+						</td>
+					</tr>
+
+					<tr>
+						<td>
+							</form>
+						</td>
+						<td>
+							<input type="Button"  class="Botones" value="Actualizar informe" onClick="document.datos.submit()">
+						</td>
+					</tr>
+				</table>
+			<?php
+				cerrar_ventana();
+			?>
+
+	<?php
 		echo '</td></tr></table>'; // Cierra la tabla de dos columnas
 	}
-?>
-<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<?php
-	if ($accion=="eliminar_informe")
-		{
-			$mensaje_error="";
-			if ($mensaje_error=="")
-				{
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe WHERE id='$informe'");
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_tablas WHERE informe='$informe'");
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE informe='$informe'");
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe='$informe'");
-					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina informe $id','$fecha_operacion','$hora_operacion')");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_informes"></form>
-							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-				}
-			else
-				{
-					mensaje('<blink>Error eliminando informe!</blink>','El informe especificado no se puede eliminar.','60%','icono_error.png','TextosEscritorio');
-					echo '<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="accion" value="administrar_informes"></form>
-						<br /><input type="Button" onclick="document.cancelar.submit()" name="" value="Cerrar" class="Botones">';
-				}
-		}
-?>
-<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<?php
-	if ($accion=="guardar_informe")
-		{
-			$mensaje_error="";
-			if ($titulo=="") $mensaje_error.="Debe indicar un t&iacute;tulo v&aacute;lido para el informe.<br>";
-			if ($categoria=="") $mensaje_error.="Debe indicar un nombre v&aacute;lido para la categor&iacute;a asociada al informe.<br>";
-			if ($mensaje_error=="")
-				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe VALUES (0, '$titulo','$descripcion','$categoria','$agrupamiento','$ordenamiento','$nivel_usuario')");
-					$id=$ConexionPDO->lastInsertId();
-					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea informe $id','$fecha_operacion','$hora_operacion')");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="accion" value="editar_informe">
-					<input type="Hidden" name="informe" value="'.$id.'"></form>
-								<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-				}
-			else
-				{
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="administrar_informes">
-						<input type="Hidden" name="error_titulo" value="Problema en los datos ingresados">
-						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
-						</form>
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+if ($accion=="eliminar_informe")
+	{
+		$mensaje_error="";
+		if ($mensaje_error=="")
+			{
+				ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe WHERE id='$informe'");
+				ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
+				ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_tablas WHERE informe='$informe'");
+				ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE informe='$informe'");
+				ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe='$informe'");
+				// Lleva a auditoria
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina informe $id','$fecha_operacion','$hora_operacion')");
+				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_informes"></form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-				}
-		}
-?>
-<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<?php if ($accion=="administrar_informes")
+			}
+		else
+			{
+				mensaje('<blink>Error eliminando informe!</blink>','El informe especificado no se puede eliminar.','60%','icono_error.png','TextosEscritorio');
+				echo '<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="accion" value="administrar_informes"></form>
+					<br /><input type="Button" onclick="document.cancelar.submit()" name="" value="Cerrar" class="Botones">';
+			}
+	}
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+if ($accion=="guardar_informe")
+	{
+		$mensaje_error="";
+		if ($titulo=="") $mensaje_error.="Debe indicar un t&iacute;tulo v&aacute;lido para el informe.<br>";
+		if ($categoria=="") $mensaje_error.="Debe indicar un nombre v&aacute;lido para la categor&iacute;a asociada al informe.<br>";
+		if ($mensaje_error=="")
+			{
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe VALUES (0, '$titulo','$descripcion','$categoria','$agrupamiento','$ordenamiento','$nivel_usuario')");
+				$id=$ConexionPDO->lastInsertId();
+				// Lleva a auditoria
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea informe $id','$fecha_operacion','$hora_operacion')");
+				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+				<input type="Hidden" name="accion" value="editar_informe">
+				<input type="Hidden" name="informe" value="'.$id.'"></form>
+							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+			}
+		else
+			{
+				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="accion" value="administrar_informes">
+					<input type="Hidden" name="error_titulo" value="Problema en los datos ingresados">
+					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+					</form>
+					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+			}
+	}
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+if ($accion=="administrar_informes")
 	{
 		 ?>
 
@@ -137,7 +258,10 @@
 					</tr>
 					<tr>
 						<td align="right">Categor&iacute;a</td>
-						<td><input type="text" name="categoria" size="20" class="CampoTexto"><a href="#" title="Ayuda r&aacute;pida:" name="Cuando el usuario tiene acceso al panel de informes del sistema estos son clasificados por categor&iacute;as.  Ingrese aqui un nombre de categor&iacute;a bajo el cual desee presentar este informe a los usuarios."><img src="img/icn_10.gif" border=0></a>	</td>
+						<td><input type="text" name="categoria" size="20" class="CampoTexto">
+							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
+							<a href="#" title="Ayuda r&aacute;pida:" name="Cuando el usuario tiene acceso al panel de informes del sistema estos son clasificados por categor&iacute;as.  Ingrese aqui un nombre de categor&iacute;a bajo el cual desee presentar este informe a los usuarios."><img src="img/icn_10.gif" border=0></a>
+						</td>
 					</tr>
 					<tr>
 						<td align="RIGHT" valign="TOP"><strong>Nivel de usuario</strong></td>
