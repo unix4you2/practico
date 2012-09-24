@@ -60,34 +60,157 @@ if ($accion=="actualizar_informe")
 	}
 
 
+/* ################################################################## */
+/* ################################################################## */
+if ($accion=="eliminar_informe_condicion")
+	{
+		$mensaje_error="";
+		if ($mensaje_error=="")
+			{
+				ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE id='$condicion'");
+				// Lleva a auditoria
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina condicion $campo del informe $informe','$fecha_operacion','$hora_operacion')");
+				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="accion" value="editar_informe">
+					<input type="Hidden" name="informe" value="'.$informe.'">
+					<input type="Hidden" name="popup_activo" value="FormularioCondiciones">
+					</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+			}
+	}
+
 
 /* ################################################################## */
 /* ################################################################## */
 
 
-	if ($accion=="guardar_tabla_informe")
+	if ($accion=="guardar_informe_condicion")
 		{
 			$mensaje_error="";
-			if ($titulo=="") $mensaje_error="Debe indicar un t&iacute;tulo o etiqueta v&aacute;lida para el campo.";
-			if ($campo=="") $mensaje_error="Debe indicar un campo v&aacute;lido para vincular con la tabla de datos asociada al formulario.";
+			$valor_i=$valor_izq.$valor_izq_manual;
+			$valor_d=$valor_der.$valor_der_manual;
+			$valor_o=$operador.$operador_manual;
+			if ($valor_i=="" && $valor_d=="") $mensaje_error="La condici&oacute;n especificada no es v&aacute;lida o carece de al menos uno de sus lados de comparaci&oacute;n.";
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_campo VALUES (0, '$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_condiciones VALUES (0, '$informe','$valor_i','$valor_o','$valor_d')");
 					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea campo $id para formulario $formulario','$fecha_operacion','$hora_operacion')");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
-						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="formulario" value="'.$formulario.'">
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Agrega condicion al informe $informe','$fecha_operacion','$hora_operacion')");
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_informe">
+						<input type="Hidden" name="informe" value="'.$informe.'">
+						<input type="Hidden" name="popup_activo" value="FormularioCondiciones">
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="editar_informe">
+						<input type="Hidden" name="error_titulo" value="Problema en los datos ingresados">
+						<input type="Hidden" name="informe" value="'.$informe.'">
+						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+if ($accion=="eliminar_informe_campo")
+	{
+		$mensaje_error="";
+		if ($mensaje_error=="")
+			{
+				ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_campos WHERE id='$campo'");
+				// Lleva a auditoria
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina campo $campo del informe $informe','$fecha_operacion','$hora_operacion')");
+				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="accion" value="editar_informe">
+					<input type="Hidden" name="informe" value="'.$informe.'">
+					<input type="Hidden" name="popup_activo" value="FormularioCampos">
+					</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+			}
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+
+
+	if ($accion=="guardar_informe_campo")
+		{
+			$mensaje_error="";
+			if ($campo_manual.$campo_datos=="") $mensaje_error="Debe indicar un nombre de campo v&aacute;lida para el origen de datos del informe.";
+			if ($mensaje_error=="")
+				{
+					$campo_definitivo=$campo_manual.$campo_datos;
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_campos VALUES (0, '$informe','$campo_definitivo','$alias_manual')");
+					// Lleva a auditoria
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Agrega campo $campo_definitivo al informe $informe','$fecha_operacion','$hora_operacion')");
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_informe">
+						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="popup_activo" value="FormularioCampos">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="editar_formulario">
+						<input type="Hidden" name="accion" value="editar_informe">
 						<input type="Hidden" name="error_titulo" value="Problema en los datos ingresados">
-						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="informe" value="'.$informe.'">
+						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+if ($accion=="eliminar_informe_tabla")
+	{
+		$mensaje_error="";
+		if ($mensaje_error=="")
+			{
+				ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_tablas WHERE id='$tabla'");
+				// Lleva a auditoria
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina tabla $tabla del informe $informe','$fecha_operacion','$hora_operacion')");
+				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="accion" value="editar_informe">
+					<input type="Hidden" name="informe" value="'.$informe.'">
+					<input type="Hidden" name="popup_activo" value="FormularioTablas">
+					</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+			}
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+
+
+	if ($accion=="guardar_informe_tabla")
+		{
+			$mensaje_error="";
+			if ($tabla_manual.$tabla_datos=="") $mensaje_error="Debe indicar un nombre de tabla v&aacute;lida para el origen de datos del informe.";
+			if ($mensaje_error=="")
+				{
+					$tabla_definitiva=$tabla_manual.$tabla_datos;
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_tablas VALUES (0, '$informe','$tabla_definitiva','$alias_manual')");
+					// Lleva a auditoria
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Agrega tabla $tabla_definitiva al informe $informe','$fecha_operacion','$hora_operacion')");
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_informe">
+						<input type="Hidden" name="informe" value="'.$informe.'">
+						<input type="Hidden" name="popup_activo" value="FormularioTablas">
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="editar_informe">
+						<input type="Hidden" name="error_titulo" value="Problema en los datos ingresados">
+						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -113,9 +236,8 @@ if ($accion=="editar_informe")
 				abrir_ventana('Agregar una nueva tabla al informe','#BDB9B9',''); 
 				?>
 				<form name="datosform" id="datosform" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-				<input type="Hidden" name="accion" value="guardar_tabla_informe">
-				<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
-				<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">
+				<input type="Hidden" name="accion" value="guardar_informe_tabla">
+				<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 				<div align=center>
 
 					<table class="TextosVentana">
@@ -137,6 +259,18 @@ if ($accion=="editar_informe")
 							</td>
 						</tr>
 						<tr>
+							<td align="right">Especificar tabla manualmente:</td>
+							<td><input type="text" name="tabla_manual" size="20" class="CampoTexto"> (opcional)
+								<a href="#" title="Avanzado:" name="En caso de no seleccionar una tabla en la parte superior puede indicar aqu&iacute; el nombre de una tabla.  Esta opci&oacuten es &uacute;til cuando requiere acceder a informaci&oacute;n contenida en tablas internas de Pr&aacute;ctico o tablas creadas mediante otras aplicaciones."><img src="img/icn_10.gif" border=0></a>
+							</td>
+						</tr>
+						<tr>
+							<td align="right">Especificar un alias manualmente:</td>
+							<td><input type="text" name="alias_manual" size="20" class="CampoTexto"> (opcional)
+								<a href="#" title="Avanzado:" name="Util para definir el nombre de una tabla generada a partir de una subconsulta o indicada manualmente."><img src="img/icn_10.gif" border=0></a>
+							</td>
+						</tr>
+						<tr>
 							<td>
 								</form>
 								
@@ -146,6 +280,37 @@ if ($accion=="editar_informe")
 							</td>
 						</tr>
 					</table>
+					
+
+				<hr><b>Tablas definidas en este informe</b>
+				<table width="100%" border="0" cellspacing="2" align="CENTER"  class="TextosVentana">
+					<tr>
+						<td bgcolor="#D6D6D6"><b>Tabla</b></td>
+						<td bgcolor="#d6d6d6"><b>Alias</b></td>
+						<td></td>
+						<td></td>
+					</tr>
+				 <?php
+
+						$consulta_forms=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_tablas WHERE informe='$informe' ORDER BY valor_tabla");
+						while($registro = $consulta_forms->fetch())
+							{
+								echo '<tr>
+										<td><b>'.$registro["valor_tabla"].'</b></td>
+										<td>'.$registro["valor_alias"].'</td>
+										<td align="center">
+												<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
+														<input type="hidden" name="accion" value="eliminar_informe_tabla">
+														<input type="hidden" name="tabla" value="'.$registro["id"].'">
+														<input type="hidden" name="informe" value="'.$informe.'">
+														<input type="button" value="Eliminar"  class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar el campo del informe la consulta puede ser inconsistente.\nEst&aacute; seguro que desea continuar ?\',df'.$registro["id"].');">
+												</form>
+										</td>
+									</tr>';
+							}
+						echo '</table>';			
+				?>
+	
 			<?php
 				abrir_barra_estado();
 					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioTablas\')">';
@@ -156,7 +321,216 @@ if ($accion=="editar_informe")
 		</div>
 
 
+		<!-- INICIO DE MARCOS POPUP -->
 
+		<div id='FormularioCampos' class="FormularioPopUps">
+				<?php
+				abrir_ventana('Agregar un nuevo campo al informe','#BDB9B9',''); 
+				?>
+				<form name="datosformc" id="datosformc" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+				<input type="Hidden" name="accion" value="guardar_informe_campo">
+				<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
+				<div align=center>
+
+					<table class="TextosVentana">
+						<tr>
+							<td align="right">Campo de datos:</td>
+							<td>
+								<select  name="campo_datos" class="Combos" >
+									<option value="">Seleccione uno</option>
+									<?php
+											$resultado=consultar_tablas();
+											while ($registro = $resultado->fetch())
+												{
+													// Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
+													if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
+														{
+															echo '<optgroup label="'.str_replace($TablasApp,'',$registro[0]).'" >';
+															//Busca los campos de la tabla
+															$nombre_tabla=$registro[0];
+															$resultado_campos=ejecutar_sql("DESCRIBE $nombre_tabla ");
+															while($registro_campos = $resultado_campos->fetch())
+																{
+																	echo '<option value="'.$nombre_tabla.'.'.$registro_campos["Field"].'">'.$registro_campos["Field"].'</option>';
+																}
+															echo '</optgroup>';
+														}
+												}
+									?>
+								</select><a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
+							</td>
+						</tr>
+						<tr>
+							<td align="right">Especificar campo manualmente:</td>
+							<td><input type="text" name="campo_manual" size="20" class="CampoTexto"> (opcional)
+								<a href="#" title="Avanzado:" name="En caso de no seleccionar un campo en la parte superior puede indicar aqu&iacute; el nombre de un campo.  Esta opci&oacuten es &uacute;til cuando requiere acceder a informaci&oacute;n contenida en campos internos de Pr&aacute;ctico o campos creadas mediante otras aplicaciones."><img src="img/icn_10.gif" border=0></a>
+							</td>
+						</tr>
+						<tr>
+							<td align="right">Especificar un alias manualmente:</td>
+							<td><input type="text" name="alias_manual" size="20" class="CampoTexto"> (opcional)
+								<a href="#" title="Avanzado:" name="Util para definir el nombre del campo generada a partir de una subconsulta de agrupaci&oacute;n o indicado manualmente."><img src="img/icn_10.gif" border=0></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								</form>
+								
+							</td>
+							<td>
+								<input type="Button"  class="Botones" value="Agregar campo" onClick="document.datosformc.submit()">
+							</td>
+						</tr>
+					</table>
+					
+
+				<hr><b>Campos definidos en este informe</b>
+				<table width="100%" border="0" cellspacing="2" align="CENTER"  class="TextosVentana">
+					<tr>
+						<td bgcolor="#D6D6D6"><b>Campo</b></td>
+						<td bgcolor="#d6d6d6"><b>Alias</b></td>
+						<td></td>
+						<td></td>
+					</tr>
+				 <?php
+
+						$consulta_forms=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe='$informe' ORDER BY valor_campo");
+						while($registro = $consulta_forms->fetch())
+							{
+								echo '<tr>
+										<td><b>'.$registro["valor_campo"].'</b></td>
+										<td>'.$registro["valor_alias"].'</td>
+										<td align="center">
+												<form action="'.$ArchivoCORE.'" method="POST" name="dfc'.$registro["id"].'" id="dfc'.$registro["id"].'">
+														<input type="hidden" name="accion" value="eliminar_informe_campo">
+														<input type="hidden" name="campo" value="'.$registro["id"].'">
+														<input type="hidden" name="informe" value="'.$informe.'">
+														<input type="button" value="Eliminar"  class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar el campo del informe la consulta puede ser inconsistente.\nEst&aacute; seguro que desea continuar ?\',dfc'.$registro["id"].');">
+												</form>
+										</td>
+									</tr>';
+							}
+						echo '</table>';			
+				?>
+	
+			<?php
+				abrir_barra_estado();
+					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioCampos\')">';
+				cerrar_barra_estado();
+			cerrar_ventana();
+			?>
+		<!-- FIN DE MARCOS POPUP -->
+		</div>
+
+
+		<!-- INICIO DE MARCOS POPUP -->
+
+		<div id='FormularioCondiciones' class="FormularioPopUps">
+				<?php
+				abrir_ventana('Agregar una nueva condici&oacute;n al informe','#BDB9B9','600'); 
+				?>
+				<form name="datosformco" id="datosformco" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+				<input type="Hidden" name="accion" value="guardar_informe_condicion">
+				<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
+				<div align=center>
+
+					<table class="TextosVentana" width="100%">
+						<tr>
+							<th>
+								Primer campo o valor
+							</th>
+							<th>
+								Operador de comparaci&oacute;n
+							</th>
+							<th>
+								Segundo campo o valor
+							</th>
+						</tr>
+						<tr>
+							<td align=center>
+								<select  name="valor_izq" class="Combos" >
+									<option value="">Vac&iacute;o</option>
+									<?php
+										$consulta_forms=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
+										while($registro = $consulta_forms->fetch())
+											{
+												echo '<option value="'.$registro["valor_campo"].'">'.$registro["valor_campo"].'</option>';
+											}
+									?>
+								</select><br>
+								<input type="text" name="valor_izq_manual" size="20" class="CampoTexto">
+							</td>
+							<td align=center>
+								<select  name="operador" class="Combos" >
+									<option value="">Seleccione uno</option>
+									<option value="=">Igual: = </option>
+									<option value="<>">Diferente: <> </option>
+									<option value=">">Mayor: > </option>
+									<option value="<">Menor: < </option>
+									<option value=">=">Mayor o Igual: >= </option>
+									<option value="<=">Menor o Igual: <= </option>
+								</select><br>
+								<input type="text" name="operador_manual" size="20" class="CampoTexto">
+							</td>
+							<td align=center>
+								<select  name="valor_der" class="Combos" >
+									<option value="">Vac&iacute;o</option>
+									<?php
+										$consulta_forms=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
+										while($registro = $consulta_forms->fetch())
+											{
+												echo '<option value="'.$registro["valor_campo"].'">'.$registro["valor_campo"].'</option>';
+											}
+									?>
+								</select><br>
+								<input type="text" name="valor_der_manual" size="20" class="CampoTexto">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								</form>
+							</td>
+							<td align=center>
+								<br><input type="Button"  class="Botones" value="Agregar condicion" onClick="document.datosformco.submit()">
+							</td>
+							<td>
+							</td>
+						</tr>
+					</table>
+					
+
+				<hr><b>Condiciones definidas en este informe</b>
+				<table width="100%" border="0" cellspacing="2" align="CENTER"  class="TextosVentana">
+				 <?php
+
+						$consulta_forms=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe='$informe'");
+						while($registro = $consulta_forms->fetch())
+							{
+								echo '<tr>
+										<td align=left>'.$registro["valor_izq"].'</td>
+										<td align=left><b>'.$registro["operador"].'</b></td>
+										<td align=left>'.$registro["valor_der"].'</td>
+										<td align="center">
+												<form action="'.$ArchivoCORE.'" method="POST" name="dfco'.$registro["id"].'" id="dfco'.$registro["id"].'">
+														<input type="hidden" name="accion" value="eliminar_informe_condicion">
+														<input type="hidden" name="condicion" value="'.$registro["id"].'">
+														<input type="hidden" name="informe" value="'.$informe.'">
+														<input type="button" value="Eliminar"  class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar la condici&oacute;n del informe la consulta puede ser inconsistente.\nEst&aacute; seguro que desea continuar ?\',dfco'.$registro["id"].');">
+												</form>
+										</td>
+									</tr>';
+							}
+						echo '</table>';
+				?>
+
+			<?php
+				abrir_barra_estado();
+					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioCondiciones\')">';
+				cerrar_barra_estado();
+			cerrar_ventana();
+			?>
+		<!-- FIN DE MARCOS POPUP -->
+		</div>
 
 
 
@@ -164,8 +538,8 @@ if ($accion=="editar_informe")
 		<?php
 			// Habilita el popup activo
 			if (@$popup_activo=="FormularioTablas")	echo '<script type="text/javascript">	AbrirPopUp("FormularioTablas"); </script>';
-			//if (@$popup_activo=="FormularioBotones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioBotones"); </script>';
-			//if (@$popup_activo=="FormularioDiseno")	echo '<script type="text/javascript">	AbrirPopUp("FormularioDiseno"); </script>';
+			if (@$popup_activo=="FormularioCampos")	echo '<script type="text/javascript">	AbrirPopUp("FormularioCampos"); </script>';
+			if (@$popup_activo=="FormularioCondiciones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioCondiciones"); </script>';
 			//if (@$popup_activo=="FormularioAcciones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioAcciones"); </script>';
 		?>
 
@@ -177,19 +551,11 @@ if ($accion=="editar_informe")
 				Tablas de datos origen<br>
 				<a href='javascript:AbrirPopUp("FormularioTablas");' title="Agregar tabla de datos al informe" name=" "><img border='0' src='img/icono_tabla.png'/></a>
 				<hr>
-
-
-
-
 				Campos de datos<br>
 				<a href='javascript:AbrirPopUp("FormularioCampos");' title="Agregar campo de datos" name=" "><img border='0' src='img/icono_campo.png'/></a>
-				&nbsp;&nbsp;
-				<a href='javascript:AbrirPopUp("FormularioDiseno");' title="Dise&ntilde;o general de campos"><img border='0' src='img/icono_diseno.png'/></a>
 				<hr>
-				Acciones, botones y comandos<br>
-				<a href='javascript:AbrirPopUp("FormularioBotones");' title="Agregar bot&oacute;n o acci&oacute;n"><img border='0' src='img/icono_boton.png'/></a>
-				&nbsp;&nbsp;
-				<a href='javascript:AbrirPopUp("FormularioAcciones");' title="Definici&oacute;n general de acciones"><img border='0' src='img/icono_acciones.png'/></a>
+				Condiciones<br>
+				<a href='javascript:AbrirPopUp("FormularioCondiciones");' title="Filtrar los resultados mediante condiciones espec&iacute;ficas"><img border='0' src='img/icono_diseno.png'/></a>
 				<hr>
 				<form action="<?php echo $ArchivoCORE; ?>" method="POST" name="cancelar"><input type="Hidden" name="accion" value="administrar_informes"></form>
 				<input type="Button" onclick="document.cancelar.submit()" value="Volver a lista de informes" class="Botones">

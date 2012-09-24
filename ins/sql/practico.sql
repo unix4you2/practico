@@ -163,8 +163,8 @@ CREATE TABLE Core_informe_condiciones (
   id int(10) AUTO_INCREMENT,
   informe int(10),
   valor_izq varchar(250),
+  operador varchar(250),
   valor_der varchar(250),
-  signo varchar(250),
   PRIMARY KEY (id)
 );
 

@@ -181,8 +181,158 @@ if ($accion=="actualizar_clave")
 			}
 	}
 	
+
+
+
+
+
+
 	
-	
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: eliminar_informe_usuario
+	Elimina un informe a un usuario determinado.
+
+	Variables de entrada:
+
+		usuario - UID/Login de usuario al que se desea eliminar el permiso
+		informe - ID del informe que se desea eliminar del perfil del usuario
+
+		(start code)
+			DELETE FROM usuario_informe WHERE informe=$informe AND usuario='$usuario'
+		(end)
+
+	Salida:
+		Tabla de permisos actualizada al eliminar el registro correspondiente
+*/
+if ($accion=="eliminar_informe_usuario")
+	{
+		// Elimina el informe
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe='$informe' AND usuario='$usuario'");
+		// Lleva a auditoria
+		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina informe $informe a $usuario','$fecha_operacion','$hora_operacion')");
+		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="informes_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
+				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+	}
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+	if ($accion=="agregar_informe_usuario")
+		{
+			$mensaje_error="";
+			// Busca si existe ese permiso para el usuario
+			$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."usuario_informe WHERE usuario='$usuario' AND informe='$informe'");
+			$registro_menu = $resultado->fetch();
+			if($registro_menu["informe"]!="")
+				$mensaje_error="El usuario ya posee el informe seleccionado.";
+
+			if ($mensaje_error=="")
+				{
+					// Guarda el permiso para el usuario
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_informe VALUES (0,'$usuario','$informe')");
+					// Lleva a auditoria
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Agrega informe $informe al usuario $usuario','$fecha_operacion','$hora_operacion')");
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+							<input type="Hidden" name="accion" value="informes_usuario">
+							<input type="Hidden" name="usuario" value="'.$usuario.'">
+							</form>
+							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="informes_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
+							<script type="" language="JavaScript"> 
+							window.alert("El usuario ya posee el informe seleccionado.");
+							document.cancelar.submit();  </script>';
+				}
+		}
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+if ($accion=="informes_usuario")
+				{
+						echo '<div align="center"><br>';
+						abrir_ventana('Administraci&oacute;n de informes del usuario','f2f2f2','60%');
+		?>
+
+		<div align="center" class="TextosVentana">
+		<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 290px">
+			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
+			<input type="hidden" name="accion" value="agregar_informe_usuario">
+			<br><font face="" size="3" color="Navy"><b>Agregar informe al men&uacute; del usuario  <?php echo $usuario; ?></b></font>
+			<br><br>
+				<select name="informe" class="Combos">
+					<?php
+						//Despliega opciones de informes para agregar, aunque solamente las que este por debajo del perfil del usuario
+						//No se permite agregar opciones por encima del perfil actual del usuario
+						$resultado=ejecutar_sql("SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe WHERE nivel_usuario<=".$Nivel_usuario." ");
+						while($registro = $resultado->fetch())
+							{
+								echo '<option value="'.$registro["id"].'">'.$registro["titulo"].'</option>';
+							}
+					?>
+				</select>
+
+			<table width="90%" border="0" cellspacing="0" cellpadding="0" class="TextosVentana"><tr>
+				<td align="RIGHT" valign="TOP">
+					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;" class="link_menu">
+						<tr>
+							<td align="RIGHT">
+									</form>
+							</td><td width="5"></td>
+							<td align="RIGHT">
+									<input type="Button" name="" value=" Agregar " class="BotonesCuidado" onClick="document.datos.submit()">
+									&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" name="" value=" Cancelar " class="Botones">
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr></table>
+
+		<font face="" size="3" color="Navy"><b>Informes ya disponibles</b></font><br><br>
+		<?php
+			echo '
+			<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
+				<tr>
+					<td align="LEFT" bgcolor="#D6D6D6"><b>ID</b></td>
+					<td align="left" bgcolor="#d6d6d6"><b>Titulo</b></td>
+					<td align="LEFT" bgcolor="#D6D6D6"><b>Categor&iacute;a</b></td>
+					<td align="left"></td>
+				</tr>';
+
+			$resultado=ejecutar_sql("SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe,".$TablasCore."usuario_informe WHERE ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$usuario'");
+			while($registro = $resultado->fetch())
+				{
+					echo '<tr>
+							<td>'.$registro["id"].'</td>
+							<td><strong>'.$registro["titulo"].'</strong></td>
+							<td>'.$registro["categoria"].'</td>
+							<td align="center">
+									<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
+											<input type="hidden" name="accion" value="eliminar_informe_usuario">
+											<input type="hidden" name="usuario" value="'.$usuario.'">
+											<input type="hidden" name="informe" value="'.$registro["id"].'">
+											<input type="button" value="Eliminar" class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar el registro pueden quedar sin vincular algunas opciones del sistema para este usuario.\nEst&aacute; seguro que desea continuar ?\',f'.$registro["id"].');">
+									</form>
+							</td>
+						</tr>';
+				}
+			echo '</table>';
+		?>
+		</DIV>
+		</div>
+
+		 <?php
+		 				cerrar_ventana();
+		 		}
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -653,6 +803,7 @@ if ($accion=="listar_usuarios")
 						<td align="left"></td>
 						<td align="left"></td>
 						<td align="left"></td>
+						<td align="left"></td>
 					</tr>
 					';
 				$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."usuario WHERE (login LIKE '%$login_filtro%') AND (nombre LIKE '%$nombre_filtro%' ) AND login<>'admin' ORDER BY login,nombre");
@@ -685,7 +836,14 @@ if ($accion=="listar_usuarios")
 										<form action="'.$ArchivoCORE.'" method="POST">
 												<input type="hidden" name="accion" value="permisos_usuario">
 												<input type="hidden" name="usuario" value="'.$registro["login"].'">
-												<input type="Submit" value="Permisos" class="Botones">
+												<input type="Submit" value="Agregar Men&uacute;es" class="Botones">
+										</form>
+								</td>
+								<td align="center">
+										<form action="'.$ArchivoCORE.'" method="POST">
+												<input type="hidden" name="accion" value="informes_usuario">
+												<input type="hidden" name="usuario" value="'.$registro["login"].'">
+												<input type="Submit" value="Agregar Informes" class="Botones">
 										</form>
 								</td>
 								<td align="center">
