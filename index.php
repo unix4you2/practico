@@ -79,9 +79,9 @@
 	if ($accion=="")
 		ventana_login();
 	// Incluye los archivos necesarios dependiendo de las funciones requeridas
-	if ($accion=="administrar_informes" || $accion=="guardar_informe" || $accion=="editar_informe" || $accion=="eliminar_informe" || $accion=="actualizar_informe" || $accion=="eliminar_informe_tabla" || $accion=="guardar_informe_tabla" || $accion=="eliminar_informe_campo" || $accion=="guardar_informe_campo" || $accion=="guardar_informe_condicion" || $accion=="eliminar_informe_condicion")
+	if ($accion=="administrar_informes" || $accion=="guardar_informe" || $accion=="editar_informe" || $accion=="eliminar_informe" || $accion=="actualizar_informe" || $accion=="eliminar_informe_tabla" || $accion=="guardar_informe_tabla" || $accion=="eliminar_informe_campo" || $accion=="guardar_informe_campo" || $accion=="guardar_informe_condicion" || $accion=="eliminar_informe_condicion" || $accion=="mis_informes")
 		include("core/informes.php");
-	if ($accion=="actualizar_clave" || $accion=="cambiar_clave" || $accion=="agregar_usuario" || $accion=="guardar_usuario" || $accion=="listar_usuarios" || $accion=="eliminar_usuario" || $accion=="cambiar_estado_usuario" || $accion=="permisos_usuario" || $accion=="agregar_permiso" || $accion=="eliminar_permiso" || $accion=="informes_usuario" || $accion=="agregar_informe_usuario" || $accion=="eliminar_informe_usuario")
+	if ($accion=="actualizar_clave" || $accion=="cambiar_clave" || $accion=="agregar_usuario" || $accion=="guardar_usuario" || $accion=="listar_usuarios" || $accion=="eliminar_usuario" || $accion=="cambiar_estado_usuario" || $accion=="permisos_usuario" || $accion=="agregar_permiso" || $accion=="eliminar_permiso" || $accion=="informes_usuario" || $accion=="agregar_informe_usuario" || $accion=="eliminar_informe_usuario" || $accion=="copiar_permisos")
 		include("core/usuarios.php");
 	if ($accion=="Ver_menu" || $accion=="administrar_menu" || $accion=="guardar_menu" || $accion=="eliminar_menu" || $accion=="detalles_menu" || $accion=="actualizar_menu")
 		include("core/menus.php");

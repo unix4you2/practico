@@ -715,6 +715,182 @@
 
 /* ################################################################## */
 /* ################################################################## */
+function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes")
+	{
+		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion;
+
+		// Busca datos del informe
+		$consulta_informe=ejecutar_sql("SELECT * FROM ".$TablasCore."informe WHERE id='$informe'");
+		$registro_informe=$consulta_informe->fetch();
+
+		//Si no encuentra informe presenta error
+		if ($registro_informe["id"]=="") mensaje("ERROR EN TIEMPO DE EJECUCION","El objeto (informe $informe) asociado a esta solicitud no existe.  Consulte con su administrador del sistema.<br>","70%","icono_error.png","TextosEscritorio");
+
+		if ($en_ventana)
+			{
+				echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" <<< Volver a mi escritorio " class="Botones">';
+				abrir_ventana($registro_formulario["titulo"],'f2f2f2','');
+			}
+
+			// Crea encabezado por tipo de formato:  1=html   2=Excel
+			if($formato=="htm")
+				{
+					echo '
+						<html>
+						<head></head>
+						<body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0" style="font-size: 12px; font-family: Verdana, Tahoma, Arial;">';
+						
+						echo '<table class="'.$estilo.'">
+							<thead><tr><td>
+							'.$Nombre_Aplicacion.' - '.$registro_informe["titulo"].'
+							</td></tr></thead></table>';
+					// Pone encabezados de informe
+					/*if ($registro_informe[filtro_cliente]!="")
+						echo 'Empresa: '.$cliente.'  -  ';
+					if ($registro_informe[filtro_fecha]!="")
+						echo 'Desde '.$anoi.'/'.$mesi.'/'.$diai.' Hasta '.$anof.'/'.$mesf.'/'.$diaf.'';*/
+					echo '
+						</font></div>';
+				}
+
+			if($formato=="xls")
+				{
+					$fecha = date("d-m-Y");
+					$tituloinforme=trim($registro_informe["titulo"]);
+					$tituloinforme="Informe";
+					$nombrearchivo=$tituloinforme."_".$fecha;
+					header('Content-type: application/vnd.ms-excel');
+					header("Content-Disposition: attachment; filename=$nombrearchivo.xls");
+					header("Pragma: no-cache");
+					header("Expires: 0");
+				}
+
+			// Inicia construccion de consulta dinamica
+			$numero_columnas=0;
+			//Busca los CAMPOS definidos para el informe
+			$consulta="SELECT ";
+			$consulta_campos=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
+			while ($registro_campos = $consulta_campos->fetch())
+				{
+					//Si tiene alias definido lo agrega
+					$posfijo_campo="";
+					if ($registro_campos["valor_alias"]!="") $posfijo_campo=" as ".$registro_campos["valor_alias"];
+					//Agrega el campo a la consulta
+					$consulta.=$registro_campos["valor_campo"].$posfijo_campo.",";
+				}
+			// Elimina la ultima coma en el listado de campos
+			$consulta=substr($consulta, 0, strlen($consulta)-1);
+
+			//Busca las TABLAS definidas para el informe
+			$consulta.=" FROM ";
+			$consulta_tablas=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_tablas WHERE informe='$informe'");
+			while ($registro_tablas = $consulta_tablas->fetch())
+				{
+					//Si tiene alias definido lo agrega
+					$posfijo_tabla="";
+					if ($registro_tablas["valor_alias"]!="") $posfijo_tabla=" as ".$registro_tablas["valor_alias"];
+					//Agrega tabla a la consulta
+					$consulta.=$registro_tablas["valor_tabla"].$posfijo_tabla.",";
+				}
+			// Elimina la ultima coma en el listado de tablas
+			$consulta=substr($consulta, 0, strlen($consulta)-1);
+
+			// Busca las CONDICIONES para el informe
+			$consulta.=" WHERE ";
+			$consulta_condiciones=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe='$informe' ORDER BY peso");
+			$hay_condiciones=0;
+			while ($registro_condiciones = $consulta_condiciones->fetch())
+				{
+					//Agrega condicion a la consulta
+					$consulta.=" ".$registro_condiciones["valor_izq"].$registro_condiciones["operador"].$registro_condiciones["valor_der"]." ";
+					$hay_condiciones=1;
+				}
+			if (!$hay_condiciones)
+			$consulta.=" 1 ";
+
+			/*
+			if ($registro_informe[filtro_cliente]!="")
+				{
+					$campocliente=$registro_informe[filtro_cliente];	
+					$consulta.= " AND $campocliente = '$cliente'";
+				}
+
+			if ($registro_informe[filtro_fecha]!="")
+				{
+					$campofecha=$registro_informe[filtro_fecha];	
+					if ($registro_informe[motor]=="mysql")
+						$consulta.= " AND $campofecha BETWEEN '$anoi$mesi$diai' AND '$anof$mesf$diaf'";
+				}
+
+			if ($registro_informe[filtro_texto]!="")
+				{
+					$campotexto=$registro_informe[filtro_texto];
+					$consulta.= " AND $campotexto = '$filtrotexto' ";
+				}
+				
+			if ($registro_informe[agrupamiento]!="")
+				{
+					$campoagrupa=$registro_informe[agrupamiento];	
+					$consulta.= " GROUP BY $campoagrupa";
+				}
+				
+			if ($registro_informe[ordenamiento]!="")
+				{
+					$campoorden=$registro_informe[ordenamiento];
+					$consulta.= " ORDER BY $campoorden";
+				}
+			*/
+
+
+			if($formato=="htm")
+				echo '<table class="'.$estilo.'">
+					<thead><tr>';
+			if($formato=="xls")
+				echo '<table class="font-size: 11px; font-family: Verdana, Tahoma, Arial;">
+					<thead><tr>';
+
+			// Imprime encabezados de columna
+			$resultado_columnas=ejecutar_sql($consulta);
+			$numero_columnas=0;
+			foreach($resultado_columnas->fetch(PDO::FETCH_ASSOC) as $key=>$val)
+				{
+					echo '<th align="LEFT">'.$key.'</th>';
+					$numero_columnas++;
+				}
+			echo '</tr></thead><tbody>';
+
+			// Imprime registros del resultado
+			$numero_filas=0;
+			$consulta_ejecucion=ejecutar_sql($consulta);
+			while($registro_informe=$consulta_ejecucion->fetch())
+				{
+					echo '<tr>';
+					for ($i=0;$i<$numero_columnas;$i++)
+						echo '<td align=left>'.$registro_informe[$i].'</td>';
+					echo '</tr>';
+					$numero_filas++;
+				}
+			echo '</tbody>';
+			if ($formato=="htm")
+				echo '<tfoot>
+					<tr><td colspan='.$numero_columnas.'>
+						<b>Total registros encontrados: </b>'.$numero_filas.'
+					</td></tr>
+				</tfoot>';
+			echo '</table>';
+
+			if($formato=="htm")
+				echo '
+					</body>
+					</html>';
+
+		if ($en_ventana) cerrar_ventana();
+	}
+
+
+
+/* ################################################################## */
+/* ################################################################## */
 	/*
 		Section: Acciones a ser ejecutadas (si aplica) en cada cargue de la herramienta
 	*/
@@ -748,6 +924,7 @@
 						<input type="Hidden" name="accion" value="'.$accion_retorno.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="popup_activo" value="'.$popup_activo.'">
 						<script type="" language="JavaScript">
 						//setTimeout ("document.cancelar.submit();", 10); 
@@ -760,6 +937,7 @@
 						<input type="Hidden" name="accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="error_titulo" value="Problema en los datos ingresados">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>

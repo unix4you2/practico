@@ -30,7 +30,7 @@
 
 			//Divide la cadena de objeto en partes conocidas
 			$partes_objeto = explode(":", $objeto);
-			if ($partes_objeto[0]!="frm")
+			if ($partes_objeto[0]!="frm" && $partes_objeto[0]!="inf")
 				$mensaje_error="El tipo de objeto ".$partes_objeto[0]." recibido en este comando es desconocido.";
 
 			if ($mensaje_error=="")
@@ -39,10 +39,17 @@
 					if ($partes_objeto[0]=="frm")
 						{
 							//Evalua si fueron enviados parametros adicionales
-							if ($partes_objeto[2]!="") $en_ventana=$partes_objeto[2];
-							if ($partes_objeto[3]!="") $campobase =$partes_objeto[3];
-							if ($partes_objeto[4]!="") $valorbase =$partes_objeto[4];
+							if ($partes_objeto[2]!="") $en_ventana=$partes_objeto[2]; // indica si es cargado en ventana o escritorio
+							if ($partes_objeto[3]!="") $campobase =$partes_objeto[3]; // campo a usar Si se llena el form desde un registro
+							if ($partes_objeto[4]!="") $valorbase =$partes_objeto[4]; // valor a comparar para el campo de busqeuda
 							cargar_formulario($partes_objeto[1],$en_ventana,$campobase,$valorbase);
+						}
+					//Si es un informe lo llama con sus parámetros
+					if ($partes_objeto[0]=="inf")
+						{
+							if ($partes_objeto[2]!="") $en_ventana=$partes_objeto[2]; // indica si es cargado en ventana o escritorio
+							if ($partes_objeto[3]!="") $formato =$partes_objeto[3]; // Formato: htm, xls
+							cargar_informe($partes_objeto[1],$en_ventana,$formato);
 						}
 				}
 			else
@@ -55,5 +62,6 @@
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 		}
+
 ?>
 

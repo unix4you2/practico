@@ -69,6 +69,8 @@ INSERT INTO Core_menu VALUES (0,'Formularios',0,0,'',1,'Interno','administrar_fo
 INSERT INTO Core_menu VALUES (0,'Cambio de clave',0,0,'',1,'Interno','cambiar_clave' ,5,3,1,0,0,'Opciones generales de usuario','icono_llave.png');
 INSERT INTO Core_menu VALUES (0,'Actualizaciones',0,0,'',1,'Interno','actualizar_practico' ,5,3,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','bajar.png');
 INSERT INTO Core_menu VALUES (0,'Informes',0,0,'',1,'Interno','administrar_informes' ,5,3,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','compfile.png');
+INSERT INTO Core_menu VALUES (0,'Mis Informes',0,0,'',1,'Interno','mis_informes' ,5,3,0,0,1,'Opciones generales de usuario','compfile.png');
+
 
 DROP TABLE IF EXISTS Core_usuario_menu;
 CREATE TABLE Core_usuario_menu (
@@ -165,6 +167,7 @@ CREATE TABLE Core_informe_condiciones (
   valor_izq varchar(250),
   operador varchar(250),
   valor_der varchar(250),
+  peso int(3) default '0',
   PRIMARY KEY (id)
 );
 

@@ -72,6 +72,33 @@
 
 
 <?php
+
+
+/* ################################################################## */
+/* ################################################################## */
+if ($accion=="copiar_permisos")
+	{
+		// Elimina opciones existentes
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario='$usuariod'");
+		// Copia permisos
+		$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."usuario_menu WHERE usuario='$usuarioo'");
+		while($registro = $resultado->fetch())
+			{
+				$menuinsertar=$registro["menu"];
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu VALUES (0,'$usuariod','$menuinsertar')");
+			}
+		// Lleva a auditoria
+		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Copia permisos de $usuarioo al usuario $usuariod','$fecha_operacion','$hora_operacion')");
+		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+			<input type="Hidden" name="accion" value="permisos_usuario">
+			<input type="Hidden" name="usuario" value="'.$usuariod.'">
+			</form>
+			<script type="" language="JavaScript">
+			alert("Copia de permisos finalizada.  Por favor verifique a continuacion.");
+			document.cancelar.submit();  </script>';
+	} 
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -180,12 +207,6 @@ if ($accion=="actualizar_clave")
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 			}
 	}
-	
-
-
-
-
-
 
 	
 /* ################################################################## */
@@ -406,6 +427,25 @@ if ($accion=="permisos_usuario")
 		?>
 
 		<div align="center" class="TextosVentana">
+			<form name="datoscopia" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<input type="hidden" name="usuariod" value="<?php echo $usuario; ?>">
+			<input type="hidden" name="accion" value="copiar_permisos">
+
+			<br><font face="" size="3" color="#971515"><b>Copiar inicialmente los permisos desde el usuario: </b></font>
+				<select name="usuarioo" class="selector_01" >
+						<option value="">Solamente borrar permisos</option>
+						<?php
+							$resultado=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login<>'admin' AND login<>'$usuario' ORDER BY login");
+							while($registro = $resultado->fetch())
+								{
+									echo '<option value="'.$registro["login"].'">'.$registro["login"].'</option>';
+								}
+						?>
+				</select>
+					<input type="Button" name="" value="Ejecutar" class="BotonesCuidado" onClick="document.datoscopia.submit()">
+			</form>
+		<br><hr>
+
 		<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 290px">
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="hidden" name="usuario" value="<?php echo $usuario; ?>">

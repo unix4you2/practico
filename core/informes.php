@@ -87,13 +87,19 @@ if ($accion=="eliminar_informe_condicion")
 	if ($accion=="guardar_informe_condicion")
 		{
 			$mensaje_error="";
-			$valor_i=$valor_izq.$valor_izq_manual;
+			$valor_i=$valor_izq.$valor_izq_manual.$operador_logico;
 			$valor_d=$valor_der.$valor_der_manual;
 			$valor_o=$operador.$operador_manual;
 			if ($valor_i=="" && $valor_d=="") $mensaje_error="La condici&oacute;n especificada no es v&aacute;lida o carece de al menos uno de sus lados de comparaci&oacute;n.";
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_condiciones VALUES (0, '$informe','$valor_i','$valor_o','$valor_d')");
+					//Busca el peso del ultimo elemento para agregar el nuevo con peso+1
+					$peso=1;
+					$consulta_peso=ejecutar_sql("SELECT MAX(peso) as peso FROM ".$TablasCore."informe_condiciones WHERE informe='$informe'");
+					$registro = $consulta_peso->fetch();
+					if($registro[0]!="")$peso=$registro[0] + 1;
+					//Agrega la condicion
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_condiciones VALUES (0, '$informe','$valor_i','$valor_o','$valor_d','$peso')");
 					// Lleva a auditoria
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Agrega condicion al informe $informe','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_informe">
@@ -225,7 +231,7 @@ if ($accion=="eliminar_informe_tabla")
 if ($accion=="editar_informe")
 	{
 		// Busca datos del informe
-		$resultado_informe=ejecutar_sql("SELECT * FROM ".$TablasCore."informe WHERE id=$informe");
+		$resultado_informe=ejecutar_sql("SELECT * FROM ".$TablasCore."informe WHERE id='$informe'");
 		$registro_informe = $resultado_informe->fetch();
   ?>
 
@@ -287,7 +293,6 @@ if ($accion=="editar_informe")
 					<tr>
 						<td bgcolor="#D6D6D6"><b>Tabla</b></td>
 						<td bgcolor="#d6d6d6"><b>Alias</b></td>
-						<td></td>
 						<td></td>
 					</tr>
 				 <?php
@@ -447,7 +452,7 @@ if ($accion=="editar_informe")
 							</th>
 						</tr>
 						<tr>
-							<td align=center>
+							<td align=center valign=top>
 								<select  name="valor_izq" class="Combos" >
 									<option value="">Vac&iacute;o</option>
 									<?php
@@ -460,7 +465,7 @@ if ($accion=="editar_informe")
 								</select><br>
 								<input type="text" name="valor_izq_manual" size="20" class="CampoTexto">
 							</td>
-							<td align=center>
+							<td align=center valign=top>
 								<select  name="operador" class="Combos" >
 									<option value="">Seleccione uno</option>
 									<option value="=">Igual: = </option>
@@ -472,7 +477,7 @@ if ($accion=="editar_informe")
 								</select><br>
 								<input type="text" name="operador_manual" size="20" class="CampoTexto">
 							</td>
-							<td align=center>
+							<td align=center valign=top>
 								<select  name="valor_der" class="Combos" >
 									<option value="">Vac&iacute;o</option>
 									<?php
@@ -486,14 +491,25 @@ if ($accion=="editar_informe")
 								<input type="text" name="valor_der_manual" size="20" class="CampoTexto">
 							</td>
 						</tr>
+						</form>
 						<tr>
-							<td>
-								</form>
+							<td align=center colspan=3>
+								<br>Agregar un agrupador de expresiones o un operador l&oacute;gico 
+								<select  name="operador_logico" class="Combos" >
+									<option value="">Seleccione uno</option>
+									<option value="(">Abrir par&eacute;ntesis - (</option>
+									<option value=")">Cerrar par&eacute;ntesis - )</option>
+									<option value="AND">AND</option>
+									<option value="OR">OR</option>
+									<option value="NOT">NOT</option>
+									<option value="XOR">XOR</option>
+								</select>
+								<a href="#" title="Cu&aacute;ndo utilizar esta opci&oacute;n?:" name="Si usted requiere agregar m&aacute;s de una sentencia a su condici&oacute;n de filtrado de resultados o si requiere agrupar varias condiciones para tener precedencia sobre algunas operaciones entonces puede utilizar esta opci&oacute;n.  Trabaja de manera independiente y debe ser agregada como un registro aparte de la consulta."><img src="img/icn_10.gif" border=0></a>
 							</td>
-							<td align=center>
-								<br><input type="Button"  class="Botones" value="Agregar condicion" onClick="document.datosformco.submit()">
-							</td>
-							<td>
+						</tr>
+						<tr>
+							<td align=center colspan=3>
+								<br><input type="Button"  class="Botones" value=" Agregar condicion >>> " onClick="document.datosformco.submit()">
 							</td>
 						</tr>
 					</table>
@@ -503,13 +519,46 @@ if ($accion=="editar_informe")
 				<table width="100%" border="0" cellspacing="2" align="CENTER"  class="TextosVentana">
 				 <?php
 
-						$consulta_forms=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe='$informe'");
+						$consulta_forms=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe='$informe' ORDER BY peso");
 						while($registro = $consulta_forms->fetch())
 							{
+								$peso_aumentado=$registro["peso"]+1;
+								if ($registro["peso"]-1>=1) $peso_disminuido=$registro["peso"]-1; else $peso_disminuido=1;
 								echo '<tr>
 										<td align=left>'.$registro["valor_izq"].'</td>
 										<td align=left><b>'.$registro["operador"].'</b></td>
 										<td align=left>'.$registro["valor_der"].'</td>
+										<td align="center">
+											<form action="'.$ArchivoCORE.'" method="POST" name="ifoce'.$registro["id"].'" id="ifoce'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+												<input type="hidden" name="accion" value="cambiar_estado_campo">
+												<input type="hidden" name="id" value="'.$registro["id"].'">
+												<input type="hidden" name="tabla" value="informe_condiciones">
+												<input type="hidden" name="campo" value="peso">
+												<input type="hidden" name="informe" value="'.$informe.'">
+												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+												<input type="hidden" name="accion_retorno" value="editar_informe">
+												<input type="hidden" name="valor" value="'.$peso_aumentado.'">
+												<input type="Hidden" name="popup_activo" value="FormularioCondiciones">
+											</form>
+											<form action="'.$ArchivoCORE.'" method="POST" name="ifopa'.$registro["id"].'" id="ifopa'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+												<input type="hidden" name="accion" value="cambiar_estado_campo">
+												<input type="hidden" name="id" value="'.$registro["id"].'">
+												<input type="hidden" name="tabla" value="informe_condiciones">
+												<input type="hidden" name="campo" value="peso">
+												<input type="hidden" name="informe" value="'.$informe.'">
+												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+												<input type="hidden" name="accion_retorno" value="editar_informe">
+												<input type="hidden" name="valor" value="'.$peso_disminuido.'">
+												<input type="Hidden" name="popup_activo" value="FormularioCondiciones">
+											</form>';
+										if ($registro["campo"]!="id")
+											echo '
+												<a href="javascript:ifoce'.$registro["id"].'.submit();" title="Aumentar peso (bajar)" name=""><img src="img/bajar.png" border=0></a> 
+												'.$registro["peso"].'
+												<a href="javascript:ifopa'.$registro["id"].'.submit();" title="Disminuir peso (subir)" name=""><img src="img/subir.png" border=0></a>
+												';
+								echo '		
+										</td>
 										<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" name="dfco'.$registro["id"].'" id="dfco'.$registro["id"].'">
 														<input type="hidden" name="accion" value="eliminar_informe_condicion">
@@ -807,5 +856,57 @@ if ($accion=="administrar_informes")
 			cerrar_ventana();
 		echo '</td></tr></table>'; // Cierra la tabla de dos columnas
 					
+	}
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+if ($accion=="mis_informes")
+	{
+			// Carga las opciones del ACORDEON DE INFORMES
+			echo '<div align="center">
+			<input type="Button" onclick="document.core_ver_menu.submit()" value=" <<< Volver a mi escritorio " class="Botones">
+			';
+			// Si el usuario es diferente al administrador agrega condiciones al query
+			if ($Login_usuario!="admin")
+				{
+					$Complemento_tablas=",".$TablasCore."usuario_informe";
+					$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$Login_usuario'";  // AND nivel>0
+				}
+			$resultado=ejecutar_sql("SELECT COUNT(*) as conteo,categoria FROM ".$TablasCore."informe ".$Complemento_tablas." WHERE 1 ".$Complemento_condicion." GROUP BY categoria ORDER BY categoria");
+
+			// Imprime las categorias encontradas para el usuario
+			while($registro = $resultado->fetch())
+				{
+					//Crea la categoria en el acordeon
+					$seccion_menu_activa=$registro["categoria"];
+					$conteo_opciones=$registro["conteo"];
+					abrir_ventana('Informes '.$seccion_menu_activa.' ('.$conteo_opciones.')','fondo_ventanas2.gif','85%');
+					// Busca las opciones dentro de la categoria
+
+					// Si el usuario es diferente al administrador agrega condiciones al query
+					if ($Login_usuario!="admin")
+						{
+							$Complemento_tablas=",".$TablasCore."usuario_informe";
+							$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$Login_usuario'";  // AND nivel>0
+						}
+					$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."informe ".$Complemento_tablas." WHERE 1 AND categoria='".$seccion_menu_activa."' ".$Complemento_condicion." GROUP BY categoria ORDER BY titulo");
+
+					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
+						{
+							echo '<form action="'.$ArchivoCORE.'" method="post" name="acordeinf_'.$registro_opciones_acordeon["id"].'" id="acordeinf_'.$registro_opciones_acordeon["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+									<input type="hidden" name="accion" value="cargar_objeto">
+									<input type="hidden" name="objeto" value="inf:'.$registro_opciones_acordeon["id"].':1:htm">
+									</form>';
+
+							// Imprime la imagen
+							echo '<a title="'.$registro_opciones_acordeon["titulo"].'" name="" href="javascript:document.acordeinf_'.$registro_opciones_acordeon["id"].'.submit();">';
+							echo '<img src="img/tango_text-x-generic.png" alt="'.$registro_opciones_acordeon["titulo"].'" class="IconosEscritorio" valign="absmiddle" align="absmiddle">';
+							echo '</a>';
+						}
+					cerrar_ventana();
+				}
+			echo '</div>';
 	}
 ?>

@@ -561,7 +561,7 @@ if ($accion=="editar_formulario")
 				while($registro = $consulta->fetch())
 					{
 						$peso_aumentado=$registro["peso"]+1;
-						if ($registro["peso"]-1>=1) $peso_disminuido=$registro["peso"]-1;
+						if ($registro["peso"]-1>=1) $peso_disminuido=$registro["peso"]-1; else $peso_disminuido=1;
 						echo '<tr>
 								<td><b>'.$registro["titulo"].'</b></td>
 								<td><b>'.$registro["campo"].'</b></td>

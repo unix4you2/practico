@@ -715,5 +715,6 @@ if ($accion=="administrar_menu")
 					cerrar_ventana();
 				}
 			echo '</div>';
+
 	} 
 ?>
