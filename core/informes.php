@@ -42,7 +42,7 @@ if ($accion=="actualizar_informe")
 		if ($mensaje_error=="")
 			{
 				// Actualiza los datos
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET titulo='$titulo',descripcion='$descripcion',categoria='$categoria',nivel_usuario='$nivel_usuario' WHERE id='$id'");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET alto='$alto',ancho='$ancho',titulo='$titulo',descripcion='$descripcion',categoria='$categoria',nivel_usuario='$nivel_usuario' WHERE id='$id'");
 				// Lleva a auditoria
 				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Actualiza informe $id','$fecha_operacion','$hora_operacion')");
 				echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
@@ -344,7 +344,8 @@ if ($accion=="editar_informe")
 								<select  name="campo_datos" class="Combos" >
 									<option value="">Seleccione uno</option>
 									<?php
-											$resultado=consultar_tablas();
+											$resultado=ejecutar_sql("SELECT valor_tabla FROM ".$TablasCore."informe_tablas WHERE informe='$informe'");
+											//$resultado=consultar_tablas();
 											while ($registro = $resultado->fetch())
 												{
 													// Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
@@ -435,9 +436,9 @@ if ($accion=="editar_informe")
 				abrir_ventana('Agregar una nueva condici&oacute;n al informe','#BDB9B9','600'); 
 				?>
 				<form name="datosformco" id="datosformco" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-				<input type="Hidden" name="accion" value="guardar_informe_condicion">
-				<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
-				<div align=center>
+					<input type="Hidden" name="accion" value="guardar_informe_condicion">
+					<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
+					<div align=center>
 
 					<table class="TextosVentana" width="100%">
 						<tr>
@@ -489,9 +490,9 @@ if ($accion=="editar_informe")
 									?>
 								</select><br>
 								<input type="text" name="valor_der_manual" size="20" class="CampoTexto">
+								<a href="#" title="Ayuda de formato" name="En cualquiera de los campos manuales puede encerrar expresiones o valores tipo cadena de caracteres utilizando comillas dobles."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
-						</form>
 						<tr>
 							<td align=center colspan=3>
 								<br>Agregar un agrupador de expresiones o un operador l&oacute;gico 
@@ -504,16 +505,17 @@ if ($accion=="editar_informe")
 									<option value="NOT">NOT</option>
 									<option value="XOR">XOR</option>
 								</select>
-								<a href="#" title="Cu&aacute;ndo utilizar esta opci&oacute;n?:" name="Si usted requiere agregar m&aacute;s de una sentencia a su condici&oacute;n de filtrado de resultados o si requiere agrupar varias condiciones para tener precedencia sobre algunas operaciones entonces puede utilizar esta opci&oacute;n.  Trabaja de manera independiente y debe ser agregada como un registro aparte de la consulta."><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="Cu&aacute;ndo utilizar esta opci&oacute;n?:" name="Si usted requiere agregar m&aacute;s de una sentencia a su condici&oacute;n de filtrado de resultados o si requiere agrupar varias condiciones para tener precedencia sobre algunas operaciones entonces puede utilizar esta opci&oacute;n.  Trabaja de manera independiente y debe ser agregada como un registro aparte de la consulta."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+								<br><b>Recomendaci&oacute;n:</b> No olvide agregar operadores AND seguidos de cada condici&oacute;n que relacione llaves for&aacute;neas entre las diferentes tablas del informe cuando aplique (generalmente cuando usa m&aacute;s de una tabla).
 							</td>
 						</tr>
 						<tr>
 							<td align=center colspan=3>
-								<br><input type="Button"  class="Botones" value=" Agregar condicion >>> " onClick="document.datosformco.submit()">
+								<br><input type="Button"  class="Botones" value=" Agregar condicion / operador >>> " onClick="document.datosformco.submit()">
 							</td>
 						</tr>
 					</table>
-					
+				</form>
 
 				<hr><b>Condiciones definidas en este informe</b>
 				<table width="100%" border="0" cellspacing="2" align="CENTER"  class="TextosVentana">
@@ -664,7 +666,18 @@ if ($accion=="editar_informe")
 							</select>
 						</td>
 					</tr>
-
+					<tr>
+						<td align="right">Ancho:</td>
+						<td><input type="text" name="ancho"  value="<?php echo $registro_informe['ancho']; ?>" size="4" class="CampoTexto"> (agregar <b>px</b> &oacute; <b>%</b> seg&uacute;n el caso)
+							<a href="#" title="Establecer ancho fijo?" name="Este valor aplica si ha especificado tambien un alto. Si requiere que el informe aparezca dentro de un marco de ancho fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">Alto:</td>
+						<td><input type="text" name="alto"  value="<?php echo $registro_informe['alto']; ?>" size="4" class="CampoTexto">  (agregar <b>px</b> &oacute; <b>%</b> seg&uacute;n el caso)
+							<a href="#" title="Establecer alto fijo?" name="Este valor aplica si ha especificado tambien un ancho. Si requiere que el informe aparezca dentro de un marco de alto fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+						</td>
+					</tr>
 					<tr>
 						<td>
 							</form>
@@ -720,7 +733,7 @@ if ($accion=="guardar_informe")
 		if ($categoria=="") $mensaje_error.="Debe indicar un nombre v&aacute;lido para la categor&iacute;a asociada al informe.<br>";
 		if ($mensaje_error=="")
 			{
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe VALUES (0, '$titulo','$descripcion','$categoria','$agrupamiento','$ordenamiento','$nivel_usuario')");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe VALUES (0, '$titulo','$descripcion','$categoria','$agrupamiento','$ordenamiento','$nivel_usuario','$ancho','$alto')");
 				$id=$ConexionPDO->lastInsertId();
 				// Lleva a auditoria
 				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea informe $id','$fecha_operacion','$hora_operacion')");
@@ -759,19 +772,21 @@ if ($accion=="administrar_informes")
 					<tr>
 						<td align="right">T&iacute;tulo del informe:</td>
 						<td><input type="text" name="titulo" size="20" class="CampoTexto">
-							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
-							<a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; en la parte superior del informe generado"><img src="img/icn_10.gif" border=0></a>
+							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+							<a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; en la parte superior del informe generado"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="right">Descripci&oacute;n</td>
-						<td><input type="text" name="descripcion" size="20" class="CampoTexto"><a href="#" title="Ayuda r&aacute;pida:" name="Texto descriptivo del informe.  No aparece en su generaci&oacute;n pero es usado para orientar al usuario en su selecci&oacute;n"><img src="img/icn_10.gif" border=0></a>	</td>
+						<td><input type="text" name="descripcion" size="20" class="CampoTexto">
+						<a href="#" title="Ayuda r&aacute;pida:" name="Texto descriptivo del informe.  No aparece en su generaci&oacute;n pero es usado para orientar al usuario en su selecci&oacute;n"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+						</td>
 					</tr>
 					<tr>
 						<td align="right">Categor&iacute;a</td>
 						<td><input type="text" name="categoria" size="20" class="CampoTexto">
-							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
-							<a href="#" title="Ayuda r&aacute;pida:" name="Cuando el usuario tiene acceso al panel de informes del sistema estos son clasificados por categor&iacute;as.  Ingrese aqui un nombre de categor&iacute;a bajo el cual desee presentar este informe a los usuarios."><img src="img/icn_10.gif" border=0></a>
+							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+							<a href="#" title="Ayuda r&aacute;pida:" name="Cuando el usuario tiene acceso al panel de informes del sistema estos son clasificados por categor&iacute;as.  Ingrese aqui un nombre de categor&iacute;a bajo el cual desee presentar este informe a los usuarios."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
@@ -796,7 +811,18 @@ if ($accion=="administrar_informes")
 							</select>
 						</td>
 					</tr>
-
+					<tr>
+						<td align="right">Ancho:</td>
+						<td><input type="text" name="ancho" size="4" class="CampoTexto">  (agregar <b>px</b> &oacute; <b>%</b> seg&uacute;n el caso)
+							<a href="#" title="Establecer ancho fijo?" name="Este valor aplica si ha especificado tambien un alto. Si requiere que el informe aparezca dentro de un marco de ancho fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">Alto:</td>
+						<td><input type="text" name="alto" size="4" class="CampoTexto">  (agregar <b>px</b> &oacute; <b>%</b> seg&uacute;n el caso)
+							<a href="#" title="Establecer alto fijo?" name="Este valor aplica si ha especificado tambien un ancho. Si requiere que el informe aparezca dentro de un marco de alto fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+						</td>
+					</tr>
 					<tr>
 						<td>
 							</form>

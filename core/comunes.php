@@ -729,28 +729,33 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		if ($en_ventana)
 			{
 				echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" <<< Volver a mi escritorio " class="Botones">';
-				abrir_ventana($registro_formulario["titulo"],'f2f2f2','');
+				abrir_ventana($Nombre_Aplicacion.' - '.$registro_informe["titulo"],'f2f2f2',$registro_informe["ancho"]);
 			}
+
+		// Si se ha definido un tamano fijo entonces crea el marco
+		if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
+			echo '<DIV style="DISPLAY: block; OVERFLOW: auto; POSITION: relative; WIDTH: '.$registro_informe["ancho"].'; HEIGHT: '.$registro_informe["alto"].'">';
 
 			// Crea encabezado por tipo de formato:  1=html   2=Excel
 			if($formato=="htm")
 				{
 					echo '
 						<html>
-						<head></head>
 						<body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0" style="font-size: 12px; font-family: Verdana, Tahoma, Arial;">';
-						
+
+					// Si no tiene ancho o alto se asume que es para impresion y agrega titulo
+					if ($registro_informe["ancho"]=="" || $registro_informe["alto"]=="")
 						echo '<table class="'.$estilo.'">
 							<thead><tr><td>
 							'.$Nombre_Aplicacion.' - '.$registro_informe["titulo"].'
 							</td></tr></thead></table>';
+
 					// Pone encabezados de informe
 					/*if ($registro_informe[filtro_cliente]!="")
 						echo 'Empresa: '.$cliente.'  -  ';
 					if ($registro_informe[filtro_fecha]!="")
 						echo 'Desde '.$anoi.'/'.$mesi.'/'.$diai.' Hasta '.$anof.'/'.$mesf.'/'.$diaf.'';*/
-					echo '
-						</font></div>';
+					//echo '</font></div>';
 				}
 
 			if($formato=="xls")
@@ -802,7 +807,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			while ($registro_condiciones = $consulta_condiciones->fetch())
 				{
 					//Agrega condicion a la consulta
-					$consulta.=" ".$registro_condiciones["valor_izq"].$registro_condiciones["operador"].$registro_condiciones["valor_der"]." ";
+					$consulta.=" ".$registro_condiciones["valor_izq"]." ".$registro_condiciones["operador"]." ".$registro_condiciones["valor_der"]." ";
 					$hay_condiciones=1;
 				}
 			if (!$hay_condiciones)
@@ -883,6 +888,10 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				echo '
 					</body>
 					</html>';
+
+		// Si se ha definido un tamano fijo entonces cierra el marco
+		if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
+			echo '</DIV>';
 
 		if ($en_ventana) cerrar_ventana();
 	}
