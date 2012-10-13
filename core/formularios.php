@@ -259,12 +259,44 @@ if ($accion=="editar_formulario")
 	{
 		  ?>
 
+		<script TYPE="text/javascript" LANGUAGE="JavaScript">
+			function OcultarCampos(cantidad_campos_existentes)
+				{
+					for (i=1;i<=cantidad_campos_existentes;i++)
+						{
+							var formdiv = document.getElementById("campo"+i);
+							formdiv.style.display="none";
+						}
+				}
+			function VisualizarCampos(formdiv_ids)
+				{
+					var parametros = formdiv_ids;
+					var lista_campos = parametros.split(',');
+
+					for (i=0;i<lista_campos.length;i++)
+						{
+							var formdiv = document.getElementById("campo"+lista_campos[i]);
+							formdiv.style.display="block";
+						}
+				}
+			//Cambia los campos visibles en el formulario segun el select
+			function CambiarCamposVisibles(tipo_objeto_activo)
+				{
+					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
+					OcultarCampos(13);
+					// Muestra campos segun tipo de objeto
+					if (tipo_objeto_activo=="texto_corto") VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,13");
+					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
+					AbrirPopUp("FormularioCampos");
+				}
+		</script>
+
 
 		<!-- INICIO DE MARCOS POPUP -->
 
 		<div id='FormularioCampos' class="FormularioPopUps">
 				<?php 
-				abrir_ventana('Agregar un nuevo campo al formulario','#BDB9B9',''); 
+				abrir_ventana('Agregar un elemento al formulario','#BDB9B9',''); 
 				?>
 				<form name="datosform" id="datosform" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="accion" value="guardar_campo_formulario">
@@ -274,146 +306,243 @@ if ($accion=="editar_formulario")
 							
 					<table class="TextosVentana">
 						<tr>
-							<td align="right">T&iacute;tulo o etiqueta:</td>
-							<td ><input type="text" name="titulo" size="20" class="CampoTexto">
+							<td align="right">Tipo de objeto que desea agregar</td>
+							<td>
+								<select  name="tipo_objeto" class="Combos" OnChange="CambiarCamposVisibles(this.options[this.selectedIndex].value);">
+									<option value="0">SELECCIONE UNO</option>
+									<optgroup label="Controles de datos">
+										<option value="texto_corto">Campo de texto corto</option>
+										<option value="lista_seleccion">Campo de selecci&oacute;n (combo-box)</option>
+										<option value="texto_largo">Campo de texto libre</option>
+										<option value="texto_formato">Campo de texto con formato enriquecido</option>
+									</optgroup>
+									<optgroup label="Presentaci&oacute;n y otros contenidos">
+										<option value="etiqueta">Texto enriquecido (como etiqueta)</option>
+										<option value="url_iframe">URL embebida (IFrame)</option>
+									</optgroup>
+									<optgroup label="Objetos internos">
+										<option value="inf">Informe predise&ntilde;ado</option>
+										<option value="frm">Formulario anidado</option>
+									</optgroup>
+								</select>
 								<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
-								<a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; al lado del indicando al usuario la informacion que debe ingresar."><img src="img/icn_10.gif" border=0></a>
 							</td>
 						</tr>
-						<tr>
-							<td align="right">Campo enlazado</td>
-							<td>
-								<select  name="campo" class="Combos" >
-									<option value="">Seleccione uno</option>
-									<?php
-										$resultado=ejecutar_sql("DESCRIBE $nombre_tabla ");
-										while($registro = $resultado->fetch())
-											{
-												echo '<option value="'.$registro["Field"].'" >'.$registro["Field"].'&nbsp;&nbsp;&nbsp;['.$registro["Type"].']</option>';
-											}							
-									?>
-								</select>
-							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
-							<a href="#" title="Ayuda r&aacute;pida:" name="Campo de la tabla de datos al cual se vincular&aacute; la informaci&oacute;n"><img src="img/icn_10.gif" border=0></a>	</td>
-						</tr>
-						<tr>
-							<td align="right">Campo de valor &uacute;nico:</td>
-							<td>
-								<input type="checkbox" value=1 name="valor_unico" checked>
-								<a href="#" title="Unicidad para los valores ingresados" name="Indica si el campo puede almacenar o no valores repetidos en la base de datos.  Deber&iacute;a estar habilitado para campos que representen claves primarias en su dise&ntilde;o y deshabilitado para el resto."><img src="img/icn_10.gif" border=0></a>	</td>
-						</tr>
-						<tr>
-							<td align="right">Valor predeterminado:</td>
-							<td ><input type="text" name="valor_predeterminado" size="20" class="CampoTexto">
-								<a href="#" title="Ayuda r&aacute;pida:" name="Establece el valor que aparece diligenciado automaticamente en el campo al abrir la vista del formulario.  Este valor puede estar en contravia de la validaci&oacute;n de datos."><img src="img/icn_10.gif" border=0></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="right">Validacion de datos:</td>
-							<td >
-								<select  name="validacion_datos" class="Combos" >
-									<option value="">Ninguna</option>
-									<option value="numerico">S&oacute;lo n&uacute;meros 0-9</option>
-									<option value="alfabetico">S&oacute;lo letras A-Z</option>
-									<option value="alfanumerico">Letras y n&uacute;meros</option>
-									<option value="fecha">Campo de fecha</option>
-								</select>
-								<a href="#" title="Ayuda r&aacute;pida:" name="Tipo de filtro a ser aplicado cuando el usuario ingresa informaci&oacute;n por teclado."><img src="img/icn_10.gif" border=0></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="right">Campo de solo lectura</td>
-							<td >
-								<select  name="solo_lectura" class="Combos" >
-									<option value="READONLY">Si</option>
-									<option value="" selected>No</option>
-								</select>
-								<a href="#" title="Define si se puede cambiar su valor" name="Propiedad util para campos o formuarios de consulta por parte del usuario donde se requiere visualizar el valor pero no permitir su modificacion"><img src="img/icn_10.gif" border=0></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="right">T&iacute;tulo de ayuda</td>
-							<td ><input type="text" name="ayuda_titulo" size="20" class="CampoTexto"><a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; como encabezado para el texto de ayuda del campo explicando al usuario qu&eacute; debe ingresar."><img src="img/icn_10.gif" border=0></a>	</td>
-						</tr>
-						<tr>
-							<td   valign="top" align="right">Texto de ayuda</td>
-							<td  colspan=2 valign="top"><textarea name="ayuda_texto" cols="25" rows="1" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"><?php echo str_replace("<br>", "\r\n", $registro["ayuda_facturacion"]);  ?></textarea>
-							<a href="#" title="Ayuda r&aacute;pida:" name="Texto completo con la descripcion de funciones resumida para el campo.  Puede incluir instrucciones de formato, advertencias o cualquier otro mensaje para el usuario."><img align="top" src="img/icn_10.gif" border=0></a>	</td>
-						</tr>
-						<tr>
-							<td colspan=2>
-							<table width="100%" class="TextosVentana"><tr>
-								<td align="right">Peso:</td>
-								<td>
-									<select name="peso" class="selector_01" >
-										<?php
-											for ($i=1;$i<=100;$i++)
-												echo '<option value="'.$i.'">'.$i.'</option>';
-										?>
-									</select><a href="#" title="Ayuda r&aacute;pida:" name="Posicion en la que aparece el campo dentro del formulario cuando este se despliega en pantalla. Orden."><img align="top" src="img/icn_10.gif" border=0></a>
+						</table>
+						<hr>
+ 
+						<div id='campo1' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">T&iacute;tulo o etiqueta:</td>
+								<td width="400" ><input type="text" name="titulo" size="20" class="CampoTexto">
+									<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
+									<a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; al lado del indicando al usuario la informacion que debe ingresar."><img src="img/icn_10.gif" border=0></a>
 								</td>
-								<td align="right">Columna</td>
-								<td>
-									<select name="columna" class="selector_01" >
+							</tr>
+							</table>
+						</div>
+
+						<div id='campo2' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Campo enlazado</td>
+								<td width="400" >
+									<select  name="campo" class="Combos" >
+										<option value="">Seleccione uno</option>
 										<?php
-											// Obtiene numero de columnas para el formulario
-											$consulta_columnas=ejecutar_sql("SELECT columnas FROM ".$TablasCore."formulario WHERE id='$formulario' ");
-											$registro_columnas = $consulta_columnas->fetch();
-											$columnas_formulario=$registro_columnas["columnas"];
-											for ($i=1;$i<=$columnas_formulario;$i++)
-												echo '<option value="'.$i.'">'.$i.'</option>';
+											$resultado=ejecutar_sql("DESCRIBE $nombre_tabla ");
+											while($registro = $resultado->fetch())
+												{
+													echo '<option value="'.$registro["Field"].'" >'.$registro["Field"].'&nbsp;&nbsp;&nbsp;['.$registro["Type"].']</option>';
+												}
 										?>
-									</select><a href="#" title="Ayuda r&aacute;pida:" name="Columna para ubicar el campo cuando la vista del formulario tenga varias columnas. Aquellos campos en columnas superiores a las definidas en el formulario no ser&aacute;n dibujados."><img src="img/icn_10.gif" border=0></a>
+									</select>
+									<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
+									<a href="#" title="Ayuda r&aacute;pida:" name="Campo de la tabla de datos al cual se vincular&aacute; la informaci&oacute;n"><img src="img/icn_10.gif" border=0></a>
 								</td>
-							</tr></table>
-							</td>
-						</tr>
-						<tr>
-							<td colspan=2>
-							<table width="100%" class="TextosVentana"><tr>
-							<td align="right">Obligatorio</td>
-							<td>
-								<select  name="obligatorio" class="Combos" >
-									<option value="1">Si</option>
-									<option value="0" selected>No</option>
-								</select>
-							</td>
-							<td align="right">Visible</td>
-							<td>
-								<select  name="visible" class="Combos" >
-									<option value="1">Si</option>
-									<option value="0">No</option>
-								</select><a href="#" title="Ayuda r&aacute;pida:" name="Determina si el control es visible o no para el usuario.  Si se deja como No el control es usado pero como un campo oculto."><img src="img/icn_10.gif" border=0></a>
-							</td>
-							</tr></table>
-							</td>
-						</tr>
-						<tr>
-							<td align="right">Utilizar para b&uacute;squedas? Etiqueta:</td>
-							<td ><input type="text" name="etiqueta_busqueda" size="10" class="CampoTexto"><a href="#" title="Indica si el campo es usado para buscar registros" name="Deje el espacio en blanco para indicar que es un campo normal o ingrese la etiqueta que debe ir en el boton de comando ubicado al lado derecho del campo para realizar la busqueda de registros."><img src="img/icn_10.gif" border=0></a>	</td>
-						</tr>
-						<tr>
-							<td align="right">Usar AJAX para buscar:</td>
-							<td>
-								<input type="checkbox" value=1 name="ajax_busqueda" checked>
-							<a href="#" title="Modo de recuperaci&oacute;n de registros:" name="Cuando la casilla se encuentra activada Practico intenta recuperar la informaci&oacute;n del registro para el formulario mediante AJAX, de lo contrario se utiliza el metodo est&aacute;ndar de envio de solicitud y recarga de la p&aacute;gina con los resultados.  Puede ser deshabilitado para mejorar compatibilidad con navegadores viejos."><img src="img/icn_10.gif" border=0></a>	</td>
-						</tr>
-						<tr>
-							<td align="right">Agregar teclado virtual:</td>
-							<td>
-								<select  name="teclado_virtual" class="Combos" >
-									<option value="1">Si</option>
-									<option value="0" selected>No</option>
-								</select>
-							<a href="#" title="Ingreso de informaci&oacute;n sin teclado" name="Cuando es habilitado en el formulario se despliega un teclado virtual para el ingreso de informaci&oacute;n;.  Por ahora el uso del teclado puede violar las validaciones."><img src="img/icn_10.gif" border=0></a>	</td>
-						</tr>
+							</tr>
+							</table>
+						</div>
+
+
+
+						<div id='campo3' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Campo de valor &uacute;nico:</td>
+								<td width="400" >
+									<input type="checkbox" value=1 name="valor_unico" checked>
+									<a href="#" title="Unicidad para los valores ingresados" name="Indica si el campo puede almacenar o no valores repetidos en la base de datos.  Deber&iacute;a estar habilitado para campos que representen claves primarias en su dise&ntilde;o y deshabilitado para el resto."><img src="img/icn_10.gif" border=0></a>	</td>
+							</tr>
+							</table>
+						</div>
+
+
+						<div id='campo4' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Valor predeterminado:</td>
+								<td width="400" ><input type="text" name="valor_predeterminado" size="20" class="CampoTexto">
+									<a href="#" title="Ayuda r&aacute;pida:" name="Establece el valor que aparece diligenciado automaticamente en el campo al abrir la vista del formulario.  Este valor puede estar en contravia de la validaci&oacute;n de datos."><img src="img/icn_10.gif" border=0></a>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+						<div id='campo5' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Validacion de datos:</td>
+								<td width="400" >
+									<select  name="validacion_datos" class="Combos" >
+										<option value="">Ninguna</option>
+										<option value="numerico">S&oacute;lo n&uacute;meros 0-9</option>
+										<option value="alfabetico">S&oacute;lo letras A-Z</option>
+										<option value="alfanumerico">Letras y n&uacute;meros</option>
+										<option value="fecha">Campo de fecha</option>
+									</select>
+									<a href="#" title="Ayuda r&aacute;pida:" name="Tipo de filtro a ser aplicado cuando el usuario ingresa informaci&oacute;n por teclado."><img src="img/icn_10.gif" border=0></a>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+
+						<div id='campo6' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Campo de solo lectura</td>
+								<td width="400" >
+									<select  name="solo_lectura" class="Combos" >
+										<option value="READONLY">Si</option>
+										<option value="" selected>No</option>
+									</select>
+									<a href="#" title="Define si se puede cambiar su valor" name="Propiedad util para campos o formuarios de consulta por parte del usuario donde se requiere visualizar el valor pero no permitir su modificacion"><img src="img/icn_10.gif" border=0></a>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+						<div id='campo7' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">T&iacute;tulo de ayuda</td>
+								<td width="400" ><input type="text" name="ayuda_titulo" size="20" class="CampoTexto"><a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; como encabezado para el texto de ayuda del campo explicando al usuario qu&eacute; debe ingresar."><img src="img/icn_10.gif" border=0></a>	</td>
+							</tr>
+							</table>
+						</div>
+
+						<div id='campo8' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200"   valign="top" align="right">Texto de ayuda</td>
+								<td width="400"  colspan=2 valign="top"><textarea name="ayuda_texto" cols="25" rows="1" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"><?php echo str_replace("<br>", "\r\n", $registro["ayuda_facturacion"]);  ?></textarea>
+								<a href="#" title="Ayuda r&aacute;pida:" name="Texto completo con la descripcion de funciones resumida para el campo.  Puede incluir instrucciones de formato, advertencias o cualquier otro mensaje para el usuario."><img align="top" src="img/icn_10.gif" border=0></a>	</td>
+							</tr>
+							</table>
+						</div>
+
+						<div id='campo9' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td colspan=2>
+								<table width="100%" class="TextosVentana"><tr>
+									<td align="right">Peso:</td>
+									<td>
+										<select name="peso" class="selector_01" >
+											<?php
+												for ($i=1;$i<=100;$i++)
+													echo '<option value="'.$i.'">'.$i.'</option>';
+											?>
+										</select><a href="#" title="Ayuda r&aacute;pida:" name="Posicion en la que aparece el campo dentro del formulario cuando este se despliega en pantalla. Orden."><img align="top" src="img/icn_10.gif" border=0></a>
+									</td>
+									<td align="right">Columna</td>
+									<td>
+										<select name="columna" class="selector_01" >
+											<?php
+												// Obtiene numero de columnas para el formulario
+												$consulta_columnas=ejecutar_sql("SELECT columnas FROM ".$TablasCore."formulario WHERE id='$formulario' ");
+												$registro_columnas = $consulta_columnas->fetch();
+												$columnas_formulario=$registro_columnas["columnas"];
+												for ($i=1;$i<=$columnas_formulario;$i++)
+													echo '<option value="'.$i.'">'.$i.'</option>';
+											?>
+										</select><a href="#" title="Ayuda r&aacute;pida:" name="Columna para ubicar el campo cuando la vista del formulario tenga varias columnas. Aquellos campos en columnas superiores a las definidas en el formulario no ser&aacute;n dibujados."><img src="img/icn_10.gif" border=0></a>
+									</td>
+								</tr></table>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+						<div id='campo10' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td colspan=2>
+								<table width="100%" class="TextosVentana"><tr>
+								<td align="right">Obligatorio</td>
+								<td>
+									<select  name="obligatorio" class="Combos" >
+										<option value="1">Si</option>
+										<option value="0" selected>No</option>
+									</select>
+								</td>
+								<td align="right">Visible</td>
+								<td>
+									<select  name="visible" class="Combos" >
+										<option value="1">Si</option>
+										<option value="0">No</option>
+									</select><a href="#" title="Ayuda r&aacute;pida:" name="Determina si el control es visible o no para el usuario.  Si se deja como No el control es usado pero como un campo oculto."><img src="img/icn_10.gif" border=0></a>
+								</td>
+								</tr></table>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+						<div id='campo11' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Utilizar para b&uacute;squedas? Etiqueta:</td>
+								<td width="400" ><input type="text" name="etiqueta_busqueda" size="10" class="CampoTexto"><a href="#" title="Indica si el campo es usado para buscar registros" name="Deje el espacio en blanco para indicar que es un campo normal o ingrese la etiqueta que debe ir en el boton de comando ubicado al lado derecho del campo para realizar la busqueda de registros."><img src="img/icn_10.gif" border=0></a>	</td>
+							</tr>
+							</table>
+						</div>
+
+						<div id='campo12' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Usar AJAX para buscar:</td>
+								<td width="400" >
+									<input type="checkbox" value=1 name="ajax_busqueda" checked>
+								<a href="#" title="Modo de recuperaci&oacute;n de registros:" name="Cuando la casilla se encuentra activada Practico intenta recuperar la informaci&oacute;n del registro para el formulario mediante AJAX, de lo contrario se utiliza el metodo est&aacute;ndar de envio de solicitud y recarga de la p&aacute;gina con los resultados.  Puede ser deshabilitado para mejorar compatibilidad con navegadores viejos."><img src="img/icn_10.gif" border=0></a>	</td>
+							</tr>
+							</table>
+						</div>
+
+						<div id='campo13' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Agregar teclado virtual:</td>
+								<td width="400" >
+									<select  name="teclado_virtual" class="Combos" >
+										<option value="1">Si</option>
+										<option value="0" selected>No</option>
+									</select>
+								<a href="#" title="Ingreso de informaci&oacute;n sin teclado" name="Cuando es habilitado en el formulario se despliega un teclado virtual para el ingreso de informaci&oacute;n;.  Por ahora el uso del teclado puede violar las validaciones."><img src="img/icn_10.gif" border=0></a>	</td>
+							</tr>
+							</table>
+						</div>
+
+					<table class="TextosVentana">
 						<tr>
 							<td>
 								</form>
 								
 							</td>
 							<td>
-								<input type="Button"  class="Botones" value="Agregar campo" onClick="document.datosform.submit()">
+								<input type="Button"  class="Botones" value="Agregar objeto/campo" onClick="document.datosform.submit()">
 							</td>
 						</tr>
 					</table>
@@ -829,8 +958,8 @@ if ($accion=="editar_formulario")
 				abrir_ventana('Barra de herramientas','#BDB9B9',''); 
 			?>
 				<div align=center>
-				Campos de datos<br>
-				<a href='javascript:AbrirPopUp("FormularioCampos");' title="Agregar campo de datos" name=" "><img border='0' src='img/icono_campo.png'/></a>
+				Objetos y Campos de datos<br>
+				<a href='javascript:AbrirPopUp("FormularioCampos");' title="Agregar un objeto o campo de datos" name=" "><img border='0' src='img/icono_campo.png'/></a>
 				&nbsp;&nbsp;
 				<a href='javascript:AbrirPopUp("FormularioDiseno");' title="Dise&ntilde;o general de campos"><img border='0' src='img/icono_diseno.png'/></a>
 				<hr>
