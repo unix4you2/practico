@@ -592,7 +592,7 @@
 						echo '<td valign=top align=center>';
 							// Crea los campos definidos por cada columna de formulario
 							echo '<table class="TextosVentana">';
-							$consulta_campos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario' AND columna='$cl' AND visible=1 ORDER BY peso");
+							$consulta_campos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND columna='$cl' AND visible=1 ORDER BY peso");
 							while ($registro_campos = $consulta_campos->fetch())
 								{
 									$nombre_campo=$registro_campos["campo"];

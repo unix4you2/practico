@@ -92,8 +92,8 @@ CREATE TABLE Core_formulario (
   PRIMARY KEY  (id)
 );
 
-DROP TABLE IF EXISTS Core_formulario_campo;
-CREATE TABLE Core_formulario_campo (
+DROP TABLE IF EXISTS Core_formulario_objeto;
+CREATE TABLE Core_formulario_objeto (
   id int(10) AUTO_INCREMENT,
   titulo varchar(250) default '',
   campo varchar(250) default '',

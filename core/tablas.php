@@ -21,7 +21,7 @@
 			$mensaje_error="";
 			
 			// Busca si existen formularios utilizando el campo de la tabla antes de ser eliminado
-			//$consulta = "SELECT * FROM ".$TablasCore."formulario_campo WHERE id='$formulario'";
+			//$consulta = "SELECT * FROM ".$TablasCore."formulario_objeto WHERE id='$formulario'";
 			//$resultado = mysql_query($consulta,$mysql_enlace);
 			//$registro = mysql_fetch_array($resultado);
 

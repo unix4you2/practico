@@ -27,7 +27,7 @@
 			// Busca los campos del form marcados como valor unico y verifica que no existan valores en la tabla
 			$tabla=$registro_formulario["tabla_datos"];
 
-			$consulta_campos_unicos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario' AND visible=1 AND valor_unico=1");
+			$consulta_campos_unicos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1 AND valor_unico=1");
 			while ($registro_campos_unicos = $consulta_campos_unicos->fetch())
 				{
 					$campo=$registro_campos_unicos["campo"];
@@ -63,7 +63,7 @@
 
 			// Busca los campos del form marcados como valor unico y verifica que no existan valores en la tabla
 			$tabla=$registro_formulario["tabla_datos"];
-			$consulta_campos_unicos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario' AND visible=1 AND valor_unico=1");
+			$consulta_campos_unicos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1 AND valor_unico=1");
 			while ($registro_campos_unicos = $consulta_campos_unicos->fetch())
 				{
 					$campo=$registro_campos_unicos["campo"];
@@ -83,7 +83,7 @@
 					$lista_valores="";
 					$existe_id=0; // Define si dentro de los valores recibidos esta o no el ID autonumerico.  Sino se agrega
 
-					$consulta_campos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario' AND visible=1");
+					$consulta_campos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1");
 					while ($registro_campos = $consulta_campos->fetch())
 						{
 							$lista_campos.=$registro_campos["campo"].",";
@@ -165,7 +165,7 @@
 			if ($mensaje_error=="")
 				{
 					// Crea la tabla temporal
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_campo WHERE id='$campo' ");
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE id='$campo' ");
 					// Lleva a auditoria
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina campo del formulario $formulario','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -195,7 +195,7 @@
 			if ($campo=="") $mensaje_error="Debe indicar un campo v&aacute;lido para vincular con la tabla de datos asociada al formulario.";
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_campo VALUES (0, '$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto VALUES (0, '$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual')");
 					// Lleva a auditoria
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea campo $id para formulario $formulario','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
@@ -686,7 +686,7 @@ if ($accion=="editar_formulario")
 			 <?php
 
 
-				$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario' ORDER BY columna,peso,titulo");
+				$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' ORDER BY columna,peso,titulo");
 				while($registro = $consulta->fetch())
 					{
 						$peso_aumentado=$registro["peso"]+1;
@@ -698,7 +698,7 @@ if ($accion=="editar_formulario")
 									<form action="'.$ArchivoCORE.'" method="POST" name="ifoc'.$registro["id"].'" id="ifoc'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 										<input type="hidden" name="accion" value="cambiar_estado_campo">
 										<input type="hidden" name="id" value="'.$registro["id"].'">
-										<input type="hidden" name="tabla" value="formulario_campo">
+										<input type="hidden" name="tabla" value="formulario_objeto">
 										<input type="hidden" name="campo" value="columna">
 										<input type="hidden" name="formulario" value="'.$formulario.'">
 										<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -724,7 +724,7 @@ if ($accion=="editar_formulario")
 										<form action="'.$ArchivoCORE.'" method="POST" name="ifoce'.$registro["id"].'" id="ifoce'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 											<input type="hidden" name="accion" value="cambiar_estado_campo">
 											<input type="hidden" name="id" value="'.$registro["id"].'">
-											<input type="hidden" name="tabla" value="formulario_campo">
+											<input type="hidden" name="tabla" value="formulario_objeto">
 											<input type="hidden" name="campo" value="peso">
 											<input type="hidden" name="formulario" value="'.$formulario.'">
 											<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -735,7 +735,7 @@ if ($accion=="editar_formulario")
 										<form action="'.$ArchivoCORE.'" method="POST" name="ifopa'.$registro["id"].'" id="ifopa'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 											<input type="hidden" name="accion" value="cambiar_estado_campo">
 											<input type="hidden" name="id" value="'.$registro["id"].'">
-											<input type="hidden" name="tabla" value="formulario_campo">
+											<input type="hidden" name="tabla" value="formulario_objeto">
 											<input type="hidden" name="campo" value="peso">
 											<input type="hidden" name="formulario" value="'.$formulario.'">
 											<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -758,7 +758,7 @@ if ($accion=="editar_formulario")
 										<form action="'.$ArchivoCORE.'" method="POST" name="ifo'.$registro["id"].'" id="ifo'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 											<input type="hidden" name="accion" value="cambiar_estado_campo">
 											<input type="hidden" name="id" value="'.$registro["id"].'">
-											<input type="hidden" name="tabla" value="formulario_campo">
+											<input type="hidden" name="tabla" value="formulario_objeto">
 											<input type="hidden" name="campo" value="obligatorio">
 											<input type="hidden" name="formulario" value="'.$formulario.'">
 											<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -776,7 +776,7 @@ if ($accion=="editar_formulario")
 											<form action="'.$ArchivoCORE.'" method="POST" name="if'.$registro["id"].'" id="if'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 												<input type="hidden" name="accion" value="cambiar_estado_campo">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
-												<input type="hidden" name="tabla" value="formulario_campo">
+												<input type="hidden" name="tabla" value="formulario_objeto">
 												<input type="hidden" name="campo" value="visible">
 												<input type="hidden" name="formulario" value="'.$formulario.'">
 												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -991,7 +991,7 @@ if ($accion=="editar_formulario")
 			if ($mensaje_error=="")
 				{
 					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario WHERE id='$formulario'");
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_campo WHERE formulario='$formulario'");
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario'");
 					// Lleva a auditoria
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina formulario $id','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_formularios"></form>
