@@ -10,7 +10,7 @@
 		$ArchivoCORE='';
 		$TablasCore='Core_';
 		$TablasApp='App_';
-		$LlaveDePaso='V92D3NZBJ9';
+		$LlaveDePaso='NNOUDYJU3D';
 		$ModoDepuracion=0;
 		$ZonaHoraria='America/Bogota';
 		$CaracteresCaptcha=1;
