@@ -11,7 +11,7 @@
 		$TablasCore='Core_';
 		$TablasApp='App_';
 		$LlaveDePaso='NNOUDYJU3D';
-		$ModoDepuracion=0;
+		$ModoDepuracion=1;
 		$ZonaHoraria='America/Bogota';
 		$CaracteresCaptcha=1;
 	?>

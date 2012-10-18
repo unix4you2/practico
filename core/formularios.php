@@ -195,7 +195,7 @@
 			if ($campo=="") $mensaje_error="Debe indicar un campo v&aacute;lido para vincular con la tabla de datos asociada al formulario.";
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto VALUES (0, '$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto VALUES (0,'$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica')");
 					// Lleva a auditoria
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea campo $id para formulario $formulario','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
@@ -283,9 +283,11 @@ if ($accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(13);
+					OcultarCampos(17);
 					// Muestra campos segun tipo de objeto
-					if (tipo_objeto_activo=="texto_corto") VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,13");
+					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,13,17");
+					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17");
+					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -312,9 +314,9 @@ if ($accion=="editar_formulario")
 									<option value="0">SELECCIONE UNO</option>
 									<optgroup label="Controles de datos">
 										<option value="texto_corto">Campo de texto corto</option>
-										<option value="lista_seleccion">Campo de selecci&oacute;n (combo-box)</option>
 										<option value="texto_largo">Campo de texto libre</option>
 										<option value="texto_formato">Campo de texto con formato enriquecido</option>
+										<option value="lista_seleccion">Campo de selecci&oacute;n (combo-box)</option>
 									</optgroup>
 									<optgroup label="Presentaci&oacute;n y otros contenidos">
 										<option value="etiqueta">Texto enriquecido (como etiqueta)</option>
@@ -366,13 +368,12 @@ if ($accion=="editar_formulario")
 						</div>
 
 
-
 						<div id='campo3' style="display:none;">
 							<table class="TextosVentana">
 							<tr>
 								<td width="200" align="right">Campo de valor &uacute;nico:</td>
 								<td width="400" >
-									<input type="checkbox" value=1 name="valor_unico" checked>
+									<input type="checkbox" value=1 name="valor_unico">
 									<a href="#" title="Unicidad para los valores ingresados" name="Indica si el campo puede almacenar o no valores repetidos en la base de datos.  Deber&iacute;a estar habilitado para campos que representen claves primarias en su dise&ntilde;o y deshabilitado para el resto."><img src="img/icn_10.gif" border=0></a>	</td>
 							</tr>
 							</table>
@@ -437,7 +438,8 @@ if ($accion=="editar_formulario")
 							<table class="TextosVentana">
 							<tr>
 								<td width="200"   valign="top" align="right">Texto de ayuda</td>
-								<td width="400"  colspan=2 valign="top"><textarea name="ayuda_texto" cols="25" rows="1" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"><?php echo str_replace("<br>", "\r\n", $registro["ayuda_facturacion"]);  ?></textarea>
+								<td width="400"  colspan=2 valign="top">
+									<textarea name="ayuda_texto" cols="25" rows="2" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"></textarea>
 								<a href="#" title="Ayuda r&aacute;pida:" name="Texto completo con la descripcion de funciones resumida para el campo.  Puede incluir instrucciones de formato, advertencias o cualquier otro mensaje para el usuario."><img align="top" src="img/icn_10.gif" border=0></a>	</td>
 							</tr>
 							</table>
@@ -531,6 +533,61 @@ if ($accion=="editar_formulario")
 										<option value="0" selected>No</option>
 									</select>
 								<a href="#" title="Ingreso de informaci&oacute;n sin teclado" name="Cuando es habilitado en el formulario se despliega un teclado virtual para el ingreso de informaci&oacute;n;.  Por ahora el uso del teclado puede violar las validaciones."><img src="img/icn_10.gif" border=0></a>	</td>
+							</tr>
+							</table>
+						</div>
+
+						<div id='campo14' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Ancho:</td>
+								<td width="400" ><input type="text" name="ancho" size="4" class="CampoTexto">
+									<a href="#" title="Cu&aacute;nto espacio de ancho debe ocupar el control" name="IMPORTANTE: en n&uacute;mero de caracteres para texto simple o en pixeles para texto con formato. Indique un n&uacute;mero de columnas, sin embargo, tenga presente que el ancho en pixeles ser&aacute; variable de acuerdo al tipo de fuente utilizada por el tema actual."><img src="img/icn_10.gif" border=0></a>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+						<div id='campo15' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Alto (l&iacute;neas):</td>
+								<td width="400" ><input type="text" name="alto" size="4" class="CampoTexto">
+									<a href="#" title="Cu&aacute;ntas filas deben estar visibles en el control?" name="IMPORTANTE: en n&uacute;mero de filas para texto simple o en pixeles para texto con formato.  En caso que el texto supere el n&uacute;mero de filas se agregar&aacute;n autom&aacute;ticamente barras de desplazamiento."><img src="img/icn_10.gif" border=0></a>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+						<div id='campo16' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Barra de edici&oacute;n:</td>
+								<td width="400" >
+									<select  name="barra_herramientas" class="Combos" >
+										<option value="0">B&aacute;sica: Documento, formato de caracter y p&aacute;rrafo</option>
+										<option value="1">Est&aacute;ndar: B&aacute;sica + Enlaces, estilos de fuente</option>
+										<option value="2">Extendida: Est&aacute;ndar + Portapapeles, buscar-reemplazar y ortograf&iacute;a</option>
+										<option value="3">Avanzada: Extendida + Insertar objetos y colores</option>
+										<option value="4">Completa: Avanzada +  Formularios y pantalla completa</option>
+									</select>
+									<a href="#" title="Tipo de editor utilizado:" name="Indica el tipo de barra de herramientas que aparecer&aacute; en la parte superior del control y que permitir&aacute; realizar al usuario las diferentes tareas de edici&oacute;n del texto. IMPORTANTE: Cada tipo de editor requiere un espacio diferente en el formulario ya que debe desplegar un n&uacute;mero de iconos y opciones diferentes."><img src="img/icn_10.gif" border=0></a>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+						<div id='campo17' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Fila &uacute;nica para este objeto?</td>
+								<td width="400" >
+									<select  name="fila_unica" class="Combos" >
+										<option value="0">No</option>
+										<option value="1">Si</option>
+									</select>
+									<a href="#" title="Se debe utilizar una fila completa para el objeto?" name="Permite desplegar el objeto en una fila exclusiva de la tabla usada en el formulario."><img src="img/icn_10.gif" border=0></a> (Experimental)
+								</td>
 							</tr>
 							</table>
 						</div>

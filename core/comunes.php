@@ -584,70 +584,222 @@
 					<input type="Hidden" name="accion" value="guardar_datos_formulario">
 					<input type="Hidden" name="formulario" value="'.$formulario.'">';
 
+				//Booleana que determina si se debe incluir el javascript de ckeditor
+				$existe_campo_textoformato=0;
+
 				// Inicia la tabla con los campos
-				echo '<table class="TextosVentana" width="100%"><tr>';
+				echo '<table border=0 class="TextosVentana" width="100%"><tr>';
 				for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
 					{
+						$consulta_campos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND columna='$cl' AND visible=1 ORDER BY peso");
+						$expansion_columnas="";
+						$numero_columnas_expandir=$registro_formulario["columnas"]*2;
+						if ($registro_campos["fila_unica"]) 
+							{
+								$expansion_columnas=" colspan='".$numero_columnas_expandir."' ";
+							}
+
 						//Inicia columna de formulario
-						echo '<td valign=top align=center>';
+						echo '<td '.$expansion_columnas.' valign=top align=center>';
 							// Crea los campos definidos por cada columna de formulario
-							echo '<table class="TextosVentana">';
-							$consulta_campos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND columna='$cl' AND visible=1 ORDER BY peso");
+							echo '<table border=0 class="TextosVentana">';
 							while ($registro_campos = $consulta_campos->fetch())
 								{
-									$nombre_campo=$registro_campos["campo"];
-									$tipo_entrada="text";
-									echo '<tr>
+									//Crea la fila y celda donde va el campo
+									// Si el objeto tiene expansion en toda la fila entonces no crea columna con etiqueta y la pone sobre el directamente
+									if ($registro_campos["fila_unica"]=="1")
+										echo '<tr>
+											<td valign=top>'.$registro_campos["titulo"].'<br>';
+									else
+										echo '<tr>
 											<td align="right" valign=top>'.$registro_campos["titulo"].'</td>
 											<td valign=top>';
 
-									// Define cadenas de longitud de campo
-									$cadena_longitud_visual=' size="20" ';
-									$cadena_longitud_permitida='';
-
-									// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
-									$cadena_valor='';
-									if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
-									if ($campobase!="" && $valorbase!="") $cadena_valor=' value="'.$registro_datos_formulario["$nombre_campo"].'" ';
-
-									// Define cadenas en caso de tener validaciones
-									$cadena_validacion='';
-									$cadena_fechas='';
-									if ($registro_campos["validacion_datos"]!="" && $registro_campos["validacion_datos"]!="fecha")
-										$cadena_validacion=' onkeypress="return validar_teclado(event, \''.$registro_campos["validacion_datos"].'\');" ';
-									if ($registro_campos["validacion_datos"]=="fecha")
+									// Despliega cada campo de acuerdo a su tipo
+									/* CAMPOS TIPO texto_corto %%%%%%%%%%%%%%%%%%%%%%*/
+									if ($registro_campos["tipo"]=="texto_corto")
 										{
-											$cadena_longitud_visual=' size="10" ';
-											$tipo_entrada="date";
-										}						
+											$nombre_campo=$registro_campos["campo"];
+											$tipo_entrada="text";
 
-									// Define si muestra o no teclado virtual
-									$cadena_clase_teclado="";
-									if ($registro_campos["teclado_virtual"])
-										$cadena_clase_teclado="keyboardInput";
+											// Define cadenas de longitud de campo
+											$cadena_longitud_visual=' size="20" ';
+											$cadena_longitud_permitida='';
 
-									// Muestra el campo
-									echo '<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="CampoTexto '.$cadena_clase_teclado.'" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].'  >';
+											// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
+											$cadena_valor='';
+											if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
+											if ($campobase!="" && $valorbase!="") $cadena_valor=' value="'.$registro_datos_formulario["$nombre_campo"].'" ';
 
-									// Muestra boton de busqueda cuando el campo sea usado para esto
-									if ($registro_campos["etiqueta_busqueda"]!="")
-										{
-											echo '<input type="Button" class="BotonesEstado" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.valorbase.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.accion.value=\'cargar_objeto\';document.datos.submit()">';
-											echo '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
-											echo '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
-											echo '<input type="Hidden" name="campobase" value="'.$registro_campos["campo"].'" >';
-											echo '<input type="Hidden" name="valorbase" '.$cadena_valor.'>';
+											// Define cadenas en caso de tener validaciones
+											$cadena_validacion='';
+											$cadena_fechas='';
+											if ($registro_campos["validacion_datos"]!="" && $registro_campos["validacion_datos"]!="fecha")
+												$cadena_validacion=' onkeypress="return validar_teclado(event, \''.$registro_campos["validacion_datos"].'\');" ';
+											if ($registro_campos["validacion_datos"]=="fecha")
+												{
+													$cadena_longitud_visual=' size="11" ';
+													$tipo_entrada="date";
+												}						
+
+											// Define si muestra o no teclado virtual
+											$cadena_clase_teclado="";
+											if ($registro_campos["teclado_virtual"])
+												$cadena_clase_teclado="keyboardInput";
+
+											// Muestra el campo
+											echo '<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="CampoTexto '.$cadena_clase_teclado.'" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].'  >';
+
+											// Muestra boton de busqueda cuando el campo sea usado para esto
+											if ($registro_campos["etiqueta_busqueda"]!="")
+												{
+													echo '<input type="Button" class="BotonesEstado" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.valorbase.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.accion.value=\'cargar_objeto\';document.datos.submit()">';
+													echo '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
+													echo '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
+													echo '<input type="Hidden" name="campobase" value="'.$registro_campos["campo"].'" >';
+													echo '<input type="Hidden" name="valorbase" '.$cadena_valor.'>';
+												}
+
+											// Muestra indicadores de obligatoriedad o ayuda
+											if ($registro_campos["valor_unico"] == "1") echo '<a href="#" title="El valor ingresado no acepta duplicados" name="El sistema validar&aacute; la informaci&oacute;n ingresada en este campo, en caso de ya existir en la base de datos no se permitir&aacute; su ingreso."><img src="img/key.gif" border=0 border=0 align="absmiddle"></a>';
+											if ($registro_campos["obligatorio"]) echo '<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
+											if ($registro_campos["ayuda_titulo"] != "") echo '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0 border=0 align="absmiddle"></a>';
 										}
+									/* FIN CAMPOS TIPO texto_corto %%%%%%%%%%%%%%%%%%%%%%*/
 
-									// Muestra indicadores de obligatoriedad o ayuda
-									if ($registro_campos["valor_unico"] == "1") echo '<a href="#" title="El valor ingresado no acepta duplicados" name="El sistema validar&aacute; la informaci&oacute;n ingresada en este campo, en caso de ya existir en la base de datos no se permitir&aacute; su ingreso."><img src="img/key.gif" border=0 border=0 align="absmiddle"></a>';
-									if ($registro_campos["obligatorio"]) echo '<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
-									if ($registro_campos["ayuda_titulo"] != "") echo '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0 border=0 align="absmiddle"></a>';
+									/* CAMPOS TIPO texto_largo %%%%%%%%%%%%%%%%%%%%%%*/
+									if ($registro_campos["tipo"]=="texto_largo")
+										{
+											$nombre_campo=$registro_campos["campo"];
+											$tipo_entrada="text";
+
+											// Define cadenas de tamano de campo
+											$cadena_ancho_visual=' cols="'.$registro_campos["ancho"].'" ';
+											$cadena_alto_visual=' rows="'.$registro_campos["alto"].'" ';
+											$cadena_longitud_visual=$cadena_ancho_visual.$cadena_alto_visual;
+
+											// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
+											$cadena_valor='';
+											if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
+											if ($campobase!="" && $valorbase!="") $cadena_valor=' value="'.$registro_datos_formulario["$nombre_campo"].'" ';
+
+											// Muestra el campo
+											echo '<textarea name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="AreaTexto" '.$registro_campos["solo_lectura"].'  >'.$cadena_valor.'</textarea>';
+
+											// Muestra indicadores de obligatoriedad o ayuda
+											if ($registro_campos["obligatorio"]) echo '<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
+											if ($registro_campos["ayuda_titulo"] != "") echo '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0 border=0 align="absmiddle"></a>';
+										}
+									/* FIN CAMPOS TIPO texto_largo %%%%%%%%%%%%%%%%%%%%%%*/
+
+									/* CAMPOS TIPO texto_formato %%%%%%%%%%%%%%%%%%%%%%*/
+									if ($registro_campos["tipo"]=="texto_formato")
+										{
+											$nombre_campo=$registro_campos["campo"];
+											$tipo_entrada="text";
+
+											// Define cadenas de tamano de campo
+											$cadena_ancho_visual=' cols="'.$registro_campos["ancho"].'" ';
+											$cadena_alto_visual=' rows="'.$registro_campos["alto"].'" ';
+											$cadena_longitud_visual=$cadena_ancho_visual.$cadena_alto_visual;
+
+											// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
+											$cadena_valor='';
+											if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
+											if ($campobase!="" && $valorbase!="") $cadena_valor=' value="'.$registro_datos_formulario["$nombre_campo"].'" ';
+
+											// Muestra el campo
+											echo '<textarea name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="ckeditor" '.$registro_campos["solo_lectura"].'  >'.$cadena_valor.'</textarea>';
+											
+											// Define las barras posibles para el editor
+											$barra_documento="['Source','-','NewPage','DocProps','Preview','Print','-','Templates']";
+											$barra_basica="['Bold', 'Italic', 'Underline', 'Strike', 'Subscript','Superscript','-','RemoveFormat']";
+											$barra_parrafo="['NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl']";
+											$barra_enlaces="['Link','Unlink','Anchor']";
+											$barra_estilos="['Styles','Format','Font','FontSize']";
+											$barra_portapapeles="['Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo']";
+											$barra_edicion="['Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt']";
+											$barra_insertar="['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe']";
+											$barra_colores="['TextColor','BGColor']";
+											$barra_formularios="['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField']";
+											$barra_otros="['Maximize', 'ShowBlocks']";
+
+											// Construye las barras de herramientas de acuerdo a la seleccion del usuario
+											$barra_editor.="['-']";
+											if ($registro_campos["barra_herramientas"]=="0")
+												{
+													$barra_editor.=",".$barra_documento;
+													$barra_editor.=",".$barra_basica;
+													$barra_editor.=",".$barra_parrafo;
+												}
+											if ($registro_campos["barra_herramientas"]=="1")
+												{
+													$barra_editor.=",".$barra_documento;
+													$barra_editor.=",".$barra_basica;
+													$barra_editor.=",".$barra_parrafo;
+													$barra_editor.=",".$barra_enlaces;
+													$barra_editor.=",".$barra_estilos;
+												}
+											if ($registro_campos["barra_herramientas"]=="2")
+												{
+													$barra_editor.=",".$barra_documento;
+													$barra_editor.=",".$barra_basica;
+													$barra_editor.=",".$barra_parrafo;
+													$barra_editor.=",".$barra_enlaces;
+													$barra_editor.=",".$barra_estilos;
+													$barra_editor.=",".$barra_portapapeles;
+													$barra_editor.=",".$barra_edicion;
+												}
+											if ($registro_campos["barra_herramientas"]=="3")
+												{
+													$barra_editor.=",".$barra_documento;
+													$barra_editor.=",".$barra_basica;
+													$barra_editor.=",".$barra_parrafo;
+													$barra_editor.=",".$barra_enlaces;
+													$barra_editor.=",".$barra_estilos;
+													$barra_editor.=",".$barra_portapapeles;
+													$barra_editor.=",".$barra_edicion;
+													$barra_editor.=",".$barra_insertar;
+													$barra_editor.=",".$barra_colores;
+												}
+											if ($registro_campos["barra_herramientas"]=="4")
+												{
+													$barra_editor.=",".$barra_documento;
+													$barra_editor.=",".$barra_basica;
+													$barra_editor.=",".$barra_parrafo;
+													$barra_editor.=",".$barra_enlaces;
+													$barra_editor.=",".$barra_estilos;
+													$barra_editor.=",".$barra_portapapeles;
+													$barra_editor.=",".$barra_edicion;
+													$barra_editor.=",".$barra_insertar;
+													$barra_editor.=",".$barra_colores;
+													$barra_editor.=",".$barra_formularios;
+													$barra_editor.=",".$barra_otros;
+												}
+											// Aplica el script del ckeditor al campo
+											if (!$existe_campo_textoformato)
+												echo '<script type="text/javascript" src="inc/ckeditor/ckeditor.js"></script>';
+											echo '	<script type="text/javascript">
+														CKEDITOR.replace( \''.$registro_campos["campo"].'\', {	toolbar : [ '.$barra_editor.' ] } );
+														CKEDITOR.config.width = '.$registro_campos["ancho"].';
+														CKEDITOR.config.height = '.$registro_campos["alto"].';
+													</script>';
+
+											// Muestra indicadores de obligatoriedad o ayuda
+											if ($registro_campos["obligatorio"]) echo '<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
+											if ($registro_campos["ayuda_titulo"] != "") echo '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0 border=0 align="absmiddle"></a>';
+											
+											//Activa booleana de existencia de tipo de campo para evitar doble inclusion de javascript
+											$existe_campo_textoformato=1;
+										}
+									/* FIN CAMPOS TIPO texto_formato %%%%%%%%%%%%%%%%%%%%%%*/
+
+									// Cierra la fila y celda donde se puso el objeto
 									echo '</td></tr>';
 								}
 							// Cierra tabla de campos en la columna
 							echo '</table>';
-						echo '</td>';
+						echo '</td>'; //Fin columna de formulario
 					}
 				// Finaliza la tabla con los campos
 				echo '</tr></table>';

@@ -95,6 +95,7 @@ CREATE TABLE Core_formulario (
 DROP TABLE IF EXISTS Core_formulario_objeto;
 CREATE TABLE Core_formulario_objeto (
   id int(10) AUTO_INCREMENT,
+  tipo varchar(20),
   titulo varchar(250) default '',
   campo varchar(250) default '',
   ayuda_titulo varchar(50) default '',
@@ -111,6 +112,10 @@ CREATE TABLE Core_formulario_objeto (
   valor_unico int(1) default '0',
   solo_lectura varchar(10) default '',
   teclado_virtual int(1) default '0',
+  ancho int(10),
+  alto int(10),
+  barra_herramientas int(1),
+  fila_unica int(1),
   PRIMARY KEY  (id)
 );
 
