@@ -195,7 +195,7 @@
 			if ($campo=="") $mensaje_error="Debe indicar un campo v&aacute;lido para vincular con la tabla de datos asociada al formulario.";
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto VALUES (0,'$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto VALUES (0,'$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones')");
 					// Lleva a auditoria
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea campo $id para formulario $formulario','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
@@ -288,6 +288,7 @@ if ($accion=="editar_formulario")
 					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,13,17");
 					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17");
 					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17");
+					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,18");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -316,7 +317,7 @@ if ($accion=="editar_formulario")
 										<option value="texto_corto">Campo de texto corto</option>
 										<option value="texto_largo">Campo de texto libre</option>
 										<option value="texto_formato">Campo de texto con formato enriquecido</option>
-										<option value="lista_seleccion">Campo de selecci&oacute;n (combo-box)</option>
+										<option value="lista_seleccion">Campo de selecci&oacute;n (ComboBox)</option>
 									</optgroup>
 									<optgroup label="Presentaci&oacute;n y otros contenidos">
 										<option value="etiqueta">Texto enriquecido (como etiqueta)</option>
@@ -543,6 +544,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right">Ancho:</td>
 								<td width="400" ><input type="text" name="ancho" size="4" class="CampoTexto">
 									<a href="#" title="Cu&aacute;nto espacio de ancho debe ocupar el control" name="IMPORTANTE: en n&uacute;mero de caracteres para texto simple o en pixeles para texto con formato. Indique un n&uacute;mero de columnas, sin embargo, tenga presente que el ancho en pixeles ser&aacute; variable de acuerdo al tipo de fuente utilizada por el tema actual."><img src="img/icn_10.gif" border=0></a>
+									<i>(M&iacute;nimo recomendado en campos con formato: 350)</i>
 								</td>
 							</tr>
 							</table>
@@ -554,6 +556,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right">Alto (l&iacute;neas):</td>
 								<td width="400" ><input type="text" name="alto" size="4" class="CampoTexto">
 									<a href="#" title="Cu&aacute;ntas filas deben estar visibles en el control?" name="IMPORTANTE: en n&uacute;mero de filas para texto simple o en pixeles para texto con formato.  En caso que el texto supere el n&uacute;mero de filas se agregar&aacute;n autom&aacute;ticamente barras de desplazamiento."><img src="img/icn_10.gif" border=0></a>
+									<i>(M&iacute;nimo recomendado en campos con formato: 100)</i>
 								</td>
 							</tr>
 							</table>
@@ -587,6 +590,18 @@ if ($accion=="editar_formulario")
 										<option value="1">Si</option>
 									</select>
 									<a href="#" title="Se debe utilizar una fila completa para el objeto?" name="Permite desplegar el objeto en una fila exclusiva de la tabla usada en el formulario."><img src="img/icn_10.gif" border=0></a> (Experimental)
+								</td>
+							</tr>
+							</table>
+						</div>
+
+						<div id='campo18' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Lista de opciones:</td>
+								<td width="400" ><input type="text" name="lista_opciones" size="30" class="CampoTexto">
+									<a href="#" title="Qu&eacute; opciones aparecen para ser escogidas" name="Ingrese una lista de opciones separadas por coma.  Si requiere tomar las opciones din&aacute;micamente desde otra tabla de la aplicaci&oacute;n utilice los campos de Origen de datos para opciones."><img src="img/icn_10.gif" border=0></a>
+									(Separadas por coma)
 								</td>
 							</tr>
 							</table>

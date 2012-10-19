@@ -620,7 +620,7 @@
 									if ($registro_campos["tipo"]=="texto_corto")
 										{
 											$nombre_campo=$registro_campos["campo"];
-											$tipo_entrada="text";
+											$tipo_entrada="text"; // Se cambia a date si se trata de un campo con validacion de fecha
 
 											// Define cadenas de longitud de campo
 											$cadena_longitud_visual=' size="20" ';
@@ -671,7 +671,6 @@
 									if ($registro_campos["tipo"]=="texto_largo")
 										{
 											$nombre_campo=$registro_campos["campo"];
-											$tipo_entrada="text";
 
 											// Define cadenas de tamano de campo
 											$cadena_ancho_visual=' cols="'.$registro_campos["ancho"].'" ';
@@ -681,7 +680,7 @@
 											// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 											$cadena_valor='';
 											if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
-											if ($campobase!="" && $valorbase!="") $cadena_valor=' value="'.$registro_datos_formulario["$nombre_campo"].'" ';
+											if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 											// Muestra el campo
 											echo '<textarea name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="AreaTexto" '.$registro_campos["solo_lectura"].'  >'.$cadena_valor.'</textarea>';
@@ -696,7 +695,6 @@
 									if ($registro_campos["tipo"]=="texto_formato")
 										{
 											$nombre_campo=$registro_campos["campo"];
-											$tipo_entrada="text";
 
 											// Define cadenas de tamano de campo
 											$cadena_ancho_visual=' cols="'.$registro_campos["ancho"].'" ';
@@ -706,7 +704,7 @@
 											// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 											$cadena_valor='';
 											if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
-											if ($campobase!="" && $valorbase!="") $cadena_valor=' value="'.$registro_datos_formulario["$nombre_campo"].'" ';
+											if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 											// Muestra el campo
 											echo '<textarea name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="ckeditor" '.$registro_campos["solo_lectura"].'  >'.$cadena_valor.'</textarea>';
@@ -793,6 +791,38 @@
 											$existe_campo_textoformato=1;
 										}
 									/* FIN CAMPOS TIPO texto_formato %%%%%%%%%%%%%%%%%%%%%%*/
+
+									/* CAMPOS TIPO lista_seleccion %%%%%%%%%%%%%%%%%%%%%%*/
+									if ($registro_campos["tipo"]=="lista_seleccion")
+										{
+											$nombre_campo=$registro_campos["campo"];
+
+											// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
+											if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
+
+											// Muestra el campo
+											echo '<select name="'.$registro_campos["campo"].'" class="Combos" >';
+
+											// Toma los valores desde la lista de opciones (cuando es estatico)
+											$opciones_lista = explode(",", $registro_campos["lista_opciones"]);
+											for ($i=0;$i<count($opciones_lista);$i++)
+												{
+													// Determina si la opcion a agregar es la misma del valor del registro
+													$cadena_predeterminado='';
+													if ($opciones_lista[$i]==$cadena_valor)
+														$cadena_predeterminado=' SELECTED ';
+													echo "<option value='".$opciones_lista[$i]."' ".$cadena_predeterminado.">".$opciones_lista[$i]."</option>";
+												}
+
+											echo '</select>';
+
+											// Muestra indicadores de obligatoriedad o ayuda
+											if ($registro_campos["valor_unico"] == "1") echo '<a href="#" title="El valor ingresado no acepta duplicados" name="El sistema validar&aacute; la informaci&oacute;n ingresada en este campo, en caso de ya existir en la base de datos no se permitir&aacute; su ingreso."><img src="img/key.gif" border=0 border=0 align="absmiddle"></a>';
+											if ($registro_campos["obligatorio"]) echo '<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
+											if ($registro_campos["ayuda_titulo"] != "") echo '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0 border=0 align="absmiddle"></a>';
+										}
+									/* FIN CAMPOS TIPO lista_seleccion %%%%%%%%%%%%%%%%%%%%%%*/
+
 
 									// Cierra la fila y celda donde se puso el objeto
 									echo '</td></tr>';
