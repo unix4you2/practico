@@ -14,6 +14,8 @@
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/calendario.css">
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/tecladovirtual.css">
 
+	<link rel="shortcut icon" href="skin/<?php echo $PlantillaActiva; ?>/img/favicon.ico"/>
+	
 </head>
 <body leftmargin="0"  margin="0" topmargin="0" oncontextmenu="return false;">
 
