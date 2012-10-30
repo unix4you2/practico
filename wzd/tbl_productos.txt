@@ -1,0 +1,7 @@
+id
+codigo
+nombre
+descripcion
+precioventa
+existencia
+costo

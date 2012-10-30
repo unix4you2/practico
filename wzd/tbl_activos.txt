@@ -1,0 +1,15 @@
+id
+codigodebarras
+comentarios
+valoractual
+fechacompra
+fechaventa
+vidaamortizable
+metododepreciacion
+descripcion
+marca
+modelo
+proximomantenimiento
+preciocompra
+numeroserial
+

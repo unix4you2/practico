@@ -1,0 +1,14 @@
+id
+fechainicio
+horainicio
+espaciosdisponibles
+confirmacion
+costoporpersona
+fechafin
+horafin
+descripcionactividad
+nombreactividad
+ubicacion
+notas
+personalrequerido
+cupomaximo

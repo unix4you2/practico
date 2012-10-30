@@ -346,6 +346,9 @@ if ($accion=="editar_tabla")
 			<input type="Hidden" name="accion" value="guardar_crear_tabla">
 			<div align=center>
 			<br>Crear una nueva tabla de datos en <b><?php echo $BaseDatos; ?></b>:
+			<table class="TextosVentana" cellspacing=10>
+			</tr>
+			<td>
 				<table class="TextosVentana">
 					<tr>
 						<td align="center">Nombre:</td>
@@ -363,7 +366,19 @@ if ($accion=="editar_tabla")
 						</td>
 					</tr>
 				</table>
-			<br><hr>
+			</td>
+			<td width=50>
+			</td>
+			<td align=center>
+				<form name="datosasis" id="datosasis" action="<?php echo $ArchivoCORE; ?>" method="POST">
+				<input type="Hidden" name="accion" value="asistente_tablas">
+				Asistente<br>
+				<a href="javascript:document.datosasis.submit()" title="Utilizar asistente?" name="Permite seleccionar desde algunas tablas comunes predefinidas"><img src="img/asistente.png" border=0 alt=0></a>
+				</form>
+			</td>
+			<tr>
+			</table>
+			<hr>
 
 		<font face="" size="3" color="Navy"><b>Tablas definidas en la base de datos</b></font><br><br>
 				<table width="100%" border="0" cellspacing="5" align="CENTER"  class="TextosVentana" >

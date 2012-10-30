@@ -1,5 +1,5 @@
 <?php
-		$ServidorBD='127.0.0.1';
+		$ServidorBD='localhost';
 		$BaseDatos='practico';
 		$UsuarioBD='root';
 		$PasswordBD='';
@@ -10,8 +10,8 @@
 		$ArchivoCORE='';
 		$TablasCore='Core_';
 		$TablasApp='App_';
-		$LlaveDePaso='NNOUDYJU3D';
-		$ModoDepuracion=1;
+		$LlaveDePaso='HDPAHL7PHW';
+		$ModoDepuracion=0;
 		$ZonaHoraria='America/Bogota';
-		$CaracteresCaptcha=1;
+		$CaracteresCaptcha=4;
 	?>
