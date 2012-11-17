@@ -184,7 +184,7 @@ if ($accion=="editar_tabla")
 									while($registro = $resultado->fetch())
 										{
 											echo '<option value="'.$registro["Field"].'" >Despu&eacute;s de '.$registro["Field"].'</option>';
-										}							
+										}
 								?>
 							</select>
 						</td>
@@ -261,7 +261,7 @@ if ($accion=="editar_tabla")
 						echo '	</tr>';
 
 					}
-				echo '</table>';			
+				echo '</table>';
 		?>
 				
 			</div>
@@ -373,7 +373,7 @@ if ($accion=="editar_tabla")
 				<form name="datosasis" id="datosasis" action="<?php echo $ArchivoCORE; ?>" method="POST">
 				<input type="Hidden" name="accion" value="asistente_tablas">
 				Asistente<br>
-				<a href="javascript:document.datosasis.submit()" title="Utilizar asistente?" name="Permite seleccionar desde algunas tablas comunes predefinidas"><img src="img/asistente.png" border=0 alt=0></a>
+				<a href="#" title="Utilizar asistente?" name="Permite seleccionar desde algunas tablas comunes predefinidas"><input type="image" src="img/asistente.png"></a>
 				</form>
 			</td>
 			<tr>
@@ -435,10 +435,191 @@ if ($accion=="editar_tabla")
 							</tr>';
 				}
 				echo '</table>';	
+			cerrar_ventana();
+	}
 
 
 
-		?>		
+/* ################################################################## */
+/* ################################################################## */
+	if ($accion=="guardar_crear_tabla_asistente")
+		{
+			$mensaje_error="";
+			if ($nombre_tabla=="") $mensaje_error="Debe indicar un nombre v&aacute;lido para la tabla.  Este no debe contener guiones, puntos, espacios o caracteres especiales.";
+			if ($plantilla_tabla=="") $mensaje_error.="<br>Debe seleccionar una plantilla desde la cual desea crear su nueva tabla.";
+			if ($mensaje_error=="")
+				{
+					// Crea la tabla temporal
+					$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+					if ($error_consulta!="")
+						{
+							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+								<input type="Hidden" name="accion" value="asistente_tablas">
+								<input type="Hidden" name="error_titulo" value="ERROR DE BASE DE DATOS">
+								<input type="Hidden" name="error_descripcion" value="Durante la ejecucion el motor ha retornado: <i>'.$error_mysql.'</i>">
+								</form>
+									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+						}
+					else
+						{
+							//Busca los campos en la plantilla
+							$directorio="wzd/";
+							//Carga el archivo de plantilla
+							$archivo_origen=$directorio.$plantilla_tabla;
+							$archivo = fopen($archivo_origen, "r");
+							if ($archivo)
+								{
+									$evitar_linea = fgets($archivo, 8192); //nombre
+									$NombreTabla= fgets($archivo, 8192);
+									$evitar_linea = fgets($archivo, 8192); //descripcion tabla
+									$DescripcionTabla= fgets($archivo, 8192);
+									$evitar_linea = fgets($archivo, 8192); //campos
+									while (!feof($archivo))
+										{
+											$linea = fgets($archivo, 8192);
+											$campos = explode("|", $linea);
+											// Verifica si el campo de texto no es vacio y lo agrega
+											if (strlen($linea)>5)
+												{
+													$nombre_campo=$campos[1];
+													$tipo=$campos[2];
+													$longitud=$campos[3];
+													// Construye la consulta para la creacion del campo (sintaxis mysql por ahora)
+													$consulta = "ALTER TABLE ".$TablasApp."$nombre_tabla ADD COLUMN $nombre_campo $tipo";
+													if ($longitud!="")
+														$consulta .= "($longitud) ";
+													// Realiza la operacion
+													ejecutar_sql_unaria($consulta);
+												}
+										}
+									fclose($archivo);
+								}
+							// Lleva a auditoria
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea tabla $nombre_tabla','$fecha_operacion','$hora_operacion')");
+							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+							<input type="Hidden" name="accion" value="editar_tabla">
+							<input type="hidden" name="nombre_tabla" value="'.$TablasApp.''.$nombre_tabla.'">
+							</form>
+									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+						}
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="asistente_tablas">
+						<input type="Hidden" name="error_titulo" value="Problema de integridad de consultas">
+						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+		}
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+	if ($accion=="asistente_tablas")
+		{
+			abrir_ventana('Asistente para generaci&oacute;n de tablas','f2f2f2',''); ?>
+			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<input type="Hidden" name="accion" value="guardar_crear_tabla_asistente">
+			<div align=center>
+			<br>Crear una nueva tabla de datos en <b><?php echo $BaseDatos; ?></b>:
+			<table class="TextosVentana" cellspacing=10>
+			</tr>
+			<td>
+				<table class="TextosVentana">
+					<tr>
+						<td align="right">Nombre para la nueva tabla:</td>
+						<td><?php echo $TablasApp; ?><input type="text" name="nombre_tabla" size="20" class="CampoTexto">
+						<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
+						<a href="#" title="Ayuda general de tablas" name="Una tabla de datos es una estrctura que le permite almacenar informaci&oacute;n. Ingrese en este espacio el nombre de la tabla sin guiones, puntos, espacios o caracteres especiales. SENSIBLE A MAYUSCULAS"><img src="img/icn_10.gif" border=0></a></td>
+					</tr>
+					<tr>
+						<td align="right"><b>Plantilla de tabla seleccionada:</b></td>
+						<td>
+							<select name="plantilla_tabla" onChange="datos.descripciontabla.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].label; datos.listacampos.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].dir; datos.totalcampos.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].lang;">
+								<option value="" label="" dir="" lang="">Seleccione una</option>
+								<?php
+									$directorio="wzd/";
+									$dh = opendir($directorio);
+									
+									while (($file = readdir($dh)) !== false)
+										{
+											if (($file != ".") && ($file != "..") && stristr($file,"tbl_")  && !stristr($file,"~"))
+												{
+													//Carga el archivo de plantilla
+													$archivo_origen=$directorio.$file;
+													$archivo = fopen($archivo_origen, "r");
+													if ($archivo)
+														{
+															$evitar_linea = fgets($archivo, 8192); //nombre
+															$NombreTabla= fgets($archivo, 8192);
+															$evitar_linea = fgets($archivo, 8192); //descripcion tabla
+															$DescripcionTabla= fgets($archivo, 8192);
+															$evitar_linea = fgets($archivo, 8192); //campos
+															$conteocampo=0;
+															$DescripcionCampos="";
+															while (!feof($archivo))
+																{
+																	$linea = fgets($archivo, 8192);
+																	$campos = explode("|", $linea);
+																	// Verifica si el campo de texto no es vacio
+																	if (strlen($linea)>5)
+																		{
+																			$conteocampo++;
+																			$DescripcionCampos.=$campos[0]."\n";
+																		}
+																}
+															fclose($archivo);
+														}
+													//Presenta la opcion del combo con los datos del archivo
+													echo '<option value="'.$file.'" label="'.$DescripcionTabla.'" dir="'.$DescripcionCampos.'" lang="'.$conteocampo.'">'.$NombreTabla.'</option>';
+												}
+										}
+								?>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" valign="top">Descripci&oacute;n:</td>
+						<td>
+							<textarea name="descripciontabla" id="descripciontabla" cols="78" rows="2" readonly></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" valign="top">Campos que contiene:</td>
+						<td>
+							<textarea name="listacampos" id="listacampos" cols="38" rows="10" readonly></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" valign="top">Total campos:</td>
+						<td>
+							<input type="text" name="totalcampos" size="4" class="CampoTexto">
+						</td>
+					</tr>
+					<tr>
+						<td align="right" valign="top">IMPORTANTE:</td>
+						<td>
+							Todas las tablas y sus campos podr&aacute;n ser personalizados en el siguiente paso,<br> agregando, eliminando o cambiando las propiedades de aquellos que desee.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							</form>
+						</td>
+						<td>
+							<input type="Button"  class="Botones" value="Crear tabla y revisar campos" onClick="document.datos.submit()">
+							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="Volver al menu" class="Botones">
+						</td>
+					</tr>
+				</table>
+			</td>
+			<tr>
+			</table>
+			<hr>
+
 <?php
 			cerrar_ventana();
 	}

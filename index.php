@@ -28,7 +28,7 @@
 	$hora_operacion_puntos=date("H:i");
 	$direccion_auditoria=$_SERVER ['REMOTE_ADDR'];
 
-	// Recupera variables recibidas para su uso como globales (como si tuviese register_globals=on en php.ini)
+	// Recupera variables recibidas para su uso como globales (equivale a register_globals=on en php.ini)
 	if (!ini_get('register_globals'))
 	{
 		$numero = count($_REQUEST);
@@ -74,7 +74,6 @@
 	if (@$error_titulo!="")	mensaje($error_titulo,$error_descripcion,'','icono_error.png','TextosEscritorio');
 
 /* ################################################################## */
-/* ################################################################## */
 	// Cuando no se tiene ninguna accion para procesar se carga la pagina de inicio de sesion
 	if ($accion=="")
 		ventana_login();
@@ -85,7 +84,7 @@
 		include("core/usuarios.php");
 	if ($accion=="Ver_menu" || $accion=="administrar_menu" || $accion=="guardar_menu" || $accion=="eliminar_menu" || $accion=="detalles_menu" || $accion=="actualizar_menu")
 		include("core/menus.php");
-	if ($accion=="administrar_tablas" || $accion=="guardar_crear_tabla" || $accion=="eliminar_tabla" || $accion=="editar_tabla" || $accion=="guardar_crear_campo" || $accion=="eliminar_campo")
+	if ($accion=="guardar_crear_tabla_asistente" || $accion=="asistente_tablas" || $accion=="administrar_tablas" || $accion=="guardar_crear_tabla" || $accion=="eliminar_tabla" || $accion=="editar_tabla" || $accion=="guardar_crear_campo" || $accion=="eliminar_campo")
 		include("core/tablas.php");
 	if ($accion=="administrar_formularios" || $accion=="guardar_formulario" || $accion=="eliminar_formulario" || $accion=="editar_formulario" || $accion=="guardar_campo_formulario" || $accion=="eliminar_campo_formulario" || $accion=="guardar_accion_formulario" || $accion=="eliminar_accion_formulario" || $accion=="guardar_datos_formulario" || $accion=="eliminar_datos_formulario")
 		include("core/formularios.php");
@@ -96,7 +95,6 @@
 	if ($accion=="actualizar_practico" || $accion=="cargar_archivo" || $accion=="analizar_parche" || $accion=="aplicar_parche")
 		include("core/actualizacion.php");
 
-/* ################################################################## */
 /* ################################################################## */
 	// Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios
 	include("personalizadas.php");  

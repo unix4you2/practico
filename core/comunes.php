@@ -805,13 +805,32 @@
 
 											// Toma los valores desde la lista de opciones (cuando es estatico)
 											$opciones_lista = explode(",", $registro_campos["lista_opciones"]);
+											$valores_lista = explode(",", $registro_campos["lista_opciones"]);
+											
+											// Si se desea tomar los valores del combo desde una tabla hace la consulta
+											if ($registro_campos["origen_lista_opciones"]!="" && $registro_campos["origen_lista_valores"]!="")
+												{
+													$nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_opciones"]);
+													$nombre_tabla_opciones = $nombre_tabla_opciones[0];
+													$campo_valores=$registro_campos["origen_lista_valores"];
+													$campo_opciones=$registro_campos["origen_lista_opciones"];
+
+													// Consulta los campos para el tag select
+													$resultado_opciones=ejecutar_sql("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE 1 ORDER BY $campo_opciones");
+													while ($registro_opciones = $resultado_opciones->fetch())
+														{
+															$opciones_lista[] = $registro_opciones["opciones"];
+															$valores_lista[] = $registro_opciones["valores"];
+														}
+												}
+
 											for ($i=0;$i<count($opciones_lista);$i++)
 												{
 													// Determina si la opcion a agregar es la misma del valor del registro
 													$cadena_predeterminado='';
 													if ($opciones_lista[$i]==$cadena_valor)
 														$cadena_predeterminado=' SELECTED ';
-													echo "<option value='".$opciones_lista[$i]."' ".$cadena_predeterminado.">".$opciones_lista[$i]."</option>";
+													echo "<option value='".$valores_lista[$i]."' ".$cadena_predeterminado.">".$opciones_lista[$i]."</option>";
 												}
 
 											echo '</select>';

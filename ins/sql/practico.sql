@@ -117,6 +117,8 @@ CREATE TABLE Core_formulario_objeto (
   barra_herramientas int(1),
   fila_unica int(1),
   lista_opciones text,
+  origen_lista_opciones varchar(250),
+  origen_lista_valores varchar(250),
   PRIMARY KEY  (id)
 );
 

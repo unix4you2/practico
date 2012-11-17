@@ -15,6 +15,9 @@ esto define la constante...  al ser constante que puede estar desde iniciod e se
 Revisar el uso de CANVAS para html5
 
 
+http://www.phpclasses.org/package/7661-PHP-Update-database-and-files-from-a-remote-server.html
+
+
 ENLACE1: http://blog-indomita.blogspot.com/2008/08/realizar-backup-mysql-desde-php.html
 ENLACE2: http://www.forosdelweb.com/f18/backup-bd-yodumpeo-1-0b-166532/
 ENLACE3: http://webelop.com.ar/php/como-hacer-un-backup-de-mysql-desde-php/

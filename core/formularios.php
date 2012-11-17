@@ -195,7 +195,7 @@
 			if ($campo=="") $mensaje_error="Debe indicar un campo v&aacute;lido para vincular con la tabla de datos asociada al formulario.";
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto VALUES (0,'$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto VALUES (0,'$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores')");
 					// Lleva a auditoria
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea campo $id para formulario $formulario','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
@@ -283,12 +283,12 @@ if ($accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(17);
+					OcultarCampos(20);
 					// Muestra campos segun tipo de objeto
 					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,13,17");
 					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17");
 					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17");
-					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,18");
+					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,18,19,20");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -600,12 +600,81 @@ if ($accion=="editar_formulario")
 							<tr>
 								<td width="200" align="right">Lista de opciones:</td>
 								<td width="400" ><input type="text" name="lista_opciones" size="30" class="CampoTexto">
-									<a href="#" title="Qu&eacute; opciones aparecen para ser escogidas" name="Ingrese una lista de opciones separadas por coma.  Si requiere tomar las opciones din&aacute;micamente desde otra tabla de la aplicaci&oacute;n utilice los campos de Origen de datos para opciones."><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="Qu&eacute; opciones aparecen para ser escogidas" name="Ingrese una lista de opciones separadas por coma.  Si requiere tomar las opciones din&aacute;micamente desde otra tabla de la aplicaci&oacute;n utilice los campos de Origen de datos para opciones.  En caso de llenar ambas opciones (lista fija y origen de datos) el resultado ser&aacute; su combinaci&oacute;n."><img src="img/icn_10.gif" border=0></a>
 									(Separadas por coma)
 								</td>
 							</tr>
 							</table>
 						</div>
+
+						<div id='campo19' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Origen de la lista de opciones:</td>
+								<td width="400" >
+									<select  name="origen_lista_opciones" class="Combos" >
+										<option value="">Seleccione uno</option>
+									<?php
+										$resultado=consultar_tablas();
+										while ($registro = $resultado->fetch())
+											{
+												// Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
+												if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
+													{
+														echo '<optgroup label="'.str_replace($TablasApp,'',$registro[0]).'" >';
+														//Busca los campos de la tabla
+														$nombre_tabla=$registro[0];
+														$resultado_campos=ejecutar_sql("DESCRIBE $nombre_tabla ");
+														while($registro_campos = $resultado_campos->fetch())
+															{
+																echo '<option value="'.$nombre_tabla.'.'.$registro_campos["Field"].'">'.$registro_campos["Field"].'</option>';
+															}
+														echo '</optgroup>';
+													}
+											}
+									?>
+									</select>
+									<a href="#" title="Debe especificar el mismo origen de la lista de valores" name=""><img src="img/icn_12.gif" border=0></a>
+									<a href="#" title="Que es esto?" name="Campo desde el cual se toman las opciones que despliega la lista."><img src="img/icn_10.gif" border=0></a>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+						<div id='campo20' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Origen de la lista de valores:</td>
+								<td width="400" >
+									<select  name="origen_lista_valores" class="Combos" >
+										<option value="">Seleccione uno</option>
+									<?php
+										$resultado=consultar_tablas();
+										while ($registro = $resultado->fetch())
+											{
+												// Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
+												if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
+													{
+														echo '<optgroup label="'.str_replace($TablasApp,'',$registro[0]).'" >';
+														//Busca los campos de la tabla
+														$nombre_tabla=$registro[0];
+														$resultado_campos=ejecutar_sql("DESCRIBE $nombre_tabla ");
+														while($registro_campos = $resultado_campos->fetch())
+															{
+																echo '<option value="'.$nombre_tabla.'.'.$registro_campos["Field"].'">'.$registro_campos["Field"].'</option>';
+															}
+														echo '</optgroup>';
+													}
+											}
+									?>
+									</select>
+									<a href="#" title="Debe especificar el mismo origen de la lista de opciones" name=""><img src="img/icn_12.gif" border=0></a>
+									<a href="#" title="Que es esto?" name="Campo desde el cual se toman los valores internos (a ser procesados) para cada opcion de la lista."><img src="img/icn_10.gif" border=0></a>
+								</td>
+							</tr>
+							</table>
+						</div>
+
 
 					<table class="TextosVentana">
 						<tr>
