@@ -385,7 +385,7 @@ if ($accion=="administrar_menu")
 				{
 					$impreso=0;
 					if ($columna_actual==1)	echo '<tr>';
-					if (($file != ".") && ($file != "..") && stristr($file,"tango_"))
+					if (($file != ".") && ($file != "..") && (stristr($file,"tango_") || stristr($file,"dev_")  || stristr($file,"finance_")  || stristr($file,"ginux_")  || stristr($file,"medical_")  || stristr($file,"moskis_")  || stristr($file,"once_")  || stristr($file,"social_")  || stristr($file,"woo_")  ))
 						{
 							echo '<td><a href="javascript:document.datos.imagen.value=\''.$file.'\';OcultarPopUp(\'FormularioImagenes\');" title="'.$file.'"><img src='.$directorio.$file.' border=0></a></td>';	
 							$impreso=1;
