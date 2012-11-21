@@ -822,80 +822,82 @@
 					mensaje($registro_formulario["ayuda_titulo"],$registro_formulario["ayuda_texto"],'100%',$imagen_ayuda,'TextosVentana');
 
 				//Inicia el formulario de datos
-				echo '<form name="datos" action="'.$ArchivoCORE.'" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+				echo '<form name="datos" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="Hidden" name="accion" value="guardar_datos_formulario">
 					<input type="Hidden" name="formulario" value="'.$formulario.'">';
 
 				//Booleana que determina si se debe incluir el javascript de ckeditor
 				$existe_campo_textoformato=0;
 
-
+				//DIAGRAMACION DE LA TABLA CON ELEMENTOS DEL FORMULARIO
 				$limite_inferior=-9999; // Peso inferior a tener en cuenta en el query
-				$limite_superior=+9999; // Peso superior a tener en cuenta en el query
-				//Busca todos los objetos marcados como fila_unica=1
-				$consulta_obj_fila_unica=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND fila_unica='1' ORDER BY peso");
-				$paso_por_no_fila_unica=0;
+				$constante_limite_superior=+9999;
+				$limite_superior=$constante_limite_superior; // Peso superior a tener en cuenta en el query
+				//Busca todos los objetos marcados como fila_unica=1 y agrega un registro mas con el limite superior
+				$consulta_obj_fila_unica=ejecutar_sql("SELECT id,peso FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior ORDER BY peso");
 				while ($registro_obj_fila_unica = $consulta_obj_fila_unica->fetch())
 					{
-						$peso_primera_fila_unica=$registro_obj_fila_unica["peso"];
-						//Crea DIVs como capas para cada columna del formulario
-						for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
-							{
-								//echo '<div id="columna'.$cl.'" style="float: left;">Marco'.$cl.'</div>';
-							}
-					} // Fin mientras seleccion fila_unica
-
-
-
-
+						$limite_superior=$registro_obj_fila_unica["peso"];
+						$ultimo_id=$registro_obj_fila_unica["id"];
 						// Inicia la tabla con los campos
 						echo '<table border=5 class="TextosVentana" width="100%"><tr>';
+						//Recorre todas las comunas definidas para el formulario buscando objetos
 						for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
 							{
-								//Busca los elementos de formulario con peso menor o igual al peso de la fila unica_actual
-								$consulta_campos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND columna='$cl' AND visible=1 ORDER BY peso");
-								$expansion_columnas="";
-								$numero_columnas_expandir=$registro_formulario["columnas"]*2;
-								if ($registro_campos["fila_unica"]=="1") 
-									{
-										$expansion_columnas=" colspan='".$numero_columnas_expandir."' ";
-									}
-
-								//Inicia columna de formulario
-								echo '<td '.$expansion_columnas.' valign=top align=center>';
+								//Busca los elementos de la coumna actual del formulario con peso menor o igual al peso del objeto fila_unica de la fila unica_actual pero que no son fila_unica
+								$consulta_campos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND columna='$cl' AND visible=1 AND peso >'$limite_inferior' AND peso <='$limite_superior' ORDER BY peso");
+								
+									//Inicia columna de formulario
+									echo '<td valign=top align=center>';
 									// Crea los campos definidos por cada columna de formulario
 									echo '<table border=1 class="TextosVentana">';
 									while ($registro_campos = $consulta_campos->fetch())
 										{
 											//Crea la fila y celda donde va el campo
-											// Si el objeto tiene expansion en toda la fila entonces no crea columna con etiqueta y la pone sobre el directamente
-											if ($registro_campos["fila_unica"]=="1")
-												echo '<tr>
-													<td valign=top>'.$registro_campos["titulo"].'<br>';
+											echo '<tr>
+												<td align="right" valign=top>'.$registro_campos["titulo"].'</td>
+												<td valign=top>';
+											//Imprime el campo solamente si no es fila unica, si es fila_unica guarda en una variable para uso posterior
+											if($registro_campos["fila_unica"]=="0")
+												{
+													// Formatea cada campo de acuerdo a su tipo
+													if ($registro_campos["tipo"]=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos);
+													if ($registro_campos["tipo"]=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos);
+													if ($registro_campos["tipo"]=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,$existe_campo_textoformato); $existe_campo_textoformato=1; }
+													if ($registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos);
+													//Imprime el objeto
+													echo $objeto_formateado;
+												}
 											else
-												echo '<tr>
-													<td align="right" valign=top>'.$registro_campos["titulo"].'</td>
-													<td valign=top>';
-
-														// Formatea cada campo de acuerdo a su tipo
-														if ($registro_campos["tipo"]=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos);
-														if ($registro_campos["tipo"]=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos);
-														if ($registro_campos["tipo"]=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,$existe_campo_textoformato); $existe_campo_textoformato=1; }
-														if ($registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos);
-
-														//Imprime el objeto
-														echo $objeto_formateado;
-
+												{
+													$registro_campos_fila_unica=$registro_campos;
+												}
 											// Cierra la fila y celda donde se puso el objeto
 											echo '</td></tr>';
 										}
 									// Cierra tabla de campos en la columna
 									echo '</table>';
-								echo '</td>'; //Fin columna de formulario
+									echo '</td>'; //Fin columna de formulario
 							}
 						// Finaliza la tabla con los campos
 						echo '</tr></table>';
+						
+						//Agrega el campo de fila unica cuando no se trata del agregado de peso 9999
+						if ($registro_campos_fila_unica["id"]!=$ultimo_id)
+							{
+								echo $registro_campos_fila_unica["titulo"].'<br>';
+								// Formatea cada campo de acuerdo a su tipo
+								if ($registro_campos_fila_unica["tipo"]=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos_fila_unica);
+								if ($registro_campos_fila_unica["tipo"]=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos_fila_unica);
+								if ($registro_campos_fila_unica["tipo"]=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos_fila_unica,$existe_campo_textoformato); $existe_campo_textoformato=1; }
+								if ($registro_campos_fila_unica["tipo"]=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos_fila_unica);
+								//Imprime el objeto
+								echo $objeto_formateado;
+							}
 
+						//Actualiza limite inferior para siguiente lista de campos
+						$limite_inferior=$registro_obj_fila_unica["peso"];
+					}
 
 
 			// Si tiene botones agrega barra de estado y los ubica
