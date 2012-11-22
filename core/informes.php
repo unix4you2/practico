@@ -874,7 +874,7 @@ if ($accion=="administrar_informes")
 								</td>
 							</tr>';
 					}
-				echo '</table>';			
+				echo '</table>';
 		?>
 
 			</div>

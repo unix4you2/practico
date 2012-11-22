@@ -191,11 +191,11 @@
 	if ($accion=="guardar_campo_formulario")
 		{
 			$mensaje_error="";
-			if ($titulo=="") $mensaje_error="Debe indicar un t&iacute;tulo o etiqueta v&aacute;lida para el campo.";
-			if ($campo=="") $mensaje_error="Debe indicar un campo v&aacute;lido para vincular con la tabla de datos asociada al formulario.";
+			if ($titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error="Debe indicar un t&iacute;tulo o etiqueta v&aacute;lida para el campo.";
+			if ($campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error="Debe indicar un campo v&aacute;lido para vincular con la tabla de datos asociada al formulario.";
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto VALUES (0,'$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto VALUES (0,'$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores','$valor_etiqueta','$url_iframe','$objeto_en_ventana','$informe_vinculado')");
 					// Lleva a auditoria
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea campo $id para formulario $formulario','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
@@ -283,12 +283,15 @@ if ($accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(20);
+					OcultarCampos(24);
 					// Muestra campos segun tipo de objeto
 					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,13,17");
 					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17");
 					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17");
-					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,18,19,20");
+					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,17,18,19,20");
+					if (tipo_objeto_activo=="etiqueta")   VisualizarCampos("9,17,21");
+					if (tipo_objeto_activo=="url_iframe")   VisualizarCampos("9,14,15,17,22,24");
+					if (tipo_objeto_activo=="informe")   VisualizarCampos("9,17,23,24");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -306,7 +309,8 @@ if ($accion=="editar_formulario")
 				<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 				<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">
 				<div align=center>
-							
+
+
 					<table class="TextosVentana">
 						<tr>
 							<td align="right">Tipo de objeto que desea agregar</td>
@@ -324,8 +328,8 @@ if ($accion=="editar_formulario")
 										<option value="url_iframe">URL embebida (IFrame)</option>
 									</optgroup>
 									<optgroup label="Objetos internos">
-										<option value="inf">Informe predise&ntilde;ado</option>
-										<option value="frm">Formulario anidado</option>
+										<option value="informe">Informe predise&ntilde;ado</option>
+										<!--<option value="frm">Formulario anidado</option>-->
 									</optgroup>
 								</select>
 								<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
@@ -334,17 +338,19 @@ if ($accion=="editar_formulario")
 						</table>
 						<hr>
  
+ 
 						<div id='campo1' style="display:none;">
 							<table class="TextosVentana">
 							<tr>
 								<td width="200" align="right">T&iacute;tulo o etiqueta:</td>
 								<td width="400" ><input type="text" name="titulo" size="20" class="CampoTexto">
 									<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
-									<a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; al lado del indicando al usuario la informacion que debe ingresar."><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; al lado del indicando al usuario la informacion que debe ingresar.  Puede usar HTML b&aacute;sico para dar formato adicional."><img src="img/icn_10.gif" border=0></a>
 								</td>
 							</tr>
 							</table>
 						</div>
+
 
 						<div id='campo2' style="display:none;">
 							<table class="TextosVentana">
@@ -361,7 +367,7 @@ if ($accion=="editar_formulario")
 												}
 										?>
 									</select>
-									<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
+									<a href="#" title="Campo obligatorio para controles de datos" name=""><img src="img/icn_12.gif" border=0></a>
 									<a href="#" title="Ayuda r&aacute;pida:" name="Campo de la tabla de datos al cual se vincular&aacute; la informaci&oacute;n"><img src="img/icn_10.gif" border=0></a>
 								</td>
 							</tr>
@@ -391,6 +397,7 @@ if ($accion=="editar_formulario")
 							</tr>
 							</table>
 						</div>
+
 
 						<div id='campo5' style="display:none;">
 							<table class="TextosVentana">
@@ -426,6 +433,7 @@ if ($accion=="editar_formulario")
 							</table>
 						</div>
 
+
 						<div id='campo7' style="display:none;">
 							<table class="TextosVentana">
 							<tr>
@@ -434,6 +442,7 @@ if ($accion=="editar_formulario")
 							</tr>
 							</table>
 						</div>
+
 
 						<div id='campo8' style="display:none;">
 							<table class="TextosVentana">
@@ -445,6 +454,7 @@ if ($accion=="editar_formulario")
 							</tr>
 							</table>
 						</div>
+
 
 						<div id='campo9' style="display:none;">
 							<table class="TextosVentana">
@@ -479,6 +489,7 @@ if ($accion=="editar_formulario")
 							</table>
 						</div>
 
+
 						<div id='campo10' style="display:none;">
 							<table class="TextosVentana">
 							<tr>
@@ -504,6 +515,7 @@ if ($accion=="editar_formulario")
 							</table>
 						</div>
 
+
 						<div id='campo11' style="display:none;">
 							<table class="TextosVentana">
 							<tr>
@@ -512,6 +524,7 @@ if ($accion=="editar_formulario")
 							</tr>
 							</table>
 						</div>
+
 
 						<div id='campo12' style="display:none;">
 							<table class="TextosVentana">
@@ -523,6 +536,7 @@ if ($accion=="editar_formulario")
 							</tr>
 							</table>
 						</div>
+
 
 						<div id='campo13' style="display:none;">
 							<table class="TextosVentana">
@@ -538,6 +552,7 @@ if ($accion=="editar_formulario")
 							</table>
 						</div>
 
+
 						<div id='campo14' style="display:none;">
 							<table class="TextosVentana">
 							<tr>
@@ -550,6 +565,7 @@ if ($accion=="editar_formulario")
 							</table>
 						</div>
 
+
 						<div id='campo15' style="display:none;">
 							<table class="TextosVentana">
 							<tr>
@@ -561,6 +577,7 @@ if ($accion=="editar_formulario")
 							</tr>
 							</table>
 						</div>
+
 
 						<div id='campo16' style="display:none;">
 							<table class="TextosVentana">
@@ -580,6 +597,7 @@ if ($accion=="editar_formulario")
 							</table>
 						</div>
 
+
 						<div id='campo17' style="display:none;">
 							<table class="TextosVentana">
 							<tr>
@@ -589,11 +607,12 @@ if ($accion=="editar_formulario")
 										<option value="0">No</option>
 										<option value="1">Si</option>
 									</select>
-									<a href="#" title="Se debe utilizar una fila completa para el objeto?" name="Permite desplegar el objeto en una fila exclusiva de la tabla usada en el formulario."><img src="img/icn_10.gif" border=0></a> (Experimental)
+									<a href="#" title="Se debe utilizar una fila completa para el objeto?" name="Permite desplegar el objeto en una fila exclusiva de la tabla usada en el formulario."><img src="img/icn_10.gif" border=0></a>
 								</td>
 							</tr>
 							</table>
 						</div>
+
 
 						<div id='campo18' style="display:none;">
 							<table class="TextosVentana">
@@ -606,6 +625,7 @@ if ($accion=="editar_formulario")
 							</tr>
 							</table>
 						</div>
+
 
 						<div id='campo19' style="display:none;">
 							<table class="TextosVentana">
@@ -640,6 +660,7 @@ if ($accion=="editar_formulario")
 							</tr>
 							</table>
 						</div>
+
 
 						<div id='campo20' style="display:none;">
 							<table class="TextosVentana">
@@ -676,11 +697,89 @@ if ($accion=="editar_formulario")
 						</div>
 
 
+						<div id='campo21' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td colspan=2>
+									Valor de la etiqueta (ser&aacute; impresa en el formulario en formato HTML):<br>
+									<textarea cols="100" rows="20" name="valor_etiqueta" id="valor_etiqueta" class="ckeditor"></textarea>
+									<script type="text/javascript" src="inc/ckeditor/ckeditor.js"></script>
+									<script type="text/javascript">
+										CKEDITOR.replace( 'valor_etiqueta', {	toolbar : [ 
+											['-']
+											['Source','-','NewPage','DocProps','Preview','Print','-','Templates']
+											['Bold', 'Italic', 'Underline', 'Strike', 'Subscript','Superscript','-','RemoveFormat']
+											['NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl']
+											['Link','Unlink','Anchor']
+											['Styles','Format','Font','FontSize']
+											['Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo']
+											['Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt']
+											['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe']
+											['TextColor','BGColor']
+											['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField']
+											['Maximize', 'ShowBlocks']
+										 ] } );
+										CKEDITOR.config.width = '550';
+										CKEDITOR.config.height = '450';
+									</script>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+
+						<div id='campo22' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">URL para IFrame:</td>
+								<td width="400" ><input type="text" name="url_iframe" size="40" class="CampoTexto">
+									<a href="#" title="Ayuda r&aacute;pida:" name="Ingrese la direcci&oacute;n de la p&aacute;gina que sera embebida en el marco."><img src="img/icn_10.gif" border=0></a>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+
+						<div id='campo23' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Informe vinculado:</td>
+								<td width="400" >
+									<select  name="informe_vinculado" class="Combos">
+									<option value="">SELECCIONE UNO</option>
+									<?php
+										$consulta_informs=ejecutar_sql("SELECT * FROM ".$TablasCore."informe ORDER BY titulo");
+										while($registro_informes = $consulta_informs->fetch())
+											{
+												echo '<option value="'.$registro_informes["id"].'">(Id.'.$registro_informes["id"].') '.$registro_informes["titulo"].'</option>';
+											}
+									?>
+									</select>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+
+						<div id='campo24' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Ventana propia para el objeto?</td>
+								<td width="400" >
+									<select  name="objeto_en_ventana" class="Combos" >
+										<option value="0">No</option>
+										<option value="1">Si</option>
+									</select>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+
 					<table class="TextosVentana">
 						<tr>
 							<td>
 								</form>
-								
 							</td>
 							<td>
 								<input type="Button"  class="Botones" value="Agregar objeto/campo" onClick="document.datosform.submit()">
@@ -747,7 +846,7 @@ if ($accion=="editar_formulario")
 						<tr>
 							<td align="right">Comando del usuario:</td>
 							<td ><input type="text" name="accion_usuario" size="20" class="CampoTexto">
-								<a href="#" title="Ayuda r&aacute;pida:" name="Nombre de la acci&oacute;n definida en el archivo de personalizaci&oacute;n que procesar&aacute; la informaci&oacute;n o comando en JavaScript a ser ejecutado de manera inmediata en la p&aacute;gina (si requiere par&aacute;metros dentro de su comando utilice comillas sencillas para encerrarlos)."><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="Ayuda r&aacute;pida:" name="Nombre de la acci&oacute;n definida en el archivo de personalizaci&oacute;n que procesar&aacute; la informaci&oacute;n o comando en JavaScript a ser ejecutado de manera inmediata en la p&aacute;gina (si requiere par&aacute;metros dentro de su comando utilice comillas sencillas para encerrarlos). Para cargar objetos de Pr&aacute;ctico como formularios o informes puede usar la misma notaci&oacute;n de menus: frm:XX:Par1:Par2:ParN o inf:XX..."><img src="img/icn_10.gif" border=0></a>
 							</td>
 						</tr>
 						<tr>
@@ -815,7 +914,7 @@ if ($accion=="editar_formulario")
 			?>
 					<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
 						<tr>
-							<td bgcolor="#D6D6D6"><b>Titulo</b></td>
+							<td bgcolor="#D6D6D6"><b>Titulo (Tipo)</b></td>
 							<td bgcolor="#d6d6d6"><b>Campo</b></td>
 							<td bgcolor="#d6d6d6"><b>Columna</b></td>
 							<td bgcolor="#d6d6d6"><b>Peso</b></td>
@@ -833,7 +932,7 @@ if ($accion=="editar_formulario")
 						$peso_aumentado=$registro["peso"]+1;
 						if ($registro["peso"]-1>=1) $peso_disminuido=$registro["peso"]-1; else $peso_disminuido=1;
 						echo '<tr>
-								<td><b>'.$registro["titulo"].'</b></td>
+								<td><b>'.$registro["titulo"].'</b> ('.$registro["tipo"].')</td>
 								<td><b>'.$registro["campo"].'</b></td>
 								<td align=center>
 									<form action="'.$ArchivoCORE.'" method="POST" name="ifoc'.$registro["id"].'" id="ifoc'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">

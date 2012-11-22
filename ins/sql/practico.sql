@@ -119,6 +119,10 @@ CREATE TABLE Core_formulario_objeto (
   lista_opciones text,
   origen_lista_opciones varchar(250),
   origen_lista_valores varchar(250),
+  valor_etiqueta text,
+  url_iframe varchar(250),
+  objeto_en_ventana int(1),
+  informe_vinculado int(10),
   PRIMARY KEY  (id)
 );
 
