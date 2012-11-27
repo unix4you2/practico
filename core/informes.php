@@ -430,7 +430,6 @@ if ($accion=="editar_informe")
 
 
 		<!-- INICIO DE MARCOS POPUP -->
-
 		<div id='FormularioCondiciones' class="FormularioPopUps">
 				<?php
 				abrir_ventana('Agregar una nueva condici&oacute;n al informe','#BDB9B9','600'); 
@@ -584,6 +583,97 @@ if ($accion=="editar_informe")
 		</div>
 
 
+		<!-- INICIO DE MARCOS POPUP -->
+		<div id='FormularioGraficos' class="FormularioPopUps">
+				<?php
+				abrir_ventana('Especifica tipos de gr&aacute;fico a generar por el informe','#BDB9B9','600'); 
+				?>
+				<form name="datosformco" id="datosformco" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+					<input type="Hidden" name="accion" value="guardar_informe_condicion">
+					<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
+
+				<!-- SELECCION DE SERIES  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+				<hr>
+				<div align=center><b>SERIES PARA EL GRAFICO</b> - Gr&aacute;ficos con m&uacute;ltiples series deben devolver el mismo n&uacute;mero de etiquetas</div>
+						<table class="TextosVentana" width="100%">
+						<?php
+							//Crea las series
+							$numero_series=5;
+							for ($cs=1;$cs<=$numero_series;$cs++)
+								{
+						?>
+							<tr>
+								<td align="center" valign="TOP">
+									<b>Nombre de la Serie <?php echo $cs; ?></b><br>
+									<input type="text" name="nombre_serie_<?php echo $cs; ?>" maxlength="20" size="20" class="CampoTexto">
+								</td>
+								<td align="center" valign="TOP">
+									<b>Campo de etiqueta</b><br>
+									<select name="campo_etiqueta_serie_<?php echo $cs; ?>" class="Combos" >
+										<?php
+										$consulta_forms=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
+										while($registro = $consulta_forms->fetch())
+											{
+												echo '<option value="'.$registro["valor_campo"].'">'.$registro["valor_campo"].'</option>';
+											}
+									?>
+									</select>
+								</td>
+								<td align="center" valign="TOP">
+									<b>Campo de valor</b><br>
+									<select name="campo_valor_serie_<?php echo $cs; ?>" class="Combos">
+									<?php
+										$consulta_forms=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
+										while($registro = $consulta_forms->fetch())
+											{
+												echo '<option value="'.$registro["valor_campo"].'">'.$registro["valor_campo"].'</option>';
+											}
+									?>
+									</select>
+								</td>
+							</tr>
+							
+						<?php
+							} // Fin del for que crea series
+						?>
+						</table>
+
+
+			<!-- SELECCION DEL TIPO DE GRAFICO  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+				<hr>
+						<div align=center><b>APARIENCIA y DISTRIBUCION</b> - Seleccione de acuerdo al n&uacute;mero de series deseadas</div>
+						<table class="TextosVentana">
+							<tr>
+								<td align="LEFT" valign="TOP">
+									<b>Tipo de gr&aacute;fico:</b><br>
+									<select name="tipo_grafico" class="Combos" >
+											<option value="barrah">Barras horizontales</option>
+											<option value="barrah_multiples">Barras horizontales (multiples series)</option>
+											<option value="linea">Grafico de linea</option>
+											<option value="linea_multiples">Grafico de linea (multiples series)</option>
+											<option value="barrav">Barras verticales</option>
+											<option value="barrav_multiples">Barras verticales (multiples series)</option>
+											<option value="torta">Grafico de torta (solo una serie)</option>
+									</select>
+								</td>
+								<td align="RIGHT">
+									<img src="img/tipos_grafico.png" border=0 alt="">
+								</td>
+							</tr>
+						</table>
+				</form>
+				<hr>
+			<?php
+				abrir_barra_estado();
+					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioGraficos\')">';
+				cerrar_barra_estado();
+			cerrar_ventana();
+			?>
+		<!-- FIN DE MARCOS POPUP -->
+		</div>
+
+
+
 
 		<div id='FondoPopUps' class="FondoOscuroPopUps"></div>
 		<?php
@@ -591,7 +681,7 @@ if ($accion=="editar_informe")
 			if (@$popup_activo=="FormularioTablas")	echo '<script type="text/javascript">	AbrirPopUp("FormularioTablas"); </script>';
 			if (@$popup_activo=="FormularioCampos")	echo '<script type="text/javascript">	AbrirPopUp("FormularioCampos"); </script>';
 			if (@$popup_activo=="FormularioCondiciones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioCondiciones"); </script>';
-			//if (@$popup_activo=="FormularioAcciones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioAcciones"); </script>';
+			if (@$popup_activo=="FormularioGraficos")	echo '<script type="text/javascript">	AbrirPopUp("FormularioGraficos"); </script>';
 		?>
 
 		<table><tr><td valign=top>
@@ -607,6 +697,19 @@ if ($accion=="editar_informe")
 				<hr>
 				Condiciones<br>
 				<a href='javascript:AbrirPopUp("FormularioCondiciones");' title="Filtrar los resultados mediante condiciones espec&iacute;ficas"><img border='0' src='img/icono_diseno.png'/></a>
+				
+				<?php
+					// Si se trata de un informe con grafico como resultado agrega el boton de graficos
+					if ($registro_informe['formato_final']=='G')
+						{
+				?>
+					<hr>
+					Propiedades del Gr&aacute;fico<br>
+					<a href='javascript:AbrirPopUp("FormularioGraficos");' title="Define las propiedades y apariencia del gr&aacute;fico desplegado por el informe"><img border='0' src='img/icono_grafico.png'/></a>
+				<?php
+						}// Fin si es grafico
+				?>
+
 				<hr>
 				<form action="<?php echo $ArchivoCORE; ?>" method="POST" name="cancelar"><input type="Hidden" name="accion" value="administrar_informes"></form>
 				<input type="Button" onclick="document.cancelar.submit()" value="Volver a lista de informes" class="Botones">
