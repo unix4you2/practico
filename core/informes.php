@@ -42,7 +42,7 @@ if ($accion=="actualizar_informe")
 		if ($mensaje_error=="")
 			{
 				// Actualiza los datos
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET alto='$alto',ancho='$ancho',titulo='$titulo',descripcion='$descripcion',categoria='$categoria',nivel_usuario='$nivel_usuario' WHERE id='$id'");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET formato_final='$formato_final', alto='$alto',ancho='$ancho',titulo='$titulo',descripcion='$descripcion',categoria='$categoria',nivel_usuario='$nivel_usuario' WHERE id='$id'");
 				// Lleva a auditoria
 				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Actualiza informe $id','$fecha_operacion','$hora_operacion')");
 				echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
@@ -627,7 +627,7 @@ if ($accion=="editar_informe")
 
 				<table class="TextosVentana">
 					<tr>
-						<td align="right">T&iacute;tulo del informe:</td>
+						<td align="right">T&iacute;tulo del informe o gr&aacute;fico:</td>
 						<td><input type="text" name="titulo" value="<?php echo $registro_informe['titulo']; ?>" size="20" class="CampoTexto">
 							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
 							<a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; en la parte superior del informe generado"><img src="img/icn_10.gif" border=0></a>
@@ -669,13 +669,23 @@ if ($accion=="editar_informe")
 					<tr>
 						<td align="right">Ancho:</td>
 						<td><input type="text" name="ancho"  value="<?php echo $registro_informe['ancho']; ?>" size="4" class="CampoTexto"> (agregar <b>px</b> &oacute; <b>%</b> seg&uacute;n el caso)
-							<a href="#" title="Establecer ancho fijo?" name="Este valor aplica si ha especificado tambien un alto. Si requiere que el informe aparezca dentro de un marco de ancho fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="Establecer ancho fijo?" name="Este valor aplica si ha especificado tambien un alto. Si requiere que el informe aparezca dentro de un marco de ancho fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o.  En el caso de los gr&aacute;ficos especifica su tama&ntilde;o de imagen."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="right">Alto:</td>
 						<td><input type="text" name="alto"  value="<?php echo $registro_informe['alto']; ?>" size="4" class="CampoTexto">  (agregar <b>px</b> &oacute; <b>%</b> seg&uacute;n el caso)
-							<a href="#" title="Establecer alto fijo?" name="Este valor aplica si ha especificado tambien un ancho. Si requiere que el informe aparezca dentro de un marco de alto fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="Establecer alto fijo?" name="Este valor aplica si ha especificado tambien un ancho. Si requiere que el informe aparezca dentro de un marco de alto fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o.  En el caso de los gr&aacute;ficos especifica su tama&ntilde;o de imagen."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+						</td>
+					</tr>
+					<tr>
+						<td align="RIGHT" valign="TOP"><strong>Formato final</strong></td>
+						<td>
+							<select  name="formato_final" id="formato_final" class="Combos">
+								<option value="T"  <?php if ($registro_informe["formato_final"]=="T") echo 'selected'; ?> >Tabla de datos</option>
+								<option value="G"  <?php if ($registro_informe["formato_final"]=="G") echo 'selected'; ?> >Gr&aacute;fico</option>
+							</select>
+							<a href="#" title="Como se visualiza este informe?" name="Indica si el producto final del informe ser&aacute; un tabla de datos o un gr&aacute;fico."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
@@ -733,7 +743,7 @@ if ($accion=="guardar_informe")
 		if ($categoria=="") $mensaje_error.="Debe indicar un nombre v&aacute;lido para la categor&iacute;a asociada al informe.<br>";
 		if ($mensaje_error=="")
 			{
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe VALUES (0, '$titulo','$descripcion','$categoria','$agrupamiento','$ordenamiento','$nivel_usuario','$ancho','$alto')");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe VALUES (0, '$titulo','$descripcion','$categoria','$agrupamiento','$ordenamiento','$nivel_usuario','$ancho','$alto','$formato_final')");
 				$id=$ConexionPDO->lastInsertId();
 				// Lleva a auditoria
 				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea informe $id','$fecha_operacion','$hora_operacion')");
@@ -762,15 +772,15 @@ if ($accion=="administrar_informes")
 		 ?>
 
 		<table class="TextosVentana"><tr><td valign=top>
-			<?php abrir_ventana('Agregar nuevo informe','f2f2f2',''); ?>
+			<?php abrir_ventana('Agregar nuevo informe o gr&aacute;fico','f2f2f2',''); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_informe">
 			<div align=center>
 						
-			<br>Defina los detalles del informe:
+			<br>Defina los detalles del informe/gr&aacute;fico:
 				<table class="TextosVentana">
 					<tr>
-						<td align="right">T&iacute;tulo del informe:</td>
+						<td align="right">T&iacute;tulo del informe o gr&aacute;fico:</td>
 						<td><input type="text" name="titulo" size="20" class="CampoTexto">
 							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align=absmiddle></a>
 							<a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; en la parte superior del informe generado"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
@@ -814,13 +824,23 @@ if ($accion=="administrar_informes")
 					<tr>
 						<td align="right">Ancho:</td>
 						<td><input type="text" name="ancho" size="4" class="CampoTexto">  (agregar <b>px</b> &oacute; <b>%</b> seg&uacute;n el caso)
-							<a href="#" title="Establecer ancho fijo?" name="Este valor aplica si ha especificado tambien un alto. Si requiere que el informe aparezca dentro de un marco de ancho fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="Establecer ancho fijo?" name="Este valor aplica si ha especificado tambien un alto. Si requiere que el informe aparezca dentro de un marco de ancho fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o.  En el caso de los gr&aacute;ficos especifica su tama&ntilde;o de imagen."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="right">Alto:</td>
 						<td><input type="text" name="alto" size="4" class="CampoTexto">  (agregar <b>px</b> &oacute; <b>%</b> seg&uacute;n el caso)
-							<a href="#" title="Establecer alto fijo?" name="Este valor aplica si ha especificado tambien un ancho. Si requiere que el informe aparezca dentro de un marco de alto fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="Establecer alto fijo?" name="Este valor aplica si ha especificado tambien un ancho. Si requiere que el informe aparezca dentro de un marco de alto fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o.  En el caso de los gr&aacute;ficos especifica su tama&ntilde;o de imagen."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+						</td>
+					</tr>
+					<tr>
+						<td align="RIGHT" valign="TOP"><strong>Formato final</strong></td>
+						<td>
+							<select  name="formato_final" id="formato_final" class="Combos">
+								<option value="T">Tabla de datos</option>
+								<option value="G">Gr&aacute;fico</option>
+							</select>
+							<a href="#" title="Como se visualiza este informe?" name="Indica si el producto final del informe ser&aacute; un tabla de datos o un gr&aacute;fico."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
@@ -839,7 +859,7 @@ if ($accion=="administrar_informes")
 		cerrar_ventana();	
 		
 		echo '</td><td valign=top>';  // Inicia segunda columna del diseñador
-		abrir_ventana('Informes ya definidos en el sistema','f2f2f2','');
+		abrir_ventana('Informes/Gr&aacute;ficos ya definidos en el sistema','f2f2f2','');
 		?>
 				<table width="100%" border="0" cellspacing="5" align="CENTER"  class="TextosVentana">
 					<tr>

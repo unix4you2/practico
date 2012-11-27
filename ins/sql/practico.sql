@@ -153,6 +153,7 @@ CREATE TABLE Core_informe (
   nivel_usuario int(10) default '0', # -1=No aplica, sino Rol minimo de usuario que accesan la opcion 
   ancho varchar(5),
   alto varchar(5),
+  formato_final char(1), # T=Tabla, G=Grafico
   PRIMARY KEY  (id)
 );
 
