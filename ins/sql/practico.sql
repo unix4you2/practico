@@ -136,7 +136,7 @@ CREATE TABLE Core_formulario_boton (
   accion_usuario varchar(250) default '',
   visible int(1) default '1',
   peso int(10),
-  retorno_titulo varchar(50) default '',  
+  retorno_titulo varchar(50) default '',
   retorno_texto text,
   confirmacion_texto varchar(250) default '',
   PRIMARY KEY  (id)
@@ -154,6 +154,7 @@ CREATE TABLE Core_informe (
   ancho varchar(5),
   alto varchar(5),
   formato_final char(1), # T=Tabla, G=Grafico
+  formato_grafico text, # Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
   PRIMARY KEY  (id)
 );
 

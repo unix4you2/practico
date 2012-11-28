@@ -16,6 +16,65 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: actualizar_grafico_informe
+	Cambia el registro asociado a un informe de la aplicacion para el campo de formato de graficos
+
+	Variables de entrada:
+
+		id - ID del informe que se desea cambiarse
+
+		(start code)
+			UPDATE ".$TablasCore."informe SET ... WHERE id=$id
+		(end)
+
+	Salida:
+		Registro de informe actualizado
+
+	Ver tambien:
+
+		<detalles_informe>
+*/
+if ($accion=="actualizar_grafico_informe")
+	{
+		$mensaje_error="";
+		if ($nombre_serie_1=="" || $campo_etiqueta_serie_1=="" || $campo_valor_serie_1=="") $mensaje_error.="Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos.";
+		if ($mensaje_error=="")
+			{
+				//Construye la cadena de formato
+				$cadena_formato="";
+				$cadena_formato.=$tipo_grafico."|";
+				$cadena_formato.=$nombre_serie_1."!".$nombre_serie_2."!".$nombre_serie_3."!".$nombre_serie_4."!".$nombre_serie_5."|";
+				$cadena_formato.=$campo_etiqueta_serie_1."!".$campo_etiqueta_serie_2."!".$campo_etiqueta_serie_3."!".$campo_etiqueta_serie_4."!".$campo_etiqueta_serie_5."|";
+				$cadena_formato.=$campo_valor_serie_1."!".$campo_valor_serie_2."!".$campo_valor_serie_3."!".$campo_valor_serie_4."!".$campo_valor_serie_5;
+
+				// Actualiza los datos
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET formato_grafico='$cadena_formato' WHERE id='$informe'");
+				// Lleva a auditoria
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Actualiza informe grafico $informe','$fecha_operacion','$hora_operacion')");
+				echo '
+					<form name="regresar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="accion" value="editar_informe">
+					<input type="Hidden" name="informe" value="'.$informe.'">
+					</form>
+				<script type="" language="JavaScript">
+				 document.regresar.submit();  </script>';
+			}
+		else
+			{
+				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="accion" value="editar_informe">
+					<input type="Hidden" name="informe" value="'.$informe.'">
+					<input type="Hidden" name="error_titulo" value="Problema en los datos ingresados">
+					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+					</form>
+					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+			}
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: actualizar_informe
 	Cambia el registro asociado a un informe de la aplicacion
 
@@ -62,6 +121,8 @@ if ($accion=="actualizar_informe")
 
 /* ################################################################## */
 /* ################################################################## */
+
+
 if ($accion=="eliminar_informe_condicion")
 	{
 		$mensaje_error="";
@@ -313,7 +374,7 @@ if ($accion=="editar_informe")
 										</td>
 									</tr>';
 							}
-						echo '</table>';			
+						echo '</table>';
 				?>
 	
 			<?php
@@ -416,9 +477,9 @@ if ($accion=="editar_informe")
 										</td>
 									</tr>';
 							}
-						echo '</table>';			
+						echo '</table>';
 				?>
-	
+
 			<?php
 				abrir_barra_estado();
 					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioCampos\')">';
@@ -588,8 +649,8 @@ if ($accion=="editar_informe")
 				<?php
 				abrir_ventana('Especifica tipos de gr&aacute;fico a generar por el informe','#BDB9B9','600'); 
 				?>
-				<form name="datosformco" id="datosformco" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="Hidden" name="accion" value="guardar_informe_condicion">
+				<form name="datosformcograf" id="datosformcograf" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+					<input type="Hidden" name="accion" value="actualizar_grafico_informe">
 					<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
 				<!-- SELECCION DE SERIES  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
@@ -597,6 +658,17 @@ if ($accion=="editar_informe")
 				<div align=center><b>SERIES PARA EL GRAFICO</b> - Gr&aacute;ficos con m&uacute;ltiples series deben devolver el mismo n&uacute;mero de etiquetas</div>
 						<table class="TextosVentana" width="100%">
 						<?php
+							//Consulta el formato de grafico y datos de series para ponerlo en los campos
+							//Dado por: Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
+							$consulta_formato_grafico=ejecutar_sql("SELECT formato_grafico FROM ".$TablasCore."informe WHERE id='$informe'");
+							$registro_formato = $consulta_formato_grafico->fetch();
+							$formato_base=explode("|",$registro_formato["formato_grafico"]);
+							$tipo_grafico_leido=$formato_base[0];
+							$lista_nombre_series=explode("!",$formato_base[1]);
+							$lista_etiqueta_series=explode("!",$formato_base[2]);
+							$lista_valor_series=explode("!",$formato_base[3]);
+
+
 							//Crea las series
 							$numero_series=5;
 							for ($cs=1;$cs<=$numero_series;$cs++)
@@ -605,16 +677,19 @@ if ($accion=="editar_informe")
 							<tr>
 								<td align="center" valign="TOP">
 									<b>Nombre de la Serie <?php echo $cs; ?></b><br>
-									<input type="text" name="nombre_serie_<?php echo $cs; ?>" maxlength="20" size="20" class="CampoTexto">
+									<input type="text" name="nombre_serie_<?php echo $cs; ?>" value="<?php echo $lista_nombre_series[$cs-1]; ?>" maxlength="20" size="20" class="CampoTexto">
 								</td>
 								<td align="center" valign="TOP">
 									<b>Campo de etiqueta</b><br>
 									<select name="campo_etiqueta_serie_<?php echo $cs; ?>" class="Combos" >
+										<option value=""></option>
 										<?php
 										$consulta_forms=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
 										while($registro = $consulta_forms->fetch())
 											{
-												echo '<option value="'.$registro["valor_campo"].'">'.$registro["valor_campo"].'</option>';
+												$estado_seleccionado="";
+												if ($lista_etiqueta_series[$cs-1]==$registro["valor_campo"]) $estado_seleccionado="SELECTED";
+												echo '<option value="'.$registro["valor_campo"].'" '.$estado_seleccionado.'>'.$registro["valor_campo"].'</option>';
 											}
 									?>
 									</select>
@@ -622,11 +697,14 @@ if ($accion=="editar_informe")
 								<td align="center" valign="TOP">
 									<b>Campo de valor</b><br>
 									<select name="campo_valor_serie_<?php echo $cs; ?>" class="Combos">
+										<option value=""></option>
 									<?php
 										$consulta_forms=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
 										while($registro = $consulta_forms->fetch())
 											{
-												echo '<option value="'.$registro["valor_campo"].'">'.$registro["valor_campo"].'</option>';
+												$estado_seleccionado="";
+												if ($lista_valor_series[$cs-1]==$registro["valor_campo"]) $estado_seleccionado="SELECTED";
+												echo '<option value="'.$registro["valor_campo"].'" '.$estado_seleccionado.'>'.$registro["valor_campo"].'</option>';
 											}
 									?>
 									</select>
@@ -647,13 +725,13 @@ if ($accion=="editar_informe")
 								<td align="LEFT" valign="TOP">
 									<b>Tipo de gr&aacute;fico:</b><br>
 									<select name="tipo_grafico" class="Combos" >
-											<option value="barrah">Barras horizontales</option>
-											<option value="barrah_multiples">Barras horizontales (multiples series)</option>
-											<option value="linea">Grafico de linea</option>
-											<option value="linea_multiples">Grafico de linea (multiples series)</option>
-											<option value="barrav">Barras verticales</option>
-											<option value="barrav_multiples">Barras verticales (multiples series)</option>
-											<option value="torta">Grafico de torta (solo una serie)</option>
+											<option value="barrah" <?php if ($tipo_grafico_leido=="barrah") echo "SELECTED"; ?>>Barras horizontales</option>
+											<option value="barrah_multiples" <?php if ($tipo_grafico_leido=="barrah_multiples") echo "SELECTED"; ?>>Barras horizontales (multiples series)</option>
+											<option value="linea" <?php if ($tipo_grafico_leido=="linea") echo "SELECTED"; ?>>Grafico de linea</option>
+											<option value="linea_multiples" <?php if ($tipo_grafico_leido=="linea_multiples") echo "SELECTED"; ?>>Grafico de linea (multiples series)</option>
+											<option value="barrav" <?php if ($tipo_grafico_leido=="barrav") echo "SELECTED"; ?>>Barras verticales</option>
+											<option value="barrav_multiples" <?php if ($tipo_grafico_leido=="barrav_multiples") echo "SELECTED"; ?>>Barras verticales (multiples series)</option>
+											<option value="torta" <?php if ($tipo_grafico_leido=="torta") echo "SELECTED"; ?>>Grafico de torta (solo una serie)</option>
 									</select>
 								</td>
 								<td align="RIGHT">
@@ -662,7 +740,10 @@ if ($accion=="editar_informe")
 							</tr>
 						</table>
 				</form>
-				<hr>
+				<hr><center>
+				<input type="Button"  class="Botones" value="Actualizar formato del gr&aacute;fico >>>" onClick="document.datosformcograf.submit()">
+				<br><br><br>
+				</center>
 			<?php
 				abrir_barra_estado();
 					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioGraficos\')">';
@@ -671,8 +752,6 @@ if ($accion=="editar_informe")
 			?>
 		<!-- FIN DE MARCOS POPUP -->
 		</div>
-
-
 
 
 		<div id='FondoPopUps' class="FondoOscuroPopUps"></div>

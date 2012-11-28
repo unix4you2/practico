@@ -1027,6 +1027,9 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				abrir_ventana($Nombre_Aplicacion.' - '.$registro_informe["titulo"],'f2f2f2',$registro_informe["ancho"]);
 			}
 
+
+
+
 		// Si se ha definido un tamano fijo entonces crea el marco
 		if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
 			echo '<DIV style="DISPLAY: block; OVERFLOW: auto; POSITION: relative; WIDTH: '.$registro_informe["ancho"].'; HEIGHT: '.$registro_informe["alto"].'">';
@@ -1064,6 +1067,10 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					header("Pragma: no-cache");
 					header("Expires: 0");
 				}
+
+
+
+
 
 			// Inicia construccion de consulta dinamica
 			$numero_columnas=0;
@@ -1142,6 +1149,11 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			*/
 
 
+
+
+
+
+
 			if($formato=="htm")
 				echo '<table class="'.$estilo.'">
 					<thead><tr>';
@@ -1187,6 +1199,16 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		// Si se ha definido un tamano fijo entonces cierra el marco
 		if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
 			echo '</DIV>';
+
+
+
+
+
+
+
+
+
+
 
 		if ($en_ventana) cerrar_ventana();
 	}
