@@ -49,7 +49,9 @@
 						{
 							if ($partes_objeto[2]!="") $en_ventana=$partes_objeto[2]; // indica si es cargado en ventana o escritorio
 							if ($partes_objeto[3]!="") $formato =$partes_objeto[3]; // Formato: htm, xls
-							cargar_informe($partes_objeto[1],$en_ventana,$formato);
+							if ($partes_objeto[4]!="") $estilo =$partes_objeto[4]; // Estilo CSS
+							if ($partes_objeto[5]!="") $embebido =$partes_objeto[5]; // Embebido? Si=1, No=0
+							cargar_informe($partes_objeto[1],$en_ventana,$formato,$estilo,$embebido);
 						}
 				}
 			else

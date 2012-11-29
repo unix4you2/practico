@@ -132,6 +132,8 @@
 	//Determina paso actual de instalacion
 	if(!isset($paso)) $paso=0;
 
+	echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/4FCEZYR03pE\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><img src='../img/icono_screencast.png' alt='ScreenCast-VideoTutorial'></a>";
+
 	abrir_ventana('Proceso de instalaci&oacute;n - Paso '.$paso,'#B5B5B5','');
 	include("paso_".$paso.".php");
 	cerrar_ventana();

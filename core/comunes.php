@@ -1010,7 +1010,7 @@
 /* ################################################################## */
 function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0)
 	{
-		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion;
+		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion,$Login_usuario;
 
 		// Busca datos del informe
 		$consulta_informe=ejecutar_sql("SELECT * FROM ".$TablasCore."informe WHERE id='$informe'");
@@ -1019,60 +1019,10 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		//Si no encuentra informe presenta error
 		if ($registro_informe["id"]=="") mensaje("ERROR EN TIEMPO DE EJECUCION","El objeto (informe $informe) asociado a esta solicitud no existe.  Consulte con su administrador del sistema.<br>","70%","icono_error.png","TextosEscritorio");
 
-		if ($en_ventana)
-			{
-				//Cuando es embebido (=1) no imprime el boton de retorno pues se asume dentro de un formulario
-				if (!$embebido)
-					echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" <<< Volver a mi escritorio " class="Botones">';
-				abrir_ventana($Nombre_Aplicacion.' - '.$registro_informe["titulo"],'f2f2f2',$registro_informe["ancho"]);
-			}
 
 
 
-
-		// Si se ha definido un tamano fijo entonces crea el marco
-		if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
-			echo '<DIV style="DISPLAY: block; OVERFLOW: auto; POSITION: relative; WIDTH: '.$registro_informe["ancho"].'; HEIGHT: '.$registro_informe["alto"].'">';
-
-			// Crea encabezado por tipo de formato:  1=html   2=Excel
-			if($formato=="htm")
-				{
-					echo '
-						<html>
-						<body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0" style="font-size: 12px; font-family: Verdana, Tahoma, Arial;">';
-
-					// Si no tiene ancho o alto se asume que es para impresion y agrega titulo
-					if ($registro_informe["ancho"]=="" || $registro_informe["alto"]=="")
-						echo '<table class="'.$estilo.'">
-							<thead><tr><td>
-							'.$Nombre_Aplicacion.' - '.$registro_informe["titulo"].'
-							</td></tr></thead></table>';
-
-					// Pone encabezados de informe
-					/*if ($registro_informe[filtro_cliente]!="")
-						echo 'Empresa: '.$cliente.'  -  ';
-					if ($registro_informe[filtro_fecha]!="")
-						echo 'Desde '.$anoi.'/'.$mesi.'/'.$diai.' Hasta '.$anof.'/'.$mesf.'/'.$diaf.'';*/
-					//echo '</font></div>';
-				}
-
-			if($formato=="xls")
-				{
-					$fecha = date("d-m-Y");
-					$tituloinforme=trim($registro_informe["titulo"]);
-					$tituloinforme="Informe";
-					$nombrearchivo=$tituloinforme."_".$fecha;
-					header('Content-type: application/vnd.ms-excel');
-					header("Content-Disposition: attachment; filename=$nombrearchivo.xls");
-					header("Pragma: no-cache");
-					header("Expires: 0");
-				}
-
-
-
-
-
-			// Inicia construccion de consulta dinamica
+			// Inicia CONSTRUCCION DE CONSULTA DINAMICA
 			$numero_columnas=0;
 			//Busca los CAMPOS definidos para el informe
 			$consulta="SELECT ";
@@ -1115,6 +1065,18 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			if (!$hay_condiciones)
 			$consulta.=" 1 ";
 
+			if ($registro_informe[agrupamiento]!="")
+				{
+					$campoagrupa=$registro_informe[agrupamiento];	
+					$consulta.= " GROUP BY $campoagrupa";
+				}
+
+			if ($registro_informe[ordenamiento]!="")
+				{
+					$campoorden=$registro_informe[ordenamiento];
+					$consulta.= " ORDER BY $campoorden";
+				}
+
 			/*
 			if ($registro_informe[filtro_cliente]!="")
 				{
@@ -1134,81 +1096,222 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					$campotexto=$registro_informe[filtro_texto];
 					$consulta.= " AND $campotexto = '$filtrotexto' ";
 				}
-				
-			if ($registro_informe[agrupamiento]!="")
-				{
-					$campoagrupa=$registro_informe[agrupamiento];	
-					$consulta.= " GROUP BY $campoagrupa";
-				}
-				
-			if ($registro_informe[ordenamiento]!="")
-				{
-					$campoorden=$registro_informe[ordenamiento];
-					$consulta.= " ORDER BY $campoorden";
-				}
+
 			*/
 
 
+		// Si el informe tiene formato_final = T (tabla de datos)
+		if ($registro_informe["formato_final"]=="T")
+			{
+				if ($en_ventana)
+					{
+						//Cuando es embebido (=1) no imprime el boton de retorno pues se asume dentro de un formulario
+						if (!$embebido)
+							echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" <<< Volver a mi escritorio " class="Botones">';
+						abrir_ventana($Nombre_Aplicacion.' - '.$registro_informe["titulo"],'f2f2f2',$registro_informe["ancho"]);
+					}
+
+				// Si se ha definido un tamano fijo entonces crea el marco
+				if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
+					echo '<DIV style="DISPLAY: block; OVERFLOW: auto; POSITION: relative; WIDTH: '.$registro_informe["ancho"].'; HEIGHT: '.$registro_informe["alto"].'">';
+
+					// Crea encabezado por tipo de formato:  1=html   2=Excel
+					if($formato=="htm")
+						{
+							echo '
+								<html>
+								<body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0" style="font-size: 12px; font-family: Verdana, Tahoma, Arial;">';
+
+							// Si no tiene ancho o alto se asume que es para impresion y agrega titulo
+							if ($registro_informe["ancho"]=="" || $registro_informe["alto"]=="")
+								echo '<table class="'.$estilo.'">
+									<thead><tr><td>
+									'.$Nombre_Aplicacion.' - '.$registro_informe["titulo"].'
+									</td></tr></thead></table>';
+
+							// Pone encabezados de informe
+							/*if ($registro_informe[filtro_cliente]!="")
+								echo 'Empresa: '.$cliente.'  -  ';
+							if ($registro_informe[filtro_fecha]!="")
+								echo 'Desde '.$anoi.'/'.$mesi.'/'.$diai.' Hasta '.$anof.'/'.$mesf.'/'.$diaf.'';*/
+							//echo '</font></div>';
+						}
+
+					if($formato=="xls")
+						{
+							$fecha = date("d-m-Y");
+							$tituloinforme=trim($registro_informe["titulo"]);
+							$tituloinforme="Informe";
+							$nombrearchivo=$tituloinforme."_".$fecha;
+							header('Content-type: application/vnd.ms-excel');
+							header("Content-Disposition: attachment; filename=$nombrearchivo.xls");
+							header("Pragma: no-cache");
+							header("Expires: 0");
+						}
+
+					if($formato=="htm")
+						echo '<table class="'.$estilo.'">
+							<thead><tr>';
+					if($formato=="xls")
+						echo '<table class="font-size: 11px; font-family: Verdana, Tahoma, Arial;">
+							<thead><tr>';
+
+					// Imprime encabezados de columna
+					$resultado_columnas=ejecutar_sql($consulta);
+					$numero_columnas=0;
+					foreach($resultado_columnas->fetch(PDO::FETCH_ASSOC) as $key=>$val)
+						{
+							echo '<th align="LEFT">'.$key.'</th>';
+							$numero_columnas++;
+						}
+					echo '</tr></thead><tbody>';
+
+					// Imprime registros del resultado
+					$numero_filas=0;
+					$consulta_ejecucion=ejecutar_sql($consulta);
+					while($registro_informe=$consulta_ejecucion->fetch())
+						{
+							echo '<tr>';
+							for ($i=0;$i<$numero_columnas;$i++)
+								echo '<td align=left>'.$registro_informe[$i].'</td>';
+							echo '</tr>';
+							$numero_filas++;
+						}
+					echo '</tbody>';
+					if ($formato=="htm")
+						echo '<tfoot>
+							<tr><td colspan='.$numero_columnas.'>
+								<b>Total registros encontrados: </b>'.$numero_filas.'
+							</td></tr>
+						</tfoot>';
+					echo '</table>';
+
+					if($formato=="htm")
+						echo '
+							</body>
+							</html>';
+
+				// Si se ha definido un tamano fijo entonces cierra el marco
+				if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
+					echo '</DIV>';
+			} // Fin si informe es T (tabla)
 
 
 
+		// Si el informe tiene formato_final = G (grafico)
+		if ($registro_informe["formato_final"]=="G")
+			{
+				//Consulta el formato de grafico y datos de series para ponerlo en los campos
+				//Dado por: Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
+				$formato_base=explode("|",$registro_informe["formato_grafico"]);
+				$tipo_grafico=$formato_base[0];
+				$lista_nombre_series=explode("!",$formato_base[1]);
+				$lista_etiqueta_series=explode("!",$formato_base[2]);
+				$lista_valor_series=explode("!",$formato_base[3]);
 
+				//Elimina los nombres de tabla en caso de tener punto y usa los alias si los tiene
+				for ($i=0;$i<5;$i++)
+					{
+						//Elimina nombres de tabla encontrando el punto y seleccionando siguiente palabra
+						if (strpos($lista_etiqueta_series[$i], "."))
+							{
+								$tmp=explode(".",$lista_etiqueta_series[$i]);
+								$lista_etiqueta_series[$i]=$tmp[1];
+							}
+						if (strpos($lista_valor_series[$i], "."))
+							{
+								$tmp=explode(".",$lista_valor_series[$i]);
+								$lista_valor_series[$i]=$tmp[1];
+							}
+						// Prefiere los alias sobre los nombres de campo cuando encuentra un AS 
+						if (strpos($lista_etiqueta_series[$i], " AS "))
+							{
+								$tmp=explode(" AS ",$lista_etiqueta_series[$i]);
+								$lista_etiqueta_series[$i]=$tmp[1];
+							}
+						if (strpos($lista_valor_series[$i], " AS "))
+							{
+								$tmp=explode(" AS ",$lista_valor_series[$i]);
+								$lista_valor_series[$i]=$tmp[1];
+							}
+					}
+				$nombre_serie_1=$lista_nombre_series[0];
+				$nombre_serie_2=$lista_nombre_series[1];
+				$nombre_serie_3=$lista_nombre_series[2];
+				$nombre_serie_4=$lista_nombre_series[3];
+				$nombre_serie_5=$lista_nombre_series[4];
+				$campo_etiqueta_serie_1=$lista_etiqueta_series[0];
+				$campo_etiqueta_serie_2=$lista_etiqueta_series[1];
+				$campo_etiqueta_serie_3=$lista_etiqueta_series[2];
+				$campo_etiqueta_serie_4=$lista_etiqueta_series[3];
+				$campo_etiqueta_serie_5=$lista_etiqueta_series[4];
+				$campo_valor_serie_1=$lista_valor_series[0];
+				$campo_valor_serie_2=$lista_valor_series[1];
+				$campo_valor_serie_3=$lista_valor_series[2];
+				$campo_valor_serie_4=$lista_valor_series[3];
+				$campo_valor_serie_5=$lista_valor_series[4];
+				// Libreria para graficos
+				include "inc/libchart/classes/libchart.php";
 
-			if($formato=="htm")
-				echo '<table class="'.$estilo.'">
-					<thead><tr>';
-			if($formato=="xls")
-				echo '<table class="font-size: 11px; font-family: Verdana, Tahoma, Arial;">
-					<thead><tr>';
+				//Crea las series para el grafico, dependiendo si es torta (una serie) o cualquier otro (multiples series)
+				if ($tipo_grafico=="torta")
+					{
+						$dataSet = new XYDataSet();
+						// GENERA DATOS DEL GRAFICO
+						$consulta_ejecucion=ejecutar_sql($consulta);
+						while($registro=$consulta_ejecucion->fetch())
+							{
+								if ($nombre_serie_1 != "") $dataSet->addPoint(new Point($registro[$campo_etiqueta_serie_1], $registro[$campo_valor_serie_1]));
+							}
+					}
+				else
+					{
+						$dataSet = new XYSeriesDataSet();
+						if ($nombre_serie_1 != "")	{
+							$serie1 = new XYDataSet();
+							$dataSet->addSerie($nombre_serie_1, $serie1);	}
+						if ($nombre_serie_2 != "")	{
+							$serie2 = new XYDataSet();
+							$dataSet->addSerie($nombre_serie_2, $serie2);	}
+						if ($nombre_serie_3 != "")	{
+							$serie3 = new XYDataSet();
+							$dataSet->addSerie($nombre_serie_3, $serie3);	}
+						if ($nombre_serie_4 != "")	{
+							$serie4 = new XYDataSet();
+							$dataSet->addSerie($nombre_serie_4, $serie4);	}
+						if ($nombre_serie_5 != "")	{
+							$serie5 = new XYDataSet();
+							$dataSet->addSerie($nombre_serie_5, $serie5);	}
 
-			// Imprime encabezados de columna
-			$resultado_columnas=ejecutar_sql($consulta);
-			$numero_columnas=0;
-			foreach($resultado_columnas->fetch(PDO::FETCH_ASSOC) as $key=>$val)
-				{
-					echo '<th align="LEFT">'.$key.'</th>';
-					$numero_columnas++;
-				}
-			echo '</tr></thead><tbody>';
+						// GENERA DATOS DEL GRAFICO
+						$consulta_ejecucion=ejecutar_sql($consulta);
+						while($registro=$consulta_ejecucion->fetch())
+							{
+								if ($nombre_serie_1 != "") $serie1->addPoint(new Point($registro[$campo_etiqueta_serie_1], $registro[$campo_valor_serie_1]));
+								if ($nombre_serie_2 != "") $serie2->addPoint(new Point($registro[$campo_etiqueta_serie_2], $registro[$campo_valor_serie_2]));
+								if ($nombre_serie_3 != "") $serie3->addPoint(new Point($registro[$campo_etiqueta_serie_3], $registro[$campo_valor_serie_3]));
+								if ($nombre_serie_4 != "") $serie4->addPoint(new Point($registro[$campo_etiqueta_serie_4], $registro[$campo_valor_serie_4]));
+								if ($nombre_serie_5 != "") $serie5->addPoint(new Point($registro[$campo_etiqueta_serie_5], $registro[$campo_valor_serie_5]));
+							}
+					}
 
-			// Imprime registros del resultado
-			$numero_filas=0;
-			$consulta_ejecucion=ejecutar_sql($consulta);
-			while($registro_informe=$consulta_ejecucion->fetch())
-				{
-					echo '<tr>';
-					for ($i=0;$i<$numero_columnas;$i++)
-						echo '<td align=left>'.$registro_informe[$i].'</td>';
-					echo '</tr>';
-					$numero_filas++;
-				}
-			echo '</tbody>';
-			if ($formato=="htm")
-				echo '<tfoot>
-					<tr><td colspan='.$numero_columnas.'>
-						<b>Total registros encontrados: </b>'.$numero_filas.'
-					</td></tr>
-				</tfoot>';
-			echo '</table>';
+				// CREA OBJETO SEGUN TIPO DE GRAFICO
+				if ($tipo_grafico=="linea" || $tipo_grafico=="linea_multiples")
+					$chart = new LineChart($registro_informe["ancho"], $registro_informe["alto"]);
+				if ($tipo_grafico=="barrah" || $tipo_grafico=="barrah_multiples")
+					$chart = new HorizontalBarChart($registro_informe["ancho"], $registro_informe["alto"]);
+				if ($tipo_grafico=="barrav" || $tipo_grafico=="barrav_multiples")
+					$chart = new VerticalBarChart($registro_informe["ancho"], $registro_informe["alto"]);
+				if ($tipo_grafico=="torta")
+					$chart = new PieChart($registro_informe["ancho"], $registro_informe["alto"]);
 
-			if($formato=="htm")
-				echo '
-					</body>
-					</html>';
-
-		// Si se ha definido un tamano fijo entonces cierra el marco
-		if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
-			echo '</DIV>';
-
-
-
-
-
-
-
-
-
-
+				// PRESENTA EL GRAFICO EN PANTALLA
+				$chart->setDataSet($dataSet);
+				//$chart->getPlot()->setGraphCaptionRatio(0.75);
+				$chart->setTitle($registro_informe["titulo"]);
+				$chart->render("tmp/Inf_".$registro_informe["titulo"]."-".$Login_usuario.".png");
+				echo '<img alt="Grafico" src="tmp/Inf_'.$registro_informe["titulo"].'-'.$Login_usuario.'.png" style="border: 1px solid gray;">';
+			} // Fin si informe es G (grafico)
 
 		if ($en_ventana) cerrar_ventana();
 	}

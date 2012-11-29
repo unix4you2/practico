@@ -5,6 +5,12 @@
   	</title>
 	<script type="text/javascript" src="js/tooltips.js"></script>
 	<link rel="stylesheet" type="text/css" href="../skin/nomo/general.css">
+	<script language="JavaScript">
+		function abrir_ventana_popup(theURL,winName,features)
+			{ 
+				window.open(theURL,winName,features);
+			}
+	</script>
 </head>
 <body leftmargin="0"  margin="0" topmargin="0" oncontextmenu="return false;">
 

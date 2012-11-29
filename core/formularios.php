@@ -328,7 +328,7 @@ if ($accion=="editar_formulario")
 										<option value="url_iframe">URL embebida (IFrame)</option>
 									</optgroup>
 									<optgroup label="Objetos internos">
-										<option value="informe">Informe predise&ntilde;ado</option>
+										<option value="informe">Informe predise&ntilde;ado (Tabla de datos o Gr&aacute;fico)</option>
 										<!--<option value="frm">Formulario anidado</option>-->
 									</optgroup>
 								</select>
@@ -770,6 +770,7 @@ if ($accion=="editar_formulario")
 										<option value="0">No</option>
 										<option value="1">Si</option>
 									</select>
+									<a href="#" title="Ayuda importante!" name="No se recomienda activar este campo cuando desee empotrar informes de tipo GRAFICA."><img src="img/icn_10.gif" border=0></a>
 								</td>
 							</tr>
 							</table>

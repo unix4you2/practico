@@ -16,6 +16,57 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: actualizar_agrupamiento_informe
+	Cambia el registro asociado a un informe de la aplicacion para el campo de agrupamiento y ordenamiento
+
+	Variables de entrada:
+
+		id - ID del informe que se desea cambiarse
+
+		(start code)
+			UPDATE ".$TablasCore."informe SET ... WHERE id=$id
+		(end)
+
+	Salida:
+		Registro de informe actualizado
+
+	Ver tambien:
+
+		<detalles_informe>
+*/
+if ($accion=="actualizar_agrupamiento_informe")
+	{
+		$mensaje_error="";
+		if ($mensaje_error=="")
+			{
+				// Actualiza los datos
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET agrupamiento='$agrupamiento',ordenamiento='$ordenamiento' WHERE id='$informe'");
+				// Lleva a auditoria
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Actualiza agrupamiento/ordenamiento informe $informe','$fecha_operacion','$hora_operacion')");
+				echo '
+					<form name="regresar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="accion" value="editar_informe">
+					<input type="Hidden" name="informe" value="'.$informe.'">
+					</form>
+				<script type="" language="JavaScript">
+				 document.regresar.submit();  </script>';
+			}
+		else
+			{
+				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="accion" value="editar_informe">
+					<input type="Hidden" name="informe" value="'.$informe.'">
+					<input type="Hidden" name="error_titulo" value="Problema en los datos ingresados">
+					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+					</form>
+					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+			}
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: actualizar_grafico_informe
 	Cambia el registro asociado a un informe de la aplicacion para el campo de formato de graficos
 
@@ -668,7 +719,6 @@ if ($accion=="editar_informe")
 							$lista_etiqueta_series=explode("!",$formato_base[2]);
 							$lista_valor_series=explode("!",$formato_base[3]);
 
-
 							//Crea las series
 							$numero_series=5;
 							for ($cs=1;$cs<=$numero_series;$cs++)
@@ -688,14 +738,16 @@ if ($accion=="editar_informe")
 										while($registro = $consulta_forms->fetch())
 											{
 												$estado_seleccionado="";
-												if ($lista_etiqueta_series[$cs-1]==$registro["valor_campo"]) $estado_seleccionado="SELECTED";
-												echo '<option value="'.$registro["valor_campo"].'" '.$estado_seleccionado.'>'.$registro["valor_campo"].'</option>';
+												$cadena_alias="";
+												if ($lista_etiqueta_series[$cs-1]==$registro["valor_campo"] || $lista_etiqueta_series[$cs-1]==$registro["valor_campo"]." AS ".$registro["valor_alias"]) $estado_seleccionado="SELECTED";
+												if ($registro["valor_alias"]!="") $cadena_alias=" AS ".$registro["valor_alias"];
+												echo '<option value="'.$registro["valor_campo"].$cadena_alias.'" '.$estado_seleccionado.'>'.$registro["valor_campo"].$cadena_alias.'</option>';
 											}
 									?>
 									</select>
 								</td>
 								<td align="center" valign="TOP">
-									<b>Campo de valor</b><br>
+									<b>Campo de valor (debe ser num&eacute;rico)</b><br>
 									<select name="campo_valor_serie_<?php echo $cs; ?>" class="Combos">
 										<option value=""></option>
 									<?php
@@ -703,8 +755,10 @@ if ($accion=="editar_informe")
 										while($registro = $consulta_forms->fetch())
 											{
 												$estado_seleccionado="";
-												if ($lista_valor_series[$cs-1]==$registro["valor_campo"]) $estado_seleccionado="SELECTED";
-												echo '<option value="'.$registro["valor_campo"].'" '.$estado_seleccionado.'>'.$registro["valor_campo"].'</option>';
+												$cadena_alias="";
+												if ($lista_valor_series[$cs-1]==$registro["valor_campo"] || $lista_valor_series[$cs-1]==$registro["valor_campo"]." AS ".$registro["valor_alias"]) $estado_seleccionado="SELECTED";
+												if ($registro["valor_alias"]!="") $cadena_alias=" AS ".$registro["valor_alias"];
+												echo '<option value="'.$registro["valor_campo"].$cadena_alias.'" '.$estado_seleccionado.'>'.$registro["valor_campo"].$cadena_alias.'</option>';
 											}
 									?>
 									</select>
@@ -715,7 +769,6 @@ if ($accion=="editar_informe")
 							} // Fin del for que crea series
 						?>
 						</table>
-
 
 			<!-- SELECCION DEL TIPO DE GRAFICO  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 				<hr>
@@ -754,6 +807,66 @@ if ($accion=="editar_informe")
 		</div>
 
 
+		<!-- INICIO DE MARCOS POPUP -->
+		<div id='FormularioAgrupacion' class="FormularioPopUps">
+				<?php
+				abrir_ventana('Especifica criterios de agrupaci&oacute;n y ordenamiento','#BDB9B9','600'); 
+				$consulta_agrupacion=ejecutar_sql("SELECT ordenamiento,agrupamiento FROM ".$TablasCore."informe WHERE id='$informe'");
+				$registro_agrupacion = $consulta_agrupacion->fetch();
+				?>
+				<form name="datosformcogrup" id="datosformcogrup" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+					<input type="Hidden" name="accion" value="actualizar_agrupamiento_informe">
+					<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
+
+						<table class="TextosVentana" width="100%">
+							<tr>
+								<td align="right" valign="TOP">
+									<img border='0' src='img/icono_totalizar.png'/>
+								</td>
+								<td align="right" valign="TOP">
+									<b>Criterio de agrupamiento</b>
+								</td>
+								<td align="left" valign="TOP">
+									<input type="text" name="agrupamiento" value="<?php echo $registro_agrupacion["agrupamiento"]; ?>" size="40" class="CampoTexto">
+									<a href="#" title="Como se agrupan los resultados?" name="Utilice esta opcion solamente si su informe maneja operaciones como suma, promedio o conteo dentro de los campos desplegados.  Ej. SUM(campo), AVG(campo), COUNT(*).  En esos casos indique por cu&aacute;l o cuales campos separados por coma se debe agrupar los resultados"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									<br><b>Recomendaci&oacute;n:</b> Utilice solamente campos definidos en su consulta.
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									<hr>
+								</td>
+							</tr>
+							<tr>
+								<td align="right" valign="TOP">
+									<img border='0' src='img/icono_ordenar.png'/>
+								</td>
+								<td align="right" valign="TOP">
+									<b>Criterio de ordenamiento</b>
+								</td>
+								<td align="left" valign="TOP">
+									<input type="text" name="ordenamiento" value="<?php echo $registro_agrupacion["ordenamiento"]; ?>" size="40" class="CampoTexto">
+									<a href="#" title="Como se ordenan los resultados?" name="Permite ordenar los resultados por alguno de los desplegados.  Indique por cu&aacute;l o cuales campos separados por coma se debe ordenar los resultados, si lo desea despu&eacute;s de cada campo puede utilizar el modificador ASC o DESC para indicar si es ascedente o descendente."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									<br><b>Recomendaci&oacute;n:</b> Utilice solamente campos definidos en su consulta.
+								</td>
+							</tr>
+						</table>
+				</form>
+				<hr><center>
+				<input type="Button"  class="Botones" value="Actualizar criterios de agrupoaci&oacute;n y ordenamiento >>>" onClick="document.datosformcogrup.submit()">
+				<br><br><br>
+				</center>
+			<?php
+				abrir_barra_estado();
+					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioAgrupacion\')">';
+				cerrar_barra_estado();
+			cerrar_ventana();
+			?>
+		<!-- FIN DE MARCOS POPUP -->
+		</div>
+
+
+
 		<div id='FondoPopUps' class="FondoOscuroPopUps"></div>
 		<?php
 			// Habilita el popup activo
@@ -761,6 +874,7 @@ if ($accion=="editar_informe")
 			if (@$popup_activo=="FormularioCampos")	echo '<script type="text/javascript">	AbrirPopUp("FormularioCampos"); </script>';
 			if (@$popup_activo=="FormularioCondiciones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioCondiciones"); </script>';
 			if (@$popup_activo=="FormularioGraficos")	echo '<script type="text/javascript">	AbrirPopUp("FormularioGraficos"); </script>';
+			if (@$popup_activo=="FormularioAgrupacion")	echo '<script type="text/javascript">	AbrirPopUp("FormularioAgrupacion"); </script>';
 		?>
 
 		<table><tr><td valign=top>
@@ -776,7 +890,10 @@ if ($accion=="editar_informe")
 				<hr>
 				Condiciones<br>
 				<a href='javascript:AbrirPopUp("FormularioCondiciones");' title="Filtrar los resultados mediante condiciones espec&iacute;ficas"><img border='0' src='img/icono_diseno.png'/></a>
-				
+				<hr>
+				Agrupaci&oacute;n y ordenamiento<br>
+				<a href='javascript:AbrirPopUp("FormularioAgrupacion");' title="Permite definir campos de agrupaci&oacute;n para informes con operaciones de suma, promedio o conteo y los campos para el ordenamiento de resultados"><img border='0' src='img/icono_totalizar.png'/><img border='0' src='img/icono_ordenar.png'/></a>
+
 				<?php
 					// Si se trata de un informe con grafico como resultado agrega el boton de graficos
 					if ($registro_informe['formato_final']=='G')
@@ -925,7 +1042,7 @@ if ($accion=="guardar_informe")
 		if ($categoria=="") $mensaje_error.="Debe indicar un nombre v&aacute;lido para la categor&iacute;a asociada al informe.<br>";
 		if ($mensaje_error=="")
 			{
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe VALUES (0, '$titulo','$descripcion','$categoria','$agrupamiento','$ordenamiento','$nivel_usuario','$ancho','$alto','$formato_final')");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe VALUES (0, '$titulo','$descripcion','$categoria','$agrupamiento','$ordenamiento','$nivel_usuario','$ancho','$alto','$formato_final','|!|!|!|')");
 				$id=$ConexionPDO->lastInsertId();
 				// Lleva a auditoria
 				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea informe $id','$fecha_operacion','$hora_operacion')");
@@ -1119,13 +1236,13 @@ if ($accion=="mis_informes")
 							$Complemento_tablas=",".$TablasCore."usuario_informe";
 							$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$Login_usuario'";  // AND nivel>0
 						}
-					$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."informe ".$Complemento_tablas." WHERE 1 AND categoria='".$seccion_menu_activa."' ".$Complemento_condicion." GROUP BY categoria ORDER BY titulo");
+					$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."informe ".$Complemento_tablas." WHERE 1 AND categoria='".$seccion_menu_activa."' ".$Complemento_condicion." ORDER BY titulo");
 
 					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
 						{
 							echo '<form action="'.$ArchivoCORE.'" method="post" name="acordeinf_'.$registro_opciones_acordeon["id"].'" id="acordeinf_'.$registro_opciones_acordeon["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 									<input type="hidden" name="accion" value="cargar_objeto">
-									<input type="hidden" name="objeto" value="inf:'.$registro_opciones_acordeon["id"].':1:htm">
+									<input type="hidden" name="objeto" value="inf:'.$registro_opciones_acordeon["id"].':1:htm:Informes:0">
 									</form>';
 
 							// Imprime la imagen

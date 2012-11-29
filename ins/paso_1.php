@@ -13,7 +13,7 @@
 						<u>Debe cumplir con lo siguiente:</u>
 						<li>Extensi&oacute;n PDO activada
 						<li>Driver PDO para el tipo de base de datos deseada
-						<li>Extensi&oacute;n GD para manipulaci&oacute;n de gr&aacute;ficos
+						<li>Extensi&oacute;n GD 2+ para manipulaci&oacute;n de gr&aacute;ficos y su soporte para FreeType 2+
 					</div>
 				</font></td></tr></table>
 
