@@ -823,6 +823,17 @@
 							zona.innerHTML = elemento;
 							capa.appendChild(zona);
 						}
+
+					function ImprimirMarco(nombre)
+						{
+						  var ficha = document.getElementById(nombre);
+						  var ventimp = window.open(" ", "popimpr");
+						  ventimp.document.write( ficha.innerHTML );
+						  ventimp.document.close();
+						  ventimp.print( );
+						  ventimp.close();
+						}
+
 				</script>
 				<!--<input type=button onclick=\'AgregarElemento("1","1","hola");\'>-->';
 
@@ -848,7 +859,8 @@
 					mensaje($registro_formulario["ayuda_titulo"],$registro_formulario["ayuda_texto"],'100%',$imagen_ayuda,'TextosVentana');
 
 				//Inicia el formulario de datos
-				echo '<form name="datos" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+				echo '
+					<form name="datos" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="Hidden" name="accion" value="guardar_datos_formulario">
 					<input type="Hidden" name="formulario" value="'.$formulario.'">';
 
@@ -861,12 +873,14 @@
 				$limite_superior=$constante_limite_superior; // Peso superior a tener en cuenta en el query
 				//Busca todos los objetos marcados como fila_unica=1 y agrega un registro mas con el limite superior
 				$consulta_obj_fila_unica=ejecutar_sql("SELECT id,peso,visible FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY peso");
+				echo '<div id="seccion_impresion">';
 				while ($registro_obj_fila_unica = $consulta_obj_fila_unica->fetch())
 					{
 						$limite_superior=$registro_obj_fila_unica["peso"];
 						$ultimo_id=$registro_obj_fila_unica["id"];
 						// Inicia la tabla con los campos
-						echo '<table border=0 class="TextosVentana" align=center width="100%"><tr>';
+						echo '
+						<table border=0 class="TextosVentana" align=center width="100%"><tr>';
 						//Recorre todas las comunas definidas para el formulario buscando objetos
 						for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
 							{
@@ -944,6 +958,7 @@
 						//Actualiza limite inferior para siguiente lista de campos
 						$limite_inferior=$registro_obj_fila_unica["peso"];
 					}
+				echo '</div> <!-- Fin PR_seccion_impresion_activa -->';
 
 			// Si tiene botones agrega barra de estado y los ubica
 			$consulta_botones = $ConexionPDO->prepare("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario' AND visible=1 ORDER BY peso");
