@@ -1240,15 +1240,23 @@ if ($accion=="mis_informes")
 
 					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
 						{
-							echo '<form action="'.$ArchivoCORE.'" method="post" name="acordeinf_'.$registro_opciones_acordeon["id"].'" id="acordeinf_'.$registro_opciones_acordeon["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+							$limite_texto_iconos=15;
+							$texto_icono=$registro_opciones_acordeon["titulo"];
+							if (strlen($texto_icono)>$limite_texto_iconos) $texto_icono = substr($texto_icono,0,$limite_texto_iconos)."...";
+							echo '
+								<div align=center style="float:left">
+									<form action="'.$ArchivoCORE.'" method="post" name="acordeinf_'.$registro_opciones_acordeon["id"].'" id="acordeinf_'.$registro_opciones_acordeon["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+									<table cellspacing=5 class="TextosEscritorio"><tr><td align=center>
 									<input type="hidden" name="accion" value="cargar_objeto">
 									<input type="hidden" name="objeto" value="inf:'.$registro_opciones_acordeon["id"].':1:htm:Informes:0">
-									</form>';
+									<a title="'.$registro_opciones_acordeon["titulo"].'" name="" href="javascript:document.acordeinf_'.$registro_opciones_acordeon["id"].'.submit();"><img src="img/tango_text-x-generic.png" alt="'.$registro_opciones_acordeon["titulo"].'"  valign="absmiddle" align="absmiddle"></a>
+									</td></tr>
+									<tr><td align=center>
+									'.$texto_icono.'
+									</td></tr></table>
+									</form>
+								</div>';
 
-							// Imprime la imagen
-							echo '<a title="'.$registro_opciones_acordeon["titulo"].'" name="" href="javascript:document.acordeinf_'.$registro_opciones_acordeon["id"].'.submit();">';
-							echo '<img src="img/tango_text-x-generic.png" alt="'.$registro_opciones_acordeon["titulo"].'" class="IconosEscritorio" valign="absmiddle" align="absmiddle">';
-							echo '</a>';
 						}
 					cerrar_ventana();
 				}
