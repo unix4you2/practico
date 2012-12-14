@@ -323,6 +323,11 @@ if ($accion=="editar_formulario")
 										<option value="texto_formato">Campo de texto con formato enriquecido</option>
 										<option value="lista_seleccion">Campo de selecci&oacute;n (ComboBox)</option>
 									</optgroup>
+									<!--
+									<optgroup label="Informaci&oacute;n externa">
+										<option value="archivo_adjunto">Archivo adjunto</option>
+									</optgroup>
+									-->
 									<optgroup label="Presentaci&oacute;n y otros contenidos">
 										<option value="etiqueta">Texto enriquecido (como etiqueta)</option>
 										<option value="url_iframe">URL embebida (IFrame)</option>
