@@ -24,6 +24,102 @@
 	</script>
 </head>
 <body leftmargin="0"  margin="0" topmargin="0" oncontextmenu="return false;">
+<div id='FondoPopUps' class="FondoOscuroPopUps"></div>
+
+
+<?php 
+	//Despliega marco de administracion a ser activado por el boton superior
+	if ($Login_usuario=="admin" && $Sesion_abierta)
+		{
+?>
+		<!-- INICIO DE MARCOS POPUP -->
+		<div id='BarraFlotanteDesarrollo' class="FormularioPopUps">
+			<?php
+			abrir_ventana('Pr&aacute;ctico - Primeros pasos','#BDB9B9','600'); 
+			?>
+				<br>
+				<div align=center>
+				<font color=black face="Tahoma,Verdana,Arial">
+					<font size=5>
+						Dise&ntilde;ar la aplicaci&oacute;n, <b>es simple y r&aacute;pido:</b>
+					</font>
+					
+					<table width="100%" cellspacing=2 cellpadding=2><tr>
+						<td><img src="img/1.png" border=0></td>
+						<td>
+							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
+						</td>
+					</tr></table>
+
+					<table width="100%" cellspacing=2 cellpadding=2><tr>
+						<td><img src="img/2.png" border=0></td>
+						<td>
+							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
+						</td>
+					</tr></table>
+
+					<table width="100%" cellspacing=2 cellpadding=2><tr>
+						<td><img src="img/3.png" border=0></td>
+						<td>
+							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
+						</td>
+					</tr></table>
+
+					<table width="100%" cellspacing=2 cellpadding=2><tr>
+						<td><img src="img/4.png" border=0></td>
+						<td>
+							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
+						</td>
+					</tr></table>
+
+
+					<table width="100%" cellspacing=2 cellpadding=2><tr>
+						<td><img src="img/5.png" border=0></td>
+						<td>
+							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
+						</td>
+					</tr></table>
+
+					<table width="100%" cellspacing=2 cellpadding=2><tr>
+						<td><img src="img/6.png" border=0></td>
+						<td>
+							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
+						</td>
+					</tr></table>
+
+					<table width="100%" cellspacing=2 cellpadding=2><tr>
+						<td><img src="img/7.png" border=0></td>
+						<td>
+							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
+						</td>
+					</tr></table>
+
+					<table width="100%" cellspacing=2 cellpadding=2><tr>
+						<td><img src="img/8.png" border=0></td>
+						<td>
+							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
+						</td>
+					</tr></table>
+
+					<table width="100%" cellspacing=2 cellpadding=2><tr>
+						<td><img src="img/9.png" border=0></td>
+						<td>
+							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
+						</td>
+					</tr></table>
+
+				</font>
+				</div>
+
+			<?php
+			cerrar_ventana();
+			?>
+		<!-- FIN DE MARCOS POPUP -->
+		</div>
+<?php 
+		} // Finsi para el marco con opciones administrativas
+?>
+
 
 <form action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;" name="core_ver_menu">
 	<input type="Hidden" name="accion" value="Ver_menu">
@@ -41,6 +137,11 @@
 				<?php 
 					if ($accion!="Ver_menu" && $Sesion_abierta)
 						echo '<a href="javascript:document.core_ver_menu.submit();" title="Ir a mi escritorio"><img src="img/tango_user-desktop.png" width="24" height="24" border=0></a>';
+				?>
+				<?php 
+					//Despliega boton de administracion
+					if ($Login_usuario=="admin" && $Sesion_abierta)
+						echo '<a href=\'javascript:AbrirPopUp("BarraFlotanteDesarrollo"); \'><img src="img/icono_admin.png" border="0"></a>';
 				?>
 			</td>
 			<td align="center" valign="middle" width="60%">

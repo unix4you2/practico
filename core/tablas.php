@@ -320,9 +320,7 @@ if ($accion=="editar_tabla")
 						{
 							// Lleva a auditoria
 							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea tabla $nombre_tabla','$fecha_operacion','$hora_operacion')");
-							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_tabla">
-								<input type="Hidden" name="nombre_tabla" value="'.$TablasApp.$nombre_tabla.'">
-							</form>
+							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_tablas"></form>
 									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 						}
 				}
@@ -540,7 +538,7 @@ if ($accion=="editar_tabla")
 					<tr>
 						<td align="right"><b>Plantilla de tabla seleccionada:</b></td>
 						<td>
-							<select name="plantilla_tabla" onChange="datos.descripciontabla.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].label; datos.listacampos.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].dir; datos.totalcampos.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].lang;">
+							<select name="plantilla_tabla" onChange="datos.descripciontabla.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].label; datos.listacampos.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].title; datos.totalcampos.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].lang;">
 								<option value="" label="" dir="" lang="">Seleccione una</option>
 								<?php
 									$directorio="wzd/";
@@ -576,7 +574,7 @@ if ($accion=="editar_tabla")
 															fclose($archivo);
 														}
 													//Presenta la opcion del combo con los datos del archivo
-													echo '<option value="'.$file.'" label="'.$DescripcionTabla.'" dir="'.$DescripcionCampos.'" lang="'.$conteocampo.'">'.$NombreTabla.'</option>';
+													echo '<option value="'.$file.'" label="'.$DescripcionTabla.'" title="'.$DescripcionCampos.'" lang="'.$conteocampo.'">'.$NombreTabla.'</option>';
 												}
 										}
 								?>

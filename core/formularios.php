@@ -86,10 +86,14 @@
 					$consulta_campos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1");
 					while ($registro_campos = $consulta_campos->fetch())
 						{
-							$lista_campos.=$registro_campos["campo"].",";
-							$lista_valores.="'".$$registro_campos["campo"]."',";
-							if ($registro_campos["campo"]=="id")
-								$existe_id=1;
+							//Agrega el campo a la lista solamente si es de datos (objetos de tipo etiqueta o iframes son pasados por alto)
+							if ($registro_campos["tipo"]!="url_iframe" && $registro_campos["tipo"]!="etiqueta" && $registro_campos["tipo"]!="informe")
+								{
+									$lista_campos.=$registro_campos["campo"].",";
+									$lista_valores.="'".$$registro_campos["campo"]."',";
+									if ($registro_campos["campo"]=="id")
+										$existe_id=1;
+								}
 						}
 					// Elimina comas al final de las listas
 					$lista_campos=substr($lista_campos, 0, strlen($lista_campos)-1);
@@ -1190,7 +1194,6 @@ if ($accion=="editar_formulario")
 		<!-- FIN DE MARCOS POPUP -->
 		</div>
 
-		<div id='FondoPopUps' class="FondoOscuroPopUps"></div>
 		<?php
 			// Habilita el popup activo
 			if (@$popup_activo=="FormularioCampos")	echo '<script type="text/javascript">	AbrirPopUp("FormularioCampos"); </script>';

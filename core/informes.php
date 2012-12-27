@@ -865,9 +865,6 @@ if ($accion=="editar_informe")
 		<!-- FIN DE MARCOS POPUP -->
 		</div>
 
-
-
-		<div id='FondoPopUps' class="FondoOscuroPopUps"></div>
 		<?php
 			// Habilita el popup activo
 			if (@$popup_activo=="FormularioTablas")	echo '<script type="text/javascript">	AbrirPopUp("FormularioTablas"); </script>';
