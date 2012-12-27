@@ -320,7 +320,9 @@ if ($accion=="editar_tabla")
 						{
 							// Lleva a auditoria
 							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea tabla $nombre_tabla','$fecha_operacion','$hora_operacion')");
-							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_tablas"></form>
+							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_tabla">
+								<input type="Hidden" name="nombre_tabla" value="'.$TablasApp.$nombre_tabla.'">
+							</form>
 									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 						}
 				}
