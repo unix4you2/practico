@@ -11,6 +11,24 @@ margin-bottom: 2px;
 margin-left: 0px;
 }
 
+table.EstiloBotones {
+background-color: #06F;
+color: #FFF;
+font-size: 14px;
+border-radius:8px;
+height:40px;
+border:2px solid #ccc;
+}
+
+table.EstiloBotones:hover {
+background-color: #03F;
+color: #FFF;
+font-size: 14px;
+border-radius:8px;
+height:40px;
+border:2px solid #ccc;
+}
+
 table.TextosEscritorio {
 font-family: Tahoma, Verdana, sans-serif;
 color: #FFFFFF;

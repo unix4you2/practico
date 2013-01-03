@@ -56,7 +56,7 @@
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='BarraFlotanteDesarrollo' class="FormularioPopUps">
 			<?php
-			abrir_ventana('Pr&aacute;ctico - Primeros pasos','#BDB9B9','600'); 
+			abrir_ventana('Pr&aacute;ctico - Primeros pasos','#FFFFCE','600'); 
 			?>
 				<br>
 				<div align=center>
@@ -64,68 +64,84 @@
 					<font size=5>
 						Dise&ntilde;ar la aplicaci&oacute;n, <b>es simple y r&aacute;pido:</b>
 					</font>
-					
-					<table width="100%" cellspacing=2 cellpadding=2><tr>
+					<hr>
+					<table width="100%" cellspacing=2 cellpadding=5 style="color:#000000; font-size:14px;"><tr>
 						<td><img src="img/1.png" border=0></td>
-						<td>
-							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
+						<td align=left valign=top>
+							Defina las tablas para su <u><b><font color="#9F1111">BASE DE DATOS</font></b></u>
+							<br><font color=blue size=1>Las tablas son aquellas estructuras en las que ser&aacute; almacenada la informaci&oacute;n que sus usuarios diligencien por medio de formularios asociados a &eacute;stas.</font>
 						</td>
-					</tr></table>
-
-					<table width="100%" cellspacing=2 cellpadding=2><tr>
+						<td>
+							<form action="" method="post" name="wzd_1" id="wzd_1" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+								<input type="hidden" name="accion" value="administrar_tablas">
+							</form>
+							<table class="EstiloBotones"><tr><td width="30" height="30" align=center>
+								<img src="img/icono_tabla.png" onClick="document.wzd_1.submit();" width="20" height="20">
+							</tr></td></table>
+						</td>
+					</tr>
+					<tr><td colspan="3"><hr></td></tr>
+					<tr>
 						<td><img src="img/2.png" border=0></td>
-						<td>
-							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
+						<td align=left valign=top >
+							Cree sus <u><b><font color="#9F1111">FORMULARIOS</font></b></u> para ingreso y consulta de informaci&oacute;n
+							<br><font color=blue size=1>Permiten al usuario ingresar informaci&oacute;n de acuerdo a ciertas validaciones o formatos, consultar registros o incluso eliminarlos. Permiten tambi&eacute;n desplegar otros elementos como p&aacute;ginas externas o informes predise&ntilde;ados.</font>
 						</td>
-					</tr></table>
-
-					<table width="100%" cellspacing=2 cellpadding=2><tr>
+						<td>
+							<form action="" method="post" name="wzd_2" id="wzd_2" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+								<input type="hidden" name="accion" value="administrar_formularios">
+							</form>
+							<table class="EstiloBotones"><tr><td width="30" height="30" align=center>
+								<img src="img/icono_form.png" onClick="document.wzd_2.submit();" width="20" height="20">
+							</tr></td></table>
+						</td>
+					</tr>
+					<tr><td colspan="3"><hr></td></tr>
+					<tr>
 						<td><img src="img/3.png" border=0></td>
-						<td>
-							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
+						<td align=left valign=top >
+							Genere sus <u><b><font color="#9F1111">INFORMES</font></b></u> (tablas o gr&aacute;ficos)
+							<br><font color=blue size=1>Presentan la informaci&oacute;n existente dentro de las tablas a los usuarios, bajo diferentes formatos y filtros definidos.  Se pueden crear informes tabulares o de tipo gr&aacute;fico y adem&aacute;s posteriormente ser embebidos en otros espacios.</font>
 						</td>
-					</tr></table>
-
-					<table width="100%" cellspacing=2 cellpadding=2><tr>
+						<td>
+							<form action="" method="post" name="wzd_3" id="wzd_3" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+								<input type="hidden" name="accion" value="administrar_informes">
+							</form>
+							<table class="EstiloBotones"><tr><td width="30" height="30" align=center>
+								<img src="img/compfile.png" onClick="document.wzd_3.submit();" width="20" height="20">
+							</tr></td></table>
+						</td>
+					</tr>
+					<tr><td colspan="3"><hr></td></tr>
+					<tr>
 						<td><img src="img/4.png" border=0></td>
-						<td>
-							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
+						<td align=left valign=top >
+							Administre las <u><b><font color="#9F1111">OPCIONES DE MENU</font></b></u> para los usuarios
+							<br><font color=blue size=1>Enlaza objetos dise&ntilde;ados como formularios o informes con iconos gr&aacute;ficos y descripciones textuales que pueden ser seleccionadas por un usuario que posea ese permiso.  Tambi&eacute;n permite vincular funciones externas o ejecuci&oacute;n de comandos personalizados.</font>
 						</td>
-					</tr></table>
-
-
-					<table width="100%" cellspacing=2 cellpadding=2><tr>
+						<td>
+							<form action="" method="post" name="wzd_4" id="wzd_4" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+								<input type="hidden" name="accion" value="administrar_menu">
+							</form>
+							<table class="EstiloBotones"><tr><td width="30" height="30" align=center>
+								<img src="img/icono_menus.png" onClick="document.wzd_4.submit();" width="20" height="20">
+							</tr></td></table>
+						</td>
+					</tr>
+					<tr><td colspan="3"><hr></td></tr>
+					<tr>
 						<td><img src="img/5.png" border=0></td>
-						<td>
-							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
+						<td align=left valign=top >
+							Defina <u><b><font color="#9F1111">USUARIOS Y PERMISOS</font></b></u> para acceder a su aplpicaci&oacute;n
+							<br><font color=blue size=1>Establece las credenciales de acceso para cada usuario, as&iacute; como los permisos con que cuenta cada uno para accesar formularios, informes o cualquier opcion de menu previamente definida.</font>
 						</td>
-					</tr></table>
-
-					<table width="100%" cellspacing=2 cellpadding=2><tr>
-						<td><img src="img/6.png" border=0></td>
 						<td>
-							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
-						</td>
-					</tr></table>
-
-					<table width="100%" cellspacing=2 cellpadding=2><tr>
-						<td><img src="img/7.png" border=0></td>
-						<td>
-							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
-						</td>
-					</tr></table>
-
-					<table width="100%" cellspacing=2 cellpadding=2><tr>
-						<td><img src="img/8.png" border=0></td>
-						<td>
-							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
-						</td>
-					</tr></table>
-
-					<table width="100%" cellspacing=2 cellpadding=2><tr>
-						<td><img src="img/9.png" border=0></td>
-						<td>
-							Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.
+							<form action="" method="post" name="wzd_5" id="wzd_5" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+								<input type="hidden" name="accion" value="listar_usuarios">
+							</form>
+							<table class="EstiloBotones"><tr><td width="30" height="30" align=center>
+								<img src="img/icono_usuarios.png" onClick="document.wzd_5.submit();" width="20" height="20">
+							</tr></td></table>
 						</td>
 					</tr></table>
 
@@ -133,6 +149,9 @@
 				</div>
 
 			<?php
+			abrir_barra_estado();
+				echo '<input type="Button"  class="BotonesEstadoCuidado" value=" <<< Volver al escritorio " onClick="OcultarPopUp(\'BarraFlotanteDesarrollo\')">';
+			cerrar_barra_estado();
 			cerrar_ventana();
 			?>
 		<!-- FIN DE MARCOS POPUP -->
