@@ -1,120 +1,49 @@
 John F. Arroyave Gutiérrez
 Copyright (c) 2013 John F. Arroyave Gutiérrez <unix4you2@gmail.com>
 License GPLv2
-See the file LICENSE for details
+See the LICENSE file for details
 
 That is the license for the whole package.
 Parts of the package are under other, compatible licenses:
 
-PCLZip:
-Location: inc/pclzip.lib.php:
-License: GNU GPL versión 2
+PCLZip (PhpConcept Library - Zip Module 2.8.2):
+	Location: inc/pclzip.lib.php:
+	License: GNU GPL versión 2
+	Made by: Vincent Blavet - August 2009
+	http://www.phpconcept.net
 
-Made by Andreas K. Foerster
-These files are dedicated to the Public Domain (CC0)
-http://creativecommons.org/publicdomain/zero/1.0/
+CKEditor
+	Location: inc/ckeditor/*
+	License: GNU General Public License Version 2, or at your choice as LGPL ó MPL
+	Made by: Frederico Knabben - Copyright © 2003-2011, CKSource
+	http://ckeditor.com
+	See inc/ckeditor/LICENSE.html for details
 
+LibChart
+	Location: inc/libchart/*
+	License: GNU General Public License Version 3
+	Made by: Jean-Marc Trémeaux - July 2011
+	http://naku.dohcrew.com/libchart/pages/introduction/
+	See inc/libchart/COPYING for details
 
+Tango Desktop Project:
+	Location: all files under img/tango_*:
+	License: The Tango base icon theme is released to the Public Domain. 
+			 The palette is in public domain. Developers, feel free to ship it along with your application.
+	http://tango.freedesktop.org/
 
+Image files:
+	skin/nomo/img/fondo.jpg  &  ins/skin/nomo/img/fondo.jpg
+	Made by: Jakub Steiner (c) 2004
+	Are released to the Public Domain.
+	http://www.kellogg.northwestern.edu/faculty/steiner/htm/
 
-CKEditor: GNU General Public License Version 2.  Con posibilidades de licenciamiento posterior como LGPL ó MPL.
-LibChart: GNU General Public License Version 3, incluyendo licencia para el uso de fuentes DejaVu de Bitstream.
-
-
-
-
-text2c, od2c, xbm2pas, xpm2pas, bdf2c, rgb2c:
-Copyright (c) Andreas K. Foerster
-Copying and distribution of this file, with or without modification,
-are permitted in any medium without royalty provided the copyright
-notice and this notice are preserved.  This file is offered as-is,
-without any warranty.
-
-
-basedir.c, akfoerster.xpm, akf64.xpm, computer.xpm, info.xpm,
-harrumph.au, hey.au, negative.au, neutral.au, positive.au, okay.au,
-question.au, sad.au, hahaha.au, game_over.au:
-Made by Andreas K. Foerster
-These files are dedicated to the Public Domain (CC0)
-http://creativecommons.org/publicdomain/zero/1.0/
-
-
-doc/*.man:
-Macros .TQ .EX .EE taken from groff an-ext.tmac
-Copyright (C) 2007, 2009 Free Software Foundation, Inc.
-You may freely use, modify and/or distribute this file.
-
-
-male_user.xpm:
-male user by Aaron Spike
-This file is in the Public Domain
-http://openclipart.org/media/files/acspike/3911
-
-
-female_user.xpm:
-female user by dagobert83
-This file is in the Public Domain
-http://openclipart.org/media/files/dagobert83/1514
-
-
-teacher.xpm:
-Drawing by Wilhelm Busch
-This file is in the Public Domain (Copyright expired)
-
-
-gnu-head.xbm, gnu-head.xpm:
-GNU head graphic was drawn by Etienne Suvasa
-coloured version: Joseph W. Reiss
-Copyright (C) Free Software Foundation
-either Free Art License or the GNU GPLv2 or later
-http://www.gnu.org/graphics/reiss-gnuhead.html
-modified by Andreas K. Foerster, who claims no Copyright on his modifications
-
-
-audio1.xpm:
-microphone 01 by ArtFavor
-http://www.openclipart.org/detail/42439
-This file is dedicated to the Public Domain (CC0)
-http://creativecommons.org/publicdomain/zero/1.0/
-
-
-The fonts 7x14.bdf, 9x18.bdf were fetched from 
-http://www.cl.cam.ac.uk/~mgk25/ucs-fonts.html
-Maintainer: Markus Kuhn
-"Public domain font.  Share and enjoy."
-
-
-configure script adapted from the package "ed-0.5"
-Copyright (C) 2003, 2004, 2005, 2006, 2007 Antonio Diaz Diaz.
-Copyright (C) 2007, 2008, 2009, 2010 Andreas K. Foerster
-This configure script is free software; you have unlimited permission
-to copy, distribute and modify it.
-
-
-rgb.txt: color table of X11
-
-
-stb_vorbis.c: Ogg Vorbis I audio decoder
-Written in April 2007 by Sean Barrett, sponsored by RAD Game Tools.
-Placed in the public domain April 2007 by the author: no copyright is
-claimed, and you may use it for any purpose you like.
-No warranty for any purpose is expressed or implied by the author (nor
-by RAD Game Tools). Report bugs and send enhancements to the author.
-Get the latest version and other information at:
-http://nothings.org/stb_vorbis/
-
-
-lua/lbase64.c:
-base64 encoding and decoding for Lua 5.1
-Luiz Henrique de Figueiredo <lhf@tecgraf.puc-rio.br>
-modified by Andreas K. Foerster <info@akfoerster.de>
-Dec 2011
-This code is hereby placed in the public domain.
-
-
-mingw/win_iconv.c, mingw/iconv.h:
-iconv library implemented with Win32 API.
-This file is placed in the public domain.
-Maintainer: Yukihiro Nakadaira <yukihiro.nakadaira@gmail.com>
-modified by: Tor Lillqvist <tml@iki.fi>
-(taken from GTK+ for Windows)
+Media files and CSS files under:
+		img/* (except those named tango_*)
+		skin/*
+		ins/img/*
+		ins/skin/*
+	License: Free Art License or the GNU GPLv2
+	Made by: John F. Arroyave Gutiérrez
+			 or Edited from images released to the public domain
+	http://sourceforge.net/projects/practico/

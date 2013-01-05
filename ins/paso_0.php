@@ -32,7 +32,7 @@
 <hr>
 <b>Esta herramienta es liberada bajo licencia GNU-GPL v2</b> descrita a continuaci&oacute;n:<br>
 <textarea cols="100" rows="7" class="AreaTexto">
-	<?php include("../LICENSE.txt"); ?>
+	<?php include("../LICENSE"); ?>
 </textarea>
 <br><br>
 Una copia en l&iacute;nea de esta licencia puede ser encontrada en diferentes formatos en el sitio web de la GNU<br> a trav&eacute;s de <a href="http://www.gnu.org/licenses/gpl-2.0.html">este enlace</a>. Si usted acepta los terminos de esta licencia, haga clic en el bot&oacute;n continuar.
