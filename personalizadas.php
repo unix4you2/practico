@@ -18,20 +18,21 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	*/
 			/*
-				Title: Funciones personalizadas
-				Ubicacion *[/personalizadas.php]*.  Archivo que contiene la declaracion de variables y funciones por parte del usuario o administrador del sistema
-				Codigo de ejemplo:
-					(start code)
-						<?php if ($accion=="Mi_accion_XYZ") 
-							{
-								// Mis operaciones a realizar
-							}
-						?>
-					(end)
-			*/
-			
-			/* Agregue en este archivo las funciones o acciones que desee vincular a menues especificos o realizacion de operaciones internas.
-			   Utilice el condicional para diferenciar la accion recibida y ser asi ejecutada. Puede vincularlos mediante forms.*/			
+			Title: Funciones personalizadas
+			Ubicacion *[/personalizadas.php]*.  Archivo que contiene la declaracion de variables y funciones por parte del usuario o administrador del sistema
+
+			Codigo de ejemplo:
+				(start code)
+					<?php if ($accion=="Mi_accion_XYZ") 
+						{
+							// Mis operaciones a realizar
+						}
+					?>
+				(end)
+
+			Comentario:
+			Agregue en este archivo las funciones o acciones que desee vincular a menues especificos o realizacion de operaciones internas.
+			Utilice el condicional para diferenciar la accion recibida y ser asi ejecutada. Puede vincularlos mediante forms.*/
 			
 ?>
 

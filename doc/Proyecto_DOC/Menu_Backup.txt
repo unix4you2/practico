@@ -1,0 +1,181 @@
+Format: 1.5
+
+
+Title: Practico
+SubTitle: Generador de aplicaciones WEB Libre y Multiplataforma
+
+Footer: Copyright (c) 2012 - John F. Arroyave Gutierrez.
+
+# You can add a timestamp to your documentation like one of these:
+# Timestamp: Generated on month day, year
+# Timestamp: Updated mm/dd/yyyy
+# Timestamp: Last updated mon day
+#
+#   m     - One or two digit month.  January is "1"
+#   mm    - Always two digit month.  January is "01"
+#   mon   - Short month word.  January is "Jan"
+#   month - Long month word.  January is "January"
+#   d     - One or two digit day.  1 is "1"
+#   dd    - Always two digit day.  1 is "01"
+#   day   - Day with letter extension.  1 is "1st"
+#   yy    - Two digit year.  2006 is "06"
+#   yyyy  - Four digit year.  2006 is "2006"
+#   year  - Four digit year.  2006 is "2006"
+
+
+# --------------------------------------------------------------------------
+# 
+# Cut and paste the lines below to change the order in which your files
+# appear on the menu.  Don't worry about adding or removing files, Natural
+# Docs will take care of that.
+# 
+# You can further organize the menu by grouping the entries.  Add a
+# "Group: [name] {" line to start a group, and add a "}" to end it.
+# 
+# You can add text and web links to the menu by adding "Text: [text]" and
+# "Link: [name] ([URL])" lines, respectively.
+# 
+# The formatting and comments are auto-generated, so don't worry about
+# neatness when editing the file.  Natural Docs will clean it up the next
+# time it is run.  When working with groups, just deal with the braces and
+# forget about the indentation and comments.
+# 
+# --------------------------------------------------------------------------
+
+
+File: Conexiones PDO  (core/conexiones.php)
+
+Group: Doc  {
+
+   File: Browser Testing  (doc/NaturalDocs/Info/HTMLTestCases.pm)
+   File: Language Notes  (doc/NaturalDocs/Info/Languages.txt)
+   File: License  (doc/NaturalDocs/License.txt)
+
+   Group: Modules  {
+
+      File: BinaryFile  (doc/NaturalDocs/Modules/NaturalDocs/BinaryFile.pm)
+      File: Builder  (doc/NaturalDocs/Modules/NaturalDocs/Builder.pm)
+
+      Group: Builder  {
+
+         File: Base  (doc/NaturalDocs/Modules/NaturalDocs/Builder/Base.pm)
+         File: FramedHTML  (doc/NaturalDocs/Modules/NaturalDocs/Builder/FramedHTML.pm)
+         File: HTML  (doc/NaturalDocs/Modules/NaturalDocs/Builder/HTML.pm)
+         File: HTMLBase  (doc/NaturalDocs/Modules/NaturalDocs/Builder/HTMLBase.pm)
+         }  # Group: Builder
+
+      File: ClassHierarchy  (doc/NaturalDocs/Modules/NaturalDocs/ClassHierarchy.pm)
+      File: ClassHierarchy::Class  (doc/NaturalDocs/Modules/NaturalDocs/ClassHierarchy/Class.pm)
+      File: ClassHierarchy::File  (doc/NaturalDocs/Modules/NaturalDocs/ClassHierarchy/File.pm)
+      File: ConfigFile  (doc/NaturalDocs/Modules/NaturalDocs/ConfigFile.pm)
+      File: Constants  (doc/NaturalDocs/Modules/NaturalDocs/Constants.pm)
+      File: DefineMembers  (doc/NaturalDocs/Modules/NaturalDocs/DefineMembers.pm)
+      File: Error  (doc/NaturalDocs/Modules/NaturalDocs/Error.pm)
+      File: File  (doc/NaturalDocs/Modules/NaturalDocs/File.pm)
+      File: ImageReferenceTable  (doc/NaturalDocs/Modules/NaturalDocs/ImageReferenceTable.pm)
+      File: ImageReferenceTable::Reference  (doc/NaturalDocs/Modules/NaturalDocs/ImageReferenceTable/Reference.pm)
+      File: ImageReferenceTable::String  (doc/NaturalDocs/Modules/NaturalDocs/ImageReferenceTable/String.pm)
+      File: Languages  (doc/NaturalDocs/Modules/NaturalDocs/Languages.pm)
+
+      Group: Languages  {
+
+         File: ActionScript  (doc/NaturalDocs/Modules/NaturalDocs/Languages/ActionScript.pm)
+         File: Ada  (doc/NaturalDocs/Modules/NaturalDocs/Languages/Ada.pm)
+         File: Advanced  (doc/NaturalDocs/Modules/NaturalDocs/Languages/Advanced.pm)
+         File: Advanced::Scope  (doc/NaturalDocs/Modules/NaturalDocs/Languages/Advanced/Scope.pm)
+         File: Advanced::ScopeChange  (doc/NaturalDocs/Modules/NaturalDocs/Languages/Advanced/ScopeChange.pm)
+         File: Base  (doc/NaturalDocs/Modules/NaturalDocs/Languages/Base.pm)
+         File: CSharp  (doc/NaturalDocs/Modules/NaturalDocs/Languages/CSharp.pm)
+         File: Pascal  (doc/NaturalDocs/Modules/NaturalDocs/Languages/Pascal.pm)
+         File: Perl  (doc/NaturalDocs/Modules/NaturalDocs/Languages/Perl.pm)
+         File: PLSQL  (doc/NaturalDocs/Modules/NaturalDocs/Languages/PLSQL.pm)
+         File: Prototype  (doc/NaturalDocs/Modules/NaturalDocs/Languages/Prototype.pm)
+         File: Prototype::Parameter  (doc/NaturalDocs/Modules/NaturalDocs/Languages/Prototype/Parameter.pm)
+         File: Simple  (doc/NaturalDocs/Modules/NaturalDocs/Languages/Simple.pm)
+         File: Tcl  (doc/NaturalDocs/Modules/NaturalDocs/Languages/Tcl.pm)
+         }  # Group: Languages
+
+      File: LineReader  (doc/NaturalDocs/Modules/NaturalDocs/LineReader.pm)
+      File: Menu  (doc/NaturalDocs/Modules/NaturalDocs/Menu.pm)
+      File: Menu::Entry  (doc/NaturalDocs/Modules/NaturalDocs/Menu/Entry.pm)
+      File: NDMarkup  (doc/NaturalDocs/Modules/NaturalDocs/NDMarkup.pm)
+      File: Parser  (doc/NaturalDocs/Modules/NaturalDocs/Parser.pm)
+
+      Group: Parser  {
+
+         File: JavaDoc  (doc/NaturalDocs/Modules/NaturalDocs/Parser/JavaDoc.pm)
+         File: Native  (doc/NaturalDocs/Modules/NaturalDocs/Parser/Native.pm)
+         File: ParsedTopic  (doc/NaturalDocs/Modules/NaturalDocs/Parser/ParsedTopic.pm)
+         }  # Group: Parser
+
+      File: Project  (doc/NaturalDocs/Modules/NaturalDocs/Project.pm)
+      File: Project::ImageFile  (doc/NaturalDocs/Modules/NaturalDocs/Project/ImageFile.pm)
+      File: Project::SourceFile  (doc/NaturalDocs/Modules/NaturalDocs/Project/SourceFile.pm)
+      File: ReferenceString  (doc/NaturalDocs/Modules/NaturalDocs/ReferenceString.pm)
+      File: Settings  (doc/NaturalDocs/Modules/NaturalDocs/Settings.pm)
+      File: Settings::BuildTarget  (doc/NaturalDocs/Modules/NaturalDocs/Settings/BuildTarget.pm)
+      File: SourceDB  (doc/NaturalDocs/Modules/NaturalDocs/SourceDB.pm)
+
+      Group: SourceDB  {
+
+         File: Extension  (doc/NaturalDocs/Modules/NaturalDocs/SourceDB/Extension.pm)
+         File: File  (doc/NaturalDocs/Modules/NaturalDocs/SourceDB/File.pm)
+         File: Item  (doc/NaturalDocs/Modules/NaturalDocs/SourceDB/Item.pm)
+         File: ItemDefinition  (doc/NaturalDocs/Modules/NaturalDocs/SourceDB/ItemDefinition.pm)
+         File: WatchedFileDefinitions  (doc/NaturalDocs/Modules/NaturalDocs/SourceDB/WatchedFileDefinitions.pm)
+         }  # Group: SourceDB
+
+      File: StatusMessage  (doc/NaturalDocs/Modules/NaturalDocs/StatusMessage.pm)
+      File: SymbolString  (doc/NaturalDocs/Modules/NaturalDocs/SymbolString.pm)
+      File: SymbolTable  (doc/NaturalDocs/Modules/NaturalDocs/SymbolTable.pm)
+
+      Group: SymbolTable  {
+
+         File: File  (doc/NaturalDocs/Modules/NaturalDocs/SymbolTable/File.pm)
+         File: IndexElement  (doc/NaturalDocs/Modules/NaturalDocs/SymbolTable/IndexElement.pm)
+         File: Reference  (doc/NaturalDocs/Modules/NaturalDocs/SymbolTable/Reference.pm)
+         File: ReferenceTarget  (doc/NaturalDocs/Modules/NaturalDocs/SymbolTable/ReferenceTarget.pm)
+         File: Symbol  (doc/NaturalDocs/Modules/NaturalDocs/SymbolTable/Symbol.pm)
+         File: SymbolDefinition  (doc/NaturalDocs/Modules/NaturalDocs/SymbolTable/SymbolDefinition.pm)
+         }  # Group: SymbolTable
+
+      File: Topics  (doc/NaturalDocs/Modules/NaturalDocs/Topics.pm)
+      File: Topics::Type  (doc/NaturalDocs/Modules/NaturalDocs/Topics/Type.pm)
+      File: Version  (doc/NaturalDocs/Modules/NaturalDocs/Version.pm)
+      }  # Group: Modules
+
+   File: NaturalDocs  (doc/NaturalDocs/NaturalDocs)
+   File: SearchPanel  (doc/NaturalDocs/JavaScript/NaturalDocs.js)
+   File: XGen.pl  (doc/NaturalDocs/Help/documenting/XGen.pl)
+   }  # Group: Doc
+
+File: Funciones personalizadas  (personalizadas.php)
+File: Libreria base  (core/comunes.php)
+
+Group: Modulos Principales  {
+
+   File: Modulo correos  (core/correos.php)
+   File: Modulo formularios  (core/formularios.php)
+   File: Modulo informes  (core/informes.php)
+   File: Modulo menues  (core/menus.php)
+   File: Modulo objetos  (core/objetos.php)
+   File: Modulo objetos  (core/actualizacion.php)
+   File: Modulo sesion  (core/sesion.php)
+   File: Modulo tablas  (core/tablas.php)
+   File: Modulo usuarios  (core/usuarios.php)
+   File: Variables de conexion  (core/doc_configuracion.php)
+   }  # Group: Modulos Principales
+
+File: Modulo central  (index.php)
+
+Group: Index  {
+
+   Index: Everything
+   Class Index: Classes
+   Constant Index: Constants
+   File Index: Files
+   Function Index: Functions
+   Type Index: Types
+   Variable Index: Variables
+   }  # Group: Index
+

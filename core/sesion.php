@@ -18,22 +18,39 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	*/
 
-			/*
-				Title: Modulo sesion
-				Ubicacion *[/core/sesion.php]*.  Archivo de funciones relacionadas con la administracion de sesiones en el sistema.
-			*/
+	/*
+		Title: Modulo sesion
+		Ubicacion *[/core/sesion.php]*.  Archivo de funciones relacionadas con la administracion de sesiones en el sistema.
+	*/
 ?>
 <?php
-			/*
-				Section: Administracion de permisos
-				Funciones asociadas a la gestion de permisos, roles y demas posibilidades de acceso que puedan tener los usuarios en el aplicativo.
-			*/
+	/*
+		Section: Administracion de permisos
+		Funciones asociadas a la gestion de permisos, roles y demas posibilidades de acceso que puedan tener los usuarios en el aplicativo.
+	*/
 ?>
 
 
 <?php
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: Iniciar_login
+	Realiza proceso de verificacion de los datos suministrados para el inicio de sesion
+
+	Variables de entrada:
+
+		uid - Valor del campo clave digitado por el usuario
+		clave - Nombre del formulario sobre el que se actualiza el valor del campo seguridad.
+		captcha - Valor del captcha diligenciado por el usuario
+		captcha_temporal - Valor del captcha calculado por el sistema
+
+	Salida:
+		Aceptacion o rechazo del inicio de sesion con la redireccion al lugar correspondiente
+
+	Ver tambien:
+		<seguridad_clave> | <cambiar_clave>
+*/
 	if ($accion=="Iniciar_login") 
 		{
 			//Verifica el captcha ingresado por el usuario
@@ -106,6 +123,13 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: Terminar_sesion
+	Lleva una auditoria sobre el cierre de sesion de cada usuario y redirecciona a la funcion <Mensaje_cierre_sesion>
+
+	Ver tambien:
+		<Mensaje_cierre_sesion>
+*/
 	if ($accion=="Terminar_sesion")
 	{
 		// Lleva a auditoria
@@ -119,13 +143,23 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: Mensaje_cierre_sesion
+	Destruye todas las variables de sesion creadas para el cliente del lado del servidor y presenta un mensaje de cierre
+
+	Salida:
+		Mensaje informando al usuario sobre el cierre de su sesion
+
+	Ver tambien:
+		<Terminar_sesion>
+*/
 	if ($accion=="Mensaje_cierre_sesion")
 	{
 		@session_destroy();
 		echo '<br><br><div align="center">';
 		abrir_ventana('Alerta de seguridad','FFFFFF','');
 			echo '
-			<br><div align="center" class="TextosVentana"><strong><font size="3">Su sesi&oacute;n ha sido cerrada</font></strong>					
+			<br><div align="center" class="TextosVentana"><strong><font size="3">Su sesi&oacute;n ha sido cerrada</font></strong>
 			<table width="100%"><tr>
 				<td>
 

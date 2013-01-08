@@ -17,6 +17,11 @@
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	*/
+
+	/*
+		Title: Seccion inferior
+		Ubicacion *[/core/marco_abajo.php]*.  Archivo dedicado a la diagramacion de contenidos en el pie de pagina de la aplicacion, incluye valores de accion y tiempos para el usuario administrador.
+	*/
 ?>
 
 	<!-- INICIO DEL MENU INFERIOR -->	

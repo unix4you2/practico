@@ -35,6 +35,25 @@
 <?php
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: eliminar_campo
+	Elimina un campo de una tabla de datos durante su proceso de edicion
+
+	Variables de entrada:
+
+		nombre_tabla - Nombre de la tabla sobre la cual sera eliminado el campo
+		nombre_campo - Nombre del campo a eliminar
+
+		(start code)
+			ALTER TABLE $nombre_tabla DROP COLUMN $nombre_campo
+		(end)
+
+	Salida:
+		Campo eliminado de la tabla.
+		
+	Ver tambien:
+		<editar_tabla> | <guardar_crear_campo>
+*/
 	if ($accion=="eliminar_campo")
 		{ 
 			$mensaje_error="";
@@ -69,9 +88,28 @@
 		}
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: guardar_crear_campo
+	Agrega un nuevo campo a una tabla de datos durante su proceso de edicion
 
-/* ################################################################## */
-/* ################################################################## */
+	Variables de entrada:
+
+		nombre_tabla - Nombre de la tabla sobre la cual sera agregado el campo
+		nombre_campo - Nombre del nuevo campo
+		tipo - Tipo de dato asociado al campo
+
+		(start code)
+			ALTER TABLE $nombre_tabla ADD COLUMN $nombre_campo $tipo
+		(end)
+
+	Salida:
+		Nuevo campo creado en la tabla.  Algunos parametros adicionales pueden ser usados durante el proceso de creacion del campo.
+		
+	Ver tambien:
+		<editar_tabla>
+*/
 	if ($accion=="guardar_crear_campo")
 		{
 			// Construye la consulta para la creacion del campo (sintaxis mysql por ahora)
@@ -116,9 +154,26 @@
 		}
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: editar_tabla
+	Permite agregar o eliminar campos en una tabla de datos de aplicacion mediante sentencias ALTER despues de haber consultado su estructura
 
-/* ################################################################## */
-/* ################################################################## */
+	Variables de entrada:
+
+		nombre_tabla - Nombre de la tabla a ser editada
+
+		(start code)
+			DESCRIBE $nombre_tabla
+		(end)
+
+	Salida:
+		Tabla con sus campos editados
+
+	Ver tambien:
+		<asistente_tablas>
+*/
 if ($accion=="editar_tabla")
 	{
 		 ?>
@@ -294,6 +349,24 @@ if ($accion=="editar_tabla")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: eliminar_tabla
+	Elimina una tabla de aplicacion
+
+	Variables de entrada:
+
+		nombre_tabla - Nombre de la tabla a ser eliminada
+
+		(start code)
+			DROP TABLE $nombre_tabla
+		(end)
+
+	Salida:
+		Tabla eliminada
+
+	Ver tambien:
+		<administrar_tablas>
+*/
 	if ($accion=="eliminar_tabla")
 		{
 			$mensaje_error="";
@@ -318,6 +391,24 @@ if ($accion=="editar_tabla")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: guardar_crear_tabla
+	Crea una nueva tabla de aplicacion
+
+	Variables de entrada:
+
+		nombre_tabla - Nombre de la tabla a ser creada
+
+		(start code)
+			CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))
+		(end)
+
+	Salida:
+		Nueva tabla creada con el prefijo de aplicacion y nombre especificado
+
+	Ver tambien:
+		<administrar_tablas>
+*/
 	if ($accion=="guardar_crear_tabla")
 		{
 			$mensaje_error="";
@@ -358,6 +449,13 @@ if ($accion=="editar_tabla")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: administrar_tablas
+	Detecta las tablas existentes en la base de datos enlazada y permite realizar operaciones basicas con ellas, asi como la creacion de nuevas tablas de aplicacion.  Esta funciona hace uso de la funcion generalizada <consultar_tablas>
+
+	Ver tambien:
+		<asistente_tablas> | <consultar_tablas>
+*/
 	if ($accion=="administrar_tablas")
 		{
 			abrir_ventana('Crear/Listar tablas de datos definidias en el sistema','f2f2f2',''); ?>
@@ -461,6 +559,26 @@ if ($accion=="editar_tabla")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: guardar_crear_tabla_asistente
+	Genera una nueva tabla a partir de la plantilla seleccionada en el asistente
+
+	Variables de entrada:
+
+		nombre_tabla - Nombre de la tabla a ser creada
+
+		(start code)
+			CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))
+			Repetir por cada campo en la definicion
+				ALTER TABLE ".$TablasApp."$nombre_tabla ADD COLUMN $nombre_campo $tipo
+		(end)
+
+	Salida:
+		Nueva tabla creada con el prefijo de aplicacion y nombre especificado
+
+	Ver tambien:
+		<asistente_tablas>
+*/
 	if ($accion=="guardar_crear_tabla_asistente")
 		{
 			$mensaje_error="";
@@ -537,6 +655,20 @@ if ($accion=="editar_tabla")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: asistente_tablas
+	Despliega el asistente para creacion de tablas basado en los archivos wzd/*
+
+	Variables de entrada:
+
+		archivos en wzd/*.txt - Contienen la definicion de tablas que pueden ser creadas con el asistente
+
+	Salida:
+		Tabla seleccionada para su creacion
+		
+	Ver tambien:
+		<guardar_crear_tabla_asistente>
+*/
 	if ($accion=="asistente_tablas")
 		{
 			abrir_ventana('Asistente para generaci&oacute;n de tablas','f2f2f2',''); ?>

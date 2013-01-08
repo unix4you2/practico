@@ -59,6 +59,33 @@
 		return buscar_texto_en_plantilla(texto,"ABCDEFGHYJKLMNÑOPQRSTUVWXYZ");
 	} 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: seguridad_clave
+	Retorna un valor asociado al nivel de seguridad de la clave recibida despues de buscar ciertos caracteres sobre esta.
+
+	Variables de entrada:
+
+		clave - Valor del campo clave digitado por el usuario
+
+		(start code)
+				if (tiene_numeros(clave)) seguridad += 10;
+				if (tiene_minusculas (clave)) seguridad += 20;
+				if (tiene_mayusculas(clave)) seguridad += 20;
+				if (tiene_simbolos(clave)) seguridad += 20;
+				if (tiene_minusculas(clave) && tiene_mayusculas(clave)) seguridad += 30;
+				if (tiene_simbolos(clave) && (tiene_mayusculas(clave) || tiene_minusculas (clave))) seguridad += 10;
+				if (clave.length <= 7) seguridad -= 40;
+				if (clave.length >= 8) seguridad += 10;
+		(end)
+
+	Salida:
+		Valor de la variable entera llamada seguridad.
+		
+			Ver tambien:
+				<muestra_seguridad_clave> | <cambiar_clave>
+*/
 	function seguridad_clave(clave){
 		var seguridad = 0;
 		if (clave.length!=0)
@@ -77,6 +104,28 @@
 		return seguridad;
 	}
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: muestra_seguridad_clave
+	Visualiza el valor asociado al nivel de seguridad de la clave sobre el formulario de diligenciamiento
+
+	Variables de entrada:
+
+		clave - Valor del campo clave digitado por el usuario
+		formulario - Nombre del formulario sobre el que se actualiza el valor del campo seguridad.
+
+		(start code)
+			seguridad=seguridad_clave(clave);
+			formulario.seguridad.value=seguridad;
+		(end)
+
+	Salida:
+		Campo (visual del formulario) actualizado
+		
+	Ver tambien:
+		<seguridad_clave> | <cambiar_clave>
+*/
 	function muestra_seguridad_clave(clave,formulario){
 		seguridad=seguridad_clave(clave);
 		formulario.seguridad.value=seguridad;
@@ -85,16 +134,31 @@
 
 
 
-
-
-
-
-
 <?php
-
-
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: copiar_permisos
+	Elimina los permisos definidos para un usuario y los reemplaza  con los permisos definidos actualmente para otro usuario
+
+	Variables de entrada:
+
+		usuariod - Usuario destino (al que seran copiados los permisos)
+		usuarioo - Usuario oorigen (del que se toman los permisos como base para ser copiados)
+
+		(start code)
+			DELETE FROM ".$TablasCore."usuario_menu WHERE usuario='$usuariod'
+			SELECT * FROM ".$TablasCore."usuario_menu WHERE usuario='$usuarioo'
+			Repetir con cada permiso del usuario origen:
+				INSERT INTO ".$TablasCore."usuario_menu VALUES (0,'$usuariod','$menuinsertar')
+		(end)
+
+	Salida:
+		Permisos del usuario destino actualizados
+
+	Ver tambien:
+		<permisos_usuario> | <informes_usuario>
+*/
 if ($accion=="copiar_permisos")
 	{
 		// Elimina opciones existentes
@@ -126,7 +190,11 @@ if ($accion=="copiar_permisos")
 
 	Salida:
 		Variables pasadas a la accion <actualizar_clave>
-*/		
+
+	Ver tambien:
+		<actualizar_clave> | <muestra_seguridad_clave> | <seguridad_clave>
+
+*/
 if ($accion=="cambiar_clave")
 	{
 		echo '<div align="center">';
@@ -245,6 +313,9 @@ if ($accion=="actualizar_clave")
 
 	Salida:
 		Tabla de permisos actualizada al eliminar el registro correspondiente
+	
+	Ver tambien:
+		<informes_usuario> | <agregar_informe_usuario>
 */
 if ($accion=="eliminar_informe_usuario")
 	{
@@ -260,6 +331,26 @@ if ($accion=="eliminar_informe_usuario")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: agregar_informe_usuario
+	Agrega un informe definido en el sistema a un usuario determinado.
+
+	Variables de entrada:
+
+		usuario - UID/Login de usuario al que se desea agregar el permiso
+		informe - ID del informe que se desea agregar al perfil del usuario
+
+		(start code)
+			SELECT * FROM ".$TablasCore."usuario_informe WHERE usuario='$usuario' AND informe='$informe'
+			INSERT INTO ".$TablasCore."usuario_informe VALUES (0,'$usuario','$informe')
+		(end)
+
+	Salida:
+		Tabla de permisos actualizada al agregar el registro correspondiente
+
+	Ver tambien:
+		<eliminar_informe_usuario> | <informes_usuario>
+*/
 	if ($accion=="agregar_informe_usuario")
 		{
 			$mensaje_error="";
@@ -294,6 +385,25 @@ if ($accion=="eliminar_informe_usuario")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: informes_usuario
+	Despliega una lista con los informes definidos para un usuario determinado con la posibilidad de agregar mas informes
+
+	Variables de entrada:
+
+		usuario - UID/Login de usuario al que se desea agregar el permiso
+
+		(start code)
+			SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe WHERE nivel_usuario<=".$Nivel_usuario
+			SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe,".$TablasCore."usuario_informe WHERE ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$usuario'
+		(end)
+
+	Salida:
+		Listado de informes disponibles en el perfil del usuario
+
+	Ver tambien:
+		<eliminar_informe_usuario> | <agregar_informe_usuario>
+*/
 if ($accion=="informes_usuario")
 				{
 						echo '<div align="center"><br>';
@@ -390,6 +500,9 @@ if ($accion=="informes_usuario")
 
 	Salida:
 		Tabla de permisos actualizada al eliminar el registro correspondiente
+	
+	Ver tambien:
+		<agregar_permiso>
 */
 if ($accion=="eliminar_permiso")
 	{
@@ -405,6 +518,26 @@ if ($accion=="eliminar_permiso")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: agregar_permiso
+	Agrega un permiso a un usuario determinado.
+
+	Variables de entrada:
+
+		usuario - UID/Login de usuario al que se desea agregar el permiso
+		menu - ID del menu que se desea agregar del perfil del usuario
+
+		(start code)
+			SELECT * FROM ".$TablasCore."usuario_menu WHERE usuario='$usuario' AND menu='$menu'
+			INSERT INTO ".$TablasCore."usuario_menu VALUES (0,'$usuario','$menu')
+		(end)
+
+	Salida:
+		Tabla de permisos actualizada al agregar el registro correspondiente
+	
+	Ver tambien:
+		<eliminar_permiso>
+*/
 	if ($accion=="agregar_permiso")
 		{
 			$mensaje_error="";
@@ -439,6 +572,26 @@ if ($accion=="eliminar_permiso")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: permisos_usuario
+	Despliega una lista con las opciones de menu definidas para un usuario determinado con la posibilidad de agregar o eliminar
+
+	Variables de entrada:
+
+		usuario - UID/Login de usuario al que se desea agregar el permiso
+
+		(start code)
+			SELECT login FROM ".$TablasCore."usuario WHERE login<>'admin' AND login<>'$usuario' ORDER BY login
+			SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE nivel_usuario<=".$Nivel_usuario
+			SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu,".$TablasCore."usuario_menu WHERE ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$usuario'
+		(end)
+
+	Salida:
+		Listado de opciones de menu disponibles en el perfil del usuario
+
+	Ver tambien:
+		<informes_usuario>
+*/
 if ($accion=="permisos_usuario")
 				{
 						echo '<div align="center"><br>';
@@ -546,7 +699,7 @@ if ($accion=="permisos_usuario")
 /* ################################################################## */
 			/*
 				Section: Operaciones basicas de administracion
-				Funciones asociadas al mantenimiento de la informacion de usuarios: Adicion, edicio, eliminacion, cambios de estado.
+				Funciones asociadas al mantenimiento de la informacion de usuarios: Adicion, edicion, eliminacion, cambios de estado.
 			*/
 /* ################################################################## */
 /* ################################################################## */
@@ -561,17 +714,15 @@ if ($accion=="permisos_usuario")
 
 				Proceso simplificado:
 					(start code)
-						if ($estado==1)
-							$consulta = "UPDATE ".$TablasCore."usuario SET estado=0 WHERE login='$uid_especifico'";
-						else
-							$consulta = "UPDATE ".$TablasCore."usuario SET estado=1, ultimo_acceso='$fecha_operacion' WHERE login='$uid_especifico'";
+						DELETE FROM ".$TablasCore."usuario WHERE login='$uid_especifico'
+						DELETE FROM ".$TablasCore."usuario_menu WHERE usuario='$uid_especifico'
 					(end)
 
 				Salida de la funcion:
-					* Usuario con estado diferente (contrario) al recibido
+					* Tabla de usuarios actualizada al eliminar el registro asociado
 
 				Ver tambien:
-					<listar_usuarios> | <agregar_usuario>
+					<listar_usuarios> | <agregar_usuario> | <cambiar_estado_usuario>
 			*/
 			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario WHERE login='$uid_especifico'");
 			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario='$uid_especifico'");
@@ -606,7 +757,7 @@ if ($accion=="permisos_usuario")
 					* Usuario con estado diferente (contrario) al recibido
 
 				Ver tambien:
-					<listar_usuarios>
+					<listar_usuarios> | <eliminar_usuario>
 			*/
 			if ($estado==1)
 				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET estado=0 WHERE login='$uid_especifico'");
@@ -697,7 +848,7 @@ if ($accion=="agregar_usuario")
 					* Llamada al proceso <guardar_usuario> para almacenar la informacion correspondiente al nuevo usuario.
 
 				Ver tambien:
-					<listar_usuarios> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario>
+					<listar_usuarios> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario> | <muestra_seguridad_clave> | <seguridad_clave>
 			*/
 		echo '<div align="center">';
 		abrir_ventana('Adici&oacute;n de usuarios','f2f2f2','');

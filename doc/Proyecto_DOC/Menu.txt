@@ -40,25 +40,30 @@ Footer: Copyright (c) 2012 - John F. Arroyave Gutierrez.
 # time it is run.  When working with groups, just deal with the braces and
 # forget about the indentation and comments.
 # 
-# You can use this file on other computers even if they use different
-# directories.  As long as the command line points to the same source files,
-# Natural Docs will be able to correct the locations automatically.
-# 
 # --------------------------------------------------------------------------
 
 
-File: Conexiones PDO  (/mnt/webcube/webserver/cubepy/pdccion/practico/core/conexiones.php)
-File: Libreria base  (/mnt/webcube/webserver/cubepy/pdccion/practico/core/comunes.php)
+File: Conexiones PDO  (core/conexiones.php)
+File: Funciones personalizadas  (personalizadas.php)
+File: Libreria base  (core/comunes.php)
 
 Group: Modulos Principales  {
 
-   File: Modulo formularios  (/mnt/webcube/webserver/cubepy/pdccion/practico/core/formularios.php)
-   File: Modulo menues  (/mnt/webcube/webserver/cubepy/pdccion/practico/core/menus.php)
-   File: Modulo sesion  (/mnt/webcube/webserver/cubepy/pdccion/practico/core/sesion.php)
-   File: Modulo tablas  (/mnt/webcube/webserver/cubepy/pdccion/practico/core/tablas.php)
-   File: Modulo usuarios  (/mnt/webcube/webserver/cubepy/pdccion/practico/core/usuarios.php)
-   File: Variables de conexion  (/mnt/webcube/webserver/cubepy/pdccion/practico/core/doc_configuracion.php)
+   File: Modulo correos  (core/correos.php)
+   File: Modulo formularios  (core/formularios.php)
+   File: Modulo informes  (core/informes.php)
+   File: Modulo menues  (core/menus.php)
+   File: Modulo objetos  (core/objetos.php)
+   File: Modulo objetos  (core/actualizacion.php)
+   File: Modulo sesion  (core/sesion.php)
+   File: Modulo tablas  (core/tablas.php)
+   File: Modulo usuarios  (core/usuarios.php)
+   File: Seccion inferior  (core/marco_abajo.php)
+   File: Seccion superior  (core/marco_arriba.php)
+   File: Variables de conexion  (core/doc_configuracion.php)
    }  # Group: Modulos Principales
+
+File: Modulo central  (index.php)
 
 Group: Index  {
 
@@ -66,9 +71,3 @@ Group: Index  {
    Function Index: Functions
    }  # Group: Index
 
-
-
-##### Do not change or remove these lines. #####
-Data: 1(D3333E\t37GY9NYG37GY6GH/GH39NYGIQ3If998u\3IHp9t89u39uHG)
-Data: 1(h3333E\t37GY9NYG37GY6GH/GH39NYGIQ3If998u\3IHp9t89u3l6)
-Data: 1(T3333E\t37GY9NYG37GY6GH/GH39NYGIQ3If998u\3IHp9t89u38\6)

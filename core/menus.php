@@ -18,17 +18,17 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	*/
 
-			/*
-				Title: Modulo menues
-				Ubicacion *[/core/menus.php]*.  Archivo de funciones relacionadas con la administracion de opciones de menu.
-			*/
+	/*
+		Title: Modulo menues
+		Ubicacion *[/core/menus.php]*.  Archivo de funciones relacionadas con la administracion de opciones de menu.
+	*/
 ?>
 
 <?php
-			/*
-				Section: Operaciones basicas de administracion
-				Funciones asociadas al mantenimiento de menues en el sistema.
-			*/
+	/*
+		Section: Operaciones basicas de administracion
+		Funciones asociadas al mantenimiento de menues en el sistema.
+	*/
 ?>
 
 <?php
@@ -332,11 +332,16 @@ if ($accion=="eliminar_menu")
 
 				id - Identificador unico en la tabla de menu
 
+			(start code)
+				DELETE FROM ".$TablasCore."menu WHERE id=$id
+				DELETE FROM ".$TablasCore."usuario_menu WHERE menu=$id
+			(end)
+
 			Salida:
 				Entradas de menu actualizadas.
 
 			Ver tambien:
-			<administrar_menu>  <detalles_menu>
+			<administrar_menu> | <detalles_menu>
 		*/
 		// Elimina los datos de la opcion
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."menu WHERE id=$id");
@@ -351,6 +356,30 @@ if ($accion=="eliminar_menu")
 
 /* ################################################################## */
 /* ################################################################## */
+		/*
+			Function: guardar_menu
+			Almacena una opcion del menu, escritorio o demas ubicaciones definidas por el administrador quedando disponible para ser asignado a los usuarios mediante la opcion que hace el llamado a la funcion de <permisos_usuario>
+
+			Variables de entrada:
+
+				texto - Texto que identifica a la opcion de menu
+				peso - Valor entero que define el orden en que debe ser presentada la opcion cuando aparece junto con otras
+				tipo_comando - Define el tipo de comando que va a aser ejecutado por la opcion de menu
+				imagen - Un nombre de archivo correspondiente a una imagen existente dentro de la carpeta relativa img/ y que sera utilizada como icono para la opcion
+				seccion - Texto que indica el nombre de una seccion que puede agrupar la opcion cuando esta se encuentra disponible en el acordeon de opciones en el escritorio
+				nivel_usuario - Establece el nivel de usuario minimo requerido para poder visualizar la opcion
+				comando - En el caso de tipo_comando personalizado, establece el comando a ser lanzado por practico
+
+			(start code)
+				INSERT INTO ".$TablasCore."menu VALUES (0,'$texto','$padre','$peso','$url','$posible_clic','$tipo_comando','$comando','$nivel_usuario','$columna','$posible_arriba','$posible_escritorio','$posible_centro','$seccion','$imagen')
+			(end)
+
+			Salida:
+				Entradas de menu actualizadas.
+
+			Ver tambien:
+			<administrar_menu> | <detalles_menu> | <eliminar_menu>
+		*/
 	if ($accion=="guardar_menu")
 		{
 			$mensaje_error="";
@@ -381,6 +410,20 @@ if ($accion=="eliminar_menu")
 
 /* ################################################################## */
 /* ################################################################## */
+		/*
+			Function: administrar_menu
+			Presenta la lista de todas las opciones definidas para el menu de usuarios con la posibilidad de agregar nuevas o de administrar las existentes. Incluye la carga de imagenes dentro de marco oculto para su seleccion como iconos.
+
+			(start code)
+				SELECT * FROM ".$TablasCore."menu WHERE 1
+			(end)
+
+			Salida:
+				Listado de opciones de menu y formulario para creacion de nuevas
+
+			Ver tambien:
+			<guardar_menu> | <detalles_menu> | <eliminar_menu>
+		*/
 if ($accion=="administrar_menu")
 	{
 		echo '<div align="center"><br>';
@@ -642,7 +685,24 @@ if ($accion=="administrar_menu")
 
 /* ################################################################## */
 /* ################################################################## */
-	// Si la accion es presentar el menu de inicio o escritorio
+/*
+	Function: Ver_menu
+	Despliega el escritorio de un usuario, incluyendo el menu superior, iconos de escritorio y opciones agrupadas en el acordeon central
+
+	Variables de entrada:
+
+		Login_usuario - UID/Login de usuario al que se desea agregar el permiso almacenado como variable de sesion despues del login
+		Sesion_abierta - Variable que establece si realmente se ha iniciado una sesion
+
+	Salida:
+		Escritorio de usuario con las opciones asignadas
+
+	Observacion:
+		La funcion agrega un filtrado para aquellos usuarios diferentes del administrador.  El usuario administrador mostrara siempre todas las opciones existentes por defecto.
+
+	Ver tambien:
+		<administrar_menu>
+*/
 	if ($accion=="Ver_menu" && $Sesion_abierta)
 		{ 
 			// Carga las opciones del ESCRITORIO

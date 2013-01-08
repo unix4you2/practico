@@ -1,30 +1,201 @@
 1.5
-PHP
-/mnt/webcube/webserver/cubepy/pdccion/practico/js/tecladovirtual.js	1344889283	0	/mnt/webcube/webserver/cubepy/pdccion/practico/js/tecladovirtual.js
-/mnt/webcube/webserver/cubepy/pdccion/practico/ins/index.php	1345566754	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/index.php
-/mnt/webcube/webserver/cubepy/pdccion/practico/js/validaform.js	1344889283	0	/mnt/webcube/webserver/cubepy/pdccion/practico/js/validaform.js
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/marco_abajo.php	1344889283	0	/mnt/webcube/webserver/cubepy/pdccion/practico/core/marco_abajo.php
-/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_0.php	1344868394	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_0.php
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/configuracion.php	1345581072	0	Configuracion base
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/formularios.php	1344889283	1	Modulo formularios
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/doc_configuracion.php	1345037465	1	Variables de conexion
-/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_3.php	1345037667	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_3.php
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/marco_arriba.php	1345581554	0	/mnt/webcube/webserver/cubepy/pdccion/practico/core/marco_arriba.php
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/tablas.php	1345129135	1	Modulo tablas
-/mnt/webcube/webserver/cubepy/pdccion/practico/js/calendario.js	1344889283	0	/mnt/webcube/webserver/cubepy/pdccion/practico/js/calendario.js
-/mnt/webcube/webserver/cubepy/pdccion/practico/ins/js/tooltips.js	1344889283	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/js/tooltips.js
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/usuarios.php	1345042805	1	Modulo usuarios
-/mnt/webcube/webserver/cubepy/pdccion/practico/ins/core/marco_arriba.php	1345222696	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/core/marco_arriba.php
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/conexiones.php	1345036498	1	Conexiones PDO
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/captcha.php	1344973183	0	/mnt/webcube/webserver/cubepy/pdccion/practico/core/captcha.php
-/mnt/webcube/webserver/cubepy/pdccion/practico/js/tooltips.js	1344889283	0	/mnt/webcube/webserver/cubepy/pdccion/practico/js/tooltips.js
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/menus.php	1345583312	1	Modulo menues
-/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_4.php	1345565965	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_4.php
-/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_2.php	1345222803	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_2.php
-/mnt/webcube/webserver/cubepy/pdccion/practico/ins/sql/practico.sql	1345581747	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/sql/practico.sql
-/mnt/webcube/webserver/cubepy/pdccion/practico/ins/core/marco_abajo.php	1344867353	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/core/marco_abajo.php
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/sesion.php	1345039944	1	Modulo sesion
-/mnt/webcube/webserver/cubepy/pdccion/practico/ins/gpl-2.0.txt	1344696195	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/gpl-2.0.txt
-/mnt/webcube/webserver/cubepy/pdccion/practico/js/popup.js	1344889283	0	/mnt/webcube/webserver/cubepy/pdccion/practico/js/popup.js
-/mnt/webcube/webserver/cubepy/pdccion/practico/core/comunes.php	1345581577	1	Libreria base
-/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_1.php	1345567845	0	/mnt/webcube/webserver/cubepy/pdccion/practico/ins/paso_1.php
+JavaScript
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/th.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/th.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/pt-br.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/pt-br.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/wzd/tbl_entregas.txt	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/wzd/tbl_entregas.txt
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/axis/Bound.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/axis/Bound.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/paso_2.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/paso_2.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/liststyle/dialogs/liststyle.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/liststyle/dialogs/liststyle.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/a11yhelp/lang/he.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/a11yhelp/lang/he.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/link/dialogs/link.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/link/dialogs/link.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/chart/Chart.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/chart/Chart.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/uicolor/lang/en.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/uicolor/lang/en.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/autogrow/plugin.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/autogrow/plugin.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/eo.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/eo.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/axis/Axis.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/axis/Axis.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/button.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/button.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/lv.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/lv.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/placeholder/lang/he.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/placeholder/lang/he.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/comunes.php	1357250965	1	Libreria base
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/fr.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/fr.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/bg.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/bg.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/radio.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/radio.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/colordialog/dialogs/colordialog.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/colordialog/dialogs/colordialog.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/index.php	1357572716	1	Modulo central
+/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/paso_3.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/paso_3.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/paso_i.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/paso_i.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/uicolor/dialogs/uicolor.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/uicolor/dialogs/uicolor.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/color/ColorSet.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/color/ColorSet.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/wzd/tbl_activos.txt	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/wzd/tbl_activos.txt
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/vi.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/vi.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/sk.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/sk.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/doc_configuracion.php	1357250965	1	Variables de conexion
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/skins/v2/skin.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/skins/v2/skin.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/lt.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/lt.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/adapters/jquery.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/adapters/jquery.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/sr.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/sr.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/placeholder/plugin.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/placeholder/plugin.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/wzd/tbl_contactos.txt	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/wzd/tbl_contactos.txt
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/flash/dialogs/flash.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/flash/dialogs/flash.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/pastefromword/filter/default.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/pastefromword/filter/default.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/color/Palette.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/color/Palette.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/model/XYSeriesDataSet.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/model/XYSeriesDataSet.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/ja.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/ja.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/backups.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/core/backups.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/sl.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/sl.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/primitive/Padding.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/primitive/Padding.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/marco_arriba.php	1357592864	1	Seccion superior
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/he.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/he.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/correos.php	1357250965	1	Modulo correos
+/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/js/tooltips.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/js/tooltips.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/af.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/af.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/a11yhelp/dialogs/a11yhelp.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/a11yhelp/dialogs/a11yhelp.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/caption/Caption.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/caption/Caption.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/bs.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/bs.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/ro.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/ro.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/adobeair/plugin.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/adobeair/plugin.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/zonas_horarias.txt	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/zonas_horarias.txt
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/ckeditor_source.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/ckeditor_source.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/uicolor/plugin.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/uicolor/plugin.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/wzd/tbl_eventos.txt	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/wzd/tbl_eventos.txt
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/skins/kama/skin.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/skins/kama/skin.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/en-ca.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/en-ca.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/div/dialogs/div.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/div/dialogs/div.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/_translationstatus.txt	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/_translationstatus.txt
+/mnt/datos/jwf/Desarrollo/WebServer/practico/js/calendario.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/js/calendario.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/marco_abajo.php	1357592859	1	Seccion inferior
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/pl.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/pl.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/core/marco_abajo.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/core/marco_abajo.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/zh.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/zh.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/ka.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/ka.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/personalizadas.php	1357572392	1	Funciones personalizadas
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/chart/BarChart.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/chart/BarChart.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/pt.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/pt.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/iframe/dialogs/iframe.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/iframe/dialogs/iframe.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/placeholder/dialogs/placeholder.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/placeholder/dialogs/placeholder.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/specialchar/lang/en.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/specialchar/lang/en.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/xml/plugin.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/xml/plugin.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/chart/PieChart.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/chart/PieChart.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/primitive/Primitive.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/primitive/Primitive.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/usuarios.php	1357591430	1	Modulo usuarios
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/placeholder/lang/en.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/placeholder/lang/en.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/conexiones.php	1357250965	1	Conexiones PDO
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/es.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/es.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/sv.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/sv.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/eu.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/eu.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/devtools/lang/en.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/devtools/lang/en.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/wzd/tbl_productos.txt	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/wzd/tbl_productos.txt
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/docprops/dialogs/docprops.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/docprops/dialogs/docprops.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/paso_1.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/paso_1.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/form.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/form.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/iframedialog/plugin.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/iframedialog/plugin.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/ru.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/ru.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/it.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/it.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/hr.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/hr.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/wsc/dialogs/wsc.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/wsc/dialogs/wsc.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/bn.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/bn.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/themes/default/theme.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/themes/default/theme.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/km.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/km.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/styles/styles/default.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/styles/styles/default.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/ckeditor_php5.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/ckeditor_php5.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/ar.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/ar.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/chart/HorizontalBarChart.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/chart/HorizontalBarChart.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/a11yhelp/lang/en.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/a11yhelp/lang/en.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/zh-cn.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/zh-cn.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/chart/LineChart.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/chart/LineChart.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/model/XYDataSet.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/model/XYDataSet.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/hi.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/hi.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/tabletools/dialogs/tableCell.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/tabletools/dialogs/tableCell.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/paso_0.php	1357563659	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/paso_0.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/checkbox.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/checkbox.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/fi.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/fi.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/devtools/plugin.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/devtools/plugin.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/uk.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/uk.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/find/dialogs/find.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/find/dialogs/find.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/skins/office2003/skin.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/skins/office2003/skin.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/model/Point.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/model/Point.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/et.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/et.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/menus.php	1357592601	1	Modulo menues
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/color/Color.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/color/Color.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/uicolor/yui/yui.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/uicolor/yui/yui.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/uicolor/lang/he.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/uicolor/lang/he.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/informes.php	1357250965	1	Modulo informes
+/mnt/datos/jwf/Desarrollo/WebServer/practico/js/popup.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/js/popup.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/text/Text.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/text/Text.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/ko.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/ko.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/stylesheetparser/plugin.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/stylesheetparser/plugin.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/en-gb.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/en-gb.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/ckeditor.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/ckeditor.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/cy.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/cy.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/model/DataSet.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/model/DataSet.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/configuracion.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/core/configuracion.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/templates/dialogs/templates.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/templates/dialogs/templates.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/select.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/select.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/gl.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/gl.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/no.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/no.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/plot/Plot.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/plot/Plot.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/image/dialogs/image.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/image/dialogs/image.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/ckeditor.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/ckeditor.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/tablas.php	1357589721	1	Modulo tablas
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/actualizacion.php	1357250965	1	Modulo objetos
+/mnt/datos/jwf/Desarrollo/WebServer/practico/js/tooltips.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/js/tooltips.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/sesion.php	1357590202	1	Modulo sesion
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/link/dialogs/anchor.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/link/dialogs/anchor.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/hiddenfield.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/hiddenfield.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/formularios.php	1357250965	1	Modulo formularios
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/sr-latn.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/sr-latn.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/js/validaform.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/js/validaform.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/en.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/en.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/_languages.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/_languages.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/objetos.php	1357591558	1	Modulo objetos
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/el.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/el.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/textarea.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/textarea.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/docprops/plugin.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/docprops/plugin.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/tableresize/plugin.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/tableresize/plugin.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/ms.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/ms.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/js/tecladovirtual.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/js/tecladovirtual.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/bbcode/plugin.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/bbcode/plugin.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/wzd/tbl_empleados.txt	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/wzd/tbl_empleados.txt
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/nb.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/nb.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/hu.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/hu.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/fa.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/fa.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/ckeditor_php4.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/ckeditor_php4.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/index.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/index.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/version_actual.txt	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/version_actual.txt
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/tr.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/tr.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/fr-ca.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/fr-ca.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/tmp/anotaciones.txt	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/tmp/anotaciones.txt
+/mnt/datos/jwf/Desarrollo/WebServer/practico/wzd/tbl_clientes.txt	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/wzd/tbl_clientes.txt
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/de.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/de.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/pastetext/dialogs/pastetext.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/pastetext/dialogs/pastetext.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/scayt/dialogs/options.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/scayt/dialogs/options.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/nl.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/nl.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/is.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/is.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/ckeditor_basic.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/ckeditor_basic.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/sql/practico.sql	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/sql/practico.sql
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/table/dialogs/table.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/table/dialogs/table.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/dialog/dialogDefinition.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/dialog/dialogDefinition.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/about/dialogs/about.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/about/dialogs/about.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/ajax/plugin.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/ajax/plugin.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/gu.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/gu.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/mn.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/mn.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/ckeditor_basic_source.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/ckeditor_basic_source.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/templates/templates/default.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/templates/templates/default.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/pclzip.lib.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/pclzip.lib.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/smiley/dialogs/smiley.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/smiley/dialogs/smiley.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/ca.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/ca.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/clipboard/dialogs/paste.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/clipboard/dialogs/paste.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/textfield.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/textfield.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/da.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/da.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/core/captcha.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/core/captcha.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/core/marco_arriba.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/core/marco_arriba.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/model/ChartConfig.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/model/ChartConfig.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/libchart.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/libchart.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/specialchar/dialogs/specialchar.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/plugins/specialchar/dialogs/specialchar.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/primitive/Rectangle.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/primitive/Rectangle.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/config.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/config.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/fo.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/fo.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/paso_4.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/ins/paso_4.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/chart/VerticalBarChart.php	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/libchart/classes/view/chart/VerticalBarChart.php
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/en-au.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/en-au.js
+/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/cs.js	1357250965	0	/mnt/datos/jwf/Desarrollo/WebServer/practico/inc/ckeditor/lang/cs.js

@@ -21,6 +21,20 @@
 	/*
 		Title: Modulo central
 		Ubicacion *[index.php]*.  Archivo que contiene llamados a los demas modulos y procesos de validacion de cabeceras.
+
+		Operaciones resumidas:
+			(start code)
+				Inicio variables de session
+				Inclusion de archivo de configuracion
+				Definicion de variables y parametros de funcionamiento
+				Inclusion de conexiones PDO y funciones comunes
+				Validacion de credenciales y datos de sesion
+				Inclusion de marco superior
+				Inclusion de modulos segun accion
+				Proyeccion de contenidos centrales por cada modulo (externo)
+				Inclusion de funciones personalizadas
+				Inclusion de marco inferior
+			(end)
 	*/
 
 	// Inicio de la sesion
