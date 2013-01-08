@@ -35,6 +35,29 @@
 <?php
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: eliminar_datos_formulario
+	Elimina los datos asociados sobre las tablas de aplicacion para un registro determinado.  Esta funcion es utilizada por los botones de Eliminar registro definidos como accion en un formulario
+
+	Variables de entrada:
+
+		formulario - ID unico de formulario sobre el cual se realiza la operacion de eliminacion
+		campo - nombre del campo que debe ser usado para filtrar
+		valor - valor a comparar sobre el campo y que es usado para determinar que registro eliminar
+
+	(start code)
+		SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'
+		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1 AND valor_unico=1
+		DELETE FROM ".$tabla." WHERE $campo='$valor'
+	(end)
+
+	Salida:
+		Registro eliminado de la tabla de aplicacion
+
+	Ver tambien:
+		<guardar_datos_formulario>
+
+*/
 	if ($accion=="eliminar_datos_formulario")
 		{
 			$mensaje_error="";
@@ -67,9 +90,31 @@
 		}
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: guardar_datos_formulario
+	Guarda un registro sobre la tabla de aplicacion cuando es llamada la accion de guardar datos sobre un formulario.  Tomando todos los datos del formulario construye un query valido en SQL para hacer la insercion de los datos que debieron recibirse por metodo POST desde el formulario
 
-/* ################################################################## */
-/* ################################################################## */
+	Variables de entrada:
+
+		formulario - ID unico de formulario sobre el cual se realiza la operacion de eliminacion
+		lista de valores - obtenidos dinamicamente dependiendo de la definicion del formulario
+
+	(start code)
+		SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'
+		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1 AND valor_unico=1
+		SELECT id FROM ".$tabla." WHERE $campo='$valor'
+		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1
+		INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores.")"
+	(end)
+
+	Salida:
+		Registro agregado a la tabla de aplicacion
+
+	Ver tambien:
+		<eliminar_datos_formulario>
+*/
 	if ($accion=="guardar_datos_formulario")
 		{
 			// POR CORREGIR:  Si el diseno cuenta con varios campos que ven hacia un mismo campo de base de datos el query no es valido

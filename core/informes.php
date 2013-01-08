@@ -41,9 +41,11 @@
 	Variables de entrada:
 
 		id - ID del informe que se desea cambiarse
+		agrupamiento - Nuevo valor de campo para agrupamiento del query
+		ordenamiento - Nuevo valor de campo para ordenamiento del query
 
 		(start code)
-			UPDATE ".$TablasCore."informe SET ... WHERE id=$id
+			UPDATE ".$TablasCore."informe SET agrupamiento='$agrupamiento',ordenamiento='$ordenamiento' WHERE id=$id
 		(end)
 
 	Salida:
@@ -51,7 +53,7 @@
 
 	Ver tambien:
 
-		<detalles_informe>
+		<editar_informe>
 */
 if ($accion=="actualizar_agrupamiento_informe")
 	{
@@ -92,9 +94,10 @@ if ($accion=="actualizar_agrupamiento_informe")
 	Variables de entrada:
 
 		id - ID del informe que se desea cambiarse
+		cadena_formato - Formato utilizado para la generacion del grafico incluyendo el tipo y valores para cada una de sus series (nombre, campo usado como etiqueta y campo usado como valor)
 
 		(start code)
-			UPDATE ".$TablasCore."informe SET ... WHERE id=$id
+			UPDATE ".$TablasCore."informe SET formato_grafico='$cadena_formato' WHERE id=$id
 		(end)
 
 	Salida:
@@ -102,7 +105,7 @@ if ($accion=="actualizar_agrupamiento_informe")
 
 	Ver tambien:
 
-		<detalles_informe>
+		<editar_informe>
 */
 if ($accion=="actualizar_grafico_informe")
 	{
@@ -151,9 +154,10 @@ if ($accion=="actualizar_grafico_informe")
 	Variables de entrada:
 
 		id - ID del informe que se desea cambiarse
+		variables - Nuevos valores de variable para formato_final, alto,ancho,titulo,descripcion,categoria,nivel_usuario
 
 		(start code)
-			UPDATE ".$TablasCore."informe SET ... WHERE id=$id
+			UPDATE ".$TablasCore."informe SET formato_final='$formato_final', alto='$alto',ancho='$ancho',titulo='$titulo',descripcion='$descripcion',categoria='$categoria',nivel_usuario='$nivel_usuario' WHERE id=$id
 		(end)
 
 	Salida:
@@ -161,7 +165,7 @@ if ($accion=="actualizar_grafico_informe")
 
 	Ver tambien:
 
-		<detalles_informe>
+		<editar_informe> | <actualizar_grafico_informe> | <actualizar_agrupamiento_informe>
 */
 if ($accion=="actualizar_informe")
 	{
@@ -191,8 +195,25 @@ if ($accion=="actualizar_informe")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: eliminar_informe_condicion
+	Elimina una condicion de filtrado para un informe de la aplicacion
 
+	Variables de entrada:
 
+		id - ID de la condicion a eliminar
+
+		(start code)
+			DELETE FROM ".$TablasCore."informe_condiciones WHERE id='$condicion'
+		(end)
+
+	Salida:
+		Registro de informe actualizado
+
+	Ver tambien:
+
+		<editar_informe> | <guardar_informe_condicion>
+*/
 if ($accion=="eliminar_informe_condicion")
 	{
 		$mensaje_error="";
@@ -213,8 +234,26 @@ if ($accion=="eliminar_informe_condicion")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: guardar_informe_condicion
+	Agrega una condicion de filtrado para un informe de la aplicacion
 
+	Variables de entrada:
 
+		id - ID de la condicion a eliminar
+
+		(start code)
+			SELECT MAX(peso) as peso FROM ".$TablasCore."informe_condiciones WHERE informe='$informe'
+			INSERT INTO ".$TablasCore."informe_condiciones VALUES (0, '$informe','$valor_i','$valor_o','$valor_d','$peso')
+		(end)
+
+	Salida:
+		Registro de informe actualizado
+
+	Ver tambien:
+
+		<editar_informe> | <eliminar_informe_condicion>
+*/
 	if ($accion=="guardar_informe_condicion")
 		{
 			$mensaje_error="";
@@ -253,6 +292,25 @@ if ($accion=="eliminar_informe_condicion")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: eliminar_informe_campo
+	Elimina un campo definido para un informe de la aplicacion
+
+	Variables de entrada:
+
+		id - ID del campo a eliminar
+
+		(start code)
+			DELETE FROM ".$TablasCore."informe_campos WHERE id='$campo'
+		(end)
+
+	Salida:
+		Campo eliminado de la lista agregada al informe
+
+	Ver tambien:
+
+		<editar_informe>
+*/
 if ($accion=="eliminar_informe_campo")
 	{
 		$mensaje_error="";
@@ -273,8 +331,29 @@ if ($accion=="eliminar_informe_campo")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: guardar_informe_campo
+	Agrega un campo definido para un informe de la aplicacion
 
+	Variables de entrada:
 
+		informe - ID del informe al que sera agregado el campo
+		campo_datos - Nombre del campo, normalmente seleccionado de los disponibles
+		campo_manual - Valor manual para un nombre de campo, puede ser usado tambien en funciones de agrupacion
+		alias_manual - Valor de alias para el campo, usado en la impresion
+		campo_definitivo - concatenacion resultante de campo_manual y campo_datos (interno, no ercibido)
+
+		(start code)
+			INSERT INTO ".$TablasCore."informe_campos VALUES (0, '$informe','$campo_definitivo','$alias_manual')
+		(end)
+
+	Salida:
+		Campo agregado a la lista en el informe
+
+	Ver tambien:
+
+		<editar_informe> | <eliminar_informe_campo>
+*/
 	if ($accion=="guardar_informe_campo")
 		{
 			$mensaje_error="";
@@ -305,6 +384,25 @@ if ($accion=="eliminar_informe_campo")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: eliminar_informe_tabla
+	Elimina una tabla de datos definida para un informe de la aplicacion
+
+	Variables de entrada:
+
+		tabla - ID de la tabla que debe ser eliminada
+
+		(start code)
+			DELETE FROM ".$TablasCore."informe_tablas WHERE id='$tabla'
+		(end)
+
+	Salida:
+		Tabla eliminada del informe
+
+	Ver tambien:
+
+		<editar_informe> | <eliminar_informe_campo>
+*/
 if ($accion=="eliminar_informe_tabla")
 	{
 		$mensaje_error="";
@@ -325,8 +423,29 @@ if ($accion=="eliminar_informe_tabla")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: guardar_informe_tabla
+	Agrega una tabla de datos para un informe de la aplicacion
 
+	Variables de entrada:
 
+		informe - ID del informe al que sera agregada la tabla
+		tabla_datos - Nombre de la tabla, normalmente seleccionada de las disponibles
+		tabla_manual - Valor manual para un nombre de tabla
+		alias_manual - Valor de alias para la tabla
+		tabla_definitiva - concatenacion resultante de campo_manual y campo_datos (interno, no ercibido)
+
+		(start code)
+			INSERT INTO ".$TablasCore."informe_tablas VALUES (0, '$informe','$tabla_definitiva','$alias_manual')
+		(end)
+
+	Salida:
+		Tabla agregada al informe
+
+	Ver tambien:
+
+		<editar_informe>
+*/
 	if ($accion=="guardar_informe_tabla")
 		{
 			$mensaje_error="";
@@ -357,8 +476,14 @@ if ($accion=="eliminar_informe_tabla")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: editar_informe
+	Actualiza la informacion asociada a un informe mediante dos ventanas.  En una se cargan los datos basicos y que pueden ser actualizados directamente.  En otra se cargan accesos a ventanas emergentes que permiten cambiar otros parámetros mas especificos.
 
+	Salida:
+		Ventanas con los campos y enlaces requeridos para la edicion
 
+*/
 if ($accion=="editar_informe")
 	{
 		// Busca datos del informe
@@ -1024,6 +1149,29 @@ if ($accion=="editar_informe")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: eliminar_informe
+	Elimina un informe de la aplicacion, incluyendo todos los registros asociados en otras tablas
+
+	Variables de entrada:
+
+		informe - ID del informe que sera eliminado
+
+		(start code)
+			DELETE FROM ".$TablasCore."informe WHERE id='$informe'
+			DELETE FROM ".$TablasCore."informe_campos WHERE informe='$informe'
+			DELETE FROM ".$TablasCore."informe_tablas WHERE informe='$informe'
+			DELETE FROM ".$TablasCore."informe_condiciones WHERE informe='$informe'
+			DELETE FROM ".$TablasCore."usuario_informe WHERE informe='$informe'
+		(end)
+
+	Salida:
+		Informe eliminado
+
+	Ver tambien:
+
+		<editar_informe>
+*/
 if ($accion=="eliminar_informe")
 	{
 		$mensaje_error="";
@@ -1051,6 +1199,21 @@ if ($accion=="eliminar_informe")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: guardar_informe
+	Agrega un informe a la aplicacion
+
+		(start code)
+			INSERT INTO ".$TablasCore."informe VALUES (0, '$titulo','$descripcion','$categoria','$agrupamiento','$ordenamiento','$nivel_usuario','$ancho','$alto','$formato_final','|!|!|!|')
+		(end)
+
+	Salida:
+		Informe agregado al sistema
+
+	Ver tambien:
+
+		<editar_informe>
+*/
 if ($accion=="guardar_informe")
 	{
 		$mensaje_error="";
@@ -1079,9 +1242,22 @@ if ($accion=="guardar_informe")
 	}
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: administrar_informes
+	Presenta la lista de todos los informes definidos en el sistema con la posibilidad de agregar nuevos o de administrar los existentes.
 
-/* ################################################################## */
-/* ################################################################## */
+	(start code)
+		SELECT * FROM ".$TablasCore."informe ORDER BY titulo
+	(end)
+
+	Salida:
+		Listado de informes y formulario para creacion de nuevos
+
+	Ver tambien:
+	<guardar_informe> | <eliminar_informe>
+*/
 if ($accion=="administrar_informes")
 	{
 		 ?>
@@ -1220,9 +1396,34 @@ if ($accion=="administrar_informes")
 	}
 
 
+<?php
+/*
+	Section: Operaciones de usuario final
+	Funciones asociadas a la presentacion de informes para los usuarios finales de la aplicacion
+*/
+?>
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: mis_informes
+	Presenta las ventanas organizando los informes por categoria segun los permisos del usuario.  Para el usuario administrador se visualizan todos los informes.
 
-/* ################################################################## */
-/* ################################################################## */
+	Variables de entrada:
+
+		Login_usuario - Identificador de usuario para filtrar los resultados
+
+	(start code)
+		SELECT COUNT(*) as conteo,categoria FROM ".$TablasCore."informe ".$Complemento_tablas." WHERE 1 ".$Complemento_condicion." GROUP BY categoria ORDER BY categoria
+		Repetir por cada categoria
+			SELECT * FROM ".$TablasCore."informe ".$Complemento_tablas." WHERE 1 AND categoria='".$seccion_menu_activa."' ".$Complemento_condicion." ORDER BY titulo
+	(end)
+
+	Salida:
+		Listado de informes disponibles para el usuario organizados por Categoria en ventanas independientes
+
+	Ver tambien:
+	<administrar_informes>
+*/
 if ($accion=="mis_informes")
 	{
 			// Carga las opciones del ACORDEON DE INFORMES

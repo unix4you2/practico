@@ -1,3 +1,22 @@
+// original code by Stuart Langridge 2003-11
+// with additions to the code by other good people
+// This file is under public domain
+// http://www.kryogenix.org/code/browser/nicetitle/
+// thank you, sir
+
+// modified by Peter Janes 2003-03-25
+// http://peterjanes.ca/blog/archives/2003/03/25/nicetitles-for-ins-and-del
+// added in ins and del tags
+
+// modified by Dunstan Orchard 2003-11-18
+// http://1976design.com/blog/
+// added in accesskey information
+// tried ever-so-hard, but couldn't work out how to do what Ethan did
+
+// final genius touch by by Ethan Marcotte 2003-11-18
+// http://www.sidesh0w.com/
+// worked out how to delay showing the popups to make them more like the browser's own
+
 addEvent(window, "load", makeNiceTitles);
 
 var XHTMLNS = "http://www.w3.org/1999/xhtml";
