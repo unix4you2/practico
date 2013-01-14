@@ -458,6 +458,8 @@ if ($accion=="editar_tabla")
 */
 	if ($accion=="administrar_tablas")
 		{
+			echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/otODPESW0k0\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><img src='img/icono_screencast.png' alt='ScreenCast-VideoTutorial'></a>";
+
 			abrir_ventana('Crear/Listar tablas de datos definidias en el sistema','f2f2f2',''); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_crear_tabla">

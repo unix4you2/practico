@@ -1396,12 +1396,12 @@ if ($accion=="administrar_informes")
 	}
 
 
-<?php
+
 /*
 	Section: Operaciones de usuario final
 	Funciones asociadas a la presentacion de informes para los usuarios finales de la aplicacion
 */
-?>
+
 /* ################################################################## */
 /* ################################################################## */
 /*
