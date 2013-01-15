@@ -572,7 +572,7 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function cargar_objeto_texto_corto($registro_campos)
+	function cargar_objeto_texto_corto($registro_campos,$formulario,$en_ventana)
 		{
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
@@ -921,7 +921,7 @@
 														<td valign=top>';
 													// Formatea cada campo de acuerdo a su tipo
 													// CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas abajo tambien
-													if ($registro_campos["tipo"]=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos);
+													if ($registro_campos["tipo"]=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,$formulario,$en_ventana);
 													if ($registro_campos["tipo"]=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos);
 													if ($registro_campos["tipo"]=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,$existe_campo_textoformato); $existe_campo_textoformato=1; }
 													if ($registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos);
@@ -961,7 +961,7 @@
 								echo '&nbsp;&nbsp;'.$registro_campos["titulo"];
 								// Formatea cada campo de acuerdo a su tipo
 								// CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas arriba tambien
-								if ($registro_campos["tipo"]=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos);
+								if ($registro_campos["tipo"]=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,$formulario,$en_ventana);
 								if ($registro_campos["tipo"]=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos);
 								if ($registro_campos["tipo"]=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,$existe_campo_textoformato); $existe_campo_textoformato=1; }
 								if ($registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos);
