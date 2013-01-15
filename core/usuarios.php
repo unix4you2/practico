@@ -974,6 +974,7 @@ if ($accion=="listar_usuarios")
 				Ver tambien:
 					<agregar_usuario> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario>
 			*/
+				echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/0KzASMtKRcc\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><img src='img/icono_screencast.png' alt='ScreenCast-VideoTutorial'></a>";
 
 				abrir_ventana('Listado de usuarios en el sistema','f2f2f2','');
 

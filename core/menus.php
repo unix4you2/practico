@@ -427,6 +427,7 @@ if ($accion=="eliminar_menu")
 if ($accion=="administrar_menu")
 	{
 		echo '<div align="center"><br>';
+		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/-24qazTBngg\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><img src='img/icono_screencast.png' alt='ScreenCast-VideoTutorial'></a>";
 		abrir_ventana('Administraci&oacute;n del men&uacute; principal','f2f2f2','');
 ?>
 

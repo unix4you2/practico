@@ -1260,6 +1260,7 @@ if ($accion=="guardar_informe")
 */
 if ($accion=="administrar_informes")
 	{
+		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/M4kYe9nTeTA\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><img src='img/icono_screencast.png' alt='ScreenCast-VideoTutorial'></a>";
 		 ?>
 
 		<table class="TextosVentana"><tr><td valign=top>
