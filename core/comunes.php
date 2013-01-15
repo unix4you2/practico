@@ -572,8 +572,9 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function cargar_objeto_texto_corto($registro_campos,$formulario,$en_ventana)
+	function cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 		{
+			global $campobase,$valorbase;
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
 			$tipo_entrada="text"; // Se cambia a date si se trata de un campo con validacion de fecha
@@ -626,8 +627,9 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function cargar_objeto_texto_largo($registro_campos)
+	function cargar_objeto_texto_largo($registro_campos,$registro_datos_formulario)
 		{
+			global $campobase,$valorbase;
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
 
@@ -653,8 +655,9 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function cargar_objeto_texto_formato($registro_campos,$existe_campo_textoformato)
+	function cargar_objeto_texto_formato($registro_campos,$registro_datos_formulario,$existe_campo_textoformato)
 		{
+			global $campobase,$valorbase;
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
 
@@ -757,8 +760,9 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function cargar_objeto_lista_seleccion($registro_campos)
+	function cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario)
 		{
+			global $campobase,$valorbase;
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
 
@@ -810,8 +814,9 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function cargar_objeto_etiqueta($registro_campos)
+	function cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario)
 		{
+			global $campobase,$valorbase;
 			$salida=$registro_campos["valor_etiqueta"];
 			return $salida;
 		}
@@ -819,8 +824,9 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function cargar_objeto_iframe($registro_campos)
+	function cargar_objeto_iframe($registro_campos,$registro_datos_formulario)
 		{
+			global $campobase,$valorbase;
 			$salida='<iframe src="'.$registro_campos["url_iframe"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>';
 			return $salida;
 		}
@@ -921,12 +927,12 @@
 														<td valign=top>';
 													// Formatea cada campo de acuerdo a su tipo
 													// CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas abajo tambien
-													if ($registro_campos["tipo"]=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,$formulario,$en_ventana);
-													if ($registro_campos["tipo"]=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos);
-													if ($registro_campos["tipo"]=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,$existe_campo_textoformato); $existe_campo_textoformato=1; }
-													if ($registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos);
-													if ($registro_campos["tipo"]=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos);
-													if ($registro_campos["tipo"]=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos);
+													if ($registro_campos["tipo"]=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana);
+													if ($registro_campos["tipo"]=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos,$registro_datos_formulario);
+													if ($registro_campos["tipo"]=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
+													if ($registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario);
+													if ($registro_campos["tipo"]=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario);
+													if ($registro_campos["tipo"]=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos,$registro_datos_formulario);
 													if ($registro_campos["tipo"]=="informe") cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
 
 													//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
@@ -961,12 +967,12 @@
 								echo '&nbsp;&nbsp;'.$registro_campos["titulo"];
 								// Formatea cada campo de acuerdo a su tipo
 								// CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas arriba tambien
-								if ($registro_campos["tipo"]=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,$formulario,$en_ventana);
-								if ($registro_campos["tipo"]=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos);
-								if ($registro_campos["tipo"]=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,$existe_campo_textoformato); $existe_campo_textoformato=1; }
-								if ($registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos);
-								if ($registro_campos["tipo"]=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos);
-								if ($registro_campos["tipo"]=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos);
+								if ($registro_campos["tipo"]=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana);
+								if ($registro_campos["tipo"]=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos,$registro_datos_formulario);
+								if ($registro_campos["tipo"]=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
+								if ($registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario);
+								if ($registro_campos["tipo"]=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario);
+								if ($registro_campos["tipo"]=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos,$registro_datos_formulario);
 								if ($registro_campos["tipo"]=="informe") cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
 
 								//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
