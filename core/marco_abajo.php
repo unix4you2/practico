@@ -21,6 +21,28 @@
 	/*
 		Title: Seccion inferior
 		Ubicacion *[/core/marco_abajo.php]*.  Archivo dedicado a la diagramacion de contenidos en el pie de pagina de la aplicacion, incluye valores de accion y tiempos para el usuario administrador.
+
+	Variables de entrada:
+
+		fecha_operacion_guiones - Fecha actual en formato AAAA-MM-DD
+		hora_operacion_puntos - Hora actual en formato HH:MM:SS
+		Login_usuario - Nombre de usuario que se encuentra logueado en el sistema
+		accion - Accion llamada actualmente en Practico (identificador unico de funcion interna o personalizada)
+		tiempo_inicio_script - Hora en microtime marcada para el incio del script
+
+		(start code)
+			if($Login_usuario=="admin" && $accion!="")
+				{
+					$tiempo_final_script = obtener_microtime();
+					$tiempo_total_script = $tiempo_final_script - $tiempo_inicio_script;
+				}
+		(end)
+
+	Salida:
+		Pie de pagina de aplicacion e informacion asociada a la accion y tiempos de ejecucion en caso de ser el usuario administrador
+
+	Ver tambien:
+		<Seccion superior> | <Articulador>
 	*/
 ?>
 

@@ -198,6 +198,24 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: eliminar_accion_formulario
+	Elimina un boton creado para un formulario
+
+	Variables de entrada:
+
+		boton - ID unico del boton sobre el cual se realiza la operacion de eliminacion
+
+	(start code)
+		DELETE FROM ".$TablasCore."formulario_boton WHERE id='$boton'
+	(end)
+
+	Salida:
+		Registro de boton eliminado y formulario actualizado en pantalla
+
+	Ver tambien:
+		<eliminar_campo_formulario>
+*/
 	if ($accion=="eliminar_accion_formulario")
 		{
 			$mensaje_error="";
@@ -227,6 +245,24 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: eliminar_campo_formulario
+	Elimina un campo de datos, etiqueta, marco externo o informe creado para un formulario
+
+	Variables de entrada:
+
+		campo - ID unico del elemento sobre el cual se realiza la operacion de eliminacion
+
+	(start code)
+		DELETE FROM ".$TablasCore."formulario_objeto WHERE id='$campo' 
+	(end)
+
+	Salida:
+		Registro de campo eliminado y formulario actualizado en pantalla
+
+	Ver tambien:
+		<eliminar_accion_formulario>
+*/
 	if ($accion=="eliminar_campo_formulario")
 		{
 			$mensaje_error="";
@@ -256,6 +292,24 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: guardar_campo_formulario
+	Agrega un campo de datos, etiqueta, marco externo o informe a un formulario
+
+	Variables de entrada:
+
+		multiples - Recibidas mediante formulario unico asociado al proceso de creacion del elemento.
+
+	(start code)
+		INSERT INTO ".$TablasCore."formulario_objeto VALUES (0,'$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores','$valor_etiqueta','$url_iframe','$objeto_en_ventana','$informe_vinculado')
+	(end)
+
+	Salida:
+		Registro agregado y formulario actualizado en pantalla
+
+	Ver tambien:
+		<eliminar_campo_formulario>
+*/
 	if ($accion=="guardar_campo_formulario")
 		{
 			$mensaje_error="";
@@ -289,6 +343,24 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: guardar_accion_formulario
+	Agrega un boton con una accion determinada para un formulario
+
+	Variables de entrada:
+
+		multiples - Recibidas mediante formulario unico asociado al proceso de creacion del elemento.
+
+	(start code)
+		INSERT INTO ".$TablasCore."formulario_boton VALUES (0, '$titulo','$estilo','$formulario','$tipo_accion','$accion_usuario','$visible','$peso','$retorno_titulo','$retorno_texto','$confirmacion_texto')
+	(end)
+
+	Salida:
+		Registro agregado y formulario actualizado en pantalla
+
+	Ver tambien:
+		<eliminar_accion_formulario>
+*/
 	if ($accion=="guardar_accion_formulario")
 		{
 			$mensaje_error="";
@@ -323,6 +395,21 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: editar_formulario
+	Despliega las ventanas requeridas para agregar los diferentes elementos al formulario como campos, etiquetas, marcos y acciones
+
+	Variables de entrada:
+
+		formulario - ID unico de identificacion del formulario sobre el cual se hace la edicion
+
+	(start code)
+		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' ORDER BY columna,peso,titulo
+	(end)
+
+	Salida:
+		Ventanas con herramientas de edicion y vista previa del formulario en pantalla
+*/
 if ($accion=="editar_formulario")
 	{
 		  ?>
@@ -1298,6 +1385,25 @@ if ($accion=="editar_formulario")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: eliminar_formulario
+	Elimina un formulario definido para la aplicacion incluyendo todos los objetos definidos en su interior
+
+	Variables de entrada:
+
+		formulario - ID unico de identificacion del formulario a eliminar
+
+	(start code)
+		DELETE FROM ".$TablasCore."formulario WHERE id='$formulario'
+		DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario'
+	(end)
+
+	Salida:
+		Registro eliminado
+
+	Ver tambien:
+		<administrar_formularios>
+*/
 	if ($accion=="eliminar_formulario")
 		{
 			$mensaje_error="";
@@ -1322,6 +1428,20 @@ if ($accion=="editar_formulario")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: guardar_formulario
+	Agrega un formulario vacio para la aplicacion
+
+	(start code)
+		INSERT INTO ".$TablasCore."formulario VALUES (0, '$titulo','$ayuda_titulo','$ayuda_texto','$ayuda_imagen','$tabla_datos','$columnas')
+	(end)
+
+	Salida:
+		Registro agregado y paso a las ventanas de edicion de formulario para agregar los elementos internos
+
+	Ver tambien:
+		<administrar_formularios>
+*/
 	if ($accion=="guardar_formulario")
 		{
 			$mensaje_error="";
@@ -1354,6 +1474,14 @@ if ($accion=="editar_formulario")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: administrar_formularios
+	Presenta ventanas con la posibilidad de agregar nuevo formulario a la aplicacion y el listado para administrar o editar los existentes
+
+	(start code)
+		SELECT * FROM ".$TablasCore."formulario ORDER BY titulo
+	(end)
+*/
 if ($accion=="administrar_formularios")
 	{
 		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/-50HOcXa9tY\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><img src='img/icono_screencast.png' alt='ScreenCast-VideoTutorial'></a>";

@@ -20,14 +20,16 @@
 
 	/*
 		Title: Modulo correos
-		Ubicacion *[/core/correo.php]*.  Modulo encargado del envio de informes por correo electronico
+		Ubicacion *[/core/correo.php]*.  Modulo encargado del envio de informes automaticos por correo electronico.
+
+		Estado de desarrollo actual: Alpha, lanzamiento estimado 13.02
 
 		Variables de entrada:
 
 			informe - Indica el nombre del informe a generar y enviar
 
 		Salida de la funcion:
-			Informe por correo
+			Informe por correo electronico
 	*/
 
 	session_start();
@@ -110,7 +112,7 @@
 
 
 // #####################################################################################################
-if ($informe=="xxx")		
+if ($informe=="xxxBETA")		
 	{
 		//PASAR FUNCIONALIDAD A PDO
 		$mysql_enlace = mysql_connect($Servidor, $UsuarioBD, $PasswordBD); 
@@ -134,7 +136,7 @@ if ($informe=="xxx")
 
 		$headers = "MIME-Version: 1.0\n"; 
 		$headers .= "Content-type: text/html; charset=iso-8859-1\n"; 
-		$headers .= "From: ERP Colmedicos S.A. <".$par_NOREPLYMAIL.">\n"; 
+		$headers .= "From: Practico <".$par_NOREPLYMAIL.">\n"; 
 		$headers .= "Reply-To: ".$par_NOREPLYMAIL."\n"; 
 		$headers .= "Return-path: ".$par_NOREPLYMAIL."\n"; 
 

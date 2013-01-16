@@ -16,12 +16,16 @@
 	You should have received a copy of the GNU General Public License
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+		// ESTE ARCHIVO SE MANTIENE COMO DOCUMENTACION ASOCIADA AL ARCHIVO configuracion.php, EL CUAL SOLO INCLUYE LAS DEFINICIONES DE VARIABLES
+		// GENERADAS DURANTE EL PROCESO DE INSTALACION.  LOS VALORES AQUI PROPUESTOS SON SOLAMENTE EJEMPLOS.
+		
 	*/
 
 	/*
-		// ESTE ARCHIVO SE MANTIENE COMO DOCUMENTACION ASOCIADA AL ARCHIVO configuracion.php, EL CUAL SOLO INCLUYE LAS DEFINICIONES DE VARIABLES
-		// GENERADAS DURANTE EL PROCESO DE INSTALACION.  LOS VALORES AQUI PROPUESTOS SON SOLAMENTE EJEMPLOS.
+
 		Title: Configuracion base 
+		
 		Ubicacion *[/core/configuracion.php]*.  Archivo que contiene la declaracion de variables basicas para conexion a bases de datos y otros
 	*/
 ?>

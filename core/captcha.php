@@ -20,16 +20,28 @@
 
 	session_start();
 
-		function TextoAleatorio($longitud)
-			{
-				// Plantilla para el captcha, a definir como parametro de aplicacion
-				$plantilla = "23456789abcdefghijkmnpqrstuvwxyz";
-				for($i=0;$i<$longitud;$i++)
-					{
-						$clave .= $plantilla{rand(0,strlen($plantilla)-1)};
-					}
-				return $clave;
-			}
+/*
+	Function: TextoAleatorio
+	Genera un texto aleatorio de una longitud determinada y basado en los caracteres suministrados en $plantilla
+
+	Variables de entrada:
+
+		longitud - Longitud del texto aleatorio
+
+	Salida:
+		texto aleatorio utilizado para la generacion de imagen del captcha
+
+*/
+	function TextoAleatorio($longitud)
+		{
+			// Plantilla para el captcha, a definir como parametro de aplicacion
+			$plantilla = "23456789abcdefghijkmnpqrstuvwxyz";
+			for($i=0;$i<$longitud;$i++)
+				{
+					$clave .= $plantilla{rand(0,strlen($plantilla)-1)};
+				}
+			return $clave;
+		}
 	include("configuracion.php");
 	$longitud=$CaracteresCaptcha; // A definir como parametro
 	$fuente=1;

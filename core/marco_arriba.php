@@ -20,8 +20,31 @@
 
 
 	/*
-		Title: Seccion superior
-		Ubicacion *[/core/marco_arriba.php]*.  Archivo dedicado a la diagramacion de contenidos en el encabezado de la aplicacion, incluye el menu superior horizontal
+	Title: Seccion superior
+	Ubicacion *[/core/marco_arriba.php]*.  Archivo dedicado a la diagramacion de contenidos en el encabezado de la aplicacion, incluye el menu superior horizontal
+
+	Variables de entrada:
+
+		NombreRAD - Nombre de la aplicacion para encabezado
+		PlantillaActiva - Nombre de la plantilla activa para diagramar el sistema
+		Login_usuario - Nombre de usuario que se encuentra logueado en el sistema
+		Sesion_abierta - Bandera que indica si hay una sesion activa
+		ArchivoCORE - Nombre del archivo principal que procesa todas las solicitudes
+
+		(start code)
+			if ($Login_usuario!="admin")
+				{
+					$Complemento_tablas=",".$TablasCore."usuario_menu";
+					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$Login_usuario'";  // AND nivel>0
+				}
+			SELECT * FROM ".$TablasCore."menu ".$Complemento_tablas." WHERE posible_arriba ".$Complemento_condicion
+		(end)
+
+	Salida:
+		Encabezado de aplicacion y menu superior disponible para el usuario activo
+
+	Ver tambien:
+		<Seccion inferior> | <Articulador>
 	*/
 ?>
 

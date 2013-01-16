@@ -2,9 +2,9 @@ Format: 1.5
 
 
 Title: Practico
-SubTitle: Generador de aplicaciones WEB Libre y Multiplataforma
+SubTitle: Generador de aplicaciones WEB libre
 
-Footer: Copyright (c) 2012 - John F. Arroyave Gutierrez.
+Footer: Copyright (c) 2013 - John F. Arroyave Gutierrez |
 
 # You can add a timestamp to your documentation like one of these:
 # Timestamp: Generated on month day, year
@@ -43,27 +43,32 @@ Footer: Copyright (c) 2012 - John F. Arroyave Gutierrez.
 # --------------------------------------------------------------------------
 
 
+File: Introduccion  (core/doc_intro.php)
+File: Configuracion base  (core/doc_configuracion.php)
 File: Conexiones PDO  (core/conexiones.php)
-File: Funciones personalizadas  (personalizadas.php)
 File: Libreria base  (core/comunes.php)
+File: Funciones personalizadas  (personalizadas.php)
 
 Group: Modulos Principales  {
 
-   File: Modulo correos  (core/correos.php)
-   File: Modulo formularios  (core/formularios.php)
-   File: Modulo informes  (core/informes.php)
-   File: Modulo menues  (core/menus.php)
-   File: Modulo objetos  (core/objetos.php)
-   File: Modulo objetos  (core/actualizacion.php)
-   File: Modulo sesion  (core/sesion.php)
-   File: Modulo tablas  (core/tablas.php)
-   File: Modulo usuarios  (core/usuarios.php)
+   File: Articulador  (index.php)
+   File: Formularios  (no auto-title, core/formularios.php)
+   File: Informes  (no auto-title, core/informes.php)
+   File: Menues  (no auto-title, core/menus.php)
+   File: Objetos  (no auto-title, core/objetos.php)
+   File: Actualizacion  (no auto-title, core/actualizacion.php)
+   File: Sesion  (no auto-title, core/sesion.php)
+   File: Tablas  (no auto-title, core/tablas.php)
+   File: Usuarios  (no auto-title, core/usuarios.php)
    File: Seccion inferior  (core/marco_abajo.php)
    File: Seccion superior  (core/marco_arriba.php)
-   File: Variables de conexion  (core/doc_configuracion.php)
+   File: TextoAleatorio  (core/captcha.php)
    }  # Group: Modulos Principales
 
-File: Modulo central  (index.php)
+Group: Modulos (en desarrollo)  {
+
+   File: Modulo correos  (core/correos.php)
+   }  # Group: Modulos (en desarrollo)
 
 Group: Index  {
 
@@ -71,3 +76,5 @@ Group: Index  {
    Function Index: Functions
    }  # Group: Index
 
+Text: Copyright (c) 2013
+Link: [John F. Arroyave Gutierrez]  (mailto:unix4you2@gmail.com)

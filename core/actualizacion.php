@@ -19,20 +19,20 @@
 	*/
 
 			/*
-				Title: Modulo objetos
-				Ubicacion *[/core/objetos.php]*.  Archivo de funciones relacionadas con las operaciones de objetos generados por la herramienta
+				Title: Modulo actualizar
+				Ubicacion *[/core/actualizacion.php]*.  Archivo de funciones para el proceso de actualizacion de la plataforma mediante parches incrementales
 			*/
 ?>
 
 <?php
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: actualizar_practico
+	Presenta el paso 1 del asistente de actualizacion de Practico para la carga del archivo con el parche
+*/
 if ($accion=="actualizar_practico")
 	{
-		/*
-			Function: actualizar_practico
-			Actualiza la plataforma manualmente o por medio de descargas de paquetes del repositorio
-		*/
 		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/OxheOe-o17s\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><img src='img/icono_screencast.png' alt='ScreenCast-VideoTutorial'></a>";
 		abrir_ventana('Actualizacion de la plataforma','f2f2f2','600');
 		mensaje('ATENCION: Lea esta informaci&oacute;n antes de continuar','Pr&aacute;ctico le ofrece este mecanismo para aplicar actualizaciones autom&aacute;ticas a su sistema mediante parches incrementales descargados desde la web oficial del proyecto o mediante el asistente para b&uacute;squeda de actualizaciones, sin embargo, antes de aplicar cualquier parche es fundamental que:<br><br><li>Haga una copia de seguridad de sus bases de datos. Algunas actualizaciones puede que requieran la modificaci&oacute;n de estructuras sobre la base de datos que pueden afectar la informaci&oacute;n.<li>Haga una copia de seguridad de sus archivos o carpeta de Pr&aacute;ctico.<li>LIMPIE la carpeta de trabajo de practico (ruta  tmp/), ser&aacute; utilizada por el asistente para descomprimir y analizar los archivos.','100%','warning_icon.png','TextosVentana');
@@ -71,6 +71,20 @@ if ($accion=="actualizar_practico")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: cargar_archivo
+	Toma el archivo entregado por el paso 1 del asistente de actualizacion y lo carga sobre la ruta relativa a la instalacion de Practico /tmp para ser analizado.
+
+	Variables de entrada:
+
+		archivo - Archivo recibido mediante el formulario Multipart del paso 1
+
+	Salida:
+		Archivo cargado sobre /tmp o mensaje de error en caso de fallo
+
+	Ver tambien:
+		<actualizar_practico>
+*/
 if ($accion=="cargar_archivo")
 	{
 		abrir_ventana('Adjuntando un nuevo archivo al sistema','f2f2f2','');
@@ -127,6 +141,20 @@ if ($accion=="cargar_archivo")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: analizar_parche
+	Revisa el archivo cargado sobre /tmp para validar si se trata de un parche con una estructura valida para Practico y muestra ademas el resumen de cambios que implementara.
+
+	Variables de entrada:
+
+		archivo_cargado - Ruta absoluta hacia el archivo cargado en el paso anterior del asistente
+
+	Salida:
+		Analisis del archivo y detalles del parche
+
+	Ver tambien:
+		<actualizar_practico>
+*/
 if ($accion=="analizar_parche")
 	{
 		abrir_ventana('Descomprimiendo archivo '.$archivo_cargado,'f2f2f2','700');
@@ -230,6 +258,20 @@ if ($accion=="analizar_parche")
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: aplicar_parche
+	Hace una copia de seguridad del sistema actual y toma el archivo entregado por el paso 2 del asistente de actualizacion y ejecuta todos los scripts encontrados en el, ademas de copiar los archivos correspondientes.
+
+	Variables de entrada:
+
+		archivo_cargado - Ruta absoluta hacia el archivo cargado en el paso anterior del asistente
+
+	Salida:
+		Actualizacion de Practico ejecutada, nueva version del aplicativo disponible
+
+	Ver tambien:
+		<actualizar_practico>
+*/
 if ($accion=="aplicar_parche")
 	{
 		//Divide los queries de un cadena

@@ -572,6 +572,23 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: cargar_objeto_texto_corto
+	Genera el codigo HTML y CSS correspondiente a un campo de texto (text) vinculado a un campo de datos sobre un formulario
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		registro_datos_formulario - Arreglo asociativo con nombres de campo y valores cuando se hacen llamados de registro especificos
+		formulario - ID unico del formulario al cual pertenece el objeto
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
 	function cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 		{
 			global $campobase,$valorbase;
@@ -627,6 +644,22 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: cargar_objeto_texto_largo
+	Genera el codigo HTML y CSS correspondiente a un campo de texto largo (textarea) vinculado a un campo de datos sobre un formulario
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		registro_datos_formulario - Arreglo asociativo con nombres de campo y valores cuando se hacen llamados de registro especificos
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
 	function cargar_objeto_texto_largo($registro_campos,$registro_datos_formulario)
 		{
 			global $campobase,$valorbase;
@@ -655,6 +688,23 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: cargar_objeto_texto_formato
+	Genera el codigo HTML y CSS correspondiente a un campo de texto largo (textarea alterado por CKEditor) vinculado a un campo de datos sobre un formulario
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		registro_datos_formulario - Arreglo asociativo con nombres de campo y valores cuando se hacen llamados de registro especificos
+		existe_campo_textoformato - Variable que determina si ya han sido cargadas las librerias del CKEditor para evitar una segunda carga y errores derivados de JavaScript
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
 	function cargar_objeto_texto_formato($registro_campos,$registro_datos_formulario,$existe_campo_textoformato)
 		{
 			global $campobase,$valorbase;
@@ -760,6 +810,22 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: cargar_objeto_lista_seleccion
+	Genera el codigo HTML y CSS correspondiente a un campo de lista (select - ComboBox) vinculado a un campo de datos sobre un formulario
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		registro_datos_formulario - Arreglo asociativo con nombres de campo y valores cuando se hacen llamados de registro especificos
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
 	function cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario)
 		{
 			global $campobase,$valorbase;
@@ -814,6 +880,22 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: cargar_objeto_etiqueta
+	Genera el codigo HTML y CSS correspondiente a un campo de etiqueta sobre un formulario
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		registro_datos_formulario - Arreglo asociativo con nombres de campo y valores cuando se hacen llamados de registro especificos
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
 	function cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario)
 		{
 			global $campobase,$valorbase;
@@ -824,6 +906,22 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: cargar_objeto_iframe
+	Genera el codigo HTML correspondiente a un campo de IFRAME para empotrar paginas externas sobre un formulario
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		registro_datos_formulario - Arreglo asociativo con nombres de campo y valores cuando se hacen llamados de registro especificos
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
 	function cargar_objeto_iframe($registro_campos,$registro_datos_formulario)
 		{
 			global $campobase,$valorbase;
@@ -834,6 +932,34 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: cargar_formulario
+	Genera el codigo HTML correspondiente a un formulario de la aplicacion y hace los llamados necesarios para la diagramacion por pantalla de los diferentes objetos que lo componen.
+
+	Variables de entrada:
+
+		formulario - ID unico del formulario que se desea cargar
+		en_ventana - Opcional, determina si el formulario es cargado en una ventana o directamente sobre el escritorio
+		campobase - Opcional, indica el campo sobre el cual se deben realizar busquedas para el cargue automatico de campos del formulario desde la base de datos
+		valorbase - Opcional, indica el valor que sera buscado sobre el campobase para encontrar los valores de cada objeto en el formulario
+
+	(start code)
+		SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'
+		SELECT id,peso,visible FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY peso
+		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND columna='$cl' AND visible=1 AND peso >'$limite_inferior' AND peso <='$limite_superior' ORDER BY peso
+		Por cada registro
+			Llamar creacion de objeto correspondiente
+		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND id='$ultimo_id'
+		SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario' AND visible=1 ORDER BY peso
+	(end)
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al formulario
+
+	Ver tambien:
+		<cargar_informe>
+*/
 		function cargar_formulario($formulario,$en_ventana=1,$campobase="",$valorbase="")
 		  {
 				global $ConexionPDO,$ArchivoCORE,$TablasCore;
@@ -1048,6 +1174,32 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: cargar_informe
+	Genera el codigo HTML correspondiente a un formulario de la aplicacion y hace los llamados necesarios para la diagramacion por pantalla de los diferentes objetos que lo componen.
+
+	Variables de entrada:
+
+		informe - ID unico del informe que se desea cargar
+		en_ventana - Indica si el informe debe ser cargado en una ventana o directamente sobre el escritorio de aplicacion
+		formato - Determina el formato en el cual es generado el informe como HTM o XLS (Alpha)
+		estilo - Determina el estilo CSS utilizado para presentar el informe, debe existir dentro de las hojas de estilo de la plantilla
+		embebido - Determina si el informe es presentado dentro de otro objeto o no, como por ejemplo un formulario
+
+	(start code)
+		SELECT * FROM ".$TablasCore."informe WHERE id='$informe'
+		SELECT * FROM ".$TablasCore."informe_campos WHERE informe='$informe'
+		SELECT * FROM ".$TablasCore."informe_tablas WHERE informe='$informe'
+		SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe='$informe' ORDER BY peso
+	(end)
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
 function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0)
 	{
 		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion,$Login_usuario;

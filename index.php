@@ -19,7 +19,7 @@
 	*/
 
 	/*
-		Title: Modulo central
+		Title: Articulador
 		Ubicacion *[index.php]*.  Archivo que contiene llamados a los demas modulos y procesos de validacion de cabeceras.
 
 		Operaciones resumidas:
