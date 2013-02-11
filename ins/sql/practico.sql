@@ -118,6 +118,7 @@ CREATE TABLE Core_formulario_objeto (
   url_iframe varchar(250),
   objeto_en_ventana int(1),
   informe_vinculado int(10),
+  maxima_longitud int(10) default 0,
   PRIMARY KEY  (id)
 );
 
@@ -180,6 +181,23 @@ CREATE TABLE Core_informe_condiciones (
   valor_der varchar(250),
   peso int(3) default '0',
   PRIMARY KEY (id)
+);
+
+DROP TABLE IF EXISTS Core_informe_boton;
+CREATE TABLE Core_informe_boton (
+  id int(10) AUTO_INCREMENT,
+  titulo varchar(250) default '',
+  estilo varchar(20) default '',
+  informe int(10),
+  tipo_accion varchar(250) default '',
+  accion_usuario varchar(250) default '',
+  visible int(1) default '1',
+  peso int(10),
+  retorno_titulo varchar(50) default '',
+  retorno_texto text,
+  confirmacion_texto varchar(250) default '',
+  campo_vinculoformulario varchar(250) default '',
+  PRIMARY KEY  (id)
 );
 
 DROP TABLE IF EXISTS Core_usuario_informe;

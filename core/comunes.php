@@ -596,9 +596,15 @@
 			$nombre_campo=$registro_campos["campo"];
 			$tipo_entrada="text"; // Se cambia a date si se trata de un campo con validacion de fecha
 
-			// Define cadenas de longitud de campo
+			// Especifica longitud visual de campo en caso de haber sido definida
 			$cadena_longitud_visual=' size="20" ';
-			$cadena_longitud_permitida='';
+			if ($registro_campos["ancho"]!="0")
+				$cadena_longitud_visual=' size="'.$registro_campos["ancho"].'" ';
+
+			// Especifica longitud maxima de caracteres en caso de haber sido definida
+			$cadena_longitud_permitida=' ';
+			if ($registro_campos["maxima_longitud"]!=0)
+				$cadena_longitud_permitida=' maxlength="'.$registro_campos["maxima_longitud"].'" ';
 
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
@@ -933,6 +939,71 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: cargar_objeto_lista_radio
+	Genera el codigo HTML y CSS correspondiente a los radio-button (Radio) vinculado a un campo de datos sobre un formulario
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		registro_datos_formulario - Arreglo asociativo con nombres de campo y valores cuando se hacen llamados de registro especificos
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
+	function cargar_objeto_lista_radio($registro_campos,$registro_datos_formulario)
+		{
+			global $campobase,$valorbase;
+			$salida='';
+			$nombre_campo=$registro_campos["campo"];
+
+			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
+			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
+
+			// Toma los valores desde la lista de opciones (cuando es estatico)
+			$opciones_lista = explode(",", $registro_campos["lista_opciones"]);
+			$valores_lista = explode(",", $registro_campos["lista_opciones"]);
+			
+			// Si se desea tomar los valores del combo desde una tabla hace la consulta
+			if ($registro_campos["origen_lista_opciones"]!="" && $registro_campos["origen_lista_valores"]!="")
+				{
+					$nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_opciones"]);
+					$nombre_tabla_opciones = $nombre_tabla_opciones[0];
+					$campo_valores=$registro_campos["origen_lista_valores"];
+					$campo_opciones=$registro_campos["origen_lista_opciones"];
+
+					// Consulta los campos para el tag select
+					$resultado_opciones=ejecutar_sql("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE 1 ORDER BY $campo_opciones");
+					while ($registro_opciones = $resultado_opciones->fetch())
+						{
+							$opciones_lista[] = $registro_opciones["opciones"];
+							$valores_lista[] = $registro_opciones["valores"];
+						}
+				}
+
+			for ($i=0;$i<count($opciones_lista);$i++)
+				{
+					// Determina si la opcion a agregar es la misma del valor del registro
+					$cadena_predeterminado='';
+					if ($opciones_lista[$i]==$cadena_valor)
+						$cadena_predeterminado=' SELECTED ';
+					$salida.= "<input class='Radios' type='radio' name='".$registro_campos["campo"]."' value='".$valores_lista[$i]."' ".$cadena_predeterminado.">".$opciones_lista[$i]."<br>";
+				}
+
+			// Muestra indicadores de obligatoriedad o ayuda
+			if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="El valor ingresado no acepta duplicados" name="El sistema validar&aacute; la informaci&oacute;n ingresada en este campo, en caso de ya existir en la base de datos no se permitir&aacute; su ingreso."><img src="img/key.gif" border=0 border=0 align="absmiddle"></a>';
+			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
+			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0 border=0 align="absmiddle"></a>';
+			return $salida;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: cargar_formulario
 	Genera el codigo HTML correspondiente a un formulario de la aplicacion y hace los llamados necesarios para la diagramacion por pantalla de los diferentes objetos que lo componen.
 
@@ -1057,6 +1128,7 @@
 													if ($registro_campos["tipo"]=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos,$registro_datos_formulario);
 													if ($registro_campos["tipo"]=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
 													if ($registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario);
+													if ($registro_campos["tipo"]=="lista_radio") $objeto_formateado = cargar_objeto_lista_radio($registro_campos,$registro_datos_formulario);
 													if ($registro_campos["tipo"]=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario);
 													if ($registro_campos["tipo"]=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos,$registro_datos_formulario);
 													if ($registro_campos["tipo"]=="informe") cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
@@ -1097,6 +1169,7 @@
 								if ($registro_campos["tipo"]=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos,$registro_datos_formulario);
 								if ($registro_campos["tipo"]=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
 								if ($registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario);
+								if ($registro_campos["tipo"]=="lista_radio") $objeto_formateado = cargar_objeto_lista_radio($registro_campos,$registro_datos_formulario);
 								if ($registro_campos["tipo"]=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario);
 								if ($registro_campos["tipo"]=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos,$registro_datos_formulario);
 								if ($registro_campos["tipo"]=="informe") cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);

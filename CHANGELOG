@@ -1,8 +1,37 @@
-===================
-Versión 13.2 (2013-01-15)
+########################################
+ Versión 13.2 (2013-01-15)
 
-  * 
+  * Adición de longitudes máximas para campos de texto corto
+  * Personalización del tamaño para campos de texto corto
+  * Adición de objetos para los campos de selección de tipo radio-button
+  * Botón de acceso directo a la vista previa de informes
+  * Adición de acciones para informes
 
-===================
+----------------------------------------
+ Detalles de cambios por parche:
+  >> core/formularios.php
+  >> core/comunes.php
+  >> core/informes.php
+  >> skin/nomo/general.css
+  >> ins/sql/practico.sql
+  >> index.php
+
+  >> ALTER TABLE Core_formulario_objeto ADD COLUMN maxima_longitud INT(10) DEFAULT 0;
+	CREATE TABLE Core_informe_boton (
+	  id int(10) AUTO_INCREMENT,
+	  titulo varchar(250) default '',
+	  estilo varchar(20) default '',
+	  informe int(10),
+	  tipo_accion varchar(250) default '',
+	  accion_usuario varchar(250) default '',
+	  visible int(1) default '1',
+	  peso int(10),
+	  retorno_titulo varchar(50) default '',
+	  retorno_texto text,
+	  confirmacion_texto varchar(250) default '',
+	  campo_vinculoformulario varchar(250) default '',
+	  PRIMARY KEY  (id)
+	);
+########################################
  Versión 13.1 (2013-01-15)
   * Primer lanzamiento oficial

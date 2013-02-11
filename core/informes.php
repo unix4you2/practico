@@ -477,6 +477,55 @@ if ($accion=="eliminar_informe_tabla")
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: guardar_accion_informe
+	Agrega un boton con una accion determinada para un registro desplegado por un informe tabular
+
+	Variables de entrada:
+
+		multiples - Recibidas mediante formulario unico asociado al proceso de creacion del elemento.
+
+	(start code)
+		INSERT INTO ".$TablasCore."formulario_boton VALUES (0, '$titulo','$estilo','$formulario','$tipo_accion','$accion_usuario','$visible','$peso','$retorno_titulo','$retorno_texto','$confirmacion_texto')
+	(end)
+
+	Salida:
+		Registro agregado y formulario actualizado en pantalla
+
+	Ver tambien:
+		<eliminar_accion_informe>
+*/
+	if ($accion=="guardar_accion_informe")
+		{
+			$mensaje_error="";
+			if ($titulo=="") $mensaje_error="Debe indicar un t&iacute;tulo o etiqueta v&aacute;lida para el bot&oacute;n.";
+			if ($tipo_accion=="") $mensaje_error="Debe indicar una acci&oacute;n v&aacute;lido para ser ejecutada cuando se active el control.";
+			if ($mensaje_error=="")
+				{
+					$accion_usuario=addslashes($accion_usuario);
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton VALUES (0, '$titulo','$estilo','$formulario','$tipo_accion','$accion_usuario','$visible','$peso','$retorno_titulo','$retorno_texto','$confirmacion_texto','$campo_vinculoformulario')");
+					// Lleva a auditoria
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea boton $id para informe $informe','$fecha_operacion','$hora_operacion')");
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_informe">
+						<input type="Hidden" name="informe" value="'.$informe.'">
+						<input type="Hidden" name="popup_activo" value="FormularioBotones">
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="editar_informe">
+						<input type="Hidden" name="error_titulo" value="Problema en los datos ingresados">
+						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						<input type="Hidden" name="informe" value="'.$informe.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: editar_informe
 	Actualiza la informacion asociada a un informe mediante dos ventanas.  En una se cargan los datos basicos y que pueden ser actualizados directamente.  En otra se cargan accesos a ventanas emergentes que permiten cambiar otros parámetros mas especificos.
 
@@ -1009,6 +1058,134 @@ if ($accion=="editar_informe")
 		<!-- FIN DE MARCOS POPUP -->
 		</div>
 
+
+		<!-- INICIO DE MARCOS POPUP -->
+		<div id='FormularioBotones' class="FormularioPopUps">
+			<?php
+			abrir_ventana('Agregar botones y acciones a cada registro','BDB9B9','');
+			?>
+				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+				<input type="Hidden" name="accion" value="guardar_accion_informe">
+				<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
+				<div align=center>
+							
+					<table class="TextosVentana">
+						<tr>
+							<td align="right">T&iacute;tulo o etiqueta:</td>
+							<td ><input type="text" name="titulo" size="20" class="CampoTexto">
+								<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
+								<a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; sobre el bot&oacute;n."><img src="img/icn_10.gif" border=0></a>
+							</td>
+						</tr>
+						<tr>
+							<td align="right">Estilo</td>
+							<td>
+								<select  name="estilo" class="Combos" >
+									<option value="BotonesEstado">Predeterminado - bot&oacute;n normal</option>
+									<option value="BotonesEstadoCuidado">Boton de acci&oacute;n que requiere cuidado</option>
+								</select>
+							<a href="#" title="Ayuda r&aacute;pida:" name="Apariencia gr&aacute;fica del control"><img src="img/icn_10.gif" border=0></a>	</td>
+						</tr>
+						<tr>
+							<td align="right">Tipo de acci&oacute;n</td>
+							<td>
+								<select  name="tipo_accion" class="Combos" >
+									<option value="">Seleccione una</option>
+									<optgroup label="Acciones internas">
+										<option value="interna_eliminar">Eliminar registro</option>
+										<option value="interna_cargar">Cargar un formulario asociado (Indicar campo de vinculo)</option>
+									</optgroup>
+									<optgroup label="Definidas por el usuario">
+										<option value="externa_formulario">En personalizadas.php</option>
+										<option value="externa_javascript">Comando en JavaScript</option>
+									</optgroup>
+								</select>
+							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
+							<a href="#" title="Ayuda r&aacute;pida:" name="Comando que deber&aacute; ejecutar el control al ser pulsado.  Para acciones definidas es personalizadas.php los datos del formulario ser&aacute;n enviados a esa rutina para ser procesados."><img src="img/icn_10.gif" border=0></a>	</td>
+						</tr>
+						<tr>
+							<td align="right">Comando del usuario:</td>
+							<td ><input type="text" name="accion_usuario" size="20" class="CampoTexto">
+								<a href="#" title="Ayuda r&aacute;pida:" name="Nombre de la acci&oacute;n definida en el archivo de personalizaci&oacute;n que procesar&aacute; la informaci&oacute;n o comando en JavaScript a ser ejecutado de manera inmediata en la p&aacute;gina (si requiere par&aacute;metros dentro de su comando utilice comillas sencillas para encerrarlos). Para cargar objetos de Pr&aacute;ctico como formularios o informes puede usar la misma notaci&oacute;n de menus: frm:XX:Par1:Par2:ParN o inf:XX...  El comando javascript ImprimirMarco('seccion_impresion') le permite imprimir el contenido del formulario."><img src="img/icn_10.gif" border=0></a>
+							</td>
+						</tr>
+						<tr>
+							<td align="right">Campo de v&iacute;nculo con formulario:</td>
+							<td >
+								<select name="campo_vinculoformulario" class="Combos" >
+									<option value=""></option>
+									<?php
+									$consulta_forms=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
+									while($registro = $consulta_forms->fetch())
+										{
+											$estado_seleccionado="";
+											$cadena_alias="";
+											if ($lista_etiqueta_series[$cs-1]==$registro["valor_campo"] || $lista_etiqueta_series[$cs-1]==$registro["valor_campo"]." AS ".$registro["valor_alias"]) $estado_seleccionado="SELECTED";
+											if ($registro["valor_alias"]!="") $cadena_alias=" AS ".$registro["valor_alias"];
+											echo '<option value="'.$registro["valor_campo"].$cadena_alias.'" '.$estado_seleccionado.'>'.$registro["valor_campo"].$cadena_alias.'</option>';
+										}
+									?>
+								</select>
+								<a href="#" title="Ayuda r&aacute;pida:" name="Nombre del campo que es utilizado para abrir formularios vinculados a datos con este registro.  Opera como una busqueda sobre el formulario a desplegar. Se recomienda usar campos de valor &uacute;nico."><img src="img/icn_10.gif" border=0></a>
+							</td>
+						</tr>
+						<tr>
+							<td colspan=2>
+							<table width="100%" class="TextosVentana"><tr>
+								<td align="right">Peso:</td>
+								<td>
+									<select name="peso" class="selector_01" >
+										<?php
+											for ($i=1;$i<=20;$i++)
+												echo '<option value="'.$i.'">'.$i.'</option>';
+										?>
+									</select><a href="#" title="Ayuda r&aacute;pida:" name="Posicion en la que aparece el campo dentro de la barra de estado del formulario cuando este se despliega en pantalla. Orden de izquierda a derecha."><img align="top" src="img/icn_10.gif" border=0></a>
+								</td>
+								<td align="right">Visible</td>
+								<td>
+									<select  name="visible" class="Combos" >
+										<option value="1">Si</option>
+										<option value="0">No</option>
+									</select><a href="#" title="Ayuda r&aacute;pida:" name="Determina si el control es visible o no para el usuario."><img src="img/icn_10.gif" border=0></a>
+								</td>
+							</tr></table>
+							</td>
+						</tr>
+						<tr>
+							<td align="right">T&iacute;tulo de retorno</td>
+							<td ><input type="text" name="retorno_titulo" size="20" class="CampoTexto"><a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; como encabezado en el escritorio despu&eacute;s de realizar la acci&oacute;n indicada por el usuario."><img src="img/icn_10.gif" border=0></a>	</td>
+						</tr>
+						<tr>
+							<td   valign="top" align="right">Texto de retorno</td>
+							<td  colspan=2 valign="top"><textarea name="retorno_texto" cols="25" rows="1" class="AreaTexto"></textarea>
+							<a href="#" title="Ayuda r&aacute;pida:" name="Texto completo con la descripci&oacute;n de acci&oacute;n realizada o mensaje entregado al usuario despu&eacute;s de ejecutar el control."><img align="top" src="img/icn_10.gif" border=0></a>	</td>
+						</tr>
+						<tr>
+							<td align="right">Texto de confirmaci&oacute;n</td>
+							<td ><input type="text" name="confirmacion_texto" size="20" class="CampoTexto">
+							<a href="#" title="Ayuda r&aacute;pida:" name="En caso de ser diligenciado: Texto que aparecer&aacute; como ventana emergente advirtiendo la ejecuci&oacute;n del control y esperando confirmaci&oacute;n del usuario para proceder."><img src="img/icn_10.gif" border=0></a>	</td>
+						</tr>
+
+						<tr>
+							<td>
+								</form>
+							</td>
+							<td>
+								<input type="Button"  class="Botones" value="Agregar acci&oacute;n/bot&oacute;n" onClick="document.datosfield.submit()">
+							</td>
+						</tr>
+					</table>
+				</br>
+			<?php
+				abrir_barra_estado();
+					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioBotones\')">';
+				cerrar_barra_estado();
+				cerrar_ventana();		// Cierra adicion de botones
+			?>
+		<!-- FIN DE MARCOS POPUP -->
+		</div>
+
+
 		<?php
 			// Habilita el popup activo
 			if (@$popup_activo=="FormularioTablas")	echo '<script type="text/javascript">	AbrirPopUp("FormularioTablas"); </script>';
@@ -1016,6 +1193,7 @@ if ($accion=="editar_informe")
 			if (@$popup_activo=="FormularioCondiciones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioCondiciones"); </script>';
 			if (@$popup_activo=="FormularioGraficos")	echo '<script type="text/javascript">	AbrirPopUp("FormularioGraficos"); </script>';
 			if (@$popup_activo=="FormularioAgrupacion")	echo '<script type="text/javascript">	AbrirPopUp("FormularioAgrupacion"); </script>';
+			if (@$popup_activo=="FormularioBotones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioBotones"); </script>';
 		?>
 
 		<table><tr><td valign=top>
@@ -1043,6 +1221,18 @@ if ($accion=="editar_informe")
 					<hr>
 					Propiedades del Gr&aacute;fico<br>
 					<a href='javascript:AbrirPopUp("FormularioGraficos");' title="Define las propiedades y apariencia del gr&aacute;fico desplegado por el informe"><img border='0' src='img/icono_grafico.png'/></a>
+				<?php
+						}// Fin si es grafico
+				?>
+
+				<?php
+					// Si se trata de un informe tabular permite agregarle acciones a los registros
+					if ($registro_informe['formato_final']=='T')
+						{
+				?>
+					<hr>
+					Acciones para cada registro<br>
+					<a href='javascript:AbrirPopUp("FormularioBotones");' title="Define acciones que pueden ser ejecutadas sobre cada registro desplegado por el informe como Elimina, Abrir un formulario, funciones de usuario, etc."><img border='0' src='img/icono_boton.png'/></a>
 				<?php
 						}// Fin si es grafico
 				?>
@@ -1134,6 +1324,30 @@ if ($accion=="editar_informe")
 						</td>
 						<td>
 							<input type="Button"  class="Botones" value="Actualizar informe" onClick="document.datos.submit()">
+						</td>
+					</tr>
+				</table>
+			<?php
+				cerrar_ventana();
+			?>
+
+
+			<?php abrir_ventana('Vista previa del informe','f2f2f2',''); ?>
+
+			<form action="<?php echo $ArchivoCORE; ?>" method="post" name="datosprevios" id="datosprevios" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+			
+			<input type="hidden" name="accion" value="cargar_objeto">
+			<input type="hidden" name="objeto" value="inf:<?php echo $registro_informe['id']; ?>:1:htm:Informes:0">
+			</form>
+
+				<table width="100%" class="TextosVentana">
+					<tr>
+						<td>
+							</form>
+						</td>
+						<td align=center>
+							Esta opci&oacute;n cerrar&aacute; el modo de dise&ntilde;o<br> y cargar&aacute; el informe tal y como ser&aacute; visualizado<br> por un usuario de la aplicaci&oacute;n: <br>
+							<input type="Button"  class="Botones" value="Cargar vista previa" onClick="document.datosprevios.submit()">
 						</td>
 					</tr>
 				</table>

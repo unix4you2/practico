@@ -317,7 +317,7 @@
 			if ($campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error="Debe indicar un campo v&aacute;lido para vincular con la tabla de datos asociada al formulario.";
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto VALUES (0,'$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores','$valor_etiqueta','$url_iframe','$objeto_en_ventana','$informe_vinculado')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto VALUES (0,'$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores','$valor_etiqueta','$url_iframe','$objeto_en_ventana','$informe_vinculado','$maxima_longitud')");
 					// Lleva a auditoria
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea campo $id para formulario $formulario','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
@@ -438,12 +438,13 @@ if ($accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(24);
+					OcultarCampos(25);
 					// Muestra campos segun tipo de objeto
-					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,13,17");
+					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,13,14,17,25");
 					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17");
 					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17");
 					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,17,18,19,20");
+					if (tipo_objeto_activo=="lista_radio") VisualizarCampos("1,2,7,8,9,10,17,18,19,20");
 					if (tipo_objeto_activo=="etiqueta")   VisualizarCampos("9,17,21");
 					if (tipo_objeto_activo=="url_iframe")   VisualizarCampos("9,14,15,17,22,24");
 					if (tipo_objeto_activo=="informe")   VisualizarCampos("9,17,23,24");
@@ -476,7 +477,8 @@ if ($accion=="editar_formulario")
 										<option value="texto_corto">Campo de texto corto</option>
 										<option value="texto_largo">Campo de texto libre</option>
 										<option value="texto_formato">Campo de texto con formato enriquecido</option>
-										<option value="lista_seleccion">Campo de selecci&oacute;n (ComboBox)</option>
+										<option value="lista_seleccion">Campo de selecci&oacute;n (ComboBox o lista desplegable)</option>
+										<option value="lista_radio">Campo de selecci&oacute;n (RadioButton)</option>
 									</optgroup>
 									<!--
 									<optgroup label="Informaci&oacute;n externa">
@@ -725,7 +727,6 @@ if ($accion=="editar_formulario")
 							</table>
 						</div>
 
-
 						<div id='campo15' style="display:none;">
 							<table class="TextosVentana">
 							<tr>
@@ -814,7 +815,7 @@ if ($accion=="editar_formulario")
 											}
 									?>
 									</select>
-									<a href="#" title="Debe especificar el mismo origen de la lista de valores" name=""><img src="img/icn_12.gif" border=0></a>
+									<a href="#" title="Debe especificar el mismo origen (tabla) de la lista de valores" name=""><img src="img/icn_12.gif" border=0></a>
 									<a href="#" title="Que es esto?" name="Campo desde el cual se toman las opciones que despliega la lista."><img src="img/icn_10.gif" border=0></a>
 								</td>
 							</tr>
@@ -849,7 +850,7 @@ if ($accion=="editar_formulario")
 											}
 									?>
 									</select>
-									<a href="#" title="Debe especificar el mismo origen de la lista de opciones" name=""><img src="img/icn_12.gif" border=0></a>
+									<a href="#" title="Debe especificar el mismo origen (tabla) de la lista de opciones" name=""><img src="img/icn_12.gif" border=0></a>
 									<a href="#" title="Que es esto?" name="Campo desde el cual se toman los valores internos (a ser procesados) para cada opcion de la lista."><img src="img/icn_10.gif" border=0></a>
 								</td>
 							</tr>
@@ -936,6 +937,18 @@ if ($accion=="editar_formulario")
 							</table>
 						</div>
 
+
+						<div id='campo25' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right">Longitud m&aacute;xima:</td>
+								<td width="400" ><input type="text" name="maxima_longitud" size="4" class="CampoTexto">
+									<a href="#" title="Cu&aacute;ntos caracteres permite el campo?"><img src="img/icn_10.gif" border=0></a>
+									<i>(Valor entre 1 y N, 0 para deshabilitar el l&iacute;mite)</i>
+								</td>
+							</tr>
+							</table>
+						</div>
 
 					<table class="TextosVentana">
 						<tr>
@@ -1374,7 +1387,7 @@ if ($accion=="editar_formulario")
 			<?php
 				cerrar_ventana();
 			?>
-			
+
 		<?php
 		echo '</td><td valign=top align=center>';  // Inicia segunda columna del diseñador
 			cargar_formulario($formulario);
