@@ -547,7 +547,7 @@ if ($accion=="eliminar_informe_tabla")
 			if ($mensaje_error=="")
 				{
 					$accion_usuario=addslashes($accion_usuario);
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton VALUES (0, '$titulo','$estilo','$informe','$tipo_accion','$accion_usuario','$visible','$peso','$confirmacion_texto','$campo_vinculoformulario')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton VALUES (0, '$titulo','$estilo','$informe','$tipo_accion','$accion_usuario','$visible','$peso','$confirmacion_texto')");
 					// Lleva a auditoria
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea boton $id para informe $informe','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_informe">
@@ -1185,6 +1185,7 @@ if ($accion=="editar_informe")
 							<td ><input type="text" name="accion_usuario" size="20" class="CampoTexto">
 								<a href="#" title="Ayuda r&aacute;pida:" name="Nombre de la acci&oacute;n definida en el archivo de personalizaci&oacute;n que procesar&aacute; la informaci&oacute;n o comando en JavaScript a ser ejecutado de manera inmediata en la p&aacute;gina (si requiere par&aacute;metros dentro de su comando utilice comillas sencillas para encerrarlos). Para cargar objetos de Pr&aacute;ctico como formularios o informes puede usar la misma notaci&oacute;n de menus: frm:XX:Par1:Par2:ParN o inf:XX...  El comando javascript ImprimirMarco('seccion_impresion') le permite imprimir el contenido del formulario."><img src="img/icn_10.gif" border=0></a>
 								<br>Si desea cargar un formulario utilice la notaci&oacute;n  ID:1:CampoBusqueda
+								<br>Se desea eliminar el registro asociado indique la tabla.campo usada para comparar
 							</td>
 						</tr>
 						<tr>

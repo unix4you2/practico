@@ -194,7 +194,6 @@ CREATE TABLE Core_informe_boton (
   visible int(1) default '1',
   peso int(10),
   confirmacion_texto varchar(250) default '',
-  campo_vinculoformulario varchar(250) default '',
   PRIMARY KEY  (id)
 );
 
