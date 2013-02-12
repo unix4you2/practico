@@ -15,7 +15,7 @@
   >> skin/nomo/general.css
   >> ins/sql/practico.sql
   >> index.php
-
+  
   >> ALTER TABLE Core_formulario_objeto ADD COLUMN maxima_longitud INT(10) DEFAULT 0;
 	CREATE TABLE Core_informe_boton (
 	  id int(10) AUTO_INCREMENT,

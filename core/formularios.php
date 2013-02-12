@@ -79,7 +79,7 @@
 					// Inserta los datos
 					ejecutar_sql_unaria("DELETE FROM ".$tabla." WHERE $campo='$valor'");
 					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Inserta registro en ".$registro_formulario["tabla_datos"]."','$fecha_operacion','$hora_operacion')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina registro donde ".$campo." = ".$valor." en ".$tabla."','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -236,7 +236,7 @@
 			else
 				{
 					mensaje('<blink>Error eliminando tabla de datos!</blink>','La acci&oacute;n especificada no se puede eliminar.','60%','icono_error.png','TextosEscritorio');
-					echo '<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="accion" value="administrar_tablas"></form>
+					echo '<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="accion" value="Ver_menu"></form>
 						<br /><input type="Button" onclick="document.cancelar.submit()" name="" value="Cerrar" class="Botones">';
 				}
 		}
@@ -1214,6 +1214,7 @@ if ($accion=="editar_formulario")
 														<input type="Hidden" name="popup_activo" value="FormularioDiseno">
 												</form>
 										</td>
+										<!--
 										<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 														<input type="hidden" name="accion" value="editar_campo_formulario">
@@ -1223,7 +1224,7 @@ if ($accion=="editar_formulario")
 														<input type="Button" value="Editar (Deshabilitado)"  class="Botones">
 														<input type="Hidden" name="popup_activo" value="FormularioDiseno">
 												</form>
-										</td>';
+										</td>-->';
 									}
 								else
 									{
@@ -1263,7 +1264,7 @@ if ($accion=="editar_formulario")
 							<td></td>
 						</tr>
 			 <?php
-				$consulta_botones=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario' ORDER BY peso,titulo");
+				$consulta_botones=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario' ORDER BY peso,id");
 				while($registro = $consulta_botones->fetch())
 					{
 						$peso_aumentado=$registro["peso"]+1;
@@ -1332,6 +1333,7 @@ if ($accion=="editar_formulario")
 														<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 												</form>
 										</td>
+										<!--
 										<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 														<input type="hidden" name="accion" value="editar_campo_formulario">
@@ -1341,11 +1343,11 @@ if ($accion=="editar_formulario")
 														<input type="Button" value="Editar (Deshabilitado)"  class="Botones">
 														<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 												</form>
-										</td>';
+										</td>-->';
 
 							echo '</tr>';
 					}
-				echo '</table>';			
+				echo '</table>';
 			?>
 				
 			</div>

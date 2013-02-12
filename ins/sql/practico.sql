@@ -193,8 +193,6 @@ CREATE TABLE Core_informe_boton (
   accion_usuario varchar(250) default '',
   visible int(1) default '1',
   peso int(10),
-  retorno_titulo varchar(50) default '',
-  retorno_texto text,
   confirmacion_texto varchar(250) default '',
   campo_vinculoformulario varchar(250) default '',
   PRIMARY KEY  (id)

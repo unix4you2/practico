@@ -32,6 +32,51 @@
 
 
 <?php 
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: eliminar_accion_informe
+	Elimina un boton creado para los registros desplegados por un informe tabular
+
+	Variables de entrada:
+
+		boton - ID unico del boton sobre el cual se realiza la operacion de eliminacion
+
+	(start code)
+		DELETE FROM ".$TablasCore."informe_boton WHERE id='$boton'
+	(end)
+
+	Salida:
+		Registro de boton eliminado e informe actualizado
+*/
+	if ($accion=="eliminar_accion_informe")
+		{
+			$mensaje_error="";
+			if ($mensaje_error=="")
+				{
+					// Crea la tabla temporal
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_boton WHERE id='$boton' ");
+					// Lleva a auditoria
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina accion del informe $informe','$fecha_operacion','$hora_operacion')");
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="accion" value="editar_informe">
+					<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+					<input type="Hidden" name="informe" value="'.$informe.'">
+					<input type="Hidden" name="popup_activo" value="FormularioAcciones">
+					</form>
+							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+			else
+				{
+					mensaje('<blink>Error eliminando tabla de datos!</blink>','La acci&oacute;n especificada no se puede eliminar.','60%','icono_error.png','TextosEscritorio');
+					echo '<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="accion" value="Ver_menu"></form>
+						<br /><input type="Button" onclick="document.cancelar.submit()" name="" value="Cerrar" class="Botones">';
+				}
+		}
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -502,7 +547,7 @@ if ($accion=="eliminar_informe_tabla")
 			if ($mensaje_error=="")
 				{
 					$accion_usuario=addslashes($accion_usuario);
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton VALUES (0, '$titulo','$estilo','$formulario','$tipo_accion','$accion_usuario','$visible','$peso','$retorno_titulo','$retorno_texto','$confirmacion_texto','$campo_vinculoformulario')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton VALUES (0, '$titulo','$estilo','$informe','$tipo_accion','$accion_usuario','$visible','$peso','$confirmacion_texto','$campo_vinculoformulario')");
 					// Lleva a auditoria
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Crea boton $id para informe $informe','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_informe">
@@ -520,6 +565,36 @@ if ($accion=="eliminar_informe_tabla")
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: eliminar_registro_informe
+	Elimina los registros coincidentes con los datos de un boton de accion sobre un informe tabular
+
+	Variables de entrada:
+
+		tabla - nombre de la tabla sobre la que se hace la operacion
+		campo - nombre del campo que debe ser usado para filtrar
+		valor - valor a comparar sobre el campo y que es usado para determinar que registro eliminar
+
+	(start code)
+		DELETE FROM ".$tabla." WHERE $campo='$valor'
+	(end)
+
+	Salida:
+		Registro eliminado de la tabla de aplicacion
+
+*/
+	if ($accion=="eliminar_registro_informe")
+		{
+			$mensaje_error="";
+			ejecutar_sql_unaria("DELETE FROM ".$tabla." WHERE $campo='$valor'");
+			// Lleva a auditoria
+			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina registro donde ".$campo." = ".$valor." en ".$tabla."','$fecha_operacion','$hora_operacion')");
+			echo '<script language="JavaScript"> document.core_ver_menu.submit();  </script>';
 		}
 
 
@@ -1081,8 +1156,10 @@ if ($accion=="editar_informe")
 							<td align="right">Estilo</td>
 							<td>
 								<select  name="estilo" class="Combos" >
-									<option value="BotonesEstado">Predeterminado - bot&oacute;n normal</option>
-									<option value="BotonesEstadoCuidado">Boton de acci&oacute;n que requiere cuidado</option>
+									<option value="BotonesEstado">Predeterminado - bot&oacute;n normal (peque&ntilde;o)</option>
+									<option value="BotonesEstadoCuidado">Boton de acci&oacute;n que requiere cuidado (peque&ntilde;o)</option>
+									<option value="Botones">Bot&oacute;n normal (grande)</option>
+									<option value="BotonesCuidado">Boton de acci&oacute;n que requiere cuidado (grande)</option>
 								</select>
 							<a href="#" title="Ayuda r&aacute;pida:" name="Apariencia gr&aacute;fica del control"><img src="img/icn_10.gif" border=0></a>	</td>
 						</tr>
@@ -1093,7 +1170,7 @@ if ($accion=="editar_informe")
 									<option value="">Seleccione una</option>
 									<optgroup label="Acciones internas">
 										<option value="interna_eliminar">Eliminar registro</option>
-										<option value="interna_cargar">Cargar un formulario asociado (Indicar campo de vinculo)</option>
+										<option value="interna_cargar">Cargar un formulario por ID</option>
 									</optgroup>
 									<optgroup label="Definidas por el usuario">
 										<option value="externa_formulario">En personalizadas.php</option>
@@ -1107,11 +1184,17 @@ if ($accion=="editar_informe")
 							<td align="right">Comando del usuario:</td>
 							<td ><input type="text" name="accion_usuario" size="20" class="CampoTexto">
 								<a href="#" title="Ayuda r&aacute;pida:" name="Nombre de la acci&oacute;n definida en el archivo de personalizaci&oacute;n que procesar&aacute; la informaci&oacute;n o comando en JavaScript a ser ejecutado de manera inmediata en la p&aacute;gina (si requiere par&aacute;metros dentro de su comando utilice comillas sencillas para encerrarlos). Para cargar objetos de Pr&aacute;ctico como formularios o informes puede usar la misma notaci&oacute;n de menus: frm:XX:Par1:Par2:ParN o inf:XX...  El comando javascript ImprimirMarco('seccion_impresion') le permite imprimir el contenido del formulario."><img src="img/icn_10.gif" border=0></a>
+								<br>Si desea cargar un formulario utilice la notaci&oacute;n  ID:1:CampoBusqueda
 							</td>
 						</tr>
 						<tr>
-							<td align="right">Campo de v&iacute;nculo con formulario:</td>
+							<td align="right">Campo de v&iacute;nculo:</td>
 							<td >
+								<br>IMPORTANTE: Se asumir&aacute; el primer campo o columna como de valor &uacute;nico<br>
+								para realizar las operaciones de eliminaci&oacute;n o apertura de<br>
+								nuevos formularios.  Se recomienda utilizar campos que realmente sean de<br>
+								valor &uacute;nico a menos que se deseen operaciones grupales.<br>
+								<!--
 								<select name="campo_vinculoformulario" class="Combos" >
 									<option value=""></option>
 									<?php
@@ -1127,6 +1210,7 @@ if ($accion=="editar_informe")
 									?>
 								</select>
 								<a href="#" title="Ayuda r&aacute;pida:" name="Nombre del campo que es utilizado para abrir formularios vinculados a datos con este registro.  Opera como una busqueda sobre el formulario a desplegar. Se recomienda usar campos de valor &uacute;nico."><img src="img/icn_10.gif" border=0></a>
+								-->
 							</td>
 						</tr>
 						<tr>
@@ -1150,15 +1234,6 @@ if ($accion=="editar_informe")
 								</td>
 							</tr></table>
 							</td>
-						</tr>
-						<tr>
-							<td align="right">T&iacute;tulo de retorno</td>
-							<td ><input type="text" name="retorno_titulo" size="20" class="CampoTexto"><a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; como encabezado en el escritorio despu&eacute;s de realizar la acci&oacute;n indicada por el usuario."><img src="img/icn_10.gif" border=0></a>	</td>
-						</tr>
-						<tr>
-							<td   valign="top" align="right">Texto de retorno</td>
-							<td  colspan=2 valign="top"><textarea name="retorno_texto" cols="25" rows="1" class="AreaTexto"></textarea>
-							<a href="#" title="Ayuda r&aacute;pida:" name="Texto completo con la descripci&oacute;n de acci&oacute;n realizada o mensaje entregado al usuario despu&eacute;s de ejecutar el control."><img align="top" src="img/icn_10.gif" border=0></a>	</td>
 						</tr>
 						<tr>
 							<td align="right">Texto de confirmaci&oacute;n</td>
@@ -1186,6 +1261,118 @@ if ($accion=="editar_informe")
 		</div>
 
 
+		<!-- INICIO DE MARCOS POPUP -->
+		<div id='FormularioAcciones' class="FormularioPopUps">
+			<?php
+				abrir_ventana('Definici&oacute;n general de acciones y comandos','#BDB9B9','');
+			?>
+					<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
+						<tr>
+							<td bgcolor="#D6D6D6"><b>Etiqueta</b></td>
+							<td bgcolor="#d6d6d6"><b>Tipo de acci&oacute;n</b></td>
+							<td bgcolor="#d6d6d6"><b>Acci&oacute;n Usuario</b></td>
+							<td bgcolor="#d6d6d6"><b>Orden</b></td>
+							<td bgcolor="#d6d6d6"><b>Visible</b></td>
+							<td></td>
+							<td></td>
+						</tr>
+			 <?php
+				$consulta_botones=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_boton WHERE informe='$informe' ORDER BY peso,id");
+				while($registro = $consulta_botones->fetch())
+					{
+						$peso_aumentado=$registro["peso"]+1;
+						if ($registro["peso"]-1>=1) $peso_disminuido=$registro["peso"]-1;
+						echo '<tr>
+								<td><b>'.$registro["titulo"].'</b></td>
+								<td><b>'.$registro["tipo_accion"].'</b></td>
+								<td>'.$registro["accion_usuario"].'</td>';
+						echo '		<td align=center>
+										<form action="'.$ArchivoCORE.'" method="POST" name="bifoce'.$registro["id"].'" id="bifoce'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+											<input type="hidden" name="accion" value="cambiar_estado_campo">
+											<input type="hidden" name="id" value="'.$registro["id"].'">
+											<input type="hidden" name="tabla" value="informe_boton">
+											<input type="hidden" name="campo" value="peso">
+											<input type="hidden" name="informe" value="'.$informe.'">
+											<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+											<input type="hidden" name="accion_retorno" value="editar_informe">
+											<input type="hidden" name="valor" value="'.$peso_aumentado.'">
+											<input type="Hidden" name="popup_activo" value="FormularioAcciones">
+										</form>
+										<form action="'.$ArchivoCORE.'" method="POST" name="bifopa'.$registro["id"].'" id="bifopa'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+											<input type="hidden" name="accion" value="cambiar_estado_campo">
+											<input type="hidden" name="id" value="'.$registro["id"].'">
+											<input type="hidden" name="tabla" value="informe_boton">
+											<input type="hidden" name="campo" value="peso">
+											<input type="hidden" name="informe" value="'.$informe.'">
+											<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+											<input type="hidden" name="accion_retorno" value="editar_informe">
+											<input type="hidden" name="valor" value="'.$peso_disminuido.'">
+											<input type="Hidden" name="popup_activo" value="FormularioAcciones">
+										</form>
+									';
+
+									echo '
+										<a href="javascript:bifoce'.$registro["id"].'.submit();" title="Aumentar peso (bajar)" name=""><img src="img/bajar.png" border=0></a> 
+										'.$registro["peso"].'
+										<a href="javascript:bifopa'.$registro["id"].'.submit();" title="Disminuir peso (subir)" name=""><img src="img/subir.png" border=0></a>
+										';
+								
+								echo '</td>';
+								
+								
+								echo '<td align=center>
+											<form action="'.$ArchivoCORE.'" method="POST" name="bif'.$registro["id"].'" id="bif'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+												<input type="hidden" name="accion" value="cambiar_estado_campo">
+												<input type="hidden" name="id" value="'.$registro["id"].'">
+												<input type="hidden" name="tabla" value="informe_boton">
+												<input type="hidden" name="campo" value="visible">
+												<input type="hidden" name="informe" value="'.$informe.'">
+												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+												<input type="hidden" name="accion_retorno" value="editar_informe">
+												<input type="Hidden" name="popup_activo" value="FormularioAcciones">
+											';
+									if ($registro["visible"])
+										echo '<input type="hidden" name="valor" value="0"><a href="javascript:bif'.$registro["id"].'.submit();" title="Cambiar estado" name=""><img src="img/on.png" border=0></a>';
+									else
+										echo '<input type="hidden" name="valor" value="1"><a href="javascript:bif'.$registro["id"].'.submit();" title="Cambiar estado" name=""><img src="img/off.png" border=0></a>';
+								echo '</form></td>';
+										echo '<td align="center">
+												<form action="'.$ArchivoCORE.'" method="POST" name="bf'.$registro["id"].'" id="bf'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+														<input type="hidden" name="accion" value="eliminar_accion_informe">
+														<input type="hidden" name="boton" value="'.$registro["id"].'">
+														<input type="hidden" name="informe" value="'.$informe.'">
+														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+														<input type="button" value="Eliminar"  class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar el bot&oacute;n/acci&oacute;n los usuarios no podr&aacute;n verlo o ejecutar el comando asociado a este y no podr&aacute; deshacer esta operaci&oacute;n luego.\nEst&aacute; seguro que desea continuar ?\',bf'.$registro["id"].');">
+														<input type="Hidden" name="popup_activo" value="FormularioAcciones">
+												</form>
+										</td>
+										<!--<td align="center">
+												<form action="'.$ArchivoCORE.'" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+														<input type="hidden" name="accion" value="editar_campo_formulario">
+														<input type="hidden" name="campo" value="'.$registro["id"].'">
+														<input type="hidden" name="formulario" value="'.$formulario.'">
+														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+														<input type="Button" value="Editar (Deshabilitado)"  class="Botones">
+														<input type="Hidden" name="popup_activo" value="FormularioAcciones">
+												</form>
+										</td>-->';
+
+							echo '</tr>';
+					}
+				echo '</table>';
+			?>
+				
+			</div>
+			<?php
+				abrir_barra_estado();
+					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioAcciones\')">';
+				cerrar_barra_estado();
+				cerrar_ventana();
+			?>
+		<!-- FIN DE MARCOS POPUP -->
+		</div>
+
+
 		<?php
 			// Habilita el popup activo
 			if (@$popup_activo=="FormularioTablas")	echo '<script type="text/javascript">	AbrirPopUp("FormularioTablas"); </script>';
@@ -1194,6 +1381,7 @@ if ($accion=="editar_informe")
 			if (@$popup_activo=="FormularioGraficos")	echo '<script type="text/javascript">	AbrirPopUp("FormularioGraficos"); </script>';
 			if (@$popup_activo=="FormularioAgrupacion")	echo '<script type="text/javascript">	AbrirPopUp("FormularioAgrupacion"); </script>';
 			if (@$popup_activo=="FormularioBotones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioBotones"); </script>';
+			if (@$popup_activo=="FormularioAcciones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioAcciones"); </script>';
 		?>
 
 		<table><tr><td valign=top>
@@ -1233,6 +1421,8 @@ if ($accion=="editar_informe")
 					<hr>
 					Acciones para cada registro<br>
 					<a href='javascript:AbrirPopUp("FormularioBotones");' title="Define acciones que pueden ser ejecutadas sobre cada registro desplegado por el informe como Elimina, Abrir un formulario, funciones de usuario, etc."><img border='0' src='img/icono_boton.png'/></a>
+					&nbsp;&nbsp;
+					<a href='javascript:AbrirPopUp("FormularioAcciones");' title="Definici&oacute;n general de acciones"><img border='0' src='img/icono_acciones.png'/></a>
 				<?php
 						}// Fin si es grafico
 				?>

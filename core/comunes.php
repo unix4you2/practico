@@ -1421,6 +1421,57 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 						echo '<table class="font-size: 11px; font-family: Verdana, Tahoma, Arial;">
 							<thead><tr>';
 
+
+					// Busca si el informe tiene acciones (botones), los cuenta y prepara dentro de un arreglo para repetir en cada registro
+					$consulta_botones=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_boton WHERE informe='$informe' AND visible=1 ORDER BY peso");
+					$total_botones=0;
+					while($registro_botones=$consulta_botones->fetch())
+						{
+							//Construye una cadena generica con todos los botones para ser reemplazada luego con valores
+							if ($registro_botones["tipo_accion"]=="interna_eliminar")
+								{
+									$tabla_vinculada=explode(".",$registro_botones["campo_vinculoformulario"])[0];
+									$campo_vinculado=explode(".",$registro_botones["campo_vinculoformulario"])[1];
+									$comando_javascript="
+										document.FRMBASEINFORME.accion.value='eliminar_registro_informe';
+										document.FRMBASEINFORME.tabla.value='".$tabla_vinculada."';
+										document.FRMBASEINFORME.campo.value='".$campo_vinculado."';
+										document.FRMBASEINFORME.valor.value='DELFRMVALVALOR';
+										document.FRMBASEINFORME.submit()";
+								}
+							if ($registro_botones["tipo_accion"]=="interna_cargar")
+								{
+									$comando_javascript="
+										document.FRMBASEINFORME.accion.value='cargar_objeto';
+										document.FRMBASEINFORME.objeto.value='frm:".$registro_botones["accion_usuario"].":DETFRMVALBASE';
+										document.FRMBASEINFORME.submit()";
+								}
+							if ($registro_botones["tipo_accion"]=="externa_formulario")
+								{
+									$comando_javascript="
+										document.FRMBASEINFORME.accion.value='".$registro_botones["accion_usuario"]."';
+										document.FRMBASEINFORME.submit()";
+								}
+							if ($registro_botones["tipo_accion"]=="externa_javascript")
+								{
+									$comando_javascript=$registro_botones["accion_usuario"];
+								}
+							$cadena_javascript='onclick="'.@$comando_javascript.'"';
+							$cadena_generica_botones.='<input type="Button"  class="'.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.$cadena_javascript.' >';
+							$total_botones++;
+						}
+					//Si el informe tiene botones se agrega el formulario para procesar las acciones
+					if ($total_botones>0)
+						{
+							echo '<form name="FRMBASEINFORME" action="'.$ArchivoCORE.'" method="POST">
+								<input type="Hidden" name="accion" value="">
+								<input type="Hidden" name="tabla" value="">
+								<input type="Hidden" name="campo" value="">
+								<input type="Hidden" name="valor" value="">
+								<input type="Hidden" name="objeto" value="">
+								</form>';
+						}
+
 					// Imprime encabezados de columna
 					$resultado_columnas=ejecutar_sql($consulta);
 					$numero_columnas=0;
@@ -1429,6 +1480,10 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							echo '<th align="LEFT">'.$key.'</th>';
 							$numero_columnas++;
 						}
+
+					//Si el informe tiene botones entonces agrega columna adicional
+					if ($total_botones>0)
+						echo '<th align="LEFT"></th>';
 					echo '</tr></thead><tbody>';
 
 					// Imprime registros del resultado
@@ -1439,6 +1494,15 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							echo '<tr>';
 							for ($i=0;$i<$numero_columnas;$i++)
 								echo '<td align=left>'.$registro_informe[$i].'</td>';
+							//Si el informe tiene botones los agrega
+							if ($total_botones>0)
+								{
+									//Transforma la cadena generica con los datos especificos del registro, toma por ahora el primer campo
+									$cadena_botones_registro=str_replace("DELFRMVALVALOR",$registro_informe[0],$cadena_generica_botones);
+									$cadena_botones_registro=str_replace("DETFRMVALBASE",$registro_informe[0],$cadena_botones_registro);
+									//Muestra los botones preparados para el registro
+									echo '<th align="LEFT">'.$cadena_botones_registro.'</th>';
+								}
 							echo '</tr>';
 							$numero_filas++;
 						}
@@ -1612,7 +1676,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			if ($mensaje_error=="")
 				{
 					ejecutar_sql_unaria("UPDATE ".$TablasCore."$tabla SET $campo = $valor WHERE id = '$id'");
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Cambia estado del campo $campo en formulario $formulario','$fecha_operacion','$hora_operacion')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Cambia estado del campo $campo en objetoID $formulario','$fecha_operacion','$hora_operacion')");
 
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="'.$accion_retorno.'">
