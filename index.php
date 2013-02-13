@@ -130,7 +130,7 @@
 
 /* ################################################################## */
 	// Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios
-	include("personalizadas.php");  
+	include("mod/personalizadas.php");  
 
 	// Finaliza el contenido central y presenta el pie de pagina de aplicacion
 	include("core/marco_abajo.php");

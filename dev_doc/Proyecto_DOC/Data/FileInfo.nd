@@ -60,7 +60,7 @@ JavaScript
 /mnt/datos/WebServer/practico/inc/ckeditor/plugins/autogrow/plugin.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/plugins/autogrow/plugin.js
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/es.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/es.js
 /mnt/datos/WebServer/practico/wzd/tbl_entregas.txt	1354043060	0	/mnt/datos/WebServer/practico/wzd/tbl_entregas.txt
-/mnt/datos/WebServer/practico/ins/sql/practico.sql	1357224848	0	/mnt/datos/WebServer/practico/ins/sql/practico.sql
+/mnt/datos/WebServer/practico/ins/sql/practico.sql	1360704044	0	/mnt/datos/WebServer/practico/ins/sql/practico.sql
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/gl.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/gl.js
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/hr.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/hr.js
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/eu.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/eu.js
@@ -80,10 +80,10 @@ JavaScript
 /mnt/datos/WebServer/practico/inc/ckeditor/plugins/tableresize/plugin.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/plugins/tableresize/plugin.js
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/de.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/de.js
 /mnt/datos/WebServer/practico/inc/libchart/classes/view/primitive/Primitive.php	1311766149	0	/mnt/datos/WebServer/practico/inc/libchart/classes/view/primitive/Primitive.php
-/mnt/datos/WebServer/practico/inc/version_actual.txt	1354043060	0	/mnt/datos/WebServer/practico/inc/version_actual.txt
+/mnt/datos/WebServer/practico/inc/version_actual.txt	1360765097	0	/mnt/datos/WebServer/practico/inc/version_actual.txt
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/zh.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/zh.js
 /mnt/datos/WebServer/practico/inc/ckeditor/plugins/a11yhelp/lang/en.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/plugins/a11yhelp/lang/en.js
-/mnt/datos/WebServer/practico/core/informes.php	1358278278	1	Modulo informes
+/mnt/datos/WebServer/practico/core/informes.php	1360704281	1	Modulo informes
 /mnt/datos/WebServer/practico/inc/libchart/classes/view/color/Palette.php	1311766150	0	/mnt/datos/WebServer/practico/inc/libchart/classes/view/color/Palette.php
 /mnt/datos/WebServer/practico/inc/libchart/classes/view/caption/Caption.php	1311766149	0	/mnt/datos/WebServer/practico/inc/libchart/classes/view/caption/Caption.php
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/it.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/it.js
@@ -113,7 +113,7 @@ JavaScript
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/lt.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/lt.js
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/eo.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/eo.js
 /mnt/datos/WebServer/practico/tmp/anotaciones.txt	1354043060	0	/mnt/datos/WebServer/practico/tmp/anotaciones.txt
-/mnt/datos/WebServer/practico/personalizadas.php	1357653390	1	Funciones personalizadas
+/mnt/datos/WebServer/practico/personalizadas.php	1360698437	1	Funciones personalizadas
 /mnt/datos/WebServer/practico/inc/zonas_horarias.txt	1354043060	0	/mnt/datos/WebServer/practico/inc/zonas_horarias.txt
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/no.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/no.js
 /mnt/datos/WebServer/practico/inc/ckeditor/plugins/uicolor/lang/he.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/plugins/uicolor/lang/he.js
@@ -137,7 +137,7 @@ JavaScript
 /mnt/datos/WebServer/practico/inc/libchart/classes/view/chart/VerticalBarChart.php	1311766149	0	/mnt/datos/WebServer/practico/inc/libchart/classes/view/chart/VerticalBarChart.php
 /mnt/datos/WebServer/practico/inc/ckeditor/config.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/config.js
 /mnt/datos/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/radio.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/radio.js
-/mnt/datos/WebServer/practico/core/formularios.php	1358362568	1	Modulo formularios
+/mnt/datos/WebServer/practico/core/formularios.php	1360703807	1	Modulo formularios
 /mnt/datos/WebServer/practico/inc/ckeditor/adapters/jquery.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/adapters/jquery.js
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/fr.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/fr.js
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/_languages.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/_languages.js
@@ -182,7 +182,7 @@ JavaScript
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/fr-ca.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/fr-ca.js
 /mnt/datos/WebServer/practico/inc/ckeditor/ckeditor_php5.php	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/ckeditor_php5.php
 /mnt/datos/WebServer/practico/inc/ckeditor/plugins/scayt/dialogs/options.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/plugins/scayt/dialogs/options.js
-/mnt/datos/WebServer/practico/core/comunes.php	1358366062	1	Libreria base
+/mnt/datos/WebServer/practico/core/comunes.php	1360704177	1	Libreria base
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/bs.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/bs.js
 /mnt/datos/WebServer/practico/ins/core/marco_arriba.php	1357215960	0	/mnt/datos/WebServer/practico/ins/core/marco_arriba.php
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/ro.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/ro.js
@@ -197,6 +197,6 @@ JavaScript
 /mnt/datos/WebServer/practico/inc/ckeditor/ckeditor_basic_source.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/ckeditor_basic_source.js
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/ru.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/ru.js
 /mnt/datos/WebServer/practico/inc/ckeditor/lang/en.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/lang/en.js
-/mnt/datos/WebServer/practico/index.php	1358338556	1	Articulador
+/mnt/datos/WebServer/practico/index.php	1360703297	1	Articulador
 /mnt/datos/WebServer/practico/inc/ckeditor/ckeditor_basic.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/ckeditor_basic.js
 /mnt/datos/WebServer/practico/inc/ckeditor/plugins/ajax/plugin.js	1354043060	0	/mnt/datos/WebServer/practico/inc/ckeditor/plugins/ajax/plugin.js
