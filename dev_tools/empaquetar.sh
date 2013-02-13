@@ -40,6 +40,7 @@
 # PARAMETROS BASICOS DEL EMPAQUETADO
 	#Lista de archivos y carpetas a empaquetar (relativos a la raiz y separados por espacio)
 	ListaArchivos=" AUTHORS index.php LICENSE personalizadas.php README bkp core img inc ins js mod skin tmp wzd "
+	ListaExcluidos=" core/configuracion.php " # Residen en alguna carpeta a comprimir pero deben evitarse
 	#Nombre del archivo resultante
 	NombreArchivo="Practico";
 	Version=`head -n 1 inc/version_actual.txt`
@@ -66,11 +67,12 @@
 	NivelCompresion=" -9 " # -9 (mejor)
 	VerDetalles=" -v " # -v  (v)erbose
 	Recursividad=" -r "
+	Exclusion=" -x "
 	ProbarIntegridad=" -T "
 
 #Procesa si el formato es ZIP (identificado por el comando)
 	if [ $Comando == "zip " ]; then
-		ComandoFinal=${Comando}${NivelCompresion}${VerDetalles}${Recursividad}${ProbarIntegridad}${Espacio}${SCRIPTPATH}${Slash}${NombreArchivo}${Guion}${Version}${Extension}${Espacio}${ListaArchivos}
+		ComandoFinal=${Comando}${NivelCompresion}${VerDetalles}${Recursividad}${Exclusion}${ListaExcluidos}${ProbarIntegridad}${Espacio}${SCRIPTPATH}${Slash}${NombreArchivo}${Guion}${Version}${Extension}${Espacio}${ListaArchivos}
 		eval ${ComandoFinal}
 	fi
 

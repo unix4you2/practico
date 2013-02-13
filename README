@@ -5,40 +5,40 @@
                |_|   |_|  \__,_|\___|\__|_|\___\___/ 
                                       
 
- - Practico is a free and open source application designed for automatic
-   web application development without coding.
+ - Practico es una herramienta de codigo abierto para el diseño
+   automatico de aplicaciones web de manera agil y sin digitar codigo
 
 ===================
- Characteristics
+ Características
 
- - Written entirely in PHP, HTML & Javascript.
- - Graphical User Interface.
- - Integrated functions for advanced and simple CRUD operations.
- - Multiplatform (GNU/Linux, FreeBSD, Microsoft Windows...).
- - Easy to custom with your own functions.
- - Lightweight and fast.
- - Captcha recognition where needed.
- - Graphical tools for database, forms and reports generation.
- - Easy user and rights administration.
- - We use a simple code, sources are easy to understand.
+ - Escrito completamente en PHP, HTML y Javascript
+ - Interfaz gráfica de usuario
+ - Funciones integradas para operaciones CRUD simples y avanzadas
+ - Multiplataforma (GNU/Linux, *BSD, Microsoft Windows)
+ - Fácilmente personalizable mediante sus propias funciones
+ - Pequeño, liviano y rápido
+ - Reconocimiento de captcha, teclados en pantalla y otros a su gusto
+ - Herramientas gráficas para gestionar la base de datos
+ - Generación simple y rápida de completos formularios y reportes
+ - Administración sencilla de las credenciales de usuario
+ - Código fuente simple, los fuentes son muy fáciles de entender.
 
 ===================
- Installation & Usage
+ Instalación y uso
 
- - Unpack the tarball under your web server:
+ - Descomprima el paquete de instalación en su servidor web:
 
-   $ tar zxvf practico-<version>.tar.gz
+   $ tar zxvf practico-<version>.tar.gz  ó
+   $ unzip practico-<version>.zip
 
- - Point your web browser to http://DomainOrIP/practico (or your folder)
-   and follow installation wizard's instructions.
+ - Abra su navegador en la URL correspondiente y siga las instrucciones
+   del asistente.  Pruebe  http://DomainOrIP/practico (or your folder)
 
    ----------
+ - Desinstalación de Practico:
 
- - Uninstall Practico:
-
-   # simply erase all folders under Practico installation on your
-     web server and drop the database used for Practico.
-
+   # Simplemente elimine todos los archivos bajo el directorio de
+     instalación en su servidor web, así como la base de datos asociada
 
  _                      _                            _     _           
 | |    ___   __ _    __| | ___    ___ __ _ _ __ ___ | |__ (_) ___  ___ 
@@ -47,39 +47,14 @@
 |_____\___/ \__, |  \__,_|\___|  \___\__,_|_| |_| |_|_.__/|_|\___/|___/
             |___/ 
 
- Versión 13.2 (2013-01-15)
-
+----------------------------------------
+Versión 13.2 (2013-02-13)
   * Adición de longitudes máximas para campos de texto corto
   * Personalización del tamaño para campos de texto corto
   * Adición de objetos para los campos de selección de tipo radio-button
   * Botón de acceso directo a la vista previa de informes
   * Adición de acciones para informes
-
+  * Utilidad de empaquetamiento en dev_tools (bajo Git)
 ----------------------------------------
- Detalles de cambios por parche:
-  >> core/formularios.php
-  >> core/comunes.php
-  >> core/informes.php
-  >> skin/nomo/general.css
-  >> ins/sql/practico.sql
-  >> index.php
-  
-  >> ALTER TABLE Core_formulario_objeto ADD COLUMN maxima_longitud INT(10) DEFAULT 0;
-	CREATE TABLE Core_informe_boton (
-	  id int(10) AUTO_INCREMENT,
-	  titulo varchar(250) default '',
-	  estilo varchar(20) default '',
-	  informe int(10),
-	  tipo_accion varchar(250) default '',
-	  accion_usuario varchar(250) default '',
-	  visible int(1) default '1',
-	  peso int(10),
-	  retorno_titulo varchar(50) default '',
-	  retorno_texto text,
-	  confirmacion_texto varchar(250) default '',
-	  campo_vinculoformulario varchar(250) default '',
-	  PRIMARY KEY  (id)
-	);
-----------------------------------------
- Versión 13.1 (2013-01-15)
+Versión 13.1 (2013-01-15)
   * Primer lanzamiento oficial
