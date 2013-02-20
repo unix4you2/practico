@@ -49,6 +49,9 @@
 
 ----------------------------------------
 Versión 13.2 (2013-02-13)
+  * Fixed: Sintaxis compatible para explode y PHP 5.3+ sobre comunes.php
+----------------------------------------
+Versión 13.2 (2013-02-13)
   * Adición de longitudes máximas para campos de texto corto
   * Personalización del tamaño para campos de texto corto
   * Adición de objetos para los campos de selección de tipo radio-button
