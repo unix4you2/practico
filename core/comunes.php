@@ -1430,8 +1430,9 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							//Construye una cadena generica con todos los botones para ser reemplazada luego con valores
 							if ($registro_botones["tipo_accion"]=="interna_eliminar")
 								{
-									$tabla_vinculada=explode(".",$registro_botones["accion_usuario"])[0];
-									$campo_vinculado=explode(".",$registro_botones["accion_usuario"])[1];
+									$valores = explode(".",$registro_botones["accion_usuario"]);
+									$tabla_vinculada=$valores[0];
+									$campo_vinculado=$valores[1];
 									$comando_javascript="
 										document.FRMBASEINFORME.accion.value='eliminar_registro_informe';
 										document.FRMBASEINFORME.tabla.value='".$tabla_vinculada."';
