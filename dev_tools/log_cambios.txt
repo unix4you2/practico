@@ -1,17 +1,24 @@
-----------------------------------------
- Detalles de cambios por parche:
-  >> core/formularios.php
-  >> core/comunes.php
-  >> core/informes.php
-  >> skin/nomo/general.css
-  >> ins/sql/practico.sql
-  >> index.php
+#[VersionCompatible]
+#Utilice cuatro guiones ---- para cualquiera: crea tmp/par_compat.txt
+VersionCompatibleAno="13"
+VersionCompatibleMes="2"
 
-[CorreccionErrores]
-Sintaxis compatible para explode con PHP 5.3+
+#[VersionFinal]
+#Utilice cuatro guiones ---- para cualquiera:. Despues de parchear: crea inc/version_actual.txt
+VersionFinalAno="13"
+VersionFinalMes="3"
 
-[BaseDatos]
-  >> ALTER TABLE Core_formulario_objeto ADD COLUMN maxima_longitud INT(10) DEFAULT 0;
+#[ListaArchivos]
+ListaArchivos="core/formularios.php core/comunes.php core/informes.php skin/nomo/general.css ins/sql/practico.sql index.php"
+
+#[LogCambios]
+#Crea tmp/par_cambios.txt
+LogCambios="Sintaxis compatible para explode con PHP 5.3+"
+
+#[ScriptBasedatos]
+#Crea tmp/par_sql.txt
+ScriptBasedatos="
+	ALTER TABLE Core_formulario_objeto ADD COLUMN maxima_longitud INT(10) DEFAULT 0;
 	CREATE TABLE Core_informe_boton (
 	  id int(10) AUTO_INCREMENT,
 	  titulo varchar(250) default '',
@@ -26,4 +33,4 @@ Sintaxis compatible para explode con PHP 5.3+
 	  confirmacion_texto varchar(250) default '',
 	  campo_vinculoformulario varchar(250) default '',
 	  PRIMARY KEY  (id)
-	);
+	);"

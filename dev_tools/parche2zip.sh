@@ -31,19 +31,6 @@
 
 	FECHA=$(date)  # Obtengo la fecha y hora actual
 
-
-
-
-
-for línea in $(cat archivo)
-do
-   comando
-done
-
-
-
-
-
 # Obtengo la ruta de ejecucion del script
 	SCRIPT=$(readlink -f "$0")
 	SCRIPTPATH=`dirname "$SCRIPT"`
@@ -51,44 +38,58 @@ done
 	cd $SCRIPTPATH
 	cd ..
 
-# PARAMETROS BASICOS DEL EMPAQUETADO
-	#Lista de archivos y carpetas a empaquetar (relativos a la raiz y separados por espacio)
-	ListaArchivos=" AUTHORS index.php LICENSE personalizadas.php README bkp core img inc ins js mod skin tmp wzd "
-	ListaExcluidos=" core/configuracion.php " # Residen en alguna carpeta a comprimir pero deben evitarse
-	#Nombre del archivo resultante
-	NombreArchivo="Practico";
-	Version=`head -n 1 inc/version_actual.txt`
-	Extension=".zip"
-
-# Pregunta por continuar o abortar
-	echo ""
-	echo "Version detectada     : " $Version
-	echo "Nombre del empaquetado: " $NombreArchivo$Version$Extension
-	echo "Fecha de empaquetado  : " $FECHA
-	echo ""
-	read -p "Presione [Enter] para continuar o [Ctrl+C] para abortar" vble
-	echo "-----------------------------------------------------------------"
-
 # Variables de trabajo adicionales
 	oldIFS=$IFS  # conserva el separador de campo
 	IFS=$'\n'  # nuevo separador de campo, el caracter fin de línea
 	Espacio=" " # Usado en concatenaciones
 	Slash="/" # Usado en concatenaciones
 	Guion="-" # Usado en concatenaciones
+	Punto="." # Usado en concatenaciones
+	Underline="_" # Usado en concatenaciones
+	To="_to_" # Usado en concatenaciones
+
+#Incluye los datos/parametros para generacion del parche
+source dev_tools/log_cambios.txt
+
+# PARAMETROS BASICOS DEL EMPAQUETADO
+	#Nombre del archivo resultante
+	NombreArchivo="Practico";
+	Version=`head -n 1 inc/version_actual.txt`
+	Extension=".zip"
+	VersionCompatibleMnemo=$VersionCompatibleAno$Guion$VersionCompatibleMes
+	VersionFinalMnemo=$VersionFinalAno$Guion$VersionFinalMes
+	ArchivoParche=$NombreArchivo$Underline$VersionCompatibleMnemo$To$VersionFinalMnemo$Extension
 
 # Banderas para la compresion
 	Comando="zip "
 	NivelCompresion=" -9 " # -9 (mejor)
 	VerDetalles=" -v " # -v  (v)erbose
 	Recursividad=" -r "
-	Exclusion=" -x "
 	ProbarIntegridad=" -T "
+
+# Pregunta por continuar o abortar
+	echo ""
+	echo "Version compatible    : " $VersionCompatibleAno$Punto$VersionCompatibleMes
+	echo "Version final         : " $VersionFinalAno$Punto$VersionFinalMes
+	echo "Nombre del empaquetado: " $ArchivoParche
+	echo "Fecha de empaquetado  : " $FECHA
+	echo ""
+	echo "ARCHIVOS A INCLUIR EN ESTE PARCHE (separados por espacios): "
+	echo $ListaArchivos
+	echo ""
+	read -p "Presione [Enter] para continuar o [Ctrl+C] para abortar" vble
+	echo "-----------------------------------------------------------------"
 
 #Procesa si el formato es ZIP (identificado por el comando)
 	if [ $Comando == "zip " ]; then
-		ComandoFinal=${Comando}${NivelCompresion}${VerDetalles}${Recursividad}${Exclusion}${ListaExcluidos}${ProbarIntegridad}${Espacio}${SCRIPTPATH}${Slash}${NombreArchivo}${Guion}${Version}${Extension}${Espacio}${ListaArchivos}
+		ComandoFinal=${Comando}${NivelCompresion}${VerDetalles}${Recursividad}${ProbarIntegridad}${Espacio}${SCRIPTPATH}${Slash}${ArchivoParche}${Espacio}${ListaArchivos}
 		eval ${ComandoFinal}
 	fi
+
+exit 0
+
+
+
 
 # Presenta resultados, restablece variables y termina
 	IFS=$old_IFS  # restablece el separador de campo predeterminado
