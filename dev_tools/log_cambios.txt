@@ -1,45 +1,28 @@
 #[VersionCompatible]
 #Utilice cuatro guiones ---- para cualquiera: Usado para tmp/par_compat.txt
 VersionCompatibleAno="13"
-VersionCompatibleMes="2"
+VersionCompatibleMes="3"
 
 #[VersionFinal]
 #Utilice cuatro guiones ---- para cualquiera:. Usado para inc/version_actual.txt
 VersionFinalAno="13"
-VersionFinalMes="3"
+VersionFinalMes="4"
 
-#[ListaArchivos]
-ListaArchivos=" core/formularios.php core/comunes.php core/informes.php skin/nomo/general.css index.php "
+#[ListaArchivos] Separados por espacio
+ListaArchivos="  "
+
+#[ArchivosObligatorios] Separados por espacio
 ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame.txt inc/version_actual.txt"
 
 ########################################################################
 #[LogCambios] Usado para tmp/par_cambios.txt
 #TOMAR CONTENIDO DESDE EL README
 LogCambios="
-  * Fixed: Sintaxis compatible para explode con PHP 5.3+ sobre comunes.php
-  * Fixed: Generacion de graficos basados en su ID y no titulo para evitar problemas en nombre de archivo
-  * Fixed: Mensajes tipo Notice en algunos scripts suprimidos cuando el modo de depuración es desactivado
-  * Fixed: Definicion de variable durante generacion de captcha en servidores bajo windows evita su visualizacion, corregido
-  * Fixed: Variable de host en conexiones a base de datos
+
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-ALTER TABLE Core_formulario_objeto ADD COLUMN maxima_longitud INT(10) DEFAULT 0;
-CREATE TABLE Core_informe_boton (
-  id int(10) AUTO_INCREMENT,
-  titulo varchar(250) default '',
-  estilo varchar(20) default '',
-  informe int(10),
-  tipo_accion varchar(250) default '',
-  accion_usuario varchar(250) default '',
-  visible int(1) default '1',
-  peso int(10),
-  retorno_titulo varchar(50) default '',
-  retorno_texto text,
-  confirmacion_texto varchar(250) default '',
-  campo_vinculoformulario varchar(250) default '',
-  PRIMARY KEY  (id)
-);
+
 "
