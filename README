@@ -48,6 +48,12 @@
             |___/ 
 
 ----------------------------------------
+Versión 13.3 (2013-03-08)
+  * Fixed: Sintaxis compatible para explode con PHP 5.3+ sobre comunes.php
+  * Fixed: Generacion de graficos basados en su ID y no titulo para evitar problemas en nombre de archivo
+  * Fixed: Mensajes tipo Notice en algunos scripts suprimidos cuando el modo de depuración es desactivado
+  * Fixed: Definicion de variable durante generacion de captcha en servidores bajo windows evita su visualizacion, corregido
+----------------------------------------
 Versión 13.2 (2013-02-13)
   * Fixed: Sintaxis compatible para explode y PHP 5.3+ sobre comunes.php
 ----------------------------------------

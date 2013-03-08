@@ -1639,7 +1639,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				$chart->setDataSet($dataSet);
 				//$chart->getPlot()->setGraphCaptionRatio(0.75);
 				$chart->setTitle($registro_informe["titulo"]);
-				$chart->render("tmp/Inf_".$registro_informe["titulo"]."-".$Login_usuario.".png");
+				$chart->render("tmp/Inf_".$registro_informe["id"]."-".$Login_usuario.".png");
 				echo '<img alt="Grafico" src="tmp/Inf_'.$registro_informe["titulo"].'-'.$Login_usuario.'.png" style="border: 1px solid gray;">';
 			} // Fin si informe es G (grafico)
 

@@ -48,7 +48,11 @@
 	if ($ModoDepuracion)
 		{
 			ini_set("display_errors", 1);
-			error_reporting(E_ERROR | E_WARNING | E_PARSE);
+			error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
+		}
+	else
+		{
+			error_reporting(0);
 		}
 
 	// Establece la zona horaria por defecto para la aplicacion

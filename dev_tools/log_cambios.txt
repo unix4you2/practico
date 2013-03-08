@@ -1,10 +1,10 @@
 #[VersionCompatible]
-#Utilice cuatro guiones ---- para cualquiera: crea tmp/par_compat.txt
+#Utilice cuatro guiones ---- para cualquiera: Usado para tmp/par_compat.txt
 VersionCompatibleAno="13"
 VersionCompatibleMes="2"
 
 #[VersionFinal]
-#Utilice cuatro guiones ---- para cualquiera:. Despues de parchear: crea inc/version_actual.txt
+#Utilice cuatro guiones ---- para cualquiera:. Usado para inc/version_actual.txt
 VersionFinalAno="13"
 VersionFinalMes="3"
 
@@ -14,8 +14,12 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 
 ########################################################################
 #[LogCambios] Usado para tmp/par_cambios.txt
+#TOMAR CONTENIDO DESDE EL README
 LogCambios="
-Sintaxis compatible para explode con PHP 5.3+
+  * Fixed: Sintaxis compatible para explode con PHP 5.3+ sobre comunes.php
+  * Fixed: Generacion de graficos basados en su ID y no titulo para evitar problemas en nombre de archivo
+  * Fixed: Mensajes tipo Notice en algunos scripts suprimidos cuando el modo de depuración es desactivado
+  * Fixed: Definicion de variable durante generacion de captcha en servidores bajo windows evita su visualizacion, corregido
 "
 
 ########################################################################

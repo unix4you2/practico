@@ -35,6 +35,7 @@
 	function TextoAleatorio($longitud)
 		{
 			// Plantilla para el captcha, a definir como parametro de aplicacion
+			$clave="";
 			$plantilla = "23456789abcdefghijkmnpqrstuvwxyz";
 			for($i=0;$i<$longitud;$i++)
 				{
