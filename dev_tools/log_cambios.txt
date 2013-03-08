@@ -20,6 +20,7 @@ LogCambios="
   * Fixed: Generacion de graficos basados en su ID y no titulo para evitar problemas en nombre de archivo
   * Fixed: Mensajes tipo Notice en algunos scripts suprimidos cuando el modo de depuración es desactivado
   * Fixed: Definicion de variable durante generacion de captcha en servidores bajo windows evita su visualizacion, corregido
+  * Fixed: Variable de host en conexiones a base de datos
 "
 
 ########################################################################

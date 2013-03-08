@@ -59,34 +59,34 @@
 				{
 					// Si no se ha definido un numero de puerto
 					if ($PuertoBD=="")
-						$ConexionPDO = new PDO("mysql:dbname=$BaseDatos;host=$Servidor","$UsuarioBD","$PasswordBD");
+						$ConexionPDO = new PDO("mysql:dbname=$BaseDatos;host=$ServidorBD","$UsuarioBD","$PasswordBD");
 					else
-						$ConexionPDO = new PDO("mysql:dbname=$BaseDatos;host=$Servidor;port=$PuertoBD","$UsuarioBD","$PasswordBD");
+						$ConexionPDO = new PDO("mysql:dbname=$BaseDatos;host=$ServidorBD;port=$PuertoBD","$UsuarioBD","$PasswordBD");
 				}
 			if ($MotorBD=="pg")
 				{
 					// Si no se ha definido un numero de puerto
 					if ($PuertoBD=="")
-						$ConexionPDO = new PDO("pgsql:dbname=$BaseDatos;host=$Servidor","$UsuarioBD","$PasswordBD");
+						$ConexionPDO = new PDO("pgsql:dbname=$BaseDatos;host=$ServidorBD","$UsuarioBD","$PasswordBD");
 					else
-						$ConexionPDO = new PDO("mysql:dbname=$BaseDatos;host=$Servidor;port=$PuertoBD","$UsuarioBD","$PasswordBD");
+						$ConexionPDO = new PDO("mysql:dbname=$BaseDatos;host=$ServidorBD;port=$PuertoBD","$UsuarioBD","$PasswordBD");
 				}
 			if ($MotorBD=="sqlite2")
 						$ConexionPDO = new PDO("sqlite:$BaseDatos");
 			if ($MotorBD=="sqlite3")
 						$ConexionPDO = new PDO("sqlite:$BaseDatos");  //$ConexionPDO = new PDO("sqlite::memory");
 			if ($MotorBD=="fbd")
-						$ConexionPDO = new PDO("firebird:dbname=$Servidor".":"."$BaseDatos","$UsuarioBD","$PasswordBD");
+						$ConexionPDO = new PDO("firebird:dbname=$ServidorBD".":"."$BaseDatos","$UsuarioBD","$PasswordBD");
 			if ($MotorBD=="oracle")
 						$ConexionPDO = new PDO("OCI:dbname=$BaseDatos;charset=UTF-8","$UsuarioBD","$PasswordBD");
 			if ($MotorBD=="mssql")
-						$ConexionPDO = new PDO("mssql:dbname=$BaseDatos;host=$Servidor","$UsuarioBD","$PasswordBD");
+						$ConexionPDO = new PDO("mssql:dbname=$BaseDatos;host=$ServidorBD","$UsuarioBD","$PasswordBD");
 			if ($MotorBD=="sqlsrv")
-						$ConexionPDO = new PDO("sqlsrv:database=$BaseDatos;server=$Servidor","$UsuarioBD","$PasswordBD");
+						$ConexionPDO = new PDO("sqlsrv:database=$BaseDatos;server=$ServidorBD","$UsuarioBD","$PasswordBD");
 			if ($MotorBD=="ibm")
-						$ConexionPDO = new PDO("ibm:DRIVER={IBM DB2 ODBC DRIVER};DATABASE=$BaseDatos; HOSTNAME=$Servidor; PORT=$PuertoBD; PROTOCOL=TCPIP;","$UsuarioBD","$PasswordBD");
+						$ConexionPDO = new PDO("ibm:DRIVER={IBM DB2 ODBC DRIVER};DATABASE=$BaseDatos; HOSTNAME=$ServidorBD; PORT=$PuertoBD; PROTOCOL=TCPIP;","$UsuarioBD","$PasswordBD");
 			if ($MotorBD=="dblib")
-						$ConexionPDO = new PDO("dblib:dbname=$BaseDatos;host=$Servidor".":"."$PuertoBD","$UsuarioBD","$PasswordBD");
+						$ConexionPDO = new PDO("dblib:dbname=$BaseDatos;host=$ServidorBD".":"."$PuertoBD","$UsuarioBD","$PasswordBD");
 			if ($MotorBD=="odbc")
 						$ConexionPDO = new PDO("odbc:Driver={Microsoft Access Driver (*.mdb)};Dbq=C:\accounts.mdb;Uid=$UsuarioBD");
 			if ($MotorBD=="ifmx")

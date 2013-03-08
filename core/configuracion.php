@@ -1,5 +1,5 @@
 <?php
-		$ServidorBD='127.0.0.1';
+		$ServidorBD='localhost';
 		$BaseDatos='practico';
 		$UsuarioBD='root';
 		$PasswordBD='';
