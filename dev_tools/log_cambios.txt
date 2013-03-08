@@ -9,7 +9,7 @@ VersionFinalAno="13"
 VersionFinalMes="4"
 
 #[ListaArchivos] Separados por espacio
-ListaArchivos="  "
+ListaArchivos=" core/marco_arriba.php "
 
 #[ArchivosObligatorios] Separados por espacio
 ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame.txt inc/version_actual.txt"
@@ -18,7 +18,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #[LogCambios] Usado para tmp/par_cambios.txt
 #TOMAR CONTENIDO DESDE EL README
 LogCambios="
-
+  * Fixed: Correccion en textos de menu
 "
 
 ########################################################################

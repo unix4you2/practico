@@ -1,16 +1,16 @@
 <?php
-		$ServidorBD='localhost';
-		$BaseDatos='practico';
-		$UsuarioBD='root';
-		$PasswordBD='pass';
-		$MotorBD='mysql';
+		$ServidorBD='';
+		$BaseDatos='practicobd.sqlite';
+		$UsuarioBD='';
+		$PasswordBD='';
+		$MotorBD='sqlite3';
 		$PuertoBD='';
 		$NombreRAD='Pr&aacute;ctico';
 		$PlantillaActiva='nomo';
 		$ArchivoCORE='';
 		$TablasCore='Core_';
 		$TablasApp='App_';
-		$LlaveDePaso='7HB3LACQ2M';
+		$LlaveDePaso='ZYGVDPXWPY';
 		$ModoDepuracion=0;
 		$ZonaHoraria='America/Bogota';
 		$CaracteresCaptcha=4;
