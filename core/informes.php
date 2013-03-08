@@ -619,7 +619,7 @@ if ($accion=="editar_informe")
 
 		<div id='FormularioTablas' class="FormularioPopUps">
 				<?php
-				abrir_ventana('Agregar una nueva tabla al informe','#BDB9B9',''); 
+				abrir_ventana('Agregar una nueva tabla al informe','#BDB9B9','');
 				?>
 				<form name="datosform" id="datosform" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="accion" value="guardar_informe_tabla">

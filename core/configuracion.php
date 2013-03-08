@@ -2,7 +2,7 @@
 		$ServidorBD='localhost';
 		$BaseDatos='practico';
 		$UsuarioBD='root';
-		$PasswordBD='';
+		$PasswordBD='pass';
 		$MotorBD='mysql';
 		$PuertoBD='';
 		$NombreRAD='Pr&aacute;ctico';
