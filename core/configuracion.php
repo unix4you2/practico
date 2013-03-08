@@ -1,9 +1,9 @@
 <?php
-		$ServidorBD='';
-		$BaseDatos='practicobd.sqlite';
-		$UsuarioBD='';
+		$ServidorBD='localhost';
+		$BaseDatos='practico';
+		$UsuarioBD='root';
 		$PasswordBD='';
-		$MotorBD='sqlite3';
+		$MotorBD='mysql';
 		$PuertoBD='';
 		$NombreRAD='Pr&aacute;ctico';
 		$PlantillaActiva='nomo';

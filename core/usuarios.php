@@ -945,6 +945,68 @@ if ($accion=="agregar_usuario")
 		 ?>
 
 <?php
+
+/* ################################################################## */
+if ($accion=="ver_seguimiento_especifico")
+				{
+			/*
+				Function: ver_seguimiento_especifico
+				Presenta las ultimas operaciones realizadas por un usuario.  Por defecto las ultimas 50 acciones.
+
+				Variables minimas de entrada:
+					uid_especifico - Login del usuario
+
+				Proceso simplificado:
+					(start code)
+						SELECT * FROM ".$TablasCore."usuario WHERE (login LIKE '%$login_filtro%') AND (nombre LIKE '%$nombre_filtro%' ) AND login<>'admin' ORDER BY login,nombre";
+					(end)
+
+				Salida de la funcion:
+					* Listado de usuarios filtrado por algun criterio y ordenado por login y nombre
+
+				Ver tambien:
+					<agregar_usuario> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario>
+			*/
+						echo '<div align="center"><br>';
+				abrir_ventana('Historial de operaciones del usuario (de la m&aacute;s reciente a la mas antigua)','#BDB9B9','90%');
+				if ($inicio_reg=="") $inicio_reg=0;
+				if ($fin_reg=="") $fin_reg=50;
+					echo ' <br><div align="right">
+								<form name="datos" action="'.$ArchivoCORE.'" method="POST">
+								<input type="hidden" name="accion" value="ver_seguimiento_especifico">
+								<input type="hidden" name="uid_especifico" value="'.$uid_especifico.'">
+								&nbsp;&nbsp;Iniciar en el registro
+								<input type="text" class="CampoTexto" name="inicio_reg" value="'.$inicio_reg.'" size="4" maxlength="6">
+								Hasta el registro
+								<input type="text" class="CampoTexto" name="fin_reg" value="'.$fin_reg.'" size="4" maxlength="6">
+								&nbsp;&nbsp;<input type="submit" value="Actualizar >>>" class="Botones">&nbsp;&nbsp;
+						</form>
+					</div>';
+				echo '<table width="100%" border="0" cellspacing="0" align="CENTER" class="TextosVentana">
+					<tr>
+						<td align="center" bgcolor="#d6d6d6"><b>&nbsp;&nbsp;&nbsp;C&oacute;digo&nbsp;&nbsp;&nbsp;</b></td>
+						<td align="left" bgcolor="#d6d6d6"><b>&nbsp;&nbsp;Id. de usuario&nbsp;&nbsp;</b></td>
+						<td align="left" bgcolor="#d6d6d6"><b>&nbsp;&nbsp;&nbsp;Descripci&oacute;n de la acci&oacute;n&nbsp;&nbsp;&nbsp;</b></td>
+						<td align="center" bgcolor="#d6d6d6"><b>&nbsp;&nbsp;Fecha (AAAA-MM-DD)&nbsp;&nbsp;</b></td>
+						<td align="center" bgcolor="#d6d6d6"><b>&nbsp;&nbsp;Hora (HH-MM-SS)&nbsp;&nbsp;</b></td>
+					</tr>';
+				$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."auditoria WHERE usuario_login='$uid_especifico' ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg");
+				while($registro = $resultado->fetch())
+					{
+						echo '<tr><td align="center">&nbsp;&nbsp;'.$registro["id"].'&nbsp;&nbsp;</td>
+								<td>&nbsp;&nbsp;'.$registro["usuario_login"].'&nbsp;&nbsp;</td>
+								<td>&nbsp;&nbsp;'.$registro["accion"].'&nbsp;&nbsp;</td>
+								<td align="center">&nbsp;&nbsp;'.$registro["fecha"].'&nbsp;&nbsp;</td>
+								<td align="center">&nbsp;&nbsp;'.$registro["hora"].'&nbsp;&nbsp;</td>
+							</tr>';
+					}
+				echo '</table>';
+				abrir_barra_estado();
+				echo '<input type="Button" onclick="document.core_ver_menu.submit()" value="<< Regresar al escritorio" class="BotonesEstado">';
+				cerrar_barra_estado();
+				cerrar_ventana();
+				echo '<br>';
+				 }
 /* ################################################################## */
 /* ################################################################## */
 			/*
@@ -1061,7 +1123,7 @@ if ($accion=="listar_usuarios")
 										<form action="'.$ArchivoCORE.'" method="POST">
 												<input type="hidden" name="accion" value="ver_seguimiento_especifico">
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
-												<input type="Submit" value="Auditoria (deshabilitado)" class="Botones">
+												<input type="Submit" value="Auditoria" class="Botones">
 										</form>
 								</td>
 							</tr>';
