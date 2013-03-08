@@ -162,7 +162,7 @@
 						<tr>
 							<td><img src="img/5.png" border=0></td>
 							<td align=left valign=top >
-								Defina <u><b><font color="#FFF022">USUARIOS Y PERMISOS</font></b></u> para acceder a su aplpicaci&oacute;n
+								Defina <u><b><font color="#FFF022">USUARIOS Y PERMISOS</font></b></u> para acceder a su aplicaci&oacute;n
 								<br><font color=lightgray size=1>Establece las credenciales de acceso para cada usuario, as&iacute; como los permisos con que cuenta cada uno para accesar formularios, informes o cualquier opcion de menu previamente definida.</font>
 							</td>
 							<td>
