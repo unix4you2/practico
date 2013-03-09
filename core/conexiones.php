@@ -94,6 +94,11 @@
 
 			// Establece parametros para la conexion
 			$ConexionPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			
+			// Evita el "General error: 2014 Cannot execute queries while other unbuffered queries are active"
+			if ($MotorBD=="mysql")
+				$ConexionPDO->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
+
 			//$this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 			//$this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
 			//$this->con->setAttribute(PDO::SQLSRV_ATTR_DIRECT_QUERY => true);
