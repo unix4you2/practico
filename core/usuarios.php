@@ -946,6 +946,237 @@ if ($accion=="agregar_usuario")
 
 <?php
 
+
+/* ################################################################## */
+if ($accion=="ver_seguimiento_monitoreo")		
+				{
+			/*
+				Function: ver_seguimiento_monitoreo
+				Presenta las ultimas 30 acciones del sistema, permitiendo su actualizacion automatica cada 5 segundos
+
+				Proceso simplificado:
+					(start code)
+						SELECT * FROM ".$TablasCore."auditoria ORDER BY fecha DESC, hora DESC LIMIT 0,30
+					(end)
+
+				Salida de la funcion:
+					* Listado de operaciones realizadas actualizado automaticamente
+
+				Ver tambien:
+					<listar_usuarios> | <ver_seguimiento_especifico>
+			*/
+						echo '<div align="center"><br>';
+				abrir_ventana('Seguimiento de operaciones (actualizando autom&aacute;ticamente cada 5 segundos)','#BDB9B9','90%');
+					echo '<form name="datos" action="'.$ArchivoSNT.'" method="POST">
+						</form>';
+				echo '<table width="100%" border="0" cellspacing="2" align="CENTER" class="TextosVentana">
+					<tr>
+						<td align="center" bgcolor="#d6d6d6"><b>C&oacute;digo</b></td>
+						<td align="left" bgcolor="#d6d6d6"><b>Id. de usuario</b></td>
+						<td align="left" bgcolor="#d6d6d6"><b>Descripci&oacute;n de la acci&oacute;n</b></td>
+						<td align="center" bgcolor="#d6d6d6"><b>Fecha (AAAA-MM-DD)</b></td>
+						<td align="center" bgcolor="#d6d6d6"><b>Hora (HH-MM-SS)</b></td>
+					</tr>';
+
+
+				$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."auditoria ORDER BY fecha DESC, hora DESC LIMIT 0,30");
+				while($registro = $resultado->fetch())
+					{
+						echo '<tr><td align="center">'.$registro["id"].'</td>
+								<td>'.$registro["usuario_login"].'</td>
+								<td>'.$registro["accion"].'</td>
+								<td align="center">'.$registro["fecha"].'</td>
+								<td align="center">'.$registro["hora"].'</td>
+							</tr>';
+					}
+				echo '</table>
+				<script type="text/JavaScript">
+					setTimeout("document.ver_auditoria_monitoreo.submit();",5000);
+				</script>
+				<form action="'.$ArchivoCORE.'" method="POST" name="ver_auditoria_monitoreo"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+					<input type="hidden" name="accion" value="ver_seguimiento_monitoreo">
+				</form>
+				';
+				abrir_barra_estado();
+				echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" << Regresar al escritorio " class="BotonesEstado">';
+				cerrar_barra_estado();
+				cerrar_ventana();
+				 }
+/* ################################################################## */
+if ($accion=="ver_seguimiento_general")		
+				{
+			/*
+				Function: ver_seguimiento_general
+				Presenta un filtro para navegar tablas de auditoria con todas las operaciones sobre el sistema
+
+				Proceso simplificado:
+					(start code)
+						SELECT login FROM ".$TablasCore."usuario ORDER BY login
+						SELECT * FROM ".$TablasCore."auditoria WHERE fecha>='$anoi$mesi$diai' AND fecha<= '$anof$mesf$diaf' AND accion LIKE '%$accionbuscar%' AND usuario_login LIKE '%$usuario%' ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg
+					(end)
+
+				Salida de la funcion:
+					* Listado de operaciones realizadas que cumple el filtro de busqueda
+
+				Ver tambien:
+					<listar_usuarios> | <ver_seguimiento_especifico> | <ver_seguimiento_monitoreo>
+			*/
+						echo '<div align="center"><br>';
+				abrir_ventana('Seguimiento de operaciones para todos los usuarios','#BDB9B9','90%');
+				if ($inicio_reg=="") $inicio_reg=0;
+				if ($fin_reg=="") $fin_reg=50;
+					echo ' <br><div align="center">
+								<form name="datos" action="'.$ArchivoSNT.'" method="POST">
+								&nbsp;&nbsp;Con la siguiente <b>acci&oacute;n</b>
+								<input type="text" class="CampoTexto" name="accionbuscar" value="'.$accionbuscar.'" size="30" maxlength="200"> y para el <b>usuario </b>
+								<select name="usuario" class="Combos">
+									<option value="">Cualquiera</option>';
+										$resultado=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario ORDER BY login");
+										while($registro = $resultado->fetch())
+											{
+												echo '<option value="'.$registro["login"].'">'.$registro["login"].'</option>';
+											}
+					echo '		</select>	<br>
+								&nbsp;&nbsp;Desde (Dia / Mes) <select name="diai" class="selector_01" >';
+													for ($i=1;$i<=date("j")-1;$i++)
+														{
+																if ($i<10)
+																		echo '<option value="0'.$i.'">0'.$i.'</option>';
+																else
+																		echo '<option value="'.$i.'">'.$i.'</option>';
+														}
+													if ($i<10)
+															echo '<option value="0'.date("j").'" selected>0'.date("j").'</option>';
+													else
+															echo '<option value="'.date("j").'" selected>'.date("j").'</option>';
+													for ($i=date("j")+1;$i<=31;$i++)
+														{
+																if ($i<10)
+																		echo '<option value="0'.$i.'">0'.$i.'</option>';
+																else
+																		echo '<option value="'.$i.'">'.$i.'</option>';
+														}
+													echo '</select>
+														<select name="mesi" class="selector_01" >';
+													for ($i=1;$i<=date("n")-1;$i++)
+														{
+																if ($i<10)
+																		echo '<option value="0'.$i.'">0'.$i.'</option>';
+																else
+																		echo '<option value="'.$i.'">'.$i.'</option>';
+														}
+													if ($i<10)
+															echo '<option value="0'.date("n").'" selected>0'.date("n").'</option>';
+													else
+															echo '<option value="'.date("n").'" selected>'.date("n").'</option>';
+													for ($i=date("n")+1;$i<=12;$i++)
+														{
+																if ($i<10)
+																		echo '<option value="0'.$i.'">0'.$i.'</option>';
+																else
+																		echo '<option value="'.$i.'">'.$i.'</option>';
+														}
+													echo '</select>';
+									
+								echo ' &nbsp;hasta &nbsp;&nbsp;<select name="diaf" class="selector_01" >';
+													for ($i=1;$i<=date("j")-1;$i++)
+														{
+																if ($i<10)
+																		echo '<option value="0'.$i.'">0'.$i.'</option>';
+																else
+																		echo '<option value="'.$i.'">'.$i.'</option>';
+														}
+													if ($i<10)
+															echo '<option value="0'.date("j").'" selected>0'.date("j").'</option>';
+													else
+															echo '<option value="'.date("j").'" selected>'.date("j").'</option>';
+													for ($i=date("j")+1;$i<=31;$i++)
+														{
+																if ($i<10)
+																		echo '<option value="0'.$i.'">0'.$i.'</option>';
+																else
+																		echo '<option value="'.$i.'">'.$i.'</option>';
+														}
+													echo '</select>
+														<select name="mesf" class="selector_01" >';
+													for ($i=1;$i<=date("n")-1;$i++)
+														{
+																if ($i<10)
+																		echo '<option value="0'.$i.'">0'.$i.'</option>';
+																else
+																		echo '<option value="'.$i.'">'.$i.'</option>';
+														}
+													if ($i<10)
+															echo '<option value="0'.date("n").'" selected>0'.date("n").'</option>';
+													else
+															echo '<option value="'.date("n").'" selected>'.date("n").'</option>';
+													for ($i=date("n")+1;$i<=12;$i++)
+														{
+																if ($i<10)
+																		echo '<option value="0'.$i.'">0'.$i.'</option>';
+																else
+																		echo '<option value="'.$i.'">'.$i.'</option>';
+														}
+														
+														
+													echo '</select><br> Consultando auditoria del a&ntilde;o: 
+														<select name="ano" class="selector_01" >';
+													for ($i=2003;$i<=date("Y")-1;$i++)
+														{
+																echo '<option value="'.$i.'">'.$i.'</option>';
+														}
+															echo '<option value="'.date("Y").'" selected>'.date("Y").'</option>';
+													for ($i=date("Y")+1;$i<=2005;$i++)
+														{
+																		echo '<option value="'.$i.'">'.$i.'</option>';
+														}
+							echo '
+									</select><br>
+								<input type="hidden" name="accion" value="ver_seguimiento_general">
+								&nbsp;&nbsp;Iniciar en el registro
+								<input type="text" class="CampoTexto"  name="inicio_reg" value="'.$inicio_reg.'" size="4" maxlength="6">
+								visualizando 
+								<input type="text" class="CampoTexto" name="fin_reg" value="'.$fin_reg.'" size="4" maxlength="6"> registros
+								&nbsp;&nbsp;<input type="submit" value=" Filtrar >> " class="Botones">&nbsp;&nbsp;
+						</form>
+					</div>';
+				echo '<table width="100%" border="0" cellspacing="2" align="CENTER" class="TextosVentana">
+					<tr>
+						<td align="center" bgcolor="#d6d6d6"><b>C&oacute;digo</b></td>
+						<td align="left" bgcolor="#d6d6d6"><b>Id. de usuario</b></td>
+						<td align="left" bgcolor="#d6d6d6"><b>Descripci&oacute;n de la acci&oacute;n</b></td>
+						<td align="center" bgcolor="#d6d6d6"><b>Fecha (AAAA-MM-DD)</b></td>
+						<td align="center" bgcolor="#d6d6d6"><b>Hora (HH-MM-SS)</b></td>
+					</tr>';
+
+				$anoi = $ano;
+				$anof = $ano;
+				if ($anoi=="") {$anoi=date("Y"); $anof=$anoi;}
+				if ($mesi=="") {$mesi=date("n"); $mesf=$mesi;}
+				if ($diai=="") {$diai=date("j"); $diaf=$diai;}
+
+				$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."auditoria WHERE fecha>='$anoi$mesi$diai' AND fecha<= '$anof$mesf$diaf' AND accion LIKE '%$accionbuscar%' AND usuario_login LIKE '%$usuario%' ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg");
+				while($registro = $resultado->fetch())
+					{
+						echo '<tr><td align="center">'.$registro["id"].'</td>
+								<td>'.$registro["usuario_login"].'</td>
+								<td>'.$registro["accion"].'</td>
+								<td align="center">'.$registro["fecha"].'</td>
+								<td align="center">'.$registro["hora"].'</td>
+							</tr>';
+					}
+				echo '</table>
+				<form action="'.$ArchivoCORE.'" method="POST" name="ver_auditoria_monitoreo"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+					<input type="hidden" name="accion" value="ver_seguimiento_monitoreo">
+				</form>
+				';
+
+				abrir_barra_estado();
+				echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" << Regresar al escritorio " class="BotonesEstado">';
+				echo '<input type="Button" onclick="document.ver_auditoria_monitoreo.submit()" value=" Modo de monitoreo " class="BotonesEstadoCuidado">';
+				cerrar_barra_estado();
+				cerrar_ventana();
+				 }
 /* ################################################################## */
 if ($accion=="ver_seguimiento_especifico")
 				{
@@ -955,17 +1186,19 @@ if ($accion=="ver_seguimiento_especifico")
 
 				Variables minimas de entrada:
 					uid_especifico - Login del usuario
+					inicio_reg - Numero de registro de inicio
+					fin_reg - Numero de registros a visualizar
 
 				Proceso simplificado:
 					(start code)
-						SELECT * FROM ".$TablasCore."usuario WHERE (login LIKE '%$login_filtro%') AND (nombre LIKE '%$nombre_filtro%' ) AND login<>'admin' ORDER BY login,nombre";
+						SELECT * FROM ".$TablasCore."auditoria WHERE usuario_login='$uid_especifico' ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg"
 					(end)
 
 				Salida de la funcion:
-					* Listado de usuarios filtrado por algun criterio y ordenado por login y nombre
+					* Listado de operaciones realizadas por el usuario
 
 				Ver tambien:
-					<agregar_usuario> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario>
+					<listar_usuarios> | <ver_seguimiento_general>
 			*/
 						echo '<div align="center"><br>';
 				abrir_ventana('Historial de operaciones del usuario (de la m&aacute;s reciente a la mas antigua)','#BDB9B9','90%');
@@ -977,9 +1210,9 @@ if ($accion=="ver_seguimiento_especifico")
 								<input type="hidden" name="uid_especifico" value="'.$uid_especifico.'">
 								&nbsp;&nbsp;Iniciar en el registro
 								<input type="text" class="CampoTexto" name="inicio_reg" value="'.$inicio_reg.'" size="4" maxlength="6">
-								Hasta el registro
-								<input type="text" class="CampoTexto" name="fin_reg" value="'.$fin_reg.'" size="4" maxlength="6">
-								&nbsp;&nbsp;<input type="submit" value="Actualizar >>>" class="Botones">&nbsp;&nbsp;
+								Visualizando
+								<input type="text" class="CampoTexto" name="fin_reg" value="'.$fin_reg.'" size="4" maxlength="6"> registros
+								&nbsp;&nbsp;<input type="submit" value="Filtrar >>>" class="Botones">&nbsp;&nbsp;
 						</form>
 					</div>';
 				echo '<table width="100%" border="0" cellspacing="0" align="CENTER" class="TextosVentana">
@@ -1002,7 +1235,7 @@ if ($accion=="ver_seguimiento_especifico")
 					}
 				echo '</table>';
 				abrir_barra_estado();
-				echo '<input type="Button" onclick="document.core_ver_menu.submit()" value="<< Regresar al escritorio" class="BotonesEstado">';
+				echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" << Regresar al escritorio " class="BotonesEstado">';
 				cerrar_barra_estado();
 				cerrar_ventana();
 				echo '<br>';
@@ -1134,10 +1367,19 @@ if ($accion=="listar_usuarios")
 			} // Fin sino filtro
 
 	echo '
-		</div>';
+		</div>
+				<form action="'.$ArchivoCORE.'" method="POST" name="ver_auditoria_general"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+					<input type="hidden" name="accion" value="ver_seguimiento_general">
+				</form>
+				<form action="'.$ArchivoCORE.'" method="POST" name="ver_auditoria_monitoreo"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+					<input type="hidden" name="accion" value="ver_seguimiento_monitoreo">
+				</form>
+		';
 				abrir_barra_estado();
-				echo '<input type="Button" onclick="document.core_ver_menu.submit()" value="<< Regresar al escritorio" class="BotonesEstado">';
-				echo '<input type="Button" onclick="document.form_crear_usuario.submit()" value="Crear un usuario" class="BotonesEstadoCuidado">';
+				echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" << Regresar al escritorio " class="BotonesEstado">';
+				echo '<input type="Button" onclick="document.form_crear_usuario.submit()" value=" Crear un usuario " class="BotonesEstadoCuidado">';
+				echo '<input type="Button" onclick="document.ver_auditoria_general.submit()" value=" Ver auditoria de usuarios " class="BotonesEstado">';
+				echo '<input type="Button" onclick="document.ver_auditoria_monitoreo.submit()" value=" Modo de monitoreo " class="BotonesEstadoCuidado">';
 				cerrar_barra_estado();
 				cerrar_ventana();
 			 }
