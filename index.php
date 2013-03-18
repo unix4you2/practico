@@ -134,7 +134,21 @@
 
 /* ################################################################## */
 	// Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios
-	include("mod/personalizadas.php");  
+	include("mod/personalizadas.php"); 
+	// Incluye otros modulos que residan sobre carpetas en mod/* cuya entrada es index.php
+	$directorio_modulos=opendir("mod");
+	while (($elemento=readdir($directorio_modulos))!=false)
+		{
+			//Lo procesa solo si es directorio
+			if (is_dir("mod/".$elemento) && $elemento!="." && $elemento!="..")
+				{
+					//Busca la entrada del modulo sino muestra error
+					if (file_exists("mod/".$elemento."/index.php"))
+						include("mod/".$elemento."/index.php");
+					else
+						mensaje("Error en tiempo de ejecuci&oacute;n","El modulo central esta tratando de incluir un modulo ubicado en <b>mod/$elemento</b> pero no encuentra su punto de accceso.<br>Verifique el estado del m&oacute;dulo, consulte con su administrador o elimine el m&oacute;dulo en conflicto para evitar este mensaje.",'','icono_error.png','TextosEscritorio');
+				}
+		}
 
 	// Finaliza el contenido central y presenta el pie de pagina de aplicacion
 	include("core/marco_abajo.php");

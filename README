@@ -51,6 +51,7 @@ Versión 13.4 (2013-04-01)
   * Added: Se permite la consulta de auditoria por usuario especifico por medio del listado de usuarios
   * Added: Se permite consultar la auditoria general de usuarios mediante el listado de usuarios
   * Added: Modo de monitoreo general, presenta en tiempo real las actividades por medio del listado de usuarios
+  * Added: Se permite la creacion de modulos independientes sobre /mod, cada carpeta alli definida sera interpretada como un modulo cuyo punto de ingreso es un index.php y sera incluido en la ejecucion del modulo central.
   * Fixed: Correccion en textos de menu
 
 
