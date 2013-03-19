@@ -47,20 +47,31 @@
 |_____\___/ \__, |  \__,_|\___|  \___\__,_|_| |_| |_|_.__/|_|\___/|___/
             |___/ 
 ----------------------------------------
+Versión 13.5 (2013-05-02)
+
+----------------------------------------
 Versión 13.4 (2013-04-01)
-  * Added: Se permite la consulta de auditoria por usuario especifico por medio del listado de usuarios
-  * Added: Se permite consultar la auditoria general de usuarios mediante el listado de usuarios
-  * Added: Modo de monitoreo general, presenta en tiempo real las actividades por medio del listado de usuarios
-  * Added: Se permite la creacion de modulos independientes sobre /mod, cada carpeta alli definida sera interpretada como un modulo cuyo punto de ingreso es un index.php y sera incluido en la ejecucion del modulo central.
+  * Added: Se permite la consulta de auditoria por usuario especifico
+           por medio del listado de usuarios
+  * Added: Se permite consultar la auditoria general de usuarios
+           mediante el listado de usuarios
+  * Added: Modo de monitoreo general, presenta en tiempo real las
+           actividades por medio del listado de usuarios
+  * Added: Se permite la creacion de modulos independientes sobre /mod,
+           cada carpeta alli definida sera interpretada como un modulo
+           cuyo punto de ingreso es un index.php y sera incluido en la
+           ejecucion del modulo central.
   * Fixed: Correccion en textos de menu
-
-
+  * Fixed: Instalaciones sobre MySQL activan ahora el buffer de consulta
 ----------------------------------------
 Versión 13.3 (2013-03-08)
   * Fixed: Sintaxis compatible para explode con PHP 5.3+ sobre comunes.php
-  * Fixed: Generacion de graficos basados en su ID y no titulo para evitar problemas en nombre de archivo
-  * Fixed: Mensajes tipo Notice en algunos scripts suprimidos cuando el modo de depuración es desactivado
-  * Fixed: Definicion de variable durante generacion de captcha en servidores bajo windows evita su visualizacion, corregido
+  * Fixed: Generacion de graficos basados en su ID y no titulo para
+           evitar problemas en nombre de archivo
+  * Fixed: Mensajes tipo Notice en algunos scripts suprimidos cuando el
+           modo de depuración es desactivado
+  * Fixed: Definicion de variable durante generacion de captcha en
+           servidores bajo windows evita su visualizacion, corregido
   * Fixed: Variable de host en conexiones a base de datos
 ----------------------------------------
 Versión 13.2 (2013-02-13)

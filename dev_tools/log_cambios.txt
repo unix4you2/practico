@@ -1,15 +1,15 @@
 #[VersionCompatible]
 #Utilice cuatro guiones ---- para cualquiera: Usado para tmp/par_compat.txt
 VersionCompatibleAno="13"
-VersionCompatibleMes="3"
+VersionCompatibleMes="4"
 
 #[VersionFinal]
 #Utilice cuatro guiones ---- para cualquiera:. Usado para inc/version_actual.txt
 VersionFinalAno="13"
-VersionFinalMes="4"
+VersionFinalMes="5"
 
 #[ListaArchivos] Separados por espacio
-ListaArchivos=" index.php core/marco_arriba.php core/usuarios.php "
+ListaArchivos="  "
 
 #[ArchivosObligatorios] Separados por espacio
 ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame.txt inc/version_actual.txt"
@@ -18,11 +18,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #[LogCambios] Usado para tmp/par_cambios.txt
 #TOMAR CONTENIDO DESDE EL README
 LogCambios="
-  * Added: Se permite la consulta de auditoria por usuario especifico por medio del listado de usuarios
-  * Added: Se permite consultar la auditoria general de usuarios mediante el listado de usuarios
-  * Added: Modo de monitoreo general, presenta en tiempo real las actividades por medio del listado de usuarios
-  * Added: Se permite la creacion de modulos independientes sobre /mod, cada carpeta alli definida sera interpretada como un modulo cuyo punto de ingreso es un index.php y sera incluido en la ejecucion del modulo central.
-  * Fixed: Correccion en textos de menu
+  * Added: 
 "
 
 ########################################################################
