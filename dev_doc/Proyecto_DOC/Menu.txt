@@ -47,7 +47,6 @@ File: Introduccion  (core/doc_intro.php)
 File: Configuracion base  (core/doc_configuracion.php)
 File: Conexiones PDO  (core/conexiones.php)
 File: Libreria base  (core/comunes.php)
-File: Funciones personalizadas  (personalizadas.php)
 
 Group: Modulos Principales  {
 
@@ -78,3 +77,4 @@ Group: Index  {
 
 Text: Copyright (c) 2013
 Link: [John F. Arroyave Gutierrez]  (mailto:unix4you2@gmail.com)
+File: Funciones personalizadas  (mod/personalizadas.php)
