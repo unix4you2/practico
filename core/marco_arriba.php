@@ -89,6 +89,7 @@
 			?>
 				<table width="100%" cellspacing=0 cellpadding=0 background="skin/nomo/img/fondo_ventanas1.png"><tr><td>
 					<br>
+					
 					<div align=center>
 					<font color=yellow face="Tahoma,Verdana,Arial">
 						<font size=5>
@@ -186,6 +187,232 @@
 			?>
 		<!-- FIN DE MARCOS POPUP -->
 		</div>
+
+
+		<!-- INICIO DE MARCOS POPUP -->
+		<div id='BarraFlotanteConfiguracion' class="FormularioPopUps">
+			<?php
+			abrir_ventana('Pr&aacute;ctico - Configuracion de la plataforma','#f2f2f2','600'); 
+			?>
+				<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 450px">
+
+					<form name="continuar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+					<input type="hidden" name="accion" value="guardar_configuracion">
+					<font size=2 color=black><br><b>
+						[Motor de Base de Datos]</b>
+					</font>
+					<table cellspacing=5 width="700">
+						<tr>
+							<td valign=top align=right>
+								<font size=2 color=black>
+									Tipo de motor
+								</font>
+							</td>
+							<td valign=top width="380">
+								<select name="MotorBDNEW" class="Combos" >
+									<option value="mysql"	 <?php if ($MotorBD=="mysql") echo "SELECTED"; ?> >MySQL - MariaDB (3.x/4.x/5.x)</option>
+									<option value="sqlite2"	 <?php if ($MotorBD=="sqlite2") echo "SELECTED"; ?> >SQLite2</option>
+									<option value="sqlite3"	 <?php if ($MotorBD=="sqlite3") echo "SELECTED"; ?> >SQLite3</option>
+									<option value="sqlsrv"	 <?php if ($MotorBD=="sqlsrv") echo "SELECTED"; ?> >FreeTDS/Microsoft SQL Server: Win32 [max version 2008]</option>
+									<option value="mssql"	 <?php if ($MotorBD=="mssql") echo "SELECTED"; ?> >FreeTDS/Microsoft SQL Server: Win32&Linux, [max version 2000]</option>
+									<option value="pg"		 <?php if ($MotorBD=="pg") echo "SELECTED"; ?> >PostgreSQL</option>
+									<option value="ibm"		 <?php if ($MotorBD=="ibm") echo "SELECTED"; ?> >IBM (DB2)</option>
+									<option value="dblib"	 <?php if ($MotorBD=="dblib") echo "SELECTED"; ?> >DBLIB</option>
+									<option value="odbc"	 <?php if ($MotorBD=="odbc") echo "SELECTED"; ?> >Microsoft Access (ODBC v3: IBM DB2, unixODBC, Win32 ODBC)</option>
+									<option value="oracle"	 <?php if ($MotorBD=="oracle") echo "SELECTED"; ?> >ORACLE (OCI Oracle Call Interface)</option>
+									<option value="ifmx"	 <?php if ($MotorBD=="ifmx") echo "SELECTED"; ?> >Informix (IBM Informix Dynamic Server)</option>
+									<option value="fbd"		 <?php if ($MotorBD=="fbd") echo "SELECTED"; ?> >Firebird (Firebird/Interbase 6)</option>
+								</select>
+								<a href="#" title="MySQL y MariaDB" name="Son los motores oficiales.  Sobre ellos se hace el desarrollo y pruebas de la herramienta y aunque gracias a PDO usted podr&aacute; utilizar la herramienta en otros motores es probable que deba hacer ajustes a operaciones espec&iacute;ficas de &eacute;stos."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=right>
+								<font size=2 color=black>
+									Host/Servidor
+								</font>
+							</td>
+							<td valign=top>
+								<font size=2 color=black>
+								<input type="text" name="ServidorNEW"  value="<?php echo $ServidorBD; ?>" size="20" class="CampoTexto" class="keyboardInput">
+								Puerto: <input type="text"  value="<?php echo $PuertoBD; ?>" name="PuertoBDNEW" size="4" class="CampoTexto" class="keyboardInput"> (si no es el predeterminado)
+								</font>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=right>
+								<font size=2 color=black>
+									Base de datos
+								</font>
+							</td>
+							<td valign=top>
+								<font size=2 color=black>
+								<input type="text" name="BaseDatosNEW"  value="<?php echo $BaseDatos; ?>" size="20" class="CampoTexto" class="keyboardInput"> (debe existir)
+								</font>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=right>
+								<font size=2 color=black>
+									Usuario
+								</font>
+							</td>
+							<td valign=top>
+								<input type="text" name="UsuarioBDNEW"  value="<?php echo $UsuarioBD; ?>" size="20" class="CampoTexto" class="keyboardInput">
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=right>
+								<font size=2 color=black>
+									Contrase&ntilde;a
+								</font>
+							</td>
+							<td valign=top>
+								<input type="password" name="PasswordBDNEW"  value="<?php echo $PasswordBD; ?>" size="20" class="CampoTexto" class="keyboardInput">
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=right>
+								<font size=2 color=black>
+									Prefijo tablas internas de Pr&aacute;ctico
+								</font>
+							</td>
+							<td valign=top>
+								<input type="text" name="TablasCoreNEW" size="7"  value="<?php echo $TablasCore; ?>" value="Core_" class="CampoTexto" class="keyboardInput">
+								<a href="#" title="Se recomienda NO vac&iacute;o" name=""><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=right>
+								<font size=2 color=black>
+									Prefijo tablas de Aplicaci&oacute;n
+								</font>
+							</td>
+							<td valign=top>
+								<input type="text" name="TablasAppNEW" size="7"  value="<?php echo $TablasApp; ?>" value="App_" class="CampoTexto" class="keyboardInput">
+								<a href="#" title="Importante" name="El prefijo utilizado para las tablas de aplicaci&oacute;n puede ser utilizado para separar diferentes instalaciones de Pr&aacute;ctico sobre una misma base de datos o tambi&eacute;n puede ser dejado vac&iacute;o para enlazar/integrar a Pr&aacute;ctico con otras aplicaciones pre-existentes."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=right>
+								<font size=2 color=black>
+									Llave de paso
+								</font>
+							</td>
+							<td valign=top>
+								<font size=2 color=black>
+									<input type="text" name="LlaveDePasoNEW" size="12" value="<?php echo $LlaveDePaso; ?>" class="CampoTexto" class="keyboardInput">
+									(valor para firmar cuentas de usuario)
+								</font>
+							</td>
+						</tr>
+					</table>
+
+					<hr>
+					<font size=2 color=black><br><b>
+						[Configuraci&oacute;n de opciones varias]</b>
+					</font>
+					<table cellspacing=5 width="700">
+						<tr>
+							<td valign=top align=right>
+								<font size=2 color=black>
+									Zona horaria
+								</font>
+							</td>
+							<td valign=top width="380">
+								<select  name="ZonaHorariaNEW" class="Combos">
+									<?php
+										$archivo_origen="inc/zonas_horarias.txt";
+										$archivo = fopen($archivo_origen, "r");
+										//descarta comentario inicial de archivo
+										if ($archivo)
+											{
+												$linea = fgets($archivo, 1024);
+												while (!feof($archivo))
+													{
+														$linea = fgets($archivo, 1024);
+														if (trim($linea)==$ZonaHoraria)
+															echo "<option value='".trim($linea)."' selected>".trim($linea)."</option>";
+														else
+															echo "<option value='".trim($linea)."'>".trim($linea)."</option>";
+													}
+												fclose($archivo);
+											}
+									?>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=right>
+								<font size=2 color=black>
+									N&uacute;mero de caracteres para captcha?
+								</font>
+							</td>
+							<td valign=top width="380">
+								<select name="CaracteresCaptchaNEW" class="Combos" >
+									<option value="1" <?php if ($CaracteresCaptcha=="1") echo "SELECTED"; ?> >1</option>
+									<option value="2" <?php if ($CaracteresCaptcha=="2") echo "SELECTED"; ?> >2</option>
+									<option value="3" <?php if ($CaracteresCaptcha=="3") echo "SELECTED"; ?> >3</option>
+									<option value="4" <?php if ($CaracteresCaptcha=="4") echo "SELECTED"; ?> >4</option>
+									<option value="5" <?php if ($CaracteresCaptcha=="5") echo "SELECTED"; ?> >5</option>
+									<option value="6" <?php if ($CaracteresCaptcha=="6") echo "SELECTED"; ?> >6</option>
+								</select>
+								<a href="#" title="Longitud de la palabra" name="Indica el n&uacute;mero de s&iacute;mbolos utilizados en la palabra de seguridad que deben ingresar los usuarios para cada acceso al sistema."><img src="img/icn_10.gif" border=0></a>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=right>
+								<font size=2 color=black>
+									Activar modo de depuraci&oacute;n?
+								</font>
+							</td>
+							<td valign=top width="380">
+								<select name="ModoDepuracionNEW" class="Combos" >
+									<option value="1" <?php if ($ModoDepuracion=="") echo "SELECTED"; ?> >Encendido</option>
+									<option value="0" <?php if ($ModoDepuracion=="") echo "SELECTED"; ?> >Apagado</option>
+								</select>
+								<a href="#" title="Presentar errores y advertencias" name="Para sitios en producci&oacute;n esta opci&oacute;n debe estar apagada.  Cuando se enciende ense&ntilde;a durante la ejecuci&oacute;n de la aplicaci&oacute;n todos los errores y mensajes que puedan ser generados por el preprocesador de hipertexto - PHP"><img src="img/icn_10.gif" border=0></a>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=right>
+								<font size=2 color=black>
+									Plantilla gr&aacute;fica activa
+								</font>
+							</td>
+							<td valign=top width="380">
+								<font size=2 color=black>
+									<input type="text" name="PlantillaActivaNEW" size="12" value="<?php echo $PlantillaActiva; ?>" class="CampoTexto" class="keyboardInput">
+								</font>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=right>
+								<font size=2 color=black>
+									Nombre RAD
+								</font>
+							</td>
+							<td valign=top width="380">
+								<font size=2 color=black>
+									<input type="text" name="NombreRADNEW" size="12" value="<?php echo $NombreRAD; ?>" class="CampoTexto" class="keyboardInput">
+								</font>
+							</td>
+						</tr>
+					</table>
+					</form>
+				</DIV>
+
+			<?php
+			abrir_barra_estado();
+				echo '<input type="Button"  class="BotonesEstadoCuidado" value=" <<< Volver al escritorio " onClick="OcultarPopUp(\'BarraFlotanteConfiguracion\')">';
+				echo '<input type="Button"  class="BotonesEstado" value=" Guardar configuraci&oacute;n >>> " onClick="document.forms.continuar.submit();">';
+			cerrar_barra_estado();
+			cerrar_ventana();
+			?>
+		<!-- FIN DE MARCOS POPUP -->
+		</div>
+
+
 <?php 
 		} // Finsi para el marco con opciones administrativas
 ?>
@@ -209,9 +436,13 @@
 						echo '<a href="javascript:document.core_ver_menu.submit();" title="Ir a mi escritorio"><img src="img/tango_user-desktop.png" width="24" height="24" border=0></a>';
 				?>
 				<?php 
-					//Despliega boton de administracion
+					//Despliega botones de administracion
 					if ($Login_usuario=="admin" && $Sesion_abierta)
-						echo '<a href=\'javascript:AbrirPopUp("BarraFlotanteDesarrollo"); \'><img src="img/icono_admin.png" border="0"></a>';
+						echo '
+						<div id="marco_cluster" style="position: absolute; left: 140px; top: 0px;">
+							<a href=\'javascript:AbrirPopUp("BarraFlotanteDesarrollo"); \'><img src="img/icono_admin.png" border="0"></a>
+							<a href=\'javascript:AbrirPopUp("BarraFlotanteConfiguracion"); \'><img src="img/icono_config.png" border=0 algin=middle></a>
+						</div>';
 				?>
 			</td>
 			<td align="center" valign="middle" width="60%">
@@ -223,7 +454,7 @@
 						echo '<font color="#d4dce4">Generador de Aplicaciones WEB</font> Libre y multiplataforma';
 				?>
 			</td>
-			<td align="right"  width="20%" valign="bottom">
+			<td align="right"  width="20%" valign="top">
 				<?php 
 					if ($Sesion_abierta) {
 				?>

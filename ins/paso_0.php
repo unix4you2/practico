@@ -24,6 +24,7 @@
 	<tr>
 		<td><img src="../img/practico_login.png" border=0 ALT="Logo Practico"></td>
 		<td valign=top><font size=2 color=black><br><b>
+			<h1>Versi&oacute;n <?php include("../inc/version_actual.txt"); ?></h1>
 			[Bienvenido al proceso de instalaci&oacute;n]</b><br><br>
 			Este asistente le guiar&aacute; en cada paso de las configuraciones iniciales para el uso de Pr&aacute;ctico como un entorno visual para el desarrollo de aplicaciones web.
 		</font></td>

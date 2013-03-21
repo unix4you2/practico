@@ -106,5 +106,69 @@
 				}
 		}
 
+/* ################################################################## */
+/* ################################################################## */
+	if ($accion=="guardar_configuracion")
+		{
+			/*
+				Function: guardar_configuracion
+				Actualiza los valores del archivo core/configuracion.php con los ingresados en el formulario por el administrador.  El archivo debe contar con permisos suficientes para que el usuario que ejecuta el servicio web pueda escribirlo.
+
+				Variables de entrada:
+
+					variables desde formulario
+
+				Salida:
+
+					Archivo de configuracion actualizado con los nuevos parametros
+			*/
+
+			$mensaje_error="";
+
+			$hay_error=0;
+			// Crea la cadena de salida con la configuracion de practico
+$salida=sprintf("<?php
+	\$ServidorBD='%s';
+	\$BaseDatos='%s';
+	\$UsuarioBD='%s';
+	\$PasswordBD='%s';
+	\$MotorBD='%s';
+	\$PuertoBD='%s';
+	\$NombreRAD='%s';
+	\$PlantillaActiva='%s';
+	\$ArchivoCORE='';
+	\$TablasCore='%s';
+	\$TablasApp='%s';
+	\$LlaveDePaso='%s';
+	\$ModoDepuracion=%s;
+	\$ZonaHoraria='%s';
+	\$CaracteresCaptcha=%s;
+?>",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$PlantillaActivaNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$ZonaHorariaNEW,$CaracteresCaptchaNEW);
+			// Escribe el archivo de configuracion
+			$archivo_config=fopen("core/configuracion.php","w");
+			if($archivo_config==null)
+				{
+					$hay_error=1;
+					$mensaje_error='<b>Se han encontrado errores al tratar de escribir el archivo de configuraci&oacute;n !!!</b>:<br>Si lo desea una alternativa puede ser cambiar usted mismo los valores por defecto incluidos en el archivo core/configuracion.php.<br><br>Tambi&eacute;n puede cambiar los permisos al archivo de configuraci&oacute;n y probar nuevamente con este asistente.';
+				}
+			else
+				{
+					fwrite($archivo_config,$salida,strlen($salida)); 
+					fclose($archivo_config);
+				}
+			if ($mensaje_error=="")
+				{
+					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="Ver_menu">
+						<input type="Hidden" name="error_titulo" value="Error en tiempo de ejecuci&oacute;n">
+						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+		}
 ?>
 

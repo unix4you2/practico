@@ -1,17 +1,17 @@
 <?php
-		$ServidorBD='localhost';
-		$BaseDatos='practico';
-		$UsuarioBD='root';
-		$PasswordBD='';
-		$MotorBD='mysql';
-		$PuertoBD='';
-		$NombreRAD='Pr&aacute;ctico';
-		$PlantillaActiva='nomo';
-		$ArchivoCORE='';
-		$TablasCore='Core_';
-		$TablasApp='App_';
-		$LlaveDePaso='ZYGVDPXWPY';
-		$ModoDepuracion=0;
-		$ZonaHoraria='America/Bogota';
-		$CaracteresCaptcha=4;
-	?>
+	$ServidorBD='localhost';
+	$BaseDatos='practico';
+	$UsuarioBD='root';
+	$PasswordBD='';
+	$MotorBD='mysql';
+	$PuertoBD='';
+	$NombreRAD='Práctico';
+	$PlantillaActiva='nomo';
+	$ArchivoCORE='';
+	$TablasCore='Core_';
+	$TablasApp='App_';
+	$LlaveDePaso='ZYGVDPXWPY';
+	$ModoDepuracion=0;
+	$ZonaHoraria='America/Bogota';
+	$CaracteresCaptcha=4;
+?>

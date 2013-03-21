@@ -9,7 +9,7 @@ VersionFinalAno="13"
 VersionFinalMes="5"
 
 #[ListaArchivos] Separados por espacio
-ListaArchivos="  "
+ListaArchivos=" core/marco_arriba.php ins/paso_0.php img/icono_config.png index.php "
 
 #[ArchivosObligatorios] Separados por espacio
 ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame.txt inc/version_actual.txt"
@@ -18,7 +18,8 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #[LogCambios] Usado para tmp/par_cambios.txt
 #TOMAR CONTENIDO DESDE EL README
 LogCambios="
-  * Added: 
+  * Added: Formulario para edición del archivo de configuración por admin
+  * Fixed: Se deja numero de version informativo al inicio del instalador
 "
 
 ########################################################################
