@@ -289,10 +289,61 @@
 		</td>
 		<td valign=top>
 			<select  name="Auth_TipoMotor" class="Combos">
-				<option value="practico">Interno (Tablas propias de Pr&aacute;ctico)</option>
+				<option value="practico">Interno (Tablas propias de Pr&aacute;ctico usando MD5)</option>
 				<option value="ldap">LDAP (Servidor de directorio)</option>
 			</select>
 			<a href="#" title="Importante" name="El uso de un motor de autenticaci&oacute;n diferente a Pr&aacute;ctico no excluye la creaci&oacute;n de los usuarios sobre la herramienta.  El motor externo servira como metodo para validar el login y clave correspondiente como un m&eacute;todo de autenticaci&oacute;n centralizado; pero el resto de caracter&iacute;sticas del perfil ser&aacute;n tomadas desde el usuario Pr&aacute;ctico.  El cambio de contrase&ntilde;a en Pr&aacute;ctico ser&aacute; deshabilitado para que sea controlada solamente por el motor externo.  El usuario admin seguir&aacute; siendo siempre aut&oacute;nomo para no perder control de acceso por errores de configuraci&oacute;n."><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+		</td>
+	</tr>
+	<tr>
+		<td valign=top align=right>
+			<font size=2 color=black>
+				Algoritmo de encripci&oacute;n
+			</font>
+		</td>
+		<td valign=top>
+			<select  name="Auth_TipoEncripcion" class="Combos">
+				<option value="plano">Texto plano</option>
+				<option value="md5">MD5</option>
+				<option value="md4">MD4</option>
+				<option value="md2">MD2</option>
+				<option value="sha1">SHA 1</option>
+				<option value="sha256">SHA 256</option>
+				<option value="sha384">SHA 384</option>
+				<option value="sha512">SHA 512</option>
+				<option value="crc32">CRC 32</option>
+				<option value="crc32b">CRC 32B</option>
+				<option value="adler32">Adler 32</option>
+				<option value="gost">Gost</option>
+				<option value="whirlpool">Whirlpool</option>
+				<option value="snefru">Snefru</option>
+				<option value="ripemd128">Ripemd 128</option>
+				<option value="ripemd160">Ripemd 160</option>
+				<option value="ripemd256">Ripemd 256</option>
+				<option value="ripemd320">Ripemd 320</option>
+				<option value="tiger128,3">Tiger 128,3</option>
+				<option value="tiger128,4">Tiger 128,4</option>
+				<option value="tiger160,3">Tiger 160,3</option>
+				<option value="tiger160,4">Tiger 160,4</option>
+				<option value="tiger192,3">Tiger 192,3</option>
+				<option value="tiger192,4">Tiger 192,4</option>
+				<option value="haval128,3">Haval 128,3</option>
+				<option value="haval128,4">Haval 128,4</option>
+				<option value="haval128,5">Haval 128,5</option>
+				<option value="haval160,3">Haval 160,3</option>
+				<option value="haval160,4">Haval 160,4</option>
+				<option value="haval160,5">Haval 160,5</option>
+				<option value="haval192,3">Haval 192,3</option>
+				<option value="haval192,4">Haval 192,4</option>
+				<option value="haval192,5">Haval 192,5</option>
+				<option value="haval224,3">Haval 224,3</option>
+				<option value="haval224,4">Haval 224,4</option>
+				<option value="haval224,5">Haval 224,5</option>
+				<option value="haval256,3">Haval 256,3</option>
+				<option value="haval256,4">Haval 256,4</option>
+				<option value="haval256,5">Haval 256,5</option>
+			</select>
+			<a href="#" title="Tipo de encripcion de claves usado por el motor" name="Especifique el tipo de encripcion utilizado por el sistema de autenticacion que va a utilizar.  Pr&aacute;ctico encriptar&aacute; el valor de clave ingresado por el usuario antes de enviarla al motor a verificaci&oacute;n."><img src="img/icn_12.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 	<tr>

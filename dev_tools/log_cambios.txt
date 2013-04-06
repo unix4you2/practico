@@ -20,6 +20,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
   * Added: Formulario para edición del archivo de configuración por admin
   * Added: Autenticacion por LDAP
+  * Added: Soporte a encripción de claves en motores de autenticación externos sobre 11 tipos de algoritmo diferentes
   * Fixed: Modo de depuracion siempre era desactivado en edición de configuración
   * Fixed: Se deja numero de version informativo al inicio del instalador
 "

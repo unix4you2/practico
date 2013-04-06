@@ -63,12 +63,42 @@
 				}
 			session_destroy();
 
-			$resultado_usuario=ejecutar_sql("SELECT login, nombre, clave, descripcion, nivel, correo, llave_paso FROM ".$TablasCore."usuario WHERE estado=1 AND login='$uid' AND clave=MD5('$clave')");
-			$registro = $resultado_usuario->fetch();
+			$ok_login=0;			
+			//Verifica autenticacion interna
+			if ($Auth_TipoMotor=="practico")
+				{
+					$resultado_usuario=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE estado=1 AND login='$uid' AND clave=MD5('$clave')");
+					$registro = $resultado_usuario->fetch();
+					if ($registro["login"]!="")
+						$ok_login=1;
+				}
+				
+			//Verifica autenticacion por LDAP
+			if ($Auth_TipoMotor=="ldap")
+				{
+					$auth_ldap_dc="";
+					$auth_ldap_dc_trozos=explode(".",$Auth_LDAPDominio);
+					for ($i = 0; $i < count($auth_ldap_dc_trozos) ; $i++)
+						$auth_ldap_dc.=",dc=".$auth_ldap_dc_trozos[$i];
+					$auth_ldap_cadena = 'uid='.$uid.',ou='.$Auth_LDAPOU.$auth_ldap_dc;
+					// Conexion a LDAP
+					$auth_ldap_conexion = ldap_connect( $Auth_LDAPServidor, $Auth_LDAPPuerto );
+					ldap_set_option($auth_ldap_conexion, LDAP_OPT_PROTOCOL_VERSION, 3);
+					//Verifica si se debe preencriptar la clave
+					if ($Auth_TipoEncripcion!="plano")
+						$clave=hash($Auth_TipoEncripcion, $clave);
+					// match de usuario y password
+					if (  ldap_bind( $auth_ldap_conexion, $auth_ldap_cadena, $clave )  )
+						$ok_login=1;
+				}
 
 			$clave_correcta=0;
-			if ($clave!="" && $registro["login"]!="" && $ok_captcha==1)
+			if ($clave!="" && $ok_login==1 && $ok_captcha==1)
 				  {
+						// Busca datos del usuario Practico, sin importar metodo de autenticacion para tener configuraciones de permisos y parametros propios de la herramienta
+						$resultado_usuario=ejecutar_sql("SELECT login, nombre, clave, descripcion, nivel, correo, llave_paso FROM ".$TablasCore."usuario WHERE login='$uid' ");
+						$registro = $resultado_usuario->fetch();					
+						
 						// Se buscan datos de la aplicacion
 						$consulta_parametros=ejecutar_sql("SELECT * FROM ".$TablasCore."parametros");
 						$registro_parametros = $consulta_parametros->fetch();
@@ -95,7 +125,7 @@
 						if (!isset($_SESSION["Sesion_abierta"])) $_SESSION["Sesion_abierta"]=$Sesion_abierta;
 						if (!isset($_SESSION["clave_correcta"])) $_SESSION["clave_correcta"]=$clave_correcta;
 						if (!isset($_SESSION["LlaveDePasoUsuario"])) $_SESSION["LlaveDePasoUsuario"]=$registro["llave_paso"];
-						
+
 						if (!isset($_SESSION["Nombre_Empresa_Corto"])) $_SESSION["Nombre_Empresa_Corto"]=$registro_parametros["nombre_empresa_corto"];
 						if (!isset($_SESSION["Nombre_Aplicacion"])) $_SESSION["Nombre_Aplicacion"]=$registro_parametros["nombre_aplicacion"];
 						if (!isset($_SESSION["Version_Aplicacion"])) $_SESSION["Version_Aplicacion"]=$registro_parametros["version"];
