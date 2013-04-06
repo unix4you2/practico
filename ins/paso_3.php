@@ -52,7 +52,12 @@
 		\$ModoDepuracion=%s;
 		\$ZonaHoraria='%s';
 		\$CaracteresCaptcha=%s;
-	?>",$Servidor,$BaseDatos,$UsuarioBD,$PasswordBD,$MotorBD,$PuertoBD,$TablasCore,$TablasApp,$LlaveDePaso,$ModoDepuracion,$ZonaHoraria,$CaracteresCaptcha);
+		\$Auth_TipoMotor='%s';
+		\$Auth_LDAPServidor='%s';
+		\$Auth_LDAPPuerto='%s';
+		\$Auth_LDAPDominio='%s';
+		\$Auth_LDAPOU='%s';
+	?>",$Servidor,$BaseDatos,$UsuarioBD,$PasswordBD,$MotorBD,$PuertoBD,$TablasCore,$TablasApp,$LlaveDePaso,$ModoDepuracion,$ZonaHoraria,$CaracteresCaptcha,$Auth_TipoMotor,$Auth_LDAPServidor,$Auth_LDAPPuerto,$Auth_LDAPDominio,$Auth_LDAPOU);
 	// Escribe el archivo de configuracion
 	$archivo_config=fopen("../core/configuracion.php","w");
 	if($archivo_config==null)

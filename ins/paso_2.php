@@ -34,7 +34,7 @@
 <font size=2 color=black><br><b>
 	[Motor de Base de Datos]</b>
 </font>
-<table cellspacing=10 width="700">
+<table cellspacing=2 width="700">
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
@@ -159,7 +159,7 @@
 <font size=2 color=black><br><b>
 	[Par&aacute;metros para su primera aplicaci&oacute;n]</b>
 </font>
-<table cellspacing=10 width="700">
+<table cellspacing=2 width="700">
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
@@ -211,7 +211,7 @@
 <font size=2 color=black><br><b>
 	[Configuraci&oacute;n de opciones varias]</b>
 </font>
-<table cellspacing=10 width="700">
+<table cellspacing=2 width="700">
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
@@ -256,7 +256,7 @@
 				<option value="5">5</option>
 				<option value="6">6</option>
 			</select>
-			<a href="#" title="Longitud de la palabra" name="Indica el n&uacute;mero de s&iacute;mbolos utilizados en la palabra de seguridad que deben ingresar los usuarios para cada acceso al sistema."><img src="img/icn_10.gif" border=0></a>
+			<a href="#" title="Longitud de la palabra" name="Indica el n&uacute;mero de s&iacute;mbolos utilizados en la palabra de seguridad que deben ingresar los usuarios para cada acceso al sistema."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 	<tr>
@@ -270,21 +270,80 @@
 				<option value="1">Encendido</option>
 				<option value="0" selected>Apagado</option>
 			</select>
-			<a href="#" title="Presentar errores y advertencias" name="Para sitios en producci&oacute;n esta opci&oacute;n debe estar apagada.  Cuando se enciende ense&ntilde;a durante la ejecuci&oacute;n de la aplicaci&oacute;n todos los errores y mensajes que puedan ser generados por el preprocesador de hipertexto - PHP"><img src="img/icn_10.gif" border=0></a>
+			<a href="#" title="Presentar errores y advertencias" name="Para sitios en producci&oacute;n esta opci&oacute;n debe estar apagada.  Cuando se enciende ense&ntilde;a durante la ejecuci&oacute;n de la aplicaci&oacute;n todos los errores y mensajes que puedan ser generados por el preprocesador de hipertexto - PHP"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 </table>
 
 
-
-
-
-
-
-
-
-
-
+<hr>
+<font size=2 color=black><br><b>
+	[Motor de autenticaci&oacute;n]</b>
+</font>
+<table cellspacing=2 width="700">
+	<tr>
+		<td valign=top align=right>
+			<font size=2 color=black>
+				Tipo
+			</font>
+		</td>
+		<td valign=top>
+			<select  name="Auth_TipoMotor" class="Combos">
+				<option value="practico">Interno (Tablas propias de Pr&aacute;ctico)</option>
+				<option value="ldap">LDAP (Servidor de directorio)</option>
+			</select>
+			<a href="#" title="Importante" name="El uso de un motor de autenticaci&oacute;n diferente a Pr&aacute;ctico no excluye la creaci&oacute;n de los usuarios sobre la herramienta.  El motor externo servira como metodo para validar el login y clave correspondiente como un m&eacute;todo de autenticaci&oacute;n centralizado; pero el resto de caracter&iacute;sticas del perfil ser&aacute;n tomadas desde el usuario Pr&aacute;ctico.  El cambio de contrase&ntilde;a en Pr&aacute;ctico ser&aacute; deshabilitado para que sea controlada solamente por el motor externo.  El usuario admin seguir&aacute; siendo siempre aut&oacute;nomo para no perder control de acceso por errores de configuraci&oacute;n."><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+		</td>
+	</tr>
+	<tr>
+		<td valign=top align=right>
+			<font size=2 color=black>
+				LDAP Servidor
+			</font>
+		</td>
+		<td valign=top width="380">
+			<input type="text" name="Auth_LDAPServidor" size="20" class="CampoTexto" value="">
+			<a href="#" title="Servidor LDAP" name="Indique la direccion IP del servidor de directorio o su nombre en caso de poder ser resuelto."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+		</td>
+	</tr>
+	<tr>
+		<td valign=top align=right>
+			<font size=2 color=black>
+				LDAP Puerto
+			</font>
+		</td>
+		<td valign=top width="380">
+			<input type="text" name="Auth_LDAPPuerto" size="5" class="CampoTexto" value="389">
+			<a href="#" title="Puerto de conexion" name=""><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+		</td>
+	</tr>
+	<tr>
+		<td valign=top align=right>
+			<font size=2 color=black>
+				LDAP Dominio (dc=)
+			</font>
+		</td>
+		<td valign=top width="380">
+			<font size=2 color=black>
+			<input type="text" name="Auth_LDAPDominio" size="15" class="CampoTexto" value="">
+			<a href="#" title="Dominio utilizado por el servidor" name="Ejemplo: midominio.com.co  Con esto sera creada la cadena interna dc=midominio,dc=com,dc=co"><img src="img/icn_10.gif" border=0 align=absmiddle></a> (opcional)
+			</font>
+		</td>
+	</tr>
+	<tr>
+		<td valign=top align=right>
+			<font size=2 color=black>
+				LDAP Unidad organizacional o contexto (ou=)
+			</font>
+		</td>
+		<td valign=top width="380">
+			<font size=2 color=black>
+			<input type="text" name="Auth_LDAPOU" size="15" class="CampoTexto" value="">
+			<a href="#" title="Contexto de conexion del usuario" name="Debe existir sobre el servidor LDAP, ej: people, ventas, mercadeo, etc"><img src="img/icn_10.gif" border=0 align=absmiddle></a> (opcional)
+			</font>
+		</td>
+	</tr>
+</table>
 
 
 

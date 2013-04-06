@@ -14,4 +14,9 @@
 	$ModoDepuracion=0;
 	$ZonaHoraria='America/Bogota';
 	$CaracteresCaptcha=4;
+	$Auth_TipoMotor='practico';
+	$Auth_LDAPServidor='127.0.0.1';
+	$Auth_LDAPPuerto='';
+	$Auth_LDAPDominio='colmedicos.com';
+	$Auth_LDAPOU='clientes';
 ?>
