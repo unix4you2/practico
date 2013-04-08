@@ -286,6 +286,47 @@
 
 /* ################################################################## */
 /* ################################################################## */
+	function verificar_extensiones()
+		{
+			/*
+				Function: verificar_extensiones
+				Verifica si las extensiones minimas requeridas por la herramienta se encuentran activadas y despliega mensaje de error si aplica.
+					
+				Salida:
+					Mensajes de error asociados a la no activacion de cada extension
+			*/
+			global $MotorBD;
+			global $Auth_TipoMotor;
+			global $Auth_TipoEncripcion;
+			
+			//Verifica soporte para LDAP cuando esta activado en la herramienta
+			if ($Auth_TipoMotor=='ldap' &&  !extension_loaded('ldap'))
+				mensaje('Extensi&oacute;n PHP faltante o sin activar','Su instalacion de PHP parece no tener el soporte LDAP activado para ser usado como metodo de autenticacion externa.<br>Por favor haga los ajustes requeridos y reinicie su servicio web.<br>La autenticaci&oacute;n del usuario admin seguir&aacute; siendo independiente para evitar p&eacute;rdida de acceso.','','icono_error.png','TextosEscritorio');
+
+			//Verifica soporte para HASH cuando se requiere encripcion
+			if ($Auth_TipoEncripcion!="plano" && !extension_loaded('hash'))
+				mensaje('Extensi&oacute;n PHP faltante o sin activar','Su instalacion de PHP parece no tener el soporte para HASH activado.<br>Este se requiere cuando es seleccionado un tipo de encripci&oacute;n diferente al plano para contrase&ntilde;as sobre motores de autenticaci&oacute;n externos.<br>Por favor haga los ajustes requeridos y reinicie su servicio web.','','icono_error.png','TextosEscritorio');
+
+			//Verifica soporte para sesiones
+			if (!extension_loaded('session'))
+				mensaje('Extensi&oacute;n PHP faltante o sin activar','Su instalacion de PHP parece no tener el soporte para sesiones activado.  Por favor haga los ajustes requeridos y reinicie su servicio web.','','icono_error.png','TextosEscritorio');
+
+			//Verifica soporte para GD2
+			if (!extension_loaded('gd'))
+				mensaje('Extensi&oacute;n PHP faltante o sin activar','Su instalacion de PHP parece no tener el soporte para librer&iacute;a gr&aacute;fica GD &oacute; GD2 activado.  Por favor haga los ajustes requeridos y reinicie su servicio web.','','icono_error.png','TextosEscritorio');
+
+			//Verifica soporte para PDO
+			if (!extension_loaded('pdo'))
+				mensaje('Extensi&oacute;n PHP faltante o sin activar','Su instalacion de PHP parece no tener el soporte para PDO activado.  Por favor haga los ajustes requeridos y reinicie su servicio web.','','icono_error.png','TextosEscritorio');
+
+			//Verifica soporte para el driver PDO correspondiente al motor utilizado
+			if (!extension_loaded('pdo_'.$MotorBD))
+				mensaje('Extensi&oacute;n PHP faltante o sin activar','Su instalacion de PHP parece no tener el soporte para PDO activado.  Por favor haga los ajustes requeridos y reinicie su servicio web.','','icono_error.png','TextosEscritorio');
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
 	function consultar_bases_de_datos()
 		{
 			/*

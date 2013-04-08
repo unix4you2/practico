@@ -63,18 +63,16 @@
 					else
 						$ConexionPDO = new PDO("mysql:dbname=$BaseDatos;host=$ServidorBD;port=$PuertoBD","$UsuarioBD","$PasswordBD");
 				}
-			if ($MotorBD=="pg")
+			if ($MotorBD=="pgsql")
 				{
 					// Si no se ha definido un numero de puerto
 					if ($PuertoBD=="")
 						$ConexionPDO = new PDO("pgsql:dbname=$BaseDatos;host=$ServidorBD","$UsuarioBD","$PasswordBD");
 					else
-						$ConexionPDO = new PDO("mysql:dbname=$BaseDatos;host=$ServidorBD;port=$PuertoBD","$UsuarioBD","$PasswordBD");
+						$ConexionPDO = new PDO("pgsql:dbname=$BaseDatos;host=$ServidorBD;port=$PuertoBD","$UsuarioBD","$PasswordBD");
 				}
-			if ($MotorBD=="sqlite2")
-						$ConexionPDO = new PDO("sqlite:$BaseDatos");
-			if ($MotorBD=="sqlite3")
-						$ConexionPDO = new PDO("sqlite:$BaseDatos");  //$ConexionPDO = new PDO("sqlite::memory");
+			if ($MotorBD=="sqlite")
+						$ConexionPDO = new PDO("sqlite:$BaseDatos");  // SQLite 3??? $ConexionPDO = new PDO("sqlite::memory");
 			if ($MotorBD=="fbd")
 						$ConexionPDO = new PDO("firebird:dbname=$ServidorBD".":"."$BaseDatos","$UsuarioBD","$PasswordBD");
 			if ($MotorBD=="oracle")

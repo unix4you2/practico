@@ -21,8 +21,11 @@ LogCambios="
   * Added: Formulario para edición del archivo de configuración por admin
   * Added: Autenticacion por LDAP
   * Added: Soporte a encripción de claves en motores de autenticación externos sobre 11 tipos de algoritmo diferentes
+  * Added: Nuevo módulo embebido para administracion LDAP disponible para descarga usando phpldapadmin-1.2.3
   * Fixed: Modo de depuracion siempre era desactivado en edición de configuración
   * Fixed: Se deja numero de version informativo al inicio del instalador
+  * Fixed: Bloqueo de cambio de claves en motores de autenticación externos
+  * Fixed: Autonomía del admin para cambios de clave siempre sobre Práctico
 "
 
 ########################################################################

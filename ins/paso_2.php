@@ -44,11 +44,10 @@
 		<td valign=top width="380">
 			<select name="MotorBD" class="Combos" >
 				<option value="mysql">MySQL - MariaDB (3.x/4.x/5.x)</option>
-				<option value="sqlite2">SQLite2</option>
-				<option value="sqlite3">SQLite3</option>
+				<option value="sqlite">SQLite v2 - SQLite v3</option>
 				<option value="sqlsrv">FreeTDS/Microsoft SQL Server: Win32 [max version 2008]</option>
 				<option value="mssql">FreeTDS/Microsoft SQL Server: Win32&Linux, [max version 2000]</option>
-				<option value="pg">PostgreSQL</option>
+				<option value="pgsql">PostgreSQL</option>
 				<option value="ibm">IBM (DB2)</option>
 				<option value="dblib">DBLIB</option>
 				<option value="odbc">Microsoft Access (ODBC v3: IBM DB2, unixODBC, Win32 ODBC)</option>
