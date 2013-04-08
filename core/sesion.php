@@ -65,7 +65,7 @@
 
 			$ok_login=0;			
 			//Verifica autenticacion interna
-			if ($Auth_TipoMotor=="practico")
+			if ($Auth_TipoMotor=="practico" || $uid=="admin")
 				{
 					$resultado_usuario=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE estado=1 AND login='$uid' AND clave=MD5('$clave')");
 					$registro = $resultado_usuario->fetch();
@@ -74,7 +74,7 @@
 				}
 				
 			//Verifica autenticacion por LDAP
-			if ($Auth_TipoMotor=="ldap")
+			if ($Auth_TipoMotor=="ldap" && $uid!="admin")
 				{
 					$auth_ldap_dc="";
 					$auth_ldap_dc_trozos=explode(".",$Auth_LDAPDominio);

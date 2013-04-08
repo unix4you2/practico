@@ -230,9 +230,23 @@ if ($accion=="cambiar_clave")
 								</form>
 								<form action="<?php echo $ArchivoCORE; ?>" method="POST" style="height: 0px; padding-bottom: 0px; padding-top: 0px; margin-top: 0px; margin-bottom: 0px;" name="cancelar"><input type="Hidden" name="accion" value="Ver_menu"></form>
 							</td><td width="5"></td>
-							<td align="RIGHT">
-								<input type="Button" name="" value="Actualizar" class="BotonesCuidado" onClick="document.datos.submit();">
-								&nbsp;&nbsp;<input type="Button" onclick="document.cancelar.submit()" name="" value="Cancelar" class="Botones">
+							<td align="center" colspan=3>
+								<br>
+								<?php
+									//Permite cambio solamente si es admin o el motor de autenticacion es practico
+									if ($Auth_TipoMotor=="practico" || $Login_usuario=="admin")
+										{
+											echo '<input type="Button" name="" value="Actualizar" class="BotonesCuidado" onClick="document.datos.submit();">
+											&nbsp;&nbsp;<input type="Button" onclick="document.cancelar.submit()" name="" value="Cancelar" class="Botones">';
+										}
+									else
+										{
+											echo '<br><h4>Importante: El motor de autenticaci&oacute;n definido para la herramienta es de tipo externo.<br>
+											El cambio de clave se encuentra deshabilitado pues debe ser gestionado de manera centralizada<br>
+											por usted en la herramienta definida por el administrador de sistemas (bajo '.$Auth_TipoMotor.').
+											</h4>';
+										}
+								?>
 							</td>
 							<td></td>
 						</tr>

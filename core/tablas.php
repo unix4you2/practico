@@ -199,7 +199,7 @@ if ($accion=="editar_tabla")
 						<td>
 							<select  name="tipo" class="Combos" >
 								<option value="INT">Entero</option>
-								<option value="VARCHAR">Cadena (Hasta 255)</option>
+								<option value="VARCHAR">Cadena (longitud Hasta 255)</option>
 								<option value="TEXT">Texto (Ilimitado)</option>
 								<option value="DATE">Fecha (sin hora)</option>
 							<!--
@@ -212,7 +212,7 @@ if ($accion=="editar_tabla")
 					<tr>
 						<td align="right">Longitud (Si aplica):</td>
 						<td><input type="text" name="longitud" size="10" class="CampoTexto">
-						<a href="#" title="Cuidado" name="Este campo puede ser de car&aacute;cter obligatorio dependiendo del tipo de dato a ser almacenado"><img src="img/icn_12.gif" border=0></a>
+						<a href="#" title="Cuidado" name="Este campo puede ser de car&aacute;cter obligatorio dependiendo del tipo de dato a ser almacenado, ejemplo campos tipo Cadena"><img src="img/icn_12.gif" border=0></a>
 						<a href="#" title="Ayuda de formato:" name="Si alguna vez necesita poner una barra invertida (backslash) o una comilla simple entre esos valores, siempre ponga una barra invertida adicional (backslash).  Para campos enum o set, use el formato: 'a','b','c'..."><img src="img/icn_10.gif" border=0></a>	
 						</td>
 					</tr>
