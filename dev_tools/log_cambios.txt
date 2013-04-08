@@ -9,7 +9,7 @@ VersionFinalAno="13"
 VersionFinalMes="5"
 
 #[ListaArchivos] Separados por espacio
-ListaArchivos=" core/marco_arriba.php ins/paso_0.php img/icono_config.png index.php "
+ListaArchivos=" core/comunes.php core/conexiones.php core/marco_arriba.php ins/paso_0.php ins/paso_2.php ins/paso_3.php img/icono_config.png index.php core/objetos.php core/sesion.php core/usuarios.php "
 
 #[ArchivosObligatorios] Separados por espacio
 ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame.txt inc/version_actual.txt"
@@ -26,6 +26,7 @@ LogCambios="
   * Fixed: Se deja numero de version informativo al inicio del instalador
   * Fixed: Bloqueo de cambio de claves en motores de autenticación externos
   * Fixed: Autonomía del admin para cambios de clave siempre sobre Práctico
+  * Fixed: Validaciones en instalación de PHP y extensiones requeridas
 "
 
 ########################################################################
