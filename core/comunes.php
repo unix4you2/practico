@@ -313,11 +313,11 @@
 
 			//Verifica soporte para GD2
 			if (!extension_loaded('gd'))
-				mensaje('Extensi&oacute;n PHP faltante o sin activar','Su instalacion de PHP parece no tener el soporte para librer&iacute;a gr&aacute;fica GD &oacute; GD2 activado.  Por favor haga los ajustes requeridos y reinicie su servicio web.','','icono_error.png','TextosEscritorio');
+				mensaje('Extensi&oacute;n PHP faltante o sin activar','Su instalacion de PHP parece no tener el soporte para librer&iacute;a gr&aacute;fica GD &oacute; GD2 activado.<br>Aquellos utilizando debian, ubuntu o sus derivados pueden intentar un <b>apt-get install php5-gd</b> para agregarlo.<br>Por favor haga los ajustes requeridos y reinicie su servicio web.','','icono_error.png','TextosEscritorio');
 
 			//Verifica soporte para PDO
 			if (!extension_loaded('pdo'))
-				mensaje('Extensi&oacute;n PHP faltante o sin activar','Su instalacion de PHP parece no tener el soporte para PDO activado.  Por favor haga los ajustes requeridos y reinicie su servicio web.','','icono_error.png','TextosEscritorio');
+				mensaje('Extensi&oacute;n PHP faltante o sin activar','Su instalacion de PHP parece no tener el soporte para PDO activado.<br>Por favor haga los ajustes requeridos y reinicie su servicio web.','','icono_error.png','TextosEscritorio');
 
 			//Verifica soporte para el driver PDO correspondiente al motor utilizado
 			if (!extension_loaded('pdo_'.$MotorBD))
