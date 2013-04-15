@@ -1010,7 +1010,7 @@ if ($accion=="editar_formulario")
 										<option value="interna_cargar">Cargar un objeto</option>
 									</optgroup>
 									<optgroup label="Definidas por el usuario">
-										<option value="externa_formulario">En personalizadas.php</option>
+										<option value="externa_formulario">En personalizadas.php o cualquier otro m&oacute;dulo instalado</option>
 										<option value="externa_javascript">Comando en JavaScript</option>
 									</optgroup>
 								</select>
