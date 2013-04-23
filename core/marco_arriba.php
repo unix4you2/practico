@@ -211,11 +211,11 @@
 							<td valign=top width="380">
 								<select name="MotorBDNEW" class="Combos" >
 									<option value="mysql"	 <?php if ($MotorBD=="mysql") echo "SELECTED"; ?> >MySQL - MariaDB (3.x/4.x/5.x)</option>
+									<option value="pgsql"		 <?php if ($MotorBD=="pgsql") echo "SELECTED"; ?> >PostgreSQL</option>
 									<option value="sqlite2"	 <?php if ($MotorBD=="sqlite2") echo "SELECTED"; ?> >SQLite2</option>
 									<option value="sqlite3"	 <?php if ($MotorBD=="sqlite3") echo "SELECTED"; ?> >SQLite3</option>
 									<option value="sqlsrv"	 <?php if ($MotorBD=="sqlsrv") echo "SELECTED"; ?> >FreeTDS/Microsoft SQL Server: Win32 [max version 2008]</option>
 									<option value="mssql"	 <?php if ($MotorBD=="mssql") echo "SELECTED"; ?> >FreeTDS/Microsoft SQL Server: Win32&Linux, [max version 2000]</option>
-									<option value="pg"		 <?php if ($MotorBD=="pg") echo "SELECTED"; ?> >PostgreSQL</option>
 									<option value="ibm"		 <?php if ($MotorBD=="ibm") echo "SELECTED"; ?> >IBM (DB2)</option>
 									<option value="dblib"	 <?php if ($MotorBD=="dblib") echo "SELECTED"; ?> >DBLIB</option>
 									<option value="odbc"	 <?php if ($MotorBD=="odbc") echo "SELECTED"; ?> >Microsoft Access (ODBC v3: IBM DB2, unixODBC, Win32 ODBC)</option>
@@ -609,7 +609,7 @@
 								$Complemento_tablas=",".$TablasCore."usuario_menu";
 								$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$Login_usuario'";  // AND nivel>0
 							}
-						$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".$Complemento_tablas." WHERE posible_arriba ".$Complemento_condicion);
+						$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".$Complemento_tablas." WHERE posible_arriba=1 ".$Complemento_condicion);
 
 						while($registro = $resultado->fetch())
 							{

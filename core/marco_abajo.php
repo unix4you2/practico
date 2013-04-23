@@ -63,7 +63,7 @@
 				?>
 			</td>
 			<td align="right" valign="bottom" width="50%">
-				Software por John F. Arroyave Guti&eacute;rrez&nbsp;&nbsp;
+				<i>&copy; Codigoabierto.org</i>&nbsp;&nbsp;
 			</td>
 		</tr></table>
 	</td></tr>

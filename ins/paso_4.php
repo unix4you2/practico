@@ -34,6 +34,7 @@
 	// Ejecuta los scripts de creacion de la BD si se requiere
 	$total_ejecutadas=0;
 
+
 	if ($aplicar_script_basedatos)
 		{
 
@@ -41,8 +42,8 @@
 			include_once("../core/conexiones.php");
 			include_once("../core/comunes.php");
 
-			//Abre el archivo con los queries
-			$RutaScriptSQL="sql/practico.sql";
+			//Abre el archivo con los queries dependiendo del motor
+			$RutaScriptSQL="sql/practico.".$MotorBD;
 			$archivo_consultas=fopen($RutaScriptSQL,"r");
 			$total_consultas= fread($archivo_consultas,filesize($RutaScriptSQL));
 			fclose($archivo_consultas);

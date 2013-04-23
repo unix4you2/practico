@@ -90,12 +90,19 @@
 			if ($MotorBD=="ifmx")
 						$ConexionPDO = new PDO("informix:DSN=InformixDB","$UsuarioBD","$PasswordBD");
 
-			// Establece parametros para la conexion
-			$ConexionPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+			// Evita el SQLSTATE[HY000]: General error. presentado por PostgreSQL.  Se habilita solo para MySQL
+			if ($MotorBD=="mysql")
+				{
+					// Establece parametros para la conexion
+					$ConexionPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				}
 			
 			// Evita el "General error: 2014 Cannot execute queries while other unbuffered queries are active"
 			if ($MotorBD=="mysql")
-				$ConexionPDO->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
+				{
+					$ConexionPDO->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
+				}
 
 			//$this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 			//$this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
