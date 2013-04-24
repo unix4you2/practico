@@ -33,17 +33,19 @@
 <?php
 	// Ejecuta los scripts de creacion de la BD si se requiere
 	$total_ejecutadas=0;
-
-
+	
 	if ($aplicar_script_basedatos)
 		{
+			// Si el motor es SQLite se requiere una booleana para que conexiones.php agregue un prefijo en la creacion de archivo
+			$tiempo_instalacion_activa=1;
 
 			include_once("../core/configuracion.php");
 			include_once("../core/conexiones.php");
 			include_once("../core/comunes.php");
-
+			
 			//Abre el archivo con los queries dependiendo del motor
 			$RutaScriptSQL="sql/practico.".$MotorBD;
+			
 			$archivo_consultas=fopen($RutaScriptSQL,"r");
 			$total_consultas= fread($archivo_consultas,filesize($RutaScriptSQL));
 			fclose($archivo_consultas);
@@ -62,6 +64,7 @@
 
 							//Ejecuta el query
 							$consulta_enviar = $ConexionPDO->prepare($consulta);
+							echo $consulta;
 							$consulta_enviar->execute();
 							$total_ejecutadas++;
 						}
@@ -73,7 +76,8 @@
 				}
 
 			//Actualiza las llaves de paso de los usuarios insertados
-			$consulta="UPDATE ".$TablasCore."usuario SET llave_paso=MD5('".$LlaveDePaso."')";
+			$LlaveEnMD5=hash("md5", $LlaveDePaso);
+			$consulta="UPDATE ".$TablasCore."usuario SET llave_paso='".$LlaveEnMD5."' ";
 			$consulta_enviar = $ConexionPDO->prepare($consulta);
 			$consulta_enviar->execute();
 		}

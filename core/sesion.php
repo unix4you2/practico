@@ -59,7 +59,7 @@
 				{
 					$ok_captcha=0;
 					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$uid','Elimina sesiones activas al intentar acceso con CAPTCHA incorrecto desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$uid','Elimina sesiones activas al intentar acceso con CAPTCHA incorrecto desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");
 				}
 			session_destroy();
 
@@ -67,7 +67,8 @@
 			//Verifica autenticacion interna
 			if ($Auth_TipoMotor=="practico" || $uid=="admin")
 				{
-					$resultado_usuario=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE estado=1 AND login='$uid' AND clave=MD5('$clave')");
+					$ClaveEnMD5=hash("md5", $clave);
+					$resultado_usuario=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE estado=1 AND login='$uid' AND clave='$ClaveEnMD5' ");
 					$registro = $resultado_usuario->fetch();
 					if ($registro["login"]!="")
 						$ok_login=1;
@@ -100,7 +101,7 @@
 						$registro = $resultado_usuario->fetch();					
 						
 						// Se buscan datos de la aplicacion
-						$consulta_parametros=ejecutar_sql("SELECT * FROM ".$TablasCore."parametros");
+						$consulta_parametros=ejecutar_sql("SELECT id,".$ListaCamposSinID_parametros." FROM ".$TablasCore."parametros");
 						$registro_parametros = $consulta_parametros->fetch();
 
 						// Actualiza las vartiables de sesion con el registro
@@ -131,7 +132,7 @@
 						if (!isset($_SESSION["Version_Aplicacion"])) $_SESSION["Version_Aplicacion"]=$registro_parametros["version"];
 
 						// Lleva a auditoria
-						ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$uid','Ingresa al sistema desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");
+						ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$uid','Ingresa al sistema desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");
 						// Actualiza fecha del ultimo ingreso para el usuario
 						ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso='$fecha_operacion' WHERE login='$uid'");
 				  }
@@ -163,7 +164,7 @@
 	if ($accion=="Terminar_sesion")
 	{
 		// Lleva a auditoria
-		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Cierra sesion desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");
+		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Cierra sesion desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");
 
 		session_destroy();
 		echo '<form name="Redireccion" method="POST"><input type="Hidden" name="accion" value="Mensaje_cierre_sesion"></form><script type="" language="JavaScript">	document.Redireccion.submit();  </script>';

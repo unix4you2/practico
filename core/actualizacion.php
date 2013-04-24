@@ -119,7 +119,7 @@ if ($accion=="cargar_archivo")
 						<input type="submit" value="'.$texto_boton_siguiente.'"  class="BotonesCuidado">
 					</form>';
 				// Lleva a auditoria
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Carga archivo en carpeta $carpeta - $nombre_archivo','$fecha_operacion','$hora_operacion')");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Carga archivo en carpeta $carpeta - $nombre_archivo','$fecha_operacion','$hora_operacion')");
 			}
 		else
 			{
@@ -236,7 +236,7 @@ if ($accion=="analizar_parche")
 						<input type="submit" value="Continuar aplicando el parche"  class="BotonesCuidado">
 					</form>';
 				// Lleva a auditoria
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Analiza archivo en carpeta $carpeta - $nombre_archivo','$fecha_operacion','$hora_operacion')");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Analiza archivo en carpeta $carpeta - $nombre_archivo','$fecha_operacion','$hora_operacion')");
 			}
 		else
 			{
@@ -403,7 +403,7 @@ if ($accion=="aplicar_parche")
 				<hr>
 				<b>PROCESO FINALIZADO<br>';
 				// Lleva a auditoria
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Actualiza version de plataforma desde $version_actual hacia $version_final','$fecha_operacion','$hora_operacion')");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Actualiza version de plataforma desde $version_actual hacia $version_final','$fecha_operacion','$hora_operacion')");
 			}
 		else
 			{

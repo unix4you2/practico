@@ -58,7 +58,7 @@ if ($accion=="actualizar_menu")
 		// Actualiza los datos del item
 		ejecutar_sql_unaria("UPDATE ".$TablasCore."menu SET texto='$texto',padre='$padre',peso='$peso',url='$url',posible_clic='$posible_clic',tipo_comando='$tipo_comando',comando='$comando',nivel_usuario='$nivel_usuario',columna='$columna',posible_arriba='$posible_arriba',posible_centro='$posible_centro',posible_escritorio='$posible_escritorio',seccion='$seccion',imagen='$imagen' WHERE id=$id");
 		// Lleva a auditoria
-		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Actualiza menu item $texto c&oacute;digo $id','$fecha_operacion','$hora_operacion')");
+		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Actualiza menu item $texto c&oacute;digo $id','$fecha_operacion','$hora_operacion')");
 		echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 	}
 
@@ -88,7 +88,7 @@ if ($accion=="detalles_menu")
 		abrir_ventana('Edici&oacute;n del item de menu','f2f2f2','');
 
 		// Busca detalles del item
-		$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE id=$id");
+		$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE id=$id");
 		$registro = $resultado->fetch();
 		?>
 
@@ -159,7 +159,7 @@ if ($accion=="detalles_menu")
 									<select name="padre" class="Combos" >
 										<option value="0">Ninguno</option>
 										<?php
-											$resultado_padre=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE 1 ORDER BY texto");
+											$resultado_padre=ejecutar_sql("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE 1=1 ORDER BY texto");
 											while($registro_padre = $resultado_padre->fetch())
 												{
 													if ($registro["padre"]==$registro_padre["id"])
@@ -348,7 +348,7 @@ if ($accion=="eliminar_menu")
 		// Elimina el enlace para todos los usuarios que utilizan esa opcion
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=$id");
 		// Lleva a auditoria
-		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina en menu $id','$fecha_operacion','$hora_operacion')");
+		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Elimina en menu $id','$fecha_operacion','$hora_operacion')");
 		echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 	}
 
@@ -390,9 +390,9 @@ if ($accion=="eliminar_menu")
 			if ($mensaje_error=="")
 				{
 					// Guarda los datos del comando o item de menu
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."menu VALUES (0,'$texto','$padre','$peso','$url','$posible_clic','$tipo_comando','$comando','$nivel_usuario','$columna','$posible_arriba','$posible_escritorio','$posible_centro','$seccion','$imagen')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES ('$texto','$padre','$peso','$url','$posible_clic','$tipo_comando','$comando','$nivel_usuario','$columna','$posible_arriba','$posible_escritorio','$posible_centro','$seccion','$imagen')");
 					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Agrega en menu: $texto','$fecha_operacion','$hora_operacion')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Agrega en menu: $texto','$fecha_operacion','$hora_operacion')");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
 			else
@@ -486,7 +486,7 @@ if ($accion=="administrar_menu")
 									<select name="padre" class="Combos" >
 										<option value="0">Ninguno</option>
 										<?php				
-											$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ORDER BY texto");
+											$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu ORDER BY texto");
 											while($registro = $resultado->fetch())
 												{
 													echo '<option value="'.$registro["id"].'">'.$registro["texto"].'</option>';
@@ -646,7 +646,7 @@ if ($accion=="administrar_menu")
 						<td></td>
 					</tr>	';
 
-				$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu WHERE 1");
+				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE 1=1");
 				while($registro = $resultado->fetch())
 					{
 						$cadena_nivel="";

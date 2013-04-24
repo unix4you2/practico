@@ -211,9 +211,8 @@
 							<td valign=top width="380">
 								<select name="MotorBDNEW" class="Combos" >
 									<option value="mysql"	 <?php if ($MotorBD=="mysql") echo "SELECTED"; ?> >MySQL - MariaDB (3.x/4.x/5.x)</option>
-									<option value="pgsql"		 <?php if ($MotorBD=="pgsql") echo "SELECTED"; ?> >PostgreSQL</option>
-									<option value="sqlite2"	 <?php if ($MotorBD=="sqlite2") echo "SELECTED"; ?> >SQLite2</option>
-									<option value="sqlite3"	 <?php if ($MotorBD=="sqlite3") echo "SELECTED"; ?> >SQLite3</option>
+									<option value="pgsql"	 <?php if ($MotorBD=="pgsql") echo "SELECTED"; ?> >PostgreSQL</option>
+									<option value="sqlite"	 <?php if ($MotorBD=="sqlite") echo "SELECTED"; ?> >SQLite v2 - SQLite v3</option>
 									<option value="sqlsrv"	 <?php if ($MotorBD=="sqlsrv") echo "SELECTED"; ?> >FreeTDS/Microsoft SQL Server: Win32 [max version 2008]</option>
 									<option value="mssql"	 <?php if ($MotorBD=="mssql") echo "SELECTED"; ?> >FreeTDS/Microsoft SQL Server: Win32&Linux, [max version 2000]</option>
 									<option value="ibm"		 <?php if ($MotorBD=="ibm") echo "SELECTED"; ?> >IBM (DB2)</option>

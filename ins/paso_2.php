@@ -45,7 +45,7 @@
 			<select name="MotorBD" class="Combos" >
 				<option value="mysql">MySQL - MariaDB (3.x/4.x/5.x)</option>
 				<option value="pgsql">PostgreSQL</option>
-				<option value="sqlite">SQLite v2 - SQLite v3</option>
+				<option value="sqlite">SQLite v2 - SQLite v3 (Si no existe ser&aacute; creada en la ra&iacute;z)</option>
 				<option value="sqlsrv">FreeTDS/Microsoft SQL Server: Win32 [max version 2008]</option>
 				<option value="mssql">FreeTDS/Microsoft SQL Server: Win32&Linux, [max version 2000]</option>
 				<option value="ibm">IBM (DB2)</option>
@@ -110,8 +110,8 @@
 			</font>
 		</td>
 		<td valign=top>
-			<input type="text" name="TablasCore" size="7" value="Core_" class="CampoTexto" class="keyboardInput">
-			<a href="#" title="Se recomienda NO vac&iacute;o" name=""><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+			<input type="text" name="TablasCore" size="7" value="core_" class="CampoTexto" class="keyboardInput">
+			<a href="#" title="Se recomienda NO vac&iacute;o Ni Mayusculas" name=""><img src="img/icn_12.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 	<tr>
@@ -121,8 +121,8 @@
 			</font>
 		</td>
 		<td valign=top>
-			<input type="text" name="TablasApp" size="7" value="App_" class="CampoTexto" class="keyboardInput">
-			<a href="#" title="Importante" name="El prefijo utilizado para las tablas de aplicaci&oacute;n puede ser utilizado para separar diferentes instalaciones de Pr&aacute;ctico sobre una misma base de datos o tambi&eacute;n puede ser dejado vac&iacute;o para enlazar/integrar a Pr&aacute;ctico con otras aplicaciones pre-existentes."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+			<input type="text" name="TablasApp" size="7" value="app_" class="CampoTexto" class="keyboardInput">
+			<a href="#" title="Importante" name="El prefijo utilizado para las tablas de aplicaci&oacute;n puede ser utilizado para separar diferentes instalaciones de Pr&aacute;ctico sobre una misma base de datos o tambi&eacute;n puede ser dejado vac&iacute;o para enlazar/integrar a Pr&aacute;ctico con otras aplicaciones pre-existentes. No se recomienda mayusculas para compatibilidad entre motores."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 	<tr>

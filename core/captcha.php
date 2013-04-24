@@ -39,7 +39,8 @@
 			$plantilla = "23456789abcdefghijkmnpqrstuvwxyz";
 			for($i=0;$i<$longitud;$i++)
 				{
-					$clave .= $plantilla{rand(0,strlen($plantilla)-1)};
+					$posicion=rand(0,strlen($plantilla)-1);
+					$clave .= $plantilla[$posicion];
 				}
 			return $clave;
 		}

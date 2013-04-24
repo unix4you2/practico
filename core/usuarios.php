@@ -164,14 +164,14 @@ if ($accion=="copiar_permisos")
 		// Elimina opciones existentes
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario='$usuariod'");
 		// Copia permisos
-		$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."usuario_menu WHERE usuario='$usuarioo'");
+		$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario='$usuarioo'");
 		while($registro = $resultado->fetch())
 			{
 				$menuinsertar=$registro["menu"];
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu VALUES (0,'$usuariod','$menuinsertar')");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES ('$usuariod','$menuinsertar')");
 			}
 		// Lleva a auditoria
-		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Copia permisos de $usuarioo al usuario $usuariod','$fecha_operacion','$hora_operacion')");
+		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Copia permisos de $usuarioo al usuario $usuariod','$fecha_operacion','$hora_operacion')");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="accion" value="permisos_usuario">
 			<input type="Hidden" name="usuario" value="'.$usuariod.'">
@@ -295,7 +295,7 @@ if ($accion=="actualizar_clave")
 		if ($mensaje_error=="")
 			{
 				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login='$Login_usuario'");
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Actualiza clave de acceso','$fecha_operacion','$hora_operacion')");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Actualiza clave de acceso','$fecha_operacion','$hora_operacion')");
 				echo '<script language="javascript"> document.core_ver_menu.submit(); </script>';
 			}
 		else
@@ -336,7 +336,7 @@ if ($accion=="eliminar_informe_usuario")
 		// Elimina el informe
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe='$informe' AND usuario='$usuario'");
 		// Lleva a auditoria
-		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina informe $informe a $usuario','$fecha_operacion','$hora_operacion')");
+		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Elimina informe $informe a $usuario','$fecha_operacion','$hora_operacion')");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="informes_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
@@ -369,7 +369,7 @@ if ($accion=="eliminar_informe_usuario")
 		{
 			$mensaje_error="";
 			// Busca si existe ese permiso para el usuario
-			$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."usuario_informe WHERE usuario='$usuario' AND informe='$informe'");
+			$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_informe." FROM ".$TablasCore."usuario_informe WHERE usuario='$usuario' AND informe='$informe'");
 			$registro_menu = $resultado->fetch();
 			if($registro_menu["informe"]!="")
 				$mensaje_error="El usuario ya posee el informe seleccionado.";
@@ -377,9 +377,9 @@ if ($accion=="eliminar_informe_usuario")
 			if ($mensaje_error=="")
 				{
 					// Guarda el permiso para el usuario
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_informe VALUES (0,'$usuario','$informe')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES ('$usuario','$informe')");
 					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Agrega informe $informe al usuario $usuario','$fecha_operacion','$hora_operacion')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Agrega informe $informe al usuario $usuario','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 							<input type="Hidden" name="accion" value="informes_usuario">
 							<input type="Hidden" name="usuario" value="'.$usuario.'">
@@ -523,7 +523,7 @@ if ($accion=="eliminar_permiso")
 		// Elimina los datos de la opcion
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=$menu AND usuario='$usuario'");
 		// Lleva a auditoria
-		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina permiso $menu a $usuario','$fecha_operacion','$hora_operacion')");
+		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Elimina permiso $menu a $usuario','$fecha_operacion','$hora_operacion')");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="permisos_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
@@ -556,7 +556,7 @@ if ($accion=="eliminar_permiso")
 		{
 			$mensaje_error="";
 			// Busca si existe ese permiso para el usuario
-			$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."usuario_menu WHERE usuario='$usuario' AND menu='$menu'");
+			$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario='$usuario' AND menu='$menu'");
 			$registro_menu = $resultado->fetch();
 			if($registro_menu["menu"]!="")
 				$mensaje_error="El usuario ya posee el permiso seleccionado.";
@@ -564,9 +564,9 @@ if ($accion=="eliminar_permiso")
 			if ($mensaje_error=="")
 				{
 					// Guarda el permiso para el usuario
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu VALUES (0,'$usuario','$menu')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES ('$usuario','$menu')");
 					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Agrega permiso $menu al usuario $usuario','$fecha_operacion','$hora_operacion')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Agrega permiso $menu al usuario $usuario','$fecha_operacion','$hora_operacion')");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 							<input type="Hidden" name="accion" value="permisos_usuario">
 							<input type="Hidden" name="usuario" value="'.$usuario.'">
@@ -741,7 +741,7 @@ if ($accion=="permisos_usuario")
 			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario WHERE login='$uid_especifico'");
 			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario='$uid_especifico'");
 			// Lleva a auditoria
-			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Elimina el usuario $uid_especifico','$fecha_operacion','$hora_operacion')");
+			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Elimina el usuario $uid_especifico','$fecha_operacion','$hora_operacion')");
 			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 		}
 
@@ -778,7 +778,7 @@ if ($accion=="permisos_usuario")
 			else
 				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET estado=1, ultimo_acceso='$fecha_operacion' WHERE login='$uid_especifico'");
 			// Lleva a auditoria
-			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Cambia estado del usuario $uid_especifico y actualiza ultimo acceso a $fecha_operacion','$fecha_operacion','$hora_operacion')");
+			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Cambia estado del usuario $uid_especifico y actualiza ultimo acceso a $fecha_operacion','$fecha_operacion','$hora_operacion')");
 			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 		}
 
@@ -832,9 +832,9 @@ if ($accion=="permisos_usuario")
 					// Inserta datos del usuario
 					$clavemd5=MD5($clave);
 					$pasomd5=MD5($LlaveDePaso);
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario VALUES ('$login','$clavemd5','$nombre','$descripcion',$estado,'$nivel','$correo','$fecha_operacion','$pasomd5')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES ('$login','$clavemd5','$nombre','$descripcion',$estado,'$nivel','$correo','$fecha_operacion','$pasomd5')");
 					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Agrega usuario $login para $nombre','$fecha_operacion','$hora_operacion')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Agrega usuario $login para $nombre','$fecha_operacion','$hora_operacion')");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
 			else
@@ -993,7 +993,7 @@ if ($accion=="ver_seguimiento_monitoreo")
 					</tr>';
 
 
-				$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."auditoria ORDER BY fecha DESC, hora DESC LIMIT 0,30");
+				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria ORDER BY fecha DESC, hora DESC LIMIT 0,30");
 				while($registro = $resultado->fetch())
 					{
 						echo '<tr><td align="center">'.$registro["id"].'</td>
@@ -1169,7 +1169,7 @@ if ($accion=="ver_seguimiento_general")
 				if ($mesi=="") {$mesi=date("n"); $mesf=$mesi;}
 				if ($diai=="") {$diai=date("j"); $diaf=$diai;}
 
-				$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."auditoria WHERE fecha>='$anoi$mesi$diai' AND fecha<= '$anof$mesf$diaf' AND accion LIKE '%$accionbuscar%' AND usuario_login LIKE '%$usuario%' ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg");
+				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria WHERE fecha>='$anoi$mesi$diai' AND fecha<= '$anof$mesf$diaf' AND accion LIKE '%$accionbuscar%' AND usuario_login LIKE '%$usuario%' ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg");
 				while($registro = $resultado->fetch())
 					{
 						echo '<tr><td align="center">'.$registro["id"].'</td>
@@ -1237,7 +1237,7 @@ if ($accion=="ver_seguimiento_especifico")
 						<td align="center" bgcolor="#d6d6d6"><b>&nbsp;&nbsp;Fecha (AAAA-MM-DD)&nbsp;&nbsp;</b></td>
 						<td align="center" bgcolor="#d6d6d6"><b>&nbsp;&nbsp;Hora (HH-MM-SS)&nbsp;&nbsp;</b></td>
 					</tr>';
-				$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."auditoria WHERE usuario_login='$uid_especifico' ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg");
+				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria WHERE usuario_login='$uid_especifico' ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg");
 				while($registro = $resultado->fetch())
 					{
 						echo '<tr><td align="center">&nbsp;&nbsp;'.$registro["id"].'&nbsp;&nbsp;</td>
@@ -1326,7 +1326,7 @@ if ($accion=="listar_usuarios")
 						<td align="left"></td>
 					</tr>
 					';
-				$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."usuario WHERE (login LIKE '%$login_filtro%') AND (nombre LIKE '%$nombre_filtro%' ) AND login<>'admin' ORDER BY login,nombre");
+				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario." FROM ".$TablasCore."usuario WHERE (login LIKE '%$login_filtro%') AND (nombre LIKE '%$nombre_filtro%' ) AND login<>'admin' ORDER BY login,nombre");
 				$i=0;
 				while($registro = $resultado->fetch())
 					{

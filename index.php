@@ -91,6 +91,9 @@
 
 	// Inicia las conexiones con la BD y las deja listas para las operaciones
 	include("core/conexiones.php");
+
+	// Incluye definiciones comunes de la base de datos
+	include("inc/def_basedatos.php");
 	
 	// Incluye archivo con algunas funciones comunes usadas por la herramienta
 	include_once("core/comunes.php");

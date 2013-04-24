@@ -9,7 +9,7 @@ VersionFinalAno="13"
 VersionFinalMes="5"
 
 #[ListaArchivos] Separados por espacio
-ListaArchivos=" core/comunes.php core/conexiones.php core/marco_arriba.php ins/paso_0.php ins/paso_2.php ins/paso_3.php img/icono_config.png index.php core/objetos.php core/sesion.php core/usuarios.php "
+ListaArchivos=" inc/def_basedatos.php core/captcha.php core/comunes.php core/conexiones.php core/formularios.php core/tablas.php core/informes.php core/marco_arriba.php core/marco_abajo.php core/menus.php core/actualizacion.php img/icono_config.png index.php core/objetos.php core/sesion.php core/usuarios.php "
 
 #[ArchivosObligatorios] Separados por espacio
 ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame.txt inc/version_actual.txt"
@@ -27,6 +27,17 @@ LogCambios="
   * Fixed: Bloqueo de cambio de claves en motores de autenticación externos
   * Fixed: Autonomía del admin para cambios de clave siempre sobre Práctico
   * Fixed: Validaciones en instalación de PHP y extensiones requeridas
+  * Added: Scripts PostgreSQL para procesdo de instalación
+  * Fixed: Consultas que requieren valor boobleano en postgresql se reemplazan de vble por vble=1
+  * Fixed: Asistente de instalación, selección de motores y scripts asociados sobre /sql
+  * Fixed: Error en conexiones PostgreSQL derivado de setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  * Added: Scripts SQLite para procesdo de instalación
+  * Fixed: Especificación de lista de campos para cada query Insert para mejora de compatibilidad entre motores
+  * Fixed: Ajuste sobre captcha (posición sobre arreglo plantilla) para compatibilidad PHP 5.3+
+  * Fixed: Corrección en creación de ruta cuando el motor seleccionado es SQLite durante instalación
+  * Fixed: Valores MD5 son calculados por PHP para compatibilidad con motores que no tienen esa función
+  * Added: Archivo def_basedatos contiene ahora la lista de campos por tabla para mejorar consultas
+  * Fixed: Ajuste a instalador para selección de motor SQLite.
 "
 
 ########################################################################

@@ -72,7 +72,12 @@
 						$ConexionPDO = new PDO("pgsql:dbname=$BaseDatos;host=$ServidorBD;port=$PuertoBD","$UsuarioBD","$PasswordBD");
 				}
 			if ($MotorBD=="sqlite")
-						$ConexionPDO = new PDO("sqlite:$BaseDatos");  // SQLite 3??? $ConexionPDO = new PDO("sqlite::memory");
+				{
+					//Si se encuentra en tiempo de instalacion añade prefijo para guardar BD en nivel superior
+					if ($tiempo_instalacion_activa==1)
+						$BaseDatos="../".$BaseDatos;
+					$ConexionPDO = new PDO("sqlite:$BaseDatos");  // SQLite 3??? $ConexionPDO = new PDO("sqlite::memory");	
+				}
 			if ($MotorBD=="fbd")
 						$ConexionPDO = new PDO("firebird:dbname=$ServidorBD".":"."$BaseDatos","$UsuarioBD","$PasswordBD");
 			if ($MotorBD=="oracle")
@@ -92,7 +97,7 @@
 
 
 			// Evita el SQLSTATE[HY000]: General error. presentado por PostgreSQL.  Se habilita solo para MySQL
-			if ($MotorBD=="mysql")
+			if ($MotorBD=="mysql" || $MotorBD=="sqlite")
 				{
 					// Establece parametros para la conexion
 					$ConexionPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

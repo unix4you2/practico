@@ -1101,7 +1101,7 @@
 				<!--<input type=button onclick=\'AgregarElemento("1","1","hola");\'>-->';
 
 				// Busca datos del formulario
-				$consulta_formulario=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'");
+				$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id='$formulario'");
 				$registro_formulario = $consulta_formulario->fetch();
 
 				//Si no encuentra formulario presenta error
@@ -1148,7 +1148,7 @@
 						for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
 							{
 								//Busca los elementos de la coumna actual del formulario con peso menor o igual al peso del objeto fila_unica de la fila unica_actual pero que no son fila_unica
-								$consulta_campos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND columna='$cl' AND visible=1 AND peso >'$limite_inferior' AND peso <='$limite_superior' ORDER BY peso");
+								$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND columna='$cl' AND visible=1 AND peso >'$limite_inferior' AND peso <='$limite_superior' ORDER BY peso");
 								
 									//Inicia columna de formulario
 									echo '<td valign=top align=center>';
@@ -1197,7 +1197,7 @@
 						echo '</tr></table>';
 
 						//Busca datos del registro de fila_unica
-						$consulta_campos=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND id='$ultimo_id'");
+						$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND id='$ultimo_id'");
 						$registro_campos = $consulta_campos->fetch();
 
 						//Agrega el campo de fila unica cuando no se trata del agregado de peso 9999
@@ -1226,7 +1226,7 @@
 				echo '</div> <!-- Fin PR_seccion_impresion_activa -->';
 
 			// Si tiene botones agrega barra de estado y los ubica
-			$consulta_botones = $ConexionPDO->prepare("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario' AND visible=1 ORDER BY peso");
+			$consulta_botones = $ConexionPDO->prepare("SELECT id,".$ListaCamposSinID_formulario_boton." FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario' AND visible=1 ORDER BY peso");
 			$consulta_botones->execute();
 
 			if($consulta_botones->rowCount()>0)
@@ -1319,7 +1319,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion,$Login_usuario;
 
 		// Busca datos del informe
-		$consulta_informe=ejecutar_sql("SELECT * FROM ".$TablasCore."informe WHERE id='$informe'");
+		$consulta_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id='$informe'");
 		$registro_informe=$consulta_informe->fetch();
 
 		//Si no encuentra informe presenta error
@@ -1332,7 +1332,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			$numero_columnas=0;
 			//Busca los CAMPOS definidos para el informe
 			$consulta="SELECT ";
-			$consulta_campos=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
+			$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
 			while ($registro_campos = $consulta_campos->fetch())
 				{
 					//Si tiene alias definido lo agrega
@@ -1346,7 +1346,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 			//Busca las TABLAS definidas para el informe
 			$consulta.=" FROM ";
-			$consulta_tablas=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_tablas WHERE informe='$informe'");
+			$consulta_tablas=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_tablas." FROM ".$TablasCore."informe_tablas WHERE informe='$informe'");
 			while ($registro_tablas = $consulta_tablas->fetch())
 				{
 					//Si tiene alias definido lo agrega
@@ -1360,7 +1360,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 			// Busca las CONDICIONES para el informe
 			$consulta.=" WHERE ";
-			$consulta_condiciones=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe='$informe' ORDER BY peso");
+			$consulta_condiciones=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_condiciones." FROM ".$TablasCore."informe_condiciones WHERE informe='$informe' ORDER BY peso");
 			$hay_condiciones=0;
 			while ($registro_condiciones = $consulta_condiciones->fetch())
 				{
@@ -1464,7 +1464,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 
 					// Busca si el informe tiene acciones (botones), los cuenta y prepara dentro de un arreglo para repetir en cada registro
-					$consulta_botones=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_boton WHERE informe='$informe' AND visible=1 ORDER BY peso");
+					$consulta_botones=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_boton." FROM ".$TablasCore."informe_boton WHERE informe='$informe' AND visible=1 ORDER BY peso");
 					$total_botones=0;
 					while($registro_botones=$consulta_botones->fetch())
 						{
@@ -1718,7 +1718,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			if ($mensaje_error=="")
 				{
 					ejecutar_sql_unaria("UPDATE ".$TablasCore."$tabla SET $campo = $valor WHERE id = '$id'");
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria VALUES (0,'$Login_usuario','Cambia estado del campo $campo en objetoID $formulario','$fecha_operacion','$hora_operacion')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Cambia estado del campo $campo en objetoID $formulario','$fecha_operacion','$hora_operacion')");
 
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="'.$accion_retorno.'">
