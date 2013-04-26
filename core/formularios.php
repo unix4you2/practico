@@ -293,6 +293,65 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: actualizar_campo_formulario
+	Actualiza un campo de datos, etiqueta, marco externo o informe en un formulario
+
+	Variables de entrada:
+
+		multiples - Recibidas mediante formulario unico asociado al proceso de creacion/edicion del elemento.
+
+	(start code)
+		UPDATE ".$TablasCore."formulario_objeto SET ... Lista da campos
+	(end)
+
+	Salida:
+		Registro de campo alterado y formulario actualizado en pantalla
+
+	Ver tambien:
+		<eliminar_campo_formulario> | <agregar_campo_formulario>
+*/
+	if ($accion=="actualizar_campo_formulario")
+		{
+			$mensaje_error="";
+			if ($valor_unico=="on") $valor_unico=1; else $valor_unico=0;
+			if ($ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
+			$tipo_objeto=$tipo;
+			if ($titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error="Debe indicar un t&iacute;tulo o etiqueta v&aacute;lida para el campo.";
+			if ($campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error="Debe indicar un campo v&aacute;lido para vincular con la tabla de datos asociada al formulario.";
+			if ($mensaje_error=="")
+				{
+					//Genera la lista de campos a ser actualizados desde la definicion de tabla para no olvidar ninguno
+					$ListaCampos=explode(",",$ListaCamposSinID_formulario_objeto);
+					for ($i=0; $i<count($ListaCampos);$i++)
+						$ListaCamposyValores.=$ListaCampos[$i]."='".$$ListaCampos[$i]."',";
+					$ListaCamposyValores.="id=id"; //Agregado para evitar coma final
+
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario_objeto SET ".$ListaCamposyValores." WHERE id='$idcampomodificado'");
+					// Lleva a auditoria
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Modifica diseno campo $idcampomodificado para formulario $formulario','$fecha_operacion','$hora_operacion')");
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
+						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="editar_formulario">
+						<input type="Hidden" name="error_titulo" value="Problema en los datos ingresados">
+						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+		}
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: guardar_campo_formulario
 	Agrega un campo de datos, etiqueta, marco externo o informe a un formulario
 
@@ -313,6 +372,9 @@
 	if ($accion=="guardar_campo_formulario")
 		{
 			$mensaje_error="";
+			$tipo_objeto=$tipo;
+			if ($valor_unico=="on") $valor_unico=1; else $valor_unico=0;
+			if ($ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
 			if ($titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error="Debe indicar un t&iacute;tulo o etiqueta v&aacute;lida para el campo.";
 			if ($campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error="Debe indicar un campo v&aacute;lido para vincular con la tabla de datos asociada al formulario.";
 			if ($mensaje_error=="")
@@ -458,12 +520,26 @@ if ($accion=="editar_formulario")
 
 		<div id='FormularioCampos' class="FormularioPopUps">
 				<?php 
-				abrir_ventana('Agregar un elemento al formulario','#BDB9B9',''); 
+				abrir_ventana('Agregar un elemento al formulario','#BDB9B9','');
+				
+				//Si se trata de la edicion de un campo entonces busca su registro para agregar valores al form
+				if ($popup_activo=="FormularioCampos")
+					{
+						$consulta_campo_editar=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE id='$campo' ");
+						$registro_campo_editar = $consulta_campo_editar->fetch();
+					}
 				?>
 				<form name="datosform" id="datosform" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-				<input type="Hidden" name="accion" value="guardar_campo_formulario">
+				<?php 
+					//Define tipo de accion si se trata de creacion o modificacion
+					if ($popup_activo=="FormularioCampos")
+						echo '<input type="Hidden" name="accion" value="actualizar_campo_formulario">';
+					else
+						echo '<input type="Hidden" name="accion" value="guardar_campo_formulario">';
+				?>
 				<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 				<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">
+				<input type="Hidden" name="idcampomodificado" value="<?php echo $campo; ?>">
 				<div align=center>
 
 
@@ -471,14 +547,14 @@ if ($accion=="editar_formulario")
 						<tr>
 							<td align="right">Tipo de objeto que desea agregar</td>
 							<td>
-								<select  name="tipo_objeto" class="Combos" OnChange="CambiarCamposVisibles(this.options[this.selectedIndex].value);">
+								<select  name="tipo" class="Combos" OnChange="CambiarCamposVisibles(this.options[this.selectedIndex].value);">
 									<option value="0">SELECCIONE UNO</option>
 									<optgroup label="Controles de datos">
-										<option value="texto_corto">Campo de texto corto</option>
-										<option value="texto_largo">Campo de texto libre</option>
-										<option value="texto_formato">Campo de texto con formato enriquecido</option>
-										<option value="lista_seleccion">Campo de selecci&oacute;n (ComboBox o lista desplegable)</option>
-										<option value="lista_radio">Campo de selecci&oacute;n (RadioButton)</option>
+										<option value="texto_corto"     <?php if ($registro_campo_editar["tipo"]=="texto_corto")     echo 'SELECTED'; ?>>Campo de texto corto</option>
+										<option value="texto_largo"     <?php if ($registro_campo_editar["tipo"]=="texto_largo")     echo 'SELECTED'; ?>>Campo de texto libre</option>
+										<option value="texto_formato"   <?php if ($registro_campo_editar["tipo"]=="texto_formato")   echo 'SELECTED'; ?>>Campo de texto con formato enriquecido</option>
+										<option value="lista_seleccion" <?php if ($registro_campo_editar["tipo"]=="lista_seleccion") echo 'SELECTED'; ?>>Campo de selecci&oacute;n (ComboBox o lista desplegable)</option>
+										<option value="lista_radio"     <?php if ($registro_campo_editar["tipo"]=="lista_radio")     echo 'SELECTED'; ?>>Campo de selecci&oacute;n (RadioButton)</option>
 									</optgroup>
 									<!--
 									<optgroup label="Informaci&oacute;n externa">
@@ -486,11 +562,11 @@ if ($accion=="editar_formulario")
 									</optgroup>
 									-->
 									<optgroup label="Presentaci&oacute;n y otros contenidos">
-										<option value="etiqueta">Texto enriquecido (como etiqueta)</option>
-										<option value="url_iframe">URL embebida (IFrame)</option>
+										<option value="etiqueta"        <?php if ($registro_campo_editar["tipo"]=="etiqueta")        echo 'SELECTED'; ?>>Texto enriquecido (como etiqueta)</option>
+										<option value="url_iframe"      <?php if ($registro_campo_editar["tipo"]=="url_iframe")      echo 'SELECTED'; ?>>URL embebida (IFrame)</option>
 									</optgroup>
 									<optgroup label="Objetos internos">
-										<option value="informe">Informe predise&ntilde;ado (Tabla de datos o Gr&aacute;fico)</option>
+										<option value="informe"         <?php if ($registro_campo_editar["tipo"]=="informe")         echo 'SELECTED'; ?>>Informe predise&ntilde;ado (Tabla de datos o Gr&aacute;fico)</option>
 										<!--<option value="frm">Formulario anidado</option>-->
 									</optgroup>
 								</select>
@@ -499,13 +575,14 @@ if ($accion=="editar_formulario")
 						</tr>
 						</table>
 						<hr>
- 
- 
+
+
 						<div id='campo1' style="display:none;">
 							<table class="TextosVentana">
 							<tr>
 								<td width="200" align="right">T&iacute;tulo o etiqueta:</td>
-								<td width="400" ><input type="text" name="titulo" size="20" class="CampoTexto">
+								<td width="400" >
+									<input type="text" name="titulo" size="20" class="CampoTexto" value="<?php echo $registro_campo_editar["titulo"]; ?>">
 									<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
 									<a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; al lado del indicando al usuario la informacion que debe ingresar.  Puede usar HTML b&aacute;sico para dar formato adicional."><img src="img/icn_10.gif" border=0></a>
 								</td>
@@ -525,7 +602,10 @@ if ($accion=="editar_formulario")
 											$resultado=ejecutar_sql("DESCRIBE $nombre_tabla ");
 											while($registro = $resultado->fetch())
 												{
-													echo '<option value="'.$registro["Field"].'" >'.$registro["Field"].'&nbsp;&nbsp;&nbsp;['.$registro["Type"].']</option>';
+													$seleccion_campo="";
+													if ($registro_campo_editar["campo"]==$registro["Field"])
+														$seleccion_campo="SELECTED";
+													echo '<option value="'.$registro["Field"].'" '.$seleccion_campo.'>'.$registro["Field"].'&nbsp;&nbsp;&nbsp;['.$registro["Type"].']</option>';
 												}
 										?>
 									</select>
@@ -542,7 +622,7 @@ if ($accion=="editar_formulario")
 							<tr>
 								<td width="200" align="right">Campo de valor &uacute;nico:</td>
 								<td width="400" >
-									<input type="checkbox" value=1 name="valor_unico">
+									<input type="checkbox" name="valor_unico" <?php if ($registro_campo_editar["valor_unico"]==1) echo 'checked'; ?>>
 									<a href="#" title="Unicidad para los valores ingresados" name="Indica si el campo puede almacenar o no valores repetidos en la base de datos.  Deber&iacute;a estar habilitado para campos que representen claves primarias en su dise&ntilde;o y deshabilitado para el resto."><img src="img/icn_10.gif" border=0></a>	</td>
 							</tr>
 							</table>
@@ -553,7 +633,8 @@ if ($accion=="editar_formulario")
 							<table class="TextosVentana">
 							<tr>
 								<td width="200" align="right">Valor predeterminado:</td>
-								<td width="400" ><input type="text" name="valor_predeterminado" size="20" class="CampoTexto">
+								<td width="400" >
+									<input type="text" name="valor_predeterminado" size="20" class="CampoTexto" value="<?php echo $registro_campo_editar["valor_predeterminado"]; ?>">
 									<a href="#" title="Ayuda r&aacute;pida:" name="Establece el valor que aparece diligenciado automaticamente en el campo al abrir la vista del formulario.  Este valor puede estar en contravia de la validaci&oacute;n de datos."><img src="img/icn_10.gif" border=0></a>
 								</td>
 							</tr>
@@ -568,10 +649,10 @@ if ($accion=="editar_formulario")
 								<td width="400" >
 									<select  name="validacion_datos" class="Combos" >
 										<option value="">Ninguna</option>
-										<option value="numerico">S&oacute;lo n&uacute;meros 0-9</option>
-										<option value="alfabetico">S&oacute;lo letras A-Z</option>
-										<option value="alfanumerico">Letras y n&uacute;meros</option>
-										<option value="fecha">Campo de fecha</option>
+										<option value="numerico"     <?php if ($registro_campo_editar["validacion_datos"]=="numerico")     echo 'SELECTED'; ?>>S&oacute;lo n&uacute;meros 0-9</option>
+										<option value="alfabetico"   <?php if ($registro_campo_editar["validacion_datos"]=="alfabetico")   echo 'SELECTED'; ?>>S&oacute;lo letras A-Z</option>
+										<option value="alfanumerico" <?php if ($registro_campo_editar["validacion_datos"]=="alfanumerico") echo 'SELECTED'; ?>>Letras y n&uacute;meros</option>
+										<option value="fecha"        <?php if ($registro_campo_editar["validacion_datos"]=="fecha")        echo 'SELECTED'; ?>>Campo de fecha</option>
 									</select>
 									<a href="#" title="Ayuda r&aacute;pida:" name="Tipo de filtro a ser aplicado cuando el usuario ingresa informaci&oacute;n por teclado."><img src="img/icn_10.gif" border=0></a>
 								</td>
@@ -586,8 +667,8 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right">Campo de solo lectura</td>
 								<td width="400" >
 									<select  name="solo_lectura" class="Combos" >
-										<option value="READONLY">Si</option>
-										<option value="" selected>No</option>
+										<option value="READONLY" <?php if ($registro_campo_editar["solo_lectura"]=="READONLY") echo 'SELECTED'; ?>>Si</option>
+										<option value=""         <?php if ($registro_campo_editar["solo_lectura"]=="")         echo 'SELECTED'; ?>>No</option>
 									</select>
 									<a href="#" title="Define si se puede cambiar su valor" name="Propiedad util para campos o formuarios de consulta por parte del usuario donde se requiere visualizar el valor pero no permitir su modificacion"><img src="img/icn_10.gif" border=0></a>
 								</td>
@@ -600,7 +681,10 @@ if ($accion=="editar_formulario")
 							<table class="TextosVentana">
 							<tr>
 								<td width="200" align="right">T&iacute;tulo de ayuda</td>
-								<td width="400" ><input type="text" name="ayuda_titulo" size="20" class="CampoTexto"><a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; como encabezado para el texto de ayuda del campo explicando al usuario qu&eacute; debe ingresar."><img src="img/icn_10.gif" border=0></a>	</td>
+								<td width="400" >
+									<input type="text" name="ayuda_titulo" size="20" class="CampoTexto" value="<?php echo $registro_campo_editar["ayuda_titulo"]; ?>">
+									<a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; como encabezado para el texto de ayuda del campo explicando al usuario qu&eacute; debe ingresar."><img src="img/icn_10.gif" border=0></a>
+								</td>
 							</tr>
 							</table>
 						</div>
@@ -611,8 +695,9 @@ if ($accion=="editar_formulario")
 							<tr>
 								<td width="200"   valign="top" align="right">Texto de ayuda</td>
 								<td width="400"  colspan=2 valign="top">
-									<textarea name="ayuda_texto" cols="25" rows="2" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"></textarea>
-								<a href="#" title="Ayuda r&aacute;pida:" name="Texto completo con la descripcion de funciones resumida para el campo.  Puede incluir instrucciones de formato, advertencias o cualquier otro mensaje para el usuario."><img align="top" src="img/icn_10.gif" border=0></a>	</td>
+									<textarea name="ayuda_texto" cols="25" rows="2" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"><?php echo $registro_campo_editar["ayuda_texto"]; ?></textarea>
+									<a href="#" title="Ayuda r&aacute;pida:" name="Texto completo con la descripcion de funciones resumida para el campo.  Puede incluir instrucciones de formato, advertencias o cualquier otro mensaje para el usuario."><img align="top" src="img/icn_10.gif" border=0></a>
+								</td>
 							</tr>
 							</table>
 						</div>
@@ -628,7 +713,12 @@ if ($accion=="editar_formulario")
 										<select name="peso" class="selector_01" >
 											<?php
 												for ($i=1;$i<=100;$i++)
-													echo '<option value="'.$i.'">'.$i.'</option>';
+													{
+														$seleccion_campo="";
+														if ($registro_campo_editar["peso"]==$i)
+															$seleccion_campo="SELECTED";														
+														echo '<option value="'.$i.'" '.$seleccion_campo.'>'.$i.'</option>';
+													}
 											?>
 										</select><a href="#" title="Ayuda r&aacute;pida:" name="Posicion en la que aparece el campo dentro del formulario cuando este se despliega en pantalla. Orden."><img align="top" src="img/icn_10.gif" border=0></a>
 									</td>
@@ -641,7 +731,12 @@ if ($accion=="editar_formulario")
 												$registro_columnas = $consulta_columnas->fetch();
 												$columnas_formulario=$registro_columnas["columnas"];
 												for ($i=1;$i<=$columnas_formulario;$i++)
-													echo '<option value="'.$i.'">'.$i.'</option>';
+													{
+														$seleccion_campo="";
+														if ($registro_campo_editar["columna"]==$i)
+															$seleccion_campo="SELECTED";
+														echo '<option value="'.$i.'" '.$seleccion_campo.'>'.$i.'</option>';
+													}
 											?>
 										</select><a href="#" title="Ayuda r&aacute;pida:" name="Columna para ubicar el campo cuando la vista del formulario tenga varias columnas. Aquellos campos en columnas superiores a las definidas en el formulario no ser&aacute;n dibujados."><img src="img/icn_10.gif" border=0></a>
 									</td>
@@ -660,16 +755,17 @@ if ($accion=="editar_formulario")
 								<td align="right">Obligatorio</td>
 								<td>
 									<select  name="obligatorio" class="Combos" >
-										<option value="1">Si</option>
-										<option value="0" selected>No</option>
+										<option value="1" <?php if ($registro_campo_editar["obligatorio"]==1) echo 'SELECTED'; ?>>Si</option>
+										<option value="0" <?php if ($registro_campo_editar["obligatorio"]==0) echo 'SELECTED'; ?>>No</option>
 									</select>
 								</td>
 								<td align="right">Visible</td>
 								<td>
 									<select  name="visible" class="Combos" >
-										<option value="1">Si</option>
-										<option value="0">No</option>
-									</select><a href="#" title="Ayuda r&aacute;pida:" name="Determina si el control es visible o no para el usuario.  Si se deja como No el control es usado pero como un campo oculto."><img src="img/icn_10.gif" border=0></a>
+										<option value="1" <?php if ($registro_campo_editar["visible"]=="1") echo 'SELECTED'; ?>>Si</option>
+										<option value="0" <?php if ($registro_campo_editar["visible"]=="0") echo 'SELECTED'; ?>>No</option>
+									</select>
+									<a href="#" title="Ayuda r&aacute;pida:" name="Determina si el control es visible o no para el usuario.  Si se deja como No el control es usado pero como un campo oculto."><img src="img/icn_10.gif" border=0></a>
 								</td>
 								</tr></table>
 								</td>
@@ -682,7 +778,10 @@ if ($accion=="editar_formulario")
 							<table class="TextosVentana">
 							<tr>
 								<td width="200" align="right">Utilizar para b&uacute;squedas? Etiqueta:</td>
-								<td width="400" ><input type="text" name="etiqueta_busqueda" size="10" class="CampoTexto"><a href="#" title="Indica si el campo es usado para buscar registros" name="Deje el espacio en blanco para indicar que es un campo normal o ingrese la etiqueta que debe ir en el boton de comando ubicado al lado derecho del campo para realizar la busqueda de registros."><img src="img/icn_10.gif" border=0></a>	</td>
+								<td width="400" >
+									<input type="text" name="etiqueta_busqueda" size="10" class="CampoTexto" value="<?php echo $registro_campo_editar["etiqueta_busqueda"]; ?>">
+									<a href="#" title="Indica si el campo es usado para buscar registros" name="Deje el espacio en blanco para indicar que es un campo normal o ingrese la etiqueta que debe ir en el boton de comando ubicado al lado derecho del campo para realizar la busqueda de registros."><img src="img/icn_10.gif" border=0></a>
+								</td>
 							</tr>
 							</table>
 						</div>
@@ -693,8 +792,9 @@ if ($accion=="editar_formulario")
 							<tr>
 								<td width="200" align="right">Usar AJAX para buscar:</td>
 								<td width="400" >
-									<input type="checkbox" value=1 name="ajax_busqueda" checked>
-								<a href="#" title="Modo de recuperaci&oacute;n de registros:" name="Cuando la casilla se encuentra activada Practico intenta recuperar la informaci&oacute;n del registro para el formulario mediante AJAX, de lo contrario se utiliza el metodo est&aacute;ndar de envio de solicitud y recarga de la p&aacute;gina con los resultados.  Puede ser deshabilitado para mejorar compatibilidad con navegadores viejos."><img src="img/icn_10.gif" border=0></a>	</td>
+									<input type="checkbox" name="ajax_busqueda" <?php if ($registro_campo_editar["ajax_busqueda"]==1) echo 'checked'; ?>>
+									<a href="#" title="Modo de recuperaci&oacute;n de registros:" name="Cuando la casilla se encuentra activada Practico intenta recuperar la informaci&oacute;n del registro para el formulario mediante AJAX (Se recomienda habilitar), de lo contrario se utiliza el metodo est&aacute;ndar de envio de solicitud y recarga de la p&aacute;gina con los resultados.  Puede ser deshabilitado para mejorar compatibilidad con navegadores viejos."><img src="img/icn_10.gif" border=0></a>
+								</td>
 							</tr>
 							</table>
 						</div>
@@ -706,8 +806,8 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right">Agregar teclado virtual:</td>
 								<td width="400" >
 									<select  name="teclado_virtual" class="Combos" >
-										<option value="1">Si</option>
-										<option value="0" selected>No</option>
+										<option value="1" <?php if ($registro_campo_editar["teclado_virtual"]==1) echo 'SELECTED'; ?>>Si</option>
+										<option value="0" <?php if ($registro_campo_editar["teclado_virtual"]==0) echo 'SELECTED'; ?>>No</option>
 									</select>
 								<a href="#" title="Ingreso de informaci&oacute;n sin teclado" name="Cuando es habilitado en el formulario se despliega un teclado virtual para el ingreso de informaci&oacute;n;.  Por ahora el uso del teclado puede violar las validaciones."><img src="img/icn_10.gif" border=0></a>	</td>
 							</tr>
@@ -719,7 +819,8 @@ if ($accion=="editar_formulario")
 							<table class="TextosVentana">
 							<tr>
 								<td width="200" align="right">Ancho:</td>
-								<td width="400" ><input type="text" name="ancho" size="4" class="CampoTexto">
+								<td width="400" >
+									<input type="text" name="ancho" size="4" class="CampoTexto" value="<?php echo $registro_campo_editar["ancho"]; ?>">
 									<a href="#" title="Cu&aacute;nto espacio de ancho debe ocupar el control" name="IMPORTANTE: en n&uacute;mero de caracteres para texto simple o en pixeles para texto con formato. Indique un n&uacute;mero de columnas, sin embargo, tenga presente que el ancho en pixeles ser&aacute; variable de acuerdo al tipo de fuente utilizada por el tema actual."><img src="img/icn_10.gif" border=0></a>
 									<i>(M&iacute;nimo recomendado en campos con formato: 350)</i>
 								</td>
@@ -731,7 +832,8 @@ if ($accion=="editar_formulario")
 							<table class="TextosVentana">
 							<tr>
 								<td width="200" align="right">Alto (l&iacute;neas):</td>
-								<td width="400" ><input type="text" name="alto" size="4" class="CampoTexto">
+								<td width="400" >
+									<input type="text" name="alto" size="4" class="CampoTexto" value="<?php echo $registro_campo_editar["alto"]; ?>">
 									<a href="#" title="Cu&aacute;ntas filas deben estar visibles en el control?" name="IMPORTANTE: en n&uacute;mero de filas para texto simple o en pixeles para texto con formato.  En caso que el texto supere el n&uacute;mero de filas se agregar&aacute;n autom&aacute;ticamente barras de desplazamiento."><img src="img/icn_10.gif" border=0></a>
 									<i>(M&iacute;nimo recomendado en campos con formato: 100)</i>
 								</td>
@@ -746,11 +848,11 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right">Barra de edici&oacute;n:</td>
 								<td width="400" >
 									<select  name="barra_herramientas" class="Combos" >
-										<option value="0">B&aacute;sica: Documento, formato de caracter y p&aacute;rrafo</option>
-										<option value="1">Est&aacute;ndar: B&aacute;sica + Enlaces, estilos de fuente</option>
-										<option value="2">Extendida: Est&aacute;ndar + Portapapeles, buscar-reemplazar y ortograf&iacute;a</option>
-										<option value="3">Avanzada: Extendida + Insertar objetos y colores</option>
-										<option value="4">Completa: Avanzada +  Formularios y pantalla completa</option>
+										<option value="0" <?php if ($registro_campo_editar["barra_herramientas"]=="0") echo 'SELECTED'; ?>>B&aacute;sica: Documento, formato de caracter y p&aacute;rrafo</option>
+										<option value="1" <?php if ($registro_campo_editar["barra_herramientas"]=="1") echo 'SELECTED'; ?>>Est&aacute;ndar: B&aacute;sica + Enlaces, estilos de fuente</option>
+										<option value="2" <?php if ($registro_campo_editar["barra_herramientas"]=="2") echo 'SELECTED'; ?>>Extendida: Est&aacute;ndar + Portapapeles, buscar-reemplazar y ortograf&iacute;a</option>
+										<option value="3" <?php if ($registro_campo_editar["barra_herramientas"]=="3") echo 'SELECTED'; ?>>Avanzada: Extendida + Insertar objetos y colores</option>
+										<option value="4" <?php if ($registro_campo_editar["barra_herramientas"]=="4") echo 'SELECTED'; ?>>Completa: Avanzada +  Formularios y pantalla completa</option>
 									</select>
 									<a href="#" title="Tipo de editor utilizado:" name="Indica el tipo de barra de herramientas que aparecer&aacute; en la parte superior del control y que permitir&aacute; realizar al usuario las diferentes tareas de edici&oacute;n del texto. IMPORTANTE: Cada tipo de editor requiere un espacio diferente en el formulario ya que debe desplegar un n&uacute;mero de iconos y opciones diferentes."><img src="img/icn_10.gif" border=0></a>
 								</td>
@@ -765,8 +867,8 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right">Fila &uacute;nica para este objeto?</td>
 								<td width="400" >
 									<select  name="fila_unica" class="Combos" >
-										<option value="0">No</option>
-										<option value="1">Si</option>
+										<option value="0" <?php if ($registro_campo_editar["fila_unica"]=="0") echo 'SELECTED'; ?>>No</option>
+										<option value="1" <?php if ($registro_campo_editar["fila_unica"]=="1") echo 'SELECTED'; ?>>Si</option>
 									</select>
 									<a href="#" title="Se debe utilizar una fila completa para el objeto?" name="Permite desplegar el objeto en una fila exclusiva de la tabla usada en el formulario."><img src="img/icn_10.gif" border=0></a>
 								</td>
@@ -779,7 +881,8 @@ if ($accion=="editar_formulario")
 							<table class="TextosVentana">
 							<tr>
 								<td width="200" align="right">Lista de opciones:</td>
-								<td width="400" ><input type="text" name="lista_opciones" size="30" class="CampoTexto">
+								<td width="400" >
+									<input type="text" name="lista_opciones" size="30" class="CampoTexto" value="<?php echo $registro_campo_editar["lista_opciones"]; ?>">
 									<a href="#" title="Qu&eacute; opciones aparecen para ser escogidas" name="Ingrese una lista de opciones separadas por coma.  Si requiere tomar las opciones din&aacute;micamente desde otra tabla de la aplicaci&oacute;n utilice los campos de Origen de datos para opciones.  En caso de llenar ambas opciones (lista fija y origen de datos) el resultado ser&aacute; su combinaci&oacute;n."><img src="img/icn_10.gif" border=0></a>
 									(Separadas por coma)
 								</td>
@@ -808,7 +911,10 @@ if ($accion=="editar_formulario")
 														$resultado_campos=ejecutar_sql("DESCRIBE $nombre_tabla ");
 														while($registro_campos = $resultado_campos->fetch())
 															{
-																echo '<option value="'.$nombre_tabla.'.'.$registro_campos["Field"].'">'.$registro_campos["Field"].'</option>';
+																$seleccion_campo="";
+																if ($registro_campo_editar["origen_lista_opciones"]==$nombre_tabla.'.'.$registro_campos["Field"])
+																	$seleccion_campo="SELECTED";
+																echo '<option value="'.$nombre_tabla.'.'.$registro_campos["Field"].'" '.$seleccion_campo.'>'.$registro_campos["Field"].'</option>';
 															}
 														echo '</optgroup>';
 													}
@@ -843,7 +949,10 @@ if ($accion=="editar_formulario")
 														$resultado_campos=ejecutar_sql("DESCRIBE $nombre_tabla ");
 														while($registro_campos = $resultado_campos->fetch())
 															{
-																echo '<option value="'.$nombre_tabla.'.'.$registro_campos["Field"].'">'.$registro_campos["Field"].'</option>';
+																$seleccion_campo="";
+																if ($registro_campo_editar["origen_lista_valores"]==$nombre_tabla.'.'.$registro_campos["Field"])
+																	$seleccion_campo="SELECTED";
+																echo '<option value="'.$nombre_tabla.'.'.$registro_campos["Field"].'" '.$seleccion_campo.'>'.$registro_campos["Field"].'</option>';
 															}
 														echo '</optgroup>';
 													}
@@ -863,7 +972,7 @@ if ($accion=="editar_formulario")
 							<tr>
 								<td colspan=2>
 									Valor de la etiqueta (ser&aacute; impresa en el formulario en formato HTML):<br>
-									<textarea cols="100" rows="20" name="valor_etiqueta" id="valor_etiqueta" class="ckeditor"></textarea>
+									<textarea cols="100" rows="20" name="valor_etiqueta" id="valor_etiqueta" class="ckeditor"><?php echo $registro_campo_editar["valor_etiqueta"]; ?></textarea>
 									<script type="text/javascript" src="inc/ckeditor/ckeditor.js"></script>
 									<script type="text/javascript">
 										CKEDITOR.replace( 'valor_etiqueta', {	toolbar : [ 
@@ -893,7 +1002,8 @@ if ($accion=="editar_formulario")
 							<table class="TextosVentana">
 							<tr>
 								<td width="200" align="right">URL para IFrame:</td>
-								<td width="400" ><input type="text" name="url_iframe" size="40" class="CampoTexto">
+								<td width="400" >
+									<input type="text" name="url_iframe" size="40" class="CampoTexto" value="<?php echo $registro_campo_editar["url_iframe"]; ?>">
 									<a href="#" title="Ayuda r&aacute;pida:" name="Ingrese la direcci&oacute;n de la p&aacute;gina que sera embebida en el marco."><img src="img/icn_10.gif" border=0></a>
 								</td>
 							</tr>
@@ -912,7 +1022,10 @@ if ($accion=="editar_formulario")
 										$consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe ORDER BY titulo");
 										while($registro_informes = $consulta_informs->fetch())
 											{
-												echo '<option value="'.$registro_informes["id"].'">(Id.'.$registro_informes["id"].') '.$registro_informes["titulo"].'</option>';
+												$seleccion_campo="";
+												if ($registro_campo_editar["informe_vinculado"]==$registro_informes["id"])
+													$seleccion_campo="SELECTED";
+												echo '<option value="'.$registro_informes["id"].'" '.$seleccion_campo.'>(Id.'.$registro_informes["id"].') '.$registro_informes["titulo"].'</option>';
 											}
 									?>
 									</select>
@@ -928,8 +1041,8 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right">Ventana propia para el objeto?</td>
 								<td width="400" >
 									<select  name="objeto_en_ventana" class="Combos" >
-										<option value="0">No</option>
-										<option value="1">Si</option>
+										<option value="0" <?php if ($registro_campo_editar["objeto_en_ventana"]=="0") echo 'SELECTED'; ?>>No</option>
+										<option value="1" <?php if ($registro_campo_editar["objeto_en_ventana"]=="1") echo 'SELECTED'; ?>>Si</option>
 									</select>
 									<a href="#" title="Ayuda importante!" name="No se recomienda activar este campo cuando desee empotrar informes de tipo GRAFICA."><img src="img/icn_10.gif" border=0></a>
 								</td>
@@ -942,7 +1055,8 @@ if ($accion=="editar_formulario")
 							<table class="TextosVentana">
 							<tr>
 								<td width="200" align="right">Longitud m&aacute;xima:</td>
-								<td width="400" ><input type="text" name="maxima_longitud" size="4" class="CampoTexto">
+								<td width="400" >
+									<input type="text" name="maxima_longitud" size="4" class="CampoTexto" value="<?php echo $registro_campo_editar["maxima_longitud"]; ?>">
 									<a href="#" title="Cu&aacute;ntos caracteres permite el campo?"><img src="img/icn_10.gif" border=0></a>
 									<i>(Valor entre 1 y N, 0 para deshabilitar el l&iacute;mite)</i>
 								</td>
@@ -950,13 +1064,22 @@ if ($accion=="editar_formulario")
 							</table>
 						</div>
 
+
+					<?php
+						//Despues de agregar todos los parametros de campos, Si se detecta que es edicion de un campo se llama a la funcion de visualizacion de campos especificos
+						if ($popup_activo=="FormularioCampos")
+							echo '	<script TYPE="text/javascript" LANGUAGE="JavaScript">
+										CambiarCamposVisibles("'.$registro_campo_editar["tipo"].'");
+									</script>';
+					?>
+
 					<table class="TextosVentana">
 						<tr>
 							<td>
 								</form>
 							</td>
 							<td>
-								<input type="Button"  class="Botones" value="Agregar objeto/campo" onClick="document.datosform.submit()">
+								<input type="Button"  class="Botones" value="Agregar o actualizar el objeto/campo" onClick="document.datosform.submit()">
 							</td>
 						</tr>
 					</table>
@@ -1214,17 +1337,17 @@ if ($accion=="editar_formulario")
 														<input type="Hidden" name="popup_activo" value="FormularioDiseno">
 												</form>
 										</td>
-										<!--
+
 										<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-														<input type="hidden" name="accion" value="editar_campo_formulario">
+														<input type="hidden" name="accion" value="editar_formulario">
 														<input type="hidden" name="campo" value="'.$registro["id"].'">
 														<input type="hidden" name="formulario" value="'.$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-														<input type="Button" value="Editar (Deshabilitado)"  class="Botones">
-														<input type="Hidden" name="popup_activo" value="FormularioDiseno">
+														<input type="Submit" value="Editar"  class="Botones">
+														<input type="Hidden" name="popup_activo" value="FormularioCampos">
 												</form>
-										</td>-->';
+										</td>';
 									}
 								else
 									{

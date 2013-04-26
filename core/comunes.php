@@ -53,7 +53,7 @@
 				}
 			catch( PDOException $ErrorPDO)
 				{
-					mensaje('Error durante la ejecuci&oacute;n',$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
+					mensaje('Ha ocurrido un error durante la ejecuci&oacute;n',$ErrorPDO->getMessage().'<br><b>Detalles del query</b>: '.$query,'80%','icono_error.png','TextosEscritorio');
 					return 1;
 				}
 		}
@@ -86,7 +86,7 @@
 				}
 			catch( PDOException $ErrorPDO)
 				{
-					echo '<script language="JavaScript"> alert("Ha ocurrido un error interno durante la ejecucion del Query: '.$query.'\n\nEl motor ha devuelto: '.$ErrorPDO->getMessage().'.\n\nPongase en contacto con el administrador del sistema y comunique este mensaje.");  </script>';					
+					echo '<script language="JavaScript"> alert("Ha ocurrido un error interno durante la ejecucion\nDetalles del Query: '.$query.'\n\nEl motor ha devuelto: '.$ErrorPDO->getMessage().'.\n\nPongase en contacto con el administrador del sistema y comunique este mensaje.");  </script>';					
 					//mensaje('Error durante la ejecuci&oacute;n',$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
 					return $ErrorPDO->getMessage();
 				}
@@ -230,7 +230,7 @@
 			global $MotorBD;
 			global $BaseDatos;
 
-			if($MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc" || $MotorBD=="sqlite2" || $MotorBD=="sqlite3")
+			if($MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc" || $MotorBD=="sqlite")
 					$consulta = "SELECT name FROM sysobjects WHERE xtype='U';";
 			if($MotorBD=="oracle")
 					$consulta = "SELECT table_name FROM cat;";  //  Si falla probar con esta:  $consulta = "SELECT table_name FROM tabs;";
@@ -238,7 +238,7 @@
 					$consulta = "SELECT RDB$RELATION_NAME FROM RDB$RELATIONS WHERE RDB$SYSTEM_FLAG = 0 AND RDB$VIEW_BLR IS NULL ORDER BY RDB$RELATION_NAME;";
 			if($MotorBD=="mysql")
 					$consulta = "SHOW tables FROM ".$BaseDatos." ";
-			if($MotorBD=="pg")
+			if($MotorBD=="pgsql")
 					$consulta = "SELECT relname AS name FROM pg_stat_user_tables ORDER BY relname;";
 
 			try
@@ -1075,7 +1075,9 @@
 		function cargar_formulario($formulario,$en_ventana=1,$campobase="",$valorbase="")
 		  {
 				global $ConexionPDO,$ArchivoCORE,$TablasCore;
-
+				// Carga variables de definicion de tablas
+				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
+	
 				echo '
 				<script type="text/javascript">
 					function AgregarElemento(columna,fila,elemento)
@@ -1317,6 +1319,9 @@
 function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0)
 	{
 		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion,$Login_usuario;
+		// Carga variables de definicion de tablas
+		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
+		
 
 		// Busca datos del informe
 		$consulta_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id='$informe'");

@@ -79,7 +79,8 @@
 		</td>
 		<td valign=top>
 			<font size=2 color=black>
-			<input type="text" name="BaseDatos" size="20" class="CampoTexto" class="keyboardInput"> (debe existir)
+			<input type="text" name="BaseDatos" size="20" class="CampoTexto" class="keyboardInput"> 
+			<a href="#" title="La base de datos debe existir previamente" name="Para motores diferentes a SQLite usted debe haber creado primero la base de datos.  Para SQLite solamente requiere especificar el nombre del archivo asociado a la BD (ej. practico.sqlite3) y Practico intentara crearlo por usted siempre y cuando tenga los permisos adecuados sobre su servidor web."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 			</font>
 		</td>
 	</tr>
