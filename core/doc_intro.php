@@ -78,7 +78,7 @@ Section: Detalles de licenciamiento (AUTHORS)
 		Parts of the package are under other, compatible licenses:
 
 		PCLZip (PhpConcept Library - Zip Module 2.8.2):
-			Location: inc/pclzip.lib.php:
+			Location: inc/pclzip/pclzip.lib.php:
 			License: GNU GPL version 2
 			Made by: Vincent Blavet - August 2009
 			http://www.phpconcept.net

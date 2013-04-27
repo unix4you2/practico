@@ -396,11 +396,12 @@
 			Despliega la ventana de ingreso al sistema con el formulario para usuario, contrasena y captcha.
 		*/
 		  global $ArchivoCORE;
+		  global $MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo;
 			echo '
 					<br><br>
 					<div align="center">
 					';
-			abrir_ventana('Ingreso al sistema','#EADEDE','620');
+			abrir_ventana($MULTILANG_TituloLogin,'#EADEDE','620');
 			?>
 						<div align="center">
 						<form name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
@@ -409,21 +410,21 @@
 								<td align="center">
 										<table width="100%" border="0" cellspacing="10" cellpadding="0" class="TextosVentana" align="center">
 										<tr>
-											<td align="right"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">Usuario&nbsp;</td>
+											<td align="right"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_Usuario; ?>&nbsp;</td>
 											<td><input type="text" name="uid" size="18" class="CampoTexto" class="keyboardInput"></td>
 										</tr>
 										<tr>
-											<td align="right"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">Contrase&ntilde;a&nbsp;</td>
+											<td align="right"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_Contrasena; ?>&nbsp;</td>
 											<td><input type="password" name="clave" size="18" class="CampoTexto keyboardInput" class="keyboardInput" style="border-width: 1px; font-size: 9px; font-family: VErdana, Tahoma, Arial;"></td>
 										</tr>
 										<tr>
-											<td align="right" valign="middle"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">Codigo de seguridad</td>
+											<td align="right" valign="middle"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_CodigoSeguridad; ?></td>
 											<td valign="middle">
 											<img src="core/captcha.php">
 											</td>
 										</tr>
 										<tr>
-											<td width="150" align="right" valign="middle"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">Ingrese aqui el codigo de seguridad</td>
+											<td width="150" align="right" valign="middle"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_IngreseCodigoSeguridad; ?></td>
 											<td valign="middle">
 											<img src="img/tango_go-next.png" align="absmiddle"> <input type="text" name="captcha" size="7" maxlength=6 style="border-width: 1px; font-size: 9px; font-family: VErdana, Tahoma, Arial;">
 											</td>
@@ -445,7 +446,7 @@
 						</div>
 						
 			<?php
-			mensaje('Importante','El acceso a este software es exlusivo para usuarios registrados. Por su seguridad, nunca comparta su nombre de usuario y contrase&ntilde;a.','100%','../img/tango_dialog-information.png','TextosVentana');
+			mensaje($MULTILANG_Importante,$MULTILANG_AccesoExclusivo,'100%','../img/tango_dialog-information.png','TextosVentana');
 			cerrar_ventana();
 			echo '</div>';
 	  }

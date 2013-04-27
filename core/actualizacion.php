@@ -174,7 +174,7 @@ if ($accion=="analizar_parche")
 			$mensaje_error.="<br>Error cargando la versi&oacute;n actual de Pr&aacute;ctico.  No se encuentra inc/version_actual.txt";
 
 		//Libreria necesaria para extraer el archivo
-		include("inc/pclzip.lib.php");
+		include("inc/pclzip/pclzip.lib.php");
 		$archivo = new PclZip($archivo_cargado);
 		
 		//Obtiene archivo compat.txt con el numero de version compatible del parche
@@ -317,7 +317,7 @@ if ($accion=="aplicar_parche")
 		//VERIFICAR PERMISOS DE ESCRITURA EN CADA RUTA DEL PARCHE
 
 		//Libreria necesaria para extraer el archivo
-		include("inc/pclzip.lib.php");
+		include("inc/pclzip/pclzip.lib.php");
 		$archivo = new PclZip($archivo_cargado);
 		
 		if ($mensaje_error=="")

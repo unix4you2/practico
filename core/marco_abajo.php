@@ -50,15 +50,15 @@
 	<tr><td>
 		<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MarcoInferior"><tr>
 			<td align="left" valign="bottom" width="50%">
-				&nbsp;&nbsp;Instante:&nbsp;&nbsp;<?php echo $fecha_operacion_guiones;?>&nbsp;&nbsp;<?php echo $hora_operacion_puntos;?>
-				<?php 
+				&nbsp;&nbsp;<?php echo $MULTILANG_Instante; ?>:&nbsp;&nbsp;<?php echo $fecha_operacion_guiones;?>&nbsp;&nbsp;<?php echo $hora_operacion_puntos;?>
+				<?php
 					// Muestra la accion actual si el usuario es administrador y la accion no es vacia - Sirve como guia a la hora de crear objetos
 					if($Login_usuario=="admin" && $accion!="")
 						{
 							// Calcula tiempos de ejecucion del script
 							$tiempo_final_script = obtener_microtime();
 							$tiempo_total_script = $tiempo_final_script - $tiempo_inicio_script;
-							echo " - <font color=yellow>Accion: ".$accion."</font> <font color=black>Usados (seg):";  echo round($tiempo_total_script,3);
+							echo " - <font color=yellow>$MULTILANG_Accion: $accion</font> <font color=black>$MULTILANG_TiempoCarga (seg):";  echo round($tiempo_total_script,3);
 						}
 				?>
 			</td>

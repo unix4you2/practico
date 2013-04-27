@@ -221,7 +221,7 @@
 		<td valign=top width="380">
 			<select  name="ZonaHoraria" class="Combos">
 				<?php
-					$archivo_origen="../inc/zonas_horarias.txt";
+					$archivo_origen="../inc/practico/zonas_horarias.txt";
 					$archivo = fopen($archivo_origen, "r");
 					//descarta comentario inicial de archivo
 					if ($archivo)

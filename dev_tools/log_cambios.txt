@@ -25,6 +25,7 @@ LogCambios="
   * Added: Archivo def_basedatos contiene ahora la lista de campos por tabla para mejorar consultas
   * Added: Ahora los errores en tiempo de ejecución asociados a base de datos muestran el detalle del query para facilitar su depuración
   * Added: Mejora sustancial en la edición de campos sobre diseño de formularios. Dinámicamente permite cambio de tipos y propiedades
+  * Added: Inicio del soporte multi-idioma
   * Fixed: Scripts PostgreSQL para procesdo de instalación
   * Fixed: Scripts SQLite para procesdo de instalación
   * Fixed: Modo de depuracion siempre era desactivado en edición de configuración

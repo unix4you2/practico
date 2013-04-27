@@ -54,11 +54,11 @@
 		<?php echo $NombreRAD; ?> <?php include("inc/version_actual.txt"); ?>
   	</title>
 
-	<script type="text/javascript" src="js/tooltips.js"></script>
-	<script type="text/javascript" src="js/validaform.js"></script>
-	<script type="text/javascript" src="js/popup.js"></script>
-	<script type="text/javascript" src="js/calendario.js"></script>
-	<script type="text/javascript" src="js/tecladovirtual.js"></script>
+	<script type="text/javascript" src="inc/practico/javascript/tooltips.js"></script>
+	<script type="text/javascript" src="inc/practico/javascript/validaform.js"></script>
+	<script type="text/javascript" src="inc/practico/javascript/popup.js"></script>
+	<script type="text/javascript" src="inc/practico/javascript/calendario.js"></script>
+	<script type="text/javascript" src="inc/practico/javascript/tecladovirtual.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/general.css">
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/calendario.css">
@@ -321,7 +321,7 @@
 							<td valign=top width="380">
 								<select  name="ZonaHorariaNEW" class="Combos">
 									<?php
-										$archivo_origen="inc/zonas_horarias.txt";
+										$archivo_origen="inc/practico/zonas_horarias.txt";
 										$archivo = fopen($archivo_origen, "r");
 										//descarta comentario inicial de archivo
 										if ($archivo)

@@ -602,7 +602,7 @@ if ($accion=="editar_tabla")
 					else
 						{
 							//Busca los campos en la plantilla
-							$directorio="wzd/";
+							$directorio="inc/practico/asistentes/";
 							//Carga el archivo de plantilla
 							$archivo_origen=$directorio.$plantilla_tabla;
 							$archivo = fopen($archivo_origen, "r");
@@ -659,11 +659,11 @@ if ($accion=="editar_tabla")
 /* ################################################################## */
 /*
 	Function: asistente_tablas
-	Despliega el asistente para creacion de tablas basado en los archivos wzd/*
+	Despliega el asistente para creacion de tablas basado en los archivos inc/practico/asistentes/*
 
 	Variables de entrada:
 
-		archivos en wzd/*.txt - Contienen la definicion de tablas que pueden ser creadas con el asistente
+		archivos en inc/practico/asistentes/*.txt - Contienen la definicion de tablas que pueden ser creadas con el asistente
 
 	Salida:
 		Tabla seleccionada para su creacion
@@ -694,7 +694,7 @@ if ($accion=="editar_tabla")
 							<select name="plantilla_tabla" onChange="datos.descripciontabla.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].label; datos.listacampos.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].title; datos.totalcampos.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].lang;">
 								<option value="" label="" dir="" lang="">Seleccione una</option>
 								<?php
-									$directorio="wzd/";
+									$directorio="inc/practico/asistentes/";
 									$dh = opendir($directorio);
 									
 									while (($file = readdir($dh)) !== false)
