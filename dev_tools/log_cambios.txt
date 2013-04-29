@@ -49,3 +49,9 @@ LogCambios="
 ScriptBasedatos="
 
 "
+
+########################################################################
+#[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
+TODOList="
+	Ver: http://www.pedroventura.com/php/problemas-codificacion-web-configurar-codificacion-utf8-php-mysql-y-html/
+"

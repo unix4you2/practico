@@ -19,10 +19,18 @@
 	*/
 ?>
 
+<?php
+	//Incluye el archivo de idioma
+	if (!isset($Idioma)) $Idioma="es";
+	include_once("../inc/practico/idiomas/".$Idioma.".php");
+?>
+
+
 <html>
+	<meta name="tipo_contenido"  content="text/html;" http-equiv="content-type" charset="utf-8">
 <head>
 	<title>
-		Pr&aacute;ctico - Instalaci&oacute;n
+		Pr&aacute;ctico - <?php echo $MULTILANG_Instalacion; ?>
   	</title>
 	<script type="text/javascript" src="js/tooltips.js"></script>
 	<link rel="stylesheet" type="text/css" href="../skin/nomo/general.css">
@@ -41,21 +49,21 @@
 	<tr><td>
 		<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MarcoSuperior"><tr>
 			<td valign="bottom" width="20%">
-				<img src="../skin/nomo/img/logo.png" border="0"><b><font color=yellow> Versi&oacute;n <?php include("../inc/version_actual.txt"); ?></font></b>
+				<img src="../skin/nomo/img/logo.png" border="0"><b><font color=yellow> <?php echo $MULTILANG_Version; ?> <?php include("../inc/version_actual.txt"); ?></font></b>
 			</td>
 			<td align="center" valign="middle" width="60%">
 				<b>
-					<font color="#d4dce4">Generador de Aplicaciones WEB</font> Libre y multiplataforma
+					<font color="#d4dce4"><?php echo $MULTILANG_SubtituloPractico1; ?></font> <?php echo $MULTILANG_SubtituloPractico2; ?>
 			</td>
 			<td align="right"  width="20%" valign="middle">
-					Instalador de aplicaci&oacute;n&nbsp;&nbsp;
+					&nbsp;&nbsp;
 			</td>
 		</tr></table>
 		<!-- FIN DEL ENCABEZADO -->
 
 		<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MenuSuperior"><tr>
 			<td valign="top">
-				&nbsp;&nbsp;usuario@an&oacute;nimo>
+				<?php echo $MULTILANG_InstaladorAplicacion; ?>&nbsp;&nbsp;<?php echo $MULTILANG_Usuario; ?>@<?php echo $MULTILANG_Anonimo; ?>>
 			</td>
 		</tr></table>
 		<form method="POST" name="cerrar_sesion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">

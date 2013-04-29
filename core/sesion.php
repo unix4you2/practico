@@ -188,33 +188,18 @@
 	{
 		@session_destroy();
 		echo '<br><br><div align="center">';
-		abrir_ventana('Alerta de seguridad','FFFFFF','');
+		abrir_ventana($MULTILANG_Atencion,'FFFFFF','');
 			echo '
-			<br><div align="center" class="TextosVentana"><strong><font size="3">Su sesi&oacute;n ha sido cerrada</font></strong>
+			<br><div align="center" class="TextosVentana"><strong><font size="3">'.$MULTILANG_SesionCerrada.'</font></strong>
 			<table width="100%"><tr>
 				<td>
 
 					</div><br>
 					<table width="90%" border="0" cellspacing="0" cellpadding="0" align="center" class="TextosVentana"><tr><td>
 						<font color="#000000">
-						<strong>Esto puede ocasionarse por acciones ejecutadas por el usuario como:</strong><br>
+						<strong>'.$MULTILANG_TituloCierre.':</strong><br>
 						<font color="#808080">
-						<li>Cerrar de manera voluntaria su sesi&oacute;n</li>
-						<li>Dejar de usar el sistema durante un tiempo prolongado</li>
-						<li>Tener abiertas varias ventanas del sistema al mismo tiempo en secciones restringidas por el administrador</li>
-						<li>Su usuario o contrase&ntilde;a son inv&aacute;lidos para realizar alguna operaci&oacute;n</li>
-						<li>Navegar utilizando enlaces o botones diferentes a los permitidos</li>
-						<font color="#000000">
-						<br><strong>Tambi&eacute;n por configuraciones o acciones de su equipo como:</strong><br>
-						<font color="#808080">
-						<li>Su navegador no est&aacute; soportando cookies</li>
-						<li>Se ha lipiado la cach&eacute; cookies o sesiones del navegador mientras se usaba el sistema</li>
-						<font color="#000000">
-						<br><strong>Tambi&eacute;n por configuraciones del sistema como:</strong><br>
-						<font color="#808080">
-						<li>Haber finalizado un proceso de instalaci&oacute;n de la plataforma que requiere un reinicio de sesi&oacute;n</li>
-						<li>La llave de paso de su usuario no corresponde a la llave solicitada por este sistema</li>
-						<li>Las credenciales para firmar un registro de operaci&oacute;n no son v&aacute;lidas</li>
+							'.$MULTILANG_ExplicacionCierre.'
 						</font>
 					</td></tr></table>
 					<br>
@@ -223,14 +208,13 @@
 					<img src="img/caduca.gif"  width="88" height="116"  border=0 alt="">&nbsp;
 				</td>
 			</tr></table>
-			<form name="Again" method="POST"><input type="Hidden" name="accion" value="">
-			<input type="image" src="img/ingresa.gif"></form>
+			<form name="Again" method="POST">
+				<input type="Hidden" name="accion" value="">
+				<input type="Submit"  class="Botones" value=" '.$MULTILANG_Ingresar.' >>>" >
+			</form>
 			';
 		@session_destroy();
 		cerrar_ventana();
 		echo '</div>';
 	}
 ?>
-
-
-

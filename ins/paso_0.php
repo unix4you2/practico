@@ -24,23 +24,21 @@
 	<tr>
 		<td><img src="../img/practico_login.png" border=0 ALT="Logo Practico"></td>
 		<td valign=top><font size=2 color=black><br><b>
-			<h1>Versi&oacute;n <?php include("../inc/version_actual.txt"); ?></h1>
-			[Bienvenido al proceso de instalaci&oacute;n]</b><br><br>
-			Este asistente le guiar&aacute; en cada paso de las configuraciones iniciales para el uso de Pr&aacute;ctico como un entorno visual para el desarrollo de aplicaciones web.
+			<h1><?php echo $MULTILANG_Version; ?> <?php include("../inc/version_actual.txt"); ?></h1>
+			[<?php echo $MULTILANG_BienvenidaInstalacion; ?>]</b><br><br>
+			<?php echo $MULTILANG_BienvenidaDescripcion; ?>.
 		</font></td>
 	</tr>
 </table>
 <hr>
-<b>Esta herramienta es liberada bajo licencia GNU-GPL v2</b> descrita a continuaci&oacute;n:<br>
+<b><?php echo $MULTILANG_ResumenLicencia; ?></b>:<br>
 <textarea cols="100" rows="7" class="AreaTexto">
 	<?php include("../LICENSE"); ?>
 </textarea>
 <br><br>
-Una copia en l&iacute;nea de esta licencia puede ser encontrada en diferentes formatos en el sitio web de la GNU<br> a trav&eacute;s de <a href="http://www.gnu.org/licenses/gpl-2.0.html">este enlace</a>. Si usted acepta los terminos de esta licencia, haga clic en el bot&oacute;n continuar.
+<?php echo $MULTILANG_AmpliacionLicencia; ?>.
 <br><br>
 </div>
-
-
 
 <?php
 	abrir_barra_estado();
@@ -49,11 +47,8 @@ Una copia en l&iacute;nea de esta licencia puede ser encontrada en diferentes fo
 	echo '
 		<form name="continuar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 			<input type="Hidden" name="paso" value="'.$siguiente.'">
-			<input type="Submit" class="BotonesEstadoCuidado" value=" Acepto la licencia - Continuar >>> ">
+			<input type="Hidden" name="Idioma" value="'.$Idioma.'">
+			<input type="Submit" class="BotonesEstadoCuidado" value=" '.$MULTILANG_Continuar.' >>> ">
 		</form>';
 	cerrar_barra_estado();
-
 ?>
-
-
-

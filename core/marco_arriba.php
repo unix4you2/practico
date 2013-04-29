@@ -344,6 +344,38 @@
 						<tr>
 							<td valign=top align=right>
 								<font size=2 color=black>
+									Idioma predeterminado
+								</font>
+							</td>
+							<td valign=top width="380">
+								<select name="IdiomaPredeterminadoNEW" class="Combos" >
+									<?php
+									// Incluye archivos de idioma para ser seleccionados
+									$path_idiomas="inc/practico/idiomas/";
+									$directorio_idiomas=opendir($path_idiomas);
+									while (($elemento=readdir($directorio_idiomas))!=false)
+										{
+											//Lo procesa solo si es un archivo diferente del index
+											if (!is_dir($path_idiomas.$elemento) && $elemento!="." && $elemento!=".."  && $elemento!="index.html")
+												{
+													include_once($path_idiomas.$elemento);
+													//Establece espanol como predeterminado
+													$seleccion="";
+													$valor_opcion=str_replace(".php","",$elemento);
+													if ($valor_opcion==$IdiomaPredeterminado) $seleccion="SELECTED";
+													//Presenta la opcion
+													echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$elemento.')</option>';
+													if (file_exists("mod/".$elemento."/index.php"))
+														include("mod/".$elemento."/index.php");
+												}
+										}		
+									?>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=right>
+								<font size=2 color=black>
 									N&uacute;mero de caracteres para captcha?
 								</font>
 							</td>
@@ -586,8 +618,8 @@
 								echo "&#9733;";
 							?></font>)&nbsp;
 							<br>
-							<img src="<?php echo 'skin/'.$PlantillaActiva.'/img/cerrar.gif'; ?>" border="0" OnClick="cerrar_sesion.submit();" style="cursor:pointer;">&nbsp;
-				<?php 
+							<input type="Button" class="BotonesEstado" value=" <?php echo $MULTILANG_CerrarSesion; ?> "  OnClick="cerrar_sesion.submit();">&nbsp;
+				<?php
 					}
 				?>
 			</td>

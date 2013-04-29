@@ -142,6 +142,7 @@ $salida=sprintf("<?php
 	\$LlaveDePaso='%s';
 	\$ModoDepuracion=%s;
 	\$ZonaHoraria='%s';
+	\$IdiomaPredeterminado='%s';
 	\$CaracteresCaptcha=%s;
 	\$Auth_TipoMotor='%s';
 	\$Auth_TipoEncripcion='%s';
@@ -149,13 +150,13 @@ $salida=sprintf("<?php
 	\$Auth_LDAPPuerto='%s';
 	\$Auth_LDAPDominio='%s';
 	\$Auth_LDAPOU='%s';
-?>",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$PlantillaActivaNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$ZonaHorariaNEW,$CaracteresCaptchaNEW,$Auth_TipoMotorNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW);
+?>",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$PlantillaActivaNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$Auth_TipoMotorNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW);
 			// Escribe el archivo de configuracion
 			$archivo_config=fopen("core/configuracion.php","w");
 			if($archivo_config==null)
 				{
 					$hay_error=1;
-					$mensaje_error='<b>Se han encontrado errores al tratar de escribir el archivo de configuraci&oacute;n !!!</b>:<br>Si lo desea una alternativa puede ser cambiar usted mismo los valores por defecto incluidos en el archivo core/configuracion.php.<br><br>Tambi&eacute;n puede cambiar los permisos al archivo de configuraci&oacute;n y probar nuevamente con este asistente.';
+					$mensaje_error=$MULTILANG_ErrorEscribirConfig;
 				}
 			else
 				{

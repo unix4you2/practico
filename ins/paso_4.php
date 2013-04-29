@@ -24,7 +24,7 @@
 	<tr>
 		<td width=100><img src="../img/practico_login.png" border=0 ALT="Logo Practico" width="116" height="80"></td>
 		<td valign=top><font size=2 color=black><br><b>
-			[Ejecutando scripts de base de datos (si aplica)]</b><br><br>
+			[<?php echo $MULTILANG_ExeScripts; ?>]</b><br><br>
 		</font></td>
 	</tr>
 </table>
@@ -70,7 +70,7 @@
 						}
 					catch( PDOException $ErrorPDO)
 						{
-							echo "<hr><b><font color=red>ATENCION: </font>Error ejecutando la consulta</b> $consulta <b>sobre la base de datos. DETALLES: ".$ErrorPDO->getMessage()."</b>";
+							echo "<hr><b><font color=red>".$MULTILANG_Atencion."!!!: </font>".$MULTILANG_ErrorScripts.". SQL: ".$consulta." ".$MULTILANG_Error.": ".$ErrorPDO->getMessage()."</b>";
 							$hay_error=1; //usada globalmente durante el proceso de instalacion
 						}
 				}
@@ -87,32 +87,26 @@
 <?php
 	echo '
 	<table width="700" cellspacing=10><tr><td align=left><font size=2 color=black>
-		<b>Total consultas ejecutadas:</b> '.$total_ejecutadas.'<br>
-		Si esta es una instalaci&oacute;n nueva puede ingresar al sistema mediante las credenciales<b> admin/admin</b> y cambiarlas luego por las que usted desee.<br>
+		<b>'.$MULTILANG_Totalejecutado.':</b> '.$total_ejecutadas.'<br>
+		'.$MULTILANG_MsjFinal1.'<br>
 		<br>
-		<font size=4 color=red><b>IMPORTANTE:</b></font><br>
-		<u><b>Recuerde eliminar por completo el directorio de instalaci&oacute;n (carpeta /ins)</b></u> para evitar que otra persona ejecute nuevamente estos scripts sobre un sistema en producci&oacute;n pudiendo ocasionar alg&uacute;n tipo de da&ntilde;o.
+		<font size=4 color=red><b>'.$MULTILANG_Importante.':</b></font><br>
+		<u><b>'.$MULTILANG_MsjFinal2.'
 		<br><br>
-	<b>Resumen de operaciones ejecutadas</b> (archivo '.$RutaScriptSQL.'):<br>
+	<b>'.$MULTILANG_MsjFinal3.'</b> ('.$RutaScriptSQL.'):<br>
 	<textarea cols="120" rows="7" class="AreaTexto">
 		'.$total_consultas.'
 	</textarea>
 	</td></tr></table>
 	';
 
-
-
-
 	abrir_barra_estado();
-
 	if (!$hay_error)
 		{
 			echo '<form name="continuar" action="../" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="accion" value="Terminar_sesion">
-				<input type="Submit" class="BotonesEstadoCuidado" value=" Ir a su instalaci&oacute;n de Pr&aacute;ctico " onclick="document.continuar.submit();">
+				<input type="Submit" class="BotonesEstadoCuidado" value=" '.$MULTILANG_IrInstalacion.' " onclick="document.continuar.submit();">
 				</form>';
 		}
-
 	cerrar_barra_estado();
 ?>
-

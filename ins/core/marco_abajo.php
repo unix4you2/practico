@@ -24,7 +24,7 @@
 	<tr><td>
 		<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MarcoInferior"><tr>
 			<td align="left" valign="bottom" width="50%">
-				&nbsp;&nbsp;Instante:&nbsp;&nbsp;<?php echo $fecha_operacion_guiones;?>&nbsp;&nbsp;<?php echo $hora_operacion_puntos;?>
+				&nbsp;&nbsp;<?php echo $MULTILANG_Instante; ?>:&nbsp;&nbsp;<?php echo $fecha_operacion_guiones;?>&nbsp;&nbsp;<?php echo $hora_operacion_puntos;?>
 				<?php
 					$url = $_SERVER['SERVER_NAME'];
 					$root = $url.$_SERVER['PHP_SELF'];

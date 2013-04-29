@@ -24,28 +24,28 @@
 	<tr>
 		<td width=100><img src="../img/practico_login.png" border=0 ALT="Logo Practico" width="116" height="80"></td>
 		<td valign=top><font size=2 color=black><br><b>
-			[Configuraci&oacute;n General]</b><br><br>
-			Indique la configuraci&oacute;n deseada para el almacenamiento de aplicaciones e informaci&oacute;n de usuario generada por Pr&aacute;ctico, as&iacute; como otras opciones importantes de la herramienta.  Esta ventana ser&aacute; presentada s&oacute;lo una vez as&iacute; que aseg&uacute;rese de diligenciar y confirmar toda la informaci&oacute;n requerida:
+			[<?php echo $MULTILANG_ConfiguracionGeneral; ?>]</b><br><br>
+			<?php echo $MULTILANG_ConfiguracionDescripcion; ?>:
 		</font></td>
 	</tr>
 </table>
 <form name="continuar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 <hr>
 <font size=2 color=black><br><b>
-	[Motor de Base de Datos]</b>
+	[<?php echo $MULTILANG_MotorBD; ?>]</b>
 </font>
 <table cellspacing=2 width="700">
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				Tipo de motor
+				<?php echo $MULTILANG_TipoMotor; ?>
 			</font>
 		</td>
 		<td valign=top width="380">
 			<select name="MotorBD" class="Combos" >
 				<option value="mysql">MySQL - MariaDB (3.x/4.x/5.x)</option>
 				<option value="pgsql">PostgreSQL</option>
-				<option value="sqlite">SQLite v2 - SQLite v3 (Si no existe ser&aacute; creada en la ra&iacute;z)</option>
+				<option value="sqlite">SQLite v2 - SQLite v3</option>
 				<option value="sqlsrv">FreeTDS/Microsoft SQL Server: Win32 [max version 2008]</option>
 				<option value="mssql">FreeTDS/Microsoft SQL Server: Win32&Linux, [max version 2000]</option>
 				<option value="ibm">IBM (DB2)</option>
@@ -55,39 +55,39 @@
 				<option value="ifmx">Informix (IBM Informix Dynamic Server)</option>
 				<option value="fbd">Firebird (Firebird/Interbase 6)</option>
 			</select>
-			<a href="#" title="MySQL y MariaDB" name="Son los motores oficiales.  Sobre ellos se hace el desarrollo y pruebas de la herramienta y aunque gracias a PDO usted podr&aacute; utilizar la herramienta en otros motores es probable que deba hacer ajustes a operaciones espec&iacute;ficas de &eacute;stos."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+			<a href="#" title="<?php echo $MULTILANG_AyudaTitMotor; ?>" name="<?php echo $MULTILANG_AyudaDesMotor; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				Host/Servidor
+				<?php echo $MULTILANG_Servidor; ?>
 			</font>
 		</td>
 		<td valign=top>
 			<font size=2 color=black>
 			<input type="text" name="Servidor" size="20" class="CampoTexto" class="keyboardInput">
-			Puerto: <input type="text" name="PuertoBD" size="4" class="CampoTexto" class="keyboardInput"> (si no es el predeterminado)
+			<?php echo $MULTILANG_Puerto; ?>: <input type="text" name="PuertoBD" size="4" class="CampoTexto" class="keyboardInput"> <?php echo $MULTILANG_PuertoNoPredeterminado; ?>
 			</font>
 		</td>
 	</tr>
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				Base de datos
+				<?php echo $MULTILANG_Basedatos; ?>
 			</font>
 		</td>
 		<td valign=top>
 			<font size=2 color=black>
 			<input type="text" name="BaseDatos" size="20" class="CampoTexto" class="keyboardInput"> 
-			<a href="#" title="La base de datos debe existir previamente" name="Para motores diferentes a SQLite usted debe haber creado primero la base de datos.  Para SQLite solamente requiere especificar el nombre del archivo asociado a la BD (ej. practico.sqlite3) y Practico intentara crearlo por usted siempre y cuando tenga los permisos adecuados sobre su servidor web."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+			<a href="#" title="<?php echo $MULTILANG_AyudaTitBD; ?>" name="<?php echo $MULTILANG_AyudaDesBD; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 			</font>
 		</td>
 	</tr>
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				Usuario
+				<?php echo $MULTILANG_Usuario; ?>
 			</font>
 		</td>
 		<td valign=top>
@@ -97,7 +97,7 @@
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				Contrase&ntilde;a
+				<?php echo $MULTILANG_Contrasena; ?>
 			</font>
 		</td>
 		<td valign=top>
@@ -107,43 +107,42 @@
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				Prefijo tablas internas de Pr&aacute;ctico
+				<?php echo $MULTILANG_PrefijoCore; ?>
 			</font>
 		</td>
 		<td valign=top>
 			<input type="text" name="TablasCore" size="7" value="core_" class="CampoTexto" class="keyboardInput">
-			<a href="#" title="Se recomienda NO vac&iacute;o Ni Mayusculas" name=""><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+			<a href="#" title="<?php echo $MULTILANG_AyudaTitPreCore; ?>" name="<?php echo $MULTILANG_AyudaDesPreCore; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				Prefijo tablas de Aplicaci&oacute;n
+				<?php echo $MULTILANG_PrefijoApp; ?>
 			</font>
 		</td>
 		<td valign=top>
 			<input type="text" name="TablasApp" size="7" value="app_" class="CampoTexto" class="keyboardInput">
-			<a href="#" title="Importante" name="El prefijo utilizado para las tablas de aplicaci&oacute;n puede ser utilizado para separar diferentes instalaciones de Pr&aacute;ctico sobre una misma base de datos o tambi&eacute;n puede ser dejado vac&iacute;o para enlazar/integrar a Pr&aacute;ctico con otras aplicaciones pre-existentes. No se recomienda mayusculas para compatibilidad entre motores."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+			<a href="#" title="<?php echo $MULTILANG_AyudaTitPreApp; ?>" name="<?php echo $MULTILANG_AyudaDesPreApp; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				Llave de paso
+				<?php echo $MULTILANG_LlavePaso; ?>
 			</font>
 		</td>
 		<td valign=top>
 			<font size=2 color=black>
 				<input type="text" name="LlaveDePaso" size="12" value="<?php echo TextoAleatorio(10); ?>" class="CampoTexto" class="keyboardInput">
-				(valor para firmar cuentas de usuario)
+				(<?php echo $MULTILANG_AyudaLlave; ?>)
 			</font>
 		</td>
 	</tr>
 	<tr>
 		<td valign=top colspan=2>
 			<font size=1 color=darkblue>
-				<u>IMPORTANTE 1</u>: La base de datos debe existir previamente para que Pr&aacute;ctico pueda conectarse a ella y generar las estructuras requeridas.  Consulte con su proveedor de hosting o administrador de sistemas c&oacute;mo crear una base de datos con privilegios suficientes para trabajar con Pr&aacute;ctico.<br><br>
-				<u>IMPORTANTE 2</u>: El instalador eliminar&aacute; todas las tablas existentes sobre la base de datos indicada y que coincidan con los nombres de tablas que utilizar&aacute; Pr&aacute;ctico.  Si usted considera que puede tener informaci&oacute;n importante en ellas se recomienda realizar una copia de seguridad antes de continuar.  Si desea compartir una misma base de datos entre diferentes instalaciones de Pr&aacute;ctico puede cambiar los prefijos de tabla utilizados por cada una.
+				<?php echo $MULTILANG_NotasImportantesInst1; ?>
 			</font>
 		</td>
 	</tr>
@@ -157,39 +156,39 @@
 
 <hr>
 <font size=2 color=black><br><b>
-	[Par&aacute;metros para su primera aplicaci&oacute;n]</b>
+	[<?php echo $MULTILANG_ParametrosApp; ?>]</b>
 </font>
 <table cellspacing=2 width="700">
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				Nombre corto de su Organizaci&oacute;n o empresa
+				<?php echo $MULTILANG_ParamNombreEmpresa; ?>
 			</font>
 		</td>
 		<td valign=top>
 			<font size=2 color=black>
-			<input type="text" name="NombreCortoEmpresa" size="50" class="CampoTexto" value="Nombre corto de su empresa">
-			<a href="#" title="Nombre a desplegar en la parte superior" name="Este texto ser&aacute; utilizado en informes y espacios de la aplicaci&oacute;n que requieran un nombre corto para identificar su organizaci&oacute;n."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+			<input type="text" name="NombreCortoEmpresa" size="50" class="CampoTexto" value="">
+			<a href="#" title="<?php echo $MULTILANG_AyudaTitNomEmp; ?>" name="<?php echo $MULTILANG_AyudaDesNomEmp; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 			</font>
 		</td>
 	</tr>
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				Nombre de su aplicaci&oacute;n
+				<?php echo $MULTILANG_ParamNombreApp; ?>
 			</font>
 		</td>
 		<td valign=top>
 			<font size=2 color=black>
-			<input type="text" name="NombreAplicacion" size="50" class="CampoTexto" value="Nombre Aplicacion">
-			<a href="#" title="Nombre descriptivo" name="El nombre especificado aparecer&aacute; siempre en la parte superior de su aplicaci&oacute;n."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+			<input type="text" name="NombreAplicacion" size="50" class="CampoTexto" value="">
+			<a href="#" title="<?php echo $MULTILANG_AyudaTitNomApp; ?>" name="<?php echo $MULTILANG_AyudaDesNomApp; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 			</font>
 		</td>
 	</tr>
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				Versi&oacute;n inicial de su aplicaci&oacute;n
+				<?php echo $MULTILANG_ParamVersionApp; ?>
 			</font>
 		</td>
 		<td valign=top>
@@ -201,7 +200,7 @@
 	<tr>
 		<td valign=top colspan=2>
 			<font size=1 color=darkblue>
-				<u>IMPORTANTE</u>: Otros parametros como nombre largo y corto de su empresa, fecha de lanzamiento, textos de licencia y creditos podran ser modificados posteriormente mediante las opciones disponibles para el usuario administrador.<br><br>
+				<?php echo $MULTILANG_NotasImportantesInst2; ?><br><br>
 			</font>
 		</td>
 	</tr>
@@ -209,13 +208,13 @@
 
 <hr>
 <font size=2 color=black><br><b>
-	[Configuraci&oacute;n de opciones varias]</b>
+	[<?php echo $MULTILANG_ConfiguracionVarias; ?>]</b>
 </font>
 <table cellspacing=2 width="700">
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				Zona horaria
+				<?php echo $MULTILANG_ZonaHoraria; ?>
 			</font>
 		</td>
 		<td valign=top width="380">
@@ -244,7 +243,7 @@
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				N&uacute;mero de caracteres para captcha?
+				<?php echo $MULTILANG_CaracteresCaptcha; ?>
 			</font>
 		</td>
 		<td valign=top width="380">
@@ -256,21 +255,21 @@
 				<option value="5">5</option>
 				<option value="6">6</option>
 			</select>
-			<a href="#" title="Longitud de la palabra" name="Indica el n&uacute;mero de s&iacute;mbolos utilizados en la palabra de seguridad que deben ingresar los usuarios para cada acceso al sistema."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+			<a href="#" title="<?php echo $MULTILANG_AyudaTitCaptcha; ?>" name="<?php echo $MULTILANG_AyudaDesCaptcha; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				Activar modo de depuraci&oacute;n?
+				<?php echo $MULTILANG_ModoDepuracion; ?>
 			</font>
 		</td>
 		<td valign=top width="380">
 			<select name="ModoDepuracion" class="Combos" >
-				<option value="1">Encendido</option>
-				<option value="0" selected>Apagado</option>
+				<option value="1"><?php echo $MULTILANG_Encendido; ?></option>
+				<option value="0" selected><?php echo $MULTILANG_Apagado; ?></option>
 			</select>
-			<a href="#" title="Presentar errores y advertencias" name="Para sitios en producci&oacute;n esta opci&oacute;n debe estar apagada.  Cuando se enciende ense&ntilde;a durante la ejecuci&oacute;n de la aplicaci&oacute;n todos los errores y mensajes que puedan ser generados por el preprocesador de hipertexto - PHP"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+			<a href="#" title="<?php echo $MULTILANG_AyudaTitDebug; ?>" name="<?php echo $MULTILANG_AyudaDesDebug; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 </table>
@@ -278,32 +277,32 @@
 
 <hr>
 <font size=2 color=black><br><b>
-	[Motor de autenticaci&oacute;n]</b>
+	[<?php echo $MULTILANG_MotorAuth; ?>]</b>
 </font>
 <table cellspacing=2 width="700">
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				Tipo
+				<?php echo $MULTILANG_Tipo; ?>
 			</font>
 		</td>
 		<td valign=top>
 			<select  name="Auth_TipoMotor" class="Combos">
-				<option value="practico">Interno (Tablas propias de Pr&aacute;ctico usando MD5)</option>
-				<option value="ldap">LDAP (Servidor de directorio)</option>
+				<option value="practico"><?php echo $MULTILANG_AuthPractico; ?></option>
+				<option value="ldap"><?php echo $MULTILANG_AuthLDAP; ?></option>
 			</select>
-			<a href="#" title="Importante" name="El uso de un motor de autenticaci&oacute;n diferente a Pr&aacute;ctico no excluye la creaci&oacute;n de los usuarios sobre la herramienta.  El motor externo servira como metodo para validar el login y clave correspondiente como un m&eacute;todo de autenticaci&oacute;n centralizado; pero el resto de caracter&iacute;sticas del perfil ser&aacute;n tomadas desde el usuario Pr&aacute;ctico.  El cambio de contrase&ntilde;a en Pr&aacute;ctico ser&aacute; deshabilitado para que sea controlada solamente por el motor externo.  El usuario admin seguir&aacute; siendo siempre aut&oacute;nomo para no perder control de acceso por errores de configuraci&oacute;n."><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+			<a href="#" title="<?php echo $MULTILANG_Importante; ?>" name="<?php echo $MULTILANG_AyudaDesAuth; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				Algoritmo de encripci&oacute;n
+				<?php echo $MULTILANG_AlgoritmoCripto; ?>
 			</font>
 		</td>
 		<td valign=top>
 			<select  name="Auth_TipoEncripcion" class="Combos">
-				<option value="plano">Texto plano</option>
+				<option value="plano">Texto plano/Plain text</option>
 				<option value="md5">MD5</option>
 				<option value="md4">MD4</option>
 				<option value="md2">MD2</option>
@@ -343,54 +342,53 @@
 				<option value="haval256,4">Haval 256,4</option>
 				<option value="haval256,5">Haval 256,5</option>
 			</select>
-			<a href="#" title="Tipo de encripcion de claves usado por el motor" name="Especifique el tipo de encripcion utilizado por el sistema de autenticacion que va a utilizar.  Pr&aacute;ctico encriptar&aacute; el valor de clave ingresado por el usuario antes de enviarla al motor a verificaci&oacute;n."><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+			<a href="#" title="<?php echo $MULTILANG_AyudaTitCript; ?>" name="<?php echo $MULTILANG_AyudaDesCript; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				LDAP Servidor
+				LDAP: <?php echo $MULTILANG_Servidor; ?>
 			</font>
 		</td>
 		<td valign=top width="380">
 			<input type="text" name="Auth_LDAPServidor" size="20" class="CampoTexto" value="">
-			<a href="#" title="Servidor LDAP" name="Indique la direccion IP del servidor de directorio o su nombre en caso de poder ser resuelto."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+			<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_AyudaDesLdapIP; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				LDAP Puerto
+				LDAP: <?php echo $MULTILANG_Puerto; ?>
 			</font>
 		</td>
 		<td valign=top width="380">
 			<input type="text" name="Auth_LDAPPuerto" size="5" class="CampoTexto" value="389">
-			<a href="#" title="Puerto de conexion" name=""><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				LDAP Dominio (dc=)
+				LDAP: <?php echo $MULTILANG_Dominio; ?> (dc=)
 			</font>
 		</td>
 		<td valign=top width="380">
 			<font size=2 color=black>
 			<input type="text" name="Auth_LDAPDominio" size="15" class="CampoTexto" value="">
-			<a href="#" title="Dominio utilizado por el servidor" name="Ejemplo: midominio.com.co  Con esto sera creada la cadena interna dc=midominio,dc=com,dc=co"><img src="img/icn_10.gif" border=0 align=absmiddle></a> (opcional)
+			<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_AyudaDesLdapDominio; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a> (<?php echo $MULTILANG_Opcional; ?>)
 			</font>
 		</td>
 	</tr>
 	<tr>
 		<td valign=top align=right>
 			<font size=2 color=black>
-				LDAP Unidad organizacional o contexto (ou=)
+				LDAP: <?php echo $MULTILANG_UO; ?> (ou=)
 			</font>
 		</td>
 		<td valign=top width="380">
 			<font size=2 color=black>
 			<input type="text" name="Auth_LDAPOU" size="15" class="CampoTexto" value="">
-			<a href="#" title="Contexto de conexion del usuario" name="Debe existir sobre el servidor LDAP, ej: people, ventas, mercadeo, etc"><img src="img/icn_10.gif" border=0 align=absmiddle></a> (opcional)
+			<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_AyudaDesLdapUO; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a> (<?php echo $MULTILANG_Opcional; ?>)
 			</font>
 		</td>
 	</tr>
@@ -410,18 +408,23 @@
 
 	if ($hay_error)
 		{
-			echo '<input type="Hidden" name="paso" value="1">';
-			echo '<input type="Button" class="BotonesEstado" value=" Probar de nuevo " onclick="document.continuar.submit();">';
+			echo '<input type="Hidden" name="paso" value="1">
+				  <input type="Hidden" name="Idioma" value="'.$Idioma.'">
+			';
+			echo '<input type="Button" class="BotonesEstado" value=" '.$MULTILANG_ProbarNuevamente.' " onclick="document.continuar.submit();">';
 		}
 	else
 		{
-			echo '<input type="Hidden" name="paso" value="'.$siguiente.'">';
-			echo '<input type="Button" class="BotonesEstadoCuidado" value=" Continuar >>> " onclick="document.continuar.submit();">';
+			echo '<input type="Hidden" name="paso" value="'.$siguiente.'">
+				  <input type="Hidden" name="Idioma" value="'.$Idioma.'">
+			';
+			echo '<input type="Button" class="BotonesEstadoCuidado" value=" '.$MULTILANG_Continuar.' >>> " onclick="document.continuar.submit();">';
 		}
 	echo '</form>';
 	echo '<form name="regresar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 			<input type="Hidden" name="paso" value="'.$anterior.'">
-			<input type="Button" class="BotonesEstado" value=" <<< Anterior " onclick="document.regresar.submit();">
+			<input type="Hidden" name="Idioma" value="'.$Idioma.'">
+			<input type="Button" class="BotonesEstado" value=" <<< '.$MULTILANG_Anterior.' " onclick="document.regresar.submit();">
 		  </form>';
 	cerrar_barra_estado();
 ?>

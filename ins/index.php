@@ -132,15 +132,15 @@
 
 	function informar_prueba_escritura($path_a_probar) // dir pass with / 
 		{
-			global $hay_error;
+			global $hay_error,$MULTILANG_Correcto,$MULTILANG_Error;
 			echo "<li>Probando archivo/carpeta:&nbsp;&nbsp;&nbsp;".$path_a_probar."&nbsp;&nbsp;&nbsp;";
 			if(puede_escribirse($path_a_probar))
 				{
-					echo '<b><font color="green">[OK]</font></b>';
+					echo '<b><font color="green">['.$MULTILANG_Correcto.']</font></b>';
 				}
 			else
 				{
-					echo  '<b><font color="red">[FALLO]</font></b>';
+					echo  '<b><font color="red">['.$MULTILANG_Error.']</font></b>';
 					$hay_error=1;
 				}
 		}
@@ -149,11 +149,11 @@
 	include("core/marco_arriba.php");
 	
 	//Determina paso actual de instalacion
-	if(!isset($paso)) $paso=0;
+	if(!isset($paso)) $paso=-1;
 
 	echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/4FCEZYR03pE\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><img src='../img/icono_screencast.png' alt='ScreenCast-VideoTutorial'></a>";
 
-	abrir_ventana('Proceso de instalaci&oacute;n - Paso '.$paso,'#B5B5B5','');
+	abrir_ventana($MULTILANG_Instalacion.' - '.$MULTILANG_Paso.' '.$paso,'#B5B5B5','');
 	include("paso_".$paso.".php");
 	cerrar_ventana();
 
