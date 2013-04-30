@@ -34,12 +34,12 @@
 if ($accion=="actualizar_practico")
 	{
 		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/OxheOe-o17s\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><img src='img/icono_screencast.png' alt='ScreenCast-VideoTutorial'></a>";
-		abrir_ventana('Actualizacion de la plataforma','f2f2f2','600');
-		mensaje('ATENCION: Lea esta informaci&oacute;n antes de continuar','Pr&aacute;ctico le ofrece este mecanismo para aplicar actualizaciones autom&aacute;ticas a su sistema mediante parches incrementales descargados desde la web oficial del proyecto o mediante el asistente para b&uacute;squeda de actualizaciones, sin embargo, antes de aplicar cualquier parche es fundamental que:<br><br><li>Haga una copia de seguridad de sus bases de datos. Algunas actualizaciones puede que requieran la modificaci&oacute;n de estructuras sobre la base de datos que pueden afectar la informaci&oacute;n.<li>Haga una copia de seguridad de sus archivos o carpeta de Pr&aacute;ctico.<li>LIMPIE la carpeta de trabajo de practico (ruta  tmp/), ser&aacute; utilizada por el asistente para descomprimir y analizar los archivos.','100%','warning_icon.png','TextosVentana');
+		abrir_ventana($NombreRAD.' - '.$MULTILANG_Actualizacion,'f2f2f2','600');
+		mensaje($MULTILANG_ActMsj1,$MULTILANG_ActMsj2,'100%','warning_icon.png','TextosVentana');
 ?>
 		<div align="center">
 			<br>
-			<img src="img/tango_package-x-generic.png" alt="" border=0 align=absmiddle><b> Actualmente usted utiliza la versi&oacute;n: <?php include("inc/version_actual.txt"); ?> de Pr&aacute;ctico</b><br>
+			<img src="img/tango_package-x-generic.png" alt="" border=0 align=absmiddle><b> <?php echo $MULTILANG_ActUsando; ?>: <?php include("inc/version_actual.txt"); ?></b><br>
 			<br><hr>
 			<table border="0" width="100%"  cellspacing="0" cellpadding="0" align="center" class="TextosVentana"><tr height="100%">
 				<td align=center height="100%">
@@ -50,10 +50,10 @@ if ($accion=="actualizar_practico")
 						<input type="Hidden" name="siguiente_accion" value="analizar_parche">
 						<input type="Hidden" name="texto_boton_siguiente" value="Continuar con la revisi&oacute;n >>>">
 						<input type="Hidden" name="carpeta" value="tmp">
-						<b>Paquete/Parche de actualizacion manual: </b><br>
+						<b><?php echo $MULTILANG_ActPaquete; ?>: </b><br>
 						<input name="archivo" type="file" class="CampoTexto">
 						<br><br>
-						<input type="submit" value="Cargar el archivo"  class="BotonesCuidado"> (Archivos previos ser&aacute;n sobreescritos)
+						<input type="submit" value="<?php echo $MULTILANG_CargarArchivo; ?>"  class="BotonesCuidado"> (<?php echo $MULTILANG_ActSobreescritos; ?>)
 					</form> 
 					<hr>
 					<br>
@@ -62,7 +62,7 @@ if ($accion=="actualizar_practico")
 		</div>
 <?php
 		abrir_barra_estado();
-		echo '<input type="Button" onclick="document.core_ver_menu.submit()" value="<< Cancelar" class="BotonesEstado">';
+		echo '<input type="Button" onclick="document.core_ver_menu.submit()" value="<< '.$MULTILANG_Cancelar.'" class="BotonesEstado">';
 		cerrar_barra_estado();
 		cerrar_ventana();
 	}
@@ -87,7 +87,7 @@ if ($accion=="actualizar_practico")
 */
 if ($accion=="cargar_archivo")
 	{
-		abrir_ventana('Adjuntando un nuevo archivo al sistema','f2f2f2','');
+		abrir_ventana($MULTILANG_Adjuntando,'f2f2f2','');
 		echo '<table border="0" width="400"  cellspacing="0" cellpadding="0" align="center" class="TextosVentana"><tr height="100%"><td align=center height="100%">';
 
 		//datos del arhivo
@@ -100,39 +100,38 @@ if ($accion=="cargar_archivo")
 
 		//Comprueba si las características del archivo son las deseadas
 		if ($tamano_archivo > $MAX_FILE_SIZE)
-			$mensaje_error.="<b>ATENCION:</b> El tamano del archivo no debe exceder los ".$tamano_permitido." Bytes. Proceso interrumpido.";
+			$mensaje_error.=$MULTILANG_ErrorTamano.' ('.$tamano_permitido.' Bytes).';
 
 		if (strpos($nombre_archivo, $extension_archivo)===FALSE)
-			$mensaje_error.="<b>ATENCION:</b> El formato del archivo cargado no es el solicitado. Proceso interrumpido.";
+			$mensaje_error.=$MULTILANG_ErrorFormato;
 
 		// Solo intenta la carga del archivo si cumple las condiciones
 		if ($mensaje_error=="")
 			if (!move_uploaded_file($nombre_archivo_temporal, $carpeta."/".$nombre_archivo))
-				$mensaje_error.="<b>ATENCION:</b>  Ocurri&oacute; un error desconocido al cargar el archivo ".$nombre_archivo." en la ruta ".$carpeta."/. Contacte con su administrador de sistemas.";
+				$mensaje_error.=$MULTILANG_ErrorDesconocido.' '.$nombre_archivo.' --> '.$carpeta.'/. '.$MULTILANG_ContacteAdmin;
 
 		if ($mensaje_error=="")
 			{				
-				echo '<br><br><img src="img/icn_11.gif" border=0 align="absmiddle"> El archivo ha sido cargado correctamente.<br><br>
+				echo '<br><br><img src="img/icn_11.gif" border=0 align="absmiddle">'.$MULTILANG_CargaCorrecta.'.<br><br>
 					<form action="'.$ArchivoCORE.'" method="post">
 						<input type="Hidden" name="archivo_cargado" value="'.$carpeta.'/'.$nombre_archivo.'">
 						<input type="Hidden" name="accion" value="'.$siguiente_accion.'">
 						<input type="submit" value="'.$texto_boton_siguiente.'"  class="BotonesCuidado">
 					</form>';
-				// Lleva a auditoria
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Carga archivo en carpeta $carpeta - $nombre_archivo','$fecha_operacion','$hora_operacion')");
+				auditar("Carga archivo en carpeta $carpeta - $nombre_archivo");
 			}
 		else
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="accion" value="Ver_menu">
-					<input type="Hidden" name="error_titulo" value="Problema en la carga del archivo">
+					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_Actualizacion.' - '.$MULTILANG_Error.'">
 					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 					</form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 			}
 		echo '</td></tr></table><br>';
 		abrir_barra_estado();
-		echo '<input type="Button" onclick="document.core_ver_menu.submit()" value="<< Volver al escritorio" class="BotonesEstado">';
+		echo '<input type="Button" onclick="document.core_ver_menu.submit()" value="<< '.$MULTILANG_IrEscritorio.'" class="BotonesEstado">';
 		cerrar_barra_estado();
 		cerrar_ventana();
 	}
@@ -157,9 +156,9 @@ if ($accion=="cargar_archivo")
 */
 if ($accion=="analizar_parche")
 	{
-		abrir_ventana('Descomprimiendo archivo '.$archivo_cargado,'f2f2f2','700');
+		abrir_ventana($MULTILANG_ErrorDescomprimiendo.' '.$archivo_cargado,'f2f2f2','700');
 		echo '<table border="0" width="100%"  cellspacing="15" cellpadding="0" align="center" class="TextosVentana"><tr height="100%"><td align=left height="100%">
-		<u>Contenido del parche:</u><br>';
+		<u>'.$MULTILANG_ContenidoParche.':</u><br>';
 		$mensaje_error="";
 
 		//Lee la version actualmente instalada de practico
@@ -171,7 +170,7 @@ if ($accion=="analizar_parche")
 				fclose($archivo);
 			}
 		else
-			$mensaje_error.="<br>Error cargando la versi&oacute;n actual de Pr&aacute;ctico.  No se encuentra inc/version_actual.txt";
+			$mensaje_error.='<br>'.$MULTILANG_ErrorVerAct.' <b>inc/version_actual.txt</b>';
 
 		//Libreria necesaria para extraer el archivo
 		include("inc/pclzip/pclzip.lib.php");
@@ -181,75 +180,74 @@ if ($accion=="analizar_parche")
 		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "tmp/par_compat.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
 		$version_compatible=trim($lista_contenido[0]['content']);
 		if ($lista_contenido == 0 || $version_compatible=="")
-			$mensaje_error.="<br>El archivo cargado parece no ser un paquete de actualizacion v&aacute;lido.  No se encuentra el archivo tmp/par_compat.txt"."<br>";
+			$mensaje_error.='<br>'.$MULTILANG_ErrorActualiza.' tmp/par_compat.txt <br>';
 
 		//Obtiene archivo version.txt con la version que se aplicaria al sistema
 		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "inc/version_actual.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
 		$version_final=trim($lista_contenido[0]['content']);
 		if ($lista_contenido == 0 || $version_final=="")
-			$mensaje_error.="<br>El archivo cargado parece no ser un paquete de actualizacion v&aacute;lido.  No se encuentra el archivo inc/version_actual.txt"."<br>";
+			$mensaje_error.='<br>'.$MULTILANG_ErrorActualiza.' inc/version_actual.txt <br>';
 
 		//Obtiene archivo cambios.txt con la informacion de funcionalidades implementadas por el parche
 		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "tmp/par_cambios.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
 		$resumen_cambios=$lista_contenido[0]['content'];
 		if ($lista_contenido == 0 || $resumen_cambios=="")
-			$mensaje_error.="<br>El archivo cargado parece no ser un paquete de actualizacion v&aacute;lido.  No se encuentra el archivo tmp/par_cambios.txt"."<br>";
+			$mensaje_error.='<br>'.$MULTILANG_ErrorActualiza.' tmp/par_cambios.txt <br>';
 
 		//Obtiene archivo sql.txt con las instrucciones a ejecutar
 		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "tmp/par_sql.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
 		$resumen_sql=$lista_contenido[0]['content'];
 		if ($lista_contenido == 0)
-			$mensaje_error.="<br>El archivo cargado parece no ser un paquete de actualizacion v&aacute;lido.  No se encuentra el archivo tmp/par_sql.txt"."<br>";
+			$mensaje_error.='<br>'.$MULTILANG_ErrorActualiza.' tmp/par_sql.txt <br>';
 
 		//Verifica que no sea un parche mas viejo que la version actual
 		if ($mensaje_error=="")
 			if ($version_final <= $version_actual)
-				$mensaje_error.="<br>El archivo de parche cargado hace referencia a una actualizaci&oacute;n mas antigua que su version actual.";
+				$mensaje_error.='<br>'.$MULTILANG_ErrorAntigua;
 
 		//Verifica si la version actualmente instalada es la requerida por el parche
 		if ($mensaje_error=="")
 			if ($version_compatible != $version_actual)
-				$mensaje_error.="<br>El archivo de parche cargado requiere la version ".$version_compatible." y usted cuenta con la version ".$version_actual."<br>Debe aplicar primero los parches incrementales requeridos hasta elevar su sistema a la versi&oacute;n minima que necesita el parche.";
+				$mensaje_error.="<br>".$MULTILANG_ErrorVersion." ".$version_compatible."<br>".$MULTILANG_AvisoIncremental;
 
 		if ($mensaje_error=="")
 			{
 				//Presenta contenido del archivo
 				if (($lista_contenido = $archivo->listContent()) == 0)
-					echo "ERROR: ".$archivo->errorInfo(true);
+					echo $MULTILANG_Error.": ".$archivo->errorInfo(true);
 				echo '<OL>';
 				for ($i=0; $i<sizeof($lista_contenido); $i++)
-					echo "<li><font color=blue>".$lista_contenido[$i][filename]."</font> ... Integridad: <b>".$lista_contenido[$i][status]."</b>";  /*Propiedades adicionales:  filename, stored_filename, size, compressed_size, mtime, comment, folder, index, status*/
+					echo "<li><font color=blue>".$lista_contenido[$i][filename]."</font> ... ".$MULTILANG_Integridad.": <b>".$lista_contenido[$i][status]."</b>";  /*Propiedades adicionales:  filename, stored_filename, size, compressed_size, mtime, comment, folder, index, status*/
 				echo '</OL>';
 				echo '<center>
-				<hr><b>Resumen de los cambios y funcionalidades suministradas por el parche</b>:<br>
+				<hr><b>'.$MULTILANG_ResumenParche.'</b>:<br>
 				<textarea cols="100" rows="7" class="AreaTexto">'.$resumen_cambios.'</textarea>
-				<hr><b>Instrucciones a ser ejecutadas sobre las tablas de Pr&aacute;ctico</b>:<br>
+				<hr><b>'.$MULTILANG_ResumenInstrucciones.'</b>:<br>
 				<textarea cols="100" rows="7" class="AreaTexto">'.$resumen_sql.'</textarea>
-				<br><br><b>PROCESO DE REVISION FINALIZADO.<br>
-				 <font color=blue>- Al aplicar los archivos listados arriba se actualizar&aacute; su sistema a la versi&oacute;n '.$version_final.' -</font></b><br>
+				<br><br><b>'.$MULTILANG_FinRevision.'<br>
+				 <font color=blue>- '.$MULTILANG_ActMsj3.': '.$version_final.' -</font></b><br>
 				 <br><br>
 					<form action="'.$ArchivoCORE.'" method="post">
 						<input type="Hidden" name="accion" value="aplicar_parche">
 						<input type="Hidden" name="version_actual" value="'.$version_actual.'">
 						<input type="Hidden" name="version_final" value="'.$version_final.'">
 						<input type="Hidden" name="archivo_cargado" value="'.$archivo_cargado.'">
-						<input type="submit" value="Continuar aplicando el parche"  class="BotonesCuidado">
+						<input type="submit" value=" '.$MULTILANG_Continuar.' >>>"  class="BotonesCuidado">
 					</form>';
-				// Lleva a auditoria
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Analiza archivo en carpeta $carpeta - $nombre_archivo','$fecha_operacion','$hora_operacion')");
+				auditar("Analiza archivo en carpeta $carpeta - $nombre_archivo");
 			}
 		else
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="accion" value="Ver_menu">
-					<input type="Hidden" name="error_titulo" value="Archivo con estructura, tipo o versi&oacute;n no compatible">
+					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ActErrGral.'">
 					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 					</form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 			}
 		echo '</center></td></tr></table>';
 		abrir_barra_estado();
-		echo '<input type="Button" onclick="document.core_ver_menu.submit()" value="<< Volver al escritorio" class="BotonesEstado">';
+		echo '<input type="Button" onclick="document.core_ver_menu.submit()" value="<< '.$MULTILANG_IrEscritorio.'" class="BotonesEstado">';
 		cerrar_barra_estado();
 		cerrar_ventana();
 	}
@@ -309,9 +307,15 @@ if ($accion=="aplicar_parche")
 				return($ret);
 			}
 
+
+//////////////////////////////////////////
+//////////////////////////////////////////
+
+
+
 		abrir_ventana('Aplicando actualizacion desde '.$archivo_cargado,'f2f2f2','700');
 		echo '<table border="0" width="100%"  cellspacing="15" cellpadding="0" align="center" class="TextosVentana"><tr height="100%"><td align=left height="100%">
-		<u>Actualizando desde version '.$version_actual.' hacia '.$version_final.':</u><br><br>';
+		<u>'.$MULTILANG_ActDesde.' '.$version_actual.' ---> '.$version_final.':</u><br><br>';
 		$mensaje_error="";
 
 		//VERIFICAR PERMISOS DE ESCRITURA EN CADA RUTA DEL PARCHE
@@ -402,8 +406,7 @@ if ($accion=="aplicar_parche")
 				<hr><font color=blue>- Si alguno de los archivos no ha podido ser escrito por este asistente por problemas de permisos el parche tambien puede ser aplicado manualmente por el administrador o escribiendo solamente los archivos faltantes. -</font></b>
 				<hr>
 				<b>PROCESO FINALIZADO<br>';
-				// Lleva a auditoria
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Actualiza version de plataforma desde $version_actual hacia $version_final','$fecha_operacion','$hora_operacion')");
+				auditar("Actualiza version de plataforma desde $version_actual hacia $version_final");
 			}
 		else
 			{

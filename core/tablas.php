@@ -67,8 +67,7 @@
 				{
 					// Realiza la operacion
 					ejecutar_sql_unaria("ALTER TABLE $nombre_tabla DROP COLUMN $nombre_campo");
-					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Elimina campo $nombre_campo de tabla $nombre_tabla','$fecha_operacion','$hora_operacion')");
+					auditar("Elimina campo $nombre_campo de tabla $nombre_tabla");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="accion" value="editar_tabla">
 					<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -143,8 +142,7 @@
 				}
 			else
 				{
-					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Agrega campo $nombre_campo tipo $tipo a tabla $nombre_tabla','$fecha_operacion','$hora_operacion')");
+					auditar("Agrega campo $nombre_campo tipo $tipo a tabla $nombre_tabla");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="editar_tabla">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -374,8 +372,7 @@ if ($accion=="editar_tabla")
 				{
 					// Realiza la operacion
 					ejecutar_sql_unaria("DROP TABLE $nombre_tabla");
-					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Elimina tabla $nombre_tabla','$fecha_operacion','$hora_operacion')");
+					auditar("Elimina tabla $nombre_tabla");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_tablas"></form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -428,8 +425,7 @@ if ($accion=="editar_tabla")
 						}
 					else
 						{
-							// Lleva a auditoria
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Crea tabla $nombre_tabla','$fecha_operacion','$hora_operacion')");
+							auditar("Crea tabla $nombre_tabla");
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_tablas"></form>
 									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 						}
@@ -633,8 +629,7 @@ if ($accion=="editar_tabla")
 										}
 									fclose($archivo);
 								}
-							// Lleva a auditoria
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Crea tabla $nombre_tabla','$fecha_operacion','$hora_operacion')");
+							auditar("Crea tabla $nombre_tabla");
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 							<input type="Hidden" name="accion" value="editar_tabla">
 							<input type="hidden" name="nombre_tabla" value="'.$TablasApp.''.$nombre_tabla.'">

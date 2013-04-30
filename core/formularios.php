@@ -78,8 +78,7 @@
 
 					// Inserta los datos
 					ejecutar_sql_unaria("DELETE FROM ".$tabla." WHERE $campo='$valor'");
-					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Elimina registro donde ".$campo." = ".$valor." en ".$tabla."','$fecha_operacion','$hora_operacion')");
+					auditar("Elimina registro donde ".$campo." = ".$valor." en ".$tabla);
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -163,16 +162,18 @@
 					$lista_campos=substr($lista_campos, 0, strlen($lista_campos)-1);
 					$lista_valores=substr($lista_valores, 0, strlen($lista_valores)-1);
 					// Agrega el autoincremento en caso de no recibirlo
+					/*
+					Por compatibilidad entre motores ahora se envia la lista de campos sin el Id en cero. El id sera generado internamente
 					if (!$existe_id)
 						{
 							$lista_campos="id,".$lista_campos;
 							$lista_valores="'0',".$lista_valores;
 						}
+					*/
 
 					// Inserta los datos
 					ejecutar_sql_unaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores.")");
-					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Inserta registro en ".$registro_formulario["tabla_datos"]."','$fecha_operacion','$hora_operacion')");
+					auditar("Inserta registro en ".$registro_formulario["tabla_datos"]);
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -223,8 +224,7 @@
 				{
 					// Crea la tabla temporal
 					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_boton WHERE id='$boton' ");
-					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Elimina accion del formulario $formulario','$fecha_operacion','$hora_operacion')");
+					auditar("Elimina accion del formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="accion" value="editar_formulario">
 					<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -270,8 +270,7 @@
 				{
 					// Crea la tabla temporal
 					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE id='$campo' ");
-					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Elimina campo del formulario $formulario','$fecha_operacion','$hora_operacion')");
+					auditar("Elimina campo del formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="accion" value="editar_formulario">
 					<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -327,8 +326,7 @@
 					$ListaCamposyValores.="id=id"; //Agregado para evitar coma final
 
 					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario_objeto SET ".$ListaCamposyValores." WHERE id='$idcampomodificado'");
-					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Modifica diseno campo $idcampomodificado para formulario $formulario','$fecha_operacion','$hora_operacion')");
+					auditar("Modifica diseno campo $idcampomodificado para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
@@ -380,8 +378,7 @@
 			if ($mensaje_error=="")
 				{
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES ('$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores','$valor_etiqueta','$url_iframe','$objeto_en_ventana','$informe_vinculado','$maxima_longitud')");
-					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Crea campo $id para formulario $formulario','$fecha_operacion','$hora_operacion')");
+					auditar("Crea campo $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
@@ -432,8 +429,7 @@
 				{
 					$accion_usuario=addslashes($accion_usuario);
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES ('$titulo','$estilo','$formulario','$tipo_accion','$accion_usuario','$visible','$peso','$retorno_titulo','$retorno_texto','$confirmacion_texto')");
-					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Crea boton $id para formulario $formulario','$fecha_operacion','$hora_operacion')");
+					auditar("Crea boton $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
@@ -605,7 +601,8 @@ if ($accion=="editar_formulario")
 													$seleccion_campo="";
 													if ($registro_campo_editar["campo"]==$registro["Field"])
 														$seleccion_campo="SELECTED";
-													echo '<option value="'.$registro["Field"].'" '.$seleccion_campo.'>'.$registro["Field"].'&nbsp;&nbsp;&nbsp;['.$registro["Type"].']</option>';
+													if (strtolower($registro["Field"])!="id")
+														echo '<option value="'.$registro["Field"].'" '.$seleccion_campo.'>'.$registro["Field"].'&nbsp;&nbsp;&nbsp;['.$registro["Type"].']</option>';
 												}
 										?>
 									</select>
@@ -1549,8 +1546,7 @@ if ($accion=="editar_formulario")
 				{
 					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario WHERE id='$formulario'");
 					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario'");
-					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Elimina formulario $id','$fecha_operacion','$hora_operacion')");
+					auditar("Elimina formulario $id");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_formularios"></form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -1589,8 +1585,7 @@ if ($accion=="editar_formulario")
 				{
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES ('$titulo','$ayuda_titulo','$ayuda_texto','$ayuda_imagen','$tabla_datos','$columnas')");
 					$id=$ConexionPDO->lastInsertId();
-					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Crea formulario $id para $tabla_datos','$fecha_operacion','$hora_operacion')");
+					auditar("Crea formulario $id para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
 					<input type="Hidden" name="accion" value="editar_formulario">

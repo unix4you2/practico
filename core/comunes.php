@@ -44,6 +44,7 @@
 					Retorna una variable con el arreglo de resultados en caso de ser exitosa la consulta
 			*/
 			global $ConexionPDO;
+			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles;
 			try
 				{
 					$consulta = $ConexionPDO->prepare($query);
@@ -53,7 +54,7 @@
 				}
 			catch( PDOException $ErrorPDO)
 				{
-					mensaje('Ha ocurrido un error durante la ejecuci&oacute;n',$ErrorPDO->getMessage().'<br><b>Detalles del query</b>: '.$query,'80%','icono_error.png','TextosEscritorio');
+					mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.$query,'80%','icono_error.png','TextosEscritorio');
 					return 1;
 				}
 		}
@@ -86,7 +87,7 @@
 				}
 			catch( PDOException $ErrorPDO)
 				{
-					echo '<script language="JavaScript"> alert("Ha ocurrido un error interno durante la ejecucion\nDetalles del Query: '.$query.'\n\nEl motor ha devuelto: '.$ErrorPDO->getMessage().'.\n\nPongase en contacto con el administrador del sistema y comunique este mensaje.");  </script>';					
+					echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$query.'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';					
 					//mensaje('Error durante la ejecuci&oacute;n',$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
 					return $ErrorPDO->getMessage();
 				}
@@ -120,6 +121,37 @@
 				{
 					return $e->getMessage();
 				}
+		}
+
+
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: auditar
+	Lleva un registro de auditoria en el sistema
+
+	Variables de entrada:
+
+		accion - Descripcion de la accion a ser almacenada en la auditoria
+
+	(start code)
+
+	(end)
+
+	Salida:
+
+		Registro de auditoria llevado sobre la tabla
+*/
+	function auditar($accion)
+		{
+			global $ConexionPDO,$ArchivoCORE,$TablasCore;
+			global $ListaCamposSinID_auditoria;
+			global $Login_usuario,$fecha_operacion,$hora_operacion;
+			//Lleva el registro
+			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','$accion','$fecha_operacion','$hora_operacion')");
 		}
 
 
@@ -174,12 +206,12 @@
 				Ver tambien:
 				<imprimir_drivers_disponibles> | <Definicion de conexion PDO>
 			*/
-			echo "<hr><center><blink><b><font color=yellow>Informaci&oacute;n de conexi&oacute;n:</font></b></blink><br>";
-			echo "Driver: ".$ConexionPDO->getAttribute(PDO::ATTR_DRIVER_NAME)."<br>";
-			echo "Versi&oacute;n del servidor: ".$ConexionPDO->getAttribute(PDO::ATTR_SERVER_VERSION)."<br>";
-			echo "Estado: ".$ConexionPDO->getAttribute(PDO::ATTR_CONNECTION_STATUS)."<br>";
-			echo "Versi&oacute;n del cliente: ".$ConexionPDO->getAttribute(PDO::ATTR_CLIENT_VERSION)."<br>";
-			echo "Informaci&oacute;n adicional: ".$ConexionPDO->getAttribute(PDO::ATTR_SERVER_INFO)."<hr>";
+			echo "<hr><center><blink><b><font color=yellow>".$MULTILANG_Detalles.":</font></b></blink><br>";
+			echo $MULTILANG_Controlador.': '.$ConexionPDO->getAttribute(PDO::ATTR_DRIVER_NAME).'<br>';
+			echo $MULTILANG_Version.' '.$MULTILANG_Servidor.': '.$ConexionPDO->getAttribute(PDO::ATTR_SERVER_VERSION).'<br>';
+			echo $MULTILANG_Estado.': '.$ConexionPDO->getAttribute(PDO::ATTR_CONNECTION_STATUS).'<br>';
+			echo $MULTILANG_Version.' '.$MULTILANG_Cliente.': '.$ConexionPDO->getAttribute(PDO::ATTR_CLIENT_VERSION).'<br>';
+			echo $MULTILANG_InfoAdicional.': '.$ConexionPDO->getAttribute(PDO::ATTR_SERVER_INFO).'<hr>';
 		}
 
 
@@ -229,6 +261,7 @@
 			global $ConexionPDO;
 			global $MotorBD;
 			global $BaseDatos;
+			global $MULTILANG_ErrorTiempoEjecucion;
 
 			if($MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc" || $MotorBD=="sqlite")
 					$consulta = "SELECT name FROM sysobjects WHERE xtype='U';";
@@ -248,7 +281,7 @@
 				}
 			catch( PDOException $ErrorPDO)
 				{
-					mensaje('Error durante la ejecuci&oacute;n',$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
+					mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
 					return false;
 				}
 		}
@@ -298,30 +331,31 @@
 			global $MotorBD;
 			global $Auth_TipoMotor;
 			global $Auth_TipoEncripcion;
+			global $MULTILANG_ErrExtension,$MULTILANG_ErrLDAP,$MULTILANG_ErrHASH,$MULTILANG_ErrSESS,$MULTILANG_ErrGD,$MULTILANG_ErrPDO,$MULTILANG_ErrDriverPDO;
 			
 			//Verifica soporte para LDAP cuando esta activado en la herramienta
 			if ($Auth_TipoMotor=='ldap' &&  !extension_loaded('ldap'))
-				mensaje('Extensi&oacute;n PHP faltante o sin activar','Su instalacion de PHP parece no tener el soporte LDAP activado para ser usado como metodo de autenticacion externa.<br>Por favor haga los ajustes requeridos y reinicie su servicio web.<br>La autenticaci&oacute;n del usuario admin seguir&aacute; siendo independiente para evitar p&eacute;rdida de acceso.','','icono_error.png','TextosEscritorio');
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrLDAP,'','icono_error.png','TextosEscritorio');
 
 			//Verifica soporte para HASH cuando se requiere encripcion
 			if ($Auth_TipoEncripcion!="plano" && !extension_loaded('hash'))
-				mensaje('Extensi&oacute;n PHP faltante o sin activar','Su instalacion de PHP parece no tener el soporte para HASH activado.<br>Este se requiere cuando es seleccionado un tipo de encripci&oacute;n diferente al plano para contrase&ntilde;as sobre motores de autenticaci&oacute;n externos.<br>Por favor haga los ajustes requeridos y reinicie su servicio web.','','icono_error.png','TextosEscritorio');
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrHASH,'','icono_error.png','TextosEscritorio');
 
 			//Verifica soporte para sesiones
 			if (!extension_loaded('session'))
-				mensaje('Extensi&oacute;n PHP faltante o sin activar','Su instalacion de PHP parece no tener el soporte para sesiones activado.  Por favor haga los ajustes requeridos y reinicie su servicio web.','','icono_error.png','TextosEscritorio');
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrSESS,'','icono_error.png','TextosEscritorio');
 
 			//Verifica soporte para GD2
 			if (!extension_loaded('gd'))
-				mensaje('Extensi&oacute;n PHP faltante o sin activar','Su instalacion de PHP parece no tener el soporte para librer&iacute;a gr&aacute;fica GD &oacute; GD2 activado.<br>Aquellos utilizando debian, ubuntu o sus derivados pueden intentar un <b>apt-get install php5-gd</b> para agregarlo.<br>Por favor haga los ajustes requeridos y reinicie su servicio web.','','icono_error.png','TextosEscritorio');
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrGD,'','icono_error.png','TextosEscritorio');
 
 			//Verifica soporte para PDO
 			if (!extension_loaded('pdo'))
-				mensaje('Extensi&oacute;n PHP faltante o sin activar','Su instalacion de PHP parece no tener el soporte para PDO activado.<br>Por favor haga los ajustes requeridos y reinicie su servicio web.','','icono_error.png','TextosEscritorio');
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrPDO,'','icono_error.png','TextosEscritorio');
 
 			//Verifica soporte para el driver PDO correspondiente al motor utilizado
 			if (!extension_loaded('pdo_'.$MotorBD))
-				mensaje('Extensi&oacute;n PHP faltante o sin activar','Su instalacion de PHP parece no tener el soporte para PDO activado.  Por favor haga los ajustes requeridos y reinicie su servicio web.','','icono_error.png','TextosEscritorio');
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrDriverPDO,'','icono_error.png','TextosEscritorio');
 		}
 
 
@@ -342,6 +376,7 @@
 			global $ConexionPDO;
 			global $MotorBD;
 			global $BaseDatos;
+			global $MULTILANG_ErrorTiempoEjecucion;
 
 			if($MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc" || $MotorBD=="sqlite2" || $MotorBD=="sqlite3")
 				$consulta = "SELECT name FROM sys.Databases;";
@@ -362,7 +397,7 @@
 				}
 			catch( PDOException $ErrorPDO)
 				{
-					mensaje('Error durante la ejecuci&oacute;n',$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
+					mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
 					return false;
 				}
 	}
@@ -634,6 +669,8 @@
 	function cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 		{
 			global $campobase,$valorbase;
+			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
 			$tipo_entrada="text"; // Se cambia a date si se trata de un campo con validacion de fecha
@@ -683,8 +720,8 @@
 				}
 
 			// Muestra indicadores de obligatoriedad o ayuda
-			if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="El valor ingresado no acepta duplicados" name="El sistema validar&aacute; la informaci&oacute;n ingresada en este campo, en caso de ya existir en la base de datos no se permitir&aacute; su ingreso."><img src="img/key.gif" border=0 border=0 align="absmiddle"></a>';
-			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
+			if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="'.$MULTILANG_TitValorUnico.'" name="'.$MULTILANG_DesValorUnico.'"><img src="img/key.gif" border=0 border=0 align="absmiddle"></a>';
+			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
 			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0 border=0 align="absmiddle"></a>';
 			return $salida;
 		}
@@ -711,6 +748,8 @@
 	function cargar_objeto_texto_largo($registro_campos,$registro_datos_formulario)
 		{
 			global $campobase,$valorbase;
+			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
 
@@ -728,7 +767,7 @@
 			$salida.= '<textarea name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="AreaTexto" '.$registro_campos["solo_lectura"].'  >'.$cadena_valor.'</textarea>';
 
 			// Muestra indicadores de obligatoriedad o ayuda
-			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
+			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
 			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0 border=0 align="absmiddle"></a>';
 			return $salida;
 		}
@@ -756,6 +795,8 @@
 	function cargar_objeto_texto_formato($registro_campos,$registro_datos_formulario,$existe_campo_textoformato)
 		{
 			global $campobase,$valorbase;
+			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
 
@@ -847,7 +888,7 @@
 					</script>';
 
 			// Muestra indicadores de obligatoriedad o ayuda
-			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
+			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
 			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0 border=0 align="absmiddle"></a>';
 			
 			//Activa booleana de existencia de tipo de campo para evitar doble inclusion de javascript
@@ -877,6 +918,8 @@
 	function cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario)
 		{
 			global $campobase,$valorbase;
+			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
 
@@ -919,8 +962,8 @@
 			$salida.= '</select>';
 
 			// Muestra indicadores de obligatoriedad o ayuda
-			if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="El valor ingresado no acepta duplicados" name="El sistema validar&aacute; la informaci&oacute;n ingresada en este campo, en caso de ya existir en la base de datos no se permitir&aacute; su ingreso."><img src="img/key.gif" border=0 border=0 align="absmiddle"></a>';
-			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
+			if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="'.$MULTILANG_TitValorUnico.'" name="'.$MULTILANG_DesValorUnico.'"><img src="img/key.gif" border=0 border=0 align="absmiddle"></a>';
+			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
 			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0 border=0 align="absmiddle"></a>';
 			return $salida;
 		}
@@ -999,6 +1042,8 @@
 	function cargar_objeto_lista_radio($registro_campos,$registro_datos_formulario)
 		{
 			global $campobase,$valorbase;
+			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
 
@@ -1036,8 +1081,8 @@
 				}
 
 			// Muestra indicadores de obligatoriedad o ayuda
-			if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="El valor ingresado no acepta duplicados" name="El sistema validar&aacute; la informaci&oacute;n ingresada en este campo, en caso de ya existir en la base de datos no se permitir&aacute; su ingreso."><img src="img/key.gif" border=0 border=0 align="absmiddle"></a>';
-			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
+			if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="'.$MULTILANG_TitValorUnico.'" name="'.$MULTILANG_DesValorUnico.'"><img src="img/key.gif" border=0 border=0 align="absmiddle"></a>';
+			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
 			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0 border=0 align="absmiddle"></a>';
 			return $salida;
 		}
@@ -1078,7 +1123,8 @@
 				global $ConexionPDO,$ArchivoCORE,$TablasCore;
 				// Carga variables de definicion de tablas
 				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
-	
+				global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios;
+
 				echo '
 				<script type="text/javascript">
 					function AgregarElemento(columna,fila,elemento)
@@ -1101,14 +1147,14 @@
 						}
 
 				</script>
-				<!--<input type=button onclick=\'AgregarElemento("1","1","hola");\'>-->';
+				<!--<input type=button onclick=\'AgregarElemento("1","1","hello world");\'>-->';
 
 				// Busca datos del formulario
 				$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id='$formulario'");
 				$registro_formulario = $consulta_formulario->fetch();
 
 				//Si no encuentra formulario presenta error
-				if ($registro_formulario["id"]=="")	mensaje("ERROR EN TIEMPO DE EJECUCION","El objeto (formulario $formulario) asociado a esta solicitud no existe.  Consulte con su administrador del sistema.<br>","70%","icono_error.png","TextosEscritorio");
+				if ($registro_formulario["id"]=="")	mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Formularios." $formulario)","70%","icono_error.png","TextosEscritorio");
 
 				// En caso de recibir un campo base y valor base se hace la busqueda para recuperar la informacion
 				if ($campobase!="" && $valorbase!="")
@@ -1322,17 +1368,14 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion,$Login_usuario;
 		// Carga variables de definicion de tablas
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
-		
+		global $MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio;
 
 		// Busca datos del informe
 		$consulta_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id='$informe'");
 		$registro_informe=$consulta_informe->fetch();
 
 		//Si no encuentra informe presenta error
-		if ($registro_informe["id"]=="") mensaje("ERROR EN TIEMPO DE EJECUCION","El objeto (informe $informe) asociado a esta solicitud no existe.  Consulte con su administrador del sistema.<br>","70%","icono_error.png","TextosEscritorio");
-
-
-
+		if ($registro_informe["id"]=="") mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Informes." $informe)","70%","icono_error.png","TextosEscritorio");
 
 			// Inicia CONSTRUCCION DE CONSULTA DINAMICA
 			$numero_columnas=0;
@@ -1419,7 +1462,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					{
 						//Cuando es embebido (=1) no imprime el boton de retorno pues se asume dentro de un formulario
 						if (!$embebido)
-							echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" <<< Volver a mi escritorio " class="Botones">';
+							echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" <<< '.$MULTILANG_IrEscritorio.' " class="Botones">';
 						abrir_ventana($Nombre_Aplicacion.' - '.$registro_informe["titulo"],'f2f2f2',$registro_informe["ancho"]);
 					}
 
@@ -1558,7 +1601,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					if ($formato=="htm")
 						echo '<tfoot>
 							<tr><td colspan='.$numero_columnas.'>
-								<b>Total registros encontrados: </b>'.$numero_filas.'
+								<b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
 							</td></tr>
 						</tfoot>';
 					echo '</table>';
@@ -1724,7 +1767,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			if ($mensaje_error=="")
 				{
 					ejecutar_sql_unaria("UPDATE ".$TablasCore."$tabla SET $campo = $valor WHERE id = '$id'");
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Cambia estado del campo $campo en objetoID $formulario','$fecha_operacion','$hora_operacion')");
+					auditar("Cambia estado del campo $campo en objetoID $formulario");
 
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="'.$accion_retorno.'">
@@ -1744,7 +1787,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="informe" value="'.$informe.'">
-						<input type="Hidden" name="error_titulo" value="Problema en los datos ingresados">
+						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';

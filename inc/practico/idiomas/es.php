@@ -29,6 +29,8 @@
 
 	//Lexico general (palabras y frases comunes a varios modulos)
 	$MULTILANG_Accion='Accion';
+	$MULTILANG_Actualizacion='Actualizaci&oacute;n';
+	$MULTILANG_Administre='Administre';
 	$MULTILANG_Anonimo='An&oacute;nimo';
 	$MULTILANG_Anterior='Anterior';
 	$MULTILANG_Apagado='Apagado';
@@ -36,43 +38,92 @@
 	$MULTILANG_Ayuda='Ayuda';
 	$MULTILANG_Basedatos='Base de datos';
 	$MULTILANG_CaracteresCaptcha='N&uacute;mero de caracteres para captcha?';
+	$MULTILANG_Cancelar='Cancelar';
 	$MULTILANG_CerrarSesion='Cerrar sesi&oacute;n';
+	$MULTILANG_Cliente='Cliente';
 	$MULTILANG_ConfiguracionGeneral='Configuraci&oacute;n General';
 	$MULTILANG_ConfiguracionVarias='Configuraci&oacute;n de opciones varias';
 	$MULTILANG_Continuar='Continuar';
 	$MULTILANG_Contrasena='Contrase&ntilde;a';
+	$MULTILANG_Controlador='Controlador';
 	$MULTILANG_Correcto='Correcto';
+	$MULTILANG_Defina='Defina';
 	$MULTILANG_Detalles='Detalles';
+	$MULTILANG_Disene='Dise&ntilde;e';
 	$MULTILANG_Encendido='Encendido';
 	$MULTILANG_Error='Error';
+	$MULTILANG_Estado='Estado';
+	$MULTILANG_Formularios='Formularios';
+	$MULTILANG_Guardar='Guardar';
+	$MULTILANG_IdiomaPredeterminado='Idioma predeterminado';
 	$MULTILANG_Importante='Importante';
+	$MULTILANG_InfoAdicional='Informaci&oacute;n adicional';
+	$MULTILANG_Informes='Informes';
 	$MULTILANG_Ingresar='Ingresar';
 	$MULTILANG_Instante='Instante';
+	$MULTILANG_IrEscritorio='Ir a mi escritorio';
 	$MULTILANG_LlavePaso='Llave de paso';
 	$MULTILANG_MotorBD='Motor de Base de Datos';
+	$MULTILANG_NombreRAD='Nombre RAD';
 	$MULTILANG_Opcional='Opcional';
+	$MULTILANG_OpcionesMenu='Opciones de menu';
 	$MULTILANG_Paso='Paso';
+	$MULTILANG_PlantillaActiva='Plantilla gr&aacute;fica activa';
 	$MULTILANG_Puerto='Puerto';
 	$MULTILANG_Servidor='Servidor';
+	$MULTILANG_Tablas='Tablas';
 	$MULTILANG_TiempoCarga='Tiempo de carga';
 	$MULTILANG_Tipo='Tipo';
 	$MULTILANG_TipoMotor='Tipo de motor';
+	$MULTILANG_TotalRegistros='Total registros encontrados';
 	$MULTILANG_Usuario='Usuario';
 	$MULTILANG_Version='Versi&oacute;n';
 	$MULTILANG_ZonaHoraria='Zona horaria';
 	
+	//Ventana de login
+	$MULTILANG_TituloLogin='Ingreso al sistema';
+	$MULTILANG_CodigoSeguridad='Codigo de seguridad';
+	$MULTILANG_IngreseCodigoSeguridad='Ingrese aqui el codigo de seguridad';
+	$MULTILANG_AccesoExclusivo='El acceso a este software es exlusivo para usuarios registrados. Por su seguridad, nunca comparta su nombre de usuario y contrase&ntilde;a.';
+
+	//Banderas de campos en formularios
+	$MULTILANG_TitValorUnico='El valor ingresado no acepta duplicados';
+	$MULTILANG_DesValorUnico='El sistema validar&aacute; la informaci&oacute;n ingresada en este campo, en caso de ya existir en la base de datos no se permitir&aacute; su ingreso.';
+	$MULTILANG_TitObligatorio='Campo obligatorio';
+	$MULTILANG_DesObligatorio='Este campo ha sido marcado como obligatorio.  Si no se ingresa un valor para &eacute;ste el sistema no almacenar&aacute; el registro ingresado por el usuario.';
 
 	//Errores y avisos varios
 	$MULTILANG_TituloInsExiste='ATENCION: La carpeta de instalaci&oacute;n existe en el servidor';
 	$MULTILANG_TextoInsExiste='Este mensaje aparecer&aacute; de manera permanente a todos sus usuarios mientras usted no elimine el directorio utilizado durante el proceso de instalaci&oacute;n de Pr&aacute;ctico.  Es fundamental que la carpeta sea eliminada despu&eacute;s de finalizar una instalaci&oacute;n para evitar que algun usuario an&oacute;nimo inicie nuevamente el proceso sobreescribiendo archivos de configuraci&oacute;n o bases de datos con informaci&oacute;n de importancia para usted.<br><br>Si ya ha finalizado un proceso de instalaci&oacute;n de Pr&aacute;ctico para su uso en producci&oacute;n es importante que elimine esta carpeta antes de continuar.  Si no desea eliminar esta carpeta puede optar por renombrarla en instalaciones temporales o de prueba.<br><br>Si est&aacute; visualizando este mensaje al ejecutar este script por primera vez y desea realizar una instalaci&oacute;n nueva, puede iniciar el asistente haciendo <input type="button" Value="clic AQUI" Onclick="document.location=\'ins\'" class="BotonesCuidado">';
 	$MULTILANG_ErrorTiempoEjecucion='Error en tiempo de ejecuci&oacute;n';
 	$MULTILANG_ErrorModulo='El modulo central esta tratando de incluir un modulo ubicado en <b>mod/</b> pero no encuentra su punto de accceso.<br>Verifique el estado del m&oacute;dulo, consulte con su administrador o elimine el m&oacute;dulo en conflicto para evitar este mensaje.';
+	$MULTILANG_ContacteAdmin='Contacte con el administrador de su sistema y comunique este mensaje.';
+	$MULTILANG_ReinicieWeb='Por favor haga los ajustes requeridos y reinicie su servicio web.';
+	$MULTILANG_PHPSinSoporte='Su instalacion de PHP parece no tener soporte';
+	$MULTILANG_ErrExtension='Extensi&oacute;n PHP faltante o sin activar';
+	$MULTILANG_ErrLDAP=$MULTILANG_PHPSinSoporte.' para LDAP activado para ser usado como metodo de autenticacion externa.<br>'.$MULTILANG_ReinicieWeb.'.<br>La autenticaci&oacute;n del usuario admin seguir&aacute; siendo independiente para evitar p&eacute;rdida de acceso.';
+	$MULTILANG_ErrHASH=$MULTILANG_PHPSinSoporte.' para HASH activado.<br>Este se requiere cuando es seleccionado un tipo de encripci&oacute;n diferente al plano para contrase&ntilde;as sobre motores de autenticaci&oacute;n externos.<br>'.$MULTILANG_ReinicieWeb;
+	$MULTILANG_ErrSESS=$MULTILANG_PHPSinSoporte.' para sesiones activado. '.$MULTILANG_ReinicieWeb;
+	$MULTILANG_ErrGD=$MULTILANG_PHPSinSoporte.' para librer&iacute;a gr&aacute;fica GD &oacute; GD2 activado.<br>Aquellos utilizando debian, ubuntu o sus derivados pueden intentar un <b>apt-get install php5-gd</b> para agregarlo.<br>'.$MULTILANG_ReinicieWeb;
+	$MULTILANG_ErrPDO=$MULTILANG_PHPSinSoporte.' para PDO activado.<br>'.$MULTILANG_ReinicieWeb;
+	$MULTILANG_ErrDriverPDO=$MULTILANG_PHPSinSoporte.' para PDO activado. '.$MULTILANG_ReinicieWeb;
+	$MULTILANG_ObjetoNoExiste='El objeto asociado a esta solicitud no existe.';
+	$MULTILANG_ErrorDatos='Problema en los datos ingresados';
 
-	//Ventana de login
-	$MULTILANG_TituloLogin='Ingreso al sistema';
-	$MULTILANG_CodigoSeguridad='Codigo de seguridad';
-	$MULTILANG_IngreseCodigoSeguridad='Ingrese aqui el codigo de seguridad';
-	$MULTILANG_AccesoExclusivo='El acceso a este software es exlusivo para usuarios registrados. Por su seguridad, nunca comparta su nombre de usuario y contrase&ntilde;a.';
+	//Asistente disenador aplicaciones
+	$MULTILANG_TitDisenador='Dise&ntilde;ar la aplicaci&oacute;n, <b>es simple y r&aacute;pido:</b>';
+	$MULTILANG_DefTablas='Definici&oacute;n de tablas';
+	$MULTILANG_DesTablas='Las tablas son aquellas estructuras en las que ser&aacute; almacenada la informaci&oacute;n que sus usuarios diligencien por medio de formularios asociados a &eacute;stas.';
+	$MULTILANG_DefForms='para ingreso y consulta de informaci&oacute;n';
+	$MULTILANG_DesForms='Permiten al usuario ingresar informaci&oacute;n de acuerdo a ciertas validaciones o formatos, consultar registros o incluso eliminarlos. Permiten tambi&eacute;n desplegar otros elementos como p&aacute;ginas externas o informes predise&ntilde;ados.';
+	$MULTILANG_DefInformes='(tablas o gr&aacute;ficos)';
+	$MULTILANG_DesInformes='Presentan la informaci&oacute;n existente dentro de las tablas a los usuarios, bajo diferentes formatos y filtros definidos.  Se pueden crear informes tabulares o de tipo gr&aacute;fico y adem&aacute;s posteriormente ser embebidos en otros espacios.';
+	$MULTILANG_DefMenus='para los usuarios';
+	$MULTILANG_DesMenus='Enlaza objetos dise&ntilde;ados como formularios o informes con iconos gr&aacute;ficos y descripciones textuales que pueden ser seleccionadas por un usuario que posea ese permiso.  Tambi&eacute;n permite vincular funciones externas o ejecuci&oacute;n de comandos personalizados.';
+	$MULTILANG_UsuariosPermisos='Usuarios y permisos';
+	$MULTILANG_DefUsuarios='para acceder a su aplicaci&oacute;n';
+	$MULTILANG_DesUsuarios='Establece las credenciales de acceso para cada usuario, as&iacute; como los permisos con que cuenta cada uno para accesar formularios, informes o cualquier opcion de menu previamente definida.';
+
 
 	//Cierre de sesion
 	$MULTILANG_SesionCerrada='Su sesi&oacute;n ha sido cerrada';
@@ -93,6 +144,33 @@
 			<li>Haber finalizado un proceso de instalaci&oacute;n de la plataforma que requiere un reinicio de sesi&oacute;n</li>
 			<li>La llave de paso de su usuario no corresponde a la llave solicitada por este sistema</li>
 			<li>Las credenciales para firmar un registro de operaci&oacute;n no son v&aacute;lidas</li>';
+
+	//Actualizacion de plataforma
+	$MULTILANG_ActMsj1='ATENCION: Lea esta informaci&oacute;n antes de continuar';
+	$MULTILANG_ActMsj2='Pr&aacute;ctico le ofrece este mecanismo para aplicar actualizaciones autom&aacute;ticas a su sistema mediante parches incrementales descargados desde la web oficial del proyecto o mediante el asistente para b&uacute;squeda de actualizaciones, sin embargo, antes de aplicar cualquier parche es fundamental que:<br><br><li>Haga una copia de seguridad de sus bases de datos. Algunas actualizaciones puede que requieran la modificaci&oacute;n de estructuras sobre la base de datos que pueden afectar la informaci&oacute;n.<li>Haga una copia de seguridad de sus archivos o carpeta de Pr&aacute;ctico.<li>LIMPIE la carpeta de trabajo de practico (ruta  tmp/), ser&aacute; utilizada por el asistente para descomprimir y analizar los archivos.';
+	$MULTILANG_ActUsando='Actualmente usted utiliza la versi&oacute;n';
+	$MULTILANG_ActPaquete='Paquete/Parche de actualizacion manual';
+	$MULTILANG_ActSobreescritos='Archivos previos ser&aacute;n sobreescritos';
+	$MULTILANG_CargarArchivo='Cargar el archivo';
+	$MULTILANG_Adjuntando='Adjuntando un nuevo archivo al sistema';
+	$MULTILANG_ErrorTamano='<b>ATENCION:</b> Proceso interrumpido.  El archivo excede el tama&ntilde;o permitido';
+	$MULTILANG_ErrorFormato='<b>ATENCION:</b> Proceso interrumpido.  El formato del archivo cargado no es el solicitado';
+	$MULTILANG_CargaCorrecta='El archivo ha sido cargado correctamente';
+	$MULTILANG_ErrorDesconocido='<b>ATENCION:</b>  Ocurri&oacute; un error desconocido al cargar el archivo';
+	$MULTILANG_ErrorDescomprimiendo='Descomprimiendo archivo';
+	$MULTILANG_ContenidoParche='Contenido del parche';
+	$MULTILANG_ErrorVerAct='Error cargando la versi&oacute;n actual de Pr&aacute;ctico.  No se encuentra el archivo';
+	$MULTILANG_ErrorActualiza='El archivo cargado parece no ser un paquete de actualizacion v&aacute;lido.  No se encuentra el archivo';
+	$MULTILANG_ErrorAntigua='El archivo de parche cargado hace referencia a una actualizaci&oacute;n mas antigua que su version actual';
+	$MULTILANG_ErrorVersion='El archivo de parche cargado requiere la siguiente version';
+	$MULTILANG_AvisoIncremental='Debe aplicar primero los parches incrementales requeridos hasta elevar su sistema a la versi&oacute;n minima que necesita el parche.';
+	$MULTILANG_Integridad='Integridad';
+	$MULTILANG_ResumenParche='Resumen de los cambios y funcionalidades suministradas por el parche';
+	$MULTILANG_ResumenInstrucciones='Instrucciones a ser ejecutadas sobre las tablas de del sistema';
+	$MULTILANG_FinRevision='PROCESO DE REVISION FINALIZADO';
+	$MULTILANG_ActMsj3='Al aplicar los archivos listados arriba se actualizar&aacute; su sistema a la siguiente versi&oacute;n';
+	$MULTILANG_ActErrGral='Archivo con estructura, tipo o versi&oacute;n no compatible';
+	$MULTILANG_ActDesde='Actualizando desde la version';
 
 	//Proceso de instalacion
 	$MULTILANG_Instalacion='Proceso de instalaci&oacute;n';

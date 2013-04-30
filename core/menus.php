@@ -57,8 +57,7 @@ if ($accion=="actualizar_menu")
 	{
 		// Actualiza los datos del item
 		ejecutar_sql_unaria("UPDATE ".$TablasCore."menu SET texto='$texto',padre='$padre',peso='$peso',url='$url',posible_clic='$posible_clic',tipo_comando='$tipo_comando',comando='$comando',nivel_usuario='$nivel_usuario',columna='$columna',posible_arriba='$posible_arriba',posible_centro='$posible_centro',posible_escritorio='$posible_escritorio',seccion='$seccion',imagen='$imagen' WHERE id=$id");
-		// Lleva a auditoria
-		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Actualiza menu item $texto c&oacute;digo $id','$fecha_operacion','$hora_operacion')");
+		auditar("Actualiza menu item $texto c&oacute;digo $id");
 		echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 	}
 
@@ -347,8 +346,7 @@ if ($accion=="eliminar_menu")
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."menu WHERE id=$id");
 		// Elimina el enlace para todos los usuarios que utilizan esa opcion
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=$id");
-		// Lleva a auditoria
-		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Elimina en menu $id','$fecha_operacion','$hora_operacion')");
+		auditar("Elimina en menu $id");
 		echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 	}
 
@@ -391,8 +389,7 @@ if ($accion=="eliminar_menu")
 				{
 					// Guarda los datos del comando o item de menu
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES ('$texto','$padre','$peso','$url','$posible_clic','$tipo_comando','$comando','$nivel_usuario','$columna','$posible_arriba','$posible_escritorio','$posible_centro','$seccion','$imagen')");
-					// Lleva a auditoria
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','Agrega en menu: $texto','$fecha_operacion','$hora_operacion')");
+					auditar("Agrega en menu: $texto");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
 			else
