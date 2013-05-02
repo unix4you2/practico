@@ -87,7 +87,7 @@
 				}
 			catch( PDOException $ErrorPDO)
 				{
-					echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$query.'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';					
+					echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$query.'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
 					//mensaje('Error durante la ejecuci&oacute;n',$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
 					return $ErrorPDO->getMessage();
 				}
@@ -1730,7 +1730,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				//$chart->getPlot()->setGraphCaptionRatio(0.75);
 				$chart->setTitle($registro_informe["titulo"]);
 				$chart->render("tmp/Inf_".$registro_informe["id"]."-".$Login_usuario.".png");
-				echo '<img alt="Grafico" src="tmp/Inf_'.$registro_informe["titulo"].'-'.$Login_usuario.'.png" style="border: 1px solid gray;">';
+				echo '<img alt="Grafico" src="tmp/Inf_'.$registro_informe["id"].'-'.$Login_usuario.'.png" style="border: 1px solid gray;">';
 			} // Fin si informe es G (grafico)
 
 		if ($en_ventana) cerrar_ventana();

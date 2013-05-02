@@ -307,13 +307,7 @@ if ($accion=="aplicar_parche")
 				return($ret);
 			}
 
-
-//////////////////////////////////////////
-//////////////////////////////////////////
-
-
-
-		abrir_ventana('Aplicando actualizacion desde '.$archivo_cargado,'f2f2f2','700');
+		abrir_ventana($MULTILANG_Aplicando.': '.$archivo_cargado,'f2f2f2','700');
 		echo '<table border="0" width="100%"  cellspacing="15" cellpadding="0" align="center" class="TextosVentana"><tr height="100%"><td align=left height="100%">
 		<u>'.$MULTILANG_ActDesde.' '.$version_actual.' ---> '.$version_final.':</u><br><br>';
 		$mensaje_error="";
@@ -332,7 +326,7 @@ if ($accion=="aplicar_parche")
 				$archivo_backup = new PclZip($archivo_destino_backup_app);
 
 				if (($lista_contenido = $archivo->listContent()) == 0)
-					echo "Error cargando lista de archivos para backup: ".$archivo->errorInfo(true);
+					echo $MULTILANG_ErrLista.": ".$archivo->errorInfo(true);
 
 				$lista_archivos_a_comprimir="";
 				for ($i=0; $i<sizeof($lista_contenido); $i++)
@@ -341,7 +335,7 @@ if ($accion=="aplicar_parche")
 						if (file_exists($lista_contenido[$i][filename]) && !is_dir($lista_contenido[$i][filename]))
 							{
 								$lista_archivos_a_comprimir.=$lista_contenido[$i][filename].",";
-								echo "<li> Haciendo backup de: ".$lista_contenido[$i][filename];
+								echo "<li> ".$MULTILANG_HaciendoBkp.": ".$lista_contenido[$i][filename];
 							}
 					}
 				$lista_archivos_a_comprimir=substr($lista_archivos_a_comprimir, 0, strlen($lista_archivos_a_comprimir)-1);
@@ -369,14 +363,14 @@ if ($accion=="aplicar_parche")
 					}
 				else
 					{
-						echo '<hr><b>Ha ocurrido un error durante la copia de seguridad de la base de datos.</b>';
+						echo '<hr><b>'.$MULTILANG_ErrBkpBD.'.</b>';
 					}
 
 				//Descomprime el archivo de parche
 				$carpeta_destino='';
 				//Extrae el archivo
 				if ($archivo->extract(PCLZIP_OPT_PATH, $carpeta_destino, PCLZIP_OPT_REPLACE_NEWER) == 0)
-					echo "ERROR: ".$archivo->errorInfo(true)."<br>";
+					echo $MULTILANG_Error.": ".$archivo->errorInfo(true)."<br>";
 
 				//Abre el archivo con los queries
 				$RutaScriptSQL="tmp/par_sql.txt";
@@ -397,29 +391,29 @@ if ($accion=="aplicar_parche")
 							}
 						catch( PDOException $ErrorPDO)
 							{
-								echo "<hr><b><font color=red>ATENCION: </font>Error ejecutando la consulta</b> $consulta <b>sobre la base de datos. DETALLES: ".$ErrorPDO->getMessage()."</b>";
+								echo "<hr><b><font color=red>".$MULTILANG_ErrorTiempoEjecucion.": </font><br>".$MULTILANG_Detalles.":</b> $consulta <b><br>".$MULTILANG_MotorBD.": ".$ErrorPDO->getMessage()."</b>";
 								$hay_error=1; //usada globalmente durante el proceso de instalacion
 							}
 					}
 
 				echo '<center>
-				<hr><font color=blue>- Si alguno de los archivos no ha podido ser escrito por este asistente por problemas de permisos el parche tambien puede ser aplicado manualmente por el administrador o escribiendo solamente los archivos faltantes. -</font></b>
+				<hr><font color=blue>- '.$MULTILANG_ActMsj4.'. -</font></b>
 				<hr>
-				<b>PROCESO FINALIZADO<br>';
+				<b>'.$MULTILANG_ProcesoFin.'<br>';
 				auditar("Actualiza version de plataforma desde $version_actual hacia $version_final");
 			}
 		else
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="accion" value="Ver_menu">
-					<input type="Hidden" name="error_titulo" value="Archivo con estructura o tipo no compatible">
+					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ActMsj5.'">
 					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 					</form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 			}
 		echo '</center></td></tr></table>';
 		abrir_barra_estado();
-		echo '<input type="Button" onclick="document.core_ver_menu.submit()" value="<< Volver al escritorio" class="BotonesEstado">';
+		echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" << '.$MULTILANG_IrEscritorio.' " class="BotonesEstado">';
 		cerrar_barra_estado();
 		cerrar_ventana();
 	}
