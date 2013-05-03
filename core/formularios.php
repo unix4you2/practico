@@ -1071,92 +1071,99 @@ if ($accion=="editar_formulario")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioBotones' class="FormularioPopUps">
 			<?php
-			abrir_ventana('Agregar botones y acciones al formulario','BDB9B9','');
+			abrir_ventana($MULTILANG_FrmAgregaBot,'BDB9B9','');
 			?>
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="accion" value="guardar_accion_formulario">
 				<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 				<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">
 				<div align=center>
-							
+
 					<table class="TextosVentana">
 						<tr>
-							<td align="right">T&iacute;tulo o etiqueta:</td>
+							<td align="right"><?php echo $MULTILANG_FrmTituloBot; ?>:</td>
 							<td ><input type="text" name="titulo" size="20" class="CampoTexto">
-								<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
-								<a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; sobre el bot&oacute;n."><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesBot; ?>"><img src="img/icn_10.gif" border=0></a>
 							</td>
 						</tr>
 						<tr>
-							<td align="right">Estilo</td>
+							<td align="right"><?php echo $MULTILANG_FrmEstilo; ?></td>
 							<td>
 								<select  name="estilo" class="Combos" >
-									<option value="BotonesEstado">Predeterminado - bot&oacute;n normal</option>
-									<option value="BotonesEstadoCuidado">Boton de acci&oacute;n que requiere cuidado</option>
+									<option value="BotonesEstado"><?php echo $MULTILANG_FrmEstilo1; ?></option>
+									<option value="BotonesEstadoCuidado"><?php echo $MULTILANG_FrmEstilo2; ?></option>
 								</select>
-							<a href="#" title="Ayuda r&aacute;pida:" name="Apariencia gr&aacute;fica del control"><img src="img/icn_10.gif" border=0></a>	</td>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesEstilo; ?>"><img src="img/icn_10.gif" border=0></a>	</td>
 						</tr>
 						<tr>
-							<td align="right">Tipo de acci&oacute;n</td>
+							<td align="right"><?php echo $MULTILANG_FrmTipoAccion; ?></td>
 							<td>
 								<select  name="tipo_accion" class="Combos" >
-									<option value="">Seleccione una</option>
-									<optgroup label="Acciones internas">
-										<option value="interna_guardar">Guardar datos</option>
-										<option value="interna_limpiar">Limpiar datos</option>
-										<option value="interna_eliminar">Eliminar datos</option>
-										<option value="interna_escritorio">Regresar a escritorio</option>
-										<option value="interna_cargar">Cargar un objeto</option>
+									<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+									<optgroup label="<?php echo $MULTILANG_FrmAccionT1; ?>">
+										<option value="interna_guardar"><?php echo $MULTILANG_FrmAccionGuardar; ?></option>
+										<option value="interna_limpiar"><?php echo $MULTILANG_FrmAccionLimpiar; ?></option>
+										<option value="interna_eliminar"><?php echo $MULTILANG_FrmAccionEliminar; ?></option>
+										<option value="interna_escritorio"><?php echo $MULTILANG_FrmAccionRegresar; ?></option>
+										<option value="interna_cargar"><?php echo $MULTILANG_FrmAccionCargar; ?></option>
 									</optgroup>
-									<optgroup label="Definidas por el usuario">
-										<option value="externa_formulario">En personalizadas.php o cualquier otro m&oacute;dulo instalado</option>
-										<option value="externa_javascript">Comando en JavaScript</option>
+									<optgroup label="<?php echo $MULTILANG_FrmAccionT2; ?>">
+										<option value="externa_formulario"><?php echo $MULTILANG_FrmAccionExterna; ?></option>
+										<option value="externa_javascript"><?php echo $MULTILANG_FrmAccionJS; ?></option>
 									</optgroup>
 								</select>
-							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
-							<a href="#" title="Ayuda r&aacute;pida:" name="Comando que deber&aacute; ejecutar el control al ser pulsado.  Para acciones definidas es personalizadas.php los datos del formulario ser&aacute;n enviados a esa rutina para ser procesados."><img src="img/icn_10.gif" border=0></a>	</td>
+							<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesAccion; ?>"><img src="img/icn_10.gif" border=0></a>	</td>
 						</tr>
 						<tr>
-							<td align="right">Comando del usuario:</td>
+							<td align="right"><?php echo $MULTILANG_FrmAccionCMD; ?>:</td>
 							<td ><input type="text" name="accion_usuario" size="20" class="CampoTexto">
-								<a href="#" title="Ayuda r&aacute;pida:" name="Nombre de la acci&oacute;n definida en el archivo de personalizaci&oacute;n que procesar&aacute; la informaci&oacute;n o comando en JavaScript a ser ejecutado de manera inmediata en la p&aacute;gina (si requiere par&aacute;metros dentro de su comando utilice comillas sencillas para encerrarlos). Para cargar objetos de Pr&aacute;ctico como formularios o informes puede usar la misma notaci&oacute;n de menus: frm:XX:Par1:Par2:ParN o inf:XX...  El comando javascript ImprimirMarco('seccion_impresion') le permite imprimir el contenido del formulario."><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmAccionDesCMD; ?>"><img src="img/icn_10.gif" border=0></a>
 							</td>
 						</tr>
 						<tr>
 							<td colspan=2>
 							<table width="100%" class="TextosVentana"><tr>
-								<td align="right">Peso:</td>
+								<td align="right"><?php echo $MULTILANG_Peso; ?>:</td>
 								<td>
 									<select name="peso" class="selector_01" >
 										<?php
 											for ($i=1;$i<=20;$i++)
 												echo '<option value="'.$i.'">'.$i.'</option>';
 										?>
-									</select><a href="#" title="Ayuda r&aacute;pida:" name="Posicion en la que aparece el campo dentro de la barra de estado del formulario cuando este se despliega en pantalla. Orden de izquierda a derecha."><img align="top" src="img/icn_10.gif" border=0></a>
+									</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesPeso; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
 								</td>
-								<td align="right">Visible</td>
+								<td align="right"><?php echo $MULTILANG_FrmVisible; ?></td>
 								<td>
 									<select  name="visible" class="Combos" >
-										<option value="1">Si</option>
-										<option value="0">No</option>
-									</select><a href="#" title="Ayuda r&aacute;pida:" name="Determina si el control es visible o no para el usuario."><img src="img/icn_10.gif" border=0></a>
+										<option value="1"><?php echo $MULTILANG_Si; ?></option>
+										<option value="0"><?php echo $MULTILANG_No; ?></option>
+									</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmBotDesVisible; ?>"><img src="img/icn_10.gif" border=0></a>
 								</td>
 							</tr></table>
 							</td>
 						</tr>
 						<tr>
-							<td align="right">T&iacute;tulo de retorno</td>
-							<td ><input type="text" name="retorno_titulo" size="20" class="CampoTexto"><a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; como encabezado en el escritorio despu&eacute;s de realizar la acci&oacute;n indicada por el usuario."><img src="img/icn_10.gif" border=0></a>	</td>
+							<td align="right"><?php echo $MULTILANG_FrmRetorno; ?></td>
+							<td >
+								<input type="text" name="retorno_titulo" size="20" class="CampoTexto">
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesRetorno; ?>"><img src="img/icn_10.gif" border=0></a>
+							</td>
 						</tr>
 						<tr>
-							<td   valign="top" align="right">Texto de retorno</td>
-							<td  colspan=2 valign="top"><textarea name="retorno_texto" cols="25" rows="1" class="AreaTexto"></textarea>
-							<a href="#" title="Ayuda r&aacute;pida:" name="Texto completo con la descripci&oacute;n de acci&oacute;n realizada o mensaje entregado al usuario despu&eacute;s de ejecutar el control."><img align="top" src="img/icn_10.gif" border=0></a>	</td>
+							<td   valign="top" align="right"><?php echo $MULTILANG_FrmTxtRetorno; ?></td>
+							<td  colspan=2 valign="top">
+								<textarea name="retorno_texto" cols="25" rows="1" class="AreaTexto"></textarea>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmTxtDesRetorno; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
+							</td>
 						</tr>
 						<tr>
-							<td align="right">Texto de confirmaci&oacute;n</td>
-							<td ><input type="text" name="confirmacion_texto" size="20" class="CampoTexto">
-							<a href="#" title="Ayuda r&aacute;pida:" name="En caso de ser diligenciado: Texto que aparecer&aacute; como ventana emergente advirtiendo la ejecuci&oacute;n del control y esperando confirmaci&oacute;n del usuario para proceder."><img src="img/icn_10.gif" border=0></a>	</td>
+							<td align="right"><?php echo $MULTILANG_FrmConfirma; ?></td>
+							<td >
+								<input type="text" name="confirmacion_texto" size="20" class="CampoTexto">
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesConfirma; ?>"><img src="img/icn_10.gif" border=0></a>
+							</td>
 						</tr>
 
 						<tr>
@@ -1164,14 +1171,14 @@ if ($accion=="editar_formulario")
 								</form>
 							</td>
 							<td>
-								<input type="Button"  class="Botones" value="Agregar acci&oacute;n/bot&oacute;n" onClick="document.datosfield.submit()">
+								<input type="Button"  class="Botones" value="<?php echo $MULTILANG_FrmBtnGuardar; ?>" onClick="document.datosfield.submit()">
 							</td>
 						</tr>
 					</table>
 				</br>
 			<?php
 				abrir_barra_estado();
-					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioBotones\')">';
+					echo '<input type="Button"  class="BotonesEstadoCuidado" value=" '.$MULTILANG_Cancelar.' " onClick="OcultarPopUp(\'FormularioBotones\')">';
 				cerrar_barra_estado();
 				cerrar_ventana();		// Cierra adicion de botones
 			?>
@@ -1183,16 +1190,16 @@ if ($accion=="editar_formulario")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioDiseno' class="FormularioPopUps">
 			<?php
-				abrir_ventana('Dise&ntilde;o general de campos','#BDB9B9','');
+				abrir_ventana($MULTILANG_FrmDisCampos,'#BDB9B9','');
 			?>
 					<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
 						<tr>
-							<td bgcolor="#D6D6D6"><b>Titulo (Tipo)</b></td>
-							<td bgcolor="#d6d6d6"><b>Campo</b></td>
-							<td bgcolor="#d6d6d6"><b>Columna</b></td>
-							<td bgcolor="#d6d6d6"><b>Peso</b></td>
-							<td bgcolor="#d6d6d6"><b>Obligatorio</b> <a href="#" title="Importante:" name="Tenga presente que los campos obligatorios deber&iacute;an estar visibles."><img src="img/icn_10.gif" align="absmiddle" border=0></a></td>
-							<td bgcolor="#d6d6d6"><b>Visible</b></td>
+							<td bgcolor="#D6D6D6"><b><?php echo $MULTILANG_Titulo; ?> (<?php echo $MULTILANG_Tipo?>)</b></td>
+							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_Campo; ?></b></td>
+							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_Columna; ?></b></td>
+							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_Peso; ?></b></td>
+							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_FrmObligatorio; ?></b> <a href="#" title="<?php echo $MULTILANG_Importante; ?>" name="<?php echo $MULTILANG_FrmDesObliga; ?>"><img src="img/icn_10.gif" align="absmiddle" border=0></a></td>
+							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_FrmVisible; ?></b></td>
 							<td></td>
 							<td></td>
 						</tr>
@@ -1230,7 +1237,7 @@ if ($accion=="editar_formulario")
 													echo '<option value="'.$i.'">'.$i.'</option>';
 											    $i++;
 											}
-						echo '		</select></form> <a href="javascript:ifoc'.$registro["id"].'.submit();" title="Guardar columna" name=""><img src="img/guardar.gif" border=0></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						echo '		</select></form> <a href="javascript:ifoc'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmGuardaCol.'" name=""><img src="img/guardar.gif" border=0></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								
 								</td>
 								<td align=center>
@@ -1260,9 +1267,9 @@ if ($accion=="editar_formulario")
 								
 								if ($registro["campo"]!="id")
 									echo '
-										<a href="javascript:ifoce'.$registro["id"].'.submit();" title="Aumentar peso (bajar)" name=""><img src="img/bajar.png" border=0></a> 
+										<a href="javascript:ifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" name=""><img src="img/bajar.png" border=0></a> 
 										'.$registro["peso"].'
-										<a href="javascript:ifopa'.$registro["id"].'.submit();" title="Disminuir peso (subir)" name=""><img src="img/subir.png" border=0></a>
+										<a href="javascript:ifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" name=""><img src="img/subir.png" border=0></a>
 										';
 								
 								echo '</td>';
@@ -1280,9 +1287,9 @@ if ($accion=="editar_formulario")
 											';
 									if ($registro["campo"]!="id")
 										if ($registro["obligatorio"])
-											echo '<input type="hidden" name="valor" value="0"><a href="javascript:ifo'.$registro["id"].'.submit();" title="Cambiar estado" name=""><img src="img/on.png" border=0></a>';
+											echo '<input type="hidden" name="valor" value="0"><a href="javascript:ifo'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><img src="img/on.png" border=0></a>';
 										else
-											echo '<input type="hidden" name="valor" value="1"><a href="javascript:ifo'.$registro["id"].'.submit();" title="Cambiar estado" name=""><img src="img/off.png" border=0></a>';
+											echo '<input type="hidden" name="valor" value="1"><a href="javascript:ifo'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><img src="img/off.png" border=0></a>';
 								echo '</form></td>';
 								
 								echo '<td align=center>
@@ -1297,9 +1304,9 @@ if ($accion=="editar_formulario")
 												<input type="Hidden" name="popup_activo" value="FormularioDiseno">
 											';
 									if ($registro["visible"])
-										echo '<input type="hidden" name="valor" value="0"><a href="javascript:if'.$registro["id"].'.submit();" title="Cambiar estado" name=""><img src="img/on.png" border=0></a>';
+										echo '<input type="hidden" name="valor" value="0"><a href="javascript:if'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><img src="img/on.png" border=0></a>';
 									else
-										echo '<input type="hidden" name="valor" value="1"><a href="javascript:if'.$registro["id"].'.submit();" title="Cambiar estado" name=""><img src="img/off.png" border=0></a>';
+										echo '<input type="hidden" name="valor" value="1"><a href="javascript:if'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><img src="img/off.png" border=0></a>';
 								echo '</form></td>';
 								if ($registro["peso"]!="0")
 									{
@@ -1309,7 +1316,7 @@ if ($accion=="editar_formulario")
 														<input type="hidden" name="campo" value="'.$registro["id"].'">
 														<input type="hidden" name="formulario" value="'.$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-														<input type="button" value="Eliminar"  class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar el campo los usuarios no podr&aacute;n verlo  y no podr&aacute; deshacer esta operaci&oacute;n.\nEst&aacute; seguro que desea continuar ?\',f'.$registro["id"].');">
+														<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_FrmAdvDelCampo.'\',f'.$registro["id"].');">
 														<input type="Hidden" name="popup_activo" value="FormularioDiseno">
 												</form>
 										</td>
@@ -1320,7 +1327,7 @@ if ($accion=="editar_formulario")
 														<input type="hidden" name="campo" value="'.$registro["id"].'">
 														<input type="hidden" name="formulario" value="'.$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-														<input type="Submit" value="Editar"  class="Botones">
+														<input type="Submit" value="'.$MULTILANG_Editar.'"  class="Botones">
 														<input type="Hidden" name="popup_activo" value="FormularioCampos">
 												</form>
 										</td>';
@@ -1338,7 +1345,7 @@ if ($accion=="editar_formulario")
 			</div>
 			<?php
 				abrir_barra_estado();
-					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioDiseno\')">';
+					echo '<input type="Button"  class="BotonesEstadoCuidado" value=" '.$MULTILANG_Cancelar.' " onClick="OcultarPopUp(\'FormularioDiseno\')">';
 				cerrar_barra_estado();
 				cerrar_ventana();
 			?>
@@ -1350,15 +1357,15 @@ if ($accion=="editar_formulario")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioAcciones' class="FormularioPopUps">
 			<?php
-				abrir_ventana('Definici&oacute;n general de acciones y comandos','#BDB9B9','');
+				abrir_ventana($MULTILANG_FrmTitComandos,'#BDB9B9','');
 			?>
 					<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
 						<tr>
-							<td bgcolor="#D6D6D6"><b>Etiqueta</b></td>
-							<td bgcolor="#d6d6d6"><b>Tipo de acci&oacute;n</b></td>
-							<td bgcolor="#d6d6d6"><b>Acci&oacute;n Usuario</b></td>
-							<td bgcolor="#d6d6d6"><b>Orden</b></td>
-							<td bgcolor="#d6d6d6"><b>Visible</b></td>
+							<td bgcolor="#D6D6D6"><b><?php echo $MULTILANG_Etiqueta; ?></b></td>
+							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_FrmTipoAcc; ?></b></td>
+							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_FrmAccUsuario; ?></b></td>
+							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_FrmOrden; ?></b></td>
+							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_FrmVisible; ?></b></td>
 							<td></td>
 							<td></td>
 						</tr>
@@ -1398,9 +1405,9 @@ if ($accion=="editar_formulario")
 									';
 
 									echo '
-										<a href="javascript:bifoce'.$registro["id"].'.submit();" title="Aumentar peso (bajar)" name=""><img src="img/bajar.png" border=0></a> 
+										<a href="javascript:bifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" name=""><img src="img/bajar.png" border=0></a> 
 										'.$registro["peso"].'
-										<a href="javascript:bifopa'.$registro["id"].'.submit();" title="Disminuir peso (subir)" name=""><img src="img/subir.png" border=0></a>
+										<a href="javascript:bifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" name=""><img src="img/subir.png" border=0></a>
 										';
 								
 								echo '</td>';
@@ -1418,9 +1425,9 @@ if ($accion=="editar_formulario")
 												<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 											';
 									if ($registro["visible"])
-										echo '<input type="hidden" name="valor" value="0"><a href="javascript:bif'.$registro["id"].'.submit();" title="Cambiar estado" name=""><img src="img/on.png" border=0></a>';
+										echo '<input type="hidden" name="valor" value="0"><a href="javascript:bif'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><img src="img/on.png" border=0></a>';
 									else
-										echo '<input type="hidden" name="valor" value="1"><a href="javascript:bif'.$registro["id"].'.submit();" title="Cambiar estado" name=""><img src="img/off.png" border=0></a>';
+										echo '<input type="hidden" name="valor" value="1"><a href="javascript:bif'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><img src="img/off.png" border=0></a>';
 								echo '</form></td>';
 										echo '<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" name="bf'.$registro["id"].'" id="bf'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
@@ -1428,7 +1435,7 @@ if ($accion=="editar_formulario")
 														<input type="hidden" name="boton" value="'.$registro["id"].'">
 														<input type="hidden" name="formulario" value="'.$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-														<input type="button" value="Eliminar"  class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar el bot&oacute;n/acci&oacute;n los usuarios no podr&aacute;n verlo o ejecutar el comando asociado a este y no podr&aacute; deshacer esta operaci&oacute;n luego.\nEst&aacute; seguro que desea continuar ?\',bf'.$registro["id"].');">
+														<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_FrmAdvDelBoton.'\',bf'.$registro["id"].');">
 														<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 												</form>
 										</td>
@@ -1439,7 +1446,7 @@ if ($accion=="editar_formulario")
 														<input type="hidden" name="campo" value="'.$registro["id"].'">
 														<input type="hidden" name="formulario" value="'.$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-														<input type="Button" value="Editar (Deshabilitado)"  class="Botones">
+														<input type="Button" value="'.$MULTILANG_Editar.'"  class="Botones">
 														<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 												</form>
 										</td>-->';
@@ -1452,7 +1459,7 @@ if ($accion=="editar_formulario")
 			</div>
 			<?php
 				abrir_barra_estado();
-					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioAcciones\')">';
+					echo '<input type="Button"  class="BotonesEstadoCuidado" value=" '.$MULTILANG_Cancelar.' " onClick="OcultarPopUp(\'FormularioAcciones\')">';
 				cerrar_barra_estado();
 				cerrar_ventana();
 			?>
@@ -1469,21 +1476,21 @@ if ($accion=="editar_formulario")
 
 		<table><tr><td valign=top>
 			<?php 
-				abrir_ventana('Barra de herramientas','#BDB9B9',''); 
+				abrir_ventana($MULTILANG_BarraHtas,'#BDB9B9',''); 
 			?>
 				<div align=center>
-				Objetos y Campos de datos<br>
-				<a href='javascript:AbrirPopUp("FormularioCampos");' title="Agregar un objeto o campo de datos" name=" "><img border='0' src='img/icono_campo.png'/></a>
+				<?php echo $MULTILANG_FrmObjetos; ?><br>
+				<a href='javascript:AbrirPopUp("FormularioCampos");' title="<?php echo $MULTILANG_FrmDesObjetos; ?>" name=" "><img border='0' src='img/icono_campo.png'/></a>
 				&nbsp;&nbsp;
-				<a href='javascript:AbrirPopUp("FormularioDiseno");' title="Dise&ntilde;o general de campos"><img border='0' src='img/icono_diseno.png'/></a>
+				<a href='javascript:AbrirPopUp("FormularioDiseno");' title="<?php echo $MULTILANG_FrmDesCampos; ?>"><img border='0' src='img/icono_diseno.png'/></a>
 				<hr>
-				Acciones, botones y comandos<br>
-				<a href='javascript:AbrirPopUp("FormularioBotones");' title="Agregar bot&oacute;n o acci&oacute;n"><img border='0' src='img/icono_boton.png'/></a>
+				<?php echo $MULTILANG_FrmAcciones; ?><br>
+				<a href='javascript:AbrirPopUp("FormularioBotones");' title="<?php echo $MULTILANG_FrmDesBoton; ?>"><img border='0' src='img/icono_boton.png'/></a>
 				&nbsp;&nbsp;
-				<a href='javascript:AbrirPopUp("FormularioAcciones");' title="Definici&oacute;n general de acciones"><img border='0' src='img/icono_acciones.png'/></a>
+				<a href='javascript:AbrirPopUp("FormularioAcciones");' title="<?php echo $MULTILANG_FrmDesAcciones; ?>"><img border='0' src='img/icono_acciones.png'/></a>
 				<hr>
 				<form action="<?php echo $ArchivoCORE; ?>" method="POST" name="cancelar"><input type="Hidden" name="accion" value="administrar_formularios"></form>
-				<input type="Button" onclick="document.cancelar.submit()" value="Volver a lista de formularios" class="Botones">
+				<input type="Button" onclick="document.cancelar.submit()" value="<?php echo $MULTILANG_FrmVolverLista; ?>" class="Botones">
 				</div><br>
 			<?php
 				cerrar_ventana();
@@ -1520,21 +1527,11 @@ if ($accion=="editar_formulario")
 */
 	if ($accion=="eliminar_formulario")
 		{
-			$mensaje_error="";
-			if ($mensaje_error=="")
-				{
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario WHERE id='$formulario'");
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario'");
-					auditar("Elimina formulario $id");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_formularios"></form>
-							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-				}
-			else
-				{
-					mensaje('<blink>Error eliminando formulario!</blink>','El formulario especificado no se puede eliminar.','60%','icono_error.png','TextosEscritorio');
-					echo '<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="accion" value="administrar_formularios"></form>
-						<br /><input type="Button" onclick="document.cancelar.submit()" name="" value="Cerrar" class="Botones">';
-				}
+			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario WHERE id='$formulario'");
+			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario'");
+			auditar("Elimina formulario $id");
+			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_formularios"></form>
+					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 		}
 
 
@@ -1558,11 +1555,11 @@ if ($accion=="editar_formulario")
 	if ($accion=="guardar_formulario")
 		{
 			$mensaje_error="";
-			if ($titulo=="") $mensaje_error.="Debe indicar un t&iacute;tulo v&aacute;lido para el formulario.<br>";
-			if ($tabla_datos=="") $mensaje_error.="Debe indicar un nombre v&aacute;lido para la tabla de datos asociada al formulario.<br>";
+			if ($titulo=="") $mensaje_error.=$MULTILANG_FrmErr1.'<br>';
+			if ($tabla_datos=="") $mensaje_error.=$MULTILANG_FrmErr2.'<br>';
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES ('$titulo','$ayuda_titulo','$ayuda_texto','$ayuda_imagen','$tabla_datos','$columnas')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES ('$titulo','$ayuda_titulo','$ayuda_texto','$ayuda_imagen','$tabla_datos','$columnas','$javascript')");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea formulario $id para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -1575,7 +1572,7 @@ if ($accion=="editar_formulario")
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="administrar_formularios">
-						<input type="Hidden" name="error_titulo" value="Problema en los datos ingresados">
+						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -1601,43 +1598,49 @@ if ($accion=="administrar_formularios")
 		 ?>
 
 		<table class="TextosVentana"><tr><td valign=top>
-			<?php abrir_ventana('Agregar nuevo formulario','f2f2f2',''); ?>
+			<?php abrir_ventana($MULTILANG_FrmAgregar,'f2f2f2',''); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_formulario">
 			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 			<div align=center>
 						
-			<br>Defina los detalles del formulario:
+			<br><?php echo $MULTILANG_FrmDetalles; ?>:
 				<table class="TextosVentana">
 					<tr>
-						<td align="right">T&iacute;tulo de ventana:</td>
-						<td><input type="text" name="titulo" size="20" class="CampoTexto">
-							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
-							<a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; en la parte superior de la ventana de formulario o barra de t&iacute;tulo"><img src="img/icn_10.gif" border=0></a>
+						<td align="right"><?php echo $MULTILANG_FrmTitVen; ?>:</td>
+						<td>
+							<input type="text" name="titulo" size="20" class="CampoTexto">
+							<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesTit; ?>"><img src="img/icn_10.gif" border=0></a>
 						</td>
 					</tr>
 					<tr>
-						<td align="right">T&iacute;tulo de ayuda</td>
-						<td><input type="text" name="ayuda_titulo" size="20" class="CampoTexto"><a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; como encabezado para el texto de ayuda del formulario"><img src="img/icn_10.gif" border=0></a>	</td>
+						<td align="right"><?php echo $MULTILANG_FrmHlp; ?></td>
+						<td>
+							<input type="text" name="ayuda_titulo" size="20" class="CampoTexto">
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesHlp; ?>"><img src="img/icn_10.gif" border=0></a>
+						</td>
 					</tr>
 					<tr>
-						<td valign="top" align="right">Texto de ayuda</td>
-						<td valign="top"><textarea name="ayuda_texto" cols="25" rows="3" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"></textarea>
-						<a href="#" title="Ayuda r&aacute;pida:" name="Texto completo con la descripcion de funciones resumida para el formulario.  Puede ser cualquier texto introductorio para el usuario"><img align="top" src="img/icn_10.gif" border=0></a>	</td>
+						<td valign="top" align="right"><?php echo $MULTILANG_FrmTxt; ?></td>
+						<td valign="top">
+							<textarea name="ayuda_texto" cols="25" rows="3" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"></textarea>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesTxt; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
+						</td>
 					</tr>
 					<tr>
-						<td align="right">Im&aacute;gen de ayuda</td>
+						<td align="right"><?php echo $MULTILANG_FrmImagen; ?></td>
 						<td>
 							<select  name="ayuda_imagen" class="Combos" >
-								<option value="">Deshabilitado</option>
+								<option value=""><?php echo $MULTILANG_Deshabilitado; ?></option>
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td align="right">Tabla de datos:</td>
+						<td align="right"><?php echo $MULTILANG_TablaDatos; ?>:</td>
 						<td>
 							<select  name="tabla_datos" class="Combos" >
-								<option value="">Seleccione una</option>
+								<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
 								 <?php
 										$resultado=consultar_tablas();
 										while ($registro = $resultado->fetch())
@@ -1647,18 +1650,18 @@ if ($accion=="administrar_formularios")
 													echo '<option value="'.$registro[0].'" >'.str_replace($TablasApp,'',$registro[0]).'</option>';
 											}		
 								?>
-							</select><a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
+							</select><a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
 						</td>
 					</tr>
 					<tr>
-						<td align="right">N&uacute;mero columnas</td>
+						<td align="right"><?php echo $MULTILANG_FrmNumeroCols; ?></td>
 						<td>
 							<select name="columnas" class="selector_01" >
 								<?php
 									for ($i=1;$i<=20;$i++)
 										echo '<option value="'.$i.'">'.$i.'</option>';
 								?>
-							</select><a href="#" title="Ayuda r&aacute;pida:" name="Indica en cuantas columnas deben desplegarse los campos cuando el formulario sea cargado."><img src="img/icn_10.gif" border=0></a>
+							</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesNumeroCols; ?>"><img src="img/icn_10.gif" border=0></a>
 						</td>
 					</tr>
 
@@ -1667,8 +1670,8 @@ if ($accion=="administrar_formularios")
 							</form>
 						</td>
 						<td>
-							<input type="Button"  class="Botones" value="Crear y dise&ntilde;ar" onClick="document.datos.submit()">
-							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="Volver al menu" class="Botones">
+							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_FrmCreaDisena; ?>" onClick="document.datos.submit()">
+							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="<?php echo $MULTILANG_IrEscritorio; ?>" class="Botones">
 						</td>
 					</tr>
 				</table>
@@ -1678,13 +1681,13 @@ if ($accion=="administrar_formularios")
 		cerrar_ventana();	
 		
 		echo '</td><td valign=top>';  // Inicia segunda columna del diseñador
-		abrir_ventana('Formularios ya definidos en el sistema','f2f2f2','');
+		abrir_ventana($MULTILANG_FrmTitForms,'f2f2f2','');
 		?>
 				<table width="100%" border="0" cellspacing="5" align="CENTER"  class="TextosVentana">
 					<tr>
 						<td bgcolor="#d6d6d6"><b>Id</b></td>
-						<td bgcolor="#D6D6D6"><b>Titulo</b></td>
-						<td bgcolor="#d6d6d6"><b>Tabla de datos</b></td>
+						<td bgcolor="#D6D6D6"><b><?php echo $MULTILANG_Titulo; ?></b></td>
+						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_TablaDatos; ?></b></td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -1701,7 +1704,7 @@ if ($accion=="administrar_formularios")
 										<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
 												<input type="hidden" name="accion" value="eliminar_formulario">
 												<input type="hidden" name="formulario" value="'.$registro["id"].'">
-												<input type="button" value="Eliminar"  class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar el formulario los usuarios no podr&aacute;n accesarlo nuevamente para operaciones de consulta o ingreso de datos definidas en &eacute;l y no podr&aacute; deshacer esta operaci&oacute;n. Esto tambien elimina cualquier dise&ntilde;o interno del formulario.\nEst&aacute; seguro que desea continuar ?\',df'.$registro["id"].');">
+												<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_FrmAdvDelForm.'\',df'.$registro["id"].');">
 										</form>
 								</td>
 								<td align="center">
@@ -1709,7 +1712,7 @@ if ($accion=="administrar_formularios")
 												<input type="hidden" name="accion" value="editar_formulario">
 												<input type="hidden" name="formulario" value="'.$registro["id"].'">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["tabla_datos"].'">
-												<input type="Submit" value="Campos y acciones"  class="Botones">
+												<input type="Submit" value="'.$MULTILANG_FrmCamposAcciones.'"  class="Botones">
 										</form>
 								</td>
 							</tr>';

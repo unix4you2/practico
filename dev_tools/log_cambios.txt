@@ -27,7 +27,8 @@ LogCambios="
   * Added: Mejora sustancial en la edición de campos sobre diseño de formularios. Dinámicamente permite cambio de tipos y propiedades
   * Added: Inicio del soporte multi-idioma
   * Added: Funcion de auditar para simplificar el codigo y dejarla disponible en el framework para funciones personalizadas
-  * Fixed: Scripts PostgreSQL para procesdo de instalación
+  * Added: Campo para almacenar scripts de java sobre formularios con funciones Pre-ejecucion,Pos-ejecucion y cualquier otra definida por el usuario
+  * Fixed: Scripts PostgreSQL para proceso de instalación
   * Fixed: Scripts SQLite para procesdo de instalación
   * Fixed: Modo de depuracion siempre era desactivado en edición de configuración
   * Fixed: Se deja numero de version informativo al inicio del instalador
@@ -48,7 +49,7 @@ LogCambios="
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-
+ALTER TABLE core_formulario ADD COLUMN javascript TEXT NULL;
 "
 
 ########################################################################

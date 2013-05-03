@@ -78,7 +78,8 @@ CREATE TABLE Core_formulario (
   ayuda_texto text,
   ayuda_imagen text default '',
   tabla_datos text default '',
-  columnas integer default '1'
+  columnas integer default '1',
+  javascript text
 );
 
 DROP TABLE IF EXISTS Core_formulario_objeto;

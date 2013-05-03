@@ -84,6 +84,7 @@ CREATE TABLE Core_formulario (
   ayuda_imagen varchar(250) default '',
   tabla_datos varchar(250) default '',
   columnas int(10) default '1',
+  javascript text,
   PRIMARY KEY  (id)
 );
 

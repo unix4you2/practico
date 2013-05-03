@@ -21,7 +21,11 @@
 	/*
 		Title: Idioma espanol
 		Ubicacion *[/inc/idioma/es.php]*.  Incluye la definicion de variables utilizadas para presentar mensajes en el idioma correspondiente
-		NOTA IMPORTANTE: Por cuestiones de rendimiento se recomienda la definicion usando comillas simples, usar las dobles solo cuando se requieran variables o caracteres especiales.
+		NOTAS IMPORTANTES:
+			* Por cuestiones de rendimiento se recomienda la definicion usando comillas simples.
+			* Usar las dobles solo cuando se requieran variables o caracteres especiales.
+			* Se pueden definir cadenas en funcion de otras definidas con anterioridad
+			* Se puede hacer uso de notacion HTML dentro de las cadenas para dar formato
 	*/
 
 	// Cadena que describe el archivo de idioma para su escogencia
@@ -38,8 +42,10 @@
 	$MULTILANG_Atencion='Atenci&oacute;n';
 	$MULTILANG_Ayuda='Ayuda';
 	$MULTILANG_Basedatos='Base de datos';
-	$MULTILANG_CaracteresCaptcha='N&uacute;mero de caracteres para captcha?';
+	$MULTILANG_BarraHtas='Barra de herramientas';
+	$MULTILANG_Campo='Campo';
 	$MULTILANG_Cancelar='Cancelar';
+	$MULTILANG_CaracteresCaptcha='N&uacute;mero de caracteres para captcha?';
 	$MULTILANG_CerrarSesion='Cerrar sesi&oacute;n';
 	$MULTILANG_Cliente='Cliente';
 	$MULTILANG_Columna='Columna';
@@ -50,11 +56,15 @@
 	$MULTILANG_Controlador='Controlador';
 	$MULTILANG_Correcto='Correcto';
 	$MULTILANG_Defina='Defina';
+	$MULTILANG_Deshabilitado='Deshabilitado';
 	$MULTILANG_Detalles='Detalles';
 	$MULTILANG_Disene='Dise&ntilde;e';
+	$MULTILANG_Editar='Editar';
+	$MULTILANG_Eliminar='Eliminar';
 	$MULTILANG_Encendido='Encendido';
 	$MULTILANG_Error='Error';
 	$MULTILANG_Estado='Estado';
+	$MULTILANG_Etiqueta='Etiqueta';
 	$MULTILANG_Formularios='Formularios';
 	$MULTILANG_Guardar='Guardar';
 	$MULTILANG_IdiomaPredeterminado='Idioma predeterminado';
@@ -80,9 +90,11 @@
 	$MULTILANG_Servidor='Servidor';
 	$MULTILANG_SeleccioneUno='Seleccione uno';
 	$MULTILANG_Tablas='Tablas';
+	$MULTILANG_TablaDatos='Tabla de datos';
 	$MULTILANG_TiempoCarga='Tiempo de carga';
 	$MULTILANG_Tipo='Tipo';
 	$MULTILANG_TipoMotor='Tipo de motor';
+	$MULTILANG_Titulo='T&iacute;tulo';
 	$MULTILANG_TotalRegistros='Total registros encontrados';
 	$MULTILANG_Usuario='Usuario';
 	$MULTILANG_Version='Versi&oacute;n';
@@ -281,6 +293,72 @@
 	$MULTILANG_FrmTit1LongMaxima='Cu&aacute;ntos caracteres permite el campo?';
 	$MULTILANG_FrmTit2LongMaxima='Valor entre 1 y N, 0 para deshabilitar el l&iacute;mite';
 	$MULTILANG_FrmBtnGuardar='Agregar o actualizar el objeto/campo';
+	$MULTILANG_FrmAgregaBot='Agregar botones y acciones al formulario';
+	$MULTILANG_FrmTituloBot='T&iacute;tulo o etiqueta';
+	$MULTILANG_FrmDesBot='Texto que aparecer&aacute; sobre el bot&oacute;n';
+	$MULTILANG_FrmEstilo='Estilo';
+	$MULTILANG_FrmEstilo1='Predeterminado - bot&oacute;n normal';
+	$MULTILANG_FrmEstilo2='Boton de acci&oacute;n que requiere cuidado';
+	$MULTILANG_FrmDesEstilo='Apariencia gr&aacute;fica del control';
+	$MULTILANG_FrmTipoAccion='Tipo de acci&oacute;n';
+	$MULTILANG_FrmAccionT1='Acciones internas';
+	$MULTILANG_FrmAccionGuardar='Guardar datos';
+	$MULTILANG_FrmAccionLimpiar='Limpiar datos';
+	$MULTILANG_FrmAccionEliminar='Eliminar datos';
+	$MULTILANG_FrmAccionRegresar='Regresar a escritorio';
+	$MULTILANG_FrmAccionCargar='Cargar un objeto';
+	$MULTILANG_FrmAccionT2='Definidas por el usuario';
+	$MULTILANG_FrmAccionExterna='En personalizadas.php o cualquier otro m&oacute;dulo instalado';
+	$MULTILANG_FrmAccionJS='Comando en JavaScript';
+	$MULTILANG_FrmDesAccion='Comando que deber&aacute; ejecutar el control al ser pulsado.  Para acciones definidas es personalizadas.php los datos del formulario ser&aacute;n enviados a esa rutina para ser procesados';
+	$MULTILANG_FrmAccionCMD='Comando del usuario';
+	$MULTILANG_FrmAccionDesCMD='Nombre de la acci&oacute;n definida en el archivo de personalizaci&oacute;n que procesar&aacute; la informaci&oacute;n o comando en JavaScript a ser ejecutado de manera inmediata en la p&aacute;gina (si requiere par&aacute;metros dentro de su comando utilice comillas sencillas para encerrarlos). Para cargar objetos de Pr&aacute;ctico como formularios o informes puede usar la misma notaci&oacute;n de menus: frm:XX:Par1:Par2:ParN o inf:XX...  El comando javascript ImprimirMarco(\'seccion_impresion\') le permite imprimir el contenido del formulario';
+	$MULTILANG_FrmDesPeso='Posicion en la que aparece el campo dentro de la barra de estado del formulario cuando este se despliega en pantalla. Orden de izquierda a derecha';
+	$MULTILANG_FrmBotDesVisible='Determina si el control es visible o no para el usuario';
+	$MULTILANG_FrmRetorno='T&iacute;tulo de retorno';
+	$MULTILANG_FrmDesRetorno='Texto que aparecer&aacute; como encabezado en el escritorio despu&eacute;s de realizar la acci&oacute;n indicada por el usuario';
+	$MULTILANG_FrmTxtRetorno='Texto de retorno';
+	$MULTILANG_FrmTxtDesRetorno='Texto completo con la descripci&oacute;n de acci&oacute;n realizada o mensaje entregado al usuario despu&eacute;s de ejecutar el control';
+	$MULTILANG_FrmConfirma='Texto de confirmaci&oacute;n';
+	$MULTILANG_FrmDesConfirma='En caso de ser diligenciado: Texto que aparecer&aacute; como ventana emergente advirtiendo la ejecuci&oacute;n del control y esperando confirmaci&oacute;n del usuario para proceder';
+	$MULTILANG_FrmBtnGuardar='Agregar acci&oacute;n/bot&oacute;n';
+	$MULTILANG_FrmDisCampos='Dise&ntilde;o general de campos';
+	$MULTILANG_FrmDesObliga='Tenga presente que los campos obligatorios deber&iacute;an estar visibles';
+	$MULTILANG_FrmGuardaCol='Guardar columna';
+	$MULTILANG_FrmAumentaPeso='Aumentar peso (bajar)';
+	$MULTILANG_FrmDisminuyePeso='Disminuir peso (subir)';
+	$MULTILANG_FrmHlpCambiaEstado='Cambiar estado';
+	$MULTILANG_FrmAdvDelCampo='IMPORTANTE:  Al eliminar el campo los usuarios no podr&aacute;n verlo  y no podr&aacute; deshacer esta operaci&oacute;n.\nEst&aacute; seguro que desea continuar ?';
+	$MULTILANG_FrmTitComandos='Definici&oacute;n general de acciones y comandos';
+	$MULTILANG_FrmTipoAcc='Tipo de acci&oacute;n';
+	$MULTILANG_FrmAccUsuario='Acci&oacute;n Usuario';
+	$MULTILANG_FrmOrden='Orden';
+	$MULTILANG_FrmAdvDelBoton='IMPORTANTE:  Al eliminar el bot&oacute;n/acci&oacute;n los usuarios no podr&aacute;n verlo o ejecutar el comando asociado a este y no podr&aacute; deshacer esta operaci&oacute;n luego.\nEst&aacute; seguro que desea continuar ?';
+	$MULTILANG_FrmObjetos='Objetos y Campos de datos';
+	$MULTILANG_FrmDesObjetos='Agregar un objeto o campo de datos';
+	$MULTILANG_FrmDesCampos='Dise&ntilde;o general de campos';
+	$MULTILANG_FrmAcciones='Acciones, botones y comandos';
+	$MULTILANG_FrmDesBoton='Agregar bot&oacute;n o acci&oacute;n';
+	$MULTILANG_FrmDesAcciones='Definici&oacute;n general de acciones';
+	$MULTILANG_FrmVolverLista='Volver a lista de formularios';
+	$MULTILANG_FrmErr1='Debe indicar un t&iacute;tulo v&aacute;lido para el formulario.';
+	$MULTILANG_FrmErr2='Debe indicar un nombre v&aacute;lido para la tabla de datos asociada al formulario.';
+	$MULTILANG_FrmAgregar='Agregar nuevo formulario';
+	$MULTILANG_FrmDetalles='Defina los detalles del formulario';
+	$MULTILANG_FrmTitVen='T&iacute;tulo de ventana';
+	$MULTILANG_FrmDesTit='Texto que aparecer&aacute; en la parte superior de la ventana de formulario o barra de t&iacute;tulo';
+	$MULTILANG_FrmHlp='T&iacute;tulo de ayuda';
+	$MULTILANG_FrmDesHlp='Texto que aparecer&aacute; como encabezado para el texto de ayuda del formulario';
+	$MULTILANG_FrmTxt='Texto de ayuda';
+	$MULTILANG_FrmDesTxt='Texto completo con la descripcion de funciones resumida para el formulario.  Puede ser cualquier texto introductorio para el usuario';
+	$MULTILANG_FrmImagen='Im&aacute;gen de ayuda';
+	$MULTILANG_FrmNumeroCols='N&uacute;mero columnas';
+	$MULTILANG_FrmDesNumeroCols='Indica en cuantas columnas deben desplegarse los campos cuando el formulario sea cargado';
+	$MULTILANG_FrmCreaDisena='Crear y dise&ntilde;ar';
+	$MULTILANG_FrmTitForms='Formularios ya definidos en el sistema';
+	$MULTILANG_FrmCamposAcciones='Campos y acciones';
+	$MULTILANG_FrmAdvDelForm='IMPORTANTE:  Al eliminar el formulario los usuarios no podr&aacute;n accesarlo nuevamente para operaciones de consulta o ingreso de datos definidas en &eacute;l y no podr&aacute; deshacer esta operaci&oacute;n. Esto tambien elimina cualquier dise&ntilde;o interno del formulario.\nEst&aacute; seguro que desea continuar ?';
+	
 
 
 	//Proceso de instalacion
