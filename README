@@ -48,7 +48,32 @@
             |___/ 
 ----------------------------------------
 Versión 13.5 (2013-05-02)
-
+  * Added: Panel de control de configuración por el admin
+  * Added: Autenticacion externa opcional mediante LDAP
+  * Added: Soporte a encripción de claves en motores de autenticación externos sobre 11 tipos de algoritmo diferentes
+  * Added: Nuevo módulo embebido para administracion LDAP disponible para descarga usando phpldapadmin-1.2.3
+  * Added: Archivo def_basedatos contiene ahora la lista de campos por tabla para mejorar consultas
+  * Added: Ahora los errores en tiempo de ejecución asociados a base de datos muestran el detalle del query para facilitar su depuración
+  * Added: Mejora sustancial en la edición de campos sobre diseño de formularios. Dinámicamente permite cambio de tipos y propiedades
+  * Added: Inicio del soporte multi-idioma
+  * Added: Funcion de auditar para simplificar el codigo y dejarla disponible en el framework para funciones personalizadas
+  * Added: Campo para almacenar scripts de java sobre formularios con funciones de autoejecucion y cualquier otra definida por el usuario
+  * Fixed: Scripts PostgreSQL para proceso de instalación
+  * Fixed: Scripts SQLite para procesdo de instalación
+  * Fixed: Modo de depuracion siempre era desactivado en edición de configuración
+  * Fixed: Se deja numero de version informativo al inicio del instalador
+  * Fixed: Bloqueo de cambio de claves en motores de autenticación externos
+  * Fixed: Autonomía del admin para cambios de clave siempre sobre Práctico
+  * Fixed: Validaciones en tiempo de instalación de PHP y extensiones requeridas
+  * Fixed: Consultas que requieren valor boobleano en postgresql se reemplazan de vble por vble=1
+  * Fixed: Asistente de instalación, selección de motores y scripts asociados sobre /sql
+  * Fixed: Error en conexiones PostgreSQL derivado de setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  * Fixed: Especificación de lista de campos para cada query Insert para mejora de compatibilidad entre motores
+  * Fixed: Ajuste sobre captcha (posición sobre arreglo plantilla) para compatibilidad PHP 5.3+
+  * Fixed: Corrección en creación de ruta cuando el motor seleccionado es SQLite durante instalación
+  * Fixed: Valores MD5 son calculados por PHP para compatibilidad con motores que no tienen esa función
+  * Fixed: Ajuste a instalador para selección de motor SQLite.
+  * Fixed: Ajuste paso de isntalación con ayudas para selección de motor y condiciones
 ----------------------------------------
 Versión 13.4 (2013-04-01)
   * Added: Se permite la consulta de auditoria por usuario especifico

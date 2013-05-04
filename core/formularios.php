@@ -1557,6 +1557,9 @@ if ($accion=="editar_formulario")
 			$mensaje_error="";
 			if ($titulo=="") $mensaje_error.=$MULTILANG_FrmErr1.'<br>';
 			if ($tabla_datos=="") $mensaje_error.=$MULTILANG_FrmErr2.'<br>';
+			//escapa cadenas antes de ser enviadas a consulta
+			//$javascript=$ConexionPDO->quote($javascript);
+
 			if ($mensaje_error=="")
 				{
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES ('$titulo','$ayuda_titulo','$ayuda_texto','$ayuda_imagen','$tabla_datos','$columnas','$javascript')");
@@ -1602,6 +1605,44 @@ if ($accion=="administrar_formularios")
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_formulario">
 			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
+
+
+
+
+
+				<!-- INICIO DE MARCOS POPUP -->
+				<div id='FormularioScripts' class="FormularioPopUps">
+					<?php
+						abrir_ventana($MULTILANG_FrmTitComandos,'#BDB9B9','');
+					?>
+						<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
+							<tr>
+								<td>
+									<?php echo $MULTILANG_FrmHlpFunciones; ?>
+								</td>
+							</tr>
+							<tr>
+								<td>
+<textarea name="javascript" cols="100" rows="20" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)">
+function FrmAutoRun()
+	{
+		//Aqui sus instrucciones
+	}
+</textarea>
+								</td>
+							</tr>
+						</table>
+					<?php
+						abrir_barra_estado();
+							echo '<input type="Button"  class="BotonesEstadoCuidado" value=" '.$MULTILANG_Finalizado.' " onClick="OcultarPopUp(\'FormularioScripts\')">';
+						cerrar_barra_estado();
+						cerrar_ventana();
+					?>
+				<!-- FIN DE MARCOS POPUP -->
+				</div>
+
+
+
 			<div align=center>
 						
 			<br><?php echo $MULTILANG_FrmDetalles; ?>:
@@ -1664,7 +1705,12 @@ if ($accion=="administrar_formularios")
 							</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesNumeroCols; ?>"><img src="img/icn_10.gif" border=0></a>
 						</td>
 					</tr>
-
+					<tr>
+						<td align="right"></td>
+						<td>
+							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_FrmAdvDelForm; ?>" onClick="javascript:AbrirPopUp('FormularioScripts');">
+						</td>
+					</tr>
 					<tr>
 						<td>
 							</form>

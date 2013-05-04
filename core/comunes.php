@@ -1330,6 +1330,12 @@
 
 			//Cierra todo el formulario
 			echo '</form>';
+			
+			//Carga las funciones JavaScript asociadas al formulario y llama la funcion FrmAutoRun()
+				echo '<script type="text/javascript">'.$registro_formulario["javascript"].' FrmAutoRun(); </script>';
+			
+			
+			
 			if ($en_ventana) cerrar_ventana();
 		  }
 

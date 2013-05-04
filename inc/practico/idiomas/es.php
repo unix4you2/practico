@@ -46,6 +46,7 @@
 	$MULTILANG_Campo='Campo';
 	$MULTILANG_Cancelar='Cancelar';
 	$MULTILANG_CaracteresCaptcha='N&uacute;mero de caracteres para captcha?';
+	$MULTILANG_Cerrar='Cerrar';
 	$MULTILANG_CerrarSesion='Cerrar sesi&oacute;n';
 	$MULTILANG_Cliente='Cliente';
 	$MULTILANG_Columna='Columna';
@@ -65,7 +66,9 @@
 	$MULTILANG_Error='Error';
 	$MULTILANG_Estado='Estado';
 	$MULTILANG_Etiqueta='Etiqueta';
+	$MULTILANG_Finalizado='Finalizado';
 	$MULTILANG_Formularios='Formularios';
+	$MULTILANG_Grande='Grande';
 	$MULTILANG_Guardar='Guardar';
 	$MULTILANG_IdiomaPredeterminado='Idioma predeterminado';
 	$MULTILANG_Importante='Importante';
@@ -83,6 +86,7 @@
 	$MULTILANG_OpcionesMenu='Opciones de menu';
 	$MULTILANG_Paso='Paso';
 	$MULTILANG_Peso='Peso';
+	$MULTILANG_Pequeno='peque&ntilde;o';
 	$MULTILANG_PlantillaActiva='Plantilla gr&aacute;fica activa';
 	$MULTILANG_ProcesoFin='Proceso finalizado';
 	$MULTILANG_Puerto='Puerto';
@@ -97,6 +101,7 @@
 	$MULTILANG_Titulo='T&iacute;tulo';
 	$MULTILANG_TotalRegistros='Total registros encontrados';
 	$MULTILANG_Usuario='Usuario';
+	$MULTILANG_Vacio='Vac&iacute;o';
 	$MULTILANG_Version='Versi&oacute;n';
 	$MULTILANG_ZonaHoraria='Zona horaria';
 	
@@ -298,6 +303,7 @@
 	$MULTILANG_FrmDesBot='Texto que aparecer&aacute; sobre el bot&oacute;n';
 	$MULTILANG_FrmEstilo='Estilo';
 	$MULTILANG_FrmEstilo1='Predeterminado - bot&oacute;n normal';
+	$MULTILANG_FrmEstilo1b='Bot&oacute;n normal';
 	$MULTILANG_FrmEstilo2='Boton de acci&oacute;n que requiere cuidado';
 	$MULTILANG_FrmDesEstilo='Apariencia gr&aacute;fica del control';
 	$MULTILANG_FrmTipoAccion='Tipo de acci&oacute;n';
@@ -358,8 +364,94 @@
 	$MULTILANG_FrmTitForms='Formularios ya definidos en el sistema';
 	$MULTILANG_FrmCamposAcciones='Campos y acciones';
 	$MULTILANG_FrmAdvDelForm='IMPORTANTE:  Al eliminar el formulario los usuarios no podr&aacute;n accesarlo nuevamente para operaciones de consulta o ingreso de datos definidas en &eacute;l y no podr&aacute; deshacer esta operaci&oacute;n. Esto tambien elimina cualquier dise&ntilde;o interno del formulario.\nEst&aacute; seguro que desea continuar ?';
+	$MULTILANG_FrmAdvDelForm='Editar scripts (avanzado)';
+	$MULTILANG_FrmHlpFunciones='Todas las funciones JavaScript definidas en este espacio ser&aacute;n inclu&iacute;das al formulario cada vez que sea cargado.<br>Si requiere comportamientos adicionales o eventos especificos lanzados por medio de botones o dem&aacute;s objetos<br> en su formulario este es el espacio para definirlos.<br><b>Al utilizar comillas en parametros y funciones estas deben ser siempre dobles</b>, no simples.<br>La funci&oacute;n FrmAutoRun siempre debe existir (aunque sea vac&iacute;a) pues ser&aacute; ejecutada autom&aacute;ticamente en cada carga del Formulario.';
 	
-
+	//Informes
+	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';
+	$MULTILANG_InfErr2='Debe indicar un t&iacute;tulo v&aacute;lido para el informe.';
+	$MULTILANG_InfErr3='Debe indicar un nombre v&aacute;lido para la categor&iacute;a asociada al informe.';
+	$MULTILANG_InfErrCondicion='La condici&oacute;n especificada no es v&aacute;lida o carece de al menos uno de sus lados de comparaci&oacute;n.';
+	$MULTILANG_InfErrCampo='Debe indicar un nombre de campo v&aacute;lida para el origen de datos del informe.';
+	$MULTILANG_InfErrTabla='Debe indicar un nombre de tabla v&aacute;lida para el origen de datos del informe.';
+	$MULTILANG_InfErr4='Debe indicar un t&iacute;tulo o etiqueta v&aacute;lida para el bot&oacute;n.';
+	$MULTILANG_InfErr5='Debe indicar una acci&oacute;n v&aacute;lido para ser ejecutada cuando se active el control.';
+	$MULTILANG_InfAgregaTabla='Agregar una nueva tabla al informe';
+	$MULTILANG_InfTablaManual='Especificar tabla manualmente';
+	$MULTILANG_InfDesTablaManual='En caso de no seleccionar una tabla en la parte superior puede indicar aqu&iacute; el nombre de una tabla.  Esta opci&oacuten es &uacute;til cuando requiere acceder a informaci&oacute;n contenida en tablas internas de Pr&aacute;ctico o tablas creadas mediante otras aplicaciones';
+	$MULTILANG_InfAliasManual='Especificar un alias manualmente';
+	$MULTILANG_InfDesAliasManual='Util para definir el nombre de una tabla generada a partir de una subconsulta o indicada manualmente';
+	$MULTILANG_InfBtnAgregaTabla='Agregar tabla';
+	$MULTILANG_InfTablasDef='Tablas definidas en este informe';
+	$MULTILANG_InfAlias='Alias';
+	$MULTILANG_InfAdvBorrado='IMPORTANTE:  Al eliminar el objeto seleccionado la consulta o informe puede ser inconsistente.\nEst&aacute; seguro que desea continuar ?';
+	$MULTILANG_InfAgregaCampo='Agregar un nuevo campo al informe';
+	$MULTILANG_InfCampoDatos='Campo de datos';
+	$MULTILANG_InfCampoManual='Especificar campo manualmente';
+	$MULTILANG_InfDesCampoManual='En caso de no seleccionar un campo en la parte superior puede indicar aqu&iacute; el nombre de un campo.  Esta opci&oacuten es &uacute;til cuando requiere acceder a informaci&oacute;n contenida en campos internos de Pr&aacute;ctico o campos creadas mediante otras aplicaciones';
+	$MULTILANG_InfDesAliasManual2='Util para definir el nombre de un campo generado a partir de una subconsulta de agrupaci&oacute;n o indicado manualmente';
+	$MULTILANG_InfBtnAgregaCampo='Agregar campo';
+	$MULTILANG_InfCamposDef='Campos definidos en este informe';
+	$MULTILANG_InfAddCondicion='Agregar una nueva condici&oacute;n al informe';
+	$MULTILANG_InfPrimer='Primer campo o valor';
+	$MULTILANG_InfOperador='Operador de comparaci&oacute;n';
+	$MULTILANG_InfSegundo='Segundo campo o valor';
+	$MULTILANG_InfMayorQue='Mayor';
+	$MULTILANG_InfMenorQue='Menor';
+	$MULTILANG_InfMayorIgualQue='Mayor o Igual';
+	$MULTILANG_InfMenorIgualQue='Menor o Igual';
+	$MULTILANG_InfDiferenteDe='Diferente';
+	$MULTILANG_InfIgualA='Igual';
+	$MULTILANG_InfDesManual='En cualquiera de los campos manuales puede encerrar expresiones o valores tipo cadena de caracteres utilizando comillas dobles';
+	$MULTILANG_InfOperador='Agregar un agrupador de expresiones o un operador l&oacute;gico ';
+	$MULTILANG_InfOpParentesisA='Abrir par&eacute;ntesis';
+	$MULTILANG_InfOpParentesisC='Cerrar par&eacute;ntesis';
+	$MULTILANG_InfOpAND='Y L&oacute;gico';
+	$MULTILANG_InfOpOR='O L&oacute;gico';
+	$MULTILANG_InfOpNOT='Negaci&oacute;n';
+	$MULTILANG_InfOpXOR='O Exclusivo';
+	$MULTILANG_InfTitOp='Cu&aacute;ndo utilizar esta opci&oacute;n?';
+	$MULTILANG_InfDesOp='Si usted requiere agregar m&aacute;s de una sentencia a su condici&oacute;n de filtrado de resultados o si requiere agrupar varias condiciones para tener precedencia sobre algunas operaciones entonces puede utilizar esta opci&oacute;n.  Trabaja de manera independiente y debe ser agregada como un registro aparte de la consulta';
+	$MULTILANG_InfReco1='Recomendaci&oacute;n';
+	$MULTILANG_InfReco2='No olvide agregar operadores AND seguidos de cada condici&oacute;n que relacione llaves for&aacute;neas entre las diferentes tablas del informe cuando aplique (generalmente cuando usa m&aacute;s de una tabla).';
+	$MULTILANG_InfBtnAddCondic='Agregar condicion / operador';
+	$MULTILANG_InfDefCond='Condiciones definidas en este informe';
+	$MULTILANG_InfTitGrafico='Especifica tipos de gr&aacute;fico a generar por el informe';
+	$MULTILANG_InfSeriesGrafico1='SERIES PARA EL GRAFICO';
+	$MULTILANG_InfSeriesGrafico2='Gr&aacute;ficos con m&uacute;ltiples series deben devolver el mismo n&uacute;mero de etiquetas';
+	$MULTILANG_InfNomSerie='Nombre de la Serie';
+	$MULTILANG_InfCampoEtiqSerie='Campo de etiqueta';
+	$MULTILANG_InfCampoValor='Campo de valor (debe ser num&eacute;rico)';
+	$MULTILANG_InfVistaGrafico1='APARIENCIA y DISTRIBUCION';
+	$MULTILANG_InfVistaGrafico2='Seleccione de acuerdo al n&uacute;mero de series deseadas';
+	$MULTILANG_InfTipoGrafico='Tipo de gr&aacute;fico';
+	$MULTILANG_InfGrafico1='Barras horizontales';
+	$MULTILANG_InfGrafico2='Barras horizontales (multiples series)';
+	$MULTILANG_InfGrafico3='Grafico de linea';
+	$MULTILANG_InfGrafico4='Grafico de linea (multiples series)';
+	$MULTILANG_InfGrafico5='Barras verticales';
+	$MULTILANG_InfGrafico6='Barras verticales (multiples series)';
+	$MULTILANG_InfGrafico6='Grafico de torta (solo una serie)';
+	$MULTILANG_InfActGraf='Actualizar formato del gr&aacute;fico';
+	$MULTILANG_InfAgrupa='Especifica criterios de agrupaci&oacute;n y ordenamiento';
+	$MULTILANG_InfReco3='Utilice solamente campos definidos en su consulta.';
+	$MULTILANG_InfCriterioAgrupa='Criterio de agrupamiento';
+	$MULTILANG_InfCriterioOrdena='Criterio de ordenamiento';
+	$MULTILANG_InfTitAgrupa='Como se agrupan los resultados?';
+	$MULTILANG_InfDesAgrupa='Utilice esta opcion solamente si su informe maneja operaciones como suma, promedio o conteo dentro de los campos desplegados.  Ej. SUM(campo), AVG(campo), COUNT(*).  En esos casos indique por cu&aacute;l o cuales campos separados por coma se debe agrupar los resultados';
+	$MULTILANG_InfTitOrdena='Como se ordenan los resultados?';
+	$MULTILANG_InfDesOrdena='Permite ordenar los resultados por alguno de los desplegados.  Indique por cu&aacute;l o cuales campos separados por coma se debe ordenar los resultados, si lo desea despu&eacute;s de cada campo puede utilizar el modificador ASC o DESC para indicar si es ascedente o descendente';
+	$MULTILANG_InfActCriterios='Actualizar criterios de agrupoaci&oacute;n y ordenamiento';
+	$MULTILANG_InfTitBotones='Agregar botones y acciones a cada registro';
+	$MULTILANG_InfDelReg='Eliminar registro';
+	$MULTILANG_InfCargaForm='Cargar un formulario por ID';
+	$MULTILANG_InfHlpAccion='Si desea cargar un formulario utilice la notaci&oacute;n  ID:1:CampoBusqueda<br>Si desea eliminar el registro asociado indique la tabla.campo usada para comparar';
+	$MULTILANG_InfVinculo='Campo de v&iacute;nculo';
+	$MULTILANG_InfDesVinculo='IMPORTANTE: Se asumir&aacute; el primer campo o columna como de valor &uacute;nico<br>
+				para realizar las operaciones de eliminaci&oacute;n o apertura de<br>
+				nuevos formularios.  Se recomienda utilizar campos que realmente sean de<br>
+				valor &uacute;nico a menos que se deseen operaciones grupales.';
+	$MULTILANG_InfDesPeso='Posicion en la que aparece el boton dentro de los creados al lado derecho de cada registro. Orden de izquierda a derecha.';
 
 	//Proceso de instalacion
 	$MULTILANG_Instalacion='Proceso de instalaci&oacute;n';
