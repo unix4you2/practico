@@ -35,6 +35,7 @@
 	$MULTILANG_Accion='Accion';
 	$MULTILANG_Actualizacion='Actualizaci&oacute;n';
 	$MULTILANG_Administre='Administre';
+	$MULTILANG_Agregar='Agregar';
 	$MULTILANG_Anonimo='An&oacute;nimo';
 	$MULTILANG_Anterior='Anterior';
 	$MULTILANG_Apagado='Apagado';
@@ -69,8 +70,10 @@
 	$MULTILANG_Finalizado='Finalizado';
 	$MULTILANG_Formularios='Formularios';
 	$MULTILANG_Grande='Grande';
+	$MULTILANG_Grafico='Gr&aacute;fico';
 	$MULTILANG_Guardar='Guardar';
 	$MULTILANG_IdiomaPredeterminado='Idioma predeterminado';
+	$MULTILANG_Imagen='Imagen';
 	$MULTILANG_Importante='Importante';
 	$MULTILANG_InfoAdicional='Informaci&oacute;n adicional';
 	$MULTILANG_Informes='Informes';
@@ -81,6 +84,7 @@
 	$MULTILANG_MotorBD='Motor de Base de Datos';
 	$MULTILANG_Ninguno='Ninguno';
 	$MULTILANG_No='No';
+	$MULTILANG_Nombre='Nombre';
 	$MULTILANG_NombreRAD='Nombre RAD';
 	$MULTILANG_Opcional='Opcional';
 	$MULTILANG_OpcionesMenu='Opciones de menu';
@@ -134,6 +138,8 @@
 	$MULTILANG_ErrDriverPDO=$MULTILANG_PHPSinSoporte.' para PDO activado. '.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ObjetoNoExiste='El objeto asociado a esta solicitud no existe.';
 	$MULTILANG_ErrorDatos='Problema en los datos ingresados';
+	$MULTILANG_ErrorTitAuth='<blink>ACCESO NEGADO!</blink>';
+	$MULTILANG_ErrorDesAuth='Las credenciales suministradas para el acceso al sistema no fueron aceptadas.  Algunas causas comunes son:<br><li>El nombre de usuario o contrase&ntilde;a son incorrectos.<br><li>C&oacute;digo de seguridad ingresado de manera incorrecta.<br><li>Su usuario est&aacute; deshabilitado.<br><li>Cuenta bloqueada por multiples intentos de acceso con clave incorrecta.';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_TitDisenador='Dise&ntilde;ar la aplicaci&oacute;n, <b>es simple y r&aacute;pido:</b>';
@@ -452,6 +458,107 @@
 				nuevos formularios.  Se recomienda utilizar campos que realmente sean de<br>
 				valor &uacute;nico a menos que se deseen operaciones grupales.';
 	$MULTILANG_InfDesPeso='Posicion en la que aparece el boton dentro de los creados al lado derecho de cada registro. Orden de izquierda a derecha.';
+	$MULTILANG_InfFiltrar='Filtrar los resultados mediante condiciones espec&iacute;ficas';
+	$MULTILANG_InfCampoAgrupa='Permite definir campos de agrupaci&oacute;n para informes con operaciones de suma, promedio o conteo y los campos para el ordenamiento de resultados';
+	$MULTILANG_InfTablasOrigen='Tablas de datos origen';
+	$MULTILANG_InfCamposOrigen='Campos de datos';
+	$MULTILANG_InfCondiciones='Condiciones';
+	$MULTILANG_InfPropGraf='Propiedades del Gr&aacute;fico';
+	$MULTILANG_InfDesGraf='Define las propiedades y apariencia del gr&aacute;fico desplegado por el informe';
+	$MULTILANG_InfDesAccion='Define acciones que pueden ser ejecutadas sobre cada registro desplegado por el informe como Elimina, Abrir un formulario, funciones de usuario, etc.';
+	$MULTILANG_InfVolver='Volver a lista de informes';
+	$MULTILANG_InfTitulo='T&iacute;tulo del informe o gr&aacute;fico';
+	$MULTILANG_InfDesTitulo='Texto que aparecer&aacute; en la parte superior del informe generado';
+	$MULTILANG_InfDescripcion='Descripci&oacute;n';
+	$MULTILANG_InfDesDescrip='Texto descriptivo del informe.  No aparece en su generaci&oacute;n pero es usado para orientar al usuario en su selecci&oacute;n';
+	$MULTILANG_InfCategoria='Categor&iacute;a';
+	$MULTILANG_InfDesCateg='Cuando el usuario tiene acceso al panel de informes del sistema estos son clasificados por categor&iacute;as.  Ingrese aqui un nombre de categor&iacute;a bajo el cual desee presentar este informe a los usuarios.';
+	$MULTILANG_InfNivelUsuario='Nivel de usuario';
+	$MULTILANG_InfTodoUsuario='Todos los usuarios';
+	$MULTILANG_InfParam='Editar par&aacute;metros generales del informe';
+	$MULTILANG_InfTitNivel='Quienes pueden ver este informe?';
+	$MULTILANG_InfDesNivel='Indique el perfil de usuario que se debe tener para ver este informe como disponible.';
+	$MULTILANG_InfAlto='Alto';
+	$MULTILANG_InfTitAncho='Establecer ancho fijo?';
+	$MULTILANG_InfDesAncho='Este valor aplica si ha especificado tambien un alto. Si requiere que el informe aparezca dentro de un marco de ancho fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o.  En el caso de los gr&aacute;ficos especifica su tama&ntilde;o de imagen.';
+	$MULTILANG_InfTitAlto='Establecer alto fijo?';
+	$MULTILANG_InfDesAlto='Este valor aplica si ha especificado tambien un ancho. Si requiere que el informe aparezca dentro de un marco de alto fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o.  En el caso de los gr&aacute;ficos especifica su tama&ntilde;o de imagen.';
+	$MULTILANG_InfHlpAnchoalto='agregar <b>px</b> &oacute; <b>%</b> seg&uacute;n el caso';
+	$MULTILANG_InfFormato='Formato final';
+	$MULTILANG_InfTitFormato='Como se visualiza este informe?';
+	$MULTILANG_InfDesFormato='Indica si el producto final del informe ser&aacute; un tabla de datos o un gr&aacute;fico.';
+	$MULTILANG_InfActualizar='Actualizar informe';
+	$MULTILANG_InfVistaPrev='Vista previa del informe';
+	$MULTILANG_InfCargaPrev='Cargar vista previa';
+	$MULTILANG_InfHlpCarga='Esta opci&oacute;n cerrar&aacute; el modo de dise&ntilde;o<br> y cargar&aacute; el informe tal y como ser&aacute; visualizado<br> por un usuario de la aplicaci&oacute;n';
+	$MULTILANG_InfErrInforme1='Debe indicar un t&iacute;tulo v&aacute;lido para el informe.';
+	$MULTILANG_InfErrInforme2='Debe indicar un nombre v&aacute;lido para la categor&iacute;a asociada al informe.';
+	$MULTILANG_InfTituloAgr='Agregar nuevo informe o gr&aacute;fico';
+	$MULTILANG_InfDetalles='Defina los detalles del informe/gr&aacute;fico';
+	$MULTILANG_InfDefinidos='Informes/Gr&aacute;ficos ya definidos en el sistema';
+	$MULTILANG_InfcamTabCond='Campos, Tablas y Condiciones';
+	$MULTILANG_InfAdvEliminar='IMPORTANTE:  Al eliminar el informe los usuarios no podr&aacute;n accesarlo nuevamente para operaciones de consulta definidas en &eacute;l y no podr&aacute; deshacer esta operaci&oacute;n. Esto tambien elimina cualquier dise&ntilde;o interno del informe.\nEst&aacute; seguro que desea continuar ?';
+	
+	//Menus
+	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';
+	$MULTILANG_MnuSelImagen='Haga clic sobre una im&aacute;gen para seleccionarla';
+	$MULTILANG_MnuPropiedad='Propiedades del item';
+	$MULTILANG_MnuApariencia='CONFIGURACION DE APARIENCIA Y UBICACION';
+	$MULTILANG_MnuTexto='Texto';
+	$MULTILANG_MnuPadre='Padre';
+	$MULTILANG_MnuSiAplica='Si aplica';
+	$MULTILANG_MnuUbicacion='Ubicaci&oacute;n de esta opci&oacute;n';
+	$MULTILANG_MnuArriba='Posible arriba?';
+	$MULTILANG_MnuEscritorio='Posible escritorio?';
+	$MULTILANG_MnuCentro='Posible en el centro?';
+	$MULTILANG_MnuSeccion='Secci&oacute;n';
+	$MULTILANG_MnuDesArriba='Se debe habilitar esta opci&oacute;n para ser desplegada en la barra de menu superior-horizontal?';
+	$MULTILANG_MnuDesEscritorio='Se debe habilitar esta opci&oacute;n para ser desplegada como un icono en el escritorio del usuario?';
+	$MULTILANG_MnuDesCentro='Se debe habilitar esta opci&oacute;n para ser desplegada en la parte central del aplicativo, dentro de ventanas clasificadas/agrupadas por el valor definido en el campo Seccion?';
+	$MULTILANG_MnuDesImagen='Desplegar una lista de im&aacute;genes disponibles en el sistema';
+	$MULTILANG_MnuComandos='CONFIGURACION DE COMANDOS Y ACCIONES';
+	$MULTILANG_MnuClic='Posible hacer clic?';
+	$MULTILANG_MnuURL='URL est&aacute;tica';
+	$MULTILANG_MnuTitURL='Llevar a una URL o ejecutar un javascript?';
+	$MULTILANG_MnuDesURL='Ingrese una URL completa o un comando javascript definido por javascript:comando para ser reemplazadas dentro de un HREF de un ancla generada alrededor del objeto';
+	$MULTILANG_MnuTipo='Tipo de comando';
+	$MULTILANG_MnuInterno='Interno';
+	$MULTILANG_MnuPersonal='Personal';
+	$MULTILANG_MnuObjeto='Objeto';
+	$MULTILANG_MnuAccion='Acci&oacute;n interna/comando/objeto';
+	$MULTILANG_MnuTitAccion='Indique uno de tres valores posibles as&iacute;';
+	$MULTILANG_MnuDesAccion='1) EL OBJETO dise&ntilde;ado en Pr&aacute;ctico y al cual se quiere enlazar la opci&oacute;n mediante el formato frm:XXX &oacute; inf:XXX donde debe reemplazar XXX por el identificador &uacute;nico del objeto que se obtiene despu&eacute;s de haber sido creado (ID del formulario o del informe),  2) LA ACCION INTERNA de Pr&aacute;ctico hacia la cual debe ser direccionado el usuario (normalmente se encuentra en la parte inferior de la pantalla), &oacute; 3) COMANDO PERSONALIZADO: La secuencia de comandos definida/programada por el usuario y existente en el archivo personalizadas.php';
+	$MULTILANG_MnuTitNivel='Quienes pueden ver esta opci&oacute;n?';
+	$MULTILANG_MnuDesNivel='Indique el perfil de usuario que se debe tener para ver esta opci&oacute;n como disponible.';
+	$MULTILANG_MnuActualiza='Actualizar menu';
+	$MULTILANG_MnuErr='Se requiere el campo de texto como m&iacute;nimo.';
+	$MULTILANG_MnuAdmin='Administraci&oacute;n del men&uacute; principal';
+	$MULTILANG_MnuAgregar='Agregar opci&oacute;n al men&uacute;';
+	$MULTILANG_MnuDefinidos='Secciones y comandos de men&uacute; definidos';
+	$MULTILANG_MnuNivel='Nivel';
+	$MULTILANG_MnuComando='Comando';
+	$MULTILANG_MnuAdvElimina='IMPORTANTE:  Al eliminar el registro pueden quedar sin vincular algunas opciones del sistema.\nEst&aacute; seguro que desea continuar ?';
+
+	//Objetos
+	$MULTILANG_ObjError='El tipo de objeto recibido en este comando es desconocido';
+	
+	//Tablas
+	$MULTILANG_TblError1='Problema de integridad en dise&ntilde;o';
+	$MULTILANG_TblError2='ERROR DE BASE DE DATOS';
+	$MULTILANG_TblError3='Durante la ejecucion el motor ha retornado lo siguiente';
+	$MULTILANG_TblAgrCampo='Agregar campos en la tabla de datos';
+	$MULTILANG_TblAgrCampoTabla='Agregar un campo a la tabla';
+	$MULTILANG_TblEntero='Entero';
+	$MULTILANG_TblCadena='Cadena (longitud Hasta 255)';
+	$MULTILANG_TblTexto='Texto (Ilimitado)';
+	$MULTILANG_TblFecha='Fecha (sin hora)';
+	$MULTILANG_TblTitNombre='Ayuda de formato para nombre del campo';
+	$MULTILANG_TblDesNombre='Nombre del campo sin guiones, puntos, espacios o caracteres especiales';
+	$MULTILANG_TblLongitud='Longitud';
+	$MULTILANG_TblAutoinc='Autoincremento';
+	$MULTILANG_TblDesLongitud='Este campo puede ser de car&aacute;cter obligatorio dependiendo del tipo de dato a ser almacenado, ejemplo campos tipo Cadena';
+	$MULTILANG_TblDesLongitud2='Formato: Si alguna vez necesita poner una barra invertida (backslash) o una comilla simple entre esos valores, siempre ponga una barra invertida adicional (backslash).  Para campos enum o set, use el formato: \'a\',\'b\',\'c\'...';
+	
 
 	//Proceso de instalacion
 	$MULTILANG_Instalacion='Proceso de instalaci&oacute;n';

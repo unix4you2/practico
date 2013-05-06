@@ -1213,15 +1213,15 @@ if ($accion=="editar_informe")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioAcciones' class="FormularioPopUps">
 			<?php
-				abrir_ventana('Definici&oacute;n general de acciones y comandos','#BDB9B9','');
+				abrir_ventana($MULTILANG_FrmTitComandos,'#BDB9B9','');
 			?>
 					<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
 						<tr>
-							<td bgcolor="#D6D6D6"><b>Etiqueta</b></td>
-							<td bgcolor="#d6d6d6"><b>Tipo de acci&oacute;n</b></td>
-							<td bgcolor="#d6d6d6"><b>Acci&oacute;n Usuario</b></td>
-							<td bgcolor="#d6d6d6"><b>Orden</b></td>
-							<td bgcolor="#d6d6d6"><b>Visible</b></td>
+							<td bgcolor="#D6D6D6"><b><?php echo $MULTILANG_Etiqueta; ?></b></td>
+							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_FrmTipoAccion; ?></b></td>
+							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_FrmAccUsuario; ?></b></td>
+							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_FrmOrden; ?></b></td>
+							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_FrmVisible; ?></b></td>
 							<td></td>
 							<td></td>
 						</tr>
@@ -1261,9 +1261,9 @@ if ($accion=="editar_informe")
 									';
 
 									echo '
-										<a href="javascript:bifoce'.$registro["id"].'.submit();" title="Aumentar peso (bajar)" name=""><img src="img/bajar.png" border=0></a> 
+										<a href="javascript:bifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" name=""><img src="img/bajar.png" border=0></a> 
 										'.$registro["peso"].'
-										<a href="javascript:bifopa'.$registro["id"].'.submit();" title="Disminuir peso (subir)" name=""><img src="img/subir.png" border=0></a>
+										<a href="javascript:bifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" name=""><img src="img/subir.png" border=0></a>
 										';
 								
 								echo '</td>';
@@ -1281,9 +1281,9 @@ if ($accion=="editar_informe")
 												<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 											';
 									if ($registro["visible"])
-										echo '<input type="hidden" name="valor" value="0"><a href="javascript:bif'.$registro["id"].'.submit();" title="Cambiar estado" name=""><img src="img/on.png" border=0></a>';
+										echo '<input type="hidden" name="valor" value="0"><a href="javascript:bif'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><img src="img/on.png" border=0></a>';
 									else
-										echo '<input type="hidden" name="valor" value="1"><a href="javascript:bif'.$registro["id"].'.submit();" title="Cambiar estado" name=""><img src="img/off.png" border=0></a>';
+										echo '<input type="hidden" name="valor" value="1"><a href="javascript:bif'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><img src="img/off.png" border=0></a>';
 								echo '</form></td>';
 										echo '<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" name="bf'.$registro["id"].'" id="bf'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
@@ -1291,7 +1291,7 @@ if ($accion=="editar_informe")
 														<input type="hidden" name="boton" value="'.$registro["id"].'">
 														<input type="hidden" name="informe" value="'.$informe.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-														<input type="button" value="Eliminar"  class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar el bot&oacute;n/acci&oacute;n los usuarios no podr&aacute;n verlo o ejecutar el comando asociado a este y no podr&aacute; deshacer esta operaci&oacute;n luego.\nEst&aacute; seguro que desea continuar ?\',bf'.$registro["id"].');">
+														<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_FrmAdvDelBoton.'\',bf'.$registro["id"].');">
 														<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 												</form>
 										</td>
@@ -1314,7 +1314,7 @@ if ($accion=="editar_informe")
 			</div>
 			<?php
 				abrir_barra_estado();
-					echo '<input type="Button"  class="BotonesEstadoCuidado" value="Cerrar" onClick="OcultarPopUp(\'FormularioAcciones\')">';
+					echo '<input type="Button"  class="BotonesEstadoCuidado" value="'.$MULTILANG_Cerrar.'" onClick="OcultarPopUp(\'FormularioAcciones\')">';
 				cerrar_barra_estado();
 				cerrar_ventana();
 			?>
@@ -1335,20 +1335,20 @@ if ($accion=="editar_informe")
 
 		<table><tr><td valign=top>
 			<?php 
-				abrir_ventana('Barra de herramientas','#BDB9B9',''); 
+				abrir_ventana($MULTILANG_BarraHtas,'#BDB9B9',''); 
 			?>
 				<div align=center>
-				Tablas de datos origen<br>
-				<a href='javascript:AbrirPopUp("FormularioTablas");' title="Agregar tabla de datos al informe" name=" "><img border='0' src='img/icono_tabla.png'/></a>
+				<?php echo $MULTILANG_InfTablasOrigen; ?><br>
+				<a href='javascript:AbrirPopUp("FormularioTablas");' title="<?php echo $MULTILANG_InfAgregaTabla; ?>" name=" "><img border='0' src='img/icono_tabla.png'/></a>
 				<hr>
-				Campos de datos<br>
-				<a href='javascript:AbrirPopUp("FormularioCampos");' title="Agregar campo de datos" name=" "><img border='0' src='img/icono_campo.png'/></a>
+				<?php echo $MULTILANG_InfCamposOrigen; ?><br>
+				<a href='javascript:AbrirPopUp("FormularioCampos");' title="<?php echo $MULTILANG_InfAgregaCampo; ?>" name=" "><img border='0' src='img/icono_campo.png'/></a>
 				<hr>
-				Condiciones<br>
-				<a href='javascript:AbrirPopUp("FormularioCondiciones");' title="Filtrar los resultados mediante condiciones espec&iacute;ficas"><img border='0' src='img/icono_diseno.png'/></a>
+				<?php echo $MULTILANG_InfCondiciones; ?><br>
+				<a href='javascript:AbrirPopUp("FormularioCondiciones");' title="<?php echo $MULTILANG_InfFiltrar; ?>"><img border='0' src='img/icono_diseno.png'/></a>
 				<hr>
-				Agrupaci&oacute;n y ordenamiento<br>
-				<a href='javascript:AbrirPopUp("FormularioAgrupacion");' title="Permite definir campos de agrupaci&oacute;n para informes con operaciones de suma, promedio o conteo y los campos para el ordenamiento de resultados"><img border='0' src='img/icono_totalizar.png'/><img border='0' src='img/icono_ordenar.png'/></a>
+				<?php echo $MULTILANG_InfAgrupa; ?><br>
+				<a href='javascript:AbrirPopUp("FormularioAgrupacion");' title="<?php echo $MULTILANG_InfCampoAgrupa; ?>"><img border='0' src='img/icono_totalizar.png'/><img border='0' src='img/icono_ordenar.png'/></a>
 
 				<?php
 					// Si se trata de un informe con grafico como resultado agrega el boton de graficos
@@ -1356,8 +1356,8 @@ if ($accion=="editar_informe")
 						{
 				?>
 					<hr>
-					Propiedades del Gr&aacute;fico<br>
-					<a href='javascript:AbrirPopUp("FormularioGraficos");' title="Define las propiedades y apariencia del gr&aacute;fico desplegado por el informe"><img border='0' src='img/icono_grafico.png'/></a>
+					<?php echo $MULTILANG_InfPropGraf; ?><br>
+					<a href='javascript:AbrirPopUp("FormularioGraficos");' title="<?php echo $MULTILANG_InfDesGraf; ?>"><img border='0' src='img/icono_grafico.png'/></a>
 				<?php
 						}// Fin si es grafico
 				?>
@@ -1369,16 +1369,16 @@ if ($accion=="editar_informe")
 				?>
 					<hr>
 					Acciones para cada registro<br>
-					<a href='javascript:AbrirPopUp("FormularioBotones");' title="Define acciones que pueden ser ejecutadas sobre cada registro desplegado por el informe como Elimina, Abrir un formulario, funciones de usuario, etc."><img border='0' src='img/icono_boton.png'/></a>
+					<a href='javascript:AbrirPopUp("FormularioBotones");' title="<?php echo $MULTILANG_InfDesAccion; ?>"><img border='0' src='img/icono_boton.png'/></a>
 					&nbsp;&nbsp;
-					<a href='javascript:AbrirPopUp("FormularioAcciones");' title="Definici&oacute;n general de acciones"><img border='0' src='img/icono_acciones.png'/></a>
+					<a href='javascript:AbrirPopUp("FormularioAcciones");' title="<?php echo $MULTILANG_FrmDesAcciones; ?>"><img border='0' src='img/icono_acciones.png'/></a>
 				<?php
 						}// Fin si es grafico
 				?>
 
 				<hr>
 				<form action="<?php echo $ArchivoCORE; ?>" method="POST" name="cancelar"><input type="Hidden" name="accion" value="administrar_informes"></form>
-				<input type="Button" onclick="document.cancelar.submit()" value="Volver a lista de informes" class="Botones">
+				<input type="Button" onclick="document.cancelar.submit()" value="<?php echo $MULTILANG_InfVolver; ?>" class="Botones">
 				</div><br>
 			<?php
 				cerrar_ventana();
@@ -1389,72 +1389,73 @@ if ($accion=="editar_informe")
 		?>
 
 
-			<?php abrir_ventana('Editar par&aacute;metros generales del informe','f2f2f2',''); ?>
+			<?php abrir_ventana($MULTILANG_InfParam,'f2f2f2',''); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="actualizar_informe">
 			<input type="Hidden" name="id" value="<?php echo $registro_informe['id']; ?>">
 
 				<table class="TextosVentana">
 					<tr>
-						<td align="right">T&iacute;tulo del informe o gr&aacute;fico:</td>
+						<td align="right"><?php echo $MULTILANG_InfTitulo; ?>:</td>
 						<td><input type="text" name="titulo" value="<?php echo $registro_informe['titulo']; ?>" size="20" class="CampoTexto">
-							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
-							<a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; en la parte superior del informe generado"><img src="img/icn_10.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesTitulo; ?>"><img src="img/icn_10.gif" border=0></a>
 						</td>
 					</tr>
 					<tr>
-						<td align="right">Descripci&oacute;n</td>
-						<td><input type="text" name="descripcion" size="20" value="<?php echo $registro_informe['descripcion']; ?>" class="CampoTexto"><a href="#" title="Ayuda r&aacute;pida:" name="Texto descriptivo del informe.  No aparece en su generaci&oacute;n pero es usado para orientar al usuario en su selecci&oacute;n"><img src="img/icn_10.gif" border=0></a>	</td>
+						<td align="right"><?php echo $MULTILANG_InfDescripcion; ?></td>
+						<td><input type="text" name="descripcion" size="20" value="<?php echo $registro_informe['descripcion']; ?>" class="CampoTexto">
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesDescrip; ?>"><img src="img/icn_10.gif" border=0></a>	</td>
 					</tr>
 					<tr>
-						<td align="right">Categor&iacute;a</td>
+						<td align="right"><?php echo $MULTILANG_InfCategoria; ?></td>
 						<td><input type="text" name="categoria" value="<?php echo $registro_informe['categoria']; ?>" size="20" class="CampoTexto">
-							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
-							<a href="#" title="Ayuda r&aacute;pida:" name="Cuando el usuario tiene acceso al panel de informes del sistema estos son clasificados por categor&iacute;as.  Ingrese aqui un nombre de categor&iacute;a bajo el cual desee presentar este informe a los usuarios."><img src="img/icn_10.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesCateg; ?>"><img src="img/icn_10.gif" border=0></a>
 						</td>
 					</tr>
 					<tr>
-						<td align="RIGHT" valign="TOP"><strong>Nivel de usuario</strong></td>
+						<td align="RIGHT" valign="TOP"><strong><?php echo $MULTILANG_InfNivelUsuario; ?></strong></td>
 						<td>
 							<select  name="nivel_usuario" id="nivel_usuario" class="Combos">
-								<option value="-1" <?php if ($registro_informe["nivel_usuario"]=="-1") echo 'selected'; ?> >Todos los usuarios</option>
+								<option value="-1" <?php if ($registro_informe["nivel_usuario"]=="-1") echo 'selected'; ?> ><?php echo $MULTILANG_InfTodoUsuario; ?></option>
 								<option value="1"  <?php if ($registro_informe["nivel_usuario"]=="1") echo 'selected'; ?> >&#9733;</option>
 								<option value="2"  <?php if ($registro_informe["nivel_usuario"]=="2") echo 'selected'; ?> >&#9733;&#9733;</option>
 								<option value="3"  <?php if ($registro_informe["nivel_usuario"]=="3") echo 'selected'; ?> >&#9733;&#9733;&#9733;</option>
 								<option value="4"  <?php if ($registro_informe["nivel_usuario"]=="4") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;</option>
 								<option value="5"  <?php if ($registro_informe["nivel_usuario"]=="5") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
 							</select>
-							<a href="#" title="Quienes pueden ver este informe?" name="Indique el perfil de usuario que se debe tener para ver este informe como disponible."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_InfTitNivel; ?>" name="<?php echo $MULTILANG_InfDesNivel; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
-						<td align="right">Im&aacute;gen de ayuda</td>
+						<td align="right"><?php echo $MULTILANG_FrmImagen; ?></td>
 						<td>
 							<select  name="ayuda_imagen" class="Combos" >
-								<option value="">Deshabilitado</option>
+								<option value=""><?php echo $MULTILANG_Deshabilitado; ?></option>
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td align="right">Ancho:</td>
-						<td><input type="text" name="ancho"  value="<?php echo $registro_informe['ancho']; ?>" size="4" class="CampoTexto"> (agregar <b>px</b> &oacute; <b>%</b> seg&uacute;n el caso)
-							<a href="#" title="Establecer ancho fijo?" name="Este valor aplica si ha especificado tambien un alto. Si requiere que el informe aparezca dentro de un marco de ancho fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o.  En el caso de los gr&aacute;ficos especifica su tama&ntilde;o de imagen."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+						<td align="right"><?php echo $MULTILANG_FrmAncho; ?>:</td>
+						<td><input type="text" name="ancho"  value="<?php echo $registro_informe['ancho']; ?>" size="4" class="CampoTexto"> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)
+							<a href="#" title="<?php echo $MULTILANG_InfTitAncho; ?>" name="<?php echo $MULTILANG_InfDesAncho; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
-						<td align="right">Alto:</td>
-						<td><input type="text" name="alto"  value="<?php echo $registro_informe['alto']; ?>" size="4" class="CampoTexto">  (agregar <b>px</b> &oacute; <b>%</b> seg&uacute;n el caso)
-							<a href="#" title="Establecer alto fijo?" name="Este valor aplica si ha especificado tambien un ancho. Si requiere que el informe aparezca dentro de un marco de alto fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o.  En el caso de los gr&aacute;ficos especifica su tama&ntilde;o de imagen."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+						<td align="right"><?php echo $MULTILANG_InfAlto; ?>:</td>
+						<td><input type="text" name="alto"  value="<?php echo $registro_informe['alto']; ?>" size="4" class="CampoTexto">  (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)
+							<a href="#" title="<?php echo $MULTILANG_InfTitAlto; ?>" name="<?php echo $MULTILANG_InfDesAlto; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
-						<td align="RIGHT" valign="TOP"><strong>Formato final</strong></td>
+						<td align="RIGHT" valign="TOP"><strong><?php echo $MULTILANG_InfFormato; ?></strong></td>
 						<td>
 							<select  name="formato_final" id="formato_final" class="Combos">
-								<option value="T"  <?php if ($registro_informe["formato_final"]=="T") echo 'selected'; ?> >Tabla de datos</option>
-								<option value="G"  <?php if ($registro_informe["formato_final"]=="G") echo 'selected'; ?> >Gr&aacute;fico</option>
+								<option value="T"  <?php if ($registro_informe["formato_final"]=="T") echo 'selected'; ?> ><?php echo $MULTILANG_TablaDatos; ?></option>
+								<option value="G"  <?php if ($registro_informe["formato_final"]=="G") echo 'selected'; ?> ><?php echo $MULTILANG_Grafico; ?></option>
 							</select>
-							<a href="#" title="Como se visualiza este informe?" name="Indica si el producto final del informe ser&aacute; un tabla de datos o un gr&aacute;fico."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_InfTitFormato; ?>" name="<?php echo $MULTILANG_InfDesFormato; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
@@ -1462,7 +1463,7 @@ if ($accion=="editar_informe")
 							</form>
 						</td>
 						<td>
-							<input type="Button"  class="Botones" value="Actualizar informe" onClick="document.datos.submit()">
+							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_InfActualizar; ?>" onClick="document.datos.submit()">
 						</td>
 					</tr>
 				</table>
@@ -1471,7 +1472,7 @@ if ($accion=="editar_informe")
 			?>
 
 
-			<?php abrir_ventana('Vista previa del informe','f2f2f2',''); ?>
+			<?php abrir_ventana($MULTILANG_InfVistaPrev,'f2f2f2',''); ?>
 
 			<form action="<?php echo $ArchivoCORE; ?>" method="post" name="datosprevios" id="datosprevios" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 			
@@ -1485,8 +1486,8 @@ if ($accion=="editar_informe")
 							</form>
 						</td>
 						<td align=center>
-							Esta opci&oacute;n cerrar&aacute; el modo de dise&ntilde;o<br> y cargar&aacute; el informe tal y como ser&aacute; visualizado<br> por un usuario de la aplicaci&oacute;n: <br>
-							<input type="Button"  class="Botones" value="Cargar vista previa" onClick="document.datosprevios.submit()">
+							<?php echo $MULTILANG_InfHlpCarga; ?>: <br>
+							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_InfCargaPrev; ?>" onClick="document.datosprevios.submit()">
 						</td>
 					</tr>
 				</table>
@@ -1527,24 +1528,14 @@ if ($accion=="editar_informe")
 */
 if ($accion=="eliminar_informe")
 	{
-		$mensaje_error="";
-		if ($mensaje_error=="")
-			{
-				ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe WHERE id='$informe'");
-				ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
-				ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_tablas WHERE informe='$informe'");
-				ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE informe='$informe'");
-				ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe='$informe'");
-				auditar("Elimina informe $id");
-				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_informes"></form>
-						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-			}
-		else
-			{
-				mensaje('<blink>Error eliminando informe!</blink>','El informe especificado no se puede eliminar.','60%','icono_error.png','TextosEscritorio');
-				echo '<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="accion" value="administrar_informes"></form>
-					<br /><input type="Button" onclick="document.cancelar.submit()" name="" value="Cerrar" class="Botones">';
-			}
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe WHERE id='$informe'");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_tablas WHERE informe='$informe'");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE informe='$informe'");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe='$informe'");
+		auditar("Elimina informe $id");
+		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_informes"></form>
+				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
 
 
@@ -1569,8 +1560,8 @@ if ($accion=="eliminar_informe")
 if ($accion=="guardar_informe")
 	{
 		$mensaje_error="";
-		if ($titulo=="") $mensaje_error.="Debe indicar un t&iacute;tulo v&aacute;lido para el informe.<br>";
-		if ($categoria=="") $mensaje_error.="Debe indicar un nombre v&aacute;lido para la categor&iacute;a asociada al informe.<br>";
+		if ($titulo=="") $mensaje_error.=$MULTILANG_InfErrInforme1."<br>";
+		if ($categoria=="") $mensaje_error.=$MULTILANG_InfErrInforme2."<br>";
 		if ($mensaje_error=="")
 			{
 				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES ('$titulo','$descripcion','$categoria','$agrupamiento','$ordenamiento','$nivel_usuario','$ancho','$alto','$formato_final','|!|!|!|')");
@@ -1585,7 +1576,7 @@ if ($accion=="guardar_informe")
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="accion" value="administrar_informes">
-					<input type="Hidden" name="error_titulo" value="Problema en los datos ingresados">
+					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 					</form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -1615,75 +1606,75 @@ if ($accion=="administrar_informes")
 		 ?>
 
 		<table class="TextosVentana"><tr><td valign=top>
-			<?php abrir_ventana('Agregar nuevo informe o gr&aacute;fico','f2f2f2',''); ?>
+			<?php abrir_ventana($MULTILANG_InfTituloAgr,'f2f2f2',''); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_informe">
 			<div align=center>
 						
-			<br>Defina los detalles del informe/gr&aacute;fico:
+			<br><?php echo $MULTILANG_InfDetalles; ?>:
 				<table class="TextosVentana">
 					<tr>
-						<td align="right">T&iacute;tulo del informe o gr&aacute;fico:</td>
+						<td align="right"><?php echo $MULTILANG_InfTitulo; ?>:</td>
 						<td><input type="text" name="titulo" size="20" class="CampoTexto">
-							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align=absmiddle></a>
-							<a href="#" title="Ayuda r&aacute;pida:" name="Texto que aparecer&aacute; en la parte superior del informe generado"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesTitulo; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
-						<td align="right">Descripci&oacute;n</td>
+						<td align="right"><?php echo $MULTILANG_InfDescripcion; ?></td>
 						<td><input type="text" name="descripcion" size="20" class="CampoTexto">
-						<a href="#" title="Ayuda r&aacute;pida:" name="Texto descriptivo del informe.  No aparece en su generaci&oacute;n pero es usado para orientar al usuario en su selecci&oacute;n"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesDescrip; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
-						<td align="right">Categor&iacute;a</td>
+						<td align="right"><?php echo $MULTILANG_InfCategoria; ?></td>
 						<td><input type="text" name="categoria" size="20" class="CampoTexto">
-							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0 align=absmiddle></a>
-							<a href="#" title="Ayuda r&aacute;pida:" name="Cuando el usuario tiene acceso al panel de informes del sistema estos son clasificados por categor&iacute;as.  Ingrese aqui un nombre de categor&iacute;a bajo el cual desee presentar este informe a los usuarios."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesCateg; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
-						<td align="RIGHT" valign="TOP"><strong>Nivel de usuario</strong></td>
+						<td align="RIGHT" valign="TOP"><strong><?php echo $MULTILANG_InfNivelUsuario; ?></strong></td>
 						<td>
 							<select  name="nivel_usuario" id="nivel_usuario" class="Combos">
-								<option value="-1" <?php if ($registro["nivel_usuario"]=="-1") echo 'selected'; ?> >Todos los usuarios</option>
+								<option value="-1" <?php if ($registro["nivel_usuario"]=="-1") echo 'selected'; ?> ><?php echo $MULTILANG_InfTodoUsuario; ?></option>
 								<option value="1"  <?php if ($registro["nivel_usuario"]=="1") echo 'selected'; ?> >&#9733;</option>
 								<option value="2"  <?php if ($registro["nivel_usuario"]=="2") echo 'selected'; ?> >&#9733;&#9733;</option>
 								<option value="3"  <?php if ($registro["nivel_usuario"]=="3") echo 'selected'; ?> >&#9733;&#9733;&#9733;</option>
 								<option value="4"  <?php if ($registro["nivel_usuario"]=="4") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;</option>
 								<option value="5"  <?php if ($registro["nivel_usuario"]=="5") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
 							</select>
-							<a href="#" title="Quienes pueden ver este informe?" name="Indique el perfil de usuario que se debe tener para ver este informe como disponible."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_InfTitNivel; ?>" name="<?php echo $MULTILANG_InfDesNivel; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
-						<td align="right">Im&aacute;gen de ayuda</td>
+						<td align="right"><?php echo $MULTILANG_FrmImagen; ?></td>
 						<td>
 							<select  name="ayuda_imagen" class="Combos" >
-								<option value="">Deshabilitado</option>
+								<option value=""><?php echo $MULTILANG_Deshabilitado; ?></option>
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td align="right">Ancho:</td>
-						<td><input type="text" name="ancho" size="4" class="CampoTexto">  (agregar <b>px</b> &oacute; <b>%</b> seg&uacute;n el caso)
-							<a href="#" title="Establecer ancho fijo?" name="Este valor aplica si ha especificado tambien un alto. Si requiere que el informe aparezca dentro de un marco de ancho fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o.  En el caso de los gr&aacute;ficos especifica su tama&ntilde;o de imagen."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+						<td align="right"><?php echo $MULTILANG_FrmAncho; ?>:</td>
+						<td><input type="text" name="ancho" size="4" class="CampoTexto">  (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)
+							<a href="#" title="<?php echo $MULTILANG_InfTitAncho; ?>" name="<?php echo $MULTILANG_InfDesAncho; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
-						<td align="right">Alto:</td>
-						<td><input type="text" name="alto" size="4" class="CampoTexto">  (agregar <b>px</b> &oacute; <b>%</b> seg&uacute;n el caso)
-							<a href="#" title="Establecer alto fijo?" name="Este valor aplica si ha especificado tambien un ancho. Si requiere que el informe aparezca dentro de un marco de alto fijo especifique su tama&ntilde;o en pixeles, deje en blanco para que se desplieguen los datos sin restricciones de tama&ntilde;o.  En el caso de los gr&aacute;ficos especifica su tama&ntilde;o de imagen."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+						<td align="right"><?php echo $MULTILANG_InfAlto; ?>:</td>
+						<td><input type="text" name="alto" size="4" class="CampoTexto">  (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)
+							<a href="#" title="<?php echo $MULTILANG_InfTitAlto; ?>" name="<?php echo $MULTILANG_InfDesAlto; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
-						<td align="RIGHT" valign="TOP"><strong>Formato final</strong></td>
+						<td align="RIGHT" valign="TOP"><strong><?php echo $MULTILANG_InfFormato; ?></strong></td>
 						<td>
 							<select  name="formato_final" id="formato_final" class="Combos">
-								<option value="T">Tabla de datos</option>
-								<option value="G">Gr&aacute;fico</option>
+								<option value="T"><?php echo $MULTILANG_TablaDatos; ?></option>
+								<option value="G"><?php echo $MULTILANG_Grafico; ?></option>
 							</select>
-							<a href="#" title="Como se visualiza este informe?" name="Indica si el producto final del informe ser&aacute; un tabla de datos o un gr&aacute;fico."><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_InfTitFormato; ?>" name="<?php echo $MULTILANG_InfDesFormato; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>
@@ -1691,8 +1682,8 @@ if ($accion=="administrar_informes")
 							</form>
 						</td>
 						<td>
-							<input type="Button"  class="Botones" value="Crear y dise&ntilde;ar" onClick="document.datos.submit()">
-							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="Volver al menu" class="Botones">
+							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_FrmCreaDisena; ?>" onClick="document.datos.submit()">
+							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="<?php echo $MULTILANG_IrEscritorio; ?>" class="Botones">
 						</td>
 					</tr>
 				</table>
@@ -1702,13 +1693,13 @@ if ($accion=="administrar_informes")
 		cerrar_ventana();	
 		
 		echo '</td><td valign=top>';  // Inicia segunda columna del diseñador
-		abrir_ventana('Informes/Gr&aacute;ficos ya definidos en el sistema','f2f2f2','');
+		abrir_ventana($MULTILANG_InfDefinidos,'f2f2f2','');
 		?>
 				<table width="100%" border="0" cellspacing="5" align="CENTER"  class="TextosVentana">
 					<tr>
 						<td bgcolor="#d6d6d6"><b>Id</b></td>
-						<td bgcolor="#D6D6D6"><b>Titulo</b></td>
-						<td bgcolor="#d6d6d6"><b>Categor&iacute;a</b></td>
+						<td bgcolor="#D6D6D6"><b><?php echo $MULTILANG_Titulo; ?></b></td>
+						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_InfCategoria; ?></b></td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -1725,14 +1716,14 @@ if ($accion=="administrar_informes")
 										<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
 												<input type="hidden" name="accion" value="eliminar_informe">
 												<input type="hidden" name="informe" value="'.$registro["id"].'">
-												<input type="button" value="Eliminar"  class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar el informe los usuarios no podr&aacute;n accesarlo nuevamente para operaciones de consulta definidas en &eacute;l y no podr&aacute; deshacer esta operaci&oacute;n. Esto tambien elimina cualquier dise&ntilde;o interno del informe.\nEst&aacute; seguro que desea continuar ?\',df'.$registro["id"].');">
+												<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_InfAdvEliminar.'\',df'.$registro["id"].');">
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
 												<input type="hidden" name="accion" value="editar_informe">
 												<input type="hidden" name="informe" value="'.$registro["id"].'">
-												<input type="Submit" value="Campos, Tablas y Condiciones"  class="Botones">
+												<input type="Submit" value="'.$MULTILANG_InfcamTabCond.'"  class="Botones">
 										</form>
 								</td>
 							</tr>';
@@ -1780,7 +1771,7 @@ if ($accion=="mis_informes")
 	{
 			// Carga las opciones del ACORDEON DE INFORMES
 			echo '<div align="center">
-			<input type="Button" onclick="document.core_ver_menu.submit()" value=" <<< Volver a mi escritorio " class="Botones">
+			<input type="Button" onclick="document.core_ver_menu.submit()" value=" <<< '.$MULTILANG_IrEscritorio.' " class="Botones">
 			';
 			// Si el usuario es diferente al administrador agrega condiciones al query
 			if ($Login_usuario!="admin")
@@ -1796,7 +1787,7 @@ if ($accion=="mis_informes")
 					//Crea la categoria en el acordeon
 					$seccion_menu_activa=$registro["categoria"];
 					$conteo_opciones=$registro["conteo"];
-					abrir_ventana('Informes '.$seccion_menu_activa.' ('.$conteo_opciones.')','fondo_ventanas2.gif','85%');
+					abrir_ventana($MULTILANG_Informes.': '.$seccion_menu_activa.' ('.$conteo_opciones.')','fondo_ventanas2.gif','85%');
 					// Busca las opciones dentro de la categoria
 
 					// Si el usuario es diferente al administrador agrega condiciones al query

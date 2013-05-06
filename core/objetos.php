@@ -72,7 +72,7 @@
 			//Divide la cadena de objeto en partes conocidas
 			$partes_objeto = explode(":", $objeto);
 			if ($partes_objeto[0]!="frm" && $partes_objeto[0]!="inf")
-				$mensaje_error="El tipo de objeto ".$partes_objeto[0]." recibido en este comando es desconocido.";
+				$mensaje_error=$MULTILANG_ObjError.": ".$partes_objeto[0];
 
 			if ($mensaje_error=="")
 				{
@@ -99,7 +99,7 @@
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="Ver_menu">
-						<input type="Hidden" name="error_titulo" value="Error en tiempo de ejecuci&oacute;n">
+						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -171,7 +171,7 @@ $salida=sprintf("<?php
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="Ver_menu">
-						<input type="Hidden" name="error_titulo" value="Error en tiempo de ejecuci&oacute;n">
+						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';

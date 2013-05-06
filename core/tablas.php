@@ -79,7 +79,7 @@
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="editar_tabla">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="error_titulo" value="Problema de integridad en dise&ntilde;o">
+						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -135,8 +135,8 @@
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="editar_tabla">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="error_titulo" value="ERROR DE BASE DE DATOS">
-						<input type="Hidden" name="error_descripcion" value="Durante la ejecucion el motor ha retornado lo siguiente: <i>'.$descripcion_ultimo_error.'</i>">
+						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError2.'">
+						<input type="Hidden" name="error_descripcion" value="'.$MULTILANG_TblError3.': <i>'.$descripcion_ultimo_error.'</i>">
 						</form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -178,28 +178,28 @@ if ($accion=="editar_tabla")
 
 		<table class="TextosVentana"><tr><td valign=top>
 						
-			<?php abrir_ventana('Agregar campos en la tabla de datos','f2f2f2',''); ?>
+			<?php abrir_ventana($MULTILANG_TblAgrCampo,'f2f2f2',''); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_crear_campo">
 			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 			<div align=center>
 						
-			<br>Agregar un campo a la tabla <b><?php echo $nombre_tabla; ?></b>:
+			<br><?php echo $MULTILANG_TblAgrCampoTabla; ?>: <b><?php echo $nombre_tabla; ?></b>:
 				<table class="TextosVentana">
 					<tr>
-						<td align="right">Nombre:</td>
+						<td align="right"><?php echo $MULTILANG_Nombre; ?>:</td>
 						<td><input type="text" name="nombre_campo" size="20" class="CampoTexto">
-						<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
-						<a href="#" title="Ayuda de formato para nombre del campo:" name="Nombre del campo sin guiones, puntos, espacios o caracteres especiales."><img src="img/icn_10.gif" border=0></a>	</td>
+						<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+						<a href="#" title="<?php echo $MULTILANG_TblTitNombre; ?>" name="<?php echo $MULTILANG_TblDesNombre; ?>"><img src="img/icn_10.gif" border=0></a>	</td>
 					</tr>
 					<tr>
-						<td align="right">Tipo:</td>
+						<td align="right"><?php echo $MULTILANG_Tipo; ?>:</td>
 						<td>
 							<select  name="tipo" class="Combos" >
-								<option value="INT">Entero</option>
-								<option value="VARCHAR">Cadena (longitud Hasta 255)</option>
-								<option value="TEXT">Texto (Ilimitado)</option>
-								<option value="DATE">Fecha (sin hora)</option>
+								<option value="INT"><?php echo $MULTILANG_TblEntero; ?></option>
+								<option value="VARCHAR"><?php echo $MULTILANG_TblCadena; ?></option>
+								<option value="TEXT"><?php echo $MULTILANG_TblTexto; ?></option>
+								<option value="DATE"><?php echo $MULTILANG_TblFecha; ?></option>
 							<!--
 							 OPCIONES PREVIAS: SOLO MYSQL
 								<option value="INT">Entero</option><option value="VARCHAR">Cadena (Hasta 255)</option><option value="TEXT">Texto (Ilimitado)</option><option value="DATE">Fecha (sin hora)</option><optgroup label="Tipos numericos comunes"><option value="TINYINT">TINYINT</option><option value="SMALLINT">SMALLINT</option><option value="MEDIUMINT">MEDIUMINT</option><option value="INT">INT</option><option value="BIGINT">BIGINT</option><option value="-">-</option><option value="DECIMAL">DECIMAL</option><option value="FLOAT">FLOAT</option><option value="DOUBLE">DOUBLE</option><option value="REAL">REAL</option><option value="-">-</option><option value="BIT">BIT</option><option value="BOOLEAN">BOOLEAN</option><option value="SERIAL">SERIAL</option></optgroup><optgroup label="Tipos de Fecha y Hora"><option value="DATE">DATE</option><option value="DATETIME">DATETIME</option><option value="TIMESTAMP">TIMESTAMP</option><option value="TIME">TIME</option><option value="YEAR">YEAR</option></optgroup><optgroup label="Tipos de cadenas de caracteres"><option value="CHAR">CHAR</option><option value="VARCHAR">VARCHAR</option><option value="-">-</option><option value="TINYTEXT">TINYTEXT</option><option value="TEXT">TEXT</option><option value="MEDIUMTEXT">MEDIUMTEXT</option><option value="LONGTEXT">LONGTEXT</option><option value="-">-</option><option value="BINARY">BINARY</option><option value="VARBINARY">VARBINARY</option><option value="-">-</option><option value="TINYBLOB">TINYBLOB</option><option value="MEDIUMBLOB">MEDIUMBLOB</option><option value="BLOB">BLOB</option><option value="LONGBLOB">LONGBLOB</option><option value="-">-</option><option value="ENUM">ENUM</option><option value="SET">SET</option></optgroup><optgroup label="Tipos espaciales"><option value="GEOMETRY">GEOMETRY</option><option value="POINT">POINT</option><option value="LINESTRING">LINESTRING</option><option value="POLYGON">POLYGON</option><option value="MULTIPOINT">MULTIPOINT</option><option value="MULTILINESTRING">MULTILINESTRING</option><option value="MULTIPOLYGON">MULTIPOLYGON</option><option value="GEOMETRYCOLLECTION">GEOMETRYCOLLECTION</option></optgroup>
@@ -208,18 +208,18 @@ if ($accion=="editar_tabla")
 						</td>
 					</tr>
 					<tr>
-						<td align="right">Longitud (Si aplica):</td>
+						<td align="right"><?php echo $MULTILANG_TblLongitud; ?> (<?php echo $MULTILANG_MnuSiAplica; ?>):</td>
 						<td><input type="text" name="longitud" size="10" class="CampoTexto">
-						<a href="#" title="Cuidado" name="Este campo puede ser de car&aacute;cter obligatorio dependiendo del tipo de dato a ser almacenado, ejemplo campos tipo Cadena"><img src="img/icn_12.gif" border=0></a>
-						<a href="#" title="Ayuda de formato:" name="Si alguna vez necesita poner una barra invertida (backslash) o una comilla simple entre esos valores, siempre ponga una barra invertida adicional (backslash).  Para campos enum o set, use el formato: 'a','b','c'..."><img src="img/icn_10.gif" border=0></a>	
+						<a href="#" title="<?php echo $MULTILANG_Importante; ?>" name="<?php echo $MULTILANG_TblDesLongitud; ?>"><img src="img/icn_12.gif" border=0></a>
+						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesLongitud2; ?>"><img src="img/icn_10.gif" border=0></a>	
 						</td>
 					</tr>
 					<tr>
-						<td align="right">Autoincremento:</td>
+						<td align="right"><?php echo $MULTILANG_TblAutoinc; ?>:</td>
 						<td>
 							<select  name="autoincremento" class="Combos" >
-								<option value="AUTO_INCREMENT">Si</option>
-								<option value="" selected>No</option>
+								<option value="AUTO_INCREMENT"><?php echo $MULTILANG_Si; ?></option>
+								<option value="" selected><?php echo $MULTILANG_No; ?></option>
 							</select>
 							<a href="#" title="Alerta de clave primaria" name="Este valor puede ser definido solamente por administradores avanzados que han suprimido por alg&uacute;n motivo el autoincremento del campo Id predeterminado."><img src="img/icn_12.gif" border=0></a>
 						</td>
