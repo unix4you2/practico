@@ -354,22 +354,25 @@
 									// Incluye archivos de idioma para ser seleccionados
 									$path_idiomas="inc/practico/idiomas/";
 									$directorio_idiomas=opendir($path_idiomas);
+									$IdiomaPredeterminadoActual=$IdiomaPredeterminado;
 									while (($elemento=readdir($directorio_idiomas))!=false)
 										{
 											//Lo procesa solo si es un archivo diferente del index
 											if (!is_dir($path_idiomas.$elemento) && $elemento!="." && $elemento!=".."  && $elemento!="index.html")
 												{
-													include_once($path_idiomas.$elemento);
+													include($path_idiomas.$elemento);
 													//Establece espanol como predeterminado
 													$seleccion="";
 													$valor_opcion=str_replace(".php","",$elemento);
-													if ($valor_opcion==$IdiomaPredeterminado) $seleccion="SELECTED";
+													if ($valor_opcion==$IdiomaPredeterminadoActual) $seleccion="SELECTED";
 													//Presenta la opcion
 													echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$elemento.')</option>';
 													if (file_exists("mod/".$elemento."/index.php"))
 														include("mod/".$elemento."/index.php");
 												}
 										}		
+									//Vuelve a cargar el predeterminado actual
+									include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
 									?>
 								</select>
 							</td>

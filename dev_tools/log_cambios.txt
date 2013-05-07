@@ -1,15 +1,34 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
 VersionCompatibleAno="13"
-VersionCompatibleMes="4"
+VersionCompatibleMes="5"
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
 VersionFinalAno="13"
-VersionFinalMes="5"
+VersionFinalMes="6"
 
-#[ListaArchivos] Separados por espacio
-ListaArchivos=" inc/def_basedatos.php core/captcha.php core/comunes.php core/conexiones.php core/formularios.php core/tablas.php core/informes.php core/marco_arriba.php core/marco_abajo.php core/menus.php core/actualizacion.php img/icono_config.png index.php core/objetos.php core/sesion.php core/usuarios.php "
+#[ListaArchivos] Separados por espacio o salto de linea
+ListaArchivos="
+index.php
+core/actualizacion.php
+core/backups.php
+core/captcha.php
+core/comunes.php
+core/conexiones.php
+core/formularios.php
+core/informes.php
+core/marco_abajo.php
+core/marco_arriba.php
+core/menus.php
+core/objetos.php
+core/sesion.php
+core/tablas.php
+core/usuarios.php
+inc/practico/def_basedatos.php
+inc/practico/idiomas/es.php
+inc/practico/idiomas/en.php
+"
 
 #[ArchivosObligatorios] Separados por espacio
 ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame.txt inc/version_actual.txt"
@@ -18,13 +37,14 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #[LogCambios] Usado para tmp/par_cambios.txt
 #TOMAR CONTENIDO DESDE EL README
 LogCambios="
-
+ * Added: Multi-idioma a módulos de tablas, usuarios y menúes
+ * Fixed: Las consultas SQL eran impresas durante el proceso de instalación (se eliminan)
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-ALTER TABLE core_formulario ADD COLUMN javascript TEXT NULL;
+
 "
 
 ########################################################################

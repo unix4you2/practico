@@ -51,6 +51,7 @@
 
 	//Incluye idioma espanol (oficial), luego sobreescribe vbles por configuracion de usuario
 	include("inc/practico/idiomas/es.php");
+	include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
 
 	//Si esta establecido el modo de depuracion en configuracion.php activa errores del preprocesador
 	if ($ModoDepuracion)

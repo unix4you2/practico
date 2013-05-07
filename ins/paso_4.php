@@ -64,7 +64,6 @@
 
 							//Ejecuta el query
 							$consulta_enviar = $ConexionPDO->prepare($consulta);
-							echo $consulta;
 							$consulta_enviar->execute();
 							$total_ejecutadas++;
 						}

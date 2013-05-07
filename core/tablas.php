@@ -221,41 +221,41 @@ if ($accion=="editar_tabla")
 								<option value="AUTO_INCREMENT"><?php echo $MULTILANG_Si; ?></option>
 								<option value="" selected><?php echo $MULTILANG_No; ?></option>
 							</select>
-							<a href="#" title="Alerta de clave primaria" name="Este valor puede ser definido solamente por administradores avanzados que han suprimido por alg&uacute;n motivo el autoincremento del campo Id predeterminado."><img src="img/icn_12.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_TblTitAutoinc; ?>" name="<?php echo $MULTILANG_TblDesAutoinc; ?>"><img src="img/icn_12.gif" border=0></a>
 						</td>
 					</tr>
 					<tr>
-						<td align="right">Permitir valores nulos?:</td>
+						<td align="right"><?php echo $MULTILANG_TblNulos; ?>:</td>
 						<td>
 							<select  name="valores_nulos" class="Combos" >
-								<option value="">Si</option>
-								<option value="NOT NULL">No</option>
+								<option value=""><?php echo $MULTILANG_Si; ?></option>
+								<option value="NOT NULL"><?php echo $MULTILANG_No; ?></option>
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td valign=top align="right">Valor predeterminado:</td>
+						<td valign=top align="right"><?php echo $MULTILANG_FrmPredeterminado; ?>:</td>
 						<td>
 							<select name="predeterminado">
-								<option value="" >Ninguno</option>
-								<option value="USER_DEFINED" >Definido por el usuario:</option>
-								<option value="NULL" >Nulo</option>
-								<option value="CURRENT_TIMESTAMP" >Fecha y hora actual</option>
+								<option value="" ><?php echo $MULTILANG_Ninguno; ?></option>
+								<option value="USER_DEFINED" ><?php echo $MULTILANG_TblDefUsuario; ?>:</option>
+								<option value="NULL" ><?php echo $MULTILANG_TblNulo; ?></option>
+								<option value="CURRENT_TIMESTAMP" ><?php echo $MULTILANG_TblFechaHora; ?></option>
 							</select><br>
 							<input type="text" name="predeterminado_valor" size="20" class="CampoTexto">
-							<a href="#" title="Ayuda de formato:" name="S&oacute;lo un valor, sin caracteres de escape.  Para cadenas de caracteres utilice comillas simples al principio y al final"><img src="img/icn_10.gif" border=0></a>	
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesPredet; ?>"><img src="img/icn_10.gif" border=0></a>	
 						</td>
 					</tr>
 					<tr>
-						<td align="right">Agregar el campo:</td>
+						<td align="right"><?php echo $MULTILANG_TblAgregando; ?>:</td>
 						<td>
 							<select name="despues_campo">
-								<option value="" >Al final de todo</option>
+								<option value="" ><?php echo $MULTILANG_TblAlFinal; ?></option>
 								<?php
 									$resultado=ejecutar_sql("DESCRIBE $nombre_tabla ");
 									while($registro = $resultado->fetch())
 										{
-											echo '<option value="'.$registro["Field"].'" >Despu&eacute;s de '.$registro["Field"].'</option>';
+											echo '<option value="'.$registro["Field"].'" >'.$MULTILANG_TblDespuesDe.' '.$registro["Field"].'</option>';
 										}
 								?>
 							</select>
@@ -266,8 +266,8 @@ if ($accion=="editar_tabla")
 							</form>
 						</td>
 						<td>
-							<input type="Button"  class="Botones" value="Agregar campo" onClick="document.datos.submit()">
-							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="Volver al menu" class="Botones">
+							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_TblAgregando; ?>" onClick="document.datos.submit()">
+							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="<?php echo $MULTILANG_IrEscritorio; ?>" class="Botones">
 						</td>
 					</tr>
 				</table>
@@ -276,16 +276,16 @@ if ($accion=="editar_tabla")
 		<?php
 		cerrar_ventana();
 		echo '</td><td valign=top>';  // Inicia segunda columna del diseñador
-		abrir_ventana('Campos ya definidos en la tabla','f2f2f2','');
+		abrir_ventana($MULTILANG_TblCamposDef,'f2f2f2','');
 		?>
 				<table width="100%" border="0" cellspacing="5" align="CENTER" style="color: black; font-size: 9px; font-family: Verdana, Tahoma, Arial;">
 					<tr>
-						<td bgcolor="#d6d6d6"><b>Campo</b></td>
-						<td bgcolor="#D6D6D6"><b>Tipo</b></td>
-						<td bgcolor="#d6d6d6"><b>Permite Nulos</b></td>
-						<td bgcolor="#d6d6d6"><b>Tipo clave</b></td>
-						<td bgcolor="#d6d6d6"><b>Predeterminado</b></td>
-						<td bgcolor="#d6d6d6"><b>Extras</b></td>
+						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_Campo; ?></b></td>
+						<td bgcolor="#D6D6D6"><b><?php echo $MULTILANG_Tipo; ?></b></td>
+						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_TblNulos; ?></b></td>
+						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_TblTipoClave; ?></b></td>
+						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_Predeterminado; ?></b></td>
+						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_Otros; ?></b></td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -310,24 +310,26 @@ if ($accion=="editar_tabla")
 												<input type="hidden" name="accion" value="eliminar_campo">
 												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 												<input type="hidden" name="nombre_campo" value="'.$registro["Field"].'">
-												<input type="button" value="Eliminar"  class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar la columna '.$registro["Field"].' de la tabla se eliminar&aacute;n tambi&eacute;n todos los datos en ella almacenados y luego no podr&aacute; deshacer esta operaci&oacute;n.\nEst&aacute; seguro que desea continuar ?\',f'.$registro["Field"].');">
+												<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelCampo.'\',f'.$registro["Field"].');">
 												&nbsp;&nbsp;
 										</form>
 								</td>
 								<td align="center">
+										<!--
 										<form action="'.$ArchivoCORE.'" method="POST">
 												<input type="hidden" name="accion" value="editar_tabla">
 												<input type="hidden" name="nombre_tabla" value="'.@$registro["Name"].'">
 												<input type="Button" value="Editar (deshabilitado)"  class="Botones">
 												&nbsp;&nbsp;
 										</form>
+										-->
 								</td>';
 						else
 							echo '
 								<td align="center">
 								</td>
 								<td align="center">
-								No Puede Eliminarse
+								'.$MULTILANG_TblNoElim.'
 								</td>';
 
 						echo '	</tr>';
@@ -378,7 +380,7 @@ if ($accion=="editar_tabla")
 				}
 			else
 				{
-					mensaje('<blink>Error eliminando tabla de datos!</blink>','La tabla especificada no se puede eliminar.  Algunas causas comunes son:<br><li>La es utilizada por alguno de los formularios o informes autom&aacute;ticos, en ese caso puede intentar editarla.<br><li>La tabla cuenta con relaciones definidas por el dise&ntilde;ador hacia otras tablas de datos.<br><li>El rol de usuario definido para el usuario con sesi&oacute;n activa no permite eliminar objetos en DynApps.','60%','icono_error.png','TextosEscritorio');
+					mensaje('<blink>'.$MULTILANG_TblErrDel1.'</blink>',$MULTILANG_TblErrDel2,'60%','icono_error.png','TextosEscritorio');
 					echo '<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="accion" value="administrar_tablas"></form>
 						<br /><input type="Button" onclick="document.cancelar.submit()" name="" value="Cerrar" class="Botones">';
 				}
@@ -409,7 +411,7 @@ if ($accion=="editar_tabla")
 	if ($accion=="guardar_crear_tabla")
 		{
 			$mensaje_error="";
-			if ($nombre_tabla=="") $mensaje_error="Debe indicar un nombre v&aacute;lido para la tabla.  Este no debe contener guiones, puntos, espacios o caracteres especiales.";
+			if ($nombre_tabla=="") $mensaje_error=$MULTILANG_TblErrCrear;
 			if ($mensaje_error=="")
 				{
 					// Crea la tabla temporal
@@ -418,8 +420,8 @@ if ($accion=="editar_tabla")
 						{
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 								<input type="Hidden" name="accion" value="administrar_tablas">
-								<input type="Hidden" name="error_titulo" value="ERROR DE BASE DE DATOS">
-								<input type="Hidden" name="error_descripcion" value="Durante la ejecucion el motor ha retornado lo siguiente: <i>'.$error_mysql.'</i>">
+								<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError2.'">
+								<input type="Hidden" name="error_descripcion" value="'.$MULTILANG_TblError3.' <i>'.$error_mysql.'</i>">
 								</form>
 									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 						}
@@ -434,7 +436,7 @@ if ($accion=="editar_tabla")
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="administrar_tablas">
-						<input type="Hidden" name="error_titulo" value="Problema de integridad de consultas">
+						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError1.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -456,28 +458,28 @@ if ($accion=="editar_tabla")
 		{
 			echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/otODPESW0k0\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><img src='img/icono_screencast.png' alt='ScreenCast-VideoTutorial'></a>";
 
-			abrir_ventana('Crear/Listar tablas de datos definidias en el sistema','f2f2f2',''); ?>
+			abrir_ventana($MULTILANG_TblCrearListar,'f2f2f2',''); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_crear_tabla">
 			<div align=center>
-			<br>Crear una nueva tabla de datos en <b><?php echo $BaseDatos; ?></b>:
+			<br><?php echo $MULTILANG_TblCreaTabla; ?>:<b><?php echo $BaseDatos; ?></b>:
 			<table class="TextosVentana" cellspacing=10>
 			</tr>
 			<td>
 				<table class="TextosVentana">
 					<tr>
-						<td align="center">Nombre:</td>
+						<td align="center"><?php echo $MULTILANG_Nombre; ?>:</td>
 						<td><?php echo $TablasApp; ?><input type="text" name="nombre_tabla" size="20" class="CampoTexto">
-						<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
-						<a href="#" title="Ayuda general de tablas" name="Una tabla de datos es una estrctura que le permite almacenar informaci&oacute;n. Ingrese en este espacio el nombre de la tabla sin guiones, puntos, espacios o caracteres especiales. SENSIBLE A MAYUSCULAS"><img src="img/icn_10.gif" border=0></a></td>
+						<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesTabla; ?>"><img src="img/icn_10.gif" border=0></a></td>
 					</tr>
 					<tr>
 						<td>
 							</form>
 						</td>
 						<td>
-							<input type="Button"  class="Botones" value="Crear tabla y definir campos" onClick="document.datos.submit()">
-							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="Volver al menu" class="Botones">
+							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_TblCreaTabCampos; ?>" onClick="document.datos.submit()">
+							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="<?php echo $MULTILANG_IrEscritorio; ?>" class="Botones">
 						</td>
 					</tr>
 				</table>
@@ -487,19 +489,19 @@ if ($accion=="editar_tabla")
 			<td align=center>
 				<form name="datosasis" id="datosasis" action="<?php echo $ArchivoCORE; ?>" method="POST">
 				<input type="Hidden" name="accion" value="asistente_tablas">
-				Asistente<br>
-				<a href="#" title="Utilizar asistente?" name="Permite seleccionar desde algunas tablas comunes predefinidas"><input type="image" src="img/asistente.png"></a>
+				<?php echo $MULTILANG_Asistente; ?><br>
+				<a href="#" title="<?php echo $MULTILANG_TblTitAsis; ?>" name="<?php echo $MULTILANG_TblDesAsis; ?>"><input type="image" src="img/asistente.png"></a>
 				</form>
 			</td>
 			<tr>
 			</table>
 			<hr>
 
-		<font face="" size="3" color="Navy"><b>Tablas definidas en la base de datos</b></font><br><br>
+		<font face="" size="3" color="Navy"><b><?php echo $MULTILANG_TblTablasBD; ?></b></font><br><br>
 				<table width="100%" border="0" cellspacing="5" align="CENTER"  class="TextosVentana" >
 					<tr>
-						<td bgcolor="#d6d6d6"><b>Nombre</b></td>
-						<td bgcolor="#d6d6d6"><b>Registros</b></td>
+						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_Nombre; ?></b></td>
+						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_TblRegistros; ?></b></td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -531,7 +533,7 @@ if ($accion=="editar_tabla")
 										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["0"].'" id="f'.$registro["0"].'">
 												<input type="hidden" name="accion" value="eliminar_tabla">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
-												<input type="button" value="Eliminar"  class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar la tabla de datos '.$registro["0"].' se eliminar&aacute;n tambi&eacute;n todos los registros en ella almacenados y luego no podr&aacute; deshacer esta operaci&oacute;n.\nEst&aacute; seguro que desea continuar ?\',f'.$registro["0"].');">
+												<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelTabla.'\',f'.$registro["0"].');">
 												&nbsp;&nbsp;
 										</form>';
 						echo '
@@ -542,7 +544,7 @@ if ($accion=="editar_tabla")
 										<form action="'.$ArchivoCORE.'" method="POST">
 												<input type="hidden" name="accion" value="editar_tabla">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
-												<input type="Submit" value="Editar"  class="Botones">
+												<input type="Submit" value="'.$MULTILANG_Editar.'"  class="Botones">
 												&nbsp;&nbsp;
 										</form>';
 						echo '
@@ -580,8 +582,8 @@ if ($accion=="editar_tabla")
 	if ($accion=="guardar_crear_tabla_asistente")
 		{
 			$mensaje_error="";
-			if ($nombre_tabla=="") $mensaje_error="Debe indicar un nombre v&aacute;lido para la tabla.  Este no debe contener guiones, puntos, espacios o caracteres especiales.";
-			if ($plantilla_tabla=="") $mensaje_error.="<br>Debe seleccionar una plantilla desde la cual desea crear su nueva tabla.";
+			if ($nombre_tabla=="") $mensaje_error=$MULTILANG_TblErrCrear;
+			if ($plantilla_tabla=="") $mensaje_error.="<br>".$MULTILANG_TblErrPlantilla;
 			if ($mensaje_error=="")
 				{
 					// Crea la tabla temporal
@@ -590,8 +592,8 @@ if ($accion=="editar_tabla")
 						{
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 								<input type="Hidden" name="accion" value="asistente_tablas">
-								<input type="Hidden" name="error_titulo" value="ERROR DE BASE DE DATOS">
-								<input type="Hidden" name="error_descripcion" value="Durante la ejecucion el motor ha retornado: <i>'.$error_mysql.'</i>">
+								<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError2.'">
+								<input type="Hidden" name="error_descripcion" value="'.$MULTILANG_TblError3=.': <i>'.$error_mysql.'</i>">
 								</form>
 									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 						}
@@ -641,7 +643,7 @@ if ($accion=="editar_tabla")
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="asistente_tablas">
-						<input type="Hidden" name="error_titulo" value="Problema de integridad de consultas">
+						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError1.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -668,26 +670,26 @@ if ($accion=="editar_tabla")
 */
 	if ($accion=="asistente_tablas")
 		{
-			abrir_ventana('Asistente para generaci&oacute;n de tablas','f2f2f2',''); ?>
+			abrir_ventana($MULTILANG_TblAsistente,'f2f2f2',''); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_crear_tabla_asistente">
 			<div align=center>
-			<br>Crear una nueva tabla de datos en <b><?php echo $BaseDatos; ?></b>:
+			<br><?php echo $MULTILANG_TblCreaTabla; ?> <b><?php echo $BaseDatos; ?></b>:
 			<table class="TextosVentana" cellspacing=10>
 			</tr>
 			<td>
 				<table class="TextosVentana">
 					<tr>
-						<td align="right">Nombre para la nueva tabla:</td>
+						<td align="right"><?php echo $MULTILANG_TblAsistNombre; ?>:</td>
 						<td><?php echo $TablasApp; ?><input type="text" name="nombre_tabla" size="20" class="CampoTexto">
-						<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
-						<a href="#" title="Ayuda general de tablas" name="Una tabla de datos es una estrctura que le permite almacenar informaci&oacute;n. Ingrese en este espacio el nombre de la tabla sin guiones, puntos, espacios o caracteres especiales. SENSIBLE A MAYUSCULAS"><img src="img/icn_10.gif" border=0></a></td>
+						<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesTabla; ?>"><img src="img/icn_10.gif" border=0></a></td>
 					</tr>
 					<tr>
-						<td align="right"><b>Plantilla de tabla seleccionada:</b></td>
+						<td align="right"><b><?php echo $MULTILANG_TblAsistPlant; ?>:</b></td>
 						<td>
 							<select name="plantilla_tabla" onChange="datos.descripciontabla.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].label; datos.listacampos.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].title; datos.totalcampos.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].lang;">
-								<option value="" label="" dir="" lang="">Seleccione una</option>
+								<option value="" label="" dir="" lang=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
 								<?php
 									$directorio="inc/practico/asistentes/";
 									$dh = opendir($directorio);
@@ -730,27 +732,27 @@ if ($accion=="editar_tabla")
 						</td>
 					</tr>
 					<tr>
-						<td align="right" valign="top">Descripci&oacute;n:</td>
+						<td align="right" valign="top"><?php echo $MULTILANG_InfDescripcion; ?>:</td>
 						<td>
 							<textarea name="descripciontabla" id="descripciontabla" cols="78" rows="2" readonly></textarea>
 						</td>
 					</tr>
 					<tr>
-						<td align="right" valign="top">Campos que contiene:</td>
+						<td align="right" valign="top"><?php echo $MULTILANG_TblAsCampos; ?>:</td>
 						<td>
 							<textarea name="listacampos" id="listacampos" cols="38" rows="10" readonly></textarea>
 						</td>
 					</tr>
 					<tr>
-						<td align="right" valign="top">Total campos:</td>
+						<td align="right" valign="top"><?php echo $MULTILANG_TblTotCampos; ?>:</td>
 						<td>
 							<input type="text" name="totalcampos" size="4" class="CampoTexto">
 						</td>
 					</tr>
 					<tr>
-						<td align="right" valign="top">IMPORTANTE:</td>
+						<td align="right" valign="top"><?php echo strtoupper($MULTILANG_Importante); ?>:</td>
 						<td>
-							Todas las tablas y sus campos podr&aacute;n ser personalizados en el siguiente paso,<br> agregando, eliminando o cambiando las propiedades de aquellos que desee.
+							<?php echo $MULTILANG_TblHlpAsist; ?>
 						</td>
 					</tr>
 					<tr>
@@ -758,8 +760,8 @@ if ($accion=="editar_tabla")
 							</form>
 						</td>
 						<td>
-							<input type="Button"  class="Botones" value="Crear tabla y revisar campos" onClick="document.datos.submit()">
-							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="Volver al menu" class="Botones">
+							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_TblCreaTabCampos; ?>" onClick="document.datos.submit()">
+							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="<?php echo $MULTILANG_IrEscritorio; ?>" class="Botones">
 						</td>
 					</tr>
 				</table>
@@ -784,7 +786,7 @@ if ($accion=="editar_tabla")
 /* ################################################################## */
 /* ################################################################## */
 /* ################################################################## */
-/* AQUI EMPIEZA CODIGO DE VERSIONES ANTERIORES ESPECIFICAS PARA MYSQL ------ EN DESUSO-----   */
+/* AQUI EMPIEZA CODIGO DE VERSIONES ANTERIORES ESPECIFICAS PARA MYSQL y MARIADB ------ EN DESUSO-----   */
  if ($accion=="administrar_tablas_solo_mysql")
 	{
 			abrir_ventana('Crear/Listar tablas de datos definidias en el sistema','f2f2f2','95%'); ?>

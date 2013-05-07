@@ -6,6 +6,8 @@ See the LICENSE file for details
 That is the license for the whole package.
 Parts of the package are under other, compatible licenses:
 
+Important:  All source files in this project should be codified as UTF-8 Without BOM
+
 PCLZip (PhpConcept Library - Zip Module 2.8.2):
 	Location: inc/pclzip/pclzip.lib.php:
 	License: GNU GPL versión 2
