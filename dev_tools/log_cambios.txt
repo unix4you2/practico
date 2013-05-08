@@ -39,6 +39,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
  * Added: Multi-idioma a módulos de tablas, usuarios y menúes
  * Fixed: Las consultas SQL eran impresas durante el proceso de instalación (se eliminan)
+ * Fixed: Acción vacía con sesión abierta ya no presenta ventana de login nuevamente.  Tester: Esteban Rodriguez
 "
 
 ########################################################################

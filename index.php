@@ -127,8 +127,8 @@
 
 /* ################################################################## */
 	// Cuando no se tiene ninguna accion para procesar se carga la pagina de inicio de sesion
-	if ($accion=="")
-		ventana_login();
+	if ($accion=="" && $Sesion_abierta==0) ventana_login();
+	if ($accion=="" && $Sesion_abierta==1) echo '<script type="" language="JavaScript">	document.core_ver_menu.submit();  </script>';
 	// Incluye los archivos necesarios dependiendo de las funciones requeridas
 	if ($accion=="administrar_informes" || $accion=="guardar_informe" || $accion=="editar_informe" || $accion=="eliminar_informe" || $accion=="actualizar_informe" || $accion=="eliminar_informe_tabla" || $accion=="guardar_informe_tabla" || $accion=="eliminar_informe_campo" || $accion=="guardar_informe_campo" || $accion=="guardar_informe_condicion" || $accion=="eliminar_informe_condicion" || $accion=="mis_informes" || $accion=="actualizar_grafico_informe" || $accion=="actualizar_agrupamiento_informe" || $accion=="guardar_accion_informe" || $accion=="eliminar_registro_informe" || $accion=="eliminar_accion_informe")
 		include("core/informes.php");
