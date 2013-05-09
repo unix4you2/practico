@@ -37,10 +37,12 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #[LogCambios] Usado para tmp/par_cambios.txt
 #TOMAR CONTENIDO DESDE EL README
 LogCambios="
+ * Added: Idioma inglés basado en Google Translator
  * Added: Multi-idioma a módulos de tablas, usuarios y menúes
  * Fixed: Las consultas SQL eran impresas durante el proceso de instalación (se eliminan)
  * Fixed: [Tester: Esteban Rodriguez] Acción vacía con sesión abierta ya no presenta ventana de login nuevamente.
  * Fixed: [Tester: Esteban Rodriguez] Posible inyección SQL en login.
+ * Fixed: [Tester: Esteban Rodriguez] Visualizacion de query con info sensible en errores capturados por PDO.
 "
 
 ########################################################################

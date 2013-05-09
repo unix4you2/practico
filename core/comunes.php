@@ -69,6 +69,7 @@
 			global $ConexionPDO;
 			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles;
 			global $accion;
+			global $Login_usuario;
 			try
 				{
 					//Elimina caracteres que pueden ser usados para SQLInjection
@@ -81,7 +82,12 @@
 				}
 			catch( PDOException $ErrorPDO)
 				{
-					mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.$query,'80%','icono_error.png','TextosEscritorio');
+					//Muestra detalles del query solo al admin
+					if ($Login_usuario!='admin')
+						$query_recibido='Solo pueden ser vistos por el usuario admin.';
+					else
+						$query_recibido=$query;
+					mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.$query_recibido,'80%','icono_error.png','TextosEscritorio');
 					return 1;
 				}
 		}
@@ -106,6 +112,7 @@
 					Retorna una cadena vacia si la consulta es ejecutada sin problemas.
 			*/
 			global $ConexionPDO;
+			global $Login_usuario;
 			try
 				{
 					$consulta = $ConexionPDO->prepare($query);
@@ -114,7 +121,12 @@
 				}
 			catch( PDOException $ErrorPDO)
 				{
-					echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$query.'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
+					//Muestra detalles del query solo al admin
+					if ($Login_usuario!='admin')
+						$query_recibido='Solo pueden ser vistos por el usuario admin.';
+					else
+						$query_recibido=$query;
+					echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$query_recibido.'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
 					//mensaje('Error durante la ejecuci&oacute;n',$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
 					return $ErrorPDO->getMessage();
 				}
