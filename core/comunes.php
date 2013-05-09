@@ -26,6 +26,29 @@
 		Section: Funciones asociadas a las operaciones con bases de datos - Ejecucion de consultas
 	*/
 
+
+
+/* ################################################################## */
+/* ################################################################## */
+	function filtrar_cadena_sql($cadena)
+		{
+			/*
+				Function: filtrar_cadena_sql
+				Filtra los caracteres existentes en una cadena de manera que no permita comillas sencillas, backslash o cualquier otro caracter que genere problemas en las consultas o posibles fallos de seguridad derivados de un SQLInjection
+
+				Variables de entrada:
+
+					cadena - Cadena a filtrar
+
+				Salida:
+					Retorna cadena sin caracteres ilegales
+			*/
+			$cadena=str_replace("''","'",$cadena); // Comilla simple
+			$cadena=str_replace("\\","",$cadena); // BackSlash
+			return $cadena;
+		}
+
+
 /* ################################################################## */
 /* ################################################################## */
 	function ejecutar_sql($query,$param="")
@@ -45,8 +68,12 @@
 			*/
 			global $ConexionPDO;
 			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles;
+			global $accion;
 			try
 				{
+					//Elimina caracteres que pueden ser usados para SQLInjection
+					if ($accion=="Iniciar_login")
+						$query=filtrar_cadena_sql($query);
 					$consulta = $ConexionPDO->prepare($query);
 					$consulta->execute();
 					return $consulta;

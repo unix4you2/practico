@@ -58,6 +58,7 @@
 			if ($captcha_temporal!=$captcha)
 				{
 					$ok_captcha=0;
+					$uid=filtrar_cadena_sql($uid);
 					// Lleva a auditoria con query manual por la falta de $Login_Usuario
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$uid','Elimina sesiones activas al intentar acceso con CAPTCHA incorrecto desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");
 				}
