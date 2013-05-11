@@ -40,7 +40,6 @@
 # PARAMETROS BASICOS DEL EMPAQUETADO
 	#Lista de archivos y carpetas a empaquetar (relativos a la raiz y separados por espacio)
 	ListaArchivos=" AUTHORS index.php LICENSE personalizadas.php README bkp core img inc ins js mod skin tmp wzd "
-	ListaExcluidos=" mod/ldap\* core/configuracion.php " # Residen en alguna carpeta a comprimir pero deben evitarse
 	#Nombre del archivo resultante
 	NombreArchivo="Practico";
 	Version=`head -n 1 inc/version_actual.txt`
@@ -61,6 +60,12 @@
 	Espacio=" " # Usado en concatenaciones
 	Slash="/" # Usado en concatenaciones
 	Guion="-" # Usado en concatenaciones
+
+#Incluye los datos/parametros para generacion del parche
+#source dev_tools/log_cambios.txt
+
+#[ArchivosExcluidos] Separados por espacio. Residen en alguna carpeta a comprimir pero deben evitarse
+ListaExcluidos=" mod/ldap\* core/configuracion.php core/doc_configuracion.php core/doc_intro.php "
 
 # Banderas para la compresion
 	Comando="zip "

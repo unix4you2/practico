@@ -43,8 +43,29 @@
 				Salida:
 					Retorna cadena sin caracteres ilegales
 			*/
-			$cadena=str_replace("''","'",$cadena); // Comilla simple
-			$cadena=str_replace("\\","",$cadena); // BackSlash
+			$cadena = str_ireplace("''","'",$cadena);
+			$cadena = str_ireplace("\\","",$cadena);
+			$cadena = str_ireplace("COPY","",$cadena);
+			$cadena = str_ireplace("DELETE","",$cadena);
+			$cadena = str_ireplace("DROP","",$cadena);
+			$cadena = str_ireplace("DUMP","",$cadena);
+			$cadena = str_ireplace(" OR ","",$cadena);
+			$cadena = str_ireplace("%","",$cadena);
+			$cadena = str_ireplace("LIKE","",$cadena);
+			$cadena = str_ireplace("--","",$cadena);
+			$cadena = str_ireplace("^","",$cadena);
+			$cadena = str_ireplace("[","",$cadena);
+			$cadena = str_ireplace("]","",$cadena);
+			$cadena = str_ireplace("!","",$cadena);
+			$cadena = str_ireplace("¡","",$cadena);
+			$cadena = str_ireplace("?","",$cadena);
+			$cadena = str_ireplace("&","",$cadena);
+			/*
+			array_walk($_POST, 'limpiarCadena');
+			array_walk($_GET, 'limpiarCadena');
+			//$cadena = str_ireplace("SELECT","",$cadena);
+			//$cadena = str_ireplace("=","",$cadena);
+			*/
 			return $cadena;
 		}
 
@@ -67,14 +88,16 @@
 					Retorna una variable con el arreglo de resultados en caso de ser exitosa la consulta
 			*/
 			global $ConexionPDO;
-			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles;
+			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin;
 			global $accion;
 			global $Login_usuario;
+
+			//Elimina caracteres que pueden ser usados para SQLInjection en acciones sensibles
+			if ($accion=="Iniciar_login")
+				$query=filtrar_cadena_sql($query);
+
 			try
 				{
-					//Elimina caracteres que pueden ser usados para SQLInjection
-					if ($accion=="Iniciar_login")
-						$query=filtrar_cadena_sql($query);
 					$consulta = $ConexionPDO->prepare($query);
 					$consulta->execute();
 					return $consulta;
@@ -83,11 +106,11 @@
 			catch( PDOException $ErrorPDO)
 				{
 					//Muestra detalles del query solo al admin
-					if ($Login_usuario!='admin')
-						$query_recibido='Solo pueden ser vistos por el usuario admin.';
-					else
-						$query_recibido=$query;
-					mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.$query_recibido,'80%','icono_error.png','TextosEscritorio');
+					if ($Login_usuario!='admin') $query=$MULTILANG_ErrorSoloAdmin;
+					mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.$query,'80%','icono_error.png','TextosEscritorio');
+					//Redirecciona segun la accion
+					if ($accion=="Iniciar_login") 
+						echo '<form name="Acceso" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value=""></form><script type="" language="JavaScript">	document.Acceso.submit();  </script>';
 					return 1;
 				}
 		}
@@ -113,6 +136,7 @@
 			*/
 			global $ConexionPDO;
 			global $Login_usuario;
+			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin,$MULTILANG_ContacteAdmin;
 			try
 				{
 					$consulta = $ConexionPDO->prepare($query);
@@ -122,12 +146,8 @@
 			catch( PDOException $ErrorPDO)
 				{
 					//Muestra detalles del query solo al admin
-					if ($Login_usuario!='admin')
-						$query_recibido='Solo pueden ser vistos por el usuario admin.';
-					else
-						$query_recibido=$query;
-					echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$query_recibido.'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
-					//mensaje('Error durante la ejecuci&oacute;n',$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
+					if ($Login_usuario!='admin') $query=$MULTILANG_ErrorSoloAdmin;
+					echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$query.'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
 					return $ErrorPDO->getMessage();
 				}
 		}

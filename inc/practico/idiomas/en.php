@@ -153,8 +153,10 @@
 	$MULTILANG_ErrorDatos='Problem in the input data';
 	$MULTILANG_ErrorTitAuth='<blink>ACCESS DENIED!</blink>';
 	$MULTILANG_ErrorDesAuth='The credentials supplied for access to the system were not accepted. Some common causes are:<br><li> The username or password is incorrect. <br> <li> Security code entered incorrectly. <br> <li> Your Login is disabled. <br> <li> Account locked access by multiple attempts with incorrect password.';
+	$MULTILANG_ErrorSoloAdmin='Only admin user can see the transaction details';
 
 	//Asistente disenador aplicaciones
+	$MULTILANG_DesAppBoton='Application design';
 	$MULTILANG_TitDisenador='Designing the application <b>is simple and fast:</b>';
 	$MULTILANG_DefTablas='Table Definition';
 	$MULTILANG_DesTablas='Tables are those structures in which information is stored using forms associated with them.';
@@ -610,7 +612,7 @@
 
 	//Usuarios
 	$MULTILANG_UsrCopia='Permissions copy completed. Please check below.';
-	$MULTILANG_UsrDesPW='Passwords with minimum safety conditions should have a length of <b>at least 8 characters</b>, numbers, uppercase and lowercase symbols such as <font color=yellow>! # $% & - * </font>. To have your password is considered safe by this system <b> must meet at least one security level of 81%</b>';
+	$MULTILANG_UsrDesPW='Passwords with minimum safety conditions should have a length of <b>at least 8 characters</b>, numbers, uppercase and lowercase symbols such as <font color=yellow># $ * </font>. To have your password is considered safe by this system <b> must meet at least one security level of 81%</b>';
 	$MULTILANG_UsrCambioPW='Change Password';
 	$MULTILANG_UsrAnteriorPW='Old Password';
 	$MULTILANG_UsrNuevoPW='New password';

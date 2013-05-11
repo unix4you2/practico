@@ -367,8 +367,6 @@
 													if ($valor_opcion==$IdiomaPredeterminadoActual) $seleccion="SELECTED";
 													//Presenta la opcion
 													echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$elemento.')</option>';
-													if (file_exists("mod/".$elemento."/index.php"))
-														include("mod/".$elemento."/index.php");
 												}
 										}		
 									//Vuelve a cargar el predeterminado actual
@@ -417,7 +415,28 @@
 							</td>
 							<td valign=top width="380">
 								<font size=2 color=black>
-									<input type="text" name="PlantillaActivaNEW" size="12" value="<?php echo $PlantillaActiva; ?>" class="CampoTexto" class="keyboardInput">
+									<select name="PlantillaActivaNEW" class="Combos" >
+										<?php
+										// Incluye archivos de idioma para ser seleccionados
+										$path_plantillas="skin/";
+										$directorio_plantillas=opendir($path_plantillas);
+										while (($elemento=readdir($directorio_plantillas))!=false)
+											{
+												//Lo procesa solo si es un directorio
+												if (is_dir($path_plantillas.$elemento) && $elemento!="." && $elemento!="..")
+													{
+														include($path_plantillas.$elemento.'/index.php');
+														//Establece el seleccionado actualmente como SELECTED
+														$seleccion="";
+														if ($elemento==$PlantillaActiva) $seleccion="SELECTED";
+														//Presenta la opcion
+														echo '<option value="'.$elemento.'" '.$seleccion.'>'.$MULTILANG_NombrePlantilla.' (skin/'.$elemento.')</option>';
+													}
+											}		
+										//Vuelve a cargar el predeterminado actual
+										include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
+										?>
+									</select>
 								</font>
 							</td>
 						</tr>
@@ -596,9 +615,9 @@
 					//Despliega botones de administracion
 					if ($Login_usuario=="admin" && $Sesion_abierta)
 						echo '
-						<div id="marco_cluster" style="position: absolute; left: 140px; top: 0px;">
-							<a href=\'javascript:AbrirPopUp("BarraFlotanteDesarrollo"); \'><img src="img/icono_admin.png" border="0"></a>
-							<a href=\'javascript:AbrirPopUp("BarraFlotanteConfiguracion"); \'><img src="img/icono_config.png" border=0 algin=middle></a>
+						<div id="marco_cluster" style="position: absolute; left: 140px; top: 5px;">
+							<input type="button" value="'.$MULTILANG_DesAppBoton.'"  class="BotonesEspeciales" onclick="AbrirPopUp(\'BarraFlotanteDesarrollo\');">
+							<input type="button" value="'.$MULTILANG_ConfiguracionGeneral.'"  class="BotonesEspeciales" onclick="AbrirPopUp(\'BarraFlotanteConfiguracion\');">
 						</div>';
 				?>
 			</td>
@@ -612,7 +631,7 @@
 				?>
 			</td>
 			<td align="right"  width="20%" valign="top">
-				<?php 
+				<?php
 					if ($Sesion_abierta) {
 				?>
 							<?php echo $Nombre_usuario;?>

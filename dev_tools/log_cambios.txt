@@ -8,7 +8,7 @@ VersionCompatibleMes="5"
 VersionFinalAno="13"
 VersionFinalMes="6"
 
-#[ListaArchivos] Separados por espacio o salto de linea
+#[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 index.php
 core/actualizacion.php
@@ -28,10 +28,11 @@ core/usuarios.php
 inc/practico/def_basedatos.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
+skin/nomo/general.css
 "
 
 #[ArchivosObligatorios] Separados por espacio
-ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame.txt inc/version_actual.txt"
+ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame.txt inc/version_actual.txt "
 
 ########################################################################
 #[LogCambios] Usado para tmp/par_cambios.txt
@@ -39,10 +40,13 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
  * Added: Idioma inglés basado en Google Translator
  * Added: Multi-idioma a módulos de tablas, usuarios y menúes
+ * Added: Seleccion visual de plantillas
+ * Added: Botones de administracion cambiados por CSS en lugar de imágenes para permitir multi-idioma
  * Fixed: Las consultas SQL eran impresas durante el proceso de instalación (se eliminan)
  * Fixed: [Tester: Esteban Rodriguez] Acción vacía con sesión abierta ya no presenta ventana de login nuevamente.
  * Fixed: [Tester: Esteban Rodriguez] Posible inyección SQL en login.
  * Fixed: [Tester: Esteban Rodriguez] Visualizacion de query con info sensible en errores capturados por PDO.
+ * Fixed: Intento de login con caracteres inválidos redirecciona a login nuevamente.
 "
 
 ########################################################################

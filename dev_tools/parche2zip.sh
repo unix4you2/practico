@@ -116,7 +116,7 @@ enlace:  http://www.unixlandia.org/index.php/Politicas_envio_de_parches
 	To="_to_" # Usado en concatenaciones
 
 #Incluye los datos/parametros para generacion del parche
-source dev_tools/log_cambios.txt
+	source dev_tools/log_cambios.txt
 
 # PARAMETROS BASICOS DEL EMPAQUETADO
 	#Nombre del archivo resultante
@@ -132,6 +132,7 @@ source dev_tools/log_cambios.txt
 	NivelCompresion=" -9 " # -9 (mejor)
 	VerDetalles="  " # -v  (v)erbose
 	Recursividad=" -r "
+	Exclusion=" -x "
 	ProbarIntegridad="  " # -T (T)est
 
 # Pregunta por continuar o abortar

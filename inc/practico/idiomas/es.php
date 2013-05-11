@@ -153,8 +153,10 @@
 	$MULTILANG_ErrorDatos='Problema en los datos ingresados';
 	$MULTILANG_ErrorTitAuth='<blink>ACCESO NEGADO!</blink>';
 	$MULTILANG_ErrorDesAuth='Las credenciales suministradas para el acceso al sistema no fueron aceptadas.  Algunas causas comunes son:<br><li>El nombre de usuario o contrase&ntilde;a son incorrectos.<br><li>C&oacute;digo de seguridad ingresado de manera incorrecta.<br><li>Su usuario est&aacute; deshabilitado.<br><li>Cuenta bloqueada por multiples intentos de acceso con clave incorrecta.';
+	$MULTILANG_ErrorSoloAdmin='S&oacute;lo el usuario admin puede ver los detalles de la transacci&oacute;n';
 
 	//Asistente disenador aplicaciones
+	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';
 	$MULTILANG_TitDisenador='Dise&ntilde;ar la aplicaci&oacute;n, <b>es simple y r&aacute;pido:</b>';
 	$MULTILANG_DefTablas='Definici&oacute;n de tablas';
 	$MULTILANG_DesTablas='Las tablas son aquellas estructuras en las que ser&aacute; almacenada la informaci&oacute;n que sus usuarios diligencien por medio de formularios asociados a &eacute;stas.';
@@ -607,7 +609,7 @@
 	
 	//Usuarios
 	$MULTILANG_UsrCopia='Copia de permisos finalizada.  Por favor verifique a continuacion.';
-	$MULTILANG_UsrDesPW='Las contrase&ntilde;as con condiciones m&iacute;nimas de seguridad deben tener una longitud de <b>al menos 8 caracteres</b>, n&uacute;meros, letras en may&uacute;scula y en min&uacute;scula o s&iacute;mbolos como <font color=yellow>! # $ % & - *</font>.  Para que su contrase&ntilde;a sea considerada segura por este sistema <b>debe cumplir al menos con un nivel de seguridad del 81%</b>';
+	$MULTILANG_UsrDesPW='Las contrase&ntilde;as con condiciones m&iacute;nimas de seguridad deben tener una longitud de <b>al menos 8 caracteres</b>, n&uacute;meros, letras en may&uacute;scula y en min&uacute;scula o s&iacute;mbolos permitidos como <font color=yellow># $ *</font>.  Para que su contrase&ntilde;a sea considerada segura por este sistema <b>debe cumplir al menos con un nivel de seguridad del 81%</b>';
 	$MULTILANG_UsrCambioPW='Cambio de contrase&ntilde;a';
 	$MULTILANG_UsrAnteriorPW='Contrase&ntilde;a anterior';
 	$MULTILANG_UsrNuevoPW='Nueva contrase&ntilde;a';
