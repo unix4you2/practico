@@ -616,8 +616,8 @@
 					if ($Login_usuario=="admin" && $Sesion_abierta)
 						echo '
 						<div id="marco_cluster" style="position: absolute; left: 140px; top: 5px;">
-							<input type="button" value="'.$MULTILANG_DesAppBoton.'"  class="BotonesEspeciales" onclick="AbrirPopUp(\'BarraFlotanteDesarrollo\');">
-							<input type="button" value="'.$MULTILANG_ConfiguracionGeneral.'"  class="BotonesEspeciales" onclick="AbrirPopUp(\'BarraFlotanteConfiguracion\');">
+							<input type="button" value="'.$MULTILANG_DesAppBoton.'"  class="BotonesADM" onclick="AbrirPopUp(\'BarraFlotanteDesarrollo\');">
+							<input type="button" value="'.$MULTILANG_ConfiguracionGeneral.'"  class="BotonesADM" onclick="AbrirPopUp(\'BarraFlotanteConfiguracion\');">
 						</div>';
 				?>
 			</td>

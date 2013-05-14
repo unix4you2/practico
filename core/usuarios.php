@@ -1315,7 +1315,7 @@ if ($accion=="listar_usuarios")
 						<td align="left"></td>
 					</tr>
 					';
-				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario." FROM ".$TablasCore."usuario WHERE (login LIKE '%$login_filtro%') AND (nombre LIKE '%$nombre_filtro%' ) AND login<>'admin' ORDER BY login,nombre");
+				$resultado=ejecutar_sql("SELECT ".$ListaCamposSinID_usuario." FROM ".$TablasCore."usuario WHERE (login LIKE '%$login_filtro%') AND (nombre LIKE '%$nombre_filtro%' ) AND login<>'admin' ORDER BY login,nombre");
 				$i=0;
 				while($registro = $resultado->fetch())
 					{
