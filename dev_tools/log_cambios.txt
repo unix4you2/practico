@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno="13"
-VersionCompatibleMes="5"
+VersionCompatibleAno=""
+VersionCompatibleMes=""
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno="13"
-VersionFinalMes="6"
+VersionFinalAno=""
+VersionFinalMes=""
 
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
@@ -37,16 +37,18 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 ########################################################################
 #[LogCambios] Usado para tmp/par_cambios.txt
 #TOMAR CONTENIDO DESDE EL README
+#Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
- * Added: Idioma inglés basado en Google Translator
- * Added: Multi-idioma a módulos de tablas, usuarios y menúes
+ * Added: Idioma inglEs basado en Google Translator
+ * Added: Multi-idioma a mOdulos de tablas, usuarios y menUes
  * Added: Seleccion visual de plantillas
- * Added: Botones de administracion cambiados por CSS en lugar de imágenes para permitir multi-idioma
- * Fixed: Las consultas SQL eran impresas durante el proceso de instalación (se eliminan)
- * Fixed: [Tester: Esteban Rodriguez] Acción vacía con sesión abierta ya no presenta ventana de login nuevamente.
- * Fixed: [Tester: Esteban Rodriguez] Posible inyección SQL en login.
+ * Added: Botones de administraciOn cambiados por CSS en lugar de imAgenes para permitir multi-idioma
+ * Added: El asistente de actualizaciOn ahora permite parches sin firma de versiOn
+ * Fixed: Las consultas SQL eran impresas durante el proceso de instalaciOn (se eliminan)
+ * Fixed: [Tester: Esteban Rodriguez] AcciOn vacIa con sesiOn abierta ya no presenta ventana de login nuevamente.
+ * Fixed: [Tester: Esteban Rodriguez] Posible inyecciOn SQL en login.
  * Fixed: [Tester: Esteban Rodriguez] Visualizacion de query con info sensible en errores capturados por PDO.
- * Fixed: Intento de login con caracteres inválidos redirecciona a login nuevamente.
+ * Fixed: Intento de login con caracteres invAlidos redirecciona a login nuevamente.
 "
 
 ########################################################################
@@ -58,5 +60,5 @@ ScriptBasedatos="
 ########################################################################
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
-	Ver: http://www.pedroventura.com/php/problemas-codificacion-web-configurar-codificacion-utf8-php-mysql-y-html/
+
 "

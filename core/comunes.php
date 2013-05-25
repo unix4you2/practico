@@ -41,7 +41,20 @@
 					cadena - Cadena a filtrar
 
 				Salida:
-					Retorna cadena sin caracteres ilegales
+					Retorna cadena sin caracteres ilegales o posibles inyecciones
+
+					' or "='
+					'' or 1=1 -- and ''=''
+					admin' --
+					admin' #
+					admin'/*
+					' or 1=1--
+					' or 1=1#
+					' or 1=1/*
+					') or '1'='1--
+					') or ('1'='1--
+					1' and ''=' 
+					' OR 'A'='A
 			*/
 			$cadena = str_ireplace("''","'",$cadena);
 			$cadena = str_ireplace("\\","",$cadena);

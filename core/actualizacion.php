@@ -175,7 +175,7 @@ if ($accion=="analizar_parche")
 		//Libreria necesaria para extraer el archivo
 		include("inc/pclzip/pclzip.lib.php");
 		$archivo = new PclZip($archivo_cargado);
-		
+
 		//Obtiene archivo compat.txt con el numero de version compatible del parche
 		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "tmp/par_compat.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
 		$version_compatible=trim($lista_contenido[0]['content']);
@@ -200,15 +200,19 @@ if ($accion=="analizar_parche")
 		if ($lista_contenido == 0)
 			$mensaje_error.='<br>'.$MULTILANG_ErrorActualiza.' tmp/par_sql.txt <br>';
 
-		//Verifica que no sea un parche mas viejo que la version actual
-		if ($mensaje_error=="")
-			if ($version_final <= $version_actual)
-				$mensaje_error.='<br>'.$MULTILANG_ErrorAntigua;
+		//Hace verificaciones adicionales cuando la version compatible es diferente de un punto (. = cualquiera)
+		if ($version_compatible!=".")
+			{
+				//Verifica que no sea un parche mas viejo que la version actual
+				if ($mensaje_error=="")
+					if ($version_final <= $version_actual)
+						$mensaje_error.='<br>'.$MULTILANG_ErrorAntigua;
 
-		//Verifica si la version actualmente instalada es la requerida por el parche
-		if ($mensaje_error=="")
-			if ($version_compatible != $version_actual)
-				$mensaje_error.="<br>".$MULTILANG_ErrorVersion." ".$version_compatible."<br>".$MULTILANG_AvisoIncremental;
+				//Verifica si la version actualmente instalada es la requerida por el parche
+				if ($mensaje_error=="")
+					if ($version_compatible != $version_actual)
+						$mensaje_error.="<br>".$MULTILANG_ErrorVersion." ".$version_compatible."<br>".$MULTILANG_AvisoIncremental;
+			}
 
 		if ($mensaje_error=="")
 			{
