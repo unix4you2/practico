@@ -166,7 +166,7 @@ enlace:  http://www.unixlandia.org/index.php/Politicas_envio_de_parches
 
 		echo "-----------------------------------------------------------------"
 		echo "Empaquetando archivos del parche..."
-		ComandoFinal=${Comando}${NivelCompresion}${VerDetalles}${Recursividad}${ProbarIntegridad}${Espacio}${SCRIPTPATH}${Slash}${ArchivoParche}${Espacio}${ArchivosFijos}${ListaArchivos}
+		ComandoFinal=${Comando}${NivelCompresion}${VerDetalles}${Recursividad}${ProbarIntegridad}${Espacio}${SCRIPTPATH}${Slash}${ArchivoParche}${Espacio}${ArchivosFijos}${ArchivoVersion}${ListaArchivos}
 		eval ${ComandoFinal}
 		
 		#Elimina archivos del parche creados

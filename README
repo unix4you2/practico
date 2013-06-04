@@ -46,6 +46,19 @@
 | |__| (_) | (_| | | (_| |  __/ | (_| (_| | | | | | | |_) | | (_) \__ \
 |_____\___/ \__, |  \__,_|\___|  \___\__,_|_| |_| |_|_.__/|_|\___/|___/
             |___/ 
+
+----------------------------------------
+Versión 13.6 (2013-06-03)
+ * Added: Idioma inglEs basado en Google Translator
+ * Added: Multi-idioma a mOdulos de tablas, usuarios y menUes
+ * Added: Seleccion visual de plantillas
+ * Added: Botones de administraciOn cambiados por CSS en lugar de imAgenes para permitir multi-idioma
+ * Added: El asistente de actualizaciOn ahora permite parches sin firma de versiOn
+ * Fixed: Las consultas SQL eran impresas durante el proceso de instalaciOn (se eliminan)
+ * Fixed: [Tester: Esteban Rodriguez] AcciOn vacIa con sesiOn abierta ya no presenta ventana de login nuevamente.
+ * Fixed: [Tester: Esteban Rodriguez] Posible inyecciOn SQL en login.
+ * Fixed: [Tester: Esteban Rodriguez] Visualizacion de query con info sensible en errores capturados por PDO.
+ * Fixed: Intento de login con caracteres invAlidos redirecciona a login nuevamente.
 ----------------------------------------
 Versión 13.5 (2013-05-02)
   * Added: Panel de control de configuración por el admin

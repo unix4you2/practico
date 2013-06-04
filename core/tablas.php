@@ -593,7 +593,7 @@ if ($accion=="editar_tabla")
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 								<input type="Hidden" name="accion" value="asistente_tablas">
 								<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError2.'">
-								<input type="Hidden" name="error_descripcion" value="'.$MULTILANG_TblError3=.': <i>'.$error_mysql.'</i>">
+								<input type="Hidden" name="error_descripcion" value="'.$MULTILANG_TblError3.': <i>'.$error_mysql.'</i>">
 								</form>
 									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 						}

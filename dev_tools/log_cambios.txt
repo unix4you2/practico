@@ -1,12 +1,16 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno=""
-VersionCompatibleMes=""
+VersionCompatibleAno="13"
+VersionCompatibleMes="5"
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno=""
-VersionFinalMes=""
+VersionFinalAno="13"
+VersionFinalMes="6"
+
+#[Archivo de version]
+#Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version
+ArchivoVersion=" inc/version_actual.txt "
 
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
@@ -32,23 +36,14 @@ skin/nomo/general.css
 "
 
 #[ArchivosObligatorios] Separados por espacio
-ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame.txt inc/version_actual.txt "
+ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame.txt "
 
 ########################################################################
 #[LogCambios] Usado para tmp/par_cambios.txt
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
- * Added: Idioma inglEs basado en Google Translator
- * Added: Multi-idioma a mOdulos de tablas, usuarios y menUes
- * Added: Seleccion visual de plantillas
- * Added: Botones de administraciOn cambiados por CSS en lugar de imAgenes para permitir multi-idioma
- * Added: El asistente de actualizaciOn ahora permite parches sin firma de versiOn
- * Fixed: Las consultas SQL eran impresas durante el proceso de instalaciOn (se eliminan)
- * Fixed: [Tester: Esteban Rodriguez] AcciOn vacIa con sesiOn abierta ya no presenta ventana de login nuevamente.
- * Fixed: [Tester: Esteban Rodriguez] Posible inyecciOn SQL en login.
- * Fixed: [Tester: Esteban Rodriguez] Visualizacion de query con info sensible en errores capturados por PDO.
- * Fixed: Intento de login con caracteres invAlidos redirecciona a login nuevamente.
+
 "
 
 ########################################################################
