@@ -5,12 +5,12 @@
 	$PasswordBD='mypass';
 	$MotorBD='mysql';
 	$PuertoBD='';
-	$NombreRAD='Práctico';
+	$NombreRAD='Pr&aacute;ctico';
 	$PlantillaActiva='nomo';
 	$ArchivoCORE='';
 	$TablasCore='core_';
 	$TablasApp='app_';
-	$LlaveDePaso='F8UQBDHVW4';
+	$LlaveDePaso='AJXRMXZXBJ';
 	$ModoDepuracion=0;
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='es';

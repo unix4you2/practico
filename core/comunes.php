@@ -74,8 +74,8 @@
 			$cadena = str_ireplace("?","",$cadena);
 			$cadena = str_ireplace("&","",$cadena);
 			/*
-			array_walk($_POST, 'limpiarCadena');
-			array_walk($_GET, 'limpiarCadena');
+			array_walk($_POST, 'filtrar_cadena_sql');
+			array_walk($_GET, 'filtrar_cadena_sql');
 			//$cadena = str_ireplace("SELECT","",$cadena);
 			//$cadena = str_ireplace("=","",$cadena);
 			*/

@@ -623,7 +623,7 @@ if ($accion=="administrar_menu")
 							</td><td width="5"></td>
 							<td align="RIGHT">
 									<input type="button" name="" value="<?php echo $MULTILANG_Agregar; ?>" class="Botones" onClick="document.datos.submit()">
-									&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" name="<?php echo $MULTILANG_Cancelar; ?>" value="" class="Botones">
+									&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="<?php echo $MULTILANG_Cancelar; ?>" value="" class="Botones">
 							</td>
 						</tr>
 					</table>

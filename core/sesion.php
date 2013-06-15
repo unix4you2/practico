@@ -54,6 +54,9 @@
 	if ($accion=="Iniciar_login") 
 		{
 			//Filtra cadenas recibidas para evitar sql injection
+			$uid_orig=$uid;
+			$clave_orig=$clave;
+			$captcha_orig=$captcha;
 			$uid=filtrar_cadena_sql($uid);
 			$clave=filtrar_cadena_sql($clave);
 			$captcha=filtrar_cadena_sql($captcha);
@@ -63,8 +66,9 @@
 			if ($captcha_temporal!=$captcha)
 				{
 					$ok_captcha=0;
-					// Lleva a auditoria con query manual por la falta de $Login_Usuario
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$uid','Elimina sesiones activas al intentar acceso con CAPTCHA incorrecto desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");
+					// Lleva auditoria con query manual por la falta de $Login_Usuario y solamente si no hay un posible sqlinjection
+					if ($uid_orig==$uid && $clave_orig==$clave)
+						ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$uid','Elimina sesiones activas al intentar acceso con CAPTCHA incorrecto desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");
 				}
 			session_destroy();
 

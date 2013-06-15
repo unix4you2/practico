@@ -345,7 +345,7 @@ select:focus {
 }
 
 div.nicetitle {
-    position: absolute;
+    position: absolute;  /*absolute (default), relative, fixed, inherit, static*/
     padding: 4px;
     top: 0px;
     left: 0px;

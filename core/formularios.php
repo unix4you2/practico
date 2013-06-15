@@ -1622,8 +1622,8 @@ if ($accion=="administrar_formularios")
 								</td>
 							</tr>
 							<tr>
-								<td>
-<textarea name="javascript" cols="100" rows="20" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)">
+								<td align=center>
+<textarea name="javascript" cols="100" rows="20">
 function FrmAutoRun()
 	{
 		//Aqui sus instrucciones
