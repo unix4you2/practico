@@ -79,7 +79,7 @@
 
 <?php 
 	//Despliega marco de administracion a ser activado por el boton superior
-	if ($Login_usuario=="admin" && $Sesion_abierta)
+	if (@$Login_usuario=="admin" && $Sesion_abierta)
 		{
 ?>
 		<!-- INICIO DE MARCOS POPUP -->
@@ -612,7 +612,7 @@
 				?>
 				<?php 
 					//Despliega botones de administracion
-					if ($Login_usuario=="admin" && $Sesion_abierta)
+					if (@$Login_usuario=="admin" && $Sesion_abierta)
 						echo '
 						<div id="marco_cluster" style="position: absolute; left: 140px; top: 5px;">
 							<input type="button" value="'.$MULTILANG_DesAppBoton.'"  class="BotonesADM" onclick="AbrirPopUp(\'BarraFlotanteDesarrollo\');">
@@ -661,7 +661,7 @@
 								$Complemento_tablas=",".$TablasCore."usuario_menu";
 								$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$Login_usuario'";  // AND nivel>0
 							}
-						$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".$Complemento_tablas." WHERE posible_arriba=1 ".$Complemento_condicion);
+						$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_arriba=1 ".@$Complemento_condicion);
 
 						while($registro = $resultado->fetch())
 							{

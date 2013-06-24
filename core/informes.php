@@ -589,7 +589,7 @@ if ($accion=="editar_informe")
 													// Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
 													if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
 														echo '<option value="'.$registro[0].'" >'.str_replace($TablasApp,'',$registro[0]).'</option>';
-												}		
+												}
 									?>
 								</select><a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
 							</td>
@@ -651,6 +651,7 @@ if ($accion=="editar_informe")
 					echo '<input type="Button"  class="BotonesEstadoCuidado" value="'.$MULTILANG_Cerrar.'" onClick="OcultarPopUp(\'FormularioTablas\')">';
 				cerrar_barra_estado();
 			cerrar_ventana();
+
 			?>
 		<!-- FIN DE MARCOS POPUP -->
 		</div>
@@ -674,8 +675,8 @@ if ($accion=="editar_informe")
 								<select  name="campo_datos" class="Combos" >
 									<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
 									<?php
-											$resultado=ejecutar_sql("SELECT valor_tabla FROM ".$TablasCore."informe_tablas WHERE informe='$informe'");
-											//$resultado=consultar_tablas();
+											//$resultado=ejecutar_sql("SELECT valor_tabla FROM ".$TablasCore."informe_tablas WHERE informe='$informe'");
+											$resultado=consultar_tablas();
 											while ($registro = $resultado->fetch())
 												{
 													// Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
@@ -683,12 +684,9 @@ if ($accion=="editar_informe")
 														{
 															echo '<optgroup label="'.str_replace($TablasApp,'',$registro[0]).'" >';
 															//Busca los campos de la tabla
-															$nombre_tabla=$registro[0];
-															$resultado_campos=ejecutar_sql("DESCRIBE $nombre_tabla ");
-															while($registro_campos = $resultado_campos->fetch())
-																{
-																	echo '<option value="'.$nombre_tabla.'.'.$registro_campos["Field"].'">'.$registro_campos["Field"].'</option>';
-																}
+															$resultadocampos=consultar_columnas($registro[0]);
+															for($i=0;$i<count($resultadocampos);$i++)
+																echo '<option value="'.$nombre_tabla.'.'.$resultadocampos[$i]["nombre"].'">'.$resultadocampos[$i]["nombre"].'</option>';
 															echo '</optgroup>';
 														}
 												}
@@ -1418,12 +1416,12 @@ if ($accion=="editar_informe")
 						<td align="RIGHT" valign="TOP"><strong><?php echo $MULTILANG_InfNivelUsuario; ?></strong></td>
 						<td>
 							<select  name="nivel_usuario" id="nivel_usuario" class="Combos">
-								<option value="-1" <?php if ($registro_informe["nivel_usuario"]=="-1") echo 'selected'; ?> ><?php echo $MULTILANG_InfTodoUsuario; ?></option>
-								<option value="1"  <?php if ($registro_informe["nivel_usuario"]=="1") echo 'selected'; ?> >&#9733;</option>
-								<option value="2"  <?php if ($registro_informe["nivel_usuario"]=="2") echo 'selected'; ?> >&#9733;&#9733;</option>
-								<option value="3"  <?php if ($registro_informe["nivel_usuario"]=="3") echo 'selected'; ?> >&#9733;&#9733;&#9733;</option>
-								<option value="4"  <?php if ($registro_informe["nivel_usuario"]=="4") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;</option>
-								<option value="5"  <?php if ($registro_informe["nivel_usuario"]=="5") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
+								<option value="-1" <?php if (@$registro_informe["nivel_usuario"]=="-1") echo 'selected'; ?> ><?php echo $MULTILANG_InfTodoUsuario; ?></option>
+								<option value="1"  <?php if (@$registro_informe["nivel_usuario"]=="1") echo 'selected'; ?> >&#9733;</option>
+								<option value="2"  <?php if (@$registro_informe["nivel_usuario"]=="2") echo 'selected'; ?> >&#9733;&#9733;</option>
+								<option value="3"  <?php if (@$registro_informe["nivel_usuario"]=="3") echo 'selected'; ?> >&#9733;&#9733;&#9733;</option>
+								<option value="4"  <?php if (@$registro_informe["nivel_usuario"]=="4") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;</option>
+								<option value="5"  <?php if (@$registro_informe["nivel_usuario"]=="5") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
 							</select>
 							<a href="#" title="<?php echo $MULTILANG_InfTitNivel; ?>" name="<?php echo $MULTILANG_InfDesNivel; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
@@ -1637,12 +1635,12 @@ if ($accion=="administrar_informes")
 						<td align="RIGHT" valign="TOP"><strong><?php echo $MULTILANG_InfNivelUsuario; ?></strong></td>
 						<td>
 							<select  name="nivel_usuario" id="nivel_usuario" class="Combos">
-								<option value="-1" <?php if ($registro["nivel_usuario"]=="-1") echo 'selected'; ?> ><?php echo $MULTILANG_InfTodoUsuario; ?></option>
-								<option value="1"  <?php if ($registro["nivel_usuario"]=="1") echo 'selected'; ?> >&#9733;</option>
-								<option value="2"  <?php if ($registro["nivel_usuario"]=="2") echo 'selected'; ?> >&#9733;&#9733;</option>
-								<option value="3"  <?php if ($registro["nivel_usuario"]=="3") echo 'selected'; ?> >&#9733;&#9733;&#9733;</option>
-								<option value="4"  <?php if ($registro["nivel_usuario"]=="4") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;</option>
-								<option value="5"  <?php if ($registro["nivel_usuario"]=="5") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
+								<option value="-1" <?php if (@$registro["nivel_usuario"]=="-1") echo 'selected'; ?> ><?php echo $MULTILANG_InfTodoUsuario; ?></option>
+								<option value="1"  <?php if (@$registro["nivel_usuario"]=="1") echo 'selected'; ?> >&#9733;</option>
+								<option value="2"  <?php if (@$registro["nivel_usuario"]=="2") echo 'selected'; ?> >&#9733;&#9733;</option>
+								<option value="3"  <?php if (@$registro["nivel_usuario"]=="3") echo 'selected'; ?> >&#9733;&#9733;&#9733;</option>
+								<option value="4"  <?php if (@$registro["nivel_usuario"]=="4") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;</option>
+								<option value="5"  <?php if (@$registro["nivel_usuario"]=="5") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
 							</select>
 							<a href="#" title="<?php echo $MULTILANG_InfTitNivel; ?>" name="<?php echo $MULTILANG_InfDesNivel; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>

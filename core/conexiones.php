@@ -74,7 +74,7 @@
 			if ($MotorBD=="sqlite")
 				{
 					//Si se encuentra en tiempo de instalacion añade prefijo para guardar BD en nivel superior
-					if ($tiempo_instalacion_activa==1)
+					if (@$tiempo_instalacion_activa==1)
 						$BaseDatos="../".$BaseDatos;
 					$ConexionPDO = new PDO("sqlite:$BaseDatos");  // SQLite 3??? $ConexionPDO = new PDO("sqlite::memory");	
 				}

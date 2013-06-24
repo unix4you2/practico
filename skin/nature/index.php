@@ -19,5 +19,5 @@
 	*/
 
 	// Cadena que describe la plantilla
-	$MULTILANG_NombrePlantilla		='Simple (no Marcos, contenido plano)';
+	$MULTILANG_NombrePlantilla		='Nature - Un paisaje simple de fondo';
 ?>

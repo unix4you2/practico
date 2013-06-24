@@ -335,8 +335,10 @@
 			global $BaseDatos;
 			global $MULTILANG_ErrorTiempoEjecucion;
 
-			if($MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc" || $MotorBD=="sqlite")
+			if($MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc")
 					$consulta = "SELECT name FROM sysobjects WHERE xtype='U';";
+			if($MotorBD=="sqlite")
+					$consulta = "SELECT name FROM sqlite_master WHERE type IN ('table','view') AND name NOT LIKE 'sqlite_%' UNION ALL SELECT name FROM sqlite_temp_master WHERE type IN ('table','view') ORDER BY 1";
 			if($MotorBD=="oracle")
 					$consulta = "SELECT table_name FROM cat;";  //  Si falla probar con esta:  $consulta = "SELECT table_name FROM tabs;";
 			if($MotorBD=="ifmx" || $MotorBD=="fbd")
@@ -365,8 +367,8 @@
 	function consultar_columnas($tabla)
 		{
 			/*
-				Function: consultar_columnas
-				Devuelve un vector con los nombres de las columnas de una tabla
+				Function: consultar_nombres_columnas
+				Devuelve un arreglo escalar y asociativo con los nombres de las columnas de una tabla y sus datos generales
 
 				Variables de entrada:
 
@@ -378,13 +380,105 @@
 				Ver tambien:
 				<consultar_tablas>
 			*/
+			global $ConexionPDO;
+			global $MotorBD;
+			global $BaseDatos;
+			global $MULTILANG_ErrorTiempoEjecucion;
+
+			//Busca los campos dependiendo del motor de BD configurado actualmente
+			if ($MotorBD=="mysql" || $MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc" || $MotorBD=="oracle" || $MotorBD=="ifmx" || $MotorBD=="fbd")
+				{
+					$columna=0;
+					$resultado=ejecutar_sql("DESCRIBE $tabla ");
+					while($registro = $resultado->fetch())
+						{
+							$columnas[$columna]["nombre"] = $registro["Field"];
+							$columnas[$columna]["tipo"] = $registro["Type"];
+							$columnas[$columna]["nulo"] = $registro["Null"];
+							$columnas[$columna]["llave"] = $registro["Key"];
+							$columnas[$columna]["predefinido"] = $registro["Default"];
+							$columnas[$columna]["extras"] = $registro["Extra"];
+							$columna++;
+						}
+				}
+
+			if ($MotorBD=="pgsql")
+				{
+					$columna=0;
+					$resultado=ejecutar_sql("SELECT * from INFORMATION_SCHEMA.COLUMNS where table_name = '$tabla' ");
+					while($registro = $resultado->fetch())
+						{
+							$columnas[$columna]["nombre"] = $registro["column_name"];
+							$columnas[$columna]["tipo"] = $registro["data_type"];
+							$columnas[$columna]["nulo"] = $registro["is_nullable"];
+							$columnas[$columna]["llave"] = "";
+							$columnas[$columna]["predefinido"] = $registro["column_default"];
+							$columnas[$columna]["extras"] = $registro["udt_name"];
+							$columna++;
+						}
+				}
+
+			if ($MotorBD=="sqlite")
+				{
+					$columna=0;
+					$resultado=ejecutar_sql("SELECT * FROM sqlite_master WHERE type='table' AND name='$tabla' ");
+					$registro = $resultado->fetch();
+					//Toma los campos encontrados en el SQL de la tabla, los separa y los depura para devolver valores
+					$campos=explode(",",$registro["sql"]);
+					for($i=0;$i<count($campos);$i++)
+						{
+							$campos[$i]=trim($campos[$i]);  // Elimina espacios al comienzo y final
+							$campos[$i]=str_replace("  "," ",$campos[$i]);  //Elimina espacios dobles
+							if ($i==0) $campos[$i]=str_replace("CREATE TABLE $tabla (","",$campos[$i]);  //Elimina instruccion create del primer campo
+							if ($i==count($campos)-1) $campos[$i]=str_replace("))",")",$campos[$i]);  //Elimina ultimos parentesis
+							//echo $i." valor:".$campos[$i]."<hr>"; //  Usado para depuracion en tiempo de desarrollo
+							$analisis_campo=explode(" ",$campos[$i]);
+							$columnas[$columna]["nombre"] = $analisis_campo[0];
+							$columnas[$columna]["tipo"] = $analisis_campo[1];
+							$palabra_siguiente=2;
+							if (trim(strtoupper($analisis_campo[$palabra_siguiente]))=="PRIMARY")
+								{
+									$columnas[$columna]["llave"] = $analisis_campo[$palabra_siguiente];
+									$palabra_siguiente+=2;
+								}
+							if (trim(strtoupper($analisis_campo[$palabra_siguiente]))=="NOT")
+								{
+									$columnas[$columna]["nulo"] =  $analisis_campo[$palabra_siguiente]." ".$analisis_campo[$palabra_siguiente+1];
+									$palabra_siguiente+=2;
+								}
+							if (trim(strtoupper($analisis_campo[$palabra_siguiente]))=="DEFAULT")
+								{
+									$columnas[$columna]["predefinido"] =  $analisis_campo[$palabra_siguiente+1];
+									$palabra_siguiente+=2;
+								}
+							$columnas[$columna]["extras"] = $registro[""];
+							$columna++;
+						}
+				}
+
+
+			//Retorna el arreglo asociativo
+			return $columnas;
+
+
+			/*//Forma 1 (General solo nombres)
 			$resultado=ejecutar_sql("SELECT * FROM ".$tabla);
 			$columnas = array();
 			foreach($resultado->fetch(PDO::FETCH_ASSOC) as $key=>$val)
 				{
-					$columnas[] = $key;
+					$columnas[]["nombre"] = $key;
 				}
-			return $columnas;
+			return $columnas;*/
+
+			/*//Forma 2
+			$resultado=ejecutar_sql("SELECT * FROM ".$tabla);
+			$columnas = array();
+			for ($i = 0; $i < $resultado->columnCount(); $i++)
+				{
+					$col = $resultado->getColumnMeta($i);
+					$columnas[] = $col['name'];
+				}
+			return $columnas;*/
 		}
 
 
@@ -1498,13 +1592,13 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			if (!$hay_condiciones)
 			$consulta.=" 1 ";
 
-			if ($registro_informe[agrupamiento]!="")
+			if (@$registro_informe[agrupamiento]!="")
 				{
 					$campoagrupa=$registro_informe[agrupamiento];	
 					$consulta.= " GROUP BY $campoagrupa";
 				}
 
-			if ($registro_informe[ordenamiento]!="")
+			if (@$registro_informe[ordenamiento]!="")
 				{
 					$campoorden=$registro_informe[ordenamiento];
 					$consulta.= " ORDER BY $campoorden";

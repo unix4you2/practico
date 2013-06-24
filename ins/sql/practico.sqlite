@@ -9,6 +9,7 @@ CREATE TABLE Core_parametros (
   fecha_lanzamiento text,
   licencia text,
   creditos text
+  
 );
 
 INSERT INTO Core_parametros VALUES (1,'Nombre completo de su empresa','PAR_NombreCortoEmpresa','PAR_NombreAplicacion','PAR_VersionAplicacion','20120101','Texto de su licencia','Texto asociado a los creditos de su aplicacion');
@@ -24,6 +25,7 @@ CREATE TABLE Core_usuario (
   correo text  default '',
   ultimo_acceso text  default '20000101',
   llave_paso text  default 'd41d8cd98f00b204e9800998ecf8427e'
+  
 );
 
 INSERT INTO Core_usuario VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','Super usuario','Administrador del sistema',1,5,'unix4you2@gmail.com','20110601','d41d8cd98f00b204e9800998ecf8427e');
@@ -37,6 +39,7 @@ CREATE TABLE Core_auditoria (
   accion text,
   fecha text,
   hora text
+  
 );
 
 DROP TABLE IF EXISTS Core_menu;
@@ -56,18 +59,19 @@ CREATE TABLE Core_menu (
   posible_escritorio integer default '0',
   seccion text default '',
   imagen text default ''
+  
 );
 
 INSERT INTO Core_menu VALUES (1,'Cambio de clave',0,0,'',1,'Interno','cambiar_clave' ,5,3,1,0,0,'Opciones generales de usuario','icono_llave.png');
 INSERT INTO Core_menu VALUES (2,'Actualizaciones',0,0,'',1,'Interno','actualizar_practico' ,5,3,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','bajar.png');
 INSERT INTO Core_menu VALUES (3,'Mis Informes',0,0,'',1,'Interno','mis_informes' ,5,3,0,0,1,'Opciones generales de usuario','compfile.png');
 
-
 DROP TABLE IF EXISTS Core_usuario_menu;
 CREATE TABLE Core_usuario_menu (
   id integer PRIMARY KEY AUTOINCREMENT,
   usuario text  default '',
   menu integer  default '0'
+  
 );
 
 DROP TABLE IF EXISTS Core_formulario;
@@ -80,6 +84,7 @@ CREATE TABLE Core_formulario (
   tabla_datos text default '',
   columnas integer default '1',
   javascript text
+  
 );
 
 DROP TABLE IF EXISTS Core_formulario_objeto;
@@ -114,6 +119,7 @@ CREATE TABLE Core_formulario_objeto (
   objeto_en_ventana integer,
   informe_vinculado integer,
   maxima_longitud integer default 0
+  
 );
 
 DROP TABLE IF EXISTS Core_formulario_boton;
@@ -129,6 +135,7 @@ CREATE TABLE Core_formulario_boton (
   retorno_titulo text default '',
   retorno_texto text,
   confirmacion_texto text default ''
+  
 );
 
 DROP TABLE IF EXISTS Core_informe;
@@ -144,6 +151,7 @@ CREATE TABLE Core_informe (
   alto text,
   formato_final text, 
   formato_grafico text
+  
 );
 
 DROP TABLE IF EXISTS Core_informe_campos;
@@ -152,6 +160,7 @@ CREATE TABLE Core_informe_campos (
   informe integer,
   valor_campo text,
   valor_alias text
+  
 );
 
 DROP TABLE IF EXISTS Core_informe_tablas;
@@ -160,6 +169,7 @@ CREATE TABLE Core_informe_tablas (
   informe integer,
   valor_tabla text,
   valor_alias text
+  
 );
 
 DROP TABLE IF EXISTS Core_informe_condiciones;
@@ -170,6 +180,7 @@ CREATE TABLE Core_informe_condiciones (
   operador text,
   valor_der text,
   peso integer default '0'
+  
 );
 
 DROP TABLE IF EXISTS Core_informe_boton;
@@ -183,6 +194,7 @@ CREATE TABLE Core_informe_boton (
   visible integer default '1',
   peso integer,
   confirmacion_texto text default ''
+  
 );
 
 DROP TABLE IF EXISTS Core_usuario_informe;
@@ -190,5 +202,6 @@ CREATE TABLE Core_usuario_informe (
   id integer PRIMARY KEY  AUTOINCREMENT,
   usuario text ,
   informe integer
+  
 );
 

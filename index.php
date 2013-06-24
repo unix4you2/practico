@@ -43,7 +43,7 @@
 	*/
 
 	// Inicio de la sesion
-	session_start();
+	@session_start();
 
 	//Determina si es un primer inicio o no hay configuracion
 	if (!file_exists("core/configuracion.php")) { header("Location: ins/"); die();}
@@ -103,7 +103,7 @@
 	include_once("core/comunes.php");
 
 	// Almacena tiempo de inicio para calculo de tiempos de ejecucion del script (informados al admin)
-	if($Login_usuario=="admin" && $accion!="") $tiempo_inicio_script = obtener_microtime();
+	if(@$Login_usuario=="admin" && $accion!="") $tiempo_inicio_script = obtener_microtime();
 
 	// Verifica autenticidad de la sesion mediante llave de paso
 	if ($accion!= "" && $accion!="Iniciar_login" && $accion!="Terminar_sesion" && $accion!="Mensaje_cierre_sesion")

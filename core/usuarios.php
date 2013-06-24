@@ -971,7 +971,7 @@ if ($accion=="ver_seguimiento_monitoreo")
 			*/
 						echo '<div align="center"><br>';
 				abrir_ventana($MULTILANG_UsrAudit1,'#BDB9B9','90%');
-					echo '<form name="datos" action="'.$ArchivoSNT.'" method="POST">
+					echo '<form name="datos" action="'.$ArchivoCORE.'" method="POST">
 						</form>';
 				echo '<table width="100%" border="0" cellspacing="2" align="CENTER" class="TextosVentana">
 					<tr>
@@ -1027,12 +1027,12 @@ if ($accion=="ver_seguimiento_general")
 			*/
 						echo '<div align="center"><br>';
 				abrir_ventana($MULTILANG_UsrAudUsrs,'#BDB9B9','90%');
-				if ($inicio_reg=="") $inicio_reg=0;
-				if ($fin_reg=="") $fin_reg=50;
+				if (@$inicio_reg=="") $inicio_reg=0;
+				if (@$fin_reg=="") $fin_reg=50;
 					echo ' <br><div align="center">
-								<form name="datos" action="'.$ArchivoSNT.'" method="POST">
+								<form name="datos" action="'.$ArchivoCORE.'" method="POST">
 								&nbsp;&nbsp;'.$MULTILANG_UsrAudAccion.'
-								<input type="text" class="CampoTexto" name="accionbuscar" value="'.$accionbuscar.'" size="30" maxlength="200"> '.$MULTILANG_UsrAudUsuario.'
+								<input type="text" class="CampoTexto" name="accionbuscar" value="'.@$accionbuscar.'" size="30" maxlength="200"> '.$MULTILANG_UsrAudUsuario.'
 								<select name="usuario" class="Combos">
 									<option value="">'.$MULTILANG_Cualquiera.'</option>';
 										$resultado=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario ORDER BY login");
@@ -1153,13 +1153,13 @@ if ($accion=="ver_seguimiento_general")
 						<td align="center" bgcolor="#d6d6d6"><b>'.$MULTILANG_Hora.' (HH-MM-SS)</b></td>
 					</tr>';
 
-				$anoi = $ano;
-				$anof = $ano;
+				@$anoi = $ano;
+				@$anof = $ano;
 				if ($anoi=="") {$anoi=date("Y"); $anof=$anoi;}
-				if ($mesi=="") {$mesi=date("n"); $mesf=$mesi;}
-				if ($diai=="") {$diai=date("j"); $diaf=$diai;}
+				if (@$mesi=="") {$mesi=date("n"); $mesf=$mesi;}
+				if (@$diai=="") {$diai=date("j"); $diaf=$diai;}
 
-				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria WHERE fecha>='$anoi$mesi$diai' AND fecha<= '$anof$mesf$diaf' AND accion LIKE '%$accionbuscar%' AND usuario_login LIKE '%$usuario%' ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg");
+				$resultado=@ejecutar_sql("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria WHERE fecha>='$anoi$mesi$diai' AND fecha<= '$anof$mesf$diaf' AND accion LIKE '%$accionbuscar%' AND usuario_login LIKE '%$usuario%' ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg");
 				while($registro = $resultado->fetch())
 					{
 						echo '<tr><td align="center">'.$registro["id"].'</td>
@@ -1284,19 +1284,19 @@ if ($accion=="listar_usuarios")
 			</form>
 			<form action="'.$ArchivoCORE.'" method="POST">
 					'.$MULTILANG_UsrLisNombre.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input class="CampoTexto" type="Text" value="'.$nombre_filtro.'" name="nombre_filtro" size="20">
+					<input class="CampoTexto" type="Text" value="'.@$nombre_filtro.'" name="nombre_filtro" size="20">
 				<input type="hidden" name="accion" value="listar_usuarios">
 				<input type="submit" value="'.$MULTILANG_Ejecutar.' >>>" class="Botones">
 			</form>
 			<form action="'.$ArchivoCORE.'" method="POST">
 					'.$MULTILANG_UsrLisLogin.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input class="CampoTexto" type="Text" value="'.$login_filtro.'" name="login_filtro" size="20">
+					<input class="CampoTexto" type="Text" value="'.@$login_filtro.'" name="login_filtro" size="20">
 				<input type="hidden" name="accion" value="listar_usuarios">
 				<input type="submit" value="'.$MULTILANG_Ejecutar.' >>>" class="Botones">
 			</form>
 		';
 
-			if ($nombre_filtro == "" && $login_filtro=="")
+			if (@$nombre_filtro == "" && @$login_filtro=="")
 			{
 				echo '<br>'.$MULTILANG_UsrFiltro;
 			}

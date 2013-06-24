@@ -252,11 +252,9 @@ if ($accion=="editar_tabla")
 							<select name="despues_campo">
 								<option value="" ><?php echo $MULTILANG_TblAlFinal; ?></option>
 								<?php
-									$resultado=ejecutar_sql("DESCRIBE $nombre_tabla ");
-									while($registro = $resultado->fetch())
-										{
-											echo '<option value="'.$registro["Field"].'" >'.$MULTILANG_TblDespuesDe.' '.$registro["Field"].'</option>';
-										}
+									$resultado=consultar_columnas($nombre_tabla);
+									for($i=0;$i<count($resultado);$i++)
+										echo '<option value="'.$resultado[$i]["nombre"].'" >'.$MULTILANG_TblDespuesDe.' '.$resultado[$i]["nombre"].'</option>';								
 								?>
 							</select>
 						</td>
@@ -287,49 +285,36 @@ if ($accion=="editar_tabla")
 						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_Predeterminado; ?></b></td>
 						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_Otros; ?></b></td>
 						<td></td>
-						<td></td>
 					</tr>
 		 <?php
-				$resultado=ejecutar_sql("DESCRIBE $nombre_tabla ");
-				while($registro = $resultado->fetch())
+				$registro=consultar_columnas($nombre_tabla);
+				for($i=0;$i<count($registro);$i++)
 					{
 						$imagen="";
-						if ($registro["Key"] != "") $imagen=" <img src='img/key.gif' border=0 align=absmiddle>";
+						if ($registro[$i]["llave"] != "") $imagen=" <img src='img/key.gif' border=0 align=absmiddle>";
 						echo '<tr>
-								<td><b>'.$registro["Field"].$imagen.'</b></td>
-								<td>'.$registro["Type"].'</td>
-								<td>'.$registro["Null"].'</td>
-								<td>'.$registro["Key"].'</td>
-								<td>'.$registro["Default"].'</td>
-								<td>'.$registro["Extra"].'</td>';
+								<td><b>'.$registro[$i]["nombre"].$imagen.'</b></td>
+								<td>'.$registro[$i]["tipo"].'</td>
+								<td>'.$registro[$i]["nulo"].'</td>
+								<td>'.$registro[$i]["llave"].'</td>
+								<td>'.$registro[$i]["predefinido"].'</td>
+								<td>'.$registro[$i]["extras"].'</td>';
 						// Permite eliminar aquellos campos diferentes al Id
-						if ($registro["Field"] != "id")
+						if ($registro[$i]["nombre"] != "id")
 							echo '
 								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["Field"].'" id="f'.$registro["Field"].'">
+										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro[$i]["nombre"].'" id="f'.$registro[$i]["nombre"].'">
 												<input type="hidden" name="accion" value="eliminar_campo">
 												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-												<input type="hidden" name="nombre_campo" value="'.$registro["Field"].'">
-												<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelCampo.'\',f'.$registro["Field"].');">
+												<input type="hidden" name="nombre_campo" value="'.$registro[$i]["nombre"].'">
+												<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelCampo.'\',f'.$registro[$i]["nombre"].');">
 												&nbsp;&nbsp;
 										</form>
-								</td>
-								<td align="center">
-										<!--
-										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="accion" value="editar_tabla">
-												<input type="hidden" name="nombre_tabla" value="'.@$registro["Name"].'">
-												<input type="Button" value="Editar (deshabilitado)"  class="Botones">
-												&nbsp;&nbsp;
-										</form>
-										-->
 								</td>';
 						else
 							echo '
 								<td align="center">
-								</td>
-								<td align="center">
-								'.$MULTILANG_TblNoElim.'
+								['.$MULTILANG_TblNoElim.']
 								</td>';
 
 						echo '	</tr>';
@@ -414,8 +399,70 @@ if ($accion=="editar_tabla")
 			if ($nombre_tabla=="") $mensaje_error=$MULTILANG_TblErrCrear;
 			if ($mensaje_error=="")
 				{
-					// Crea la tabla temporal
-					$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+					// Crea la tabla temporal segun el motor de base de datos
+					$operacion_enviada=0;
+
+					if ($MotorBD=="mysql" && !$operacion_enviada)
+						{
+							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$operacion_enviada=1;
+						}
+
+					if ($MotorBD=="pgsql" && !$operacion_enviada)
+						{
+							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id serial, PRIMARY KEY  (id) )");
+							$operacion_enviada=1;
+						}
+
+					if ($MotorBD=="sqlite" && !$operacion_enviada)
+						{
+							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id integer PRIMARY KEY AUTOINCREMENT)");
+							$operacion_enviada=1;
+						}
+
+					if ( ($MotorBD=="sqlsrv" || $MotorBD=="mssql") && !$operacion_enviada)
+						{
+							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$operacion_enviada=1;
+						}
+
+					if ($MotorBD=="ibm" && !$operacion_enviada)
+						{
+							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$operacion_enviada=1;
+						}
+
+					if ($MotorBD=="dblib" && !$operacion_enviada)
+						{
+							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$operacion_enviada=1;
+						}
+
+					if ($MotorBD=="odbc" && !$operacion_enviada)
+						{
+							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$operacion_enviada=1;
+						}
+
+					if ($MotorBD=="oracle" && !$operacion_enviada)
+						{
+							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$operacion_enviada=1;
+						}
+
+					if ($MotorBD=="ifmx" && !$operacion_enviada)
+						{
+							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$operacion_enviada=1;
+						}
+
+					if ($MotorBD=="fbd" && !$operacion_enviada)
+						{
+							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$operacion_enviada=1;
+						}
+
+					//Valida si hubo errores
 					if ($error_consulta!="")
 						{
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">

@@ -53,7 +53,7 @@
 				&nbsp;&nbsp;<?php echo $MULTILANG_Instante; ?>:&nbsp;&nbsp;<?php echo $fecha_operacion_guiones;?>&nbsp;&nbsp;<?php echo $hora_operacion_puntos;?>
 				<?php
 					// Muestra la accion actual si el usuario es administrador y la accion no es vacia - Sirve como guia a la hora de crear objetos
-					if($Login_usuario=="admin" && $accion!="")
+					if(@$Login_usuario=="admin" && $accion!="")
 						{
 							// Calcula tiempos de ejecucion del script
 							$tiempo_final_script = obtener_microtime();

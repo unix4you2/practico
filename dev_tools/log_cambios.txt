@@ -14,11 +14,8 @@ ArchivoVersion=" inc/version_actual.txt "
 
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
-index.php
-core/menus.php
-core/formularios.php
-core/sesion.php
-inc/ckeditor/*
+core/comunes.php
+core/tablas.php
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -32,8 +29,12 @@ LogCambios="
  * Added: Variable E_DEPRECATED es presentada ahora en los mensajes del modo de depuracion
  * Added: Actualizado y optimizado el editor Wysiwyg
  * Added: Optimización del código y reducción en 0.5 MB el tamaño de instalador
+ * Added: Dos plantillas adicionales de ejemplo: Bluez y Nature  disponibles para descarga.  Por defecto se incluyen Nomo y Nature.
  * Fixed: Correcion en boton cancelar de creacion de menues
+ * Fixed: Correcion en creacion de tablas SQLite y PostgreSQL, se independiza para especificar script en otros motores
+ * Fixed: Obtencion de informacion de campos por tabla
  * Fixed: Supresión de SQLInjection
+ * Fixed: Supresion de mensajes de advertencia innecesarios
 "
 
 ########################################################################
