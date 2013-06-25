@@ -1380,14 +1380,14 @@
 														<td valign=top>';
 													// Formatea cada campo de acuerdo a su tipo
 													// CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas abajo tambien
-													if ($registro_campos["tipo"]=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana);
-													if ($registro_campos["tipo"]=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos,$registro_datos_formulario);
-													if ($registro_campos["tipo"]=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
-													if ($registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario);
-													if ($registro_campos["tipo"]=="lista_radio") $objeto_formateado = cargar_objeto_lista_radio($registro_campos,$registro_datos_formulario);
-													if ($registro_campos["tipo"]=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario);
-													if ($registro_campos["tipo"]=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos,$registro_datos_formulario);
-													if ($registro_campos["tipo"]=="informe") cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
+													if (@$registro_campos["tipo"]=="texto_corto") $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana);
+													if (@$registro_campos["tipo"]=="texto_largo") $objeto_formateado = @cargar_objeto_texto_largo($registro_campos,$registro_datos_formulario);
+													if (@$registro_campos["tipo"]=="texto_formato") { $objeto_formateado = @cargar_objeto_texto_formato($registro_campos,$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
+													if (@$registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = @cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario);
+													if (@$registro_campos["tipo"]=="lista_radio") $objeto_formateado = @cargar_objeto_lista_radio($registro_campos,$registro_datos_formulario);
+													if (@$registro_campos["tipo"]=="etiqueta") $objeto_formateado = @cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario);
+													if (@$registro_campos["tipo"]=="url_iframe") $objeto_formateado = @cargar_objeto_iframe($registro_campos,$registro_datos_formulario);
+													if (@$registro_campos["tipo"]=="informe") @cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
 
 													//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 													if ($registro_campos["tipo"]!="informe")

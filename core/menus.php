@@ -128,6 +128,57 @@ if ($accion=="detalles_menu")
 		<!-- FIN DE MARCOS POPUP -->
 		<div id='FondoPopUps' class="FondoOscuroPopUps"></div>
 
+		<!-- INICIO DE MARCOS POPUP -->
+		<div id='FormularioObjetos' class="FormularioPopUps">
+			<form name="selector_objetos" method="POST">
+			<?php
+			abrir_ventana($MULTILANG_SeleccioneUno.' '.$MULTILANG_MnuObjeto,'BDB9B9','');
+			?>
+				<br><br>
+				<table class="TextosVentana">
+				<tr>
+					<td align="right"><?php echo $MULTILANG_Formularios; ?> / <?php echo $MULTILANG_Informes; ?>:</td>
+					<td >
+						<select  name="objeto_seleccionado" class="Combos">
+						<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+						<optgroup label="<?php echo $MULTILANG_Formularios; ?>">
+							<?php
+								$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario ORDER BY titulo");
+								while($registro_forms = $consulta_forms->fetch())
+									echo '<option value="frm:'.$registro_forms["id"].'">(Id.'.$registro_forms["id"].') '.$registro_forms["titulo"].'</option>';
+							?>
+						</optgroup>
+						<optgroup label="<?php echo $MULTILANG_Informes; ?>">
+							<?php
+								$consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe ORDER BY titulo");
+								while($registro_informes = $consulta_informs->fetch())
+									echo '<option value="inf:'.$registro_informes["id"].'">(Id.'.$registro_informes["id"].') '.$registro_informes["titulo"].'</option>';
+							?>
+						</optgroup>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td align="right"><?php echo $MULTILANG_FrmVentana; ?>:</td>
+					<td >
+						<select  name="definir_ventana_propia" class="Combos">
+							<option value=":1"><?php echo $MULTILANG_Si; ?></option>
+							<option value=":0"><?php echo $MULTILANG_No; ?></option>
+						</select>
+					</td>
+				</tr>
+				</table>
+				<br><br>
+			<?php
+				abrir_barra_estado();
+					echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_Guardar.' " onClick="document.datos.comando.value=document.selector_objetos.objeto_seleccionado.options[document.selector_objetos.objeto_seleccionado.selectedIndex].value + document.selector_objetos.definir_ventana_propia.options[document.selector_objetos.definir_ventana_propia.selectedIndex].value; OcultarPopUp(\'FormularioObjetos\')">';
+					echo '<input type="Button"  class="BotonesEstadoCuidado" value=" '.$MULTILANG_Cancelar.' " onClick="OcultarPopUp(\'FormularioObjetos\')">';
+				cerrar_barra_estado();
+				cerrar_ventana();		// Cierra seleccion de objetos
+			?>
+			</form>
+		</div>
+		<!-- FIN DE MARCOS POPUP -->
 
 
 		<div align="center">
@@ -265,15 +316,17 @@ if ($accion=="detalles_menu")
 							<td align="RIGHT"><b><?php echo $MULTILANG_MnuTipo; ?></b></td><td width="10"></td>
 							<td>
 									<select name="tipo_comando" class="Combos" >
-										<option value="Interno" <?php if ($registro["tipo_comando"]=="Interno") echo 'selected'; ?> ><?php echo $MULTILANG_MnuInterno; ?></option>
-										<option value="Personal" <?php if ($registro["tipo_comando"]=="Personal") echo 'selected'; ?> ><?php echo $MULTILANG_MnuPersonal; ?></option>
-										<option value="Objeto" <?php if ($registro["tipo_comando"]=="Objeto") echo 'selected'; ?> ><?php echo $MULTILANG_MnuObjeto; ?></option>
+										<option value="Objeto" <?php if ($registro["tipo_comando"]=="Objeto") echo 'selected'; ?> >1. <?php echo $MULTILANG_MnuObjeto; ?></option>
+										<option value="Interno" <?php if ($registro["tipo_comando"]=="Interno") echo 'selected'; ?> >2. <?php echo $MULTILANG_MnuInterno; ?></option>
+										<option value="Personal" <?php if ($registro["tipo_comando"]=="Personal") echo 'selected'; ?> >3. <?php echo $MULTILANG_MnuPersonal; ?></option>
 									</select>
+									<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_MnuAccion; ?></b></td><td width="10"></td>
 							<td><input value="<?php echo $registro["comando"]; ?>"  class="CampoTexto" type="text" name="comando" size="30" maxlength="250" class="texto_01">
+								<a href='javascript:AbrirPopUp("FormularioObjetos");' title="<?php echo $MULTILANG_SeleccioneUno.' '.$MULTILANG_MnuObjeto; ?>">[...]</a>
 								<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
@@ -389,7 +442,7 @@ if ($accion=="eliminar_menu")
 			if ($mensaje_error=="")
 				{
 					// Guarda los datos del comando o item de menu
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES ('$texto','$padre','$peso','$url','$posible_clic','$tipo_comando','$comando','$nivel_usuario','$columna','$posible_arriba','$posible_escritorio','$posible_centro','$seccion','$imagen')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES ('$texto','$padre','$peso','$url','$posible_clic','$tipo_comando','$comando','$nivel_usuario','$columna','$posible_arriba','$posible_centro','$posible_escritorio','$seccion','$imagen')");
 					auditar("Agrega en menu: $texto");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
@@ -460,10 +513,64 @@ if ($accion=="administrar_menu")
 				abrir_barra_estado();
 					echo '<input type="Button"  class="BotonesEstadoCuidado" value="'.$MULTILANG_Cerrar.'" onClick="OcultarPopUp(\'FormularioImagenes\')">';
 				cerrar_barra_estado();
-				cerrar_ventana();		// Cierra adicion de botones
+				cerrar_ventana();		// Cierra seleccion de imagenes
 			?>
 		</div>
 		<!-- FIN DE MARCOS POPUP -->
+
+		<!-- INICIO DE MARCOS POPUP -->
+		<div id='FormularioObjetos' class="FormularioPopUps">
+			<form name="selector_objetos" method="POST">
+			<?php
+			abrir_ventana($MULTILANG_SeleccioneUno.' '.$MULTILANG_MnuObjeto,'BDB9B9','');
+			?>
+				<br><br>
+				<table class="TextosVentana">
+				<tr>
+					<td align="right"><?php echo $MULTILANG_Formularios; ?> / <?php echo $MULTILANG_Informes; ?>:</td>
+					<td >
+						<select  name="objeto_seleccionado" class="Combos">
+						<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+						<optgroup label="<?php echo $MULTILANG_Formularios; ?>">
+							<?php
+								$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario ORDER BY titulo");
+								while($registro_forms = $consulta_forms->fetch())
+									echo '<option value="frm:'.$registro_forms["id"].'">(Id.'.$registro_forms["id"].') '.$registro_forms["titulo"].'</option>';
+							?>
+						</optgroup>
+						<optgroup label="<?php echo $MULTILANG_Informes; ?>">
+							<?php
+								$consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe ORDER BY titulo");
+								while($registro_informes = $consulta_informs->fetch())
+									echo '<option value="inf:'.$registro_informes["id"].'">(Id.'.$registro_informes["id"].') '.$registro_informes["titulo"].'</option>';
+							?>
+						</optgroup>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td align="right"><?php echo $MULTILANG_FrmVentana; ?>:</td>
+					<td >
+						<select  name="definir_ventana_propia" class="Combos">
+							<option value=":1"><?php echo $MULTILANG_Si; ?></option>
+							<option value=":0"><?php echo $MULTILANG_No; ?></option>
+						</select>
+					</td>
+				</tr>
+				</table>
+				<br><br>
+			<?php
+				abrir_barra_estado();
+					echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_Guardar.' " onClick="document.datos.comando.value=document.selector_objetos.objeto_seleccionado.options[document.selector_objetos.objeto_seleccionado.selectedIndex].value + document.selector_objetos.definir_ventana_propia.options[document.selector_objetos.definir_ventana_propia.selectedIndex].value; OcultarPopUp(\'FormularioObjetos\')">';
+					echo '<input type="Button"  class="BotonesEstadoCuidado" value=" '.$MULTILANG_Cancelar.' " onClick="OcultarPopUp(\'FormularioObjetos\')">';
+				cerrar_barra_estado();
+				cerrar_ventana();		// Cierra seleccion de objetos
+			?>
+			</form>
+		</div>
+		<!-- FIN DE MARCOS POPUP -->
+
+
 		<div id='FondoPopUps' class="FondoOscuroPopUps"></div>
 
 		<div align="center">
@@ -584,15 +691,17 @@ if ($accion=="administrar_menu")
 							<td align="RIGHT"><b><?php echo $MULTILANG_MnuTipo; ?></b></td><td width="10"></td>
 							<td>
 									<select name="tipo_comando" class="Combos" >
-										<option value="Interno"><?php echo $MULTILANG_MnuInterno; ?></option>
-										<option value="Personal"><?php echo $MULTILANG_MnuPersonal; ?></option>
-										<option value="Objeto"><?php echo $MULTILANG_MnuObjeto; ?></option>
+										<option value="Objeto">1. <?php echo $MULTILANG_MnuObjeto; ?></option>
+										<option value="Interno">2. <?php echo $MULTILANG_MnuInterno; ?></option>
+										<option value="Personal">3. <?php echo $MULTILANG_MnuPersonal; ?></option>
 									</select>
+									<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_MnuAccion; ?></b></td><td width="10"></td>
 							<td><input class="CampoTexto" type="text" name="comando" size="30" maxlength="250" class="texto_01">
+								<a href='javascript:AbrirPopUp("FormularioObjetos");' title="<?php echo $MULTILANG_SeleccioneUno.' '.$MULTILANG_MnuObjeto; ?>">[...]</a>
 								<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
@@ -628,7 +737,7 @@ if ($accion=="administrar_menu")
 						</tr>
 					</table>
 				</td>
-			</tr></table>
+			</tr></table><hr>
 
 		<font face="" size="3" color="Navy"><b><?php echo $MULTILANG_MnuDefinidos; ?></b></font><br><br>
 		 <?php
@@ -764,7 +873,7 @@ if ($accion=="administrar_menu")
 							$Complemento_tablas=",".$TablasCore."usuario_menu";
 							$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$Login_usuario'";  // AND nivel>0
 						}
-					$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".$Complemento_tablas." WHERE posible_centro=1 AND seccion='".$seccion_menu_activa."' ".$Complemento_condicion." ORDER BY peso");
+					$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_centro=1 AND seccion='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY peso");
 
 					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
 						{
