@@ -242,6 +242,11 @@
 	$MULTILANG_FrmTipo7='URL embebida (IFrame)';
 	$MULTILANG_FrmTipoTit3='Objetos internos';
 	$MULTILANG_FrmTipo8='Informe predise&ntilde;ado (Tabla de datos o Gr&aacute;fico)';
+	$MULTILANG_FrmTipo9='Deslizador (selector de rangos num&eacute;ricos - HTML5)';
+	$MULTILANG_FrmValorMinimo='Valor m&iacute;nimo';
+	$MULTILANG_FrmValorMaximo='Valor m&aacute;ximo';
+	$MULTILANG_FrmValorSalto='Valor de salto';
+	$MULTILANG_FrmTitValorSalto='Cuantas unidades salta la barra en cada desplazamiento?';
 	$MULTILANG_FrmTitulo='T&iacute;tulo o etiqueta';
 	$MULTILANG_FrmDesTitulo='Texto que aparecer&aacute; al lado del indicando al usuario la informacion que debe ingresar.  Puede usar HTML b&aacute;sico para dar formato adicional.';
 	$MULTILANG_FrmCampo='Campo enlazado';
@@ -348,7 +353,7 @@
 	$MULTILANG_FrmTxtDesRetorno='Texto completo con la descripci&oacute;n de acci&oacute;n realizada o mensaje entregado al usuario despu&eacute;s de ejecutar el control';
 	$MULTILANG_FrmConfirma='Texto de confirmaci&oacute;n';
 	$MULTILANG_FrmDesConfirma='En caso de ser diligenciado: Texto que aparecer&aacute; como ventana emergente advirtiendo la ejecuci&oacute;n del control y esperando confirmaci&oacute;n del usuario para proceder';
-	$MULTILANG_FrmBtnGuardar='Agregar acci&oacute;n/bot&oacute;n';
+	$MULTILANG_FrmBtnGuardarBut='Agregar acci&oacute;n/bot&oacute;n';
 	$MULTILANG_FrmDisCampos='Dise&ntilde;o general de campos';
 	$MULTILANG_FrmDesObliga='Tenga presente que los campos obligatorios deber&iacute;an estar visibles';
 	$MULTILANG_FrmGuardaCol='Guardar columna';

@@ -355,7 +355,7 @@
 			if ($campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error=$MULTILANG_ErrFrmCampo2;
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES ('$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores','$valor_etiqueta','$url_iframe','$objeto_en_ventana','$informe_vinculado','$maxima_longitud')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES ('$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores','$valor_etiqueta','$url_iframe','$objeto_en_ventana','$informe_vinculado','$maxima_longitud','$valor_minimo','$valor_maximo','$valor_salto')");
 					auditar("Crea campo $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -474,7 +474,7 @@ if ($accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(25);
+					OcultarCampos(26);
 					// Muestra campos segun tipo de objeto
 					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,13,14,17,25");
 					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17");
@@ -484,6 +484,7 @@ if ($accion=="editar_formulario")
 					if (tipo_objeto_activo=="etiqueta")   VisualizarCampos("9,17,21");
 					if (tipo_objeto_activo=="url_iframe")   VisualizarCampos("9,14,15,17,22,24");
 					if (tipo_objeto_activo=="informe")   VisualizarCampos("9,17,23,24");
+					if (tipo_objeto_activo=="deslizador")   VisualizarCampos("1,2,4,7,8,9,17,26");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -529,6 +530,7 @@ if ($accion=="editar_formulario")
 										<option value="texto_formato"   <?php if (@$registro_campo_editar["tipo"]=="texto_formato")   echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo3; ?></option>
 										<option value="lista_seleccion" <?php if (@$registro_campo_editar["tipo"]=="lista_seleccion") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo4; ?></option>
 										<option value="lista_radio"     <?php if (@$registro_campo_editar["tipo"]=="lista_radio")     echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo5; ?></option>
+										<option value="deslizador"      <?php if (@$registro_campo_editar["tipo"]=="deslizador")      echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo9; ?></option>
 									</optgroup>
 									<!--
 									<optgroup label="Informaci&oacute;n externa">
@@ -569,7 +571,7 @@ if ($accion=="editar_formulario")
 							<table class="TextosVentana">
 							<tr>
 								<td width="200" align="right"><?php echo $MULTILANG_FrmCampo; ?></td>
-								<td width="400" >
+								<td width="400" ><?php echo $nombre_tabla; ?>.
 									<select  name="campo" class="Combos" >
 										<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
 										<?php
@@ -1041,6 +1043,31 @@ if ($accion=="editar_formulario")
 						</div>
 
 
+						<div id='campo26' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right"><?php echo $MULTILANG_FrmValorMinimo; ?>:</td>
+								<td width="400" >
+									<input type="text" name="valor_minimo" size="4" class="CampoTexto" value="<?php if (@$registro_campo_editar["valor_minimo"]!='1') echo $registro_campo_editar["valor_minimo"]; else echo '1'; ?>">
+								</td>
+							</tr>
+							<tr>
+								<td width="200" align="right"><?php echo $MULTILANG_FrmValorMaximo; ?>:</td>
+								<td width="400" >
+									<input type="text" name="valor_maximo" size="4" class="CampoTexto" value="<?php if (@$registro_campo_editar["valor_maximo"]!='100') echo $registro_campo_editar["valor_maximo"]; else echo '100'; ?>">
+								</td>
+							</tr>
+							<tr>
+								<td width="200" align="right"><?php echo $MULTILANG_FrmValorSalto; ?>:</td>
+								<td width="400" >
+									<input type="text" name="valor_salto" size="4" class="CampoTexto" value="<?php if (@$registro_campo_editar["valor_salto"]!='1') echo $registro_campo_editar["valor_salto"]; else echo '1'; ?>">
+									<a href="#" title="<?php echo $MULTILANG_FrmTitValorSalto; ?>"><img src="img/icn_10.gif" border=0></a>
+								</td>
+							</tr>
+							</table>
+						</div>
+						
+
 					<?php
 						//Despues de agregar todos los parametros de campos, Si se detecta que es edicion de un campo se llama a la funcion de visualizacion de campos especificos
 						if (@$popup_activo=="FormularioCampos")
@@ -1171,7 +1198,7 @@ if ($accion=="editar_formulario")
 								</form>
 							</td>
 							<td>
-								<input type="Button"  class="Botones" value="<?php echo $MULTILANG_FrmBtnGuardar; ?>" onClick="document.datosfield.submit()">
+								<input type="Button"  class="Botones" value="<?php echo $MULTILANG_FrmBtnGuardarBut; ?>" onClick="document.datosfield.submit()">
 							</td>
 						</tr>
 					</table>

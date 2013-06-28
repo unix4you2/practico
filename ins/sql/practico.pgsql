@@ -120,6 +120,9 @@ CREATE TABLE Core_formulario_objeto (
   objeto_en_ventana integer,
   informe_vinculado integer,
   maxima_longitud integer default 0,
+  valor_minimo integer,
+  valor_maximo integer,
+  valor_salto integer,
   PRIMARY KEY  (id)
 );
 

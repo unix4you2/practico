@@ -245,6 +245,11 @@
 	$MULTILANG_FrmTipo7='Wrapper (iFrame)';
 	$MULTILANG_FrmTipoTit3='Internal objects';
 	$MULTILANG_FrmTipo8='Report predesigned (Data Table or Graph)';
+	$MULTILANG_FrmTipo9='Slider (numeric range selector - HTML5)';
+	$MULTILANG_FrmValorMinimo='Minimum value';
+	$MULTILANG_FrmValorMaximo='Maximum value';
+	$MULTILANG_FrmValorSalto='Step value';
+	$MULTILANG_FrmTitValorSalto='How many units jump the slider on each movement?';
 	$MULTILANG_FrmTitulo='Title or Tag';
 	$MULTILANG_FrmDesTitulo='Text that will appear next to the field telling the user the information that must be entered. You can use basic HTML to additional format.';
 	$MULTILANG_FrmCampo='Linked field';
@@ -351,7 +356,7 @@
 	$MULTILANG_FrmTxtDesRetorno='Full Text with description of action taken or delivered to the user message after running control';
 	$MULTILANG_FrmConfirma='Confirmation Text';
 	$MULTILANG_FrmDesConfirma='If its filled, Text that will appear as a popup warning control execution and waiting for user confirmation to proceed';
-	$MULTILANG_FrmBtnGuardar='Add Action / Button';
+	$MULTILANG_FrmBtnGuardarBut='Add Action / Button';
 	$MULTILANG_FrmDisCampos='General fields design';
 	$MULTILANG_FrmDesObliga='Note that the required fields should be visible';
 	$MULTILANG_FrmGuardaCol='Save column';

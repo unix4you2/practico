@@ -27,7 +27,7 @@
 	$ListaCamposSinID_usuario='login,clave,nombre,descripcion,estado,nivel,correo,ultimo_acceso,llave_paso';
 	$ListaCamposSinID_usuario_menu='usuario,menu';
 	$ListaCamposSinID_usuario_informe='usuario,informe';
-	$ListaCamposSinID_formulario_objeto='tipo,titulo,campo,ayuda_titulo,ayuda_texto,formulario,peso,columna,obligatorio,visible,valor_predeterminado,validacion_datos,etiqueta_busqueda,ajax_busqueda,valor_unico,solo_lectura,teclado_virtual,ancho,alto,barra_herramientas,fila_unica,lista_opciones,origen_lista_opciones,origen_lista_valores,valor_etiqueta,url_iframe,objeto_en_ventana,informe_vinculado,maxima_longitud';
+	$ListaCamposSinID_formulario_objeto='tipo,titulo,campo,ayuda_titulo,ayuda_texto,formulario,peso,columna,obligatorio,visible,valor_predeterminado,validacion_datos,etiqueta_busqueda,ajax_busqueda,valor_unico,solo_lectura,teclado_virtual,ancho,alto,barra_herramientas,fila_unica,lista_opciones,origen_lista_opciones,origen_lista_valores,valor_etiqueta,url_iframe,objeto_en_ventana,informe_vinculado,maxima_longitud,valor_minimo,valor_maximo,valor_salto';
 	$ListaCamposSinID_formulario_boton='titulo,estilo,formulario,tipo_accion,accion_usuario,visible,peso,retorno_titulo,retorno_texto,confirmacion_texto';
 	$ListaCamposSinID_formulario='titulo,ayuda_titulo,ayuda_texto,ayuda_imagen,tabla_datos,columnas,javascript';
 	$ListaCamposSinID_informe_condiciones='informe,valor_izq,operador,valor_der,peso';

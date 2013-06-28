@@ -926,7 +926,7 @@
 
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
-			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
+			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=$registro_campos["valor_predeterminado"];
 			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 			// Muestra el campo
@@ -973,7 +973,7 @@
 
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
-			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
+			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=$registro_campos["valor_predeterminado"];
 			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 			// Muestra el campo
@@ -993,7 +993,7 @@
 			$barra_otros="['Maximize', 'ShowBlocks']";
 
 			// Construye las barras de herramientas de acuerdo a la seleccion del usuario
-			$barra_editor.="['-']";
+			@$barra_editor.="['-']";
 			if ($registro_campos["barra_herramientas"]=="0")
 				{
 					$barra_editor.=",".$barra_documento;
@@ -1257,6 +1257,52 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: cargar_objeto_deslizador
+	Genera el codigo HTML y CSS correspondiente a un campo tipo range de HTML5 vinculado a un campo de datos sobre un formulario
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		registro_datos_formulario - Arreglo asociativo con nombres de campo y valores cuando se hacen llamados de registro especificos
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
+	function cargar_objeto_deslizador($registro_campos,$registro_datos_formulario)
+		{
+			global $campobase,$valorbase;
+			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+
+			$salida='';
+			$nombre_campo=$registro_campos["campo"];
+
+			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
+			$cadena_valor='';
+			if ($registro_campos["valor_predeterminado"]!="") $valor_de_campo=$registro_campos["valor_predeterminado"];
+			if ($campobase!="" && $valorbase!="") $valor_de_campo=$registro_datos_formulario["$nombre_campo"];
+			$cadena_valor=' value="'.$valor_de_campo.'" ';
+
+			// Muestra el campo
+			$salida.= '<input type="range" name="'.$registro_campos["campo"].'" min="'.$registro_campos["valor_minimo"].'" max="'.$registro_campos["valor_maximo"].'" step="'.$registro_campos["valor_salto"].'" '.$cadena_valor.' onchange="document.getElementById(\'VAL'.$registro_campos["campo"].'\').innerHTML = \'[\'+this.value+\']\';" oninput="document.getElementById(\'VAL'.$registro_campos["campo"].'\').innerHTML = \'[\'+this.value+\']\';"><div id="VAL'.$registro_campos["campo"].'" style="float: right;"></div>';
+
+			// Activa el primer valor del campo
+			$salida.= '<script type="text/javascript">document.getElementById(\'VAL'.$registro_campos["campo"].'\').innerHTML = \'['.$valor_de_campo.']\';</script>';
+
+			// Muestra indicadores de obligatoriedad o ayuda
+			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
+			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0 border=0 align="absmiddle"></a>';
+
+			return $salida;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: cargar_formulario
 	Genera el codigo HTML correspondiente a un formulario de la aplicacion y hace los llamados necesarios para la diagramacion por pantalla de los diferentes objetos que lo componen.
 
@@ -1388,6 +1434,7 @@
 													if (@$registro_campos["tipo"]=="etiqueta") $objeto_formateado = @cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario);
 													if (@$registro_campos["tipo"]=="url_iframe") $objeto_formateado = @cargar_objeto_iframe($registro_campos,$registro_datos_formulario);
 													if (@$registro_campos["tipo"]=="informe") @cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
+													if (@$registro_campos["tipo"]=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,$registro_datos_formulario);
 
 													//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 													if ($registro_campos["tipo"]!="informe")
@@ -1423,12 +1470,13 @@
 								// CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas arriba tambien
 								if ($registro_campos["tipo"]=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana);
 								if ($registro_campos["tipo"]=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos,$registro_datos_formulario);
-								if ($registro_campos["tipo"]=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
+								if ($registro_campos["tipo"]=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
 								if ($registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario);
 								if ($registro_campos["tipo"]=="lista_radio") $objeto_formateado = cargar_objeto_lista_radio($registro_campos,$registro_datos_formulario);
 								if ($registro_campos["tipo"]=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario);
 								if ($registro_campos["tipo"]=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos,$registro_datos_formulario);
 								if ($registro_campos["tipo"]=="informe") cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
+								if (@$registro_campos["tipo"]=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,$registro_datos_formulario);
 
 								//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 								if ($registro_campos["tipo"]!="informe")

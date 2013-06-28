@@ -16,6 +16,11 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 core/comunes.php
 core/tablas.php
+core/formularios.php
+core/marco_arriba.php
+inc/practico/def_basedatos.php
+inc/practico/idiomas/en.php
+inc/practico/idiomas/es.php
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -26,23 +31,28 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+ * Added: Nuevo control de deslizador para seleccion de valores por rangos en formularios
+ * Added: Seleccion visual de formularios e informes durante la creacion de menues
  * Added: Variable E_DEPRECATED es presentada ahora en los mensajes del modo de depuracion
  * Added: Actualizado y optimizado el editor Wysiwyg
  * Added: Optimización del codigo y reducción en 0.5 MB el tamano de instalador
  * Added: Dos plantillas adicionales de ejemplo: Bluez y Nature  disponibles para descarga.  Por defecto se incluyen Nomo y Nature.
- * Added: Seleccion visual de formularios e informes durante la creacion de menues
  * Added: Ampliacion de ayudas en creacion de menues
  * Fixed: Correcion en boton cancelar de creacion de menues
  * Fixed: Correcion en creacion de tablas SQLite y PostgreSQL, se independiza para especificar script en otros motores
  * Fixed: Obtencion de informacion de campos por tabla
  * Fixed: Supresión de SQLInjection
  * Fixed: Supresion de mensajes de advertencia innecesarios en multiples modulos
+ * Fixed: Correcion en asignacion de valores predeterminados de texto largo y con formato a formularios
+ * Fixed: Textos multi-idioma botones en creacion de campos para formularios
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-
+  ALTER TABLE core_formulario_objeto ADD COLUMN valor_minimo INT(10) NULL;
+  ALTER TABLE core_formulario_objeto ADD COLUMN valor_maximo INT(10) NULL;
+  ALTER TABLE core_formulario_objeto ADD COLUMN valor_salto INT(10) NULL;
 "
 
 ########################################################################
