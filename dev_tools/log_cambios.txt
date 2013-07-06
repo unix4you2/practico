@@ -38,6 +38,7 @@ LogCambios="
  * Added: Optimización del codigo y reducción en 0.5 MB el tamano de instalador
  * Added: Dos plantillas adicionales de ejemplo: Bluez y Nature  disponibles para descarga.  Por defecto se incluyen Nomo y Nature.
  * Added: Ampliacion de ayudas en creacion de menues
+ * Added: Soporte a modulo de administracion de archivos
  * Fixed: Correcion en boton cancelar de creacion de menues
  * Fixed: Correcion en creacion de tablas SQLite y PostgreSQL, se independiza para especificar script en otros motores
  * Fixed: Obtencion de informacion de campos por tabla

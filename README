@@ -48,6 +48,23 @@
             |___/ 
 
 ----------------------------------------
+Versión 13.7 (2013-07-07)
+ * Added: Nuevo control de deslizador para seleccion de valores por rangos en formularios
+ * Added: Seleccion visual de formularios e informes durante la creacion de menues
+ * Added: Variable E_DEPRECATED es presentada ahora en los mensajes del modo de depuracion
+ * Added: Actualizado y optimizado el editor Wysiwyg
+ * Added: Optimización del codigo y reducción en 0.5 MB el tamano de instalador
+ * Added: Dos plantillas adicionales de ejemplo: Bluez y Nature  disponibles para descarga.  Por defecto se incluyen Nomo y Nature.
+ * Added: Ampliacion de ayudas en creacion de menues
+ * Added: Soporte a modulo de administracion de archivos
+ * Fixed: Correcion en boton cancelar de creacion de menues
+ * Fixed: Correcion en creacion de tablas SQLite y PostgreSQL, se independiza para especificar script en otros motores
+ * Fixed: Obtencion de informacion de campos por tabla
+ * Fixed: Supresión de SQLInjection
+ * Fixed: Supresion de mensajes de advertencia innecesarios en multiples modulos
+ * Fixed: Correcion en asignacion de valores predeterminados de texto largo y con formato a formularios
+ * Fixed: Textos multi-idioma botones en creacion de campos para formularios
+----------------------------------------
 Versión 13.6 (2013-06-03)
  * Added: Idioma inglEs basado en Google Translator
  * Added: Multi-idioma a mOdulos de tablas, usuarios y menUes
