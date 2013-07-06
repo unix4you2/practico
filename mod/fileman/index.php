@@ -41,7 +41,7 @@
 */
 if ($accion=="fileman_admin_embebido") 
 	{
-		echo '<iframe src="mod/fileman/extplorer_2.1.3" width="95%" height="95%" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>';
+		echo '<iframe src="mod/fileman/elfinder/" width="95%" height="95%" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>';
 	}
 
 ?>

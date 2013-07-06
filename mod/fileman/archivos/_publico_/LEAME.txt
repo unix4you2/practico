@@ -1,0 +1,31 @@
+                ____                 _   _           
+               |  _ \ _ __ __ _  ___| |_(_) ___ ___  
+               | |_) | '__/ _` |/ __| __| |/ __/ _ \ 
+               |  __/| | | (_| | (__| |_| | (_| (_) |
+               |_|   |_|  \__,_|\___|\__|_|\___\___/ 
+                                      (texto sin acentos)
+
+VERSION EN ESPANOL
+===================
+Cualquier carpeta o archivo creado en este espacio estara disponible
+para todos los usuarios de la aplicacion que posean permiso para
+ingresar al administrador de archivos.
+
+Si desea agregar archivos o carpetas de manera privada, debe hacer uso
+de su carpeta personal llamada "Mis archivos".  Esta carpeta aparecera
+automaticamente cuando el administrador cree una con su mismo nombre
+de usuario sobre el path /archivos de este modulo.
+
+Detalles avanzados para el administrador se encuentran en el LEAME del modulo.
+
+ENGLISH VERSION
+===================
+Any folder or file created in this space will be available for all
+application users that have permission to enter the file manager.
+
+If you want to add files or folders privately, make use in your home
+folder called "My files".  This folder will be appear automatically
+when tha administrator create a new folder with the same login that
+you use under /archivos path in this module.
+
+Advanced details for admins could be readed ni LEAME file for the module

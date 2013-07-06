@@ -11,7 +11,7 @@
 	$TablasCore='core_';
 	$TablasApp='app_';
 	$LlaveDePaso='';
-	$ModoDepuracion=0;
+	$ModoDepuracion=1;
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='es';
 	$CaracteresCaptcha=4;

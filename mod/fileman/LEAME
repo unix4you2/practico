@@ -8,7 +8,8 @@
 
 Modo de Uso:
 	1) Descomprimir el modulo mediante su proceso de instalacion normal o manualmente sobre /mod
-	2) Accesar Practico con credenciales de administrador y agregar un nuevo menu asi:
+	2) Asegurese de dar permisos de escritura para la carpeta "archivos" y sus subcarpetas contenida en el modulo
+	2) Accesar Practico con credenciales de administrador y agregar un nuevo menu asi (si todavia no existe):
 		Texto:   Administrador de archivos    (o el deseado por usted)
 		Seccion: Módulos embebidos
 		Imagen:  tango_document-open.png (o la deseada por usted)
@@ -16,34 +17,22 @@ Modo de Uso:
 		Accion:  fileman_admin_embebido
 	3) Haha clic sobre la nueva opcion para lanzar el módulo embebido
 
+Definicion de carpetas de usuario y raices de acceso:
+	Por defecto todos los usuarios tienen acceso al path archivos/_publico_ visualizada como "Carpeta publica"
+	El sistema presentara una carpeta privada como "Mis archivos" cuando sea detectada una carpeta dentro de /archivos con el mismo nombre del usuario
+	Por defecto el admin cuenta con las dos carpetas anteriores y un espacio para ver las carpetas de todos los usuarios
+	Adicionalmente, si el despliegue de la herramienta se ha hecho sobre una carpeta llamada "practico" entonces presentara al admin la raiz de la aplicacion para administrar la totalidad de archivos
+
 ----------------------------------------------------------------------------
-Proyecto original elFinder
+Proyecto original elFinder version 2.0-rc1
 Alteraciones generales:
 
-
-
-
-
-
-
-
-
-
-
-
-	config/config.php (inclusion de parametros desde configuracion.php):
-		LINEA: 287+
-		include ("../../../../core/configuracion.php");
-		$servers->setValue('server','host',$Auth_LDAPServidor);
-		$servers->setValue('server','port',$Auth_LDAPPuerto);
-		$config->custom->appearance['language'] = 'es_ES';
-	htdocs/css/default/style.css
-		LINEA: 9 alterado #FFFFFF;
-			background-color: #f2f2f2;
-		LINEA: 112 agregado:
-			img.logo {
-				visibility:hidden;
-				width: 0px;
-				height: 0px;
-			}
-
+	elfinder.html renombrado a index.php
+	
+	index.php (anteriormente elfinder.html):  cambio a idioma espanol predeterminado
+	
+	connector.php:
+	LINEA: 29 Se agrega la siguiente inclusion al archivo de definicion de raices
+		include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'carpetas.php';
+	LINEA: 30+ Eliminadas definiciones de raices existentes en forma de arrays
+	       Se dejan solamente las instrucciones posteriores que lanzan el programa

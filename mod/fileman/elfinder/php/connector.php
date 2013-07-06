@@ -1,5 +1,4 @@
 <?php
-
 error_reporting(0); // Set E_ALL for debuging
 
 include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderConnector.class.php';
@@ -26,25 +25,7 @@ function access($attr, $path, $data, $volume) {
 		:  null;                                    // else elFinder decide it itself
 }
 
-$opts = array(
-	// 'debug' => true,
-	'roots' => array(
-		array(
-			'driver'        => 'LocalFileSystem',   // driver for accessing file system (REQUIRED)
-			'path'          => '../files/',         // path to files (REQUIRED)
-			'URL'           => dirname($_SERVER['PHP_SELF']) . '/../files/', // URL to files (REQUIRED)
-			'alias' 		=> 'Filezzz',
-			'accessControl' => 'access'             // disable and hide dot starting files (OPTIONAL)
-		),
-		array(
-			'driver'        => 'LocalFileSystem',   // driver for accessing file system (REQUIRED)
-			'path'          => '../files2/',         // path to files (REQUIRED)
-			'URL'           => dirname($_SERVER['PHP_SELF']) . '/../files2/', // URL to files (REQUIRED)
-			'alias' 		=> 'File2',
-			'accessControl' => 'access'             // disable and hide dot starting files (OPTIONAL)
-		)
-	)
-);
+include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'carpetas.php';
 
 // run elFinder
 $connector = new elFinderConnector(new elFinder($opts));
