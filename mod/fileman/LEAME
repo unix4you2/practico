@@ -29,8 +29,11 @@ Alteraciones generales:
 
 	elfinder.html renombrado a index.php
 	
-	index.php (anteriormente elfinder.html):  cambio a idioma espanol predeterminado
-	
+	index.php (anteriormente elfinder.html):
+	LINEA: 20 y 27 cambio a idioma espanol predeterminado
+	LINEA: 8 inclusion del CSS desde uno descargado a carpeta jquery para evitar ir a la web cada vez
+	LINEA: 9 y 10 inclusion de los JS desde jquery igual que punto anterior
+
 	connector.php:
 	LINEA: 29 Se agrega la siguiente inclusion al archivo de definicion de raices
 		include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'carpetas.php';
