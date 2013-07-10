@@ -1,0 +1,23 @@
+                ____                 _   _           
+               |  _ \ _ __ __ _  ___| |_(_) ___ ___  
+               | |_) | '__/ _` |/ __| __| |/ __/ _ \ 
+               |  __/| | | (_| | (__| |_| | (_| (_) |
+               |_|   |_|  \__,_|\___|\__|_|\___\___/ 
+                                      
+- Modulo embebido de html2pdf para conversion de archivos HTML a PDF en Práctico.
+
+Modo de Uso:
+	1) Descomprimir el modulo mediante su proceso de instalacion normal o manualmente sobre /mod
+	2) Verifique que las funciones de conversion de informes a PDF se hayan activado
+	   (al detectar el modulo esto debe ocurrir automaticamente en la parte superior de cada informe)
+
+----------------------------------------------------------------------------
+Proyecto original HTML2PDF version 4.03
+Alteraciones generales:
+
+	Se elimina el uso del paquete TCPDF versión 5.0.002 por el peso de sus fuentes (11MB)
+	Se utiliza en su lugar la versión 6 (mínima), descomprimida como _tcpdf_6.0.020 (2MB)
+
+	html2pdf.class.php
+	LINEA: 15 se cambia el valor del DEFINE de '5.0.002' a '6.0.020_min' para indicar que
+	       ahora reside sobre ese directorio la clase generadora de tcpdf.
