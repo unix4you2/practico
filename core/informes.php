@@ -233,7 +233,7 @@ if ($accion=="actualizar_informe")
 if ($accion=="eliminar_informe_condicion")
 	{
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE id='$condicion'");
-		auditar("Elimina condicion $campo del informe $informe");
+		@auditar("Elimina condicion $condicion");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="accion" value="editar_informe">
 			<input type="Hidden" name="informe" value="'.$informe.'">
@@ -675,14 +675,15 @@ if ($accion=="editar_informe")
 								<select  name="campo_datos" class="Combos" >
 									<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
 									<?php
-											//$resultado=ejecutar_sql("SELECT valor_tabla FROM ".$TablasCore."informe_tablas WHERE informe='$informe'");
-											$resultado=consultar_tablas();
+											$resultado=ejecutar_sql("SELECT valor_tabla FROM ".$TablasCore."informe_tablas WHERE informe='$informe'");
+											//$resultado=consultar_tablas(); //Presenta todas las tablas
 											while ($registro = $resultado->fetch())
 												{
 													// Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
 													if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
 														{
 															echo '<optgroup label="'.str_replace($TablasApp,'',$registro[0]).'" >';
+															$nombre_tabla=$registro[0];
 															//Busca los campos de la tabla
 															$resultadocampos=consultar_columnas($registro[0]);
 															for($i=0;$i<count($resultadocampos);$i++)
@@ -880,7 +881,7 @@ if ($accion=="editar_informe")
 												<input type="hidden" name="valor" value="'.$peso_disminuido.'">
 												<input type="Hidden" name="popup_activo" value="FormularioCondiciones">
 											</form>';
-										if ($registro["campo"]!="id")
+										if (@$registro["campo"]!="id")
 											echo '
 												<a href="javascript:ifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" name=""><img src="img/bajar.png" border=0></a> 
 												'.$registro["peso"].'
@@ -1777,7 +1778,7 @@ if ($accion=="mis_informes")
 					$Complemento_tablas=",".$TablasCore."usuario_informe";
 					$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$Login_usuario'";  // AND nivel>0
 				}
-			$resultado=ejecutar_sql("SELECT COUNT(*) as conteo,categoria FROM ".$TablasCore."informe ".$Complemento_tablas." WHERE 1 ".$Complemento_condicion." GROUP BY categoria ORDER BY categoria");
+			$resultado=ejecutar_sql("SELECT COUNT(*) as conteo,categoria FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE 1 ".@$Complemento_condicion." GROUP BY categoria ORDER BY categoria");
 
 			// Imprime las categorias encontradas para el usuario
 			while($registro = $resultado->fetch())
@@ -1794,7 +1795,7 @@ if ($accion=="mis_informes")
 							$Complemento_tablas=",".$TablasCore."usuario_informe";
 							$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$Login_usuario'";  // AND nivel>0
 						}
-					$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."informe ".$Complemento_tablas." WHERE 1 AND categoria='".$seccion_menu_activa."' ".$Complemento_condicion." ORDER BY titulo");
+					$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE 1 AND categoria='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY titulo");
 
 					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
 						{
