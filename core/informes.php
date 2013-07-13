@@ -944,7 +944,7 @@ if ($accion=="editar_informe")
 							<tr>
 								<td align="center" valign="TOP">
 									<b><?php echo $MULTILANG_InfNomSerie?> <?php echo $cs; ?></b><br>
-									<input type="text" name="nombre_serie_<?php echo $cs; ?>" value="<?php echo $lista_nombre_series[$cs-1]; ?>" maxlength="20" size="20" class="CampoTexto">
+									<input type="text" name="nombre_serie_<?php echo $cs; ?>" value="<?php echo @$lista_nombre_series[$cs-1]; ?>" maxlength="20" size="20" class="CampoTexto">
 								</td>
 								<td align="center" valign="TOP">
 									<b><?php echo $MULTILANG_InfCampoEtiqSerie; ?></b><br>
@@ -1254,7 +1254,7 @@ if ($accion=="editar_informe")
 											<input type="hidden" name="informe" value="'.$informe.'">
 											<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 											<input type="hidden" name="accion_retorno" value="editar_informe">
-											<input type="hidden" name="valor" value="'.$peso_disminuido.'">
+											<input type="hidden" name="valor" value="'.@$peso_disminuido.'">
 											<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 										</form>
 									';
@@ -1298,7 +1298,7 @@ if ($accion=="editar_informe")
 												<form action="'.$ArchivoCORE.'" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 														<input type="hidden" name="accion" value="editar_campo_formulario">
 														<input type="hidden" name="campo" value="'.$registro["id"].'">
-														<input type="hidden" name="formulario" value="'.$formulario.'">
+														<input type="hidden" name="formulario" value="'.@$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 														<input type="Button" value="Editar (Deshabilitado)"  class="Botones">
 														<input type="Hidden" name="popup_activo" value="FormularioAcciones">

@@ -50,9 +50,11 @@
 
 <html>
 <head>
-	<title>
-		<?php echo $NombreRAD; ?> <?php include("inc/version_actual.txt"); ?>
-  	</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Practico <?php  $version = file("inc/version_actual.txt"); echo trim($version[0]); ?>" />
+	<meta name="description" content="Generador de aplicaciones web - www.codigoabierto.org" />
+
+	<title><?php echo $NombreRAD; ?> <?php echo trim($version[0]); ?></title>
 
 	<script type="text/javascript" src="inc/practico/javascript/tooltips.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/validaform.js"></script>

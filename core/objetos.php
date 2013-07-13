@@ -89,8 +89,8 @@
 					if ($partes_objeto[0]=="inf")
 						{
 							if (@$partes_objeto[2]!="") $en_ventana=$partes_objeto[2];
-							if (@$partes_objeto[3]!="") $formato =$partes_objeto[3]; 
-							if (@$partes_objeto[4]!="") $estilo =$partes_objeto[4]; 
+							if (@$partes_objeto[3]!="") $formato =$partes_objeto[3];
+							if (@$partes_objeto[4]!="") $estilo =$partes_objeto[4];
 							if (@$partes_objeto[5]!="") $embebido =$partes_objeto[5];
 							cargar_informe($partes_objeto[1],@$en_ventana,@$formato,@$estilo,@$embebido);
 						}

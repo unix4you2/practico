@@ -521,7 +521,8 @@
 	$MULTILANG_InfDefinidos='Reports / charts already defined in the system';
 	$MULTILANG_InfcamTabCond='Fields, Tables and Conditions';
 	$MULTILANG_InfAdvEliminar='IMPORTANT: Deleting this report users can not access it again. You can not undo this operation. This also eliminates any internal design of the report.\n'.$MULTILANG_Confirma;
-	
+	$MULTILANG_InfErrTamano='The report you are trying to generate is a graph type  report but the designer did not specify the height and width of the resulting graph.<br>Should provide an valid size of graphic to generate an image.';
+
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';
 	$MULTILANG_MnuSelImagen='Click on an image to select';

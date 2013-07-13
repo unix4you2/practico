@@ -5,7 +5,7 @@
 	$PasswordBD='mypass';
 	$MotorBD='mysql';
 	$PuertoBD='';
-	$NombreRAD='Práctico';
+	$NombreRAD='Pr&aacute;ctico';
 	$PlantillaActiva='nomo';
 	$ArchivoCORE='';
 	$TablasCore='core_';

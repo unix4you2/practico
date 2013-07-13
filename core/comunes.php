@@ -1588,12 +1588,13 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion,$Login_usuario;
 		// Carga variables de definicion de tablas
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
-		global $MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio;
+		global $MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano;
+		global $IdiomaPredeterminado;
 
 		// Busca datos del informe
 		$consulta_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id='$informe'");
 		$registro_informe=$consulta_informe->fetch();
-
+		$Identificador_informe=$registro_informe["id"];
 		//Si no encuentra informe presenta error
 		if ($registro_informe["id"]=="") mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Informes." $informe)","70%","icono_error.png","TextosEscritorio");
 
@@ -1678,6 +1679,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		// Si el informe tiene formato_final = T (tabla de datos)
 		if ($registro_informe["formato_final"]=="T")
 			{
+				$SalidaFinalInforme='';
+				$SalidaFinalInformePDF='';
 				if ($en_ventana)
 					{
 						//Cuando es embebido (=1) no imprime el boton de retorno pues se asume dentro de un formulario
@@ -1689,21 +1692,32 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				// Si se ha definido un tamano fijo entonces crea el marco
 				if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
 					echo '<DIV style="DISPLAY: block; OVERFLOW: auto; POSITION: relative; WIDTH: '.$registro_informe["ancho"].'; HEIGHT: '.$registro_informe["alto"].'">';
+					
+				//Genera enlace al PDF cuando se detecta el modulo
+				if (@file_exists("mod/pdf"))
+					{
+						echo '<div align=right><a href="tmp/Inf_'.$Identificador_informe.'-'.$Login_usuario.'.pdf" target="_BLANK"><img src="img/icono_pdf.gif" border=0 align=absmiddle> PDF&nbsp;</a></div>';
+					}
 
 					// Crea encabezado por tipo de formato:  1=html   2=Excel
 					if($formato=="htm")
 						{
 							echo '
 								<html>
-								<body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0" style="font-size: 12px; font-family: Verdana, Tahoma, Arial;">';
+								<body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0" style="font-size: 12px; font-family: Arial, Verdana, Tahoma;">';
 
 							// Si no tiene ancho o alto se asume que es para impresion y agrega titulo
 							if ($registro_informe["ancho"]=="" || $registro_informe["alto"]=="")
-								echo '<table class="'.$estilo.'">
-									<thead><tr><td>
-									'.$Nombre_Aplicacion.' - '.$registro_informe["titulo"].'
-									</td></tr></thead></table>';
-
+								{
+									$SalidaFinalInforme.= '<table class="'.$estilo.'">
+										<thead><tr><td>
+										'.$Nombre_Aplicacion.' - '.$registro_informe["titulo"].'
+										</td></tr></thead></table>';
+									$SalidaFinalInformePDF.= '<table class="'.$estilo.'">
+										<thead><tr><td>
+										'.$Nombre_Aplicacion.' - '.$registro_informe["titulo"].'
+										</td></tr></thead></table>';
+								}
 							// Pone encabezados de informe
 							/*if ($registro_informe[filtro_cliente]!="")
 								echo 'Empresa: '.$cliente.'  -  ';
@@ -1725,11 +1739,15 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 						}
 
 					if($formato=="htm")
-						echo '<table class="'.$estilo.'">
-							<thead><tr>';
+						{
+							$SalidaFinalInforme.= '<table class="'.$estilo.'"><thead><tr>';
+							$SalidaFinalInformePDF.= '<table class="'.$estilo.'"><thead><tr>';
+						}
 					if($formato=="xls")
-						echo '<table class="font-size: 11px; font-family: Verdana, Tahoma, Arial;">
-							<thead><tr>';
+						{
+							$SalidaFinalInforme.= '<table class="font-size: 11px; font-family: Verdana, Tahoma, Arial;"><thead><tr>';
+							$SalidaFinalInformePDF.= '<table class="font-size: 11px; font-family: Verdana, Tahoma, Arial;"><thead><tr>';
+						}
 
 
 					// Busca si el informe tiene acciones (botones), los cuenta y prepara dentro de un arreglo para repetir en cada registro
@@ -1774,7 +1792,14 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					//Si el informe tiene botones se agrega el formulario para procesar las acciones
 					if ($total_botones>0)
 						{
-							echo '<form name="FRMBASEINFORME" action="'.$ArchivoCORE.'" method="POST">
+							$SalidaFinalInforme.= '<form name="FRMBASEINFORME" action="'.$ArchivoCORE.'" method="POST">
+								<input type="Hidden" name="accion" value="">
+								<input type="Hidden" name="tabla" value="">
+								<input type="Hidden" name="campo" value="">
+								<input type="Hidden" name="valor" value="">
+								<input type="Hidden" name="objeto" value="">
+								</form>';
+							$SalidaFinalInformePDF.= '<form name="FRMBASEINFORME" action="'.$ArchivoCORE.'" method="POST">
 								<input type="Hidden" name="accion" value="">
 								<input type="Hidden" name="tabla" value="">
 								<input type="Hidden" name="campo" value="">
@@ -1788,23 +1813,32 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					$numero_columnas=0;
 					foreach($resultado_columnas->fetch(PDO::FETCH_ASSOC) as $key=>$val)
 						{
-							echo '<th align="LEFT">'.$key.'</th>';
+							$SalidaFinalInforme.= '<th align="LEFT">'.$key.'</th>';
+							$SalidaFinalInformePDF.= '<th align="LEFT">'.$key.'</th>';
 							$numero_columnas++;
 						}
 
 					//Si el informe tiene botones entonces agrega columna adicional
 					if ($total_botones>0)
-						echo '<th align="LEFT"></th>';
-					echo '</tr></thead><tbody>';
+						{
+							$SalidaFinalInforme.= '<th align="LEFT"></th>';
+							$SalidaFinalInformePDF.= '<th align="LEFT"></th>';
+						}
+					$SalidaFinalInforme.= '</tr></thead><tbody>';
+					$SalidaFinalInformePDF.= '</tr></thead><tbody>';
 
 					// Imprime registros del resultado
 					$numero_filas=0;
 					$consulta_ejecucion=ejecutar_sql($consulta);
 					while($registro_informe=$consulta_ejecucion->fetch())
 						{
-							echo '<tr>';
+							$SalidaFinalInforme.= '<tr>';
+							$SalidaFinalInformePDF.= '<tr>';
 							for ($i=0;$i<$numero_columnas;$i++)
-								echo '<td align=left>'.$registro_informe[$i].'</td>';
+								{
+									$SalidaFinalInforme.= '<td align=left>'.$registro_informe[$i].'</td>';
+									$SalidaFinalInformePDF.= '<td align=left>'.$registro_informe[$i].'</td>';
+								}
 							//Si el informe tiene botones los agrega
 							if ($total_botones>0)
 								{
@@ -1812,34 +1846,87 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 									$cadena_botones_registro=str_replace("DELFRMVALVALOR",$registro_informe[0],$cadena_generica_botones);
 									$cadena_botones_registro=str_replace("DETFRMVALBASE",$registro_informe[0],$cadena_botones_registro);
 									//Muestra los botones preparados para el registro
-									echo '<th align="LEFT">'.$cadena_botones_registro.'</th>';
+									$SalidaFinalInforme.= '<th align="LEFT">'.$cadena_botones_registro.'</th>';
+									$SalidaFinalInformePDF.= '<th align="LEFT">'.$cadena_botones_registro.'</th>';
 								}
-							echo '</tr>';
+							$SalidaFinalInforme.= '</tr>';
+							$SalidaFinalInformePDF.= '</tr>';
 							$numero_filas++;
 						}
-					echo '</tbody>';
+					$SalidaFinalInforme.= '</tbody>';
+					$SalidaFinalInformePDF.= '</tbody>';
 					if ($formato=="htm")
-						echo '<tfoot>
-							<tr><td colspan='.$numero_columnas.'>
-								<b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
-							</td></tr>
-						</tfoot>';
-					echo '</table>';
+						{
+							$SalidaFinalInforme.= '<tfoot>
+								<tr><td colspan='.$numero_columnas.'>
+									<b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
+								</td></tr>
+							</tfoot>';
+							$SalidaFinalInformePDF.= '<tfoot>
+								<tr><td colspan='.$numero_columnas.'>
+									<b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
+								</td></tr>
+							</tfoot>';
+						}
+					$SalidaFinalInforme.= '</table>';
+					$SalidaFinalInformePDF.= '</table>';
 
 					if($formato=="htm")
-						echo '
-							</body>
-							</html>';
-
+						echo '</body></html>';
+				//Imprime el HTML generado para el informe
+				echo $SalidaFinalInforme;
+				
+				//Genera el PDF cuando se encuentra el modulo
+				if (@file_exists("mod/pdf"))
+					{
+						require_once('mod/pdf/html2pdf/html2pdf.class.php');
+						try
+							{
+								//Define parametros para generar el PDF
+								$IdiomaPDF=$IdiomaPredeterminado;			// Acepta solo ca|cs|da|de|en|es|fr|it|nl|pt|tr
+								$OrientacionPDF='P';						// P|ortrait  L|andscape
+								$TamanoPaginaPDF='A4';						// A4|A5|LETTER|LEGAL|100×200...|
+								$MargenPaginaMM='10';						// Como Entero o arreglo (Izq,Der,Arr,Aba) ej:  10  o  array(1, 25, 25, 5)
+								$ModoVistaPDF='fullpage';					// fullpage|fullwidth|real|default
+								$FuentePredeterminadaPDF='Arial';			// Arial|Courier|Courier-Bold|Courier-BoldOblique|Courier-Oblique|Helvetica|Helvetica-Bold|Helvetica-BoldOblique|Helvetica-Oblique|Symbol|Times-Roman|Times-Bold|Times-BoldItalic|Times-Italic|ZapfDingbats
+								$ContrasenaLecturaPDF='';					// Si se asigna un valor pedira contrasena para poderlo leer
+								$JavaScriptPDF='';							// Ej.  print(true);
+								// Inicia la generacion del PDF
+								$html2pdf = new HTML2PDF($OrientacionPDF,$TamanoPaginaPDF,$IdiomaPDF, true, 'UTF-8', $MargenPaginaMM);
+								if ($ContrasenaLecturaPDF!="")
+									$html2pdf->pdf->SetProtection(array('print'), $ContrasenaLecturaPDF);
+								if ($JavaScriptPDF!="")
+									$html2pdf->pdf->IncludeJS($JavaScriptPDF);
+								$html2pdf->pdf->SetDisplayMode($ModoVistaPDF);
+								$html2pdf->setDefaultFont($FuentePredeterminadaPDF);
+								$html2pdf->WriteHTML($SalidaFinalInformePDF);
+								$html2pdf->Output('tmp/Inf_'.$Identificador_informe.'-'.$Login_usuario.'.pdf', 'F'); // Antes: $html2pdf->Output('tmp/exemple.pdf'); enviaba salida al navegador directamente
+							}
+						catch (HTML2PDF_exception $e)
+							{
+								echo $e;
+								exit;
+							}
+					}
+				
 				// Si se ha definido un tamano fijo entonces cierra el marco
 				if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
 					echo '</DIV>';
 			} // Fin si informe es T (tabla)
 
-
+		//Verifica si es un informe grafico sin dimensiones
+		if ($registro_informe["formato_final"]=="G" && ( $registro_informe["ancho"]=="" || $registro_informe["alto"]=="" ))
+			{
+				echo '<form name="cancelarXTamano" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="accion" value="Ver_menu">
+					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
+					<input type="Hidden" name="error_descripcion" value="'.$MULTILANG_InfErrTamano.'">
+					</form>
+					<script type="" language="JavaScript"> document.cancelarXTamano.submit();  </script>';
+			}
 
 		// Si el informe tiene formato_final = G (grafico)
-		if ($registro_informe["formato_final"]=="G")
+		if ($registro_informe["formato_final"]=="G" && $registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
 			{
 				//Consulta el formato de grafico y datos de series para ponerlo en los campos
 				//Dado por: Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
@@ -1950,11 +2037,13 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				//$chart->getPlot()->setGraphCaptionRatio(0.75);
 				$chart->setTitle($registro_informe["titulo"]);
 				$chart->render("tmp/Inf_".$registro_informe["id"]."-".$Login_usuario.".png");
-				echo '<img alt="Grafico" src="tmp/Inf_'.$registro_informe["id"].'-'.$Login_usuario.'.png" style="border: 1px solid gray;">';
+				echo '<img alt="Grafico" src="tmp/Inf_'.$Identificador_informe.'-'.$Login_usuario.'.png" style="border: 1px solid gray;">';
 			} // Fin si informe es G (grafico)
 
 		if ($en_ventana) cerrar_ventana();
 	}
+
+
 
 
 
