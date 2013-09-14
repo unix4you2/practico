@@ -147,6 +147,8 @@
 	$MULTILANG_ErrHASH=$MULTILANG_PHPSinSoporte.' HASH support is required.<br>This extension is required if you selected a different encryption type for passwords on engines up external authentication.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrSESS=$MULTILANG_PHPSinSoporte.' sessions support is required. '.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrGD=$MULTILANG_PHPSinSoporte.' GD Graphics Library is required.<br>Those who are using debian, ubuntu or its derivatives can try a <b> apt-get install php5-gd </ b> to add it.<br>'.$MULTILANG_ReinicieWeb;
+	$MULTILANG_ErrCURL=$MULTILANG_PHPSinSoporte.' cURL Library is required.<br>Those who are using debian, ubuntu or its derivatives can try a <b> apt-get install php5-gd </ b> to add it.<br>'.$MULTILANG_ReinicieWeb;
+	$MULTILANG_ErrSimpleXML=$MULTILANG_PHPSinSoporte.' SimpleXML Library is required.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrPDO=$MULTILANG_PHPSinSoporte.' PDO support is required.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrDriverPDO=$MULTILANG_PHPSinSoporte.' for PDO. '.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ObjetoNoExiste='The object associated with this request does not exist.';
@@ -753,4 +755,10 @@
 	$MULTILANG_MsjFinal1='If this is a new installation can enter the system through <b> credentials admin / admin </ b> and change then as you desire.';
 	$MULTILANG_MsjFinal2='Remember to completely remove the installation directory (folder / ins) </b> </u> to prevent other person run these scripts again on a production system can cause any damage.';
 	$MULTILANG_MsjFinal2='Summary of operations executed';
-?>
+
+	//API-Webservices
+	$MULTILANG_WSErrTitulo='Practico WebServices - Error';
+	$MULTILANG_WSErr01='[Cod. 01] Invalid key';
+	$MULTILANG_WSErr02='[Cod. 02] KEYs definition file does not found';
+	$MULTILANG_WSErr03='[Cod. 03] WebServices functions file does not found';
+

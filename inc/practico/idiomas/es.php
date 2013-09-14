@@ -147,6 +147,8 @@
 	$MULTILANG_ErrHASH=$MULTILANG_PHPSinSoporte.' para HASH activado.<br>Este se requiere cuando es seleccionado un tipo de encripci&oacute;n diferente al plano para contrase&ntilde;as sobre motores de autenticaci&oacute;n externos.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrSESS=$MULTILANG_PHPSinSoporte.' para sesiones activado. '.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrGD=$MULTILANG_PHPSinSoporte.' para librer&iacute;a gr&aacute;fica GD &oacute; GD2 activado.<br>Aquellos utilizando debian, ubuntu o sus derivados pueden intentar un <b>apt-get install php5-gd</b> para agregarlo.<br>'.$MULTILANG_ReinicieWeb;
+	$MULTILANG_ErrCURL=$MULTILANG_PHPSinSoporte.' para librer&iacute;a cURL activado.<br>Aquellos utilizando debian, ubuntu o sus derivados pueden intentar un <b>apt-get install php5-curl</b> para agregarlo.<br>'.$MULTILANG_ReinicieWeb;
+	$MULTILANG_ErrSimpleXML=$MULTILANG_PHPSinSoporte.' para librer&iacute;a SimpleXML activado.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrPDO=$MULTILANG_PHPSinSoporte.' para PDO activado.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrDriverPDO=$MULTILANG_PHPSinSoporte.' para PDO activado. '.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ObjetoNoExiste='El objeto asociado a esta solicitud no existe.';
@@ -750,4 +752,10 @@
 	$MULTILANG_MsjFinal1='Si esta es una instalaci&oacute;n nueva puede ingresar al sistema mediante las credenciales<b> admin/admin</b> y cambiarlas luego por las que usted desee.';
 	$MULTILANG_MsjFinal2='Recuerde eliminar por completo el directorio de instalaci&oacute;n (carpeta /ins)</b></u> para evitar que otra persona ejecute nuevamente estos scripts sobre un sistema en producci&oacute;n pudiendo ocasionar alg&uacute;n tipo de da&ntilde;o.';
 	$MULTILANG_MsjFinal2='Resumen de operaciones ejecutadas';
-?>
+
+	//API-Webservices
+	$MULTILANG_WSErrTitulo='Practico WebServices - Error';
+	$MULTILANG_WSErr01='[Cod. 01] La llave suministrada es inv&aacute;lida';
+	$MULTILANG_WSErr02='[Cod. 02] No se encuentra el archivo de definici&oacute;n de llaves';
+	$MULTILANG_WSErr03='[Cod. 03] No se encuentra el archivo de funciones para webservices.';
+

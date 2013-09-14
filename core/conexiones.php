@@ -119,4 +119,3 @@
 			$hay_error=1; //usada globalmente durante el proceso de instalacion
 		}
 
-?>

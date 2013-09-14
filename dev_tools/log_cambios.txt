@@ -14,12 +14,21 @@ ArchivoVersion=" inc/version_actual.txt "
 
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
+index.php
 core/menus.php
 core/comunes.php
+core/conexiones.php
+core/sesion.php
 core/tablas.php
 core/informes.php
 core/formularios.php
 core/marco_arriba.php
+core/ws_funciones.php
+core/ws_llaves.php
+inc/practico/def_basedatos.php
+inc/practico/idiomas/es.php
+inc/practico/idiomas/en.php
+mod/personalizadas_ws.php
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -34,6 +43,8 @@ LogCambios="
  * Added: Disponibilidad de nuevo modulo para pasar a PDF
  * Added: Adicion de encabezados y pies de pagina a informes PDF desde la personalizacion de parametros
  * Added: Personalizacion de margenes, fuentes, etc en generacion de PDFs
+ * Added: Modo de webservices, definicion de llaves para consumidores webservices y validacion de las mismas
+ * Added: Autenticacion interna basada en WebServices y XML, esto permite ademas creacion de sistemas centralizados de autenticacion basados en Practico
  * Fixed: Mensajes de advertencia en generacion de informes
  * Fixed: Cambio de idioma en generador de PDFs de acuerdo a la parametrizacion del sistema
  * Fixed: MetaTAGs nuevos en la generacion de las paginas

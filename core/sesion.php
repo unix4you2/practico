@@ -63,7 +63,7 @@
 
 			//Verifica el captcha ingresado por el usuario
 			$ok_captcha=1;
-			if ($captcha_temporal!=$captcha)
+			if (@$captcha_temporal!=$captcha)
 				{
 					$ok_captcha=0;
 					// Lleva auditoria con query manual por la falta de $Login_Usuario y solamente si no hay un posible sqlinjection
@@ -72,39 +72,45 @@
 				}
 			session_destroy();
 
-			$ok_login=0;			
-			//Verifica autenticacion interna
-			if ($Auth_TipoMotor=="practico" || $uid=="admin")
-				{
-					$ClaveEnMD5=hash("md5", $clave);
-					$resultado_usuario=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE estado=1 AND login='$uid' AND clave='$ClaveEnMD5' ");
-					$registro = $resultado_usuario->fetch();
-					if ($registro["login"]!="")
-						$ok_login=1;
-				}
-				
-			//Verifica autenticacion por LDAP
-			if ($Auth_TipoMotor=="ldap" && $uid!="admin")
-				{
-					$auth_ldap_dc="";
-					$auth_ldap_dc_trozos=explode(".",$Auth_LDAPDominio);
-					for ($i = 0; $i < count($auth_ldap_dc_trozos) ; $i++)
-						$auth_ldap_dc.=",dc=".$auth_ldap_dc_trozos[$i];
-					$auth_ldap_cadena = 'uid='.$uid.',ou='.$Auth_LDAPOU.$auth_ldap_dc;
-					// Conexion a LDAP
-					$auth_ldap_conexion = ldap_connect( $Auth_LDAPServidor, $Auth_LDAPPuerto );
-					ldap_set_option($auth_ldap_conexion, LDAP_OPT_PROTOCOL_VERSION, 3);
-					//Verifica si se debe preencriptar la clave
-					if ($Auth_TipoEncripcion!="plano")
-						$clave=hash($Auth_TipoEncripcion, $clave);
-					// match de usuario y password
-					if (  ldap_bind( $auth_ldap_conexion, $auth_ldap_cadena, $clave )  )
-						$ok_login=1;
-				}
+			$ok_login=0;
+			// Inicia la autenticacion como una solicitud de webservices interna
+			// Determina si la conexion actual de Practico esta encriptada
+			if(empty($_SERVER["HTTPS"]))
+				$protocolo_webservice="http://";
+			else
+				$protocolo_webservice="https://";
+			// Construye la URL para solicitar el webservice
+			$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
+			$webservice_validacion = $protocolo_webservice.$prefijo_webservice."?WSOn=1&WSKey=abc&WSId=verificar_credenciales&uid=".$uid."&clave=".$clave;
+			// Forma 1: Usando SimpleXML Directamente
+			$resultado_webservice = simplexml_load_string(file_get_contents($webservice_validacion));
+			// Analiza la respuesta recibida en el XML
+			if($resultado_webservice->credencial[0]->aceptacion==1)
+				$ok_login=1;
+			/*
+			// Forma 2: Usando cURL
+				$variable_curl = curl_init($webservice_validacion);
+				$ok_login = curl_exec($variable_curl); //Solo recibe una booleana
+				curl_close($variable_curl);
+				unset($variable_curl);
+			// Forma 3: DEPRECATED
+				$ok_login = file_get_contents($webservice_validacion);  //Solo recibe una booleana
+			// Forma 4: DEPRECATED Usando fopen requiere allow_url_fopen activado en php.ini  //Solo recibe una booleana
+				$file = @fopen($webservice_validacion, ‘r’);
+				if($file)
+					{
+						while(!feof($file))
+							{
+								$ok_login .= @fgets($file, 4096);
+							}
+						fclose ($file);
+					}
+			*/
 
 			$clave_correcta=0;
 			if ($clave!="" && $ok_login==1 && $ok_captcha==1)
 				  {
+
 						// Busca datos del usuario Practico, sin importar metodo de autenticacion para tener configuraciones de permisos y parametros propios de la herramienta
 						$resultado_usuario=ejecutar_sql("SELECT login, nombre, clave, descripcion, nivel, correo, llave_paso FROM ".$TablasCore."usuario WHERE login='$uid' ");
 						$registro = $resultado_usuario->fetch();					
@@ -113,32 +119,26 @@
 						$consulta_parametros=ejecutar_sql("SELECT id,".$ListaCamposSinID_parametros." FROM ".$TablasCore."parametros");
 						$registro_parametros = $consulta_parametros->fetch();
 
-						// Actualiza las vartiables de sesion con el registro
-						//$Login_usuario=$registro["login"];
-						//$Nombre_usuario=$registro["nombre"];
-						//$Clave_usuario=$registro["clave"];
-						//$Descripcion_usuario=$registro["descripcion"];
-						//$Nivel_usuario=$registro["nivel"];
-						//$Correo_usuario=$registro["correo"];
+						// Actualiza las variables de sesion con el registro
 						$Sesion_abierta=1;
 						// Actualiza booleana de ingreso
 						$clave_correcta=1;
 						// Registro de variables en la sesion
 						/*Antes con depreciada: session_register('Login_usuario');*/
-						session_start();
-						if (!isset($_SESSION["Login_usuario"])) $_SESSION["Login_usuario"]=$registro["login"];
-						if (!isset($_SESSION["Nombre_usuario"])) $_SESSION["Nombre_usuario"]=$registro["nombre"];
+						@session_start();
+						if (!isset($_SESSION["Login_usuario"])) $_SESSION["Login_usuario"]=(string)$resultado_webservice->credencial[0]->login;
+						if (!isset($_SESSION["Nombre_usuario"])) $_SESSION["Nombre_usuario"]=(string)$resultado_webservice->credencial[0]->nombre;
+						if (!isset($_SESSION["Descripcion_usuario"])) $_SESSION["Descripcion_usuario"]=(string)$resultado_webservice->credencial[0]->descripcion;
+						if (!isset($_SESSION["Nivel_usuario"])) $_SESSION["Nivel_usuario"]=(string)$resultado_webservice->credencial[0]->nivel;
+						if (!isset($_SESSION["Correo_usuario"])) $_SESSION["Correo_usuario"]=(string)$resultado_webservice->credencial[0]->correo;
 						if (!isset($_SESSION["Clave_usuario"])) $_SESSION["Clave_usuario"]=$registro["clave"];
-						if (!isset($_SESSION["Descripcion_usuario"])) $_SESSION["Descripcion_usuario"]=$registro["descripcion"];
-						if (!isset($_SESSION["Nivel_usuario"])) $_SESSION["Nivel_usuario"]=$registro["nivel"];
-						if (!isset($_SESSION["Correo_usuario"])) $_SESSION["Correo_usuario"]=$registro["correo"];
+						if (!isset($_SESSION["LlaveDePasoUsuario"])) $_SESSION["LlaveDePasoUsuario"]=$registro["llave_paso"];
 						if (!isset($_SESSION["Sesion_abierta"])) $_SESSION["Sesion_abierta"]=$Sesion_abierta;
 						if (!isset($_SESSION["clave_correcta"])) $_SESSION["clave_correcta"]=$clave_correcta;
-						if (!isset($_SESSION["LlaveDePasoUsuario"])) $_SESSION["LlaveDePasoUsuario"]=$registro["llave_paso"];
-
 						if (!isset($_SESSION["Nombre_Empresa_Corto"])) $_SESSION["Nombre_Empresa_Corto"]=$registro_parametros["nombre_empresa_corto"];
 						if (!isset($_SESSION["Nombre_Aplicacion"])) $_SESSION["Nombre_Aplicacion"]=$registro_parametros["nombre_aplicacion"];
 						if (!isset($_SESSION["Version_Aplicacion"])) $_SESSION["Version_Aplicacion"]=$registro_parametros["version"];
+
 
 						// Lleva a auditoria con query manual por la falta de $Login_Usuario
 						ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$uid','Ingresa al sistema desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");

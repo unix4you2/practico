@@ -5,7 +5,7 @@
 	$PasswordBD='mypass';
 	$MotorBD='mysql';
 	$PuertoBD='';
-	$NombreRAD='Pr&aacute;ctico';
+	$NombreRAD='Práctico';
 	$PlantillaActiva='nomo';
 	$ArchivoCORE='';
 	$TablasCore='core_';
@@ -21,4 +21,3 @@
 	$Auth_LDAPPuerto='389';
 	$Auth_LDAPDominio='';
 	$Auth_LDAPOU='';
-?>

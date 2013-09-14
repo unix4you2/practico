@@ -497,7 +497,7 @@
 			global $MotorBD;
 			global $Auth_TipoMotor;
 			global $Auth_TipoEncripcion;
-			global $MULTILANG_ErrExtension,$MULTILANG_ErrLDAP,$MULTILANG_ErrHASH,$MULTILANG_ErrSESS,$MULTILANG_ErrGD,$MULTILANG_ErrPDO,$MULTILANG_ErrDriverPDO;
+			global $MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,$MULTILANG_ErrCURL,$MULTILANG_ErrLDAP,$MULTILANG_ErrHASH,$MULTILANG_ErrSESS,$MULTILANG_ErrGD,$MULTILANG_ErrPDO,$MULTILANG_ErrDriverPDO;
 			
 			//Verifica soporte para LDAP cuando esta activado en la herramienta
 			if ($Auth_TipoMotor=='ldap' &&  !extension_loaded('ldap'))
@@ -522,6 +522,14 @@
 			//Verifica soporte para el driver PDO correspondiente al motor utilizado
 			if (!extension_loaded('pdo_'.$MotorBD))
 				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrDriverPDO,'','icono_error.png','TextosEscritorio');
+
+			//Verifica soporte para SimpleXML
+			if (!extension_loaded('SimpleXML'))
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,'','icono_error.png','TextosEscritorio');
+
+			// DEPRECATED Verifica soporte para cURL
+			//if (!extension_loaded('curl'))
+			//	mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrCURL,'','icono_error.png','TextosEscritorio');
 		}
 
 
@@ -2103,4 +2111,3 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				}
 		}
 
-?>
