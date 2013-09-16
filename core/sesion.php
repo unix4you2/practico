@@ -40,8 +40,8 @@
 
 	Variables de entrada:
 
-		uid - Valor del campo clave digitado por el usuario
-		clave - Nombre del formulario sobre el que se actualiza el valor del campo seguridad.
+		uid - Login utilizado por el usuario
+		clave - Clave del usuario sin cifrar
 		captcha - Valor del captcha diligenciado por el usuario
 		captcha_temporal - Valor del captcha calculado por el sistema
 
@@ -81,7 +81,7 @@
 				$protocolo_webservice="https://";
 			// Construye la URL para solicitar el webservice
 			$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
-			$webservice_validacion = $protocolo_webservice.$prefijo_webservice."?WSOn=1&WSKey=abc&WSId=verificar_credenciales&uid=".$uid."&clave=".$clave;
+			$webservice_validacion = $protocolo_webservice.$prefijo_webservice."?WSOn=1&WSKey=".$LlaveDePaso."&WSId=verificar_credenciales&uid=".$uid."&clave=".$clave;
 			// Forma 1: Usando SimpleXML Directamente
 			$resultado_webservice = simplexml_load_string(file_get_contents($webservice_validacion));
 			// Analiza la respuesta recibida en el XML

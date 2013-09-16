@@ -741,7 +741,7 @@
 	$MULTILANG_AyudaDesLdapUO='User Context Connection. Must exist on the LDAP server, eg people, sales, marketing, etc.';
 	$MULTILANG_TitInsPaso3='Writing Configuration and connecting to Database';
 	$MULTILANG_DesInsPaso3='I am writing configuracion.php file located in / core with the parameters you specified and is being tested Connects to the specified database.';
-	$MULTILANG_ErrorEscribirConfig='<b>Found errors when trying to write the configuration file! </b>: <br> If you want an alternative may be to change your own default values ​​contained in the file core/configuracion.php. <br> <br> You can also change file permissions for configuracion.php and try again with this wizard.';
+	$MULTILANG_ErrorEscribirConfig='<b>Found errors when trying to write the configuration file! </b>: <br> If you want an alternative may be to change your own default values ​​contained in the file core/configuracion.php or ws_llaves.php depending of your desired changes.<br> <br> You can also change file permissions for configuracion.php and try again with this wizard.';
 	$MULTILANG_ErrorConexBD='<b> found errors when connecting to the database! </b>: <br> Check the values ​​entered in the previous step and try again.';
 	$MULTILANG_InfoPaso3='<b> Everything seems fine with the basic configuration of PDO. </b> <br> The last step is to tell the installation wizard like trying your database:<br><br>
 				<li><b>1.</b> Add data start the database, this includes the initial user (admin), menus and other records on Practico Core tables. This is the best choice for new installations.
@@ -761,4 +761,10 @@
 	$MULTILANG_WSErr01='[Cod. 01] Invalid key';
 	$MULTILANG_WSErr02='[Cod. 02] KEYs definition file does not found';
 	$MULTILANG_WSErr03='[Cod. 03] WebServices functions file does not found';
-
+	$MULTILANG_WSErr04='[Cod. 04] Webservice consumers key is empty or null. Check the value you sent or your Practico installation process.';
+	$MULTILANG_WSErr05='[Cod. 05] The service identifier, function or method could not be executed, is uknown or is empty.';
+	$MULTILANG_WSConfigButt='WebServices configuration';
+	$MULTILANG_WSLlavesDefinidas='<b>WebServices consumer Keys</b> (one each line)';
+	$MULTILANG_WSLlavesAyuda='Those are the webservices keys that you allow to use Pr&aacute;ctico Webservices or user custom services.  It is not necessary to add your setup pass key cause it is allowed by default.';
+	$MULTILANG_WSLlavesAgregar='Add random key';
+	

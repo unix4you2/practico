@@ -195,23 +195,21 @@
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='BarraFlotanteConfiguracion' class="FormularioPopUps">
 			<?php
-			abrir_ventana($NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral,'#f2f2f2','600'); 
+			abrir_ventana($NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral,'#f2f2f2','900'); 
 			?>
 				<!--<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 800; POSITION: relative; HEIGHT: 400px">-->
 
 					<form name="continuar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="hidden" name="accion" value="guardar_configuracion">
-					<font size=2 color=black><br><b>
+					<font size=2 color=black><b>
 						[<?php echo $MULTILANG_MotorBD; ?>]</b>
 					</font>
-					<table cellspacing=2 width="700">
+					<table cellspacing=0 width="100%" style="font-size:11px; color:000000;">
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									<?php echo $MULTILANG_TipoMotor; ?>
-								</font>
+								<?php echo $MULTILANG_TipoMotor; ?>
 							</td>
-							<td valign=top width="380">
+							<td valign=top width="480">
 								<select name="MotorBDNEW" class="Combos" >
 									<option value="mysql"	 <?php if ($MotorBD=="mysql") echo "SELECTED"; ?> >MySQL - MariaDB (3.x/4.x/5.x)</option>
 									<option value="pgsql"	 <?php if ($MotorBD=="pgsql") echo "SELECTED"; ?> >PostgreSQL</option>
@@ -230,55 +228,35 @@
 						</tr>
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									<?php echo $MULTILANG_Servidor; ?>
-								</font>
+								<?php echo $MULTILANG_Servidor; ?>
 							</td>
 							<td valign=top>
-								<font size=2 color=black>
 								<input type="text" name="ServidorNEW"  value="<?php echo $ServidorBD; ?>" size="20" class="CampoTexto" class="keyboardInput">
 								<?php echo $MULTILANG_Puerto; ?>: <input type="text"  value="<?php echo $PuertoBD; ?>" name="PuertoBDNEW" size="4" class="CampoTexto" class="keyboardInput"> <?php echo $MULTILANG_PuertoNoPredeterminado; ?>
-								</font>
 							</td>
 						</tr>
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									<?php echo $MULTILANG_Basedatos; ?>
-								</font>
+								<?php echo $MULTILANG_Basedatos; ?>
 							</td>
 							<td valign=top>
-								<font size=2 color=black>
 								<input type="text" name="BaseDatosNEW"  value="<?php echo $BaseDatos; ?>" size="20" class="CampoTexto" class="keyboardInput">
 								<a href="#" title="<?php echo $MULTILANG_AyudaTitBD; ?>" name="<?php echo $MULTILANG_AyudaDesBD; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
-								</font>
 							</td>
 						</tr>
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									<?php echo $MULTILANG_Usuario; ?>
-								</font>
+								<?php echo $MULTILANG_Usuario; ?>
 							</td>
 							<td valign=top>
 								<input type="text" name="UsuarioBDNEW"  value="<?php echo $UsuarioBD; ?>" size="20" class="CampoTexto" class="keyboardInput">
-							</td>
-						</tr>
-						<tr>
-							<td valign=top align=right>
-								<font size=2 color=black>
-									<?php echo $MULTILANG_Contrasena; ?>
-								</font>
-							</td>
-							<td valign=top>
+								<?php echo $MULTILANG_Contrasena; ?>
 								<input type="password" name="PasswordBDNEW"  value="<?php echo $PasswordBD; ?>" size="20" class="CampoTexto" class="keyboardInput">
 							</td>
 						</tr>
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									<?php echo $MULTILANG_PrefijoCore; ?>
-								</font>
+								<?php echo $MULTILANG_PrefijoCore; ?>
 							</td>
 							<td valign=top>
 								<input type="text" name="TablasCoreNEW" size="7"  value="<?php echo $TablasCore; ?>" value="Core_" class="CampoTexto" class="keyboardInput">
@@ -287,9 +265,7 @@
 						</tr>
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									<?php echo $MULTILANG_PrefijoApp; ?>
-								</font>
+								<?php echo $MULTILANG_PrefijoApp; ?>
 							</td>
 							<td valign=top>
 								<input type="text" name="TablasAppNEW" size="7"  value="<?php echo $TablasApp; ?>" value="App_" class="CampoTexto" class="keyboardInput">
@@ -298,31 +274,25 @@
 						</tr>
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									<?php echo $MULTILANG_LlavePaso; ?>
-								</font>
+								<?php echo $MULTILANG_LlavePaso; ?>
 							</td>
 							<td valign=top>
-								<font size=2 color=black>
-									<input type="text" name="LlaveDePasoNEW" size="12" value="<?php echo $LlaveDePaso; ?>" class="CampoTexto" class="keyboardInput">
-									(<?php echo $MULTILANG_AyudaLlave; ?>)
-								</font>
+								<input type="text" name="LlaveDePasoNEW" size="12" value="<?php echo $LlaveDePaso; ?>" class="CampoTexto" class="keyboardInput">
+								(<?php echo $MULTILANG_AyudaLlave; ?>)
 							</td>
 						</tr>
 					</table>
 
 					<hr>
-					<font size=2 color=black><br><b>
+					<font size=2 color=black><b>
 						[<?php echo $MULTILANG_ConfiguracionVarias; ?>]</b>
 					</font>
-					<table cellspacing=2 width="700">
+					<table cellspacing=0 width="100%" style="font-size:11px; color:000000;">
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									<?php echo $MULTILANG_ZonaHoraria; ?>
-								</font>
+								<?php echo $MULTILANG_ZonaHoraria; ?>
 							</td>
-							<td valign=top width="380">
+							<td valign=top width="480">
 								<select  name="ZonaHorariaNEW" class="Combos">
 									<?php
 										$archivo_origen="inc/practico/zonas_horarias.txt";
@@ -347,11 +317,9 @@
 						</tr>
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
 									<?php echo $MULTILANG_IdiomaPredeterminado; ?>
-								</font>
 							</td>
-							<td valign=top width="380">
+							<td valign=top>
 								<select name="IdiomaPredeterminadoNEW" class="Combos" >
 									<?php
 									// Incluye archivos de idioma para ser seleccionados
@@ -380,11 +348,9 @@
 						</tr>
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									<?php echo $MULTILANG_CaracteresCaptcha; ?>
-								</font>
+								<?php echo $MULTILANG_CaracteresCaptcha; ?>
 							</td>
-							<td valign=top width="380">
+							<td valign=top>
 								<select name="CaracteresCaptchaNEW" class="Combos" >
 									<option value="1" <?php if ($CaracteresCaptcha=="1") echo "SELECTED"; ?> >1</option>
 									<option value="2" <?php if ($CaracteresCaptcha=="2") echo "SELECTED"; ?> >2</option>
@@ -398,11 +364,9 @@
 						</tr>
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									<?php echo $MULTILANG_ModoDepuracion; ?>
-								</font>
+								<?php echo $MULTILANG_ModoDepuracion; ?>
 							</td>
-							<td valign=top width="380">
+							<td valign=top>
 								<select name="ModoDepuracionNEW" class="Combos" >
 									<option value="1" <?php if ($ModoDepuracion=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Encendido; ?></option>
 									<option value="0" <?php if ($ModoDepuracion=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_Apagado; ?></option>
@@ -412,12 +376,9 @@
 						</tr>
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									<?php echo $MULTILANG_PlantillaActiva; ?>
-								</font>
+								<?php echo $MULTILANG_PlantillaActiva; ?>
 							</td>
-							<td valign=top width="380">
-								<font size=2 color=black>
+							<td valign=top>
 									<select name="PlantillaActivaNEW" class="Combos" >
 										<?php
 										// Incluye archivos de idioma para ser seleccionados
@@ -440,36 +401,29 @@
 										include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
 										?>
 									</select>
-								</font>
 							</td>
 						</tr>
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
 									<?php echo $MULTILANG_NombreRAD; ?>
-								</font>
 							</td>
-							<td valign=top width="380">
-								<font size=2 color=black>
+							<td valign=top>
 									<input type="text" name="NombreRADNEW" size="12" value="<?php echo $NombreRAD; ?>" class="CampoTexto" class="keyboardInput">
-								</font>
 							</td>
 						</tr>
 					</table>
 
 
 					<hr>
-					<font size=2 color=black><br><b>
+					<font size=2 color=black><b>
 						[<?php echo $MULTILANG_MotorAuth; ?>]</b>
 					</font>
-					<table cellspacing=2 width="700">
+					<table cellspacing=0 width="100%" style="font-size:11px; color:000000;">
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									<?php echo $MULTILANG_Tipo; ?>
-								</font>
+								<?php echo $MULTILANG_Tipo; ?>
 							</td>
-							<td valign=top>
+							<td valign=top width="480">
 								<select  name="Auth_TipoMotorNEW" class="Combos">
 									<option value="practico" <?php if ($Auth_TipoMotor=="practico") echo "SELECTED"; ?> ><?php echo $MULTILANG_AuthPractico; ?></option>
 									<option value="ldap" <?php if ($Auth_TipoMotor=="ldap") echo "SELECTED"; ?> ><?php echo $MULTILANG_AuthLDAP; ?></option>
@@ -479,9 +433,7 @@
 						</tr>
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									<?php echo $MULTILANG_AlgoritmoCripto; ?>
-								</font>
+								<?php echo $MULTILANG_AlgoritmoCripto; ?>
 							</td>
 							<td valign=top>
 								<select  name="Auth_TipoEncripcionNEW" class="Combos">
@@ -530,49 +482,37 @@
 						</tr>
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									LDAP: <?php echo $MULTILANG_Servidor; ?>
-								</font>
+								LDAP: <?php echo $MULTILANG_Servidor; ?>
 							</td>
-							<td valign=top width="380">
+							<td valign=top>
 								<input type="text" name="Auth_LDAPServidorNEW" size="20" class="CampoTexto" value="<?php echo $Auth_LDAPServidor; ?>" >
 								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_AyudaDesLdapIP; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									LDAP: <?php echo $MULTILANG_Puerto; ?>
-								</font>
+								LDAP: <?php echo $MULTILANG_Puerto; ?>
 							</td>
-							<td valign=top width="380">
+							<td valign=top>
 								<input type="text" name="Auth_LDAPPuertoNEW" size="5" class="CampoTexto" value="<?php echo $Auth_LDAPPuerto; ?>" >
 							</td>
 						</tr>
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									LDAP: <?php echo $MULTILANG_Dominio; ?> (dc=)
-								</font>
+								LDAP: <?php echo $MULTILANG_Dominio; ?> (dc=)
 							</td>
-							<td valign=top width="380">
-								<font size=2 color=black>
+							<td valign=top>
 								<input type="text" name="Auth_LDAPDominioNEW" size="15" class="CampoTexto" value="<?php echo $Auth_LDAPDominio; ?>">
 								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_AyudaDesLdapDominio; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a> (<?php echo $MULTILANG_Opcional; ?>)
-								</font>
 							</td>
 						</tr>
 						<tr>
 							<td valign=top align=right>
-								<font size=2 color=black>
-									LDAP: <?php echo $MULTILANG_UO; ?> (ou=)
-								</font>
+								LDAP: <?php echo $MULTILANG_UO; ?> (ou=)
 							</td>
-							<td valign=top width="380">
-								<font size=2 color=black>
+							<td valign=top>
 								<input type="text" name="Auth_LDAPOUNEW" size="15" class="CampoTexto" value="<?php echo $Auth_LDAPOU; ?>">
 								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_AyudaDesLdapUO; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a> (<?php echo $MULTILANG_Opcional; ?>)
-								</font>
 							</td>
 						</tr>
 					</table>
@@ -583,7 +523,55 @@
 			<?php
 			abrir_barra_estado();
 				echo '<input type="Button"  class="BotonesEstadoCuidado" value=" <<< '.$MULTILANG_IrEscritorio.' " onClick="OcultarPopUp(\'BarraFlotanteConfiguracion\')">';
+				echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_WSConfigButt.' >>> " onClick="OcultarPopUp(\'BarraFlotanteConfiguracion\'); AbrirPopUp(\'ConfiguracionWebServices\');">';
 				echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_Guardar.' >>> " onClick="document.forms.continuar.submit();">';
+			cerrar_barra_estado();
+			cerrar_ventana();
+			?>
+		<!-- FIN DE MARCOS POPUP -->
+		</div>
+
+
+		<!-- INICIO DE MARCOS POPUP -->
+		<div id='ConfiguracionWebServices' class="FormularioPopUps">
+			<?php
+			abrir_ventana($NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral,'#f2f2f2','500'); 
+			?>
+				<!--<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 800; POSITION: relative; HEIGHT: 400px">-->
+
+					<form name="configws" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+					<input type="hidden" name="accion" value="guardar_configws">
+					<table cellspacing=0 width="100%" style="font-size:11px; color:000000;">
+						<tr>
+							<td colspan=2 valign=top align=center>
+								<br><?php echo $MULTILANG_WSLlavesDefinidas; ?><br><br><?php echo $MULTILANG_WSLlavesAyuda; ?>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=right>
+								<textarea name="llaves_definidas" cols="15" rows="10" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"><?php
+									// Carga las llaves definidas
+									include_once("core/ws_llaves.php");
+										for ($r=0;$r<count($Auth_WSKeys);$r++)
+											echo $Auth_WSKeys[$r]."\n";
+									?></textarea>
+							</td>
+							<td valign=top align=left>
+								<?php
+									$llave_temp=TextoAleatorio(10);
+								?>
+								<br>
+								<input type="Button" name="bot0" id="bot0" class="Botones" value=" <<< <?php echo $MULTILANG_WSLlavesAgregar.' '.$llave_temp; ?> " onClick="document.forms.configws.llaves_definidas.value+='<?php echo $llave_temp; ?>\n'; bot0.style.visibility='hidden'; alert('<?php echo $MULTILANG_Finalizado?>');" style="visibility:visible; " >
+							</td>
+						</tr>
+					</table>
+
+					</form>
+				<!-- </DIV> -->
+			<?php
+			abrir_barra_estado();
+				echo '<input type="Button"  class="BotonesEstadoCuidado" value=" <<< '.$MULTILANG_IrEscritorio.' " onClick="OcultarPopUp(\'ConfiguracionWebServices\')">';
+				echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_Guardar.' >>> " onClick="document.forms.configws.submit();">';
 			cerrar_barra_estado();
 			cerrar_ventana();
 			?>

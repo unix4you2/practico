@@ -10,7 +10,7 @@
 	$ArchivoCORE='';
 	$TablasCore='core_';
 	$TablasApp='app_';
-	$LlaveDePaso='';
+	$LlaveDePaso='ABC';
 	$ModoDepuracion=1;
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='es';

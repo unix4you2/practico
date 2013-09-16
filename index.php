@@ -107,29 +107,41 @@
 
 	// Verifica si se trata de un llamado por web-services
 	$ModoWSActivado=0;
-	if (@$WSOn==1 && @$WSKey!="" && @$WSId!="")
+	if (@$WSOn==1)
 		{
-			// Incluye las llaves definidas
-			if (!file_exists("core/ws_llaves.php")) mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr02,'','icono_error.png','TextosEscritorio');
-			else include_once("core/ws_llaves.php");
-			// Agrega llave del sistema de manera predeterminada a la lista de llaves permitidas
-			$Auth_WSKeys[]=$LlaveDePaso;
-			// Verifica validez de la llave recibida para el webservice
-			if(in_array($WSKey, $Auth_WSKeys,true))
-				$ModoWSActivado=1;
-			// Si la llave es correcta incluye los webservices de la herramienta y los del usuario, sino presenta error
-			if ($ModoWSActivado)
+			// Verifica si se ha recibido una llave
+			if (@$WSKey!="")
 				{
-					if (!file_exists("core/ws_funciones.php")) mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr03,'','icono_error.png','TextosEscritorio');
-					else
+					// Verifica si se ha recibido un identificador de servicio
+					if (@$WSId!="")
 						{
-							ob_clean(); //Limpia salida antes de llamar los WS
-							include_once("core/ws_funciones.php");
-							include_once("mod/personalizadas_ws.php");
+							// Incluye las llaves definidas
+							if (!file_exists("core/ws_llaves.php")) mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr02,'','icono_error.png','TextosEscritorio');
+							else include_once("core/ws_llaves.php");
+							// Agrega llave del sistema de manera predeterminada a la lista de llaves permitidas, no deberia ser vacia o de lo contrario los WS no entraran
+							$Auth_WSKeys[]=$LlaveDePaso;
+							// Verifica validez de la llave recibida para el webservice
+							if(in_array($WSKey, $Auth_WSKeys,true))
+								$ModoWSActivado=1;
+							// Si la llave es correcta incluye los webservices de la herramienta y los del usuario, sino presenta error
+							if ($ModoWSActivado)
+								{
+									if (!file_exists("core/ws_funciones.php")) mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr03,'','icono_error.png','TextosEscritorio');
+									else
+										{
+											ob_clean(); //Limpia salida antes de llamar los WS
+											include_once("core/ws_funciones.php");
+											include_once("mod/personalizadas_ws.php");
+										}
+								}
+							else
+								mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr01,'','icono_error.png','TextosEscritorio');	
 						}
+					else
+						mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr05,'','icono_error.png','TextosEscritorio');
 				}
 			else
-				mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr01,'','icono_error.png','TextosEscritorio');
+				mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr04,'','icono_error.png','TextosEscritorio');	
 			die(); // Finaliza script para presentar solo el resultado del WebService ejecutado
 		}
 
@@ -170,7 +182,7 @@
 		include("core/formularios.php");
 	if ($accion=="Iniciar_login" || $accion=="Terminar_sesion" || $accion=="Mensaje_cierre_sesion")
 		include("core/sesion.php");
-	if ($accion=="cargar_objeto" || $accion=="guardar_configuracion")
+	if ($accion=="cargar_objeto" || $accion=="guardar_configuracion" || $accion=="guardar_configws")
 		include("core/objetos.php");
 	if ($accion=="actualizar_practico" || $accion=="cargar_archivo" || $accion=="analizar_parche" || $accion=="aplicar_parche")
 		include("core/actualizacion.php");

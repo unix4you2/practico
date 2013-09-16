@@ -30,6 +30,30 @@
 
 /* ################################################################## */
 /* ################################################################## */
+	function TextoAleatorio($longitud)
+		{
+			/*
+				Function: TextoAleatorio
+				Genera un texto alfanumerico aleatorio de una longitud determinada
+
+				Variables de entrada:
+
+					longitud - Numero de caracteres que deben ser retornados en la cadena
+
+				Salida:
+					Cadena aleatoria
+			*/
+			$plantilla = "23456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+			$clave="";
+			for($i=0;$i<$longitud;$i++)
+				{
+					$clave .= $plantilla{rand(0,strlen($plantilla)-1)};
+				}
+			return $clave;
+		}
+
+/* ################################################################## */
+/* ################################################################## */
 	function filtrar_cadena_sql($cadena)
 		{
 			/*

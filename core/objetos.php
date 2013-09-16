@@ -22,9 +22,6 @@
 		Title: Modulo objetos
 		Ubicacion *[/core/objetos.php]*.  Archivo de funciones relacionadas con las operaciones de objetos generados por la herramienta
 	*/
-?>
-
-<?php
 
 
 
@@ -149,8 +146,7 @@ $salida=sprintf("<?php
 	\$Auth_LDAPServidor='%s';
 	\$Auth_LDAPPuerto='%s';
 	\$Auth_LDAPDominio='%s';
-	\$Auth_LDAPOU='%s';
-?>",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$PlantillaActivaNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$Auth_TipoMotorNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW);
+	\$Auth_LDAPOU='%s';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$PlantillaActivaNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$Auth_TipoMotorNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW);
 			// Escribe el archivo de configuracion
 			$archivo_config=fopen("core/configuracion.php","w");
 			if($archivo_config==null)
@@ -177,5 +173,61 @@ $salida=sprintf("<?php
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 		}
-?>
 
+
+/* ################################################################## */
+/* ################################################################## */
+	if ($accion=="guardar_configws")
+		{
+			/*
+				Function: guardar_configws
+				Actualiza las configuraciones y llaves asociadas a los webservices
+
+				Variables de entrada:
+
+					llaves_activas - Lista de llaves autorizadas para consumir webservices
+
+				Salida:
+
+					Archivo de definicion de llaves actualizado
+			*/
+
+			$mensaje_error="";
+			$hay_error=0;
+
+			// Crea la cadena de salida con las llaves
+			$salida = str_replace("\r\n", "|", $llaves_definidas);
+			$arreglo_llaves=explode("|",$salida);
+			$salida="<?php
+";
+			for ($r=0;$r<count($arreglo_llaves);$r++)
+				if (trim($arreglo_llaves[$r])!="")
+					$salida.="	\$Auth_WSKeys[]='".trim($arreglo_llaves[$r])."';\n";
+
+			// Escribe el archivo de configuracion
+			$archivo_config=fopen("core/ws_llaves.php","w");
+			if($archivo_config==null)
+				{
+					$hay_error=1;
+					$mensaje_error=$MULTILANG_ErrorEscribirConfig;
+				}
+			else
+				{
+					fwrite($archivo_config,$salida,strlen($salida)); 
+					fclose($archivo_config);
+				}
+			if ($mensaje_error=="")
+				{
+					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="Ver_menu">
+						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
+						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+		}
+?>

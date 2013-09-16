@@ -29,23 +29,51 @@
 		
 		El consumo de los web services requiere el envio de los siguientes parametros minimos a la raiz de Practico en cada llamado:
 		
-		* WS=1: Siempre iniciado en 1 indica a Practico que debe activar el modo de WebServices
+		* WSOn=1: Siempre iniciado en 1 indica a Practico que debe activar el modo de WebServices
 		* WSKey: La llave generada para consumir los WebServices, la llave de paso de instalacion es incluida por defecto
 		* WSId: El identificador unico del metodo o funcion de webservices a llamar
 		* OTROS: Parametros adicionales requeridos por la funcion pueden ser enviados por URL o metodo POST al llamar el WebService.
 
 		Ejemplo:  www.sudominio.com/practico/?WSOn=1&WSKey=AFSX345DF&WSId=verificar_credenciales
+		
+		Recomendacion:  La generacion de avisos de tipo Notice, Warning, Error o similares de PHP puede ocasionar la emision
+		de valores previos a la respuesta del WebService, se recomienda tener el modo de depuracion desactivado o verificar que los
+		parametros y funciones utilizadas por cada webservice generen una salida limpia en caso de tener la depuracion activada.
 	*/
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: verificar_credenciales
+	Realiza proceso de verificacion de credenciales para un inicio de sesion
 
+	Variables de entrada:
+
+		uid - Obligatorio: Login utilizado por el usuario
+		clave - Obligatorio: Clave del usuario sin cifrar
+
+	Salida:
+		Archivo XML que contiene la propiedad de aceptacion en cero o uno (0,1) dependiendo de si las credenciales son o no validas.
+		Complemento del archivo XML con datos generales del usuario como login, nombre, descripcion, nivel, correo y fecha de ultimo acceso
+
+	Ver tambien:
+		<Iniciar_login> | <cambiar_clave>
+*/
 if ($WSId=="verificar_credenciales") 
 	{
+		$uid=filtrar_cadena_sql(@$uid);
+		$clave=filtrar_cadena_sql(@$clave);
 		$salida_xml="";
 		$ok_login_verifica='0';
+		$error_parametros=0;		
 
+		// Verifica parametros minimos para trabajar
+		if ($uid=="" || $clave=="")
+			$error_parametros=1;
+		
 		//Verifica MOTOR autenticacion interna
-		if ($Auth_TipoMotor=="practico" || $uid=="admin")
+		if (!$error_parametros && ($Auth_TipoMotor=="practico" || $uid=="admin"))
 			{
 				$ClaveEnMD5=hash("md5", $clave);
 				$resultado_usuario=ejecutar_sql("SELECT * FROM ".$TablasCore."usuario WHERE estado=1 AND login='$uid' AND clave='$ClaveEnMD5' ");
@@ -55,7 +83,7 @@ if ($WSId=="verificar_credenciales")
 			}
 
 		//Verifica MOTOR autenticacion por LDAP
-		if ($Auth_TipoMotor=="ldap" && $uid!="admin")
+		if (!$error_parametros && ($Auth_TipoMotor=="ldap" && $uid!="admin"))
 			{
 				$auth_ldap_dc="";
 				$auth_ldap_dc_trozos=explode(".",$Auth_LDAPDominio);
@@ -100,5 +128,3 @@ if ($WSId=="verificar_credenciales")
 		// Devuelve los resultados
 		echo $salida_xml;
 	}
-
-

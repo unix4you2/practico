@@ -23,6 +23,7 @@ core/tablas.php
 core/informes.php
 core/formularios.php
 core/marco_arriba.php
+core/objetos.php
 core/ws_funciones.php
 core/ws_llaves.php
 inc/practico/def_basedatos.php
