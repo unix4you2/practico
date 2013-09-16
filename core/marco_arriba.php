@@ -552,7 +552,7 @@
 								<textarea name="llaves_definidas" cols="15" rows="10" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"><?php
 									// Carga las llaves definidas
 									include_once("core/ws_llaves.php");
-										for ($r=0;$r<count($Auth_WSKeys);$r++)
+										for ($r=0;$r<count(@$Auth_WSKeys);$r++)
 											echo $Auth_WSKeys[$r]."\n";
 									?></textarea>
 							</td>
