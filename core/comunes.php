@@ -1725,8 +1725,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
 					echo '<DIV style="DISPLAY: block; OVERFLOW: auto; POSITION: relative; WIDTH: '.$registro_informe["ancho"].'; HEIGHT: '.$registro_informe["alto"].'">';
 					
-				//Genera enlace al PDF cuando se detecta el modulo
-				if (@file_exists("mod/pdf"))
+				//Genera enlace al PDF cuando se detecta el modulo y ademas el informe lo tiene activado
+				if (@file_exists("mod/pdf") && $registro_informe["genera_pdf"]=='S')
 					{
 						echo '<div align=right><a href="tmp/Inf_'.$Identificador_informe.'-'.$Login_usuario.'.pdf" target="_BLANK"><img src="img/icono_pdf.gif" border=0 align=absmiddle> PDF&nbsp;</a></div>';
 					}
@@ -1908,8 +1908,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				//Imprime el HTML generado para el informe
 				echo $SalidaFinalInforme;
 				
-				//Genera el PDF cuando se encuentra el modulo
-				if (@file_exists("mod/pdf"))
+				//Genera el PDF cuando se encuentra el modulo y el informe lo tiene activado
+				if (@file_exists("mod/pdf") && $registro_informe["genera_pdf"]=='S')
 					{
 						require_once('mod/pdf/html2pdf/html2pdf.class.php');
 						try
@@ -1940,7 +1940,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 								exit;
 							}
 					}
-				
+
 				// Si se ha definido un tamano fijo entonces cierra el marco
 				if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
 					echo '</DIV>';

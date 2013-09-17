@@ -44,6 +44,7 @@ LogCambios="
  * Added: Conversion automatica de informes tabulares a formato PDF
  * Added: Disponibilidad de nuevo modulo para pasar a PDF
  * Added: Adicion de encabezados y pies de pagina a informes PDF desde la personalizacion de parametros
+ * Added: La generacion de PDFs se puede especificar por cada informe de manera separada
  * Added: Personalizacion de margenes, fuentes, etc en generacion de PDFs
  * Added: Modo de webservices, definicion de llaves para consumidores webservices y validacion de las mismas
  * Added: Autenticacion interna basada en WebServices y XML, esto permite ademas creacion de sistemas centralizados de autenticacion basados en Practico
@@ -55,7 +56,7 @@ LogCambios="
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-
+	ALTER TABLE core_informe ADD COLUMN genera_pdf CHAR(1) DEFAULT 'N';
 "
 
 ########################################################################

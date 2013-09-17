@@ -521,6 +521,9 @@
 	$MULTILANG_InfcamTabCond='Campos, Tablas y Condiciones';
 	$MULTILANG_InfAdvEliminar='IMPORTANTE:  Al eliminar el informe los usuarios no podr&aacute;n accesarlo nuevamente para operaciones de consulta definidas en &eacute;l y no podr&aacute; deshacer esta operaci&oacute;n. Esto tambien elimina cualquier dise&ntilde;o interno del informe.\n'.$MULTILANG_Confirma;
 	$MULTILANG_InfErrTamano='El informe que intenta generar es de tipo gr&aacute;fico pero el dise&ntilde;ador no ha indicado el alto y ancho del gr&aacute;fico resultante.<br>Debe indicarse un tama&ntilde;o v&aacute;lido de gr&aacute;fico para poder generarse una im&aacute;gen.';
+	$MULTILANG_InfGeneraPDF='Exportar PDF?';
+	$MULTILANG_InfGeneraPDFInfoTit='Aplica s&oacute;lo para informes tabulares';
+	$MULTILANG_InfGeneraPDFInfoDesc='El uso de esta opci&oacute;n requiere la descarga e instalaci&oacute;n del m&oacute;dulo adicional para generaci&oacute;n de PDFs de Pr&aacute;ctico.  Se encuentra disponible en la zona de descargas en web oficial de la herramienta.  Activar esta opci&oacute;n puede represetar tiempos adicionales en la generaci&oacute;n de su informe cuando el vol&uacute;men de resultados es alto.';
 	
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';

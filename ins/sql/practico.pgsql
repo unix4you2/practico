@@ -155,6 +155,7 @@ CREATE TABLE Core_informe (
   alto varchar(5),
   formato_final char(1), 
   formato_grafico text, 
+  genera_pdf char(1), 
   PRIMARY KEY  (id)
 );
 

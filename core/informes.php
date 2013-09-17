@@ -192,7 +192,7 @@ if ($accion=="actualizar_informe")
 		if ($mensaje_error=="")
 			{
 				// Actualiza los datos
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET formato_final='$formato_final', alto='$alto',ancho='$ancho',titulo='$titulo',descripcion='$descripcion',categoria='$categoria',nivel_usuario='$nivel_usuario' WHERE id='$id'");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET genera_pdf='$genera_pdf',formato_final='$formato_final', alto='$alto',ancho='$ancho',titulo='$titulo',descripcion='$descripcion',categoria='$categoria',nivel_usuario='$nivel_usuario' WHERE id='$id'");
 				auditar("Actualiza informe $id");
 				echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 			}
@@ -1458,6 +1458,16 @@ if ($accion=="editar_informe")
 						</td>
 					</tr>
 					<tr>
+						<td align="RIGHT" valign="TOP"><?php echo $MULTILANG_InfGeneraPDF; ?></td>
+						<td>
+							<select  name="genera_pdf" id="genera_pdf" class="Combos">
+								<option value="S" <?php if ($registro_informe["genera_pdf"]=="S") echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
+								<option value="N" <?php if ($registro_informe["genera_pdf"]=="N") echo 'selected'; ?> ><?php echo $MULTILANG_No; ?></option>
+							</select>
+							<a href="#" title="<?php echo $MULTILANG_InfGeneraPDFInfoTit; ?>" name="<?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+						</td>
+					</tr>
+					<tr>
 						<td>
 							</form>
 						</td>
@@ -1563,7 +1573,7 @@ if ($accion=="guardar_informe")
 		if ($categoria=="") $mensaje_error.=$MULTILANG_InfErrInforme2."<br>";
 		if ($mensaje_error=="")
 			{
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES ('$titulo','$descripcion','$categoria','$agrupamiento','$ordenamiento','$nivel_usuario','$ancho','$alto','$formato_final','|!|!|!|')");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES ('$titulo','$descripcion','$categoria','$agrupamiento','$ordenamiento','$nivel_usuario','$ancho','$alto','$formato_final','|!|!|!|','$genera_pdf')");
 				$id=$ConexionPDO->lastInsertId();
 				auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -1674,6 +1684,16 @@ if ($accion=="administrar_informes")
 								<option value="G"><?php echo $MULTILANG_Grafico; ?></option>
 							</select>
 							<a href="#" title="<?php echo $MULTILANG_InfTitFormato; ?>" name="<?php echo $MULTILANG_InfDesFormato; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+						</td>
+					</tr>
+					<tr>
+						<td align="RIGHT" valign="TOP"><?php echo $MULTILANG_InfGeneraPDF; ?></td>
+						<td>
+							<select  name="genera_pdf" id="genera_pdf" class="Combos">
+								<option value="S"><?php echo $MULTILANG_Si; ?></option>
+								<option value="N" selected><?php echo $MULTILANG_No; ?></option>
+							</select>
+							<a href="#" title="<?php echo $MULTILANG_InfGeneraPDFInfoTit; ?>" name="<?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
 					<tr>

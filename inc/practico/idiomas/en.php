@@ -524,6 +524,9 @@
 	$MULTILANG_InfcamTabCond='Fields, Tables and Conditions';
 	$MULTILANG_InfAdvEliminar='IMPORTANT: Deleting this report users can not access it again. You can not undo this operation. This also eliminates any internal design of the report.\n'.$MULTILANG_Confirma;
 	$MULTILANG_InfErrTamano='The report you are trying to generate is a graph type  report but the designer did not specify the height and width of the resulting graph.<br>Should provide an valid size of graphic to generate an image.';
+	$MULTILANG_InfGeneraPDF='PDF Export?';
+	$MULTILANG_InfGeneraPDFInfoTit='Available for tabular reports only';
+	$MULTILANG_InfGeneraPDFInfoDesc='This option requires the PDF generator module that is available in downloads link at Practicos website. If you activate this option the report time could be more than a normal report when you have a lot of records in your results';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';

@@ -153,8 +153,9 @@ CREATE TABLE Core_informe (
   ancho text,
   alto text,
   formato_final text, 
-  formato_grafico text
-  
+  formato_grafico text,
+  genera_pdf text
+
 );
 
 DROP TABLE IF EXISTS Core_informe_campos;
