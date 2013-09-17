@@ -19,7 +19,7 @@
  - Pequeño, liviano y rápido
  - Reconocimiento de captcha, teclados en pantalla y otros a su gusto
  - Herramientas gráficas para gestionar la base de datos
- - Generación simple y rápida de completos formularios y reportes
+ - Generación simple y rápida de completos formularios y reportes HTML y PDF
  - Administración sencilla de las credenciales de usuario
  - Código fuente simple, los fuentes son muy fáciles de entender.
 
@@ -47,6 +47,18 @@
 |_____\___/ \__, |  \__,_|\___|  \___\__,_|_| |_| |_|_.__/|_|\___/|___/
             |___/ 
 
+----------------------------------------
+Versión 13.9 (2013-09-17)
+ * Added: Conversion automatica de informes tabulares a formato PDF
+ * Added: Disponibilidad de nuevo modulo para pasar a PDF
+ * Added: Adicion de encabezados y pies de pagina a informes PDF desde la personalizacion de parametros
+ * Added: La generacion de PDFs se puede especificar por cada informe de manera separada
+ * Added: Personalizacion de margenes, fuentes, etc en generacion de PDFs
+ * Added: Modo de webservices, definicion de llaves para consumidores webservices y validacion de las mismas
+ * Added: Autenticacion interna basada en WebServices y XML, esto permite ademas creacion de sistemas centralizados de autenticacion basados en Practico
+ * Fixed: Mensajes de advertencia en generacion de informes
+ * Fixed: Cambio de idioma en generador de PDFs de acuerdo a la parametrizacion del sistema
+ * Fixed: MetaTAGs nuevos en la generacion de las paginas
 ----------------------------------------
 Versión 13.7 (2013-07-07)
  * Added: Nuevo control de deslizador para seleccion de valores por rangos en formularios

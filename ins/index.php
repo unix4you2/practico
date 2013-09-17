@@ -47,16 +47,6 @@
 		//foreach($HTTP_GET_VARS as $getvar => $getval){ ${$getvar} = $getval; }		  
 	}
 
-	function TextoAleatorio($longitud)
-		{
-			$plantilla = "23456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-			for($i=0;$i<$longitud;$i++)
-				{
-					$clave .= $plantilla{rand(0,strlen($plantilla)-1)};
-				}
-			return $clave;
-		}
-
 	//Divide los queries de un cadena
 	function split_sql($sql)
 		{
