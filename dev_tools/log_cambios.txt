@@ -40,7 +40,7 @@ LogCambios="
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-	ALTER TABLE core_informe ADD COLUMN genera_pdf CHAR(1) DEFAULT 'N';
+
 "
 
 ########################################################################

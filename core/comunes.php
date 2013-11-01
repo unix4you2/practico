@@ -260,10 +260,9 @@
 				Salida:
 					Cadena filtrada
 			*/
-		if ( '' == $texto )
-			return $texto;
-		$texto = preg_replace('|[^a-z0-9-~+_.?#=!&;,/:%@$\|*\'()\\x80-\\xff]|i', '', $texto);
-		$texto = str_replace(';//', '://', $texto);
+		//$texto = preg_replace('|[^a-z0-9-~+_.?#=!&;,/:%@$\|*\'()\\x80-\\xff]|i', '', $texto); // Muy estricto
+		$texto = str_ireplace("script","",$texto);
+
 		return $texto;
 	}
 
