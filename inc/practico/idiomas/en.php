@@ -155,7 +155,7 @@
 	$MULTILANG_ErrorDatos='Problem in the input data';
 	$MULTILANG_ErrorTitAuth='<blink>ACCESS DENIED!</blink>';
 	$MULTILANG_ErrorDesAuth='The credentials supplied for access to the system were not accepted. Some common causes are:<br><li> The username or password is incorrect. <br> <li> Security code entered incorrectly. <br> <li> Your Login is disabled. <br> <li> Account locked access by multiple attempts with incorrect password.';
-	$MULTILANG_ErrorSoloAdmin='Only admin user can see the transaction details';
+	$MULTILANG_ErrorSoloAdmin='Only admin user can see the transaction details with debug mode turned On';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';
@@ -568,8 +568,10 @@
 	$MULTILANG_MnuComando='Command';
 	$MULTILANG_MnuAdvElimina='IMPORTANT: Deleting this registry you could unlink some system options.\n'.$MULTILANG_Confirma;
 
-	//Objetos
+	//Objetos, seguridad y otros
 	$MULTILANG_ObjError='The type of object received in this command is unknown';
+	$MULTILANG_SecErrorTit='Commands & reports security control';
+	$MULTILANG_SecErrorDes='You have attempted to execute a function, command or report for which you are unauthorized.<br>System will be taking an audit log:';
 	
 	//Tablas
 	$MULTILANG_TblError1='Design integrity problem';

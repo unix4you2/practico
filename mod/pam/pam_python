@@ -1,0 +1,4 @@
+login account   requisite   pam_python.so pam_practico.py
+login auth      requisite   pam_python.so pam_practico.py
+login password  requisite   pam_python.so pam_practico.py
+login session   requisite   pam_python.so pam_practico.py

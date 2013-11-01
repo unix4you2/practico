@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
 VersionCompatibleAno="13"
-VersionCompatibleMes="7"
+VersionCompatibleMes="9"
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
 VersionFinalAno="13"
-VersionFinalMes="9"
+VersionFinalMes="11"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version
@@ -15,22 +15,12 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 index.php
-core/menus.php
 core/comunes.php
-core/conexiones.php
 core/sesion.php
-core/tablas.php
-core/informes.php
-core/formularios.php
-core/marco_arriba.php
-core/objetos.php
-core/ws_funciones.php
-core/ws_llaves.php
-core/ws_nucleo.php
-inc/practico/def_basedatos.php
+core/menus.php
+core/usuarios.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
-mod/personalizadas_ws.php
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -41,16 +31,10 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
- * Added: Conversion automatica de informes tabulares a formato PDF
- * Added: Disponibilidad de nuevo modulo para pasar a PDF
- * Added: Adicion de encabezados y pies de pagina a informes PDF desde la personalizacion de parametros
- * Added: La generacion de PDFs se puede especificar por cada informe de manera separada
- * Added: Personalizacion de margenes, fuentes, etc en generacion de PDFs
- * Added: Modo de webservices, definicion de llaves para consumidores webservices y validacion de las mismas
- * Added: Autenticacion interna basada en WebServices y XML, esto permite ademas creacion de sistemas centralizados de autenticacion basados en Practico
- * Fixed: Mensajes de advertencia en generacion de informes
- * Fixed: Cambio de idioma en generador de PDFs de acuerdo a la parametrizacion del sistema
- * Fixed: MetaTAGs nuevos en la generacion de las paginas
+ * Added: Inicio de construccion de modulo PAM propio para permitir a escritorios de equipo autenticarse frente al modelo de webservices de Practico
+ * Fixed: Importantes mejoras a la seguridad y llamado de funciones.  Gracias especiales al equipo de Zero Science Lab por su completa revisión de vulnerabilidades
+ * Fixed: Se suprimen mensajes de error en los motores retornados a los usuarios para evitar posibles SQLInjection sobre 40 funciones diferentes.  Gracias a Zero Science Lab
+ * Fixed: Se filtran cadenas y variables de entrada a funciones sensibles para evitar posible XSS.  Gracias a Zero Science Lab
 "
 
 ########################################################################

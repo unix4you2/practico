@@ -27,6 +27,319 @@
 	*/
 
 
+/* ################################################################## */
+/* ################################################################## */
+	function permiso_heredado_accion($accion)
+		{
+			/*
+				Function: permiso_accion
+				Busca dentro de los permisos del usuario la accion a ejecutar cuando no se encuentra directamente como una opcion del usuario sino como una subrutina de otra de la que si tiene agregada de manera que valida si puede ingresar o no a ella.
+				
+				Variables de entrada:
+
+					accion - Accion a ser ejectudada, de la que se desea buscar permiso heredado por otra
+
+				Salida:
+					Retorna 1 en caso de encontrar el permiso
+					Retorna 0 cuando no se encuentra un permiso
+			*/
+			global $Login_usuario;
+			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
+			$retorno=0;
+
+			// Verifica mapeo de permisos para acciones que llaman a otras, heredadas.  Valores en = 1  son funciones publicas:
+			// FUNCION_solicitada_por_el_usuario				FUNCION_madre_de_entrada_a_funcion_solicitada
+			if ($accion== "mis_informes")						$retorno = 1;
+			if ($accion== "guardar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
+			if ($accion== "editar_informe")						$retorno = permiso_agregado_accion("administrar_informes");
+			if ($accion== "eliminar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
+			if ($accion== "actualizar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
+			if ($accion== "eliminar_informe_tabla")				$retorno = permiso_agregado_accion("administrar_informes");
+			if ($accion== "guardar_informe_tabla")				$retorno = permiso_agregado_accion("administrar_informes");
+			if ($accion== "eliminar_informe_campo")				$retorno = permiso_agregado_accion("administrar_informes");
+			if ($accion== "guardar_informe_campo")				$retorno = permiso_agregado_accion("administrar_informes");
+			if ($accion== "guardar_informe_condicion")			$retorno = permiso_agregado_accion("administrar_informes");
+			if ($accion== "eliminar_informe_condicion")			$retorno = permiso_agregado_accion("administrar_informes");
+			if ($accion== "actualizar_grafico_informe")			$retorno = permiso_agregado_accion("administrar_informes");
+			if ($accion== "actualizar_agrupamiento_informe")	$retorno = permiso_agregado_accion("administrar_informes");
+			if ($accion== "guardar_accion_informe")				$retorno = permiso_agregado_accion("administrar_informes");
+			if ($accion== "eliminar_registro_informe")			$retorno = permiso_agregado_accion("administrar_informes");
+			if ($accion== "eliminar_accion_informe")			$retorno = permiso_agregado_accion("administrar_informes");
+			// Funciones en core/usuarios.php
+			if ($accion== "cambiar_clave")						$retorno = 1;
+			if ($accion== "ver_seguimiento_monitoreo")			$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($accion== "ver_seguimiento_general")			$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($accion== "ver_seguimiento_especifico")			$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($accion== "actualizar_clave")					$retorno = permiso_agregado_accion("cambiar_clave");
+			if ($accion== "agregar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($accion== "guardar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($accion== "eliminar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($accion== "cambiar_estado_usuario")				$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($accion== "permisos_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($accion== "agregar_permiso")					$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($accion== "eliminar_permiso")					$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($accion== "informes_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($accion== "agregar_informe_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($accion== "eliminar_informe_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($accion== "copiar_permisos")					$retorno = permiso_agregado_accion("listar_usuarios");
+			// Funciones en core/menus.php
+			if ($accion== "Ver_menu")							$retorno = 1;
+			if ($accion== "guardar_menu")						$retorno = permiso_agregado_accion("administrar_menu");
+			if ($accion== "eliminar_menu")						$retorno = permiso_agregado_accion("administrar_menu");
+			if ($accion== "detalles_menu")						$retorno = permiso_agregado_accion("administrar_menu");
+			if ($accion== "actualizar_menu")					$retorno = permiso_agregado_accion("administrar_menu");
+			// Funciones en core/tablas.php
+			if ($accion== "asistente_tablas")					$retorno = permiso_agregado_accion("administrar_tablas");
+			if ($accion== "guardar_crear_tabla_asistente")		$retorno = permiso_agregado_accion("asistente_tablas");
+			if ($accion== "editar_tabla")						$retorno = permiso_agregado_accion("guardar_crear_tabla_asistente");
+			if ($accion== "eliminar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
+			if ($accion== "eliminar_campo")						$retorno = permiso_agregado_accion("editar_tabla");
+			if ($accion== "guardar_crear_campo")				$retorno = permiso_agregado_accion("editar_tabla");
+			if ($accion== "guardar_crear_tabla")				$retorno = permiso_agregado_accion("administrar_tablas");
+			// Funciones en core/formularios.php
+			if ($accion== "guardar_datos_formulario")			$retorno = 1;
+			if ($accion== "eliminar_datos_formulario")			$retorno = 1;
+			if ($accion== "actualizar_campo_formulario")		$retorno = permiso_agregado_accion("administrar_formularios");
+			if ($accion== "guardar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
+			if ($accion== "eliminar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
+			if ($accion== "editar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
+			if ($accion== "guardar_campo_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
+			if ($accion== "eliminar_campo_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
+			if ($accion== "guardar_accion_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
+			if ($accion== "eliminar_accion_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
+			// Funciones en core/sesion.php
+			if ($accion== "Iniciar_login")						$retorno = 1;
+			if ($accion== "Terminar_sesion")					$retorno = 1;
+			if ($accion== "Mensaje_cierre_sesion")				$retorno = 1;
+			// Funciones en core/objetos.php
+			if ($accion== "cargar_objeto")						$retorno = 1;
+			// Funciones en core/actualizacion.php
+			if ($accion== "cargar_archivo")						$retorno = permiso_agregado_accion("actualizar_practico");
+			if ($accion== "analizar_parche")					$retorno = permiso_agregado_accion("cargar_archivo");
+			if ($accion== "aplicar_parche")						$retorno = permiso_agregado_accion("analizar_parche");
+			//echo $Login_usuario.':Permiso heredado accion='.$accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
+			return $retorno;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+	function permiso_agregado_accion($accion)
+		{
+			/*
+				Function: permiso_agregado_accion
+				Busca dentro de los permisos agregados de manera explicita al usuario.
+				
+				Variables de entrada:
+
+					accion - Accion a ser ejectudada
+					estado_aceptacion - Si el usuario cuenta o no con el permiso solicitado
+					
+				Salida:
+					Retorna 1 en caso de encontrar el permiso
+					Retorna 0 cuando no se encuentra un permiso
+			*/
+			
+			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
+			$retorno=0;
+			global $ConexionPDO,$TablasCore,$Login_usuario;
+			
+			$consulta = $ConexionPDO->prepare("SELECT ".$TablasCore."menu.id FROM ".$TablasCore."usuario_menu,".$TablasCore."menu WHERE ".$TablasCore."menu.id=".$TablasCore."usuario_menu.menu AND usuario='$Login_usuario' AND ".$TablasCore."menu.comando='$accion' ");
+			$consulta->execute();
+			$registro = $consulta->fetch();
+			if ($registro[0]!="")
+				{
+					$retorno=1;
+				}
+			//echo $Login_usuario.':Permiso agregado accion='.$accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
+			return $retorno;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+	function permiso_raiz_admin($accion)
+		{
+			/*
+				EN DESUSO - EN DESUSO - EN DESUSO: Ahora las acciones para admin siempre son ejecutadas.  Ver funcion permiso_accion
+				Function: permiso_raiz_admin
+				El super usuario no cuenta con ninguna entrada dentro de la tabla de permisos pues por defecto las ve todas.  En el caso de las funciones administrativas se agregan en el mapeo para el admin de manera que siempre le deje entrar.
+				
+				Variables de entrada:
+
+					accion - Accion a ser ejectudada
+					
+				Salida:
+					Retorna 1 en caso de encontrar el permiso
+					Retorna 0 cuando no se encuentra un permiso
+			*/
+			global $Login_usuario;
+			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
+			$retorno=0;
+			// Permisos o acciones raiz para el admin
+			if ($Login_usuario=="admin")
+				{
+					switch ($accion)
+						{
+							case "cambiar_clave":
+							case "guardar_configuracion":
+							case "guardar_configws":
+							case "administrar_tablas":
+							case "administrar_formularios":
+							case "administrar_informes":
+							case "administrar_menu":
+							case "listar_usuarios":
+							case "actualizar_practico":
+								$retorno = 1;
+								break;
+							default:
+								$retorno = 0;
+								break;
+						}
+				}
+			//echo $Login_usuario.':Permiso raiz admin='.$accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
+			return $retorno;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+	function permiso_accion($accion)
+		{
+			/*
+				Function: permiso_accion
+				Busca dentro de los permisos del usuario la accion a ejecutar de manera que valida si puede ingresar o no a ella.
+
+				Variables de entrada:
+
+					accion - Accion a ser ejectudada
+
+				Salida:
+					Retorna 1 en caso de encontrar el permiso
+					Retorna 0 cuando no se encuentra un permiso
+			*/
+			global $Login_usuario;
+			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
+			$retorno=0;
+
+			// Evalua inicialmente permisos para el admin (evita queries)
+			// $retorno=permiso_raiz_admin($accion);
+			if ($Login_usuario=="admin") $retorno=1;
+
+			// Si es un usuario estandar siempre entra, si es el admin entra si no es permiso raiz
+			if (!$retorno)
+				{
+					// Busca permisos agregados directamente al usuario
+					$retorno=permiso_agregado_accion($accion);
+					// Si no encuentra permisos directos, busca en los heredados de los directos
+					if (!$retorno)
+						{
+							// Si no encuentra el permiso directo llama los heredados
+							$retorno=permiso_heredado_accion($accion);
+						}
+				}
+
+			//echo $Login_usuario.':Permiso accion='.$accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
+			return $retorno;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+  function escapar_contenido($texto)
+	{
+			/*
+				Function: escapar_url
+				Limpia cadenas y URLs a ser impresas para evitar posibles ataques por XSS
+				En general, se debe limpiar cualquier variable enviada por el usuario y que vaya a ser impresa en su navegador para evitar que al imprimirla se puedan enviar javascripts o similares
+
+				Variables de entrada:
+
+					texto - URL, texto, variable de entrada o cualquier otro valor a escapar.
+
+				Salida:
+					Cadena filtrada
+			*/
+		if ( '' == $texto )
+			return $texto;
+		$texto = preg_replace('|[^a-z0-9-~+_.?#=!&;,/:%@$\|*\'()\\x80-\\xff]|i', '', $texto);
+		$texto = str_replace(';//', '://', $texto);
+		return $texto;
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+  function limpiar_entradas()
+	{
+			/*
+				Function: limpiar_entradas
+				Limpia cadenas y URLs a ser impresas segun acciones para evitar posibles ataques por XSS
+
+				Salida:
+					Cadenas y variables filtradas sobre sus valores globales
+			*/
+		global $accion;
+		// Escapa siempre las acciones
+		$accion=escapar_contenido($accion);
+
+		if ($accion=="ver_seguimiento_general")
+			{
+				global $accionbuscar,$fin_reg,$inicio_reg;
+				$accionbuscar=escapar_contenido($accionbuscar);
+				$inicio_reg=escapar_contenido($inicio_reg);
+				$fin_reg=escapar_contenido($fin_reg);
+			}
+
+		if ($accion=="administrar_formularios")
+			{
+				global $error_descripcion,$error_titulo;
+				$error_descripcion=escapar_contenido($error_descripcion);
+				$error_titulo=escapar_contenido($error_titulo);
+			}
+
+		if ($accion=="actualizar_menu")
+			{
+				global $id;
+				$id=escapar_contenido($id);
+			}
+
+		if ($accion=="detalles_menu")
+			{
+				global $id;
+				$id=escapar_contenido($id);
+			}
+
+		if ($accion=="editar_informe")
+			{
+				// 
+				global $informe;
+				$informe=escapar_contenido($informe);
+			}
+
+		if ($accion=="listar_usuarios")
+			{
+				global $login_filtro,$nombre_filtro;
+				$login_filtro=escapar_contenido($login_filtro);
+				$nombre_filtro=escapar_contenido($nombre_filtro);
+			}
+			
+		if ($accion=="cargar_objeto")
+			{
+				global $objeto;
+				$objeto=escapar_contenido($objeto);
+			}
+
+		if ($accion=="guardar_formulario")
+			{
+				global $tabla_datos;
+				$tabla_datos=escapar_contenido($tabla_datos); // Revisar si afecta el script de autorun
+			}
+
+
+
+	}
+
 
 /* ################################################################## */
 /* ################################################################## */
@@ -80,23 +393,32 @@
 					1' and ''=' 
 					' OR 'A'='A
 			*/
-			$cadena = str_ireplace("''","'",$cadena);
-			$cadena = str_ireplace("\\","",$cadena);
-			$cadena = str_ireplace("COPY","",$cadena);
-			$cadena = str_ireplace("DELETE","",$cadena);
-			$cadena = str_ireplace("DROP","",$cadena);
-			$cadena = str_ireplace("DUMP","",$cadena);
-			$cadena = str_ireplace(" OR ","",$cadena);
-			$cadena = str_ireplace("%","",$cadena);
-			$cadena = str_ireplace("LIKE","",$cadena);
-			$cadena = str_ireplace("--","",$cadena);
-			$cadena = str_ireplace("^","",$cadena);
-			$cadena = str_ireplace("[","",$cadena);
-			$cadena = str_ireplace("]","",$cadena);
-			$cadena = str_ireplace("!","",$cadena);
-			$cadena = str_ireplace("¡","",$cadena);
-			$cadena = str_ireplace("?","",$cadena);
-			$cadena = str_ireplace("&","",$cadena);
+			global $accion;
+
+			if ($accion=="Iniciar_login")
+				{
+					$cadena = str_ireplace("''","'",$cadena);
+					$cadena = str_ireplace("\\","",$cadena);
+					$cadena = str_ireplace("COPY","",$cadena);
+					$cadena = str_ireplace("DELETE","",$cadena);
+					$cadena = str_ireplace("DROP","",$cadena);
+					$cadena = str_ireplace("DUMP","",$cadena);
+					$cadena = str_ireplace(" OR ","",$cadena);
+					$cadena = str_ireplace("%","",$cadena);
+					$cadena = str_ireplace("LIKE","",$cadena);
+					$cadena = str_ireplace("--","",$cadena);
+					$cadena = str_ireplace("^","",$cadena);
+					$cadena = str_ireplace("[","",$cadena);
+					$cadena = str_ireplace("]","",$cadena);
+					$cadena = str_ireplace("!","",$cadena);
+					$cadena = str_ireplace("¡","",$cadena);
+					$cadena = str_ireplace("?","",$cadena);
+					$cadena = str_ireplace("&","",$cadena);
+				}
+				
+			// Expresiones que siempre deben ser filtradas	
+			$cadena = str_ireplace("BENCHMARK","",$cadena);
+
 			/*
 			array_walk($_POST, 'filtrar_cadena_sql');
 			array_walk($_GET, 'filtrar_cadena_sql');
@@ -124,15 +446,14 @@
 					Retorna mensaje en pantalla con la descripcion devuelta por el driver en caso de error
 					Retorna una variable con el arreglo de resultados en caso de ser exitosa la consulta
 			*/
-			global $ConexionPDO;
+			global $ConexionPDO,$ModoDepuracion;
 			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin;
 			global $accion;
 			global $Login_usuario;
-
-			//Elimina caracteres que pueden ser usados para SQLInjection en acciones sensibles
-			if ($accion=="Iniciar_login")
-				$query=filtrar_cadena_sql($query);
-
+			
+			// Filtra la cadena antes de ser ejecutada
+			$query=filtrar_cadena_sql($query,$accion);
+			
 			try
 				{
 					$consulta = $ConexionPDO->prepare($query);
@@ -142,9 +463,11 @@
 				}
 			catch( PDOException $ErrorPDO)
 				{
-					//Muestra detalles del query solo al admin
-					if ($Login_usuario!='admin') $query=$MULTILANG_ErrorSoloAdmin;
-					mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.$query,'80%','icono_error.png','TextosEscritorio');
+					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
+					if ($Login_usuario=='admin' && $ModoDepuracion)
+						mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.$query,'80%','icono_error.png','TextosEscritorio');
+					else
+						mensaje($MULTILANG_ErrorTiempoEjecucion,'<b>'.$MULTILANG_Detalles.'</b>: '.$MULTILANG_ErrorSoloAdmin,'80%','icono_error.png','TextosEscritorio');
 					//Redirecciona segun la accion
 					if ($accion=="Iniciar_login") 
 						echo '<form name="Acceso" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value=""></form><script type="" language="JavaScript">	document.Acceso.submit();  </script>';
@@ -171,9 +494,9 @@
 					Retorna una cadena que contiene una descripcion de error PDO en caso de error y agrega un mensaje en pantalla con la descripcion devuelta por el driver
 					Retorna una cadena vacia si la consulta es ejecutada sin problemas.
 			*/
-			global $ConexionPDO;
+			global $ConexionPDO,$ModoDepuracion;
 			global $Login_usuario;
-			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin,$MULTILANG_ContacteAdmin;
+			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin,$MULTILANG_ContacteAdmin,$MULTILANG_MotorBD;
 			try
 				{
 					$consulta = $ConexionPDO->prepare($query);
@@ -182,10 +505,12 @@
 				}
 			catch( PDOException $ErrorPDO)
 				{
-					//Muestra detalles del query solo al admin
-					if ($Login_usuario!='admin') $query=$MULTILANG_ErrorSoloAdmin;
-					echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$query.'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
-					return $ErrorPDO->getMessage();
+					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
+					if ($Login_usuario=='admin' && $ModoDepuracion)
+						echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$query.'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
+					else
+						echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$MULTILANG_ErrorSoloAdmin.'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
+					return $MULTILANG_ErrorTiempoEjecucion;
 				}
 		}
 
@@ -554,6 +879,13 @@
 			// DEPRECATED Verifica soporte para cURL
 			//if (!extension_loaded('curl'))
 			//	mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrCURL,'','icono_error.png','TextosEscritorio');
+			
+			//PENDIENTE VALIDAR allow_url_fopen=On  EN PHP.INI  ... posible?  ini_set('allow_url_fopen', 1);
+			
+			
+			// Bloqueos por IP/pais http://stackoverflow.com/questions/15835274/file-get-contents-failed-to-open-stream-connection-refused
+			
+			
 		}
 
 

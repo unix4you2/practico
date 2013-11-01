@@ -1007,7 +1007,7 @@ if ($accion=="ver_seguimiento_monitoreo")
 				cerrar_ventana();
 				 }
 /* ################################################################## */
-if ($accion=="ver_seguimiento_general")		
+if ($accion=="ver_seguimiento_general")
 				{
 			/*
 				Function: ver_seguimiento_general
@@ -1025,7 +1025,8 @@ if ($accion=="ver_seguimiento_general")
 				Ver tambien:
 					<listar_usuarios> | <ver_seguimiento_especifico> | <ver_seguimiento_monitoreo>
 			*/
-						echo '<div align="center"><br>';
+
+				echo '<div align="center"><br>';
 				abrir_ventana($MULTILANG_UsrAudUsrs,'#BDB9B9','90%');
 				if (@$inicio_reg=="") $inicio_reg=0;
 				if (@$fin_reg=="") $fin_reg=50;

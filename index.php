@@ -108,13 +108,25 @@
 	// Determina si al momento de ejecucion se encuentra activado el modo webservices
 	include_once("core/ws_nucleo.php");
 
-	// Verifica autenticidad de la sesion mediante llave de paso
+	limpiar_entradas(); // Evita XSS
+
+	// Valida llaves de paso y permisos de accion
 	if ($accion!= "" && $accion!="Iniciar_login" && $accion!="Terminar_sesion" && $accion!="Mensaje_cierre_sesion")
-		if (MD5($LlaveDePaso)!=$LlaveDePasoUsuario)
-			{
-				header("Location: index.php?accion=Terminar_sesion");
-				exit(1);
-			}
+		{
+			// Verifica autenticidad de la sesion mediante llave de paso
+			if (MD5($LlaveDePaso)!=$LlaveDePasoUsuario)
+				{
+					header("Location: index.php?accion=Terminar_sesion");
+					exit(1);
+				}
+			// Valida permisos asignados al usuario actual para la accion llamada a ejecutar
+			if (!permiso_accion($accion))
+				{
+					mensaje($MULTILANG_SecErrorTit,$MULTILANG_SecErrorDes."<br>[US=<b>$Login_usuario</b>|CMD=<b>$accion</b>|IP=<b>$direccion_auditoria</b>|DTE=<b>$fecha_operacion_guiones $hora_operacion_puntos</b>]",'','icono_error.png','TextosEscritorio');
+					auditar("SEC: Intento de acceso no autorizado CMD=$accion");
+					exit(1);
+				}
+		}
 
 	// Inicia la presentacion de la pagina
 	include("core/marco_arriba.php");

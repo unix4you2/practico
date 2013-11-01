@@ -137,7 +137,7 @@
 	//Errores y avisos varios
 	$MULTILANG_TituloInsExiste='ATENCION: La carpeta de instalaci&oacute;n existe en el servidor';
 	$MULTILANG_TextoInsExiste='Este mensaje aparecer&aacute; de manera permanente a todos sus usuarios mientras usted no elimine el directorio utilizado durante el proceso de instalaci&oacute;n de Pr&aacute;ctico.  Es fundamental que la carpeta sea eliminada despu&eacute;s de finalizar una instalaci&oacute;n para evitar que algun usuario an&oacute;nimo inicie nuevamente el proceso sobreescribiendo archivos de configuraci&oacute;n o bases de datos con informaci&oacute;n de importancia para usted.<br><br>Si ya ha finalizado un proceso de instalaci&oacute;n de Pr&aacute;ctico para su uso en producci&oacute;n es importante que elimine esta carpeta antes de continuar.  Si no desea eliminar esta carpeta puede optar por renombrarla en instalaciones temporales o de prueba.<br><br>Si est&aacute; visualizando este mensaje al ejecutar este script por primera vez y desea realizar una instalaci&oacute;n nueva, puede iniciar el asistente haciendo <input type="button" Value="clic AQUI" Onclick="document.location=\'ins\'" class="BotonesCuidado">';
-	$MULTILANG_ErrorTiempoEjecucion='Error en tiempo de ejecuci&oacute;n';
+	$MULTILANG_ErrorTiempoEjecucion='Error en tiempo de ejecucion';
 	$MULTILANG_ErrorModulo='El modulo central esta tratando de incluir un modulo ubicado en <b>mod/</b> pero no encuentra su punto de accceso.<br>Verifique el estado del m&oacute;dulo, consulte con su administrador o elimine el m&oacute;dulo en conflicto para evitar este mensaje.';
 	$MULTILANG_ContacteAdmin='Contacte con el administrador de su sistema y comunique este mensaje.';
 	$MULTILANG_ReinicieWeb='Por favor haga los ajustes requeridos y reinicie su servicio web.';
@@ -155,7 +155,7 @@
 	$MULTILANG_ErrorDatos='Problema en los datos ingresados';
 	$MULTILANG_ErrorTitAuth='<blink>ACCESO NEGADO!</blink>';
 	$MULTILANG_ErrorDesAuth='Las credenciales suministradas para el acceso al sistema no fueron aceptadas.  Algunas causas comunes son:<br><li>El nombre de usuario o contrase&ntilde;a son incorrectos.<br><li>C&oacute;digo de seguridad ingresado de manera incorrecta.<br><li>Su usuario est&aacute; deshabilitado.<br><li>Cuenta bloqueada por multiples intentos de acceso con clave incorrecta.';
-	$MULTILANG_ErrorSoloAdmin='S&oacute;lo el usuario admin puede ver los detalles de la transacci&oacute;n';
+	$MULTILANG_ErrorSoloAdmin='Solo el usuario admin puede ver los detalles de la transaccion con el modo de depuracion encendido.';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';
@@ -565,8 +565,10 @@
 	$MULTILANG_MnuComando='Comando';
 	$MULTILANG_MnuAdvElimina='IMPORTANTE:  Al eliminar el registro pueden quedar sin vincular algunas opciones del sistema.\n'.$MULTILANG_Confirma;
 
-	//Objetos
+	//Objetos, seguridad y otros
 	$MULTILANG_ObjError='El tipo de objeto recibido en este comando es desconocido';
+	$MULTILANG_SecErrorTit='Control de seguridad por comandos e informes';
+	$MULTILANG_SecErrorDes='Usted ha intentado ejecutar una funcion, comando o informe para el cual no se encuetra autorizado.<br>Ser&aacute; llevado un registro de auditor&iacute;a:';
 	
 	//Tablas
 	$MULTILANG_TblError1='Problema de integridad en dise&ntilde;o';

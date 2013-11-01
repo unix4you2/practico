@@ -1,0 +1,153 @@
+                ____                 _   _           
+               |  _ \ _ __ __ _  ___| |_(_) ___ ___  
+               | |_) | '__/ _` |/ __| __| |/ __/ _ \ 
+               |  __/| | | (_| | (__| |_| | (_| (_) |
+               |_|   |_|  \__,_|\___|\__|_|\___\___/ 
+                                      
+- Modulo PAM para autenticacion de maquinas Linux mediante webservices en Práctico.
+
+
+
+
+Modo de Uso:
+	1) Instale en el cliente linux que desea autenticar frente a Practico los siguientes paquetes:
+		python (incluyendo al menos las librerias:  sys, PAM, urllib, xml.dom.minidom, getpass)
+		libpam-python
+		libpam-python-doc
+	2) Descomprimir el modulo mediante su proceso de instalacion normal o manualmente sobre /mod
+	3) Copiar el archivo pam_python en /etc/pam.d para incluir las reglas PAM para libpam-python
+		En caso de no existir /etc/pam.d copiar el contenido del archivo sobre /etc/pam.conf
+	4) Copiar el archivo pam_practico.py en /lib/security
+	
+
+
+
+
+	2) Configure los parametros basicos dentro del archivo pam_practico.py
+
+----------------------------------------------------------------------------
+Proyecto original HTML2PDF version 4.03 (http://html2pdf.fr/)
+Alteraciones generales:
+
+	Se elimina el uso del paquete TCPDF versión 5.0.002 por el peso de sus fuentes (11MB)
+	Se utiliza en su lugar la versión 6 (mínima), descomprimida como _tcpdf_6.0.020 (2MB)
+
+	html2pdf.class.php
+	LINEA: 15 se cambia el valor del DEFINE de '5.0.002' a '6.0.020_min' para indicar que
+	       ahora reside sobre ese directorio la clase generadora de tcpdf.
+
+============================================================================
+OTROS EJEMPLOS COMPLEMENTARIOS (para desarrollo)
+    <page_header>
+        <table class="page_header">
+            <tr>
+                <td style="width: 50%; text-align: left">
+                    A propos de ...
+                </td>
+                <td style="width: 50%; text-align: right">
+                    HTML2PDF v<?php echo __CLASS_HTML2PDF__; ?>
+                </td>
+            </tr>
+        </table>
+    </page_header>
+    <page_footer>
+        <table class="page_footer">
+            <tr>
+                <td style="width: 33%; text-align: left;">
+                    http://html2pdf.fr/
+                </td>
+                <td style="width: 34%; text-align: center">
+                    page [[page_cu]]/[[page_nb]]
+                </td>
+                <td style="width: 33%; text-align: right">
+                    &copy;Spipu 2008-2011
+                </td>
+            </tr>
+        </table>
+    </page_footer>
+
+    <qrcode value="<?php echo $msg; ?>" ec="L" style="width: 30mm;"></qrcode>
+    <qrcode value="<?php echo $msg; ?>" ec="M" style="width: 30mm;"></qrcode>
+    <qrcode value="<?php echo $msg; ?>" ec="Q" style="width: 30mm;"></qrcode>
+    <qrcode value="<?php echo $msg; ?>" ec="H" style="width: 30mm;"></qrcode>
+    <br>
+    <h3>Message avec différentes largeurs</h3>
+    <qrcode value="<?php echo $msg; ?>" style="width: 20mm;"></qrcode>
+    <qrcode value="<?php echo $msg; ?>" style="width: 30mm;"></qrcode>
+    <qrcode value="<?php echo $msg; ?>" style="width: 40mm;"></qrcode>
+    <qrcode value="<?php echo $msg; ?>" style="width: 50mm;"></qrcode>
+    <br>
+    <h3>Message de différentes couleurs</h3>
+    <qrcode value="<?php echo $msg; ?>" style="width: 40mm; background-color: white; color: black;"></qrcode>
+    <qrcode value="<?php echo $msg; ?>" style="width: 40mm; background-color: yellow; color: red"></qrcode>
+    <qrcode value="<?php echo $msg; ?>" style="width: 40mm; background-color: #FFCCFF; color: #003300"></qrcode>
+    <qrcode value="<?php echo $msg; ?>" style="width: 40mm; background-color: #CCFFFF; color: #003333"></qrcode>
+
+
+
+<barcode type="EAN13" value="45" label="label" style="width:30mm; height:6mm; color: #770000; font-size: 4mm"></barcode>
+type=”…“ : type of barcode to use
+value=”…“ : value to convert into barcode
+label=”…“ : indicates that the label must be present below the bar code (label) or not (none) (non-mandatory, default: label)
+style=”…“ : Sets the color for the bar, its width and height (without the label) and the size of the label if it is displayed (not required)
+The different types of barcode are :
+
+CODE 39 - ANSI MH10.8M-1983 - USD-3 - 3 of 9	C39
+CODE 39 + CHECKSUM	C39+
+CODE 39 EXTENDED	C39E
+CODE 39 EXTENDED + CHECKSUM	C39E+
+CODE 93 - USS-93	C93
+Standard 2 of 5	S25
+Standard 2 of 5 + CHECKSUM	S25+
+Interleaved 2 of 5	I25
+Interleaved 2 of 5 + CHECKSUM	I25+
+CODE 128 A	C128A
+CODE 128 B	C128B
+CODE 128 C	C128C
+EAN 8	EAN8
+EAN 13	EAN13
+2-Digits UPC-Based Extention	EAN2
+5-Digits UPC-Based Extention	EAN5
+UPC-A	UPCA
+UPC-E	UPCE
+MSI	MSI
+MSI + CHECKSUM (module 11)	MSI+
+IMB - Intelligent Mail Barcode - Onecode - USPS-B-3200	IMB
+POSTNET	POSTNET
+PLANET	PLANET
+RMS4CC (Royal Mail 4-state Customer Code) - CBC (Customer Bar Code)	RMS4CC
+KIX (Klant index - Customer index)	KIX
+CODABAR	CODABAR
+CODE 11	CODE11
+PHARMACODE	PHARMA
+PHARMACODE TWO-TRACKS	PHARMA2T
+
+
+
+
+  <page>
+     <page_header>
+        ...
+     </ page_header>
+     <page_footer>
+        ...
+     </ page_footer>
+     ...
+  </ page>
+Propiedades de PAGE:  
+backimg: url de la imagen
+backimgx: left / center / right / value (mm, px, pt,%)
+backimgy: top / middle / bottom / value (mm, px, pt,%)
+backimgw: valor (mm, px, pt,%)
+backtop: valor (mm, px, pt,%)
+backbottom: valor (mm, px, pt,%)
+backleft: valor (mm, px, pt,%)
+backright: valor (mm, px, pt,%)
+backcolor: valor de un color
+footer: varios valores (page, date, heure, form), separados por ”;”
+
+Debemos OBLIGATORIAMENTE indicar la altura necesaria para la cabecera, usando la propiedad backtop de la etiqueta page
+Debemos OBLIGATORIAMENTE indicar la altura necesaria para el pie de página usando la propiedad backbottom de la etiqueta page 
+ 
+<page format="100x200" orientation="L" backcolor="#AAAACC" style="font: arial;">
+</page>
