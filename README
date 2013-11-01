@@ -48,6 +48,12 @@
             |___/ 
 
 ----------------------------------------
+Versión 13.911 (2013-11-01)
+ * Added: Inicio de construccion de modulo PAM propio para permitir a escritorios de equipo autenticarse frente al modelo de webservices de Practico
+ * Fixed: Importantes mejoras a la seguridad y llamado de funciones.  Gracias especiales al equipo de Zero Science Lab por su completa revisión de vulnerabilidades
+ * Fixed: Se suprimen mensajes de error en los motores retornados a los usuarios para evitar posibles SQLInjection sobre 40 funciones diferentes.  Gracias a Zero Science Lab
+ * Fixed: Se filtran cadenas y variables de entrada a funciones sensibles para evitar posible XSS.  Gracias a Zero Science Lab
+----------------------------------------
 Versión 13.9 (2013-09-17)
  * Added: Conversion automatica de informes tabulares a formato PDF
  * Added: Disponibilidad de nuevo modulo para pasar a PDF

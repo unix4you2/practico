@@ -6,7 +6,7 @@ VersionCompatibleMes="9"
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
 VersionFinalAno="13"
-VersionFinalMes="11"
+VersionFinalMes="911"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version

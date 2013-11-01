@@ -206,7 +206,7 @@ if ($accion=="analizar_parche")
 				//Verifica que no sea un parche mas viejo que la version actual
 				if ($mensaje_error=="")
 					if ($version_final <= $version_actual)
-						$mensaje_error.='<br>'.$MULTILANG_ErrorAntigua;
+						$mensaje_error.='<br>'.$MULTILANG_ErrorAntigua.' Ver:'.$version_final.' <= Ver:'.$version_actual;
 
 				//Verifica si la version actualmente instalada es la requerida por el parche
 				if ($mensaje_error=="")
