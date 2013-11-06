@@ -82,61 +82,41 @@
 			// Construye la URL para solicitar el webservice.  La URL se debe poder resolver por el servidor web correctamente, ya sea por dominio o IP (interna o publica).  Ver /etc/hosts si algo.
 			$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
 			$webservice_validacion = $protocolo_webservice.$prefijo_webservice."?WSOn=1&WSKey=".$LlaveDePaso."&WSId=verificar_credenciales&uid=".$uid."&clave=".$clave;
-			// Forma 1: Usando SimpleXML Directamente
-			
+			// FORMA 1: Usando SimpleXML Directamente
+				// Carga el contenido en una variable para validar la conexion
+				$contenido_url = file_get_contents($webservice_validacion);
+				// Valida si se logro cargar o no el contenido
+				if ($contenido_url)
+					{
+						$resultado_webservice = simplexml_load_string($contenido_url);
+						// Analiza la respuesta recibida en el XML
+						if($resultado_webservice->credencial[0]->aceptacion==1)
+							$ok_login=1;
+					}
+				else
+					{
+						limpiar_entradas();
+						mensaje($MULTILANG_LoginNoWSTit,$MULTILANG_LoginNoWSDes."<br>Test URL=<a href='".$webservice_validacion."' target=_BLANK>Auth WebService</a> (entradas filtradas)",'','icono_error.png','TextosEscritorio');
+					}
 			/*
-			 pendiente validar  contenido:
-$url = @file_get_contents("http://www.itreb.info");
-if ($url) {
-    // if url is true execute this 
-    echo $url;
-} else {
-    // if not exceute this 
-    echo "connection error";
-}
-			 * 
-			 * 
-			 * 
-			 * 
-			 * */
-
-
-
-			$resultado_webservice = simplexml_load_string(file_get_contents($webservice_validacion));
-			// Analiza la respuesta recibida en el XML
-			if($resultado_webservice->credencial[0]->aceptacion==1)
-				$ok_login=1;
-			/*
-			// Forma 2: Usando cURL
+			// FORMA 2: Usando cURL
 				$variable_curl = curl_init($webservice_validacion);
 				$ok_login = curl_exec($variable_curl); //Solo recibe una booleana
 				curl_close($variable_curl);
 				unset($variable_curl);
-
-
-//Otra con cURL
-   $IP = '202.71.158.30'; 
-    $runfile = 'http://api.hostip.info/country.php?ip=' . $IP;
-
-    $ch = curl_init();
-
-    curl_setopt($ch, CURLOPT_URL, $runfile);
-
-    curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-
-    curl_setopt($ch, CURLOPT_URL,$runfile);
-
-    $content = curl_exec ($ch);
-
-    curl_close ($ch); 
-
-    echo $content;
-
-
-
-			// Forma 3: DEPRECATED
+			//FORMA 3: Otra con cURL
+				$IP = '202.71.158.30'; 
+				$runfile = 'http://api.hostip.info/country.php?ip=' . $IP;
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL, $runfile);
+				curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($ch, CURLOPT_URL,$runfile);
+				$content = curl_exec ($ch);
+				curl_close ($ch); 
+				echo $content;
+			// FORMA 4: DEPRECATED
 				$ok_login = file_get_contents($webservice_validacion);  //Solo recibe una booleana
-			// Forma 4: DEPRECATED Usando fopen requiere allow_url_fopen activado en php.ini  //Solo recibe una booleana
+			// Forma 5: DEPRECATED Usando fopen requiere allow_url_fopen activado en php.ini  //Solo recibe una booleana
 				$file = @fopen($webservice_validacion, ‘r’);
 				if($file)
 					{

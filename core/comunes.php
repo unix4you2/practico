@@ -334,9 +334,14 @@
 				global $tabla_datos;
 				$tabla_datos=escapar_contenido($tabla_datos); // Revisar si afecta el script de autorun
 			}
-
-
-
+			
+		if ($accion=="Iniciar_login")
+			{
+				global $uid,$clave,$captcha;
+				$uid=escapar_contenido($uid);
+				$clave=escapar_contenido($clave);
+				$captcha=escapar_contenido($captcha);
+			}
 	}
 
 
@@ -452,7 +457,7 @@
 			
 			// Filtra la cadena antes de ser ejecutada
 			$query=filtrar_cadena_sql($query,$accion);
-			
+
 			try
 				{
 					$consulta = $ConexionPDO->prepare($query);
