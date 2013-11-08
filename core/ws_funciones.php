@@ -128,3 +128,58 @@ if ($WSId=="verificar_credenciales")
 		// Devuelve los resultados
 		echo $salida_xml;
 	}
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: autenticacion_google
+	Realiza proceso de llamado a la API de autenticacion de Google para permitir el acceso del usuario
+
+	Salida:
+		Redireccion del usuario a la pagina de login de google, quien a su vez redireccionara al usuario segun el resultado
+
+	Ver tambien:
+		<Iniciar_login>
+*/
+if ($WSId=="autenticacion_google") 
+	{
+		require_once 'mod/google-api/Google_Client.php';
+		require_once 'mod/google-api/contrib/Google_PlusService.php';
+
+		// Set your cached access token. Remember to replace $_SESSION with a
+		// real database or memcached.
+		session_start();
+
+		$client = new Google_Client();
+		$client->setApplicationName('Autenticacion Practico');
+		// Visit https://code.google.com/apis/console?api=plus to generate your
+		// client id, client secret, and to register your redirect uri.
+		$client->setClientId('932485011824.apps.googleusercontent.com'); //insert_your_oauth2_client_id
+		$client->setClientSecret('Ne6iR6YLWVKiGUVEpXdCfG00'); //insert_your_oauth2_client_secret
+		$client->setRedirectUri('http://www.lexicomtheplace.com/practico/auth/valida.php'); //insert_your_oauth2_redirect_uri
+		$client->setDeveloperKey('AIzaSyASqk3wVgXwLp7qEjQtl7F771xSw9Bx0sA'); //insert_your_simple_api_key
+		$plus = new Google_PlusService($client);
+
+		if (isset($_GET['code'])) {
+		  $client->authenticate();
+		  $_SESSION['token'] = $client->getAccessToken();
+		  $redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+		  header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
+		}
+
+		if (isset($_SESSION['token'])) {
+		  $client->setAccessToken($_SESSION['token']);
+		}
+
+		if ($client->getAccessToken()) {
+		  $activities = $plus->activities->listActivities('me', 'public');
+		  print 'Your Activities: <pre>' . print_r($activities, true) . '</pre>';
+
+		  // We're not done yet. Remember to update the cached access token.
+		  // Remember to replace $_SESSION with a real database or memcached.
+		  $_SESSION['token'] = $client->getAccessToken();
+		} else {
+		  $authUrl = $client->createAuthUrl();
+		  header("Location: $authUrl"); // Redirecciona a la autenticacion de Google
+		}
+	}

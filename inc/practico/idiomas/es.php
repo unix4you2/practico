@@ -129,6 +129,7 @@
 	$MULTILANG_AccesoExclusivo='El acceso a este software es exclusivo para usuarios registrados. Por su seguridad, nunca comparta su nombre de usuario y contrase&ntilde;a.';
 	$MULTILANG_LoginNoWSTit='Error tratando de alcanzar el webservice de autenticacion';
 	$MULTILANG_LoginNoWSDes='La funcion file_get_contents() no puede cargar correctamente el archivo XML generado por el web service de autenticacion de Practico.<br>  Verifique la instalacion de su servidor web para validar que la funcion opera correctamente y sin restricciones.<br>  Una forma de validar si el proceso de autenticacion es correcto pero es su servidor quien no deja abrir el resultado<br>es abriendo el siguiente enlace y viendo si carga correctamente el XML.<br>  Activar el modo de depuracion en la configuracion de Practico puede ayudar a ver mas detalles.';
+	$MULTILANG_GoogleLogin='Iniciar con mi cuenta Google';
 
 	//Banderas de campos en formularios
 	$MULTILANG_TitValorUnico='El valor ingresado no acepta duplicados';

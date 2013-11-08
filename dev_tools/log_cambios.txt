@@ -14,9 +14,13 @@ ArchivoVersion=" inc/version_actual.txt "
 
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
+core/comunes.php
 core/sesion.php
+core/ws_funciones.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
+skin/nomo/general.css
+skin/nature/general.css
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -27,6 +31,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+ * Added: Posibilidad de inicio de sesion mediante Google.  Solo inicio de sesion, los permisos continuan independientes en la plataforma para el usuario con el mismo login de Google
  * Fixed: Mensajes de validación para el proceso de autenticación cuando la función file_get_contents() no opera correctamente
 "
 

@@ -224,6 +224,17 @@ padding: 2px;
 cursor: pointer;
 }
 
+input.BotonesGoogle {
+background-color: #275bca;
+font-family: Tahoma, Verdana, sans-serif;
+color: #ffffff;
+font-size: 11px;
+border-width: 2px;
+border-radius: 5px 5px 5px 5px;
+padding: 4px;
+cursor: hand;
+}
+
 input.BotonesCuidado {
 background-color: #ff0000;
 font-family: Tahoma, Verdana, sans-serif;

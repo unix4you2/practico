@@ -964,8 +964,8 @@
 			Function: ventana_login
 			Despliega la ventana de ingreso al sistema con el formulario para usuario, contrasena y captcha.
 		*/
-		  global $ArchivoCORE;
-		  global $MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar;
+		  global $ArchivoCORE,$LlaveDePaso;
+		  global $MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_GoogleLogin;
 			echo '
 					<br><br>
 					<div align="center">
@@ -1010,6 +1010,15 @@
 										<img src="img/practico_login.png" alt="" border="0">
 								</td>
 						</tr></table>
+						</form>
+						
+
+						<form name="login_google" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;">
+						<input type="hidden" name="WSOn" value="1">
+						<input type="hidden" name="WSKey" value="<?php echo $LlaveDePaso; ?>">
+						<input type="hidden" name="WSId" value="autenticacion_google">
+						<img src="https://ssl.gstatic.com/accounts/ui/logo_2x.png" border=0 width=107 height=35><br>
+						<input type="Submit"  class="BotonesGoogle" value="<?php echo $MULTILANG_GoogleLogin; ?>" >
 						</form>
 						<script language="JavaScript"> login_usuario.uid.focus(); </script>
 						</div>
