@@ -273,15 +273,17 @@
 	{
 			/*
 				Function: limpiar_entradas
-				Limpia cadenas y URLs a ser impresas segun acciones para evitar posibles ataques por XSS
+				Limpia cadenas y URLs a ser impresas segun acciones para evitar XSS
 
 				Salida:
 					Cadenas y variables filtradas sobre sus valores globales
 			*/
 		global $accion;
-		// Escapa siempre las acciones
+		// Escapar siempre las acciones pues deberian tener solo letras, numeros y underlines.
 		$accion=escapar_contenido($accion);
+		$accion = ereg_replace("[^A-Za-z0-9_]", "", $accion);
 
+		// Escapar algunas variables segun la accion recibida
 		if ($accion=="ver_seguimiento_general")
 			{
 				global $accionbuscar,$fin_reg,$inicio_reg;
