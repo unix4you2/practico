@@ -852,7 +852,7 @@
 			global $MotorBD;
 			global $Auth_TipoMotor;
 			global $Auth_TipoEncripcion;
-			global $MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,$MULTILANG_ErrCURL,$MULTILANG_ErrLDAP,$MULTILANG_ErrHASH,$MULTILANG_ErrSESS,$MULTILANG_ErrGD,$MULTILANG_ErrPDO,$MULTILANG_ErrDriverPDO;
+			global $MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,$MULTILANG_ErrCURL,$MULTILANG_ErrLDAP,$MULTILANG_ErrHASH,$MULTILANG_ErrSESS,$MULTILANG_ErrGD,$MULTILANG_ErrPDO,$MULTILANG_ErrDriverPDO,$MULTILANG_ErrGoogleAPIMod;
 			
 			//Verifica soporte para LDAP cuando esta activado en la herramienta
 			if ($Auth_TipoMotor=='ldap' &&  !extension_loaded('ldap'))
@@ -881,6 +881,11 @@
 			//Verifica soporte para SimpleXML
 			if (!extension_loaded('SimpleXML'))
 				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,'','icono_error.png','TextosEscritorio');
+
+			//Verifica existencia del modulo de google-api cuando se indica ese tipo de autenticacion
+			if ($Auth_TipoMotor=='oauth2' &&  @!file_exists("mod/google-api"))
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrGoogleAPIMod,'','icono_error.png','TextosEscritorio');
+
 
 			// DEPRECATED Verifica soporte para cURL
 			//if (!extension_loaded('curl'))

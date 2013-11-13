@@ -145,7 +145,7 @@
 	$MULTILANG_ContacteAdmin='Contacte con el administrador de su sistema y comunique este mensaje.';
 	$MULTILANG_ReinicieWeb='Por favor haga los ajustes requeridos y reinicie su servicio web.';
 	$MULTILANG_PHPSinSoporte='Su instalacion de PHP parece no tener soporte';
-	$MULTILANG_ErrExtension='Extensi&oacute;n PHP faltante o sin activar';
+	$MULTILANG_ErrExtension='Extensi&oacute;n PHP faltante, sin activar o Modulo requerido';
 	$MULTILANG_ErrLDAP=$MULTILANG_PHPSinSoporte.' para LDAP activado para ser usado como metodo de autenticacion externa.<br>'.$MULTILANG_ReinicieWeb.'.<br>La autenticaci&oacute;n del usuario admin seguir&aacute; siendo independiente para evitar p&eacute;rdida de acceso.';
 	$MULTILANG_ErrHASH=$MULTILANG_PHPSinSoporte.' para HASH activado.<br>Este se requiere cuando es seleccionado un tipo de encripci&oacute;n diferente al plano para contrase&ntilde;as sobre motores de autenticaci&oacute;n externos.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrSESS=$MULTILANG_PHPSinSoporte.' para sesiones activado. '.$MULTILANG_ReinicieWeb;
@@ -159,6 +159,7 @@
 	$MULTILANG_ErrorTitAuth='<blink>ACCESO NEGADO!</blink>';
 	$MULTILANG_ErrorDesAuth='Las credenciales suministradas para el acceso al sistema no fueron aceptadas.  Algunas causas comunes son:<br><li>El nombre de usuario o contrase&ntilde;a son incorrectos.<br><li>C&oacute;digo de seguridad ingresado de manera incorrecta.<br><li>Su usuario est&aacute; deshabilitado.<br><li>Cuenta bloqueada por multiples intentos de acceso con clave incorrecta.';
 	$MULTILANG_ErrorSoloAdmin='Solo el usuario admin puede ver los detalles de la transaccion con el modo de depuracion encendido.';
+	$MULTILANG_ErrGoogleAPIMod='El metodo de autenticacion esta configurado como OAuth2 para Google.<br>Sin embargo el modulo de Practico google-api no se encuentra instalado.<br>Descargue e instale el modulo desde la web oficial de Practico y actualice la pagina nuevamente.';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';

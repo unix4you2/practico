@@ -81,7 +81,7 @@
 	$CaracteresCaptcha=4;
 	
 	// Tipo de motor usado para la autenticacion de usuarios
-	$Auth_TipoMotor='practico';
+	$Auth_TipoMotor='oauth2';
 	
 	// Configuracion LDAP - Auth_TipoMotor=ldap
 	$Auth_TipoEncripcion='plano';

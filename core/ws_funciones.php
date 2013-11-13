@@ -157,7 +157,6 @@ if ($WSId=="autenticacion_google")
 		$client->setClientId($APIGoogle_ClientId);
 		$client->setClientSecret($APIGoogle_ClientSecret);
 		$client->setRedirectUri($APIGoogle_RedirectUri);
-		// Deberia registrarse como http://www.lexicomtheplace.com/practico/?WsOn=1%26WSId=verificacion_google
 		$client->setDeveloperKey($APIGoogle_DeveloperKey); //insert_your_simple_api_key
 		$plus = new Google_PlusService($client);
 
@@ -174,7 +173,7 @@ if ($WSId=="autenticacion_google")
 
 		if ($client->getAccessToken()) {
 		  $activities = $plus->activities->listActivities('me', 'public');
-		  print 'Your Activities: <pre>' . print_r($activities, true) . '</pre>';
+		  print 'Sus actividades: <pre>' . print_r($activities, true) . '</pre>';
 
 		  // We're not done yet. Remember to update the cached access token.
 		  // Remember to replace $_SESSION with a real database or memcached.

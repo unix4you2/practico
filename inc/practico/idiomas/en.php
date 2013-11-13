@@ -145,7 +145,7 @@
 	$MULTILANG_ContacteAdmin='Contact your system administrator and report this post.';
 	$MULTILANG_ReinicieWeb='Please make the required settings and restart your web service.';
 	$MULTILANG_PHPSinSoporte='Your PHP installation appears to have no support';
-	$MULTILANG_ErrExtension='PHP Extension missing or disabled';
+	$MULTILANG_ErrExtension='PHP Extension missing, disabled or a module is required';
 	$MULTILANG_ErrLDAP=$MULTILANG_PHPSinSoporte.' LDAP support is required for use as external authentication method.<br>'.$MULTILANG_ReinicieWeb.'.<br>The admin user authentication will remain independent to avoid loss of access.';
 	$MULTILANG_ErrHASH=$MULTILANG_PHPSinSoporte.' HASH support is required.<br>This extension is required if you selected a different encryption type for passwords on engines up external authentication.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrSESS=$MULTILANG_PHPSinSoporte.' sessions support is required. '.$MULTILANG_ReinicieWeb;
@@ -159,6 +159,7 @@
 	$MULTILANG_ErrorTitAuth='<blink>ACCESS DENIED!</blink>';
 	$MULTILANG_ErrorDesAuth='The credentials supplied for access to the system were not accepted. Some common causes are:<br><li> The username or password is incorrect. <br> <li> Security code entered incorrectly. <br> <li> Your Login is disabled. <br> <li> Account locked access by multiple attempts with incorrect password.';
 	$MULTILANG_ErrorSoloAdmin='Only admin user can see the transaction details with debug mode turned On';
+	$MULTILANG_ErrGoogleAPIMod='OAuth2 for Google was configured as default auth method.<br>Anyway the Practicos module for google-api is not installed yet.<br>Please download the google-api module from Practicos website and reload again.';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';
