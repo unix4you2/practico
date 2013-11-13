@@ -31,8 +31,9 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
- * Added: Posibilidad de inicio de sesion mediante Google.  Solo inicio de sesion, los permisos continuan independientes en la plataforma para el usuario con el mismo login de Google
+ * Added: Posibilidad de inicio de sesion mediante Google.  Solo inicio de sesion, los permisos continuan independientes en la plataforma para el usuario con el mismo login de Google (OAuth 2.0)
  * Fixed: Mensajes de validación para el proceso de autenticación cuando la función file_get_contents() no opera correctamente
+ * Fixed: Solucionado posible XSS al limpiar la variable accion durante cada ejecución.  Gracias a la empresa Secunia por su análisis.
 "
 
 ########################################################################

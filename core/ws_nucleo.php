@@ -32,12 +32,17 @@
 	*/
 
 
+	// Bypass para casos de URI de redireccion para Google Oauth2
+	$ByPassWS=0;
+	if (@$WSId=='verificacion_google')
+		$ByPassWS=1;
+
 	// Verifica si se trata de un llamado por web-services
 	$ModoWSActivado=0;
 	if (@$WSOn==1)
 		{
 			// Verifica si se ha recibido una llave
-			if (@$WSKey!="")
+			if (@$WSKey!="" || $ByPassWS)
 				{
 					// Verifica si se ha recibido un identificador de servicio
 					if (@$WSId!="")
@@ -48,7 +53,7 @@
 							// Agrega llave del sistema de manera predeterminada a la lista de llaves permitidas, no deberia ser vacia o de lo contrario los WS no entraran
 							$Auth_WSKeys[]=$LlaveDePaso;
 							// Verifica validez de la llave recibida para el webservice
-							if(in_array($WSKey, $Auth_WSKeys,true))
+							if(in_array($WSKey, $Auth_WSKeys,true) || $ByPassWS)
 								$ModoWSActivado=1;
 							// Si la llave es correcta incluye los webservices de la herramienta y los del usuario, sino presenta error
 							if ($ModoWSActivado)

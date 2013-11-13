@@ -1019,7 +1019,7 @@
 						<input type="hidden" name="WSOn" value="1">
 						<input type="hidden" name="WSKey" value="<?php echo $LlaveDePaso; ?>">
 						<input type="hidden" name="WSId" value="autenticacion_google">
-						<img src="https://ssl.gstatic.com/accounts/ui/logo_2x.png" border=0 width=107 height=35><br>
+						<img src="mod/google-api/google.png" border=0 width=94 height=35><br>
 						<input type="Submit"  class="BotonesGoogle" value="<?php echo $MULTILANG_GoogleLogin; ?>" >
 						</form>
 						<script language="JavaScript"> login_usuario.uid.focus(); </script>

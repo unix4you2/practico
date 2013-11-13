@@ -735,6 +735,7 @@
 	$MULTILANG_MotorAuth='Motor de autenticaci&oacute;n';
 	$MULTILANG_AuthPractico='Interno (Tablas propias de Pr&aacute;ctico usando MD5)';
 	$MULTILANG_AuthLDAP='LDAP (Servidor de directorio)';
+	$MULTILANG_AuthGoogle='Google / Google+ (Mediante OAuth2)';
 	$MULTILANG_AyudaDesAuth='El uso de un motor de autenticaci&oacute;n diferente a Pr&aacute;ctico no excluye la creaci&oacute;n de los usuarios sobre la herramienta.  El motor externo servira como metodo para validar el login y clave correspondiente como un m&eacute;todo de autenticaci&oacute;n centralizado; pero el resto de caracter&iacute;sticas del perfil ser&aacute;n tomadas desde el usuario Pr&aacute;ctico.  El cambio de contrase&ntilde;a en Pr&aacute;ctico ser&aacute; deshabilitado para que sea controlada solamente por el motor externo.  El usuario admin seguir&aacute; siendo siempre aut&oacute;nomo para no perder control de acceso por errores de configuraci&oacute;n.';
 	$MULTILANG_AyudaTitCript='Tipo de encripcion de claves usado por el motor';
 	$MULTILANG_AyudaDesCript='Especifique el tipo de encripcion utilizado por el sistema de autenticacion que va a utilizar.  Pr&aacute;ctico encriptar&aacute; el valor de clave ingresado por el usuario antes de enviarla al motor a verificaci&oacute;n.';
@@ -760,6 +761,16 @@
 	$MULTILANG_MsjFinal1='Si esta es una instalaci&oacute;n nueva puede ingresar al sistema mediante las credenciales<b> admin/admin</b> y cambiarlas luego por las que usted desee.';
 	$MULTILANG_MsjFinal2='Recuerde eliminar por completo el directorio de instalaci&oacute;n (carpeta /ins)</b></u> para evitar que otra persona ejecute nuevamente estos scripts sobre un sistema en producci&oacute;n pudiendo ocasionar alg&uacute;n tipo de da&ntilde;o.';
 	$MULTILANG_MsjFinal2='Resumen de operaciones ejecutadas';
+	$MULTILANG_AuthLDAPTitulo='Autenticacion basada en LDAP';
+	$MULTILANG_AuthGoogleTitulo='Autenticacion basada en API Google';
+	$MULTILANG_AuthGoogleApp='Nombre de la aplicacion';
+	$MULTILANG_AuthGoogleId='Identificador del cliente';
+	$MULTILANG_AuthGoogleSecret='Secreto del cliente';
+	$MULTILANG_AuthGoogleURI='URI de redireccion';
+	$MULTILANG_AuthGoogleKey='Llave simple o llave de desarrollador';
+	$MULTILANG_GoogleTitURI='Debe registrar previamente esta URI en su API de Google';
+	$MULTILANG_GoogleDesURI='Tenga en cuenta que la URI de retorno debe estar asociada a un dominio o IP publica para poder ser resuelta por Google. Esta URI se calcula automaticamente dependiendo del path al momento de instalacion';
+	$MULTILANG_GoogleWarnURI='La URI configurada parece ser diferente a la URI actualmente calculada. Se recomienda verificar y actualizar los valores';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';

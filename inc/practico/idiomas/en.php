@@ -738,6 +738,7 @@
 	$MULTILANG_MotorAuth='Authentication engine';
 	$MULTILANG_AuthPractico='Internal (Practico Tables using MD5)';
 	$MULTILANG_AuthLDAP='LDAP (Directory server)';
+	$MULTILANG_AuthGoogle='Google / Google+ (By OAuth2)';
 	$MULTILANG_AyudaDesAuth='Using a different authentication engine Practico not preclude the creation of users of the tool. The outboard motor will serve as a method to validate the login and corresponding password as a centralized authentication method, but the other features of the profile are taken from the Practico user. The Practico password change will be disabled to be controlled only by the external motor. The admin user will always remain autonomous to keep access control configuration errors.';
 	$MULTILANG_AyudaTitCript='Key encryption type used by the engine';
 	$MULTILANG_AyudaDesCript='Specify the type of encryption used by the authentication system to be used. Practico will encrypt the key value entered by the user before sending the verification engine.';
@@ -763,6 +764,16 @@
 	$MULTILANG_MsjFinal1='If this is a new installation can enter the system through <b> credentials admin / admin </ b> and change then as you desire.';
 	$MULTILANG_MsjFinal2='Remember to completely remove the installation directory (folder / ins) </b> </u> to prevent other person run these scripts again on a production system can cause any damage.';
 	$MULTILANG_MsjFinal2='Summary of operations executed';
+	$MULTILANG_AuthLDAPTitulo='LDAP based login';
+	$MULTILANG_AuthGoogleTitulo='Google API based login';
+	$MULTILANG_AuthGoogleApp='Application name';
+	$MULTILANG_AuthGoogleId='Client ID';
+	$MULTILANG_AuthGoogleSecret='Client Secret';
+	$MULTILANG_AuthGoogleURI='Redirect URI';
+	$MULTILANG_AuthGoogleKey='Simple key or Developer Key';
+	$MULTILANG_GoogleTitURI='You should register this URI in your Google API first';
+	$MULTILANG_GoogleDesURI='Important: Your return URI should be under a domain or public IP because Google will need to link with that. This URI is automatically created acording to the path during installation time.';
+	$MULTILANG_GoogleWarnURI='The URI in config file is different to the calculated URI. You should check and update that value';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';

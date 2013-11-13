@@ -145,6 +145,9 @@ $salida=sprintf("<?php
 
 
 		Title: Configuracion base
+		
+		IMPORTANTE: La actualizacion de este archivo se deberia realizar por medio de la ventana de configuracion de la herramienta.  No altere estos valores manualmente a menos que sepa lo que hace.
+		
 		Ubicacion *[/core/configuracion.php]*.  Archivo que contiene la declaracion de variables basicas para conexion a bases de datos y otros
 
 		Section: Variables de conexion
@@ -152,40 +155,43 @@ $salida=sprintf("<?php
 		Crea las variables de conexion para el motor de bases de datos, segmentos de direcciones, etc.  Ver ejemplo:
 
 		(start code)
-			$Servidor='localhost'; // Define servidor de bases de datos
-			$BaseDatos='practico'; // Nombre de la base de datos a utilizar
-			$UsuarioBD='root'; // Usuario con privilegios suficientes para crear/eliminar tablas y realizar operaciones con registros
-			$PasswordBD='toor'; // Contrasena del usuario para accesar al motor
+			ServidorBD='XXX';
+			BaseDatos='XXX';
+			UsuarioBD='XXX';
+			PasswordBD='XXX';
+			MotorBD='XXX';
+			PuertoBD='';
 		(end)
 	*/
 
-	\$ServidorBD='%s';
+	\$ServidorBD='%s';	// Direccion IP o nombre de host
 	\$BaseDatos='%s';   // Path completo cuando se trata de sqlite2, ej: '/path/to/database.sdb'
 	\$UsuarioBD='%s';
 	\$PasswordBD='%s';
-	\$MotorBD='%s';
-	\$PuertoBD='%s';
+	\$MotorBD='%s';		// Puede variar segun el driver PDO: mysql|pgsql|sqlite|sqlsrv|mssql|ibm|dblib|odbc|oracle|ifmx|fbd
+	\$PuertoBD='%s';	// Vacio para predeterminado
 
 	/*
 		Section: Variables para aplicacion
 
 		(start code)
-			$NombreRAD='Pr&aacute;ctico';  // Nombre del aplicativo
-			$VersionRAD='11.06';           // Version del aplicativo
-			$PlantillaActiva='nomo';       // Mascara visual con la definicion de hojas CSS e imagenes.  Ubicada en /skin
-			$ArchivoCORE='';               // Script que procesa todos los formularios. Vacio para la misma pagina o index.php
+			NombreRAD='XXX';			// Nombre del aplicativo
+			VersionRAD='XXX';			// Version del aplicativo
+			PlantillaActiva='XXX';		// Mascara visual con la definicion de hojas CSS e imagenes.  Ubicada en /skin
+			ArchivoCORE='';				// Script que procesa todos los formularios. Vacio para la misma pagina o index.php
 
-			$TablasCore='Core_';		   // Prefijo de Tablas base para uso de Practico (Cuidado al cambiar)
-			$TablasApp='App_';			   // Prefijo de Tablas de datos definidas por el usuario (Cuidado al cambiar)
+			TablasCore='Core_';			// Prefijo de Tablas base para uso de Practico (Cuidado al cambiar)
+			TablasApp='App_';			// Prefijo de Tablas de datos definidas por el usuario (Cuidado al cambiar)
 		(end)
 
 		*Llave de paso*
 
 		Establezca cualquier valor en la siguiente variable para reforzar la seguridad. Cambiar esto despues de tener usuarios creados puede afectar la autenticacion
 		Se recomienda establecer una llave en ambientes de produccion antes de trabajar. Cada usuario debe contar en su registro con una llave de paso equivalente al MD5 definido en este punto
+		La llave de paso es utilizada tambien como una llave de consumo interno para WebServices.  Aunque se puede compartir con otros sitios o aplicativos, por seguridad se deberian utilizar llaves de paso generadas por el asistente.
 
 		(start code)
-			$LlaveDePaso=''; //Predeterminado en vacio con MD5=d41d8cd98f00b204e9800998ecf8427e
+			LlaveDePaso=''; //Predeterminado en vacio con MD5=d41d8cd98f00b204e9800998ecf8427e
 		(end)
 	*/
 
@@ -199,12 +205,23 @@ $salida=sprintf("<?php
 	\$ZonaHoraria='%s';
 	\$IdiomaPredeterminado='%s';
 	\$CaracteresCaptcha=%s;
+	
+	// Tipo de motor usado para la autenticacion de usuarios
 	\$Auth_TipoMotor='%s';
+	
+	// Configuracion LDAP - Auth_TipoMotor=ldap
 	\$Auth_TipoEncripcion='%s';
 	\$Auth_LDAPServidor='%s';
 	\$Auth_LDAPPuerto='%s';
 	\$Auth_LDAPDominio='%s';
-	\$Auth_LDAPOU='%s';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$PlantillaActivaNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$Auth_TipoMotorNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW);
+	\$Auth_LDAPOU='%s';
+	
+	// Configuracion OAuth2 - Google - Google+  - Auth_TipoMotor=oauth2
+	\$APIGoogle_ApplicationName='%s';
+	\$APIGoogle_ClientId='%s';
+	\$APIGoogle_ClientSecret='%s';
+	\$APIGoogle_RedirectUri='%s';
+	\$APIGoogle_DeveloperKey='%s';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$PlantillaActivaNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$Auth_TipoMotorNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW,$APIGoogle_ApplicationNameNEW,$APIGoogle_ClientIdNEW,$APIGoogle_ClientSecretNEW,$APIGoogle_RedirectUriNEW,$APIGoogle_DeveloperKeyNEW);
 			// Escribe el archivo de configuracion
 			$archivo_config=fopen("core/configuracion.php","w");
 			if($archivo_config==null)

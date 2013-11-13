@@ -30,6 +30,10 @@
 	</tr>
 </table>
 <form name="continuar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+<input type="hidden" name="NombreRADNEW" value="Practico">
+<input type="hidden" name="PlantillaActivaNEW" value="nomo">
+<input type="hidden" name="IdiomaPredeterminadoNEW" value="<?php echo $Idioma; ?>">
+
 <hr>
 <font size=2 color=black><br><b>
 	[<?php echo $MULTILANG_MotorBD; ?>]</b>
@@ -42,7 +46,7 @@
 			</font>
 		</td>
 		<td valign=top width="380">
-			<select name="MotorBD" class="Combos" >
+			<select name="MotorBDNEW" class="Combos" >
 				<option value="mysql">MySQL - MariaDB (3.x/4.x/5.x)</option>
 				<option value="pgsql">PostgreSQL</option>
 				<option value="sqlite">SQLite v2 - SQLite v3</option>
@@ -66,8 +70,8 @@
 		</td>
 		<td valign=top>
 			<font size=2 color=black>
-			<input type="text" name="Servidor" size="20" class="CampoTexto" class="keyboardInput">
-			<?php echo $MULTILANG_Puerto; ?>: <input type="text" name="PuertoBD" size="4" class="CampoTexto" class="keyboardInput"> <?php echo $MULTILANG_PuertoNoPredeterminado; ?>
+			<input type="text" name="ServidorNEW" size="20" class="CampoTexto" class="keyboardInput">
+			<?php echo $MULTILANG_Puerto; ?>: <input type="text" name="PuertoBDNEW" size="4" class="CampoTexto" class="keyboardInput"> <?php echo $MULTILANG_PuertoNoPredeterminado; ?>
 			</font>
 		</td>
 	</tr>
@@ -79,7 +83,7 @@
 		</td>
 		<td valign=top>
 			<font size=2 color=black>
-			<input type="text" name="BaseDatos" size="20" class="CampoTexto" class="keyboardInput"> 
+			<input type="text" name="BaseDatosNEW" size="20" class="CampoTexto" class="keyboardInput"> 
 			<a href="#" title="<?php echo $MULTILANG_AyudaTitBD; ?>" name="<?php echo $MULTILANG_AyudaDesBD; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 			</font>
 		</td>
@@ -91,7 +95,7 @@
 			</font>
 		</td>
 		<td valign=top>
-			<input type="text" name="UsuarioBD" size="20" class="CampoTexto" class="keyboardInput">
+			<input type="text" name="UsuarioBDNEW" size="20" class="CampoTexto" class="keyboardInput">
 		</td>
 	</tr>
 	<tr>
@@ -101,7 +105,7 @@
 			</font>
 		</td>
 		<td valign=top>
-			<input type="password" name="PasswordBD" size="20" class="CampoTexto" class="keyboardInput">
+			<input type="password" name="PasswordBDNEW" size="20" class="CampoTexto" class="keyboardInput">
 		</td>
 	</tr>
 	<tr>
@@ -111,7 +115,7 @@
 			</font>
 		</td>
 		<td valign=top>
-			<input type="text" name="TablasCore" size="7" value="core_" class="CampoTexto" class="keyboardInput">
+			<input type="text" name="TablasCoreNEW" size="7" value="core_" class="CampoTexto" class="keyboardInput">
 			<a href="#" title="<?php echo $MULTILANG_AyudaTitPreCore; ?>" name="<?php echo $MULTILANG_AyudaDesPreCore; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
@@ -122,7 +126,7 @@
 			</font>
 		</td>
 		<td valign=top>
-			<input type="text" name="TablasApp" size="7" value="app_" class="CampoTexto" class="keyboardInput">
+			<input type="text" name="TablasAppNEW" size="7" value="app_" class="CampoTexto" class="keyboardInput">
 			<a href="#" title="<?php echo $MULTILANG_AyudaTitPreApp; ?>" name="<?php echo $MULTILANG_AyudaDesPreApp; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
@@ -134,7 +138,7 @@
 		</td>
 		<td valign=top>
 			<font size=2 color=black>
-				<input type="text" name="LlaveDePaso" size="12" value="<?php echo TextoAleatorio(10); ?>" class="CampoTexto" class="keyboardInput">
+				<input type="text" name="LlaveDePasoNEW" size="12" value="<?php echo TextoAleatorio(10); ?>" class="CampoTexto" class="keyboardInput">
 				(<?php echo $MULTILANG_AyudaLlave; ?>)
 			</font>
 		</td>
@@ -218,7 +222,7 @@
 			</font>
 		</td>
 		<td valign=top width="380">
-			<select  name="ZonaHoraria" class="Combos">
+			<select  name="ZonaHorariaNEW" class="Combos">
 				<?php
 					$archivo_origen="../inc/practico/zonas_horarias.txt";
 					$archivo = fopen($archivo_origen, "r");
@@ -247,7 +251,7 @@
 			</font>
 		</td>
 		<td valign=top width="380">
-			<select name="CaracteresCaptcha" class="Combos" >
+			<select name="CaracteresCaptchaNEW" class="Combos" >
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
@@ -265,7 +269,7 @@
 			</font>
 		</td>
 		<td valign=top width="380">
-			<select name="ModoDepuracion" class="Combos" >
+			<select name="ModoDepuracionNEW" class="Combos" >
 				<option value="1"><?php echo $MULTILANG_Encendido; ?></option>
 				<option value="0" selected><?php echo $MULTILANG_Apagado; ?></option>
 			</select>
@@ -276,123 +280,180 @@
 
 
 <hr>
-<font size=2 color=black><br><b>
+<font size=2 color=black><b>
 	[<?php echo $MULTILANG_MotorAuth; ?>]</b>
 </font>
-<table cellspacing=2 width="700">
+<table cellspacing=0 align="center" style="font-size:11px; color:000000;">
 	<tr>
 		<td valign=top align=right>
-			<font size=2 color=black>
-				<?php echo $MULTILANG_Tipo; ?>
-			</font>
+			<?php echo $MULTILANG_Tipo; ?>
 		</td>
 		<td valign=top>
-			<select  name="Auth_TipoMotor" class="Combos">
-				<option value="practico"><?php echo $MULTILANG_AuthPractico; ?></option>
-				<option value="ldap"><?php echo $MULTILANG_AuthLDAP; ?></option>
+			<select  name="Auth_TipoMotorNEW" class="Combos">
+				<option value="practico" <?php if ($Auth_TipoMotor=="practico") echo "SELECTED"; ?> ><?php echo $MULTILANG_AuthPractico; ?></option>
+				<option value="ldap" <?php if ($Auth_TipoMotor=="ldap") echo "SELECTED"; ?> ><?php echo $MULTILANG_AuthLDAP; ?></option>
+				<option value="oauth2" <?php if ($Auth_TipoMotor=="oauth2") echo "SELECTED"; ?> ><?php echo $MULTILANG_AuthGoogle; ?></option>
 			</select>
 			<a href="#" title="<?php echo $MULTILANG_Importante; ?>" name="<?php echo $MULTILANG_AyudaDesAuth; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
+</table>
+<hr>
+
+
+<table cellspacing=0 cellpadding=10 border=0 align="center" style="font-size:11px; color:000000;">
 	<tr>
-		<td valign=top align=right>
-			<font size=2 color=black>
-				<?php echo $MULTILANG_AlgoritmoCripto; ?>
-			</font>
+		<td valign=top align=center>
+			<b>[<?php echo $MULTILANG_AuthLDAPTitulo; ?>]</b>
+			<table cellspacing=0 width="100%" style="font-size:11px; color:000000;">
+				<tr>
+					<td valign=top align=right>
+						<?php echo $MULTILANG_AlgoritmoCripto; ?>
+					</td>
+					<td valign=top>
+						<select  name="Auth_TipoEncripcionNEW" class="Combos">
+							<option  <?php if ($Auth_TipoEncripcion=="plano") echo "SELECTED"; ?> value="plano">Texto plano/Plain text</option>
+							<option  <?php if ($Auth_TipoEncripcion=="md5") echo "SELECTED"; ?> value="md5">MD5</option>
+							<option  <?php if ($Auth_TipoEncripcion=="md4") echo "SELECTED"; ?> value="md4">MD4</option>
+							<option  <?php if ($Auth_TipoEncripcion=="md2") echo "SELECTED"; ?> value="md2">MD2</option>
+							<option  <?php if ($Auth_TipoEncripcion=="sha1") echo "SELECTED"; ?> value="sha1">SHA 1</option>
+							<option  <?php if ($Auth_TipoEncripcion=="sha256") echo "SELECTED"; ?> value="sha256">SHA 256</option>
+							<option  <?php if ($Auth_TipoEncripcion=="sha384") echo "SELECTED"; ?> value="sha384">SHA 384</option>
+							<option  <?php if ($Auth_TipoEncripcion=="sha512") echo "SELECTED"; ?> value="sha512">SHA 512</option>
+							<option  <?php if ($Auth_TipoEncripcion=="crc32") echo "SELECTED"; ?> value="crc32">CRC 32</option>
+							<option  <?php if ($Auth_TipoEncripcion=="crc32b") echo "SELECTED"; ?> value="crc32b">CRC 32B</option>
+							<option  <?php if ($Auth_TipoEncripcion=="adler32") echo "SELECTED"; ?> value="adler32">Adler 32</option>
+							<option  <?php if ($Auth_TipoEncripcion=="gost") echo "SELECTED"; ?> value="gost">Gost</option>
+							<option  <?php if ($Auth_TipoEncripcion=="whirlpool") echo "SELECTED"; ?> value="whirlpool">Whirlpool</option>
+							<option  <?php if ($Auth_TipoEncripcion=="snefru") echo "SELECTED"; ?> value="snefru">Snefru</option>
+							<option  <?php if ($Auth_TipoEncripcion=="ripemd128") echo "SELECTED"; ?> value="ripemd128">Ripemd 128</option>
+							<option  <?php if ($Auth_TipoEncripcion=="ripemd160") echo "SELECTED"; ?> value="ripemd160">Ripemd 160</option>
+							<option  <?php if ($Auth_TipoEncripcion=="ripemd256") echo "SELECTED"; ?> value="ripemd256">Ripemd 256</option>
+							<option  <?php if ($Auth_TipoEncripcion=="ripemd320") echo "SELECTED"; ?> value="ripemd320">Ripemd 320</option>
+							<option  <?php if ($Auth_TipoEncripcion=="tiger128,3") echo "SELECTED"; ?> value="tiger128,3">Tiger 128,3</option>
+							<option  <?php if ($Auth_TipoEncripcion=="tiger128,4") echo "SELECTED"; ?> value="tiger128,4">Tiger 128,4</option>
+							<option  <?php if ($Auth_TipoEncripcion=="tiger160,3") echo "SELECTED"; ?> value="tiger160,3">Tiger 160,3</option>
+							<option  <?php if ($Auth_TipoEncripcion=="tiger160,4") echo "SELECTED"; ?> value="tiger160,4">Tiger 160,4</option>
+							<option  <?php if ($Auth_TipoEncripcion=="tiger192,3") echo "SELECTED"; ?> value="tiger192,3">Tiger 192,3</option>
+							<option  <?php if ($Auth_TipoEncripcion=="tiger192,4") echo "SELECTED"; ?> value="tiger192,4">Tiger 192,4</option>
+							<option  <?php if ($Auth_TipoEncripcion=="haval128,3") echo "SELECTED"; ?> value="haval128,3">Haval 128,3</option>
+							<option  <?php if ($Auth_TipoEncripcion=="haval128,4") echo "SELECTED"; ?> value="haval128,4">Haval 128,4</option>
+							<option  <?php if ($Auth_TipoEncripcion=="haval128,5") echo "SELECTED"; ?> value="haval128,5">Haval 128,5</option>
+							<option  <?php if ($Auth_TipoEncripcion=="haval160,3") echo "SELECTED"; ?> value="haval160,3">Haval 160,3</option>
+							<option  <?php if ($Auth_TipoEncripcion=="haval160,4") echo "SELECTED"; ?> value="haval160,4">Haval 160,4</option>
+							<option  <?php if ($Auth_TipoEncripcion=="haval160,5") echo "SELECTED"; ?> value="haval160,5">Haval 160,5</option>
+							<option  <?php if ($Auth_TipoEncripcion=="haval192,3") echo "SELECTED"; ?> value="haval192,3">Haval 192,3</option>
+							<option  <?php if ($Auth_TipoEncripcion=="haval192,4") echo "SELECTED"; ?> value="haval192,4">Haval 192,4</option>
+							<option  <?php if ($Auth_TipoEncripcion=="haval192,5") echo "SELECTED"; ?> value="haval192,5">Haval 192,5</option>
+							<option  <?php if ($Auth_TipoEncripcion=="haval224,3") echo "SELECTED"; ?> value="haval224,3">Haval 224,3</option>
+							<option  <?php if ($Auth_TipoEncripcion=="haval224,4") echo "SELECTED"; ?> value="haval224,4">Haval 224,4</option>
+							<option  <?php if ($Auth_TipoEncripcion=="haval224,5") echo "SELECTED"; ?> value="haval224,5">Haval 224,5</option>
+							<option  <?php if ($Auth_TipoEncripcion=="haval256,3") echo "SELECTED"; ?> value="haval256,3">Haval 256,3</option>
+							<option  <?php if ($Auth_TipoEncripcion=="haval256,4") echo "SELECTED"; ?> value="haval256,4">Haval 256,4</option>
+							<option  <?php if ($Auth_TipoEncripcion=="haval256,5") echo "SELECTED"; ?> value="haval256,5">Haval 256,5</option>
+						</select>
+						<a href="#" title="<?php echo $MULTILANG_AyudaTitCript; ?>" name="<?php echo $MULTILANG_AyudaDesCript; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+					</td>
+				</tr>
+				<tr>
+					<td valign=top align=right>
+						<?php echo $MULTILANG_Servidor; ?>
+					</td>
+					<td valign=top>
+						<input type="text" name="Auth_LDAPServidorNEW" size="20" class="CampoTexto" value="<?php echo $Auth_LDAPServidor; ?>" >
+						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_AyudaDesLdapIP; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+					</td>
+				</tr>
+				<tr>
+					<td valign=top align=right>
+						<?php echo $MULTILANG_Puerto; ?>
+					</td>
+					<td valign=top>
+						<input type="text" name="Auth_LDAPPuertoNEW" size="5" class="CampoTexto" value="<?php echo $Auth_LDAPPuerto; ?>" >
+					</td>
+				</tr>
+				<tr>
+					<td valign=top align=right>
+						<?php echo $MULTILANG_Dominio; ?> (dc=)
+					</td>
+					<td valign=top>
+						<input type="text" name="Auth_LDAPDominioNEW" size="15" class="CampoTexto" value="<?php echo $Auth_LDAPDominio; ?>">
+						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_AyudaDesLdapDominio; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a> (<?php echo $MULTILANG_Opcional; ?>)
+					</td>
+				</tr>
+				<tr>
+					<td valign=top align=right>
+						<?php echo $MULTILANG_UO; ?> (ou=)
+					</td>
+					<td valign=top>
+						<input type="text" name="Auth_LDAPOUNEW" size="15" class="CampoTexto" value="<?php echo $Auth_LDAPOU; ?>">
+						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_AyudaDesLdapUO; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a> (<?php echo $MULTILANG_Opcional; ?>)
+					</td>
+				</tr>
+			</table>
+
 		</td>
-		<td valign=top>
-			<select  name="Auth_TipoEncripcion" class="Combos">
-				<option value="plano">Texto plano/Plain text</option>
-				<option value="md5">MD5</option>
-				<option value="md4">MD4</option>
-				<option value="md2">MD2</option>
-				<option value="sha1">SHA 1</option>
-				<option value="sha256">SHA 256</option>
-				<option value="sha384">SHA 384</option>
-				<option value="sha512">SHA 512</option>
-				<option value="crc32">CRC 32</option>
-				<option value="crc32b">CRC 32B</option>
-				<option value="adler32">Adler 32</option>
-				<option value="gost">Gost</option>
-				<option value="whirlpool">Whirlpool</option>
-				<option value="snefru">Snefru</option>
-				<option value="ripemd128">Ripemd 128</option>
-				<option value="ripemd160">Ripemd 160</option>
-				<option value="ripemd256">Ripemd 256</option>
-				<option value="ripemd320">Ripemd 320</option>
-				<option value="tiger128,3">Tiger 128,3</option>
-				<option value="tiger128,4">Tiger 128,4</option>
-				<option value="tiger160,3">Tiger 160,3</option>
-				<option value="tiger160,4">Tiger 160,4</option>
-				<option value="tiger192,3">Tiger 192,3</option>
-				<option value="tiger192,4">Tiger 192,4</option>
-				<option value="haval128,3">Haval 128,3</option>
-				<option value="haval128,4">Haval 128,4</option>
-				<option value="haval128,5">Haval 128,5</option>
-				<option value="haval160,3">Haval 160,3</option>
-				<option value="haval160,4">Haval 160,4</option>
-				<option value="haval160,5">Haval 160,5</option>
-				<option value="haval192,3">Haval 192,3</option>
-				<option value="haval192,4">Haval 192,4</option>
-				<option value="haval192,5">Haval 192,5</option>
-				<option value="haval224,3">Haval 224,3</option>
-				<option value="haval224,4">Haval 224,4</option>
-				<option value="haval224,5">Haval 224,5</option>
-				<option value="haval256,3">Haval 256,3</option>
-				<option value="haval256,4">Haval 256,4</option>
-				<option value="haval256,5">Haval 256,5</option>
-			</select>
-			<a href="#" title="<?php echo $MULTILANG_AyudaTitCript; ?>" name="<?php echo $MULTILANG_AyudaDesCript; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
-		</td>
-	</tr>
-	<tr>
-		<td valign=top align=right>
-			<font size=2 color=black>
-				LDAP: <?php echo $MULTILANG_Servidor; ?>
-			</font>
-		</td>
-		<td valign=top width="380">
-			<input type="text" name="Auth_LDAPServidor" size="20" class="CampoTexto" value="">
-			<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_AyudaDesLdapIP; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
-		</td>
-	</tr>
-	<tr>
-		<td valign=top align=right>
-			<font size=2 color=black>
-				LDAP: <?php echo $MULTILANG_Puerto; ?>
-			</font>
-		</td>
-		<td valign=top width="380">
-			<input type="text" name="Auth_LDAPPuerto" size="5" class="CampoTexto" value="389">
-		</td>
-	</tr>
-	<tr>
-		<td valign=top align=right>
-			<font size=2 color=black>
-				LDAP: <?php echo $MULTILANG_Dominio; ?> (dc=)
-			</font>
-		</td>
-		<td valign=top width="380">
-			<font size=2 color=black>
-			<input type="text" name="Auth_LDAPDominio" size="15" class="CampoTexto" value="">
-			<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_AyudaDesLdapDominio; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a> (<?php echo $MULTILANG_Opcional; ?>)
-			</font>
-		</td>
-	</tr>
-	<tr>
-		<td valign=top align=right>
-			<font size=2 color=black>
-				LDAP: <?php echo $MULTILANG_UO; ?> (ou=)
-			</font>
-		</td>
-		<td valign=top width="380">
-			<font size=2 color=black>
-			<input type="text" name="Auth_LDAPOU" size="15" class="CampoTexto" value="">
-			<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_AyudaDesLdapUO; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a> (<?php echo $MULTILANG_Opcional; ?>)
-			</font>
+		<td valign=top  align=center>
+			<b>[<?php echo $MULTILANG_AuthGoogleTitulo; ?>]</b>
+			<table cellspacing=0 width="100%" style="font-size:11px; color:000000;">
+				<tr>
+					<td valign=top align=right>
+						<?php echo $MULTILANG_AuthGoogleApp; ?>
+					</td>
+					<td valign=top>
+						<input type="text" name="APIGoogle_ApplicationNameNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_ApplicationName; ?>" >
+					</td>
+				</tr>
+				<tr>
+					<td valign=top align=right>
+						<?php echo $MULTILANG_AuthGoogleId; ?>
+					</td>
+					<td valign=top>
+						<input type="text" name="APIGoogle_ClientIdNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_ClientId; ?>" >
+					</td>
+				</tr>
+				<tr>
+					<td valign=top align=right>
+						<?php echo $MULTILANG_AuthGoogleSecret; ?>
+					</td>
+					<td valign=top>
+						<input type="text" name="APIGoogle_ClientSecretNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_ClientSecret; ?>" >
+					</td>
+				</tr>
+				<tr>
+					<td valign=top align=right>
+						<?php echo $MULTILANG_AuthGoogleURI; ?>
+					</td>
+					<td valign=top>
+						<?php
+							// Determina si la conexion actual de Practico esta encriptada
+							if(empty($_SERVER["HTTPS"]))
+								$protocolo_webservice="http://";
+							else
+								$protocolo_webservice="https://";
+							// Construye la URI de retorno para Google
+							$prefijo_webservice=$_SERVER['SERVER_NAME'].str_ireplace("ins/","",$_SERVER['PHP_SELF']);
+							$URIGoogle = $protocolo_webservice.$prefijo_webservice."?WsOn=1%26WSId=verificacion_google";
+						?>
+						<input type="text" name="APIGoogle_RedirectUriNEW" size="25" class="CampoTexto" value="<?php echo $URIGoogle; ?>" >
+						<a href="#" title="<?php echo $MULTILANG_GoogleTitURI; ?>" name="<?php echo $MULTILANG_GoogleDesURI; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+					</td>
+				</tr>
+				<tr>
+					<td valign=top align=right>
+						<?php echo $MULTILANG_AuthGoogleKey; ?>
+					</td>
+					<td valign=top>
+						<input type="text" name="APIGoogle_DeveloperKeyNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_DeveloperKey; ?>" >
+					</td>
+				</tr>
+			</table>
+
+
 		</td>
 	</tr>
 </table>
+<br>
 
 
 

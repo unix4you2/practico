@@ -1,4 +1,5 @@
 *.log
 temp/*
 practico.sqlite3
+core/configuracion.php
 
