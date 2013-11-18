@@ -40,7 +40,7 @@
 	// Verifica si se trata de un llamado por web-services
 	$ModoWSActivado=0;
 	if (@$WSOn==1)
-		{
+		{//echo "xxWsOn: |$WsOn| WSId: |$WSId| error: |$error|";
 			// Verifica si se ha recibido una llave
 			if (@$WSKey!="" || $ByPassWS)
 				{

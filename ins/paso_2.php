@@ -433,7 +433,7 @@
 								$protocolo_webservice="https://";
 							// Construye la URI de retorno para Google
 							$prefijo_webservice=$_SERVER['SERVER_NAME'].str_ireplace("ins/","",$_SERVER['PHP_SELF']);
-							$URIGoogle = $protocolo_webservice.$prefijo_webservice."?WsOn=1%26WSId=verificacion_google";
+							$URIGoogle = $protocolo_webservice.$prefijo_webservice."?WsOn=1&WSId=verificacion_google";
 						?>
 						<input type="text" name="APIGoogle_RedirectUriNEW" size="25" class="CampoTexto" value="<?php echo $URIGoogle; ?>" >
 						<a href="#" title="<?php echo $MULTILANG_GoogleTitURI; ?>" name="<?php echo $MULTILANG_GoogleDesURI; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>

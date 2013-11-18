@@ -63,7 +63,7 @@
 				?>
 			</td>
 			<td align="right" valign="bottom" width="50%">
-				<i>&copy; Codigoabierto.org</i>&nbsp;&nbsp;
+				<i>&copy; Practico.org</i>&nbsp;&nbsp;
 			</td>
 		</tr></table>
 	</td></tr>

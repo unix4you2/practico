@@ -466,7 +466,7 @@
 	$MULTILANG_InfGrafico4='Line chart (multiple series)';
 	$MULTILANG_InfGrafico5='Vertical Bars';
 	$MULTILANG_InfGrafico6='Vertical Bars (multiple series)';
-	$MULTILANG_InfGrafico6='Pie chart (only one series)';
+	$MULTILANG_InfGrafico7='Pie chart (only one series)';
 	$MULTILANG_InfActGraf='Update chart format';
 	$MULTILANG_InfAgrupa='Specifies sorting criteria and grouping';
 	$MULTILANG_InfReco3='Use only fields defined in your query.';

@@ -568,7 +568,7 @@
 													$protocolo_webservice="https://";
 												// Construye la URI de retorno para Google
 												$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
-												$URIGoogle = $protocolo_webservice.$prefijo_webservice."?WsOn=1%26WSId=verificacion_google";
+												$URIGoogle = $protocolo_webservice.$prefijo_webservice."?WSOn=1&WSId=verificacion_google";
 												if ($URIGoogle!=$APIGoogle_RedirectUri)
 													echo '<a href="#" title="'.$MULTILANG_Estado.'" name="'.$MULTILANG_GoogleWarnURI.'">'.$MULTILANG_Atencion.'<img src="img/icn_12.gif" border=0 align=absmiddle></a><br>';
 											?>

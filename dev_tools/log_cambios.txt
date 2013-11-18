@@ -16,6 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/marco_abajo.php
 core/marco_arriba.php
 core/objetos.php
 core/sesion.php
@@ -45,6 +46,8 @@ LogCambios="
  * Fixed: Generación del archivo de configuración incluye todos los comentarios desde el momento de instalación
  * Fixed: Actualización de archivos de idioma
  * Fixed: Se verifica que se cuente con el modulo de google-api de Práctico cuando se habilite ese modo de autenticación
+ * Fixed: Texto multi-idioma para seleccion de gráficos de tipo torta en la generación de informes
+ * Fixed: Enlace a sitio web oficial en pie de pagina actualizado (practico.org)
 "
 
 ########################################################################

@@ -198,43 +198,72 @@ if ($WSId=="verificacion_google")
 		// Valida error devuelto por cancelacion del usuario
 		if ($error=="access_denied")
 			{
-				mensaje($MULTILANG_ErrorTitAuth,$MULTILANG_ErrorDesAuth,'60%','../img/tango_dialog-error.png','TextosEscritorio');
-				ventana_login();
+				//mensaje($MULTILANG_ErrorTitAuth,$MULTILANG_ErrorDesAuth,'60%','../img/tango_dialog-error.png','TextosEscritorio');
+				//ventana_login();
 				@session_destroy();
+				// Determina si la conexion actual de Practico esta encriptada
+				if(empty($_SERVER["HTTPS"]))
+					$protocolo_webservice="http://";
+				else
+					$protocolo_webservice="https://";
+				// Construye la URI de retorno para Google
+				$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
+				$URIBase = $protocolo_webservice.$prefijo_webservice;
+				header("Location: $URIBase?error_titulo=$MULTILANG_ErrorTitAuth&error_descripcion=$MULTILANG_ErrorDesAuth"); // Redirecciona a la pagina inicial
 			}
-		
-		/*
 
-		require_once '../../src/Google_Client.php';
-		require_once '../../src/contrib/Google_Oauth2Service.php';
-		session_start();
+		require_once 'mod/google-api/Google_Client.php';
+		require_once 'mod/google-api/contrib/Google_Oauth2Service.php';
 
+		//session_start();
 		$client = new Google_Client();
-		$client->setApplicationName("Google UserInfo PHP Starter Application");
-		// Visit https://code.google.com/apis/console?api=plus to generate your
-		// oauth2_client_id, oauth2_client_secret, and to register your oauth2_redirect_uri.
-		// $client->setClientId('insert_your_oauth2_client_id');
-		// $client->setClientSecret('insert_your_oauth2_client_secret');
-		// $client->setRedirectUri('insert_your_redirect_uri');
-		// $client->setDeveloperKey('insert_your_developer_key');
+		$client->setApplicationName($APIGoogle_ApplicationName);
+		$client->setClientId($APIGoogle_ClientId);
+		$client->setClientSecret($APIGoogle_ClientSecret);
+		$client->setRedirectUri($APIGoogle_RedirectUri);
+		$client->setDeveloperKey($APIGoogle_DeveloperKey); //insert_your_simple_api_key
 		$oauth2 = new Google_Oauth2Service($client);
 
-		if (isset($_GET['code'])) {
-		  $client->authenticate($_GET['code']);
-		  $_SESSION['token'] = $client->getAccessToken();
-		  $redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-		  header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
-		  return;
-		}
+		//Verifica si hay un codigo de conexion devuelto por Google
+		if (isset($_GET['code']))
+			{
+				echo $WSId;
+				$user = $oauth2->userinfo->get();
+				echo $user;
+				$client->authenticate($_GET['code']);
+				echo $WSId;
+				$_SESSION['token'] = $client->getAccessToken();
+				echo $WSId;
+				$redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+				
+				
+				echo $WSId;
+		  $user = $oauth2->userinfo->get();
 
-		if (isset($_SESSION['token'])) {
-		 $client->setAccessToken($_SESSION['token']);
-		}
+		  // These fields are currently filtered through the PHP sanitize filters.
+		  // See http://www.php.net/manual/en/filter.filters.sanitize.php
+		  $email = filter_var($user['email'], FILTER_SANITIZE_EMAIL);
+		  $img = filter_var($user['picture'], FILTER_VALIDATE_URL);
+		  $personMarkup = "$email<div><img src='$img?sz=50'></div>";
+		  
+		  exit;				
+				
+				
+				header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
+				return;
+			}
 
-		if (isset($_REQUEST['logout'])) {
-		  unset($_SESSION['token']);
-		  $client->revokeToken();
-		}
+		if (isset($_SESSION['token']))
+			{
+				$client->setAccessToken($_SESSION['token']);
+			}
+
+		// Determina si quiere cerrar la sesion
+		if (isset($_REQUEST['logout']))
+			{
+				unset($_SESSION['token']);
+				$client->revokeToken();
+			}
 
 		if ($client->getAccessToken()) {
 		  $user = $oauth2->userinfo->get();
@@ -244,6 +273,7 @@ if ($WSId=="verificacion_google")
 		  $email = filter_var($user['email'], FILTER_SANITIZE_EMAIL);
 		  $img = filter_var($user['picture'], FILTER_VALIDATE_URL);
 		  $personMarkup = "$email<div><img src='$img?sz=50'></div>";
+echo $email;
 
 		  // The access token may have been updated lazily.
 		  $_SESSION['token'] = $client->getAccessToken();
@@ -266,85 +296,10 @@ if ($WSId=="verificacion_google")
 		   print "<a class='logout' href='?logout'>Logout</a>";
 		  }
 		?>
-		</body></html>
+		</body>
+		AAA
+		</html>
 		<?php
-		
-		 */
+
 	}
 
-
-/* ################################################################## */
-/* ################################################################## */
-/*
-	Function: error_autenticacion_google
-	Presenta mensaje de error cuando el proceso de autenticacion con google no es satisfactorio
-
-	Ver tambien:
-		<Iniciar_login> | <autenticacion_google>
-*/
-if ($WSId=="error_autenticacion_google") 
-	{
-		require_once '../../src/Google_Client.php';
-		require_once '../../src/contrib/Google_Oauth2Service.php';
-		session_start();
-
-		$client = new Google_Client();
-		$client->setApplicationName("Google UserInfo PHP Starter Application");
-		// Visit https://code.google.com/apis/console?api=plus to generate your
-		// oauth2_client_id, oauth2_client_secret, and to register your oauth2_redirect_uri.
-		// $client->setClientId('insert_your_oauth2_client_id');
-		// $client->setClientSecret('insert_your_oauth2_client_secret');
-		// $client->setRedirectUri('insert_your_redirect_uri');
-		// $client->setDeveloperKey('insert_your_developer_key');
-		$oauth2 = new Google_Oauth2Service($client);
-
-		if (isset($_GET['code'])) {
-		  $client->authenticate($_GET['code']);
-		  $_SESSION['token'] = $client->getAccessToken();
-		  $redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-		  header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
-		  return;
-		}
-
-		if (isset($_SESSION['token'])) {
-		 $client->setAccessToken($_SESSION['token']);
-		}
-
-		if (isset($_REQUEST['logout'])) {
-		  unset($_SESSION['token']);
-		  $client->revokeToken();
-		}
-
-		if ($client->getAccessToken()) {
-		  $user = $oauth2->userinfo->get();
-
-		  // These fields are currently filtered through the PHP sanitize filters.
-		  // See http://www.php.net/manual/en/filter.filters.sanitize.php
-		  $email = filter_var($user['email'], FILTER_SANITIZE_EMAIL);
-		  $img = filter_var($user['picture'], FILTER_VALIDATE_URL);
-		  $personMarkup = "$email<div><img src='$img?sz=50'></div>";
-
-		  // The access token may have been updated lazily.
-		  $_SESSION['token'] = $client->getAccessToken();
-		} else {
-		  $authUrl = $client->createAuthUrl();
-		}
-		?>
-		<!doctype html>
-		<html>
-		<head><meta charset="utf-8"></head>
-		<body>
-		<header><h1>Google UserInfo Sample App</h1></header>
-		<?php if(isset($personMarkup)): ?>
-		<?php print $personMarkup ?>
-		<?php endif ?>
-		<?php
-		  if(isset($authUrl)) {
-			print "<a class='login' href='$authUrl'>Connect Me!</a>";
-		  } else {
-		   print "<a class='logout' href='?logout'>Logout</a>";
-		  }
-		?>
-		</body></html>
-		<?php
-	}
