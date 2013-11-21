@@ -42,6 +42,7 @@ LogCambios="
  * Added: Posibilidad de inicio de sesion mediante Google.  Solo inicio de sesion, los permisos continuan independientes en la plataforma para el usuario con el mismo login de Google (OAuth 2.0)
  * Added: Asistente de instalación y panel de configuración soportan ahora los parámetros de autenticación por Google
  * Added: Cálculo automático del URI para autenticación por Google
+ * Added: Inicio de sesion con OAuth para 22 proveedores diferentes:  Google, Facebook, LinkedIn, Instagram, Dropbox, Microsoft (Live), Flickr, Twitter, Foursquare, XING, Salesforce, Bitbucket, Yahoo, Box, Disqus, Eventful, SurveyMonkey, RightSignature, Fitbit, Scoop.it, Tumblr, StockTwits
  * Fixed: Mensajes de validación para el proceso de autenticación cuando la función file_get_contents() no opera correctamente
  * Fixed: Solucionado posible XSS al limpiar la variable accion durante cada ejecución.  Gracias a la empresa Secunia por su análisis.
  * Fixed: Inclusión de logo de google para no depender de instalaciones sin conexión a Internet
