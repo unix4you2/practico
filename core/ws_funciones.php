@@ -477,7 +477,7 @@ if ($WSId=="autenticacion_oauth")
 			}
 
 		// Eventful
-		if ($OAuth_servicio=='Eventful')	
+		if ($OAuth_servicio=='Eventful')
 			{
 				$OAuth_URIRedireccion=$APIEventful_RedirectUri;
 				$OAuth_IDCliente=$APIEventful_ClientId;
@@ -490,7 +490,7 @@ if ($WSId=="autenticacion_oauth")
 			}
 
 		// Fitbit
-		if ($OAuth_servicio=='Fitbit')	
+		if ($OAuth_servicio=='Fitbit')
 			{
 				$OAuth_URIRedireccion=$APIFitbit_RedirectUri;
 				$OAuth_IDCliente=$APIFitbit_ClientId;
@@ -501,7 +501,7 @@ if ($WSId=="autenticacion_oauth")
 			}
 
 		// RightSignature
-		if ($OAuth_servicio=='RightSignature')	
+		if ($OAuth_servicio=='RightSignature')
 			{
 				$OAuth_URIRedireccion=$APIRightSignature_RedirectUri;
 				$OAuth_IDCliente=$APIRightSignature_ClientId;
