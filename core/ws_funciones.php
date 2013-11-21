@@ -129,177 +129,796 @@ if ($WSId=="verificar_credenciales")
 		echo $salida_xml;
 	}
 
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: autenticacion_google
-	Realiza proceso de llamado a la API de autenticacion de Google para permitir el acceso del usuario
+	Function: oauth_crear_usuario
+	Agrega usuarios de manera automatica cuando son autenticados por OAuth
+
+	Ver tambien:
+		<autenticacion_oauth> | <ejecutar_login_oauth>
+*/
+function oauth_crear_usuario($user,$OAuth_servicio)
+	{
+		global $TablasCore,$LlaveDePaso,$fecha_operacion,$ListaCamposSinID_usuario;
+		// Inserta datos del usuario
+		$clavemd5=MD5(TextoAleatorio(20));
+		$pasomd5=MD5($LlaveDePaso);
+		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES ('".$user->email."','$clavemd5','".$user->name."','OAuth:".$OAuth_servicio."',1,'4','".$user->email."','$fecha_operacion','$pasomd5')");
+		auditar("OAuth:Agregado usuario ".$user->email." para ".$OAuth_servicio);
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: ejecutar_login_oauth
+	Recibe los parametros necesarios para hacer el registro de un usuario en la plataforma durante su ingreso cuando se usa oauth
+	
+	Variables de entrada:
+
+		accion - Accion a ser ejectudada, de la que se desea buscar permiso heredado por otra
 
 	Salida:
-		Redireccion del usuario a la pagina de login de google, quien a su vez redireccionara al usuario segun el resultado
+		Variables de sesion registradas
+		Redireccion del usuario al menu
+*/
+	function ejecutar_login_oauth($user,$OAuth_servicio)
+		{
+
+/*
+		echo '<h1>', HtmlSpecialChars($user->name), 
+			' you have logged in successfully with Facebook!</h1>';
+		echo '<pre>', HtmlSpecialChars(print_r($user, 1)), '</pre>';
+*/
+
+
+/*
+	VARIABLES EN GOOGLE
+    [id] => 112257217240385236034
+    [email] => application.connect@gmail.com
+    [verified_email] => 1
+    [name] => Juan G
+    [given_name] => Juan
+    [family_name] => G
+    [link] => https://plus.google.com/112257217240385236034
+    [picture] => https://lh3.googleusercontent.com/-05k3xTsACK4/AAAAAAAAAAI/AAAAAAAAFaw/pjzUyI6LUrU/photo.jpg
+    [gender] => male
+    [locale] => es
+*/
+			global $TablasCore,$uid,$ListaCamposSinID_parametros,$resultado_webservice,$ListaCamposSinID_parametros,$ListaCamposSinID_auditoria,$direccion_auditoria,$hora_operacion,$fecha_operacion,$ArchivoCORE;
+
+			// Busca datos del usuario Practico, segun tipo de servicio OAuth para tener configuraciones de permisos y parametros propios de la herramienta
+			$consulta_busqueda_usuario_oauth="SELECT login, nombre, clave, descripcion, nivel, correo, llave_paso FROM ".$TablasCore."usuario WHERE login='".$user->email."' AND descripcion LIKE '%OAuth:$OAuth_servicio%' ";
+			$resultado_usuario=ejecutar_sql($consulta_busqueda_usuario_oauth);
+			$registro = $resultado_usuario->fetch();
+
+			// Agrega el usuario cuando es primer login desde el servicio
+			if ($registro["login"]=="")
+				{
+					oauth_crear_usuario($user,$OAuth_servicio);
+					// Actualiza el registro desde nueva consulta
+					$resultado_usuario=ejecutar_sql($consulta_busqueda_usuario_oauth);
+					$registro = $resultado_usuario->fetch();
+				}
+
+			// Hace la copia opcional de permisos desde usuario plantilla
+			// ############ PENDIENTE ##################
+			// ############ PENDIENTE ##################
+			// ############ PENDIENTE ##################
+
+			// Se buscan datos de la aplicacion
+			$consulta_parametros=ejecutar_sql("SELECT id,".$ListaCamposSinID_parametros." FROM ".$TablasCore."parametros");
+			$registro_parametros = $consulta_parametros->fetch();
+
+			// Actualiza las variables de sesion con el registro
+			$Sesion_abierta=1;
+			// Actualiza booleana de ingreso
+			$clave_correcta=1;
+			// Registro de variables en la sesion
+			@session_start();
+			if (!isset($_SESSION["Login_usuario"])) $_SESSION["Login_usuario"]=(string)$registro["login"];
+			if (!isset($_SESSION["Nombre_usuario"])) $_SESSION["Nombre_usuario"]=(string)$registro["nombre"];
+			if (!isset($_SESSION["Descripcion_usuario"])) $_SESSION["Descripcion_usuario"]=(string)$registro["descripcion"];
+			if (!isset($_SESSION["Nivel_usuario"])) $_SESSION["Nivel_usuario"]=(string)$registro["nivel"];
+			if (!isset($_SESSION["Correo_usuario"])) $_SESSION["Correo_usuario"]=(string)$registro["correo"];
+			if (!isset($_SESSION["Clave_usuario"])) $_SESSION["Clave_usuario"]=$registro["clave"];
+			if (!isset($_SESSION["LlaveDePasoUsuario"])) $_SESSION["LlaveDePasoUsuario"]=$registro["llave_paso"];
+			if (!isset($_SESSION["Sesion_abierta"])) $_SESSION["Sesion_abierta"]=$Sesion_abierta;
+			if (!isset($_SESSION["clave_correcta"])) $_SESSION["clave_correcta"]=$clave_correcta;
+			if (!isset($_SESSION["Nombre_Empresa_Corto"])) $_SESSION["Nombre_Empresa_Corto"]=$registro_parametros["nombre_empresa_corto"];
+			if (!isset($_SESSION["Nombre_Aplicacion"])) $_SESSION["Nombre_Aplicacion"]=$registro_parametros["nombre_aplicacion"];
+			if (!isset($_SESSION["Version_Aplicacion"])) $_SESSION["Version_Aplicacion"]=$registro_parametros["version"];
+
+			// Lleva a auditoria con query manual por la falta de $Login_Usuario
+			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('".$registro["login"]."','Ingresa al sistema desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");
+			// Actualiza fecha del ultimo ingreso para el usuario
+			ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso='$fecha_operacion' WHERE login='".$registro["login"]."'");
+
+			// Redirecciona al menu
+			header("Location: index.php");
+			exit();
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: error_oauth
+	Presenta mensajes de error durante la autenticacion
+
+	Ver tambien:
+		<autenticacion_oauth> | <aprobar_oauth>
+*/
+function error_oauth($client,$OAuth_servicio)
+	{
+		global $MULTILANG_WSErrTitulo;
+		mensaje($MULTILANG_WSErrTitulo,'OAuth '.$OAuth_servicio.' error: '.HtmlSpecialChars($client->error),'','icono_error.png','TextosEscritorio');	
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: autenticacion_oauth
+	Realiza proceso de autenticacion hacia servidores OAuth 1.0 y 2.0
+
+	Variables de entrada:
+		* OAuth_solicitado:  Indica el tipo de servicio OAuth que debe ser llamado.
+		* Permite por ahora los valores (22): Google, Facebook, LinkedIn, Instagram, Dropbox, Microsoft (Live), Flickr, Twitter, Foursquare, XING, Salesforce, Bitbucket, Yahoo, Box, Disqus, Eventful, SurveyMonkey, RightSignature, Fitbit, Scoop.it, Tumblr, StockTwits
+
+	Salida:
+		Redireccion del usuario a la pagina de login del proveedor de autenticacion , quien a su vez redireccionara al usuario segun el resultado
 
 	Ver tambien:
 		<Iniciar_login>
 */
-if ($WSId=="autenticacion_google") 
+if ($WSId=="autenticacion_oauth") 
 	{
-		require_once 'mod/google-api/Google_Client.php';
-		require_once 'mod/google-api/contrib/Google_PlusService.php';
+		require('inc/http/http.php');			// Incluye funciones del cliente HTTP para conexiones desde PHP
+		require('inc/oauth/oauth_client.php');	// Incluye las librerias del modulo OAuth 1.0 y 2.0
 
-		// Set your cached access token. Remember to replace $_SESSION with a
-		// real database or memcached.
-		session_start();
+		// Inicia la conexion correspondiente
+		$client = new oauth_client_class;
 
-		$client = new Google_Client();
-		$client->setApplicationName($APIGoogle_ApplicationName);
-		// Visit https://code.google.com/apis/console?api=plus to generate your
-		// client id, client secret, and to register your redirect uri.
-		$client->setClientId($APIGoogle_ClientId);
-		$client->setClientSecret($APIGoogle_ClientSecret);
-		$client->setRedirectUri($APIGoogle_RedirectUri);
-		$client->setDeveloperKey($APIGoogle_DeveloperKey); //insert_your_simple_api_key
-		$plus = new Google_PlusService($client);
+		// Define el servicio a llamar segun el recibido
+		// $OAuth_solicitado='Google'; // Para predeterminar uno mientras se prueba
+		$OAuth_servicio=$OAuthSrv;
+		
+		// Google
+		if ($OAuth_servicio=='Google')	
+			{
+				$OAuth_URIRedireccion=$APIGoogle_RedirectUri;
+				$OAuth_IDCliente=$APIGoogle_ClientId;
+				$OAuth_SecretoCliente=$APIGoogle_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Google http://code.google.com/apis/console y cree un nuevo ID de cliente, Secreto y URI de redireccion.";
+				$OAuth_Alcance='https://www.googleapis.com/auth/userinfo.email '.'https://www.googleapis.com/auth/userinfo.profile';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+				$OAuth_Offline=false;
+			}
 
-		if (isset($_GET['code'])) {
-		  $client->authenticate();
-		  $_SESSION['token'] = $client->getAccessToken();
-		  $redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-		  header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
-		}
+		// Facebook
+		if ($OAuth_servicio=='Facebook')	
+			{
+				$OAuth_URIRedireccion=$APIFacebook_RedirectUri;
+				$OAuth_IDCliente=$APIFacebook_ClientId;
+				$OAuth_SecretoCliente=$APIFacebook_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Facebook https://developers.facebook.com/apps y cree un nuevo ID de cliente, Secreto y URI de redireccion.";
+				$OAuth_Alcance='email';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
 
-		if (isset($_SESSION['token'])) {
-		  $client->setAccessToken($_SESSION['token']);
-		}
+		// LinkedIn
+		if ($OAuth_servicio=='LinkedIn')	
+			{
+				$OAuth_URIRedireccion=$APILinkedIn_RedirectUri;
+				$OAuth_IDCliente=$APILinkedIn_ClientId;
+				$OAuth_SecretoCliente=$APILinkedIn_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de LinkedIn https://www.linkedin.com/secure/developer?newapp= y cree un nuevo ID de cliente, Secreto y URI de redireccion.";
+				$OAuth_Alcance='r_fullprofile r_emailaddress';
+				$OAuth_Depuracion=1;
+				$OAuth_DepuracionHttp=1;
+			}
 
-		if ($client->getAccessToken()) {
-		  $activities = $plus->activities->listActivities('me', 'public');
-		  print 'Sus actividades: <pre>' . print_r($activities, true) . '</pre>';
+		// Instagram
+		if ($OAuth_servicio=='Instagram')	
+			{
+				$OAuth_URIRedireccion=$APIInstagram_RedirectUri;
+				$OAuth_IDCliente=$APIInstagram_ClientId;
+				$OAuth_SecretoCliente=$APIInstagram_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Instagram http://instagram.com/developer/register/ y cree un nuevo ID de cliente, Secreto y URI de redireccion.";
+				$OAuth_Alcance='basic';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
 
-		  // We're not done yet. Remember to update the cached access token.
-		  // Remember to replace $_SESSION with a real database or memcached.
-		  $_SESSION['token'] = $client->getAccessToken();
-		} else {
-		  $authUrl = $client->createAuthUrl();
-		  header("Location: $authUrl"); // Redirecciona a la autenticacion de Google
-		}
+		// Dropbox
+		if ($OAuth_servicio=='Dropbox')	
+			{
+				$OAuth_URIRedireccion=$APIDropbox_RedirectUri;
+				$OAuth_IDCliente=$APIDropbox_ClientId;
+				$OAuth_SecretoCliente=$APIDropbox_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Dropbox https://www.dropbox.com/developers/apps y cree un nuevo ID de cliente, Secreto y URI de redireccion.";
+				$OAuth_Depuracion=1;
+				$OAuth_DepuracionHttp=1;
+			}
+
+		// Microsoft
+		if ($OAuth_servicio=='Microsoft')	
+			{
+				$OAuth_URIRedireccion=$APIMicrosoft_RedirectUri;
+				$OAuth_IDCliente=$APIMicrosoft_ClientId;
+				$OAuth_SecretoCliente=$APIMicrosoft_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Microsoft https://manage.dev.live.com/AddApplication.aspx y cree un nuevo ID de cliente, Secreto y URI de redireccion.";
+				$OAuth_Alcance='wl.basic wl.emails';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Flickr
+		if ($OAuth_servicio=='Flickr')	
+			{
+				$OAuth_URIRedireccion=$APIFlickr_RedirectUri;
+				$OAuth_IDCliente=$APIFlickr_ClientId;
+				$OAuth_SecretoCliente=$APIFlickr_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Flickr http://www.flickr.com/services/apps/create/ y cree un nuevo ID de cliente, Secreto y URI de redireccion.";
+				$OAuth_Alcance='read'; // 'read', 'write' or 'delete'
+				$OAuth_Depuracion=0;
+				$OAuth_DepuracionHttp=1;
+			}
+
+		// Twitter
+		if ($OAuth_servicio=='Twitter')	
+			{
+				$OAuth_URIRedireccion=$APITwitter_RedirectUri;
+				$OAuth_IDCliente=$APITwitter_ClientId;
+				$OAuth_SecretoCliente=$APITwitter_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Twitter https://dev.twitter.com/apps/new y cree un nuevo ID de cliente, Secreto y URI de redireccion.";
+				$OAuth_Depuracion=1;
+				$OAuth_DepuracionHttp=1;
+			}
+
+		// Foursquare
+		if ($OAuth_servicio=='Foursquare')	
+			{
+				$OAuth_URIRedireccion=$APIFoursquare_RedirectUri;
+				$OAuth_IDCliente=$APIFoursquare_ClientId;
+				$OAuth_SecretoCliente=$APIFoursquare_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Foursquare https://foursquare.com/developers/apps y cree un nuevo ID de cliente, Secreto y URI de redireccion.";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=true;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// XING
+		if ($OAuth_servicio=='XING')	
+			{
+				$OAuth_URIRedireccion=$APIXING_RedirectUri;
+				$OAuth_IDCliente=$APIXING_ClientId;
+				$OAuth_SecretoCliente=$APIXING_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de XING https://dev.xing.com/applications y cree un nuevo ID de cliente, Secreto y URI de redireccion.";
+				$OAuth_Depuracion=0;
+				$OAuth_DepuracionHttp=1;
+			}
+
+		// Salesforce
+		if ($OAuth_servicio=='Salesforce')	
+			{
+				$OAuth_URIRedireccion=$APISalesforce_RedirectUri;
+				$OAuth_IDCliente=$APISalesforce_ClientId;
+				$OAuth_SecretoCliente=$APISalesforce_ClientSecret;
+				$OAuth_Mensaje="Vaya Salesforce, ingrese a la cuenta.  Clic en Setup, Clic en Develop, Clic en Remote Access y cree una nueva aplicacion para obtener el ID, Secreto y URI.";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=true;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Bitbucket
+		if ($OAuth_servicio=='Bitbucket')	
+			{
+				$OAuth_URIRedireccion=$APIBitbucket_RedirectUri;
+				$OAuth_IDCliente=$APIBitbucket_ClientId;
+				$OAuth_SecretoCliente=$APIBitbucket_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Bitbucket https://bitbucket.org/account/ clic en Integrated Applications, luego Add Consumer para obtener el ID, Secreto y URI";
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Yahoo
+		if ($OAuth_servicio=='Yahoo')	
+			{
+				$OAuth_URIRedireccion=$APIYahoo_RedirectUri;
+				$OAuth_IDCliente=$APIYahoo_ClientId;
+				$OAuth_SecretoCliente=$APIYahoo_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Yahoo https://developer.apps.yahoo.com/projects/ y cree un proyecto para obtener el ID, Secreto y URI";
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Box
+		if ($OAuth_servicio=='Box')	
+			{
+				$OAuth_URIRedireccion=$APIBox_RedirectUri;
+				$OAuth_IDCliente=$APIBox_ClientId;
+				$OAuth_SecretoCliente=$APIBox_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Box https://www.box.com/developers/services y cree una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=true;
+				$OAuth_DepuracionHttp=true;
+				$OAuth_Offline=false;
+			}
+
+		// Disqus
+		if ($OAuth_servicio=='Disqus')	
+			{
+				$OAuth_URIRedireccion=$APIDisqus_RedirectUri;
+				$OAuth_IDCliente=$APIDisqus_ClientId;
+				$OAuth_SecretoCliente=$APIDisqus_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Disqus http://disqus.com/api/applications/ y en la pestana API Access obtenga el ID, Secreto y URI";
+				$OAuth_Alcance='read,write';
+				$OAuth_Depuracion=true;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// SurveyMonkey
+		if ($OAuth_servicio=='SurveyMonkey')	
+			{
+				$OAuth_URIRedireccion=$APISurveyMonkey_RedirectUri;
+				$OAuth_IDCliente=$APISurveyMonkey_ClientId;
+				$OAuth_SecretoCliente=$APISurveyMonkey_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de SurveyMonkey https://developer.surveymonkey.com/apps/register y en la pestana API Access obtenga el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Eventful
+		if ($OAuth_servicio=='Eventful')	
+			{
+				$OAuth_URIRedireccion=$APIEventful_RedirectUri;
+				$OAuth_IDCliente=$APIEventful_ClientId;
+				$OAuth_SecretoCliente=$APIEventful_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Eventful http://api.eventful.com/keys/new y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Depuracion=1;
+				$OAuth_DepuracionHttp=1;
+				$application_key = ''; // Llave de la aplicacion
+				$account = ''; // Cuenta usada, ej: mlemos
+			}
+
+		// Fitbit
+		if ($OAuth_servicio=='Fitbit')	
+			{
+				$OAuth_URIRedireccion=$APIFitbit_RedirectUri;
+				$OAuth_IDCliente=$APIFitbit_ClientId;
+				$OAuth_SecretoCliente=$APIFitbit_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Fitbit https://dev.fitbit.com/apps/new y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Depuracion=1;
+				$OAuth_DepuracionHttp=1;
+			}
+
+		// RightSignature
+		if ($OAuth_servicio=='RightSignature')	
+			{
+				$OAuth_URIRedireccion=$APIRightSignature_RedirectUri;
+				$OAuth_IDCliente=$APIRightSignature_ClientId;
+				$OAuth_SecretoCliente=$APIRightSignature_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de RightSignature https://rightsignature.com/oauth_clients/new y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Depuracion=0;
+				$OAuth_DepuracionHttp=1;
+			}
+
+		// Scoop.it
+		if ($OAuth_servicio=='Scoop.it')	
+			{
+				$OAuth_URIRedireccion=$APIScoopit_RedirectUri;
+				$OAuth_IDCliente=$APIScoopit_ClientId;
+				$OAuth_SecretoCliente=$APIScoopit_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Scoop.it https://www.scoopit.com/developers/apps y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Depuracion=0;
+				$OAuth_DepuracionHttp=1;
+			}
+
+		// Tumblr
+		if ($OAuth_servicio=='Tumblr')	
+			{
+				$OAuth_URIRedireccion=$APITumblr_RedirectUri;
+				$OAuth_IDCliente=$APITumblr_ClientId;
+				$OAuth_SecretoCliente=$APITumblr_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Tumblr http://www.tumblr.com/oauth/apps y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Depuracion=1;
+				$OAuth_DepuracionHttp=1;
+			}
+
+		// StockTwits
+		if ($OAuth_servicio=='StockTwits')	
+			{
+				$OAuth_URIRedireccion=$APIStockTwits_RedirectUri;
+				$OAuth_IDCliente=$APIStockTwits_ClientId;
+				$OAuth_SecretoCliente=$APIStockTwits_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de StockTwits http://stocktwits.com/developers/apps/new y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='read,watch_lists,publish_messages,publish_watch_lists,direct_messages,follow_users,follow_stocks';
+				$OAuth_Depuracion=true;
+				$OAuth_DepuracionHttp=true;
+			}
+
+
+		// Define parametros del cliente segun el servicio detectado
+		$client->server = $OAuth_servicio;
+		// Establecerlo solo si se necesita llamar al API sin el usuario presente y el token puede expirar
+		if ($OAuth_Offline==true)
+			$client->offline = $OAuth_Offline;
+		$client->debug = $OAuth_Depuracion;
+		$client->debug_http = $OAuth_DepuracionHttp;
+		$client->redirect_uri = $OAuth_URIRedireccion;
+		$client->client_id = $OAuth_IDCliente; $application_line = __LINE__;
+		$client->client_secret = $OAuth_SecretoCliente;
+
+		// Si no se dan los parametros basicos presenta error
+		if(strlen($client->client_id) == 0 || strlen($client->client_secret) == 0)
+			die($OAuth_Mensaje);
+
+		// Define permisos de la API (si es necesario)
+		if ($OAuth_Alcance!="")
+			$client->scope = $OAuth_Alcance;
+		
+		
+		
+		if(($success = $client->Initialize()))
+			{
+				if(($success = $client->Process()))
+				{
+					
+
+
+
+
+
+					// Google
+					if ($OAuth_servicio=='Google')
+						{
+							if(strlen($client->authorization_error))
+							{
+								$client->error = $client->authorization_error;
+								$success = false;
+							}
+							elseif(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'https://www.googleapis.com/oauth2/v1/userinfo',
+									'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Facebook
+					if ($OAuth_servicio=='Facebook')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'https://graph.facebook.com/me', 
+									'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// LinkedIn
+					if ($OAuth_servicio=='LinkedIn')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://api.linkedin.com/v1/people/~', 
+									'GET', array(
+										'format'=>'json'
+									), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Instagram
+					if ($OAuth_servicio=='Instagram')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'https://api.instagram.com/v1/users/self/', 
+									'GET', array(), array('FailOnAccessError'=>true), $user);
+								if(!$success)
+								{
+									$client->ResetAccessToken();
+								}
+							}
+						}
+
+					// Dropbox
+					if ($OAuth_servicio=='Dropbox')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'https://api.dropbox.com/1/account/info', 
+									'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Microsoft
+					if ($OAuth_servicio=='Microsoft')
+						{
+							if(strlen($client->authorization_error))
+							{
+								$client->error = $client->authorization_error;
+								$success = false;
+							}
+							elseif(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'https://apis.live.net/v5.0/me',
+									'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Flickr
+					if ($OAuth_servicio=='Flickr')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://api.flickr.com/services/rest/', 
+									'GET', array(
+										'method'=>'flickr.test.login',
+										'format'=>'json',
+										'nojsoncallback'=>'1'
+									), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Twitter
+					if ($OAuth_servicio=='Twitter')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'https://api.twitter.com/1.1/account/verify_credentials.json', 
+									'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Foursquare
+					if ($OAuth_servicio=='Foursquare')
+						{
+							if(strlen($client->authorization_error))
+							{
+								$client->error = $client->authorization_error;
+								$success = false;
+							}
+							elseif(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'https://api.foursquare.com/v2/users/self?v=20131013',
+									'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// XING
+					if ($OAuth_servicio=='XING')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'https://api.xing.com/v1/users/me', 
+									'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Salesforce
+					if ($OAuth_servicio=='Salesforce')
+						{
+							if(strlen($client->authorization_error))
+							{
+								$client->error = $client->authorization_error;
+								$success = false;
+							}
+							elseif(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									$client->access_token_response['id'],
+									'GET', array(), array(
+										'FailOnAccessError'=>true,
+										'FollowRedirection'=>true
+									), $user);
+							}
+						}
+
+					// Bitbucket
+					if ($OAuth_servicio=='Bitbucket')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'https://api.bitbucket.org/1.0/user', 
+									'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Yahoo
+					if ($OAuth_servicio=='Yahoo')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://query.yahooapis.com/v1/yql', 
+									'GET', array(
+										'q'=>'select * from social.profile where guid=me',
+										'format'=>'json'
+									), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Box
+					if ($OAuth_servicio=='Box')
+						{
+							if(strlen($client->authorization_error))
+							{
+								$client->error = $client->authorization_error;
+								$success = false;
+							}
+							elseif(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'https://api.box.com/2.0/users/me',
+									'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Disqus
+					if ($OAuth_servicio=='Disqus')
+						{
+							if(strlen($client->authorization_error))
+							{
+								$client->error = $client->authorization_error;
+								$success = false;
+							}
+							elseif(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'https://disqus.com/api/3.0/users/details.json?api_key='.UrlEncode($client->client_id),
+									'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// SurveyMonkey
+					if ($OAuth_servicio=='SurveyMonkey')
+						{
+							if(strlen($client->authorization_error))
+							{
+								$client->error = $client->authorization_error;
+								$success = false;
+							}
+							elseif(strlen($client->access_token))
+							{
+								$parameters = new stdClass;
+								$success = $client->CallAPI(
+									'https://api.surveymonkey.net/v2/surveys/get_survey_list?api_key='.$client->api_key,
+									'POST', $parameters, array('FailOnAccessError'=>true, 'RequestContentType'=>'application/json'), $surveys);
+							}
+						}
+
+					// Eventful
+					if ($OAuth_servicio=='Eventful')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://api.evdb.com/rest/users/get', 
+									'GET', array(
+										'id'=>$account,
+										'app_key'=>$application_key
+									), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Fitbit
+					if ($OAuth_servicio=='Fitbit')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'https://api.fitbit.com/1/user/-/profile.json', 
+									'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// RightSignature
+					if ($OAuth_servicio=='RightSignature')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'https://rightsignature.com/api/users/user_details.json', 
+									'GET', array(), array(
+										'FailOnAccessError'=>true,
+										'ResponseContentType'=>'application/json'
+									), $user);
+							}
+						}
+
+					// Scoop.it
+					if ($OAuth_servicio=='Scoop.it')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://www.scoop.it/api/1/profile', 
+									'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+		
+					// Tumblr
+					if ($OAuth_servicio=='Tumblr')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://api.tumblr.com/v2/user/info', 
+									'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// StockTwits
+					if ($OAuth_servicio=='StockTwits')
+						{
+							if(strlen($client->authorization_error))
+							{
+								$client->error = $client->authorization_error;
+								$success = false;
+							}
+							elseif(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'https://api.stocktwits.com/api/2/account/verify.json',
+									'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+
+				}
+				$success = $client->Finalize($success);
+			}
+
+
+		if($client->exit)
+			exit;
+
+		// Yahoo
+			{
+				if(strlen($client->authorization_error))
+				{
+					$client->error = $client->authorization_error;
+					$success = false;
+				}
+			}
+
+
+		// LinkedIn
+			{
+				if(strlen($client->authorization_error))
+					{
+						$client->error = $client->authorization_error;
+						$success = false;
+					}
+			}
+
+		// Twitter
+			{
+				$client->ResetAccessToken();
+			}
+
+
+		// Si se logra la autenticacion presenta resultados
+		if($success)
+			ejecutar_login_oauth($user,$OAuth_servicio);
+		else
+			error_oauth($client,$OAuth_servicio);
 	}
-
-/* ################################################################## */
-/* ################################################################## */
-/*
-	Function: verificacion_google
-	Realiza proceso de llamado a la API de autenticacion de Google posterior a la redireccion para permitir capturar los datos del usuario
-
-	Ver tambien:
-		<Iniciar_login> | <autenticacion_google>
-*/
-if ($WSId=="verificacion_google") 
-	{
-		// Valida error devuelto por cancelacion del usuario
-		if ($error=="access_denied")
-			{
-				//mensaje($MULTILANG_ErrorTitAuth,$MULTILANG_ErrorDesAuth,'60%','../img/tango_dialog-error.png','TextosEscritorio');
-				//ventana_login();
-				@session_destroy();
-				// Determina si la conexion actual de Practico esta encriptada
-				if(empty($_SERVER["HTTPS"]))
-					$protocolo_webservice="http://";
-				else
-					$protocolo_webservice="https://";
-				// Construye la URI de retorno para Google
-				$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
-				$URIBase = $protocolo_webservice.$prefijo_webservice;
-				header("Location: $URIBase?error_titulo=$MULTILANG_ErrorTitAuth&error_descripcion=$MULTILANG_ErrorDesAuth"); // Redirecciona a la pagina inicial
-			}
-
-		require_once 'mod/google-api/Google_Client.php';
-		require_once 'mod/google-api/contrib/Google_Oauth2Service.php';
-
-		//session_start();
-		$client = new Google_Client();
-		$client->setApplicationName($APIGoogle_ApplicationName);
-		$client->setClientId($APIGoogle_ClientId);
-		$client->setClientSecret($APIGoogle_ClientSecret);
-		$client->setRedirectUri($APIGoogle_RedirectUri);
-		$client->setDeveloperKey($APIGoogle_DeveloperKey); //insert_your_simple_api_key
-		$oauth2 = new Google_Oauth2Service($client);
-
-		//Verifica si hay un codigo de conexion devuelto por Google
-		if (isset($_GET['code']))
-			{
-				echo $WSId;
-				$user = $oauth2->userinfo->get();
-				echo $user;
-				$client->authenticate($_GET['code']);
-				echo $WSId;
-				$_SESSION['token'] = $client->getAccessToken();
-				echo $WSId;
-				$redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-				
-				
-				echo $WSId;
-		  $user = $oauth2->userinfo->get();
-
-		  // These fields are currently filtered through the PHP sanitize filters.
-		  // See http://www.php.net/manual/en/filter.filters.sanitize.php
-		  $email = filter_var($user['email'], FILTER_SANITIZE_EMAIL);
-		  $img = filter_var($user['picture'], FILTER_VALIDATE_URL);
-		  $personMarkup = "$email<div><img src='$img?sz=50'></div>";
-		  
-		  exit;				
-				
-				
-				header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
-				return;
-			}
-
-		if (isset($_SESSION['token']))
-			{
-				$client->setAccessToken($_SESSION['token']);
-			}
-
-		// Determina si quiere cerrar la sesion
-		if (isset($_REQUEST['logout']))
-			{
-				unset($_SESSION['token']);
-				$client->revokeToken();
-			}
-
-		if ($client->getAccessToken()) {
-		  $user = $oauth2->userinfo->get();
-
-		  // These fields are currently filtered through the PHP sanitize filters.
-		  // See http://www.php.net/manual/en/filter.filters.sanitize.php
-		  $email = filter_var($user['email'], FILTER_SANITIZE_EMAIL);
-		  $img = filter_var($user['picture'], FILTER_VALIDATE_URL);
-		  $personMarkup = "$email<div><img src='$img?sz=50'></div>";
-echo $email;
-
-		  // The access token may have been updated lazily.
-		  $_SESSION['token'] = $client->getAccessToken();
-		} else {
-		  $authUrl = $client->createAuthUrl();
-		}
-		?>
-		<!doctype html>
-		<html>
-		<head><meta charset="utf-8"></head>
-		<body>
-		<header><h1>Google UserInfo Sample App</h1></header>
-		<?php if(isset($personMarkup)): ?>
-		<?php print $personMarkup ?>
-		<?php endif ?>
-		<?php
-		  if(isset($authUrl)) {
-			print "<a class='login' href='$authUrl'>Connect Me!</a>";
-		  } else {
-		   print "<a class='logout' href='?logout'>Logout</a>";
-		  }
-		?>
-		</body>
-		AAA
-		</html>
-		<?php
-
-	}
-

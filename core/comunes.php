@@ -29,20 +29,20 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: permiso_accion
+	Busca dentro de los permisos del usuario la accion a ejecutar cuando no se encuentra directamente como una opcion del usuario sino como una subrutina de otra de la que si tiene agregada de manera que valida si puede ingresar o no a ella.
+	
+	Variables de entrada:
+
+		accion - Accion a ser ejectudada, de la que se desea buscar permiso heredado por otra
+
+	Salida:
+		Retorna 1 en caso de encontrar el permiso
+		Retorna 0 cuando no se encuentra un permiso
+*/
 	function permiso_heredado_accion($accion)
 		{
-			/*
-				Function: permiso_accion
-				Busca dentro de los permisos del usuario la accion a ejecutar cuando no se encuentra directamente como una opcion del usuario sino como una subrutina de otra de la que si tiene agregada de manera que valida si puede ingresar o no a ella.
-				
-				Variables de entrada:
-
-					accion - Accion a ser ejectudada, de la que se desea buscar permiso heredado por otra
-
-				Salida:
-					Retorna 1 en caso de encontrar el permiso
-					Retorna 0 cuando no se encuentra un permiso
-			*/
 			global $Login_usuario;
 			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 			$retorno=0;
@@ -124,22 +124,21 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: permiso_agregado_accion
+	Busca dentro de los permisos agregados de manera explicita al usuario.
+	
+	Variables de entrada:
+
+		accion - Accion a ser ejectudada
+		estado_aceptacion - Si el usuario cuenta o no con el permiso solicitado
+		
+	Salida:
+		Retorna 1 en caso de encontrar el permiso
+		Retorna 0 cuando no se encuentra un permiso
+*/
 	function permiso_agregado_accion($accion)
 		{
-			/*
-				Function: permiso_agregado_accion
-				Busca dentro de los permisos agregados de manera explicita al usuario.
-				
-				Variables de entrada:
-
-					accion - Accion a ser ejectudada
-					estado_aceptacion - Si el usuario cuenta o no con el permiso solicitado
-					
-				Salida:
-					Retorna 1 en caso de encontrar el permiso
-					Retorna 0 cuando no se encuentra un permiso
-			*/
-			
 			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 			$retorno=0;
 			global $ConexionPDO,$TablasCore,$Login_usuario;
@@ -158,21 +157,21 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	EN DESUSO - EN DESUSO - EN DESUSO: Ahora las acciones para admin siempre son ejecutadas.  Ver funcion permiso_accion
+	Function: permiso_raiz_admin
+	El super usuario no cuenta con ninguna entrada dentro de la tabla de permisos pues por defecto las ve todas.  En el caso de las funciones administrativas se agregan en el mapeo para el admin de manera que siempre le deje entrar.
+	
+	Variables de entrada:
+
+		accion - Accion a ser ejectudada
+		
+	Salida:
+		Retorna 1 en caso de encontrar el permiso
+		Retorna 0 cuando no se encuentra un permiso
+*/
 	function permiso_raiz_admin($accion)
 		{
-			/*
-				EN DESUSO - EN DESUSO - EN DESUSO: Ahora las acciones para admin siempre son ejecutadas.  Ver funcion permiso_accion
-				Function: permiso_raiz_admin
-				El super usuario no cuenta con ninguna entrada dentro de la tabla de permisos pues por defecto las ve todas.  En el caso de las funciones administrativas se agregan en el mapeo para el admin de manera que siempre le deje entrar.
-				
-				Variables de entrada:
-
-					accion - Accion a ser ejectudada
-					
-				Salida:
-					Retorna 1 en caso de encontrar el permiso
-					Retorna 0 cuando no se encuentra un permiso
-			*/
 			global $Login_usuario;
 			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 			$retorno=0;
@@ -204,20 +203,20 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: permiso_accion
+	Busca dentro de los permisos del usuario la accion a ejecutar de manera que valida si puede ingresar o no a ella.
+
+	Variables de entrada:
+
+		accion - Accion a ser ejectudada
+
+	Salida:
+		Retorna 1 en caso de encontrar el permiso
+		Retorna 0 cuando no se encuentra un permiso
+*/
 	function permiso_accion($accion)
 		{
-			/*
-				Function: permiso_accion
-				Busca dentro de los permisos del usuario la accion a ejecutar de manera que valida si puede ingresar o no a ella.
-
-				Variables de entrada:
-
-					accion - Accion a ser ejectudada
-
-				Salida:
-					Retorna 1 en caso de encontrar el permiso
-					Retorna 0 cuando no se encuentra un permiso
-			*/
 			global $Login_usuario;
 			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 			$retorno=0;
@@ -246,25 +245,25 @@
 
 /* ################################################################## */
 /* ################################################################## */
-  function escapar_contenido($texto)
-	{
-			/*
-				Function: escapar_url
-				Limpia cadenas y URLs a ser impresas para evitar posibles ataques por XSS
-				En general, se debe limpiar cualquier variable enviada por el usuario y que vaya a ser impresa en su navegador para evitar que al imprimirla se puedan enviar javascripts o similares
+/*
+	Function: escapar_url
+	Limpia cadenas y URLs a ser impresas para evitar posibles ataques por XSS
+	En general, se debe limpiar cualquier variable enviada por el usuario y que vaya a ser impresa en su navegador para evitar que al imprimirla se puedan enviar javascripts o similares
 
-				Variables de entrada:
+	Variables de entrada:
 
-					texto - URL, texto, variable de entrada o cualquier otro valor a escapar.
+		texto - URL, texto, variable de entrada o cualquier otro valor a escapar.
 
-				Salida:
-					Cadena filtrada
-			*/
-		//$texto = preg_replace('|[^a-z0-9-~+_.?#=!&;,/:%@$\|*\'()\\x80-\\xff]|i', '', $texto); // Muy estricto
-		$texto = str_ireplace("script","",$texto);
+	Salida:
+		Cadena filtrada
+*/
+	function escapar_contenido($texto)
+		{
+			//$texto = preg_replace('|[^a-z0-9-~+_.?#=!&;,/:%@$\|*\'()\\x80-\\xff]|i', '', $texto); // Muy estricto
+			$texto = str_ireplace("script","",$texto);
 
-		return $texto;
-	}
+			return $texto;
+		}
 
 
 /* ################################################################## */
@@ -282,6 +281,11 @@
 		// Escapar siempre las acciones pues deberian tener solo letras, numeros y underlines.
 		$accion=escapar_contenido($accion);
 		$accion = ereg_replace("[^A-Za-z0-9_]", "", $accion);
+		
+		// Escapa otras variables de uso comun
+		global $error_titulo,$error_descripcion;
+		$error_titulo=escapar_contenido($error_titulo);
+		$error_descripcion=escapar_contenido($error_descripcion);
 
 		// Escapar algunas variables segun la accion recibida
 		if ($accion=="ver_seguimiento_general")
@@ -1022,9 +1026,10 @@
 
 						<form name="login_google" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;">
 						<input type="hidden" name="WSOn" value="1">
+						<input type="hidden" name="OAuthSrv" value="Google">
 						<input type="hidden" name="WSKey" value="<?php echo $LlaveDePaso; ?>">
-						<input type="hidden" name="WSId" value="autenticacion_google">
-						<img src="mod/google-api/google.png" border=0 width=94 height=35><br>
+						<input type="hidden" name="WSId" value="autenticacion_oauth">
+						<img src="inc/oauth/logos/google.png" border=0 width=94 height=35><br>
 						<input type="Submit"  class="BotonesGoogle" value="<?php echo $MULTILANG_GoogleLogin; ?>" >
 						</form>
 						<script language="JavaScript"> login_usuario.uid.focus(); </script>

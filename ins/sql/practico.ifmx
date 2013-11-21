@@ -16,7 +16,7 @@ INSERT INTO Core_parametros VALUES (0,'Nombre completo de su empresa','PAR_Nombr
 
 DROP TABLE IF EXISTS Core_usuario;
 CREATE TABLE Core_usuario (
-  login varchar(20) NOT NULL,
+  login varchar(250) NOT NULL,
   clave varchar(50) NOT NULL default 'd41d8cd98fd41d8cd98fd41d8cd98fd41d8cd98f',
   nombre varchar(100) NOT NULL default '',
   descripcion varchar(250) NOT NULL default '',
@@ -35,7 +35,7 @@ UPDATE Core_usuario SET ultimo_acceso=CURDATE();
 DROP TABLE IF EXISTS Core_auditoria;
 CREATE TABLE Core_auditoria (
   id int(10) NOT NULL AUTO_INCREMENT,
-  usuario_login varchar(20) NOT NULL,
+  usuario_login varchar(250) NOT NULL,
   accion varchar(250) NOT NULL,
   fecha date NOT NULL,
   hora time NOT NULL,
@@ -70,7 +70,7 @@ INSERT INTO Core_menu VALUES (0,'Mis Informes',0,0,'',1,'Interno','mis_informes'
 DROP TABLE IF EXISTS Core_usuario_menu;
 CREATE TABLE Core_usuario_menu (
   id int(10) NOT NULL AUTO_INCREMENT,
-  usuario varchar(20) NOT NULL default '',
+  usuario varchar(250) NOT NULL default '',
   menu int(10) NOT NULL default '0',
   PRIMARY KEY  (id)
 );
@@ -205,7 +205,7 @@ CREATE TABLE Core_informe_boton (
 DROP TABLE IF EXISTS Core_usuario_informe;
 CREATE TABLE Core_usuario_informe (
   id int(10) NOT NULL AUTO_INCREMENT,
-  usuario varchar(20) NOT NULL,
+  usuario varchar(250) NOT NULL,
   informe int(10) NOT NULL,
   PRIMARY KEY  (id)
 );

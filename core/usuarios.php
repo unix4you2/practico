@@ -887,16 +887,18 @@ if ($accion=="agregar_usuario")
 							</td>
 						</tr>
 						<tr>
-							<td align="RIGHT"><?php echo $MULTILANG_InfDescripcion; ?></td><td width="20"></td>
-							<td><input class="CampoTexto" type="Text" name="descripcion" size="30" maxlength="200" onkeypress="return validar_teclado(event, 'alfanumerico');"></td>
-						</tr>
-						<tr>
 							<td align="RIGHT"><?php echo $MULTILANG_Contrasena; ?></td><td width="20"></td>
 							<td><input class="CampoTexto" type="password" name="clave" size="11" maxlength="20" onkeyup="muestra_seguridad_clave(this.value, this.form)">
 							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
 							&nbsp;&nbsp; <?php echo $MULTILANG_UsrNivelPW; ?>: <input id="seguridad" value="0" size="3" name="seguridad" style="border: 0px; background-color:ffffff; text-decoration:italic;" class="CampoTexto" type="text" readonly onfocus="blur()">%
 							</td>
 						</tr>
+						<!--
+						<tr>
+							<td align="RIGHT"><?php echo $MULTILANG_InfDescripcion.' '.$MULTILANG_MotorAuth; ?></td><td width="20"></td>
+							<td><input class="CampoTexto" type="Text" name="descripcion" size="30" maxlength="200" onkeypress="return validar_teclado(event, 'alfanumerico');"></td>
+						</tr>
+						-->
 						<tr>
 							<td align="RIGHT"><?php echo $MULTILANG_UsrVerificaPW; ?></td><td width="20"></td>
 							<td><input class="CampoTexto" type="password" name="clave1" size="11" maxlength="20">

@@ -131,7 +131,6 @@
 			$clave_correcta=0;
 			if ($clave!="" && $ok_login==1 && $ok_captcha==1)
 				  {
-
 						// Busca datos del usuario Practico, sin importar metodo de autenticacion para tener configuraciones de permisos y parametros propios de la herramienta
 						$resultado_usuario=ejecutar_sql("SELECT login, nombre, clave, descripcion, nivel, correo, llave_paso FROM ".$TablasCore."usuario WHERE login='$uid' ");
 						$registro = $resultado_usuario->fetch();					
@@ -145,7 +144,7 @@
 						// Actualiza booleana de ingreso
 						$clave_correcta=1;
 						// Registro de variables en la sesion
-						/*Antes con depreciada: session_register('Login_usuario');*/
+						// Antes con depreciada: session_register('Login_usuario');
 						@session_start();
 						if (!isset($_SESSION["Login_usuario"])) $_SESSION["Login_usuario"]=(string)$resultado_webservice->credencial[0]->login;
 						if (!isset($_SESSION["Nombre_usuario"])) $_SESSION["Nombre_usuario"]=(string)$resultado_webservice->credencial[0]->nombre;
@@ -159,7 +158,6 @@
 						if (!isset($_SESSION["Nombre_Empresa_Corto"])) $_SESSION["Nombre_Empresa_Corto"]=$registro_parametros["nombre_empresa_corto"];
 						if (!isset($_SESSION["Nombre_Aplicacion"])) $_SESSION["Nombre_Aplicacion"]=$registro_parametros["nombre_aplicacion"];
 						if (!isset($_SESSION["Version_Aplicacion"])) $_SESSION["Version_Aplicacion"]=$registro_parametros["version"];
-
 
 						// Lleva a auditoria con query manual por la falta de $Login_Usuario
 						ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$uid','Ingresa al sistema desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");

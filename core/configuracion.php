@@ -39,9 +39,9 @@
 	*/
 
 	$ServidorBD='localhost';	// Direccion IP o nombre de host
-	$BaseDatos='practico13911';   // Path completo cuando se trata de sqlite2, ej: '/path/to/database.sdb'
+	$BaseDatos='practico';   // Path completo cuando se trata de sqlite2, ej: '/path/to/database.sdb'
 	$UsuarioBD='root';
-	$PasswordBD='mypass';
+	$PasswordBD='';
 	$MotorBD='mysql';		// Puede variar segun el driver PDO: mysql|pgsql|sqlite|sqlsrv|mssql|ibm|dblib|odbc|oracle|ifmx|fbd
 	$PuertoBD='';	// Vacio para predeterminado
 
@@ -74,14 +74,14 @@
 	$ArchivoCORE='';
 	$TablasCore='core_';  // Cuidado al cambiar: Prefijo de Tablas base para uso de Practico
 	$TablasApp='app_';  // Cuidado al cambiar: Prefijo para Tablas de datos definidas por el usuario
-	$LlaveDePaso='XBX2H4HB2X';  // Valor unico para firmar los usuarios del aplicativo.  No debe ser cambiado despues de puesto en marcha a menos que se haga un update manual el usuario que no coincida con la llave no podra ingresar.
-	$ModoDepuracion=0;
+	$LlaveDePaso='U4RKBAKH5H';  // Valor unico para firmar los usuarios del aplicativo.  No debe ser cambiado despues de puesto en marcha a menos que se haga un update manual el usuario que no coincida con la llave no podra ingresar.
+	$ModoDepuracion=1;
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='es';
 	$CaracteresCaptcha=4;
 	
 	// Tipo de motor usado para la autenticacion de usuarios
-	$Auth_TipoMotor='oauth2';
+	$Auth_TipoMotor='practico';
 	
 	// Configuracion LDAP - Auth_TipoMotor=ldap
 	$Auth_TipoEncripcion='plano';
@@ -91,8 +91,8 @@
 	$Auth_LDAPOU='';
 	
 	// Configuracion OAuth2 - Google - Google+  - Auth_TipoMotor=oauth2
-	$APIGoogle_ApplicationName='';
-	$APIGoogle_ClientId='';
-	$APIGoogle_ClientSecret='';
-	$APIGoogle_RedirectUri='http://127.0.0.1/practico/index.php?WsOn=1%26WSId=verificacion_google';
-	$APIGoogle_DeveloperKey='';
+	$APIGoogle_ApplicationName='Autenticacion Practico';
+	$APIGoogle_ClientId='932485011824.apps.googleusercontent.com';
+	$APIGoogle_ClientSecret='Ne6iR6YLWVKiGUVEpXdCfG00';
+	$APIGoogle_RedirectUri='http://www.lexicomtheplace.com/practico/index.php?WSOn=1&WSId=autenticacion_oauth';
+	$APIGoogle_DeveloperKey='AIzaSyASqk3wVgXwLp7qEjQtl7F771xSw9Bx0sA';

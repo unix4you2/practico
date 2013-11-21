@@ -28,6 +28,20 @@ LibChart
 	http://naku.dohcrew.com/libchart/pages/introduction/
 	See inc/libchart/COPYING for details
 
+OAuth 1.0 y 2.0
+	Location: inc/oauth/*
+	License: BSD license style
+	Made by: Copyright (c) 2012-2013, Manuel Lemos
+	mlemos-at-acm.org
+	See inc/oauth/LICENSE for details
+
+HTTP Client
+	Location: inc/http/*
+	License: BSD license style
+	Made by: Copyright (c) 2012-2013, Manuel Lemos
+	mlemos-at-acm.org
+	See inc/http/LICENSE.txt for details
+
 Tango Desktop Project:
 	Location: all files under img/tango_*:
 	License: The Tango base icon theme is released to the Public Domain. 

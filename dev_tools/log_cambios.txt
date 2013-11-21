@@ -24,6 +24,8 @@ core/ws_funciones.php
 core/ws_nucleo.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
+inc/http/*
+inc/oauth/*
 skin/nomo/general.css
 skin/nature/general.css
 
@@ -48,12 +50,16 @@ LogCambios="
  * Fixed: Se verifica que se cuente con el modulo de google-api de Práctico cuando se habilite ese modo de autenticación
  * Fixed: Texto multi-idioma para seleccion de gráficos de tipo torta en la generación de informes
  * Fixed: Enlace a sitio web oficial en pie de pagina actualizado (practico.org)
+ * Fixed: Se limpia en cada ejecucion el contenido de error_titulo y error_descripcion para evitar XSS
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-
+ALTER TABLE core_usuario CHANGE COLUMN login login VARCHAR(250) NOT NULL;
+ALTER TABLE core_auditoria CHANGE COLUMN usuario_login usuario_login VARCHAR(250) NOT NULL;
+ALTER TABLE core_usuario_menu CHANGE COLUMN usuario usuario VARCHAR(250) NOT NULL;
+ALTER TABLE core_usuario_informe CHANGE COLUMN usuario usuario VARCHAR(250) NOT NULL;
 "
 
 ########################################################################
