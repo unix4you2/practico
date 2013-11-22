@@ -597,6 +597,7 @@
 			abrir_barra_estado();
 				echo '<input type="Button"  class="BotonesEstadoCuidado" value=" <<< '.$MULTILANG_IrEscritorio.' " onClick="OcultarPopUp(\'BarraFlotanteConfiguracion\')">';
 				echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_WSConfigButt.' >>> " onClick="OcultarPopUp(\'BarraFlotanteConfiguracion\'); AbrirPopUp(\'ConfiguracionWebServices\');">';
+				echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_OauthButt.' >>> " onClick="OcultarPopUp(\'BarraFlotanteConfiguracion\'); AbrirPopUp(\'BarraFlotanteOAuth\');">';
 				echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_Guardar.' >>> " onClick="document.forms.continuar.submit();">';
 			cerrar_barra_estado();
 			cerrar_ventana();
@@ -650,6 +651,107 @@
 			?>
 		<!-- FIN DE MARCOS POPUP -->
 		</div>
+
+
+
+
+
+		<!-- INICIO DE MARCOS POPUP -->
+		<div id='BarraFlotanteOAuth' class="FormularioPopUps">
+			<?php
+			abrir_ventana($NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral,'#f2f2f2','900'); 
+			?>
+				<!--<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 800; POSITION: relative; HEIGHT: 400px">-->
+
+					<form name="configoauth" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+					<input type="hidden" name="accion" value="guardar_oauth">
+
+					<table cellspacing=0 cellpadding=10 border=0 align="center" style="font-size:11px; color:000000;">
+						<tr>
+							<td valign=top align=center>
+
+
+
+
+
+
+							</td>
+							<td valign=top  align=center>
+								<b>[<?php echo $MULTILANG_AuthGoogleTitulo; ?>]</b>
+								<table cellspacing=0 width="100%" style="font-size:11px; color:000000;">
+									<tr>
+										<td valign=top align=right>
+											<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+										</td>
+										<td valign=top>
+											<input type="text" name="APIGoogle_ApplicationNameNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_ApplicationName; ?>" >
+										</td>
+									</tr>
+									<tr>
+										<td valign=top align=right>
+											<?php echo $MULTILANG_AuthOauthId; ?>
+										</td>
+										<td valign=top>
+											<input type="text" name="APIGoogle_ClientIdNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_ClientId; ?>" >
+										</td>
+									</tr>
+									<tr>
+										<td valign=top align=right>
+											<?php echo $MULTILANG_AuthOauthSecret; ?>
+										</td>
+										<td valign=top>
+											<input type="text" name="APIGoogle_ClientSecretNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_ClientSecret; ?>" >
+										</td>
+									</tr>
+									<tr>
+										<td valign=top align=right>
+											<?php echo $MULTILANG_AuthOauthURI; ?>
+										</td>
+										<td valign=top>
+											<?php
+												// Determina si la conexion actual de Practico esta encriptada
+												if(empty($_SERVER["HTTPS"]))
+													$protocolo_webservice="http://";
+												else
+													$protocolo_webservice="https://";
+												// Construye la URI de retorno para Google
+												$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
+												$URIGoogle = $protocolo_webservice.$prefijo_webservice."?WSOn=1&WSId=verificacion_google";
+												if ($URIGoogle!=$APIGoogle_RedirectUri)
+													echo '<a href="#" title="'.$MULTILANG_Estado.'" name="'.$MULTILANG_OauthWarnURI.'">'.$MULTILANG_Atencion.'<img src="img/icn_12.gif" border=0 align=absmiddle></a><br>';
+											?>
+											<input type="text" name="APIGoogle_RedirectUriNEW" size="25" class="CampoTexto" value="<?php echo $APIGoogle_RedirectUri; ?>" readonly>
+											<a href="#" title="<?php echo $MULTILANG_OauthTitURI; ?>" name="<?php echo $MULTILANG_OauthDesURI; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+										</td>
+									</tr>
+									<tr>
+										<td valign=top align=right>
+											<?php echo $MULTILANG_AuthOauthLlave; ?>
+										</td>
+										<td valign=top>
+											<input type="text" name="APIGoogle_DeveloperKeyNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_DeveloperKey; ?>" >
+										</td>
+									</tr>
+								</table>
+
+							</td>
+						</tr>
+					</table>
+					<br>
+
+					</form>
+				<!-- </DIV> -->
+			<?php
+			abrir_barra_estado();
+				echo '<input type="Button"  class="BotonesEstadoCuidado" value=" <<< '.$MULTILANG_IrEscritorio.' " onClick="OcultarPopUp(\'BarraFlotanteOAuth\')">';
+				echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_Guardar.' >>> " onClick="document.forms.configoauth.submit();">';
+			cerrar_barra_estado();
+			cerrar_ventana();
+			?>
+		<!-- FIN DE MARCOS POPUP -->
+		</div>
+
+
 
 
 <?php 

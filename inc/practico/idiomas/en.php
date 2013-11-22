@@ -766,15 +766,15 @@
 	$MULTILANG_MsjFinal2='Remember to completely remove the installation directory (folder / ins) </b> </u> to prevent other person run these scripts again on a production system can cause any damage.';
 	$MULTILANG_MsjFinal2='Summary of operations executed';
 	$MULTILANG_AuthLDAPTitulo='LDAP based login';
-	$MULTILANG_AuthGoogleTitulo='Google API based login';
-	$MULTILANG_AuthGoogleApp='Application name';
-	$MULTILANG_AuthGoogleId='Client ID';
-	$MULTILANG_AuthGoogleSecret='Client Secret';
-	$MULTILANG_AuthGoogleURI='Redirect URI';
-	$MULTILANG_AuthGoogleKey='Simple key or Developer Key';
-	$MULTILANG_GoogleTitURI='You should register this URI in your Google API first';
-	$MULTILANG_GoogleDesURI='Important: Your return URI should be under a domain or public IP because Google will need to link with that. This URI is automatically created acording to the path during installation time.';
-	$MULTILANG_GoogleWarnURI='The URI in config file is different to the calculated URI. You should check and update that value';
+	$MULTILANG_AuthOauthTitulo='Google API based login';
+	$MULTILANG_AuthOauthPlantilla='Application name';
+	$MULTILANG_AuthOauthId='Client ID';
+	$MULTILANG_AuthOauthSecret='Client Secret';
+	$MULTILANG_AuthOauthURI='Redirect URI';
+	$MULTILANG_AuthOauthLlave='Simple key or Developer Key';
+	$MULTILANG_OauthTitURI='You should register this URI in your Google API first';
+	$MULTILANG_OauthDesURI='Important: Your return URI should be under a domain or public IP because Google will need to link with that. This URI is automatically created acording to the path during installation time.';
+	$MULTILANG_OauthWarnURI='The URI in config file is different to the calculated URI. You should check and update that value';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';
@@ -783,8 +783,11 @@
 	$MULTILANG_WSErr03='[Cod. 03] WebServices functions file does not found';
 	$MULTILANG_WSErr04='[Cod. 04] Webservice consumers key is empty or null. Check the value you sent or your Practico installation process.';
 	$MULTILANG_WSErr05='[Cod. 05] The service identifier, function or method could not be executed, is uknown or is empty.';
-	$MULTILANG_WSConfigButt='WebServices configuration';
+	$MULTILANG_WSConfigButt='WebServices keys';
 	$MULTILANG_WSLlavesDefinidas='<b>WebServices consumer Keys</b> (one each line)';
 	$MULTILANG_WSLlavesAyuda='Those are the webservices keys that you allow to use Pr&aacute;ctico Webservices or user custom services.  It is not necessary to add your setup pass key cause it is allowed by default.';
 	$MULTILANG_WSLlavesAgregar='Add random key';
+	
+	//OAuth
+	$MULTILANG_OauthButt='OAuth Autentication';
 	

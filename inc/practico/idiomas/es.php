@@ -763,15 +763,15 @@
 	$MULTILANG_MsjFinal2='Recuerde eliminar por completo el directorio de instalaci&oacute;n (carpeta /ins)</b></u> para evitar que otra persona ejecute nuevamente estos scripts sobre un sistema en producci&oacute;n pudiendo ocasionar alg&uacute;n tipo de da&ntilde;o.';
 	$MULTILANG_MsjFinal2='Resumen de operaciones ejecutadas';
 	$MULTILANG_AuthLDAPTitulo='Autenticacion basada en LDAP';
-	$MULTILANG_AuthGoogleTitulo='Autenticacion basada en API Google';
-	$MULTILANG_AuthGoogleApp='Nombre de la aplicacion';
-	$MULTILANG_AuthGoogleId='Identificador del cliente';
-	$MULTILANG_AuthGoogleSecret='Secreto del cliente';
-	$MULTILANG_AuthGoogleURI='URI de redireccion';
-	$MULTILANG_AuthGoogleKey='Llave simple o llave de desarrollador';
-	$MULTILANG_GoogleTitURI='Debe registrar previamente esta URI en su API de Google';
-	$MULTILANG_GoogleDesURI='Tenga en cuenta que la URI de retorno debe estar asociada a un dominio o IP publica para poder ser resuelta por Google. Esta URI se calcula automaticamente dependiendo del path al momento de instalacion';
-	$MULTILANG_GoogleWarnURI='La URI configurada parece ser diferente a la URI actualmente calculada. Se recomienda verificar y actualizar los valores';
+	$MULTILANG_AuthOauthTitulo='Autenticacion basada en API Google';
+	$MULTILANG_AuthOauthPlantilla='Nombre de la aplicacion';
+	$MULTILANG_AuthOauthId='Identificador del cliente';
+	$MULTILANG_AuthOauthSecret='Secreto del cliente';
+	$MULTILANG_AuthOauthURI='URI de redireccion';
+	$MULTILANG_AuthOauthLlave='Llave simple o llave de desarrollador';
+	$MULTILANG_OauthTitURI='Debe registrar previamente esta URI en su API de Google';
+	$MULTILANG_OauthDesURI='Tenga en cuenta que la URI de retorno debe estar asociada a un dominio o IP publica para poder ser resuelta por Google. Esta URI se calcula automaticamente dependiendo del path al momento de instalacion';
+	$MULTILANG_OauthWarnURI='La URI configurada parece ser diferente a la URI actualmente calculada. Se recomienda verificar y actualizar los valores';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';
@@ -780,7 +780,10 @@
 	$MULTILANG_WSErr03='[Cod. 03] No se encuentra el archivo de funciones para webservices.';
 	$MULTILANG_WSErr04='[Cod. 04] No se ha suministrado una llave para consumir los servicios o la llave utilizada durante la instalaci&oacute;n fue vac&iacute;a.';
 	$MULTILANG_WSErr05='[Cod. 05] El identificador de servicio, funci&oacute;n o m&eacute;todo a ejecutar no ha sido suministrado';
-	$MULTILANG_WSConfigButt='Configuraci&oacute;n de WebServices';
+	$MULTILANG_WSConfigButt='Llaves de WebServices';
 	$MULTILANG_WSLlavesDefinidas='<b>Llaves definidas para el consumo de WebServices</b> (una por l&iacute;nea)';
 	$MULTILANG_WSLlavesAyuda='Son aquellas autorizadas para ejecutar los webservices definidos en Pr&aacute;ctico o los personalizados por el usuario.  No es necesario agregar la llave de paso del sistema ya que esta se encuentra autorizada por defecto.';
 	$MULTILANG_WSLlavesAgregar='Agregar llave aleatoria';
+
+	//OAuth
+	$MULTILANG_OauthButt='Autenticacion OAuth';

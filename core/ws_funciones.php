@@ -146,8 +146,8 @@ function oauth_crear_usuario($user,$OAuth_servicio)
 		// Inserta datos del usuario
 		$clavemd5=MD5(TextoAleatorio(20));
 		$pasomd5=MD5($LlaveDePaso);
-		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES ('".$user->email."','$clavemd5','".$user->name."','OAuth:".$OAuth_servicio."',1,'4','".$user->email."','$fecha_operacion','$pasomd5')");
-		auditar("OAuth:Agregado usuario ".$user->email." para ".$OAuth_servicio);
+		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES ('".$user->email."','$clavemd5','".$user->name."','Auth:".$OAuth_servicio."',1,'4','".$user->email."','$fecha_operacion','$pasomd5')");
+		auditar("Auth:Agregado usuario ".$user->email." para ".$OAuth_servicio);
 	}
 
 
@@ -191,7 +191,7 @@ function oauth_crear_usuario($user,$OAuth_servicio)
 			global $TablasCore,$uid,$ListaCamposSinID_parametros,$resultado_webservice,$ListaCamposSinID_parametros,$ListaCamposSinID_auditoria,$direccion_auditoria,$hora_operacion,$fecha_operacion,$ArchivoCORE;
 
 			// Busca datos del usuario Practico, segun tipo de servicio OAuth para tener configuraciones de permisos y parametros propios de la herramienta
-			$consulta_busqueda_usuario_oauth="SELECT login, nombre, clave, descripcion, nivel, correo, llave_paso FROM ".$TablasCore."usuario WHERE login='".$user->email."' AND descripcion LIKE '%OAuth:$OAuth_servicio%' ";
+			$consulta_busqueda_usuario_oauth="SELECT login, nombre, clave, descripcion, nivel, correo, llave_paso FROM ".$TablasCore."usuario WHERE login='".$user->email."' AND descripcion LIKE '%Auth:$OAuth_servicio%' ";
 			$resultado_usuario=ejecutar_sql($consulta_busqueda_usuario_oauth);
 			$registro = $resultado_usuario->fetch();
 
@@ -255,7 +255,7 @@ function oauth_crear_usuario($user,$OAuth_servicio)
 function error_oauth($client,$OAuth_servicio)
 	{
 		global $MULTILANG_WSErrTitulo;
-		mensaje($MULTILANG_WSErrTitulo,'OAuth '.$OAuth_servicio.' error: '.HtmlSpecialChars($client->error),'','icono_error.png','TextosEscritorio');	
+		mensaje($MULTILANG_WSErrTitulo,'OAuth '.$OAuth_servicio.' error: '.HtmlSpecialChars($client->error),'','icono_error.png','TextosEscritorio');
 	}
 
 
@@ -545,7 +545,6 @@ if ($WSId=="autenticacion_oauth")
 				$OAuth_DepuracionHttp=true;
 			}
 
-
 		// Define parametros del cliente segun el servicio detectado
 		$client->server = $OAuth_servicio;
 		// Establecerlo solo si se necesita llamar al API sin el usuario presente y el token puede expirar
@@ -559,24 +558,20 @@ if ($WSId=="autenticacion_oauth")
 
 		// Si no se dan los parametros basicos presenta error
 		if(strlen($client->client_id) == 0 || strlen($client->client_secret) == 0)
-			die($OAuth_Mensaje);
+			{
+				mensaje($MULTILANG_WSErrTitulo,'<b>'.$OAuth_servicio.'</b>: '.$OAuth_Mensaje,'','icono_error.png','TextosEscritorio');	
+				die();
+			}
 
 		// Define permisos de la API (si es necesario)
 		if ($OAuth_Alcance!="")
 			$client->scope = $OAuth_Alcance;
 		
-		
-		
 		if(($success = $client->Initialize()))
 			{
 				if(($success = $client->Process()))
 				{
-					
-
-
-
-
-
+					// INICIO DEL PROCESAMIENTO POR SERVICIO
 					// Google
 					if ($OAuth_servicio=='Google')
 						{
@@ -881,17 +876,18 @@ if ($WSId=="autenticacion_oauth")
 									'GET', array(), array('FailOnAccessError'=>true), $user);
 							}
 						}
-
-
+					
+					// FIN DEL PROCESAMIENTO POR SERVICIO
 				}
 				$success = $client->Finalize($success);
 			}
 
-
 		if($client->exit)
 			exit;
 
-		// Yahoo
+		// Operaciones adicionales para algunos servicios
+		// Yahoo o LinkedIn
+		if ($OAuth_servicio=='Yahoo' || $OAuth_servicio=='LinkedIn')
 			{
 				if(strlen($client->authorization_error))
 				{
@@ -900,23 +896,13 @@ if ($WSId=="autenticacion_oauth")
 				}
 			}
 
-
-		// LinkedIn
-			{
-				if(strlen($client->authorization_error))
-					{
-						$client->error = $client->authorization_error;
-						$success = false;
-					}
-			}
-
 		// Twitter
+		if ($OAuth_servicio=='Twitter')
 			{
 				$client->ResetAccessToken();
 			}
 
-
-		// Si se logra la autenticacion presenta resultados
+		// Presenta resultados de la autenticacion
 		if($success)
 			ejecutar_login_oauth($user,$OAuth_servicio);
 		else
