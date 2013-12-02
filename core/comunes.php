@@ -911,7 +911,6 @@
 			global $MULTILANG_Atencion,$MULTILANG_ActAlertaVersion;
 			// Genera un aleatorio entre 1 y 10 para no sacar siempre el aviso y buscar nuevas versiones.
 			$buscar=rand(0,7);
-			echo $buscar;
 			if ($Login_usuario=="admin" && $accion=="Ver_menu" && $buscar==1)
 				{
 					$version_actualizada = trim(file_get_contents("http://downloads.sourceforge.net/project/practico/version_actual.txt"));
@@ -1067,6 +1066,7 @@
 														// Crea los formularios de redireccion segun proveedor
 														function CreaFormOauth($sitio)
 															{
+																global $ArchivoCORE;
 																// Crea el formulario correspondiente para llamar el login con el proveedor
 																echo '
 																	<form name="login_'.$sitio.'" method="POST" action="'.$ArchivoCORE.'" style="margin: 2; display: inline!important;">

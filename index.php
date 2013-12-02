@@ -138,7 +138,7 @@
 	verificar_extensiones();
 
 	// Valida existencia de versiones nuevas cuando el admin esta logueado
-	buscar_actualizaciones($Login_usuario,$accion);
+	buscar_actualizaciones(@$Login_usuario,$accion);
 
 	// Si existe el directorio de instalacion presenta un mensaje constante de advertencia
 	if (@file_exists("ins"))	mensaje($MULTILANG_TituloInsExiste,$MULTILANG_TextoInsExiste,'70%','warning_icon.png','TextosEscritorio');

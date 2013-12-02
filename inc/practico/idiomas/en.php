@@ -776,7 +776,7 @@
 	$MULTILANG_AuthOauthSecret='Client Secret';
 	$MULTILANG_AuthOauthURI='Redirect URI';
 	$MULTILANG_OauthTitURI='Before you continue, you should register a new application with the provider to obtain an ID, Secret and URI to config the auth service.  The URI to register is calculated automatically by Practico in each URI field for this form.';
-	$MULTILANG_OauthDesURI='Important: Your return URI should be under a domain or public IP because your provider will need to link with that. This URI is automatically created acording to the path during installation time.';
+	$MULTILANG_OauthDesURI='Important: Your return URI should be under a domain or public IP because your provider will need to link with that. This URI is automatically created acording to the path during installation time.  Clic over each providers logo to go to their API registration website.';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';
