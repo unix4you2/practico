@@ -39,7 +39,7 @@
 	*/
 
 	$ServidorBD='localhost';	// Direccion IP o nombre de host
-	$BaseDatos='practico13911';   // Path completo cuando se trata de sqlite2, ej: '/path/to/database.sdb'
+	$BaseDatos='practico';   // Path completo cuando se trata de sqlite2, ej: '/path/to/database.sdb'
 	$UsuarioBD='root';
 	$PasswordBD='mypass';
 	$MotorBD='mysql';		// Puede variar segun el driver PDO: mysql|pgsql|sqlite|sqlsrv|mssql|ibm|dblib|odbc|oracle|ifmx|fbd
@@ -74,7 +74,7 @@
 	$ArchivoCORE='';
 	$TablasCore='core_';  // Cuidado al cambiar: Prefijo de Tablas base para uso de Practico
 	$TablasApp='app_';  // Cuidado al cambiar: Prefijo para Tablas de datos definidas por el usuario
-	$LlaveDePaso='2MO5B2DCNZ';  // Valor unico para firmar los usuarios del aplicativo.  No debe ser cambiado despues de puesto en marcha a menos que se haga un update manual el usuario que no coincida con la llave no podra ingresar.
+	$LlaveDePaso='ENSWCA22JD';  // Valor unico para firmar los usuarios del aplicativo.  No debe ser cambiado despues de puesto en marcha a menos que se haga un update manual el usuario que no coincida con la llave no podra ingresar.
 	$ModoDepuracion=0;
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='es';
@@ -89,10 +89,3 @@
 	$Auth_LDAPPuerto='';
 	$Auth_LDAPDominio='';
 	$Auth_LDAPOU='';
-	
-	// Configuracion OAuth2 - Google - Google+  - Auth_TipoMotor=oauth2
-	$APIGoogle_ApplicationName='';
-	$APIGoogle_ClientId='';
-	$APIGoogle_ClientSecret='';
-	$APIGoogle_RedirectUri='http://127.0.0.1/practico/index.php?WsOn=1&WSId=verificacion_google';
-	$APIGoogle_DeveloperKey='';

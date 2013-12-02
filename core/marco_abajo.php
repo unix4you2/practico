@@ -63,7 +63,7 @@
 				?>
 			</td>
 			<td align="right" valign="bottom" width="50%">
-				<i>&copy; Practico.org</i>&nbsp;&nbsp;
+				<i>&copy; <a href="http://www.practico.org" style="color:#FFFFFF">Practico.org</a></i>&nbsp;&nbsp;
 			</td>
 		</tr></table>
 	</td></tr>

@@ -140,15 +140,15 @@ if ($WSId=="verificar_credenciales")
 	Ver tambien:
 		<autenticacion_oauth> | <ejecutar_login_oauth>
 */
-function oauth_crear_usuario($user,$OAuth_servicio)
-	{
-		global $TablasCore,$LlaveDePaso,$fecha_operacion,$ListaCamposSinID_usuario;
-		// Inserta datos del usuario
-		$clavemd5=MD5(TextoAleatorio(20));
-		$pasomd5=MD5($LlaveDePaso);
-		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES ('".$user->email."','$clavemd5','".$user->name."','Auth:".$OAuth_servicio."',1,'4','".$user->email."','$fecha_operacion','$pasomd5')");
-		auditar("Auth:Agregado usuario ".$user->email." para ".$OAuth_servicio);
-	}
+	function oauth_crear_usuario($OAuth_servicio,$login_chk='',$nombre_chk='',$correo_chk='')
+		{
+			global $TablasCore,$LlaveDePaso,$fecha_operacion,$ListaCamposSinID_usuario;
+			// Inserta datos del usuario
+			$clavemd5=MD5(TextoAleatorio(20));
+			$pasomd5=MD5($LlaveDePaso);
+			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES ('$login_chk','$clavemd5','$nombre_chk','Auth:".$OAuth_servicio."',1,'4','$correo_chk','$fecha_operacion','$pasomd5')");
+			auditar("OAuth:Agregado usuario $login_chk para ".$OAuth_servicio);
+		}
 
 
 /* ################################################################## */
@@ -167,38 +167,36 @@ function oauth_crear_usuario($user,$OAuth_servicio)
 */
 	function ejecutar_login_oauth($user,$OAuth_servicio)
 		{
-
-/*
-		echo '<h1>', HtmlSpecialChars($user->name), 
-			' you have logged in successfully with Facebook!</h1>';
-		echo '<pre>', HtmlSpecialChars(print_r($user, 1)), '</pre>';
-*/
-
-
-/*
-	VARIABLES EN GOOGLE
-    [id] => 112257217240385236034
-    [email] => application.connect@gmail.com
-    [verified_email] => 1
-    [name] => Juan G
-    [given_name] => Juan
-    [family_name] => G
-    [link] => https://plus.google.com/112257217240385236034
-    [picture] => https://lh3.googleusercontent.com/-05k3xTsACK4/AAAAAAAAAAI/AAAAAAAAFaw/pjzUyI6LUrU/photo.jpg
-    [gender] => male
-    [locale] => es
-*/
 			global $TablasCore,$uid,$ListaCamposSinID_parametros,$resultado_webservice,$ListaCamposSinID_parametros,$ListaCamposSinID_auditoria,$direccion_auditoria,$hora_operacion,$fecha_operacion,$ArchivoCORE;
 
+			// Si el modo depuracion esta activo muestra arreglo user devuelto por el proveedor
+			global $ModoDepuracion;
+			if ($ModoDepuracion)
+				{
+					echo '<h1>'.$OAuth_servicio.' Login OK!</h1><hr>';
+					echo '<pre>', HtmlSpecialChars(print_r($user, 1)), '</pre><hr>';
+					die("Modo de depuracion activo. Debe apagarlo para usar OAuth");
+				}
+
+			// Define las variables del usuario a buscar/crear segun el servicio OAuth utilizado
+			if ($OAuth_servicio=='Google')	
+				{
+					// Otros disponibles: id,verified_email (0|1),given_name,family_name,link (G+),picture (link),gender (male|female),locale (es|en...)
+					$login_chk=$user->email;
+					$nombre_chk=$user->name;
+					$correo_chk=$user->email;
+				}
+
+
 			// Busca datos del usuario Practico, segun tipo de servicio OAuth para tener configuraciones de permisos y parametros propios de la herramienta
-			$consulta_busqueda_usuario_oauth="SELECT login, nombre, clave, descripcion, nivel, correo, llave_paso FROM ".$TablasCore."usuario WHERE login='".$user->email."' AND descripcion LIKE '%Auth:$OAuth_servicio%' ";
+			$consulta_busqueda_usuario_oauth="SELECT login, nombre, clave, descripcion, nivel, correo, llave_paso FROM ".$TablasCore."usuario WHERE login='$login_chk' AND descripcion LIKE '%Auth:$OAuth_servicio%' ";
 			$resultado_usuario=ejecutar_sql($consulta_busqueda_usuario_oauth);
 			$registro = $resultado_usuario->fetch();
 
 			// Agrega el usuario cuando es primer login desde el servicio
 			if ($registro["login"]=="")
 				{
-					oauth_crear_usuario($user,$OAuth_servicio);
+					oauth_crear_usuario($OAuth_servicio,$login_chk,$nombre_chk,$correo_chk);
 					// Actualiza el registro desde nueva consulta
 					$resultado_usuario=ejecutar_sql($consulta_busqueda_usuario_oauth);
 					$registro = $resultado_usuario->fetch();
@@ -267,7 +265,7 @@ function error_oauth($client,$OAuth_servicio)
 
 	Variables de entrada:
 		* OAuth_solicitado:  Indica el tipo de servicio OAuth que debe ser llamado.
-		* Permite por ahora los valores (22): Google, Facebook, LinkedIn, Instagram, Dropbox, Microsoft (Live), Flickr, Twitter, Foursquare, XING, Salesforce, Bitbucket, Yahoo, Box, Disqus, Eventful, SurveyMonkey, RightSignature, Fitbit, Scoop.it, Tumblr, StockTwits
+		* Permite por ahora los valores (22): Google, Facebook, LinkedIn, Instagram, Dropbox, Microsoft (Live), Flickr, Twitter, Foursquare, XING, Salesforce, Bitbucket, Yahoo, Box, Disqus, Eventful, SurveyMonkey, RightSignature, Fitbit, ScoopIt, Tumblr, StockTwits
 
 	Salida:
 		Redireccion del usuario a la pagina de login del proveedor de autenticacion , quien a su vez redireccionara al usuario segun el resultado
@@ -512,7 +510,7 @@ if ($WSId=="autenticacion_oauth")
 			}
 
 		// Scoop.it
-		if ($OAuth_servicio=='Scoop.it')	
+		if ($OAuth_servicio=='ScoopIt')	
 			{
 				$OAuth_URIRedireccion=$APIScoopit_RedirectUri;
 				$OAuth_IDCliente=$APIScoopit_ClientId;

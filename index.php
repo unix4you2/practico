@@ -105,6 +105,9 @@
 	// Almacena tiempo de inicio para calculo de tiempos de ejecucion del script (informados al admin)
 	if(@$Login_usuario=="admin" && $accion!="") $tiempo_inicio_script = obtener_microtime();
 
+	// Incluye configuraciones OAuth
+	include_once("core/ws_oauth.php");
+
 	// Determina si al momento de ejecucion se encuentra activado el modo webservices
 	include_once("core/ws_nucleo.php");
 
@@ -134,6 +137,9 @@
 	// Prueba que todas las extensiones requeridas se encuentren habilitadas
 	verificar_extensiones();
 
+	// Valida existencia de versiones nuevas cuando el admin esta logueado
+	buscar_actualizaciones($Login_usuario,$accion);
+
 	// Si existe el directorio de instalacion presenta un mensaje constante de advertencia
 	if (@file_exists("ins"))	mensaje($MULTILANG_TituloInsExiste,$MULTILANG_TextoInsExiste,'70%','warning_icon.png','TextosEscritorio');
 
@@ -157,7 +163,7 @@
 		include("core/formularios.php");
 	if ($accion=="Iniciar_login" || $accion=="Terminar_sesion" || $accion=="Mensaje_cierre_sesion")
 		include("core/sesion.php");
-	if ($accion=="cargar_objeto" || $accion=="guardar_configuracion" || $accion=="guardar_configws")
+	if ($accion=="cargar_objeto" || $accion=="guardar_configuracion" || $accion=="guardar_configws" || $accion=="guardar_oauth")
 		include("core/objetos.php");
 	if ($accion=="actualizar_practico" || $accion=="cargar_archivo" || $accion=="analizar_parche" || $accion=="aplicar_parche")
 		include("core/actualizacion.php");

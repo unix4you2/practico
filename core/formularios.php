@@ -477,6 +477,7 @@ if ($accion=="editar_formulario")
 					OcultarCampos(26);
 					// Muestra campos segun tipo de objeto
 					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,13,14,17,25");
+					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,13,17,25");
 					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17");
 					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17");
 					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,17,18,19,20");
@@ -526,6 +527,7 @@ if ($accion=="editar_formulario")
 									<option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
 									<optgroup label="<?php echo $MULTILANG_FrmTipoTit1; ?>">
 										<option value="texto_corto"     <?php if (@$registro_campo_editar["tipo"]=="texto_corto")     echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo1; ?></option>
+										<option value="texto_clave"     <?php if (@$registro_campo_editar["tipo"]=="texto_clave")     echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo10; ?></option>
 										<option value="texto_largo"     <?php if (@$registro_campo_editar["tipo"]=="texto_largo")     echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo2; ?></option>
 										<option value="texto_formato"   <?php if (@$registro_campo_editar["tipo"]=="texto_formato")   echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo3; ?></option>
 										<option value="lista_seleccion" <?php if (@$registro_campo_editar["tipo"]=="lista_seleccion") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo4; ?></option>

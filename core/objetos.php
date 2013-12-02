@@ -214,14 +214,7 @@ $salida=sprintf("<?php
 	\$Auth_LDAPServidor='%s';
 	\$Auth_LDAPPuerto='%s';
 	\$Auth_LDAPDominio='%s';
-	\$Auth_LDAPOU='%s';
-	
-	// Configuracion OAuth2 - Google - Google+  - Auth_TipoMotor=oauth2
-	\$APIGoogle_ApplicationName='%s';
-	\$APIGoogle_ClientId='%s';
-	\$APIGoogle_ClientSecret='%s';
-	\$APIGoogle_RedirectUri='%s';
-	\$APIGoogle_DeveloperKey='%s';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$PlantillaActivaNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$Auth_TipoMotorNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW,$APIGoogle_ApplicationNameNEW,$APIGoogle_ClientIdNEW,$APIGoogle_ClientSecretNEW,$APIGoogle_RedirectUriNEW,$APIGoogle_DeveloperKeyNEW);
+	\$Auth_LDAPOU='%s';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$PlantillaActivaNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$Auth_TipoMotorNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW);
 			// Escribe el archivo de configuracion
 			$archivo_config=fopen("core/configuracion.php","w");
 			if($archivo_config==null)
@@ -330,4 +323,212 @@ $salida=sprintf("<?php
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 		}
-?>
+
+
+/* ################################################################## */
+/* ################################################################## */
+	if ($accion=="guardar_oauth")
+		{
+			/*
+				Function: guardar_oauth
+				Actualiza las configuraciones para autenticacion por OAuth
+
+				Variables de entrada:
+
+					ID Client, Secret, URI - Para cada servicio de OAuth disponible
+
+				Salida:
+
+					Archivo de tokens y configuraciones de OAuth actualizado
+			*/
+
+
+$salida=sprintf("<?php
+	/*
+	Copyright (C) 2013  John F. Arroyave Gutiérrez
+						unix4you2@gmail.com
+
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+
+		Title: Configuracion Proveedores OAuth 1.0 y 2.0
+		
+		IMPORTANTE: La actualizacion de este archivo se deberia realizar por medio de la ventana de configuracion de la herramienta.  No altere estos valores manualmente a menos que sepa lo que hace.
+		
+		Ubicacion *[/core/ws_oauth.php]*.  Archivo que contiene la configuracion para autenticaciones externas con proveedores OAuth
+	*/
+
+	// Google
+	\$APIGoogle_ClientId='%s';
+	\$APIGoogle_ClientSecret='%s';
+	\$APIGoogle_RedirectUri='%s';
+	\$APIGoogle_Template='%s';
+
+	// Facebook
+	\$APIFacebook_ClientId='%s';
+	\$APIFacebook_ClientSecret='%s';
+	\$APIFacebook_RedirectUri='%s';
+	\$APIFacebook_Template='%s';
+
+	// Twitter
+	\$APITwitter_ClientId='%s';
+	\$APITwitter_ClientSecret='%s';
+	\$APITwitter_RedirectUri='%s';
+	\$APITwitter_Template='%s';
+
+	// Dropbox
+	\$APIDropbox_ClientId='%s';
+	\$APIDropbox_ClientSecret='%s';
+	\$APIDropbox_RedirectUri='%s';
+	\$APIDropbox_Template='%s';
+
+	// Flickr
+	\$APIFlickr_ClientId='%s';
+	\$APIFlickr_ClientSecret='%s';
+	\$APIFlickr_RedirectUri='%s';
+	\$APIFlickr_Template='%s';
+
+	// Microsoft
+	\$APIMicrosoft_ClientId='%s';
+	\$APIMicrosoft_ClientSecret='%s';
+	\$APIMicrosoft_RedirectUri='%s';
+	\$APIMicrosoft_Template='%s';
+
+	// Foursquare
+	\$APIFoursquare_ClientId='%s';
+	\$APIFoursquare_ClientSecret='%s';
+	\$APIFoursquare_RedirectUri='%s';
+	\$APIFoursquare_Template='%s';
+
+	// Bitbucket
+	\$APIBitbucket_ClientId='%s';
+	\$APIBitbucket_ClientSecret='%s';
+	\$APIBitbucket_RedirectUri='%s';
+	\$APIBitbucket_Template='%s';
+
+	// Salesforce
+	\$APISalesforce_ClientId='%s';
+	\$APISalesforce_ClientSecret='%s';
+	\$APISalesforce_RedirectUri='%s';
+	\$APISalesforce_Template='%s';
+
+	// Yahoo
+	\$APIYahoo_ClientId='%s';
+	\$APIYahoo_ClientSecret='%s';
+	\$APIYahoo_RedirectUri='%s';
+	\$APIYahoo_Template='%s';
+
+	// Box
+	\$APIBox_ClientId='%s';
+	\$APIBox_ClientSecret='%s';
+	\$APIBox_RedirectUri='%s';
+	\$APIBox_Template='%s';
+
+	// Disqus
+	\$APIDisqus_ClientId='%s';
+	\$APIDisqus_ClientSecret='%s';
+	\$APIDisqus_RedirectUri='%s';
+	\$APIDisqus_Template='%s';
+
+	// RightSignature
+	\$APIRightSignature_ClientId='%s';
+	\$APIRightSignature_ClientSecret='%s';
+	\$APIRightSignature_RedirectUri='%s';
+	\$APIRightSignature_Template='%s';
+
+	// Fitbit
+	\$APIFitbit_ClientId='%s';
+	\$APIFitbit_ClientSecret='%s';
+	\$APIFitbit_RedirectUri='%s';
+	\$APIFitbit_Template='%s';
+
+	// ScoopIt
+	\$APIScoopIt_ClientId='%s';
+	\$APIScoopIt_ClientSecret='%s';
+	\$APIScoopIt_RedirectUri='%s';
+	\$APIScoopIt_Template='%s';
+
+	// Tumblr
+	\$APITumblr_ClientId='%s';
+	\$APITumblr_ClientSecret='%s';
+	\$APITumblr_RedirectUri='%s';
+	\$APITumblr_Template='%s';
+
+	// StockTwits
+	\$APIStockTwits_ClientId='%s';
+	\$APIStockTwits_ClientSecret='%s';
+	\$APIStockTwits_RedirectUri='%s';
+	\$APIStockTwits_Template='%s';
+
+	// LinkedIn
+	\$APILinkedIn_ClientId='%s';
+	\$APILinkedIn_ClientSecret='%s';
+	\$APILinkedIn_RedirectUri='%s';
+	\$APILinkedIn_Template='%s';
+
+	// Instagram
+	\$APIInstagram_ClientId='%s';
+	\$APIInstagram_ClientSecret='%s';
+	\$APIInstagram_RedirectUri='%s';
+	\$APIInstagram_Template='%s';
+
+	// SurveyMonkey
+	\$APISurveyMonkey_ClientId='%s';
+	\$APISurveyMonkey_ClientSecret='%s';
+	\$APISurveyMonkey_RedirectUri='%s';
+	\$APISurveyMonkey_Template='%s';
+
+	// Eventful
+	\$APIEventful_ClientId='%s';
+	\$APIEventful_ClientSecret='%s';
+	\$APIEventful_RedirectUri='%s';
+	\$APIEventful_Template='%s';
+
+	// XING
+	\$APIXING_ClientId='%s';
+	\$APIXING_ClientSecret='%s';
+	\$APIXING_RedirectUri='%s';
+	\$APIXING_Template='%s';",$APIGoogle_ClientIdNEW,$APIGoogle_ClientSecretNEW,$APIGoogle_RedirectUriNEW,$APIGoogle_TemplateNEW,$APIFacebook_ClientIdNEW,$APIFacebook_ClientSecretNEW,$APIFacebook_RedirectUriNEW,$APIFacebook_TemplateNEW,$APITwitter_ClientIdNEW,$APITwitter_ClientSecretNEW,$APITwitter_RedirectUriNEW,$APITwitter_TemplateNEW,$APIDropbox_ClientIdNEW,$APIDropbox_ClientSecretNEW,$APIDropbox_RedirectUriNEW,$APIDropbox_TemplateNEW,$APIFlickr_ClientIdNEW,$APIFlickr_ClientSecretNEW,$APIFlickr_RedirectUriNEW,$APIFlickr_TemplateNEW,$APIMicrosoft_ClientIdNEW,$APIMicrosoft_ClientSecretNEW,$APIMicrosoft_RedirectUriNEW,$APIMicrosoft_TemplateNEW,$APIFoursquare_ClientIdNEW,$APIFoursquare_ClientSecretNEW,$APIFoursquare_RedirectUriNEW,$APIFoursquare_TemplateNEW,$APIBitbucket_ClientIdNEW,$APIBitbucket_ClientSecretNEW,$APIBitbucket_RedirectUriNEW,$APIBitbucket_TemplateNEW,$APISalesforce_ClientIdNEW,$APISalesforce_ClientSecretNEW,$APISalesforce_RedirectUriNEW,$APISalesforce_TemplateNEW,$APIYahoo_ClientIdNEW,$APIYahoo_ClientSecretNEW,$APIYahoo_RedirectUriNEW,$APIYahoo_TemplateNEW,$APIBox_ClientIdNEW,$APIBox_ClientSecretNEW,$APIBox_RedirectUriNEW,$APIBox_TemplateNEW,$APIDisqus_ClientIdNEW,$APIDisqus_ClientSecretNEW,$APIDisqus_RedirectUriNEW,$APIDisqus_TemplateNEW,$APIRightSignature_ClientIdNEW,$APIRightSignature_ClientSecretNEW,$APIRightSignature_RedirectUriNEW,$APIRightSignature_TemplateNEW,$APIFitbit_ClientIdNEW,$APIFitbit_ClientSecretNEW,$APIFitbit_RedirectUriNEW,$APIFitbit_TemplateNEW,$APIScoopIt_ClientIdNEW,$APIScoopIt_ClientSecretNEW,$APIScoopIt_RedirectUriNEW,$APIScoopIt_TemplateNEW,$APITumblr_ClientIdNEW,$APITumblr_ClientSecretNEW,$APITumblr_RedirectUriNEW,$APITumblr_TemplateNEW,$APIStockTwits_ClientIdNEW,$APIStockTwits_ClientSecretNEW,$APIStockTwits_RedirectUriNEW,$APIStockTwits_TemplateNEW,$APILinkedIn_ClientIdNEW,$APILinkedIn_ClientSecretNEW,$APILinkedIn_RedirectUriNEW,$APILinkedIn_TemplateNEW,$APIInstagram_ClientIdNEW,$APIInstagram_ClientSecretNEW,$APIInstagram_RedirectUriNEW,$APIInstagram_TemplateNEW,$APISurveyMonkey_ClientIdNEW,$APISurveyMonkey_ClientSecretNEW,$APISurveyMonkey_RedirectUriNEW,$APISurveyMonkey_TemplateNEW,$APIEventful_ClientIdNEW,$APIEventful_ClientSecretNEW,$APIEventful_RedirectUriNEW,$APIEventful_TemplateNEW,$APIXING_ClientIdNEW,$APIXING_ClientSecretNEW,$APIXING_RedirectUriNEW,$APIXING_TemplateNEW);
+
+			$mensaje_error="";
+
+			// Escribe el archivo de configuracion
+			$archivo_config=fopen("core/ws_oauth.php","w");
+			if($archivo_config==null)
+				{
+					$hay_error=1;
+					$mensaje_error=$MULTILANG_ErrorEscribirConfig;
+				}
+			else
+				{
+					fwrite($archivo_config,$salida,strlen($salida)); 
+					fclose($archivo_config);
+				}
+			if ($mensaje_error=="")
+				{
+					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="Ver_menu">
+						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
+						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+		}
+
+

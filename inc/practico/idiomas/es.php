@@ -129,7 +129,9 @@
 	$MULTILANG_AccesoExclusivo='El acceso a este software es exclusivo para usuarios registrados. Por su seguridad, nunca comparta su nombre de usuario y contrase&ntilde;a.';
 	$MULTILANG_LoginNoWSTit='Error tratando de alcanzar el webservice de autenticacion';
 	$MULTILANG_LoginNoWSDes='La funcion file_get_contents() no puede cargar correctamente el archivo XML generado por el web service de autenticacion de Practico.<br>  Verifique la instalacion de su servidor web para validar que la funcion opera correctamente y sin restricciones.<br>  Una forma de validar si el proceso de autenticacion es correcto pero es su servidor quien no deja abrir el resultado<br>es abriendo el siguiente enlace y viendo si carga correctamente el XML.<br>  Activar el modo de depuracion en la configuracion de Practico puede ayudar a ver mas detalles.';
-	$MULTILANG_GoogleLogin='Iniciar con mi cuenta Google';
+	$MULTILANG_OauthLogin='Iniciar con mi red social';
+	$MULTILANG_LoginClasico='Usar mi cuenta Practico';
+	$MULTILANG_LoginOauthDes='<b>Redes sociales y proveedores externos disponibles</b><br>Haga clic sobre el logo para ingresar usando las credenciales de su sitio favorito.';
 
 	//Banderas de campos en formularios
 	$MULTILANG_TitValorUnico='El valor ingresado no acepta duplicados';
@@ -227,6 +229,8 @@
 	$MULTILANG_ErrBkpBD='Ha ocurrido un error durante la copia de seguridad de la base de datos';
 	$MULTILANG_ActMsj4='Si alguno de los archivos no ha podido ser escrito por este asistente por problemas de permisos el parche tambien puede ser aplicado manualmente por el administrador o escribiendo solamente los archivos faltantes';
 	$MULTILANG_ActMsj5='Archivo con estructura o tipo no compatible';
+	$MULTILANG_ActAlertaVersion='Existe una nueva version de Practico disponible.<br>Se recomienda descargar la nueva version o el paquete de actualizacion desde la web oficial y actualizar su sistema para contar con las nuevas mejoras de seguridad y funcionalidad';
+	$MULTILANG_ActBuscarVersion='Buscar nuevas versiones automaticamente';
 	
 	//Formularios
 	$MULTILANG_ErrFrmDuplicado='Ha ocurrido un error de valor duplicado en el(los) campo(s): $campo . El valor ingresado ya existe en la base de datos.';
@@ -249,6 +253,7 @@
 	$MULTILANG_FrmTipoTit3='Objetos internos';
 	$MULTILANG_FrmTipo8='Informe predise&ntilde;ado (Tabla de datos o Gr&aacute;fico)';
 	$MULTILANG_FrmTipo9='Deslizador (selector de rangos num&eacute;ricos - HTML5)';
+	$MULTILANG_FrmTipo10='Campo de contrasena';
 	$MULTILANG_FrmValorMinimo='Valor m&iacute;nimo';
 	$MULTILANG_FrmValorMaximo='Valor m&aacute;ximo';
 	$MULTILANG_FrmValorSalto='Valor de salto';
@@ -748,7 +753,7 @@
 	$MULTILANG_AyudaDesLdapUO='Contexto de conexion del usuario. Debe existir sobre el servidor LDAP, ej: people, ventas, mercadeo, etc';
 	$MULTILANG_TitInsPaso3='Escribiendo configuraci&oacute;n y conectando Base de Datos';
 	$MULTILANG_DesInsPaso3='Se esta escribiendo el archivo de configuracion.php ubicado en /core con los par&aacute;metros por usted indicados y se est&aacute; probando la conexi&oacute;n a la base de datos indicada.';
-	$MULTILANG_ErrorEscribirConfig='<b>Se han encontrado errores al tratar de escribir el archivo de configuraci&oacute;n !!!</b>:<br>Si lo desea una alternativa puede ser cambiar usted mismo los valores por defecto incluidos en el archivo core/configuracion.php o core/ws_llaves.php dependiendo de la configuracion que estuviese actualizando.<br><br>Tambi&eacute;n puede cambiar los permisos al archivo de configuraci&oacute;n y probar nuevamente con este asistente.';
+	$MULTILANG_ErrorEscribirConfig='<b>Se han encontrado errores al tratar de escribir el archivo de configuraci&oacute;n !!!</b>:<br>Si lo desea una alternativa puede ser cambiar usted mismo los valores por defecto incluidos en el archivo core/configuracion.php o core/ws_llaves.php o core/ws_oauth.php dependiendo de la configuracion que estuviese actualizando.<br><br>Tambi&eacute;n puede cambiar los permisos al archivo de configuraci&oacute;n y probar nuevamente con este asistente.';
 	$MULTILANG_ErrorConexBD='<b>Se han encontrado errores al conectar con la Base de Datos !!!</b>:<br>Verifique los valores ingresados en el paso anterior e intente nuevamente.';
 	$MULTILANG_InfoPaso3='<b>Todo parace estar bien con su configuraci&oacute;n b&aacute;sica de PDO.</b><br>El ultimo paso consiste en indicar al asistente de instalaci&oacute;n como tratar su base de datos:<br><br>
 				<li><b>1.</b> Agregar datos de inicio a la base de datos, esto incluye el usuario inicial (admin), menues y dem&aacute;s registros sobre las tablas Core de Pr&aacute;ctico.  Esta es la mejor opci&oacute;n para las instalaciones nuevas.
@@ -763,15 +768,12 @@
 	$MULTILANG_MsjFinal2='Recuerde eliminar por completo el directorio de instalaci&oacute;n (carpeta /ins)</b></u> para evitar que otra persona ejecute nuevamente estos scripts sobre un sistema en producci&oacute;n pudiendo ocasionar alg&uacute;n tipo de da&ntilde;o.';
 	$MULTILANG_MsjFinal2='Resumen de operaciones ejecutadas';
 	$MULTILANG_AuthLDAPTitulo='Autenticacion basada en LDAP';
-	$MULTILANG_AuthOauthTitulo='Autenticacion basada en API Google';
-	$MULTILANG_AuthOauthPlantilla='Nombre de la aplicacion';
-	$MULTILANG_AuthOauthId='Identificador del cliente';
-	$MULTILANG_AuthOauthSecret='Secreto del cliente';
-	$MULTILANG_AuthOauthURI='URI de redireccion';
-	$MULTILANG_AuthOauthLlave='Llave simple o llave de desarrollador';
-	$MULTILANG_OauthTitURI='Debe registrar previamente esta URI en su API de Google';
-	$MULTILANG_OauthDesURI='Tenga en cuenta que la URI de retorno debe estar asociada a un dominio o IP publica para poder ser resuelta por Google. Esta URI se calcula automaticamente dependiendo del path al momento de instalacion';
-	$MULTILANG_OauthWarnURI='La URI configurada parece ser diferente a la URI actualmente calculada. Se recomienda verificar y actualizar los valores';
+	$MULTILANG_AuthOauthPlantilla='Usuario plantilla';
+	$MULTILANG_AuthOauthId='ID de cliente';
+	$MULTILANG_AuthOauthSecret='Secreto de cliente';
+	$MULTILANG_AuthOauthURI='URI redireccion';
+	$MULTILANG_OauthTitURI='Antes de continuar, usted debe registrar una aplicaci&oacute;n con el proveedor correspondiente y obtener el ID, Secreto y URI para asociarla al servicio.  La URI a registrar con su proveedor es aquella calculada automaticamente por Practico en ese campo.';
+	$MULTILANG_OauthDesURI='Tenga en cuenta que la URI de retorno debe estar asociada a un dominio o IP publica para poder ser resuelta por el proveedor. Esta URI se calcula automaticamente dependiendo del path al momento de instalacion';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';

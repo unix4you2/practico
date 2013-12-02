@@ -31,8 +31,7 @@
 		Este archivo es incluido desde alli para validar el estado de webservices cada vez que se ejecute la aplicacion
 	*/
 
-
-	// Bypass para casos de URI de redireccion para Google Oauth2
+	// Bypass para casos de URI de redireccion por Oauth
 	$ByPassWS=0;
 	if (@$WSId=='autenticacion_oauth')
 		$ByPassWS=1;

@@ -292,7 +292,6 @@
 			<select  name="Auth_TipoMotorNEW" class="Combos">
 				<option value="practico" <?php if ($Auth_TipoMotor=="practico") echo "SELECTED"; ?> ><?php echo $MULTILANG_AuthPractico; ?></option>
 				<option value="ldap" <?php if ($Auth_TipoMotor=="ldap") echo "SELECTED"; ?> ><?php echo $MULTILANG_AuthLDAP; ?></option>
-				<option value="oauth2" <?php if ($Auth_TipoMotor=="oauth2") echo "SELECTED"; ?> ><?php echo $MULTILANG_AuthGoogle; ?></option>
 			</select>
 			<a href="#" title="<?php echo $MULTILANG_Importante; ?>" name="<?php echo $MULTILANG_AyudaDesAuth; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
 		</td>
@@ -391,64 +390,6 @@
 					</td>
 				</tr>
 			</table>
-
-		</td>
-		<td valign=top  align=center>
-			<b>[<?php echo $MULTILANG_AuthGoogleTitulo; ?>]</b>
-			<table cellspacing=0 width="100%" style="font-size:11px; color:000000;">
-				<tr>
-					<td valign=top align=right>
-						<?php echo $MULTILANG_AuthGoogleApp; ?>
-					</td>
-					<td valign=top>
-						<input type="text" name="APIGoogle_ApplicationNameNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_ApplicationName; ?>" >
-					</td>
-				</tr>
-				<tr>
-					<td valign=top align=right>
-						<?php echo $MULTILANG_AuthGoogleId; ?>
-					</td>
-					<td valign=top>
-						<input type="text" name="APIGoogle_ClientIdNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_ClientId; ?>" >
-					</td>
-				</tr>
-				<tr>
-					<td valign=top align=right>
-						<?php echo $MULTILANG_AuthGoogleSecret; ?>
-					</td>
-					<td valign=top>
-						<input type="text" name="APIGoogle_ClientSecretNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_ClientSecret; ?>" >
-					</td>
-				</tr>
-				<tr>
-					<td valign=top align=right>
-						<?php echo $MULTILANG_AuthGoogleURI; ?>
-					</td>
-					<td valign=top>
-						<?php
-							// Determina si la conexion actual de Practico esta encriptada
-							if(empty($_SERVER["HTTPS"]))
-								$protocolo_webservice="http://";
-							else
-								$protocolo_webservice="https://";
-							// Construye la URI de retorno para Google
-							$prefijo_webservice=$_SERVER['SERVER_NAME'].str_ireplace("ins/","",$_SERVER['PHP_SELF']);
-							$URIGoogle = $protocolo_webservice.$prefijo_webservice."?WsOn=1&WSId=verificacion_google";
-						?>
-						<input type="text" name="APIGoogle_RedirectUriNEW" size="25" class="CampoTexto" value="<?php echo $URIGoogle; ?>" >
-						<a href="#" title="<?php echo $MULTILANG_GoogleTitURI; ?>" name="<?php echo $MULTILANG_GoogleDesURI; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
-					</td>
-				</tr>
-				<tr>
-					<td valign=top align=right>
-						<?php echo $MULTILANG_AuthGoogleKey; ?>
-					</td>
-					<td valign=top>
-						<input type="text" name="APIGoogle_DeveloperKeyNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_DeveloperKey; ?>" >
-					</td>
-				</tr>
-			</table>
-
 
 		</td>
 	</tr>

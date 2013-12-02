@@ -528,65 +528,6 @@
 								</table>
 
 							</td>
-							<td valign=top  align=center>
-								<b>[<?php echo $MULTILANG_AuthGoogleTitulo; ?>]</b>
-								<table cellspacing=0 width="100%" style="font-size:11px; color:000000;">
-									<tr>
-										<td valign=top align=right>
-											<?php echo $MULTILANG_AuthGoogleApp; ?>
-										</td>
-										<td valign=top>
-											<input type="text" name="APIGoogle_ApplicationNameNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_ApplicationName; ?>" >
-										</td>
-									</tr>
-									<tr>
-										<td valign=top align=right>
-											<?php echo $MULTILANG_AuthGoogleId; ?>
-										</td>
-										<td valign=top>
-											<input type="text" name="APIGoogle_ClientIdNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_ClientId; ?>" >
-										</td>
-									</tr>
-									<tr>
-										<td valign=top align=right>
-											<?php echo $MULTILANG_AuthGoogleSecret; ?>
-										</td>
-										<td valign=top>
-											<input type="text" name="APIGoogle_ClientSecretNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_ClientSecret; ?>" >
-										</td>
-									</tr>
-									<tr>
-										<td valign=top align=right>
-											<?php echo $MULTILANG_AuthGoogleURI; ?>
-										</td>
-										<td valign=top>
-											<?php
-												// Determina si la conexion actual de Practico esta encriptada
-												if(empty($_SERVER["HTTPS"]))
-													$protocolo_webservice="http://";
-												else
-													$protocolo_webservice="https://";
-												// Construye la URI de retorno para Google
-												$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
-												$URIGoogle = $protocolo_webservice.$prefijo_webservice."?WSOn=1&WSId=verificacion_google";
-												if ($URIGoogle!=$APIGoogle_RedirectUri)
-													echo '<a href="#" title="'.$MULTILANG_Estado.'" name="'.$MULTILANG_GoogleWarnURI.'">'.$MULTILANG_Atencion.'<img src="img/icn_12.gif" border=0 align=absmiddle></a><br>';
-											?>
-											<input type="text" name="APIGoogle_RedirectUriNEW" size="25" class="CampoTexto" value="<?php echo $APIGoogle_RedirectUri; ?>" readonly>
-											<a href="#" title="<?php echo $MULTILANG_GoogleTitURI; ?>" name="<?php echo $MULTILANG_GoogleDesURI; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
-										</td>
-									</tr>
-									<tr>
-										<td valign=top align=right>
-											<?php echo $MULTILANG_AuthGoogleKey; ?>
-										</td>
-										<td valign=top>
-											<input type="text" name="APIGoogle_DeveloperKeyNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_DeveloperKey; ?>" >
-										</td>
-									</tr>
-								</table>
-
-							</td>
 						</tr>
 					</table>
 					<br>
@@ -659,88 +600,1005 @@
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='BarraFlotanteOAuth' class="FormularioPopUps">
 			<?php
-			abrir_ventana($NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral,'#f2f2f2','900'); 
+				abrir_ventana($NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral,'#f2f2f2',''); 
+
+				// Determina si la conexion actual de Practico esta encriptada
+				if(empty($_SERVER["HTTPS"]))
+					$protocolo_webservice="http://";
+				else
+					$protocolo_webservice="https://";
+				// Construye la URI de retorno
+				$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
+				// Construye la URI de redireccion base para concatenar el servicio especifico
+				$URI = $protocolo_webservice.$prefijo_webservice."?WSOn=1&WSId=autenticacion_oauth&OAuthSrv=";
 			?>
-				<!--<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 800; POSITION: relative; HEIGHT: 400px">-->
+				<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 800; POSITION: relative; HEIGHT: 400px">
 
 					<form name="configoauth" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="hidden" name="accion" value="guardar_oauth">
 
+					<?php
+						echo '<br>&nbsp;&nbsp;&nbsp;<b>'.$MULTILANG_Importante.'</b>:<br>';
+						echo '<li>'.$MULTILANG_OauthTitURI; 						
+						echo '<li>'.$MULTILANG_OauthDesURI.'<hr>'; 
+					?>
+
 					<table cellspacing=0 cellpadding=10 border=0 align="center" style="font-size:11px; color:000000;">
 						<tr>
 							<td valign=top align=center>
-
-
-
-
-
-
+									<!-- ### OAUTH GOOGLE ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/google.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIGoogle_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIGoogle_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIGoogle_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIGoogle_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIGoogle_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Google" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIGoogle_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIGoogle_Template; ?>" >
+											</td>
+										</tr>
+									</table>
 							</td>
 							<td valign=top  align=center>
-								<b>[<?php echo $MULTILANG_AuthGoogleTitulo; ?>]</b>
-								<table cellspacing=0 width="100%" style="font-size:11px; color:000000;">
-									<tr>
-										<td valign=top align=right>
-											<?php echo $MULTILANG_AuthOauthPlantilla; ?>
-										</td>
-										<td valign=top>
-											<input type="text" name="APIGoogle_ApplicationNameNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_ApplicationName; ?>" >
-										</td>
-									</tr>
-									<tr>
-										<td valign=top align=right>
-											<?php echo $MULTILANG_AuthOauthId; ?>
-										</td>
-										<td valign=top>
-											<input type="text" name="APIGoogle_ClientIdNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_ClientId; ?>" >
-										</td>
-									</tr>
-									<tr>
-										<td valign=top align=right>
-											<?php echo $MULTILANG_AuthOauthSecret; ?>
-										</td>
-										<td valign=top>
-											<input type="text" name="APIGoogle_ClientSecretNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_ClientSecret; ?>" >
-										</td>
-									</tr>
-									<tr>
-										<td valign=top align=right>
-											<?php echo $MULTILANG_AuthOauthURI; ?>
-										</td>
-										<td valign=top>
-											<?php
-												// Determina si la conexion actual de Practico esta encriptada
-												if(empty($_SERVER["HTTPS"]))
-													$protocolo_webservice="http://";
-												else
-													$protocolo_webservice="https://";
-												// Construye la URI de retorno para Google
-												$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
-												$URIGoogle = $protocolo_webservice.$prefijo_webservice."?WSOn=1&WSId=verificacion_google";
-												if ($URIGoogle!=$APIGoogle_RedirectUri)
-													echo '<a href="#" title="'.$MULTILANG_Estado.'" name="'.$MULTILANG_OauthWarnURI.'">'.$MULTILANG_Atencion.'<img src="img/icn_12.gif" border=0 align=absmiddle></a><br>';
-											?>
-											<input type="text" name="APIGoogle_RedirectUriNEW" size="25" class="CampoTexto" value="<?php echo $APIGoogle_RedirectUri; ?>" readonly>
-											<a href="#" title="<?php echo $MULTILANG_OauthTitURI; ?>" name="<?php echo $MULTILANG_OauthDesURI; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
-										</td>
-									</tr>
-									<tr>
-										<td valign=top align=right>
-											<?php echo $MULTILANG_AuthOauthLlave; ?>
-										</td>
-										<td valign=top>
-											<input type="text" name="APIGoogle_DeveloperKeyNEW" size="30" class="CampoTexto" value="<?php echo $APIGoogle_DeveloperKey; ?>" >
-										</td>
-									</tr>
-								</table>
-
+									<!-- ### OAUTH FACEBOOK ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/facebook.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIFacebook_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIFacebook_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIFacebook_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIFacebook_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIFacebook_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Facebook" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIFacebook_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIFacebook_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+							<td valign=top  align=center>
+									<!-- ### OAUTH TWITTER ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/twitter.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APITwitter_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APITwitter_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APITwitter_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APITwitter_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APITwitter_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Twitter" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APITwitter_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APITwitter_Template; ?>" >
+											</td>
+										</tr>
+									</table>
 							</td>
 						</tr>
+						<tr>
+							<td valign=top  align=center>
+									<!-- ### OAUTH DROPBOX ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/dropbox.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIDropbox_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIDropbox_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIDropbox_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIDropbox_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIDropbox_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Dropbox" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIDropbox_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIDropbox_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+							<td valign=top  align=center>
+									<!-- ### OAUTH FLICKR ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/flickr.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIFlickr_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIFlickr_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIFlickr_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIFlickr_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIFlickr_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Flickr" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIFlickr_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIFlickr_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+							<td valign=top  align=center>
+									<!-- ### OAUTH MICROSOFT ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/microsoft.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIMicrosoft_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIMicrosoft_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIMicrosoft_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIMicrosoft_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIMicrosoft_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Microsoft" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIMicrosoft_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIMicrosoft_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=center>
+									<!-- ### OAUTH FOURSQUARE ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/foursquare.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIFoursquare_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIFoursquare_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIFoursquare_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIFoursquare_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIFoursquare_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Foursquare" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIFoursquare_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIFoursquare_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+							<td valign=top  align=center>
+									<!-- ### OAUTH BITBUCKET ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/bitbucket.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIBitbucket_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIBitbucket_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIBitbucket_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIBitbucket_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIBitbucket_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Bitbucket" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIBitbucket_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIBitbucket_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+							<td valign=top  align=center>
+									<!-- ### OAUTH SALESFORCE ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/salesforce.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APISalesforce_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APISalesforce_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APISalesforce_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APISalesforce_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APISalesforce_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Salesforce" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APISalesforce_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APISalesforce_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=center>
+									<!-- ### OAUTH YAHOO ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/yahoo.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIYahoo_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIYahoo_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIYahoo_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIYahoo_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIYahoo_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Yahoo" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIYahoo_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIYahoo_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+							<td valign=top  align=center>
+									<!-- ### OAUTH BOX ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/box.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIBox_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIBox_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIBox_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIBox_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIBox_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Box" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIBox_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIBox_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+							<td valign=top  align=center>
+									<!-- ### OAUTH DISQUS ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/disqus.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIDisqus_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIDisqus_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIDisqus_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIDisqus_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIDisqus_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Disqus" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIDisqus_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIDisqus_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=center>
+									<!-- ### OAUTH RIGHTSIGNATURE ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/rightsignature.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIRightSignature_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIRightSignature_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIRightSignature_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIRightSignature_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIRightSignature_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>RightSignature" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIRightSignature_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIRightSignature_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+							<td valign=top  align=center>
+									<!-- ### OAUTH FITBIT ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/fitbit.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIFitbit_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIFitbit_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIFitbit_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIFitbit_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIFitbit_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Fitbit" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIFitbit_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIFitbit_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+							<td valign=top  align=center>
+									<!-- ### OAUTH SCOOP.IT ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/scoopit.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIScoopIt_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIScoopIt_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIScoopIt_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIScoopIt_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIScoopIt_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>ScoopIt" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIScoopIt_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIScoopIt_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=center>
+									<!-- ### OAUTH TUMBLR ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/tumblr.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APITumblr_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APITumblr_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APITumblr_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APITumblr_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APITumblr_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Tumblr" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APITumblr_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APITumblr_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+							<td valign=top  align=center>
+									<!-- ### OAUTH STOCKTWITS ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/stocktwits.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIStockTwits_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIStockTwits_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIStockTwits_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIStockTwits_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIStockTwits_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>StockTwits" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIStockTwits_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIStockTwits_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+							<td valign=top  align=center>
+									<!-- ### OAUTH LINKEDIN ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/linkedin.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APILinkedIn_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APILinkedIn_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APILinkedIn_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APILinkedIn_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APILinkedIn_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>LinkedIn" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APILinkedIn_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APILinkedIn_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top align=center>
+									<!-- ### OAUTH INSTAGRAM ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/instagram.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIInstagram_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIInstagram_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIInstagram_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIInstagram_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIInstagram_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Instagram" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIInstagram_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIInstagram_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+							<td valign=top  align=center>
+									<!-- ### OAUTH SURVEYMONKEY ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/surveymonkey.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APISurveyMonkey_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APISurveyMonkey_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APISurveyMonkey_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APISurveyMonkey_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APISurveyMonkey_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>SurveyMonkey" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APISurveyMonkey_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APISurveyMonkey_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+							<td valign=top  align=center>
+									<!-- ### OAUTH EVENTFUL ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/eventful.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIEventful_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIEventful_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIEventful_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIEventful_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIEventful_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Eventful" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIEventful_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIEventful_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+						</tr>
+						<tr>
+							<td valign=top  align=center>
+									<!-- ### OAUTH XING ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<img src="inc/oauth/logos/xing.png" border=0 width=94 height=35>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIXING_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIXING_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIXING_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIXING_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIXING_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>XING" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIXING_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIXING_Template; ?>" >
+											</td>
+										</tr>
+									</table>
+							</td>
+							<td valign=top  align=center>
+							</td>
+							<td valign=top  align=center>
+							</td>
+						</tr>
+
+
+
+
+
 					</table>
-					<br>
 
 					</form>
-				<!-- </DIV> -->
+				</DIV>
 			<?php
 			abrir_barra_estado();
 				echo '<input type="Button"  class="BotonesEstadoCuidado" value=" <<< '.$MULTILANG_IrEscritorio.' " onClick="OcultarPopUp(\'BarraFlotanteOAuth\')">';

@@ -887,8 +887,8 @@
 				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,'','icono_error.png','TextosEscritorio');
 
 			//Verifica existencia del modulo de google-api cuando se indica ese tipo de autenticacion
-			if ($Auth_TipoMotor=='oauth2' &&  @!file_exists("mod/google-api"))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrGoogleAPIMod,'','icono_error.png','TextosEscritorio');
+			//if ($Auth_TipoMotor=='oauth2' &&  @!file_exists("mod/google-api"))
+			//	mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrGoogleAPIMod,'','icono_error.png','TextosEscritorio');
 
 
 			// DEPRECATED Verifica soporte para cURL
@@ -901,6 +901,30 @@
 			// Bloqueos por IP/pais http://stackoverflow.com/questions/15835274/file-get-contents-failed-to-open-stream-connection-refused
 			
 			
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+	function buscar_actualizaciones($Login_usuario='',$accion='')
+		{
+			global $MULTILANG_Atencion,$MULTILANG_ActAlertaVersion;
+			// Genera un aleatorio entre 1 y 10 para no sacar siempre el aviso y buscar nuevas versiones.
+			$buscar=rand(0,7);
+			echo $buscar;
+			if ($Login_usuario=="admin" && $accion=="Ver_menu" && $buscar==1)
+				{
+					$version_actualizada = trim(file_get_contents("http://downloads.sourceforge.net/project/practico/version_actual.txt"));
+					$archivo_origen="inc/version_actual.txt";
+					$archivo = fopen($archivo_origen, "r");
+					if ($archivo)
+						{
+							$version_practico = trim(fgets($archivo, 1024));
+							fclose($archivo);
+						}
+					if ($version_actualizada>$version_practico)
+						mensaje($MULTILANG_Atencion,$MULTILANG_ActAlertaVersion,'','warning_icon.png','TextosEscritorio');
+				}
 		}
 
 
@@ -976,65 +1000,170 @@
 			Despliega la ventana de ingreso al sistema con el formulario para usuario, contrasena y captcha.
 		*/
 		  global $ArchivoCORE,$LlaveDePaso;
-		  global $MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_GoogleLogin;
+		  global $MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes;
+			// Variables para OAuth desde el archivo de configuracion
+			global $APIGoogle_ClientId,$APIGoogle_ClientSecret;
+			global $APIFacebook_ClientId,$APIFacebook_ClientSecret;
+			global $APILinkedIn_ClientId,$APILinkedIn_ClientSecret;
+			global $APIInstagram_ClientId,$APIInstagram_ClientSecret;
+			global $APIDropbox_ClientId,$APIDropbox_ClientSecret;
+			global $APIMicrosoft_ClientId,$APIMicrosoft_ClientSecret;
+			global $APIFlickr_ClientId,$APIFlickr_ClientSecret;
+			global $APITwitter_ClientId,$APITwitter_ClientSecret;
+			global $APIFoursquare_ClientId,$APIFoursquare_ClientSecret;
+			global $APIXING_ClientId,$APIXING_ClientSecret;
+			global $APISalesforce_ClientId,$APISalesforce_ClientSecret;
+			global $APIBitbucket_ClientId,$APIBitbucket_ClientSecret;
+			global $APIYahoo_ClientId,$APIYahoo_ClientSecret;
+			global $APIBox_ClientId,$APIBox_ClientSecret;
+			global $APIDisqus_ClientId,$APIDisqus_ClientSecret;
+			global $APIEventful_ClientId,$APIEventful_ClientSecret;
+			global $APISurveyMonkey_ClientId,$APISurveyMonkey_ClientSecret;
+			global $APIRightSignature_ClientId,$APIRightSignature_ClientSecret;
+			global $APIFitbit_ClientId,$APIFitbit_ClientSecret;
+			global $APIScoopIt_ClientId,$APIScoopIt_ClientSecret;
+			global $APITumblr_ClientId,$APITumblr_ClientSecret;
+			global $APIStockTwits_ClientId,$APIStockTwits_ClientSecret;
+
+			// Variable que determina si se tiene activo al menos un proveedor OAuth
+			$AlMenosUnOAuth=0;
+
 			echo '
 					<br><br>
 					<div align="center">
 					';
 			abrir_ventana($MULTILANG_TituloLogin,'#EADEDE','620');
 			?>
+
+			<script language="javascript"> 
+				function IntercambiarLogin(Seccion)
+					{
+						var ele = document.getElementById(Seccion);
+						if (ele.style.display == "none")
+							{
+								ele.style.display = "block";
+								ele.style.visibility = "visible";
+							}
+						else
+							{
+								ele.style.display = "none";
+								ele.style.visibility = "hidden";
+							}
+					} 
+			</script>
+
 						<div align="center">
-						<form name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
-						<input type="Hidden" name="accion" value="Iniciar_login">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center"><tr>
 								<td align="center">
-										<table width="100%" border="0" cellspacing="10" cellpadding="0" class="TextosVentana" align="center">
-										<tr>
-											<td align="right"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_Usuario; ?>&nbsp;</td>
-											<td><input type="text" name="uid" size="18" class="CampoTexto" class="keyboardInput"></td>
-										</tr>
-										<tr>
-											<td align="right"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_Contrasena; ?>&nbsp;</td>
-											<td><input type="password" name="clave" size="18" class="CampoTexto keyboardInput" class="keyboardInput" style="border-width: 1px; font-size: 9px; font-family: VErdana, Tahoma, Arial;"></td>
-										</tr>
-										<tr>
-											<td align="right" valign="middle"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_CodigoSeguridad; ?></td>
-											<td valign="middle">
-											<img src="core/captcha.php">
-											</td>
-										</tr>
-										<tr>
-											<td width="150" align="right" valign="middle"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_IngreseCodigoSeguridad; ?></td>
-											<td valign="middle">
-											<img src="img/tango_go-next.png" align="absmiddle"> <input type="text" name="captcha" size="7" maxlength=6 style="border-width: 1px; font-size: 9px; font-family: VErdana, Tahoma, Arial;">
-											</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td>
-												<input type="Submit"  class="Botones" value=" <?php echo $MULTILANG_Ingresar; ?> >>>" >
-											</td>
-										</tr>
+
+										<div id="LoginOauth" style="display:none; visibility:hidden; ">
+										<table width="350" border="0" cellspacing="10" cellpadding="0" class="TextosVentana" align="center">
+												<tr bgcolor="#AAA6AD"><td align="center"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">
+													<?php echo $MULTILANG_LoginOauthDes; ?>
+												</td></tr>
+												<tr><td align="center"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">
+													
+													<?php
+														// Crea los formularios de redireccion segun proveedor
+														function CreaFormOauth($sitio)
+															{
+																// Crea el formulario correspondiente para llamar el login con el proveedor
+																echo '
+																	<form name="login_'.$sitio.'" method="POST" action="'.$ArchivoCORE.'" style="margin: 2; display: inline!important;">
+																	<input type="hidden" name="WSOn" value="1">
+																	<input type="hidden" name="OAuthSrv" value="'.$sitio.'">
+																	<input type="hidden" name="WSId" value="autenticacion_oauth">
+																	<input type="image" src="inc/oauth/logos/'.strtolower($sitio).'.png" border=0 width=81 height=30 style="background:#FFFFFF;"> <!--94x35|81x30-->
+																	</form>';
+																// Retorna valor de activacion a variable AlMenosUnOAuth
+																return 1;
+															}
+															
+														if ($APIGoogle_ClientId!=''			&& $APIGoogle_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Google');
+														if ($APIFacebook_ClientId!=''		&& $APIFacebook_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Facebook');
+														if ($APILinkedIn_ClientId!=''		&& $APILinkedIn_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('LinkedIn');
+														if ($APIInstagram_ClientId!=''		&& $APIInstagram_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Instagram');
+														if ($APIDropbox_ClientId!=''		&& $APIDropbox_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Dropbox');
+														if ($APIMicrosoft_ClientId!=''		&& $APIMicrosoft_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Microsoft');
+														if ($APIFlickr_ClientId!=''			&& $APIFlickr_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Flickr');
+														if ($APITwitter_ClientId!=''		&& $APITwitter_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Twitter');
+														if ($APIFoursquare_ClientId!=''		&& $APIFoursquare_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Foursquare');
+														if ($APIXING_ClientId!=''			&& $APIXING_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('XING');
+														if ($APISalesforce_ClientId!=''		&& $APISalesforce_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Salesforce');
+														if ($APIBitbucket_ClientId!=''		&& $APIBitbucket_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Bitbucket');
+														if ($APIYahoo_ClientId!=''			&& $APIYahoo_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Yahoo');
+														if ($APIBox_ClientId!=''			&& $APIBox_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Box');
+														if ($APIDisqus_ClientId!=''			&& $APIDisqus_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Disqus');
+														if ($APIEventful_ClientId!=''		&& $APIEventful_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Eventful');
+														if ($APISurveyMonkey_ClientId!=''	&& $APISurveyMonkey_ClientSecret!='')	$AlMenosUnOAuth+=CreaFormOauth('SurveyMonkey');
+														if ($APIRightSignature_ClientId!=''	&& $APIRightSignature_ClientSecret!='')	$AlMenosUnOAuth+=CreaFormOauth('RightSignature');
+														if ($APIFitbit_ClientId!=''			&& $APIFitbit_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Fitbit');
+														if ($APIScoopIt_ClientId!=''		&& $APIScoopIt_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('ScoopIt');
+														if ($APITumblr_ClientId!=''			&& $APITumblr_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Tumblr');
+														if ($APIStockTwits_ClientId!=''		&& $APIStockTwits_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('StockTwits');
+													?>													
+													<hr>
+													<input type="Button"  class="BotonesGoogle" value="<<< <?php echo $MULTILANG_LoginClasico; ?> >>>"  OnClick="IntercambiarLogin('LoginOauth');IntercambiarLogin('LoginClasico');">
+												</td></tr>
 										</table>
+										</div>
+
+										<div id="LoginClasico" style="display:block; visibility:visible; ">
+										<table width="100%" border="0" cellspacing="3" cellpadding="0" class="TextosVentana" align="center">
+												<tr><td align="center"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">
+												
+													<form name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
+													<input type="Hidden" name="accion" value="Iniciar_login">
+													<table width="350" border="0" cellspacing="7" cellpadding="0" class="TextosVentana" align="center">
+													<tr>
+														<td align="right"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_Usuario; ?>&nbsp;</td>
+														<td><input type="text" name="uid" size="18" class="CampoTexto" class="keyboardInput"></td>
+													</tr>
+													<tr>
+														<td align="right"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_Contrasena; ?>&nbsp;</td>
+														<td><input type="password" name="clave" size="18" class="CampoTexto keyboardInput" class="keyboardInput" style="border-width: 1px; font-size: 9px; font-family: VErdana, Tahoma, Arial;"></td>
+													</tr>
+													<tr>
+														<td align="right" valign="middle"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_CodigoSeguridad; ?></td>
+														<td valign="middle">
+														<img src="core/captcha.php">
+														</td>
+													</tr>
+													<tr>
+														<td width="150" align="right" valign="middle"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_IngreseCodigoSeguridad; ?></td>
+														<td valign="middle">
+														<img src="img/tango_go-next.png" align="absmiddle"> <input type="text" name="captcha" size="7" maxlength=6 style="border-width: 1px; font-size: 9px; font-family: VErdana, Tahoma, Arial;">
+														</td>
+													</tr>
+													<tr>
+														<td></td>
+														<td>
+															<input type="Submit"  class="Botones" value=" <?php echo $MULTILANG_Ingresar; ?> >>>" >
+														</td>
+													</tr>
+													</table>
+													</form>
+													<?php
+														// Muestra boton de login por red social si aplica
+														if ($AlMenosUnOAuth>0)
+															echo '<hr>
+																<input type="Button"  class="BotonesGoogle" value="<<< '.$MULTILANG_OauthLogin.' >>>" OnClick="IntercambiarLogin(\'LoginOauth\');IntercambiarLogin(\'LoginClasico\');">';
+													?>
+												</td></tr>
+										</table>
+										</div>
+
+
 								</td>
 								<td align="center">
 										<img src="img/practico_login.png" alt="" border="0">
 								</td>
 						</tr></table>
-						</form>
 						
-
-						<form name="login_google" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;">
-						<input type="hidden" name="WSOn" value="1">
-						<input type="hidden" name="OAuthSrv" value="Google">
-						<input type="hidden" name="WSKey" value="<?php echo $LlaveDePaso; ?>">
-						<input type="hidden" name="WSId" value="autenticacion_oauth">
-						<img src="inc/oauth/logos/google.png" border=0 width=94 height=35><br>
-						<input type="Submit"  class="BotonesGoogle" value="<?php echo $MULTILANG_GoogleLogin; ?>" >
-						</form>
-						<script language="JavaScript"> login_usuario.uid.focus(); </script>
 						</div>
-						
+
+						<script language="JavaScript"> login_usuario.uid.focus(); </script>
+
 			<?php
 			mensaje($MULTILANG_Importante,$MULTILANG_AccesoExclusivo,'100%','../img/tango_dialog-information.png','TextosVentana');
 			cerrar_ventana();
@@ -1228,7 +1357,7 @@
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
-			$tipo_entrada="text"; // Se cambia a date si se trata de un campo con validacion de fecha
+			$tipo_entrada="text"; // Se cambia a date si se trata de un campo con validacion de fecha, si se cambia a password es tipo clave...
 
 			// Especifica longitud visual de campo en caso de haber sido definida
 			$cadena_longitud_visual=' size="20" ';
@@ -1254,6 +1383,12 @@
 				{
 					$cadena_longitud_visual=' size="11" ';
 					$tipo_entrada="date";
+				}
+
+			// Si el campo es de tipo clave cambia el input a password
+			if ($registro_campos["tipo"]=="texto_clave")
+				{
+					$tipo_entrada="password";
 				}
 
 			// Define si muestra o no teclado virtual
@@ -1816,6 +1951,7 @@
 													// Formatea cada campo de acuerdo a su tipo
 													// CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas abajo tambien
 													if (@$registro_campos["tipo"]=="texto_corto") $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana);
+													if (@$registro_campos["tipo"]=="texto_clave") $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana);
 													if (@$registro_campos["tipo"]=="texto_largo") $objeto_formateado = @cargar_objeto_texto_largo($registro_campos,$registro_datos_formulario);
 													if (@$registro_campos["tipo"]=="texto_formato") { $objeto_formateado = @cargar_objeto_texto_formato($registro_campos,$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
 													if (@$registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = @cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario);
@@ -1858,6 +1994,7 @@
 								// Formatea cada campo de acuerdo a su tipo
 								// CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas arriba tambien
 								if ($registro_campos["tipo"]=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana);
+								if ($registro_campos["tipo"]=="texto_clave") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana);
 								if ($registro_campos["tipo"]=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos,$registro_datos_formulario);
 								if ($registro_campos["tipo"]=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
 								if ($registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario);

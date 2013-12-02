@@ -43,6 +43,9 @@ LogCambios="
  * Added: Asistente de instalación y panel de configuración soportan ahora los parámetros de autenticación por Google
  * Added: Cálculo automático del URI para autenticación por Google
  * Added: Inicio de sesion con OAuth para 22 proveedores diferentes:  Google, Facebook, LinkedIn, Instagram, Dropbox, Microsoft (Live), Flickr, Twitter, Foursquare, XING, Salesforce, Bitbucket, Yahoo, Box, Disqus, Eventful, SurveyMonkey, RightSignature, Fitbit, Scoop.it, Tumblr, StockTwits
+ * Added: Marco para selección de red social o proveedor OAuth durante el login cuando se encuentra al menos uno activo
+ * Added: Nuevo campo de datos tipo contrasena durante el diseno de formularios
+ * Added: Ahora Practico puede comparar la version actualmente instalada con los ultimos lanzamientos para avisar al administrador del sistema sobre su disponibilidad
  * Fixed: Mensajes de validación para el proceso de autenticación cuando la función file_get_contents() no opera correctamente
  * Fixed: Solucionado posible XSS al limpiar la variable accion durante cada ejecución.  Gracias a la empresa Secunia por su análisis.
  * Fixed: Inclusión de logo de google para no depender de instalaciones sin conexión a Internet

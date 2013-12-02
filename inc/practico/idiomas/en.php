@@ -129,7 +129,9 @@
 	$MULTILANG_AccesoExclusivo='Access to this software is only for registered users. For your safety, never share your username and password.';
 	$MULTILANG_LoginNoWSTit='Error trying to load the authentication webservice';
 	$MULTILANG_LoginNoWSDes='The file_get_contents() function can not to load the XML output file built by Practico authentication process.<br>  Check your web server configuration/installation to see that this funtion can works correctly and without restrictions.<br>  A way to check that Practicos process is fine but your server doesnt allow to load the XML file<br>is opening the next link and checking if your browser loads the XML correctly.  Activating debug mode on your Practicos config you could see more details: ';
-	$MULTILANG_GoogleLogin='Login using my Google account';
+	$MULTILANG_OauthLogin='Login using my social network';
+	$MULTILANG_LoginClasico='Login with Practicos account';
+	$MULTILANG_LoginOauthDes='<b>Social networks and other authentication providers availables</b><br>Click over the logo to login using the username and password from your favorite site.';
 
 	//Banderas de campos en formularios
 	$MULTILANG_TitValorUnico='The value entered does not accept duplicate';
@@ -230,6 +232,8 @@
 	$MULTILANG_ErrBkpBD='An error occurred during the database backup';
 	$MULTILANG_ActMsj4='If any of the files could not be written by this wizard by permissions issues, the patch can also be applied manually by the administrator or by copying only files missing';
 	$MULTILANG_ActMsj5='File structure or type unsupported';
+	$MULTILANG_ActAlertaVersion='There is a new version of Practico available to download.<br>We recomend you to download the new version or upgrade package from the oficial website and upgrade your system to have the new features.';
+	$MULTILANG_ActBuscarVersion='Look for new versions automatically';
 	
 	//Formularios
 	$MULTILANG_ErrFrmDuplicado='Failed doubled value (the) field (s): $campo . The value you entered already exists in the database.';
@@ -252,6 +256,7 @@
 	$MULTILANG_FrmTipoTit3='Internal objects';
 	$MULTILANG_FrmTipo8='Report predesigned (Data Table or Graph)';
 	$MULTILANG_FrmTipo9='Slider (numeric range selector - HTML5)';
+	$MULTILANG_FrmTipo10='Password field';
 	$MULTILANG_FrmValorMinimo='Minimum value';
 	$MULTILANG_FrmValorMaximo='Maximum value';
 	$MULTILANG_FrmValorSalto='Step value';
@@ -751,7 +756,7 @@
 	$MULTILANG_AyudaDesLdapUO='User Context Connection. Must exist on the LDAP server, eg people, sales, marketing, etc.';
 	$MULTILANG_TitInsPaso3='Writing Configuration and connecting to Database';
 	$MULTILANG_DesInsPaso3='I am writing configuracion.php file located in / core with the parameters you specified and is being tested Connects to the specified database.';
-	$MULTILANG_ErrorEscribirConfig='<b>Found errors when trying to write the configuration file! </b>: <br> If you want an alternative may be to change your own default values ​​contained in the file core/configuracion.php or ws_llaves.php depending of your desired changes.<br> <br> You can also change file permissions for configuracion.php and try again with this wizard.';
+	$MULTILANG_ErrorEscribirConfig='<b>Found errors when trying to write the configuration file! </b>: <br> If you want an alternative may be to change your own default values ​​contained in the file core/configuracion.php or ws_llaves.php or core/ws_oauth.php depending of your desired changes.<br> <br> You can also change file permissions for configuracion.php and try again with this wizard.';
 	$MULTILANG_ErrorConexBD='<b> found errors when connecting to the database! </b>: <br> Check the values ​​entered in the previous step and try again.';
 	$MULTILANG_InfoPaso3='<b> Everything seems fine with the basic configuration of PDO. </b> <br> The last step is to tell the installation wizard like trying your database:<br><br>
 				<li><b>1.</b> Add data start the database, this includes the initial user (admin), menus and other records on Practico Core tables. This is the best choice for new installations.
@@ -766,15 +771,12 @@
 	$MULTILANG_MsjFinal2='Remember to completely remove the installation directory (folder / ins) </b> </u> to prevent other person run these scripts again on a production system can cause any damage.';
 	$MULTILANG_MsjFinal2='Summary of operations executed';
 	$MULTILANG_AuthLDAPTitulo='LDAP based login';
-	$MULTILANG_AuthOauthTitulo='Google API based login';
-	$MULTILANG_AuthOauthPlantilla='Application name';
+	$MULTILANG_AuthOauthPlantilla='Template user';
 	$MULTILANG_AuthOauthId='Client ID';
 	$MULTILANG_AuthOauthSecret='Client Secret';
 	$MULTILANG_AuthOauthURI='Redirect URI';
-	$MULTILANG_AuthOauthLlave='Simple key or Developer Key';
-	$MULTILANG_OauthTitURI='You should register this URI in your Google API first';
-	$MULTILANG_OauthDesURI='Important: Your return URI should be under a domain or public IP because Google will need to link with that. This URI is automatically created acording to the path during installation time.';
-	$MULTILANG_OauthWarnURI='The URI in config file is different to the calculated URI. You should check and update that value';
+	$MULTILANG_OauthTitURI='Before you continue, you should register a new application with the provider to obtain an ID, Secret and URI to config the auth service.  The URI to register is calculated automatically by Practico in each URI field for this form.';
+	$MULTILANG_OauthDesURI='Important: Your return URI should be under a domain or public IP because your provider will need to link with that. This URI is automatically created acording to the path during installation time.';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';
