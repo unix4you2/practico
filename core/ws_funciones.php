@@ -179,13 +179,28 @@ if ($WSId=="verificar_credenciales")
 				}
 
 			// Define las variables del usuario a buscar/crear segun el servicio OAuth utilizado
-			if ($OAuth_servicio=='Google')	
+			if ($OAuth_servicio=='Google' || $OAuth_servicio=='LinkedIn' || $OAuth_servicio=='Instagram' || $OAuth_servicio=='Microsoft' || $OAuth_servicio=='Flickr' || $OAuth_servicio=='Twitter' || $OAuth_servicio=='Foursquare' || $OAuth_servicio=='XING' || $OAuth_servicio=='Salesforce' || $OAuth_servicio=='Bitbucket' || $OAuth_servicio=='Yahoo' || $OAuth_servicio=='Box' || $OAuth_servicio=='Disqus' || $OAuth_servicio=='Eventful' || $OAuth_servicio=='SurveyMonkey' || $OAuth_servicio=='RightSignature' || $OAuth_servicio=='Fitbit' || $OAuth_servicio=='ScoopIt' || $OAuth_servicio=='Tumblr' || $OAuth_servicio=='StockTwits')
 				{
 					// Otros disponibles: id,verified_email (0|1),given_name,family_name,link (G+),picture (link),gender (male|female),locale (es|en...)
 					$login_chk=$user->email;
 					$nombre_chk=$user->name;
 					$correo_chk=$user->email;
 				}
+			if ($OAuth_servicio=='Facebook')
+				{
+					// Otros disponibles: id,name,first_name,middle_name,last_name, link, username, education(arreglo:school[id,name],type),gender (male|female),email, timezone,locale (es_LA...),verified,updated_time
+					$login_chk=$user->username;
+					$nombre_chk=$user->name;
+					$correo_chk=$user->email;
+				}
+			if ($OAuth_servicio=='Dropbox')
+				{
+					// Otros disponibles: referral_link,display_name,uid (numerico),country (ej:CO),quota_info Arreglo: [datastores,shared,quota,normal],email
+					$login_chk=$user->uid;
+					$nombre_chk=$user->display_name;
+					$correo_chk=$user->email;
+				}
+
 
 
 			// Busca datos del usuario Practico, segun tipo de servicio OAuth para tener configuraciones de permisos y parametros propios de la herramienta
@@ -546,7 +561,7 @@ if ($WSId=="autenticacion_oauth")
 		// Define parametros del cliente segun el servicio detectado
 		$client->server = $OAuth_servicio;
 		// Establecerlo solo si se necesita llamar al API sin el usuario presente y el token puede expirar
-		if ($OAuth_Offline==true)
+		if (@$OAuth_Offline==true)
 			$client->offline = $OAuth_Offline;
 		$client->debug = $OAuth_Depuracion;
 		$client->debug_http = $OAuth_DepuracionHttp;

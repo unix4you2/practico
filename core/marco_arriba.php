@@ -631,7 +631,7 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="http://code.google.com/apis/console" target="_BLANK"><img src="inc/oauth/logos/google.png" border=0 width=94 height=35></a>
+												<a href="http://code.google.com/apis/console" target="_BLANK"><img src="inc/oauth/logos/google.png" border=0 width=94 height=35 align=middle></a>
 											</td>
 										</tr>
 										<tr>
@@ -674,7 +674,7 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="https://developers.facebook.com/apps" target="_BLANK"><img src="inc/oauth/logos/facebook.png" border=0 width=94 height=35></a>
+												<a href="https://developers.facebook.com/apps" target="_BLANK"><img src="inc/oauth/logos/facebook.png" border=0 width=94 height=35 align=middle></a>
 											</td>
 										</tr>
 										<tr>
@@ -717,7 +717,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="https://dev.twitter.com/apps/new" target="_BLANK"><img src="inc/oauth/logos/twitter.png" border=0 width=94 height=35></a>
+												<a href="https://dev.twitter.com/apps/new" target="_BLANK"><img src="inc/oauth/logos/twitter.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -762,7 +763,7 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="https://www.dropbox.com/developers/apps" target="_BLANK"><img src="inc/oauth/logos/dropbox.png" border=0 width=94 height=35></a>
+												<a href="https://www.dropbox.com/developers/apps" target="_BLANK"><img src="inc/oauth/logos/dropbox.png" border=0 width=94 height=35 align=middle></a>
 											</td>
 										</tr>
 										<tr>
@@ -805,7 +806,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="http://www.flickr.com/services/apps/create/" target="_BLANK"><img src="inc/oauth/logos/flickr.png" border=0 width=94 height=35></a>
+												<a href="http://www.flickr.com/services/apps/create/" target="_BLANK"><img src="inc/oauth/logos/flickr.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -848,7 +850,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="https://manage.dev.live.com/AddApplication.aspx" target="_BLANK"><img src="inc/oauth/logos/microsoft.png" border=0 width=94 height=35></a>
+												<a href="https://manage.dev.live.com/AddApplication.aspx" target="_BLANK"><img src="inc/oauth/logos/microsoft.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -893,7 +896,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="https://foursquare.com/developers/apps" target="_BLANK"><img src="inc/oauth/logos/foursquare.png" border=0 width=94 height=35></a>
+												<a href="https://foursquare.com/developers/apps" target="_BLANK"><img src="inc/oauth/logos/foursquare.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -936,7 +940,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="https://bitbucket.org/account/" target="_BLANK"><img src="inc/oauth/logos/bitbucket.png" border=0 width=94 height=35></a>
+												<a href="https://bitbucket.org/account/" target="_BLANK"><img src="inc/oauth/logos/bitbucket.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -979,7 +984,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="http://www.salesforce.com/" target="_BLANK"><img src="inc/oauth/logos/salesforce.png" border=0 width=94 height=35></a>
+												<a href="http://www.salesforce.com/" target="_BLANK"><img src="inc/oauth/logos/salesforce.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -1024,7 +1030,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="https://developer.apps.yahoo.com/projects/" target="_BLANK"><img src="inc/oauth/logos/yahoo.png" border=0 width=94 height=35></a>
+												<a href="https://developer.apps.yahoo.com/projects/" target="_BLANK"><img src="inc/oauth/logos/yahoo.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -1067,7 +1074,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="https://www.box.com/developers/services" target="_BLANK"><img src="inc/oauth/logos/box.png" border=0 width=94 height=35></a>
+												<a href="https://www.box.com/developers/services" target="_BLANK"><img src="inc/oauth/logos/box.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -1110,7 +1118,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="http://disqus.com/api/applications/" target="_BLANK"><img src="inc/oauth/logos/disqus.png" border=0 width=94 height=35></a>
+												<a href="http://disqus.com/api/applications/" target="_BLANK"><img src="inc/oauth/logos/disqus.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -1155,7 +1164,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="https://rightsignature.com/oauth_clients/new" target="_BLANK"><img src="inc/oauth/logos/rightsignature.png" border=0 width=94 height=35></a>
+												<a href="https://rightsignature.com/oauth_clients/new" target="_BLANK"><img src="inc/oauth/logos/rightsignature.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -1198,7 +1208,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="https://dev.fitbit.com/apps/new" target="_BLANK"><img src="inc/oauth/logos/fitbit.png" border=0 width=94 height=35></a>
+												<a href="https://dev.fitbit.com/apps/new" target="_BLANK"><img src="inc/oauth/logos/fitbit.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -1241,7 +1252,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="https://www.scoopit.com/developers/apps" target="_BLANK"><img src="inc/oauth/logos/scoopit.png" border=0 width=94 height=35></a>
+												<a href="https://www.scoopit.com/developers/apps" target="_BLANK"><img src="inc/oauth/logos/scoopit.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -1286,7 +1298,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="http://www.tumblr.com/oauth/apps" target="_BLANK"><img src="inc/oauth/logos/tumblr.png" border=0 width=94 height=35></a>
+												<a href="http://www.tumblr.com/oauth/apps" target="_BLANK"><img src="inc/oauth/logos/tumblr.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -1329,7 +1342,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="http://stocktwits.com/developers/apps/new" target="_BLANK"><img src="inc/oauth/logos/stocktwits.png" border=0 width=94 height=35></a>
+												<a href="http://stocktwits.com/developers/apps/new" target="_BLANK"><img src="inc/oauth/logos/stocktwits.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -1372,7 +1386,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="https://www.linkedin.com/secure/developer?newapp=" target="_BLANK"><img src="inc/oauth/logos/linkedin.png" border=0 width=94 height=35></a>
+												<a href="https://www.linkedin.com/secure/developer?newapp=" target="_BLANK"><img src="inc/oauth/logos/linkedin.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -1417,7 +1432,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="http://instagram.com/developer/register/" target="_BLANK"><img src="inc/oauth/logos/instagram.png" border=0 width=94 height=35></a>
+												<a href="http://instagram.com/developer/register/" target="_BLANK"><img src="inc/oauth/logos/instagram.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -1460,7 +1476,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="https://developer.surveymonkey.com/apps/register" target="_BLANK"><img src="inc/oauth/logos/surveymonkey.png" border=0 width=94 height=35></a>
+												<a href="https://developer.surveymonkey.com/apps/register" target="_BLANK"><img src="inc/oauth/logos/surveymonkey.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -1503,7 +1520,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="http://api.eventful.com/keys/new" target="_BLANK"><img src="inc/oauth/logos/eventful.png" border=0 width=94 height=35></a>
+												<a href="http://api.eventful.com/keys/new" target="_BLANK"><img src="inc/oauth/logos/eventful.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>
@@ -1548,7 +1566,8 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="https://dev.xing.com/applications" target="_BLANK"><img src="inc/oauth/logos/xing.png" border=0 width=94 height=35></a>
+												<a href="https://dev.xing.com/applications" target="_BLANK"><img src="inc/oauth/logos/xing.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
 										<tr>

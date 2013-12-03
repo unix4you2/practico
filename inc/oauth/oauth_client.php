@@ -1046,7 +1046,7 @@ class oauth_client_class
 		{
 			if(!function_exists('session_start'))
 				return $this->SetError('Session variables are not accessible in this PHP environment');
-			if(!session_start())
+			if(@!session_start())
 				return($this->SetPHPError('it was not possible to start the PHP session', $php_error_message));
 			$this->session_started = true;
 		}
