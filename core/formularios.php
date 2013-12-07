@@ -353,14 +353,17 @@
 			if ($ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
 			if ($titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error=$MULTILANG_ErrFrmCampo1;
 			if ($campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error=$MULTILANG_ErrFrmCampo2;
+
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES ('$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores','$valor_etiqueta','$url_iframe','$objeto_en_ventana','$informe_vinculado','$maxima_longitud','$valor_minimo','$valor_maximo','$valor_salto')");
+					// Define la consulta de insercion del nuevo campo
+					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES ('$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores','$valor_etiqueta','$url_iframe','$objeto_en_ventana','$informe_vinculado','$maxima_longitud','$valor_minimo','$valor_maximo','$valor_salto')";
+					echo '<script language="JavaScript"> alert("'.$consulta_insercion.'");  </script>';
+					ejecutar_sql_unaria($consulta_insercion);
 					auditar("Crea campo $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
-						<input type="Hidden" name="popup_activo" value="FormularioCampos">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
@@ -509,9 +512,9 @@ if ($accion=="editar_formulario")
 				<?php 
 					//Define tipo de accion si se trata de creacion o modificacion
 					if (@$popup_activo=="FormularioCampos")
-						echo '<input type="Hidden" name="accion" value="actualizar_campo_formulario">';
+						echo '<input type="Hidden" name="accion" value="actualizar_campo_formulario">actualizar_campo_formulario';
 					else
-						echo '<input type="Hidden" name="accion" value="guardar_campo_formulario">';
+						echo '<input type="Hidden" name="accion" value="guardar_campo_formulario">guardar_campo_formulario';
 				?>
 				<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 				<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">
@@ -1050,19 +1053,19 @@ if ($accion=="editar_formulario")
 							<tr>
 								<td width="200" align="right"><?php echo $MULTILANG_FrmValorMinimo; ?>:</td>
 								<td width="400" >
-									<input type="text" name="valor_minimo" size="4" class="CampoTexto" value="<?php if (@$registro_campo_editar["valor_minimo"]!='1') echo $registro_campo_editar["valor_minimo"]; else echo '1'; ?>">
+									<input type="text" name="valor_minimo" size="4" class="CampoTexto" value="<?php if (@$registro_campo_editar["valor_minimo"]!='1') echo @$registro_campo_editar["valor_minimo"]; else echo '1'; ?>">
 								</td>
 							</tr>
 							<tr>
 								<td width="200" align="right"><?php echo $MULTILANG_FrmValorMaximo; ?>:</td>
 								<td width="400" >
-									<input type="text" name="valor_maximo" size="4" class="CampoTexto" value="<?php if (@$registro_campo_editar["valor_maximo"]!='100') echo $registro_campo_editar["valor_maximo"]; else echo '100'; ?>">
+									<input type="text" name="valor_maximo" size="4" class="CampoTexto" value="<?php if (@$registro_campo_editar["valor_maximo"]!='100') echo @$registro_campo_editar["valor_maximo"]; else echo '100'; ?>">
 								</td>
 							</tr>
 							<tr>
 								<td width="200" align="right"><?php echo $MULTILANG_FrmValorSalto; ?>:</td>
 								<td width="400" >
-									<input type="text" name="valor_salto" size="4" class="CampoTexto" value="<?php if (@$registro_campo_editar["valor_salto"]!='1') echo $registro_campo_editar["valor_salto"]; else echo '1'; ?>">
+									<input type="text" name="valor_salto" size="4" class="CampoTexto" value="<?php if (@$registro_campo_editar["valor_salto"]!='1') echo @$registro_campo_editar["valor_salto"]; else echo '1'; ?>">
 									<a href="#" title="<?php echo $MULTILANG_FrmTitValorSalto; ?>"><img src="img/icn_10.gif" border=0></a>
 								</td>
 							</tr>

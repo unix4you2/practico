@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
 VersionCompatibleAno="13"
-VersionCompatibleMes="911"
+VersionCompatibleMes="912"
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno="13"
-VersionFinalMes="912"
+VersionFinalAno="14"
+VersionFinalMes="1"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version
@@ -14,21 +14,8 @@ ArchivoVersion=" inc/version_actual.txt "
 
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
-index.php
-core/comunes.php
-core/marco_abajo.php
-core/marco_arriba.php
-core/objetos.php
-core/sesion.php
-core/ws_funciones.php
-core/ws_nucleo.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
-inc/http/*
-inc/oauth/*
-skin/nomo/general.css
-skin/nature/general.css
-
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -39,31 +26,17 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
- * Added: Posibilidad de inicio de sesion mediante Google.  Solo inicio de sesion, los permisos continuan independientes en la plataforma para el usuario con el mismo login de Google (OAuth 2.0)
- * Added: Asistente de instalación y panel de configuración soportan ahora los parámetros de autenticación por Google
- * Added: Cálculo automático del URI para autenticación por Google
- * Added: Inicio de sesion con OAuth para 22 proveedores diferentes:  Google, Facebook, LinkedIn, Instagram, Dropbox, Microsoft (Live), Flickr, Twitter, Foursquare, XING, Salesforce, Bitbucket, Yahoo, Box, Disqus, Eventful, SurveyMonkey, RightSignature, Fitbit, Scoop.it, Tumblr, StockTwits
- * Added: Marco para selección de red social o proveedor OAuth durante el login cuando se encuentra al menos uno activo
- * Added: Nuevo campo de datos tipo contrasena durante el diseno de formularios
- * Added: Ahora Practico puede comparar la version actualmente instalada con los ultimos lanzamientos para avisar al administrador del sistema sobre su disponibilidad
- * Fixed: Mensajes de validación para el proceso de autenticación cuando la función file_get_contents() no opera correctamente
- * Fixed: Solucionado posible XSS al limpiar la variable accion durante cada ejecución.  Gracias a la empresa Secunia por su análisis.
- * Fixed: Inclusión de logo de google para no depender de instalaciones sin conexión a Internet
- * Fixed: Generación del archivo de configuración incluye todos los comentarios desde el momento de instalación
- * Fixed: Actualización de archivos de idioma
- * Fixed: Se verifica que se cuente con el modulo de google-api de Práctico cuando se habilite ese modo de autenticación
- * Fixed: Texto multi-idioma para seleccion de gráficos de tipo torta en la generación de informes
- * Fixed: Enlace a sitio web oficial en pie de pagina actualizado (practico.org)
- * Fixed: Se limpia en cada ejecucion el contenido de error_titulo y error_descripcion para evitar XSS
+
+--------------------------------------
+El proyecto Práctico agradece a las siguientes personas por su apoyo mediante donaciones
+para la liberación de la versión 14.1 realizadas en www.indiegogo.com/projects/practico/:
+ * Daniel Morales
+--------------------------------------
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-ALTER TABLE core_usuario CHANGE COLUMN login login VARCHAR(250) NOT NULL;
-ALTER TABLE core_auditoria CHANGE COLUMN usuario_login usuario_login VARCHAR(250) NOT NULL;
-ALTER TABLE core_usuario_menu CHANGE COLUMN usuario usuario VARCHAR(250) NOT NULL;
-ALTER TABLE core_usuario_informe CHANGE COLUMN usuario usuario VARCHAR(250) NOT NULL;
 "
 
 ########################################################################
