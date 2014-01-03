@@ -296,6 +296,19 @@
 			<a href="#" title="<?php echo $MULTILANG_Importante; ?>" name="<?php echo $MULTILANG_AyudaDesAuth; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
+	<tr>
+		<td valign=top align=right>
+			<?php echo $MULTILANG_ProtoTransporte; ?>
+		</td>
+		<td valign=top>
+			<select  name="Auth_ProtoTransporteNEW" class="Combos">
+				<option value="" <?php if ($Auth_ProtoTransporte=="") echo "SELECTED"; ?> ><?php echo $MULTILANG_ProtoTransAUTO; ?></option>
+				<option value="http" <?php if ($Auth_ProtoTransporte=="http") echo "SELECTED"; ?> ><?php echo $MULTILANG_ProtoTransHTTP; ?></option>
+				<option value="https" <?php if ($Auth_ProtoTransporte=="https") echo "SELECTED"; ?> ><?php echo $MULTILANG_ProtoTransHTTPS; ?></option>
+			</select>
+			<a href="#" title="<?php echo $MULTILANG_Importante; ?>" name="<?php echo $MULTILANG_ProtoDescripcion; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+		</td>
+	</tr>
 </table>
 <hr>
 

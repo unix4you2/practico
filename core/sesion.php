@@ -79,6 +79,9 @@
 				$protocolo_webservice="http://";
 			else
 				$protocolo_webservice="https://";
+			// Si se tiene un protocolo preferido sobreescribe lo auto-detectado
+			if ($Auth_ProtoTransporte!="")
+				$protocolo_webservice=$Auth_ProtoTransporte."://";
 			// Construye la URL para solicitar el webservice.  La URL se debe poder resolver por el servidor web correctamente, ya sea por dominio o IP (interna o publica).  Ver /etc/hosts si algo.
 			$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
 			$webservice_validacion = $protocolo_webservice.$prefijo_webservice."?WSOn=1&WSKey=".$LlaveDePaso."&WSId=verificar_credenciales&uid=".$uid."&clave=".$clave;

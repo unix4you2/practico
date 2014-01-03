@@ -789,3 +789,9 @@
 
 	//OAuth
 	$MULTILANG_OauthButt='Autenticacion OAuth';
+	$MULTILANG_ProtoTransporte='Protocolo de transporte preferido';
+	$MULTILANG_ProtoTransAUTO='Autodetectar por URL';
+	$MULTILANG_ProtoTransHTTP='HTTP sin cifrar';
+	$MULTILANG_ProtoTransHTTPS='HTTP cifrado';
+	$MULTILANG_ProtoDescripcion='Autodetectar mira la URL mediante la cual accede el usuario y segun su cabecera determina si usa o no el cifrado,  HTTP sin cifrar permite aquellos con certificados autofirmados no validos poder recibir el webservice de autenticacion.  Es un modo no mas seguro pero si mas efectivo de siempre hacer login.   HTTP Cifrado requiere un certificado SSL valido emitido por un CA en su servidor.';
+	

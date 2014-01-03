@@ -208,13 +208,14 @@ $salida=sprintf("<?php
 	
 	// Tipo de motor usado para la autenticacion de usuarios
 	\$Auth_TipoMotor='%s';
+	\$Auth_ProtoTransporte='%s';
 	
 	// Configuracion LDAP - Auth_TipoMotor=ldap
 	\$Auth_TipoEncripcion='%s';
 	\$Auth_LDAPServidor='%s';
 	\$Auth_LDAPPuerto='%s';
 	\$Auth_LDAPDominio='%s';
-	\$Auth_LDAPOU='%s';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$PlantillaActivaNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$Auth_TipoMotorNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW);
+	\$Auth_LDAPOU='%s';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$PlantillaActivaNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW);
 			// Escribe el archivo de configuracion
 			$archivo_config=fopen("core/configuracion.php","w");
 			if($archivo_config==null)
