@@ -233,7 +233,8 @@
 	$MULTILANG_ActBuscarVersion='Buscar nuevas versiones automaticamente';
 	
 	//Formularios
-	$MULTILANG_ErrFrmDuplicado='Ha ocurrido un error de valor duplicado en el(los) campo(s): $campo . El valor ingresado ya existe en la base de datos.';
+	$MULTILANG_ErrFrmDuplicado="Ha ocurrido un error de valor duplicado en el(los) campo(s). El valor ingresado ya existe en la base de datos. Campo(s): ";
+	$MULTILANG_ErrFrmObligatorio="Ha olvidado diligenciar el campo obligatorio: ";
 	$MULTILANG_ErrFrmDatos='Problema en los datos ingresados';
 	$MULTILANG_ErrFrmCampo1='Debe indicar un t&iacute;tulo o etiqueta v&aacute;lida para el campo.';
 	$MULTILANG_ErrFrmCampo2='Debe indicar un campo v&aacute;lido para vincular con la tabla de datos asociada al formulario.';

@@ -135,7 +135,19 @@
 					$consulta_existente=ejecutar_sql("SELECT id FROM ".$tabla." WHERE $campo='$valor'");
 					$registro_existente = $consulta_existente->fetch();
 					if ($registro_existente["id"]!="")
-						$mensaje_error.=$MULTILANG_ErrFrmDuplicado;
+						$mensaje_error.=$MULTILANG_ErrFrmDuplicado.$campo.'<br>';
+				}
+
+			// Busca los campos del form marcados como obligatorios a los que no se les ingreso valor
+			$tabla=$registro_formulario["tabla_datos"];
+			$consulta_campos_obligatorios=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1 AND obligatorio=1");
+			while ($registro_campos_obligatorios = $consulta_campos_obligatorios->fetch())
+				{
+					$campo=$registro_campos_obligatorios["campo"];
+					$valor=$$campo;
+					// Verifica si es vacio para retornar el error
+					if ($valor=="")
+						$mensaje_error.=$MULTILANG_ErrFrmObligatorio.$campo.'<br>';
 				}
 
 			//Ejecuta consulta de insercion de datos
@@ -358,7 +370,6 @@
 				{
 					// Define la consulta de insercion del nuevo campo
 					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES ('$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores','$valor_etiqueta','$url_iframe','$objeto_en_ventana','$informe_vinculado','$maxima_longitud','$valor_minimo','$valor_maximo','$valor_salto')";
-					echo '<script language="JavaScript"> alert("'.$consulta_insercion.'");  </script>';
 					ejecutar_sql_unaria($consulta_insercion);
 					auditar("Crea campo $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
@@ -512,9 +523,9 @@ if ($accion=="editar_formulario")
 				<?php 
 					//Define tipo de accion si se trata de creacion o modificacion
 					if (@$popup_activo=="FormularioCampos")
-						echo '<input type="Hidden" name="accion" value="actualizar_campo_formulario">actualizar_campo_formulario';
+						echo '<input type="Hidden" name="accion" value="actualizar_campo_formulario">';
 					else
-						echo '<input type="Hidden" name="accion" value="guardar_campo_formulario">guardar_campo_formulario';
+						echo '<input type="Hidden" name="accion" value="guardar_campo_formulario">';
 				?>
 				<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 				<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">

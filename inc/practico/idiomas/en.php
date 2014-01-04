@@ -234,9 +234,10 @@
 	$MULTILANG_ActMsj5='File structure or type unsupported';
 	$MULTILANG_ActAlertaVersion='There is a new version of Practico available to download.<br>We recomend you to download the new version or upgrade package from the oficial website and upgrade your system to have the new features.';
 	$MULTILANG_ActBuscarVersion='Look for new versions automatically';
-	
+
 	//Formularios
-	$MULTILANG_ErrFrmDuplicado='Failed doubled value (the) field (s): $campo . The value you entered already exists in the database.';
+	$MULTILANG_ErrFrmDuplicado='Failed duplicated value (the) field (s). The value you entered already exists in the database. Field(s): ';
+	$MULTILANG_ErrFrmObligatorio="You forgot to enter mandatory field: ";
 	$MULTILANG_ErrFrmDatos='There is a problem in the input data';
 	$MULTILANG_ErrFrmCampo1='You must enter a valid title or label for the field.';
 	$MULTILANG_ErrFrmCampo2='You must enter a valid field to link to the data table associated with the form.';
