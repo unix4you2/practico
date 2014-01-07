@@ -280,8 +280,8 @@
 		global $accion;
 		// Escapar siempre las acciones pues deberian tener solo letras, numeros y underlines.
 		$accion=escapar_contenido($accion);
-		$accion = ereg_replace("[^A-Za-z0-9_]", "", $accion);
-		
+		$accion = preg_replace("/[^A-Za-z0-9_]/", "", $accion);
+
 		// Escapa otras variables de uso comun
 		global $error_titulo,$error_descripcion;
 		$error_titulo=escapar_contenido($error_titulo);

@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
 VersionCompatibleAno="13"
-VersionCompatibleMes="912"
+VersionCompatibleMes="914"
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno="13"
-VersionFinalMes="914"
+VersionFinalAno="14"
+VersionFinalMes="1"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version
@@ -18,6 +18,7 @@ core/objetos.php
 core/formularios.php
 core/comunes.php
 core/sesion.php
+core/tablas.php
 core/marco_arriba.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
@@ -33,7 +34,10 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 * Added: Tester: Victor Hugo Marin.  Ahora se puede indicar el protocolo preferido para el transporte en el momento de autenticación cuando se utilizan protocolos HTTP o HTTPS.  Aquellos con certificados autofirmados o no emitidos por un CA reconocido pueden presentar problemas con la recuperación de los tokens al momento de autenticación por lo que se deja la posibilidad al administrador de definir la forma de autenticar.
 * Added: Tester: Victor Hugo Marin.  Los campos marcados como obligatorios en el diseno de formularios ahora no son sólo informativos, sino que son validados antes de enviar la consulta para almacenar el registro.
+* Added: Documentación mejorada y actualizada sobre la web oficial (Manuales)
 * Fixed: Se retira de las opciones para motores de autenticación a Google, pues ya se encuentra disponible como proveedor OAuth
+* Fixed: Reemplazo de función obsoleta de PHP ereg_replace por preg_replace (core/comunes.php|283)
+* Fixed: Se elimina la posibilidad de indicar la posición del campo en la tabla durante su edición por compatibilidad con todos los motores
 --------------------------------------
 El proyecto Práctico agradece a las siguientes personas por su apoyo mediante donaciones
 para la liberación de la versión 14.1 realizadas en www.indiegogo.com/projects/practico/:

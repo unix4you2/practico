@@ -607,8 +607,6 @@
 	$MULTILANG_TblFechaHora='Current date';
 	$MULTILANG_TblDesPredet='Format: Only one value, unescaped. For strings use single quotation marks at the beginning and end';
 	$MULTILANG_TblAgregando='Add the field';
-	$MULTILANG_TblAlFinal='At the end of all fields';
-	$MULTILANG_TblDespuesDe='After';
 	$MULTILANG_TblCamposDef='Fields already defined in the table';
 	$MULTILANG_TblTipoClave='Key type';
 	$MULTILANG_TblNoElim='Cant be eliminated';

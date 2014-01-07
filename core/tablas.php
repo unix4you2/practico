@@ -121,9 +121,6 @@
 					$consulta .= " DEFAULT $predeterminado ";
 				else
 					$consulta .= " DEFAULT $predeterminado_valor ";
-			$consulta .= "$autoincremento ";
-			if ($despues_campo!="")
-				$consulta .= " AFTER $despues_campo ";
 
 			// Realiza la operacion
 			ejecutar_sql_unaria($consulta);
@@ -214,6 +211,7 @@ if ($accion=="editar_tabla")
 						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesLongitud2; ?>"><img src="img/icn_10.gif" border=0></a>	
 						</td>
 					</tr>
+					
 					<tr>
 						<td align="right"><?php echo $MULTILANG_TblAutoinc; ?>:</td>
 						<td>
@@ -224,6 +222,7 @@ if ($accion=="editar_tabla")
 							<a href="#" title="<?php echo $MULTILANG_TblTitAutoinc; ?>" name="<?php echo $MULTILANG_TblDesAutoinc; ?>"><img src="img/icn_12.gif" border=0></a>
 						</td>
 					</tr>
+					
 					<tr>
 						<td align="right"><?php echo $MULTILANG_TblNulos; ?>:</td>
 						<td>
@@ -244,19 +243,6 @@ if ($accion=="editar_tabla")
 							</select><br>
 							<input type="text" name="predeterminado_valor" size="20" class="CampoTexto">
 							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesPredet; ?>"><img src="img/icn_10.gif" border=0></a>	
-						</td>
-					</tr>
-					<tr>
-						<td align="right"><?php echo $MULTILANG_TblAgregando; ?>:</td>
-						<td>
-							<select name="despues_campo">
-								<option value="" ><?php echo $MULTILANG_TblAlFinal; ?></option>
-								<?php
-									$resultado=consultar_columnas($nombre_tabla);
-									for($i=0;$i<count($resultado);$i++)
-										echo '<option value="'.$resultado[$i]["nombre"].'" >'.$MULTILANG_TblDespuesDe.' '.$resultado[$i]["nombre"].'</option>';								
-								?>
-							</select>
 						</td>
 					</tr>
 					<tr>

@@ -277,7 +277,7 @@
 	$MULTILANG_FrmValidaDes='Tipo de filtro a ser aplicado cuando el usuario ingresa informaci&oacute;n por teclado';
 	$MULTILANG_FrmLectura='Campo de solo lectura';
 	$MULTILANG_FrmTitLectura='Define si se puede cambiar su valor';
-	$MULTILANG_FrmDesLectura='Propiedad util para campos o formuarios de consulta por parte del usuario donde se requiere visualizar el valor pero no permitir su modificacion';
+	$MULTILANG_FrmDesLectura='Propiedad util para campos o formularios de consulta por parte del usuario donde se requiere visualizar el valor pero no permitir su modificacion';
 	$MULTILANG_FrmAyuda='T&iacute;tulo de ayuda';
 	$MULTILANG_FrmDesAyuda='Texto que aparecer&aacute; como encabezado para el texto de ayuda del campo explicando al usuario qu&eacute; debe ingresar';
 	$MULTILANG_FrmTxtAyuda='Texto de ayuda';
@@ -604,8 +604,6 @@
 	$MULTILANG_TblFechaHora='Fecha y hora actual';
 	$MULTILANG_TblDesPredet='Formato: S&oacute;lo un valor, sin caracteres de escape.  Para cadenas de caracteres utilice comillas simples al principio y al final';
 	$MULTILANG_TblAgregando='Agregar el campo';
-	$MULTILANG_TblAlFinal='Al final de todos los campos';
-	$MULTILANG_TblDespuesDe='Despu&eacute;s de';
 	$MULTILANG_TblCamposDef='Campos ya definidos en la tabla';
 	$MULTILANG_TblTipoClave='Tipo clave';
 	$MULTILANG_TblNoElim='No Puede Eliminarse';
