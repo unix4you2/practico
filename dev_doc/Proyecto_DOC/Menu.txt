@@ -43,25 +43,40 @@ Footer: Copyright (c) 2013 - John F. Arroyave Gutierrez |
 # --------------------------------------------------------------------------
 
 
-File: Introduccion  (core/doc_intro.php)
-File: Configuracion base  (core/doc_configuracion.php)
-File: Conexiones PDO  (core/conexiones.php)
-File: Libreria base  (core/comunes.php)
-
 Group: Modulos Principales  {
 
    File: Articulador  (index.php)
-   File: Formularios  (no auto-title, core/formularios.php)
-   File: Informes  (no auto-title, core/informes.php)
-   File: Menues  (no auto-title, core/menus.php)
-   File: Objetos  (no auto-title, core/objetos.php)
-   File: Actualizacion  (no auto-title, core/actualizacion.php)
-   File: Sesion  (no auto-title, core/sesion.php)
-   File: Tablas  (no auto-title, core/tablas.php)
-   File: Usuarios  (no auto-title, core/usuarios.php)
-   File: Seccion inferior  (core/marco_abajo.php)
-   File: Seccion superior  (core/marco_arriba.php)
-   File: TextoAleatorio  (core/captcha.php)
+
+   Group: Core  {
+
+      File: Formularios  (no auto-title, core/formularios.php)
+      File: Informes  (no auto-title, core/informes.php)
+      File: Menues  (no auto-title, core/menus.php)
+      File: Objetos  (no auto-title, core/objetos.php)
+      File: Actualizacion  (no auto-title, core/actualizacion.php)
+      File: Sesion  (no auto-title, core/sesion.php)
+      File: Tablas  (no auto-title, core/tablas.php)
+      File: Usuarios  (no auto-title, core/usuarios.php)
+      File: Seccion inferior  (core/marco_abajo.php)
+      File: Seccion superior  (core/marco_arriba.php)
+      File: TextoAleatorio  (core/captcha.php)
+      File: Nucleo de WebServices  (core/ws_nucleo.php)
+      File: Seccion Configuracion WebServices  (core/marco_wscfg.php)
+      File: Seccion marco de configuracion  (core/marco_conf.php)
+      File: Seccion marco de desarrollo  (core/marco_dev.php)
+      File: Seccion Proveedores OAuth  (core/marco_oauth.php)
+      File: Variables para aplicacion  (core/configuracion.php)
+      File: WS_API  (core/ws_funciones.php)
+      }  # Group: Core
+
+   Group: Inc  {
+
+      File: Idioma espanol  (inc/practico/idiomas/es.php)
+      File: Idioma espanol  (inc/practico/idiomas/en.php)
+      File: Libreria Definicion de base de datos  (inc/practico/def_basedatos.php)
+      }  # Group: Inc
+
+   File: Variables para aplicacion  (ins/paso_3.php)
    }  # Group: Modulos Principales
 
 Group: Modulos (en desarrollo)  {
@@ -72,9 +87,28 @@ Group: Modulos (en desarrollo)  {
 Group: Index  {
 
    Index: Everything
+   File Index: Files
    Function Index: Functions
+   Variable Index: Variables
    }  # Group: Index
 
 Text: Copyright (c) 2013
 Link: [John F. Arroyave Gutierrez]  (mailto:unix4you2@gmail.com)
-File: Funciones personalizadas  (mod/personalizadas.php)
+
+Group: Core  {
+
+   File: Introduccion  (core/doc_intro.php)
+   File: Conexiones PDO  (core/conexiones.php)
+   File: Libreria base  (core/comunes.php)
+   }  # Group: Core
+
+Group: Mod  {
+
+   File: convertidor_pdf_funcion_predeterminada  (mod/pdf/index.php)
+   File: fileman_admin_embebido  (mod/fileman/index.php)
+   File: Funciones personalizadas  (mod/personalizadas.php)
+   File: Funciones personalizadas para WebServices  (mod/personalizadas_ws.php)
+   File: ldap/.../lib/schema_functions.php  (mod/ldap/phpldapadmin-1.2.3/lib/schema_functions.php)
+   File: ldap_admin_embebido  (mod/ldap/index.php)
+   }  # Group: Mod
+

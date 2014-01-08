@@ -276,6 +276,20 @@
 			<a href="#" title="<?php echo $MULTILANG_AyudaTitDebug; ?>" name="<?php echo $MULTILANG_AyudaDesDebug; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 		</td>
 	</tr>
+	<tr>
+		<td valign=top align=right>
+			<font size=2 color=black>
+				<?php echo $MULTILANG_BuscarActual; ?>
+			</font>
+		</td>
+		<td valign=top width="380">
+			<select name="BuscarActualizacionesNEW" class="Combos" >
+				<option value="1"><?php echo $MULTILANG_Encendido; ?></option>
+				<option value="0" selected><?php echo $MULTILANG_Apagado; ?></option>
+			</select>
+			<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_DescActual; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+		</td>
+	</tr>
 </table>
 
 
@@ -303,7 +317,7 @@
 		<td valign=top>
 			<select  name="Auth_ProtoTransporteNEW" class="Combos">
 				<option value="" <?php if ($Auth_ProtoTransporte=="") echo "SELECTED"; ?> ><?php echo $MULTILANG_ProtoTransAUTO; ?></option>
-				<option value="http" <?php if ($Auth_ProtoTransporte=="http") echo "SELECTED"; ?> ><?php echo $MULTILANG_ProtoTransHTTP; ?></option>
+				<option value="http" <?php if ($Auth_ProtoTransporte=="http") echo "SELECTED"; ?> SELECTED><?php echo $MULTILANG_ProtoTransHTTP; ?></option>
 				<option value="https" <?php if ($Auth_ProtoTransporte=="https") echo "SELECTED"; ?> ><?php echo $MULTILANG_ProtoTransHTTPS; ?></option>
 			</select>
 			<a href="#" title="<?php echo $MULTILANG_Importante; ?>" name="<?php echo $MULTILANG_ProtoDescripcion; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>

@@ -16,6 +16,11 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 core/objetos.php
 core/formularios.php
+core/marco_arriba.php
+core/marco_conf.php
+core/marco_dev.php
+core/marco_wscfg.php
+core/marco_oauth.php
 core/comunes.php
 core/sesion.php
 core/tablas.php
@@ -34,6 +39,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 * Added: Tester: Victor Hugo Marin.  Ahora se puede indicar el protocolo preferido para el transporte en el momento de autenticación cuando se utilizan protocolos HTTP o HTTPS.  Aquellos con certificados autofirmados o no emitidos por un CA reconocido pueden presentar problemas con la recuperación de los tokens al momento de autenticación por lo que se deja la posibilidad al administrador de definir la forma de autenticar.
 * Added: Tester: Victor Hugo Marin.  Los campos marcados como obligatorios en el diseno de formularios ahora no son sólo informativos, sino que son validados antes de enviar la consulta para almacenar el registro.
+* Added: Ahora el usuario admin puede controlar si desea buscar o no actualizaciones automáticas de Práctico.
 * Added: Documentación mejorada y actualizada sobre la web oficial (Manuales)
 * Fixed: Se retira de las opciones para motores de autenticación a Google, pues ya se encuentra disponible como proveedor OAuth
 * Fixed: Reemplazo de función obsoleta de PHP ereg_replace por preg_replace (core/comunes.php|283)

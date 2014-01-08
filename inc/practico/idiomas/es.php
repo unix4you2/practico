@@ -773,6 +773,8 @@
 	$MULTILANG_AuthOauthURI='URI redireccion';
 	$MULTILANG_OauthTitURI='Antes de continuar, usted debe registrar una aplicaci&oacute;n con el proveedor correspondiente y obtener el ID, Secreto y URI para asociarla al servicio.  La URI a registrar con su proveedor es aquella calculada automaticamente por Practico en ese campo.';
 	$MULTILANG_OauthDesURI='Tenga en cuenta que la URI de retorno debe estar asociada a un dominio o IP publica para poder ser resuelta por el proveedor. Esta URI se calcula automaticamente dependiendo del path al momento de instalacion.  Para ir a la URL donde se registran las aplicaciones haga clic sobre el logo correspondiente.';
+	$MULTILANG_BuscarActual='Buscar actualizaciones automaticamente';
+	$MULTILANG_DescActual='Se conecta de manera aleatoria durante algunos ingresos del admin para verificar si existen versiones nuevas de Practico.  Puede poner un poco lenta la carga del panel para el usuario admin mientras busca nuevas versiones.';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';
