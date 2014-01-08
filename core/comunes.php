@@ -2059,11 +2059,11 @@
 									$tipo_boton="Button";
 									$comando_javascript=$registro_botones["accion_usuario"];
 								}
-							if ($comando_javascript!="" && $tipo_boton!="Reset")
+							if (@$comando_javascript!="" && $tipo_boton!="Reset")
 								{
 									$cadena_javascript='onclick="'.@$comando_javascript.'"';
 								}
-							echo '<input type="'.$tipo_boton.'"  class="'.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.$cadena_javascript.' >';
+							echo '<input type="'.$tipo_boton.'"  class="'.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.@$cadena_javascript.' >';
 						}
 					cerrar_barra_estado();
 				}

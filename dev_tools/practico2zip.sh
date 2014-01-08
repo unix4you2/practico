@@ -99,3 +99,11 @@ ListaExcluidos=" mod/ldap\* mod/pam\* mod/fileman\* mod/pdf\* core/configuracion
 # $?: Salida del último proceso ejecutado.
 # read -p "Entra vble: " vble  Lee por teclado (hace eco)
 # read -s -p "Entra vble: " vble  Lee por teclado (no hace eco)
+# Leer por lineas:
+#   oldIFS=$IFS  #Almacenamos el valor original de la variable IFS
+#   IFS=$'\n'    #Cambiamos el valor del IFS
+#   for line in $(cat file.txt)
+#     do
+#       echo $line
+#     done
+#   IFS=$oldIFS  #Restauramos el IFS
