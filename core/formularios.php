@@ -494,7 +494,7 @@ if ($accion=="editar_formulario")
 					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,13,17,25");
 					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17");
 					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17");
-					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,17,18,19,20");
+					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,15,17,18,19,20");
 					if (tipo_objeto_activo=="lista_radio") VisualizarCampos("1,2,7,8,9,10,17,18,19,20");
 					if (tipo_objeto_activo=="etiqueta")   VisualizarCampos("9,17,21");
 					if (tipo_objeto_activo=="url_iframe")   VisualizarCampos("9,14,15,17,22,24");
@@ -1751,7 +1751,7 @@ function FrmAutoRun()
 					<tr>
 						<td align="right"></td>
 						<td>
-							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_FrmAdvDelForm; ?>" onClick="javascript:AbrirPopUp('FormularioScripts');">
+							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_FrmAdvScriptForm; ?>" onClick="javascript:AbrirPopUp('FormularioScripts');">
 						</td>
 					</tr>
 					<tr>
@@ -1779,6 +1779,7 @@ function FrmAutoRun()
 						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_TablaDatos; ?></b></td>
 						<td></td>
 						<td></td>
+						<td></td>
 					</tr>
 		 <?php
 
@@ -1789,6 +1790,13 @@ function FrmAutoRun()
 								<td><b>'.$registro["id"].'</b></td>
 								<td>'.$registro["titulo"].'</td>
 								<td>'.str_replace($TablasApp,'',$registro["tabla_datos"]).'</td>
+								<td align="center">
+										<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
+												<input type="hidden" name="accion" value="copiar_formulario">
+												<input type="hidden" name="formulario" value="'.$registro["id"].'">
+												<input type="button" value="'.$MULTILANG_FrmCopiar.'"  class="Botones" onClick="confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',df'.$registro["id"].');">
+										</form>
+								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
 												<input type="hidden" name="accion" value="eliminar_formulario">

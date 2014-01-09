@@ -405,8 +405,10 @@
 	$MULTILANG_FrmTitForms='Forms defined in the system';
 	$MULTILANG_FrmCamposAcciones='Fields and actions';
 	$MULTILANG_FrmAdvDelForm='IMPORTANT: Deleting the form users can not access it again to query operations or data entry defined. You can not undo this operation. This also eliminates any internal design of the form.\n'.$MULTILANG_Confirma;
-	$MULTILANG_FrmAdvDelForm='Scripts edit (Advanced)';
+	$MULTILANG_FrmAdvScriptForm='Scripts edit (Advanced)';
 	$MULTILANG_FrmHlpFunciones='All JavaScript functions defined here will be included in the form.<br>If you need some additional events linked by buttons or any object in the form<br> this field let you define them.<br><b>When you need to use parameters or any quote use always double quotes!</b>.<br>The FrmAutoRun function must be exist (even empty) cause it will be executed automatically on every form load.';
+	$MULTILANG_FrmCopiar='Make a copy';
+	$MULTILANG_FrmAdvCopiar='A new copy of this will be created.  Are you sure?';
 	
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';

@@ -402,8 +402,10 @@
 	$MULTILANG_FrmTitForms='Formularios ya definidos en el sistema';
 	$MULTILANG_FrmCamposAcciones='Campos y acciones';
 	$MULTILANG_FrmAdvDelForm='IMPORTANTE:  Al eliminar el formulario los usuarios no podr&aacute;n accesarlo nuevamente para operaciones de consulta o ingreso de datos definidas en &eacute;l y no podr&aacute; deshacer esta operaci&oacute;n. Esto tambien elimina cualquier dise&ntilde;o interno del formulario.\n'.$MULTILANG_Confirma;
-	$MULTILANG_FrmAdvDelForm='Editar scripts (avanzado)';
+	$MULTILANG_FrmAdvScriptForm='Editar scripts (avanzado)';
 	$MULTILANG_FrmHlpFunciones='Todas las funciones JavaScript definidas en este espacio ser&aacute;n inclu&iacute;das al formulario cada vez que sea cargado.<br>Si requiere comportamientos adicionales o eventos especificos lanzados por medio de botones o dem&aacute;s objetos<br> en su formulario este es el espacio para definirlos.<br><b>Al utilizar comillas en parametros y funciones estas deben ser siempre dobles</b>, no simples.<br>La funci&oacute;n FrmAutoRun siempre debe existir (aunque sea vac&iacute;a) pues ser&aacute; ejecutada autom&aacute;ticamente en cada carga del Formulario.';
+	$MULTILANG_FrmCopiar='Crear copia';
+	$MULTILANG_FrmAdvCopiar='Se creara una copia nueva del formulario actual.  Esta seguro?';
 	
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

@@ -1615,9 +1615,13 @@
 
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
+			
+			// Define si el control es un ComboBox o un ListBox dependiendo de su altura (!=0 es listbox)
+			if ($registro_campos["alto"]!='0')
+				$cadena_altura='size='.$registro_campos["alto"];
 
 			// Muestra el campo
-			$salida.= '<select name="'.$registro_campos["campo"].'" class="Combos" >';
+			$salida.= '<select name="'.$registro_campos["campo"].'" class="Combos" '.$cadena_altura.' >';
 
 			// Toma los valores desde la lista de opciones (cuando es estatico)
 			$opciones_lista = explode(",", $registro_campos["lista_opciones"]);
