@@ -388,7 +388,7 @@ if ($accion=="aplicar_parche")
 						try
 							{
 								//Cambia el prefijo predeterminado en caso que haya sido personalizado en la instalacion
-								$consulta=str_replace("Core_",$TablasCore,$consulta);
+								$consulta=str_replace("core_",$TablasCore,$consulta);
 								//Ejecuta el query
 								$consulta_enviar = $ConexionPDO->prepare($consulta);
 								$estado_ok = $consulta_enviar->execute();

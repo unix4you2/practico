@@ -595,9 +595,9 @@ if ($accion=="editar_formulario")
 											for($i=0;$i<count($resultadocampos);$i++)
 												{
 													$seleccion_campo="";
-													if (@$registro_campo_editar["campo"]==$resultadocampos[$i]["nombre"])
+													if (@$registro_campo_editar["campo"]==@$resultadocampos[$i]["nombre"])
 														$seleccion_campo="SELECTED";
-													if (strtolower($resultadocampos["nombre"])!="id")
+													if (@strtolower($resultadocampos["nombre"])!="id")
 														echo '<option value="'.$resultadocampos[$i]["nombre"].'" '.$seleccion_campo.'>'.$resultadocampos[$i]["nombre"].'&nbsp;&nbsp;&nbsp;'.$resultadocampos[$i]["tipo"].'</option>';								
 												}
 										?>

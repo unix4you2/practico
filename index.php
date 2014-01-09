@@ -131,8 +131,9 @@
 				}
 		}
 
-	// Inicia la presentacion de la pagina
-	include("core/marco_arriba.php");
+	// Inicia la presentacion de la pagina si no esta activado el fullscreen
+	if (@$Presentar_FullScreen!=1)
+		include("core/marco_arriba.php");
 
 	// Prueba que todas las extensiones requeridas se encuentren habilitadas
 	verificar_extensiones();
@@ -186,6 +187,7 @@
 				}
 		}
 
-	// Finaliza el contenido central y presenta el pie de pagina de aplicacion
-	include("core/marco_abajo.php");
+	// Finaliza el contenido central y presenta el pie de pagina de aplicacion si no se esta en fullscreen
+	if (@$Presentar_FullScreen!=1)
+		include("core/marco_abajo.php");
 ?>

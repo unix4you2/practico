@@ -56,7 +56,7 @@
 					try
 						{
 							//Cambia el prefijo predeterminado en caso que haya sido personalizado en la instalacion
-							$consulta=str_replace("Core_",$TablasCore,$consulta);
+							$consulta=str_replace("core_",$TablasCore,$consulta);
 							//Cambia parametros iniciales de aplicacion
 							$consulta=str_replace("PAR_NombreCortoEmpresa",$NombreCortoEmpresa,$consulta);
 							$consulta=str_replace("PAR_NombreAplicacion",$NombreAplicacion,$consulta);

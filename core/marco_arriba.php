@@ -52,7 +52,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="Practico <?php  $version = file("inc/version_actual.txt"); echo trim($version[0]); ?>" />
-	<meta name="description" content="Generador de aplicaciones web - www.codigoabierto.org" />
+	<meta name="description" content="Generador de aplicaciones web - www.practico.org" />
 
 	<title><?php echo $NombreRAD; ?> <?php echo trim($version[0]); ?></title>
 

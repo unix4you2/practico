@@ -58,7 +58,9 @@
 							// Calcula tiempos de ejecucion del script
 							$tiempo_final_script = obtener_microtime();
 							$tiempo_total_script = $tiempo_final_script - $tiempo_inicio_script;
-							echo " - <font color=yellow>$MULTILANG_Accion: $accion</font> <font color=black>$MULTILANG_TiempoCarga (seg):";  echo round($tiempo_total_script,3);
+							echo " - <font color=yellow>$MULTILANG_Accion: $accion</font> <font color=black>$MULTILANG_TiempoCarga (seg):";
+							echo round($tiempo_total_script,3);
+							echo " - Inc: ".count(get_included_files()); // Retorna arreglo con cantidad de archivos incluidos
 						}
 				?>
 			</td>
