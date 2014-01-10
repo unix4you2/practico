@@ -1563,7 +1563,7 @@ if ($accion=="editar_formulario")
 							</tr>
 							<tr>
 								<td align=center>
-									<textarea name="javascript" cols="100" rows="20"><?php echo $registro_form["javascript"]; ?></textarea>
+									<textarea name="javascript" cols="100" rows="20" style="font-size:12px; font-family: Monospace, Sans-serif, Tahoma; border: 1px dotted #000099;"><?php echo $registro_form["javascript"]; ?></textarea>
 								</td>
 							</tr>
 						</table>
@@ -1954,7 +1954,7 @@ if ($accion=="administrar_formularios")
 							</tr>
 							<tr>
 								<td align=center>
-<textarea name="javascript" cols="100" rows="20">
+<textarea name="javascript" cols="100" rows="20"  style="font-size:12px; font-family: Monospace, Sans-serif, Tahoma; border: 1px dotted #000099;">
 function FrmAutoRun()
 	{
 		//Aqui sus instrucciones
