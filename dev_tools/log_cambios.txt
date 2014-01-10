@@ -43,6 +43,7 @@ LogCambios="
 * Added: Ahora se pueden clonar formularios rapidamente mediante una función de copia en la administración de formularios
 * Added: Tester: Victor Hugo Marin.  Ahora se puede indicar el protocolo preferido para el transporte en el momento de autenticación cuando se utilizan protocolos HTTP o HTTPS.  Aquellos con certificados autofirmados o no emitidos por un CA reconocido pueden presentar problemas con la recuperación de los tokens al momento de autenticación por lo que se deja la posibilidad al administrador de definir la forma de autenticar.
 * Added: Tester: Victor Hugo Marin.  Los campos marcados como obligatorios en el diseno de formularios ahora no son sólo informativos, sino que son validados antes de enviar la consulta para almacenar el registro.
+* Added: Ahora se cuenta con un modo de impresión para los formularios, ubicado en la parte superior (título de las ventanas generadas) con el fin de permitir la impresión rápida de una ficha, informe o cualquier contenido publicado en un form.
 * Added: Los controles tipo ComboBox o Listas de selección pueden convertirse ahora en controles ListBox especificando el alto deseado para la lista de opciones.
 * Added: Ahora el usuario admin puede controlar si desea buscar o no actualizaciones automáticas de Práctico.
 * Added: Documentación mejorada y actualizada sobre la web oficial (Manuales)

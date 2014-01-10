@@ -1866,10 +1866,14 @@
 */
 		function cargar_formulario($formulario,$en_ventana=1,$campobase="",$valorbase="")
 		  {
-				global $ConexionPDO,$ArchivoCORE,$TablasCore;
+				global $ConexionPDO,$ArchivoCORE,$TablasCore,$PlantillaActiva;
 				// Carga variables de definicion de tablas
 				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
 				global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion;
+
+				// Busca datos del formulario
+				$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id='$formulario'");
+				$registro_formulario = $consulta_formulario->fetch();
 
 				echo '
 				<script type="text/javascript">
@@ -1884,20 +1888,29 @@
 
 					function ImprimirMarco(nombre)
 						{
-						  var ficha = document.getElementById(nombre);
-						  var ventimp = window.open(" ", "popimpr");
-						  ventimp.document.write( ficha.innerHTML );
-						  ventimp.document.close();
-						  ventimp.print( );
-						  ventimp.close();
+						  var marco_contenidos = document.getElementById(nombre);
+						  var ventana_impresion = window.open(" ", "PopUpImpresion");
+						  
+						  //Agrega estilos basicos
+							ventana_impresion.document.write( \'<link rel="stylesheet" type="text/css" href="skin/'.$PlantillaActiva.'/general.css">\' );
+						  
+						  //Agrega titulo del formulario
+							ventana_impresion.document.write( \'<div align=CENTER><b>'.$registro_formulario["titulo"].'</b></div><hr>\' );
+
+						  //Agrega el concenito del DIV al documento
+							ventana_impresion.document.write( marco_contenidos.innerHTML );
+							ventana_impresion.document.close();
+						  
+						  //Abre ventana de impresion
+							ventana_impresion.print( );
+						  
+						  //Cierra ventana de impresion
+							ventana_impresion.close();
 						}
 
 				</script>
 				<!--<input type=button onclick=\'AgregarElemento("1","1","hello world");\'>-->';
 
-				// Busca datos del formulario
-				$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id='$formulario'");
-				$registro_formulario = $consulta_formulario->fetch();
 
 				//Si no encuentra formulario presenta error
 				if ($registro_formulario["id"]=="")	mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Formularios." $formulario)","70%","icono_error.png","TextosEscritorio");
@@ -1911,18 +1924,9 @@
 					}
 				// Define la barra de herramientas mini superior (en barra de titulo)
 				@$barra_herramientas_mini.='
-					<form target="_BLANK" name="iconobarra1" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-						<input type="Hidden" name="accion" value="cargar_objeto">
-						<input type="Hidden" name="Presentar_FullScreen" value="1">
-						<input type="Hidden" name="objeto" value="frm:'.$formulario.':'.$en_ventana.':'.$campobase.':'.$valorbase.'">
 						<a href="#" title="'.$MULTILANG_VistaImpresion.'" name="">
-							<img src="img/tango_document-print.png" border=0 height=15 width=15 OnClick="document.iconobarra1.submit();">
-						</a>
-					</form>
-
-									
-									
-									';
+							<img src="img/tango_document-print.png" border=0 height=15 width=15 OnClick="ImprimirMarco(\'MARCO_IMPRESION\');">
+						</a>';
 
 				// Crea ventana si aplica para el form
 				if ($en_ventana) abrir_ventana($registro_formulario["titulo"],'f2f2f2','',$barra_herramientas_mini);
@@ -1934,6 +1938,7 @@
 
 				//Inicia el formulario de datos
 				echo '
+					<div id="MARCO_IMPRESION">
 					<form name="datos" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="Hidden" name="accion" value="guardar_datos_formulario">
 					<input type="Hidden" name="formulario" value="'.$formulario.'">';
@@ -2038,7 +2043,8 @@
 						//Actualiza limite inferior para siguiente lista de campos
 						$limite_inferior=$registro_obj_fila_unica["peso"];
 					}
-				echo '</div> <!-- Fin PR_seccion_impresion_activa -->';
+				echo '</div>
+				</div> <!-- cierra MARCO_IMPRESION -->';
 
 			// Si tiene botones agrega barra de estado y los ubica
 			$consulta_botones = $ConexionPDO->prepare("SELECT id,".$ListaCamposSinID_formulario_boton." FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario' AND visible=1 ORDER BY peso");
