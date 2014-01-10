@@ -1174,9 +1174,9 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function abrir_ventana($titulo,$fondo,$ancho='100%')
+	function abrir_ventana($titulo,$fondo,$ancho='100%',$barra_herramientas='')
 	  {
-		global $PlantillaActiva;
+		global $PlantillaActiva,$MULTILANG_VistaImpresion;
 		/*
 			Procedure: abrir_ventana
 			Abre los espacios de trabajo dinamicos sobre el contenedor principal donde se despliega informacion
@@ -1210,6 +1210,12 @@
 												'.$titulo.'
 										</b></font>
 									</td>
+									<!-- Barra de botones de ventana -->
+									<td align="RIGHT" background="skin/'.$PlantillaActiva.'/img/bar_c.jpg">';
+										// Si se recibe una barra de herramientas la dibuja
+										if ($barra_herramientas!='')
+											echo $barra_herramientas;
+		echo '						</td>
 									<td><img src="skin/'.$PlantillaActiva.'/img/bar_d.gif " border=0 alt=""></td>
 							</tr></table>
 					</td>
@@ -1863,7 +1869,7 @@
 				global $ConexionPDO,$ArchivoCORE,$TablasCore;
 				// Carga variables de definicion de tablas
 				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
-				global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios;
+				global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion;
 
 				echo '
 				<script type="text/javascript">
@@ -1903,7 +1909,23 @@
 						$consulta_datos_formulario->execute();
 						$registro_datos_formulario = $consulta_datos_formulario->fetch();
 					}
-				if ($en_ventana) abrir_ventana($registro_formulario["titulo"],'f2f2f2','');
+				// Define la barra de herramientas mini superior (en barra de titulo)
+				@$barra_herramientas_mini.='
+					<form target="_BLANK" name="iconobarra1" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+						<input type="Hidden" name="accion" value="cargar_objeto">
+						<input type="Hidden" name="Presentar_FullScreen" value="1">
+						<input type="Hidden" name="objeto" value="frm:'.$formulario.':'.$en_ventana.':'.$campobase.':'.$valorbase.'">
+						<a href="#" title="'.$MULTILANG_VistaImpresion.'" name="">
+							<img src="img/tango_document-print.png" border=0 height=15 width=15 OnClick="document.iconobarra1.submit();">
+						</a>
+					</form>
+
+									
+									
+									';
+
+				// Crea ventana si aplica para el form
+				if ($en_ventana) abrir_ventana($registro_formulario["titulo"],'f2f2f2','',$barra_herramientas_mini);
 				// Muestra ayuda en caso de tenerla
 				$imagen_ayuda="info_icon.png";
 				if ($registro_formulario["ayuda_imagen"]!="") $imagen_ayuda=$registro_formulario["ayuda_imagen"];

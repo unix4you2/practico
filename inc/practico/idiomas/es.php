@@ -121,6 +121,7 @@
 	$MULTILANG_Vacio='Vac&iacute;o';
 	$MULTILANG_Version='Versi&oacute;n';
 	$MULTILANG_ZonaHoraria='Zona horaria';
+	$MULTILANG_VistaImpresion='Vista de impresion';
 	
 	//Ventana de login
 	$MULTILANG_TituloLogin='Ingreso al sistema';
@@ -388,6 +389,7 @@
 	$MULTILANG_FrmErr1='Debe indicar un t&iacute;tulo v&aacute;lido para el formulario.';
 	$MULTILANG_FrmErr2='Debe indicar un nombre v&aacute;lido para la tabla de datos asociada al formulario.';
 	$MULTILANG_FrmAgregar='Agregar nuevo formulario';
+	$MULTILANG_FrmActualizar='Actualizar configuraciones iniciales';
 	$MULTILANG_FrmDetalles='Defina los detalles del formulario';
 	$MULTILANG_FrmTitVen='T&iacute;tulo de ventana';
 	$MULTILANG_FrmDesTit='Texto que aparecer&aacute; en la parte superior de la ventana de formulario o barra de t&iacute;tulo';

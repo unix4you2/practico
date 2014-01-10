@@ -121,6 +121,7 @@
 	$MULTILANG_Vacio='Empty';
 	$MULTILANG_Version='Versi&oacute;n';
 	$MULTILANG_ZonaHoraria='Time zone';
+	$MULTILANG_VistaImpresion='Printer view';
 	
 	//Ventana de login
 	$MULTILANG_TituloLogin='System Login';
@@ -391,6 +392,7 @@
 	$MULTILANG_FrmErr1='You must enter a valid title for the form.';
 	$MULTILANG_FrmErr2='Please specify a valid name for the data table associated with the form.';
 	$MULTILANG_FrmAgregar='Add New Form';
+	$MULTILANG_FrmActualizar='Update initial configurations';
 	$MULTILANG_FrmDetalles='Define the form details';
 	$MULTILANG_FrmTitVen='Window title';
 	$MULTILANG_FrmDesTit='Text that appears at the top of the window';

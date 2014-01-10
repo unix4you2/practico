@@ -17,6 +17,7 @@ ListaArchivos="
 index.php
 core/objetos.php
 core/formularios.php
+core/informes.php
 core/marco_arriba.php
 core/marco_abajo.php
 core/marco_conf.php
@@ -45,6 +46,7 @@ LogCambios="
 * Added: Los controles tipo ComboBox o Listas de selección pueden convertirse ahora en controles ListBox especificando el alto deseado para la lista de opciones.
 * Added: Ahora el usuario admin puede controlar si desea buscar o no actualizaciones automáticas de Práctico.
 * Added: Documentación mejorada y actualizada sobre la web oficial (Manuales)
+* Added: Ventana de edición para propiedades inciales de formularios en el modo de edición de los mismos
 * Fixed: Se retira de las opciones para motores de autenticación a Google, pues ya se encuentra disponible como proveedor OAuth
 * Fixed: Reemplazo de función obsoleta de PHP ereg_replace por preg_replace (core/comunes.php|283)
 * Fixed: Se elimina la posibilidad de indicar la posición del campo en la tabla durante su edición por compatibilidad con todos los motores

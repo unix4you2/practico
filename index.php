@@ -160,7 +160,7 @@
 		include("core/menus.php");
 	if ($accion=="guardar_crear_tabla_asistente" || $accion=="asistente_tablas" || $accion=="administrar_tablas" || $accion=="guardar_crear_tabla" || $accion=="eliminar_tabla" || $accion=="editar_tabla" || $accion=="guardar_crear_campo" || $accion=="eliminar_campo")
 		include("core/tablas.php");
-	if ($accion=="copiar_formulario" || $accion=="actualizar_campo_formulario" || $accion=="administrar_formularios" || $accion=="guardar_formulario" || $accion=="eliminar_formulario" || $accion=="editar_formulario" || $accion=="guardar_campo_formulario" || $accion=="eliminar_campo_formulario" || $accion=="guardar_accion_formulario" || $accion=="eliminar_accion_formulario" || $accion=="guardar_datos_formulario" || $accion=="eliminar_datos_formulario")
+	if ($accion=="actualizar_formulario" || $accion=="copiar_formulario" || $accion=="actualizar_campo_formulario" || $accion=="administrar_formularios" || $accion=="guardar_formulario" || $accion=="eliminar_formulario" || $accion=="editar_formulario" || $accion=="guardar_campo_formulario" || $accion=="eliminar_campo_formulario" || $accion=="guardar_accion_formulario" || $accion=="eliminar_accion_formulario" || $accion=="guardar_datos_formulario" || $accion=="eliminar_datos_formulario")
 		include("core/formularios.php");
 	if ($accion=="Iniciar_login" || $accion=="Terminar_sesion" || $accion=="Mensaje_cierre_sesion")
 		include("core/sesion.php");

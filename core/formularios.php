@@ -1517,9 +1517,9 @@ if ($accion=="editar_formulario")
 			if (@$popup_activo=="FormularioAcciones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioAcciones"); </script>';
 		?>
 
-		<table><tr><td valign=top>
+		<table><tr><td align=center valign=top>
 			<?php 
-				abrir_ventana($MULTILANG_BarraHtas,'#BDB9B9',''); 
+				abrir_ventana($MULTILANG_BarraHtas,'#BDB9B9','100%'); 
 			?>
 				<div align=center>
 				<?php echo $MULTILANG_FrmObjetos; ?><br>
@@ -1537,7 +1537,137 @@ if ($accion=="editar_formulario")
 				</div><br>
 			<?php
 				cerrar_ventana();
+
+
+
+				// Inicia presentacion de ventana de edicion de formulario
+				$consulta_form=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id='$formulario'");
+				$registro_form = $consulta_form->fetch();
+				abrir_ventana($MULTILANG_FrmActualizar,'f2f2f2','100%');
 			?>
+			<form name="datosact" id="datosact" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<input type="Hidden" name="accion" value="actualizar_formulario">
+			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
+			<input type="Hidden" name="formulario" value="<?php echo $registro_form["id"]; ?>">
+
+				<!-- INICIO DE MARCOS POPUP -->
+				<div id='FormularioScripts' class="FormularioPopUps">
+					<?php
+						abrir_ventana($MULTILANG_FrmTitComandos,'#BDB9B9','');
+					?>
+						<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
+							<tr>
+								<td>
+									<?php echo $MULTILANG_FrmHlpFunciones; ?>
+								</td>
+							</tr>
+							<tr>
+								<td align=center>
+									<textarea name="javascript" cols="100" rows="20"><?php echo $registro_form["javascript"]; ?></textarea>
+								</td>
+							</tr>
+						</table>
+					<?php
+						abrir_barra_estado();
+							echo '<input type="Button"  class="BotonesEstadoCuidado" value=" '.$MULTILANG_Finalizado.' " onClick="OcultarPopUp(\'FormularioScripts\')">';
+						cerrar_barra_estado();
+						cerrar_ventana();
+					?>
+				<!-- FIN DE MARCOS POPUP -->
+				</div>
+
+			<div align=center>
+						
+			<br><?php echo $MULTILANG_FrmDetalles; ?>:
+				<table class="TextosVentana">
+					<tr>
+						<td align="right"><?php echo $MULTILANG_FrmTitVen; ?>:</td>
+						<td>
+							<input type="text" value="<?php echo $registro_form["titulo"]; ?>" name="titulo" size="20" class="CampoTexto">
+							<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesTit; ?>"><img src="img/icn_10.gif" border=0></a>
+						</td>
+					</tr>
+					<tr>
+						<td align="right"><?php echo $MULTILANG_FrmHlp; ?></td>
+						<td>
+							<input type="text" value="<?php echo $registro_form["ayuda_titulo"]; ?>" name="ayuda_titulo" size="20" class="CampoTexto">
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesHlp; ?>"><img src="img/icn_10.gif" border=0></a>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top" align="right"><?php echo $MULTILANG_FrmTxt; ?></td>
+						<td valign="top">
+							<textarea name="ayuda_texto" cols="25" rows="3" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"><?php echo $registro_form["ayuda_texto"]; ?></textarea>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesTxt; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
+						</td>
+					</tr>
+					<tr>
+						<td align="right"><?php echo $MULTILANG_FrmImagen; ?></td>
+						<td>
+							<select  name="ayuda_imagen" class="Combos" >
+								<option value=""><?php echo $MULTILANG_Deshabilitado; ?></option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="right"><?php echo $MULTILANG_TablaDatos; ?>:</td>
+						<td>
+							<select  name="tabla_datos" class="Combos" >
+								<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+								 <?php
+										$resultado=consultar_tablas();
+										while ($registro = $resultado->fetch())
+											{
+												// Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
+												if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
+													{
+														$estado_seleccion_tabla="";
+														if ($registro[0]==$registro_form["tabla_datos"])
+															$estado_seleccion_tabla="SELECTED";
+														echo '<option value="'.$registro[0].'" '.$estado_seleccion_tabla.'>'.str_replace($TablasApp,'',$registro[0]).'</option>';
+													}
+											}		
+								?>
+							</select><a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+						</td>
+					</tr>
+					<tr>
+						<td align="right"><?php echo $MULTILANG_FrmNumeroCols; ?></td>
+						<td>
+							<select name="columnas" class="selector_01" >
+								<?php
+									for ($i=1;$i<=20;$i++)
+										{
+											$estado_seleccion_cols="";
+											if ($i==$registro_form["columnas"])
+												$estado_seleccion_cols="SELECTED";
+											echo '<option value="'.$i.'" '.$estado_seleccion_cols.'>'.$i.'</option>';
+										}
+								?>
+							</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesNumeroCols; ?>"><img src="img/icn_10.gif" border=0></a>
+						</td>
+					</tr>
+					<tr>
+						<td align="right"></td>
+						<td>
+							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_FrmAdvScriptForm; ?>" onClick="javascript:AbrirPopUp('FormularioScripts');">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							</form>
+						</td>
+						<td>
+							<input type="Button"  class="BotonesCuidado" value="<?php echo $MULTILANG_Actualizar; ?>" onClick="document.datosact.submit()">
+						</td>
+					</tr>
+				</table>
+
+		<?php
+			//Cierra actualizacion de formulario
+			cerrar_ventana();
+		?>
 
 		<?php
 		echo '</td><td valign=top align=center>';  // Inicia segunda columna del diseñador
@@ -1577,6 +1707,45 @@ if ($accion=="editar_formulario")
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 		}
 
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: actualizar_formulario
+	Actualiza los datos basicos de un formulario
+
+	Salida:
+		Registro de formulario actualizado
+
+	Ver tambien:
+		<administrar_formularios>
+*/
+	if ($accion=="actualizar_formulario")
+		{
+			$mensaje_error="";
+			if ($titulo=="") $mensaje_error.=$MULTILANG_FrmErr1.'<br>';
+			if ($tabla_datos=="") $mensaje_error.=$MULTILANG_FrmErr2.'<br>';
+
+			if ($mensaje_error=="")
+				{
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario SET titulo='$titulo',ayuda_titulo='$ayuda_titulo',ayuda_texto='$ayuda_texto',ayuda_imagen='$ayuda_imagen',tabla_datos='$tabla_datos',columnas='$columnas',javascript='$javascript' WHERE id='$formulario'");
+					auditar("Actualiza formulario $formulario para $tabla_datos");
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
+					<input type="Hidden" name="accion" value="editar_formulario">
+					<input type="Hidden" name="formulario" value="'.$formulario.'"></form>
+								<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="administrar_formularios">
+						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
+						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+		}
 
 
 /* ################################################################## */
