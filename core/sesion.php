@@ -80,7 +80,7 @@
 			else
 				$protocolo_webservice="https://";
 			// Si se tiene un protocolo preferido sobreescribe lo auto-detectado
-			if ($Auth_ProtoTransporte!="")
+			if (@$Auth_ProtoTransporte=="http" || @$Auth_ProtoTransporte=="https")
 				$protocolo_webservice=$Auth_ProtoTransporte."://";
 			// Construye la URL para solicitar el webservice.  La URL se debe poder resolver por el servidor web correctamente, ya sea por dominio o IP (interna o publica).  Ver /etc/hosts si algo.
 			$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];

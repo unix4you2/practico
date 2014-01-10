@@ -729,7 +729,7 @@ if ($accion=="editar_informe")
 					</tr>
 				 <?php
 
-						$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe='$informe' ORDER BY valor_campo");
+						$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe='$informe' ");
 						while($registro = $consulta_forms->fetch())
 							{
 								echo '<tr>

@@ -39,6 +39,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added: Ahora se pueden clonar formularios rapidamente mediante una función de copia en la administración de formularios
 * Added: Tester: Victor Hugo Marin.  Ahora se puede indicar el protocolo preferido para el transporte en el momento de autenticación cuando se utilizan protocolos HTTP o HTTPS.  Aquellos con certificados autofirmados o no emitidos por un CA reconocido pueden presentar problemas con la recuperación de los tokens al momento de autenticación por lo que se deja la posibilidad al administrador de definir la forma de autenticar.
 * Added: Tester: Victor Hugo Marin.  Los campos marcados como obligatorios en el diseno de formularios ahora no son sólo informativos, sino que son validados antes de enviar la consulta para almacenar el registro.
 * Added: Los controles tipo ComboBox o Listas de selección pueden convertirse ahora en controles ListBox especificando el alto deseado para la lista de opciones.
@@ -49,6 +50,7 @@ LogCambios="
 * Fixed: Se elimina la posibilidad de indicar la posición del campo en la tabla durante su edición por compatibilidad con todos los motores
 * Fixed: Cambio del prefijo de tablas en procesos de actualizacion para que se pueda tomar ajustes a bases de datos
 * Fixed: Mensaje de advertencia en eliminación de formularios presentaba un texto mal por falta de actualización en los archivos de idioma
+* Fixed: Mejora en la detección del protocolo de transporte y warnings de variables inexistentes
 --------------------------------------
 El proyecto Práctico agradece a las siguientes personas por su apoyo mediante donaciones
 para la liberación de la versión 14.1 realizadas en www.indiegogo.com/projects/practico/:

@@ -1630,6 +1630,125 @@ if ($accion=="editar_formulario")
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: copiar_formulario
+	Agrega un formulario vacio para la aplicacion
+
+	(start code)
+		INSERT INTO ".$TablasCore."formulario VALUES (0, '$titulo','$ayuda_titulo','$ayuda_texto','$ayuda_imagen','$tabla_datos','$columnas')
+	(end)
+
+	Salida:
+		Registro agregado y paso a las ventanas de edicion de formulario para agregar los elementos internos
+
+	Ver tambien:
+		<administrar_formularios>
+*/
+	if ($accion=="copiar_formulario")
+		{
+			$mensaje_error="";
+			if ($formulario=="")
+				$mensaje_error=$MULTILANG_ErrorTiempoEjecucion.".  No ID Form";
+
+			if ($mensaje_error=="")
+				{
+					// Busca datos y Crea copia del formulario
+					$consulta=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id='$formulario'");
+					$registro = $consulta->fetch();
+					// Establece valores para cada campo a insertar en el nuevo form
+					$nuevo_titulo='[COPIA] '.$registro["titulo"];
+					$ayuda_titulo=$registro["ayuda_titulo"];
+					$ayuda_texto=$registro["ayuda_texto"];
+					$ayuda_imagen=$registro["ayuda_imagen"];
+					$tabla_datos=$registro["tabla_datos"];
+					$columnas=$registro["columnas"];
+					$javascript=$registro["javascript"];
+					// Inserta el nuevo objeto al form
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES ('$nuevo_titulo','$ayuda_titulo','$ayuda_texto','$ayuda_imagen','$tabla_datos','$columnas','$javascript') ");
+					$id=$ConexionPDO->lastInsertId();
+					// Busca los elementos que componen el formulario para hacerles la copia
+					// Registros de formulario_objeto
+					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario'");
+					while($registro = $consulta->fetch())
+						{
+							//Establece valores para cada campo a insertar
+							$tipo=$registro["tipo"];
+							$titulo=$registro["titulo"];
+							$campo=$registro["campo"];
+							$ayuda_titulo=$registro["ayuda_titulo"];
+							$ayuda_texto=$registro["ayuda_texto"];
+							$nuevo_formulario=$id;
+							$peso=$registro["peso"];
+							$columna=$registro["columna"];
+							$obligatorio=$registro["obligatorio"];
+							$visible=$registro["visible"];
+							$valor_predeterminado=$registro["valor_predeterminado"];
+							$validacion_datos=$registro["validacion_datos"];
+							$etiqueta_busqueda=$registro["etiqueta_busqueda"];
+							$ajax_busqueda=$registro["ajax_busqueda"];
+							$valor_unico=$registro["valor_unico"];
+							$solo_lectura=$registro["solo_lectura"];
+							$teclado_virtual=$registro["teclado_virtual"];
+							$ancho=$registro["ancho"];
+							$alto=$registro["alto"];
+							$barra_herramientas=$registro["barra_herramientas"];
+							$fila_unica=$registro["fila_unica"];
+							$lista_opciones=$registro["lista_opciones"];
+							$origen_lista_opciones=$registro["origen_lista_opciones"];
+							$origen_lista_valores=$registro["origen_lista_valores"];
+							$valor_etiqueta=$registro["valor_etiqueta"];
+							$url_iframe=$registro["url_iframe"];
+							$objeto_en_ventana=$registro["objeto_en_ventana"];
+							$informe_vinculado=$registro["informe_vinculado"];
+							$maxima_longitud=$registro["maxima_longitud"];
+							$valor_minimo=$registro["valor_minimo"];
+							$valor_maximo=$registro["valor_maximo"];
+							$valor_salto=$registro["valor_salto"];
+							//Inserta el nuevo objeto al form
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES ('$tipo','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$nuevo_formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores','$valor_etiqueta','$url_iframe','$objeto_en_ventana','$informe_vinculado','$maxima_longitud','$valor_minimo','$valor_maximo','$valor_salto') ");
+						}				
+					// Registros de formulario_boton
+					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario'");
+					while($registro = $consulta->fetch())
+						{
+							//Establece valores para cada campo a insertar
+							$titulo=$registro["titulo"];
+							$estilo=$registro["estilo"];
+							$nuevo_formulario=$id;
+							$tipo_accion=$registro["tipo_accion"];
+							$accion_usuario=$registro["accion_usuario"];
+							$visible=$registro["visible"];
+							$peso=$registro["peso"];
+							$retorno_titulo=$registro["retorno_titulo"];
+							$retorno_texto=$registro["retorno_texto"];
+							$confirmacion_texto=$registro["confirmacion_texto"];
+							//Inserta el nuevo objeto al form
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES ('$titulo','$estilo','$nuevo_formulario','$tipo_accion','$accion_usuario','$visible','$peso','$retorno_titulo','$retorno_texto','$confirmacion_texto') ");
+						}
+					auditar("Crea copia de formulario $formulario");
+
+					// Regresa a la administracion de formularios
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="accion" value="administrar_formularios">
+					</form>
+					<script type="" language="JavaScript"> 
+					alert("'.$MULTILANG_FrmMsjCopia.$nuevo_titulo.' ID: '.$id.'");
+					document.cancelar.submit();  </script>';
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="administrar_formularios">
+						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
+						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: administrar_formularios
 	Presenta ventanas con la posibilidad de agregar nuevo formulario a la aplicacion y el listado para administrar o editar los existentes
 
@@ -1791,10 +1910,11 @@ function FrmAutoRun()
 								<td>'.$registro["titulo"].'</td>
 								<td>'.str_replace($TablasApp,'',$registro["tabla_datos"]).'</td>
 								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
+										<form action="'.$ArchivoCORE.'" method="POST" name="dco'.$registro["id"].'" id="dco'.$registro["id"].'">
 												<input type="hidden" name="accion" value="copiar_formulario">
 												<input type="hidden" name="formulario" value="'.$registro["id"].'">
-												<input type="button" value="'.$MULTILANG_FrmCopiar.'"  class="Botones" onClick="confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',df'.$registro["id"].');">
+												<input type="hidden" name="nombre_tabla" value="'.$registro["tabla_datos"].'">
+												<input type="button" value="'.$MULTILANG_FrmCopiar.'"  class="Botones" onClick="confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["id"].');">
 										</form>
 								</td>
 								<td align="center">
