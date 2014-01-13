@@ -2,7 +2,7 @@
 /*
  * oauth_client.php
  *
- * @(#) $Id: oauth_client.php,v 1.78 2014/01/13 05:26:47 mlemos Exp $
+ * @(#) $Id: oauth_client.php,v 1.74 2013/10/17 04:45:34 mlemos Exp $
  *
  */
 
@@ -12,7 +12,7 @@
 
 	<package>net.manuellemos.oauth</package>
 
-	<version>@(#) $Id: oauth_client.php,v 1.78 2014/01/13 05:26:47 mlemos Exp $</version>
+	<version>@(#) $Id: oauth_client.php,v 1.74 2013/10/17 04:45:34 mlemos Exp $</version>
 	<copyright>Copyright © (C) Manuel Lemos 2012</copyright>
 	<title>OAuth client</title>
 	<author>Manuel Lemos</author>
@@ -228,8 +228,7 @@ class oauth_client_class
 				<stringvalue>Bitbucket</stringvalue>,
 				<stringvalue>Box</stringvalue>,
 				<stringvalue>Disqus</stringvalue>,
-				<stringvalue>Dropbox</stringvalue> (Dropbox with OAuth 1.0),
-				<stringvalue>Dropbox2</stringvalue> (Dropbox with OAuth 2.0),
+				<stringvalue>Dropbox</stringvalue>,
 				<stringvalue>Eventful</stringvalue>,
 				<stringvalue>Facebook</stringvalue>,
 				<stringvalue>Fitbit</stringvalue>,
@@ -240,7 +239,6 @@ class oauth_client_class
 				<stringvalue>Instagram</stringvalue>,
 				<stringvalue>LinkedIn</stringvalue>,
 				<stringvalue>Microsoft</stringvalue>,
-				<stringvalue>Reddit</stringvalue>,
 				<stringvalue>Salesforce</stringvalue>,
 				<stringvalue>Scoop.it</stringvalue>,
 				<stringvalue>StockTwits</stringvalue>,
@@ -711,8 +709,7 @@ class oauth_client_class
 {metadocument}
 	<variable>
 		<name>store_access_token_response</name>
-		<type>BOOLEAN</type>
-		<value>0</value>
+		<type>ARRAY</type>
 		<documentation>
 			<purpose>Option to determine if the original response for the access
 				token request should be stored in the
@@ -726,26 +723,6 @@ class oauth_client_class
 {/metadocument}
 */
 	var $store_access_token_response = false;
-
-/*
-{metadocument}
-	<variable>
-		<name>access_token_authentication</name>
-		<type>STRING</type>
-		<value></value>
-		<documentation>
-			<purpose>Option to determine if the requests to obtain a new access
-				token should use authentication to pass the application client ID
-				and secret.</purpose>
-			<usage>Set this variable to <stringvalue>basic</stringvalue> if the
-				OAuth server requires that the the client ID and secret be passed
-				using HTTP basic authentication headers when retrieving a new
-				token.</usage>
-		</documentation>
-	</variable>
-{/metadocument}
-*/
-	var $access_token_authentication = '';
 
 /*
 {metadocument}
@@ -818,7 +795,7 @@ class oauth_client_class
 */
 	var $response_status = 0;
 
-	var $oauth_user_agent = 'PHP-OAuth-API (http://www.phpclasses.org/oauth-api $Revision: 1.78 $)';
+	var $oauth_user_agent = 'PHP-OAuth-API (http://www.phpclasses.org/oauth-api $Revision: 1.74 $)';
 	var $session_started = false;
 
 	Function SetError($error)
@@ -1069,7 +1046,7 @@ class oauth_client_class
 		{
 			if(!function_exists('session_start'))
 				return $this->SetError('Session variables are not accessible in this PHP environment');
-			if(!session_start())
+			if(@!session_start())
 				return($this->SetPHPError('it was not possible to start the PHP session', $php_error_message));
 			$this->session_started = true;
 		}
@@ -1288,7 +1265,6 @@ class oauth_client_class
 					$authorization .= ($first ? ' ' : ',').$parameter.'="'.$this->Encode($value).'"';
 					$first = false;
 				}
-				$post_values = $parameters;
 			}
 			else
 			{
@@ -1308,8 +1284,6 @@ class oauth_client_class
 					$post_values = $values;
 			}
 		}
-		else
-			$post_values = $parameters;
 		if(strlen($authorization) === 0
 		&& !strcasecmp($this->access_token_type, 'Bearer'))
 			$authorization = 'Bearer '.$this->access_token;
@@ -1326,7 +1300,7 @@ class oauth_client_class
 			case 'multipart/form-data':
 				if(IsSet($options['RequestBody']))
 					return($this->SetError('the request body is defined automatically from the parameters'));
-				$arguments['PostValues'] = $post_values;
+				$arguments['PostValues'] = $parameters;
 				break;
 			case 'application/json':
 				$arguments['Headers']['Content-Type'] = $options['RequestContentType'];
@@ -1343,18 +1317,8 @@ class oauth_client_class
 				break;
 		}
 		$arguments['Headers']['Accept'] = (IsSet($options['Accept']) ? $options['Accept'] : '*/*');
-		switch(IsSet($options['AccessTokenAuthentication']) ? strtolower($options['AccessTokenAuthentication']) : '')
-		{
-			case 'basic':
-				$arguments['Headers']['Authorization'] = 'Basic '.base64_encode($this->client_id.':'.($this->get_token_with_api_key ? $this->api_key : $this->client_secret));
-				break;
-			case '':
-				if(strlen($authorization))
-					$arguments['Headers']['Authorization'] = $authorization;
-				break;
-			default:
-				return($this->SetError($this->access_token_authentication.' is not a supported authentication mechanism to retrieve an access token'));
-		}
+		if(strlen($authorization))
+			$arguments['Headers']['Authorization'] = $authorization;
 		if(strlen($error = $http->SendRequest($arguments))
 		|| strlen($error = $http->ReadReplyHeaders($headers)))
 		{
@@ -1428,44 +1392,30 @@ class oauth_client_class
 
 	Function ProcessToken($code, $refresh)
 	{
-		if(!$this->GetRedirectURI($redirect_uri))
-			return false;
 		if($refresh)
 		{
 			$values = array(
+				'client_id'=>$this->client_id,
+				'client_secret'=>($this->get_token_with_api_key ? $this->api_key : $this->client_secret),
 				'refresh_token'=>$this->refresh_token,
-				'grant_type'=>'refresh_token',
-				'scope'=>$this->scope,
+				'grant_type'=>'refresh_token'
 			);
 		}
 		else
 		{
+			if(!$this->GetRedirectURI($redirect_uri))
+				return false;
 			$values = array(
 				'code'=>$code,
+				'client_id'=>$this->client_id,
+				'client_secret'=>($this->get_token_with_api_key ? $this->api_key : $this->client_secret),
 				'redirect_uri'=>$redirect_uri,
 				'grant_type'=>'authorization_code'
 			);
 		}
-		$options = array(
-			'Resource'=>'OAuth '.($refresh ? 'refresh' : 'access').' token',
-			'ConvertObjects'=>true
-		);
-		switch(strtolower($this->access_token_authentication))
-		{
-			case 'basic':
-				$options['AccessTokenAuthentication'] = $this->access_token_authentication;
-				$values['redirect_uri'] = $redirect_uri;
-				break;
-			case '':
-				$values['client_id'] = $this->client_id;
-				$values['client_secret'] = ($this->get_token_with_api_key ? $this->api_key : $this->client_secret);
-				break;
-			default:
-				return($this->SetError($this->access_token_authentication.' is not a supported authentication mechanism to retrieve an access token'));
-		}
 		if(!$this->GetAccessTokenURL($access_token_url))
 			return false;
-		if(!$this->SendAPIRequest($access_token_url, 'POST', $values, null, $options, $response))
+		if(!$this->SendAPIRequest($access_token_url, 'POST', $values, null, array('Resource'=>'OAuth '.($refresh ? 'refresh' : 'access').' token', 'ConvertObjects'=>true), $response))
 			return false;
 		if(strlen($this->access_token_error))
 		{
@@ -1551,21 +1501,19 @@ class oauth_client_class
 		if(IsSet($access_token['value']))
 		{
 			$this->access_token_expiry = '';
-			$expired = (IsSet($access_token['expiry']) && strcmp($this->access_token_expiry = $access_token['expiry'], gmstrftime('%Y-%m-%d %H:%M:%S')) < 0);
-			if($expired)
+			if(IsSet($access_token['expiry'])
+			&& strcmp($this->access_token_expiry = $access_token['expiry'], gmstrftime('%Y-%m-%d %H:%M:%S')) < 0)
 			{
 				if($this->debug)
 					$this->OutputDebug('The OAuth access token expired in '.$this->access_token_expiry);
 			}
 			$this->access_token = $access_token['value'];
-			if(!$expired
-			&& $this->debug)
+			if($this->debug)
 				$this->OutputDebug('The OAuth access token '.$this->access_token.' is valid');
 			if(IsSet($access_token['type']))
 			{
 				$this->access_token_type = $access_token['type'];
 				if(strlen($this->access_token_type)
-				&& !$expired
 				&& $this->debug)
 					$this->OutputDebug('The OAuth access token is of type '.$this->access_token_type);
 			}
@@ -1573,15 +1521,13 @@ class oauth_client_class
 			{
 				$this->access_token_type = $this->default_access_token_type;
 				if(strlen($this->access_token_type)
-				&& !$expired
 				&& $this->debug)
 					$this->OutputDebug('Assumed the default for OAuth access token type which is '.$this->access_token_type);
 			}
 			if(IsSet($access_token['secret']))
 			{
 				$this->access_token_secret = $access_token['secret'];
-				if($this->debug
-				&& !$expired)
+				if($this->debug)
 					$this->OutputDebug('The OAuth access token secret is '.$this->access_token_secret);
 			}
 			if(IsSet($access_token['refresh']))
@@ -1765,16 +1711,12 @@ class oauth_client_class
 					if(strlen($this->refresh_token) === 0)
 						return($this->SetError('the access token expired and no refresh token is available'));
 					if($this->debug)
-						$this->OutputDebug('Refreshing the OAuth access token');
+					{
+						$this->OutputDebug('The access token expired on '.$this->access_token_expiry);
+						$this->OutputDebug('Refreshing the access token');
+					}
 					if(!$this->ProcessToken(null, true))
 						return false;
-					if(IsSet($options['FailOnAccessError'])
-					&& $options['FailOnAccessError']
-					&& strlen($this->authorization_error))
-					{
-						$this->error = $this->authorization_error;
-						return false;
-					}
 				}
 				$oauth = null;
 				if(strcasecmp($this->access_token_type, 'Bearer'))
@@ -1852,12 +1794,6 @@ class oauth_client_class
 				$this->dialog_url = 'https://www.dropbox.com/1/oauth/authorize';
 				$this->access_token_url = 'https://api.dropbox.com/1/oauth/access_token';
 				$this->authorization_header = false;
-				break;
-
-			case 'Dropbox2':
-				$this->oauth_version = '2.0';
-				$this->dialog_url = 'https://www.dropbox.com/1/oauth2/authorize?response_type=code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&state={STATE}';
-				$this->access_token_url = 'https://www.dropbox.com/1/oauth2/token';
 				break;
 
 			case 'Eventful':
@@ -1938,14 +1874,6 @@ class oauth_client_class
 				$this->oauth_version = '2.0';
 				$this->dialog_url = 'https://login.live.com/oauth20_authorize.srf?client_id={CLIENT_ID}&scope={SCOPE}&response_type=code&redirect_uri={REDIRECT_URI}&state={STATE}';
 				$this->access_token_url = 'https://login.live.com/oauth20_token.srf';
-				break;
-
-			case 'Reddit':
-				$this->oauth_version = '2.0';
-				$this->dialog_url = 'https://ssl.reddit.com/api/v1/authorize?response_type=code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&state={STATE}';
-				$this->offline_dialog_url = 'https://ssl.reddit.com/api/v1/authorize?response_type=code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&state={STATE}&duration=permanent';
-				$this->access_token_url = 'https://ssl.reddit.com/api/v1/access_token';
-				$this->access_token_authentication = 'basic';
 				break;
 
 			case 'RightSignature':

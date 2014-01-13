@@ -126,6 +126,7 @@ if ($WSId=="verificar_credenciales")
 			</credencial>
 		</credenciales>";
 		// Devuelve los resultados
+		@ob_clean(); //Limpia salida antes de llamar los WS
 		echo $salida_xml;
 	}
 

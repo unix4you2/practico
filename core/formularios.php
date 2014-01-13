@@ -188,7 +188,7 @@
 					auditar("Inserta registro en ".$registro_formulario["tabla_datos"]);
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="editar_formulario">
-						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+						<input type="Hidden" name="nombre_tabla" value="'.$registro_formulario["tabla_datos"].'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="popup_activo" value="FormularioCampos">
 					<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
@@ -421,6 +421,7 @@
 				{
 					$accion_usuario=addslashes($accion_usuario);
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES ('$titulo','$estilo','$formulario','$tipo_accion','$accion_usuario','$visible','$peso','$retorno_titulo','$retorno_texto','$confirmacion_texto')");
+					$id=$ConexionPDO->lastInsertId();					
 					auditar("Crea boton $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -507,7 +508,6 @@ if ($accion=="editar_formulario")
 
 
 		<!-- INICIO DE MARCOS POPUP -->
-
 		<div id='FormularioCampos' class="FormularioPopUps">
 				<?php 
 				abrir_ventana($MULTILANG_FrmMsj1,'#BDB9B9','');
@@ -581,7 +581,6 @@ if ($accion=="editar_formulario")
 							</tr>
 							</table>
 						</div>
-
 
 						<div id='campo2' style="display:none;">
 							<table class="TextosVentana">
@@ -901,14 +900,14 @@ if ($accion=="editar_formulario")
 													{
 														echo '<optgroup label="'.str_replace($TablasApp,'',$registro[0]).'" >';
 														//Busca los campos de la tabla
-														$nombre_tabla=$registro[0];
-														$resultadocampos=consultar_columnas($nombre_tabla);
+														$nombre_tabla_opc=$registro[0];
+														$resultadocampos=consultar_columnas($nombre_tabla_opc);
 														for($i=0;$i<count($resultadocampos);$i++)
 															{
 																$seleccion_campo="";
-																if (@$registro_campo_editar["origen_lista_opciones"]==$nombre_tabla.'.'.$resultadocampos[$i]["nombre"])
+																if (@$registro_campo_editar["origen_lista_opciones"]==$nombre_tabla_opc.'.'.$resultadocampos[$i]["nombre"])
 																	$seleccion_campo="SELECTED";
-																echo '<option value="'.$nombre_tabla.'.'.$resultadocampos[$i]["nombre"].'" '.$seleccion_campo.'>'.$resultadocampos[$i]["nombre"].'&nbsp;&nbsp;&nbsp;'.$resultadocampos[$i]["tipo"].'</option>';								
+																echo '<option value="'.$nombre_tabla_opc.'.'.$resultadocampos[$i]["nombre"].'" '.$seleccion_campo.'>'.$resultadocampos[$i]["nombre"].'&nbsp;&nbsp;&nbsp;'.$resultadocampos[$i]["tipo"].'</option>';								
 															}
 														echo '</optgroup>';
 													}
@@ -939,14 +938,14 @@ if ($accion=="editar_formulario")
 													{
 														echo '<optgroup label="'.str_replace($TablasApp,'',$registro[0]).'" >';
 														//Busca los campos de la tabla
-														$nombre_tabla=$registro[0];
-														$resultadocampos=consultar_columnas($nombre_tabla);
+														$nombre_tabla_val=$registro[0];
+														$resultadocampos=consultar_columnas($nombre_tabla_val);
 														for($i=0;$i<count($resultadocampos);$i++)
 															{
 																$seleccion_campo="";
-																if (@$registro_campo_editar["origen_lista_valores"]==$nombre_tabla.'.'.$resultadocampos[$i]["nombre"])
+																if (@$registro_campo_editar["origen_lista_valores"]==$nombre_tabla_val.'.'.$resultadocampos[$i]["nombre"])
 																	$seleccion_campo="SELECTED";
-																echo '<option value="'.$nombre_tabla.'.'.$resultadocampos[$i]["nombre"].'" '.$seleccion_campo.'>'.$resultadocampos[$i]["nombre"].'&nbsp;&nbsp;&nbsp;'.$resultadocampos[$i]["tipo"].'</option>';								
+																echo '<option value="'.$nombre_tabla_val.'.'.$resultadocampos[$i]["nombre"].'" '.$seleccion_campo.'>'.$resultadocampos[$i]["nombre"].'&nbsp;&nbsp;&nbsp;'.$resultadocampos[$i]["tipo"].'</option>';								
 															}
 														echo '</optgroup>';
 													}
@@ -1442,7 +1441,7 @@ if ($accion=="editar_formulario")
 											<input type="hidden" name="formulario" value="'.$formulario.'">
 											<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 											<input type="hidden" name="accion_retorno" value="editar_formulario">
-											<input type="hidden" name="valor" value="'.$peso_disminuido.'">
+											<input type="hidden" name="valor" value="'.@$peso_disminuido.'">
 											<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 										</form>
 									';

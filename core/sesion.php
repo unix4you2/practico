@@ -87,7 +87,7 @@
 			$webservice_validacion = $protocolo_webservice.$prefijo_webservice."?WSOn=1&WSKey=".$LlaveDePaso."&WSId=verificar_credenciales&uid=".$uid."&clave=".$clave;
 			// FORMA 1: Usando SimpleXML Directamente
 				// Carga el contenido en una variable para validar la conexion
-				$contenido_url = file_get_contents($webservice_validacion);
+				$contenido_url = trim(file_get_contents($webservice_validacion));
 				// Valida si se logro cargar o no el contenido
 				if ($contenido_url)
 					{

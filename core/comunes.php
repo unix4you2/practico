@@ -856,7 +856,7 @@
 			global $MotorBD;
 			global $Auth_TipoMotor;
 			global $Auth_TipoEncripcion;
-			global $MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,$MULTILANG_ErrCURL,$MULTILANG_ErrLDAP,$MULTILANG_ErrHASH,$MULTILANG_ErrSESS,$MULTILANG_ErrGD,$MULTILANG_ErrPDO,$MULTILANG_ErrDriverPDO,$MULTILANG_ErrGoogleAPIMod;
+			global $MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,$MULTILANG_ErrCURL,$MULTILANG_ErrLDAP,$MULTILANG_ErrHASH,$MULTILANG_ErrSESS,$MULTILANG_ErrGD,$MULTILANG_ErrPDO,$MULTILANG_ErrDriverPDO,$MULTILANG_ErrGoogleAPIMod,$MULTILANG_ErrFuncion;
 			
 			//Verifica soporte para LDAP cuando esta activado en la herramienta
 			if ($Auth_TipoMotor=='ldap' &&  !extension_loaded('ldap'))
@@ -900,6 +900,10 @@
 			
 			// Bloqueos por IP/pais http://stackoverflow.com/questions/15835274/file-get-contents-failed-to-open-stream-connection-refused
 			
+			// Verifica el soporte para funciones especificas PHP
+			$funcion_evaluada='file_get_contents';
+			if (!function_exists($funcion_evaluada))
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrFuncion.'<b>'.$funcion_evaluada.'</b>','','icono_error.png','TextosEscritorio');
 			
 		}
 
@@ -1654,7 +1658,7 @@
 				{
 					// Determina si la opcion a agregar es la misma del valor del registro
 					$cadena_predeterminado='';
-					if ($opciones_lista[$i]==$cadena_valor)
+					if ($valores_lista[$i]==$cadena_valor)
 						$cadena_predeterminado=' SELECTED ';
 					$salida.= "<option value='".$valores_lista[$i]."' ".$cadena_predeterminado.">".$opciones_lista[$i]."</option>";
 				}
@@ -1775,8 +1779,8 @@
 				{
 					// Determina si la opcion a agregar es la misma del valor del registro
 					$cadena_predeterminado='';
-					if ($opciones_lista[$i]==$cadena_valor)
-						$cadena_predeterminado=' SELECTED ';
+					if ($valores_lista[$i]==$cadena_valor)
+						$cadena_predeterminado=' CHECKED ';
 					$salida.= "<input class='Radios' type='radio' name='".$registro_campos["campo"]."' value='".$valores_lista[$i]."' ".$cadena_predeterminado.">".$opciones_lista[$i]."<br>";
 				}
 
@@ -1817,7 +1821,12 @@
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
 			if ($registro_campos["valor_predeterminado"]!="") $valor_de_campo=$registro_campos["valor_predeterminado"];
-			if ($campobase!="" && $valorbase!="") $valor_de_campo=$registro_datos_formulario["$nombre_campo"];
+
+			// toma el valor predeterminado como el minimo (formulario de registro nuevo) 
+				$valor_de_campo=$registro_campos["valor_minimo"];
+			// Busca el valor segun registro en caso de recibir un registro recuperado
+			if ($campobase!="" && $valorbase!="")
+				$valor_de_campo=$registro_datos_formulario["$nombre_campo"];
 			$cadena_valor=' value="'.$valor_de_campo.'" ';
 
 			// Muestra el campo

@@ -163,6 +163,7 @@
 	$MULTILANG_ErrorDesAuth='The credentials supplied for access to the system were not accepted. Some common causes are:<br><li> The username or password is incorrect. <br> <li> Security code entered incorrectly. <br> <li> Your Login is disabled. <br> <li> Account locked access by multiple attempts with incorrect password.';
 	$MULTILANG_ErrorSoloAdmin='Only admin user can see the transaction details with debug mode turned On';
 	$MULTILANG_ErrGoogleAPIMod='OAuth2 for Google was configured as default auth method.<br>Anyway the Practicos module for google-api is not installed yet.<br>Please download the google-api module from Practicos website and reload again.';
+	$MULTILANG_ErrFuncion='<br>PHP Function doesnt exists or is disabled in your server: ';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';
@@ -270,7 +271,7 @@
 	$MULTILANG_FrmDesCampo='Field data table which will link information';
 	$MULTILANG_FrmValUnico='Single value field';
 	$MULTILANG_FrmTitUnico='Uniqueness for input values';
-	$MULTILANG_FrmDesUnico='Indicates whether the field can store or repeated values ​​in the database. Should be enabled for fields representing primary keys in their Design and disabled for the rest';
+	$MULTILANG_FrmDesUnico='Indicates whether the field can store or repeated values ​​in the database. Should be enabled for fields representing primary keys in their Design and disabled for the rest.  You should take care in that forms that you need this field to do upgrades and its duplicated error message.';
 	$MULTILANG_FrmPredeterminado='Default value';
 	$MULTILANG_FrmDesPredeterminado='Sets the value that appears automatically filled in the field to open the form view. This value can be out of data validation';
 	$MULTILANG_FrmValida='Data validation';

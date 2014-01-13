@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
 VersionCompatibleAno="13"
-VersionCompatibleMes="914"
+VersionCompatibleMes="917"
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno="14"
-VersionFinalMes="1"
+VersionFinalAno="13"
+VersionFinalMes="918"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version
@@ -43,17 +43,26 @@ LogCambios="
 * Added: Ahora se pueden clonar formularios rapidamente mediante una función de copia en la administración de formularios
 * Added: Tester: Victor Hugo Marin.  Ahora se puede indicar el protocolo preferido para el transporte en el momento de autenticación cuando se utilizan protocolos HTTP o HTTPS.  Aquellos con certificados autofirmados o no emitidos por un CA reconocido pueden presentar problemas con la recuperación de los tokens al momento de autenticación por lo que se deja la posibilidad al administrador de definir la forma de autenticar.
 * Added: Tester: Victor Hugo Marin.  Los campos marcados como obligatorios en el diseno de formularios ahora no son sólo informativos, sino que son validados antes de enviar la consulta para almacenar el registro.
+* Added: Tester: Jaime Alejandro Zapata.  Algunos servidores no devuelven correctamente el archivo XML utilizado por el webservice de autenticación.
 * Added: Ahora se cuenta con un modo de impresión para los formularios, ubicado en la parte superior (título de las ventanas generadas) con el fin de permitir la impresión rápida de una ficha, informe o cualquier contenido publicado en un form.
 * Added: Los controles tipo ComboBox o Listas de selección pueden convertirse ahora en controles ListBox especificando el alto deseado para la lista de opciones.
 * Added: Ahora el usuario admin puede controlar si desea buscar o no actualizaciones automáticas de Práctico.
 * Added: Documentación mejorada y actualizada sobre la web oficial (Manuales)
 * Added: Ventana de edición para propiedades inciales de formularios en el modo de edición de los mismos
+* Added: Ahora Práctico cuenta con una función para verificar si las funciones específicas de PHP están o no disponibles.  En este caso se inicia probando la existencia de file_get_contents para procesos de autenticacion.
+* Fixed: Ahora los campos tipo deslizador se inicializan automáticamente al cargar un formulario de ingreso de datos nuevo
 * Fixed: Se retira de las opciones para motores de autenticación a Google, pues ya se encuentra disponible como proveedor OAuth
 * Fixed: Reemplazo de función obsoleta de PHP ereg_replace por preg_replace (core/comunes.php|283)
 * Fixed: Se elimina la posibilidad de indicar la posición del campo en la tabla durante su edición por compatibilidad con todos los motores
 * Fixed: Cambio del prefijo de tablas en procesos de actualizacion para que se pueda tomar ajustes a bases de datos
 * Fixed: Mensaje de advertencia en eliminación de formularios presentaba un texto mal por falta de actualización en los archivos de idioma
 * Fixed: Mejora en la detección del protocolo de transporte y warnings de variables inexistentes
+* Fixed: Seleccion de campos en edición de controles de datos sobre formularios tomaba última tabla del sistema.
+* Fixed: Eliminación de warning para tabla desconocida durante inserción de registros
+* Fixed: Seleccion de campos con valores dinamicos desde otras tablas afectaba la seleccion de campos en la tabla del form
+* Fixed: Apertura de formularios de datos con campos de seleccion en registros previos detecta ahora los valores de registro y selecciona de la lista el valor correspondiente
+* Fixed: Apertura de formularios de datos con campos de radio button en registros previos detecta ahora los valores de registro y selecciona de la lista el valor correspondiente
+* Fixed: Se corrige no inicialización de valores post en la clase oauth_client.
 --------------------------------------
 El proyecto Práctico agradece a las siguientes personas por su apoyo mediante donaciones
 para la liberación de la versión 14.1 realizadas en www.indiegogo.com/projects/practico/:

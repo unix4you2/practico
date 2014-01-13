@@ -60,7 +60,7 @@
 									if (!file_exists("core/ws_funciones.php")) mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr03,'','icono_error.png','TextosEscritorio');
 									else
 										{
-											ob_clean(); //Limpia salida antes de llamar los WS
+											@ob_clean(); //Limpia salida antes de llamar los WS
 											include_once("core/ws_funciones.php");
 											include_once("mod/personalizadas_ws.php");
 										}
