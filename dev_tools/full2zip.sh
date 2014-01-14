@@ -41,7 +41,7 @@
 	#Lista de archivos y carpetas a empaquetar (relativos a la raiz y separados por espacio)
 	ListaArchivos=" AUTHORS index.php LICENSE README bkp core img inc ins mod skin tmp "
 	#Nombre del archivo resultante
-	NombreArchivo="Practico";
+	NombreArchivo="Practico+Modulos";
 	Version=`head -n 1 inc/version_actual.txt`
 	Extension=".zip"
 
@@ -65,7 +65,7 @@
 #source dev_tools/log_cambios.txt
 
 #[ArchivosExcluidos] Separados por espacio. Residen en alguna carpeta a comprimir pero deben evitarse
-ListaExcluidos=" mod/ldap\* mod/pam\* mod/fileman\* mod/pdf\* core/configuracion.php core/doc_configuracion.php core/doc_intro.php practico.sqlite3 "
+ListaExcluidos=" core/configuracion.php core/doc_configuracion.php core/doc_intro.php practico.sqlite3 "
 
 # Banderas para la compresion
 	Comando="zip "
