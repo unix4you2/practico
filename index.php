@@ -102,6 +102,9 @@
 	// Incluye archivo con algunas funciones comunes usadas por la herramienta
 	include_once("core/comunes.php");
 
+	// Incluye archivo con funciones de correo electronico
+	include_once("core/correos.php");
+
 	// Almacena tiempo de inicio para calculo de tiempos de ejecucion del script (informados al admin)
 	if(@$Login_usuario=="admin" && $accion!="") $tiempo_inicio_script = obtener_microtime();
 

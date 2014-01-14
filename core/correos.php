@@ -20,49 +20,44 @@
 
 	/*
 		Title: Modulo correos
-		Ubicacion *[/core/correo.php]*.  Modulo encargado del envio de informes automaticos por correo electronico.
-
-		Estado de desarrollo actual: Alpha, lanzamiento estimado 13.02
-
-		Variables de entrada:
-
-			informe - Indica el nombre del informe a generar y enviar
-
-		Salida de la funcion:
-			Informe por correo electronico
+		Ubicacion *[/core/correo.php]*.  Modulo encargado del envio de mensajes simples o informes automaticos por correo electronico.
 	*/
 
-	session_start();
+	
+	// Valida sesion activa de Practico
+	@session_start();
+	if (!isset($Sesion_abierta)) 
+		{
+			echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
+			die();
+		}
 
-	include("configuracion.php");
 
-	$fecha_correo=date("Y/m/d");
-	$hora_correo=date("H:i:s");
-	$prefijo_correo = '<html>
+	$texto_prefijo_correo = '<html>
 		<head>
 		<meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
-		<title>Mensaje de Pr&aacute;ctico</title>
+		<title>Mensaje de Practico</title>
 		</head>
 		<body>
 		<span style="font-family: Helvetica,Arial,sans-serif;"><small
 		style="font-weight: bold; color: rgb(102, 102, 102);">Mensaje
-		automático de eventos en la plataforma Práctico</small><br>
+		automático de la plataforma Práctico</small><br>
 		<hr>
 		<br>
 		</span>
 		<div style="margin-left: 40px;"><span
 		style="font-family: Helvetica,Arial,sans-serif;">Fecha:<span
-		style="font-weight: bold;"> '.$fecha_correo.'</span> - Hora: <span
-		style="font-weight: bold;">'.$hora_correo.'</span></span></div>
+		style="font-weight: bold;"> '.date("Y/m/d").'</span> - Hora: <span
+		style="font-weight: bold;">'.date("H:i:s").'</span></span></div>
 		<div style="margin-left: 40px;"><span
 		style="font-family: Helvetica,Arial,sans-serif;">';
 
-	$posfijo_correo = ' </span></div>
+	$texto_posfijo_correo = ' </span></div>
 		<p style="font-family: Helvetica,Arial,sans-serif;"><br>
 		</p>
 		<p style="font-family: Helvetica,Arial,sans-serif;">Información
 		detallada sobre este mensaje puede ser encontrada accesando nuestro
-		portal de <span style="font-weight: bold;">Práctico</span> con su
+		portal de <span style="font-weight: bold;">Practico</span> con su
 		nombre de
 		usuario y contraseña<br>
 		</p>
@@ -111,40 +106,43 @@
 		</html>'; 
 
 
-// #####################################################################################################
-if ($informe=="xxxBETA")		
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: enviar_correo
+	Envia un correo electronico utilizando la funcion mail de php
+
+	Variables de entrada:
+		* remitente
+		* destinatario
+		* asunto
+		* cuerpo_mensaje
+		* destinatario_cc
+		* destinatario_bcc
+
+	Salida:
+		Correo electronico enviado al destinatario, destinatario_cc y destinatario_bcc
+		* Retorna verdadero si el correo fue encolado/aceptado para envio o falso si fue rechazado
+
+	Ver tambien:
+		<Modulo correos>
+*/
+function enviar_correo($remitente,$destinatario,$asunto,$cuerpo_mensaje,$destinatario_cc="",$destinatario_bcc="")
 	{
-		//PASAR FUNCIONALIDAD A PDO
-		$mysql_enlace = mysql_connect($Servidor, $UsuarioBD, $PasswordBD); 
-		mysql_select_db($BaseDatos, $mysql_enlace);
-
-		// Busca empresas atendidas en el dia
-		$reporte_general=$prefijo_correo;
-		$reporte_general.='<br>La informaci&oacute;n asociada a este mensaje se encuentra directamente en el asunto para facilitar su lectura en dispositivos m&oacute;viles<br>';
-		
-		// Obtiene y formatea datos del informe a enviar almacenados en la cadena de reporte_general
-		if ($fecha=="") $fecha=date("Ymd");
-		$consulta_ventas = "SELECT format(SUM(total),0) as totalventas FROM fac_factura WHERE anulada=0 AND f_fact='$fecha' AND cod_empresa<>'' AND forma_pago='0'";
-		$resultado_ventas = mysql_query($consulta_ventas,$mysql_enlace);
-		$registro_ventas = mysql_fetch_array($resultado_ventas);
-		$total_ventas=$registro_ventas["totalventas"];
-
-		$reporte_general.=$posfijo_correo;
-
-		// ENVIO DE CORREO ELECTRONICO
-		$asunto = "[".$par_NOMBRESEDE."] Total ventas: $".$total_ventas;
-
-		$headers = "MIME-Version: 1.0\n"; 
-		$headers .= "Content-type: text/html; charset=iso-8859-1\n"; 
-		$headers .= "From: Practico <".$par_NOREPLYMAIL.">\n"; 
-		$headers .= "Reply-To: ".$par_NOREPLYMAIL."\n"; 
-		$headers .= "Return-path: ".$par_NOREPLYMAIL."\n"; 
-
-		$destinatario = "reportes@unixlandia.org";
-		$headers .= "Cc: copias1@unixlandia.com,copias2@unixlandia.net\n";
-		$headers .= "Bcc: john.arroyave@unixlandia.org,catalina.merino@unixlandia.org\n";
-
-		mail($destinatario,$asunto,$reporte_general,$headers);
+		global $texto_prefijo_correo,$texto_posfijo_correo;
+		//para el envío en formato HTML
+		$headers = "MIME-Version: 1.0\n";
+		$headers .= "Content-type: text/html; charset=iso-8859-1\n";
+		$headers .= "From: Practico <".$remitente.">\n";
+		$headers .= "Reply-To: ".$remitente."\n";
+		$headers .= "Return-path: ".$remitente."\n";
+		$headers .= $destinatario_cc;
+		$headers .= $destinatario_bcc;
+		$mensaje_final=$texto_prefijo_correo.$cuerpo_mensaje.$texto_posfijo_correo;
+		$estado_envio = mail($destinatario,$asunto,$mensaje_final,$headers);
+		return $estado_envio;
 	}
+
+
 
 ?>
