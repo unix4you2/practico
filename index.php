@@ -167,7 +167,7 @@
 		include("core/formularios.php");
 	if ($accion=="Iniciar_login" || $accion=="Terminar_sesion" || $accion=="Mensaje_cierre_sesion")
 		include("core/sesion.php");
-	if ($accion=="cargar_objeto" || $accion=="guardar_configuracion" || $accion=="guardar_configws" || $accion=="guardar_oauth")
+	if ($accion=="cargar_objeto" || $accion=="guardar_configuracion" || $accion=="guardar_oauth")
 		include("core/objetos.php");
 	if ($accion=="actualizar_practico" || $accion=="cargar_archivo" || $accion=="analizar_parche" || $accion=="aplicar_parche")
 		include("core/actualizacion.php");

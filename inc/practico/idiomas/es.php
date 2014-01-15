@@ -785,14 +785,26 @@
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';
 	$MULTILANG_WSErr01='[Cod. 01] La llave suministrada es inv&aacute;lida';
-	$MULTILANG_WSErr02='[Cod. 02] No se encuentra el archivo de definici&oacute;n de llaves';
+	$MULTILANG_WSErr02='[Cod. 02] El valor secreto suministrado no es valido';
 	$MULTILANG_WSErr03='[Cod. 03] No se encuentra el archivo de funciones para webservices.';
 	$MULTILANG_WSErr04='[Cod. 04] No se ha suministrado una llave para consumir los servicios o la llave utilizada durante la instalaci&oacute;n fue vac&iacute;a.';
 	$MULTILANG_WSErr05='[Cod. 05] El identificador de servicio, funci&oacute;n o m&eacute;todo a ejecutar no ha sido suministrado';
+	$MULTILANG_WSErr06='[Cod. 06] Permisos insuficientes para ejecutar servicio: ';
+	$MULTILANG_WSErr07='[Cod. 07] Acceso a la API no autorizado para la direccion: ';
+	$MULTILANG_WSErr08='[Cod. 08] Acceso a la API no autorizado para el dominio: ';
 	$MULTILANG_WSConfigButt='Llaves de WebServices';
 	$MULTILANG_WSLlavesDefinidas='<b>Llaves definidas para el consumo de WebServices</b> (una por l&iacute;nea)';
-	$MULTILANG_WSLlavesAyuda='Son aquellas autorizadas para ejecutar los webservices definidos en Pr&aacute;ctico o los personalizados por el usuario.  No es necesario agregar la llave de paso del sistema ya que esta se encuentra autorizada por defecto.';
-	$MULTILANG_WSLlavesAgregar='Agregar llave aleatoria';
+	$MULTILANG_WSLlavesAyuda='Son aquellas autorizadas para ejecutar los webservices definidos en Pr&aacute;ctico o los personalizados por el usuario.  No es necesario agregar la llave de paso del sistema ya que esta se encuentra autorizada por defecto en todos los dominios y funciones';
+	$MULTILANG_WSLlavesNuevo='Agregar nuevo cliente de API';
+	$MULTILANG_WSLlavesBorrar='Se dispone a eliminar las llaves de API para el cliente seleccionado.  Cualquier aplicacion externa o intento de conexion que utilice este conjunto de llaves sera rechazado por Practico.  La operacion no se puede deshacer luego, Desea continuar?';
+	$MULTILANG_WSLlavesNombre='Nombre cliente';
+	$MULTILANG_WSLlavesLlave='Llave';
+	$MULTILANG_WSLlavesSecreto='Secreto';
+	$MULTILANG_WSLlavesURI='URI de redireccion';
+	$MULTILANG_WSLlavesDominio='Dominio(s) autorizado(s)';
+	$MULTILANG_WSLlavesIP='IP(s) autorizadas(s)';
+	$MULTILANG_WSLlavesFunciones='Servicios permitidos';
+	$MULTILANG_WSLlavesAsterisco='(*) Asterisco para cualquiera';
 
 	//OAuth
 	$MULTILANG_OauthButt='Autenticacion OAuth';

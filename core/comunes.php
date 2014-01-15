@@ -576,15 +576,19 @@
 
 		Registro de auditoria llevado sobre la tabla
 */
-	function auditar($accion)
+	function auditar($accion,$usuario="")
 		{
 			global $ConexionPDO,$ArchivoCORE,$TablasCore;
 			global $ListaCamposSinID_auditoria;
 			global $Login_usuario,$fecha_operacion,$hora_operacion;
+			//Establece el usuario para el registro
+			if ($usuario=="")
+				$usuario_auditar=$Login_usuario;
+			else
+				$usuario_auditar=$usuario;
 			//Lleva el registro
-			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$Login_usuario','$accion','$fecha_operacion','$hora_operacion')");
+			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$usuario_auditar','$accion','$fecha_operacion','$hora_operacion')");
 		}
-
 
 
 /* ################################################################## */

@@ -79,6 +79,10 @@
 <body leftmargin="0"  margin="0" topmargin="0" oncontextmenu="return false;">
 <div id='FondoPopUps' class="FondoOscuroPopUps"></div>
 
+<form action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;" name="core_ver_menu">
+	<input type="Hidden" name="accion" value="Ver_menu">
+</form>
+
 <?php 
 	//Despliega marco de administracion a ser activado por el boton superior
 	if (@$Login_usuario=="admin" && $Sesion_abierta)
@@ -89,10 +93,6 @@
 			include_once("core/marco_oauth.php");
 		}
 ?>
-
-<form action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;" name="core_ver_menu">
-	<input type="Hidden" name="accion" value="Ver_menu">
-</form>
 
 
 <!-- INICIA LA TABLA PRINCIPAL -->

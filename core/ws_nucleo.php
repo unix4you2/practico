@@ -46,24 +46,83 @@
 					// Verifica si se ha recibido un identificador de servicio
 					if (@$WSId!="")
 						{
-							// Incluye las llaves definidas
-							if (!file_exists("core/ws_llaves.php")) mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr02,'','icono_error.png','TextosEscritorio');
-							else include_once("core/ws_llaves.php");
-							// Agrega llave del sistema de manera predeterminada a la lista de llaves permitidas, no deberia ser vacia o de lo contrario los WS no entraran
-							$Auth_WSKeys[]=$LlaveDePaso;
 							// Verifica validez de la llave recibida para el webservice
-							if(in_array($WSKey, $Auth_WSKeys,true) || $ByPassWS)
+							$llave_ws_valida=0;
+							// Verifica si la llave es la misma de instalacion (llave propia)
+							if ($WSKey==$LlaveDePaso)
+								{
+									$llave_ws_valida=1;
+									// Define valores para la llave de instalacion
+									$nombre_cliente="Practico";
+									$funciones_autorizadas='verificar_credenciales,autenticacion_oauth';
+									$ip_autorizada="*";
+									$dominio_autorizado="*";
+								}
+							else
+								{
+									// Valida si la llave esta en la BD de API
+									$consulta_llave=ejecutar_sql("SELECT id,".$ListaCamposSinID_llaves_api." FROM ".$TablasCore."llaves_api WHERE llave='$WSKey' ");
+									$registro_llave = $consulta_llave->fetch();
+									// Si encuentra una llave valida entonces su secreto
+									if ($registro_llave["llave"]!="")
+										{
+											if($registro_llave["secreto"]==$WSSecret)
+												{
+													$llave_ws_valida=1;
+													// Define valores para la llave
+													$nombre_cliente=$registro_llave["nombre"];
+													$ip_autorizada=$registro_llave["ip_autorizada"];
+													$dominio_autorizado=$registro_llave["dominio_autorizado"];
+													$funciones_autorizadas=$registro_llave["funciones_autorizadas"];												
+												}
+											else
+												{
+													mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr02,'','icono_error.png','TextosEscritorio');
+												}
+										}
+								}
+
+							// Verifica si se tiene una llave valida y activa los WS
+							if($llave_ws_valida || $ByPassWS)
 								$ModoWSActivado=1;
+
 							// Si la llave es correcta incluye los webservices de la herramienta y los del usuario, sino presenta error
 							if ($ModoWSActivado)
 								{
-									if (!file_exists("core/ws_funciones.php")) mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr03,'','icono_error.png','TextosEscritorio');
+									//Valida si tiene acceso a la funcion llamada
+									if (strpos($funciones_autorizadas, $WSId)!==FALSE || $funciones_autorizadas=="*")
+										{
+											//Valida si la IP del cliente es una de las autorizadas
+											if (strpos($ip_autorizada, $_SERVER['REMOTE_ADDR'])!==FALSE || $ip_autorizada=="*")
+												{
+													//Valida si el dominio del cliente es uno de las autorizadas
+													if (strpos($dominio_autorizado, $_SERVER['REMOTE_HOST'])!==FALSE || $dominio_autorizado=="*")
+														{
+															//Todo OK a este punto
+															if (!file_exists("core/ws_funciones.php")) mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr03,'','icono_error.png','TextosEscritorio');
+															else
+																{
+																	@ob_clean(); //Limpia salida antes de llamar los WS
+																	include_once("core/ws_funciones.php");
+																	include_once("mod/personalizadas_ws.php");
+																}
+															// Lleva a auditoria
+															auditar("$WSId","API.".$nombre_cliente);
+														}
+													else
+														{
+															mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr08.$_SERVER['REMOTE_HOST'],'','icono_error.png','TextosEscritorio');	
+														}
+												}
+											else
+												{
+													mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr07.$_SERVER['REMOTE_ADDR'],'','icono_error.png','TextosEscritorio');	
+												}
+										}
 									else
 										{
-											@ob_clean(); //Limpia salida antes de llamar los WS
-											include_once("core/ws_funciones.php");
-											include_once("mod/personalizadas_ws.php");
-										}
+											mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr06.$WSId,'','icono_error.png','TextosEscritorio');	
+										}		
 								}
 							else
 								mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr01,'','icono_error.png','TextosEscritorio');	
@@ -75,4 +134,3 @@
 				mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr04,'','icono_error.png','TextosEscritorio');	
 			die(); // Finaliza script para presentar solo el resultado del WebService ejecutado
 		}
-

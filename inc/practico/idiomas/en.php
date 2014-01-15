@@ -788,15 +788,28 @@
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';
 	$MULTILANG_WSErr01='[Cod. 01] Invalid key';
-	$MULTILANG_WSErr02='[Cod. 02] KEYs definition file does not found';
+	$MULTILANG_WSErr02='[Cod. 01] Secret value is not valid';
 	$MULTILANG_WSErr03='[Cod. 03] WebServices functions file does not found';
 	$MULTILANG_WSErr04='[Cod. 04] Webservice consumers key is empty or null. Check the value you sent or your Practico installation process.';
 	$MULTILANG_WSErr05='[Cod. 05] The service identifier, function or method could not be executed, is uknown or is empty.';
+	$MULTILANG_WSErr06='[Cod. 06] You dont have permission to run the service: ';
+	$MULTILANG_WSErr07='[Cod. 07] API access unauthorized for the address: ';
+	$MULTILANG_WSErr08='[Cod. 08] API access unauthorized for the domain: ';
 	$MULTILANG_WSConfigButt='WebServices keys';
 	$MULTILANG_WSLlavesDefinidas='<b>WebServices consumer Keys</b> (one each line)';
-	$MULTILANG_WSLlavesAyuda='Those are the webservices keys that you allow to use Pr&aacute;ctico Webservices or user custom services.  It is not necessary to add your setup pass key cause it is allowed by default.';
-	$MULTILANG_WSLlavesAgregar='Add random key';
-	
+	$MULTILANG_WSLlavesAyuda='Those are the webservices keys that you allow to use Pr&aacute;ctico Webservices or user custom services.  It is not necessary to add your setup pass key cause it is allowed by default over all domains and functions';
+	$MULTILANG_WSLlavesNuevo='Add a new API client';
+	$MULTILANG_WSLlavesBorrar='You are going to delete the API keys selected.  Any application o foreign connection using that keys will be forbidden by Practico.  This operation can not be undo later, Are you sure?';
+	$MULTILANG_WSLlavesNombre='Client name';
+	$MULTILANG_WSLlavesLlave='Key';
+	$MULTILANG_WSLlavesSecreto='Secret';
+	$MULTILANG_WSLlavesURI='Redirect URI';
+	$MULTILANG_WSLlavesDominio='Authorized domain(s)';
+	$MULTILANG_WSLlavesIP='Authorized IP(s)';
+	$MULTILANG_WSLlavesFunciones='Allowed services';
+	$MULTILANG_WSLlavesAsterisco='(*) asterisk for any';
+
+
 	//OAuth
 	$MULTILANG_OauthButt='OAuth Autentication';
 	$MULTILANG_ProtoTransporte='Prefered transport protocol';

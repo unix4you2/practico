@@ -210,3 +210,15 @@ CREATE TABLE core_usuario_informe (
   PRIMARY KEY  (id)
 );
 
+DROP TABLE IF EXISTS core_llaves_api;
+CREATE TABLE core_llaves_api (
+  id serial,
+  nombre varchar(15) NOT NULL,
+  llave varchar(50) NOT NULL,
+  secreto varchar(50) NOT NULL,
+  uri varchar(255) NOT NULL,
+  dominio_autorizado varchar(255) NOT NULL,
+  ip_autorizada varchar(255) NOT NULL,
+  funciones_autorizadas text,
+  PRIMARY KEY (id)
+);

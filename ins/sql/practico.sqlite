@@ -209,3 +209,15 @@ CREATE TABLE core_usuario_informe (
   
 );
 
+DROP TABLE IF EXISTS core_llaves_api;
+CREATE TABLE core_llaves_api (
+  id integer PRIMARY KEY  AUTOINCREMENT,
+  nombre text,
+  llave text,
+  secreto text,
+  uri text,
+  dominio_autorizado text,
+  ip_autorizada text,
+  funciones_autorizadas text
+
+);
