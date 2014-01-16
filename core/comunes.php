@@ -1954,7 +1954,9 @@
 					<div id="MARCO_IMPRESION">
 					<form name="datos" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="Hidden" name="accion" value="guardar_datos_formulario">
-					<input type="Hidden" name="formulario" value="'.$formulario.'">';
+					<input type="Hidden" name="formulario" value="'.$formulario.'">
+					<input type="Hidden" name="id_registro_datos" value="'.$registro_datos_formulario["id"].'">
+					';
 
 				//Booleana que determina si se debe incluir el javascript de ckeditor
 				$existe_campo_textoformato=0;
@@ -2082,6 +2084,11 @@
 								{
 									$tipo_boton="Button";
 									$comando_javascript="document.core_ver_menu.submit()";
+								}
+							if ($registro_botones["tipo_accion"]=="interna_actualizar")
+								{
+									$tipo_boton="Button";
+									$comando_javascript="document.datos.accion.value='actualizar_datos_formulario';document.datos.submit()";
 								}
 							if ($registro_botones["tipo_accion"]=="interna_eliminar")
 								{

@@ -354,6 +354,7 @@
 	$MULTILANG_FrmAccionGuardar='Save data';
 	$MULTILANG_FrmAccionLimpiar='Clean data';
 	$MULTILANG_FrmAccionEliminar='Delete data';
+	$MULTILANG_FrmAccionActualizar='Update data';
 	$MULTILANG_FrmAccionRegresar='Go back to desktop';
 	$MULTILANG_FrmAccionCargar='Object load';
 	$MULTILANG_FrmAccionT2='User defined';

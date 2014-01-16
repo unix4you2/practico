@@ -90,13 +90,13 @@
 							if ($ModoWSActivado)
 								{
 									//Valida si tiene acceso a la funcion llamada
-									if (strpos($funciones_autorizadas, $WSId)!==FALSE || $funciones_autorizadas=="*")
+									if (strpos($funciones_autorizadas, $WSId)!==FALSE || $funciones_autorizadas=="*" || $ByPassWS)
 										{
 											//Valida si la IP del cliente es una de las autorizadas
-											if (strpos($ip_autorizada, $_SERVER['REMOTE_ADDR'])!==FALSE || $ip_autorizada=="*")
+											if (strpos($ip_autorizada, $_SERVER['REMOTE_ADDR'])!==FALSE || $ip_autorizada=="*" || $ByPassWS)
 												{
 													//Valida si el dominio del cliente es uno de las autorizadas
-													if (strpos($dominio_autorizado, $_SERVER['REMOTE_HOST'])!==FALSE || $dominio_autorizado=="*")
+													if (strpos($dominio_autorizado, $_SERVER['REMOTE_HOST'])!==FALSE || $dominio_autorizado=="*" || $ByPassWS)
 														{
 															//Todo OK a este punto
 															if (!file_exists("core/ws_funciones.php")) mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr03,'','icono_error.png','TextosEscritorio');

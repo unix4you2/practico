@@ -351,6 +351,7 @@
 	$MULTILANG_FrmAccionGuardar='Guardar datos';
 	$MULTILANG_FrmAccionLimpiar='Limpiar datos';
 	$MULTILANG_FrmAccionEliminar='Eliminar datos';
+	$MULTILANG_FrmAccionActualizar='Actualizar datos';
 	$MULTILANG_FrmAccionRegresar='Regresar a escritorio';
 	$MULTILANG_FrmAccionCargar='Cargar un objeto';
 	$MULTILANG_FrmAccionT2='Definidas por el usuario';
