@@ -117,6 +117,7 @@
 			$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id='$formulario'");
 			$registro_formulario = $consulta_formulario->fetch();
 
+/*
 			// Busca los campos del form marcados como valor unico y verifica que no existan valores en la tabla
 			$tabla=$registro_formulario["tabla_datos"];
 			$consulta_campos_unicos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1 AND valor_unico=1");
@@ -130,6 +131,7 @@
 					if ($registro_existente["id"]!="")
 						$mensaje_error.=$MULTILANG_ErrFrmDuplicado.$campo.'<br>';
 				}
+*/
 
 			// Busca los campos del form marcados como obligatorios a los que no se les ingreso valor
 			$tabla=$registro_formulario["tabla_datos"];

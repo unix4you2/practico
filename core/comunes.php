@@ -99,6 +99,9 @@
 			// Funciones en core/formularios.php
 			if ($accion== "guardar_datos_formulario")			$retorno = 1;
 			if ($accion== "eliminar_datos_formulario")			$retorno = 1;
+			if ($accion== "actualizar_datos_formulario")		$retorno = 1;
+			if ($accion== "actualizar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
+			if ($accion== "copiar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
 			if ($accion== "actualizar_campo_formulario")		$retorno = permiso_agregado_accion("administrar_formularios");
 			if ($accion== "guardar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
 			if ($accion== "eliminar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
