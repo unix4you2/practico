@@ -83,7 +83,7 @@
 			if (@$Auth_ProtoTransporte=="http" || @$Auth_ProtoTransporte=="https")
 				$protocolo_webservice=$Auth_ProtoTransporte."://";
 			// Construye la URL para solicitar el webservice.  La URL se debe poder resolver por el servidor web correctamente, ya sea por dominio o IP (interna o publica).  Ver /etc/hosts si algo.
-			$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
+			$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['SERVER_PORT'].$_SERVER['PHP_SELF'];
 			$webservice_validacion = $protocolo_webservice.$prefijo_webservice."?WSOn=1&WSKey=".$LlaveDePaso."&WSSecret=".$LlaveDePaso."&WSId=verificar_credenciales&uid=".$uid."&clave=".$clave;
 			// FORMA 1: Usando SimpleXML Directamente
 				// Carga el contenido en una variable para validar la conexion

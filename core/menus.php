@@ -168,6 +168,7 @@ if ($accion=="detalles_menu")
 					</td>
 				</tr>
 				</table>
+				<?php echo $MULTILANG_MnuHlpComandoInf; ?>
 				<br><br>
 			<?php
 				abrir_barra_estado();
@@ -559,6 +560,7 @@ if ($accion=="administrar_menu")
 					</td>
 				</tr>
 				</table>
+				<?php echo $MULTILANG_MnuHlpComandoInf; ?>
 				<br><br>
 			<?php
 				abrir_barra_estado();

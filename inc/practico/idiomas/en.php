@@ -450,7 +450,7 @@
 	$MULTILANG_InfMenorIgualQue='Less than or equal';
 	$MULTILANG_InfDiferenteDe='Different';
 	$MULTILANG_InfIgualA='Equal';
-	$MULTILANG_InfDesManual='In any manual fields you can enclose expressions or character string values ​​using double quotes';
+	$MULTILANG_InfDesManual='In any manual fields you can enclose expressions or character string values ​​using double quotes.   You can compare with session vars putting the PHP variable.  i.e.: $Login_usuario, $Nombre_usuario, $Descripcion_usuario, $Nivel_usuario, $Correo_usuario, $LlaveDePasoUsuario';
 	$MULTILANG_InfOperador='Add an aggregator of expressions or a logical operator ';
 	$MULTILANG_InfOpParentesisA='Parenthesis open';
 	$MULTILANG_InfOpParentesisC='Parenthesis close';
@@ -584,6 +584,7 @@
 	$MULTILANG_MnuNivel='Level';
 	$MULTILANG_MnuComando='Command';
 	$MULTILANG_MnuAdvElimina='IMPORTANT: Deleting this registry you could unlink some system options.\n'.$MULTILANG_Confirma;
+	$MULTILANG_MnuHlpComandoInf='Maybe you want to add to the command this srtring <b>:htm:Informes</b>  to say Practico <br>that puts all the data in Html format and with that CSS style sheet';
 
 	//Objetos, seguridad y otros
 	$MULTILANG_ObjError='The type of object received in this command is unknown';

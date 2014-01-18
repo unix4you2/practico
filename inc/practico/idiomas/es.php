@@ -447,7 +447,7 @@
 	$MULTILANG_InfMenorIgualQue='Menor o Igual';
 	$MULTILANG_InfDiferenteDe='Diferente';
 	$MULTILANG_InfIgualA='Igual';
-	$MULTILANG_InfDesManual='En cualquiera de los campos manuales puede encerrar expresiones o valores tipo cadena de caracteres utilizando comillas dobles';
+	$MULTILANG_InfDesManual='En cualquiera de los campos manuales puede encerrar expresiones o valores tipo cadena de caracteres utilizando comillas dobles.  Tambien puede comparar frente a las variables de sesion del usuario simplemente con poner alguna de ellas en notacion PHP, por ejemplo: $Login_usuario, $Nombre_usuario, $Descripcion_usuario, $Nivel_usuario, $Correo_usuario, $LlaveDePasoUsuario';
 	$MULTILANG_InfOperador='Agregar un agrupador de expresiones o un operador l&oacute;gico ';
 	$MULTILANG_InfOpParentesisA='Abrir par&eacute;ntesis';
 	$MULTILANG_InfOpParentesisC='Cerrar par&eacute;ntesis';
@@ -581,6 +581,7 @@
 	$MULTILANG_MnuNivel='Nivel';
 	$MULTILANG_MnuComando='Comando';
 	$MULTILANG_MnuAdvElimina='IMPORTANTE:  Al eliminar el registro pueden quedar sin vincular algunas opciones del sistema.\n'.$MULTILANG_Confirma;
+	$MULTILANG_MnuHlpComandoInf='Es probable que para los tipo Informe quiera agregar al comando final un <b>:htm:Informes</b> para indicar a Practico<br>que debe entregar sus resultados en html y con esa hoja de estilos';
 
 	//Objetos, seguridad y otros
 	$MULTILANG_ObjError='El tipo de objeto recibido en este comando es desconocido';

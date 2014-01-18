@@ -2166,7 +2166,9 @@
 */
 function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0)
 	{
-		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion,$Login_usuario;
+		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion;
+		// Carga variables de sesion por si son comparadas en alguna condicion
+		global $Login_usuario,$Nombre_usuario,$Descripcion_usuario,$Nivel_usuario,$Correo_usuario,$LlaveDePasoUsuario;
 		// Carga variables de definicion de tablas
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
 		global $MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano;
@@ -2216,7 +2218,29 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			while ($registro_condiciones = $consulta_condiciones->fetch())
 				{
 					//Agrega condicion a la consulta
-					$consulta.=" ".$registro_condiciones["valor_izq"]." ".$registro_condiciones["operador"]." ".$registro_condiciones["valor_der"]." ";
+					$valor_izquierdo=$registro_condiciones["valor_izq"];
+					$valor_derecho=$registro_condiciones["valor_der"];
+					
+					// CONVIERTE VARIABLES DE SESION PHP A VALORES PARA EL QUERY
+					//Si el valor Izquierdo a comparar inicia por signo pesos y es una variable PHP la usa como tal
+					if (@$valor_izquierdo[0]=="$")
+						{
+							//Quita el signo pesos inicial para buscar la variable
+							$variable_a_buscar=substr($valor_izquierdo, 1, strlen($valor_izquierdo));
+							// Si la variable esta definida toma su valor encerrado entre comillas para el query
+							if (@isset($variable_a_buscar)) 
+								$valor_izquierdo="'".$$variable_a_buscar."'";
+						}
+					//Si el valor Derecho a comparar inicia por signo pesos y es una variable PHP la usa como tal
+					if (@$valor_derecho[0]=="$")
+						{
+							//Quita el signo pesos inicial para buscar la variable
+							$variable_a_buscar=substr($valor_derecho, 1, strlen($valor_derecho));
+							// Si la variable esta definida toma su valor encerrado entre comillas para el query
+							if (@isset($variable_a_buscar)) 
+								$valor_derecho="'".$$variable_a_buscar."'";
+						}
+					$consulta.=" ".$valor_izquierdo." ".$registro_condiciones["operador"]." ".$valor_derecho." ";
 					$hay_condiciones=1;
 				}
 			if (!$hay_condiciones)
@@ -2391,6 +2415,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 					// Imprime encabezados de columna
 					$resultado_columnas=ejecutar_sql($consulta);
+				
 					$numero_columnas=0;
 					foreach($resultado_columnas->fetch(PDO::FETCH_ASSOC) as $key=>$val)
 						{
