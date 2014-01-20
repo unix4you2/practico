@@ -863,7 +863,15 @@
 			global $MotorBD;
 			global $Auth_TipoMotor;
 			global $Auth_TipoEncripcion;
-			global $MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,$MULTILANG_ErrCURL,$MULTILANG_ErrLDAP,$MULTILANG_ErrHASH,$MULTILANG_ErrSESS,$MULTILANG_ErrGD,$MULTILANG_ErrPDO,$MULTILANG_ErrDriverPDO,$MULTILANG_ErrGoogleAPIMod,$MULTILANG_ErrFuncion;
+			global $MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,$MULTILANG_ErrCURL,$MULTILANG_ErrLDAP,$MULTILANG_ErrHASH,$MULTILANG_ErrSESS,$MULTILANG_ErrGD,$MULTILANG_ErrPDO,$MULTILANG_ErrDriverPDO,$MULTILANG_ErrGoogleAPIMod,$MULTILANG_ErrFuncion,$MULTILANG_ErrDirectiva;
+
+			//Verifica estado de configuraciones PHP
+			$funcion_evaluada='allow_url_fopen'; $valor_esperado='1';
+				//Intenta encenderla (para servidores con suPHP)
+				if (ini_get($funcion_evaluada)!=$valor_esperado) {ini_set($funcion_evaluada,$valor_esperado);}
+				//Verifica si pudo ser encendida en tiempo de ejecucion, sino muestra mensaje
+				if (ini_get($funcion_evaluada)!=$valor_esperado)
+					mensaje($MULTILANG_ErrFuncion,$funcion_evaluada.': '.$MULTILANG_ErrDirectiva,'','icono_error.png','TextosEscritorio');
 			
 			//Verifica soporte para LDAP cuando esta activado en la herramienta
 			if ($Auth_TipoMotor=='ldap' &&  !extension_loaded('ldap'))
@@ -893,17 +901,9 @@
 			if (!extension_loaded('SimpleXML'))
 				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,'','icono_error.png','TextosEscritorio');
 
-			//Verifica existencia del modulo de google-api cuando se indica ese tipo de autenticacion
-			//if ($Auth_TipoMotor=='oauth2' &&  @!file_exists("mod/google-api"))
-			//	mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrGoogleAPIMod,'','icono_error.png','TextosEscritorio');
-
-
 			// DEPRECATED Verifica soporte para cURL
 			//if (!extension_loaded('curl'))
 			//	mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrCURL,'','icono_error.png','TextosEscritorio');
-			
-			//PENDIENTE VALIDAR allow_url_fopen=On  EN PHP.INI  ... posible?  ini_set('allow_url_fopen', 1);
-			
 			
 			// Bloqueos por IP/pais http://stackoverflow.com/questions/15835274/file-get-contents-failed-to-open-stream-connection-refused
 			
