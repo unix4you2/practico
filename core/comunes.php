@@ -869,8 +869,8 @@
 			$funcion_evaluada='allow_url_fopen'; $valor_esperado='1';
 				//Intenta encenderla (para servidores con suPHP)
 				if (ini_get($funcion_evaluada)!=$valor_esperado) {ini_set($funcion_evaluada,$valor_esperado);}
-				//Verifica si pudo ser encendida en tiempo de ejecucion, sino muestra mensaje
-				if (ini_get($funcion_evaluada)!=$valor_esperado)
+				//Verifica si pudo ser encendida en tiempo de ejecucion, sino muestra mensaje y solamente si no hay cURL pues es un sustituto
+				if (ini_get($funcion_evaluada)!=$valor_esperado && !extension_loaded('curl'))
 					mensaje($MULTILANG_ErrFuncion,$funcion_evaluada.': '.$MULTILANG_ErrDirectiva,'','icono_error.png','TextosEscritorio');
 			
 			//Verifica soporte para LDAP cuando esta activado en la herramienta
@@ -900,10 +900,6 @@
 			//Verifica soporte para SimpleXML
 			if (!extension_loaded('SimpleXML'))
 				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,'','icono_error.png','TextosEscritorio');
-
-			// DEPRECATED Verifica soporte para cURL
-			//if (!extension_loaded('curl'))
-			//	mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrCURL,'','icono_error.png','TextosEscritorio');
 			
 			// Bloqueos por IP/pais http://stackoverflow.com/questions/15835274/file-get-contents-failed-to-open-stream-connection-refused
 			

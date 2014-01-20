@@ -39,6 +39,7 @@ LogCambios="
 * Fixed: Metodos para la autenticacion por web services son ahora accesibles por ByPass en proveedores OAuth
 * Fixed: [Tester Jaime Alejandro Zapata]:  Al llamar informes desde opciones de menu se agrega una columna inicial que desfasa los resultados.  Se agrega aclaracion en ayuda para agregar :htm:Informes al comando generado
 * Fixed: [Tester Jaime Alejandro Zapata]:  Se agrega mensaje aclaratorio para cuando se ejecuta Practico sobre instalacion PHP con allow_url_fopen desactivado.  Es una configuracion que solo se cambia desde servidor o con archivos de configuración de PHP
+* Fixed: [Tester Jaime Alejandro Zapata]:  Cuando la funcion file_get_contents no retorna nada por tener allow_url_fopen desactivado se hace el paso a funciones cURL para el proceso de autenticacion
 "
 
 ########################################################################

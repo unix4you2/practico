@@ -32,6 +32,34 @@
 
 
 <?php
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: file_get_contents_curl
+	Un reemplazo para la funcion file_get_contents utilizando cURL
+
+	Salida:
+		Contenido de la URL recibida
+*/
+	function file_get_contents_curl($url)
+		{
+			global $MULTILANG_ErrExtension,$MULTILANG_ErrCURL;
+			//Verifica soporte para cURL
+			if (!extension_loaded('curl'))
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrCURL,'','icono_error.png','TextosEscritorio');
+			//Inicializa el objeto cURL y procesa la solicitud
+			$objeto_curl = curl_init();
+			curl_setopt($objeto_curl, CURLOPT_HEADER, 0);
+			curl_setopt($objeto_curl, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($objeto_curl, CURLOPT_URL, $url);
+			$datos_recibidos = curl_exec($objeto_curl);
+			curl_close($objeto_curl);
+			return $datos_recibidos;
+		}
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -88,6 +116,11 @@
 			// FORMA 1: Usando SimpleXML Directamente
 				// Carga el contenido en una variable para validar la conexion
 				$contenido_url = trim(file_get_contents($webservice_validacion));
+
+				//Si no se pudo utilizar la funcion file_get_contents intenta con cURL
+				if (!$contenido_url)
+						$contenido_url = trim(file_get_contents_curl($webservice_validacion));
+
 				// Valida si se logro cargar o no el contenido
 				if ($contenido_url)
 					{
