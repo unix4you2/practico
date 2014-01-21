@@ -2242,15 +2242,15 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			if (!$hay_condiciones)
 			$consulta.=" 1 ";
 
-			if (@$registro_informe[agrupamiento]!="")
+			if (@$registro_informe["agrupamiento"]!="")
 				{
-					$campoagrupa=$registro_informe[agrupamiento];	
+					$campoagrupa=$registro_informe["agrupamiento"];
 					$consulta.= " GROUP BY $campoagrupa";
 				}
 
-			if (@$registro_informe[ordenamiento]!="")
+			if (@$registro_informe["ordenamiento"]!="")
 				{
-					$campoorden=$registro_informe[ordenamiento];
+					$campoorden=$registro_informe["ordenamiento"];
 					$consulta.= " ORDER BY $campoorden";
 				}
 

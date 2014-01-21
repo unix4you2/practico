@@ -128,140 +128,157 @@
 					<font size=2 color=black><b>
 						[<?php echo $MULTILANG_ConfiguracionVarias; ?>]</b>
 					</font>
+
 					<table cellspacing=0 width="100%" style="font-size:11px; color:000000;">
 						<tr>
-							<td valign=top align=right>
-								<?php echo $MULTILANG_ZonaHoraria; ?>
-							</td>
-							<td valign=top width="480">
-								<select  name="ZonaHorariaNEW" class="Combos">
-									<?php
-										$archivo_origen="inc/practico/zonas_horarias.txt";
-										$archivo = fopen($archivo_origen, "r");
-										//descarta comentario inicial de archivo
-										if ($archivo)
-											{
-												$linea = fgets($archivo, 1024);
-												while (!feof($archivo))
+							<td>
+								
+								<table cellspacing=0 width="100%" style="font-size:11px; color:000000;">
+									<tr>
+										<td valign=top align=right>
+											<?php echo $MULTILANG_ZonaHoraria; ?>
+										</td>
+										<td valign=top>
+											<select  name="ZonaHorariaNEW" class="Combos">
+												<?php
+													$archivo_origen="inc/practico/zonas_horarias.txt";
+													$archivo = fopen($archivo_origen, "r");
+													//descarta comentario inicial de archivo
+													if ($archivo)
+														{
+															$linea = fgets($archivo, 1024);
+															while (!feof($archivo))
+																{
+																	$linea = fgets($archivo, 1024);
+																	if (trim($linea)==$ZonaHoraria)
+																		echo "<option value='".trim($linea)."' selected>".trim($linea)."</option>";
+																	else
+																		echo "<option value='".trim($linea)."'>".trim($linea)."</option>";
+																}
+															fclose($archivo);
+														}
+												?>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td valign=top align=right>
+												<?php echo $MULTILANG_IdiomaPredeterminado; ?>
+										</td>
+										<td valign=top>
+											<select name="IdiomaPredeterminadoNEW" class="Combos" >
+												<?php
+												// Incluye archivos de idioma para ser seleccionados
+												$path_idiomas="inc/practico/idiomas/";
+												$directorio_idiomas=opendir($path_idiomas);
+												$IdiomaPredeterminadoActual=$IdiomaPredeterminado;
+												while (($elemento=readdir($directorio_idiomas))!=false)
 													{
-														$linea = fgets($archivo, 1024);
-														if (trim($linea)==$ZonaHoraria)
-															echo "<option value='".trim($linea)."' selected>".trim($linea)."</option>";
-														else
-															echo "<option value='".trim($linea)."'>".trim($linea)."</option>";
-													}
-												fclose($archivo);
-											}
-									?>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td valign=top align=right>
-									<?php echo $MULTILANG_IdiomaPredeterminado; ?>
-							</td>
-							<td valign=top>
-								<select name="IdiomaPredeterminadoNEW" class="Combos" >
-									<?php
-									// Incluye archivos de idioma para ser seleccionados
-									$path_idiomas="inc/practico/idiomas/";
-									$directorio_idiomas=opendir($path_idiomas);
-									$IdiomaPredeterminadoActual=$IdiomaPredeterminado;
-									while (($elemento=readdir($directorio_idiomas))!=false)
-										{
-											//Lo procesa solo si es un archivo diferente del index
-											if (!is_dir($path_idiomas.$elemento) && $elemento!="." && $elemento!=".."  && $elemento!="index.html")
-												{
-													include($path_idiomas.$elemento);
-													//Establece espanol como predeterminado
-													$seleccion="";
-													$valor_opcion=str_replace(".php","",$elemento);
-													if ($valor_opcion==$IdiomaPredeterminadoActual) $seleccion="SELECTED";
-													//Presenta la opcion
-													echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$elemento.')</option>';
-												}
-										}		
-									//Vuelve a cargar el predeterminado actual
-									include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
-									?>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td valign=top align=right>
-								<?php echo $MULTILANG_CaracteresCaptcha; ?>
-							</td>
-							<td valign=top>
-								<select name="CaracteresCaptchaNEW" class="Combos" >
-									<option value="1" <?php if ($CaracteresCaptcha=="1") echo "SELECTED"; ?> >1</option>
-									<option value="2" <?php if ($CaracteresCaptcha=="2") echo "SELECTED"; ?> >2</option>
-									<option value="3" <?php if ($CaracteresCaptcha=="3") echo "SELECTED"; ?> >3</option>
-									<option value="4" <?php if ($CaracteresCaptcha=="4") echo "SELECTED"; ?> >4</option>
-									<option value="5" <?php if ($CaracteresCaptcha=="5") echo "SELECTED"; ?> >5</option>
-									<option value="6" <?php if ($CaracteresCaptcha=="6") echo "SELECTED"; ?> >6</option>
-								</select>
-								<a href="#" title="<?php echo $MULTILANG_AyudaTitCaptcha; ?>" name="<?php echo $MULTILANG_AyudaDesCaptcha; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
-							</td>
-						</tr>
-						<tr>
-							<td valign=top align=right>
-								<?php echo $MULTILANG_ModoDepuracion; ?>
-							</td>
-							<td valign=top>
-								<select name="ModoDepuracionNEW" class="Combos" >
-									<option value="1" <?php if ($ModoDepuracion=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Encendido; ?></option>
-									<option value="0" <?php if ($ModoDepuracion=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_Apagado; ?></option>
-								</select>
-								<a href="#" title="<?php echo $MULTILANG_AyudaTitDebug; ?>" name="<?php echo $MULTILANG_AyudaDesDebug; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
-							</td>
-						</tr>
-						<tr>
-							<td valign=top align=right>
-								<?php echo $MULTILANG_BuscarActual; ?>
+														//Lo procesa solo si es un archivo diferente del index
+														if (!is_dir($path_idiomas.$elemento) && $elemento!="." && $elemento!=".."  && $elemento!="index.html")
+															{
+																include($path_idiomas.$elemento);
+																//Establece espanol como predeterminado
+																$seleccion="";
+																$valor_opcion=str_replace(".php","",$elemento);
+																if ($valor_opcion==$IdiomaPredeterminadoActual) $seleccion="SELECTED";
+																//Presenta la opcion
+																echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$elemento.')</option>';
+															}
+													}		
+												//Vuelve a cargar el predeterminado actual
+												include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
+												?>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td valign=top align=right>
+											<?php echo $MULTILANG_CaracteresCaptcha; ?>
+										</td>
+										<td valign=top>
+											<select name="CaracteresCaptchaNEW" class="Combos" >
+												<option value="1" <?php if ($CaracteresCaptcha=="1") echo "SELECTED"; ?> >1</option>
+												<option value="2" <?php if ($CaracteresCaptcha=="2") echo "SELECTED"; ?> >2</option>
+												<option value="3" <?php if ($CaracteresCaptcha=="3") echo "SELECTED"; ?> >3</option>
+												<option value="4" <?php if ($CaracteresCaptcha=="4") echo "SELECTED"; ?> >4</option>
+												<option value="5" <?php if ($CaracteresCaptcha=="5") echo "SELECTED"; ?> >5</option>
+												<option value="6" <?php if ($CaracteresCaptcha=="6") echo "SELECTED"; ?> >6</option>
+											</select>
+											<a href="#" title="<?php echo $MULTILANG_AyudaTitCaptcha; ?>" name="<?php echo $MULTILANG_AyudaDesCaptcha; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+										</td>
+									</tr>
+									<tr>
+										<td valign=top align=right>
+											<?php echo $MULTILANG_ModoDepuracion; ?>
+										</td>
+										<td valign=top>
+											<select name="ModoDepuracionNEW" class="Combos" >
+												<option value="1" <?php if ($ModoDepuracion=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Encendido; ?></option>
+												<option value="0" <?php if ($ModoDepuracion=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_Apagado; ?></option>
+											</select>
+											<a href="#" title="<?php echo $MULTILANG_AyudaTitDebug; ?>" name="<?php echo $MULTILANG_AyudaDesDebug; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+										</td>
+									</tr>
+									<tr>
+										<td valign=top align=right>
+											<?php echo $MULTILANG_BuscarActual; ?>
+										</td>
+										<td valign=top>
+											<select name="BuscarActualizacionesNEW" class="Combos" >
+												<option value="1" <?php if (@$BuscarActualizaciones=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Encendido; ?></option>
+												<option value="0" <?php if (@$BuscarActualizaciones=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_Apagado; ?></option>
+											</select>
+											<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_DescActual; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+										</td>
+									</tr>
+									<tr>
+										<td valign=top align=right>
+												<?php echo $MULTILANG_NombreRAD; ?>
+										</td>
+										<td valign=top>
+												<input type="text" name="NombreRADNEW" size="12" value="<?php echo $NombreRAD; ?>" class="CampoTexto" class="keyboardInput">
+										</td>
+									</tr>
+								</table>
+
 							</td>
 							<td valign=top>
-								<select name="BuscarActualizacionesNEW" class="Combos" >
-									<option value="1" <?php if (@$BuscarActualizaciones=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Encendido; ?></option>
-									<option value="0" <?php if (@$BuscarActualizaciones=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_Apagado; ?></option>
-								</select>
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_DescActual; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
-							</td>
-						</tr>
-						<tr>
-							<td valign=top align=right>
-								<?php echo $MULTILANG_PlantillaActiva; ?>
-							</td>
-							<td valign=top>
-									<select name="PlantillaActivaNEW" class="Combos" >
-										<?php
-										// Incluye archivos de idioma para ser seleccionados
-										$path_plantillas="skin/";
-										$directorio_plantillas=opendir($path_plantillas);
-										while (($elemento=readdir($directorio_plantillas))!=false)
-											{
-												//Lo procesa solo si es un directorio
-												if (is_dir($path_plantillas.$elemento) && $elemento!="." && $elemento!="..")
-													{
-														include($path_plantillas.$elemento.'/index.php');
-														//Establece el seleccionado actualmente como SELECTED
-														$seleccion="";
-														if ($elemento==$PlantillaActiva) $seleccion="SELECTED";
-														//Presenta la opcion
-														echo '<option value="'.$elemento.'" '.$seleccion.'>'.$MULTILANG_NombrePlantilla.' (skin/'.$elemento.')</option>';
-													}
-											}		
-										//Vuelve a cargar el predeterminado actual
-										include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
-										?>
-									</select>
-							</td>
-						</tr>
-						<tr>
-							<td valign=top align=right>
-									<?php echo $MULTILANG_NombreRAD; ?>
-							</td>
-							<td valign=top>
-									<input type="text" name="NombreRADNEW" size="12" value="<?php echo $NombreRAD; ?>" class="CampoTexto" class="keyboardInput">
+								
+								<table cellspacing=0 width="100%" style="font-size:11px; color:000000;">
+									<tr>
+										<td valign=top align=right>
+											<?php echo $MULTILANG_PlantillaActiva; ?>
+										</td>
+										<td valign=top>
+												<select name="PlantillaActivaNEW" class="Combos"  style="width:200px;" onChange="previa_plantilla.src='skin/'+this.options[this.selectedIndex].value+'/img/fondo.jpg';">
+													<?php
+													// Incluye archivos de plantilla para ser seleccionados
+													$path_plantillas="skin/";
+													$directorio_plantillas=opendir($path_plantillas);
+													while (($elemento=readdir($directorio_plantillas))!=false)
+														{
+															//Lo procesa solo si es un directorio
+															if (is_dir($path_plantillas.$elemento) && $elemento!="." && $elemento!="..")
+																{
+																	include($path_plantillas.$elemento.'/index.php');
+																	//Establece el seleccionado actualmente como SELECTED
+																	$seleccion="";
+																	if ($elemento==$PlantillaActiva) $seleccion="SELECTED";
+																	//Presenta la opcion
+																	echo '<option value="'.$elemento.'" '.$seleccion.'>'.$MULTILANG_NombrePlantilla.' (skin/'.$elemento.')</option>';
+																}
+														}		
+													?>
+												</select>
+												<br><br>
+												<img name="previa_plantilla" id="previa_plantilla" src="skin/<?php echo $PlantillaActiva; ?>/img/fondo.jpg" width="130" height="90" />
+												<br>
+												[<?php echo $MULTILANG_ConfGraficas; ?>]
+										</td>
+									</tr>
+								</table>
+								
 							</td>
 						</tr>
 					</table>

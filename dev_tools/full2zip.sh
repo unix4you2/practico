@@ -65,7 +65,7 @@
 #source dev_tools/log_cambios.txt
 
 #[ArchivosExcluidos] Separados por espacio. Residen en alguna carpeta a comprimir pero deben evitarse
-ListaExcluidos=" core/configuracion.php core/doc_configuracion.php core/doc_intro.php practico.sqlite3 "
+ListaExcluidos=" skin/nomo_editada\* core/configuracion.php core/doc_configuracion.php core/doc_intro.php practico.sqlite3 "
 
 # Banderas para la compresion
 	Comando="zip "

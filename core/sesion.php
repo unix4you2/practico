@@ -135,21 +135,7 @@
 						mensaje($MULTILANG_LoginNoWSTit,$MULTILANG_LoginNoWSDes."<br>Test URL=<a href='".$webservice_validacion."' target=_BLANK>Auth WebService</a> (entradas filtradas)",'','icono_error.png','TextosEscritorio');
 					}
 			/*
-			// FORMA 2: Usando cURL
-				$variable_curl = curl_init($webservice_validacion);
-				$ok_login = curl_exec($variable_curl); //Solo recibe una booleana
-				curl_close($variable_curl);
-				unset($variable_curl);
-			//FORMA 3: Otra con cURL
-				$IP = '202.71.158.30'; 
-				$runfile = 'http://api.hostip.info/country.php?ip=' . $IP;
-				$ch = curl_init();
-				curl_setopt($ch, CURLOPT_URL, $runfile);
-				curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-				curl_setopt($ch, CURLOPT_URL,$runfile);
-				$content = curl_exec ($ch);
-				curl_close ($ch); 
-				echo $content;
+
 			// FORMA 4: DEPRECATED
 				$ok_login = file_get_contents($webservice_validacion);  //Solo recibe una booleana
 			// Forma 5: DEPRECATED Usando fopen requiere allow_url_fopen activado en php.ini  //Solo recibe una booleana

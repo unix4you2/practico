@@ -17,11 +17,17 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/menus.php
+core/marco_conf.php
 core/formularios.php
 core/sesion.php
 core/ws_nucleo.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
+mod/mvc/LEAME
+mod/mvc/index.php
+mod/mvc/controlador/controlador.php
+mod/mvc/modelo/modelo.php
+mod/mvc/vista/vista.php
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -36,6 +42,9 @@ LogCambios="
 * Added: [Tester Javier Enrique]: Ahora Practico detecta el puerto sobre el cual corre el servidor web para los procesos de autenticación.
 * Added: Los campos ID de registro no son visualizados en diseno de formularios para evitar inconsistencias en tratamiento de registros durante actualizaciones
 * Added: Boton de actualizacion de registros automatico
+* Added: Nueva función basada en cURL es utilizada automáticamente cuando la función nativa de php file_get_contents falla
+* Added: Vista previa de los wallpapers por cada tema grafico seleccionado desde el panel de configuracion
+* Added: Modulo de ejemplo practico sobre el uso de MVC con el framework
 * Fixed: Metodos para la autenticacion por web services son ahora accesibles por ByPass en proveedores OAuth
 * Fixed: [Tester Jaime Alejandro Zapata]:  Al llamar informes desde opciones de menu se agrega una columna inicial que desfasa los resultados.  Se agrega aclaracion en ayuda para agregar :htm:Informes al comando generado
 * Fixed: [Tester Jaime Alejandro Zapata]:  Se agrega mensaje aclaratorio para cuando se ejecuta Practico sobre instalacion PHP con allow_url_fopen desactivado.  Es una configuracion que solo se cambia desde servidor o con archivos de configuración de PHP
