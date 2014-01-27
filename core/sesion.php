@@ -63,6 +63,26 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: cargar_url
+	Recibe una URL y pasa su contenido a una cadena de texto
+*/
+	function cargar_url($url)
+		{
+			//Intenta con la funcion nativa de PHP
+			$contenido_url = trim(file_get_contents($url));
+
+			//Si no se pudo utilizar la funcion file_get_contents intenta con cURL
+			if (!$contenido_url)
+				$contenido_url = trim(file_get_contents_curl($url));
+			
+			//Retorna el resultado
+			return $contenido_url;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: Iniciar_login
 	Realiza proceso de verificacion de los datos suministrados para el inicio de sesion
 
@@ -113,42 +133,23 @@
 			// Construye la URL para solicitar el webservice.  La URL se debe poder resolver por el servidor web correctamente, ya sea por dominio o IP (interna o publica).  Ver /etc/hosts si algo.
 			$prefijo_webservice=$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$_SERVER['PHP_SELF'];
 			$webservice_validacion = $protocolo_webservice.$prefijo_webservice."?WSOn=1&WSKey=".$LlaveDePaso."&WSSecret=".$LlaveDePaso."&WSId=verificar_credenciales&uid=".$uid."&clave=".$clave;
-			// FORMA 1: Usando SimpleXML Directamente
-				// Carga el contenido en una variable para validar la conexion
-				$contenido_url = trim(file_get_contents($webservice_validacion));
+			// Carga el contenido en una variable para validar la conexion
+			$contenido_url = cargar_url($webservice_validacion);
 
-				//Si no se pudo utilizar la funcion file_get_contents intenta con cURL
-				if (!$contenido_url)
-						$contenido_url = trim(file_get_contents_curl($webservice_validacion));
-
-				// Valida si se logro cargar o no el contenido
-				if ($contenido_url)
-					{
-						$resultado_webservice = simplexml_load_string($contenido_url);
-						// Analiza la respuesta recibida en el XML
-						if($resultado_webservice->credencial[0]->aceptacion==1)
-							$ok_login=1;
-					}
-				else
-					{
-						limpiar_entradas();
-						mensaje($MULTILANG_LoginNoWSTit,$MULTILANG_LoginNoWSDes."<br>Test URL=<a href='".$webservice_validacion."' target=_BLANK>Auth WebService</a> (entradas filtradas)",'','icono_error.png','TextosEscritorio');
-					}
-			/*
-
-			// FORMA 4: DEPRECATED
-				$ok_login = file_get_contents($webservice_validacion);  //Solo recibe una booleana
-			// Forma 5: DEPRECATED Usando fopen requiere allow_url_fopen activado en php.ini  //Solo recibe una booleana
-				$file = @fopen($webservice_validacion, ‘r’);
-				if($file)
-					{
-						while(!feof($file))
-							{
-								$ok_login .= @fgets($file, 4096);
-							}
-						fclose ($file);
-					}
-			*/
+			// Valida si se logro cargar o no el contenido
+			if ($contenido_url)
+				{
+					// Usa SimpleXML Directamente para interpretar respuesta
+					$resultado_webservice = simplexml_load_string($contenido_url);
+					// Analiza la respuesta recibida en el XML
+					if($resultado_webservice->credencial[0]->aceptacion==1)
+						$ok_login=1;
+				}
+			else
+				{
+					limpiar_entradas();
+					mensaje($MULTILANG_LoginNoWSTit,$MULTILANG_LoginNoWSDes."<br>Test URL=<a href='".$webservice_validacion."' target=_BLANK>Auth WebService</a> (entradas filtradas)",'','icono_error.png','TextosEscritorio');
+				}
 
 			$clave_correcta=0;
 			if ($clave!="" && $ok_login==1 && $ok_captcha==1)
