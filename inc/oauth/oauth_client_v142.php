@@ -2,7 +2,7 @@
 /*
  * oauth_client.php
  *
- * @(#) $Id: oauth_client.php,v 1.83 2014/01/27 09:59:39 mlemos Exp $
+ * @(#) $Id: oauth_client.php,v 1.78 2014/01/13 05:26:47 mlemos Exp $
  *
  */
 
@@ -12,7 +12,7 @@
 
 	<package>net.manuellemos.oauth</package>
 
-	<version>@(#) $Id: oauth_client.php,v 1.83 2014/01/27 09:59:39 mlemos Exp $</version>
+	<version>@(#) $Id: oauth_client.php,v 1.78 2014/01/13 05:26:47 mlemos Exp $</version>
 	<copyright>Copyright © (C) Manuel Lemos 2012</copyright>
 	<title>OAuth client</title>
 	<author>Manuel Lemos</author>
@@ -237,7 +237,6 @@ class oauth_client_class
 				<stringvalue>Foursquare</stringvalue>,
 				<stringvalue>github</stringvalue>,
 				<stringvalue>Google</stringvalue>,
-				<stringvalue>Google1</stringvalue> (Google with OAuth 1.0),
 				<stringvalue>Instagram</stringvalue>,
 				<stringvalue>LinkedIn</stringvalue>,
 				<stringvalue>Microsoft</stringvalue>,
@@ -248,8 +247,6 @@ class oauth_client_class
 				<stringvalue>SurveyMonkey</stringvalue>,
 				<stringvalue>Tumblr</stringvalue>,
 				<stringvalue>Twitter</stringvalue>,
-				<stringvalue>VK</stringvalue>,
-				<stringvalue>Withings</stringvalue>,
 				<stringvalue>XING</stringvalue> and
 				<stringvalue>Yahoo</stringvalue>. Please contact the author if you
 				would like to ask to add built-in support for other types of OAuth
@@ -821,7 +818,7 @@ class oauth_client_class
 */
 	var $response_status = 0;
 
-	var $oauth_user_agent = 'PHP-OAuth-API (http://www.phpclasses.org/oauth-api $Revision: 1.83 $)';
+	var $oauth_user_agent = 'PHP-OAuth-API (http://www.phpclasses.org/oauth-api $Revision: 1.78 $)';
 	var $session_started = false;
 
 	Function SetError($error)
@@ -1190,7 +1187,7 @@ class oauth_client_class
 		$post_files = array();
 		$method = strtoupper($method);
 		$authorization = '';
-		$type = (IsSet($options['RequestContentType']) ? strtolower(trim(strtok($options['RequestContentType'], ';'))) : ($method === 'POST' ? 'application/x-www-form-urlencoded' : ''));
+		$type = (IsSet($options['RequestContentType']) ? strtolower(trim(strtok($options['RequestContentType'], ';'))) : 'application/x-www-form-urlencoded');
 		if(IsSet($oauth))
 		{
 			$values = array(
@@ -1312,26 +1309,7 @@ class oauth_client_class
 			}
 		}
 		else
-		{
 			$post_values = $parameters;
-			if(count($parameters))
-			{
-				switch($type)
-				{
-					case 'application/x-www-form-urlencoded':
-					case 'multipart/form-data':
-					case 'application/json':
-						break;
-					default:
-						$first = (strpos($url, '?') === false);
-						foreach($parameters as $name => $value)
-						{
-							$url .= ($first ? '?' : '&').$name.'='.UrlEncode($value);
-							$first = false;
-						}
-				}
-			}
-		}
 		if(strlen($authorization) === 0
 		&& !strcasecmp($this->access_token_type, 'Bearer'))
 			$authorization = 'Bearer '.$this->access_token;
@@ -1357,6 +1335,7 @@ class oauth_client_class
 					$arguments['Body'] = json_encode($parameters);
 					break;
 				}
+			default:
 				if(!IsSet($options['RequestBody']))
 					return($this->SetError('it was not specified the body value of the of the API call request'));
 				$arguments['Headers']['Content-Type'] = $options['RequestContentType'];
@@ -1844,7 +1823,6 @@ class oauth_client_class
 		$this->url_parameters = false;
 		$this->token_request_method = 'GET';
 		$this->signature_method = 'HMAC-SHA1';
-		$this->access_token_authentication = '';
 		switch($this->server)
 		{
 			case 'Bitbucket':
@@ -1942,13 +1920,6 @@ class oauth_client_class
 				$this->access_token_url = 'https://accounts.google.com/o/oauth2/token';
 				break;
 
-			case 'Google1':
-				$this->oauth_version = '1.0a';
-				$this->dialog_url = 'https://www.google.com/accounts/OAuthAuthorizeToken';
-				$this->access_token_url = 'https://www.google.com/accounts/OAuthGetAccessToken';
-				$this->request_token_url = 'https://www.google.com/accounts/OAuthGetRequestToken?scope={SCOPE}';
-				break;
-
 			case 'Instagram':
 				$this->oauth_version = '2.0';
 				$this->dialog_url ='https://api.instagram.com/oauth/authorize/?client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&response_type=code&state={STATE}';
@@ -2025,21 +1996,7 @@ class oauth_client_class
 				$this->request_token_url = 'https://api.twitter.com/oauth/request_token';
 				$this->dialog_url = 'https://api.twitter.com/oauth/authenticate';
 				$this->access_token_url = 'https://api.twitter.com/oauth/access_token';
-				$this->url_parameters = false;
-				break;
-
-			case 'VK':
-				$this->oauth_version = '2.0';
-				$this->dialog_url = 'https://oauth.vk.com/authorize?client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&state={STATE}';
-				$this->access_token_url = 'https://oauth.vk.com/access_token';
-				break;
-
-			case 'Withings':
-				$this->oauth_version = '1.0';
-				$this->request_token_url = 'https://oauth.withings.com/account/request_token';
-				$this->dialog_url = 'https://oauth.withings.com/account/authorize';
-				$this->access_token_url = 'https://oauth.withings.com/account/access_token';
-				$this->authorization_header = false;
+				$this->url_parameters = true;
 				break;
 
 			case 'XING':

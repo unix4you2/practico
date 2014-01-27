@@ -156,3 +156,15 @@
 	$APIXING_ClientSecret='';
 	$APIXING_RedirectUri='http://127.0.0.1/practico/index.php?WSOn=1&WSId=autenticacion_oauth&OAuthSrv=XING';
 	$APIXING_Template='';
+	
+	// VK
+	$APIVK_ClientId='';
+	$APIVK_ClientSecret='';
+	$APIVK_RedirectUri='http://127.0.0.1/practico/index.php?WSOn=1&WSId=autenticacion_oauth&OAuthSrv=VK';
+	$APIVK_Template='';
+	
+	// Withings
+	$APIWithings_ClientId='';
+	$APIWithings_ClientSecret='';
+	$APIWithings_RedirectUri='http://127.0.0.1/practico/index.php?WSOn=1&WSId=autenticacion_oauth&OAuthSrv=Withings';
+	$APIWithings_Template='';

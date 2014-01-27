@@ -180,7 +180,7 @@ if ($WSId=="verificar_credenciales")
 				}
 
 			// Define las variables del usuario a buscar/crear segun el servicio OAuth utilizado
-			if ($OAuth_servicio=='Google' || $OAuth_servicio=='LinkedIn' || $OAuth_servicio=='Instagram' || $OAuth_servicio=='Microsoft' || $OAuth_servicio=='Flickr' || $OAuth_servicio=='Twitter' || $OAuth_servicio=='Foursquare' || $OAuth_servicio=='XING' || $OAuth_servicio=='Salesforce' || $OAuth_servicio=='Bitbucket' || $OAuth_servicio=='Yahoo' || $OAuth_servicio=='Box' || $OAuth_servicio=='Disqus' || $OAuth_servicio=='Eventful' || $OAuth_servicio=='SurveyMonkey' || $OAuth_servicio=='RightSignature' || $OAuth_servicio=='Fitbit' || $OAuth_servicio=='ScoopIt' || $OAuth_servicio=='Tumblr' || $OAuth_servicio=='StockTwits')
+			if ($OAuth_servicio=='Google' || $OAuth_servicio=='LinkedIn' || $OAuth_servicio=='Instagram' || $OAuth_servicio=='Microsoft' || $OAuth_servicio=='Flickr' || $OAuth_servicio=='Twitter' || $OAuth_servicio=='Foursquare' || $OAuth_servicio=='XING' || $OAuth_servicio=='Salesforce' || $OAuth_servicio=='Bitbucket' || $OAuth_servicio=='Yahoo' || $OAuth_servicio=='Box' || $OAuth_servicio=='Disqus' || $OAuth_servicio=='Eventful' || $OAuth_servicio=='SurveyMonkey' || $OAuth_servicio=='RightSignature' || $OAuth_servicio=='Fitbit' || $OAuth_servicio=='ScoopIt' || $OAuth_servicio=='Tumblr' || $OAuth_servicio=='StockTwits' || $OAuth_servicio=='VK' || $OAuth_servicio=='Withings')
 				{
 					// Otros disponibles: id,verified_email (0|1),given_name,family_name,link (G+),picture (link),gender (male|female),locale (es|en...)
 					$login_chk=$user->email;
@@ -201,8 +201,6 @@ if ($WSId=="verificar_credenciales")
 					$nombre_chk=$user->display_name;
 					$correo_chk=$user->email;
 				}
-
-
 
 			// Busca datos del usuario Practico, segun tipo de servicio OAuth para tener configuraciones de permisos y parametros propios de la herramienta
 			$consulta_busqueda_usuario_oauth="SELECT login, nombre, clave, descripcion, nivel, correo, llave_paso FROM ".$TablasCore."usuario WHERE login='$login_chk' AND descripcion LIKE '%Auth:$OAuth_servicio%' ";
@@ -298,7 +296,6 @@ if ($WSId=="autenticacion_oauth")
 		$client = new oauth_client_class;
 
 		// Define el servicio a llamar segun el recibido
-		// $OAuth_solicitado='Google'; // Para predeterminar uno mientras se prueba
 		$OAuth_servicio=$OAuthSrv;
 		
 		// Google
@@ -559,6 +556,29 @@ if ($WSId=="autenticacion_oauth")
 				$OAuth_DepuracionHttp=true;
 			}
 
+		// VK
+		if ($OAuth_servicio=='VK')	
+			{
+				$OAuth_URIRedireccion=$APIVK_RedirectUri;
+				$OAuth_IDCliente=$APIVK_ClientId;
+				$OAuth_SecretoCliente=$APIVK_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de VK http://vk.com/editapp?act=create y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Withings
+		if ($OAuth_servicio=='Withings')	
+			{
+				$OAuth_URIRedireccion=$APIWithings_RedirectUri;
+				$OAuth_IDCliente=$APIWithings_ClientId;
+				$OAuth_SecretoCliente=$APIWithings_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Withings https://oauth.withings.com/en/partner/add y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
 		// Define parametros del cliente segun el servicio detectado
 		$client->server = $OAuth_servicio;
 		// Establecerlo solo si se necesita llamar al API sin el usuario presente y el token puede expirar
@@ -580,7 +600,7 @@ if ($WSId=="autenticacion_oauth")
 		// Define permisos de la API (si es necesario)
 		if ($OAuth_Alcance!="")
 			$client->scope = $OAuth_Alcance;
-		
+
 		if(($success = $client->Initialize()))
 			{
 				if(($success = $client->Process()))
@@ -890,7 +910,28 @@ if ($WSId=="autenticacion_oauth")
 									'GET', array(), array('FailOnAccessError'=>true), $user);
 							}
 						}
-					
+
+					// VK
+					if ($OAuth_servicio=='VK')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'https://api.vk.com/method/users.get', 
+									'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Withings
+					if ($OAuth_servicio=='Withings')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://wbsapi.withings.net/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
 					// FIN DEL PROCESAMIENTO POR SERVICIO
 				}
 				$success = $client->Finalize($success);

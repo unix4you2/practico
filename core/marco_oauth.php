@@ -1041,8 +1041,92 @@
 									</table>
 							</td>
 							<td valign=top  align=center>
+									<!-- ### OAUTH VK ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<a href="https://dev.xing.com/applications" target="_BLANK"><img src="inc/oauth/logos/vkontakte.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIVK_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIVK_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIVK_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIVK_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIVK_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>VK" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIVK_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIVK_Template; ?>" >
+											</td>
+										</tr>
+									</table>
 							</td>
 							<td valign=top  align=center>
+									<!-- ### OAUTH Withings ### -->
+									<table cellspacing=0 cellpadding=0 width="100%" style="font-size:11px; color:000000;">
+										<tr>
+											<td valign=top align=right></td>
+											<td valign=top>
+												<a href="https://dev.xing.com/applications" target="_BLANK"><img src="inc/oauth/logos/withings.png" border=0 width=94 height=35 align=middle></a>
+												<i><b><font color=red>Beta</font></b></i>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthId; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIWithings_ClientIdNEW" size="20" class="CampoTexto" value="<?php echo $APIWithings_ClientId; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthSecret; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIWithings_ClientSecretNEW" size="20" class="CampoTexto" value="<?php echo $APIWithings_ClientSecret; ?>" >
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthURI; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIWithings_RedirectUriNEW" size="20" class="CampoTexto" value="<?php echo $URI; ?>Withings" readonly>
+											</td>
+										</tr>
+										<tr>
+											<td valign=top align=right>
+												<?php echo $MULTILANG_AuthOauthPlantilla; ?>
+											</td>
+											<td valign=top>
+												&nbsp;<input type="text" name="APIWithings_TemplateNEW" size="20" class="CampoTexto" value="<?php echo $APIWithings_Template; ?>" >
+											</td>
+										</tr>
+									</table>
 							</td>
 						</tr>
 

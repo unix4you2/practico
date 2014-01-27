@@ -28,7 +28,7 @@ LibChart
 	http://naku.dohcrew.com/libchart/pages/introduction/
 	See inc/libchart/COPYING for details
 
-OAuth 1.0 y 2.0
+OAuth 1.0 y 2.0 Class
 	Location: inc/oauth/*
 	License: BSD license style
 	Made by: Copyright (c) 2012-2013, Manuel Lemos
