@@ -1030,6 +1030,8 @@
 			global $APIScoopIt_ClientId,$APIScoopIt_ClientSecret;
 			global $APITumblr_ClientId,$APITumblr_ClientSecret;
 			global $APIStockTwits_ClientId,$APIStockTwits_ClientSecret;
+			global $APIVK_ClientId,$APIVK_ClientSecret;
+			global $APIWithings_ClientId,$APIWithings_ClientSecret;
 
 			// Variable que determina si se tiene activo al menos un proveedor OAuth
 			$AlMenosUnOAuth=0;
@@ -1108,7 +1110,9 @@
 														if ($APIScoopIt_ClientId!=''		&& $APIScoopIt_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('ScoopIt');
 														if ($APITumblr_ClientId!=''			&& $APITumblr_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Tumblr');
 														if ($APIStockTwits_ClientId!=''		&& $APIStockTwits_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('StockTwits');
-													?>													
+														if ($APIVK_ClientId!=''				&& $APIVK_ClientSecret!='')				$AlMenosUnOAuth+=CreaFormOauth('VK');
+														if ($APIWithings_ClientId!=''		&& $APIWithings_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Withings');
+													?>
 													<hr>
 													<input type="Button"  class="BotonesGoogle" value="<<< <?php echo $MULTILANG_LoginClasico; ?> >>>"  OnClick="IntercambiarLogin('LoginOauth');IntercambiarLogin('LoginClasico');">
 												</td></tr>
