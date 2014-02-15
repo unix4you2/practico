@@ -848,6 +848,42 @@
 		}
 
 
+/* ################################################################## */
+/* ################################################################## */
+	function existe_campo_tabla($campo,$tabla)
+		{
+			/*
+				Function: existe_campo_tabla
+				Determina si un campo dado existe dentro de una tabla especifica
+
+				Variables de entrada:
+
+					tabla - Nombre de la tabla de la que se desea buscar el campo
+					campo - Nombre del campo a verificar
+					
+				Salida:
+					verdadero o falso dependiendo de si existe o no el campo en la tabla
+				
+				Ver tambien:
+				<consultar_tablas>
+			*/
+			
+			//Asume que el campo no existe
+			$estado=false;
+
+			//Busca todos los campos de la tabla
+			$resultadocampos=consultar_columnas($tabla);
+			for($i=0;$i<count($resultadocampos);$i++)
+				{
+					//Si el campo en el arreglo es igual al campo buscado cambia el estado a verdadero
+					if ($resultadocampos[$i]["nombre"]==$campo)
+						$estado=true;
+				}
+
+			//Retorna el resultado
+			return $estado;
+		}
+
 
 /* ################################################################## */
 /* ################################################################## */

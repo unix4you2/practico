@@ -159,7 +159,11 @@
 							//Agrega el campo a la lista solamente si es de datos y si es diferente al campo ID que es usado para la actualizacion (objetos de tipo etiqueta o iframes son pasados por alto)
 							if ($registro_campos["tipo"]!="url_iframe" && $registro_campos["tipo"]!="etiqueta" && $registro_campos["tipo"]!="informe")
 								{
-									$cadena_nuevos_valores.=$registro_campos["campo"]."='".$$registro_campos["campo"]."',";
+									//Verifica que el campo se encuentre dentro de la tabla, para descartar campos manuales mal escritos o usados para javascripts y otros fines.
+									if (existe_campo_tabla($registro_campos["campo"],$registro_formulario["tabla_datos"]))
+										{
+											$cadena_nuevos_valores.=$registro_campos["campo"]."='".$$registro_campos["campo"]."',";
+										}
 								}
 						}
 					// Elimina comas al final de las listas
@@ -256,11 +260,15 @@
 					$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1");
 					while ($registro_campos = $consulta_campos->fetch())
 						{
-							//Agrega el campo a la lista solamente si es de datos (objetos de tipo etiqueta o iframes son pasados por alto)
+							//Hace la operacion con el campo solamente si es de datos (objetos de tipo etiqueta o iframes son pasados por alto)
 							if ($registro_campos["tipo"]!="url_iframe" && $registro_campos["tipo"]!="etiqueta" && $registro_campos["tipo"]!="informe")
 								{
-									$lista_campos.=$registro_campos["campo"].",";
-									$lista_valores.="'".$$registro_campos["campo"]."',";
+									//Verifica que el campo se encuentre dentro de la tabla, para descartar campos manuales mal escritos o usados para javascripts y otros fines.
+									if (existe_campo_tabla($registro_campos["campo"],$registro_formulario["tabla_datos"]))
+										{
+											$lista_campos.=$registro_campos["campo"].",";
+											$lista_valores.="'".$$registro_campos["campo"]."',";
+										}
 								}
 						}
 					// Elimina comas al final de las listas
@@ -440,6 +448,10 @@
 		{
 			$mensaje_error="";
 			$tipo_objeto=$tipo;
+
+			//Concatena el campo manual en caso de encontrar alguno
+			$campo=$campo.$campo_manual;
+
 			if ($valor_unico=="on") $valor_unico=1; else $valor_unico=0;
 			if ($ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
 			if ($titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error=$MULTILANG_ErrFrmCampo1;
@@ -685,6 +697,8 @@ if ($accion=="editar_formulario")
 									</select>
 									<a href="#" title="<?php echo $MULTILANG_FrmCampoOb1; ?>" name=""><img src="img/icn_12.gif" border=0></a>
 									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesCampo; ?>"><img src="img/icn_10.gif" border=0></a>
+									<br>
+									<?php echo $MULTILANG_InfCampoManual; ?>: <input type="text" name="campo_manual" size="20" class="CampoTexto" value="<?php if (!existe_campo_tabla($registro_campo_editar["campo"],$nombre_tabla)) echo $registro_campo_editar["campo"]; ?>">
 								</td>
 							</tr>
 							</table>
