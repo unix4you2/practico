@@ -42,6 +42,12 @@ HTTP Client
 	mlemos-at-acm.org
 	See inc/http/LICENSE.txt for details
 
+QR Code encoder
+	Location: inc/qrcode/*
+	License: GNU General Public License Version 3
+	Made by: Copyright (C) 2010, Dominik Dzienia
+	deltalab at poczta dot fm
+
 Tango Desktop Project:
 	Location: all files under img/tango_*:
 	License: The Tango base icon theme is released to the Public Domain. 

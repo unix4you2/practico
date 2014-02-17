@@ -378,6 +378,38 @@
 			return $clave;
 		}
 
+
+/* ################################################################## */
+/* ################################################################## */
+	function CodigoQR($contenido,$recuperacion_errores="L",$ancho_pixeles=3,$margen_pixeles=1,$ruta_almacenamiento="tmp/",$archivo="")
+		{
+			/*
+				Function: CodigoQR
+				Genera un codigo QR a partir de los parametros recibidos
+
+				Variables de entrada:
+
+					contenido - Texto que debera ser representado en el codigo QR
+					recuperacion_errores - Recuperacion de errores para el codigo (L,M,Q,H) L el mas bajo, H el mas alto
+					ancho_pixeles - Tamano de cada cuadro del codigo en pixeles
+					margen_pixeles - La margen externa del codigo QR
+					ruta_almacenamiento - Path sobre el cual se almacenara el codigo, debe contar con permisos de escritura
+					archivo - nombre de archivo (sin extension) sobre el cual sera guardado el codigo
+
+				Salida:
+					Imagen generada para el codigo QR
+			*/
+			include_once("inc/qrcode/qrcode.php");
+			//Si no se recibe un archivo entonces genera uno aleatorio
+			if ($archivo=="") $archivo="QR".TextoAleatorio(15);
+			//Genera el archivo con el QR
+			$Ruta_QRC=$ruta_almacenamiento.$archivo.".png";
+			QRcode::png($contenido, $Ruta_QRC, $recuperacion_errores, $ancho_pixeles, $margen_pixeles);
+			//Imprime el codigo QR
+			echo '<img src="'.$Ruta_QRC.'" alt="" border="0">';
+		}
+
+
 /* ################################################################## */
 /* ################################################################## */
 	function filtrar_cadena_sql($cadena)
