@@ -76,6 +76,8 @@
 	$MULTILANG_Fecha='Fecha';
 	$MULTILANG_Finalizado='Finalizado';
 	$MULTILANG_Formularios='Formularios';
+	$MULTILANG_Funciones='Funciones preautorizadas';
+	$MULTILANG_FuncionesDes='Por motivos de seguridad, sus funciones personalizadas o modulos desarrollados usted debe preautorizar su uso en este cuadro para los usuarios.  Agregue las funciones o acciones separadas por cualqueir caracter.';
 	$MULTILANG_Grande='Grande';
 	$MULTILANG_Grafico='Gr&aacute;fico';
 	$MULTILANG_Guardar='Guardar';
@@ -99,6 +101,7 @@
 	$MULTILANG_Opcional='Opcional';
 	$MULTILANG_OpcionesMenu='Opciones de menu';
 	$MULTILANG_Otros='Otros';
+	$MULTILANG_ParamApp='Par&aacute;metros de aplicaci&oacute;n';
 	$MULTILANG_Paso='Paso';
 	$MULTILANG_Peso='Peso';
 	$MULTILANG_Pequeno='peque&ntilde;o';
@@ -732,7 +735,7 @@
 	$MULTILANG_AyudaDesPreApp='El prefijo utilizado para las tablas de aplicaci&oacute;n puede ser utilizado para separar diferentes instalaciones de Pr&aacute;ctico sobre una misma base de datos o tambi&eacute;n puede ser dejado vac&iacute;o para enlazar/integrar a Pr&aacute;ctico con otras aplicaciones pre-existentes. No se recomienda mayusculas para compatibilidad entre motores.';
 	$MULTILANG_AyudaLlave='valor para firmar cuentas de usuario';
 	$MULTILANG_NotasImportantesInst1='<u>IMPORTANTE 1</u>: La base de datos debe existir previamente para que Pr&aacute;ctico pueda conectarse a ella y generar las estructuras requeridas.  Consulte con su proveedor de hosting o administrador de sistemas c&oacute;mo crear una base de datos con privilegios suficientes para trabajar con Pr&aacute;ctico.<br><br><u>IMPORTANTE 2</u>: El instalador eliminar&aacute; todas las tablas existentes sobre la base de datos indicada y que coincidan con los nombres de tablas que utilizar&aacute; Pr&aacute;ctico.  Si usted considera que puede tener informaci&oacute;n importante en ellas se recomienda realizar una copia de seguridad antes de continuar.  Si desea compartir una misma base de datos entre diferentes instalaciones de Pr&aacute;ctico puede cambiar los prefijos de tabla utilizados por cada una.';
-	$MULTILANG_ParametrosApp='Par&aacute;metros para su primera aplicaci&oacute;n';
+	$MULTILANG_ParametrosApp='Par&aacute;metros para su aplicaci&oacute;n';
 	$MULTILANG_ParamNombreEmpresa='Nombre corto de su Organizaci&oacute;n o empresa';
 	$MULTILANG_ParamNombreApp='Nombre de su aplicaci&oacute;n';
 	$MULTILANG_ParamVersionApp='Versi&oacute;n inicial de su aplicaci&oacute;n';

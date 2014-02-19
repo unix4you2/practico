@@ -9,6 +9,7 @@ CREATE TABLE core_parametros (
   fecha_lanzamiento date,
   licencia text,
   creditos text,
+  funciones_personalizadas text,
   PRIMARY KEY  (id)
 );
 

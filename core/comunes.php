@@ -186,6 +186,7 @@
 							case "cambiar_clave":
 							case "guardar_configuracion":
 							case "guardar_configws":
+							case "guardar_params":
 							case "administrar_tablas":
 							case "administrar_formularios":
 							case "administrar_informes":
@@ -220,7 +221,7 @@
 */
 	function permiso_accion($accion)
 		{
-			global $Login_usuario;
+			global $Login_usuario,$TablasCore;
 			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 			$retorno=0;
 
@@ -238,6 +239,15 @@
 						{
 							// Si no encuentra el permiso directo llama los heredados
 							$retorno=permiso_heredado_accion($accion);
+						}
+					//Si no encuentra en los heredados busca en preautorizados por configuracion
+					if (!$retorno)
+						{
+							$resultado=ejecutar_sql("SELECT id from ".$TablasCore."parametros WHERE funciones_personalizadas LIKE '%$accion%' ");
+							$parametros = $resultado->fetch();
+							//Si encuentra un registro con la accion preautorizada entonces autoriza al usuario
+							if ($parametros["id"]!="")
+								$retorno=1;
 						}
 				}
 

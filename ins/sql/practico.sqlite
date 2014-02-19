@@ -8,7 +8,8 @@ CREATE TABLE core_parametros (
   version text,
   fecha_lanzamiento text,
   licencia text,
-  creditos text
+  creditos text,
+  funciones_personalizadas text
   
 );
 

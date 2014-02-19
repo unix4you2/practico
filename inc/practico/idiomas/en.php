@@ -76,6 +76,8 @@
 	$MULTILANG_Fecha='Date';
 	$MULTILANG_Finalizado='Finished';
 	$MULTILANG_Formularios='Forms';
+	$MULTILANG_Funciones='Preauthorized functions';
+	$MULTILANG_FuncionesDes='For security reasons, your custom functions or modules should be pre-authorized in this field. Add the functions or actions separated by any character.';
 	$MULTILANG_Grande='Big';
 	$MULTILANG_Grafico='Graphic';
 	$MULTILANG_Guardar='Save';
@@ -99,6 +101,7 @@
 	$MULTILANG_Opcional='Optional';
 	$MULTILANG_OpcionesMenu='Menu options';
 	$MULTILANG_Otros='Others';
+	$MULTILANG_ParamApp='Aplication parameters';
 	$MULTILANG_Paso='Step';
 	$MULTILANG_Peso='Weight';
 	$MULTILANG_Pequeno='small';
@@ -735,7 +738,7 @@
 	$MULTILANG_AyudaDesPreApp='The prefix used for application tables can be used to separate different Practical facilities on the same database or it can be left empty to link / integrate with other applications Practical pre-existing. Not recommended uppercase for compatibility between engines.';
 	$MULTILANG_AyudaLlave='Sign value for user accounts';
 	$MULTILANG_NotasImportantesInst1=' <u>IMPORTANT 1 </u>: The database used for Practico must already exist to connect to it and generate the required structures. Check with your hosting provider or system administrator how to create a database with sufficient privilege to work with Practico. <br> <br> <u> IMPORTANT 2 </u>: The installer will remove all existing tables on database indicated and that match the names of tables that Practico uses. If you think you may have important information in them is recommended to make a backup before proceeding. To share a single database between different Practico installations you can change the table prefixes used by each.';
-	$MULTILANG_ParametrosApp='Parameters for the first application';
+	$MULTILANG_ParametrosApp='Parameters for your application';
 	$MULTILANG_ParamNombreEmpresa='Short name of your organization or company';
 	$MULTILANG_ParamNombreApp='Application name';
 	$MULTILANG_ParamVersionApp='Initial release version of its application';

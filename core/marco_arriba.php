@@ -91,6 +91,7 @@
 			include_once("core/marco_conf.php");
 			include_once("core/marco_wscfg.php");
 			include_once("core/marco_oauth.php");
+			include_once("core/marco_param.php");
 		}
 ?>
 

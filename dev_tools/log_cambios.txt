@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno="14"
-VersionCompatibleMes="2"
+VersionCompatibleAno=""
+VersionCompatibleMes=""
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno="14"
-VersionFinalMes="3"
+VersionFinalAno=""
+VersionFinalMes=""
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version
@@ -17,6 +17,8 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/menus.php
+core/marco_arriba.php
+core/marco_param.php
 core/marco_conf.php
 core/marco_oauth.php
 core/formularios.php
@@ -47,11 +49,13 @@ LogCambios="
 * Added: Ahora se permite definir campos manuales dentro de los formularios, esos campos seran obviados dentro de los insert y updates cuando no se encuentren en la tabla
 * Added: Ahora las operaciones de almacenamiento validan si los campos existen realmente en la tabla para evitar errores del programador y uso de campos manuales
 * Added: Generacion de codigos QR mediante una nueva funcion
+* Added: Definicion de funciones personalizadas para accesos seguros
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
+ALTER TABLE core_parametros ADD COLUMN funciones_personalizadas TEXT;
 "
 
 ########################################################################
