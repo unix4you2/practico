@@ -37,9 +37,10 @@
 ?>
 
 
-<?php if ($accion=="Mi_accion_XYZ") 
+<?php
+
+if ($accion=="Mi_accion_XYZ") 
 	{
 
 
 	}
-
