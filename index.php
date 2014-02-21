@@ -190,6 +190,8 @@
 				}
 		}
 
+include("core/monitoreo.php");
+
 	// Finaliza el contenido central y presenta el pie de pagina de aplicacion si no se esta en fullscreen
 	if (@$Presentar_FullScreen!=1)
 		include("core/marco_abajo.php");
