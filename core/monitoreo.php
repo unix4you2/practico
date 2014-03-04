@@ -30,6 +30,9 @@
 
 /* ################################################################## */
 /* ################################################################## */
+	$PaginaInicio=5;
+	$MaximoPaginas=5;
+	$MilisegundosPagina=10000;
 
 	//Definicion de maquinas a monitorear
 	$Maquinas[]=array(Nombre => "Sofia Servicio Web",	Host => "localhost",	Puerto => "80",		TipoMonitor=>"socket",	Icono=> "icn_rdp.png");
@@ -49,6 +52,7 @@
 	$Tamano_iconos=" width=20 heigth=20 ";
 	$Imagen_generica_sql="tango_utilities-system-monitor.png";
 	$Imagen_generica_shell="tango_utilities-terminal.png";
+	$Sonido_alarma="../inc/practico_alarma.mp3";
 
 	//Variables de apariencia
 	$ancho_tablas_maquinas=200;
@@ -136,6 +140,7 @@
 					<MaquinaOnline>
 			*/
 			global $ancho_tablas_maquinas,$Path_imagenes,$Imagen_fallo,$Imagen_generica,$Imagen_ok,$Tamano_iconos;
+			global $ErroresMonitoreoPractico; // Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay errores
 			
 			//Verifica estado de la maquina y servicio
 			$estado_actual=ServicioOnline($Maquina["Host"],$Maquina["Puerto"]);
@@ -147,6 +152,7 @@
 					$estado_final="<blink><img src=".$Path_imagenes.$Imagen_fallo." border=0 align=top ".$Tamano_iconos."> Ca&iacute;do <img src=".$Path_imagenes.$Imagen_fallo." border=0 align=top></blink>";
 					$color_fondo_estado="#FF3B36";
 					$color_texto_estado="#FFFF00";
+					$ErroresMonitoreoPractico=1;
 				}
 			
 			//Determina si a la maquina o servicio se le ha indicado un icono
@@ -158,7 +164,7 @@
 			echo '
 				<table width="'.$ancho_tablas_maquinas.'" border=1 cellpadding=1 cellspacing=0 bgcolor="#DDDDDD" style="color:black; width:'.$ancho_tablas_maquinas.'px; display: inline!important; font-family: Verdana, Tahoma, Arial; font-size: 9px; margin-top: 5px; margin-right: 5px; margin-left: 5px; margin-bottom: 5px;">
 					<tr>
-						<td bgcolor="#D8D8FF" align=center>
+						<td width="'.$ancho_tablas_maquinas.'" bgcolor="#D8D8FF" align=center>
 							<table width="100%" border=0 cellpadding=2 cellspacing=0 style="color:black; font-family: Verdana, Tahoma, Arial; font-size: 11px;"><tr>
 								<td>
 									'.$icono_maquina.'
@@ -263,6 +269,21 @@
 
 /* ################################################################## */
 /* ################################################################## */
+	function PresentarImagen($ImagenRRD)
+		{
+			/*
+				Function: PresentarImagen
+				Muestra una imagen en un path relativo a la ejecucion de la herramienta y de un tamano en pixeles determinado
+			*/
+
+			//Presenta la imagen
+			echo '<img src="'.$ImagenRRD["Path"].'" width="'.$ImagenRRD["Ancho"].'" height="'.$ImagenRRD["Alto"].'" border=0>';
+			if ($ImagenRRD["Salto"]==1) echo "<br>";
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
 	function EjecutarComando($comando_ejecutar)
 		{
 			/*
@@ -302,23 +323,22 @@
 
 
 
-
-
 	//Recorre todos los servicios y maquinas definidos
 	echo '<br>';
 	for ($i=0;$i<count($Maquinas);$i++)
 		PresentarEstadoMaquina($Maquinas[$i],$color_fondo_estado,$color_texto_estado);
 
 	//Recorre todos los comandos de shell para monitoreo
-	echo '<br>';
+	echo '<br><br>';
 	for ($i=0;$i<count($ComandosShell);$i++)
 		EjecutarComando($ComandosShell[$i]);
-		//PresentarEstadoMaquina($Maquinas[$i],$color_fondo_estado,$color_texto_estado);
 
 	//Recorre todos los comandos de monitoreo SQL
-	echo '<br>';
+	echo '<br><br>';
 	for ($i=0;$i<count($ComandosSQL);$i++)
 		PresentarEstadoSQL($ComandosSQL[$i],$color_fondo_estado_sql,$color_texto_estado_sql);
 
-	
-
+	//Recorre todas las imagenes o graficos RRD
+	echo '<br><br>';
+	for ($i=0;$i<count($ImagenesRRD);$i++)
+		PresentarImagen($ImagenesRRD[$i]);

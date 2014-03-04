@@ -264,6 +264,7 @@
 	$MULTILANG_FrmTipo8='Report predesigned (Data Table or Graph)';
 	$MULTILANG_FrmTipo9='Slider (numeric range selector - HTML5)';
 	$MULTILANG_FrmTipo10='Password field';
+	$MULTILANG_FrmTipo11='Field value as label';
 	$MULTILANG_FrmValorMinimo='Minimum value';
 	$MULTILANG_FrmValorMaximo='Maximum value';
 	$MULTILANG_FrmValorSalto='Step value';

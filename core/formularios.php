@@ -61,15 +61,14 @@
 	if ($accion=="eliminar_datos_formulario")
 		{
 			$mensaje_error="";
-
 			// Busca datos del formulario
-			$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id='$formulario'");
+			$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
 			$registro_formulario = $consulta_formulario->fetch();
 
 			// Busca los campos del form marcados como valor unico y verifica que no existan valores en la tabla
 			$tabla=$registro_formulario["tabla_datos"];
 
-			$consulta_campos_unicos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1 AND valor_unico=1");
+			$consulta_campos_unicos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND valor_unico=1","$formulario");
 			while ($registro_campos_unicos = $consulta_campos_unicos->fetch())
 				{
 					$campo=$registro_campos_unicos["campo"];
@@ -77,11 +76,11 @@
 					// Busca si el campo cuenta con el valor en la tabla
 
 					// Inserta los datos
-					ejecutar_sql_unaria("DELETE FROM ".$tabla." WHERE $campo='$valor'");
+					ejecutar_sql_unaria("DELETE FROM ".$tabla." WHERE $campo = $valor ");
 					auditar("Elimina registro donde ".$campo." = ".$valor." en ".$tabla);
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="editar_formulario">
-						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+						<input type="Hidden" name="nombre_tabla" value="'.$tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="popup_activo" value="FormularioCampos">
 					<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
@@ -114,7 +113,7 @@
 			$mensaje_error="";
 
 			// Busca datos del formulario
-			$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id='$formulario'");
+			$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
 			$registro_formulario = $consulta_formulario->fetch();
 
 /*
@@ -135,7 +134,7 @@
 
 			// Busca los campos del form marcados como obligatorios a los que no se les ingreso valor
 			$tabla=$registro_formulario["tabla_datos"];
-			$consulta_campos_obligatorios=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1 AND obligatorio=1");
+			$consulta_campos_obligatorios=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND obligatorio=1","$formulario");
 			while ($registro_campos_obligatorios = $consulta_campos_obligatorios->fetch())
 				{
 					$campo=$registro_campos_obligatorios["campo"];
@@ -153,7 +152,7 @@
 					$lista_campos="";
 					$lista_valores="";
 
-					$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1 AND campo<>'id' ");
+					$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND campo<>'id' ","$formulario");
 					while ($registro_campos = $consulta_campos->fetch())
 						{
 							//Agrega el campo a la lista solamente si es de datos y si es diferente al campo ID que es usado para la actualizacion (objetos de tipo etiqueta o iframes son pasados por alto)
@@ -221,12 +220,12 @@
 			$mensaje_error="";
 
 			// Busca datos del formulario
-			$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id='$formulario'");
+			$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
 			$registro_formulario = $consulta_formulario->fetch();
 
 			// Busca los campos del form marcados como valor unico y verifica que no existan valores en la tabla
 			$tabla=$registro_formulario["tabla_datos"];
-			$consulta_campos_unicos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1 AND valor_unico=1");
+			$consulta_campos_unicos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND valor_unico=1","$formulario");
 			while ($registro_campos_unicos = $consulta_campos_unicos->fetch())
 				{
 					$campo=$registro_campos_unicos["campo"];
@@ -240,7 +239,7 @@
 
 			// Busca los campos del form marcados como obligatorios a los que no se les ingreso valor
 			$tabla=$registro_formulario["tabla_datos"];
-			$consulta_campos_obligatorios=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1 AND obligatorio=1");
+			$consulta_campos_obligatorios=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND obligatorio=1","$formulario");
 			while ($registro_campos_obligatorios = $consulta_campos_obligatorios->fetch())
 				{
 					$campo=$registro_campos_obligatorios["campo"];
@@ -253,11 +252,11 @@
 			//Ejecuta consulta de insercion de datos
 			if ($mensaje_error=="")
 				{
-					// Busca los campos del form y construye cadenas de valores para consulta
+					// Busca los campos visibles del form y construye cadenas de valores para consulta
 					$lista_campos="";
 					$lista_valores="";
 
-					$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1");
+					$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1","$formulario");
 					while ($registro_campos = $consulta_campos->fetch())
 						{
 							//Hace la operacion con el campo solamente si es de datos (objetos de tipo etiqueta o iframes son pasados por alto)
@@ -278,7 +277,7 @@
 					// Inserta los datos
 					ejecutar_sql_unaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores.")");
 					auditar("Inserta registro en ".$registro_formulario["tabla_datos"]);
-					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+					echo '<script type="" language="JavaScript"> document.core_ver_menus.submit();  </script>';
 				}
 			else
 				{
@@ -318,7 +317,7 @@
 */
 	if ($accion=="eliminar_accion_formulario")
 		{
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_boton WHERE id='$boton' ");
+			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_boton WHERE id=? ","$boton");
 			auditar("Elimina accion del formulario $formulario");
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="accion" value="editar_formulario">
@@ -353,7 +352,7 @@
 */
 	if ($accion=="eliminar_campo_formulario")
 		{
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE id='$campo' ");
+			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE id=? ","$campo");
 			auditar("Elimina campo del formulario $formulario");
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="accion" value="editar_formulario">
@@ -389,6 +388,10 @@
 	if ($accion=="actualizar_campo_formulario")
 		{
 			$mensaje_error="";
+
+			//Concatena el campo manual en caso de encontrar alguno
+			$campo=$campo.$campo_manual;
+
 			if ($valor_unico=="on") $valor_unico=1; else $valor_unico=0;
 			if ($ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
 			$tipo_objeto=$tipo;
@@ -402,7 +405,7 @@
 						$ListaCamposyValores.=$ListaCampos[$i]."='".$$ListaCampos[$i]."',";
 					$ListaCamposyValores.="id=id"; //Agregado para evitar coma final
 
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario_objeto SET ".$ListaCamposyValores." WHERE id='$idcampomodificado'");
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario_objeto SET ".$ListaCamposyValores." WHERE id=?","$idcampomodificado");
 					auditar("Modifica diseno campo $idcampomodificado para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -452,16 +455,17 @@
 			//Concatena el campo manual en caso de encontrar alguno
 			$campo=$campo.$campo_manual;
 
-			if ($valor_unico=="on") $valor_unico=1; else $valor_unico=0;
-			if ($ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
-			if ($titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error=$MULTILANG_ErrFrmCampo1;
-			if ($campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error=$MULTILANG_ErrFrmCampo2;
+			if (@$valor_unico=="on") $valor_unico=1; else $valor_unico=0;
+			if (@$ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
+			if (@$titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error=$MULTILANG_ErrFrmCampo1;
+			if (@$campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error=$MULTILANG_ErrFrmCampo2;
 
 			if ($mensaje_error=="")
 				{
 					// Define la consulta de insercion del nuevo campo
 					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES ('$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores','$valor_etiqueta','$url_iframe','$objeto_en_ventana','$informe_vinculado','$maxima_longitud','$valor_minimo','$valor_maximo','$valor_salto')";
 					ejecutar_sql_unaria($consulta_insercion);
+					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea campo $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -512,7 +516,7 @@
 				{
 					$accion_usuario=addslashes($accion_usuario);
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES ('$titulo','$estilo','$formulario','$tipo_accion','$accion_usuario','$visible','$peso','$retorno_titulo','$retorno_texto','$confirmacion_texto')");
-					$id=$ConexionPDO->lastInsertId();					
+					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea boton $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -592,6 +596,7 @@ if ($accion=="editar_formulario")
 					if (tipo_objeto_activo=="url_iframe")   VisualizarCampos("9,14,15,17,22,24");
 					if (tipo_objeto_activo=="informe")   VisualizarCampos("9,17,23,24");
 					if (tipo_objeto_activo=="deslizador")   VisualizarCampos("1,2,4,7,8,9,17,26");
+					if (tipo_objeto_activo=="campo_etiqueta")   VisualizarCampos("1,2,4,9,17");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -638,6 +643,7 @@ if ($accion=="editar_formulario")
 										<option value="lista_seleccion" <?php if (@$registro_campo_editar["tipo"]=="lista_seleccion") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo4; ?></option>
 										<option value="lista_radio"     <?php if (@$registro_campo_editar["tipo"]=="lista_radio")     echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo5; ?></option>
 										<option value="deslizador"      <?php if (@$registro_campo_editar["tipo"]=="deslizador")      echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo9; ?></option>
+										<option value="campo_etiqueta"  <?php if (@$registro_campo_editar["tipo"]=="campo_etiqueta")  echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo11; ?></option>
 									</optgroup>
 									<!--
 									<optgroup label="Informaci&oacute;n externa">
@@ -698,7 +704,7 @@ if ($accion=="editar_formulario")
 									<a href="#" title="<?php echo $MULTILANG_FrmCampoOb1; ?>" name=""><img src="img/icn_12.gif" border=0></a>
 									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesCampo; ?>"><img src="img/icn_10.gif" border=0></a>
 									<br>
-									<?php echo $MULTILANG_InfCampoManual; ?>: <input type="text" name="campo_manual" size="20" class="CampoTexto" value="<?php if (!existe_campo_tabla($registro_campo_editar["campo"],$nombre_tabla)) echo $registro_campo_editar["campo"]; ?>">
+									<?php echo $MULTILANG_InfCampoManual; ?>: <input type="text" name="campo_manual" size="20" class="CampoTexto" value="<?php if (!@existe_campo_tabla($registro_campo_editar["campo"],$nombre_tabla)) echo @$registro_campo_editar["campo"]; ?>">
 								</td>
 							</tr>
 							</table>

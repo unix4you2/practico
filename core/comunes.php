@@ -486,7 +486,7 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function ejecutar_sql($query,$param="")
+	function ejecutar_sql($query,$lista_parametros="")
 		{
 			/*
 				Function: ejecutar_sql
@@ -495,7 +495,7 @@
 				Variables de entrada:
 
 					query - Consulta preformateada para ser ejecutada en el motor
-					param - Lista de parametros que deben ser preparados para el query separados por coma
+					lista_parametros - Lista de variables PHP con parametros que deben ser preparados para el query separados por doble pipe ||
 					
 				Salida:
 					Retorna mensaje en pantalla con la descripcion devuelta por el driver en caso de error
@@ -507,11 +507,25 @@
 			global $Login_usuario;
 			
 			// Filtra la cadena antes de ser ejecutada
-			$query=filtrar_cadena_sql($query,$accion);
+			$query=filtrar_cadena_sql($query);
 
 			try
 				{
 					$consulta = $ConexionPDO->prepare($query);
+					//Cuando se reciben parametros entonces se asume recepcion de querys con  interrogaciones  ?
+					//que deben ser preparados antes de ejecutarse con cada uno de los parametros recibidos
+					if ($lista_parametros!="")
+						{
+							$cantidad_parametros=substr_count($query,'?');
+							$parametros=explode('||',$lista_parametros);
+							// if ($cantidad_parametros!=count($parametros)) //La cantidad de parametros en query es diferente a los recibidos
+							//Recorre cada parametro y toma su valor
+							for ($i=1;$i<=$cantidad_parametros;$i++)
+								{
+									$consulta->bindValue($i, $parametros[$i-1]);
+									//echo 'Parametro '.$i.'='.$parametros[$i-1]."<br>"; //PARA DEPURACION
+								}
+						}
 					$consulta->execute();
 					return $consulta;
 					//return $consulta->fetchAll();
@@ -534,7 +548,7 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function ejecutar_sql_unaria($query,$param="")
+	function ejecutar_sql_unaria($query,$lista_parametros="")
 		{
 			/*
 				Function: ejecutar_sql_unaria
@@ -555,6 +569,20 @@
 			try
 				{
 					$consulta = $ConexionPDO->prepare($query);
+					//Cuando se reciben parametros entonces se asume recepcion de querys con  interrogaciones  ?
+					//que deben ser preparados antes de ejecutarse con cada uno de los parametros recibidos
+					if ($lista_parametros!="")
+						{
+							$cantidad_parametros=substr_count($query,'?');
+							$parametros=explode('||',$lista_parametros);
+							// if ($cantidad_parametros!=count($parametros)) //La cantidad de parametros en query es diferente a los recibidos
+							//Recorre cada parametro y toma su valor
+							for ($i=1;$i<=$cantidad_parametros;$i++)
+								{
+									$consulta->bindValue($i, $parametros[$i-1]);
+									//echo 'Parametro '.$i.'='.$parametros[$i-1]."<br>"; //PARA DEPURACION
+								}
+						}
 					$consulta->execute();
 					return "";
 				}
@@ -632,7 +660,7 @@
 			else
 				$usuario_auditar=$usuario;
 			//Lleva el registro
-			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$usuario_auditar','$accion','$fecha_operacion','$hora_operacion')");
+			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES (?,?,?,?)","$usuario_auditar||$accion||$fecha_operacion||$hora_operacion");
 		}
 
 
@@ -813,7 +841,7 @@
 			if ($MotorBD=="pgsql")
 				{
 					$columna=0;
-					$resultado=ejecutar_sql("SELECT * from INFORMATION_SCHEMA.COLUMNS where table_name = '$tabla' ");
+					$resultado=ejecutar_sql("SELECT * from INFORMATION_SCHEMA.COLUMNS where table_name = ? ","$tabla");
 					while($registro = $resultado->fetch())
 						{
 							$columnas[$columna]["nombre"] = $registro["column_name"];
@@ -829,7 +857,7 @@
 			if ($MotorBD=="sqlite")
 				{
 					$columna=0;
-					$resultado=ejecutar_sql("SELECT * FROM sqlite_master WHERE type='table' AND name='$tabla' ");
+					$resultado=ejecutar_sql("SELECT * FROM sqlite_master WHERE type='table' AND name=? ","$tabla");
 					$registro = $resultado->fetch();
 					//Toma los campos encontrados en el SQL de la tabla, los separa y los depura para devolver valores
 					$campos=explode(",",$registro["sql"]);
@@ -1512,6 +1540,45 @@
 		}
 
 
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: cargar_objeto_oculto
+	Genera el codigo HTML y CSS correspondiente a un campo de texto pero oculto (hidden) vinculado a un campo de datos sobre un formulario
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		registro_datos_formulario - Arreglo asociativo con nombres de campo y valores cuando se hacen llamados de registro especificos
+		formulario - ID unico del formulario al cual pertenece el objeto
+
+	Salida:
+
+		HTML asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
+	function cargar_objeto_oculto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
+		{
+			global $campobase,$valorbase;
+
+			$salida='';
+			$nombre_campo=$registro_campos["campo"];
+			$tipo_entrada="hidden";
+
+			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
+			$cadena_valor='';
+			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
+			if ($campobase!="" && $valorbase!="") $cadena_valor=' value="'.$registro_datos_formulario["$nombre_campo"].'" ';
+
+			// Muestra el campo
+			$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor.'" >';
+			return $salida;
+		}
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -1787,6 +1854,42 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: cargar_objeto_campoetiqueta
+	Genera el codigo HTML para imprimir el valor de un campo directamente, sin control de datos.
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		registro_datos_formulario - Arreglo asociativo con nombres de campo y valores cuando se hacen llamados de registro especificos
+
+	Salida:
+
+		HTML asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
+	function cargar_objeto_campoetiqueta($registro_campos,$registro_datos_formulario)
+		{
+			global $campobase,$valorbase;
+			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
+			$cadena_valor='';
+			$nombre_campo=$registro_campos["campo"];
+			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=$registro_campos["valor_predeterminado"];
+			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
+			$salida=$cadena_valor;
+
+			//Agrega ademas el valor como hidden para disponer de el cuando se requiera en otro llamado o funcion personalizada
+			$tipo_entrada="hidden";
+			// Muestra el campo
+			$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor.'" >';
+			return $salida;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: cargar_objeto_iframe
 	Genera el codigo HTML correspondiente a un campo de IFRAME para empotrar paginas externas sobre un formulario
 
@@ -1966,7 +2069,7 @@
 				global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion;
 
 				// Busca datos del formulario
-				$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id='$formulario'");
+				$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
 				$registro_formulario = $consulta_formulario->fetch();
 
 				echo '
@@ -2036,7 +2139,7 @@
 					<form name="datos" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="Hidden" name="accion" value="guardar_datos_formulario">
 					<input type="Hidden" name="formulario" value="'.$formulario.'">
-					<input type="Hidden" name="id_registro_datos" value="'.$registro_datos_formulario["id"].'">
+					<input type="Hidden" name="id_registro_datos" value="'.@$registro_datos_formulario["id"].'">
 					';
 
 				//Booleana que determina si se debe incluir el javascript de ckeditor
@@ -2047,7 +2150,7 @@
 				$constante_limite_superior=+9999;
 				$limite_superior=$constante_limite_superior; // Peso superior a tener en cuenta en el query
 				//Busca todos los objetos marcados como fila_unica=1 y agrega un registro mas con el limite superior
-				$consulta_obj_fila_unica=ejecutar_sql("SELECT id,peso,visible FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY peso");
+				$consulta_obj_fila_unica=ejecutar_sql("SELECT id,peso,visible FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY peso","$formulario");
 				echo '<div id="seccion_impresion">';
 				while ($registro_obj_fila_unica = $consulta_obj_fila_unica->fetch())
 					{
@@ -2060,7 +2163,7 @@
 						for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
 							{
 								//Busca los elementos de la coumna actual del formulario con peso menor o igual al peso del objeto fila_unica de la fila unica_actual pero que no son fila_unica
-								$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND columna='$cl' AND visible=1 AND peso >'$limite_inferior' AND peso <='$limite_superior' ORDER BY peso");
+								$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND columna=? AND visible=1 AND peso >? AND peso <=? ORDER BY peso","$formulario||$cl||$limite_inferior||$limite_superior");
 								
 									//Inicia columna de formulario
 									echo '<td valign=top align=center>';
@@ -2077,16 +2180,18 @@
 														<td valign=top>';
 													// Formatea cada campo de acuerdo a su tipo
 													// CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas abajo tambien
-													if (@$registro_campos["tipo"]=="texto_corto") $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana);
-													if (@$registro_campos["tipo"]=="texto_clave") $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana);
-													if (@$registro_campos["tipo"]=="texto_largo") $objeto_formateado = @cargar_objeto_texto_largo($registro_campos,$registro_datos_formulario);
-													if (@$registro_campos["tipo"]=="texto_formato") { $objeto_formateado = @cargar_objeto_texto_formato($registro_campos,$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
-													if (@$registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = @cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario);
-													if (@$registro_campos["tipo"]=="lista_radio") $objeto_formateado = @cargar_objeto_lista_radio($registro_campos,$registro_datos_formulario);
-													if (@$registro_campos["tipo"]=="etiqueta") $objeto_formateado = @cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario);
-													if (@$registro_campos["tipo"]=="url_iframe") $objeto_formateado = @cargar_objeto_iframe($registro_campos,$registro_datos_formulario);
-													if (@$registro_campos["tipo"]=="informe") @cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
-													if (@$registro_campos["tipo"]=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,$registro_datos_formulario);
+													$tipo_de_objeto=@$registro_campos["tipo"];
+													if ($tipo_de_objeto=="texto_corto") $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
+													if ($tipo_de_objeto=="texto_clave") $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
+													if ($tipo_de_objeto=="texto_largo") $objeto_formateado = @cargar_objeto_texto_largo($registro_campos,@$registro_datos_formulario);
+													if ($tipo_de_objeto=="texto_formato") { $objeto_formateado = @cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
+													if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = @cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario);
+													if ($tipo_de_objeto=="lista_radio") $objeto_formateado = @cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
+													if ($tipo_de_objeto=="etiqueta") $objeto_formateado = @cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
+													if ($tipo_de_objeto=="url_iframe") $objeto_formateado = @cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
+													if ($tipo_de_objeto=="informe") @cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
+													if ($tipo_de_objeto=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
+													if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
 
 													//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 													if ($registro_campos["tipo"]!="informe")
@@ -2111,25 +2216,27 @@
 						echo '</tr></table>';
 
 						//Busca datos del registro de fila_unica
-						$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND id='$ultimo_id'");
+						$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND id=? ","$formulario||$ultimo_id");
 						$registro_campos = $consulta_campos->fetch();
 
 						//Agrega el campo de fila unica cuando no se trata del agregado de peso 9999
 						if ($registro_campos["visible"]=="1")
 							{
-								echo '&nbsp;&nbsp;'.$registro_campos["titulo"];
+								//echo '&nbsp;&nbsp;'.$registro_campos["titulo"];
 								// Formatea cada campo de acuerdo a su tipo
 								// CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas arriba tambien
-								if ($registro_campos["tipo"]=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana);
-								if ($registro_campos["tipo"]=="texto_clave") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana);
-								if ($registro_campos["tipo"]=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos,$registro_datos_formulario);
-								if ($registro_campos["tipo"]=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
-								if ($registro_campos["tipo"]=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario);
-								if ($registro_campos["tipo"]=="lista_radio") $objeto_formateado = cargar_objeto_lista_radio($registro_campos,$registro_datos_formulario);
-								if ($registro_campos["tipo"]=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario);
-								if ($registro_campos["tipo"]=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos,$registro_datos_formulario);
-								if ($registro_campos["tipo"]=="informe") cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
-								if (@$registro_campos["tipo"]=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,$registro_datos_formulario);
+								$tipo_de_objeto=@$registro_campos["tipo"];
+								if ($tipo_de_objeto=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
+								if ($tipo_de_objeto=="texto_clave") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
+								if ($tipo_de_objeto=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos,@$registro_datos_formulario);
+								if ($tipo_de_objeto=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
+								if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario);
+								if ($tipo_de_objeto=="lista_radio") $objeto_formateado = cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
+								if ($tipo_de_objeto=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
+								if ($tipo_de_objeto=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
+								if ($tipo_de_objeto=="informe") cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
+								if ($tipo_de_objeto=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
+								if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
 
 								//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 								if ($registro_campos["tipo"]!="informe")
@@ -2142,10 +2249,20 @@
 				echo '</div>
 				</div> <!-- cierra MARCO_IMPRESION -->';
 
-			// Si tiene botones agrega barra de estado y los ubica
-			$consulta_botones = $ConexionPDO->prepare("SELECT id,".$ListaCamposSinID_formulario_boton." FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario' AND visible=1 ORDER BY peso");
-			$consulta_botones->execute();
+			//Busca los campos definidos como visilbe=0 (o NO) para agregarlos como hidden
+			$consulta_ocultos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=0 ","$formulario");
+			while ($registro_ocultos = $consulta_ocultos->fetch())
+				{
+					// Formatea cada campo de acuerdo a su tipo
+					$objeto_formateado = @cargar_objeto_oculto($registro_ocultos,$registro_datos_formulario,$formulario,$en_ventana);
+					//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
+					if ($registro_campos["tipo"]!="informe")
+						echo $objeto_formateado;
+				}
 
+			// Si tiene botones agrega barra de estado y los ubica
+			$consulta_botones = ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_boton." FROM ".$TablasCore."formulario_boton WHERE formulario=? AND visible=1 ORDER BY peso","$formulario");
+			
 			if($consulta_botones->rowCount()>0)
 				{
 					abrir_barra_estado();
@@ -2253,7 +2370,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		global $IdiomaPredeterminado;
 
 		// Busca datos del informe
-		$consulta_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id='$informe'");
+		$consulta_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
 		$registro_informe=$consulta_informe->fetch();
 		$Identificador_informe=$registro_informe["id"];
 		//Si no encuentra informe presenta error
@@ -2263,7 +2380,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			$numero_columnas=0;
 			//Busca los CAMPOS definidos para el informe
 			$consulta="SELECT ";
-			$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
+			$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
 			while ($registro_campos = $consulta_campos->fetch())
 				{
 					//Si tiene alias definido lo agrega
@@ -2277,7 +2394,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 			//Busca las TABLAS definidas para el informe
 			$consulta.=" FROM ";
-			$consulta_tablas=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_tablas." FROM ".$TablasCore."informe_tablas WHERE informe='$informe'");
+			$consulta_tablas=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_tablas." FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
 			while ($registro_tablas = $consulta_tablas->fetch())
 				{
 					//Si tiene alias definido lo agrega
@@ -2291,7 +2408,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 			// Busca las CONDICIONES para el informe
 			$consulta.=" WHERE ";
-			$consulta_condiciones=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_condiciones." FROM ".$TablasCore."informe_condiciones WHERE informe='$informe' ORDER BY peso");
+			$consulta_condiciones=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_condiciones." FROM ".$TablasCore."informe_condiciones WHERE informe=? ORDER BY peso","$informe");
 			$hay_condiciones=0;
 			while ($registro_condiciones = $consulta_condiciones->fetch())
 				{
@@ -2434,7 +2551,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 
 					// Busca si el informe tiene acciones (botones), los cuenta y prepara dentro de un arreglo para repetir en cada registro
-					$consulta_botones=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_boton." FROM ".$TablasCore."informe_boton WHERE informe='$informe' AND visible=1 ORDER BY peso");
+					$consulta_botones=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_boton." FROM ".$TablasCore."informe_boton WHERE informe=? AND visible=1 ORDER BY peso","$informe");
 					$total_botones=0;
 					while($registro_botones=$consulta_botones->fetch())
 						{
@@ -2759,7 +2876,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			$mensaje_error="";
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."$tabla SET $campo = $valor WHERE id = '$id'");
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."$tabla SET $campo = $valor WHERE id = ? ","$id");
 					auditar("Cambia estado del campo $campo en objetoID $formulario");
 
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">

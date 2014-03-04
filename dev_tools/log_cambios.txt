@@ -18,6 +18,7 @@ index.php
 core/comunes.php
 core/menus.php
 core/marco_arriba.php
+core/monitoreo.php
 core/marco_param.php
 core/marco_conf.php
 core/marco_oauth.php
@@ -49,7 +50,11 @@ LogCambios="
 * Added: Ahora se permite definir campos manuales dentro de los formularios, esos campos seran obviados dentro de los insert y updates cuando no se encuentren en la tabla
 * Added: Ahora las operaciones de almacenamiento validan si los campos existen realmente en la tabla para evitar errores del programador y uso de campos manuales
 * Added: Generacion de codigos QR mediante una nueva funcion
+* Added: Ahora los campos definidos como ocultos en los formularios son tratados como tipo hidden
 * Added: Definicion de funciones personalizadas para accesos seguros
+* Added: Ahora las funciones de SQL soportan parámetros separados por doble pipe || para preparar las consultas antes de su ejecución
+* Added: Nuevos tipos de campo para formularios donde el valor para la etiqueta es tomado desde el valor de un campo
+* Fixed: Mejora en preparación de consultas y funciones SQL para prevenir inyecciones
 "
 
 ########################################################################

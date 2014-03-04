@@ -261,6 +261,7 @@
 	$MULTILANG_FrmTipo8='Informe predise&ntilde;ado (Tabla de datos o Gr&aacute;fico)';
 	$MULTILANG_FrmTipo9='Deslizador (selector de rangos num&eacute;ricos - HTML5)';
 	$MULTILANG_FrmTipo10='Campo de contrasena';
+	$MULTILANG_FrmTipo11='Valor de campo como etiqueta';
 	$MULTILANG_FrmValorMinimo='Valor m&iacute;nimo';
 	$MULTILANG_FrmValorMaximo='Valor m&aacute;ximo';
 	$MULTILANG_FrmValorSalto='Valor de salto';

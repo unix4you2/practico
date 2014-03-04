@@ -49,13 +49,18 @@
 			//Verifica soporte para cURL
 			if (!extension_loaded('curl'))
 				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrCURL,'','icono_error.png','TextosEscritorio');
-			//Inicializa el objeto cURL y procesa la solicitud
-			$objeto_curl = curl_init();
-			curl_setopt($objeto_curl, CURLOPT_HEADER, 0);
-			curl_setopt($objeto_curl, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($objeto_curl, CURLOPT_URL, $url);
-			$datos_recibidos = curl_exec($objeto_curl);
-			curl_close($objeto_curl);
+			//Verifica que la funcion se encuentre activada
+			$funcion_evaluada='curl_init'; $valor_esperado='1';
+			if (ini_get($funcion_evaluada)==$valor_esperado)
+				{
+					//Inicializa el objeto cURL y procesa la solicitud
+					$objeto_curl = curl_init();
+					curl_setopt($objeto_curl, CURLOPT_HEADER, 0);
+					curl_setopt($objeto_curl, CURLOPT_RETURNTRANSFER, 1);
+					curl_setopt($objeto_curl, CURLOPT_URL, $url);
+					$datos_recibidos = curl_exec($objeto_curl);
+					curl_close($objeto_curl);
+				}
 			return $datos_recibidos;
 		}
 
@@ -68,11 +73,15 @@
 */
 	function cargar_url($url)
 		{
-			//Intenta con la funcion nativa de PHP
-			$contenido_url = trim(file_get_contents($url));
+			$funcion_evaluada='allow_url_fopen'; $valor_esperado='1';
+
+			//Intenta con la funcion nativa de PHP si esta habilitada
+			if (@!$contenido_url)
+				if (ini_get($funcion_evaluada)==$valor_esperado)
+					$contenido_url = trim(file_get_contents($url));
 
 			//Si no se pudo utilizar la funcion file_get_contents intenta con cURL
-			if (!$contenido_url)
+			if (@!$contenido_url)
 				$contenido_url = trim(file_get_contents_curl($url));
 			
 			//Retorna el resultado
@@ -134,10 +143,10 @@
 			$prefijo_webservice=$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$_SERVER['PHP_SELF'];
 			$webservice_validacion = $protocolo_webservice.$prefijo_webservice."?WSOn=1&WSKey=".$LlaveDePaso."&WSSecret=".$LlaveDePaso."&WSId=verificar_credenciales&uid=".$uid."&clave=".$clave;
 			// Carga el contenido en una variable para validar la conexion
-			$contenido_url = cargar_url($webservice_validacion);
+			$contenido_url = @cargar_url($webservice_validacion);
 
 			// Valida si se logro cargar o no el contenido
-			if ($contenido_url)
+			if ($contenido_url!="")
 				{
 					// Usa SimpleXML Directamente para interpretar respuesta
 					$resultado_webservice = simplexml_load_string($contenido_url);
