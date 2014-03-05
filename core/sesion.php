@@ -125,7 +125,7 @@
 					$ok_captcha=0;
 					// Lleva auditoria con query manual por la falta de $Login_Usuario y solamente si no hay un posible sqlinjection
 					if ($uid_orig==$uid && $clave_orig==$clave)
-						ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$uid','Elimina sesiones activas al intentar acceso con CAPTCHA incorrecto desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");
+						auditar("Elimina sesiones activas al intentar acceso con CAPTCHA incorrecto desde $direccion_auditoria",$uid);
 				}
 			session_destroy();
 
@@ -164,8 +164,8 @@
 			if ($clave!="" && $ok_login==1 && $ok_captcha==1)
 				  {
 						// Busca datos del usuario Practico, sin importar metodo de autenticacion para tener configuraciones de permisos y parametros propios de la herramienta
-						$resultado_usuario=ejecutar_sql("SELECT login, nombre, clave, descripcion, nivel, correo, llave_paso FROM ".$TablasCore."usuario WHERE login='$uid' ");
-						$registro = $resultado_usuario->fetch();					
+						$resultado_usuario=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login='$uid'");
+						$registro = $resultado_usuario->fetch();
 						
 						// Se buscan datos de la aplicacion
 						$consulta_parametros=ejecutar_sql("SELECT id,".$ListaCamposSinID_parametros." FROM ".$TablasCore."parametros");
@@ -192,9 +192,9 @@
 						if (!isset($_SESSION["Version_Aplicacion"])) $_SESSION["Version_Aplicacion"]=$registro_parametros["version"];
 
 						// Lleva a auditoria con query manual por la falta de $Login_Usuario
-						ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('$uid','Ingresa al sistema desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");
+						auditar("Ingresa al sistema desde $direccion_auditoria",$uid);
 						// Actualiza fecha del ultimo ingreso para el usuario
-						ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso='$fecha_operacion' WHERE login='$uid'");
+						ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login=? ","$fecha_operacion||$uid");
 				  }
 
 			// Si la clave es incorrecta muestra de nuevo la ventana de ingreso

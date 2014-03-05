@@ -169,7 +169,7 @@
 					$cadena_nuevos_valores=substr($cadena_nuevos_valores, 0, strlen($cadena_nuevos_valores)-1);
 
 					// Actualiza los datos
-					ejecutar_sql_unaria("UPDATE ".$registro_formulario["tabla_datos"]." SET $cadena_nuevos_valores WHERE id='$id_registro_datos' ");
+					ejecutar_sql_unaria("UPDATE ".$registro_formulario["tabla_datos"]." SET $cadena_nuevos_valores WHERE id=? ","$id_registro_datos");
 					auditar("Actualiza registro $id_registro_datos en ".$registro_formulario["tabla_datos"]);
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
@@ -277,7 +277,7 @@
 					// Inserta los datos
 					ejecutar_sql_unaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores.")");
 					auditar("Inserta registro en ".$registro_formulario["tabla_datos"]);
-					echo '<script type="" language="JavaScript"> document.core_ver_menus.submit();  </script>';
+					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
 			else
 				{
@@ -463,8 +463,8 @@
 			if ($mensaje_error=="")
 				{
 					// Define la consulta de insercion del nuevo campo
-					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES ('$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores','$valor_etiqueta','$url_iframe','$objeto_en_ventana','$informe_vinculado','$maxima_longitud','$valor_minimo','$valor_maximo','$valor_salto')";
-					ejecutar_sql_unaria($consulta_insercion);
+					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					ejecutar_sql_unaria($consulta_insercion,"$tipo_objeto||$titulo||$campo||$ayuda_titulo||$ayuda_texto||$formulario||$peso||$columna||$obligatorio||$visible||$valor_predeterminado||$validacion_datos||$etiqueta_busqueda||$ajax_busqueda||$valor_unico||$solo_lectura||$teclado_virtual||$ancho||$alto||$barra_herramientas||$fila_unica||$lista_opciones||$origen_lista_opciones||$origen_lista_valores||$valor_etiqueta||$url_iframe||$objeto_en_ventana||$informe_vinculado||$maxima_longitud||$valor_minimo||$valor_maximo||$valor_salto");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea campo $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
@@ -515,7 +515,7 @@
 			if ($mensaje_error=="")
 				{
 					$accion_usuario=addslashes($accion_usuario);
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES ('$titulo','$estilo','$formulario','$tipo_accion','$accion_usuario','$visible','$peso','$retorno_titulo','$retorno_texto','$confirmacion_texto')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?)","$titulo||$estilo||$formulario||$tipo_accion||$accion_usuario||$visible||$peso||$retorno_titulo||$retorno_texto||$confirmacion_texto");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea boton $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
@@ -611,7 +611,7 @@ if ($accion=="editar_formulario")
 				//Si se trata de la edicion de un campo entonces busca su registro para agregar valores al form
 				if (@$popup_activo=="FormularioCampos")
 					{
-						$consulta_campo_editar=@ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE id='$campo' ");
+						$consulta_campo_editar=@ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE id=? ","$campo");
 						$registro_campo_editar = $consulta_campo_editar->fetch();
 					}
 				?>
@@ -821,7 +821,7 @@ if ($accion=="editar_formulario")
 										<select name="columna" class="selector_01" >
 											<?php
 												// Obtiene numero de columnas para el formulario
-												$consulta_columnas=ejecutar_sql("SELECT columnas FROM ".$TablasCore."formulario WHERE id='$formulario' ");
+												$consulta_columnas=ejecutar_sql("SELECT columnas FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
 												$registro_columnas = $consulta_columnas->fetch();
 												$columnas_formulario=$registro_columnas["columnas"];
 												for ($i=1;$i<=$columnas_formulario;$i++)
@@ -1351,7 +1351,7 @@ if ($accion=="editar_formulario")
 			 <?php
 
 
-				$consulta=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' ORDER BY columna,peso,titulo");
+				$consulta=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER BY columna,peso,titulo","$formulario");
 				while($registro = $consulta->fetch())
 					{
 						$peso_aumentado=$registro["peso"]+1;
@@ -1643,7 +1643,7 @@ if ($accion=="editar_formulario")
 
 
 				// Inicia presentacion de ventana de edicion de formulario
-				$consulta_form=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id='$formulario'");
+				$consulta_form=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
 				$registro_form = $consulta_form->fetch();
 				abrir_ventana($MULTILANG_FrmActualizar,'f2f2f2','100%');
 			?>
@@ -1802,9 +1802,9 @@ if ($accion=="editar_formulario")
 */
 	if ($accion=="eliminar_formulario")
 		{
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario WHERE id='$formulario'");
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario'");
-			auditar("Elimina formulario $id");
+			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
+			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario=? ","$formulario");
+			auditar("Elimina formulario $formulario");
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_formularios"></form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 		}
@@ -1830,7 +1830,7 @@ if ($accion=="editar_formulario")
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario SET titulo='$titulo',ayuda_titulo='$ayuda_titulo',ayuda_texto='$ayuda_texto',ayuda_imagen='$ayuda_imagen',tabla_datos='$tabla_datos',columnas='$columnas',javascript='$javascript' WHERE id='$formulario'");
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario SET titulo=?,ayuda_titulo=?,ayuda_texto=?,ayuda_imagen=?,tabla_datos=?,columnas=?,javascript=? WHERE id= ? ","$titulo||$ayuda_titulo||$ayuda_texto||$ayuda_imagen||$tabla_datos||$columnas||$javascript||$formulario");
 					auditar("Actualiza formulario $formulario para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
@@ -1876,7 +1876,7 @@ if ($accion=="editar_formulario")
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES ('$titulo','$ayuda_titulo','$ayuda_texto','$ayuda_imagen','$tabla_datos','$columnas','$javascript')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?)","$titulo||$ayuda_titulo||$ayuda_texto||$ayuda_imagen||$tabla_datos||$columnas||$javascript");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea formulario $id para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -1923,7 +1923,7 @@ if ($accion=="editar_formulario")
 			if ($mensaje_error=="")
 				{
 					// Busca datos y Crea copia del formulario
-					$consulta=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id='$formulario'");
+					$consulta=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
 					$registro = $consulta->fetch();
 					// Establece valores para cada campo a insertar en el nuevo form
 					$nuevo_titulo='[COPIA] '.$registro["titulo"];
@@ -1934,11 +1934,11 @@ if ($accion=="editar_formulario")
 					$columnas=$registro["columnas"];
 					$javascript=$registro["javascript"];
 					// Inserta el nuevo objeto al form
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES ('$nuevo_titulo','$ayuda_titulo','$ayuda_texto','$ayuda_imagen','$tabla_datos','$columnas','$javascript') ");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?) ","$nuevo_titulo||$ayuda_titulo||$ayuda_texto||$ayuda_imagen||$tabla_datos||$columnas||$javascript");
 					$id=$ConexionPDO->lastInsertId();
 					// Busca los elementos que componen el formulario para hacerles la copia
 					// Registros de formulario_objeto
-					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario'");
+					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario=?","$formulario");
 					while($registro = $consulta->fetch())
 						{
 							//Establece valores para cada campo a insertar
@@ -1975,10 +1975,10 @@ if ($accion=="editar_formulario")
 							$valor_maximo=$registro["valor_maximo"];
 							$valor_salto=$registro["valor_salto"];
 							//Inserta el nuevo objeto al form
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES ('$tipo','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$nuevo_formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores','$valor_etiqueta','$url_iframe','$objeto_en_ventana','$informe_vinculado','$maxima_longitud','$valor_minimo','$valor_maximo','$valor_salto') ");
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$tipo||$titulo||$campo||$ayuda_titulo||$ayuda_texto||$nuevo_formulario||$peso||$columna||$obligatorio||$visible||$valor_predeterminado||$validacion_datos||$etiqueta_busqueda||$ajax_busqueda||$valor_unico||$solo_lectura||$teclado_virtual||$ancho||$alto||$barra_herramientas||$fila_unica||$lista_opciones||$origen_lista_opciones||$origen_lista_valores||$valor_etiqueta||$url_iframe||$objeto_en_ventana||$informe_vinculado||$maxima_longitud||$valor_minimo||$valor_maximo||$valor_salto");
 						}				
 					// Registros de formulario_boton
-					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario'");
+					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
 					while($registro = $consulta->fetch())
 						{
 							//Establece valores para cada campo a insertar
@@ -1993,7 +1993,7 @@ if ($accion=="editar_formulario")
 							$retorno_texto=$registro["retorno_texto"];
 							$confirmacion_texto=$registro["confirmacion_texto"];
 							//Inserta el nuevo objeto al form
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES ('$titulo','$estilo','$nuevo_formulario','$tipo_accion','$accion_usuario','$visible','$peso','$retorno_titulo','$retorno_texto','$confirmacion_texto') ");
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?) ","$titulo||$estilo||$nuevo_formulario||$tipo_accion||$accion_usuario||$visible||$peso||$retorno_titulo||$retorno_texto||$confirmacion_texto");
 						}
 					auditar("Crea copia de formulario $formulario");
 

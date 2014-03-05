@@ -48,7 +48,7 @@
 	//Determina si es un primer inicio o no hay configuracion
 	if (!file_exists("core/configuracion.php")) { header("Location: ins/"); die();}
 	else include("core/configuracion.php");
-
+	
 	//Incluye idioma espanol (oficial), luego sobreescribe vbles por configuracion de usuario
 	include("inc/practico/idiomas/es.php");
 	include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");

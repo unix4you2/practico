@@ -162,13 +162,13 @@
 if ($accion=="copiar_permisos")
 	{
 		// Elimina opciones existentes
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario='$usuariod'");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$usuariod");
 		// Copia permisos
-		$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario='$usuarioo'");
+		$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$usuarioo");
 		while($registro = $resultado->fetch())
 			{
 				$menuinsertar=$registro["menu"];
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES ('$usuariod','$menuinsertar')");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuariod||$menuinsertar");
 			}
 		auditar("Copia permisos de $usuarioo al usuario $usuariod");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -290,7 +290,7 @@ if ($accion=="actualizar_clave")
 
 		if ($mensaje_error=="")
 			{
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login='$Login_usuario'");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login=? ","$Login_usuario");
 				auditar("Actualiza clave de acceso");
 				echo '<script language="javascript"> document.core_ver_menu.submit(); </script>';
 			}
@@ -330,7 +330,7 @@ if ($accion=="actualizar_clave")
 if ($accion=="eliminar_informe_usuario")
 	{
 		// Elimina el informe
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe='$informe' AND usuario='$usuario'");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe=? AND usuario=? ","$informe||$usuario");
 		auditar("Elimina informe $informe a $usuario");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="informes_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -364,7 +364,7 @@ if ($accion=="eliminar_informe_usuario")
 		{
 			$mensaje_error="";
 			// Busca si existe ese permiso para el usuario
-			$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_informe." FROM ".$TablasCore."usuario_informe WHERE usuario='$usuario' AND informe='$informe'");
+			$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_informe." FROM ".$TablasCore."usuario_informe WHERE usuario=? AND informe=? ","$usuario||$informe");
 			$registro_menu = $resultado->fetch();
 			if($registro_menu["informe"]!="")
 				$mensaje_error=$MULTILANG_UsrErrInf;
@@ -372,7 +372,7 @@ if ($accion=="eliminar_informe_usuario")
 			if ($mensaje_error=="")
 				{
 					// Guarda el permiso para el usuario
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES ('$usuario','$informe')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES (?,?)","$usuario||$informe");
 					auditar("Agrega informe $informe al usuario $usuario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 							<input type="Hidden" name="accion" value="informes_usuario">
@@ -464,7 +464,7 @@ if ($accion=="informes_usuario")
 					<td align="left"></td>
 				</tr>';
 
-			$resultado=ejecutar_sql("SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe,".$TablasCore."usuario_informe WHERE ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$usuario'");
+			$resultado=ejecutar_sql("SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe,".$TablasCore."usuario_informe WHERE ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario=? ","$usuario");
 			while($registro = $resultado->fetch())
 				{
 					echo '<tr>
@@ -515,7 +515,7 @@ if ($accion=="informes_usuario")
 if ($accion=="eliminar_permiso")
 	{
 		// Elimina los datos de la opcion
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=$menu AND usuario='$usuario'");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? AND usuario=? ","$menu||$usuario");
 		auditar("Elimina permiso $menu a $usuario");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="permisos_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -549,7 +549,7 @@ if ($accion=="eliminar_permiso")
 		{
 			$mensaje_error="";
 			// Busca si existe ese permiso para el usuario
-			$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario='$usuario' AND menu='$menu'");
+			$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario=? AND menu=? ","$usuario||$menu");
 			$registro_menu = $resultado->fetch();
 			if($registro_menu["menu"]!="")
 				$mensaje_error=$MULTILANG_UsrErrInf;
@@ -557,7 +557,7 @@ if ($accion=="eliminar_permiso")
 			if ($mensaje_error=="")
 				{
 					// Guarda el permiso para el usuario
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES ('$usuario','$menu')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuario||$menu");
 					auditar("Agrega permiso $menu al usuario $usuario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 							<input type="Hidden" name="accion" value="permisos_usuario">
@@ -613,7 +613,7 @@ if ($accion=="permisos_usuario")
 				<select name="usuarioo" class="selector_01" >
 						<option value=""><?php echo $MULTILANG_UsrDelPer; ?></option>
 						<?php
-							$resultado=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login<>'admin' AND login<>'$usuario' ORDER BY login");
+							$resultado=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login<>'admin' AND login<>? ORDER BY login","$usuario");
 							while($registro = $resultado->fetch())
 								{
 									echo '<option value="'.$registro["login"].'">'.$registro["login"].'</option>';
@@ -671,7 +671,7 @@ if ($accion=="permisos_usuario")
 					<td align="left"></td>
 				</tr>';
 
-			$resultado=ejecutar_sql("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu,".$TablasCore."usuario_menu WHERE ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$usuario'");
+			$resultado=ejecutar_sql("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu,".$TablasCore."usuario_menu WHERE ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario=? ","$usuario");
 			while($registro = $resultado->fetch())
 				{
 					echo '<tr>
@@ -730,9 +730,9 @@ if ($accion=="permisos_usuario")
 				Ver tambien:
 					<listar_usuarios> | <agregar_usuario> | <cambiar_estado_usuario>
 			*/
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario WHERE login='$uid_especifico'");
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario='$uid_especifico'");
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE usuario='$uid_especifico'");
+			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario WHERE login=? ","$uid_especifico");
+			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$uid_especifico");
+			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE usuario=? ","$uid_especifico");
 			auditar("Elimina el usuario $uid_especifico");
 			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 		}
@@ -766,10 +766,10 @@ if ($accion=="permisos_usuario")
 					<listar_usuarios> | <eliminar_usuario>
 			*/
 			if ($estado==1)
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET estado=0 WHERE login='$uid_especifico'");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET estado=0 WHERE login=? ","$uid_especifico");
 			else
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET estado=1, ultimo_acceso='$fecha_operacion' WHERE login='$uid_especifico'");
-			auditar("Cambia estado del usuario $uid_especifico y actualiza ultimo acceso a $fecha_operacion");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET estado=1, ultimo_acceso=? WHERE login=? ","$fecha_operacion||$uid_especifico");
+			auditar("Cambia estado del usuario $uid_especifico");
 			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 		}
 
@@ -803,7 +803,7 @@ if ($accion=="permisos_usuario")
 			$mensaje_error="";
 
 			// Verifica que no existe el usuario
-			$resultado_usuario=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login='$login'");
+			$resultado_usuario=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login=? ","$login");
 			$registro_usuario = $resultado_usuario->fetch();
 			if ($registro_usuario["login"]!="")
 				$mensaje_error=$MULTILANG_UsrErrCrea1;
@@ -823,7 +823,7 @@ if ($accion=="permisos_usuario")
 					// Inserta datos del usuario
 					$clavemd5=MD5($clave);
 					$pasomd5=MD5($LlaveDePaso);
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES ('$login','$clavemd5','$nombre','$descripcion',$estado,'$nivel','$correo','$fecha_operacion','$pasomd5')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?)","$login||$clavemd5||$nombre||$descripcion||$estado||$nivel||$correo||$fecha_operacion||$pasomd5");
 					auditar("Agrega usuario $login para $nombre");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
@@ -1230,7 +1230,7 @@ if ($accion=="ver_seguimiento_especifico")
 						<td align="center" bgcolor="#d6d6d6"><b>'.$MULTILANG_Fecha.' (AAAA-MM-DD)</b></td>
 						<td align="center" bgcolor="#d6d6d6"><b>'.$MULTILANG_Hora.' (HH-MM-SS)</b></td>
 					</tr>';
-				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria WHERE usuario_login='$uid_especifico' ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg");
+				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria WHERE usuario_login=? ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg","$uid_especifico");
 				while($registro = $resultado->fetch())
 					{
 						echo '<tr><td align="center">'.$registro["id"].'</td>

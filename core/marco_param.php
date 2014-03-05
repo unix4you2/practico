@@ -47,7 +47,7 @@
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."parametros SET nombre_empresa_corto='$nombre_empresa_corto',nombre_aplicacion='$nombre_aplicacion',version='$version',funciones_personalizadas='$funciones_personalizadas' ");
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."parametros SET nombre_empresa_corto=?,nombre_aplicacion=?,version=?,funciones_personalizadas=? ","$nombre_empresa_corto||$nombre_aplicacion||$version||$funciones_personalizadas");
 					auditar("Actualiza parametros de aplicacion");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit(); </script>';
 				}
@@ -72,7 +72,7 @@
 				abrir_ventana($NombreRAD.' - '.$MULTILANG_ParametrosApp,'#f2f2f2',''); 
 
 				//Consulta parametros de la aplicacion
-				$resultado=ejecutar_sql("SELECT * from ".$TablasCore."parametros ");
+				$resultado=ejecutar_sql("SELECT id,$ListaCamposSinID_parametros from ".$TablasCore."parametros ");
 				$parametros = $resultado->fetch();
 
 			?>

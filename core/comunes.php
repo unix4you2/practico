@@ -290,11 +290,17 @@
 				Salida:
 					Cadenas y variables filtradas sobre sus valores globales
 			*/
-		global $accion;
+		global $accion,$error_titulo,$error_descripcion;
 		// Escapar siempre las acciones pues deberian tener solo letras, numeros y underlines.
 		$accion=escapar_contenido($accion);
 		$accion = preg_replace("/[^A-Za-z0-9_]/", "", $accion);
-
+		
+		// Escapa siempre los mensajes de error
+		$error_titulo=escapar_contenido($error_titulo);
+		$error_titulo = preg_replace("/[^A-Za-z0-9_ ]/", "", $error_titulo);
+		$error_descripcion=escapar_contenido($error_descripcion);
+		$error_descripcion = preg_replace("/[^A-Za-z0-9_ ]/", "", $error_descripcion);
+		
 		// Escapa otras variables de uso comun
 		global $error_titulo,$error_descripcion;
 		$error_titulo=escapar_contenido($error_titulo);

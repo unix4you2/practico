@@ -76,7 +76,7 @@ if ($WSId=="verificar_credenciales")
 		if (!$error_parametros && ($Auth_TipoMotor=="practico" || $uid=="admin"))
 			{
 				$ClaveEnMD5=hash("md5", $clave);
-				$resultado_usuario=ejecutar_sql("SELECT * FROM ".$TablasCore."usuario WHERE estado=1 AND login='$uid' AND clave='$ClaveEnMD5' ");
+				$resultado_usuario=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE estado=1 AND login=? AND clave=? ","$uid||$ClaveEnMD5");
 				$registro = $resultado_usuario->fetch();
 				if ($registro["login"]!="")
 					$ok_login_verifica='1';
@@ -102,7 +102,7 @@ if ($WSId=="verificar_credenciales")
 					$ok_login_verifica='1';
 				// Si logra el acceso por LDAP consulta datos del usuario sobre Practico para llenar el XML pero
 				// Si el usuario no existe se devolvera el valor de aceptacion solamente y el resto vacios
-				$resultado_usuario=ejecutar_sql("SELECT * FROM ".$TablasCore."usuario WHERE login='$uid' ");
+				$resultado_usuario=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login=? ","$uid");
 				$registro = $resultado_usuario->fetch();
 				//echo $auth_ldap_cadena;
 			}
@@ -246,8 +246,9 @@ if ($WSId=="verificar_credenciales")
 
 			// Lleva a auditoria con query manual por la falta de $Login_Usuario
 			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('".$registro["login"]."','Ingresa al sistema desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");
+			auditar("Ingresa al sistema desde $direccion_auditoria",$_SESSION["Login_usuario"]);
 			// Actualiza fecha del ultimo ingreso para el usuario
-			ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso='$fecha_operacion' WHERE login='".$registro["login"]."'");
+			ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login='".$registro["login"]."'","$fecha_operacion");
 
 			// Redirecciona al menu
 			header("Location: index.php");

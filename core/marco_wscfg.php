@@ -47,7 +47,7 @@
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."llaves_api (".$ListaCamposSinID_llaves_api.") VALUES ('$nombre','$llave','$secreto','$uri','$dominio_autorizado','$ip_autorizada','$funciones_autorizadas')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."llaves_api (".$ListaCamposSinID_llaves_api.") VALUES (?,?,?,?,?,?,?)","$nombre||$llave||$secreto||$uri||$dominio_autorizado||$ip_autorizada||$funciones_autorizadas");
 					auditar("Agrega llave API para $nombre");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit(); </script>';
 				}
@@ -77,7 +77,7 @@
 			$mensaje_error="";
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."llaves_api SET uri='$uri',dominio_autorizado='$dominio_autorizado',ip_autorizada='$ip_autorizada',funciones_autorizadas='$funciones_autorizadas' WHERE id='$id'");
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."llaves_api SET uri=?,dominio_autorizado=?,ip_autorizada=?,funciones_autorizadas=? WHERE id=? ","$uri||$dominio_autorizado||$ip_autorizada||$funciones_autorizadas||$id");
 					auditar("Actualiza llave API para $id");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit(); </script>';
 				}
@@ -108,7 +108,7 @@
 			$mensaje_error="";
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."llaves_api WHERE id='$id'");
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."llaves_api WHERE id=? ","$id");
 					auditar("Elimina llave API para $id");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit(); </script>';
 				}

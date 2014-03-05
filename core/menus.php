@@ -56,7 +56,7 @@
 if ($accion=="actualizar_menu")
 	{
 		// Actualiza los datos del item
-		ejecutar_sql_unaria("UPDATE ".$TablasCore."menu SET texto='$texto',padre='$padre',peso='$peso',url='$url',posible_clic='$posible_clic',tipo_comando='$tipo_comando',comando='$comando',nivel_usuario='$nivel_usuario',columna='$columna',posible_arriba='$posible_arriba',posible_centro='$posible_centro',posible_escritorio='$posible_escritorio',seccion='$seccion',imagen='$imagen' WHERE id=$id");
+		ejecutar_sql_unaria("UPDATE ".$TablasCore."menu SET texto=?,padre=?,peso=?,url=?,posible_clic=?,tipo_comando=?,comando=?,nivel_usuario=?,columna=?,posible_arriba=?,posible_centro=?,posible_escritorio=?,seccion=?,imagen=? WHERE id=? ","$texto||$padre||$peso||$url||$posible_clic||$tipo_comando||$comando||$nivel_usuario||$columna||$posible_arriba||$posible_centro||$posible_escritorio||$seccion||$imagen||$id");
 		auditar("Actualiza menu item $texto c&oacute;digo $id");
 		echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 	}
@@ -87,7 +87,7 @@ if ($accion=="detalles_menu")
 		abrir_ventana($MULTILANG_MnuTitEditar,'f2f2f2','');
 
 		// Busca detalles del item
-		$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE id=$id");
+		$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE id=? ","$id");
 		$registro = $resultado->fetch();
 		?>
 
@@ -398,9 +398,9 @@ if ($accion=="eliminar_menu")
 			<administrar_menu> | <detalles_menu>
 		*/
 		// Elimina los datos de la opcion
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."menu WHERE id=$id");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."menu WHERE id=? ","$id");
 		// Elimina el enlace para todos los usuarios que utilizan esa opcion
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=$id");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? ","$id");
 		auditar("Elimina en menu $id");
 		echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 	}
@@ -443,7 +443,7 @@ if ($accion=="eliminar_menu")
 			if ($mensaje_error=="")
 				{
 					// Guarda los datos del comando o item de menu
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES ('$texto','$padre','$peso','$url','$posible_clic','$tipo_comando','$comando','$nivel_usuario','$columna','$posible_arriba','$posible_centro','$posible_escritorio','$seccion','$imagen')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)","$texto||$padre||$peso||$url||$posible_clic||$tipo_comando||$comando||$nivel_usuario||$columna||$posible_arriba||$posible_centro||$posible_escritorio||$seccion||$imagen");
 					auditar("Agrega en menu: $texto");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}

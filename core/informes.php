@@ -53,7 +53,7 @@
 */
 	if ($accion=="eliminar_accion_informe")
 		{
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_boton WHERE id='$boton' ");
+			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_boton WHERE id=? ","$boton");
 			auditar("Elimina accion del informe $informe");
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="accion" value="editar_informe">
@@ -91,7 +91,7 @@
 if ($accion=="actualizar_agrupamiento_informe")
 	{
 		// Actualiza los datos
-		ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET agrupamiento='$agrupamiento',ordenamiento='$ordenamiento' WHERE id='$informe'");
+		ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET agrupamiento=?,ordenamiento=? WHERE id=? ","$agrupamiento||$ordenamiento||$informe");
 		auditar("Actualiza agrupamiento/ordenamiento informe $informe");
 		echo '
 			<form name="regresar" action="'.$ArchivoCORE.'" method="POST">
@@ -139,7 +139,7 @@ if ($accion=="actualizar_grafico_informe")
 				$cadena_formato.=$campo_valor_serie_1."!".$campo_valor_serie_2."!".$campo_valor_serie_3."!".$campo_valor_serie_4."!".$campo_valor_serie_5;
 
 				// Actualiza los datos
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET formato_grafico='$cadena_formato' WHERE id='$informe'");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET formato_grafico=? WHERE id=? ","$cadena_formato||$informe");
 				auditar("Actualiza informe grafico $informe");
 				echo '
 					<form name="regresar" action="'.$ArchivoCORE.'" method="POST">
@@ -192,9 +192,14 @@ if ($accion=="actualizar_informe")
 		if ($mensaje_error=="")
 			{
 				// Actualiza los datos
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET genera_pdf='$genera_pdf',formato_final='$formato_final', alto='$alto',ancho='$ancho',titulo='$titulo',descripcion='$descripcion',categoria='$categoria',nivel_usuario='$nivel_usuario' WHERE id='$id'");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET genera_pdf=?,formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=?,nivel_usuario=? WHERE id=? ","$genera_pdf||$formato_final||$alto||$ancho||$titulo||$descripcion||$categoria||$nivel_usuario||$id");
 				auditar("Actualiza informe $id");
-				echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="accion" value="editar_informe">
+					<input type="Hidden" name="informe" value="'.$id.'">
+					</form>
+					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				//echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 			}
 		else
 			{
@@ -232,7 +237,7 @@ if ($accion=="actualizar_informe")
 */
 if ($accion=="eliminar_informe_condicion")
 	{
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE id='$condicion'");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE id=? ","$condicion");
 		@auditar("Elimina condicion $condicion");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="accion" value="editar_informe">
@@ -276,11 +281,11 @@ if ($accion=="eliminar_informe_condicion")
 				{
 					//Busca el peso del ultimo elemento para agregar el nuevo con peso+1
 					$peso=1;
-					$consulta_peso=ejecutar_sql("SELECT MAX(peso) as peso FROM ".$TablasCore."informe_condiciones WHERE informe='$informe'");
+					$consulta_peso=ejecutar_sql("SELECT MAX(peso) as peso FROM ".$TablasCore."informe_condiciones WHERE informe=? ","$informe");
 					$registro = $consulta_peso->fetch();
 					if($registro[0]!="")$peso=$registro[0] + 1;
 					//Agrega la condicion
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_condiciones (".$ListaCamposSinID_informe_condiciones.") VALUES ('$informe','$valor_i','$valor_o','$valor_d','$peso')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_condiciones (".$ListaCamposSinID_informe_condiciones.") VALUES (?,?,?,?,?)","$informe||$valor_i||$valor_o||$valor_d||$peso");
 					auditar("Agrega condicion al informe $informe");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_informe">
 						<input type="Hidden" name="informe" value="'.$informe.'">
@@ -323,7 +328,7 @@ if ($accion=="eliminar_informe_condicion")
 */
 if ($accion=="eliminar_informe_campo")
 	{
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_campos WHERE id='$campo'");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_campos WHERE id=? ","$campo");
 		auditar("Elimina campo $campo del informe $informe");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="accion" value="editar_informe">
@@ -366,7 +371,7 @@ if ($accion=="eliminar_informe_campo")
 			if ($mensaje_error=="")
 				{
 					$campo_definitivo=$campo_manual.$campo_datos;
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_campos (".$ListaCamposSinID_informe_campos.") VALUES ('$informe','$campo_definitivo','$alias_manual')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_campos (".$ListaCamposSinID_informe_campos.") VALUES (?,?,?)","$informe||$campo_definitivo||$alias_manual");
 					auditar("Agrega campo $campo_definitivo al informe $informe");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_informe">
 						<input type="Hidden" name="informe" value="'.$informe.'">
@@ -409,7 +414,7 @@ if ($accion=="eliminar_informe_campo")
 */
 if ($accion=="eliminar_informe_tabla")
 	{
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_tablas WHERE id='$tabla'");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_tablas WHERE id=? ","$tabla");
 		auditar("Elimina tabla $tabla del informe $informe");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="accion" value="editar_informe">
@@ -452,7 +457,7 @@ if ($accion=="eliminar_informe_tabla")
 			if ($mensaje_error=="")
 				{
 					$tabla_definitiva=$tabla_manual.$tabla_datos;
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_tablas (".$ListaCamposSinID_informe_tablas.") VALUES ('$informe','$tabla_definitiva','$alias_manual')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_tablas (".$ListaCamposSinID_informe_tablas.") VALUES (?,?,?)","$informe||$tabla_definitiva||$alias_manual");
 					auditar("Agrega tabla $tabla_definitiva al informe $informe");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_informe">
 						<input type="Hidden" name="informe" value="'.$informe.'">
@@ -499,8 +504,7 @@ if ($accion=="eliminar_informe_tabla")
 			if ($tipo_accion=="") $mensaje_error=$MULTILANG_InfErr5;
 			if ($mensaje_error=="")
 				{
-					$accion_usuario=addslashes($accion_usuario);
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton (".$ListaCamposSinID_informe_boton.") VALUES ('$titulo','$estilo','$informe','$tipo_accion','$accion_usuario','$visible','$peso','$confirmacion_texto')");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton (".$ListaCamposSinID_informe_boton.") VALUES (?,?,?,?,?,?,?,?)","$titulo||$estilo||$informe||$tipo_accion||$accion_usuario||$visible||$peso||$confirmacion_texto");
 					auditar("Crea boton $id para informe $informe");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_informe">
 						<input type="Hidden" name="informe" value="'.$informe.'">
@@ -561,7 +565,7 @@ if ($accion=="eliminar_informe_tabla")
 if ($accion=="editar_informe")
 	{
 		// Busca datos del informe
-		$resultado_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id='$informe'");
+		$resultado_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
 		$registro_informe = $resultado_informe->fetch();
   ?>
 
@@ -627,7 +631,7 @@ if ($accion=="editar_informe")
 					</tr>
 				 <?php
 
-						$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_tablas." FROM ".$TablasCore."informe_tablas WHERE informe='$informe' ORDER BY valor_tabla");
+						$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_tablas." FROM ".$TablasCore."informe_tablas WHERE informe=? ORDER BY valor_tabla","$informe");
 						while($registro = $consulta_forms->fetch())
 							{
 								echo '<tr>
@@ -675,7 +679,7 @@ if ($accion=="editar_informe")
 								<select  name="campo_datos" class="Combos" >
 									<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
 									<?php
-											$resultado=ejecutar_sql("SELECT valor_tabla FROM ".$TablasCore."informe_tablas WHERE informe='$informe'");
+											$resultado=ejecutar_sql("SELECT valor_tabla FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
 											//$resultado=consultar_tablas(); //Presenta todas las tablas
 											while ($registro = $resultado->fetch())
 												{
@@ -729,7 +733,7 @@ if ($accion=="editar_informe")
 					</tr>
 				 <?php
 
-						$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe='$informe' ");
+						$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
 						while($registro = $consulta_forms->fetch())
 							{
 								echo '<tr>
@@ -785,7 +789,7 @@ if ($accion=="editar_informe")
 								<select  name="valor_izq" class="Combos" >
 									<option value=""><?php echo $MULTILANG_Vacio; ?></option>
 									<?php
-										$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
+										$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
 										while($registro = $consulta_forms->fetch())
 											{
 												echo '<option value="'.$registro["valor_campo"].'">'.$registro["valor_campo"].'</option>';
@@ -810,7 +814,7 @@ if ($accion=="editar_informe")
 								<select  name="valor_der" class="Combos" >
 									<option value=""><?php echo $MULTILANG_Vacio; ?></option>
 									<?php
-										$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
+										$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
 										while($registro = $consulta_forms->fetch())
 											{
 												echo '<option value="'.$registro["valor_campo"].'">'.$registro["valor_campo"].'</option>';
@@ -849,7 +853,7 @@ if ($accion=="editar_informe")
 				<table width="100%" border="0" cellspacing="2" align="CENTER"  class="TextosVentana">
 				 <?php
 
-						$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_condiciones." FROM ".$TablasCore."informe_condiciones WHERE informe='$informe' ORDER BY peso");
+						$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_condiciones." FROM ".$TablasCore."informe_condiciones WHERE informe=? ORDER BY peso","$informe");
 						while($registro = $consulta_forms->fetch())
 							{
 								$peso_aumentado=$registro["peso"]+1;
@@ -928,7 +932,7 @@ if ($accion=="editar_informe")
 						<?php
 							//Consulta el formato de grafico y datos de series para ponerlo en los campos
 							//Dado por: Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
-							$consulta_formato_grafico=ejecutar_sql("SELECT formato_grafico FROM ".$TablasCore."informe WHERE id='$informe'");
+							$consulta_formato_grafico=ejecutar_sql("SELECT formato_grafico FROM ".$TablasCore."informe WHERE id=? ","$informe");
 							$registro_formato = $consulta_formato_grafico->fetch();
 							$formato_base=explode("|",$registro_formato["formato_grafico"]);
 							$tipo_grafico_leido=$formato_base[0];
@@ -951,7 +955,7 @@ if ($accion=="editar_informe")
 									<select name="campo_etiqueta_serie_<?php echo $cs; ?>" class="Combos" >
 										<option value=""></option>
 										<?php
-										$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
+										$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
 										while($registro = $consulta_forms->fetch())
 											{
 												$estado_seleccionado="";
@@ -968,7 +972,7 @@ if ($accion=="editar_informe")
 									<select name="campo_valor_serie_<?php echo $cs; ?>" class="Combos">
 										<option value=""></option>
 									<?php
-										$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
+										$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
 										while($registro = $consulta_forms->fetch())
 											{
 												$estado_seleccionado="";
@@ -1028,7 +1032,7 @@ if ($accion=="editar_informe")
 		<div id='FormularioAgrupacion' class="FormularioPopUps">
 				<?php
 				abrir_ventana($MULTILANG_InfAgrupa,'#BDB9B9','600'); 
-				$consulta_agrupacion=ejecutar_sql("SELECT ordenamiento,agrupamiento FROM ".$TablasCore."informe WHERE id='$informe'");
+				$consulta_agrupacion=ejecutar_sql("SELECT ordenamiento,agrupamiento FROM ".$TablasCore."informe WHERE id=? ","$informe");
 				$registro_agrupacion = $consulta_agrupacion->fetch();
 				?>
 				<form name="datosformcogrup" id="datosformcogrup" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
@@ -1146,7 +1150,7 @@ if ($accion=="editar_informe")
 								<select name="campo_vinculoformulario" class="Combos" >
 									<option value=""></option>
 									<?php
-									$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
+									$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
 									while($registro = $consulta_forms->fetch())
 										{
 											$estado_seleccionado="";
@@ -1225,7 +1229,7 @@ if ($accion=="editar_informe")
 							<td></td>
 						</tr>
 			 <?php
-				$consulta_botones=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_boton." FROM ".$TablasCore."informe_boton WHERE informe='$informe' ORDER BY peso,id");
+				$consulta_botones=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_boton." FROM ".$TablasCore."informe_boton WHERE informe=? ORDER BY peso,id","$informe");
 				while($registro = $consulta_botones->fetch())
 					{
 						$peso_aumentado=$registro["peso"]+1;
@@ -1537,12 +1541,12 @@ if ($accion=="editar_informe")
 */
 if ($accion=="eliminar_informe")
 	{
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe WHERE id='$informe'");
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_campos WHERE informe='$informe'");
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_tablas WHERE informe='$informe'");
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE informe='$informe'");
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe='$informe'");
-		auditar("Elimina informe $id");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe WHERE id=? ","$informe");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE informe=? ","$informe");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe=? ","$informe");
+		auditar("Elimina informe $informe");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_informes"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
@@ -1573,7 +1577,7 @@ if ($accion=="guardar_informe")
 		if ($categoria=="") $mensaje_error.=$MULTILANG_InfErrInforme2."<br>";
 		if ($mensaje_error=="")
 			{
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES ('$titulo','$descripcion','$categoria','$agrupamiento','$ordenamiento','$nivel_usuario','$ancho','$alto','$formato_final','|!|!|!|','$genera_pdf')");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,'|!|!|!|',?)","$titulo||$descripcion||$categoria||$agrupamiento||$ordenamiento||$nivel_usuario||$ancho||$alto||$formato_final||$genera_pdf");
 				$id=$ConexionPDO->lastInsertId();
 				auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -1619,7 +1623,7 @@ if ($accion=="administrar_informes")
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_informe">
 			<div align=center>
-						
+
 			<br><?php echo $MULTILANG_InfDetalles; ?>:
 				<table class="TextosVentana">
 					<tr>
