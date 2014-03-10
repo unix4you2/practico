@@ -43,11 +43,11 @@
 	if ($accion=="guardar_params")
 		{
 			$mensaje_error="";
-			if ($nombre_empresa_corto=="" || $nombre_aplicacion=="" || $version=="") $mensaje_error.=$MULTILANG_ErrorDatos.'<br>';
+			if ($nombre_empresa_corto=="" || $nombre_aplicacion=="" || $version_nueva=="") $mensaje_error.=$MULTILANG_ErrorDatos.'<br>';
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."parametros SET nombre_empresa_corto=?,nombre_aplicacion=?,version=?,funciones_personalizadas=? ","$nombre_empresa_corto||$nombre_aplicacion||$version||$funciones_personalizadas");
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."parametros SET nombre_empresa_corto=?,nombre_aplicacion=?,version=?,funciones_personalizadas=? ","$nombre_empresa_corto||$nombre_aplicacion||$version_nueva||$funciones_personalizadas");
 					auditar("Actualiza parametros de aplicacion");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit(); </script>';
 				}
@@ -119,7 +119,7 @@
 							</td>
 							<td valign=top>
 								<font size=2 color=black>
-								<input type="text" name="version" size="10" class="CampoTexto" value="<?php echo $parametros["version"]; ?>">
+								<input type="text" name="version_nueva" size="10" class="CampoTexto" value="<?php echo $parametros["version"]; ?>">
 								</font>
 							</td>
 						</tr>

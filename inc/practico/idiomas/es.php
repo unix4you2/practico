@@ -481,7 +481,7 @@
 	$MULTILANG_InfGrafico4='Grafico de linea (multiples series)';
 	$MULTILANG_InfGrafico5='Barras verticales';
 	$MULTILANG_InfGrafico6='Barras verticales (multiples series)';
-	$MULTILANG_InfGrafico6='Grafico de torta (solo una serie)';
+	$MULTILANG_InfGrafico7='Grafico de torta (solo una serie)';
 	$MULTILANG_InfActGraf='Actualizar formato del gr&aacute;fico';
 	$MULTILANG_InfAgrupa='Especifica criterios de agrupaci&oacute;n y ordenamiento';
 	$MULTILANG_InfReco3='Utilice solamente campos definidos en su consulta.';

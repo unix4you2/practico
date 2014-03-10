@@ -392,8 +392,8 @@
 			//Concatena el campo manual en caso de encontrar alguno
 			$campo=$campo.$campo_manual;
 
-			if ($valor_unico=="on") $valor_unico=1; else $valor_unico=0;
-			if ($ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
+			if (@$valor_unico=="on") $valor_unico=1; else $valor_unico=0;
+			if (@$ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
 			$tipo_objeto=$tipo;
 			if ($titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error=$MULTILANG_ErrFrmCampo1;
 			if ($campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error=$MULTILANG_ErrFrmCampo2;
@@ -402,7 +402,7 @@
 					//Genera la lista de campos a ser actualizados desde la definicion de tabla para no olvidar ninguno
 					$ListaCampos=explode(",",$ListaCamposSinID_formulario_objeto);
 					for ($i=0; $i<count($ListaCampos);$i++)
-						$ListaCamposyValores.=$ListaCampos[$i]."='".$$ListaCampos[$i]."',";
+						@$ListaCamposyValores.=$ListaCampos[$i]."='".$$ListaCampos[$i]."',";
 					$ListaCamposyValores.="id=id"; //Agregado para evitar coma final
 
 					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario_objeto SET ".$ListaCamposyValores." WHERE id=?","$idcampomodificado");
