@@ -35,14 +35,19 @@
 	$MilisegundosPagina=10000;
 
 	//Definicion de maquinas a monitorear
-	$Maquinas[]=array(Nombre => "Sofia Servicio Web",	Host => "localhost",	Puerto => "80",		TipoMonitor=>"socket",	Icono=> "icn_rdp.png");
-	$Maquinas[]=array(Nombre => "Sofia SSH",			Host => "localhost",	Puerto => "83",		TipoMonitor=>"socket",	Icono=> "");
-	$Maquinas[]=array(Nombre => "Sofia MySQL",			Host => "192.168.1.250",	Puerto => "5060",	TipoMonitor=>"socket",	Icono=> "");
-	$Maquinas[]=array(Nombre => "Remoto Bogota",		Host => "190.85.123.108",	Puerto => "820",	TipoMonitor=>"ping",	Icono=> "");
+	$Maquinas[]=array(Nombre => "Servicio Web",	Host => "localhost",	Puerto => "80",		TipoMonitor=>"socket",	Icono=> "icn_rdp.png");
+	$Maquinas[]=array(Nombre => "MySQL",			Host => "localhost",	Puerto => "344306",	TipoMonitor=>"socket",	Icono=> "");
+
 	//Comandos de monitoreo por shell validos
 	$ComandosShell[]=array(Nombre => "Procesos",	Comando=>"ps -aux",	Ancho=>"80",	Alto=>"6");
 	//Comandos monitoreo SQL
-	$ComandosSQL[]=array(Nombre => "Consulta SQL",	Comando=>"SELECT COUNT(*) as Conteo FROM core_usuario",	TamanoResult=>"30",	OcultarTitulos=>"1");	
+	$ComandosSQL[]=array(Nombre => "Consulta SQL",	Comando=>"SELECT COUNT(*) as conteos FROM usuario",	TamanoResult=>"30",	OcultarTitulos=>"1");	
+	$ComandosSQL[]=array(Nombre => "Operaciones",	Comando=>"SELECT MAX(codigo) as conteo3 FROM auditoria",	TamanoResult=>"30",	OcultarTitulos=>"1");
+
+	//Imagenes
+	$ImagenesRRD[]=array(Nombre => "Imagen1",	Path=>"../img/icn_03.gif",	Ancho=>"300",	Alto=>"100",	Salto=>"0");	
+	$ImagenesRRD[]=array(Nombre => "Imagen2",	Path=>"../img/icn_02.gif",	Ancho=>"300",	Alto=>"100",	Salto=>"0");
+
 
 	//Path imagenes e iconos y sus propiedades
 	$Path_imagenes="img/";
@@ -342,3 +347,20 @@
 	echo '<br><br>';
 	for ($i=0;$i<count($ImagenesRRD);$i++)
 		PresentarImagen($ImagenesRRD[$i]);
+		
+	// Si encuentra algun error en el monitoreo reproduce la alarma
+	if ($ErroresMonitoreoPractico)
+		{
+			$Ruta_Servidor="http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+			$Ruta_Servidor=str_replace(basename($_SERVER['PHP_SELF']),"",$Ruta_Servidor);
+			$Ruta_Servidor.=$Sonido_alarma;
+			//echo "<hr>".$Ruta_Servidor;
+			//$Sonido_alarma=$Ruta_Servidor;
+
+			//Tipos de reproduccion
+			//echo '<embed height="50" width="100" src="'.$Sonido_alarma.'">';
+			//echo '<object height="50" width="100" data="'.$Sonido_alarma.'"></object>';
+			//echo '<bgsound src="'.$Sonido_alarma.'" loop="1"></bgsound>';
+			//echo '<audio autoplay id="bgsound"><source src="'.$Sonido_alarma.'" type="audio/mp3"><p>Navegador no soporta Audio en HTML5</p></audio>';
+			echo '<iframe src="'.$Ruta_Servidor.'" width="0" height="0"></iframe>';
+		}
