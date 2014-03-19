@@ -48,6 +48,14 @@ QR Code encoder
 	Made by: Copyright (C) 2010, Dominik Dzienia
 	deltalab at poczta dot fm
 
+Gantti - A simple PHP Gantt Class
+	Location: mod/gantti/*
+	License: MIT License
+	Made by: Copyright (C) Bastian Allgeier
+	http://bastianallgeier.com/gantti
+	bastianallgeier dot com
+	See mod/gantti/readme.mdown for details
+
 Tango Desktop Project:
 	Location: all files under img/tango_*:
 	License: The Tango base icon theme is released to the Public Domain. 

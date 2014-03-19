@@ -70,7 +70,7 @@
 	*/
 
 	$NombreRAD='Practico';
-	$PlantillaActiva='nomo';
+	$PlantillaActiva='light';
 	$ArchivoCORE='';
 	$TablasCore='core_';  // Cuidado al cambiar: Prefijo de Tablas base para uso de Practico
 	$TablasApp='app_';  // Cuidado al cambiar: Prefijo para Tablas de datos definidas por el usuario

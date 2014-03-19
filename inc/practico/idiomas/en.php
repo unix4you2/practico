@@ -242,8 +242,8 @@
 	$MULTILANG_ActBuscarVersion='Look for new versions automatically';
 
 	//Formularios
-	$MULTILANG_ErrFrmDuplicado='Failed duplicated value (the) field (s). The value you entered already exists in the database. Field(s): ';
-	$MULTILANG_ErrFrmObligatorio="You forgot to enter mandatory field: ";
+	$MULTILANG_ErrFrmDuplicado='Failed duplicated value in the field. The value you entered already exists in the database. Field: ';
+	$MULTILANG_ErrFrmObligatorio='You forgot to enter mandatory field: ';
 	$MULTILANG_ErrFrmDatos='There is a problem in the input data';
 	$MULTILANG_ErrFrmCampo1='You must enter a valid title or label for the field.';
 	$MULTILANG_ErrFrmCampo2='You must enter a valid field to link to the data table associated with the form.';
@@ -278,7 +278,7 @@
 	$MULTILANG_FrmTitUnico='Uniqueness for input values';
 	$MULTILANG_FrmDesUnico='Indicates whether the field can store or repeated values ​​in the database. Should be enabled for fields representing primary keys in their Design and disabled for the rest.  You should take care in that forms that you need this field to do upgrades and its duplicated error message.';
 	$MULTILANG_FrmPredeterminado='Default value';
-	$MULTILANG_FrmDesPredeterminado='Sets the value that appears automatically filled in the field to open the form view. This value can be out of data validation';
+	$MULTILANG_FrmDesPredeterminado='Sets the value that appears automatically filled in the field to open the form view. This value can be out of data validation.  If a PHP session variable is entered then Practico will take its value';
 	$MULTILANG_FrmValida='Data validation';
 	$MULTILANG_FrmValida1='Numbers only 0-9';
 	$MULTILANG_FrmValida2='Only letters A-Z';

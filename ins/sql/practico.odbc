@@ -13,7 +13,7 @@ CREATE TABLE core_parametros (
   PRIMARY KEY  (id)
 );
 
-INSERT INTO core_parametros VALUES (0,'Nombre completo de su empresa','PAR_NombreCortoEmpresa','PAR_NombreAplicacion','PAR_VersionAplicacion','20120101','Texto de su licencia','Texto asociado a los creditos de su aplicacion');
+INSERT INTO core_parametros VALUES (0,'Nombre completo de su empresa','PAR_NombreCortoEmpresa','PAR_NombreAplicacion','PAR_VersionAplicacion','20120101','Texto de su licencia','Texto asociado a los creditos de su aplicacion','');
 
 DROP TABLE IF EXISTS core_usuario;
 CREATE TABLE core_usuario (

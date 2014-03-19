@@ -19,5 +19,5 @@
 	*/
 
 	// Cadena que describe la plantilla
-	$MULTILANG_NombrePlantilla		='Nomo - Original';
+	$MULTILANG_NombrePlantilla		='Nomo - Light (Grises claros)';
 ?>

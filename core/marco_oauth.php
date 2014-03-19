@@ -1046,7 +1046,7 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="https://dev.xing.com/applications" target="_BLANK"><img src="inc/oauth/logos/vkontakte.png" border=0 width=94 height=35 align=middle></a>
+												<a href="http://vk.com/editapp?act=create" target="_BLANK"><img src="inc/oauth/logos/vk.png" border=0 width=94 height=35 align=middle></a>
 												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>
@@ -1090,7 +1090,7 @@
 										<tr>
 											<td valign=top align=right></td>
 											<td valign=top>
-												<a href="https://dev.xing.com/applications" target="_BLANK"><img src="inc/oauth/logos/withings.png" border=0 width=94 height=35 align=middle></a>
+												<a href="https://oauth.withings.com/en/partner/add" target="_BLANK"><img src="inc/oauth/logos/withings.png" border=0 width=94 height=35 align=middle></a>
 												<i><b><font color=red>Beta</font></b></i>
 											</td>
 										</tr>

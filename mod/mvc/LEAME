@@ -8,10 +8,9 @@
 
 Modo de Uso (para versiones anteriores a la 14.3, versiones 14.3 ya lo incluyen por defecto):
 	1) Descomprimir el modulo mediante su proceso de instalacion normal o manualmente sobre /mod
-	2) Asegurese de dar permisos de escritura para la carpeta "archivos" y sus subcarpetas contenida en el modulo
 
 Primer llamado al modulo:
-	3) Accesar Practico con credenciales de administrador y agregar un nuevo menu asi (si todavia no existe):
+	2) Accesar Practico con credenciales de administrador y agregar un nuevo menu asi (si todavia no existe):
 		Texto:   Prueba de MVC    (o el deseado por usted)
 		Seccion: Módulos embebidos
 		Imagen:  tango_document-open.png (o la deseada por usted)

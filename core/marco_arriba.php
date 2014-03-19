@@ -122,9 +122,9 @@
 				<b>
 				<?php
 					if ($Sesion_abierta)
-						echo '<font color="#d4dce4">'.$Nombre_Empresa_Corto.'</font> - '.$Nombre_Aplicacion.' </b> <i> v'.$Version_Aplicacion.'</i>';
+						echo '<font color="">'.$Nombre_Empresa_Corto.'</font> - '.$Nombre_Aplicacion.' </b> <i> v'.$Version_Aplicacion.'</i>';
 					else
-						echo '<font color="#d4dce4">'.$MULTILANG_SubtituloPractico1.'</font> '.$MULTILANG_SubtituloPractico2;
+						echo '<font color="">'.$MULTILANG_SubtituloPractico1.'</font> '.$MULTILANG_SubtituloPractico2;
 				?>
 			</td>
 			<td align="right"  width="20%" valign="top">

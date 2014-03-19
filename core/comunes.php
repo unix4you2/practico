@@ -297,9 +297,9 @@
 		
 		// Escapa siempre los mensajes de error
 		$error_titulo=escapar_contenido($error_titulo);
-		$error_titulo = preg_replace("/[^A-Za-z0-9_ ]/", "", $error_titulo);
+		$error_titulo = preg_replace("/[^A-Za-z0-9_ ><]/", "", $error_titulo);
 		$error_descripcion=escapar_contenido($error_descripcion);
-		$error_descripcion = preg_replace("/[^A-Za-z0-9_ ]/", "", $error_descripcion);
+		$error_descripcion = preg_replace("/[^A-Za-z0-9_ ><]/", "", $error_descripcion);
 		
 		// Escapa otras variables de uso comun
 		global $error_titulo,$error_descripcion;
@@ -1501,6 +1501,17 @@
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
 			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
+			//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.
+			if (substr($registro_campos["valor_predeterminado"], 0,1)=="$")
+				{
+					$nombre_variable = substr($registro_campos["valor_predeterminado"], 1);
+					global ${$nombre_variable};
+					if (isset($nombre_variable))
+						{
+							$valor_variable=$$nombre_variable;
+							$cadena_valor=' value="'.$valor_variable.'" ';							
+						}
+				}
 			if ($campobase!="" && $valorbase!="") $cadena_valor=' value="'.$registro_datos_formulario["$nombre_campo"].'" ';
 
 			// Define cadenas en caso de tener validaciones
@@ -1577,6 +1588,17 @@
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
 			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
+			//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.
+			if (substr($registro_campos["valor_predeterminado"], 0,1)=="$")
+				{
+					$nombre_variable = substr($registro_campos["valor_predeterminado"], 1);
+					global ${$nombre_variable};
+					if (isset($nombre_variable))
+						{
+							$valor_variable=$$nombre_variable;
+							$cadena_valor=' value="'.$valor_variable.'" ';							
+						}
+				}
 			if ($campobase!="" && $valorbase!="") $cadena_valor=' value="'.$registro_datos_formulario["$nombre_campo"].'" ';
 
 			// Muestra el campo
@@ -1619,6 +1641,17 @@
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
 			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=$registro_campos["valor_predeterminado"];
+			//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.
+			if (substr($registro_campos["valor_predeterminado"], 0,1)=="$")
+				{
+					$nombre_variable = substr($registro_campos["valor_predeterminado"], 1);
+					global ${$nombre_variable};
+					if (isset($nombre_variable))
+						{
+							$valor_variable=$$nombre_variable;
+							$cadena_valor=' value="'.$valor_variable.'" ';							
+						}
+				}
 			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 			// Muestra el campo
@@ -1666,6 +1699,17 @@
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
 			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=$registro_campos["valor_predeterminado"];
+			//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.
+			if (substr($registro_campos["valor_predeterminado"], 0,1)=="$")
+				{
+					$nombre_variable = substr($registro_campos["valor_predeterminado"], 1);
+					global ${$nombre_variable};
+					if (isset($nombre_variable))
+						{
+							$valor_variable=$$nombre_variable;
+							$cadena_valor=' value="'.$valor_variable.'" ';							
+						}
+				}
 			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 			// Muestra el campo
@@ -1882,6 +1926,17 @@
 			$cadena_valor='';
 			$nombre_campo=$registro_campos["campo"];
 			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=$registro_campos["valor_predeterminado"];
+			//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.
+			if (substr($registro_campos["valor_predeterminado"], 0,1)=="$")
+				{
+					$nombre_variable = substr($registro_campos["valor_predeterminado"], 1);
+					global ${$nombre_variable};
+					if (isset($nombre_variable))
+						{
+							$valor_variable=$$nombre_variable;
+							$cadena_valor=' value="'.$valor_variable.'" ';							
+						}
+				}
 			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 			$salida=$cadena_valor;
 
@@ -2567,6 +2622,14 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 									$valores = explode(".",$registro_botones["accion_usuario"]);
 									$tabla_vinculada=$valores[0];
 									$campo_vinculado=$valores[1];
+								
+									//Si solo se indico el campo, sin la tabla, intenta usar solo el campo
+									if ($campo_vinculado=="" && $tabla_vinculada!="")
+										{
+											$campo_vinculado=$valores[0];
+											$tabla_vinculada="";
+										}
+
 									$comando_javascript="
 										document.FRMBASEINFORME.accion.value='eliminar_registro_informe';
 										document.FRMBASEINFORME.tabla.value='".$tabla_vinculada."';

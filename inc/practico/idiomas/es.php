@@ -239,8 +239,8 @@
 	$MULTILANG_ActBuscarVersion='Buscar nuevas versiones automaticamente';
 	
 	//Formularios
-	$MULTILANG_ErrFrmDuplicado="Ha ocurrido un error de valor duplicado en el(los) campo(s). El valor ingresado ya existe en la base de datos. Campo(s): ";
-	$MULTILANG_ErrFrmObligatorio="Ha olvidado diligenciar el campo obligatorio: ";
+	$MULTILANG_ErrFrmDuplicado='Ha ocurrido un error de valor duplicado en el campo. El valor ingresado ya existe en la base de datos. Campo: ';
+	$MULTILANG_ErrFrmObligatorio='Ha olvidado diligenciar el campo obligatorio: ';
 	$MULTILANG_ErrFrmDatos='Problema en los datos ingresados';
 	$MULTILANG_ErrFrmCampo1='Debe indicar un t&iacute;tulo o etiqueta v&aacute;lida para el campo.';
 	$MULTILANG_ErrFrmCampo2='Debe indicar un campo v&aacute;lido para vincular con la tabla de datos asociada al formulario.';
@@ -275,7 +275,7 @@
 	$MULTILANG_FrmTitUnico='Unicidad para los valores ingresados';
 	$MULTILANG_FrmDesUnico='Indica si el campo puede almacenar o no valores repetidos en la base de datos.  Deber&iacute;a estar habilitado para campos que representen claves primarias en su dise&ntilde;o y deshabilitado para el resto.  Debera tener especial cuidado con aquellos formularios donde desee dejar el campo para actualizaciones y que pueda generar error de valor duplicado.';
 	$MULTILANG_FrmPredeterminado='Valor predeterminado';
-	$MULTILANG_FrmDesPredeterminado='Establece el valor que aparece diligenciado automaticamente en el campo al abrir la vista del formulario.  Este valor puede estar en contravia de la validaci&oacute;n de datos';
+	$MULTILANG_FrmDesPredeterminado='Establece el valor que aparece diligenciado automaticamente en el campo al abrir la vista del formulario.  Este valor puede estar en contravia de la validaci&oacute;n de datos.  Si se ingresan variables PHP definidas en la sesion entonces se tomara su valor.';
 	$MULTILANG_FrmValida='Validacion de datos';
 	$MULTILANG_FrmValida1='S&oacute;lo n&uacute;meros 0-9';
 	$MULTILANG_FrmValida2='S&oacute;lo letras A-Z';

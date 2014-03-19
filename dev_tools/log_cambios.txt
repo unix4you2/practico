@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno=""
-VersionCompatibleMes=""
+VersionCompatibleAno="14"
+VersionCompatibleMes="3"
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno=""
-VersionFinalMes=""
+VersionFinalAno="14"
+VersionFinalMes="4"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version
@@ -14,32 +14,18 @@ ArchivoVersion=" inc/version_actual.txt "
 
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
+AUTHORS
+README
 index.php
 core/comunes.php
-core/menus.php
-core/marco_arriba.php
-core/monitoreo.php
-core/marco_param.php
-core/marco_conf.php
-core/marco_wscfg.php
-core/marco_oauth.php
 core/formularios.php
-core/informes.php
+core/marco_arriba.php
+core/marco_oauth.php
 core/sesion.php
-core/objetos.php
-core/usuarios.php
 core/ws_nucleo.php
-core/ws_funciones.php
-inc/oauth/oauth_client.php
-inc/practico/def_basedatos.php
+skin/light/*
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
-inc/qrcode/qrcode.php
-mod/mvc/LEAME
-mod/mvc/index.php
-mod/mvc/controlador/controlador.php
-mod/mvc/modelo/modelo.php
-mod/mvc/vista/vista.php
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -50,26 +36,13 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Nueva funcion para buscar campos dentro de una tabla
-* Added: Ahora se permite definir campos manuales dentro de los formularios, esos campos seran obviados dentro de los insert y updates cuando no se encuentren en la tabla
-* Added: Ahora las operaciones de almacenamiento validan si los campos existen realmente en la tabla para evitar errores del programador y uso de campos manuales
-* Added: Generacion de codigos QR mediante una nueva funcion
-* Added: Ahora los campos definidos como ocultos en los formularios son tratados como tipo hidden
-* Added: Definicion de funciones personalizadas para accesos seguros
-* Added: Ahora las funciones de SQL soportan parámetros separados por doble pipe || para preparar las consultas antes de su ejecución
-* Added: Nuevos tipos de campo para formularios donde el valor para la etiqueta es tomado desde el valor de un campo
-* Fixed: La actualización de informes retorna a la edición del mismo en lugar del escritorio
-* Fixed: Preparación de consultas y funciones SQL para prevenir inyecciones mediante uso de la nueva funcion ejecutar_sql y ejecutar_sql_unaria
-* Fixed: Posible error SQL derivado de la adicion de botones de comando javascript a informes
-* Fixed: Funciones personalizadas pueden ser agradas a permisos en todos los usuarios mediante el panel de configuración
-* Fixed: Actualizado el archivo de definición de bases de datos.
-* Fixed: Posible XSS derivado de las variables de mensaje de error ha sido suprimido
+* Added: Ahora algunos controles de datos permiten definir como su valor predeterminado a una variable PHP, valores iniciando con signo de $ seran evaluados como variables PHP en caso de estar definidas.
+* Fixed: Enlaces y logos de proveedores Oauth VK y Withings
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-ALTER TABLE core_parametros ADD COLUMN funciones_personalizadas TEXT;
 "
 
 ########################################################################

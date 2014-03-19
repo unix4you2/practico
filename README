@@ -49,7 +49,24 @@
 
 
 
-
+----------------------------------------
+Versión 14.3 (2014--03-16)
+----------------------------------------
+* Added: Nueva funcion para buscar campos dentro de una tabla
+* Added: Ahora se permite definir campos manuales dentro de los formularios, esos campos seran obviados dentro de los insert y updates cuando no se encuentren en la tabla
+* Added: Ahora las operaciones de almacenamiento validan si los campos existen realmente en la tabla para evitar errores del programador y uso de campos manuales
+* Added: Generacion de codigos QR mediante una nueva funcion
+* Added: Ahora los campos definidos como ocultos en los formularios son tratados como tipo hidden
+* Added: Definicion de funciones personalizadas para accesos seguros
+* Added: Ahora las funciones de SQL soportan parámetros separados por doble pipe || para preparar las consultas antes de su ejecución
+* Added: Nuevos tipos de campo para formularios donde el valor para la etiqueta es tomado desde el valor de un campo
+* Fixed: La actualización de informes retorna a la edición del mismo en lugar del escritorio
+* Fixed: Preparación de consultas y funciones SQL para prevenir inyecciones mediante uso de la nueva funcion ejecutar_sql y ejecutar_sql_unaria
+* Fixed: Posible error SQL derivado de la adicion de botones de comando javascript a informes
+* Fixed: Funciones personalizadas pueden ser agradas a permisos en todos los usuarios mediante el panel de configuración
+* Fixed: Actualizado el archivo de definición de bases de datos.
+* Fixed: Posible XSS derivado de las variables de mensaje de error ha sido suprimido
+----------------------------------------
 Versión 14.2 (2014-01-20)
 ----------------------------------------
 * Added: [Tester Jaime Alejandro Zapata]:  Ahora en los campos de condiciones para informes se puede agregar cualquier variable de sesion de PHP del usuario para que esta sea tomada en la comparación del query
