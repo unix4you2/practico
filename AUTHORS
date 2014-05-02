@@ -56,6 +56,11 @@ Gantti - A simple PHP Gantt Class
 	bastianallgeier dot com
 	See mod/gantti/readme.mdown for details
 
+Chat
+	Location: inc/chat/*
+	Made by: Copyright (c) 2009 Anant Garg
+	See (anantgarg dot com | inscripts dot com)
+
 Tango Desktop Project:
 	Location: all files under img/tango_*:
 	License: The Tango base icon theme is released to the Public Domain. 

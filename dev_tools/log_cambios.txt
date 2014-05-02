@@ -49,6 +49,7 @@ LogCambios="
 * Added: Ahora cada formulario puede especificar su color de fondo de manera independiente a la del tema seleccionado.
 * Added: Ahora cada informe puede especificar su color de fondo de manera independiente a la del tema seleccionado.
 * Added: Ahora algunos controles de datos permiten definir como su valor predeterminado a una variable PHP, valores iniciando con signo de $ seran evaluados como variables PHP en caso de estar definidas.
+* Added: Generador de diagramas de Gantt automatico
 * Fixed: Enlaces y logos de proveedores Oauth VK y Withings
 "
 
