@@ -82,7 +82,7 @@ CREATE TABLE core_formulario (
   titulo varchar(250) default '',
   ayuda_titulo varchar(250) default '',
   ayuda_texto text,
-  ayuda_imagen varchar(250) default '',
+  color_fondo varchar(20) default '',
   tabla_datos varchar(250) default '',
   columnas int(10) default '1',
   javascript text,
@@ -157,6 +157,7 @@ CREATE TABLE core_informe (
   formato_final char(1), # T=Tabla, G=Grafico
   formato_grafico text, # Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
   genera_pdf char(1), # S=Si, N=No
+  color_fondo varchar(20) default '',
   PRIMARY KEY  (id)
 );
 

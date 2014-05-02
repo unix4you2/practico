@@ -81,7 +81,7 @@ CREATE TABLE core_formulario (
   titulo text default '',
   ayuda_titulo text default '',
   ayuda_texto text,
-  ayuda_imagen text default '',
+  color_fondo text default '',
   tabla_datos text default '',
   columnas integer default '1',
   javascript text
@@ -155,7 +155,8 @@ CREATE TABLE core_informe (
   alto text,
   formato_final text, 
   formato_grafico text,
-  genera_pdf text
+  genera_pdf text,
+  color_fondo text
 
 );
 

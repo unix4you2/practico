@@ -81,7 +81,7 @@ CREATE TABLE core_formulario (
   titulo varchar(250) default '',
   ayuda_titulo varchar(250) default '',
   ayuda_texto text,
-  ayuda_imagen varchar(250) default '',
+  color_fondo varchar(20) default '',
   tabla_datos varchar(250) default '',
   columnas int(10) default '1',
   javascript text,
@@ -156,6 +156,7 @@ CREATE TABLE core_informe (
   formato_final char(1), # T=Tabla, G=Grafico
   formato_grafico text, # Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
   genera_pdf char(1), # S=Si, N=No
+  color_fondo varchar(20) default '',
   PRIMARY KEY  (id)
 );
 
@@ -220,5 +221,16 @@ CREATE TABLE core_llaves_api (
   dominio_autorizado varchar(255) NOT NULL,
   ip_autorizada varchar(255) NOT NULL,
   funciones_autorizadas text,
+  PRIMARY KEY (id)
+);
+
+DROP TABLE IF EXISTS core_chat;
+CREATE TABLE core_chat (
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  from VARCHAR(255) NOT NULL DEFAULT '',
+  to VARCHAR(255) NOT NULL DEFAULT '',
+  message TEXT NOT NULL,
+  sent DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  recd INTEGER UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (id)
 );

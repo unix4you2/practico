@@ -1311,7 +1311,7 @@
 				ancho - Ancho del espacio de trabajo definido en pixels o porcentaje sobre el contenedor principal.
 				
 			Ver tambien:
-			<cerrar_ventana>	
+			<cerrar_ventana>
 		*/
 
 		// Determina si fue enviado un nombre de archivo como fondo y lo usa
@@ -2186,8 +2186,11 @@
 							<img src="img/tango_document-print.png" border=0 height=15 width=15 OnClick="ImprimirMarco(\'MARCO_IMPRESION\');">
 						</a>';
 
+				// Establece color de fondo para el form
+				$color_fondo="#f2f2f2";
+				if ($registro_formulario["color_fondo"]!="") $color_fondo=$registro_formulario["color_fondo"];
 				// Crea ventana si aplica para el form
-				if ($en_ventana) abrir_ventana($registro_formulario["titulo"],'f2f2f2','',$barra_herramientas_mini);
+				if ($en_ventana) abrir_ventana($registro_formulario["titulo"],$color_fondo,'',$barra_herramientas_mini);
 				// Muestra ayuda en caso de tenerla
 				$imagen_ayuda="info_icon.png";
 				if ($registro_formulario["ayuda_imagen"]!="") $imagen_ayuda=$registro_formulario["ayuda_imagen"];
@@ -2547,7 +2550,11 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 						//Cuando es embebido (=1) no imprime el boton de retorno pues se asume dentro de un formulario
 						if (!$embebido)
 							echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" <<< '.$MULTILANG_IrEscritorio.' " class="Botones">';
-						abrir_ventana($Nombre_Aplicacion.' - '.$registro_informe["titulo"],'f2f2f2',$registro_informe["ancho"]);
+						//Establece el color de fondo del informe
+						$color_fondo="#f2f2f2";
+						if ($registro_informe["color_fondo"]!="") $color_fondo=$registro_informe["color_fondo"];
+						//Carga la ventana con el informe
+						abrir_ventana($Nombre_Aplicacion.' - '.$registro_informe["titulo"],$color_fondo,$registro_informe["ancho"]);
 					}
 
 				// Si se ha definido un tamano fijo entonces crea el marco

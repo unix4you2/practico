@@ -168,6 +168,7 @@
 	$MULTILANG_ErrGoogleAPIMod='OAuth2 for Google was configured as default auth method.<br>Anyway the Practicos module for google-api is not installed yet.<br>Please download the google-api module from Practicos website and reload again.';
 	$MULTILANG_ErrFuncion='<br>PHP Function doesnt exists or is disabled in your server: ';
 	$MULTILANG_ErrDirectiva='The environment var should be enabled on your PHP or web server configuration';
+	$MULTILANG_UsuariosChat='Available chat users';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';
@@ -407,7 +408,8 @@
 	$MULTILANG_FrmDesHlp='Text that will appear as a caption for the support of the form';
 	$MULTILANG_FrmTxt='Help Text';
 	$MULTILANG_FrmDesTxt='Full Text with summary function description for the form. Introductory text for any user';
-	$MULTILANG_FrmImagen='Help icon';
+	$MULTILANG_FrmImagen='Background color';
+	$MULTILANG_FrmImagenDes='If your web browser has HTML5 support you could choose the background color.  If not you can type an hexadecimal color code i.e. #F2F2F2 or its name as HTML notation i.e. LightGray';
 	$MULTILANG_FrmNumeroCols='Number of columns';
 	$MULTILANG_FrmDesNumeroCols='Indicates how many columns to be deployed in fields when the form is loaded';
 	$MULTILANG_FrmCreaDisena='Create and design';

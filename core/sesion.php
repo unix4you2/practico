@@ -180,6 +180,7 @@
 						// Antes con depreciada: session_register('Login_usuario');
 						@session_start();
 						if (!isset($_SESSION["Login_usuario"])) $_SESSION["Login_usuario"]=(string)$resultado_webservice->credencial[0]->login;
+						if (!isset($_SESSION["username"])) $_SESSION["username"]=(string)$registro["login"]; //Usada para el modulo de chat
 						if (!isset($_SESSION["Nombre_usuario"])) $_SESSION["Nombre_usuario"]=(string)$resultado_webservice->credencial[0]->nombre;
 						if (!isset($_SESSION["Descripcion_usuario"])) $_SESSION["Descripcion_usuario"]=(string)$resultado_webservice->credencial[0]->descripcion;
 						if (!isset($_SESSION["Nivel_usuario"])) $_SESSION["Nivel_usuario"]=(string)$resultado_webservice->credencial[0]->nivel;

@@ -168,6 +168,7 @@
 	$MULTILANG_ErrGoogleAPIMod='El metodo de autenticacion esta configurado como OAuth2 para Google.<br>Sin embargo el modulo de Practico google-api no se encuentra instalado.<br>Descargue e instale el modulo desde la web oficial de Practico y actualice la pagina nuevamente.';
 	$MULTILANG_ErrFuncion='<br>Funcion de PHP no existe o se encuentra deshabilitada en su servidor: ';
 	$MULTILANG_ErrDirectiva='La directiva o variable de configuracion PHP indicada debe estar habilitada en su configuracion de PHP o servidor web';
+	$MULTILANG_UsuariosChat='Usuarios disponibles para chat';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';
@@ -404,7 +405,8 @@
 	$MULTILANG_FrmDesHlp='Texto que aparecer&aacute; como encabezado para el texto de ayuda del formulario';
 	$MULTILANG_FrmTxt='Texto de ayuda';
 	$MULTILANG_FrmDesTxt='Texto completo con la descripcion de funciones resumida para el formulario.  Puede ser cualquier texto introductorio para el usuario';
-	$MULTILANG_FrmImagen='Im&aacute;gen de ayuda';
+	$MULTILANG_FrmImagen='Color de fondo';
+	$MULTILANG_FrmImagenDes='Si su navegador soporta HTML5 puede seleccionar el color, de lo contrario ingrese un codigo en hexadecimal como por ejemplo #F2F2F2 o su nombre en HTML como por ejemplo LightGray';
 	$MULTILANG_FrmNumeroCols='N&uacute;mero columnas';
 	$MULTILANG_FrmDesNumeroCols='Indica en cuantas columnas deben desplegarse los campos cuando el formulario sea cargado';
 	$MULTILANG_FrmCreaDisena='Crear y dise&ntilde;ar';

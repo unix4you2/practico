@@ -1707,9 +1707,8 @@ if ($accion=="editar_formulario")
 					<tr>
 						<td align="right"><?php echo $MULTILANG_FrmImagen; ?></td>
 						<td>
-							<select  name="ayuda_imagen" class="Combos" >
-								<option value=""><?php echo $MULTILANG_Deshabilitado; ?></option>
-							</select>
+							<input type="color" name="color_fondo" size="10" value="<?php if ($registro_form["color_fondo"]!="") echo $registro_form["color_fondo"]; else echo '#f2f2f2'; ?>" class="CampoTexto">
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
 						</td>
 					</tr>
 					<tr>
@@ -1830,7 +1829,7 @@ if ($accion=="editar_formulario")
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario SET titulo=?,ayuda_titulo=?,ayuda_texto=?,ayuda_imagen=?,tabla_datos=?,columnas=?,javascript=? WHERE id= ? ","$titulo||$ayuda_titulo||$ayuda_texto||$ayuda_imagen||$tabla_datos||$columnas||$javascript||$formulario");
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario SET titulo=?,ayuda_titulo=?,ayuda_texto=?,color_fondo=?,tabla_datos=?,columnas=?,javascript=? WHERE id= ? ","$titulo||$ayuda_titulo||$ayuda_texto||$color_fondo||$tabla_datos||$columnas||$javascript||$formulario");
 					auditar("Actualiza formulario $formulario para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
@@ -1857,7 +1856,7 @@ if ($accion=="editar_formulario")
 	Agrega un formulario vacio para la aplicacion
 
 	(start code)
-		INSERT INTO ".$TablasCore."formulario VALUES (0, '$titulo','$ayuda_titulo','$ayuda_texto','$ayuda_imagen','$tabla_datos','$columnas')
+		INSERT INTO ".$TablasCore."formulario VALUES (0, '$titulo','$ayuda_titulo','$ayuda_texto','$color_fondo','$tabla_datos','$columnas')
 	(end)
 
 	Salida:
@@ -1876,7 +1875,7 @@ if ($accion=="editar_formulario")
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?)","$titulo||$ayuda_titulo||$ayuda_texto||$ayuda_imagen||$tabla_datos||$columnas||$javascript");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?)","$titulo||$ayuda_titulo||$ayuda_texto||$color_fondo||$tabla_datos||$columnas||$javascript");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea formulario $id para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -1905,7 +1904,7 @@ if ($accion=="editar_formulario")
 	Agrega un formulario vacio para la aplicacion
 
 	(start code)
-		INSERT INTO ".$TablasCore."formulario VALUES (0, '$titulo','$ayuda_titulo','$ayuda_texto','$ayuda_imagen','$tabla_datos','$columnas')
+		INSERT INTO ".$TablasCore."formulario VALUES (0, '$titulo','$ayuda_titulo','$ayuda_texto','$color_fondo','$tabla_datos','$columnas')
 	(end)
 
 	Salida:
@@ -1929,12 +1928,12 @@ if ($accion=="editar_formulario")
 					$nuevo_titulo='[COPIA] '.$registro["titulo"];
 					$ayuda_titulo=$registro["ayuda_titulo"];
 					$ayuda_texto=$registro["ayuda_texto"];
-					$ayuda_imagen=$registro["ayuda_imagen"];
+					$color_fondo=$registro["color_fondo"];
 					$tabla_datos=$registro["tabla_datos"];
 					$columnas=$registro["columnas"];
 					$javascript=$registro["javascript"];
 					// Inserta el nuevo objeto al form
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?) ","$nuevo_titulo||$ayuda_titulo||$ayuda_texto||$ayuda_imagen||$tabla_datos||$columnas||$javascript");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?) ","$nuevo_titulo||$ayuda_titulo||$ayuda_texto||$color_fondo||$tabla_datos||$columnas||$javascript");
 					$id=$ConexionPDO->lastInsertId();
 					// Busca los elementos que componen el formulario para hacerles la copia
 					// Registros de formulario_objeto
@@ -2105,9 +2104,8 @@ function FrmAutoRun()
 					<tr>
 						<td align="right"><?php echo $MULTILANG_FrmImagen; ?></td>
 						<td>
-							<select  name="ayuda_imagen" class="Combos" >
-								<option value=""><?php echo $MULTILANG_Deshabilitado; ?></option>
-							</select>
+							<input type="color" name="color_fondo" size="10" value="#f2f2f2" class="CampoTexto">
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
 						</td>
 					</tr>
 					<tr>

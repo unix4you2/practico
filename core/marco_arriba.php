@@ -67,6 +67,12 @@
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/calendario.css">
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/tecladovirtual.css">
 
+	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/chat.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/screen.css" />
+	<!--[if lte IE 7]>
+	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/screen_ie.css" />
+	<![endif]-->
+
 	<link rel="shortcut icon" href="skin/<?php echo $PlantillaActiva; ?>/img/favicon.ico"/>
 
 	<script language="JavaScript">
@@ -77,6 +83,9 @@
 	</script>
 </head>
 <body leftmargin="0"  margin="0" topmargin="0" oncontextmenu="return false;">
+<!-- INICIA MARCO DE CHAT -->
+<div id="main_container" style="overflow: hidden;">
+
 <div id='FondoPopUps' class="FondoOscuroPopUps"></div>
 
 <form action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;" name="core_ver_menu">
@@ -93,8 +102,8 @@
 			include_once("core/marco_oauth.php");
 			include_once("core/marco_param.php");
 		}
+	include_once("core/marco_chat.php");
 ?>
-
 
 <!-- INICIA LA TABLA PRINCIPAL -->
 <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="left">
@@ -131,6 +140,11 @@
 				<?php
 					if ($Sesion_abierta) {
 				?>
+					<table  cellspacing="0" cellpadding="0" border=0 class="MarcoSuperior"><tr>
+						<td align="right" valign="top">
+							<img src="img/icono_chat.png" ALT="Chat" OnClick="AbrirPopUp('BarraFlotanteChat');">&nbsp;&nbsp;
+						</td>
+						<td align="right"  valign="top">
 							<?php echo $Nombre_usuario;?>
 							(<font color="#ffff00"><?php 
 								for ($i=1;$i<=$Nivel_usuario;$i++)
@@ -138,6 +152,8 @@
 							?></font>)&nbsp;
 							<br>
 							<input type="Button" class="BotonesEstado" value=" <?php echo $MULTILANG_CerrarSesion; ?> "  OnClick="cerrar_sesion.submit();">&nbsp;
+						</td>
+					</tr></table>
 				<?php
 					}
 				?>
@@ -159,7 +175,7 @@
 								$Complemento_tablas=",".$TablasCore."usuario_menu";
 								$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$Login_usuario'";  // AND nivel>0
 							}
-						$resultado=ejecutar_sql("SELECT id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_arriba=1 ".@$Complemento_condicion);
+						$resultado=ejecutar_sql("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_arriba=1 ".@$Complemento_condicion);
 
 						while($registro = $resultado->fetch())
 							{

@@ -192,7 +192,7 @@ if ($accion=="actualizar_informe")
 		if ($mensaje_error=="")
 			{
 				// Actualiza los datos
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET genera_pdf=?,formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=?,nivel_usuario=? WHERE id=? ","$genera_pdf||$formato_final||$alto||$ancho||$titulo||$descripcion||$categoria||$nivel_usuario||$id");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET color_fondo=?,genera_pdf=?,formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=?,nivel_usuario=? WHERE id=? ","$color_fondo||$genera_pdf||$formato_final||$alto||$ancho||$titulo||$descripcion||$categoria||$nivel_usuario||$id");
 				auditar("Actualiza informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="accion" value="editar_informe">
@@ -1434,9 +1434,8 @@ if ($accion=="editar_informe")
 					<tr>
 						<td align="right"><?php echo $MULTILANG_FrmImagen; ?></td>
 						<td>
-							<select  name="ayuda_imagen" class="Combos" >
-								<option value=""><?php echo $MULTILANG_Deshabilitado; ?></option>
-							</select>
+							<input type="color" name="color_fondo" size="10" value="<?php if ($registro_informe["color_fondo"]!="") echo $registro_informe["color_fondo"]; else echo '#f2f2f2'; ?>" class="CampoTexto">
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
 						</td>
 					</tr>
 					<tr>
@@ -1577,7 +1576,7 @@ if ($accion=="guardar_informe")
 		if ($categoria=="") $mensaje_error.=$MULTILANG_InfErrInforme2."<br>";
 		if ($mensaje_error=="")
 			{
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,'|!|!|!|',?)","$titulo||$descripcion||$categoria||$agrupamiento||$ordenamiento||$nivel_usuario||$ancho||$alto||$formato_final||$genera_pdf");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,'|!|!|!|',?,?)","$titulo||$descripcion||$categoria||$agrupamiento||$ordenamiento||$nivel_usuario||$ancho||$alto||$formato_final||$genera_pdf||$color_fondo");
 				$id=$ConexionPDO->lastInsertId();
 				auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -1663,9 +1662,8 @@ if ($accion=="administrar_informes")
 					<tr>
 						<td align="right"><?php echo $MULTILANG_FrmImagen; ?></td>
 						<td>
-							<select  name="ayuda_imagen" class="Combos" >
-								<option value=""><?php echo $MULTILANG_Deshabilitado; ?></option>
-							</select>
+							<input type="color" name="color_fondo" size="10" value="#f2f2f2" class="CampoTexto">
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
 						</td>
 					</tr>
 					<tr>

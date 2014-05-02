@@ -232,6 +232,7 @@ if ($WSId=="verificar_credenciales")
 			// Registro de variables en la sesion
 			@session_start();
 			if (!isset($_SESSION["Login_usuario"])) $_SESSION["Login_usuario"]=(string)$registro["login"];
+			if (!isset($_SESSION["username"])) $_SESSION["username"]=(string)$registro["login"]; //Usada para el modulo de chat
 			if (!isset($_SESSION["Nombre_usuario"])) $_SESSION["Nombre_usuario"]=(string)$registro["nombre"];
 			if (!isset($_SESSION["Descripcion_usuario"])) $_SESSION["Descripcion_usuario"]=(string)$registro["descripcion"];
 			if (!isset($_SESSION["Nivel_usuario"])) $_SESSION["Nivel_usuario"]=(string)$registro["nivel"];

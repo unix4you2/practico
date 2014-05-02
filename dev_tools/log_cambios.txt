@@ -6,7 +6,7 @@ VersionCompatibleMes="3"
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
 VersionFinalAno="14"
-VersionFinalMes="4"
+VersionFinalMes="5"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version
@@ -19,13 +19,22 @@ README
 index.php
 core/comunes.php
 core/formularios.php
+core/informes.php
 core/marco_arriba.php
+core/marco_abajo.php
+core/marco_chat.php
 core/marco_oauth.php
+core/objetos.php
 core/sesion.php
 core/ws_nucleo.php
+core/ws_funciones.php
 skin/light/*
+inc/chat/*
+inc/jquery/*
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
+inc/practico/def_basedatos.php
+img/icono_chat.png
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -36,6 +45,9 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added: Sistema de chat interno tipo Gmail entre usuarios de la herramienta
+* Added: Ahora cada formulario puede especificar su color de fondo de manera independiente a la del tema seleccionado.
+* Added: Ahora cada informe puede especificar su color de fondo de manera independiente a la del tema seleccionado.
 * Added: Ahora algunos controles de datos permiten definir como su valor predeterminado a una variable PHP, valores iniciando con signo de $ seran evaluados como variables PHP en caso de estar definidas.
 * Fixed: Enlaces y logos de proveedores Oauth VK y Withings
 "
@@ -43,6 +55,17 @@ LogCambios="
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
+ALTER TABLE core_formulario CHANGE COLUMN ayuda_imagen color_fondo VARCHAR(20);
+ALTER TABLE core_informe ADD COLUMN color_fondo VARCHAR(20);
+CREATE TABLE core_chat (
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  from VARCHAR(255) NOT NULL DEFAULT '',
+  to VARCHAR(255) NOT NULL DEFAULT '',
+  message TEXT NOT NULL,
+  sent DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  recd INTEGER UNSIGNED NOT NULL DEFAULT 0,
+  PRIMARY KEY (id)
+);
 "
 
 ########################################################################
