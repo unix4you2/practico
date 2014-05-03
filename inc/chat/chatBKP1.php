@@ -48,7 +48,6 @@ if (!isset($_SESSION['openChatBoxes'])) {
 
 function chatHeartbeat() {
 	
-	global $TablasCore;
 	$sql = "select * from ".$TablasCore."chat where (".$TablasCore."chat.to = '".mysql_real_escape_string($_SESSION['username'])."' AND recd = 0) order by id ASC";
 	$query = mysql_query($sql);
 	$items = '';
@@ -177,7 +176,6 @@ header('Content-type: application/json');
 }
 
 function sendChat() {
-	global $TablasCore;
 	$from = $_SESSION['username'];
 	$to = $_POST['to'];
 	$message = $_POST['message'];

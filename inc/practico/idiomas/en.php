@@ -168,7 +168,7 @@
 	$MULTILANG_ErrGoogleAPIMod='OAuth2 for Google was configured as default auth method.<br>Anyway the Practicos module for google-api is not installed yet.<br>Please download the google-api module from Practicos website and reload again.';
 	$MULTILANG_ErrFuncion='<br>PHP Function doesnt exists or is disabled in your server: ';
 	$MULTILANG_ErrDirectiva='The environment var should be enabled on your PHP or web server configuration';
-	$MULTILANG_UsuariosChat='Available chat users';
+	$MULTILANG_UsuariosChat='Users that are offline at this moment will see all the messages when they login again to the system.';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';

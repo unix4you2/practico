@@ -26,10 +26,6 @@
 		<Seccion superior> | <Articulador>
 	*/
 
-	//Valida que quien llame este marco tenga permisos suficientes
-	if (!$Sesion_abierta)
-		die();
-
 
 /* ################################################################## */
 /* ################################################################## */
@@ -39,58 +35,62 @@
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='BarraFlotanteChat' class="FormularioPopUps">
 			<?php
-				abrir_ventana($MULTILANG_UsuariosChat,'#f2f2f2',''); 
+				abrir_ventana($MULTILANG_UsrLista,'#f2f2f2',''); 
+				echo '<div align=center><br>'.$MULTILANG_UsuariosChat.'<br><br></div>';
 
-				//Consulta los usuarios
-				$resultado=ejecutar_sql("SELECT $ListaCamposSinID_usuario from ".$TablasCore."usuario WHERE login<>'$Login_usuario' ");
-
-				//Presenta la lista de usuarios
-				echo '<table cellspacing=0 cellpadding=4 width="">
-							<tr>
-								<td valign=middle align=center  bgcolor=darkgray>
-									<font size=2 color=black>
-										<b>'.$MULTILANG_Usuario.'</b>
-									</font>
-								</td>
-								<td valign=middle align=center  bgcolor=darkgray>
-									<font size=2 color=black>
-										'.$MULTILANG_Nombre.'
-									</font>
-								</td>
-								<td  bgcolor=darkgray valign=middle align=center>
-									<font size=2 color=black>
-										'.$MULTILANG_UsrAcceso.'
-									</font>
-								</td>
-								<td bgcolor=darkgray></td>
-							</tr>';
-				while($usuarios_chat = $resultado->fetch())
+				//Consulta los usuarios siempre y cuando tenga sesion activa
+				if ($Sesion_abierta)
 					{
-						echo '
-							<tr>
-								<td valign=middle align=left>
-									<img src="img/icn_22.gif" border=0 align=absmiddle>
-									<font size=2 color=black>
-										<b>'.$usuarios_chat["login"].'</b>
-									</font>
-								</td>
-								<td valign=middle align=left>
-									<font size=2 color=black>
-										'.$usuarios_chat["nombre"].'
-									</font>
-								</td>
-								<td valign=middle align=left>
-									<font size=2 color=black>
-										'.$usuarios_chat["ultimo_acceso"].'
-									</font>
-								</td>
-								<td valign=middle>
-									<input type="Button"  class="BotonesEstado" value=" Chat >>> " onClick="chatWith(\''.$usuarios_chat["login"].'\'); OcultarPopUp(\'BarraFlotanteChat\'); ">
-								</td>
-							</tr>
-						';
+						$resultado=ejecutar_sql("SELECT $ListaCamposSinID_usuario from ".$TablasCore."usuario WHERE login<>'$Login_usuario' ");
+
+						//Presenta la lista de usuarios
+						echo '<table cellspacing=0 cellpadding=4 width="100%">
+									<tr>
+										<td valign=middle align=center  bgcolor=darkgray>
+											<font size=2 color=black>
+												<b>'.$MULTILANG_Usuario.'</b>
+											</font>
+										</td>
+										<td valign=middle align=center  bgcolor=darkgray>
+											<font size=2 color=black>
+												'.$MULTILANG_Nombre.'
+											</font>
+										</td>
+										<td  bgcolor=darkgray valign=middle align=center>
+											<font size=2 color=black>
+												'.$MULTILANG_UsrAcceso.'
+											</font>
+										</td>
+										<td bgcolor=darkgray></td>
+									</tr>';
+						while($usuarios_chat = $resultado->fetch())
+							{
+								echo '
+									<tr>
+										<td valign=middle align=left>
+											<img src="img/icn_22.gif" border=0 align=absmiddle>
+											<font size=2 color=black>
+												<b>'.$usuarios_chat["login"].'</b>
+											</font>
+										</td>
+										<td valign=middle align=left>
+											<font size=2 color=black>
+												'.$usuarios_chat["nombre"].'
+											</font>
+										</td>
+										<td valign=middle align=left>
+											<font size=2 color=black>
+												'.$usuarios_chat["ultimo_acceso"].'
+											</font>
+										</td>
+										<td valign=middle>
+											<input type="Button"  class="BotonesEstado" value=" Chat >>> " onClick="chatWith(\''.$usuarios_chat["login"].'\'); OcultarPopUp(\'BarraFlotanteChat\'); ">
+										</td>
+									</tr>
+								';
+							}
+						echo '</table>';
 					}
-				echo '</table>';
 			?>
 
 			<?php
