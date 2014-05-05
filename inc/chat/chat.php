@@ -49,7 +49,7 @@ if (!isset($_SESSION['openChatBoxes'])) {
 function chatHeartbeat() {
 	
 	global $TablasCore;
-	$sql = "select * from ".$TablasCore."chat where (".$TablasCore."chat.to = '".mysql_real_escape_string($_SESSION['username'])."' AND recd = 0) order by id ASC";
+	$sql = "select * from ".$TablasCore."chat where (".$TablasCore."chat.destinatario = '".mysql_real_escape_string($_SESSION['username'])."' AND recd = 0) order by id ASC";
 	$query = mysql_query($sql);
 	$items = '';
 
@@ -57,8 +57,8 @@ function chatHeartbeat() {
 
 	while ($chat = mysql_fetch_array($query)) {
 
-		if (!isset($_SESSION['openChatBoxes'][$chat['from']]) && isset($_SESSION['chatHistory'][$chat['from']])) {
-			$items = $_SESSION['chatHistory'][$chat['from']];
+		if (!isset($_SESSION['openChatBoxes'][$chat['remitente']]) && isset($_SESSION['chatHistory'][$chat['remitente']])) {
+			$items = $_SESSION['chatHistory'][$chat['remitente']];
 		}
 
 		$chat['message'] = sanitize($chat['message']);
@@ -66,25 +66,25 @@ function chatHeartbeat() {
 		$items .= <<<EOD
 					   {
 			"s": "0",
-			"f": "{$chat['from']}",
+			"f": "{$chat['remitente']}",
 			"m": "{$chat['message']}"
 	   },
 EOD;
 
-	if (!isset($_SESSION['chatHistory'][$chat['from']])) {
-		$_SESSION['chatHistory'][$chat['from']] = '';
+	if (!isset($_SESSION['chatHistory'][$chat['remitente']])) {
+		$_SESSION['chatHistory'][$chat['remitente']] = '';
 	}
 
-	$_SESSION['chatHistory'][$chat['from']] .= <<<EOD
+	$_SESSION['chatHistory'][$chat['remitente']] .= <<<EOD
 						   {
 			"s": "0",
-			"f": "{$chat['from']}",
+			"f": "{$chat['remitente']}",
 			"m": "{$chat['message']}"
 	   },
 EOD;
 		
-		unset($_SESSION['tsChatBoxes'][$chat['from']]);
-		$_SESSION['openChatBoxes'][$chat['from']] = $chat['sent'];
+		unset($_SESSION['tsChatBoxes'][$chat['remitente']]);
+		$_SESSION['openChatBoxes'][$chat['remitente']] = $chat['sent'];
 	}
 
 	if (!empty($_SESSION['openChatBoxes'])) {
@@ -120,7 +120,7 @@ EOD;
 	}
 }
 
-	$sql = "update ".$TablasCore."chat set recd = 1 where ".$TablasCore."chat.to = '".mysql_real_escape_string($_SESSION['username'])."' and recd = 0";
+	$sql = "update ".$TablasCore."chat set recd = 1 where ".$TablasCore."chat.destinatario = '".mysql_real_escape_string($_SESSION['username'])."' and recd = 0";
 	$query = mysql_query($sql);
 
 	if ($items != '') {
@@ -178,30 +178,30 @@ header('Content-type: application/json');
 
 function sendChat() {
 	global $TablasCore;
-	$from = $_SESSION['username'];
-	$to = $_POST['to'];
+	$remitente = $_SESSION['username'];
+	$destinatario = $_POST['destinatario'];
 	$message = $_POST['message'];
 
-	$_SESSION['openChatBoxes'][$_POST['to']] = date('Y-m-d H:i:s', time());
+	$_SESSION['openChatBoxes'][$_POST['destinatario']] = date('Y-m-d H:i:s', time());
 	
 	$messagesan = sanitize($message);
 
-	if (!isset($_SESSION['chatHistory'][$_POST['to']])) {
-		$_SESSION['chatHistory'][$_POST['to']] = '';
+	if (!isset($_SESSION['chatHistory'][$_POST['destinatario']])) {
+		$_SESSION['chatHistory'][$_POST['destinatario']] = '';
 	}
 
-	$_SESSION['chatHistory'][$_POST['to']] .= <<<EOD
+	$_SESSION['chatHistory'][$_POST['destinatario']] .= <<<EOD
 					   {
 			"s": "1",
-			"f": "{$to}",
+			"f": "{$destinatario}",
 			"m": "{$messagesan}"
 	   },
 EOD;
 
 
-	unset($_SESSION['tsChatBoxes'][$_POST['to']]);
+	unset($_SESSION['tsChatBoxes'][$_POST['destinatario']]);
 
-	$sql = "insert into ".$TablasCore."chat (".$TablasCore."chat.from,".$TablasCore."chat.to,message,sent) values ('".mysql_real_escape_string($from)."', '".mysql_real_escape_string($to)."','".mysql_real_escape_string($message)."',NOW())";
+	$sql = "insert into ".$TablasCore."chat (".$TablasCore."chat.remitente,".$TablasCore."chat.destinatario,message,sent) values ('".mysql_real_escape_string($remitente)."', '".mysql_real_escape_string($destinatario)."','".mysql_real_escape_string($message)."',NOW())";
 	$query = mysql_query($sql);
 	echo "1";
 	exit(0);

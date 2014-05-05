@@ -35,6 +35,7 @@ inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
 inc/practico/def_basedatos.php
 img/icono_chat.png
+img/practico_login.png
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -51,6 +52,8 @@ LogCambios="
 * Added: Ahora algunos controles de datos permiten definir como su valor predeterminado a una variable PHP, valores iniciando con signo de $ seran evaluados como variables PHP en caso de estar definidas.
 * Added: Generador de diagramas de Gantt automatico
 * Fixed: Enlaces y logos de proveedores Oauth VK y Withings
+* Added: Mejoras de rendimiento en renderizado de formularios
+* Added: Agregada una plantilla en colores claros
 "
 
 ########################################################################
@@ -60,8 +63,8 @@ ALTER TABLE core_formulario CHANGE COLUMN ayuda_imagen color_fondo VARCHAR(20);
 ALTER TABLE core_informe ADD COLUMN color_fondo VARCHAR(20);
 CREATE TABLE core_chat (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  from VARCHAR(255) NOT NULL DEFAULT '',
-  to VARCHAR(255) NOT NULL DEFAULT '',
+  remitente VARCHAR(255) NOT NULL DEFAULT '',
+  destinatario VARCHAR(255) NOT NULL DEFAULT '',
   message TEXT NOT NULL,
   sent DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
   recd INTEGER UNSIGNED NOT NULL DEFAULT 0,

@@ -84,7 +84,7 @@
 </head>
 <body leftmargin="0"  margin="0" topmargin="0" oncontextmenu="return false;">
 <!-- INICIA MARCO DE CHAT -->
-<div id="main_container" style="overflow: hidden;">
+<div id="main_container" style="overflow: auto;">
 
 <div id='FondoPopUps' class="FondoOscuroPopUps"></div>
 

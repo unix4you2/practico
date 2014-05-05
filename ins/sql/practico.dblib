@@ -224,3 +224,14 @@ CREATE TABLE core_llaves_api (
   funciones_autorizadas text,
   PRIMARY KEY (id)
 );
+
+DROP TABLE IF EXISTS core_chat;
+CREATE TABLE core_chat (
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  remitente VARCHAR(255) NOT NULL DEFAULT '',
+  destinatario VARCHAR(255) NOT NULL DEFAULT '',
+  message TEXT NOT NULL,
+  sent DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  recd INTEGER UNSIGNED NOT NULL DEFAULT 0,
+  PRIMARY KEY (id)
+);

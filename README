@@ -48,9 +48,19 @@
             |___/ 
 
 
-
 ----------------------------------------
-Versión 14.3 (2014--03-16)
+Versión 14.5 (2014-05-04)
+----------------------------------------
+* Added: Sistema de chat interno tipo Gmail entre usuarios de la herramienta
+* Added: Ahora cada formulario puede especificar su color de fondo de manera independiente a la del tema seleccionado.
+* Added: Ahora cada informe puede especificar su color de fondo de manera independiente a la del tema seleccionado.
+* Added: Ahora algunos controles de datos permiten definir como su valor predeterminado a una variable PHP, valores iniciando con signo de $ seran evaluados como variables PHP en caso de estar definidas.
+* Added: Generador de diagramas de Gantt automatico
+* Fixed: Enlaces y logos de proveedores Oauth VK y Withings
+* Added: Mejoras de rendimiento en renderizado de formularios
+* Added: Agregada una plantilla en colores claros
+----------------------------------------
+Versión 14.3 (2014-03-16)
 ----------------------------------------
 * Added: Nueva funcion para buscar campos dentro de una tabla
 * Added: Ahora se permite definir campos manuales dentro de los formularios, esos campos seran obviados dentro de los insert y updates cuando no se encuentren en la tabla
