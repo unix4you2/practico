@@ -74,8 +74,6 @@
 </table>
 
 </div> <!-- FINALIZA MARCO DE CHAT -->
-
-<script type="text/javascript" src="inc/chat/js/jquery.js"></script>
 <script type="text/javascript" src="inc/chat/js/chat.js"></script>
 
 </body>

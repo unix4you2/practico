@@ -1750,6 +1750,15 @@ if ($accion=="editar_formulario")
 						</td>
 					</tr>
 					<tr>
+						<td align="right"><?php echo $MULTILANG_FrmBordesVisibles; ?></td>
+						<td>
+							<select name="borde_visible" class="selector_01" >
+								<option value="0" <?php if ($registro_form["borde_visible"]==0) echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?></option>
+								<option value="1" <?php if ($registro_form["borde_visible"]==1) echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?></option>
+							</select>
+						</td>
+					</tr>
+					<tr>
 						<td align="right"></td>
 						<td>
 							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_FrmAdvScriptForm; ?>" onClick="javascript:AbrirPopUp('FormularioScripts');">
@@ -1829,7 +1838,7 @@ if ($accion=="editar_formulario")
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario SET titulo=?,ayuda_titulo=?,ayuda_texto=?,color_fondo=?,tabla_datos=?,columnas=?,javascript=? WHERE id= ? ","$titulo||$ayuda_titulo||$ayuda_texto||$color_fondo||$tabla_datos||$columnas||$javascript||$formulario");
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario SET titulo=?,ayuda_titulo=?,ayuda_texto=?,color_fondo=?,tabla_datos=?,columnas=?,javascript=?,borde_visible=? WHERE id= ? ","$titulo||$ayuda_titulo||$ayuda_texto||$color_fondo||$tabla_datos||$columnas||$javascript||$borde_visible||$formulario");
 					auditar("Actualiza formulario $formulario para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
@@ -1875,7 +1884,7 @@ if ($accion=="editar_formulario")
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?)","$titulo||$ayuda_titulo||$ayuda_texto||$color_fondo||$tabla_datos||$columnas||$javascript");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?)","$titulo||$ayuda_titulo||$ayuda_texto||$color_fondo||$tabla_datos||$columnas||$javascript||$borde_visible");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea formulario $id para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -1932,8 +1941,9 @@ if ($accion=="editar_formulario")
 					$tabla_datos=$registro["tabla_datos"];
 					$columnas=$registro["columnas"];
 					$javascript=$registro["javascript"];
+					$borde_visible=$registro["borde_visible"];
 					// Inserta el nuevo objeto al form
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?) ","$nuevo_titulo||$ayuda_titulo||$ayuda_texto||$color_fondo||$tabla_datos||$columnas||$javascript");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?) ","$nuevo_titulo||$ayuda_titulo||$ayuda_texto||$color_fondo||$tabla_datos||$columnas||$javascript||$borde_visible");
 					$id=$ConexionPDO->lastInsertId();
 					// Busca los elementos que componen el formulario para hacerles la copia
 					// Registros de formulario_objeto
@@ -2134,6 +2144,15 @@ function FrmAutoRun()
 										echo '<option value="'.$i.'">'.$i.'</option>';
 								?>
 							</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesNumeroCols; ?>"><img src="img/icn_10.gif" border=0></a>
+						</td>
+					</tr>
+					<tr>
+						<td align="right"><?php echo $MULTILANG_FrmBordesVisibles; ?></td>
+						<td>
+							<select name="borde_visible" class="selector_01" >
+								<option value="0"><?php echo $MULTILANG_No; ?></option>
+								<option value="1"><?php echo $MULTILANG_Si; ?></option>
+							</select>
 						</td>
 					</tr>
 					<tr>

@@ -421,6 +421,7 @@
 	$MULTILANG_FrmCopiar='Make a copy';
 	$MULTILANG_FrmAdvCopiar='A new copy of this will be created.  Are you sure?';
 	$MULTILANG_FrmMsjCopia='Now you can go to edit your new form.  A copy was maded as: ';
+	$MULTILANG_FrmBordesVisibles='Are table borders visible?';
 	
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';

@@ -24,14 +24,14 @@ session_start();
 //Incluye los archivos de configuracion de Practico y define vbles de conexion
 include("../../core/configuracion.php");
 
-define ('DBPATH',$ServidorBD);
-define ('DBUSER',$UsuarioBD);
-define ('DBPASS',$PasswordBD);
-define ('DBNAME',$BaseDatos);
+// Inicia las conexiones con la BD y las deja listas para las operaciones
+include("../../core/conexiones.php");
 
-global $dbh;
-$dbh = mysql_connect(DBPATH,DBUSER,DBPASS);
-mysql_selectdb(DBNAME,$dbh);
+// Incluye definiciones comunes de la base de datos
+include_once("../../inc/practico/def_basedatos.php");
+
+// Incluye archivo con algunas funciones comunes usadas por la herramienta
+include_once("../../core/comunes.php");
 
 if ($_GET['action'] == "chatheartbeat") { chatHeartbeat(); } 
 if ($_GET['action'] == "sendchat") { sendChat(); } 
@@ -49,13 +49,15 @@ if (!isset($_SESSION['openChatBoxes'])) {
 function chatHeartbeat() {
 	
 	global $TablasCore;
-	$sql = "select * from ".$TablasCore."chat where (".$TablasCore."chat.destinatario = '".mysql_real_escape_string($_SESSION['username'])."' AND recd = 0) order by id ASC";
-	$query = mysql_query($sql);
+	
+	$usuario_chat=$_SESSION['username'];
+	$consulta=ejecutar_sql("select * from ".$TablasCore."chat where (".$TablasCore."chat.destinatario = ? AND recd = 0) order by id ASC","$usuario_chat");
+	
 	$items = '';
 
 	$chatBoxes = array();
 
-	while ($chat = mysql_fetch_array($query)) {
+	while ($chat = $consulta->fetch()) {
 
 		if (!isset($_SESSION['openChatBoxes'][$chat['remitente']]) && isset($_SESSION['chatHistory'][$chat['remitente']])) {
 			$items = $_SESSION['chatHistory'][$chat['remitente']];
@@ -120,8 +122,8 @@ EOD;
 	}
 }
 
-	$sql = "update ".$TablasCore."chat set recd = 1 where ".$TablasCore."chat.destinatario = '".mysql_real_escape_string($_SESSION['username'])."' and recd = 0";
-	$query = mysql_query($sql);
+	$usuario_chat=$_SESSION['username'];
+	ejecutar_sql_unaria("update ".$TablasCore."chat set recd = 1 where ".$TablasCore."chat.destinatario = ? and recd = 0","$usuario_chat");
 
 	if ($items != '') {
 		$items = substr($items, 0, -1);
@@ -201,8 +203,7 @@ EOD;
 
 	unset($_SESSION['tsChatBoxes'][$_POST['destinatario']]);
 
-	$sql = "insert into ".$TablasCore."chat (".$TablasCore."chat.remitente,".$TablasCore."chat.destinatario,message,sent) values ('".mysql_real_escape_string($remitente)."', '".mysql_real_escape_string($destinatario)."','".mysql_real_escape_string($message)."',NOW())";
-	$query = mysql_query($sql);
+	ejecutar_sql_unaria("insert into ".$TablasCore."chat (".$TablasCore."chat.remitente,".$TablasCore."chat.destinatario,message,sent) values (?,?,?,NOW());","$remitente||$destinatario||$message");
 	echo "1";
 	exit(0);
 }

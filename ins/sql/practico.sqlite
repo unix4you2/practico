@@ -84,7 +84,8 @@ CREATE TABLE core_formulario (
   color_fondo text default '',
   tabla_datos text default '',
   columnas integer default '1',
-  javascript text
+  javascript text,
+  borde_visible integer default '0'
   
 );
 

@@ -86,6 +86,7 @@ CREATE TABLE core_formulario (
   tabla_datos varchar(250) default '',
   columnas integer default '1',
   javascript text,
+  borde_visible integer default '0',
   PRIMARY KEY  (id)
 );
 

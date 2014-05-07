@@ -62,6 +62,7 @@
 	<script type="text/javascript" src="inc/practico/javascript/calendario.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/tecladovirtual.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/html5slider.js"></script>
+	<script type="text/javascript" src="inc/jquery/jquery-2.1.0.min.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/general.css">
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/calendario.css">

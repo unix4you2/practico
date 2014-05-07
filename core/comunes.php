@@ -2215,6 +2215,9 @@
 				$limite_superior=$constante_limite_superior; // Peso superior a tener en cuenta en el query
 				//Busca todos los objetos marcados como fila_unica=1 y agrega un registro mas con el limite superior
 				$consulta_obj_fila_unica=ejecutar_sql("SELECT id,peso,visible FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY peso","$formulario");
+				//Define si debe o no dibujar borde de las celdas
+				$ancho_borde_visible=0;
+				if ($registro_formulario["borde_visible"]==1) $ancho_borde_visible=1;
 				echo '<div id="seccion_impresion">';
 				while ($registro_obj_fila_unica = $consulta_obj_fila_unica->fetch())
 					{
@@ -2222,7 +2225,7 @@
 						$ultimo_id=$registro_obj_fila_unica["id"];
 						// Inicia la tabla con los campos
 						echo '
-						<table border=0 class="TextosVentana" align=center width="100%"><tr>';
+						<table cellspacing=0 cellpadding=2 border=0 class="TextosVentana" align=center width="100%"><tr>';
 						//Recorre todas las comunas definidas para el formulario buscando objetos
 						for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
 							{
@@ -2232,7 +2235,7 @@
 									//Inicia columna de formulario
 									echo '<td valign=top align=center>';
 									// Crea los campos definidos por cada columna de formulario
-									echo '<table border=0 class="TextosVentana">';
+									echo '<table cellspacing=0 cellpadding=2 border='.$ancho_borde_visible.' class="TextosVentana">';
 									while ($registro_campos = $consulta_campos->fetch())
 										{
 											//Crea la fila y celda donde va el campo
@@ -2289,6 +2292,7 @@
 								//echo '&nbsp;&nbsp;'.$registro_campos["titulo"];
 								// Formatea cada campo de acuerdo a su tipo
 								// CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas arriba tambien
+								echo '<table cellspacing=0 cellpadding=2 border='.$ancho_borde_visible.' class="TextosVentana" align=center width="100%"><tr><td>';
 								$tipo_de_objeto=@$registro_campos["tipo"];
 								if ($tipo_de_objeto=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
 								if ($tipo_de_objeto=="texto_clave") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
@@ -2301,10 +2305,10 @@
 								if ($tipo_de_objeto=="informe") cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
 								if ($tipo_de_objeto=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
 								if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
-
 								//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 								if ($registro_campos["tipo"]!="informe")
 									echo $objeto_formateado;
+								echo '</td></tr></table>';
 							}
 
 						//Actualiza limite inferior para siguiente lista de campos

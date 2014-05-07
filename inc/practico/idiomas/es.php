@@ -418,6 +418,7 @@
 	$MULTILANG_FrmCopiar='Crear copia';
 	$MULTILANG_FrmAdvCopiar='Se creara una copia nueva del formulario actual.  Esta seguro?';
 	$MULTILANG_FrmMsjCopia='Ahora puede ingresar a editar su nuevo formulario.  Se ha creado una copia como: ';
+	$MULTILANG_FrmBordesVisibles='Bordes de tabla visibles?';
 	
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';
