@@ -109,22 +109,22 @@ if ($WSId=="verificar_credenciales")
 
 		// Inicia el XML de salida basico solamente con el estado de aceptacion
 		$salida_xml .= "<?xml version=\"1.0\" encoding=\"utf-8\" ?>
-			<credenciales>
-				<credencial>
-					<aceptacion>$ok_login_verifica</aceptacion>";
+<credenciales>
+	<credencial>
+		<aceptacion>$ok_login_verifica</aceptacion>";
 		// Agrega al XML informacion complementaria cuando el estado de aceptacion es 1//// y ademas el motor interno es practico
 		if ($ok_login_verifica=='1')
 			$salida_xml .= "
-				<login>".$registro["login"]."</login>
-				<nombre>".$registro["nombre"]."</nombre>
-				<descripcion>".$registro["descripcion"]."</descripcion>
-				<nivel>".$registro["nivel"]."</nivel>
-				<correo>".$registro["correo"]."</correo>
-				<ultimo_acceso>".$registro["ultimo_acceso"]."</ultimo_acceso>";
+		<login>".$registro["login"]."</login>
+		<nombre>".$registro["nombre"]."</nombre>
+		<descripcion>".$registro["descripcion"]."</descripcion>
+		<nivel>".$registro["nivel"]."</nivel>
+		<correo>".$registro["correo"]."</correo>
+		<ultimo_acceso>".$registro["ultimo_acceso"]."</ultimo_acceso>";
 		// Finaliza el archivo XML
 		$salida_xml .= "
-			</credencial>
-		</credenciales>";
+	</credencial>
+</credenciales>";
 		// Devuelve los resultados
 		@ob_clean(); //Limpia salida antes de llamar los WS
 		echo $salida_xml;

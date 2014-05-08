@@ -74,17 +74,19 @@
 	function cargar_url($url)
 		{
 			$contenido_url="";
+
+			//Intenta con cURL si esta habilitado
+			$funcion_evaluada='curl_init'; $valor_esperado='1';
+			if (@$contenido_url=="")
+				if (ini_get($funcion_evaluada)==$valor_esperado)
+					$contenido_url = trim(file_get_contents_curl($url));
+
 			$funcion_evaluada='allow_url_fopen'; $valor_esperado='1';
-					
-			//Intenta con la funcion nativa de PHP si esta habilitada
+			//Intenta con la funcion nativa de PHP si esta habilitada y no se pudo obtener nada con cURL
 			if (@$contenido_url=="")
 				if (ini_get($funcion_evaluada)==$valor_esperado)
 					$contenido_url = trim(file_get_contents($url));
 
-			//Si no se pudo utilizar la funcion file_get_contents intenta con cURL
-			if (@$contenido_url=="")
-				$contenido_url = trim(file_get_contents_curl($url));
-			
 			//Retorna el resultado
 			return $contenido_url;
 		}
