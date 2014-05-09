@@ -6,7 +6,10 @@
                                       
 - Modulo embebido de elfinder-2.0-rc1 para la administración de archivos desde Práctico.
 
-Modo de Uso:
+
+Modo de Uso: (Proceso de instalacion versiones inferiores a la 14.7)  A partir de la version 14.7 este modulo
+             se incluye por defecto.
+
 	1) Descomprimir el modulo mediante su proceso de instalacion normal o manualmente sobre /mod
 	2) Asegurese de dar permisos de escritura para la carpeta "archivos" y sus subcarpetas contenida en el modulo
 	2) Accesar Practico con credenciales de administrador y agregar un nuevo menu asi (si todavia no existe):

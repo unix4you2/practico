@@ -73,6 +73,16 @@
 									'alias' 		=> 'Raiz de Practico',
 									'accessControl' => 'access'             // disable and hide dot starting files (OPTIONAL)
 								)
+							//Agrega raiz para la carpeta compartida general ubicada en archivos/_publico_
+							,
+							array
+								(
+									'driver'        => 'LocalFileSystem',   // driver for accessing file system (REQUIRED)
+									'path'          => '../../cargas/',         // path to files (REQUIRED)
+									'URL'           => dirname($_SERVER['PHP_SELF']) . '/../../cargas/', // URL to files (REQUIRED)
+									'alias' 		=> 'Cargas por formulario',
+									'accessControl' => 'access'             // disable and hide dot starting files (OPTIONAL)
+								)
 						)
 				);
 		}

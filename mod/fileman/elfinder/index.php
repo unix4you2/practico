@@ -5,9 +5,10 @@
 		<title>elFinder 2.0</title>
 
 		<!-- jQuery and jQuery UI (REQUIRED) -->
-		<link rel="stylesheet" type="text/css" media="screen" href="jquery/jquery-ui.css">
-		<script type="text/javascript" src="jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
+		<!-- Actualizado para inclusion desde inc/jquery de Practico -->
+		<link rel="stylesheet" type="text/css" media="screen" href="../../../inc/jquery/plugins/ui-1.8.18/jquery-ui.css">
+		<script type="text/javascript" src="../../../inc/jquery/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="../../../inc/jquery/plugins/ui-1.8.18/jquery-ui.min.js"></script>
 
 		<!-- elFinder CSS (REQUIRED) -->
 		<link rel="stylesheet" type="text/css" media="screen" href="css/elfinder.min.css">
