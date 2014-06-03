@@ -829,3 +829,5 @@
 	$MULTILANG_ProtoTransHTTPS='HTTP secured';
 	$MULTILANG_ProtoDescripcion='Autodetect will check URLs used to access and will enable or disable SSL,  HTTP standard allow people with self-signed certs to connect with the Practicos auth webservice.  This is an unsafe mode but very effective if you need to access.   HTTP Secured requieres a valid SSL cert by a CA on your web server.';
 
+	//Login Federado
+	$MULTILANG_TitFederado='Federated Login';

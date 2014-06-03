@@ -825,3 +825,11 @@
 	$MULTILANG_ProtoTransHTTPS='HTTP cifrado';
 	$MULTILANG_ProtoDescripcion='Autodetectar mira la URL mediante la cual accede el usuario y segun su cabecera determina si usa o no el cifrado,  HTTP sin cifrar permite aquellos con certificados autofirmados no validos poder recibir el webservice de autenticacion.  Es un modo no mas seguro pero si mas efectivo de siempre hacer login.   HTTP Cifrado requiere un certificado SSL valido emitido por un CA en su servidor.';
 	
+	//Login Federado
+	$MULTILANG_TitFederado='Autenticaci&oacute;n Federada';
+	$MULTILANG_CampoUsuarioFederado='Campo de usuario';
+	$MULTILANG_CampoClaveFederado='Campo de contrase&ntilde;a';
+
+
+
+

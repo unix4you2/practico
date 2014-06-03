@@ -49,6 +49,19 @@
 
 
 ----------------------------------------
+Versión 14.6 (2014-06-02)
+----------------------------------------
+* Added: Actualizacion JQuery a version 2.1.0
+* Added: Mejora a la clase HTTP (actualizada a version abril 30/2014) 
+* Added: Compatibilidad para cualquier motor de base de datos en el modulo de chat
+* Fixed: Inclusion de JQuery se hace al comienzo de la herramienta y no al final
+* Fixed: Modulo de chat ahora es dependiente de la version actualizada de JQuery
+* Added: Ahora para facilitar diseño o para cuando su finalidad sea ésta, se permite dejar visibles las líneas de borde para la tabla usada en un formulario.
+* Added: Inclusion del finder de archivos por defecto
+* Added: Inclusion de todos los iconos en temas disponibles por defecto
+* Added: BETA. Autenticacion federada frente a otros motores y aplicaciones!
+* Fixed: [Tester: Eisenhower Renza Guzman]  Cuando se tienen demasiados campos en un formulario al momento de edicion no se cuenta con scrollbar
+----------------------------------------
 Versión 14.5 (2014-05-04)
 ----------------------------------------
 * Added: Sistema de chat interno tipo Gmail entre usuarios de la herramienta

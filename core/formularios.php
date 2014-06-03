@@ -1337,6 +1337,7 @@ if ($accion=="editar_formulario")
 			<?php
 				abrir_ventana($MULTILANG_FrmDisCampos,'#BDB9B9','');
 			?>
+				<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 550px">
 					<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
 						<tr>
 							<td bgcolor="#D6D6D6"><b><?php echo $MULTILANG_Titulo; ?> (<?php echo $MULTILANG_Tipo?>)</b></td>
@@ -1486,7 +1487,7 @@ if ($accion=="editar_formulario")
 					}
 				echo '</table>';			
 			?>
-				
+				</DIV>
 			</div>
 			<?php
 				abrir_barra_estado();

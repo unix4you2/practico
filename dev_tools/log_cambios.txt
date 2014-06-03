@@ -6,7 +6,7 @@ VersionCompatibleMes="5"
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
 VersionFinalAno="14"
-VersionFinalMes="7"
+VersionFinalMes="6"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version
@@ -15,10 +15,30 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 index.php
+core/actualizacion.php
+core/backups.php
+core/captcha.php
 core/comunes.php
+core/conexiones.php
+core/correos.php
 core/formularios.php
-core/marco_arriba.php
+core/informes.php
 core/marco_abajo.php
+core/marco_arriba.php
+core/marco_chat.php
+core/marco_conf.php
+core/marco_dev.php
+core/marco_oauth.php
+core/marco_param.php
+core/marco_wscfg.php
+core/menus.php
+core/monitoreo.php
+core/objetos.php
+core/sesion.php
+core/tablas.php
+core/usuarios.php
+core/ws_funciones.php
+core/ws_nucleo.php
 img/*
 inc/jquery/*
 inc/practico/def_basedatos.php
@@ -45,6 +65,8 @@ LogCambios="
 * Added: Ahora para facilitar diseño o para cuando su finalidad sea ésta, se permite dejar visibles las líneas de borde para la tabla usada en un formulario.
 * Added: Inclusion del finder de archivos por defecto
 * Added: Inclusion de todos los iconos en temas disponibles por defecto
+* Added: BETA. Autenticacion federada frente a otros motores y aplicaciones!
+* Fixed: [Tester: Eisenhower Renza Guzman]  Cuando se tienen demasiados campos en un formulario al momento de edicion no se cuenta con scrollbar
 "
 
 ########################################################################
