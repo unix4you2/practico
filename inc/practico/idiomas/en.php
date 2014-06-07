@@ -708,6 +708,7 @@
 	$MULTILANG_UsrAuditoria='Audit';
 	$MULTILANG_UsrAgregar='Add a User';
 	$MULTILANG_UsrVerAudit='View user audit';
+	$MULTILANG_UsrReset='Password reset';
 
 	//Proceso de instalacion
 	$MULTILANG_Instalacion='Installation Process';

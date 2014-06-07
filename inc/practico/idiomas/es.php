@@ -705,6 +705,7 @@
 	$MULTILANG_UsrAuditoria='Auditor&iacute;a';
 	$MULTILANG_UsrAgregar='Agregar un usuario';
 	$MULTILANG_UsrVerAudit='Ver auditoria de usuarios';
+	$MULTILANG_UsrReset='Resetear clave';
 
 	//Proceso de instalacion
 	$MULTILANG_Instalacion='Proceso de instalaci&oacute;n';

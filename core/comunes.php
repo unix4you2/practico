@@ -68,6 +68,7 @@
 			// Funciones en core/usuarios.php
 			if ($accion== "cambiar_clave")						$retorno = 1;
 			if ($accion== "ver_seguimiento_monitoreo")			$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($accion== "resetear_clave")						$retorno = permiso_agregado_accion("listar_usuarios");
 			if ($accion== "ver_seguimiento_general")			$retorno = permiso_agregado_accion("listar_usuarios");
 			if ($accion== "ver_seguimiento_especifico")			$retorno = permiso_agregado_accion("listar_usuarios");
 			if ($accion== "actualizar_clave")					$retorno = permiso_agregado_accion("cambiar_clave");

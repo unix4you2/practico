@@ -774,6 +774,29 @@ if ($accion=="permisos_usuario")
 		}
 
 
+/* ################################################################## */
+/* ################################################################## */
+	if ($accion=="resetear_clave")
+		{
+			/*
+				Function: resetear_clave
+				Restablece la contrasena de un usuario por la nueva ingresada
+
+				Variables minimas de entrada:
+					uid_especifico - Login del usuario
+					nueva_clave - Nueva clave para el usuario
+
+				Salida de la funcion:
+					* Usuario con su clave actualizada
+
+				Ver tambien:
+					<listar_usuarios> | <eliminar_usuario>
+			*/
+			ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$nueva_clave') WHERE login=? ","$uid_especifico");
+			auditar("Restablece clave de acceso para $uid_especifico");
+			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+		}
+
 
 /* ################################################################## */
 /* ################################################################## */
@@ -1306,7 +1329,7 @@ if ($accion=="listar_usuarios")
 			else
 			{
 				echo '
-				<table border="0" cellspacing="10" align="CENTER" class="TextosVentana">
+				<table border="0" cellspacing="3" align="CENTER" class="TextosVentana">
 					<tr>
 						<td align="left" bgcolor="#d6d6d6"><b>'.$MULTILANG_UsrLogin.'</b></td>
 						<td align="LEFT" bgcolor="#D6D6D6"><b>'.$MULTILANG_Nombre.'</b></td>
@@ -1364,6 +1387,22 @@ if ($accion=="listar_usuarios")
 												<input type="Submit" value="'.$MULTILANG_UsrAuditoria.'" class="Botones">
 										</form>
 								</td>
+							<tr>
+								<td colspan=3>
+								</td>
+								<td colspan=5>
+										<form action="'.$ArchivoCORE.'" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+												<input type="hidden" name="accion" value="resetear_clave">
+												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
+												<input type="Submit" value="'.$MULTILANG_UsrReset.' -->" class="BotonesCuidado">
+												'.$MULTILANG_UsrNuevoPW.': <input type="text" name="nueva_clave" size=12 value="'.TextoAleatorio(10).'">
+										</form>
+								</td>
+							</tr>
+							<tr>
+								<td colspan=8><hr>
+								</td>
+							</tr>
 							</tr>';
 							$i++;
 					}
