@@ -1390,7 +1390,7 @@ if ($accion=="listar_usuarios")
 							<tr>
 								<td colspan=3>
 								</td>
-								<td colspan=5>
+								<td colspan=5 align=center>
 										<form action="'.$ArchivoCORE.'" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 												<input type="hidden" name="accion" value="resetear_clave">
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">

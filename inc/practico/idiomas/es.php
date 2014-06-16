@@ -52,6 +52,7 @@
 	$MULTILANG_Cerrar='Cerrar';
 	$MULTILANG_CerrarSesion='Cerrar sesi&oacute;n';
 	$MULTILANG_Cliente='Cliente';
+	$MULTILANG_CodigoBarras='C&oacute;digo de barras';
 	$MULTILANG_Columna='Columna';
 	$MULTILANG_ConfiguracionGeneral='Configuraci&oacute;n General';
 	$MULTILANG_ConfiguracionVarias='Configuraci&oacute;n de opciones varias';
@@ -93,6 +94,7 @@
 	$MULTILANG_Instante='Instante';
 	$MULTILANG_IrEscritorio='Ir a mi escritorio';
 	$MULTILANG_LlavePaso='Llave de paso';
+	$MULTILANG_Matriz='Matriz';
 	$MULTILANG_MotorBD='Motor de Base de Datos';
 	$MULTILANG_Ninguno='Ninguno';
 	$MULTILANG_No='No';
@@ -306,11 +308,11 @@
 	$MULTILANG_FrmDesTeclado='Cuando es habilitado en el formulario se despliega un teclado virtual para el ingreso de informaci&oacute;n;.  Por ahora el uso del teclado puede violar las validaciones';
 	$MULTILANG_FrmAncho='Ancho';
 	$MULTILANG_FrmTitAncho='Cu&aacute;nto espacio de ancho debe ocupar el control';
-	$MULTILANG_FrmDesAncho='IMPORTANTE: en n&uacute;mero de caracteres para texto simple o en pixeles para texto con formato. Indique un n&uacute;mero de columnas, sin embargo, tenga presente que el ancho en pixeles ser&aacute; variable de acuerdo al tipo de fuente utilizada por el tema actual';
+	$MULTILANG_FrmDesAncho='IMPORTANTE: en n&uacute;mero de caracteres para texto simple o en pixeles para texto con formato. Indique un n&uacute;mero de columnas, sin embargo, tenga presente que el ancho en pixeles ser&aacute; variable de acuerdo al tipo de fuente utilizada por el tema actual. Para campos con imagenes o codigos de barra esto representa su tamano en pixeles.';
 	$MULTILANG_FrmDesAncho2='M&iacute;nimo recomendado en campos con formato: 350';
 	$MULTILANG_FrmAlto='Alto (l&iacute;neas)';
 	$MULTILANG_FrmTitAlto='Cu&aacute;ntas filas deben estar visibles en el control?';
-	$MULTILANG_FrmDesAlto='IMPORTANTE: en n&uacute;mero de filas para texto simple o en pixeles para texto con formato.  En caso que el texto supere el n&uacute;mero de filas se agregar&aacute;n autom&aacute;ticamente barras de desplazamiento';
+	$MULTILANG_FrmDesAlto='IMPORTANTE: en n&uacute;mero de filas para texto simple o en pixeles para texto con formato.  En caso que el texto supere el n&uacute;mero de filas se agregar&aacute;n autom&aacute;ticamente barras de desplazamiento. Para campos con imagenes o codigos de barra esto representa su tamano en pixeles.';
 	$MULTILANG_FrmDesAlto2='M&iacute;nimo recomendado en campos con formato: 100';
 	$MULTILANG_FrmBarra='Barra de edici&oacute;n';
 	$MULTILANG_FrmBarraTipo1='B&aacute;sica: Documento, formato de caracter y p&aacute;rrafo';
@@ -419,6 +421,7 @@
 	$MULTILANG_FrmAdvCopiar='Se creara una copia nueva del formulario actual.  Esta seguro?';
 	$MULTILANG_FrmMsjCopia='Ahora puede ingresar a editar su nuevo formulario.  Se ha creado una copia como: ';
 	$MULTILANG_FrmBordesVisibles='Bordes de tabla visibles?';
+	$MULTILANG_FrmFormatoSalida='Formato de salida';
 	
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

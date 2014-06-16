@@ -125,6 +125,7 @@ CREATE TABLE core_formulario_objeto (
   valor_minimo integer,
   valor_maximo integer,
   valor_salto integer
+  formato_salida text default '',
 
 );
 

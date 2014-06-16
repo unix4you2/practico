@@ -463,8 +463,8 @@
 			if ($mensaje_error=="")
 				{
 					// Define la consulta de insercion del nuevo campo
-					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-					ejecutar_sql_unaria($consulta_insercion,"$tipo_objeto||$titulo||$campo||$ayuda_titulo||$ayuda_texto||$formulario||$peso||$columna||$obligatorio||$visible||$valor_predeterminado||$validacion_datos||$etiqueta_busqueda||$ajax_busqueda||$valor_unico||$solo_lectura||$teclado_virtual||$ancho||$alto||$barra_herramientas||$fila_unica||$lista_opciones||$origen_lista_opciones||$origen_lista_valores||$valor_etiqueta||$url_iframe||$objeto_en_ventana||$informe_vinculado||$maxima_longitud||$valor_minimo||$valor_maximo||$valor_salto");
+					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					ejecutar_sql_unaria($consulta_insercion,"$tipo_objeto||$titulo||$campo||$ayuda_titulo||$ayuda_texto||$formulario||$peso||$columna||$obligatorio||$visible||$valor_predeterminado||$validacion_datos||$etiqueta_busqueda||$ajax_busqueda||$valor_unico||$solo_lectura||$teclado_virtual||$ancho||$alto||$barra_herramientas||$fila_unica||$lista_opciones||$origen_lista_opciones||$origen_lista_valores||$valor_etiqueta||$url_iframe||$objeto_en_ventana||$informe_vinculado||$maxima_longitud||$valor_minimo||$valor_maximo||$valor_salto||$formato_salida");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea campo $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
@@ -584,7 +584,7 @@ if ($accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(26);
+					OcultarCampos(27);
 					// Muestra campos segun tipo de objeto
 					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,13,14,17,25");
 					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,13,17,25");
@@ -596,7 +596,7 @@ if ($accion=="editar_formulario")
 					if (tipo_objeto_activo=="url_iframe")   VisualizarCampos("9,14,15,17,22,24");
 					if (tipo_objeto_activo=="informe")   VisualizarCampos("9,17,23,24");
 					if (tipo_objeto_activo=="deslizador")   VisualizarCampos("1,2,4,7,8,9,17,26");
-					if (tipo_objeto_activo=="campo_etiqueta")   VisualizarCampos("1,2,4,9,17");
+					if (tipo_objeto_activo=="campo_etiqueta")   VisualizarCampos("1,2,4,9,17,14,15,27");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -1183,7 +1183,36 @@ if ($accion=="editar_formulario")
 							</tr>
 							</table>
 						</div>
-						
+
+						<div id='campo27' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right"><?php echo $MULTILANG_FrmFormatoSalida; ?>:</td>
+								<td width="400" >
+									<select  name="formato_salida" class="Combos">
+									<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+									<optgroup label="<?php echo $MULTILANG_CodigoBarras; ?>">
+										<option value="std25">Standard 2 of 5 (industrial, Numerio Sin limite)</option>
+										<option value="int25">Interleaved 2 of 5</option>
+										<option value="ean8">EAN 8 (Numerico 7 caracteres)</option>
+										<option value="ean13">EAN 13 (Numerico 12 caracteres)</option>
+										<option value="upc">UPC</option>
+										<option value="code11">Code 11</option>
+										<option value="code39">Code 39</option>
+										<option value="code93">Code 93</option>
+										<option value="code128">Code 128</option>
+										<option value="codabar">CodaBar</option>
+										<option value="msi">MSI</option>
+									</optgroup>
+									<optgroup label="<?php echo $MULTILANG_Matriz; ?>">
+										<option value="datamatrix">Datamatrix (ASCII+extended)</option>
+										<option value="qrcode">QR-Code</option>
+									</optgroup>
+									</select>
+								</td>
+							</tr>
+							</table>
+						</div>
 
 					<?php
 						//Despues de agregar todos los parametros de campos, Si se detecta que es edicion de un campo se llama a la funcion de visualizacion de campos especificos

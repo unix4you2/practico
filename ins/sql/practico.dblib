@@ -126,6 +126,7 @@ CREATE TABLE core_formulario_objeto (
   valor_minimo int(10),
   valor_maximo int(10),
   valor_salto int(10),
+  formato_salida varchar(250) default '',
   PRIMARY KEY  (id)
 );
 

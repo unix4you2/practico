@@ -52,6 +52,7 @@
 	$MULTILANG_Cerrar='Close';
 	$MULTILANG_CerrarSesion='Logout';
 	$MULTILANG_Cliente='Client';
+	$MULTILANG_CodigoBarras='Bar code';
 	$MULTILANG_Columna='Column';
 	$MULTILANG_ConfiguracionGeneral='General Settings';
 	$MULTILANG_ConfiguracionVarias='Configuring multiple options';
@@ -93,6 +94,7 @@
 	$MULTILANG_Instante='Instant';
 	$MULTILANG_IrEscritorio='Go to my desk';
 	$MULTILANG_LlavePaso='SignKey';
+	$MULTILANG_Matriz='Matrix';
 	$MULTILANG_MotorBD='Database Engine';
 	$MULTILANG_Ninguno='None';
 	$MULTILANG_No='No';
@@ -309,11 +311,11 @@
 	$MULTILANG_FrmDesTeclado='When enabled on the form displays a virtual keyboard for entering information,. For now the keyboard use may violate validations';
 	$MULTILANG_FrmAncho='Width';
 	$MULTILANG_FrmTitAncho='How wide should occupy space control';
-	$MULTILANG_FrmDesAncho='IMPORTANT: in characters number for simple text fields and pixels rich-text fields. Enter a number of columns, however, note that the width in pixels will vary according to the type of font used by the current theme';
+	$MULTILANG_FrmDesAncho='IMPORTANT: in characters number for simple text fields and pixels rich-text fields. Enter a number of columns, however, note that the width in pixels will vary according to the type of font used by the current theme.  For image or bar code fields this value is for the size of the picture.';
 	$MULTILANG_FrmDesAncho2='Minimum recommended for rich-text format fields: 350';
 	$MULTILANG_FrmAlto='Height (lines)';
 	$MULTILANG_FrmTitAlto='How many rows should be visible in the control?';
-	$MULTILANG_FrmDesAlto='IMPORTANT: the number of rows for simple text or in pixels for rich-text formatting. If the text exceeds the number of rows are automatically added scrollbars';
+	$MULTILANG_FrmDesAlto='IMPORTANT: the number of rows for simple text or in pixels for rich-text formatting. If the text exceeds the number of rows are automatically added scrollbars.  For image or bar code fields this value is for the size of the picture.';
 	$MULTILANG_FrmDesAlto2='Minimum recommended format fields: 100';
 	$MULTILANG_FrmBarra='Formatting bar';
 	$MULTILANG_FrmBarraTipo1='Basic: Document, character and paragraph formatting';
@@ -422,6 +424,7 @@
 	$MULTILANG_FrmAdvCopiar='A new copy of this will be created.  Are you sure?';
 	$MULTILANG_FrmMsjCopia='Now you can go to edit your new form.  A copy was maded as: ';
 	$MULTILANG_FrmBordesVisibles='Are table borders visible?';
+	$MULTILANG_FrmFormatoSalida='Output format';
 	
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';

@@ -15,11 +15,15 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 index.php
+core/codigobarras.php
 core/marco_param.php
 core/comunes.php
+core/formularios.php
 core/usuarios.php
+inc/practico/def_basedatos.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
+inc/bargen/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -31,12 +35,14 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 * Added: Opcion de reinicio de claves para usuarios
+* Added: Impresion de campos de base de datos tipo etiqueta en formularios como códigos de barra en múltiples formatos o QR Codes.
 * Added: BETA. Autenticacion federada frente a otros motores y aplicaciones!
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
+ALTER TABLE core_formulario_objeto ADD COLUMN formato_salida varchar(250) default '';
 "
 
 ########################################################################

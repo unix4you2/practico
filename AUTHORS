@@ -48,6 +48,14 @@ QR Code encoder
 	Made by: Copyright (C) 2010, Dominik Dzienia
 	deltalab at poczta dot fm
 
+BarCode Coder Library (BCC Library)
+	Location: inc/bargen/*
+	License: GNU General Public License Version 3
+	Made by: DEMONTE Jean-Baptiste - 2013-01-06
+	jbdemonte at gmail.com
+	http://barcode-coder.com/
+	See inc/http/LICENSE.txt for details
+
 Gantti - A simple PHP Gantt Class
 	Location: mod/gantti/*
 	License: MIT License

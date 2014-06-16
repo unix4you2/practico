@@ -1925,6 +1925,7 @@
 			global $campobase,$valorbase;
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
+			$Contenido_BARRAS='';
 			$nombre_campo=$registro_campos["campo"];
 			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=$registro_campos["valor_predeterminado"];
 			//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.
@@ -1938,13 +1939,45 @@
 							$cadena_valor=' value="'.$valor_variable.'" ';							
 						}
 				}
-			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
+			//Si viene de una busqueda de registro pone el valor de registro
+			if ($campobase!="" && $valorbase!="") 
+				{
+					$cadena_valor=$registro_datos_formulario["$nombre_campo"];
+					$Contenido_BARRAS=$cadena_valor; //En caso que se requiera para imprimir en formato especial
+				}
+
+			//Si el formato de salida es especial entonces muestra lo que corresponda
+			if ($registro_campos["formato_salida"]!="") 
+				{
+					$Tipo_BARRAS=$registro_campos["formato_salida"];
+
+					//Establece tamanos de imagen segun tipo de grafico (codigo barras o datamatrix)
+					if ($Tipo_BARRAS!="datamatrix")
+						{
+							$Ancho_BARRAS=$registro_campos["ancho"];
+							//Si no se definio un ancho fijo entonces trata de calcularlo por la longitud del texto a mostrar
+							if ($Ancho_BARRAS=="" || $Ancho_BARRAS=="0")
+								$Ancho_BARRAS=110+strlen($Contenido_BARRAS)*10;
+							$Alto_BARRAS=$registro_campos["alto"];
+						}
+					if ($Tipo_BARRAS=="datamatrix")
+						{
+							$Ancho_BARRAS=$registro_campos["ancho"];
+							$Alto_BARRAS=$registro_campos["alto"];
+						}
+					
+					
+					
+					$cadena_valor='<img src="core/codigobarras.php?Cadena='.$Contenido_BARRAS.'&Tipo='.$Tipo_BARRAS.'&AnchoCodigo=2&AltoCodigo='.($Alto_BARRAS-6).'&AnchoImagen='.$Ancho_BARRAS.'&AltoImagen='.$Alto_BARRAS.'" border=0>';
+					//$cadena_valor=$registro_campos["valor_predeterminado"];
+				}
+
 			$salida=$cadena_valor;
 
 			//Agrega ademas el valor como hidden para disponer de el cuando se requiera en otro llamado o funcion personalizada
 			$tipo_entrada="hidden";
 			// Muestra el campo
-			$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor.'" >';
+			//$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor.'" >';
 			return $salida;
 		}
 
