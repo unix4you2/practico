@@ -1327,20 +1327,20 @@
 			<table width="'.$ancho.'" border="0" cellspacing="0" cellpadding="0" class="EstiloVentana">
 				<tr>
 					<td>
-							<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
-									<td><img src="skin/'.$PlantillaActiva.'/img/bar_i.gif" border=0 alt=" "></td>
+							<table width="100%" border="0" cellspacing="0" cellpadding="0" background="skin/'.$PlantillaActiva.'/img/bar_c.jpg"><tr>
+									<td valign=top><img src="skin/'.$PlantillaActiva.'/img/bar_i.gif" border=0 alt=" "></td>
 									<td width="100%" align="CENTER" background="skin/'.$PlantillaActiva.'/img/bar_c.jpg">
 										<font face="" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; color: Black;"><b>
 												'.$titulo.'
 										</b></font>
 									</td>
 									<!-- Barra de botones de ventana -->
-									<td align="RIGHT" background="skin/'.$PlantillaActiva.'/img/bar_c.jpg">';
+									<td valign=top align="RIGHT" background="skin/'.$PlantillaActiva.'/img/bar_c.jpg">';
 										// Si se recibe una barra de herramientas la dibuja
 										if ($barra_herramientas!='')
 											echo $barra_herramientas;
 		echo '						</td>
-									<td><img src="skin/'.$PlantillaActiva.'/img/bar_d.gif " border=0 alt=""></td>
+									<td valign=top><img src="skin/'.$PlantillaActiva.'/img/bar_d.gif " border=0 alt=""></td>
 							</tr></table>
 					</td>
 				</tr>
