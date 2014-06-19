@@ -26,58 +26,6 @@
 
 
 <?php 
-
-
-/* ################################################################## */
-/* ################################################################## */
-	$PaginaInicio=5;
-	$MaximoPaginas=5;
-	$MilisegundosPagina=10000;
-
-	//Definicion de maquinas a monitorear
-	$Maquinas[]=array(Nombre => "Servicio Web",	Host => "localhost",	Puerto => "80",		TipoMonitor=>"socket",	Icono=> "icn_rdp.png");
-	$Maquinas[]=array(Nombre => "MySQL",			Host => "localhost",	Puerto => "344306",	TipoMonitor=>"socket",	Icono=> "");
-
-	//Comandos de monitoreo por shell validos
-	$ComandosShell[]=array(Nombre => "Procesos",	Comando=>"ps -aux",	Ancho=>"80",	Alto=>"6");
-	//Comandos monitoreo SQL
-	$ComandosSQL[]=array(Nombre => "Consulta SQL",	Comando=>"SELECT COUNT(*) as conteos FROM usuario",	TamanoResult=>"30",	OcultarTitulos=>"1");	
-	$ComandosSQL[]=array(Nombre => "Operaciones",	Comando=>"SELECT MAX(codigo) as conteo3 FROM auditoria",	TamanoResult=>"30",	OcultarTitulos=>"1");
-
-	//Imagenes
-	$ImagenesRRD[]=array(Nombre => "Imagen1",	Path=>"../img/icn_03.gif",	Ancho=>"300",	Alto=>"100",	Salto=>"0");	
-	$ImagenesRRD[]=array(Nombre => "Imagen2",	Path=>"../img/icn_02.gif",	Ancho=>"300",	Alto=>"100",	Salto=>"0");
-
-
-	//Path imagenes e iconos y sus propiedades
-	$Path_imagenes="img/";
-	$Imagen_fallo="icn_12.gif";
-	$Imagen_ok="icn_11.gif";
-	$Imagen_generica="tango_network-server.png";
-	$Tamano_iconos=" width=20 heigth=20 ";
-	$Imagen_generica_sql="tango_utilities-system-monitor.png";
-	$Imagen_generica_shell="tango_utilities-terminal.png";
-	$Sonido_alarma="../inc/practico_alarma.mp3";
-
-	//Variables de apariencia
-	$ancho_tablas_maquinas=200;
-	// Valores de presentacion predeterminados
-	$color_fondo_estado="#CAF9CB";
-	$color_texto_estado="green";
-
-	$color_fondo_estado_sql="#CAF9CB";
-	$color_texto_estado_sql="green";
-
-	$color_fondo_ascii="transparent"; 	//Transparent o el codigo de color
-	$color_texto_ascii="#FFFFFF";
-	$barras_texto_ascii="hidden";		//hidden|auto
-
-
-
-
-
-
-
 /* ################################################################## */
 /* ################################################################## */
 	function GetPing($ip=NULL)
@@ -283,7 +231,6 @@
 
 			//Presenta la imagen
 			echo '<img src="'.$ImagenRRD["Path"].'" width="'.$ImagenRRD["Ancho"].'" height="'.$ImagenRRD["Alto"].'" border=0>';
-			if ($ImagenRRD["Salto"]==1) echo "<br>";
 		}
 
 
@@ -325,42 +272,498 @@
 		}
 
 
+/* ################################################################## */
+/* ################################################################## */
+if ($accion=="eliminar_monitoreo")
+	{
+		/*
+			Function: eliminar_monitoreo
+			Elimina una opcion del menu, escritorio o demas ubicaciones definidas por el administrador incluyendo el vinculo a todos los usuarios que la tengan.
+
+			Variables de entrada:
+
+				id - Identificador unico en la tabla de menu
+
+			(start code)
+				DELETE FROM ".$TablasCore."monitoreo WHERE id=$id
+			(end)
+
+			Salida:
+				Entradas de menu actualizadas.
+
+			Ver tambien:
+			<administrar_monitoreo> | <guardar_monitoreo>
+		*/
+		// Elimina los datos del monitor
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."monitoreo WHERE id=? ","$id");
+		auditar("Elimina monitor $id");
+					echo '
+					<form name="continuar_admin_mon" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="administrar_monitoreo">
+					</form>
+					<script type="" language="JavaScript"> 
+					alert("'.$MULTILANG_Aplicando.'");
+					document.continuar_admin_mon.submit();  </script>';
+	}
 
 
+/* ################################################################## */
+/* ################################################################## */
+		/*
+			Function: guardar_monitoreo
+			Almacena un nuevo monitor definido por el usuario
 
-	//Recorre todos los servicios y maquinas definidos
-	echo '<br>';
-	for ($i=0;$i<count($Maquinas);$i++)
-		PresentarEstadoMaquina($Maquinas[$i],$color_fondo_estado,$color_texto_estado);
+			(start code)
+				INSERT INTO ".$TablasCore."monitoreo VALUES ( ... )
+			(end)
 
-	//Recorre todos los comandos de shell para monitoreo
-	echo '<br><br>';
-	for ($i=0;$i<count($ComandosShell);$i++)
-		EjecutarComando($ComandosShell[$i]);
+			Salida:
+				Entradas en la tabla de monitoreo actualizadas
 
-	//Recorre todos los comandos de monitoreo SQL
-	echo '<br><br>';
-	for ($i=0;$i<count($ComandosSQL);$i++)
-		PresentarEstadoSQL($ComandosSQL[$i],$color_fondo_estado_sql,$color_texto_estado_sql);
-
-	//Recorre todas las imagenes o graficos RRD
-	echo '<br><br>';
-	for ($i=0;$i<count($ImagenesRRD);$i++)
-		PresentarImagen($ImagenesRRD[$i]);
-		
-	// Si encuentra algun error en el monitoreo reproduce la alarma
-	if ($ErroresMonitoreoPractico)
+			Ver tambien:
+			<administrar_monitoreo>
+		*/
+	if ($accion=="guardar_monitoreo")
 		{
-			$Ruta_Servidor="http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
-			$Ruta_Servidor=str_replace(basename($_SERVER['PHP_SELF']),"",$Ruta_Servidor);
-			$Ruta_Servidor.=$Sonido_alarma;
-			//echo "<hr>".$Ruta_Servidor;
-			//$Sonido_alarma=$Ruta_Servidor;
+			$mensaje_error="";
+			// Verifica campos nulos
+			if ($nombre=="")
+				$mensaje_error.=$MULTILANG_MonErr."<br>";
 
-			//Tipos de reproduccion
-			//echo '<embed height="50" width="100" src="'.$Sonido_alarma.'">';
-			//echo '<object height="50" width="100" data="'.$Sonido_alarma.'"></object>';
-			//echo '<bgsound src="'.$Sonido_alarma.'" loop="1"></bgsound>';
-			//echo '<audio autoplay id="bgsound"><source src="'.$Sonido_alarma.'" type="audio/mp3"><p>Navegador no soporta Audio en HTML5</p></audio>';
-			echo '<iframe src="'.$Ruta_Servidor.'" width="0" height="0"></iframe>';
+			if ($mensaje_error=="")
+				{
+					// Guarda los datos del comando de monitoreo
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."monitoreo (".$ListaCamposSinID_monitoreo.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)","$tipo||$pagina||$peso||$nombre||$host||$puerto||$tipo_ping||$saltos||$comando||$ancho||$alto||$tamano_resultado||$ocultar_titulos||$path||$correo_alerta||$alerta_sonora||$milisegundos_lectura");
+					auditar("Agrega en monitor: $nombre");
+					echo '
+					<form name="continuar_admin_mon" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="administrar_monitoreo">
+					</form>
+					<script type="" language="JavaScript"> 
+					alert("'.$MULTILANG_Aplicando.'");
+					document.continuar_admin_mon.submit();  </script>';
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="administrar_monitoreo">
+						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
+						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
 		}
+
+/* ################################################################## */
+/* ################################################################## */
+		/*
+			Function: administrar_monitoreo
+			Presenta la lista de todos los monitores de red, sql y comandos definidos
+
+			(start code)
+				SELECT * FROM ".$TablasCore."monitoreo WHERE 1
+			(end)
+
+			Salida:
+				Listado de monitores y paginas de monitoreo definidas
+
+			Ver tambien:
+			<guardar_monitoreo>
+		*/
+if ($accion=="administrar_monitoreo")
+	{
+		$accion=escapar_contenido($accion); //Limpia cadena para evitar XSS
+		echo '<div align="center"><br>';
+		abrir_ventana($MULTILANG_MonTitulo,'f2f2f2','');
+?>
+
+		<div id='FondoPopUps' class="FondoOscuroPopUps"></div>
+
+		<div align="center">
+			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<input type="hidden" name="accion" value="guardar_monitoreo">
+			<br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_MonNuevo; ?></b></font>
+			<table border="0" cellspacing="10" cellpadding="0" class="TextosVentana"><tr>
+				<td valign="TOP" align=center>
+					<img src="img/ginux_Network_Connections.png" border=0><br><br>
+					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" class="TextosVentana">
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_Tipo; ?></b></td><td width="10"></td>
+							<td>
+									<select  name="tipo" class="Combos" >
+										<option value="Etiqueta"><?php echo $MULTILANG_Etiqueta; ?></option>
+										<option value="Maquina" selected><?php echo $MULTILANG_Maquina; ?></option>
+										<option value="ComandoShell"><?php echo $MULTILANG_MonCommShell; ?></option>
+										<option value="ComandoSQL"><?php echo $MULTILANG_MonCommSQL; ?></option>
+										<option value="Imagen"><?php echo $MULTILANG_Imagen; ?></option>
+										<option value="Embebido"><?php echo $MULTILANG_Embebido; ?></option>
+									</select>
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_MonDesTipo; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							</td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_Pagina; ?></b></td><td width="10"></td>
+							<td>
+									<select name="pagina" class="Combos" >
+											<?php
+													for ($i=1;$i<=20;$i++)
+														{
+																echo '<option value="'.$i.'">'.$i.'</option>';
+														}
+											?>
+									</select>
+							</td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_Peso; ?></b></td><td width="10"></td>
+							<td>
+									<select name="peso" class="Combos" >
+											<?php
+													for ($i=1;$i<=50;$i++)
+														{
+																echo '<option value="'.$i.'">'.$i.'</option>';
+														}
+											?>
+									</select>
+							</td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_Nombre; ?></b></td><td width="10"></td>
+							<td><input class="CampoTexto" type="text" name="nombre" size="40" maxlength="250"></td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_MonSaltos; ?></b></td><td width="10"></td>
+							<td>
+									<select name="saltos" class="Combos" >
+											<?php
+													for ($i=0;$i<=15;$i++)
+														{
+																echo '<option value="'.$i.'">'.$i.'</option>';
+														}
+											?>
+									</select>
+							</td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_MonMsLectura; ?></b></td><td width="10"></td>
+							<td><input class="CampoTexto" type="text" value="1000" name="milisegundos_lectura" size="5" maxlength="250"> ms</td>
+						</tr>
+					</table>
+
+					<br><br><font size=2><b><a href="index.php?accion=ver_monitoreo&Presentar_FullScreen=1" target="_BLANK">[<img src="img/dev_Coherence.png" border=0 align=absmiddle><?php echo " $MULTILANG_MonPgInicio -> $MULTILANG_MonTitulo ";?>]</a></b></font>
+				</td>
+				<td align="CENTER" valign="TOP">
+
+					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" class="TextosVentana">
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_Maquina; ?> / IP</b></td><td width="10"></td>
+							<td><input class="CampoTexto" type="text" name="host" size="20" maxlength="250"></td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_Puerto; ?></b></td><td width="10"></td>
+							<td><input class="CampoTexto" type="text" name="puerto" size="5" maxlength="250"></td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_MonMetodo; ?></b></td><td width="10"></td>
+							<td>
+									<select  name="tipo_ping" class="Combos" >
+										<option value="socket">Socket</option>
+										<option value="ping">Ping</option>
+									</select>
+							</td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_Comando; ?></b></td><td width="10"></td>
+							<td><textarea name="comando" cols="40" rows="3" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"></textarea></td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_FrmAncho; ?></b></td><td width="10"></td>
+							<td><input class="CampoTexto" type="text" name="ancho" size="5" maxlength="250"></td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_InfAlto; ?></b></td><td width="10"></td>
+							<td><input class="CampoTexto" type="text" name="alto" size="5" maxlength="250"></td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_MonTamano; ?></b></td><td width="10"></td>
+							<td>
+									<select name="tamano_resultado" class="Combos" >
+											<?php
+													for ($i=1;$i<=100;$i++)
+														{
+																echo '<option value="'.$i.'">'.$i.'</option>';
+														}
+											?>
+									</select> pixeles
+							</td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_MonOcultaTit; ?></b></td><td width="10"></td>
+							<td>
+									<select  name="ocultar_titulos" class="Combos" >
+										<option value="0"><?php echo $MULTILANG_No; ?></option>
+										<option value="1"><?php echo $MULTILANG_Si; ?></option>
+									</select>
+							</td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_MnuURL; ?></b></td><td width="10"></td>
+							<td><input class="CampoTexto" type="text" name="path" size="40" maxlength="250"></td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_MonCorreoAlerta; ?></b></td><td width="10"></td>
+							<td><input class="CampoTexto" type="text" name="correo_alerta" size="40" maxlength="250"></td>
+						</tr>
+						<tr>
+							<td align="RIGHT"><b><?php echo $MULTILANG_MonAlertaSnd; ?></b></td><td width="10"></td>
+							<td>
+									<select  name="alerta_sonora" class="Combos" >
+										<option value="1"><?php echo $MULTILANG_Si; ?></option>
+										<option value="0"><?php echo $MULTILANG_No; ?></option>
+									</select>
+							</td>
+						</tr>
+					</table>
+
+				</td>
+			</tr></table>
+
+			<table width="90%" border="0" cellspacing="0" cellpadding="0"  class="TextosVentana"><tr>
+				<td align="RIGHT" valign="TOP">
+					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;" class="link_menu">
+						<tr>
+							<td align="RIGHT">
+									</form>
+							</td><td width="5"></td>
+							<td align="RIGHT">
+									<input type="button" name="" value="<?php echo $MULTILANG_Agregar; ?>" class="Botones" onClick="document.datos.submit()">
+									&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="<?php echo $MULTILANG_Cancelar; ?>" value="" class="Botones">
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr></table><hr>
+
+		<font face="" size="3" color="Navy"><b><?php echo $MULTILANG_MonDefinidos; ?></b></font><br><br>
+		 <?php
+				echo '
+				<table width="100%" border="0" cellspacing="3" align="CENTER" class="TextosVentana">
+					<tr>
+						<td align="left" bgcolor="#d6d6d6"><b>'.$MULTILANG_Pagina.'</b></td>
+						<td align="left" bgcolor="#d6d6d6"><b>'.$MULTILANG_Peso.'</b></td>
+						<td align="left" bgcolor="#d6d6d6"><b>'.$MULTILANG_Tipo.'</b></td>
+						<td align="LEFT" bgcolor="#D6D6D6"><b>'.$MULTILANG_Nombre.'</b></td>
+						<td align="LEFT" bgcolor="#D6D6D6"><b>'.$MULTILANG_MonMsLectura.'</b></td>
+						<td></td>
+						<td></td>
+					</tr>	';
+
+				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE 1=1 ORDER BY pagina,peso ");
+				while($registro = $resultado->fetch())
+					{
+						$cadena_detalles=$MULTILANG_Detalles.": ".$registro["nombre"]." (".$registro["id"].")\\n-----------------\\n"
+						."\\n $MULTILANG_Pagina: ".$registro["pagina"]
+						."\\n $MULTILANG_Peso: ".$registro["peso"]
+						."\\n $MULTILANG_Tipo: ".$registro["tipo"]
+						."\\n $MULTILANG_Nombre: ".$registro["nombre"]
+						."\\n $MULTILANG_Maquina: ".$registro["host"]
+						."\\n $MULTILANG_Puerto: ".$registro["puerto"]
+						."\\n $MULTILANG_MonMetodo: ".$registro["tipo_ping"]
+						."\\n $MULTILANG_MonSaltos: ".$registro["saltos"]
+						."\\n $MULTILANG_Comando: ".$registro["comando"]
+						."\\n $MULTILANG_FrmAncho: ".$registro["ancho"]
+						."\\n $MULTILANG_InfAlto: ".$registro["alto"]
+						."\\n $MULTILANG_MonTamano: ".$registro["tamano_resultado"]
+						."\\n $MULTILANG_MonOcultaTit: ".$registro["ocultar_titulos"]
+						."\\n $MULTILANG_MnuURL: ".$registro["path"]
+						."\\n $MULTILANG_MonCorreoAlerta: ".$registro["correo_alerta"]
+						."\\n $MULTILANG_MonAlertaSnd: ".$registro["alerta_sonora"]
+						."\\n $MULTILANG_MonMsLectura: ".$registro["milisegundos_lectura"]
+						."\\n\\n-------------------\\n".$MULTILANG_Finalizado;
+						echo '<tr>
+								<td>'.$registro["pagina"].'</td>
+								<td>'.$registro["peso"].'</td>
+								<td>'.$registro["tipo"].'</td>
+								<td>'.$registro["nombre"].'</td>
+								<td>'.$registro["milisegundos_lectura"].'</td>
+								<td align="center">
+										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
+												<input type="hidden" name="accion" value="eliminar_monitoreo">
+												<input type="hidden" name="id" value="'.$registro["id"].'">
+												<input type="button" value="'.$MULTILANG_Eliminar.'" class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_MnuAdvElimina.'\',f'.$registro["id"].');">
+										</form>
+								</td>
+								<td align="center">
+									<input type="Button" OnClick="window.alert(\''.$cadena_detalles.'\');" value="'.$MULTILANG_Detalles.'" class="Botones">
+								</td>
+							</tr>';
+					}
+				echo '</table>';
+		 ?>
+		</div>
+
+		 <?php
+		 				cerrar_ventana();
+		 		} //Fin administrar_monitoreo
+
+
+/* ################################################################## */
+/* ################################################################## */
+		/*
+			Function: ver_monitoreo
+			Presenta las diferentes pantallas de monitoreo
+
+			Salida:
+				Pagina web con el sistema de monitoreo
+
+			Ver tambien:
+			<guardar_monitoreo>
+		*/
+if ($accion=="ver_monitoreo")
+	{
+
+?>
+		<html>
+			<head>
+				<title><?php echo $MULTILANG_MonEstado; ?></title>
+			</head>
+		<body bgcolor="#000000" vlink="#000000" leftmargin="0" topmargin="0" oncontextmenu="return false;" style="font-family: Verdana, Tahoma, Arial; font-size: 11px;">
+
+		<?php
+			//Busa la mayor y menor pagina definida
+			$resultado=ejecutar_sql("SELECT MIN(pagina) as minimo,MAX(pagina) as maximo FROM ".$TablasCore."monitoreo ");
+			$registro = $resultado->fetch();
+			$PaginaInicio=$registro["minimo"];
+			$MaximoPaginas=$registro["maximo"];
+			//Define la pagina que debe ser cargada
+			if ($Pagina=="") $PaginaMonitoreo=$PaginaInicio;
+			else $PaginaMonitoreo=$Pagina;
+			//Salta a la siguiente pagina, si la pagina es mayor a las permitidas retorna a la primera
+			$SiguientePagina=$PaginaMonitoreo+1;
+			if($SiguientePagina>$MaximoPaginas) $SiguientePagina=$PaginaInicio;
+			//Busca cuantos milisegundos esperar segun la pagina definida y sus elementos
+			$resultado=ejecutar_sql("SELECT SUM(milisegundos_lectura) as total_espera FROM ".$TablasCore."monitoreo WHERE pagina='$PaginaMonitoreo' ");
+			$registro = $resultado->fetch();
+			$MilisegundosPagina=$registro["total_espera"];			
+		?>
+
+		<script language="JavaScript">
+			function actualizar()
+				{
+					document.location="index.php?accion=ver_monitoreo&Presentar_FullScreen=1&Pagina=<?php echo $SiguientePagina; ?>";
+				}
+			window.setTimeout("actualizar()",<?php echo $MilisegundosPagina; ?>);
+		</script>
+
+		<!-- INICIA LA TABLA PRINCIPAL -->
+		<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="color:white;">
+			<tr><td height="100%" valign="<?php if ($accion=="Ver_menu") echo 'TOP'; else echo 'MIDDLE'; ?>" align="center">
+
+				<?php
+					$ErroresMonitoreoPractico=0;
+
+					//Path imagenes e iconos y sus propiedades
+					$Path_imagenes="img/";
+					$Imagen_fallo="icn_12.gif";
+					$Imagen_ok="icn_11.gif";
+					$Imagen_generica="icn_rdp.png";
+					$Tamano_iconos=" width=20 heigth=20 ";
+					$Imagen_generica_sql="icn_03.gif";
+					$Imagen_generica_shell="icn_07.gif";
+					$Sonido_alarma="inc/practico/sonidos/alarma.mp3";
+
+					//Variables de apariencia
+					$ancho_tablas_maquinas=150;
+					// Valores de presentacion predeterminados
+					$color_fondo_estado="#CAF9CB";
+					$color_texto_estado="green";
+
+					$color_fondo_estado_sql="#CAF9CB";
+					$color_texto_estado_sql="green";
+
+					$color_fondo_ascii="transparent"; 	//Transparent o el codigo de color
+					$color_texto_ascii="#FFFFFF";
+					$barras_texto_ascii="hidden";		//hidden|auto
+
+					$PosicionImagenes=0; //La posicion global para saber que imagen sigue
+
+					//Limpia los arreglos de monitores
+					unset($Maquinas);
+					unset($ComandosShell);
+					unset($ComandosSQL);
+					unset($Imagenes);
+					//Recorre la pagina en cuestion
+					$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE pagina='$PaginaMonitoreo' ORDER BY peso ");
+					while($registro = $resultado->fetch())
+						{
+							//Evalua elementos tipo Etiqueta
+							if ($registro["tipo"]=="Etiqueta")
+								{
+									echo $registro["nombre"];
+								}
+							//Evalua elementos tipo Maquina o host
+							if ($registro["tipo"]=="Maquina")
+								{
+									$Maquinas[]=array(Nombre => $registro["nombre"],	Host => $registro["host"],	Puerto => $registro["puerto"],		TipoMonitor=>$registro["tipo_ping"],	Icono=> $Imagen_generica);
+									PresentarEstadoMaquina($Maquinas[count($Maquinas)-1],$color_fondo_estado,$color_texto_estado);
+								}
+							//Evalua elementos tipo Comando shell
+							if ($registro["tipo"]=="ComandoShell")
+								{
+									$ComandosShell[]=array(Nombre => $registro["nombre"],	Comando=>$registro["comando"],	Ancho=>$registro["ancho"],	Alto=>$registro["alto"]);
+									EjecutarComando($ComandosShell[count($ComandosShell)-1]);
+								}
+							//Evalua elementos tipo Consulta SQL
+							if ($registro["tipo"]=="ComandoSQL")
+								{
+									$ComandosSQL[]=array(Nombre => $registro["nombre"],	Comando=>$registro["comando"],	TamanoResult=>$registro["tamano_resultado"],	OcultarTitulos=>$registro["ocultar_titulos"]);
+									PresentarEstadoSQL($ComandosSQL[count($ComandosSQL)-1],$color_fondo_estado_sql,$color_texto_estado_sql);
+								}
+							//Evalua elementos tipo Imagen
+							if ($registro["tipo"]=="Imagen")
+								{
+									$Imagenes[]=array(Nombre => $registro["nombre"],	Path=>$registro["path"],	Ancho=>$registro["ancho"],	Alto=>$registro["alto"],	Salto=>"0");	
+									PresentarImagen($Imagenes[count($Imagenes)-1]);
+								}
+							//Evalua elementos tipo Embebido
+							if ($registro["tipo"]=="Embebido")
+								{
+									echo '<iframe src="'.$registro["path"].'" width="'.$registro["ancho"].'" height="'.$registro["alto"].'"></iframe>';
+								}
+							//Agrega los saltos de linea
+							for ($i;$i<=$registro["saltos"];$i++) echo "<br>";
+						}
+
+					// Si encuentra algun error en el monitoreo reproduce la alarma
+					if ($ErroresMonitoreoPractico)
+						{
+							$Ruta_Servidor="http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+							$Ruta_Servidor=str_replace(basename($_SERVER['PHP_SELF']),"",$Ruta_Servidor);
+							$Ruta_Servidor.=$Sonido_alarma;
+							//Tipos de reproduccion
+							//echo '<embed height="50" width="100" src="'.$Sonido_alarma.'">';
+							//echo '<object height="50" width="100" data="'.$Sonido_alarma.'"></object>';
+							//echo '<bgsound src="'.$Sonido_alarma.'" loop="1"></bgsound>';
+							//echo '<audio autoplay id="bgsound"><source src="'.$Sonido_alarma.'" type="audio/mp3"><p>Navegador no soporta Audio en HTML5</p></audio>';
+							echo '<iframe src="'.$Ruta_Servidor.'" width="0" height="0"></iframe>';
+						}
+
+				?>
+			<!-- PIE DE PAGINA -->	
+			<tr><td>
+				<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MarcoInferior"><tr>
+					<td align="left" valign="bottom" width="50%">
+					</td>
+					<td align="right" valign="bottom" width="50%">
+						<font color=lightgray size=1><i><?php echo $MULTILANG_MonAcerca; ?></i>&nbsp;&nbsp;</font>
+					</td>
+				</tr></table>
+			</td></tr>
+		<!-- FINALIZA LA TABLA PRINCIPAL -->
+		</td></tr></table>
+
+		</body>
+		</html>
+<?php
+	} //Fin ver_monitoreo
+

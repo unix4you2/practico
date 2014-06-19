@@ -54,6 +54,7 @@
 	$MULTILANG_Cliente='Cliente';
 	$MULTILANG_CodigoBarras='C&oacute;digo de barras';
 	$MULTILANG_Columna='Columna';
+	$MULTILANG_Comando='Comando';
 	$MULTILANG_ConfiguracionGeneral='Configuraci&oacute;n General';
 	$MULTILANG_ConfiguracionVarias='Configuraci&oacute;n de opciones varias';
 	$MULTILANG_Confirma='Est&aacute; seguro que desea continuar ?';
@@ -70,6 +71,7 @@
 	$MULTILANG_Editar='Editar';
 	$MULTILANG_Ejecutar='Ejecutar';
 	$MULTILANG_Eliminar='Eliminar';
+	$MULTILANG_Embebido='Embebido';
 	$MULTILANG_Encendido='Encendido';
 	$MULTILANG_Error='Error';
 	$MULTILANG_Estado='Estado';
@@ -94,6 +96,7 @@
 	$MULTILANG_Instante='Instante';
 	$MULTILANG_IrEscritorio='Ir a mi escritorio';
 	$MULTILANG_LlavePaso='Llave de paso';
+	$MULTILANG_Maquina='Maquina';
 	$MULTILANG_Matriz='Matriz';
 	$MULTILANG_MotorBD='Motor de Base de Datos';
 	$MULTILANG_Ninguno='Ninguno';
@@ -103,6 +106,7 @@
 	$MULTILANG_Opcional='Opcional';
 	$MULTILANG_OpcionesMenu='Opciones de menu';
 	$MULTILANG_Otros='Otros';
+	$MULTILANG_Pagina='Pagina';
 	$MULTILANG_ParamApp='Par&aacute;metros de aplicaci&oacute;n';
 	$MULTILANG_Paso='Paso';
 	$MULTILANG_Peso='Peso';
@@ -834,6 +838,23 @@
 	$MULTILANG_CampoUsuarioFederado='Campo de usuario';
 	$MULTILANG_CampoClaveFederado='Campo de contrase&ntilde;a';
 
-
-
+	//Modulo de monitoreo
+	$MULTILANG_MonTitulo='Sistema de monitoreo';
+	$MULTILANG_MonPgInicio='Pagina de inicio';
+	$MULTILANG_MonConfig='Configurar la lista de monitores';
+	$MULTILANG_MonNuevo='Agregar un nuevo monitor';
+	$MULTILANG_MonCommShell='Comando Shell';
+	$MULTILANG_MonCommSQL='Consulta SQL';
+	$MULTILANG_MonDesTipo='Indica el tipo de elemento que sera agregado a la pagina de monitoreo';
+	$MULTILANG_MonMetodo='Metodo utilizado';
+	$MULTILANG_MonSaltos='Saltos de linea';
+	$MULTILANG_MonTamano='Tamano fuente SQL';
+	$MULTILANG_MonOcultaTit='Ocultar titulos';
+	$MULTILANG_MonCorreoAlerta='Correo para alertas';
+	$MULTILANG_MonAlertaSnd='Alerta sonora';
+	$MULTILANG_MonMsLectura='Milisegundos para lectura';
+	$MULTILANG_MonDefinidos='Paginas y Monitores definidos';
+	$MULTILANG_MonErr='Se requiere el campo de nombre como minimo';
+	$MULTILANG_MonEstado='Estado del sistema';
+	$MULTILANG_MonAcerca='&copy; Sistema de monitoreo basado en <a href="http://www.practico.org" style="color:#FFFFFF"><font color=white><b>Practico.org</b></font></a>';
 

@@ -171,6 +171,8 @@
 		include("core/objetos.php");
 	if ($accion=="actualizar_practico" || $accion=="cargar_archivo" || $accion=="analizar_parche" || $accion=="aplicar_parche")
 		include("core/actualizacion.php");
+	if ($accion=="administrar_monitoreo" || $accion=="guardar_monitoreo" || $accion=="eliminar_monitoreo" || $accion=="ver_monitoreo")
+		include("core/monitoreo.php");
 
 /* ################################################################## */
 	// Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios

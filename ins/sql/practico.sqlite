@@ -237,3 +237,26 @@ CREATE TABLE core_chat (
   recd INTEGER DEFAULT '0'
 
 );
+
+DROP TABLE IF EXISTS core_monitoreo;
+CREATE TABLE core_monitoreo (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  tipo text DEFAULT '',
+  pagina integer,
+  peso integer,
+  nombre text DEFAULT '',
+  host text DEFAULT '',
+  puerto text DEFAULT '',
+  tipo_ping text DEFAULT '',
+  saltos integer,
+  comando text,
+  ancho integer,
+  alto integer,
+  tamano_resultado integer,
+  ocultar_titulos integer,
+  path text DEFAULT '',
+  correo_alerta text DEFAULT '',
+  alerta_sonora integer
+  milisegundos_lectura integer default '1',
+
+);

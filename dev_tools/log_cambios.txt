@@ -17,13 +17,18 @@ ListaArchivos="
 index.php
 core/codigobarras.php
 core/marco_param.php
+core/menus.php
 core/comunes.php
+core/monitoreo.php
 core/formularios.php
 core/usuarios.php
+img/icn_bar.png
+img/icn_rdp.png
 inc/practico/def_basedatos.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
 inc/bargen/*
+inc/practico/sonidos/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -37,12 +42,38 @@ LogCambios="
 * Added: Opcion de reinicio de claves para usuarios
 * Added: Impresion de campos de base de datos tipo etiqueta en formularios como códigos de barra en múltiples formatos o QR Codes.
 * Added: BETA. Autenticacion federada frente a otros motores y aplicaciones!
+* Added: Monitoreo por configuracion visual
+* Fixed: Alineación de objetos de la barra de herramientas de ventanas para navegadores firefox
+* Fixed: Iconos en creación y edición de opciones de menú
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
 ALTER TABLE core_formulario_objeto ADD COLUMN formato_salida varchar(250) default '';
+CREATE TABLE core_monitoreo (
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  tipo VARCHAR(20) NOT NULL DEFAULT '',
+  pagina int(10) NOT NULL,
+  peso int(10) NOT NULL,
+  nombre VARCHAR(255) NOT NULL DEFAULT '',
+  host VARCHAR(255) NOT NULL DEFAULT '',
+  puerto VARCHAR(255) NOT NULL DEFAULT '',
+  tipo_ping VARCHAR(255) NOT NULL DEFAULT '',
+  icono VARCHAR(255) NOT NULL DEFAULT '',
+  salto int(10) NOT NULL,
+  comando VARCHAR(255) NOT NULL DEFAULT '',
+  ancho int(10) NOT NULL,
+  alto int(10) NOT NULL, 
+  query TEXT NOT NULL DEFAULT '',
+  tamano_resultado int(10) NOT NULL,
+  ocultar_titulos int(10) NOT NULL,
+  path VARCHAR(255) NOT NULL DEFAULT '',
+  correo_alerta VARCHAR(255) NOT NULL DEFAULT '',
+  alerta_sonora int(10) default '0',
+  milisegundos_lectura int(10) default '1',
+  PRIMARY KEY (id)
+);
 "
 
 ########################################################################

@@ -54,6 +54,7 @@
 	$MULTILANG_Cliente='Client';
 	$MULTILANG_CodigoBarras='Bar code';
 	$MULTILANG_Columna='Column';
+	$MULTILANG_Comando='Commando';
 	$MULTILANG_ConfiguracionGeneral='General Settings';
 	$MULTILANG_ConfiguracionVarias='Configuring multiple options';
 	$MULTILANG_Confirma='Are you sure you want to continue?';
@@ -70,6 +71,7 @@
 	$MULTILANG_Editar='Edit';
 	$MULTILANG_Ejecutar='Execute';
 	$MULTILANG_Eliminar='Delete';
+	$MULTILANG_Embebido='Embed';
 	$MULTILANG_Encendido='On';
 	$MULTILANG_Error='Error';
 	$MULTILANG_Estado='Status';
@@ -94,6 +96,7 @@
 	$MULTILANG_Instante='Instant';
 	$MULTILANG_IrEscritorio='Go to my desk';
 	$MULTILANG_LlavePaso='SignKey';
+	$MULTILANG_Maquina='Host';
 	$MULTILANG_Matriz='Matrix';
 	$MULTILANG_MotorBD='Database Engine';
 	$MULTILANG_Ninguno='None';
@@ -103,6 +106,7 @@
 	$MULTILANG_Opcional='Optional';
 	$MULTILANG_OpcionesMenu='Menu options';
 	$MULTILANG_Otros='Others';
+	$MULTILANG_Pagina='Page';
 	$MULTILANG_ParamApp='Aplication parameters';
 	$MULTILANG_Paso='Step';
 	$MULTILANG_Peso='Weight';
@@ -835,3 +839,23 @@
 
 	//Login Federado
 	$MULTILANG_TitFederado='Federated Login';
+
+	//Modulo de monitoreo
+	$MULTILANG_MonTitulo='Monitoring system';
+	$MULTILANG_MonPgInicio='Start page';
+	$MULTILANG_MonConfig='Monitor configure';
+	$MULTILANG_MonNuevo='Add a new monitor';
+	$MULTILANG_MonCommShell='Shell command';
+	$MULTILANG_MonCommSQL='SQL Query';
+	$MULTILANG_MonDesTipo='This is the element that you want to add to the monitoring page';
+	$MULTILANG_MonMetodo='Used method';
+	$MULTILANG_MonSaltos='Line brakes';
+	$MULTILANG_MonTamano='SQL font size';
+	$MULTILANG_MonOcultaTit='Title hidding';
+	$MULTILANG_MonCorreoAlerta='Alerts email';
+	$MULTILANG_MonAlertaSnd='Soundest alert';
+	$MULTILANG_MonMsLectura='Miliseconds for reading';
+	$MULTILANG_MonDefinidos='Pages & Monitors defined';
+	$MULTILANG_MonErr='Name field is mandatory';
+	$MULTILANG_MonEstado='System status';
+	$MULTILANG_MonAcerca='&copy; Monitoring system based on <a href="http://www.practico.org" style="color:#FFFFFF"><font color=white><b>Practico.org</b></font></a>';

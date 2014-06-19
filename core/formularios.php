@@ -1187,10 +1187,10 @@ if ($accion=="editar_formulario")
 						<div id='campo27' style="display:none;">
 							<table class="TextosVentana">
 							<tr>
-								<td width="200" align="right"><?php echo $MULTILANG_FrmFormatoSalida; ?>:</td>
+								<td width="200" align="right"><?php echo $MULTILANG_FrmFormatoSalida; ?> <img src="img/icn_bar.png" border=0 align=absmiddle>:</td>
 								<td width="400" >
 									<select  name="formato_salida" class="Combos">
-									<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+									<option value=""><?php echo $MULTILANG_MnuTexto; ?></option>
 									<optgroup label="<?php echo $MULTILANG_CodigoBarras; ?>">
 										<option value="std25">Standard 2 of 5 (industrial, Numerio Sin limite)</option>
 										<option value="int25">Interleaved 2 of 5</option>
