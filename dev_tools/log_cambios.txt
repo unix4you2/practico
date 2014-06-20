@@ -42,6 +42,7 @@ LogCambios="
 * Added: Vinculacion manual de tablas de datos durante creacion y actualizacion de formularios
 * Added: Opcion de reinicio de claves para usuarios
 * Added: Impresion de campos de base de datos tipo etiqueta en formularios como códigos de barra en múltiples formatos o QR Codes.
+* Added: Clasificacion de packs de iconos durante creacion de opciones de menu
 * Added: BETA. Autenticacion federada frente a otros motores y aplicaciones!
 * Added: Monitoreo por configuracion visual
 * Added: Documentacion de funciones actualizada
