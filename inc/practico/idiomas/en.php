@@ -859,3 +859,6 @@
 	$MULTILANG_MonErr='Name field is mandatory';
 	$MULTILANG_MonEstado='System status';
 	$MULTILANG_MonAcerca='&copy; Monitoring system based on <a href="http://www.practico.org" style="color:#FFFFFF"><font color=white><b>Practico.org</b></font></a>';
+	$MULTILANG_AplicaPara='This applies for: ';
+	$MULTILANG_MonLinea='ON LINE';
+	$MULTILANG_MonCaido='DOWN';

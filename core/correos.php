@@ -144,5 +144,4 @@ function enviar_correo($remitente,$destinatario,$asunto,$cuerpo_mensaje,$destina
 	}
 
 
-
 ?>

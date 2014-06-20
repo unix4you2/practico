@@ -311,6 +311,7 @@
 								<font size=2 color=black><b>
 									&nbsp;&nbsp;[<?php echo $MULTILANG_MonTitulo; ?>]</b>
 								</font>
+								<!--
 								<table cellspacing=2>
 									<tr>
 										<td valign=top align=right>
@@ -325,29 +326,11 @@
 										</td>
 									</tr>
 								</table>
-								<input type="Button"  class="Botones" value=" <?php echo $MULTILANG_MonConfig; ?> " onClick="document.ver_monitoreo.submit();">
+								-->
+								<br><input type="Button"  class="Botones" value=" <?php echo $MULTILANG_MonConfig; ?> " onClick="document.ver_monitoreo.submit();">
 						
 						</td>						
 					</tr></table>
-					
-					
-					
-					
-					
-					
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 					</form>
 					<form name="ver_monitoreo" action="<?php echo $ArchivoCORE; ?>" method="POST">

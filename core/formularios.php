@@ -1742,11 +1742,14 @@ if ($accion=="editar_formulario")
 						</td>
 					</tr>
 					<tr>
-						<td align="right"><?php echo $MULTILANG_TablaDatos; ?>:</td>
+						<td align="right" valign=top><?php echo $MULTILANG_TablaDatos; ?>:</td>
 						<td>
 							<select  name="tabla_datos" class="Combos" >
 								<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
 								 <?php
+										//Asumimos que la tabla es manual
+										$es_tabla_manual=1;
+										//Recorre las tablas definidas
 										$resultado=consultar_tablas();
 										while ($registro = $resultado->fetch())
 											{
@@ -1755,12 +1758,18 @@ if ($accion=="editar_formulario")
 													{
 														$estado_seleccion_tabla="";
 														if ($registro[0]==$registro_form["tabla_datos"])
-															$estado_seleccion_tabla="SELECTED";
+															{
+																$estado_seleccion_tabla="SELECTED";
+																//Si se detecta el nombre dentro de la lista la tabla deja de ser manual
+																$es_tabla_manual=0;
+															}
 														echo '<option value="'.$registro[0].'" '.$estado_seleccion_tabla.'>'.str_replace($TablasApp,'',$registro[0]).'</option>';
 													}
 											}		
 								?>
 							</select><a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+							<br>&nbsp;&nbsp;&nbsp;&nbsp;<i><?php echo $MULTILANG_InfTablaManual; ?>:</i>
+							<br>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="tabla_datos_manual" value="<?php if($es_tabla_manual==1) echo $registro_form["tabla_datos"]; ?>" size="20" class="CampoTexto">
 						</td>
 					</tr>
 					<tr>
@@ -1864,6 +1873,7 @@ if ($accion=="editar_formulario")
 		{
 			$mensaje_error="";
 			if ($titulo=="") $mensaje_error.=$MULTILANG_FrmErr1.'<br>';
+			$tabla_datos.=$tabla_datos_manual;
 			if ($tabla_datos=="") $mensaje_error.=$MULTILANG_FrmErr2.'<br>';
 
 			if ($mensaje_error=="")
@@ -1908,6 +1918,7 @@ if ($accion=="editar_formulario")
 		{
 			$mensaje_error="";
 			if ($titulo=="") $mensaje_error.=$MULTILANG_FrmErr1.'<br>';
+			$tabla_datos.=$tabla_datos_manual;
 			if ($tabla_datos=="") $mensaje_error.=$MULTILANG_FrmErr2.'<br>';
 			//escapa cadenas antes de ser enviadas a consulta
 			//$javascript=$ConexionPDO->quote($javascript);
@@ -2013,8 +2024,9 @@ if ($accion=="editar_formulario")
 							$valor_minimo=$registro["valor_minimo"];
 							$valor_maximo=$registro["valor_maximo"];
 							$valor_salto=$registro["valor_salto"];
+							$formato_salida=$registro["formato_salida"];
 							//Inserta el nuevo objeto al form
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$tipo||$titulo||$campo||$ayuda_titulo||$ayuda_texto||$nuevo_formulario||$peso||$columna||$obligatorio||$visible||$valor_predeterminado||$validacion_datos||$etiqueta_busqueda||$ajax_busqueda||$valor_unico||$solo_lectura||$teclado_virtual||$ancho||$alto||$barra_herramientas||$fila_unica||$lista_opciones||$origen_lista_opciones||$origen_lista_valores||$valor_etiqueta||$url_iframe||$objeto_en_ventana||$informe_vinculado||$maxima_longitud||$valor_minimo||$valor_maximo||$valor_salto");
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$tipo||$titulo||$campo||$ayuda_titulo||$ayuda_texto||$nuevo_formulario||$peso||$columna||$obligatorio||$visible||$valor_predeterminado||$validacion_datos||$etiqueta_busqueda||$ajax_busqueda||$valor_unico||$solo_lectura||$teclado_virtual||$ancho||$alto||$barra_herramientas||$fila_unica||$lista_opciones||$origen_lista_opciones||$origen_lista_valores||$valor_etiqueta||$url_iframe||$objeto_en_ventana||$informe_vinculado||$maxima_longitud||$valor_minimo||$valor_maximo||$valor_salto||$formato_salida");
 						}				
 					// Registros de formulario_boton
 					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
@@ -2149,7 +2161,7 @@ function FrmAutoRun()
 						</td>
 					</tr>
 					<tr>
-						<td align="right"><?php echo $MULTILANG_TablaDatos; ?>:</td>
+						<td align="right" valign=top><?php echo $MULTILANG_TablaDatos; ?>:</td>
 						<td>
 							<select  name="tabla_datos" class="Combos" >
 								<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
@@ -2163,6 +2175,8 @@ function FrmAutoRun()
 											}		
 								?>
 							</select><a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+							<br>&nbsp;&nbsp;&nbsp;&nbsp;<i><?php echo $MULTILANG_InfTablaManual; ?>:</i>
+							<br>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="tabla_datos_manual" size="20" class="CampoTexto">
 						</td>
 					</tr>
 					<tr>

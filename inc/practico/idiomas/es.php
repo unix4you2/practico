@@ -857,4 +857,7 @@
 	$MULTILANG_MonErr='Se requiere el campo de nombre como minimo';
 	$MULTILANG_MonEstado='Estado del sistema';
 	$MULTILANG_MonAcerca='&copy; Sistema de monitoreo basado en <a href="http://www.practico.org" style="color:#FFFFFF"><font color=white><b>Practico.org</b></font></a>';
+	$MULTILANG_AplicaPara='Esto aplica para: ';
+	$MULTILANG_MonLinea='EN LINEA';
+	$MULTILANG_MonCaido='CAIDO';
 

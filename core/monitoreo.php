@@ -77,9 +77,8 @@
 							}
 				}				
 		}
-		
-		
-	
+
+
 /* ################################################################## */
 /* ################################################################## */
 	function PresentarEstadoMaquina($Maquina,$color_fondo_estado,$color_texto_estado)
@@ -94,18 +93,22 @@
 			*/
 			global $ancho_tablas_maquinas,$Path_imagenes,$Imagen_fallo,$Imagen_generica,$Imagen_ok,$Tamano_iconos;
 			global $ErroresMonitoreoPractico; // Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay errores
+			global $MULTILANG_MonTitulo,$fecha_operacion_guiones,$hora_operacion_puntos;
+			global $MULTILANG_MonLinea,$MULTILANG_MonCaido;
 			
 			//Verifica estado de la maquina y servicio
 			$estado_actual=ServicioOnline($Maquina["Host"],$Maquina["Puerto"]);
 
 			if ($estado_actual)
-				$estado_final="<img src=".$Path_imagenes.$Imagen_ok." border=0 align=top ".$Tamano_iconos."> En linea";
+				$estado_final="<img src=".$Path_imagenes.$Imagen_ok." border=0 align=top ".$Tamano_iconos."> $MULTILANG_MonLinea";
 			else
 				{
-					$estado_final="<blink><img src=".$Path_imagenes.$Imagen_fallo." border=0 align=top ".$Tamano_iconos."> Ca&iacute;do <img src=".$Path_imagenes.$Imagen_fallo." border=0 align=top></blink>";
+					$estado_final="<blink><img src=".$Path_imagenes.$Imagen_fallo." border=0 align=top ".$Tamano_iconos."> $MULTILANG_MonCaido <img src=".$Path_imagenes.$Imagen_fallo." border=0 align=top></blink>";
 					$color_fondo_estado="#FF3B36";
 					$color_texto_estado="#FFFF00";
 					$ErroresMonitoreoPractico=1;
+					//Envia mensaje de notificacion por correo
+					enviar_correo("noreply@practico.org",$Maquina["CorreoAlerta"],$MULTILANG_MonTitulo." $MULTILANG_MonCaido [$fecha_operacion_guiones $hora_operacion_puntos] ",$Maquina["Nombre"]." [".$Maquina["Host"].":".$Maquina["Puerto"]."] -> ".$Maquina["TipoMonitor"]);				
 				}
 			
 			//Determina si a la maquina o servicio se le ha indicado un icono
@@ -201,7 +204,6 @@
 					</tr>
 				</table>
 			';
-		
 		}
 
 
@@ -457,11 +459,15 @@ if ($accion=="administrar_monitoreo")
 					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" class="TextosVentana">
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_Maquina; ?> / IP</b></td><td width="10"></td>
-							<td><input class="CampoTexto" type="text" name="host" size="20" maxlength="250"></td>
+							<td><input class="CampoTexto" type="text" name="host" size="20" maxlength="250">
+							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_Puerto; ?></b></td><td width="10"></td>
-							<td><input class="CampoTexto" type="text" name="puerto" size="5" maxlength="250"></td>
+							<td><input class="CampoTexto" type="text" name="puerto" size="5" maxlength="250">
+							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_MonMetodo; ?></b></td><td width="10"></td>
@@ -470,19 +476,26 @@ if ($accion=="administrar_monitoreo")
 										<option value="socket">Socket</option>
 										<option value="ping">Ping</option>
 									</select>
+									<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_Comando; ?></b></td><td width="10"></td>
-							<td><textarea name="comando" cols="40" rows="3" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"></textarea></td>
+							<td><textarea name="comando" cols="40" rows="3" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"></textarea>
+							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommShell, $MULTILANG_MonCommSQL"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_FrmAncho; ?></b></td><td width="10"></td>
-							<td><input class="CampoTexto" type="text" name="ancho" size="5" maxlength="250"></td>
+							<td><input class="CampoTexto" type="text" name="ancho" size="5" maxlength="250">
+							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommShell (caracteres),$MULTILANG_Imagen (pixeles), $MULTILANG_Embebido (pixeles)"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_InfAlto; ?></b></td><td width="10"></td>
-							<td><input class="CampoTexto" type="text" name="alto" size="5" maxlength="250"></td>
+							<td><input class="CampoTexto" type="text" name="alto" size="5" maxlength="250">
+							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommShell (caracteres),$MULTILANG_Imagen (pixeles), $MULTILANG_Embebido (pixeles)"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_MonTamano; ?></b></td><td width="10"></td>
@@ -494,7 +507,7 @@ if ($accion=="administrar_monitoreo")
 																echo '<option value="'.$i.'">'.$i.'</option>';
 														}
 											?>
-									</select> pixeles
+									</select> pixeles <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommSQL"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 						<tr>
@@ -503,16 +516,20 @@ if ($accion=="administrar_monitoreo")
 									<select  name="ocultar_titulos" class="Combos" >
 										<option value="0"><?php echo $MULTILANG_No; ?></option>
 										<option value="1"><?php echo $MULTILANG_Si; ?></option>
-									</select>
+									</select> <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommSQL"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_MnuURL; ?></b></td><td width="10"></td>
-							<td><input class="CampoTexto" type="text" name="path" size="40" maxlength="250"></td>
+							<td><input class="CampoTexto" type="text" name="path" size="40" maxlength="250">
+							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Imagen, $MULTILANG_Embebido"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_MonCorreoAlerta; ?></b></td><td width="10"></td>
-							<td><input class="CampoTexto" type="text" name="correo_alerta" size="40" maxlength="250"></td>
+							<td><input class="CampoTexto" type="text" name="correo_alerta" size="40" maxlength="250">
+							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_MonAlertaSnd; ?></b></td><td width="10"></td>
@@ -521,6 +538,7 @@ if ($accion=="administrar_monitoreo")
 										<option value="1"><?php echo $MULTILANG_Si; ?></option>
 										<option value="0"><?php echo $MULTILANG_No; ?></option>
 									</select>
+									<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 					</table>
@@ -704,7 +722,7 @@ if ($accion=="ver_monitoreo")
 							//Evalua elementos tipo Maquina o host
 							if ($registro["tipo"]=="Maquina")
 								{
-									$Maquinas[]=array(Nombre => $registro["nombre"],	Host => $registro["host"],	Puerto => $registro["puerto"],		TipoMonitor=>$registro["tipo_ping"],	Icono=> $Imagen_generica);
+									$Maquinas[]=array(Nombre => $registro["nombre"],	Host => $registro["host"],	Puerto => $registro["puerto"],		TipoMonitor=>$registro["tipo_ping"],	Icono=> $Imagen_generica,		CorreoAlerta=>$registro["correo_alerta"]);
 									PresentarEstadoMaquina($Maquinas[count($Maquinas)-1],$color_fondo_estado,$color_texto_estado);
 								}
 							//Evalua elementos tipo Comando shell

@@ -45,9 +45,16 @@ Footer: Copyright (c) 2013 - John F. Arroyave Gutierrez |
 
 Group: Modulos Principales  {
 
-   File: Articulador  (index.php)
+   File: Introduccion  (core/doc_intro.php)
 
    Group: Core  {
+
+      File: Articulador  (index.php)
+      File: Conexiones PDO  (core/conexiones.php)
+      File: Libreria base  (core/comunes.php)
+      }  # Group: Core
+
+   Group: Modulos  {
 
       File: Formularios  (no auto-title, core/formularios.php)
       File: Informes  (no auto-title, core/informes.php)
@@ -67,6 +74,10 @@ Group: Modulos Principales  {
       File: Seccion Proveedores OAuth  (core/marco_oauth.php)
       File: Variables para aplicacion  (core/configuracion.php)
       File: WS_API  (core/ws_funciones.php)
+      File: Libreria Generadores de Codigo de barras-Practico  (core/codigobarras.php)
+      File: Modulo monitoreo  (core/monitoreo.php)
+      File: Seccion con los contactos de Chat disponibles  (core/marco_chat.php)
+      File: Seccion Proveedores OAuth  (core/marco_param.php)
       }  # Group: Core
 
    Group: Inc  {
@@ -95,13 +106,6 @@ Group: Index  {
 Text: Copyright (c) 2013
 Link: [John F. Arroyave Gutierrez]  (mailto:unix4you2@gmail.com)
 
-Group: Core  {
-
-   File: Introduccion  (core/doc_intro.php)
-   File: Conexiones PDO  (core/conexiones.php)
-   File: Libreria base  (core/comunes.php)
-   }  # Group: Core
-
 Group: Mod  {
 
    File: convertidor_pdf_funcion_predeterminada  (mod/pdf/index.php)
@@ -110,5 +114,6 @@ Group: Mod  {
    File: Funciones personalizadas para WebServices  (mod/personalizadas_ws.php)
    File: ldap/.../lib/schema_functions.php  (mod/ldap/phpldapadmin-1.2.3/lib/schema_functions.php)
    File: ldap_admin_embebido  (mod/ldap/index.php)
+   File: probar_ejemplo_mvc  (mod/mvc/index.php)
    }  # Group: Mod
 

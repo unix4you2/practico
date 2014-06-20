@@ -39,12 +39,16 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added: Vinculacion manual de tablas de datos durante creacion y actualizacion de formularios
 * Added: Opcion de reinicio de claves para usuarios
 * Added: Impresion de campos de base de datos tipo etiqueta en formularios como códigos de barra en múltiples formatos o QR Codes.
 * Added: BETA. Autenticacion federada frente a otros motores y aplicaciones!
 * Added: Monitoreo por configuracion visual
+* Added: Documentacion de funciones actualizada
+* Added: Alertas por correo para monitoreo
 * Fixed: Alineación de objetos de la barra de herramientas de ventanas para navegadores firefox
 * Fixed: Iconos en creación y edición de opciones de menú
+* Fixed: Copia de formularios con formatos de salida especiales
 "
 
 ########################################################################
