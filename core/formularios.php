@@ -1192,21 +1192,21 @@ if ($accion=="editar_formulario")
 									<select  name="formato_salida" class="Combos">
 									<option value=""><?php echo $MULTILANG_MnuTexto; ?></option>
 									<optgroup label="<?php echo $MULTILANG_CodigoBarras; ?>">
-										<option value="std25">Standard 2 of 5 (industrial, Numerio Sin limite)</option>
-										<option value="int25">Interleaved 2 of 5</option>
-										<option value="ean8">EAN 8 (Numerico 7 caracteres)</option>
-										<option value="ean13">EAN 13 (Numerico 12 caracteres)</option>
-										<option value="upc">UPC</option>
-										<option value="code11">Code 11</option>
-										<option value="code39">Code 39</option>
-										<option value="code93">Code 93</option>
-										<option value="code128">Code 128</option>
-										<option value="codabar">CodaBar</option>
-										<option value="msi">MSI</option>
+										<option value="std25" <?php if (@$registro_campo_editar["formato_salida"]=="std25") echo "SELECTED"; ?> >Standard 2 of 5 (industrial, Numerio Sin limite)</option>
+										<option value="int25" <?php if (@$registro_campo_editar["formato_salida"]=="int25") echo "SELECTED"; ?> >Interleaved 2 of 5</option>
+										<option value="ean8" <?php if (@$registro_campo_editar["formato_salida"]=="ean8") echo "SELECTED"; ?> >EAN 8 (Numerico 7 caracteres)</option>
+										<option value="ean13" <?php if (@$registro_campo_editar["formato_salida"]=="ean13") echo "SELECTED"; ?> >EAN 13 (Numerico 12 caracteres)</option>
+										<option value="upc" <?php if (@$registro_campo_editar["formato_salida"]=="upc") echo "SELECTED"; ?> >UPC</option>
+										<option value="code11" <?php if (@$registro_campo_editar["formato_salida"]=="code11") echo "SELECTED"; ?> >Code 11</option>
+										<option value="code39" <?php if (@$registro_campo_editar["formato_salida"]=="code39") echo "SELECTED"; ?> >Code 39</option>
+										<option value="code93" <?php if (@$registro_campo_editar["formato_salida"]=="code93") echo "SELECTED"; ?> >Code 93</option>
+										<option value="code128" <?php if (@$registro_campo_editar["formato_salida"]=="code128") echo "SELECTED"; ?> >Code 128</option>
+										<option value="codabar" <?php if (@$registro_campo_editar["formato_salida"]=="codabar") echo "SELECTED"; ?> >CodaBar</option>
+										<option value="msi" <?php if (@$registro_campo_editar["formato_salida"]=="msi") echo "SELECTED"; ?> >MSI</option>
 									</optgroup>
 									<optgroup label="<?php echo $MULTILANG_Matriz; ?>">
-										<option value="datamatrix">Datamatrix (ASCII+extended)</option>
-										<option value="qrcode">QR-Code</option>
+										<option value="datamatrix" <?php if (@$registro_campo_editar["formato_salida"]=="datamatrix") echo "SELECTED"; ?> >Datamatrix (ASCII+extended)</option>
+										<option value="qrcode" <?php if (@$registro_campo_editar["formato_salida"]=="qrcode") echo "SELECTED"; ?> >QR-Code</option>
 									</optgroup>
 									</select>
 								</td>
@@ -2089,9 +2089,6 @@ if ($accion=="administrar_formularios")
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_formulario">
 			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
-
-
-
 
 
 				<!-- INICIO DE MARCOS POPUP -->

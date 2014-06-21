@@ -100,15 +100,15 @@ if ($accion=="detalles_menu")
 			$columnas=15;
 			$columna_actual=1;
 			$directorio="img/";
-			$TemasIconos[]=array(Nombre => "Tango Desktop",	Tamano => "32x32",	Prefijo => "tango_");
-			$TemasIconos[]=array(Nombre => "Developer",		Tamano => "32x32",	Prefijo => "dev_");
-			$TemasIconos[]=array(Nombre => "Finance",		Tamano => "32x32",	Prefijo => "finance_");
-			$TemasIconos[]=array(Nombre => "Medical",		Tamano => "32x32",	Prefijo => "medical_");
-			$TemasIconos[]=array(Nombre => "Moskis",		Tamano => "32x32",	Prefijo => "moskis_");
-			$TemasIconos[]=array(Nombre => "Social",		Tamano => "32x32",	Prefijo => "social_");
-			$TemasIconos[]=array(Nombre => "Woo",			Tamano => "32x32",	Prefijo => "woo_");
-			$TemasIconos[]=array(Nombre => "Once",			Tamano => "48x48",	Prefijo => "once_");
-			$TemasIconos[]=array(Nombre => "Ginux",			Tamano => "64x64",	Prefijo => "ginux_");
+			@$TemasIconos[]=array(Nombre => "Tango Desktop",	Tamano => "32x32",	Prefijo => "tango_");
+			@$TemasIconos[]=array(Nombre => "Developer",		Tamano => "32x32",	Prefijo => "dev_");
+			@$TemasIconos[]=array(Nombre => "Finance",		Tamano => "32x32",	Prefijo => "finance_");
+			@$TemasIconos[]=array(Nombre => "Medical",		Tamano => "32x32",	Prefijo => "medical_");
+			@$TemasIconos[]=array(Nombre => "Moskis",		Tamano => "32x32",	Prefijo => "moskis_");
+			@$TemasIconos[]=array(Nombre => "Social",		Tamano => "32x32",	Prefijo => "social_");
+			@$TemasIconos[]=array(Nombre => "Woo",			Tamano => "32x32",	Prefijo => "woo_");
+			@$TemasIconos[]=array(Nombre => "Once",			Tamano => "48x48",	Prefijo => "once_");
+			@$TemasIconos[]=array(Nombre => "Ginux",			Tamano => "64x64",	Prefijo => "ginux_");
 			echo '<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 350px">';
 			for ($i=0;$i<count($TemasIconos);$i++)
 				{
@@ -507,15 +507,15 @@ if ($accion=="administrar_menu")
 			$columnas=15;
 			$columna_actual=1;
 			$directorio="img/";
-			$TemasIconos[]=array(Nombre => "Tango Desktop",	Tamano => "32x32",	Prefijo => "tango_");
-			$TemasIconos[]=array(Nombre => "Developer",		Tamano => "32x32",	Prefijo => "dev_");
-			$TemasIconos[]=array(Nombre => "Finance",		Tamano => "32x32",	Prefijo => "finance_");
-			$TemasIconos[]=array(Nombre => "Medical",		Tamano => "32x32",	Prefijo => "medical_");
-			$TemasIconos[]=array(Nombre => "Moskis",		Tamano => "32x32",	Prefijo => "moskis_");
-			$TemasIconos[]=array(Nombre => "Social",		Tamano => "32x32",	Prefijo => "social_");
-			$TemasIconos[]=array(Nombre => "Woo",			Tamano => "32x32",	Prefijo => "woo_");
-			$TemasIconos[]=array(Nombre => "Once",			Tamano => "48x48",	Prefijo => "once_");
-			$TemasIconos[]=array(Nombre => "Ginux",			Tamano => "64x64",	Prefijo => "ginux_");
+			@$TemasIconos[]=array(Nombre => "Tango Desktop",	Tamano => "32x32",	Prefijo => "tango_");
+			@$TemasIconos[]=array(Nombre => "Developer",		Tamano => "32x32",	Prefijo => "dev_");
+			@$TemasIconos[]=array(Nombre => "Finance",		Tamano => "32x32",	Prefijo => "finance_");
+			@$TemasIconos[]=array(Nombre => "Medical",		Tamano => "32x32",	Prefijo => "medical_");
+			@$TemasIconos[]=array(Nombre => "Moskis",		Tamano => "32x32",	Prefijo => "moskis_");
+			@$TemasIconos[]=array(Nombre => "Social",		Tamano => "32x32",	Prefijo => "social_");
+			@$TemasIconos[]=array(Nombre => "Woo",			Tamano => "32x32",	Prefijo => "woo_");
+			@$TemasIconos[]=array(Nombre => "Once",			Tamano => "32x32",	Prefijo => "once_");
+			@$TemasIconos[]=array(Nombre => "Ginux",			Tamano => "32x32",	Prefijo => "ginux_");
 			echo '<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 350px">';
 			for ($i=0;$i<count($TemasIconos);$i++)
 				{
@@ -541,7 +541,7 @@ if ($accion=="administrar_menu")
 			echo '</DIV>';
 
 				abrir_barra_estado();
-					echo '<input type="Button"  class="BotonesEstadoCuidado" value="'.$MULTILANG_Cerrar.'" onClick="OcultarPopUp(\'FormularioImagenes\')">';
+					echo '<input type="Button"  class="BotonesEstadoCuidado" value=" '.$MULTILANG_Cerrar.' " onClick="OcultarPopUp(\'FormularioImagenes\')">';
 				cerrar_barra_estado();
 				cerrar_ventana();		// Cierra seleccion de imagenes
 			?>

@@ -422,8 +422,8 @@
 			//Genera el archivo con el QR
 			$Ruta_QRC=$ruta_almacenamiento.$archivo.".png";
 			QRcode::png($contenido, $Ruta_QRC, $recuperacion_errores, $ancho_pixeles, $margen_pixeles);
-			//Imprime el codigo QR
-			echo '<img src="'.$Ruta_QRC.'" alt="" border="0">';
+			//Devuelve el codigo QR como etiqueta de imagen HTML
+			return '<img src="'.$Ruta_QRC.'" alt="" border="0">';
 		}
 
 
@@ -541,11 +541,14 @@
 				{
 					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
 					if ($Login_usuario=='admin' && $ModoDepuracion)
-						mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.$query,'80%','icono_error.png','TextosEscritorio');
+						$mensaje_final=$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.$query;
 					else
-						mensaje($MULTILANG_ErrorTiempoEjecucion,'<b>'.$MULTILANG_Detalles.'</b>: '.$MULTILANG_ErrorSoloAdmin,'80%','icono_error.png','TextosEscritorio');
+						$mensaje_final='<b>'.$MULTILANG_Detalles.'</b>: '.$MULTILANG_ErrorSoloAdmin;
+					//Presenta el mensaje sobre el HTML y como Emergente JS
+					mensaje($MULTILANG_ErrorTiempoEjecucion,$mensaje_final,'80%','icono_error.png','TextosEscritorio');
+					echo '<script type="" language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\\n\\n'.$mensaje_final.'");</script>';
 					//Redirecciona segun la accion
-					if ($accion=="Iniciar_login") 
+					if ($accion=="Iniciar_login")
 						echo '<form name="Acceso" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value=""></form><script type="" language="JavaScript">	document.Acceso.submit();  </script>';
 					return 1;
 				}
@@ -833,16 +836,31 @@
 				{
 					$columna=0;
 					$resultado=ejecutar_sql("DESCRIBE $tabla ");
-					while($registro = $resultado->fetch())
+					//echo $resultado;
+					//Evalua si se retorno 1 (error) por la funcion para saber si sigue o no
+					//if($resultado!="1")
 						{
-							$columnas[$columna]["nombre"] = $registro["Field"];
-							$columnas[$columna]["tipo"] = $registro["Type"];
-							$columnas[$columna]["nulo"] = $registro["Null"];
-							$columnas[$columna]["llave"] = $registro["Key"];
-							$columnas[$columna]["predefinido"] = $registro["Default"];
-							$columnas[$columna]["extras"] = $registro["Extra"];
-							$columna++;
+							while($registro = $resultado->fetch())
+								{
+									$columnas[$columna]["nombre"] = $registro["Field"];
+									$columnas[$columna]["tipo"] = $registro["Type"];
+									$columnas[$columna]["nulo"] = $registro["Null"];
+									$columnas[$columna]["llave"] = $registro["Key"];
+									$columnas[$columna]["predefinido"] = $registro["Default"];
+									$columnas[$columna]["extras"] = $registro["Extra"];
+									$columna++;
+								}							
 						}
+					/*else
+						{
+									$columnas[$columna]["nombre"] = "ERROR: Tabla no conectada";
+									$columnas[$columna]["tipo"] = "ERROR: Tabla no conectada";
+									$columnas[$columna]["nulo"] = "ERROR: Tabla no conectada";
+									$columnas[$columna]["llave"] = "ERROR: Tabla no conectada";
+									$columnas[$columna]["predefinido"] = "ERROR: Tabla no conectada";
+									$columnas[$columna]["extras"] = "ERROR: Tabla no conectada";
+									$columna++;
+						}*/
 				}
 
 			if ($MotorBD=="pgsql")
@@ -1966,14 +1984,14 @@
 							$Alto_BARRAS=$registro_campos["alto"];
 						}
 					
-					
-					
-					$cadena_valor='<img src="core/codigobarras.php?Cadena='.$Contenido_BARRAS.'&Tipo='.$Tipo_BARRAS.'&AnchoCodigo=2&AltoCodigo='.($Alto_BARRAS-6).'&AnchoImagen='.$Ancho_BARRAS.'&AltoImagen='.$Alto_BARRAS.'" border=0>';
-					//$cadena_valor=$registro_campos["valor_predeterminado"];
+					//Si es un codigo desde la libreria de codigos de barras lo muestra, si es un QR usa la otra funcion
+					if ($Tipo_BARRAS!="qrcode")
+						$cadena_valor='<img src="core/codigobarras.php?Cadena='.$Contenido_BARRAS.'&Tipo='.$Tipo_BARRAS.'&AnchoCodigo=2&AltoCodigo='.($Alto_BARRAS-6).'&AnchoImagen='.$Ancho_BARRAS.'&AltoImagen='.$Alto_BARRAS.'" border=0>';
+					else
+						$cadena_valor=CodigoQR($Contenido_BARRAS);
 				}
 
 			$salida=$cadena_valor;
-
 			//Agrega ademas el valor como hidden para disponer de el cuando se requiera en otro llamado o funcion personalizada
 			$tipo_entrada="hidden";
 			// Muestra el campo
@@ -2227,8 +2245,7 @@
 				if ($en_ventana) abrir_ventana($registro_formulario["titulo"],$color_fondo,'',$barra_herramientas_mini);
 				// Muestra ayuda en caso de tenerla
 				$imagen_ayuda="info_icon.png";
-				if ($registro_formulario["ayuda_imagen"]!="") $imagen_ayuda=$registro_formulario["ayuda_imagen"];
-				if ($registro_formulario["ayuda_titulo"]!="" || $registro_formulario["ayuda_texto"]!="" || $registro_formulario["ayuda_imagen"]!="")
+				if ($registro_formulario["ayuda_titulo"]!="" || $registro_formulario["ayuda_texto"]!="")
 					mensaje($registro_formulario["ayuda_titulo"],$registro_formulario["ayuda_texto"],'100%',$imagen_ayuda,'TextosVentana');
 
 				//Inicia el formulario de datos
