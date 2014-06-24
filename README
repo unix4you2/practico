@@ -49,6 +49,23 @@
 
 
 ----------------------------------------
+Versión 14.7 (2014-06-23)
+----------------------------------------
+* Added: Vinculacion manual de tablas de datos durante creacion y actualizacion de formularios
+* Added: Opcion de reinicio de claves para usuarios
+* Added: Impresion de campos de base de datos tipo etiqueta en formularios como códigos de barra en múltiples formatos
+* Added: Clasificacion de packs de iconos durante creacion de opciones de menu
+* Added: BETA. Autenticacion federada frente a otros motores y aplicaciones!
+* Added: Monitoreo por configuracion visual
+* Added: Documentacion de funciones actualizada
+* Added: Generador de codigos QR disponible en campos tipo etiqueta
+* Added: Alertas en tiempo de ejecucion son ahora presentadas tambien en JavaScript además del HTML
+* Added: Alertas por correo para monitoreo
+* Fixed: Alineación de objetos de la barra de herramientas de ventanas para navegadores firefox
+* Fixed: Iconos en creación y edición de opciones de menú
+* Fixed: Copia de formularios con formatos de salida especiales
+* Fixed: Warning en imagenes de ayuda para textos iniciales de formularios
+----------------------------------------
 Versión 14.6 (2014-06-02)
 ----------------------------------------
 * Added: Actualizacion JQuery a version 2.1.0
