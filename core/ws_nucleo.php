@@ -49,7 +49,7 @@
 							// Verifica validez de la llave recibida para el webservice
 							$llave_ws_valida=0;
 							// Verifica si la llave es la misma de instalacion (llave propia)
-							if ($WSKey==$LlaveDePaso)
+							if ($WSKey==$LlaveDePaso || $ByPassWS)
 								{
 									$llave_ws_valida=1;
 									// Define valores para la llave de instalacion
@@ -62,7 +62,9 @@
 								{
 									// Valida si la llave esta en la BD de API
 									$consulta_llave=ejecutar_sql("SELECT id,".$ListaCamposSinID_llaves_api." FROM ".$TablasCore."llaves_api WHERE llave=? ","$WSKey");
-									$registro_llave = $consulta_llave->fetch();
+									// Si no se retorno error en la consulta y tiene datos hace el fetch
+									if($consulta_llave!="1" && $consulta_llave!="")
+										$registro_llave = $consulta_llave->fetch();
 									// Si encuentra una llave valida entonces su secreto
 									if ($registro_llave["llave"]!="")
 										{

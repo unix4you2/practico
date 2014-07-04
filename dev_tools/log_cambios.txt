@@ -16,8 +16,11 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/formularios.php
+core/ws_nucleo.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
+img/practico_social.png
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -28,7 +31,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-
+* Fixed: [Tester: Jaime Berrio Arenas]  El login por proveedores OAuth no estaba operando en version 14.7
 "
 
 ########################################################################

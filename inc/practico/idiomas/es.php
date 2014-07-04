@@ -269,6 +269,8 @@
 	$MULTILANG_FrmTipo9='Deslizador (selector de rangos num&eacute;ricos - HTML5)';
 	$MULTILANG_FrmTipo10='Campo de contrasena';
 	$MULTILANG_FrmTipo11='Valor de campo como etiqueta';
+	$MULTILANG_FrmTipoTit4='Controles de datos especiales';
+	$MULTILANG_FrmTipo12='Archivo adjunto';
 	$MULTILANG_FrmValorMinimo='Valor m&iacute;nimo';
 	$MULTILANG_FrmValorMaximo='Valor m&aacute;ximo';
 	$MULTILANG_FrmValorSalto='Valor de salto';

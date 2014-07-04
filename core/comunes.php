@@ -1175,7 +1175,7 @@
 			?>
 
 			<script language="javascript"> 
-				function IntercambiarLogin(Seccion)
+				function IntercambiarLogin(Seccion,Imagen)
 					{
 						var ele = document.getElementById(Seccion);
 						if (ele.style.display == "none")
@@ -1188,7 +1188,11 @@
 								ele.style.display = "none";
 								ele.style.visibility = "hidden";
 							}
-					} 
+						if (LoginClasico.style.visibility == "visible")
+							img_login.src="img/practico_login.png";
+						if (LoginOauth.style.visibility == "visible")
+							img_login.src="img/practico_social.png";
+					}
 			</script>
 
 						<div align="center">
@@ -1298,7 +1302,7 @@
 
 								</td>
 								<td align="center">
-										<img src="img/practico_login.png" alt="" border="0">
+										<img name="img_login" id="img_login" src="img/practico_login.png" alt="" border="0">
 								</td>
 						</tr></table>
 						

@@ -597,6 +597,7 @@ if ($accion=="editar_formulario")
 					if (tipo_objeto_activo=="informe")   VisualizarCampos("9,17,23,24");
 					if (tipo_objeto_activo=="deslizador")   VisualizarCampos("1,2,4,7,8,9,17,26");
 					if (tipo_objeto_activo=="campo_etiqueta")   VisualizarCampos("1,2,4,9,17,14,15,27");
+					if (tipo_objeto_activo=="archivo_adjunto")   VisualizarCampos("1,7,8,9,10,17");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -645,11 +646,9 @@ if ($accion=="editar_formulario")
 										<option value="deslizador"      <?php if (@$registro_campo_editar["tipo"]=="deslizador")      echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo9; ?></option>
 										<option value="campo_etiqueta"  <?php if (@$registro_campo_editar["tipo"]=="campo_etiqueta")  echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo11; ?></option>
 									</optgroup>
-									<!--
-									<optgroup label="Informaci&oacute;n externa">
-										<option value="archivo_adjunto">Archivo adjunto</option>
+									<optgroup label="<?php echo $MULTILANG_FrmTipoTit4; ?>">
+										<option value="archivo_adjunto" <?php if (@$registro_campo_editar["tipo"]=="archivo_adjunto") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo12; ?></option>
 									</optgroup>
-									-->
 									<optgroup label="<?php echo $MULTILANG_FrmTipoTit2; ?>">
 										<option value="etiqueta"        <?php if (@$registro_campo_editar["tipo"]=="etiqueta")        echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo6; ?></option>
 										<option value="url_iframe"      <?php if (@$registro_campo_editar["tipo"]=="url_iframe")      echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo7; ?></option>
