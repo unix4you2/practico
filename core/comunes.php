@@ -2170,7 +2170,7 @@
 	function cargar_objeto_archivo_adjunto($registro_campos,$registro_datos_formulario)
 		{
 			global $campobase,$valorbase;
-			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_FrmArchivoLink;
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
@@ -2200,7 +2200,10 @@
 							$cadena_valor=' value="'.$valor_variable.'" ';							
 						}
 				}
-			if ($campobase!="" && $valorbase!="") $cadena_valor=' value="'.$registro_datos_formulario["$nombre_campo"].'" ';
+
+			// Si detecta un path de archivo en el registro entonces agrega el enlace
+			if ($campobase!="" && $valorbase!="" && $registro_datos_formulario["$nombre_campo"]!="")
+				$salida.='<a target="_BLANK" href="'.$registro_datos_formulario["$nombre_campo"].'"><img src="img/woo_folder_search_32.png" border=0 width="25" height="25" align="absmiddle"><b>'.$MULTILANG_FrmArchivoLink.'</b><img src="img/woo_save_download_32.png" border=0 width="25" height="25" align="absmiddle"></a><br>';
 
 			// Muestra el campo
 			$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="CampoTexto '.$cadena_clase_teclado.'" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].'  >';
