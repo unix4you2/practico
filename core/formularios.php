@@ -250,6 +250,7 @@
 				}
 
 			//Ejecuta consulta de insercion de datos
+			$errores_de_carga="";
 			if ($mensaje_error=="")
 				{
 					// Busca los campos visibles del form y construye cadenas de valores para consulta
@@ -265,19 +266,97 @@
 									//Verifica que el campo se encuentre dentro de la tabla, para descartar campos manuales mal escritos o usados para javascripts y otros fines.
 									if (existe_campo_tabla($registro_campos["campo"],$registro_formulario["tabla_datos"]))
 										{
-											$lista_campos.=$registro_campos["campo"].",";
-											$lista_valores.="'".$$registro_campos["campo"]."',";
+											// Si el tipos de campo es archivo lo procesa como adjunto, sino lo pasa al insert
+											if ($registro_campos["tipo"]=="archivo_adjunto")
+												{
+													// Procesa el archivo y lo almacena en el path de acuerdo a la plantilla definida
+													$variable_de_archivo=$registro_campos["campo"];
+													$nombre_archivo = $_FILES[$variable_de_archivo]['name']; //Contiene el nombre original
+													$tipo_archivo = $_FILES[$variable_de_archivo]['type']; //Contiene el tipo original, ej: application/octet-stream, application/x-php, image/jpeg
+													$tamano_archivo = $_FILES[$variable_de_archivo]['size']; //Tamano del archivo cargado
+													$nombre_archivo_temporal = $_FILES[$variable_de_archivo]['tmp_name']; //Nombre del archivo temporal en servidor
+													$peso_final_permitido=$registro_campos["peso_archivo"]*1024;
+													// Comprueba tamano del archivo
+													if ($tamano_archivo > $peso_final_permitido)
+														{
+															$errores_de_carga.=$nombre_archivo.'- '.$MULTILANG_FrmErrorCargaTamano;
+														}
+													else
+														{
+															// Crea el path definitivo del archivo
+															$path_final_archivo="mod/fileman/cargas/"; // Path predeterminado
+															//En caso de no tener plantilla intentara cargarlo con su nombre original
+															if ($registro_campos["plantilla_archivo"]=="")
+																$path_final_archivo.=$nombre_archivo;
+															else
+																$path_final_archivo.=$registro_campos["plantilla_archivo"];
+															// Busca ocurrencias de las cadenas de formato y las reemplaza
+															$cadena_formato_a_buscar="_ORIGINAL_";
+															$cadena_formato_a_reemplazar=$nombre_archivo;
+															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
+																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
+															$cadena_formato_a_buscar="_CAMPOTABLA_";
+															$cadena_formato_a_reemplazar=$registro_campos["campo"];
+															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
+																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
+															$cadena_formato_a_buscar="_FECHA_";
+															$cadena_formato_a_reemplazar=$fecha_operacion;
+															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
+																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
+															$cadena_formato_a_buscar="_HORA_";
+															$cadena_formato_a_reemplazar=$hora_operacion;
+															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
+																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
+															$cadena_formato_a_buscar="_HORAINTERNET_";
+															$cadena_formato_a_reemplazar=date("B");
+															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
+																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
+															$cadena_formato_a_buscar="_USUARIO_";
+															$cadena_formato_a_reemplazar=$Login_usuario;
+															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
+																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
+															$cadena_formato_a_buscar="_MICRO_";
+															$cadena_formato_a_reemplazar=date("u");
+															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
+																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
+															// Intenta la carga del archivo solo si realmente se recibio uno
+															if($nombre_archivo!="")
+																if (!move_uploaded_file($nombre_archivo_temporal, $path_final_archivo ))
+																	$errores_de_carga.=$nombre_archivo.'- '.$MULTILANG_FrmErrorCargaGeneral;
+															//Agrega el campo y su path a la lista de campos para el query
+															$lista_campos.=$registro_campos["campo"].",";
+															$lista_valores.="'".$path_final_archivo."',";
+														}
+												}
+											else
+												{
+													//Agrega el campo y su valor a la lista de campos para el query
+													$lista_campos.=$registro_campos["campo"].",";
+													$lista_valores.="'".$$registro_campos["campo"]."',";
+												}
 										}
 								}
 						}
+
 					// Elimina comas al final de las listas
 					$lista_campos=substr($lista_campos, 0, strlen($lista_campos)-1);
 					$lista_valores=substr($lista_valores, 0, strlen($lista_valores)-1);
 
-					// Inserta los datos
+					// Inserta los datos del registro en BD
 					ejecutar_sql_unaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores.")");
 					auditar("Inserta registro en ".$registro_formulario["tabla_datos"]);
-					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+					//Si no hay errores en carga de archivos redirecciona normal, sino redirecciona con los errores
+					if ($errores_de_carga=="")
+						echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+					else
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="accion" value="Ver_menu">
+						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrFrmDatos.'">
+						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="error_descripcion" value="'.$errores_de_carga.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
 				{
@@ -463,8 +542,8 @@
 			if ($mensaje_error=="")
 				{
 					// Define la consulta de insercion del nuevo campo
-					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-					ejecutar_sql_unaria($consulta_insercion,"$tipo_objeto||$titulo||$campo||$ayuda_titulo||$ayuda_texto||$formulario||$peso||$columna||$obligatorio||$visible||$valor_predeterminado||$validacion_datos||$etiqueta_busqueda||$ajax_busqueda||$valor_unico||$solo_lectura||$teclado_virtual||$ancho||$alto||$barra_herramientas||$fila_unica||$lista_opciones||$origen_lista_opciones||$origen_lista_valores||$valor_etiqueta||$url_iframe||$objeto_en_ventana||$informe_vinculado||$maxima_longitud||$valor_minimo||$valor_maximo||$valor_salto||$formato_salida");
+					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					ejecutar_sql_unaria($consulta_insercion,"$tipo_objeto||$titulo||$campo||$ayuda_titulo||$ayuda_texto||$formulario||$peso||$columna||$obligatorio||$visible||$valor_predeterminado||$validacion_datos||$etiqueta_busqueda||$ajax_busqueda||$valor_unico||$solo_lectura||$teclado_virtual||$ancho||$alto||$barra_herramientas||$fila_unica||$lista_opciones||$origen_lista_opciones||$origen_lista_valores||$valor_etiqueta||$url_iframe||$objeto_en_ventana||$informe_vinculado||$maxima_longitud||$valor_minimo||$valor_maximo||$valor_salto||$formato_salida||$plantilla_archivo||$peso_archivo");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea campo $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
@@ -584,7 +663,7 @@ if ($accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(27);
+					OcultarCampos(29);
 					// Muestra campos segun tipo de objeto
 					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,13,14,17,25");
 					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,13,17,25");
@@ -597,7 +676,7 @@ if ($accion=="editar_formulario")
 					if (tipo_objeto_activo=="informe")   VisualizarCampos("9,17,23,24");
 					if (tipo_objeto_activo=="deslizador")   VisualizarCampos("1,2,4,7,8,9,17,26");
 					if (tipo_objeto_activo=="campo_etiqueta")   VisualizarCampos("1,2,4,9,17,14,15,27");
-					if (tipo_objeto_activo=="archivo_adjunto")   VisualizarCampos("1,7,8,9,10,17");
+					if (tipo_objeto_activo=="archivo_adjunto")   VisualizarCampos("1,2,7,8,9,17,28,29");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -628,7 +707,6 @@ if ($accion=="editar_formulario")
 				<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">
 				<input type="Hidden" name="idcampomodificado" value="<?php echo $campo; ?>">
 				<div align=center>
-
 
 					<table class="TextosVentana">
 						<tr>
@@ -663,7 +741,6 @@ if ($accion=="editar_formulario")
 						</tr>
 						</table>
 						<hr>
-
 
 						<div id='campo1' style="display:none;">
 							<table class="TextosVentana">
@@ -1207,6 +1284,43 @@ if ($accion=="editar_formulario")
 										<option value="datamatrix" <?php if (@$registro_campo_editar["formato_salida"]=="datamatrix") echo "SELECTED"; ?> >Datamatrix (ASCII+extended)</option>
 										<option value="qrcode" <?php if (@$registro_campo_editar["formato_salida"]=="qrcode") echo "SELECTED"; ?> >QR-Code</option>
 									</optgroup>
+									</select>
+								</td>
+							</tr>
+							</table>
+						</div>
+						
+						<div id='campo28' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right" valign=top><?php echo $MULTILANG_FrmPlantillaArchivo; ?></td>
+								<td width="400" >
+									<input type="text" name="plantilla_archivo" size="40" class="CampoTexto" value="<?php echo @$registro_campo_editar["plantilla_archivo"]; ?>">
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesPlantillaArchivo; ?>"><img src="img/icn_10.gif" border=0></a>
+									<br><?php echo $MULTILANG_FrmPlantillaEjemplos; ?>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+						<div id='campo29' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right"><?php echo $MULTILANG_Peso; ?> (Max)</td>
+								<td width="400" >
+									<select  name="peso_archivo" class="Combos">
+										<option value="50">50 KB</option>
+										<option value="100" <?php if (@$registro_campo_editar["peso_archivo"]=="100") echo "SELECTED"; ?> >100 KB</option>
+										<option value="150" <?php if (@$registro_campo_editar["peso_archivo"]=="150") echo "SELECTED"; ?> >150 KB</option>
+										<option value="250" <?php if (@$registro_campo_editar["peso_archivo"]=="250") echo "SELECTED"; ?> >250 KB</option>
+										<option value="500" <?php if (@$registro_campo_editar["peso_archivo"]=="500") echo "SELECTED"; ?> >500 KB</option>
+										<option value="750" <?php if (@$registro_campo_editar["peso_archivo"]=="750") echo "SELECTED"; ?> >750 KB</option>
+										<option value="1000" <?php if (@$registro_campo_editar["peso_archivo"]=="1000") echo "SELECTED"; ?> >1 MB</option>
+										<option value="1500" <?php if (@$registro_campo_editar["peso_archivo"]=="1500") echo "SELECTED"; ?> >1.5 MB</option>
+										<option value="2000" <?php if (@$registro_campo_editar["peso_archivo"]=="2000") echo "SELECTED"; ?> >2 MB</option>
+										<option value="4000" <?php if (@$registro_campo_editar["peso_archivo"]=="4000") echo "SELECTED"; ?> >4 MB</option>
+										<option value="8000" <?php if (@$registro_campo_editar["peso_archivo"]=="8000") echo "SELECTED"; ?> >8 MB</option>
+										<option value="16000" <?php if (@$registro_campo_editar["peso_archivo"]=="16000") echo "SELECTED"; ?> >16 MB</option>
 									</select>
 								</td>
 							</tr>
@@ -2024,8 +2138,10 @@ if ($accion=="editar_formulario")
 							$valor_maximo=$registro["valor_maximo"];
 							$valor_salto=$registro["valor_salto"];
 							$formato_salida=$registro["formato_salida"];
+							$plantilla_archivo=$registro["plantilla_archivo"];
+							$peso_archivo=$registro["peso_archivo"];
 							//Inserta el nuevo objeto al form
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$tipo||$titulo||$campo||$ayuda_titulo||$ayuda_texto||$nuevo_formulario||$peso||$columna||$obligatorio||$visible||$valor_predeterminado||$validacion_datos||$etiqueta_busqueda||$ajax_busqueda||$valor_unico||$solo_lectura||$teclado_virtual||$ancho||$alto||$barra_herramientas||$fila_unica||$lista_opciones||$origen_lista_opciones||$origen_lista_valores||$valor_etiqueta||$url_iframe||$objeto_en_ventana||$informe_vinculado||$maxima_longitud||$valor_minimo||$valor_maximo||$valor_salto||$formato_salida");
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$tipo||$titulo||$campo||$ayuda_titulo||$ayuda_texto||$nuevo_formulario||$peso||$columna||$obligatorio||$visible||$valor_predeterminado||$validacion_datos||$etiqueta_busqueda||$ajax_busqueda||$valor_unico||$solo_lectura||$teclado_virtual||$ancho||$alto||$barra_herramientas||$fila_unica||$lista_opciones||$origen_lista_opciones||$origen_lista_valores||$valor_etiqueta||$url_iframe||$objeto_en_ventana||$informe_vinculado||$maxima_longitud||$valor_minimo||$valor_maximo||$valor_salto||$formato_salida||$plantilla_archivo||$peso_archivo");
 						}				
 					// Registros de formulario_boton
 					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");

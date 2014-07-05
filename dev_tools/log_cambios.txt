@@ -20,6 +20,7 @@ core/formularios.php
 core/ws_nucleo.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
+inc/practico/def_basedatos.php
 img/practico_social.png
 "
 
@@ -31,12 +32,20 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added: Campos de tipo archivo en diseño de formularios ahora permiten adjuntar multiples archivos
+* Added: Se simplifica creacion de opciones de menu eliminando campos de padre y columna
 * Fixed: [Tester: Jaime Berrio Arenas]  El login por proveedores OAuth no estaba operando en version 14.7
+* Added: BETA. Autenticacion federada frente a otros motores y aplicaciones!
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
+ALTER TABLE core_formulario_objeto ADD COLUMN plantilla_archivo varchar(250) default '';
+ALTER TABLE core_formulario_objeto ADD COLUMN peso_archivo int(10);
+ALTER TABLE core_menu DROP COLUMN padre;
+ALTER TABLE core_menu DROP COLUMN columna;
+
 "
 
 ########################################################################

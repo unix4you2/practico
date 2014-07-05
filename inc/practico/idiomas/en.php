@@ -282,7 +282,7 @@
 	$MULTILANG_FrmDesTitulo='Text that will appear next to the field telling the user the information that must be entered. You can use basic HTML to additional format.';
 	$MULTILANG_FrmCampo='Linked field';
 	$MULTILANG_FrmCampoOb1='Mandatory field for data binding controls';
-	$MULTILANG_FrmDesCampo='Field data table which will link information';
+	$MULTILANG_FrmDesCampo='Field data table which will link information.  In file fields this could contain the relative path to the file uploaded in the server.  Every file should have at least one field to store its path';
 	$MULTILANG_FrmValUnico='Single value field';
 	$MULTILANG_FrmTitUnico='Uniqueness for input values';
 	$MULTILANG_FrmDesUnico='Indicates whether the field can store or repeated values ​​in the database. Should be enabled for fields representing primary keys in their Design and disabled for the rest.  You should take care in that forms that you need this field to do upgrades and its duplicated error message.';
@@ -431,7 +431,12 @@
 	$MULTILANG_FrmMsjCopia='Now you can go to edit your new form.  A copy was maded as: ';
 	$MULTILANG_FrmBordesVisibles='Are table borders visible?';
 	$MULTILANG_FrmFormatoSalida='Output format';
-	
+	$MULTILANG_FrmPlantillaArchivo='Name template for the file';
+	$MULTILANG_FrmDesPlantillaArchivo='The template is the form or pattern that will be renamed the file after the user uploaded to the server. This may include different variables to alter the name and extension thereof as examples. You can also leave it blank so that the files are loaded with the original name of the folder system loads (not recommended for security).';
+	$MULTILANG_FrmErrorCargaGeneral='There was an error during the upload';
+	$MULTILANG_FrmErrorCargaTamano='The file size is greater than the allowed size';
+	$MULTILANG_FrmPlantillaEjemplos='<i>Some format modifiers:<li>_ORIGINAL_ : Original file name</li><li>_CAMPOTABLA_ : Linked field name over the table</li><li>_FECHA_ : Actual date in AAAAMMDD format</li><li>_HORA_ : Actual server time in  HHMMSS format</li><li>_MICRO_ : Time microseconds</li><li>_HORAINTERNET_ : Internet time between 000 and 999</li><li>_USUARIO_ : User login name</li></i><b>Examples:</b><li>_USUARIO__ORIGINAL_: Renames the original file with the user name login</li><li>formatos/_ORIGINAL_: Will upload the file into a formatos/ folder using the original name.  This folder have to be created by admin user before using the file manager in the cargas folder.</li><li>_FECHA__HORA__USUARIO_.pdf: Renames all the original file for something like 20140502_135400_admin.pdf</li><li>reportes/_FECHA_.xls: Will upload the file into reportes folder and will force the final extension to .xls too.</li><li>foto__USUARIO_.jpg: This file will have two fixed strings (foto_ at beginning and .jpg at the end) but inside them Practico will append the username.  Pay attention to the double underline character, one of them will separate the name and the other is for the format modifier.  You will obtain somthing like foto_avelez.jpg</li>A general rule: any string inside the pattern that dont match any format modifier will be a fixed string in the file name.';
+
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';
 	$MULTILANG_InfErr2='You must enter a valid title for the report.';

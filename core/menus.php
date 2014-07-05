@@ -56,7 +56,7 @@
 if ($accion=="actualizar_menu")
 	{
 		// Actualiza los datos del item
-		ejecutar_sql_unaria("UPDATE ".$TablasCore."menu SET texto=?,padre=?,peso=?,url=?,posible_clic=?,tipo_comando=?,comando=?,nivel_usuario=?,columna=?,posible_arriba=?,posible_centro=?,posible_escritorio=?,seccion=?,imagen=? WHERE id=? ","$texto||$padre||$peso||$url||$posible_clic||$tipo_comando||$comando||$nivel_usuario||$columna||$posible_arriba||$posible_centro||$posible_escritorio||$seccion||$imagen||$id");
+		ejecutar_sql_unaria("UPDATE ".$TablasCore."menu SET texto=?,peso=?,url=?,posible_clic=?,tipo_comando=?,comando=?,nivel_usuario=?,posible_arriba=?,posible_centro=?,posible_escritorio=?,seccion=?,imagen=? WHERE id=? ","$texto||$peso||$url||$posible_clic||$tipo_comando||$comando||$nivel_usuario||$posible_arriba||$posible_centro||$posible_escritorio||$seccion||$imagen||$id");
 		auditar("Actualiza menu item $texto c&oacute;digo $id");
 		echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 	}
@@ -217,40 +217,6 @@ if ($accion=="detalles_menu")
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_MnuTexto; ?></b></td><td width="10"></td>
 							<td><input value="<?php echo $registro["texto"]; ?>" class="CampoTexto" type="text" name="texto" size="40" maxlength="250"></td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuPadre; ?></b></td><td width="10"></td>
-							<td>
-									<select name="padre" class="Combos" >
-										<option value="0"><?php echo $MULTILANG_Ninguno; ?></option>
-										<?php
-											$resultado_padre=ejecutar_sql("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE 1=1 ORDER BY texto");
-											while($registro_padre = $resultado_padre->fetch())
-												{
-													if ($registro["padre"]==$registro_padre["id"])
-														echo '<option value="'.$registro_padre["id"].'" selected>'.$registro_padre["texto"].'</option>';
-													else
-														echo '<option value="'.$registro_padre["id"].'">'.$registro_padre["texto"].'</option>';
-												}
-										?>
-									</select>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_Columna; ?></b></td><td width="10"></td>
-							<td>
-									<select name="columna" class="Combos" >
-											<?php
-													for ($i=1;$i<=9;$i++)
-														{
-															if ($registro["columna"]==$i)
-																echo '<option value="'.$i.'" selected>'.$i.'</option>';
-															else
-																echo '<option value="'.$i.'">'.$i.'</option>';
-														}
-											?>
-									</select> (<?php echo $MULTILANG_MnuSiAplica; ?>)
-							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_Peso; ?></b></td><td width="10"></td>
@@ -457,7 +423,7 @@ if ($accion=="eliminar_menu")
 			if ($mensaje_error=="")
 				{
 					// Guarda los datos del comando o item de menu
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)","$texto||$padre||$peso||$url||$posible_clic||$tipo_comando||$comando||$nivel_usuario||$columna||$posible_arriba||$posible_centro||$posible_escritorio||$seccion||$imagen");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$texto||$peso||$url||$posible_clic||$tipo_comando||$comando||$nivel_usuario||$posible_arriba||$posible_centro||$posible_escritorio||$seccion||$imagen");
 					auditar("Agrega en menu: $texto");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
@@ -615,34 +581,6 @@ if ($accion=="administrar_menu")
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_MnuTexto; ?></b></td><td width="10"></td>
 							<td><input class="CampoTexto" type="text" name="texto" size="40" maxlength="250"></td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuPadre; ?></b></td><td width="10"></td>
-							<td>
-									<select name="padre" class="Combos" >
-										<option value="0"><?php echo $MULTILANG_Ninguno; ?></option>
-										<?php				
-											$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu ORDER BY texto");
-											while($registro = $resultado->fetch())
-												{
-													echo '<option value="'.$registro["id"].'">'.$registro["texto"].'</option>';
-												}
-										?>
-									</select> (beta)
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_Columna; ?></b></td><td width="10"></td>
-							<td>
-									<select name="columna" class="Combos" >
-											<?php
-													for ($i=1;$i<=9;$i++)
-														{
-																echo '<option value="'.$i.'">'.$i.'</option>';
-														}
-											?>
-									</select> (beta)
-							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_Peso; ?></b></td><td width="10"></td>

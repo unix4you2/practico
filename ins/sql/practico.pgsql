@@ -127,6 +127,8 @@ CREATE TABLE core_formulario_objeto (
   valor_maximo integer,
   valor_salto integer,
   formato_salida varchar(250) default '',
+  plantilla_archivo varchar(250) default '',
+  peso_archivo integer,
   PRIMARY KEY  (id)
 );
 

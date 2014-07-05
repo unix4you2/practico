@@ -2148,6 +2148,72 @@
 		}
 
 
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: cargar_objeto_archivo_adjunto
+	Genera el codigo HTML y CSS correspondiente a un campo de archivo (file) vinculado a un campo de datos sobre un formulario
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		registro_datos_formulario - Arreglo asociativo con nombres de campo y valores cuando se hacen llamados de registro especificos
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
+	function cargar_objeto_archivo_adjunto($registro_campos,$registro_datos_formulario)
+		{
+			global $campobase,$valorbase;
+			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+
+			$salida='';
+			$nombre_campo=$registro_campos["campo"];
+			$tipo_entrada="file";
+
+			// Especifica longitud visual de campo en caso de haber sido definida
+			$cadena_longitud_visual=' size="20" ';
+			if ($registro_campos["ancho"]!="0")
+				$cadena_longitud_visual=' size="'.$registro_campos["ancho"].'" ';
+
+			// Especifica longitud maxima de caracteres en caso de haber sido definida
+			$cadena_longitud_permitida=' ';
+			if ($registro_campos["maxima_longitud"]!=0)
+				$cadena_longitud_permitida=' maxlength="'.$registro_campos["maxima_longitud"].'" ';
+
+			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
+			$cadena_valor='';
+			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
+			//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.
+			if (substr($registro_campos["valor_predeterminado"], 0,1)=="$")
+				{
+					$nombre_variable = substr($registro_campos["valor_predeterminado"], 1);
+					global ${$nombre_variable};
+					if (isset($nombre_variable))
+						{
+							$valor_variable=$$nombre_variable;
+							$cadena_valor=' value="'.$valor_variable.'" ';							
+						}
+				}
+			if ($campobase!="" && $valorbase!="") $cadena_valor=' value="'.$registro_datos_formulario["$nombre_campo"].'" ';
+
+			// Muestra el campo
+			$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="CampoTexto '.$cadena_clase_teclado.'" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].'  >';
+
+			// Muestra indicadores de obligatoriedad o ayuda
+			if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="'.$MULTILANG_TitValorUnico.'" name="'.$MULTILANG_DesValorUnico.'"><img src="img/key.gif" border=0 border=0 align="absmiddle"></a>';
+			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
+			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0 border=0 align="absmiddle"></a>';
+			return $salida;
+		}
+
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -2314,6 +2380,7 @@
 													if ($tipo_de_objeto=="informe") @cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
 													if ($tipo_de_objeto=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
 													if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
+													if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
 
 													//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 													if ($registro_campos["tipo"]!="informe")
@@ -2360,6 +2427,7 @@
 								if ($tipo_de_objeto=="informe") cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
 								if ($tipo_de_objeto=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
 								if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
+								if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
 								//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 								if ($registro_campos["tipo"]!="informe")
 									echo $objeto_formateado;

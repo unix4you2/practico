@@ -279,7 +279,7 @@
 	$MULTILANG_FrmDesTitulo='Texto que aparecer&aacute; al lado del indicando al usuario la informacion que debe ingresar.  Puede usar HTML b&aacute;sico para dar formato adicional.';
 	$MULTILANG_FrmCampo='Campo enlazado';
 	$MULTILANG_FrmCampoOb1='Campo obligatorio para controles de datos';
-	$MULTILANG_FrmDesCampo='Campo de la tabla de datos al cual se vincular&aacute; la informaci&oacute;n';
+	$MULTILANG_FrmDesCampo='Campo de la tabla de datos al cual se vincular&aacute; la informaci&oacute;n.  Para controles de tipo archivo puede representar el campo donde se almacena el path del archivo sobre el servidor. Cada control tipo archivo deberia tener al menos un campo sobre la tabla donde guardar el path.';
 	$MULTILANG_FrmValUnico='Campo de valor &uacute;nico';
 	$MULTILANG_FrmTitUnico='Unicidad para los valores ingresados';
 	$MULTILANG_FrmDesUnico='Indica si el campo puede almacenar o no valores repetidos en la base de datos.  Deber&iacute;a estar habilitado para campos que representen claves primarias en su dise&ntilde;o y deshabilitado para el resto.  Debera tener especial cuidado con aquellos formularios donde desee dejar el campo para actualizaciones y que pueda generar error de valor duplicado.';
@@ -428,7 +428,12 @@
 	$MULTILANG_FrmMsjCopia='Ahora puede ingresar a editar su nuevo formulario.  Se ha creado una copia como: ';
 	$MULTILANG_FrmBordesVisibles='Bordes de tabla visibles?';
 	$MULTILANG_FrmFormatoSalida='Formato de salida';
-	
+	$MULTILANG_FrmPlantillaArchivo='Plantilla para el nombre del archivo';
+	$MULTILANG_FrmDesPlantillaArchivo='La plantilla es la forma o patron en que sera renombrado el archivo una vez subido por el usuario al servidor.  Esto puede incluir diferentes variables para alterar el nombre y la extension del mismo como los ejemplos. Tambien puede dejarla en blanco para que los archivos sean cargados con el nombre original sobre la carpeta de cargas del sistema (No recomendado por seguridad).';
+	$MULTILANG_FrmErrorCargaGeneral='Ha ocurrido un error durante la carga del archivo';
+	$MULTILANG_FrmErrorCargaTamano='El archivo excede el tamano permitido';
+	$MULTILANG_FrmPlantillaEjemplos='<i><b>Algunas variables de formato:</b><li>_ORIGINAL_ : Nombre original del archivo</li><li>_CAMPOTABLA_ : Nombre del campo de tabla vinculado</li><li>_FECHA_ : Fecha actual en formato AAAAMMDD</li><li>_HORA_ : Hora del servidor en formato HHMMSS</li><li>_MICRO_ : Microsegundos de la hora del sistema</li><li>_HORAINTERNET_ : Valor hora de internet de 000 a 999</li><li>_USUARIO_ : Login del usuario que hace el cargue</li><b>Ejemplos:</b><li>_USUARIO__ORIGINAL_: Renombra el archivo original anteponiendo el login del usuario que lo carga</li><li>formatos/_ORIGINAL_: Carga el archivo con su nombre original dentro de la carpeta formatos.  La carpeta debe haber sido creada previamente por el usuario admin mediante el administrador de archivos dentro de la carpeta de cargas.</li><li>_FECHA__HORA__USUARIO_.pdf: Ademas de renombrar el archivo original por una cadena con la fecha, hora y usuario que hace el cargue, hace el forzado de la extension de archivo, renombrandolo como PDF.</li><li>reportes/_FECHA_.xls: Ademas de cargar el archivo en la carpeta reportes, lo renombra a la fecha actual y hace el forzado para que su extension sea XLS.</li><li>foto__USUARIO_.jpg: El archivo tendra fijas las cadenas iniciales y finales de foto_ y .jpg pero en el medio se reemplazara el valor del usuario que hace el cargue.  Observe el doble underline, uno para separar el archivo y otro para la variable de formato como tal.  Tendra un resultado final como foto_avelez.jpg</li>En general cualquier cadena dentro del formato que no coincida con las variables de formato quedara intacta en el nombre del archivo.</i>';
+
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';
 	$MULTILANG_InfErr2='Debe indicar un t&iacute;tulo v&aacute;lido para el informe.';
