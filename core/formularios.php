@@ -325,7 +325,7 @@
 																	$errores_de_carga.=$nombre_archivo.'- '.$MULTILANG_FrmErrorCargaGeneral;
 															//Agrega el campo y su path a la lista de campos para el query
 															$lista_campos.=$registro_campos["campo"].",";
-															$lista_valores.="'".$path_final_archivo."',";
+															$lista_valores.="'".$path_final_archivo."|".$tipo_archivo."',";
 														}
 												}
 											else
