@@ -2248,7 +2248,7 @@
 
 			// Si detecta un valor en el registro entonces agrega el contenido
 			if ($campobase!="" && $valorbase!="" && $registro_datos_formulario["$nombre_campo"]!="")
-			$salida.='<a target="_BLANK" href="javascript:AbrirPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\');"><img src="img/ginux_Outlook.png" border=0 width="20" height="20" align="absmiddle"><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
+			$salida.='<a href="javascript:AbrirPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\');"><img src="img/ginux_Outlook.png" border=0 width="20" height="20" align="absmiddle"><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
 				<!-- INICIO DE MARCOS POPUP -->
 				<div id="CANVASPrevio'.$registro_campos["campo"].'" class="FormularioPopUps">
 					<div align=center>
@@ -2264,7 +2264,9 @@
 			// Muestra el campo
 			$salida.='
 				<!--<a href="javascript:" id="upload" style="width: 100px;">Upload</a>-->
-				<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" style="border: 1px solid #acc;"></canvas>
+				<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" style="border: 1px solid #acc;">Su navegador no soporta Canvas</canvas>
+				<a href="javascript:limpiar_CANVAS_'.$registro_campos["campo"].'();"><img src="img/woo_close_32.png" border=0 width="20" height="20" align="top"></a>
+
 				<script type="text/javascript">
 					$(function ()
 						{
@@ -2280,6 +2282,27 @@
 							//alert(strDataURI); //Muestra el resultado en base64
 						});
 					*/
+
+					function limpiar_CANVAS_'.$registro_campos["campo"].'()
+						{
+							// Busca el contexto del canvas y le reasigna ancho y alto para limpiarlo
+							var oCanvas = document.getElementById("CANVAS_'.$registro_campos["campo"].'");
+							var oContext = oCanvas.getContext("2d");
+							//FORMA1:
+								oContext.clearRect(0, 0, oCanvas.width, oCanvas.height);
+							/*//FORMA2:
+								oCanvas.width = oCanvas.width;*/
+							/*//FORMA3:
+								oContext.save();
+								oContext.fillStyle = "#FFF";
+								oContext.fillRect(0, 0, oCanvas.width, oCanvas.height);
+								oContext.restore();
+								oCanvas.clear();*/
+							/*//FORMA4:
+								var ancho_anterior = oCanvas.width;
+								oCanvas.width = 1;
+								oCanvas.width = ancho_anterior;*/
+						}
 
 					function actualizar_CANVAS_'.$registro_campos["campo"].'()
 						{
