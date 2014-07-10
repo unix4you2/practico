@@ -542,8 +542,8 @@
 			if ($mensaje_error=="")
 				{
 					// Define la consulta de insercion del nuevo campo
-					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-					ejecutar_sql_unaria($consulta_insercion,"$tipo_objeto||$titulo||$campo||$ayuda_titulo||$ayuda_texto||$formulario||$peso||$columna||$obligatorio||$visible||$valor_predeterminado||$validacion_datos||$etiqueta_busqueda||$ajax_busqueda||$valor_unico||$solo_lectura||$teclado_virtual||$ancho||$alto||$barra_herramientas||$fila_unica||$lista_opciones||$origen_lista_opciones||$origen_lista_valores||$valor_etiqueta||$url_iframe||$objeto_en_ventana||$informe_vinculado||$maxima_longitud||$valor_minimo||$valor_maximo||$valor_salto||$formato_salida||$plantilla_archivo||$peso_archivo");
+					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					ejecutar_sql_unaria($consulta_insercion,"$tipo_objeto||$titulo||$campo||$ayuda_titulo||$ayuda_texto||$formulario||$peso||$columna||$obligatorio||$visible||$valor_predeterminado||$validacion_datos||$etiqueta_busqueda||$ajax_busqueda||$valor_unico||$solo_lectura||$teclado_virtual||$ancho||$alto||$barra_herramientas||$fila_unica||$lista_opciones||$origen_lista_opciones||$origen_lista_valores||$valor_etiqueta||$url_iframe||$objeto_en_ventana||$informe_vinculado||$maxima_longitud||$valor_minimo||$valor_maximo||$valor_salto||$formato_salida||$plantilla_archivo||$peso_archivo||$tamano_pincel||$color_trazo");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea campo $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
@@ -663,7 +663,7 @@ if ($accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(29);
+					OcultarCampos(30);
 					// Muestra campos segun tipo de objeto
 					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,13,14,17,25");
 					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,13,17,25");
@@ -677,6 +677,7 @@ if ($accion=="editar_formulario")
 					if (tipo_objeto_activo=="deslizador")   VisualizarCampos("1,2,4,7,8,9,17,26");
 					if (tipo_objeto_activo=="campo_etiqueta")   VisualizarCampos("1,2,4,9,17,14,15,27");
 					if (tipo_objeto_activo=="archivo_adjunto")   VisualizarCampos("1,2,7,8,9,17,28,29");
+					if (tipo_objeto_activo=="objeto_canvas")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,30");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -726,6 +727,7 @@ if ($accion=="editar_formulario")
 									</optgroup>
 									<optgroup label="<?php echo $MULTILANG_FrmTipoTit4; ?>">
 										<option value="archivo_adjunto" <?php if (@$registro_campo_editar["tipo"]=="archivo_adjunto") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo12; ?></option>
+										<option value="objeto_canvas" <?php if (@$registro_campo_editar["tipo"]=="objeto_canvas") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo13; ?></option>
 									</optgroup>
 									<optgroup label="<?php echo $MULTILANG_FrmTipoTit2; ?>">
 										<option value="etiqueta"        <?php if (@$registro_campo_editar["tipo"]=="etiqueta")        echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo6; ?></option>
@@ -1324,6 +1326,40 @@ if ($accion=="editar_formulario")
 									</select>
 								</td>
 							</tr>
+							</table>
+						</div>
+
+						<div id='campo30' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right"><?php echo $MULTILANG_FrmTipoPincel; ?></td>
+								<td width="400" >
+									<img src="img/ginux_Prorgrams.png" border=0 width="20" height="20" align="absmiddle">
+									<select  name="tamano_pincel" class="Combos">
+										<option value="1">1</option>
+										<option value="2" <?php if (@$registro_campo_editar["tamano_pincel"]=="2") echo "SELECTED"; ?> >2</option>
+										<option value="3" <?php if (@$registro_campo_editar["tamano_pincel"]=="3") echo "SELECTED"; ?> >3</option>
+										<option value="4" <?php if (@$registro_campo_editar["tamano_pincel"]=="4") echo "SELECTED"; ?> >4</option>
+										<option value="5" <?php if (@$registro_campo_editar["tamano_pincel"]=="5") echo "SELECTED"; ?> >5</option>
+										<option value="7" <?php if (@$registro_campo_editar["tamano_pincel"]=="7") echo "SELECTED"; ?> >7</option>
+										<option value="10" <?php if (@$registro_campo_editar["tamano_pincel"]=="10") echo "SELECTED"; ?> >10</option>
+										<option value="15" <?php if (@$registro_campo_editar["tamano_pincel"]=="15") echo "SELECTED"; ?> >15</option>
+										<option value="20" <?php if (@$registro_campo_editar["tamano_pincel"]=="20") echo "SELECTED"; ?> >20</option>
+										<option value="25" <?php if (@$registro_campo_editar["tamano_pincel"]=="25") echo "SELECTED"; ?> >25</option>
+									</select> (Pixels)
+								</td>
+							</tr>
+							<tr>
+								<td width="200" align="right"><?php echo $MULTILANG_FrmTipoColor; ?> (Hex)</td>
+								<td width="400" >
+									<img src="img/dev_UniversalBinary.png" border=0 width="20" height="20" align="absmiddle">
+									<input type="color" name="color_trazo" size="10" value="<?php if ($registro_campo_editar["color_trazo"]!="") echo $registro_campo_editar["color_trazo"]; else echo '#000000'; ?>" class="CampoTexto">
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
+								</td>
+							</tr>
+							<tr>
+								<td colspan=2 align="center"><?php echo $MULTILANG_FrmTipoAdvertencia; ?></td>
+							</tr>							
 							</table>
 						</div>
 
@@ -2140,8 +2176,10 @@ if ($accion=="editar_formulario")
 							$formato_salida=$registro["formato_salida"];
 							$plantilla_archivo=$registro["plantilla_archivo"];
 							$peso_archivo=$registro["peso_archivo"];
+							$tamano_pincel=$registro["tamano_pincel"];
+							$color_trazo=$registro["color_trazo"];
 							//Inserta el nuevo objeto al form
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$tipo||$titulo||$campo||$ayuda_titulo||$ayuda_texto||$nuevo_formulario||$peso||$columna||$obligatorio||$visible||$valor_predeterminado||$validacion_datos||$etiqueta_busqueda||$ajax_busqueda||$valor_unico||$solo_lectura||$teclado_virtual||$ancho||$alto||$barra_herramientas||$fila_unica||$lista_opciones||$origen_lista_opciones||$origen_lista_valores||$valor_etiqueta||$url_iframe||$objeto_en_ventana||$informe_vinculado||$maxima_longitud||$valor_minimo||$valor_maximo||$valor_salto||$formato_salida||$plantilla_archivo||$peso_archivo");
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$tipo||$titulo||$campo||$ayuda_titulo||$ayuda_texto||$nuevo_formulario||$peso||$columna||$obligatorio||$visible||$valor_predeterminado||$validacion_datos||$etiqueta_busqueda||$ajax_busqueda||$valor_unico||$solo_lectura||$teclado_virtual||$ancho||$alto||$barra_herramientas||$fila_unica||$lista_opciones||$origen_lista_opciones||$origen_lista_valores||$valor_etiqueta||$url_iframe||$objeto_en_ventana||$informe_vinculado||$maxima_longitud||$valor_minimo||$valor_maximo||$valor_salto||$formato_salida||$plantilla_archivo||$peso_archivo||$tamano_pincel||$color_trazo");
 						}				
 					// Registros de formulario_boton
 					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");

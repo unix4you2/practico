@@ -129,6 +129,8 @@ CREATE TABLE core_formulario_objeto (
   formato_salida varchar(250) default '',
   plantilla_archivo varchar(250) default '',
   peso_archivo integer,
+  tamano_pincel integer,
+  color_trazo varchar(20) default '',
   PRIMARY KEY  (id)
 );
 

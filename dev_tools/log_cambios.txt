@@ -18,10 +18,12 @@ index.php
 core/comunes.php
 core/formularios.php
 core/ws_nucleo.php
+core/marco_arriba.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
 inc/practico/def_basedatos.php
 img/practico_social.png
+inc/jquery/plugins/sketch.js
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -38,6 +40,7 @@ LogCambios="
 * Fixed: [Tester: Jaime Berrio Arenas]  El login por proveedores OAuth no estaba operando en version 14.7
 * Added: BETA. Autenticacion federada frente a otros motores y aplicaciones!
 * Added: Identificacion del tipo MIME de adjunto en tiempo de carga y descarga
+* Added: Adicion de objetos y controles multiples tipo canvas HTML5 a diseño de formularios
 "
 
 ########################################################################
@@ -47,7 +50,8 @@ ALTER TABLE core_formulario_objeto ADD COLUMN plantilla_archivo varchar(250) def
 ALTER TABLE core_formulario_objeto ADD COLUMN peso_archivo int(10);
 ALTER TABLE core_menu DROP COLUMN padre;
 ALTER TABLE core_menu DROP COLUMN columna;
-
+ALTER TABLE core_formulario_objeto ADD COLUMN tamano_pincel int(2);
+ALTER TABLE core_formulario_objeto ADD COLUMN color_trazo varchar(20) default '';
 "
 
 ########################################################################

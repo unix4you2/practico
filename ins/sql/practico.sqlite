@@ -127,7 +127,9 @@ CREATE TABLE core_formulario_objeto (
   valor_salto integer,
   formato_salida text default '',
   plantilla_archivo text default '',
-  peso_archivo integer
+  peso_archivo integer,
+  tamano_pincel integer,
+  color_trazo text default ''
 
 );
 

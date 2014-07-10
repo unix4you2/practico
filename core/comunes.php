@@ -2223,6 +2223,87 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: cargar_objeto_canvas
+	Genera el codigo HTML y CSS correspondiente a un campo de canvas vinculado a un campo de datos sobre un formulario
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		registro_datos_formulario - Arreglo asociativo con nombres de campo y valores cuando se hacen llamados de registro especificos
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
+	function cargar_objeto_canvas($registro_campos,$registro_datos_formulario)
+		{
+			global $campobase,$valorbase;
+			global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink;
+
+			$salida='';
+			$nombre_campo=$registro_campos["campo"];
+
+			// Si detecta un valor en el registro entonces agrega el contenido
+			if ($campobase!="" && $valorbase!="" && $registro_datos_formulario["$nombre_campo"]!="")
+			$salida.='<a target="_BLANK" href="javascript:AbrirPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\');"><img src="img/ginux_Outlook.png" border=0 width="20" height="20" align="absmiddle"><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
+				<!-- INICIO DE MARCOS POPUP -->
+				<div id="CANVASPrevio'.$registro_campos["campo"].'" class="FormularioPopUps">
+					<div align=center>
+						<table bgcolor="#FFFFFF"><tr><td>
+							<img src="'.$registro_datos_formulario["$nombre_campo"].'" border=1>
+						</td></tr></table>
+					</br>
+					<input type="Button"  class="Botones" value=" -- '.$MULTILANG_Cerrar.' -- " onClick="OcultarPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\')">
+					</div>
+				<!-- FIN DE MARCOS POPUP -->
+				</div>';
+
+			// Muestra el campo
+			$salida.='
+				<!--<a href="javascript:" id="upload" style="width: 100px;">Upload</a>-->
+				<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" style="border: 1px solid #acc;"></canvas>
+				<script type="text/javascript">
+					$(function ()
+						{
+							$(\'#CANVAS_'.$registro_campos["campo"].'\').sketch({defaultColor: "'.$registro_campos["color_trazo"].'", defaultSize: "'.$registro_campos["tamano_pincel"].'"});
+						});
+
+					/*
+					// Genera el vinculo entre el enlace de upload y la funcion
+					$("#upload").bind("click", function ()
+						{
+							var oCanvas = document.getElementById("CANVAS_'.$registro_campos["campo"].'");
+							var strDataURI = oCanvas.toDataURL();
+							//alert(strDataURI); //Muestra el resultado en base64
+						});
+					*/
+
+					function actualizar_CANVAS_'.$registro_campos["campo"].'()
+						{
+							// Pasa el valor del canvas al campo que se usa en almacenamiento
+							var oCanvas = document.getElementById("CANVAS_'.$registro_campos["campo"].'");
+							var strDataURI = oCanvas.toDataURL();
+							document.datos.'.$registro_campos["campo"].'.value=strDataURI;
+							window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);
+						}
+					window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);
+				</script>
+				<input type="hidden" name="'.$registro_campos["campo"].'">';
+			
+			// Muestra indicadores de obligatoriedad o ayuda
+			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
+			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><img src="img/icn_10.gif" border=0 border=0 align="absmiddle"></a>';
+			return $salida;
+		}
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: cargar_formulario
 	Genera el codigo HTML correspondiente a un formulario de la aplicacion y hace los llamados necesarios para la diagramacion por pantalla de los diferentes objetos que lo componen.
 
@@ -2387,6 +2468,7 @@
 													if ($tipo_de_objeto=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
 													if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
 													if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
+													if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
 
 													//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 													if ($registro_campos["tipo"]!="informe")
@@ -2434,6 +2516,7 @@
 								if ($tipo_de_objeto=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
 								if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
 								if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
+								if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
 								//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 								if ($registro_campos["tipo"]!="informe")
 									echo $objeto_formateado;
