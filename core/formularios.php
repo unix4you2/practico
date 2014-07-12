@@ -330,9 +330,14 @@
 												}
 											else
 												{
+													$nombre_de_campo_query=$registro_campos["campo"].",";
+													$valor_de_campo_query="'".$$registro_campos["campo"]."',";
+													//Compresion previa para campos especiales (MUY experimental por cuanto puede generar errores de query)
+														//if ($registro_campos["tipo"]=="objeto_canvas")
+														//	$valor_de_campo_query=gzencode($valor_de_campo_query,9);
 													//Agrega el campo y su valor a la lista de campos para el query
-													$lista_campos.=$registro_campos["campo"].",";
-													$lista_valores.="'".$$registro_campos["campo"]."',";
+													$lista_campos.=$nombre_de_campo_query;
+													$lista_valores.=$valor_de_campo_query;
 												}
 										}
 								}
