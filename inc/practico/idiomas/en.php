@@ -48,6 +48,7 @@
 	$MULTILANG_BarraHtas='Toolbar';
 	$MULTILANG_Campo='Field';
 	$MULTILANG_Cancelar='Cancel';
+	$MULTILANG_Capturar='Capture';
 	$MULTILANG_CaracteresCaptcha='Number of characters for captcha?';
 	$MULTILANG_Cerrar='Close';
 	$MULTILANG_CerrarSesion='Logout';
@@ -275,6 +276,7 @@
 	$MULTILANG_FrmTipoTit4='Special Data Controls';
 	$MULTILANG_FrmTipo12='Archivo adjunto';
 	$MULTILANG_FrmTipo13='Canvas (Drawing area - HTML5)';
+	$MULTILANG_FrmTipo14='Canvas (Webcam capture - HTML5)';
 	$MULTILANG_FrmTipoPincel='Brush size';
 	$MULTILANG_FrmTipoColor='Line color';
 	$MULTILANG_FrmTipoAdvertencia='<font color=yellow>This kind of data controls should be stored in your table into a long text or unlimited field</font>';
@@ -442,6 +444,7 @@
 	$MULTILANG_FrmPlantillaEjemplos='<i>Some format modifiers:<li>_ORIGINAL_ : Original file name</li><li>_CAMPOTABLA_ : Linked field name over the table</li><li>_FECHA_ : Actual date in AAAAMMDD format</li><li>_HORA_ : Actual server time in  HHMMSS format</li><li>_MICRO_ : Time microseconds</li><li>_HORAINTERNET_ : Internet time between 000 and 999</li><li>_USUARIO_ : User login name</li></i><b>Examples:</b><li>_USUARIO__ORIGINAL_: Renames the original file with the user name login</li><li>formatos/_ORIGINAL_: Will upload the file into a formatos/ folder using the original name.  This folder have to be created by admin user before using the file manager in the cargas folder.</li><li>_FECHA__HORA__USUARIO_.pdf: Renames all the original file for something like 20140502_135400_admin.pdf</li><li>reportes/_FECHA_.xls: Will upload the file into reportes folder and will force the final extension to .xls too.</li><li>foto__USUARIO_.jpg: This file will have two fixed strings (foto_ at beginning and .jpg at the end) but inside them Practico will append the username.  Pay attention to the double underline character, one of them will separate the name and the other is for the format modifier.  You will obtain somthing like foto_avelez.jpg</li>A general rule: any string inside the pattern that dont match any format modifier will be a fixed string in the file name.';
 	$MULTILANG_FrmArchivoLink='[Open already uploaded file]';
 	$MULTILANG_FrmCanvasLink='[Open drawing already added]';
+	$MULTILANG_FrmErrorCam='There is an error with the video device.  Please cheack that you have a video device or webcam installed and the you answer Afirmative or Accept in your browser to allow Practico to use the device.';
 
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';

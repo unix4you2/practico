@@ -668,7 +668,7 @@ if ($accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(30);
+					OcultarCampos(31);
 					// Muestra campos segun tipo de objeto
 					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,13,14,17,25");
 					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,13,17,25");
@@ -682,7 +682,8 @@ if ($accion=="editar_formulario")
 					if (tipo_objeto_activo=="deslizador")   VisualizarCampos("1,2,4,7,8,9,17,26");
 					if (tipo_objeto_activo=="campo_etiqueta")   VisualizarCampos("1,2,4,9,17,14,15,27");
 					if (tipo_objeto_activo=="archivo_adjunto")   VisualizarCampos("1,2,7,8,9,17,28,29");
-					if (tipo_objeto_activo=="objeto_canvas")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,30");
+					if (tipo_objeto_activo=="objeto_canvas")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,30,31");
+					if (tipo_objeto_activo=="objeto_camara")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,31");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -733,6 +734,7 @@ if ($accion=="editar_formulario")
 									<optgroup label="<?php echo $MULTILANG_FrmTipoTit4; ?>">
 										<option value="archivo_adjunto" <?php if (@$registro_campo_editar["tipo"]=="archivo_adjunto") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo12; ?></option>
 										<option value="objeto_canvas" <?php if (@$registro_campo_editar["tipo"]=="objeto_canvas") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo13; ?></option>
+										<option value="objeto_camara" <?php if (@$registro_campo_editar["tipo"]=="objeto_camara") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo14; ?></option>
 									</optgroup>
 									<optgroup label="<?php echo $MULTILANG_FrmTipoTit2; ?>">
 										<option value="etiqueta"        <?php if (@$registro_campo_editar["tipo"]=="etiqueta")        echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo6; ?></option>
@@ -1267,6 +1269,7 @@ if ($accion=="editar_formulario")
 							</table>
 						</div>
 
+
 						<div id='campo27' style="display:none;">
 							<table class="TextosVentana">
 							<tr>
@@ -1296,7 +1299,8 @@ if ($accion=="editar_formulario")
 							</tr>
 							</table>
 						</div>
-						
+
+
 						<div id='campo28' style="display:none;">
 							<table class="TextosVentana">
 							<tr>
@@ -1309,6 +1313,7 @@ if ($accion=="editar_formulario")
 							</tr>
 							</table>
 						</div>
+
 
 						<div id='campo29' style="display:none;">
 							<table class="TextosVentana">
@@ -1333,6 +1338,7 @@ if ($accion=="editar_formulario")
 							</tr>
 							</table>
 						</div>
+
 
 						<div id='campo30' style="display:none;">
 							<table class="TextosVentana">
@@ -1362,6 +1368,12 @@ if ($accion=="editar_formulario")
 									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
 								</td>
 							</tr>
+							</table>
+						</div>
+
+
+						<div id='campo31' style="display:none;">
+							<table class="TextosVentana">
 							<tr>
 								<td colspan=2 align="center"><?php echo $MULTILANG_FrmTipoAdvertencia; ?></td>
 							</tr>							

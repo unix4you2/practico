@@ -48,6 +48,7 @@
 	$MULTILANG_BarraHtas='Barra de herramientas';
 	$MULTILANG_Campo='Campo';
 	$MULTILANG_Cancelar='Cancelar';
+	$MULTILANG_Capturar='Capturar';
 	$MULTILANG_CaracteresCaptcha='N&uacute;mero de caracteres para captcha?';
 	$MULTILANG_Cerrar='Cerrar';
 	$MULTILANG_CerrarSesion='Cerrar sesi&oacute;n';
@@ -272,6 +273,7 @@
 	$MULTILANG_FrmTipoTit4='Controles de datos especiales';
 	$MULTILANG_FrmTipo12='Archivo adjunto';
 	$MULTILANG_FrmTipo13='Canvas (Area de dibujo - HTML5)';
+	$MULTILANG_FrmTipo14='Canvas (Captura Webcam - HTML5)';
 	$MULTILANG_FrmTipoPincel='Tama&ntilde;o del pincel';
 	$MULTILANG_FrmTipoColor='Color del trazo';
 	$MULTILANG_FrmTipoAdvertencia='<font color=yellow>Este tipo de controles deberia ser almacenado en su tabla dentro de campos de texto largo/ilimitado</font>';
@@ -439,6 +441,7 @@
 	$MULTILANG_FrmPlantillaEjemplos='<i><b>Algunas variables de formato:</b><li>_ORIGINAL_ : Nombre original del archivo</li><li>_CAMPOTABLA_ : Nombre del campo de tabla vinculado</li><li>_FECHA_ : Fecha actual en formato AAAAMMDD</li><li>_HORA_ : Hora del servidor en formato HHMMSS</li><li>_MICRO_ : Microsegundos de la hora del sistema</li><li>_HORAINTERNET_ : Valor hora de internet de 000 a 999</li><li>_USUARIO_ : Login del usuario que hace el cargue</li><b>Ejemplos:</b><li>_USUARIO__ORIGINAL_: Renombra el archivo original anteponiendo el login del usuario que lo carga</li><li>formatos/_ORIGINAL_: Carga el archivo con su nombre original dentro de la carpeta formatos.  La carpeta debe haber sido creada previamente por el usuario admin mediante el administrador de archivos dentro de la carpeta de cargas.</li><li>_FECHA__HORA__USUARIO_.pdf: Ademas de renombrar el archivo original por una cadena con la fecha, hora y usuario que hace el cargue, hace el forzado de la extension de archivo, renombrandolo como PDF.</li><li>reportes/_FECHA_.xls: Ademas de cargar el archivo en la carpeta reportes, lo renombra a la fecha actual y hace el forzado para que su extension sea XLS.</li><li>foto__USUARIO_.jpg: El archivo tendra fijas las cadenas iniciales y finales de foto_ y .jpg pero en el medio se reemplazara el valor del usuario que hace el cargue.  Observe el doble underline, uno para separar el archivo y otro para la variable de formato como tal.  Tendra un resultado final como foto_avelez.jpg</li>En general cualquier cadena dentro del formato que no coincida con las variables de formato quedara intacta en el nombre del archivo.</i>';
 	$MULTILANG_FrmArchivoLink='[Abrir archivo ya cargado]';
 	$MULTILANG_FrmCanvasLink='[Ver grafico ya cargado]';
+	$MULTILANG_FrmErrorCam='Error en el dispositivo de video.  Verifique que cuenta con una camara instalada y que ha hecho clic en Permitir o aceptar para permitir a Practico utilizarla.';
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

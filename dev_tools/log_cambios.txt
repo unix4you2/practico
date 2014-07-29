@@ -34,6 +34,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added: Adicion de control de datos para captura de imágenes desde la webcam en diseño de formularios
 * Added: Presentacion de archivos adjuntos referenciados por registros
 * Added: Campos de tipo archivo en diseño de formularios ahora permiten adjuntar multiples archivos
 * Added: Se simplifica creacion de opciones de menu eliminando campos de padre y columna
