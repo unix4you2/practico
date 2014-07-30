@@ -282,6 +282,21 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: gzdecode
+	Crea una funcion de descompresion en caso de no estar disponible en la instalacion de PHP actual
+*/
+	if (!function_exists('gzdecode'))
+		{
+			function gzdecode($cadena)
+				{
+					return gzinflate(substr($cadena,10,-8));
+				}
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
   function limpiar_entradas()
 	{
 			/*
@@ -1535,7 +1550,10 @@
 							$cadena_valor=' value="'.$valor_variable.'" ';							
 						}
 				}
-			if ($campobase!="" && $valorbase!="") $cadena_valor=' value="'.$registro_datos_formulario["$nombre_campo"].'" ';
+			$valor_variable_escapada=$registro_datos_formulario["$nombre_campo"];
+			//$valor_variable_escapada=addslashes ( '"'.$valor_variable_escapada.'"' );
+			$valor_variable_escapada=htmlentities($valor_variable_escapada); //Presenta la cadena como caracteres especiales HTML para ayudar a presentar correctamente tildes, comillas y barras
+			if ($campobase!="" && $valorbase!="") $cadena_valor=' value="'.$valor_variable_escapada.'" ';
 
 			// Define cadenas en caso de tener validaciones
 			$cadena_validacion='';
@@ -2248,18 +2266,22 @@
 
 			// Si detecta un valor en el registro entonces agrega el contenido
 			if ($campobase!="" && $valorbase!="" && $registro_datos_formulario["$nombre_campo"]!="")
-			$salida.='<a href="javascript:AbrirPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\');"><img src="img/ginux_Outlook.png" border=0 width="20" height="20" align="absmiddle"><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
-				<!-- INICIO DE MARCOS POPUP -->
-				<div id="CANVASPrevio'.$registro_campos["campo"].'" class="FormularioPopUps">
-					<div align=center>
-						<table bgcolor="#FFFFFF"><tr><td>
-							<img src="'.$registro_datos_formulario["$nombre_campo"].'" border=1>
-						</td></tr></table>
-					</br>
-					<input type="Button"  class="Botones" value=" -- '.$MULTILANG_Cerrar.' -- " onClick="OcultarPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\')">
-					</div>
-				<!-- FIN DE MARCOS POPUP -->
-				</div>';
+				{
+					$cadena_decodificada=$registro_datos_formulario["$nombre_campo"];
+					$cadena_decodificada=gzdecode($cadena_decodificada);
+					$salida.='<a href="javascript:AbrirPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\');"><img src="img/ginux_Outlook.png" border=0 width="20" height="20" align="absmiddle"><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
+						<!-- INICIO DE MARCOS POPUP -->
+						<div id="CANVASPrevio'.$registro_campos["campo"].'" class="FormularioPopUps">
+							<div align=center>
+								<table bgcolor="#FFFFFF"><tr><td>
+									<img src="'.$cadena_decodificada.'" border=1>
+								</td></tr></table>
+							</br>
+							<input type="Button"  class="Botones" value=" -- '.$MULTILANG_Cerrar.' -- " onClick="OcultarPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\')">
+							</div>
+						<!-- FIN DE MARCOS POPUP -->
+						</div>';
+				}
 
 			// Muestra el campo
 			$salida.='
@@ -2352,18 +2374,22 @@
 
 			// Si detecta un valor en el registro entonces agrega el contenido
 			if ($campobase!="" && $valorbase!="" && $registro_datos_formulario["$nombre_campo"]!="")
-			$salida.='<a href="javascript:AbrirPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\');"><img src="img/ginux_Outlook.png" border=0 width="20" height="20" align="absmiddle"><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
-				<!-- INICIO DE MARCOS POPUP -->
-				<div id="CANVASPrevio'.$registro_campos["campo"].'" class="FormularioPopUps">
-					<div align=center>
-						<table bgcolor="#FFFFFF"><tr><td>
-							<img src="'.$registro_datos_formulario["$nombre_campo"].'" border=1>
-						</td></tr></table>
-					</br>
-					<input type="Button"  class="Botones" value=" -- '.$MULTILANG_Cerrar.' -- " onClick="OcultarPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\')">
-					</div>
-				<!-- FIN DE MARCOS POPUP -->
-				</div>';
+				{
+					$cadena_decodificada=$registro_datos_formulario["$nombre_campo"];
+					$cadena_decodificada=gzdecode($cadena_decodificada);
+					$salida.='<a href="javascript:AbrirPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\');"><img src="img/ginux_Outlook.png" border=0 width="20" height="20" align="absmiddle"><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
+						<!-- INICIO DE MARCOS POPUP -->
+						<div id="CANVASPrevio'.$registro_campos["campo"].'" class="FormularioPopUps">
+							<div align=center>
+								<table bgcolor="#FFFFFF"><tr><td>
+									<img src="'.$cadena_decodificada.'" border=1>
+								</td></tr></table>
+							</br>
+							<input type="Button"  class="Botones" value=" -- '.$MULTILANG_Cerrar.' -- " onClick="OcultarPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\')">
+							</div>
+						<!-- FIN DE MARCOS POPUP -->
+						</div>';
+				}
 
 			// Muestra el campo
 			$escala_reduccion=2;
@@ -3026,7 +3052,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 									$comando_javascript=$registro_botones["accion_usuario"];
 								}
 							$cadena_javascript='onclick="'.@$comando_javascript.'"';
-							$cadena_generica_botones.='<input type="Button"  class="'.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.$cadena_javascript.' >';
+							@$cadena_generica_botones.='<input type="Button"  class="'.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.$cadena_javascript.' >';
 							$total_botones++;
 						}
 					//Si el informe tiene botones se agrega el formulario para procesar las acciones

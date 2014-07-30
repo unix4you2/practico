@@ -256,6 +256,8 @@
 					// Busca los campos visibles del form y construye cadenas de valores para consulta
 					$lista_campos="";
 					$lista_valores="";
+					$lista_valores_interrogantes="";
+					$lista_valores_concatenados="";
 
 					$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1","$formulario");
 					while ($registro_campos = $consulta_campos->fetch())
@@ -326,18 +328,24 @@
 															//Agrega el campo y su path a la lista de campos para el query
 															$lista_campos.=$registro_campos["campo"].",";
 															$lista_valores.="'".$path_final_archivo."|".$tipo_archivo."',";
+															//Cadenas de valores usados para hacer consultas Binded con PDO
+															$lista_valores_interrogantes.="?,";
+															$lista_valores_concatenados.=$path_final_archivo."|".$tipo_archivo."||";
 														}
 												}
 											else
 												{
 													$nombre_de_campo_query=$registro_campos["campo"].",";
-													$valor_de_campo_query="'".$$registro_campos["campo"]."',";
+													//ANTES DE QUERY CON PARAMETROS $valor_de_campo_query="'".$$registro_campos["campo"]."',";
+													$valor_de_campo_query=$$registro_campos["campo"];
 													//Compresion previa para campos especiales (MUY experimental por cuanto puede generar errores de query)
-														//if ($registro_campos["tipo"]=="objeto_canvas")
-														//	$valor_de_campo_query=gzencode($valor_de_campo_query,9);
+														if ($registro_campos["tipo"]=="objeto_canvas" || $registro_campos["tipo"]=="objeto_camara")
+															$valor_de_campo_query=gzencode($valor_de_campo_query,9);
 													//Agrega el campo y su valor a la lista de campos para el query
 													$lista_campos.=$nombre_de_campo_query;
 													$lista_valores.=$valor_de_campo_query;
+													$lista_valores_interrogantes.="?,";
+													$lista_valores_concatenados.=$valor_de_campo_query."||";
 												}
 										}
 								}
@@ -346,9 +354,13 @@
 					// Elimina comas al final de las listas
 					$lista_campos=substr($lista_campos, 0, strlen($lista_campos)-1);
 					$lista_valores=substr($lista_valores, 0, strlen($lista_valores)-1);
+					$lista_valores_interrogantes=substr($lista_valores_interrogantes, 0, strlen($lista_valores_interrogantes)-1);
+					//Elimina doble pipe al final de valores concatenados
+					$lista_valores_concatenados=substr($lista_valores_concatenados, 0, strlen($lista_valores_concatenados)-2);					
 
-					// Inserta los datos del registro en BD
-					ejecutar_sql_unaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores.")");
+					//Inserta los datos del registro en BD
+					//ANTES DEL QUERY CON PARAMETROS: ejecutar_sql_unaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores.")");
+					ejecutar_sql_unaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores_interrogantes.")",$lista_valores_concatenados);
 					auditar("Inserta registro en ".$registro_formulario["tabla_datos"]);
 					//Si no hay errores en carga de archivos redirecciona normal, sino redirecciona con los errores
 					if ($errores_de_carga=="")
