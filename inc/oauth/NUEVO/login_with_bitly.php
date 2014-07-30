@@ -1,8 +1,8 @@
 <?php
 /*
- * login_with_bitbucket.php
+ * login_with_bitly.php
  *
- * @(#) $Id: login_with_bitbucket.php,v 1.2 2013/07/31 11:48:04 mlemos Exp $
+ * @(#) $Id: login_with_bitly.php,v 1.1 2014/05/15 04:06:17 mlemos Exp $
  *
  */
 
@@ -13,32 +13,45 @@
 	require('oauth_client.php');
 
 	$client = new oauth_client_class;
+	$client->server = 'Bitly';
+
 	$client->debug = false;
 	$client->debug_http = true;
-	$client->server = 'Bitbucket';
 	$client->redirect_uri = 'http://'.$_SERVER['HTTP_HOST'].
-		dirname(strtok($_SERVER['REQUEST_URI'],'?')).'/login_with_bitbucket.php';
+		dirname(strtok($_SERVER['REQUEST_URI'],'?')).'/login_with_bitly.php';
 
 	$client->client_id = ''; $application_line = __LINE__;
 	$client->client_secret = '';
 
 	if(strlen($client->client_id) == 0
 	|| strlen($client->client_secret) == 0)
-		die('Please go to Bitbucket page to Manage Account '.
-			'https://bitbucket.org/account/ , click on Integrated Applications, '.
-			'then Add Consumer, and in the line '.$application_line.
-			' set the client_id with Key and client_secret with Secret. '.
-			'The URL must be '.$client->redirect_uri);
+		die('Please create a Bitly application in '.
+			'https://bitly.com/a/oauth_apps , and in the line '.
+			$application_line.' set the client_id to Client ID and '.
+			'client_secret with Client Secret. '.
+			'The callback URL must be '.$client->redirect_uri.' but make sure '.
+			'it is a secure URL (https://).');
 
+	/* API permissions, empty is the default for this application
+	 */
+	$client->scope = '';
 	if(($success = $client->Initialize()))
 	{
 		if(($success = $client->Process()))
 		{
-			if(strlen($client->access_token))
+			if(strlen($client->authorization_error))
+			{
+				$client->error = $client->authorization_error;
+				$success = false;
+			}
+			elseif(strlen($client->access_token))
 			{
 				$success = $client->CallAPI(
-					'https://api.bitbucket.org/1.0/user', 
-					'GET', array(), array('FailOnAccessError'=>true), $user);
+					'https://api-ssl.bitly.com/v3/user/info',
+					'GET', array(), array(
+						'FailOnAccessError'=>true,
+						'FollowRedirection'=>true
+					), $user);
 			}
 		}
 		$success = $client->Finalize($success);
@@ -51,12 +64,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>Bitbucket OAuth client results</title>
+<title>Bitly OAuth client results</title>
 </head>
 <body>
 <?php
-		echo '<h1>', HtmlSpecialChars($user->user->first_name), 
-			' you have logged in successfully with Bitbucket!</h1>';
+		echo '<h1>', HtmlSpecialChars($user->data->full_name),
+			' you have logged in successfully with Bitly!</h1>';
 		echo '<pre>', HtmlSpecialChars(print_r($user, 1)), '</pre>';
 ?>
 </body>

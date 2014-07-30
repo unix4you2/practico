@@ -2,7 +2,7 @@
 /*
  * login_with_yahoo.php
  *
- * @(#) $Id: login_with_yahoo.php,v 1.3 2013/10/17 05:23:22 mlemos Exp $
+ * @(#) $Id: login_with_yahoo.php,v 1.4 2014/03/31 07:18:57 mlemos Exp $
  *
  */
 
@@ -37,7 +37,7 @@
 			if(strlen($client->access_token))
 			{
 				$success = $client->CallAPI(
-					'http://query.yahooapis.com/v1/yql', 
+					'https://query.yahooapis.com/v1/yql', 
 					'GET', array(
 						'q'=>'select * from social.profile where guid=me',
 						'format'=>'json'

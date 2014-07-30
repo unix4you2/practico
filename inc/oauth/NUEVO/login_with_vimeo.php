@@ -1,8 +1,8 @@
 <?php
 /*
- * login_with_fitbit.php
+ * login_with_vimeo.php
  *
- * @(#) $Id: login_with_fitbit.php,v 1.2 2013/07/31 11:48:04 mlemos Exp $
+ * @(#) $Id: login_with_vimeo.php,v 1.1 2014/04/11 10:25:46 mlemos Exp $
  *
  */
 
@@ -13,23 +13,24 @@
 	require('oauth_client.php');
 
 	$client = new oauth_client_class;
-	$client->debug = 1;
-	$client->debug_http = 1;
-	$client->server = 'Fitbit';
+	$client->debug = true;
+	$client->debug_http = true;
+	$client->server = 'Vimeo';
 	$client->redirect_uri = 'http://'.$_SERVER['HTTP_HOST'].
-		dirname(strtok($_SERVER['REQUEST_URI'],'?')).'/login_with_fitbit.php';
+		dirname(strtok($_SERVER['REQUEST_URI'],'?')).'/login_with_vimeo.php';
 
 	$client->client_id = ''; $application_line = __LINE__;
 	$client->client_secret = '';
 
 	if(strlen($client->client_id) == 0
 	|| strlen($client->client_secret) == 0)
-		die('Please go to Fitbit application registration page https://dev.fitbit.com/apps/new , '.
+		die('Please go to Vimeo Apps page https://developer.vimeo.com/apps/new , '.
 			'create an application, and in the line '.$application_line.
-			' set the client_id to Consumer key and client_secret with Consumer secret. '.
-			'The Callback URL must be '.$client->redirect_uri).' Make sure this URL is '.
-			'not in a private network and accessible to the Fitbit site.';
+			' set the client_id to Client Identifier and client_secret with Client Secret');
 
+	/* API permissions
+	 */
+	$client->scope = '';
 	if(($success = $client->Initialize()))
 	{
 		if(($success = $client->Process()))
@@ -37,7 +38,7 @@
 			if(strlen($client->access_token))
 			{
 				$success = $client->CallAPI(
-					'https://api.fitbit.com/1/user/-/profile.json', 
+					'https://api.vimeo.com/me/?format=json', 
 					'GET', array(), array('FailOnAccessError'=>true), $user);
 			}
 		}
@@ -51,12 +52,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>Fitbit OAuth client results</title>
+<title>Vimeo OAuth client results</title>
 </head>
 <body>
 <?php
-		echo '<h1>', HtmlSpecialChars($user->user->displayName), 
-			' you have logged in successfully with Fitbit!</h1>';
+		echo '<h1>', HtmlSpecialChars($user->name), 
+			' you have logged in successfully with Vimeo!</h1>';
 		echo '<pre>', HtmlSpecialChars(print_r($user, 1)), '</pre>';
 ?>
 </body>
@@ -73,7 +74,7 @@
 </head>
 <body>
 <h1>OAuth client error</h1>
-<p>Error: <?php echo HtmlSpecialChars($client->error); ?></p>
+<pre>Error: <?php echo HtmlSpecialChars($client->error); ?></pre>
 </body>
 </html>
 <?php

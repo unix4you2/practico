@@ -1,8 +1,8 @@
 <?php
 /*
- * login_with_basecamp.php
+ * login_with_mavenlink.php
  *
- * @(#) $Id: login_with_37signals.php,v 1.1 2014/03/17 09:45:08 mlemos Exp $
+ * @(#) $Id: login_with_mavenlink.php,v 1.1 2014/05/15 09:41:45 mlemos Exp $
  *
  */
 
@@ -13,27 +13,26 @@
 	require('oauth_client.php');
 
 	$client = new oauth_client_class;
-	$client->server = '37Signals';
+	$client->server = 'Mavenlink';
+
 	$client->debug = false;
 	$client->debug_http = true;
 	$client->redirect_uri = 'http://'.$_SERVER['HTTP_HOST'].
-		dirname(strtok($_SERVER['REQUEST_URI'],'?')).'/login_with_37signals.php';
+		dirname(strtok($_SERVER['REQUEST_URI'],'?')).'/login_with_mavenlink.php';
 
 	$client->client_id = ''; $application_line = __LINE__;
 	$client->client_secret = '';
 
-	// 37Signals
-	$client->client_id = '68a354455ac2e3dacbce2f3ae5fd3fd018869e95';
-	$client->client_secret = '4a4be253ce94b861a1829db946120be48b2563fe';
-
 	if(strlen($client->client_id) == 0
 	|| strlen($client->client_secret) == 0)
-		die('Please go to 37Signals Integrate new application page '.
-			'https://integrate.37signals.com/apps/new and in the line '.$application_line.
-			' set the client_id to Client ID and client_secret with Client secret. '.
-			'The site domain must have the same domain of '.$client->redirect_uri);
+		die('Please create a Mavenlink application in '.
+			'https://app.mavenlink.com/oauth/applications/new , and in the line '.
+			$application_line.' set the client_id to Client ID and '.
+			'client_secret with Client Secret. '.
+			'The callback URL must be '.$client->redirect_uri.' but make sure '.
+			'it is a secure URL (https://).');
 
-	/* API permissions
+	/* API permissions, empty is the default for this application
 	 */
 	$client->scope = '';
 	if(($success = $client->Initialize()))
@@ -48,8 +47,11 @@
 			elseif(strlen($client->access_token))
 			{
 				$success = $client->CallAPI(
-					'https://launchpad.37signals.com/authorization.json',
-					'GET', array(), array('FailOnAccessError'=>true), $user);
+					'https://api.mavenlink.com/api/v1/users/me.json',
+					'GET', array(), array(
+						'FailOnAccessError'=>true,
+						'FollowRedirection'=>true
+					), $user);
 			}
 		}
 		$success = $client->Finalize($success);
@@ -62,12 +64,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>37Signals OAuth client results</title>
+<title>Mavenlink OAuth client results</title>
 </head>
 <body>
 <?php
-		echo '<h1>', HtmlSpecialChars($user->identity->first_name),
-			' you have logged in successfully with 37Signals!</h1>';
+		$key = Key($user->users);
+		echo '<h1>', HtmlSpecialChars($user->users->{$key}->full_name),
+			' you have logged in successfully with Mavenlink!</h1>';
 		echo '<pre>', HtmlSpecialChars(print_r($user, 1)), '</pre>';
 ?>
 </body>
