@@ -517,7 +517,7 @@
 				Variables de entrada:
 
 					query - Consulta preformateada para ser ejecutada en el motor
-					lista_parametros - Lista de variables PHP con parametros que deben ser preparados para el query separados por doble pipe ||
+					lista_parametros - Lista de variables PHP con parametros que deben ser preparados para el query separados por $_SeparadorCampos_
 					
 				Salida:
 					Retorna mensaje en pantalla con la descripcion devuelta por el driver en caso de error
@@ -526,7 +526,7 @@
 			global $ConexionPDO,$ModoDepuracion;
 			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin;
 			global $accion;
-			global $Login_usuario;
+			global $Login_usuario,$_SeparadorCampos_;
 			
 			// Filtra la cadena antes de ser ejecutada
 			$query=filtrar_cadena_sql($query);
@@ -539,7 +539,7 @@
 					if ($lista_parametros!="")
 						{
 							$cantidad_parametros=substr_count($query,'?');
-							$parametros=explode('||',$lista_parametros);
+							$parametros=explode($_SeparadorCampos_,$lista_parametros);
 							// if ($cantidad_parametros!=count($parametros)) //La cantidad de parametros en query es diferente a los recibidos
 							//Recorre cada parametro y toma su valor
 							for ($i=1;$i<=$cantidad_parametros;$i++)
@@ -589,7 +589,7 @@
 					Retorna una cadena vacia si la consulta es ejecutada sin problemas.
 			*/
 			global $ConexionPDO,$ModoDepuracion;
-			global $Login_usuario;
+			global $Login_usuario,$_SeparadorCampos_;
 			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin,$MULTILANG_ContacteAdmin,$MULTILANG_MotorBD;
 			try
 				{
@@ -599,7 +599,7 @@
 					if ($lista_parametros!="")
 						{
 							$cantidad_parametros=substr_count($query,'?');
-							$parametros=explode('||',$lista_parametros);
+							$parametros=explode($_SeparadorCampos_,$lista_parametros);
 							// if ($cantidad_parametros!=count($parametros)) //La cantidad de parametros en query es diferente a los recibidos
 							//Recorre cada parametro y toma su valor
 							for ($i=1;$i<=$cantidad_parametros;$i++)
@@ -677,7 +677,7 @@
 	function auditar($accion,$usuario="")
 		{
 			global $ConexionPDO,$ArchivoCORE,$TablasCore;
-			global $ListaCamposSinID_auditoria;
+			global $ListaCamposSinID_auditoria,$_SeparadorCampos_;
 			global $Login_usuario,$fecha_operacion,$hora_operacion;
 			//Establece el usuario para el registro
 			if ($usuario=="")
@@ -685,7 +685,7 @@
 			else
 				$usuario_auditar=$usuario;
 			//Lleva el registro
-			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES (?,?,?,?)","$usuario_auditar||$accion||$fecha_operacion||$hora_operacion");
+			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES (?,?,?,?)","$usuario_auditar$_SeparadorCampos_$accion$_SeparadorCampos_$fecha_operacion$_SeparadorCampos_$hora_operacion");
 		}
 
 
@@ -2392,7 +2392,7 @@
 				}
 
 			// Muestra el campo
-			$escala_reduccion=2;
+			$escala_reduccion=1;
 			$salida.='
 				<table border=0>
 					<tr>
@@ -2506,6 +2506,7 @@
 		function cargar_formulario($formulario,$en_ventana=1,$campobase="",$valorbase="")
 		  {
 				global $ConexionPDO,$ArchivoCORE,$TablasCore,$PlantillaActiva;
+				global $_SeparadorCampos_;
 				// Carga variables de definicion de tablas
 				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
 				global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion;
@@ -2610,7 +2611,7 @@
 						for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
 							{
 								//Busca los elementos de la coumna actual del formulario con peso menor o igual al peso del objeto fila_unica de la fila unica_actual pero que no son fila_unica
-								$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND columna=? AND visible=1 AND peso >? AND peso <=? ORDER BY peso","$formulario||$cl||$limite_inferior||$limite_superior");
+								$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND columna=? AND visible=1 AND peso >? AND peso <=? ORDER BY peso","$formulario$_SeparadorCampos_$cl$_SeparadorCampos_$limite_inferior$_SeparadorCampos_$limite_superior");
 								
 									//Inicia columna de formulario
 									echo '<td valign=top align=center>';
@@ -2666,7 +2667,7 @@
 						echo '</tr></table>';
 
 						//Busca datos del registro de fila_unica
-						$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND id=? ","$formulario||$ultimo_id");
+						$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND id=? ","$formulario$_SeparadorCampos_$ultimo_id");
 						$registro_campos = $consulta_campos->fetch();
 
 						//Agrega el campo de fila unica cuando no se trata del agregado de peso 9999

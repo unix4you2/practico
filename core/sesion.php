@@ -198,7 +198,7 @@
 						// Lleva a auditoria con query manual por la falta de $Login_Usuario
 						auditar("Ingresa al sistema desde $direccion_auditoria",$uid);
 						// Actualiza fecha del ultimo ingreso para el usuario
-						ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login=? ","$fecha_operacion||$uid");
+						ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login=? ","$fecha_operacion$_SeparadorCampos_$uid");
 				  }
 
 			// Si la clave es incorrecta muestra de nuevo la ventana de ingreso

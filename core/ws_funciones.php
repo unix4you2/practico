@@ -76,7 +76,7 @@ if ($WSId=="verificar_credenciales")
 		if (!$error_parametros && ($Auth_TipoMotor=="practico" || $uid=="admin"))
 			{
 				$ClaveEnMD5=hash("md5", $clave);
-				$resultado_usuario=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE estado=1 AND login=? AND clave=? ","$uid||$ClaveEnMD5");
+				$resultado_usuario=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE estado=1 AND login=? AND clave=? ","$uid$_SeparadorCampos_$ClaveEnMD5");
 				$registro = $resultado_usuario->fetch();
 				if ($registro["login"]!="")
 					$ok_login_verifica='1';

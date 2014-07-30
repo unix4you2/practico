@@ -73,6 +73,9 @@
 	$hora_operacion=date("His");
 	$hora_operacion_puntos=date("H:i");
 	$direccion_auditoria=$_SERVER ['REMOTE_ADDR'];
+	
+	// Define cadena usada para separar campos en operaciones de bases de datos
+	$_SeparadorCampos_="||_||";
 
 	// Recupera variables recibidas para su uso como globales (equivale a register_globals=on en php.ini)
 	if (!ini_get('register_globals'))

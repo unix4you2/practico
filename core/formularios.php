@@ -330,7 +330,7 @@
 															$lista_valores.="'".$path_final_archivo."|".$tipo_archivo."',";
 															//Cadenas de valores usados para hacer consultas Binded con PDO
 															$lista_valores_interrogantes.="?,";
-															$lista_valores_concatenados.=$path_final_archivo."|".$tipo_archivo."||";
+															$lista_valores_concatenados.=$path_final_archivo."|".$tipo_archivo.$_SeparadorCampos_;
 														}
 												}
 											else
@@ -345,7 +345,7 @@
 													$lista_campos.=$nombre_de_campo_query;
 													$lista_valores.=$valor_de_campo_query;
 													$lista_valores_interrogantes.="?,";
-													$lista_valores_concatenados.=$valor_de_campo_query."||";
+													$lista_valores_concatenados.=$valor_de_campo_query.$_SeparadorCampos_;
 												}
 										}
 								}
@@ -355,8 +355,8 @@
 					$lista_campos=substr($lista_campos, 0, strlen($lista_campos)-1);
 					$lista_valores=substr($lista_valores, 0, strlen($lista_valores)-1);
 					$lista_valores_interrogantes=substr($lista_valores_interrogantes, 0, strlen($lista_valores_interrogantes)-1);
-					//Elimina doble pipe al final de valores concatenados
-					$lista_valores_concatenados=substr($lista_valores_concatenados, 0, strlen($lista_valores_concatenados)-2);					
+					//Elimina separador de campo al final de valores concatenados
+					$lista_valores_concatenados=substr($lista_valores_concatenados, 0, strlen($lista_valores_concatenados)-strlen($_SeparadorCampos_));					
 
 					//Inserta los datos del registro en BD
 					//ANTES DEL QUERY CON PARAMETROS: ejecutar_sql_unaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores.")");
@@ -560,7 +560,7 @@
 				{
 					// Define la consulta de insercion del nuevo campo
 					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-					ejecutar_sql_unaria($consulta_insercion,"$tipo_objeto||$titulo||$campo||$ayuda_titulo||$ayuda_texto||$formulario||$peso||$columna||$obligatorio||$visible||$valor_predeterminado||$validacion_datos||$etiqueta_busqueda||$ajax_busqueda||$valor_unico||$solo_lectura||$teclado_virtual||$ancho||$alto||$barra_herramientas||$fila_unica||$lista_opciones||$origen_lista_opciones||$origen_lista_valores||$valor_etiqueta||$url_iframe||$objeto_en_ventana||$informe_vinculado||$maxima_longitud||$valor_minimo||$valor_maximo||$valor_salto||$formato_salida||$plantilla_archivo||$peso_archivo||$tamano_pincel||$color_trazo");
+					ejecutar_sql_unaria($consulta_insercion,"$tipo_objeto$_SeparadorCampos_$titulo$_SeparadorCampos_$campo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$formulario$_SeparadorCampos_$peso$_SeparadorCampos_$columna$_SeparadorCampos_$obligatorio$_SeparadorCampos_$visible$_SeparadorCampos_$valor_predeterminado$_SeparadorCampos_$validacion_datos$_SeparadorCampos_$etiqueta_busqueda$_SeparadorCampos_$ajax_busqueda$_SeparadorCampos_$valor_unico$_SeparadorCampos_$solo_lectura$_SeparadorCampos_$teclado_virtual$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$barra_herramientas$_SeparadorCampos_$fila_unica$_SeparadorCampos_$lista_opciones$_SeparadorCampos_$origen_lista_opciones$_SeparadorCampos_$origen_lista_valores$_SeparadorCampos_$valor_etiqueta$_SeparadorCampos_$url_iframe$_SeparadorCampos_$objeto_en_ventana$_SeparadorCampos_$informe_vinculado$_SeparadorCampos_$maxima_longitud$_SeparadorCampos_$valor_minimo$_SeparadorCampos_$valor_maximo$_SeparadorCampos_$valor_salto$_SeparadorCampos_$formato_salida$_SeparadorCampos_$plantilla_archivo$_SeparadorCampos_$peso_archivo$_SeparadorCampos_$tamano_pincel$_SeparadorCampos_$color_trazo");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea campo $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
@@ -611,7 +611,7 @@
 			if ($mensaje_error=="")
 				{
 					$accion_usuario=addslashes($accion_usuario);
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?)","$titulo||$estilo||$formulario||$tipo_accion||$accion_usuario||$visible||$peso||$retorno_titulo||$retorno_texto||$confirmacion_texto");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$formulario$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$retorno_titulo$_SeparadorCampos_$retorno_texto$_SeparadorCampos_$confirmacion_texto");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea boton $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
@@ -2056,7 +2056,7 @@ if ($accion=="editar_formulario")
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario SET titulo=?,ayuda_titulo=?,ayuda_texto=?,color_fondo=?,tabla_datos=?,columnas=?,javascript=?,borde_visible=? WHERE id= ? ","$titulo||$ayuda_titulo||$ayuda_texto||$color_fondo||$tabla_datos||$columnas||$javascript||$borde_visible||$formulario");
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario SET titulo=?,ayuda_titulo=?,ayuda_texto=?,color_fondo=?,tabla_datos=?,columnas=?,javascript=?,borde_visible=? WHERE id= ? ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$color_fondo$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$formulario");
 					auditar("Actualiza formulario $formulario para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
@@ -2103,7 +2103,7 @@ if ($accion=="editar_formulario")
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?)","$titulo||$ayuda_titulo||$ayuda_texto||$color_fondo||$tabla_datos||$columnas||$javascript||$borde_visible");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$color_fondo$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea formulario $id para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -2162,7 +2162,7 @@ if ($accion=="editar_formulario")
 					$javascript=$registro["javascript"];
 					$borde_visible=$registro["borde_visible"];
 					// Inserta el nuevo objeto al form
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?) ","$nuevo_titulo||$ayuda_titulo||$ayuda_texto||$color_fondo||$tabla_datos||$columnas||$javascript||$borde_visible");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?) ","$nuevo_titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$color_fondo$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible");
 					$id=$ConexionPDO->lastInsertId();
 					// Busca los elementos que componen el formulario para hacerles la copia
 					// Registros de formulario_objeto
@@ -2208,7 +2208,7 @@ if ($accion=="editar_formulario")
 							$tamano_pincel=$registro["tamano_pincel"];
 							$color_trazo=$registro["color_trazo"];
 							//Inserta el nuevo objeto al form
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$tipo||$titulo||$campo||$ayuda_titulo||$ayuda_texto||$nuevo_formulario||$peso||$columna||$obligatorio||$visible||$valor_predeterminado||$validacion_datos||$etiqueta_busqueda||$ajax_busqueda||$valor_unico||$solo_lectura||$teclado_virtual||$ancho||$alto||$barra_herramientas||$fila_unica||$lista_opciones||$origen_lista_opciones||$origen_lista_valores||$valor_etiqueta||$url_iframe||$objeto_en_ventana||$informe_vinculado||$maxima_longitud||$valor_minimo||$valor_maximo||$valor_salto||$formato_salida||$plantilla_archivo||$peso_archivo||$tamano_pincel||$color_trazo");
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$tipo$_SeparadorCampos_$titulo$_SeparadorCampos_$campo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$nuevo_formulario$_SeparadorCampos_$peso$_SeparadorCampos_$columna$_SeparadorCampos_$obligatorio$_SeparadorCampos_$visible$_SeparadorCampos_$valor_predeterminado$_SeparadorCampos_$validacion_datos$_SeparadorCampos_$etiqueta_busqueda$_SeparadorCampos_$ajax_busqueda$_SeparadorCampos_$valor_unico$_SeparadorCampos_$solo_lectura$_SeparadorCampos_$teclado_virtual$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$barra_herramientas$_SeparadorCampos_$fila_unica$_SeparadorCampos_$lista_opciones$_SeparadorCampos_$origen_lista_opciones$_SeparadorCampos_$origen_lista_valores$_SeparadorCampos_$valor_etiqueta$_SeparadorCampos_$url_iframe$_SeparadorCampos_$objeto_en_ventana$_SeparadorCampos_$informe_vinculado$_SeparadorCampos_$maxima_longitud$_SeparadorCampos_$valor_minimo$_SeparadorCampos_$valor_maximo$_SeparadorCampos_$valor_salto$_SeparadorCampos_$formato_salida$_SeparadorCampos_$plantilla_archivo$_SeparadorCampos_$peso_archivo$_SeparadorCampos_$tamano_pincel$_SeparadorCampos_$color_trazo");
 						}				
 					// Registros de formulario_boton
 					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
@@ -2226,7 +2226,7 @@ if ($accion=="editar_formulario")
 							$retorno_texto=$registro["retorno_texto"];
 							$confirmacion_texto=$registro["confirmacion_texto"];
 							//Inserta el nuevo objeto al form
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?) ","$titulo||$estilo||$nuevo_formulario||$tipo_accion||$accion_usuario||$visible||$peso||$retorno_titulo||$retorno_texto||$confirmacion_texto");
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$nuevo_formulario$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$retorno_titulo$_SeparadorCampos_$retorno_texto$_SeparadorCampos_$confirmacion_texto");
 						}
 					auditar("Crea copia de formulario $formulario");
 

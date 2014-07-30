@@ -168,7 +168,7 @@ if ($accion=="copiar_permisos")
 		while($registro = $resultado->fetch())
 			{
 				$menuinsertar=$registro["menu"];
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuariod||$menuinsertar");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuariod$_SeparadorCampos_$menuinsertar");
 			}
 		auditar("Copia permisos de $usuarioo al usuario $usuariod");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -330,7 +330,7 @@ if ($accion=="actualizar_clave")
 if ($accion=="eliminar_informe_usuario")
 	{
 		// Elimina el informe
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe=? AND usuario=? ","$informe||$usuario");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe=? AND usuario=? ","$informe$_SeparadorCampos_$usuario");
 		auditar("Elimina informe $informe a $usuario");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="informes_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -364,7 +364,7 @@ if ($accion=="eliminar_informe_usuario")
 		{
 			$mensaje_error="";
 			// Busca si existe ese permiso para el usuario
-			$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_informe." FROM ".$TablasCore."usuario_informe WHERE usuario=? AND informe=? ","$usuario||$informe");
+			$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_informe." FROM ".$TablasCore."usuario_informe WHERE usuario=? AND informe=? ","$usuario$_SeparadorCampos_$informe");
 			$registro_menu = $resultado->fetch();
 			if($registro_menu["informe"]!="")
 				$mensaje_error=$MULTILANG_UsrErrInf;
@@ -372,7 +372,7 @@ if ($accion=="eliminar_informe_usuario")
 			if ($mensaje_error=="")
 				{
 					// Guarda el permiso para el usuario
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES (?,?)","$usuario||$informe");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES (?,?)","$usuario$_SeparadorCampos_$informe");
 					auditar("Agrega informe $informe al usuario $usuario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 							<input type="Hidden" name="accion" value="informes_usuario">
@@ -515,7 +515,7 @@ if ($accion=="informes_usuario")
 if ($accion=="eliminar_permiso")
 	{
 		// Elimina los datos de la opcion
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? AND usuario=? ","$menu||$usuario");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? AND usuario=? ","$menu$_SeparadorCampos_$usuario");
 		auditar("Elimina permiso $menu a $usuario");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="permisos_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -549,7 +549,7 @@ if ($accion=="eliminar_permiso")
 		{
 			$mensaje_error="";
 			// Busca si existe ese permiso para el usuario
-			$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario=? AND menu=? ","$usuario||$menu");
+			$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario=? AND menu=? ","$usuario$_SeparadorCampos_$menu");
 			$registro_menu = $resultado->fetch();
 			if($registro_menu["menu"]!="")
 				$mensaje_error=$MULTILANG_UsrErrInf;
@@ -557,7 +557,7 @@ if ($accion=="eliminar_permiso")
 			if ($mensaje_error=="")
 				{
 					// Guarda el permiso para el usuario
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuario||$menu");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuario$_SeparadorCampos_$menu");
 					auditar("Agrega permiso $menu al usuario $usuario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 							<input type="Hidden" name="accion" value="permisos_usuario">
@@ -768,7 +768,7 @@ if ($accion=="permisos_usuario")
 			if ($estado==1)
 				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET estado=0 WHERE login=? ","$uid_especifico");
 			else
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET estado=1, ultimo_acceso=? WHERE login=? ","$fecha_operacion||$uid_especifico");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET estado=1, ultimo_acceso=? WHERE login=? ","$fecha_operacion$_SeparadorCampos_$uid_especifico");
 			auditar("Cambia estado del usuario $uid_especifico");
 			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 		}
@@ -846,7 +846,7 @@ if ($accion=="permisos_usuario")
 					// Inserta datos del usuario
 					$clavemd5=MD5($clave);
 					$pasomd5=MD5($LlaveDePaso);
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?)","$login||$clavemd5||$nombre||$descripcion||$estado||$nivel||$correo||$fecha_operacion||$pasomd5");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$descripcion$_SeparadorCampos_$estado$_SeparadorCampos_$nivel$_SeparadorCampos_$correo$_SeparadorCampos_$fecha_operacion$_SeparadorCampos_$pasomd5");
 					auditar("Agrega usuario $login para $nombre");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}

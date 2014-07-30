@@ -17,8 +17,16 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/formularios.php
+core/informes.php
+core/menus.php
+core/monitoreo.php
+core/sesion.php
+core/usuarios.php
 core/ws_nucleo.php
+core/ws_funciones.php
 core/marco_arriba.php
+core/marco_param.php
+core/marco_wscfg.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
 inc/practico/def_basedatos.php
@@ -45,6 +53,7 @@ LogCambios="
 * Added: Identificacion del tipo MIME de adjunto en tiempo de carga y descarga
 * Added: Adicion de objetos y controles multiples tipo canvas HTML5 a diseño de formularios
 * Added: El almacenamiento de campos canvas y de imagen se hace ahora de manera comprimida de manera predeterminada para economizar espacio sobre las tablas
+* Fixed: Se agrega una cadena separadora de campos que permita generalizar las operaciones de bases de datos a cadenas improbables en su combinacion, sobretodo para su uso con campos de tipo canvas comprimidos
 "
 
 ########################################################################
