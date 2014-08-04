@@ -39,7 +39,7 @@
 	*/
 
 	$ServidorBD='localhost';	// Direccion IP o nombre de host
-	$BaseDatos='practico143';   // Path completo cuando se trata de sqlite2, ej: '/path/to/database.sdb'
+	$BaseDatos='practico_148';   // Path completo cuando se trata de sqlite2, ej: '/path/to/database.sdb'
 	$UsuarioBD='root';
 	$PasswordBD='mypass';
 	$MotorBD='mysql';		// Puede variar segun el driver PDO: mysql|pgsql|sqlite|sqlsrv|mssql|ibm|dblib|odbc|oracle|ifmx|fbd
@@ -70,13 +70,13 @@
 	*/
 
 	$NombreRAD='Practico';
-	$PlantillaActiva='light';
+	$PlantillaActiva='nomo';
 	$ArchivoCORE='';
 	$TablasCore='core_';  // Cuidado al cambiar: Prefijo de Tablas base para uso de Practico
 	$TablasApp='app_';  // Cuidado al cambiar: Prefijo para Tablas de datos definidas por el usuario
-	$LlaveDePaso='YY2WDEKE5C';  // Valor unico para firmar los usuarios del aplicativo.  No debe ser cambiado despues de puesto en marcha a menos que se haga un update manual el usuario que no coincida con la llave no podra ingresar.
+	$LlaveDePaso='TIJYKM6QBF';  // Valor unico para firmar los usuarios del aplicativo.  No debe ser cambiado despues de puesto en marcha a menos que se haga un update manual el usuario que no coincida con la llave no podra ingresar.
 	$ModoDepuracion=0;
-	$BuscarActualizaciones=1;
+	$BuscarActualizaciones=0;
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='es';
 	$CaracteresCaptcha=4;
