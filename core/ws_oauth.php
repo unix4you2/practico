@@ -26,8 +26,8 @@
 	*/
 
 	// Google
-	$APIGoogle_ClientId='123123';
-	$APIGoogle_ClientSecret='123123';
+	$APIGoogle_ClientId='';
+	$APIGoogle_ClientSecret='';
 	$APIGoogle_RedirectUri='http://127.0.0.1/practico/index.php?WSOn=1&WSId=autenticacion_oauth&OAuthSrv=Google';
 	$APIGoogle_Template='';
 

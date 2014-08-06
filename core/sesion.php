@@ -68,6 +68,42 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: file_get_contents_socket
+	Un reemplazo para la funcion file_get_contents utilizando Sockets
+*/
+	function file_get_contents_socket($url)
+		{
+			$url_parsed = parse_url($url);
+			$host = $url_parsed["host"];
+			$port = $url_parsed["port"];
+			if ($port==0)
+				$port = 80;
+			$path = $url_parsed["path"];
+			if ($url_parsed["query"] != "")
+				$path .= "?".$url_parsed["query"];
+
+			$out = "GET $path HTTP/1.0\r\nHost: $host\r\n\r\n";
+
+			$fp = fsockopen($host, $port, $errno, $errstr, 30);
+
+			fwrite($fp, $out);
+			$body = false;
+			while (!feof($fp))
+				{
+					$s = fgets($fp, 1024);
+					if ( $body )
+						$in .= $s;
+					if ( $s == "\r\n" )
+						$body = true;
+				}
+			fclose($fp);
+			return $in;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: cargar_url
 	Recibe una URL y pasa su contenido a una cadena de texto
 */
@@ -86,6 +122,10 @@
 			if (@$contenido_url=="")
 				if (ini_get($funcion_evaluada)==$valor_esperado)
 					$contenido_url = trim(file_get_contents($url));
+
+			//Intenta con funciones de socket si no se pudo obtener nada con file_get_contents
+			if (@$contenido_url=="")
+				$contenido_url = trim(file_get_contents_socket($url));
 
 			//Retorna el resultado
 			return $contenido_url;

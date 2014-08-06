@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
 VersionCompatibleAno="14"
-VersionCompatibleMes="7"
+VersionCompatibleMes="8"
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
 VersionFinalAno="14"
-VersionFinalMes="8"
+VersionFinalMes="9"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version
@@ -15,24 +15,9 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 README
-index.php
-core/comunes.php
-core/formularios.php
-core/informes.php
-core/menus.php
-core/monitoreo.php
-core/sesion.php
-core/usuarios.php
-core/ws_nucleo.php
-core/ws_funciones.php
-core/marco_arriba.php
-core/marco_param.php
-core/marco_wscfg.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
 inc/practico/def_basedatos.php
-img/practico_social.png
-inc/jquery/plugins/sketch.js
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -43,29 +28,12 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Adicion de control de datos para captura de imágenes desde la webcam en diseño de formularios
-* Added: Presentacion de archivos adjuntos referenciados por registros
-* Added: Campos de tipo archivo en diseño de formularios ahora permiten adjuntar multiples archivos
-* Added: Se simplifica creacion de opciones de menu eliminando campos de padre y columna
-* Added: Mejora al almacenamiento de datos sobre formularios disenados impide inyecciones SQL y escapa todas las cadenas, incluso comillas y barras
-* Added: Los valores sobre formularios de consulta en campos de texto corto son pasados por htmlentities para obtener valores más limpios en el navegador.
-* Fixed: [Tester: Jaime Berrio Arenas]  El login por proveedores OAuth no estaba operando en version 14.7
-* Added: BETA. Autenticacion federada frente a otros motores y aplicaciones!
-* Added: Identificacion del tipo MIME de adjunto en tiempo de carga y descarga
-* Added: Adicion de objetos y controles multiples tipo canvas HTML5 a diseño de formularios
-* Added: El almacenamiento de campos canvas y de imagen se hace ahora de manera comprimida de manera predeterminada para economizar espacio sobre las tablas
-* Fixed: Se agrega una cadena separadora de campos que permita generalizar las operaciones de bases de datos a cadenas improbables en su combinacion, sobretodo para su uso con campos de tipo canvas comprimidos
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-ALTER TABLE core_formulario_objeto ADD COLUMN plantilla_archivo varchar(250) default '';
-ALTER TABLE core_formulario_objeto ADD COLUMN peso_archivo int(10);
-ALTER TABLE core_menu DROP COLUMN padre;
-ALTER TABLE core_menu DROP COLUMN columna;
-ALTER TABLE core_formulario_objeto ADD COLUMN tamano_pincel int(2);
-ALTER TABLE core_formulario_objeto ADD COLUMN color_trazo varchar(20) default '';
+
 "
 
 ########################################################################
