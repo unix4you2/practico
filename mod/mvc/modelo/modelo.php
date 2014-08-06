@@ -25,14 +25,14 @@
 			// Llama las funciones de BD definidas por Practico
 			// No hay que definir conexiones ni validar excepciones pues Practico lo hace
 			$resultado = ejecutar_sql("SELECT id,usuario_login,accion,fecha,hora FROM core_auditoria WHERE 1=1");
-			
+
 			// Define variable $registros para guardar los resultados
 			$registros = array();
-			
+
 			// Recorre los registros agregandolos al arreglo
 			while($registro_auditoria = $resultado->fetch())
 				$registros[] = $registro_auditoria;
-			
+
 			// Retorna la variable con el resultado
 			return $registros;
 		}

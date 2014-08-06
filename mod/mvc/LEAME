@@ -6,7 +6,7 @@
                                       
 - Modulo de ejemplo para el trabajo con patrones de diseno MVC en Práctico
 
-Modo de Uso (para versiones anteriores a la 14.3, versiones 14.3 ya lo incluyen por defecto):
+Modo de Uso (para versiones anteriores a la 14.3, versiones 14.3+ ya lo incluyen por defecto):
 	1) Descomprimir el modulo mediante su proceso de instalacion normal o manualmente sobre /mod
 
 Primer llamado al modulo:

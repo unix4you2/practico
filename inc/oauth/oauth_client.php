@@ -2,7 +2,7 @@
 /*
  * oauth_client.php
  *
- * @(#) $Id: oauth_client.php,v 1.83 2014/01/27 09:59:39 mlemos Exp $
+ * @(#) $Id: oauth_client.php,v 1.109 2014/06/18 08:30:41 mlemos Exp $
  *
  */
 
@@ -12,7 +12,7 @@
 
 	<package>net.manuellemos.oauth</package>
 
-	<version>@(#) $Id: oauth_client.php,v 1.83 2014/01/27 09:59:39 mlemos Exp $</version>
+	<version>@(#) $Id: oauth_client.php,v 1.109 2014/06/18 08:30:41 mlemos Exp $</version>
 	<copyright>Copyright © (C) Manuel Lemos 2012</copyright>
 	<title>OAuth client</title>
 	<author>Manuel Lemos</author>
@@ -225,11 +225,18 @@ class oauth_client_class
 				several configuration variables just by setting this server
 				variable.<paragraphbreak />
 				Currently it supports the following servers:
+				<stringvalue>37Signals</stringvalue>,
+				<stringvalue>Amazon</stringvalue>,
 				<stringvalue>Bitbucket</stringvalue>,
+				<stringvalue>Bitly</stringvalue>,
 				<stringvalue>Box</stringvalue>,
+				<stringvalue>Buffer</stringvalue>,
+				<stringvalue>Dailymotion</stringvalue>,
+				<stringvalue>Discogs</stringvalue>,
 				<stringvalue>Disqus</stringvalue>,
 				<stringvalue>Dropbox</stringvalue> (Dropbox with OAuth 1.0),
 				<stringvalue>Dropbox2</stringvalue> (Dropbox with OAuth 2.0),
+				<stringvalue>Etsy</stringvalue>,
 				<stringvalue>Eventful</stringvalue>,
 				<stringvalue>Facebook</stringvalue>,
 				<stringvalue>Fitbit</stringvalue>,
@@ -240,16 +247,23 @@ class oauth_client_class
 				<stringvalue>Google1</stringvalue> (Google with OAuth 1.0),
 				<stringvalue>Instagram</stringvalue>,
 				<stringvalue>LinkedIn</stringvalue>,
+				<stringvalue>Mavenlink</stringvalue>,
 				<stringvalue>Microsoft</stringvalue>,
+				<stringvalue>oDesk</stringvalue>,
+				<stringvalue>Rdio</stringvalue>,
 				<stringvalue>Reddit</stringvalue>,
+				<stringvalue>RunKeeper</stringvalue>,
 				<stringvalue>Salesforce</stringvalue>,
 				<stringvalue>Scoop.it</stringvalue>,
 				<stringvalue>StockTwits</stringvalue>,
 				<stringvalue>SurveyMonkey</stringvalue>,
 				<stringvalue>Tumblr</stringvalue>,
 				<stringvalue>Twitter</stringvalue>,
+				<stringvalue>Vimeo</stringvalue>,
 				<stringvalue>VK</stringvalue>,
 				<stringvalue>Withings</stringvalue>,
+				<stringvalue>Wordpress</stringvalue>,
+				<stringvalue>Xero</stringvalue>,
 				<stringvalue>XING</stringvalue> and
 				<stringvalue>Yahoo</stringvalue>. Please contact the author if you
 				would like to ask to add built-in support for other types of OAuth
@@ -262,6 +276,24 @@ class oauth_client_class
 {/metadocument}
 */
 	var $server = '';
+
+/*
+{metadocument}
+	<variable>
+		<name>configuration_file</name>
+		<type>STRING</type>
+		<value>oauth_configuration.json</value>
+		<documentation>
+			<purpose>Specify the path of the configuration file that defines the
+				properties of additional OAuth server types.</purpose>
+			<usage>Change the path in this variable if you are accessing a type
+				of server without support built-in the class and you need to put
+				the configuration file path in a different directory.</usage>
+		</documentation>
+	</variable>
+{/metadocument}
+*/
+	var $configuration_file = 'oauth_configuration.json';
 
 /*
 {metadocument}
@@ -299,6 +331,9 @@ class oauth_client_class
 				can grant access to your application.</purpose>
 			<usage>Set this variable to the OAuth request token URL when you are
 				not accessing one of the built-in supported OAuth servers.<paragraphbreak />
+				For OAuth 1.0a servers that return the login dialog URL
+				automatically, set this variable to
+				<stringvalue>automatic</stringvalue><paragraphbreak />
 				For certain servers, the dialog URL can have certain marks that
 				will act as template placeholders which will be replaced with
 				values defined before redirecting the users browser. Currently it
@@ -821,8 +856,41 @@ class oauth_client_class
 */
 	var $response_status = 0;
 
-	var $oauth_user_agent = 'PHP-OAuth-API (http://www.phpclasses.org/oauth-api $Revision: 1.83 $)';
-	var $session_started = false;
+/*
+{metadocument}
+	<variable>
+		<name>oauth_username</name>
+		<type>STRING</type>
+		<value></value>
+		<documentation>
+			<purpose>Define the user name to obtain authorization using a password.</purpose>
+			<usage>Set this variable to the user name of the account to
+				authorize instead of going through the interactive user
+				authorization process.</usage>
+		</documentation>
+	</variable>
+{/metadocument}
+*/
+	var $oauth_username = '';
+
+/*
+{metadocument}
+	<variable>
+		<name>oauth_password</name>
+		<type>STRING</type>
+		<value></value>
+		<documentation>
+			<purpose>Define the user name to obtain authorization using a password.</purpose>
+			<usage>Set this variable to the user password of the account to
+				authorize instead of going through the interactive user
+				authorization process.</usage>
+		</documentation>
+	</variable>
+{/metadocument}
+*/
+	var $oauth_password = '';
+
+	var $oauth_user_agent = 'PHP-OAuth-API (http://www.phpclasses.org/oauth-api $Revision: 1.109 $)';
 
 	Function SetError($error)
 	{
@@ -880,11 +948,11 @@ class oauth_client_class
 
 	Function GetStoredState(&$state)
 	{
-		if(!$this->session_started)
-		{
-			if(!function_exists('session_start'))
-				return $this->SetError('Session variables are not accessible in this PHP environment');
-		}
+		if(!function_exists('session_start'))
+			return $this->SetError('Session variables are not accessible in this PHP environment');
+		if(session_id() === ''
+		&& !session_start())
+			return($this->SetPHPError('it was not possible to start the PHP session', $php_errormsg));
 		if(IsSet($_SESSION['OAUTH_STATE']))
 			$state = $_SESSION['OAUTH_STATE'];
 		else
@@ -1014,11 +1082,11 @@ class oauth_client_class
 */
 	Function StoreAccessToken($access_token)
 	{
-		if(!$this->session_started)
-		{
-			if(!function_exists('session_start'))
-				return $this->SetError('Session variables are not accessible in this PHP environment');
-		}
+		if(!function_exists('session_start'))
+			return $this->SetError('Session variables are not accessible in this PHP environment');
+		if(session_id() === ''
+		&& !session_start())
+			return($this->SetPHPError('it was not possible to start the PHP session', $php_errormsg));
 		if(!$this->GetAccessTokenURL($access_token_url))
 			return false;
 		$_SESSION['OAUTH_ACCESS_TOKEN'][$access_token_url] = $access_token;
@@ -1068,14 +1136,11 @@ class oauth_client_class
 */
 	Function GetAccessToken(&$access_token)
 	{
-		if(!$this->session_started)
-		{
-			if(!function_exists('session_start'))
-				return $this->SetError('Session variables are not accessible in this PHP environment');
-			if(!session_start())
-				return($this->SetPHPError('it was not possible to start the PHP session', $php_error_message));
-			$this->session_started = true;
-		}
+		if(!function_exists('session_start'))
+			return $this->SetError('Session variables are not accessible in this PHP environment');
+		if(session_id() === ''
+		&& !session_start())
+			return($this->SetPHPError('it was not possible to start the PHP session', $php_errormsg));
 		if(!$this->GetAccessTokenURL($access_token_url))
 			return false;
 		if(IsSet($_SESSION['OAUTH_ACCESS_TOKEN'][$access_token_url]))
@@ -1125,14 +1190,11 @@ class oauth_client_class
 			return false;
 		if($this->debug)
 			$this->OutputDebug('Resetting the access token status for OAuth server located at '.$access_token_url);
-		if(!$this->session_started)
-		{
-			if(!function_exists('session_start'))
-				return $this->SetError('Session variables are not accessible in this PHP environment');
-			if(!session_start())
-				return($this->SetPHPError('it was not possible to start the PHP session', $php_error_message));
-		}
-		$this->session_started = true;
+		if(!function_exists('session_start'))
+			return $this->SetError('Session variables are not accessible in this PHP environment');
+		if(session_id() === ''
+		&& !session_start())
+			return($this->SetPHPError('it was not possible to start the PHP session', $php_errormsg));
 		if(IsSet($_SESSION['OAUTH_ACCESS_TOKEN'][$access_token_url]))
 			Unset($_SESSION['OAUTH_ACCESS_TOKEN'][$access_token_url]);
 		return true;
@@ -1190,7 +1252,7 @@ class oauth_client_class
 		$post_files = array();
 		$method = strtoupper($method);
 		$authorization = '';
-		$type = (IsSet($options['RequestContentType']) ? strtolower(trim(strtok($options['RequestContentType'], ';'))) : ($method === 'POST' ? 'application/x-www-form-urlencoded' : ''));
+		$type = (IsSet($options['RequestContentType']) ? strtolower(trim(strtok($options['RequestContentType'], ';'))) : (($method === 'POST' || IsSet($oauth)) ? 'application/x-www-form-urlencoded' : ''));
 		if(IsSet($oauth))
 		{
 			$values = array(
@@ -1219,7 +1281,7 @@ class oauth_client_class
 						default:
 							return($this->SetError($value['Type'].' is not a valid type for file '.$name));
 					}
-					$file['ContentType'] = (IsSet($value['Content-Type']) ? $value['Content-Type'] : 'automatic/name');
+					$file['Content-Type'] = (IsSet($value['ContentType']) ? $value['ContentType'] : 'automatic/name');
 					$post_files[$name] = $file;
 				}
 				UnSet($parameters[$name]);
@@ -1250,8 +1312,9 @@ class oauth_client_class
 					}
 					$parameters = array();
 				}
-				$value_parameters = ($type !== 'application/x-www-form-urlencoded' ? array() : $parameters);
+				$value_parameters = (($type !== 'application/x-www-form-urlencoded') ? array() : $parameters);
 			}
+			$header_values = ($method === 'GET' ? array_merge($values, $oauth, $value_parameters) : array_merge($values, $oauth));
 			$values = array_merge($values, $oauth, $value_parameters);
 			$key = $this->Encode($this->client_secret).'&'.$this->Encode($this->access_token_secret);
 			switch($this->signature_method)
@@ -1277,7 +1340,7 @@ class oauth_client_class
 						$sign .= $this->Encode(($first ? '' : '&').$parameter.'='.$this->Encode($value));
 						$first = false;
 					}
-					$values['oauth_signature'] = base64_encode($this->HMAC('sha1', $sign, $key));
+					$header_values['oauth_signature'] = $values['oauth_signature'] = base64_encode($this->HMAC('sha1', $sign, $key));
 					break;
 				default:
 					return $this->SetError($this->signature_method.' signature method is not yet supported');
@@ -1286,7 +1349,7 @@ class oauth_client_class
 			{
 				$authorization = 'OAuth';
 				$first = true;
-				foreach($values as $parameter => $value)
+				foreach($header_values as $parameter => $value)
 				{
 					$authorization .= ($first ? ' ' : ',').$parameter.'="'.$this->Encode($value).'"';
 					$first = false;
@@ -1295,7 +1358,7 @@ class oauth_client_class
 			}
 			else
 			{
-				if($method === 'GET'
+				if($method !== 'POST'
 				|| (IsSet($options['PostValuesInURI'])
 				&& $options['PostValuesInURI']))
 				{
@@ -1326,8 +1389,19 @@ class oauth_client_class
 						$first = (strpos($url, '?') === false);
 						foreach($parameters as $name => $value)
 						{
-							$url .= ($first ? '?' : '&').$name.'='.UrlEncode($value);
-							$first = false;
+							if(GetType($value) === 'array')
+							{
+								foreach($value as $index => $value)
+								{
+									$url .= ($first ? '?' : '&').$name.'='.UrlEncode($value);
+									$first = false;
+								}
+							}
+							else
+							{
+								$url .= ($first ? '?' : '&').$name.'='.UrlEncode($value);
+								$first = false;
+							}
 						}
 				}
 			}
@@ -1352,19 +1426,21 @@ class oauth_client_class
 				break;
 			case 'application/json':
 				$arguments['Headers']['Content-Type'] = $options['RequestContentType'];
+				$arguments['Body'] = (IsSet($options['RequestBody']) ? $options['RequestBody'] : json_encode($parameters));
+				break;
+			default:
 				if(!IsSet($options['RequestBody']))
 				{
-					$arguments['Body'] = json_encode($parameters);
+					if(IsSet($options['RequestContentType']))
+						return($this->SetError('it was not specified the body value of the of the API call request'));
 					break;
 				}
-				if(!IsSet($options['RequestBody']))
-					return($this->SetError('it was not specified the body value of the of the API call request'));
 				$arguments['Headers']['Content-Type'] = $options['RequestContentType'];
 				$arguments['Body'] = $options['RequestBody'];
 				break;
 		}
 		$arguments['Headers']['Accept'] = (IsSet($options['Accept']) ? $options['Accept'] : '*/*');
-		switch(IsSet($options['AccessTokenAuthentication']) ? strtolower($options['AccessTokenAuthentication']) : '')
+		switch($authentication = (IsSet($options['AccessTokenAuthentication']) ? strtolower($options['AccessTokenAuthentication']) : ''))
 		{
 			case 'basic':
 				$arguments['Headers']['Authorization'] = 'Basic '.base64_encode($this->client_id.':'.($this->get_token_with_api_key ? $this->api_key : $this->client_secret));
@@ -1374,7 +1450,7 @@ class oauth_client_class
 					$arguments['Headers']['Authorization'] = $authorization;
 				break;
 			default:
-				return($this->SetError($this->access_token_authentication.' is not a supported authentication mechanism to retrieve an access token'));
+				return($this->SetError($authentication.' is not a supported authentication mechanism to retrieve an access token'));
 		}
 		if(strlen($error = $http->SendRequest($arguments))
 		|| strlen($error = $http->ReadReplyHeaders($headers)))
@@ -1390,6 +1466,7 @@ class oauth_client_class
 		}
 		$this->response_status = intval($http->response_status);
 		$content_type = (IsSet($options['ResponseContentType']) ? $options['ResponseContentType'] : (IsSet($headers['content-type']) ? strtolower(trim(strtok($headers['content-type'], ';'))) : 'unspecified'));
+		$content_type = preg_replace('/^(.+\\/).+\\+(.+)$/', '\\1\\2', $content_type); 
 		switch($content_type)
 		{
 			case 'text/javascript':
@@ -1425,6 +1502,27 @@ class oauth_client_class
 			case 'text/html':
 				parse_str($data, $response);
 				break;
+			case 'text/xml':
+				if(IsSet($options['DecodeXMLResponse']))
+				{
+					switch(strtolower($options['DecodeXMLResponse']))
+					{
+						case 'simplexml':
+							if($this->debug)
+								$this->OutputDebug('Decoding XML response with simplexml');
+							try
+							{
+								$response = @new SimpleXMLElement($data);
+							}
+							catch(Exception $exception)
+							{
+								return $this->SetError('Could not parse XML response: '.$exception->getMessage());
+							}
+							break 2;
+						default:
+							return $this->SetError($options['DecodeXML'].' is not a supported method to decode XML responses');
+					}
+				}
 			default:
 				$response = $data;
 				break;
@@ -1447,11 +1545,85 @@ class oauth_client_class
 		return true;
 	}
 
-	Function ProcessToken($code, $refresh)
+	Function ProcessToken1($oauth, &$access_token)
+	{
+		if(!$this->GetAccessTokenURL($url))
+			return false;
+		$options = array('Resource'=>'OAuth access token');
+		$method = strtoupper($this->token_request_method);
+		switch($method)
+		{
+			case 'GET':
+				break;
+			case 'POST':
+				$options['PostValuesInURI'] = true;
+				break;
+			default:
+				$this->error = $method.' is not a supported method to request tokens';
+				return false;
+		}
+		if(!$this->SendAPIRequest($url, $method, array(), $oauth, $options, $response))
+			return false;
+		if(strlen($this->access_token_error))
+		{
+			$this->authorization_error = $this->access_token_error;
+			return true;
+		}
+		if(!IsSet($response['oauth_token'])
+		|| !IsSet($response['oauth_token_secret']))
+		{
+			$this->authorization_error= 'it was not returned the access token and secret';
+			return true;
+		}
+		$access_token = array(
+			'value'=>$response['oauth_token'],
+			'secret'=>$response['oauth_token_secret'],
+			'authorized'=>true
+		);
+		if(IsSet($response['oauth_expires_in'])
+		&& $response['oauth_expires_in'] == 0)
+		{
+			if($this->debug)
+				$this->OutputDebug('Ignoring access token expiry set to 0');
+			$this->access_token_expiry = '';
+		}
+		elseif(IsSet($response['oauth_expires_in']))
+		{
+			$expires = $response['oauth_expires_in'];
+			if(strval($expires) !== strval(intval($expires))
+			|| $expires <= 0)
+				return($this->SetError('OAuth server did not return a supported type of access token expiry time'));
+			$this->access_token_expiry = gmstrftime('%Y-%m-%d %H:%M:%S', time() + $expires);
+			if($this->debug)
+				$this->OutputDebug('Access token expiry: '.$this->access_token_expiry.' UTC');
+			$access_token['expiry'] = $this->access_token_expiry;
+		}
+		else
+			$this->access_token_expiry = '';
+		if(IsSet($response['oauth_session_handle']))
+		{
+			$access_token['refresh'] = $response['oauth_session_handle'];
+			if($this->debug)
+				$this->OutputDebug('Refresh token: '.$access_token['refresh']);
+		}
+		return $this->StoreAccessToken($access_token);
+	}
+
+	Function ProcessToken2($code, $refresh)
 	{
 		if(!$this->GetRedirectURI($redirect_uri))
 			return false;
-		if($refresh)
+		$authentication = $this->access_token_authentication;
+		if(strlen($this->oauth_username))
+		{
+			$values = array(
+				'grant_type'=>'password',
+				'username'=>$this->oauth_username,
+				'password'=>$this->oauth_password
+			);
+			$authentication = 'Basic';
+		}
+		elseif($refresh)
 		{
 			$values = array(
 				'refresh_token'=>$this->refresh_token,
@@ -1471,10 +1643,10 @@ class oauth_client_class
 			'Resource'=>'OAuth '.($refresh ? 'refresh' : 'access').' token',
 			'ConvertObjects'=>true
 		);
-		switch(strtolower($this->access_token_authentication))
+		switch(strtolower($authentication))
 		{
 			case 'basic':
-				$options['AccessTokenAuthentication'] = $this->access_token_authentication;
+				$options['AccessTokenAuthentication'] = $authentication;
 				$values['redirect_uri'] = $redirect_uri;
 				break;
 			case '':
@@ -1482,7 +1654,7 @@ class oauth_client_class
 				$values['client_secret'] = ($this->get_token_with_api_key ? $this->api_key : $this->client_secret);
 				break;
 			default:
-				return($this->SetError($this->access_token_authentication.' is not a supported authentication mechanism to retrieve an access token'));
+				return($this->SetError($authentication.' is not a supported authentication mechanism to retrieve an access token'));
 		}
 		if(!$this->GetAccessTokenURL($access_token_url))
 			return false;
@@ -1550,7 +1722,7 @@ class oauth_client_class
 		{
 			$this->refresh_token = $response['refresh_token'];
 			if($this->debug)
-				$this->OutputDebug('New refresh token: '.$this->refresh_token);
+				$this->OutputDebug('Refresh token: '.$this->refresh_token);
 			$access_token['refresh'] = $this->refresh_token;
 		}
 		elseif(strlen($this->refresh_token))
@@ -1559,9 +1731,7 @@ class oauth_client_class
 				$this->OutputDebug('Reusing previous refresh token: '.$this->refresh_token);
 			$access_token['refresh'] = $this->refresh_token;
 		}
-		if(!$this->StoreAccessToken($access_token))
-			return false;
-		return true;
+		return $this->StoreAccessToken($access_token);
 	}
 
 	Function RetrieveToken(&$valid)
@@ -1576,7 +1746,7 @@ class oauth_client_class
 			if($expired)
 			{
 				if($this->debug)
-					$this->OutputDebug('The OAuth access token expired in '.$this->access_token_expiry);
+					$this->OutputDebug('The OAuth access token expired on '.$this->access_token_expiry.' UTC');
 			}
 			$this->access_token = $access_token['value'];
 			if(!$expired
@@ -1602,7 +1772,8 @@ class oauth_client_class
 			{
 				$this->access_token_secret = $access_token['secret'];
 				if($this->debug
-				&& !$expired)
+				&& !$expired
+				&& strlen($this->access_token_secret))
 					$this->OutputDebug('The OAuth access token secret is '.$this->access_token_secret);
 			}
 			if(IsSet($access_token['refresh']))
@@ -1677,6 +1848,11 @@ class oauth_client_class
 						determines if objects should be converted into arrays when the
 						response is returned in JSON format. The default value is
 						<booleanvalue>0</booleanvalue>.<paragraphbreak />
+					<stringvalue>DecodeXMLResponse</stringvalue>: name of the method
+						to decode XML responses. Currently only
+						<stringvalue>simplexml</stringvalue> is supported. It makes a
+						XML response be parsed and returned as a SimpleXMLElement
+						object.<paragraphbreak />
 					<stringvalue>FailOnAccessError</stringvalue>: boolean option
 						that determines if this functions should fail when the server
 						response status is not between 200 and 299. The default value
@@ -1774,6 +1950,34 @@ class oauth_client_class
 		switch(intval($this->oauth_version))
 		{
 			case 1:
+				if(strlen($this->access_token_expiry)
+				&& strcmp($this->access_token_expiry, gmstrftime('%Y-%m-%d %H:%M:%S')) <= 0)
+				{
+					if(strlen($this->refresh_token) === 0)
+						return($this->SetError('the access token expired and no refresh token is available'));
+					if($this->debug)
+						$this->OutputDebug('Refreshing the OAuth access token expired on '.$this->access_token_expiry);
+					$oauth = array(
+						'oauth_token'=>$this->access_token,
+						'oauth_session_handle'=>$this->refresh_token
+					);
+					if(!$this->ProcessToken1($oauth, $access_token))
+						return false;
+					if(IsSet($options['FailOnAccessError'])
+					&& $options['FailOnAccessError']
+					&& strlen($this->authorization_error))
+					{
+						$this->error = $this->authorization_error;
+						return false;
+					}
+					if(!IsSet($access_token['authorized'])
+					|| !$access_token['authorized'])
+						return($this->SetError('failed to obtain a renewed the expired access token'));
+					$this->access_token = $access_token['value'];
+					$this->access_token_secret = $access_token['secret'];
+					if(IsSet($access_token['refresh']))
+						$this->refresh_token = $access_token['refresh'];
+				}
 				$oauth = array(
 					(strlen($this->access_token_parameter) ? $this->access_token_parameter : 'oauth_token')=>((IsSet($options['2Legged']) && $options['2Legged']) ? '' : $this->access_token)
 				);
@@ -1786,8 +1990,8 @@ class oauth_client_class
 					if(strlen($this->refresh_token) === 0)
 						return($this->SetError('the access token expired and no refresh token is available'));
 					if($this->debug)
-						$this->OutputDebug('Refreshing the OAuth access token');
-					if(!$this->ProcessToken(null, true))
+						$this->OutputDebug('Refreshing the OAuth access token expired on '.$this->access_token_expiry);
+					if(!$this->ProcessToken2(null, true))
 						return false;
 					if(IsSet($options['FailOnAccessError'])
 					&& $options['FailOnAccessError']
@@ -1838,95 +2042,25 @@ class oauth_client_class
 	{
 		if(strlen($this->server) === 0)
 			return true;
-		$this->request_token_url = '';
+		$this->oauth_version =
+		$this->dialog_url = 
+		$this->access_token_url = 
+		$this->request_token_url =
 		$this->append_state_to_redirect_uri = '';
 		$this->authorization_header = true;
 		$this->url_parameters = false;
 		$this->token_request_method = 'GET';
 		$this->signature_method = 'HMAC-SHA1';
 		$this->access_token_authentication = '';
+		$this->access_token_parameter = '';
+		$this->default_access_token_type = '';
+		$this->store_access_token_response = false;
 		switch($this->server)
 		{
-			case 'Bitbucket':
-				$this->oauth_version = '1.0a';
-				$this->request_token_url = 'https://bitbucket.org/!api/1.0/oauth/request_token';
-				$this->dialog_url = 'https://bitbucket.org/!api/1.0/oauth/authenticate';
-				$this->access_token_url = 'https://bitbucket.org/!api/1.0/oauth/access_token';
-				$this->url_parameters = false;
-				break;
-
-			case 'Box':
-				$this->oauth_version = '2.0';
-				$this->dialog_url = 'https://www.box.com/api/oauth2/authorize?response_type=code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&state={STATE}';
-				$this->offline_dialog_url = 'https://www.box.com/api/oauth2/authorize?response_type=code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&state={STATE}&access_type=offline&approval_prompt=force';
-				$this->access_token_url = 'https://www.box.com/api/oauth2/token';
-				break;
-
-			case 'Disqus':
-				$this->oauth_version = '2.0';
-				$this->dialog_url = 'https://disqus.com/api/oauth/2.0/authorize/?response_type=code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&state={STATE}';
-				$this->access_token_url = 'https://disqus.com/api/oauth/2.0/access_token/';
-				break;
-
-			case 'Dropbox':
-				$this->oauth_version = '1.0';
-				$this->request_token_url = 'https://api.dropbox.com/1/oauth/request_token';
-				$this->dialog_url = 'https://www.dropbox.com/1/oauth/authorize';
-				$this->access_token_url = 'https://api.dropbox.com/1/oauth/access_token';
-				$this->authorization_header = false;
-				break;
-
-			case 'Dropbox2':
-				$this->oauth_version = '2.0';
-				$this->dialog_url = 'https://www.dropbox.com/1/oauth2/authorize?response_type=code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&state={STATE}';
-				$this->access_token_url = 'https://www.dropbox.com/1/oauth2/token';
-				break;
-
-			case 'Eventful':
-				$this->oauth_version = '1.0a';
-				$this->request_token_url = 'http://eventful.com/oauth/request_token';
-				$this->dialog_url = 'http://eventful.com/oauth/authorize';
-				$this->access_token_url = 'http://eventful.com/oauth/access_token';
-				$this->authorization_header = false;
-				$this->url_parameters = true;
-				$this->token_request_method = 'POST';
-				break;
-
-			case 'Evernote':
-				$this->oauth_version = '1.0a';
-				$this->request_token_url = 'https://sandbox.evernote.com/oauth';
-				$this->dialog_url = 'https://sandbox.evernote.com/OAuth.action';
-				$this->access_token_url = 'https://sandbox.evernote.com/oauth';
-				$this->url_parameters = true;
-				$this->authorization_header = false;
-				break;
-
 			case 'Facebook':
 				$this->oauth_version = '2.0';
 				$this->dialog_url = 'https://www.facebook.com/dialog/oauth?client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&state={STATE}';
 				$this->access_token_url = 'https://graph.facebook.com/oauth/access_token';
-				break;
-
-			case 'Fitbit':
-				$this->oauth_version = '1.0a';
-				$this->request_token_url = 'http://api.fitbit.com/oauth/request_token';
-				$this->dialog_url = 'http://api.fitbit.com/oauth/authorize';
-				$this->access_token_url = 'http://api.fitbit.com/oauth/access_token';
-				break;
-
-			case 'Flickr':
-				$this->oauth_version = '1.0a';
-				$this->request_token_url = 'http://www.flickr.com/services/oauth/request_token';
-				$this->dialog_url = 'http://www.flickr.com/services/oauth/authorize?perms={SCOPE}';
-				$this->access_token_url = 'http://www.flickr.com/services/oauth/access_token';
-				$this->authorization_header = false;
-				break;
-
-			case 'Foursquare':
-				$this->oauth_version = '2.0';
-				$this->dialog_url = 'https://foursquare.com/oauth2/authorize?client_id={CLIENT_ID}&scope={SCOPE}&response_type=code&redirect_uri={REDIRECT_URI}&state={STATE}';
-				$this->access_token_url = 'https://foursquare.com/oauth2/access_token';
-				$this->access_token_parameter = 'oauth_token';
 				break;
 
 			case 'github':
@@ -1940,19 +2074,6 @@ class oauth_client_class
 				$this->dialog_url = 'https://accounts.google.com/o/oauth2/auth?response_type=code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&state={STATE}';
 				$this->offline_dialog_url = 'https://accounts.google.com/o/oauth2/auth?response_type=code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&state={STATE}&access_type=offline&approval_prompt=force';
 				$this->access_token_url = 'https://accounts.google.com/o/oauth2/token';
-				break;
-
-			case 'Google1':
-				$this->oauth_version = '1.0a';
-				$this->dialog_url = 'https://www.google.com/accounts/OAuthAuthorizeToken';
-				$this->access_token_url = 'https://www.google.com/accounts/OAuthGetAccessToken';
-				$this->request_token_url = 'https://www.google.com/accounts/OAuthGetRequestToken?scope={SCOPE}';
-				break;
-
-			case 'Instagram':
-				$this->oauth_version = '2.0';
-				$this->dialog_url ='https://api.instagram.com/oauth/authorize/?client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&response_type=code&state={STATE}';
-				$this->access_token_url = 'https://api.instagram.com/oauth/access_token';
 				break;
 
 			case 'LinkedIn':
@@ -1969,85 +2090,12 @@ class oauth_client_class
 				$this->access_token_url = 'https://login.live.com/oauth20_token.srf';
 				break;
 
-			case 'Reddit':
-				$this->oauth_version = '2.0';
-				$this->dialog_url = 'https://ssl.reddit.com/api/v1/authorize?response_type=code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&state={STATE}';
-				$this->offline_dialog_url = 'https://ssl.reddit.com/api/v1/authorize?response_type=code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&state={STATE}&duration=permanent';
-				$this->access_token_url = 'https://ssl.reddit.com/api/v1/access_token';
-				$this->access_token_authentication = 'basic';
-				break;
-
-			case 'RightSignature':
-				$this->oauth_version = '1.0a';
-				$this->request_token_url = 'https://rightsignature.com/oauth/request_token';
-				$this->dialog_url = 'https://rightsignature.com/oauth/authorize';
-				$this->access_token_url = 'https://rightsignature.com/oauth/access_token';
-				$this->authorization_header = false;
-				break;
-
-			case 'Salesforce':
-				$this->oauth_version = '2.0';
-				$this->dialog_url = 'https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&state={STATE}';
-				$this->access_token_url = 'https://login.salesforce.com/services/oauth2/token';
-				$this->default_access_token_type = 'Bearer';
-				$this->store_access_token_response = true;
-				break;
-
-			case 'Scoop.it':
-				$this->oauth_version = '1.0a';
-				$this->request_token_url = 'https://www.scoop.it/oauth/request';
-				$this->dialog_url = 'https://www.scoop.it/oauth/authorize';
-				$this->access_token_url = 'https://www.scoop.it/oauth/access';
-				$this->authorization_header = false;
-				break;
-
-			case 'StockTwits':
-				$this->oauth_version = '2.0';
-				$this->dialog_url = 'https://api.stocktwits.com/api/2/oauth/authorize?client_id={CLIENT_ID}&response_type=code&redirect_uri={REDIRECT_URI}&scope={SCOPE}&state={STATE}';
-				$this->access_token_url = 'https://api.stocktwits.com/api/2/oauth/token';
-				break;
-
-			case 'SurveyMonkey':
-				$this->oauth_version = '2.0';
-				$this->dialog_url = 'https://api.surveymonkey.net/oauth/authorize?client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&response_type=code&state={STATE}&api_key={API_KEY}';
-				$this->access_token_url = 'https://api.surveymonkey.net/oauth/token?api_key={API_KEY}';
-				break;
-
-			case 'Tumblr':
-				$this->oauth_version = '1.0a';
-				$this->request_token_url = 'http://www.tumblr.com/oauth/request_token';
-				$this->dialog_url = 'http://www.tumblr.com/oauth/authorize';
-				$this->access_token_url = 'http://www.tumblr.com/oauth/access_token';
-				break;
-
 			case 'Twitter':
 				$this->oauth_version = '1.0a';
 				$this->request_token_url = 'https://api.twitter.com/oauth/request_token';
 				$this->dialog_url = 'https://api.twitter.com/oauth/authenticate';
 				$this->access_token_url = 'https://api.twitter.com/oauth/access_token';
 				$this->url_parameters = false;
-				break;
-
-			case 'VK':
-				$this->oauth_version = '2.0';
-				$this->dialog_url = 'https://oauth.vk.com/authorize?client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&scope={SCOPE}&state={STATE}';
-				$this->access_token_url = 'https://oauth.vk.com/access_token';
-				break;
-
-			case 'Withings':
-				$this->oauth_version = '1.0';
-				$this->request_token_url = 'https://oauth.withings.com/account/request_token';
-				$this->dialog_url = 'https://oauth.withings.com/account/authorize';
-				$this->access_token_url = 'https://oauth.withings.com/account/access_token';
-				$this->authorization_header = false;
-				break;
-
-			case 'XING':
-				$this->oauth_version = '1.0a';
-				$this->request_token_url = 'https://api.xing.com/v1/request_token';
-				$this->dialog_url = 'https://api.xing.com/v1/authorize';
-				$this->access_token_url = 'https://api.xing.com/v1/access_token';
-				$this->authorization_header = false;
 				break;
 
 			case 'Yahoo':
@@ -2059,7 +2107,65 @@ class oauth_client_class
 				break;
 
 			default:
-				return($this->SetError($this->server.' is not yet a supported type of OAuth server. Please contact the author Manuel Lemos <mlemos@acm.org> to request adding built-in support to this type of OAuth server.'));
+				if(!($json = @file_get_contents($this->configuration_file)))
+				{
+					if(!file_exists($this->configuration_file))
+						return $this->SetError('the OAuth server configuration file '.$this->configuration_file.' does not exist');
+					return $this->SetPHPError('could not read the OAuth server configuration file '.$this->configuration_file, $php_errormsg);
+				}
+				$oauth_server = json_decode($json);
+				if(!IsSet($oauth_server))
+					return $this->SetPHPError('It was not possible to decode the OAuth server configuration file '.$this->configuration_file.' eventually due to incorrect format', $php_errormsg);
+				if(GetType($oauth_server) !== 'object')
+					return $this->SetError('It was not possible to decode the OAuth server configuration file '.$this->configuration_file.' because it does not correctly define a JSON object');
+				if(!IsSet($oauth_server->servers)
+				|| GetType($oauth_server->servers) !== 'object')
+					return $this->SetError('It was not possible to decode the OAuth server configuration file '.$this->configuration_file.' because it does not correctly define a JSON object for servers');
+				if(!IsSet($oauth_server->servers->{$this->server}))
+					return($this->SetError($this->server.' is not yet a supported type of OAuth server. Please send a request in this class support forum (preferred) http://www.phpclasses.org/oauth-api , or if it is a security or private matter, contact the author Manuel Lemos mlemos@acm.org to request adding built-in support to this type of OAuth server.'));
+				$properties = $oauth_server->servers->{$this->server};
+				if(GetType($properties) !== 'object')
+					return $this->SetError('The OAuth server configuration file '.$this->configuration_file.' for the "'.$this->server.'" server does not correctly define a JSON object');
+				$types = array(
+					'oauth_version'=>'string',
+					'request_token_url'=>'string',
+					'dialog_url'=>'string',
+					'offline_dialog_url'=>'string',
+					'access_token_url'=>'string',
+					'append_state_to_redirect_uri'=> 'string',
+					'authorization_header'=>'boolean',
+					'url_parameters' => 'boolean',
+					'token_request_method'=>'string',
+					'signature_method'=>'string',
+					'access_token_authentication'=>'string',
+					'access_token_parameter'=>'string',
+					'default_access_token_type'=>'string',
+					'store_access_token_response'=>'boolean'
+				);
+				$required = array(
+					'oauth_version'=>array(),
+					'request_token_url'=>array('1.0', '1.0a'),
+					'dialog_url'=>array(),
+					'access_token_url'=>array(),
+				);
+				foreach($properties as $property => $value)
+				{
+					if(!IsSet($types[$property]))
+						return $this->SetError($property.' is not a supported property for the "'.$this->server.'" server in the OAuth server configuration file '.$this->configuration_file);
+					$type = GetType($value);
+					$expected = $types[$property];
+					if($type !== $expected)
+						return $this->SetError(' the property "'.$property.'" for the "'.$this->server.'" server is not of type "'.$expected.'", it is of type "'.$type.'", in the OAuth server configuration file '.$this->configuration_file);
+					$this->{$property} = $value;
+					UnSet($required[$property]);
+				}
+				foreach($required as $property => $value)
+				{
+					if(count($value)
+					&& in_array($this->oauth_version, $value))
+						return $this->SetError('the property "'.$property.'" is not defined for the "'.$this->server.'" server in the OAuth server configuration file '.$this->configuration_file);
+				}
+				break;
 		}
 		return(true);
 	}
@@ -2089,6 +2195,13 @@ class oauth_client_class
 */
 	Function Process()
 	{
+		if(strlen($this->access_token)
+		|| strlen($this->access_token_secret))
+		{
+			if($this->debug)
+				$this->OutputDebug('The Process function should not be called again if the OAuth token was already set manually');
+			return $this->SetError('the OAuth token was already set');
+		}
 		switch(intval($this->oauth_version))
 		{
 			case 1:
@@ -2097,6 +2210,8 @@ class oauth_client_class
 					$this->OutputDebug('Checking the OAuth token authorization state');
 				if(!$this->GetAccessToken($access_token))
 					return false;
+				if(IsSet($access_token['expiry']))
+					$this->access_token_expiry = $access_token['expiry'];
 				if(IsSet($access_token['authorized'])
 				&& IsSet($access_token['value']))
 				{
@@ -2143,67 +2258,13 @@ class oauth_client_class
 						}
 						else
 						{
-							if(!$this->GetAccessTokenURL($url))
-								return false;
+							$this->access_token_secret = $access_token['secret'];
 							$oauth = array(
 								'oauth_token'=>$token,
 							);
 							if($one_a)
 								$oauth['oauth_verifier'] = $verifier;
-							$this->access_token_secret = $access_token['secret'];
-							$options = array('Resource'=>'OAuth access token');
-							$method = strtoupper($this->token_request_method);
-							switch($method)
-							{
-								case 'GET':
-									break;
-								case 'POST':
-									$options['PostValuesInURI'] = true;
-									break;
-								default:
-									$this->error = $method.' is not a supported method to request tokens';
-									break;
-							}
-							if(!$this->SendAPIRequest($url, $method, array(), $oauth, $options, $response))
-								return false;
-							if(strlen($this->access_token_error))
-							{
-								$this->authorization_error = $this->access_token_error;
-								return true;
-							}
-							if(!IsSet($response['oauth_token'])
-							|| !IsSet($response['oauth_token_secret']))
-							{
-								$this->authorization_error= 'it was not returned the access token and secret';
-								return true;
-							}
-							$access_token = array(
-								'value'=>$response['oauth_token'],
-								'secret'=>$response['oauth_token_secret'],
-								'authorized'=>true
-							);
-							if(IsSet($response['oauth_expires_in'])
-							&& $response['oauth_expires_in'] == 0)
-							{
-								if($this->debug)
-									$this->OutputDebug('Ignoring access token expiry set to 0');
-								$this->access_token_expiry = '';
-							}
-							elseif(IsSet($response['oauth_expires_in']))
-							{
-								$expires = $response['oauth_expires_in'];
-								if(strval($expires) !== strval(intval($expires))
-								|| $expires <= 0)
-									return($this->SetError('OAuth server did not return a supported type of access token expiry time'));
-								$this->access_token_expiry = gmstrftime('%Y-%m-%d %H:%M:%S', time() + $expires);
-								if($this->debug)
-									$this->OutputDebug('Access token expiry: '.$this->access_token_expiry.' UTC');
-								$access_token['expiry'] = $this->access_token_expiry;
-							}
-							else
-								$this->access_token_expiry = '';
-
-							if(!$this->StoreAccessToken($access_token))
+							if(!$this->ProcessToken1($oauth, $access_token))
 								return false;
 							if($this->debug)
 								$this->OutputDebug('The OAuth token was authorized');
@@ -2216,6 +2277,8 @@ class oauth_client_class
 					{
 						$this->access_token = $access_token['value'];
 						$this->access_token_secret = $access_token['secret'];
+						if(IsSet($access_token['refresh']))
+							$this->refresh_token = $access_token['refresh'];
 						return true;
 					}
 				}
@@ -2271,12 +2334,23 @@ class oauth_client_class
 						'secret'=>$response['oauth_token_secret'],
 						'authorized'=>false
 					);
+					if(IsSet($response['login_url']))
+						$access_token['login_url'] = $response['login_url'];
 					if(!$this->StoreAccessToken($access_token))
 						return false;
 				}
 				if(!$this->GetDialogURL($url))
 					return false;
-				$url .= (strpos($url, '?') === false ? '?' : '&').'oauth_token='.$access_token['value'];
+				if($url === 'automatic')
+				{
+					if(!IsSet($access_token['login_url']))
+						return($this->SetError('The request token response did not automatically the login dialog URL as expected'));
+					if($this->debug)
+						$this->OutputDebug('Dialog URL obtained automatically from the request token response: '.$url);
+					$url = $access_token['login_url'];
+				}
+				else
+					$url .= (strpos($url, '?') === false ? '?' : '&').'oauth_token='.$access_token['value'];
 				if(!$one_a)
 				{
 					if(!$this->GetRedirectURI($redirect_uri))
@@ -2298,8 +2372,16 @@ class oauth_client_class
 				}
 				if(!$this->RetrieveToken($valid))
 					return false;
-				if($valid)
+				$expired = (strlen($this->access_token_expiry) && strcmp($this->access_token_expiry, gmstrftime('%Y-%m-%d %H:%M:%S')) <= 0 && strlen($this->refresh_token) === 0);
+				if($valid
+				&& !$expired)
 					return true;
+				if(strlen($this->oauth_username))
+				{
+					if($this->debug)
+						$this->OutputDebug('Getting the access token using the username and password');
+					return $this->ProcessToken2(null, false);
+				}
 				if($this->debug)
 					$this->OutputDebug('Checking the authentication state in URI '.$_SERVER['REQUEST_URI']);
 				if(!$this->GetStoredState($stored_state))
@@ -2339,7 +2421,7 @@ class oauth_client_class
 						}
 						return($this->SetError('it was not returned the OAuth dialog code'));
 					}
-					if(!$this->ProcessToken($code, false))
+					if(!$this->ProcessToken2($code, false))
 						return false;
 				}
 				else
