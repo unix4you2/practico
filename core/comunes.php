@@ -1067,7 +1067,7 @@
 			$buscar=rand(0,7);
 			if ($Login_usuario=="admin" && $accion=="Ver_menu" && $buscar==1)
 				{
-					$version_actualizada = trim(file_get_contents("http://downloads.sourceforge.net/project/practico/version_actual.txt"));
+					$version_actualizada = @trim(file_get_contents("http://downloads.sourceforge.net/project/practico/version_actual.txt"));
 					$archivo_origen="inc/version_actual.txt";
 					$archivo = fopen($archivo_origen, "r");
 					if ($archivo)

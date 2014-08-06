@@ -654,7 +654,7 @@ if ($accion=="ver_monitoreo")
 			$PaginaInicio=$registro["minimo"];
 			$MaximoPaginas=$registro["maximo"];
 			//Define la pagina que debe ser cargada
-			if ($Pagina=="") $PaginaMonitoreo=$PaginaInicio;
+			if (@$Pagina=="") $PaginaMonitoreo=$PaginaInicio;
 			else $PaginaMonitoreo=$Pagina;
 			//Salta a la siguiente pagina, si la pagina es mayor a las permitidas retorna a la primera
 			$SiguientePagina=$PaginaMonitoreo+1;
