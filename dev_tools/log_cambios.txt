@@ -15,6 +15,9 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 README
+core/conexiones.php
+core/ws_nucleo.php
+core/sesion.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
 inc/practico/def_basedatos.php
@@ -28,7 +31,8 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added:  Soporte a login basado en sockets para servidores sin cURL o allow_urlfopen activado
+* Added: Soporte a login basado en sockets para servidores sin cURL o allow_urlfopen activado
+* Added: Actualizada clase OAuth
 "
 
 ########################################################################

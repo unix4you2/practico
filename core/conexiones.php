@@ -21,11 +21,7 @@
 	/*
 		Title: Conexiones PDO
 		Ubicacion *[/core/conexiones.php]*.  Define las conexiones para uso de base de datos mediante PDO
-	*/
-?>
 
-<?php
-	/*
 		Section: Definicion de conexion PDO
 		Establece una conexion mediante objetos de datos PHP al inicio del script de manera que se usa una sola conexion para la mayoria de operaciones.
 

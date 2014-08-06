@@ -49,7 +49,7 @@
 							// Verifica validez de la llave recibida para el webservice
 							$llave_ws_valida=0;
 							// Verifica si la llave es la misma de instalacion (llave propia)
-							if ($WSKey==$LlaveDePaso || $ByPassWS)
+							if (@$WSKey==$LlaveDePaso || $ByPassWS)
 								{
 									$llave_ws_valida=1;
 									// Define valores para la llave de instalacion
