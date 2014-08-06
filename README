@@ -48,6 +48,22 @@
             |___/ 
 
 
+
+----------------------------------------
+Versión 14.8 (2014-08-07)
+----------------------------------------
+* Added: Adicion de control de datos para captura de imágenes desde la webcam en diseño de formularios
+* Added: Presentacion de archivos adjuntos referenciados por registros
+* Added: Campos de tipo archivo en diseño de formularios ahora permiten adjuntar multiples archivos
+* Added: Se simplifica creacion de opciones de menu eliminando campos de padre y columna
+* Added: Mejora al almacenamiento de datos sobre formularios disenados impide inyecciones SQL y escapa todas las cadenas, incluso comillas y barras
+* Added: Los valores sobre formularios de consulta en campos de texto corto son pasados por htmlentities para obtener valores más limpios en el navegador.
+* Fixed: [Tester: Jaime Berrio Arenas]  El login por proveedores OAuth no estaba operando en version 14.7
+* Added: BETA. Autenticacion federada frente a otros motores y aplicaciones!
+* Added: Identificacion del tipo MIME de adjunto en tiempo de carga y descarga
+* Added: Adicion de objetos y controles multiples tipo canvas HTML5 a diseño de formularios
+* Added: El almacenamiento de campos canvas y de imagen se hace ahora de manera comprimida de manera predeterminada para economizar espacio sobre las tablas
+* Fixed: Se agrega una cadena separadora de campos que permita generalizar las operaciones de bases de datos a cadenas improbables en su combinacion, sobretodo para su uso con campos de tipo canvas comprimidos
 ----------------------------------------
 Versión 14.7 (2014-06-23)
 ----------------------------------------
