@@ -26,16 +26,16 @@
 ===================
 ## Instalación y uso
 
- - Descomprima el paquete de instalación en su servidor web:
+ * Descomprima el paquete de instalación en su servidor web:
 
    $ tar zxvf practico-<version>.tar.gz  ó
    $ unzip practico-<version>.zip
 
- - Abra su navegador en la URL correspondiente y siga las instrucciones
+ * Abra su navegador en la URL correspondiente y siga las instrucciones
    del asistente.  Pruebe  http://DomainOrIP/practico (or your folder)
 
    ----------
- - Desinstalación de Practico:
+ * Desinstalación de Practico:
 
    # Simplemente elimine todos los archivos bajo el directorio de
      instalación en su servidor web, así como la base de datos asociada
