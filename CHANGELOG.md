@@ -1,15 +1,15 @@
+```
  _                      _                            _     _           
 | |    ___   __ _    __| | ___    ___ __ _ _ __ ___ | |__ (_) ___  ___ 
 | |   / _ \ / _` |  / _` |/ _ \  / __/ _` | '_ ` _ \| '_ \| |/ _ \/ __|
 | |__| (_) | (_| | | (_| |  __/ | (_| (_| | | | | | | |_) | | (_) \__ \
 |_____\___/ \__, |  \__,_|\___|  \___\__,_|_| |_| |_|_.__/|_|\___/|___/
             |___/ 
+```
 
 
 
-----------------------------------------
-Versión 14.8 (2014-08-07)
-----------------------------------------
+## Versión 14.8 (2014-08-07)
 * Added: Adicion de control de datos para captura de imágenes desde la webcam en diseño de formularios
 * Added: Presentacion de archivos adjuntos referenciados por registros
 * Added: Campos de tipo archivo en diseño de formularios ahora permiten adjuntar multiples archivos
@@ -22,9 +22,8 @@ Versión 14.8 (2014-08-07)
 * Added: Adicion de objetos y controles multiples tipo canvas HTML5 a diseño de formularios
 * Added: El almacenamiento de campos canvas y de imagen se hace ahora de manera comprimida de manera predeterminada para economizar espacio sobre las tablas
 * Fixed: Se agrega una cadena separadora de campos que permita generalizar las operaciones de bases de datos a cadenas improbables en su combinacion, sobretodo para su uso con campos de tipo canvas comprimidos
-----------------------------------------
-Versión 14.7 (2014-06-23)
-----------------------------------------
+
+## Versión 14.7 (2014-06-23)
 * Added: Vinculacion manual de tablas de datos durante creacion y actualizacion de formularios
 * Added: Opcion de reinicio de claves para usuarios
 * Added: Impresion de campos de base de datos tipo etiqueta en formularios como códigos de barra en múltiples formatos
@@ -39,9 +38,8 @@ Versión 14.7 (2014-06-23)
 * Fixed: Iconos en creación y edición de opciones de menú
 * Fixed: Copia de formularios con formatos de salida especiales
 * Fixed: Warning en imagenes de ayuda para textos iniciales de formularios
-----------------------------------------
-Versión 14.6 (2014-06-02)
-----------------------------------------
+
+## Versión 14.6 (2014-06-02)
 * Added: Actualizacion JQuery a version 2.1.0
 * Added: Mejora a la clase HTTP (actualizada a version abril 30/2014) 
 * Added: Compatibilidad para cualquier motor de base de datos en el modulo de chat
@@ -52,9 +50,8 @@ Versión 14.6 (2014-06-02)
 * Added: Inclusion de todos los iconos en temas disponibles por defecto
 * Added: BETA. Autenticacion federada frente a otros motores y aplicaciones!
 * Fixed: [Tester: Eisenhower Renza Guzman]  Cuando se tienen demasiados campos en un formulario al momento de edicion no se cuenta con scrollbar
-----------------------------------------
-Versión 14.5 (2014-05-04)
-----------------------------------------
+
+## Versión 14.5 (2014-05-04)
 * Added: Sistema de chat interno tipo Gmail entre usuarios de la herramienta
 * Added: Ahora cada formulario puede especificar su color de fondo de manera independiente a la del tema seleccionado.
 * Added: Ahora cada informe puede especificar su color de fondo de manera independiente a la del tema seleccionado.
@@ -63,9 +60,8 @@ Versión 14.5 (2014-05-04)
 * Fixed: Enlaces y logos de proveedores Oauth VK y Withings
 * Added: Mejoras de rendimiento en renderizado de formularios
 * Added: Agregada una plantilla en colores claros
-----------------------------------------
-Versión 14.3 (2014-03-16)
-----------------------------------------
+
+## Versión 14.3 (2014-03-16)
 * Added: Nueva funcion para buscar campos dentro de una tabla
 * Added: Ahora se permite definir campos manuales dentro de los formularios, esos campos seran obviados dentro de los insert y updates cuando no se encuentren en la tabla
 * Added: Ahora las operaciones de almacenamiento validan si los campos existen realmente en la tabla para evitar errores del programador y uso de campos manuales
@@ -80,9 +76,8 @@ Versión 14.3 (2014-03-16)
 * Fixed: Funciones personalizadas pueden ser agradas a permisos en todos los usuarios mediante el panel de configuración
 * Fixed: Actualizado el archivo de definición de bases de datos.
 * Fixed: Posible XSS derivado de las variables de mensaje de error ha sido suprimido
-----------------------------------------
-Versión 14.2 (2014-01-20)
-----------------------------------------
+
+## Versión 14.2 (2014-01-20)
 * Added: [Tester Jaime Alejandro Zapata]:  Ahora en los campos de condiciones para informes se puede agregar cualquier variable de sesion de PHP del usuario para que esta sea tomada en la comparación del query
 * Added: [Tester Javier Enrique]: Ahora Practico detecta el puerto sobre el cual corre el servidor web para los procesos de autenticación.
 * Added: Soporte de autenticacion OAuth para red social rusa VK y para Withings
@@ -96,9 +91,8 @@ Versión 14.2 (2014-01-20)
 * Fixed: [Tester Jaime Alejandro Zapata]:  Al llamar informes desde opciones de menu se agrega una columna inicial que desfasa los resultados.  Se agrega aclaracion en ayuda para agregar :htm:Informes al comando generado
 * Fixed: [Tester Jaime Alejandro Zapata]:  Se agrega mensaje aclaratorio para cuando se ejecuta Practico sobre instalacion PHP con allow_url_fopen desactivado.  Es una configuracion que solo se cambia desde servidor o con archivos de configuración de PHP
 * Fixed: [Tester Jaime Alejandro Zapata]:  Cuando la funcion file_get_contents no retorna nada por tener allow_url_fopen desactivado se hace el paso a funciones cURL para el proceso de autenticacion
-----------------------------------------
-Versión 14.1 (2014-01-19)
-----------------------------------------
+
+## Versión 14.1 (2014-01-19)
 * Added: Ahora se pueden clonar formularios rapidamente mediante una función de copia en la administración de formularios
 * Added: Tester: Victor Hugo Marin.  Ahora se puede indicar el protocolo preferido para el transporte en el momento de autenticación cuando se utilizan protocolos HTTP o HTTPS.  Aquellos con certificados autofirmados o no emitidos por un CA reconocido pueden presentar problemas con la recuperación de los tokens al momento de autenticación por lo que se deja la posibilidad al administrador de definir la forma de autenticar.
 * Added: Tester: Victor Hugo Marin.  Los campos marcados como obligatorios en el diseno de formularios ahora no son sólo informativos, sino que son validados antes de enviar la consulta para almacenar el registro.
@@ -125,14 +119,12 @@ Versión 14.1 (2014-01-19)
 * Fixed: Apertura de formularios de datos con campos de seleccion en registros previos detecta ahora los valores de registro y selecciona de la lista el valor correspondiente
 * Fixed: Apertura de formularios de datos con campos de radio button en registros previos detecta ahora los valores de registro y selecciona de la lista el valor correspondiente
 * Fixed: Se corrige no inicialización de valores post en la clase oauth_client. Actualizacion de la clase por el autor.
-========================================
-El proyecto Práctico agradece a las siguientes personas por su apoyo mediante donaciones
+
+### El proyecto Práctico agradece a las siguientes personas por su apoyo mediante donaciones
 para la liberación de la versión 14.1 realizadas en www.indiegogo.com/projects/practico/:
  * Daniel Morales
-----------------------------------------
-----------------------------------------
-Versión 13.912 (2013-12-07)
-----------------------------------------
+
+## Versión 13.912 (2013-12-07)
  * Added: Posibilidad de inicio de sesion mediante Google.  Solo inicio de sesion, los permisos continuan independientes en la plataforma para el usuario con el mismo login de Google (OAuth 2.0)
  * Added: Asistente de instalación y panel de configuración soportan ahora los parámetros de autenticación por Google
  * Added: Cálculo automático del URI para autenticación por Google
@@ -151,19 +143,18 @@ Versión 13.912 (2013-12-07)
  * Fixed: Enlace a sitio web oficial en pie de pagina actualizado (practico.org)
  * Fixed: Se limpia en cada ejecucion el contenido de error_titulo y error_descripcion para evitar XSS
  * Fixed: Campos deslizadores presentaban warning como valor predeterminado en modo de depuración
-========================================
-El proyecto Práctico agradece a las siguientes personas por su apoyo mediante donaciones
+
+### El proyecto Práctico agradece a las siguientes personas por su apoyo mediante donaciones
 para la liberación de la versión 13.912 realizadas en www.indiegogo.com/projects/practico/:
  * Daniel Morales
-----------------------------------------
-----------------------------------------
-Versión 13.911 (2013-11-01)
+
+## Versión 13.911 (2013-11-01)
  * Added: Inicio de construccion de modulo PAM propio para permitir a escritorios de equipo autenticarse frente al modelo de webservices de Practico
  * Fixed: Importantes mejoras a la seguridad y llamado de funciones.  Gracias especiales al equipo de Zero Science Lab por su completa revisión de vulnerabilidades
  * Fixed: Se suprimen mensajes de error en los motores retornados a los usuarios para evitar posibles SQLInjection sobre 40 funciones diferentes.  Gracias a Zero Science Lab
  * Fixed: Se filtran cadenas y variables de entrada a funciones sensibles para evitar posible XSS.  Gracias a Zero Science Lab
-----------------------------------------
-Versión 13.9 (2013-09-17)
+
+## Versión 13.9 (2013-09-17)
  * Added: Conversion automatica de informes tabulares a formato PDF
  * Added: Disponibilidad de nuevo modulo para pasar a PDF
  * Added: Adicion de encabezados y pies de pagina a informes PDF desde la personalizacion de parametros
@@ -174,8 +165,8 @@ Versión 13.9 (2013-09-17)
  * Fixed: Mensajes de advertencia en generacion de informes
  * Fixed: Cambio de idioma en generador de PDFs de acuerdo a la parametrizacion del sistema
  * Fixed: MetaTAGs nuevos en la generacion de las paginas
-----------------------------------------
-Versión 13.7 (2013-07-07)
+
+## Versión 13.7 (2013-07-07)
  * Added: Nuevo control de deslizador para seleccion de valores por rangos en formularios
  * Added: Seleccion visual de formularios e informes durante la creacion de menues
  * Added: Variable E_DEPRECATED es presentada ahora en los mensajes del modo de depuracion
@@ -191,8 +182,8 @@ Versión 13.7 (2013-07-07)
  * Fixed: Supresion de mensajes de advertencia innecesarios en multiples modulos
  * Fixed: Correcion en asignacion de valores predeterminados de texto largo y con formato a formularios
  * Fixed: Textos multi-idioma botones en creacion de campos para formularios
-----------------------------------------
-Versión 13.6 (2013-06-03)
+
+## Versión 13.6 (2013-06-03)
  * Added: Idioma inglEs basado en Google Translator
  * Added: Multi-idioma a mOdulos de tablas, usuarios y menUes
  * Added: Seleccion visual de plantillas
@@ -203,8 +194,8 @@ Versión 13.6 (2013-06-03)
  * Fixed: [Tester: Esteban Rodriguez] Posible inyecciOn SQL en login.
  * Fixed: [Tester: Esteban Rodriguez] Visualizacion de query con info sensible en errores capturados por PDO.
  * Fixed: Intento de login con caracteres invAlidos redirecciona a login nuevamente.
-----------------------------------------
-Versión 13.5 (2013-05-02)
+
+## Versión 13.5 (2013-05-02)
   * Added: Panel de control de configuración por el admin
   * Added: Autenticacion externa opcional mediante LDAP
   * Added: Soporte a encripción de claves en motores de autenticación externos sobre 11 tipos de algoritmo diferentes
@@ -231,8 +222,8 @@ Versión 13.5 (2013-05-02)
   * Fixed: Valores MD5 son calculados por PHP para compatibilidad con motores que no tienen esa función
   * Fixed: Ajuste a instalador para selección de motor SQLite.
   * Fixed: Ajuste paso de isntalación con ayudas para selección de motor y condiciones
-----------------------------------------
-Versión 13.4 (2013-04-01)
+
+## Versión 13.4 (2013-04-01)
   * Added: Se permite la consulta de auditoria por usuario especifico
            por medio del listado de usuarios
   * Added: Se permite consultar la auditoria general de usuarios
@@ -245,8 +236,8 @@ Versión 13.4 (2013-04-01)
            ejecucion del modulo central.
   * Fixed: Correccion en textos de menu
   * Fixed: Instalaciones sobre MySQL activan ahora el buffer de consulta
-----------------------------------------
-Versión 13.3 (2013-03-08)
+
+## Versión 13.3 (2013-03-08)
   * Fixed: Sintaxis compatible para explode con PHP 5.3+ sobre comunes.php
   * Fixed: Generacion de graficos basados en su ID y no titulo para
            evitar problemas en nombre de archivo
@@ -255,17 +246,17 @@ Versión 13.3 (2013-03-08)
   * Fixed: Definicion de variable durante generacion de captcha en
            servidores bajo windows evita su visualizacion, corregido
   * Fixed: Variable de host en conexiones a base de datos
-----------------------------------------
-Versión 13.2 (2013-02-13)
+
+## Versión 13.2 (2013-02-13)
   * Fixed: Sintaxis compatible para explode y PHP 5.3+ sobre comunes.php
-----------------------------------------
-Versión 13.2 (2013-02-13)
+
+## Versión 13.2 (2013-02-13)
   * Adición de longitudes máximas para campos de texto corto
   * Personalización del tamaño para campos de texto corto
   * Adición de objetos para los campos de selección de tipo radio-button
   * Botón de acceso directo a la vista previa de informes
   * Adición de acciones para informes
   * Utilidad de empaquetamiento en dev_tools (bajo Git)
-----------------------------------------
-Versión 13.1 (2013-01-15)
+
+## Versión 13.1 (2013-01-15)
   * Primer lanzamiento oficial
