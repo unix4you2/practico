@@ -35,10 +35,10 @@
    del asistente.  Pruebe  http://DomainOrIP/practico (or your folder)
 
    ----------
- * Desinstalación de Practico:
+## Desinstalación de Practico:
 
-   # Simplemente elimine todos los archivos bajo el directorio de
-     instalación en su servidor web, así como la base de datos asociada
+  Simplemente elimine todos los archivos bajo el directorio de
+  instalación en su servidor web, así como la base de datos asociada
 
 ===================
 ## Documentación para desarrolladores
