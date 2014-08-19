@@ -9,7 +9,7 @@
    automatico de aplicaciones web de manera agil y sin digitar codigo
 
 ===================
- Características
+## Características
 
  - Escrito completamente en PHP, HTML y Javascript
  - Interfaz gráfica de usuario
@@ -24,7 +24,7 @@
  - Código fuente simple, los fuentes son muy fáciles de entender.
 
 ===================
- Instalación y uso
+## Instalación y uso
 
  - Descomprima el paquete de instalación en su servidor web:
 
@@ -41,7 +41,8 @@
      instalación en su servidor web, así como la base de datos asociada
 
 ===================
- Documentación para desarrolladores, junto con un manual completo en
+## Documentación para desarrolladores
+ Junto con un manual completo en
  formato Google Docs y puede ser encontrada en el sitio web sobre el
  enlace del menú superior "Documentación" o en:
    
