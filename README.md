@@ -7,6 +7,8 @@
 ```                                      
 Practico es una herramienta de codigo abierto para el diseño automatico de aplicaciones web de manera agil y sin digitar codigo
 
+![Clonacion de aplicaciones](http://www.practico.org/_/rsrc/1367847811637/funcionalidades/SlideInicio3.png)
+
 ## Características
 
  - Escrito completamente en PHP, HTML y Javascript
