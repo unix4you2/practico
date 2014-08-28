@@ -864,7 +864,7 @@
 	$MULTILANG_MonDesTipo='Indica el tipo de elemento que sera agregado a la pagina de monitoreo';
 	$MULTILANG_MonMetodo='Metodo utilizado';
 	$MULTILANG_MonSaltos='Saltos de linea';
-	$MULTILANG_MonTamano='Tama&oacute;o fuente SQL';
+	$MULTILANG_MonTamano='Tama&ntilde;o fuente SQL';
 	$MULTILANG_MonOcultaTit='Ocultar titulos';
 	$MULTILANG_MonCorreoAlerta='Correo para alertas';
 	$MULTILANG_MonAlertaSnd='Alerta sonora';

@@ -28,8 +28,78 @@
 <?php 
 /* ################################################################## */
 /* ################################################################## */
+	function MedirVelocidad($url_medidor="http://localhost/cargar_bytes.php",$unidad_medida="KB")
+		{
+			/*
+				Function: MedirVelocidad
+				Mide la velocidad de descarga desde el servidor actual hacia otra maquina
+			*/
+
+			//Se desactiva el limite de tiempo para ejecucion del script
+			set_time_limit (0) ; 
+
+			//Toma el tiempo inicial de ejecucion
+			$tiempo_micro [1] = microtime();
+			$q_espacios = explode (" ", $tiempo_micro[1]);
+			$tiempo_[1] = $q_espacios[1]+$q_espacios[0];
+
+			//Carga el contenido o URL mediante la cual mediremos la transferencia y lo guarda en una cadena
+			$contenido = file_get_contents($url_medidor);
+			//Convierte los bytes recibidos a la unidad de medida requerida.  Tener en cuenta:
+			// 1 KB es igual a 1024 Bytes
+			// 1 MB es igual a 1024 KB
+			// 1 GB es igual a 1024 MB
+			// 1 TB es igual a 1024 GB
+			$tamano_KB = strlen($contenido)/1024;
+			if ($unidad_medida=="MB") $tamano_KB = $tamano_KB/1024;
+			if ($unidad_medida=="GB") $tamano_KB = ($tamano_KB/1024)/1024;
+			if ($unidad_medida=="TB") $tamano_KB = (($tamano_KB/1024)/1024)/1024;			
+
+			//Toma el tiempo final de ejecucion
+			$tiempo_micro[2] = microtime();
+			$q_espacios = explode (" ", $tiempo_micro[2]);
+			$tiempo_[2] = $q_espacios[1]+$q_espacios[0];
+
+			//Realiza los calculos de tiempos y velocidad
+			$tiempo_utilizado = number_format ( ( $tiempo_ [ 2 ] - $tiempo_ [ 1 ] ) , 3 , "." , "," ) ;
+			$velocidad = round ( $tamano_KB / $tiempo_utilizado , 2 ) ; 
+			
+			//Presenta resultados
+			echo 'Velocidad de conexión: ' . $velocidad . ' '.$unidad_medida.'ps <br>
+			 Se enviarón: ' . $tamano_KB . ' '.$unidad_medida.'ytes , Tiempo utilizado: ' . $tiempo_utilizado . ' Segundos <hr>' ;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+	function CargarBytes($tamano_transferencia=1024000)
+		{
+			/*
+				Function: CargarBytes
+				Genera N bytes para ser transmitidos en pruebas de velocidad
+
+				Ver tambien:
+					<MedirVelocidad>
+			*/
+			echo str_repeat ("X" , $tamano_transferencia);
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
 	function GetPing($ip=NULL)
 		{
+			/*
+				Function: GetPing
+				Determina si una maquina se encuentra o no encendida y respondiendo mediante el uso del comando ping
+
+				Variables de entrada:
+
+					ip - Direccion de la maquina, router, host o dispositivo que debe responder a la senal de ping
+
+				Ver tambien:
+					<ServicioOnline> | <PresentarEstadoMaquina>
+			*/
 			if(empty($ip))
 				{
 					$ip = $_SERVER['REMOTE_ADDR'];
@@ -52,6 +122,19 @@
 /* ################################################################## */
 	function ServicioOnline($maquina,$puerto,$tipo_monitor="socket")
 		{
+			/*
+				Function: ServicioOnline
+				Determina si una maquina se encuentra o no encendida y respondiendo a senales de red
+
+				Variables de entrada:
+
+					maquina - Direccion de la maquina, router, host o dispositivo que debe responder a la senal de ping
+					puerto - Puerto sobre el cual se encuentra el servicio que se desea probar.  Aplica para los tipos Socket
+					tipo_monitor - Predeterminado en socket (mas veloz) o cambiable a ping (mas compatible) determina como realizar la prueba de conexion hasta la maquina remota
+
+				Ver tambien:
+					<GetPing> | <PresentarEstadoMaquina>
+			*/
 			if($tipo_monitor=="socket")
 				{
 					$estado_ok = @fsockopen($maquina, $puerto, $errno, $errstr, 30);   
