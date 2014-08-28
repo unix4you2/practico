@@ -64,9 +64,16 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function CargarBytes()
+	function CargarBytes($tamano_transferencia=1024000)
 		{
-			echo str_repeat ( "X" , 1024000 ) ;
+			/*
+				Function: CargarBytes
+				Genera N bytes para ser transmitidos en pruebas de velocidad
+
+				Ver tambien:
+					<MedirVelocidad>
+			*/
+			echo str_repeat ("X" , $tamano_transferencia);
 		}
 
 
@@ -74,6 +81,17 @@
 /* ################################################################## */
 	function GetPing($ip=NULL)
 		{
+			/*
+				Function: GetPing
+				Determina si una maquina se encuentra o no encendida y respondiendo mediante el uso del comando ping
+
+				Variables de entrada:
+
+					ip - Direccion de la maquina, router, host o dispositivo que debe responder a la senal de ping
+
+				Ver tambien:
+					<ServicioOnline> | <PresentarEstadoMaquina>
+			*/
 			if(empty($ip))
 				{
 					$ip = $_SERVER['REMOTE_ADDR'];
@@ -96,6 +114,19 @@
 /* ################################################################## */
 	function ServicioOnline($maquina,$puerto,$tipo_monitor="socket")
 		{
+			/*
+				Function: ServicioOnline
+				Determina si una maquina se encuentra o no encendida y respondiendo a senales de red
+
+				Variables de entrada:
+
+					maquina - Direccion de la maquina, router, host o dispositivo que debe responder a la senal de ping
+					puerto - Puerto sobre el cual se encuentra el servicio que se desea probar.  Aplica para los tipos Socket
+					tipo_monitor - Predeterminado en socket (mas veloz) o cambiable a ping (mas compatible) determina como realizar la prueba de conexion hasta la maquina remota
+
+				Ver tambien:
+					<GetPing> | <PresentarEstadoMaquina>
+			*/
 			if($tipo_monitor=="socket")
 				{
 					$estado_ok = @fsockopen($maquina, $puerto, $errno, $errstr, 30);   
