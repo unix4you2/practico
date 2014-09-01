@@ -33,6 +33,12 @@ Practico es una herramienta de codigo abierto para el diseño automatico de apli
  * Abra su navegador en la URL correspondiente y siga las instrucciones
    del asistente.  Pruebe  http://DomainOrIP/practico (or your folder)
 
+### Despliegue rápido
+
+Para aquellos usuarios de Heroku que deseen hacer un despliegue de Práctico sobre su perfil se ofrece el siguiente enlace:
+
+[![Desplegar](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)
+
 ## Desinstalación de Practico:
 
   Simplemente elimine todos los archivos bajo el directorio de
