@@ -1,6 +1,8 @@
 {
   "name": "Practico",
   "description": "Generador de aplicaciones web",
+  "website": "http://www.practico.org",
+  "success_url": "/ins/",
   "repository": "https://github.com/unix4you2/practico.git",
   "logo": "http://www.practico.org/repositorioimagenes/practico_login.png",
   "keywords": ["practico", "framework", "php"]
