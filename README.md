@@ -5,7 +5,7 @@
                |  __/| | | (_| | (__| |_| | (_| (_) |
                |_|   |_|  \__,_|\___|\__|_|\___\___/ 
 ```                                      
-[![Desplegar](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)  [![HackPad](https://sites.google.com/site/practicodevel/repositorioimagenes/hackpad.png)](https://practico.hackpad.com/)
+[![Desplegar](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)      [![HackPad](https://sites.google.com/site/practicodevel/repositorioimagenes/hackpad.png)](https://practico.hackpad.com/)
 
 Practico es una herramienta de codigo abierto para el diseño automatico de aplicaciones web de manera agil y sin digitar codigo
 
@@ -45,13 +45,13 @@ Junto con un manual completo en formato Google Docs y puede ser encontrada en el
 
  * http://www.practico.org/documentacion
 
-[![Desplegar](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)
-
 ### Ideas y puntos de contacto
 
- * Visita nuestro Hackpad y comparte tus ideas de mejora: https://practico.hackpad.com/
+ * Comparte tus ideas de mejora en nuestro [Hackpad](https://practico.hackpad.com/)
  * Espacios de discusión en nuestro [Grupo de Google](https://groups.google.com/forum/#!forum/practicodev)
 
 ### Despliegue rápido
 
 Para aquellos usuarios de Heroku que deseen hacer un despliegue de Práctico sobre su perfil se ofrece el siguiente enlace:
+
+ * [![Desplegar](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)
