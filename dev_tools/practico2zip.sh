@@ -51,7 +51,8 @@
 	echo "Nombre del empaquetado: " $NombreArchivo$Version$Extension
 	echo "Fecha de empaquetado  : " $FECHA
 	echo ""
-	read -p "Presione [Enter] para continuar o [Ctrl+C] para abortar" vble
+	echo "Presione [Enter] para continuar o [Ctrl+C] para abortar"
+#	read -p "" vble
 	echo "-----------------------------------------------------------------"
 
 # Variables de trabajo adicionales
@@ -85,7 +86,8 @@ ListaExcluidos=" skin/nomo_editada\* mod/ldap\* mod/pam\* mod/pdf\* core/configu
 # Presenta resultados, restablece variables y termina
 	IFS=$old_IFS  # restablece el separador de campo predeterminado
 	echo "-----------------------------------------------------------------"
-	read -p "Presione [Enter] para finalizar. " vble
+	echo "Presione [Enter] para finalizar. "
+#	read -p "" vble
 	exit 0  # Finalizo ejecucion normal del script
 
 

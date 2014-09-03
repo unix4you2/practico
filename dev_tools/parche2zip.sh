@@ -146,7 +146,8 @@ enlace:  http://www.unixlandia.org/index.php/Politicas_envio_de_parches
 	echo "ARCHIVOS A INCLUIR EN ESTE PARCHE (separados por espacios): "
 	echo $ListaArchivos
 	echo ""
-	read -p "Presione [Enter] para continuar o [Ctrl+C] para abortar" vble
+	echo "Presione [Enter] para continuar o [Ctrl+C] para abortar"
+#	read -p "" vble
 
 #Procesa si el formato es ZIP (identificado por el comando)
 	if [ $Comando == "zip " ]; then
@@ -181,7 +182,8 @@ enlace:  http://www.unixlandia.org/index.php/Politicas_envio_de_parches
 # Presenta resultados, restablece variables y termina
 	IFS=$old_IFS  # restablece el separador de campo predeterminado
 	echo "-----------------------------------------------------------------"
-	read -p "PROCESO FINALIZADO.  Presione [Enter] para finalizar. " vble
+	echo "PROCESO FINALIZADO.  Presione [Enter] para finalizar. "
+#	read -p "" vble
 	clear
 	exit 0  # Finalizo ejecucion normal del script
 

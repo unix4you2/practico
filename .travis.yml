@@ -23,13 +23,6 @@ env:
 #  - DB=mongodb
   - DB=mysql
 
-
-# Ejecuta scripts antes de correr las pruebas, puede utilizar variables de entorno
-before_script:
-#  - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS hello_world_test;" -U postgres; fi
-#  - if [[ "$DB" == "pgsql" ]]; then psql -c "create database hello_world_test;" -U postgres; fi
-#  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS hello_world_test;" -uroot; fi
-
 # Configura notificaciones (email, IRC, campfire etc)
 notifications:
 #  irc: "irc.freenode.org#yourfavouriteroomfortravis"
@@ -50,4 +43,32 @@ branches:
 # Mediante expresiones regulares
 #    - /^deploy-.*$/
 
-script: dev_tools/practico2zip.sh
+#before_install:
+# Comandos para preparar el sistema antes de las pruebas para instalar prerequisitos o dependencias
+#ls -al
+
+#install:
+# Comandos para instalar prerequisitos o dependencias
+#pwd
+
+# Ejecuta scripts antes de correr las pruebas, puede utilizar variables de entorno
+#before_script:
+#  - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS hello_world_test;" -U postgres; fi
+#  - if [[ "$DB" == "pgsql" ]]; then psql -c "create database hello_world_test;" -U postgres; fi
+#  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS hello_world_test;" -uroot; fi
+
+# Comandos para construir.  Todos deben retornar cero, cualquier otra salida se considera una falla
+script:
+  - dev_tools/practico2zip.sh
+  - dev_tools/parche2zip.sh.sh
+
+# Comandos a ejecutar cuando se finaliza la consutrccion sin problemas
+#after_success
+
+# Comandos a ejecutar cuando se obtuvo algun error
+#after_failure
+
+# Comandos finales a ejecutar despues de ejecutar script: con exito
+#after_script
+
+
