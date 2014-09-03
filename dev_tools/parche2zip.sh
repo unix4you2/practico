@@ -85,7 +85,7 @@ enlace:  http://www.unixlandia.org/index.php/Politicas_envio_de_parches
 "
 
 # Mensajes de inicio e introduccion al script
-	clear
+#	clear
 	echo "    _                                      _                  "
 	echo "   (_  _ _  _  _  _     _ _|_ _  _| _  _  |_) _ _  _ _|_. _ _ "
 	echo "   (_ | | ||_)(_|(_||_|(/_ | (_|(_|(_)|   |  | (_|(_  | |(_(_)"
@@ -184,7 +184,7 @@ enlace:  http://www.unixlandia.org/index.php/Politicas_envio_de_parches
 	echo "-----------------------------------------------------------------"
 	echo "PROCESO FINALIZADO.  Presione [Enter] para finalizar. "
 #	read -p "" vble
-	clear
+#	clear
 	exit 0  # Finalizo ejecucion normal del script
 
 
