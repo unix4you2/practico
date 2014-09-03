@@ -33,6 +33,9 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 * Added: Soporte a login basado en sockets para servidores sin cURL o allow_urlfopen activado
 * Added: Actualizada clase OAuth
+* Added: Actualización de scrips de construccion
+* Added: Soporte para travis
+* Added: Soporte para heroku
 "
 
 ########################################################################
