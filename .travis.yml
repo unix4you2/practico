@@ -49,3 +49,5 @@ branches:
     - master
 # Mediante expresiones regulares
 #    - /^deploy-.*$/
+
+script: dev_tools/practico2zip.sh
