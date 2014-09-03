@@ -56,3 +56,8 @@ Junto con un manual completo en formato Google Docs y puede ser encontrada en el
 Para aquellos usuarios de Heroku que deseen hacer un despliegue de Práctico sobre su perfil se ofrece el siguiente enlace:
 
  * [![Desplegar](http://www.practico.org/repositorioimagenes/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)
+
+
+### Estado actual de construcción en Travis
+
+[![Build Status](https://travis-ci.org/unix4you2/practico.svg?branch=master)](https://travis-ci.org/unix4you2/practico)
