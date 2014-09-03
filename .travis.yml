@@ -60,7 +60,7 @@ branches:
 # Comandos para construir.  Todos deben retornar cero, cualquier otra salida se considera una falla
 script:
   - dev_tools/practico2zip.sh
-  - dev_tools/parche2zip.sh.sh
+  - dev_tools/parche2zip.sh
 
 # Comandos a ejecutar cuando se finaliza la consutrccion sin problemas
 #after_success
