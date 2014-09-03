@@ -6,7 +6,7 @@
                |_|   |_|  \__,_|\___|\__|_|\___\___/ 
 ```                                      
 
-[![Desplegar](http://www.practico.org/repositorioimagenes/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)      [![HackPad](https://sites.google.com/site/practicodevel/repositorioimagenes/hackpad.png)](https://practico.hackpad.com/)
+[![Desplegar](http://www.practico.org/repositorioimagenes/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)    [![HackPad](https://sites.google.com/site/practicodevel/repositorioimagenes/hackpad.png)](https://practico.hackpad.com/)  [![Travis](https://sites.google.com/site/practicodevel/repositorioimagenes/travis-logo.png)](https://travis-ci.org/unix4you2/practico)
 
 Practico es una herramienta de codigo abierto para el diseño automatico de aplicaciones web de manera agil y sin digitar codigo
 
