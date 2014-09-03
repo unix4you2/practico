@@ -52,13 +52,8 @@ Junto con un manual completo en formato Google Docs y puede ser encontrada en el
  * Comparte tus ideas de mejora en nuestro [Hackpad](https://practico.hackpad.com/)
  * Espacios de discusión en nuestro [Grupo de Google](https://groups.google.com/forum/#!forum/practicodev)
 
-### Despliegue rápido
+### Despliegue y construcción rápida
 
-Para aquellos usuarios de Heroku que deseen hacer un despliegue de Práctico sobre su perfil se ofrece el siguiente enlace:
+ * [![Desplegar](http://www.practico.org/repositorioimagenes/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master) Para aquellos usuarios de Heroku que deseen hacer un despliegue de Práctico sobre su perfil
 
- * [![Desplegar](http://www.practico.org/repositorioimagenes/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)
-
-
-### Estado actual de construcción en [![Travis](https://sites.google.com/site/practicodevel/repositorioimagenes/travis-logo.png)](https://travis-ci.org/unix4you2/practico)
-
-[![Build Status](https://travis-ci.org/unix4you2/practico.svg?branch=master)](https://travis-ci.org/unix4you2/practico)
+ * [![Travis](https://sites.google.com/site/practicodevel/repositorioimagenes/travis-logo.png)](https://travis-ci.org/unix4you2/practico) para quienes deseen ver el estado actual de la construcción para la rama principal del proyecto.  Reportada también arriba.
