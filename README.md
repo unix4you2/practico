@@ -7,7 +7,7 @@
  ╚═╝      ╚═╝  ╚═╝ ╚═╝  ╚═╝  ╚═════╝    ╚═╝    ╚═╝  ╚═════╝  ╚═════╝ 
 ```                                      
 
-[![Desplegar](http://www.practico.org/repositorioimagenes/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)    [![HackPad](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/hackpad.png)](https://practico.hackpad.com/)  [![Build Status](https://travis-ci.org/unix4you2/practico.svg?branch=master)](https://travis-ci.org/unix4you2/practico)
+[![Desplegar](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)    [![HackPad](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/hackpad.png)](https://practico.hackpad.com/)  [![Build Status](https://travis-ci.org/unix4you2/practico.svg?branch=master)](https://travis-ci.org/unix4you2/practico)
 
 
 Practico es una herramienta de codigo abierto para el diseño automatico de aplicaciones web de manera agil y sin digitar codigo
@@ -55,6 +55,6 @@ Junto con un manual completo en formato Google Docs y puede ser encontrada en el
 
 ### Despliegue y construcción rápida
 
- * [![Desplegar](http://www.practico.org/repositorioimagenes/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master) Para aquellos usuarios de Heroku que deseen hacer un despliegue de Práctico sobre su perfil
+ * [![Desplegar](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master) Para aquellos usuarios de Heroku que deseen hacer un despliegue de Práctico sobre su perfil
 
- * [![Travis](https://sites.google.com/site/practicodevel/repositorioimagenes/travis-logo.png)](https://travis-ci.org/unix4you2/practico) para quienes deseen ver el estado actual de la construcción para la rama principal del proyecto.  Reportada también arriba.
+ * [![Travis](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/travis.png)](https://travis-ci.org/unix4you2/practico) para quienes deseen ver el estado actual de la construcción para la rama principal del proyecto.  Reportada también arriba.
