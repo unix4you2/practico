@@ -1,7 +1,5 @@
 language: php
 php:
-  # using major version aliases
-
   # Alias de la version 5.2.17
   - "5.2"
   # Alias de la version 5.3.x
@@ -59,8 +57,9 @@ branches:
 
 # Comandos para construir.  Todos deben retornar cero, cualquier otra salida se considera una falla
 script:
-  - dev_tools/practico2zip.sh
   - dev_tools/parche2zip.sh
+  - dev_tools/practico2zip.sh
+
 
 # Comandos a ejecutar cuando se finaliza la consutrccion sin problemas
 #after_success
@@ -70,5 +69,3 @@ script:
 
 # Comandos finales a ejecutar despues de ejecutar script: con exito
 #after_script
-
-
