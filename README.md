@@ -52,9 +52,15 @@ Junto con un manual completo en formato Google Docs y puede ser encontrada en el
 
  * Comparte tus ideas de mejora en nuestro [Hackpad](https://practico.hackpad.com/)
  * Espacios de discusión en nuestro [Grupo de Google](https://groups.google.com/forum/#!forum/practicodev)
+ * Ayuda a mejorar la documentación existente en nuestra [Wiki](https://github.com/unix4you2/practico/wiki)
 
 ### Despliegue y construcción rápida
 
  * [![Desplegar](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master) Para aquellos usuarios de Heroku que deseen hacer un despliegue de Práctico sobre su perfil
 
  * [![Travis](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/travis.png)](https://travis-ci.org/unix4you2/practico) para quienes deseen ver el estado actual de la construcción para la rama principal del proyecto.  Reportada también arriba.
+
+#### Soporte y donaciones al proyecto
+
+[![Donaciones](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/paypal.png)](https://www.paypal.com/cgi-bin/webscr?item_name=Donacion+para+desarrollo+de+funcionalidades+de+Pr%E1ctico&cmd=_donations&business=unix4you2%40gmail.com)
+
