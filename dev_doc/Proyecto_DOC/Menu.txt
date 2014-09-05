@@ -78,7 +78,7 @@ Group: Modulos Principales  {
       File: Modulo monitoreo  (core/monitoreo.php)
       File: Seccion con los contactos de Chat disponibles  (core/marco_chat.php)
       File: Seccion Proveedores OAuth  (core/marco_param.php)
-      }  # Group: Core
+      }  # Group: Modulos
 
    Group: Inc  {
 
