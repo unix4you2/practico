@@ -998,6 +998,104 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	Function: file_get_contents_curl
+	Un reemplazo para la funcion file_get_contents utilizando cURL
+
+	Salida:
+		Contenido de la URL recibida
+*/
+	function file_get_contents_curl($url)
+		{
+			global $MULTILANG_ErrExtension,$MULTILANG_ErrCURL;
+			//Verifica soporte para cURL
+			if (!extension_loaded('curl'))
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrCURL,'','icono_error.png','TextosEscritorio');
+			//Verifica que la funcion se encuentre activada
+			$funcion_evaluada='curl_init'; $valor_esperado='1';
+			if (ini_get($funcion_evaluada)==$valor_esperado)
+				{
+					//Inicializa el objeto cURL y procesa la solicitud
+					$objeto_curl = curl_init();
+					curl_setopt($objeto_curl, CURLOPT_HEADER, 0);
+					curl_setopt($objeto_curl, CURLOPT_RETURNTRANSFER, 1);
+					curl_setopt($objeto_curl, CURLOPT_URL, $url);
+					$datos_recibidos = curl_exec($objeto_curl);
+					curl_close($objeto_curl);
+				}
+			return $datos_recibidos;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: file_get_contents_socket
+	Un reemplazo para la funcion file_get_contents utilizando Sockets
+*/
+	function file_get_contents_socket($url)
+		{
+			$url_parsed = parse_url($url);
+			$host = $url_parsed["host"];
+			$port = $url_parsed["port"];
+			if ($port==0)
+				$port = 80;
+			$path = $url_parsed["path"];
+			if ($url_parsed["query"] != "")
+				$path .= "?".$url_parsed["query"];
+
+			$out = "GET $path HTTP/1.0\r\nHost: $host\r\n\r\n";
+
+			$fp = fsockopen($host, $port, $errno, $errstr, 30);
+
+			fwrite($fp, $out);
+			$body = false;
+			while (!feof($fp))
+				{
+					$s = fgets($fp, 1024);
+					if ( $body )
+						$in .= $s;
+					if ( $s == "\r\n" )
+						$body = true;
+				}
+			fclose($fp);
+			return $in;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: cargar_url
+	Recibe una URL y pasa su contenido a una cadena de texto
+*/
+	function cargar_url($url)
+		{
+			$contenido_url="";
+
+			//Intenta con cURL si esta habilitado
+			$funcion_evaluada='curl_init'; $valor_esperado='1';
+			if (@$contenido_url=="")
+				if (ini_get($funcion_evaluada)==$valor_esperado)
+					$contenido_url = trim(file_get_contents_curl($url));
+
+			$funcion_evaluada='allow_url_fopen'; $valor_esperado='1';
+			//Intenta con la funcion nativa de PHP si esta habilitada y no se pudo obtener nada con cURL
+			if (@$contenido_url=="")
+				if (ini_get($funcion_evaluada)==$valor_esperado)
+					$contenido_url = trim(file_get_contents($url));
+
+			//Intenta con funciones de socket si no se pudo obtener nada con file_get_contents
+			if (@$contenido_url=="")
+				$contenido_url = trim(file_get_contents_socket($url));
+
+			//Retorna el resultado
+			return $contenido_url;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
 	function verificar_extensiones()
 		{
 			/*
@@ -1067,7 +1165,8 @@
 			$buscar=rand(0,7);
 			if ($Login_usuario=="admin" && $accion=="Ver_menu" && $buscar==1)
 				{
-					$version_actualizada = @trim(file_get_contents("http://downloads.sourceforge.net/project/practico/version_actual.txt"));
+					$path_ultima_version="https://raw.githubusercontent.com/unix4you2/practico/master/dev_tools/version_publicada.txt";
+					$version_actualizada = @cargar_url($path_ultima_version);
 					$archivo_origen="inc/version_actual.txt";
 					$archivo = fopen($archivo_origen, "r");
 					if ($archivo)

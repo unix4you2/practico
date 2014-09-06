@@ -15,6 +15,7 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 README
+core/comunes.php
 core/conexiones.php
 core/ws_nucleo.php
 core/sesion.php
@@ -36,6 +37,9 @@ LogCambios="
 * Added: Actualización de scrips de construccion
 * Added: Soporte para travis
 * Added: Soporte para heroku
+* Added: Se cambia el método para buscar nuevas actualizaciones a la función interna
+* Fixed: Se mueven funciones de carga de URLs a un punto común para su uso en toda la herramienta
+* Added: Ahora el método o función cargar_url() está disponible para funciones personalizadas
 "
 
 ########################################################################
