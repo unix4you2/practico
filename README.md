@@ -52,12 +52,12 @@ Junto con un manual completo en formato Google Docs y puede ser encontrada en el
 
  * [![Travis](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/travis.png)](https://travis-ci.org/unix4you2/practico) para quienes deseen ver el estado actual de la construcción para la rama principal del proyecto.  Reportada también arriba.
 
+#### Métricas del proyecto
+
+[![Throughput Graph](https://graphs.waffle.io/unix4you2/practico/throughput.svg)](https://waffle.io/unix4you2/practico/metrics)
+
 #### Soporte y donaciones al proyecto
 
 Si encuentra útil este proyecto y desea contribuir al desarrollo del mismo puede apoyarnos mediante una donación por un valor voluntario que será destinado exclusivamente para soportar el desarrollo de nuevas funcionalidades.
 
 [![Donaciones](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/paypal.png)](https://www.paypal.com/cgi-bin/webscr?item_name=Donacion+para+desarrollo+de+funcionalidades+de+Pr%E1ctico&cmd=_donations&business=unix4you2%40gmail.com)
-
-#### Métricas
-
-[![Throughput Graph](https://graphs.waffle.io/unix4you2/practico/throughput.svg)](https://waffle.io/unix4you2/practico/metrics)
