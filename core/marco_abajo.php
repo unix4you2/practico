@@ -76,5 +76,8 @@
 </div> <!-- FINALIZA MARCO DE CHAT -->
 <script type="text/javascript" src="inc/chat/js/chat.js"></script>
 
+<!-- ESTADISTICAS DE USO ANONIMO CON GOOGLE ANALYTICS BEACON -->
+<img src="https://ga-beacon.appspot.com/UA-847800-9/Practico/<?php echo $accion; ?>?pixel" border=0 ALT=""/>
+
 </body>
 </html>
