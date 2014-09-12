@@ -62,4 +62,7 @@ Si encuentra útil este proyecto y desea contribuir al desarrollo del mismo pued
 
 [![Donaciones](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/paypal.png)](https://www.paypal.com/cgi-bin/webscr?item_name=Donacion+para+desarrollo+de+funcionalidades+de+Pr%E1ctico&cmd=_donations&business=unix4you2%40gmail.com)
 
-[![Analytics](https://ga-beacon.appspot.com/UA-847800-9/chromeskel_a/readme?pixel)](https://github.com/igrigorik/ga-beacon)
+
+
+
+[![Analytics](https://ga-beacon.appspot.com/UA-847800-9/ArbolFuentes/README?pixel)](https://github.com/igrigorik/ga-beacon)
