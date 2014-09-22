@@ -18,6 +18,7 @@ README
 core/objetos.php
 core/comunes.php
 core/conexiones.php
+core/monitoreo.php
 core/ws_nucleo.php
 core/marco_abajo.php
 core/marco_conf.php

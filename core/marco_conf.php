@@ -247,6 +247,7 @@
 										</td>
 										<td valign=top>
 												<input type="text" name="CodigoGoogleAnalyticsNEW" size="12" value="<?php if (@$CodigoGoogleAnalytics!="") echo $CodigoGoogleAnalytics; ?>" class="CampoTexto" class="keyboardInput">
+												<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_AyudaGABeacon; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 										</td>
 									</tr>
 								</table>

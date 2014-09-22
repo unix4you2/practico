@@ -133,7 +133,8 @@
 	$MULTILANG_ZonaHoraria='Time zone';
 	$MULTILANG_VistaImpresion='Printer view';
 	$MULTILANG_IDGABeacon='Google Analytics ID';
-	
+	$MULTILANG_AyudaGABeacon='Those developers who want to have a full log or real time statistics about their software using Google Analytics can put here the unique ID from their Google Analytics Panel.  Practico will send all statistics tu your Analytics Panel in real time.';
+
 	//Ventana de login
 	$MULTILANG_TituloLogin='System Login';
 	$MULTILANG_CodigoSeguridad='Security code';
