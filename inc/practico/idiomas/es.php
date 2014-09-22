@@ -132,6 +132,8 @@
 	$MULTILANG_Version='Versi&oacute;n';
 	$MULTILANG_ZonaHoraria='Zona horaria';
 	$MULTILANG_VistaImpresion='Vista de impresion';
+	$MULTILANG_IDGABeacon='ID Google Analytics';
+	$MULTILANG_AyudaGABeacon='Aquellos desarrolladores que deseen tener un seguimiento historico detallado o incluso en tiempo real del uso de su herramienta a traves de Google Analytics pueden diligenciar aqui el ID obtenido en su panel de Google.  Practico reportara todo movimiento a su panel de Analytics';
 	
 	//Ventana de login
 	$MULTILANG_TituloLogin='Ingreso al sistema';
