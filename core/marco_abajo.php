@@ -85,8 +85,8 @@
 	// su valor a traves del panel de configuracion de Practico con el entregado como ID de GoogleAnalytics
 	$Infijo=base64_decode("VUEtODQ3ODAwLTk=");
 	echo $PrefijoGA.$Infijo.$PosfijoGA;
-	if(@$CodigoSeguimientoGABeacon!="" && @$CodigoSeguimientoGABeacon!=$Infijo)
-		echo $PrefijoGA.$CodigoSeguimientoGABeacon.$PosfijoGA;	
+	if(@$CodigoGoogleAnalytics!="")
+		echo $PrefijoGA.$CodigoGoogleAnalytics.$PosfijoGA;	
 ?>
 
 </body>

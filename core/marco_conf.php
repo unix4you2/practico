@@ -240,6 +240,15 @@
 												<input type="text" name="NombreRADNEW" size="12" value="<?php echo $NombreRAD; ?>" class="CampoTexto" class="keyboardInput">
 										</td>
 									</tr>
+
+									<tr>
+										<td valign=top align=right>
+												<?php echo $MULTILANG_IDGABeacon; ?>
+										</td>
+										<td valign=top>
+												<input type="text" name="CodigoGoogleAnalyticsNEW" size="12" value="<?php if (@$CodigoGoogleAnalytics!="") echo $CodigoGoogleAnalytics; ?>" class="CampoTexto" class="keyboardInput">
+										</td>
+									</tr>
 								</table>
 
 							</td>

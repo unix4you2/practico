@@ -15,10 +15,12 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 README
+core/objetos.php
 core/comunes.php
 core/conexiones.php
 core/ws_nucleo.php
 core/marco_abajo.php
+core/marco_conf.php
 core/sesion.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
@@ -42,6 +44,7 @@ LogCambios="
 * Fixed: Se mueven funciones de carga de URLs a un punto común para su uso en toda la herramienta
 * Added: Ahora el método o función cargar_url() está disponible para funciones personalizadas
 * Added: Se agregan estadisticas anonimas de uso de la herramienta para saber enfasis en mejoras
+* Added: Se permite hacer seguimiento al uso de la herramienta por medio de Google Analytics para quienes deseen configurar su ID de Google.
 "
 
 ########################################################################

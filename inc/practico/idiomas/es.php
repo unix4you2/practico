@@ -132,6 +132,7 @@
 	$MULTILANG_Version='Versi&oacute;n';
 	$MULTILANG_ZonaHoraria='Zona horaria';
 	$MULTILANG_VistaImpresion='Vista de impresion';
+	$MULTILANG_IDGABeacon='ID Google Analytics';
 	
 	//Ventana de login
 	$MULTILANG_TituloLogin='Ingreso al sistema';
