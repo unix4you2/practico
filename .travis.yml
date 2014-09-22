@@ -50,7 +50,9 @@ branches:
 #pwd
 
 # Ejecuta scripts antes de correr las pruebas, puede utilizar variables de entorno
-#before_script:
+before_script:
+  - "mysql -e 'create database practico;'"
+
 #  - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS hello_world_test;" -U postgres; fi
 #  - if [[ "$DB" == "pgsql" ]]; then psql -c "create database hello_world_test;" -U postgres; fi
 #  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS hello_world_test;" -uroot; fi

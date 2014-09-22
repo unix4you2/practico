@@ -268,7 +268,7 @@
 																	//Presenta la opcion
 																	echo '<option value="'.$elemento.'" '.$seleccion.'>'.$MULTILANG_NombrePlantilla.' (skin/'.$elemento.')</option>';
 																}
-														}		
+														}
 													?>
 												</select>
 												<br><br>
