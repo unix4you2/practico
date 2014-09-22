@@ -80,6 +80,7 @@
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='es';
 	$CaracteresCaptcha=4;
+	$CodigoGoogleAnalytics='UA-847800-9';
 	
 	// Tipo de motor usado para la autenticacion de usuarios
 	$Auth_TipoMotor='practico';
