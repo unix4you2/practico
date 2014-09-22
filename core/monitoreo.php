@@ -180,7 +180,7 @@
 			global $MULTILANG_MonLinea,$MULTILANG_MonCaido;
 			
 			//Verifica estado de la maquina y servicio
-			$estado_actual=ServicioOnline($Maquina["Host"],$Maquina["Puerto"]);
+			$estado_actual=ServicioOnline($Maquina["Host"],$Maquina["Puerto"],$Maquina["TipoMonitor"]);
 
 			if ($estado_actual)
 				$estado_final="<img src=".$Path_imagenes.$Imagen_ok." border=0 align=top ".$Tamano_iconos."> $MULTILANG_MonLinea";
@@ -195,6 +195,7 @@
 				}
 			
 			//Determina si a la maquina o servicio se le ha indicado un icono
+			$dos_puntos = ($Maquina["TipoMonitor"]=="socket")?":":"";
 			if ($Maquina["Icono"]!="")
 				$icono_maquina='<img src="'.$Path_imagenes.$Maquina["Icono"].'" border=0 '.$Tamano_iconos.'>';
 			else
@@ -212,7 +213,7 @@
 									<font size=2><b>'.$Maquina["Nombre"].'</b></font><br>
 								</td>
 							</tr></table>
-							('.$Maquina["Host"].':'.$Maquina["Puerto"].')
+							('.$Maquina["Host"].$dos_puntos.$Maquina["Puerto"].')
 						</td>
 					</tr>
 					<tr>
