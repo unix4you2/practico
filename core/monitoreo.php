@@ -195,7 +195,10 @@
 				}
 			
 			//Determina si a la maquina o servicio se le ha indicado un icono
-			$dos_puntos = ($Maquina["TipoMonitor"]=="socket")?":":"";
+			$Separador_DosPuntos = "";
+			if ($Maquina["TipoMonitor"]=="socket")
+				$Separador_DosPuntos = ":";
+
 			if ($Maquina["Icono"]!="")
 				$icono_maquina='<img src="'.$Path_imagenes.$Maquina["Icono"].'" border=0 '.$Tamano_iconos.'>';
 			else
@@ -213,7 +216,7 @@
 									<font size=2><b>'.$Maquina["Nombre"].'</b></font><br>
 								</td>
 							</tr></table>
-							('.$Maquina["Host"].$dos_puntos.$Maquina["Puerto"].')
+							('.$Maquina["Host"].$Separador_DosPuntos.$Maquina["Puerto"].')
 						</td>
 					</tr>
 					<tr>
