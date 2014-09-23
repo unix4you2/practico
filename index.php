@@ -120,7 +120,7 @@
 	limpiar_entradas(); // Evita XSS
 
 	// Valida llaves de paso y permisos de accion
-	if ($accion!= "" && $accion!="Iniciar_login" && $accion!="Terminar_sesion" && $accion!="Mensaje_cierre_sesion")
+	if ($accion!= "" && $accion!="Iniciar_login" && $accion!="Terminar_sesion" && $accion!="Mensaje_cierre_sesion" && $accion!="ver_monitoreo")
 		{
 			// Verifica autenticidad de la sesion mediante llave de paso
 			if (MD5($LlaveDePaso)!=$LlaveDePasoUsuario)

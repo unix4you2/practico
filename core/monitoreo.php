@@ -749,7 +749,7 @@ if ($accion=="ver_monitoreo")
 			//Busca cuantos milisegundos esperar segun la pagina definida y sus elementos
 			$resultado=ejecutar_sql("SELECT SUM(milisegundos_lectura) as total_espera FROM ".$TablasCore."monitoreo WHERE pagina='$PaginaMonitoreo' ");
 			$registro = $resultado->fetch();
-			$MilisegundosPagina=$registro["total_espera"];			
+			$MilisegundosPagina=$registro["total_espera"];
 		?>
 
 		<script language="JavaScript">
