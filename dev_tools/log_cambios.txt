@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
 VersionCompatibleAno="14"
-VersionCompatibleMes="8"
+VersionCompatibleMes="9"
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
 VersionFinalAno="14"
-VersionFinalMes="9"
+VersionFinalMes="911"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version
@@ -14,7 +14,9 @@ ArchivoVersion=" inc/version_actual.txt "
 
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
-README
+README.md
+CHANGELOG.md
+index.php
 core/comunes.php
 core/formularios.php
 core/informes.php
@@ -39,16 +41,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Soporte a login basado en sockets para servidores sin cURL o allow_urlfopen activado
-* Added: Actualizada clase OAuth
-* Added: Actualización de scripts de construccion
-* Added: Soporte para Travis
-* Added: Soporte para Heroku
-* Added: Se cambia el método para buscar nuevas actualizaciones a la función interna
-* Fixed: Se mueven funciones de carga de URLs a un punto común para su uso en toda la herramienta
-* Added: Ahora el método o función cargar_url() está disponible para funciones personalizadas
-* Added: Se agregan estadisticas anonimas de uso de la herramienta para saber enfasis en mejoras
-* Added: Se permite hacer seguimiento al uso de la herramienta por medio de Google Analytics para quienes deseen configurar su ID de Google.
+
 "
 
 ########################################################################

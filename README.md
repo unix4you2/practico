@@ -38,7 +38,7 @@ Practico es una herramienta de codigo abierto para el diseño automatico de apli
 ## Documentación para desarrolladores
 Junto con un manual completo en formato Google Docs y puede ser encontrada en el sitio web sobre el enlace del menú superior "Documentación" o en:
 
- * http://www.practico.org/documentacion
+ * https://github.com/unix4you2/practico/wiki
 
 ### Ideas y puntos de contacto
 
