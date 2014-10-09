@@ -7,7 +7,17 @@
             |___/ 
 ```
 
-
+## Versión 14.9 (2014-10-07)
+* Added: Soporte a login basado en sockets para servidores sin cURL o allow_urlfopen activado
+* Added: Actualizada clase OAuth
+* Added: Actualización de scrips de construccion
+* Added: Soporte para travis
+* Added: Soporte para heroku
+* Added: Se cambia el método para buscar nuevas actualizaciones a la función interna
+* Fixed: Se mueven funciones de carga de URLs a un punto común para su uso en toda la herramienta
+* Added: Ahora el método o función cargar_url() está disponible para funciones personalizadas
+* Added: Se agregan estadisticas anonimas de uso de la herramienta para saber enfasis en mejoras
+* Added: Se permite hacer seguimiento al uso de la herramienta por medio de Google Analytics para quienes deseen configurar su ID de Google.
 
 ## Versión 14.8 (2014-08-07)
 * Added: Adicion de control de datos para captura de imágenes desde la webcam en diseño de formularios

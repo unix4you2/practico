@@ -15,13 +15,16 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 README
-core/objetos.php
 core/comunes.php
-core/conexiones.php
-core/monitoreo.php
-core/ws_nucleo.php
+core/formularios.php
+core/informes.php
 core/marco_abajo.php
 core/marco_conf.php
+core/ws_funciones.php
+core/ws_nucleo.php
+core/objetos.php
+core/conexiones.php
+core/monitoreo.php
 core/sesion.php
 inc/practico/idiomas/es.php
 inc/practico/idiomas/en.php
@@ -38,9 +41,9 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 * Added: Soporte a login basado en sockets para servidores sin cURL o allow_urlfopen activado
 * Added: Actualizada clase OAuth
-* Added: Actualización de scrips de construccion
-* Added: Soporte para travis
-* Added: Soporte para heroku
+* Added: Actualización de scripts de construccion
+* Added: Soporte para Travis
+* Added: Soporte para Heroku
 * Added: Se cambia el método para buscar nuevas actualizaciones a la función interna
 * Fixed: Se mueven funciones de carga de URLs a un punto común para su uso en toda la herramienta
 * Added: Ahora el método o función cargar_url() está disponible para funciones personalizadas
