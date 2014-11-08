@@ -2805,7 +2805,9 @@
 									echo $objeto_formateado;
 								echo '</td></tr></table>';
 								
-								//echo @$registro_datos_formulario;
+
+								//echo $registro_campos["formulario_campo_vinculado"];
+								//echo @$registro_datos_formulario[$registro_campos["formulario_campo_vinculado"]];
 								
 								
 							}
