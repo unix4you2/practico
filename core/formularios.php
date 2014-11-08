@@ -491,8 +491,8 @@
 			if (@$valor_unico=="on") $valor_unico=1; else $valor_unico=0;
 			if (@$ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
 			$tipo_objeto=$tipo;
-			if ($titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error=$MULTILANG_ErrFrmCampo1;
-			if ($campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error=$MULTILANG_ErrFrmCampo2;
+			if ($titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm" && $tipo_objeto!="form_consulta") ) $mensaje_error=$MULTILANG_ErrFrmCampo1;
+			if ($campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm" && $tipo_objeto!="form_consulta") ) $mensaje_error=$MULTILANG_ErrFrmCampo2;
 			if ($mensaje_error=="")
 				{
 					//Genera la lista de campos a ser actualizados desde la definicion de tabla para no olvidar ninguno
@@ -553,14 +553,14 @@
 
 			if (@$valor_unico=="on") $valor_unico=1; else $valor_unico=0;
 			if (@$ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
-			if (@$titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error=$MULTILANG_ErrFrmCampo1;
-			if (@$campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm") ) $mensaje_error=$MULTILANG_ErrFrmCampo2;
+			if (@$titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm" && $tipo_objeto!="form_consulta") ) $mensaje_error=$MULTILANG_ErrFrmCampo1;
+			if (@$campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm" && $tipo_objeto!="form_consulta") ) $mensaje_error=$MULTILANG_ErrFrmCampo2;
 
 			if ($mensaje_error=="")
 				{
 					// Define la consulta de insercion del nuevo campo
-					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-					ejecutar_sql_unaria($consulta_insercion,"$tipo_objeto$_SeparadorCampos_$titulo$_SeparadorCampos_$campo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$formulario$_SeparadorCampos_$peso$_SeparadorCampos_$columna$_SeparadorCampos_$obligatorio$_SeparadorCampos_$visible$_SeparadorCampos_$valor_predeterminado$_SeparadorCampos_$validacion_datos$_SeparadorCampos_$etiqueta_busqueda$_SeparadorCampos_$ajax_busqueda$_SeparadorCampos_$valor_unico$_SeparadorCampos_$solo_lectura$_SeparadorCampos_$teclado_virtual$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$barra_herramientas$_SeparadorCampos_$fila_unica$_SeparadorCampos_$lista_opciones$_SeparadorCampos_$origen_lista_opciones$_SeparadorCampos_$origen_lista_valores$_SeparadorCampos_$valor_etiqueta$_SeparadorCampos_$url_iframe$_SeparadorCampos_$objeto_en_ventana$_SeparadorCampos_$informe_vinculado$_SeparadorCampos_$maxima_longitud$_SeparadorCampos_$valor_minimo$_SeparadorCampos_$valor_maximo$_SeparadorCampos_$valor_salto$_SeparadorCampos_$formato_salida$_SeparadorCampos_$plantilla_archivo$_SeparadorCampos_$peso_archivo$_SeparadorCampos_$tamano_pincel$_SeparadorCampos_$color_trazo");
+					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					ejecutar_sql_unaria($consulta_insercion,"$tipo_objeto$_SeparadorCampos_$titulo$_SeparadorCampos_$campo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$formulario$_SeparadorCampos_$peso$_SeparadorCampos_$columna$_SeparadorCampos_$obligatorio$_SeparadorCampos_$visible$_SeparadorCampos_$valor_predeterminado$_SeparadorCampos_$validacion_datos$_SeparadorCampos_$etiqueta_busqueda$_SeparadorCampos_$ajax_busqueda$_SeparadorCampos_$valor_unico$_SeparadorCampos_$solo_lectura$_SeparadorCampos_$teclado_virtual$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$barra_herramientas$_SeparadorCampos_$fila_unica$_SeparadorCampos_$lista_opciones$_SeparadorCampos_$origen_lista_opciones$_SeparadorCampos_$origen_lista_valores$_SeparadorCampos_$valor_etiqueta$_SeparadorCampos_$url_iframe$_SeparadorCampos_$objeto_en_ventana$_SeparadorCampos_$informe_vinculado$_SeparadorCampos_$maxima_longitud$_SeparadorCampos_$valor_minimo$_SeparadorCampos_$valor_maximo$_SeparadorCampos_$valor_salto$_SeparadorCampos_$formato_salida$_SeparadorCampos_$plantilla_archivo$_SeparadorCampos_$peso_archivo$_SeparadorCampos_$tamano_pincel$_SeparadorCampos_$color_trazo$_SeparadorCampos_$formulario_vinculado$_SeparadorCampos_$formulario_campo_vinculo$_SeparadorCampos_$formulario_campo_foraneo");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea campo $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
@@ -696,6 +696,7 @@ if ($accion=="editar_formulario")
 					if (tipo_objeto_activo=="archivo_adjunto")   VisualizarCampos("1,2,7,8,9,17,28,29");
 					if (tipo_objeto_activo=="objeto_canvas")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,30,31");
 					if (tipo_objeto_activo=="objeto_camara")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,31");
+					if (tipo_objeto_activo=="form_consulta")   VisualizarCampos("9,17,24,32,33,34");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -1391,6 +1392,57 @@ if ($accion=="editar_formulario")
 							</tr>							
 							</table>
 						</div>
+
+
+						<div id='campo32' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right"><?php echo $MULTILANG_FrmFormulario; ?>:</td>
+								<td width="400" >
+									<select  name="formulario_vinculado" class="Combos">
+									<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+									<?php
+										$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario ORDER BY titulo");
+										while($registro_formularios = $consulta_forms->fetch())
+											{
+												$seleccion_campo="";
+												if ($registro_campo_editar["formulario_vinculado"]==$registro_formularios["id"])
+													$seleccion_campo="SELECTED";
+												echo '<option value="'.$registro_formularios["id"].'" '.$seleccion_campo.'>(Id.'.$registro_informes["id"].') '.$registro_formularios["titulo"].'</option>';
+											}
+									?>
+									</select>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+
+						<div id='campo33' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right"><?php echo $MULTILANG_FrmCampo; ?></td>
+								<td width="400" >
+									<input type="text" name="formulario_campo_vinculo" size="20" class="CampoTexto" value="<?php echo @$registro_campo_editar["formulario_campo_vinculo"]; ?>">
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesCampoVinculo; ?>"><img src="img/icn_10.gif" border=0></a>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+
+						<div id='campo34' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right"><?php echo $MULTILANG_FrmCampo; ?></td>
+								<td width="400" >
+									<input type="text" name="formulario_campo_foraneo" size="20" class="CampoTexto" value="<?php echo @$registro_campo_editar["formulario_campo_foraneo"]; ?>">
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesCampoForaneo; ?>"><img src="img/icn_10.gif" border=0></a>
+								</td>
+							</tr>
+							</table>
+						</div>
+
 
 					<?php
 						//Despues de agregar todos los parametros de campos, Si se detecta que es edicion de un campo se llama a la funcion de visualizacion de campos especificos

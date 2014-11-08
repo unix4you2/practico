@@ -42,14 +42,16 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Se introducen los subformularios en modo de consulta recomendados para solo consulta.  Todos sus campos deberian estar en modo de etiqueta.
+* Added: Se introducen los subformularios en modo de consulta recomendados para solo consulta.  Todos sus campos deberian estar en modo de etiqueta Aunque el sistema permite cualquier tipo por ahora.
 * Fixed: Modulo de chat actualizado.  Versiones anteriores no parchaban correctamente los cambios de este modulo
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-
+ALTER TABLE core_formulario_objeto ADD COLUMN formulario_vinculado INT(10) NULL DEFAULT NULL;
+ALTER TABLE core_formulario_objeto ADD COLUMN formulario_campo_vinculo VARCHAR(250) NULL DEFAULT '';
+ALTER TABLE core_formulario_objeto ADD COLUMN formulario_campo_foraneo VARCHAR(250) NULL DEFAULT '';
 "
 
 ########################################################################

@@ -358,6 +358,9 @@
 	$MULTILANG_FrmURL='IFrame URL';
 	$MULTILANG_FrmDesURL='Enter the address of the page that will be embedded in the IFrame';
 	$MULTILANG_FrmInforme='Linked report';
+	$MULTILANG_FrmFormulario='Linked Subform';
+	$MULTILANG_FrmDesCampoVinculo='Put here the local fields name (parent form field) to be used for search data in the sub-form';
+	$MULTILANG_FrmDesCampoForaneo='Put here the Foraign filed from the subform to be used to compare or search data in the local field to show data.';
 	$MULTILANG_FrmVentana='Create a window for the object?';
 	$MULTILANG_FrmDesVentana='It is NOT recommended to activate this field when you want to embed GRAPHIC type reports';
 	$MULTILANG_FrmLongMaxima='Maximum length';

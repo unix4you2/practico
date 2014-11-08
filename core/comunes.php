@@ -2743,6 +2743,8 @@
 													if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
 													if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
 													if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
+													//Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
+													if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],"");
 
 													//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 													if ($registro_campos["tipo"]!="informe")
@@ -2792,6 +2794,9 @@
 								if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
 								if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
 								if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
+								//Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
+								if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],"");
+
 								//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 								if ($registro_campos["tipo"]!="informe")
 									echo $objeto_formateado;
