@@ -2747,7 +2747,7 @@
 													if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],"");
 
 													//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
-													if ($registro_campos["tipo"]!="informe")
+													if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
 														echo $objeto_formateado;
 													// Cierra la fila y celda donde se puso el objeto
 													echo '</td></tr>';
@@ -2798,7 +2798,7 @@
 								if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],"");
 
 								//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
-								if ($registro_campos["tipo"]!="informe")
+								if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
 									echo $objeto_formateado;
 								echo '</td></tr></table>';
 							}
