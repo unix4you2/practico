@@ -276,6 +276,7 @@
 	$MULTILANG_FrmTipo12='Archivo adjunto';
 	$MULTILANG_FrmTipo13='Canvas (Area de dibujo - HTML5)';
 	$MULTILANG_FrmTipo14='Canvas (Captura Webcam - HTML5)';
+	$MULTILANG_FrmTipo15='SubFormulario (Para consulta en Solo lectura)';
 	$MULTILANG_FrmTipoPincel='Tama&ntilde;o del pincel';
 	$MULTILANG_FrmTipoColor='Color del trazo';
 	$MULTILANG_FrmTipoAdvertencia='<font color=yellow>Este tipo de controles deberia ser almacenado en su tabla dentro de campos de texto largo/ilimitado</font>';

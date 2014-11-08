@@ -20,6 +20,7 @@ index.php
 core/comunes.php
 core/formularios.php
 core/informes.php
+core/marco_arriba.php
 core/marco_abajo.php
 core/marco_conf.php
 core/ws_funciones.php
@@ -28,9 +29,9 @@ core/objetos.php
 core/conexiones.php
 core/monitoreo.php
 core/sesion.php
-inc/practico/idiomas/es.php
-inc/practico/idiomas/en.php
+inc/practico/idiomas/*
 inc/practico/def_basedatos.php
+inc/chat/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -41,7 +42,8 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-
+* Added: Se introducen los subformularios en modo de consulta recomendados para solo consulta.  Todos sus campos deberian estar en modo de etiqueta.
+* Fixed: Modulo de chat actualizado.  Versiones anteriores no parchaban correctamente los cambios de este modulo
 "
 
 ########################################################################

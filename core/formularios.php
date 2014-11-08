@@ -754,7 +754,7 @@ if ($accion=="editar_formulario")
 									</optgroup>
 									<optgroup label="<?php echo $MULTILANG_FrmTipoTit3; ?>">
 										<option value="informe"         <?php if (@$registro_campo_editar["tipo"]=="informe")         echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo8; ?></option>
-										<!--<option value="frm">Formulario anidado</option>-->
+										<option value="form_consulta"	  <?php if (@$registro_campo_editar["tipo"]=="form_consulta")   echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo15; ?></option>
 									</optgroup>
 								</select>
 								<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>

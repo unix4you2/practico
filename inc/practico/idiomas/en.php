@@ -279,6 +279,7 @@
 	$MULTILANG_FrmTipo12='Archivo adjunto';
 	$MULTILANG_FrmTipo13='Canvas (Drawing area - HTML5)';
 	$MULTILANG_FrmTipo14='Canvas (Webcam capture - HTML5)';
+	$MULTILANG_FrmTipo15='SubForm (To query and ReadOnly)';
 	$MULTILANG_FrmTipoPincel='Brush size';
 	$MULTILANG_FrmTipoColor='Line color';
 	$MULTILANG_FrmTipoAdvertencia='<font color=yellow>This kind of data controls should be stored in your table into a long text or unlimited field</font>';
