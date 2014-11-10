@@ -1,13 +1,13 @@
 ![PRACTICO](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/LogoHorizontal.png)
 
 [![Desplegar](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)    [![HackPad](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/hackpad.png)](https://practico.hackpad.com/)  [![Build Status](https://travis-ci.org/unix4you2/practico.svg?branch=master)](https://travis-ci.org/unix4you2/practico)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/unix4you2/practico?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Practico es una herramienta de codigo abierto para el diseño automatico de aplicaciones web de manera agil y sin digitar codigo
 
 ![Clonacion de aplicaciones](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/slide1.png)
 
 ## Características
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/unix4you2/practico?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
  - Escrito completamente en PHP, HTML y Javascript
  - Interfaz gráfica de usuario
