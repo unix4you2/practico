@@ -49,6 +49,7 @@ LogCambios="
 * Added: Nuevo parámetro permite determinar si los forms cuentan con etiquetas FORM o no, para permitir así anidar múltiples formularios para construir sólo uno como derivado
 * Fixed: ID de formulario no es mostrado durante su seleccion en el diseño de campos
 * Fixed: Monitoreo presentaba salto de linea aún cuando se le indique un valor de cero.
+* Added: Se simplifica la creacion de menues e informes eliminando los niveles de usuario.  Ahora predeterminado en todos los usuarios.
 "
 
 ########################################################################
