@@ -112,7 +112,7 @@
 			else
 				{
 					$exec = exec("ping -c 1 -s 64 -t 64 ".$ip);
-					$expandidos_inicial=explode("=", $exec );
+					$expandidos_inicial=explode("=", $exec ); //1
 					$puntero_final = end($expandidos_inicial);
 					$array = explode("/", $puntero_final );
 					return ceil($array[1]) . 'ms';
