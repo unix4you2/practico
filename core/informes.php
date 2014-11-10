@@ -1395,6 +1395,8 @@ if ($accion=="editar_informe")
 			<?php abrir_ventana($MULTILANG_InfParam,'f2f2f2',''); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="actualizar_informe">
+			<input type="Hidden" name="nivel_usuario" value="-1">
+
 			<input type="Hidden" name="id" value="<?php echo $registro_informe['id']; ?>">
 
 				<table class="TextosVentana">
@@ -1417,6 +1419,7 @@ if ($accion=="editar_informe")
 							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesCateg; ?>"><img src="img/icn_10.gif" border=0></a>
 						</td>
 					</tr>
+					<!--
 					<tr>
 						<td align="RIGHT" valign="TOP"><strong><?php echo $MULTILANG_InfNivelUsuario; ?></strong></td>
 						<td>
@@ -1431,6 +1434,7 @@ if ($accion=="editar_informe")
 							<a href="#" title="<?php echo $MULTILANG_InfTitNivel; ?>" name="<?php echo $MULTILANG_InfDesNivel; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
+					-->
 					<tr>
 						<td align="right"><?php echo $MULTILANG_FrmImagen; ?></td>
 						<td>
@@ -1621,6 +1625,7 @@ if ($accion=="administrar_informes")
 			<?php abrir_ventana($MULTILANG_InfTituloAgr,'f2f2f2',''); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_informe">
+			<input type="Hidden" name="nivel_usuario" value="-1">
 			<div align=center>
 
 			<br><?php echo $MULTILANG_InfDetalles; ?>:
@@ -1645,6 +1650,7 @@ if ($accion=="administrar_informes")
 							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesCateg; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
+					<!--
 					<tr>
 						<td align="RIGHT" valign="TOP"><strong><?php echo $MULTILANG_InfNivelUsuario; ?></strong></td>
 						<td>
@@ -1659,6 +1665,7 @@ if ($accion=="administrar_informes")
 							<a href="#" title="<?php echo $MULTILANG_InfTitNivel; ?>" name="<?php echo $MULTILANG_InfDesNivel; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 						</td>
 					</tr>
+					-->
 					<tr>
 						<td align="right"><?php echo $MULTILANG_FrmImagen; ?></td>
 						<td>

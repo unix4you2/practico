@@ -573,6 +573,7 @@ if ($accion=="administrar_menu")
 		<div align="center">
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="hidden" name="accion" value="guardar_menu">
+			<input type="hidden" name="nivel_usuario" value="-1">
 			<br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_MnuAgregar; ?></b></font>
 			<table border="0" cellspacing="10" cellpadding="0" class="TextosVentana"><tr>
 				<td valign="TOP" align=center>
@@ -672,20 +673,6 @@ if ($accion=="administrar_menu")
 							<td><input class="CampoTexto" type="text" name="comando" size="30" maxlength="250" class="texto_01">
 								<a href='javascript:AbrirPopUp("FormularioObjetos");' title="<?php echo $MULTILANG_SeleccioneUno.' '.$MULTILANG_MnuObjeto; ?>">[...]</a>
 								<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT" valign="TOP"><strong><?php echo $MULTILANG_InfNivelUsuario; ?></strong></td><td width="10"></td>
-							<td>
-								<select  name="nivel_usuario" id="nivel_usuario" class="Combos">
-									<option value="-1"><?php echo $MULTILANG_InfTodoUsuario; ?></option>
-									<option value="1">&#9733;</option>
-									<option value="2">&#9733;&#9733;</option>
-									<option value="3">&#9733;&#9733;&#9733;</option>
-									<option value="4">&#9733;&#9733;&#9733;&#9733;</option>
-									<option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
-								</select>
-								<a href="#" title="<?php echo $MULTILANG_MnuTitNivel; ?>" name="<?php echo $MULTILANG_MnuDesNivel; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
 							</td>
 						</tr>
 					</table>

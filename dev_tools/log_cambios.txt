@@ -23,6 +23,7 @@ core/informes.php
 core/marco_arriba.php
 core/marco_abajo.php
 core/marco_conf.php
+core/menus.php
 core/ws_funciones.php
 core/ws_nucleo.php
 core/objetos.php
