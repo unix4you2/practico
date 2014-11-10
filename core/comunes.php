@@ -2585,6 +2585,7 @@
 		en_ventana - Opcional, determina si el formulario es cargado en una ventana o directamente sobre el escritorio
 		campobase - Opcional, indica el campo sobre el cual se deben realizar busquedas para el cargue automatico de campos del formulario desde la base de datos
 		valorbase - Opcional, indica el valor que sera buscado sobre el campobase para encontrar los valores de cada objeto en el formulario
+		anular_form - Opcional, indica si las etiquetas del formulario HTML deben ser eliminadas y agregar los campos crudos dentro del form
 
 	(start code)
 		SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'
@@ -2747,7 +2748,7 @@
 													if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
 													if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
 													//Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
-													if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],"",1);
+													if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_vinculo"],@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]],1);
 
 													//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 													if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
@@ -2798,18 +2799,12 @@
 								if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
 								if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
 								//Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
-								if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],"",1);
+								if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_vinculo"],@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]],1);
 
 								//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 								if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
 									echo $objeto_formateado;
 								echo '</td></tr></table>';
-								
-
-								//echo $registro_campos["formulario_campo_vinculado"];
-								//echo @$registro_datos_formulario[$registro_campos["formulario_campo_vinculado"]];
-								
-								
 							}
 
 						//Actualiza limite inferior para siguiente lista de campos

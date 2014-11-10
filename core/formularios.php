@@ -1408,7 +1408,7 @@ if ($accion=="editar_formulario")
 												$seleccion_campo="";
 												if ($registro_campo_editar["formulario_vinculado"]==$registro_formularios["id"])
 													$seleccion_campo="SELECTED";
-												echo '<option value="'.$registro_formularios["id"].'" '.$seleccion_campo.'>(Id.'.$registro_informes["id"].') '.$registro_formularios["titulo"].'</option>';
+												echo '<option value="'.$registro_formularios["id"].'" '.$seleccion_campo.'>(Id.'.$registro_formularios["id"].') '.$registro_formularios["titulo"].'</option>';
 											}
 									?>
 									</select>
