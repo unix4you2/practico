@@ -46,6 +46,7 @@ LogCambios="
 * Fixed: Modulo de chat actualizado.  Versiones anteriores no parchaban correctamente los cambios de este modulo
 * Added: Nuevo parámetro permite determinar si los forms cuentan con etiquetas FORM o no, para permitir así anidar múltiples formularios para construir sólo uno como derivado
 * Fixed: ID de formulario no es mostrado durante su seleccion en el diseño de campos
+* Fixed: Monitoreo presentaba salto de linea aún cuando se le indique un valor de cero.
 "
 
 ########################################################################

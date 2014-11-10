@@ -131,6 +131,9 @@ CREATE TABLE core_formulario_objeto (
   peso_archivo int(10),
   tamano_pincel int(2),
   color_trazo varchar(20) default '',
+  formulario_vinculado int(10),
+  formulario_campo_vinculo varchar(250) default '',
+  formulario_campo_foraneo varchar(250) default '',
   PRIMARY KEY  (id)
 );
 
