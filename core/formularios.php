@@ -2069,6 +2069,7 @@ if ($accion=="editar_formulario")
 	(start code)
 		DELETE FROM ".$TablasCore."formulario WHERE id='$formulario'
 		DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario'
+		DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario
 	(end)
 
 	Salida:
@@ -2081,6 +2082,7 @@ if ($accion=="editar_formulario")
 		{
 			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
 			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario=? ","$formulario");
+			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
 			auditar("Elimina formulario $formulario");
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_formularios"></form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
