@@ -112,7 +112,9 @@
 			else
 				{
 					$exec = exec("ping -c 1 -s 64 -t 64 ".$ip);
-					$array = explode("/", end(explode("=", $exec )) );
+					$expandidos_inicial=explode("=", $exec );
+					$puntero_final = end($expandidos_inicial);
+					$array = explode("/", $puntero_final );
 					return ceil($array[1]) . 'ms';
 				}
 		}
@@ -809,7 +811,7 @@ if ($accion=="ver_monitoreo")
 							//Evalua elementos tipo Maquina o host
 							if ($registro["tipo"]=="Maquina")
 								{
-									$Maquinas[]=array(Nombre => $registro["nombre"],	Host => $registro["host"],	Puerto => $registro["puerto"],		TipoMonitor=>$registro["tipo_ping"],	Icono=> $Imagen_generica,		CorreoAlerta=>$registro["correo_alerta"]);
+									$Maquinas[]=@array(Nombre => $registro["nombre"],	Host => $registro["host"],	Puerto => $registro["puerto"],		TipoMonitor=>$registro["tipo_ping"],	Icono=> $Imagen_generica,		CorreoAlerta=>$registro["correo_alerta"]);
 									PresentarEstadoMaquina($Maquinas[count($Maquinas)-1],$color_fondo_estado,$color_texto_estado);
 								}
 							//Evalua elementos tipo Comando shell
