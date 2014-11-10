@@ -7,6 +7,14 @@
             |___/ 
 ```
 
+## Versión 14.911 (2014-11-09)
+* Added: Se introducen los subformularios en modo de consulta recomendados para solo consulta.  Todos sus campos deberian estar en modo de etiqueta Aunque el sistema permite cualquier tipo por ahora.
+* Fixed: Modulo de chat actualizado.  Versiones anteriores no parchaban correctamente los cambios de este modulo
+* Added: Nuevo parámetro permite determinar si los forms cuentan con etiquetas FORM o no, para permitir así anidar múltiples formularios para construir sólo uno como derivado
+* Fixed: ID de formulario no es mostrado durante su seleccion en el diseño de campos
+* Fixed: Monitoreo presentaba salto de linea aún cuando se le indique un valor de cero.
+* Added: Se simplifica la creacion de menues e informes eliminando los niveles de usuario.  Ahora predeterminado en todos los usuarios.
+
 ## Versión 14.9 (2014-10-07)
 * Added: Soporte a login basado en sockets para servidores sin cURL o allow_urlfopen activado
 * Added: Actualizada clase OAuth
