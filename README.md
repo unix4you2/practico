@@ -7,6 +7,7 @@ Practico es una herramienta de codigo abierto para el diseño automatico de apli
 ![Clonacion de aplicaciones](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/slide1.png)
 
 ## Características
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/unix4you2/practico?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
  - Escrito completamente en PHP, HTML y Javascript
  - Interfaz gráfica de usuario
