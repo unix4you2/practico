@@ -836,7 +836,7 @@ if ($accion=="ver_monitoreo")
 									echo '<iframe src="'.$registro["path"].'" width="'.$registro["ancho"].'" height="'.$registro["alto"].'"></iframe>';
 								}
 							//Agrega los saltos de linea
-							for ($i=0;$i<=$registro["saltos"];$i++) echo "<br>";
+							for ($i=0;$i<$registro["saltos"];$i++) echo "<br>";
 						}
 
 					// Si encuentra algun error en el monitoreo reproduce la alarma
