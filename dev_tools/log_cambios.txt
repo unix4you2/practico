@@ -29,6 +29,7 @@ core/objetos.php
 core/conexiones.php
 core/monitoreo.php
 core/sesion.php
+core/usuarios.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/chat/*
@@ -55,6 +56,7 @@ ScriptBasedatos="
 ALTER TABLE core_formulario_objeto ADD COLUMN formulario_vinculado INT(10) NULL DEFAULT NULL;
 ALTER TABLE core_formulario_objeto ADD COLUMN formulario_campo_vinculo VARCHAR(250) NULL DEFAULT '';
 ALTER TABLE core_formulario_objeto ADD COLUMN formulario_campo_foraneo VARCHAR(250) NULL DEFAULT '';
+ALTER TABLE core_usuario ADD COLUMN usuario_interno INT(1) NULL DEFAULT 0;
 "
 
 ########################################################################

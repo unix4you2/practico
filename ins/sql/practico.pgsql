@@ -26,6 +26,7 @@ CREATE TABLE core_usuario (
   correo varchar(200) NOT NULL default '',
   ultimo_acceso date NOT NULL default '20000101',
   llave_paso varchar(50) NOT NULL default 'd41d8cd98f00b204e9800998ecf8427e',
+  usuario_interno integer DEFAULT 0,
   PRIMARY KEY  (login)
 );
 

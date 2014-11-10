@@ -675,7 +675,7 @@
 	
 	//Usuarios
 	$MULTILANG_UsrCopia='Copia de permisos finalizada.  Por favor verifique a continuacion.';
-	$MULTILANG_UsrDesPW='Las contrase&ntilde;as con condiciones m&iacute;nimas de seguridad deben tener una longitud de <b>al menos 8 caracteres</b>, n&uacute;meros, letras en may&uacute;scula y en min&uacute;scula o s&iacute;mbolos permitidos como <font color=yellow># $ *</font>.  Para que su contrase&ntilde;a sea considerada segura por este sistema <b>debe cumplir al menos con un nivel de seguridad del 81%</b>';
+	$MULTILANG_UsrDesPW='Las contrase&ntilde;as con condiciones m&iacute;nimas de seguridad deben tener una longitud de <b>al menos 8 caracteres</b>, n&uacute;meros, letras en may&uacute;scula y en min&uacute;scula o s&iacute;mbolos permitidos como <font color=blue>$ *</font>.  Para que su contrase&ntilde;a sea considerada segura por este sistema <b>debe cumplir al menos con un nivel de seguridad del 81%</b>';
 	$MULTILANG_UsrCambioPW='Cambio de contrase&ntilde;a';
 	$MULTILANG_UsrAnteriorPW='Contrase&ntilde;a anterior';
 	$MULTILANG_UsrNuevoPW='Nueva contrase&ntilde;a';
@@ -708,6 +708,8 @@
 	$MULTILANG_UsrDesCorreo='Direcci&oacute;n electr&oacute;nica de posible uso para notificaciones autom&aacute;ticas del sistema en algunos m&oacute;dulos';
 	$MULTILANG_UsrEstado='Estado inicial';
 	$MULTILANG_UsrNivel='Nivel de acceso';
+	$MULTILANG_UsrInterno='Usuario interno?';
+	$MULTILANG_UsrDesInterno='Un usuario interno es aquel diferenciado para tareas especificas de la organizacion o empresa que implementa el ERP.  Asi pues, los usuarios son clasificados como internos o externos, siendo estos ultimos los asociados a los clientes o usuarios de afuera de nuestra organizacion que acceden a los servicios';
 	$MULTILANG_UsrTitNivel='Perfil inicial de seguridad';
 	$MULTILANG_UsrDesNivel='Perfil de seguridad del usuario.  CUIDADO:  Esta opci&oacute;n es diferente a los permisos individuales de usuario definidos por el disenador para los objetos por el creados.  Este perfil solamente aplica para las operaciones internas de Pr&aacute;ctico';
 	$MULTILANG_UsrAudit1='Seguimiento de operaciones (actualizando autom&aacute;ticamente cada 5 segundos)';

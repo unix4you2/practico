@@ -846,7 +846,7 @@ if ($accion=="permisos_usuario")
 					// Inserta datos del usuario
 					$clavemd5=MD5($clave);
 					$pasomd5=MD5($LlaveDePaso);
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$descripcion$_SeparadorCampos_$estado$_SeparadorCampos_$nivel$_SeparadorCampos_$correo$_SeparadorCampos_$fecha_operacion$_SeparadorCampos_$pasomd5");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$descripcion$_SeparadorCampos_$estado$_SeparadorCampos_$nivel$_SeparadorCampos_$correo$_SeparadorCampos_$fecha_operacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno");
 					auditar("Agrega usuario $login para $nombre");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
@@ -895,6 +895,7 @@ if ($accion=="agregar_usuario")
 		<!-- VALOR MD5 PARA VACIO:  d41d8cd98f00b204e9800998ecf8427e-->
 					<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 					<input type="hidden" name="accion" value="guardar_usuario">
+					<input type="hidden" name="nivel" value="5">
 					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;"  class="TextosVentana">
 						<tr>
 							<td align="RIGHT"><?php echo $MULTILANG_UsrLogin; ?></td><td width="20"></td>
@@ -943,11 +944,13 @@ if ($accion=="agregar_usuario")
 								</select>
 							</td>
 						</tr>
+						<!--
 						<tr>
 							<td align="RIGHT" valign="TOP"><strong><?php echo $MULTILANG_UsrNivel; ?></strong></td><td width="10"></td>
-							<td>
+							<td>-->
 								<!-- Caracteres UNICODE para el combo
 									Revisar: http://www.okelmann.com/homepage/unicode.htm -->
+						<!--
 								<select  name="nivel" id="nivel"  style="font-family: Verdana, Tahoma, Arial; font-weight: normal; font-size: 10px; width: 100px; background-color: #FFFFFF; color: #000000;">
 									<option value="1">&#9733;</option>
 									<option value="2">&#9733;&#9733;</option>
@@ -956,6 +959,17 @@ if ($accion=="agregar_usuario")
 									<option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
 								</select>
 								<a href="#" title="<?php echo $MULTILANG_UsrTitNivel; ?>" name="<?php echo $MULTILANG_UsrDesNivel; ?>"><img src="img/icn_10.gif" border=0></a>
+							</td>
+						</tr>
+						-->
+						<tr>
+							<td align="RIGHT"><strong><?php echo $MULTILANG_UsrInterno; ?></strong></td><td width="10"></td>
+							<td>
+								<select  name="usuario_interno" id="usuario_interno"  class="selector_01">
+									<option value="1">Si</option>
+									<option value="0">No</option>
+								</select>
+								<a href="#" title="<?php echo $MULTILANG_UsrTitNivel; ?>" name="<?php echo $MULTILANG_UsrDesInterno; ?>"><img src="img/icn_10.gif" border=0></a>
 							</td>
 						</tr>
 						<tr>

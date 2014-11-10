@@ -678,7 +678,7 @@
 
 	//Usuarios
 	$MULTILANG_UsrCopia='Permissions copy completed. Please check below.';
-	$MULTILANG_UsrDesPW='Passwords with minimum safety conditions should have a length of <b>at least 8 characters</b>, numbers, uppercase and lowercase symbols such as <font color=yellow># $ * </font>. To have your password is considered safe by this system <b> must meet at least one security level of 81%</b>';
+	$MULTILANG_UsrDesPW='Passwords with minimum safety conditions should have a length of <b>at least 8 characters</b>, numbers, uppercase and lowercase symbols such as <font color=blue>$ * </font>. To have your password is considered safe by this system <b> must meet at least one security level of 81%</b>';
 	$MULTILANG_UsrCambioPW='Change Password';
 	$MULTILANG_UsrAnteriorPW='Old Password';
 	$MULTILANG_UsrNuevoPW='New password';
@@ -711,6 +711,8 @@
 	$MULTILANG_UsrDesCorreo='E-mail of possible use for automatic notifications system in some modules';
 	$MULTILANG_UsrEstado='Initial state';
 	$MULTILANG_UsrNivel='Access level';
+	$MULTILANG_UsrInterno='Internal user?';
+	$MULTILANG_UsrDesInterno='An internal user is for people who work inside the company that deploy the ERP or system.  An external user is for example for people that is from a customer or another company that login to the system';
 	$MULTILANG_UsrTitNivel='Initial safety profile';
 	$MULTILANG_UsrDesNivel='Users security profile. CAUTION: This option is different to individual user permissions defined by the designer for the created objects. This page only applies to the internal operations of Practico';
 	$MULTILANG_UsrAudit1='Tracking operations (automatically updated every 5 seconds)';
