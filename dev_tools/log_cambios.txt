@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
 VersionCompatibleAno="14"
-VersionCompatibleMes="9"
+VersionCompatibleMes="911"
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
 VersionFinalAno="14"
-VersionFinalMes="911"
+VersionFinalMes="912"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version
@@ -44,21 +44,13 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Se introducen los subformularios en modo de consulta recomendados para solo consulta.  Todos sus campos deberian estar en modo de etiqueta Aunque el sistema permite cualquier tipo por ahora.
-* Fixed: Modulo de chat actualizado.  Versiones anteriores no parchaban correctamente los cambios de este modulo
-* Added: Nuevo parámetro permite determinar si los forms cuentan con etiquetas FORM o no, para permitir así anidar múltiples formularios para construir sólo uno como derivado
-* Fixed: ID de formulario no es mostrado durante su seleccion en el diseño de campos
-* Fixed: Monitoreo presentaba salto de linea aún cuando se le indique un valor de cero.
-* Added: Se simplifica la creacion de menues e informes eliminando los niveles de usuario.  Ahora predeterminado en todos los usuarios.
+
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-ALTER TABLE core_formulario_objeto ADD COLUMN formulario_vinculado INT(10) NULL DEFAULT NULL;
-ALTER TABLE core_formulario_objeto ADD COLUMN formulario_campo_vinculo VARCHAR(250) NULL DEFAULT '';
-ALTER TABLE core_formulario_objeto ADD COLUMN formulario_campo_foraneo VARCHAR(250) NULL DEFAULT '';
-ALTER TABLE core_usuario ADD COLUMN usuario_interno INT(1) NULL DEFAULT 0;
+
 "
 
 ########################################################################
