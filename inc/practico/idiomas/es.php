@@ -276,6 +276,7 @@
 	$MULTILANG_FrmTipo12='Archivo adjunto';
 	$MULTILANG_FrmTipo13='Canvas (Area de dibujo - HTML5)';
 	$MULTILANG_FrmTipo14='Canvas (Captura Webcam - HTML5)';
+	$MULTILANG_FrmTipo15='SubFormulario (Para consulta en Solo lectura)';
 	$MULTILANG_FrmTipoPincel='Tama&ntilde;o del pincel';
 	$MULTILANG_FrmTipoColor='Color del trazo';
 	$MULTILANG_FrmTipoAdvertencia='<font color=yellow>Este tipo de controles deberia ser almacenado en su tabla dentro de campos de texto largo/ilimitado</font>';
@@ -354,6 +355,9 @@
 	$MULTILANG_FrmURL='URL para IFrame';
 	$MULTILANG_FrmDesURL='Ingrese la direcci&oacute;n de la p&aacute;gina que sera embebida en el marco';
 	$MULTILANG_FrmInforme='Informe vinculado';
+	$MULTILANG_FrmFormulario='Formulario vinculado';
+	$MULTILANG_FrmDesCampoVinculo='Indique el nombre del CAMPO DEL FORMULARIO PADRE que sera utilizado para tomar el valor y buscarlo en el sub-formulario para presentar sus datos.';
+	$MULTILANG_FrmDesCampoForaneo='Indique el nombre del CAMPO FORANEAO DEL SUB-FORMULARIO y sobre el cual se debe buscar el dato del campo local para ser enlazado y presentar sus datos';
 	$MULTILANG_FrmVentana='Ventana propia para el objeto?';
 	$MULTILANG_FrmDesVentana='No se recomienda activar este campo cuando desee empotrar informes de tipo GRAFICA';
 	$MULTILANG_FrmLongMaxima='Longitud m&aacute;xima';

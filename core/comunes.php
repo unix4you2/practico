@@ -2585,6 +2585,7 @@
 		en_ventana - Opcional, determina si el formulario es cargado en una ventana o directamente sobre el escritorio
 		campobase - Opcional, indica el campo sobre el cual se deben realizar busquedas para el cargue automatico de campos del formulario desde la base de datos
 		valorbase - Opcional, indica el valor que sera buscado sobre el campobase para encontrar los valores de cada objeto en el formulario
+		anular_form - Opcional, indica si las etiquetas del formulario HTML deben ser eliminadas y agregar los campos crudos dentro del form
 
 	(start code)
 		SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'
@@ -2603,7 +2604,7 @@
 	Ver tambien:
 		<cargar_informe>
 */
-		function cargar_formulario($formulario,$en_ventana=1,$campobase="",$valorbase="")
+		function cargar_formulario($formulario,$en_ventana=1,$campobase="",$valorbase="",$anular_form=0)
 		  {
 				global $ConexionPDO,$ArchivoCORE,$TablasCore,$PlantillaActiva;
 				global $_SeparadorCampos_;
@@ -2680,12 +2681,15 @@
 
 				//Inicia el formulario de datos
 				echo '
-					<div id="MARCO_IMPRESION">
-					<form name="datos" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="Hidden" name="accion" value="guardar_datos_formulario">
-					<input type="Hidden" name="formulario" value="'.$formulario.'">
-					<input type="Hidden" name="id_registro_datos" value="'.@$registro_datos_formulario["id"].'">
-					';
+					<div id="MARCO_IMPRESION">';
+				
+				//Si se quiere anular el formulario y su accion cuando se trata de un sub-formulario de consulta
+				if (!$anular_form)
+					echo'<form name="datos" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+						<input type="Hidden" name="accion" value="guardar_datos_formulario">
+						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="id_registro_datos" value="'.@$registro_datos_formulario["id"].'">
+						';
 
 				//Booleana que determina si se debe incluir el javascript de ckeditor
 				$existe_campo_textoformato=0;
@@ -2743,9 +2747,11 @@
 													if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
 													if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
 													if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
+													//Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
+													if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_vinculo"],@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]],1);
 
 													//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
-													if ($registro_campos["tipo"]!="informe")
+													if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
 														echo $objeto_formateado;
 													// Cierra la fila y celda donde se puso el objeto
 													echo '</td></tr>';
@@ -2792,8 +2798,11 @@
 								if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
 								if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
 								if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
+								//Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
+								if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_vinculo"],@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]],1);
+
 								//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
-								if ($registro_campos["tipo"]!="informe")
+								if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
 									echo $objeto_formateado;
 								echo '</td></tr></table>';
 							}
@@ -2874,12 +2883,12 @@
 				}
 
 			//Cierra todo el formulario
-			echo '</form>';
+			//Si se quiere anular el formulario y su accion cuando se trata de un sub-formulario de consulta
+			if (!$anular_form)
+				echo '</form>';
 			
 			//Carga las funciones JavaScript asociadas al formulario y llama la funcion FrmAutoRun()
 				echo '<script type="text/javascript">'.$registro_formulario["javascript"].' FrmAutoRun(); </script>';
-			
-			
 			
 			if ($en_ventana) cerrar_ventana();
 		  }
