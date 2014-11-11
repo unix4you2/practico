@@ -2008,6 +2008,16 @@
 
 			$salida.= '</select>';
 
+			// Muestra boton de busqueda cuando el campo sea usado para esto
+			if ($registro_campos["etiqueta_busqueda"]!="")
+				{
+					$salida.= '<input type="Button" class="BotonesEstado" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.valorbase.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.accion.value=\'cargar_objeto\';document.datos.submit()">';
+					$salida.= '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
+					$salida.= '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
+					$salida.= '<input type="Hidden" name="campobase" value="'.$registro_campos["campo"].'" >';
+					$salida.= '<input type="Hidden" name="valorbase" '.$cadena_valor.'>';
+				}
+
 			// Muestra indicadores de obligatoriedad o ayuda
 			if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="'.$MULTILANG_TitValorUnico.'" name="'.$MULTILANG_DesValorUnico.'"><img src="img/key.gif" border=0 border=0 align="absmiddle"></a>';
 			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><img src="img/icn_12.gif" border=0 align="absmiddle"></a>';
