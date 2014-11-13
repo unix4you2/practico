@@ -1958,7 +1958,7 @@
 	Ver tambien:
 		<cargar_formulario>
 */
-	function cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario)
+	function cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 		{
 			global $campobase,$valorbase;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
@@ -2621,10 +2621,12 @@
 				// Carga variables de definicion de tablas
 				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
 				global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion;
-
+				
 				// Busca datos del formulario
 				$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
-				$registro_formulario = $consulta_formulario->fetch();
+				$registro_formulario = @$consulta_formulario->fetch();
+				
+				
 
 				echo '
 				<script type="text/javascript">
@@ -2747,7 +2749,7 @@
 													if ($tipo_de_objeto=="texto_clave") $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
 													if ($tipo_de_objeto=="texto_largo") $objeto_formateado = @cargar_objeto_texto_largo($registro_campos,@$registro_datos_formulario);
 													if ($tipo_de_objeto=="texto_formato") { $objeto_formateado = @cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
-													if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = @cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario);
+													if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = @cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
 													if ($tipo_de_objeto=="lista_radio") $objeto_formateado = @cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
 													if ($tipo_de_objeto=="etiqueta") $objeto_formateado = @cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
 													if ($tipo_de_objeto=="url_iframe") $objeto_formateado = @cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
@@ -2758,7 +2760,7 @@
 													if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
 													if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
 													//Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
-													if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_vinculo"],@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]],1);
+													if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$valorbase,1);
 
 													//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 													if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
@@ -2798,7 +2800,7 @@
 								if ($tipo_de_objeto=="texto_clave") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
 								if ($tipo_de_objeto=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos,@$registro_datos_formulario);
 								if ($tipo_de_objeto=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
-								if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario);
+								if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
 								if ($tipo_de_objeto=="lista_radio") $objeto_formateado = cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
 								if ($tipo_de_objeto=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
 								if ($tipo_de_objeto=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
@@ -2809,7 +2811,7 @@
 								if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
 								if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
 								//Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
-								if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_vinculo"],@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]],1);
+								if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$valorbase,1);
 
 								//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 								if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")

@@ -9,7 +9,7 @@ VersionFinalAno="14"
 VersionFinalMes="912"
 
 #[Archivo de version]
-#Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version
+#Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
 ArchivoVersion=" inc/version_actual.txt "
 
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
@@ -33,7 +33,6 @@ core/sesion.php
 core/usuarios.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
-inc/chat/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -44,7 +43,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-
+* Fixed: Vinculos de subformularios
 "
 
 ########################################################################

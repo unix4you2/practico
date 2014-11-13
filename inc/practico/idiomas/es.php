@@ -356,8 +356,8 @@
 	$MULTILANG_FrmDesURL='Ingrese la direcci&oacute;n de la p&aacute;gina que sera embebida en el marco';
 	$MULTILANG_FrmInforme='Informe vinculado';
 	$MULTILANG_FrmFormulario='Formulario vinculado';
-	$MULTILANG_FrmDesCampoVinculo='Indique el nombre del CAMPO DEL FORMULARIO PADRE que sera utilizado para tomar el valor y buscarlo en el sub-formulario para presentar sus datos.';
-	$MULTILANG_FrmDesCampoForaneo='Indique el nombre del CAMPO FORANEAO DEL SUB-FORMULARIO y sobre el cual se debe buscar el dato del campo local para ser enlazado y presentar sus datos';
+	$MULTILANG_FrmDesCampoVinculo='Indique el nombre del CAMPO DEL FORMULARIO PADRE (el que esta disenando en este momento) que sera utilizado para tomar el valor y buscarlo en el sub-formulario para enlazar sus datos.';
+	$MULTILANG_FrmDesCampoForaneo='Indique el nombre del CAMPO FORANEAO DEL SUB-FORMULARIO (del formulario o tabla que alimenta el subformulario) y sobre el cual se debe buscar el dato del campo local para ser enlazado y presentar sus datos';
 	$MULTILANG_FrmVentana='Ventana propia para el objeto?';
 	$MULTILANG_FrmDesVentana='No se recomienda activar este campo cuando desee empotrar informes de tipo GRAFICA';
 	$MULTILANG_FrmLongMaxima='Longitud m&aacute;xima';
