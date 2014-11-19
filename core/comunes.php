@@ -3200,7 +3200,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					$resultado_columnas=ejecutar_sql($consulta);
 				
 					$numero_columnas=0;
-					foreach($resultado_columnas->fetch(PDO::FETCH_ASSOC) as $key=>$val)
+					foreach(@$resultado_columnas->fetch(PDO::FETCH_ASSOC) as $key=>$val)
 						{
 							$SalidaFinalInforme.= '<th align="LEFT">'.$key.'</th>';
 							$SalidaFinalInformePDF.= '<th align="LEFT">'.$key.'</th>';
