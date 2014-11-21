@@ -44,6 +44,9 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 * Fixed: Vinculos de subformularios
+* Added: Actualizar ahora verifica versiones estrictamente inferiores
+* Fixed: Corrección de scripts de instalación
+* Added: Se agrega la lista de tipos de dato específicos de motores MySQL y MariaDB cuando se configuran instalaciones de este tipo
 "
 
 ########################################################################
