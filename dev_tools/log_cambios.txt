@@ -33,6 +33,7 @@ core/sesion.php
 core/usuarios.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
+inc/font-awesome/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -47,6 +48,7 @@ LogCambios="
 * Added: Actualizar ahora verifica versiones estrictamente inferiores
 * Fixed: Corrección de scripts de instalación
 * Added: Se agrega la lista de tipos de dato específicos de motores MySQL y MariaDB cuando se configuran instalaciones de este tipo
+* Added: Preparación de Font-Awesome para futuros releases
 "
 
 ########################################################################

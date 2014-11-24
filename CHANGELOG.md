@@ -7,6 +7,13 @@
             |___/ 
 ```
 
+## Versión 14.912 (2014-11-24)
+* Fixed: Vinculos de subformularios
+* Added: Actualizar ahora verifica versiones estrictamente inferiores
+* Fixed: Corrección de scripts de instalación
+* Added: Se agrega la lista de tipos de dato específicos de motores MySQL y MariaDB cuando se configuran instalaciones de este tipo
+* Added: Preparación de Font-Awesome para futuros releases
+
 ## Versión 14.911 (2014-11-09)
 * Added: Se introducen los subformularios en modo de consulta recomendados para solo consulta.  Todos sus campos deberian estar en modo de etiqueta Aunque el sistema permite cualquier tipo por ahora.
 * Fixed: Modulo de chat actualizado.  Versiones anteriores no parchaban correctamente los cambios de este modulo

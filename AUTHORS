@@ -79,6 +79,14 @@ ElFinder
 	Developers: Alexey Sukhotin <strogg@yandex.ru>, Naoki Sawada <hypweb@gmail.com>
 	Icons: [PixelMixer](http://pixelmixer.ru), [Yusuke Kamiyamane](http://p.yusukekamiyamane.com)
 
+Font-Awesome
+	Location: inc/font-awesome/fonts/*
+	Font License: SIL OFL 1.1
+	URL: http://scripts.sil.org/OFL
+	Location: Applies to all CSS and LESS files in the following directories: font-awesome/css/, font-awesome/less/, and font-awesome/scss/.
+	Code License: MIT License
+	URL: http://opensource.org/licenses/mit-license.html
+
 Tango Desktop Project:
 	Location: all files under img/tango_*:
 	License: The Tango base icon theme is released to the Public Domain. 
