@@ -54,16 +54,31 @@
 	<meta name="generator" content="Practico <?php  $version = file("inc/version_actual.txt"); echo trim($version[0]); ?>" />
 	<meta name="description" content="Generador de aplicaciones web - www.practico.org" />
 
-	<title><?php echo $NombreRAD; ?> <?php echo trim($version[0]); ?></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    <!-- CSS de Bootstrap -->
+    <link href="inc/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <!-- librerías opcionales que activan el soporte de HTML5 para IE8 -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	<title><?php echo $NombreRAD; ?> <?php echo trim($version[0]); ?></title>
 	<script type="text/javascript" src="inc/practico/javascript/tooltips.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/validaform.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/popup.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/calendario.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/tecladovirtual.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/html5slider.js"></script>
+
+    <!-- Librería jQuery requerida por los plugins de JavaScript -->
 	<script type="text/javascript" src="inc/jquery/jquery-2.1.0.min.js"></script>
 	<script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>
+
+
 
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/general.css">
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/calendario.css">
