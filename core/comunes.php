@@ -1987,9 +1987,11 @@
 					$nombre_tabla_opciones = $nombre_tabla_opciones[0];
 					$campo_valores=$registro_campos["origen_lista_valores"];
 					$campo_opciones=$registro_campos["origen_lista_opciones"];
-
+					//Define si los registros a mostrar en la lista deben estar filtrados por alguna condicion
+					$condicion_filtrado_listas=$registro_campos["condicion_filtrado_listas"];
+					if ($condicion_filtrado_listas=="") $condicion_filtrado_listas="1";
 					// Consulta los campos para el tag select
-					$resultado_opciones=ejecutar_sql("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE 1 ORDER BY $campo_opciones");
+					$resultado_opciones=ejecutar_sql("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE $condicion_filtrado_listas ORDER BY $campo_opciones");
 					while ($registro_opciones = $resultado_opciones->fetch())
 						{
 							$opciones_lista[] = $registro_opciones["opciones"];
@@ -2198,9 +2200,11 @@
 					$nombre_tabla_opciones = $nombre_tabla_opciones[0];
 					$campo_valores=$registro_campos["origen_lista_valores"];
 					$campo_opciones=$registro_campos["origen_lista_opciones"];
-
+					//Define si los registros a mostrar en la lista deben estar filtrados por alguna condicion
+					$condicion_filtrado_listas=$registro_campos["condicion_filtrado_listas"];
+					if ($condicion_filtrado_listas=="") $condicion_filtrado_listas="1";
 					// Consulta los campos para el tag select
-					$resultado_opciones=ejecutar_sql("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE 1 ORDER BY $campo_opciones");
+					$resultado_opciones=ejecutar_sql("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE $condicion_filtrado_listas ORDER BY $campo_opciones");
 					while ($registro_opciones = $resultado_opciones->fetch())
 						{
 							$opciones_lista[] = $registro_opciones["opciones"];

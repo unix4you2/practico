@@ -558,9 +558,20 @@
 
 			if ($mensaje_error=="")
 				{
+					//Genera la lista de campos a ser insertados desde la definicion de tabla para no olvidar ninguno
+					$ListaCampos=explode(",",$ListaCamposSinID_formulario_objeto);
+					$ListaInterrogantes="";
+					for ($i=0; $i<count($ListaCampos);$i++)
+						{
+							$ListaInterrogantes.="?,";
+							@$ListaCamposyValores.=$$ListaCampos[$i].$_SeparadorCampos_;
+						}
+					//Elimina partes finales innecesarias (coma y separador de campos)
+					$ListaInterrogantes = substr ($ListaInterrogantes, 0, - 1);
+					$ListaCamposyValores = substr ($ListaCamposyValores, 0, strlen($_SeparadorCampos_)*(-1));
 					// Define la consulta de insercion del nuevo campo
-					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-					ejecutar_sql_unaria($consulta_insercion,"$tipo_objeto$_SeparadorCampos_$titulo$_SeparadorCampos_$campo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$formulario$_SeparadorCampos_$peso$_SeparadorCampos_$columna$_SeparadorCampos_$obligatorio$_SeparadorCampos_$visible$_SeparadorCampos_$valor_predeterminado$_SeparadorCampos_$validacion_datos$_SeparadorCampos_$etiqueta_busqueda$_SeparadorCampos_$ajax_busqueda$_SeparadorCampos_$valor_unico$_SeparadorCampos_$solo_lectura$_SeparadorCampos_$teclado_virtual$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$barra_herramientas$_SeparadorCampos_$fila_unica$_SeparadorCampos_$lista_opciones$_SeparadorCampos_$origen_lista_opciones$_SeparadorCampos_$origen_lista_valores$_SeparadorCampos_$valor_etiqueta$_SeparadorCampos_$url_iframe$_SeparadorCampos_$objeto_en_ventana$_SeparadorCampos_$informe_vinculado$_SeparadorCampos_$maxima_longitud$_SeparadorCampos_$valor_minimo$_SeparadorCampos_$valor_maximo$_SeparadorCampos_$valor_salto$_SeparadorCampos_$formato_salida$_SeparadorCampos_$plantilla_archivo$_SeparadorCampos_$peso_archivo$_SeparadorCampos_$tamano_pincel$_SeparadorCampos_$color_trazo$_SeparadorCampos_$formulario_vinculado$_SeparadorCampos_$formulario_campo_vinculo$_SeparadorCampos_$formulario_campo_foraneo");
+					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (".$ListaInterrogantes.")";
+					ejecutar_sql_unaria($consulta_insercion,"$ListaCamposyValores");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea campo $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
@@ -686,8 +697,8 @@ if ($accion=="editar_formulario")
 					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,13,17,25");
 					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17");
 					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17");
-					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,15,17,18,19,20");
-					if (tipo_objeto_activo=="lista_radio") VisualizarCampos("1,2,7,8,9,10,17,18,19,20");
+					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,15,17,18,19,20,35");
+					if (tipo_objeto_activo=="lista_radio") VisualizarCampos("1,2,7,8,9,10,17,18,19,20,35");
 					if (tipo_objeto_activo=="etiqueta")   VisualizarCampos("9,17,21");
 					if (tipo_objeto_activo=="url_iframe")   VisualizarCampos("9,14,15,17,22,24");
 					if (tipo_objeto_activo=="informe")   VisualizarCampos("9,17,23,24");
@@ -1438,6 +1449,19 @@ if ($accion=="editar_formulario")
 								<td width="400" >
 									<input type="text" name="formulario_campo_foraneo" size="20" class="CampoTexto" value="<?php echo @$registro_campo_editar["formulario_campo_foraneo"]; ?>">
 									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesCampoForaneo; ?>"><img src="img/icn_10.gif" border=0></a>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+
+						<div id='campo35' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td width="200" align="right"><?php echo $MULTILANG_FrmFiltroLista; ?></td>
+								<td width="400" >
+									<input type="text" name="condicion_filtrado_listas" size="50" class="CampoTexto" value="<?php echo @$registro_campo_editar["condicion_filtrado_listas"]; ?>">
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesFiltroLista; ?>"><img src="img/icn_10.gif" border=0></a>
 								</td>
 							</tr>
 							</table>

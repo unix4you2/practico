@@ -290,6 +290,8 @@
 	$MULTILANG_FrmTitulo='Title or Tag';
 	$MULTILANG_FrmDesTitulo='Text that will appear next to the field telling the user the information that must be entered. You can use basic HTML to additional format.';
 	$MULTILANG_FrmCampo='Linked field';
+	$MULTILANG_FrmFiltroLista='List filter condition';
+	$MULTILANG_FrmDesFiltroLista='Special condition that records must have to be displayed.  This condition could use any field in your source table that are not selected as values too.';
 	$MULTILANG_FrmCampoOb1='Mandatory field for data binding controls';
 	$MULTILANG_FrmDesCampo='Field data table which will link information.  In file fields this could contain the relative path to the file uploaded in the server.  Every file should have at least one field to store its path';
 	$MULTILANG_FrmValUnico='Single value field';

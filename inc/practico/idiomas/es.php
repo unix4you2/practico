@@ -287,6 +287,8 @@
 	$MULTILANG_FrmTitulo='T&iacute;tulo o etiqueta';
 	$MULTILANG_FrmDesTitulo='Texto que aparecer&aacute; al lado del indicando al usuario la informacion que debe ingresar.  Puede usar HTML b&aacute;sico para dar formato adicional.';
 	$MULTILANG_FrmCampo='Campo enlazado';
+	$MULTILANG_FrmFiltroLista='Condicion de filtrado de la lista';
+	$MULTILANG_FrmDesFiltroLista='Condicion especial que deben cumplir los registros de la lista para poder ser desplegados.  Puede hacer referencia a campos que no se encuentren dentro de los seleccionados.';
 	$MULTILANG_FrmCampoOb1='Campo obligatorio para controles de datos';
 	$MULTILANG_FrmDesCampo='Campo de la tabla de datos al cual se vincular&aacute; la informaci&oacute;n.  Para controles de tipo archivo puede representar el campo donde se almacena el path del archivo sobre el servidor. Cada control tipo archivo deberia tener al menos un campo sobre la tabla donde guardar el path.';
 	$MULTILANG_FrmValUnico='Campo de valor &uacute;nico';
