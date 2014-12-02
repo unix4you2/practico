@@ -67,14 +67,14 @@ before_script:
 
   #Genera archivo temporal con configuracion de base de datos
   - echo "<?php
-    $ServidorBD='127.0.0.1';
-    $BaseDatos='practico';
-    $UsuarioBD='root';
-    $PasswordBD='';
-    $MotorBD='mysql';
-    $PuertoBD='';
-    $TablasCore='core_';
-    $TablasApp='app_';"  >  dev_tools/tests/configuracion.php
+    \$ServidorBD='127.0.0.1';
+    \$BaseDatos='practico';
+    \$UsuarioBD='root';
+    \$PasswordBD='';
+    \$MotorBD='mysql';
+    \$PuertoBD='';
+    \$TablasCore='core_';
+    \$TablasApp='app_';"  >  dev_tools/tests/configuracion.php
   #Verifica archivo de configuracion creado
   - cat dev_tools/tests/configuracion.php
 
