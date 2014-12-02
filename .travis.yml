@@ -75,6 +75,8 @@ before_script:
     $PuertoBD='';
     $TablasCore='core_';
     $TablasApp='app_';"  >  dev_tools/tests/configuracion.php
+  #Verifica archivo de configuracion creado
+  - cat dev_tools/tests/configuracion.php
 
 #  - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS hello_world_test;" -U postgres; fi
 #  - if [[ "$DB" == "pgsql" ]]; then psql -c "create database hello_world_test;" -U postgres; fi
