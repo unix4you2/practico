@@ -32,4 +32,12 @@
 	$estado_final="0";
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	// Devuelve resultado final de las pruebas
 	return $estado_final;

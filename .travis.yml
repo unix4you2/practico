@@ -1,17 +1,17 @@
 language: php
 php:
   # Alias de la version 5.2.17
-  - "5.2"
+  #- "5.2"
   # Alias de la version 5.3.x
   - "5.3"
   # Alias de la version 5.4.x
-  - "5.4"
+  #- "5.4"
   # Alias de la version 5.5.x
-  - "5.5"
+  #- "5.5"
   # Alias de la version 5.6.x
-  - "5.6"
-
-  - hhvm
+  #- "5.6"
+  # Alias lenguaje Hack de facebook
+  #- hhvm
 
 # Especificacion opcional de variables de entorno, por ejemplo para bases de datos
 env:
@@ -34,6 +34,9 @@ branches:
     - HabilitacionAuditorias
     - AcordeonOpcionesCentrales
     - SeguimientoGA
+    - ImplementacionBootStrap
+    - SubFormularios
+    - PruebasDeSoftware    
 
 # Ramas del repositorio a tener en cuenta
 branches:
@@ -52,7 +55,26 @@ branches:
 
 # Ejecuta scripts antes de correr las pruebas, puede utilizar variables de entorno
 before_script:
-  - "mysql -e 'create database practico;'"
+  
+  #Creamos la base de datos para la instalacion de prueba
+  - sh -c "mysql -e 'create database practico;'"
+
+  #Creamos el directorio de pruebas en caso de no existir
+  #- mkdir dev_tools/tests
+  
+  #Asegura permisos completos en la carpeta de pruebas
+  - chmod -R 777 dev_tools/tests
+
+  #Genera archivo temporal con configuracion de base de datos
+  - echo "<?php
+    $ServidorBD='127.0.0.1';
+    $BaseDatos='practico';
+    $UsuarioBD='root';
+    $PasswordBD='';
+    $MotorBD='mysql';
+    $PuertoBD='';
+    $TablasCore='core_';
+    $TablasApp='app_';"  >  dev_tools/tests/configuracion.php
 
 #  - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS hello_world_test;" -U postgres; fi
 #  - if [[ "$DB" == "pgsql" ]]; then psql -c "create database hello_world_test;" -U postgres; fi
@@ -62,7 +84,8 @@ before_script:
 script:
   - dev_tools/parche2zip.sh
   - dev_tools/practico2zip.sh
-
+  - php dev_tools/tests/t_obsoletas.php
+  - php dev_tools/tests/t_basedatos.php
 
 # Comandos a ejecutar cuando se finaliza la consutrccion sin problemas
 #after_success
