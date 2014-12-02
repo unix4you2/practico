@@ -51,11 +51,11 @@ branches:
 
 # Comandos para instalar prerequisitos o dependencias
 install:
-#pwd
-  - pear install PHP_CodeSniffer
-
+  - pear install pear/PHP_CodeSniffer
+  - phpenv rehash
   #Otra forma: php pyrus.phar install pear/PHP_CodeSniffer-2.0.0RC4
   #Otra forma: pear install PHP_CodeSniffer-2.0.0RC4
+  #Otra forma: pyrus install pear/PHP_CodeSniffer
 
 # Ejecuta scripts antes de correr las pruebas, puede utilizar variables de entorno
 before_script:
