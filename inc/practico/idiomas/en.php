@@ -624,6 +624,7 @@
 	$MULTILANG_MnuComando='Command';
 	$MULTILANG_MnuAdvElimina='IMPORTANT: Deleting this registry you could unlink some system options.\n'.$MULTILANG_Confirma;
 	$MULTILANG_MnuHlpComandoInf='Maybe you want to add to the command this srtring <b>:htm:Informes</b>  to say Practico <br>that puts all the data in Html format and with that CSS style sheet';
+	$MULTILANG_MnuHlpAwesome='';
 
 	//Objetos, seguridad y otros
 	$MULTILANG_ObjError='The type of object received in this command is unknown';

@@ -482,7 +482,9 @@ if ($accion=="administrar_menu")
 			@$TemasIconos[]=array(Nombre => "Woo",			Tamano => "32x32",	Prefijo => "woo_");
 			@$TemasIconos[]=array(Nombre => "Once",			Tamano => "32x32",	Prefijo => "once_");
 			@$TemasIconos[]=array(Nombre => "Ginux",			Tamano => "32x32",	Prefijo => "ginux_");
-			echo '<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 350px">';
+			
+			
+			echo '<center>'.$MULTILANG_MnuHlpAwesome.'</center><hr><DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 350px">';
 			for ($i=0;$i<count($TemasIconos);$i++)
 				{
 					$columna_actual=1;
@@ -799,7 +801,16 @@ if ($accion=="administrar_menu")
 								}
 							// Imprime la imagen
 							echo '<a title="'.$registro["texto"].'" name="" href="javascript:document.desk_'.$registro["id"].'.submit();">';
-							echo '<img src="img/'.$registro["imagen"].'" alt="'.$registro["texto"].'" class="IconosEscritorio" valign="absmiddle" align="absmiddle">';
+							// Imprime la imagen asociada si esta definida
+							if ($registro["imagen"]!="")
+								{
+									// Verifica si se tiene el string  .png en la cadena para saber si es icono de imagen, sino lo asume como font awesome
+									$es_imagen_png=strpos($registro["imagen"],".png");
+									if ($es_imagen_png)
+										echo '<img src="img/'.$registro["imagen"].'" alt="'.$registro["texto"].'" class="IconosEscritorio" valign="absmiddle" align="absmiddle">';
+										//echo '<img src="img/'.$registro["imagen"].'" border=0 alt="" valign="absmiddle" align="absmiddle" width="14" height="13" >&nbsp;';
+									else  echo '&nbsp;<i class="'.$registro["imagen"].'"></i>&nbsp;';
+								}
 							echo '</a>';
 						}
 				}
@@ -851,7 +862,12 @@ if ($accion=="administrar_menu")
 										}
 									// Imprime la imagen
 									echo '<a title="'.$registro_opciones_acordeon["texto"].'" name="" href="javascript:document.acorde_'.$registro_opciones_acordeon["id"].'.submit();">';
-									echo '<img src="img/'.$registro_opciones_acordeon["imagen"].'" alt="'.$registro_opciones_acordeon["texto"].'" class="IconosEscritorio" valign="absmiddle" align="absmiddle">';
+									// Verifica si se tiene el string  .png en la cadena para saber si es icono de imagen, sino lo asume como font awesome
+									$es_imagen_png=strpos($registro_opciones_acordeon["imagen"],".png");
+									if ($es_imagen_png)
+										echo '<img src="img/'.$registro_opciones_acordeon["imagen"].'" alt="'.$registro_opciones_acordeon["texto"].'" class="IconosEscritorio" valign="absmiddle" align="absmiddle">';
+										//echo '<img src="img/'.$registro["imagen"].'" border=0 alt="" valign="absmiddle" align="absmiddle" width="14" height="13" >&nbsp;';
+									else  echo '&nbsp;<i class="'.$registro_opciones_acordeon["imagen"].'"></i>&nbsp;';
 									echo '</a>';
 								}
 						}
