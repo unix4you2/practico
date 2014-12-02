@@ -54,7 +54,7 @@
 				}
 			catch( PDOException $ErrorPDO)
 				{
-					echo "SQL: ".$consulta." ==>> ".$ErrorPDO->getMessage();
+					//echo "SQL: ".$consulta." ==>> ".$ErrorPDO->getMessage();
 					$hay_error=1;
 				}
 		}
