@@ -28,9 +28,44 @@
 		Ubicacion *[dev_tools/tests/t_basedatos.php]*.  Pruebas para evaluacion de bases de datos al momento de instalacion
 	*/
 
+	//Divide los queries de un cadena
+	function split_sql($sql)
+		{
+			$sql = trim($sql);
+			$sql = ereg_replace("\n#[^\n]*\n", "\n", $sql);
+
+			$buffer = array();
+			$ret = array();
+			$in_string = false;
+
+			for($i=0; $i<strlen($sql)-1; $i++) {
+				if($sql[$i] == ";" && !$in_string) {
+					$ret[] = substr($sql, 0, $i);
+					$sql = substr($sql, $i + 1);
+					$i = 0;
+				}
+
+				if($in_string && ($sql[$i] == $in_string) && $buffer[1] != "\\") {
+					$in_string = false;
+				}
+				elseif(!$in_string && ($sql[$i] == '"' || $sql[$i] == "'") && (!isset($buffer[0]) || $buffer[0] != "\\")) {
+					$in_string = $sql[$i];
+				}
+				if(isset($buffer[1])) {
+					$buffer[0] = $buffer[1];
+				}
+				$buffer[1] = $sql[$i];
+			}
+
+			if(!empty($sql)) {
+				$ret[] = $sql;
+			}
+			return($ret);
+		}
+
 	// Definicion de variables para almacenar resultado
 	$estado_final="0";
-
+	$accion="";
 	include_once("dev_tools/tests/t_bdconfig.php");
 	include_once("core/conexiones.php");
 	include_once("core/comunes.php");
@@ -54,7 +89,7 @@
 				}
 			catch( PDOException $ErrorPDO)
 				{
-					//echo "SQL: ".$consulta." ==>> ".$ErrorPDO->getMessage();
+					echo "SQL: ".$consulta." ==>> ".$ErrorPDO->getMessage();
 					$hay_error=1;
 				}
 		}
