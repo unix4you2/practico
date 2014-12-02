@@ -1175,7 +1175,7 @@
 							fclose($archivo);
 						}
 					if ($version_actualizada>$version_practico)
-						mensaje($MULTILANG_Atencion,$MULTILANG_ActAlertaVersion,'','warning_icon.png','TextosEscritorio');
+						mensaje($MULTILANG_Atencion,$MULTILANG_ActAlertaVersion,'','fa fa-exclamation-triangle fa-5x','TextosEscritorio');
 				}
 		}
 

@@ -202,7 +202,7 @@ if ($accion=="cambiar_clave")
 		<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; ">
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<?php
-				mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'60%','warning_icon.png','TextosEscritorio');
+				mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'60%','fa fa-exclamation-triangle fa-5x','TextosEscritorio');
 			?>
 			<input type="hidden" name="accion" value="actualizar_clave">
 			<br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrCambioPW; ?></b></font>

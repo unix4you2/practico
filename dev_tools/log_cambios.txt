@@ -18,6 +18,7 @@ README.md
 CHANGELOG.md
 index.php
 core/comunes.php
+core/actualizacion.php
 core/formularios.php
 core/informes.php
 core/marco_arriba.php

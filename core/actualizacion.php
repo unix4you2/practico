@@ -35,7 +35,7 @@ if ($accion=="actualizar_practico")
 	{
 		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/OxheOe-o17s\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><img src='img/icono_screencast.png' alt='ScreenCast-VideoTutorial'></a>";
 		abrir_ventana($NombreRAD.' - '.$MULTILANG_Actualizacion,'f2f2f2','600');
-		mensaje($MULTILANG_ActMsj1,$MULTILANG_ActMsj2,'100%','warning_icon.png','TextosVentana');
+		mensaje($MULTILANG_ActMsj1,$MULTILANG_ActMsj2,'100%','fa fa-exclamation-triangle fa-5x','TextosVentana');
 ?>
 		<div align="center">
 			<br>
