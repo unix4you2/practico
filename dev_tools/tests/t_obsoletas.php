@@ -33,7 +33,7 @@
 	
 	
 	
-	
+	//ereg_replace()
 	
 	
 	

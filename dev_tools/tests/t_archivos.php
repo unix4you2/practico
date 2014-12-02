@@ -32,6 +32,7 @@
 	$estado_final="0";
 
 
+
 	//if (!file_exists("core/configuracion.php")) $estado_final="1";
 
 

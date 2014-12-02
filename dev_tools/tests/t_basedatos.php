@@ -69,32 +69,44 @@
 	include_once("dev_tools/tests/t_bdconfig.php");
 	include_once("core/conexiones.php");
 	include_once("core/comunes.php");
-	$total_ejecutadas=0;
-	//Abre el archivo con los queries dependiendo del motor
-	$RutaScriptSQL="ins/sql/practico.".$MotorBD;
-	$archivo_consultas=fopen($RutaScriptSQL,"r");
-	$total_consultas= fread($archivo_consultas,filesize($RutaScriptSQL));
-	fclose($archivo_consultas);
-	$arreglo_consultas = split_sql($total_consultas);
-	foreach($arreglo_consultas as $consulta)
-		{
-			try
-				{
-					//Cambia el prefijo predeterminado en caso que haya sido personalizado en la instalacion
-					$consulta=str_replace("core_",$TablasCore,$consulta);
-					//Ejecuta el query
-					$consulta_enviar = $ConexionPDO->prepare($consulta);
-					$consulta_enviar->execute();
-					$total_ejecutadas++;
-				}
-			catch( PDOException $ErrorPDO)
-				{
-					echo "SQL: ".$consulta." ==>> ".$ErrorPDO->getMessage();
-					$hay_error=1;
-				}
-		}
+	
 
-	if ($hay_error)
+	//PASO 1: Agrega las tablas y ejecuta consultas iniciales sobre la base de datos
+		$total_ejecutadas=0;
+		//Abre el archivo con los queries dependiendo del motor
+		$RutaScriptSQL="ins/sql/practico.".$MotorBD;
+		$archivo_consultas=fopen($RutaScriptSQL,"r");
+		$total_consultas= fread($archivo_consultas,filesize($RutaScriptSQL));
+		fclose($archivo_consultas);
+		$arreglo_consultas = split_sql($total_consultas);
+		foreach($arreglo_consultas as $consulta)
+			{
+				try
+					{
+						//Cambia el prefijo predeterminado en caso que haya sido personalizado en la instalacion
+						$consulta=str_replace("core_",$TablasCore,$consulta);
+						//Ejecuta el query
+						$consulta_enviar = $ConexionPDO->prepare($consulta);
+						$consulta_enviar->execute();
+						$total_ejecutadas++;
+					}
+				catch( PDOException $ErrorPDO)
+					{
+						echo "SQL: ".$consulta." ==>> ".$ErrorPDO->getMessage();
+						$hay_error=1;
+					}
+			}
+
+	//PASO 2: Verifica las tablas creadas en la base de datos
+		$resultado=consultar_tablas();
+		while ($registro = $resultado->fetch())
+			{
+				$total_registros=ContarRegistros($registro["0"]);
+				echo 'Tabla: '.$registro[0].'='.$total_registros.' registros. ';
+			}
+	
+
+	if (@$hay_error)
 		$estado_final=1;
 
 	// Devuelve resultado final de las pruebas
