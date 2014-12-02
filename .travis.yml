@@ -65,19 +65,6 @@ before_script:
   #Asegura permisos completos en la carpeta de pruebas
   - chmod -R 777 dev_tools/tests
 
-  #Genera archivo temporal con configuracion de base de datos
-  - echo "<?php
-    \$ServidorBD='127.0.0.1';
-    \$BaseDatos='practico';
-    \$UsuarioBD='root';
-    \$PasswordBD='';
-    \$MotorBD='mysql';
-    \$PuertoBD='';
-    \$TablasCore='core_';
-    \$TablasApp='app_';"  >  dev_tools/tests/configuracion.php
-  #Verifica archivo de configuracion creado
-  - cat dev_tools/tests/configuracion.php
-
 #  - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS hello_world_test;" -U postgres; fi
 #  - if [[ "$DB" == "pgsql" ]]; then psql -c "create database hello_world_test;" -U postgres; fi
 #  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS hello_world_test;" -uroot; fi

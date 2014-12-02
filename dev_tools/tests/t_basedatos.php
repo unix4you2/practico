@@ -31,7 +31,7 @@
 	// Definicion de variables para almacenar resultado
 	$estado_final="0";
 
-	include_once("dev_tools/tests/configuracion.php");
+	include_once("dev_tools/tests/t_bdconfig.php");
 	include_once("core/conexiones.php");
 	include_once("core/comunes.php");
 	$total_ejecutadas=0;
