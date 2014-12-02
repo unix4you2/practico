@@ -52,8 +52,11 @@ branches:
 # Comandos para instalar prerequisitos o dependencias
 install:
 #pwd
-  - pear install PHP_CodeSniffer-2.0.0RC4
-  #Otra forma de instalar: php pyrus.phar install pear/PHP_CodeSniffer-2.0.0RC4
+  - pear install PHP_CodeSniffer
+  - phpcs -i
+
+  #Otra forma: php pyrus.phar install pear/PHP_CodeSniffer-2.0.0RC4
+  #Otra forma: pear install PHP_CodeSniffer-2.0.0RC4
 
 # Ejecuta scripts antes de correr las pruebas, puede utilizar variables de entorno
 before_script:
@@ -63,9 +66,13 @@ before_script:
 
   #Creamos el directorio de pruebas en caso de no existir
   #- mkdir dev_tools/tests
-  
+
   #Asegura permisos completos en la carpeta de pruebas
   - chmod -R 777 dev_tools/tests
+
+  #Ejecuta las pruebas para codigo PHP obsoleto de acuerdo la version de prueba utilizada
+  #- phpcs --standard=PHP53Compatibility core/
+  - phpcs --standard=Zend index.php
 
 #  - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS hello_world_test;" -U postgres; fi
 #  - if [[ "$DB" == "pgsql" ]]; then psql -c "create database hello_world_test;" -U postgres; fi
