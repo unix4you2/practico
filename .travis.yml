@@ -54,7 +54,7 @@ install:
   - pear install pear/PHP_CodeSniffer
   - phpenv rehash
   #Verificamos la instalacion y el soporte de estandares
-  - phpcs -i
+  #- phpcs -i
   #Otra forma: php pyrus.phar install pear/PHP_CodeSniffer-2.0.0RC4
   #Otra forma: pear install PHP_CodeSniffer-2.0.0RC4
   #Otra forma: pyrus install pear/PHP_CodeSniffer
