@@ -53,6 +53,8 @@ branches:
 install:
   - pear install pear/PHP_CodeSniffer
   - phpenv rehash
+  #Verificamos la instalacion y el soporte de estandares
+  - phpcs -i
   #Otra forma: php pyrus.phar install pear/PHP_CodeSniffer-2.0.0RC4
   #Otra forma: pear install PHP_CodeSniffer-2.0.0RC4
   #Otra forma: pyrus install pear/PHP_CodeSniffer
@@ -70,7 +72,8 @@ before_script:
   - chmod -R 777 dev_tools/tests
 
   #Ejecuta las pruebas para codigo PHP obsoleto de acuerdo la version de prueba utilizada
-  #- phpcs --standard=Zend index.php
+  #- phpcs --standard=PEAR index.php
+  #Otra forma: phpcs --standard=Zend index.php
   #Otra forma: phpcs --standard=PHP53Compatibility core/
   
 

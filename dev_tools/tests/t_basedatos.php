@@ -83,8 +83,6 @@
 			{
 				try
 					{
-						//Cambia el prefijo predeterminado en caso que haya sido personalizado en la instalacion
-						$consulta=str_replace("core_",$TablasCore,$consulta);
 						//Ejecuta el query
 						$consulta_enviar = $ConexionPDO->prepare($consulta);
 						$consulta_enviar->execute();
@@ -99,12 +97,14 @@
 
 	//PASO 2: Verifica las tablas creadas en la base de datos
 		$resultado=consultar_tablas();
+        $total_tablas=0;
 		while ($registro = $resultado->fetch())
 			{
 				$total_registros=ContarRegistros($registro["0"]);
 				echo 'Tabla: '.$registro[0].'='.$total_registros.' registros. ';
+                $total_tablas++;
 			}
-	
+        echo 'Total tablas: '.$total_tablas;
 
 	if (@$hay_error)
 		$estado_final=1;
