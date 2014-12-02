@@ -34,6 +34,7 @@ core/usuarios.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/font-awesome/*
+skin/nomo/general.css
 "
 
 #[ArchivosObligatorios] Separados por espacio

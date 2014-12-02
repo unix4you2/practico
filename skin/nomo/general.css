@@ -17,6 +17,46 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+*.icon-white {color: white}
+*.icon-red {color: red}
+*.icon-green {color: green}
+*.icon-blue {color: blue}
+*.icon-yellow {color: yellow}
+*.icon-gray {color: gray}
+
+/* ANIMACIONES */
+*.icon-desapareciendo {
+    -moz-animation: parpadeando 2s infinite linear;
+    -o-animation: parpadeando 2s infinite linear;
+    -webkit-animation: parpadeando 2s infinite linear;
+    animation: parpadeando 2s infinite linear;
+}
+@-moz-keyframes parpadeando {
+  0% {opacity: 1;}
+  50% {opacity: .1;}
+  100% {opacity: 1;}
+}
+@-webkit-keyframes parpadeando {
+  0% {opacity: 1;}
+  50% {opacity: .1;}
+  100% {opacity: 1;}
+}
+@-o-keyframes parpadeando {
+  0% {opacity: 1;}
+  50% {opacity: .1;}
+  100% {opacity: 1;}
+}
+@-ms-keyframes parpadeando {
+  0% {opacity: 1;}
+  50% {opacity: .1;}
+  100% {opacity: 1;}
+}
+@keyframes parpadeando {
+  0% {opacity: 1;}
+  50% {opacity: .1;}
+  100% {opacity: 1;}
+}
+
 body {
 background-image:url(img/fondo.jpg);
 background-color: #726d6d;

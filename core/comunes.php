@@ -1582,13 +1582,20 @@
 
 				titulo - Texto que aparece en resaltado como encabezado del texto.  Acepta modificadores HTML.
 				texto - Mensaje completo a desplegar en formato de texto normal.  Acepta modificadores HTML.
-				icono - Imagen que acompana el texto ubicada al lado izquierdo.  Tamano y formato libre.
+				icono - Imagen que acompana el texto ubicada al lado izquierdo.  Tamano y formato libre.  Permite notacion de Awesome Fonts
 				ancho - Ancho del espacio de trabajo definido en pixels o porcentaje sobre el contenedor principal.
 				estilo - Especifica el punto donde sera publicado el mensaje para definir la hoja de estilos correspondiente.
 		*/
+        
+        //Verifica si es una imagen, sino lo asume como AwesomeFonts
+        if (strpos($icono, ".png") || strpos($icono, ".jpg") || strpos($icono, ".gif"))
+            $cadena_icono='<img src="img/'.$icono.'" alt="" border="0">';
+        else
+            $cadena_icono='<i class="'.$icono.'"></i>';
+
 		echo '<table width="'.$ancho.'" border="0" cellspacing="5" cellpadding="0" align="center" class="'.$estilo.'">
 				<tr>
-					<td valign="top"><img src="img/'.$icono.'" alt="" border="0">
+					<td valign="top">'.$cadena_icono.'
 					</td>
 					<td valign="top"><strong>'.$titulo.':<br></strong>
 					'.$texto.'
