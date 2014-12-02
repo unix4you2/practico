@@ -59,7 +59,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- CSS de Bootstrap -->
-    <link href="inc/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="BORRAMEinc/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <!-- librerías opcionales que activan el soporte de HTML5 para IE8 -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -78,8 +78,7 @@
 	<script type="text/javascript" src="inc/jquery/jquery-2.1.0.min.js"></script>
 	<script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>
 
-
-
+	<link rel="stylesheet" href="inc/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/general.css">
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/calendario.css">
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/tecladovirtual.css">
@@ -197,8 +196,14 @@
 						while($registro = $resultado->fetch())
 							{
 								// Imprime la imagen asociada si esta definida
-								if ($registro["imagen"]!="") echo '<img src="img/'.$registro["imagen"].'" border=0 alt="" valign="absmiddle" align="absmiddle" width="14" height="13" >&nbsp;';
-								
+								if ($registro["imagen"]!="")
+									{
+										// Verifica si se tiene el string  .png en la cadena para saber si es icono de imagen, sino lo asume como font awesome
+										$es_imagen_png=strpos($registro["imagen"],".png");
+										if ($es_imagen_png) echo '<img src="img/'.$registro["imagen"].'" border=0 alt="" valign="absmiddle" align="absmiddle" width="14" height="13" >&nbsp;';
+										else  echo '<i class="'.$registro["imagen"].'"></i>&nbsp;';									
+									}
+
 								// Verifica si se trata de un comando interno y crea formulario y enlace correspondiente
 								//if ($registro["tipo_comando"]=="Interno")
 									{
