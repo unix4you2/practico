@@ -144,7 +144,7 @@
 									<td NOWRAP align="right"><?php echo $MULTILANG_WSLlavesNombre; ?>:</td>
 									<td>
 										<input type="text" name="nombre" size="20" maxlength=15 class="CampoTexto" value="<?php echo @$registro_campo_editar["titulo"]; ?>">
-										<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+										<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
 									</td>
 								</tr>
 								<tr>
@@ -169,21 +169,21 @@
 									<td NOWRAP align="right"><?php echo $MULTILANG_WSLlavesDominio; ?>:</td>
 									<td>
 										<input type="text" name="dominio_autorizado" size="50" maxlength=255 class="CampoTexto">
-										<a href="#" title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><img src="img/icn_10.gif" border=0></a>
+										<a href="#" title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><i class="fa fa-question-circle"></i></a>
 									</td>
 								</tr>
 								<tr>
 									<td NOWRAP align="right"><?php echo $MULTILANG_WSLlavesIP; ?>:</td>
 									<td>
 										<input type="text" name="ip_autorizada" size="50" maxlength=255 class="CampoTexto">
-										<a href="#" title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><img src="img/icn_10.gif" border=0></a>
+										<a href="#" title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><i class="fa fa-question-circle"></i></a>
 									</td>
 								</tr>
 								</table>
 						</td>
 						<td>
 								<?php echo $MULTILANG_WSLlavesFunciones; ?>
-								<a href="#" title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><img src="img/icn_10.gif" border=0></a>:<br>
+								<a href="#" title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><i class="fa fa-question-circle"></i></a>:<br>
 								<textarea name="funciones_autorizadas" cols=40 rows=10></textarea>
 						</td>
 					</tr>

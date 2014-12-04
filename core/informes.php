@@ -595,19 +595,19 @@ if ($accion=="editar_informe")
 														echo '<option value="'.$registro[0].'" >'.str_replace($TablasApp,'',$registro[0]).'</option>';
 												}
 									?>
-								</select><a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+								</select><a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="right"><?php echo $MULTILANG_InfTablaManual; ?>:</td>
 							<td><input type="text" name="tabla_manual" size="20" class="CampoTexto"> (<?php echo $MULTILANG_Opcional; ?>)
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesTablaManual; ?>"><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesTablaManual; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="right"><?php echo $MULTILANG_InfAliasManual; ?>:</td>
 							<td><input type="text" name="alias_manual" size="20" class="CampoTexto"> (<?php echo $MULTILANG_Opcional; ?>)
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesAliasManual; ?>"><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesAliasManual; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -696,19 +696,19 @@ if ($accion=="editar_informe")
 														}
 												}
 									?>
-								</select><a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+								</select><a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="right"><?php echo $MULTILANG_InfCampoManual; ?>:</td>
 							<td><input type="text" name="campo_manual" size="20" class="CampoTexto"> (<?php echo $MULTILANG_Opcional; ?>)
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesCampoManual; ?>"><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesCampoManual; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="right"><?php echo $MULTILANG_InfAliasManual; ?>:</td>
 							<td><input type="text" name="alias_manual" size="20" class="CampoTexto"> (<?php echo $MULTILANG_Opcional; ?>)
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesAliasManual2; ?>"><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesAliasManual2; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -822,7 +822,7 @@ if ($accion=="editar_informe")
 									?>
 								</select><br>
 								<input type="text" name="valor_der_manual" size="20" class="CampoTexto">
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesManual; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesManual; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -837,7 +837,7 @@ if ($accion=="editar_informe")
 									<option value="NOT"><?php echo $MULTILANG_InfOpNOT; ?> - NOT</option>
 									<option value="XOR"><?php echo $MULTILANG_InfOpXOR; ?> - XOR</option>
 								</select>
-								<a href="#" title="<?php echo $MULTILANG_InfTitOp; ?>" name="<?php echo $MULTILANG_InfDesOp; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+								<a href="#" title="<?php echo $MULTILANG_InfTitOp; ?>" name="<?php echo $MULTILANG_InfDesOp; ?>"><i class="fa fa-question-circle"></i></a>
 								<br><b><?php echo $MULTILANG_InfReco1; ?>:</b> <?php echo $MULTILANG_InfReco2; ?>
 							</td>
 						</tr>
@@ -1049,7 +1049,7 @@ if ($accion=="editar_informe")
 								</td>
 								<td align="left" valign="TOP">
 									<input type="text" name="agrupamiento" value="<?php echo $registro_agrupacion["agrupamiento"]; ?>" size="40" class="CampoTexto">
-									<a href="#" title="<?php echo $MULTILANG_InfTitAgrupa; ?>" name="<?php echo $MULTILANG_InfDesAgrupa; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									<a href="#" title="<?php echo $MULTILANG_InfTitAgrupa; ?>" name="<?php echo $MULTILANG_InfDesAgrupa; ?>"><i class="fa fa-question-circle"></i></a>
 									<br><b><?php echo $MULTILANG_InfReco1; ?>:</b> <?php echo $MULTILANG_InfReco3; ?>
 								</td>
 							</tr>
@@ -1067,7 +1067,7 @@ if ($accion=="editar_informe")
 								</td>
 								<td align="left" valign="TOP">
 									<input type="text" name="ordenamiento" value="<?php echo $registro_agrupacion["ordenamiento"]; ?>" size="40" class="CampoTexto">
-									<a href="#" title="<?php echo $MULTILANG_InfTitOrdena; ?>" name="<?php echo $MULTILANG_InfDesOrdena; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									<a href="#" title="<?php echo $MULTILANG_InfTitOrdena; ?>" name="<?php echo $MULTILANG_InfDesOrdena; ?>"><i class="fa fa-question-circle"></i></a>
 									<br><b><?php echo $MULTILANG_InfReco1; ?>:</b> <?php echo $MULTILANG_InfReco3; ?>
 								</td>
 							</tr>
@@ -1101,8 +1101,8 @@ if ($accion=="editar_informe")
 						<tr>
 							<td align="right"><?php echo $MULTILANG_FrmTitulo; ?>:</td>
 							<td ><input type="text" name="titulo" size="20" class="CampoTexto">
-								<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesBot; ?>"><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesBot; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -1114,7 +1114,7 @@ if ($accion=="editar_informe")
 									<option value="Botones"><?php echo $MULTILANG_FrmEstilo1b; ?> (<?php echo $MULTILANG_Grande; ?>)</option>
 									<option value="BotonesCuidado"><?php echo $MULTILANG_FrmEstilo2; ?> (<?php echo $MULTILANG_Grande; ?>)</option>
 								</select>
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesEstilo; ?>"><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesEstilo; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -1131,14 +1131,14 @@ if ($accion=="editar_informe")
 										<option value="externa_javascript"><?php echo $MULTILANG_FrmAccionJS; ?></option>
 									</optgroup>
 								</select>
-								<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesAccion; ?>"><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesAccion; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="right"><?php echo $MULTILANG_FrmAccionCMD; ?>:</td>
 							<td ><input type="text" name="accion_usuario" size="20" class="CampoTexto">
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmAccionDesCMD; ?>"><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmAccionDesCMD; ?>"><i class="fa fa-question-circle"></i></a>
 								<br><?php echo $MULTILANG_InfHlpAccion; ?>
 							</td>
 						</tr>
@@ -1161,7 +1161,7 @@ if ($accion=="editar_informe")
 										}
 									?>
 								</select>
-								<a href="#" title="Ayuda r&aacute;pida:" name="Nombre del campo que es utilizado para abrir formularios vinculados a datos con este registro.  Opera como una busqueda sobre el formulario a desplegar. Se recomienda usar campos de valor &uacute;nico."><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="Ayuda r&aacute;pida:" name="Nombre del campo que es utilizado para abrir formularios vinculados a datos con este registro.  Opera como una busqueda sobre el formulario a desplegar. Se recomienda usar campos de valor &uacute;nico."><i class="fa fa-question-circle"></i></a>
 								-->
 							</td>
 						</tr>
@@ -1175,14 +1175,14 @@ if ($accion=="editar_informe")
 											for ($i=1;$i<=20;$i++)
 												echo '<option value="'.$i.'">'.$i.'</option>';
 										?>
-									</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesPeso; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
+									</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesPeso; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 								<td align="right"><?php echo $MULTILANG_FrmVisible; ?></td>
 								<td>
 									<select  name="visible" class="Combos" >
 										<option value="1"><?php echo $MULTILANG_Si; ?></option>
 										<option value="0"><?php echo $MULTILANG_No; ?></option>
-									</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesVisible; ?>"><img src="img/icn_10.gif" border=0></a>
+									</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesVisible; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr></table>
 							</td>
@@ -1190,7 +1190,7 @@ if ($accion=="editar_informe")
 						<tr>
 							<td align="right"><?php echo $MULTILANG_FrmConfirma; ?></td>
 							<td ><input type="text" name="confirmacion_texto" size="20" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesConfirma; ?>"><img src="img/icn_10.gif" border=0></a>	</td>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesConfirma; ?>"><i class="fa fa-question-circle"></i></a>	</td>
 						</tr>
 
 						<tr>
@@ -1403,20 +1403,20 @@ if ($accion=="editar_informe")
 					<tr>
 						<td align="right"><?php echo $MULTILANG_InfTitulo; ?>:</td>
 						<td><input type="text" name="titulo" value="<?php echo $registro_informe['titulo']; ?>" size="20" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesTitulo; ?>"><img src="img/icn_10.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesTitulo; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="right"><?php echo $MULTILANG_InfDescripcion; ?></td>
 						<td><input type="text" name="descripcion" size="20" value="<?php echo $registro_informe['descripcion']; ?>" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesDescrip; ?>"><img src="img/icn_10.gif" border=0></a>	</td>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesDescrip; ?>"><i class="fa fa-question-circle"></i></a>	</td>
 					</tr>
 					<tr>
 						<td align="right"><?php echo $MULTILANG_InfCategoria; ?></td>
 						<td><input type="text" name="categoria" value="<?php echo $registro_informe['categoria']; ?>" size="20" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesCateg; ?>"><img src="img/icn_10.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesCateg; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<!--
@@ -1431,7 +1431,7 @@ if ($accion=="editar_informe")
 								<option value="4"  <?php if (@$registro_informe["nivel_usuario"]=="4") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;</option>
 								<option value="5"  <?php if (@$registro_informe["nivel_usuario"]=="5") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
 							</select>
-							<a href="#" title="<?php echo $MULTILANG_InfTitNivel; ?>" name="<?php echo $MULTILANG_InfDesNivel; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_InfTitNivel; ?>" name="<?php echo $MULTILANG_InfDesNivel; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					-->
@@ -1439,19 +1439,19 @@ if ($accion=="editar_informe")
 						<td align="right"><?php echo $MULTILANG_FrmImagen; ?></td>
 						<td>
 							<input type="color" name="color_fondo" size="10" value="<?php if ($registro_informe["color_fondo"]!="") echo $registro_informe["color_fondo"]; else echo '#f2f2f2'; ?>" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="right"><?php echo $MULTILANG_FrmAncho; ?>:</td>
 						<td><input type="text" name="ancho"  value="<?php echo $registro_informe['ancho']; ?>" size="4" class="CampoTexto"> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)
-							<a href="#" title="<?php echo $MULTILANG_InfTitAncho; ?>" name="<?php echo $MULTILANG_InfDesAncho; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_InfTitAncho; ?>" name="<?php echo $MULTILANG_InfDesAncho; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="right"><?php echo $MULTILANG_InfAlto; ?>:</td>
 						<td><input type="text" name="alto"  value="<?php echo $registro_informe['alto']; ?>" size="4" class="CampoTexto">  (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)
-							<a href="#" title="<?php echo $MULTILANG_InfTitAlto; ?>" name="<?php echo $MULTILANG_InfDesAlto; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_InfTitAlto; ?>" name="<?php echo $MULTILANG_InfDesAlto; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
@@ -1461,7 +1461,7 @@ if ($accion=="editar_informe")
 								<option value="T"  <?php if ($registro_informe["formato_final"]=="T") echo 'selected'; ?> ><?php echo $MULTILANG_TablaDatos; ?></option>
 								<option value="G"  <?php if ($registro_informe["formato_final"]=="G") echo 'selected'; ?> ><?php echo $MULTILANG_Grafico; ?></option>
 							</select>
-							<a href="#" title="<?php echo $MULTILANG_InfTitFormato; ?>" name="<?php echo $MULTILANG_InfDesFormato; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_InfTitFormato; ?>" name="<?php echo $MULTILANG_InfDesFormato; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
@@ -1471,7 +1471,7 @@ if ($accion=="editar_informe")
 								<option value="S" <?php if ($registro_informe["genera_pdf"]=="S") echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
 								<option value="N" <?php if ($registro_informe["genera_pdf"]=="N") echo 'selected'; ?> ><?php echo $MULTILANG_No; ?></option>
 							</select>
-							<a href="#" title="<?php echo $MULTILANG_InfGeneraPDFInfoTit; ?>" name="<?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_InfGeneraPDFInfoTit; ?>" name="<?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
 						</td>
 					</tr>
 					<tr>
@@ -1633,21 +1633,21 @@ if ($accion=="administrar_informes")
 					<tr>
 						<td align="right"><?php echo $MULTILANG_InfTitulo; ?>:</td>
 						<td><input type="text" name="titulo" size="20" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0 align=absmiddle></a>
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesTitulo; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesTitulo; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="right"><?php echo $MULTILANG_InfDescripcion; ?></td>
 						<td><input type="text" name="descripcion" size="20" class="CampoTexto">
-						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesDescrip; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesDescrip; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="right"><?php echo $MULTILANG_InfCategoria; ?></td>
 						<td><input type="text" name="categoria" size="20" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0 align=absmiddle></a>
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesCateg; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesCateg; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<!--
@@ -1662,7 +1662,7 @@ if ($accion=="administrar_informes")
 								<option value="4"  <?php if (@$registro["nivel_usuario"]=="4") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;</option>
 								<option value="5"  <?php if (@$registro["nivel_usuario"]=="5") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
 							</select>
-							<a href="#" title="<?php echo $MULTILANG_InfTitNivel; ?>" name="<?php echo $MULTILANG_InfDesNivel; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_InfTitNivel; ?>" name="<?php echo $MULTILANG_InfDesNivel; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					-->
@@ -1670,19 +1670,19 @@ if ($accion=="administrar_informes")
 						<td align="right"><?php echo $MULTILANG_FrmImagen; ?></td>
 						<td>
 							<input type="color" name="color_fondo" size="10" value="#f2f2f2" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="right"><?php echo $MULTILANG_FrmAncho; ?>:</td>
 						<td><input type="text" name="ancho" size="4" class="CampoTexto">  (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)
-							<a href="#" title="<?php echo $MULTILANG_InfTitAncho; ?>" name="<?php echo $MULTILANG_InfDesAncho; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_InfTitAncho; ?>" name="<?php echo $MULTILANG_InfDesAncho; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="right"><?php echo $MULTILANG_InfAlto; ?>:</td>
 						<td><input type="text" name="alto" size="4" class="CampoTexto">  (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)
-							<a href="#" title="<?php echo $MULTILANG_InfTitAlto; ?>" name="<?php echo $MULTILANG_InfDesAlto; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_InfTitAlto; ?>" name="<?php echo $MULTILANG_InfDesAlto; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
@@ -1692,7 +1692,7 @@ if ($accion=="administrar_informes")
 								<option value="T"><?php echo $MULTILANG_TablaDatos; ?></option>
 								<option value="G"><?php echo $MULTILANG_Grafico; ?></option>
 							</select>
-							<a href="#" title="<?php echo $MULTILANG_InfTitFormato; ?>" name="<?php echo $MULTILANG_InfDesFormato; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_InfTitFormato; ?>" name="<?php echo $MULTILANG_InfDesFormato; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
@@ -1702,7 +1702,7 @@ if ($accion=="administrar_informes")
 								<option value="S"><?php echo $MULTILANG_Si; ?></option>
 								<option value="N" selected><?php echo $MULTILANG_No; ?></option>
 							</select>
-							<a href="#" title="<?php echo $MULTILANG_InfGeneraPDFInfoTit; ?>" name="<?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><img src="img/icn_12.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_InfGeneraPDFInfoTit; ?>" name="<?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
 						</td>
 					</tr>
 					<tr>

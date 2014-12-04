@@ -900,20 +900,20 @@ if ($accion=="agregar_usuario")
 						<tr>
 							<td align="RIGHT"><?php echo $MULTILANG_UsrLogin; ?></td><td width="20"></td>
 							<td><input class="CampoTexto" type="Text" name="login" size="11" maxlength="20"  onkeypress="return validar_teclado(event, 'alfanumerico');" >
-							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_UsrDesLogin; ?>"><img src="img/icn_10.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_UsrDesLogin; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><?php echo $MULTILANG_UsrNombre; ?></td><td width="20"></td>
 							<td><input class="CampoTexto" type="Text" name="nombre" size="30" maxlength="200" onkeypress="return validar_teclado(event, 'alfanumerico');">
-							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><?php echo $MULTILANG_Contrasena; ?></td><td width="20"></td>
 							<td><input class="CampoTexto" type="password" name="clave" size="11" maxlength="20" onkeyup="muestra_seguridad_clave(this.value, this.form)">
-							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
 							&nbsp;&nbsp; <?php echo $MULTILANG_UsrNivelPW; ?>: <input id="seguridad" value="0" size="3" name="seguridad" style="border: 0px; background-color:ffffff; text-decoration:italic;" class="CampoTexto" type="text" readonly onfocus="blur()">%
 							</td>
 						</tr>
@@ -926,13 +926,13 @@ if ($accion=="agregar_usuario")
 						<tr>
 							<td align="RIGHT"><?php echo $MULTILANG_UsrVerificaPW; ?></td><td width="20"></td>
 							<td><input class="CampoTexto" type="password" name="clave1" size="11" maxlength="20">
-							<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
+							<a href="#" title="Campo obligatorio" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT" valign="TOP"><?php echo $MULTILANG_Correo; ?></td><td width="20"></td>
 							<td><input class="CampoTexto" type="Text" name="correo" size="30" maxlength="200" onkeypress="return FiltrarTeclas(this, event)">
-								<a href="#" title="<?php echo $MULTILANG_UsrTitCorreo; ?>" name="<?php echo $MULTILANG_UsrDesCorreo; ?>"><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_UsrTitCorreo; ?>" name="<?php echo $MULTILANG_UsrDesCorreo; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -958,7 +958,7 @@ if ($accion=="agregar_usuario")
 									<option value="4">&#9733;&#9733;&#9733;&#9733;</option>
 									<option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
 								</select>
-								<a href="#" title="<?php echo $MULTILANG_UsrTitNivel; ?>" name="<?php echo $MULTILANG_UsrDesNivel; ?>"><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_UsrTitNivel; ?>" name="<?php echo $MULTILANG_UsrDesNivel; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						-->
@@ -969,7 +969,7 @@ if ($accion=="agregar_usuario")
 									<option value="1">Si</option>
 									<option value="0">No</option>
 								</select>
-								<a href="#" title="<?php echo $MULTILANG_UsrTitNivel; ?>" name="<?php echo $MULTILANG_UsrDesInterno; ?>"><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_UsrTitNivel; ?>" name="<?php echo $MULTILANG_UsrDesInterno; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>

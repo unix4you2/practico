@@ -769,7 +769,7 @@ if ($accion=="editar_formulario")
 										<option value="form_consulta"	  <?php if (@$registro_campo_editar["tipo"]=="form_consulta")   echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo15; ?></option>
 									</optgroup>
 								</select>
-								<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
 							</td>
 						</tr>
 						</table>
@@ -781,8 +781,8 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right"><?php echo $MULTILANG_FrmTitulo; ?>:</td>
 								<td width="400" >
 									<input type="text" name="titulo" size="20" class="CampoTexto" value="<?php echo @$registro_campo_editar["titulo"]; ?>">
-									<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
-									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesTitulo; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesTitulo; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -810,8 +810,8 @@ if ($accion=="editar_formulario")
 												}
 										?>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_FrmCampoOb1; ?>" name=""><img src="img/icn_12.gif" border=0></a>
-									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesCampo; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_FrmCampoOb1; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesCampo; ?>"><i class="fa fa-question-circle"></i></a>
 									<br>
 									<?php echo $MULTILANG_InfCampoManual; ?>: <input type="text" name="campo_manual" size="20" class="CampoTexto" value="<?php if (!@existe_campo_tabla($registro_campo_editar["campo"],$nombre_tabla)) echo @$registro_campo_editar["campo"]; ?>">
 								</td>
@@ -826,7 +826,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right"><?php echo $MULTILANG_FrmValUnico; ?>:</td>
 								<td width="400" >
 									<input type="checkbox" name="valor_unico" <?php if (@$registro_campo_editar["valor_unico"]==1) echo 'checked'; ?>>
-									<a href="#" title="<?php echo $MULTILANG_FrmTitUnico; ?>" name="<?php echo $MULTILANG_FrmDesUnico; ?>"><img src="img/icn_10.gif" border=0></a>	</td>
+									<a href="#" title="<?php echo $MULTILANG_FrmTitUnico; ?>" name="<?php echo $MULTILANG_FrmDesUnico; ?>"><i class="fa fa-question-circle"></i></a>	</td>
 							</tr>
 							</table>
 						</div>
@@ -838,7 +838,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right"><?php echo $MULTILANG_FrmPredeterminado; ?>:</td>
 								<td width="400" >
 									<input type="text" name="valor_predeterminado" size="20" class="CampoTexto" value="<?php echo @$registro_campo_editar["valor_predeterminado"]; ?>">
-									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesPredeterminado; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesPredeterminado; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -857,7 +857,7 @@ if ($accion=="editar_formulario")
 										<option value="alfanumerico" <?php if (@$registro_campo_editar["validacion_datos"]=="alfanumerico") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida3; ?></option>
 										<option value="fecha"        <?php if (@$registro_campo_editar["validacion_datos"]=="fecha")        echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida4; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmValidaDes; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmValidaDes; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -873,7 +873,7 @@ if ($accion=="editar_formulario")
 										<option value="READONLY" <?php if (@$registro_campo_editar["solo_lectura"]=="READONLY") echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
 										<option value=""         <?php if (@$registro_campo_editar["solo_lectura"]=="")         echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_FrmTitLectura; ?>" name="<?php echo $MULTILANG_FrmDesLectura; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_FrmTitLectura; ?>" name="<?php echo $MULTILANG_FrmDesLectura; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -886,7 +886,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right"><?php echo $MULTILANG_FrmAyuda; ?></td>
 								<td width="400" >
 									<input type="text" name="ayuda_titulo" size="20" class="CampoTexto" value="<?php echo @$registro_campo_editar["ayuda_titulo"]; ?>">
-									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesAyuda; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesAyuda; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -899,7 +899,7 @@ if ($accion=="editar_formulario")
 								<td width="200"   valign="top" align="right"><?php echo $MULTILANG_FrmTxtAyuda; ?></td>
 								<td width="400"  colspan=2 valign="top">
 									<textarea name="ayuda_texto" cols="25" rows="2" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"><?php echo @$registro_campo_editar["ayuda_texto"]; ?></textarea>
-									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesTxtAyuda; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesTxtAyuda; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -923,7 +923,7 @@ if ($accion=="editar_formulario")
 														echo '<option value="'.$i.'" '.$seleccion_campo.'>'.$i.'</option>';
 													}
 											?>
-										</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesPeso; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
+										</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesPeso; ?>"><i class="fa fa-question-circle"></i></a>
 									</td>
 									<td align="right"><?php echo $MULTILANG_Columna; ?></td>
 									<td>
@@ -941,7 +941,7 @@ if ($accion=="editar_formulario")
 														echo '<option value="'.$i.'" '.$seleccion_campo.'>'.$i.'</option>';
 													}
 											?>
-										</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesColumna; ?>"><img src="img/icn_10.gif" border=0></a>
+										</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesColumna; ?>"><i class="fa fa-question-circle"></i></a>
 									</td>
 								</tr></table>
 								</td>
@@ -968,7 +968,7 @@ if ($accion=="editar_formulario")
 										<option value="1" <?php if (@$registro_campo_editar["visible"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
 										<option value="0" <?php if (@$registro_campo_editar["visible"]=="0") echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesVisible; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesVisible; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 								</tr></table>
 								</td>
@@ -983,7 +983,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right"><?php echo $MULTILANG_FrmLblBusqueda; ?>:</td>
 								<td width="400" >
 									<input type="text" name="etiqueta_busqueda" size="10" class="CampoTexto" value="<?php echo @$registro_campo_editar["etiqueta_busqueda"]; ?>">
-									<a href="#" title="<?php echo $MULTILANG_FrmTitBusqueda; ?>" name="<?php echo $MULTILANG_FrmDesBusqueda; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_FrmTitBusqueda; ?>" name="<?php echo $MULTILANG_FrmDesBusqueda; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -996,7 +996,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right"><?php echo $MULTILANG_FrmAjax; ?>:</td>
 								<td width="400" >
 									<input type="checkbox" name="ajax_busqueda" <?php if (@$registro_campo_editar["ajax_busqueda"]==1) echo 'checked'; ?>>
-									<a href="#" title="<?php echo $MULTILANG_FrmTitAjax; ?>" name="<?php echo $MULTILANG_FrmDesAjax; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_FrmTitAjax; ?>" name="<?php echo $MULTILANG_FrmDesAjax; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -1012,7 +1012,7 @@ if ($accion=="editar_formulario")
 										<option value="1" <?php if (@$registro_campo_editar["teclado_virtual"]==1) echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
 										<option value="0" <?php if (@$registro_campo_editar["teclado_virtual"]==0) echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_FrmTitTeclado; ?>" name="<?php echo $MULTILANG_FrmDesTeclado; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_FrmTitTeclado; ?>" name="<?php echo $MULTILANG_FrmDesTeclado; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -1025,7 +1025,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right"><?php echo $MULTILANG_FrmAncho; ?>:</td>
 								<td width="400" >
 									<input type="text" name="ancho" size="4" class="CampoTexto" value="<?php echo @$registro_campo_editar["ancho"]; ?>">
-									<a href="#" title="<?php echo $MULTILANG_FrmTitAncho; ?>" name="<?php echo $MULTILANG_FrmDesAncho; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_FrmTitAncho; ?>" name="<?php echo $MULTILANG_FrmDesAncho; ?>"><i class="fa fa-question-circle"></i></a>
 									<i>(<?php echo $MULTILANG_FrmDesAncho2; ?>)</i>
 								</td>
 							</tr>
@@ -1038,7 +1038,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right"><?php echo $MULTILANG_FrmAlto; ?>:</td>
 								<td width="400" >
 									<input type="text" name="alto" size="4" class="CampoTexto" value="<?php echo @$registro_campo_editar["alto"]; ?>">
-									<a href="#" title="<?php echo $MULTILANG_FrmTitAlto; ?>" name="<?php echo $MULTILANG_FrmDesAlto; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_FrmTitAlto; ?>" name="<?php echo $MULTILANG_FrmDesAlto; ?>"><i class="fa fa-question-circle"></i></a>
 									<i>(<?php echo $MULTILANG_FrmDesAlto2; ?>)</i>
 								</td>
 							</tr>
@@ -1058,7 +1058,7 @@ if ($accion=="editar_formulario")
 										<option value="3" <?php if (@$registro_campo_editar["barra_herramientas"]=="3") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo4; ?></option>
 										<option value="4" <?php if (@$registro_campo_editar["barra_herramientas"]=="4") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo5; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_FrmTitBarra; ?>" name="<?php echo $MULTILANG_FrmDesBarra; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_FrmTitBarra; ?>" name="<?php echo $MULTILANG_FrmDesBarra; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -1074,7 +1074,7 @@ if ($accion=="editar_formulario")
 										<option value="0" <?php if (@$registro_campo_editar["fila_unica"]=="0") echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
 										<option value="1" <?php if (@$registro_campo_editar["fila_unica"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_FrmTitFila; ?>" name="<?php echo $MULTILANG_FrmDesFila; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_FrmTitFila; ?>" name="<?php echo $MULTILANG_FrmDesFila; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -1087,7 +1087,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right"><?php echo $MULTILANG_FrmLista; ?>:</td>
 								<td width="400" >
 									<input type="text" name="lista_opciones" size="30" class="CampoTexto" value="<?php echo @$registro_campo_editar["lista_opciones"]; ?>">
-									<a href="#" title="<?php echo $MULTILANG_FrmTitLista; ?>" name="<?php echo $MULTILANG_FrmDesLista; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_FrmTitLista; ?>" name="<?php echo $MULTILANG_FrmDesLista; ?>"><i class="fa fa-question-circle"></i></a>
 									(<?php echo $MULTILANG_FrmDesLista2; ?>)
 								</td>
 							</tr>
@@ -1125,8 +1125,8 @@ if ($accion=="editar_formulario")
 											}
 									?>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_FrmTitOrigen; ?>" name=""><img src="img/icn_12.gif" border=0></a>
-									<a href="#" title="<?php echo $MULTILANG_FrmTitOrigen2; ?>" name="<?php echo $MULTILANG_FrmDesOrigen; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_FrmTitOrigen; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+									<a href="#" title="<?php echo $MULTILANG_FrmTitOrigen2; ?>" name="<?php echo $MULTILANG_FrmDesOrigen; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -1163,8 +1163,8 @@ if ($accion=="editar_formulario")
 											}
 									?>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_FrmTitOrigenVal; ?>" name=""><img src="img/icn_12.gif" border=0></a>
-									<a href="#" title="<?php echo $MULTILANG_FrmTitOrigen2; ?>" name="<?php echo $MULTILANG_FrmDesOrigenVal; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_FrmTitOrigenVal; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+									<a href="#" title="<?php echo $MULTILANG_FrmTitOrigen2; ?>" name="<?php echo $MULTILANG_FrmDesOrigenVal; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -1208,7 +1208,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right"><?php echo $MULTILANG_FrmURL; ?>:</td>
 								<td width="400" >
 									<input type="text" name="url_iframe" size="40" class="CampoTexto" value="<?php echo @$registro_campo_editar["url_iframe"]; ?>">
-									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesURL; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesURL; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -1248,7 +1248,7 @@ if ($accion=="editar_formulario")
 										<option value="0" <?php if (@$registro_campo_editar["objeto_en_ventana"]=="0") echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
 										<option value="1" <?php if (@$registro_campo_editar["objeto_en_ventana"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_Importante; ?>" name="<?php echo $MULTILANG_FrmDesVentana; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_Importante; ?>" name="<?php echo $MULTILANG_FrmDesVentana; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -1261,7 +1261,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right"><?php echo $MULTILANG_FrmLongMaxima; ?>:</td>
 								<td width="400" >
 									<input type="text" name="maxima_longitud" size="4" class="CampoTexto" value="<?php echo @$registro_campo_editar["maxima_longitud"]; ?>">
-									<a href="#" title="<?php echo $MULTILANG_FrmTit1LongMaxima; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_FrmTit1LongMaxima; ?>"><i class="fa fa-question-circle"></i></a>
 									<i>(<?php echo $MULTILANG_FrmTit2LongMaxima; ?>)</i>
 								</td>
 							</tr>
@@ -1287,7 +1287,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right"><?php echo $MULTILANG_FrmValorSalto; ?>:</td>
 								<td width="400" >
 									<input type="text" name="valor_salto" size="4" class="CampoTexto" value="<?php if (@$registro_campo_editar["valor_salto"]!='1') echo @$registro_campo_editar["valor_salto"]; else echo '1'; ?>">
-									<a href="#" title="<?php echo $MULTILANG_FrmTitValorSalto; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_FrmTitValorSalto; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -1331,7 +1331,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right" valign=top><?php echo $MULTILANG_FrmPlantillaArchivo; ?></td>
 								<td width="400" >
 									<input type="text" name="plantilla_archivo" size="40" class="CampoTexto" value="<?php echo @$registro_campo_editar["plantilla_archivo"]; ?>">
-									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesPlantillaArchivo; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesPlantillaArchivo; ?>"><i class="fa fa-question-circle"></i></a>
 									<br><?php echo $MULTILANG_FrmPlantillaEjemplos; ?>
 								</td>
 							</tr>
@@ -1389,7 +1389,7 @@ if ($accion=="editar_formulario")
 								<td width="400" >
 									<img src="img/dev_UniversalBinary.png" border=0 width="20" height="20" align="absmiddle">
 									<input type="color" name="color_trazo" size="10" value="<?php if ($registro_campo_editar["color_trazo"]!="") echo $registro_campo_editar["color_trazo"]; else echo '#000000'; ?>" class="CampoTexto">
-									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -1435,7 +1435,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right"><?php echo $MULTILANG_FrmCampo; ?></td>
 								<td width="400" >
 									<input type="text" name="formulario_campo_vinculo" size="20" class="CampoTexto" value="<?php echo @$registro_campo_editar["formulario_campo_vinculo"]; ?>">
-									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesCampoVinculo; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesCampoVinculo; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -1448,7 +1448,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right"><?php echo $MULTILANG_FrmCampo; ?></td>
 								<td width="400" >
 									<input type="text" name="formulario_campo_foraneo" size="20" class="CampoTexto" value="<?php echo @$registro_campo_editar["formulario_campo_foraneo"]; ?>">
-									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesCampoForaneo; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesCampoForaneo; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -1461,7 +1461,7 @@ if ($accion=="editar_formulario")
 								<td width="200" align="right"><?php echo $MULTILANG_FrmFiltroLista; ?></td>
 								<td width="400" >
 									<input type="text" name="condicion_filtrado_listas" size="50" class="CampoTexto" value="<?php echo @$registro_campo_editar["condicion_filtrado_listas"]; ?>">
-									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesFiltroLista; ?>"><img src="img/icn_10.gif" border=0></a>
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesFiltroLista; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr>
 							</table>
@@ -1510,8 +1510,8 @@ if ($accion=="editar_formulario")
 						<tr>
 							<td align="right"><?php echo $MULTILANG_FrmTituloBot; ?>:</td>
 							<td ><input type="text" name="titulo" size="20" class="CampoTexto">
-								<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesBot; ?>"><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesBot; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -1521,7 +1521,7 @@ if ($accion=="editar_formulario")
 									<option value="BotonesEstado"><?php echo $MULTILANG_FrmEstilo1; ?></option>
 									<option value="BotonesEstadoCuidado"><?php echo $MULTILANG_FrmEstilo2; ?></option>
 								</select>
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesEstilo; ?>"><img src="img/icn_10.gif" border=0></a>	</td>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesEstilo; ?>"><i class="fa fa-question-circle"></i></a>	</td>
 						</tr>
 						<tr>
 							<td align="right"><?php echo $MULTILANG_FrmTipoAccion; ?></td>
@@ -1541,13 +1541,13 @@ if ($accion=="editar_formulario")
 										<option value="externa_javascript"><?php echo $MULTILANG_FrmAccionJS; ?></option>
 									</optgroup>
 								</select>
-							<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesAccion; ?>"><img src="img/icn_10.gif" border=0></a>	</td>
+							<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesAccion; ?>"><i class="fa fa-question-circle"></i></a>	</td>
 						</tr>
 						<tr>
 							<td align="right"><?php echo $MULTILANG_FrmAccionCMD; ?>:</td>
 							<td ><input type="text" name="accion_usuario" size="20" class="CampoTexto">
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmAccionDesCMD; ?>"><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmAccionDesCMD; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -1560,14 +1560,14 @@ if ($accion=="editar_formulario")
 											for ($i=1;$i<=20;$i++)
 												echo '<option value="'.$i.'">'.$i.'</option>';
 										?>
-									</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesPeso; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
+									</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesPeso; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 								<td align="right"><?php echo $MULTILANG_FrmVisible; ?></td>
 								<td>
 									<select  name="visible" class="Combos" >
 										<option value="1"><?php echo $MULTILANG_Si; ?></option>
 										<option value="0"><?php echo $MULTILANG_No; ?></option>
-									</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmBotDesVisible; ?>"><img src="img/icn_10.gif" border=0></a>
+									</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmBotDesVisible; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
 							</tr></table>
 							</td>
@@ -1576,21 +1576,21 @@ if ($accion=="editar_formulario")
 							<td align="right"><?php echo $MULTILANG_FrmRetorno; ?></td>
 							<td >
 								<input type="text" name="retorno_titulo" size="20" class="CampoTexto">
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesRetorno; ?>"><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesRetorno; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td   valign="top" align="right"><?php echo $MULTILANG_FrmTxtRetorno; ?></td>
 							<td  colspan=2 valign="top">
 								<textarea name="retorno_texto" cols="25" rows="1" class="AreaTexto"></textarea>
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmTxtDesRetorno; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmTxtDesRetorno; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="right"><?php echo $MULTILANG_FrmConfirma; ?></td>
 							<td >
 								<input type="text" name="confirmacion_texto" size="20" class="CampoTexto">
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesConfirma; ?>"><img src="img/icn_10.gif" border=0></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesConfirma; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 
@@ -1627,7 +1627,7 @@ if ($accion=="editar_formulario")
 							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_Campo; ?></b></td>
 							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_Columna; ?></b></td>
 							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_Peso; ?></b></td>
-							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_FrmObligatorio; ?></b> <a href="#" title="<?php echo $MULTILANG_Importante; ?>" name="<?php echo $MULTILANG_FrmDesObliga; ?>"><img src="img/icn_10.gif" align="absmiddle" border=0></a></td>
+							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_FrmObligatorio; ?></b> <a href="#" title="<?php echo $MULTILANG_Importante; ?>" name="<?php echo $MULTILANG_FrmDesObliga; ?>"><i class="fa fa-question-circle"></i></a></td>
 							<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_FrmVisible; ?></b></td>
 							<td></td>
 							<td></td>
@@ -1970,29 +1970,29 @@ if ($accion=="editar_formulario")
 						<td align="right"><?php echo $MULTILANG_FrmTitVen; ?>:</td>
 						<td>
 							<input type="text" value="<?php echo $registro_form["titulo"]; ?>" name="titulo" size="20" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesTit; ?>"><img src="img/icn_10.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesTit; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="right"><?php echo $MULTILANG_FrmHlp; ?></td>
 						<td>
 							<input type="text" value="<?php echo $registro_form["ayuda_titulo"]; ?>" name="ayuda_titulo" size="20" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesHlp; ?>"><img src="img/icn_10.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesHlp; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
 						<td valign="top" align="right"><?php echo $MULTILANG_FrmTxt; ?></td>
 						<td valign="top">
 							<textarea name="ayuda_texto" cols="25" rows="3" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"><?php echo $registro_form["ayuda_texto"]; ?></textarea>
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesTxt; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesTxt; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="right"><?php echo $MULTILANG_FrmImagen; ?></td>
 						<td>
 							<input type="color" name="color_fondo" size="10" value="<?php if ($registro_form["color_fondo"]!="") echo $registro_form["color_fondo"]; else echo '#f2f2f2'; ?>" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
@@ -2021,7 +2021,7 @@ if ($accion=="editar_formulario")
 													}
 											}		
 								?>
-							</select><a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+							</select><a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
 							<br>&nbsp;&nbsp;&nbsp;&nbsp;<i><?php echo $MULTILANG_InfTablaManual; ?>:</i>
 							<br>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="tabla_datos_manual" value="<?php if($es_tabla_manual==1) echo $registro_form["tabla_datos"]; ?>" size="20" class="CampoTexto">
 						</td>
@@ -2039,7 +2039,7 @@ if ($accion=="editar_formulario")
 											echo '<option value="'.$i.'" '.$estado_seleccion_cols.'>'.$i.'</option>';
 										}
 								?>
-							</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesNumeroCols; ?>"><img src="img/icn_10.gif" border=0></a>
+							</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesNumeroCols; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
@@ -2396,29 +2396,29 @@ function FrmAutoRun()
 						<td align="right"><?php echo $MULTILANG_FrmTitVen; ?>:</td>
 						<td>
 							<input type="text" name="titulo" size="20" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesTit; ?>"><img src="img/icn_10.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesTit; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="right"><?php echo $MULTILANG_FrmHlp; ?></td>
 						<td>
 							<input type="text" name="ayuda_titulo" size="20" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesHlp; ?>"><img src="img/icn_10.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesHlp; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
 						<td valign="top" align="right"><?php echo $MULTILANG_FrmTxt; ?></td>
 						<td valign="top">
 							<textarea name="ayuda_texto" cols="25" rows="3" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"></textarea>
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesTxt; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesTxt; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
 						<td align="right"><?php echo $MULTILANG_FrmImagen; ?></td>
 						<td>
 							<input type="color" name="color_fondo" size="10" value="#f2f2f2" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><img align="top" src="img/icn_10.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>
@@ -2435,7 +2435,7 @@ function FrmAutoRun()
 													echo '<option value="'.$registro[0].'" >'.str_replace($TablasApp,'',$registro[0]).'</option>';
 											}		
 								?>
-							</select><a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
+							</select><a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
 							<br>&nbsp;&nbsp;&nbsp;&nbsp;<i><?php echo $MULTILANG_InfTablaManual; ?>:</i>
 							<br>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="tabla_datos_manual" size="20" class="CampoTexto">
 						</td>
@@ -2448,7 +2448,7 @@ function FrmAutoRun()
 									for ($i=1;$i<=20;$i++)
 										echo '<option value="'.$i.'">'.$i.'</option>';
 								?>
-							</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesNumeroCols; ?>"><img src="img/icn_10.gif" border=0></a>
+							</select><a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmDesNumeroCols; ?>"><i class="fa fa-question-circle"></i></a>
 						</td>
 					</tr>
 					<tr>

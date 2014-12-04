@@ -241,7 +241,7 @@ if ($accion=="detalles_menu")
 										<option value="0"><?php echo $MULTILANG_No; ?></option>
 										<option value="1" <?php if ($registro["posible_arriba"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesArriba; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesArriba; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -251,7 +251,7 @@ if ($accion=="detalles_menu")
 										<option value="0"><?php echo $MULTILANG_No; ?></option>
 										<option value="1" <?php if ($registro["posible_escritorio"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesEscritorio; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesEscritorio; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -261,7 +261,7 @@ if ($accion=="detalles_menu")
 										<option value="0"><?php echo $MULTILANG_No; ?></option>
 										<option value="1" <?php if ($registro["posible_centro"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesCentro; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesCentro; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -290,7 +290,7 @@ if ($accion=="detalles_menu")
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_MnuURL; ?></b></td><td width="10"></td>
 							<td><input value="<?php echo $registro["url"]; ?>"  class="CampoTexto" type="text" name="url" size="35" maxlength="250" class="texto_01">
-								<a href="#" title="<?php echo $MULTILANG_MnuTitURL; ?>" name="<?php echo $MULTILANG_MnuDesURL; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+								<a href="#" title="<?php echo $MULTILANG_MnuTitURL; ?>" name="<?php echo $MULTILANG_MnuDesURL; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -301,14 +301,14 @@ if ($accion=="detalles_menu")
 										<option value="Interno" <?php if ($registro["tipo_comando"]=="Interno") echo 'selected'; ?> >2. <?php echo $MULTILANG_MnuInterno; ?></option>
 										<option value="Personal" <?php if ($registro["tipo_comando"]=="Personal") echo 'selected'; ?> >3. <?php echo $MULTILANG_MnuPersonal; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_MnuAccion; ?></b></td><td width="10"></td>
 							<td><input value="<?php echo $registro["comando"]; ?>"  class="CampoTexto" type="text" name="comando" size="30" maxlength="250" class="texto_01">
 								<a href='javascript:AbrirPopUp("FormularioObjetos");' title="<?php echo $MULTILANG_SeleccioneUno.' '.$MULTILANG_MnuObjeto; ?>">[...]</a>
-								<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+								<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -322,7 +322,7 @@ if ($accion=="detalles_menu")
 									<option value="4"  <?php if ($registro["nivel_usuario"]=="4") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;</option>
 									<option value="5"  <?php if ($registro["nivel_usuario"]=="5") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
 								</select>
-								<a href="#" title="<?php echo $MULTILANG_MnuTitNivel; ?>" name="<?php echo $MULTILANG_MnuDesNivel; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+								<a href="#" title="<?php echo $MULTILANG_MnuTitNivel; ?>" name="<?php echo $MULTILANG_MnuDesNivel; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 					</table>
@@ -605,7 +605,7 @@ if ($accion=="administrar_menu")
 										<option value="0"><?php echo $MULTILANG_No; ?></option>
 										<option value="1"><?php echo $MULTILANG_Si; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesArriba; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesArriba; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -615,7 +615,7 @@ if ($accion=="administrar_menu")
 										<option value="0"><?php echo $MULTILANG_No; ?></option>
 										<option value="1" selected><?php echo $MULTILANG_Si; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesEscritorio; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesEscritorio; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -625,7 +625,7 @@ if ($accion=="administrar_menu")
 										<option value="0"><?php echo $MULTILANG_No; ?></option>
 										<option value="1"><?php echo $MULTILANG_Si; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesCentro; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesCentro; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -656,7 +656,7 @@ if ($accion=="administrar_menu")
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_MnuURL; ?></b></td><td width="10"></td>
 							<td><input class="CampoTexto" type="text" name="url" size="35" maxlength="250" class="texto_01">
-								<a href="#" title="<?php echo $MULTILANG_MnuTitURL; ?>" name="<?php echo $MULTILANG_MnuDesURL; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+								<a href="#" title="<?php echo $MULTILANG_MnuTitURL; ?>" name="<?php echo $MULTILANG_MnuDesURL; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -667,14 +667,14 @@ if ($accion=="administrar_menu")
 										<option value="Interno">2. <?php echo $MULTILANG_MnuInterno; ?></option>
 										<option value="Personal">3. <?php echo $MULTILANG_MnuPersonal; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_MnuAccion; ?></b></td><td width="10"></td>
 							<td><input class="CampoTexto" type="text" name="comando" size="30" maxlength="250" class="texto_01">
 								<a href='javascript:AbrirPopUp("FormularioObjetos");' title="<?php echo $MULTILANG_SeleccioneUno.' '.$MULTILANG_MnuObjeto; ?>">[...]</a>
-								<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+								<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 					</table>

@@ -186,8 +186,8 @@ if ($accion=="editar_tabla")
 					<tr>
 						<td align="right"><?php echo $MULTILANG_Nombre; ?>:</td>
 						<td><input type="text" name="nombre_campo" size="20" class="CampoTexto">
-						<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
-						<a href="#" title="<?php echo $MULTILANG_TblTitNombre; ?>" name="<?php echo $MULTILANG_TblDesNombre; ?>"><img src="img/icn_10.gif" border=0></a>	</td>
+						<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+						<a href="#" title="<?php echo $MULTILANG_TblTitNombre; ?>" name="<?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle"></i></a>	</td>
 					</tr>
 					<tr>
 						<td align="right"><?php echo $MULTILANG_Tipo; ?>:</td>
@@ -264,8 +264,8 @@ if ($accion=="editar_tabla")
 					<tr>
 						<td align="right"><?php echo $MULTILANG_TblLongitud; ?> (<?php echo $MULTILANG_MnuSiAplica; ?>):</td>
 						<td><input type="text" name="longitud" size="10" class="CampoTexto">
-						<a href="#" title="<?php echo $MULTILANG_Importante; ?>" name="<?php echo $MULTILANG_TblDesLongitud; ?>"><img src="img/icn_12.gif" border=0></a>
-						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesLongitud2; ?>"><img src="img/icn_10.gif" border=0></a>	
+						<a href="#" title="<?php echo $MULTILANG_Importante; ?>" name="<?php echo $MULTILANG_TblDesLongitud; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesLongitud2; ?>"><i class="fa fa-question-circle"></i></a>	
 						</td>
 					</tr>
 					
@@ -276,7 +276,7 @@ if ($accion=="editar_tabla")
 								<option value="AUTO_INCREMENT"><?php echo $MULTILANG_Si; ?></option>
 								<option value="" selected><?php echo $MULTILANG_No; ?></option>
 							</select>
-							<a href="#" title="<?php echo $MULTILANG_TblTitAutoinc; ?>" name="<?php echo $MULTILANG_TblDesAutoinc; ?>"><img src="img/icn_12.gif" border=0></a>
+							<a href="#" title="<?php echo $MULTILANG_TblTitAutoinc; ?>" name="<?php echo $MULTILANG_TblDesAutoinc; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
 						</td>
 					</tr>
 					
@@ -299,7 +299,7 @@ if ($accion=="editar_tabla")
 								<option value="CURRENT_TIMESTAMP" ><?php echo $MULTILANG_TblFechaHora; ?></option>
 							</select><br>
 							<input type="text" name="predeterminado_valor" size="20" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesPredet; ?>"><img src="img/icn_10.gif" border=0></a>	
+							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesPredet; ?>"><i class="fa fa-question-circle"></i></a>	
 						</td>
 					</tr>
 					<tr>
@@ -560,8 +560,8 @@ if ($accion=="editar_tabla")
 					<tr>
 						<td align="center"><?php echo $MULTILANG_Nombre; ?>:</td>
 						<td><?php echo $TablasApp; ?><input type="text" name="nombre_tabla" size="20" class="CampoTexto">
-						<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
-						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesTabla; ?>"><img src="img/icn_10.gif" border=0></a></td>
+						<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesTabla; ?>"><i class="fa fa-question-circle"></i></a></td>
 					</tr>
 					<tr>
 						<td>
@@ -772,8 +772,8 @@ if ($accion=="editar_tabla")
 					<tr>
 						<td align="right"><?php echo $MULTILANG_TblAsistNombre; ?>:</td>
 						<td><?php echo $TablasApp; ?><input type="text" name="nombre_tabla" size="20" class="CampoTexto">
-						<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><img src="img/icn_12.gif" border=0></a>
-						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesTabla; ?>"><img src="img/icn_10.gif" border=0></a></td>
+						<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesTabla; ?>"><i class="fa fa-question-circle"></i></a></td>
 					</tr>
 					<tr>
 						<td align="right"><b><?php echo $MULTILANG_TblAsistPlant; ?>:</b></td>
@@ -888,8 +888,8 @@ if ($accion=="editar_tabla")
 					<tr>
 						<td align="center">Nombre:</td>
 						<td><?php echo $TablasApp; ?><input type="text" name="nombre_tabla" size="20" class="CampoTexto">
-						<a href="#" title="Campo obligatorio" name=""><img src="img/icn_12.gif" border=0></a>
-						<a href="#" title="Ayuda general de tablas" name="Una tabla de datos es una estrctura que le permite almacenar informaci&oacute;n. Ingrese en este espacio el nombre de la tabla sin guiones, puntos, espacios o caracteres especiales. SENSIBLE A MAYUSCULAS"><img src="img/icn_10.gif" border=0></a></td>
+						<a href="#" title="Campo obligatorio" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+						<a href="#" title="Ayuda general de tablas" name="Una tabla de datos es una estrctura que le permite almacenar informaci&oacute;n. Ingrese en este espacio el nombre de la tabla sin guiones, puntos, espacios o caracteres especiales. SENSIBLE A MAYUSCULAS"><i class="fa fa-question-circle"></i></a></td>
 					</tr>
 					<tr>
 						<td>

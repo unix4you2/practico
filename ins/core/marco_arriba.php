@@ -33,6 +33,7 @@
 		Pr&aacute;ctico - <?php echo $MULTILANG_Instalacion; ?>
   	</title>
 	<script type="text/javascript" src="js/tooltips.js"></script>
+    <link rel="stylesheet" href="../inc/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="../skin/nomo/general.css">
 	<script language="JavaScript">
 		function abrir_ventana_popup(theURL,winName,features)

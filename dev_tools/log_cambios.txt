@@ -21,6 +21,9 @@ core/comunes.php
 core/actualizacion.php
 core/formularios.php
 core/informes.php
+core/tablas.php
+core/marco_param.php
+core/marco_wscfg.php
 core/marco_arriba.php
 core/marco_abajo.php
 core/marco_conf.php

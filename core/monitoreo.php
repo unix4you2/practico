@@ -185,10 +185,10 @@
 			$estado_actual=ServicioOnline($Maquina["Host"],$Maquina["Puerto"],$Maquina["TipoMonitor"]);
 
 			if ($estado_actual)
-				$estado_final="<img src=".$Path_imagenes.$Imagen_ok." border=0 align=top ".$Tamano_iconos."> $MULTILANG_MonLinea";
+				$estado_final="$Imagen_ok $MULTILANG_MonLinea";
 			else
 				{
-					$estado_final="<blink><img src=".$Path_imagenes.$Imagen_fallo." border=0 align=top ".$Tamano_iconos."> $MULTILANG_MonCaido <img src=".$Path_imagenes.$Imagen_fallo." border=0 align=top></blink>";
+					$estado_final="<blink> $Imagen_fallo $MULTILANG_MonCaido $Imagen_fallo</blink>";
 					$color_fondo_estado="#FF3B36";
 					$color_texto_estado="#FFFF00";
 					$ErroresMonitoreoPractico=1;
@@ -200,11 +200,12 @@
 			$Separador_DosPuntos = "";
 			if ($Maquina["TipoMonitor"]=="socket")
 				$Separador_DosPuntos = ":";
-
+            
+            /*
 			if ($Maquina["Icono"]!="")
 				$icono_maquina='<img src="'.$Path_imagenes.$Maquina["Icono"].'" border=0 '.$Tamano_iconos.'>';
-			else
-				$icono_maquina='<img src="'.$Path_imagenes.$Imagen_generica.'" border=0 '.$Tamano_iconos.'>';
+			else*/
+				$icono_maquina=$Imagen_generica;
 
 			echo '
 				<table width="'.$ancho_tablas_maquinas.'" border=1 cellpadding=1 cellspacing=0 bgcolor="#DDDDDD" style="color:black; width:'.$ancho_tablas_maquinas.'px; display: inline!important; font-family: Verdana, Tahoma, Arial; font-size: 9px; margin-top: 5px; margin-right: 5px; margin-left: 5px; margin-bottom: 5px;">
@@ -271,7 +272,7 @@
 				}
 			$SalidaFinalInforme.="</tr></table>";
 
-			$icono_maquina='<img src="'.$Path_imagenes.$Imagen_generica_sql.'" border=0 '.$Tamano_iconos.'>';
+			$icono_maquina=$Imagen_generica_sql;
 			echo '
 				<table width="'.$ancho_tablas_maquinas.'" border=1 cellpadding=1 cellspacing=0 bgcolor="#DDDDDD" style="color:black; width:'.$ancho_tablas_maquinas.'px; display: inline!important; font-family: Verdana, Tahoma, Arial; font-size: 9px; margin-top: 5px; margin-right: 5px; margin-left: 5px; margin-bottom: 5px;">
 					<tr>
@@ -338,7 +339,7 @@
 			//Ejecuta el comando
 			$salida_comando = shell_exec($comando_ejecutar["Comando"]);
 			//Presenta la salida
-			$icono_maquina='<img src="'.$Path_imagenes.$Imagen_generica_shell.'" border=0 '.$Tamano_iconos.'>';
+			$icono_maquina=$Imagen_generica_shell;
 			echo '
 				<table width="'.$ancho_tablas_maquinas.'" border=1 cellpadding=1 cellspacing=0 style="color:black; width:'.$ancho_tablas_maquinas.'px; display: inline!important; font-family: Verdana, Tahoma, Arial; font-size: 9px; margin-top: 5px; margin-right: 5px; margin-left: 5px; margin-bottom: 5px;">
 					<tr>
@@ -489,7 +490,7 @@ if ($accion=="administrar_monitoreo")
 										<option value="Imagen"><?php echo $MULTILANG_Imagen; ?></option>
 										<option value="Embebido"><?php echo $MULTILANG_Embebido; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_MonDesTipo; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_MonDesTipo; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -549,13 +550,13 @@ if ($accion=="administrar_monitoreo")
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_Maquina; ?> / IP</b></td><td width="10"></td>
 							<td><input class="CampoTexto" type="text" name="host" size="20" maxlength="250">
-							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_Puerto; ?></b></td><td width="10"></td>
 							<td><input class="CampoTexto" type="text" name="puerto" size="5" maxlength="250">
-							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -565,25 +566,25 @@ if ($accion=="administrar_monitoreo")
 										<option value="socket">Socket</option>
 										<option value="ping">Ping</option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_Comando; ?></b></td><td width="10"></td>
 							<td><textarea name="comando" cols="40" rows="3" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"></textarea>
-							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommShell, $MULTILANG_MonCommSQL"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommShell, $MULTILANG_MonCommSQL"; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_FrmAncho; ?></b></td><td width="10"></td>
 							<td><input class="CampoTexto" type="text" name="ancho" size="5" maxlength="250">
-							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommShell (caracteres),$MULTILANG_Imagen (pixeles), $MULTILANG_Embebido (pixeles)"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommShell (caracteres),$MULTILANG_Imagen (pixeles), $MULTILANG_Embebido (pixeles)"; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_InfAlto; ?></b></td><td width="10"></td>
 							<td><input class="CampoTexto" type="text" name="alto" size="5" maxlength="250">
-							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommShell (caracteres),$MULTILANG_Imagen (pixeles), $MULTILANG_Embebido (pixeles)"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommShell (caracteres),$MULTILANG_Imagen (pixeles), $MULTILANG_Embebido (pixeles)"; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -596,7 +597,7 @@ if ($accion=="administrar_monitoreo")
 																echo '<option value="'.$i.'">'.$i.'</option>';
 														}
 											?>
-									</select> pixeles <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommSQL"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									</select> pixeles <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommSQL"; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -605,19 +606,19 @@ if ($accion=="administrar_monitoreo")
 									<select  name="ocultar_titulos" class="Combos" >
 										<option value="0"><?php echo $MULTILANG_No; ?></option>
 										<option value="1"><?php echo $MULTILANG_Si; ?></option>
-									</select> <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommSQL"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									</select> <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommSQL"; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_MnuURL; ?></b></td><td width="10"></td>
 							<td><input class="CampoTexto" type="text" name="path" size="40" maxlength="250">
-							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Imagen, $MULTILANG_Embebido"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Imagen, $MULTILANG_Embebido"; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_MonCorreoAlerta; ?></b></td><td width="10"></td>
 							<td><input class="CampoTexto" type="text" name="correo_alerta" size="40" maxlength="250">
-							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -627,7 +628,7 @@ if ($accion=="administrar_monitoreo")
 										<option value="1"><?php echo $MULTILANG_Si; ?></option>
 										<option value="0"><?php echo $MULTILANG_No; ?></option>
 									</select>
-									<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+									<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?>" name="<?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><i class="fa fa-question-circle"></i></a>
 							</td>
 						</tr>
 					</table>
@@ -733,6 +734,7 @@ if ($accion=="ver_monitoreo")
 		<html>
 			<head>
 				<title><?php echo $MULTILANG_MonEstado; ?></title>
+                <link rel="stylesheet" href="inc/font-awesome/css/font-awesome.min.css">
 			</head>
 		<body bgcolor="#000000" vlink="#000000" leftmargin="0" topmargin="0" oncontextmenu="return false;" style="font-family: Verdana, Tahoma, Arial; font-size: 11px;">
 
@@ -771,12 +773,17 @@ if ($accion=="ver_monitoreo")
 
 					//Path imagenes e iconos y sus propiedades
 					$Path_imagenes="img/";
-					$Imagen_fallo="icn_12.gif";
-					$Imagen_ok="icn_11.gif";
-					$Imagen_generica="icn_rdp.png";
+					//$Imagen_fallo='<img src=".$Path_imagenes."icn_12.gif border=0 align=top ".$Tamano_iconos.">';
+                    $Imagen_fallo='<i class="fa fa-exclamation-triangle icon-orange"></i>';
+					//$Imagen_ok='<img src=".$Path_imagenes."icn_11.gif border=0 align=top ".$Tamano_iconos.">';
+                    $Imagen_ok='<i class="fa fa-check-circle icon-green"></i>';
+					//$Imagen_generica='<img src=".$Path_imagenes."icn_rdp.png border=0 align=top ".$Tamano_iconos.">';
+                    $Imagen_generica='<i class="fa fa-certificate"></i>';
 					$Tamano_iconos=" width=20 heigth=20 ";
-					$Imagen_generica_sql="icn_03.gif";
-					$Imagen_generica_shell="icn_07.gif";
+                    //$Imagen_generica_sql='<img src=".$Path_imagenes."icn_03.gif border=0 align=top ".$Tamano_iconos.">';
+                    $Imagen_generica_sql='<i class="fa fa-database"></i>';
+					//$Imagen_generica_shell='<img src=".$Path_imagenes."icn_07.gif border=0 align=top ".$Tamano_iconos.">';
+                    $Imagen_generica_shell='<i class="fa fa-terminal"></i>';
 					$Sonido_alarma="inc/practico/sonidos/alarma.mp3";
 
 					//Variables de apariencia

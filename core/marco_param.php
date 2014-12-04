@@ -94,7 +94,7 @@
 							<td valign=top>
 								<font size=2 color=black>
 								<input type="text" name="nombre_empresa_corto" size="50" class="CampoTexto" value="<?php echo $parametros["nombre_empresa_corto"]; ?>">
-								<a href="#" title="<?php echo $MULTILANG_AyudaTitNomEmp; ?>" name="<?php echo $MULTILANG_AyudaDesNomEmp; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+								<a href="#" title="<?php echo $MULTILANG_AyudaTitNomEmp; ?>" name="<?php echo $MULTILANG_AyudaDesNomEmp; ?>"><i class="fa fa-question-circle"></i></a>
 								</font>
 							</td>
 						</tr>
@@ -107,7 +107,7 @@
 							<td valign=top>
 								<font size=2 color=black>
 								<input type="text" name="nombre_aplicacion" size="50" class="CampoTexto" value="<?php echo $parametros["nombre_aplicacion"]; ?>">
-								<a href="#" title="<?php echo $MULTILANG_AyudaTitNomApp; ?>" name="<?php echo $MULTILANG_AyudaDesNomApp; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+								<a href="#" title="<?php echo $MULTILANG_AyudaTitNomApp; ?>" name="<?php echo $MULTILANG_AyudaDesNomApp; ?>"><i class="fa fa-question-circle"></i></a>
 								</font>
 							</td>
 						</tr>
@@ -132,7 +132,7 @@
 							<td valign=top>
 								<font size=2 color=black>
 								<textarea name="funciones_personalizadas" cols="50" rows="5" class="AreaTexto" onkeypress="return FiltrarTeclas(this, event)"><?php echo $parametros["funciones_personalizadas"]; ?></textarea>
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FuncionesDes; ?>"><img src="img/icn_10.gif" border=0 align=absmiddle></a>
+								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FuncionesDes; ?>"><i class="fa fa-question-circle"></i></a>
 								</font>
 							</td>
 						</tr>
