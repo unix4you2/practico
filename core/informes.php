@@ -1042,7 +1042,7 @@ if ($accion=="editar_informe")
 						<table class="TextosVentana" width="100%">
 							<tr>
 								<td align="right" valign="TOP">
-									<img border='0' src='img/icono_totalizar.png'/>
+									<i class="fa fa-plus fa-3x"></i>
 								</td>
 								<td align="right" valign="TOP">
 									<b><?php echo $MULTILANG_InfCriterioAgrupa; ?></b>
@@ -1060,7 +1060,7 @@ if ($accion=="editar_informe")
 							</tr>
 							<tr>
 								<td align="right" valign="TOP">
-									<img border='0' src='img/icono_ordenar.png'/>
+									<i class="fa fa-sort-alpha-asc fa-3x"></i>
 								</td>
 								<td align="right" valign="TOP">
 									<b><?php echo $MULTILANG_InfCriterioOrdena; ?></b>
@@ -1342,16 +1342,16 @@ if ($accion=="editar_informe")
 			?>
 				<div align=center>
 				<?php echo $MULTILANG_InfTablasOrigen; ?><br>
-				<a href='javascript:AbrirPopUp("FormularioTablas");' title="<?php echo $MULTILANG_InfAgregaTabla; ?>" name=" "><img border='0' src='img/icono_tabla.png'/></a>
+				<a href='javascript:AbrirPopUp("FormularioTablas");' title="<?php echo $MULTILANG_InfAgregaTabla; ?>" name=" "><i class="fa fa-database fa-3x"></i></a>
 				<hr>
 				<?php echo $MULTILANG_InfCamposOrigen; ?><br>
-				<a href='javascript:AbrirPopUp("FormularioCampos");' title="<?php echo $MULTILANG_InfAgregaCampo; ?>" name=" "><img border='0' src='img/icono_campo.png'/></a>
+				<a href='javascript:AbrirPopUp("FormularioCampos");' title="<?php echo $MULTILANG_InfAgregaCampo; ?>" name=" "><i class="fa fa-th-list fa-3x"></i></a>
 				<hr>
 				<?php echo $MULTILANG_InfCondiciones; ?><br>
-				<a href='javascript:AbrirPopUp("FormularioCondiciones");' title="<?php echo $MULTILANG_InfFiltrar; ?>"><img border='0' src='img/icono_diseno.png'/></a>
+				<a href='javascript:AbrirPopUp("FormularioCondiciones");' title="<?php echo $MULTILANG_InfFiltrar; ?>"><i class="fa fa-filter fa-3x"></i></a>
 				<hr>
 				<?php echo $MULTILANG_InfAgrupa; ?><br>
-				<a href='javascript:AbrirPopUp("FormularioAgrupacion");' title="<?php echo $MULTILANG_InfCampoAgrupa; ?>"><img border='0' src='img/icono_totalizar.png'/><img border='0' src='img/icono_ordenar.png'/></a>
+				<a href='javascript:AbrirPopUp("FormularioAgrupacion");' title="<?php echo $MULTILANG_InfCampoAgrupa; ?>"><i class="fa fa-plus fa-3x"></i> <i class="fa fa-sort-alpha-asc fa-3x"></i></a>
 
 				<?php
 					// Si se trata de un informe con grafico como resultado agrega el boton de graficos
@@ -1372,9 +1372,9 @@ if ($accion=="editar_informe")
 				?>
 					<hr>
 					Acciones para cada registro<br>
-					<a href='javascript:AbrirPopUp("FormularioBotones");' title="<?php echo $MULTILANG_InfDesAccion; ?>"><img border='0' src='img/icono_boton.png'/></a>
+					<a href='javascript:AbrirPopUp("FormularioBotones");' title="<?php echo $MULTILANG_InfDesAccion; ?>"><i class="fa fa-bolt fa-3x"></i></a>
 					&nbsp;&nbsp;
-					<a href='javascript:AbrirPopUp("FormularioAcciones");' title="<?php echo $MULTILANG_FrmDesAcciones; ?>"><img border='0' src='img/icono_acciones.png'/></a>
+					<a href='javascript:AbrirPopUp("FormularioAcciones");' title="<?php echo $MULTILANG_FrmDesAcciones; ?>"><i class="fa fa-pencil-square-o fa-3x"></i></a>
 				<?php
 						}// Fin si es grafico
 				?>

@@ -57,7 +57,7 @@
 									<input type="hidden" name="accion" value="administrar_tablas">
 								</form>
 								<table class="EstiloBotones"><tr><td width="30" height="30" align=center>
-									<img src="img/icono_tabla.png" onClick="document.wzd_1.submit();" width="20" height="20">
+									<i class="fa fa-table fa-2x"  onClick="document.wzd_1.submit();"></i>
 								</tr></td></table>
 							</td>
 						</tr>
@@ -73,7 +73,7 @@
 									<input type="hidden" name="accion" value="administrar_formularios">
 								</form>
 								<table class="EstiloBotones"><tr><td width="30" height="30" align=center>
-									<img src="img/icono_form.png" onClick="document.wzd_2.submit();" width="20" height="20">
+									<i class="fa fa-list-alt fa-2x"  onClick="document.wzd_2.submit();"></i>
 								</tr></td></table>
 							</td>
 						</tr>
@@ -89,7 +89,7 @@
 									<input type="hidden" name="accion" value="administrar_informes">
 								</form>
 								<table class="EstiloBotones"><tr><td width="30" height="30" align=center>
-									<img src="img/compfile.png" onClick="document.wzd_3.submit();" width="20" height="20">
+									<i class="fa fa-file-text fa-2x" onClick="document.wzd_3.submit();"></i>
 								</tr></td></table>
 							</td>
 						</tr>

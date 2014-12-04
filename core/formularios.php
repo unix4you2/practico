@@ -1909,14 +1909,14 @@ if ($accion=="editar_formulario")
 			?>
 				<div align=center>
 				<?php echo $MULTILANG_FrmObjetos; ?><br>
-				<a href='javascript:AbrirPopUp("FormularioCampos");' title="<?php echo $MULTILANG_FrmDesObjetos; ?>" name=" "><img border='0' src='img/icono_campo.png'/></a>
+				<a href='javascript:AbrirPopUp("FormularioCampos");' title="<?php echo $MULTILANG_FrmDesObjetos; ?>" name=" "><i class="fa fa-th-list fa-3x"></i></a>
 				&nbsp;&nbsp;
-				<a href='javascript:AbrirPopUp("FormularioDiseno");' title="<?php echo $MULTILANG_FrmDesCampos; ?>"><img border='0' src='img/icono_diseno.png'/></a>
+				<a href='javascript:AbrirPopUp("FormularioDiseno");' title="<?php echo $MULTILANG_FrmDesCampos; ?>"><i class="fa fa-pencil-square-o fa-3x"></i></a>
 				<hr>
 				<?php echo $MULTILANG_FrmAcciones; ?><br>
-				<a href='javascript:AbrirPopUp("FormularioBotones");' title="<?php echo $MULTILANG_FrmDesBoton; ?>"><img border='0' src='img/icono_boton.png'/></a>
+				<a href='javascript:AbrirPopUp("FormularioBotones");' title="<?php echo $MULTILANG_FrmDesBoton; ?>"><i class="fa fa-bolt fa-3x"></i></a>
 				&nbsp;&nbsp;
-				<a href='javascript:AbrirPopUp("FormularioAcciones");' title="<?php echo $MULTILANG_FrmDesAcciones; ?>"><img border='0' src='img/icono_acciones.png'/></a>
+				<a href='javascript:AbrirPopUp("FormularioAcciones");' title="<?php echo $MULTILANG_FrmDesAcciones; ?>"><i class="fa fa-pencil-square-o fa-3x"></i></a>
 				<hr>
 				<form action="<?php echo $ArchivoCORE; ?>" method="POST" name="cancelar"><input type="Hidden" name="accion" value="administrar_formularios"></form>
 				<input type="Button" onclick="document.cancelar.submit()" value="<?php echo $MULTILANG_FrmVolverLista; ?>" class="Botones">

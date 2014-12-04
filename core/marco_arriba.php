@@ -158,7 +158,7 @@
 				?>
 					<table  cellspacing="0" cellpadding="0" border=0 class="MarcoSuperior"><tr>
 						<td align="right" valign="top">
-							<img src="img/icono_chat.png" ALT="Chat" OnClick="AbrirPopUp('BarraFlotanteChat');">&nbsp;&nbsp;
+                            <i class="fa fa-weixin fa-2x" OnClick="AbrirPopUp('BarraFlotanteChat');"></i>&nbsp;&nbsp;
 						</td>
 						<td align="right"  valign="top">
 							<?php echo $Nombre_usuario;?>
