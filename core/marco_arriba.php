@@ -138,7 +138,7 @@
 					if (@$Login_usuario=="admin" && $Sesion_abierta)
 						echo '
 						<div id="marco_cluster" style="position: absolute; left: 140px; top: 5px;">
-                            <a class="btn btn-default btn-xs" href="javascript:AbrirPopUp(\'BarraFlotanteDesarrollo\');"><i class="fa fa-paper-plane"></i> '.$MULTILANG_DesAppBoton.'</a>
+                            <a class="btn btn-default btn-xs" href="javascript:AbrirPopUp(\'BarraFlotanteDesarrollo\');"><i class="fa fa-puzzle-piece"></i> '.$MULTILANG_DesAppBoton.'</a>
                             <a class="btn btn-danger btn-xs" href="javascript:AbrirPopUp(\'BarraFlotanteConfiguracion\');"><i class="fa fa-cog"></i> '.$MULTILANG_ConfiguracionGeneral.'</a>
 						</div>';
 				?>

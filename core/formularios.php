@@ -2463,7 +2463,8 @@ function FrmAutoRun()
 					<tr>
 						<td align="right"></td>
 						<td>
-							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_FrmAdvScriptForm; ?>" onClick="javascript:AbrirPopUp('FormularioScripts');">
+                            <a class="btn btn-primary btn-xs" href="javascript:AbrirPopUp('FormularioScripts');"><i class="fa fa-file-code-o"></i> <?php echo $MULTILANG_FrmAdvScriptForm; ?></a>
+                            <br><br>
 						</td>
 					</tr>
 					<tr>
@@ -2471,8 +2472,8 @@ function FrmAutoRun()
 							</form>
 						</td>
 						<td>
-							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_FrmCreaDisena; ?>" onClick="document.datos.submit()">
-							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="<?php echo $MULTILANG_IrEscritorio; ?>" class="Botones">
+                            <a class="btn btn-default btn-xs" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o texto-azul"></i> <?php echo $MULTILANG_FrmCreaDisena; ?></a>
+                            <a class="btn btn-default btn-xs" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 						</td>
 					</tr>
 				</table>

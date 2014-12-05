@@ -878,18 +878,10 @@ if ($accion=="agregar_usuario")
 					<listar_usuarios> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario> | <muestra_seguridad_clave> | <seguridad_clave>
 			*/
 		echo '<div align="center">';
-		abrir_ventana($MULTILANG_UsrAdicion,'f2f2f2','');
+		abrir_ventana($MULTILANG_UsrAdicion,'f2f2f2','600');
+        
+        mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'','fa fa-info-circle fa-5x texto-azul','alert alert-info alert-dismissible');
 ?>
-
-			<table width="500" border="0" cellspacing="5" cellpadding="0" align="center" class="TextosVentana">
-					<tr>
-						<td valign="top"><i class="fa fa-info-circle fa-5x texto-azul"></i>
-						</td>
-						<td valign="top"><strong><?php echo $MULTILANG_Importante; ?>:<br></strong>
-						<?php echo $MULTILANG_UsrDesPW; ?>
-						</td>
-					</tr>
-				</table>
 
 
 		<!-- VALOR MD5 PARA VACIO:  d41d8cd98f00b204e9800998ecf8427e-->

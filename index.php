@@ -154,12 +154,12 @@
 
     // Si existe el directorio de instalacion presenta un mensaje constante de advertencia
     if (@file_exists("ins")) {
-        mensaje($MULTILANG_TituloInsExiste, $MULTILANG_TextoInsExiste, '70%', 'fa fa-exclamation-triangle fa-5x icon-yellow texto-parpadeando', 'TextosEscritorio');
+        mensaje($MULTILANG_TituloInsExiste, $MULTILANG_TextoInsExiste, '70%', 'fa fa-exclamation-triangle fa-5x texto-rojo texto-parpadeando', 'alert alert-warning alert-dismissible');
     }
 
     // Presenta mensajes con errores generales cuando son encontrados durante la ejecucion
     if (@$error_titulo!="") {
-        mensaje($error_titulo, $error_descripcion, '', 'icono_error.png', 'TextosEscritorio');
+        mensaje($error_titulo, $error_descripcion, '', 'fa fa-thumbs-down fa-fw fa-2x', 'alert alert-danger alert-dismissible');
     }
 
 /* ################################################################## */

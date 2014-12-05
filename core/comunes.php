@@ -1572,7 +1572,7 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function mensaje($titulo,$texto,$ancho,$icono,$estilo)
+	function mensaje($titulo,$texto,$ancho="",$icono,$estilo)
 	  {
 		/*
 			Function: mensaje
@@ -1582,26 +1582,15 @@
 
 				titulo - Texto que aparece en resaltado como encabezado del texto.  Acepta modificadores HTML.
 				texto - Mensaje completo a desplegar en formato de texto normal.  Acepta modificadores HTML.
-				icono - Imagen que acompana el texto ubicada al lado izquierdo.  Tamano y formato libre.  Permite notacion de Awesome Fonts
+				icono - Formato Awesome Fonts o Iconos de Bootstrap
 				ancho - Ancho del espacio de trabajo definido en pixels o porcentaje sobre el contenedor principal.
 				estilo - Especifica el punto donde sera publicado el mensaje para definir la hoja de estilos correspondiente.
 		*/
-        
-        //Verifica si es una imagen, sino lo asume como AwesomeFonts
-        if (strpos($icono, ".png") || strpos($icono, ".jpg") || strpos($icono, ".gif"))
-            $cadena_icono='<img src="img/'.$icono.'" alt="" border="0">';
-        else
-            $cadena_icono='<i class="'.$icono.'"></i>';
-
-		echo '<table width="'.$ancho.'" border="0" cellspacing="5" cellpadding="0" align="center" class="'.$estilo.'">
-				<tr>
-					<td valign="top">'.$cadena_icono.'
-					</td>
-					<td valign="top"><strong>'.$titulo.':<br></strong>
-					'.$texto.'
-					</td>
-				</tr>
-			</table>';
+        echo '<div class="'.$estilo.'" role="alert">
+                <i class="'.$icono.' pull-left"></i>
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <strong>'.$titulo.'</strong><br>'.$texto.'
+            </div>';
 	  }
 
 
@@ -2700,7 +2689,7 @@
 				// Muestra ayuda en caso de tenerla
 				$imagen_ayuda='fa fa-info-circle fa-5x texto-azul';
 				if ($registro_formulario["ayuda_titulo"]!="" || $registro_formulario["ayuda_texto"]!="")
-					mensaje($registro_formulario["ayuda_titulo"],$registro_formulario["ayuda_texto"],'100%',$imagen_ayuda,'TextosVentana');
+					mensaje($registro_formulario["ayuda_titulo"],$registro_formulario["ayuda_texto"],'100%',$imagen_ayuda,'alert alert-info alert-dismissible');
 
 				//Inicia el formulario de datos
 				echo '
