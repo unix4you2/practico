@@ -26,7 +26,9 @@ core/marco_param.php
 core/marco_wscfg.php
 core/marco_arriba.php
 core/marco_abajo.php
+core/marco_chat.php
 core/marco_conf.php
+core/marco_dev.php
 core/menus.php
 core/ws_funciones.php
 core/ws_nucleo.php
@@ -51,7 +53,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 * Added: Filtro de listas de seleccion.  Ahora se permite definir condiciones de filtrado para las listas utilizadas en los controles combobox y radiobutton
 * Added: Se inicia con el uso de awesome-font.  Se sustituyen varias expresiones de iconos por las existentes en la fuente de iconos nueva
-* Drop: Eliminada sentencia de posible actualizacion de icono en escritorio: UPDATE core_menu SET imagen='fa fa-bar-chart fa-3x' WHERE imagen='compfile.png';
+* Added: Actualizacion de mucha iconografia a fuentes Awesome
 "
 
 ########################################################################
@@ -61,6 +63,8 @@ ALTER TABLE core_formulario_objeto ADD COLUMN condicion_filtrado_listas VARCHAR(
 UPDATE core_menu SET imagen='fa fa-key' WHERE imagen='icono_llave.png';
 UPDATE core_menu SET imagen='fa fa-download' WHERE imagen='bajar.png';
 UPDATE core_menu SET imagen='fa fa-cloud-upload' WHERE imagen='tango_user-home.png';
+UPDATE core_menu SET imagen='fa fa-bar-chart fa-3x' WHERE imagen='compfile.png';
+
 "
 
 ########################################################################

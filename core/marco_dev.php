@@ -56,9 +56,7 @@
 								<form action="" method="post" name="wzd_1" id="wzd_1" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 									<input type="hidden" name="accion" value="administrar_tablas">
 								</form>
-								<table class="EstiloBotones"><tr><td width="30" height="30" align=center>
-									<i class="fa fa-table fa-2x"  onClick="document.wzd_1.submit();"></i>
-								</tr></td></table>
+                                <i class="fa fa-table fa-2x fa-border"  onClick="document.wzd_1.submit();"></i>
 							</td>
 						</tr>
 						<tr><td colspan="3"><hr></td></tr>
@@ -72,9 +70,7 @@
 								<form action="" method="post" name="wzd_2" id="wzd_2" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 									<input type="hidden" name="accion" value="administrar_formularios">
 								</form>
-								<table class="EstiloBotones"><tr><td width="30" height="30" align=center>
-									<i class="fa fa-list-alt fa-2x"  onClick="document.wzd_2.submit();"></i>
-								</tr></td></table>
+									<i class="fa fa-list-alt fa-2x fa-border"  onClick="document.wzd_2.submit();"></i>
 							</td>
 						</tr>
 						<tr><td colspan="3"><hr></td></tr>
@@ -88,9 +84,7 @@
 								<form action="" method="post" name="wzd_3" id="wzd_3" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 									<input type="hidden" name="accion" value="administrar_informes">
 								</form>
-								<table class="EstiloBotones"><tr><td width="30" height="30" align=center>
-									<i class="fa fa-file-text fa-2x" onClick="document.wzd_3.submit();"></i>
-								</tr></td></table>
+									<i class="fa fa-file-text fa-2x fa-border" onClick="document.wzd_3.submit();"></i>
 							</td>
 						</tr>
 						<tr><td colspan="3"><hr></td></tr>
@@ -104,9 +98,7 @@
 								<form action="" method="post" name="wzd_4" id="wzd_4" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 									<input type="hidden" name="accion" value="administrar_menu">
 								</form>
-								<table class="EstiloBotones"><tr><td width="30" height="30" align=center>
-									<img src="img/icono_menus.png" onClick="document.wzd_4.submit();" width="20" height="20">
-								</tr></td></table>
+                                <i class="fa fa-external-link-square fa-2x fa-border " onClick="document.wzd_4.submit();"></i>
 							</td>
 						</tr>
 						<tr><td colspan="3"><hr></td></tr>
@@ -120,9 +112,7 @@
 								<form action="" method="post" name="wzd_5" id="wzd_5" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 									<input type="hidden" name="accion" value="listar_usuarios">
 								</form>
-								<table class="EstiloBotones"><tr><td width="30" height="30" align=center>
-									<img src="img/icono_usuarios.png" onClick="document.wzd_5.submit();" width="20" height="20">
-								</tr></td></table>
+                                <i class="fa fa-user fa-2x fa-border " onClick="document.wzd_5.submit();"></i>
 							</td>
 						</tr></table>
 

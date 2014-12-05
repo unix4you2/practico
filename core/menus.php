@@ -800,7 +800,7 @@ if ($accion=="administrar_menu")
 										 <input type="hidden" name="objeto" value="'.$registro["comando"].'"></form>';
 								}
 							// Imprime la imagen
-							echo '<a title="'.$registro["texto"].'" name="" href="javascript:document.desk_'.$registro["id"].'.submit();">';
+							echo '&nbsp;<a title="'.$registro["texto"].'" name="" href="javascript:document.desk_'.$registro["id"].'.submit();">';
 							// Imprime la imagen asociada si esta definida
 							if ($registro["imagen"]!="")
 								{
@@ -809,9 +809,9 @@ if ($accion=="administrar_menu")
 									if ($es_imagen_png)
 										echo '<img src="img/'.$registro["imagen"].'" alt="'.$registro["texto"].'" class="IconosEscritorio" valign="absmiddle" align="absmiddle">';
 										//echo '<img src="img/'.$registro["imagen"].'" border=0 alt="" valign="absmiddle" align="absmiddle" width="14" height="13" >&nbsp;';
-									else  echo '&nbsp;<i class="'.$registro["imagen"].'"></i>&nbsp;';
+									else  echo '<i class="'.$registro["imagen"].'"></i>';
 								}
-							echo '</a>';
+							echo '</a>&nbsp;';
 						}
 				}
 			echo '</td></tr></table>';
@@ -861,14 +861,14 @@ if ($accion=="administrar_menu")
 												 <input type="hidden" name="objeto" value="'.$registro_opciones_acordeon["comando"].'"></form>';
 										}
 									// Imprime la imagen
-									echo '<a title="'.$registro_opciones_acordeon["texto"].'" name="" href="javascript:document.acorde_'.$registro_opciones_acordeon["id"].'.submit();">';
+									echo '&nbsp;<a title="'.$registro_opciones_acordeon["texto"].'" name="" href="javascript:document.acorde_'.$registro_opciones_acordeon["id"].'.submit();">';
 									// Verifica si se tiene el string  .png en la cadena para saber si es icono de imagen, sino lo asume como font awesome
 									$es_imagen_png=strpos($registro_opciones_acordeon["imagen"],".png");
 									if ($es_imagen_png)
 										echo '<img src="img/'.$registro_opciones_acordeon["imagen"].'" alt="'.$registro_opciones_acordeon["texto"].'" class="IconosEscritorio" valign="absmiddle" align="absmiddle">';
 										//echo '<img src="img/'.$registro["imagen"].'" border=0 alt="" valign="absmiddle" align="absmiddle" width="14" height="13" >&nbsp;';
-									else  echo '&nbsp;<i class="'.$registro_opciones_acordeon["imagen"].'"></i>&nbsp;';
-									echo '</a>';
+									else  echo '<i class="'.$registro_opciones_acordeon["imagen"].'"></i>';
+									echo '</a>&nbsp;';
 								}
 						}
 					cerrar_ventana();

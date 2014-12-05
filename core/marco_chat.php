@@ -68,7 +68,7 @@
 								echo '
 									<tr>
 										<td valign=middle align=left>
-											<img src="img/icn_22.gif" border=0 align=absmiddle>
+											<i class="fa fa-user texto-azul"></i>
 											<font size=2 color=black>
 												<b>'.$usuarios_chat["login"].'</b>
 											</font>

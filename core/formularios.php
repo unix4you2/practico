@@ -1666,7 +1666,7 @@ if ($accion=="editar_formulario")
 													echo '<option value="'.$i.'">'.$i.'</option>';
 											    $i++;
 											}
-						echo '		</select></form> <a href="javascript:ifoc'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmGuardaCol.'" name=""><img src="img/guardar.gif" border=0></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						echo '		</select></form> <a href="javascript:ifoc'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmGuardaCol.'" name=""><i class="fa fa-floppy-o fa-2x texto-azul"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								
 								</td>
 								<td align=center>
@@ -1696,9 +1696,9 @@ if ($accion=="editar_formulario")
 								
 								if ($registro["campo"]!="id")
 									echo '
-										<a href="javascript:ifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" name=""><img src="img/bajar.png" border=0></a> 
+										<a href="javascript:ifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" name=""><i class="fa fa-caret-down fa-2x texto-verde"></i></a> 
 										'.$registro["peso"].'
-										<a href="javascript:ifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" name=""><img src="img/subir.png" border=0></a>
+										<a href="javascript:ifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" name=""><i class="fa fa-caret-up fa-2x texto-verde"></i></a>
 										';
 								
 								echo '</td>';
@@ -1716,9 +1716,9 @@ if ($accion=="editar_formulario")
 											';
 									if ($registro["campo"]!="id")
 										if ($registro["obligatorio"])
-											echo '<input type="hidden" name="valor" value="0"><a href="javascript:ifo'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><img src="img/on.png" border=0></a>';
+											echo '<input type="hidden" name="valor" value="0"><a href="javascript:ifo'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><i class="fa fa-lightbulb-o fa-2x texto-amarillo"></i></a>';
 										else
-											echo '<input type="hidden" name="valor" value="1"><a href="javascript:ifo'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><img src="img/off.png" border=0></a>';
+											echo '<input type="hidden" name="valor" value="1"><a href="javascript:ifo'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><i class="fa fa-lightbulb-o fa-2x texto-gris"></i></a>';
 								echo '</form></td>';
 								
 								echo '<td align=center>
@@ -1733,9 +1733,9 @@ if ($accion=="editar_formulario")
 												<input type="Hidden" name="popup_activo" value="FormularioDiseno">
 											';
 									if ($registro["visible"])
-										echo '<input type="hidden" name="valor" value="0"><a href="javascript:if'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><img src="img/on.png" border=0></a>';
+										echo '<input type="hidden" name="valor" value="0"><a href="javascript:if'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><i class="fa fa-lightbulb-o fa-2x texto-amarillo"></i></a>';
 									else
-										echo '<input type="hidden" name="valor" value="1"><a href="javascript:if'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><img src="img/off.png" border=0></a>';
+										echo '<input type="hidden" name="valor" value="1"><a href="javascript:if'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><i class="fa fa-lightbulb-o fa-2x texto-gris"></i></a>';
 								echo '</form></td>';
 								if ($registro["peso"]!="0")
 									{
@@ -1834,9 +1834,9 @@ if ($accion=="editar_formulario")
 									';
 
 									echo '
-										<a href="javascript:bifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" name=""><img src="img/bajar.png" border=0></a> 
+										<a href="javascript:bifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" name=""><i class="fa fa-caret-down fa-2x texto-verde"></i></a> 
 										'.$registro["peso"].'
-										<a href="javascript:bifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" name=""><img src="img/subir.png" border=0></a>
+										<a href="javascript:bifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" name=""><i class="fa fa-caret-up fa-2x texto-verde"></i></a>
 										';
 								
 								echo '</td>';
@@ -1854,9 +1854,9 @@ if ($accion=="editar_formulario")
 												<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 											';
 									if ($registro["visible"])
-										echo '<input type="hidden" name="valor" value="0"><a href="javascript:bif'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><img src="img/on.png" border=0></a>';
+										echo '<input type="hidden" name="valor" value="0"><a href="javascript:bif'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><i class="fa fa-lightbulb-o fa-2x texto-amarillo"></i></a>';
 									else
-										echo '<input type="hidden" name="valor" value="1"><a href="javascript:bif'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><img src="img/off.png" border=0></a>';
+										echo '<input type="hidden" name="valor" value="1"><a href="javascript:bif'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" name=""><i class="fa fa-lightbulb-o fa-2x texto-gris"></i></a>';
 								echo '</form></td>';
 										echo '<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" name="bf'.$registro["id"].'" id="bf'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
