@@ -2507,22 +2507,22 @@ function FrmAutoRun()
 												<input type="hidden" name="accion" value="copiar_formulario">
 												<input type="hidden" name="formulario" value="'.$registro["id"].'">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["tabla_datos"].'">
-												<input type="button" value="'.$MULTILANG_FrmCopiar.'"  class="Botones" onClick="confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["id"].');">
+                                                <a class="btn btn-default btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["id"].');"><i class="fa fa-code-fork"></i> '.$MULTILANG_FrmCopiar.'</a>
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
 												<input type="hidden" name="accion" value="eliminar_formulario">
 												<input type="hidden" name="formulario" value="'.$registro["id"].'">
-												<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_FrmAdvDelForm.'\',df'.$registro["id"].');">
+                                                <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvDelForm.'\',df'.$registro["id"].');"><i class="fa fa-arrows-alt"></i> '.$MULTILANG_Eliminar.'</a>
 										</form>
 								</td>
 								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST">
+										<form action="'.$ArchivoCORE.'" method="POST" name="det'.$registro["id"].'" id="det'.$registro["id"].'">
 												<input type="hidden" name="accion" value="editar_formulario">
 												<input type="hidden" name="formulario" value="'.$registro["id"].'">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["tabla_datos"].'">
-												<input type="Submit" value="'.$MULTILANG_FrmCamposAcciones.'"  class="Botones">
+                                                <a class="btn btn-default btn-xs" href="javascript:document.det'.$registro["id"].'.submit();"><i class="fa fa-list-alt"></i> '.$MULTILANG_FrmCamposAcciones.'</a>
 										</form>
 								</td>
 							</tr>';

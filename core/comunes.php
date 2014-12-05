@@ -1393,7 +1393,7 @@
 													<tr>
 														<td width="150" align="right" valign="middle"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_IngreseCodigoSeguridad; ?></td>
 														<td valign="middle">
-														<img src="img/tango_go-next.png" align="absmiddle"> <input type="text" name="captcha" size="7" maxlength=6 style="border-width: 1px; font-size: 9px; font-family: VErdana, Tahoma, Arial;">
+														<i class="fa fa-arrow-right fa-fw texto-blanco"></i> <input type="text" name="captcha" size="7" maxlength=6 style="border-width: 1px; font-size: 9px; font-family: VErdana, Tahoma, Arial;">
 														</td>
 													</tr>
 													<tr>
@@ -1426,7 +1426,7 @@
 						<script language="JavaScript"> login_usuario.uid.focus(); </script>
 
 			<?php
-			mensaje($MULTILANG_Importante,$MULTILANG_AccesoExclusivo,'100%','../img/tango_dialog-information.png','TextosVentana');
+			mensaje($MULTILANG_Importante,$MULTILANG_AccesoExclusivo,'100%','fa fa-lightbulb-o fa-4x fa-fw','TextosVentana');
 			cerrar_ventana();
 			echo '</div>';
 	  }

@@ -59,7 +59,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- CSS de Bootstrap -->
-    <link href="BORRAMEinc/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="inc/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <!-- librerías opcionales que activan el soporte de HTML5 para IE8 -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -138,8 +138,8 @@
 					if (@$Login_usuario=="admin" && $Sesion_abierta)
 						echo '
 						<div id="marco_cluster" style="position: absolute; left: 140px; top: 5px;">
-                            <input type="button" value="'.$MULTILANG_DesAppBoton.'"  class="BotonesADM" onclick="AbrirPopUp(\'BarraFlotanteDesarrollo\');">
-                            <input type="button" value="'.$MULTILANG_ConfiguracionGeneral.'"  class="BotonesADM" onclick="AbrirPopUp(\'BarraFlotanteConfiguracion\');">
+                            <a class="btn btn-default btn-xs" href="javascript:AbrirPopUp(\'BarraFlotanteDesarrollo\');"><i class="fa fa-paper-plane"></i> '.$MULTILANG_DesAppBoton.'</a>
+                            <a class="btn btn-danger btn-xs" href="javascript:AbrirPopUp(\'BarraFlotanteConfiguracion\');"><i class="fa fa-cog"></i> '.$MULTILANG_ConfiguracionGeneral.'</a>
 						</div>';
 				?>
 			</td>
@@ -167,7 +167,7 @@
 								echo "&#9733;";
 							?></font>)&nbsp;
 							<br>
-							<input type="Button" class="BotonesEstado" value=" <?php echo $MULTILANG_CerrarSesion; ?> "  OnClick="cerrar_sesion.submit();">&nbsp;
+                            <span class="label label-info" OnClick="cerrar_sesion.submit();"><?php echo $MULTILANG_CerrarSesion; ?></span>&nbsp;
 						</td>
 					</tr></table>
 				<?php
