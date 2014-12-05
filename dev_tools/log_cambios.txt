@@ -16,6 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 README.md
 CHANGELOG.md
+AUTHORS
 index.php
 core/comunes.php
 core/actualizacion.php

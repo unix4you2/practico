@@ -131,15 +131,15 @@
 				<img src="<?php echo 'skin/'.$PlantillaActiva.'/img/logo.png'; ?>" border="0">
 				<?php 
 					if ($accion!="Ver_menu" && $Sesion_abierta)
-						echo '<a href="javascript:document.core_ver_menu.submit();" title="'.$MULTILANG_IrEscritorio.'"><img src="img/tango_user-desktop.png" width="24" height="24" border=0></a>';
+						echo '<a href="javascript:document.core_ver_menu.submit();" title="'.$MULTILANG_IrEscritorio.'"><i class="fa fa-home fa-2x texto-blanco"></i></a>';
 				?>
 				<?php 
 					//Despliega botones de administracion
 					if (@$Login_usuario=="admin" && $Sesion_abierta)
 						echo '
 						<div id="marco_cluster" style="position: absolute; left: 140px; top: 5px;">
-							<input type="button" value="'.$MULTILANG_DesAppBoton.'"  class="BotonesADM" onclick="AbrirPopUp(\'BarraFlotanteDesarrollo\');">
-							<input type="button" value="'.$MULTILANG_ConfiguracionGeneral.'"  class="BotonesADM" onclick="AbrirPopUp(\'BarraFlotanteConfiguracion\');">
+                            <input type="button" value="'.$MULTILANG_DesAppBoton.'"  class="BotonesADM" onclick="AbrirPopUp(\'BarraFlotanteDesarrollo\');">
+                            <input type="button" value="'.$MULTILANG_ConfiguracionGeneral.'"  class="BotonesADM" onclick="AbrirPopUp(\'BarraFlotanteConfiguracion\');">
 						</div>';
 				?>
 			</td>

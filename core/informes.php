@@ -1270,8 +1270,7 @@ if ($accion=="editar_informe")
 										';
 								
 								echo '</td>';
-								
-								
+
 								echo '<td align=center>
 											<form action="'.$ArchivoCORE.'" method="POST" name="bif'.$registro["id"].'" id="bif'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 												<input type="hidden" name="accion" value="cambiar_estado_campo">
@@ -1618,7 +1617,7 @@ if ($accion=="guardar_informe")
 */
 if ($accion=="administrar_informes")
 	{
-		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/M4kYe9nTeTA\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><img src='img/icono_screencast.png' alt='ScreenCast-VideoTutorial'></a>";
+		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/M4kYe9nTeTA\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a>";
 		 ?>
 
 		<table class="TextosVentana"><tr><td valign=top>
@@ -1837,7 +1836,7 @@ if ($accion=="mis_informes")
 									<table cellspacing=5 class="TextosEscritorio"><tr><td align=center>
 									<input type="hidden" name="accion" value="cargar_objeto">
 									<input type="hidden" name="objeto" value="inf:'.$registro_opciones_acordeon["id"].':1:htm:Informes:0">
-									<a title="'.$registro_opciones_acordeon["titulo"].'" name="" href="javascript:document.acordeinf_'.$registro_opciones_acordeon["id"].'.submit();"><img src="img/tango_text-x-generic.png" alt="'.$registro_opciones_acordeon["titulo"].'"  valign="absmiddle" align="absmiddle"></a>
+									<a title="'.$registro_opciones_acordeon["titulo"].'" name="" href="javascript:document.acordeinf_'.$registro_opciones_acordeon["id"].'.submit();"><i class="fa fa-file-text-o fa-3x fa-fw texto-blanco"></i></a>
 									</td></tr>
 									<tr><td align=center>
 									'.$texto_icono.'

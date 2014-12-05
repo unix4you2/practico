@@ -1297,7 +1297,7 @@ if ($accion=="editar_formulario")
 						<div id='campo27' style="display:none;">
 							<table class="TextosVentana">
 							<tr>
-								<td width="200" align="right"><?php echo $MULTILANG_FrmFormatoSalida; ?> <img src="img/icn_bar.png" border=0 align=absmiddle>:</td>
+								<td width="200" align="right"><?php echo $MULTILANG_FrmFormatoSalida; ?> <i class="fa fa-barcode fa-2x texto-negro"></i><i class="fa fa-barcode fa-2x texto-negro"></i>:</td>
 								<td width="400" >
 									<select  name="formato_salida" class="Combos">
 									<option value=""><?php echo $MULTILANG_MnuTexto; ?></option>
@@ -1369,7 +1369,7 @@ if ($accion=="editar_formulario")
 							<tr>
 								<td width="200" align="right"><?php echo $MULTILANG_FrmTipoPincel; ?></td>
 								<td width="400" >
-									<img src="img/ginux_Prorgrams.png" border=0 width="20" height="20" align="absmiddle">
+									<i class="fa fa-paint-brush fa-2x texto-rojo"></i>
 									<select  name="tamano_pincel" class="Combos">
 										<option value="1">1</option>
 										<option value="2" <?php if (@$registro_campo_editar["tamano_pincel"]=="2") echo "SELECTED"; ?> >2</option>
@@ -1387,7 +1387,7 @@ if ($accion=="editar_formulario")
 							<tr>
 								<td width="200" align="right"><?php echo $MULTILANG_FrmTipoColor; ?> (Hex)</td>
 								<td width="400" >
-									<img src="img/dev_UniversalBinary.png" border=0 width="20" height="20" align="absmiddle">
+									<i class="fa fa-yelp fa-2x texto-verde"></i>
 									<input type="color" name="color_trazo" size="10" value="<?php if ($registro_campo_editar["color_trazo"]!="") echo $registro_campo_editar["color_trazo"]; else echo '#000000'; ?>" class="CampoTexto">
 									<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><i class="fa fa-question-circle"></i></a>
 								</td>
@@ -2344,7 +2344,7 @@ if ($accion=="editar_formulario")
 */
 if ($accion=="administrar_formularios")
 	{
-		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/-50HOcXa9tY\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><img src='img/icono_screencast.png' alt='ScreenCast-VideoTutorial'></a>";
+		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/-50HOcXa9tY\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a>";
 
 		 ?>
 

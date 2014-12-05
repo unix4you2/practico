@@ -334,7 +334,7 @@ if ($accion=="editar_tabla")
 				for($i=0;$i<count($registro);$i++)
 					{
 						$imagen="";
-						if ($registro[$i]["llave"] != "") $imagen=" <img src='img/key.gif' border=0 align=absmiddle>";
+						if ($registro[$i]["llave"] != "") $imagen=' <i class="fa fa-key fa-2x fa-flip-horizontal texto-rojo"></i> ';
 						echo '<tr>
 								<td><b>'.$registro[$i]["nombre"].$imagen.'</b></td>
 								<td>'.$registro[$i]["tipo"].'</td>
@@ -546,7 +546,7 @@ if ($accion=="editar_tabla")
 */
 	if ($accion=="administrar_tablas")
 		{
-			echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/otODPESW0k0\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><img src='img/icono_screencast.png' alt='ScreenCast-VideoTutorial'></a>";
+			echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/otODPESW0k0\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a>";
 
 			abrir_ventana($MULTILANG_TblCrearListar,'f2f2f2',''); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
@@ -580,7 +580,7 @@ if ($accion=="editar_tabla")
 				<form name="datosasis" id="datosasis" action="<?php echo $ArchivoCORE; ?>" method="POST">
 				<input type="Hidden" name="accion" value="asistente_tablas">
 				<?php echo $MULTILANG_Asistente; ?><br>
-				<a href="#" title="<?php echo $MULTILANG_TblTitAsis; ?>" name="<?php echo $MULTILANG_TblDesAsis; ?>"><input type="image" src="img/asistente.png"></a>
+				<a href="#" title="<?php echo $MULTILANG_TblTitAsis; ?>" name="<?php echo $MULTILANG_TblDesAsis; ?>"><i class="fa fa-paint-brush fa-5x texto-naranja"></i></a>
 				</form>
 			</td>
 			<tr>

@@ -883,7 +883,7 @@ if ($accion=="agregar_usuario")
 
 			<table width="500" border="0" cellspacing="5" cellpadding="0" align="center" class="TextosVentana">
 					<tr>
-						<td valign="top"><img src="img/info_icon.png" alt="" border="0">
+						<td valign="top"><i class="fa fa-info-circle fa-5x texto-azul"></i>
 						</td>
 						<td valign="top"><strong><?php echo $MULTILANG_Importante; ?>:<br></strong>
 						<?php echo $MULTILANG_UsrDesPW; ?>
@@ -1313,7 +1313,7 @@ if ($accion=="listar_usuarios")
 				Ver tambien:
 					<agregar_usuario> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario>
 			*/
-				echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/0KzASMtKRcc\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><img src='img/icono_screencast.png' alt='ScreenCast-VideoTutorial'></a>";
+				echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/0KzASMtKRcc\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a>";
 
 				abrir_ventana($MULTILANG_UsrLista,'f2f2f2','');
 

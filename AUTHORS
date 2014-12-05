@@ -87,6 +87,14 @@ Font-Awesome
 	Code License: MIT License
 	URL: http://opensource.org/licenses/mit-license.html
 
+Bootstrap
+	Location: inc/bootstrap/*
+	License: MIT License
+    License docs: Creative Commons  
+    URL: http://getbootstrap.com/
+	Copyright 2011-2014 Twitter, Inc.
+
+
 Tango Desktop Project:
 	Location: all files under img/tango_*:
 	License: The Tango base icon theme is released to the Public Domain. 
