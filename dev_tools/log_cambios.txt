@@ -42,6 +42,7 @@ inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/font-awesome/*
 skin/nomo/general.css
+inc/jquery/plugins/bootstrap-modal.js
 "
 
 #[ArchivosObligatorios] Separados por espacio

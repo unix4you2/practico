@@ -32,36 +32,74 @@
 
 ?>
 
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_TitDisenador; ?></h4>
+      </div>
+      <div class="modal-body">
+            <table class="table">
+                <tr>
+                    <td><h1><span class="label label-primary">1</span></h1></td>
+                    <td align=left valign=top>
+                    <?php echo $MULTILANG_DefTablas; ?>: <u><b><?php echo strtoupper($MULTILANG_Basedatos); ?></b></u>
+                    <br><?php echo $MULTILANG_DesTablas; ?>
+                    </td>
+                    <td>
+                    <form action="" method="post" name="wzd_1" id="wzd_1" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+                    <input type="hidden" name="accion" value="administrar_tablas">
+                    </form>
+                        <i class="fa fa-table fa-2x fa-border"  onClick="document.wzd_1.submit();"></i>
+                    </td>
+                </tr>
+            </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='BarraFlotanteDesarrollo' class="FormularioPopUps">
 			<?php
-			abrir_ventana($NombreRAD,'#000000','600'); 
+			abrir_ventana($MULTILANG_TitDisenador,'panel-primary'); 
 			?>
+
+
+            
+            
 				<table width="100%" cellspacing=0 cellpadding=0 background="skin/<?php echo $PlantillaActiva; ?>/img/fondo_ventanas1.png"><tr><td>
 					<br>
 					
 					<div align=center>
 					<font color=yellow face="Tahoma,Verdana,Arial">
-						<font size=5>
-							<?php echo $MULTILANG_TitDisenador; ?>
-						</font>
 						<hr>
 						<table width="100%" cellspacing=2 cellpadding=5 style="color:#FFFFFF; font-size:14px;"><tr>
-							<td><img src="img/1.png" border=0></td>
+							<td><h1><span class="label label-primary">1</span></h1></td>
 							<td align=left valign=top>
 								<?php echo $MULTILANG_DefTablas; ?>: <u><b><font color="#FFF022"><?php echo strtoupper($MULTILANG_Basedatos); ?></font></b></u>
 								<br><font color=lightgray size=1><?php echo $MULTILANG_DesTablas; ?></font>
 							</td>
 							<td>
-								<form action="" method="post" name="wzd_1" id="wzd_1" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+								<form action="" method="post" name="wzd_1old" id="wzd_1old" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 									<input type="hidden" name="accion" value="administrar_tablas">
 								</form>
-                                <i class="fa fa-table fa-2x fa-border"  onClick="document.wzd_1.submit();"></i>
+                                <i class="fa fa-table fa-2x fa-border"  onClick="document.wzd_1old.submit();"></i>
 							</td>
 						</tr>
 						<tr><td colspan="3"><hr></td></tr>
 						<tr>
-							<td><img src="img/2.png" border=0></td>
+							<td><h1><span class="label label-success">2</span></h1></td>
 							<td align=left valign=top >
 								<?php echo $MULTILANG_Disene; ?> <u><b><font color="#FFF022"><?php echo strtoupper($MULTILANG_Formularios); ?></font></b></u> <?php echo $MULTILANG_DefForms; ?>
 								<br><font color=lightgray size=1><?php echo $MULTILANG_DesForms; ?></font>
@@ -75,7 +113,7 @@
 						</tr>
 						<tr><td colspan="3"><hr></td></tr>
 						<tr>
-							<td><img src="img/3.png" border=0></td>
+							<td><h1><span class="label label-info">3</span></h1></td>
 							<td align=left valign=top >
 								<?php echo $MULTILANG_Disene; ?> <u><b><font color="#FFF022"><?php echo strtoupper($MULTILANG_Informes); ?></font></b></u> <?php echo $MULTILANG_DefInformes; ?>
 								<br><font color=lightgray size=1><?php echo $MULTILANG_DesInformes; ?></font>
@@ -89,7 +127,7 @@
 						</tr>
 						<tr><td colspan="3"><hr></td></tr>
 						<tr>
-							<td><img src="img/4.png" border=0></td>
+							<td><h1><span class="label label-warning">4</span></h1></td>
 							<td align=left valign=top >
 								<?php echo $MULTILANG_Administre; ?> <u><b><font color="#FFF022"><?php echo strtoupper($MULTILANG_OpcionesMenu); ?></font></b></u> <?php echo $MULTILANG_DefMenus; ?>
 								<br><font color=lightgray size=1><?php echo $MULTILANG_DesMenus; ?></font>
@@ -103,7 +141,7 @@
 						</tr>
 						<tr><td colspan="3"><hr></td></tr>
 						<tr>
-							<td><img src="img/5.png" border=0></td>
+							<td><h1><span class="label label-danger">5</span></h1></td>
 							<td align=left valign=top >
 								<?php echo $MULTILANG_Defina; ?> <u><b><font color="#FFF022"><?php echo strtoupper($MULTILANG_UsuariosPermisos); ?></font></b></u> <?php echo $MULTILANG_DefUsuarios; ?>
 								<br><font color=lightgray size=1><?php echo $MULTILANG_DesUsuarios; ?></font>
@@ -121,7 +159,7 @@
 				</td></tr></table> <!-- cierra tabla para el fondo -->
 			<?php
 			abrir_barra_estado();
-				echo '<input type="Button"  class="BotonesEstadoCuidado" value=" <<< '.$MULTILANG_IrEscritorio.' " onClick="OcultarPopUp(\'BarraFlotanteDesarrollo\')">';
+				echo '<a class="btn btn-primary btn-xs" href="javascript:OcultarPopUp(\'BarraFlotanteDesarrollo\')"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
 			cerrar_barra_estado();
 			cerrar_ventana();
 			?>

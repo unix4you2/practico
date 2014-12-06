@@ -74,10 +74,6 @@
 	<script type="text/javascript" src="inc/practico/javascript/tecladovirtual.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/html5slider.js"></script>
 
-    <!-- Librería jQuery requerida por los plugins de JavaScript -->
-	<script type="text/javascript" src="inc/jquery/jquery-2.1.0.min.js"></script>
-	<script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>
-
 	<link rel="stylesheet" href="inc/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/general.css">
 	<link rel="stylesheet" type="text/css" href="skin/<?php echo $PlantillaActiva; ?>/calendario.css">
@@ -138,7 +134,8 @@
 					if (@$Login_usuario=="admin" && $Sesion_abierta)
 						echo '
 						<div id="marco_cluster" style="position: absolute; left: 140px; top: 5px;">
-                            <a class="btn btn-default btn-xs" href="javascript:AbrirPopUp(\'BarraFlotanteDesarrollo\');"><i class="fa fa-puzzle-piece"></i> '.$MULTILANG_DesAppBoton.'</a>
+                            <a data-toggle="modal" class="btn btn-default btn-xs" href="#myModal"><i class="fa fa-puzzle-piece"></i> '.$MULTILANG_DesAppBoton.'</a>
+                            <!-- <a class="btn btn-default btn-xs" href="javascript:AbrirPopUp(\'BarraFlotanteDesarrollo\');"><i class="fa fa-puzzle-piece"></i> '.$MULTILANG_DesAppBoton.'</a> -->
                             <a class="btn btn-danger btn-xs" href="javascript:AbrirPopUp(\'BarraFlotanteConfiguracion\');"><i class="fa fa-cog"></i> '.$MULTILANG_ConfiguracionGeneral.'</a>
 						</div>';
 				?>

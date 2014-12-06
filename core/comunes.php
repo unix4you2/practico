@@ -1435,57 +1435,29 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function abrir_ventana($titulo,$fondo,$ancho='100%',$barra_herramientas='')
-	  {
-		global $PlantillaActiva,$MULTILANG_VistaImpresion;
-		/*
-			Procedure: abrir_ventana
-			Abre los espacios de trabajo dinamicos sobre el contenedor principal donde se despliega informacion
+    function abrir_ventana($titulo,$tipo_panel="panel-default",$DEPRECATED_ancho='100%',$barra_herramientas='')
+        {
+            /*
+            Procedure: abrir_ventana
+            Abre los espacios de trabajo dinamicos sobre el contenedor principal donde se despliega informacion
 
-			Variables de entrada:
+            Variables de entrada:
 
-				titulo - Nombre de la ventana a visualizar en la parte superior.  Acepta modificadores HTML.
-				fondo - Color de fondo de la ventana en formato Hexadecimal. Si no es enviado se crea transparente.  Si llega un nombre de imagen es usado.
-				ancho - Ancho del espacio de trabajo definido en pixels o porcentaje sobre el contenedor principal.
-				
-			Ver tambien:
-			<cerrar_ventana>
-		*/
+            titulo - Nombre de la ventana a visualizar en la parte superior.
+            tipo_panel - Recibe el tipo de panel bootstrap a crear: panel-primary,panel-success,panel-info,panel-warning,panel-danger
+            barra_herramientas - Lista de barras de herramientas a ser impresas
 
-		// Determina si fue enviado un nombre de archivo como fondo y lo usa
-		$ruta_fondo_imagen='';
-		$color_fondo='';
-		if (strpos($fondo, ".png") || strpos($fondo, ".jpg") || strpos($fondo, ".gif"))
-			$ruta_fondo_imagen='skin/'.$PlantillaActiva.'/img/'.$fondo;
-		else
-			$color_fondo=$fondo;
-
-		echo '
-			<table width="'.$ancho.'" border="0" cellspacing="0" cellpadding="0" class="EstiloVentana">
-				<tr>
-					<td>
-							<table width="100%" border="0" cellspacing="0" cellpadding="0" background="skin/'.$PlantillaActiva.'/img/bar_c.jpg"><tr>
-									<td valign=top><img src="skin/'.$PlantillaActiva.'/img/bar_i.gif" border=0 alt=" "></td>
-									<td width="100%" align="CENTER" background="skin/'.$PlantillaActiva.'/img/bar_c.jpg">
-										<font face="" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; color: Black;"><b>
-												'.$titulo.'
-										</b></font>
-									</td>
-									<!-- Barra de botones de ventana -->
-									<td valign=top align="RIGHT" background="skin/'.$PlantillaActiva.'/img/bar_c.jpg">';
-										// Si se recibe una barra de herramientas la dibuja
-										if ($barra_herramientas!='')
-											echo $barra_herramientas;
-		echo '						</td>
-									<td valign=top><img src="skin/'.$PlantillaActiva.'/img/bar_d.gif " border=0 alt=""></td>
-							</tr></table>
-					</td>
-				</tr>
-				<tr>
-					<td width="100%" align="CENTER">
-							<table width="100%" border="1" cellspacing="0" cellpadding="0" align="center"  bgcolor="'.$color_fondo.'" BACKGROUND="'.$ruta_fondo_imagen.'" class="TextosVentana"><tr><td>
-				';
-	  }
+            Ver tambien:
+            <cerrar_ventana>
+            */
+            echo '
+                <div class="panel '.$tipo_panel.'">
+                <div class="panel-heading">'.$titulo;
+            if ($barra_herramientas!='')
+                echo $barra_herramientas;
+            echo '</div>
+                <div class="panel-body">';
+        }
 
 
 
@@ -1500,38 +1472,42 @@
 			Ver tambien:
 			<abrir_ventana>	
 		*/
-			echo '
-							</td></tr></table>
-					</td>
-				</tr>
-			</table>
-				';		  
+        echo '
+              </div>  <!-- CIERRA panel-body -->
+            </div>  <!-- CIERRA panel panel-default -->';
 	  }
 
 
 
 /* ################################################################## */
 /* ################################################################## */
-	function abrir_barra_estado($alineacion="CENTER")
+	function abrir_barra_estado($DEPRECATED_alineacion="CENTER")
 	  {
 		 global $PlantillaActiva;
 		/*
 			Procedure: abrir_barra_estado
 			Abre los espacios para despliegue de informacion en la parte inferior de los objetos tales como botones o mensajes
 
-			Variables de entrada:
-
-				alineacion - Alineacion que tendran los objetos en la barra (center, left, right).  Por defecto CENTER cuando no es recibido el parametro
-				
 			Ver tambien:
 			<cerrar_barra_estado>	
 		*/
+        echo '<div class="panel-footer">';
+	  }
 
-		echo '
-			<table width="100%" border="0" cellspacing="0" cellpadding="1" class="EstiloBarraEstado">
-				<tr>
-					<td width="100%" align="'.$alineacion.'">
-				';
+
+
+/* ################################################################## */
+/* ################################################################## */
+	function cerrar_barra_estado()
+	  {
+		/*
+			Function: cerrar_barra_estado
+			Cierra los espacios de trabajo dinamicos generados por <abrir_barra_estado>
+
+			Ver tambien:
+			<abrir_barra_estado>	
+		*/
+            echo '</div> <!-- CIERRA panel-footer -->';
 	  }
 
 
@@ -1547,26 +1523,6 @@
 			list($useg, $seg) = explode(" ", microtime());
 			return ((float)$useg + (float)$seg);
 		}
-
-
-
-/* ################################################################## */
-/* ################################################################## */
-	function cerrar_barra_estado()
-	  {
-		/*
-			Function: cerrar_barra_estado
-			Cierra los espacios de trabajo dinamicos generados por <abrir_barra_estado>
-
-			Ver tambien:
-			<abrir_barra_estado>	
-		*/
-			echo '
-					</td>
-				</tr>
-			</table>
-				';		  
-	  }
 
 
 
