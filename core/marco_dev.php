@@ -41,7 +41,12 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_TitDisenador; ?></h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body modal-primary">
+           
+           
+           
+           
+           
             <table class="table">
                 <tr>
                     <td><h1><span class="label label-primary">1</span></h1></td>
@@ -72,7 +77,7 @@
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='BarraFlotanteDesarrollo' class="FormularioPopUps">
 			<?php
-			abrir_ventana($MULTILANG_TitDisenador,'panel-primary'); 
+			abrir_ventana($MULTILANG_TitDisenador, 'panel-primary'); 
 			?>
 
 

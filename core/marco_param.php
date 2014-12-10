@@ -69,7 +69,7 @@
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='BarraFlotanteParametros' class="FormularioPopUps">
 			<?php
-				abrir_ventana($NombreRAD.' - '.$MULTILANG_ParametrosApp,'#f2f2f2',''); 
+				abrir_ventana($NombreRAD.' - '.$MULTILANG_ParametrosApp, 'panel-info'); 
 
 				//Consulta parametros de la aplicacion
 				$resultado=ejecutar_sql("SELECT id,$ListaCamposSinID_parametros from ".$TablasCore."parametros ");

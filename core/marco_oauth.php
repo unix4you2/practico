@@ -36,7 +36,7 @@
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='BarraFlotanteOAuth' class="FormularioPopUps">
 			<?php
-				abrir_ventana($NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral,'#f2f2f2',''); 
+				abrir_ventana($NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral, 'panel-danger'); 
 
 				// Determina si la conexion actual de Practico esta encriptada
 				if(empty($_SERVER["HTTPS"]))

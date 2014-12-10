@@ -415,7 +415,7 @@ if ($accion=="eliminar_informe_usuario")
 if ($accion=="informes_usuario")
 				{
 						echo '<div align="center"><br>';
-						abrir_ventana($MULTILANG_UsrAdmInf,'f2f2f2','60%');
+						abrir_ventana($MULTILANG_UsrAdmInf,'panel-info');
 		?>
 
 		<div align="center" class="TextosVentana">
@@ -601,7 +601,7 @@ if ($accion=="eliminar_permiso")
 if ($accion=="permisos_usuario")
 				{
 						echo '<div align="center"><br>';
-						abrir_ventana($MULTILANG_UsrAdmPer,'f2f2f2','60%');
+						abrir_ventana($MULTILANG_UsrAdmPer, 'panel-info');
 		?>
 
 		<div align="center" class="TextosVentana">
@@ -878,7 +878,7 @@ if ($accion=="agregar_usuario")
 					<listar_usuarios> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario> | <muestra_seguridad_clave> | <seguridad_clave>
 			*/
 		echo '<div align="center">';
-		abrir_ventana($MULTILANG_UsrAdicion,'f2f2f2','600');
+		abrir_ventana($MULTILANG_UsrAdicion, 'panel-info');
         
         mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'','fa fa-info-circle fa-5x texto-azul','alert alert-info alert-dismissible');
 ?>
@@ -1001,7 +1001,7 @@ if ($accion=="ver_seguimiento_monitoreo")
 					<listar_usuarios> | <ver_seguimiento_especifico>
 			*/
 						echo '<div align="center"><br>';
-				abrir_ventana($MULTILANG_UsrAudit1,'#BDB9B9','90%');
+				abrir_ventana($MULTILANG_UsrAudit1, 'panel-info');
 					echo '<form name="datos" action="'.$ArchivoCORE.'" method="POST">
 						</form>';
 				echo '<table width="100%" border="0" cellspacing="2" align="CENTER" class="TextosVentana">
@@ -1058,7 +1058,7 @@ if ($accion=="ver_seguimiento_general")
 			*/
 
 				echo '<div align="center"><br>';
-				abrir_ventana($MULTILANG_UsrAudUsrs,'#BDB9B9','90%');
+				abrir_ventana($MULTILANG_UsrAudUsrs, 'panel-info');
 				if (@$inicio_reg=="") $inicio_reg=0;
 				if (@$fin_reg=="") $fin_reg=50;
 					echo ' <br><div align="center">
@@ -1237,7 +1237,7 @@ if ($accion=="ver_seguimiento_especifico")
 					<listar_usuarios> | <ver_seguimiento_general>
 			*/
 						echo '<div align="center"><br>';
-				abrir_ventana($MULTILANG_UsrAudHisto,'#BDB9B9','90%');
+				abrir_ventana($MULTILANG_UsrAudHisto, 'panel-info');
 				if ($inicio_reg=="") $inicio_reg=0;
 				if ($fin_reg=="") $fin_reg=50;
 					echo ' <br><div align="right">
@@ -1307,7 +1307,7 @@ if ($accion=="listar_usuarios")
 			*/
 				echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/0KzASMtKRcc\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a>";
 
-				abrir_ventana($MULTILANG_UsrLista,'f2f2f2','');
+				abrir_ventana($MULTILANG_UsrLista, 'panel-info');
 
 				echo '<br>
 		<div align="center">

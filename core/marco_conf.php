@@ -36,7 +36,7 @@
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='BarraFlotanteConfiguracion' class="FormularioPopUps">
 			<?php
-			abrir_ventana($NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral,'#f2f2f2','900'); 
+			abrir_ventana($NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral, 'panel-primary');
 			?>
 				<!--<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 800; POSITION: relative; HEIGHT: 400px">-->
 

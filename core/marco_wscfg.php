@@ -130,7 +130,7 @@
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='ConfiguracionWebServices' class="FormularioPopUps">
 			<?php
-			abrir_ventana($NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral,'#f2f2f2','750'); 
+			abrir_ventana($NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral, 'panel-info'); 
 			?>
 			
 				<br><div align=center><font size=3><b><?php echo $MULTILANG_WSLlavesNuevo; ?></b></font>

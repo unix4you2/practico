@@ -35,7 +35,7 @@
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='BarraFlotanteChat' class="FormularioPopUps">
 			<?php
-				abrir_ventana($MULTILANG_UsrLista,'#f2f2f2',''); 
+				abrir_ventana($MULTILANG_UsrLista, 'panel-primary'); 
 				echo '<div align=center><br>'.$MULTILANG_UsuariosChat.'<br><br></div>';
 
 				//Consulta los usuarios siempre y cuando tenga sesion activa

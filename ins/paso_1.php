@@ -22,14 +22,14 @@
 <div align=center>
 	
 
-<table width="700" cellspacing=10>
+<table  class="table">
 	<tr>
 		<td width=100 valign=top><img src="../img/practico_login.png" border=0 ALT="Logo Practico" width="116" height="80"></td>
 		<td valign=top>
 			<font size=2 color=black><br>
 			<b>[<?php echo $MULTILANG_ChequeoPreprocesador; ?>]</b><br>
 			<?php echo $MULTILANG_VistaPreprocesador; ?></b>.
-				<table width="100%" cellspacing=10><tr><td valign=top><font size=2 color=black>
+				<table class="table"><tr><td valign=top><font size=2 color=black>
 					<div align=left>
 						<u><?php echo $MULTILANG_CumplirRequisitos; ?>:</u>
 						<li><?php echo $MULTILANG_CumplirPDO; ?>
@@ -42,7 +42,7 @@
 			<hr><b>[<?php echo $MULTILANG_ChequeoDirectorios1; ?>]</b><br>
 				<?php echo $MULTILANG_ChequeoDirectorios2; ?>:
 			</font>
-				<table width="100%" cellspacing=10><tr><td valign=top><font size=2 color=black>
+				<table class="table"><tr><td valign=top><font size=2 color=black>
 					<div align=left>
 						<?php
 							$hay_error=0;
@@ -75,7 +75,7 @@
 	echo '<form name="regresar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 			<input type="Hidden" name="paso" value="'.$anterior.'">
 			<input type="Hidden" name="Idioma" value="'.$Idioma.'">
-			<input type="Button" class="BotonesEstado" value=" <<< '.$MULTILANG_Anterior.' " onclick="document.regresar.submit();">
+            <button onclick="document.regresar.submit();" type="button" class="btn btn-primary navbar-btn"><i class="fa fa-caret-square-o-left texto-amarillo"></i> '.$MULTILANG_Anterior.'</button>
 		  </form>';
 
 	echo '<form name="continuar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';	
@@ -84,14 +84,14 @@
 			echo '<input type="Hidden" name="paso" value="'.$paso.'">
 				  <input type="Hidden" name="Idioma" value="'.$Idioma.'">
 			';
-			echo '<input type="Button" class="BotonesEstado" value=" '.$MULTILANG_ProbarNuevamente.' " onclick="document.continuar.submit();">';
+			echo '<button onclick="document.continuar.submit();" type="button" class="btn btn-primary navbar-btn">'.$MULTILANG_ProbarNuevamente.' <i class="fa fa-refresh texto-amarillo"></i></button>';
 		}
 	else
 		{
 			echo '<input type="Hidden" name="paso" value="'.$siguiente.'">
 				  <input type="Hidden" name="Idioma" value="'.$Idioma.'">
 			';
-			echo '<input type="Button" class="BotonesEstadoCuidado" value=" '.$MULTILANG_Continuar.' >>> " onclick="document.continuar.submit();">';
+			echo '<button onclick="document.continuar.submit();" type="button" class="btn btn-primary navbar-btn">'.$MULTILANG_Continuar.' <i class="fa fa-caret-square-o-right texto-amarillo"></i></button>';
 		}
 	echo '</form>';
 

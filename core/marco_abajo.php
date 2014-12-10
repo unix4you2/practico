@@ -97,5 +97,6 @@
     <script src="inc/bootstrap/js/bootstrap.min.js"></script>
     <!-- NO REQUERIDO <script type="text/javascript" src="inc/jquery/plugins/bootstrap-modal.js"></script>-->
 
+</div>
 </body>
 </html>

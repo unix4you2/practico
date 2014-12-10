@@ -717,7 +717,7 @@ if ($accion=="editar_formulario")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioCampos' class="FormularioPopUps">
 				<?php 
-				abrir_ventana($MULTILANG_FrmMsj1,'#BDB9B9','');
+				abrir_ventana($MULTILANG_FrmMsj1, 'panel-primary');
 				
 				//Si se trata de la edicion de un campo entonces busca su registro para agregar valores al form
 				if (@$popup_activo=="FormularioCampos")
@@ -1498,7 +1498,7 @@ if ($accion=="editar_formulario")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioBotones' class="FormularioPopUps">
 			<?php
-			abrir_ventana($MULTILANG_FrmAgregaBot,'BDB9B9','');
+			abrir_ventana($MULTILANG_FrmAgregaBot,'panel-warning');
 			?>
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="accion" value="guardar_accion_formulario">
@@ -1618,7 +1618,7 @@ if ($accion=="editar_formulario")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioDiseno' class="FormularioPopUps">
 			<?php
-				abrir_ventana($MULTILANG_FrmDisCampos,'#BDB9B9','');
+				abrir_ventana($MULTILANG_FrmDisCampos, 'panel-primary');
 			?>
 				<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 550px">
 					<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
@@ -1786,7 +1786,7 @@ if ($accion=="editar_formulario")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioAcciones' class="FormularioPopUps">
 			<?php
-				abrir_ventana($MULTILANG_FrmTitComandos,'#BDB9B9','');
+				abrir_ventana($MULTILANG_FrmTitComandos, 'panel-danger');
 			?>
 					<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
 						<tr>
@@ -1905,7 +1905,7 @@ if ($accion=="editar_formulario")
 
 		<table><tr><td align=center valign=top>
 			<?php 
-				abrir_ventana($MULTILANG_BarraHtas,'#BDB9B9','100%'); 
+				abrir_ventana($MULTILANG_BarraHtas, 'panel-warning'); 
 			?>
 				<div align=center>
 				<?php echo $MULTILANG_FrmObjetos; ?><br>
@@ -1929,7 +1929,7 @@ if ($accion=="editar_formulario")
 				// Inicia presentacion de ventana de edicion de formulario
 				$consulta_form=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
 				$registro_form = $consulta_form->fetch();
-				abrir_ventana($MULTILANG_FrmActualizar,'f2f2f2','100%');
+				abrir_ventana($MULTILANG_FrmActualizar, 'panel-primary');
 			?>
 			<form name="datosact" id="datosact" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="actualizar_formulario">
@@ -1939,7 +1939,7 @@ if ($accion=="editar_formulario")
 				<!-- INICIO DE MARCOS POPUP -->
 				<div id='FormularioScripts' class="FormularioPopUps">
 					<?php
-						abrir_ventana($MULTILANG_FrmTitComandos,'#BDB9B9','');
+						abrir_ventana($MULTILANG_FrmTitComandos, 'panel-danger');
 					?>
 						<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
 							<tr>
@@ -2349,7 +2349,7 @@ if ($accion=="administrar_formularios")
 		 ?>
 
 		<table class="TextosVentana"><tr><td valign=top>
-			<?php abrir_ventana($MULTILANG_FrmAgregar,'f2f2f2',''); ?>
+			<?php abrir_ventana($MULTILANG_FrmAgregar, 'panel-warning'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_formulario">
 			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
@@ -2358,7 +2358,7 @@ if ($accion=="administrar_formularios")
 				<!-- INICIO DE MARCOS POPUP -->
 				<div id='FormularioScripts' class="FormularioPopUps">
 					<?php
-						abrir_ventana($MULTILANG_FrmTitComandos,'#BDB9B9','');
+						abrir_ventana($MULTILANG_FrmTitComandos, 'panel-primary');
 					?>
 						<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
 							<tr>
@@ -2483,7 +2483,7 @@ function FrmAutoRun()
 		cerrar_ventana();	
 		
 		echo '</td><td valign=top>';  // Inicia segunda columna del diseñador
-		abrir_ventana($MULTILANG_FrmTitForms,'f2f2f2','');
+		abrir_ventana($MULTILANG_FrmTitForms, 'panel-info');
 		?>
 				<table width="100%" border="0" cellspacing="5" align="CENTER"  class="TextosVentana">
 					<tr>

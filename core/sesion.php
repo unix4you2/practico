@@ -192,7 +192,7 @@
 	{
 		@session_destroy();
 		echo '<br><br><div align="center">';
-		abrir_ventana($MULTILANG_Atencion,'FFFFFF','');
+		abrir_ventana($MULTILANG_Atencion, 'panel-primary');
 			echo '
 			<br><div align="center" class="TextosVentana"><strong><font size="3">'.$MULTILANG_SesionCerrada.'</font></strong>
 			<table width="100%"><tr>

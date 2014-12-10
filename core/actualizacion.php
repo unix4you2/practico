@@ -34,7 +34,7 @@
 if ($accion=="actualizar_practico")
 	{
 		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/OxheOe-o17s\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a>";
-		abrir_ventana($NombreRAD.' - '.$MULTILANG_Actualizacion,'f2f2f2','600');
+		abrir_ventana($NombreRAD.' - '.$MULTILANG_Actualizacion,'panel-info');
 		mensaje($MULTILANG_ActMsj1,$MULTILANG_ActMsj2,'100%','fa fa-exclamation-triangle fa-5x','TextosVentana');
 ?>
 		<div align="center">
@@ -87,7 +87,7 @@ if ($accion=="actualizar_practico")
 */
 if ($accion=="cargar_archivo")
 	{
-		abrir_ventana($MULTILANG_Adjuntando,'f2f2f2','');
+		abrir_ventana($MULTILANG_Adjuntando, 'panel-primary');
 		echo '<table border="0" width="400"  cellspacing="0" cellpadding="0" align="center" class="TextosVentana"><tr height="100%"><td align=center height="100%">';
 
 		//datos del arhivo
@@ -156,7 +156,7 @@ if ($accion=="cargar_archivo")
 */
 if ($accion=="analizar_parche")
 	{
-		abrir_ventana($MULTILANG_ErrorDescomprimiendo.' '.$archivo_cargado,'f2f2f2','700');
+		abrir_ventana($MULTILANG_ErrorDescomprimiendo.' '.$archivo_cargado, 'panel-info');
 		echo '<table border="0" width="100%"  cellspacing="15" cellpadding="0" align="center" class="TextosVentana"><tr height="100%"><td align=left height="100%">
 		<u>'.$MULTILANG_ContenidoParche.':</u><br>';
 		$mensaje_error="";
@@ -311,7 +311,7 @@ if ($accion=="aplicar_parche")
 				return($ret);
 			}
 
-		abrir_ventana($MULTILANG_Aplicando.': '.$archivo_cargado,'f2f2f2','700');
+		abrir_ventana($MULTILANG_Aplicando.': '.$archivo_cargado, 'panel-primary');
 		echo '<table border="0" width="100%"  cellspacing="15" cellpadding="0" align="center" class="TextosVentana"><tr height="100%"><td align=left height="100%">
 		<u>'.$MULTILANG_ActDesde.' '.$version_actual.' ---> '.$version_final.':</u><br><br>';
 		$mensaje_error="";

@@ -1282,11 +1282,7 @@
 			// Variable que determina si se tiene activo al menos un proveedor OAuth
 			$AlMenosUnOAuth=0;
 
-			echo '
-					<br><br>
-					<div align="center">
-					';
-			abrir_ventana($MULTILANG_TituloLogin,'#EADEDE','620');
+			abrir_ventana($MULTILANG_TituloLogin, 'panel-primary col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-');
 			?>
 
 			<script language="javascript"> 
@@ -1310,17 +1306,17 @@
 					}
 			</script>
 
-						<div align="center">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center"><tr>
+
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="table"><tr>
 								<td align="center">
 
 										<div id="LoginOauth" style="display:none; visibility:hidden; ">
-										<table width="350" border="0" cellspacing="10" cellpadding="0" class="TextosVentana" align="center">
+										<table width="350" border="0" cellspacing="10" cellpadding="0" class="table" align="center">
 												<tr bgcolor="#AAA6AD"><td align="center"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">
 													<?php echo $MULTILANG_LoginOauthDes; ?>
 												</td></tr>
 												<tr><td align="center"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">
-													
+
 													<?php
 														// Crea los formularios de redireccion segun proveedor
 														function CreaFormOauth($sitio)
@@ -1337,7 +1333,7 @@
 																// Retorna valor de activacion a variable AlMenosUnOAuth
 																return 1;
 															}
-															
+
 														if ($APIGoogle_ClientId!=''			&& $APIGoogle_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Google');
 														if ($APIFacebook_ClientId!=''		&& $APIFacebook_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Facebook');
 														if ($APILinkedIn_ClientId!=''		&& $APILinkedIn_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('LinkedIn');
@@ -1370,6 +1366,16 @@
 										</div>
 
 										<div id="LoginClasico" style="display:block; visibility:visible; ">
+                                            
+                                            
+
+                                            
+                                            
+                                            
+                                     
+  
+                                            
+                                            
 										<table width="100%" border="0" cellspacing="3" cellpadding="0" class="TextosVentana" align="center">
 												<tr><td align="center"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">
 												
@@ -1377,29 +1383,36 @@
 													<input type="Hidden" name="accion" value="Iniciar_login">
 													<table width="350" border="0" cellspacing="7" cellpadding="0" class="TextosVentana" align="center">
 													<tr>
-														<td align="right"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_Usuario; ?>&nbsp;</td>
-														<td><input type="text" name="uid" size="18" class="CampoTexto" class="keyboardInput"></td>
-													</tr>
-													<tr>
-														<td align="right"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_Contrasena; ?>&nbsp;</td>
-														<td><input type="password" name="clave" size="18" class="CampoTexto keyboardInput" class="keyboardInput" style="border-width: 1px; font-size: 9px; font-family: VErdana, Tahoma, Arial;"></td>
-													</tr>
-													<tr>
-														<td align="right" valign="middle"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_CodigoSeguridad; ?></td>
-														<td valign="middle">
-														<img src="core/captcha.php">
-														</td>
-													</tr>
-													<tr>
-														<td width="150" align="right" valign="middle"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;"><?php echo $MULTILANG_IngreseCodigoSeguridad; ?></td>
-														<td valign="middle">
-														<i class="fa fa-arrow-right fa-fw texto-blanco"></i> <input type="text" name="captcha" size="7" maxlength=6 style="border-width: 1px; font-size: 9px; font-family: VErdana, Tahoma, Arial;">
-														</td>
-													</tr>
-													<tr>
-														<td></td>
 														<td>
-															<input type="Submit"  class="Botones" value=" <?php echo $MULTILANG_Ingresar; ?> >>>" >
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                                                                <input name="uid" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Usuario; ?>">
+                                                            </div>
+                                                        </td>
+													</tr>
+													<tr>
+														<td>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                                                                <input name="clave" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
+                                                            </div>
+                                                        </td>
+													</tr>
+													<tr>
+														<td valign="middle">
+                                                            <?php echo $MULTILANG_CodigoSeguridad; ?>
+                                                            <img src="core/captcha.php">
+														</td>
+													</tr>
+													<tr>
+														<td valign="middle">
+                                                            <?php echo $MULTILANG_IngreseCodigoSeguridad; ?>
+                                                            <i class="fa fa-arrow-right fa-fw texto-blanco"></i> <input type="text" name="captcha" size="7" maxlength=6 style="border-width: 1px; font-size: 9px; font-family: VErdana, Tahoma, Arial;">
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<a class="btn btn-primary" href="javascript:document.login_usuario.submit();"><?php echo $MULTILANG_Ingresar; ?></a>
 														</td>
 													</tr>
 													</table>
@@ -1414,28 +1427,27 @@
 										</table>
 										</div>
 
-
 								</td>
 								<td align="center">
 										<img name="img_login" id="img_login" src="img/practico_login.png" alt="" border="0">
 								</td>
 						</tr></table>
 						
-						</div>
+
 
 						<script language="JavaScript"> login_usuario.uid.focus(); </script>
 
 			<?php
-			mensaje($MULTILANG_Importante,$MULTILANG_AccesoExclusivo,'100%','fa fa-lightbulb-o fa-4x fa-fw','TextosVentana');
+			mensaje($MULTILANG_Importante,$MULTILANG_AccesoExclusivo,'','fa fa-info-circle fa-3x texto-azul','alert alert-info');
 			cerrar_ventana();
-			echo '</div>';
+
 	  }
 
 
 
 /* ################################################################## */
 /* ################################################################## */
-    function abrir_ventana($titulo,$tipo_panel="panel-default",$DEPRECATED_ancho='100%',$barra_herramientas='')
+    function abrir_ventana($titulo,$tipo_panel="panel-default",$css_personalizado='',$barra_herramientas='')
         {
             /*
             Procedure: abrir_ventana
@@ -1444,14 +1456,19 @@
             Variables de entrada:
 
             titulo - Nombre de la ventana a visualizar en la parte superior.
-            tipo_panel - Recibe el tipo de panel bootstrap a crear: panel-primary,panel-success,panel-info,panel-warning,panel-danger
+            tipo_panel - Recibe el tipo de panel bootstrap a crear: 
+
+            * panel-primary,panel-success,panel-info,panel-warning,panel-danger
+            * col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-
+            * Otros asociados a clases de bootstrap
+            
             barra_herramientas - Lista de barras de herramientas a ser impresas
 
             Ver tambien:
             <cerrar_ventana>
             */
             echo '
-                <div class="panel '.$tipo_panel.'">
+                <div class="panel '.$tipo_panel.'" style="'.$css_personalizado.'">
                 <div class="panel-heading">'.$titulo;
             if ($barra_herramientas!='')
                 echo $barra_herramientas;

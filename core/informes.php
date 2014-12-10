@@ -573,7 +573,7 @@ if ($accion=="editar_informe")
 
 		<div id='FormularioTablas' class="FormularioPopUps">
 				<?php
-				abrir_ventana($MULTILANG_InfAgregaTabla,'#BDB9B9','');
+				abrir_ventana($MULTILANG_InfAgregaTabla, 'panel-primary');
 				?>
 				<form name="datosform" id="datosform" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="accion" value="guardar_informe_tabla">
@@ -665,7 +665,7 @@ if ($accion=="editar_informe")
 
 		<div id='FormularioCampos' class="FormularioPopUps">
 				<?php
-				abrir_ventana($MULTILANG_InfAgregaCampo,'#BDB9B9',''); 
+				abrir_ventana($MULTILANG_InfAgregaCampo, 'panel-primary'); 
 				?>
 				<form name="datosformc" id="datosformc" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="accion" value="guardar_informe_campo">
@@ -765,7 +765,7 @@ if ($accion=="editar_informe")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioCondiciones' class="FormularioPopUps">
 				<?php
-				abrir_ventana($MULTILANG_InfAddCondicion,'#BDB9B9','600'); 
+				abrir_ventana($MULTILANG_InfAddCondicion, 'panel-primary'); 
 				?>
 				<form name="datosformco" id="datosformco" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="Hidden" name="accion" value="guardar_informe_condicion">
@@ -919,7 +919,7 @@ if ($accion=="editar_informe")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioGraficos' class="FormularioPopUps">
 				<?php
-				abrir_ventana($MULTILANG_InfTitGrafico,'#BDB9B9','600'); 
+				abrir_ventana($MULTILANG_InfTitGrafico, 'panel-primary'); 
 				?>
 				<form name="datosformcograf" id="datosformcograf" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="Hidden" name="accion" value="actualizar_grafico_informe">
@@ -1031,7 +1031,7 @@ if ($accion=="editar_informe")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioAgrupacion' class="FormularioPopUps">
 				<?php
-				abrir_ventana($MULTILANG_InfAgrupa,'#BDB9B9','600'); 
+				abrir_ventana($MULTILANG_InfAgrupa, 'panel-primary'); 
 				$consulta_agrupacion=ejecutar_sql("SELECT ordenamiento,agrupamiento FROM ".$TablasCore."informe WHERE id=? ","$informe");
 				$registro_agrupacion = $consulta_agrupacion->fetch();
 				?>
@@ -1090,7 +1090,7 @@ if ($accion=="editar_informe")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioBotones' class="FormularioPopUps">
 			<?php
-			abrir_ventana($MULTILANG_InfTitBotones,'BDB9B9','');
+			abrir_ventana($MULTILANG_InfTitBotones, 'panel-primary');
 			?>
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="accion" value="guardar_accion_informe">
@@ -1216,7 +1216,7 @@ if ($accion=="editar_informe")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioAcciones' class="FormularioPopUps">
 			<?php
-				abrir_ventana($MULTILANG_FrmTitComandos,'#BDB9B9','');
+				abrir_ventana($MULTILANG_FrmTitComandos, 'panel-primary');
 			?>
 					<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
 						<tr>
@@ -1337,7 +1337,7 @@ if ($accion=="editar_informe")
 
 		<table><tr><td valign=top>
 			<?php 
-				abrir_ventana($MULTILANG_BarraHtas,'#BDB9B9',''); 
+				abrir_ventana($MULTILANG_BarraHtas, 'panel-primary'); 
 			?>
 				<div align=center>
 				<?php echo $MULTILANG_InfTablasOrigen; ?><br>
@@ -1391,7 +1391,7 @@ if ($accion=="editar_informe")
 		?>
 
 
-			<?php abrir_ventana($MULTILANG_InfParam,'f2f2f2',''); ?>
+			<?php abrir_ventana($MULTILANG_InfParam, 'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="actualizar_informe">
 			<input type="Hidden" name="nivel_usuario" value="-1">
@@ -1487,7 +1487,7 @@ if ($accion=="editar_informe")
 			?>
 
 
-			<?php abrir_ventana($MULTILANG_InfVistaPrev,'f2f2f2',''); ?>
+			<?php abrir_ventana($MULTILANG_InfVistaPrev, 'panel-primary'); ?>
 
 			<form action="<?php echo $ArchivoCORE; ?>" method="post" name="datosprevios" id="datosprevios" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 			
@@ -1621,7 +1621,7 @@ if ($accion=="administrar_informes")
 		 ?>
 
 		<table class="TextosVentana"><tr><td valign=top>
-			<?php abrir_ventana($MULTILANG_InfTituloAgr,'f2f2f2',''); ?>
+			<?php abrir_ventana($MULTILANG_InfTituloAgr, 'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_informe">
 			<input type="Hidden" name="nivel_usuario" value="-1">
@@ -1720,7 +1720,7 @@ if ($accion=="administrar_informes")
 		cerrar_ventana();	
 		
 		echo '</td><td valign=top>';  // Inicia segunda columna del diseñador
-		abrir_ventana($MULTILANG_InfDefinidos,'f2f2f2','');
+		abrir_ventana($MULTILANG_InfDefinidos, 'panel-primary');
 		?>
 				<table width="100%" border="0" cellspacing="5" align="CENTER"  class="TextosVentana">
 					<tr>
@@ -1814,7 +1814,7 @@ if ($accion=="mis_informes")
 					//Crea la categoria en el acordeon
 					$seccion_menu_activa=$registro["categoria"];
 					$conteo_opciones=$registro["conteo"];
-					abrir_ventana($MULTILANG_Informes.': '.$seccion_menu_activa.' ('.$conteo_opciones.')','fondo_ventanas2.gif','85%');
+					abrir_ventana($MULTILANG_Informes.': '.$seccion_menu_activa.' ('.$conteo_opciones.')', 'panel-primary');
 					// Busca las opciones dentro de la categoria
 
 					// Si el usuario es diferente al administrador agrega condiciones al query

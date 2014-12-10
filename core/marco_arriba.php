@@ -95,6 +95,17 @@
 	</script>
 </head>
 <body leftmargin="0"  margin="0" topmargin="0" oncontextmenu="return false;">
+
+<nav class="navbar navbar-inverse navbar-static-top"  role="navigation">
+  <div class="container">
+    ...
+  </div>
+</nav>
+
+<div  class="panel">
+
+
+
 <!-- INICIA MARCO DE CHAT -->
 <div id="main_container" style="overflow: auto;">
 

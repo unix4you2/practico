@@ -175,7 +175,7 @@ if ($accion=="editar_tabla")
 
 		<table class="TextosVentana"><tr><td valign=top>
 						
-			<?php abrir_ventana($MULTILANG_TblAgrCampo,'f2f2f2',''); ?>
+			<?php abrir_ventana($MULTILANG_TblAgrCampo,'panel-danger'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_crear_campo">
 			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
@@ -317,7 +317,7 @@ if ($accion=="editar_tabla")
 		<?php
 		cerrar_ventana();
 		echo '</td><td valign=top>';  // Inicia segunda columna del diseñador
-		abrir_ventana($MULTILANG_TblCamposDef,'f2f2f2','');
+		abrir_ventana($MULTILANG_TblCamposDef,'panel-primary');
 		?>
 				<table width="100%" border="0" cellspacing="5" align="CENTER" style="color: black; font-size: 9px; font-family: Verdana, Tahoma, Arial;">
 					<tr>
@@ -548,7 +548,7 @@ if ($accion=="editar_tabla")
 		{
 			echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/otODPESW0k0\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a>";
 
-			abrir_ventana($MULTILANG_TblCrearListar,'f2f2f2',''); ?>
+			abrir_ventana($MULTILANG_TblCrearListar,'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_crear_tabla">
 			<div align=center>
@@ -760,7 +760,7 @@ if ($accion=="editar_tabla")
 */
 	if ($accion=="asistente_tablas")
 		{
-			abrir_ventana($MULTILANG_TblAsistente,'f2f2f2',''); ?>
+			abrir_ventana($MULTILANG_TblAsistente,'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_crear_tabla_asistente">
 			<div align=center>
@@ -879,7 +879,7 @@ if ($accion=="editar_tabla")
 /* AQUI EMPIEZA CODIGO DE VERSIONES ANTERIORES ESPECIFICAS PARA MYSQL y MARIADB ------ EN DESUSO-----   */
  if ($accion=="administrar_tablas_solo_mysql")
 	{
-			abrir_ventana('Crear/Listar tablas de datos definidias en el sistema','f2f2f2','95%'); ?>
+			abrir_ventana('Crear/Listar tablas de datos definidias en el sistema','panel-warning'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_crear_tabla">
 			<div align=center>
