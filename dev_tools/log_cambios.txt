@@ -28,6 +28,7 @@ core/marco_wscfg.php
 core/marco_arriba.php
 core/marco_abajo.php
 core/marco_chat.php
+core/marco_oauth.php
 core/marco_conf.php
 core/marco_dev.php
 core/menus.php
