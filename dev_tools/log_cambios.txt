@@ -43,8 +43,12 @@ core/usuarios.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/font-awesome/*
+img/logo.png
+inc/bootstrap/*
+inc/fonts/*
+inc/less/*
 skin/nomo/general.css
-inc/jquery/plugins/bootstrap-modal.js
+inc/jquery/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -55,9 +59,16 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added: Ahora todo es responsive!
 * Added: Filtro de listas de seleccion.  Ahora se permite definir condiciones de filtrado para las listas utilizadas en los controles combobox y radiobutton
 * Added: Se inicia con el uso de awesome-font.  Se sustituyen varias expresiones de iconos por las existentes en la fuente de iconos nueva
 * Added: Actualizacion de mucha iconografia a fuentes Awesome
+* Added: Uso de bootstrap. Ahora toda la aplicación es responsive y maquetada mediante bootstrap.
+* Added: Se ajustan métodos para cierre de marcos mediante la tecla Esc.
+* Added: Marcos de configuración diagramados de manera independiente
+* Added: Barra de menu/herramientas lateral e iconos de contexto en barra superior
+* Added: Inclusión de GlypIcons
+* Added: Adición de librerías nuevas para elaboración de gráficos
 "
 
 ########################################################################

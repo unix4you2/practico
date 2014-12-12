@@ -32,8 +32,20 @@
 
 ?>
 
-		<!-- INICIO DE MARCOS POPUP -->
-		<div id='BarraFlotanteChat' class="FormularioPopUps">
+    <!-- Modal Botones de Desarrollo -->
+    <div class="modal fade" id="Dialogo_Chat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_TitDisenador; ?></h4>
+          </div>
+          <div class="modal-body mdl-primary">
+
+
+
+
+
 			<?php
 				abrir_ventana($MULTILANG_UsrLista, 'panel-primary'); 
 				echo '<div align=center><br>'.$MULTILANG_UsuariosChat.'<br><br></div>';
@@ -99,5 +111,21 @@
 			cerrar_barra_estado();
 			cerrar_ventana();
 			?>
-		<!-- FIN DE MARCOS POPUP -->
-		</div>
+
+
+
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+

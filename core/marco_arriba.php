@@ -48,25 +48,38 @@
 	*/
 ?>
 
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="generator" content="Practico <?php  $version = file("inc/version_actual.txt"); echo trim($version[0]); ?>" />
 	<meta name="description" content="Generador de aplicaciones web - www.practico.org" />
+    <meta name="author" content="John Arroyave G. - {www.practico.org} - {unix4you2 at gmail.com}">
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title><?php echo $NombreRAD; ?> <?php echo trim($version[0]); ?></title>
 
-    <!-- CSS de Bootstrap -->
-    <link href="inc/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <!-- Bootstrap Core CSS -->
+    <link href="inc/bootstrap/css/bootstrap.min.css" rel="stylesheet"  media="screen">
     <!-- librerías opcionales que activan el soporte de HTML5 para IE8 -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-	<title><?php echo $NombreRAD; ?> <?php echo trim($version[0]); ?></title>
+    <!-- MetisMenu CSS -->
+    <link href="inc/bootstrap/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="inc/bootstrap/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="inc/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+
+<!--
+
 	<script type="text/javascript" src="inc/practico/javascript/tooltips.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/validaform.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/popup.js"></script>
@@ -81,9 +94,13 @@
 
 	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/chat.css" />
 	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/screen.css" />
+-->
+
 	<!--[if lte IE 7]>
 	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/screen_ie.css" />
 	<![endif]-->
+
+
 
 	<link rel="shortcut icon" href="skin/<?php echo $PlantillaActiva; ?>/img/favicon.ico"/>
 
@@ -94,15 +111,431 @@
 			}
 	</script>
 </head>
-<body leftmargin="0"  margin="0" topmargin="0" oncontextmenu="return false;">
+<body oncontextmenu="return false;">
 
+    <div id="wrapper">
+
+<!--
 <nav class="navbar navbar-inverse navbar-static-top"  role="navigation">
   <div class="container">
     ...
   </div>
 </nav>
+-->
 
-<div  class="panel">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="<?php echo $ArchivoCORE; ?>"><img src="img/logo.png" border="0" ALT="Practico"></a>
+            </div>
+            <!-- /.navbar-header -->
+
+
+
+
+
+
+            <ul class="nav navbar-top-links navbar-right">
+
+				<?php 
+                    //Agrega boton de retorno al inicio si la accion es diferente al escritorio
+					if ($accion!="Ver_menu" && $Sesion_abierta)
+						echo '<a class="btn btn-success btn-xs" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i></a>';
+				?>
+				<?php 
+					//Despliega botones de desarrollo
+					if (@$Login_usuario=="admin" && $Sesion_abierta)
+						echo '<a data-toggle="modal" class="btn btn-default btn-xs" href="#myModalDESARROLLO"><i class="fa fa-puzzle-piece"></i> '.$MULTILANG_DesAppBoton.'</a>';
+				?>
+				<?php 
+					//Despliega botones de configuracion
+					if (@$Login_usuario=="admin" && $Sesion_abierta)
+						echo '<a class="btn btn-danger btn-xs" href="javascript:AbrirPopUp(\'BarraFlotanteConfiguracion\');"><i class="fa fa-cog"></i> '.$MULTILANG_ConfiguracionGeneral.'</a>';
+				?>
+				<?php
+                    //Presenta titulo de la aplicacion
+					if ($Sesion_abierta)
+						echo '<b>'.$Nombre_Empresa_Corto.' - '.$Nombre_Aplicacion.' </b> <i> v'.$Version_Aplicacion.'</i>';
+					else
+						echo $MULTILANG_SubtituloPractico1.' '.$MULTILANG_SubtituloPractico2;
+				?>
+            
+
+
+
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>Read All Messages</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+                
+                
+                
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 1</strong>
+                                        <span class="pull-right text-muted">40% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 2</strong>
+                                        <span class="pull-right text-muted">20% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                            <span class="sr-only">20% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 3</strong>
+                                        <span class="pull-right text-muted">60% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (warning)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 4</strong>
+                                        <span class="pull-right text-muted">80% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Tasks</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <span class="pull-right text-muted small">12 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-tasks fa-fw"></i> New Task
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+
+
+
+
+
+
+
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="flot.html">Flot Charts</a>
+                                </li>
+                                <li>
+                                    <a href="morris.html">Morris.js Charts</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                        </li>
+                        <li>
+                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="panels-wells.html">Panels and Wells</a>
+                                </li>
+                                <li>
+                                    <a href="buttons.html">Buttons</a>
+                                </li>
+                                <li>
+                                    <a href="notifications.html">Notifications</a>
+                                </li>
+                                <li>
+                                    <a href="typography.html">Typography</a>
+                                </li>
+                                <li>
+                                    <a href="grid.html">Grid</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Second Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Second Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li class="active">
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a class="active" href="blank.html">Blank Page</a>
+                                </li>
+                                <li>
+                                    <a href="login.html">Login Page</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                
+                
+
+                    <div class="alert alert-info" role="alert">
+                        <?php 
+                        //Presenta informacion de carga del aplicativo
+                        echo $MULTILANG_Instante; ?>:&nbsp;&nbsp;<?php echo $fecha_operacion_guiones;?>&nbsp;&nbsp;<?php echo $hora_operacion_puntos;?>
+                        <br>
+                        <?php
+                            // Muestra la accion actual si el usuario es administrador y la accion no es vacia - Sirve como guia a la hora de crear objetos
+                            if(@$Login_usuario=="admin" && $accion!="")
+                                {
+                                    // Calcula tiempos de ejecucion del script
+                                    $tiempo_final_script = obtener_microtime();
+                                    $tiempo_total_script = $tiempo_final_script - $tiempo_inicio_script;
+                                    echo "$MULTILANG_Accion: $accion <br>$MULTILANG_TiempoCarga: ";
+                                    echo round($tiempo_total_script,3);
+                                    echo " s<br>Inclusiones: ".count(get_included_files()); // Retorna arreglo con cantidad de archivos incluidos
+                                }
+                        ?>
+                        <hr>
+                        <i><i class="fa fa-copyright"></i> <a href="http://www.practico.org">Practico.org</a></i>&nbsp;&nbsp;
+                    </div>
+
+
+                </div>
+                <!-- FIN DEL /.sidebar-collapse -->
+            </div>
+            <!-- FIN DEL /.navbar-static-side -->
+            
+
+
+
+        </nav>
+
+
+
+        <!-- CONTENIDO DE APLICACION -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+
+
+
 
 
 
@@ -135,30 +568,9 @@
 	<tr><td>
 		<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MarcoSuperior"><tr>
 			<td valign="bottom" width="20%">
-				<img src="<?php echo 'skin/'.$PlantillaActiva.'/img/logo.png'; ?>" border="0">
-				<?php 
-					if ($accion!="Ver_menu" && $Sesion_abierta)
-						echo '<a href="javascript:document.core_ver_menu.submit();" title="'.$MULTILANG_IrEscritorio.'"><i class="fa fa-home fa-2x texto-blanco"></i></a>';
-				?>
-				<?php 
-					//Despliega botones de administracion
-					if (@$Login_usuario=="admin" && $Sesion_abierta)
-						echo '
-						<div id="marco_cluster" style="position: absolute; left: 140px; top: 5px;">
-                            <a data-toggle="modal" class="btn btn-default btn-xs" href="#myModal"><i class="fa fa-puzzle-piece"></i> '.$MULTILANG_DesAppBoton.'</a>
-                            <!-- <a class="btn btn-default btn-xs" href="javascript:AbrirPopUp(\'BarraFlotanteDesarrollo\');"><i class="fa fa-puzzle-piece"></i> '.$MULTILANG_DesAppBoton.'</a> -->
-                            <a class="btn btn-danger btn-xs" href="javascript:AbrirPopUp(\'BarraFlotanteConfiguracion\');"><i class="fa fa-cog"></i> '.$MULTILANG_ConfiguracionGeneral.'</a>
-						</div>';
-				?>
 			</td>
 			<td align="center" valign="middle" width="60%">
 				<b>
-				<?php
-					if ($Sesion_abierta)
-						echo '<font color="">'.$Nombre_Empresa_Corto.'</font> - '.$Nombre_Aplicacion.' </b> <i> v'.$Version_Aplicacion.'</i>';
-					else
-						echo '<font color="">'.$MULTILANG_SubtituloPractico1.'</font> '.$MULTILANG_SubtituloPractico2;
-				?>
 			</td>
 			<td align="right"  width="20%" valign="top">
 				<?php
@@ -167,6 +579,7 @@
 					<table  cellspacing="0" cellpadding="0" border=0 class="MarcoSuperior"><tr>
 						<td align="right" valign="top">
                             <i class="fa fa-comment fa-2x" OnClick="AbrirPopUp('BarraFlotanteChat');"></i>&nbsp;&nbsp;
+                            <a data-toggle="modal" class="btn btn-default btn-xs" href="#Dialogo_Chat"><i class="fa fa-puzzle-piece"></i>CHATTT</a>
 						</td>
 						<td align="right"  valign="top">
 							<?php echo $Nombre_usuario;?>
