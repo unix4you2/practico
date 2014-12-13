@@ -1389,7 +1389,7 @@
                         <br>
                         <a class="btn btn-primary" href="javascript:document.login_usuario.submit();"><i class="fa fa-check-circle"></i> <?php echo $MULTILANG_Ingresar; ?></a>
                         <br>
-                        
+
                         <?php
                             // Muestra boton de login por red social si aplica
                             if ($AlMenosUnOAuth>0)
@@ -1412,7 +1412,6 @@
                         mensaje($MULTILANG_Importante,$MULTILANG_AccesoExclusivo,'','fa fa-info-circle fa-3x texto-azul','alert alert-info');
                         cerrar_ventana();
                 //Fin del login estandar
-
 	  }
 
 

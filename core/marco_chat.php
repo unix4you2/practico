@@ -38,7 +38,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_TitDisenador; ?></h4>
+            <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_UsrLista; ?></h4>
           </div>
           <div class="modal-body mdl-primary">
 
@@ -47,8 +47,7 @@
 
 
 			<?php
-				abrir_ventana($MULTILANG_UsrLista, 'panel-primary'); 
-				echo '<div align=center><br>'.$MULTILANG_UsuariosChat.'<br><br></div>';
+				echo $MULTILANG_UsuariosChat;
 
 				//Consulta los usuarios siempre y cuando tenga sesion activa
 				if ($Sesion_abierta)
@@ -56,7 +55,7 @@
 						$resultado=ejecutar_sql("SELECT $ListaCamposSinID_usuario from ".$TablasCore."usuario WHERE login<>'$Login_usuario' ");
 
 						//Presenta la lista de usuarios
-						echo '<table cellspacing=0 cellpadding=4 width="100%">
+						echo '<table class="table">
 									<tr>
 										<td valign=middle align=center  bgcolor=darkgray>
 											<font size=2 color=black>
@@ -96,7 +95,7 @@
 											</font>
 										</td>
 										<td valign=middle>
-											<input type="Button"  class="BotonesEstado" value=" Chat >>> " onClick="chatWith(\''.$usuarios_chat["login"].'\'); OcultarPopUp(\'BarraFlotanteChat\'); ">
+                                            <button type="button" class="btn btn-success" onClick="chatWith(\''.$usuarios_chat["login"].'\'); OcultarPopUp(\'BarraFlotanteChat\'); "><i class="fa fa-weixin "></i></button>
 										</td>
 									</tr>
 								';
@@ -105,21 +104,12 @@
 					}
 			?>
 
-			<?php
-			abrir_barra_estado();
-				echo '<input type="Button"  class="BotonesEstadoCuidado" value=" <<< '.$MULTILANG_IrEscritorio.' " onClick="OcultarPopUp(\'BarraFlotanteChat\')">';
-			cerrar_barra_estado();
-			cerrar_ventana();
-			?>
-
-
-
 
 
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
           </div>
         </div>
       </div>

@@ -88,9 +88,11 @@
 
 	<link rel="stylesheet" href="inc/font-awesome/css/font-awesome.min.css">
 
-	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/chat.css" />
-	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/screen.css" />
+
 -->
+	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/chat.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/screen.cssXXX" />
+
 
 	<!--[if lte IE 7]>
 	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/screen_ie.css" />
@@ -109,15 +111,11 @@
 </head>
 <body oncontextmenu="return false;">
 
-    <div id="wrapper" class="wrapper">
+    <div id="wrapper">
 
-<!--
-<nav class="navbar navbar-inverse navbar-static-top"  role="navigation">
-  <div class="container">
-    ...
-  </div>
-</nav>
--->
+
+
+
 
 
         <!-- Navigation -->
@@ -212,7 +210,19 @@
                                             <input type="Hidden" name="accion" value="administrar_monitoreo">
                                         </form>
                                         <i class="fa fa-lightbulb-o fa-fw"></i> <?php echo $MULTILANG_MonTitulo; ?>
-                                        <span class="pull-right text-muted small">4</span>
+                                        <span class="pull-right text-muted small">5</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a data-toggle="modal" href="javascript:document.actualizarad.submit();">
+                                    <div>
+                                        <form name="actualizarad" action="<?php echo $ArchivoCORE; ?>" method="POST">
+                                            <input type="Hidden" name="accion" value="actualizar_practico">
+                                        </form>
+                                        <i class="fa fa-download fa-fw"></i> <?php echo $MULTILANG_Actualizar; ?> <?php echo $NombreRAD; ?>
+                                        <span class="pull-right text-muted small">6</span>
                                     </div>
                                 </a>
                             </li>
@@ -408,13 +418,17 @@
 
 
 
+
+
 <!-- INICIA MARCO DE CHAT -->
 <div id="main_container" style="overflow: auto;">
 
-<div id='FondoPopUps' class="FondoOscuroPopUps"></div>
 
 <form action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;" name="core_ver_menu">
 	<input type="Hidden" name="accion" value="Ver_menu">
+</form>
+<form method="POST" name="cerrar_sesion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+    <input type="Hidden" name="accion" value="Terminar_sesion">
 </form>
 
 <?php 
@@ -430,20 +444,20 @@
 	include_once("core/marco_chat.php");
 ?>
 
-<!-- INICIA LA TABLA PRINCIPAL -->
-<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="left">
 
-	<!-- INICIO DEL ENCABEZADO -->
-	<tr><td>
 
-		<!-- FIN DEL ENCABEZADO -->
 
-		<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MenuSuperior"><tr>
-			<td valign="top">
+
+
+
+
+
+
+
+
 				<?php
-
 					if ($Sesion_abierta && $accion=="Ver_menu") {
-						echo '&nbsp;@<b>'.@$Login_usuario.'</b>>&nbsp;&nbsp;&nbsp;';
+						echo '<ul class="nav nav-pills">';
 						// Carga las opciones del menu superior
 
 						// Si el usuario es diferente al administrador agrega condiciones al query
@@ -456,41 +470,23 @@
 
 						while($registro = $resultado->fetch())
 							{
-								// Imprime la imagen asociada si esta definida
-								if ($registro["imagen"]!="")
-									{
-										// Verifica si se tiene el string  .png en la cadena para saber si es icono de imagen, sino lo asume como font awesome
-										$es_imagen_png=strpos($registro["imagen"],".png");
-										if ($es_imagen_png) echo '<img src="img/'.$registro["imagen"].'" border=0 alt="" valign="absmiddle" align="absmiddle" width="14" height="13" >&nbsp;';
-										else  echo '<i class="'.$registro["imagen"].'"></i>&nbsp;';									
-									}
-
+								echo '<li role="presentation">';
 								// Verifica si se trata de un comando interno y crea formulario y enlace correspondiente
 								//if ($registro["tipo_comando"]=="Interno")
 									{
 										echo '<form action="'.$ArchivoCORE.'" method="post" name="top_'.$registro["id"].'" id="top_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;"><input type="hidden" name="accion" value="'.$registro["comando"].'"></form>';
-										echo '<a href="javascript:document.top_'.$registro["id"].'.submit();">'.$registro["texto"].'</a>';
+										echo '<a href="javascript:document.top_'.$registro["id"].'.submit();"><i class="'.$registro["imagen"].'"></i> '.$registro["texto"].'</a>';
 									}
-
-								// Agrega un separador de menu
-								echo '<img src="skin/'.$PlantillaActiva.'/img/sep1.gif" border=0 alt="" valign="absmiddle" align="absmiddle" >';
+                                echo '</li>';
 							}
-				?>
-				<?php 
+                        echo '</ul>';
 					}
-					else
-						echo '<br>';
 				?>
-			</td>
-		</tr></table>
-		<form method="POST" name="cerrar_sesion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-			<input type="Hidden" name="accion" value="Terminar_sesion">
-		</form>
-	</td></tr>
+
+
+
 
 	<!-- INICIO  DE CONTENIDOS DE APLICACION -->
 
 
-	<!-- INICIO DEL CONTENIDO CENTRAL -->
-	<tr><td height="100%" valign="<?php if ($accion=="Ver_menu") echo 'TOP'; else echo 'MIDDLE'; ?>" align="center">
-	<!-- INICIO DEL CONTENIDO CENTRAL -->
+

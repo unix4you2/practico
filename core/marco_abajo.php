@@ -48,11 +48,10 @@
 
 
 
-<!-- FINALIZA LA TABLA PRINCIPAL -->
-</table>
+
 
 </div> <!-- FINALIZA MARCO DE CHAT -->
-<script type="text/javascript" src="inc/chat/js/chat.js"></script>
+
 
 
 
@@ -89,6 +88,8 @@
     <!-- JavaScript Personalizado del tema -->
     <script src="inc/bootstrap/js/sb-admin-2.js"></script>
     <!--<script src="inc/bootstrap/js/practico.js"></script>-->
+    <!-- Chat -->
+    <script type="text/javascript" src="inc/chat/js/chat.js"></script>
 
 
     <?php
