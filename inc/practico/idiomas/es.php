@@ -172,7 +172,7 @@
 	$MULTILANG_ObjetoNoExiste='El objeto asociado a esta solicitud no existe.';
 	$MULTILANG_ErrorDatos='Problema en los datos ingresados';
 	$MULTILANG_ErrorTitAuth='<blink>ACCESO NEGADO!</blink>';
-	$MULTILANG_ErrorDesAuth='Las credenciales suministradas para el acceso al sistema no fueron aceptadas.  Algunas causas comunes son:<br><li>El nombre de usuario o clave son incorrectos.<br><li>Captcha de seguridad ingresado de manera incorrecta.<br><li>Su usuario se encuentra deshabilitado.<br><li>Cuenta bloqueada por varios intentos de acceso con clave incorrecta.';
+	$MULTILANG_ErrorDesAuth='<div align=left>Las credenciales suministradas para el acceso al sistema no fueron aceptadas.  Algunas causas comunes son:<br><li>El nombre de usuario o clave son incorrectos.<br><li>Captcha de seguridad ingresado de manera incorrecta.<br><li>Su usuario se encuentra deshabilitado.<br><li>Cuenta bloqueada por varios intentos de acceso con clave incorrecta.</div>';
 	$MULTILANG_ErrorSoloAdmin='Solo el usuario admin puede ver los detalles de la transaccion con el modo de depuracion encendido.';
 	$MULTILANG_ErrGoogleAPIMod='El metodo de autenticacion esta configurado como OAuth2 para Google.<br>Sin embargo el modulo de Practico google-api no se encuentra instalado.<br>Descargue e instale el modulo desde la web oficial de Practico y actualice la pagina nuevamente.';
 	$MULTILANG_ErrFuncion='<br>Funcion de PHP no existe o se encuentra deshabilitada en su servidor: ';
@@ -202,14 +202,10 @@
 			<li>Tener abiertas varias ventanas del sistema al mismo tiempo en secciones restringidas por el administrador</li>
 			<li>Su usuario o contrase&ntilde;a son inv&aacute;lidos para realizar alguna operaci&oacute;n</li>
 			<li>Navegar utilizando enlaces o botones diferentes a los permitidos</li>
-			<font color="#000000">
 			<br><strong>Tambi&eacute;n por configuraciones o acciones de su equipo como:</strong><br>
-			<font color="#808080">
 			<li>Su navegador no est&aacute; soportando cookies</li>
 			<li>Se ha lipiado la cach&eacute; cookies o sesiones del navegador mientras se usaba el sistema</li>
-			<font color="#000000">
 			<br><strong>Tambi&eacute;n por configuraciones del sistema como:</strong><br>
-			<font color="#808080">
 			<li>Haber finalizado un proceso de instalaci&oacute;n de la plataforma que requiere un reinicio de sesi&oacute;n</li>
 			<li>La llave de paso de su usuario no corresponde a la llave solicitada por este sistema</li>
 			<li>Las credenciales para firmar un registro de operaci&oacute;n no son v&aacute;lidas</li>';

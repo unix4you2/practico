@@ -47,7 +47,6 @@ img/logo.png
 inc/bootstrap/*
 inc/fonts/*
 inc/less/*
-skin/nomo/general.css
 inc/jquery/*
 "
 
@@ -69,6 +68,8 @@ LogCambios="
 * Added: Barra de menu/herramientas lateral e iconos de contexto en barra superior
 * Added: Inclusión de GlypIcons
 * Added: Adición de librerías nuevas para elaboración de gráficos
+* Added: Se cambia la ventana de login por OAuth a modal.
+* Fixed: Se simplifica script de inicio para login y cambio dinámico de marcos.
 "
 
 ########################################################################

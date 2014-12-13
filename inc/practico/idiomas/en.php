@@ -172,7 +172,7 @@
 	$MULTILANG_ObjetoNoExiste='The object associated with this request does not exist.';
 	$MULTILANG_ErrorDatos='Problem in the input data';
 	$MULTILANG_ErrorTitAuth='<blink>ACCESS DENIED!</blink>';
-	$MULTILANG_ErrorDesAuth='The credentials supplied for access to the system were not accepted. Some common causes are:<br><li> The username or password is incorrect. <br> <li> Security code entered incorrectly. <br> <li> Your Login is disabled. <br> <li> Account locked access by multiple attempts with incorrect password.';
+	$MULTILANG_ErrorDesAuth='<div align=left>The credentials supplied for access to the system were not accepted. Some common causes are:<br><li> The username or password is incorrect. <br> <li> Security code entered incorrectly. <br> <li> Your Login is disabled. <br> <li> Account locked access by multiple attempts with incorrect password.</div>';
 	$MULTILANG_ErrorSoloAdmin='Only admin user can see the transaction details with debug mode turned On';
 	$MULTILANG_ErrGoogleAPIMod='OAuth2 for Google was configured as default auth method.<br>Anyway the Practicos module for google-api is not installed yet.<br>Please download the google-api module from Practicos website and reload again.';
 	$MULTILANG_ErrFuncion='<br>PHP Function doesnt exists or is disabled in your server: ';
@@ -202,14 +202,10 @@
 			<li>Having multiple windows open at the same time system in restricted sections by admin</li>
 			<li>Your username or password is invalid for further operation</li>
 			<li>Navigate using links or other buttons than those permitted</li>
-			<font color="#000000">
 			<br><strong>Also for configurations or actions on your computer like:</strong><br>
-			<font color="#808080">
 			<li>Your browser is not supporting cookies</li>
 			<li>Cleaned cache of browser cookies or sessions while using the system</li>
-			<font color="#000000">
 			<br><strong>System configurations also like:</strong><br>
-			<font color="#808080">
 			<li>You have completed an installation process of the platform requires a restart of session</li>
 			<li>The SignKey of the user does not corresponds to the key required by this system</li>
 			<li>The credentials to sign an operation are not valid</li>';

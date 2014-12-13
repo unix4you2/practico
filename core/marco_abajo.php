@@ -88,6 +88,7 @@
 	<!--<script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>-->
     <!-- JavaScript Personalizado del tema -->
     <script src="inc/bootstrap/js/sb-admin-2.js"></script>
+    <!--<script src="inc/bootstrap/js/practico.js"></script>-->
 
 
     <?php

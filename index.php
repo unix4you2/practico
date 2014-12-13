@@ -154,7 +154,7 @@
 
     // Si existe el directorio de instalacion presenta un mensaje constante de advertencia
     if (@file_exists("ins")) {
-        mensaje($MULTILANG_TituloInsExiste, $MULTILANG_TextoInsExiste, '70%', 'fa fa-exclamation-triangle fa-5x texto-rojo texto-parpadeando', 'alert alert-warning alert-dismissible');
+        mensaje($MULTILANG_TituloInsExiste, $MULTILANG_TextoInsExiste, '', 'fa fa-exclamation-triangle fa-5x texto-rojo texto-blink', 'alert alert-warning alert-dismissible');
     }
 
     // Presenta mensajes con errores generales cuando son encontrados durante la ejecucion

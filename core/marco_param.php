@@ -66,10 +66,20 @@
 ?>
 
 
-		<!-- INICIO DE MARCOS POPUP -->
-		<div id='BarraFlotanteParametros' class="FormularioPopUps">
+    <!-- Modal Configuracion -->
+    <div class="modal fade" id="myModalPARAMETROS" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel"><?php echo $NombreRAD.' - '.$MULTILANG_ParametrosApp; ?></h4>
+          </div>
+          <div class="modal-body mdl-primary">
+              
+
+
+
 			<?php
-				abrir_ventana($NombreRAD.' - '.$MULTILANG_ParametrosApp, 'panel-info'); 
 
 				//Consulta parametros de la aplicacion
 				$resultado=ejecutar_sql("SELECT id,$ListaCamposSinID_parametros from ".$TablasCore."parametros ");
@@ -305,45 +315,23 @@
 								</table>
 						
 						</td>
-						<td width="30"></td>
-						<td align=center valign=top>
-							
-								<font size=2 color=black><b>
-									&nbsp;&nbsp;[<?php echo $MULTILANG_MonTitulo; ?>]</b>
-								</font>
-								<!--
-								<table cellspacing=2>
-									<tr>
-										<td valign=top align=right>
-											<font size=2 color=black>
-												<?php echo $MULTILANG_MonPgInicio; ?>
-											</font>
-										</td>
-										<td valign=top>
-											<font size=2 color=black>
-											<input type="text" name="servidor_federado" size="20" class="CampoTexto" value="<?php echo $parametros["servidor_federado"]; ?>">
-											</font>
-										</td>
-									</tr>
-								</table>
-								-->
-								<br><input type="Button"  class="Botones" value=" <?php echo $MULTILANG_MonConfig; ?> " onClick="document.ver_monitoreo.submit();">
-						
-						</td>						
+			
 					</tr></table>
 
-					</form>
-					<form name="ver_monitoreo" action="<?php echo $ArchivoCORE; ?>" method="POST">
-						<input type="Hidden" name="accion" value="administrar_monitoreo">
 					</form>
 
 
 			<?php
 			abrir_barra_estado();
-				echo '<input type="Button"  class="BotonesEstadoCuidado" value=" <<< '.$MULTILANG_IrEscritorio.' " onClick="OcultarPopUp(\'BarraFlotanteParametros\')">';
 				echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_Guardar.' >>> " onClick="document.forms.configparams.submit();">';
 			cerrar_barra_estado();
-			cerrar_ventana();
 			?>
-		<!-- FIN DE MARCOS POPUP -->
-		</div>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+          </div>
+        </div>
+      </div>
+    </div>

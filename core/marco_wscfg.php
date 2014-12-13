@@ -127,12 +127,19 @@
 
 ?>
 
-		<!-- INICIO DE MARCOS POPUP -->
-		<div id='ConfiguracionWebServices' class="FormularioPopUps">
-			<?php
-			abrir_ventana($NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral, 'panel-info'); 
-			?>
-			
+    <!-- Modal WebServices -->
+    <div class="modal fade" id="myModalWEBSERVICES" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel"><?php echo $NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral; ?></h4>
+          </div>
+          <div class="modal-body mdl-primary">
+
+
+
+
 				<br><div align=center><font size=3><b><?php echo $MULTILANG_WSLlavesNuevo; ?></b></font>
 				<form name="nuevallave" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="hidden" name="accion" value="agregar_configws">
@@ -200,7 +207,6 @@
 
 			<br>
 			<?php echo $MULTILANG_WSLlavesDefinidas; ?><br><?php echo $MULTILANG_WSLlavesAyuda; ?>
-			<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 730; POSITION: relative; HEIGHT: 200px">
 
 				<table width="100%" border="0" cellspacing="5" align="CENTER"  class="TextosVentana">
 					<tr>
@@ -243,9 +249,13 @@
 					echo '</table>';
 				?>
 
-				</DIV>
-			<?php
-			cerrar_ventana();
-			?>
-		<!-- FIN DE MARCOS POPUP -->
-		</div>
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+          </div>
+        </div>
+      </div>
+    </div>

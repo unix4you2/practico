@@ -1252,7 +1252,7 @@
 			Despliega la ventana de ingreso al sistema con el formulario para usuario, contrasena y captcha.
 		*/
 		  global $ArchivoCORE,$LlaveDePaso;
-		  global $MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes;
+		  global $MULTILANG_Cerrar,$MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes;
 			// Variables para OAuth desde el archivo de configuracion
 			global $APIGoogle_ClientId,$APIGoogle_ClientSecret;
 			global $APIFacebook_ClientId,$APIFacebook_ClientSecret;
@@ -1281,165 +1281,137 @@
 
 			// Variable que determina si se tiene activo al menos un proveedor OAuth
 			$AlMenosUnOAuth=0;
-
-			abrir_ventana($MULTILANG_TituloLogin, 'panel-primary col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-');
 			?>
 
-			<script language="javascript"> 
-				function IntercambiarLogin(Seccion,Imagen)
-					{
-						var ele = document.getElementById(Seccion);
-						if (ele.style.display == "none")
-							{
-								ele.style.display = "block";
-								ele.style.visibility = "visible";
-							}
-						else
-							{
-								ele.style.display = "none";
-								ele.style.visibility = "hidden";
-							}
-						if (LoginClasico.style.visibility == "visible")
-							img_login.src="img/practico_login.png";
-						if (LoginOauth.style.visibility == "visible")
-							img_login.src="img/practico_social.png";
-					}
-			</script>
+                <!-- Modal LoginOauth -->
+                <div class="modal fade" id="myModalLOGINOAUTH" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_OauthLogin; ?></h4>
+                      </div>
+                      <div class="modal-body mdl-primary">
+                          
+                        <img name="img_login" id="img_login" src="img/practico_social.png" alt="" border="0">
+                        <?php
+                            mensaje("",$MULTILANG_LoginOauthDes,'','fa fa-info-circle fa-3x text-info','alert alert-info');
+                        ?>
+
+                        <table class="table">
+                                <tr><td align="center"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">
+
+                                    <?php
+                                        // Crea los formularios de redireccion segun proveedor
+                                        function CreaFormOauth($sitio)
+                                            {
+                                                global $ArchivoCORE;
+                                                // Crea el formulario correspondiente para llamar el login con el proveedor
+                                                echo '
+                                                    <form name="login_'.$sitio.'" method="POST" action="'.$ArchivoCORE.'" style="margin: 2; display: inline!important;">
+                                                    <input type="hidden" name="WSOn" value="1">
+                                                    <input type="hidden" name="OAuthSrv" value="'.$sitio.'">
+                                                    <input type="hidden" name="WSId" value="autenticacion_oauth">
+                                                    <input type="image" src="inc/oauth/logos/'.strtolower($sitio).'.png" border=0 width=81 height=30 style="background:#FFFFFF;"> <!--94x35|81x30-->
+                                                    </form>';
+                                                // Retorna valor de activacion a variable AlMenosUnOAuth
+                                                return 1;
+                                            }
+                                        if ($APIGoogle_ClientId!=''			&& $APIGoogle_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Google');
+                                        if ($APIFacebook_ClientId!=''		&& $APIFacebook_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Facebook');
+                                        if ($APILinkedIn_ClientId!=''		&& $APILinkedIn_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('LinkedIn');
+                                        if ($APIInstagram_ClientId!=''		&& $APIInstagram_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Instagram');
+                                        if ($APIDropbox_ClientId!=''		&& $APIDropbox_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Dropbox');
+                                        if ($APIMicrosoft_ClientId!=''		&& $APIMicrosoft_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Microsoft');
+                                        if ($APIFlickr_ClientId!=''			&& $APIFlickr_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Flickr');
+                                        if ($APITwitter_ClientId!=''		&& $APITwitter_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Twitter');
+                                        if ($APIFoursquare_ClientId!=''		&& $APIFoursquare_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Foursquare');
+                                        if ($APIXING_ClientId!=''			&& $APIXING_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('XING');
+                                        if ($APISalesforce_ClientId!=''		&& $APISalesforce_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Salesforce');
+                                        if ($APIBitbucket_ClientId!=''		&& $APIBitbucket_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Bitbucket');
+                                        if ($APIYahoo_ClientId!=''			&& $APIYahoo_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Yahoo');
+                                        if ($APIBox_ClientId!=''			&& $APIBox_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Box');
+                                        if ($APIDisqus_ClientId!=''			&& $APIDisqus_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Disqus');
+                                        if ($APIEventful_ClientId!=''		&& $APIEventful_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Eventful');
+                                        if ($APISurveyMonkey_ClientId!=''	&& $APISurveyMonkey_ClientSecret!='')	$AlMenosUnOAuth+=CreaFormOauth('SurveyMonkey');
+                                        if ($APIRightSignature_ClientId!=''	&& $APIRightSignature_ClientSecret!='')	$AlMenosUnOAuth+=CreaFormOauth('RightSignature');
+                                        if ($APIFitbit_ClientId!=''			&& $APIFitbit_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Fitbit');
+                                        if ($APIScoopIt_ClientId!=''		&& $APIScoopIt_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('ScoopIt');
+                                        if ($APITumblr_ClientId!=''			&& $APITumblr_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Tumblr');
+                                        if ($APIStockTwits_ClientId!=''		&& $APIStockTwits_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('StockTwits');
+                                        if ($APIVK_ClientId!=''				&& $APIVK_ClientSecret!='')				$AlMenosUnOAuth+=CreaFormOauth('VK');
+                                        if ($APIWithings_ClientId!=''		&& $APIWithings_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Withings');
+                                    ?>
+                                    <hr>
+                                </td></tr>
+                        </table>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-info" type="button" data-dismiss="modal">
+                            <?php echo $MULTILANG_LoginClasico; ?>
+                            {<i class="fa fa-paypal"></i>}
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
 
-						<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="table"><tr>
-								<td align="center">
 
-										<div id="LoginOauth" style="display:none; visibility:hidden; ">
-										<table width="350" border="0" cellspacing="10" cellpadding="0" class="table" align="center">
-												<tr bgcolor="#AAA6AD"><td align="center"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">
-													<?php echo $MULTILANG_LoginOauthDes; ?>
-												</td></tr>
-												<tr><td align="center"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">
+                <!--Login Estandar-->
+                    <?php
+                        abrir_ventana($MULTILANG_TituloLogin, 'panel-primary col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-');
+                    ?>
+                    <img name="img_login" id="img_login" src="img/practico_login.png" alt="" border="0"><br><br>
+                    <form name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
+                    <input type="Hidden" name="accion" value="Iniciar_login">
 
-													<?php
-														// Crea los formularios de redireccion segun proveedor
-														function CreaFormOauth($sitio)
-															{
-																global $ArchivoCORE;
-																// Crea el formulario correspondiente para llamar el login con el proveedor
-																echo '
-																	<form name="login_'.$sitio.'" method="POST" action="'.$ArchivoCORE.'" style="margin: 2; display: inline!important;">
-																	<input type="hidden" name="WSOn" value="1">
-																	<input type="hidden" name="OAuthSrv" value="'.$sitio.'">
-																	<input type="hidden" name="WSId" value="autenticacion_oauth">
-																	<input type="image" src="inc/oauth/logos/'.strtolower($sitio).'.png" border=0 width=81 height=30 style="background:#FFFFFF;"> <!--94x35|81x30-->
-																	</form>';
-																// Retorna valor de activacion a variable AlMenosUnOAuth
-																return 1;
-															}
+                        <div class="input-group input-group-sm col-xs-7">
+                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            <input name="uid" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Usuario; ?>">
+                        </div>
+                        <div class="input-group input-group-sm col-xs-7">
+                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                            <input name="clave" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
+                        </div>
 
-														if ($APIGoogle_ClientId!=''			&& $APIGoogle_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Google');
-														if ($APIFacebook_ClientId!=''		&& $APIFacebook_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Facebook');
-														if ($APILinkedIn_ClientId!=''		&& $APILinkedIn_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('LinkedIn');
-														if ($APIInstagram_ClientId!=''		&& $APIInstagram_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Instagram');
-														if ($APIDropbox_ClientId!=''		&& $APIDropbox_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Dropbox');
-														if ($APIMicrosoft_ClientId!=''		&& $APIMicrosoft_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Microsoft');
-														if ($APIFlickr_ClientId!=''			&& $APIFlickr_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Flickr');
-														if ($APITwitter_ClientId!=''		&& $APITwitter_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Twitter');
-														if ($APIFoursquare_ClientId!=''		&& $APIFoursquare_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Foursquare');
-														if ($APIXING_ClientId!=''			&& $APIXING_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('XING');
-														if ($APISalesforce_ClientId!=''		&& $APISalesforce_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Salesforce');
-														if ($APIBitbucket_ClientId!=''		&& $APIBitbucket_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Bitbucket');
-														if ($APIYahoo_ClientId!=''			&& $APIYahoo_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Yahoo');
-														if ($APIBox_ClientId!=''			&& $APIBox_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Box');
-														if ($APIDisqus_ClientId!=''			&& $APIDisqus_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Disqus');
-														if ($APIEventful_ClientId!=''		&& $APIEventful_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Eventful');
-														if ($APISurveyMonkey_ClientId!=''	&& $APISurveyMonkey_ClientSecret!='')	$AlMenosUnOAuth+=CreaFormOauth('SurveyMonkey');
-														if ($APIRightSignature_ClientId!=''	&& $APIRightSignature_ClientSecret!='')	$AlMenosUnOAuth+=CreaFormOauth('RightSignature');
-														if ($APIFitbit_ClientId!=''			&& $APIFitbit_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Fitbit');
-														if ($APIScoopIt_ClientId!=''		&& $APIScoopIt_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('ScoopIt');
-														if ($APITumblr_ClientId!=''			&& $APITumblr_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Tumblr');
-														if ($APIStockTwits_ClientId!=''		&& $APIStockTwits_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('StockTwits');
-														if ($APIVK_ClientId!=''				&& $APIVK_ClientSecret!='')				$AlMenosUnOAuth+=CreaFormOauth('VK');
-														if ($APIWithings_ClientId!=''		&& $APIWithings_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Withings');
-													?>
-													<hr>
-													<input type="Button"  class="BotonesGoogle" value="<<< <?php echo $MULTILANG_LoginClasico; ?> >>>"  OnClick="IntercambiarLogin('LoginOauth');IntercambiarLogin('LoginClasico');">
-												</td></tr>
-										</table>
-										</div>
+                        <br>
+                        <?php echo $MULTILANG_CodigoSeguridad; ?>:
+                        <img src="core/captcha.php">
 
-										<div id="LoginClasico" style="display:block; visibility:visible; ">
-                                            
-                                            
+                        <div class="input-group input-group-sm col-xs-9">
+                            <span class="input-group-addon"><i class="fa fa-hand-o-right fa-fw"></i></span>
+                            <input type="text" name="captcha" size="7" maxlength=6 class="form-control"  placeholder="<?php echo $MULTILANG_IngreseCodigoSeguridad; ?>">
+                        </div>
 
-                                            
-                                            
-                                            
-                                     
-  
-                                            
-                                            
-										<table width="100%" border="0" cellspacing="3" cellpadding="0" class="TextosVentana" align="center">
-												<tr><td align="center"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">
-												
-													<form name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
-													<input type="Hidden" name="accion" value="Iniciar_login">
-													<table width="350" border="0" cellspacing="7" cellpadding="0" class="TextosVentana" align="center">
-													<tr>
-														<td>
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                                                                <input name="uid" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Usuario; ?>">
-                                                            </div>
-                                                        </td>
-													</tr>
-													<tr>
-														<td>
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                                                                <input name="clave" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
-                                                            </div>
-                                                        </td>
-													</tr>
-													<tr>
-														<td valign="middle">
-                                                            <?php echo $MULTILANG_CodigoSeguridad; ?>
-                                                            <img src="core/captcha.php">
-														</td>
-													</tr>
-													<tr>
-														<td valign="middle">
-                                                            <?php echo $MULTILANG_IngreseCodigoSeguridad; ?>
-                                                            <i class="fa fa-arrow-right fa-fw texto-blanco"></i> <input type="text" name="captcha" size="7" maxlength=6 style="border-width: 1px; font-size: 9px; font-family: VErdana, Tahoma, Arial;">
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<a class="btn btn-primary" href="javascript:document.login_usuario.submit();"><?php echo $MULTILANG_Ingresar; ?></a>
-														</td>
-													</tr>
-													</table>
-													</form>
-													<?php
-														// Muestra boton de login por red social si aplica
-														if ($AlMenosUnOAuth>0)
-															echo '<hr>
-																<input type="Button"  class="BotonesGoogle" value="<<< '.$MULTILANG_OauthLogin.' >>>" OnClick="IntercambiarLogin(\'LoginOauth\');IntercambiarLogin(\'LoginClasico\');">';
-													?>
-												</td></tr>
-										</table>
-										</div>
-
-								</td>
-								<td align="center">
-										<img name="img_login" id="img_login" src="img/practico_login.png" alt="" border="0">
-								</td>
-						</tr></table>
-						
-
-
-						<script language="JavaScript"> login_usuario.uid.focus(); </script>
-
-			<?php
-			mensaje($MULTILANG_Importante,$MULTILANG_AccesoExclusivo,'','fa fa-info-circle fa-3x texto-azul','alert alert-info');
-			cerrar_ventana();
+                        <br>
+                        <a class="btn btn-primary" href="javascript:document.login_usuario.submit();"><i class="fa fa-check-circle"></i> <?php echo $MULTILANG_Ingresar; ?></a>
+                        <br>
+                        
+                        <?php
+                            // Muestra boton de login por red social si aplica
+                            if ($AlMenosUnOAuth>0)
+                                echo '<hr>
+                                    <a data-toggle="modal" href="#myModalLOGINOAUTH" class="btn btn-info">
+                                        <div>
+                                            '.$MULTILANG_OauthLogin.'
+                                            <i class="fa fa-facebook-square"></i>
+                                            <i class="fa fa-google-plus-square"></i>
+                                            <i class="fa fa-twitter"></i>
+                                            <i class="fa fa-linkedin-square"></i>
+                                            <i class="fa fa-dropbox"></i>
+                                        </div>
+                                    </a><br>';
+                        ?>
+                    </form>
+                    <script language="JavaScript"> login_usuario.uid.focus(); </script>
+                    <br>
+                    <?php
+                        mensaje($MULTILANG_Importante,$MULTILANG_AccesoExclusivo,'','fa fa-info-circle fa-3x texto-azul','alert alert-info');
+                        cerrar_ventana();
+                //Fin del login estandar
 
 	  }
 
@@ -1545,26 +1517,28 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function mensaje($titulo,$texto,$ancho="",$icono,$estilo)
+/*
+    Function: mensaje
+    Funcion generica para la presentacion de mensajes.  Ver variables para personalizacion.
+
+    Variables de entrada:
+
+        titulo - Texto que aparece en resaltado como encabezado del texto.  Acepta modificadores HTML.
+        texto - Mensaje completo a desplegar en formato de texto normal.  Acepta modificadores HTML.
+        icono - Formato Awesome Fonts o Iconos de Bootstrap
+        ancho - Ancho del espacio de trabajo definido en pixels o porcentaje sobre el contenedor principal.
+        estilo - Especifica el punto donde sera publicado el mensaje para definir la hoja de estilos correspondiente.
+*/
+	function mensaje($titulo,$texto,$DEPRECATED_ancho="",$icono,$estilo)
 	  {
-		/*
-			Function: mensaje
-			Funcion generica para la presentacion de mensajes.  Ver variables para personalizacion.
-
-			Variables de entrada:
-
-				titulo - Texto que aparece en resaltado como encabezado del texto.  Acepta modificadores HTML.
-				texto - Mensaje completo a desplegar en formato de texto normal.  Acepta modificadores HTML.
-				icono - Formato Awesome Fonts o Iconos de Bootstrap
-				ancho - Ancho del espacio de trabajo definido en pixels o porcentaje sobre el contenedor principal.
-				estilo - Especifica el punto donde sera publicado el mensaje para definir la hoja de estilos correspondiente.
-		*/
+        global $MULTILANG_Cerrar;
         echo '<div class="'.$estilo.'" role="alert">
                 <i class="'.$icono.' pull-left"></i>
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">'.$MULTILANG_Cerrar.'</span></button>
                 <strong>'.$titulo.'</strong><br>'.$texto.'
             </div>';
 	  }
+
 
 
 /* ################################################################## */

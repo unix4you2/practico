@@ -32,7 +32,7 @@
 
 ?>
 
-    <!-- Modal Botones de Desarrollo -->
+    <!-- Modal Ventana de chat -->
     <div class="modal fade" id="Dialogo_Chat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">

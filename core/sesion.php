@@ -146,7 +146,7 @@
 			// Si la clave es incorrecta muestra de nuevo la ventana de ingreso
 			if (!$clave_correcta)
 				{
-					mensaje($MULTILANG_ErrorTitAuth,$MULTILANG_ErrorDesAuth,'60%','../img/tango_dialog-error.png','TextosEscritorio');
+					mensaje($MULTILANG_ErrorTitAuth,$MULTILANG_ErrorDesAuth,'','fa fa-ban fa-4x text-danger','alert alert-danger');
 					ventana_login();
 					@session_destroy();
 				}
@@ -190,35 +190,22 @@
 */
 	if ($accion=="Mensaje_cierre_sesion")
 	{
-		@session_destroy();
-		echo '<br><br><div align="center">';
 		abrir_ventana($MULTILANG_Atencion, 'panel-primary');
-			echo '
-			<br><div align="center" class="TextosVentana"><strong><font size="3">'.$MULTILANG_SesionCerrada.'</font></strong>
-			<table width="100%"><tr>
-				<td>
-
-					</div><br>
-					<table width="90%" border="0" cellspacing="0" cellpadding="0" align="center" class="TextosVentana"><tr><td>
-						<font color="#000000">
-						<strong>'.$MULTILANG_TituloCierre.':</strong><br>
-						<font color="#808080">
-							'.$MULTILANG_ExplicacionCierre.'
-						</font>
-					</td></tr></table>
-					<br>
+			echo '<strong><font size="3">'.$MULTILANG_SesionCerrada.'</font>
+			<table class="table"><tr>
+				<td class="texto-gris">
+					'.$MULTILANG_TituloCierre.':<br>
+					'.$MULTILANG_ExplicacionCierre.'
 				</td>
 				<td>
-					<img src="img/caduca.gif"  width="88" height="116"  border=0 alt="">&nbsp;
+                    <i class="fa fa-chain-broken fa-5x texto-rojo texto-blink"></i>
 				</td>
 			</tr></table>
 			<form name="Again" method="POST">
 				<input type="Hidden" name="accion" value="">
-				<input type="Submit"  class="Botones" value=" '.$MULTILANG_Ingresar.' >>>" >
-			</form>
-			';
+                <a class="btn btn-info" href="javascript:document.Again.submit();"><i class="fa fa-refresh"></i> '.$MULTILANG_Ingresar.'</a>
+			</form>';
 		@session_destroy();
 		cerrar_ventana();
-		echo '</div>';
 	}
-?>
+
