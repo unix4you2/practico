@@ -1362,50 +1362,60 @@
 
                 <!--Login Estandar-->
                     <?php
-                        abrir_ventana($MULTILANG_TituloLogin, 'panel-primary col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-');
+                        echo '<br>';
+                        abrir_ventana($MULTILANG_TituloLogin, 'panel-primary col-md-8 col-md-offset-2 col-sm-8 col-sm-offset- col-xs-12');
+                        // col-md-8 col-md-offset-2 col-sm-8 col-sm-offset- col-xs-12
                     ?>
-                    <img name="img_login" id="img_login" src="img/practico_login.png" alt="" border="0"><br><br>
-                    <form name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
-                    <input type="Hidden" name="accion" value="Iniciar_login">
 
-                        <div class="input-group input-group-sm col-xs-7">
-                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input name="uid" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Usuario; ?>">
+                        <div align=center>
+                            <form name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
+                            <input type="Hidden" name="accion" value="Iniciar_login">
+
+                                <div class="col-xs-12">
+                                    <img name="img_login" id="img_login" src="img/practico_login.png" alt="" border="0"><br><br>
+                                </div>
+                                <div class="input-group input-group-sm col-xs-12">
+                                    <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                                    <input name="uid" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Usuario; ?>">
+                                </div>
+                                <div class="input-group input-group-sm col-xs-12">
+                                    <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                                    <input name="clave" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
+                                </div>
+                                <div class="col-xs-12">
+                                    <br>
+                                    <?php echo $MULTILANG_CodigoSeguridad; ?>:
+                                    <img src="core/captcha.php"><br><br>
+                                </div>
+                                <div class="input-group input-group-sm col-xs-12">
+                                    <span class="input-group-addon"><i class="fa fa-hand-o-right fa-fw"></i></span>
+                                    <input type="text" name="captcha" maxlength=6 class="form-control"  placeholder="<?php echo $MULTILANG_IngreseCodigoSeguridad; ?>">
+                                </div>
+                                <div class="input-group input-group-sm col-xs-12">
+                                    <br>
+                                    <a class="btn btn-primary col-md-offset-3 col-xs-6" href="javascript:document.login_usuario.submit();"><i class="fa fa-check-circle"></i> <?php echo $MULTILANG_Ingresar; ?></a>
+                                    <br>
+                                </div>
+
+
+                                <?php
+                                    // Muestra boton de login por red social si aplica
+                                    if ($AlMenosUnOAuth>0)
+                                        echo '<hr>
+                                            <a data-toggle="modal" href="#myModalLOGINOAUTH" class="btn btn-info">
+                                                <div>
+                                                    '.$MULTILANG_OauthLogin.'
+                                                    <i class="fa fa-facebook-square"></i>
+                                                    <i class="fa fa-google-plus-square"></i>
+                                                    <i class="fa fa-twitter"></i>
+                                                    <i class="fa fa-linkedin-square"></i>
+                                                    <i class="fa fa-dropbox"></i>
+                                                </div>
+                                            </a><br>';
+                                ?>
+                            </form>
                         </div>
-                        <div class="input-group input-group-sm col-xs-7">
-                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                            <input name="clave" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
-                        </div>
-
-                        <br>
-                        <?php echo $MULTILANG_CodigoSeguridad; ?>:
-                        <img src="core/captcha.php">
-
-                        <div class="input-group input-group-sm col-xs-9">
-                            <span class="input-group-addon"><i class="fa fa-hand-o-right fa-fw"></i></span>
-                            <input type="text" name="captcha" size="7" maxlength=6 class="form-control"  placeholder="<?php echo $MULTILANG_IngreseCodigoSeguridad; ?>">
-                        </div>
-
-                        <br>
-                        <a class="btn btn-primary" href="javascript:document.login_usuario.submit();"><i class="fa fa-check-circle"></i> <?php echo $MULTILANG_Ingresar; ?></a>
-                        <br>
-
-                        <?php
-                            // Muestra boton de login por red social si aplica
-                            if ($AlMenosUnOAuth>0)
-                                echo '<hr>
-                                    <a data-toggle="modal" href="#myModalLOGINOAUTH" class="btn btn-info">
-                                        <div>
-                                            '.$MULTILANG_OauthLogin.'
-                                            <i class="fa fa-facebook-square"></i>
-                                            <i class="fa fa-google-plus-square"></i>
-                                            <i class="fa fa-twitter"></i>
-                                            <i class="fa fa-linkedin-square"></i>
-                                            <i class="fa fa-dropbox"></i>
-                                        </div>
-                                    </a><br>';
-                        ?>
-                    </form>
+                    
                     <script language="JavaScript"> login_usuario.uid.focus(); </script>
                     <br>
                     <?php

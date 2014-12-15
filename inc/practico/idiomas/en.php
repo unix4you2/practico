@@ -46,6 +46,7 @@
 	$MULTILANG_Ayuda='Help';
 	$MULTILANG_Basedatos='Data base';
 	$MULTILANG_BarraHtas='Toolbar';
+    $MULTILANG_Buscar='Search';
 	$MULTILANG_Campo='Field';
 	$MULTILANG_Cancelar='Cancel';
 	$MULTILANG_Capturar='Capture';
@@ -138,7 +139,7 @@
 	//Ventana de login
 	$MULTILANG_TituloLogin='System Login';
 	$MULTILANG_CodigoSeguridad='Security code';
-	$MULTILANG_IngreseCodigoSeguridad='Enter here the security code';
+	$MULTILANG_IngreseCodigoSeguridad='Enter the code';
 	$MULTILANG_AccesoExclusivo='Access to this software is only for registered users. For your safety, never share your username and password.';
 	$MULTILANG_LoginNoWSTit='Error trying to load the authentication webservice';
 	$MULTILANG_LoginNoWSDes='The file_get_contents() function can not to load the XML output file built by Practico authentication process.<br>  Check your web server configuration/installation to see that this funtion can works correctly and without restrictions.<br>  A way to check that Practicos process is fine but your server doesnt allow to load the XML file<br>is opening the next link and checking if your browser loads the XML correctly.  Activating debug mode on your Practicos config you could see more details: ';

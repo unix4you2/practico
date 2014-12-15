@@ -114,15 +114,10 @@
     <div id="wrapper">
 
 
-
-
-
-
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
+                <button OnClick="document.getElementById('barra_navegacion_izquierda').style.visibility='visible';" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -130,9 +125,6 @@
                 <a class="navbar-brand" href="<?php echo $ArchivoCORE; ?>"><img src="img/logo.png" border="0" ALT="Practico"></a>
             </div>
             <!-- /.navbar-header -->
-
-
-
 
 
 
@@ -146,7 +138,6 @@
 					//else
 					//	echo $MULTILANG_SubtituloPractico1.' '.$MULTILANG_SubtituloPractico2;
 				?>
-                                    
 				<?php 
 					//Despliega botones de desarrollo
 					if (@$Login_usuario=="admin" && $Sesion_abierta)
@@ -226,12 +217,6 @@
                                     </div>
                                 </a>
                             </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#">
-                                    <strong>...</strong>
-                                </a>
-                            </li>
                         </ul>
                         <!-- /.dropdown-alerts -->
                     </li>
@@ -269,13 +254,16 @@
 
 
 
-
-            <div id="menu_izquierdo" class="navbar-default sidebar" role="navigation">
+            <div id="boton_menu_izquierdo" style="position: absolute; left: 1px; top: 60px;  z-index: 2;">
+                <i class="fa fa-indent fa-border texto-negro texto-blink" OnClick="javascript:barra_navegacion_izquierda_toggle('<?php if (@$ModoBarraMenuRecibido=="flotante") echo "flotante"; else echo "responsive"; ?>');"></i>
+            </div>
+            <div id="barra_navegacion_izquierda" class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
+                        <br>
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Buscar...">
+                                <input type="text" class="form-control" placeholder="<?php echo $MULTILANG_Buscar; ?>...">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="button">
                                         <i class="fa fa-search"></i>
@@ -285,7 +273,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="<?php echo $ArchivoCORE; ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -356,21 +344,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li class="active">
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a class="active" href="blank.html">Blank Page</a>
-                                </li>
-                                <li>
-                                    <a href="login.html">Login Page</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
                     </ul>
-                
-                
 
                     <div class="alert alert-info" role="alert">
                         <?php 
@@ -390,18 +364,13 @@
                                 }
                         ?>
                         <hr>
-                        <i><i class="fa fa-copyright"></i> <a href="http://www.practico.org">Practico.org</a></i>&nbsp;&nbsp;
+                        <i><i class="fa fa-copyright"></i> <a href="http://www.practico.org">Practico.org</a></i>
                     </div>
-
 
                 </div>
                 <!-- FIN DEL /.sidebar-collapse -->
             </div>
             <!-- FIN DEL /.navbar-static-side -->
-            
-
-
-
         </nav>
 
 

@@ -78,6 +78,8 @@
     </div>
     <!-- /#wrapper inicial -->
 
+
+
     <!-- jQuery -->
 	<script type="text/javascript" src="inc/jquery/jquery-2.1.0.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
@@ -87,10 +89,16 @@
 	<!--<script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>-->
     <!-- JavaScript Personalizado del tema -->
     <script src="inc/bootstrap/js/sb-admin-2.js"></script>
-    <!--<script src="inc/bootstrap/js/practico.js"></script>-->
+    <script src="inc/bootstrap/js/practico.js"></script>
     <!-- Chat -->
     <script type="text/javascript" src="inc/chat/js/chat.js"></script>
 
+<script>
+//Autooculta la barra de navegacion
+$(".navbar-fixed-top").autoHidingNavbar({
+  // see next for specifications
+});
+</script>
 
     <?php
         // Estadisticas de uso anonimo con GABeacon
