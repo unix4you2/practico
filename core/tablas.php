@@ -546,7 +546,7 @@ if ($accion=="editar_tabla")
 */
 	if ($accion=="administrar_tablas")
 		{
-			echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/otODPESW0k0\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a>";
+			echo "<center><a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/otODPESW0k0\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a></center>";
 
 			abrir_ventana($MULTILANG_TblCrearListar,'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
@@ -560,8 +560,8 @@ if ($accion=="editar_tabla")
 					<tr>
 						<td align="center"><?php echo $MULTILANG_Nombre; ?>:</td>
 						<td><?php echo $TablasApp; ?><input type="text" name="nombre_tabla" size="20" class="CampoTexto">
-						<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesTabla; ?>"><i class="fa fa-question-circle"></i></a></td>
+                        <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+						<a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_TblDesTabla; ?>" name="<?php echo $MULTILANG_TblDesTabla; ?>"><i class="fa fa-question-circle"></i></a></td>
 					</tr>
 					<tr>
 						<td>
@@ -580,7 +580,7 @@ if ($accion=="editar_tabla")
 				<form name="datosasis" id="datosasis" action="<?php echo $ArchivoCORE; ?>" method="POST">
 				<input type="Hidden" name="accion" value="asistente_tablas">
 				<?php echo $MULTILANG_Asistente; ?><br>
-				<a href="#" title="<?php echo $MULTILANG_TblTitAsis; ?>" name="<?php echo $MULTILANG_TblDesAsis; ?>"><i class="fa fa-paint-brush fa-5x texto-naranja"></i></a>
+				<a href="javascript:document.datosasis.submit();" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TblTitAsis; ?>: <?php echo $MULTILANG_TblDesAsis; ?>"><i class="fa fa-paint-brush fa-5x texto-naranja"></i></a>
 				</form>
 			</td>
 			<tr>

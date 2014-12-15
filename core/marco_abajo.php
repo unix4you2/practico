@@ -86,19 +86,33 @@
     <script type="text/javascript" src="inc/bootstrap/js/bootstrap.min.js"></script>
     <!-- Plugins JavaScript adicionales -->
     <script src="inc/bootstrap/js/plugins/metisMenu/metisMenu.min.js"></script>
-	<!--<script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>-->
+    <!-- Morris Charts JavaScript -->
+    <script src="inc/bootstrap/js/plugins/morris/raphael.min.js"></script>
+    <script src="inc/bootstrap/js/plugins/morris/morris.min.js"></script>
+    <script src="inc/bootstrap/js/plugins/morris/morris-data.js"></script>
+	<!-- Canvas -->
+    <!--<script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>-->
+
     <!-- JavaScript Personalizado del tema -->
     <script src="inc/bootstrap/js/sb-admin-2.js"></script>
     <script src="inc/bootstrap/js/practico.js"></script>
     <!-- Chat -->
     <script type="text/javascript" src="inc/chat/js/chat.js"></script>
 
-<script>
-//Autooculta la barra de navegacion
-$(".navbar-fixed-top").autoHidingNavbar({
-  // see next for specifications
-});
-</script>
+    <?php
+        //Si el usuario es admin por defecto presenta la barra lateral activa
+        if ($Login_usuario=="admin" && $Sesion_abierta && $accion=="Ver_menu")
+            echo '<script language="JavaScript">
+                    ver_navegacion_izquierda_responsive();
+                </script>';
+    ?>
+
+    <script language="JavaScript">
+        //Carga los tooltips programados en la hoja.  Por defecto todos los elementos con data-toggle=tootip
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 
     <?php
         // Estadisticas de uso anonimo con GABeacon

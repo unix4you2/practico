@@ -28,6 +28,7 @@ core/marco_wscfg.php
 core/marco_arriba.php
 core/marco_param.php
 core/marco_abajo.php
+core/marco_admin.php
 core/marco_chat.php
 core/marco_oauth.php
 core/marco_conf.php
@@ -70,7 +71,9 @@ LogCambios="
 * Added: Inclusión de GlypIcons
 * Added: Adición de librerías nuevas para elaboración de gráficos
 * Added: Se cambia la ventana de login por OAuth a modal.
+* Added: Panel administrativo al inicio con resumenes del sistema
 * Fixed: Se simplifica script de inicio para login y cambio dinámico de marcos.
+* Fixed: Actualizados scripts de instalacion pues ya no requieren creación de menues
 "
 
 ########################################################################

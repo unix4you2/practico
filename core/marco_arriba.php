@@ -234,12 +234,11 @@
                             <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> <?php echo $Nombre_usuario;?></a>
-                            </li>
-                            <li><a data-toggle="modal" href="#Dialogo_Chat"><i class="fa fa-comment fa-fw"></i> Chat</a>
-                            </li>
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i> <?php echo $Nombre_usuario;?></a></li>
+                            <li><a href="javascript:document.reseteo_clave.submit();"><i class="fa fa-key fa-fw"></i> <?php echo $MULTILANG_UsrReset; ?></a></li>
+                            <li><a data-toggle="modal" href="#Dialogo_Chat"><i class="fa fa-comment fa-fw"></i> Chat</a></li>
                             <li class="divider"></li>
-                            <li><a href="javascript:cerrar_sesion.submit();"><i class="fa fa-sign-out fa-fw"></i> <?php echo $MULTILANG_CerrarSesion; ?></a>
+                            <li><a href="javascript:cerrar_sesion.submit();"><i class="fa fa-sign-out fa-fw texto-blink"></i> <?php echo $MULTILANG_CerrarSesion; ?></a>
                             </li>
                         </ul>
                         <!-- /.dropdown-user -->
@@ -259,97 +258,45 @@
             </div>
             <div id="barra_navegacion_izquierda" class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <br>
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="<?php echo $MULTILANG_Buscar; ?>...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-                        <li>
-                            <a href="<?php echo $ArchivoCORE; ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot.html">Flot Charts</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Morris.js Charts</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
-                        </li>
-                        <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="panels-wells.html">Panels and Wells</a>
-                                </li>
-                                <li>
-                                    <a href="buttons.html">Buttons</a>
-                                </li>
-                                <li>
-                                    <a href="notifications.html">Notifications</a>
-                                </li>
-                                <li>
-                                    <a href="typography.html">Typography</a>
-                                </li>
-                                <li>
-                                    <a href="grid.html">Grid</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
+                    
+                    <!--INICIO DE OPCIONES BARRA LATERAL-->
+                        <ul class="nav" id="side-menu">
+                            <br>
+                            <li class="sidebar-search">
+                                <div class="input-group custom-search-form">
+                                    <input type="text" class="form-control" placeholder="<?php echo $MULTILANG_Buscar; ?>...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <!-- /input-group -->
+                            </li>
+                            <li>
+                                <a href="<?php echo $ArchivoCORE; ?>"><i class="fa fa-dashboard fa-fw"></i> <?php echo $MULTILANG_Escritorio; ?></a>
+                            </li>
+                            <li>
+                                <a href="javascript:document.mis_informes.submit();"><i class="fa fa-pie-chart fa-fw"></i> <?php echo $MULTILANG_UsrInfDisp; ?></a>
+                            </li>
+                            <?php
+                                if(@$Login_usuario=="admin" && $accion!="")
+                                    {
+                            ?>
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="javascript:document.fileman_admin_embebido.submit();"><i class="fa fa fa-cloud-upload fa-fw"></i> <?php echo $MULTILANG_AdminArchivos; ?></a>
                                         </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                    </ul>
+                            <?php
+                                    }
+                            ?>
+                        </ul>
+                    <!--FIN DE OPCIONES BARRA LATERAL-->
 
-                    <div class="alert alert-info" role="alert">
+                    <div class="alert alert-info btn-xs" role="alert">
+                        <strong><i class='fa fa-bolt fa-fw'></i> 
                         <?php 
                         //Presenta informacion de carga del aplicativo
-                        echo $MULTILANG_Instante; ?>:&nbsp;&nbsp;<?php echo $fecha_operacion_guiones;?>&nbsp;&nbsp;<?php echo $hora_operacion_puntos;?>
+                        echo $MULTILANG_Instante; ?>:</strong>&nbsp;&nbsp;<?php echo $fecha_operacion_guiones;?>&nbsp;&nbsp;<?php echo $hora_operacion_puntos;?>
                         <br>
                         <?php
                             // Muestra la accion actual si el usuario es administrador y la accion no es vacia - Sirve como guia a la hora de crear objetos
@@ -358,13 +305,14 @@
                                     // Calcula tiempos de ejecucion del script
                                     $tiempo_final_script = obtener_microtime();
                                     $tiempo_total_script = $tiempo_final_script - $tiempo_inicio_script;
-                                    echo "$MULTILANG_Accion: $accion <br>$MULTILANG_TiempoCarga: ";
+                                    echo "<strong><i class='fa fa-cog fa-fw'></i> $MULTILANG_Accion:</strong> $accion <br><strong><i class='fa fa-clock-o fa-fw'></i> $MULTILANG_TiempoCarga:</strong> ";
                                     echo round($tiempo_total_script,3);
-                                    echo " s<br>Inclusiones: ".count(get_included_files()); // Retorna arreglo con cantidad de archivos incluidos
+                                    echo " s<br><strong><i class='fa fa-file-code-o fa-fw'></i> Inclusiones:</strong> ".(count(get_included_files()))."<hr>"; // Retorna arreglo con cantidad de archivos incluidos
                                 }
                         ?>
-                        <hr>
-                        <i><i class="fa fa-copyright"></i> <a href="http://www.practico.org">Practico.org</a></i>
+                        <div align=center>
+                        <i>Copyright <i class="fa fa-copyright"></i> <a href="http://www.practico.org">Practico.org</a></i>
+                        </div>
                     </div>
 
                 </div>
@@ -393,15 +341,27 @@
 <div id="main_container" style="overflow: auto;">
 
 
+
+
 <form action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;" name="core_ver_menu">
 	<input type="Hidden" name="accion" value="Ver_menu">
 </form>
 <form method="POST" name="cerrar_sesion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     <input type="Hidden" name="accion" value="Terminar_sesion">
 </form>
+<form method="POST" name="reseteo_clave" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+    <input type="Hidden" name="accion" value="cambiar_clave">
+</form>
+<form method="POST" name="mis_informes" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+    <input type="Hidden" name="accion" value="mis_informes">
+</form>
+<form method="POST" name="fileman_admin_embebido" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+    <input type="Hidden" name="accion" value="fileman_admin_embebido">
+</form>
+
 
 <?php 
-	//Despliega marco de administracion a ser activado por el boton superior
+	//Despliega marcos de administracion a ser activados por el menu superior
 	if (@$Login_usuario=="admin" && $Sesion_abierta)
 		{
 			include_once("core/marco_dev.php");
@@ -412,15 +372,6 @@
 		}
 	include_once("core/marco_chat.php");
 ?>
-
-
-
-
-
-
-
-
-
 
 
 
@@ -456,6 +407,40 @@
 
 
 	<!-- INICIO  DE CONTENIDOS DE APLICACION -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

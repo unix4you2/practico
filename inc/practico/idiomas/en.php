@@ -76,6 +76,7 @@
 	$MULTILANG_Embebido='Embed';
 	$MULTILANG_Encendido='On';
 	$MULTILANG_Error='Error';
+    $MULTILANG_Escritorio='Desktop';
 	$MULTILANG_Estado='Status';
 	$MULTILANG_Etiqueta='Label';
 	$MULTILANG_Fecha='Date';
@@ -179,6 +180,7 @@
 	$MULTILANG_ErrFuncion='<br>PHP Function doesnt exists or is disabled in your server: ';
 	$MULTILANG_ErrDirectiva='The environment var should be enabled on your PHP or web server configuration';
 	$MULTILANG_UsuariosChat='Users that are offline at this moment will see all the messages when they login again to the system.';
+    $MULTILANG_AdminArchivos='File manager';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';

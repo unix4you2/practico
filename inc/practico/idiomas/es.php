@@ -35,7 +35,7 @@
 	$MULTILANG_Accion='Accion';
 	$MULTILANG_Actualizacion='Actualizaci&oacute;n';
 	$MULTILANG_Actualizar='Actualizar';
-	$MULTILANG_Administre='Administre';
+    $MULTILANG_Administre='Administre';
 	$MULTILANG_Agregar='Agregar';
 	$MULTILANG_Anonimo='An&oacute;nimo';
 	$MULTILANG_Anterior='Anterior';
@@ -76,7 +76,8 @@
 	$MULTILANG_Embebido='Embebido';
 	$MULTILANG_Encendido='Encendido';
 	$MULTILANG_Error='Error';
-	$MULTILANG_Estado='Estado';
+	$MULTILANG_Escritorio='Escritorio';
+    $MULTILANG_Estado='Estado';
 	$MULTILANG_Etiqueta='Etiqueta';
 	$MULTILANG_Fecha='Fecha';
 	$MULTILANG_Finalizado='Finalizado';
@@ -179,6 +180,7 @@
 	$MULTILANG_ErrFuncion='<br>Funcion de PHP no existe o se encuentra deshabilitada en su servidor: ';
 	$MULTILANG_ErrDirectiva='La directiva o variable de configuracion PHP indicada debe estar habilitada en su configuracion de PHP o servidor web';
 	$MULTILANG_UsuariosChat='Aquellos usuarios desconectados en el momento recibiran los mensajes cuando ingresen nuevamente al sistema.';
+    $MULTILANG_AdminArchivos='Administrador de archivos';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';
@@ -690,7 +692,7 @@
 	$MULTILANG_UsrErrInf='El usuario ya posee el permiso seleccionado';
 	$MULTILANG_UsrAdmInf='Administraci&oacute;n de informes del usuario';
 	$MULTILANG_UsrAgreInf='Agregar informe al men&uacute; del usuario';
-	$MULTILANG_UsrInfDisp='Informes ya disponibles';
+	$MULTILANG_UsrInfDisp='Informes disponibles';
 	$MULTILANG_UsrAdvDel='IMPORTANTE:  Al eliminar el registro pueden quedar sin vincular algunas opciones del sistema para este usuario.\n'.$MULTILANG_Confirma;
 	$MULTILANG_UsrAdmPer='Administraci&oacute;n de permisos del usuario';
 	$MULTILANG_UsrCopiaPer='Copiar inicialmente los permisos desde el usuario';

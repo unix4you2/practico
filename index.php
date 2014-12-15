@@ -157,6 +157,11 @@
         mensaje($MULTILANG_TituloInsExiste, $MULTILANG_TextoInsExiste, '', 'fa fa-exclamation-triangle fa-5x texto-rojo texto-blink', 'alert alert-warning alert-dismissible');
     }
 
+	//Despliega escritorio del admin
+	if (@$Login_usuario=="admin" && $Sesion_abierta && $accion=="Ver_menu") {
+        include_once("core/marco_admin.php");
+    }
+
     // Presenta mensajes con errores generales cuando son encontrados durante la ejecucion
     if (@$error_titulo!="") {
         mensaje($error_titulo, $error_descripcion, '', 'fa fa-thumbs-down fa-fw fa-2x', 'alert alert-danger alert-dismissible');
