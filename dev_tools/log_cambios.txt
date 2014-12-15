@@ -48,6 +48,7 @@ inc/bootstrap/*
 inc/fonts/*
 inc/less/*
 inc/jquery/*
+img/favicon.ico
 "
 
 #[ArchivosObligatorios] Separados por espacio

@@ -100,7 +100,7 @@
 
 
 
-	<link rel="shortcut icon" href="skin/<?php echo $PlantillaActiva; ?>/img/favicon.ico"/>
+	<link rel="shortcut icon" href="img/favicon.ico"/>
 
 	<script language="JavaScript">
 		function abrir_ventana_popup(theURL,winName,features)
