@@ -91,7 +91,8 @@
     <script src="inc/bootstrap/js/plugins/morris/morris.min.js"></script>
     <?php
         // Incluye archivo con las consultas y datos para ser diagramados por Morris
-        include_once("core/marco_admin_morris.php");
+		if (@$Login_usuario=="admin" && $Sesion_abierta)
+            include_once("core/marco_admin_morris.php");
     ?>
 
 	<!-- Canvas -->

@@ -47,10 +47,19 @@ $(function() {
             $cadena_datos="";
             while ($registro_auditoria = $resultado_auditoria->fetch())
                 {
+                    //Cuenta ingresos unicos de usuarios
+                    $registro_auditoria_usuarios=ejecutar_sql("SELECT count(*) as cantidad FROM ".$TablasCore."auditoria WHERE fecha='".$registro_auditoria["fecha"]."' GROUP BY usuario_login")->fetch();
+                    $total_usuarios_unicos=$registro_auditoria_usuarios["cantidad"];
+                    //Cuenta registros de la API
+                    $registro_auditoria_api=ejecutar_sql("SELECT count(*) as cantidad FROM ".$TablasCore."auditoria WHERE fecha='".$registro_auditoria["fecha"]."' AND usuario_login LIKE 'API.%' GROUP BY usuario_login")->fetch();
+                    $total_uso_api=$registro_auditoria_api["cantidad"];
+                    //Agrega datos al arreglo
                     $cadena_datos.= "
                         {
                             fecha: '".$registro_auditoria["fecha"]."',
-                            operaciones: ".$registro_auditoria["cantidad"]."
+                            Operaciones: ".$registro_auditoria["cantidad"].",
+                            Usuarios: ".$total_usuarios_unicos.",
+                            UsoAPI: ".$total_uso_api."
                         },
                         ";
                 }
@@ -59,8 +68,8 @@ $(function() {
         ?>
         ],
         xkey: 'fecha',
-        ykeys: ['operaciones'],
-        labels: ['operaciones'],
+        ykeys: ['Operaciones','Usuarios','UsoAPI'],
+        labels: ['Operaciones','Usuarios','UsoAPI'],
         pointSize: 2,
         hideHover: 'auto',
         resize: true

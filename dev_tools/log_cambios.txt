@@ -73,6 +73,7 @@ LogCambios="
 * Added: Adición de librerías nuevas para elaboración de gráficos
 * Added: Se cambia la ventana de login por OAuth a modal.
 * Added: Panel administrativo al inicio con resumenes del sistema
+* Added: Panel de dashboard para el administrador de aplicacion
 * Fixed: Se simplifica script de inicio para login y cambio dinámico de marcos.
 * Fixed: Actualizados scripts de instalacion pues ya no requieren creación de menues
 "
