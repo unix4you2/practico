@@ -34,6 +34,7 @@ core/marco_oauth.php
 core/marco_conf.php
 core/marco_dev.php
 core/menus.php
+core/marco_admin_morris.php
 core/ws_funciones.php
 core/ws_nucleo.php
 core/objetos.php

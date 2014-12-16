@@ -40,7 +40,8 @@
 	$MULTILANG_Anonimo='An&oacute;nimo';
 	$MULTILANG_Anterior='Anterior';
 	$MULTILANG_Apagado='Apagado';
-	$MULTILANG_Aplicando='Aplicando';
+	$MULTILANG_Aplicacion='Aplicaci&oacute;n';
+    $MULTILANG_Aplicando='Aplicando';
 	$MULTILANG_Asistente='Asistente';
 	$MULTILANG_Atencion='Atenci&oacute;n';
 	$MULTILANG_Ayuda='Ayuda';
