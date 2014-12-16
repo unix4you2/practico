@@ -101,7 +101,7 @@
 
     <?php
         //Si el usuario es admin por defecto presenta la barra lateral activa
-        if ($Login_usuario=="admin" && $Sesion_abierta && $accion=="Ver_menu")
+        if (@$Login_usuario=="admin" && @$Sesion_abierta && @$accion=="Ver_menu")
             echo '<script language="JavaScript">
                     ver_navegacion_izquierda_responsive();
                 </script>';

@@ -201,10 +201,11 @@
                     <i class="fa fa-chain-broken fa-5x texto-rojo texto-blink"></i>
 				</td>
 			</tr></table>
+            <center>
 			<form name="Again" method="POST">
 				<input type="Hidden" name="accion" value="">
-                <a class="btn btn-info" href="javascript:document.Again.submit();"><i class="fa fa-refresh"></i> '.$MULTILANG_Ingresar.'</a>
-			</form>';
+                <a class="btn btn-info" href="javascript:document.Again.submit();"><i class="fa fa-refresh fa-spin"></i> '.$MULTILANG_Ingresar.'</a>
+			</form></center>';
 		@session_destroy();
 		cerrar_ventana();
 	}

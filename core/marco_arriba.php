@@ -85,10 +85,6 @@
 	<script type="text/javascript" src="inc/practico/javascript/validaform.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/popup.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/html5slider.js"></script>
-
-	<link rel="stylesheet" href="inc/font-awesome/css/font-awesome.min.css">
-
-
 -->
 	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/chat.css" />
 	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/screen.cssXXX" />
@@ -252,7 +248,11 @@
             <!-- CIERRA /.navbar-top-links -->
 
 
-
+        <?php
+            //Presenta las opciones de la barra izquierda a los usuarios
+            if ($Sesion_abierta && @$Login_usuario!="")
+                {
+        ?>
             <div id="boton_menu_izquierdo" style="position: absolute; left: 1px; top: 60px;  z-index: 2;">
                 <i class="fa fa-indent fa-border texto-negro texto-blink" OnClick="javascript:barra_navegacion_izquierda_toggle('<?php if (@$ModoBarraMenuRecibido=="flotante") echo "flotante"; else echo "responsive"; ?>');"></i>
             </div>
@@ -261,6 +261,8 @@
                     
                     <!--INICIO DE OPCIONES BARRA LATERAL-->
                         <ul class="nav" id="side-menu">
+                            
+
                             <br>
                             <li class="sidebar-search">
                                 <div class="input-group custom-search-form">
@@ -279,8 +281,11 @@
                             <li>
                                 <a href="javascript:document.mis_informes.submit();"><i class="fa fa-pie-chart fa-fw"></i> <?php echo $MULTILANG_UsrInfDisp; ?></a>
                             </li>
+
+                            
                             <?php
-                                if(@$Login_usuario=="admin" && $accion!="")
+                                //Siempre presenta el administrador de archivos al superusuario
+                                if($Sesion_abierta && @$Login_usuario=="admin" && $accion!="")
                                     {
                             ?>
                                         <li>
@@ -319,7 +324,14 @@
                 <!-- FIN DEL /.sidebar-collapse -->
             </div>
             <!-- FIN DEL /.navbar-static-side -->
+        <?php
+                } //Fin Presentar opciones de la barra a usuarios
+        ?>
+            
+            
         </nav>
+
+
 
 
 
@@ -328,10 +340,6 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-
-
-
-
 
 
 
@@ -407,40 +415,6 @@
 
 
 	<!-- INICIO  DE CONTENIDOS DE APLICACION -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
