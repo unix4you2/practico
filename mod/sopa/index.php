@@ -59,5 +59,7 @@ if ($accion=="Ver_menu")
 	{
 		//Llamar al controlador inicial de la aplicacion o modulo
 		require($SOPA_controladores.'controlador.php');
+        
+        //echo ObtenerEntradas_FacebookFanPage("", "1444206149136402");
 	}
 
