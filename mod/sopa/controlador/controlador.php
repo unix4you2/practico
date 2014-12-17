@@ -92,6 +92,7 @@ function ObtenerEntradas_FacebookFanPage($Nombre_FanPage="", $ID_FanPage="", $Fo
                 //Si se ha obtenido respuesta entonces procesa entradas
                 if ($contenido_url!="")
                     {
+                        echo $contenido_url;
                         // Usa SimpleXML Directamente para interpretar respuesta
                         $EntradasObtenidas = simplexml_load_string($contenido_url);
                         // Procesa la respuesta recibida en el XML
