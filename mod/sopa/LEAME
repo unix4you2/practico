@@ -1,0 +1,36 @@
+                ____                 _   _           
+               |  _ \ _ __ __ _  ___| |_(_) ___ ___  
+               | |_) | '__/ _` |/ __| __| |/ __/ _ \ 
+               |  __/| | | (_| | (__| |_| | (_| (_) |
+               |_|   |_|  \__,_|\___|\__|_|\___\___/ 
+                                      
+- Modulo de Social Parsing
+
+Modo de Uso (para versiones anteriores a la 14.913, versiones 15.1+ ya lo incluyen por defecto):
+	1) Descomprimir el modulo mediante su proceso de instalacion normal o manualmente sobre /mod
+
+Primer llamado al modulo:
+	2) Accesar Practico con credenciales de administrador y agregar un nuevo menu asi (si todavia no existe):
+		Texto:   Social Parser    (o el deseado por usted)
+		Seccion: Módulos embebidos
+		Imagen:  tango_document-open.png (o la deseada por usted)
+		Tipo:    Interno
+		Accion:  social_parser (o la definida)
+	3) Haha clic sobre la nueva opcion para lanzar el módulo embebido
+
+----------------------------------------------------------------------------
+Notas de interes para desarrolladores:
+
+FACEBOOK:
+    * Obtener datos basicos de perfil y el ID de pagina:
+        https://graph.facebook.com/{PAGINA}
+        Ejemplo: https://graph.facebook.com/colmedicos
+    * Obtener Feed RSS con las entradas del muro:
+        feed://www.facebook.com/feeds/page.php?id={ID_DE_PAGINA_FACE}&format=rss20
+        Ejemplo 1: https://www.facebook.com/feeds/page.php?id=1444206149136402&format=rss20
+        Ejemplo 2: https://www.facebook.com/feeds/page.php?id=1444206149136402&format=atom10
+
+PINTEREST:
+    * Obtener Feed RSS con las entradas:
+        http://pinterest.com/norfipc/{NOMBRE_DE_LA_CUENTA}.rss
+        Ejemplo 1: http://pinterest.com/norfipc/pensamientos-sobre-la-vida-y-el-amor.rss
