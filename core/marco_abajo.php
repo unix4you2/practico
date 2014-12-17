@@ -46,49 +46,90 @@
 	*/
 ?>
 
-	<!-- INICIO DEL MENU INFERIOR -->	
-	<tr><td>
-		<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MarcoInferior"><tr>
-			<td align="left" valign="bottom" width="50%">
-				&nbsp;&nbsp;<?php echo $MULTILANG_Instante; ?>:&nbsp;&nbsp;<?php echo $fecha_operacion_guiones;?>&nbsp;&nbsp;<?php echo $hora_operacion_puntos;?>
-				<?php
-					// Muestra la accion actual si el usuario es administrador y la accion no es vacia - Sirve como guia a la hora de crear objetos
-					if(@$Login_usuario=="admin" && $accion!="")
-						{
-							// Calcula tiempos de ejecucion del script
-							$tiempo_final_script = obtener_microtime();
-							$tiempo_total_script = $tiempo_final_script - $tiempo_inicio_script;
-							echo " - <font color=yellow>$MULTILANG_Accion: $accion</font> <font color=black>$MULTILANG_TiempoCarga (seg):";
-							echo round($tiempo_total_script,3);
-							echo " - Inc: ".count(get_included_files()); // Retorna arreglo con cantidad de archivos incluidos
-						}
-				?>
-			</td>
-			<td align="right" valign="bottom" width="50%">
-				<i><i class="fa fa-copyright"></i> <a href="http://www.practico.org" style="color:#FFFFFF">Practico.org</a></i>&nbsp;&nbsp;
-			</td>
-		</tr></table>
-	</td></tr>
 
-<!-- FINALIZA LA TABLA PRINCIPAL -->
-</table>
+
+
 
 </div> <!-- FINALIZA MARCO DE CHAT -->
-<script type="text/javascript" src="inc/chat/js/chat.js"></script>
 
-<?php
-	// Estadisticas de uso anonimo con GABeacon
-	$PrefijoGA='<img src="https://ga-beacon.appspot.com/';
-	$PosfijoGA='/Practico/'.$accion.'?pixel" border=0 ALT=""/>';
-	// Este valor indica un ID generico de GA UA-847800-9 No edite esta linea sobre el codigo
-	// Para validar que su ID es diferente al generico de seguimiento.  En lugar de esto cambie
-	// su valor a traves del panel de configuracion de Practico con el entregado como ID de GoogleAnalytics
-	$Infijo=base64_decode("VUEtODQ3ODAwLTk=");
-	echo $PrefijoGA.$Infijo.$PosfijoGA;
-	if(@$CodigoGoogleAnalytics!="")
-		echo $PrefijoGA.$CodigoGoogleAnalytics.$PosfijoGA;	
-?>
 
-    <script src="inc/bootstrap/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+
+
+
+
+    </div>
+    <!-- /#wrapper inicial -->
+
+
+    <!-- jQuery -->
+	<script type="text/javascript" src="inc/jquery/jquery-2.1.0.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="inc/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Plugins JavaScript adicionales -->
+    <script src="inc/bootstrap/js/plugins/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="inc/bootstrap/js/plugins/morris/raphael.min.js"></script>
+    <script src="inc/bootstrap/js/plugins/morris/morris.min.js"></script>
+    <?php
+        // Incluye archivo con las consultas y datos para ser diagramados por Morris
+		if (@$Login_usuario=="admin" && $Sesion_abierta)
+            include_once("core/marco_admin_morris.php");
+    ?>
+
+	<!-- Canvas -->
+    <!--<script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>-->
+
+    <!-- JavaScript Personalizado del tema -->
+    <script src="inc/bootstrap/js/sb-admin-2.js"></script>
+    <script src="inc/bootstrap/js/practico.js"></script>
+    <!-- Chat -->
+    <script type="text/javascript" src="inc/chat/js/chat.js"></script>
+
+    <?php
+        //Si el usuario es admin por defecto presenta la barra lateral activa
+        if (@$Login_usuario=="admin" && @$Sesion_abierta && @$accion=="Ver_menu")
+            echo '<script language="JavaScript">
+                    ver_navegacion_izquierda_responsive();
+                </script>';
+    ?>
+
+    <script language="JavaScript">
+        //Carga los tooltips programados en la hoja.  Por defecto todos los elementos con data-toggle=tootip
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+
+    <?php
+        // Estadisticas de uso anonimo con GABeacon
+        $PrefijoGA='<img src="https://ga-beacon.appspot.com/';
+        $PosfijoGA='/Practico/'.$accion.'?pixel" border=0 ALT=""/>';
+        // Este valor indica un ID generico de GA UA-847800-9 No edite esta linea sobre el codigo
+        // Para validar que su ID es diferente al generico de seguimiento.  En lugar de esto cambie
+        // su valor a traves del panel de configuracion de Practico con el entregado como ID de GoogleAnalytics
+        $Infijo=base64_decode("VUEtODQ3ODAwLTk=");
+        echo $PrefijoGA.$Infijo.$PosfijoGA;
+        if(@$CodigoGoogleAnalytics!="")
+            echo $PrefijoGA.$CodigoGoogleAnalytics.$PosfijoGA;	
+    ?>
 </body>
 </html>

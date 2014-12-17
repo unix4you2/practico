@@ -84,7 +84,7 @@ if ($accion=="actualizar_menu")
 if ($accion=="detalles_menu")
 	{
 		echo '<div align="center">';
-		abrir_ventana($MULTILANG_MnuTitEditar,'f2f2f2','');
+		abrir_ventana($MULTILANG_MnuTitEditar,'panel-danger');
 
 		// Busca detalles del item
 		$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE id=? ","$id");
@@ -94,7 +94,7 @@ if ($accion=="detalles_menu")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioImagenes' class="FormularioPopUps">
 			<?php
-			abrir_ventana($MULTILANG_MnuSelImagen,'BDB9B9','620');
+			abrir_ventana($MULTILANG_MnuSelImagen,'panel-warning');
 
 			//Busca en el directorio de iconos por imagenes listas para ser usadas
 			$columnas=15;
@@ -146,7 +146,7 @@ if ($accion=="detalles_menu")
 		<div id='FormularioObjetos' class="FormularioPopUps">
 			<form name="selector_objetos" method="POST">
 			<?php
-			abrir_ventana($MULTILANG_SeleccioneUno.' '.$MULTILANG_MnuObjeto,'BDB9B9','');
+			abrir_ventana($MULTILANG_SeleccioneUno.' '.$MULTILANG_MnuObjeto,'panel-primary');
 			?>
 				<br><br>
 				<table class="TextosVentana">
@@ -461,13 +461,13 @@ if ($accion=="administrar_menu")
 		$accion=escapar_contenido($accion); //Limpia cadena para evitar XSS
 		echo '<div align="center"><br>';
 		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/-24qazTBngg\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a>";
-		abrir_ventana($MULTILANG_MnuAdmin,'f2f2f2','');
+		abrir_ventana($MULTILANG_MnuAdmin, 'panel-primary');
 ?>
 
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioImagenes' class="FormularioPopUps">
 			<?php
-			abrir_ventana($MULTILANG_MnuSelImagen,'BDB9B9','620');
+			abrir_ventana($MULTILANG_MnuSelImagen, 'panel-warning');
 
 			//Busca en el directorio de iconos por imagenes listas para ser usadas
 			$columnas=15;
@@ -520,7 +520,7 @@ if ($accion=="administrar_menu")
 		<div id='FormularioObjetos' class="FormularioPopUps">
 			<form name="selector_objetos" method="POST">
 			<?php
-			abrir_ventana($MULTILANG_SeleccioneUno.' '.$MULTILANG_MnuObjeto,'BDB9B9','');
+			abrir_ventana($MULTILANG_SeleccioneUno.' '.$MULTILANG_MnuObjeto, 'panel-warning');
 			?>
 				<br><br>
 				<table class="TextosVentana">
@@ -831,7 +831,7 @@ if ($accion=="administrar_menu")
 					//Crea la seccion en el acordeon
 					$seccion_menu_activa=$registro["seccion"];
 					$conteo_opciones=$registro["conteo"];
-					abrir_ventana($seccion_menu_activa.' ('.$conteo_opciones.')','fondo_ventanas2.gif','85%');
+					abrir_ventana($seccion_menu_activa.' ('.$conteo_opciones.')', 'panel-primary');
 					// Busca las opciones dentro de la seccion
 
 					// Si el usuario es diferente al administrador agrega condiciones al query

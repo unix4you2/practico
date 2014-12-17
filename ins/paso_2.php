@@ -438,22 +438,20 @@
 	if ($hay_error)
 		{
 			echo '<input type="Hidden" name="paso" value="1">
-				  <input type="Hidden" name="Idioma" value="'.$Idioma.'">
-			';
+				  <input type="Hidden" name="Idioma" value="'.$Idioma.'">';
 			echo '<input type="Button" class="BotonesEstado" value=" '.$MULTILANG_ProbarNuevamente.' " onclick="document.continuar.submit();">';
 		}
 	else
 		{
 			echo '<input type="Hidden" name="paso" value="'.$siguiente.'">
-				  <input type="Hidden" name="Idioma" value="'.$Idioma.'">
-			';
-			echo '<input type="Button" class="BotonesEstadoCuidado" value=" '.$MULTILANG_Continuar.' >>> " onclick="document.continuar.submit();">';
+				  <input type="Hidden" name="Idioma" value="'.$Idioma.'">';
+			echo '<button onclick="document.continuar.submit();" type="button" class="btn btn-primary navbar-btn">'.$MULTILANG_Continuar.' <i class="fa fa-refresh texto-amarillo"></i></button>';
 		}
 	echo '</form>';
 	echo '<form name="regresar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 			<input type="Hidden" name="paso" value="'.$anterior.'">
 			<input type="Hidden" name="Idioma" value="'.$Idioma.'">
-			<input type="Button" class="BotonesEstado" value=" <<< '.$MULTILANG_Anterior.' " onclick="document.regresar.submit();">
+			<button onclick="document.regresar.submit();" type="button" class="btn btn-primary navbar-btn"><i class="fa fa-caret-square-o-left texto-amarillo"></i> '.$MULTILANG_Anterior.'</button>
 		  </form>';
 	cerrar_barra_estado();
 ?>

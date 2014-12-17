@@ -466,7 +466,7 @@ if ($accion=="administrar_monitoreo")
 	{
 		$accion=escapar_contenido($accion); //Limpia cadena para evitar XSS
 		echo '<div align="center"><br>';
-		abrir_ventana($MULTILANG_MonTitulo,'f2f2f2','');
+		abrir_ventana($MULTILANG_MonConfig,'panel-primary');
 ?>
 
 		<div id='FondoPopUps' class="FondoOscuroPopUps"></div>

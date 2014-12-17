@@ -17,11 +17,62 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+*.icon-white {color: white}
+*.icon-red {color: red}
+*.icon-green {color: green}
+*.icon-blue {color: blue}
+*.icon-yellow {color: yellow}
+*.icon-gray {color: gray}
+*.icon-orange {color: #FF8040}
+
+
+*.texto-blanco {color: white}
+*.texto-rojo {color: red}
+*.texto-verde {color: green}
+*.texto-azul {color: blue}
+*.texto-amarillo {color: yellow}
+*.texto-gris {color: gray}
+*.texto-naranja {color: #FF8040}
+
+
+/* ANIMACIONES */
+*.texto-parpadeando {
+    -moz-animation: parpadeando 2s infinite linear;
+    -o-animation: parpadeando 2s infinite linear;
+    -webkit-animation: parpadeando 2s infinite linear;
+    animation: parpadeando 2s infinite linear;
+}
+@-moz-keyframes parpadeando {
+  0% {opacity: 1;}
+  50% {opacity: .1;}
+  100% {opacity: 1;}
+}
+@-webkit-keyframes parpadeando {
+  0% {opacity: 1;}
+  50% {opacity: .1;}
+  100% {opacity: 1;}
+}
+@-o-keyframes parpadeando {
+  0% {opacity: 1;}
+  50% {opacity: .1;}
+  100% {opacity: 1;}
+}
+@-ms-keyframes parpadeando {
+  0% {opacity: 1;}
+  50% {opacity: .1;}
+  100% {opacity: 1;}
+}
+@keyframes parpadeando {
+  0% {opacity: 1;}
+  50% {opacity: .1;}
+  100% {opacity: 1;}
+}
+
 body {
 background-image:url(img/fondo.jpg);
-background-color: #E7E7E7;
+background-color: #726d6d;
 font-family: Tahoma, Verdana, sans-serif;
-color: #000000;
+color: #FFFFFF;
 font-size: 10px;
 font-weight: normal;
 margin-top: 0px;
@@ -50,7 +101,7 @@ border:2px solid #ccc;
 
 table.TextosEscritorio {
 font-family: Tahoma, Verdana, sans-serif;
-color: #000000;
+color: #FFFFFF;
 font-size: 10px;
 font-weight: normal;
 }
@@ -95,9 +146,9 @@ background-image:url(img/barra_estado.jpg);
 
 table.MarcoSuperior {
 background-image:url(img/fondo_superior.jpg);
-background-color: #FFFFFF;
+background-color: #000000;
 font-family: Tahoma, Verdana, sans-serif;
-color: #000000;
+color: #FFFFFF;
 font-size: 10px;
 font-weight: normal;
 }
@@ -112,22 +163,22 @@ font-weight: normal;
 
 table.MenuSuperior {
 background-image:url(img/fondo_menu.jpg);
-background-color: #FFFFFF;
+background-color: #362D2D;
 font-family: Tahoma, Verdana, sans-serif;
-color: #000000;
+color: #ffffff;
 font-size: 10px;
 font-weight: normal;
 }
 
 table.MenuSuperior a{
 text-decoration: none;
-color: #000000;
+color: #ffffff;
 }
 
 table.MenuSuperior a:hover{
 color: #000000;
 font-weight: bold;
-border:0px solid #000000;
+border:1px solid #000000;
 }
 
 /* TABLAS PARA GENERADOR DE INFORMES */

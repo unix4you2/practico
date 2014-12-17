@@ -103,12 +103,6 @@ Section: Detalles de licenciamiento (AUTHORS)
 					 The palette is in public domain. Developers, feel free to ship it along with your application.
 			http://tango.freedesktop.org/
 
-		Image files:
-			skin/nomo/img/fondo.jpg  &  ins/skin/nomo/img/fondo.jpg
-			Made by: Jakub Steiner (c) 2004
-			Are released to the Public Domain.
-			http://www.kellogg.northwestern.edu/faculty/steiner/htm/
-
 		Media files and CSS files under:
 				img / * (except those named tango_*)
 				skin / *

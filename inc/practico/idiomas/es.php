@@ -35,17 +35,19 @@
 	$MULTILANG_Accion='Accion';
 	$MULTILANG_Actualizacion='Actualizaci&oacute;n';
 	$MULTILANG_Actualizar='Actualizar';
-	$MULTILANG_Administre='Administre';
+    $MULTILANG_Administre='Administre';
 	$MULTILANG_Agregar='Agregar';
 	$MULTILANG_Anonimo='An&oacute;nimo';
 	$MULTILANG_Anterior='Anterior';
 	$MULTILANG_Apagado='Apagado';
-	$MULTILANG_Aplicando='Aplicando';
+	$MULTILANG_Aplicacion='Aplicaci&oacute;n';
+    $MULTILANG_Aplicando='Aplicando';
 	$MULTILANG_Asistente='Asistente';
 	$MULTILANG_Atencion='Atenci&oacute;n';
 	$MULTILANG_Ayuda='Ayuda';
 	$MULTILANG_Basedatos='Base de datos';
 	$MULTILANG_BarraHtas='Barra de herramientas';
+    $MULTILANG_Buscar='Buscar';
 	$MULTILANG_Campo='Campo';
 	$MULTILANG_Cancelar='Cancelar';
 	$MULTILANG_Capturar='Capturar';
@@ -75,7 +77,8 @@
 	$MULTILANG_Embebido='Embebido';
 	$MULTILANG_Encendido='Encendido';
 	$MULTILANG_Error='Error';
-	$MULTILANG_Estado='Estado';
+	$MULTILANG_Escritorio='Escritorio';
+    $MULTILANG_Estado='Estado';
 	$MULTILANG_Etiqueta='Etiqueta';
 	$MULTILANG_Fecha='Fecha';
 	$MULTILANG_Finalizado='Finalizado';
@@ -138,7 +141,7 @@
 	//Ventana de login
 	$MULTILANG_TituloLogin='Ingreso al sistema';
 	$MULTILANG_CodigoSeguridad='Codigo de seguridad';
-	$MULTILANG_IngreseCodigoSeguridad='Ingrese aqui el codigo de seguridad';
+	$MULTILANG_IngreseCodigoSeguridad='Ingrese el codigo';
 	$MULTILANG_AccesoExclusivo='El acceso a este software es exclusivo para usuarios registrados. Por su seguridad, nunca comparta su nombre de usuario y contrase&ntilde;a.';
 	$MULTILANG_LoginNoWSTit='Error tratando de alcanzar el webservice de autenticacion';
 	$MULTILANG_LoginNoWSDes='La funcion file_get_contents() no puede cargar correctamente el archivo XML generado por el web service de autenticacion de Practico.<br>  Verifique la instalacion de su servidor web para validar que la funcion opera correctamente y sin restricciones.<br>  Una forma de validar si el proceso de autenticacion es correcto pero es su servidor quien no deja abrir el resultado<br>es abriendo el siguiente enlace y viendo si carga correctamente el XML.<br>  Activar el modo de depuracion en la configuracion de Practico puede ayudar a ver mas detalles.';
@@ -154,7 +157,7 @@
 
 	//Errores y avisos varios
 	$MULTILANG_TituloInsExiste='ATENCION: La carpeta de instalaci&oacute;n existe en el servidor';
-	$MULTILANG_TextoInsExiste='Este mensaje aparecer&aacute; de manera permanente a todos sus usuarios mientras usted no elimine el directorio utilizado durante el proceso de instalaci&oacute;n de Pr&aacute;ctico.  Es fundamental que la carpeta sea eliminada despu&eacute;s de finalizar una instalaci&oacute;n para evitar que algun usuario an&oacute;nimo inicie nuevamente el proceso sobreescribiendo archivos de configuraci&oacute;n o bases de datos con informaci&oacute;n de importancia para usted.<br><br>Si ya ha finalizado un proceso de instalaci&oacute;n de Pr&aacute;ctico para su uso en producci&oacute;n es importante que elimine esta carpeta antes de continuar.  Si no desea eliminar esta carpeta puede optar por renombrarla en instalaciones temporales o de prueba.<br><br>Si est&aacute; visualizando este mensaje al ejecutar este script por primera vez y desea realizar una instalaci&oacute;n nueva, puede iniciar el asistente haciendo <input type="button" Value="clic AQUI" Onclick="document.location=\'ins\'" class="BotonesCuidado">';
+	$MULTILANG_TextoInsExiste='Este mensaje aparecer&aacute; de manera permanente a todos sus usuarios mientras usted no elimine el directorio utilizado durante el proceso de instalaci&oacute;n de Pr&aacute;ctico.  Es fundamental que la carpeta sea eliminada despu&eacute;s de finalizar una instalaci&oacute;n para evitar que algun usuario an&oacute;nimo inicie nuevamente el proceso sobreescribiendo archivos de configuraci&oacute;n o bases de datos con informaci&oacute;n de importancia para usted.<br><br>Si ya ha finalizado un proceso de instalaci&oacute;n de Pr&aacute;ctico para su uso en producci&oacute;n es importante que elimine esta carpeta antes de continuar.  Si no desea eliminar esta carpeta puede optar por renombrarla en instalaciones temporales o de prueba.<br><br>Si est&aacute; visualizando este mensaje al ejecutar este script por primera vez y desea realizar una instalaci&oacute;n nueva, puede iniciar el asistente haciendo <a class="btn btn-primary btn-xs" href="javascript:document.location=\'ins\';"><i class="fa fa-rocket"></i> Clic AQUI</a> ';
 	$MULTILANG_ErrorTiempoEjecucion='Error en tiempo de ejecucion';
 	$MULTILANG_ErrorModulo='El modulo central esta tratando de incluir un modulo ubicado en <b>mod/</b> pero no encuentra su punto de accceso.<br>Verifique el estado del m&oacute;dulo, consulte con su administrador o elimine el m&oacute;dulo en conflicto para evitar este mensaje.';
 	$MULTILANG_ContacteAdmin='Contacte con el administrador de su sistema y comunique este mensaje.';
@@ -172,12 +175,13 @@
 	$MULTILANG_ObjetoNoExiste='El objeto asociado a esta solicitud no existe.';
 	$MULTILANG_ErrorDatos='Problema en los datos ingresados';
 	$MULTILANG_ErrorTitAuth='<blink>ACCESO NEGADO!</blink>';
-	$MULTILANG_ErrorDesAuth='Las credenciales suministradas para el acceso al sistema no fueron aceptadas.  Algunas causas comunes son:<br><li>El nombre de usuario o clave son incorrectos.<br><li>Captcha de seguridad ingresado de manera incorrecta.<br><li>Su usuario se encuentra deshabilitado.<br><li>Cuenta bloqueada por varios intentos de acceso con clave incorrecta.';
+	$MULTILANG_ErrorDesAuth='<div align=left>Las credenciales suministradas para el acceso al sistema no fueron aceptadas.  Algunas causas comunes son:<br><li>El nombre de usuario o clave son incorrectos.<br><li>Captcha de seguridad ingresado de manera incorrecta.<br><li>Su usuario se encuentra deshabilitado.<br><li>Cuenta bloqueada por varios intentos de acceso con clave incorrecta.</div>';
 	$MULTILANG_ErrorSoloAdmin='Solo el usuario admin puede ver los detalles de la transaccion con el modo de depuracion encendido.';
 	$MULTILANG_ErrGoogleAPIMod='El metodo de autenticacion esta configurado como OAuth2 para Google.<br>Sin embargo el modulo de Practico google-api no se encuentra instalado.<br>Descargue e instale el modulo desde la web oficial de Practico y actualice la pagina nuevamente.';
 	$MULTILANG_ErrFuncion='<br>Funcion de PHP no existe o se encuentra deshabilitada en su servidor: ';
 	$MULTILANG_ErrDirectiva='La directiva o variable de configuracion PHP indicada debe estar habilitada en su configuracion de PHP o servidor web';
 	$MULTILANG_UsuariosChat='Aquellos usuarios desconectados en el momento recibiran los mensajes cuando ingresen nuevamente al sistema.';
+    $MULTILANG_AdminArchivos='Administrador de archivos';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';
@@ -202,14 +206,10 @@
 			<li>Tener abiertas varias ventanas del sistema al mismo tiempo en secciones restringidas por el administrador</li>
 			<li>Su usuario o contrase&ntilde;a son inv&aacute;lidos para realizar alguna operaci&oacute;n</li>
 			<li>Navegar utilizando enlaces o botones diferentes a los permitidos</li>
-			<font color="#000000">
 			<br><strong>Tambi&eacute;n por configuraciones o acciones de su equipo como:</strong><br>
-			<font color="#808080">
 			<li>Su navegador no est&aacute; soportando cookies</li>
 			<li>Se ha lipiado la cach&eacute; cookies o sesiones del navegador mientras se usaba el sistema</li>
-			<font color="#000000">
 			<br><strong>Tambi&eacute;n por configuraciones del sistema como:</strong><br>
-			<font color="#808080">
 			<li>Haber finalizado un proceso de instalaci&oacute;n de la plataforma que requiere un reinicio de sesi&oacute;n</li>
 			<li>La llave de paso de su usuario no corresponde a la llave solicitada por este sistema</li>
 			<li>Las credenciales para firmar un registro de operaci&oacute;n no son v&aacute;lidas</li>';
@@ -693,7 +693,7 @@
 	$MULTILANG_UsrErrInf='El usuario ya posee el permiso seleccionado';
 	$MULTILANG_UsrAdmInf='Administraci&oacute;n de informes del usuario';
 	$MULTILANG_UsrAgreInf='Agregar informe al men&uacute; del usuario';
-	$MULTILANG_UsrInfDisp='Informes ya disponibles';
+	$MULTILANG_UsrInfDisp='Informes disponibles';
 	$MULTILANG_UsrAdvDel='IMPORTANTE:  Al eliminar el registro pueden quedar sin vincular algunas opciones del sistema para este usuario.\n'.$MULTILANG_Confirma;
 	$MULTILANG_UsrAdmPer='Administraci&oacute;n de permisos del usuario';
 	$MULTILANG_UsrCopiaPer='Copiar inicialmente los permisos desde el usuario';

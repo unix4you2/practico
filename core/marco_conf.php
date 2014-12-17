@@ -33,12 +33,17 @@
 ?>
 
 
-		<!-- INICIO DE MARCOS POPUP -->
-		<div id='BarraFlotanteConfiguracion' class="FormularioPopUps">
-			<?php
-			abrir_ventana($NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral,'#f2f2f2','900'); 
-			?>
-				<!--<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 800; POSITION: relative; HEIGHT: 400px">-->
+    <!-- Modal Configuracion -->
+    <div class="modal fade" id="myModalCONFIGURACION" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel"><?php echo $NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral; ?></h4>
+          </div>
+          <div class="modal-body mdl-primary">
+
+
 
 					<form name="continuar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="hidden" name="accion" value="guardar_configuracion">
@@ -425,16 +430,17 @@
 					<br>
 
 					</form>
-				<!-- </DIV> -->
 			<?php
 			abrir_barra_estado();
-				echo '<input type="Button"  class="BotonesEstadoCuidado" value=" <<< '.$MULTILANG_IrEscritorio.' " onClick="OcultarPopUp(\'BarraFlotanteConfiguracion\')">';
-				echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_ParamApp.' >>> " onClick="OcultarPopUp(\'BarraFlotanteConfiguracion\'); AbrirPopUp(\'BarraFlotanteParametros\');">';
-				echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_WSConfigButt.' >>> " onClick="OcultarPopUp(\'BarraFlotanteConfiguracion\'); AbrirPopUp(\'ConfiguracionWebServices\');">';
-				echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_OauthButt.' >>> " onClick="OcultarPopUp(\'BarraFlotanteConfiguracion\'); AbrirPopUp(\'BarraFlotanteOAuth\');">';
 				echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_Guardar.' >>> " onClick="document.forms.continuar.submit();">';
 			cerrar_barra_estado();
-			cerrar_ventana();
 			?>
-		<!-- FIN DE MARCOS POPUP -->
-		</div>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -32,98 +32,95 @@
 
 ?>
 
-		<!-- INICIO DE MARCOS POPUP -->
-		<div id='BarraFlotanteDesarrollo' class="FormularioPopUps">
-			<?php
-			abrir_ventana($NombreRAD,'#000000','600'); 
-			?>
-				<table width="100%" cellspacing=0 cellpadding=0 background="skin/<?php echo $PlantillaActiva; ?>/img/fondo_ventanas1.png"><tr><td>
-					<br>
-					
-					<div align=center>
-					<font color=yellow face="Tahoma,Verdana,Arial">
-						<font size=5>
-							<?php echo $MULTILANG_TitDisenador; ?>
-						</font>
-						<hr>
-						<table width="100%" cellspacing=2 cellpadding=5 style="color:#FFFFFF; font-size:14px;"><tr>
-							<td><img src="img/1.png" border=0></td>
-							<td align=left valign=top>
-								<?php echo $MULTILANG_DefTablas; ?>: <u><b><font color="#FFF022"><?php echo strtoupper($MULTILANG_Basedatos); ?></font></b></u>
-								<br><font color=lightgray size=1><?php echo $MULTILANG_DesTablas; ?></font>
-							</td>
-							<td>
-								<form action="" method="post" name="wzd_1" id="wzd_1" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-									<input type="hidden" name="accion" value="administrar_tablas">
-								</form>
-                                <i class="fa fa-table fa-2x fa-border"  onClick="document.wzd_1.submit();"></i>
-							</td>
-						</tr>
-						<tr><td colspan="3"><hr></td></tr>
-						<tr>
-							<td><img src="img/2.png" border=0></td>
-							<td align=left valign=top >
-								<?php echo $MULTILANG_Disene; ?> <u><b><font color="#FFF022"><?php echo strtoupper($MULTILANG_Formularios); ?></font></b></u> <?php echo $MULTILANG_DefForms; ?>
-								<br><font color=lightgray size=1><?php echo $MULTILANG_DesForms; ?></font>
-							</td>
-							<td>
-								<form action="" method="post" name="wzd_2" id="wzd_2" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-									<input type="hidden" name="accion" value="administrar_formularios">
-								</form>
-									<i class="fa fa-list-alt fa-2x fa-border"  onClick="document.wzd_2.submit();"></i>
-							</td>
-						</tr>
-						<tr><td colspan="3"><hr></td></tr>
-						<tr>
-							<td><img src="img/3.png" border=0></td>
-							<td align=left valign=top >
-								<?php echo $MULTILANG_Disene; ?> <u><b><font color="#FFF022"><?php echo strtoupper($MULTILANG_Informes); ?></font></b></u> <?php echo $MULTILANG_DefInformes; ?>
-								<br><font color=lightgray size=1><?php echo $MULTILANG_DesInformes; ?></font>
-							</td>
-							<td>
-								<form action="" method="post" name="wzd_3" id="wzd_3" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-									<input type="hidden" name="accion" value="administrar_informes">
-								</form>
-									<i class="fa fa-file-text fa-2x fa-border" onClick="document.wzd_3.submit();"></i>
-							</td>
-						</tr>
-						<tr><td colspan="3"><hr></td></tr>
-						<tr>
-							<td><img src="img/4.png" border=0></td>
-							<td align=left valign=top >
-								<?php echo $MULTILANG_Administre; ?> <u><b><font color="#FFF022"><?php echo strtoupper($MULTILANG_OpcionesMenu); ?></font></b></u> <?php echo $MULTILANG_DefMenus; ?>
-								<br><font color=lightgray size=1><?php echo $MULTILANG_DesMenus; ?></font>
-							</td>
-							<td>
-								<form action="" method="post" name="wzd_4" id="wzd_4" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-									<input type="hidden" name="accion" value="administrar_menu">
-								</form>
-                                <i class="fa fa-external-link-square fa-2x fa-border " onClick="document.wzd_4.submit();"></i>
-							</td>
-						</tr>
-						<tr><td colspan="3"><hr></td></tr>
-						<tr>
-							<td><img src="img/5.png" border=0></td>
-							<td align=left valign=top >
-								<?php echo $MULTILANG_Defina; ?> <u><b><font color="#FFF022"><?php echo strtoupper($MULTILANG_UsuariosPermisos); ?></font></b></u> <?php echo $MULTILANG_DefUsuarios; ?>
-								<br><font color=lightgray size=1><?php echo $MULTILANG_DesUsuarios; ?></font>
-							</td>
-							<td>
-								<form action="" method="post" name="wzd_5" id="wzd_5" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-									<input type="hidden" name="accion" value="listar_usuarios">
-								</form>
-                                <i class="fa fa-user fa-2x fa-border " onClick="document.wzd_5.submit();"></i>
-							</td>
-						</tr></table>
 
-					</font>
-					</div>
-				</td></tr></table> <!-- cierra tabla para el fondo -->
-			<?php
-			abrir_barra_estado();
-				echo '<input type="Button"  class="BotonesEstadoCuidado" value=" <<< '.$MULTILANG_IrEscritorio.' " onClick="OcultarPopUp(\'BarraFlotanteDesarrollo\')">';
-			cerrar_barra_estado();
-			cerrar_ventana();
-			?>
-		<!-- FIN DE MARCOS POPUP -->
-		</div>
+    <!-- Modal Botones de Desarrollo -->
+    <div class="modal fade" id="myModalDESARROLLO" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_TitDisenador; ?></h4>
+          </div>
+          <div class="modal-body mdl-primary">
+
+
+
+                <table class="table">
+                    <tr>
+                        <td valign=top><h1><span class="label label-primary">1</span></h1></td>
+                        <td align=left valign=top>
+                        <?php echo $MULTILANG_DefTablas; ?>: <u><b><?php echo strtoupper($MULTILANG_Basedatos); ?></b></u>
+                        <br><?php echo $MULTILANG_DesTablas; ?>
+                        </td>
+                        <td>
+                        <form action="" method="post" name="wzd_1" id="wzd_1" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+                        <input type="hidden" name="accion" value="administrar_tablas">
+                        </form>
+                            <i class="fa fa-table fa-4x fa-border"  onClick="document.wzd_1.submit();"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign=top><h1><span class="label label-success">2</span></h1></td>
+                        <td align=left valign=top>
+                        <?php echo $MULTILANG_Disene; ?> <u><b><?php echo strtoupper($MULTILANG_Formularios); ?></b> </u> <?php echo $MULTILANG_DefForms; ?>
+                        <br><?php echo $MULTILANG_DesForms; ?>
+                        </td>
+                        <td>
+                            <form action="" method="post" name="wzd_2" id="wzd_2" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+                                <input type="hidden" name="accion" value="administrar_formularios">
+                            </form>
+                                <i class="fa fa-list-alt fa-4x fa-border"  onClick="document.wzd_2.submit();"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign=top><h1><span class="label label-info">3</span></h1></td>
+                        <td align=left valign=top>
+                        <?php echo $MULTILANG_Disene; ?> <u><b><?php echo strtoupper($MULTILANG_Informes); ?></b> </u> <?php echo $MULTILANG_DefInformes; ?>
+                        <br><?php echo $MULTILANG_DesInformes; ?>
+                        </td>
+                        <td>
+                            <form action="" method="post" name="wzd_3" id="wzd_3" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+                                <input type="hidden" name="accion" value="administrar_informes">
+                            </form>
+                                <i class="fa fa-file-text fa-4x fa-border" onClick="document.wzd_3.submit();"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign=top><h1><span class="label label-warning">4</span></h1></td>
+                        <td align=left valign=top>
+                        <?php echo $MULTILANG_Administre; ?> <u><b><?php echo strtoupper($MULTILANG_OpcionesMenu); ?></b> </u> <?php echo $MULTILANG_DefMenus; ?>
+                        <br><?php echo $MULTILANG_DesMenus; ?>
+                        </td>
+                        <td>
+                            <form action="" method="post" name="wzd_4" id="wzd_4" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+                                <input type="hidden" name="accion" value="administrar_menu">
+                            </form>
+                            <i class="fa fa-external-link-square fa-4x fa-border " onClick="document.wzd_4.submit();"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign=top><h1><span class="label label-danger">5</span></h1></td>
+                        <td align=left valign=top>
+                        <?php echo $MULTILANG_Defina; ?> <u><b><?php echo strtoupper($MULTILANG_UsuariosPermisos); ?></b> </u> <?php echo $MULTILANG_DefUsuarios; ?>
+                        <br><?php echo $MULTILANG_DesUsuarios; ?>
+                        </td>
+                        <td>
+                            <form action="" method="post" name="wzd_5" id="wzd_5" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+                                <input type="hidden" name="accion" value="listar_usuarios">
+                            </form>
+                            <i class="fa fa-user fa-4x fa-border " onClick="document.wzd_5.submit();"></i>
+                        </td>
+                    </tr>
+
+                </table>
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+

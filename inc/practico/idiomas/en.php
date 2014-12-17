@@ -40,12 +40,14 @@
 	$MULTILANG_Anonimo='Anonymous';
 	$MULTILANG_Anterior='Previous';
 	$MULTILANG_Apagado='Off';
-	$MULTILANG_Aplicando='Applying';
+	$MULTILANG_Aplicacion='Application';
+    $MULTILANG_Aplicando='Applying';
 	$MULTILANG_Asistente='Wizard';
 	$MULTILANG_Atencion='Attention';
 	$MULTILANG_Ayuda='Help';
 	$MULTILANG_Basedatos='Data base';
 	$MULTILANG_BarraHtas='Toolbar';
+    $MULTILANG_Buscar='Search';
 	$MULTILANG_Campo='Field';
 	$MULTILANG_Cancelar='Cancel';
 	$MULTILANG_Capturar='Capture';
@@ -75,6 +77,7 @@
 	$MULTILANG_Embebido='Embed';
 	$MULTILANG_Encendido='On';
 	$MULTILANG_Error='Error';
+    $MULTILANG_Escritorio='Desktop';
 	$MULTILANG_Estado='Status';
 	$MULTILANG_Etiqueta='Label';
 	$MULTILANG_Fecha='Date';
@@ -138,7 +141,7 @@
 	//Ventana de login
 	$MULTILANG_TituloLogin='System Login';
 	$MULTILANG_CodigoSeguridad='Security code';
-	$MULTILANG_IngreseCodigoSeguridad='Enter here the security code';
+	$MULTILANG_IngreseCodigoSeguridad='Enter the code';
 	$MULTILANG_AccesoExclusivo='Access to this software is only for registered users. For your safety, never share your username and password.';
 	$MULTILANG_LoginNoWSTit='Error trying to load the authentication webservice';
 	$MULTILANG_LoginNoWSDes='The file_get_contents() function can not to load the XML output file built by Practico authentication process.<br>  Check your web server configuration/installation to see that this funtion can works correctly and without restrictions.<br>  A way to check that Practicos process is fine but your server doesnt allow to load the XML file<br>is opening the next link and checking if your browser loads the XML correctly.  Activating debug mode on your Practicos config you could see more details: ';
@@ -154,7 +157,7 @@
 
 	//Errores y avisos varios
 	$MULTILANG_TituloInsExiste='ATTENTION: The installation folder exists on the server';
-	$MULTILANG_TextoInsExiste='This message appears permanently to all users as you do not delete the directory used for the installation of Practico. It is essential that the folder is deleted after the end of an installation to prevent any anonymous user initiate the process again overwritting configuration files or databases with information of importance to you<br><br>If you have already completed an install of Practico for use in production is important to remove this folder before proceeding. If you want to delete this folder you can choose to rename in temporary or trial. <br> <br> If you are viewing this message when running this script for the first time and want to make a new installation, you can launch the wizard <input type="button" Value="clicking HERE" Onclick="document.location=\'ins\'" class="BotonesCuidado"> ';
+	$MULTILANG_TextoInsExiste='This message appears permanently to all users as you do not delete the directory used for the installation of Practico. It is essential that the folder is deleted after the end of an installation to prevent any anonymous user initiate the process again overwritting configuration files or databases with information of importance to you<br><br>If you have already completed an install of Practico for use in production is important to remove this folder before proceeding. If you want to delete this folder you can choose to rename in temporary or trial. <br> <br> If you are viewing this message when running this script for the first time and want to make a new installation, you can launch the wizard  <a class="btn btn-primary btn-xs" href="javascript:document.location=\'ins\';"><i class="fa fa-rocket"></i> Clicking HERE</a> ';
 	$MULTILANG_ErrorTiempoEjecucion='RunTime Error';
 	$MULTILANG_ErrorModulo='Main module is trying to include a module located in <b>mod/</b> but Practico can not find your access point. <br> Check the module status, consult your administrator or delete the conflicting module to avoid this message.';
 	$MULTILANG_ContacteAdmin='Contact your system administrator and report this post.';
@@ -172,12 +175,13 @@
 	$MULTILANG_ObjetoNoExiste='The object associated with this request does not exist.';
 	$MULTILANG_ErrorDatos='Problem in the input data';
 	$MULTILANG_ErrorTitAuth='<blink>ACCESS DENIED!</blink>';
-	$MULTILANG_ErrorDesAuth='The credentials supplied for access to the system were not accepted. Some common causes are:<br><li> The username or password is incorrect. <br> <li> Security code entered incorrectly. <br> <li> Your Login is disabled. <br> <li> Account locked access by multiple attempts with incorrect password.';
+	$MULTILANG_ErrorDesAuth='<div align=left>The credentials supplied for access to the system were not accepted. Some common causes are:<br><li> The username or password is incorrect. <br> <li> Security code entered incorrectly. <br> <li> Your Login is disabled. <br> <li> Account locked access by multiple attempts with incorrect password.</div>';
 	$MULTILANG_ErrorSoloAdmin='Only admin user can see the transaction details with debug mode turned On';
 	$MULTILANG_ErrGoogleAPIMod='OAuth2 for Google was configured as default auth method.<br>Anyway the Practicos module for google-api is not installed yet.<br>Please download the google-api module from Practicos website and reload again.';
 	$MULTILANG_ErrFuncion='<br>PHP Function doesnt exists or is disabled in your server: ';
 	$MULTILANG_ErrDirectiva='The environment var should be enabled on your PHP or web server configuration';
 	$MULTILANG_UsuariosChat='Users that are offline at this moment will see all the messages when they login again to the system.';
+    $MULTILANG_AdminArchivos='File manager';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';
@@ -202,14 +206,10 @@
 			<li>Having multiple windows open at the same time system in restricted sections by admin</li>
 			<li>Your username or password is invalid for further operation</li>
 			<li>Navigate using links or other buttons than those permitted</li>
-			<font color="#000000">
 			<br><strong>Also for configurations or actions on your computer like:</strong><br>
-			<font color="#808080">
 			<li>Your browser is not supporting cookies</li>
 			<li>Cleaned cache of browser cookies or sessions while using the system</li>
-			<font color="#000000">
 			<br><strong>System configurations also like:</strong><br>
-			<font color="#808080">
 			<li>You have completed an installation process of the platform requires a restart of session</li>
 			<li>The SignKey of the user does not corresponds to the key required by this system</li>
 			<li>The credentials to sign an operation are not valid</li>';
