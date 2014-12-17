@@ -20,7 +20,7 @@
 ?>
 
 <div align=center>
-<table width="700" cellspacing=10>
+<table class="table">
 	<tr>
 		<td><img src="../img/practico_login.png" border=0 ALT="Logo Practico"></td>
 		<td valign=top><font size=2 color=black><br><b>
@@ -30,7 +30,7 @@
 		</font></td>
 	</tr>
 </table>
-<hr>
+
 <b><?php echo $MULTILANG_ResumenLicencia; ?></b>:<br>
 <textarea cols="100" rows="7" class="AreaTexto">
 	<?php include("../LICENSE"); ?>
@@ -48,7 +48,7 @@
 		<form name="continuar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 			<input type="Hidden" name="paso" value="'.$siguiente.'">
 			<input type="Hidden" name="Idioma" value="'.$Idioma.'">
-			<input type="Submit" class="BotonesEstadoCuidado" value=" '.$MULTILANG_Continuar.' >>> ">
+            <button onclick="document.continuar.submit();" type="button" class="btn btn-primary navbar-btn">'.$MULTILANG_Continuar.' <i class="fa fa-caret-square-o-right texto-amarillo"></i></button>
 		</form>';
 	cerrar_barra_estado();
 ?>

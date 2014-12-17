@@ -64,11 +64,6 @@ CREATE TABLE core_menu (
   
 );
 
-INSERT INTO core_menu VALUES (1,'Cambio de clave',0,0,'',1,'Interno','cambiar_clave' ,5,3,1,0,0,'Opciones generales de usuario','fa fa-key');
-INSERT INTO core_menu VALUES (2,'Actualizaciones',0,0,'',1,'Interno','actualizar_practico' ,5,3,1,0,0,'Administrativas - Dise&ntilde;ador de aplicaciones','fa fa-download');
-INSERT INTO core_menu VALUES (3,'Mis Informes',0,0,'',1,'Interno','mis_informes' ,5,3,0,0,1,'Opciones generales de usuario','fa fa-bar-chart fa-3x');
-INSERT INTO core_menu VALUES (4,'Administrador de archivos',0,0,'',1,'Interno','fileman_admin_embebido' ,5,3,1,0,0,'Opciones generales de usuario','fa fa-cloud-upload');
-
 DROP TABLE IF EXISTS core_usuario_menu;
 CREATE TABLE core_usuario_menu (
   id integer PRIMARY KEY AUTOINCREMENT,

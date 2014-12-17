@@ -33,10 +33,20 @@
 ?>
 
 
-		<!-- INICIO DE MARCOS POPUP -->
-		<div id='BarraFlotanteOAuth' class="FormularioPopUps">
+    <!-- Modal Configuracion -->
+    <div class="modal fade" id="myModalOAUTH" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_ConfiguracionGeneral; ?></h4>
+          </div>
+          <div class="modal-body mdl-primary">
+
+
+
+
 			<?php
-				abrir_ventana($NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral,'#f2f2f2',''); 
 
 				// Determina si la conexion actual de Practico esta encriptada
 				if(empty($_SERVER["HTTPS"]))
@@ -48,7 +58,6 @@
 				// Construye la URI de redireccion base para concatenar el servicio especifico
 				$URI = $protocolo_webservice.$prefijo_webservice."?WSOn=1&WSId=autenticacion_oauth&OAuthSrv=";
 			?>
-				<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 800; POSITION: relative; HEIGHT: 400px">
 
 					<form name="configoauth" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="hidden" name="accion" value="guardar_oauth">
@@ -1137,13 +1146,20 @@
 					</table>
 
 					</form>
-				</DIV>
+                
 			<?php
 			abrir_barra_estado();
-				echo '<input type="Button"  class="BotonesEstadoCuidado" value=" <<< '.$MULTILANG_IrEscritorio.' " onClick="OcultarPopUp(\'BarraFlotanteOAuth\')">';
 				echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_Guardar.' >>> " onClick="document.forms.configoauth.submit();">';
 			cerrar_barra_estado();
-			cerrar_ventana();
 			?>
-		<!-- FIN DE MARCOS POPUP -->
-		</div>
+
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+          </div>
+        </div>
+      </div>
+    </div>

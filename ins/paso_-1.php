@@ -20,26 +20,24 @@
 ?>
 
 <form name="continuar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-<div align=center>
-<table width="700" cellspacing=10>
+
+<table class="table">
 	<tr>
 		<td valign=top align=center>
-			<br><br>
 			<img src="../img/practico_login.png" border=0 ALT="Logo Practico">
-			<font color=black>
-			</font>
 		</td>
-		<td valign=top align=center><font size=2 color=black><br><b>
+		<td valign=top align=center><font size=2 color=black><b>
 			<h1>Versi&oacute;n <?php include("../inc/version_actual.txt"); ?></h1>
-			
-			<font color=white>
+
+			<font color=gray>
 			Welcome &nbsp;&nbsp; Willkommen &nbsp;&nbsp; Ongi Etorri<br>
 			<font size=5>Bienvenido<br></font>
 			 Bienvenuto &nbsp;&nbsp; Bienvenue &nbsp;&nbsp; bem-vindo<br><br>
 			</font>
 			
 			[Seleccione el idioma deseado/Select your language]</b><br><br>
-			<select name="Idioma" class="Combos" >
+            <div class="form-group">
+			<select name="Idioma" class="form-control" >
 				<?php
 				// Incluye archivos de idioma para ser seleccionados
 				$path_idiomas="../inc/practico/idiomas/";
@@ -62,20 +60,19 @@
 					}		
 				?>
 			</select>
+            </div>
 		</font></td>
 	</tr>
 </table>
-<hr>
-<br><br>
-</div>
+
 
 <?php
 	abrir_barra_estado();
 	$anterior=$paso-1;
 	$siguiente=$paso+1;
 	echo '
+            <button onclick="document.continuar.submit();" type="button" class="btn btn-primary navbar-btn">Continuar / Next <i class="fa fa-caret-square-o-right texto-amarillo"></i></button>
 			<input type="Hidden" name="paso" value="'.$siguiente.'">
-			<input type="Submit" class="BotonesEstadoCuidado" value=" Continuar / Next >>> ">
 		</form>';
 	cerrar_barra_estado();
 ?>

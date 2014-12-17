@@ -717,7 +717,7 @@ if ($accion=="editar_formulario")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioCampos' class="FormularioPopUps">
 				<?php 
-				abrir_ventana($MULTILANG_FrmMsj1,'#BDB9B9','');
+				abrir_ventana($MULTILANG_FrmMsj1, 'panel-primary');
 				
 				//Si se trata de la edicion de un campo entonces busca su registro para agregar valores al form
 				if (@$popup_activo=="FormularioCampos")
@@ -1498,7 +1498,7 @@ if ($accion=="editar_formulario")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioBotones' class="FormularioPopUps">
 			<?php
-			abrir_ventana($MULTILANG_FrmAgregaBot,'BDB9B9','');
+			abrir_ventana($MULTILANG_FrmAgregaBot,'panel-warning');
 			?>
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="accion" value="guardar_accion_formulario">
@@ -1618,7 +1618,7 @@ if ($accion=="editar_formulario")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioDiseno' class="FormularioPopUps">
 			<?php
-				abrir_ventana($MULTILANG_FrmDisCampos,'#BDB9B9','');
+				abrir_ventana($MULTILANG_FrmDisCampos, 'panel-primary');
 			?>
 				<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 550px">
 					<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
@@ -1786,7 +1786,7 @@ if ($accion=="editar_formulario")
 		<!-- INICIO DE MARCOS POPUP -->
 		<div id='FormularioAcciones' class="FormularioPopUps">
 			<?php
-				abrir_ventana($MULTILANG_FrmTitComandos,'#BDB9B9','');
+				abrir_ventana($MULTILANG_FrmTitComandos, 'panel-danger');
 			?>
 					<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
 						<tr>
@@ -1905,7 +1905,7 @@ if ($accion=="editar_formulario")
 
 		<table><tr><td align=center valign=top>
 			<?php 
-				abrir_ventana($MULTILANG_BarraHtas,'#BDB9B9','100%'); 
+				abrir_ventana($MULTILANG_BarraHtas, 'panel-warning'); 
 			?>
 				<div align=center>
 				<?php echo $MULTILANG_FrmObjetos; ?><br>
@@ -1929,7 +1929,7 @@ if ($accion=="editar_formulario")
 				// Inicia presentacion de ventana de edicion de formulario
 				$consulta_form=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
 				$registro_form = $consulta_form->fetch();
-				abrir_ventana($MULTILANG_FrmActualizar,'f2f2f2','100%');
+				abrir_ventana($MULTILANG_FrmActualizar, 'panel-primary');
 			?>
 			<form name="datosact" id="datosact" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="actualizar_formulario">
@@ -1939,7 +1939,7 @@ if ($accion=="editar_formulario")
 				<!-- INICIO DE MARCOS POPUP -->
 				<div id='FormularioScripts' class="FormularioPopUps">
 					<?php
-						abrir_ventana($MULTILANG_FrmTitComandos,'#BDB9B9','');
+						abrir_ventana($MULTILANG_FrmTitComandos, 'panel-danger');
 					?>
 						<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
 							<tr>
@@ -2349,7 +2349,7 @@ if ($accion=="administrar_formularios")
 		 ?>
 
 		<table class="TextosVentana"><tr><td valign=top>
-			<?php abrir_ventana($MULTILANG_FrmAgregar,'f2f2f2',''); ?>
+			<?php abrir_ventana($MULTILANG_FrmAgregar, 'panel-warning'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_formulario">
 			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
@@ -2358,7 +2358,7 @@ if ($accion=="administrar_formularios")
 				<!-- INICIO DE MARCOS POPUP -->
 				<div id='FormularioScripts' class="FormularioPopUps">
 					<?php
-						abrir_ventana($MULTILANG_FrmTitComandos,'#BDB9B9','');
+						abrir_ventana($MULTILANG_FrmTitComandos, 'panel-primary');
 					?>
 						<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
 							<tr>
@@ -2463,7 +2463,8 @@ function FrmAutoRun()
 					<tr>
 						<td align="right"></td>
 						<td>
-							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_FrmAdvScriptForm; ?>" onClick="javascript:AbrirPopUp('FormularioScripts');">
+                            <a class="btn btn-primary btn-xs" href="javascript:AbrirPopUp('FormularioScripts');"><i class="fa fa-file-code-o"></i> <?php echo $MULTILANG_FrmAdvScriptForm; ?></a>
+                            <br><br>
 						</td>
 					</tr>
 					<tr>
@@ -2471,8 +2472,8 @@ function FrmAutoRun()
 							</form>
 						</td>
 						<td>
-							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_FrmCreaDisena; ?>" onClick="document.datos.submit()">
-							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="<?php echo $MULTILANG_IrEscritorio; ?>" class="Botones">
+                            <a class="btn btn-default btn-xs" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o texto-azul"></i> <?php echo $MULTILANG_FrmCreaDisena; ?></a>
+                            <a class="btn btn-default btn-xs" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 						</td>
 					</tr>
 				</table>
@@ -2482,7 +2483,7 @@ function FrmAutoRun()
 		cerrar_ventana();	
 		
 		echo '</td><td valign=top>';  // Inicia segunda columna del diseñador
-		abrir_ventana($MULTILANG_FrmTitForms,'f2f2f2','');
+		abrir_ventana($MULTILANG_FrmTitForms, 'panel-info');
 		?>
 				<table width="100%" border="0" cellspacing="5" align="CENTER"  class="TextosVentana">
 					<tr>
@@ -2507,22 +2508,22 @@ function FrmAutoRun()
 												<input type="hidden" name="accion" value="copiar_formulario">
 												<input type="hidden" name="formulario" value="'.$registro["id"].'">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["tabla_datos"].'">
-												<input type="button" value="'.$MULTILANG_FrmCopiar.'"  class="Botones" onClick="confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["id"].');">
+                                                <a class="btn btn-default btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["id"].');"><i class="fa fa-code-fork"></i> '.$MULTILANG_FrmCopiar.'</a>
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
 												<input type="hidden" name="accion" value="eliminar_formulario">
 												<input type="hidden" name="formulario" value="'.$registro["id"].'">
-												<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_FrmAdvDelForm.'\',df'.$registro["id"].');">
+                                                <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvDelForm.'\',df'.$registro["id"].');"><i class="fa fa-arrows-alt"></i> '.$MULTILANG_Eliminar.'</a>
 										</form>
 								</td>
 								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST">
+										<form action="'.$ArchivoCORE.'" method="POST" name="det'.$registro["id"].'" id="det'.$registro["id"].'">
 												<input type="hidden" name="accion" value="editar_formulario">
 												<input type="hidden" name="formulario" value="'.$registro["id"].'">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["tabla_datos"].'">
-												<input type="Submit" value="'.$MULTILANG_FrmCamposAcciones.'"  class="Botones">
+                                                <a class="btn btn-default btn-xs" href="javascript:document.det'.$registro["id"].'.submit();"><i class="fa fa-list-alt"></i> '.$MULTILANG_FrmCamposAcciones.'</a>
 										</form>
 								</td>
 							</tr>';

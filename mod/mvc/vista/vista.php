@@ -21,7 +21,7 @@
 
 <?php
 	//Abre un contenedor (Opcional)
-	abrir_ventana('Registros de auditoria','#BDB9B9','');
+	abrir_ventana('Registros de auditoria', 'panel-primary');
 ?>
 
 	<h1>Listado de acciones encontradas</h1>
