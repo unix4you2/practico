@@ -1066,6 +1066,35 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: file_get_contents_nativo
+	Una personalizacion para la funcion file_get_contents de PHP agregando Agente de navegador y otros.
+
+	Salida:
+		Contenido de la URL recibida
+*/
+	function file_get_contents_nativo($url)
+		{
+            //ORIGINAL$contenido_url = trim(file_get_contents($url));
+            //Define el contexto de navegacion
+            $opciones_navegacion = array(
+              'http'=>array(
+                'method'=>"GET",
+                'header'=>"Accept-language: en\r\n" .
+                          "Cookie: foo=bar\r\n" .  // check function.stream-context-create on php.net
+                          "User-Agent: Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.102011-10-16 20:23:10\r\n" // i.e. An iPad 
+              )
+            );
+            //$opciones_navegacion  = array('http' => array('user_agent' => 'custom user agent string'));
+
+            $contexto_navegacion = stream_context_create($opciones_navegacion);
+            $datos_recibidos = file_get_contents($url, false, $contexto_navegacion);
+			return $datos_recibidos;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: cargar_url
 	Recibe una URL y pasa su contenido a una cadena de texto
 */
@@ -1083,7 +1112,7 @@
 			//Intenta con la funcion nativa de PHP si esta habilitada y no se pudo obtener nada con cURL
 			if (@$contenido_url=="")
 				if (ini_get($funcion_evaluada)==$valor_esperado)
-					$contenido_url = trim(file_get_contents($url));
+					$contenido_url = trim(file_get_contents_nativo($url));
 
 			//Intenta con funciones de socket si no se pudo obtener nada con file_get_contents
 			if (@$contenido_url=="")

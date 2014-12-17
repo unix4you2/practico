@@ -51,6 +51,7 @@ inc/fonts/*
 inc/less/*
 inc/jquery/*
 img/favicon.ico
+mod/sopa/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -74,6 +75,7 @@ LogCambios="
 * Added: Se cambia la ventana de login por OAuth a modal.
 * Added: Panel administrativo al inicio con resumenes del sistema
 * Added: Panel de dashboard para el administrador de aplicacion
+* Added: Modulo SOPA.  Una aproximación al Social Parsing con Práctico.
 * Fixed: Se simplifica script de inicio para login y cambio dinámico de marcos.
 * Fixed: Actualizados scripts de instalacion pues ya no requieren creación de menues
 "

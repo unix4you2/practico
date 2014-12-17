@@ -340,6 +340,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
+                        <br>
 
 
 
@@ -351,7 +352,7 @@
 
 
 
-<form action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;" name="core_ver_menu">
+<form method="POST" name="core_ver_menu" action="<?php echo $ArchivoCORE; ?>" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 	<input type="Hidden" name="accion" value="Ver_menu">
 </form>
 <form method="POST" name="cerrar_sesion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">

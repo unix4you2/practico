@@ -20,7 +20,7 @@
 
 
 	/*
-		Title: Social Parser
+		Title: SOPA - Social Parser
 		Ubicacion *[/mod/sopa/index.php]*.  Archivo que contiene las funciones de enlace al modulo de Social Parser
         
         Este modulo permite hacer el parsing de redes sociales de usuarios especificos hacia tablas de la aplicacion
@@ -45,21 +45,7 @@
 	$SOPA_controladores = $SOPA_raiz_modulo."controlador/";
 	$SOPA_idiomas = $SOPA_raiz_modulo."idiomas/";
 
-/* ################################################################## */
-/* ################################################################## */
-/*
-	Function: probar_ejemplo_mvc
-	Ejecuta el ejemplo de MVC para una consulta sencilla de auditoria en Practico.  Es solo un ejemplo
-	pues en realidad como modelo aplicaria para cualquier operacion y sobre cualquier tabla.
-
-	Salida:
-		Listado de acciones de auditoria utilizando MVC y algunos estilos y funciones de Practico
-*/
-if ($accion=="Ver_menu") 
-	{
-		//Llamar al controlador inicial de la aplicacion o modulo
-		require($SOPA_controladores.'controlador.php');
-        
-        //echo ObtenerEntradas_FacebookFanPage("", "1444206149136402");
-	}
-
+    //Llamar al controlador inicial de la aplicacion o modulo
+    require($SOPA_modelos.'modelo.php');
+    require($SOPA_vistas.'vista.php');
+    require($SOPA_controladores.'controlador.php');

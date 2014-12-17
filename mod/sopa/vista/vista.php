@@ -17,63 +17,54 @@
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	*/
-?>
 
-<?php
-	//Abre un contenedor (Opcional)
-	abrir_ventana('Registros de auditoria', 'panel-primary');
-?>
 
-	<h1>Listado de acciones encontradas</h1>
-	<table class="TextosVentana">
-		<tr>
-		  <td>Id</td>
-		  <td>Usuario</td>
-		  <td>Accion</td>
-		  <td>Fecha</td>
-		  <td>Hora</td>
-		</tr>
-		<?php foreach($registros as $fila): ?>
-			<tr>
-				<td><?php echo $fila['id']?></td>
-				<td><?php echo $fila['usuario_login']?></td>
-				<td><?php echo $fila['accion']?></td>
-				<td><?php echo $fila['fecha']?></td>
-				<td><?php echo $fila['hora']?></td>
-			</tr>
-		<?php endforeach;?>
-	</table>
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: DemoVista_SOPA_Facebook
+	Presenta un arreglo de entradas obtenidas desde FaceBook
+	
+	Variables de entrada:
 
-<?php
-	//Crea una barra de estado (opcional)
-	abrir_barra_estado();
-		echo '<input type="Button"  class="BotonesEstadoCuidado" value="'.$MULTILANG_Cerrar.'" onClick="document.core_ver_menu.submit();">';
-	cerrar_barra_estado();
-?>
-
-<?php
-	//Cierra el contenedor (Obligatorio si se ha abierto alguno)
-	cerrar_ventana();
-?>
-
-<?php
-/* ANOTACIONES IMPORTANTES:
-===========================
-Todos los mensajes podrian ser en multiples idiomas creando sus propios
-archivos de inclusion y llamando a estos de acuerdo a la variable de
-Practico $IdiomaPredeterminado que indica  por ejemplo 'es' o 'en' para 
-que usted pueda hacer algo como:
-	include($ruta_idiomas.$IdiomaPredeterminado.".php");
-
-Las tablas, marcos y demas etiquetas HTML pueden hacer uso de los estilos
-CSS definidos por Practico para que asi cuando el usuario cambie plantillas
-o versiones su modulo siga siendo presentado de manera consistente.  Ver
-estilo aplicado a la tabla.
-
-Puede hacer uso de todas las funciones existentes, por ejemplo la de
-creacion de barras de estado o herramientas como se muestra al final e
-incluso hacer uso de las constantes de idioma predefinidas en Practico
-como se muestra en el boton y elementos y formularios preexistentes como
-se ve en su evento onclick.
+		EntradasFaceBook - Arreglo obtenido mediante la funcion SOPA correspondiente para Facebook
+		
+	Salida:
+		Diagramacion de los datos entregados por SOPA
 */
+function DemoVista_SOPA_Facebook($EntradasFaceBook)
+    {
+        global $MULTILANG_IrEscritorio;
+        //Abre un contenedor (Opcional)
+        abrir_ventana('Prueba de SO.PA. - (SocialParser by Practico)', 'panel-primary');
+
+        //Encabezados de la tabla
+        echo '<h1>Entradas encontradas: <strong>'.count($EntradasFaceBook).'</strong></h1>
+            <table class="table table-hover table-striped table-bordered">
+                <thead>
+                    <tr>
+                      <th>Titulo</td>
+                      <th>Descripcion</td>
+                      <th>Fecha</td>
+                    </tr>
+                </thead>
+                <tbody>';
+                    foreach($EntradasFaceBook as $fila):
+                        echo '
+                            <tr>
+                                <td>'.$fila['Titulo'].'</td>
+                                <td>'.$fila['Descripcion'].'</td>
+                                <td>'.$fila['Fecha'].'</td>
+                            </tr>';
+                    endforeach;
+        echo '  </tbody>
+            </table>';
+
+        //Crea una barra de estado (opcional)
+        abrir_barra_estado();
+            echo '<button type="button" class="btn btn-danger" OnClick="document.core_ver_menu.submit();">'.$MULTILANG_IrEscritorio.'</button>';
+        cerrar_barra_estado();
+        //Cierra el contenedor (Obligatorio si se ha abierto alguno)
+        cerrar_ventana();
+    }
 

@@ -28,7 +28,6 @@
 
 
 
-
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -58,66 +57,19 @@ function Obtener_IDFanPage($Nombre_FanPage="")
         return $ID_Obtenido;
     }
 
-
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: ObtenerEntradas_FacebookFanPage
-	Recupera el JSON con la informacion de una FanPage de Facebook y retorna su ID solamente
-	
-	Variables de entrada:
+	Function: servir_sopa
+	Ejecuta el lanzador de SO.PA. (Social Parser) de Practico
 
-		Nombre_FanPage - Nombre de la fan page (en caso de no tener el ID)
-        ID_FanPage - ID de la fan page para consulta directa (cuando se tiene)
-        Formato - Establece el formato de salida de las entradas:  rss20 | atom10 
-        Cantidad - Numero de entradas a ser devueltas
-		
 	Salida:
-		Retorna variable con las entradas del Feed
+		Opciones del SOPA - Demostracion
 */
-function ObtenerEntradas_FacebookFanPage($Nombre_FanPage="", $ID_FanPage="", $Formato="rss20", $Cantidad=1)
-    {
-        //Por defecto inicia en blanco
-        $EntradasFanPage="";
-        //Si el ID de consulta directa es vacio intenta averiguarlo con el nombre
-        if ($ID_FanPage=="" && $Nombre_FanPage!="")
-            {
-                $ID_FanPage=Obtener_IDFanPage($Nombre_FanPage);
-            }
-        //Cuando ya se cuenta con un ID de FanPage hace la consulta
-        if ($ID_FanPage!="")
-            {
-                $URL_Recuperacion="https://www.facebook.com/feeds/page.php?id=$ID_FanPage&format=$Formato";
-                $contenido_url = @cargar_url($URL_Recuperacion);
-                //Si se ha obtenido respuesta entonces procesa entradas
-                if ($contenido_url!="")
-                    {
-                        echo $contenido_url;
-                        // Usa SimpleXML Directamente para interpretar respuesta
-                        $EntradasObtenidas = simplexml_load_string($contenido_url);
-                        // Procesa la respuesta recibida en el XML
-                        $NumEntradaProcesada=1;
-                        
-                        //Procesa si el formato recibido es RSS 2.0
-                        if ($Formato="rss20")
-                            {
-                                foreach($EntradasObtenidas->channel->item as $Entrada)
-                                    {
-                                        $EntradasFanPage.=$Entrada->title;
-                                        $EntradasFanPage.=$Entrada->description;
-                                        $EntradasFanPage.=$Entrada->link;
-                                        $NumEntradaProcesada++;
-                                        if($NumEntradaProcesada > $Cantidad){
-                                            break;
-                                        }
-                                    }
-                            }
-                    }
-                else
-                    {
-                        $EntradasFanPage="";
-                    }
-            }
-        return $EntradasFanPage;
-    }
-
+if ($accion=="servir_sopa") 
+	{
+        //Llamado a la funcion SOPA de Practico (Cuidado: es multiparametro o polimorfica)
+        $EntradasFaceBook = ObtenerEntradas_FacebookFanPage("", "47562714382",3);
+        //Despliegue de resultados
+        DemoVista_SOPA_Facebook($EntradasFaceBook);
+	}

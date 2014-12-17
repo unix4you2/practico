@@ -15,7 +15,7 @@ Primer llamado al modulo:
 		Seccion: Módulos embebidos
 		Imagen:  tango_document-open.png (o la deseada por usted)
 		Tipo:    Interno
-		Accion:  social_parser (o la definida)
+		Accion:  servir_sopa (o la definida)
 	3) Haha clic sobre la nueva opcion para lanzar el módulo embebido
 
 ----------------------------------------------------------------------------
@@ -24,11 +24,17 @@ Notas de interes para desarrolladores:
 FACEBOOK:
     * Obtener datos basicos de perfil y el ID de pagina:
         https://graph.facebook.com/{PAGINA}
-        Ejemplo: https://graph.facebook.com/colmedicos
-    * Obtener Feed RSS con las entradas del muro:
-        feed://www.facebook.com/feeds/page.php?id={ID_DE_PAGINA_FACE}&format=rss20
-        Ejemplo 1: https://www.facebook.com/feeds/page.php?id=1444206149136402&format=rss20
-        Ejemplo 2: https://www.facebook.com/feeds/page.php?id=1444206149136402&format=atom10
+        
+    * Obtener Feed RSS con las entradas del muro (Formatos rss20, atom10):
+        feed://www.facebook.com/feeds/page.php?id={ID_DE_PAGINA_FACE}&format={FORMATO}
+
+        Ejemplos de algunas empresas:
+        Colmedicos      https://www.facebook.com/colmedicos
+                        ID: 1444206149136402
+        Claro Colombia  https://www.facebook.com/ClaroMovilColombia
+                        ID: 139919649476834
+        UNE             https://www.facebook.com/UNEMejorjuntos
+                        ID: 47562714382
 
 PINTEREST:
     * Obtener Feed RSS con las entradas:
