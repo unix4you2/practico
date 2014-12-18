@@ -552,24 +552,31 @@ if ($accion=="editar_tabla")
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_crear_tabla">
 			<div align=center>
-			<br><?php echo $MULTILANG_TblCreaTabla; ?>:<b><?php echo $BaseDatos; ?></b>:
+			<h3><?php echo $MULTILANG_TblCreaTabla; ?>:<b><?php echo $BaseDatos; ?></b>:</h3>
 			<table class="TextosVentana" cellspacing=10>
 			</tr>
 			<td>
 				<table class="TextosVentana">
 					<tr>
-						<td align="center"><?php echo $MULTILANG_Nombre; ?>:</td>
-						<td><?php echo $TablasApp; ?><input type="text" name="nombre_tabla" size="20" class="CampoTexto">
-                        <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-						<a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_TblDesTabla; ?>" name="<?php echo $MULTILANG_TblDesTabla; ?>"><i class="fa fa-question-circle"></i></a></td>
+						<td align="center"></td>
+						<td>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> <?php echo $TablasApp; ?></span>
+                                <input name="nombre_tabla" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Nombre; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_TblDesTabla; ?>" name="<?php echo $MULTILANG_TblDesTabla; ?>"><i class="fa fa-question-circle"></i></a>
+                                </span>
+                            </div>
+                        </td>
 					</tr>
 					<tr>
 						<td>
 							</form>
 						</td>
 						<td>
-							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_TblCreaTabCampos; ?>" onClick="document.datos.submit()">
-							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="<?php echo $MULTILANG_IrEscritorio; ?>" class="Botones">
+                            <button type="button" class="btn btn-success" OnClick="document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_TblCreaTabCampos; ?></button>
+							<button type="button" class="btn btn-default" OnClick="document.core_ver_menu.submit();"><i class="fa fa-desktop"></i> <?php echo $MULTILANG_IrEscritorio; ?></button>
 						</td>
 					</tr>
 				</table>
@@ -580,23 +587,24 @@ if ($accion=="editar_tabla")
 				<form name="datosasis" id="datosasis" action="<?php echo $ArchivoCORE; ?>" method="POST">
 				<input type="Hidden" name="accion" value="asistente_tablas">
 				<?php echo $MULTILANG_Asistente; ?><br>
-				<a href="javascript:document.datosasis.submit();" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TblTitAsis; ?>: <?php echo $MULTILANG_TblDesAsis; ?>"><i class="fa fa-paint-brush fa-5x texto-naranja"></i></a>
+				<a href="javascript:document.datosasis.submit();" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TblTitAsis; ?>: <?php echo $MULTILANG_TblDesAsis; ?>"><i class="fa fa-magic fa-5x texto-naranja"></i></a>
 				</form>
 			</td>
 			<tr>
 			</table>
 			<hr>
 
-		<font face="" size="3" color="Navy"><b><?php echo $MULTILANG_TblTablasBD; ?></b></font><br><br>
-				<table width="100%" border="0" cellspacing="5" align="CENTER"  class="TextosVentana" >
-					<tr>
-						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_Nombre; ?></b></td>
-						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_TblRegistros; ?></b></td>
-						<td></td>
-						<td></td>
-					</tr>
-
-
+		<h3><?php echo $MULTILANG_TblTablasBD; ?></h3>
+				<table class="table table-hover table-condensed" >
+                    <thead>
+                        <tr>
+                            <td><b><?php echo $MULTILANG_Nombre; ?></b></td>
+                            <td><b><?php echo $MULTILANG_TblRegistros; ?></b></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
 		<?php
 			$resultado=consultar_tablas();
 
@@ -623,8 +631,7 @@ if ($accion=="editar_tabla")
 										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["0"].'" id="f'.$registro["0"].'">
 												<input type="hidden" name="accion" value="eliminar_tabla">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
-												<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelTabla.'\',f'.$registro["0"].');">
-												&nbsp;&nbsp;
+                                                <a href="#" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelTabla.'\',f'.$registro["0"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 										</form>';
 						echo '
 								</td>
@@ -634,14 +641,14 @@ if ($accion=="editar_tabla")
 										<form action="'.$ArchivoCORE.'" method="POST">
 												<input type="hidden" name="accion" value="editar_tabla">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
-												<input type="Submit" value="'.$MULTILANG_Editar.'"  class="Botones">
-												&nbsp;&nbsp;
+                                                <button type="submit" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i> '.$MULTILANG_Editar.'</button>
 										</form>';
 						echo '
 								</td>
 							</tr>';
 				}
-				echo '</table>';	
+				echo '</tbody>
+                    </table>';	
 			cerrar_ventana();
 	}
 
@@ -851,7 +858,7 @@ if ($accion=="editar_tabla")
 						</td>
 						<td>
 							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_TblCreaTabCampos; ?>" onClick="document.datos.submit()">
-							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="<?php echo $MULTILANG_IrEscritorio; ?>" class="Botones">
+							<button type="button" class="btn" OnClick="document.core_ver_menu.submit();"><?php echo $MULTILANG_IrEscritorio; ?></button>
 						</td>
 					</tr>
 				</table>

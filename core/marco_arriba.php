@@ -78,11 +78,9 @@
     <link href="inc/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 
-
-<!--
-
-	<script type="text/javascript" src="inc/practico/javascript/tooltips.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/validaform.js"></script>
+<!--
+	<script type="text/javascript" src="inc/practico/javascript/tooltips.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/popup.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/html5slider.js"></script>
 -->
@@ -97,7 +95,6 @@
 
 
 	<link rel="shortcut icon" href="img/favicon.ico"/>
-
 	<script language="JavaScript">
 		function abrir_ventana_popup(theURL,winName,features)
 			{ 
