@@ -115,7 +115,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo $ArchivoCORE; ?>"><img src="img/logo.png" border="0" ALT="Practico"></a>
+                <a class="navbar-brand" href="javascript:document.core_ver_menu.submit();"><img src="img/logo.png" border="0" ALT="Practico"></a>
             </div>
             <!-- /.navbar-header -->
 
@@ -273,7 +273,7 @@
                                 <!-- /input-group -->
                             </li>
                             <li>
-                                <a href="<?php echo $ArchivoCORE; ?>"><i class="fa fa-dashboard fa-fw"></i> <?php echo $MULTILANG_Escritorio; ?></a>
+                                <a href="javascript:document.core_ver_menu.submit();"><i class="fa fa-dashboard fa-fw"></i> <?php echo $MULTILANG_Escritorio; ?></a>
                             </li>
                             <li>
                                 <a href="javascript:document.mis_informes.submit();"><i class="fa fa-pie-chart fa-fw"></i> <?php echo $MULTILANG_UsrInfDisp; ?></a>
@@ -344,7 +344,7 @@
 
 
 <!-- INICIA MARCO DE CHAT -->
-<div id="main_container" style="overflow: auto;">
+<!--<div id="main_container" style="overflow: auto;">-->
 
 
 

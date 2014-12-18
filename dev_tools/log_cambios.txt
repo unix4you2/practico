@@ -78,6 +78,7 @@ LogCambios="
 * Added: Modulo SOPA.  Una aproximación al Social Parsing con Práctico.
 * Fixed: Se simplifica script de inicio para login y cambio dinámico de marcos.
 * Fixed: Actualizados scripts de instalacion pues ya no requieren creación de menues
+* Fixed: Se evita cierre de sesion involuntario por enlaces mal generados al escritorio
 "
 
 ########################################################################

@@ -173,31 +173,38 @@ if ($accion=="editar_tabla")
 	{
 		 ?>
 
-		<table class="TextosVentana"><tr><td valign=top>
-						
+<div class="row">
+  <div class="col-md-4">
+      
 			<?php abrir_ventana($MULTILANG_TblAgrCampo,'panel-danger'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_crear_campo">
 			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
-			<div align=center>
-						
-			<br><?php echo $MULTILANG_TblAgrCampoTabla; ?>: <b><?php echo $nombre_tabla; ?></b>:
-				<table class="TextosVentana">
+
+			<h4><?php echo $MULTILANG_TblAgrCampoTabla; ?>: <b><?php echo $nombre_tabla; ?></b>:</h4>
+
+
+				<table class="table table-condensed btn-xs table-unbordered ">
 					<tr>
-						<td align="right"><?php echo $MULTILANG_Nombre; ?>:</td>
-						<td><input type="text" name="nombre_campo" size="20" class="CampoTexto">
-						<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-						<a href="#" title="<?php echo $MULTILANG_TblTitNombre; ?>" name="<?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle"></i></a>	</td>
+						<td>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> </span>
+                                <input name="nombre_campo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Nombre; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TblTitNombre; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle"></i></a>
+                                </span>
+                            </div>
+                        </td>
 					</tr>
 					<tr>
-						<td align="right"><?php echo $MULTILANG_Tipo; ?>:</td>
 						<td>
-							<select  name="tipo" class="Combos" >
+							<label for="tipo"><?php echo $MULTILANG_Tipo; ?>:</label>
+                            <select id="tipo" name="tipo" class="form-control">
 								<option value="INT"><?php echo $MULTILANG_TblEntero; ?></option>
 								<option value="VARCHAR"><?php echo $MULTILANG_TblCadena; ?></option>
 								<option value="TEXT"><?php echo $MULTILANG_TblTexto; ?></option>
 								<option value="DATE"><?php echo $MULTILANG_TblFecha; ?></option>
-
 								<?php
 									//Verifica si se trata de un motor MySQL o compatible y agrega los tipos especificos
 									if ($MotorBD=="mysql")
@@ -262,73 +269,94 @@ if ($accion=="editar_tabla")
 						</td>
 					</tr>
 					<tr>
-						<td align="right"><?php echo $MULTILANG_TblLongitud; ?> (<?php echo $MULTILANG_MnuSiAplica; ?>):</td>
-						<td><input type="text" name="longitud" size="10" class="CampoTexto">
-						<a href="#" title="<?php echo $MULTILANG_Importante; ?>" name="<?php echo $MULTILANG_TblDesLongitud; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesLongitud2; ?>"><i class="fa fa-question-circle"></i></a>	
+						<td>
+                            <div class="form-group input-group">
+                                <input name="longitud" type="text" class="form-control" placeholder="<?php echo $MULTILANG_TblLongitud; ?> (<?php echo $MULTILANG_MnuSiAplica; ?>)">
+                                <span class="input-group-addon">
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_Importante; ?>: <?php echo $MULTILANG_TblDesLongitud; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_TblDesLongitud2; ?>"><i class="fa fa-question-circle"></i></a>
+                                </span>
+                            </div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+                            <label for="autoincremento"><?php echo $MULTILANG_TblAutoinc; ?>:</label>
+                            <div class="form-group input-group">
+                                <select id="autoincremento" name="autoincremento" class="form-control" >
+                                    <option value="AUTO_INCREMENT"><?php echo $MULTILANG_Si; ?></option>
+                                    <option value="" selected><?php echo $MULTILANG_No; ?></option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_TblTitAutoinc; ?>" name="<?php echo $MULTILANG_TblDesAutoinc; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                </span>
+                            </div>
 						</td>
 					</tr>
 					
 					<tr>
-						<td align="right"><?php echo $MULTILANG_TblAutoinc; ?>:</td>
 						<td>
-							<select  name="autoincremento" class="Combos" >
-								<option value="AUTO_INCREMENT"><?php echo $MULTILANG_Si; ?></option>
-								<option value="" selected><?php echo $MULTILANG_No; ?></option>
-							</select>
-							<a href="#" title="<?php echo $MULTILANG_TblTitAutoinc; ?>" name="<?php echo $MULTILANG_TblDesAutoinc; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-						</td>
-					</tr>
-					
-					<tr>
-						<td align="right"><?php echo $MULTILANG_TblNulos; ?>:</td>
-						<td>
-							<select  name="valores_nulos" class="Combos" >
+							<label for="valores_nulos"><?php echo $MULTILANG_TblNulos; ?>:</label>
+							<select id="valores_nulos" name="valores_nulos" class="form-control">
 								<option value=""><?php echo $MULTILANG_Si; ?></option>
 								<option value="NOT NULL"><?php echo $MULTILANG_No; ?></option>
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td valign=top align="right"><?php echo $MULTILANG_FrmPredeterminado; ?>:</td>
 						<td>
-							<select name="predeterminado">
-								<option value="" ><?php echo $MULTILANG_Ninguno; ?></option>
-								<option value="USER_DEFINED" ><?php echo $MULTILANG_TblDefUsuario; ?>:</option>
-								<option value="NULL" ><?php echo $MULTILANG_TblNulo; ?></option>
-								<option value="CURRENT_TIMESTAMP" ><?php echo $MULTILANG_TblFechaHora; ?></option>
-							</select><br>
-							<input type="text" name="predeterminado_valor" size="20" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesPredet; ?>"><i class="fa fa-question-circle"></i></a>	
-						</td>
-					</tr>
-					<tr>
-						<td>
-							</form>
-						</td>
-						<td>
-							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_TblAgregando; ?>" onClick="document.datos.submit()">
-							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="<?php echo $MULTILANG_IrEscritorio; ?>" class="Botones">
+							<label for="predeterminado"><?php echo $MULTILANG_FrmPredeterminado; ?>:</label>
+                            <div class="form-group input-group">
+                                <select id="predeterminado" name="predeterminado" class="form-control">
+                                    <option value="" ><?php echo $MULTILANG_Ninguno; ?></option>
+                                    <option value="USER_DEFINED" ><?php echo $MULTILANG_TblDefUsuario; ?>:</option>
+                                    <option value="NULL" ><?php echo $MULTILANG_TblNulo; ?></option>
+                                    <option value="CURRENT_TIMESTAMP" ><?php echo $MULTILANG_TblFechaHora; ?></option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_TblDesPredet; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                </span>
+                            </div>
+                                <div class="form-group input-group">
+                                    <input name="predeterminado_valor" type="text" class="form-control">
+                                    <span class="input-group-addon">
+                                        <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TblDesPredet; ?>"><i class="fa fa-question-circle"></i></a>
+                                    </span>
+                                </div>
 						</td>
 					</tr>
 				</table>
+                </form>
+                <button type="button" class="btn btn-success btn-block" OnClick="document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_TblAgregando; ?></button>
+                <button type="button" class="btn btn-default btn-block" OnClick="document.core_ver_menu.submit();"><i class="fa fa-desktop"></i> <?php echo $MULTILANG_IrEscritorio; ?></button>
 
 
 		<?php
 		cerrar_ventana();
-		echo '</td><td valign=top>';  // Inicia segunda columna del diseñador
+
+?>
+      
+  </div>    
+  <div class="col-md-8">
+
+<?php
+
 		abrir_ventana($MULTILANG_TblCamposDef,'panel-primary');
 		?>
-				<table width="100%" border="0" cellspacing="5" align="CENTER" style="color: black; font-size: 9px; font-family: Verdana, Tahoma, Arial;">
-					<tr>
-						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_Campo; ?></b></td>
-						<td bgcolor="#D6D6D6"><b><?php echo $MULTILANG_Tipo; ?></b></td>
-						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_TblNulos; ?></b></td>
-						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_TblTipoClave; ?></b></td>
-						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_Predeterminado; ?></b></td>
-						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_Otros; ?></b></td>
+				<div class="table-responsive">
+                <table class="table table-condensed btn-xs table-unbordered table-hover table-responsive">
+					<thead>
+                    <tr>
+						<td><b><?php echo $MULTILANG_Campo; ?></b></td>
+						<td><b><?php echo $MULTILANG_Tipo; ?></b></td>
+						<td><b><?php echo $MULTILANG_TblNulos; ?></b></td>
+						<td><b><?php echo $MULTILANG_TblTipoClave; ?></b></td>
+						<td><b><?php echo $MULTILANG_Predeterminado; ?></b></td>
+						<td><b><?php echo $MULTILANG_Otros; ?></b></td>
 						<td></td>
 					</tr>
+                    <thead>
+                    <tbody>
 		 <?php
 				$registro=consultar_columnas($nombre_tabla);
 				for($i=0;$i<count($registro);$i++)
@@ -350,7 +378,7 @@ if ($accion=="editar_tabla")
 												<input type="hidden" name="accion" value="eliminar_campo">
 												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 												<input type="hidden" name="nombre_campo" value="'.$registro[$i]["nombre"].'">
-												<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelCampo.'\',f'.$registro[$i]["nombre"].');">
+                                                <a href="#" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelCampo.'\',f'.$registro[$i]["nombre"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 												&nbsp;&nbsp;
 										</form>
 								</td>';
@@ -363,14 +391,20 @@ if ($accion=="editar_tabla")
 						echo '	</tr>';
 
 					}
-				echo '</table>';
-		?>
-				
-			</div>
-<?php
+				echo '
+                </tbody>
+                </table>
+                </div>
+                ';
+
 			cerrar_ventana();
-		echo '</td></tr></table>'; // Cierra la tabla de dos columnas
-					
+
+echo '
+
+  </div>
+</div>
+';
+
 	}
 
 
@@ -857,8 +891,8 @@ if ($accion=="editar_tabla")
 							</form>
 						</td>
 						<td>
-							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_TblCreaTabCampos; ?>" onClick="document.datos.submit()">
-							<button type="button" class="btn" OnClick="document.core_ver_menu.submit();"><?php echo $MULTILANG_IrEscritorio; ?></button>
+							<button class="btn btn-success btn-block" OnClick="document.datos.submit()"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_TblCreaTabCampos; ?></button>
+                            <button type="button" class="btn btn-default btn-block" OnClick="document.core_ver_menu.submit();"><i class="fa fa-desktop"></i> <?php echo $MULTILANG_IrEscritorio; ?></button>
 						</td>
 					</tr>
 				</table>

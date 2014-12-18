@@ -36,6 +36,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 *.texto-naranja {color: #FF8040}
 
 
+/* Estilo adicional para tablas sin bordes */
+*.table-unbordered>thead>tr>th, 
+*.table-unbordered>tbody>tr>th, 
+*.table-unbordered>tfoot>tr>th, 
+*.table-unbordered>thead>tr>td, 
+*.table-unbordered>tbody>tr>td, 
+*.table-unbordered>tfoot>tr>td {
+  border-top: none; 
+}
+
 /* ANIMACIONES */
 *.texto-blink {
     -moz-animation: blink 2s infinite linear;

@@ -50,13 +50,7 @@
 
 
 
-</div> <!-- FINALIZA MARCO DE CHAT -->
-
-
-
-
-
-
+<!--</div>--> <!-- FINALIZA MARCO DE CHAT -->
 
 
 
@@ -67,7 +61,6 @@
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
-
         </div>
         <!-- /#page-wrapper -->
 
