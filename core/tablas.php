@@ -288,7 +288,7 @@ if ($accion=="editar_tabla")
                                     <option value="" selected><?php echo $MULTILANG_No; ?></option>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_TblTitAutoinc; ?>" name="<?php echo $MULTILANG_TblDesAutoinc; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    <a href="#" title="<?php echo $MULTILANG_TblTitAutoinc; ?>: <?php echo $MULTILANG_TblDesAutoinc; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
                                 </span>
                             </div>
 						</td>
@@ -684,6 +684,7 @@ echo '
 				echo '</tbody>
                     </table>';	
 			cerrar_ventana();
+			$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 
 
@@ -805,21 +806,25 @@ echo '
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_crear_tabla_asistente">
 			<div align=center>
-			<br><?php echo $MULTILANG_TblCreaTabla; ?> <b><?php echo $BaseDatos; ?></b>:
-			<table class="TextosVentana" cellspacing=10>
-			</tr>
-			<td>
-				<table class="TextosVentana">
+			<h3><?php echo $MULTILANG_TblCreaTabla; ?> <b><?php echo $BaseDatos; ?></b>:</h3>
+				<table class="table table-unbordered">
 					<tr>
-						<td align="right"><?php echo $MULTILANG_TblAsistNombre; ?>:</td>
-						<td><?php echo $TablasApp; ?><input type="text" name="nombre_tabla" size="20" class="CampoTexto">
-						<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_TblDesTabla; ?>"><i class="fa fa-question-circle"></i></a></td>
+                        <td>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> <?php echo $TablasApp; ?></span>
+                                <input name="nombre_tabla" type="text" class="form-control" placeholder="<?php echo $MULTILANG_TblAsistNombre; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_TblDesTabla; ?>" name="<?php echo $MULTILANG_TblDesTabla; ?>"><i class="fa fa-question-circle"></i></a>
+                                </span>
+                            </div>
+						</td>
 					</tr>
 					<tr>
-						<td align="right"><b><?php echo $MULTILANG_TblAsistPlant; ?>:</b></td>
 						<td>
-							<select name="plantilla_tabla" onChange="datos.descripciontabla.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].label; datos.listacampos.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].title; datos.totalcampos.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].lang;">
+                            <div class="form-group input-group">
+                            <label for="plantilla_tabla"><?php echo $MULTILANG_TblAsistPlant; ?>:</label>
+							<select id="plantilla_tabla" name="plantilla_tabla" class="form-control" onChange="datos.descripciontabla.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].label; datos.listacampos.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].title; datos.totalcampos.value=document.datos.plantilla_tabla.options[document.datos.plantilla_tabla.selectedIndex].lang;">
 								<option value="" label="" dir="" lang=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
 								<?php
 									$directorio="inc/practico/asistentes/";
@@ -860,49 +865,39 @@ echo '
 										}
 								?>
 							</select>
-						</td>
-					</tr>
-					<tr>
-						<td align="right" valign="top"><?php echo $MULTILANG_InfDescripcion; ?>:</td>
-						<td>
-							<textarea name="descripciontabla" id="descripciontabla" cols="78" rows="2" readonly></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td align="right" valign="top"><?php echo $MULTILANG_TblAsCampos; ?>:</td>
-						<td>
-							<textarea name="listacampos" id="listacampos" cols="38" rows="10" readonly></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td align="right" valign="top"><?php echo $MULTILANG_TblTotCampos; ?>:</td>
-						<td>
-							<input type="text" name="totalcampos" size="4" class="CampoTexto">
-						</td>
-					</tr>
-					<tr>
-						<td align="right" valign="top"><?php echo strtoupper($MULTILANG_Importante); ?>:</td>
-						<td>
-							<?php echo $MULTILANG_TblHlpAsist; ?>
+                            </div>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							</form>
+							<textarea name="descripciontabla" id="descripciontabla"  class="form-control" rows="2" readonly placeholder="<?php echo $MULTILANG_InfDescripcion; ?>"></textarea>
 						</td>
+					</tr>
+					<tr>
 						<td>
-							<button class="btn btn-success btn-block" OnClick="document.datos.submit()"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_TblCreaTabCampos; ?></button>
-                            <button type="button" class="btn btn-default btn-block" OnClick="document.core_ver_menu.submit();"><i class="fa fa-desktop"></i> <?php echo $MULTILANG_IrEscritorio; ?></button>
+							<textarea name="listacampos" id="listacampos"  class="form-control" rows="10" readonly placeholder="<?php echo $MULTILANG_TblAsCampos; ?>"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" name="totalcampos" class="form-control" placeholder="<?php echo $MULTILANG_TblTotCampos; ?>">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<?php echo strtoupper($MULTILANG_Importante); ?>:<br>
+                            <?php echo $MULTILANG_TblHlpAsist; ?>
 						</td>
 					</tr>
 				</table>
-			</td>
-			<tr>
-			</table>
-			<hr>
+                </form>
+
+                <button class="btn btn-success btn-block" OnClick="document.datos.submit()"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_TblCreaTabCampos; ?></button>
+                <button type="button" class="btn btn-default btn-block" OnClick="document.core_ver_menu.submit();"><i class="fa fa-desktop"></i> <?php echo $MULTILANG_IrEscritorio; ?></button>
 
 <?php
-			cerrar_ventana();
+			$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
+            cerrar_ventana();
 	}
 ?>
 

@@ -79,6 +79,7 @@ LogCambios="
 * Fixed: Se simplifica script de inicio para login y cambio dinámico de marcos.
 * Fixed: Actualizados scripts de instalacion pues ya no requieren creación de menues
 * Fixed: Se evita cierre de sesion involuntario por enlaces mal generados al escritorio
+* Fixed: Se retira campo de color de formulario pues ahora todo se hace con estilos de BootStrap
 "
 
 ########################################################################
@@ -89,7 +90,7 @@ UPDATE core_menu SET imagen='fa fa-key' WHERE imagen='icono_llave.png';
 UPDATE core_menu SET imagen='fa fa-download' WHERE imagen='bajar.png';
 UPDATE core_menu SET imagen='fa fa-cloud-upload' WHERE imagen='tango_user-home.png';
 UPDATE core_menu SET imagen='fa fa-bar-chart fa-3x' WHERE imagen='compfile.png';
-
+ALTER TABLE core_formulario DROP COLUMN color_fondo;
 "
 
 ########################################################################
