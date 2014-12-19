@@ -282,7 +282,7 @@
 	$MULTILANG_FrmTipo15='SubForm (To query and ReadOnly)';
 	$MULTILANG_FrmTipoPincel='Brush size';
 	$MULTILANG_FrmTipoColor='Line color';
-	$MULTILANG_FrmTipoAdvertencia='<font color=yellow>This kind of data controls should be stored in your table into a long text or unlimited field</font>';
+	$MULTILANG_FrmTipoAdvertencia='This kind of data controls should be stored in your table into a long text or unlimited field';
 	$MULTILANG_FrmValorMinimo='Minimum value';
 	$MULTILANG_FrmValorMaximo='Maximum value';
 	$MULTILANG_FrmValorSalto='Step value';

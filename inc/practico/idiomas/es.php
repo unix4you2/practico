@@ -279,7 +279,7 @@
 	$MULTILANG_FrmTipo15='SubFormulario (Para consulta en Solo lectura)';
 	$MULTILANG_FrmTipoPincel='Tama&ntilde;o del pincel';
 	$MULTILANG_FrmTipoColor='Color del trazo';
-	$MULTILANG_FrmTipoAdvertencia='<font color=yellow>Este tipo de controles deberia ser almacenado en su tabla dentro de campos de texto largo/ilimitado</font>';
+	$MULTILANG_FrmTipoAdvertencia='Este tipo de controles deberia ser almacenado en su tabla dentro de campos de texto largo/ilimitado';
 	$MULTILANG_FrmValorMinimo='Valor m&iacute;nimo';
 	$MULTILANG_FrmValorMaximo='Valor m&aacute;ximo';
 	$MULTILANG_FrmValorSalto='Valor de salto';

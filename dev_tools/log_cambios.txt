@@ -80,6 +80,8 @@ LogCambios="
 * Fixed: Actualizados scripts de instalacion pues ya no requieren creación de menues
 * Fixed: Se evita cierre de sesion involuntario por enlaces mal generados al escritorio
 * Fixed: Se retira campo de color de formulario pues ahora todo se hace con estilos de BootStrap
+* Fixed: Se retira opcion de teclado virtual en controles de formularios
+* Fixed: Formatos de color directos en HTML son removidos para ser controlados ahora desde BootStrap
 "
 
 ########################################################################
@@ -91,6 +93,7 @@ UPDATE core_menu SET imagen='fa fa-download' WHERE imagen='bajar.png';
 UPDATE core_menu SET imagen='fa fa-cloud-upload' WHERE imagen='tango_user-home.png';
 UPDATE core_menu SET imagen='fa fa-bar-chart fa-3x' WHERE imagen='compfile.png';
 ALTER TABLE core_formulario DROP COLUMN color_fondo;
+ALTER TABLE core_formulario_objeto DROP COLUMN teclado_virtual ;
 "
 
 ########################################################################
