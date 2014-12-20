@@ -82,6 +82,7 @@ LogCambios="
 * Fixed: Se retira campo de color de formulario pues ahora todo se hace con estilos de BootStrap
 * Fixed: Se retira opcion de teclado virtual en controles de formularios
 * Fixed: Formatos de color directos en HTML son removidos para ser controlados ahora desde BootStrap
+* Fixed: El orden de los campos en los informes se hace basado en su ID
 "
 
 ########################################################################

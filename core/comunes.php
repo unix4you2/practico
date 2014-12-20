@@ -2933,7 +2933,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			$numero_columnas=0;
 			//Busca los CAMPOS definidos para el informe
 			$consulta="SELECT ";
-			$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
+			$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY id","$informe");
 			while ($registro_campos = $consulta_campos->fetch())
 				{
 					//Si tiene alias definido lo agrega
@@ -3448,7 +3448,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 						<input type="Hidden" name="accion" value="'.$accion_retorno.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
-						<input type="Hidden" name="informe" value="'.$informe.'">
+						<input type="Hidden" name="informe" value="'.@$informe.'">
 						<input type="Hidden" name="popup_activo" value="'.$popup_activo.'">
 						<script type="" language="JavaScript">
 						//setTimeout ("document.cancelar.submit();", 10); 
