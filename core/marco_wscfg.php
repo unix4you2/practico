@@ -128,7 +128,7 @@
 ?>
 
     <!-- Modal WebServices -->
-    <div class="modal fade" id="myModalWEBSERVICES" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade modal-wide" id="myModalWEBSERVICES" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">

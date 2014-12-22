@@ -62,7 +62,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Ahora todo es responsive!
+* Added: Ahora todo es responsive!  Sus aplicaciones corriendo sin problemas en la web para escritorios, tabletas y smartphones
 * Added: Filtro de listas de seleccion.  Ahora se permite definir condiciones de filtrado para las listas utilizadas en los controles combobox y radiobutton
 * Added: Se inicia con el uso de awesome-font.  Se sustituyen varias expresiones de iconos por las existentes en la fuente de iconos nueva
 * Added: Actualizacion de mucha iconografia a fuentes Awesome
@@ -84,6 +84,7 @@ LogCambios="
 * Fixed: Formatos de color directos en HTML son removidos para ser controlados ahora desde BootStrap
 * Fixed: El orden de los campos en los informes se hace basado en su ID
 * Fixed: Se reduce numero de columnas en formularios a 12 para posterior compatibilidad con BootStrap
+* Fixed: El tipo de objeto al aumentar o disminuir pesos de controles es ahora identificado.
 "
 
 ########################################################################

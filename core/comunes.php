@@ -3441,13 +3441,18 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			$mensaje_error="";
 			if ($mensaje_error=="")
 				{
+                    //Determina el tipo de objeto sobre el que se hace el cambio
+                    $TipoCampo="";
+                    if (@$formulario!="") $TipoCampo.="Frm:".$formulario;
+                    if (@$informe!="") $TipoCampo.="Inf:".$informe;
+                    
 					ejecutar_sql_unaria("UPDATE ".$TablasCore."$tabla SET $campo = $valor WHERE id = ? ","$id");
-					auditar("Cambia estado del campo $campo en objetoID $formulario");
+					@auditar("Cambia estado del campo $campo en objetoID $TipoCampo");
 
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="accion" value="'.$accion_retorno.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="formulario" value="'.@$formulario.'">
 						<input type="Hidden" name="informe" value="'.@$informe.'">
 						<input type="Hidden" name="popup_activo" value="'.$popup_activo.'">
 						<script type="" language="JavaScript">

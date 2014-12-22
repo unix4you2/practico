@@ -1888,7 +1888,7 @@ if ($accion=="editar_formulario")
 
 
                 <!-- Modal EditorJavascript -->
-                <div class="modal fade" id="myModalActualizaJAVASCRIPT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade modal-wide" id="myModalActualizaJAVASCRIPT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -2316,7 +2316,7 @@ if ($accion=="administrar_formularios")
 
 
             <!-- Modal EditorJavascript -->
-            <div class="modal fade" id="myModalJAVASCRIPT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade modal-wide" id="myModalJAVASCRIPT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -2388,7 +2388,7 @@ function FrmAutoRun()
             <div class="form-group input-group">
                 <select id="tabla_datos" name="tabla_datos" class="form-control" >
                     <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
-                     <?php
+                    <?php
                             $resultado=consultar_tablas();
                             while ($registro = $resultado->fetch())
                                 {
@@ -2435,7 +2435,7 @@ function FrmAutoRun()
 
 		<?php
 		cerrar_ventana();	
-		
+
 ?>
 
   </div>    
