@@ -34,7 +34,7 @@
 	$ListaCamposSinID_informe_campos='informe,valor_campo,valor_alias';
 	$ListaCamposSinID_informe_tablas='informe,valor_tabla,valor_alias';
 	$ListaCamposSinID_informe_boton='titulo,estilo,informe,tipo_accion,accion_usuario,visible,peso,confirmacion_texto';
-	$ListaCamposSinID_informe='titulo,descripcion,categoria,agrupamiento,ordenamiento,nivel_usuario,ancho,alto,formato_final,formato_grafico,genera_pdf,color_fondo';
+	$ListaCamposSinID_informe='titulo,descripcion,categoria,agrupamiento,ordenamiento,nivel_usuario,ancho,alto,formato_final,formato_grafico,genera_pdf';
 	$ListaCamposSinID_menu='texto,peso,url,posible_clic,tipo_comando,comando,nivel_usuario,posible_arriba,posible_centro,posible_escritorio,seccion,imagen';
 	$ListaCamposSinID_parametros='nombre_empresa_largo,nombre_empresa_corto,nombre_aplicacion,version,fecha_lanzamiento,licencia,creditos,funciones_personalizadas';
 	$ListaCamposSinID_llaves_api='nombre,llave,secreto,uri,dominio_autorizado,ip_autorizada,funciones_autorizadas';

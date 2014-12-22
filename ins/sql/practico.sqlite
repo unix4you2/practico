@@ -159,8 +159,7 @@ CREATE TABLE core_informe (
   alto text,
   formato_final text, 
   formato_grafico text,
-  genera_pdf text,
-  color_fondo text
+  genera_pdf text
 
 );
 

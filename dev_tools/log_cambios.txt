@@ -75,14 +75,15 @@ LogCambios="
 * Added: Se cambia la ventana de login por OAuth a modal.
 * Added: Panel administrativo al inicio con resumenes del sistema
 * Added: Panel de dashboard para el administrador de aplicacion
-* Added: Modulo SOPA.  Una aproximación al Social Parsing con Práctico.
+* Added: Modulo SOPA.  Una aproximación al Social Parsing y demo de funciones para obtener URLs con Práctico.
 * Fixed: Se simplifica script de inicio para login y cambio dinámico de marcos.
 * Fixed: Actualizados scripts de instalacion pues ya no requieren creación de menues
 * Fixed: Se evita cierre de sesion involuntario por enlaces mal generados al escritorio
-* Fixed: Se retira campo de color de formulario pues ahora todo se hace con estilos de BootStrap
+* Fixed: Se retira campo de color de formularios e informes pues ahora todo se hace con estilos de BootStrap
 * Fixed: Se retira opcion de teclado virtual en controles de formularios
 * Fixed: Formatos de color directos en HTML son removidos para ser controlados ahora desde BootStrap
 * Fixed: El orden de los campos en los informes se hace basado en su ID
+* Fixed: Se reduce numero de columnas en formularios a 12 para posterior compatibilidad con BootStrap
 "
 
 ########################################################################
@@ -95,6 +96,7 @@ UPDATE core_menu SET imagen='fa fa-cloud-upload' WHERE imagen='tango_user-home.p
 UPDATE core_menu SET imagen='fa fa-bar-chart fa-3x' WHERE imagen='compfile.png';
 ALTER TABLE core_formulario DROP COLUMN color_fondo;
 ALTER TABLE core_formulario_objeto DROP COLUMN teclado_virtual ;
+ALTER TABLE core_informe DROP COLUMN color_fondo;
 "
 
 ########################################################################

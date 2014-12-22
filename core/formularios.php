@@ -2360,90 +2360,71 @@ function FrmAutoRun()
 			<?php abrir_ventana($MULTILANG_FrmAgregar, 'panel-primary'); ?>
 						
 			<h4><?php echo $MULTILANG_FrmDetalles; ?>:</h4>
-				<table class="table table-condensed btn-xs table-unbordered ">
-					<tr>
-						<td>
-                            <div class="form-group input-group">
-                                <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> </span>
-                                <input name="titulo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmTitVen; ?>">
-                                <span class="input-group-addon">
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmDesTit; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                                </span>
-                            </div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-                            <div class="form-group input-group">
-                                <input name="ayuda_titulo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmHlp; ?>">
-                                <span class="input-group-addon">
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmDesHlp; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                                </span>
-                            </div>
-						</td>
-					</tr>
-					<tr>
-						<td valign="top">
-                            <div class="form-group input-group">
-                                <textarea name="ayuda_texto"  class="form-control" placeholder="<?php echo $MULTILANG_FrmTxt; ?>" rows="3"></textarea>
-                                <span class="input-group-addon">
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmDesTxt; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle  fa-fw "></i></a>
-                                </span>
-                            </div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-                            <label for="tabla_datos"><?php echo $MULTILANG_TablaDatos; ?>:</label>
-                            <div class="form-group input-group">
-                                <select id="tabla_datos" name="tabla_datos" class="form-control" >
-                                    <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
-                                     <?php
-                                            $resultado=consultar_tablas();
-                                            while ($registro = $resultado->fetch())
-                                                {
-                                                    // Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
-                                                    if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
-                                                        echo '<option value="'.$registro[0].'" >'.str_replace($TablasApp,'',$registro[0]).'</option>';
-                                                }		
-                                    ?>
-                                </select>
-                                <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle  fa-fw icon-orange"></i></a>
-                                </span>
-                            </div>
-                            <input type="text" name="tabla_datos_manual" class="form-control" placeholder="<?php echo $MULTILANG_InfTablaManual; ?>">
-						</td>
-					</tr>
-					<tr>
-						<td>
-                            <label for="columnas"><?php echo $MULTILANG_FrmNumeroCols; ?>:</label>
-                            <div class="form-group input-group">
-                                <select id="columnas" name="columnas" class="form-control" >
-                                    <?php
-                                        for ($i=1;$i<=20;$i++)
-                                            echo '<option value="'.$i.'">'.$i.'</option>';
-                                    ?>
-                                </select>
-                                <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesNumeroCols; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                                </span>
-                            </div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-                            <label for="borde_visible"><?php echo $MULTILANG_FrmBordesVisibles; ?>:</label>
-                            <select id="borde_visible" name="borde_visible" class="form-control" >
-                                <option value="0"><?php echo $MULTILANG_No; ?></option>
-                                <option value="1"><?php echo $MULTILANG_Si; ?></option>
-                            </select>
-						</td>
-					</tr>
-				</table>
-            </form>
 
+            <div class="form-group input-group">
+                <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> </span>
+                <input name="titulo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmTitVen; ?>">
+                <span class="input-group-addon">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmDesTit; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                </span>
+            </div>
+
+            <div class="form-group input-group">
+                <input name="ayuda_titulo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmHlp; ?>">
+                <span class="input-group-addon">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmDesHlp; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                </span>
+            </div>
+
+            <div class="form-group input-group">
+                <textarea name="ayuda_texto"  class="form-control" placeholder="<?php echo $MULTILANG_FrmTxt; ?>" rows="3"></textarea>
+                <span class="input-group-addon">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmDesTxt; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle  fa-fw "></i></a>
+                </span>
+            </div>
+
+            <label for="tabla_datos"><?php echo $MULTILANG_TablaDatos; ?>:</label>
+            <div class="form-group input-group">
+                <select id="tabla_datos" name="tabla_datos" class="form-control" >
+                    <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                     <?php
+                            $resultado=consultar_tablas();
+                            while ($registro = $resultado->fetch())
+                                {
+                                    // Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
+                                    if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
+                                        echo '<option value="'.$registro[0].'" >'.str_replace($TablasApp,'',$registro[0]).'</option>';
+                                }		
+                    ?>
+                </select>
+                <span class="input-group-addon">
+                    <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle  fa-fw icon-orange"></i></a>
+                </span>
+            </div>
+            <input type="text" name="tabla_datos_manual" class="form-control" placeholder="<?php echo $MULTILANG_InfTablaManual; ?>">
+
+            <label for="columnas"><?php echo $MULTILANG_FrmNumeroCols; ?>:</label>
+            <div class="form-group input-group">
+                <select id="columnas" name="columnas" class="form-control" >
+                    <?php
+                        for ($i=1;$i<=12;$i++)
+                            echo '<option value="'.$i.'">'.$i.'</option>';
+                    ?>
+                </select>
+                <span class="input-group-addon">
+                    <a href="#" title="<?php echo $MULTILANG_FrmDesNumeroCols; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                </span>
+            </div>
+
+            <label for="borde_visible"><?php echo $MULTILANG_FrmBordesVisibles; ?>:</label>
+            <select id="borde_visible" name="borde_visible" class="form-control" >
+                <option value="0"><?php echo $MULTILANG_No; ?></option>
+                <option value="1"><?php echo $MULTILANG_Si; ?></option>
+            </select>
+
+            </form>
+            <br>
             <a class="btn btn-primary btn-xs btn-block" data-toggle="modal" href="#myModalJAVASCRIPT">
                 <div>
                     <i class="fa fa-file-code-o"></i> <?php echo $MULTILANG_FrmAdvScriptForm; ?>
@@ -2498,7 +2479,7 @@ function FrmAutoRun()
 										<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
 												<input type="hidden" name="accion" value="eliminar_formulario">
 												<input type="hidden" name="formulario" value="'.$registro["id"].'">
-                                                <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvDelForm.'\',df'.$registro["id"].');"><i class="fa fa-arrows-alt"></i> '.$MULTILANG_Eliminar.'</a>
+                                                <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvDelForm.'\',df'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 										</form>
 								</td>
 								<td align="center">

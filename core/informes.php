@@ -192,7 +192,7 @@ if ($accion=="actualizar_informe")
 		if ($mensaje_error=="")
 			{
 				// Actualiza los datos
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET color_fondo=?,genera_pdf=?,formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=?,nivel_usuario=? WHERE id=? ","$color_fondo$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$id");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET genera_pdf=?,formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=?,nivel_usuario=? WHERE id=? ","$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$id");
 				auditar("Actualiza informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="accion" value="editar_informe">
@@ -569,66 +569,74 @@ if ($accion=="editar_informe")
 		$registro_informe = $resultado_informe->fetch();
   ?>
 
-		<!-- INICIO DE MARCOS POPUP -->
+            <!-- Modal Tablas del informe -->
+            <div class="modal fade" id="myModalTablaInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_InfAgregaTabla; ?></h4>
+                  </div>
+                  <div class="modal-body mdl-primary">
+                      
 
-		<div id='FormularioTablas' class="FormularioPopUps">
-				<?php
-				abrir_ventana($MULTILANG_InfAgregaTabla, 'panel-primary');
-				?>
 				<form name="datosform" id="datosform" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-				<input type="Hidden" name="accion" value="guardar_informe_tabla">
-				<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
-				<div align=center>
+                    <input type="Hidden" name="accion" value="guardar_informe_tabla">
+                    <input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
-					<table class="TextosVentana">
-						<tr>
-							<td align="right"><?php echo $MULTILANG_TablaDatos; ?>:</td>
-							<td>
-								<select  name="tabla_datos" class="Combos" >
-									<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
-									 <?php
-											$resultado=consultar_tablas();
-											while ($registro = $resultado->fetch())
-												{
-													// Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
-													if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
-														echo '<option value="'.$registro[0].'" >'.str_replace($TablasApp,'',$registro[0]).'</option>';
-												}
-									?>
-								</select><a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="right"><?php echo $MULTILANG_InfTablaManual; ?>:</td>
-							<td><input type="text" name="tabla_manual" size="20" class="CampoTexto"> (<?php echo $MULTILANG_Opcional; ?>)
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesTablaManual; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="right"><?php echo $MULTILANG_InfAliasManual; ?>:</td>
-							<td><input type="text" name="alias_manual" size="20" class="CampoTexto"> (<?php echo $MULTILANG_Opcional; ?>)
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesAliasManual; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								</form>
-								
-							</td>
-							<td>
-								<input type="Button"  class="Botones" value="<?php echo $MULTILANG_InfBtnAgregaTabla; ?>" onClick="document.datosform.submit()">
-							</td>
-						</tr>
-					</table>
-					
+                    <label for="tabla_datos"><?php echo $MULTILANG_TablaDatos; ?>:</label>
+                    <div class="form-group input-group">
+                        <select id="tabla_datos" name="tabla_datos" class="form-control" >
+                            <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                             <?php
+                                    $resultado=consultar_tablas();
+                                    while ($registro = $resultado->fetch())
+                                        {
+                                            // Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
+                                            if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
+                                                echo '<option value="'.$registro[0].'" >'.str_replace($TablasApp,'',$registro[0]).'</option>';
+                                        }
+                            ?>
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                        </span>
+                    </div>
 
-				<hr><b><?php echo $MULTILANG_InfTablasDef; ?></b>
-				<table width="100%" border="0" cellspacing="2" align="CENTER"  class="TextosVentana">
-					<tr>
-						<td bgcolor="#D6D6D6"><b><?php echo $MULTILANG_Tablas; ?></b></td>
-						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_InfAlias; ?></b></td>
+                    <div class="form-group input-group">
+                        <input name="tabla_manual" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfTablaManual; ?>">
+                        <span class="input-group-addon">
+                            (<?php echo $MULTILANG_Opcional; ?>)
+                        </span>
+                        <span class="input-group-addon">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesTablaManual; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                        </span>
+                    </div>
+
+                    <div class="form-group input-group">
+                        <input name="alias_manual" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfAliasManual; ?>">
+                        <span class="input-group-addon">
+                            (<?php echo $MULTILANG_Opcional; ?>)
+                        </span>
+                        <span class="input-group-addon">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesAliasManual; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                        </span>
+                    </div>
+                    
+                </form>
+            <a class="btn btn-success btn-block" href="javascript:document.datosform.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_InfBtnAgregaTabla; ?></a>
+
+
+				<h4><?php echo $MULTILANG_InfTablasDef; ?>:</h4>
+				<table class="table table-condensed btn-xs table-unbordered table-hover">
+					<thead>
+                    <tr>
+						<td><b><?php echo $MULTILANG_Tablas; ?></b></td>
+						<td><b><?php echo $MULTILANG_InfAlias; ?></b></td>
 						<td></td>
 					</tr>
+                    </thead>
+                    <tbody>
 				 <?php
 
 						$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_tablas." FROM ".$TablasCore."informe_tablas WHERE informe=? ORDER BY valor_tabla","$informe");
@@ -642,41 +650,44 @@ if ($accion=="editar_informe")
 														<input type="hidden" name="accion" value="eliminar_informe_tabla">
 														<input type="hidden" name="tabla" value="'.$registro["id"].'">
 														<input type="hidden" name="informe" value="'.$informe.'">
-														<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_InfAdvBorrado.'\',df'.$registro["id"].');">
+                                                        <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvBorrado.'\',df'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 												</form>
 										</td>
 									</tr>';
 							}
-						echo '</table>';
+						echo '</tbody>
+                        </table>';
 				?>
-	
-			<?php
-				abrir_barra_estado();
-					echo '<input type="Button"  class="BotonesEstadoCuidado" value="'.$MULTILANG_Cerrar.'" onClick="OcultarPopUp(\'FormularioTablas\')">';
-				cerrar_barra_estado();
-			cerrar_ventana();
 
-			?>
-		<!-- FIN DE MARCOS POPUP -->
-		</div>
+            
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
-		<!-- INICIO DE MARCOS POPUP -->
 
-		<div id='FormularioCampos' class="FormularioPopUps">
-				<?php
-				abrir_ventana($MULTILANG_InfAgregaCampo, 'panel-primary'); 
-				?>
+            <!-- Modal Campos del informe -->
+            <div class="modal fade" id="myModalCamposInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_InfAgregaCampo; ?></h4>
+                  </div>
+                  <div class="modal-body mdl-primary">
+
 				<form name="datosformc" id="datosformc" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-				<input type="Hidden" name="accion" value="guardar_informe_campo">
-				<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
-				<div align=center>
+                    <input type="Hidden" name="accion" value="guardar_informe_campo">
+                    <input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
-					<table class="TextosVentana">
-						<tr>
-							<td align="right"><?php echo $MULTILANG_InfCampoDatos; ?>:</td>
-							<td>
-								<select  name="campo_datos" class="Combos" >
+
+                    <label for="campo_datos"><?php echo $MULTILANG_InfCampoDatos; ?>:</label>
+                    <div class="form-group input-group">
+                        <select id="campo_datos" name="campo_datos" class="form-control" >
 									<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
 									<?php
 											$resultado=ejecutar_sql("SELECT valor_tabla FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
@@ -696,38 +707,40 @@ if ($accion=="editar_informe")
 														}
 												}
 									?>
-								</select><a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="right"><?php echo $MULTILANG_InfCampoManual; ?>:</td>
-							<td><input type="text" name="campo_manual" size="20" class="CampoTexto"> (<?php echo $MULTILANG_Opcional; ?>)
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesCampoManual; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="right"><?php echo $MULTILANG_InfAliasManual; ?>:</td>
-							<td><input type="text" name="alias_manual" size="20" class="CampoTexto"> (<?php echo $MULTILANG_Opcional; ?>)
-								<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesAliasManual2; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								</form>
-								
-							</td>
-							<td>
-								<input type="Button"  class="Botones" value="<?php echo $MULTILANG_InfBtnAgregaCampo; ?>" onClick="document.datosformc.submit()">
-							</td>
-						</tr>
-					</table>
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                        </span>
+                    </div>
+
+                    <div class="form-group input-group">
+                        <input name="campo_manual" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>">
+                        <span class="input-group-addon">
+                            (<?php echo $MULTILANG_Opcional; ?>)
+                        </span>
+                        <span class="input-group-addon">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesCampoManual; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                        </span>
+                    </div>
+
+                    <div class="form-group input-group">
+                        <input name="alias_manual" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfAliasManual; ?>">
+                        <span class="input-group-addon">
+                            (<?php echo $MULTILANG_Opcional; ?>)
+                        </span>
+                        <span class="input-group-addon">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesAliasManual2; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                        </span>
+                    </div>
+                </form>
+            <a class="btn btn-success btn-block" href="javascript:document.datosformc.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_InfBtnAgregaCampo; ?></a>
 					
 
-				<hr><b><?php echo $MULTILANG_InfCamposDef; ?></b>
-				<table width="100%" border="0" cellspacing="2" align="CENTER"  class="TextosVentana">
+				<hr><h4><?php echo $MULTILANG_InfCamposDef; ?>:</h4>
+				<table class="table table-condensed btn-xs table-unbordered table-hover">
 					<tr>
-						<td bgcolor="#D6D6D6"><b><?php echo $MULTILANG_Campo; ?></b></td>
-						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_InfAlias; ?></b></td>
+						<td><b><?php echo $MULTILANG_Campo; ?></b></td>
+						<td><b><?php echo $MULTILANG_InfAlias; ?></b></td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -744,7 +757,7 @@ if ($accion=="editar_informe")
 														<input type="hidden" name="accion" value="eliminar_informe_campo">
 														<input type="hidden" name="campo" value="'.$registro["id"].'">
 														<input type="hidden" name="informe" value="'.$informe.'">
-														<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_InfAdvBorrado.'\',dfc'.$registro["id"].');">
+                                                        <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvBorrado.'\',dfc'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 												</form>
 										</td>
 									</tr>';
@@ -752,25 +765,29 @@ if ($accion=="editar_informe")
 						echo '</table>';
 				?>
 
-			<?php
-				abrir_barra_estado();
-					echo '<input type="Button"  class="BotonesEstadoCuidado" value="'.$MULTILANG_Cerrar.'" onClick="OcultarPopUp(\'FormularioCampos\')">';
-				cerrar_barra_estado();
-			cerrar_ventana();
-			?>
-		<!-- FIN DE MARCOS POPUP -->
-		</div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
-		<!-- INICIO DE MARCOS POPUP -->
-		<div id='FormularioCondiciones' class="FormularioPopUps">
-				<?php
-				abrir_ventana($MULTILANG_InfAddCondicion, 'panel-primary'); 
-				?>
+            <!-- Modal Condiciones del informe -->
+            <div class="modal fade" id="myModalCondicionesInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_InfAddCondicion; ?></h4>
+                  </div>
+                  <div class="modal-body mdl-primary">
+                      
+
 				<form name="datosformco" id="datosformco" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="Hidden" name="accion" value="guardar_informe_condicion">
 					<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
-					<div align=center>
 
 					<table class="TextosVentana" width="100%">
 						<tr>
@@ -906,21 +923,25 @@ if ($accion=="editar_informe")
 						echo '</table>';
 				?>
 
-			<?php
-				abrir_barra_estado();
-					echo '<input type="Button"  class="BotonesEstadoCuidado" value="'.$MULTILANG_Cerrar.'" onClick="OcultarPopUp(\'FormularioCondiciones\')">';
-				cerrar_barra_estado();
-			cerrar_ventana();
-			?>
-		<!-- FIN DE MARCOS POPUP -->
-		</div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
-		<!-- INICIO DE MARCOS POPUP -->
-		<div id='FormularioGraficos' class="FormularioPopUps">
-				<?php
-				abrir_ventana($MULTILANG_InfTitGrafico, 'panel-primary'); 
-				?>
+            <!-- Modal Graficos del informe -->
+            <div class="modal fade" id="myModalGraficosInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_InfTitGrafico; ?></h4>
+                  </div>
+                  <div class="modal-body mdl-primary">
+
 				<form name="datosformcograf" id="datosformcograf" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="Hidden" name="accion" value="actualizar_grafico_informe">
 					<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
@@ -1018,20 +1039,27 @@ if ($accion=="editar_informe")
 				<input type="Button"  class="Botones" value="<?php echo $MULTILANG_InfActGraf; ?> >>>" onClick="document.datosformcograf.submit()">
 				<br><br><br>
 				</center>
-			<?php
-				abrir_barra_estado();
-					echo '<input type="Button"  class="BotonesEstadoCuidado" value="'.$MULTILANG_Cerrar.'" onClick="OcultarPopUp(\'FormularioGraficos\')">';
-				cerrar_barra_estado();
-			cerrar_ventana();
-			?>
-		<!-- FIN DE MARCOS POPUP -->
-		</div>
 
 
-		<!-- INICIO DE MARCOS POPUP -->
-		<div id='FormularioAgrupacion' class="FormularioPopUps">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Modal Agrupacion y ordenamiento del informe -->
+            <div class="modal fade" id="myModalAgrupacionInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_InfAgrupa; ?></h4>
+                  </div>
+                  <div class="modal-body mdl-primary">
 				<?php
-				abrir_ventana($MULTILANG_InfAgrupa, 'panel-primary'); 
 				$consulta_agrupacion=ejecutar_sql("SELECT ordenamiento,agrupamiento FROM ".$TablasCore."informe WHERE id=? ","$informe");
 				$registro_agrupacion = $consulta_agrupacion->fetch();
 				?>
@@ -1077,25 +1105,29 @@ if ($accion=="editar_informe")
 				<input type="Button"  class="Botones" value="<?php echo $MULTILANG_InfActCriterios; ?> >>>" onClick="document.datosformcogrup.submit()">
 				<br><br><br>
 				</center>
-			<?php
-				abrir_barra_estado();
-					echo '<input type="Button"  class="BotonesEstadoCuidado" value="'.$MULTILANG_Cerrar.'" onClick="OcultarPopUp(\'FormularioAgrupacion\')">';
-				cerrar_barra_estado();
-			cerrar_ventana();
-			?>
-		<!-- FIN DE MARCOS POPUP -->
-		</div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
-		<!-- INICIO DE MARCOS POPUP -->
-		<div id='FormularioBotones' class="FormularioPopUps">
-			<?php
-			abrir_ventana($MULTILANG_InfTitBotones, 'panel-primary');
-			?>
+            <!-- Modal Agregar acciones del informe -->
+            <div class="modal fade" id="myModalAgregaAccionesInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_InfTitBotones; ?></h4>
+                  </div>
+                  <div class="modal-body mdl-primary">
+
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="accion" value="guardar_accion_informe">
 				<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
-				<div align=center>
 							
 					<table class="TextosVentana">
 						<tr>
@@ -1203,21 +1235,28 @@ if ($accion=="editar_informe")
 						</tr>
 					</table>
 				</br>
-			<?php
-				abrir_barra_estado();
-					echo '<input type="Button"  class="BotonesEstadoCuidado" value="'.$MULTILANG_Cerrar.'" onClick="OcultarPopUp(\'FormularioBotones\')">';
-				cerrar_barra_estado();
-				cerrar_ventana();		// Cierra adicion de botones
-			?>
-		<!-- FIN DE MARCOS POPUP -->
-		</div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
-		<!-- INICIO DE MARCOS POPUP -->
-		<div id='FormularioAcciones' class="FormularioPopUps">
-			<?php
-				abrir_ventana($MULTILANG_FrmTitComandos, 'panel-primary');
-			?>
+
+
+            <!-- Modal Agregar acciones del informe -->
+            <div class="modal fade" id="myModalEditaAccionesInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_FrmTitComandos; ?></h4>
+                  </div>
+                  <div class="modal-body mdl-primary">
+
 					<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
 						<tr>
 							<td bgcolor="#D6D6D6"><b><?php echo $MULTILANG_Etiqueta; ?></b></td>
@@ -1312,16 +1351,15 @@ if ($accion=="editar_informe")
 					}
 				echo '</table>';
 			?>
-				
-			</div>
-			<?php
-				abrir_barra_estado();
-					echo '<input type="Button"  class="BotonesEstadoCuidado" value="'.$MULTILANG_Cerrar.'" onClick="OcultarPopUp(\'FormularioAcciones\')">';
-				cerrar_barra_estado();
-				cerrar_ventana();
-			?>
-		<!-- FIN DE MARCOS POPUP -->
-		</div>
+
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
 		<?php
@@ -1335,22 +1373,23 @@ if ($accion=="editar_informe")
 			if (@$popup_activo=="FormularioAcciones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioAcciones"); </script>';
 		?>
 
-		<table><tr><td valign=top>
+<div class="row">
+  <div class="col-md-4">
 			<?php 
 				abrir_ventana($MULTILANG_BarraHtas, 'panel-primary'); 
 			?>
 				<div align=center>
 				<?php echo $MULTILANG_InfTablasOrigen; ?><br>
-				<a href='javascript:AbrirPopUp("FormularioTablas");' title="<?php echo $MULTILANG_InfAgregaTabla; ?>" name=" "><i class="fa fa-database fa-3x"></i></a>
+				<a data-toggle="modal" href='#myModalTablaInforme' title="<?php echo $MULTILANG_InfAgregaTabla; ?>" name=" "><i class="fa fa-database fa-3x"></i></a>
 				<hr>
 				<?php echo $MULTILANG_InfCamposOrigen; ?><br>
-				<a href='javascript:AbrirPopUp("FormularioCampos");' title="<?php echo $MULTILANG_InfAgregaCampo; ?>" name=" "><i class="fa fa-th-list fa-3x"></i></a>
+				<a data-toggle="modal" href='#myModalCamposInforme' title="<?php echo $MULTILANG_InfAgregaCampo; ?>" name=" "><i class="fa fa-th-list fa-3x"></i></a>
 				<hr>
 				<?php echo $MULTILANG_InfCondiciones; ?><br>
-				<a href='javascript:AbrirPopUp("FormularioCondiciones");' title="<?php echo $MULTILANG_InfFiltrar; ?>"><i class="fa fa-filter fa-3x"></i></a>
+				<a data-toggle="modal" href='#myModalCondicionesInforme' title="<?php echo $MULTILANG_InfFiltrar; ?>"><i class="fa fa-filter fa-3x"></i></a>
 				<hr>
 				<?php echo $MULTILANG_InfAgrupa; ?><br>
-				<a href='javascript:AbrirPopUp("FormularioAgrupacion");' title="<?php echo $MULTILANG_InfCampoAgrupa; ?>"><i class="fa fa-plus fa-3x"></i> <i class="fa fa-sort-alpha-asc fa-3x"></i></a>
+				<a data-toggle="modal" href='#myModalAgrupacionInforme' title="<?php echo $MULTILANG_InfCampoAgrupa; ?>"><i class="fa fa-plus fa-3x fa-fw"></i><i class="fa fa-sort-alpha-asc fa-3x fa-fw"></i></a>
 
 				<?php
 					// Si se trata de un informe con grafico como resultado agrega el boton de graficos
@@ -1359,7 +1398,7 @@ if ($accion=="editar_informe")
 				?>
 					<hr>
 					<?php echo $MULTILANG_InfPropGraf; ?><br>
-					<a href='javascript:AbrirPopUp("FormularioGraficos");' title="<?php echo $MULTILANG_InfDesGraf; ?>"><img border='0' src='img/icono_grafico.png'/></a>
+					<a data-toggle="modal" href='#myModalGraficosInforme' title="<?php echo $MULTILANG_InfDesGraf; ?>"><i class="fa fa-pie-chart fa-3x"></i></a>
 				<?php
 						}// Fin si es grafico
 				?>
@@ -1371,117 +1410,96 @@ if ($accion=="editar_informe")
 				?>
 					<hr>
 					Acciones para cada registro<br>
-					<a href='javascript:AbrirPopUp("FormularioBotones");' title="<?php echo $MULTILANG_InfDesAccion; ?>"><i class="fa fa-bolt fa-3x"></i></a>
-					&nbsp;&nbsp;
-					<a href='javascript:AbrirPopUp("FormularioAcciones");' title="<?php echo $MULTILANG_FrmDesAcciones; ?>"><i class="fa fa-pencil-square-o fa-3x"></i></a>
+					<a data-toggle="modal" href='#myModalAgregaAccionesInforme' title="<?php echo $MULTILANG_InfDesAccion; ?>"><i class="fa fa-bolt fa-3x fa-fw icon-red"></i></a>
+					<a data-toggle="modal" href='#myModalEditaAccionesInforme' title="<?php echo $MULTILANG_FrmDesAcciones; ?>"><i class="fa fa-pencil-square-o fa-3x fa-fw"></i></a>
 				<?php
 						}// Fin si es grafico
 				?>
 
-				<hr>
+				<br><br>
 				<form action="<?php echo $ArchivoCORE; ?>" method="POST" name="cancelar"><input type="Hidden" name="accion" value="administrar_informes"></form>
-				<input type="Button" onclick="document.cancelar.submit()" value="<?php echo $MULTILANG_InfVolver; ?>" class="Botones">
+                <a class="btn btn-warning btn-block" href="javascript:document.cancelar.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_InfVolver; ?></a>
+
 				</div><br>
 			<?php
 				cerrar_ventana();
 			?>
 			
-		<?php
-		echo '</td><td valign=top align=center>';  // Inicia segunda columna del diseñador
-		?>
+
+  </div>    
+  <div class="col-md-8">
+
 
 
 			<?php abrir_ventana($MULTILANG_InfParam, 'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="actualizar_informe">
 			<input type="Hidden" name="nivel_usuario" value="-1">
-
 			<input type="Hidden" name="id" value="<?php echo $registro_informe['id']; ?>">
 
-				<table class="TextosVentana">
-					<tr>
-						<td align="right"><?php echo $MULTILANG_InfTitulo; ?>:</td>
-						<td><input type="text" name="titulo" value="<?php echo $registro_informe['titulo']; ?>" size="20" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesTitulo; ?>"><i class="fa fa-question-circle"></i></a>
-						</td>
-					</tr>
-					<tr>
-						<td align="right"><?php echo $MULTILANG_InfDescripcion; ?></td>
-						<td><input type="text" name="descripcion" size="20" value="<?php echo $registro_informe['descripcion']; ?>" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesDescrip; ?>"><i class="fa fa-question-circle"></i></a>	</td>
-					</tr>
-					<tr>
-						<td align="right"><?php echo $MULTILANG_InfCategoria; ?></td>
-						<td><input type="text" name="categoria" value="<?php echo $registro_informe['categoria']; ?>" size="20" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesCateg; ?>"><i class="fa fa-question-circle"></i></a>
-						</td>
-					</tr>
-					<!--
-					<tr>
-						<td align="RIGHT" valign="TOP"><strong><?php echo $MULTILANG_InfNivelUsuario; ?></strong></td>
-						<td>
-							<select  name="nivel_usuario" id="nivel_usuario" class="Combos">
-								<option value="-1" <?php if (@$registro_informe["nivel_usuario"]=="-1") echo 'selected'; ?> ><?php echo $MULTILANG_InfTodoUsuario; ?></option>
-								<option value="1"  <?php if (@$registro_informe["nivel_usuario"]=="1") echo 'selected'; ?> >&#9733;</option>
-								<option value="2"  <?php if (@$registro_informe["nivel_usuario"]=="2") echo 'selected'; ?> >&#9733;&#9733;</option>
-								<option value="3"  <?php if (@$registro_informe["nivel_usuario"]=="3") echo 'selected'; ?> >&#9733;&#9733;&#9733;</option>
-								<option value="4"  <?php if (@$registro_informe["nivel_usuario"]=="4") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;</option>
-								<option value="5"  <?php if (@$registro_informe["nivel_usuario"]=="5") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
-							</select>
-							<a href="#" title="<?php echo $MULTILANG_InfTitNivel; ?>" name="<?php echo $MULTILANG_InfDesNivel; ?>"><i class="fa fa-question-circle"></i></a>
-						</td>
-					</tr>
-					-->
-					<tr>
-						<td align="right"><?php echo $MULTILANG_FrmImagen; ?></td>
-						<td>
-							<input type="color" name="color_fondo" size="10" value="<?php if ($registro_informe["color_fondo"]!="") echo $registro_informe["color_fondo"]; else echo '#f2f2f2'; ?>" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><i class="fa fa-question-circle"></i></a>
-						</td>
-					</tr>
-					<tr>
-						<td align="right"><?php echo $MULTILANG_FrmAncho; ?>:</td>
-						<td><input type="text" name="ancho"  value="<?php echo $registro_informe['ancho']; ?>" size="4" class="CampoTexto"> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)
-							<a href="#" title="<?php echo $MULTILANG_InfTitAncho; ?>" name="<?php echo $MULTILANG_InfDesAncho; ?>"><i class="fa fa-question-circle"></i></a>
-						</td>
-					</tr>
-					<tr>
-						<td align="right"><?php echo $MULTILANG_InfAlto; ?>:</td>
-						<td><input type="text" name="alto"  value="<?php echo $registro_informe['alto']; ?>" size="4" class="CampoTexto">  (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)
-							<a href="#" title="<?php echo $MULTILANG_InfTitAlto; ?>" name="<?php echo $MULTILANG_InfDesAlto; ?>"><i class="fa fa-question-circle"></i></a>
-						</td>
-					</tr>
-					<tr>
-						<td align="RIGHT" valign="TOP"><strong><?php echo $MULTILANG_InfFormato; ?></strong></td>
-						<td>
-							<select  name="formato_final" id="formato_final" class="Combos">
-								<option value="T"  <?php if ($registro_informe["formato_final"]=="T") echo 'selected'; ?> ><?php echo $MULTILANG_TablaDatos; ?></option>
-								<option value="G"  <?php if ($registro_informe["formato_final"]=="G") echo 'selected'; ?> ><?php echo $MULTILANG_Grafico; ?></option>
-							</select>
-							<a href="#" title="<?php echo $MULTILANG_InfTitFormato; ?>" name="<?php echo $MULTILANG_InfDesFormato; ?>"><i class="fa fa-question-circle"></i></a>
-						</td>
-					</tr>
-					<tr>
-						<td align="RIGHT" valign="TOP"><?php echo $MULTILANG_InfGeneraPDF; ?></td>
-						<td>
-							<select  name="genera_pdf" id="genera_pdf" class="Combos">
-								<option value="S" <?php if ($registro_informe["genera_pdf"]=="S") echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
-								<option value="N" <?php if ($registro_informe["genera_pdf"]=="N") echo 'selected'; ?> ><?php echo $MULTILANG_No; ?></option>
-							</select>
-							<a href="#" title="<?php echo $MULTILANG_InfGeneraPDFInfoTit; ?>" name="<?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							</form>
-						</td>
-						<td>
-							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_InfActualizar; ?>" onClick="document.datos.submit()">
-						</td>
-					</tr>
-				</table>
+            <div class="form-group input-group">
+                <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> </span>
+                <input name="titulo" value="<?php echo $registro_informe['titulo']; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfTitulo; ?>">
+                <span class="input-group-addon">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesTitulo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                </span>
+            </div>
+
+            <div class="form-group input-group">
+                <input name="descripcion" type="text" value="<?php echo $registro_informe['descripcion']; ?>" class="form-control" placeholder="<?php echo $MULTILANG_InfDescripcion; ?>">
+                <span class="input-group-addon">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesDescrip; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                </span>
+            </div>
+
+            <div class="form-group input-group">
+                <input name="categoria" type="text" value="<?php echo $registro_informe['categoria']; ?>" class="form-control" placeholder="<?php echo $MULTILANG_InfCategoria; ?>">
+                <span class="input-group-addon">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesCateg; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                </span>
+            </div>
+
+            <div class="form-group input-group">
+                <input name="ancho" type="text" value="<?php echo $registro_informe['ancho']; ?>" class="form-control" placeholder="<?php echo $MULTILANG_FrmAncho; ?>">
+                <span class="input-group-addon">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfTitAncho; ?>: <?php echo $MULTILANG_InfDesAncho; ?> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)"><i class="fa fa-question-circle fa-fw "></i></a>
+                </span>
+            </div>
+
+            <div class="form-group input-group">
+                <input name="alto" type="text" value="<?php echo $registro_informe['alto']; ?>" class="form-control" placeholder="<?php echo $MULTILANG_InfAlto; ?>">
+                <span class="input-group-addon">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfTitAlto; ?>: <?php echo $MULTILANG_InfDesAlto; ?> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)"><i class="fa fa-question-circle fa-fw "></i></a>
+                </span>
+            </div>
+
+            <label for="formato_final"><?php echo $MULTILANG_InfFormato; ?>:</label>
+            <div class="form-group input-group">
+                <select id="formato_final" name="formato_final" class="form-control" >
+                    <option value="T"  <?php if ($registro_informe["formato_final"]=="T") echo 'selected'; ?> ><?php echo $MULTILANG_TablaDatos; ?></option>
+                    <option value="G"  <?php if ($registro_informe["formato_final"]=="G") echo 'selected'; ?> ><?php echo $MULTILANG_Grafico; ?></option>
+                </select>
+                <span class="input-group-addon">
+                    <a href="#" title="<?php echo $MULTILANG_InfTitFormato; ?>: <?php echo $MULTILANG_InfDesFormato; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                </span>
+            </div>
+
+            <label for="genera_pdf"><?php echo $MULTILANG_InfGeneraPDF; ?>:</label>
+            <div class="form-group input-group">
+                <select id="genera_pdf" name="genera_pdf" class="form-control" >
+                    <option value="S" <?php if ($registro_informe["genera_pdf"]=="S") echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
+                    <option value="N" <?php if ($registro_informe["genera_pdf"]=="N") echo 'selected'; ?> ><?php echo $MULTILANG_No; ?></option>
+                </select>
+                <span class="input-group-addon">
+                    <a href="#" title="<?php echo $MULTILANG_InfGeneraPDFInfoTit; ?>: <?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><i class="fa fa-exclamation-triangle icon-orange fa-fw"></i></a>
+                </span>
+            </div>
+
+            </form>
+            <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa  fa-floppy-o"></i> <?php echo $MULTILANG_InfActualizar; ?></a>
+
 			<?php
 				cerrar_ventana();
 			?>
@@ -1502,7 +1520,7 @@ if ($accion=="editar_informe")
 						</td>
 						<td align=center>
 							<?php echo $MULTILANG_InfHlpCarga; ?>: <br>
-							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_InfCargaPrev; ?>" onClick="document.datosprevios.submit()">
+                            <a class="btn btn-info btn-block" href="javascript:document.datosprevios.submit();"><i class="fa fa-print"></i> <?php echo $MULTILANG_InfCargaPrev; ?></a>
 						</td>
 					</tr>
 				</table>
@@ -1511,7 +1529,11 @@ if ($accion=="editar_informe")
 			?>
 
 	<?php
-		echo '</td></tr></table>'; // Cierra la tabla de dos columnas
+		echo '
+  </div>
+</div>        
+        
+        ';
 	}
 
 
@@ -1579,7 +1601,7 @@ if ($accion=="guardar_informe")
 		if ($categoria=="") $mensaje_error.=$MULTILANG_InfErrInforme2."<br>";
 		if ($mensaje_error=="")
 			{
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,'|!|!|!|',?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$color_fondo");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|',?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf");
 				$id=$ConexionPDO->lastInsertId();
 				auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -1620,116 +1642,105 @@ if ($accion=="administrar_informes")
 		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/M4kYe9nTeTA\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a>";
 		 ?>
 
-		<table class="TextosVentana"><tr><td valign=top>
+<div class="row">
+  <div class="col-md-4">
+
 			<?php abrir_ventana($MULTILANG_InfTituloAgr, 'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="accion" value="guardar_informe">
 			<input type="Hidden" name="nivel_usuario" value="-1">
-			<div align=center>
 
-			<br><?php echo $MULTILANG_InfDetalles; ?>:
-				<table class="TextosVentana">
-					<tr>
-						<td align="right"><?php echo $MULTILANG_InfTitulo; ?>:</td>
-						<td><input type="text" name="titulo" size="20" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesTitulo; ?>"><i class="fa fa-question-circle"></i></a>
-						</td>
-					</tr>
-					<tr>
-						<td align="right"><?php echo $MULTILANG_InfDescripcion; ?></td>
-						<td><input type="text" name="descripcion" size="20" class="CampoTexto">
-						<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesDescrip; ?>"><i class="fa fa-question-circle"></i></a>
-						</td>
-					</tr>
-					<tr>
-						<td align="right"><?php echo $MULTILANG_InfCategoria; ?></td>
-						<td><input type="text" name="categoria" size="20" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_InfDesCateg; ?>"><i class="fa fa-question-circle"></i></a>
-						</td>
-					</tr>
-					<!--
-					<tr>
-						<td align="RIGHT" valign="TOP"><strong><?php echo $MULTILANG_InfNivelUsuario; ?></strong></td>
-						<td>
-							<select  name="nivel_usuario" id="nivel_usuario" class="Combos">
-								<option value="-1" <?php if (@$registro["nivel_usuario"]=="-1") echo 'selected'; ?> ><?php echo $MULTILANG_InfTodoUsuario; ?></option>
-								<option value="1"  <?php if (@$registro["nivel_usuario"]=="1") echo 'selected'; ?> >&#9733;</option>
-								<option value="2"  <?php if (@$registro["nivel_usuario"]=="2") echo 'selected'; ?> >&#9733;&#9733;</option>
-								<option value="3"  <?php if (@$registro["nivel_usuario"]=="3") echo 'selected'; ?> >&#9733;&#9733;&#9733;</option>
-								<option value="4"  <?php if (@$registro["nivel_usuario"]=="4") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;</option>
-								<option value="5"  <?php if (@$registro["nivel_usuario"]=="5") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
-							</select>
-							<a href="#" title="<?php echo $MULTILANG_InfTitNivel; ?>" name="<?php echo $MULTILANG_InfDesNivel; ?>"><i class="fa fa-question-circle"></i></a>
-						</td>
-					</tr>
-					-->
-					<tr>
-						<td align="right"><?php echo $MULTILANG_FrmImagen; ?></td>
-						<td>
-							<input type="color" name="color_fondo" size="10" value="#f2f2f2" class="CampoTexto">
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_FrmImagenDes; ?>"><i class="fa fa-question-circle"></i></a>
-						</td>
-					</tr>
-					<tr>
-						<td align="right"><?php echo $MULTILANG_FrmAncho; ?>:</td>
-						<td><input type="text" name="ancho" size="4" class="CampoTexto">  (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)
-							<a href="#" title="<?php echo $MULTILANG_InfTitAncho; ?>" name="<?php echo $MULTILANG_InfDesAncho; ?>"><i class="fa fa-question-circle"></i></a>
-						</td>
-					</tr>
-					<tr>
-						<td align="right"><?php echo $MULTILANG_InfAlto; ?>:</td>
-						<td><input type="text" name="alto" size="4" class="CampoTexto">  (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)
-							<a href="#" title="<?php echo $MULTILANG_InfTitAlto; ?>" name="<?php echo $MULTILANG_InfDesAlto; ?>"><i class="fa fa-question-circle"></i></a>
-						</td>
-					</tr>
-					<tr>
-						<td align="RIGHT" valign="TOP"><strong><?php echo $MULTILANG_InfFormato; ?></strong></td>
-						<td>
-							<select  name="formato_final" id="formato_final" class="Combos">
-								<option value="T"><?php echo $MULTILANG_TablaDatos; ?></option>
-								<option value="G"><?php echo $MULTILANG_Grafico; ?></option>
-							</select>
-							<a href="#" title="<?php echo $MULTILANG_InfTitFormato; ?>" name="<?php echo $MULTILANG_InfDesFormato; ?>"><i class="fa fa-question-circle"></i></a>
-						</td>
-					</tr>
-					<tr>
-						<td align="RIGHT" valign="TOP"><?php echo $MULTILANG_InfGeneraPDF; ?></td>
-						<td>
-							<select  name="genera_pdf" id="genera_pdf" class="Combos">
-								<option value="S"><?php echo $MULTILANG_Si; ?></option>
-								<option value="N" selected><?php echo $MULTILANG_No; ?></option>
-							</select>
-							<a href="#" title="<?php echo $MULTILANG_InfGeneraPDFInfoTit; ?>" name="<?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							</form>
-						</td>
-						<td>
-							<input type="Button"  class="Botones" value="<?php echo $MULTILANG_FrmCreaDisena; ?>" onClick="document.datos.submit()">
-							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="<?php echo $MULTILANG_IrEscritorio; ?>" class="Botones">
-						</td>
-					</tr>
-				</table>
+			<h4><?php echo $MULTILANG_InfDetalles; ?>:</h4>
 
+            <div class="form-group input-group">
+                <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> </span>
+                <input name="titulo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfTitulo; ?>">
+                <span class="input-group-addon">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesTitulo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                </span>
+            </div>
+
+            <div class="form-group input-group">
+                <input name="descripcion" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfDescripcion; ?>">
+                <span class="input-group-addon">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesDescrip; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                </span>
+            </div>
+
+            <div class="form-group input-group">
+                <input name="categoria" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfCategoria; ?>">
+                <span class="input-group-addon">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesCateg; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                </span>
+            </div>
+
+            <div class="form-group input-group">
+                <input name="ancho" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmAncho; ?>">
+                <span class="input-group-addon">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfTitAncho; ?>: <?php echo $MULTILANG_InfDesAncho; ?> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)"><i class="fa fa-question-circle fa-fw "></i></a>
+                </span>
+            </div>
+
+            <div class="form-group input-group">
+                <input name="alto" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfAlto; ?>">
+                <span class="input-group-addon">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfTitAlto; ?>: <?php echo $MULTILANG_InfDesAlto; ?> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)"><i class="fa fa-question-circle fa-fw "></i></a>
+                </span>
+            </div>
+
+            <label for="formato_final"><?php echo $MULTILANG_InfFormato; ?>:</label>
+            <div class="form-group input-group">
+                <select id="formato_final" name="formato_final" class="form-control" >
+                    <option value="T"><?php echo $MULTILANG_TablaDatos; ?></option>
+                    <option value="G"><?php echo $MULTILANG_Grafico; ?></option>
+                </select>
+                <span class="input-group-addon">
+                    <a href="#" title="<?php echo $MULTILANG_InfTitFormato; ?>: <?php echo $MULTILANG_InfDesFormato; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                </span>
+            </div>
+
+            <label for="genera_pdf"><?php echo $MULTILANG_InfGeneraPDF; ?>:</label>
+            <div class="form-group input-group">
+                <select id="genera_pdf" name="genera_pdf" class="form-control" >
+                    <option value="S"><?php echo $MULTILANG_Si; ?></option>
+                    <option value="N" selected><?php echo $MULTILANG_No; ?></option>
+                </select>
+                <span class="input-group-addon">
+                    <a href="#" title="<?php echo $MULTILANG_InfGeneraPDFInfoTit; ?>: <?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><i class="fa fa-exclamation-triangle icon-orange fa-fw"></i></a>
+                </span>
+            </div>
+
+            </form>
+
+            <a class="btn btn-success btn-xs btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o texto-azul"></i> <?php echo $MULTILANG_FrmCreaDisena; ?></a>
+            <a class="btn btn-default btn-xs btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 
 		<?php
 		cerrar_ventana();	
-		
-		echo '</td><td valign=top>';  // Inicia segunda columna del diseñador
+
+?>
+
+  </div>    
+  <div class="col-md-8">
+
+
+<?php
+
 		abrir_ventana($MULTILANG_InfDefinidos, 'panel-primary');
 		?>
-				<table width="100%" border="0" cellspacing="5" align="CENTER"  class="TextosVentana">
-					<tr>
-						<td bgcolor="#d6d6d6"><b>Id</b></td>
-						<td bgcolor="#D6D6D6"><b><?php echo $MULTILANG_Titulo; ?></b></td>
-						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_InfCategoria; ?></b></td>
+				<table class="table table-condensed btn-xs table-unbordered ">
+					<thead>
+                    <tr>
+						<td><b>Id</b></td>
+						<td><b><?php echo $MULTILANG_Titulo; ?></b></td>
+						<td><b><?php echo $MULTILANG_InfCategoria; ?></b></td>
 						<td></td>
 						<td></td>
 					</tr>
+                    </thead>
+                    <tbody>
 		 <?php
 
 				$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe ORDER BY titulo");
@@ -1743,26 +1754,28 @@ if ($accion=="administrar_informes")
 										<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
 												<input type="hidden" name="accion" value="eliminar_informe">
 												<input type="hidden" name="informe" value="'.$registro["id"].'">
-												<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_InfAdvEliminar.'\',df'.$registro["id"].');">
+                                                <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvEliminar.'\',df'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
 												<input type="hidden" name="accion" value="editar_informe">
 												<input type="hidden" name="informe" value="'.$registro["id"].'">
-												<input type="Submit" value="'.$MULTILANG_InfcamTabCond.'"  class="Botones">
+                                                <button type="submit" class="btn btn-default btn-xs"><i class="fa fa-bars"></i> '.$MULTILANG_InfcamTabCond.'</button>
 										</form>
 								</td>
 							</tr>';
 					}
-				echo '</table>';
+				echo '</tbody>
+                </table>';
 		?>
 
-			</div>
 <?php
 			cerrar_ventana();
-		echo '</td></tr></table>'; // Cierra la tabla de dos columnas
-					
+echo '
+  </div>
+</div>
+';
 	}
 
 

@@ -160,7 +160,6 @@ CREATE TABLE core_informe (
   formato_final char(1), 
   formato_grafico text, 
   genera_pdf char(1), 
-  color_fondo varchar(20) default '',
   PRIMARY KEY  (id)
 );
 
