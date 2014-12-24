@@ -2430,8 +2430,8 @@ function FrmAutoRun()
                     <i class="fa fa-file-code-o"></i> <?php echo $MULTILANG_FrmAdvScriptForm; ?>
                 </div>
             </a>
-            <a class="btn btn-success btn-xs btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o texto-azul"></i> <?php echo $MULTILANG_FrmCreaDisena; ?></a>
-            <a class="btn btn-default btn-xs btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+            <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCreaDisena; ?></a>
+            <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 
 		<?php
 		cerrar_ventana();	

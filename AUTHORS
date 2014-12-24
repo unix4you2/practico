@@ -94,15 +94,8 @@ Bootstrap
     URL: http://getbootstrap.com/
 	Copyright 2011-2014 Twitter, Inc.
 
-
-Tango Desktop Project:
-	Location: all files under img/tango_*:
-	License: The Tango base icon theme is released to the Public Domain. 
-			 The palette is in public domain. Developers, feel free to ship it along with your application.
-	http://tango.freedesktop.org/
-
 Media files and CSS files under:
-		img/* (except those named tango_*)
+		img/*
 		skin/*
 		ins/img/*
 		ins/skin/*

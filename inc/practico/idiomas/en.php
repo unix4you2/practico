@@ -731,8 +731,8 @@
 	$MULTILANG_UsrAudMonit='Monitoring mode';
 	$MULTILANG_UsrAudHisto='History of user operations (from most recent to oldest)';
 	$MULTILANG_UsrLista='List of users in the system';
-	$MULTILANG_UsrLisNombre='See only users whose <strong> name </strong> contains';
-	$MULTILANG_UsrLisLogin='See only users whose <strong> login </strong> contains';
+	$MULTILANG_UsrLisNombre='See only users whose NAME contains';
+	$MULTILANG_UsrLisLogin='See only users whose LOGIN contains';
 	$MULTILANG_UsrFiltro='Due to the number of registered users you should filter the output.<br>
 				Enter the desired filter type at the top and click the corresponding button.';
 	$MULTILANG_UsrAcceso='Last access';

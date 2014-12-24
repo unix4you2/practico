@@ -1308,44 +1308,66 @@ if ($accion=="listar_usuarios")
 				echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/0KzASMtKRcc\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a>";
 
 				abrir_ventana($MULTILANG_UsrLista, 'panel-info');
+                ?>
+                
 
-				echo '<br>
-		<div align="center">
+
+            <form action="<?php echo $ArchivoCORE; ?>" method="POST">
+                <input type="hidden" name="accion" value="listar_usuarios">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-users"></i>
+                    </span>
+                    <input name="nombre_filtro" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrLisNombre; ?>">
+                    <span class="input-group-addon">
+                        <button type="submit" class="btn btn-info btn-xs"><?php echo $MULTILANG_Ejecutar; ?> <i class="fa fa-filter"></i></button>
+                    </span>
+                </div>
+			</form>
+
+            <form action="<?php echo $ArchivoCORE; ?>" method="POST">
+                <input type="hidden" name="accion" value="listar_usuarios">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-users"></i>
+                    </span>
+                    <input name="login_filtro" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrLisLogin; ?>">
+                    <span class="input-group-addon">
+                        <button type="submit" class="btn btn-info btn-xs"><?php echo $MULTILANG_Ejecutar; ?> <i class="fa fa-filter"></i></button>
+                    </span>
+                </div>
+			</form>
+            
+            
+<?php
+				echo '
 			<form name="form_crear_usuario" action="'.$ArchivoCORE.'" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="hidden" name="accion" value="agregar_usuario">
 			</form>
-			<form action="'.$ArchivoCORE.'" method="POST">
-					'.$MULTILANG_UsrLisNombre.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input class="CampoTexto" type="Text" value="'.@$nombre_filtro.'" name="nombre_filtro" size="20">
-				<input type="hidden" name="accion" value="listar_usuarios">
-				<input type="submit" value="'.$MULTILANG_Ejecutar.' >>>" class="Botones">
-			</form>
-			<form action="'.$ArchivoCORE.'" method="POST">
-					'.$MULTILANG_UsrLisLogin.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input class="CampoTexto" type="Text" value="'.@$login_filtro.'" name="login_filtro" size="20">
-				<input type="hidden" name="accion" value="listar_usuarios">
-				<input type="submit" value="'.$MULTILANG_Ejecutar.' >>>" class="Botones">
-			</form>
+
 		';
 
 			if (@$nombre_filtro == "" && @$login_filtro=="")
 			{
-				echo '<br>'.$MULTILANG_UsrFiltro;
+				echo $MULTILANG_UsrFiltro;
 			}
 			else
 			{
 				echo '
-				<table border="0" cellspacing="3" align="CENTER" class="TextosVentana">
-					<tr>
-						<td align="left" bgcolor="#d6d6d6"><b>'.$MULTILANG_UsrLogin.'</b></td>
-						<td align="LEFT" bgcolor="#D6D6D6"><b>'.$MULTILANG_Nombre.'</b></td>
-						<td align="left" bgcolor="#d6d6d6"><b>'.$MULTILANG_UsrAcceso.'</b></td>
-						<td align="left"></td>
-						<td align="left"></td>
-						<td align="left"></td>
-						<td align="left"></td>
-						<td align="left"></td>
-					</tr>
+				<table class="table table-hover table-condensed btn-xs table-unbordered">
+					<thead>
+                        <tr>
+                            <td>'.$MULTILANG_UsrLogin.'</td>
+                            <td>'.$MULTILANG_Nombre.'</td>
+                            <td>'.$MULTILANG_UsrAcceso.'</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    </body>
 					';
 				$resultado=ejecutar_sql("SELECT ".$ListaCamposSinID_usuario." FROM ".$TablasCore."usuario WHERE (login LIKE '%$login_filtro%') AND (nombre LIKE '%$nombre_filtro%' ) AND login<>'admin' ORDER BY login,nombre");
 				$i=0;
@@ -1359,65 +1381,68 @@ if ($accion=="listar_usuarios")
 												<input type="hidden" name="accion" value="cambiar_estado_usuario">
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
 												<input type="hidden" name="estado" value="'.$registro["estado"].'">
-												<input type="Submit" value="';
+                                                <button type="submit" class="btn btn-warning btn-xs">';
 												if ($registro["estado"]==1) echo $MULTILANG_Suspender;
 												else echo $MULTILANG_Habilitar;
-												echo '" class="Botones">
+                                                echo '</button>
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST"  name="f'.$i.'">
 												<input type="hidden" name="accion" value="eliminar_usuario">
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
-												<input type="Button"   onClick="confirmar_evento(\''.$MULTILANG_UsrAdvSupr.'\',f'.$i.');" name="" value="'.$MULTILANG_Eliminar.'" class="BotonesCuidado">
+                                                <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_UsrAdvSupr.'\',f'.$i.');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
 												<input type="hidden" name="accion" value="permisos_usuario">
 												<input type="hidden" name="usuario" value="'.$registro["login"].'">
-												<input type="Submit" value="'.$MULTILANG_UsrAddMenu.'" class="Botones">
+                                                <button type="submit" class="btn btn-info btn-xs">'.$MULTILANG_UsrAddMenu.'</button>
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
 												<input type="hidden" name="accion" value="informes_usuario">
 												<input type="hidden" name="usuario" value="'.$registro["login"].'">
-												<input type="Submit" value="'.$MULTILANG_UsrAddInfo.'" class="Botones">
+                                                <button type="submit" class="btn btn-default btn-xs">'.$MULTILANG_UsrAddInfo.'</button>
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
 												<input type="hidden" name="accion" value="ver_seguimiento_especifico">
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
-												<input type="Submit" value="'.$MULTILANG_UsrAuditoria.'" class="Botones">
+                                                <button type="submit" class="btn btn-default btn-xs">'.$MULTILANG_UsrAuditoria.'</button>
 										</form>
 								</td>
-							<tr>
+							</tr>
+                            <tr>
 								<td colspan=3>
 								</td>
 								<td colspan=5 align=center>
 										<form action="'.$ArchivoCORE.'" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 												<input type="hidden" name="accion" value="resetear_clave">
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
-												<input type="Submit" value="'.$MULTILANG_UsrReset.' -->" class="BotonesCuidado">
-												'.$MULTILANG_UsrNuevoPW.': <input type="text" name="nueva_clave" size=12 value="'.TextoAleatorio(10).'">
+                                                <div class="form-group input-group">
+                                                    <span class="input-group-addon">
+                                                        '.$MULTILANG_UsrNuevoPW.':
+                                                    </span>
+                                                    <input type="text" name="nueva_clave" size=12 class="form-control" value="'.TextoAleatorio(10).'">
+                                                    <span class="input-group-addon">
+                                                        <button type="submit" class="btn btn-success btn-xs">'.$MULTILANG_UsrReset.' <i class="fa fa-refresh"></i></button>
+                                                    </span>
+                                                </div>
 										</form>
 								</td>
-							</tr>
-							<tr>
-								<td colspan=8><hr>
-								</td>
-							</tr>
 							</tr>';
 							$i++;
 					}
-				echo '</table>';
+				echo '</tbody>
+                </table>';
 				
 			} // Fin sino filtro
 
 	echo '
-		</div>
 				<form action="'.$ArchivoCORE.'" method="POST" name="ver_auditoria_general"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="hidden" name="accion" value="ver_seguimiento_general">
 				</form>
@@ -1426,11 +1451,14 @@ if ($accion=="listar_usuarios")
 				</form>
 		';
 				abrir_barra_estado();
-				echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" << '.$MULTILANG_IrEscritorio.' " class="BotonesEstado">';
-				echo '<input type="Button" onclick="document.form_crear_usuario.submit()" value=" '.$MULTILANG_UsrAgregar.' " class="BotonesEstadoCuidado">';
-				echo '<input type="Button" onclick="document.ver_auditoria_general.submit()" value=" '.$MULTILANG_UsrVerAudit.' " class="BotonesEstado">';
-				echo '<input type="Button" onclick="document.ver_auditoria_monitoreo.submit()" value=" '.$MULTILANG_UsrAudMonit.' " class="BotonesEstadoCuidado">';
+                    echo '<div align=center>
+                        <a class="btn btn-default " href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>
+                        <a class="btn btn-success " href="javascript:document.form_crear_usuario.submit();"><i class="fa fa-file-o"></i> '.$MULTILANG_UsrAgregar.'</a>
+                        <a class="btn btn-warning " href="javascript:document.ver_auditoria_general.submit();"><i class="fa fa-file-text"></i> '.$MULTILANG_UsrVerAudit.'</a>
+                        <a class="btn btn-info " href="javascript:document.ver_auditoria_monitoreo.submit();"><i class="fa fa-file-text"></i> '.$MULTILANG_UsrAudMonit.'</a>
+                        </div>';
 				cerrar_barra_estado();
 				cerrar_ventana();
 			 }
+			//$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 		?>

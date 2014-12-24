@@ -728,8 +728,8 @@
 	$MULTILANG_UsrAudMonit='Modo de monitoreo';
 	$MULTILANG_UsrAudHisto='Historial de operaciones del usuario (de la m&aacute;s reciente a la mas antigua)';
 	$MULTILANG_UsrLista='Listado de usuarios en el sistema';
-	$MULTILANG_UsrLisNombre='Ver s&oacute;lo los usuarios cuyo<strong> nombre</strong> contenga';
-	$MULTILANG_UsrLisLogin='Ver s&oacute;lo los usuarios cuyo <strong>login</strong> contenga';
+	$MULTILANG_UsrLisNombre='Ver s&oacute;lo los usuarios cuyo NOMBRE contenga';
+	$MULTILANG_UsrLisLogin='Ver s&oacute;lo los usuarios cuyo LOGIN contenga';
 	$MULTILANG_UsrFiltro='Debido a la cantidad de usuarios registrados usted debe filtrar el resultado.<br>
 				Indique el tipo de filtro deseado en la parte superior y haga clic en el bot&oacute;n correspondiente.';
 	$MULTILANG_UsrAcceso='Ultimo acceso';

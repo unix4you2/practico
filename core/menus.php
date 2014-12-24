@@ -35,6 +35,153 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: selector_iconos_awesome
+	Despliega marco para seleccionar iconos
+
+	Ver tambien:
+
+		<administrar_menu> | <detalles_menu>
+*/
+function selector_iconos_awesome()
+	{
+        global $MULTILANG_MnuSelImagen,$MULTILANG_MnuHlpAwesome,$MULTILANG_Cerrar;
+?>
+
+            <!-- Modal Selector de iconos -->
+            <div class="modal fade" id="myModalSelectorIconos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_MnuSelImagen; ?></h4>
+                  </div>
+                  <div class="modal-body mdl-primary">
+
+
+			<?php
+			//Busca en el directorio de iconos por imagenes listas para ser usadas
+			$columnas=15;
+			$columna_actual=1;
+			$directorio="img/";
+			@$TemasIconos[]=array(Nombre => "Tango Desktop",	Tamano => "32x32",	Prefijo => "tango_");
+			@$TemasIconos[]=array(Nombre => "Developer",		Tamano => "32x32",	Prefijo => "dev_");
+			@$TemasIconos[]=array(Nombre => "Finance",		Tamano => "32x32",	Prefijo => "finance_");
+			@$TemasIconos[]=array(Nombre => "Medical",		Tamano => "32x32",	Prefijo => "medical_");
+			@$TemasIconos[]=array(Nombre => "Moskis",		Tamano => "32x32",	Prefijo => "moskis_");
+			@$TemasIconos[]=array(Nombre => "Social",		Tamano => "32x32",	Prefijo => "social_");
+			@$TemasIconos[]=array(Nombre => "Woo",			Tamano => "32x32",	Prefijo => "woo_");
+			@$TemasIconos[]=array(Nombre => "Once",			Tamano => "32x32",	Prefijo => "once_");
+			@$TemasIconos[]=array(Nombre => "Ginux",			Tamano => "32x32",	Prefijo => "ginux_");
+			
+			
+			echo '<center>'.$MULTILANG_MnuHlpAwesome.'</center><hr><DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 350px">';
+			for ($i=0;$i<count($TemasIconos);$i++)
+				{
+					$columna_actual=1;
+					$dh = opendir($directorio);
+					echo "<font size=3>&nbsp;&nbsp;<b><br><br>".$TemasIconos[$i]["Nombre"]." (".$TemasIconos[$i]["Tamano"]." pixels)<hr></b></font>";
+					echo '<table border=0 cellspacing=4>';
+					while (($file = readdir($dh)) !== false)
+						{
+							$impreso=0;
+							if (($file != ".") && ($file != "..") && (stristr($file,$TemasIconos[$i]["Prefijo"])  ))
+								{
+									if ($columna_actual==1)	echo '<tr>';
+									echo '<td><a href="javascript:document.datos.imagen.value=\''.$file.'\';OcultarPopUp(\'FormularioImagenes\');" title="'.$file.'"><img src='.$directorio.$file.' border=0 width=32 height=32></a></td>';	
+									$impreso=1;
+									if ($impreso) $columna_actual++;
+									if ($columna_actual==$columnas) $columna_actual=1;
+									if ($columna_actual==$columnas)	echo '</tr>';
+								}
+						}
+					echo '</table>';
+				}
+			echo '</DIV>';
+			?>
+            
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+<?php
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: selector_objetos_menu
+	Despliega marco para seleccionar objetos de formulario e informes durante creacion de menues
+
+	Ver tambien:
+
+		<administrar_menu> | <detalles_menu>
+*/
+function selector_objetos_menu()
+    {
+        global $MULTILANG_SeleccioneUno,$MULTILANG_Formularios,$MULTILANG_MnuHlpComandoInf,$MULTILANG_Si,$MULTILANG_No,$MULTILANG_Informes,$MULTILANG_FrmVentana,$MULTILANG_Guardar,$MULTILANG_Cerrar;
+        global $ListaCamposSinID_formulario,$ListaCamposSinID_informe,$TablasCore;
+        global $registro_informes;
+        ?>
+            <!-- Modal Selector de objetos -->
+            <div class="modal fade" id="myModalSelectorObjetos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_SeleccioneUno; ?></h4>
+                  </div>
+                  <div class="modal-body mdl-primary">
+                      
+                    <form name="selector_objetos" method="POST">
+
+                        <label for="objeto_seleccionado"><?php echo $MULTILANG_Formularios; ?> / <?php echo $MULTILANG_Informes; ?>:</label>
+                        <select id="objeto_seleccionado" name="objeto_seleccionado" class="form-control" >
+                            <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                            <optgroup label="<?php echo $MULTILANG_Formularios; ?>">
+                                <?php
+                                    $consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario ORDER BY titulo");
+                                    while($registro_forms = $consulta_forms->fetch())
+                                        echo '<option value="frm:'.$registro_forms["id"].'">(Id.'.$registro_forms["id"].') '.$registro_forms["titulo"].'</option>';
+                                ?>
+                            </optgroup>
+                            <optgroup label="<?php echo $MULTILANG_Informes; ?>">
+                                <?php
+                                    $consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe ORDER BY titulo");
+                                    while($registro_informes = $consulta_informs->fetch())
+                                        echo '<option value="inf:'.$registro_informes["id"].'">(Id.'.$registro_informes["id"].') '.$registro_informes["titulo"].'</option>';
+                                ?>
+                            </optgroup>
+                        </select>
+
+                        <label for="definir_ventana_propia"><?php echo $MULTILANG_FrmVentana; ?></label>
+                        <select id="definir_ventana_propia" name="definir_ventana_propia" class="form-control" >
+                            <option value=":1"><?php echo $MULTILANG_Si; ?></option>
+                            <option value=":0"><?php echo $MULTILANG_No; ?></option>
+                        </select>
+                        <br>
+                        <?php echo $MULTILANG_MnuHlpComandoInf; ?>
+                    </form>
+            
+                  </div>
+                  <div class="modal-footer">
+                    <button onClick="document.datos.comando.value=document.selector_objetos.objeto_seleccionado.options[document.selector_objetos.objeto_seleccionado.selectedIndex].value + document.selector_objetos.definir_ventana_propia.options[document.selector_objetos.definir_ventana_propia.selectedIndex].value;" type="button" class="btn btn-success" data-dismiss="modal"><?php echo $MULTILANG_Guardar; ?></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+<?php        
+    }
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: actualizar_menu
 	Cambia el registro asociado a un menu de la aplicacion
 
@@ -62,7 +209,6 @@ if ($accion=="actualizar_menu")
 	}
 
 
-
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -83,270 +229,151 @@ if ($accion=="actualizar_menu")
 */
 if ($accion=="detalles_menu")
 	{
-		echo '<div align="center">';
 		abrir_ventana($MULTILANG_MnuTitEditar,'panel-danger');
 
 		// Busca detalles del item
 		$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE id=? ","$id");
 		$registro = $resultado->fetch();
-		?>
-
-		<!-- INICIO DE MARCOS POPUP -->
-		<div id='FormularioImagenes' class="FormularioPopUps">
-			<?php
-			abrir_ventana($MULTILANG_MnuSelImagen,'panel-warning');
-
-			//Busca en el directorio de iconos por imagenes listas para ser usadas
-			$columnas=15;
-			$columna_actual=1;
-			$directorio="img/";
-			@$TemasIconos[]=array(Nombre => "Tango Desktop",	Tamano => "32x32",	Prefijo => "tango_");
-			@$TemasIconos[]=array(Nombre => "Developer",		Tamano => "32x32",	Prefijo => "dev_");
-			@$TemasIconos[]=array(Nombre => "Finance",		Tamano => "32x32",	Prefijo => "finance_");
-			@$TemasIconos[]=array(Nombre => "Medical",		Tamano => "32x32",	Prefijo => "medical_");
-			@$TemasIconos[]=array(Nombre => "Moskis",		Tamano => "32x32",	Prefijo => "moskis_");
-			@$TemasIconos[]=array(Nombre => "Social",		Tamano => "32x32",	Prefijo => "social_");
-			@$TemasIconos[]=array(Nombre => "Woo",			Tamano => "32x32",	Prefijo => "woo_");
-			@$TemasIconos[]=array(Nombre => "Once",			Tamano => "48x48",	Prefijo => "once_");
-			@$TemasIconos[]=array(Nombre => "Ginux",			Tamano => "64x64",	Prefijo => "ginux_");
-			echo '<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 350px">';
-			for ($i=0;$i<count($TemasIconos);$i++)
-				{
-					$columna_actual=1;
-					$dh = opendir($directorio);
-					echo "<font size=3>&nbsp;&nbsp;<b><br><br>".$TemasIconos[$i]["Nombre"]." (".$TemasIconos[$i]["Tamano"]." pixels)<hr></b></font>";
-					echo '<table border=0 cellspacing=4>';
-					while (($file = readdir($dh)) !== false)
-						{
-							$impreso=0;
-							if (($file != ".") && ($file != "..") && (stristr($file,$TemasIconos[$i]["Prefijo"])  ))
-								{
-									if ($columna_actual==1)	echo '<tr>';
-									echo '<td><a href="javascript:document.datos.imagen.value=\''.$file.'\';OcultarPopUp(\'FormularioImagenes\');" title="'.$file.'"><img src='.$directorio.$file.' border=0 width=32 height=32></a></td>';	
-									$impreso=1;
-									if ($impreso) $columna_actual++;
-									if ($columna_actual==$columnas) $columna_actual=1;
-									if ($columna_actual==$columnas)	echo '</tr>';
-								}
-						}
-					echo '</table>';
-				}
-			echo '</DIV>';
-
-				abrir_barra_estado();
-					echo '<input type="Button"  class="BotonesEstadoCuidado" value="'.$MULTILANG_Cerrar.'" onClick="OcultarPopUp(\'FormularioImagenes\')">';
-				cerrar_barra_estado();
-				cerrar_ventana();		// Cierra adicion de botones
-			?>
-		</div>
-		<!-- FIN DE MARCOS POPUP -->
-		<div id='FondoPopUps' class="FondoOscuroPopUps"></div>
-
-		<!-- INICIO DE MARCOS POPUP -->
-		<div id='FormularioObjetos' class="FormularioPopUps">
-			<form name="selector_objetos" method="POST">
-			<?php
-			abrir_ventana($MULTILANG_SeleccioneUno.' '.$MULTILANG_MnuObjeto,'panel-primary');
-			?>
-				<br><br>
-				<table class="TextosVentana">
-				<tr>
-					<td align="right"><?php echo $MULTILANG_Formularios; ?> / <?php echo $MULTILANG_Informes; ?>:</td>
-					<td >
-						<select  name="objeto_seleccionado" class="Combos">
-						<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
-						<optgroup label="<?php echo $MULTILANG_Formularios; ?>">
-							<?php
-								$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario ORDER BY titulo");
-								while($registro_forms = $consulta_forms->fetch())
-									echo '<option value="frm:'.$registro_forms["id"].'">(Id.'.$registro_forms["id"].') '.$registro_forms["titulo"].'</option>';
-							?>
-						</optgroup>
-						<optgroup label="<?php echo $MULTILANG_Informes; ?>">
-							<?php
-								$consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe ORDER BY titulo");
-								while($registro_informes = $consulta_informs->fetch())
-									echo '<option value="inf:'.$registro_informes["id"].'">(Id.'.$registro_informes["id"].') '.$registro_informes["titulo"].'</option>';
-							?>
-						</optgroup>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td align="right"><?php echo $MULTILANG_FrmVentana; ?>:</td>
-					<td >
-						<select  name="definir_ventana_propia" class="Combos">
-							<option value=":1"><?php echo $MULTILANG_Si; ?></option>
-							<option value=":0"><?php echo $MULTILANG_No; ?></option>
-						</select>
-					</td>
-				</tr>
-				</table>
-				<?php echo $MULTILANG_MnuHlpComandoInf; ?>
-				<br><br>
-			<?php
-				abrir_barra_estado();
-					echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_Guardar.' " onClick="document.datos.comando.value=document.selector_objetos.objeto_seleccionado.options[document.selector_objetos.objeto_seleccionado.selectedIndex].value + document.selector_objetos.definir_ventana_propia.options[document.selector_objetos.definir_ventana_propia.selectedIndex].value; OcultarPopUp(\'FormularioObjetos\')">';
-					echo '<input type="Button"  class="BotonesEstadoCuidado" value=" '.$MULTILANG_Cancelar.' " onClick="OcultarPopUp(\'FormularioObjetos\')">';
-				cerrar_barra_estado();
-				cerrar_ventana();		// Cierra seleccion de objetos
-			?>
-			</form>
-		</div>
-		<!-- FIN DE MARCOS POPUP -->
+		
+        selector_iconos_awesome();
+        selector_objetos_menu();
+        ?>
 
 
-		<div align="center">
-			
-		<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative;">
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="hidden" name="accion" value="actualizar_menu">
 			<input type="hidden" name="id" value="<?php echo $registro["id"]; ?>">
-			<br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_MnuPropiedad; ?></b></font>
+			<input type="hidden" name="nivel_usuario" value="-1">
+			<h4><b><?php echo $MULTILANG_MnuPropiedad; ?></b></h4>
 
-			<table border="0" cellspacing="10" cellpadding="0" class="TextosVentana"><tr>
-				<td valign="TOP" align=center>
-					[<?php echo $MULTILANG_MnuApariencia; ?>]
-					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" class="TextosVentana">
-						<tr>
-							<td align="RIGHT"><b>ID</b></td><td width="10"></td>
-							<td>
-									<?php echo $registro["id"]; ?>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuTexto; ?></b></td><td width="10"></td>
-							<td><input value="<?php echo $registro["texto"]; ?>" class="CampoTexto" type="text" name="texto" size="40" maxlength="250"></td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_Peso; ?></b></td><td width="10"></td>
-							<td>
-									<select name="peso" class="Combos" >
-											<?php
-													for ($i=1;$i<=100;$i++)
-														{
-															if ($registro["peso"]==$i)
-																echo '<option value="'.$i.'" selected>'.$i.'</option>';
-															else
-																echo '<option value="'.$i.'">'.$i.'</option>';
-														}
-											?>
-									</select>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuArriba; ?></b></td><td width="10"></td>
-							<td>
-									<select  name="posible_arriba" class="Combos" >
-										<option value="0"><?php echo $MULTILANG_No; ?></option>
-										<option value="1" <?php if ($registro["posible_arriba"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
-									</select>
-									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesArriba; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuEscritorio; ?></b></td><td width="10"></td>
-							<td>
-									<select  name="posible_escritorio" class="Combos" >
-										<option value="0"><?php echo $MULTILANG_No; ?></option>
-										<option value="1" <?php if ($registro["posible_escritorio"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
-									</select>
-									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesEscritorio; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuCentro; ?></b></td><td width="10"></td>
-							<td>
-									<select  name="posible_centro" class="Combos" >
-										<option value="0"><?php echo $MULTILANG_No; ?></option>
-										<option value="1" <?php if ($registro["posible_centro"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
-									</select>
-									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesCentro; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuSeccion; ?></b></td><td width="10"></td>
-							<td><input value="<?php echo $registro["seccion"]; ?>" class="CampoTexto" type="text" name="seccion" size="40" maxlength="250" class="texto_01"></td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_Imagen; ?></b></td><td width="10"></td>
-							<td><input value="<?php echo $registro["imagen"]; ?>" class="CampoTexto" type="text" name="imagen" size="34" maxlength="250" class="texto_01">
-							<a href='javascript:AbrirPopUp("FormularioImagenes");' title="<?php echo $MULTILANG_MnuDesImagen; ?>">[...]</a></td>
-						</tr>
-					</table>
-				</td>
-				<td align="CENTER" valign="TOP">
-					[<?php echo $MULTILANG_MnuComandos; ?>]
-					<table border="0" cellspacing="5" cellpadding="0" align="CENTER"  class="TextosVentana" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;" class="link_menu">
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuClic; ?></b></td><td width="10"></td>
-							<td>
-									<select  name="posible_clic" class="Combos" >
-										<option value="0"><?php echo $MULTILANG_No; ?></option>
-										<option value="1" <?php if ($registro["posible_clic"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
-									</select>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuURL; ?></b></td><td width="10"></td>
-							<td><input value="<?php echo $registro["url"]; ?>"  class="CampoTexto" type="text" name="url" size="35" maxlength="250" class="texto_01">
-								<a href="#" title="<?php echo $MULTILANG_MnuTitURL; ?>" name="<?php echo $MULTILANG_MnuDesURL; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuTipo; ?></b></td><td width="10"></td>
-							<td>
-									<select name="tipo_comando" class="Combos" >
-										<option value="Objeto" <?php if ($registro["tipo_comando"]=="Objeto") echo 'selected'; ?> >1. <?php echo $MULTILANG_MnuObjeto; ?></option>
-										<option value="Interno" <?php if ($registro["tipo_comando"]=="Interno") echo 'selected'; ?> >2. <?php echo $MULTILANG_MnuInterno; ?></option>
-										<option value="Personal" <?php if ($registro["tipo_comando"]=="Personal") echo 'selected'; ?> >3. <?php echo $MULTILANG_MnuPersonal; ?></option>
-									</select>
-									<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuAccion; ?></b></td><td width="10"></td>
-							<td><input value="<?php echo $registro["comando"]; ?>"  class="CampoTexto" type="text" name="comando" size="30" maxlength="250" class="texto_01">
-								<a href='javascript:AbrirPopUp("FormularioObjetos");' title="<?php echo $MULTILANG_SeleccioneUno.' '.$MULTILANG_MnuObjeto; ?>">[...]</a>
-								<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT" valign="TOP"><strong><?php echo $MULTILANG_InfNivelUsuario; ?></strong></td><td width="10"></td>
-							<td>
-								<select  name="nivel_usuario" id="nivel_usuario" class="Combos">
-									<option value="-1" <?php if ($registro["nivel_usuario"]=="-1") echo 'selected'; ?> ><?php echo $MULTILANG_InfTodoUsuario; ?></option>
-									<option value="1"  <?php if ($registro["nivel_usuario"]=="1") echo 'selected'; ?> >&#9733;</option>
-									<option value="2"  <?php if ($registro["nivel_usuario"]=="2") echo 'selected'; ?> >&#9733;&#9733;</option>
-									<option value="3"  <?php if ($registro["nivel_usuario"]=="3") echo 'selected'; ?> >&#9733;&#9733;&#9733;</option>
-									<option value="4"  <?php if ($registro["nivel_usuario"]=="4") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;</option>
-									<option value="5"  <?php if ($registro["nivel_usuario"]=="5") echo 'selected'; ?> >&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
-								</select>
-								<a href="#" title="<?php echo $MULTILANG_MnuTitNivel; ?>" name="<?php echo $MULTILANG_MnuDesNivel; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr></table>
 
-			<table width="90%" border="0" cellspacing="0" cellpadding="0"><tr>
-				<td align="RIGHT" valign="TOP">
-					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;" class="link_menu">
-						<tr>
-							<td align="RIGHT">
-									</form>
-							</td><td width="5"></td>
-							<td align="RIGHT">
-									<input type="Button" name="" value="<?php echo $MULTILANG_MnuActualiza; ?>"  class="Botones" onClick="document.datos.submit()">
-									&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" name="" value="<?php echo $MULTILANG_Cerrar; ?>" class="Botones">
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr></table>
+                <div class="row">
+                    <div class="col-md-6">
 
-		</DIV>
-		</div>
+                            [<?php echo $MULTILANG_MnuApariencia; ?>]
+
+                            <div class="form-group input-group">
+                                <input name="texto" value="<?php echo $registro["texto"]; ?>" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuTexto; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
+                                </span>
+                            </div>
+
+                            <label for="peso"><?php echo $MULTILANG_Peso; ?>:</label>
+                            <select id="peso" name="peso" class="form-control" >
+                                <?php
+                                        for ($i=1;$i<=100;$i++)
+                                            {
+                                                if ($registro["peso"]==$i)
+                                                    echo '<option value="'.$i.'" selected>'.$i.'</option>';
+                                                else
+                                                    echo '<option value="'.$i.'">'.$i.'</option>';
+                                            }
+                                ?>
+                            </select>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                        <label for="posible_arriba"><?php echo $MULTILANG_MnuArriba; ?>:</label>
+                                        <div class="form-group input-group">
+                                            <select id="posible_arriba" name="posible_arriba" class="form-control" >
+                                                <option value="0"><?php echo $MULTILANG_No; ?></option>
+                                                <option value="1" <?php if ($registro["posible_arriba"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
+                                            </select>
+                                            <span class="input-group-addon">
+                                                <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesArriba; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            </span>
+                                        </div>
+                                </div>    
+                                <div class="col-md-4">
+                                        <label for="posible_escritorio"><?php echo $MULTILANG_MnuEscritorio; ?>:</label>
+                                        <div class="form-group input-group">
+                                            <select id="posible_escritorio" name="posible_escritorio" class="form-control" >
+                                                <option value="0"><?php echo $MULTILANG_No; ?></option>
+                                                <option value="1" <?php if ($registro["posible_escritorio"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
+                                            </select>
+                                            <span class="input-group-addon">
+                                                <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesEscritorio; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            </span>
+                                        </div>
+                                </div>    
+                                <div class="col-md-4">
+                                        <label for="posible_centro"><?php echo $MULTILANG_MnuCentro; ?>:</label>
+                                        <div class="form-group input-group">
+                                            <select id="posible_centro" name="posible_centro" class="form-control" >
+                                                <option value="0"><?php echo $MULTILANG_No; ?></option>
+                                                <option value="1" <?php if ($registro["posible_centro"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
+                                            </select>
+                                            <span class="input-group-addon">
+                                                <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesCentro; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            </span>
+                                        </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group input-group">
+                                <input name="seccion" value="<?php echo $registro["seccion"]; ?>" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuSeccion; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
+                                </span>
+                            </div>
+
+                            <div class="form-group input-group">
+                                <input name="imagen" value="<?php echo $registro["imagen"]; ?>" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Imagen; ?>">
+                                <span class="input-group-addon">
+                                    <a data-toggle="modal" href="#myModalSelectorIconos" title="<?php echo $MULTILANG_MnuDesImagen; ?>">
+                                           <i class="fa fa-hand-o-right"></i> <i class="fa fa-picture-o"></i>
+                                    </a>
+                                </span>
+                            </div>
+
+                    </div>    
+                    <div class="col-md-6">
+                            
+                            [<?php echo $MULTILANG_MnuComandos; ?>]
+                            
+                            <label for="posible_clic"><?php echo $MULTILANG_MnuClic; ?>:</label>
+                            <select id="posible_clic" name="posible_clic" class="form-control" >
+                                <option value="0"><?php echo $MULTILANG_No; ?></option>
+                                <option value="1" <?php if ($registro["posible_clic"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
+                            </select>
+                            
+                            <div class="form-group input-group">
+                                <input name="url" value="<?php echo $registro["url"]; ?>" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuURL; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_MnuTitURL; ?>: <?php echo $MULTILANG_MnuDesURL; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
+                                </span>
+                            </div>
+                            
+                            <label for="tipo_comando"><?php echo $MULTILANG_MnuTipo; ?>:</label>
+                            <div class="form-group input-group">
+                                <select id="tipo_comando" name="tipo_comando" class="form-control" >
+                                    <option value="Objeto" <?php if ($registro["tipo_comando"]=="Objeto") echo 'selected'; ?> >1. <?php echo $MULTILANG_MnuObjeto; ?></option>
+                                    <option value="Interno" <?php if ($registro["tipo_comando"]=="Interno") echo 'selected'; ?> >2. <?php echo $MULTILANG_MnuInterno; ?></option>
+                                    <option value="Personal" <?php if ($registro["tipo_comando"]=="Personal") echo 'selected'; ?> >3. <?php echo $MULTILANG_MnuPersonal; ?></option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>: <?php echo $MULTILANG_MnuDesAccion; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                </span>
+                            </div>
+                            
+                            <div class="form-group input-group">
+                                <input name="comando" value="<?php echo $registro["comando"]; ?>" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuAccion; ?>">
+                                <span class="input-group-addon">
+                                    <a data-toggle="modal" href="#myModalSelectorObjetos" title="<?php echo $MULTILANG_SeleccioneUno; ?> <?php echo $MULTILANG_MnuObjeto; ?> o <?php echo $MULTILANG_MnuTitAccion; ?> <?php echo $MULTILANG_MnuDesAccion; ?>">
+                                           <i class="fa fa-hand-o-right"></i> <i class="fa fa-folder-open"></i>
+                                    </a>
+                                </span>
+                            </div>
+                            
+                            <br>
+                            <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_MnuActualiza; ?></a>
+                            <a class="btn btn-block btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> <?php echo $MULTILANG_Cancelar; ?></a>
+
+                    </div>
+                </div>
+            </form>
 
  <?php
 		cerrar_ventana();
@@ -462,264 +489,171 @@ if ($accion=="administrar_menu")
 		echo '<div align="center"><br>';
 		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/-24qazTBngg\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a>";
 		abrir_ventana($MULTILANG_MnuAdmin, 'panel-primary');
+        
+        selector_iconos_awesome();
+        selector_objetos_menu();
 ?>
-
-		<!-- INICIO DE MARCOS POPUP -->
-		<div id='FormularioImagenes' class="FormularioPopUps">
-			<?php
-			abrir_ventana($MULTILANG_MnuSelImagen, 'panel-warning');
-
-			//Busca en el directorio de iconos por imagenes listas para ser usadas
-			$columnas=15;
-			$columna_actual=1;
-			$directorio="img/";
-			@$TemasIconos[]=array(Nombre => "Tango Desktop",	Tamano => "32x32",	Prefijo => "tango_");
-			@$TemasIconos[]=array(Nombre => "Developer",		Tamano => "32x32",	Prefijo => "dev_");
-			@$TemasIconos[]=array(Nombre => "Finance",		Tamano => "32x32",	Prefijo => "finance_");
-			@$TemasIconos[]=array(Nombre => "Medical",		Tamano => "32x32",	Prefijo => "medical_");
-			@$TemasIconos[]=array(Nombre => "Moskis",		Tamano => "32x32",	Prefijo => "moskis_");
-			@$TemasIconos[]=array(Nombre => "Social",		Tamano => "32x32",	Prefijo => "social_");
-			@$TemasIconos[]=array(Nombre => "Woo",			Tamano => "32x32",	Prefijo => "woo_");
-			@$TemasIconos[]=array(Nombre => "Once",			Tamano => "32x32",	Prefijo => "once_");
-			@$TemasIconos[]=array(Nombre => "Ginux",			Tamano => "32x32",	Prefijo => "ginux_");
-			
-			
-			echo '<center>'.$MULTILANG_MnuHlpAwesome.'</center><hr><DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 350px">';
-			for ($i=0;$i<count($TemasIconos);$i++)
-				{
-					$columna_actual=1;
-					$dh = opendir($directorio);
-					echo "<font size=3>&nbsp;&nbsp;<b><br><br>".$TemasIconos[$i]["Nombre"]." (".$TemasIconos[$i]["Tamano"]." pixels)<hr></b></font>";
-					echo '<table border=0 cellspacing=4>';
-					while (($file = readdir($dh)) !== false)
-						{
-							$impreso=0;
-							if (($file != ".") && ($file != "..") && (stristr($file,$TemasIconos[$i]["Prefijo"])  ))
-								{
-									if ($columna_actual==1)	echo '<tr>';
-									echo '<td><a href="javascript:document.datos.imagen.value=\''.$file.'\';OcultarPopUp(\'FormularioImagenes\');" title="'.$file.'"><img src='.$directorio.$file.' border=0 width=32 height=32></a></td>';	
-									$impreso=1;
-									if ($impreso) $columna_actual++;
-									if ($columna_actual==$columnas) $columna_actual=1;
-									if ($columna_actual==$columnas)	echo '</tr>';
-								}
-						}
-					echo '</table>';
-				}
-			echo '</DIV>';
-
-				abrir_barra_estado();
-					echo '<input type="Button"  class="BotonesEstadoCuidado" value=" '.$MULTILANG_Cerrar.' " onClick="OcultarPopUp(\'FormularioImagenes\')">';
-				cerrar_barra_estado();
-				cerrar_ventana();		// Cierra seleccion de imagenes
-			?>
-		</div>
-		<!-- FIN DE MARCOS POPUP -->
-
-		<!-- INICIO DE MARCOS POPUP -->
-		<div id='FormularioObjetos' class="FormularioPopUps">
-			<form name="selector_objetos" method="POST">
-			<?php
-			abrir_ventana($MULTILANG_SeleccioneUno.' '.$MULTILANG_MnuObjeto, 'panel-warning');
-			?>
-				<br><br>
-				<table class="TextosVentana">
-				<tr>
-					<td align="right"><?php echo $MULTILANG_Formularios; ?> / <?php echo $MULTILANG_Informes; ?>:</td>
-					<td >
-						<select  name="objeto_seleccionado" class="Combos">
-						<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
-						<optgroup label="<?php echo $MULTILANG_Formularios; ?>">
-							<?php
-								$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario ORDER BY titulo");
-								while($registro_forms = $consulta_forms->fetch())
-									echo '<option value="frm:'.$registro_forms["id"].'">(Id.'.$registro_forms["id"].') '.$registro_forms["titulo"].'</option>';
-							?>
-						</optgroup>
-						<optgroup label="<?php echo $MULTILANG_Informes; ?>">
-							<?php
-								$consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe ORDER BY titulo");
-								while($registro_informes = $consulta_informs->fetch())
-									echo '<option value="inf:'.$registro_informes["id"].'">(Id.'.$registro_informes["id"].') '.$registro_informes["titulo"].'</option>';
-							?>
-						</optgroup>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td align="right"><?php echo $MULTILANG_FrmVentana; ?>:</td>
-					<td >
-						<select  name="definir_ventana_propia" class="Combos">
-							<option value=":1"><?php echo $MULTILANG_Si; ?></option>
-							<option value=":0"><?php echo $MULTILANG_No; ?></option>
-						</select>
-					</td>
-				</tr>
-				</table>
-				<?php echo $MULTILANG_MnuHlpComandoInf; ?>
-				<br><br>
-			<?php
-				abrir_barra_estado();
-					echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_Guardar.' " onClick="document.datos.comando.value=document.selector_objetos.objeto_seleccionado.options[document.selector_objetos.objeto_seleccionado.selectedIndex].value + document.selector_objetos.definir_ventana_propia.options[document.selector_objetos.definir_ventana_propia.selectedIndex].value; OcultarPopUp(\'FormularioObjetos\')">';
-					echo '<input type="Button"  class="BotonesEstadoCuidado" value=" '.$MULTILANG_Cancelar.' " onClick="OcultarPopUp(\'FormularioObjetos\')">';
-				cerrar_barra_estado();
-				cerrar_ventana();		// Cierra seleccion de objetos
-			?>
-			</form>
-		</div>
-		<!-- FIN DE MARCOS POPUP -->
+          
+            
 
 
-		<div id='FondoPopUps' class="FondoOscuroPopUps"></div>
 
-		<div align="center">
+
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="hidden" name="accion" value="guardar_menu">
 			<input type="hidden" name="nivel_usuario" value="-1">
-			<br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_MnuAgregar; ?></b></font>
-			<table border="0" cellspacing="10" cellpadding="0" class="TextosVentana"><tr>
-				<td valign="TOP" align=center>
-					[<?php echo $MULTILANG_MnuApariencia; ?>]
-					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" class="TextosVentana">
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuTexto; ?></b></td><td width="10"></td>
-							<td><input class="CampoTexto" type="text" name="texto" size="40" maxlength="250"></td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_Peso; ?></b></td><td width="10"></td>
-							<td>
-									<select name="peso" class="Combos" >
-											<?php
-													for ($i=1;$i<=100;$i++)
-														{
-																echo '<option value="'.$i.'">'.$i.'</option>';
-														}
-											?>
-									</select>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuArriba; ?></b></td><td width="10"></td>
-							<td>
-									<select  name="posible_arriba" class="Combos" >
-										<option value="0"><?php echo $MULTILANG_No; ?></option>
-										<option value="1"><?php echo $MULTILANG_Si; ?></option>
-									</select>
-									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesArriba; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuEscritorio; ?></b></td><td width="10"></td>
-							<td>
-									<select  name="posible_escritorio" class="Combos" >
-										<option value="0"><?php echo $MULTILANG_No; ?></option>
-										<option value="1" selected><?php echo $MULTILANG_Si; ?></option>
-									</select>
-									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesEscritorio; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuCentro; ?></b></td><td width="10"></td>
-							<td>
-									<select  name="posible_centro" class="Combos" >
-										<option value="0"><?php echo $MULTILANG_No; ?></option>
-										<option value="1"><?php echo $MULTILANG_Si; ?></option>
-									</select>
-									<a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>" name="<?php echo $MULTILANG_MnuDesCentro; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuSeccion; ?></b></td><td width="10"></td>
-							<td><input class="CampoTexto" type="text" name="seccion" size="40" maxlength="250" class="texto_01"></td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_Imagen; ?></b></td><td width="10"></td>
-							<td>
-								<input class="CampoTexto" type="text" name="imagen" size="34" maxlength="250" class="texto_01">
-								<a href='javascript:AbrirPopUp("FormularioImagenes");' title="<?php echo $MULTILANG_MnuDesImagen; ?>">[...]</a>
-								</td>
-						</tr>
-					</table>
-				</td>
-				<td align="CENTER" valign="TOP">
-					[<?php echo $MULTILANG_MnuComandos; ?>]
-					<table border="0" cellspacing="5" cellpadding="0" align="CENTER"  class="TextosVentana" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;" class="link_menu">
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuClic; ?></b></td><td width="10"></td>
-							<td>
-									<select  name="posible_clic" class="Combos" >
-										<option value="0"><?php echo $MULTILANG_No; ?></option>
-										<option value="1"><?php echo $MULTILANG_Si; ?></option>
-									</select>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuURL; ?></b></td><td width="10"></td>
-							<td><input class="CampoTexto" type="text" name="url" size="35" maxlength="250" class="texto_01">
-								<a href="#" title="<?php echo $MULTILANG_MnuTitURL; ?>" name="<?php echo $MULTILANG_MnuDesURL; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuTipo; ?></b></td><td width="10"></td>
-							<td>
-									<select name="tipo_comando" class="Combos" >
-										<option value="Objeto">1. <?php echo $MULTILANG_MnuObjeto; ?></option>
-										<option value="Interno">2. <?php echo $MULTILANG_MnuInterno; ?></option>
-										<option value="Personal">3. <?php echo $MULTILANG_MnuPersonal; ?></option>
-									</select>
-									<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_MnuAccion; ?></b></td><td width="10"></td>
-							<td><input class="CampoTexto" type="text" name="comando" size="30" maxlength="250" class="texto_01">
-								<a href='javascript:AbrirPopUp("FormularioObjetos");' title="<?php echo $MULTILANG_SeleccioneUno.' '.$MULTILANG_MnuObjeto; ?>">[...]</a>
-								<a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>" name="<?php echo $MULTILANG_MnuDesAccion; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr></table>
+			<h4><b><?php echo $MULTILANG_MnuAgregar; ?></b></h4>
 
-			<table width="90%" border="0" cellspacing="0" cellpadding="0"  class="TextosVentana"><tr>
-				<td align="RIGHT" valign="TOP">
-					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;" class="link_menu">
-						<tr>
-							<td align="RIGHT">
-									</form>
-							</td><td width="5"></td>
-							<td align="RIGHT">
-									<input type="button" name="" value="<?php echo $MULTILANG_Agregar; ?>" class="Botones" onClick="document.datos.submit()">
-									&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="<?php echo $MULTILANG_Cancelar; ?>" value="" class="Botones">
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr></table><hr>
 
-		<font face="" size="3" color="Navy"><b><?php echo $MULTILANG_MnuDefinidos; ?></b></font><br><br>
+                <div class="row">
+                    <div class="col-md-6">
+
+                            [<?php echo $MULTILANG_MnuApariencia; ?>]
+
+                            <div class="form-group input-group">
+                                <input name="texto"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuTexto; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
+                                </span>
+                            </div>
+
+                            <label for="peso"><?php echo $MULTILANG_Peso; ?>:</label>
+                            <select id="peso" name="peso" class="form-control" >
+                                <?php
+                                    for ($i=1;$i<=100;$i++)
+                                        {
+                                                echo '<option value="'.$i.'">'.$i.'</option>';
+                                        }
+                                ?>
+                            </select>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                        <label for="posible_arriba"><?php echo $MULTILANG_MnuArriba; ?>:</label>
+                                        <div class="form-group input-group">
+                                            <select id="posible_arriba" name="posible_arriba" class="form-control" >
+                                                <option value="0"><?php echo $MULTILANG_No; ?></option>
+                                                <option value="1"><?php echo $MULTILANG_Si; ?></option>
+                                            </select>
+                                            <span class="input-group-addon">
+                                                <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesArriba; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            </span>
+                                        </div>
+                                </div>    
+                                <div class="col-md-4">
+                                        <label for="posible_escritorio"><?php echo $MULTILANG_MnuEscritorio; ?>:</label>
+                                        <div class="form-group input-group">
+                                            <select id="posible_escritorio" name="posible_escritorio" class="form-control" >
+                                                <option value="0"><?php echo $MULTILANG_No; ?></option>
+                                                <option value="1" selected><?php echo $MULTILANG_Si; ?></option>
+                                            </select>
+                                            <span class="input-group-addon">
+                                                <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesEscritorio; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            </span>
+                                        </div>
+                                </div>    
+                                <div class="col-md-4">
+                                        <label for="posible_centro"><?php echo $MULTILANG_MnuCentro; ?>:</label>
+                                        <div class="form-group input-group">
+                                            <select id="posible_centro" name="posible_centro" class="form-control" >
+                                                <option value="0"><?php echo $MULTILANG_No; ?></option>
+                                                <option value="1"><?php echo $MULTILANG_Si; ?></option>
+                                            </select>
+                                            <span class="input-group-addon">
+                                                <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesCentro; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            </span>
+                                        </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group input-group">
+                                <input name="seccion"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuSeccion; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
+                                </span>
+                            </div>
+
+                            <div class="form-group input-group">
+                                <input name="imagen"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Imagen; ?>">
+                                <span class="input-group-addon">
+                                    <a data-toggle="modal" href="#myModalSelectorIconos" title="<?php echo $MULTILANG_MnuDesImagen; ?>">
+                                           <i class="fa fa-hand-o-right"></i> <i class="fa fa-picture-o"></i>
+                                    </a>
+                                </span>
+                            </div>
+
+                    </div>    
+                    <div class="col-md-6">
+                            
+                            [<?php echo $MULTILANG_MnuComandos; ?>]
+                            
+                            <label for="posible_clic"><?php echo $MULTILANG_MnuClic; ?>:</label>
+                            <select id="posible_clic" name="posible_clic" class="form-control" >
+                                <option value="0"><?php echo $MULTILANG_No; ?></option>
+                                <option value="1"><?php echo $MULTILANG_Si; ?></option>
+                            </select>
+                            
+                            <div class="form-group input-group">
+                                <input name="url"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuURL; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_MnuTitURL; ?>: <?php echo $MULTILANG_MnuDesURL; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
+                                </span>
+                            </div>
+                            
+                            <label for="tipo_comando"><?php echo $MULTILANG_MnuTipo; ?>:</label>
+                            <div class="form-group input-group">
+                                <select id="tipo_comando" name="tipo_comando" class="form-control" >
+                                    <option value="Objeto">1. <?php echo $MULTILANG_MnuObjeto; ?></option>
+                                    <option value="Interno">2. <?php echo $MULTILANG_MnuInterno; ?></option>
+                                    <option value="Personal">3. <?php echo $MULTILANG_MnuPersonal; ?></option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>: <?php echo $MULTILANG_MnuDesAccion; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                </span>
+                            </div>
+                            
+                            <div class="form-group input-group">
+                                <input name="comando"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuAccion; ?>">
+                                <span class="input-group-addon">
+                                    <a data-toggle="modal" href="#myModalSelectorObjetos" title="<?php echo $MULTILANG_SeleccioneUno; ?> <?php echo $MULTILANG_MnuObjeto; ?> o <?php echo $MULTILANG_MnuTitAccion; ?> <?php echo $MULTILANG_MnuDesAccion; ?>">
+                                           <i class="fa fa-hand-o-right"></i> <i class="fa fa-folder-open"></i>
+                                    </a>
+                                </span>
+                            </div>
+
+                            <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Agregar; ?></a>
+                            <a class="btn btn-block btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> <?php echo $MULTILANG_Cancelar; ?></a>
+
+
+                    </div>
+                </div>
+            </form>
+
+        <hr>
+
+		<h4><b><?php echo $MULTILANG_MnuDefinidos; ?></b></h4>
 		 <?php
 				echo '
-				<table width="100%" border="0" cellspacing="3" align="CENTER" class="TextosVentana">
-					<tr>
-						<td align="left" bgcolor="#d6d6d6"><b>Id</b></td>
-						<td align="LEFT" bgcolor="#D6D6D6"><b>'.$MULTILANG_MnuNivel.'</b></td>
+				<table class="table table-condensed btn-xs table-unbordered table-hover">
+					<thead>
+                    <tr>
+						<td><b>Id</b></td>
 						<td></td>
-						<td align="left" bgcolor="#d6d6d6"><b>'.$MULTILANG_MnuTexto.'</b></td>
-						<td align="LEFT" bgcolor="#D6D6D6"><b>'.$MULTILANG_MnuComando.'</b></td>
+						<td><b>'.$MULTILANG_MnuTexto.'</b></td>
+						<td><b>'.$MULTILANG_MnuComando.'</b></td>
 						<td></td>
 						<td></td>
-					</tr>	';
+					</tr>
+                    </thead>
+                    <tbody>
+                    	';
 
 				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE 1=1");
 				while($registro = $resultado->fetch())
 					{
-						$cadena_nivel="";
-						for ($i=1;$i<=$registro["nivel_usuario"];$i++)
-							$cadena_nivel.="&#9733;";
 						echo '<tr>
 								<td>'.$registro["id"].'</td>
-								<td>'.$cadena_nivel.'</td>
 								<td><img src="img/'.$registro["imagen"].'" border=0 alt="" valign="absmiddle" align="absmiddle" width="14" height="13" ></td>
 								<td><strong>'.$registro["texto"].'</strong></td>
 								<td>'.$registro["comando"].'</td>
@@ -727,21 +661,22 @@ if ($accion=="administrar_menu")
 										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
 												<input type="hidden" name="accion" value="eliminar_menu">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
-												<input type="button" value="'.$MULTILANG_Eliminar.'" class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_MnuAdvElimina.'\',f'.$registro["id"].');">
+                                                <a href="javascript:confirmar_evento(\''.$MULTILANG_MnuAdvElimina.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
 												<input type="hidden" name="accion" value="detalles_menu">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
-												<input type="Submit" value="'.$MULTILANG_Detalles.'" class="Botones">
+                                                <button type="submit" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i></button>
 										</form>
 								</td>
 							</tr>';
 					}
-				echo '</table>';
+				echo '</tbody>
+                </table>';
 		 ?>
-		</div>
+
 
 
 		 <?php

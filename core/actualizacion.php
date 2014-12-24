@@ -112,7 +112,7 @@ if ($accion=="cargar_archivo")
 
 		if ($mensaje_error=="")
 			{				
-				echo '<br><br><img src="img/icn_11.gif" border=0 align="absmiddle">'.$MULTILANG_CargaCorrecta.'.<br><br>
+				echo '<br><br><i class="fa fa-check"></i>'.$MULTILANG_CargaCorrecta.'.<br><br>
 					<form action="'.$ArchivoCORE.'" method="post">
 						<input type="Hidden" name="archivo_cargado" value="'.$carpeta.'/'.$nombre_archivo.'">
 						<input type="Hidden" name="accion" value="'.$siguiente_accion.'">

@@ -477,7 +477,7 @@ if ($accion=="administrar_monitoreo")
 			<br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_MonNuevo; ?></b></font>
 			<table border="0" cellspacing="10" cellpadding="0" class="TextosVentana"><tr>
 				<td valign="TOP" align=center>
-					<img src="img/ginux_Network_Connections.png" border=0><br><br>
+					<i class="fa fa-link"></i><br><br>
 					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" class="TextosVentana">
 						<tr>
 							<td align="RIGHT"><b><?php echo $MULTILANG_Tipo; ?></b></td><td width="10"></td>
@@ -542,7 +542,7 @@ if ($accion=="administrar_monitoreo")
 						</tr>
 					</table>
 
-					<br><br><font size=2><b><a href="index.php?accion=ver_monitoreo&Presentar_FullScreen=1" target="_BLANK">[<img src="img/dev_Coherence.png" border=0 align=absmiddle><?php echo " $MULTILANG_MonPgInicio -> $MULTILANG_MonTitulo ";?>]</a></b></font>
+					<br><br><font size=2><b><a href="index.php?accion=ver_monitoreo&Presentar_FullScreen=1" target="_BLANK">[ <i class="fa fa-play"></i> <?php echo " $MULTILANG_MonPgInicio -> $MULTILANG_MonTitulo ";?>]</a></b></font>
 				</td>
 				<td align="CENTER" valign="TOP">
 

@@ -135,7 +135,7 @@
             }
             // Valida permisos asignados al usuario actual para la accion llamada a ejecutar
             if (!permiso_accion($accion)) {
-                mensaje($MULTILANG_SecErrorTit, $MULTILANG_SecErrorDes."<br>[US=<b>$Login_usuario</b>|CMD=<b>$accion</b>|IP=<b>$direccion_auditoria</b>|DTE=<b>$fecha_operacion_guiones $hora_operacion_puntos</b>]", '', 'icono_error.png', 'TextosEscritorio');
+                echo $MULTILANG_SecErrorTit."<hr>".$MULTILANG_SecErrorDes."<hr>[US=<b>$Login_usuario</b>|CMD=<b>$accion</b>|IP=<b>$direccion_auditoria</b>|DTE=<b>$fecha_operacion_guiones $hora_operacion_puntos</b>]";
                 auditar("SEC: Intento de acceso no autorizado CMD=$accion");
                 exit(1);
             }
@@ -203,7 +203,7 @@
             if (file_exists("mod/".$elemento."/index.php"))
                 include("mod/".$elemento."/index.php");
             else
-                mensaje($MULTILANG_ErrorTiempoEjecucion, $MULTILANG_ErrorModulo.'<br><b>'.$MULTILANG_Detalles.': '.$elemento.'</b>', '', 'icono_error.png', 'TextosEscritorio');
+                mensaje($MULTILANG_ErrorTiempoEjecucion, $MULTILANG_ErrorModulo.'<br><b>'.$MULTILANG_Detalles.': '.$elemento.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
         }
     }
 

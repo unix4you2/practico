@@ -560,7 +560,7 @@
 					else
 						$mensaje_final='<b>'.$MULTILANG_Detalles.'</b>: '.$MULTILANG_ErrorSoloAdmin;
 					//Presenta el mensaje sobre el HTML y como Emergente JS
-					mensaje($MULTILANG_ErrorTiempoEjecucion,$mensaje_final,'80%','icono_error.png','TextosEscritorio');
+                    mensaje($MULTILANG_ErrorTiempoEjecucion,$mensaje_final, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 					echo '<script type="" language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\\n\\n'.$mensaje_final.'");</script>';
 					//Redirecciona segun la accion
 					if ($accion=="Iniciar_login")
@@ -817,7 +817,7 @@
 				}
 			catch( PDOException $ErrorPDO)
 				{
-					mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
+                    mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage(), '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 					return false;
 				}
 		}
@@ -1010,7 +1010,7 @@
 			global $MULTILANG_ErrExtension,$MULTILANG_ErrCURL;
 			//Verifica soporte para cURL
 			if (!extension_loaded('curl'))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrCURL,'','icono_error.png','TextosEscritorio');
+                mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrCURL, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 			//Verifica que la funcion se encuentre activada
 			$funcion_evaluada='curl_init'; $valor_esperado='1';
 			if (ini_get($funcion_evaluada)==$valor_esperado)
@@ -1145,42 +1145,42 @@
 				if (ini_get($funcion_evaluada)!=$valor_esperado) {ini_set($funcion_evaluada,$valor_esperado);}
 				//Verifica si pudo ser encendida en tiempo de ejecucion, sino muestra mensaje y solamente si no hay cURL pues es un sustituto
 				if (ini_get($funcion_evaluada)!=$valor_esperado && !extension_loaded('curl'))
-					mensaje($MULTILANG_ErrFuncion,$funcion_evaluada.': '.$MULTILANG_ErrDirectiva,'','icono_error.png','TextosEscritorio');
+					mensaje($MULTILANG_ErrFuncion,$funcion_evaluada.': '.$MULTILANG_ErrDirectiva, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 			
 			//Verifica soporte para LDAP cuando esta activado en la herramienta
 			if ($Auth_TipoMotor=='ldap' &&  !extension_loaded('ldap'))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrLDAP,'','icono_error.png','TextosEscritorio');
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrLDAP, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
 			//Verifica soporte para HASH cuando se requiere encripcion
 			if ($Auth_TipoEncripcion!="plano" && !extension_loaded('hash'))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrHASH,'','icono_error.png','TextosEscritorio');
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrHASH, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
 			//Verifica soporte para sesiones
 			if (!extension_loaded('session'))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrSESS,'','icono_error.png','TextosEscritorio');
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrSESS, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
 			//Verifica soporte para GD2
 			if (!extension_loaded('gd'))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrGD,'','icono_error.png','TextosEscritorio');
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrGD, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
 			//Verifica soporte para PDO
 			if (!extension_loaded('pdo'))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrPDO,'','icono_error.png','TextosEscritorio');
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrPDO, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
 			//Verifica soporte para el driver PDO correspondiente al motor utilizado
 			if (!extension_loaded('pdo_'.$MotorBD))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrDriverPDO,'','icono_error.png','TextosEscritorio');
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrDriverPDO, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
 			//Verifica soporte para SimpleXML
 			if (!extension_loaded('SimpleXML'))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,'','icono_error.png','TextosEscritorio');
+				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 			
 			// Bloqueos por IP/pais http://stackoverflow.com/questions/15835274/file-get-contents-failed-to-open-stream-connection-refused
 			
 			// Verifica el soporte para funciones especificas PHP
 			$funcion_evaluada='file_get_contents';
 			if (!function_exists($funcion_evaluada))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrFuncion.'<b>'.$funcion_evaluada.'</b>','','icono_error.png','TextosEscritorio');
+                mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrFuncion.'<b>'.$funcion_evaluada.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 			
 		}
 
@@ -1247,7 +1247,7 @@
 				}
 			catch( PDOException $ErrorPDO)
 				{
-					mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage(),'90%','icono_error.png','TextosEscritorio');
+					mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage(), '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 					return false;
 				}
 	}
@@ -2311,7 +2311,7 @@ function ventana_login()
 			$adjunto_url_archivo=$partes_adjunto_archivo[0];
 			$adjunto_tipo_archivo=$partes_adjunto_archivo[1];
 			if ($campobase!="" && $valorbase!="" && $registro_datos_formulario["$nombre_campo"]!="")
-				$salida.='<a target="_BLANK" href="'.$adjunto_url_archivo.'"><img src="img/woo_folder_search_32.png" border=0 width="20" height="20" align="absmiddle"><b>'.$MULTILANG_FrmArchivoLink.'</b><img src="img/woo_save_download_32.png" border=0 width="20" height="20" align="absmiddle"></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>('.$MULTILANG_Tipo.': '.$adjunto_tipo_archivo.')</i><br>';
+				$salida.='<a target="_BLANK" href="'.$adjunto_url_archivo.'"><i class="fa fa-search"></i><b>'.$MULTILANG_FrmArchivoLink.'</b><img src="img/woo_save_download_32.png" border=0 width="20" height="20" align="absmiddle"></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>('.$MULTILANG_Tipo.': '.$adjunto_tipo_archivo.')</i><br>';
 
 			// Muestra el campo
 			$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="CampoTexto '.$cadena_clase_teclado.'" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].'  >';
@@ -2356,7 +2356,7 @@ function ventana_login()
 				{
 					$cadena_decodificada=$registro_datos_formulario["$nombre_campo"];
 					$cadena_decodificada=gzdecode($cadena_decodificada);
-					$salida.='<a href="javascript:AbrirPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\');"><img src="img/ginux_Outlook.png" border=0 width="20" height="20" align="absmiddle"><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
+					$salida.='<a href="javascript:AbrirPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\');"><i class="fa fa-picture-o"></i><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
 						<!-- INICIO DE MARCOS POPUP -->
 						<div id="CANVASPrevio'.$registro_campos["campo"].'" class="FormularioPopUps">
 							<div align=center>
@@ -2374,7 +2374,7 @@ function ventana_login()
 			$salida.='
 				<!--<a href="javascript:" id="upload" style="width: 100px;">Upload</a>-->
 				<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" style="border: 1px solid #acc;">Su navegador no soporta Canvas</canvas>
-				<a href="javascript:limpiar_CANVAS_'.$registro_campos["campo"].'();"><img src="img/woo_close_32.png" border=0 width="20" height="20" align="top"></a>
+				<a href="javascript:limpiar_CANVAS_'.$registro_campos["campo"].'();"><i class="fa fa-times fa-2x"></i></a>
 
 				<script type="text/javascript">
 					$(function ()
@@ -2464,7 +2464,7 @@ function ventana_login()
 				{
 					$cadena_decodificada=$registro_datos_formulario["$nombre_campo"];
 					$cadena_decodificada=gzdecode($cadena_decodificada);
-					$salida.='<a href="javascript:AbrirPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\');"><img src="img/ginux_Outlook.png" border=0 width="20" height="20" align="absmiddle"><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
+					$salida.='<a href="javascript:AbrirPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\');"><i class="fa fa-picture-o"></i><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
 						<!-- INICIO DE MARCOS POPUP -->
 						<div id="CANVASPrevio'.$registro_campos["campo"].'" class="FormularioPopUps">
 							<div align=center>
@@ -2490,7 +2490,7 @@ function ventana_login()
 							</div>
 						</td>
 						<td valign=top>
-							<img src="img/woo_camera_32.png" width="20" alt="Capturar" border=0 OnClick="draw(v,context,w,h);"/>
+                            <i class="fa fa-camera" OnClick="draw(v,context,w,h);"></i>
 							<br>
 							<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.(($registro_campos["ancho"]/$escala_reduccion)).'" height="'.(($registro_campos["alto"]/$escala_reduccion)).'" style="width: '.(($registro_campos["ancho"]/$escala_reduccion)).'px; height: '.(($registro_campos["alto"]/$escala_reduccion)).'px; background-color: #CCC; visibility:visible;"></canvas>
 						</td>
@@ -2643,7 +2643,7 @@ function ventana_login()
 
 
 				//Si no encuentra formulario presenta error
-				if ($registro_formulario["id"]=="")	mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Formularios." $formulario)","70%","icono_error.png","TextosEscritorio");
+				if ($registro_formulario["id"]=="")	mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Formularios." $formulario)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
 				// En caso de recibir un campo base y valor base se hace la busqueda para recuperar la informacion
 				if ($campobase!="" && $valorbase!="")
@@ -2655,7 +2655,7 @@ function ventana_login()
 				// Define la barra de herramientas mini superior (en barra de titulo)
 				@$barra_herramientas_mini.='
 						<a href="#" title="'.$MULTILANG_VistaImpresion.'" name="">
-							<img src="img/tango_document-print.png" border=0 height=15 width=15 OnClick="ImprimirMarco(\'MARCO_IMPRESION\');">
+							<i class="fa fa-print" OnClick="ImprimirMarco(\'MARCO_IMPRESION\');"></i>
 						</a>';
 
 				// Establece color de fondo para el form
@@ -2927,7 +2927,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		$registro_informe=$consulta_informe->fetch();
 		$Identificador_informe=$registro_informe["id"];
 		//Si no encuentra informe presenta error
-		if ($registro_informe["id"]=="") mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Informes." $informe)","70%","icono_error.png","TextosEscritorio");
+		if ($registro_informe["id"]=="") mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Informes." $informe)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
 			// Inicia CONSTRUCCION DE CONSULTA DINAMICA
 			$numero_columnas=0;
@@ -3053,7 +3053,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				//Genera enlace al PDF cuando se detecta el modulo y ademas el informe lo tiene activado
 				if (@file_exists("mod/pdf") && $registro_informe["genera_pdf"]=='S')
 					{
-						echo '<div align=right><a href="tmp/Inf_'.$Identificador_informe.'-'.$Login_usuario.'.pdf" target="_BLANK"><img src="img/icono_pdf.gif" border=0 align=absmiddle> PDF&nbsp;</a></div>';
+						echo '<div align=right><a href="tmp/Inf_'.$Identificador_informe.'-'.$Login_usuario.'.pdf" target="_BLANK"><i class="fa fa-file-pdf-o"></i> PDF&nbsp;</a></div>';
 					}
 
 					// Crea encabezado por tipo de formato:  1=html   2=Excel

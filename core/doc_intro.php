@@ -97,14 +97,8 @@ Section: Detalles de licenciamiento (AUTHORS)
 			http://naku.dohcrew.com/libchart/pages/introduction/
 			See inc/libchart/COPYING for details
 
-		Tango Desktop Project:
-			Location: all files under img/tango_*:
-			License: The Tango base icon theme is released to the Public Domain. 
-					 The palette is in public domain. Developers, feel free to ship it along with your application.
-			http://tango.freedesktop.org/
-
 		Media files and CSS files under:
-				img / * (except those named tango_*)
+				img / *
 				skin / *
 				ins/img / *
 				ins/skin / *
