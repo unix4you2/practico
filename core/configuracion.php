@@ -51,7 +51,6 @@
 		(start code)
 			NombreRAD='XXX';			// Nombre del aplicativo
 			VersionRAD='XXX';			// Version del aplicativo
-			PlantillaActiva='XXX';		// Mascara visual con la definicion de hojas CSS e imagenes.  Ubicada en /skin
 			ArchivoCORE='';				// Script que procesa todos los formularios. Vacio para la misma pagina o index.php
 
 			TablasCore='Core_';			// Prefijo de Tablas base para uso de Practico (Cuidado al cambiar)
@@ -70,7 +69,6 @@
 	*/
 
 	$NombreRAD='Practico';
-	$PlantillaActiva='nomo';
 	$ArchivoCORE='';
 	$TablasCore='core_';  // Cuidado al cambiar: Prefijo de Tablas base para uso de Practico
 	$TablasApp='app_';  // Cuidado al cambiar: Prefijo para Tablas de datos definidas por el usuario

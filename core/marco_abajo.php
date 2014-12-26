@@ -88,6 +88,13 @@
             include_once("core/marco_admin_morris.php");
     ?>
 
+    <!-- DataTables JavaScript -->
+    <script src="inc/bootstrap/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="inc/bootstrap/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
+
+
+
 	<!-- Canvas -->
     <!--<script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>-->
 
@@ -124,5 +131,6 @@
         if(@$CodigoGoogleAnalytics!="")
             echo $PrefijoGA.$CodigoGoogleAnalytics.$PosfijoGA;	
     ?>
+
 </body>
 </html>

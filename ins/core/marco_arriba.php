@@ -32,7 +32,6 @@
 	<title>
 		Pr&aacute;ctico - <?php echo $MULTILANG_Instalacion; ?>
   	</title>
-	<script type="text/javascript" src="js/tooltips.js"></script>
     <!-- CSS de Bootstrap -->
     <link href="../inc/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <!-- librerías opcionales que activan el soporte de HTML5 para IE8 -->
@@ -42,7 +41,6 @@
     <![endif]-->
 
     <link rel="stylesheet" href="../inc/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="../skin/nomo/general.css">
 	<script language="JavaScript">
 		function abrir_ventana_popup(theURL,winName,features)
 			{ 
@@ -58,7 +56,7 @@
 	<tr><td>
 		<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MarcoSuperior"><tr>
 			<td valign="bottom" width="20%">
-				<img src="../skin/nomo/img/logo.png" border="0"><b><font color=yellow> <?php echo $MULTILANG_Version; ?> <?php include("../inc/version_actual.txt"); ?></font></b>
+				<img src="../img/logo.png" border="0"><b><font color=yellow> <?php echo $MULTILANG_Version; ?> <?php include("../inc/version_actual.txt"); ?></font></b>
 			</td>
 			<td align="center" valign="middle" width="60%">
 				<b>

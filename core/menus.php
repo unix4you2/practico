@@ -74,7 +74,11 @@ function selector_iconos_awesome()
 			@$TemasIconos[]=array(Nombre => "Ginux",			Tamano => "32x32",	Prefijo => "ginux_");
 			
 			
-			echo '<center>'.$MULTILANG_MnuHlpAwesome.'</center><hr><DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 350px">';
+			echo '<center>'.$MULTILANG_MnuHlpAwesome.'</center><hr>
+            
+            
+            
+            <DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 350px">';
 			for ($i=0;$i<count($TemasIconos);$i++)
 				{
 					$columna_actual=1;

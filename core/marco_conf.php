@@ -258,43 +258,6 @@
 								</table>
 
 							</td>
-							<td valign=top>
-								
-								<table cellspacing=0 width="100%" style="font-size:11px; color:000000;">
-									<tr>
-										<td valign=top align=right>
-											<?php echo $MULTILANG_PlantillaActiva; ?>
-										</td>
-										<td valign=top>
-												<select name="PlantillaActivaNEW" class="Combos"  style="width:200px;" onChange="previa_plantilla.src='skin/'+this.options[this.selectedIndex].value+'/img/fondo.jpg';">
-													<?php
-													// Incluye archivos de plantilla para ser seleccionados
-													$path_plantillas="skin/";
-													$directorio_plantillas=opendir($path_plantillas);
-													while (($elemento=readdir($directorio_plantillas))!=false)
-														{
-															//Lo procesa solo si es un directorio
-															if (is_dir($path_plantillas.$elemento) && $elemento!="." && $elemento!="..")
-																{
-																	include($path_plantillas.$elemento.'/index.php');
-																	//Establece el seleccionado actualmente como SELECTED
-																	$seleccion="";
-																	if ($elemento==$PlantillaActiva) $seleccion="SELECTED";
-																	//Presenta la opcion
-																	echo '<option value="'.$elemento.'" '.$seleccion.'>'.$MULTILANG_NombrePlantilla.' (skin/'.$elemento.')</option>';
-																}
-														}
-													?>
-												</select>
-												<br><br>
-												<img name="previa_plantilla" id="previa_plantilla" src="skin/<?php echo $PlantillaActiva; ?>/img/fondo.jpg" width="130" height="90" />
-												<br>
-												[<?php echo $MULTILANG_ConfGraficas; ?>]
-										</td>
-									</tr>
-								</table>
-								
-							</td>
 						</tr>
 					</table>
 

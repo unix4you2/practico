@@ -31,7 +31,6 @@
 </table>
 <form name="continuar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 <input type="hidden" name="NombreRADNEW" value="Practico">
-<input type="hidden" name="PlantillaActivaNEW" value="nomo">
 <input type="hidden" name="IdiomaPredeterminadoNEW" value="<?php echo $Idioma; ?>">
 
 <hr>

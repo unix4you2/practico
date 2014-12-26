@@ -1502,7 +1502,6 @@ function ventana_login()
 /* ################################################################## */
 	function abrir_barra_estado($DEPRECATED_alineacion="CENTER")
 	  {
-		 global $PlantillaActiva;
 		/*
 			Procedure: abrir_barra_estado
 			Abre los espacios para despliegue de informacion en la parte inferior de los objetos tales como botones o mensajes
@@ -2593,7 +2592,7 @@ function ventana_login()
 */
 		function cargar_formulario($formulario,$en_ventana=1,$campobase="",$valorbase="",$anular_form=0)
 		  {
-				global $ConexionPDO,$ArchivoCORE,$TablasCore,$PlantillaActiva;
+				global $ConexionPDO,$ArchivoCORE,$TablasCore;
 				global $_SeparadorCampos_;
 				// Carga variables de definicion de tablas
 				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
@@ -2622,7 +2621,7 @@ function ventana_login()
 						  var ventana_impresion = window.open(" ", "PopUpImpresion");
 						  
 						  //Agrega estilos basicos
-							ventana_impresion.document.write( \'<link rel="stylesheet" type="text/css" href="skin/'.$PlantillaActiva.'/general.css">\' );
+                            //ventana_impresion.document.write( \'<link rel="stylesheet" type="text/css" href="general.css">\' );
 						  
 						  //Agrega titulo del formulario
 							ventana_impresion.document.write( \'<div align=CENTER><b>'.$registro_formulario["titulo"].'</b></div><hr>\' );

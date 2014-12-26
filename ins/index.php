@@ -19,7 +19,6 @@
 	*/
 
 	$NombreRAD="Pr&aacute;ctico";
-	$PlantillaActiva="nomo";
 	$fecha_operacion=date("Ymd");
 	$fecha_operacion_guiones=date("Y-m-d");
 	$hora_operacion=date("His");

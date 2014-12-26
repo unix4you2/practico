@@ -26,7 +26,6 @@
 	Variables de entrada:
 
 		NombreRAD - Nombre de la aplicacion para encabezado
-		PlantillaActiva - Nombre de la plantilla activa para diagramar el sistema
 		Login_usuario - Nombre de usuario que se encuentra logueado en el sistema
 		Sesion_abierta - Bandera que indica si hay una sesion activa
 		ArchivoCORE - Nombre del archivo principal que procesa todas las solicitudes
@@ -58,10 +57,9 @@
 	<meta name="generator" content="Practico <?php  $version = file("inc/version_actual.txt"); echo trim($version[0]); ?>" />
 	<meta name="description" content="Generador de aplicaciones web - www.practico.org" />
     <meta name="author" content="John Arroyave G. - {www.practico.org} - {unix4you2 at gmail.com}">
-
 	<title><?php echo $NombreRAD; ?> <?php echo trim($version[0]); ?></title>
 
-    <!-- Bootstrap Core CSS -->
+    <!-- CSS Core de Bootstrap -->
     <link href="inc/bootstrap/css/bootstrap.min.css" rel="stylesheet"  media="screen">
     <!-- librerías opcionales que activan el soporte de HTML5 para IE8 -->
     <!--[if lt IE 9]>
@@ -69,29 +67,29 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- MetisMenu CSS -->
+    <!-- CSS Plugins BootStrap -->
     <link href="inc/bootstrap/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-    <!-- CSS Personalizado -->
+    <link href="inc/bootstrap/css/plugins/morris.css" rel="stylesheet">
+    <link href="inc/bootstrap/css/plugins/timeline.css" rel="stylesheet">
+    <link href="inc/bootstrap/css/plugins/social-buttons.css" rel="stylesheet">
+    <link href="inc/bootstrap/css/plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- CSS Personalizado (Plantilla y Practico) -->
     <link href="inc/bootstrap/css/sb-admin-2.css" rel="stylesheet">
     <link href="inc/bootstrap/css/practico.css" rel="stylesheet">
+
     <!-- Custom Fonts -->
     <link href="inc/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-
+    <!-- JavaScript Personalizado -->
 	<script type="text/javascript" src="inc/practico/javascript/validaform.js"></script>
-<!--
-	<script type="text/javascript" src="inc/practico/javascript/tooltips.js"></script>
-	<script type="text/javascript" src="inc/practico/javascript/popup.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/html5slider.js"></script>
--->
+
 	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/chat.css" />
 	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/screen.cssXXX" />
-
-
 	<!--[if lte IE 7]>
 	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/screen_ie.css" />
 	<![endif]-->
-
 
 
 	<link rel="shortcut icon" href="img/favicon.ico"/>

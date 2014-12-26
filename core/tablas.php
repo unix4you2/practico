@@ -629,13 +629,13 @@ echo '
 			<hr>
 
 		<h3><?php echo $MULTILANG_TblTablasBD; ?></h3>
-				<table class="table table-hover table-condensed" >
+				<table class="table table-hover table-condensed btn-xs table-striped" >
                     <thead>
                         <tr>
-                            <td><b><?php echo $MULTILANG_Nombre; ?></b></td>
-                            <td><b><?php echo $MULTILANG_TblRegistros; ?></b></td>
-                            <td></td>
-                            <td></td>
+                            <th><b><?php echo $MULTILANG_Nombre; ?></b></th>
+                            <th><b><?php echo $MULTILANG_TblRegistros; ?></b></th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>

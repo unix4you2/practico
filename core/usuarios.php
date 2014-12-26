@@ -826,10 +826,13 @@ if ($accion=="permisos_usuario")
 			$mensaje_error="";
 
 			// Verifica que no existe el usuario
-			$resultado_usuario=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login=? ","$login");
-			$registro_usuario = $resultado_usuario->fetch();
-			if ($registro_usuario["login"]!="")
-				$mensaje_error=$MULTILANG_UsrErrCrea1;
+			if ($login!="")
+            {
+                $resultado_usuario=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login=? ","$login");
+                $registro_usuario = $resultado_usuario->fetch();
+                if ($registro_usuario["login"]!="")
+                    $mensaje_error=$MULTILANG_UsrErrCrea1;
+            }
 
 			// Verifica campos nulos
 			if ($nombre=="" || $login=="" || $clave=="")
@@ -846,7 +849,7 @@ if ($accion=="permisos_usuario")
 					// Inserta datos del usuario
 					$clavemd5=MD5($clave);
 					$pasomd5=MD5($LlaveDePaso);
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$descripcion$_SeparadorCampos_$estado$_SeparadorCampos_$nivel$_SeparadorCampos_$correo$_SeparadorCampos_$fecha_operacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$fecha_operacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno");
 					auditar("Agrega usuario $login para $nombre");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
@@ -880,103 +883,88 @@ if ($accion=="agregar_usuario")
 		echo '<div align="center">';
 		abrir_ventana($MULTILANG_UsrAdicion, 'panel-info');
         
-        mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'','fa fa-info-circle fa-5x texto-azul','alert alert-info alert-dismissible');
+        mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'','fa fa-info-circle fa-5x texto-azul','alert alert-default alert-dismissible');
 ?>
 
-
 		<!-- VALOR MD5 PARA VACIO:  d41d8cd98f00b204e9800998ecf8427e-->
-					<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+				<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 					<input type="hidden" name="accion" value="guardar_usuario">
-					<input type="hidden" name="nivel" value="5">
-					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;"  class="TextosVentana">
-						<tr>
-							<td align="RIGHT"><?php echo $MULTILANG_UsrLogin; ?></td><td width="20"></td>
-							<td><input class="CampoTexto" type="Text" name="login" size="11" maxlength="20"  onkeypress="return validar_teclado(event, 'alfanumerico');" >
-							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-							<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>" name="<?php echo $MULTILANG_UsrDesLogin; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><?php echo $MULTILANG_UsrNombre; ?></td><td width="20"></td>
-							<td><input class="CampoTexto" type="Text" name="nombre" size="30" maxlength="200" onkeypress="return validar_teclado(event, 'alfanumerico');">
-							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><?php echo $MULTILANG_Contrasena; ?></td><td width="20"></td>
-							<td><input class="CampoTexto" type="password" name="clave" size="11" maxlength="20" onkeyup="muestra_seguridad_clave(this.value, this.form)">
-							<a href="#" title="<?php echo $MULTILANG_FrmObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-							&nbsp;&nbsp; <?php echo $MULTILANG_UsrNivelPW; ?>: <input id="seguridad" value="0" size="3" name="seguridad" style="border: 0px; background-color:ffffff; text-decoration:italic;" class="CampoTexto" type="text" readonly onfocus="blur()">%
-							</td>
-						</tr>
-						<!--
-						<tr>
-							<td align="RIGHT"><?php echo $MULTILANG_InfDescripcion.' '.$MULTILANG_MotorAuth; ?></td><td width="20"></td>
-							<td><input class="CampoTexto" type="Text" name="descripcion" size="30" maxlength="200" onkeypress="return validar_teclado(event, 'alfanumerico');"></td>
-						</tr>
-						-->
-						<tr>
-							<td align="RIGHT"><?php echo $MULTILANG_UsrVerificaPW; ?></td><td width="20"></td>
-							<td><input class="CampoTexto" type="password" name="clave1" size="11" maxlength="20">
-							<a href="#" title="Campo obligatorio" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT" valign="TOP"><?php echo $MULTILANG_Correo; ?></td><td width="20"></td>
-							<td><input class="CampoTexto" type="Text" name="correo" size="30" maxlength="200" onkeypress="return FiltrarTeclas(this, event)">
-								<a href="#" title="<?php echo $MULTILANG_UsrTitCorreo; ?>" name="<?php echo $MULTILANG_UsrDesCorreo; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><?php echo $MULTILANG_UsrEstado; ?></td><td width="20"></td>
-							<td>
-								<select name="estado" class="selector_01">
-										<option value="1"><?php echo $MULTILANG_Habilitado; ?></option>
-										<option value="0"><?php echo $MULTILANG_Deshabilitado; ?></option>
-								</select>
-							</td>
-						</tr>
-						<!--
-						<tr>
-							<td align="RIGHT" valign="TOP"><strong><?php echo $MULTILANG_UsrNivel; ?></strong></td><td width="10"></td>
-							<td>-->
-								<!-- Caracteres UNICODE para el combo
-									Revisar: http://www.okelmann.com/homepage/unicode.htm -->
-						<!--
-								<select  name="nivel" id="nivel"  style="font-family: Verdana, Tahoma, Arial; font-weight: normal; font-size: 10px; width: 100px; background-color: #FFFFFF; color: #000000;">
-									<option value="1">&#9733;</option>
-									<option value="2">&#9733;&#9733;</option>
-									<option value="3">&#9733;&#9733;&#9733;</option>
-									<option value="4">&#9733;&#9733;&#9733;&#9733;</option>
-									<option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; SuperAdmin</option>
-								</select>
-								<a href="#" title="<?php echo $MULTILANG_UsrTitNivel; ?>" name="<?php echo $MULTILANG_UsrDesNivel; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						-->
-						<tr>
-							<td align="RIGHT"><strong><?php echo $MULTILANG_UsrInterno; ?></strong></td><td width="10"></td>
-							<td>
-								<select  name="usuario_interno" id="usuario_interno"  class="selector_01">
-									<option value="1">Si</option>
-									<option value="0">No</option>
-								</select>
-								<a href="#" title="<?php echo $MULTILANG_UsrTitNivel; ?>" name="<?php echo $MULTILANG_UsrDesInterno; ?>"><i class="fa fa-question-circle"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"></td><td width="20">
-									</form>
-							</td>
-							<td>
-									<input type="Button" onclick="document.datos.submit()" name="" value="<?php echo $MULTILANG_Guardar; ?>" class="Botones">
-									&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" name="" value="<?php echo $MULTILANG_Cancelar; ?>" class="Botones">
-							</td>
-						</tr>
-					</table>
+
+                    <div class="form-group input-group">
+                        <input name="login" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrLogin; ?>">
+                        <span class="input-group-addon">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_UsrDesLogin; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                        </span>
+                    </div>
+
+                    <div class="form-group input-group">
+                        <input name="nombre"  onkeypress="return validar_teclado(event, 'alfanumerico');" maxlength="100" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrNombre; ?>">
+                        <span class="input-group-addon">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                        </span>
+                    </div>
+
+                    <div class="form-group input-group">
+                        <input name="clave"   onkeyup="muestra_seguridad_clave(this.value, this.form)" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
+                        <span class="input-group-addon">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                        </span>
+                        <span class="input-group-addon">
+                            <?php echo $MULTILANG_UsrNivelPW; ?>:
+                        </span>
+                        <input id="seguridad" value="0" size="3" name="seguridad" class="form-control" type="text" readonly onfocus="blur()">
+                        <span class="input-group-addon">
+                            %
+                        </span>
+                    </div>
+
+                    <div class="form-group input-group">
+                        <input name="clave1" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?> (Confirma)">
+                        <span class="input-group-addon">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                        </span>
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-at fa-fw "></i>
+                        </span>
+                        <input name="correo" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Correo; ?>">
+                        <span class="input-group-addon">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_UsrTitCorreo; ?>: <?php echo $MULTILANG_UsrDesCorreo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                        </span>
+                    </div>
+
+                    <label for="estado"><?php echo $MULTILANG_UsrEstado; ?>:</label>
+                    <div class="form-group input-group">
+                        <select id="estado" name="estado" class="form-control" >
+                            <option value="1"><?php echo $MULTILANG_Habilitado; ?></option>
+                            <option value="0"><?php echo $MULTILANG_Deshabilitado; ?></option>
+                        </select>
+                    </div>
+
+                    <label for="usuario_interno"><?php echo $MULTILANG_UsrInterno; ?>:</label>
+                    <div class="form-group input-group">
+                        <select id="usuario_interno" name="usuario_interno" class="form-control" >
+                            <option value="1"><?php echo $MULTILANG_Si; ?></option>
+                            <option value="0"><?php echo $MULTILANG_No; ?></option>
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="#" title="<?php echo $MULTILANG_UsrTitNivel; ?>: <?php echo $MULTILANG_UsrDesInterno; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                    </div>
+                </form>
+
+            <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Guardar; ?></a>
+            <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+
 		 <?php
 		 				cerrar_ventana();
+			$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 		 		}
+
+
 		 ?>
 
 <?php
@@ -1004,14 +992,18 @@ if ($accion=="ver_seguimiento_monitoreo")
 				abrir_ventana($MULTILANG_UsrAudit1, 'panel-info');
 					echo '<form name="datos" action="'.$ArchivoCORE.'" method="POST">
 						</form>';
-				echo '<table width="100%" border="0" cellspacing="2" align="CENTER" class="TextosVentana">
-					<tr>
-						<td align="center" bgcolor="#d6d6d6"><b>ID</b></td>
-						<td align="left" bgcolor="#d6d6d6"><b>'.$MULTILANG_UsrLogin.'</b></td>
-						<td align="left" bgcolor="#d6d6d6"><b>'.$MULTILANG_UsrAudDes.'</b></td>
-						<td align="center" bgcolor="#d6d6d6"><b>'.$MULTILANG_Fecha.' (AAAA-MM-DD)</b></td>
-						<td align="center" bgcolor="#d6d6d6"><b>'.$MULTILANG_Hora.' (HH-MM-SS)</b></td>
-					</tr>';
+				echo '<table class="table table-hover table-condensed table-unbordered btn-xs">
+					<thead>
+                    <tr>
+						<td><b>ID</b></td>
+						<td><b>'.$MULTILANG_UsrLogin.'</b></td>
+						<td><b>'.$MULTILANG_UsrAudDes.'</b></td>
+						<td><b>'.$MULTILANG_Fecha.' (AAAA-MM-DD)</b></td>
+						<td><b>'.$MULTILANG_Hora.' (HH-MM-SS)</b></td>
+					</tr>
+                    </thead>
+                    </body>
+                    ';
 
 
 				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria ORDER BY fecha DESC, hora DESC LIMIT 0,30");
@@ -1024,7 +1016,8 @@ if ($accion=="ver_seguimiento_monitoreo")
 								<td align="center">'.$registro["hora"].'</td>
 							</tr>';
 					}
-				echo '</table>
+				echo '</tbody>
+                </table>
 				<script type="text/JavaScript">
 					setTimeout("document.ver_auditoria_monitoreo.submit();",5000);
 				</script>
@@ -1033,7 +1026,7 @@ if ($accion=="ver_seguimiento_monitoreo")
 				</form>
 				';
 				abrir_barra_estado();
-				echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" << '.$MULTILANG_IrEscritorio.' " class="BotonesEstado">';
+				echo '<a class="btn btn-danger btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
 				cerrar_barra_estado();
 				cerrar_ventana();
 				 }
@@ -1057,22 +1050,36 @@ if ($accion=="ver_seguimiento_general")
 					<listar_usuarios> | <ver_seguimiento_especifico> | <ver_seguimiento_monitoreo>
 			*/
 
-				echo '<div align="center"><br>';
-				abrir_ventana($MULTILANG_UsrAudUsrs, 'panel-info');
-				if (@$inicio_reg=="") $inicio_reg=0;
-				if (@$fin_reg=="") $fin_reg=50;
-					echo ' <br><div align="center">
-								<form name="datos" action="'.$ArchivoCORE.'" method="POST">
-								&nbsp;&nbsp;'.$MULTILANG_UsrAudAccion.'
-								<input type="text" class="CampoTexto" name="accionbuscar" value="'.@$accionbuscar.'" size="30" maxlength="200"> '.$MULTILANG_UsrAudUsuario.'
-								<select name="usuario" class="Combos">
-									<option value="">'.$MULTILANG_Cualquiera.'</option>';
-										$resultado=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario ORDER BY login");
-										while($registro = $resultado->fetch())
-											{
-												echo '<option value="'.$registro["login"].'">'.$registro["login"].'</option>';
-											}
-					echo '		</select>	<br>
+            abrir_ventana($MULTILANG_UsrAudUsrs, 'panel-info');
+            if (@$inicio_reg=="") $inicio_reg=0;
+            if (@$fin_reg=="") $fin_reg=50;
+                ?>
+
+
+
+
+                <form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+                    <input type="hidden" name="accion" value="ver_seguimiento_general">
+                
+                    <div class="form-group input-group">
+                        <input name="accionbuscar" value="<?php echo @$accionbuscar; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrAudAccion; ?>">
+                        <span class="input-group-addon">
+                            <?php echo $MULTILANG_UsrAudUsuario; ?>
+                        </span>
+                        <select id="usuario" name="usuario" class="form-control" >
+                            <option value=""><?php echo $MULTILANG_Cualquiera; ?></option>
+                            <?php
+                                $resultado=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario ORDER BY login");
+                                while($registro = $resultado->fetch())
+                                    {
+                                        echo '<option value="'.$registro["login"].'">'.$registro["login"].'</option>';
+                                    }	
+                            ?>
+                        </select>
+                    </div>
+
+                    <?php
+					echo '		
 								&nbsp;&nbsp;'.$MULTILANG_UsrAudDesde.' <select name="diai" class="selector_01" >';
 													for ($i=1;$i<=date("j")-1;$i++)
 														{
@@ -1167,23 +1174,41 @@ if ($accion=="ver_seguimiento_general")
 																		echo '<option value="'.$i.'">'.$i.'</option>';
 														}
 							echo '
-									</select><br>
-								<input type="hidden" name="accion" value="ver_seguimiento_general">
-								&nbsp;&nbsp;'.$MULTILANG_UsrAudIniReg.'
-								<input type="text" class="CampoTexto"  name="inicio_reg" value="'.$inicio_reg.'" size="4" maxlength="6">
-								'.$MULTILANG_UsrAudVisual.' 
-								<input type="text" class="CampoTexto" name="fin_reg" value="'.$fin_reg.'" size="4" maxlength="6"> '.$MULTILANG_TblRegistros.'
-								&nbsp;&nbsp;<input type="submit" value=" '.$MULTILANG_Ejecutar.' >> " class="Botones">&nbsp;&nbsp;
-						</form>
-					</div>';
-				echo '<table width="100%" border="0" cellspacing="2" align="CENTER" class="TextosVentana">
+									</select>'; ?>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">
+                            <?php echo $MULTILANG_UsrAudIniReg; ?>
+                        </span>
+                        <input name="inicio_reg" value="<?php echo @$inicio_reg; ?>" type="text" class="form-control">
+                        <span class="input-group-addon">
+                            <?php echo $MULTILANG_UsrAudVisual; ?>
+                        </span>
+                        <input name="fin_reg" value="<?php echo @$fin_reg; ?>" type="text" class="form-control">
+                        <span class="input-group-addon">
+                            <?php echo $MULTILANG_TblRegistros; ?>
+                        </span>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-success btn-block"><?php echo $MULTILANG_Ejecutar; ?></button>
+                </form>
+                <hr>
+
+<?php
+				echo '
+                <table id="TablaAcciones" class="table table-condensed table-hover table-unbordered btn-xs table-striped">
+                    <thead>
 					<tr>
-						<td align="center" bgcolor="#d6d6d6"><b>ID</b></td>
-						<td align="left" bgcolor="#d6d6d6"><b>'.$MULTILANG_UsrLogin.'</b></td>
-						<td align="left" bgcolor="#d6d6d6"><b>'.$MULTILANG_UsrAudDes.'</b></td>
-						<td align="center" bgcolor="#d6d6d6"><b>'.$MULTILANG_Fecha.' (AAAA-MM-DD)</b></td>
-						<td align="center" bgcolor="#d6d6d6"><b>'.$MULTILANG_Hora.' (HH-MM-SS)</b></td>
-					</tr>';
+						<th><b>ID</b></th>
+						<th><b>'.$MULTILANG_UsrLogin.'</b></th>
+						<th><b>'.$MULTILANG_UsrAudDes.'</b></th>
+						<th><b>'.$MULTILANG_Fecha.'</b></th>
+						<th><b>'.$MULTILANG_Hora.'</b></th>
+					</tr>
+                    </thead>
+                    <tbody>
+                    ';
 
 				@$anoi = $ano;
 				@$anof = $ano;
@@ -1194,22 +1219,23 @@ if ($accion=="ver_seguimiento_general")
 				$resultado=@ejecutar_sql("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria WHERE fecha>='$anoi$mesi$diai' AND fecha<= '$anof$mesf$diaf' AND accion LIKE '%$accionbuscar%' AND usuario_login LIKE '%$usuario%' ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg");
 				while($registro = $resultado->fetch())
 					{
-						echo '<tr><td align="center">'.$registro["id"].'</td>
+						echo '<tr>
+                                <td>'.$registro["id"].'</td>
 								<td>'.$registro["usuario_login"].'</td>
 								<td>'.$registro["accion"].'</td>
-								<td align="center">'.$registro["fecha"].'</td>
-								<td align="center">'.$registro["hora"].'</td>
+								<td>'.$registro["fecha"].'</td>
+								<td>'.$registro["hora"].'</td>
 							</tr>';
 					}
-				echo '</table>
+				echo '</tbody>
+                </table>
 				<form action="'.$ArchivoCORE.'" method="POST" name="ver_auditoria_monitoreo"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="hidden" name="accion" value="ver_seguimiento_monitoreo">
-				</form>
-				';
+				</form>';
 
 				abrir_barra_estado();
-				echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" << '.$MULTILANG_IrEscritorio.' " class="BotonesEstado">';
-				echo '<input type="Button" onclick="document.ver_auditoria_monitoreo.submit()" value=" '.$MULTILANG_UsrAudMonit.' " class="BotonesEstadoCuidado">';
+				echo '<a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
+				echo '<a class="btn btn-warning btn-block" href="javascript:document.ver_auditoria_monitoreo.submit();"><i class="fa fa-home"></i> '.$MULTILANG_UsrAudMonit.'</a>';
 				cerrar_barra_estado();
 				cerrar_ventana();
 				 }
@@ -1439,7 +1465,7 @@ if ($accion=="listar_usuarios")
 					}
 				echo '</tbody>
                 </table>';
-				
+
 			} // Fin sino filtro
 
 	echo '

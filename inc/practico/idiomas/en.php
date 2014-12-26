@@ -115,7 +115,6 @@
 	$MULTILANG_Paso='Step';
 	$MULTILANG_Peso='Weight';
 	$MULTILANG_Pequeno='small';
-	$MULTILANG_PlantillaActiva='Active template';
 	$MULTILANG_Predeterminado='Default';
 	$MULTILANG_ProcesoFin='Process completed';
 	$MULTILANG_Puerto='Port';
@@ -624,7 +623,7 @@
 	$MULTILANG_MnuComando='Command';
 	$MULTILANG_MnuAdvElimina='IMPORTANT: Deleting this registry you could unlink some system options.\n'.$MULTILANG_Confirma;
 	$MULTILANG_MnuHlpComandoInf='Maybe you want to add to the command this srtring <b>:htm:Informes</b>  to say Practico <br>that puts all the data in Html format and with that CSS style sheet';
-	$MULTILANG_MnuHlpAwesome='';
+	$MULTILANG_MnuHlpAwesome='<b>Advice:</b> Instead JPEG or GIF images as icons you can use<br> the Font-Awesome or GlyphIcons notation/syntax.  See <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_BLANK">Available icons</a> and their <a href="http://fortawesome.github.io/Font-Awesome/examples/" target="_BLANK">Examples</a>.  More icons are available via <a href="http://getbootstrap.com/components/#glyphicons" target="_BLANK">GlyphIcons</a> too.';
 
 	//Objetos, seguridad y otros
 	$MULTILANG_ObjError='The type of object received in this command is unknown';
@@ -721,7 +720,7 @@
 	$MULTILANG_UsrAudit1='Tracking operations (automatically updated every 5 seconds)';
 	$MULTILANG_UsrAudDes='Details of the action';
 	$MULTILANG_UsrAudUsrs='Monitoring transactions for all users';
-	$MULTILANG_UsrAudAccion='With the <b>action</b>';
+	$MULTILANG_UsrAudAccion='With the ACTION';
 	$MULTILANG_UsrAudUsuario='for the <b>user</b>';
 	$MULTILANG_UsrAudDesde='From (Day / Month)';
 	$MULTILANG_UsrAudHasta='to';

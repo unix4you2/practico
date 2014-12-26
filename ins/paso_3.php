@@ -88,7 +88,6 @@
 		(start code)
 			NombreRAD='XXX';			// Nombre del aplicativo
 			VersionRAD='XXX';			// Version del aplicativo
-			PlantillaActiva='XXX';		// Mascara visual con la definicion de hojas CSS e imagenes.  Ubicada en /skin
 			ArchivoCORE='';				// Script que procesa todos los formularios. Vacio para la misma pagina o index.php
 
 			TablasCore='Core_';			// Prefijo de Tablas base para uso de Practico (Cuidado al cambiar)
@@ -107,7 +106,6 @@
 	*/
 
 	\$NombreRAD='%s';
-	\$PlantillaActiva='%s';
 	\$ArchivoCORE='';
 	\$TablasCore='%s';  // Cuidado al cambiar: Prefijo de Tablas base para uso de Practico
 	\$TablasApp='%s';  // Cuidado al cambiar: Prefijo para Tablas de datos definidas por el usuario
@@ -127,7 +125,7 @@
 	\$Auth_LDAPServidor='%s';
 	\$Auth_LDAPPuerto='%s';
 	\$Auth_LDAPDominio='%s';
-	\$Auth_LDAPOU='%s';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$PlantillaActivaNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW);
+	\$Auth_LDAPOU='%s';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW);
 	// Escribe el archivo de configuracion
 	$archivo_config=fopen("../core/configuracion.php","w");
 	if($archivo_config==null)
