@@ -196,61 +196,65 @@ if ($accion=="copiar_permisos")
 */
 if ($accion=="cambiar_clave")
 	{
-		echo '<div align="center">';
 ?>
-		<div align="center">
-		<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; ">
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<?php
 				mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'60%','fa fa-exclamation-triangle fa-5x','TextosEscritorio');
 			?>
-			<input type="hidden" name="accion" value="actualizar_clave">
-			<br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrCambioPW; ?></b></font>
-			<table border="0" cellspacing="0" cellpadding="0"><tr>
-				<td align="CENTER" valign="TOP">
-					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;" class="link_menu">
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_UsrAnteriorPW; ?></b></td><td width="10"></td>
-							<td>***********</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_UsrNuevoPW; ?></b></td><td width="10"></td>
-							<td><input class="CampoTexto" type="password" name="clave1" size="27" maxlength="20" onkeyup="muestra_seguridad_clave(this.value, this.form)"></td>
-							<td><?php echo $MULTILANG_UsrNivelPW; ?>: <input id="seguridad" value="0" size="3" name="seguridad" style="background:000000; border: 0px; text-decoration:italic;" class="CampoTexto" type="text" readonly onfocus="blur()">%</td>
-						</tr>
-						<tr>
-							<td align="RIGHT"><b><?php echo $MULTILANG_UsrVerificaPW; ?></b></td><td width="10"></td>
-							<td><input class="CampoTexto" type="password" name="clave2" size="27" maxlength="20" onkeypress="return FiltrarTeclas(this, event)"></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td align="RIGHT">
-								</form>
-								<form action="<?php echo $ArchivoCORE; ?>" method="POST" style="height: 0px; padding-bottom: 0px; padding-top: 0px; margin-top: 0px; margin-bottom: 0px;" name="cancelar"><input type="Hidden" name="accion" value="Ver_menu"></form>
-							</td><td width="5"></td>
-							<td align="center" colspan=3>
-								<br>
-								<?php
-									//Permite cambio solamente si es admin o el motor de autenticacion es practico
-									if ($Auth_TipoMotor=="practico" || $Login_usuario=="admin")
-										{
-											echo '<input type="Button" name="" value="'.$MULTILANG_Actualizar.'" class="BotonesCuidado" onClick="document.datos.submit();">
-											&nbsp;&nbsp;<input type="Button" onclick="document.cancelar.submit()" name="" value="'.$MULTILANG_Cancelar.'" class="Botones">';
-										}
-									else
-										{
-											echo '<br><h4>'.$MULTILANG_Importante.': '.$MULTILANG_UsrHlpNoPW.' ('.$Auth_TipoMotor.')</h4>';
-										}
-								?>
-							</td>
-							<td></td>
-						</tr>
-					</table>
-				</td>
-			</tr></table>
-		</DIV>
-		</div>
+                <input type="hidden" name="accion" value="actualizar_clave">
+                <br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrCambioPW; ?></b></font>
+
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                        <?php echo $MULTILANG_UsrAnteriorPW; ?>:
+                    </span>
+                    <input type="password" class="form-control" value="****************" readonly>
+                </div>
+        
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                        <?php echo $MULTILANG_UsrNuevoPW; ?>:
+                    </span>
+                    <input name="clave1"   onkeyup="muestra_seguridad_clave(this.value, this.form)" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
+                    <span class="input-group-addon">
+                        <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                    </span>
+                    <span class="input-group-addon">
+                        <?php echo $MULTILANG_UsrNivelPW; ?>:
+                    </span>
+                    <input id="seguridad" value="0" size="3" name="seguridad" class="form-control" type="text" readonly onfocus="blur()">
+                    <span class="input-group-addon">
+                        %
+                    </span>
+                </div>
+
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                        <?php echo $MULTILANG_UsrVerificaPW; ?>:
+                    </span>
+                    <input name="clave2" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?> (Confirma)">
+                    <span class="input-group-addon">
+                        <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                    </span>
+                </div>            
+
+            </form>
+            <div align=center>
+                <hr>
+                <?php
+                    //Permite cambio solamente si es admin o el motor de autenticacion es practico
+                    if ($Auth_TipoMotor=="practico" || $Login_usuario=="admin")
+                        {
+                            echo '
+                                <a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> '.$MULTILANG_Actualizar.'</a>
+                                <a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
+                        }
+                    else
+                        {
+                            echo '<br><h4>'.$MULTILANG_Importante.': '.$MULTILANG_UsrHlpNoPW.' ('.$Auth_TipoMotor.')</h4>';
+                        }
+                ?>
+            </div>
 <?php
 	}
 

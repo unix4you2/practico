@@ -72,7 +72,7 @@ IMPORTANTE:  Muchos archivos han sido reemplazados o eliminados por compatibilid
 * Added: Se ajustan métodos para cierre de marcos mediante la tecla Esc.
 * Added: Marcos de configuración diagramados de manera independiente
 * Added: Barra de menu/herramientas lateral e iconos de contexto en barra superior
-* Added: Inclusión de GlypIcons
+* Added: Inclusión de GlyphIcons
 * Added: Adición de librerías nuevas para elaboración de gráficos
 * Added: Se cambia la ventana de login por OAuth a modal.
 * Added: Panel administrativo al inicio con resumenes del sistema
@@ -94,7 +94,8 @@ IMPORTANTE:  Muchos archivos han sido reemplazados o eliminados por compatibilid
 * Fixed: Eliminadas las columnas innecesarias de nivel y descripcion de la tabla de usuarios
 * Fixed: Se elimina la seleccion de plantillas, ahora todo se hace por bootstrap
 * Fixed: Presentación de indicadores numericos sobre graficos Morris.
-* Fixed: Marco de configuracion ahora es responsive mediante bootstrap tabs
+* Fixed: Marco de configuracion de aplicación, de parámetros y de oauth ahora son responsive mediante bootstrap tabs
+* Fixed: Cambio de clave responsive
 "
 
 ########################################################################

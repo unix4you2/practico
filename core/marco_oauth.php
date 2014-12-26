@@ -63,12 +63,12 @@
 					<input type="hidden" name="accion" value="guardar_oauth">
 
 					<?php
-						echo '<br>&nbsp;&nbsp;&nbsp;<b>'.$MULTILANG_Importante.'</b>:<br>';
+						echo '<b>'.$MULTILANG_Importante.'</b>:<br>';
 						echo '<li>'.$MULTILANG_OauthTitURI; 						
 						echo '<li>'.$MULTILANG_OauthDesURI.'<hr>'; 
 					?>
 
-					<table cellspacing=0 cellpadding=10 border=0 align="center" style="font-size:11px; color:000000;">
+					<table class="table table-condensed table-unbordered btn-xs">
 						<tr>
 							<td valign=top align=center>
 									<!-- ### OAUTH GOOGLE ### -->
@@ -1139,27 +1139,17 @@
 							</td>
 						</tr>
 
-
-
-
-
 					</table>
-
-					</form>
-                
-			<?php
-			abrir_barra_estado();
-				echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_Guardar.' >>> " onClick="document.forms.configoauth.submit();">';
-			cerrar_barra_estado();
-			?>
-
 
 
 
           </div>
           <div class="modal-footer">
+            <button type="submit" class="btn btn-success"><?php echo $MULTILANG_Guardar; ?> <i class="fa fa-save"></i></button>
             <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
           </div>
         </div>
       </div>
     </div>
+
+					</form>

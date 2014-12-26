@@ -133,92 +133,94 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel"><?php echo $NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral; ?></h4>
+            <h4 class="modal-title" id="myModalLabel"><?php echo $NombreRAD.' - '.$MULTILANG_WSLlavesNuevo; ?></h4>
           </div>
           <div class="modal-body mdl-primary">
 
 
 
+            <form name="nuevallave" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+                <input type="hidden" name="accion" value="agregar_configws">
+                <div class="row">
+                    <div class="col-md-6">
 
-				<br><div align=center><font size=3><b><?php echo $MULTILANG_WSLlavesNuevo; ?></b></font>
-				<form name="nuevallave" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="hidden" name="accion" value="agregar_configws">
-					<table class="TextosVentana" align=center>
-					<tr>
-						<td>
-								<table class="TextosVentana">
-								<tr>
-									<td NOWRAP align="right"><?php echo $MULTILANG_WSLlavesNombre; ?>:</td>
-									<td>
-										<input type="text" name="nombre" size="20" maxlength=15 class="CampoTexto" value="<?php echo @$registro_campo_editar["titulo"]; ?>">
-										<a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-									</td>
-								</tr>
-								<tr>
-									<td align="right"><?php echo $MULTILANG_WSLlavesLlave; ?>:</td>
-									<td>
-										<input type="text" name="llave" size="15" maxlength=50 class="CampoTexto" value="<?php echo TextoAleatorio(10); ?>" readonly>
-									</td>
-								</tr>
-								<tr>
-									<td align="right"><?php echo $MULTILANG_WSLlavesSecreto; ?>:</td>
-									<td>
-										<input type="text" name="secreto" size="15" maxlength=50 class="CampoTexto" value="<?php echo TextoAleatorio(10); ?>" readonly>
-									</td>
-								</tr>
-								<tr>
-									<td align="right"><?php echo $MULTILANG_WSLlavesURI; ?>:</td>
-									<td>
-										<input type="text" name="uri" size="50" maxlength=255 class="CampoTexto">
-									</td>
-								</tr>
-								<tr>
-									<td NOWRAP align="right"><?php echo $MULTILANG_WSLlavesDominio; ?>:</td>
-									<td>
-										<input type="text" name="dominio_autorizado" size="50" maxlength=255 class="CampoTexto">
-										<a href="#" title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><i class="fa fa-question-circle"></i></a>
-									</td>
-								</tr>
-								<tr>
-									<td NOWRAP align="right"><?php echo $MULTILANG_WSLlavesIP; ?>:</td>
-									<td>
-										<input type="text" name="ip_autorizada" size="50" maxlength=255 class="CampoTexto">
-										<a href="#" title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><i class="fa fa-question-circle"></i></a>
-									</td>
-								</tr>
-								</table>
-						</td>
-						<td>
-								<?php echo $MULTILANG_WSLlavesFunciones; ?>
-								<a href="#" title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><i class="fa fa-question-circle"></i></a>:<br>
-								<textarea name="funciones_autorizadas" cols=40 rows=10></textarea>
-						</td>
-					</tr>
-					</table>
-					<br>
-					<?php
-						abrir_barra_estado();
-							echo '<input type="Button"  class="BotonesEstadoCuidado" value=" <<< '.$MULTILANG_IrEscritorio.' " onClick="OcultarPopUp(\'ConfiguracionWebServices\')">';
-							echo '<input type="Button"  class="BotonesEstado" value=" '.$MULTILANG_Agregar.' >>> " onClick="document.forms.nuevallave.submit();">';
-						cerrar_barra_estado();
-					?>
-				</form>
-				</div>
+                        <div class="form-group input-group">
+                            <input name="nombre" type="text" class="form-control" placeholder="<?php echo $MULTILANG_WSLlavesNombre; ?>">
+                            <span class="input-group-addon">
+                                <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                            </span>
+                        </div>
 
-			<br>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">
+                                <?php echo $MULTILANG_WSLlavesLlave; ?>:
+                            </span>
+                            <input name="llave" type="text" class="form-control" value="<?php echo TextoAleatorio(10); ?>" readonly>
+                        </div>
+
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">
+                                <?php echo $MULTILANG_WSLlavesSecreto; ?>:
+                            </span>
+                            <input name="secreto" type="text" class="form-control" value="<?php echo TextoAleatorio(10); ?>" readonly>
+                        </div>
+
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-globe"></i>
+                            </span>
+                            <input name="uri" type="text" class="form-control" placeholder="<?php echo $MULTILANG_WSLlavesURI; ?>">
+                        </div>
+
+                        <div class="form-group input-group">
+                            <input name="dominio_autorizado" type="text" class="form-control" placeholder="<?php echo $MULTILANG_WSLlavesDominio; ?>">
+                            <span class="input-group-addon">
+                                <a href="#" title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                            </span>
+                        </div>
+
+                        <div class="form-group input-group">
+                            <input name="ip_autorizada" type="text" class="form-control" placeholder="<?php echo $MULTILANG_WSLlavesIP; ?>">
+                            <span class="input-group-addon">
+                                <a href="#" title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                            </span>
+                        </div>
+
+                    </div>    
+                    <div class="col-md-6">
+                        
+                        <?php echo $MULTILANG_WSLlavesFunciones; ?>
+                        <div class="form-group input-group">
+                            <textarea name="funciones_autorizadas" rows=8 class="form-control"><?php echo @$parametros["funciones_autorizadas"]; ?></textarea>
+                            <span class="input-group-addon">
+                                <a href="#" title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            </span>
+                        </div>
+
+                        <button type="button" class="btn btn-success btn-block" onclick="document.forms.nuevallave.submit();"><i class="fa fa-save"></i> <?php echo $MULTILANG_Agregar; ?></button>
+
+                    </div>
+                </div>
+
+			</form>
+
+
+			<hr>
 			<?php echo $MULTILANG_WSLlavesDefinidas; ?><br><?php echo $MULTILANG_WSLlavesAyuda; ?>
 
-				<table width="100%" border="0" cellspacing="5" align="CENTER"  class="TextosVentana">
+				<table class="table table-unbordered table-striped table-hover table-condensed btn-xs">
+                    <thead>
 					<tr>
-						<td bgcolor="#D6D6D6" NOWRAP><b><?php echo $MULTILANG_WSLlavesNombre; ?><br><?php echo $MULTILANG_WSLlavesLlave; ?><br><?php echo $MULTILANG_WSLlavesSecreto; ?></b></td>
-						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_WSLlavesURI; ?></b></td>
-						<td bgcolor="#D6D6D6"><b><?php echo $MULTILANG_WSLlavesDominio; ?></b></td>
-						<td bgcolor="#d6d6d6"><b><?php echo $MULTILANG_WSLlavesIP; ?></b></td>
-						<td bgcolor="#D6D6D6"><b><?php echo $MULTILANG_WSLlavesFunciones; ?></b></td>
-						<td></td>
-						<td></td>
+						<th><b><?php echo $MULTILANG_WSLlavesNombre; ?><br><?php echo $MULTILANG_WSLlavesLlave; ?><br><?php echo $MULTILANG_WSLlavesSecreto; ?></b></th>
+						<th><b><?php echo $MULTILANG_WSLlavesURI; ?></b></th>
+						<th><b><?php echo $MULTILANG_WSLlavesDominio; ?></b></th>
+						<th><b><?php echo $MULTILANG_WSLlavesIP; ?></b></th>
+						<th><b><?php echo $MULTILANG_WSLlavesFunciones; ?></b></th>
+						<th></th>
+						<th></th>
 					</tr>
-
+                    </thead>
+                    <tbody>
 				<?php
 					$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_llaves_api." FROM ".$TablasCore."llaves_api");
 					while($registro = $consulta_forms->fetch())
@@ -234,22 +236,22 @@
 									<td><input type="text" name="ip_autorizada" value="'.$registro["ip_autorizada"].'" size="13" maxlength=255 class="CampoTexto"></td>
 									<td><textarea name="funciones_autorizadas" cols=20 rows=1>'.$registro["funciones_autorizadas"].'</textarea></td>
 									<td align="center">													
-								<input type="submit" value="'.$MULTILANG_Actualizar.'"  class="Botones">
+                                <button type="submit" class="btn btn-xs btn-info"><i class="fa fa-refresh"></i> '.$MULTILANG_Actualizar.'</button>
 							</form>
 									</td>
 									<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="delf'.$registro["id"].'" id="delf'.$registro["id"].'">
 												<input type="hidden" name="accion" value="eliminar_llavews">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
-												<input type="button" value="'.$MULTILANG_Eliminar.'"  class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_WSLlavesBorrar.'\',delf'.$registro["id"].');">
+                                                <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_WSLlavesBorrar.'\',delf'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 										</form>
 									</td>
 								</tr>';
 						}
-					echo '</table>';
+					echo '
+                        </tbody>
+                    </table>';
 				?>
-
-
 
 
           </div>

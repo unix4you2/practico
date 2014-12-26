@@ -370,7 +370,6 @@
 
           </div>
           <div class="modal-footer">
-            
             <button type="submit" class="btn btn-success"><?php echo $MULTILANG_Guardar; ?> <i class="fa fa-save"></i></button>
             <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
           </div>
