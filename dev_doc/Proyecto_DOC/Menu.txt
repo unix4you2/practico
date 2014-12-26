@@ -51,6 +51,15 @@ Group: Modulos Principales  {
 
       File: Articulador  (index.php)
       File: Conexiones PDO  (core/conexiones.php)
+
+      Group: Dev_tools  {
+
+         File: t_basedatos  (dev_tools/tests/t_basedatos.php)
+         File: t_basedatos  (dev_tools/tests/t_archivos.php)
+         File: t_bdconfig  (dev_tools/tests/t_bdconfig.php)
+         File: t_obsoletas  (dev_tools/tests/t_obsoletas.php)
+         }  # Group: Dev_tools
+
       File: Libreria base  (core/comunes.php)
       }  # Group: Core
 
@@ -78,6 +87,8 @@ Group: Modulos Principales  {
       File: Modulo monitoreo  (core/monitoreo.php)
       File: Seccion con los contactos de Chat disponibles  (core/marco_chat.php)
       File: Seccion Proveedores OAuth  (core/marco_param.php)
+      File: Seccion Escritorio Administrativo  (core/marco_admin.php)
+      File: Seccion Escritorio Administrativo  (core/marco_admin_morris.php)
       }  # Group: Modulos
 
    Group: Inc  {
@@ -115,5 +126,14 @@ Group: Mod  {
    File: ldap/.../lib/schema_functions.php  (mod/ldap/phpldapadmin-1.2.3/lib/schema_functions.php)
    File: ldap_admin_embebido  (mod/ldap/index.php)
    File: probar_ejemplo_mvc  (mod/mvc/index.php)
+
+   Group: Sopa  {
+
+      File: controlador/controlador.php  (mod/sopa/controlador/controlador.php)
+      File: DemoVista_SOPA_Facebook  (mod/sopa/vista/vista.php)
+      File: ObtenerEntradas_FacebookFanPage  (mod/sopa/modelo/modelo.php)
+      File: SOPA - Social Parser  (mod/sopa/index.php)
+      }  # Group: Sopa
+
    }  # Group: Mod
 
