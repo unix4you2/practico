@@ -1644,13 +1644,8 @@ function ventana_login()
 					$tipo_entrada="password";
 				}
 
-			// Define si muestra o no teclado virtual
-			$cadena_clase_teclado="";
-			if ($registro_campos["teclado_virtual"])
-				$cadena_clase_teclado="keyboardInput";
-
 			// Muestra el campo
-			$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="CampoTexto '.$cadena_clase_teclado.'" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].'  >';
+			$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control " '.$cadena_validacion.' '.$registro_campos["solo_lectura"].'  >';
 
 			// Muestra boton de busqueda cuando el campo sea usado para esto
 			if ($registro_campos["etiqueta_busqueda"]!="")
@@ -1768,7 +1763,7 @@ function ventana_login()
 			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 			// Muestra el campo
-			$salida.= '<textarea name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="AreaTexto" '.$registro_campos["solo_lectura"].'  >'.$cadena_valor.'</textarea>';
+			$salida.= '<textarea name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="form-control" '.$registro_campos["solo_lectura"].'  >'.$cadena_valor.'</textarea>';
 
 			// Muestra indicadores de obligatoriedad o ayuda
 			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
@@ -1946,7 +1941,7 @@ function ventana_login()
 				$cadena_altura='size='.$registro_campos["alto"];
 
 			// Muestra el campo
-			$salida.= '<select name="'.$registro_campos["campo"].'" class="Combos" '.$cadena_altura.' >';
+			$salida.= '<select name="'.$registro_campos["campo"].'" class="form-control" '.$cadena_altura.' >';
 
 			// Toma los valores desde la lista de opciones (cuando es estatico)
 			$opciones_lista = explode(",", $registro_campos["lista_opciones"]);
@@ -2127,7 +2122,10 @@ function ventana_login()
 	function cargar_objeto_iframe($registro_campos,$registro_datos_formulario)
 		{
 			global $campobase,$valorbase;
-			$salida='<iframe src="'.$registro_campos["url_iframe"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>';
+			$salida='
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe src="'.$registro_campos["url_iframe"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
+            </div>';
 			return $salida;
 		}
 
@@ -2313,7 +2311,7 @@ function ventana_login()
 				$salida.='<a target="_BLANK" href="'.$adjunto_url_archivo.'"><i class="fa fa-search"></i><b>'.$MULTILANG_FrmArchivoLink.'</b><img src="img/woo_save_download_32.png" border=0 width="20" height="20" align="absmiddle"></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>('.$MULTILANG_Tipo.': '.$adjunto_tipo_archivo.')</i><br>';
 
 			// Muestra el campo
-			$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="CampoTexto '.$cadena_clase_teclado.'" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].'  >';
+			$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control " '.$cadena_validacion.' '.$registro_campos["solo_lectura"].'  >';
 
 			// Muestra indicadores de obligatoriedad o ayuda
 			if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="'.$MULTILANG_TitValorUnico.'" name="'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
@@ -2659,9 +2657,8 @@ function ventana_login()
 
 				// Establece color de fondo para el form
 				$color_fondo="#f2f2f2";
-				if ($registro_formulario["color_fondo"]!="") $color_fondo=$registro_formulario["color_fondo"];
 				// Crea ventana si aplica para el form
-				if ($en_ventana) abrir_ventana($registro_formulario["titulo"],$color_fondo,'',$barra_herramientas_mini);
+				if ($en_ventana) abrir_ventana($registro_formulario["titulo"],'panel-primary','',$barra_herramientas_mini);
 				// Muestra ayuda en caso de tenerla
 				$imagen_ayuda='fa fa-info-circle fa-5x texto-azul';
 				if ($registro_formulario["ayuda_titulo"]!="" || $registro_formulario["ayuda_texto"]!="")
@@ -2698,7 +2695,7 @@ function ventana_login()
 						$ultimo_id=$registro_obj_fila_unica["id"];
 						// Inicia la tabla con los campos
 						echo '
-						<table cellspacing=0 cellpadding=2 border=0 class="TextosVentana" align=center width="100%"><tr>';
+						<table class="table table-unbordered table-condensed btn-xs"><tr>';
 						//Recorre todas las comunas definidas para el formulario buscando objetos
 						for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
 							{
@@ -2707,8 +2704,11 @@ function ventana_login()
 								
 									//Inicia columna de formulario
 									echo '<td valign=top align=center>';
+									//Define si se muestra o no el borde
+                                    $estilo_bordes="table-unbordered";
+                                    if ($ancho_borde_visible=="1") $estilo_bordes="table-bordered";
 									// Crea los campos definidos por cada columna de formulario
-									echo '<table cellspacing=0 cellpadding=2 border='.$ancho_borde_visible.' class="TextosVentana">';
+                                    echo '<table cellspacing=0 cellpadding=2 class="table '.$estilo_bordes.'">';
 									while ($registro_campos = $consulta_campos->fetch())
 										{
 											//Crea la fila y celda donde va el campo
@@ -2818,6 +2818,7 @@ function ventana_login()
 			if($consulta_botones->rowCount()>0)
 				{
 					abrir_barra_estado();
+                    echo '<div align="center">';
 					while ($registro_botones = $consulta_botones->fetch())
 						{
 							//Define el tipo de boton de acuerdo al tipo de accion como Submit, Reset o Button
@@ -2867,6 +2868,7 @@ function ventana_login()
 								}
 							echo '<input type="'.$tipo_boton.'"  class="'.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.@$cadena_javascript.' >';
 						}
+                    echo '</div>';
 					cerrar_barra_estado();
 				}
 

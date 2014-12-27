@@ -79,6 +79,7 @@ IMPORTANTE:  Muchos archivos han sido reemplazados o eliminados por compatibilid
 * Added: Panel de dashboard para el administrador de aplicacion
 * Added: Modulo SOPA.  Una aproximación al Social Parsing y demo de funciones para obtener URLs con Práctico.
 * Enhan: Tamaño del instalador disminuido en varias megas
+* Enhan: Se aumenta longitud del campo de estilo para botones y se permite ademas el uso de texto libre para ingresar estilos bootstrap
 * Fixed: Se simplifica script de inicio para login y cambio dinámico de marcos.
 * Fixed: Actualizados scripts de instalacion pues ya no requieren creación de menues
 * Fixed: Se evita cierre de sesion involuntario por enlaces mal generados al escritorio
@@ -109,10 +110,11 @@ UPDATE core_menu SET imagen='fa fa-download' WHERE imagen='bajar.png';
 UPDATE core_menu SET imagen='fa fa-cloud-upload' WHERE imagen='tango_user-home.png';
 UPDATE core_menu SET imagen='fa fa-bar-chart fa-3x' WHERE imagen='compfile.png';
 ALTER TABLE core_formulario DROP COLUMN color_fondo;
-ALTER TABLE core_formulario_objeto DROP COLUMN teclado_virtual ;
+ALTER TABLE core_formulario_objeto DROP COLUMN teclado_virtual;
 ALTER TABLE core_informe DROP COLUMN color_fondo;
 ALTER TABLE core_usuario DROP COLUMN descripcion;
 ALTER TABLE core_usuario DROP COLUMN nivel;
+ALTER TABLE core_formulario_boton CHANGE COLUMN estilo estilo VARCHAR(250) NULL DEFAULT '';
 "
 
 ########################################################################

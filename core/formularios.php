@@ -1436,12 +1436,8 @@ if ($accion=="editar_formulario")
                         </span>
                     </div>
                     
-                    <label for="estilo"><?php echo $MULTILANG_FrmEstilo; ?></label>
                     <div class="form-group input-group">
-                        <select id="estilo" name="estilo" class="form-control">
-                            <option value="BotonesEstado"><?php echo $MULTILANG_FrmEstilo1; ?></option>
-                            <option value="BotonesEstadoCuidado"><?php echo $MULTILANG_FrmEstilo2; ?></option>
-                        </select>
+                        <input type="text" name="estilo" class="form-control" placeholder="<?php echo $MULTILANG_FrmEstilo; ?>: BootStrap o Customizado">
                         <span class="input-group-addon">
                             <a href="#" title="<?php echo $MULTILANG_FrmDesEstilo; ?>"><i class="fa fa-question-circle text-info"></i></a>
                         </span>
@@ -1551,7 +1547,7 @@ if ($accion=="editar_formulario")
           <div class="modal-body mdl-primary">
 
 
-					<table class="table table-condensed table-hover">
+					<table class="table table-condensed table-hover btn-xs">
 						<thead>
                         <tr>
 							<td><b><?php echo $MULTILANG_Titulo; ?> (<?php echo $MULTILANG_Tipo?>)</b></td>
@@ -1695,7 +1691,7 @@ if ($accion=="editar_formulario")
 														<input type="hidden" name="formulario" value="'.$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 														<input type="Hidden" name="popup_activo" value="FormularioCampos">
-                                                        <button type="submit" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i></button>
+                                                        <button type="submit" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i></button>
 												</form>
 										</td>';
 									}
