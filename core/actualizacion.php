@@ -40,31 +40,28 @@ if ($accion=="actualizar_practico")
 		<div align="center">
 			<br>
 			<i class="fa fa-inbox fa-3x fa-fw"></i><b> <?php echo $MULTILANG_ActUsando; ?>: <?php include("inc/version_actual.txt"); ?></b><br>
-			<br><hr>
-			<table border="0" width="100%"  cellspacing="0" cellpadding="0" align="center" class="TextosVentana"><tr height="100%">
-				<td align=center height="100%">
+			<hr>
 					<form action="<?php echo $ArchivoCORE; ?>" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="extension_archivo" value=".zip">
 						<input type="hidden" name="MAX_FILE_SIZE" value="8192000">
 						<input type="Hidden" name="accion" value="cargar_archivo">
 						<input type="Hidden" name="siguiente_accion" value="analizar_parche">
-						<input type="Hidden" name="texto_boton_siguiente" value="Continuar con la revisi&oacute;n >>>">
+						<input type="Hidden" name="texto_boton_siguiente" value="Continuar con la revisi&oacute;n">
 						<input type="Hidden" name="carpeta" value="tmp">
 						<b><?php echo $MULTILANG_ActPaquete; ?>: </b><br>
-						<input name="archivo" type="file" class="CampoTexto">
+						<input name="archivo" type="file" class="form-control btn btn-info">
 						<br><br>
-						<input type="submit" value="<?php echo $MULTILANG_CargarArchivo; ?>"  class="BotonesCuidado"> (<?php echo $MULTILANG_ActSobreescritos; ?>)
+						<input type="submit" value="<?php echo $MULTILANG_CargarArchivo; ?>"  class="btn btn-success"> (<?php echo $MULTILANG_ActSobreescritos; ?>)
 					</form> 
 					<hr>
-					<br>
-				</td>
-			</tr></table>
+
 		</div>
 <?php
 		abrir_barra_estado();
-		echo '<input type="Button" onclick="document.core_ver_menu.submit()" value="<< '.$MULTILANG_Cancelar.'" class="BotonesEstado">';
+		echo '<a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 		cerrar_barra_estado();
 		cerrar_ventana();
+        $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 
 
@@ -88,7 +85,6 @@ if ($accion=="actualizar_practico")
 if ($accion=="cargar_archivo")
 	{
 		abrir_ventana($MULTILANG_Adjuntando, 'panel-primary');
-		echo '<table border="0" width="400"  cellspacing="0" cellpadding="0" align="center" class="TextosVentana"><tr height="100%"><td align=center height="100%">';
 
 		//datos del arhivo
 		$mensaje_error="";
@@ -112,11 +108,11 @@ if ($accion=="cargar_archivo")
 
 		if ($mensaje_error=="")
 			{				
-				echo '<br><br><i class="fa fa-check"></i>'.$MULTILANG_CargaCorrecta.'.<br><br>
+				echo '<i class="fa fa-check fa-fw fa-3x"></i> '.$MULTILANG_CargaCorrecta.'.<br><br>
 					<form action="'.$ArchivoCORE.'" method="post">
 						<input type="Hidden" name="archivo_cargado" value="'.$carpeta.'/'.$nombre_archivo.'">
 						<input type="Hidden" name="accion" value="'.$siguiente_accion.'">
-						<input type="submit" value="'.$texto_boton_siguiente.'"  class="BotonesCuidado">
+                        <button type="submit" class="btn btn-success btn-block"><i class="fa fa-list"></i> '.$texto_boton_siguiente.'</button>
 					</form>';
 				auditar("Carga archivo en carpeta $carpeta - $nombre_archivo");
 			}
@@ -129,11 +125,12 @@ if ($accion=="cargar_archivo")
 					</form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 			}
-		echo '</td></tr></table><br>';
-		abrir_barra_estado();
-		echo '<input type="Button" onclick="document.core_ver_menu.submit()" value="<< '.$MULTILANG_IrEscritorio.'" class="BotonesEstado">';
-		cerrar_barra_estado();
+
+
+		echo '<br><a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
+
 		cerrar_ventana();
+        $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 
 
@@ -157,8 +154,7 @@ if ($accion=="cargar_archivo")
 if ($accion=="analizar_parche")
 	{
 		abrir_ventana($MULTILANG_ErrorDescomprimiendo.' '.$archivo_cargado, 'panel-info');
-		echo '<table border="0" width="100%"  cellspacing="15" cellpadding="0" align="center" class="TextosVentana"><tr height="100%"><td align=left height="100%">
-		<u>'.$MULTILANG_ContenidoParche.':</u><br>';
+		echo '<u>'.$MULTILANG_ContenidoParche.':</u><br>';
 		$mensaje_error="";
 
 		//Lee la version actualmente instalada de practico
@@ -175,7 +171,7 @@ if ($accion=="analizar_parche")
 		//Libreria necesaria para extraer el archivo
 		include("inc/pclzip/pclzip.lib.php");
 		$archivo = new PclZip($archivo_cargado);
-
+        $carpeta_destino=""; //Define donde se descomprime el archivo.  Por defecto es la ruta vacia para tomar la actual o raiz
 		//Obtiene archivo compat.txt con el numero de version compatible del parche
 		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "tmp/par_compat.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
 		$version_compatible=trim($lista_contenido[0]['content']);
@@ -221,13 +217,13 @@ if ($accion=="analizar_parche")
 					echo $MULTILANG_Error.": ".$archivo->errorInfo(true);
 				echo '<OL>';
 				for ($i=0; $i<sizeof($lista_contenido); $i++)
-					echo "<li><font color=blue>".$lista_contenido[$i][filename]."</font> ... ".$MULTILANG_Integridad.": <b>".$lista_contenido[$i][status]."</b>";  /*Propiedades adicionales:  filename, stored_filename, size, compressed_size, mtime, comment, folder, index, status*/
+					echo "<li><font color=blue>".@$lista_contenido[$i][filename]."</font> ... ".$MULTILANG_Integridad.": <b>".@$lista_contenido[$i][status]."</b>";  /*Propiedades adicionales:  filename, stored_filename, size, compressed_size, mtime, comment, folder, index, status*/
 				echo '</OL>';
 				echo '<center>
 				<hr><b>'.$MULTILANG_ResumenParche.'</b>:<br>
-				<textarea cols="100" rows="7" class="AreaTexto">'.$resumen_cambios.'</textarea>
+				<textarea rows=7 class="form-control btn-xs">'.$resumen_cambios.'</textarea>
 				<hr><b>'.$MULTILANG_ResumenInstrucciones.'</b>:<br>
-				<textarea cols="100" rows="7" class="AreaTexto">'.$resumen_sql.'</textarea>
+				<textarea rows=7 class="form-control btn-xs">'.$resumen_sql.'</textarea>
 				<br><br><b>'.$MULTILANG_FinRevision.'<br>
 				 <font color=blue>- '.$MULTILANG_ActMsj3.': '.$version_final.' -</font></b><br>
 				 <br><br>
@@ -236,9 +232,9 @@ if ($accion=="analizar_parche")
 						<input type="Hidden" name="version_actual" value="'.$version_actual.'">
 						<input type="Hidden" name="version_final" value="'.$version_final.'">
 						<input type="Hidden" name="archivo_cargado" value="'.$archivo_cargado.'">
-						<input type="submit" value=" '.$MULTILANG_Continuar.' >>>"  class="BotonesCuidado">
+                        <button type="submit" class="btn btn-danger btn-block"><i class="fa fa-warning texto-blink icon-yellow"></i> '.$MULTILANG_Continuar.' <i class="fa fa-warning texto-blink icon-yellow"></i></button>
 					</form>';
-				auditar("Analiza archivo en carpeta $carpeta - $nombre_archivo");
+				auditar("Analiza archivo $archivo_cargado");
 			}
 		else
 			{
@@ -249,11 +245,11 @@ if ($accion=="analizar_parche")
 					</form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 			}
-		echo '</center></td></tr></table>';
-		abrir_barra_estado();
-		echo '<input type="Button" onclick="document.core_ver_menu.submit()" value="<< '.$MULTILANG_IrEscritorio.'" class="BotonesEstado">';
-		cerrar_barra_estado();
+		echo '</center>';
+		echo '<br><a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
+
 		cerrar_ventana();
+        $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 
 
@@ -312,7 +308,7 @@ if ($accion=="aplicar_parche")
 			}
 
 		abrir_ventana($MULTILANG_Aplicando.': '.$archivo_cargado, 'panel-primary');
-		echo '<table border="0" width="100%"  cellspacing="15" cellpadding="0" align="center" class="TextosVentana"><tr height="100%"><td align=left height="100%">
+		echo '<table class="table table-unbordered table-condensed"><tr><td>
 		<u>'.$MULTILANG_ActDesde.' '.$version_actual.' ---> '.$version_final.':</u><br><br>';
 		$mensaje_error="";
 
@@ -416,9 +412,9 @@ if ($accion=="aplicar_parche")
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 			}
 		echo '</center></td></tr></table>';
-		abrir_barra_estado();
-		echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" << '.$MULTILANG_IrEscritorio.' " class="BotonesEstado">';
-		cerrar_barra_estado();
+
+		echo '<br><a class="btn btn-success btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
 		cerrar_ventana();
+        $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 ?>

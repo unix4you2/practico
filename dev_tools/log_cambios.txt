@@ -89,6 +89,7 @@ IMPORTANTE:  Muchos archivos han sido reemplazados o eliminados por compatibilid
 * Fixed: Se reduce numero de columnas en formularios a 12 para posterior compatibilidad con BootStrap
 * Fixed: El tipo de objeto al aumentar o disminuir pesos de controles es ahora identificado.
 * Fixed: Administrador de archivos ahora es responsive
+* Fixed: Asistente de actualización es ahora responsive
 * Fixed: Ahora todos los niveles de usuario son establecidos a -1 como valor para transicion a su eliminacion
 * Fixed: Durante creacion de usuarios se valida login solo si es diferente de vacio para evitar error fatal del query
 * Fixed: Eliminadas las columnas innecesarias de nivel y descripcion de la tabla de usuarios
@@ -96,6 +97,7 @@ IMPORTANTE:  Muchos archivos han sido reemplazados o eliminados por compatibilid
 * Fixed: Presentación de indicadores numericos sobre graficos Morris.
 * Fixed: Marco de configuracion de aplicación, de parámetros y de oauth ahora son responsive mediante bootstrap tabs
 * Fixed: Cambio de clave responsive
+* Fixed: Variables desconocidas durante extracción de parches de actualización
 "
 
 ########################################################################
