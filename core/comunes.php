@@ -41,7 +41,7 @@
 		Retorna 1 en caso de encontrar el permiso
 		Retorna 0 cuando no se encuentra un permiso
 */
-	function permiso_heredado_accion($accion)
+	function permiso_heredado_accion($PCO_Accion)
 		{
 			global $Login_usuario;
 			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
@@ -49,79 +49,79 @@
 
 			// Verifica mapeo de permisos para acciones que llaman a otras, heredadas.  Valores en = 1  son funciones publicas:
 			// FUNCION_solicitada_por_el_usuario				FUNCION_madre_de_entrada_a_funcion_solicitada
-			if ($accion== "mis_informes")						$retorno = 1;
-			if ($accion== "guardar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
-			if ($accion== "editar_informe")						$retorno = permiso_agregado_accion("administrar_informes");
-			if ($accion== "eliminar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
-			if ($accion== "actualizar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
-			if ($accion== "eliminar_informe_tabla")				$retorno = permiso_agregado_accion("administrar_informes");
-			if ($accion== "guardar_informe_tabla")				$retorno = permiso_agregado_accion("administrar_informes");
-			if ($accion== "eliminar_informe_campo")				$retorno = permiso_agregado_accion("administrar_informes");
-			if ($accion== "guardar_informe_campo")				$retorno = permiso_agregado_accion("administrar_informes");
-			if ($accion== "guardar_informe_condicion")			$retorno = permiso_agregado_accion("administrar_informes");
-			if ($accion== "eliminar_informe_condicion")			$retorno = permiso_agregado_accion("administrar_informes");
-			if ($accion== "actualizar_grafico_informe")			$retorno = permiso_agregado_accion("administrar_informes");
-			if ($accion== "actualizar_agrupamiento_informe")	$retorno = permiso_agregado_accion("administrar_informes");
-			if ($accion== "guardar_accion_informe")				$retorno = permiso_agregado_accion("administrar_informes");
-			if ($accion== "eliminar_registro_informe")			$retorno = permiso_agregado_accion("administrar_informes");
-			if ($accion== "eliminar_accion_informe")			$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "mis_informes")						$retorno = 1;
+			if ($PCO_Accion== "guardar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "editar_informe")						$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "eliminar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "actualizar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "eliminar_informe_tabla")				$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "guardar_informe_tabla")				$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "eliminar_informe_campo")				$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "guardar_informe_campo")				$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "guardar_informe_condicion")			$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "eliminar_informe_condicion")			$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "actualizar_grafico_informe")			$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "actualizar_agrupamiento_informe")	$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "guardar_accion_informe")				$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "eliminar_registro_informe")			$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "eliminar_accion_informe")			$retorno = permiso_agregado_accion("administrar_informes");
 			// Funciones en core/usuarios.php
-			if ($accion== "cambiar_clave")						$retorno = 1;
-			if ($accion== "ver_seguimiento_monitoreo")			$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($accion== "resetear_clave")						$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($accion== "ver_seguimiento_general")			$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($accion== "ver_seguimiento_especifico")			$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($accion== "actualizar_clave")					$retorno = permiso_agregado_accion("cambiar_clave");
-			if ($accion== "agregar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($accion== "guardar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($accion== "eliminar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($accion== "cambiar_estado_usuario")				$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($accion== "permisos_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($accion== "agregar_permiso")					$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($accion== "eliminar_permiso")					$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($accion== "informes_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($accion== "agregar_informe_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($accion== "eliminar_informe_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($accion== "copiar_permisos")					$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($PCO_Accion== "cambiar_clave")						$retorno = 1;
+			if ($PCO_Accion== "ver_seguimiento_monitoreo")			$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($PCO_Accion== "resetear_clave")						$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($PCO_Accion== "ver_seguimiento_general")			$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($PCO_Accion== "ver_seguimiento_especifico")			$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($PCO_Accion== "actualizar_clave")					$retorno = permiso_agregado_accion("cambiar_clave");
+			if ($PCO_Accion== "agregar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($PCO_Accion== "guardar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($PCO_Accion== "eliminar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($PCO_Accion== "cambiar_estado_usuario")				$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($PCO_Accion== "permisos_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($PCO_Accion== "agregar_permiso")					$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($PCO_Accion== "eliminar_permiso")					$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($PCO_Accion== "informes_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($PCO_Accion== "agregar_informe_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($PCO_Accion== "eliminar_informe_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
+			if ($PCO_Accion== "copiar_permisos")					$retorno = permiso_agregado_accion("listar_usuarios");
 			// Funciones en core/menus.php
-			if ($accion== "Ver_menu")							$retorno = 1;
-			if ($accion== "guardar_menu")						$retorno = permiso_agregado_accion("administrar_menu");
-			if ($accion== "eliminar_menu")						$retorno = permiso_agregado_accion("administrar_menu");
-			if ($accion== "detalles_menu")						$retorno = permiso_agregado_accion("administrar_menu");
-			if ($accion== "actualizar_menu")					$retorno = permiso_agregado_accion("administrar_menu");
+			if ($PCO_Accion== "Ver_menu")							$retorno = 1;
+			if ($PCO_Accion== "guardar_menu")						$retorno = permiso_agregado_accion("administrar_menu");
+			if ($PCO_Accion== "eliminar_menu")						$retorno = permiso_agregado_accion("administrar_menu");
+			if ($PCO_Accion== "detalles_menu")						$retorno = permiso_agregado_accion("administrar_menu");
+			if ($PCO_Accion== "actualizar_menu")					$retorno = permiso_agregado_accion("administrar_menu");
 			// Funciones en core/tablas.php
-			if ($accion== "asistente_tablas")					$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($accion== "guardar_crear_tabla_asistente")		$retorno = permiso_agregado_accion("asistente_tablas");
-			if ($accion== "editar_tabla")						$retorno = permiso_agregado_accion("guardar_crear_tabla_asistente");
-			if ($accion== "eliminar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($accion== "eliminar_campo")						$retorno = permiso_agregado_accion("editar_tabla");
-			if ($accion== "guardar_crear_campo")				$retorno = permiso_agregado_accion("editar_tabla");
-			if ($accion== "guardar_crear_tabla")				$retorno = permiso_agregado_accion("administrar_tablas");
+			if ($PCO_Accion== "asistente_tablas")					$retorno = permiso_agregado_accion("administrar_tablas");
+			if ($PCO_Accion== "guardar_crear_tabla_asistente")		$retorno = permiso_agregado_accion("asistente_tablas");
+			if ($PCO_Accion== "editar_tabla")						$retorno = permiso_agregado_accion("guardar_crear_tabla_asistente");
+			if ($PCO_Accion== "eliminar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
+			if ($PCO_Accion== "eliminar_campo")						$retorno = permiso_agregado_accion("editar_tabla");
+			if ($PCO_Accion== "guardar_crear_campo")				$retorno = permiso_agregado_accion("editar_tabla");
+			if ($PCO_Accion== "guardar_crear_tabla")				$retorno = permiso_agregado_accion("administrar_tablas");
 			// Funciones en core/formularios.php
-			if ($accion== "guardar_datos_formulario")			$retorno = 1;
-			if ($accion== "eliminar_datos_formulario")			$retorno = 1;
-			if ($accion== "actualizar_datos_formulario")		$retorno = 1;
-			if ($accion== "actualizar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
-			if ($accion== "copiar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
-			if ($accion== "actualizar_campo_formulario")		$retorno = permiso_agregado_accion("administrar_formularios");
-			if ($accion== "guardar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
-			if ($accion== "eliminar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
-			if ($accion== "editar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
-			if ($accion== "guardar_campo_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
-			if ($accion== "eliminar_campo_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
-			if ($accion== "guardar_accion_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
-			if ($accion== "eliminar_accion_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
+			if ($PCO_Accion== "guardar_datos_formulario")			$retorno = 1;
+			if ($PCO_Accion== "eliminar_datos_formulario")			$retorno = 1;
+			if ($PCO_Accion== "actualizar_datos_formulario")		$retorno = 1;
+			if ($PCO_Accion== "actualizar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
+			if ($PCO_Accion== "copiar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
+			if ($PCO_Accion== "actualizar_campo_formulario")		$retorno = permiso_agregado_accion("administrar_formularios");
+			if ($PCO_Accion== "guardar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
+			if ($PCO_Accion== "eliminar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
+			if ($PCO_Accion== "editar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
+			if ($PCO_Accion== "guardar_campo_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
+			if ($PCO_Accion== "eliminar_campo_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
+			if ($PCO_Accion== "guardar_accion_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
+			if ($PCO_Accion== "eliminar_accion_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
 			// Funciones en core/sesion.php
-			if ($accion== "Iniciar_login")						$retorno = 1;
-			if ($accion== "Terminar_sesion")					$retorno = 1;
-			if ($accion== "Mensaje_cierre_sesion")				$retorno = 1;
+			if ($PCO_Accion== "Iniciar_login")						$retorno = 1;
+			if ($PCO_Accion== "Terminar_sesion")					$retorno = 1;
+			if ($PCO_Accion== "Mensaje_cierre_sesion")				$retorno = 1;
 			// Funciones en core/objetos.php
-			if ($accion== "cargar_objeto")						$retorno = 1;
+			if ($PCO_Accion== "cargar_objeto")						$retorno = 1;
 			// Funciones en core/actualizacion.php
-			if ($accion== "cargar_archivo")						$retorno = permiso_agregado_accion("actualizar_practico");
-			if ($accion== "analizar_parche")					$retorno = permiso_agregado_accion("cargar_archivo");
-			if ($accion== "aplicar_parche")						$retorno = permiso_agregado_accion("analizar_parche");
-			//echo $Login_usuario.':Permiso heredado accion='.$accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
+			if ($PCO_Accion== "cargar_archivo")						$retorno = permiso_agregado_accion("actualizar_practico");
+			if ($PCO_Accion== "analizar_parche")					$retorno = permiso_agregado_accion("cargar_archivo");
+			if ($PCO_Accion== "aplicar_parche")						$retorno = permiso_agregado_accion("analizar_parche");
+			//echo $Login_usuario.':Permiso heredado accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
 			return $retorno;
 		}
 
@@ -141,20 +141,20 @@
 		Retorna 1 en caso de encontrar el permiso
 		Retorna 0 cuando no se encuentra un permiso
 */
-	function permiso_agregado_accion($accion)
+	function permiso_agregado_accion($PCO_Accion)
 		{
 			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 			$retorno=0;
 			global $ConexionPDO,$TablasCore,$Login_usuario;
 			
-			$consulta = $ConexionPDO->prepare("SELECT ".$TablasCore."menu.id FROM ".$TablasCore."usuario_menu,".$TablasCore."menu WHERE ".$TablasCore."menu.id=".$TablasCore."usuario_menu.menu AND usuario='$Login_usuario' AND ".$TablasCore."menu.comando='$accion' ");
+			$consulta = $ConexionPDO->prepare("SELECT ".$TablasCore."menu.id FROM ".$TablasCore."usuario_menu,".$TablasCore."menu WHERE ".$TablasCore."menu.id=".$TablasCore."usuario_menu.menu AND usuario='$Login_usuario' AND ".$TablasCore."menu.comando='$PCO_Accion' ");
 			$consulta->execute();
 			$registro = $consulta->fetch();
 			if ($registro[0]!="")
 				{
 					$retorno=1;
 				}
-			//echo $Login_usuario.':Permiso agregado accion='.$accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
+			//echo $Login_usuario.':Permiso agregado accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
 			return $retorno;
 		}
 
@@ -174,7 +174,7 @@
 		Retorna 1 en caso de encontrar el permiso
 		Retorna 0 cuando no se encuentra un permiso
 */
-	function permiso_raiz_admin($accion)
+	function permiso_raiz_admin($PCO_Accion)
 		{
 			global $Login_usuario;
 			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
@@ -182,7 +182,7 @@
 			// Permisos o acciones raiz para el admin
 			if ($Login_usuario=="admin")
 				{
-					switch ($accion)
+					switch ($PCO_Accion)
 						{
 							case "cambiar_clave":
 							case "guardar_configuracion":
@@ -201,7 +201,7 @@
 								break;
 						}
 				}
-			//echo $Login_usuario.':Permiso raiz admin='.$accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
+			//echo $Login_usuario.':Permiso raiz admin='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
 			return $retorno;
 		}
 
@@ -220,31 +220,31 @@
 		Retorna 1 en caso de encontrar el permiso
 		Retorna 0 cuando no se encuentra un permiso
 */
-	function permiso_accion($accion)
+	function permiso_accion($PCO_Accion)
 		{
 			global $Login_usuario,$TablasCore;
 			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 			$retorno=0;
 
 			// Evalua inicialmente permisos para el admin (evita queries)
-			// $retorno=permiso_raiz_admin($accion);
+			// $retorno=permiso_raiz_admin($PCO_Accion);
 			if ($Login_usuario=="admin") $retorno=1;
 
 			// Si es un usuario estandar siempre entra, si es el admin entra si no es permiso raiz
 			if (!$retorno)
 				{
 					// Busca permisos agregados directamente al usuario
-					$retorno=permiso_agregado_accion($accion);
+					$retorno=permiso_agregado_accion($PCO_Accion);
 					// Si no encuentra permisos directos, busca en los heredados de los directos
 					if (!$retorno)
 						{
 							// Si no encuentra el permiso directo llama los heredados
-							$retorno=permiso_heredado_accion($accion);
+							$retorno=permiso_heredado_accion($PCO_Accion);
 						}
 					//Si no encuentra en los heredados busca en preautorizados por configuracion
 					if (!$retorno)
 						{
-							$resultado=ejecutar_sql("SELECT id from ".$TablasCore."parametros WHERE funciones_personalizadas LIKE '%$accion%' ");
+							$resultado=ejecutar_sql("SELECT id from ".$TablasCore."parametros WHERE funciones_personalizadas LIKE '%$PCO_Accion%' ");
 							$parametros = $resultado->fetch();
 							//Si encuentra un registro con la accion preautorizada entonces autoriza al usuario
 							if ($parametros["id"]!="")
@@ -252,7 +252,7 @@
 						}
 				}
 
-			//echo $Login_usuario.':Permiso accion='.$accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
+			//echo $Login_usuario.':Permiso accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
 			return $retorno;
 		}
 
@@ -306,10 +306,10 @@
 				Salida:
 					Cadenas y variables filtradas sobre sus valores globales
 			*/
-		global $accion,$error_titulo,$error_descripcion;
+		global $PCO_Accion,$error_titulo,$error_descripcion;
 		// Escapar siempre las acciones pues deberian tener solo letras, numeros y underlines.
-		$accion=escapar_contenido($accion);
-		$accion = preg_replace("/[^A-Za-z0-9_]/", "", $accion);
+		$PCO_Accion=escapar_contenido($PCO_Accion);
+		$PCO_Accion = preg_replace("/[^A-Za-z0-9_]/", "", $PCO_Accion);
 		
 		// Escapa siempre los mensajes de error
 		$error_titulo=escapar_contenido($error_titulo);
@@ -323,7 +323,7 @@
 		$error_descripcion=escapar_contenido($error_descripcion);
 
 		// Escapar algunas variables segun la accion recibida
-		if ($accion=="ver_seguimiento_general")
+		if ($PCO_Accion=="ver_seguimiento_general")
 			{
 				global $accionbuscar,$fin_reg,$inicio_reg;
 				$accionbuscar=escapar_contenido($accionbuscar);
@@ -331,52 +331,52 @@
 				$fin_reg=escapar_contenido($fin_reg);
 			}
 
-		if ($accion=="administrar_formularios")
+		if ($PCO_Accion=="administrar_formularios")
 			{
 				global $error_descripcion,$error_titulo;
 				$error_descripcion=escapar_contenido($error_descripcion);
 				$error_titulo=escapar_contenido($error_titulo);
 			}
 
-		if ($accion=="actualizar_menu")
+		if ($PCO_Accion=="actualizar_menu")
 			{
 				global $id;
 				$id=escapar_contenido($id);
 			}
 
-		if ($accion=="detalles_menu")
+		if ($PCO_Accion=="detalles_menu")
 			{
 				global $id;
 				$id=escapar_contenido($id);
 			}
 
-		if ($accion=="editar_informe")
+		if ($PCO_Accion=="editar_informe")
 			{
 				// 
 				global $informe;
 				$informe=escapar_contenido($informe);
 			}
 
-		if ($accion=="listar_usuarios")
+		if ($PCO_Accion=="listar_usuarios")
 			{
 				global $login_filtro,$nombre_filtro;
 				$login_filtro=escapar_contenido($login_filtro);
 				$nombre_filtro=escapar_contenido($nombre_filtro);
 			}
 			
-		if ($accion=="cargar_objeto")
+		if ($PCO_Accion=="cargar_objeto")
 			{
 				global $objeto;
 				$objeto=escapar_contenido($objeto);
 			}
 
-		if ($accion=="guardar_formulario")
+		if ($PCO_Accion=="guardar_formulario")
 			{
 				global $tabla_datos;
 				$tabla_datos=escapar_contenido($tabla_datos); // Revisar si afecta el script de autorun
 			}
 			
-		if ($accion=="Iniciar_login")
+		if ($PCO_Accion=="Iniciar_login")
 			{
 				global $uid,$clave,$captcha;
 				$uid=escapar_contenido($uid);
@@ -470,9 +470,9 @@
 					1' and ''=' 
 					' OR 'A'='A
 			*/
-			global $accion;
+			global $PCO_Accion;
 
-			if ($accion=="Iniciar_login")
+			if ($PCO_Accion=="Iniciar_login")
 				{
 					$cadena = str_ireplace("''","'",$cadena);
 					$cadena = str_ireplace("\\","",$cadena);
@@ -525,7 +525,7 @@
 			*/
 			global $ConexionPDO,$ModoDepuracion;
 			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin;
-			global $accion;
+			global $PCO_Accion;
 			global $Login_usuario,$_SeparadorCampos_;
 			
 			// Filtra la cadena antes de ser ejecutada
@@ -563,8 +563,8 @@
                     mensaje($MULTILANG_ErrorTiempoEjecucion,$mensaje_final, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 					echo '<script type="" language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\\n\\n'.$mensaje_final.'");</script>';
 					//Redirecciona segun la accion
-					if ($accion=="Iniciar_login")
-						echo '<form name="Acceso" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value=""></form><script type="" language="JavaScript">	document.Acceso.submit();  </script>';
+					if ($PCO_Accion=="Iniciar_login")
+						echo '<form name="Acceso" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value=""></form><script type="" language="JavaScript">	document.Acceso.submit();  </script>';
 					return 1;
 				}
 		}
@@ -674,7 +674,7 @@
 
 		Registro de auditoria llevado sobre la tabla
 */
-	function auditar($accion,$usuario="")
+	function auditar($PCO_Accion,$usuario="")
 		{
 			global $ConexionPDO,$ArchivoCORE,$TablasCore;
 			global $ListaCamposSinID_auditoria,$_SeparadorCampos_;
@@ -685,7 +685,7 @@
 			else
 				$usuario_auditar=$usuario;
 			//Lleva el registro
-			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES (?,?,?,?)","$usuario_auditar$_SeparadorCampos_$accion$_SeparadorCampos_$fecha_operacion$_SeparadorCampos_$hora_operacion");
+			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES (?,?,?,?)","$usuario_auditar$_SeparadorCampos_$PCO_Accion$_SeparadorCampos_$fecha_operacion$_SeparadorCampos_$hora_operacion");
 		}
 
 
@@ -1187,12 +1187,12 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function buscar_actualizaciones($Login_usuario='',$accion='')
+	function buscar_actualizaciones($Login_usuario='',$PCO_Accion='')
 		{
 			global $MULTILANG_Atencion,$MULTILANG_ActAlertaVersion;
 			// Genera un aleatorio entre 1 y 10 para no sacar siempre el aviso y buscar nuevas versiones.
 			$buscar=rand(0,7);
-			if ($Login_usuario=="admin" && $accion=="Ver_menu" && $buscar==1)
+			if ($Login_usuario=="admin" && $PCO_Accion=="Ver_menu" && $buscar==1)
 				{
 					$path_ultima_version="https://raw.githubusercontent.com/unix4you2/practico/master/dev_tools/version_publicada.txt";
 					$version_actualizada = @cargar_url($path_ultima_version);
@@ -1394,7 +1394,7 @@ function ventana_login()
                         <div align=center class="panel-body">
 
                                 <form role="form" name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
-                                <input type="Hidden" name="accion" value="Iniciar_login">
+                                <input type="Hidden" name="PCO_Accion" value="Iniciar_login">
                                     <div class="form-group">
                                         <img name="img_login" id="img_login" src="img/practico_login.png" alt="" border="0"><br><br>
                                     </div>
@@ -2773,7 +2773,7 @@ function ventana_login()
 				//Si se quiere anular el formulario y su accion cuando se trata de un sub-formulario de consulta
 				if (!$anular_form)
 					echo'<form name="datos" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-						<input type="Hidden" name="accion" value="guardar_datos_formulario">
+						<input type="Hidden" name="PCO_Accion" value="guardar_datos_formulario">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="id_registro_datos" value="'.@$registro_datos_formulario["id"].'">
 						';
@@ -2798,7 +2798,8 @@ function ventana_login()
 						$ultimo_id=$registro_obj_fila_unica["id"];
 						// Inicia la tabla con los campos
 						echo '
-						<table class="table table-unbordered table-condensed btn-xs"><tr>';
+                            <div class="table-responsive">
+                            <table class="table table-responsive table-unbordered table-condensed btn-xs"><tr>';
 						//Recorre todas las comunas definidas para el formulario buscando objetos
 						for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
 							{
@@ -2806,18 +2807,13 @@ function ventana_login()
 								$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND columna=? AND visible=1 AND peso >? AND peso <=? ORDER BY peso","$formulario$_SeparadorCampos_$cl$_SeparadorCampos_$limite_inferior$_SeparadorCampos_$limite_superior");
 								
 									//Inicia columna de formulario
-									echo '<td valign=top align=center>';
+									echo '<td>';
 									// Crea los campos definidos por cada columna de formulario
-                                    echo '<table class="table table-condensed btn-xs '.$estilo_bordes.'">';
 									while ($registro_campos = $consulta_campos->fetch())
 										{
-											//Crea la fila y celda donde va el campo
 											//Imprime el campo solamente si no es fila unica, si es fila_unica guarda en una variable para uso posterior
 											if($registro_campos["fila_unica"]=="0")
 												{
-													echo '<tr>
-														<!-- DEPRECATED Version tablas<td align="right" valign=top>'.$registro_campos["titulo"].'</td>-->
-														<td valign=top>';
 													// Formatea cada campo de acuerdo a su tipo
 													// CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas abajo tambien
 													$tipo_de_objeto=@$registro_campos["tipo"];
@@ -2841,8 +2837,6 @@ function ventana_login()
 													//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
 													if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
 														echo $objeto_formateado;
-													// Cierra la fila y celda donde se puso el objeto
-													echo '</td></tr>';
 												}
 											/*
 											else
@@ -2853,12 +2847,11 @@ function ventana_login()
 														</td></tr>';
 												}*/
 										}
-									// Cierra tabla de campos en la columna
-									echo '</table>';
 									echo '</td>'; //Fin columna de formulario
 							}
 						// Finaliza la tabla con los campos
-						echo '</tr></table>';
+                        echo '</tr></table>
+                            </div>';
 
 						//Busca datos del registro de fila_unica
 						$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND id=? ","$formulario$_SeparadorCampos_$ultimo_id");
@@ -3256,14 +3249,14 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					if ($total_botones>0)
 						{
 							$SalidaFinalInforme.= '<form name="FRMBASEINFORME" action="'.$ArchivoCORE.'" method="POST">
-								<input type="Hidden" name="accion" value="">
+								<input type="Hidden" name="PCO_Accion" value="">
 								<input type="Hidden" name="tabla" value="">
 								<input type="Hidden" name="campo" value="">
 								<input type="Hidden" name="valor" value="">
 								<input type="Hidden" name="objeto" value="">
 								</form>';
 							$SalidaFinalInformePDF.= '<form name="FRMBASEINFORME" action="'.$ArchivoCORE.'" method="POST">
-								<input type="Hidden" name="accion" value="">
+								<input type="Hidden" name="PCO_Accion" value="">
 								<input type="Hidden" name="tabla" value="">
 								<input type="Hidden" name="campo" value="">
 								<input type="Hidden" name="valor" value="">
@@ -3382,7 +3375,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		if ($registro_informe["formato_final"]=="G" && ( $registro_informe["ancho"]=="" || $registro_informe["alto"]=="" ))
 			{
 				echo '<form name="cancelarXTamano" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 					<input type="Hidden" name="error_descripcion" value="'.$MULTILANG_InfErrTamano.'">
 					</form>
@@ -3518,7 +3511,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 	*/
 /* ################################################################## */
 /* ################################################################## */
-	if ($accion=="cambiar_estado_campo")
+	if ($PCO_Accion=="cambiar_estado_campo")
 		{		
 			/*
 				Function: cambiar_estado_campo
@@ -3548,7 +3541,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					@auditar("Cambia estado del campo $campo en objetoID $TipoCampo");
 
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="'.$accion_retorno.'">
+						<input type="Hidden" name="PCO_Accion" value="'.$accion_retorno.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.@$formulario.'">
 						<input type="Hidden" name="informe" value="'.@$informe.'">
@@ -3561,7 +3554,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="editar_formulario">
+						<input type="Hidden" name="PCO_Accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="informe" value="'.$informe.'">

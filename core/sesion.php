@@ -53,7 +53,7 @@
 	Ver tambien:
 		<seguridad_clave> | <cambiar_clave>
 */
-	if ($accion=="Iniciar_login") 
+	if ($PCO_Accion=="Iniciar_login") 
 		{
 			//Filtra cadenas recibidas para evitar sql injection
 			$uid_orig=$uid;
@@ -152,7 +152,7 @@
 				}
 			else
 				{
-					echo '<form name="Acceso" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="Ver_menu"></form><script type="" language="JavaScript">	document.Acceso.submit();  </script>';
+					echo '<form name="Acceso" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="Ver_menu"></form><script type="" language="JavaScript">	document.Acceso.submit();  </script>';
 				}
 		}
 
@@ -167,11 +167,11 @@
 	Ver tambien:
 		<Mensaje_cierre_sesion>
 */
-	if ($accion=="Terminar_sesion")
+	if ($PCO_Accion=="Terminar_sesion")
 	{
 		auditar("Cierra sesion desde $direccion_auditoria");
 		session_destroy();
-		echo '<form name="Redireccion" method="POST"><input type="Hidden" name="accion" value="Mensaje_cierre_sesion"></form><script type="" language="JavaScript">	document.Redireccion.submit();  </script>';
+		echo '<form name="Redireccion" method="POST"><input type="Hidden" name="PCO_Accion" value="Mensaje_cierre_sesion"></form><script type="" language="JavaScript">	document.Redireccion.submit();  </script>';
 	}
 
 
@@ -188,7 +188,7 @@
 	Ver tambien:
 		<Terminar_sesion>
 */
-	if ($accion=="Mensaje_cierre_sesion")
+	if ($PCO_Accion=="Mensaje_cierre_sesion")
 	{
 		abrir_ventana($MULTILANG_Atencion, 'panel-primary');
 			echo '<strong><font size="3">'.$MULTILANG_SesionCerrada.'</font>
@@ -203,7 +203,7 @@
 			</tr></table>
             <center>
 			<form name="Again" method="POST">
-				<input type="Hidden" name="accion" value="">
+				<input type="Hidden" name="PCO_Accion" value="">
                 <a class="btn btn-info" href="javascript:document.Again.submit();"><i class="fa fa-refresh fa-spin"></i> '.$MULTILANG_Ingresar.'</a>
 			</form></center>';
 		@session_destroy();

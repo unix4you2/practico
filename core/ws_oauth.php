@@ -26,20 +26,20 @@
 	*/
 
 	// Google
-	$APIGoogle_ClientId='';
-	$APIGoogle_ClientSecret='';
+	$APIGoogle_ClientId='34534';
+	$APIGoogle_ClientSecret='345345';
 	$APIGoogle_RedirectUri='http://127.0.0.1/practico/index.php?WSOn=1&WSId=autenticacion_oauth&OAuthSrv=Google';
 	$APIGoogle_Template='';
 
 	// Facebook
-	$APIFacebook_ClientId='';
-	$APIFacebook_ClientSecret='';
+	$APIFacebook_ClientId='34543';
+	$APIFacebook_ClientSecret='345435';
 	$APIFacebook_RedirectUri='http://127.0.0.1/practico/index.php?WSOn=1&WSId=autenticacion_oauth&OAuthSrv=Facebook';
 	$APIFacebook_Template='';
 
 	// Twitter
-	$APITwitter_ClientId='';
-	$APITwitter_ClientSecret='';
+	$APITwitter_ClientId='345435';
+	$APITwitter_ClientSecret='345345';
 	$APITwitter_RedirectUri='http://127.0.0.1/practico/index.php?WSOn=1&WSId=autenticacion_oauth&OAuthSrv=Twitter';
 	$APITwitter_Template='';
 
@@ -50,8 +50,8 @@
 	$APIDropbox_Template='';
 
 	// Flickr
-	$APIFlickr_ClientId='';
-	$APIFlickr_ClientSecret='';
+	$APIFlickr_ClientId='345435';
+	$APIFlickr_ClientSecret='345345';
 	$APIFlickr_RedirectUri='http://127.0.0.1/practico/index.php?WSOn=1&WSId=autenticacion_oauth&OAuthSrv=Flickr';
 	$APIFlickr_Template='';
 

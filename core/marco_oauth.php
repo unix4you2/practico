@@ -60,7 +60,7 @@
 			?>
 
 					<form name="configoauth" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="hidden" name="accion" value="guardar_oauth">
+					<input type="hidden" name="PCO_Accion" value="guardar_oauth">
 
 					<?php
 						echo '<b>'.$MULTILANG_Importante.'</b>:<br>';

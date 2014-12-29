@@ -18,30 +18,30 @@ README.md
 CHANGELOG.md
 AUTHORS
 index.php
-core/comunes.php
 core/actualizacion.php
+core/comunes.php
 core/formularios.php
 core/informes.php
-core/tablas.php
-core/marco_param.php
-core/marco_wscfg.php
-core/marco_arriba.php
-core/marco_param.php
 core/marco_abajo.php
 core/marco_admin.php
-core/marco_chat.php
-core/marco_oauth.php
+core/marco_admin_morris.php
+core/marco_arriba.php
 core/marco_conf.php
 core/marco_dev.php
+core/marco_oauth.php
+core/marco_param.php
+core/marco_wscfg.php
+core/marco_chat.php
 core/menus.php
-core/marco_admin_morris.php
+core/monitoreo.php
+core/objetos.php
+core/sesion.php
+core/tablas.php
+core/usuarios.php
 core/ws_funciones.php
 core/ws_nucleo.php
-core/objetos.php
+core/ws_oauth.php
 core/conexiones.php
-core/monitoreo.php
-core/sesion.php
-core/usuarios.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/font-awesome/*
@@ -53,6 +53,9 @@ inc/jquery/*
 img/favicon.ico
 mod/sopa/*
 mod/fileman/index.php
+mod/ldap/index.php
+mod/mvc/index.php
+mod/pdf/index.php
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -80,6 +83,7 @@ IMPORTANTE:  Muchos archivos han sido reemplazados o eliminados por compatibilid
 * Added: Modulo SOPA.  Una aproximación al Social Parsing y demo de funciones para obtener URLs con Práctico.
 * Enhan: Tamaño del instalador disminuido en varias megas
 * Enhan: Se aumenta longitud del campo de estilo para botones y se permite ademas el uso de texto libre para ingresar estilos bootstrap
+* Enhan: La variable de control de practico ahora se llama $PCO_Accion en lugar de simplemente $PCO_Accion para evitar conflictos.  Usuarios que deseen compatibilidad a versiones anteriores podrán hacer una asignación de la nueva variable así: $PCO_Accion=$PCO_Accion;
 * Fixed: Se simplifica script de inicio para login y cambio dinámico de marcos.
 * Fixed: Actualizados scripts de instalacion pues ya no requieren creación de menues
 * Fixed: Se evita cierre de sesion involuntario por enlaces mal generados al escritorio

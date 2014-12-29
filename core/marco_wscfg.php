@@ -40,7 +40,7 @@
 	Salida:
 		Registro con llaves de API agregado
 */
-	if ($accion=="agregar_configws")
+	if ($PCO_Accion=="agregar_configws")
 		{
 			$mensaje_error="";
 			if ($nombre=="") $mensaje_error.=$MULTILANG_WSLlavesNombre.'<br>';
@@ -54,7 +54,7 @@
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
@@ -72,7 +72,7 @@
 	Salida:
 		Registro con llaves de API actualizado
 */
-	if ($accion=="actualizar_llavews")
+	if ($PCO_Accion=="actualizar_llavews")
 		{
 			$mensaje_error="";
 			if ($mensaje_error=="")
@@ -84,7 +84,7 @@
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
@@ -103,7 +103,7 @@
 	Salida:
 		Registro con llaves de API eliminado
 */
-	if ($accion=="eliminar_llavews")
+	if ($PCO_Accion=="eliminar_llavews")
 		{
 			$mensaje_error="";
 			if ($mensaje_error=="")
@@ -115,7 +115,7 @@
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
@@ -140,7 +140,7 @@
 
 
             <form name="nuevallave" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-                <input type="hidden" name="accion" value="agregar_configws">
+                <input type="hidden" name="PCO_Accion" value="agregar_configws">
                 <div class="row">
                     <div class="col-md-6">
 
@@ -227,7 +227,7 @@
 						{
 							echo '
 							<form action="'.$ArchivoCORE.'" method="POST" name="dactf'.$registro["id"].'" id="dactf'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-								<input type="hidden" name="accion" value="actualizar_llavews">
+								<input type="hidden" name="PCO_Accion" value="actualizar_llavews">
 								<input type="hidden" name="id" value="'.$registro["id"].'">
 								<tr>
 									<td><b><font color=blue>'.$registro["nombre"].'</font></b><br>'.$registro["llave"].'<br>'.$registro["secreto"].'</td>
@@ -241,7 +241,7 @@
 									</td>
 									<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="delf'.$registro["id"].'" id="delf'.$registro["id"].'">
-												<input type="hidden" name="accion" value="eliminar_llavews">
+												<input type="hidden" name="PCO_Accion" value="eliminar_llavews">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
                                                 <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_WSLlavesBorrar.'\',delf'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 										</form>

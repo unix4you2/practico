@@ -33,16 +33,16 @@
 ?>
 
 <form name="administrar_tablas" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="accion" value="administrar_tablas">
+	<input type="Hidden" name="PCO_Accion" value="administrar_tablas">
 </form>
 <form name="administrar_formularios" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="accion" value="administrar_formularios">
+	<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
 </form>
 <form name="listar_usuarios" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="accion" value="listar_usuarios">
+	<input type="Hidden" name="PCO_Accion" value="listar_usuarios">
 </form>
 <form name="ver_seguimiento_monitoreo" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="accion" value="ver_seguimiento_monitoreo">
+	<input type="Hidden" name="PCO_Accion" value="ver_seguimiento_monitoreo">
 </form>
 
 

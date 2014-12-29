@@ -136,7 +136,7 @@
 				?>
 				<?php 
                     //Agrega boton de retorno al inicio si la accion es diferente al escritorio
-					if ($accion!="Ver_menu" && $Sesion_abierta)
+					if ($PCO_Accion!="Ver_menu" && $Sesion_abierta)
 						echo '<a class="btn btn-success btn-xs" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i></a>';
 				?>
 				<?php 
@@ -189,7 +189,7 @@
                                 <a data-toggle="modal" href="javascript:document.ver_monitoreo.submit();">
                                     <div>
                                         <form name="ver_monitoreo" action="<?php echo $ArchivoCORE; ?>" method="POST">
-                                            <input type="Hidden" name="accion" value="administrar_monitoreo">
+                                            <input type="Hidden" name="PCO_Accion" value="administrar_monitoreo">
                                         </form>
                                         <i class="fa fa-lightbulb-o fa-fw"></i> <?php echo $MULTILANG_MonTitulo; ?>
                                         <span class="pull-right text-muted small">5</span>
@@ -201,7 +201,7 @@
                                 <a data-toggle="modal" href="javascript:document.actualizarad.submit();">
                                     <div>
                                         <form name="actualizarad" action="<?php echo $ArchivoCORE; ?>" method="POST">
-                                            <input type="Hidden" name="accion" value="actualizar_practico">
+                                            <input type="Hidden" name="PCO_Accion" value="actualizar_practico">
                                         </form>
                                         <i class="fa fa-download fa-fw"></i> <?php echo $MULTILANG_Actualizar; ?> <?php echo $NombreRAD; ?>
                                         <span class="pull-right text-muted small">6</span>
@@ -280,7 +280,7 @@
                             
                             <?php
                                 //Siempre presenta el administrador de archivos al superusuario
-                                if($Sesion_abierta && @$Login_usuario=="admin" && $accion!="")
+                                if($Sesion_abierta && @$Login_usuario=="admin" && $PCO_Accion!="")
                                     {
                             ?>
                                         <li>
@@ -300,12 +300,12 @@
                         <br>
                         <?php
                             // Muestra la accion actual si el usuario es administrador y la accion no es vacia - Sirve como guia a la hora de crear objetos
-                            if(@$Login_usuario=="admin" && $accion!="")
+                            if(@$Login_usuario=="admin" && $PCO_Accion!="")
                                 {
                                     // Calcula tiempos de ejecucion del script
                                     $tiempo_final_script = obtener_microtime();
                                     $tiempo_total_script = $tiempo_final_script - $tiempo_inicio_script;
-                                    echo "<strong><i class='fa fa-cog fa-fw'></i> $MULTILANG_Accion:</strong> $accion <br><strong><i class='fa fa-clock-o fa-fw'></i> $MULTILANG_TiempoCarga:</strong> ";
+                                    echo "<strong><i class='fa fa-cog fa-fw'></i> $MULTILANG_Accion:</strong> $PCO_Accion <br><strong><i class='fa fa-clock-o fa-fw'></i> $MULTILANG_TiempoCarga:</strong> ";
                                     echo round($tiempo_total_script,3);
                                     echo " s<br><strong><i class='fa fa-file-code-o fa-fw'></i> Inclusiones:</strong> ".(count(get_included_files()))."<hr>"; // Retorna arreglo con cantidad de archivos incluidos
                                 }
@@ -348,19 +348,19 @@
 
 
 <form method="POST" name="core_ver_menu" action="<?php echo $ArchivoCORE; ?>" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="accion" value="Ver_menu">
+	<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 </form>
 <form method="POST" name="cerrar_sesion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    <input type="Hidden" name="accion" value="Terminar_sesion">
+    <input type="Hidden" name="PCO_Accion" value="Terminar_sesion">
 </form>
 <form method="POST" name="reseteo_clave" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    <input type="Hidden" name="accion" value="cambiar_clave">
+    <input type="Hidden" name="PCO_Accion" value="cambiar_clave">
 </form>
 <form method="POST" name="mis_informes" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    <input type="Hidden" name="accion" value="mis_informes">
+    <input type="Hidden" name="PCO_Accion" value="mis_informes">
 </form>
 <form method="POST" name="fileman_admin_embebido" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    <input type="Hidden" name="accion" value="fileman_admin_embebido">
+    <input type="Hidden" name="PCO_Accion" value="fileman_admin_embebido">
 </form>
 
 
@@ -380,7 +380,7 @@
 
 
 				<?php
-					if ($Sesion_abierta && $accion=="Ver_menu") {
+					if ($Sesion_abierta && $PCO_Accion=="Ver_menu") {
 						echo '<ul class="nav nav-pills">';
 						// Carga las opciones del menu superior
 
@@ -398,7 +398,7 @@
 								// Verifica si se trata de un comando interno y crea formulario y enlace correspondiente
 								//if ($registro["tipo_comando"]=="Interno")
 									{
-										echo '<form action="'.$ArchivoCORE.'" method="post" name="top_'.$registro["id"].'" id="top_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;"><input type="hidden" name="accion" value="'.$registro["comando"].'"></form>';
+										echo '<form action="'.$ArchivoCORE.'" method="post" name="top_'.$registro["id"].'" id="top_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;"><input type="hidden" name="PCO_Accion" value="'.$registro["comando"].'"></form>';
 										echo '<a href="javascript:document.top_'.$registro["id"].'.submit();"><i class="'.$registro["imagen"].'"></i> '.$registro["texto"].'</a>';
 									}
                                 echo '</li>';

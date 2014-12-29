@@ -31,7 +31,7 @@
 		tiempo_inicio_script - Hora en microtime marcada para el incio del script
 
 		(start code)
-			if($Login_usuario=="admin" && $accion!="")
+			if($Login_usuario=="admin" && $PCO_Accion!="")
 				{
 					$tiempo_final_script = obtener_microtime();
 					$tiempo_total_script = $tiempo_final_script - $tiempo_inicio_script;
@@ -92,9 +92,6 @@
     <script src="inc/bootstrap/js/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="inc/bootstrap/js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
-
-
-
 	<!-- Canvas -->
     <!--<script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>-->
 
@@ -106,11 +103,24 @@
 
     <?php
         //Si el usuario es admin por defecto presenta la barra lateral activa
-        if ((@$Login_usuario=="admin" && @$Sesion_abierta && @$accion=="Ver_menu") || (@$Login_usuario!="" && @$Sesion_abierta && @$VerNavegacionIzquierdaResponsive==1))
+        if ((@$Login_usuario=="admin" && @$Sesion_abierta && @$PCO_Accion=="Ver_menu") || (@$Login_usuario!="" && @$Sesion_abierta && @$VerNavegacionIzquierdaResponsive==1))
             echo '<script language="JavaScript">
                     ver_navegacion_izquierda_responsive();
                 </script>';
     ?>
+
+    <?php
+        // Habilita el popup activo
+        if (@$popup_activo=="FormularioCampos")	
+            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalElementoFormulario").modal("show"); }); </script>';
+        if (@$popup_activo=="FormularioBotones")
+            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalBotonFormulario").modal("show"); }); </script>';
+        if (@$popup_activo=="FormularioDiseno")
+            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalDisenoFormulario").modal("show"); }); </script>';
+        if (@$popup_activo=="FormularioAcciones")
+            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalDisenoBotones").modal("show"); }); </script>';
+    ?>
+
 
     <script language="JavaScript">
         //Carga los tooltips programados en la hoja.  Por defecto todos los elementos con data-toggle=tootip
@@ -122,7 +132,7 @@
     <?php
         // Estadisticas de uso anonimo con GABeacon
         $PrefijoGA='<img src="https://ga-beacon.appspot.com/';
-        $PosfijoGA='/Practico/'.$accion.'?pixel" border=0 ALT=""/>';
+        $PosfijoGA='/Practico/'.$PCO_Accion.'?pixel" border=0 ALT=""/>';
         // Este valor indica un ID generico de GA UA-847800-9 No edite esta linea sobre el codigo
         // Para validar que su ID es diferente al generico de seguimiento.  En lugar de esto cambie
         // su valor a traves del panel de configuracion de Practico con el entregado como ID de GoogleAnalytics

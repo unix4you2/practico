@@ -39,7 +39,7 @@
 	Salida:
 		IFrame con contenido generado por la herramienta
 */
-if ($accion=="ldap_admin_embebido") 
+if ($PCO_Accion=="ldap_admin_embebido") 
 	{
 		echo '<iframe src="mod/ldap/phpldapadmin-1.2.3" width="95%" height="95%" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>';
 	}

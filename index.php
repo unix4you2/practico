@@ -97,7 +97,7 @@
     }
 
     // Verifica algunas variables minimas de trabajo en el primer inicio para evitar NOTICE y WARNINGs
-    if (!isset($accion)) $accion="";
+    if (!isset($PCO_Accion)) $PCO_Accion="";
     if (!isset($Sesion_abierta)) $Sesion_abierta=0;
 
     // Inicia las conexiones con la BD y las deja listas para las operaciones
@@ -113,7 +113,7 @@
     include_once("core/correos.php");
 
     // Almacena tiempo de inicio para calculo de tiempos de ejecucion del script (informados al admin)
-    if(@$Login_usuario=="admin" && $accion!="") {
+    if(@$Login_usuario=="admin" && $PCO_Accion!="") {
         $tiempo_inicio_script = obtener_microtime();
     }
 
@@ -126,7 +126,7 @@
     limpiar_entradas(); // Evita XSS
 
     // Valida llaves de paso y permisos de accion
-    if ($accion!= "" && $accion!="Iniciar_login" && $accion!="Terminar_sesion" && $accion!="Mensaje_cierre_sesion" && $accion!="ver_monitoreo")
+    if ($PCO_Accion!= "" && $PCO_Accion!="Iniciar_login" && $PCO_Accion!="Terminar_sesion" && $PCO_Accion!="Mensaje_cierre_sesion" && $PCO_Accion!="ver_monitoreo")
         {
             // Verifica autenticidad de la sesion mediante llave de paso
             if (MD5($LlaveDePaso)!=$LlaveDePasoUsuario) {
@@ -134,9 +134,9 @@
                 exit(1);
             }
             // Valida permisos asignados al usuario actual para la accion llamada a ejecutar
-            if (!permiso_accion($accion)) {
-                echo $MULTILANG_SecErrorTit."<hr>".$MULTILANG_SecErrorDes."<hr>[US=<b>$Login_usuario</b>|CMD=<b>$accion</b>|IP=<b>$direccion_auditoria</b>|DTE=<b>$fecha_operacion_guiones $hora_operacion_puntos</b>]";
-                auditar("SEC: Intento de acceso no autorizado CMD=$accion");
+            if (!permiso_accion($PCO_Accion)) {
+                echo $MULTILANG_SecErrorTit."<hr>".$MULTILANG_SecErrorDes."<hr>[US=<b>$Login_usuario</b>|CMD=<b>$PCO_Accion</b>|IP=<b>$direccion_auditoria</b>|DTE=<b>$fecha_operacion_guiones $hora_operacion_puntos</b>]";
+                auditar("SEC: Intento de acceso no autorizado CMD=$PCO_Accion");
                 exit(1);
             }
         }
@@ -150,7 +150,7 @@
     verificar_extensiones();
 
     // Valida existencia de versiones nuevas cuando el admin esta logueado
-    buscar_actualizaciones(@$Login_usuario,$accion);
+    buscar_actualizaciones(@$Login_usuario,$PCO_Accion);
 
     // Si existe el directorio de instalacion presenta un mensaje constante de advertencia
     if (@file_exists("ins")) {
@@ -158,7 +158,7 @@
     }
 
 	//Despliega escritorio del admin
-	if (@$Login_usuario=="admin" && $Sesion_abierta && $accion=="Ver_menu") {
+	if (@$Login_usuario=="admin" && $Sesion_abierta && $PCO_Accion=="Ver_menu") {
         include_once("core/marco_admin.php");
     }
 
@@ -169,26 +169,26 @@
 
 /* ################################################################## */
     // Cuando no se tiene ninguna accion para procesar se carga la pagina de inicio de sesion
-    if ($accion=="" && $Sesion_abierta==0) ventana_login();
-    if ($accion=="" && $Sesion_abierta==1) echo '<script type="" language="JavaScript">    document.core_ver_menu.submit();  </script>';
+    if ($PCO_Accion=="" && $Sesion_abierta==0) ventana_login();
+    if ($PCO_Accion=="" && $Sesion_abierta==1) echo '<script type="" language="JavaScript">    document.core_ver_menu.submit();  </script>';
     // Incluye los archivos necesarios dependiendo de las funciones requeridas
-    if ($accion=="administrar_informes" || $accion=="guardar_informe" || $accion=="editar_informe" || $accion=="eliminar_informe" || $accion=="actualizar_informe" || $accion=="eliminar_informe_tabla" || $accion=="guardar_informe_tabla" || $accion=="eliminar_informe_campo" || $accion=="guardar_informe_campo" || $accion=="guardar_informe_condicion" || $accion=="eliminar_informe_condicion" || $accion=="mis_informes" || $accion=="actualizar_grafico_informe" || $accion=="actualizar_agrupamiento_informe" || $accion=="guardar_accion_informe" || $accion=="eliminar_registro_informe" || $accion=="eliminar_accion_informe")
+    if ($PCO_Accion=="administrar_informes" || $PCO_Accion=="guardar_informe" || $PCO_Accion=="editar_informe" || $PCO_Accion=="eliminar_informe" || $PCO_Accion=="actualizar_informe" || $PCO_Accion=="eliminar_informe_tabla" || $PCO_Accion=="guardar_informe_tabla" || $PCO_Accion=="eliminar_informe_campo" || $PCO_Accion=="guardar_informe_campo" || $PCO_Accion=="guardar_informe_condicion" || $PCO_Accion=="eliminar_informe_condicion" || $PCO_Accion=="mis_informes" || $PCO_Accion=="actualizar_grafico_informe" || $PCO_Accion=="actualizar_agrupamiento_informe" || $PCO_Accion=="guardar_accion_informe" || $PCO_Accion=="eliminar_registro_informe" || $PCO_Accion=="eliminar_accion_informe")
         include("core/informes.php");
-    if ($accion=="resetear_clave" || $accion=="ver_seguimiento_monitoreo" || $accion=="ver_seguimiento_general" || $accion=="ver_seguimiento_especifico" || $accion=="actualizar_clave" || $accion=="cambiar_clave" || $accion=="agregar_usuario" || $accion=="guardar_usuario" || $accion=="listar_usuarios" || $accion=="eliminar_usuario" || $accion=="cambiar_estado_usuario" || $accion=="permisos_usuario" || $accion=="agregar_permiso" || $accion=="eliminar_permiso" || $accion=="informes_usuario" || $accion=="agregar_informe_usuario" || $accion=="eliminar_informe_usuario" || $accion=="copiar_permisos")
+    if ($PCO_Accion=="resetear_clave" || $PCO_Accion=="ver_seguimiento_monitoreo" || $PCO_Accion=="ver_seguimiento_general" || $PCO_Accion=="ver_seguimiento_especifico" || $PCO_Accion=="actualizar_clave" || $PCO_Accion=="cambiar_clave" || $PCO_Accion=="agregar_usuario" || $PCO_Accion=="guardar_usuario" || $PCO_Accion=="listar_usuarios" || $PCO_Accion=="eliminar_usuario" || $PCO_Accion=="cambiar_estado_usuario" || $PCO_Accion=="permisos_usuario" || $PCO_Accion=="agregar_permiso" || $PCO_Accion=="eliminar_permiso" || $PCO_Accion=="informes_usuario" || $PCO_Accion=="agregar_informe_usuario" || $PCO_Accion=="eliminar_informe_usuario" || $PCO_Accion=="copiar_permisos")
         include("core/usuarios.php");
-    if ($accion=="Ver_menu" || $accion=="administrar_menu" || $accion=="guardar_menu" || $accion=="eliminar_menu" || $accion=="detalles_menu" || $accion=="actualizar_menu")
+    if ($PCO_Accion=="Ver_menu" || $PCO_Accion=="administrar_menu" || $PCO_Accion=="guardar_menu" || $PCO_Accion=="eliminar_menu" || $PCO_Accion=="detalles_menu" || $PCO_Accion=="actualizar_menu")
         include("core/menus.php");
-    if ($accion=="guardar_crear_tabla_asistente" || $accion=="asistente_tablas" || $accion=="administrar_tablas" || $accion=="guardar_crear_tabla" || $accion=="eliminar_tabla" || $accion=="editar_tabla" || $accion=="guardar_crear_campo" || $accion=="eliminar_campo")
+    if ($PCO_Accion=="guardar_crear_tabla_asistente" || $PCO_Accion=="asistente_tablas" || $PCO_Accion=="administrar_tablas" || $PCO_Accion=="guardar_crear_tabla" || $PCO_Accion=="eliminar_tabla" || $PCO_Accion=="editar_tabla" || $PCO_Accion=="guardar_crear_campo" || $PCO_Accion=="eliminar_campo")
         include("core/tablas.php");
-    if ($accion=="actualizar_datos_formulario" || $accion=="actualizar_formulario" || $accion=="copiar_formulario" || $accion=="actualizar_campo_formulario" || $accion=="administrar_formularios" || $accion=="guardar_formulario" || $accion=="eliminar_formulario" || $accion=="editar_formulario" || $accion=="guardar_campo_formulario" || $accion=="eliminar_campo_formulario" || $accion=="guardar_accion_formulario" || $accion=="eliminar_accion_formulario" || $accion=="guardar_datos_formulario" || $accion=="eliminar_datos_formulario")
+    if ($PCO_Accion=="actualizar_datos_formulario" || $PCO_Accion=="actualizar_formulario" || $PCO_Accion=="copiar_formulario" || $PCO_Accion=="actualizar_campo_formulario" || $PCO_Accion=="administrar_formularios" || $PCO_Accion=="guardar_formulario" || $PCO_Accion=="eliminar_formulario" || $PCO_Accion=="editar_formulario" || $PCO_Accion=="guardar_campo_formulario" || $PCO_Accion=="eliminar_campo_formulario" || $PCO_Accion=="guardar_accion_formulario" || $PCO_Accion=="eliminar_accion_formulario" || $PCO_Accion=="guardar_datos_formulario" || $PCO_Accion=="eliminar_datos_formulario")
         include("core/formularios.php");
-    if ($accion=="Iniciar_login" || $accion=="Terminar_sesion" || $accion=="Mensaje_cierre_sesion")
+    if ($PCO_Accion=="Iniciar_login" || $PCO_Accion=="Terminar_sesion" || $PCO_Accion=="Mensaje_cierre_sesion")
         include("core/sesion.php");
-    if ($accion=="cargar_objeto" || $accion=="guardar_configuracion" || $accion=="guardar_oauth")
+    if ($PCO_Accion=="cargar_objeto" || $PCO_Accion=="guardar_configuracion" || $PCO_Accion=="guardar_oauth")
         include("core/objetos.php");
-    if ($accion=="actualizar_practico" || $accion=="cargar_archivo" || $accion=="analizar_parche" || $accion=="aplicar_parche")
+    if ($PCO_Accion=="actualizar_practico" || $PCO_Accion=="cargar_archivo" || $PCO_Accion=="analizar_parche" || $PCO_Accion=="aplicar_parche")
         include("core/actualizacion.php");
-    if ($accion=="administrar_monitoreo" || $accion=="guardar_monitoreo" || $accion=="eliminar_monitoreo" || $accion=="ver_monitoreo")
+    if ($PCO_Accion=="administrar_monitoreo" || $PCO_Accion=="guardar_monitoreo" || $PCO_Accion=="eliminar_monitoreo" || $PCO_Accion=="ver_monitoreo")
         include("core/monitoreo.php");
 
 /* ################################################################## */

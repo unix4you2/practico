@@ -31,7 +31,7 @@
 	Function: actualizar_practico
 	Presenta el paso 1 del asistente de actualizacion de Practico para la carga del archivo con el parche
 */
-if ($accion=="actualizar_practico")
+if ($PCO_Accion=="actualizar_practico")
 	{
 		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/OxheOe-o17s\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a>";
 		abrir_ventana($NombreRAD.' - '.$MULTILANG_Actualizacion,'panel-info');
@@ -44,7 +44,7 @@ if ($accion=="actualizar_practico")
 					<form action="<?php echo $ArchivoCORE; ?>" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="extension_archivo" value=".zip">
 						<input type="hidden" name="MAX_FILE_SIZE" value="8192000">
-						<input type="Hidden" name="accion" value="cargar_archivo">
+						<input type="Hidden" name="PCO_Accion" value="cargar_archivo">
 						<input type="Hidden" name="siguiente_accion" value="analizar_parche">
 						<input type="Hidden" name="texto_boton_siguiente" value="Continuar con la revisi&oacute;n">
 						<input type="Hidden" name="carpeta" value="tmp">
@@ -82,7 +82,7 @@ if ($accion=="actualizar_practico")
 	Ver tambien:
 		<actualizar_practico>
 */
-if ($accion=="cargar_archivo")
+if ($PCO_Accion=="cargar_archivo")
 	{
 		abrir_ventana($MULTILANG_Adjuntando, 'panel-primary');
 
@@ -111,7 +111,7 @@ if ($accion=="cargar_archivo")
 				echo '<i class="fa fa-check fa-fw fa-3x"></i> '.$MULTILANG_CargaCorrecta.'.<br><br>
 					<form action="'.$ArchivoCORE.'" method="post">
 						<input type="Hidden" name="archivo_cargado" value="'.$carpeta.'/'.$nombre_archivo.'">
-						<input type="Hidden" name="accion" value="'.$siguiente_accion.'">
+						<input type="Hidden" name="PCO_Accion" value="'.$siguiente_accion.'">
                         <button type="submit" class="btn btn-success btn-block"><i class="fa fa-list"></i> '.$texto_boton_siguiente.'</button>
 					</form>';
 				auditar("Carga archivo en carpeta $carpeta - $nombre_archivo");
@@ -119,7 +119,7 @@ if ($accion=="cargar_archivo")
 		else
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_Actualizacion.' - '.$MULTILANG_Error.'">
 					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 					</form>
@@ -151,7 +151,7 @@ if ($accion=="cargar_archivo")
 	Ver tambien:
 		<actualizar_practico>
 */
-if ($accion=="analizar_parche")
+if ($PCO_Accion=="analizar_parche")
 	{
 		abrir_ventana($MULTILANG_ErrorDescomprimiendo.' '.$archivo_cargado, 'panel-info');
 		echo '<u>'.$MULTILANG_ContenidoParche.':</u><br>';
@@ -228,7 +228,7 @@ if ($accion=="analizar_parche")
 				 <font color=blue>- '.$MULTILANG_ActMsj3.': '.$version_final.' -</font></b><br>
 				 <br><br>
 					<form action="'.$ArchivoCORE.'" method="post">
-						<input type="Hidden" name="accion" value="aplicar_parche">
+						<input type="Hidden" name="PCO_Accion" value="aplicar_parche">
 						<input type="Hidden" name="version_actual" value="'.$version_actual.'">
 						<input type="Hidden" name="version_final" value="'.$version_final.'">
 						<input type="Hidden" name="archivo_cargado" value="'.$archivo_cargado.'">
@@ -239,7 +239,7 @@ if ($accion=="analizar_parche")
 		else
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ActErrGral.'">
 					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 					</form>
@@ -270,7 +270,7 @@ if ($accion=="analizar_parche")
 	Ver tambien:
 		<actualizar_practico>
 */
-if ($accion=="aplicar_parche")
+if ($PCO_Accion=="aplicar_parche")
 	{
 		//Divide los queries de un cadena
 		function split_sql($sql)
@@ -405,7 +405,7 @@ if ($accion=="aplicar_parche")
 		else
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ActMsj5.'">
 					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 					</form>

@@ -54,7 +54,7 @@
                         </td>
                         <td>
                         <form action="" method="post" name="wzd_1" id="wzd_1" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-                        <input type="hidden" name="accion" value="administrar_tablas">
+                        <input type="hidden" name="PCO_Accion" value="administrar_tablas">
                         </form>
                             <i class="fa fa-table fa-4x fa-border"  onClick="document.wzd_1.submit();"></i>
                         </td>
@@ -67,7 +67,7 @@
                         </td>
                         <td>
                             <form action="" method="post" name="wzd_2" id="wzd_2" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-                                <input type="hidden" name="accion" value="administrar_formularios">
+                                <input type="hidden" name="PCO_Accion" value="administrar_formularios">
                             </form>
                                 <i class="fa fa-list-alt fa-4x fa-border"  onClick="document.wzd_2.submit();"></i>
                         </td>
@@ -80,7 +80,7 @@
                         </td>
                         <td>
                             <form action="" method="post" name="wzd_3" id="wzd_3" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-                                <input type="hidden" name="accion" value="administrar_informes">
+                                <input type="hidden" name="PCO_Accion" value="administrar_informes">
                             </form>
                                 <i class="fa fa-file-text fa-4x fa-border" onClick="document.wzd_3.submit();"></i>
                         </td>
@@ -93,7 +93,7 @@
                         </td>
                         <td>
                             <form action="" method="post" name="wzd_4" id="wzd_4" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-                                <input type="hidden" name="accion" value="administrar_menu">
+                                <input type="hidden" name="PCO_Accion" value="administrar_menu">
                             </form>
                             <i class="fa fa-external-link-square fa-4x fa-border " onClick="document.wzd_4.submit();"></i>
                         </td>
@@ -106,7 +106,7 @@
                         </td>
                         <td>
                             <form action="" method="post" name="wzd_5" id="wzd_5" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-                                <input type="hidden" name="accion" value="listar_usuarios">
+                                <input type="hidden" name="PCO_Accion" value="listar_usuarios">
                             </form>
                             <i class="fa fa-user fa-4x fa-border " onClick="document.wzd_5.submit();"></i>
                         </td>

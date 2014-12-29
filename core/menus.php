@@ -204,7 +204,7 @@ function selector_objetos_menu()
 
 		<detalles_menu>
 */
-if ($accion=="actualizar_menu")
+if ($PCO_Accion=="actualizar_menu")
 	{
 		// Actualiza los datos del item
 		ejecutar_sql_unaria("UPDATE ".$TablasCore."menu SET texto=?,peso=?,url=?,posible_clic=?,tipo_comando=?,comando=?,nivel_usuario=?,posible_arriba=?,posible_centro=?,posible_escritorio=?,seccion=?,imagen=? WHERE id=? ","$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$posible_clic$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$id");
@@ -231,7 +231,7 @@ if ($accion=="actualizar_menu")
 
 		<actualizar_menu>
 */
-if ($accion=="detalles_menu")
+if ($PCO_Accion=="detalles_menu")
 	{
 		abrir_ventana($MULTILANG_MnuTitEditar,'panel-danger');
 
@@ -245,7 +245,7 @@ if ($accion=="detalles_menu")
 
 
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="hidden" name="accion" value="actualizar_menu">
+			<input type="hidden" name="PCO_Accion" value="actualizar_menu">
 			<input type="hidden" name="id" value="<?php echo $registro["id"]; ?>">
 			<input type="hidden" name="nivel_usuario" value="-1">
 			<h4><b><?php echo $MULTILANG_MnuPropiedad; ?></b></h4>
@@ -387,7 +387,7 @@ if ($accion=="detalles_menu")
 
 /* ################################################################## */
 /* ################################################################## */
-if ($accion=="eliminar_menu")
+if ($PCO_Accion=="eliminar_menu")
 	{
 		/*
 			Function: eliminar_menu
@@ -444,7 +444,7 @@ if ($accion=="eliminar_menu")
 			Ver tambien:
 			<administrar_menu> | <detalles_menu> | <eliminar_menu>
 		*/
-	if ($accion=="guardar_menu")
+	if ($PCO_Accion=="guardar_menu")
 		{
 			$mensaje_error="";
 			// Verifica campos nulos
@@ -461,7 +461,7 @@ if ($accion=="eliminar_menu")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="administrar_menu">
+						<input type="Hidden" name="PCO_Accion" value="administrar_menu">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
@@ -487,9 +487,9 @@ if ($accion=="eliminar_menu")
 			Ver tambien:
 			<guardar_menu> | <detalles_menu> | <eliminar_menu>
 		*/
-if ($accion=="administrar_menu")
+if ($PCO_Accion=="administrar_menu")
 	{
-		$accion=escapar_contenido($accion); //Limpia cadena para evitar XSS
+		$PCO_Accion=escapar_contenido($PCO_Accion); //Limpia cadena para evitar XSS
 		echo '<div align="center"><br>';
 		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/-24qazTBngg\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a>";
 		abrir_ventana($MULTILANG_MnuAdmin, 'panel-primary');
@@ -504,7 +504,7 @@ if ($accion=="administrar_menu")
 
 
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="hidden" name="accion" value="guardar_menu">
+			<input type="hidden" name="PCO_Accion" value="guardar_menu">
 			<input type="hidden" name="nivel_usuario" value="-1">
 			<h4><b><?php echo $MULTILANG_MnuAgregar; ?></b></h4>
 
@@ -663,14 +663,14 @@ if ($accion=="administrar_menu")
 								<td>'.$registro["comando"].'</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
-												<input type="hidden" name="accion" value="eliminar_menu">
+												<input type="hidden" name="PCO_Accion" value="eliminar_menu">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
                                                 <a href="javascript:confirmar_evento(\''.$MULTILANG_MnuAdvElimina.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="accion" value="detalles_menu">
+												<input type="hidden" name="PCO_Accion" value="detalles_menu">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
                                                 <button type="submit" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i></button>
 										</form>
@@ -708,7 +708,7 @@ if ($accion=="administrar_menu")
 	Ver tambien:
 		<administrar_menu>
 */
-	if ($accion=="Ver_menu" && $Sesion_abierta)
+	if ($PCO_Accion=="Ver_menu" && $Sesion_abierta)
 		{ 
 			// Carga las opciones del ESCRITORIO
 			echo '<table width="100%" border=0><tr><td valign=top>';
@@ -730,12 +730,12 @@ if ($accion=="administrar_menu")
 							// Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
 							if ($registro["tipo_comando"]=="Interno" || $registro["tipo_comando"]=="Personal")
 								{
-									echo '<input type="hidden" name="accion" value="'.$registro["comando"].'"></form>';
+									echo '<input type="hidden" name="PCO_Accion" value="'.$registro["comando"].'"></form>';
 								}
 							// Verifica si se trata de una opcion para cargar un objeto de practico
 							if ($registro["tipo_comando"]=="Objeto")
 								{
-									echo'<input type="hidden" name="accion" value="cargar_objeto">
+									echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
 										 <input type="hidden" name="objeto" value="'.$registro["comando"].'"></form>';
 								}
 							// Imprime la imagen
@@ -791,12 +791,12 @@ if ($accion=="administrar_menu")
 									// Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
 									if ($registro_opciones_acordeon["tipo_comando"]=="Interno" || $registro_opciones_acordeon["tipo_comando"]=="Personal")
 										{
-											echo '<input type="hidden" name="accion" value="'.$registro_opciones_acordeon["comando"].'"></form>';
+											echo '<input type="hidden" name="PCO_Accion" value="'.$registro_opciones_acordeon["comando"].'"></form>';
 										}
 									// Verifica si se trata de una opcion para cargar un objeto de practico
 									if ($registro_opciones_acordeon["tipo_comando"]=="Objeto")
 										{
-											echo'<input type="hidden" name="accion" value="cargar_objeto">
+											echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
 												 <input type="hidden" name="objeto" value="'.$registro_opciones_acordeon["comando"].'"></form>';
 										}
 									// Imprime la imagen

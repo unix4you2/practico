@@ -58,7 +58,7 @@
 		<guardar_datos_formulario>
 
 */
-	if ($accion=="eliminar_datos_formulario")
+	if ($PCO_Accion=="eliminar_datos_formulario")
 		{
 			$mensaje_error="";
 			// Busca datos del formulario
@@ -79,7 +79,7 @@
 					ejecutar_sql_unaria("DELETE FROM ".$tabla." WHERE $campo = $valor ");
 					auditar("Elimina registro donde ".$campo." = ".$valor." en ".$tabla);
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="editar_formulario">
+						<input type="Hidden" name="PCO_Accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="popup_activo" value="FormularioCampos">
@@ -106,7 +106,7 @@
 	Ver tambien:
 		<eliminar_datos_formulario> | <guardar_datos_formulario>
 */
-	if ($accion=="actualizar_datos_formulario")
+	if ($PCO_Accion=="actualizar_datos_formulario")
 		{
 			// POR CORREGIR:  Si el diseno cuenta con varios campos que ven hacia un mismo campo de base de datos el query PUEDE no ser valido
 
@@ -176,8 +176,8 @@
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<!-- <input type="Hidden" name="accion" value="editar_formulario"> -->
-						<input type="Hidden" name="accion" value="Ver_menu">
+						<!-- <input type="Hidden" name="PCO_Accion" value="editar_formulario"> -->
+						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
@@ -213,7 +213,7 @@
 	Ver tambien:
 		<eliminar_datos_formulario>
 */
-	if ($accion=="guardar_datos_formulario")
+	if ($PCO_Accion=="guardar_datos_formulario")
 		{
 			// POR CORREGIR:  Si el diseno cuenta con varios campos que ven hacia un mismo campo de base de datos el query no es valido
 
@@ -367,7 +367,7 @@
 						echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 					else
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
@@ -378,8 +378,8 @@
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<!-- <input type="Hidden" name="accion" value="editar_formulario"> -->
-						<input type="Hidden" name="accion" value="Ver_menu">
+						<!-- <input type="Hidden" name="PCO_Accion" value="editar_formulario"> -->
+						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
@@ -411,12 +411,12 @@
 	Ver tambien:
 		<eliminar_campo_formulario>
 */
-	if ($accion=="eliminar_accion_formulario")
+	if ($PCO_Accion=="eliminar_accion_formulario")
 		{
 			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_boton WHERE id=? ","$boton");
 			auditar("Elimina accion del formulario $formulario");
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="accion" value="editar_formulario">
+			<input type="Hidden" name="PCO_Accion" value="editar_formulario">
 			<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 			<input type="Hidden" name="formulario" value="'.$formulario.'">
 			<input type="Hidden" name="popup_activo" value="FormularioAcciones">
@@ -446,12 +446,12 @@
 	Ver tambien:
 		<eliminar_accion_formulario>
 */
-	if ($accion=="eliminar_campo_formulario")
+	if ($PCO_Accion=="eliminar_campo_formulario")
 		{
 			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE id=? ","$campo");
 			auditar("Elimina campo del formulario $formulario");
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="accion" value="editar_formulario">
+			<input type="Hidden" name="PCO_Accion" value="editar_formulario">
 			<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 			<input type="Hidden" name="formulario" value="'.$formulario.'">
 			<input type="Hidden" name="popup_activo" value="FormularioDiseno">
@@ -481,7 +481,7 @@
 	Ver tambien:
 		<eliminar_campo_formulario> | <agregar_campo_formulario>
 */
-	if ($accion=="actualizar_campo_formulario")
+	if ($PCO_Accion=="actualizar_campo_formulario")
 		{
 			$mensaje_error="";
 
@@ -503,7 +503,7 @@
 
 					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario_objeto SET ".$ListaCamposyValores." WHERE id=?","$idcampomodificado");
 					auditar("Modifica diseno campo $idcampomodificado para formulario $formulario");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -511,7 +511,7 @@
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="editar_formulario">
+						<input type="Hidden" name="PCO_Accion" value="editar_formulario">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
@@ -543,7 +543,7 @@
 	Ver tambien:
 		<eliminar_campo_formulario>
 */
-	if ($accion=="guardar_campo_formulario")
+	if ($PCO_Accion=="guardar_campo_formulario")
 		{
 			$mensaje_error="";
 			$tipo_objeto=$tipo;
@@ -574,7 +574,7 @@
 					ejecutar_sql_unaria($consulta_insercion,"$ListaCamposyValores");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea campo $id para formulario $formulario");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -582,7 +582,7 @@
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="editar_formulario">
+						<input type="Hidden" name="PCO_Accion" value="editar_formulario">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
@@ -614,7 +614,7 @@
 	Ver tambien:
 		<eliminar_accion_formulario>
 */
-	if ($accion=="guardar_accion_formulario")
+	if ($PCO_Accion=="guardar_accion_formulario")
 		{
 			$mensaje_error="";
 			if ($titulo=="") $mensaje_error=$MULTILANG_ErrFrmCampo3;
@@ -625,7 +625,7 @@
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$formulario$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$retorno_titulo$_SeparadorCampos_$retorno_texto$_SeparadorCampos_$confirmacion_texto");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea boton $id para formulario $formulario");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_formulario">
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="popup_activo" value="FormularioBotones">
@@ -634,7 +634,7 @@
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="editar_formulario">
+						<input type="Hidden" name="PCO_Accion" value="editar_formulario">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -663,7 +663,7 @@
 	Salida:
 		Ventanas con herramientas de edicion y vista previa del formulario en pantalla
 */
-if ($accion=="editar_formulario")
+if ($PCO_Accion=="editar_formulario")
 	{
 		  ?>
 
@@ -741,9 +741,9 @@ if ($accion=="editar_formulario")
 				<?php 
 					//Define tipo de accion si se trata de creacion o modificacion
 					if (@$popup_activo=="FormularioCampos")
-						echo '<input type="Hidden" name="accion" value="actualizar_campo_formulario">';
+						echo '<input type="Hidden" name="PCO_Accion" value="actualizar_campo_formulario">';
 					else
-						echo '<input type="Hidden" name="accion" value="guardar_campo_formulario">';
+						echo '<input type="Hidden" name="PCO_Accion" value="guardar_campo_formulario">';
 				?>
 				<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 				<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">
@@ -1423,7 +1423,7 @@ if ($accion=="editar_formulario")
           <div class="modal-body mdl-primary">
 
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-				<input type="Hidden" name="accion" value="guardar_accion_formulario">
+				<input type="Hidden" name="PCO_Accion" value="guardar_accion_formulario">
 				<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 				<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">
 
@@ -1574,7 +1574,7 @@ if ($accion=="editar_formulario")
 								<td><b>'.$registro["campo"].'</b></td>
 								<td align=center nowrap>
 									<form action="'.$ArchivoCORE.'" method="POST" name="ifoc'.$registro["id"].'" id="ifoc'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-										<input type="hidden" name="accion" value="cambiar_estado_campo">
+										<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 										<input type="hidden" name="id" value="'.$registro["id"].'">
 										<input type="hidden" name="tabla" value="formulario_objeto">
 										<input type="hidden" name="campo" value="columna">
@@ -1605,7 +1605,7 @@ if ($accion=="editar_formulario")
 								</td>
 								<td align=center nowrap>
 										<form action="'.$ArchivoCORE.'" method="POST" name="ifoce'.$registro["id"].'" id="ifoce'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-											<input type="hidden" name="accion" value="cambiar_estado_campo">
+											<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 											<input type="hidden" name="id" value="'.$registro["id"].'">
 											<input type="hidden" name="tabla" value="formulario_objeto">
 											<input type="hidden" name="campo" value="peso">
@@ -1616,7 +1616,7 @@ if ($accion=="editar_formulario")
 											<input type="Hidden" name="popup_activo" value="FormularioDiseno">
 										</form>
 										<form action="'.$ArchivoCORE.'" method="POST" name="ifopa'.$registro["id"].'" id="ifopa'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-											<input type="hidden" name="accion" value="cambiar_estado_campo">
+											<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 											<input type="hidden" name="id" value="'.$registro["id"].'">
 											<input type="hidden" name="tabla" value="formulario_objeto">
 											<input type="hidden" name="campo" value="peso">
@@ -1639,7 +1639,7 @@ if ($accion=="editar_formulario")
 								
 								echo '<td align=center>
 										<form action="'.$ArchivoCORE.'" method="POST" name="ifo'.$registro["id"].'" id="ifo'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-											<input type="hidden" name="accion" value="cambiar_estado_campo">
+											<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 											<input type="hidden" name="id" value="'.$registro["id"].'">
 											<input type="hidden" name="tabla" value="formulario_objeto">
 											<input type="hidden" name="campo" value="obligatorio">
@@ -1657,7 +1657,7 @@ if ($accion=="editar_formulario")
 
 								echo '<td align=center>
 											<form action="'.$ArchivoCORE.'" method="POST" name="if'.$registro["id"].'" id="if'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-												<input type="hidden" name="accion" value="cambiar_estado_campo">
+												<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
 												<input type="hidden" name="tabla" value="formulario_objeto">
 												<input type="hidden" name="campo" value="visible">
@@ -1675,7 +1675,7 @@ if ($accion=="editar_formulario")
 									{
 										echo '<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-														<input type="hidden" name="accion" value="eliminar_campo_formulario">
+														<input type="hidden" name="PCO_Accion" value="eliminar_campo_formulario">
 														<input type="hidden" name="campo" value="'.$registro["id"].'">
 														<input type="hidden" name="formulario" value="'.$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -1686,7 +1686,7 @@ if ($accion=="editar_formulario")
 
 										<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-														<input type="hidden" name="accion" value="editar_formulario">
+														<input type="hidden" name="PCO_Accion" value="editar_formulario">
 														<input type="hidden" name="campo" value="'.$registro["id"].'">
 														<input type="hidden" name="formulario" value="'.$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -1754,7 +1754,7 @@ if ($accion=="editar_formulario")
 								<td>'.$registro["accion_usuario"].'</td>';
 						echo '		<td align=center>
 										<form action="'.$ArchivoCORE.'" method="POST" name="bifoce'.$registro["id"].'" id="bifoce'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-											<input type="hidden" name="accion" value="cambiar_estado_campo">
+											<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 											<input type="hidden" name="id" value="'.$registro["id"].'">
 											<input type="hidden" name="tabla" value="formulario_boton">
 											<input type="hidden" name="campo" value="peso">
@@ -1765,7 +1765,7 @@ if ($accion=="editar_formulario")
 											<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 										</form>
 										<form action="'.$ArchivoCORE.'" method="POST" name="bifopa'.$registro["id"].'" id="bifopa'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-											<input type="hidden" name="accion" value="cambiar_estado_campo">
+											<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 											<input type="hidden" name="id" value="'.$registro["id"].'">
 											<input type="hidden" name="tabla" value="formulario_boton">
 											<input type="hidden" name="campo" value="peso">
@@ -1787,7 +1787,7 @@ if ($accion=="editar_formulario")
 								
 								echo '<td align=center>
 											<form action="'.$ArchivoCORE.'" method="POST" name="bif'.$registro["id"].'" id="bif'.$registro["id"].'" >
-												<input type="hidden" name="accion" value="cambiar_estado_campo">
+												<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
 												<input type="hidden" name="tabla" value="formulario_boton">
 												<input type="hidden" name="campo" value="visible">
@@ -1803,7 +1803,7 @@ if ($accion=="editar_formulario")
 								echo '</form></td>';
 										echo '<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" name="bf'.$registro["id"].'" id="bf'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-														<input type="hidden" name="accion" value="eliminar_accion_formulario">
+														<input type="hidden" name="PCO_Accion" value="eliminar_accion_formulario">
 														<input type="hidden" name="boton" value="'.$registro["id"].'">
 														<input type="hidden" name="formulario" value="'.$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -1830,15 +1830,6 @@ if ($accion=="editar_formulario")
 		<!-- FIN MODAL DISENO DE BOTONES -->
         
 
-		<?php
-			// Habilita el popup activo
-			if (@$popup_activo=="FormularioCampos")	echo '<script type="text/javascript">	AbrirPopUp("FormularioCampos"); </script>';
-			if (@$popup_activo=="FormularioBotones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioBotones"); </script>';
-			if (@$popup_activo=="FormularioDiseno")	echo '<script type="text/javascript">	AbrirPopUp("FormularioDiseno"); </script>';
-			if (@$popup_activo=="FormularioAcciones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioAcciones"); </script>';
-		?>
-
-
     <div class="row">
         <div class="col-md-4">
       
@@ -1863,7 +1854,7 @@ if ($accion=="editar_formulario")
                             <i class="fa fa-pencil-square-o fa-3x fa-fw"></i>
                     </a>
 				<hr>
-				<form action="<?php echo $ArchivoCORE; ?>" method="POST" name="cancelar"><input type="Hidden" name="accion" value="administrar_formularios"></form>
+				<form action="<?php echo $ArchivoCORE; ?>" method="POST" name="cancelar"><input type="Hidden" name="PCO_Accion" value="administrar_formularios"></form>
                 <button type="button" class="btn btn-danger btn-block" onclick="document.cancelar.submit()"><?php echo $MULTILANG_FrmVolverLista; ?></button>
                 </div>
 
@@ -1878,7 +1869,7 @@ if ($accion=="editar_formulario")
 				abrir_ventana($MULTILANG_FrmDetalles, 'panel-primary');
 			?>
 			<form name="datosact" id="datosact" action="<?php echo $ArchivoCORE; ?>" method="POST">
-                <input type="Hidden" name="accion" value="actualizar_formulario">
+                <input type="Hidden" name="PCO_Accion" value="actualizar_formulario">
                 <input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
                 <input type="Hidden" name="formulario" value="<?php echo $registro_form["id"]; ?>">
 
@@ -2063,13 +2054,13 @@ if ($accion=="editar_formulario")
 	Ver tambien:
 		<administrar_formularios>
 */
-	if ($accion=="eliminar_formulario")
+	if ($PCO_Accion=="eliminar_formulario")
 		{
 			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
 			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario=? ","$formulario");
 			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
 			auditar("Elimina formulario $formulario");
-			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_formularios"></form>
+			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_formularios"></form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 		}
 
@@ -2086,7 +2077,7 @@ if ($accion=="editar_formulario")
 	Ver tambien:
 		<administrar_formularios>
 */
-	if ($accion=="actualizar_formulario")
+	if ($PCO_Accion=="actualizar_formulario")
 		{
 			$mensaje_error="";
 			if ($titulo=="") $mensaje_error.=$MULTILANG_FrmErr1.'<br>';
@@ -2099,14 +2090,14 @@ if ($accion=="editar_formulario")
 					auditar("Actualiza formulario $formulario para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
-					<input type="Hidden" name="accion" value="editar_formulario">
+					<input type="Hidden" name="PCO_Accion" value="editar_formulario">
 					<input type="Hidden" name="formulario" value="'.$formulario.'"></form>
 								<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="administrar_formularios">
+						<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
@@ -2131,7 +2122,7 @@ if ($accion=="editar_formulario")
 	Ver tambien:
 		<administrar_formularios>
 */
-	if ($accion=="guardar_formulario")
+	if ($PCO_Accion=="guardar_formulario")
 		{
 			$mensaje_error="";
 			if ($titulo=="") $mensaje_error.=$MULTILANG_FrmErr1.'<br>';
@@ -2147,14 +2138,14 @@ if ($accion=="editar_formulario")
 					auditar("Crea formulario $id para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
-					<input type="Hidden" name="accion" value="editar_formulario">
+					<input type="Hidden" name="PCO_Accion" value="editar_formulario">
 					<input type="Hidden" name="formulario" value="'.$id.'"></form>
 								<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="administrar_formularios">
+						<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
@@ -2180,7 +2171,7 @@ if ($accion=="editar_formulario")
 	Ver tambien:
 		<administrar_formularios>
 */
-	if ($accion=="copiar_formulario")
+	if ($PCO_Accion=="copiar_formulario")
 		{
 			$mensaje_error="";
 			if ($formulario=="")
@@ -2273,7 +2264,7 @@ if ($accion=="editar_formulario")
 
 					// Regresa a la administracion de formularios
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="accion" value="administrar_formularios">
+					<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
 					</form>
 					<script type="" language="JavaScript"> 
 					alert("'.$MULTILANG_FrmMsjCopia.$nuevo_titulo.' ID: '.$id.'");
@@ -2282,7 +2273,7 @@ if ($accion=="editar_formulario")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="administrar_formularios">
+						<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
@@ -2301,13 +2292,13 @@ if ($accion=="editar_formulario")
 		SELECT * FROM ".$TablasCore."formulario ORDER BY titulo
 	(end)
 */
-if ($accion=="administrar_formularios")
+if ($PCO_Accion=="administrar_formularios")
 	{
 		echo "<div align=center><a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/-50HOcXa9tY\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a></div>";
 		 ?>
 
         <form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="accion" value="guardar_formulario">
+			<input type="Hidden" name="PCO_Accion" value="guardar_formulario">
 			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 
 
@@ -2465,7 +2456,7 @@ function FrmAutoRun()
 								<td>'.str_replace($TablasApp,'',$registro["tabla_datos"]).'</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="dco'.$registro["id"].'" id="dco'.$registro["id"].'">
-												<input type="hidden" name="accion" value="copiar_formulario">
+												<input type="hidden" name="PCO_Accion" value="copiar_formulario">
 												<input type="hidden" name="formulario" value="'.$registro["id"].'">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["tabla_datos"].'">
                                                 <a class="btn btn-default btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["id"].');"><i class="fa fa-code-fork"></i> '.$MULTILANG_FrmCopiar.'</a>
@@ -2473,14 +2464,14 @@ function FrmAutoRun()
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
-												<input type="hidden" name="accion" value="eliminar_formulario">
+												<input type="hidden" name="PCO_Accion" value="eliminar_formulario">
 												<input type="hidden" name="formulario" value="'.$registro["id"].'">
                                                 <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvDelForm.'\',df'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="det'.$registro["id"].'" id="det'.$registro["id"].'">
-												<input type="hidden" name="accion" value="editar_formulario">
+												<input type="hidden" name="PCO_Accion" value="editar_formulario">
 												<input type="hidden" name="formulario" value="'.$registro["id"].'">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["tabla_datos"].'">
                                                 <a class="btn btn-default btn-xs" href="javascript:document.det'.$registro["id"].'.submit();"><i class="fa fa-list-alt"></i> '.$MULTILANG_FrmCamposAcciones.'</a>

@@ -159,7 +159,7 @@
 	Ver tambien:
 		<permisos_usuario> | <informes_usuario>
 */
-if ($accion=="copiar_permisos")
+if ($PCO_Accion=="copiar_permisos")
 	{
 		// Elimina opciones existentes
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$usuariod");
@@ -172,7 +172,7 @@ if ($accion=="copiar_permisos")
 			}
 		auditar("Copia permisos de $usuarioo al usuario $usuariod");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="accion" value="permisos_usuario">
+			<input type="Hidden" name="PCO_Accion" value="permisos_usuario">
 			<input type="Hidden" name="usuario" value="'.$usuariod.'">
 			</form>
 			<script type="" language="JavaScript">
@@ -194,14 +194,14 @@ if ($accion=="copiar_permisos")
 		<actualizar_clave> | <muestra_seguridad_clave> | <seguridad_clave>
 
 */
-if ($accion=="cambiar_clave")
+if ($PCO_Accion=="cambiar_clave")
 	{
 ?>
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<?php
 				mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'60%','fa fa-exclamation-triangle fa-5x','TextosEscritorio');
 			?>
-                <input type="hidden" name="accion" value="actualizar_clave">
+                <input type="hidden" name="PCO_Accion" value="actualizar_clave">
                 <br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrCambioPW; ?></b></font>
 
                 <div class="form-group input-group">
@@ -279,7 +279,7 @@ if ($accion=="cambiar_clave")
 	Salida:
 		Tabla de usuarios actualizada en el registro correspondiente
 */
-if ($accion=="actualizar_clave")
+if ($PCO_Accion=="actualizar_clave")
 	{
 		$mensaje_error="";
 		// Verifica campos nulos
@@ -301,7 +301,7 @@ if ($accion=="actualizar_clave")
 		else
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="accion" value="cambiar_clave">
+					<input type="Hidden" name="PCO_Accion" value="cambiar_clave">
 					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 					</form>
@@ -331,12 +331,12 @@ if ($accion=="actualizar_clave")
 	Ver tambien:
 		<informes_usuario> | <agregar_informe_usuario>
 */
-if ($accion=="eliminar_informe_usuario")
+if ($PCO_Accion=="eliminar_informe_usuario")
 	{
 		// Elimina el informe
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe=? AND usuario=? ","$informe$_SeparadorCampos_$usuario");
 		auditar("Elimina informe $informe a $usuario");
-		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="informes_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
+		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="informes_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
 
@@ -364,7 +364,7 @@ if ($accion=="eliminar_informe_usuario")
 	Ver tambien:
 		<eliminar_informe_usuario> | <informes_usuario>
 */
-	if ($accion=="agregar_informe_usuario")
+	if ($PCO_Accion=="agregar_informe_usuario")
 		{
 			$mensaje_error="";
 			// Busca si existe ese permiso para el usuario
@@ -379,14 +379,14 @@ if ($accion=="eliminar_informe_usuario")
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES (?,?)","$usuario$_SeparadorCampos_$informe");
 					auditar("Agrega informe $informe al usuario $usuario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-							<input type="Hidden" name="accion" value="informes_usuario">
+							<input type="Hidden" name="PCO_Accion" value="informes_usuario">
 							<input type="Hidden" name="usuario" value="'.$usuario.'">
 							</form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
 				{
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="informes_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="informes_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 							<script type="" language="JavaScript"> 
 							window.alert("'.$mensaje_error.'");
 							document.cancelar.submit();  </script>';
@@ -416,7 +416,7 @@ if ($accion=="eliminar_informe_usuario")
 	Ver tambien:
 		<eliminar_informe_usuario> | <agregar_informe_usuario>
 */
-if ($accion=="informes_usuario")
+if ($PCO_Accion=="informes_usuario")
 				{
 						echo '<div align="center"><br>';
 						abrir_ventana($MULTILANG_UsrAdmInf,'panel-info');
@@ -426,7 +426,7 @@ if ($accion=="informes_usuario")
 		<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 290px">
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
-			<input type="hidden" name="accion" value="agregar_informe_usuario">
+			<input type="hidden" name="PCO_Accion" value="agregar_informe_usuario">
 			<br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrAgreInf; ?>: <?php echo $usuario; ?></b></font>
 			<br><br>
 				<select name="informe" class="Combos">
@@ -477,7 +477,7 @@ if ($accion=="informes_usuario")
 							<td>'.$registro["categoria"].'</td>
 							<td align="center">
 									<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
-											<input type="hidden" name="accion" value="eliminar_informe_usuario">
+											<input type="hidden" name="PCO_Accion" value="eliminar_informe_usuario">
 											<input type="hidden" name="usuario" value="'.$usuario.'">
 											<input type="hidden" name="informe" value="'.$registro["id"].'">
 											<input type="button" value="'.$MULTILANG_Eliminar.'" class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_UsrAdvDel.'\',f'.$registro["id"].');">
@@ -516,12 +516,12 @@ if ($accion=="informes_usuario")
 	Ver tambien:
 		<agregar_permiso>
 */
-if ($accion=="eliminar_permiso")
+if ($PCO_Accion=="eliminar_permiso")
 	{
 		// Elimina los datos de la opcion
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? AND usuario=? ","$menu$_SeparadorCampos_$usuario");
 		auditar("Elimina permiso $menu a $usuario");
-		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="permisos_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
+		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="permisos_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
 
@@ -549,7 +549,7 @@ if ($accion=="eliminar_permiso")
 	Ver tambien:
 		<eliminar_permiso>
 */
-	if ($accion=="agregar_permiso")
+	if ($PCO_Accion=="agregar_permiso")
 		{
 			$mensaje_error="";
 			// Busca si existe ese permiso para el usuario
@@ -564,14 +564,14 @@ if ($accion=="eliminar_permiso")
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuario$_SeparadorCampos_$menu");
 					auditar("Agrega permiso $menu al usuario $usuario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-							<input type="Hidden" name="accion" value="permisos_usuario">
+							<input type="Hidden" name="PCO_Accion" value="permisos_usuario">
 							<input type="Hidden" name="usuario" value="'.$usuario.'">
 							</form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
 				{
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="permisos_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="permisos_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 							<script type="" language="JavaScript"> 
 							window.alert("'.$mensaje_error.'");
 							document.cancelar.submit();  </script>';
@@ -602,7 +602,7 @@ if ($accion=="eliminar_permiso")
 	Ver tambien:
 		<informes_usuario>
 */
-if ($accion=="permisos_usuario")
+if ($PCO_Accion=="permisos_usuario")
 				{
 						echo '<div align="center"><br>';
 						abrir_ventana($MULTILANG_UsrAdmPer, 'panel-info');
@@ -611,7 +611,7 @@ if ($accion=="permisos_usuario")
 		<div align="center" class="TextosVentana">
 			<form name="datoscopia" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="hidden" name="usuariod" value="<?php echo $usuario; ?>">
-			<input type="hidden" name="accion" value="copiar_permisos">
+			<input type="hidden" name="PCO_Accion" value="copiar_permisos">
 
 			<br><font face="" size="3" color="#971515"><b><?php echo $MULTILANG_UsrCopiaPer; ?>: </b></font>
 				<select name="usuarioo" class="selector_01" >
@@ -631,7 +631,7 @@ if ($accion=="permisos_usuario")
 		<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 290px">
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
-			<input type="hidden" name="accion" value="agregar_permiso">
+			<input type="hidden" name="PCO_Accion" value="agregar_permiso">
 			<br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrAgreOpc; ?>: <?php echo $usuario; ?></b></font>
 			<br><br>
 				<select name="menu" class="Combos">
@@ -686,7 +686,7 @@ if ($accion=="permisos_usuario")
 							<td>'.$registro["comando"].'</td>
 							<td align="center">
 									<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
-											<input type="hidden" name="accion" value="eliminar_permiso">
+											<input type="hidden" name="PCO_Accion" value="eliminar_permiso">
 											<input type="hidden" name="usuario" value="'.$usuario.'">
 											<input type="hidden" name="menu" value="'.$registro["id"].'">
 											<input type="button" value="'.$MULTILANG_Eliminar.'" class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_UsrAdvDel.'\',f'.$registro["id"].');">
@@ -713,7 +713,7 @@ if ($accion=="permisos_usuario")
 			*/
 /* ################################################################## */
 /* ################################################################## */
-	if ($accion=="eliminar_usuario")
+	if ($PCO_Accion=="eliminar_usuario")
 		{
 			/*
 				Function: eliminar_usuario
@@ -745,7 +745,7 @@ if ($accion=="permisos_usuario")
 
 /* ################################################################## */
 /* ################################################################## */
-	if ($accion=="cambiar_estado_usuario")
+	if ($PCO_Accion=="cambiar_estado_usuario")
 		{
 			/*
 				Function: cambiar_estado_usuario
@@ -780,7 +780,7 @@ if ($accion=="permisos_usuario")
 
 /* ################################################################## */
 /* ################################################################## */
-	if ($accion=="resetear_clave")
+	if ($PCO_Accion=="resetear_clave")
 		{
 			/*
 				Function: resetear_clave
@@ -804,7 +804,7 @@ if ($accion=="permisos_usuario")
 
 /* ################################################################## */
 /* ################################################################## */
-	if ($accion=="guardar_usuario")
+	if ($PCO_Accion=="guardar_usuario")
 		{
 			/*
 				Function: guardar_usuario
@@ -860,7 +860,7 @@ if ($accion=="permisos_usuario")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="agregar_usuario">
+						<input type="Hidden" name="PCO_Accion" value="agregar_usuario">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
@@ -872,7 +872,7 @@ if ($accion=="permisos_usuario")
 
 /* ################################################################## */
 /* ################################################################## */
-if ($accion=="agregar_usuario")
+if ($PCO_Accion=="agregar_usuario")
 	{
 			/*
 				Function: agregar_usuario
@@ -892,7 +892,7 @@ if ($accion=="agregar_usuario")
 
 		<!-- VALOR MD5 PARA VACIO:  d41d8cd98f00b204e9800998ecf8427e-->
 				<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-					<input type="hidden" name="accion" value="guardar_usuario">
+					<input type="hidden" name="PCO_Accion" value="guardar_usuario">
 
                     <div class="form-group input-group">
                         <input name="login" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrLogin; ?>">
@@ -975,7 +975,7 @@ if ($accion=="agregar_usuario")
 
 
 /* ################################################################## */
-if ($accion=="ver_seguimiento_monitoreo")		
+if ($PCO_Accion=="ver_seguimiento_monitoreo")		
 				{
 			/*
 				Function: ver_seguimiento_monitoreo
@@ -1026,7 +1026,7 @@ if ($accion=="ver_seguimiento_monitoreo")
 					setTimeout("document.ver_auditoria_monitoreo.submit();",5000);
 				</script>
 				<form action="'.$ArchivoCORE.'" method="POST" name="ver_auditoria_monitoreo"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="hidden" name="accion" value="ver_seguimiento_monitoreo">
+					<input type="hidden" name="PCO_Accion" value="ver_seguimiento_monitoreo">
 				</form>
 				';
 				abrir_barra_estado();
@@ -1035,7 +1035,7 @@ if ($accion=="ver_seguimiento_monitoreo")
 				cerrar_ventana();
 				 }
 /* ################################################################## */
-if ($accion=="ver_seguimiento_general")
+if ($PCO_Accion=="ver_seguimiento_general")
 				{
 			/*
 				Function: ver_seguimiento_general
@@ -1063,7 +1063,7 @@ if ($accion=="ver_seguimiento_general")
 
 
                 <form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-                    <input type="hidden" name="accion" value="ver_seguimiento_general">
+                    <input type="hidden" name="PCO_Accion" value="ver_seguimiento_general">
                 
                     <div class="form-group input-group">
                         <input name="accionbuscar" value="<?php echo @$accionbuscar; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrAudAccion; ?>">
@@ -1234,7 +1234,7 @@ if ($accion=="ver_seguimiento_general")
 				echo '</tbody>
                 </table>
 				<form action="'.$ArchivoCORE.'" method="POST" name="ver_auditoria_monitoreo"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="hidden" name="accion" value="ver_seguimiento_monitoreo">
+					<input type="hidden" name="PCO_Accion" value="ver_seguimiento_monitoreo">
 				</form>';
 
 				abrir_barra_estado();
@@ -1244,7 +1244,7 @@ if ($accion=="ver_seguimiento_general")
 				cerrar_ventana();
 				 }
 /* ################################################################## */
-if ($accion=="ver_seguimiento_especifico")
+if ($PCO_Accion=="ver_seguimiento_especifico")
 				{
 			/*
 				Function: ver_seguimiento_especifico
@@ -1272,7 +1272,7 @@ if ($accion=="ver_seguimiento_especifico")
 				if ($fin_reg=="") $fin_reg=50;
 					echo ' <br><div align="right">
 								<form name="datos" action="'.$ArchivoCORE.'" method="POST">
-								<input type="hidden" name="accion" value="ver_seguimiento_especifico">
+								<input type="hidden" name="PCO_Accion" value="ver_seguimiento_especifico">
 								<input type="hidden" name="uid_especifico" value="'.$uid_especifico.'">
 								&nbsp;&nbsp;'.$MULTILANG_UsrAudIniReg.'
 								<input type="text" class="CampoTexto" name="inicio_reg" value="'.$inicio_reg.'" size="4" maxlength="6">
@@ -1314,7 +1314,7 @@ if ($accion=="ver_seguimiento_especifico")
 			*/
 /* ################################################################## */
 /* ################################################################## */
-if ($accion=="listar_usuarios")
+if ($PCO_Accion=="listar_usuarios")
 				{
 			/*
 				Function: listar_usuarios
@@ -1343,7 +1343,7 @@ if ($accion=="listar_usuarios")
 
 
             <form action="<?php echo $ArchivoCORE; ?>" method="POST">
-                <input type="hidden" name="accion" value="listar_usuarios">
+                <input type="hidden" name="PCO_Accion" value="listar_usuarios">
                 <div class="form-group input-group">
                     <span class="input-group-addon">
                         <i class="fa fa-users"></i>
@@ -1356,7 +1356,7 @@ if ($accion=="listar_usuarios")
 			</form>
 
             <form action="<?php echo $ArchivoCORE; ?>" method="POST">
-                <input type="hidden" name="accion" value="listar_usuarios">
+                <input type="hidden" name="PCO_Accion" value="listar_usuarios">
                 <div class="form-group input-group">
                     <span class="input-group-addon">
                         <i class="fa fa-users"></i>
@@ -1372,7 +1372,7 @@ if ($accion=="listar_usuarios")
 <?php
 				echo '
 			<form name="form_crear_usuario" action="'.$ArchivoCORE.'" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-				<input type="hidden" name="accion" value="agregar_usuario">
+				<input type="hidden" name="PCO_Accion" value="agregar_usuario">
 			</form>
 
 		';
@@ -1408,7 +1408,7 @@ if ($accion=="listar_usuarios")
 								<td>'.$registro["ultimo_acceso"].'</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="accion" value="cambiar_estado_usuario">
+												<input type="hidden" name="PCO_Accion" value="cambiar_estado_usuario">
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
 												<input type="hidden" name="estado" value="'.$registro["estado"].'">
                                                 <button type="submit" class="btn btn-warning btn-xs">';
@@ -1419,28 +1419,28 @@ if ($accion=="listar_usuarios")
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST"  name="f'.$i.'">
-												<input type="hidden" name="accion" value="eliminar_usuario">
+												<input type="hidden" name="PCO_Accion" value="eliminar_usuario">
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
                                                 <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_UsrAdvSupr.'\',f'.$i.');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="accion" value="permisos_usuario">
+												<input type="hidden" name="PCO_Accion" value="permisos_usuario">
 												<input type="hidden" name="usuario" value="'.$registro["login"].'">
                                                 <button type="submit" class="btn btn-info btn-xs">'.$MULTILANG_UsrAddMenu.'</button>
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="accion" value="informes_usuario">
+												<input type="hidden" name="PCO_Accion" value="informes_usuario">
 												<input type="hidden" name="usuario" value="'.$registro["login"].'">
                                                 <button type="submit" class="btn btn-default btn-xs">'.$MULTILANG_UsrAddInfo.'</button>
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="accion" value="ver_seguimiento_especifico">
+												<input type="hidden" name="PCO_Accion" value="ver_seguimiento_especifico">
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
                                                 <button type="submit" class="btn btn-default btn-xs">'.$MULTILANG_UsrAuditoria.'</button>
 										</form>
@@ -1451,7 +1451,7 @@ if ($accion=="listar_usuarios")
 								</td>
 								<td colspan=5 align=center>
 										<form action="'.$ArchivoCORE.'" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-												<input type="hidden" name="accion" value="resetear_clave">
+												<input type="hidden" name="PCO_Accion" value="resetear_clave">
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
                                                 <div class="form-group input-group">
                                                     <span class="input-group-addon">
@@ -1474,10 +1474,10 @@ if ($accion=="listar_usuarios")
 
 	echo '
 				<form action="'.$ArchivoCORE.'" method="POST" name="ver_auditoria_general"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="hidden" name="accion" value="ver_seguimiento_general">
+					<input type="hidden" name="PCO_Accion" value="ver_seguimiento_general">
 				</form>
 				<form action="'.$ArchivoCORE.'" method="POST" name="ver_auditoria_monitoreo"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="hidden" name="accion" value="ver_seguimiento_monitoreo">
+					<input type="hidden" name="PCO_Accion" value="ver_seguimiento_monitoreo">
 				</form>
 		';
 				abrir_barra_estado();

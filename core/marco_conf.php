@@ -45,7 +45,7 @@
 
 
 					<form action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="hidden" name="accion" value="guardar_configuracion">
+					<input type="hidden" name="PCO_Accion" value="guardar_configuracion">
 
                         
                             <!-- Nav tabs -->

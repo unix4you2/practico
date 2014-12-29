@@ -35,7 +35,7 @@
 /*
 	Function: convertidor_pdf_funcion_predeterminada
 */
-if ($accion=="convertidor_pdf_funcion_predeterminada") 
+if ($PCO_Accion=="convertidor_pdf_funcion_predeterminada") 
 	{
 	}
 

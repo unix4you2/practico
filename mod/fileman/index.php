@@ -39,7 +39,7 @@
 	Salida:
 		IFrame con contenido generado por la herramienta
 */
-if ($accion=="fileman_admin_embebido") 
+if ($PCO_Accion=="fileman_admin_embebido") 
 	{
 		echo '
             <div class="embed-responsive embed-responsive-4by3">

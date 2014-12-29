@@ -51,12 +51,12 @@
 	Salida:
 		Registro de boton eliminado e informe actualizado
 */
-	if ($accion=="eliminar_accion_informe")
+	if ($PCO_Accion=="eliminar_accion_informe")
 		{
 			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_boton WHERE id=? ","$boton");
 			auditar("Elimina accion del informe $informe");
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="accion" value="editar_informe">
+			<input type="Hidden" name="PCO_Accion" value="editar_informe">
 			<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 			<input type="Hidden" name="informe" value="'.$informe.'">
 			<input type="Hidden" name="popup_activo" value="FormularioAcciones">
@@ -88,14 +88,14 @@
 
 		<editar_informe>
 */
-if ($accion=="actualizar_agrupamiento_informe")
+if ($PCO_Accion=="actualizar_agrupamiento_informe")
 	{
 		// Actualiza los datos
 		ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET agrupamiento=?,ordenamiento=? WHERE id=? ","$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$informe");
 		auditar("Actualiza agrupamiento/ordenamiento informe $informe");
 		echo '
 			<form name="regresar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="accion" value="editar_informe">
+			<input type="Hidden" name="PCO_Accion" value="editar_informe">
 			<input type="Hidden" name="informe" value="'.$informe.'">
 			</form>
 		<script type="" language="JavaScript">
@@ -125,7 +125,7 @@ if ($accion=="actualizar_agrupamiento_informe")
 
 		<editar_informe>
 */
-if ($accion=="actualizar_grafico_informe")
+if ($PCO_Accion=="actualizar_grafico_informe")
 	{
 		$mensaje_error="";
 		if ($nombre_serie_1=="" || $campo_etiqueta_serie_1=="" || $campo_valor_serie_1=="") $mensaje_error.=$MULTILANG_InfErr1;
@@ -143,7 +143,7 @@ if ($accion=="actualizar_grafico_informe")
 				auditar("Actualiza informe grafico $informe");
 				echo '
 					<form name="regresar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="accion" value="editar_informe">
+					<input type="Hidden" name="PCO_Accion" value="editar_informe">
 					<input type="Hidden" name="informe" value="'.$informe.'">
 					</form>
 				<script type="" language="JavaScript">
@@ -152,7 +152,7 @@ if ($accion=="actualizar_grafico_informe")
 		else
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="accion" value="editar_informe">
+					<input type="Hidden" name="PCO_Accion" value="editar_informe">
 					<input type="Hidden" name="informe" value="'.$informe.'">
 					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
@@ -184,7 +184,7 @@ if ($accion=="actualizar_grafico_informe")
 
 		<editar_informe> | <actualizar_grafico_informe> | <actualizar_agrupamiento_informe>
 */
-if ($accion=="actualizar_informe")
+if ($PCO_Accion=="actualizar_informe")
 	{
 		$mensaje_error="";
 		if ($titulo=="") $mensaje_error.=$MULTILANG_InfErr2.'<br>';
@@ -195,7 +195,7 @@ if ($accion=="actualizar_informe")
 				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET genera_pdf=?,formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=?,nivel_usuario=? WHERE id=? ","$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$id");
 				auditar("Actualiza informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="accion" value="editar_informe">
+					<input type="Hidden" name="PCO_Accion" value="editar_informe">
 					<input type="Hidden" name="informe" value="'.$id.'">
 					</form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -204,7 +204,7 @@ if ($accion=="actualizar_informe")
 		else
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="accion" value="editar_informe">
+					<input type="Hidden" name="PCO_Accion" value="editar_informe">
 					<input type="Hidden" name="informe" value="'.$id.'">
 					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
@@ -235,12 +235,12 @@ if ($accion=="actualizar_informe")
 
 		<editar_informe> | <guardar_informe_condicion>
 */
-if ($accion=="eliminar_informe_condicion")
+if ($PCO_Accion=="eliminar_informe_condicion")
 	{
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE id=? ","$condicion");
 		@auditar("Elimina condicion $condicion");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="accion" value="editar_informe">
+			<input type="Hidden" name="PCO_Accion" value="editar_informe">
 			<input type="Hidden" name="informe" value="'.$informe.'">
 			<input type="Hidden" name="popup_activo" value="FormularioCondiciones">
 			</form>
@@ -270,7 +270,7 @@ if ($accion=="eliminar_informe_condicion")
 
 		<editar_informe> | <eliminar_informe_condicion>
 */
-	if ($accion=="guardar_informe_condicion")
+	if ($PCO_Accion=="guardar_informe_condicion")
 		{
 			$mensaje_error="";
 			$valor_i=$valor_izq.$valor_izq_manual.$operador_logico;
@@ -287,7 +287,7 @@ if ($accion=="eliminar_informe_condicion")
 					//Agrega la condicion
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_condiciones (".$ListaCamposSinID_informe_condiciones.") VALUES (?,?,?,?,?)","$informe$_SeparadorCampos_$valor_i$_SeparadorCampos_$valor_o$_SeparadorCampos_$valor_d$_SeparadorCampos_$peso");
 					auditar("Agrega condicion al informe $informe");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_informe">
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_informe">
 						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="popup_activo" value="FormularioCondiciones">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -295,7 +295,7 @@ if ($accion=="eliminar_informe_condicion")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="editar_informe">
+						<input type="Hidden" name="PCO_Accion" value="editar_informe">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
@@ -326,12 +326,12 @@ if ($accion=="eliminar_informe_condicion")
 
 		<editar_informe>
 */
-if ($accion=="eliminar_informe_campo")
+if ($PCO_Accion=="eliminar_informe_campo")
 	{
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_campos WHERE id=? ","$campo");
 		auditar("Elimina campo $campo del informe $informe");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="accion" value="editar_informe">
+			<input type="Hidden" name="PCO_Accion" value="editar_informe">
 			<input type="Hidden" name="informe" value="'.$informe.'">
 			<input type="Hidden" name="popup_activo" value="FormularioCampos">
 			</form>
@@ -364,7 +364,7 @@ if ($accion=="eliminar_informe_campo")
 
 		<editar_informe> | <eliminar_informe_campo>
 */
-	if ($accion=="guardar_informe_campo")
+	if ($PCO_Accion=="guardar_informe_campo")
 		{
 			$mensaje_error="";
 			if ($campo_manual.$campo_datos=="") $mensaje_error=$MULTILANG_InfErrCampo;
@@ -373,7 +373,7 @@ if ($accion=="eliminar_informe_campo")
 					$campo_definitivo=$campo_manual.$campo_datos;
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_campos (".$ListaCamposSinID_informe_campos.") VALUES (?,?,?)","$informe$_SeparadorCampos_$campo_definitivo$_SeparadorCampos_$alias_manual");
 					auditar("Agrega campo $campo_definitivo al informe $informe");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_informe">
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_informe">
 						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="popup_activo" value="FormularioCampos">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -381,7 +381,7 @@ if ($accion=="eliminar_informe_campo")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="editar_informe">
+						<input type="Hidden" name="PCO_Accion" value="editar_informe">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
@@ -412,12 +412,12 @@ if ($accion=="eliminar_informe_campo")
 
 		<editar_informe> | <eliminar_informe_campo>
 */
-if ($accion=="eliminar_informe_tabla")
+if ($PCO_Accion=="eliminar_informe_tabla")
 	{
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_tablas WHERE id=? ","$tabla");
 		auditar("Elimina tabla $tabla del informe $informe");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="accion" value="editar_informe">
+			<input type="Hidden" name="PCO_Accion" value="editar_informe">
 			<input type="Hidden" name="informe" value="'.$informe.'">
 			<input type="Hidden" name="popup_activo" value="FormularioTablas">
 			</form>
@@ -450,7 +450,7 @@ if ($accion=="eliminar_informe_tabla")
 
 		<editar_informe>
 */
-	if ($accion=="guardar_informe_tabla")
+	if ($PCO_Accion=="guardar_informe_tabla")
 		{
 			$mensaje_error="";
 			if ($tabla_manual.$tabla_datos=="") $mensaje_error=$MULTILANG_InfErrTabla;
@@ -459,7 +459,7 @@ if ($accion=="eliminar_informe_tabla")
 					$tabla_definitiva=$tabla_manual.$tabla_datos;
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_tablas (".$ListaCamposSinID_informe_tablas.") VALUES (?,?,?)","$informe$_SeparadorCampos_$tabla_definitiva$_SeparadorCampos_$alias_manual");
 					auditar("Agrega tabla $tabla_definitiva al informe $informe");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_informe">
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_informe">
 						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="popup_activo" value="FormularioTablas">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -467,7 +467,7 @@ if ($accion=="eliminar_informe_tabla")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="editar_informe">
+						<input type="Hidden" name="PCO_Accion" value="editar_informe">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
@@ -497,7 +497,7 @@ if ($accion=="eliminar_informe_tabla")
 	Ver tambien:
 		<eliminar_accion_informe>
 */
-	if ($accion=="guardar_accion_informe")
+	if ($PCO_Accion=="guardar_accion_informe")
 		{
 			$mensaje_error="";
 			if ($titulo=="") $mensaje_error=$MULTILANG_InfErr4;
@@ -506,7 +506,7 @@ if ($accion=="eliminar_informe_tabla")
 				{
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton (".$ListaCamposSinID_informe_boton.") VALUES (?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$informe$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$confirmacion_texto");
 					auditar("Crea boton $id para informe $informe");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="editar_informe">
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_informe">
 						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="popup_activo" value="FormularioBotones">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -514,7 +514,7 @@ if ($accion=="eliminar_informe_tabla")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="editar_informe">
+						<input type="Hidden" name="PCO_Accion" value="editar_informe">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						<input type="Hidden" name="informe" value="'.$informe.'">
@@ -544,7 +544,7 @@ if ($accion=="eliminar_informe_tabla")
 		Registro eliminado de la tabla de aplicacion
 
 */
-	if ($accion=="eliminar_registro_informe")
+	if ($PCO_Accion=="eliminar_registro_informe")
 		{
 			ejecutar_sql_unaria("DELETE FROM ".$tabla." WHERE $campo='$valor'");
 			auditar("Elimina registro donde $campo = $valor en $tabla");
@@ -562,7 +562,7 @@ if ($accion=="eliminar_informe_tabla")
 		Ventanas con los campos y enlaces requeridos para la edicion
 
 */
-if ($accion=="editar_informe")
+if ($PCO_Accion=="editar_informe")
 	{
 		// Busca datos del informe
 		$resultado_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
@@ -581,7 +581,7 @@ if ($accion=="editar_informe")
                       
 
 				<form name="datosform" id="datosform" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-                    <input type="Hidden" name="accion" value="guardar_informe_tabla">
+                    <input type="Hidden" name="PCO_Accion" value="guardar_informe_tabla">
                     <input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
                     <label for="tabla_datos"><?php echo $MULTILANG_TablaDatos; ?>:</label>
@@ -647,7 +647,7 @@ if ($accion=="editar_informe")
 										<td>'.$registro["valor_alias"].'</td>
 										<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
-														<input type="hidden" name="accion" value="eliminar_informe_tabla">
+														<input type="hidden" name="PCO_Accion" value="eliminar_informe_tabla">
 														<input type="hidden" name="tabla" value="'.$registro["id"].'">
 														<input type="hidden" name="informe" value="'.$informe.'">
                                                         <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvBorrado.'\',df'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
@@ -681,7 +681,7 @@ if ($accion=="editar_informe")
                   <div class="modal-body mdl-primary">
 
 				<form name="datosformc" id="datosformc" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-                    <input type="Hidden" name="accion" value="guardar_informe_campo">
+                    <input type="Hidden" name="PCO_Accion" value="guardar_informe_campo">
                     <input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
 
@@ -757,7 +757,7 @@ if ($accion=="editar_informe")
 										<td>'.$registro["valor_alias"].'</td>
 										<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" name="dfc'.$registro["id"].'" id="dfc'.$registro["id"].'">
-														<input type="hidden" name="accion" value="eliminar_informe_campo">
+														<input type="hidden" name="PCO_Accion" value="eliminar_informe_campo">
 														<input type="hidden" name="campo" value="'.$registro["id"].'">
 														<input type="hidden" name="informe" value="'.$informe.'">
                                                         <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvBorrado.'\',dfc'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
@@ -791,7 +791,7 @@ if ($accion=="editar_informe")
                       
 
 				<form name="datosformco" id="datosformco" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="Hidden" name="accion" value="guardar_informe_condicion">
+					<input type="Hidden" name="PCO_Accion" value="guardar_informe_condicion">
 					<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
                     <div class="row">
@@ -909,7 +909,7 @@ if ($accion=="editar_informe")
 										<td align=left>'.$registro["valor_der"].'</td>
 										<td align="center">
 											<form action="'.$ArchivoCORE.'" method="POST" name="ifoce'.$registro["id"].'" id="ifoce'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-												<input type="hidden" name="accion" value="cambiar_estado_campo">
+												<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
 												<input type="hidden" name="tabla" value="informe_condiciones">
 												<input type="hidden" name="campo" value="peso">
@@ -920,7 +920,7 @@ if ($accion=="editar_informe")
 												<input type="Hidden" name="popup_activo" value="FormularioCondiciones">
 											</form>
 											<form action="'.$ArchivoCORE.'" method="POST" name="ifopa'.$registro["id"].'" id="ifopa'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-												<input type="hidden" name="accion" value="cambiar_estado_campo">
+												<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
 												<input type="hidden" name="tabla" value="informe_condiciones">
 												<input type="hidden" name="campo" value="peso">
@@ -940,7 +940,7 @@ if ($accion=="editar_informe")
 										</td>
 										<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" name="dfco'.$registro["id"].'" id="dfco'.$registro["id"].'">
-														<input type="hidden" name="accion" value="eliminar_informe_condicion">
+														<input type="hidden" name="PCO_Accion" value="eliminar_informe_condicion">
 														<input type="hidden" name="condicion" value="'.$registro["id"].'">
 														<input type="hidden" name="informe" value="'.$informe.'">
                                                         <a href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvBorrado.'\',dfco'.$registro["id"].');" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
@@ -971,7 +971,7 @@ if ($accion=="editar_informe")
                   <div class="modal-body mdl-primary">
 
 				<form name="datosformcograf" id="datosformcograf" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="Hidden" name="accion" value="actualizar_grafico_informe">
+					<input type="Hidden" name="PCO_Accion" value="actualizar_grafico_informe">
 					<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
 				<!-- SELECCION DE SERIES  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
@@ -1093,7 +1093,7 @@ if ($accion=="editar_informe")
                         $registro_agrupacion = $consulta_agrupacion->fetch();
                         ?>
                         <form name="datosformcogrup" id="datosformcogrup" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-                            <input type="Hidden" name="accion" value="actualizar_agrupamiento_informe">
+                            <input type="Hidden" name="PCO_Accion" value="actualizar_agrupamiento_informe">
                             <input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
                                 <div class="form-group input-group">
@@ -1141,7 +1141,7 @@ if ($accion=="editar_informe")
                   <div class="modal-body mdl-primary">
 
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-				<input type="Hidden" name="accion" value="guardar_accion_informe">
+				<input type="Hidden" name="PCO_Accion" value="guardar_accion_informe">
 				<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
 
@@ -1285,7 +1285,7 @@ if ($accion=="editar_informe")
 								<td>'.$registro["accion_usuario"].'</td>';
 						echo '		<td align=center>
 										<form action="'.$ArchivoCORE.'" method="POST" name="bifoce'.$registro["id"].'" id="bifoce'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-											<input type="hidden" name="accion" value="cambiar_estado_campo">
+											<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 											<input type="hidden" name="id" value="'.$registro["id"].'">
 											<input type="hidden" name="tabla" value="informe_boton">
 											<input type="hidden" name="campo" value="peso">
@@ -1296,7 +1296,7 @@ if ($accion=="editar_informe")
 											<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 										</form>
 										<form action="'.$ArchivoCORE.'" method="POST" name="bifopa'.$registro["id"].'" id="bifopa'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-											<input type="hidden" name="accion" value="cambiar_estado_campo">
+											<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 											<input type="hidden" name="id" value="'.$registro["id"].'">
 											<input type="hidden" name="tabla" value="informe_boton">
 											<input type="hidden" name="campo" value="peso">
@@ -1318,7 +1318,7 @@ if ($accion=="editar_informe")
 
 								echo '<td align=center>
 											<form action="'.$ArchivoCORE.'" method="POST" name="bif'.$registro["id"].'" id="bif'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-												<input type="hidden" name="accion" value="cambiar_estado_campo">
+												<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
 												<input type="hidden" name="tabla" value="informe_boton">
 												<input type="hidden" name="campo" value="visible">
@@ -1334,7 +1334,7 @@ if ($accion=="editar_informe")
 								echo '</form></td>';
 										echo '<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" name="bf'.$registro["id"].'" id="bf'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-														<input type="hidden" name="accion" value="eliminar_accion_informe">
+														<input type="hidden" name="PCO_Accion" value="eliminar_accion_informe">
 														<input type="hidden" name="boton" value="'.$registro["id"].'">
 														<input type="hidden" name="informe" value="'.$informe.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -1415,7 +1415,7 @@ if ($accion=="editar_informe")
 				?>
 
 				<br><br>
-				<form action="<?php echo $ArchivoCORE; ?>" method="POST" name="cancelar"><input type="Hidden" name="accion" value="administrar_informes"></form>
+				<form action="<?php echo $ArchivoCORE; ?>" method="POST" name="cancelar"><input type="Hidden" name="PCO_Accion" value="administrar_informes"></form>
                 <a class="btn btn-warning btn-block" href="javascript:document.cancelar.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_InfVolver; ?></a>
 
 				</div><br>
@@ -1431,7 +1431,7 @@ if ($accion=="editar_informe")
 
 			<?php abrir_ventana($MULTILANG_InfParam, 'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="accion" value="actualizar_informe">
+			<input type="Hidden" name="PCO_Accion" value="actualizar_informe">
 			<input type="Hidden" name="nivel_usuario" value="-1">
 			<input type="Hidden" name="id" value="<?php echo $registro_informe['id']; ?>">
 
@@ -1507,7 +1507,7 @@ if ($accion=="editar_informe")
 
 			<form action="<?php echo $ArchivoCORE; ?>" method="post" name="datosprevios" id="datosprevios" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 			
-			<input type="hidden" name="accion" value="cargar_objeto">
+			<input type="hidden" name="PCO_Accion" value="cargar_objeto">
 			<input type="hidden" name="objeto" value="inf:<?php echo $registro_informe['id']; ?>:1:htm:Informes:0">
 			</form>
 
@@ -1561,7 +1561,7 @@ if ($accion=="editar_informe")
 
 		<editar_informe>
 */
-if ($accion=="eliminar_informe")
+if ($PCO_Accion=="eliminar_informe")
 	{
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe WHERE id=? ","$informe");
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
@@ -1569,7 +1569,7 @@ if ($accion=="eliminar_informe")
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE informe=? ","$informe");
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe=? ","$informe");
 		auditar("Elimina informe $informe");
-		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_informes"></form>
+		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_informes"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
 
@@ -1592,7 +1592,7 @@ if ($accion=="eliminar_informe")
 
 		<editar_informe>
 */
-if ($accion=="guardar_informe")
+if ($PCO_Accion=="guardar_informe")
 	{
 		$mensaje_error="";
 		if ($titulo=="") $mensaje_error.=$MULTILANG_InfErrInforme1."<br>";
@@ -1603,14 +1603,14 @@ if ($accion=="guardar_informe")
 				$id=$ConexionPDO->lastInsertId();
 				auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-				<input type="Hidden" name="accion" value="editar_informe">
+				<input type="Hidden" name="PCO_Accion" value="editar_informe">
 				<input type="Hidden" name="informe" value="'.$id.'"></form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 			}
 		else
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="accion" value="administrar_informes">
+					<input type="Hidden" name="PCO_Accion" value="administrar_informes">
 					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 					</form>
@@ -1635,7 +1635,7 @@ if ($accion=="guardar_informe")
 	Ver tambien:
 	<guardar_informe> | <eliminar_informe>
 */
-if ($accion=="administrar_informes")
+if ($PCO_Accion=="administrar_informes")
 	{
 		echo "<div align=center><a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/M4kYe9nTeTA\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a></div>";
 		 ?>
@@ -1645,7 +1645,7 @@ if ($accion=="administrar_informes")
 
 			<?php abrir_ventana($MULTILANG_InfTituloAgr, 'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="accion" value="guardar_informe">
+			<input type="Hidden" name="PCO_Accion" value="guardar_informe">
 			<input type="Hidden" name="nivel_usuario" value="-1">
 
 			<h4><?php echo $MULTILANG_InfDetalles; ?>:</h4>
@@ -1750,14 +1750,14 @@ if ($accion=="administrar_informes")
 								<td>'.$registro["categoria"].'</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
-												<input type="hidden" name="accion" value="eliminar_informe">
+												<input type="hidden" name="PCO_Accion" value="eliminar_informe">
 												<input type="hidden" name="informe" value="'.$registro["id"].'">
                                                 <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvEliminar.'\',df'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="accion" value="editar_informe">
+												<input type="hidden" name="PCO_Accion" value="editar_informe">
 												<input type="hidden" name="informe" value="'.$registro["id"].'">
                                                 <button type="submit" class="btn btn-default btn-xs"><i class="fa fa-bars"></i> '.$MULTILANG_InfcamTabCond.'</button>
 										</form>
@@ -1805,7 +1805,7 @@ echo '
 	Ver tambien:
 	<administrar_informes>
 */
-if ($accion=="mis_informes")
+if ($PCO_Accion=="mis_informes")
 	{
 			// Carga las opciones del ACORDEON DE INFORMES
 			echo '<div align="center">
@@ -1845,7 +1845,7 @@ if ($accion=="mis_informes")
 								<div align=center style="float:left">
 									<form action="'.$ArchivoCORE.'" method="post" name="acordeinf_'.$registro_opciones_acordeon["id"].'" id="acordeinf_'.$registro_opciones_acordeon["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 									<table cellspacing=5 class="TextosEscritorio"><tr><td align=center>
-									<input type="hidden" name="accion" value="cargar_objeto">
+									<input type="hidden" name="PCO_Accion" value="cargar_objeto">
 									<input type="hidden" name="objeto" value="inf:'.$registro_opciones_acordeon["id"].':1:htm:Informes:0">
 									<a title="'.$registro_opciones_acordeon["titulo"].'" name="" href="javascript:document.acordeinf_'.$registro_opciones_acordeon["id"].'.submit();"><i class="fa fa-file-text-o fa-3x fa-fw texto-blanco"></i></a>
 									</td></tr>

@@ -66,7 +66,7 @@ function Obtener_IDFanPage($Nombre_FanPage="")
 	Salida:
 		Opciones del SOPA - Demostracion
 */
-if ($accion=="servir_sopa") 
+if ($PCO_Accion=="servir_sopa") 
 	{
         //Llamado a la funcion SOPA de Practico (Cuidado: es multiparametro o polimorfica)
         $EntradasFaceBook = ObtenerEntradas_FacebookFanPage("", "47562714382",3);

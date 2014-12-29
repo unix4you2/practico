@@ -54,7 +54,7 @@
 	Ver tambien:
 		<editar_tabla> | <guardar_crear_campo>
 */
-	if ($accion=="eliminar_campo")
+	if ($PCO_Accion=="eliminar_campo")
 		{ 
 			$mensaje_error="";
 			
@@ -69,7 +69,7 @@
 					ejecutar_sql_unaria("ALTER TABLE $nombre_tabla DROP COLUMN $nombre_campo");
 					auditar("Elimina campo $nombre_campo de tabla $nombre_tabla");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="accion" value="editar_tabla">
+					<input type="Hidden" name="PCO_Accion" value="editar_tabla">
 					<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 					</form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -77,7 +77,7 @@
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="editar_tabla">
+						<input type="Hidden" name="PCO_Accion" value="editar_tabla">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
@@ -109,7 +109,7 @@
 	Ver tambien:
 		<editar_tabla>
 */
-	if ($accion=="guardar_crear_campo")
+	if ($PCO_Accion=="guardar_crear_campo")
 		{
 			// Construye la consulta para la creacion del campo (sintaxis mysql por ahora)
 			$consulta = "ALTER TABLE $nombre_tabla ADD COLUMN $nombre_campo $tipo";
@@ -130,7 +130,7 @@
 			if ($descripcion_ultimo_error!="")
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="editar_tabla">
+						<input type="Hidden" name="PCO_Accion" value="editar_tabla">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError2.'">
 						<input type="Hidden" name="error_descripcion" value="'.$MULTILANG_TblError3.': <i>'.$descripcion_ultimo_error.'</i>">
@@ -141,7 +141,7 @@
 				{
 					auditar("Agrega campo $nombre_campo tipo $tipo a tabla $nombre_tabla");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="editar_tabla">
+						<input type="Hidden" name="PCO_Accion" value="editar_tabla">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						</form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -169,7 +169,7 @@
 	Ver tambien:
 		<asistente_tablas>
 */
-if ($accion=="editar_tabla")
+if ($PCO_Accion=="editar_tabla")
 	{
 		 ?>
 
@@ -178,7 +178,7 @@ if ($accion=="editar_tabla")
       
 			<?php abrir_ventana($MULTILANG_TblAgrCampo,'panel-danger'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="accion" value="guardar_crear_campo">
+			<input type="Hidden" name="PCO_Accion" value="guardar_crear_campo">
 			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 
 			<h4><?php echo $MULTILANG_TblAgrCampoTabla; ?>: <b><?php echo $nombre_tabla; ?></b>:</h4>
@@ -375,7 +375,7 @@ if ($accion=="editar_tabla")
 							echo '
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro[$i]["nombre"].'" id="f'.$registro[$i]["nombre"].'">
-												<input type="hidden" name="accion" value="eliminar_campo">
+												<input type="hidden" name="PCO_Accion" value="eliminar_campo">
 												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 												<input type="hidden" name="nombre_campo" value="'.$registro[$i]["nombre"].'">
                                                 <a href="#" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelCampo.'\',f'.$registro[$i]["nombre"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
@@ -429,7 +429,7 @@ echo '
 	Ver tambien:
 		<administrar_tablas>
 */
-	if ($accion=="eliminar_tabla")
+	if ($PCO_Accion=="eliminar_tabla")
 		{
 			$mensaje_error="";
 			if ($mensaje_error=="")
@@ -437,13 +437,13 @@ echo '
 					// Realiza la operacion
 					ejecutar_sql_unaria("DROP TABLE $nombre_tabla");
 					auditar("Elimina tabla $nombre_tabla");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_tablas"></form>
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_tablas"></form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
 				{
                     mensaje('<blink>'.$MULTILANG_TblErrDel1.'</blink>',$MULTILANG_TblErrDel2, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-					echo '<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="accion" value="administrar_tablas"></form>
+					echo '<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="PCO_Accion" value="administrar_tablas"></form>
 						<br /><input type="Button" onclick="document.cancelar.submit()" name="" value="Cerrar" class="Botones">';
 				}
 		}
@@ -470,7 +470,7 @@ echo '
 	Ver tambien:
 		<administrar_tablas>
 */
-	if ($accion=="guardar_crear_tabla")
+	if ($PCO_Accion=="guardar_crear_tabla")
 		{
 			$mensaje_error="";
 			if ($nombre_tabla=="") $mensaje_error=$MULTILANG_TblErrCrear;
@@ -543,7 +543,7 @@ echo '
 					if ($error_consulta!="")
 						{
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-								<input type="Hidden" name="accion" value="administrar_tablas">
+								<input type="Hidden" name="PCO_Accion" value="administrar_tablas">
 								<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError2.'">
 								<input type="Hidden" name="error_descripcion" value="'.$MULTILANG_TblError3.' <i>'.$error_mysql.'</i>">
 								</form>
@@ -552,14 +552,14 @@ echo '
 					else
 						{
 							auditar("Crea tabla $nombre_tabla");
-							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="accion" value="administrar_tablas"></form>
+							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_tablas"></form>
 									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 						}
 				}
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="administrar_tablas">
+						<input type="Hidden" name="PCO_Accion" value="administrar_tablas">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError1.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
@@ -578,13 +578,13 @@ echo '
 	Ver tambien:
 		<asistente_tablas> | <consultar_tablas>
 */
-	if ($accion=="administrar_tablas")
+	if ($PCO_Accion=="administrar_tablas")
 		{
 			echo "<center><a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/otODPESW0k0\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a></center>";
 
 			abrir_ventana($MULTILANG_TblCrearListar,'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="accion" value="guardar_crear_tabla">
+			<input type="Hidden" name="PCO_Accion" value="guardar_crear_tabla">
 			<div align=center>
 			<h3><?php echo $MULTILANG_TblCreaTabla; ?>:<b><?php echo $BaseDatos; ?></b>:</h3>
 			<table class="TextosVentana" cellspacing=10>
@@ -619,7 +619,7 @@ echo '
 			</td>
 			<td align=center>
 				<form name="datosasis" id="datosasis" action="<?php echo $ArchivoCORE; ?>" method="POST">
-				<input type="Hidden" name="accion" value="asistente_tablas">
+				<input type="Hidden" name="PCO_Accion" value="asistente_tablas">
 				<?php echo $MULTILANG_Asistente; ?><br>
 				<a href="javascript:document.datosasis.submit();" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TblTitAsis; ?>: <?php echo $MULTILANG_TblDesAsis; ?>"><i class="fa fa-magic fa-5x texto-naranja"></i></a>
 				</form>
@@ -663,7 +663,7 @@ echo '
 					if ($PrefijoRegistro!=$TablasCore && $total_registros==0)							
 						echo '
 										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["0"].'" id="f'.$registro["0"].'">
-												<input type="hidden" name="accion" value="eliminar_tabla">
+												<input type="hidden" name="PCO_Accion" value="eliminar_tabla">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
                                                 <a href="#" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelTabla.'\',f'.$registro["0"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 										</form>';
@@ -673,7 +673,7 @@ echo '
 					if ($PrefijoRegistro!=$TablasCore)
 						echo '
 										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="accion" value="editar_tabla">
+												<input type="hidden" name="PCO_Accion" value="editar_tabla">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
                                                 <button type="submit" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i> '.$MULTILANG_Editar.'</button>
 										</form>';
@@ -711,7 +711,7 @@ echo '
 	Ver tambien:
 		<asistente_tablas>
 */
-	if ($accion=="guardar_crear_tabla_asistente")
+	if ($PCO_Accion=="guardar_crear_tabla_asistente")
 		{
 			$mensaje_error="";
 			if ($nombre_tabla=="") $mensaje_error=$MULTILANG_TblErrCrear;
@@ -723,7 +723,7 @@ echo '
 					if ($error_consulta!="")
 						{
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-								<input type="Hidden" name="accion" value="asistente_tablas">
+								<input type="Hidden" name="PCO_Accion" value="asistente_tablas">
 								<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError2.'">
 								<input type="Hidden" name="error_descripcion" value="'.$MULTILANG_TblError3.': <i>'.$error_mysql.'</i>">
 								</form>
@@ -765,7 +765,7 @@ echo '
 								}
 							auditar("Crea tabla $nombre_tabla");
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-							<input type="Hidden" name="accion" value="editar_tabla">
+							<input type="Hidden" name="PCO_Accion" value="editar_tabla">
 							<input type="hidden" name="nombre_tabla" value="'.$TablasApp.''.$nombre_tabla.'">
 							</form>
 									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -774,7 +774,7 @@ echo '
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="asistente_tablas">
+						<input type="Hidden" name="PCO_Accion" value="asistente_tablas">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError1.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
@@ -800,11 +800,11 @@ echo '
 	Ver tambien:
 		<guardar_crear_tabla_asistente>
 */
-	if ($accion=="asistente_tablas")
+	if ($PCO_Accion=="asistente_tablas")
 		{
 			abrir_ventana($MULTILANG_TblAsistente,'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="accion" value="guardar_crear_tabla_asistente">
+			<input type="Hidden" name="PCO_Accion" value="guardar_crear_tabla_asistente">
 			<div align=center>
 			<h3><?php echo $MULTILANG_TblCreaTabla; ?> <b><?php echo $BaseDatos; ?></b>:</h3>
 				<table class="table table-unbordered">
@@ -913,11 +913,11 @@ echo '
 /* ################################################################## */
 /* ################################################################## */
 /* AQUI EMPIEZA CODIGO DE VERSIONES ANTERIORES ESPECIFICAS PARA MYSQL y MARIADB ------ EN DESUSO-----   */
- if ($accion=="administrar_tablas_solo_mysql")
+ if ($PCO_Accion=="administrar_tablas_solo_mysql")
 	{
 			abrir_ventana('Crear/Listar tablas de datos definidias en el sistema','panel-warning'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="accion" value="guardar_crear_tabla">
+			<input type="Hidden" name="PCO_Accion" value="guardar_crear_tabla">
 			<div align=center>
 			<br>Crear una nueva tabla de datos en <b><?php echo $BaseDatos; ?></b>:
 				<table class="TextosVentana">
@@ -976,7 +976,7 @@ echo '
 								<td>'.$registro[14].'</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["Name"].'" id="f'.$registro["Name"].'">
-												<input type="hidden" name="accion" value="eliminar_tabla">
+												<input type="hidden" name="PCO_Accion" value="eliminar_tabla">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["Name"].'">
 												<input type="button" value="Eliminar"  class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar la tabla de datos '.$registro["Name"].' se eliminar&aacute;n tambi&eacute;n todos los registros en ella almacenados y luego no podr&aacute; deshacer esta operaci&oacute;n.\nEst&aacute; seguro que desea continuar ?\',f'.$registro["Name"].');">
 												&nbsp;&nbsp;
@@ -984,7 +984,7 @@ echo '
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="accion" value="editar_tabla">
+												<input type="hidden" name="PCO_Accion" value="editar_tabla">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["Name"].'">
 												<input type="Submit" value="Editar"  class="Botones">
 												&nbsp;&nbsp;

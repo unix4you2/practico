@@ -366,7 +366,7 @@
 
 /* ################################################################## */
 /* ################################################################## */
-if ($accion=="eliminar_monitoreo")
+if ($PCO_Accion=="eliminar_monitoreo")
 	{
 		/*
 			Function: eliminar_monitoreo
@@ -391,7 +391,7 @@ if ($accion=="eliminar_monitoreo")
 		auditar("Elimina monitor $id");
 					echo '
 					<form name="continuar_admin_mon" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="administrar_monitoreo">
+						<input type="Hidden" name="PCO_Accion" value="administrar_monitoreo">
 					</form>
 					<script type="" language="JavaScript"> 
 					alert("'.$MULTILANG_Aplicando.'");
@@ -415,7 +415,7 @@ if ($accion=="eliminar_monitoreo")
 			Ver tambien:
 			<administrar_monitoreo>
 		*/
-	if ($accion=="guardar_monitoreo")
+	if ($PCO_Accion=="guardar_monitoreo")
 		{
 			$mensaje_error="";
 			// Verifica campos nulos
@@ -429,7 +429,7 @@ if ($accion=="eliminar_monitoreo")
 					auditar("Agrega en monitor: $nombre");
 					echo '
 					<form name="continuar_admin_mon" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="administrar_monitoreo">
+						<input type="Hidden" name="PCO_Accion" value="administrar_monitoreo">
 					</form>
 					<script type="" language="JavaScript"> 
 					alert("'.$MULTILANG_Aplicando.'");
@@ -438,7 +438,7 @@ if ($accion=="eliminar_monitoreo")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="administrar_monitoreo">
+						<input type="Hidden" name="PCO_Accion" value="administrar_monitoreo">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
@@ -462,14 +462,14 @@ if ($accion=="eliminar_monitoreo")
 			Ver tambien:
 			<guardar_monitoreo>
 		*/
-if ($accion=="administrar_monitoreo")
+if ($PCO_Accion=="administrar_monitoreo")
 	{
-		$accion=escapar_contenido($accion); //Limpia cadena para evitar XSS
+		$PCO_Accion=escapar_contenido($PCO_Accion); //Limpia cadena para evitar XSS
 		abrir_ventana($MULTILANG_MonConfig,'panel-primary');
 ?>
 
         <form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-            <input type="hidden" name="accion" value="guardar_monitoreo">
+            <input type="hidden" name="PCO_Accion" value="guardar_monitoreo">
             
             <div class="row">
                 <div class="col-md-6">
@@ -696,7 +696,7 @@ if ($accion=="administrar_monitoreo")
 								<td>'.$registro["milisegundos_lectura"].'</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
-												<input type="hidden" name="accion" value="eliminar_monitoreo">
+												<input type="hidden" name="PCO_Accion" value="eliminar_monitoreo">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
 												<input type="button" value="'.$MULTILANG_Eliminar.'" class="btn btn-danger btn-xs" onClick="confirmar_evento(\''.$MULTILANG_MnuAdvElimina.'\',f'.$registro["id"].');">
 										</form>
@@ -727,7 +727,7 @@ if ($accion=="administrar_monitoreo")
 			Ver tambien:
 			<guardar_monitoreo>
 		*/
-if ($accion=="ver_monitoreo")
+if ($PCO_Accion=="ver_monitoreo")
 	{
 
 ?>
@@ -766,7 +766,7 @@ if ($accion=="ver_monitoreo")
 
 		<!-- INICIA LA TABLA PRINCIPAL -->
 		<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="color:white;">
-			<tr><td height="100%" valign="<?php if ($accion=="Ver_menu") echo 'TOP'; else echo 'MIDDLE'; ?>" align="center">
+			<tr><td height="100%" valign="<?php if ($PCO_Accion=="Ver_menu") echo 'TOP'; else echo 'MIDDLE'; ?>" align="center">
 
 				<?php
 					$ErroresMonitoreoPractico=0;
@@ -878,7 +878,7 @@ if ($accion=="ver_monitoreo")
 		<?php
 			// Estadisticas de uso anonimo con GABeacon
 			$PrefijoGA='<img src="https://ga-beacon.appspot.com/';
-			$PosfijoGA='/Practico/'.$accion.'?pixel" border=0 ALT=""/>';
+			$PosfijoGA='/Practico/'.$PCO_Accion.'?pixel" border=0 ALT=""/>';
 			// Este valor indica un ID generico de GA UA-847800-9 No edite esta linea sobre el codigo
 			// Para validar que su ID es diferente al generico de seguimiento.  En lugar de esto cambie
 			// su valor a traves del panel de configuracion de Practico con el entregado como ID de GoogleAnalytics

@@ -27,7 +27,7 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	if ($accion=="cargar_objeto")
+	if ($PCO_Accion=="cargar_objeto")
 		{
 			/*
 				Function: cargar_objeto
@@ -95,7 +95,7 @@
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
@@ -105,7 +105,7 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	if ($accion=="guardar_configuracion")
+	if ($PCO_Accion=="guardar_configuracion")
 		{
 			/*
 				Function: guardar_configuracion
@@ -235,7 +235,7 @@ $salida=sprintf("<?php
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>
@@ -246,7 +246,7 @@ $salida=sprintf("<?php
 
 /* ################################################################## */
 /* ################################################################## */
-	if ($accion=="guardar_oauth")
+	if ($PCO_Accion=="guardar_oauth")
 		{
 			/*
 				Function: guardar_oauth
@@ -454,7 +454,7 @@ $salida=sprintf("<?php
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
 						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
 						</form>

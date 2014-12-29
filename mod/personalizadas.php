@@ -23,7 +23,7 @@
 
 			Codigo de ejemplo:
 				(start code)
-					<?php if ($accion=="Mi_accion_XYZ") 
+					<?php if ($PCO_Accion=="Mi_accion_XYZ") 
 						{
 							// Mis operaciones a realizar
 						}
@@ -39,7 +39,7 @@
 
 <?php
 
-if ($accion=="Mi_accion_XYZ") 
+if ($PCO_Accion=="Mi_accion_XYZ") 
 	{
 
 
