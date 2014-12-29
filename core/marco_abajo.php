@@ -121,12 +121,22 @@
             echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalDisenoBotones").modal("show"); }); </script>';
     ?>
 
-
     <script language="JavaScript">
         //Carga los tooltips programados en la hoja.  Por defecto todos los elementos con data-toggle=tootip
         $(function () {
           $('[data-toggle="tooltip"]').tooltip();
         })
+    </script>
+
+    <?php
+        // Calcula tiempos de ejecucion del script
+        $tiempo_final_script = obtener_microtime();
+        $tiempo_total_script = $tiempo_final_script - $tiempo_inicio_script;
+        $tiempo_total_script = round($tiempo_total_script,3);
+    ?>
+    <script language="JavaScript">
+        //Actualiza marco con el tiempo de carga
+        $('#PCO_TCarga').text("<?php echo $tiempo_total_script; ?>");
     </script>
 
     <?php

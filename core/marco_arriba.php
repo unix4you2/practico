@@ -302,12 +302,8 @@
                             // Muestra la accion actual si el usuario es administrador y la accion no es vacia - Sirve como guia a la hora de crear objetos
                             if(@$Login_usuario=="admin" && $PCO_Accion!="")
                                 {
-                                    // Calcula tiempos de ejecucion del script
-                                    $tiempo_final_script = obtener_microtime();
-                                    $tiempo_total_script = $tiempo_final_script - $tiempo_inicio_script;
-                                    echo "<strong><i class='fa fa-cog fa-fw'></i> $MULTILANG_Accion:</strong> $PCO_Accion <br><strong><i class='fa fa-clock-o fa-fw'></i> $MULTILANG_TiempoCarga:</strong> ";
-                                    echo round($tiempo_total_script,3);
-                                    echo " s<br><strong><i class='fa fa-file-code-o fa-fw'></i> Inclusiones:</strong> ".(count(get_included_files()))."<hr>"; // Retorna arreglo con cantidad de archivos incluidos
+                                    echo "<strong><i class='fa fa-cog fa-fw'></i> $MULTILANG_Accion:</strong> $PCO_Accion <br><strong><i class='fa fa-clock-o fa-fw'></i> $MULTILANG_TiempoCarga:</strong> <div id='PCO_TCarga' name='PCO_TCarga' style='display: inline-block;'></div> s<br>";
+                                    echo "<strong><i class='fa fa-file-code-o fa-fw'></i> Inclusiones:</strong> ".(count(get_included_files()))."<hr>"; // Retorna arreglo con cantidad de archivos incluidos
                                 }
                         ?>
                         <div align=center>
