@@ -84,6 +84,7 @@ IMPORTANTE:  Muchos archivos han sido reemplazados o eliminados por compatibilid
 * Enhan: Tamaño del instalador disminuido en varias megas
 * Enhan: Se aumenta longitud del campo de estilo para botones y se permite ademas el uso de texto libre para ingresar estilos bootstrap
 * Enhan: La variable de control de practico ahora se llama $PCO_Accion en lugar de simplemente $PCO_Accion para evitar conflictos.  Usuarios que deseen compatibilidad a versiones anteriores podrán hacer una asignación de la nueva variable así: $PCO_Accion=$PCO_Accion;
+* Enhan: Eliminadas variables de idioma: $MULTILANG_FrmEstilo1, $MULTILANG_FrmEstilo1b, $MULTILANG_FrmEstilo2
 * Fixed: Se simplifica script de inicio para login y cambio dinámico de marcos.
 * Fixed: Actualizados scripts de instalacion pues ya no requieren creación de menues
 * Fixed: Se evita cierre de sesion involuntario por enlaces mal generados al escritorio
@@ -119,6 +120,7 @@ ALTER TABLE core_informe DROP COLUMN color_fondo;
 ALTER TABLE core_usuario DROP COLUMN descripcion;
 ALTER TABLE core_usuario DROP COLUMN nivel;
 ALTER TABLE core_formulario_boton CHANGE COLUMN estilo estilo VARCHAR(250) NULL DEFAULT '';
+ALTER TABLE core_informe_boton CHANGE COLUMN estilo estilo VARCHAR(250) NULL DEFAULT '';
 "
 
 ########################################################################

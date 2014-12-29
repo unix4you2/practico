@@ -369,9 +369,6 @@
 	$MULTILANG_FrmTituloBot='T&iacute;tulo o etiqueta';
 	$MULTILANG_FrmDesBot='Texto que aparecer&aacute; sobre el bot&oacute;n';
 	$MULTILANG_FrmEstilo='Estilo';
-	$MULTILANG_FrmEstilo1='Predeterminado - bot&oacute;n normal';
-	$MULTILANG_FrmEstilo1b='Bot&oacute;n normal';
-	$MULTILANG_FrmEstilo2='Boton de acci&oacute;n que requiere cuidado';
 	$MULTILANG_FrmDesEstilo='Apariencia gr&aacute;fica del control';
 	$MULTILANG_FrmTipoAccion='Tipo de acci&oacute;n';
 	$MULTILANG_FrmAccionT1='Acciones internas';

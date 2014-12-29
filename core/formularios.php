@@ -1427,7 +1427,6 @@ if ($PCO_Accion=="editar_formulario")
 				<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 				<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">
 
-
                     <div class="form-group input-group">
                         <input type="text" name="titulo" class="form-control" placeholder="<?php echo $MULTILANG_FrmTituloBot; ?>">
                         <span class="input-group-addon">
@@ -1436,8 +1435,9 @@ if ($PCO_Accion=="editar_formulario")
                         </span>
                     </div>
                     
+                    <label for="estilo"><?php echo $MULTILANG_FrmEstilo; ?>:</label>
                     <div class="form-group input-group">
-                        <input type="text" name="estilo" class="form-control" placeholder="<?php echo $MULTILANG_FrmEstilo; ?>: BootStrap o Customizado">
+                        <input type="text" id="estilo" name="estilo" class="form-control" placeholder="<?php echo $MULTILANG_FrmEstilo; ?>: BootStrap o Customizado">
                         <span class="input-group-addon">
                             <a href="#" title="<?php echo $MULTILANG_FrmDesEstilo; ?>"><i class="fa fa-question-circle text-info"></i></a>
                         </span>

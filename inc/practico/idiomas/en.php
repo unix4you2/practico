@@ -372,9 +372,6 @@
 	$MULTILANG_FrmTituloBot='Title or Tag';
 	$MULTILANG_FrmDesBot='Text to appear on the button';
 	$MULTILANG_FrmEstilo='Style';
-	$MULTILANG_FrmEstilo1='Default - Standard button';
-	$MULTILANG_FrmEstilo1b='Standard button';
-	$MULTILANG_FrmEstilo2='Action button that requires to be careful';
 	$MULTILANG_FrmDesEstilo='Graphical appearance for the control';
 	$MULTILANG_FrmTipoAccion='Action type';
 	$MULTILANG_FrmAccionT1='Internal actions';

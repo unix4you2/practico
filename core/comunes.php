@@ -3132,9 +3132,9 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					{
 						//Cuando es embebido (=1) no imprime el boton de retorno pues se asume dentro de un formulario
 						if (!$embebido)
-							echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" <<< '.$MULTILANG_IrEscritorio.' " class="Botones">';
+							echo '<div align=center><button type="Button" onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home fa-fw"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 						//Carga la ventana con el informe
-						abrir_ventana($Nombre_Aplicacion.' - '.$registro_informe["titulo"],'',$registro_informe["ancho"]);
+						abrir_ventana($Nombre_Aplicacion.' - '.$registro_informe["titulo"],'panel panel-info',$registro_informe["ancho"]);
 					}
 
 				// Si se ha definido un tamano fijo entonces crea el marco
@@ -3188,7 +3188,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 					if($formato=="htm")
 						{
-							$SalidaFinalInforme.= '<table class="'.$estilo.'"><thead><tr>';
+							$SalidaFinalInforme.= '<table class="table table-condensed table-hover table-striped table-unbordered '.$estilo.'"><thead><tr>';
 							$SalidaFinalInformePDF.= '<table class="'.$estilo.'"><thead><tr>';
 						}
 					if($formato=="xls")
@@ -3270,16 +3270,16 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					$numero_columnas=0;
 					foreach(@$resultado_columnas->fetch(PDO::FETCH_ASSOC) as $key=>$val)
 						{
-							$SalidaFinalInforme.= '<th align="LEFT">'.$key.'</th>';
-							$SalidaFinalInformePDF.= '<th align="LEFT">'.$key.'</th>';
+							$SalidaFinalInforme.= '<th>'.$key.'</th>';
+							$SalidaFinalInformePDF.= '<th>'.$key.'</th>';
 							$numero_columnas++;
 						}
 
 					//Si el informe tiene botones entonces agrega columna adicional
 					if ($total_botones>0)
 						{
-							$SalidaFinalInforme.= '<th align="LEFT"></th>';
-							$SalidaFinalInformePDF.= '<th align="LEFT"></th>';
+							$SalidaFinalInforme.= '<th></th>';
+							$SalidaFinalInformePDF.= '<th></th>';
 						}
 					$SalidaFinalInforme.= '</tr></thead><tbody>';
 					$SalidaFinalInformePDF.= '</tr></thead><tbody>';
@@ -3293,8 +3293,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							$SalidaFinalInformePDF.= '<tr>';
 							for ($i=0;$i<$numero_columnas;$i++)
 								{
-									$SalidaFinalInforme.= '<td align=left>'.$registro_informe[$i].'</td>';
-									$SalidaFinalInformePDF.= '<td align=left>'.$registro_informe[$i].'</td>';
+									$SalidaFinalInforme.= '<td>'.$registro_informe[$i].'</td>';
+									$SalidaFinalInformePDF.= '<td>'.$registro_informe[$i].'</td>';
 								}
 							//Si el informe tiene botones los agrega
 							if ($total_botones>0)
@@ -3303,8 +3303,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 									$cadena_botones_registro=str_replace("DELFRMVALVALOR",$registro_informe[0],$cadena_generica_botones);
 									$cadena_botones_registro=str_replace("DETFRMVALBASE",$registro_informe[0],$cadena_botones_registro);
 									//Muestra los botones preparados para el registro
-									$SalidaFinalInforme.= '<th align="LEFT">'.$cadena_botones_registro.'</th>';
-									$SalidaFinalInformePDF.= '<th align="LEFT">'.$cadena_botones_registro.'</th>';
+									$SalidaFinalInforme.= '<th>'.$cadena_botones_registro.'</th>';
+									$SalidaFinalInformePDF.= '<th>'.$cadena_botones_registro.'</th>';
 								}
 							$SalidaFinalInforme.= '</tr>';
 							$SalidaFinalInformePDF.= '</tr>';

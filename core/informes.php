@@ -1155,14 +1155,9 @@ if ($PCO_Accion=="editar_informe")
 
                     <label for="estilo"><?php echo $MULTILANG_FrmEstilo; ?>:</label>
                     <div class="form-group input-group">
-                        <select id="estilo" name="estilo" class="form-control">
-                            <option value="BotonesEstado"><?php echo $MULTILANG_FrmEstilo1; ?> (<?php echo $MULTILANG_Pequeno; ?>)</option>
-                            <option value="BotonesEstadoCuidado"><?php echo $MULTILANG_FrmEstilo2; ?> (<?php echo $MULTILANG_Pequeno; ?>)</option>
-                            <option value="Botones"><?php echo $MULTILANG_FrmEstilo1b; ?> (<?php echo $MULTILANG_Grande; ?>)</option>
-                            <option value="BotonesCuidado"><?php echo $MULTILANG_FrmEstilo2; ?> (<?php echo $MULTILANG_Grande; ?>)</option>
-                        </select>
+                        <input type="text" id="estilo" name="estilo" class="form-control" placeholder="<?php echo $MULTILANG_FrmEstilo; ?>: BootStrap o Customizado">
                         <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_FrmDesEstilo; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a href="#" title="<?php echo $MULTILANG_FrmDesEstilo; ?>"><i class="fa fa-question-circle text-info"></i></a>
                         </span>
                     </div>
 
