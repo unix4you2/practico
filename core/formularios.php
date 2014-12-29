@@ -1990,7 +1990,7 @@ if ($accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <select id="columnas" name="columnas" class="form-control">
                                     <?php
-                                        for ($i=1;$i<=20;$i++)
+                                        for ($i=1;$i<=12;$i++)
                                             {
                                                 $estado_seleccion_cols="";
                                                 if ($i==$registro_form["columnas"])

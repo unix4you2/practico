@@ -1644,23 +1644,38 @@ function ventana_login()
 					$tipo_entrada="password";
 				}
 
-			// Muestra el campo
-			$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control " '.$cadena_validacion.' '.$registro_campos["solo_lectura"].'  >';
+            //Agrega etiqueta del campo si es diferente de vacio
+			if ($registro_campos["titulo"]!="")
+                $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+			//Abre el marco del control de datos
+			$salida.='<div class="form-group input-group">';
+            // Muestra el campo
+			$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control " '.$cadena_validacion.' '.$registro_campos["solo_lectura"].'  >';
 
 			// Muestra boton de busqueda cuando el campo sea usado para esto
 			if ($registro_campos["etiqueta_busqueda"]!="")
 				{
-					$salida.= '<input type="Button" class="BotonesEstado" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.valorbase.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.accion.value=\'cargar_objeto\';document.datos.submit()">';
-					$salida.= '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
-					$salida.= '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
-					$salida.= '<input type="Hidden" name="campobase" value="'.$registro_campos["campo"].'" >';
-					$salida.= '<input type="Hidden" name="valorbase" '.$cadena_valor.'>';
+                    $salida.= '<span class="input-group-addon">';
+                        $salida.= '<input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.valorbase.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.accion.value=\'cargar_objeto\';document.datos.submit()">';
+                        $salida.= '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
+                        $salida.= '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
+                        $salida.= '<input type="Hidden" name="campobase" value="'.$registro_campos["campo"].'" >';
+                        $salida.= '<input type="Hidden" name="valorbase" '.$cadena_valor.'>';
+                    $salida.= '</span>';
 				}
 
 			// Muestra indicadores de obligatoriedad o ayuda
-			if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="'.$MULTILANG_TitValorUnico.'" name="'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
-			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+			//Si hay algun indicador adicional del campo abre los add-ons
+            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+                $salida.= '<span class="input-group-addon">';
+                if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="'.$MULTILANG_TitValorUnico.': '.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.': '.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].': '.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+            //Si habia algun indicador adicional del campo cierra los add-ons
+            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+                $salida.= '</span>';
+            //Cierra marco del control de datos
+            $salida.= '</div>';
 			return $salida;
 		}
 
@@ -1762,12 +1777,24 @@ function ventana_login()
 				}
 			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
+            //Agrega etiqueta del campo si es diferente de vacio
+			if ($registro_campos["titulo"]!="")
+                $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+			//Abre el marco del control de datos
+			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.= '<textarea name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="form-control" '.$registro_campos["solo_lectura"].'  >'.$cadena_valor.'</textarea>';
-
-			// Muestra indicadores de obligatoriedad o ayuda
-			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+			$salida.= '<textarea id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="form-control" '.$registro_campos["solo_lectura"].'  >'.$cadena_valor.'</textarea>';
+			//Si hay algun indicador adicional del campo abre los add-ons
+            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+                $salida.= '<span class="input-group-addon">';
+                // Muestra indicadores de obligatoriedad o ayuda
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.': '.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].': '.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+            //Si habia algun indicador adicional del campo cierra los add-ons
+            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+                $salida.= '</span>';
+            //Cierra marco del control de datos
+            $salida.= '</div>';
 			return $salida;
 		}
 
@@ -1821,7 +1848,7 @@ function ventana_login()
 			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 			// Muestra el campo
-			$salida.= '<textarea name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="ckeditor" '.$registro_campos["solo_lectura"].'  >'.$cadena_valor.'</textarea>';
+			$salida.= '<textarea id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="ckeditor" '.$registro_campos["solo_lectura"].'  >'.$cadena_valor.'</textarea>';
 			
 			// Define las barras posibles para el editor
 			$barra_documento="['Source','-','NewPage','DocProps','Preview','Print','-','Templates']";
@@ -1898,8 +1925,8 @@ function ventana_login()
 					</script>';
 
 			// Muestra indicadores de obligatoriedad o ayuda
-			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.': '.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].': '.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
 			
 			//Activa booleana de existencia de tipo de campo para evitar doble inclusion de javascript
 			$existe_campo_textoformato=1;
@@ -1940,8 +1967,13 @@ function ventana_login()
 			if ($registro_campos["alto"]!='0')
 				$cadena_altura='size='.$registro_campos["alto"];
 
+            //Agrega etiqueta del campo si es diferente de vacio
+			if ($registro_campos["titulo"]!="")
+                $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+			//Abre el marco del control de datos
+			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.= '<select name="'.$registro_campos["campo"].'" class="form-control" '.$cadena_altura.' >';
+			$salida.= '<select id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" class="form-control" '.$cadena_altura.' >';
 
 			// Toma los valores desde la lista de opciones (cuando es estatico)
 			$opciones_lista = explode(",", $registro_campos["lista_opciones"]);
@@ -1980,17 +2012,24 @@ function ventana_login()
 			// Muestra boton de busqueda cuando el campo sea usado para esto
 			if ($registro_campos["etiqueta_busqueda"]!="")
 				{
-					$salida.= '<input type="Button" class="BotonesEstado" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.valorbase.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.accion.value=\'cargar_objeto\';document.datos.submit()">';
+					$salida.= '<input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.valorbase.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.accion.value=\'cargar_objeto\';document.datos.submit()">';
 					$salida.= '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
 					$salida.= '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
 					$salida.= '<input type="Hidden" name="campobase" value="'.$registro_campos["campo"].'" >';
 					$salida.= '<input type="Hidden" name="valorbase" '.$cadena_valor.'>';
 				}
 
-			// Muestra indicadores de obligatoriedad o ayuda
-			if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="'.$MULTILANG_TitValorUnico.'" name="'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
-			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+			//Si hay algun indicador adicional del campo abre los add-ons
+            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+                $salida.= '<span class="input-group-addon">';
+                // Muestra indicadores de obligatoriedad o ayuda
+                if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="'.$MULTILANG_TitValorUnico.': '.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.': '.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].': '.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+                $salida.= '</span>';
+            //Cierra marco del control de datos
+            $salida.= '</div>';
 			return $salida;
 		}
 
@@ -2182,6 +2221,12 @@ function ventana_login()
 						}
 				}
 
+            //Agrega etiqueta del campo si es diferente de vacio
+			if ($registro_campos["titulo"]!="")
+                $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+			//Abre el marco del control de datos
+			$salida.='<div class="form-group input-group">';
+			// Muestra el campo
 			for ($i=0;$i<count($opciones_lista);$i++)
 				{
 					// Determina si la opcion a agregar es la misma del valor del registro
@@ -2190,11 +2235,18 @@ function ventana_login()
 						$cadena_predeterminado=' CHECKED ';
 					$salida.= "<input class='Radios' type='radio' name='".$registro_campos["campo"]."' value='".$valores_lista[$i]."' ".$cadena_predeterminado.">".$opciones_lista[$i]."<br>";
 				}
-
-			// Muestra indicadores de obligatoriedad o ayuda
-			if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="'.$MULTILANG_TitValorUnico.'" name="'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
-			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+			//Si hay algun indicador adicional del campo abre los add-ons
+            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+                $salida.= '<span class="input-group-addon">';
+                // Muestra indicadores de obligatoriedad o ayuda
+                if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="'.$MULTILANG_TitValorUnico.': '.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.': '.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].': '.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+            //Si habia algun indicador adicional del campo cierra los add-ons
+            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+                $salida.= '</span>';
+            //Cierra marco del control de datos
+            $salida.= '</div>';
 			return $salida;
 		}
 
@@ -2236,16 +2288,28 @@ function ventana_login()
 				$valor_de_campo=$registro_datos_formulario["$nombre_campo"];
 			$cadena_valor=' value="'.$valor_de_campo.'" ';
 
+            //Agrega etiqueta del campo si es diferente de vacio
+			if ($registro_campos["titulo"]!="")
+                $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+			//Abre el marco del control de datos
+			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.= '<input type="range" name="'.$registro_campos["campo"].'" min="'.$registro_campos["valor_minimo"].'" max="'.$registro_campos["valor_maximo"].'" step="'.$registro_campos["valor_salto"].'" '.$cadena_valor.' onchange="document.getElementById(\'VAL'.$registro_campos["campo"].'\').innerHTML = \'[\'+this.value+\']\';" oninput="document.getElementById(\'VAL'.$registro_campos["campo"].'\').innerHTML = \'[\'+this.value+\']\';"><div id="VAL'.$registro_campos["campo"].'" style="float: right;"></div>';
+			$salida.= '<input type="range" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" min="'.$registro_campos["valor_minimo"].'" max="'.$registro_campos["valor_maximo"].'" step="'.$registro_campos["valor_salto"].'" '.$cadena_valor.' onchange="document.getElementById(\'VAL'.$registro_campos["campo"].'\').innerHTML = \'[\'+this.value+\']\';" oninput="document.getElementById(\'VAL'.$registro_campos["campo"].'\').innerHTML = \'[\'+this.value+\']\';"><div id="VAL'.$registro_campos["campo"].'" style="float: right;"></div>';
 
 			// Activa el primer valor del campo
 			$salida.= '<script type="text/javascript">document.getElementById(\'VAL'.$registro_campos["campo"].'\').innerHTML = \'['.$valor_de_campo.']\';</script>';
 
-			// Muestra indicadores de obligatoriedad o ayuda
-			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
-
+			//Si hay algun indicador adicional del campo abre los add-ons
+            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+                $salida.= '<span class="input-group-addon">';
+                // Muestra indicadores de obligatoriedad o ayuda
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.': '.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].': '.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+            //Si habia algun indicador adicional del campo cierra los add-ons
+            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+                $salida.= '</span>';
+            //Cierra marco del control de datos
+            $salida.= '</div>';
 			return $salida;
 		}
 
@@ -2310,13 +2374,26 @@ function ventana_login()
 			if ($campobase!="" && $valorbase!="" && $registro_datos_formulario["$nombre_campo"]!="")
 				$salida.='<a target="_BLANK" href="'.$adjunto_url_archivo.'"><i class="fa fa-search"></i><b>'.$MULTILANG_FrmArchivoLink.'</b><img src="img/woo_save_download_32.png" border=0 width="20" height="20" align="absmiddle"></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>('.$MULTILANG_Tipo.': '.$adjunto_tipo_archivo.')</i><br>';
 
+            //Agrega etiqueta del campo si es diferente de vacio
+			if ($registro_campos["titulo"]!="")
+                $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+			//Abre el marco del control de datos
+			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control " '.$cadena_validacion.' '.$registro_campos["solo_lectura"].'  >';
+			$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control btn-default" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].'  >';
 
-			// Muestra indicadores de obligatoriedad o ayuda
-			if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="'.$MULTILANG_TitValorUnico.'" name="'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
-			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+			//Si hay algun indicador adicional del campo abre los add-ons
+            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+                $salida.= '<span class="input-group-addon">';
+                // Muestra indicadores de obligatoriedad o ayuda
+                if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" title="'.$MULTILANG_TitValorUnico.': '.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.': '.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].': '.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+            //Si habia algun indicador adicional del campo cierra los add-ons
+            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+                $salida.= '</span>';
+            //Cierra marco del control de datos
+            $salida.= '</div>';
 			return $salida;
 		}
 
@@ -2343,7 +2420,7 @@ function ventana_login()
 	function cargar_objeto_canvas($registro_campos,$registro_datos_formulario)
 		{
 			global $campobase,$valorbase;
-			global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink;
+			global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
@@ -2367,6 +2444,11 @@ function ventana_login()
 						</div>';
 				}
 
+            //Agrega etiqueta del campo si es diferente de vacio
+			if ($registro_campos["titulo"]!="")
+                $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+			//Abre el marco del control de datos
+			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
 			$salida.='
 				<!--<a href="javascript:" id="upload" style="width: 100px;">Upload</a>-->
@@ -2421,10 +2503,18 @@ function ventana_login()
 					window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);
 				</script>
 				<input type="hidden" name="'.$registro_campos["campo"].'">';
-			
-			// Muestra indicadores de obligatoriedad o ayuda
-			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+
+			//Si hay algun indicador adicional del campo abre los add-ons
+            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+                $salida.= '<span class="input-group-addon">';
+                // Muestra indicadores de obligatoriedad o ayuda
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.': '.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].': '.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+            //Si habia algun indicador adicional del campo cierra los add-ons
+            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+                $salida.= '</span>';
+            //Cierra marco del control de datos
+            $salida.= '</div>';
 			return $salida;
 		}
 
@@ -2451,7 +2541,7 @@ function ventana_login()
 	function cargar_objeto_camara($registro_campos,$registro_datos_formulario)
 		{
 			global $campobase,$valorbase;
-			global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink,$MULTILANG_Capturar,$MULTILANG_FrmErrorCam;
+			global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink,$MULTILANG_Capturar,$MULTILANG_FrmErrorCam,$MULTILANG_DesObligatorio,$MULTILANG_TitObligatorio;
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
@@ -2477,6 +2567,11 @@ function ventana_login()
 
 			// Muestra el campo
 			$escala_reduccion=1;
+            //Agrega etiqueta del campo si es diferente de vacio
+			if ($registro_campos["titulo"]!="")
+                $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+			//Abre el marco del control de datos
+			$salida.='<div class="form-group input-group">';
 			$salida.='
 				<table border=0>
 					<tr>
@@ -2548,10 +2643,17 @@ function ventana_login()
 					window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);
 				</script>
 				<input type="hidden" name="'.$registro_campos["campo"].'">';
-
-			// Muestra indicadores de obligatoriedad o ayuda
-			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.'" name="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].'" name="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+			//Si hay algun indicador adicional del campo abre los add-ons
+            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+                $salida.= '<span class="input-group-addon">';
+                // Muestra indicadores de obligatoriedad o ayuda
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#" title="'.$MULTILANG_TitObligatorio.': '.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" title="'.$registro_campos["ayuda_titulo"].': '.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+            //Si habia algun indicador adicional del campo cierra los add-ons
+            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+                $salida.= '</span>';
+            //Cierra marco del control de datos
+            $salida.= '</div>';
 			return $salida;
 		}
 
@@ -2686,8 +2788,9 @@ function ventana_login()
 				//Busca todos los objetos marcados como fila_unica=1 y agrega un registro mas con el limite superior
 				$consulta_obj_fila_unica=ejecutar_sql("SELECT id,peso,visible FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY peso","$formulario");
 				//Define si debe o no dibujar borde de las celdas
-				$ancho_borde_visible=0;
-				if ($registro_formulario["borde_visible"]==1) $ancho_borde_visible=1;
+                $estilo_bordes="table-unbordered";
+                if ($registro_formulario["borde_visible"]==1) $estilo_bordes="table-bordered";
+
 				echo '<div id="seccion_impresion">';
 				while ($registro_obj_fila_unica = $consulta_obj_fila_unica->fetch())
 					{
@@ -2704,11 +2807,8 @@ function ventana_login()
 								
 									//Inicia columna de formulario
 									echo '<td valign=top align=center>';
-									//Define si se muestra o no el borde
-                                    $estilo_bordes="table-unbordered";
-                                    if ($ancho_borde_visible=="1") $estilo_bordes="table-bordered";
 									// Crea los campos definidos por cada columna de formulario
-                                    echo '<table cellspacing=0 cellpadding=2 class="table '.$estilo_bordes.'">';
+                                    echo '<table class="table table-condensed btn-xs '.$estilo_bordes.'">';
 									while ($registro_campos = $consulta_campos->fetch())
 										{
 											//Crea la fila y celda donde va el campo
@@ -2716,7 +2816,7 @@ function ventana_login()
 											if($registro_campos["fila_unica"]=="0")
 												{
 													echo '<tr>
-														<td align="right" valign=top>'.$registro_campos["titulo"].'</td>
+														<!-- DEPRECATED Version tablas<td align="right" valign=top>'.$registro_campos["titulo"].'</td>-->
 														<td valign=top>';
 													// Formatea cada campo de acuerdo a su tipo
 													// CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas abajo tambien
@@ -2770,7 +2870,7 @@ function ventana_login()
 								//echo '&nbsp;&nbsp;'.$registro_campos["titulo"];
 								// Formatea cada campo de acuerdo a su tipo
 								// CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas arriba tambien
-								echo '<table cellspacing=0 cellpadding=2 border='.$ancho_borde_visible.' class="TextosVentana" align=center width="100%"><tr><td>';
+								echo '<table class="table table-condensed btn-xs '.$estilo_bordes.'"><tr><td>';
 								$tipo_de_objeto=@$registro_campos["tipo"];
 								if ($tipo_de_objeto=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
 								if ($tipo_de_objeto=="texto_clave") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
@@ -3040,11 +3140,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 						//Cuando es embebido (=1) no imprime el boton de retorno pues se asume dentro de un formulario
 						if (!$embebido)
 							echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" <<< '.$MULTILANG_IrEscritorio.' " class="Botones">';
-						//Establece el color de fondo del informe
-						$color_fondo="#f2f2f2";
-						if ($registro_informe["color_fondo"]!="") $color_fondo=$registro_informe["color_fondo"];
 						//Carga la ventana con el informe
-						abrir_ventana($Nombre_Aplicacion.' - '.$registro_informe["titulo"],$color_fondo,$registro_informe["ancho"]);
+						abrir_ventana($Nombre_Aplicacion.' - '.$registro_informe["titulo"],'',$registro_informe["ancho"]);
 					}
 
 				// Si se ha definido un tamano fijo entonces crea el marco
