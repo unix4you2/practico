@@ -24,11 +24,13 @@
 	if (!isset($Idioma)) $Idioma="es";
 	include_once("../inc/practico/idiomas/".$Idioma.".php");
 ?>
-
-
 <html>
-	<meta name="tipo_contenido"  content="text/html;" http-equiv="content-type" charset="utf-8">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="tipo_contenido"  content="text/html;" http-equiv="content-type" charset="utf-8">
+	<meta name="description" content="Generador de aplicaciones web - www.practico.org" />
+    <meta name="author" content="John Arroyave G. - {www.practico.org} - {unix4you2 at gmail.com}">
+
 	<title>
 		Pr&aacute;ctico - <?php echo $MULTILANG_Instalacion; ?>
   	</title>
@@ -41,6 +43,15 @@
     <![endif]-->
 
     <link rel="stylesheet" href="../inc/font-awesome/css/font-awesome.min.css">
+
+    <!-- CSS Personalizado (Plantilla y Practico) -->
+    <link href="../inc/bootstrap/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../inc/bootstrap/css/practico.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../inc/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+	<link rel="shortcut icon" href="../img/favicon.ico"/>
 	<script language="JavaScript">
 		function abrir_ventana_popup(theURL,winName,features)
 			{ 
@@ -48,39 +59,25 @@
 			}
 	</script>
 </head>
-<body leftmargin="0"  margin="0" topmargin="0" oncontextmenu="return false;">
+<body oncontextmenu="return false;">
+    <form method="POST" name="cerrar_sesion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+        <input type="Hidden" name="accion" value="Terminar_sesion">
+    </form>
+    <div id="wrapper">
 
-<!-- INICIA LA TABLA PRINCIPAL -->
-<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="left">
-	<!-- INICIO DEL ENCABEZADO -->
-	<tr><td>
-		<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MarcoSuperior"><tr>
-			<td valign="bottom" width="20%">
-				<img src="../img/logo.png" border="0"><b><font color=yellow> <?php echo $MULTILANG_Version; ?> <?php include("../inc/version_actual.txt"); ?></font></b>
-			</td>
-			<td align="center" valign="middle" width="60%">
-				<b>
-					<font color="#d4dce4"><?php echo $MULTILANG_SubtituloPractico1; ?></font> <?php echo $MULTILANG_SubtituloPractico2; ?>
-			</td>
-			<td align="right"  width="20%" valign="middle">
-					&nbsp;&nbsp;
-			</td>
-		</tr></table>
-		<!-- FIN DEL ENCABEZADO -->
+    <?php
+        //Presenta titulo de la aplicacion
+        echo "<a class='btn btn-block'><img src='../img/logo.png' border='0'> $MULTILANG_SubtituloPractico1 - $MULTILANG_SubtituloPractico2 <i><b> $MULTILANG_Version"; include("../inc/version_actual.txt"); echo "</b></i><br>$MULTILANG_InstaladorAplicacion</a>";
+    ?>
 
-		<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MenuSuperior"><tr>
-			<td valign="top">
-				<?php echo $MULTILANG_InstaladorAplicacion; ?>&nbsp;&nbsp;<?php echo $MULTILANG_Usuario; ?>@<?php echo $MULTILANG_Anonimo; ?>>
-			</td>
-		</tr></table>
-		<form method="POST" name="cerrar_sesion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-			<input type="Hidden" name="accion" value="Terminar_sesion">
-		</form>
-	</td></tr>
-		
+        <!-- CONTENIDO DE APLICACION -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <br>
+
+
 	<!-- INICIO  DE CONTENIDOS DE APLICACION -->
-	<!-- INICIO DEL CONTENIDO CENTRAL -->
-	<tr><td height="100%" valign="MIDDLE" align="center">
-	<!-- INICIO DEL CONTENIDO CENTRAL -->
 
 

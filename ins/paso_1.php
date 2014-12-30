@@ -22,49 +22,43 @@
 <div align=center>
 	
 
-<table  class="table">
+<table  class="table table-unbordered">
 	<tr>
 		<td width=100 valign=top><img src="../img/practico_login.png" border=0 ALT="Logo Practico" width="116" height="80"></td>
 		<td valign=top>
-			<font size=2 color=black><br>
 			<b>[<?php echo $MULTILANG_ChequeoPreprocesador; ?>]</b><br>
 			<?php echo $MULTILANG_VistaPreprocesador; ?></b>.
-				<table class="table"><tr><td valign=top><font size=2 color=black>
+				<table class="table table-unbordered"><tr><td valign=top>
 					<div align=left>
 						<u><?php echo $MULTILANG_CumplirRequisitos; ?>:</u>
 						<li><?php echo $MULTILANG_CumplirPDO; ?>
 						<li><?php echo $MULTILANG_CumplirDrivers; ?>
 						<li><?php echo $MULTILANG_CumplirGD; ?>
 					</div>
-				</font></td></tr></table>
+				</td></tr></table>
 
 			
 			<hr><b>[<?php echo $MULTILANG_ChequeoDirectorios1; ?>]</b><br>
-				<?php echo $MULTILANG_ChequeoDirectorios2; ?>:
-			</font>
-				<table class="table"><tr><td valign=top><font size=2 color=black>
-					<div align=left>
-						<?php
-							$hay_error=0;
-							//informar_prueba_escritura("..");
-							@informar_prueba_escritura("../bkp",1);
-							@informar_prueba_escritura("../core",1);
-							//informar_prueba_escritura("../core/configuracion.php",2);
-							@informar_prueba_escritura("../tmp",1);
-						?>
-					</div>
-				</font></td></tr></table>
+				<?php echo $MULTILANG_ChequeoDirectorios2; ?>:<br><br>
+
+                <?php
+                    $hay_error=0;
+                    //informar_prueba_escritura("..");
+                    @informar_prueba_escritura("../bkp",1);
+                    @informar_prueba_escritura("../core",1);
+                    //informar_prueba_escritura("../core/configuracion.php",2);
+                    @informar_prueba_escritura("../tmp",1);
+                    @informar_prueba_escritura("../ins",1);
+                ?>
+
 		</td>
 	</tr>
 </table>
 
 <?php
 	if ($hay_error)
-		{
-			echo $MULTILANG_ErrorEscritura;
-		}
+        mensaje('<i class="fa fa-warning fa-2x text-danger texto-blink"></i> ', $MULTILANG_ErrorEscritura, '', '', 'alert alert-danger alert-dismissible');
 ?>
-<br><br>
 </div>
 
 <?php

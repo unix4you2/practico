@@ -19,28 +19,46 @@
 	*/
 ?>
 
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
 
-	<!-- INICIO DEL MENU INFERIOR -->	
-	<tr><td>
-		<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MarcoInferior"><tr>
-			<td align="left" valign="bottom" width="50%">
-				&nbsp;&nbsp;<?php echo $MULTILANG_Instante; ?>:&nbsp;&nbsp;<?php echo $fecha_operacion_guiones;?>&nbsp;&nbsp;<?php echo $hora_operacion_puntos;?>
-				<?php
-					$url = $_SERVER['SERVER_NAME'];
-					$root = $url.$_SERVER['PHP_SELF'];
-					echo " - <font color=yellow>URL actual: <b>".$root."</b></font>";
-				?>
-			</td>
-			<td align="right" valign="bottom" width="50%">
-				<i>&copy; Codigoabierto.org</i>&nbsp;&nbsp;
-			</td>
-		</tr></table>
-	</td></tr>
+    </div>
+    <!-- /#wrapper inicial -->
 
-<!-- FINALIZA LA TABLA PRINCIPAL -->
-</table>
+    <!-- jQuery -->
+	<script type="text/javascript" src="../inc/jquery/jquery-2.1.0.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="../inc/bootstrap/js/bootstrap.min.js"></script>
 
+    <!-- JavaScript Personalizado del tema -->
+    <script src="../inc/bootstrap/js/sb-admin-2.js"></script>
+    <script src="../inc/bootstrap/js/practico.js"></script>
 
-    <script src="inc/bootstrap/js/bootstrap.min.js"></script>
+    <script language="JavaScript">
+        //Carga los tooltips programados en la hoja.  Por defecto todos los elementos con data-toggle=tootip
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip();
+        })
+    </script>
+
+    <?php
+        // Estadisticas de uso anonimo con GABeacon
+        $PrefijoGA='<img src="https://ga-beacon.appspot.com/';
+        $PosfijoGA='/Practico/Instalacion?pixel" border=0 ALT=""/>';
+        // Este valor indica un ID generico de GA UA-847800-9 No edite esta linea sobre el codigo
+        // Para validar que su ID es diferente al generico de seguimiento.  En lugar de esto cambie
+        // su valor a traves del panel de configuracion de Practico con el entregado como ID de GoogleAnalytics
+        $Infijo=base64_decode("VUEtODQ3ODAwLTk=");
+        echo $PrefijoGA.$Infijo.$PosfijoGA;
+        if(@$CodigoGoogleAnalytics!="")
+            echo $PrefijoGA.$CodigoGoogleAnalytics.$PosfijoGA;	
+    ?>
+
 </body>
 </html>

@@ -20,7 +20,7 @@
 ?>
 
 <div align=center>
-<table width="700" cellspacing=10>
+<table  class="table table-unbordered btn-xs">
 	<tr>
 		<td width=100><img src="../img/practico_login.png" border=0 ALT="Logo Practico" width="116" height="80"></td>
 		<td valign=top><font size=2 color=black><br><b>
@@ -85,26 +85,34 @@
 
 <?php
 	echo '
-	<table width="700" cellspacing=10><tr><td align=left><font size=2 color=black>
+	<table  class="table table-unbordered"><tr><td align=left>
 		<b>'.$MULTILANG_Totalejecutado.':</b> '.$total_ejecutadas.'<br>
 		'.$MULTILANG_MsjFinal1.'<br>
 		<br>
-		<font size=4 color=red><b>'.$MULTILANG_Importante.':</b></font><br>
+		<b>'.$MULTILANG_Importante.':</b><br>
 		<u><b>'.$MULTILANG_MsjFinal2.'
 		<br><br>
 	<b>'.$MULTILANG_MsjFinal3.'</b> ('.$RutaScriptSQL.'):<br>
-	<textarea cols="120" rows="7" class="AreaTexto">
-		'.$total_consultas.'
-	</textarea>
-	</td></tr></table>
-	';
+	<textarea rows="7" class="form-control">'.$total_consultas.'</textarea>
+	</td></tr></table>';
 
 	abrir_barra_estado();
 	if (!$hay_error)
 		{
-			echo '<form name="continuar" action="../" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+            //Intenta renombrar carpeta de instalacion
+            $nueva_carpeta="../ins_".TextoAleatorio(10);
+            $estado_renombrado = @rename("../ins/" , $nueva_carpeta);
+            //Si hay un error intenta un exec
+            if (!$estado_renombrado)
+                {
+                    $cmd = 'mv "../ins" "'.$nueva_carpeta.'"'; 
+                    @exec($cmd, $output, $return_val);                    
+                }
+
+            //Agrega boton para redirigir a la instalacion
+            echo '<form name="continuar" action="../" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="accion" value="Terminar_sesion">
-				<input type="Submit" class="BotonesEstadoCuidado" value=" '.$MULTILANG_IrInstalacion.' " onclick="document.continuar.submit();">
+				<input type="Submit" class="btn btn-success" value=" '.$MULTILANG_IrInstalacion.' " onclick="document.continuar.submit();">
 				</form>';
 		}
 	cerrar_barra_estado();

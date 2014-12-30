@@ -20,6 +20,7 @@ AUTHORS
 index.php
 core/actualizacion.php
 core/comunes.php
+core/conexiones.php
 core/formularios.php
 core/informes.php
 core/marco_abajo.php

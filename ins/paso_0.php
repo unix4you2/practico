@@ -20,24 +20,18 @@
 ?>
 
 <div align=center>
-<table class="table">
-	<tr>
-		<td><img src="../img/practico_login.png" border=0 ALT="Logo Practico"></td>
-		<td valign=top><font size=2 color=black><br><b>
-			<h1><?php echo $MULTILANG_Version; ?> <?php include("../inc/version_actual.txt"); ?></h1>
-			[<?php echo $MULTILANG_BienvenidaInstalacion; ?>]</b><br><br>
-			<?php echo $MULTILANG_BienvenidaDescripcion; ?>.
-		</font></td>
-	</tr>
-</table>
-
-<b><?php echo $MULTILANG_ResumenLicencia; ?></b>:<br>
-<textarea cols="100" rows="7" class="AreaTexto">
-	<?php include("../LICENSE"); ?>
-</textarea>
-<br><br>
-<?php echo $MULTILANG_AmpliacionLicencia; ?>.
-<br><br>
+	<b>
+    <h1><b><?php echo $MULTILANG_Version; ?> <?php include("../inc/version_actual.txt"); ?></b></h1>
+    [<?php echo $MULTILANG_BienvenidaInstalacion; ?>]</b><br><br>
+    <?php echo $MULTILANG_BienvenidaDescripcion; ?>.
+    <hr>
+    <b><?php echo $MULTILANG_ResumenLicencia; ?></b>:<br>
+    <textarea cols="100" rows="7" class="form-control">
+        <?php include("../LICENSE"); ?>
+    </textarea>
+    <br>
+    <?php echo $MULTILANG_AmpliacionLicencia; ?>.
+    <br><br>
 </div>
 
 <?php

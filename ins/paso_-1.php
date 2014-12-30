@@ -21,45 +21,48 @@
 
 <form name="continuar" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 
-<table class="table">
+<table class="table table-unbordered">
 	<tr>
-		<td valign=top align=center>
-			<img src="../img/practico_login.png" border=0 ALT="Logo Practico">
-		</td>
 		<td valign=top align=center><font size=2 color=black><b>
-			<h1>Versi&oacute;n <?php include("../inc/version_actual.txt"); ?></h1>
+            
+            <img src="../img/practico_login.png" border=0 ALT="Logo Practico">
+			<h1><b>Versi&oacute;n <?php include("../inc/version_actual.txt"); ?></b></h1>
 
 			<font color=gray>
 			Welcome &nbsp;&nbsp; Willkommen &nbsp;&nbsp; Ongi Etorri<br>
 			<font size=5>Bienvenido<br></font>
 			 Bienvenuto &nbsp;&nbsp; Bienvenue &nbsp;&nbsp; bem-vindo<br><br>
 			</font>
-			
-			[Seleccione el idioma deseado/Select your language]</b><br><br>
-            <div class="form-group">
-			<select name="Idioma" class="form-control" >
-				<?php
-				// Incluye archivos de idioma para ser seleccionados
-				$path_idiomas="../inc/practico/idiomas/";
-				$directorio_idiomas=opendir($path_idiomas);
-				while (($elemento=readdir($directorio_idiomas))!=false)
-					{
-						//Lo procesa solo si es un archivo diferente del index
-						if (!is_dir($path_idiomas.$elemento) && $elemento!="." && $elemento!=".."  && $elemento!="index.html")
-							{
-								include_once($path_idiomas.$elemento);
-								//Establece espanol como predeterminado
-								$seleccion="";
-								if ($elemento=="es.php") $seleccion="SELECTED";
-								$valor_opcion=str_replace(".php","",$elemento);
-								//Presenta la opcion
-								echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$elemento.')</option>';
-								if (file_exists("mod/".$elemento."/index.php"))
-									include("mod/".$elemento."/index.php");
-							}
-					}		
-				?>
-			</select>
+
+            <hr>
+            <label for="Idioma">[ Seleccione el idioma deseado / Select your language ]:</label>
+            <div class="form-group input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-globe"></i>
+                </span>
+                    <select id="Idioma" name="Idioma" class="form-control" >
+                        <?php
+                        // Incluye archivos de idioma para ser seleccionados
+                        $path_idiomas="../inc/practico/idiomas/";
+                        $directorio_idiomas=opendir($path_idiomas);
+                        while (($elemento=readdir($directorio_idiomas))!=false)
+                            {
+                                //Lo procesa solo si es un archivo diferente del index
+                                if (!is_dir($path_idiomas.$elemento) && $elemento!="." && $elemento!=".."  && $elemento!="index.html")
+                                    {
+                                        include_once($path_idiomas.$elemento);
+                                        //Establece espanol como predeterminado
+                                        $seleccion="";
+                                        if ($elemento=="es.php") $seleccion="SELECTED";
+                                        $valor_opcion=str_replace(".php","",$elemento);
+                                        //Presenta la opcion
+                                        echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$elemento.')</option>';
+                                        if (file_exists("mod/".$elemento."/index.php"))
+                                            include("mod/".$elemento."/index.php");
+                                    }
+                            }		
+                        ?>
+                    </select>
             </div>
 		</font></td>
 	</tr>
