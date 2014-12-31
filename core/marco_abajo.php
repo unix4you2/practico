@@ -119,6 +119,14 @@
             echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalDisenoFormulario").modal("show"); }); </script>';
         if (@$popup_activo=="FormularioAcciones")
             echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalDisenoBotones").modal("show"); }); </script>';
+        if (@$popup_activo=="InformeAcciones")
+            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalEditaAccionesInforme").modal("show"); }); </script>';
+        if (@$popup_activo=="InformeCampos")
+            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalCamposInforme").modal("show"); }); </script>';
+        if (@$popup_activo=="InformeTablas")
+            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalTablaInforme").modal("show"); }); </script>';
+        if (@$popup_activo=="InformeCondiciones")
+            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalCondicionesInforme").modal("show"); }); </script>';
     ?>
 
     <script language="JavaScript">

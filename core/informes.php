@@ -59,7 +59,7 @@
 			<input type="Hidden" name="PCO_Accion" value="editar_informe">
 			<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 			<input type="Hidden" name="informe" value="'.$informe.'">
-			<input type="Hidden" name="popup_activo" value="FormularioAcciones">
+			<input type="Hidden" name="popup_activo" value="InformeAcciones">
 			</form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 		}
@@ -242,7 +242,7 @@ if ($PCO_Accion=="eliminar_informe_condicion")
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="editar_informe">
 			<input type="Hidden" name="informe" value="'.$informe.'">
-			<input type="Hidden" name="popup_activo" value="FormularioCondiciones">
+			<input type="Hidden" name="popup_activo" value="InformeCondiciones">
 			</form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
@@ -289,7 +289,7 @@ if ($PCO_Accion=="eliminar_informe_condicion")
 					auditar("Agrega condicion al informe $informe");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_informe">
 						<input type="Hidden" name="informe" value="'.$informe.'">
-						<input type="Hidden" name="popup_activo" value="FormularioCondiciones">
+						<input type="Hidden" name="popup_activo" value="InformeCondiciones">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
@@ -333,7 +333,7 @@ if ($PCO_Accion=="eliminar_informe_campo")
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="editar_informe">
 			<input type="Hidden" name="informe" value="'.$informe.'">
-			<input type="Hidden" name="popup_activo" value="FormularioCampos">
+			<input type="Hidden" name="popup_activo" value="InformeCampos">
 			</form>
 		<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
@@ -375,7 +375,7 @@ if ($PCO_Accion=="eliminar_informe_campo")
 					auditar("Agrega campo $campo_definitivo al informe $informe");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_informe">
 						<input type="Hidden" name="informe" value="'.$informe.'">
-						<input type="Hidden" name="popup_activo" value="FormularioCampos">
+						<input type="Hidden" name="popup_activo" value="InformeCampos">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
@@ -419,7 +419,7 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="editar_informe">
 			<input type="Hidden" name="informe" value="'.$informe.'">
-			<input type="Hidden" name="popup_activo" value="FormularioTablas">
+			<input type="Hidden" name="popup_activo" value="InformeTablas">
 			</form>
 		<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
@@ -461,7 +461,7 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 					auditar("Agrega tabla $tabla_definitiva al informe $informe");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_informe">
 						<input type="Hidden" name="informe" value="'.$informe.'">
-						<input type="Hidden" name="popup_activo" value="FormularioTablas">
+						<input type="Hidden" name="popup_activo" value="InformeTablas">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
@@ -505,7 +505,7 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 			if ($mensaje_error=="")
 				{
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton (".$ListaCamposSinID_informe_boton.") VALUES (?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$informe$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$confirmacion_texto");
-					auditar("Crea boton $id para informe $informe");
+					auditar("Crea boton $titulo para informe $informe");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_informe">
 						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="popup_activo" value="FormularioBotones">
