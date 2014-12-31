@@ -49,7 +49,7 @@
 <!-- Presenta DashBoard del admin -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><?php echo $MULTILANG_Aplicacion; ?></h1>
+            <h3 class="page-header"><?php echo $MULTILANG_Aplicacion; ?></h3>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -192,7 +192,7 @@
     <!--SEPARADOR-->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><?php echo $MULTILANG_Escritorio; ?></h1>
+            <h3 class="page-header"><?php echo $MULTILANG_Escritorio; ?></h3>
         </div>
         <!-- /.col-lg-12 -->
     </div>
