@@ -20,9 +20,7 @@ CREATE TABLE core_usuario (
   login varchar(250) NOT NULL,
   clave varchar(50) NOT NULL default 'd41d8cd98fd41d8cd98fd41d8cd98fd41d8cd98f',
   nombre varchar(100) NOT NULL default '',
-  descripcion varchar(250) NOT NULL default '',
   estado int(1) NOT NULL default '1',
-  nivel int(10) NOT NULL default '0',
   correo varchar(200) NOT NULL default '',
   ultimo_acceso date NOT NULL default '20000101',
   llave_paso varchar(50) NOT NULL default 'd41d8cd98f00b204e9800998ecf8427e',
@@ -127,6 +125,7 @@ CREATE TABLE core_formulario_objeto (
   formulario_vinculado int(10),
   formulario_campo_vinculo varchar(250) default '',
   formulario_campo_foraneo varchar(250) default '',
+  condicion_filtrado_listas varchar(250) default '',
   PRIMARY KEY  (id)
 );
 
@@ -134,7 +133,7 @@ DROP TABLE IF EXISTS core_formulario_boton;
 CREATE TABLE core_formulario_boton (
   id int(10) AUTO_INCREMENT,
   titulo varchar(250) default '',
-  estilo varchar(20) default '',
+  estilo varchar(250) default '',
   formulario int(10),
   tipo_accion varchar(250) default '',
   accion_usuario varchar(250) default '',
@@ -196,7 +195,7 @@ DROP TABLE IF EXISTS core_informe_boton;
 CREATE TABLE core_informe_boton (
   id int(10) AUTO_INCREMENT,
   titulo varchar(250) default '',
-  estilo varchar(20) default '',
+  estilo varchar(250) default '',
   informe int(10),
   tipo_accion varchar(250) default '',
   accion_usuario varchar(250) default '',
@@ -241,7 +240,7 @@ CREATE TABLE core_chat (
 DROP TABLE IF EXISTS core_monitoreo;
 CREATE TABLE core_monitoreo (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  tipo VARCHAR(20) NOT NULL DEFAULT '',			 # Maquinas,ComandosShell,ComandosSQL,ImagenesRRD
+  tipo VARCHAR(20) NOT NULL DEFAULT '',			 # Etiqueta,Maquinas,ComandosShell,ComandosSQL,ImagenesRRD,Embebido
   pagina int(10) NOT NULL,
   peso int(10) NOT NULL,
   nombre VARCHAR(255) NOT NULL DEFAULT '',

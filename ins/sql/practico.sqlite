@@ -20,9 +20,7 @@ CREATE TABLE core_usuario (
   login text PRIMARY KEY,
   clave text default 'd41d8cd98fd41d8cd98fd41d8cd98fd41d8cd98f',
   nombre text default '',
-  descripcion text default '',
   estado integer  default '1',
-  nivel integer default '0',
   correo text  default '',
   ultimo_acceso text  default '20000101',
   llave_paso text  default 'd41d8cd98f00b204e9800998ecf8427e',
@@ -126,7 +124,8 @@ CREATE TABLE core_formulario_objeto (
   color_trazo text default '',
   formulario_vinculado integer,
   formulario_campo_vinculo text default '',
-  formulario_campo_foraneo text default ''
+  formulario_campo_foraneo text default '',
+  condicion_filtrado_listas text default ''
 
 );
 
