@@ -122,21 +122,10 @@
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 		}
-
-
-
 ?>
 
     <!-- Modal WebServices -->
-    <div class="modal fade modal-wide" id="myModalWEBSERVICES" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel"><?php echo $NombreRAD.' - '.$MULTILANG_WSLlavesNuevo; ?></h4>
-          </div>
-          <div class="modal-body mdl-primary">
-
+    <?php abrir_dialogo_modal("myModalWEBSERVICES",$NombreRAD.' - '.$MULTILANG_WSLlavesNuevo,"modal-wide"); ?>
 
 
             <form name="nuevallave" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
@@ -253,11 +242,9 @@
                     </table>';
 				?>
 
+        <?php 
+            $barra_herramientas_modal='
+                <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+            cerrar_dialogo_modal($barra_herramientas_modal);
+        ?>
 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-          </div>
-        </div>
-      </div>
-    </div>

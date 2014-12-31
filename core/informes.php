@@ -570,15 +570,7 @@ if ($PCO_Accion=="editar_informe")
   ?>
 
             <!-- Modal Tablas del informe -->
-            <div class="modal fade" id="myModalTablaInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_InfAgregaTabla; ?></h4>
-                  </div>
-                  <div class="modal-body mdl-primary">
-                      
+            <?php abrir_dialogo_modal("myModalTablaInforme",$MULTILANG_InfAgregaTabla); ?>
 
 				<form name="datosform" id="datosform" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
                     <input type="Hidden" name="PCO_Accion" value="guardar_informe_tabla">
@@ -659,26 +651,17 @@ if ($PCO_Accion=="editar_informe")
                         </table>';
 				?>
 
-            
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <?php 
+            $barra_herramientas_modal='
+                <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+            cerrar_dialogo_modal($barra_herramientas_modal);
+        ?>
+
 
 
 
             <!-- Modal Campos del informe -->
-            <div class="modal fade" id="myModalCamposInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_InfAgregaCampo; ?></h4>
-                  </div>
-                  <div class="modal-body mdl-primary">
+            <?php abrir_dialogo_modal("myModalCamposInforme",$MULTILANG_InfAgregaCampo); ?>
 
 				<form name="datosformc" id="datosformc" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
                     <input type="Hidden" name="PCO_Accion" value="guardar_informe_campo">
@@ -769,26 +752,15 @@ if ($PCO_Accion=="editar_informe")
                         </tbody>
                         </table>';
 				?>
-
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <?php 
+            $barra_herramientas_modal='
+                <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+            cerrar_dialogo_modal($barra_herramientas_modal);
+        ?>
 
 
             <!-- Modal Condiciones del informe -->
-            <div class="modal fade modal-wide" id="myModalCondicionesInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_InfAddCondicion; ?></h4>
-                  </div>
-                  <div class="modal-body mdl-primary">
-                      
+            <?php abrir_dialogo_modal("myModalCondicionesInforme",$MULTILANG_InfAddCondicion,"modal-wide"); ?>
 
 				<form name="datosformco" id="datosformco" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="Hidden" name="PCO_Accion" value="guardar_informe_condicion">
@@ -949,26 +921,17 @@ if ($PCO_Accion=="editar_informe")
 									</tr>';
 							}
 						echo '</table>';
-				?>
+                ?>
+                <?php 
+                    $barra_herramientas_modal='
+                        <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+                    cerrar_dialogo_modal($barra_herramientas_modal);
+                ?>
 
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-                  </div>
-                </div>
-              </div>
-            </div>
 
 
             <!-- Modal Graficos del informe -->
-            <div class="modal fade" id="myModalGraficosInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_InfTitGrafico; ?></h4>
-                  </div>
-                  <div class="modal-body mdl-primary">
+            <?php abrir_dialogo_modal("myModalGraficosInforme",$MULTILANG_InfTitGrafico,"modal-wide"); ?>
 
 				<form name="datosformcograf" id="datosformcograf" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="Hidden" name="PCO_Accion" value="actualizar_grafico_informe">
@@ -985,9 +948,9 @@ if ($PCO_Accion=="editar_informe")
 							$registro_formato = $consulta_formato_grafico->fetch();
 							$formato_base=explode("|",$registro_formato["formato_grafico"]);
 							$tipo_grafico_leido=$formato_base[0];
-							$lista_nombre_series=explode("!",$formato_base[1]);
-							$lista_etiqueta_series=explode("!",$formato_base[2]);
-							$lista_valor_series=explode("!",$formato_base[3]);
+							$lista_nombre_series=@explode("!",$formato_base[1]);
+							$lista_etiqueta_series=@explode("!",$formato_base[2]);
+							$lista_valor_series=@explode("!",$formato_base[3]);
 
 							//Crea las series
 							$numero_series=5;
@@ -1068,26 +1031,17 @@ if ($PCO_Accion=="editar_informe")
 				<br><br><br>
 				</center>
 
+                <?php 
+                    $barra_herramientas_modal='
+                        <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+                    cerrar_dialogo_modal($barra_herramientas_modal);
+                ?>
 
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-                  </div>
-                </div>
-              </div>
-            </div>
 
 
             <!-- Modal Agrupacion y ordenamiento del informe -->
-            <div class="modal fade" id="myModalAgrupacionInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_InfAgrupa; ?></h4>
-                  </div>
-                  <div class="modal-body mdl-primary">
-                      
+            <?php abrir_dialogo_modal("myModalAgrupacionInforme",$MULTILANG_InfAgrupa); ?>
+
                         <?php
                         $consulta_agrupacion=ejecutar_sql("SELECT ordenamiento,agrupamiento FROM ".$TablasCore."informe WHERE id=? ","$informe");
                         $registro_agrupacion = $consulta_agrupacion->fetch();
@@ -1120,25 +1074,16 @@ if ($PCO_Accion=="editar_informe")
                         </form>
                         <br><br>
                         <a class="btn btn-success btn-block" href="javascript:document.datosformcogrup.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_InfActCriterios; ?></a>
+                <?php 
+                    $barra_herramientas_modal='
+                        <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+                    cerrar_dialogo_modal($barra_herramientas_modal);
+                ?>
 
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-                  </div>
-                </div>
-              </div>
-            </div>
 
 
             <!-- Modal Agregar acciones del informe -->
-            <div class="modal fade" id="myModalAgregaAccionesInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_InfTitBotones; ?></h4>
-                  </div>
-                  <div class="modal-body mdl-primary">
+            <?php abrir_dialogo_modal("myModalAgregaAccionesInforme",$MULTILANG_InfTitBotones); ?>
 
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="PCO_Accion" value="guardar_accion_informe">
@@ -1233,28 +1178,18 @@ if ($PCO_Accion=="editar_informe")
 
                 </form>
                 <a class="btn btn-success btn-block" href="javascript:document.datosfield.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmBtnGuardar; ?></a>
+            <?php 
+                $barra_herramientas_modal='
+                    <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+                cerrar_dialogo_modal($barra_herramientas_modal);
+            ?>
 
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-                  </div>
-                </div>
-              </div>
-            </div>
 
 
 
 
             <!-- Modal Agregar acciones del informe -->
-            <div class="modal fade" id="myModalEditaAccionesInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_FrmTitComandos; ?></h4>
-                  </div>
-                  <div class="modal-body mdl-primary">
-
+            <?php abrir_dialogo_modal("myModalEditaAccionesInforme",$MULTILANG_FrmTitComandos); ?>
 					<table class="table table-condensed table-unbordered table-hover">
 						<thead>
                         <tr>
@@ -1344,15 +1279,12 @@ if ($PCO_Accion=="editar_informe")
                     </tbody>
                 </table>';
 			?>
+            <?php 
+                $barra_herramientas_modal='
+                    <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+                cerrar_dialogo_modal($barra_herramientas_modal);
+            ?>
 
-
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-                  </div>
-                </div>
-              </div>
-            </div>
 
 
 		<?php
@@ -1803,9 +1735,7 @@ echo '
 if ($PCO_Accion=="mis_informes")
 	{
 			// Carga las opciones del ACORDEON DE INFORMES
-			echo '<div align="center">
-			<input type="Button" onclick="document.core_ver_menu.submit()" value=" <<< '.$MULTILANG_IrEscritorio.' " class="Botones">
-			';
+			echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 			// Si el usuario es diferente al administrador agrega condiciones al query
 			if ($Login_usuario!="admin")
 				{
@@ -1833,26 +1763,23 @@ if ($PCO_Accion=="mis_informes")
 
 					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
 						{
-							$limite_texto_iconos=15;
-							$texto_icono=$registro_opciones_acordeon["titulo"];
-							if (strlen($texto_icono)>$limite_texto_iconos) $texto_icono = substr($texto_icono,0,$limite_texto_iconos)."...";
-							echo '
-								<div align=center style="float:left">
+                            //Determina si el informe es texto o grafico y cambia el icono asociado
+                            $icono_informe="fa-file-text-o";
+                            if($registro_opciones_acordeon["formato_final"]=="G")
+                                $icono_informe="fa-pie-chart";
+                            //Presenta el enlace al informe
+							echo '<div style="float:left">
 									<form action="'.$ArchivoCORE.'" method="post" name="acordeinf_'.$registro_opciones_acordeon["id"].'" id="acordeinf_'.$registro_opciones_acordeon["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-									<table cellspacing=5 class="TextosEscritorio"><tr><td align=center>
-									<input type="hidden" name="PCO_Accion" value="cargar_objeto">
-									<input type="hidden" name="objeto" value="inf:'.$registro_opciones_acordeon["id"].':1:htm:Informes:0">
-									<a title="'.$registro_opciones_acordeon["titulo"].'" name="" href="javascript:document.acordeinf_'.$registro_opciones_acordeon["id"].'.submit();"><i class="fa fa-file-text-o fa-3x fa-fw texto-blanco"></i></a>
-									</td></tr>
-									<tr><td align=center>
-									'.$texto_icono.'
-									</td></tr></table>
+                                        <table class="table table-unbordered table-hover table-condensed"><tr><td align=center>
+                                            <input type="hidden" name="PCO_Accion" value="cargar_objeto">
+                                            <input type="hidden" name="objeto" value="inf:'.$registro_opciones_acordeon["id"].':1:htm:Informes:0">
+                                            <a class="btn-xs" title="'.$registro_opciones_acordeon["titulo"].'" name="" href="javascript:document.acordeinf_'.$registro_opciones_acordeon["id"].'.submit();">
+                                            <i class="fa '.$icono_informe.' fa-3x fa-fw"></i><br>'.$registro_opciones_acordeon["titulo"].'</a>
+                                        </td></tr></table>
 									</form>
 								</div>';
-
 						}
 					cerrar_ventana();
 				}
-			echo '</div>';
 	}
 ?>

@@ -34,17 +34,7 @@
 
 
     <!-- Modal Proveedores Oauth -->
-    <div class="modal fade modal-wide" id="myModalOAUTH" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_ConfiguracionGeneral; ?></h4>
-          </div>
-          <div class="modal-body mdl-primary">
-
-
-
+    <?php abrir_dialogo_modal("myModalOAUTH",$MULTILANG_ConfiguracionGeneral,"modal-wide"); ?>
 
 			<?php
 
@@ -1142,14 +1132,11 @@
 					</table>
 
 
-
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-success"><?php echo $MULTILANG_Guardar; ?> <i class="fa fa-save"></i></button>
-            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <?php 
+        $barra_herramientas_modal='
+            <button type="submit" class="btn btn-success">'.$MULTILANG_Guardar.' <i class="fa fa-save"></i></button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+        cerrar_dialogo_modal($barra_herramientas_modal);
+    ?>
 
 					</form>

@@ -63,23 +63,8 @@
 		}
 
 
-?>
-
-
-    <!-- Modal Parametros -->
-    <div class="modal fade" id="myModalPARAMETROS" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel"><?php echo $NombreRAD.' - '.$MULTILANG_ParametrosApp; ?></h4>
-          </div>
-          <div class="modal-body mdl-primary">
-              
-
-
-
-			<?php
+    // Modal Parametros
+    abrir_dialogo_modal("myModalPARAMETROS",$NombreRAD.' - '.$MULTILANG_ParametrosApp);
 
 				//Consulta parametros de la aplicacion
 				$resultado=ejecutar_sql("SELECT id,$ListaCamposSinID_parametros from ".$TablasCore."parametros ");
@@ -251,14 +236,12 @@
                             </div>
                             <!-- FIN de las pestanas -->
 
+                <?php 
+                    $barra_herramientas_modal='
+                        <button type="submit" class="btn btn-success">'.$MULTILANG_Guardar.' <i class="fa fa-save"></i></button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+                    cerrar_dialogo_modal($barra_herramientas_modal);
+                ?>
 
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-success"><?php echo $MULTILANG_Guardar; ?> <i class="fa fa-save"></i></button>
-            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
 					</form>

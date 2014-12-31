@@ -720,14 +720,7 @@ if ($PCO_Accion=="editar_formulario")
 
 
     <!-- INICIO MODAL ADICION DE CAMPOS -->
-    <div class="modal fade" id="myModalElementoFormulario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_FrmMsj1; ?></h4>
-          </div>
-          <div class="modal-body mdl-primary">
+    <?php abrir_dialogo_modal("myModalElementoFormulario",$MULTILANG_FrmMsj1); ?>
               
 				<?php			
 				//Si se trata de la edicion de un campo entonces busca su registro para agregar valores al form
@@ -1401,27 +1394,17 @@ if ($PCO_Accion=="editar_formulario")
 									</script>';
 					?>
                     </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success" OnClick="document.datosform.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmBtnGuardar; ?></button>
-            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cancelar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-          </div>
-        </div>
-      </div>
-    </div>
-		<!-- FIN MODAL ADICION DE CAMPOS -->
+    <?php 
+        $barra_herramientas_modal='
+            <button type="button" class="btn btn-success" OnClick="document.datosform.submit();"><i class="fa fa-floppy-o"></i> '.$MULTILANG_FrmBtnGuardar.'</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+        cerrar_dialogo_modal($barra_herramientas_modal);
+    ?>
+    <!-- FIN MODAL ADICION DE CAMPOS -->
 
 
     <!-- INICIO MODAL ADICION DE BOTONES -->
-    <div class="modal fade" id="myModalBotonFormulario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_FrmAgregaBot; ?></h4>
-          </div>
-          <div class="modal-body mdl-primary">
-
+    <?php abrir_dialogo_modal("myModalBotonFormulario",$MULTILANG_FrmAgregaBot); ?>
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="PCO_Accion" value="guardar_accion_formulario">
 				<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
@@ -1523,30 +1506,18 @@ if ($PCO_Accion=="editar_formulario")
                         </span>
                     </div>
                     </form>
-
-          </div>
-          <div class="modal-footer">
-            <input type="Button"  class="btn btn-success" value="<?php echo $MULTILANG_FrmBtnGuardarBut; ?>" onClick="document.datosfield.submit()">
-            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cancelar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-          </div>
-        </div>
-      </div>
-    </div>
-		<!-- FIN MODAL ADICION DE BOTONES -->
+    <?php 
+        $barra_herramientas_modal='
+            <input type="Button" class="btn btn-success" value="'.$MULTILANG_FrmBtnGuardarBut.'" onClick="document.datosfield.submit()">
+            <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+        cerrar_dialogo_modal($barra_herramientas_modal);
+    ?>
+    <!-- FIN MODAL ADICION DE BOTONES -->
 
 
 
     <!-- INICIO MODAL DISENO DE FORMULARIO -->
-    <div class="modal fade modal-wide" id="myModalDisenoFormulario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_FrmDisCampos; ?></h4>
-          </div>
-          <div class="modal-body mdl-primary">
-
-
+    <?php abrir_dialogo_modal("myModalDisenoFormulario",$MULTILANG_FrmDisCampos,"modal-wide"); ?>
 					<table class="table table-condensed table-hover btn-xs">
 						<thead>
                         <tr>
@@ -1706,29 +1677,17 @@ if ($PCO_Accion=="editar_formulario")
                 </table>';			
 			?>
 
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cancelar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-          </div>
-        </div>
-      </div>
-    </div>
-		<!-- FIN MODAL DISENO DE FORMULARIO -->
+    <?php 
+        $barra_herramientas_modal='
+            <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+        cerrar_dialogo_modal($barra_herramientas_modal);
+    ?>
+    <!-- FIN MODAL DISENO DE FORMULARIO -->
 
 
 
     <!-- INICIO MODAL DISENO DE FORMULARIO -->
-    <div class="modal fade modal-wide" id="myModalDisenoBotones" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_FrmTitComandos; ?></h4>
-          </div>
-          <div class="modal-body mdl-primary">
-              
-              
+    <?php abrir_dialogo_modal("myModalDisenoBotones",$MULTILANG_FrmTitComandos,"modal-wide"); ?>
 					<table class="table table-hover table-condensed">
 						<thead>
                         <tr>
@@ -1819,15 +1778,12 @@ if ($PCO_Accion=="editar_formulario")
                 </table>';
 			?>
 
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cancelar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-          </div>
-        </div>
-      </div>
-    </div>
-		<!-- FIN MODAL DISENO DE BOTONES -->
+    <?php 
+        $barra_herramientas_modal='
+            <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+        cerrar_dialogo_modal($barra_herramientas_modal);
+    ?>
+    <!-- FIN MODAL DISENO DE BOTONES -->
         
 
     <div class="row">
@@ -1875,35 +1831,14 @@ if ($PCO_Accion=="editar_formulario")
 
 
                 <!-- Modal EditorJavascript -->
-                <div class="modal fade modal-wide" id="myModalActualizaJAVASCRIPT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_FrmTitComandos; ?></h4>
-                      </div>
-                      <div class="modal-body mdl-primary">
-
-                            <table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
-                                <tr>
-                                    <td>
-                                        <?php echo $MULTILANG_FrmHlpFunciones; ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align=center>
-                                        <textarea name="javascript" rows="20" class="form-control"><?php echo $registro_form["javascript"]; ?></textarea>
-                                    </td>
-                                </tr>
-                            </table>
-                            
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <?php abrir_dialogo_modal("myModalActualizaJAVASCRIPT",$MULTILANG_FrmTitComandos,"modal-wide"); ?>
+                    <?php echo $MULTILANG_FrmHlpFunciones; ?>
+                    <textarea name="javascript" rows="20" class="form-control"><?php echo $registro_form["javascript"]; ?></textarea>
+                <?php 
+                    $barra_herramientas_modal='
+                        <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+                    cerrar_dialogo_modal($barra_herramientas_modal);
+                ?>
                 <!-- Fin Modal EditorJavascript -->
 
 
@@ -2303,41 +2238,19 @@ if ($PCO_Accion=="administrar_formularios")
 
 
             <!-- Modal EditorJavascript -->
-            <div class="modal fade modal-wide" id="myModalJAVASCRIPT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_ConfiguracionGeneral; ?></h4>
-                  </div>
-                  <div class="modal-body mdl-primary">
-                      
-                                <table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
-                                    <tr>
-                                        <td>
-                                            <?php echo $MULTILANG_FrmHlpFunciones; ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align=center>
+            <?php abrir_dialogo_modal("myModalJAVASCRIPT",$MULTILANG_FrmTitComandos,"modal-wide"); ?>
+                      <?php echo $MULTILANG_FrmHlpFunciones; ?>
 <textarea name="javascript" class="form-control" rows="20">
 function FrmAutoRun()
     {
         //Aqui sus instrucciones
     }
 </textarea>
-                                        </td>
-                                    </tr>
-                                </table>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
+                <?php 
+                    $barra_herramientas_modal='
+                        <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+                    cerrar_dialogo_modal($barra_herramientas_modal);
+                ?>
 
 
 <div class="row">

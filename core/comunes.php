@@ -1532,6 +1532,62 @@ function ventana_login()
 
 /* ################################################################## */
 /* ################################################################## */
+    function abrir_dialogo_modal($identificador,$titulo="",$estilo_modal="")
+        {
+            /*
+            Procedure: abrir_modal
+            Crea un dialogo modal que puede ser activado luego por un anchor <a>
+
+            Variables de entrada:
+
+            titulo - Nombre de la ventana a visualizar en la parte superior.
+            tipo_panel - Recibe el tipo de panel bootstrap a crear: 
+
+            * panel-primary,panel-success,panel-info,panel-warning,panel-danger
+            * col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-
+            * Otros asociados a clases de bootstrap
+            
+            Ver tambien:
+            <cerrar_modal>
+            */
+            echo '
+                <div class="modal fade '.$estilo_modal.'" id="'.$identificador.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="myModalLabel">'.$titulo.'</h4>
+                            </div>
+                            <div class="modal-body mdl-primary">';
+        }
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+	function cerrar_dialogo_modal($contenido_piepagina)
+	  {
+		/*
+			Function: cerrar_modal
+			Cierra los espacios de trabajo por <abrir_modal>	
+
+			Ver tambien:
+			<abrir_modal>	
+		*/
+        echo '
+                            </div>
+                            <div class="modal-footer">
+                                '.$contenido_piepagina.'
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+	  }
+
+
+
+/* ################################################################## */
+/* ################################################################## */
 	function obtener_microtime()
 		{
 		/*

@@ -711,7 +711,7 @@ if ($PCO_Accion=="administrar_menu")
 	if ($PCO_Accion=="Ver_menu" && $Sesion_abierta)
 		{ 
 			// Carga las opciones del ESCRITORIO
-			echo '<table width="100%" border=0><tr><td valign=top>';
+			echo '<table class="table table-unbordered table-condensed"><tr><td>';
 			// Si el usuario es diferente al administrador agrega condiciones al query
 			if ($Login_usuario!="admin")
 				{
@@ -723,37 +723,27 @@ if ($PCO_Accion=="administrar_menu")
 			// Imprime las opciones con sus formularios
 			while($registro = $resultado->fetch())
 				{
-					// Esta seccion solamente opera con opciones que tienen imagen definida
-					if ($registro["imagen"]!="")
-						{
-							echo '<form action="'.$ArchivoCORE.'" method="post" name="desk_'.$registro["id"].'" id="desk_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
-							// Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
-							if ($registro["tipo_comando"]=="Interno" || $registro["tipo_comando"]=="Personal")
-								{
-									echo '<input type="hidden" name="PCO_Accion" value="'.$registro["comando"].'"></form>';
-								}
-							// Verifica si se trata de una opcion para cargar un objeto de practico
-							if ($registro["tipo_comando"]=="Objeto")
-								{
-									echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
-										 <input type="hidden" name="objeto" value="'.$registro["comando"].'"></form>';
-								}
-							// Imprime la imagen
-							echo '&nbsp;<a title="'.$registro["texto"].'" name="" href="javascript:document.desk_'.$registro["id"].'.submit();">';
-							// Imprime la imagen asociada si esta definida
-							if ($registro["imagen"]!="")
-								{
-									// Verifica si se tiene el string  .png en la cadena para saber si es icono de imagen, sino lo asume como font awesome
-									$es_imagen_png=strpos($registro["imagen"],".png");
-									if ($es_imagen_png)
-										echo '<img src="img/'.$registro["imagen"].'" alt="'.$registro["texto"].'" class="IconosEscritorio" valign="absmiddle" align="absmiddle">';
-										//echo '<img src="img/'.$registro["imagen"].'" border=0 alt="" valign="absmiddle" align="absmiddle" width="14" height="13" >&nbsp;';
-									else  echo '<i class="'.$registro["imagen"].'"></i>';
-								}
-							echo '</a>&nbsp;';
-						}
+                    echo '<form action="'.$ArchivoCORE.'" method="post" name="desk_'.$registro["id"].'" id="desk_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
+                    // Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
+                    if ($registro["tipo_comando"]=="Interno" || $registro["tipo_comando"]=="Personal")
+                        {
+                            echo '<input type="hidden" name="PCO_Accion" value="'.$registro["comando"].'"></form>';
+                        }
+                    // Verifica si se trata de una opcion para cargar un objeto de practico
+                    if ($registro["tipo_comando"]=="Objeto")
+                        {
+                            echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
+                                 <input type="hidden" name="objeto" value="'.$registro["comando"].'"></form>';
+                        }
+                    // Imprime la imagen
+                    echo '<a title="'.$registro["texto"].'" href="javascript:document.desk_'.$registro["id"].'.submit();">';
+                    echo '<button class="btn">
+                        <i class="'.$registro["imagen"].' fa-3x fa-fw"></i><br>
+                        <span class="btn-xs">'.$registro["texto"].'</span>
+                        </button>';
+                    echo '</a>';
 				}
-			echo '</td></tr></table>';
+			echo '</td></tr></table><br>';
 
 			// Carga las opciones del ACORDEON
 			echo '<div align="center">';
@@ -783,32 +773,24 @@ if ($PCO_Accion=="administrar_menu")
 
 					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
 						{
-							// Esta seccion solamente opera con opciones que tienen imagen definida
-							if ($registro_opciones_acordeon["imagen"]!="")
-								{
-									echo '<form action="'.$ArchivoCORE.'" method="post" name="acorde_'.$registro_opciones_acordeon["id"].'" id="acorde_'.$registro_opciones_acordeon["id"].'"
-									 style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
-									// Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
-									if ($registro_opciones_acordeon["tipo_comando"]=="Interno" || $registro_opciones_acordeon["tipo_comando"]=="Personal")
-										{
-											echo '<input type="hidden" name="PCO_Accion" value="'.$registro_opciones_acordeon["comando"].'"></form>';
-										}
-									// Verifica si se trata de una opcion para cargar un objeto de practico
-									if ($registro_opciones_acordeon["tipo_comando"]=="Objeto")
-										{
-											echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
-												 <input type="hidden" name="objeto" value="'.$registro_opciones_acordeon["comando"].'"></form>';
-										}
-									// Imprime la imagen
-									echo '&nbsp;<a title="'.$registro_opciones_acordeon["texto"].'" name="" href="javascript:document.acorde_'.$registro_opciones_acordeon["id"].'.submit();">';
-									// Verifica si se tiene el string  .png en la cadena para saber si es icono de imagen, sino lo asume como font awesome
-									$es_imagen_png=strpos($registro_opciones_acordeon["imagen"],".png");
-									if ($es_imagen_png)
-										echo '<img src="img/'.$registro_opciones_acordeon["imagen"].'" alt="'.$registro_opciones_acordeon["texto"].'" class="IconosEscritorio" valign="absmiddle" align="absmiddle">';
-										//echo '<img src="img/'.$registro["imagen"].'" border=0 alt="" valign="absmiddle" align="absmiddle" width="14" height="13" >&nbsp;';
-									else  echo '<i class="'.$registro_opciones_acordeon["imagen"].'"></i>';
-									echo '</a>&nbsp;';
-								}
+                            echo '<form action="'.$ArchivoCORE.'" method="post" name="acorde_'.$registro_opciones_acordeon["id"].'" id="acorde_'.$registro_opciones_acordeon["id"].'"
+                             style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
+                            // Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
+                            if ($registro_opciones_acordeon["tipo_comando"]=="Interno" || $registro_opciones_acordeon["tipo_comando"]=="Personal")
+                                {
+                                    echo '<input type="hidden" name="PCO_Accion" value="'.$registro_opciones_acordeon["comando"].'"></form>';
+                                }
+                            // Verifica si se trata de una opcion para cargar un objeto de practico
+                            if ($registro_opciones_acordeon["tipo_comando"]=="Objeto")
+                                {
+                                    echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
+                                         <input type="hidden" name="objeto" value="'.$registro_opciones_acordeon["comando"].'"></form>';
+                                }
+                            echo '<a title="'.$registro_opciones_acordeon["texto"].'" href="javascript:document.acorde_'.$registro_opciones_acordeon["id"].'.submit();">';
+                            echo '<button type="button" class="btn btn-default btn-outline"><i class="'.$registro_opciones_acordeon["imagen"].' fa-fw"></i>
+                                    <span class="btn-xs">'.$registro_opciones_acordeon["texto"].'</span>
+                                    </button>';
+                            echo '</a>&nbsp;';
 						}
 					cerrar_ventana();
 				}

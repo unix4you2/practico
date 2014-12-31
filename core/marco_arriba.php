@@ -277,7 +277,6 @@
                                 <a href="javascript:document.mis_informes.submit();"><i class="fa fa-pie-chart fa-fw"></i> <?php echo $MULTILANG_UsrInfDisp; ?></a>
                             </li>
 
-                            
                             <?php
                                 //Siempre presenta el administrador de archivos al superusuario
                                 if($Sesion_abierta && @$Login_usuario=="admin" && $PCO_Accion!="")
@@ -377,7 +376,7 @@
 
 				<?php
 					if ($Sesion_abierta && $PCO_Accion=="Ver_menu") {
-						echo '<ul class="nav nav-pills">';
+						echo '<ul class="nav nav-pills btn-xs">';
 						// Carga las opciones del menu superior
 
 						// Si el usuario es diferente al administrador agrega condiciones al query
@@ -394,8 +393,22 @@
 								// Verifica si se trata de un comando interno y crea formulario y enlace correspondiente
 								//if ($registro["tipo_comando"]=="Interno")
 									{
-										echo '<form action="'.$ArchivoCORE.'" method="post" name="top_'.$registro["id"].'" id="top_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;"><input type="hidden" name="PCO_Accion" value="'.$registro["comando"].'"></form>';
-										echo '<a href="javascript:document.top_'.$registro["id"].'.submit();"><i class="'.$registro["imagen"].'"></i> '.$registro["texto"].'</a>';
+										echo '<form action="'.$ArchivoCORE.'" method="post" name="top_'.$registro["id"].'" id="top_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
+                                        // Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
+                                        if ($registro["tipo_comando"]=="Interno" || $registro["tipo_comando"]=="Personal")
+                                            {
+                                                echo '<input type="hidden" name="PCO_Accion" value="'.$registro["comando"].'"></form>';
+                                            }
+                                        // Verifica si se trata de una opcion para cargar un objeto de practico
+                                        if ($registro["tipo_comando"]=="Objeto")
+                                            {
+                                                echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
+                                                     <input type="hidden" name="objeto" value="'.$registro["comando"].'"></form>';
+                                            }
+										echo '<a href="javascript:document.top_'.$registro["id"].'.submit();">
+                                        <button class="btn-circle btn-info btn-xs">
+                                        <i class="'.$registro["imagen"].'"></i>
+                                        </button> '.$registro["texto"].'</a>';
 									}
                                 echo '</li>';
 							}

@@ -30,20 +30,9 @@
 	if (@$Login_usuario!="admin" || !$Sesion_abierta)
 		die();
 
-?>
 
-
-    <!-- Modal Botones de Desarrollo -->
-    <div class="modal fade" id="myModalDESARROLLO" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_TitDisenador; ?></h4>
-          </div>
-          <div class="modal-body mdl-primary">
-
-
+    //Modal Botones de Desarrollo
+    abrir_dialogo_modal("myModalDESARROLLO",$MULTILANG_TitDisenador); ?>
 
                 <table class="table">
                     <tr>
@@ -114,13 +103,8 @@
 
                 </table>
 
-
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-          </div>
-        </div>
-      </div>
-    </div>
+<?php 
+    $barra_herramientas_modal='
+        <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+    cerrar_dialogo_modal($barra_herramientas_modal);
 

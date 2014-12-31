@@ -82,10 +82,15 @@ IMPORTANTE:  Muchos archivos han sido reemplazados o eliminados por compatibilid
 * Added: Panel administrativo al inicio con resumenes del sistema
 * Added: Panel de dashboard para el administrador de aplicacion
 * Added: Modulo SOPA.  Una aproximación al Social Parsing y demo de funciones para obtener URLs con Práctico.
+* Added: Nuevos estilos de presentacion para menues superiores, de acordeon y de escritorio
+* Added: El panel de informes ahora diferencia el tipo de informe y presenta icono asociado
 * Enhan: Tamaño del instalador disminuido en varias megas
 * Enhan: Se aumenta longitud del campo de estilo para botones y se permite ademas el uso de texto libre para ingresar estilos bootstrap
 * Enhan: La variable de control de practico ahora se llama $PCO_Accion en lugar de simplemente $PCO_Accion para evitar conflictos.  Usuarios que deseen compatibilidad a versiones anteriores podrán hacer una asignación de la nueva variable así: $PCO_Accion=$PCO_Accion;
 * Enhan: Eliminadas variables de idioma: $MULTILANG_FrmEstilo1, $MULTILANG_FrmEstilo1b, $MULTILANG_FrmEstilo2
+* Enhan: Eliminada la restriccion de imagen para opciones de menu, ahora todas se imprimen.
+* Enhan: Eliminada la seleccion de imagenes de opciones de menu. En adelante sólo librerias Glyp y Awesome son permitidas
+* Enhan: El titulo de informes es presentado completo aunque sea largo
 * Fixed: Se simplifica script de inicio para login y cambio dinámico de marcos.
 * Fixed: Actualizados scripts de instalacion pues ya no requieren creación de menues
 * Fixed: Se evita cierre de sesion involuntario por enlaces mal generados al escritorio
@@ -105,6 +110,7 @@ IMPORTANTE:  Muchos archivos han sido reemplazados o eliminados por compatibilid
 * Fixed: Marco de configuracion de aplicación, de parámetros y de oauth ahora son responsive mediante bootstrap tabs
 * Fixed: Cambio de clave responsive
 * Fixed: Variables desconocidas durante extracción de parches de actualización
+* Fixed: Comandos de menu superior corregidos para cargue de objetos internos
 "
 
 ########################################################################
