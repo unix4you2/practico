@@ -1339,7 +1339,7 @@ function ventana_login()
                                                     <input type="hidden" name="OAuthSrv" value="'.$sitio.'">
                                                     <input type="hidden" name="WSId" value="autenticacion_oauth">
                                                     <input type="image" src="inc/oauth/logos/'.strtolower($sitio).'.png" border=0 width=81 height=30 style="background:#FFFFFF;"> <!--94x35|81x30-->
-                                                    </form>';
+                                                    </form>&nbsp;&nbsp;';
                                                 // Retorna valor de activacion a variable AlMenosUnOAuth
                                                 return 1;
                                             }
