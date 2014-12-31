@@ -617,7 +617,7 @@
 	$MULTILANG_MnuComando='Comando';
 	$MULTILANG_MnuAdvElimina='IMPORTANTE:  Al eliminar el registro pueden quedar sin vincular algunas opciones del sistema.\n'.$MULTILANG_Confirma;
 	$MULTILANG_MnuHlpComandoInf='Es probable que para los tipo Informe quiera agregar al comando final un <b>:htm:Informes</b> para indicar a Practico<br>que debe entregar sus resultados en html y con esa hoja de estilos';
-	$MULTILANG_MnuHlpAwesome='<b>Recomendable:</b> En lugar de utilizar una im&aacute;gen de las disponibles como iconos tambi&eacute;n<br> puede usar notacion de Font-Awesome o de GlyphIcons.  Ver <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_BLANK">Iconos disponibles</a> y sus <a href="http://fortawesome.github.io/Font-Awesome/examples/" target="_BLANK">Ejemplos</a>.  Tambien aquellos disponibles para <a href="http://getbootstrap.com/components/#glyphicons" target="_BLANK">GlyphIcons.</a>';
+	$MULTILANG_MnuHlpAwesome='<b>Importante:</b> En lugar de utilizar una im&aacute;gen de las disponibles como iconos tambi&eacute;n<br> puede usar notacion de Font-Awesome o de GlyphIcons.  Ver <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_BLANK">Iconos disponibles</a> y sus <a href="http://fortawesome.github.io/Font-Awesome/examples/" target="_BLANK">Ejemplos</a>.  Tambien aquellos disponibles para <a href="http://getbootstrap.com/components/#glyphicons" target="_BLANK">GlyphIcons.</a>';
 
 	//Objetos, seguridad y otros
 	$MULTILANG_ObjError='El tipo de objeto recibido en este comando es desconocido';

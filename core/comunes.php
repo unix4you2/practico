@@ -3263,8 +3263,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							if ($registro_botones["tipo_accion"]=="interna_eliminar")
 								{
 									$valores = explode(".",$registro_botones["accion_usuario"]);
-									$tabla_vinculada=$valores[0];
-									$campo_vinculado=$valores[1];
+									$tabla_vinculada=@$valores[0];
+									$campo_vinculado=@$valores[1];
 								
 									//Si solo se indico el campo, sin la tabla, intenta usar solo el campo
 									if ($campo_vinculado=="" && $tabla_vinculada!="")
@@ -3298,7 +3298,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 									$comando_javascript=$registro_botones["accion_usuario"];
 								}
 							$cadena_javascript='onclick="'.@$comando_javascript.'"';
-							@$cadena_generica_botones.='<input type="Button"  class="'.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.$cadena_javascript.' >';
+							@$cadena_generica_botones.='<input type="Button"  class="'.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.$cadena_javascript.' >&nbsp;';
 							$total_botones++;
 						}
 					//Si el informe tiene botones se agrega el formulario para procesar las acciones

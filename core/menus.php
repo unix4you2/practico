@@ -57,13 +57,16 @@ function selector_iconos_awesome()
                   </div>
                   <div class="modal-body mdl-primary">
 
+                    <center><?php echo $MULTILANG_MnuHlpAwesome; ?></center><hr>
 
 			<?php
+            /*
+            //DEPRECATED !!!
 			//Busca en el directorio de iconos por imagenes listas para ser usadas
 			$columnas=15;
 			$columna_actual=1;
 			$directorio="img/";
-			@$TemasIconos[]=array(Nombre => "Tango Desktop",	Tamano => "32x32",	Prefijo => "tango_");
+            @$TemasIconos[]=array(Nombre => "Tango Desktop",	Tamano => "32x32",	Prefijo => "tango_");
 			@$TemasIconos[]=array(Nombre => "Developer",		Tamano => "32x32",	Prefijo => "dev_");
 			@$TemasIconos[]=array(Nombre => "Finance",		Tamano => "32x32",	Prefijo => "finance_");
 			@$TemasIconos[]=array(Nombre => "Medical",		Tamano => "32x32",	Prefijo => "medical_");
@@ -72,12 +75,7 @@ function selector_iconos_awesome()
 			@$TemasIconos[]=array(Nombre => "Woo",			Tamano => "32x32",	Prefijo => "woo_");
 			@$TemasIconos[]=array(Nombre => "Once",			Tamano => "32x32",	Prefijo => "once_");
 			@$TemasIconos[]=array(Nombre => "Ginux",			Tamano => "32x32",	Prefijo => "ginux_");
-			
-			
-			echo '<center>'.$MULTILANG_MnuHlpAwesome.'</center><hr>
-            
-            
-            
+			echo '
             <DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 350px">';
 			for ($i=0;$i<count($TemasIconos);$i++)
 				{
@@ -101,6 +99,7 @@ function selector_iconos_awesome()
 					echo '</table>';
 				}
 			echo '</DIV>';
+            */
 			?>
             
                   </div>
@@ -264,7 +263,7 @@ if ($PCO_Accion=="detalles_menu")
                             </div>
 
                             <label for="peso"><?php echo $MULTILANG_Peso; ?>:</label>
-                            <select id="peso" name="peso" class="form-control" >
+                            <select id="peso" name="peso" class="form-control selectpicker" >
                                 <?php
                                         for ($i=1;$i<=100;$i++)
                                             {
