@@ -68,6 +68,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 IMPORTANTE:  Muchos archivos han sido reemplazados o eliminados por compatibilidad y migracion hacia el nuevo modelo de imagenes basadas en fuentes.  Aquellos que requieran uso de imagenes o archivos previos podran encontrarlos dentro del arbol de fuentes en la carpeta dep (Deprecated). Usuarios en proceso de actualizacion pueden omitir esta indicacion pues todos sus archivos continuaran en las mismas rutas.
+* Added: Implementacion basada en BootStrap 3.3.1
 * Added: Ahora todo es responsive!  Sus aplicaciones corriendo sin problemas en la web para escritorios, tabletas y smartphones
 * Added: Filtro de listas de seleccion.  Ahora se permite definir condiciones de filtrado para las listas utilizadas en los controles combobox y radiobutton
 * Added: Se inicia con el uso de awesome-font.  Se sustituyen varias expresiones de iconos por las existentes en la fuente de iconos nueva
