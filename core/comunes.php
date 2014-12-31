@@ -3015,7 +3015,9 @@ function ventana_login()
 								{
 									$cadena_javascript='onclick="'.@$comando_javascript.'"';
 								}
-							echo '<input type="'.$tipo_boton.'"  class="'.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.@$cadena_javascript.' >';
+							//Si no se especifica un estilo para el boton entonces se usa el predeterminado
+                            $estilo_basico_boton="btn btn-default";
+                            echo '<input type="'.$tipo_boton.'"  class="'.$estilo_basico_boton.' '.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.@$cadena_javascript.' >';
 						}
                     echo '</div>';
 					cerrar_barra_estado();
@@ -3274,7 +3276,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 										}
 
 									$comando_javascript="
-										document.FRMBASEINFORME.accion.value='eliminar_registro_informe';
+										document.FRMBASEINFORME.PCO_Accion.value='eliminar_registro_informe';
 										document.FRMBASEINFORME.tabla.value='".$tabla_vinculada."';
 										document.FRMBASEINFORME.campo.value='".$campo_vinculado."';
 										document.FRMBASEINFORME.valor.value='DELFRMVALVALOR';
@@ -3283,14 +3285,14 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							if ($registro_botones["tipo_accion"]=="interna_cargar")
 								{
 									$comando_javascript="
-										document.FRMBASEINFORME.accion.value='cargar_objeto';
+										document.FRMBASEINFORME.PCO_Accion.value='cargar_objeto';
 										document.FRMBASEINFORME.objeto.value='frm:".$registro_botones["accion_usuario"].":DETFRMVALBASE';
 										document.FRMBASEINFORME.submit()";
 								}
 							if ($registro_botones["tipo_accion"]=="externa_formulario")
 								{
 									$comando_javascript="
-										document.FRMBASEINFORME.accion.value='".$registro_botones["accion_usuario"]."';
+										document.FRMBASEINFORME.PCO_Accion.value='".$registro_botones["accion_usuario"]."';
 										document.FRMBASEINFORME.submit()";
 								}
 							if ($registro_botones["tipo_accion"]=="externa_javascript")

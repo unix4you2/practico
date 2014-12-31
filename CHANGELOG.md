@@ -7,6 +7,52 @@
             |___/ 
 ```
 
+## Versión 15.1 (2015-01-01)
+* Added: Implementacion basada en BootStrap 3.3.1
+* Added: Ahora todo es responsive!  Sus aplicaciones corriendo sin problemas en la web para escritorios, tabletas y smartphones
+* Added: Filtro de listas de seleccion.  Ahora se permite definir condiciones de filtrado para las listas utilizadas en los controles combobox y radiobutton
+* Added: Se inicia con el uso de awesome-font.  Se sustituyen varias expresiones de iconos por las existentes en la fuente de iconos nueva
+* Added: Actualizacion de mucha iconografia a fuentes Awesome
+* Added: Uso de bootstrap. Ahora toda la aplicación es responsive y maquetada mediante bootstrap.
+* Added: Se ajustan métodos para cierre de marcos mediante la tecla Esc.
+* Added: Marcos de configuración diagramados de manera independiente
+* Added: Barra de menu/herramientas lateral e iconos de contexto en barra superior
+* Added: Inclusión de GlyphIcons
+* Added: Adición de librerías nuevas para elaboración de gráficos
+* Added: Se cambia la ventana de login por OAuth a modal.
+* Added: Panel administrativo al inicio con resumenes del sistema
+* Added: Panel de dashboard para el administrador de aplicacion
+* Added: Modulo SOPA.  Una aproximación al Social Parsing y demo de funciones para obtener URLs con Práctico.
+* Added: Nuevos estilos de presentacion para menues superiores, de acordeon y de escritorio
+* Added: El panel de informes ahora diferencia el tipo de informe y presenta icono asociado
+* Enhan: Tamaño del instalador disminuido en varias megas
+* Enhan: Se aumenta longitud del campo de estilo para botones y se permite ademas el uso de texto libre para ingresar estilos bootstrap
+* Enhan: La variable de control de practico ahora se llama $PCO_Accion en lugar de simplemente $PCO_Accion para evitar conflictos.  Usuarios que deseen compatibilidad a versiones anteriores podrán hacer una asignación de la nueva variable así: $PCO_Accion=$PCO_Accion;
+* Enhan: Eliminadas variables de idioma: $MULTILANG_FrmEstilo1, $MULTILANG_FrmEstilo1b, $MULTILANG_FrmEstilo2
+* Enhan: Eliminada la restriccion de imagen para opciones de menu, ahora todas se imprimen.
+* Enhan: Eliminada la seleccion de imagenes de opciones de menu. En adelante sólo librerias Glyp y Awesome son permitidas
+* Enhan: El titulo de informes es presentado completo aunque sea largo
+* Fixed: Se simplifica script de inicio para login y cambio dinámico de marcos.
+* Fixed: Actualizados scripts de instalacion pues ya no requieren creación de menues
+* Fixed: Se evita cierre de sesion involuntario por enlaces mal generados al escritorio
+* Fixed: Se retira campo de color de formularios e informes pues ahora todo se hace con estilos de BootStrap
+* Fixed: Se retira opcion de teclado virtual en controles de formularios
+* Fixed: Formatos de color directos en HTML son removidos para ser controlados ahora desde BootStrap
+* Fixed: El orden de los campos en los informes se hace basado en su ID
+* Fixed: Se reduce numero de columnas en formularios a 12 para posterior compatibilidad con BootStrap
+* Fixed: El tipo de objeto al aumentar o disminuir pesos de controles es ahora identificado.
+* Fixed: Administrador de archivos ahora es responsive
+* Fixed: Asistente de actualización es ahora responsive
+* Fixed: Ahora todos los niveles de usuario son establecidos a -1 como valor para transicion a su eliminacion
+* Fixed: Durante creacion de usuarios se valida login solo si es diferente de vacio para evitar error fatal del query
+* Fixed: Eliminadas las columnas innecesarias de nivel y descripcion de la tabla de usuarios
+* Fixed: Se elimina la seleccion de plantillas, ahora todo se hace por bootstrap
+* Fixed: Presentación de indicadores numericos sobre graficos Morris.
+* Fixed: Marco de configuracion de aplicación, de parámetros y de oauth ahora son responsive mediante bootstrap tabs
+* Fixed: Cambio de clave responsive
+* Fixed: Variables desconocidas durante extracción de parches de actualización
+* Fixed: Comandos de menu superior corregidos para cargue de objetos internos
+
 ## Versión 14.912 (2014-11-24)
 * Fixed: Vinculos de subformularios
 * Added: Actualizar ahora verifica versiones estrictamente inferiores

@@ -433,7 +433,7 @@ if ($PCO_Accion=="informes_usuario")
 					<?php
 						//Despliega opciones de informes para agregar, aunque solamente las que este por debajo del perfil del usuario
 						//No se permite agregar opciones por encima del perfil actual del usuario
-						$resultado=ejecutar_sql("SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe WHERE nivel_usuario<=".$Nivel_usuario." ");
+						$resultado=ejecutar_sql("SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe WHERE 1 ");
 						while($registro = $resultado->fetch())
 							{
 								echo '<option value="'.$registro["id"].'">'.$registro["titulo"].'</option>';
@@ -638,7 +638,7 @@ if ($PCO_Accion=="permisos_usuario")
 					<?php
 						//Despliega opciones de menu para agregar, aunque solamente las que este por debajo del perfil del usuario
 						//No se permite agregar opciones por encima del perfil actual del usuario
-						$resultado=ejecutar_sql("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE nivel_usuario<=".$Nivel_usuario." ");
+						$resultado=ejecutar_sql("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE 1 ");
 						while($registro = $resultado->fetch())
 							{
 								echo '<option value="'.$registro["id"].'">'.$registro["texto"].'</option>';
