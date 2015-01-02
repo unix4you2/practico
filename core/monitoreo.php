@@ -538,7 +538,7 @@ if ($PCO_Accion=="administrar_monitoreo")
 
                     <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-save"></i> <?php echo $MULTILANG_Agregar; ?></a>
                     <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
-                    <a class="btn btn-warning btn-block" href="index.php?accion=ver_monitoreo&Presentar_FullScreen=1" target="_BLANK"><i class="fa fa-globe"></i> <?php echo " $MULTILANG_MonPgInicio -> $MULTILANG_MonTitulo ";?></a>
+                    <a class="btn btn-warning btn-block" href="index.php?PCO_Accion=ver_monitoreo&Presentar_FullScreen=1" target="_BLANK"><i class="fa fa-globe"></i> <?php echo " $MULTILANG_MonPgInicio -> $MULTILANG_MonTitulo ";?></a>
 
                 </div>    
                 <div class="col-md-6">
@@ -759,7 +759,7 @@ if ($PCO_Accion=="ver_monitoreo")
 		<script language="JavaScript">
 			function actualizar()
 				{
-					document.location="index.php?accion=ver_monitoreo&Presentar_FullScreen=1&Pagina=<?php echo $SiguientePagina; ?>";
+					document.location="index.php?PCO_Accion=ver_monitoreo&Presentar_FullScreen=1&Pagina=<?php echo $SiguientePagina; ?>";
 				}
 			window.setTimeout("actualizar()",<?php echo $MilisegundosPagina; ?>);
 		</script>

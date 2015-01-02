@@ -1712,7 +1712,7 @@ function ventana_login()
 			if ($registro_campos["etiqueta_busqueda"]!="")
 				{
                     $salida.= '<span class="input-group-addon">';
-                        $salida.= '<input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.valorbase.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.accion.value=\'cargar_objeto\';document.datos.submit()">';
+                        $salida.= '<input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.valorbase.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.PCO_Accion.value=\'cargar_objeto\';document.datos.submit()">';
                         $salida.= '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
                         $salida.= '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
                         $salida.= '<input type="Hidden" name="campobase" value="'.$registro_campos["campo"].'" >';
@@ -2068,7 +2068,7 @@ function ventana_login()
 			// Muestra boton de busqueda cuando el campo sea usado para esto
 			if ($registro_campos["etiqueta_busqueda"]!="")
 				{
-					$salida.= '<input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.valorbase.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.accion.value=\'cargar_objeto\';document.datos.submit()">';
+					$salida.= '<input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.valorbase.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.PCO_Accion.value=\'cargar_objeto\';document.datos.submit()">';
 					$salida.= '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
 					$salida.= '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
 					$salida.= '<input type="Hidden" name="campobase" value="'.$registro_campos["campo"].'" >';
@@ -2988,23 +2988,23 @@ function ventana_login()
 							if ($registro_botones["tipo_accion"]=="interna_actualizar")
 								{
 									$tipo_boton="Button";
-									$comando_javascript="document.datos.accion.value='actualizar_datos_formulario';document.datos.submit()";
+									$comando_javascript="document.datos.PCO_Accion.value='actualizar_datos_formulario';document.datos.submit()";
 								}
 							if ($registro_botones["tipo_accion"]=="interna_eliminar")
 								{
 									$tipo_boton="Button";
-									$comando_javascript="document.datos.accion.value='eliminar_datos_formulario';document.datos.submit()";
+									$comando_javascript="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit()";
 								}
 							if ($registro_botones["tipo_accion"]=="interna_cargar")
 								{
 									echo '<input type="hidden" name="objeto" value="'.$registro_botones["accion_usuario"].'">';
 									$tipo_boton="Button";
-									$comando_javascript="document.datos.accion.value='cargar_objeto';document.datos.submit()";
+									$comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.submit()";
 								}
 							if ($registro_botones["tipo_accion"]=="externa_formulario")
 								{
 									$tipo_boton="Button";
-									$comando_javascript="document.datos.accion.value='".$registro_botones["accion_usuario"]."';document.datos.submit()";
+									$comando_javascript="document.datos.PCO_Accion.value='".$registro_botones["accion_usuario"]."';document.datos.submit()";
 								}
 							if ($registro_botones["tipo_accion"]=="externa_javascript")
 								{
