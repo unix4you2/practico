@@ -1647,7 +1647,7 @@ function ventana_login()
 */
 	function cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 		{
-			global $campobase,$valorbase;
+			global $campobase,$valorbase,$IdiomaPredeterminado;
             global $funciones_activacion_datepickers;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
 
@@ -1696,7 +1696,10 @@ function ventana_login()
                     $cadena_clase_datepicker=' date ';
                     @$funciones_activacion_datepickers.="
                         $(function () {
-                            $('#DatePicker_".$registro_campos["campo"]."').datetimepicker();
+                            $('#DatePicker_".$registro_campos["campo"]."').datetimepicker({
+                                language: '$IdiomaPredeterminado',
+                                pickTime: false
+                            });
                         });";
                     $cadena_complementaria_datepicker=' data-date-format="YYYY-MM-DD" ';
 				}

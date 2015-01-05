@@ -42,6 +42,7 @@ LogCambios="
 * Fixed: Lanzamiento de ventana de monitoreo con accion incorrecta.  Igual su proceso de autollamado.
 * Fixed: Tester: [Ricardo Beltran] Botones de búsqueda en campos y de operaciones diferentes a la adición no operan correctamente sobre Forms
 * Added: Soporte para datepicker por bootstrap
+* Added: Ahora los campos dotados de DatePicker identifican el idioma de la plataforma y se autotraducen
 "
 
 ########################################################################
