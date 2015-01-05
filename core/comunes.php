@@ -2346,7 +2346,7 @@ function ventana_login()
 */
 	function cargar_objeto_deslizador($registro_campos,$registro_datos_formulario)
 		{
-			global $campobase,$valorbase;
+			global $campobase,$valorbase,$funciones_activacion_sliders;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
 
 			$salida='';
@@ -2354,14 +2354,15 @@ function ventana_login()
 
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
+            $valor_de_campo="0";
+            // Si tiene valor predeterminado se asume
 			if ($registro_campos["valor_predeterminado"]!="") $valor_de_campo=$registro_campos["valor_predeterminado"];
-
-			// toma el valor predeterminado como el minimo (formulario de registro nuevo) 
-				$valor_de_campo=$registro_campos["valor_minimo"];
+			// toma el valor predeterminado como el minimo (formulario de registro nuevo) en caso de no tener un predeterminado
+            if ($registro_campos["valor_predeterminado"]=="") $valor_de_campo=$registro_campos["valor_minimo"];
 			// Busca el valor segun registro en caso de recibir un registro recuperado
 			if ($campobase!="" && $valorbase!="")
 				$valor_de_campo=$registro_datos_formulario["$nombre_campo"];
-			$cadena_valor=' value="'.$valor_de_campo.'" ';
+			$cadena_valor=' data-slider-value="'.$valor_de_campo.'" value="'.$valor_de_campo.'" ';
 
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="")
@@ -2369,10 +2370,19 @@ function ventana_login()
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.= '<input type="range" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" min="'.$registro_campos["valor_minimo"].'" max="'.$registro_campos["valor_maximo"].'" step="'.$registro_campos["valor_salto"].'" '.$cadena_valor.' onchange="document.getElementById(\'VAL'.$registro_campos["campo"].'\').innerHTML = \'[\'+this.value+\']\';" oninput="document.getElementById(\'VAL'.$registro_campos["campo"].'\').innerHTML = \'[\'+this.value+\']\';"><div id="VAL'.$registro_campos["campo"].'" style="float: right;"></div>';
+            $salida.= '<input class="span2" type="text" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" data-slider-min="'.$registro_campos["valor_minimo"].'" data-slider-max="'.$registro_campos["valor_maximo"].'" data-slider-step="'.$registro_campos["valor_salto"].'" '.$cadena_valor.'>';
+            //  data-slider-selection="after" data-slider-tooltip="hide">
 
-			// Activa el primer valor del campo
-			$salida.= '<script type="text/javascript">document.getElementById(\'VAL'.$registro_campos["campo"].'\').innerHTML = \'['.$valor_de_campo.']\';</script>';
+            //Guarda la funcion para activar el slider posterior a su carga
+            @$funciones_activacion_sliders.="
+                    $(function(){
+                        window.prettyPrint && prettyPrint();
+                    $('#".$registro_campos["campo"]."').slider({
+                      formater: function(value) {
+                        return 'Valor: '+value;
+                      }
+                    });
+                });";
 
 			//Si hay algun indicador adicional del campo abre los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")

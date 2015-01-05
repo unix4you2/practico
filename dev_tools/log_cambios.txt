@@ -24,11 +24,14 @@ core/marco_arriba.php
 core/monitoreo.php
 inc/bootstrap/css/practico.css
 inc/bootstrap/css/plugins/datepicker/*
+inc/bootstrap/css/plugins/slider/*
 inc/bootstrap/js/plugins/datepicker/*
 inc/bootstrap/js/plugins/collapse.js
 inc/bootstrap/js/plugins/transition.js
 inc/bootstrap/js/plugins/moment/*
+inc/bootstrap/js/plugins/slider/*
 inc/bootstrap/less/datepicker/*
+inc/bootstrap/less/slider/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
