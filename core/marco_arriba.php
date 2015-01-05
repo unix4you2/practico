@@ -72,6 +72,7 @@
     <link href="inc/bootstrap/css/plugins/morris.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/timeline.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/social-buttons.css" rel="stylesheet">
+    <link href="inc/bootstrap/css/plugins/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- CSS Personalizado (Plantilla y Practico) -->

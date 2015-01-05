@@ -19,7 +19,16 @@ CHANGELOG.md
 AUTHORS
 index.php
 core/comunes.php
+core/marco_abajo.php
+core/marco_arriba.php
 core/monitoreo.php
+inc/bootstrap/css/practico.css
+inc/bootstrap/css/plugins/datepicker/*
+inc/bootstrap/js/plugins/datepicker/*
+inc/bootstrap/js/plugins/collapse.js
+inc/bootstrap/js/plugins/transition.js
+inc/bootstrap/js/plugins/moment/*
+inc/bootstrap/less/datepicker/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -32,6 +41,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 * Fixed: Lanzamiento de ventana de monitoreo con accion incorrecta.  Igual su proceso de autollamado.
 * Fixed: Tester: [Ricardo Beltran] Botones de búsqueda en campos y de operaciones diferentes a la adición no operan correctamente sobre Forms
+* Added: Soporte para datepicker por bootstrap
 "
 
 ########################################################################

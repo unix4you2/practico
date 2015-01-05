@@ -66,8 +66,6 @@
 
 
 
-
-
     </div>
     <!-- /#wrapper inicial -->
 
@@ -76,16 +74,31 @@
 	<script type="text/javascript" src="inc/jquery/jquery-2.1.0.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="inc/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugins JavaScript requeridos por DateTimePicker -->
+    <script src="inc/bootstrap/js/plugins/moment/moment-with-locales.min.js"></script>
+
     <!-- Plugins JavaScript adicionales -->
+    <script type="text/javascript" src="inc/bootstrap/js/plugins/transition.js"></script>
+    <script type="text/javascript" src="inc/bootstrap/js/plugins/collapse.js"></script>   
     <script src="inc/bootstrap/js/plugins/metisMenu/metisMenu.min.js"></script>
 
+    <!-- Plugins JavaScript requeridos por DateTimePicker -->
+    <script src="inc/bootstrap/js/plugins/datepicker/bootstrap-datetimepicker.min.js"></script>
+
     <!-- Morris Charts JavaScript -->
+    <?php
+        //Carga solo Morris cuando es pagina principal por ahora para evitar conflictos con DatePicker
+        if (@$Login_usuario=="admin" && @$Sesion_abierta && @$PCO_Accion=="Ver_menu")
+        {
+    ?>
     <script src="inc/bootstrap/js/plugins/morris/raphael.min.js"></script>
     <script src="inc/bootstrap/js/plugins/morris/morris.min.js"></script>
     <?php
         // Incluye archivo con las consultas y datos para ser diagramados por Morris
 		if (@$Login_usuario=="admin" && $Sesion_abierta)
             include_once("core/marco_admin_morris.php");
+        }
     ?>
 
     <!-- DataTables JavaScript -->
@@ -158,6 +171,12 @@
         echo $PrefijoGA.$Infijo.$PosfijoGA;
         if(@$CodigoGoogleAnalytics!="")
             echo $PrefijoGA.$CodigoGoogleAnalytics.$PosfijoGA;	
+    ?>
+
+    <?php
+        //Carga las funciones activadoras de DatePicker (si fue encontrado algun campo de ese tipo)
+        if (@$funciones_activacion_datepickers!="")
+            echo '<script type="text/javascript">'.$funciones_activacion_datepickers.'</script>';
     ?>
 
 </body>

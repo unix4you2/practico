@@ -1648,6 +1648,7 @@ function ventana_login()
 	function cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 		{
 			global $campobase,$valorbase;
+            global $funciones_activacion_datepickers;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
 
 			$salida='';
@@ -1685,13 +1686,19 @@ function ventana_login()
 
 			// Define cadenas en caso de tener validaciones
 			$cadena_validacion='';
-			$cadena_fechas='';
 			if ($registro_campos["validacion_datos"]!="" && $registro_campos["validacion_datos"]!="fecha")
 				$cadena_validacion=' onkeypress="return validar_teclado(event, \''.$registro_campos["validacion_datos"].'\');" ';
-			if ($registro_campos["validacion_datos"]=="fecha")
+			
+            $cadena_complementaria_datepicker='';
+            if ($registro_campos["validacion_datos"]=="fecha")
 				{
-					$cadena_longitud_visual=' size="11" ';
-					$tipo_entrada="date";
+					$cadena_ID_datepicker=' id="DatePicker_'.$registro_campos["campo"].'" ';
+                    $cadena_clase_datepicker=' date ';
+                    @$funciones_activacion_datepickers.="
+                        $(function () {
+                            $('#DatePicker_".$registro_campos["campo"]."').datetimepicker();
+                        });";
+                    $cadena_complementaria_datepicker=' data-date-format="YYYY-MM-DD" ';
 				}
 
 			// Si el campo es de tipo clave cambia el input a password
@@ -1704,9 +1711,9 @@ function ventana_login()
 			if ($registro_campos["titulo"]!="")
                 $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
 			//Abre el marco del control de datos
-			$salida.='<div class="form-group input-group">';
+			$salida.='<div class="form-group input-group '.$cadena_clase_datepicker.'" '.$cadena_ID_datepicker.'>';
             // Muestra el campo
-			$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control " '.$cadena_validacion.' '.$registro_campos["solo_lectura"].'  >';
+			$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control " '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$cadena_complementaria_datepicker.' >';
 
 			// Muestra boton de busqueda cuando el campo sea usado para esto
 			if ($registro_campos["etiqueta_busqueda"]!="")
@@ -1719,6 +1726,15 @@ function ventana_login()
                         $salida.= '<input type="Hidden" name="valorbase" '.$cadena_valor.'>';
                     $salida.= '</span>';
 				}
+
+            //Agrega el icono de calendario al campo de fecha
+			if ($registro_campos["validacion_datos"]=="fecha")
+				{
+                    $salida.='
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </span>';
+                }
 
 			// Muestra indicadores de obligatoriedad o ayuda
 			//Si hay algun indicador adicional del campo abre los add-ons

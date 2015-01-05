@@ -19,6 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 ESTILOS ADICIONALES PARA BOOTSTRAP
 */
 
+/*@import "../less/datepicker/datepicker.less";*/
 
 *.icon-white {color: white}
 *.icon-red {color: red}
