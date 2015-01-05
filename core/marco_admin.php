@@ -30,6 +30,64 @@
 	if (@$Login_usuario!="admin" || !$Sesion_abierta)
 		die();
 
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: ObtenerEntradas_GitHub
+	Recupera el ATOM de una cuenta GitHub para presentarla dentro de las noticias
+	
+	Variables de entrada:
+
+		Login - Login utilizado en GitHub
+		
+	Salida:
+		Retorna variable con las entradas del Feed
+*/
+function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
+    {
+        //Cuando ya se cuenta con un ID de FanPage hace la consulta
+        if ($ID_Usuario!="")
+            {
+                $URL_Recuperacion="https://github.com/$ID_Usuario.atom";
+                $contenido_url = @cargar_url($URL_Recuperacion);
+                //Si se ha obtenido respuesta entonces procesa entradas
+                if ($contenido_url!="")
+                    {
+                        // Usa SimpleXML Directamente para interpretar respuesta
+                        $EntradasObtenidas = simplexml_load_string($contenido_url);
+                        // Procesa la respuesta recibida en el XML
+                        $NumEntradaProcesada=1;
+                        foreach($EntradasObtenidas->entry as $Entrada)
+                            {
+/*                                
+                                //Parsea contenido HTML mediante DOM/XML
+                                $Contenido_Entrada=$Entrada->content;
+                                # Crea objeto DOM y carga el contenido
+                                $dom = new DOMDocument();
+                                @$dom->loadHTML("<html><body> $Contenido_Entrada </body></html>");
+                                
+                                $contenidosss= $dom->getElementsByTagName('a');
+                                echo $contenidosss->getAttribute('href');
+                                
+                                //Carga los de tipo enlace solamente
+                                ///$link=$dom->getElementsByTagName('a') ;
+
+                                  //      echo $link->getAttribute('href');
+                                //echo $Contenido_Entrada->$blockquote;
+  */
+                                
+                                $EntradasGitHub[]=@array(Fecha => $Entrada->published, Titulo => $Entrada->title, Enlace => $Entrada->content);
+                                //Cuenta la entrada procesada y se detiene segun las deseadas
+                                $NumEntradaProcesada++;
+                                if($NumEntradaProcesada > $Cantidad)
+                                    break;
+                            }
+                    }
+            }
+        return $EntradasGitHub;
+    }
+
 ?>
 
 <form name="administrar_tablas" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
@@ -187,6 +245,49 @@
         <!-- /.col-lg-4 -->
     </div>
     <!-- /.row -->
+
+
+<?php
+
+    //Obtiene entradas del canal RSS de Practico
+    if (1==2) 
+        {
+            //Llamado a la funcion derivada de SOPA de Practico
+            $EntradasGitHub = ObtenerEntradas_GitHub("unix4you2");
+            //Despliegue de resultados
+
+            //Abre un contenedor (Opcional)
+            abrir_ventana('Ultimas '.count($EntradasGitHub).' Entradas ATOM', 'panel-primary');
+
+            //Encabezados de la tabla
+            echo '
+                <table class="table table-hover table-striped table-bordered btn-xs">
+                    <thead>
+                        <tr>
+                          <th>Titulo</td>
+                          <th>Fecha</td>
+                        </tr>
+                    </thead>
+                    <tbody>';
+                        foreach($EntradasGitHub as $fila):
+                            echo '
+                                <tr>
+                                    <td>'.$fila['Titulo'].'
+                                    
+                                    '.$fila['Enlace'].'
+                                    </td>
+                                    <td>'.$fila['Fecha'].'</td>
+                                </tr>';
+                        endforeach;
+            echo '  </tbody>
+                </table>';
+            //Cierra el contenedor (Obligatorio si se ha abierto alguno)
+            cerrar_ventana();
+
+        }
+
+?>
+
 
 
     <!--SEPARADOR-->
