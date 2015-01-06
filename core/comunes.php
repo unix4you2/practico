@@ -2862,121 +2862,180 @@ function ventana_login()
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="id_registro_datos" value="'.@$registro_datos_formulario["id"].'">
 						';
+                        
+                // Inicio de la generacion de encabezados pestanas
+                //Cuenta las pestanas segun los objetos del form y ademas mira si es solo una con valor vacio (sin pestanas)
+                $consulta_conteo_pestanas=      ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
+                $conteo_pestanas=0;
+                while($registro_conteo_pestanas = @$consulta_conteo_pestanas->fetch())
+                    {
+                        $conteo_pestanas++;
+                        $ultimo_nombre_pestanas=$registro_conteo_pestanas["pestana_objeto"];
+                    }
+                //Presenta barra de navegacion de pestanas si se encuentra al menos una
+                if ($conteo_pestanas>0 && ($ultimo_nombre_pestanas!=""))
+                    {
+                        $consulta_formulario_pestana=   ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
+                        echo '<ul class="nav nav-tabs nav-justified">';  //nav-pills
+                        $estado_activa_primera_pestana=' class="active" ';
+                        $pestana_activa=1;
+                        while($registro_formulario_pestana = @$consulta_formulario_pestana->fetch())
+                            {
+                                $titulo_pestana_formulario=$registro_formulario_pestana["pestana_objeto"];
+                                if ($titulo_pestana_formulario=="") $titulo_pestana_formulario="<i class='fa fa-stack-overflow'></i>";
+                                echo '<li '.$estado_activa_primera_pestana.'><a href="#pestana_formulario_'.$pestana_activa.'" data-toggle="tab">'.$titulo_pestana_formulario.'</a></li>';
+                                //Limpia para las siguientes pestanas
+                                $estado_activa_primera_pestana='';
+                                $pestana_activa++;
+                            }
+                        echo '</ul>';
+                    }
+                // Fin de la generacion de encabezados pestanas
 
-				//Booleana que determina si se debe incluir el javascript de ckeditor
-				$existe_campo_textoformato=0;
+                //Genera las pestanas con su contenido
+                if ($conteo_pestanas>0)
+                    {
+                        $consulta_formulario_pestana=   ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
+                        $estado_activa_primera_pestana='in active';
+                        $pestana_activa=1;
 
-				//DIAGRAMACION DE LA TABLA CON ELEMENTOS DEL FORMULARIO
-				$limite_inferior=-9999; // Peso inferior a tener en cuenta en el query
-				$constante_limite_superior=+9999;
-				$limite_superior=$constante_limite_superior; // Peso superior a tener en cuenta en el query
-				//Busca todos los objetos marcados como fila_unica=1 y agrega un registro mas con el limite superior
-				$consulta_obj_fila_unica=ejecutar_sql("SELECT id,peso,visible FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY peso","$formulario");
-				//Define si debe o no dibujar borde de las celdas
-                $estilo_bordes="table-unbordered";
-                if ($registro_formulario["borde_visible"]==1) $estilo_bordes="table-bordered";
+                        //Inicio de los tab-content
+                        echo '<div class="tab-content">';
+                        while($registro_formulario_pestana = @$consulta_formulario_pestana->fetch())
+                            {
+                                $titulo_pestana_formulario=$registro_formulario_pestana["pestana_objeto"];
+                                //Genera el contenedor de la pestana
+                                echo '
+                                <!-- INICIO de las pestanas No '.$pestana_activa.' -->
+                                    <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="pestana_formulario_'.$pestana_activa.'">';
+                                    
+                                        //Booleana que determina si se debe incluir el javascript de ckeditor
+                                        $existe_campo_textoformato=0;
 
-				echo '<div id="seccion_impresion">';
-				while ($registro_obj_fila_unica = $consulta_obj_fila_unica->fetch())
-					{
-						$limite_superior=$registro_obj_fila_unica["peso"];
-						$ultimo_id=$registro_obj_fila_unica["id"];
-						// Inicia la tabla con los campos
-						echo '
-                            <div class="table-responsive">
-                            <table class="table table-responsive table-unbordered table-condensed btn-xs"><tr>';
-						//Recorre todas las comunas definidas para el formulario buscando objetos
-						for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
-							{
-								//Busca los elementos de la coumna actual del formulario con peso menor o igual al peso del objeto fila_unica de la fila unica_actual pero que no son fila_unica
-								$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND columna=? AND visible=1 AND peso >? AND peso <=? ORDER BY peso","$formulario$_SeparadorCampos_$cl$_SeparadorCampos_$limite_inferior$_SeparadorCampos_$limite_superior");
-								
-									//Inicia columna de formulario
-									echo '<td>';
-									// Crea los campos definidos por cada columna de formulario
-									while ($registro_campos = $consulta_campos->fetch())
-										{
-											//Imprime el campo solamente si no es fila unica, si es fila_unica guarda en una variable para uso posterior
-											if($registro_campos["fila_unica"]=="0")
-												{
-													// Formatea cada campo de acuerdo a su tipo
-													// CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas abajo tambien
-													$tipo_de_objeto=@$registro_campos["tipo"];
-													if ($tipo_de_objeto=="texto_corto") $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-													if ($tipo_de_objeto=="texto_clave") $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-													if ($tipo_de_objeto=="texto_largo") $objeto_formateado = @cargar_objeto_texto_largo($registro_campos,@$registro_datos_formulario);
-													if ($tipo_de_objeto=="texto_formato") { $objeto_formateado = @cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
-													if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = @cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-													if ($tipo_de_objeto=="lista_radio") $objeto_formateado = @cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
-													if ($tipo_de_objeto=="etiqueta") $objeto_formateado = @cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
-													if ($tipo_de_objeto=="url_iframe") $objeto_formateado = @cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
-													if ($tipo_de_objeto=="informe") @cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
-													if ($tipo_de_objeto=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
-													if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
-													if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
-													if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
-													if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
-													//Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
-													if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$valorbase,1);
+                                        //DIAGRAMACION DE LA TABLA CON ELEMENTOS DEL FORMULARIO
+                                        $limite_inferior=-9999; // Peso inferior a tener en cuenta en el query
+                                        $constante_limite_superior=+9999;
+                                        $limite_superior=$constante_limite_superior; // Peso superior a tener en cuenta en el query
+                                        //Busca todos los objetos marcados como fila_unica=1 y agrega un registro mas con el limite superior
+                                        $consulta_obj_fila_unica=ejecutar_sql("SELECT id,peso,visible FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario");
+                                        //Define si debe o no dibujar borde de las celdas
+                                        $estilo_bordes="table-unbordered";
+                                        if ($registro_formulario["borde_visible"]==1) $estilo_bordes="table-bordered";
 
-													//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
-													if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
-														echo $objeto_formateado;
-												}
-											/*
-											else
-												{
-													echo '<tr>
-														<td align="right" valign=top></td>
-														<td valign=top>
-														</td></tr>';
-												}*/
-										}
-									echo '</td>'; //Fin columna de formulario
-							}
-						// Finaliza la tabla con los campos
-                        echo '</tr></table>
-                            </div>';
+                                        while ($registro_obj_fila_unica = $consulta_obj_fila_unica->fetch())
+                                            {
+                                                $limite_superior=$registro_obj_fila_unica["peso"];
+                                                $ultimo_id=$registro_obj_fila_unica["id"];
+                                                // Inicia la tabla con los campos
+                                                echo '
+                                                    <div class="table-responsive">
+                                                    <table class="table table-responsive table-unbordered table-condensed btn-xs"><tr>';
+                                                //Recorre todas las comunas definidas para el formulario buscando objetos
+                                                for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
+                                                    {
+                                                        //Busca los elementos de la coumna actual del formulario con peso menor o igual al peso del objeto fila_unica de la fila unica_actual pero que no son fila_unica
+                                                        $consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND columna=? AND visible=1 AND peso >? AND peso <=? ORDER BY peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario$_SeparadorCampos_$cl$_SeparadorCampos_$limite_inferior$_SeparadorCampos_$limite_superior");
+                                                        
+                                                            //Inicia columna de formulario
+                                                            echo '<td>';
+                                                            // Crea los campos definidos por cada columna de formulario
+                                                            while ($registro_campos = $consulta_campos->fetch())
+                                                                {
+                                                                    //Imprime el campo solamente si no es fila unica, si es fila_unica guarda en una variable para uso posterior
+                                                                    if($registro_campos["fila_unica"]=="0")
+                                                                        {
+                                                                            // Formatea cada campo de acuerdo a su tipo
+                                                                            // CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas abajo tambien
+                                                                            $tipo_de_objeto=@$registro_campos["tipo"];
+                                                                            if ($tipo_de_objeto=="texto_corto") $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
+                                                                            if ($tipo_de_objeto=="texto_clave") $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
+                                                                            if ($tipo_de_objeto=="texto_largo") $objeto_formateado = @cargar_objeto_texto_largo($registro_campos,@$registro_datos_formulario);
+                                                                            if ($tipo_de_objeto=="texto_formato") { $objeto_formateado = @cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
+                                                                            if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = @cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
+                                                                            if ($tipo_de_objeto=="lista_radio") $objeto_formateado = @cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
+                                                                            if ($tipo_de_objeto=="etiqueta") $objeto_formateado = @cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
+                                                                            if ($tipo_de_objeto=="url_iframe") $objeto_formateado = @cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
+                                                                            if ($tipo_de_objeto=="informe") @cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
+                                                                            if ($tipo_de_objeto=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
+                                                                            if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
+                                                                            if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
+                                                                            if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
+                                                                            if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
+                                                                            //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
+                                                                            if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$valorbase,1);
 
-						//Busca datos del registro de fila_unica
-						$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND id=? ","$formulario$_SeparadorCampos_$ultimo_id");
-						$registro_campos = $consulta_campos->fetch();
+                                                                            //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
+                                                                            if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
+                                                                                echo $objeto_formateado;
+                                                                        }
+                                                                    /*
+                                                                    else
+                                                                        {
+                                                                            echo '<tr>
+                                                                                <td align="right" valign=top></td>
+                                                                                <td valign=top>
+                                                                                </td></tr>';
+                                                                        }*/
+                                                                }
+                                                            echo '</td>'; //Fin columna de formulario
+                                                    }
+                                                // Finaliza la tabla con los campos
+                                                echo '</tr></table>
+                                                    </div>';
 
-						//Agrega el campo de fila unica cuando no se trata del agregado de peso 9999
-						if ($registro_campos["visible"]=="1")
-							{
-								//echo '&nbsp;&nbsp;'.$registro_campos["titulo"];
-								// Formatea cada campo de acuerdo a su tipo
-								// CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas arriba tambien
-								echo '<table class="table table-condensed btn-xs '.$estilo_bordes.'"><tr><td>';
-								$tipo_de_objeto=@$registro_campos["tipo"];
-								if ($tipo_de_objeto=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-								if ($tipo_de_objeto=="texto_clave") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-								if ($tipo_de_objeto=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos,@$registro_datos_formulario);
-								if ($tipo_de_objeto=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
-								if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-								if ($tipo_de_objeto=="lista_radio") $objeto_formateado = cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
-								if ($tipo_de_objeto=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
-								if ($tipo_de_objeto=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
-								if ($tipo_de_objeto=="informe") cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
-								if ($tipo_de_objeto=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
-								if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
-								if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
-								if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
-								if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
-								//Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
-								if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$valorbase,1);
+                                                //Busca datos del registro de fila_unica
+                                                $consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND id=? ","$formulario$_SeparadorCampos_$ultimo_id");
+                                                $registro_campos = $consulta_campos->fetch();
 
-								//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
-								if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
-									echo $objeto_formateado;
-								echo '</td></tr></table>';
-							}
+                                                //Agrega el campo de fila unica cuando no se trata del agregado de peso 9999
+                                                if ($registro_campos["visible"]=="1")
+                                                    {
+                                                        //echo '&nbsp;&nbsp;'.$registro_campos["titulo"];
+                                                        // Formatea cada campo de acuerdo a su tipo
+                                                        // CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas arriba tambien
+                                                        echo '<table class="table table-condensed btn-xs '.$estilo_bordes.'"><tr><td>';
+                                                        $tipo_de_objeto=@$registro_campos["tipo"];
+                                                        if ($tipo_de_objeto=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
+                                                        if ($tipo_de_objeto=="texto_clave") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
+                                                        if ($tipo_de_objeto=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos,@$registro_datos_formulario);
+                                                        if ($tipo_de_objeto=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
+                                                        if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
+                                                        if ($tipo_de_objeto=="lista_radio") $objeto_formateado = cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
+                                                        if ($tipo_de_objeto=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
+                                                        if ($tipo_de_objeto=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
+                                                        if ($tipo_de_objeto=="informe") cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
+                                                        if ($tipo_de_objeto=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
+                                                        if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
+                                                        if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
+                                                        if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
+                                                        if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
+                                                        //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
+                                                        if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$valorbase,1);
 
-						//Actualiza limite inferior para siguiente lista de campos
-						$limite_inferior=$registro_obj_fila_unica["peso"];
-					}
-				echo '</div>
+                                                        //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
+                                                        if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
+                                                            echo $objeto_formateado;
+                                                        echo '</td></tr></table>';
+                                                    }
+
+                                                //Actualiza limite inferior para siguiente lista de campos
+                                                $limite_inferior=$registro_obj_fila_unica["peso"];
+                                            }
+
+
+                                echo '
+                                    </div>
+                                <!-- FIN de las pestanas No '.$pestana_activa.'-->';
+                                //Limpia para las siguientes pestanas
+                                $estado_activa_primera_pestana='';
+                                $pestana_activa++;
+                            }
+                        //Fin de los tab-content
+                        echo '
+                        </div>';
+                    } //Fin Si conteo pestanas > 0
+
+				echo '
 				</div> <!-- cierra MARCO_IMPRESION -->';
 
 			//Busca los campos definidos como visilbe=0 (o NO) para agregarlos como hidden
