@@ -2030,7 +2030,7 @@ function ventana_login()
 	function cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 		{
 			global $campobase,$valorbase;
-			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_SeleccioneUno;
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
@@ -2048,7 +2048,7 @@ function ventana_login()
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.= '<select id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" class="form-control" '.$cadena_altura.' >';
+			$salida.= '<select id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" class="selectpicker" '.$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'">';
 
 			// Toma los valores desde la lista de opciones (cuando es estatico)
 			$opciones_lista = explode(",", $registro_campos["lista_opciones"]);

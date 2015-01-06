@@ -449,6 +449,8 @@
 	$MULTILANG_FrmArchivoLink='[Open already uploaded file]';
 	$MULTILANG_FrmCanvasLink='[Open drawing already added]';
 	$MULTILANG_FrmErrorCam='There is an error with the video device.  Please cheack that you have a video device or webcam installed and the you answer Afirmative or Accept in your browser to allow Practico to use the device.';
+    $MULTILANG_FrmPestana='Forms tab title in which the control will be published';
+    $MULTILANG_FrmDesPestana='Assign the tab for this object in the form.  Practico automatically creates tabs according to the values entered in each object.';
 
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';

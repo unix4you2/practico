@@ -82,6 +82,7 @@
     <script type="text/javascript" src="inc/bootstrap/js/plugins/transition.js"></script>
     <script type="text/javascript" src="inc/bootstrap/js/plugins/collapse.js"></script>
     <script type="text/javascript" src="inc/bootstrap/js/plugins/slider/bootstrap-slider.js"></script>
+    <script type="text/javascript" src="inc/bootstrap/js/plugins/select/bootstrap-select.min.js"></script>
     <script src="inc/bootstrap/js/plugins/metisMenu/metisMenu.min.js"></script>
 
     <!-- Plugins JavaScript requeridos por DateTimePicker -->
@@ -151,13 +152,26 @@
     </script>
 
     <?php
+        //Carga las funciones activadoras de DatePicker (si fue encontrado algun campo de ese tipo)
+        if (@$funciones_activacion_datepickers!="")
+            echo '<script type="text/javascript">'.$funciones_activacion_datepickers.'</script>';
+    ?>
+
+    <?php
+        //Carga las funciones activadoras de Deslizadores (si fue encontrado algun campo de ese tipo)
+        if (@$funciones_activacion_sliders!="")
+            echo '<script type="text/javascript">'.$funciones_activacion_sliders.'</script>';
+    ?>
+
+    <?php
         // Calcula tiempos de ejecucion del script
         $tiempo_final_script = obtener_microtime();
-        $tiempo_total_script = $tiempo_final_script - $tiempo_inicio_script;
+        $tiempo_total_script = $tiempo_final_script - @$tiempo_inicio_script;
         $tiempo_total_script = round($tiempo_total_script,3);
     ?>
+
     <script language="JavaScript">
-        //Actualiza marco con el tiempo de carga
+        //Actualiza marco con el tiempo de carga (inclusiones y PHP del lado del servidor)
         $('#PCO_TCarga').text("<?php echo $tiempo_total_script; ?>");
     </script>
 
@@ -174,52 +188,12 @@
             echo $PrefijoGA.$CodigoGoogleAnalytics.$PosfijoGA;	
     ?>
 
-    <?php
-        //Carga las funciones activadoras de DatePicker (si fue encontrado algun campo de ese tipo)
-        if (@$funciones_activacion_datepickers!="")
-            echo '<script type="text/javascript">'.$funciones_activacion_datepickers.'</script>';
-    ?>
-
-    <?php
-        //Carga las funciones activadoras de Deslizadores (si fue encontrado algun campo de ese tipo)
-        if (@$funciones_activacion_sliders!="")
-            echo '<script type="text/javascript">'.$funciones_activacion_sliders.'</script>';
-    ?>
-
-            <input type="text" class="form-control" value="4" id="sl1" >
-
-	<script>
-	if (top.location != location) {
-    top.location.href = document.location.href ;
-  }
-		$(function(){
-			window.prettyPrint && prettyPrint();
-
-        $('#sl1').slider({
-          formater: function(value) {
-            return 'Current value: '+value;
-          }
-        });
-        $('#sl2').slider();
-
-        var RGBChange = function() {
-          $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')')
-        };
-
-        var r = $('#R').slider()
-                .on('slide', RGBChange)
-                .data('slider');
-        var g = $('#G').slider()
-                .on('slide', RGBChange)
-                .data('slider');
-        var b = $('#B').slider()
-                .on('slide', RGBChange)
-                .data('slider');
-
-        $('#eg input').slider();
-    });
-  </script>
-
+    <script language="JavaScript">
+        //Actualiza marco con el tiempo de carga JavaScript (tiempo de carga y transferencia)
+        var tiempo_final_javascript = (new Date()).getTime();
+        var tiempo_final_javascript_segs = (tiempo_final_javascript-tiempo_inicio_javascript)/1000;
+        $('#PCO_TCargaJS').text(tiempo_final_javascript_segs);
+    </script>
 
 </body>
 </html>

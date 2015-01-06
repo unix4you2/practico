@@ -446,6 +446,8 @@
 	$MULTILANG_FrmArchivoLink='[Abrir archivo ya cargado]';
 	$MULTILANG_FrmCanvasLink='[Ver grafico ya cargado]';
 	$MULTILANG_FrmErrorCam='Error en el dispositivo de video.  Verifique que cuenta con una camara instalada y que ha hecho clic en Permitir o aceptar para permitir a Practico utilizarla.';
+    $MULTILANG_FrmPestana='T&iacute;tulo de la Pesta&ntilde;a a que pertenece en el formulario';
+    $MULTILANG_FrmDesPestana='Indica la pesta&ntilde;a a la que pertenece el elemento dentro del formulario.  Practico genera automaticamente las pesta&ntilde;as de acuerdo a los valores ingresados en cada objeto.';
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

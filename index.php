@@ -212,5 +212,3 @@
     if (@$Presentar_FullScreen!=1) {
         include "core/marco_abajo.php";
     }
-
-

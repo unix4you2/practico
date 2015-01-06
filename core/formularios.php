@@ -696,23 +696,23 @@ if ($PCO_Accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(35);
+					OcultarCampos(36);
 					// Muestra campos segun tipo de objeto
-					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,14,17,25");
-					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25");
-					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17");
-					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17");
-					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,15,17,18,19,20,35");
-					if (tipo_objeto_activo=="lista_radio") VisualizarCampos("1,2,7,8,9,10,17,18,19,20,35");
-					if (tipo_objeto_activo=="etiqueta")   VisualizarCampos("9,17,21");
-					if (tipo_objeto_activo=="url_iframe")   VisualizarCampos("9,14,15,17,22,24");
-					if (tipo_objeto_activo=="informe")   VisualizarCampos("9,17,23,24");
-					if (tipo_objeto_activo=="deslizador")   VisualizarCampos("1,2,4,7,8,9,17,26");
-					if (tipo_objeto_activo=="campo_etiqueta")   VisualizarCampos("1,2,4,9,17,14,15,27");
-					if (tipo_objeto_activo=="archivo_adjunto")   VisualizarCampos("1,2,7,8,9,17,28,29");
-					if (tipo_objeto_activo=="objeto_canvas")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,30,31");
-					if (tipo_objeto_activo=="objeto_camara")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,31");
-					if (tipo_objeto_activo=="form_consulta")   VisualizarCampos("9,17,24,32,33,34");
+					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,14,17,25,36");
+					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25,36");
+					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17,36");
+					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17,36");
+					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,15,17,18,19,20,35,36");
+					if (tipo_objeto_activo=="lista_radio") VisualizarCampos("1,2,7,8,9,10,17,18,19,20,35,36");
+					if (tipo_objeto_activo=="etiqueta")   VisualizarCampos("9,17,21,36");
+					if (tipo_objeto_activo=="url_iframe")   VisualizarCampos("9,14,15,17,22,24,36");
+					if (tipo_objeto_activo=="informe")   VisualizarCampos("9,17,23,24,36");
+					if (tipo_objeto_activo=="deslizador")   VisualizarCampos("1,2,4,7,8,9,17,26,36");
+					if (tipo_objeto_activo=="campo_etiqueta")   VisualizarCampos("1,2,4,9,17,14,15,27,36");
+					if (tipo_objeto_activo=="archivo_adjunto")   VisualizarCampos("1,2,7,8,9,17,28,29,36");
+					if (tipo_objeto_activo=="objeto_canvas")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,30,31,36");
+					if (tipo_objeto_activo=="objeto_camara")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,31,36");
+                    if (tipo_objeto_activo=="form_consulta")   VisualizarCampos("9,17,24,32,33,34,36");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -745,30 +745,30 @@ if ($PCO_Accion=="editar_formulario")
 
                         <label for="tipo"><?php echo $MULTILANG_FrmTipoObjeto; ?>:</label>
                         <div class="form-group input-group">
-                            <select  id="tipo" name="tipo" class="form-control" OnChange="CambiarCamposVisibles(this.options[this.selectedIndex].value);">
+                            <select  id="tipo" name="tipo" class="selectpicker"  data-style="btn-info" OnChange="CambiarCamposVisibles(this.options[this.selectedIndex].value);">
                                 <option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                 <optgroup label="<?php echo $MULTILANG_FrmTipoTit1; ?>">
-                                    <option value="texto_corto"     <?php if (@$registro_campo_editar["tipo"]=="texto_corto")     echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo1; ?></option>
-                                    <option value="texto_clave"     <?php if (@$registro_campo_editar["tipo"]=="texto_clave")     echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo10; ?></option>
-                                    <option value="texto_largo"     <?php if (@$registro_campo_editar["tipo"]=="texto_largo")     echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo2; ?></option>
-                                    <option value="texto_formato"   <?php if (@$registro_campo_editar["tipo"]=="texto_formato")   echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo3; ?></option>
-                                    <option value="lista_seleccion" <?php if (@$registro_campo_editar["tipo"]=="lista_seleccion") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo4; ?></option>
-                                    <option value="lista_radio"     <?php if (@$registro_campo_editar["tipo"]=="lista_radio")     echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo5; ?></option>
-                                    <option value="deslizador"      <?php if (@$registro_campo_editar["tipo"]=="deslizador")      echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo9; ?></option>
-                                    <option value="campo_etiqueta"  <?php if (@$registro_campo_editar["tipo"]=="campo_etiqueta")  echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo11; ?></option>
+                                    <option value="texto_corto"     data-icon="glyphicon-log-in"            <?php if (@$registro_campo_editar["tipo"]=="texto_corto")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo1; ?></option>
+                                    <option value="texto_clave"     data-icon="glyphicon-eye-close"         <?php if (@$registro_campo_editar["tipo"]=="texto_clave")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo10; ?></option>
+                                    <option value="texto_largo"     data-icon="glyphicon-text-width"        <?php if (@$registro_campo_editar["tipo"]=="texto_largo")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo2; ?></option>
+                                    <option value="texto_formato"   data-icon="glyphicon-font"              <?php if (@$registro_campo_editar["tipo"]=="texto_formato")   echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo3; ?></option>
+                                    <option value="lista_seleccion" data-icon="glyphicon-ok"                <?php if (@$registro_campo_editar["tipo"]=="lista_seleccion") echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo4; ?></option>
+                                    <option value="lista_radio"     data-icon="glyphicon-record"            <?php if (@$registro_campo_editar["tipo"]=="lista_radio")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo5; ?></option>
+                                    <option value="deslizador"      data-icon="glyphicon-resize-horizontal" <?php if (@$registro_campo_editar["tipo"]=="deslizador")      echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo9; ?></option>
+                                    <option value="campo_etiqueta"  data-icon="glyphicon-tags"              <?php if (@$registro_campo_editar["tipo"]=="campo_etiqueta")  echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo11; ?></option>
                                 </optgroup>
                                 <optgroup label="<?php echo $MULTILANG_FrmTipoTit4; ?>">
-                                    <option value="archivo_adjunto" <?php if (@$registro_campo_editar["tipo"]=="archivo_adjunto") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo12; ?></option>
-                                    <option value="objeto_canvas" <?php if (@$registro_campo_editar["tipo"]=="objeto_canvas") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo13; ?></option>
-                                    <option value="objeto_camara" <?php if (@$registro_campo_editar["tipo"]=="objeto_camara") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo14; ?></option>
+                                    <option value="archivo_adjunto" data-icon="glyphicon-file"              <?php if (@$registro_campo_editar["tipo"]=="archivo_adjunto") echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo12; ?></option>
+                                    <option value="objeto_canvas"   data-icon="glyphicon-picture"           <?php if (@$registro_campo_editar["tipo"]=="objeto_canvas") echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo13; ?></option>
+                                    <option value="objeto_camara"   data-icon="glyphicon-facetime-video"    <?php if (@$registro_campo_editar["tipo"]=="objeto_camara") echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo14; ?></option>
                                 </optgroup>
                                 <optgroup label="<?php echo $MULTILANG_FrmTipoTit2; ?>">
-                                    <option value="etiqueta"        <?php if (@$registro_campo_editar["tipo"]=="etiqueta")        echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo6; ?></option>
-                                    <option value="url_iframe"      <?php if (@$registro_campo_editar["tipo"]=="url_iframe")      echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo7; ?></option>
+                                    <option value="etiqueta"        data-icon="glyphicon-pencil"            <?php if (@$registro_campo_editar["tipo"]=="etiqueta")        echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo6; ?></option>
+                                    <option value="url_iframe"      data-icon="glyphicon-globe"            <?php if (@$registro_campo_editar["tipo"]=="url_iframe")      echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo7; ?></option>
                                 </optgroup>
                                 <optgroup label="<?php echo $MULTILANG_FrmTipoTit3; ?>">
-                                    <option value="informe"         <?php if (@$registro_campo_editar["tipo"]=="informe")         echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo8; ?></option>
-                                    <option value="form_consulta"	  <?php if (@$registro_campo_editar["tipo"]=="form_consulta")   echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmTipo15; ?></option>
+                                    <option value="informe"         data-icon="glyphicon-list-alt" <?php if (@$registro_campo_editar["tipo"]=="informe")         echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo8; ?></option>
+                                    <option value="form_consulta"	  data-icon="glyphicon-search" <?php if (@$registro_campo_editar["tipo"]=="form_consulta")   echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo15; ?></option>
                                 </optgroup>
                             </select>
                             <span class="input-group-addon">
@@ -1385,6 +1385,14 @@ if ($PCO_Accion=="editar_formulario")
                             </div>
 						</div>
 
+						<div id='campo36' style="display:none;">
+                            <div class="form-group input-group">
+                                <input type="text" name="pestana_objeto" class="form-control" value="<?php echo @$registro_campo_editar["pestana_objeto"]; ?>" placeholder="<?php echo $MULTILANG_FrmPestana; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_FrmDesPestana; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
+                            </div>
+						</div>
 
 					<?php
 						//Despues de agregar todos los parametros de campos, Si se detecta que es edicion de un campo se llama a la funcion de visualizacion de campos especificos

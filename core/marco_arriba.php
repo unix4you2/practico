@@ -50,6 +50,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <script type="text/javascript">
+        //Tiempo inicial de carga
+        var tiempo_inicio_javascript = (new Date()).getTime();
+    </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -74,6 +78,7 @@
     <link href="inc/bootstrap/css/plugins/social-buttons.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/slider/slider.css" rel="stylesheet">
+    <link href="inc/bootstrap/css/plugins/select/bootstrap-select.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- CSS Personalizado (Plantilla y Practico) -->
@@ -303,7 +308,9 @@
                             // Muestra la accion actual si el usuario es administrador y la accion no es vacia - Sirve como guia a la hora de crear objetos
                             if(@$Login_usuario=="admin" && $PCO_Accion!="")
                                 {
-                                    echo "<strong><i class='fa fa-cog fa-fw'></i> $MULTILANG_Accion:</strong> $PCO_Accion <br><strong><i class='fa fa-clock-o fa-fw'></i> $MULTILANG_TiempoCarga:</strong> <div id='PCO_TCarga' name='PCO_TCarga' style='display: inline-block;'></div> s<br>";
+                                    echo "<strong><i class='fa fa-cog fa-fw'></i> $MULTILANG_Accion:</strong> $PCO_Accion <br>";
+                                    echo "<strong><i class='fa fa-clock-o fa-fw'></i> $MULTILANG_TiempoCarga:</strong> <div id='PCO_TCarga' name='PCO_TCarga' style='display: inline-block;'></div> s<br>";
+                                    echo "<strong><i class='fa fa-clock-o fa-fw'></i> $MULTILANG_TiempoCarga (JS):</strong> <div id='PCO_TCargaJS' name='PCO_TCargaJS' style='display: inline-block;'></div> s<br>";
                                     echo "<strong><i class='fa fa-file-code-o fa-fw'></i> Inclusiones:</strong> ".(count(get_included_files()))."<hr>"; // Retorna arreglo con cantidad de archivos incluidos
                                 }
                         ?>
