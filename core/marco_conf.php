@@ -55,7 +55,7 @@
                                 <div class="tab-pane fade in active" id="basedatos-tab">
                                     <label for="MotorBDNEW"><?php echo $MULTILANG_TipoMotor; ?>:</label>
                                     <div class="form-group input-group">
-                                        <select id="MotorBDNEW" name="MotorBDNEW" class="form-control" >
+                                        <select id="MotorBDNEW" name="MotorBDNEW" class="selectpicker" >
                                             <option value="mysql"	 <?php if ($MotorBD=="mysql") echo "SELECTED"; ?> >MySQL - MariaDB (3.x/4.x/5.x)</option>
                                             <option value="pgsql"	 <?php if ($MotorBD=="pgsql") echo "SELECTED"; ?> >PostgreSQL</option>
                                             <option value="sqlite"	 <?php if ($MotorBD=="sqlite") echo "SELECTED"; ?> >SQLite v2 - SQLite v3</option>
@@ -137,7 +137,7 @@
                                 <div class="tab-pane fade" id="configvarias-tab">
                                     <label for="ZonaHorariaNEW"><?php echo $MULTILANG_ZonaHoraria; ?>:</label>
                                     <div class="form-group input-group">
-                                        <select id="ZonaHorariaNEW" name="ZonaHorariaNEW" class="form-control" >
+                                        <select id="ZonaHorariaNEW" name="ZonaHorariaNEW" class="selectpicker" >
                                             <?php
                                                 $archivo_origen="inc/practico/zonas_horarias.txt";
                                                 $archivo = fopen($archivo_origen, "r");
@@ -161,7 +161,7 @@
 
                                     <label for="IdiomaPredeterminadoNEW"><?php echo $MULTILANG_IdiomaPredeterminado; ?>:</label>
                                     <div class="form-group input-group">
-                                        <select id="IdiomaPredeterminadoNEW" name="IdiomaPredeterminadoNEW" class="form-control" >
+                                        <select id="IdiomaPredeterminadoNEW" name="IdiomaPredeterminadoNEW" class="selectpicker" >
                                             <?php
                                             // Incluye archivos de idioma para ser seleccionados
                                             $path_idiomas="inc/practico/idiomas/";
@@ -189,7 +189,7 @@
 
                                     <label for="CaracteresCaptchaNEW"><?php echo $MULTILANG_CaracteresCaptcha; ?>:</label>
                                     <div class="form-group input-group">
-                                        <select id="CaracteresCaptchaNEW" name="CaracteresCaptchaNEW" class="form-control" >
+                                        <select id="CaracteresCaptchaNEW" name="CaracteresCaptchaNEW" class="selectpicker" >
                                             <option value="1" <?php if ($CaracteresCaptcha=="1") echo "SELECTED"; ?> >1</option>
                                             <option value="2" <?php if ($CaracteresCaptcha=="2") echo "SELECTED"; ?> >2</option>
                                             <option value="3" <?php if ($CaracteresCaptcha=="3") echo "SELECTED"; ?> >3</option>
@@ -204,7 +204,7 @@
 
                                     <label for="ModoDepuracionNEW"><?php echo $MULTILANG_ModoDepuracion; ?>:</label>
                                     <div class="form-group input-group">
-                                        <select id="ModoDepuracionNEW" name="ModoDepuracionNEW" class="form-control" >
+                                        <select id="ModoDepuracionNEW" name="ModoDepuracionNEW" class="selectpicker" >
                                             <option value="1" <?php if ($ModoDepuracion=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Encendido; ?></option>
                                             <option value="0" <?php if ($ModoDepuracion=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_Apagado; ?></option>
                                         </select>
@@ -215,7 +215,7 @@
 
                                     <label for="BuscarActualizacionesNEW"><?php echo $MULTILANG_BuscarActual; ?>:</label>
                                     <div class="form-group input-group">
-                                        <select id="BuscarActualizacionesNEW" name="BuscarActualizacionesNEW" class="form-control" >
+                                        <select id="BuscarActualizacionesNEW" name="BuscarActualizacionesNEW" class="selectpicker" >
                                             <option value="1" <?php if (@$BuscarActualizaciones=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Encendido; ?></option>
                                             <option value="0" <?php if (@$BuscarActualizaciones=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_Apagado; ?></option>
                                         </select>
@@ -247,7 +247,7 @@
 
                                     <label for="Auth_TipoMotorNEW"><?php echo $MULTILANG_Tipo; ?>:</label>
                                     <div class="form-group input-group">
-                                        <select id="Auth_TipoMotorNEW" name="Auth_TipoMotorNEW" class="form-control" >
+                                        <select id="Auth_TipoMotorNEW" name="Auth_TipoMotorNEW" class="selectpicker" >
                                             <option value="practico" <?php if ($Auth_TipoMotor=="practico") echo "SELECTED"; ?> ><?php echo $MULTILANG_AuthPractico; ?></option>
                                             <option value="ldap" <?php if ($Auth_TipoMotor=="ldap") echo "SELECTED"; ?> ><?php echo $MULTILANG_AuthLDAP; ?></option>
                                         </select>
@@ -258,7 +258,7 @@
 
                                     <label for="Auth_ProtoTransporteNEW"><?php echo $MULTILANG_ProtoTransporte; ?>:</label>
                                     <div class="form-group input-group">
-                                        <select id="Auth_ProtoTransporteNEW" name="Auth_ProtoTransporteNEW" class="form-control" >
+                                        <select id="Auth_ProtoTransporteNEW" name="Auth_ProtoTransporteNEW" class="selectpicker" >
                                             <option value="" <?php if (@$Auth_ProtoTransporte=="") echo "SELECTED"; ?> ><?php echo $MULTILANG_ProtoTransAUTO; ?></option>
                                             <option value="http" <?php if (@$Auth_ProtoTransporte=="http") echo "SELECTED"; ?> ><?php echo $MULTILANG_ProtoTransHTTP; ?></option>
                                             <option value="https" <?php if (@$Auth_ProtoTransporte=="https") echo "SELECTED"; ?> ><?php echo $MULTILANG_ProtoTransHTTPS; ?></option>
@@ -273,7 +273,7 @@
 
                                     <label for="Auth_TipoEncripcionNEW"><?php echo $MULTILANG_AlgoritmoCripto; ?>:</label>
                                     <div class="form-group input-group">
-                                        <select id="Auth_TipoEncripcionNEW" name="Auth_TipoEncripcionNEW" class="form-control" >
+                                        <select id="Auth_TipoEncripcionNEW" name="Auth_TipoEncripcionNEW" class="selectpicker" >
                                             <option  <?php if ($Auth_TipoEncripcion=="plano") echo "SELECTED"; ?> value="plano">Texto plano/Plain text</option>
                                             <option  <?php if ($Auth_TipoEncripcion=="md5") echo "SELECTED"; ?> value="md5">MD5</option>
                                             <option  <?php if ($Auth_TipoEncripcion=="md4") echo "SELECTED"; ?> value="md4">MD4</option>

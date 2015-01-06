@@ -149,7 +149,7 @@
 
                                     <label for="motor_federado"><?php echo $MULTILANG_MotorBD; ?>:</label>
                                     <div class="form-group input-group">
-                                        <select id="motor_federado" name="motor_federado" class="form-control" >
+                                        <select id="motor_federado" name="motor_federado" class="selectpicker" >
                                             <option value="mysql"	 <?php if (@$parametros["motor_federado"]=="mysql") echo "SELECTED"; ?> >MySQL - MariaDB (3.x/4.x/5.x)</option>
                                             <option value="pgsql"	 <?php if (@$parametros["motor_federado"]=="pgsql") echo "SELECTED"; ?> >PostgreSQL</option>
                                             <option value="sqlite"	 <?php if (@$parametros["motor_federado"]=="sqlite") echo "SELECTED"; ?> >SQLite v2 - SQLite v3</option>
@@ -188,7 +188,7 @@
                                     
                                     <label for="encripcion_federada"><?php echo $MULTILANG_AlgoritmoCripto; ?>:</label>
                                     <div class="form-group input-group">
-                                        <select id="encripcion_federada" name="encripcion_federada" class="form-control" >
+                                        <select id="encripcion_federada" name="encripcion_federada" class="selectpicker" >
                                             <option  <?php if (@$parametros["encripcion_federada"]=="plano") echo "SELECTED"; ?> value="plano">Texto plano/Plain text</option>
                                             <option  <?php if (@$parametros["encripcion_federada"]=="md5") echo "SELECTED"; ?> value="md5">MD5</option>
                                             <option  <?php if (@$parametros["encripcion_federada"]=="md4") echo "SELECTED"; ?> value="md4">MD4</option>

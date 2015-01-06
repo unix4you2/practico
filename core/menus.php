@@ -48,7 +48,7 @@ function selector_iconos_awesome()
 ?>
 
             <!-- Modal Selector de iconos -->
-            <div class="modal fade" id="myModalSelectorIconos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade modal-wide" id="myModalSelectorIconos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -58,6 +58,31 @@ function selector_iconos_awesome()
                   <div class="modal-body mdl-primary">
 
                     <center><?php echo $MULTILANG_MnuHlpAwesome; ?></center><hr>
+                    
+                    <table class="table table-responsive table-unbordered btn-xs">
+                        <tr>
+                            <td>GlyphIcon</td>
+                            <td>IonIcon</td>
+                            <td>FontAwesome</td>
+                            <td>WeatherIcon</td>
+                            <td>MapIcon</td>
+                            <td>OctIcon</td>
+                            <td>TypIcon</td>
+                            <td>ElusiveIcon</td>
+                        </tr>
+                        <tr>
+                            <td><button id="lib_glyphicon" class="btn btn-default" data-iconset="glyphicon" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
+                            <td><button id="lib_ionicon" class="btn btn-default" data-iconset="ionicon" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
+                            <td><button id="lib_fontawesome" class="btn btn-default" data-iconset="fontawesome" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
+                            <td><button id="lib_weathericon" class="btn btn-default" data-iconset="weathericon" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
+                            <td><button id="lib_mapicon" class="btn btn-default" data-iconset="mapicon" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
+                            <td><button id="lib_octicon" class="btn btn-default" data-iconset="octicon" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
+                            <td><button id="lib_typicon" class="btn btn-default" data-iconset="typicon" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
+                            <td><button id="lib_elusiveicon" class="btn btn-default" data-iconset="elusiveicon" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
+                        </tr>
+                    </table>
+
+
 
 			<?php
             /*
@@ -657,7 +682,7 @@ if ($PCO_Accion=="administrar_menu")
 					{
 						echo '<tr>
 								<td>'.$registro["id"].'</td>
-								<td><img src="img/'.$registro["imagen"].'" border=0 alt="" valign="absmiddle" align="absmiddle" width="14" height="13" ></td>
+								<td><i class="'.$registro["imagen"].'"></i></td>
 								<td><strong>'.$registro["texto"].'</strong></td>
 								<td>'.$registro["comando"].'</td>
 								<td align="center">

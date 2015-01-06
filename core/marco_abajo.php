@@ -84,6 +84,16 @@
     <script type="text/javascript" src="inc/bootstrap/js/plugins/slider/bootstrap-slider.js"></script>
     <script type="text/javascript" src="inc/bootstrap/js/plugins/select/bootstrap-select.min.js"></script>
     <script src="inc/bootstrap/js/plugins/metisMenu/metisMenu.min.js"></script>
+    <!-- Bootstrap-Iconpicker Fuentes de iconos -->
+    <script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.2.0.min.js"></script>
+    <script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-glyphicon.min.js"></script>
+    <script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-ionicon-1.5.2.min.js"></script>
+    <script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-octicon-2.1.2.min.js"></script>
+    <script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-typicon-2.0.6.min.js"></script>
+    <script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-weathericon-1.2.0.min.js"></script>
+    <!--<script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-elusiveicon-2.0.0.min.js"></script>-->
+    <!--<script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-mapicon-2.1.0.min.js"></script>-->
+    <script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/bootstrap-iconpicker.min.js"></script>
 
     <!-- Plugins JavaScript requeridos por DateTimePicker -->
     <script src="inc/bootstrap/js/plugins/datepicker/bootstrap-datetimepicker.min.js"></script>
@@ -174,6 +184,42 @@
         //Actualiza marco con el tiempo de carga (inclusiones y PHP del lado del servidor)
         $('#PCO_TCarga').text("<?php echo $tiempo_total_script; ?>");
     </script>
+
+    <?php
+        //Si se requiere selector de iconos genera los eventos
+        if (@$PCO_Accion=="administrar_menu" || @$PCO_Accion=="detalles_menu")
+            {
+    ?>
+        <script language="JavaScript">
+            //Crea evento para el selector de iconos (cuando aplica)
+            $('#lib_glyphicon').iconpicker().on('change', function(e) {
+                document.datos.imagen.value='glyphicon '+e.icon;
+            });
+            $('#lib_ionicon').iconpicker().on('change', function(e) {
+                document.datos.imagen.value='fa '+e.icon;
+            });
+            $('#lib_fontawesome').iconpicker().on('change', function(e) {
+                document.datos.imagen.value='fa '+e.icon;
+            });
+            $('#lib_weathericon').iconpicker().on('change', function(e) {
+                document.datos.imagen.value='wi fa '+e.icon;
+            });
+            $('#lib_mapicon').iconpicker().on('change', function(e) {
+                document.datos.imagen.value=e.icon;
+            });
+            $('#lib_octicon').iconpicker().on('change', function(e) {
+                document.datos.imagen.value='octicon '+e.icon;
+            });
+            $('#lib_typicon').iconpicker().on('change', function(e) {
+                document.datos.imagen.value='typcn fa '+e.icon;
+            });
+            $('#lib_elusiveicon').iconpicker().on('change', function(e) {
+                document.datos.imagen.value=e.icon;
+            });
+        </script>
+    <?php
+            } //Fin de eventos para selector de iconos
+    ?>
 
     <?php
         // Estadisticas de uso anonimo con GABeacon

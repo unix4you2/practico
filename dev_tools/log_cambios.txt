@@ -22,12 +22,17 @@ core/comunes.php
 core/formularios.php
 core/marco_abajo.php
 core/marco_arriba.php
+core/marco_conf.php
+core/marco_param.php
+core/menus.php
 core/monitoreo.php
 inc/bootstrap/css/practico.css
 inc/bootstrap/css/plugins/datepicker/*
+inc/bootstrap/css/plugins/iconpicker/*
 inc/bootstrap/css/plugins/slider/*
 inc/bootstrap/css/plugins/select/*
 inc/bootstrap/js/plugins/datepicker/*
+inc/bootstrap/js/plugins/iconpicker/*
 inc/bootstrap/js/plugins/collapse.js
 inc/bootstrap/js/plugins/transition.js
 inc/bootstrap/js/plugins/moment/*
@@ -37,6 +42,12 @@ inc/bootstrap/less/datepicker/*
 inc/bootstrap/less/slider/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
+inc/elusive-iconfont/*
+inc/ionicons/*
+inc/map-icons/*
+inc/octicons/*
+inc/typicons/*
+inc/weather-icons/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -53,6 +64,13 @@ LogCambios="
 * Added: Controles tipo lista de selección han sido preparados para bootstrap, estilos y búsquedas en caliente.
 * Added: Funcionalidad de pestañas automáticas para objetos de formularios
 * Added: Además del tiempo de carga del lado del servidor ahora se presenta el tiempo de carga del lado del cliente mediante JS
+* Added: Libreria IonIcons (602 iconos)
+* Added: Libreria Weather Icons (124 iconos)
+* Added: Libreria Map Icons (170 iconos)
+* Added: Libreria Oct Icons (176 iconos)
+* Added: Libreria Typ Icons (336 iconos)
+* Added: Libreria Elusive Icons (299 iconos)
+* Added: Picker de iconos con soporte para más de 2480 iconos repartidos en diferentes librerías
 * Fixed: Lanzamiento de ventana de monitoreo con accion incorrecta.  Igual su proceso de autollamado.
 * Fixed: Tester: [Ricardo Beltran] Botones de búsqueda en campos y de operaciones diferentes a la adición no operan correctamente sobre Forms
 * Enhan: Reubicación de funciones de conteo de tiempos
