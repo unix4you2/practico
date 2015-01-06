@@ -56,6 +56,7 @@ LogCambios="
 * Fixed: Lanzamiento de ventana de monitoreo con accion incorrecta.  Igual su proceso de autollamado.
 * Fixed: Tester: [Ricardo Beltran] Botones de búsqueda en campos y de operaciones diferentes a la adición no operan correctamente sobre Forms
 * Enhan: Reubicación de funciones de conteo de tiempos
+* Enhan: Limpieza del instalador, ya no se requieren skins
 "
 
 ########################################################################
