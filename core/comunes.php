@@ -2212,6 +2212,10 @@ function ventana_login()
 			$tipo_entrada="hidden";
 			// Muestra el campo
 			//$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor.'" >';
+
+            //Agrega marco bootstrap antes de devolver contenidos
+            $salida='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>'.
+            '<div id="'.$registro_campos["campo"].'">'.$salida.'</div>';
 			return $salida;
 		}
 
@@ -2852,8 +2856,7 @@ function ventana_login()
 					mensaje($registro_formulario["ayuda_titulo"],$registro_formulario["ayuda_texto"],'100%',$imagen_ayuda,'alert alert-info alert-dismissible');
 
 				//Inicia el formulario de datos
-				echo '
-					<div id="MARCO_IMPRESION">';
+				echo '<div id="MARCO_IMPRESION">';
 				
 				//Si se quiere anular el formulario y su accion cuando se trata de un sub-formulario de consulta
 				if (!$anular_form)
@@ -2908,6 +2911,7 @@ function ventana_login()
                                 echo '
                                 <!-- INICIO de las pestanas No '.$pestana_activa.' -->
                                     <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="pestana_formulario_'.$pestana_activa.'">';
+                                    
                                     
                                         //Booleana que determina si se debe incluir el javascript de ckeditor
                                         $existe_campo_textoformato=0;
@@ -3031,12 +3035,10 @@ function ventana_login()
                                 $pestana_activa++;
                             }
                         //Fin de los tab-content
-                        echo '
-                        </div>';
+                        echo '</div>';
                     } //Fin Si conteo pestanas > 0
 
-				echo '
-				</div> <!-- cierra MARCO_IMPRESION -->';
+				echo '</div> <!-- cierra MARCO_IMPRESION -->';
 
 			//Busca los campos definidos como visilbe=0 (o NO) para agregarlos como hidden
 			$consulta_ocultos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=0 ","$formulario");
@@ -3106,6 +3108,7 @@ function ventana_login()
 							//Si no se especifica un estilo para el boton entonces se usa el predeterminado
                             $estilo_basico_boton="btn btn-default";
                             echo '<input type="'.$tipo_boton.'"  class="'.$estilo_basico_boton.' '.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.@$cadena_javascript.' >';
+                            echo '&nbsp;&nbsp;'; //Agrega espacio temporal entre controles
 						}
                     echo '</div>';
 					cerrar_barra_estado();
