@@ -127,6 +127,7 @@ CREATE TABLE core_formulario_objeto (
   formulario_campo_foraneo varchar(250) default '',
   condicion_filtrado_listas varchar(250) default '',
   pestana_objeto varchar(250) default '',
+  personalizacion_tag text,
   PRIMARY KEY  (id)
 );
 

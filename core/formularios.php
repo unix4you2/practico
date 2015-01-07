@@ -696,20 +696,20 @@ if ($PCO_Accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(36);
+					OcultarCampos(37);
 					// Muestra campos segun tipo de objeto
-					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,14,17,25,36");
-					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25,36");
-					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17,36");
-					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17,36");
-					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,15,17,18,19,20,35,36");
-					if (tipo_objeto_activo=="lista_radio") VisualizarCampos("1,2,7,8,9,10,17,18,19,20,35,36");
+					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,14,17,25,36,37");
+					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25,36,37");
+					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17,36,37");
+					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17,36,37");
+					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,15,17,18,19,20,35,36,37");
+					if (tipo_objeto_activo=="lista_radio") VisualizarCampos("1,2,7,8,9,10,17,18,19,20,35,36,37");
 					if (tipo_objeto_activo=="etiqueta")   VisualizarCampos("9,17,21,36");
-					if (tipo_objeto_activo=="url_iframe")   VisualizarCampos("9,14,15,17,22,24,36");
+					if (tipo_objeto_activo=="url_iframe")   VisualizarCampos("9,14,15,17,22,24,36,37");
 					if (tipo_objeto_activo=="informe")   VisualizarCampos("9,17,23,24,36");
-					if (tipo_objeto_activo=="deslizador")   VisualizarCampos("1,2,4,7,8,9,17,26,36");
+					if (tipo_objeto_activo=="deslizador")   VisualizarCampos("1,2,4,7,8,9,17,26,36,37");
 					if (tipo_objeto_activo=="campo_etiqueta")   VisualizarCampos("1,2,4,9,17,14,15,27,36");
-					if (tipo_objeto_activo=="archivo_adjunto")   VisualizarCampos("1,2,7,8,9,17,28,29,36");
+					if (tipo_objeto_activo=="archivo_adjunto")   VisualizarCampos("1,2,7,8,9,17,28,29,36,37");
 					if (tipo_objeto_activo=="objeto_canvas")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,30,31,36");
 					if (tipo_objeto_activo=="objeto_camara")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,31,36");
                     if (tipo_objeto_activo=="form_consulta")   VisualizarCampos("9,17,24,32,33,34,36");
@@ -1385,11 +1385,22 @@ if ($PCO_Accion=="editar_formulario")
                             </div>
 						</div>
 
+
 						<div id='campo36' style="display:none;">
                             <div class="form-group input-group">
                                 <input type="text" name="pestana_objeto" class="form-control" value="<?php echo @$registro_campo_editar["pestana_objeto"]; ?>" placeholder="<?php echo $MULTILANG_FrmPestana; ?>">
                                 <span class="input-group-addon">
                                     <a href="#" title="<?php echo $MULTILANG_FrmDesPestana; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
+                            </div>
+						</div>
+
+
+						<div id='campo37' style="display:none;">
+                            <div class="form-group input-group">
+                                <input type="text" name="personalizacion_tag" class="form-control" value="<?php echo @$registro_campo_editar["personalizacion_tag"]; ?>" placeholder="<?php echo $MULTILANG_FrmTagPersonalizado; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" data-toggle="popover" data-html="true" data-placement="top" title="<?php echo $MULTILANG_Ayuda; ?>" data-content="<?php echo $MULTILANG_FrmDesTagPersonalizado; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -2182,9 +2193,11 @@ if ($PCO_Accion=="editar_formulario")
 							$formulario_campo_vinculo=$registro["formulario_campo_vinculo"];
 							$formulario_campo_foraneo=$registro["formulario_campo_foraneo"];
                             $condicion_filtrado_listas=$registro["condicion_filtrado_listas"];
+                            $pestana_objeto=$registro["pestana_objeto"];
+                            $personalizacion_tag=$registro["personalizacion_tag"];
 
 							//Inserta el nuevo objeto al form
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$tipo$_SeparadorCampos_$titulo$_SeparadorCampos_$campo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$nuevo_formulario$_SeparadorCampos_$peso$_SeparadorCampos_$columna$_SeparadorCampos_$obligatorio$_SeparadorCampos_$visible$_SeparadorCampos_$valor_predeterminado$_SeparadorCampos_$validacion_datos$_SeparadorCampos_$etiqueta_busqueda$_SeparadorCampos_$ajax_busqueda$_SeparadorCampos_$valor_unico$_SeparadorCampos_$solo_lectura$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$barra_herramientas$_SeparadorCampos_$fila_unica$_SeparadorCampos_$lista_opciones$_SeparadorCampos_$origen_lista_opciones$_SeparadorCampos_$origen_lista_valores$_SeparadorCampos_$valor_etiqueta$_SeparadorCampos_$url_iframe$_SeparadorCampos_$objeto_en_ventana$_SeparadorCampos_$informe_vinculado$_SeparadorCampos_$maxima_longitud$_SeparadorCampos_$valor_minimo$_SeparadorCampos_$valor_maximo$_SeparadorCampos_$valor_salto$_SeparadorCampos_$formato_salida$_SeparadorCampos_$plantilla_archivo$_SeparadorCampos_$peso_archivo$_SeparadorCampos_$tamano_pincel$_SeparadorCampos_$color_trazo$_SeparadorCampos_$formulario_vinculado$_SeparadorCampos_$formulario_campo_vinculo$_SeparadorCampos_$formulario_campo_foraneo$_SeparadorCampos_$condicion_filtrado_listas");
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$tipo$_SeparadorCampos_$titulo$_SeparadorCampos_$campo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$nuevo_formulario$_SeparadorCampos_$peso$_SeparadorCampos_$columna$_SeparadorCampos_$obligatorio$_SeparadorCampos_$visible$_SeparadorCampos_$valor_predeterminado$_SeparadorCampos_$validacion_datos$_SeparadorCampos_$etiqueta_busqueda$_SeparadorCampos_$ajax_busqueda$_SeparadorCampos_$valor_unico$_SeparadorCampos_$solo_lectura$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$barra_herramientas$_SeparadorCampos_$fila_unica$_SeparadorCampos_$lista_opciones$_SeparadorCampos_$origen_lista_opciones$_SeparadorCampos_$origen_lista_valores$_SeparadorCampos_$valor_etiqueta$_SeparadorCampos_$url_iframe$_SeparadorCampos_$objeto_en_ventana$_SeparadorCampos_$informe_vinculado$_SeparadorCampos_$maxima_longitud$_SeparadorCampos_$valor_minimo$_SeparadorCampos_$valor_maximo$_SeparadorCampos_$valor_salto$_SeparadorCampos_$formato_salida$_SeparadorCampos_$plantilla_archivo$_SeparadorCampos_$peso_archivo$_SeparadorCampos_$tamano_pincel$_SeparadorCampos_$color_trazo$_SeparadorCampos_$formulario_vinculado$_SeparadorCampos_$formulario_campo_vinculo$_SeparadorCampos_$formulario_campo_foraneo$_SeparadorCampos_$condicion_filtrado_listas$_SeparadorCampos_$pestana_objeto$_SeparadorCampos_$personalizacion_tag");
 						}				
 					// Registros de formulario_boton
 					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");

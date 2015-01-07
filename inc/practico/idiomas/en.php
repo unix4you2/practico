@@ -451,6 +451,17 @@
 	$MULTILANG_FrmErrorCam='There is an error with the video device.  Please cheack that you have a video device or webcam installed and the you answer Afirmative or Accept in your browser to allow Practico to use the device.';
     $MULTILANG_FrmPestana='Forms tab title in which the control will be published';
     $MULTILANG_FrmDesPestana='Assign the tab for this object in the form.  Practico automatically creates tabs according to the values entered in each object.';
+    $MULTILANG_FrmTagPersonalizado='HTML Custom Tag';
+    $MULTILANG_FrmDesTagPersonalizado='Allow to add parameters to the HTML Tag created over the form by Practico. 
+            <hr>Some examples according to the data control type:
+            <br><b>Select lists (combo-box):</b>
+                <li><u>data-live-search=true</u> Enable search field in a list.</li>
+                <li><u>multiple</u> Enable multiple select.</li>
+                <li><u>data-selected-text-format=count</u> Count selected items instead values.</li>
+                <li><u>data-max-options=#</u> Maximum of elements selected.
+                <li><u>data-size=auto|#</u> How many rows are showed in the item list.</li>
+                <li><u>data-style=btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u> Graphic style
+                <li><u>disabled</u> Disables the control</li>';
 
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';

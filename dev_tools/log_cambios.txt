@@ -59,12 +59,15 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added: Personalización de Tags HTML para el diseñador de formularios
 * Added: Soporte para datepicker por bootstrap
 * Added: Ahora los campos dotados de DatePicker identifican el idioma de la plataforma y se autotraducen
 * Added: Campos tipo slider son ahora responsive, soportan dispositivos touch y tienen mejores estilos incluyendo disposición vertical.
 * Added: Controles tipo lista de selección han sido preparados para bootstrap, estilos y búsquedas en caliente.
 * Added: Funcionalidad de pestañas automáticas para objetos de formularios
 * Added: Además del tiempo de carga del lado del servidor ahora se presenta el tiempo de carga del lado del cliente mediante JS
+* Added: Posibilidad de controles de selección mútiples mediante personalización del Tag
+* Added: Listas de selección presentan ahora un Check para el elemento seleccionado
 * Added: Libreria IonIcons (602 iconos)
 * Added: Libreria Weather Icons (124 iconos)
 * Added: Libreria Map Icons (170 iconos)
@@ -73,6 +76,7 @@ LogCambios="
 * Added: Libreria Elusive Icons (299 iconos)
 * Added: Picker de iconos con soporte para más de 2480 iconos repartidos en diferentes librerías
 * Added: Se aplica el tema por defecto de bootstrap
+* Added: Ahora campos de selección soportan búsquedas dinámicas mediante personalización de Tags
 * Fixed: Lanzamiento de ventana de monitoreo con accion incorrecta.  Igual su proceso de autollamado.
 * Fixed: Tester: [Ricardo Beltran] Botones de búsqueda en campos y de operaciones diferentes a la adición no operan correctamente sobre Forms
 * Fixed: Tester: [Jonathan Sánchez] Campo de correo en registro de clientes tenía el tipo como password.
@@ -84,7 +88,8 @@ LogCambios="
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-ALTER TABLE core_formulario_objeto ADD COLUMN pestana_objeto VARCHAR(250) NULL DEFAULT '';
+ALTER TABLE core_formulario_objeto ADD COLUMN pestana_objeto varchar(250) default '';
+ALTER TABLE core_formulario_objeto ADD COLUMN personalizacion_tag TEXT;
 "
 
 ########################################################################

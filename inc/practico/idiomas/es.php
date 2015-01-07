@@ -448,6 +448,17 @@
 	$MULTILANG_FrmErrorCam='Error en el dispositivo de video.  Verifique que cuenta con una camara instalada y que ha hecho clic en Permitir o aceptar para permitir a Practico utilizarla.';
     $MULTILANG_FrmPestana='T&iacute;tulo de la Pesta&ntilde;a a que pertenece en el formulario';
     $MULTILANG_FrmDesPestana='Indica la pesta&ntilde;a a la que pertenece el elemento dentro del formulario.  Practico genera automaticamente las pesta&ntilde;as de acuerdo a los valores ingresados en cada objeto.';
+    $MULTILANG_FrmTagPersonalizado='Personalizaci&oacute;n del Tag HTML';
+    $MULTILANG_FrmDesTagPersonalizado='Permite agregar par&aacute;metros y otras configuraciones HTML a la etiqeuta generada por Pr&aacute;ctico. 
+            <hr>Ejemplos para algunos tipos de control:
+            <br><b>Listas de selecci&oacute;n (combo-box):</b>
+                <li><u>data-live-search=true</u> Busqueda dinamica sobre la lista.</li>
+                <li><u>multiple</u> Selecicones multiples sobre la lista.</li>
+                <li><u>data-selected-text-format=count</u> Combinado con multiple, cuenta las opciones seleccionadas en lugar de sus valores.</li>
+                <li><u>data-max-options=#</u> Combinado con multiple, determina el maximo de elementos a ser seleccionados.
+                <li><u>data-size=auto|#</u> Determina cuantas opciones presentar en la lista. Por defecto es auto.</li>
+                <li><u>data-style=btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u> Cambia el estilo grafico del control
+                <li><u>disabled</u> Deshabilita el control.</li>';
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

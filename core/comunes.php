@@ -1716,7 +1716,7 @@ function ventana_login()
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group '.$cadena_clase_datepicker.'" '.$cadena_ID_datepicker.'>';
             // Muestra el campo
-			$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control " '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$cadena_complementaria_datepicker.' >';
+			$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control " '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$cadena_complementaria_datepicker.'  '.$registro_campos["personalizacion_tag"].'  >';
 
 			// Muestra boton de busqueda cuando el campo sea usado para esto
 			if ($registro_campos["etiqueta_busqueda"]!="")
@@ -1858,7 +1858,7 @@ function ventana_login()
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.= '<textarea id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="form-control" '.$registro_campos["solo_lectura"].'  >'.$cadena_valor.'</textarea>';
+			$salida.= '<textarea id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="form-control" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].'  >'.$cadena_valor.'</textarea>';
 			//Si hay algun indicador adicional del campo abre los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '<span class="input-group-addon">';
@@ -1923,7 +1923,7 @@ function ventana_login()
 			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 			// Muestra el campo
-			$salida.= '<textarea id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="ckeditor" '.$registro_campos["solo_lectura"].'  >'.$cadena_valor.'</textarea>';
+			$salida.= '<textarea id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="ckeditor" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].'  >'.$cadena_valor.'</textarea>';
 			
 			// Define las barras posibles para el editor
 			$barra_documento="['Source','-','NewPage','DocProps','Preview','Print','-','Templates']";
@@ -2045,10 +2045,11 @@ function ventana_login()
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="")
                 $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.= '<select id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" class="selectpicker" '.$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'">';
+			$salida.= '<select id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" class="selectpicker show-tick" '.$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'" '.$registro_campos["personalizacion_tag"].' >';
 
 			// Toma los valores desde la lista de opciones (cuando es estatico)
 			$opciones_lista = explode(",", $registro_campos["lista_opciones"]);
@@ -2237,7 +2238,7 @@ function ventana_login()
 		{
 			global $campobase,$valorbase;
 			$salida='
-            <div class="embed-responsive embed-responsive-4by3">
+            <div class="embed-responsive embed-responsive-4by3"  '.$registro_campos["personalizacion_tag"].' >
                 <iframe src="'.$registro_campos["url_iframe"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
             </div>';
 			return $salida;
@@ -2308,7 +2309,7 @@ function ventana_login()
 					$cadena_predeterminado='';
 					if ($valores_lista[$i]==$cadena_valor)
 						$cadena_predeterminado=' CHECKED ';
-					$salida.= "<input class='Radios' type='radio' name='".$registro_campos["campo"]."' value='".$valores_lista[$i]."' ".$cadena_predeterminado.">".$opciones_lista[$i]."<br>";
+					$salida.= "<input class='Radios' type='radio' name='".$registro_campos["campo"]."' value='".$valores_lista[$i]."' ".$cadena_predeterminado." ".$registro_campos["personalizacion_tag"]." >".$opciones_lista[$i]."<br>";
 				}
 			//Si hay algun indicador adicional del campo abre los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
@@ -2370,7 +2371,7 @@ function ventana_login()
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-            $salida.= '<input class="span2" type="text" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" data-slider-min="'.$registro_campos["valor_minimo"].'" data-slider-max="'.$registro_campos["valor_maximo"].'" data-slider-step="'.$registro_campos["valor_salto"].'" '.$cadena_valor.'>';
+            $salida.= '<input class="span2" type="text" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" data-slider-min="'.$registro_campos["valor_minimo"].'" data-slider-max="'.$registro_campos["valor_maximo"].'" data-slider-step="'.$registro_campos["valor_salto"].'" '.$cadena_valor.' '.$registro_campos["personalizacion_tag"].' >';
             //  data-slider-selection="after" data-slider-tooltip="hide">
 
             //Guarda la funcion para activar el slider posterior a su carga
@@ -2465,7 +2466,7 @@ function ventana_login()
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control btn-default" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].'  >';
+			$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control btn-default" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$registro_campos["personalizacion_tag"].' >';
 
 			//Si hay algun indicador adicional del campo abre los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")

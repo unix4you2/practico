@@ -125,8 +125,9 @@ CREATE TABLE core_formulario_objeto (
   formulario_vinculado integer,
   formulario_campo_vinculo text default '',
   formulario_campo_foraneo text default '',
-  condicion_filtrado_listas text default ''
+  condicion_filtrado_listas text default '',
   pestana_objeto text default '',
+  personalizacion_tag text
 
 );
 
