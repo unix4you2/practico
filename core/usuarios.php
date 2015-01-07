@@ -934,7 +934,7 @@ if ($PCO_Accion=="agregar_usuario")
                         <span class="input-group-addon">
                             <i class="fa fa-at fa-fw "></i>
                         </span>
-                        <input name="correo" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Correo; ?>">
+                        <input name="correo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Correo; ?>">
                         <span class="input-group-addon">
                             <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_UsrTitCorreo; ?>: <?php echo $MULTILANG_UsrDesCorreo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                         </span>
