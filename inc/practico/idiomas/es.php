@@ -453,8 +453,8 @@
             <hr>Ejemplos para algunos tipos de control:
             <br><b>Listas de selecci&oacute;n (combo-box):</b>
                 <li><u>data-live-search=true</u> Busqueda dinamica sobre la lista.</li>
-                <li><u>multiple</u> Selecicones multiples sobre la lista.</li>
-                <li><u>data-selected-text-format=count</u> Combinado con multiple, cuenta las opciones seleccionadas en lugar de sus valores.</li>
+                <li>Beta <u>multiple</u> Selecciones multiples sobre la lista. Cuidado: Almacena el primer valor seleccionado.</li>
+                <li>Beta <u>data-selected-text-format=count</u> Combinado con multiple, cuenta las opciones seleccionadas en lugar de sus valores. Cuidado: Solamente cuenta, pero almacena el primer valor seleccionado.</li>
                 <li><u>data-max-options=#</u> Combinado con multiple, determina el maximo de elementos a ser seleccionados.
                 <li><u>data-size=auto|#</u> Determina cuantas opciones presentar en la lista. Por defecto es auto.</li>
                 <li><u>data-style=btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u> Cambia el estilo grafico del control
