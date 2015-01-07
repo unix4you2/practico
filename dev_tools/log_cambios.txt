@@ -26,6 +26,7 @@ core/marco_conf.php
 core/marco_param.php
 core/menus.php
 core/monitoreo.php
+core/usuarios.php
 inc/bootstrap/css/practico.css
 inc/bootstrap/css/plugins/datepicker/*
 inc/bootstrap/css/plugins/iconpicker/*
@@ -71,10 +72,13 @@ LogCambios="
 * Added: Libreria Typ Icons (336 iconos)
 * Added: Libreria Elusive Icons (299 iconos)
 * Added: Picker de iconos con soporte para más de 2480 iconos repartidos en diferentes librerías
+* Added: Se aplica el tema por defecto de bootstrap
 * Fixed: Lanzamiento de ventana de monitoreo con accion incorrecta.  Igual su proceso de autollamado.
 * Fixed: Tester: [Ricardo Beltran] Botones de búsqueda en campos y de operaciones diferentes a la adición no operan correctamente sobre Forms
+* Fixed: Tester: [Jonathan Sánchez] Campo de correo en registro de clientes tenía el tipo como password.
 * Enhan: Reubicación de funciones de conteo de tiempos
 * Enhan: Limpieza del instalador, ya no se requieren skins
+* Enhan: Los mensajes complementarios y de ayuda sobre campos de formularios son ahora PopOvers
 "
 
 ########################################################################

@@ -65,6 +65,8 @@
 
     <!-- CSS Core de Bootstrap -->
     <link href="inc/bootstrap/css/bootstrap.min.css" rel="stylesheet"  media="screen">
+    <link href="inc/bootstrap/css/bootstrap-theme.css" rel="stylesheet"  media="screen">
+    
     <!-- librerías opcionales que activan el soporte de HTML5 para IE8 -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

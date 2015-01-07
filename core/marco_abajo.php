@@ -161,6 +161,13 @@
         })
     </script>
 
+    <script language="JavaScript">
+        //Carga los popovers programados en la hoja.  Por defecto todos los elementos con data-toggle=popover
+        $(function () {
+          $('[data-toggle="popover"]').popover()
+        })
+    </script>
+
     <?php
         //Carga las funciones activadoras de DatePicker (si fue encontrado algun campo de ese tipo)
         if (@$funciones_activacion_datepickers!="")
