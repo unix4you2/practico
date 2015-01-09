@@ -89,7 +89,7 @@
 							if (@$partes_objeto[3]!="") $formato =$partes_objeto[3];
 							if (@$partes_objeto[4]!="") $estilo =$partes_objeto[4];
 							if (@$partes_objeto[5]!="") $embebido =$partes_objeto[5];
-							cargar_informe($partes_objeto[1],@$en_ventana,@$formato,@$estilo,@$embebido);
+							cargar_informe($partes_objeto[1],@$en_ventana);
 						}
 				}
 			else
