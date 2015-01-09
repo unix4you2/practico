@@ -1852,7 +1852,9 @@ if ($PCO_Accion=="editar_formulario")
                 <!-- Modal EditorJavascript -->
                 <?php abrir_dialogo_modal("myModalActualizaJAVASCRIPT",$MULTILANG_FrmTitComandos,"modal-wide"); ?>
                     <?php echo $MULTILANG_FrmHlpFunciones; ?>
-                    <textarea name="javascript" rows="20" class="form-control"><?php echo $registro_form["javascript"]; ?></textarea>
+                    <div class="well">
+                    <textarea name="javascript"  data-editor="javascript" class="form-control" style="width: 800px; height: 600px;"><?php echo $registro_form["javascript"]; ?></textarea>
+                    </div>
                 <?php 
                     $barra_herramientas_modal='
                         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
@@ -2262,18 +2264,19 @@ if ($PCO_Accion=="administrar_formularios")
             <!-- Modal EditorJavascript -->
             <?php abrir_dialogo_modal("myModalJAVASCRIPT",$MULTILANG_FrmTitComandos,"modal-wide"); ?>
                       <?php echo $MULTILANG_FrmHlpFunciones; ?>
-<textarea name="javascript" class="form-control" rows="20">
+                    <div class="well">
+<textarea name="javascript" data-editor="javascript" class="form-control" rows="20" style="width: 800px; height: 600px;">
 function FrmAutoRun()
     {
         //Aqui sus instrucciones
     }
 </textarea>
-                <?php 
+                    </div>
+                <?php
                     $barra_herramientas_modal='
                         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
                     cerrar_dialogo_modal($barra_herramientas_modal);
                 ?>
-
 
 <div class="row">
   <div class="col-md-4">

@@ -228,6 +228,40 @@
             } //Fin de eventos para selector de iconos
     ?>
 
+    <script src="inc/ace/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        // Habilita el editor ACE para los textareas con el atributo data-editor
+        $(function () {
+            $('textarea[data-editor]').each(function () {
+                var textarea = $(this);
+
+                var mode = textarea.data('editor');
+
+                var editDiv = $('<div>', {
+                    position: 'absolute',
+                    width: textarea.width(),
+                    height: textarea.height(),
+                    'class': textarea.attr('class')
+                }).insertBefore(textarea);
+
+                textarea.css('visibility', 'hidden');
+                textarea.css('display', 'none');
+
+                var editor = ace.edit(editDiv[0]);
+                //editor.renderer.setShowGutter(false); //Ocultar numero de lineas, ayudas, opciones de colapsar, etc
+                editor.getSession().setValue(textarea.val());
+                editor.getSession().setMode("ace/mode/" + mode);
+                editor.setTheme("ace/theme/eclipse"); //Establece el tema a utilizar twilight|eclipse
+                
+                // copy back to textarea on form submit...
+                textarea.closest('form').submit(function () {
+                    textarea.val(editor.getSession().getValue());
+                })
+
+            });
+        });
+    </script>
+
     <?php
         // Estadisticas de uso anonimo con GABeacon
         $PrefijoGA='<img src="https://ga-beacon.appspot.com/';
