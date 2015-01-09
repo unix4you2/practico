@@ -1564,7 +1564,7 @@ if ($PCO_Accion=="guardar_informe")
 		if ($categoria=="") $mensaje_error.=$MULTILANG_InfErrInforme2."<br>";
 		if ($mensaje_error=="")
 			{
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|',?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,'|!|!|!|',?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf");
 				$id=$ConexionPDO->lastInsertId();
 				auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -1666,7 +1666,7 @@ if ($PCO_Accion=="administrar_informes")
 
             <label for="genera_pdf"><?php echo $MULTILANG_InfGeneraPDF; ?>:</label>
             <div class="form-group input-group">
-                <select id="genera_pdf" name="genera_pdf" class="form-control" >
+                <select id="genera_pdf" name="genera_pdf" class="selectpicker" >
                     <option value="S"><?php echo $MULTILANG_Si; ?></option>
                     <option value="N" selected><?php echo $MULTILANG_No; ?></option>
                 </select>

@@ -83,6 +83,7 @@ LogCambios="
 * Fixed: Tester: [Ricardo Beltran] Botones de búsqueda en campos y de operaciones diferentes a la adición no operan correctamente sobre Forms
 * Fixed: Tester: [Jonathan Sánchez] Campo de correo en registro de clientes tenía el tipo como password.
 * Fixed: Cambio de peso en condiciones no dejaba activo su PopUp
+* Fixed: Generacion de informes no tomaba el tipo correcto
 * Enhan: Reubicación de funciones de conteo de tiempos
 * Enhan: Limpieza del instalador, ya no se requieren skins
 * Enhan: Los mensajes complementarios y de ayuda sobre campos de formularios son ahora PopOvers
