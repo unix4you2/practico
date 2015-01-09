@@ -31,7 +31,7 @@
 	$ListaCamposSinID_formulario_boton='titulo,estilo,formulario,tipo_accion,accion_usuario,visible,peso,retorno_titulo,retorno_texto,confirmacion_texto';
 	$ListaCamposSinID_formulario='titulo,ayuda_titulo,ayuda_texto,tabla_datos,columnas,javascript,borde_visible';
 	$ListaCamposSinID_informe_condiciones='informe,valor_izq,operador,valor_der,peso';
-	$ListaCamposSinID_informe_campos='informe,valor_campo,valor_alias';
+	$ListaCamposSinID_informe_campos='informe,valor_campo,valor_alias,peso';
 	$ListaCamposSinID_informe_tablas='informe,valor_tabla,valor_alias';
 	$ListaCamposSinID_informe_boton='titulo,estilo,informe,tipo_accion,accion_usuario,visible,peso,confirmacion_texto';
 	$ListaCamposSinID_informe='titulo,descripcion,categoria,agrupamiento,ordenamiento,nivel_usuario,ancho,alto,formato_final,formato_grafico,genera_pdf';

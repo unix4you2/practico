@@ -370,8 +370,12 @@ if ($PCO_Accion=="eliminar_informe_campo")
 			if ($campo_manual.$campo_datos=="") $mensaje_error=$MULTILANG_InfErrCampo;
 			if ($mensaje_error=="")
 				{
+                    //Busca el maximo peso de los elementos actuales para asignar el peso del nuevo elemento
+                    $registro_pesos=ejecutar_sql("SELECT MAX(peso) as pesomaximo FROM ".$TablasCore."informe_campos WHERE informe=$informe")->fetch();
+                    $peso=$registro_pesos["pesomaximo"]+1;
 					$campo_definitivo=$campo_manual.$campo_datos;
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_campos (".$ListaCamposSinID_informe_campos.") VALUES (?,?,?)","$informe$_SeparadorCampos_$campo_definitivo$_SeparadorCampos_$alias_manual");
+                    //Agrega el nuevo campo
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_campos (".$ListaCamposSinID_informe_campos.") VALUES (?,?,?,?)","$informe$_SeparadorCampos_$campo_definitivo$_SeparadorCampos_$alias_manual$_SeparadorCampos_$peso");
 					auditar("Agrega campo $campo_definitivo al informe $informe");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_informe">
 						<input type="Hidden" name="informe" value="'.$informe.'">
@@ -725,6 +729,7 @@ if ($PCO_Accion=="editar_informe")
                         <tr>
                             <td><b><?php echo $MULTILANG_Campo; ?></b></td>
                             <td><b><?php echo $MULTILANG_InfAlias; ?></b></td>
+                            <td><b><?php echo $MULTILANG_Peso; ?></b></td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -732,13 +737,46 @@ if ($PCO_Accion=="editar_informe")
                     <tbody>
 				 <?php
 
-						$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
+						$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY peso","$informe");
 						while($registro = $consulta_forms->fetch())
 							{
+								$peso_aumentado=$registro["peso"]+1;
+								if ($registro["peso"]-1>=1) $peso_disminuido=$registro["peso"]-1; else $peso_disminuido=1;
 								echo '<tr>
 										<td><b>'.$registro["valor_campo"].'</b></td>
 										<td>'.$registro["valor_alias"].'</td>
-										<td align="center">
+										<td>
+											<form action="'.$ArchivoCORE.'" method="POST" name="ifoce'.$registro["id"].'" id="ifoce'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+												<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
+												<input type="hidden" name="id" value="'.$registro["id"].'">
+												<input type="hidden" name="tabla" value="informe_campos">
+												<input type="hidden" name="campo" value="peso">
+												<input type="hidden" name="informe" value="'.$informe.'">
+												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+												<input type="hidden" name="accion_retorno" value="editar_informe">
+												<input type="hidden" name="valor" value="'.$peso_aumentado.'">
+												<input type="Hidden" name="popup_activo" value="InformeCampos">
+											</form>
+											<form action="'.$ArchivoCORE.'" method="POST" name="ifopa'.$registro["id"].'" id="ifopa'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+												<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
+												<input type="hidden" name="id" value="'.$registro["id"].'">
+												<input type="hidden" name="tabla" value="informe_campos">
+												<input type="hidden" name="campo" value="peso">
+												<input type="hidden" name="informe" value="'.$informe.'">
+												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+												<input type="hidden" name="accion_retorno" value="editar_informe">
+												<input type="hidden" name="valor" value="'.$peso_disminuido.'">
+												<input type="Hidden" name="popup_activo" value="InformeCampos">
+											</form>';
+										if (@$registro["campo"]!="id")
+											echo '
+												<a href="javascript:ifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="auto" ><i class="fa fa-caret-down"></i></a> 
+												'.$registro["peso"].'
+												<a href="javascript:ifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="auto" ><i class="fa fa-caret-up"></i></a>
+												';
+								echo '		
+										</td>
+										<td>
 												<form action="'.$ArchivoCORE.'" method="POST" name="dfc'.$registro["id"].'" id="dfc'.$registro["id"].'">
 														<input type="hidden" name="PCO_Accion" value="eliminar_informe_campo">
 														<input type="hidden" name="campo" value="'.$registro["id"].'">
@@ -876,10 +914,10 @@ if ($PCO_Accion=="editar_informe")
 								$peso_aumentado=$registro["peso"]+1;
 								if ($registro["peso"]-1>=1) $peso_disminuido=$registro["peso"]-1; else $peso_disminuido=1;
 								echo '<tr>
-										<td align=left>'.$registro["valor_izq"].'</td>
-										<td align=left><b>'.$registro["operador"].'</b></td>
-										<td align=left>'.$registro["valor_der"].'</td>
-										<td align="center">
+										<td>'.$registro["valor_izq"].'</td>
+										<td><b>'.$registro["operador"].'</b></td>
+										<td>'.$registro["valor_der"].'</td>
+										<td>
 											<form action="'.$ArchivoCORE.'" method="POST" name="ifoce'.$registro["id"].'" id="ifoce'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 												<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
@@ -889,7 +927,7 @@ if ($PCO_Accion=="editar_informe")
 												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 												<input type="hidden" name="accion_retorno" value="editar_informe">
 												<input type="hidden" name="valor" value="'.$peso_aumentado.'">
-												<input type="Hidden" name="popup_activo" value="FormularioCondiciones">
+												<input type="Hidden" name="popup_activo" value="InformeCondiciones">
 											</form>
 											<form action="'.$ArchivoCORE.'" method="POST" name="ifopa'.$registro["id"].'" id="ifopa'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 												<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
@@ -900,22 +938,22 @@ if ($PCO_Accion=="editar_informe")
 												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 												<input type="hidden" name="accion_retorno" value="editar_informe">
 												<input type="hidden" name="valor" value="'.$peso_disminuido.'">
-												<input type="Hidden" name="popup_activo" value="FormularioCondiciones">
+												<input type="Hidden" name="popup_activo" value="InformeCondiciones">
 											</form>';
 										if (@$registro["campo"]!="id")
 											echo '
-												<a href="javascript:ifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" class="btn btn-success btn-xs"><i class="fa fa-caret-down"></i></a> 
+												<a href="javascript:ifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="auto" ><i class="fa fa-caret-down"></i></a> 
 												'.$registro["peso"].'
-												<a href="javascript:ifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" class="btn btn-success btn-xs"><i class="fa fa-caret-up"></i></a>
+												<a href="javascript:ifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="auto" ><i class="fa fa-caret-up"></i></a>
 												';
 								echo '		
 										</td>
-										<td align="center">
+										<td>
 												<form action="'.$ArchivoCORE.'" method="POST" name="dfco'.$registro["id"].'" id="dfco'.$registro["id"].'">
 														<input type="hidden" name="PCO_Accion" value="eliminar_informe_condicion">
 														<input type="hidden" name="condicion" value="'.$registro["id"].'">
 														<input type="hidden" name="informe" value="'.$informe.'">
-                                                        <a href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvBorrado.'\',dfco'.$registro["id"].');" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
+                                                        <a href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvBorrado.'\',dfco'.$registro["id"].');" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="auto" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
 												</form>
 										</td>
 									</tr>';

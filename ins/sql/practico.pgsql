@@ -170,6 +170,7 @@ CREATE TABLE core_informe_campos (
   informe integer,
   valor_campo varchar(250),
   valor_alias varchar(250),
+  peso integer,
   PRIMARY KEY (id)
 );
 

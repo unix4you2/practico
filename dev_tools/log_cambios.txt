@@ -20,6 +20,7 @@ AUTHORS
 index.php
 core/comunes.php
 core/formularios.php
+core/informes.php
 core/marco_abajo.php
 core/marco_arriba.php
 core/marco_conf.php
@@ -76,13 +77,16 @@ LogCambios="
 * Added: Libreria Elusive Icons (299 iconos)
 * Added: Picker de iconos con soporte para más de 2480 iconos repartidos en diferentes librerías
 * Added: Se aplica el tema por defecto de bootstrap
+* Added: Variable de peso para ordenar campos dentro de los informes
 * Added: Ahora campos de selección soportan búsquedas dinámicas mediante personalización de Tags
 * Fixed: Lanzamiento de ventana de monitoreo con accion incorrecta.  Igual su proceso de autollamado.
 * Fixed: Tester: [Ricardo Beltran] Botones de búsqueda en campos y de operaciones diferentes a la adición no operan correctamente sobre Forms
 * Fixed: Tester: [Jonathan Sánchez] Campo de correo en registro de clientes tenía el tipo como password.
+* Fixed: Cambio de peso en condiciones no dejaba activo su PopUp
 * Enhan: Reubicación de funciones de conteo de tiempos
 * Enhan: Limpieza del instalador, ya no se requieren skins
 * Enhan: Los mensajes complementarios y de ayuda sobre campos de formularios son ahora PopOvers
+* Enhan: La presentación de los campos en los informes se hace ahora de acuerdo a su peso
 "
 
 ########################################################################
@@ -90,6 +94,7 @@ LogCambios="
 ScriptBasedatos="
 ALTER TABLE core_formulario_objeto ADD COLUMN pestana_objeto varchar(250) default '';
 ALTER TABLE core_formulario_objeto ADD COLUMN personalizacion_tag TEXT;
+ALTER TABLE core_informe_campos ADD COLUMN peso int(10) default 0;
 "
 
 ########################################################################

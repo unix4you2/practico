@@ -169,8 +169,9 @@ CREATE TABLE core_informe_campos (
   id integer PRIMARY KEY AUTOINCREMENT,
   informe integer,
   valor_campo text,
-  valor_alias text
-  
+  valor_alias text,
+  peso integer
+
 );
 
 DROP TABLE IF EXISTS core_informe_tablas;
