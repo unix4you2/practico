@@ -51,7 +51,6 @@ inc/map-icons/*
 inc/octicons/*
 inc/typicons/*
 inc/weather-icons/*
-inc/ace/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
