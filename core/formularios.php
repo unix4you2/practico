@@ -151,19 +151,18 @@
 					// Busca los campos del form y construye cadenas de valores para consulta
 					$lista_campos="";
 					$lista_valores="";
-
-					$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND campo<>'id' ","$formulario");
+                    //Define los tipos de control que no son tenidos en cuenta en procesos de actualizacion
+                    //Agregar el campo a la lista solamente si es de datos y si es diferente al campo ID que es usado para la actualizacion (objetos de tipo etiqueta o iframes son pasados por alto)
+                    $cadena_tipos_excluidos=" AND tipo<>'etiqueta' AND tipo<>'url_iframe' AND tipo<>'informe' AND tipo<>'form_consulta' AND tipo<>'campo_etiqueta' AND tipo<>'archivo_adjunto' ";
+					
+                    $consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND campo<>'id' $cadena_tipos_excluidos ","$formulario");
 					while ($registro_campos = $consulta_campos->fetch())
 						{
-							//Agrega el campo a la lista solamente si es de datos y si es diferente al campo ID que es usado para la actualizacion (objetos de tipo etiqueta o iframes son pasados por alto)
-							if ($registro_campos["tipo"]!="url_iframe" && $registro_campos["tipo"]!="etiqueta" && $registro_campos["tipo"]!="informe")
-								{
-									//Verifica que el campo se encuentre dentro de la tabla, para descartar campos manuales mal escritos o usados para javascripts y otros fines.
-									if (existe_campo_tabla($registro_campos["campo"],$registro_formulario["tabla_datos"]))
-										{
-											$cadena_nuevos_valores.=$registro_campos["campo"]."='".$$registro_campos["campo"]."',";
-										}
-								}
+                            //Verifica que el campo se encuentre dentro de la tabla, para descartar campos manuales mal escritos o usados para javascripts y otros fines.
+                            if (existe_campo_tabla($registro_campos["campo"],$registro_formulario["tabla_datos"]))
+                                {
+                                    $cadena_nuevos_valores.=$registro_campos["campo"]."='".$$registro_campos["campo"]."',";
+                                }
 						}
 					// Elimina comas al final de las listas
 					$cadena_nuevos_valores=substr($cadena_nuevos_valores, 0, strlen($cadena_nuevos_valores)-1);
