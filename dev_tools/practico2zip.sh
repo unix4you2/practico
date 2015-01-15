@@ -96,6 +96,8 @@ ListaExcluidos=" skin/nomo_editada\* mod/ldap\* mod/pam\* mod/pdf\* core/configu
 	cd $SCRIPTPATH
 	cd docs
     ./GenerarDocumentacion.sh
+    # Pasa archivos generados al repositorio web
+    cp -r Salida_DOC/* ../../../practico_web/dev_docs/
     cd ..
 
 
