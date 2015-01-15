@@ -18,4 +18,4 @@
 #	along with this program; if not, write to the Free Software
 #	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-perl ./NaturalDocs/NaturalDocs -ro -i ../../practico -xi ../dev_doc -o HTML ../dev_doc/Salida_DOC -p ../dev_doc/Proyecto_DOC
+perl ./NaturalDocs/NaturalDocs -ro -i ../../../practico -xi ../docs -o HTML ../docs/Salida_DOC -p ../docs/Proyecto_DOC
