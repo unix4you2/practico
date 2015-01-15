@@ -84,6 +84,7 @@ LogCambios="
 * Fixed: Lanzamiento de ventana de monitoreo con accion incorrecta.  Igual su proceso de autollamado.
 * Fixed: Tester: [Ricardo Beltran] Botones de búsqueda en campos y de operaciones diferentes a la adición no operan correctamente sobre Forms
 * Fixed: Tester: [Jonathan Sánchez] Campo de correo en registro de clientes tenía el tipo como password.
+* Fixed: Tester: [Jonathan Sánchez] Se corrigen procesos de actualización de registros para campos que no son controles de datos sobre formularios
 * Fixed: Cambio de peso en condiciones no dejaba activo su PopUp
 * Fixed: Generacion de informes no tomaba el tipo correcto
 * Fixed: Llamado de informes desde opciones de menu sin estilos
@@ -92,6 +93,9 @@ LogCambios="
 * Enhan: Limpieza del instalador, ya no se requieren skins
 * Enhan: Los mensajes complementarios y de ayuda sobre campos de formularios son ahora PopOvers
 * Enhan: La presentación de los campos en los informes se hace ahora de acuerdo a su peso
+* Enhan: Ahora la documentación del proyecto es generada automáticamente en cada liberación
+
+Importante: Aquellos que hayan aplicado procesos de actualizacion previos es probable que vean errores de ejecución SQL durante la aplicación del parche.  Si encuentre mensajes como que la tabla ya existe entonces todo va con normalidad pues ya ha sido parchado su sistema para el uso de la nueva tabla.
 "
 
 ########################################################################

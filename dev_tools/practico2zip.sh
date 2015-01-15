@@ -2,6 +2,7 @@
 
 #	Copyright (C) 2013  John F. Arroyave Gutiérrez
 #						unix4you2@gmail.com
+#						www.practico.org
 
 #	This program is free software; you can redistribute it and/or
 #	modify it under the terms of the GNU General Public License
@@ -83,6 +84,21 @@ ListaExcluidos=" skin/nomo_editada\* mod/ldap\* mod/pam\* mod/pdf\* core/configu
 		eval ${ComandoFinal}
 	fi
 
+# Actualizacion automatica de documentacion del proyecto (NaturalDocs)
+	echo " _                                   "
+	echo "| \ _  _    _ _  _  _ _|_ _  _. _  _ "
+	echo "|_/(_)(_|_|| | |(/_| | | (_|(_|(_)| |"
+	echo "-----------------------------------------------------------------"
+	echo "Actualizando documentación NaturalDocs para el proyecto para ser "
+	echo "publicada sobre http://unix4you2.github.io/docs mediante commit  "
+	echo "-----------------------------------------------------------------"
+	# Me ubico en la ruta del script y entro a la de documentacion
+	cd $SCRIPTPATH
+	cd docs
+    ./GenerarDocumentacion.sh
+    cd ..
+
+
 # Presenta resultados, restablece variables y termina
 	IFS=$old_IFS  # restablece el separador de campo predeterminado
 	echo "-----------------------------------------------------------------"
@@ -109,3 +125,5 @@ ListaExcluidos=" skin/nomo_editada\* mod/ldap\* mod/pam\* mod/pdf\* core/configu
 #       echo $line
 #     done
 #   IFS=$oldIFS  #Restauramos el IFS
+#
+#Fuentes: patorjk.com/software/taag/  (Favoritas: Small y Standar)
