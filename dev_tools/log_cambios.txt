@@ -94,6 +94,7 @@ LogCambios="
 * Enhan: Los mensajes complementarios y de ayuda sobre campos de formularios son ahora PopOvers
 * Enhan: La presentación de los campos en los informes se hace ahora de acuerdo a su peso
 * Enhan: Ahora la documentación del proyecto es generada automáticamente en cada liberación
+* Enhan: Enlace a la documentación de funciones desde la web
 
 Importante: Aquellos que hayan aplicado procesos de actualizacion previos es probable que vean errores de ejecución SQL durante la aplicación del parche.  Si encuentre mensajes como que la tabla ya existe entonces todo va con normalidad pues ya ha sido parchado su sistema para el uso de la nueva tabla.
 "

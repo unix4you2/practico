@@ -107,6 +107,7 @@
 	$MULTILANG_No='No';
 	$MULTILANG_Nombre='Name';
 	$MULTILANG_NombreRAD='RAD Name';
+    $MULTILANG_OlvideClave='I forgot my password';
 	$MULTILANG_Opcional='Optional';
 	$MULTILANG_OpcionesMenu='Menu options';
 	$MULTILANG_Otros='Others';
@@ -118,6 +119,7 @@
 	$MULTILANG_Predeterminado='Default';
 	$MULTILANG_ProcesoFin='Process completed';
 	$MULTILANG_Puerto='Port';
+    $MULTILANG_Registrarme='Sign In';
 	$MULTILANG_Si='Yes';
 	$MULTILANG_Servidor='Server';
 	$MULTILANG_SeleccioneUno='Choose one';

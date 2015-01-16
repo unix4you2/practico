@@ -1281,7 +1281,7 @@ function ventana_login()
 			Despliega la ventana de ingreso al sistema con el formulario para usuario, contrasena y captcha.
 		*/
 		  global $ArchivoCORE,$LlaveDePaso;
-		  global $MULTILANG_Cerrar,$MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes;
+		  global $MULTILANG_Cerrar,$MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes,$MULTILANG_Registrarme,$MULTILANG_OlvideClave;
 			// Variables para OAuth desde el archivo de configuracion
 			global $APIGoogle_ClientId,$APIGoogle_ClientSecret;
 			global $APIFacebook_ClientId,$APIFacebook_ClientSecret;
@@ -1391,7 +1391,7 @@ function ventana_login()
                         <div class="panel-heading">
                             <h3 class="panel-title"><?php echo $MULTILANG_TituloLogin; ?></h3>
                         </div>
-                        <div align=center class="panel-body">
+                        <div align=center class="panel-body btn-xs">
 
                                 <form role="form" name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
                                 <input type="Hidden" name="PCO_Accion" value="Iniciar_login">
@@ -1437,6 +1437,23 @@ function ventana_login()
                                 <?php
                                     //mensaje($MULTILANG_Importante,$MULTILANG_AccesoExclusivo,'','fa fa-info-circle fa-3x texto-azul','alert alert-info');
                                 ?>
+                                <!--
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <a class="btn btn-xs">
+                                            <i class="typcn fa typcn-user-add"></i>
+                                            <?php echo $MULTILANG_Registrarme; ?>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a class="btn btn-xs">
+                                            <i class="fa fa-unlock-alt"></i>
+                                            <?php echo $MULTILANG_OlvideClave; ?>
+                                        </a>
+                                    </div>
+                                </div>
+                                -->
+
                         <script language="JavaScript"> login_usuario.uid.focus(); </script>
                         </div> <!-- /panel-body -->
                     </div>

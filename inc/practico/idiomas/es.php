@@ -107,7 +107,8 @@
 	$MULTILANG_No='No';
 	$MULTILANG_Nombre='Nombre';
 	$MULTILANG_NombreRAD='Nombre RAD';
-	$MULTILANG_Opcional='Opcional';
+	$MULTILANG_OlvideClave='Olvid&eacute; mi clave';
+    $MULTILANG_Opcional='Opcional';
 	$MULTILANG_OpcionesMenu='Opciones de menu';
 	$MULTILANG_Otros='Otros';
 	$MULTILANG_Pagina='Pagina';
@@ -118,7 +119,8 @@
 	$MULTILANG_Predeterminado='Predeterminado';
 	$MULTILANG_ProcesoFin='Proceso finalizado';
 	$MULTILANG_Puerto='Puerto';
-	$MULTILANG_Si='Si';
+	$MULTILANG_Registrarme='Registrarme';
+    $MULTILANG_Si='Si';
 	$MULTILANG_Servidor='Servidor';
 	$MULTILANG_SeleccioneUno='Seleccione uno';
 	$MULTILANG_Suspender='Suspender';
