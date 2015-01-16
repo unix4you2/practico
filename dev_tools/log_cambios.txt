@@ -81,10 +81,12 @@ LogCambios="
 * Added: Variable de peso para ordenar campos dentro de los informes
 * Added: Ahora campos de selección soportan búsquedas dinámicas mediante personalización de Tags
 * Added: Modulo adicional para edición de scripts en línea basado en ACE [Ajax Cloud Editor]
+* Added: Ahora las variables de contexto PCO_ValorBusquedaBD y PCO_CampoBusquedaBD pueden ser utilizadas para filtros en generación de informes
 * Fixed: Lanzamiento de ventana de monitoreo con accion incorrecta.  Igual su proceso de autollamado.
-* Fixed: Tester: [Ricardo Beltran] Botones de búsqueda en campos y de operaciones diferentes a la adición no operan correctamente sobre Forms
+* Fixed: Tester: [Ricardo Beltran ] Botones de búsqueda en campos y de operaciones diferentes a la adición no operan correctamente sobre Forms
 * Fixed: Tester: [Jonathan Sánchez] Campo de correo en registro de clientes tenía el tipo como password.
 * Fixed: Tester: [Jonathan Sánchez] Se corrigen procesos de actualización de registros para campos que no son controles de datos sobre formularios
+* Fixed: Tester: [Jaime A. Berrio ] Se corrigen los IDs de informe generados en los enlaces para los usuarios, opción Mis Informes
 * Fixed: Cambio de peso en condiciones no dejaba activo su PopUp
 * Fixed: Generacion de informes no tomaba el tipo correcto
 * Fixed: Llamado de informes desde opciones de menu sin estilos
@@ -95,6 +97,8 @@ LogCambios="
 * Enhan: La presentación de los campos en los informes se hace ahora de acuerdo a su peso
 * Enhan: Ahora la documentación del proyecto es generada automáticamente en cada liberación
 * Enhan: Enlace a la documentación de funciones desde la web
+* Enhan: Por compatibilidad las variables internas de valorbase y campobase ahora son llamadas PCO_ValorBusquedaBD y PCO_CampoBusquedaBD
+
 
 Importante: Aquellos que hayan aplicado procesos de actualizacion previos es probable que vean errores de ejecución SQL durante la aplicación del parche.  Si encuentre mensajes como que la tabla ya existe entonces todo va con normalidad pues ya ha sido parchado su sistema para el uso de la nueva tabla.
 "

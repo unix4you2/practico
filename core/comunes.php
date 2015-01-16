@@ -1664,7 +1664,7 @@ function ventana_login()
 */
 	function cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 		{
-			global $campobase,$valorbase,$IdiomaPredeterminado;
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
             global $funciones_activacion_datepickers;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
 
@@ -1699,7 +1699,7 @@ function ventana_login()
 			$valor_variable_escapada=$registro_datos_formulario["$nombre_campo"];
 			//$valor_variable_escapada=addslashes ( '"'.$valor_variable_escapada.'"' );
 			$valor_variable_escapada=htmlentities($valor_variable_escapada); //Presenta la cadena como caracteres especiales HTML para ayudar a presentar correctamente tildes, comillas y barras
-			if ($campobase!="" && $valorbase!="") $cadena_valor=' value="'.$valor_variable_escapada.'" ';
+			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=' value="'.$valor_variable_escapada.'" ';
 
 			// Define cadenas en caso de tener validaciones
 			$cadena_validacion='';
@@ -1739,11 +1739,11 @@ function ventana_login()
 			if ($registro_campos["etiqueta_busqueda"]!="")
 				{
                     $salida.= '<span class="input-group-addon">';
-                        $salida.= '<input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.valorbase.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.PCO_Accion.value=\'cargar_objeto\';document.datos.submit()">';
+                        $salida.= '<input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.PCO_ValorBusquedaBD.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.PCO_Accion.value=\'cargar_objeto\';document.datos.submit()">';
                         $salida.= '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
                         $salida.= '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
-                        $salida.= '<input type="Hidden" name="campobase" value="'.$registro_campos["campo"].'" >';
-                        $salida.= '<input type="Hidden" name="valorbase" '.$cadena_valor.'>';
+                        $salida.= '<input type="Hidden" name="PCO_CampoBusquedaBD" value="'.$registro_campos["campo"].'" >';
+                        $salida.= '<input type="Hidden" name="PCO_ValorBusquedaBD" '.$cadena_valor.'>';
                     $salida.= '</span>';
 				}
 
@@ -1794,7 +1794,7 @@ function ventana_login()
 */
 	function cargar_objeto_oculto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 		{
-			global $campobase,$valorbase;
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
@@ -1814,7 +1814,7 @@ function ventana_login()
 							$cadena_valor=' value="'.$valor_variable.'" ';							
 						}
 				}
-			if ($campobase!="" && $valorbase!="") $cadena_valor=' value="'.$registro_datos_formulario["$nombre_campo"].'" ';
+			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=' value="'.$registro_datos_formulario["$nombre_campo"].'" ';
 
 			// Muestra el campo
 			$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor.'" >';
@@ -1842,7 +1842,7 @@ function ventana_login()
 */
 	function cargar_objeto_texto_largo($registro_campos,$registro_datos_formulario)
 		{
-			global $campobase,$valorbase;
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
 
 			$salida='';
@@ -1867,7 +1867,7 @@ function ventana_login()
 							$cadena_valor=' value="'.$valor_variable.'" ';							
 						}
 				}
-			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
+			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="")
@@ -1912,7 +1912,7 @@ function ventana_login()
 */
 	function cargar_objeto_texto_formato($registro_campos,$registro_datos_formulario,$existe_campo_textoformato)
 		{
-			global $campobase,$valorbase;
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
 
 			$salida='';
@@ -1937,7 +1937,7 @@ function ventana_login()
 							$cadena_valor=' value="'.$valor_variable.'" ';							
 						}
 				}
-			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
+			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 			// Muestra el campo
 			$salida.= '<textarea id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="ckeditor" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].'  >'.$cadena_valor.'</textarea>';
@@ -2046,14 +2046,14 @@ function ventana_login()
 */
 	function cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 		{
-			global $campobase,$valorbase;
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_SeleccioneUno;
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
 
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
-			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
+			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 			
 			// Define si el control es un ComboBox o un ListBox dependiendo de su altura (!=0 es listbox)
 			if ($registro_campos["alto"]!='0')
@@ -2105,11 +2105,11 @@ function ventana_login()
 			// Muestra boton de busqueda cuando el campo sea usado para esto
 			if ($registro_campos["etiqueta_busqueda"]!="")
 				{
-					$salida.= '<input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.valorbase.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.PCO_Accion.value=\'cargar_objeto\';document.datos.submit()">';
+					$salida.= '<input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.PCO_ValorBusquedaBD.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.PCO_Accion.value=\'cargar_objeto\';document.datos.submit()">';
 					$salida.= '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
 					$salida.= '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
-					$salida.= '<input type="Hidden" name="campobase" value="'.$registro_campos["campo"].'" >';
-					$salida.= '<input type="Hidden" name="valorbase" '.$cadena_valor.'>';
+					$salida.= '<input type="Hidden" name="PCO_CampoBusquedaBD" value="'.$registro_campos["campo"].'" >';
+					$salida.= '<input type="Hidden" name="PCO_ValorBusquedaBD" '.$cadena_valor.'>';
 				}
 
 			//Si hay algun indicador adicional del campo abre los add-ons
@@ -2147,7 +2147,7 @@ function ventana_login()
 */
 	function cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario)
 		{
-			global $campobase,$valorbase;
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			$salida=$registro_campos["valor_etiqueta"];
 			return $salida;
 		}
@@ -2173,7 +2173,7 @@ function ventana_login()
 */
 	function cargar_objeto_campoetiqueta($registro_campos,$registro_datos_formulario)
 		{
-			global $campobase,$valorbase;
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
 			$Contenido_BARRAS='';
@@ -2191,7 +2191,7 @@ function ventana_login()
 						}
 				}
 			//Si viene de una busqueda de registro pone el valor de registro
-			if ($campobase!="" && $valorbase!="") 
+			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") 
 				{
 					$cadena_valor=$registro_datos_formulario["$nombre_campo"];
 					$Contenido_BARRAS=$cadena_valor; //En caso que se requiera para imprimir en formato especial
@@ -2257,7 +2257,7 @@ function ventana_login()
 */
 	function cargar_objeto_iframe($registro_campos,$registro_datos_formulario)
 		{
-			global $campobase,$valorbase;
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			$salida='
             <div class="embed-responsive embed-responsive-4by3"  '.$registro_campos["personalizacion_tag"].' >
                 <iframe src="'.$registro_campos["url_iframe"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
@@ -2286,14 +2286,14 @@ function ventana_login()
 */
 	function cargar_objeto_lista_radio($registro_campos,$registro_datos_formulario)
 		{
-			global $campobase,$valorbase;
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
 
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
-			if ($campobase!="" && $valorbase!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
+			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 			// Toma los valores desde la lista de opciones (cuando es estatico)
 			$opciones_lista = explode(",", $registro_campos["lista_opciones"]);
@@ -2368,7 +2368,7 @@ function ventana_login()
 */
 	function cargar_objeto_deslizador($registro_campos,$registro_datos_formulario)
 		{
-			global $campobase,$valorbase,$funciones_activacion_sliders;
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$funciones_activacion_sliders;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
 
 			$salida='';
@@ -2382,7 +2382,7 @@ function ventana_login()
 			// toma el valor predeterminado como el minimo (formulario de registro nuevo) en caso de no tener un predeterminado
             if ($registro_campos["valor_predeterminado"]=="") $valor_de_campo=$registro_campos["valor_minimo"];
 			// Busca el valor segun registro en caso de recibir un registro recuperado
-			if ($campobase!="" && $valorbase!="")
+			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="")
 				$valor_de_campo=$registro_datos_formulario["$nombre_campo"];
 			$cadena_valor=' data-slider-value="'.$valor_de_campo.'" value="'.$valor_de_campo.'" ';
 
@@ -2442,7 +2442,7 @@ function ventana_login()
 */
 	function cargar_objeto_archivo_adjunto($registro_campos,$registro_datos_formulario)
 		{
-			global $campobase,$valorbase;
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_FrmArchivoLink,$MULTILANG_Tipo;
 
 			$salida='';
@@ -2478,7 +2478,7 @@ function ventana_login()
 			$partes_adjunto_archivo=explode("|",$registro_datos_formulario["$nombre_campo"]);
 			$adjunto_url_archivo=$partes_adjunto_archivo[0];
 			$adjunto_tipo_archivo=$partes_adjunto_archivo[1];
-			if ($campobase!="" && $valorbase!="" && $registro_datos_formulario["$nombre_campo"]!="")
+			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="" && $registro_datos_formulario["$nombre_campo"]!="")
 				$salida.='<a target="_BLANK" href="'.$adjunto_url_archivo.'"><i class="fa fa-search"></i><b>'.$MULTILANG_FrmArchivoLink.'</b><img src="img/woo_save_download_32.png" border=0 width="20" height="20" align="absmiddle"></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>('.$MULTILANG_Tipo.': '.$adjunto_tipo_archivo.')</i><br>';
 
             //Agrega etiqueta del campo si es diferente de vacio
@@ -2525,14 +2525,14 @@ function ventana_login()
 */
 	function cargar_objeto_canvas($registro_campos,$registro_datos_formulario)
 		{
-			global $campobase,$valorbase;
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
 
 			// Si detecta un valor en el registro entonces agrega el contenido
-			if ($campobase!="" && $valorbase!="" && $registro_datos_formulario["$nombre_campo"]!="")
+			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="" && $registro_datos_formulario["$nombre_campo"]!="")
 				{
 					$cadena_decodificada=$registro_datos_formulario["$nombre_campo"];
 					$cadena_decodificada=gzdecode($cadena_decodificada);
@@ -2646,14 +2646,14 @@ function ventana_login()
 */
 	function cargar_objeto_camara($registro_campos,$registro_datos_formulario)
 		{
-			global $campobase,$valorbase;
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink,$MULTILANG_Capturar,$MULTILANG_FrmErrorCam,$MULTILANG_DesObligatorio,$MULTILANG_TitObligatorio;
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
 
 			// Si detecta un valor en el registro entonces agrega el contenido
-			if ($campobase!="" && $valorbase!="" && $registro_datos_formulario["$nombre_campo"]!="")
+			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="" && $registro_datos_formulario["$nombre_campo"]!="")
 				{
 					$cadena_decodificada=$registro_datos_formulario["$nombre_campo"];
 					$cadena_decodificada=gzdecode($cadena_decodificada);
@@ -2775,8 +2775,8 @@ function ventana_login()
 
 		formulario - ID unico del formulario que se desea cargar
 		en_ventana - Opcional, determina si el formulario es cargado en una ventana o directamente sobre el escritorio
-		campobase - Opcional, indica el campo sobre el cual se deben realizar busquedas para el cargue automatico de campos del formulario desde la base de datos
-		valorbase - Opcional, indica el valor que sera buscado sobre el campobase para encontrar los valores de cada objeto en el formulario
+		PCO_CampoBusquedaBD - Opcional, indica el campo sobre el cual se deben realizar busquedas para el cargue automatico de campos del formulario desde la base de datos
+		PCO_ValorBusquedaBD - Opcional, indica el valor que sera buscado sobre el PCO_CampoBusquedaBD para encontrar los valores de cada objeto en el formulario
 		anular_form - Opcional, indica si las etiquetas del formulario HTML deben ser eliminadas y agregar los campos crudos dentro del form
 
 	(start code)
@@ -2796,7 +2796,7 @@ function ventana_login()
 	Ver tambien:
 		<cargar_informe>
 */
-		function cargar_formulario($formulario,$en_ventana=1,$campobase="",$valorbase="",$anular_form=0)
+		function cargar_formulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0)
 		  {
 				global $ConexionPDO,$ArchivoCORE,$TablasCore;
 				global $_SeparadorCampos_;
@@ -2851,9 +2851,9 @@ function ventana_login()
 				if ($registro_formulario["id"]=="")	mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Formularios." $formulario)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
 				// En caso de recibir un campo base y valor base se hace la busqueda para recuperar la informacion
-				if ($campobase!="" && $valorbase!="")
+				if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="")
 					{
-						$consulta_datos_formulario = $ConexionPDO->prepare("SELECT * FROM ".$registro_formulario["tabla_datos"]." WHERE $campobase='$valorbase'");
+						$consulta_datos_formulario = $ConexionPDO->prepare("SELECT * FROM ".$registro_formulario["tabla_datos"]." WHERE $PCO_CampoBusquedaBD='$PCO_ValorBusquedaBD'");
 						$consulta_datos_formulario->execute();
 						$registro_datos_formulario = $consulta_datos_formulario->fetch();
 					}
@@ -2983,7 +2983,7 @@ function ventana_login()
                                                                             if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
                                                                             //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
-                                                                            if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$valorbase,1);
+                                                                            if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorBusquedaBD,1);
 
                                                                             //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
                                                                             if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
@@ -3031,7 +3031,7 @@ function ventana_login()
                                                         if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
                                                         //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
-                                                        if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$valorbase,1);
+                                                        if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorBusquedaBD,1);
 
                                                         //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
                                                         if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
@@ -3174,7 +3174,7 @@ function ventana_login()
 */
 function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0)
 	{
-		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion;
+		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
 		// Carga variables de sesion por si son comparadas en alguna condicion
 		global $Login_usuario,$Nombre_usuario,$Descripcion_usuario,$Nivel_usuario,$Correo_usuario,$LlaveDePasoUsuario;
 		// Carga variables de definicion de tablas

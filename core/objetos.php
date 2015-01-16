@@ -78,9 +78,9 @@
 						{
 							//Evalua si fueron enviados parametros adicionales
 							if (@$partes_objeto[2]!="") $en_ventana=$partes_objeto[2];
-							if (@$partes_objeto[3]!="") $campobase =$partes_objeto[3]; 
-							if (@$partes_objeto[4]!="") $valorbase =$partes_objeto[4];
-							cargar_formulario($partes_objeto[1],@$en_ventana,@$campobase,@$valorbase);
+							if (@$partes_objeto[3]!="") $PCO_CampoBusquedaBD =$partes_objeto[3]; 
+							if (@$partes_objeto[4]!="") $PCO_ValorBusquedaBD =$partes_objeto[4];
+							cargar_formulario($partes_objeto[1],@$en_ventana,@$PCO_CampoBusquedaBD,@$PCO_ValorBusquedaBD);
 						}
 					//Si es un informe lo llama con sus parámetros
 					if ($partes_objeto[0]=="inf")
