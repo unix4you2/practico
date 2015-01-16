@@ -1805,12 +1805,15 @@ if ($PCO_Accion=="mis_informes")
                             $icono_informe="fa-file-text-o";
                             if($registro_opciones_acordeon["formato_final"]=="G")
                                 $icono_informe="fa-pie-chart";
+                            //Determina si el registro fue generado para el admin o un usuario estandar y genera el objeto a enlazar
+                            $objeto_enlazar=$registro_opciones_acordeon["id"];
+                            if ($Login_usuario!="admin") $objeto_enlazar=$registro_opciones_acordeon["informe"];
                             //Presenta el enlace al informe
 							echo '<div style="float:left">
 									<form action="'.$ArchivoCORE.'" method="post" name="acordeinf_'.$registro_opciones_acordeon["id"].'" id="acordeinf_'.$registro_opciones_acordeon["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
                                         <table class="table table-unbordered table-hover table-condensed"><tr><td align=center>
                                             <input type="hidden" name="PCO_Accion" value="cargar_objeto">
-                                            <input type="hidden" name="objeto" value="inf:'.$registro_opciones_acordeon["id"].':1:htm:Informes:0">
+                                            <input type="hidden" name="objeto" value="inf:'.$objeto_enlazar.':1">
                                             <a class="btn-xs" title="'.$registro_opciones_acordeon["titulo"].'" name="" href="javascript:document.acordeinf_'.$registro_opciones_acordeon["id"].'.submit();">
                                             <i class="fa '.$icono_informe.' fa-3x fa-fw"></i><br>'.$registro_opciones_acordeon["titulo"].'</a>
                                         </td></tr></table>
