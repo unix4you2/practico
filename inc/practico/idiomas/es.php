@@ -591,6 +591,8 @@
 	$MULTILANG_InfGeneraPDF='Exportar PDF?';
 	$MULTILANG_InfGeneraPDFInfoTit='Aplica s&oacute;lo para informes tabulares';
 	$MULTILANG_InfGeneraPDFInfoDesc='El uso de esta opci&oacute;n requiere la descarga e instalaci&oacute;n del m&oacute;dulo adicional para generaci&oacute;n de PDFs de Pr&aacute;ctico.  Se encuentra disponible en la zona de descargas en web oficial de la herramienta.  Activar esta opci&oacute;n puede represetar tiempos adicionales en la generaci&oacute;n de su informe cuando el vol&uacute;men de resultados es alto.';
+    $MULTILANG_InfVblesFiltro='Variables para filtro';
+    $MULTILANG_InfVblesDesFiltro='Variables PHP (Sin el signo pesos $ y separadas unicamente por una coma) que deberan ser buscadas en el ambito global para estar disponibles en condiciones de filtrado';
 	
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';

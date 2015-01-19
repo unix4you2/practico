@@ -155,12 +155,12 @@ CREATE TABLE core_informe (
   categoria text, 
   agrupamiento text,
   ordenamiento text,
-  nivel_usuario integer default '0',
   ancho text,
   alto text,
   formato_final text, 
   formato_grafico text,
-  genera_pdf text
+  genera_pdf text,
+  variables_filtro text
 
 );
 

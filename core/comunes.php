@@ -3219,6 +3219,17 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			// Elimina la ultima coma en el listado de tablas
 			$consulta=substr($consulta, 0, strlen($consulta)-1);
 
+            //Si hay variables de filtro definidas busca su valor en el contexto global
+            if($registro_informe["variables_filtro"]!="")
+                {
+                    $arreglo_variables_filtro = explode(",",$registro_informe["variables_filtro"]);
+                    //Busca y convierte cada variable recibida en global
+                    foreach ($arreglo_variables_filtro as $nombre_variable_filtro)
+                        {
+                            global $$nombre_variable_filtro;
+                        }
+                }
+
 			// Busca las CONDICIONES para el informe
 			$consulta.=" WHERE ";
 			$consulta_condiciones=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_condiciones." FROM ".$TablasCore."informe_condiciones WHERE informe=? ORDER BY peso","$informe");
@@ -3265,29 +3276,6 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					$campoorden=$registro_informe["ordenamiento"];
 					$consulta.= " ORDER BY $campoorden";
 				}
-
-			/*
-			if ($registro_informe[filtro_cliente]!="")
-				{
-					$campocliente=$registro_informe[filtro_cliente];	
-					$consulta.= " AND $campocliente = '$cliente'";
-				}
-
-			if ($registro_informe[filtro_fecha]!="")
-				{
-					$campofecha=$registro_informe[filtro_fecha];	
-					if ($registro_informe[motor]=="mysql")
-						$consulta.= " AND $campofecha BETWEEN '$anoi$mesi$diai' AND '$anof$mesf$diaf'";
-				}
-
-			if ($registro_informe[filtro_texto]!="")
-				{
-					$campotexto=$registro_informe[filtro_texto];
-					$consulta.= " AND $campotexto = '$filtrotexto' ";
-				}
-
-			*/
-
 
 		// Si el informe tiene formato_final = T (tabla de datos)
 		if ($registro_informe["formato_final"]=="T")

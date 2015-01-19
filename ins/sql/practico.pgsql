@@ -155,12 +155,12 @@ CREATE TABLE core_informe (
   categoria varchar(250), 
   agrupamiento varchar(250),
   ordenamiento varchar(250),
-  nivel_usuario integer default '0',
   ancho varchar(5),
   alto varchar(5),
   formato_final char(1), 
   formato_grafico text, 
   genera_pdf char(1), 
+  variables_filtro text,
   PRIMARY KEY  (id)
 );
 

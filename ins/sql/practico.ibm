@@ -155,12 +155,12 @@ CREATE TABLE core_informe (
   categoria varchar(250),  # define la seccion donde va por agrupacion en la seccion de informes
   agrupamiento varchar(250),
   ordenamiento varchar(250),
-  nivel_usuario int(10) default '0', # -1=No aplica, sino Rol minimo de usuario que accesan la opcion 
   ancho varchar(5),
   alto varchar(5),
   formato_final char(1), # T=Tabla, G=Grafico
   formato_grafico text, # Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
   genera_pdf char(1), # S=Si, N=No
+  variables_filtro text,
   PRIMARY KEY  (id)
 );
 

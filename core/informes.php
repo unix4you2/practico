@@ -171,10 +171,10 @@ if ($PCO_Accion=="actualizar_grafico_informe")
 	Variables de entrada:
 
 		id - ID del informe que se desea cambiarse
-		variables - Nuevos valores de variable para formato_final, alto,ancho,titulo,descripcion,categoria,nivel_usuario
+		variables - Nuevos valores de variable para formato_final, alto,ancho,titulo,descripcion,categoria
 
 		(start code)
-			UPDATE ".$TablasCore."informe SET formato_final='$formato_final', alto='$alto',ancho='$ancho',titulo='$titulo',descripcion='$descripcion',categoria='$categoria',nivel_usuario='$nivel_usuario' WHERE id=$id
+			UPDATE ".$TablasCore."informe SET formato_final='$formato_final', alto='$alto',ancho='$ancho',titulo='$titulo',descripcion='$descripcion',categoria='$categoria' WHERE id=$id
 		(end)
 
 	Salida:
@@ -191,8 +191,8 @@ if ($PCO_Accion=="actualizar_informe")
 		if ($categoria=="") $mensaje_error.=$MULTILANG_InfErr3.'<br>';
 		if ($mensaje_error=="")
 			{
-				// Actualiza los datos
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET genera_pdf=?,formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=?,nivel_usuario=? WHERE id=? ","$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$id");
+				// Actualiza los datos 
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET variables_filtro=?, genera_pdf=?, formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=? WHERE id=? ","$variables_filtro$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$id");
 				auditar("Actualiza informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="editar_informe">
@@ -1397,7 +1397,6 @@ if ($PCO_Accion=="editar_informe")
 			<?php abrir_ventana($MULTILANG_InfParam, 'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="actualizar_informe">
-			<input type="Hidden" name="nivel_usuario" value="-1">
 			<input type="Hidden" name="id" value="<?php echo $registro_informe['id']; ?>">
 
             <div class="form-group input-group">
@@ -1457,6 +1456,14 @@ if ($PCO_Accion=="editar_informe")
                 </select>
                 <span class="input-group-addon">
                     <a href="#" title="<?php echo $MULTILANG_InfGeneraPDFInfoTit; ?>: <?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><i class="fa fa-exclamation-triangle icon-orange fa-fw"></i></a>
+                </span>
+            </div>
+            
+            <label for="variables_filtro"><?php echo $MULTILANG_InfVblesFiltro; ?>:</label>
+            <div class="form-group input-group">
+                <input name="variables_filtro" id="variables_filtro" value="<?php echo $registro_informe['variables_filtro']; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfVblesFiltro; ?>">
+                <span class="input-group-addon">
+                    <a href="#" title="<?php echo $MULTILANG_InfVblesDesFiltro; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                 </span>
             </div>
 
@@ -1547,7 +1554,7 @@ if ($PCO_Accion=="eliminar_informe")
 	Agrega un informe a la aplicacion
 
 		(start code)
-			INSERT INTO ".$TablasCore."informe VALUES (0, '$titulo','$descripcion','$categoria','$agrupamiento','$ordenamiento','$nivel_usuario','$ancho','$alto','$formato_final','|!|!|!|')
+			INSERT INTO ".$TablasCore."informe VALUES (0, '$titulo','$descripcion','$categoria','$agrupamiento','$ordenamiento','$ancho','$alto','$formato_final','|!|!|!|')
 		(end)
 
 	Salida:
@@ -1564,7 +1571,9 @@ if ($PCO_Accion=="guardar_informe")
 		if ($categoria=="") $mensaje_error.=$MULTILANG_InfErrInforme2."<br>";
 		if ($mensaje_error=="")
 			{
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,'|!|!|!|',?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf");
+				$agrupamiento='';
+                $ordenamiento='';
+                ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|',?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro");
 				$id=$ConexionPDO->lastInsertId();
 				auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -1611,7 +1620,6 @@ if ($PCO_Accion=="administrar_informes")
 			<?php abrir_ventana($MULTILANG_InfTituloAgr, 'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="guardar_informe">
-			<input type="Hidden" name="nivel_usuario" value="-1">
 
 			<h4><?php echo $MULTILANG_InfDetalles; ?>:</h4>
 
@@ -1672,6 +1680,13 @@ if ($PCO_Accion=="administrar_informes")
                 </select>
                 <span class="input-group-addon">
                     <a href="#" title="<?php echo $MULTILANG_InfGeneraPDFInfoTit; ?>: <?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><i class="fa fa-exclamation-triangle icon-orange fa-fw"></i></a>
+                </span>
+            </div>
+
+            <div class="form-group input-group">
+                <input name="variables_filtro" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfVblesFiltro; ?>">
+                <span class="input-group-addon">
+                    <a href="#" title="<?php echo $MULTILANG_InfVblesDesFiltro; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                 </span>
             </div>
 

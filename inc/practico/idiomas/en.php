@@ -594,6 +594,8 @@
 	$MULTILANG_InfGeneraPDF='PDF Export?';
 	$MULTILANG_InfGeneraPDFInfoTit='Available for tabular reports only';
 	$MULTILANG_InfGeneraPDFInfoDesc='This option requires the PDF generator module that is available in downloads link at Practicos website. If you activate this option the report time could be more than a normal report when you have a lot of records in your results';
+    $MULTILANG_InfVblesFiltro='Filter variables';
+    $MULTILANG_InfVblesDesFiltro='PHP variables (without dollar character $ and comma separated only) that should be finded in global environment to be available for filter condittions';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';
