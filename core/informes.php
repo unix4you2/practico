@@ -832,6 +832,7 @@ if ($PCO_Accion=="editar_informe")
                                             <option value="<"><?php echo $MULTILANG_InfMenorQue; ?>: < </option>
                                             <option value=">="><?php echo $MULTILANG_InfMayorIgualQue; ?>: >= </option>
                                             <option value="<="><?php echo $MULTILANG_InfMenorIgualQue; ?>: <= </option>
+                                            <option value="LIKE"><?php echo $MULTILANG_InfPatron; ?></option>
                                 </select>
                                 <span class="input-group-addon">
                                     <a href="#" title="<?php echo $MULTILANG_InfOperador; ?>"><i class="fa fa-question-circle  fa-fw icon-info"></i></a>

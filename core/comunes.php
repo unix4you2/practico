@@ -3222,7 +3222,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
             //Si hay variables de filtro definidas busca su valor en el contexto global
             if($registro_informe["variables_filtro"]!="")
                 {
-                    $arreglo_variables_filtro = explode(",",$registro_informe["variables_filtro"]);
+                    $arreglo_variables_filtro = @explode(",",$registro_informe["variables_filtro"]);
                     //Busca y convierte cada variable recibida en global
                     foreach ($arreglo_variables_filtro as $nombre_variable_filtro)
                         {
@@ -3307,25 +3307,6 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							echo '
 								<html>
 								<body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0" style="font-size: 12px; font-family: Arial, Verdana, Tahoma;">';
-
-							// Si no tiene ancho o alto se asume que es para impresion y agrega titulo
-							if ($registro_informe["ancho"]=="" || $registro_informe["alto"]=="")
-								{
-									$SalidaFinalInforme.= '<table class="'.$estilo.'">
-										<thead><tr><td>
-										'.$Nombre_Aplicacion.' - '.$registro_informe["titulo"].'
-										</td></tr></thead></table>';
-									$SalidaFinalInformePDF.= '<table class="'.$estilo.'">
-										<thead><tr><td>
-										'.$Nombre_Aplicacion.' - '.$registro_informe["titulo"].'
-										</td></tr></thead></table>';
-								}
-							// Pone encabezados de informe
-							/*if ($registro_informe[filtro_cliente]!="")
-								echo 'Empresa: '.$cliente.'  -  ';
-							if ($registro_informe[filtro_fecha]!="")
-								echo 'Desde '.$anoi.'/'.$mesi.'/'.$diai.' Hasta '.$anof.'/'.$mesf.'/'.$diaf.'';*/
-							//echo '</font></div>';
 						}
 
 					if($formato=="xls")

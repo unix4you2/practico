@@ -500,6 +500,7 @@
 	$MULTILANG_InfMenorIgualQue='Less than or equal';
 	$MULTILANG_InfDiferenteDe='Different';
 	$MULTILANG_InfIgualA='Equal';
+    $MULTILANG_InfPatron='Match pattern (Uses % as joker)';
 	$MULTILANG_InfDesManual='In any manual fields you can enclose expressions or character string values ​​using double quotes.   You can compare with session vars putting the PHP variable.  i.e.: $Login_usuario, $Nombre_usuario, $Descripcion_usuario, $Nivel_usuario, $Correo_usuario, $LlaveDePasoUsuario';
 	$MULTILANG_InfOperador='Add an aggregator of expressions or a logical operator ';
 	$MULTILANG_InfOpParentesisA='Parenthesis open';

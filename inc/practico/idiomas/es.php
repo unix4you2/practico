@@ -497,6 +497,7 @@
 	$MULTILANG_InfMenorIgualQue='Menor o Igual';
 	$MULTILANG_InfDiferenteDe='Diferente';
 	$MULTILANG_InfIgualA='Igual';
+    $MULTILANG_InfPatron='Coincide con el patr&oacute;n (Utilice % como comodin)';
 	$MULTILANG_InfDesManual='En cualquiera de los campos manuales puede encerrar expresiones o valores tipo cadena de caracteres utilizando comillas dobles.  Tambien puede comparar frente a las variables de sesion del usuario simplemente con poner alguna de ellas en notacion PHP, por ejemplo: $Login_usuario, $Nombre_usuario, $Descripcion_usuario, $Nivel_usuario, $Correo_usuario, $LlaveDePasoUsuario';
 	$MULTILANG_InfOperador='Agregar un agrupador de expresiones o un operador l&oacute;gico ';
 	$MULTILANG_InfOpParentesisA='Abrir par&eacute;ntesis';
