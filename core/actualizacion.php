@@ -212,12 +212,22 @@ if ($PCO_Accion=="analizar_parche")
 
 		if ($mensaje_error=="")
 			{
-				//Presenta contenido del archivo
+				$errores_permisos_escritura=0;
+                //Presenta contenido del archivo
 				if (($lista_contenido = $archivo->listContent()) == 0)
 					echo $MULTILANG_Error.": ".$archivo->errorInfo(true);
 				echo '<OL>';
 				for ($i=0; $i<sizeof($lista_contenido); $i++)
-					echo "<li><font color=blue>".@$lista_contenido[$i][filename]."</font> ... ".$MULTILANG_Integridad.": <b>".@$lista_contenido[$i][status]."</b>";  /*Propiedades adicionales:  filename, stored_filename, size, compressed_size, mtime, comment, folder, index, status*/
+                    {
+                        echo "<li><font color=blue>".@$lista_contenido[$i][filename]."</font> ... ".$MULTILANG_Integridad.": <b>".@$lista_contenido[$i][status]."</b>";  /*Propiedades adicionales:  filename, stored_filename, size, compressed_size, mtime, comment, folder, index, status*/
+                        //Verifica que pueda ser escrito el archivo de destino
+                        $archivo_a_escribir=@$lista_contenido[$i][filename];
+                        if (!is_writable($archivo_a_escribir) && file_exists ($archivo_a_escribir))
+                            {
+                                echo " <font color=red><b>[$MULTILANG_ActErrEscritura]</b></font>";
+                                $errores_permisos_escritura=1;
+                            }
+                    }
 				echo '</OL>';
 				echo '<center>
 				<hr><b>'.$MULTILANG_ResumenParche.'</b>:<br>
@@ -227,13 +237,19 @@ if ($PCO_Accion=="analizar_parche")
 				<br><br><b>'.$MULTILANG_FinRevision.'<br>
 				 <font color=blue>- '.$MULTILANG_ActMsj3.': '.$version_final.' -</font></b><br>
 				 <br><br>
-					<form action="'.$ArchivoCORE.'" method="post">
+					';
+                
+                //Agrega el boton de continuar solamente si todos los archivos pueden escribirse para evitar inconsistencias
+                if ($errores_permisos_escritura==0)
+                    echo '<form action="'.$ArchivoCORE.'" method="post">
 						<input type="Hidden" name="PCO_Accion" value="aplicar_parche">
 						<input type="Hidden" name="version_actual" value="'.$version_actual.'">
 						<input type="Hidden" name="version_final" value="'.$version_final.'">
 						<input type="Hidden" name="archivo_cargado" value="'.$archivo_cargado.'">
                         <button type="submit" class="btn btn-danger btn-block"><i class="fa fa-warning texto-blink icon-yellow"></i> '.$MULTILANG_Continuar.' <i class="fa fa-warning texto-blink icon-yellow"></i></button>
 					</form>';
+                else
+                    mensaje('<i class="fa fa-warning fa-2x text-red texto-blink"></i> '.$MULTILANG_Error, $MULTILANG_ActDesEscritura, '', '', 'alert alert-danger alert-dismissible');
 				auditar("Analiza archivo $archivo_cargado");
 			}
 		else

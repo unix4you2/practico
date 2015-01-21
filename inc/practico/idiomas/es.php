@@ -248,7 +248,11 @@
 	$MULTILANG_ActMsj5='Archivo con estructura o tipo no compatible';
 	$MULTILANG_ActAlertaVersion='Existe una nueva version de Practico disponible.<br>Se recomienda descargar la nueva version o el paquete de actualizacion desde la web oficial y actualizar su sistema para contar con las nuevas mejoras de seguridad y funcionalidad';
 	$MULTILANG_ActBuscarVersion='Buscar nuevas versiones automaticamente';
-	
+    $MULTILANG_ActErrEscritura='Error de escritura';
+    $MULTILANG_ActDesEscritura='ATENCION: Se han encontrado errores de escritura en los archivos que van a ser actualizados.
+        <br><br>Para mantener la integridad de la plataforma no se permitira actualizar hasta que no corrija o actualice los permisos de los archivos indicados en el listado anterior en color rojo y con el texto "'.$MULTILANG_ActErrEscritura.'" de manera que puedan ser escribibles por Practico.
+        <br><br>Una vez actualizados los permisos intente nuevamente.';
+
 	//Formularios
 	$MULTILANG_ErrFrmDuplicado='Ha ocurrido un error de valor duplicado en el campo. El valor ingresado ya existe en la base de datos. Campo: ';
 	$MULTILANG_ErrFrmObligatorio='Ha olvidado diligenciar el campo obligatorio: ';

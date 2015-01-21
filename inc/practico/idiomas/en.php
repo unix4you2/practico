@@ -251,6 +251,10 @@
 	$MULTILANG_ActMsj5='File structure or type unsupported';
 	$MULTILANG_ActAlertaVersion='There is a new version of Practico available to download.<br>We recomend you to download the new version or upgrade package from the oficial website and upgrade your system to have the new features.';
 	$MULTILANG_ActBuscarVersion='Look for new versions automatically';
+    $MULTILANG_ActErrEscritura='Write error';
+    $MULTILANG_ActDesEscritura='WARNING: There are write errors in the files that are going to be upgraded.
+        <br><br>To keep the integrity in the software you cant upgrade until you fix the file permissions to be writeable by Practico.  Files are marked in the list in red color and the text "'.$MULTILANG_ActErrEscritura.'".  
+        <br><br>Fix the problem and try again.';
 
 	//Formularios
 	$MULTILANG_ErrFrmDuplicado='Failed duplicated value in the field. The value you entered already exists in the database. Field: ';
