@@ -417,19 +417,15 @@ if ($PCO_Accion=="eliminar_informe_usuario")
 		<eliminar_informe_usuario> | <agregar_informe_usuario>
 */
 if ($PCO_Accion=="informes_usuario")
-				{
-						echo '<div align="center"><br>';
-						abrir_ventana($MULTILANG_UsrAdmInf,'panel-info');
-		?>
-
-		<div align="center" class="TextosVentana">
-		<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 290px">
+    {
+        abrir_ventana($MULTILANG_UsrAdmInf,'panel-info');
+?>
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
-			<input type="hidden" name="PCO_Accion" value="agregar_informe_usuario">
-			<br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrAgreInf; ?>: <?php echo $usuario; ?></b></font>
-			<br><br>
-				<select name="informe" class="Combos">
+                <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
+                <input type="hidden" name="PCO_Accion" value="agregar_informe_usuario">
+                <font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrAgreInf; ?>: <?php echo $usuario; ?></b></font>
+                <br>
+				<select name="informe"  class="selectpicker " data-live-search=true data-size=10 data-style="btn btn-default btn-xs ">
 					<?php
 						//Despliega opciones de informes para agregar, aunque solamente las que este por debajo del perfil del usuario
 						//No se permite agregar opciones por encima del perfil actual del usuario
@@ -440,33 +436,25 @@ if ($PCO_Accion=="informes_usuario")
 							}
 					?>
 				</select>
+                <input type="Button" name="" value=" <?php echo $MULTILANG_Agregar; ?> " class="btn btn-success btn-xs" onClick="document.datos.submit()">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:document.core_ver_menu.submit();" class="btn btn-default btn-xs"><i class="fa fa-home"></i> <?php echo $MULTILANG_FrmAccionRegresar; ?></a>
 
-			<table width="90%" border="0" cellspacing="0" cellpadding="0" class="TextosVentana"><tr>
-				<td align="RIGHT" valign="TOP">
-					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;" class="link_menu">
-						<tr>
-							<td align="RIGHT">
-									</form>
-							</td><td width="5"></td>
-							<td align="RIGHT">
-									<input type="Button" name="" value=" <?php echo $MULTILANG_Agregar; ?> " class="BotonesCuidado" onClick="document.datos.submit()">
-									&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" name="" value=" <?php echo $MULTILANG_Cancelar; ?> " class="Botones">
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr></table>
-
-		<font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrInfDisp; ?></b></font><br><br>
+            </form>
+        <hr>
+		<font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrInfDisp; ?></b></font>
 		<?php
 			echo '
-			<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
-				<tr>
-					<td align="LEFT" bgcolor="#D6D6D6"><b>ID</b></td>
-					<td align="left" bgcolor="#d6d6d6"><b>'.$MULTILANG_Titulo.'</b></td>
-					<td align="LEFT" bgcolor="#D6D6D6"><b>'.$MULTILANG_InfCategoria.'</b></td>
-					<td align="left"></td>
-				</tr>';
+			<table class="table table-responsive btn-xs table-unbordered table-hover">
+				<thead>
+                <tr>
+					<th><b>ID</b></th>
+					<th><b>'.$MULTILANG_Titulo.'</b></th>
+					<th><b>'.$MULTILANG_InfCategoria.'</b></th>
+					<th></th>
+				</tr>
+                </thead>
+                <tbody>
+                ';
 
 			$resultado=ejecutar_sql("SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe,".$TablasCore."usuario_informe WHERE ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario=? ","$usuario");
 			while($registro = $resultado->fetch())
@@ -480,19 +468,16 @@ if ($PCO_Accion=="informes_usuario")
 											<input type="hidden" name="PCO_Accion" value="eliminar_informe_usuario">
 											<input type="hidden" name="usuario" value="'.$usuario.'">
 											<input type="hidden" name="informe" value="'.$registro["id"].'">
-											<input type="button" value="'.$MULTILANG_Eliminar.'" class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_UsrAdvDel.'\',f'.$registro["id"].');">
+                                            <a  href="javascript:confirmar_evento(\''.$MULTILANG_UsrAdvDel.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs"><i class="fa fa-times fa-fw"></i> '.$MULTILANG_Eliminar.'</a>
 									</form>
 							</td>
 						</tr>';
 				}
-			echo '</table>';
-		?>
-		</DIV>
-		</div>
+			echo '</tbody>
+            </table>';
 
-		 <?php
-		 				cerrar_ventana();
-		 		}
+        cerrar_ventana();
+	}
 
 
 /* ################################################################## */
@@ -603,18 +588,16 @@ if ($PCO_Accion=="eliminar_permiso")
 		<informes_usuario>
 */
 if ($PCO_Accion=="permisos_usuario")
-				{
-						echo '<div align="center"><br>';
-						abrir_ventana($MULTILANG_UsrAdmPer, 'panel-info');
-		?>
+    {
+        abrir_ventana($MULTILANG_UsrAdmPer, 'panel-info');
+?>
 
-		<div align="center" class="TextosVentana">
 			<form name="datoscopia" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="hidden" name="usuariod" value="<?php echo $usuario; ?>">
 			<input type="hidden" name="PCO_Accion" value="copiar_permisos">
 
-			<br><font face="" size="3" color="#971515"><b><?php echo $MULTILANG_UsrCopiaPer; ?>: </b></font>
-				<select name="usuarioo" class="selector_01" >
+			<font face="" size="3" color="#971515"><b><?php echo $MULTILANG_UsrCopiaPer; ?>: </b></font>
+				<select name="usuarioo" class="selectpicker " data-live-search=true data-size=5 data-style="btn btn-default btn-xs ">
 						<option value=""><?php echo $MULTILANG_UsrDelPer; ?></option>
 						<?php
 							$resultado=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login<>'admin' AND login<>? ORDER BY login","$usuario");
@@ -624,17 +607,15 @@ if ($PCO_Accion=="permisos_usuario")
 								}
 						?>
 				</select>
-					<input type="Button" name="" value="<?php echo $MULTILANG_Ejecutar; ?>" class="BotonesCuidado" onClick="document.datoscopia.submit()">
-			</form>
-		<br><hr>
+					<input type="Button" name="" value="<?php echo $MULTILANG_Ejecutar; ?>" class="btn btn-xs btn-danger" onClick="document.datoscopia.submit()">
+			</form><hr>
 
-		<DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 290px">
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
-			<input type="hidden" name="PCO_Accion" value="agregar_permiso">
-			<br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrAgreOpc; ?>: <?php echo $usuario; ?></b></font>
-			<br><br>
-				<select name="menu" class="Combos">
+                <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
+                <input type="hidden" name="PCO_Accion" value="agregar_permiso">
+                <font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrAgreOpc; ?>: <?php echo $usuario; ?></b></font>
+				<br>
+                <select name="menu"  class="selectpicker " data-live-search=true data-size=10 data-style="btn btn-default btn-xs ">
 					<?php
 						//Despliega opciones de menu para agregar, aunque solamente las que este por debajo del perfil del usuario
 						//No se permite agregar opciones por encima del perfil actual del usuario
@@ -645,42 +626,34 @@ if ($PCO_Accion=="permisos_usuario")
 							}
 					?>
 				</select>
+            	<input type="Button" name="" value=" <?php echo $MULTILANG_Agregar; ?> " class="btn btn-success btn-xs" onClick="document.datos.submit()">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:document.core_ver_menu.submit();" class="btn btn-default btn-xs"><i class="fa fa-home"></i> <?php echo $MULTILANG_FrmAccionRegresar; ?></a>
+            </form>
+            <hr>
 
-			<table width="90%" border="0" cellspacing="0" cellpadding="0" class="TextosVentana"><tr>
-				<td align="RIGHT" valign="TOP">
-					<table border="0" cellspacing="5" cellpadding="0" align="CENTER" style="font-family: Verdana, Tahoma, Arial; font-size: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px; margin-bottom: 10px;" class="link_menu">
-						<tr>
-							<td align="RIGHT">
-									</form>
-							</td><td width="5"></td>
-							<td align="RIGHT">
-									<input type="Button" name="" value=" <?php echo $MULTILANG_Agregar; ?> " class="BotonesCuidado" onClick="document.datos.submit()">
-									&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" name="" value=" <?php echo $MULTILANG_Cancelar; ?> " class="Botones">
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr></table>
-
-		<font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrSecc; ?></b></font><br><br>
+		<font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrSecc; ?></b></font>
 		<?php
 			echo '
-			<table width="100%" border="0" cellspacing="5" align="CENTER" class="TextosVentana">
-				<tr>
-					<td align="LEFT" bgcolor="#D6D6D6"><b>ID</b></td>
-					<td align="LEFT"></td>
-					<td align="left" bgcolor="#d6d6d6"><b>'.$MULTILANG_Etiqueta.'</b></td>
-					<td align="LEFT" bgcolor="#D6D6D6"><b>'.$MULTILANG_Tipo.'</b></td>
-					<td align="left" bgcolor="#d6d6d6"><b>'.$MULTILANG_MnuComando.'</b></td>
-					<td align="left"></td>
-				</tr>';
+			<table class="table table-responsive btn-xs table-unbordered table-hover">
+				<thead>
+                <tr>
+					<th><b>ID</b></th>
+					<th></th>
+					<th><b>'.$MULTILANG_Etiqueta.'</b></th>
+					<th><b>'.$MULTILANG_Tipo.'</b></th>
+					<th><b>'.$MULTILANG_MnuComando.'</b></th>
+					<th></th>
+				</tr>
+                </thead>
+                <tbody>
+                ';
 
 			$resultado=ejecutar_sql("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu,".$TablasCore."usuario_menu WHERE ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario=? ","$usuario");
 			while($registro = $resultado->fetch())
 				{
 					echo '<tr>
 							<td>'.$registro["id"].'</td>
-							<td align=right><img src="img/'.$registro["imagen"].'" border=0 alt="" valign="absmiddle" align="absmiddle" width="14" height="13" ></td>
+							<td align=right><i class="'.$registro["imagen"].'"></i></td>
 							<td><strong>'.$registro["texto"].'</strong></td>
 							<td>'.$registro["tipo_comando"].'</td>
 							<td>'.$registro["comando"].'</td>
@@ -689,19 +662,16 @@ if ($PCO_Accion=="permisos_usuario")
 											<input type="hidden" name="PCO_Accion" value="eliminar_permiso">
 											<input type="hidden" name="usuario" value="'.$usuario.'">
 											<input type="hidden" name="menu" value="'.$registro["id"].'">
-											<input type="button" value="'.$MULTILANG_Eliminar.'" class="BotonesCuidado" onClick="confirmar_evento(\''.$MULTILANG_UsrAdvDel.'\',f'.$registro["id"].');">
+                                            <a  href="javascript:confirmar_evento(\''.$MULTILANG_UsrAdvDel.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs"><i class="fa fa-times fa-fw"></i> '.$MULTILANG_Eliminar.'</a>
 									</form>
 							</td>
 						</tr>';
 				}
-			echo '</table>';
-		?>
-		</DIV>
-		</div>
+			echo '</tbody>
+            </table>';
 
-		 <?php
-		 				cerrar_ventana();
-		 		}
+        cerrar_ventana();
+    }
 
 
 
@@ -874,19 +844,17 @@ if ($PCO_Accion=="permisos_usuario")
 /* ################################################################## */
 if ($PCO_Accion=="agregar_usuario")
 	{
-			/*
-				Function: agregar_usuario
-				Presenta el formulario base para la adicion de usuarios al sistema.
+        /*
+            Function: agregar_usuario
+            Presenta el formulario base para la adicion de usuarios al sistema.
 
-				Salida de la funcion:
-					* Llamada al proceso <guardar_usuario> para almacenar la informacion correspondiente al nuevo usuario.
+            Salida de la funcion:
+                * Llamada al proceso <guardar_usuario> para almacenar la informacion correspondiente al nuevo usuario.
 
-				Ver tambien:
-					<listar_usuarios> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario> | <muestra_seguridad_clave> | <seguridad_clave>
-			*/
-		echo '<div align="center">';
+            Ver tambien:
+                <listar_usuarios> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario> | <muestra_seguridad_clave> | <seguridad_clave>
+        */
 		abrir_ventana($MULTILANG_UsrAdicion, 'panel-info');
-        
         mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'','fa fa-info-circle fa-5x texto-azul','alert alert-default alert-dismissible');
 ?>
 
@@ -964,18 +932,15 @@ if ($PCO_Accion=="agregar_usuario")
             <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 
 		 <?php
-		 				cerrar_ventana();
+            cerrar_ventana();
 			$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
-		 		}
+    }
 
-
-		 ?>
-
-<?php
 
 
 /* ################################################################## */
-if ($PCO_Accion=="ver_seguimiento_monitoreo")		
+/* ################################################################## */
+if ($PCO_Accion=="ver_seguimiento_monitoreo")
 				{
 			/*
 				Function: ver_seguimiento_monitoreo

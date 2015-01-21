@@ -30,6 +30,12 @@
     find . -type d -exec chmod 755 {} \;
     find . -type f -exec chmod 644 {} \;
     find . -name "*.sh" -exec chmod 777 {} \;
+    
+    #Permisos de carpetas en tiempo de instalacion
+    chmod 777 bkp
+    chmod 777 core
+    chmod 777 tmp
+    chmod 777 ins
 
     #chown -R www-data *
     #chown -R www *
