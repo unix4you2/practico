@@ -105,6 +105,9 @@ enlace:  http://www.unixlandia.org/index.php/Politicas_envio_de_parches
 	cd $SCRIPTPATH
 	cd ..
 
+#Incluye el archivo que ajusta todos los permisos previa generacion del zip
+	source dev_tools/chmod2zip.sh
+
 # Variables de trabajo adicionales
 	oldIFS=$IFS  # conserva el separador de campo
 	IFS=$'\n'  # nuevo separador de campo, el caracter fin de línea

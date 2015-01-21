@@ -38,6 +38,9 @@
 	cd $SCRIPTPATH
 	cd ..
 
+#Incluye el archivo que ajusta todos los permisos previa generacion del zip
+	source dev_tools/chmod2zip.sh
+
 # PARAMETROS BASICOS DEL EMPAQUETADO
 	#Lista de archivos y carpetas a empaquetar (relativos a la raiz y separados por espacio)
 	ListaArchivos=" AUTHORS index.php LICENSE README.md bkp core img inc ins mod skin tmp "
