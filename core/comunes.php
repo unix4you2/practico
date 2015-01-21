@@ -505,6 +505,31 @@
 			return $cadena;
 		}
 
+/* ################################################################## */
+/*  reemplaza los parametros, solo se usa para depuracion             */		
+/* ################################################################## */
+function completar_parametros($string,$data) {
+        $indexed=$data==array_values($data);
+        foreach($data as $k=>$v) {
+            if(is_string($v)) 
+	      if($v =='')
+		$v="NULL";
+	      else
+	        $v="'$v'";
+            if($indexed) 
+              if($v =='')
+		$string=preg_replace('/\?/','NULL',$string,1);
+	      else
+		$string=preg_replace('/\?/',$v,$string,1);
+            else
+              if($v =='')
+		$string=str_replace(":$k","NULL",$string);
+	      else
+	        $string=str_replace(":$k",$v,$string);
+        }
+        return $string;
+}
+
 
 /* ################################################################## */
 /* ################################################################## */
@@ -560,7 +585,7 @@
 				{
 					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
 					if ($Login_usuario=='admin' && $ModoDepuracion)
-						$mensaje_final=$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.$query;
+						$mensaje_final=$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.completar_parametros($query,$parametros);
 					else
 						$mensaje_final='<b>'.$MULTILANG_Detalles.'</b>: '.$MULTILANG_ErrorSoloAdmin;
 					//Presenta el mensaje sobre el HTML y como Emergente JS
@@ -623,7 +648,7 @@
 				{
 					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
 					if ($Login_usuario=='admin' && $ModoDepuracion)
-						echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$query.'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
+						echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.completar_parametros($query,$parametros).'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
 					else
 						echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$MULTILANG_ErrorSoloAdmin.'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
 					return $MULTILANG_ErrorTiempoEjecucion;
