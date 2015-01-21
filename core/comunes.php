@@ -544,9 +544,9 @@
 							//Recorre cada parametro y toma su valor
 							for ($i=1;$i<=$cantidad_parametros;$i++)
 								{
-                                    //Si no recibe valor en el parametro hace el bind con null para al menos hacerlo valido
+                                    //Si no recibe valor en el parametro hace el bind con vacio para al menos hacerlo valido
                                     if($parametros[$i-1] == "")
-                                        $consulta->bindValue($i,PDO::PARAM_NULL);
+                                        $consulta->bindValue($i,'');  // $consulta->bindValue($i,PDO::PARAM_NULL);
                                     else
                                         $consulta->bindValue($i, $parametros[$i-1]);
 									//echo 'Parametro '.$i.'='.$parametros[$i-1]."<br>"; //PARA DEPURACION
