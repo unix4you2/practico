@@ -67,11 +67,11 @@
 			if ($PCO_Accion== "eliminar_accion_informe")			$retorno = permiso_agregado_accion("administrar_informes");
 			// Funciones en core/usuarios.php
 			if ($PCO_Accion== "cambiar_clave")						$retorno = 1;
-			if ($PCO_Accion== "ver_seguimiento_monitoreo")			$retorno = permiso_agregado_accion("listar_usuarios");
+            if ($PCO_Accion== "ver_seguimiento_monitoreo")			$retorno = permiso_agregado_accion("listar_usuarios");
 			if ($PCO_Accion== "resetear_clave")						$retorno = permiso_agregado_accion("listar_usuarios");
 			if ($PCO_Accion== "ver_seguimiento_general")			$retorno = permiso_agregado_accion("listar_usuarios");
 			if ($PCO_Accion== "ver_seguimiento_especifico")			$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($PCO_Accion== "actualizar_clave")					$retorno = permiso_agregado_accion("cambiar_clave");
+			if ($PCO_Accion== "actualizar_clave")					$retorno = permiso_heredado_accion("cambiar_clave");
 			if ($PCO_Accion== "agregar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
 			if ($PCO_Accion== "guardar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
 			if ($PCO_Accion== "eliminar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
