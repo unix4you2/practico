@@ -85,6 +85,7 @@ LogCambios="
 * Added: Ahora las variables de contexto PCO_ValorBusquedaBD y PCO_CampoBusquedaBD pueden ser utilizadas para filtros en generación de informes
 * Added: Los informes cuentan con la posibilidad de filtrar mediante variables PHP definidas por el usuario.  Las variables pueden estar siendo recibidas por formularios previos donde se tomaran los nombres de campo como nombres de variable o cualquier otra variable global existente.
 * Added: Los informes puede ahora filtrar por patrones (LIKEs) visualmente, antes se podia ingresar su valor de operador manual solamente.
+* Fixed: Se preautoriza la funcion de actualizacion de clave por ser comun a todos los usuarios
 * Fixed: Lanzamiento de ventana de monitoreo con accion incorrecta.  Igual su proceso de autollamado.
 * Fixed: Cambio de peso en condiciones no dejaba activo su PopUp
 * Fixed: Generacion de informes no tomaba el tipo correcto
@@ -96,6 +97,7 @@ LogCambios="
 * Fixed: Tester: [Jaime A. Berrio ] Se corrigen los IDs de informe generados en los enlaces para los usuarios, opción Mis Informes
 * Fixed: Develo: [Christian Faure ] Las operaciones bind en base de datos son ahora depuradas para determinar valores en los parámetros. En caso de no existir son usados valores Null
 * Enhan: Tester: [Christian Faure ] Ahora para evitar que se apliquen de manera incompleta los parches se verifican los permisos de escritura sobre cada archivo que lo compone
+* Enhan: Develo: [Christian Faure ] Ahora la depuración permite ver el query completo (con sus valores por parámetro).
 * Enhan: Campos de edición de JavaScript para formularios pueden usar ahora ACE
 * Enhan: Reubicación de funciones de conteo de tiempos
 * Enhan: Limpieza del instalador, ya no se requieren skins

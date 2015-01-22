@@ -505,9 +505,20 @@
 			return $cadena;
 		}
 
-/* ################################################################## */
-/*  reemplaza los parametros, solo se usa para depuracion             */		
-/* ################################################################## */
+
+/* ##################################################################
+   ##################################################################
+    Function: completar_parametros
+    reemplaza los parametros, solo se usa para depuracion
+
+    Variables de entrada:
+
+        string - 
+        data - 
+        
+    Salida:
+        Retorna la cadena de consulta con valores formateada para impresion
+*/
 function completar_parametros($string,$data) {
         $indexed=$data==array_values($data);
         foreach($data as $k=>$v) {
@@ -656,7 +667,7 @@ function completar_parametros($string,$data) {
 				{
 					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
 					if ($Login_usuario=='admin' && $ModoDepuracion)
-						echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.completar_parametros($query,$parametros).'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
+                        echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.completar_parametros($query,$parametros).'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
 					else
 						echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$MULTILANG_ErrorSoloAdmin.'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
 					return $MULTILANG_ErrorTiempoEjecucion;
