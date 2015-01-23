@@ -235,30 +235,30 @@ CREATE TABLE core_chat (
   remitente VARCHAR(255) NOT NULL DEFAULT '',
   destinatario VARCHAR(255) NOT NULL DEFAULT '',
   message TEXT,
-  sent DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+  sent TIMESTAMP,
   recd INTEGER NOT NULL DEFAULT '0',
   PRIMARY KEY (id)
-);
+);	
 
 DROP TABLE IF EXISTS core_monitoreo;
 CREATE TABLE core_monitoreo (
   id serial,
   tipo VARCHAR(20) NOT NULL DEFAULT '',
-  pagina int(10) NOT NULL,
-  peso int(10) NOT NULL,
+  pagina integer NOT NULL,
+  peso integer NOT NULL,
   nombre VARCHAR(255) NOT NULL DEFAULT '',
   host VARCHAR(255) NOT NULL DEFAULT '',
   puerto VARCHAR(255) NOT NULL DEFAULT '',
   tipo_ping VARCHAR(255) NOT NULL DEFAULT '',
-  saltos int(10) NOT NULL,
+  saltos integer NOT NULL,
   comando TEXT,
-  ancho int(10) NOT NULL,
-  alto int(10) NOT NULL, 
-  tamano_resultado int(10) NOT NULL,
-  ocultar_titulos int(10) NOT NULL,
+  ancho integer NOT NULL,
+  alto integer NOT NULL, 
+  tamano_resultado integer NOT NULL,
+  ocultar_titulos integer NOT NULL,
   path VARCHAR(255) NOT NULL DEFAULT '',
   correo_alerta VARCHAR(255) NOT NULL DEFAULT '',
-  alerta_sonora int(10) default '0',
-  milisegundos_lectura int(10) default '1',
+  alerta_sonora integer default '0',
+  milisegundos_lectura integer default '1',
   PRIMARY KEY (id)
 );
