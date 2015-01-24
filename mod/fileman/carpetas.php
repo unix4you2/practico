@@ -29,7 +29,10 @@
 	//Si el usuario es el admin cambia la definicion de raices para agregar una que permite ver todos los usuarios
 	if ($Usuario_activo=="admin")
 		{
-			$opts = array
+            $Partes_Directorio_instalacion = explode(DIRECTORY_SEPARATOR, getcwd());
+            $Directorio_instalacion= $Partes_Directorio_instalacion[count($Partes_Directorio_instalacion)-5];
+
+            $opts = array
 				(
 					// 'debug' => true,
 					'roots' => array
@@ -68,9 +71,9 @@
 							array
 								(
 									'driver'        => 'LocalFileSystem',   // driver for accessing file system (REQUIRED)
-									'path'          => '../../../../../practico/',         // path to files (REQUIRED)
-									'URL'           => dirname($_SERVER['PHP_SELF']) . '/../../../../../practico/', // URL to files (REQUIRED)
-									'alias' 		=> 'Raiz de Practico',
+									'path'          => '../../../../../'.$Directorio_instalacion.'/',         // path to files (REQUIRED)
+									'URL'           => dirname($_SERVER['PHP_SELF']) . '/../../../../../'.$Directorio_instalacion.'/', // URL to files (REQUIRED)
+									'alias' 		=> 'Raiz de '.$Directorio_instalacion,
 									'accessControl' => 'access'             // disable and hide dot starting files (OPTIONAL)
 								)
 							//Agrega raiz para la carpeta compartida general ubicada en archivos/_publico_

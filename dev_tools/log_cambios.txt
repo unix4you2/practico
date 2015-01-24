@@ -52,6 +52,7 @@ inc/map-icons/*
 inc/octicons/*
 inc/typicons/*
 inc/weather-icons/*
+/mod/fileman/carpetas.php
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -108,6 +109,8 @@ LogCambios="
 * Enhan: Enlace a la documentación de funciones desde la web
 * Enhan: Por compatibilidad las variables internas de valorbase y campobase ahora son llamadas PCO_ValorBusquedaBD y PCO_CampoBusquedaBD
 * Enhan: Se elimina doble título en informes.  Ahora se despliega el título solo en la barra de ventana.  Embebidos desaparece.
+* Enhan: El administrador de archivos permite la gestion desde la raiz para instalaciones realizadas en carpetas diferentes a las llamadas "practico"
+* Enhan: Mensaje complementario para edicion de scripts
 
 IMPORTANTE: Aquellos que hayan aplicado procesos de actualizacion previos (15.1.xxx) es probable que vean errores de ejecución SQL durante la aplicación del parche.  Si encuentre mensajes como que la tabla ya existe entonces todo va con normalidad pues ya ha sido parchado su sistema para el uso de la nueva tabla.
 "

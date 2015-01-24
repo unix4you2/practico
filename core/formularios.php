@@ -2273,6 +2273,7 @@ function FrmAutoRun()
                     </div>
                 <?php
                     $barra_herramientas_modal='
+                        <i class="btn-xs">'.$MULTILANG_FrmHlpFinalFunciones.'</i>
                         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
                     cerrar_dialogo_modal($barra_herramientas_modal);
                 ?>
@@ -2349,7 +2350,7 @@ function FrmAutoRun()
 
             </form>
             <br>
-            <a class="btn btn-primary btn-xs btn-block" data-toggle="modal" href="#myModalJAVASCRIPT">
+            <a class="btn btn-primary btn-block" data-toggle="modal" href="#myModalJAVASCRIPT">
                 <div>
                     <i class="fa fa-file-code-o"></i> <?php echo $MULTILANG_FrmAdvScriptForm; ?>
                 </div>

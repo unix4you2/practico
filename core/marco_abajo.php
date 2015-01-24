@@ -258,11 +258,17 @@
                         editor.getSession().setMode("ace/mode/" + mode);
                         editor.setTheme("ace/theme/eclipse"); //Establece el tema a utilizar twilight|eclipse
                         
+                        /*
                         // copy back to textarea on form submit...
                         textarea.closest('form').submit(function () {
                             textarea.val(editor.getSession().getValue());
                         })
+                        */
 
+                        //En cada evento de cambio actualiza el textarea
+                        editor.getSession().on('change', function(){
+                          textarea.val(editor.getSession().getValue());
+                        });
                     });
                 });
             </script>
