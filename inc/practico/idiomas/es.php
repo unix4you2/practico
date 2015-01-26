@@ -389,7 +389,7 @@
 	$MULTILANG_FrmAccionJS='Comando en JavaScript';
 	$MULTILANG_FrmDesAccion='Comando que deber&aacute; ejecutar el control al ser pulsado.  Para acciones definidas es personalizadas.php los datos del formulario ser&aacute;n enviados a esa rutina para ser procesados';
 	$MULTILANG_FrmAccionCMD='Comando del usuario';
-	$MULTILANG_FrmAccionDesCMD='Nombre de la acci&oacute;n definida en el archivo de personalizaci&oacute;n que procesar&aacute; la informaci&oacute;n o comando en JavaScript a ser ejecutado de manera inmediata en la p&aacute;gina (si requiere par&aacute;metros dentro de su comando utilice comillas sencillas para encerrarlos). Para cargar objetos de Pr&aacute;ctico como formularios o informes puede usar la misma notaci&oacute;n de menus: frm:XX:Par1:Par2:ParN o inf:XX...  El comando javascript ImprimirMarco(\'seccion_impresion\') le permite imprimir el contenido del formulario';
+	$MULTILANG_FrmAccionDesCMD='Nombre de la acci&oacute;n definida en el archivo de personalizaci&oacute;n que procesar&aacute; la informaci&oacute;n o comando en JavaScript a ser ejecutado de manera inmediata en la p&aacute;gina (si requiere par&aacute;metros dentro de su comando utilice comillas sencillas para encerrarlos). Para cargar objetos de Pr&aacute;ctico como formularios o informes puede usar la misma notaci&oacute;n de menus: frm:XX:Par1:Par2:ParN o inf:XX...  El comando javascript ImprimirMarco(\'seccion_impresion\') le permite imprimir el contenido del formulario.  Tambien puede usar comandos como PCO_VentanaPopup(\'http://www.google.com\',\'SuTitulo\',\'toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\'); .Revise siempre la documentacion para una lista completa y actualizada de comandos.';
 	$MULTILANG_FrmDesPeso='Posicion en la que aparece el campo dentro de la barra de estado del formulario cuando este se despliega en pantalla. Orden de izquierda a derecha';
 	$MULTILANG_FrmBotDesVisible='Determina si el control es visible o no para el usuario';
 	$MULTILANG_FrmRetorno='T&iacute;tulo de retorno';
@@ -466,6 +466,8 @@
                 <li><u>data-size=auto|#</u> Determina cuantas opciones presentar en la lista. Por defecto es auto.</li>
                 <li><u>data-style=btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u> Cambia el estilo grafico del control
                 <li><u>disabled</u> Deshabilita el control.</li>';
+    $MULTILANG_FrmBtnFull='Cargar en pantalla completa';
+    $MULTILANG_FrmBtnObjetivo='Objetivo HTML';
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

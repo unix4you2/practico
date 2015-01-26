@@ -2929,7 +2929,7 @@ function ventana_login()
 				
 				//Si se quiere anular el formulario y su accion cuando se trata de un sub-formulario de consulta
 				if (!$anular_form)
-					echo'<form name="datos" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+					echo'<form id="datos" name="datos" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 						<input type="Hidden" name="PCO_Accion" value="guardar_datos_formulario">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="id_registro_datos" value="'.@$registro_datos_formulario["id"].'">
@@ -2980,7 +2980,6 @@ function ventana_login()
                                 echo '
                                 <!-- INICIO de las pestanas No '.$pestana_activa.' -->
                                     <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="pestana_formulario_'.$pestana_activa.'">';
-                                    
                                     
                                         //Booleana que determina si se debe incluir el javascript de ckeditor
                                         $existe_campo_textoformato=0;
@@ -3129,54 +3128,34 @@ function ventana_login()
                     echo '<div align="center">';
 					while ($registro_botones = $consulta_botones->fetch())
 						{
-							//Define el tipo de boton de acuerdo al tipo de accion como Submit, Reset o Button
-							$tipo_boton="Button";
+							//Define el tipo de boton de acuerdo al tipo de accion
 							if ($registro_botones["tipo_accion"]=="interna_guardar")
-								{
-									$tipo_boton="Submit";
-								}
+                                $comando_javascript="document.getElementById('datos').submit();";    
 							if ($registro_botones["tipo_accion"]=="interna_limpiar")
-								{
-									$tipo_boton="Reset";
-								}
-							if ($registro_botones["tipo_accion"]=="interna_escritorio")
-								{
-									$tipo_boton="Button";
-									$comando_javascript="document.core_ver_menu.submit()";
-								}
+                                $comando_javascript="document.getElementById('datos').reset();";
+                            if ($registro_botones["tipo_accion"]=="interna_escritorio")
+                                $comando_javascript="document.core_ver_menu.submit();";
 							if ($registro_botones["tipo_accion"]=="interna_actualizar")
-								{
-									$tipo_boton="Button";
-									$comando_javascript="document.datos.PCO_Accion.value='actualizar_datos_formulario';document.datos.submit()";
-								}
+								$comando_javascript="document.datos.PCO_Accion.value='actualizar_datos_formulario';document.datos.submit();";
 							if ($registro_botones["tipo_accion"]=="interna_eliminar")
-								{
-									$tipo_boton="Button";
-									$comando_javascript="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit()";
-								}
+								$comando_javascript="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit();";
 							if ($registro_botones["tipo_accion"]=="interna_cargar")
 								{
 									echo '<input type="hidden" name="objeto" value="'.$registro_botones["accion_usuario"].'">';
-									$tipo_boton="Button";
-									$comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.submit()";
+									$comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.submit();";
 								}
 							if ($registro_botones["tipo_accion"]=="externa_formulario")
-								{
-									$tipo_boton="Button";
-									$comando_javascript="document.datos.PCO_Accion.value='".$registro_botones["accion_usuario"]."';document.datos.submit()";
-								}
+								$comando_javascript="document.datos.PCO_Accion.value='".$registro_botones["accion_usuario"]."';document.datos.submit();";
 							if ($registro_botones["tipo_accion"]=="externa_javascript")
-								{
-									$tipo_boton="Button";
-									$comando_javascript=$registro_botones["accion_usuario"];
-								}
-							if (@$comando_javascript!="" && $tipo_boton!="Reset")
-								{
-									$cadena_javascript='onclick="'.@$comando_javascript.'"';
-								}
+								$comando_javascript=$registro_botones["accion_usuario"];
+
+                            //Genera la cadena del enlace
+                            $cadena_javascript='href="javascript:'.@$comando_javascript.'"';
+                            
 							//Si no se especifica un estilo para el boton entonces se usa el predeterminado
                             $estilo_basico_boton="btn btn-default";
-                            echo '<input type="'.$tipo_boton.'"  class="'.$estilo_basico_boton.' '.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.@$cadena_javascript.' >';
+                            echo '<a class="'.$estilo_basico_boton.' '.$registro_botones["estilo"].'" '.@$cadena_javascript.'>'.$registro_botones["titulo"].'</a>';
+
                             echo '&nbsp;&nbsp;'; //Agrega espacio temporal entre controles
 						}
                     echo '</div>';

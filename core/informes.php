@@ -1612,7 +1612,6 @@ if ($PCO_Accion=="guardar_informe")
 */
 if ($PCO_Accion=="administrar_informes")
 	{
-		echo "<div align=center><a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/M4kYe9nTeTA\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a></div>";
 		 ?>
 
 <div class="row">

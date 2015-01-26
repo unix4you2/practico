@@ -52,12 +52,6 @@
     <link href="../inc/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 	<link rel="shortcut icon" href="../img/favicon.ico"/>
-	<script language="JavaScript">
-		function abrir_ventana_popup(theURL,winName,features)
-			{ 
-				window.open(theURL,winName,features);
-			}
-	</script>
 </head>
 <body oncontextmenu="return false;">
     <form method="POST" name="cerrar_sesion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">

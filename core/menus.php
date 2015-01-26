@@ -515,7 +515,6 @@ if ($PCO_Accion=="administrar_menu")
 	{
 		$PCO_Accion=escapar_contenido($PCO_Accion); //Limpia cadena para evitar XSS
 		echo '<div align="center"><br>';
-		echo "<a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/-24qazTBngg\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a>";
 		abrir_ventana($MULTILANG_MnuAdmin, 'panel-primary');
         
         selector_iconos_awesome();

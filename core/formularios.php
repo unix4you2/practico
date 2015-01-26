@@ -76,7 +76,7 @@
 					// Busca si el campo cuenta con el valor en la tabla
 
 					// Inserta los datos
-					ejecutar_sql_unaria("DELETE FROM ".$tabla." WHERE $campo = $valor ");
+					ejecutar_sql_unaria("DELETE FROM ".$tabla." WHERE $campo = '$valor' ");
 					auditar("Elimina registro donde ".$campo." = ".$valor." en ".$tabla);
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="editar_formulario">
@@ -620,7 +620,7 @@
 			if ($tipo_accion=="") $mensaje_error=$MULTILANG_ErrFrmCampo4;
 			if ($mensaje_error=="")
 				{
-					$accion_usuario=addslashes($accion_usuario);
+					//$accion_usuario=addslashes($accion_usuario); //DEPRECATED Version 15.1-
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$formulario$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$retorno_titulo$_SeparadorCampos_$retorno_texto$_SeparadorCampos_$confirmacion_texto");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea boton $id para formulario $formulario");
@@ -662,6 +662,7 @@
 	Salida:
 		Ventanas con herramientas de edicion y vista previa del formulario en pantalla
 */
+/* ################################################################## */
 if ($PCO_Accion=="editar_formulario")
 	{
 		  ?>
@@ -1470,7 +1471,7 @@ if ($PCO_Accion=="editar_formulario")
                     <div class="form-group input-group">
                         <input type="text" name="accion_usuario" class="form-control" placeholder="<?php echo $MULTILANG_FrmAccionCMD; ?>">
                         <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_FrmAccionDesCMD; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                            <a href="#" data-placement="left" data-toggle="popover" data-html="true" title="<?php echo $MULTILANG_Ayuda; ?>" data-content="<?php echo $MULTILANG_FrmAccionDesCMD; ?>"><i class="fa fa-question-circle text-info"></i></a>
                         </span>
                     </div>
 
@@ -1523,6 +1524,32 @@ if ($PCO_Accion=="editar_formulario")
                             <a href="#" title="<?php echo $MULTILANG_FrmDesConfirma; ?>"><i class="fa fa-question-circle text-info"></i></a>
                         </span>
                     </div>
+
+                    <!--
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="target_formulario"><?php echo $MULTILANG_FrmBtnObjetivo; ?></label>
+                            <div class="form-group input-group">
+                                <select id="target_formulario" name="target_formulario" class="form-control">
+                                    <option value="_SELF">_SELF (<?php echo $MULTILANG_Predeterminado; ?>)</option>
+                                    <option value="_BLANK">_BLANK</option>
+                                    <option value="_PARENT">_PARENT</option>
+                                    <option value="_TOP">_TOP</option>
+                                </select>
+                            </div>
+                        </div>    
+                        <div class="col-md-6">
+                            <label for="pantalla_completa"><?php echo $MULTILANG_FrmBtnFull; ?></label>
+                            <div class="form-group input-group">
+                                <select id="pantalla_completa" name="pantalla_completa" class="form-control">
+                                    <option value="0"><?php echo $MULTILANG_No; ?></option>
+                                    <option value="1"><?php echo $MULTILANG_Si; ?></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+
                     </form>
     <?php 
         $barra_herramientas_modal='
@@ -2252,7 +2279,6 @@ if ($PCO_Accion=="editar_formulario")
 */
 if ($PCO_Accion=="administrar_formularios")
 	{
-		echo "<div align=center><a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/-50HOcXa9tY\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a></div>";
 		 ?>
 
         <form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">

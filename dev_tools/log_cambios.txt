@@ -29,6 +29,7 @@ core/marco_param.php
 core/menus.php
 core/monitoreo.php
 core/objetos.php
+core/tablas.php
 core/usuarios.php
 inc/bootstrap/css/practico.css
 inc/bootstrap/css/plugins/datepicker/*
@@ -111,6 +112,8 @@ LogCambios="
 * Enhan: Se elimina doble título en informes.  Ahora se despliega el título solo en la barra de ventana.  Embebidos desaparece.
 * Enhan: El administrador de archivos permite la gestion desde la raiz para instalaciones realizadas en carpetas diferentes a las llamadas "practico"
 * Enhan: Mensaje complementario para edicion de scripts
+* Enhan: Todos los botones de formularios han sido convertidos al tag <a> para mayor flexibilidad
+* Enhan: Eliminacion de enlaces a videotutoriales. Se quedan obsoletos rapidamente asi que seran vinculados desde la pagina oficial.
 
 IMPORTANTE: Aquellos que hayan aplicado procesos de actualizacion previos (15.1.xxx) es probable que vean errores de ejecución SQL durante la aplicación del parche.  Si encuentre mensajes como que la tabla ya existe entonces todo va con normalidad pues ya ha sido parchado su sistema para el uso de la nueva tabla.
 "

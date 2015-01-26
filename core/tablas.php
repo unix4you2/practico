@@ -580,8 +580,6 @@ echo '
 */
 	if ($PCO_Accion=="administrar_tablas")
 		{
-			echo "<center><a href='javascript:abrir_ventana_popup(\"http://www.youtube.com/embed/otODPESW0k0\",\"VideoTutorial\",\"toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\");'><i class='fa fa-life-ring fa-2x texto-rojo'></i></a></center>";
-
 			abrir_ventana($MULTILANG_TblCrearListar,'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="guardar_crear_tabla">

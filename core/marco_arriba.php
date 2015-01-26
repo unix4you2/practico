@@ -110,7 +110,7 @@
 
 	<link rel="shortcut icon" href="img/favicon.ico"/>
 	<script language="JavaScript">
-		function abrir_ventana_popup(theURL,winName,features)
+		function PCO_VentanaPopup(theURL,winName,features)
 			{ 
 				window.open(theURL,winName,features);
 			}
