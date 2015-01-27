@@ -302,8 +302,8 @@ if ($PCO_Accion=="actualizar_clave")
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="cambiar_clave">
-					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
-					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
+					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 					</form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 			}
@@ -831,8 +831,8 @@ if ($PCO_Accion=="permisos_usuario")
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="agregar_usuario">
-						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
-						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}

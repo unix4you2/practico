@@ -79,8 +79,8 @@
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="editar_tabla">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError.'">
-						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_TblError.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -132,8 +132,8 @@
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="editar_tabla">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError2.'">
-						<input type="Hidden" name="error_descripcion" value="'.$MULTILANG_TblError3.': <i>'.$descripcion_ultimo_error.'</i>">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_TblError2.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$MULTILANG_TblError3.': <i>'.$descripcion_ultimo_error.'</i>">
 						</form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -544,8 +544,8 @@ echo '
 						{
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 								<input type="Hidden" name="PCO_Accion" value="administrar_tablas">
-								<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError2.'">
-								<input type="Hidden" name="error_descripcion" value="'.$MULTILANG_TblError3.' <i>'.$error_mysql.'</i>">
+								<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_TblError2.'">
+								<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$MULTILANG_TblError3.' <i>'.$error_mysql.'</i>">
 								</form>
 									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 						}
@@ -560,8 +560,8 @@ echo '
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="administrar_tablas">
-						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError1.'">
-						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_TblError1.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -722,8 +722,8 @@ echo '
 						{
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 								<input type="Hidden" name="PCO_Accion" value="asistente_tablas">
-								<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError2.'">
-								<input type="Hidden" name="error_descripcion" value="'.$MULTILANG_TblError3.': <i>'.$error_mysql.'</i>">
+								<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_TblError2.'">
+								<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$MULTILANG_TblError3.': <i>'.$error_mysql.'</i>">
 								</form>
 									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 						}
@@ -773,8 +773,8 @@ echo '
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="asistente_tablas">
-						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_TblError1.'">
-						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_TblError1.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}

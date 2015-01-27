@@ -306,21 +306,21 @@
 				Salida:
 					Cadenas y variables filtradas sobre sus valores globales
 			*/
-		global $PCO_Accion,$error_titulo,$error_descripcion;
+		global $PCO_Accion,$PCO_ErrorTitulo,$PCO_ErrorDescripcion;
 		// Escapar siempre las acciones pues deberian tener solo letras, numeros y underlines.
 		$PCO_Accion=escapar_contenido($PCO_Accion);
 		$PCO_Accion = preg_replace("/[^A-Za-z0-9_]/", "", $PCO_Accion);
 		
 		// Escapa siempre los mensajes de error
-		$error_titulo=escapar_contenido($error_titulo);
-		$error_titulo = preg_replace("/[^A-Za-z0-9_ ><]/", "", $error_titulo);
-		$error_descripcion=escapar_contenido($error_descripcion);
-		$error_descripcion = preg_replace("/[^A-Za-z0-9_ ><]/", "", $error_descripcion);
+		$PCO_ErrorTitulo=escapar_contenido($PCO_ErrorTitulo);
+		$PCO_ErrorTitulo = preg_replace("/[^A-Za-z0-9_ ><]/", "", $PCO_ErrorTitulo);
+		$PCO_ErrorDescripcion=escapar_contenido($PCO_ErrorDescripcion);
+		$PCO_ErrorDescripcion = preg_replace("/[^A-Za-z0-9_ ><]/", "", $PCO_ErrorDescripcion);
 		
 		// Escapa otras variables de uso comun
-		global $error_titulo,$error_descripcion;
-		$error_titulo=escapar_contenido($error_titulo);
-		$error_descripcion=escapar_contenido($error_descripcion);
+		global $PCO_ErrorTitulo,$PCO_ErrorDescripcion;
+		$PCO_ErrorTitulo=escapar_contenido($PCO_ErrorTitulo);
+		$PCO_ErrorDescripcion=escapar_contenido($PCO_ErrorDescripcion);
 
 		// Escapar algunas variables segun la accion recibida
 		if ($PCO_Accion=="ver_seguimiento_general")
@@ -333,9 +333,9 @@
 
 		if ($PCO_Accion=="administrar_formularios")
 			{
-				global $error_descripcion,$error_titulo;
-				$error_descripcion=escapar_contenido($error_descripcion);
-				$error_titulo=escapar_contenido($error_titulo);
+				global $PCO_ErrorDescripcion,$PCO_ErrorTitulo;
+				$PCO_ErrorDescripcion=escapar_contenido($PCO_ErrorDescripcion);
+				$PCO_ErrorTitulo=escapar_contenido($PCO_ErrorTitulo);
 			}
 
 		if ($PCO_Accion=="actualizar_menu")
@@ -3626,8 +3626,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			{
 				echo '<form name="cancelarXTamano" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
-					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
-					<input type="Hidden" name="error_descripcion" value="'.$MULTILANG_InfErrTamano.'">
+					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
+					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$MULTILANG_InfErrTamano.'">
 					</form>
 					<script type="" language="JavaScript"> document.cancelarXTamano.submit();  </script>';
 			}
@@ -3808,8 +3808,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="informe" value="'.$informe.'">
-						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
-						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}

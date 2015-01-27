@@ -181,8 +181,8 @@
     }
 
     // Presenta mensajes con errores generales cuando son encontrados durante la ejecucion
-    if (@$error_titulo!="") {
-        mensaje($error_titulo, $error_descripcion, '', 'fa fa-thumbs-down fa-fw fa-2x', 'alert alert-danger alert-dismissible');
+    if (@$PCO_ErrorTitulo!="") {
+        mensaje($PCO_ErrorTitulo, $PCO_ErrorDescripcion, '', 'fa fa-thumbs-down fa-fw fa-2x', 'alert alert-danger alert-dismissible');
     }
 
 /* ################################################################## */

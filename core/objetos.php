@@ -96,8 +96,8 @@
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
-						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
-						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -236,8 +236,8 @@ $salida=sprintf("<?php
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
-						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
-						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -455,8 +455,8 @@ $salida=sprintf("<?php
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
-						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
-						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}

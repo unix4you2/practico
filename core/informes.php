@@ -154,8 +154,8 @@ if ($PCO_Accion=="actualizar_grafico_informe")
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="editar_informe">
 					<input type="Hidden" name="informe" value="'.$informe.'">
-					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
-					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
+					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 					</form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 			}
@@ -206,8 +206,8 @@ if ($PCO_Accion=="actualizar_informe")
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="editar_informe">
 					<input type="Hidden" name="informe" value="'.$id.'">
-					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
-					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
+					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 					</form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 			}
@@ -296,9 +296,9 @@ if ($PCO_Accion=="eliminar_informe_condicion")
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="editar_informe">
-						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="informe" value="'.$informe.'">
-						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -386,9 +386,9 @@ if ($PCO_Accion=="eliminar_informe_campo")
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="editar_informe">
-						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="informe" value="'.$informe.'">
-						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -472,9 +472,9 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="editar_informe">
-						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="informe" value="'.$informe.'">
-						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -519,8 +519,8 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="editar_informe">
-						<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
-						<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						<input type="Hidden" name="informe" value="'.$informe.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -1586,8 +1586,8 @@ if ($PCO_Accion=="guardar_informe")
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="administrar_informes">
-					<input type="Hidden" name="error_titulo" value="'.$MULTILANG_ErrorDatos.'">
-					<input type="Hidden" name="error_descripcion" value="'.$mensaje_error.'">
+					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
+					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 					</form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 			}
