@@ -243,7 +243,7 @@ if ($PCO_Accion=="cambiar_clave")
                 <hr>
                 <?php
                     //Permite cambio solamente si es admin o el motor de autenticacion es practico
-                    if ($Auth_TipoMotor=="practico" || $Login_usuario=="admin")
+                    if ($Auth_TipoMotor=="practico" || $PCOSESS_LoginUsuario=="admin")
                         {
                             echo '
                                 <a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> '.$MULTILANG_Actualizar.'</a>
@@ -268,12 +268,12 @@ if ($PCO_Accion=="cambiar_clave")
 
 	Variables de entrada:
 
-		Login_usuario - Variable de sesion con el UID/Login de usuario al que se desea actualizar la clave
+		PCOSESS_LoginUsuario - Variable de sesion con el UID/Login de usuario al que se desea actualizar la clave
 		clave1 y clave2 - Valores ingresados para la nueva contrasena
 		seguridad - Nivel de seguridad calculado para la contrasena
 
 		(start code)
-			"UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login='$Login_usuario'"
+			"UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login='$PCOSESS_LoginUsuario'"
 		(end)
 
 	Salida:
@@ -294,7 +294,7 @@ if ($PCO_Accion=="actualizar_clave")
 
 		if ($mensaje_error=="")
 			{
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login=? ","$Login_usuario");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login=? ","$PCOSESS_LoginUsuario");
 				auditar("Actualiza clave de acceso");
 				echo '<script language="javascript"> document.core_ver_menu.submit(); </script>';
 			}
@@ -730,7 +730,7 @@ if ($PCO_Accion=="permisos_usuario")
 						if ($estado==1)
 							$consulta = "UPDATE ".$TablasCore."usuario SET estado=0 WHERE login='$uid_especifico'";
 						else
-							$consulta = "UPDATE ".$TablasCore."usuario SET estado=1, ultimo_acceso='$fecha_operacion' WHERE login='$uid_especifico'";
+							$consulta = "UPDATE ".$TablasCore."usuario SET estado=1, ultimo_acceso='$PCO_FechaOperacion' WHERE login='$uid_especifico'";
 					(end)
 
 				Salida de la funcion:
@@ -742,7 +742,7 @@ if ($PCO_Accion=="permisos_usuario")
 			if ($estado==1)
 				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET estado=0 WHERE login=? ","$uid_especifico");
 			else
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET estado=1, ultimo_acceso=? WHERE login=? ","$fecha_operacion$_SeparadorCampos_$uid_especifico");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET estado=1, ultimo_acceso=? WHERE login=? ","$PCO_FechaOperacion$_SeparadorCampos_$uid_especifico");
 			auditar("Cambia estado del usuario $uid_especifico");
 			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 		}
@@ -788,7 +788,7 @@ if ($PCO_Accion=="permisos_usuario")
 				Proceso simplificado:
 					(start code)
 						SELECT login as uid_db FROM ".$TablasCore."usuario WHERE login='$login'
-						INSERT INTO ".$TablasCore."usuario VALUES ('$login','$clavemd5','$nombre','$descripcion',$estado,'$nivel','$correo','$fecha_operacion','$pasomd5')"
+						INSERT INTO ".$TablasCore."usuario VALUES ('$login','$clavemd5','$nombre','$descripcion',$estado,'$nivel','$correo','$PCO_FechaOperacion','$pasomd5')"
 					(end)
 
 				Salida de la funcion:
@@ -823,7 +823,7 @@ if ($PCO_Accion=="permisos_usuario")
 					// Inserta datos del usuario
 					$clavemd5=MD5($clave);
 					$pasomd5=MD5($LlaveDePaso);
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$fecha_operacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno");
 					auditar("Agrega usuario $login para $nombre");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}

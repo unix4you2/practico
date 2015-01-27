@@ -35,9 +35,9 @@
 
     echo $MULTILANG_UsuariosChat;
     //Consulta los usuarios siempre y cuando tenga sesion activa
-    if ($Sesion_abierta)
+    if ($PCOSESS_SesionAbierta)
         {
-            $resultado=ejecutar_sql("SELECT $ListaCamposSinID_usuario from ".$TablasCore."usuario WHERE login<>'$Login_usuario' ");
+            $resultado=ejecutar_sql("SELECT $ListaCamposSinID_usuario from ".$TablasCore."usuario WHERE login<>'$PCOSESS_LoginUsuario' ");
 
             //Presenta la lista de usuarios
             echo '<table class="table">

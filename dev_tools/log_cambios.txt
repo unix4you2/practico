@@ -21,19 +21,27 @@ index.php
 core/actualizacion.php
 core/ajax.php
 core/comunes.php
+core/correos.php
 core/formularios.php
 core/informes.php
 core/marco_abajo.php
+core/marco_admin.php
+core/marco_admin_morris.php
 core/marco_arriba.php
 core/marco_arriba_bs.php
+core/marco_chat.php
 core/marco_conf.php
+core/marco_dev.php
+core/marco_oauth.php
 core/marco_param.php
 core/marco_wscfg.php
 core/menus.php
 core/monitoreo.php
 core/objetos.php
+core/sesion.php
 core/tablas.php
 core/usuarios.php
+core/ws_funciones.php
 inc/bootstrap/css/practico.css
 inc/bootstrap/css/plugins/datepicker/*
 inc/bootstrap/css/plugins/iconpicker/*
@@ -57,6 +65,12 @@ inc/octicons/*
 inc/typicons/*
 inc/weather-icons/*
 /mod/fileman/carpetas.php
+/mod/fileman/index.php
+/mod/ldap/index.php
+/mod/mvc/index.php
+/mod/pam/index.php
+/mod/pdf/index.php
+/mod/sopa/index.php
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -120,7 +134,7 @@ LogCambios="
 * Enhan: Mensaje complementario para edicion de scripts
 * Enhan: Todos los botones de formularios han sido convertidos al tag <a> para mayor flexibilidad
 * Enhan: Eliminacion de enlaces a videotutoriales. Se quedan obsoletos rapidamente asi que seran vinculados desde la pagina oficial.
-* Enhan: Cambio de variables por compatibilidad: error_titulo a PCO_ErrorTitulo y error_descripcion a PCO_ErrorDescripcion
+* Enhan: Cambio de variables por compatibilidad: error_titulo a PCO_ErrorTitulo, error_descripcion a PCO_ErrorDescripcion, fecha_operacion_guiones a PCO_FechaOperacionGuiones, hora_operacion_puntos a PCO_HoraOperacionPuntos, hora_operacion a PCO_HoraOperacion, fecha_operacion a PCO_FechaOperacion, Login_usuario (sesion) por PCOSESS_LoginUsuario, Sesion_abierta a PCOSESS_SesionAbierta
 
 IMPORTANTE: Aquellos que hayan aplicado procesos de actualizacion previos (15.1.xxx) es probable que vean errores de ejecución SQL durante la aplicación del parche.  Si encuentre mensajes como que la tabla ya existe entonces todo va con normalidad pues ya ha sido parchado su sistema para el uso de la nueva tabla.
 "

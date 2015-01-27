@@ -24,14 +24,12 @@
 
 	Variables de entrada:
 
-		fecha_operacion_guiones - Fecha actual en formato AAAA-MM-DD
-		hora_operacion_puntos - Hora actual en formato HH:MM:SS
-		Login_usuario - Nombre de usuario que se encuentra logueado en el sistema
+		PCOSESS_LoginUsuario - Nombre de usuario que se encuentra logueado en el sistema
 		accion - Accion llamada actualmente en Practico (identificador unico de funcion interna o personalizada)
 		tiempo_inicio_script - Hora en microtime marcada para el incio del script
 
 		(start code)
-			if($Login_usuario=="admin" && $PCO_Accion!="")
+			if($PCOSESS_LoginUsuario=="admin" && $PCO_Accion!="")
 				{
 					$tiempo_final_script = obtener_microtime();
 					$tiempo_total_script = $tiempo_final_script - $tiempo_inicio_script;
@@ -102,14 +100,14 @@
     <!-- Morris Charts JavaScript -->
     <?php
         //Carga solo Morris cuando es pagina principal por ahora para evitar conflictos con DatePicker
-        if (@$Login_usuario=="admin" && @$Sesion_abierta && @$PCO_Accion=="Ver_menu")
+        if (@$PCOSESS_LoginUsuario=="admin" && @$PCOSESS_SesionAbierta && @$PCO_Accion=="Ver_menu")
         {
     ?>
     <script src="inc/bootstrap/js/plugins/morris/raphael.min.js"></script>
     <script src="inc/bootstrap/js/plugins/morris/morris.min.js"></script>
     <?php
         // Incluye archivo con las consultas y datos para ser diagramados por Morris
-		if (@$Login_usuario=="admin" && $Sesion_abierta)
+		if (@$PCOSESS_LoginUsuario=="admin" && $PCOSESS_SesionAbierta)
             include_once("core/marco_admin_morris.php");
         }
     ?>
@@ -129,7 +127,7 @@
 
     <?php
         //Si el usuario es admin por defecto presenta la barra lateral activa
-        if ((@$Login_usuario=="admin" && @$Sesion_abierta && @$PCO_Accion=="Ver_menu") || (@$Login_usuario!="" && @$Sesion_abierta && @$VerNavegacionIzquierdaResponsive==1))
+        if ((@$PCOSESS_LoginUsuario=="admin" && @$PCOSESS_SesionAbierta && @$PCO_Accion=="Ver_menu") || (@$PCOSESS_LoginUsuario!="" && @$PCOSESS_SesionAbierta && @$VerNavegacionIzquierdaResponsive==1))
             echo '<script language="JavaScript">
                     ver_navegacion_izquierda_responsive();
                 </script>';

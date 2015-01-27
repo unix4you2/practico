@@ -719,8 +719,8 @@ if ($PCO_Accion=="administrar_menu")
 
 	Variables de entrada:
 
-		Login_usuario - UID/Login de usuario al que se desea agregar el permiso almacenado como variable de sesion despues del login
-		Sesion_abierta - Variable que establece si realmente se ha iniciado una sesion
+		PCOSESS_LoginUsuario - UID/Login de usuario al que se desea agregar el permiso almacenado como variable de sesion despues del login
+		PCOSESS_SesionAbierta - Variable que establece si realmente se ha iniciado una sesion
 
 	Salida:
 		Escritorio de usuario con las opciones asignadas
@@ -731,15 +731,15 @@ if ($PCO_Accion=="administrar_menu")
 	Ver tambien:
 		<administrar_menu>
 */
-	if ($PCO_Accion=="Ver_menu" && $Sesion_abierta)
+	if ($PCO_Accion=="Ver_menu" && $PCOSESS_SesionAbierta)
 		{ 
 			// Carga las opciones del ESCRITORIO
 			echo '<table class="table table-unbordered table-condensed"><tr><td>';
 			// Si el usuario es diferente al administrador agrega condiciones al query
-			if ($Login_usuario!="admin")
+			if ($PCOSESS_LoginUsuario!="admin")
 				{
 					$Complemento_tablas=",".$TablasCore."usuario_menu";
-					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$Login_usuario'";  // AND nivel>0
+					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
 			$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_escritorio=1 ".@$Complemento_condicion);
 
@@ -771,10 +771,10 @@ if ($PCO_Accion=="administrar_menu")
 			// Carga las opciones del ACORDEON
 			echo '<div align="center">';
 			// Si el usuario es diferente al administrador agrega condiciones al query
-			if ($Login_usuario!="admin")
+			if ($PCOSESS_LoginUsuario!="admin")
 				{
 					$Complemento_tablas=",".$TablasCore."usuario_menu";
-					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$Login_usuario'";  // AND nivel>0
+					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
 			$resultado=ejecutar_sql("SELECT COUNT(*) as conteo,seccion FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_centro=1 ".@$Complemento_condicion." GROUP BY seccion ORDER BY seccion");
 			// Imprime las secciones encontradas para el usuario
@@ -787,10 +787,10 @@ if ($PCO_Accion=="administrar_menu")
 					// Busca las opciones dentro de la seccion
 
 					// Si el usuario es diferente al administrador agrega condiciones al query
-					if ($Login_usuario!="admin")
+					if ($PCOSESS_LoginUsuario!="admin")
 						{
 							$Complemento_tablas=",".$TablasCore."usuario_menu";
-							$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$Login_usuario'";  // AND nivel>0
+							$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 						}
 					$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_centro=1 AND seccion='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY peso");
 

@@ -1771,7 +1771,7 @@ echo '
 
 	Variables de entrada:
 
-		Login_usuario - Identificador de usuario para filtrar los resultados
+		PCOSESS_LoginUsuario - Identificador de usuario para filtrar los resultados
 
 	(start code)
 		SELECT COUNT(*) as conteo,categoria FROM ".$TablasCore."informe ".$Complemento_tablas." WHERE 1 ".$Complemento_condicion." GROUP BY categoria ORDER BY categoria
@@ -1790,10 +1790,10 @@ if ($PCO_Accion=="mis_informes")
 			// Carga las opciones del ACORDEON DE INFORMES
 			echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 			// Si el usuario es diferente al administrador agrega condiciones al query
-			if ($Login_usuario!="admin")
+			if ($PCOSESS_LoginUsuario!="admin")
 				{
 					$Complemento_tablas=",".$TablasCore."usuario_informe";
-					$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$Login_usuario'";  // AND nivel>0
+					$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
 			$resultado=ejecutar_sql("SELECT COUNT(*) as conteo,categoria FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE 1 ".@$Complemento_condicion." GROUP BY categoria ORDER BY categoria");
 
@@ -1807,10 +1807,10 @@ if ($PCO_Accion=="mis_informes")
 					// Busca las opciones dentro de la categoria
 
 					// Si el usuario es diferente al administrador agrega condiciones al query
-					if ($Login_usuario!="admin")
+					if ($PCOSESS_LoginUsuario!="admin")
 						{
 							$Complemento_tablas=",".$TablasCore."usuario_informe";
-							$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$Login_usuario'";  // AND nivel>0
+							$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 						}
 					$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE 1 AND categoria='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY titulo");
 
@@ -1822,7 +1822,7 @@ if ($PCO_Accion=="mis_informes")
                                 $icono_informe="fa-pie-chart";
                             //Determina si el registro fue generado para el admin o un usuario estandar y genera el objeto a enlazar
                             $objeto_enlazar=$registro_opciones_acordeon["id"];
-                            if ($Login_usuario!="admin") $objeto_enlazar=$registro_opciones_acordeon["informe"];
+                            if ($PCOSESS_LoginUsuario!="admin") $objeto_enlazar=$registro_opciones_acordeon["informe"];
                             //Presenta el enlace al informe
 							echo '<div style="float:left">
 									<form action="'.$ArchivoCORE.'" method="post" name="acordeinf_'.$registro_opciones_acordeon["id"].'" id="acordeinf_'.$registro_opciones_acordeon["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">

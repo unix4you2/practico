@@ -143,11 +143,11 @@ if ($WSId=="verificar_credenciales")
 */
 	function oauth_crear_usuario($OAuth_servicio,$login_chk='',$nombre_chk='',$correo_chk='')
 		{
-			global $TablasCore,$LlaveDePaso,$fecha_operacion,$ListaCamposSinID_usuario;
+			global $TablasCore,$LlaveDePaso,$PCO_FechaOperacion,$ListaCamposSinID_usuario;
 			// Inserta datos del usuario
 			$clavemd5=MD5(TextoAleatorio(20));
 			$pasomd5=MD5($LlaveDePaso);
-			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES ('$login_chk','$clavemd5','$nombre_chk','Auth:".$OAuth_servicio."',1,'4','$correo_chk','$fecha_operacion','$pasomd5')");
+			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES ('$login_chk','$clavemd5','$nombre_chk','Auth:".$OAuth_servicio."',1,'4','$correo_chk','$PCO_FechaOperacion','$pasomd5')");
 			auditar("OAuth:Agregado usuario $login_chk para ".$OAuth_servicio);
 		}
 
@@ -168,7 +168,7 @@ if ($WSId=="verificar_credenciales")
 */
 	function ejecutar_login_oauth($user,$OAuth_servicio)
 		{
-			global $TablasCore,$uid,$ListaCamposSinID_parametros,$resultado_webservice,$ListaCamposSinID_parametros,$ListaCamposSinID_auditoria,$direccion_auditoria,$hora_operacion,$fecha_operacion,$ArchivoCORE;
+			global $TablasCore,$uid,$ListaCamposSinID_parametros,$resultado_webservice,$ListaCamposSinID_parametros,$ListaCamposSinID_auditoria,$direccion_auditoria,$PCO_HoraOperacion,$PCO_FechaOperacion,$ArchivoCORE;
 
 			// Si el modo depuracion esta activo muestra arreglo user devuelto por el proveedor
 			global $ModoDepuracion;
@@ -226,12 +226,12 @@ if ($WSId=="verificar_credenciales")
 			$registro_parametros = $consulta_parametros->fetch();
 
 			// Actualiza las variables de sesion con el registro
-			$Sesion_abierta=1;
+			$PCOSESS_SesionAbierta=1;
 			// Actualiza booleana de ingreso
 			$clave_correcta=1;
 			// Registro de variables en la sesion
 			@session_start();
-			if (!isset($_SESSION["Login_usuario"])) $_SESSION["Login_usuario"]=(string)$registro["login"];
+			if (!isset($_SESSION["PCOSESS_LoginUsuario"])) $_SESSION["PCOSESS_LoginUsuario"]=(string)$registro["login"];
 			if (!isset($_SESSION["username"])) $_SESSION["username"]=(string)$registro["login"]; //Usada para el modulo de chat
 			if (!isset($_SESSION["Nombre_usuario"])) $_SESSION["Nombre_usuario"]=(string)$registro["nombre"];
 			if (!isset($_SESSION["Descripcion_usuario"])) $_SESSION["Descripcion_usuario"]=(string)$registro["descripcion"];
@@ -239,17 +239,17 @@ if ($WSId=="verificar_credenciales")
 			if (!isset($_SESSION["Correo_usuario"])) $_SESSION["Correo_usuario"]=(string)$registro["correo"];
 			if (!isset($_SESSION["Clave_usuario"])) $_SESSION["Clave_usuario"]=$registro["clave"];
 			if (!isset($_SESSION["LlaveDePasoUsuario"])) $_SESSION["LlaveDePasoUsuario"]=$registro["llave_paso"];
-			if (!isset($_SESSION["Sesion_abierta"])) $_SESSION["Sesion_abierta"]=$Sesion_abierta;
+			if (!isset($_SESSION["PCOSESS_SesionAbierta"])) $_SESSION["PCOSESS_SesionAbierta"]=$PCOSESS_SesionAbierta;
 			if (!isset($_SESSION["clave_correcta"])) $_SESSION["clave_correcta"]=$clave_correcta;
 			if (!isset($_SESSION["Nombre_Empresa_Corto"])) $_SESSION["Nombre_Empresa_Corto"]=$registro_parametros["nombre_empresa_corto"];
 			if (!isset($_SESSION["Nombre_Aplicacion"])) $_SESSION["Nombre_Aplicacion"]=$registro_parametros["nombre_aplicacion"];
 			if (!isset($_SESSION["Version_Aplicacion"])) $_SESSION["Version_Aplicacion"]=$registro_parametros["version"];
 
-			// Lleva a auditoria con query manual por la falta de $Login_Usuario
-			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('".$registro["login"]."','Ingresa al sistema desde $direccion_auditoria','$fecha_operacion','$hora_operacion')");
-			auditar("Ingresa al sistema desde $direccion_auditoria",$_SESSION["Login_usuario"]);
+			// Lleva a auditoria con query manual por la falta de $PCOSESS_LoginUsuario
+			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('".$registro["login"]."','Ingresa al sistema desde $direccion_auditoria','$PCO_FechaOperacion','$PCO_HoraOperacion')");
+			auditar("Ingresa al sistema desde $direccion_auditoria",$_SESSION["PCOSESS_LoginUsuario"]);
 			// Actualiza fecha del ultimo ingreso para el usuario
-			ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login='".$registro["login"]."'","$fecha_operacion");
+			ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login='".$registro["login"]."'","$PCO_FechaOperacion");
 
 			// Redirecciona al menu
 			header("Location: index.php");

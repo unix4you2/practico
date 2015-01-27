@@ -336,8 +336,8 @@ if ($PCO_Accion=="aplicar_parche")
 		if ($mensaje_error=="")
 			{				
 				//Hace una copia de seguridad de los archivos a reemplazar por el parche
-				$archivo_destino_backup_app="bkp/bkp_".$fecha_operacion."-".date("Hi")."_app.zip";
-				$archivo_destino_backup_bdd="bkp/bkp_".$fecha_operacion."-".date("Hi")."_bdd.gz";
+				$archivo_destino_backup_app="bkp/bkp_".$PCO_FechaOperacion."-".date("Hi")."_app.zip";
+				$archivo_destino_backup_bdd="bkp/bkp_".$PCO_FechaOperacion."-".date("Hi")."_bdd.gz";
 				$archivo_backup = new PclZip($archivo_destino_backup_app);
 
 				if (($lista_contenido = $archivo->listContent()) == 0)

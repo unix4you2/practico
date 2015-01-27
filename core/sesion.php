@@ -117,13 +117,13 @@
 						$registro_parametros = $consulta_parametros->fetch();
 
 						// Actualiza las variables de sesion con el registro
-						$Sesion_abierta=1;
+						$PCOSESS_SesionAbierta=1;
 						// Actualiza booleana de ingreso
 						$clave_correcta=1;
 						// Registro de variables en la sesion
-						// Antes con depreciada: session_register('Login_usuario');
+						// Antes con depreciada: session_register('PCOSESS_LoginUsuario');
 						@session_start();
-						if (!isset($_SESSION["Login_usuario"])) $_SESSION["Login_usuario"]=(string)$resultado_webservice->credencial[0]->login;
+						if (!isset($_SESSION["PCOSESS_LoginUsuario"])) $_SESSION["PCOSESS_LoginUsuario"]=(string)$resultado_webservice->credencial[0]->login;
 						if (!isset($_SESSION["username"])) $_SESSION["username"]=(string)$registro["login"]; //Usada para el modulo de chat
 						if (!isset($_SESSION["Nombre_usuario"])) $_SESSION["Nombre_usuario"]=(string)$resultado_webservice->credencial[0]->nombre;
 						if (!isset($_SESSION["Descripcion_usuario"])) $_SESSION["Descripcion_usuario"]=(string)$resultado_webservice->credencial[0]->descripcion;
@@ -131,7 +131,7 @@
 						if (!isset($_SESSION["Correo_usuario"])) $_SESSION["Correo_usuario"]=(string)$resultado_webservice->credencial[0]->correo;
 						if (!isset($_SESSION["Clave_usuario"])) $_SESSION["Clave_usuario"]=$registro["clave"];
 						if (!isset($_SESSION["LlaveDePasoUsuario"])) $_SESSION["LlaveDePasoUsuario"]=$registro["llave_paso"];
-						if (!isset($_SESSION["Sesion_abierta"])) $_SESSION["Sesion_abierta"]=$Sesion_abierta;
+						if (!isset($_SESSION["PCOSESS_SesionAbierta"])) $_SESSION["PCOSESS_SesionAbierta"]=$PCOSESS_SesionAbierta;
 						if (!isset($_SESSION["clave_correcta"])) $_SESSION["clave_correcta"]=$clave_correcta;
 						if (!isset($_SESSION["Nombre_Empresa_Corto"])) $_SESSION["Nombre_Empresa_Corto"]=$registro_parametros["nombre_empresa_corto"];
 						if (!isset($_SESSION["Nombre_Aplicacion"])) $_SESSION["Nombre_Aplicacion"]=$registro_parametros["nombre_aplicacion"];
@@ -140,7 +140,7 @@
 						// Lleva a auditoria con query manual por la falta de $Login_Usuario
 						auditar("Ingresa al sistema desde $direccion_auditoria",$uid);
 						// Actualiza fecha del ultimo ingreso para el usuario
-						ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login=? ","$fecha_operacion$_SeparadorCampos_$uid");
+						ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login=? ","$PCO_FechaOperacion$_SeparadorCampos_$uid");
 				  }
 
 			// Si la clave es incorrecta muestra de nuevo la ventana de ingreso

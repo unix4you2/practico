@@ -19,10 +19,10 @@
 	*/
 
 	$NombreRAD="Pr&aacute;ctico";
-	$fecha_operacion=date("Ymd");
-	$fecha_operacion_guiones=date("Y-m-d");
-	$hora_operacion=date("His");
-	$hora_operacion_puntos=date("H:i");
+	$PCO_FechaOperacion=date("Ymd");
+	$PCO_FechaOperacionGuiones=date("Y-m-d");
+	$PCO_HoraOperacion=date("His");
+	$PCO_HoraOperacionPuntos=date("H:i");
 	$direccion_auditoria=$_SERVER ['REMOTE_ADDR'];
 
 	// Quitar comentario si se desea modo depuracion en proceso de instalacion

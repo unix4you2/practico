@@ -43,7 +43,7 @@
 */
 	function permiso_heredado_accion($PCO_Accion)
 		{
-			global $Login_usuario;
+			global $PCOSESS_LoginUsuario;
 			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 			$retorno=0;
 
@@ -121,7 +121,7 @@
 			if ($PCO_Accion== "cargar_archivo")						$retorno = permiso_agregado_accion("actualizar_practico");
 			if ($PCO_Accion== "analizar_parche")					$retorno = permiso_agregado_accion("cargar_archivo");
 			if ($PCO_Accion== "aplicar_parche")						$retorno = permiso_agregado_accion("analizar_parche");
-			//echo $Login_usuario.':Permiso heredado accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
+			//echo $PCOSESS_LoginUsuario.':Permiso heredado accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
 			return $retorno;
 		}
 
@@ -145,16 +145,16 @@
 		{
 			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 			$retorno=0;
-			global $ConexionPDO,$TablasCore,$Login_usuario;
+			global $ConexionPDO,$TablasCore,$PCOSESS_LoginUsuario;
 			
-			$consulta = $ConexionPDO->prepare("SELECT ".$TablasCore."menu.id FROM ".$TablasCore."usuario_menu,".$TablasCore."menu WHERE ".$TablasCore."menu.id=".$TablasCore."usuario_menu.menu AND usuario='$Login_usuario' AND ".$TablasCore."menu.comando='$PCO_Accion' ");
+			$consulta = $ConexionPDO->prepare("SELECT ".$TablasCore."menu.id FROM ".$TablasCore."usuario_menu,".$TablasCore."menu WHERE ".$TablasCore."menu.id=".$TablasCore."usuario_menu.menu AND usuario='$PCOSESS_LoginUsuario' AND ".$TablasCore."menu.comando='$PCO_Accion' ");
 			$consulta->execute();
 			$registro = $consulta->fetch();
 			if ($registro[0]!="")
 				{
 					$retorno=1;
 				}
-			//echo $Login_usuario.':Permiso agregado accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
+			//echo $PCOSESS_LoginUsuario.':Permiso agregado accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
 			return $retorno;
 		}
 
@@ -176,11 +176,11 @@
 */
 	function permiso_raiz_admin($PCO_Accion)
 		{
-			global $Login_usuario;
+			global $PCOSESS_LoginUsuario;
 			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 			$retorno=0;
 			// Permisos o acciones raiz para el admin
-			if ($Login_usuario=="admin")
+			if ($PCOSESS_LoginUsuario=="admin")
 				{
 					switch ($PCO_Accion)
 						{
@@ -201,7 +201,7 @@
 								break;
 						}
 				}
-			//echo $Login_usuario.':Permiso raiz admin='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
+			//echo $PCOSESS_LoginUsuario.':Permiso raiz admin='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
 			return $retorno;
 		}
 
@@ -222,13 +222,13 @@
 */
 	function permiso_accion($PCO_Accion)
 		{
-			global $Login_usuario,$TablasCore;
+			global $PCOSESS_LoginUsuario,$TablasCore;
 			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 			$retorno=0;
 
 			// Evalua inicialmente permisos para el admin (evita queries)
 			// $retorno=permiso_raiz_admin($PCO_Accion);
-			if ($Login_usuario=="admin") $retorno=1;
+			if ($PCOSESS_LoginUsuario=="admin") $retorno=1;
 
 			// Si es un usuario estandar siempre entra, si es el admin entra si no es permiso raiz
 			if (!$retorno)
@@ -252,7 +252,7 @@
 						}
 				}
 
-			//echo $Login_usuario.':Permiso accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
+			//echo $PCOSESS_LoginUsuario.':Permiso accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
 			return $retorno;
 		}
 
@@ -562,7 +562,7 @@ function completar_parametros($string,$data) {
 			global $ConexionPDO,$ModoDepuracion;
 			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin;
 			global $PCO_Accion;
-			global $Login_usuario,$_SeparadorCampos_;
+			global $PCOSESS_LoginUsuario,$_SeparadorCampos_;
 			
 			// Filtra la cadena antes de ser ejecutada
 			$query=filtrar_cadena_sql($query);
@@ -597,7 +597,7 @@ function completar_parametros($string,$data) {
 			catch( PDOException $ErrorPDO)
 				{
 					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
-					if ($Login_usuario=='admin' && $ModoDepuracion)
+					if ($PCOSESS_LoginUsuario=='admin' && $ModoDepuracion)
 						$mensaje_final=$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.completar_parametros($query,$parametros);
 					else
 						$mensaje_final='<b>'.$MULTILANG_Detalles.'</b>: '.$MULTILANG_ErrorSoloAdmin;
@@ -631,7 +631,7 @@ function completar_parametros($string,$data) {
 					Retorna una cadena vacia si la consulta es ejecutada sin problemas.
 			*/
 			global $ConexionPDO,$ModoDepuracion;
-			global $Login_usuario,$_SeparadorCampos_;
+			global $PCOSESS_LoginUsuario,$_SeparadorCampos_;
 			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin,$MULTILANG_ContacteAdmin,$MULTILANG_MotorBD;
 			try
 				{
@@ -666,7 +666,7 @@ function completar_parametros($string,$data) {
 			catch( PDOException $ErrorPDO)
 				{
 					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
-					if ($Login_usuario=='admin' && $ModoDepuracion)
+					if ($PCOSESS_LoginUsuario=='admin' && $ModoDepuracion)
                         echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.completar_parametros($query,$parametros).'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
 					else
 						echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$MULTILANG_ErrorSoloAdmin.'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
@@ -730,14 +730,14 @@ function completar_parametros($string,$data) {
 		{
 			global $ConexionPDO,$ArchivoCORE,$TablasCore;
 			global $ListaCamposSinID_auditoria,$_SeparadorCampos_;
-			global $Login_usuario,$fecha_operacion,$hora_operacion;
+			global $PCOSESS_LoginUsuario,$PCO_FechaOperacion,$PCO_HoraOperacion;
 			//Establece el usuario para el registro
 			if ($usuario=="")
-				$usuario_auditar=$Login_usuario;
+				$usuario_auditar=$PCOSESS_LoginUsuario;
 			else
 				$usuario_auditar=$usuario;
 			//Lleva el registro
-			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES (?,?,?,?)","$usuario_auditar$_SeparadorCampos_$PCO_Accion$_SeparadorCampos_$fecha_operacion$_SeparadorCampos_$hora_operacion");
+			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES (?,?,?,?)","$usuario_auditar$_SeparadorCampos_$PCO_Accion$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$PCO_HoraOperacion");
 		}
 
 
@@ -1239,12 +1239,12 @@ function completar_parametros($string,$data) {
 
 /* ################################################################## */
 /* ################################################################## */
-	function buscar_actualizaciones($Login_usuario='',$PCO_Accion='')
+	function buscar_actualizaciones($PCOSESS_LoginUsuario='',$PCO_Accion='')
 		{
 			global $MULTILANG_Atencion,$MULTILANG_ActAlertaVersion;
 			// Genera un aleatorio entre 1 y 10 para no sacar siempre el aviso y buscar nuevas versiones.
 			$buscar=rand(0,7);
-			if ($Login_usuario=="admin" && $PCO_Accion=="Ver_menu" && $buscar==1)
+			if ($PCOSESS_LoginUsuario=="admin" && $PCO_Accion=="Ver_menu" && $buscar==1)
 				{
 					$path_ultima_version="https://raw.githubusercontent.com/unix4you2/practico/master/dev_tools/version_publicada.txt";
 					$version_actualizada = @cargar_url($path_ultima_version);
@@ -3291,7 +3291,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 	{
 		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
 		// Carga variables de sesion por si son comparadas en alguna condicion
-		global $Login_usuario,$Nombre_usuario,$Descripcion_usuario,$Nivel_usuario,$Correo_usuario,$LlaveDePasoUsuario;
+		global $PCOSESS_LoginUsuario,$Nombre_usuario,$Descripcion_usuario,$Nivel_usuario,$Correo_usuario,$LlaveDePasoUsuario;
 		// Carga variables de definicion de tablas
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
 		global $MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano;
@@ -3413,7 +3413,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				//Genera enlace al PDF cuando se detecta el modulo y ademas el informe lo tiene activado
 				if (@file_exists("mod/pdf") && $registro_informe["genera_pdf"]=='S')
 					{
-						echo '<div align=right><a href="tmp/Inf_'.$Identificador_informe.'-'.$Login_usuario.'.pdf" target="_BLANK"><i class="fa fa-file-pdf-o"></i> PDF&nbsp;</a></div>';
+						echo '<div align=right><a href="tmp/Inf_'.$Identificador_informe.'-'.$PCOSESS_LoginUsuario.'.pdf" target="_BLANK"><i class="fa fa-file-pdf-o"></i> PDF&nbsp;</a></div>';
 					}
 
 					// Crea encabezado por tipo de formato:  1=html   2=Excel
@@ -3607,7 +3607,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 								$html2pdf->pdf->SetDisplayMode($ModoVistaPDF);
 								$html2pdf->setDefaultFont($FuentePredeterminadaPDF);
 								$html2pdf->WriteHTML($SalidaFinalInformePDF);
-								$html2pdf->Output('tmp/Inf_'.$Identificador_informe.'-'.$Login_usuario.'.pdf', 'F'); // Antes: $html2pdf->Output('tmp/exemple.pdf'); enviaba salida al navegador directamente
+								$html2pdf->Output('tmp/Inf_'.$Identificador_informe.'-'.$PCOSESS_LoginUsuario.'.pdf', 'F'); // Antes: $html2pdf->Output('tmp/exemple.pdf'); enviaba salida al navegador directamente
 							}
 						catch (HTML2PDF_exception $e)
 							{
@@ -3743,8 +3743,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				$chart->setDataSet($dataSet);
 				//$chart->getPlot()->setGraphCaptionRatio(0.75);
 				$chart->setTitle($registro_informe["titulo"]);
-				$chart->render("tmp/Inf_".$registro_informe["id"]."-".$Login_usuario.".png");
-				echo '<img alt="Grafico" src="tmp/Inf_'.$Identificador_informe.'-'.$Login_usuario.'.png" style="border: 1px solid gray;">';
+				$chart->render("tmp/Inf_".$registro_informe["id"]."-".$PCOSESS_LoginUsuario.".png");
+				echo '<img alt="Grafico" src="tmp/Inf_'.$Identificador_informe.'-'.$PCOSESS_LoginUsuario.'.png" style="border: 1px solid gray;">';
 			} // Fin si informe es G (grafico)
 
 		if ($en_ventana) cerrar_ventana();

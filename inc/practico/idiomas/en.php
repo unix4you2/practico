@@ -508,7 +508,7 @@
 	$MULTILANG_InfDiferenteDe='Different';
 	$MULTILANG_InfIgualA='Equal';
     $MULTILANG_InfPatron='Match pattern (Uses % as joker)';
-	$MULTILANG_InfDesManual='In any manual fields you can enclose expressions or character string values ​​using double quotes.   You can compare with session vars putting the PHP variable.  i.e.: $Login_usuario, $Nombre_usuario, $Descripcion_usuario, $Nivel_usuario, $Correo_usuario, $LlaveDePasoUsuario';
+	$MULTILANG_InfDesManual='In any manual fields you can enclose expressions or character string values ​​using double quotes.   You can compare with session vars putting the PHP variable.  i.e.: $PCOSESS_LoginUsuario, $Nombre_usuario, $Descripcion_usuario, $Nivel_usuario, $Correo_usuario, $LlaveDePasoUsuario';
 	$MULTILANG_InfOperador='Add an aggregator of expressions or a logical operator ';
 	$MULTILANG_InfOpParentesisA='Parenthesis open';
 	$MULTILANG_InfOpParentesisC='Parenthesis close';

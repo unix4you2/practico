@@ -22,7 +22,7 @@
 	@session_start();
 
 	//Captura nombre de usuario desde la sesion
-	$Usuario_activo=$_SESSION["Login_usuario"];
+	$Usuario_activo=$_SESSION["PCOSESS_LoginUsuario"];
 	
 	if ($Usuario_activo=="") die(); //Termina ejecucion si no hay un usuario valido en la sesion
 

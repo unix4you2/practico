@@ -178,7 +178,7 @@
 			*/
 			global $ancho_tablas_maquinas,$Path_imagenes,$Imagen_fallo,$Imagen_generica,$Imagen_ok,$Tamano_iconos;
 			global $ErroresMonitoreoPractico; // Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay errores
-			global $MULTILANG_MonTitulo,$fecha_operacion_guiones,$hora_operacion_puntos;
+			global $MULTILANG_MonTitulo,$PCO_FechaOperacionGuiones,$PCO_HoraOperacionPuntos;
 			global $MULTILANG_MonLinea,$MULTILANG_MonCaido;
 			
 			//Verifica estado de la maquina y servicio
@@ -193,7 +193,7 @@
 					$color_texto_estado="#FFFF00";
 					$ErroresMonitoreoPractico=1;
 					//Envia mensaje de notificacion por correo
-					enviar_correo("noreply@practico.org",$Maquina["CorreoAlerta"],$MULTILANG_MonTitulo." $MULTILANG_MonCaido [$fecha_operacion_guiones $hora_operacion_puntos] ",$Maquina["Nombre"]." [".$Maquina["Host"].":".$Maquina["Puerto"]."] -> ".$Maquina["TipoMonitor"]);				
+					enviar_correo("noreply@practico.org",$Maquina["CorreoAlerta"],$MULTILANG_MonTitulo." $MULTILANG_MonCaido [$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos] ",$Maquina["Nombre"]." [".$Maquina["Host"].":".$Maquina["Puerto"]."] -> ".$Maquina["TipoMonitor"]);				
 				}
 			
 			//Determina si a la maquina o servicio se le ha indicado un icono

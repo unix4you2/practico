@@ -72,10 +72,10 @@
     date_default_timezone_set($ZonaHoraria);
 
     // Datos de fecha, hora y direccion IP para algunas operaciones
-    $fecha_operacion=date("Ymd");
-    $fecha_operacion_guiones=date("Y-m-d");
-    $hora_operacion=date("His");
-    $hora_operacion_puntos=date("H:i");
+    $PCO_FechaOperacion=date("Ymd");
+    $PCO_FechaOperacionGuiones=date("Y-m-d");
+    $PCO_HoraOperacion=date("His");
+    $PCO_HoraOperacionPuntos=date("H:i");
     $direccion_auditoria=$_SERVER ['REMOTE_ADDR'];
 
     // Define cadena usada para separar campos en operaciones de bases de datos
@@ -98,7 +98,7 @@
 
     // Verifica algunas variables minimas de trabajo en el primer inicio para evitar NOTICE y WARNINGs
     if (!isset($PCO_Accion)) $PCO_Accion="";
-    if (!isset($Sesion_abierta)) $Sesion_abierta=0;
+    if (!isset($PCOSESS_SesionAbierta)) $PCOSESS_SesionAbierta=0;
 
     // Inicia las conexiones con la BD y las deja listas para las operaciones
     include("core/conexiones.php");
@@ -113,7 +113,7 @@
     include_once("core/correos.php");
 
     // Almacena tiempo de inicio para calculo de tiempos de ejecucion del script (informados al admin)
-    if(@$Login_usuario=="admin" && $PCO_Accion!="") {
+    if(@$PCOSESS_LoginUsuario=="admin" && $PCO_Accion!="") {
         $tiempo_inicio_script = obtener_microtime();
     }
 
@@ -135,7 +135,7 @@
             }
             // Valida permisos asignados al usuario actual para la accion llamada a ejecutar
             if (!permiso_accion($PCO_Accion)) {
-                echo $MULTILANG_SecErrorTit."<hr>".$MULTILANG_SecErrorDes."<hr>[US=<b>$Login_usuario</b>|CMD=<b>$PCO_Accion</b>|IP=<b>$direccion_auditoria</b>|DTE=<b>$fecha_operacion_guiones $hora_operacion_puntos</b>]";
+                echo $MULTILANG_SecErrorTit."<hr>".$MULTILANG_SecErrorDes."<hr>[US=<b>$PCOSESS_LoginUsuario</b>|CMD=<b>$PCO_Accion</b>|IP=<b>$direccion_auditoria</b>|DTE=<b>$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos</b>]";
                 auditar("SEC: Intento de acceso no autorizado CMD=$PCO_Accion");
                 exit(1);
             }
@@ -168,7 +168,7 @@
     verificar_extensiones();
 
     // Valida existencia de versiones nuevas cuando el admin esta logueado
-    buscar_actualizaciones(@$Login_usuario,$PCO_Accion);
+    buscar_actualizaciones(@$PCOSESS_LoginUsuario,$PCO_Accion);
 
     // Si existe el directorio de instalacion y no es modo fullscreen presenta un mensaje constante de advertencia
     if (@file_exists("ins") && @$Presentar_FullScreen!=1) {
@@ -176,7 +176,7 @@
     }
 
 	//Despliega escritorio del admin
-	if (@$Login_usuario=="admin" && $Sesion_abierta && $PCO_Accion=="Ver_menu") {
+	if (@$PCOSESS_LoginUsuario=="admin" && $PCOSESS_SesionAbierta && $PCO_Accion=="Ver_menu") {
         include_once("core/marco_admin.php");
     }
 
@@ -187,8 +187,8 @@
 
 /* ################################################################## */
     // Cuando no se tiene ninguna accion para procesar se carga la pagina de inicio de sesion
-    if ($PCO_Accion=="" && $Sesion_abierta==0) ventana_login();
-    if ($PCO_Accion=="" && $Sesion_abierta==1 && @$Presentar_FullScreen!=1) echo '<script type="" language="JavaScript">    document.core_ver_menu.submit();  </script>';
+    if ($PCO_Accion=="" && $PCOSESS_SesionAbierta==0) ventana_login();
+    if ($PCO_Accion=="" && $PCOSESS_SesionAbierta==1 && @$Presentar_FullScreen!=1) echo '<script type="" language="JavaScript">    document.core_ver_menu.submit();  </script>';
     // Incluye los archivos necesarios dependiendo de las funciones requeridas
     if ($PCO_Accion=="administrar_informes" || $PCO_Accion=="guardar_informe" || $PCO_Accion=="editar_informe" || $PCO_Accion=="eliminar_informe" || $PCO_Accion=="actualizar_informe" || $PCO_Accion=="eliminar_informe_tabla" || $PCO_Accion=="guardar_informe_tabla" || $PCO_Accion=="eliminar_informe_campo" || $PCO_Accion=="guardar_informe_campo" || $PCO_Accion=="guardar_informe_condicion" || $PCO_Accion=="eliminar_informe_condicion" || $PCO_Accion=="mis_informes" || $PCO_Accion=="actualizar_grafico_informe" || $PCO_Accion=="actualizar_agrupamiento_informe" || $PCO_Accion=="guardar_accion_informe" || $PCO_Accion=="eliminar_registro_informe" || $PCO_Accion=="eliminar_accion_informe")
         include("core/informes.php");

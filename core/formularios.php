@@ -301,11 +301,11 @@
 															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
 																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
 															$cadena_formato_a_buscar="_FECHA_";
-															$cadena_formato_a_reemplazar=$fecha_operacion;
+															$cadena_formato_a_reemplazar=$PCO_FechaOperacion;
 															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
 																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
 															$cadena_formato_a_buscar="_HORA_";
-															$cadena_formato_a_reemplazar=$hora_operacion;
+															$cadena_formato_a_reemplazar=$PCO_HoraOperacion;
 															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
 																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
 															$cadena_formato_a_buscar="_HORAINTERNET_";
@@ -313,7 +313,7 @@
 															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
 																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
 															$cadena_formato_a_buscar="_USUARIO_";
-															$cadena_formato_a_reemplazar=$Login_usuario;
+															$cadena_formato_a_reemplazar=$PCOSESS_LoginUsuario;
 															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
 																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
 															$cadena_formato_a_buscar="_MICRO_";

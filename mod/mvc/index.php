@@ -56,7 +56,7 @@
 <?php
 	// Valida sesion activa de Practico
 	@session_start();
-	if (!isset($Sesion_abierta)) 
+	if (!isset($PCOSESS_SesionAbierta)) 
 		{
 			echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
 			die();

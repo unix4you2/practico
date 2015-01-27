@@ -26,15 +26,15 @@
 	Variables de entrada:
 
 		NombreRAD - Nombre de la aplicacion para encabezado
-		Login_usuario - Nombre de usuario que se encuentra logueado en el sistema
-		Sesion_abierta - Bandera que indica si hay una sesion activa
+		PCOSESS_LoginUsuario - Nombre de usuario que se encuentra logueado en el sistema
+		PCOSESS_SesionAbierta - Bandera que indica si hay una sesion activa
 		ArchivoCORE - Nombre del archivo principal que procesa todas las solicitudes
 
 		(start code)
-			if ($Login_usuario!="admin")
+			if ($PCOSESS_LoginUsuario!="admin")
 				{
 					$Complemento_tablas=",".$TablasCore."usuario_menu";
-					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$Login_usuario'";  // AND nivel>0
+					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
 			SELECT * FROM ".$TablasCore."menu ".$Complemento_tablas." WHERE posible_arriba ".$Complemento_condicion
 		(end)
@@ -76,24 +76,24 @@
 
 				<?php
                     //Presenta titulo de la aplicacion
-					if ($Sesion_abierta)
+					if ($PCOSESS_SesionAbierta)
 						echo '<b>'.$Nombre_Empresa_Corto.' - '.$Nombre_Aplicacion.' </b> <i> v'.$Version_Aplicacion.'</i>';
 					//else
 					//	echo $MULTILANG_SubtituloPractico1.' '.$MULTILANG_SubtituloPractico2;
 				?>
 				<?php 
 					//Despliega botones de desarrollo
-					if (@$Login_usuario=="admin" && $Sesion_abierta)
+					if (@$PCOSESS_LoginUsuario=="admin" && $PCOSESS_SesionAbierta)
 						echo '<a data-toggle="modal" class="btn btn-danger btn-xs" href="#myModalDESARROLLO"><i class="fa fa-puzzle-piece"></i> '.$MULTILANG_DesAppBoton.'</a>';
 				?>
 				<?php 
                     //Agrega boton de retorno al inicio si la accion es diferente al escritorio
-					if ($PCO_Accion!="Ver_menu" && $Sesion_abierta)
+					if ($PCO_Accion!="Ver_menu" && $PCOSESS_SesionAbierta)
 						echo '<a class="btn btn-success btn-xs" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i></a>';
 				?>
 				<?php 
 					//Despliega opciones de configuracion
-					if (@$Login_usuario=="admin" && $Sesion_abierta)
+					if (@$PCOSESS_LoginUsuario=="admin" && $PCOSESS_SesionAbierta)
                         {
 				?>
                     <li class="dropdown">
@@ -170,7 +170,7 @@
 
 				<?php
                     //Presenta el menu de login de usuario
-					if ($Sesion_abierta) {
+					if ($PCOSESS_SesionAbierta) {
 				?>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -197,7 +197,7 @@
 
         <?php
             //Presenta las opciones de la barra izquierda a los usuarios
-            if ($Sesion_abierta && @$Login_usuario!="")
+            if ($PCOSESS_SesionAbierta && @$PCOSESS_LoginUsuario!="")
                 {
         ?>
             <div id="boton_menu_izquierdo" style="position: absolute; left: 1px; top: 60px;  z-index: 2;">
@@ -231,7 +231,7 @@
 
                             <?php
                                 //Siempre presenta el administrador de archivos al superusuario
-                                if($Sesion_abierta && @$Login_usuario=="admin" && $PCO_Accion!="")
+                                if($PCOSESS_SesionAbierta && @$PCOSESS_LoginUsuario=="admin" && $PCO_Accion!="")
                                     {
                             ?>
                                         <li>
@@ -247,11 +247,11 @@
                         <strong><i class='fa fa-bolt fa-fw'></i> 
                         <?php 
                         //Presenta informacion de carga del aplicativo
-                        echo $MULTILANG_Instante; ?>:</strong>&nbsp;&nbsp;<?php echo $fecha_operacion_guiones;?>&nbsp;&nbsp;<?php echo $hora_operacion_puntos;?>
+                        echo $MULTILANG_Instante; ?>:</strong>&nbsp;&nbsp;<?php echo $PCO_FechaOperacionGuiones;?>&nbsp;&nbsp;<?php echo $PCO_HoraOperacionPuntos;?>
                         <br>
                         <?php
                             // Muestra la accion actual si el usuario es administrador y la accion no es vacia - Sirve como guia a la hora de crear objetos
-                            if(@$Login_usuario=="admin" && $PCO_Accion!="")
+                            if(@$PCOSESS_LoginUsuario=="admin" && $PCO_Accion!="")
                                 {
                                     echo "<strong><i class='fa fa-cog fa-fw'></i> $MULTILANG_Accion:</strong> $PCO_Accion <br>";
                                     echo "<strong><i class='fa fa-clock-o fa-fw'></i> $MULTILANG_TiempoCarga:</strong> <div id='PCO_TCarga' name='PCO_TCarga' style='display: inline-block;'></div> s<br>";
@@ -315,7 +315,7 @@
 
 <?php 
 	//Despliega marcos de administracion a ser activados por el menu superior
-	if (@$Login_usuario=="admin" && $Sesion_abierta)
+	if (@$PCOSESS_LoginUsuario=="admin" && $PCOSESS_SesionAbierta)
 		{
 			include_once("core/marco_dev.php");
 			include_once("core/marco_conf.php");
@@ -329,15 +329,15 @@
 
 
 				<?php
-					if ($Sesion_abierta && $PCO_Accion=="Ver_menu") {
+					if ($PCOSESS_SesionAbierta && $PCO_Accion=="Ver_menu") {
 						echo '<ul class="nav nav-pills btn-xs">';
 						// Carga las opciones del menu superior
 
 						// Si el usuario es diferente al administrador agrega condiciones al query
-						if ($Login_usuario!="admin")
+						if ($PCOSESS_LoginUsuario!="admin")
 							{
 								$Complemento_tablas=",".$TablasCore."usuario_menu";
-								$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$Login_usuario'";  // AND nivel>0
+								$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 							}
 						$resultado=ejecutar_sql("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_arriba=1 ".@$Complemento_condicion);
 
