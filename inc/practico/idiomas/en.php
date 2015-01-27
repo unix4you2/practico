@@ -327,7 +327,7 @@
 	$MULTILANG_FrmDesBusqueda='Leave blank to indicate that it is a normal field or enter the label that should go in the command button located on the right side to make the search for records';
 	$MULTILANG_FrmAjax='Use AJAX to search';
 	$MULTILANG_FrmTitAjax='Record Recovery Mode';
-	$MULTILANG_FrmDesAjax='When the box is turned on, Practico attempts to retrieve the log information to the form using AJAX (Recommended enable), otherwise using the standard method for sending request and page reload with the results . It can be disabled to improve compatibility with older browsers.';
+	$MULTILANG_FrmDesAjax='When the box is turned on, Practico attempts to retrieve the log information to the form using AJAX. In a combo box that takes its values from a table you can use it to add a button to refresh its contents online.';
 	$MULTILANG_FrmTeclado='Add virtual keyboard';
 	$MULTILANG_FrmTitTeclado='Allow data entry by on-screen keyboard';
 	$MULTILANG_FrmDesTeclado='When enabled on the form displays a virtual keyboard for entering information,. For now the keyboard use may violate validations';

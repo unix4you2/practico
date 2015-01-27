@@ -102,7 +102,7 @@
 	<script type="text/javascript" src="inc/practico/javascript/html5slider.js"></script>
 
 	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/chat.css" />
-	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/screen.cssXXX" />
+	<!--<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/screen.css" />-->
 	<!--[if lte IE 7]>
 	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/screen_ie.css" />
 	<![endif]-->

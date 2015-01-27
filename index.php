@@ -152,8 +152,8 @@
     // Valida existencia de versiones nuevas cuando el admin esta logueado
     buscar_actualizaciones(@$Login_usuario,$PCO_Accion);
 
-    // Si existe el directorio de instalacion presenta un mensaje constante de advertencia
-    if (@file_exists("ins")) {
+    // Si existe el directorio de instalacion y no es modo fullscreen presenta un mensaje constante de advertencia
+    if (@file_exists("ins") && @$Presentar_FullScreen!=1) {
         mensaje($MULTILANG_TituloInsExiste, $MULTILANG_TextoInsExiste, '', 'fa fa-exclamation-triangle fa-5x texto-rojo texto-blink', 'alert alert-warning alert-dismissible');
     }
 
@@ -170,7 +170,7 @@
 /* ################################################################## */
     // Cuando no se tiene ninguna accion para procesar se carga la pagina de inicio de sesion
     if ($PCO_Accion=="" && $Sesion_abierta==0) ventana_login();
-    if ($PCO_Accion=="" && $Sesion_abierta==1) echo '<script type="" language="JavaScript">    document.core_ver_menu.submit();  </script>';
+    if ($PCO_Accion=="" && $Sesion_abierta==1 && @$Presentar_FullScreen!=1) echo '<script type="" language="JavaScript">    document.core_ver_menu.submit();  </script>';
     // Incluye los archivos necesarios dependiendo de las funciones requeridas
     if ($PCO_Accion=="administrar_informes" || $PCO_Accion=="guardar_informe" || $PCO_Accion=="editar_informe" || $PCO_Accion=="eliminar_informe" || $PCO_Accion=="actualizar_informe" || $PCO_Accion=="eliminar_informe_tabla" || $PCO_Accion=="guardar_informe_tabla" || $PCO_Accion=="eliminar_informe_campo" || $PCO_Accion=="guardar_informe_campo" || $PCO_Accion=="guardar_informe_condicion" || $PCO_Accion=="eliminar_informe_condicion" || $PCO_Accion=="mis_informes" || $PCO_Accion=="actualizar_grafico_informe" || $PCO_Accion=="actualizar_agrupamiento_informe" || $PCO_Accion=="guardar_accion_informe" || $PCO_Accion=="eliminar_registro_informe" || $PCO_Accion=="eliminar_accion_informe")
         include("core/informes.php");
@@ -190,6 +190,9 @@
         include("core/actualizacion.php");
     if ($PCO_Accion=="administrar_monitoreo" || $PCO_Accion=="guardar_monitoreo" || $PCO_Accion=="eliminar_monitoreo" || $PCO_Accion=="ver_monitoreo")
         include("core/monitoreo.php");
+    if ($PCO_Accion=="opciones_combo_box")
+        include("core/ajax.php");
+
 
 /* ################################################################## */
     // Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios

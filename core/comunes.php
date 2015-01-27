@@ -2118,39 +2118,121 @@ function ventana_login()
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.= '<select id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" class="selectpicker show-tick" '.$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'" '.$registro_campos["personalizacion_tag"].' >';
+			$salida.= '<select id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" data-container="body" class="selectpicker combo-'.$registro_campos["campo"].' show-tick" '.$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'" '.$registro_campos["personalizacion_tag"].' >';
+            
+                //Genera Script Ajax y DIV para cambio de opciones en caliente
+                $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_opciones"]);
+                $nombre_tabla_opciones = $nombre_tabla_opciones[0];
 
-			// Toma los valores desde la lista de opciones (cuando es estatico)
-			$opciones_lista = explode(",", $registro_campos["lista_opciones"]);
-			$valores_lista = explode(",", $registro_campos["lista_opciones"]);
-			
-			// Si se desea tomar los valores del combo desde una tabla hace la consulta
-			if ($registro_campos["origen_lista_opciones"]!="" && $registro_campos["origen_lista_valores"]!="")
-				{
-					$nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_opciones"]);
-					$nombre_tabla_opciones = $nombre_tabla_opciones[0];
-					$campo_valores=$registro_campos["origen_lista_valores"];
-					$campo_opciones=$registro_campos["origen_lista_opciones"];
-					//Define si los registros a mostrar en la lista deben estar filtrados por alguna condicion
-					$condicion_filtrado_listas=$registro_campos["condicion_filtrado_listas"];
-					if ($condicion_filtrado_listas=="") $condicion_filtrado_listas="1";
-					// Consulta los campos para el tag select
-					$resultado_opciones=ejecutar_sql("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE $condicion_filtrado_listas ORDER BY $campo_opciones");
-					while ($registro_opciones = $resultado_opciones->fetch())
-						{
-							$opciones_lista[] = $registro_opciones["opciones"];
-							$valores_lista[] = $registro_opciones["valores"];
-						}
-				}
+                //Define algunas variables de construccion de la cadena final
+                $PCO_Prefijo='';
+                $PCO_Infijo='|';
+                $PCO_Posfijo='!';
 
-			for ($i=0;$i<count($opciones_lista);$i++)
-				{
-					// Determina si la opcion a agregar es la misma del valor del registro
-					$cadena_predeterminado='';
-					if ($valores_lista[$i]==$cadena_valor)
-						$cadena_predeterminado=' SELECTED ';
-					$salida.= "<option value='".$valores_lista[$i]."' ".$cadena_predeterminado.">".$opciones_lista[$i]."</option>";
-				}
+                echo '
+                    <script type="text/javascript">
+                        function PCO_ObtenerListaOpciones_'.$registro_campos["campo"].'()
+                            {
+                                //Limpia el combo
+                                var variablecombo_'.$registro_campos["campo"].' = document.getElementById("'.$registro_campos["campo"].'");
+                                document.getElementById("'.$registro_campos["campo"].'").options.length=0;
+
+                                var xmlhttp;
+                                if (window.XMLHttpRequest)
+                                    {   // codigo for IE7+, Firefox, Chrome, Opera, Safari
+                                        xmlhttp=new XMLHttpRequest();
+                                    }
+                                else
+                                    {   // codigo for IE6, IE5
+                                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                                    }
+
+                                //funcion que se llama cada vez que cambia la propiedad readyState
+                                xmlhttp.onreadystatechange=function()
+                                    {
+                                        //readyState 4: peticion finalizada y respuesta lista
+                                        //status 200: OK
+                                        if (xmlhttp.readyState===4 && xmlhttp.status===200)
+                                            {
+                                                //Pasar la respuesta html al div correspondiente
+                                                //document.getElementById("PCO_ListaOpciones_'.$registro_campos["campo"].'").innerHTML=xmlhttp.responseText;
+                                                contenido_recibido=xmlhttp.responseText;
+                                                contenido_recibido = contenido_recibido.trim();
+                                                arreglo_opciones = contenido_recibido.split("!");
+                                                
+                                                //Agrega la primera opcion vacia
+                                                var etiqueta_option = document.createElement("option");
+                                                etiqueta_option.value = "";
+                                                etiqueta_option.text = "";
+                                                variablecombo_'.$registro_campos["campo"].'.add(etiqueta_option);
+                                                
+                                                //Recorre el arreglo de opciones y las agrega al combo
+                                                for (x=0;x<arreglo_opciones.length-1;x++)
+                                                    {
+                                                        arreglo_elementos_opciones=arreglo_opciones[x].split("|");
+                                                        //Agrega el elemento
+                                                        var etiqueta_option = document.createElement("option");
+                                                        etiqueta_option.value = arreglo_elementos_opciones[0];
+                                                        etiqueta_option.text = arreglo_elementos_opciones[1];
+                                                        variablecombo_'.$registro_campos["campo"].'.add(etiqueta_option);
+                                                    }
+
+                                                //Actualiza el combo con las nuevas opciones
+                                                $(".combo-'.$registro_campos["campo"].'").selectpicker("refresh");
+                                            }
+                                    };
+
+                                /* open(metodo, url, asincronico)
+                                * metodo: post o get
+                                * url: localizacion del archivo en el servidor
+                                * asincronico: comunicacion asincronica true o false.*/
+                                xmlhttp.open("POST","index.php",true);
+
+                                //establece el header para la respuesta
+                                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+                                //enviamos las variables al archivo get_combo2.php
+                                //xmlhttp.send();
+                                xmlhttp.send("PCO_Accion=opciones_combo_box&Presentar_FullScreen=1&origen_lista_tablas='.$nombre_tabla_opciones.'&origen_lista_opciones='.$registro_campos["origen_lista_opciones"].'&origen_lista_valores='.$registro_campos["origen_lista_valores"].'&condicion_filtrado_listas='.$registro_campos["condicion_filtrado_listas"].'&PCO_Prefijo='.$PCO_Prefijo.'&PCO_Infijo='.$PCO_Infijo.'&PCO_Posfijo='.$PCO_Posfijo.'");
+                            }
+                    </script>
+                
+                <div id="PCO_ListaOpciones_'.$registro_campos["campo"].'" style="display: inline-table;">';
+
+                    // Toma los valores desde la lista de opciones (cuando es estatico)
+                    $opciones_lista = explode(",", $registro_campos["lista_opciones"]);
+                    $valores_lista = explode(",", $registro_campos["lista_opciones"]);
+                    
+                    // Si se desea tomar los valores del combo desde una tabla hace la consulta
+                    if ($registro_campos["origen_lista_opciones"]!="" && $registro_campos["origen_lista_valores"]!="")
+                        {
+                            $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_opciones"]);
+                            $nombre_tabla_opciones = $nombre_tabla_opciones[0];
+                            $campo_valores=$registro_campos["origen_lista_valores"];
+                            $campo_opciones=$registro_campos["origen_lista_opciones"];
+                            //Define si los registros a mostrar en la lista deben estar filtrados por alguna condicion
+                            $condicion_filtrado_listas=$registro_campos["condicion_filtrado_listas"];
+                            if ($condicion_filtrado_listas=="") $condicion_filtrado_listas="1";
+                            // Consulta los campos para el tag select
+                            $resultado_opciones=ejecutar_sql("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE $condicion_filtrado_listas ORDER BY $campo_opciones");
+                            while ($registro_opciones = $resultado_opciones->fetch())
+                                {
+                                    $opciones_lista[] = $registro_opciones["opciones"];
+                                    $valores_lista[] = $registro_opciones["valores"];
+                                }
+                        }
+
+                    for ($i=0;$i<count($opciones_lista);$i++)
+                        {
+                            // Determina si la opcion a agregar es la misma del valor del registro
+                            $cadena_predeterminado='';
+                            if ($valores_lista[$i]==$cadena_valor)
+                                $cadena_predeterminado=' SELECTED ';
+                            $salida.= "<option value='".$valores_lista[$i]."' ".$cadena_predeterminado.">".$opciones_lista[$i]."</option>";
+                        }
+
+                //Cierra DIV para cambio de opciones en caliente
+                echo '</div>';
 
 			$salida.= '</select>';
 
@@ -2168,6 +2250,8 @@ function ventana_login()
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
+                //if ($registro_campos["ajax_busqueda"] == "1") $salida.= '<a class="btn btn-default btn-xs" href="javascript:PCO_ObtenerListaOpciones_'.$registro_campos["campo"].'();" title="'.$MULTILANG_Actualizar.'"><i class="fa fa-refresh icon-blue"></i></a>';
+                if ($registro_campos["ajax_busqueda"] == "1") $salida.= '<a class="btn btn-success btn-xs" href="javascript:PCO_ObtenerListaOpciones_'.$registro_campos["campo"].'();" title="'.$MULTILANG_Actualizar.'"><i class="fa fa-refresh"></i></a>&nbsp;&nbsp;&nbsp;';
                 if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$MULTILANG_TitValorUnico.'" data-content="'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$MULTILANG_TitObligatorio.'" data-content="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
                 if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$registro_campos["ayuda_titulo"].'" data-content="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';

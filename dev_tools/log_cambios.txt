@@ -19,6 +19,7 @@ CHANGELOG.md
 AUTHORS
 index.php
 core/actualizacion.php
+core/ajax.php
 core/comunes.php
 core/formularios.php
 core/informes.php
@@ -87,10 +88,12 @@ LogCambios="
 * Added: Ahora las variables de contexto PCO_ValorBusquedaBD y PCO_CampoBusquedaBD pueden ser utilizadas para filtros en generación de informes
 * Added: Los informes cuentan con la posibilidad de filtrar mediante variables PHP definidas por el usuario.  Las variables pueden estar siendo recibidas por formularios previos donde se tomaran los nombres de campo como nombres de variable o cualquier otra variable global existente.
 * Added: Los informes puede ahora filtrar por patrones (LIKEs) visualmente, antes se podia ingresar su valor de operador manual solamente.
+* Added: Los controles de datos de listas de selección que toman valores desde tablas ahora pueden ser actualizados mediante AJAX
 * Fixed: Se preautoriza la funcion de actualizacion de clave por ser comun a todos los usuarios
 * Fixed: Lanzamiento de ventana de monitoreo con accion incorrecta.  Igual su proceso de autollamado.
 * Fixed: Cambio de peso en condiciones no dejaba activo su PopUp
 * Fixed: Generacion de informes no tomaba el tipo correcto
+* Fixed: Se agrega un data-container como body a las listas de seleccion para que sean visibles aun cuando el contenedor sea pequeño
 * Fixed: Llamado de informes desde opciones de menu sin estilos
 * Fixed: Insercion de informes nuevos corre los campos hacia la derecha por parametro adicional
 * Fixed: Tester: [Ricardo Beltran ] Botones de búsqueda en campos y de operaciones diferentes a la adición no operan correctamente sobre Forms

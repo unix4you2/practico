@@ -324,7 +324,7 @@
 	$MULTILANG_FrmDesBusqueda='Deje el espacio en blanco para indicar que es un campo normal o ingrese la etiqueta que debe ir en el boton de comando ubicado al lado derecho del campo para realizar la busqueda de registros';
 	$MULTILANG_FrmAjax='Usar AJAX para buscar';
 	$MULTILANG_FrmTitAjax='Modo de recuperaci&oacute;n de registros';
-	$MULTILANG_FrmDesAjax='Cuando la casilla se encuentra activada Practico intenta recuperar la informaci&oacute;n del registro para el formulario mediante AJAX (Se recomienda habilitar), de lo contrario se utiliza el metodo est&aacute;ndar de envio de solicitud y recarga de la p&aacute;gina con los resultados.  Puede ser deshabilitado para mejorar compatibilidad con navegadores viejos.';
+	$MULTILANG_FrmDesAjax='Cuando la casilla se encuentra activada Practico intenta recuperar la informaci&oacute;n del registro para el formulario mediante AJAX, En listas de seleccion cuyo valor es obtenido desde tablas esto crea un boton de actualizacion dinamico de la lista.';
 	$MULTILANG_FrmTeclado='Agregar teclado virtual';
 	$MULTILANG_FrmTitTeclado='Ingreso de informaci&oacute;n sin teclado';
 	$MULTILANG_FrmDesTeclado='Cuando es habilitado en el formulario se despliega un teclado virtual para el ingreso de informaci&oacute;n;.  Por ahora el uso del teclado puede violar las validaciones';
