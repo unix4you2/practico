@@ -142,9 +142,27 @@
         }
 
     // Inicia la presentacion de la pagina si no esta activado el fullscreen
-    if (@$Presentar_FullScreen!=1) {
-        include("core/marco_arriba.php");
-    }
+    if (@$Presentar_FullScreen!=1) 
+        {
+            include("core/marco_arriba.php");
+        }
+    else
+        {
+            //Valida si el FullScreen al menos requiere de estilos BootStrap basicos
+            if (@$Precarga_EstilosBS==1) 
+                {
+                    include("core/marco_arriba_bs.php");
+                    //Inicia lo basico de la pagina
+                    echo '<body oncontextmenu="return false;">
+                        <div id="wrapper">
+                        <!-- CONTENIDO DE APLICACION -->
+                        <div id="page-wrapper">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <br>';
+                }
+        }
 
     // Prueba que todas las extensiones requeridas se encuentren habilitadas
     verificar_extensiones();
@@ -211,7 +229,8 @@
     }
 
     // Finaliza el contenido central y presenta el pie de pagina de aplicacion
-    // siempre y cuando no se esta en fullscreen
-    if (@$Presentar_FullScreen!=1) {
-        include "core/marco_abajo.php";
-    }
+    // siempre y cuando no se esta en fullscreen.  Si la precarga esta activa tambien lo incluye
+    if (@$Presentar_FullScreen!=1 || @$Precarga_EstilosBS==1)
+        {
+            include "core/marco_abajo.php";
+        }

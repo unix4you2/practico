@@ -70,6 +70,7 @@
     <!-- /#wrapper inicial -->
 
 
+
     <!-- jQuery -->
 	<script type="text/javascript" src="inc/jquery/jquery-2.1.0.min.js"></script>
     <!-- Bootstrap Core JavaScript -->

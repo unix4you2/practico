@@ -25,6 +25,7 @@ core/formularios.php
 core/informes.php
 core/marco_abajo.php
 core/marco_arriba.php
+core/marco_arriba_bs.php
 core/marco_conf.php
 core/marco_param.php
 core/menus.php
@@ -89,6 +90,7 @@ LogCambios="
 * Added: Los informes cuentan con la posibilidad de filtrar mediante variables PHP definidas por el usuario.  Las variables pueden estar siendo recibidas por formularios previos donde se tomaran los nombres de campo como nombres de variable o cualquier otra variable global existente.
 * Added: Los informes puede ahora filtrar por patrones (LIKEs) visualmente, antes se podia ingresar su valor de operador manual solamente.
 * Added: Los controles de datos de listas de selección que toman valores desde tablas ahora pueden ser actualizados mediante AJAX
+* Added: El modo fullScreen determinado por la variable Presentar_FullScreen permite ahora combinado con otra variable Precarga_EstilosBS definir si sera en modo crudo o al menos con estilos de bootstrap
 * Fixed: Se preautoriza la funcion de actualizacion de clave por ser comun a todos los usuarios
 * Fixed: Lanzamiento de ventana de monitoreo con accion incorrecta.  Igual su proceso de autollamado.
 * Fixed: Cambio de peso en condiciones no dejaba activo su PopUp
