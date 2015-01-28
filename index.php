@@ -142,6 +142,8 @@
         }
 
     // Inicia la presentacion de la pagina si no esta activado el fullscreen
+    if (@$Presentar_FullScreen!=1) $Presentar_FullScreen="";
+    if (@$Precarga_EstilosBS!=1) $Precarga_EstilosBS="";
     if (@$Presentar_FullScreen!=1) 
         {
             include("core/marco_arriba.php");
@@ -170,6 +172,16 @@
     // Valida existencia de versiones nuevas cuando el admin esta logueado
     buscar_actualizaciones(@$PCOSESS_LoginUsuario,$PCO_Accion);
 
+    // Presenta mensajes con errores generales cuando son encontrados durante la ejecucion
+    if (@$PCO_ErrorTitulo!="") {
+        if (@$PCO_ErrorIcono=="") $PCO_ErrorIcono='fa-thumbs-down';
+        if (@$PCO_ErrorEstilo=="") $PCO_ErrorEstilo='alert-danger';
+        mensaje($PCO_ErrorTitulo, $PCO_ErrorDescripcion, '', 'fa fa-fw fa-2x '.$PCO_ErrorIcono, 'alert alert-dismissible '.$PCO_ErrorEstilo);
+        //Detiene ejecucion del script (util despues de popups de solo mensajes en operaciones)
+        if (@$PCO_ErrorAutoclose=="1") echo '<script type="" language="JavaScript"> window.close();  </script>';
+        if (@$PCO_ErrorDetener=="1") die();
+    }
+
     // Si existe el directorio de instalacion y no es modo fullscreen presenta un mensaje constante de advertencia
     if (@file_exists("ins") && @$Presentar_FullScreen!=1) {
         mensaje($MULTILANG_TituloInsExiste, $MULTILANG_TextoInsExiste, '', 'fa fa-exclamation-triangle fa-5x texto-rojo texto-blink', 'alert alert-warning alert-dismissible');
@@ -178,11 +190,6 @@
 	//Despliega escritorio del admin
 	if (@$PCOSESS_LoginUsuario=="admin" && $PCOSESS_SesionAbierta && $PCO_Accion=="Ver_menu") {
         include_once("core/marco_admin.php");
-    }
-
-    // Presenta mensajes con errores generales cuando son encontrados durante la ejecucion
-    if (@$PCO_ErrorTitulo!="") {
-        mensaje($PCO_ErrorTitulo, $PCO_ErrorDescripcion, '', 'fa fa-thumbs-down fa-fw fa-2x', 'alert alert-danger alert-dismissible');
     }
 
 /* ################################################################## */

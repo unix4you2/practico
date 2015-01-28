@@ -60,6 +60,7 @@ Group: Modulos Principales  {
          File: t_obsoletas  (dev_tools/tests/t_obsoletas.php)
          }  # Group: Dev_tools
 
+      File: Documentacion para desarrolladores  (dev_tools/docs/variables.php)
       File: Libreria base  (core/comunes.php)
       }  # Group: Core
 
@@ -89,6 +90,8 @@ Group: Modulos Principales  {
       File: Seccion Proveedores OAuth  (core/marco_param.php)
       File: Seccion Escritorio Administrativo  (core/marco_admin.php)
       File: Seccion Escritorio Administrativo  (core/marco_admin_morris.php)
+      File: Modulo ajax  (core/ajax.php)
+      File: Seccion superior  (core/marco_arriba_bs.php)
       }  # Group: Modulos
 
    Group: Inc  {

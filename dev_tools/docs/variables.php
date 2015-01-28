@@ -34,14 +34,22 @@
     Section: Variables generales (Globales)
     Las variables se encuentran disponibles en el entorno global para ser utilizadas en diferentes funciones
 
-        $PCO_ValorBusquedaBD - 
-        $PCO_CampoBusquedaBD - 
-        $PCO_ErrorTitulo - 
-        $PCO_ErrorDescripcion - 
-        $PCO_FechaOperacionGuiones - 
-        $PCO_HoraOperacionPuntos - 
-        $PCO_HoraOperacion - 
-        $PCO_FechaOperacion - 
+        $PCO_ValorBusquedaBD - Para los campos de formulario con boton de busqueda, este es el valor ingresado en el campo y requerido para la consulta del formulario nuevamente
+        $PCO_CampoBusquedaBD - Para los campos de formulario con boton de busqueda, este es el campo en la base de datos sobre el cual sera comparada la variable $PCO_ValorBusquedaBD con el fin de retornar el registro unico (o en casos de varios registros coincidentes solo el primero).
+        $PCO_FechaOperacion - Fecha de ejecucion del script en formato AAAMMDD
+        $PCO_FechaOperacionGuiones - Fecha de ejecucion del script en formato AAA-MM-DD
+        $PCO_HoraOperacion - Hora de ejecucion del script en formato HHMMSS
+        $PCO_HoraOperacionPuntos - Hora de ejecucion del script en formato HH:MM:SS
 
+    Section: Variables de mensajes en el escritorio (Globales)
+    Las variables se encuentran disponibles en el entorno global para ser utilizadas en diferentes funciones asi como pueden ser definidas mediante campos visibles u ocultos dentro de formularios para ser transportadas en su siguiente llamado.
+
+        $PCO_ErrorTitulo - Titulo para el cuadro de mensaje de error o informacion
+        $PCO_ErrorDescripcion - Mensaje con la descripcion del error o mensaje
+        $PCO_ErrorIcono - Icono deseado para el mensaje (soportado solo FontAwesome). Cuando no se recibe un valor por defecto se utiliza el icono fa-thumbs-down
+        $PCO_ErrorEstilo - Estilo BootStrap deseado [alert-info|alert-warning|alert-default|alert-primary|alert-success|alert-danger].  Cuando no se recibe un valor por defecto se utiliza el estilo CSS alert-danger
+        $PCO_ErrorAutoclose - Intenta cerrar la ventana de trabajo actual despues de presentar un mensaje de error o informacion deterimnado en el escritorio.
+        $PCO_ErrorDetener - Detiene la ejecucion del script justo despues de presentar un mensaje en el escritorio.  Util para presentar mensajes en fullscreen despues de ejecutar una operacion.
+        
     */
 

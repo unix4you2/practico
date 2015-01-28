@@ -64,13 +64,13 @@ inc/map-icons/*
 inc/octicons/*
 inc/typicons/*
 inc/weather-icons/*
-/mod/fileman/carpetas.php
-/mod/fileman/index.php
-/mod/ldap/index.php
-/mod/mvc/index.php
-/mod/pam/index.php
-/mod/pdf/index.php
-/mod/sopa/index.php
+mod/fileman/carpetas.php
+mod/fileman/index.php
+mod/ldap/index.php
+mod/mvc/index.php
+mod/pam/index.php
+mod/pdf/index.php
+mod/sopa/index.php
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -135,8 +135,11 @@ LogCambios="
 * Enhan: Todos los botones de formularios han sido convertidos al tag <a> para mayor flexibilidad
 * Enhan: Eliminacion de enlaces a videotutoriales. Se quedan obsoletos rapidamente asi que seran vinculados desde la pagina oficial.
 * Enhan: Cambio de variables por compatibilidad: error_titulo a PCO_ErrorTitulo, error_descripcion a PCO_ErrorDescripcion, fecha_operacion_guiones a PCO_FechaOperacionGuiones, hora_operacion_puntos a PCO_HoraOperacionPuntos, hora_operacion a PCO_HoraOperacion, fecha_operacion a PCO_FechaOperacion, Login_usuario (sesion) por PCOSESS_LoginUsuario, Sesion_abierta a PCOSESS_SesionAbierta
+* Enhan: Los estados de pantalla completa y de precarga de estilos son transportados en cada operacion de formulario
+* Enhan: El campo de accion personalizada del usuario para botones de formulario es ahora de tipo text, de manera que se puedan ingresar instrucciones largas.
 
-IMPORTANTE: Aquellos que hayan aplicado procesos de actualizacion previos (15.1.xxx) es probable que vean errores de ejecución SQL durante la aplicación del parche.  Si encuentre mensajes como que la tabla ya existe entonces todo va con normalidad pues ya ha sido parchado su sistema para el uso de la nueva tabla.
+IMPORTANTE 1: La aplicacion de este parche puede requerir un reinicio de sesion al finalizar pues afecta variables de entorno
+IMPORTANTE 2: Aquellos que hayan aplicado procesos de actualizacion previos (15.1.xxx) es probable que vean errores de ejecución SQL durante la aplicación del parche.  Si encuentre mensajes como que la tabla ya existe entonces todo va con normalidad pues ya ha sido parchado su sistema para el uso de la nueva tabla.
 "
 
 ########################################################################
@@ -147,6 +150,7 @@ ALTER TABLE core_formulario_objeto ADD COLUMN personalizacion_tag TEXT;
 ALTER TABLE core_informe_campos ADD COLUMN peso int(10) default 0;
 ALTER TABLE core_informe ADD COLUMN variables_filtro text;
 ALTER TABLE core_informe DROP COLUMN nivel_usuario;
+ALTER TABLE core_formulario_boton CHANGE COLUMN accion_usuario accion_usuario TEXT NULL DEFAULT '';
 "
 
 ########################################################################

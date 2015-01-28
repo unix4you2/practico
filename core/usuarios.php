@@ -200,6 +200,10 @@ if ($PCO_Accion=="cambiar_clave")
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<?php
 				mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'60%','fa fa-exclamation-triangle fa-5x','TextosEscritorio');
+
+                //Continua las Banderas recibidas para el tipo de carga de contenido
+                if (@$Presentar_FullScreen==1)  echo '<input type="Hidden" name="Presentar_FullScreen" value="1">';
+                if (@$Precarga_EstilosBS==1)    echo '<input type="Hidden" name="Precarga_EstilosBS" value="1">';
 			?>
                 <input type="hidden" name="PCO_Accion" value="actualizar_clave">
                 <br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrCambioPW; ?></b></font>
@@ -210,7 +214,7 @@ if ($PCO_Accion=="cambiar_clave")
                     </span>
                     <input type="password" class="form-control" value="****************" readonly>
                 </div>
-        
+
                 <div class="form-group input-group">
                     <span class="input-group-addon">
                         <?php echo $MULTILANG_UsrNuevoPW; ?>:
@@ -302,6 +306,8 @@ if ($PCO_Accion=="actualizar_clave")
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="cambiar_clave">
+					<input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+					<input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 					</form>
@@ -309,7 +315,7 @@ if ($PCO_Accion=="actualizar_clave")
 			}
 	}
 
-	
+
 /* ################################################################## */
 /* ################################################################## */
 /*

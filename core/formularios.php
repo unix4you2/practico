@@ -83,6 +83,8 @@
 						<input type="Hidden" name="nombre_tabla" value="'.$tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="popup_activo" value="FormularioCampos">
+                        <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+                        <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 					<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
 		}
@@ -178,9 +180,11 @@
 						<!-- <input type="Hidden" name="PCO_Accion" value="editar_formulario"> -->
 						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
-						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+                        <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+                        <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -358,7 +362,6 @@
 					$lista_valores_concatenados=substr($lista_valores_concatenados, 0, strlen($lista_valores_concatenados)-strlen($_SeparadorCampos_));					
 
 					//Inserta los datos del registro en BD
-					//ANTES DEL QUERY CON PARAMETROS: ejecutar_sql_unaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores.")");
 					ejecutar_sql_unaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores_interrogantes.")",$lista_valores_concatenados);
 					auditar("Inserta registro en ".$registro_formulario["tabla_datos"]);
 					//Si no hay errores en carga de archivos redirecciona normal, sino redirecciona con los errores
@@ -368,9 +371,11 @@
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$errores_de_carga.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
-						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$errores_de_carga.'">
+                        <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+                        <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -380,9 +385,11 @@
 						<!-- <input type="Hidden" name="PCO_Accion" value="editar_formulario"> -->
 						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
-						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+                        <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+                        <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}

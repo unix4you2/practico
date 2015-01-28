@@ -3017,8 +3017,10 @@ function ventana_login()
 						<input type="Hidden" name="PCO_Accion" value="guardar_datos_formulario">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="id_registro_datos" value="'.@$registro_datos_formulario["id"].'">
+                        <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+                        <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 						';
-                        
+
                 // Inicio de la generacion de encabezados pestanas
                 //Cuenta las pestanas segun los objetos del form y ademas mira si es solo una con valor vacio (sin pestanas)
                 $consulta_conteo_pestanas=      ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
