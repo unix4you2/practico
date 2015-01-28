@@ -138,7 +138,7 @@ CREATE TABLE core_formulario_boton (
   estilo varchar(250) default '',
   formulario integer,
   tipo_accion varchar(250) default '',
-  accion_usuario varchar(250) default '',
+  accion_usuario text,
   visible integer default '1',
   peso integer,
   retorno_titulo varchar(50) default '',

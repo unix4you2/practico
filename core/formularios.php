@@ -1593,7 +1593,7 @@ if ($PCO_Accion=="editar_formulario")
 						$peso_aumentado=$registro["peso"]+1;
 						if ($registro["peso"]-1>=1) $peso_disminuido=$registro["peso"]-1; else $peso_disminuido=1;
 						echo '<tr>
-								<td nowrap><b>'.$registro["titulo"].'</b> ('.$registro["tipo"].')</td>
+								<td><b>'.$registro["titulo"].'</b> ('.$registro["tipo"].')</td>
 								<td><b>'.$registro["campo"].'</b></td>
 								<td align=center nowrap>
 									<form action="'.$ArchivoCORE.'" method="POST" name="ifoc'.$registro["id"].'" id="ifoc'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
@@ -1605,7 +1605,6 @@ if ($PCO_Accion=="editar_formulario")
 										<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 										<input type="hidden" name="accion_retorno" value="editar_formulario">
 										<input type="Hidden" name="popup_activo" value="FormularioDiseno">
-									
 								';
 								echo '
                                 <div class="form-group input-group">
