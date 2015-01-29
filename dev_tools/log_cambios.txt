@@ -137,6 +137,9 @@ LogCambios="
 * Enhan: Cambio de variables por compatibilidad: error_titulo a PCO_ErrorTitulo, error_descripcion a PCO_ErrorDescripcion, fecha_operacion_guiones a PCO_FechaOperacionGuiones, hora_operacion_puntos a PCO_HoraOperacionPuntos, hora_operacion a PCO_HoraOperacion, fecha_operacion a PCO_FechaOperacion, Login_usuario (sesion) por PCOSESS_LoginUsuario, Sesion_abierta a PCOSESS_SesionAbierta
 * Enhan: Los estados de pantalla completa y de precarga de estilos son transportados en cada operacion de formulario
 * Enhan: El campo de accion personalizada del usuario para botones de formulario es ahora de tipo text, de manera que se puedan ingresar instrucciones largas.
+* Enhan: Depuracion de variables cadena_altura y cadena_valor en listas de seleccion
+* Enhan: Adición de tooltip a botones de actualización automática
+* Enhan: Botón de búsqueda agregado sobre etiquetas SPAN para unificar su presentación cuando hay otros controles al lado
 
 IMPORTANTE 1: La aplicacion de este parche puede requerir un reinicio de sesion al finalizar pues afecta variables de entorno
 IMPORTANTE 2: Aquellos que hayan aplicado procesos de actualizacion previos (15.1.xxx) es probable que vean errores de ejecución SQL durante la aplicación del parche.  Si encuentre mensajes como que la tabla ya existe entonces todo va con normalidad pues ya ha sido parchado su sistema para el uso de la nueva tabla.

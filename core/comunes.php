@@ -2099,7 +2099,7 @@ function ventana_login()
 	function cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 		{
 			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
-			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_SeleccioneUno;
+			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_SeleccioneUno,$MULTILANG_FrmActualizaAjax;
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
@@ -2118,7 +2118,7 @@ function ventana_login()
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.= '<select id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" data-container="body" class="selectpicker combo-'.$registro_campos["campo"].' show-tick" '.$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'" '.$registro_campos["personalizacion_tag"].' >';
+			$salida.= '<select id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" data-container="body" class="selectpicker combo-'.$registro_campos["campo"].' show-tick" '.@$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'" '.$registro_campos["personalizacion_tag"].' >';
             
                 //Genera Script Ajax y DIV para cambio de opciones en caliente
                 $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_opciones"]);
@@ -2226,7 +2226,7 @@ function ventana_login()
                         {
                             // Determina si la opcion a agregar es la misma del valor del registro
                             $cadena_predeterminado='';
-                            if ($valores_lista[$i]==$cadena_valor)
+                            if ($valores_lista[$i]==@$cadena_valor)
                                 $cadena_predeterminado=' SELECTED ';
                             $salida.= "<option value='".$valores_lista[$i]."' ".$cadena_predeterminado.">".$opciones_lista[$i]."</option>";
                         }
@@ -2239,7 +2239,7 @@ function ventana_login()
 			// Muestra boton de busqueda cuando el campo sea usado para esto
 			if ($registro_campos["etiqueta_busqueda"]!="")
 				{
-					$salida.= '<input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.PCO_ValorBusquedaBD.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.PCO_Accion.value=\'cargar_objeto\';document.datos.submit()">';
+					$salida.= '<span class="input-group-addon"><input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.PCO_ValorBusquedaBD.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.PCO_Accion.value=\'cargar_objeto\';document.datos.submit()"></span>';
 					$salida.= '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
 					$salida.= '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
 					$salida.= '<input type="Hidden" name="PCO_CampoBusquedaBD" value="'.$registro_campos["campo"].'" >';
@@ -2247,11 +2247,11 @@ function ventana_login()
 				}
 
 			//Si hay algun indicador adicional del campo abre los add-ons
-            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+            if ($registro_campos["ajax_busqueda"] == "1" || $registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
                 //if ($registro_campos["ajax_busqueda"] == "1") $salida.= '<a class="btn btn-default btn-xs" href="javascript:PCO_ObtenerListaOpciones_'.$registro_campos["campo"].'();" title="'.$MULTILANG_Actualizar.'"><i class="fa fa-refresh icon-blue"></i></a>';
-                if ($registro_campos["ajax_busqueda"] == "1") $salida.= '<a class="btn btn-success btn-xs" href="javascript:PCO_ObtenerListaOpciones_'.$registro_campos["campo"].'();" title="'.$MULTILANG_Actualizar.'"><i class="fa fa-refresh"></i></a>&nbsp;&nbsp;&nbsp;';
+                if ($registro_campos["ajax_busqueda"] == "1") $salida.= '<a data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_FrmActualizaAjax.'" class="btn btn-success btn-xs" href="javascript:PCO_ObtenerListaOpciones_'.$registro_campos["campo"].'();"><i class="fa fa-refresh"></i></a>&nbsp;&nbsp;&nbsp;';
                 if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$MULTILANG_TitValorUnico.'" data-content="'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$MULTILANG_TitObligatorio.'" data-content="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
                 if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$registro_campos["ayuda_titulo"].'" data-content="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
