@@ -113,6 +113,7 @@ LogCambios="
 * Fixed: Se agrega un data-container como body a las listas de seleccion para que sean visibles aun cuando el contenedor sea pequeño
 * Fixed: Llamado de informes desde opciones de menu sin estilos
 * Fixed: Insercion de informes nuevos corre los campos hacia la derecha por parametro adicional
+* Fixed: Visualizacion de bordes de tabla en diseño de formularios ahora aplican propiedad correctamente
 * Fixed: Tester: [Ricardo Beltran ] Botones de búsqueda en campos y de operaciones diferentes a la adición no operan correctamente sobre Forms
 * Fixed: Tester: [Jonathan Sánchez] Campo de correo en registro de clientes tenía el tipo como password.
 * Fixed: Tester: [Jonathan Sánchez] Se corrigen procesos de actualización de registros para campos que no son controles de datos sobre formularios
@@ -140,6 +141,7 @@ LogCambios="
 * Enhan: Depuracion de variables cadena_altura y cadena_valor en listas de seleccion
 * Enhan: Adición de tooltip a botones de actualización automática
 * Enhan: Botón de búsqueda agregado sobre etiquetas SPAN para unificar su presentación cuando hay otros controles al lado
+* Enhan: El diseño de formularios ahora presenta la pestaña a que pertenecen los elementos y los ordena por pestaña, columna y peso.
 
 IMPORTANTE 1: La aplicacion de este parche puede requerir un reinicio de sesion al finalizar pues afecta variables de entorno
 IMPORTANTE 2: Aquellos que hayan aplicado procesos de actualizacion previos (15.1.xxx) es probable que vean errores de ejecución SQL durante la aplicación del parche.  Si encuentre mensajes como que la tabla ya existe entonces todo va con normalidad pues ya ha sido parchado su sistema para el uso de la nueva tabla.

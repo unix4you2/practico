@@ -3087,7 +3087,7 @@ function ventana_login()
                                                 // Inicia la tabla con los campos
                                                 echo '
                                                     <div class="table-responsive">
-                                                    <table class="table table-responsive table-unbordered table-condensed btn-xs"><tr>';
+                                                    <table class="table table-responsive '.$estilo_bordes.' table-condensed btn-xs"><tr>';
                                                 //Recorre todas las comunas definidas para el formulario buscando objetos
                                                 for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
                                                     {
@@ -3151,7 +3151,9 @@ function ventana_login()
                                                         //echo '&nbsp;&nbsp;'.$registro_campos["titulo"];
                                                         // Formatea cada campo de acuerdo a su tipo
                                                         // CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas arriba tambien
-                                                        echo '<table class="table table-condensed btn-xs '.$estilo_bordes.'"><tr><td>';
+                                                        echo '
+                                                        <div class="table-responsive">
+                                                        <table class="table table-condensed btn-xs '.$estilo_bordes.'"><tr><td>';
                                                         $tipo_de_objeto=@$registro_campos["tipo"];
                                                         if ($tipo_de_objeto=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                         if ($tipo_de_objeto=="texto_clave") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
@@ -3173,7 +3175,8 @@ function ventana_login()
                                                         //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
                                                         if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
                                                             echo $objeto_formateado;
-                                                        echo '</td></tr></table>';
+                                                        echo '</td></tr></table>
+                                                        </div>';
                                                     }
 
                                                 //Actualiza limite inferior para siguiente lista de campos

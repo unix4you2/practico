@@ -116,6 +116,7 @@
 	$MULTILANG_Paso='Paso';
 	$MULTILANG_Peso='Peso';
 	$MULTILANG_Pequeno='peque&ntilde;o';
+    $MULTILANG_Pestana='Pesta&ntilde;a';
 	$MULTILANG_Predeterminado='Predeterminado';
 	$MULTILANG_ProcesoFin='Proceso finalizado';
 	$MULTILANG_Puerto='Puerto';

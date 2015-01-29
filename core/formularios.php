@@ -1573,7 +1573,7 @@ if ($PCO_Accion=="editar_formulario")
 					<table class="table table-condensed table-hover btn-xs">
 						<thead>
                         <tr>
-							<td><b><?php echo $MULTILANG_Titulo; ?> (<?php echo $MULTILANG_Tipo?>)</b></td>
+                            <td><b><?php echo $MULTILANG_Titulo; ?> (<?php echo $MULTILANG_Tipo?>)</b></td>
 							<td><b><?php echo $MULTILANG_Campo; ?></b></td>
 							<td><b><?php echo $MULTILANG_Columna; ?></b></td>
 							<td><b><?php echo $MULTILANG_Peso; ?></b></td>
@@ -1585,15 +1585,26 @@ if ($PCO_Accion=="editar_formulario")
                         </thead>
                         <tbody>
 			 <?php
-
-
-				$consulta=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER BY columna,peso,titulo","$formulario");
+                //Determina cual es la pestana para agregar el titulo cada que cambie en el listado
+                $pestana_actual="";
+				//Busca los controles
+                $consulta=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER BY pestana_objeto,columna,peso","$formulario");
 				while($registro = $consulta->fetch())
 					{
-						$peso_aumentado=$registro["peso"]+1;
+						//Si el registro cambia de pestana entonces agrega el titulo
+                        if ($pestana_actual!=$registro["pestana_objeto"])
+                            {
+                                echo '<tr><td class="btn-info" colspan=8 align=center>
+                                        <h4><b><i class="fa fa-stack-overflow"></i> '.$MULTILANG_Pestana.': '.$registro["pestana_objeto"].'</b></h4>
+                                    </td></tr>';
+                                //Actualiza la ultima pestana
+                                $pestana_actual=$registro["pestana_objeto"];
+                            }
+                        
+                        $peso_aumentado=$registro["peso"]+1;
 						if ($registro["peso"]-1>=1) $peso_disminuido=$registro["peso"]-1; else $peso_disminuido=1;
 						echo '<tr>
-								<td><b>'.$registro["titulo"].'</b> ('.$registro["tipo"].')</td>
+                                <td><b>'.$registro["titulo"].'</b> ('.$registro["tipo"].')</td>
 								<td><b>'.$registro["campo"].'</b></td>
 								<td align=center nowrap>
 									<form action="'.$ArchivoCORE.'" method="POST" name="ifoc'.$registro["id"].'" id="ifoc'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">

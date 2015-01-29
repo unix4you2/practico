@@ -116,6 +116,7 @@
 	$MULTILANG_Paso='Step';
 	$MULTILANG_Peso='Weight';
 	$MULTILANG_Pequeno='small';
+    $MULTILANG_Pestana='Tab';
 	$MULTILANG_Predeterminado='Default';
 	$MULTILANG_ProcesoFin='Process completed';
 	$MULTILANG_Puerto='Port';
