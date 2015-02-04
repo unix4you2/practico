@@ -211,17 +211,21 @@
                             
 
                             <br>
+                            <form name="datos_busqueda_home" action="<?php echo $ArchivoCORE; ?>" method="POST">
                             <li class="sidebar-search">
                                 <div class="input-group custom-search-form">
-                                    <input type="text" class="form-control" placeholder="<?php echo $MULTILANG_Buscar; ?>...">
+                                    <input name="PCO_BusquedaPermisos" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Buscar; ?>...">
+                                    <input type="hidden" name="PCO_Accion" value="buscar_permisos_practico">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button">
+                                        <button type="submit" class="btn btn-default" type="button">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </span>
                                 </div>
                                 <!-- /input-group -->
                             </li>
+                            </form>
+                            
                             <li>
                                 <a href="javascript:document.core_ver_menu.submit();"><i class="fa fa-dashboard fa-fw"></i> <?php echo $MULTILANG_Escritorio; ?></a>
                             </li>

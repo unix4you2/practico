@@ -711,6 +711,123 @@ if ($PCO_Accion=="administrar_menu")
 		 		}
 
 
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: buscar_permisos_practico
+	Busca dentro de los permisos asignados al usuario aquellos que puedan coincidir dentro de los menues y los informes a la busqueda realizada
+
+	Variables de entrada:
+
+		PCO_BusquedaPermisos - la palabra o expresion a buscar
+
+	Salida:
+		Escritorio de usuario con la lista de posibles permisos que coinciden con su busqueda
+
+	Observacion:
+		Se retornan unicamente aquellos permisos e informes asignados al usuario
+
+	Ver tambien:
+		<Ver_menu>
+*/
+	if ($PCO_Accion=="buscar_permisos_practico" && $PCOSESS_SesionAbierta)
+		{ 
+			echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
+
+            //Presenta el buscador nuevamente
+            echo '
+                <form name="datos_busqueda_home" action="'.$ArchivoCORE.'" method="POST">
+                <input type="hidden" name="PCO_Accion" value="buscar_permisos_practico">
+                <div class="chat-panel panel panel-default">
+                    <div class="panel-heading">
+                        <div class="input-group">
+                            <input id="btn-input" name="PCO_BusquedaPermisos" value="'.@$PCO_BusquedaPermisos.'" type="text" class="form-control input-sm" placeholder="'.$MULTILANG_Buscar.'..." />
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-info btn-sm" id="btn-chat">
+                                    <i class="fa fa-search"></i> '.$MULTILANG_Buscar.'
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                </form>';
+
+            //Descompone la frase de busqueda en palabras para buscar las cuatro primeras como las mas relevantes
+                $PalabrasBusqueda=explode(" ",$PCO_BusquedaPermisos);
+                $Palabra1=@$PalabrasBusqueda[0];
+                $Palabra2=@$PalabrasBusqueda[1];
+                $Palabra3=@$PalabrasBusqueda[2];
+                $Palabra4=@$PalabrasBusqueda[3];
+            $complemento_palabras_like="";
+            if ($Palabra1!="") $complemento_palabras_like.=" texto LIKE '%$Palabra1%' ";
+            if ($Palabra2!="") $complemento_palabras_like.=" OR texto LIKE '%$Palabra2%' ";
+            if ($Palabra3!="") $complemento_palabras_like.=" OR texto LIKE '%$Palabra3%' ";
+            if ($Palabra4!="") $complemento_palabras_like.=" OR texto LIKE '%$Palabra4%' ";
+
+            //Inicia el marco con resultados
+            echo '
+                    <h3>'.$MULTILANG_Resultados.':</h3>
+                    <div class="panel panel-default"> <!-- Clase chat-panel para altura -->
+                        <div class="panel-body">
+                            <ul class="chat">';
+
+
+                    // Busca y carga las opciones
+                    // Si el usuario es diferente al administrador agrega condiciones al query
+                    if ($PCOSESS_LoginUsuario!="admin")
+                        {
+                            $Complemento_tablas=",".$TablasCore."usuario_menu";
+                            $Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";
+                        }
+                    $resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE 1 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
+
+                    // Imprime las opciones con sus formularios
+                    while($registro = $resultado->fetch())
+                        {
+                            echo '<form action="'.$ArchivoCORE.'" method="post" name="desk_'.$registro["id"].'" id="desk_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
+                            // Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
+                            if ($registro["tipo_comando"]=="Interno" || $registro["tipo_comando"]=="Personal")
+                                {
+                                    echo '<input type="hidden" name="PCO_Accion" value="'.$registro["comando"].'"></form>';
+                                }
+                            // Verifica si se trata de una opcion para cargar un objeto de practico
+                            if ($registro["tipo_comando"]=="Objeto")
+                                {
+                                    echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
+                                         <input type="hidden" name="objeto" value="'.$registro["comando"].'"></form>';
+                                }
+                            //Presenta la opcion de menu
+                            echo '
+                                <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <i class="'.$registro["imagen"].' fa-2x fa-fw icon-gray"></i>
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <a href="javascript:document.desk_'.$registro["id"].'.submit();">
+                                                <strong class="primary-font">'.$registro["texto"].'</strong> 
+                                            </a>
+                                            <small class="pull-right text-muted">
+                                                <i class="fa fa-rocket fa-fw"></i> ['.$registro["tipo_comando"].']='.$registro["comando"].'
+                                            </small>
+                                        </div>
+                                        <p>
+                                            <i class="icon-gray">&nbsp;&nbsp;&nbsp;'.$registro["seccion"].'</i>
+                                        </p>
+                                    </div>
+                                </li>';
+                        }
+
+
+            //Finaliza el marco de resultados
+            echo '
+                            </ul>
+                        </div> <!-- /.panel-body -->
+                    </div> <!-- /.panel .chat-panel -->';
+	} 
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*

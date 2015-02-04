@@ -94,9 +94,9 @@
 			if ($contenido_url!="")
 				{
 					// Usa SimpleXML Directamente para interpretar respuesta
-					$resultado_webservice = simplexml_load_string($contenido_url);
+					$resultado_webservice = @simplexml_load_string($contenido_url);
 					// Analiza la respuesta recibida en el XML
-					if($resultado_webservice->credencial[0]->aceptacion==1)
+					if(@$resultado_webservice->credencial[0]->aceptacion==1)
 						$ok_login=1;
 				}
 			else

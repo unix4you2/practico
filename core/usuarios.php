@@ -163,13 +163,16 @@ if ($PCO_Accion=="copiar_permisos")
 	{
 		// Elimina opciones existentes
 		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$usuariod");
-		// Copia permisos
-		$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$usuarioo");
-		while($registro = $resultado->fetch())
-			{
-				$menuinsertar=$registro["menu"];
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuariod$_SeparadorCampos_$menuinsertar");
-			}
+		// Copia permisos si el usuario origen es diferente de vacio, sino lo deja sin nada
+        if ($usuarioo!="")
+            {
+                $resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$usuarioo");
+                while($registro = $resultado->fetch())
+                    {
+                        $menuinsertar=$registro["menu"];
+                        ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuariod$_SeparadorCampos_$menuinsertar");
+                    }
+            }
 		auditar("Copia permisos de $usuarioo al usuario $usuariod");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="permisos_usuario">
@@ -438,11 +441,11 @@ if ($PCO_Accion=="informes_usuario")
 						$resultado=ejecutar_sql("SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe WHERE 1 ");
 						while($registro = $resultado->fetch())
 							{
-								echo '<option value="'.$registro["id"].'">'.$registro["titulo"].'</option>';
+								echo '<option  data-icon="glyphicon glyphicon-list-alt fa-fw"  value="'.$registro["id"].'">'.$registro["titulo"].'</option>';
 							}
 					?>
 				</select>
-                <input type="Button" name="" value=" <?php echo $MULTILANG_Agregar; ?> " class="btn btn-success btn-xs" onClick="document.datos.submit()">
+                <button class="btn btn-success btn-xs"  onClick="document.datos.submit()"><i class="fa fa-plus fa-fw"></i> <?php echo $MULTILANG_Agregar; ?></button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:document.core_ver_menu.submit();" class="btn btn-default btn-xs"><i class="fa fa-home"></i> <?php echo $MULTILANG_FrmAccionRegresar; ?></a>
 
             </form>
@@ -628,11 +631,11 @@ if ($PCO_Accion=="permisos_usuario")
 						$resultado=ejecutar_sql("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE 1 ");
 						while($registro = $resultado->fetch())
 							{
-								echo '<option value="'.$registro["id"].'">'.$registro["texto"].'</option>';
+								echo '<option data-icon="'.$registro["imagen"].' fa-fw" value="'.$registro["id"].'">'.$registro["texto"].'</option>';
 							}
 					?>
 				</select>
-            	<input type="Button" name="" value=" <?php echo $MULTILANG_Agregar; ?> " class="btn btn-success btn-xs" onClick="document.datos.submit()">
+                <button class="btn btn-success btn-xs"  onClick="document.datos.submit()"><i class="fa fa-plus fa-fw"></i> <?php echo $MULTILANG_Agregar; ?></button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:document.core_ver_menu.submit();" class="btn btn-default btn-xs"><i class="fa fa-home"></i> <?php echo $MULTILANG_FrmAccionRegresar; ?></a>
             </form>
             <hr>

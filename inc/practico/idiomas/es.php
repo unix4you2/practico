@@ -121,6 +121,7 @@
 	$MULTILANG_ProcesoFin='Proceso finalizado';
 	$MULTILANG_Puerto='Puerto';
 	$MULTILANG_Registrarme='Registrarme';
+    $MULTILANG_Resultados='Resultados';
     $MULTILANG_Si='Si';
 	$MULTILANG_Servidor='Servidor';
 	$MULTILANG_SeleccioneUno='Seleccione uno';
@@ -184,6 +185,7 @@
 	$MULTILANG_ErrDirectiva='La directiva o variable de configuracion PHP indicada debe estar habilitada en su configuracion de PHP o servidor web';
 	$MULTILANG_UsuariosChat='Aquellos usuarios desconectados en el momento recibiran los mensajes cuando ingresen nuevamente al sistema.';
     $MULTILANG_AdminArchivos='Administrador de archivos';
+    $MULTILANG_ErrorConnLDAP='Ha ocurrido un error durante la conexion con el servidor de autenticacion LDAP. Verifique sus configuraciones e intente nuevamente.  Detalles:<br>';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';

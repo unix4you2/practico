@@ -121,6 +121,7 @@
 	$MULTILANG_ProcesoFin='Process completed';
 	$MULTILANG_Puerto='Port';
     $MULTILANG_Registrarme='Sign In';
+    $MULTILANG_Resultados='Results';
 	$MULTILANG_Si='Yes';
 	$MULTILANG_Servidor='Server';
 	$MULTILANG_SeleccioneUno='Choose one';
@@ -184,6 +185,7 @@
 	$MULTILANG_ErrDirectiva='The environment var should be enabled on your PHP or web server configuration';
 	$MULTILANG_UsuariosChat='Users that are offline at this moment will see all the messages when they login again to the system.';
     $MULTILANG_AdminArchivos='File manager';
+    $MULTILANG_ErrorConnLDAP='An error ocurred during LDAP server connection. Please check your settings and try again.  Details:<br>';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';

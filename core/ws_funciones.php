@@ -85,7 +85,8 @@ if ($WSId=="verificar_credenciales")
 		//Verifica MOTOR autenticacion por LDAP
 		if (!$error_parametros && ($Auth_TipoMotor=="ldap" && $uid!="admin"))
 			{
-				$auth_ldap_dc="";
+				$DepuracionLDAP=0; //Activar para depuracion durante autenticaciones LDAP
+                $auth_ldap_dc="";
 				$auth_ldap_dc_trozos=explode(".",$Auth_LDAPDominio);
 				for ($i = 0; $i < count($auth_ldap_dc_trozos) ; $i++)
 					$auth_ldap_dc.=",dc=".$auth_ldap_dc_trozos[$i];
@@ -100,11 +101,15 @@ if ($WSId=="verificar_credenciales")
 				// match de usuario y password
 				if (  ldap_bind( $auth_ldap_conexion, $auth_ldap_cadena, $clave )  )
 					$ok_login_verifica='1';
+                else
+                    mensaje($MULTILANG_Error.': '.$MULTILANG_AuthLDAP,$MULTILANG_ErrorConnLDAP, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 				// Si logra el acceso por LDAP consulta datos del usuario sobre Practico para llenar el XML pero
 				// Si el usuario no existe se devolvera el valor de aceptacion solamente y el resto vacios
 				$resultado_usuario=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login=? ","$uid");
 				$registro = $resultado_usuario->fetch();
-				//echo $auth_ldap_cadena;
+				if ($DepuracionLDAP)
+                    echo "<script language='JavaScript'> alert('$auth_ldap_cadena'); </script>";
+                die();
 			}
 
 		// Inicia el XML de salida basico solamente con el estado de aceptacion
