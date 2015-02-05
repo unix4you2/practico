@@ -155,7 +155,7 @@
                                         <form name="actualizarad" action="<?php echo $ArchivoCORE; ?>" method="POST">
                                             <input type="Hidden" name="PCO_Accion" value="actualizar_practico">
                                         </form>
-                                        <i class="fa fa-download fa-fw"></i> <?php echo $MULTILANG_Actualizar; ?> <?php echo $NombreRAD; ?>
+                                        <i class="fa fa-download fa-fw"></i> <?php echo $MULTILANG_Actualizacion; ?>/<?php echo $MULTILANG_Copias; ?>
                                         <span class="pull-right text-muted small">6</span>
                                     </div>
                                 </a>

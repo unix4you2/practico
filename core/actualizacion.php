@@ -25,6 +25,73 @@
 ?>
 
 <?php
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: listado_exploracion_archivos
+	Presenta una lista de los archivos contenidos en una carpeta con modificadores para las opciones
+*/
+function listado_exploracion_archivos($RutaExploracion="",$Filtro_contenido="",$TituloExploracion="")
+    {
+        global $MULTILANG_TotalRegistros,$MULTILANG_Explorar,$MULTILANG_Filtro,$MULTILANG_Descargar,$MULTILANG_Tipo,$MULTILANG_Fecha,$MULTILANG_Peso;
+        //Si la ruta de exploracion es diferente de vacio hace el proceso de busqueda de archivos
+        if ($RutaExploracion!="")
+            {
+                //Inicia Marco de presentacion de archivos
+                echo '
+                    <div class="panel panel-default"> <!-- Clase chat-panel para altura -->
+                        <div class="well well-sm"><span class="label label-primary">'.$TituloExploracion.'</span> '.$MULTILANG_Explorar.' <b>'.$RutaExploracion.'</b> '.$MULTILANG_Filtro.' '.$Filtro_contenido.':</div>
+                        <div class="panel-body">
+                            <ul class="chat">';
+
+                $ConteoElementos=0;
+                $ContenidoDirectorio = opendir($RutaExploracion);
+                while (($Elemento = readdir($ContenidoDirectorio)) !== false)
+                    {
+                        if (($Elemento != ".") && ($Elemento != "..") && stristr($Elemento,$Filtro_contenido))
+                            {
+                                $TamanoElemento=round(filesize($RutaExploracion.$Elemento)/1024);
+                                $TipoElemento=filetype($RutaExploracion.$Elemento);
+                                $FechaElemento=date("d F Y H:i:s", filemtime($RutaExploracion.$Elemento));
+                                echo '
+                                <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <i class="fa fa-file-archive-o fa-2x fa-fw icon-gray"></i>
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <strong class="primary-font">'.$Elemento.'</strong> 
+                                            <small class="pull-right text-muted">
+                                                <a  href="'.$RutaExploracion.$Elemento.'" class="btn btn-xs btn-default"><i class="fa fa-download fa-fw"></i> '.$MULTILANG_Descargar.'</a>
+                                                <br>
+                                                '.$MULTILANG_Peso.' <span class="badge">'.$TamanoElemento.' Kb</span>
+                                            </small>
+                                        </div>
+                                        <p>
+                                            <i class="icon-gray">&nbsp;&nbsp;&nbsp;
+                                            '.$MULTILANG_Fecha.': '.$FechaElemento.'
+                                            ('.$MULTILANG_Tipo.' '.$TipoElemento.')
+                                            </i>
+                                        </p>
+                                    </div>
+                                </li>';    
+                                $ConteoElementos++;
+                            }
+                    }
+
+                //Cierra Marco de presentacion de archivos
+                echo '
+                            </ul>
+                        </div> <!-- /.panel-body -->
+                    <div class="well well-sm">'.$MULTILANG_TotalRegistros.': <b>'.$ConteoElementos.'</b></div>
+                    </div> <!-- /.panel .chat-panel -->';
+            }
+    }
+
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -34,30 +101,57 @@
 if ($PCO_Accion=="actualizar_practico")
 	{
 		abrir_ventana($NombreRAD.' - '.$MULTILANG_Actualizacion,'panel-info');
-		mensaje($MULTILANG_ActMsj1,$MULTILANG_ActMsj2,'100%','fa fa-exclamation-triangle fa-5x','TextosVentana');
 ?>
-		<div align="center">
-			<br>
-			<i class="fa fa-inbox fa-3x fa-fw"></i><b> <?php echo $MULTILANG_ActUsando; ?>: <?php include("inc/version_actual.txt"); ?></b><br>
-			<hr>
-					<form action="<?php echo $ArchivoCORE; ?>" method="post" enctype="multipart/form-data">
-						<input type="hidden" name="extension_archivo" value=".zip">
-						<input type="hidden" name="MAX_FILE_SIZE" value="8192000">
-						<input type="Hidden" name="PCO_Accion" value="cargar_archivo">
-						<input type="Hidden" name="siguiente_accion" value="analizar_parche">
-						<input type="Hidden" name="texto_boton_siguiente" value="Continuar con la revisi&oacute;n">
-						<input type="Hidden" name="carpeta" value="tmp">
-						<b><?php echo $MULTILANG_ActPaquete; ?>: </b><br>
-						<input name="archivo" type="file" class="form-control btn btn-info">
-						<br><br>
-						<input type="submit" value="<?php echo $MULTILANG_CargarArchivo; ?>"  class="btn btn-success"> (<?php echo $MULTILANG_ActSobreescritos; ?>)
-					</form> 
-					<hr>
 
-		</div>
+    <ul class="nav nav-tabs nav-justified">
+    <li class="active"><a href="#pestana_actualizacion" data-toggle="tab"><i class="fa fa-upload"></i> <?php echo $MULTILANG_Actualizacion; ?></a></li>
+    <li><a href="#pestana_copias" data-toggle="tab"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Copias; ?></a></li>
+    </ul>
+
+    <div class="tab-content">
+        
+        <!-- INICIO TAB ACTUALIZACION -->
+        <div class="tab-pane fadein active" id="pestana_actualizacion">
+            <br><br>
+            <?php
+                mensaje($MULTILANG_ActMsj1,$MULTILANG_ActMsj2,'100%','fa fa-exclamation-triangle fa-5x','TextosVentana');
+            ?>
+            <div align="center">
+                <br>
+                <i class="fa fa-inbox fa-2x fa-fw"></i><b> <?php echo $MULTILANG_ActUsando; ?>: <?php include("inc/version_actual.txt"); ?></b><br>
+                <hr>
+                        <form action="<?php echo $ArchivoCORE; ?>" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="extension_archivo" value=".zip">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="8192000">
+                            <input type="Hidden" name="PCO_Accion" value="cargar_archivo">
+                            <input type="Hidden" name="siguiente_accion" value="analizar_parche">
+                            <input type="Hidden" name="texto_boton_siguiente" value="Continuar con la revisi&oacute;n">
+                            <input type="Hidden" name="carpeta" value="tmp">
+                            <b><?php echo $MULTILANG_ActPaquete; ?>: </b><br>
+                            <input name="archivo" type="file" class="form-control btn btn-info">
+                            <br>
+                            <button type="submit"  class="btn btn-success"><i class="fa fa-upload"></i> <?php echo $MULTILANG_CargarArchivo; ?></button> (<?php echo $MULTILANG_ActSobreescritos; ?>)
+                        </form> 
+                        <hr>
+
+            </div>
+        </div>
+        <!-- FIN TAB ACTUALIZACION -->
+        
+        <!-- INICIO TAB COPIAS DE SEGURIDAD -->
+        <div class="tab-pane fade" id="pestana_copias">
+            <?php
+                listado_exploracion_archivos("bkp/","_bdd.gz","Base de datos");
+                listado_exploracion_archivos("bkp/","_app.zip","Archivos y Scripts de Pr&aacute;ctico");
+            ?>
+        </div>
+        <!-- FIN TAB COPIAS DE SEGURIDAD -->
+        
+    </div>
+
 <?php
 		abrir_barra_estado();
-		echo '<a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
+		echo '<a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 		cerrar_barra_estado();
 		cerrar_ventana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto

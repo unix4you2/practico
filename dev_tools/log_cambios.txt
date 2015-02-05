@@ -107,6 +107,7 @@ LogCambios="
 * Added: Los controles de datos de listas de selección que toman valores desde tablas ahora pueden ser actualizados mediante AJAX
 * Added: El modo fullScreen determinado por la variable Presentar_FullScreen permite ahora combinado con otra variable Precarga_EstilosBS definir si sera en modo crudo o al menos con estilos de bootstrap
 * Added: Buscador del dashboard habilitado para al menos cuatro palabras sensibles permite ahora encontrar opciones en el perfil del usuario asociadas a la expresión de búsqueda
+* Added: Nueva pestaña en la opción de actualización permite ahora revisar las copias de seguridad generadas durante cada proceso de actualización realizado en la herramienta.
 * Fixed: Durante copia de permisos, al seleccionar eliminar o borrar permisos la operacion se ejecuta sin problemas cuando no se indica un usuario de origen.
 * Fixed: Se preautoriza la funcion de actualizacion de clave por ser comun a todos los usuarios
 * Fixed: Lanzamiento de ventana de monitoreo con accion incorrecta.  Igual su proceso de autollamado.

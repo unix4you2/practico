@@ -64,11 +64,13 @@
 	$MULTILANG_Continuar='Continuar';
 	$MULTILANG_Contrasena='Contrase&ntilde;a';
 	$MULTILANG_Controlador='Controlador';
+    $MULTILANG_Copias='Copias de seguridad';
 	$MULTILANG_Correcto='Correcto';
 	$MULTILANG_Correo='Correo';
 	$MULTILANG_Cualquiera='Cualquiera';
 	$MULTILANG_Defina='Defina';
-	$MULTILANG_Deshabilitado='Deshabilitado';
+	$MULTILANG_Descargar='Descargar';
+    $MULTILANG_Deshabilitado='Deshabilitado';
 	$MULTILANG_Detalles='Detalles';
 	$MULTILANG_Disene='Dise&ntilde;e';
 	$MULTILANG_Editar='Editar';
@@ -80,8 +82,10 @@
 	$MULTILANG_Escritorio='Escritorio';
     $MULTILANG_Estado='Estado';
 	$MULTILANG_Etiqueta='Etiqueta';
+    $MULTILANG_Explorar='Explorar';
 	$MULTILANG_Fecha='Fecha';
 	$MULTILANG_Finalizado='Finalizado';
+    $MULTILANG_Filtro='Filtro';
 	$MULTILANG_Formularios='Formularios';
 	$MULTILANG_Funciones='Funciones preautorizadas';
 	$MULTILANG_FuncionesDes='Por motivos de seguridad, sus funciones personalizadas o modulos desarrollados usted debe preautorizar su uso en este cuadro para los usuarios.  Agregue las funciones o acciones separadas por cualqueir caracter.';

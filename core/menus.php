@@ -783,6 +783,7 @@ if ($PCO_Accion=="administrar_menu")
                     $resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE 1 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
 
                     // Imprime las opciones con sus formularios
+                    $conteo_opciones=0;
                     while($registro = $resultado->fetch())
                         {
                             echo '<form action="'.$ArchivoCORE.'" method="post" name="desk_'.$registro["id"].'" id="desk_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
@@ -817,14 +818,16 @@ if ($PCO_Accion=="administrar_menu")
                                         </p>
                                     </div>
                                 </li>';
+                            $conteo_opciones++;
                         }
-
 
             //Finaliza el marco de resultados
             echo '
                             </ul>
                         </div> <!-- /.panel-body -->
-                    </div> <!-- /.panel .chat-panel -->';
+                    </div> <!-- /.panel .chat-panel -->
+                    <h4>'.$MULTILANG_TotalRegistros.': '.$conteo_opciones.'</h4>
+                    ';
 	} 
 
 

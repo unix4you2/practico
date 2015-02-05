@@ -64,11 +64,13 @@
 	$MULTILANG_Continuar='Continue';
 	$MULTILANG_Contrasena='Password';
 	$MULTILANG_Controlador='Driver';
+    $MULTILANG_Copias='Backups';
 	$MULTILANG_Correcto='Right';
 	$MULTILANG_Correo='Email';
 	$MULTILANG_Cualquiera='Any';
 	$MULTILANG_Defina='Define';
-	$MULTILANG_Deshabilitado='Disabled';
+	$MULTILANG_Descargar='Download';
+    $MULTILANG_Deshabilitado='Disabled';
 	$MULTILANG_Detalles='Details';
 	$MULTILANG_Disene='Design';
 	$MULTILANG_Editar='Edit';
@@ -80,8 +82,10 @@
     $MULTILANG_Escritorio='Desktop';
 	$MULTILANG_Estado='Status';
 	$MULTILANG_Etiqueta='Label';
+    $MULTILANG_Explorar='Explore';
 	$MULTILANG_Fecha='Date';
 	$MULTILANG_Finalizado='Finished';
+    $MULTILANG_Filtro='Filter';
 	$MULTILANG_Formularios='Forms';
 	$MULTILANG_Funciones='Preauthorized functions';
 	$MULTILANG_FuncionesDes='For security reasons, your custom functions or modules should be pre-authorized in this field. Add the functions or actions separated by any character.';
