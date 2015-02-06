@@ -59,6 +59,8 @@
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            
+            
             <div class="navbar-header">
                 <button OnClick="document.getElementById('barra_navegacion_izquierda').style.visibility='visible';" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -275,8 +277,8 @@
         <?php
                 } //Fin Presentar opciones de la barra a usuarios
         ?>
-            
-            
+
+
         </nav>
 
 

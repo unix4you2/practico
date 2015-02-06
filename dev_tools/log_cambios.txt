@@ -146,6 +146,8 @@ LogCambios="
 * Enhan: Botón de búsqueda agregado sobre etiquetas SPAN para unificar su presentación cuando hay otros controles al lado
 * Enhan: El diseño de formularios ahora presenta la pestaña a que pertenecen los elementos y los ordena por pestaña, columna y peso.
 * Enhan: Durante adición de permisos a los usuarios se agregan los iconos de cada opción de menú en la lista de selección para facilitar su identificación
+* Enhan: Cambiados los logos de la herramienta para unos más limpios
+* Enhan: Agregadas las estadísticas del proyecto en OpenHub al README
 
 IMPORTANTE 1: La aplicacion de este parche puede requerir un reinicio de sesion al finalizar pues afecta variables de entorno
 IMPORTANTE 2: Aquellos que hayan aplicado procesos de actualizacion previos (15.1.xxx) es probable que vean errores de ejecución SQL durante la aplicación del parche.  Si encuentre mensajes como que la tabla ya existe entonces todo va con normalidad pues ya ha sido parchado su sistema para el uso de la nueva tabla.

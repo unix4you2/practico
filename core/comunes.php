@@ -1489,7 +1489,7 @@ function ventana_login()
                                 <?php
                                     //mensaje($MULTILANG_Importante,$MULTILANG_AccesoExclusivo,'','fa fa-info-circle fa-3x texto-azul','alert alert-info');
                                 ?>
-                                <!--
+                                
                                 <div class="row">
                                     <div class="col-md-6">
                                         <a class="btn btn-xs">
@@ -1504,7 +1504,7 @@ function ventana_login()
                                         </a>
                                     </div>
                                 </div>
-                                -->
+                                
 
                         <script language="JavaScript"> login_usuario.uid.focus(); </script>
                         </div> <!-- /panel-body -->
