@@ -113,6 +113,7 @@
 	$MULTILANG_NombreRAD='RAD Name';
     $MULTILANG_OlvideClave='I forgot my password';
 	$MULTILANG_Opcional='Optional';
+    $MULTILANG_Opcion='Option';
 	$MULTILANG_OpcionesMenu='Menu options';
 	$MULTILANG_Otros='Others';
 	$MULTILANG_Pagina='Page';
@@ -125,6 +126,7 @@
 	$MULTILANG_ProcesoFin='Process completed';
 	$MULTILANG_Puerto='Port';
     $MULTILANG_Registrarme='Sign In';
+    $MULTILANG_Regresar='Return';
     $MULTILANG_Resultados='Results';
 	$MULTILANG_Si='Yes';
 	$MULTILANG_Servidor='Server';
@@ -772,6 +774,17 @@
 	$MULTILANG_UsrAgregar='Add a User';
 	$MULTILANG_UsrVerAudit='View user audit';
 	$MULTILANG_UsrReset='Password reset';
+    $MULTILANG_UsrOlvideClave='I forgot my password';
+    $MULTILANG_UsrOlvideUsuario='I forgot my username';
+    $MULTILANG_UsrIngreseUsuario='Type your username';
+    $MULTILANG_UsrIngreseCorreo='Type the registered email';
+    $MULTILANG_UsrResetAdmin='If you dont have a succefull access to the system after a password restore you can write to your system administrator who could reset your password for you..';
+    $MULTILANG_UsrAsuntoReset='Access reset';
+    $MULTILANG_UsrMensajeReset='An email with the information for the user and keys restoration was sent.  Remember to check your email in your inbox and spam folder to see the instructions.<br><br>Any link to reset your password will expire at the next day or when that link is succefully used.<hr>The subjet for the email will be something like : <b>['.$NombreRAD.'] '.$MULTILANG_UsrAsuntoReset.'</b>';
+    $MULTILANG_UsrErrorReset='The information entered for the password reset process was invalid, the username or email entered doesnt exists in the system.  Check the data and try again.';
+    $MULTILANG_UsrResetLink='Follow this link to restore your password';
+    $MULTILANG_UsrResetCuenta='Message sent to';
+    
 
 	//Proceso de instalacion
 	$MULTILANG_Instalacion='Installation Process';
@@ -918,3 +931,11 @@
 	$MULTILANG_AplicaPara='This applies for: ';
 	$MULTILANG_MonLinea='ON LINE';
 	$MULTILANG_MonCaido='DOWN';
+
+    //Modulo de correos
+    $MULTILANG_MailIntro1='Automatic platform message';
+    $MULTILANG_MailIntro2='Details about this message could be available in the system <span style="font-weight: bold;">'.$NombreRAD.'</span> using your user name and password.';
+    $MULTILANG_MailIntro3='This message was delivered by an automatic system, please dont reply to it.';
+    $MULTILANG_MailIntro4='Remember that our messages never ask you about personal information, security keys by email</span>, dont answer any message or fill any form that ask you about this kind of information out of our '.$NombreRAD.' system.';
+    $MULTILANG_MailIntro5='All the information in this email and all its attachments is confidential for the bussiness and could be used for people who is related to it only. If you receive this message by error please delete it and tell sender about the error, any other operation with this email and its content will be under legal protection.';
+    $MULTILANG_MailIntro6='<br><br>A system powered by <a href=http://www.practico.org>www.practico.org</a>';

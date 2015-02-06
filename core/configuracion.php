@@ -81,7 +81,7 @@
 	$CodigoGoogleAnalytics='UA-847800-9';
 	
 	// Tipo de motor usado para la autenticacion de usuarios
-	$Auth_TipoMotor='ldap';
+	$Auth_TipoMotor='practico';
 	$Auth_ProtoTransporte='http';
 	
 	// Configuracion LDAP - Auth_TipoMotor=ldap

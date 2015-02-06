@@ -24,7 +24,7 @@
 	*/
 
 	$ListaCamposSinID_auditoria='usuario_login,accion,fecha,hora';
-	$ListaCamposSinID_usuario='login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno';
+	$ListaCamposSinID_usuario='login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno,llave_recuperacion';
 	$ListaCamposSinID_usuario_menu='usuario,menu';
 	$ListaCamposSinID_usuario_informe='usuario,informe';
 	$ListaCamposSinID_formulario_objeto='tipo,titulo,campo,ayuda_titulo,ayuda_texto,formulario,peso,columna,obligatorio,visible,valor_predeterminado,validacion_datos,etiqueta_busqueda,ajax_busqueda,valor_unico,solo_lectura,ancho,alto,barra_herramientas,fila_unica,lista_opciones,origen_lista_opciones,origen_lista_valores,valor_etiqueta,url_iframe,objeto_en_ventana,informe_vinculado,maxima_longitud,valor_minimo,valor_maximo,valor_salto,formato_salida,plantilla_archivo,peso_archivo,tamano_pincel,color_trazo,formulario_vinculado,formulario_campo_vinculo,formulario_campo_foraneo,condicion_filtrado_listas,pestana_objeto,personalizacion_tag';

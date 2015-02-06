@@ -135,6 +135,227 @@
 
 
 <?php
+
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="ingresar_clave_nueva")
+	{
+        /*
+            Function: ingresar_clave_nueva
+            Presenta formulario para el ingreso de la nueva clave de usuario
+
+            Ver tambien:
+                <recuperar_contrasena>
+        */
+?>
+			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<?php
+				mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'60%','fa fa-exclamation-triangle fa-5x','TextosEscritorio');
+
+                //Continua las Banderas recibidas para el tipo de carga de contenido
+                if (@$Presentar_FullScreen==1)  echo '<input type="Hidden" name="Presentar_FullScreen" value="1">';
+                if (@$Precarga_EstilosBS==1)    echo '<input type="Hidden" name="Precarga_EstilosBS" value="1">';
+			?>
+                <input type="hidden" name="PCO_Accion" value="recuperar_contrasena">
+                <input type="hidden" name="PCO_SubAccion" value="establecer_nueva_contrasena">
+                <input type="hidden" name="PCO_UsuarioRestablecimiento" value="<?php echo $usuario?>">
+                <input type="hidden" name="PCO_llave" value="<?php echo $llave?>">
+                <br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrCambioPW; ?></b></font>
+
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                        <?php echo $MULTILANG_UsrAnteriorPW; ?>:
+                    </span>
+                    <input type="password" class="form-control" value="****************" readonly>
+                </div>
+
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                        <?php echo $MULTILANG_UsrNuevoPW; ?>:
+                    </span>
+                    <input name="clave1"   onkeyup="muestra_seguridad_clave(this.value, this.form)" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
+                    <span class="input-group-addon">
+                        <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                    </span>
+                    <span class="input-group-addon">
+                        <?php echo $MULTILANG_UsrNivelPW; ?>:
+                    </span>
+                    <input id="seguridad" value="0" size="3" name="seguridad" class="form-control" type="text" readonly onfocus="blur()">
+                    <span class="input-group-addon">
+                        %
+                    </span>
+                </div>
+
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                        <?php echo $MULTILANG_UsrVerificaPW; ?>:
+                    </span>
+                    <input name="clave2" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?> (Confirma)">
+                    <span class="input-group-addon">
+                        <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                    </span>
+                </div>            
+
+            </form>
+            <div align=center>
+                <hr>
+                <?php
+                    //Permite cambio solamente si es admin o el motor de autenticacion es practico
+                    if ($Auth_TipoMotor=="practico" || $PCOSESS_LoginUsuario=="admin")
+                        {
+                            echo '<a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> '.$MULTILANG_Actualizar.'</a>';
+                        }
+                    else
+                        {
+                            echo '<br><h4>'.$MULTILANG_Importante.': '.$MULTILANG_UsrHlpNoPW.' ('.$Auth_TipoMotor.')</h4>';
+                        }
+                ?>
+            </div>
+<?php
+    }
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_llave")
+	{
+        /*
+            Function: enviar_correo_llave
+            Envia un correo para un usuario con un enlace de restablecimiento de contrasena
+
+            Ver tambien:
+                <recuperar_contrasena>
+        */
+		abrir_ventana($MULTILANG_OlvideClave, 'panel-primary');
+        //Busca si realmente hay un usuario registrado con ese login y le envia el mensaje
+        if (existe_valor($TablasCore."usuario","login",$usuario) && $usuario!="")
+            {
+                //Busca los datos del usuario
+                $registro=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login=?","$usuario")->fetch();
+				//Genera la llave unica de recuperacion y la lleva al usuario
+                $LlaveRecuperacion=substr(strtoupper(md5($usuario.date("u"))),5,20);
+                ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET llave_recuperacion=? WHERE login=?","$LlaveRecuperacion$_SeparadorCampos_$usuario");
+
+                //Genera el enlace de recuperacion
+                // Determina si la conexion actual de Practico esta encriptada
+                if(empty($_SERVER["HTTPS"]))
+                    $EnlaceRecuperacion="http://";
+                else
+                    $EnlaceRecuperacion="https://";
+                $EnlaceRecuperacion.=$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$_SERVER['PHP_SELF'];
+                $EnlaceRecuperacion.="?PCO_Accion=recuperar_contrasena&PCO_SubAccion=ingresar_clave_nueva&usuario=$usuario&llave=".$LlaveRecuperacion;
+                //Datos para el correo
+                $cuenta_destinatario="___".substr($registro["correo"],3,strlen($registro["correo"])-6)."_____";
+                $remitente=$registro["correo"];
+                $destinatario=$registro["correo"];
+                $asunto="[".$NombreRAD."] ".$MULTILANG_UsrAsuntoReset;
+                $cuerpo_mensaje="<br><br>".$MULTILANG_UsrResetLink.":<br><b><a href=$EnlaceRecuperacion>$EnlaceRecuperacion</a></b>";
+                enviar_correo($remitente,$destinatario,$asunto,$cuerpo_mensaje);
+                mensaje("$MULTILANG_UsrResetCuenta: $cuenta_destinatario",$MULTILANG_UsrMensajeReset,'','fa fa-unlock-alt fa-4x','alert alert-info alert-dismissible');
+            }
+        else
+            {
+                mensaje($MULTILANG_Error,$MULTILANG_UsrErrorReset,'','fa fa-exclamation-triangle fa-4x','alert alert-danger alert-dismissible');
+            }
+        echo '<a class="btn btn-default btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
+        cerrar_ventana();
+    }
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_con_usuario")
+	{
+        /*
+            Function: enviar_correo_con_usuario
+            Busca un usuario por su correo electronico y le hace llegar su nombre de usuario al correo
+
+            Ver tambien:
+                <recuperar_contrasena> | <enviar_correo_llave>
+        */
+		abrir_ventana($MULTILANG_OlvideClave, 'panel-info');
+        //Busca si realmente hay un usuario registrado con ese correo y le envia el mensaje
+        if (existe_valor($TablasCore."usuario","correo",$correo) && $correo!="")
+            {
+                //Busca los datos del usuario y los envia al correo registrado
+                $registro=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE correo=?","$correo")->fetch();
+				
+                $remitente=$registro["correo"];
+                $destinatario=$registro["correo"];
+                $asunto="[".$NombreRAD."] ".$MULTILANG_UsrAsuntoReset;
+                $cuerpo_mensaje="<br><br>".$MULTILANG_Usuario." ".$NombreRAD.": <b>".$registro["login"]."</b>";
+                enviar_correo($remitente,$destinatario,$asunto,$cuerpo_mensaje);
+                mensaje($MULTILANG_Atencion,$MULTILANG_UsrMensajeReset,'','fa fa-unlock-alt fa-4x','alert alert-info alert-dismissible');
+            }
+        else
+            {
+                mensaje($MULTILANG_Error,$MULTILANG_UsrErrorReset,'','fa fa-exclamation-triangle fa-4x','alert alert-danger alert-dismissible');
+            }
+        echo '<a class="btn btn-default btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
+        cerrar_ventana();
+    }
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="formulario_recuperacion")
+	{
+        /*
+            Function: formulario_recuperacion
+            Presenta el formulario para recuperacion de contrasenas
+
+            Ver tambien:
+                <listar_usuarios> | <recuperar_contrasena>
+        */
+		abrir_ventana($MULTILANG_OlvideClave, 'panel-info');
+        mensaje($MULTILANG_Importante,$MULTILANG_UsrResetAdmin,'','fa fa-key fa-4x','alert alert-info alert-dismissible');
+?>
+                <?php echo $MULTILANG_Opcion; ?> <span class="badge">1</span>
+				<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+					<input type="hidden" name="PCO_Accion" value="recuperar_contrasena">
+                    <input type="hidden" name="PCO_SubAccion" value="enviar_correo_llave">
+                    <label for="usuario"><?php echo $MULTILANG_UsrOlvideClave; ?>:</label>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">
+                            <?php echo $MULTILANG_UsrIngreseUsuario; ?>:
+                        </span>
+                        <input id="usuario" name="usuario" maxlength="250" type="text" class="form-control">
+                        <span class="input-group-addon">
+                            <button type="submit" class="btn btn-info btn-xs"><?php echo $MULTILANG_Continuar; ?> <i class="fa fa-arrow-circle-right"></i></button>
+                        </span>
+                    </div>
+                </form>
+                
+                <hr>
+                <?php echo $MULTILANG_Opcion; ?> <span class="badge">2</span>
+				<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+					<input type="hidden" name="PCO_Accion" value="recuperar_contrasena">
+                    <input type="hidden" name="PCO_SubAccion" value="enviar_correo_con_usuario">
+                    <label for="correo"><?php echo $MULTILANG_UsrOlvideUsuario; ?>:</label>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">
+                            <?php echo $MULTILANG_UsrIngreseCorreo; ?>:
+                        </span>
+                        <input id="correo" name="correo" maxlength="250" type="text" class="form-control">
+                        <span class="input-group-addon">
+                            <button type="submit" class="btn btn-info btn-xs"><?php echo $MULTILANG_Continuar; ?> <i class="fa fa-arrow-circle-right"></i></button>
+                        </span>
+                    </div>
+                </form>
+
+		 <?php
+            echo '<br><br><a class="btn btn-default btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
+            cerrar_ventana();
+    }
+
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -832,7 +1053,8 @@ if ($PCO_Accion=="permisos_usuario")
 					// Inserta datos del usuario
 					$clavemd5=MD5($clave);
 					$pasomd5=MD5($LlaveDePaso);
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno");
+                    $Llave_recuperacion="";
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno$_SeparadorCampos_$Llave_recuperacion");
 					auditar("Agrega usuario $login para $nombre");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}

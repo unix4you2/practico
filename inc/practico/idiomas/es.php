@@ -113,6 +113,7 @@
 	$MULTILANG_NombreRAD='Nombre RAD';
 	$MULTILANG_OlvideClave='Olvid&eacute; mi clave';
     $MULTILANG_Opcional='Opcional';
+    $MULTILANG_Opcion='Opci&oacute;n';
 	$MULTILANG_OpcionesMenu='Opciones de menu';
 	$MULTILANG_Otros='Otros';
 	$MULTILANG_Pagina='Pagina';
@@ -125,6 +126,7 @@
 	$MULTILANG_ProcesoFin='Proceso finalizado';
 	$MULTILANG_Puerto='Puerto';
 	$MULTILANG_Registrarme='Registrarme';
+    $MULTILANG_Regresar='Regresar';
     $MULTILANG_Resultados='Resultados';
     $MULTILANG_Si='Si';
 	$MULTILANG_Servidor='Servidor';
@@ -769,6 +771,17 @@
 	$MULTILANG_UsrAgregar='Agregar un usuario';
 	$MULTILANG_UsrVerAudit='Ver auditoria de usuarios';
 	$MULTILANG_UsrReset='Resetear clave';
+    $MULTILANG_UsrOlvideClave='He olvidado mi clave';
+    $MULTILANG_UsrOlvideUsuario='He olvidado mi usuario';
+    $MULTILANG_UsrIngreseUsuario='Ingrese su nombre de usuario';
+    $MULTILANG_UsrIngreseCorreo='Ingrese su correo electr&oacute;nico registrado';
+    $MULTILANG_UsrResetAdmin='Si despu&eacute;s de realizar los pasos de restablecimiento de clave no ha podido obtener acceso al sistema exitosamente puede contactar al administrador de su plataforma, quien podr&aacute; restablecerla por usted.';
+    $MULTILANG_UsrAsuntoReset='Restablecimiento de acceso';
+    $MULTILANG_UsrMensajeReset='Se ha enviado un mensaje de correo con la informaci&oacute;n asociada al usuario y el restablecimiento de contrase&ntilde;a solicitado.<br><br>Recuerde revisar su buz&oacute;n de correo asociado incluyendo la bandeja de elementos no deseados en busca de las instrucciones.<br><br>Cualquier enlace de restablecimiento caducar&aacute; al dia siguiente de su solicitud o cuando sea utilizado al menos una vez.<hr>El asunto del correo enviado ser&aacute; algo como: <b>['.$NombreRAD.'] '.$MULTILANG_UsrAsuntoReset.'</b>';
+    $MULTILANG_UsrErrorReset='La informaci&oacute;n ingresada para el restablecimiento de contrase&ntilde;a no es correcta, el usuario ingresado no existe o el correo ingresado no ha sido registrado en el sistema.  Verifique los datos e intente nuevamente.';
+    $MULTILANG_UsrResetLink='Siga el siguiente enlace para restablecer su contrase&ntilde;a';
+    $MULTILANG_UsrResetCuenta='Mensaje enviado a la cuenta';
+   
 
 	//Proceso de instalacion
 	$MULTILANG_Instalacion='Proceso de instalaci&oacute;n';
@@ -916,4 +929,12 @@
 	$MULTILANG_AplicaPara='Esto aplica para: ';
 	$MULTILANG_MonLinea='EN LINEA';
 	$MULTILANG_MonCaido='CAIDO';
+
+    //Modulo de correos
+    $MULTILANG_MailIntro1='Mensaje autom&aacute;tico de la plataforma';
+    $MULTILANG_MailIntro2='Informaci&oacute;n detallada sobre este mensaje puede ser encontrada accesando a la herramienta <span style="font-weight: bold;">'.$NombreRAD.'</span> con su nombre de usuario y contrase&ntilde;a';
+    $MULTILANG_MailIntro3='Este correo fue generado por un sistema autom&aacute;tico, por favor no responda a este mensaje.';
+    $MULTILANG_MailIntro4='Recuerde que nunca le ser&aacute; solicitada informaci&oacute;n personal o contrase&ntilde;as v&iacute;a correo electr&oacute;nico</span>, por lo tanto no conteste o diligencie formularios donde se solicite este tipo de informaci&oacute;n y que se encuentren por fuera del sistema '.$NombreRAD.'.';
+    $MULTILANG_MailIntro5='La informaci&oacute;n contenida en este correo electr&oacute;nico y en todos sus archivos anexos, es confidencial y/o exclusiva del negocio y puede ser utilizada &uacute;nicamente por la (s) persona (s) a la (s) cual (es) est&eacute; dirigida. Si usted no es el destinatario autorizado, cualquier modificaci&oacute;n, retenci&oacute;n, difusi&oacute;n, distribuci&oacute;n o copia total o parcial de este mensaje y/o de la informaci&oacute;n contenida en este y/o en sus archivos anexos esta prohibida y son sancionados por la ley. Si recibe este mensaje por error, s&iacute;rvase borrarlo de inmediato, notificarle de su error a la persona que lo envi&oacute; y abstenerse de divulgar su contenido e informaci&oacute;n anexa.';
+    $MULTILANG_MailIntro6='<br><br>Sistema potenciado por <a href=http://www.practico.org>www.practico.org</a>';
 

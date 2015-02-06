@@ -108,6 +108,7 @@ LogCambios="
 * Added: El modo fullScreen determinado por la variable Presentar_FullScreen permite ahora combinado con otra variable Precarga_EstilosBS definir si sera en modo crudo o al menos con estilos de bootstrap
 * Added: Buscador del dashboard habilitado para al menos cuatro palabras sensibles permite ahora encontrar opciones en el perfil del usuario asociadas a la expresión de búsqueda
 * Added: Nueva pestaña en la opción de actualización permite ahora revisar las copias de seguridad generadas durante cada proceso de actualización realizado en la herramienta.
+* Added: Posibilidad para recuperación de contraseñas
 * Fixed: Durante copia de permisos, al seleccionar eliminar o borrar permisos la operacion se ejecuta sin problemas cuando no se indica un usuario de origen.
 * Fixed: Se preautoriza la funcion de actualizacion de clave por ser comun a todos los usuarios
 * Fixed: Lanzamiento de ventana de monitoreo con accion incorrecta.  Igual su proceso de autollamado.
@@ -148,6 +149,7 @@ LogCambios="
 * Enhan: Durante adición de permisos a los usuarios se agregan los iconos de cada opción de menú en la lista de selección para facilitar su identificación
 * Enhan: Cambiados los logos de la herramienta para unos más limpios
 * Enhan: Agregadas las estadísticas del proyecto en OpenHub al README
+* Enhan: Módulo de correos es ahora multiligue
 
 IMPORTANTE 1: La aplicacion de este parche puede requerir un reinicio de sesion al finalizar pues afecta variables de entorno
 IMPORTANTE 2: Aquellos que hayan aplicado procesos de actualizacion previos (15.1.xxx) es probable que vean errores de ejecución SQL durante la aplicación del parche.  Si encuentre mensajes como que la tabla ya existe entonces todo va con normalidad pues ya ha sido parchado su sistema para el uso de la nueva tabla.
@@ -162,6 +164,7 @@ ALTER TABLE core_informe_campos ADD COLUMN peso int(10) default 0;
 ALTER TABLE core_informe ADD COLUMN variables_filtro text;
 ALTER TABLE core_informe DROP COLUMN nivel_usuario;
 ALTER TABLE core_formulario_boton CHANGE COLUMN accion_usuario accion_usuario TEXT NULL DEFAULT '';
+ALTER TABLE core_usuario ADD COLUMN llave_recuperacion varchar(250) NOT NULL default '';
 "
 
 ########################################################################

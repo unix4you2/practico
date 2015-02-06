@@ -1498,7 +1498,11 @@ function ventana_login()
                                         </a>
                                     </div>
                                     <div class="col-md-6">
-                                        <a class="btn btn-xs">
+                                        <form name="recuperacion" id="recuperacion" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+                                        <input type="Hidden" name="PCO_Accion" value="recuperar_contrasena">
+                                        <input type="Hidden" name="PCO_SubAccion" value="formulario_recuperacion">
+                                        </form>
+                                        <a class="btn btn-xs" onClick="document.recuperacion.submit();">
                                             <i class="fa fa-unlock-alt"></i>
                                             <?php echo $MULTILANG_OlvideClave; ?>
                                         </a>

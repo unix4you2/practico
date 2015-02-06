@@ -36,18 +36,17 @@
 	$texto_prefijo_correo = '<html>
 		<head>
 		<meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
-		<title>Mensaje de Practico</title>
+		<title>'.$NombreRAD.'</title>
 		</head>
 		<body>
 		<span style="font-family: Helvetica,Arial,sans-serif;"><small
-		style="font-weight: bold; color: rgb(102, 102, 102);">Mensaje
-		automático de la plataforma Práctico</small><br>
+		style="font-weight: bold; color: rgb(102, 102, 102);">'.$MULTILANG_MailIntro1.' '.$NombreRAD.'</small><br>
 		<hr>
 		<br>
 		</span>
-		<div style="margin-left: 40px;"><span
-		style="font-family: Helvetica,Arial,sans-serif;">Fecha:<span
-		style="font-weight: bold;"> '.date("Y/m/d").'</span> - Hora: <span
+		<div style="margin-left: 0px;"><span
+		style="font-family: Helvetica,Arial,sans-serif;">'.$MULTILANG_Fecha.':<span
+		style="font-weight: bold;"> '.date("Y/m/d").'</span> - '.$MULTILANG_Hora.': <span
 		style="font-weight: bold;">'.date("H:i:s").'</span></span></div>
 		<div style="margin-left: 40px;"><span
 		style="font-family: Helvetica,Arial,sans-serif;">';
@@ -55,22 +54,18 @@
 	$texto_posfijo_correo = ' </span></div>
 		<p style="font-family: Helvetica,Arial,sans-serif;"><br>
 		</p>
-		<p style="font-family: Helvetica,Arial,sans-serif;">Información
-		detallada sobre este mensaje puede ser encontrada accesando nuestro
-		portal de <span style="font-weight: bold;">Practico</span> con su
-		nombre de
-		usuario y contraseña<br>
+		<p style="font-family: Helvetica,Arial,sans-serif;">
+        '.$MULTILANG_MailIntro2.'
+        <br>
 		</p>
 		<span
-		style="font-family: Helvetica,Arial,sans-serif; color: rgb(135, 18, 21); font-style: italic;">Este
-		correo fue generado por un sistema automático, por favor no responda a
-		este mensaje.<br>
+		style="font-family: Helvetica,Arial,sans-serif; color: rgb(135, 18, 21); font-style: italic;">
+        '.$MULTILANG_MailIntro3.'
+        <br>
 		<hr>
-		<small style="color: rgb(3, 0, 0);"><span style="font-weight: bold;">Recuerde
-		que nunca le será solicitada información personal o
-		contraseñas vía correo electrónico</span>, por lo tanto no conteste o
-		diligencie formularios donde te solicite este tipo de información y que
-		se encuentren por fuera de nuestro sistema.</small><br>
+		<small style="color: rgb(3, 0, 0);"><span style="font-weight: bold;">
+        '.$MULTILANG_MailIntro4.'
+        </small><br>
 		</span>
 		<table style="text-align: left; width: 100%;" border="0" cellpadding="0"
 		cellspacing="0">
@@ -84,18 +79,10 @@
 		<td
 		style="vertical-align: top; background-color: rgb(240, 240, 240);">
 		<div style="text-align: justify;"><small><small><span
-		style="font-family: Helvetica,Arial,sans-serif; color: rgb(89, 89, 89);">La
-		información contenida en este correo electrónico y en todos sus
-		archivos anexos, es confidencial y/o exclusiva del negocio y puede ser
-		utilizada únicamente por la (s) persona (s) a la (s) cual (es) esté
-		dirigida. Si
-		usted no es el destinatario autorizado, cualquier modificación,
-		retención, difusión, distribución o copia total o parcial de este
-		mensaje y/o de la información contenida en este y/o en sus archivos
-		anexos esta prohibida y son sancionados por la ley. Si recibe este
-		mensaje por error, sírvase borrarlo de inmediato, notificarle de su
-		error a la persona que lo envió y abstenerse de divulgar su contenido e
-		información anexa.</span></small></small><br
+		style="font-family: Helvetica,Arial,sans-serif; color: rgb(89, 89, 89);">
+        '.$MULTILANG_MailIntro5.'
+        '.$MULTILANG_MailIntro6.'
+        </span></small></small><br
 		style="font-family: Helvetica,Arial,sans-serif;">
 		<small><small> </small></small></div>
 		</td>
@@ -129,11 +116,11 @@
 */
 function enviar_correo($remitente,$destinatario,$asunto,$cuerpo_mensaje,$destinatario_cc="",$destinatario_bcc="")
 	{
-		global $texto_prefijo_correo,$texto_posfijo_correo;
+		global $texto_prefijo_correo,$texto_posfijo_correo,$NombreRAD;
 		//para el envío en formato HTML
 		$headers = "MIME-Version: 1.0\n";
 		$headers .= "Content-type: text/html; charset=iso-8859-1\n";
-		$headers .= "From: Practico <".$remitente.">\n";
+		$headers .= "From: ".$NombreRAD." <".$remitente.">\n";
 		$headers .= "Reply-To: ".$remitente."\n";
 		$headers .= "Return-path: ".$remitente."\n";
 		$headers .= $destinatario_cc;
