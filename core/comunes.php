@@ -1492,10 +1492,12 @@ function ventana_login()
                                 
                                 <div class="row">
                                     <div class="col-md-6">
+                                        <!--
                                         <a class="btn btn-xs">
                                             <i class="typcn fa typcn-user-add"></i>
                                             <?php echo $MULTILANG_Registrarme; ?>
                                         </a>
+                                        -->
                                     </div>
                                     <div class="col-md-6">
                                         <form name="recuperacion" id="recuperacion" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">

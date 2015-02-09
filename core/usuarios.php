@@ -138,6 +138,56 @@
 
 
 
+/* ################################################################## */
+/* ################################################################## */
+if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="establecer_nueva_contrasena")
+	{
+        /*
+            Function: establecer_nueva_contrasena
+            Establece la nueva contrasena para un usuario.
+
+            Ver tambien:
+                <recuperar_contrasena>
+        */
+        abrir_ventana($MULTILANG_OlvideClave, 'panel-primary');
+
+        $PCO_MensajeError="";
+		// Verifica campos nulos
+		if ($clave1=="" || $clave2=="")
+			$PCO_MensajeError=$MULTILANG_UsrErrPW1.".<br>";
+		// Verifica contrasena diferentes
+		if ($clave1 != $clave2)
+			$PCO_MensajeError.=$MULTILANG_UsrErrPW2.".<br>";
+		// Verifica nivel de seguridad
+		if ($seguridad < 81)
+			$PCO_MensajeError.=$MULTILANG_UsrErrPW3.".<br>";
+        
+        //Busca si realmente el usuario ha solicitado un restablecimiento de clave
+        // y compara con la llave recibida para que sea correcta y no haya caducado
+        $Llave_esperada="PCO".substr(strtoupper(md5($PCO_UsuarioRestablecimiento.date("u"))),5,20);
+        $registro_usuario=ejecutar_sql("SELECT ".$ListaCamposSinID_usuario." FROM ".$TablasCore."usuario WHERE login=? AND llave_recuperacion=? AND llave_recuperacion=? ","$PCO_UsuarioRestablecimiento$_SeparadorCampos_$PCO_llave$_SeparadorCampos_$Llave_esperada")->fetch();
+        if ($registro_usuario["login"]=="")
+            $PCO_MensajeError.=$MULTILANG_ErrorDatos.".<br>";
+		
+        //Restablece la clave si todos los datos suministrados son correctos
+        if ($PCO_UsuarioRestablecimiento!="" && $PCO_llave!="" && $PCO_MensajeError=="")
+            {
+				//Limpia de nuevo la llave de recuperacion
+                $LlaveRecuperacion="";
+                //Actualiza registros
+                ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET llave_recuperacion=? WHERE login=?","$LlaveRecuperacion$_SeparadorCampos_$PCO_UsuarioRestablecimiento");
+                ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login=? ","$PCO_UsuarioRestablecimiento");
+                mensaje($MULTILANG_UsrResetCuenta,$MULTILANG_UsrResetOK,'','fa fa-unlock-alt fa-4x','alert alert-info alert-dismissible');
+                auditar("Restablece clave de acceso desde $direccion_auditoria",$PCO_UsuarioRestablecimiento);
+            }
+        else
+            {
+                mensaje($MULTILANG_Error,$PCO_MensajeError,'','fa fa-exclamation-triangle fa-4x','alert alert-danger alert-dismissible');
+            }
+        echo '<a class="btn btn-default btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
+        cerrar_ventana();
+    }
+
 
 /* ################################################################## */
 /* ################################################################## */
@@ -148,7 +198,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="ingresar_clave_nueva
             Presenta formulario para el ingreso de la nueva clave de usuario
 
             Ver tambien:
-                <recuperar_contrasena>
+                <establecer_nueva_contrasena>
         */
 ?>
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
@@ -164,13 +214,6 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="ingresar_clave_nueva
                 <input type="hidden" name="PCO_UsuarioRestablecimiento" value="<?php echo $usuario?>">
                 <input type="hidden" name="PCO_llave" value="<?php echo $llave?>">
                 <br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrCambioPW; ?></b></font>
-
-                <div class="form-group input-group">
-                    <span class="input-group-addon">
-                        <?php echo $MULTILANG_UsrAnteriorPW; ?>:
-                    </span>
-                    <input type="password" class="form-control" value="****************" readonly>
-                </div>
 
                 <div class="form-group input-group">
                     <span class="input-group-addon">
@@ -237,7 +280,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_llave"
                 //Busca los datos del usuario
                 $registro=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login=?","$usuario")->fetch();
 				//Genera la llave unica de recuperacion y la lleva al usuario
-                $LlaveRecuperacion=substr(strtoupper(md5($usuario.date("u"))),5,20);
+                $LlaveRecuperacion="PCO".substr(strtoupper(md5($usuario.date("u"))),5,20);
                 ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET llave_recuperacion=? WHERE login=?","$LlaveRecuperacion$_SeparadorCampos_$usuario");
 
                 //Genera el enlace de recuperacion

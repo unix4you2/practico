@@ -784,6 +784,7 @@
     $MULTILANG_UsrErrorReset='The information entered for the password reset process was invalid, the username or email entered doesnt exists in the system.  Check the data and try again.';
     $MULTILANG_UsrResetLink='Follow this link to restore your password';
     $MULTILANG_UsrResetCuenta='Message sent to';
+    $MULTILANG_UsrResetOK='Password restored. Please try to login again';
     
 
 	//Proceso de instalacion

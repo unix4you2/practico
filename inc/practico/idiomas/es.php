@@ -781,6 +781,7 @@
     $MULTILANG_UsrErrorReset='La informaci&oacute;n ingresada para el restablecimiento de contrase&ntilde;a no es correcta, el usuario ingresado no existe o el correo ingresado no ha sido registrado en el sistema.  Verifique los datos e intente nuevamente.';
     $MULTILANG_UsrResetLink='Siga el siguiente enlace para restablecer su contrase&ntilde;a';
     $MULTILANG_UsrResetCuenta='Mensaje enviado a la cuenta';
+    $MULTILANG_UsrResetOK='Se ha restablecido el acceso a su cuenta con la clave suministrada.  Intente su acceso nuevamente.';
    
 
 	//Proceso de instalacion
