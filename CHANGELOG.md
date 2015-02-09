@@ -6,6 +6,76 @@
 |_____\___/ \__, |  \__,_|\___|  \___\__,_|_| |_| |_|_.__/|_|\___/|___/
             |___/ 
 ```
+## Versión 15.2 (2015-02-08)
+* Added: Personalización de Tags HTML para el diseñador de formularios
+* Added: Soporte para datepicker por bootstrap
+* Added: Ahora los campos dotados de DatePicker identifican el idioma de la plataforma y se autotraducen
+* Added: Campos tipo slider son ahora responsive, soportan dispositivos touch y tienen mejores estilos incluyendo disposición vertical.
+* Added: Controles tipo lista de selección han sido preparados para bootstrap, estilos y búsquedas en caliente.
+* Added: Funcionalidad de pestañas automáticas para objetos de formularios
+* Added: Además del tiempo de carga del lado del servidor ahora se presenta el tiempo de carga del lado del cliente mediante JS
+* Added: Posibilidad de controles de selección mútiples mediante personalización del Tag
+* Added: Listas de selección presentan ahora un Check para el elemento seleccionado
+* Added: Libreria IonIcons (602 iconos)
+* Added: Libreria Weather Icons (124 iconos)
+* Added: Libreria Map Icons (170 iconos)
+* Added: Libreria Oct Icons (176 iconos)
+* Added: Libreria Typ Icons (336 iconos)
+* Added: Libreria Elusive Icons (299 iconos)
+* Added: Picker de iconos con soporte para más de 2480 iconos repartidos en diferentes librerías
+* Added: Se aplica el tema por defecto de bootstrap
+* Added: Variable de peso para ordenar campos dentro de los informes
+* Added: Ahora campos de selección soportan búsquedas dinámicas mediante personalización de Tags
+* Added: Modulo adicional para edición de scripts en línea basado en ACE [Ajax Cloud Editor]
+* Added: Ahora las variables de contexto PCO_ValorBusquedaBD y PCO_CampoBusquedaBD pueden ser utilizadas para filtros en generación de informes
+* Added: Los informes cuentan con la posibilidad de filtrar mediante variables PHP definidas por el usuario.  Las variables pueden estar siendo recibidas por formularios previos donde se tomaran los nombres de campo como nombres de variable o cualquier otra variable global existente.
+* Added: Los informes puede ahora filtrar por patrones (LIKEs) visualmente, antes se podia ingresar su valor de operador manual solamente.
+* Added: Los controles de datos de listas de selección que toman valores desde tablas ahora pueden ser actualizados mediante AJAX
+* Added: El modo fullScreen determinado por la variable Presentar_FullScreen permite ahora combinado con otra variable Precarga_EstilosBS definir si sera en modo crudo o al menos con estilos de bootstrap
+* Added: Buscador del dashboard habilitado para al menos cuatro palabras sensibles permite ahora encontrar opciones en el perfil del usuario asociadas a la expresión de búsqueda
+* Added: Nueva pestaña en la opción de actualización permite ahora revisar las copias de seguridad generadas durante cada proceso de actualización realizado en la herramienta.
+* Added: Posibilidad para recuperación de contraseñas
+* Fixed: Durante copia de permisos, al seleccionar eliminar o borrar permisos la operacion se ejecuta sin problemas cuando no se indica un usuario de origen.
+* Fixed: Se preautoriza la funcion de actualizacion de clave por ser comun a todos los usuarios
+* Fixed: Lanzamiento de ventana de monitoreo con accion incorrecta.  Igual su proceso de autollamado.
+* Fixed: Cambio de peso en condiciones no dejaba activo su PopUp
+* Fixed: Generacion de informes no tomaba el tipo correcto
+* Fixed: Se agrega un data-container como body a las listas de seleccion para que sean visibles aun cuando el contenedor sea pequeño
+* Fixed: Llamado de informes desde opciones de menu sin estilos
+* Fixed: Insercion de informes nuevos corre los campos hacia la derecha por parametro adicional
+* Fixed: Visualizacion de bordes de tabla en diseño de formularios ahora aplican propiedad correctamente
+* Fixed: Tester: [Ricardo Beltran ] Botones de búsqueda en campos y de operaciones diferentes a la adición no operan correctamente sobre Forms
+* Fixed: Tester: [Jonathan Sánchez] Campo de correo en registro de clientes tenía el tipo como password.
+* Fixed: Tester: [Jonathan Sánchez] Se corrigen procesos de actualización de registros para campos que no son controles de datos sobre formularios
+* Fixed: Tester: [Jaime A. Berrio ] Se corrigen los IDs de informe generados en los enlaces para los usuarios, opción Mis Informes
+* Fixed: Develo: [Christian Faure ] Las operaciones bind en base de datos son ahora depuradas para determinar valores en los parámetros. En caso de no existir son usados valores Null
+* Enhan: Tester: [Christian Faure ] Ahora para evitar que se apliquen de manera incompleta los parches se verifican los permisos de escritura sobre cada archivo que lo compone
+* Enhan: Develo: [Christian Faure ] Ahora la depuración permite ver el query completo (con sus valores por parámetro).
+* Enhan: Campos de edición de JavaScript para formularios pueden usar ahora ACE
+* Enhan: Reubicación de funciones de conteo de tiempos
+* Enhan: Limpieza del instalador, ya no se requieren skins
+* Enhan: Mejorada la interfaz de administracion de permisos de menu e informes para usuarios.
+* Enhan: Los mensajes complementarios y de ayuda sobre campos de formularios son ahora PopOvers
+* Enhan: La presentación de los campos en los informes se hace ahora de acuerdo a su peso
+* Enhan: Ahora la documentación del proyecto es generada automáticamente en cada liberación
+* Enhan: Enlace a la documentación de funciones desde la web
+* Enhan: Por compatibilidad las variables internas de valorbase y campobase ahora son llamadas PCO_ValorBusquedaBD y PCO_CampoBusquedaBD
+* Enhan: Se elimina doble título en informes.  Ahora se despliega el título solo en la barra de ventana.  Embebidos desaparece.
+* Enhan: El administrador de archivos permite la gestion desde la raiz para instalaciones realizadas en carpetas diferentes a las llamadas "practico"
+* Enhan: Mensaje complementario para edicion de scripts
+* Enhan: Todos los botones de formularios han sido convertidos al tag <a> para mayor flexibilidad
+* Enhan: Eliminacion de enlaces a videotutoriales. Se quedan obsoletos rapidamente asi que seran vinculados desde la pagina oficial.
+* Enhan: Cambio de variables por compatibilidad: error_titulo a PCO_ErrorTitulo, error_descripcion a PCO_ErrorDescripcion, fecha_operacion_guiones a PCO_FechaOperacionGuiones, hora_operacion_puntos a PCO_HoraOperacionPuntos, hora_operacion a PCO_HoraOperacion, fecha_operacion a PCO_FechaOperacion, Login_usuario (sesion) por PCOSESS_LoginUsuario, Sesion_abierta a PCOSESS_SesionAbierta
+* Enhan: Los estados de pantalla completa y de precarga de estilos son transportados en cada operacion de formulario
+* Enhan: El campo de accion personalizada del usuario para botones de formulario es ahora de tipo text, de manera que se puedan ingresar instrucciones largas.
+* Enhan: Depuracion de variables cadena_altura y cadena_valor en listas de seleccion
+* Enhan: Adición de tooltip a botones de actualización automática
+* Enhan: Botón de búsqueda agregado sobre etiquetas SPAN para unificar su presentación cuando hay otros controles al lado
+* Enhan: El diseño de formularios ahora presenta la pestaña a que pertenecen los elementos y los ordena por pestaña, columna y peso.
+* Enhan: Durante adición de permisos a los usuarios se agregan los iconos de cada opción de menú en la lista de selección para facilitar su identificación
+* Enhan: Cambiados los logos de la herramienta para unos más limpios
+* Enhan: Agregadas las estadísticas del proyecto en OpenHub al README
+* Enhan: Módulo de correos es ahora multiligue
 
 ## Versión 15.1 (2015-01-01)
 * Added: Implementacion basada en BootStrap 3.3.1
