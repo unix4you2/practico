@@ -611,6 +611,15 @@
 	$MULTILANG_InfGeneraPDFInfoDesc='El uso de esta opci&oacute;n requiere la descarga e instalaci&oacute;n del m&oacute;dulo adicional para generaci&oacute;n de PDFs de Pr&aacute;ctico.  Se encuentra disponible en la zona de descargas en web oficial de la herramienta.  Activar esta opci&oacute;n puede represetar tiempos adicionales en la generaci&oacute;n de su informe cuando el vol&uacute;men de resultados es alto.';
     $MULTILANG_InfVblesFiltro='Variables para filtro';
     $MULTILANG_InfVblesDesFiltro='Variables PHP (Sin el signo pesos $ y separadas unicamente por una coma) que deberan ser buscadas en el ambito global para estar disponibles en condiciones de filtrado';
+    $MULTILANG_InfDataTableMostrando='Mostrando';
+    $MULTILANG_InfDataTableResXPag='resultados por p&aacute;gina';
+    $MULTILANG_InfDataTableViendoP='Viendo p&aacute;gina';
+    $MULTILANG_InfDataTableDe='de';
+    $MULTILANG_InfDataTablePrevio='Previo';
+    $MULTILANG_InfDataTableSiguiente='Siguiente';
+    $MULTILANG_InfDataTableFiltradoDe='Filtrado de';
+    $MULTILANG_InfDataTableRegTotal='registros en total';
+    
 	
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';

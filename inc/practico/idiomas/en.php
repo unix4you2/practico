@@ -614,6 +614,14 @@
 	$MULTILANG_InfGeneraPDFInfoDesc='This option requires the PDF generator module that is available in downloads link at Practicos website. If you activate this option the report time could be more than a normal report when you have a lot of records in your results';
     $MULTILANG_InfVblesFiltro='Filter variables';
     $MULTILANG_InfVblesDesFiltro='PHP variables (without dollar character $ and comma separated only) that should be finded in global environment to be available for filter condittions';
+    $MULTILANG_InfDataTableMostrando='Showing';
+    $MULTILANG_InfDataTableResXPag='records per page';
+    $MULTILANG_InfDataTableViendoP='Viewing page';
+    $MULTILANG_InfDataTableDe='of';
+    $MULTILANG_InfDataTablePrevio='Previous';
+    $MULTILANG_InfDataTableSiguiente='Next';
+    $MULTILANG_InfDataTableFiltradoDe='Filtered from';
+    $MULTILANG_InfDataTableRegTotal='total records';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';

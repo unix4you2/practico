@@ -167,6 +167,28 @@
         })
     </script>
 
+    <script language="JavaScript">
+        //Carga las tablas en formato DataTable
+        $(document).ready(function() {
+            <?php
+                //Desglosa la cadena de posibles tablas con formato DataTable y las convierte
+                $TablasDataTable=@explode("|",$PCO_InformesDataTable);
+                for ($i=0; $i<count($TablasDataTable);$i++)
+                    echo '$("#'.$TablasDataTable[$i].'").dataTable(
+                        {
+                            "language": {
+                                "lengthMenu": "'.$MULTILANG_InfDataTableMostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
+                                "zeroRecords": "Nothing found - sorry",
+                                "info": "'.$MULTILANG_InfDataTableViendoP.' _PAGE_ '.$MULTILANG_InfDataTableDe.' _PAGES_",
+                                "infoEmpty": "No records available",
+                                "infoFiltered": "('.$MULTILANG_InfDataTableFiltradoDe.' _MAX_ '.$MULTILANG_InfDataTableRegTotal.')"
+                            }
+                        }
+                    );';
+            ?>
+        });
+    </script>
+
     <?php
         //Carga las funciones activadoras de DatePicker (si fue encontrado algun campo de ese tipo)
         if (@$funciones_activacion_datepickers!="")

@@ -3307,6 +3307,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
 		global $MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano;
 		global $IdiomaPredeterminado;
+        global $PCO_InformesDataTable;
 
 		// Busca datos del informe
 		$consulta_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
@@ -3449,7 +3450,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 					if($formato=="htm")
 						{
-							$SalidaFinalInforme.= '<table class="table table-condensed table-hover table-striped table-unbordered '.$estilo.'"><thead><tr>';
+                            @$PCO_InformesDataTable.="TablaInforme_".$registro_informe["id"]."|";
+                            $SalidaFinalInforme.= '<table class="table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead><tr>';
 							$SalidaFinalInformePDF.= '<table class="'.$estilo.'"><thead><tr>';
 						}
 					if($formato=="xls")
