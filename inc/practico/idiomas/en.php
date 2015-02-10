@@ -105,6 +105,8 @@
 	$MULTILANG_Instante='Instant';
 	$MULTILANG_IrEscritorio='Go to my desk';
 	$MULTILANG_LlavePaso='SignKey';
+	$MULTILANG_CorreoAdministrador='System Administrator’s Email';
+	$MULTILANG_AyudaCorreoAdministrador='System Manager’s Electronic Mail';
 	$MULTILANG_Maquina='Host';
 	$MULTILANG_Matriz='Matrix';
     $MULTILANG_Mostrando='Showing';
