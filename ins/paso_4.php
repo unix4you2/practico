@@ -61,7 +61,9 @@
 							$consulta=str_replace("PAR_NombreCortoEmpresa",$NombreCortoEmpresa,$consulta);
 							$consulta=str_replace("PAR_NombreAplicacion",$NombreAplicacion,$consulta);
 							$consulta=str_replace("PAR_VersionAplicacion",$VersionAplicacion,$consulta);
-
+							
+							$consulta=str_replace("PAR_CorreoAdministradorNEW",$CorreoAdministradorNEW,$consulta);
+							
 							//Ejecuta el query
 							$consulta_enviar = $ConexionPDO->prepare($consulta);
 							$consulta_enviar->execute();
