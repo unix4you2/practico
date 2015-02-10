@@ -116,10 +116,18 @@
             <a href="#" title="<?php echo $MULTILANG_AyudaLlave; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
         </span>
     </div>
+    <!-- jonshez / Ingresar el correo del administrador del sistema -->
+    <div class="form-group input-group">
+        <span class="input-group-addon">
+            <?php echo $MULTILANG_CorreoAdministrador; ?>:
+        </span>
+        <input name="CorreoAdministradorNEW" value="@" type="text" class="form-control">
+        <span class="input-group-addon">
+            <a href="#" title="<?php echo $MULTILANG_AyudaCorreoAdministrador; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+    </span>
+    </div>
+    <!-- jonshez / Cierra -->
     <?php echo $MULTILANG_NotasImportantesInst1; ?>
-
-
-
 
 <hr><b class="icon-red">[<?php echo $MULTILANG_ParametrosApp; ?>]</b><br>
     <div class="form-group input-group">
