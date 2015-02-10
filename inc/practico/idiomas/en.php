@@ -52,6 +52,7 @@
 	$MULTILANG_Cancelar='Cancel';
 	$MULTILANG_Capturar='Capture';
 	$MULTILANG_CaracteresCaptcha='Number of characters for captcha?';
+    $MULTILANG_Cargando='Loading';
 	$MULTILANG_Cerrar='Close';
 	$MULTILANG_CerrarSesion='Logout';
 	$MULTILANG_Cliente='Client';
@@ -106,6 +107,7 @@
 	$MULTILANG_LlavePaso='SignKey';
 	$MULTILANG_Maquina='Host';
 	$MULTILANG_Matriz='Matrix';
+    $MULTILANG_Mostrando='Showing';
 	$MULTILANG_MotorBD='Database Engine';
 	$MULTILANG_Ninguno='None';
 	$MULTILANG_No='No';
@@ -123,12 +125,16 @@
 	$MULTILANG_Pequeno='small';
     $MULTILANG_Pestana='Tab';
 	$MULTILANG_Predeterminado='Default';
-	$MULTILANG_ProcesoFin='Process completed';
+    $MULTILANG_Previo='Previous';
+	$MULTILANG_Primero='First';
+    $MULTILANG_Procesando='Processing';
+    $MULTILANG_ProcesoFin='Process completed';
 	$MULTILANG_Puerto='Port';
     $MULTILANG_Registrarme='Sign In';
     $MULTILANG_Regresar='Return';
     $MULTILANG_Resultados='Results';
 	$MULTILANG_Si='Yes';
+    $MULTILANG_Siguiente='Next';
 	$MULTILANG_Servidor='Server';
 	$MULTILANG_SeleccioneUno='Choose one';
 	$MULTILANG_Suspender='Suspend';
@@ -139,7 +145,8 @@
 	$MULTILANG_TipoMotor='Engine type';
 	$MULTILANG_Titulo='Title';
 	$MULTILANG_TotalRegistros='Total records found';
-	$MULTILANG_Usuario='User';
+	$MULTILANG_Ultimo='Last';
+    $MULTILANG_Usuario='User';
 	$MULTILANG_Vacio='Empty';
 	$MULTILANG_Version='Versi&oacute;n';
 	$MULTILANG_ZonaHoraria='Time zone';
@@ -614,14 +621,14 @@
 	$MULTILANG_InfGeneraPDFInfoDesc='This option requires the PDF generator module that is available in downloads link at Practicos website. If you activate this option the report time could be more than a normal report when you have a lot of records in your results';
     $MULTILANG_InfVblesFiltro='Filter variables';
     $MULTILANG_InfVblesDesFiltro='PHP variables (without dollar character $ and comma separated only) that should be finded in global environment to be available for filter condittions';
-    $MULTILANG_InfDataTableMostrando='Showing';
     $MULTILANG_InfDataTableResXPag='records per page';
     $MULTILANG_InfDataTableViendoP='Viewing page';
     $MULTILANG_InfDataTableDe='of';
-    $MULTILANG_InfDataTablePrevio='Previous';
-    $MULTILANG_InfDataTableSiguiente='Next';
     $MULTILANG_InfDataTableFiltradoDe='Filtered from';
     $MULTILANG_InfDataTableRegTotal='total records';
+    $MULTILANG_InfDataTableNoDatos='No data available in table';
+    $MULTILANG_InfDataTableNoRegistros='There is no records that match search criteria';
+    $MULTILANG_InfDataTableNoRegistrosDisponibles='No records available';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';

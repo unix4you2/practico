@@ -177,11 +177,17 @@
                     echo '$("#'.$TablasDataTable[$i].'").dataTable(
                         {
                             "language": {
-                                "lengthMenu": "'.$MULTILANG_InfDataTableMostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
+                                "lengthMenu": "'.$MULTILANG_Mostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
                                 "zeroRecords": "Nothing found - sorry",
                                 "info": "'.$MULTILANG_InfDataTableViendoP.' _PAGE_ '.$MULTILANG_InfDataTableDe.' _PAGES_",
-                                "infoEmpty": "No records available",
-                                "infoFiltered": "('.$MULTILANG_InfDataTableFiltradoDe.' _MAX_ '.$MULTILANG_InfDataTableRegTotal.')"
+                                "infoEmpty": "'.$MULTILANG_InfDataTableNoRegistrosDisponibles.'",
+                                "infoFiltered": "('.$MULTILANG_InfDataTableFiltradoDe.' _MAX_ '.$MULTILANG_InfDataTableRegTotal.')",
+                                oPaginate: { sFirst:"'.$MULTILANG_Primero.'",sLast:"'.$MULTILANG_Ultimo.'",sNext:"'.$MULTILANG_Siguiente.'",sPrevious:"'.$MULTILANG_Previo.'" },
+                                sEmptyTable:"'.$MULTILANG_InfDataTableNoDatos.'",
+                                sSearch:"'.$MULTILANG_Buscar.':",
+                                sLoadingRecords:"'.$MULTILANG_Cargando.'...",
+                                sProcessing:"'.$MULTILANG_Procesando.'...",
+                                sZeroRecords:"'.$MULTILANG_InfDataTableNoRegistros.'"
                             }
                         }
                     );';

@@ -52,6 +52,7 @@
 	$MULTILANG_Cancelar='Cancelar';
 	$MULTILANG_Capturar='Capturar';
 	$MULTILANG_CaracteresCaptcha='N&uacute;mero de caracteres para captcha?';
+    $MULTILANG_Cargando='Cargando';
 	$MULTILANG_Cerrar='Cerrar';
 	$MULTILANG_CerrarSesion='Cerrar sesi&oacute;n';
 	$MULTILANG_Cliente='Cliente';
@@ -106,7 +107,8 @@
 	$MULTILANG_LlavePaso='Llave de paso';
 	$MULTILANG_Maquina='Maquina';
 	$MULTILANG_Matriz='Matriz';
-	$MULTILANG_MotorBD='Motor de Base de Datos';
+	$MULTILANG_Mostrando='Mostrando';
+    $MULTILANG_MotorBD='Motor de Base de Datos';
 	$MULTILANG_Ninguno='Ninguno';
 	$MULTILANG_No='No';
 	$MULTILANG_Nombre='Nombre';
@@ -123,13 +125,17 @@
 	$MULTILANG_Pequeno='peque&ntilde;o';
     $MULTILANG_Pestana='Pesta&ntilde;a';
 	$MULTILANG_Predeterminado='Predeterminado';
-	$MULTILANG_ProcesoFin='Proceso finalizado';
+    $MULTILANG_Previo='Previo';
+    $MULTILANG_Primero='Primero';
+	$MULTILANG_Procesando='Procesando';
+    $MULTILANG_ProcesoFin='Proceso finalizado';
 	$MULTILANG_Puerto='Puerto';
 	$MULTILANG_Registrarme='Registrarme';
     $MULTILANG_Regresar='Regresar';
     $MULTILANG_Resultados='Resultados';
     $MULTILANG_Si='Si';
-	$MULTILANG_Servidor='Servidor';
+	$MULTILANG_Siguiente='Siguiente';
+    $MULTILANG_Servidor='Servidor';
 	$MULTILANG_SeleccioneUno='Seleccione uno';
 	$MULTILANG_Suspender='Suspender';
 	$MULTILANG_Tablas='Tablas';
@@ -139,7 +145,8 @@
 	$MULTILANG_TipoMotor='Tipo de motor';
 	$MULTILANG_Titulo='T&iacute;tulo';
 	$MULTILANG_TotalRegistros='Total registros encontrados';
-	$MULTILANG_Usuario='Usuario';
+	$MULTILANG_Ultimo='Ultimo';
+    $MULTILANG_Usuario='Usuario';
 	$MULTILANG_Vacio='Vac&iacute;o';
 	$MULTILANG_Version='Versi&oacute;n';
 	$MULTILANG_ZonaHoraria='Zona horaria';
@@ -611,15 +618,14 @@
 	$MULTILANG_InfGeneraPDFInfoDesc='El uso de esta opci&oacute;n requiere la descarga e instalaci&oacute;n del m&oacute;dulo adicional para generaci&oacute;n de PDFs de Pr&aacute;ctico.  Se encuentra disponible en la zona de descargas en web oficial de la herramienta.  Activar esta opci&oacute;n puede represetar tiempos adicionales en la generaci&oacute;n de su informe cuando el vol&uacute;men de resultados es alto.';
     $MULTILANG_InfVblesFiltro='Variables para filtro';
     $MULTILANG_InfVblesDesFiltro='Variables PHP (Sin el signo pesos $ y separadas unicamente por una coma) que deberan ser buscadas en el ambito global para estar disponibles en condiciones de filtrado';
-    $MULTILANG_InfDataTableMostrando='Mostrando';
     $MULTILANG_InfDataTableResXPag='resultados por p&aacute;gina';
     $MULTILANG_InfDataTableViendoP='Viendo p&aacute;gina';
     $MULTILANG_InfDataTableDe='de';
-    $MULTILANG_InfDataTablePrevio='Previo';
-    $MULTILANG_InfDataTableSiguiente='Siguiente';
     $MULTILANG_InfDataTableFiltradoDe='Filtrado de';
     $MULTILANG_InfDataTableRegTotal='registros en total';
-    
+    $MULTILANG_InfDataTableNoDatos='No hay datos en la tabla';
+    $MULTILANG_InfDataTableNoRegistros='No hay registros que coincidan con el criterio de b&uacute;squeda';
+    $MULTILANG_InfDataTableNoRegistrosDisponibles='No hay registros disponibles';
 	
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';
