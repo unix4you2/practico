@@ -140,6 +140,117 @@
 
 /* ################################################################## */
 /* ################################################################## */
+	if ($PCO_Accion=="guardar_perfil_usuario")
+		{
+			/*
+				Function: guardar_perfil_usuario
+				Actualiza la informacion del perfil de usuario en su registro
+
+				Salida de la funcion:
+					* Usuario actualizado en el sistema.
+
+				Ver tambien:
+					<actualizar_perfil_usuario> | <listar_usuarios>
+			*/
+			$mensaje_error="";
+
+			// Verifica campos nulos
+			if ($nombre=="" || $correo=="")
+				$mensaje_error=$MULTILANG_UsrErrCrea2;
+
+			if ($mensaje_error=="")
+				{
+					// Actualiza datos del usuario
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET nombre=?,correo=? WHERE login='$PCOSESS_LoginUsuario' ","$nombre$_SeparadorCampos_$correo");
+					auditar("Actualiza su perfil");
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_Actualizacion.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$MULTILANG_ProcesoFin.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+					//echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="actualizar_perfil_usuario">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+		}
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+if ($PCO_Accion=="actualizar_perfil_usuario")
+	{
+        /*
+            Function: actualizar_perfil_usuario
+            Presenta el formulario con los datos del usuario actual para actualizar su informacion basica
+
+            Salida de la funcion:
+                * Registro del usuario actualizado en el sistema
+
+            Ver tambien:
+                <listar_usuarios> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario> | <muestra_seguridad_clave> | <seguridad_clave>
+        */
+		abrir_ventana($MULTILANG_UsrPerfil, 'panel-info');
+        
+        //Busca datos del usuario actual
+        $registro_usuario=ejecutar_sql("SELECT * FROM ".$TablasCore."usuario WHERE login=? ","$PCOSESS_LoginUsuario")->fetch();
+?>
+
+				<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+					<input type="hidden" name="PCO_Accion" value="guardar_perfil_usuario">
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">
+                            <?php echo $MULTILANG_UsrLogin; ?>:
+                        </span>
+                        <input readonly name="login" maxlength="250" type="text" class="form-control" value="<?php echo $PCOSESS_LoginUsuario; ?>">
+                        <span class="input-group-addon">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_UsrDesLogin; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                        </span>
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">
+                            <?php echo $MULTILANG_UsrNombre; ?>:
+                        </span>
+                        <input name="nombre"  onkeypress="return validar_teclado(event, 'alfanumerico');" maxlength="100" type="text" class="form-control" value="<?php echo $registro_usuario["nombre"]; ?>">
+                        <span class="input-group-addon">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                        </span>
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">
+                            <?php echo $MULTILANG_Correo; ?>:
+                        </span>
+                        <input name="correo" type="text" class="form-control" value="<?php echo $registro_usuario["correo"]; ?>">
+                        <span class="input-group-addon">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_UsrTitCorreo; ?>: <?php echo $MULTILANG_UsrDesCorreo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                        </span>
+                    </div>
+                </form>
+            <br><br>
+            <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Actualizar; ?></a>
+            <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+
+		 <?php
+            cerrar_ventana();
+			//$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
+    }
+
+
+/* ################################################################## */
+/* ################################################################## */
 if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="establecer_nueva_contrasena")
 	{
         /*

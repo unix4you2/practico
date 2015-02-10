@@ -750,7 +750,7 @@
 	$MULTILANG_UsrAgreOpc='Add option to the user menu';
 	$MULTILANG_UsrSecc='Sections already available';
 	$MULTILANG_UsrErrCrea1='The user entered already exists, please check or change the login entered for the account and try again';
-	$MULTILANG_UsrErrCrea2='You forgot to enter any of the requested data as required: Name, Login or Password';
+	$MULTILANG_UsrErrCrea2='You forgot to enter any of the requested data as required';
 	$MULTILANG_UsrErrCrea3='The password entered must be at least six characters';
 	$MULTILANG_UsrAdicion='Adding users';
 	$MULTILANG_UsrLogin='NickName / Login';
@@ -800,6 +800,8 @@
     $MULTILANG_UsrResetLink='Follow this link to restore your password';
     $MULTILANG_UsrResetCuenta='Message sent to';
     $MULTILANG_UsrResetOK='Password restored. Please try to login again';
+    $MULTILANG_UsrPerfil='User profile';
+    $MULTILANG_UsrActualizarAdmin='Your settings says that you should change your profile to update the email address for the admin user.<br>Please go to the upper user menu and Clic over Super user or user name option to change it.';
     
 
 	//Proceso de instalacion

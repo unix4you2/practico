@@ -179,7 +179,7 @@
                             <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> <?php echo $Nombre_usuario;?></a></li>
+                            <li><a href="javascript:document.actualizar_perfil.submit();"><i class="fa fa-user fa-fw"></i> <?php echo $Nombre_usuario;?></a></li>
                             <li><a href="javascript:document.reseteo_clave.submit();"><i class="fa fa-key fa-fw"></i> <?php echo $MULTILANG_UsrReset; ?></a></li>
                             <li><a data-toggle="modal" href="#Dialogo_Chat"><i class="fa fa-comment fa-fw"></i> Chat</a></li>
                             <li class="divider"></li>
@@ -310,6 +310,9 @@
 <form method="POST" name="cerrar_sesion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     <input type="Hidden" name="PCO_Accion" value="Terminar_sesion">
 </form>
+<form method="POST" name="actualizar_perfil" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+    <input type="Hidden" name="PCO_Accion" value="actualizar_perfil_usuario">
+</form>
 <form method="POST" name="reseteo_clave" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     <input type="Hidden" name="PCO_Accion" value="cambiar_clave">
 </form>
@@ -376,6 +379,17 @@
 							}
                         echo '</ul>';
 					}
+
+                    // Si el usuario es administrador valida que ya haya cambiado al menos su correo
+                    if ($PCOSESS_LoginUsuario=="admin")
+                        {
+                            $registro_usuario=ejecutar_sql("SELECT correo FROM ".$TablasCore."usuario WHERE login=? ","$PCOSESS_LoginUsuario")->fetch();
+                            if ($registro_usuario["correo"]=="sucorreo@dominio.com" || $registro_usuario["correo"]=="unix4you2@gmail.com")
+                                mensaje($MULTILANG_Importante, $MULTILANG_UsrActualizarAdmin, '', 'fa fa-bell fa-3x', 'alert alert-danger alert-dismissible');
+
+                        }
+
+
 				?>
 
 

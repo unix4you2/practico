@@ -747,7 +747,7 @@
 	$MULTILANG_UsrAgreOpc='Agregar opci&oacute;n al men&uacute; del usuario';
 	$MULTILANG_UsrSecc='Secciones ya disponibles';
 	$MULTILANG_UsrErrCrea1='El usuario ingresado ya existe, por favor verifique o cambie el login ingresado para la cuenta e intente de nuevo';
-	$MULTILANG_UsrErrCrea2='Usted ha olvidado ingresar alguno de los datos solicitados como obligatorios: Nombre, Login o Clave';
+	$MULTILANG_UsrErrCrea2='Usted ha olvidado ingresar alguno de los datos solicitados como obligatorios';
 	$MULTILANG_UsrErrCrea3='La contrase&ntilde;a ingresada debe tener al menos seis caracteres';
 	$MULTILANG_UsrAdicion='Adici&oacute;n de usuarios';
 	$MULTILANG_UsrLogin='NickName / Login';
@@ -797,6 +797,8 @@
     $MULTILANG_UsrResetLink='Siga el siguiente enlace para restablecer su contrase&ntilde;a';
     $MULTILANG_UsrResetCuenta='Mensaje enviado a la cuenta';
     $MULTILANG_UsrResetOK='Se ha restablecido el acceso a su cuenta con la clave suministrada.  Intente su acceso nuevamente.';
+    $MULTILANG_UsrPerfil='Perfil del usuario';
+    $MULTILANG_UsrActualizarAdmin='Sus configuraciones indican que a&uacute;n no actualiza la direcci&oacute;n de correo electronico para el super usuario.  Esto es necesario para poder recibir alertas o recuperaciones de contrase&ntilde;a.  Vaya al menu de usuario en la parte superior derecha y haga clic sobre su nombre de usuario para actualizar el perfil.';
    
 
 	//Proceso de instalacion
