@@ -117,7 +117,7 @@
     <script src="inc/bootstrap/js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
 	<!-- Canvas -->
-    <!--<script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>-->
+    <script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>
 
     <!-- JavaScript Personalizado del tema -->
     <script src="inc/bootstrap/js/sb-admin-2.js"></script>
@@ -196,15 +196,16 @@
     </script>
 
     <?php
-        //Carga las funciones activadoras de DatePicker (si fue encontrado algun campo de ese tipo)
+        //Carga las funciones activadoras de diferentes tipos de control (si fue encontrado algun campo de ese tipo)
+        //DatePicker
         if (@$funciones_activacion_datepickers!="")
             echo '<script type="text/javascript">'.$funciones_activacion_datepickers.'</script>';
-    ?>
-
-    <?php
-        //Carga las funciones activadoras de Deslizadores (si fue encontrado algun campo de ese tipo)
+        //Deslizadores
         if (@$funciones_activacion_sliders!="")
             echo '<script type="text/javascript">'.$funciones_activacion_sliders.'</script>';
+        //Canvas
+        if (@$funciones_activacion_canvas!="")
+            echo '<script type="text/javascript">'.$funciones_activacion_canvas.'</script>';
     ?>
 
     <?php

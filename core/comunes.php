@@ -2669,6 +2669,7 @@ function ventana_login()
 		{
 			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+            global $funciones_activacion_canvas;
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
@@ -2703,12 +2704,16 @@ function ventana_login()
 				<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" style="border: 1px solid #acc;">Su navegador no soporta Canvas</canvas>
 				<a href="javascript:limpiar_CANVAS_'.$registro_campos["campo"].'();"><i class="fa fa-times fa-2x"></i></a>
 
-				<script type="text/javascript">
-					$(function ()
+				<script type="text/javascript">';
+            
+            //Prepara la funcion de reactivacion del canvas para el final del script
+            $funciones_activacion_canvas.='
+                    $(function ()
 						{
 							$(\'#CANVAS_'.$registro_campos["campo"].'\').sketch({defaultColor: "'.$registro_campos["color_trazo"].'", defaultSize: "'.$registro_campos["tamano_pincel"].'"});
-						});
-
+						});';
+            
+            $salida.='
 					/*
 					// Genera el vinculo entre el enlace de upload y la funcion
 					$("#upload").bind("click", function ()
@@ -2748,7 +2753,7 @@ function ventana_login()
 							document.datos.'.$registro_campos["campo"].'.value=strDataURI;
 							window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);
 						}
-					window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);
+					window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1500);
 				</script>
 				<input type="hidden" name="'.$registro_campos["campo"].'">';
 
