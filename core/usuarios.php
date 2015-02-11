@@ -165,8 +165,10 @@
 					auditar("Actualiza su perfil");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
-						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_Actualizacion.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_Actualizacion.': '.$MULTILANG_UsrPerfil.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$MULTILANG_ProcesoFin.'">
+                        <input type="Hidden" name="PCO_ErrorIcono" value="fa-thumbs-o-up">
+                        <input type="Hidden" name="PCO_ErrorEstilo" value="alert-info">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 					//echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
