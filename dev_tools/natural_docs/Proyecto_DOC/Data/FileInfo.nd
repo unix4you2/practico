@@ -57,7 +57,7 @@ JavaScript
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-objectivec.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-objectivec.js
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/luapage.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/luapage.js
 /mnt/datos/WebServer/practico/inc/ckeditor/plugins/div/dialogs/div.js	1408456646	0	/mnt/datos/WebServer/practico/inc/ckeditor/plugins/div/dialogs/div.js
-/mnt/datos/WebServer/practico/core/marco_abajo.php	1422389977	1	Seccion inferior
+/mnt/datos/WebServer/practico/core/marco_abajo.php	1423667997	1	Seccion inferior
 /mnt/datos/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/hiddenfield.js	1408456646	0	/mnt/datos/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/hiddenfield.js
 /mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/js/jscalendar/lang/calendar-al.js	1408456646	0	/mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/js/jscalendar/lang/calendar-al.js
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/worker-php.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/worker-php.js
@@ -95,7 +95,7 @@ JavaScript
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/haskell.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/haskell.js
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-html.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-html.js
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-abap.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-abap.js
-/mnt/datos/WebServer/practico/core/informes.php	1422389364	1	Modulo informes
+/mnt/datos/WebServer/practico/core/informes.php	1423663558	1	Modulo informes
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-erlang.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-erlang.js
 /mnt/datos/WebServer/practico/mod/sopa/vista/vista.php	1418845676	1	DemoVista_SOPA_Facebook
 /mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/lib/Attribute.php	1408456646	0	/mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/lib/Attribute.php
@@ -126,7 +126,7 @@ JavaScript
 /mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/copy_form.php	1408456646	0	/mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/copy_form.php
 /mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/delete.php	1408456646	0	/mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/delete.php
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/svg.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/svg.js
-/mnt/datos/WebServer/practico/core/marco_arriba.php	1423229201	1	Seccion superior
+/mnt/datos/WebServer/practico/core/marco_arriba.php	1423669320	1	Seccion superior
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-python.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-python.js
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/soy_template.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/soy_template.js
 /mnt/datos/WebServer/practico/inc/http/http.php	1408058839	0	/mnt/datos/WebServer/practico/inc/http/http.php
@@ -246,7 +246,7 @@ JavaScript
 /mnt/datos/WebServer/practico/inc/practico/asistentes/tbl_contactos.txt	1408456646	0	/mnt/datos/WebServer/practico/inc/practico/asistentes/tbl_contactos.txt
 /mnt/datos/WebServer/practico/inc/ckeditor/plugins/specialchar/dialogs/lang/he.js	1408456646	0	/mnt/datos/WebServer/practico/inc/ckeditor/plugins/specialchar/dialogs/lang/he.js
 /mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/js/jscalendar/lang/calendar-ru_win_.js	1408456646	0	/mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/js/jscalendar/lang/calendar-ru_win_.js
-/mnt/datos/WebServer/practico/inc/practico/idiomas/en.php	1423485441	1	Idioma espanol
+/mnt/datos/WebServer/practico/inc/practico/idiomas/en.php	1423662035	1	Idioma espanol
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/coldfusion.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/coldfusion.js
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/worker-coffee.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/worker-coffee.js
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/coffee.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/coffee.js
@@ -339,7 +339,7 @@ JavaScript
 /mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/lib/ds_ldap_pla.php	1408456646	0	/mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/lib/ds_ldap_pla.php
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-jack.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-jack.js
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-prolog.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-prolog.js
-/mnt/datos/WebServer/practico/core/marco_arriba_bs.php	1422376283	1	Seccion superior
+/mnt/datos/WebServer/practico/core/marco_arriba_bs.php	1423659576	1	Seccion superior
 /mnt/datos/WebServer/practico/inc/oauth/NUEVO/login_with_rightsignature.php	1408456646	0	/mnt/datos/WebServer/practico/inc/oauth/NUEVO/login_with_rightsignature.php
 /mnt/datos/WebServer/practico/core/actualizacion.php	1423155036	1	Modulo actualizar
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/twig.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/twig.js
@@ -432,7 +432,7 @@ JavaScript
 /mnt/datos/WebServer/practico/inc/bootstrap/js/plugins/transition.js	1420470292	0	/mnt/datos/WebServer/practico/inc/bootstrap/js/plugins/transition.js
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/smarty.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/smarty.js
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-smarty.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-smarty.js
-/mnt/datos/WebServer/practico/core/usuarios.php	1423486761	1	Modulo usuarios
+/mnt/datos/WebServer/practico/core/usuarios.php	1423664031	1	Modulo usuarios
 /mnt/datos/WebServer/practico/inc/ckeditor/plugins/clipboard/dialogs/paste.js	1408456646	0	/mnt/datos/WebServer/practico/inc/ckeditor/plugins/clipboard/dialogs/paste.js
 /mnt/datos/WebServer/practico/mod/pdf/html2pdf/_tcpdf_5.0.002/README.TXT	1408456646	0	/mnt/datos/WebServer/practico/mod/pdf/html2pdf/_tcpdf_5.0.002/README.TXT
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-livescript.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-livescript.js
@@ -602,7 +602,7 @@ JavaScript
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-plain_text.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-plain_text.js
 /mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/lib/template_functions.php	1408456646	0	/mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/lib/template_functions.php
 /mnt/datos/WebServer/practico/inc/ckeditor/plugins/specialchar/dialogs/lang/de.js	1408456646	0	/mnt/datos/WebServer/practico/inc/ckeditor/plugins/specialchar/dialogs/lang/de.js
-/mnt/datos/WebServer/practico/core/comunes.php	1423486826	1	Libreria base
+/mnt/datos/WebServer/practico/core/comunes.php	1423667931	1	Libreria base
 /mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/purge_cache.php	1408456646	0	/mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/purge_cache.php
 /mnt/datos/WebServer/practico/inc/bootstrap/js/plugins/morris/raphael.min.js	1418831547	0	/mnt/datos/WebServer/practico/inc/bootstrap/js/plugins/morris/raphael.min.js
 /mnt/datos/WebServer/practico/inc/bootstrap/js/plugins/select/i18n/defaults-es_CL.min.js	1412364553	0	/mnt/datos/WebServer/practico/inc/bootstrap/js/plugins/select/i18n/defaults-es_CL.min.js
@@ -622,7 +622,7 @@ JavaScript
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-lsl.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-lsl.js
 /mnt/datos/WebServer/practico/inc/bootstrap/js/plugins/select/bootstrap-select.min.js	1412364553	0	/mnt/datos/WebServer/practico/inc/bootstrap/js/plugins/select/bootstrap-select.min.js
 /mnt/datos/WebServer/practico/inc/practico/asistentes/tbl_clientes.txt	1408456646	0	/mnt/datos/WebServer/practico/inc/practico/asistentes/tbl_clientes.txt
-/mnt/datos/WebServer/practico/index.php	1423240438	1	Articulador
+/mnt/datos/WebServer/practico/index.php	1423594386	1	Articulador
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/worker-css.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/worker-css.js
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-json.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-json.js
 /mnt/datos/WebServer/practico/inc/chat/chat.php	1408456646	0	/mnt/datos/WebServer/practico/inc/chat/chat.php
@@ -708,7 +708,7 @@ JavaScript
 /mnt/datos/WebServer/practico/ins/core/marco_abajo.php	1419948220	0	/mnt/datos/WebServer/practico/ins/core/marco_abajo.php
 /mnt/datos/WebServer/practico/inc/ckeditor/plugins/specialchar/dialogs/lang/gl.js	1408456646	0	/mnt/datos/WebServer/practico/inc/ckeditor/plugins/specialchar/dialogs/lang/gl.js
 /mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/add_attr_form.php	1408456646	0	/mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/add_attr_form.php
-/mnt/datos/WebServer/practico/dev_tools/version_publicada.txt	1420037298	0	/mnt/datos/WebServer/practico/dev_tools/version_publicada.txt
+/mnt/datos/WebServer/practico/dev_tools/version_publicada.txt	1423488075	0	/mnt/datos/WebServer/practico/dev_tools/version_publicada.txt
 /mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/js/jscalendar/lang/calendar-big5-utf8.js	1408456646	0	/mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/js/jscalendar/lang/calendar-big5-utf8.js
 /mnt/datos/WebServer/practico/ins/js/tooltips.js	1408456646	0	/mnt/datos/WebServer/practico/ins/js/tooltips.js
 /mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/lib/ShadowAttribute.php	1408456646	0	/mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/lib/ShadowAttribute.php
@@ -749,7 +749,7 @@ JavaScript
 /mnt/datos/WebServer/practico/mod/pdf/html2pdf/_read_me.txt	1408456646	0	/mnt/datos/WebServer/practico/mod/pdf/html2pdf/_read_me.txt
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-markdown.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-markdown.js
 /mnt/datos/WebServer/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.0.0.min.js	1414865990	0	/mnt/datos/WebServer/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.0.0.min.js
-/mnt/datos/WebServer/practico/dev_tools/log_cambios.txt	1423253446	0	/mnt/datos/WebServer/practico/dev_tools/log_cambios.txt
+/mnt/datos/WebServer/practico/dev_tools/log_cambios.txt	1423668271	0	/mnt/datos/WebServer/practico/dev_tools/log_cambios.txt
 /mnt/datos/WebServer/practico/core/sesion.php	1422970207	1	Modulo sesion
 /mnt/datos/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/textfield.js	1408456646	0	/mnt/datos/WebServer/practico/inc/ckeditor/plugins/forms/dialogs/textfield.js
 /mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/lib/export_functions.php	1408456646	0	/mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/lib/export_functions.php
@@ -822,7 +822,7 @@ JavaScript
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-cirru.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-cirru.js
 /mnt/datos/WebServer/practico/inc/bootstrap/js/plugins/flot/jquery.flot.pie.js	1418831547	0	/mnt/datos/WebServer/practico/inc/bootstrap/js/plugins/flot/jquery.flot.pie.js
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/autohotkey.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/autohotkey.js
-/mnt/datos/WebServer/practico/inc/practico/idiomas/es.php	1423485407	1	Idioma espanol
+/mnt/datos/WebServer/practico/inc/practico/idiomas/es.php	1423661967	1	Idioma espanol
 /mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/js/layersmenu-browser_detection.js	1408456646	0	/mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/js/layersmenu-browser_detection.js
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-tcl.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-tcl.js
 /mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/modify_member_form.php	1408456646	0	/mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/modify_member_form.php
@@ -840,7 +840,7 @@ JavaScript
 /mnt/datos/WebServer/practico/inc/ckeditor/plugins/scayt/dialogs/options.js	1408456646	0	/mnt/datos/WebServer/practico/inc/ckeditor/plugins/scayt/dialogs/options.js
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/theme-xcode.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/theme-xcode.js
 /mnt/datos/WebServer/practico/ins/core/marco_arriba.php	1422300731	0	/mnt/datos/WebServer/practico/ins/core/marco_arriba.php
-/mnt/datos/WebServer/practico/inc/practico/def_basedatos.php	1423237861	1	Libreria Definicion de base de datos
+/mnt/datos/WebServer/practico/inc/practico/def_basedatos.php	1423663025	1	Libreria Definicion de base de datos
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-haxe.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/mode-haxe.js
 /mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/text.js	1415475459	0	/mnt/datos/WebServer/practico/inc/ace/src-min-noconflict/snippets/text.js
 /mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/js/jscalendar/lang/calendar-ca.js	1408456646	0	/mnt/datos/WebServer/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/js/jscalendar/lang/calendar-ca.js
