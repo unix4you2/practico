@@ -388,7 +388,7 @@
 					}
 
                     // Si el usuario es administrador valida que ya haya cambiado al menos su correo
-                    if ($PCOSESS_LoginUsuario=="admin")
+                    if (@$PCOSESS_LoginUsuario=="admin")
                         {
                             $registro_usuario=ejecutar_sql("SELECT correo FROM ".$TablasCore."usuario WHERE login=? ","$PCOSESS_LoginUsuario")->fetch();
                             if ($registro_usuario["correo"]=="sucorreo@dominio.com" || $registro_usuario["correo"]=="unix4you2@gmail.com")
