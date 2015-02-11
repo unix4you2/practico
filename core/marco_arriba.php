@@ -52,9 +52,10 @@
     include_once("core/marco_arriba_bs.php");
 ?>
 <body oncontextmenu="return false;">
+    <!--Marco oculto para generacion de formularios y elementos dinamicos anidados -->
+    <div id="PCODIV_FormulariosDinamicos" style="visibility: hidden; display: none;"></div>
 
-    <div id="wrapper">
-        
+    <div id="wrapper">  
 
 
         <!-- Navigation -->
@@ -322,7 +323,13 @@
 <form method="POST" name="fileman_admin_embebido" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     <input type="Hidden" name="PCO_Accion" value="fileman_admin_embebido">
 </form>
-
+<form name="FRMBASEINFORME" action="<?php echo $ArchivoCORE; ?>" method="POST">
+    <input type="Hidden" name="PCO_Accion" value="">
+    <input type="Hidden" name="tabla" value="">
+    <input type="Hidden" name="campo" value="">
+    <input type="Hidden" name="valor" value="">
+    <input type="Hidden" name="objeto" value="">
+</form>
 
 <?php 
 	//Despliega marcos de administracion a ser activados por el menu superior

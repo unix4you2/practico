@@ -23,6 +23,7 @@ core/formularios.php
 core/informes.php
 core/marco_abajo.php
 core/marco_arriba.php
+core/marco_arriba_bs.php
 core/usuarios.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
@@ -38,13 +39,17 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 * Added: Ahora se permite definir informes para ser presentados en formato DataTable, con filtrados, ordenamiento, búsquedas y paginación en caliente.
 * Added: La ficha de cada usuario es editable haciendo clic sobre su nombre en el menu de usuario.  Adicionalmente después de la instalación de la plataforma el usuario admin es redirigido en su primer ingreso para cambiar/actualizar su ficha.
+* Added: Ahora los informes embebidos soportan botones de comando sin importar si se encuentran dentro de otros formularios
 * Fixed: 
-* Enhan: 
+* Enhan: Se cambia correo de instalación predeterminado a uno genérico.
+* Enhan: Agregada funcion JavaScript PCO_AgregarElementoDiv que permite agregar dinamicamente elementos HTML a un marco determinado.
+* Enhan: Informes DataTable tienen ahora soporte multiidioma
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
+ALTER TABLE core_informe ADD COLUMN soporte_datatable char(1) DEFAULT 'N';
 "
 
 ########################################################################

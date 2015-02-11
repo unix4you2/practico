@@ -629,6 +629,9 @@
     $MULTILANG_InfDataTableNoDatos='No data available in table';
     $MULTILANG_InfDataTableNoRegistros='There is no records that match search criteria';
     $MULTILANG_InfDataTableNoRegistrosDisponibles='No records available';
+    $MULTILANG_InfDataTableTit='DataTables support?';
+    $MULTILANG_InfDataTableDes='Allow to transform the report in a DataTable to filter, search, sort and get pages of results dinamically';
+
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';

@@ -97,5 +97,13 @@
 			{ 
 				window.open(theURL,winName,features);
 			}
+        function PCO_AgregarElementoDiv(marco,elemento)
+            {
+                //carga dinamicamente objetos html a marcos
+                var capa = document.getElementById(marco);
+                var zona = document.createElement("NuevoElemento");
+                zona.innerHTML = elemento;
+                capa.appendChild(zona);
+            }
 	</script>
 </head>

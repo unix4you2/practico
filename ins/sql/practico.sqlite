@@ -161,7 +161,8 @@ CREATE TABLE core_informe (
   formato_final text, 
   formato_grafico text,
   genera_pdf text,
-  variables_filtro text
+  variables_filtro text,
+  soporte_datatable text DEFAULT 'N'
 
 );
 

@@ -3450,7 +3450,9 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 					if($formato=="htm")
 						{
-                            @$PCO_InformesDataTable.="TablaInforme_".$registro_informe["id"]."|";
+                            //Si el informe va a soportar datatable entonces lo agrega a las tablas que deben ser convertidas en el pageonload
+                            if ($registro_informe["soporte_datatable"]=="S")
+                                @$PCO_InformesDataTable.="TablaInforme_".$registro_informe["id"]."|";
                             $SalidaFinalInforme.= '<table class="table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead><tr>';
 							$SalidaFinalInformePDF.= '<table class="'.$estilo.'"><thead><tr>';
 						}
@@ -3507,24 +3509,6 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							$cadena_javascript='onclick="'.@$comando_javascript.'"';
 							@$cadena_generica_botones.='<input type="Button"  class="'.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.$cadena_javascript.' >&nbsp;';
 							$total_botones++;
-						}
-					//Si el informe tiene botones se agrega el formulario para procesar las acciones
-					if ($total_botones>0)
-						{
-							$SalidaFinalInforme.= '<form name="FRMBASEINFORME" action="'.$ArchivoCORE.'" method="POST">
-								<input type="Hidden" name="PCO_Accion" value="">
-								<input type="Hidden" name="tabla" value="">
-								<input type="Hidden" name="campo" value="">
-								<input type="Hidden" name="valor" value="">
-								<input type="Hidden" name="objeto" value="">
-								</form>';
-							$SalidaFinalInformePDF.= '<form name="FRMBASEINFORME" action="'.$ArchivoCORE.'" method="POST">
-								<input type="Hidden" name="PCO_Accion" value="">
-								<input type="Hidden" name="tabla" value="">
-								<input type="Hidden" name="campo" value="">
-								<input type="Hidden" name="valor" value="">
-								<input type="Hidden" name="objeto" value="">
-								</form>';
 						}
 
 					// Imprime encabezados de columna

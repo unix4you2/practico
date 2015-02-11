@@ -244,6 +244,10 @@ if ($PCO_Accion=="actualizar_perfil_usuario")
             <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 
 		 <?php
+            // Si el usuario es administrador y el correo es un valor predeterminado en versiones viejas lo cambia
+            if ($PCOSESS_LoginUsuario=="admin" && $registro_usuario["correo"]=="unix4you2@gmail.com")
+                echo '<script language="JavaScript">document.datos.correo.value="sucorreo@dominio.com";</script>';
+
             cerrar_ventana();
 			//$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
     }

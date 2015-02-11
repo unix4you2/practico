@@ -192,7 +192,7 @@ if ($PCO_Accion=="actualizar_informe")
 		if ($mensaje_error=="")
 			{
 				// Actualiza los datos 
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET variables_filtro=?, genera_pdf=?, formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=? WHERE id=? ","$variables_filtro$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$id");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET soporte_datatable=?, variables_filtro=?, genera_pdf=?, formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=? WHERE id=? ","$soporte_datatable$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$id");
 				auditar("Actualiza informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="editar_informe">
@@ -1468,6 +1468,17 @@ if ($PCO_Accion=="editar_informe")
                 </span>
             </div>
 
+            <label for="soporte_datatable"><?php echo $MULTILANG_InfDataTableTit; ?>:</label>
+            <div class="form-group input-group">
+                <select id="soporte_datatable" name="soporte_datatable" class="form-control" >
+                    <option value="S" <?php if ($registro_informe["soporte_datatable"]=="S") echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
+                    <option value="N" <?php if ($registro_informe["soporte_datatable"]=="N") echo 'selected'; ?> ><?php echo $MULTILANG_No; ?></option>
+                </select>
+                <span class="input-group-addon">
+                    <a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_InfDataTableDes; ?>"><i class="fa fa-question-circle fa-fw"></i></a>
+                </span>
+            </div>
+
             </form>
             <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa  fa-floppy-o"></i> <?php echo $MULTILANG_InfActualizar; ?></a>
 
@@ -1574,7 +1585,7 @@ if ($PCO_Accion=="guardar_informe")
 			{
 				$agrupamiento='';
                 $ordenamiento='';
-                ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|',?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro");
+                ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|',?,?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable");
 				$id=$ConexionPDO->lastInsertId();
 				auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -1689,6 +1700,18 @@ if ($PCO_Accion=="administrar_informes")
                     <a href="#" title="<?php echo $MULTILANG_InfVblesDesFiltro; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                 </span>
             </div>
+
+            <label for="soporte_datatable"><?php echo $MULTILANG_InfDataTableTit; ?>:</label>
+            <div class="form-group input-group">
+                <select id="soporte_datatable" name="soporte_datatable" class="selectpicker" >
+                    <option value="S"><?php echo $MULTILANG_Si; ?></option>
+                    <option value="N" selected><?php echo $MULTILANG_No; ?></option>
+                </select>
+                <span class="input-group-addon">
+                    <a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_InfDataTableDes; ?>"><i class="fa fa-question-circle fa-fw"></i></a>
+                </span>
+            </div>
+
 
             </form>
 

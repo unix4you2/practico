@@ -626,6 +626,9 @@
     $MULTILANG_InfDataTableNoDatos='No hay datos en la tabla';
     $MULTILANG_InfDataTableNoRegistros='No hay registros que coincidan con el criterio de b&uacute;squeda';
     $MULTILANG_InfDataTableNoRegistrosDisponibles='No hay registros disponibles';
+    $MULTILANG_InfDataTableTit='Soportar DataTables?';
+    $MULTILANG_InfDataTableDes='Permite transformar el informe en un DataTable que permite realizar filtros, ordenamiento, busquedas y paginacion en caliente';
+    
 	
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';
