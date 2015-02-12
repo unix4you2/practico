@@ -1788,7 +1788,7 @@ function ventana_login()
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="")
                 $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
-			//Abre el marco del control de datos
+			//Abre el marco del control de datos style="display:inline;"
 			$salida.='<div class="form-group input-group '.$cadena_clase_datepicker.'" '.$cadena_ID_datepicker.'>';
             // Muestra el campo
 			$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control " '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$cadena_complementaria_datepicker.'  '.$registro_campos["personalizacion_tag"].'  >';
@@ -3136,6 +3136,7 @@ function ventana_login()
                                                                             //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
                                                                             if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
                                                                                 echo $objeto_formateado;
+                                                                            
                                                                         }
                                                                     /*
                                                                     else
@@ -3310,9 +3311,10 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		global $PCOSESS_LoginUsuario,$Nombre_usuario,$Descripcion_usuario,$Nivel_usuario,$Correo_usuario,$LlaveDePasoUsuario;
 		// Carga variables de definicion de tablas
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
-		global $MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano;
+		global $MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano,$MULTILANG_MonCommSQL;
 		global $IdiomaPredeterminado;
         global $PCO_InformesDataTable;
+        global $ModoDepuracion;
 
 		// Busca datos del informe
 		$consulta_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
@@ -3750,6 +3752,11 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			} // Fin si informe es G (grafico)
 
 		if ($en_ventana) cerrar_ventana();
+
+        //Si el usuario es admin le muestra el query generador.
+        if (@$PCOSESS_LoginUsuario=="admin" && $ModoDepuracion)
+            mensaje($MULTILANG_MonCommSQL, $consulta, '', 'fa fa-fw fa-2x fa-database', 'alert alert-info alert-dismissible ');
+
 	}
 
 

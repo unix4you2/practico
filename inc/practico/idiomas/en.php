@@ -301,6 +301,7 @@
 	$MULTILANG_FrmTipo13='Canvas (Drawing area - HTML5)';
 	$MULTILANG_FrmTipo14='Canvas (Webcam capture - HTML5)';
 	$MULTILANG_FrmTipo15='SubForm (To query and ReadOnly)';
+    $MULTILANG_FrmTipo16='Command button';
 	$MULTILANG_FrmTipoPincel='Brush size';
 	$MULTILANG_FrmTipoColor='Line color';
 	$MULTILANG_FrmTipoAdvertencia='This kind of data controls should be stored in your table into a long text or unlimited field';
@@ -488,6 +489,8 @@
     $MULTILANG_FrmBtnFull='Load in FullScreen';
     $MULTILANG_FrmBtnObjetivo='HTML Target';
     $MULTILANG_FrmActualizaAjax='Dynamic reload';
+    $MULTILANG_FrmActivarInline='Turn on the <i>Inline</i> view';
+    $MULTILANG_FrmActivarInlineDes='Allow to put the control using an inline style to keep a new line before publish the control over the form';
 
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';

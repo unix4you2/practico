@@ -298,6 +298,7 @@
 	$MULTILANG_FrmTipo13='Canvas (Area de dibujo - HTML5)';
 	$MULTILANG_FrmTipo14='Canvas (Captura Webcam - HTML5)';
 	$MULTILANG_FrmTipo15='SubFormulario (Para consulta en Solo lectura)';
+    $MULTILANG_FrmTipo16='Boton de comando';
 	$MULTILANG_FrmTipoPincel='Tama&ntilde;o del pincel';
 	$MULTILANG_FrmTipoColor='Color del trazo';
 	$MULTILANG_FrmTipoAdvertencia='Este tipo de controles deberia ser almacenado en su tabla dentro de campos de texto largo/ilimitado';
@@ -485,6 +486,8 @@
     $MULTILANG_FrmBtnFull='Cargar en pantalla completa';
     $MULTILANG_FrmBtnObjetivo='Objetivo HTML';
     $MULTILANG_FrmActualizaAjax='Actualizar din&aacute;micamente';
+    $MULTILANG_FrmActivarInline='Activar modo de vista <i>Inline</i>';
+    $MULTILANG_FrmActivarInlineDes='Permite que el control sea diagramado con estilo inline, lo que impide el salto de linea previo a ser ubicado en el formulario';
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

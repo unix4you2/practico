@@ -155,7 +155,7 @@
 					$lista_valores="";
                     //Define los tipos de control que no son tenidos en cuenta en procesos de actualizacion
                     //Agregar el campo a la lista solamente si es de datos y si es diferente al campo ID que es usado para la actualizacion (objetos de tipo etiqueta o iframes son pasados por alto)
-                    $cadena_tipos_excluidos=" AND tipo<>'etiqueta' AND tipo<>'url_iframe' AND tipo<>'informe' AND tipo<>'form_consulta' AND tipo<>'campo_etiqueta' AND tipo<>'archivo_adjunto' ";
+                    $cadena_tipos_excluidos=" AND tipo<>'etiqueta' AND tipo<>'url_iframe' AND tipo<>'informe' AND tipo<>'form_consulta' AND tipo<>'campo_etiqueta' AND tipo<>'archivo_adjunto' AND tipo<>'boton_comando' ";
 					
                     $consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND campo<>'id' $cadena_tipos_excluidos ","$formulario");
 					while ($registro_campos = $consulta_campos->fetch())
@@ -266,7 +266,7 @@
 					while ($registro_campos = $consulta_campos->fetch())
 						{
 							//Hace la operacion con el campo solamente si es de datos (objetos de tipo etiqueta o iframes son pasados por alto)
-							if ($registro_campos["tipo"]!="url_iframe" && $registro_campos["tipo"]!="etiqueta" && $registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta" && $registro_campos["tipo"]!="campo_etiqueta")
+							if ($registro_campos["tipo"]!="url_iframe" && $registro_campos["tipo"]!="etiqueta" && $registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta" && $registro_campos["tipo"]!="campo_etiqueta" && $registro_campos["tipo"]!="boton_comando")
 								{
 									//Verifica que el campo se encuentre dentro de la tabla, para descartar campos manuales mal escritos o usados para javascripts y otros fines.
 									if (existe_campo_tabla($registro_campos["campo"],$registro_formulario["tabla_datos"]))
@@ -560,7 +560,7 @@
 			if (@$valor_unico=="on") $valor_unico=1; else $valor_unico=0;
 			if (@$ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
 			if (@$titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm" && $tipo_objeto!="form_consulta") ) $mensaje_error=$MULTILANG_ErrFrmCampo1;
-			if (@$campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm" && $tipo_objeto!="form_consulta") ) $mensaje_error=$MULTILANG_ErrFrmCampo2;
+			if (@$campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm" && $tipo_objeto!="form_consulta" && $tipo_objeto!="boton_comando" ) ) $mensaje_error=$MULTILANG_ErrFrmCampo2;
 
 			if ($mensaje_error=="")
 				{
@@ -703,7 +703,7 @@ if ($PCO_Accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(37);
+					OcultarCampos(38);
 					// Muestra campos segun tipo de objeto
 					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,14,17,25,36,37");
 					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25,36,37");
@@ -720,6 +720,7 @@ if ($PCO_Accion=="editar_formulario")
 					if (tipo_objeto_activo=="objeto_canvas")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,30,31,36");
 					if (tipo_objeto_activo=="objeto_camara")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,31,36");
                     if (tipo_objeto_activo=="form_consulta")   VisualizarCampos("9,17,24,32,33,34,36");
+                    if (tipo_objeto_activo=="boton_comando")   VisualizarCampos("1,9,36,37,38");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -776,6 +777,7 @@ if ($PCO_Accion=="editar_formulario")
                                 <optgroup label="<?php echo $MULTILANG_FrmTipoTit3; ?>">
                                     <option value="informe"         data-icon="glyphicon-list-alt" <?php if (@$registro_campo_editar["tipo"]=="informe")         echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo8; ?></option>
                                     <option value="form_consulta"	  data-icon="glyphicon-search" <?php if (@$registro_campo_editar["tipo"]=="form_consulta")   echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo15; ?></option>
+                                    <option value="boton_comando"	  data-icon="glyphicon-flash" <?php if (@$registro_campo_editar["tipo"]=="boton_comando")   echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo16; ?></option>
                                 </optgroup>
                             </select>
                             <span class="input-group-addon">
@@ -1408,6 +1410,20 @@ if ($PCO_Accion=="editar_formulario")
                                 <input type="text" name="personalizacion_tag" class="form-control" value="<?php echo @$registro_campo_editar["personalizacion_tag"]; ?>" placeholder="<?php echo $MULTILANG_FrmTagPersonalizado; ?>">
                                 <span class="input-group-addon">
                                     <a href="#" data-toggle="popover" data-html="true" data-placement="top" title="<?php echo $MULTILANG_Ayuda; ?>" data-content="<?php echo $MULTILANG_FrmDesTagPersonalizado; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
+                            </div>
+						</div>
+
+
+						<div id='campo38' style="display:none;">
+                            <label for="modo_inline"><?php echo $MULTILANG_FrmActivarInline; ?>:</label>
+                            <div class="form-group input-group">
+                                <select id="modo_inline" name="modo_inline" class="form-control" >
+										<option value="0" <?php if (@$registro_campo_editar["modo_inline"]=="0") echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
+										<option value="1" <?php if (@$registro_campo_editar["modo_inline"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_FrmActivarInlineDes; ?>"><i class="fa fa-question-circle icon-info"></i></a>
                                 </span>
                             </div>
 						</div>

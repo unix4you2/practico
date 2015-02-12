@@ -129,6 +129,7 @@ CREATE TABLE core_formulario_objeto (
   condicion_filtrado_listas varchar(250) default '',
   pestana_objeto varchar(250) default '',
   personalizacion_tag text,
+  modo_inline int(1) default '0',
   PRIMARY KEY  (id)
 );
 
