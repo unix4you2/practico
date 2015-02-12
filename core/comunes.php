@@ -2911,6 +2911,39 @@ function ventana_login()
 		}
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: cargar_objeto_boton_comando
+	Genera el codigo HTML y CSS correspondiente a un boton de comando sobre un formulario
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		registro_datos_formulario - Arreglo asociativo con nombres de campo y valores cuando se hacen llamados de registro especificos
+		formulario - ID unico del formulario al cual pertenece el objeto
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
+	function cargar_objeto_boton_comando($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
+		{
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
+            global $funciones_activacion_datepickers;
+			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+			$salida='';
+
+			//Abre el marco del control de datos style="display:inline;"
+            // Muestra el campo
+			$salida.='<Button style="" class="btn '.$registro_campos["personalizacion_tag"].'">'.$registro_campos["titulo"].'</Button>';
+
+			return $salida;
+		}
+
 
 /* ################################################################## */
 /* ################################################################## */
@@ -3130,6 +3163,7 @@ function ventana_login()
                                                                             if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
+                                                                            if ($tipo_de_objeto=="boton_comando") $objeto_formateado = @cargar_objeto_boton_comando($registro_campos,@$registro_datos_formulario);
                                                                             //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
                                                                             if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorBusquedaBD,1);
 
@@ -3181,6 +3215,7 @@ function ventana_login()
                                                         if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
+                                                        if ($tipo_de_objeto=="boton_comando") $objeto_formateado = @cargar_objeto_boton_comando($registro_campos,@$registro_datos_formulario);
                                                         //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
                                                         if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorBusquedaBD,1);
 
@@ -3216,7 +3251,7 @@ function ventana_login()
 					// Formatea cada campo de acuerdo a su tipo
 					$objeto_formateado = @cargar_objeto_oculto($registro_ocultos,$registro_datos_formulario,$formulario,$en_ventana);
 					//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
-					if ($registro_campos["tipo"]!="informe")
+					if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta" && $registro_campos["tipo"]!="boton_comando")
 						echo $objeto_formateado;
 				}
 

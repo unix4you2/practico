@@ -482,7 +482,9 @@
                 <li><u>data-max-options=#</u> Combinado con multiple, determina el maximo de elementos a ser seleccionados.
                 <li><u>data-size=auto|#</u> Determina cuantas opciones presentar en la lista. Por defecto es auto.</li>
                 <li><u>data-style=btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u> Cambia el estilo grafico del control
-                <li><u>disabled</u> Deshabilita el control.</li>';
+                <li><u>disabled</u> Deshabilita el control.</li>
+            <br><b>Botones de comando (command buttons):</b>
+                <li><u>btn btn-xs btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u></li>';
     $MULTILANG_FrmBtnFull='Cargar en pantalla completa';
     $MULTILANG_FrmBtnObjetivo='Objetivo HTML';
     $MULTILANG_FrmActualizaAjax='Actualizar din&aacute;micamente';
