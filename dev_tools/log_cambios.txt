@@ -24,7 +24,9 @@ core/informes.php
 core/marco_abajo.php
 core/marco_arriba.php
 core/marco_arriba_bs.php
+core/menus.php
 core/usuarios.php
+img/favicon.ico
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 "
@@ -42,12 +44,14 @@ LogCambios="
 * Added: Ahora los informes embebidos soportan botones de comando sin importar si se encuentran dentro de otros formularios
 * Added: Algunos controles de formulario pueden soportar ahora el modo de estilo inline durante su publicacion sobre el formulario
 * Added: Nuevos controles de botones de comando para formularios permiten agregar botones en medio del form y no sólo en su barra de estado
+* Added: Algunos controles de formulario podrán soportar imágenes derivadas de las librerías de iconos disponibles.
 * Fixed: Mensaje de confirmación en cambio de perfil
 * Fixed: Reactivado el control tipo Canvas
 * Enhan: Se cambia correo de instalación predeterminado a uno genérico.
 * Enhan: Agregada funcion JavaScript PCO_AgregarElementoDiv que permite agregar dinamicamente elementos HTML a un marco determinado.
 * Enhan: Informes DataTable tienen ahora soporte multiidioma
 * Enhan: El modo de depuracion muestra ahora el query generador al final de cada informe para el usuario admin
+* Enhan: **[Natalia Arroyave]** Mejora en el logo de la aplicación
 "
 
 ########################################################################
@@ -55,6 +59,7 @@ LogCambios="
 ScriptBasedatos="
 ALTER TABLE core_informe ADD COLUMN soporte_datatable char(1) DEFAULT 'N';
 ALTER TABLE core_formulario_objeto ADD COLUMN modo_inline int(1) DEFAULT 0;
+ALTER TABLE core_formulario_objeto ADD COLUMN imagen varchar(250) default '';
 "
 
 ########################################################################

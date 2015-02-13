@@ -91,7 +91,7 @@
 	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/screen_ie.css" />
 	<![endif]-->
 
-	<link rel="shortcut icon" href="img/favicon.ico"/>
+	<link rel="shortcut icon" href="img/favicon.ico?v=3"/>
 	<script language="JavaScript">
 		function PCO_VentanaPopup(theURL,winName,features)
 			{ 

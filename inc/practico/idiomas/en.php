@@ -491,8 +491,8 @@
     $MULTILANG_FrmBtnFull='Load in FullScreen';
     $MULTILANG_FrmBtnObjetivo='HTML Target';
     $MULTILANG_FrmActualizaAjax='Dynamic reload';
-    $MULTILANG_FrmActivarInline='Turn on the <i>Inline</i> view';
-    $MULTILANG_FrmActivarInlineDes='Allow to put the control using an inline style to keep a new line before publish the control over the form';
+    $MULTILANG_FrmActivarInline='<i>Inline</i> view: Work in onjunction with next and previous elements';
+    $MULTILANG_FrmActivarInlineDes='Allow to put the control using an inline style to keep a new line before publish the control over the form. Acording the effect you want, previous or next element should activate this properti too';
 
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';
@@ -678,7 +678,7 @@
 	$MULTILANG_MnuComando='Command';
 	$MULTILANG_MnuAdvElimina='IMPORTANT: Deleting this registry you could unlink some system options.\n'.$MULTILANG_Confirma;
 	$MULTILANG_MnuHlpComandoInf='Maybe you want to add to the command this srtring <b>:htm:Informes</b>  to say Practico <br>that puts all the data in Html format and with that CSS style sheet';
-	$MULTILANG_MnuHlpAwesome='<b>Advice:</b> Instead JPEG or GIF images as icons you can use<br> the Font-Awesome or GlyphIcons notation/syntax.  See <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_BLANK">Available icons</a> and their <a href="http://fortawesome.github.io/Font-Awesome/examples/" target="_BLANK">Examples</a>.  More icons are available via <a href="http://getbootstrap.com/components/#glyphicons" target="_BLANK">GlyphIcons</a> too.';
+	$MULTILANG_MnuHlpAwesome='You can use the same syntax used for menu icons';
 
 	//Objetos, seguridad y otros
 	$MULTILANG_ObjError='The type of object received in this command is unknown';

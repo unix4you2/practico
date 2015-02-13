@@ -706,8 +706,6 @@ function completar_parametros($string,$data) {
 
 
 
-
-
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -1698,6 +1696,112 @@ function ventana_login()
                 <strong>'.$titulo.'</strong><br>'.$texto.'
             </div>';
 	  }
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: selector_iconos_awesome
+	Despliega marco para seleccionar iconos
+
+	Ver tambien:
+
+		<administrar_menu> | <detalles_menu>
+*/
+function selector_iconos_awesome()
+	{
+        global $MULTILANG_MnuSelImagen,$MULTILANG_MnuHlpAwesome,$MULTILANG_Cerrar;
+?>
+
+            <!-- Modal Selector de iconos -->
+            <div class="modal fade modal-wide" id="myModalSelectorIconos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_MnuSelImagen; ?></h4>
+                  </div>
+                  <div class="modal-body mdl-primary">
+                   
+                    <table class="table table-responsive table-unbordered btn-xs">
+                        <tr>
+                            <td>GlyphIcon</td>
+                            <td>IonIcon</td>
+                            <td>FontAwesome</td>
+                            <td>WeatherIcon</td>
+                            <td>MapIcon</td>
+                            <td>OctIcon</td>
+                            <td>TypIcon</td>
+                            <td>ElusiveIcon</td>
+                        </tr>
+                        <tr>
+                            <td><button id="lib_glyphicon" class="btn btn-default" data-iconset="glyphicon" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
+                            <td><button id="lib_ionicon" class="btn btn-default" data-iconset="ionicon" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
+                            <td><button id="lib_fontawesome" class="btn btn-default" data-iconset="fontawesome" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
+                            <td><button id="lib_weathericon" class="btn btn-default" data-iconset="weathericon" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
+                            <td><button id="lib_mapicon" class="btn btn-default" data-iconset="mapicon" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
+                            <td><button id="lib_octicon" class="btn btn-default" data-iconset="octicon" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
+                            <td><button id="lib_typicon" class="btn btn-default" data-iconset="typicon" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
+                            <td><button id="lib_elusiveicon" class="btn btn-default" data-iconset="elusiveicon" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
+                        </tr>
+                    </table>
+
+
+
+			<?php
+            /*
+            //DEPRECATED !!!
+			//Busca en el directorio de iconos por imagenes listas para ser usadas
+			$columnas=15;
+			$columna_actual=1;
+			$directorio="img/";
+            @$TemasIconos[]=array(Nombre => "Tango Desktop",	Tamano => "32x32",	Prefijo => "tango_");
+			@$TemasIconos[]=array(Nombre => "Developer",		Tamano => "32x32",	Prefijo => "dev_");
+			@$TemasIconos[]=array(Nombre => "Finance",		Tamano => "32x32",	Prefijo => "finance_");
+			@$TemasIconos[]=array(Nombre => "Medical",		Tamano => "32x32",	Prefijo => "medical_");
+			@$TemasIconos[]=array(Nombre => "Moskis",		Tamano => "32x32",	Prefijo => "moskis_");
+			@$TemasIconos[]=array(Nombre => "Social",		Tamano => "32x32",	Prefijo => "social_");
+			@$TemasIconos[]=array(Nombre => "Woo",			Tamano => "32x32",	Prefijo => "woo_");
+			@$TemasIconos[]=array(Nombre => "Once",			Tamano => "32x32",	Prefijo => "once_");
+			@$TemasIconos[]=array(Nombre => "Ginux",			Tamano => "32x32",	Prefijo => "ginux_");
+			echo '
+            <DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 350px">';
+			for ($i=0;$i<count($TemasIconos);$i++)
+				{
+					$columna_actual=1;
+					$dh = opendir($directorio);
+					echo "<font size=3>&nbsp;&nbsp;<b><br><br>".$TemasIconos[$i]["Nombre"]." (".$TemasIconos[$i]["Tamano"]." pixels)<hr></b></font>";
+					echo '<table border=0 cellspacing=4>';
+					while (($file = readdir($dh)) !== false)
+						{
+							$impreso=0;
+							if (($file != ".") && ($file != "..") && (stristr($file,$TemasIconos[$i]["Prefijo"])  ))
+								{
+									if ($columna_actual==1)	echo '<tr>';
+									echo '<td><a href="javascript:document.datos.imagen.value=\''.$file.'\';OcultarPopUp(\'FormularioImagenes\');" title="'.$file.'"><img src='.$directorio.$file.' border=0 width=32 height=32></a></td>';	
+									$impreso=1;
+									if ($impreso) $columna_actual++;
+									if ($columna_actual==$columnas) $columna_actual=1;
+									if ($columna_actual==$columnas)	echo '</tr>';
+								}
+						}
+					echo '</table>';
+				}
+			echo '</DIV>';
+            */
+			?>
+            
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+<?php
+	}
 
 
 
@@ -2937,10 +3041,18 @@ function ventana_login()
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
 			$salida='';
 
-			//Abre el marco del control de datos style="display:inline;"
+            //Determina si el estilo del objeto debe ser inline o no
+			$cadena_modo_inline='';
+            if ($registro_campos["modo_inline"])
+                $cadena_modo_inline='display:inline;';
+            
+            //Abre el marco del control de datos style="display:inline;"
+			$salida.='<div style="'.$cadena_modo_inline.'" class="form-group input-group">';
             // Muestra el campo
-			$salida.='<Button style="" class="btn '.$registro_campos["personalizacion_tag"].'">'.$registro_campos["titulo"].'</Button>';
-
+			$salida.='<a class="btn '.$registro_campos["personalizacion_tag"].'"><i class="'.$registro_campos["imagen"].'"></i> '.$registro_campos["titulo"].'</a>';
+            //Cierra marco del control de datos
+            $salida.= '</div>';
+            
 			return $salida;
 		}
 
@@ -3143,6 +3255,12 @@ function ventana_login()
                                                             // Crea los campos definidos por cada columna de formulario
                                                             while ($registro_campos = $consulta_campos->fetch())
                                                                 {
+                                                                    //Determina si el estilo del objeto debe ser inline o no
+                                                                    $cadena_modo_inline='';
+                                                                    if ($registro_campos["modo_inline"])
+                                                                        $cadena_modo_inline='display:inline;';
+                                                                    echo '<div style="'.$cadena_modo_inline.'">';
+
                                                                     //Imprime el campo solamente si no es fila unica, si es fila_unica guarda en una variable para uso posterior
                                                                     if($registro_campos["fila_unica"]=="0")
                                                                         {
@@ -3172,14 +3290,9 @@ function ventana_login()
                                                                                 echo $objeto_formateado;
                                                                             
                                                                         }
-                                                                    /*
-                                                                    else
-                                                                        {
-                                                                            echo '<tr>
-                                                                                <td align="right" valign=top></td>
-                                                                                <td valign=top>
-                                                                                </td></tr>';
-                                                                        }*/
+                                                                    
+                                                                    //Cierra el marco para el estilo inline del objeto
+                                                                    echo '</div>';
                                                                 }
                                                             echo '</td>'; //Fin columna de formulario
                                                     }
@@ -3229,7 +3342,6 @@ function ventana_login()
                                                 //Actualiza limite inferior para siguiente lista de campos
                                                 $limite_inferior=$registro_obj_fila_unica["peso"];
                                             }
-
 
                                 echo '
                                     </div>

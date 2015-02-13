@@ -130,6 +130,7 @@ CREATE TABLE core_formulario_objeto (
   pestana_objeto varchar(250) default '',
   personalizacion_tag text,
   modo_inline integer default 0,
+  imagen varchar(250) default '',
   PRIMARY KEY  (id)
 );
 

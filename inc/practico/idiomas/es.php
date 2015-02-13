@@ -488,8 +488,8 @@
     $MULTILANG_FrmBtnFull='Cargar en pantalla completa';
     $MULTILANG_FrmBtnObjetivo='Objetivo HTML';
     $MULTILANG_FrmActualizaAjax='Actualizar din&aacute;micamente';
-    $MULTILANG_FrmActivarInline='Activar modo de vista <i>Inline</i>';
-    $MULTILANG_FrmActivarInlineDes='Permite que el control sea diagramado con estilo inline, lo que impide el salto de linea previo a ser ubicado en el formulario';
+    $MULTILANG_FrmActivarInline='Modo de vista <i>Inline</i> (Conjunto con el elemento anterior y siguiente)';
+    $MULTILANG_FrmActivarInlineDes='Permite que el control sea diagramado con estilo inline, lo que impide el salto de linea previo a ser ubicado en el formulario.  Dependiendo del efecto deseado, el control anterior o siguiente tambien debera contar con esta propiedad activada.';
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';
@@ -675,7 +675,7 @@
 	$MULTILANG_MnuComando='Comando';
 	$MULTILANG_MnuAdvElimina='IMPORTANTE:  Al eliminar el registro pueden quedar sin vincular algunas opciones del sistema.\n'.$MULTILANG_Confirma;
 	$MULTILANG_MnuHlpComandoInf='Es probable que para los tipo Informe quiera agregar al comando final un <b>:htm:Informes</b> para indicar a Practico<br>que debe entregar sus resultados en html y con esa hoja de estilos';
-	$MULTILANG_MnuHlpAwesome='<b>Importante:</b> En lugar de utilizar una im&aacute;gen de las disponibles como iconos tambi&eacute;n<br> puede usar notacion de Font-Awesome o de GlyphIcons.  Ver <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_BLANK">Iconos disponibles</a> y sus <a href="http://fortawesome.github.io/Font-Awesome/examples/" target="_BLANK">Ejemplos</a>.  Tambien aquellos disponibles para <a href="http://getbootstrap.com/components/#glyphicons" target="_BLANK">GlyphIcons.</a>';
+	$MULTILANG_MnuHlpAwesome='Puede usar la misma notacion de los iconos de menu';
 
 	//Objetos, seguridad y otros
 	$MULTILANG_ObjError='El tipo de objeto recibido en este comando es desconocido';

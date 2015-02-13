@@ -498,7 +498,7 @@
 			if (@$ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
 			$tipo_objeto=$tipo;
 			if ($titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm" && $tipo_objeto!="form_consulta") ) $mensaje_error=$MULTILANG_ErrFrmCampo1;
-			if ($campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm" && $tipo_objeto!="form_consulta") ) $mensaje_error=$MULTILANG_ErrFrmCampo2;
+			if ($campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm" && $tipo_objeto!="form_consulta" && $tipo_objeto!="boton_comando") ) $mensaje_error=$MULTILANG_ErrFrmCampo2;
 			if ($mensaje_error=="")
 				{
 					//Genera la lista de campos a ser actualizados desde la definicion de tabla para no olvidar ninguno
@@ -672,6 +672,9 @@
 /* ################################################################## */
 if ($PCO_Accion=="editar_formulario")
 	{
+        //Prepara el selector de iconos para las opciones
+        selector_iconos_awesome();
+
 		  ?>
 
 		<script TYPE="text/javascript" LANGUAGE="JavaScript">
@@ -703,7 +706,7 @@ if ($PCO_Accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(38);
+					OcultarCampos(39);
 					// Muestra campos segun tipo de objeto
 					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,14,17,25,36,37");
 					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25,36,37");
@@ -720,7 +723,7 @@ if ($PCO_Accion=="editar_formulario")
 					if (tipo_objeto_activo=="objeto_canvas")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,30,31,36");
 					if (tipo_objeto_activo=="objeto_camara")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,31,36");
                     if (tipo_objeto_activo=="form_consulta")   VisualizarCampos("9,17,24,32,33,34,36");
-                    if (tipo_objeto_activo=="boton_comando")   VisualizarCampos("1,9,36,37,38");
+                    if (tipo_objeto_activo=="boton_comando")   VisualizarCampos("1,9,36,37,38,39");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -1426,6 +1429,21 @@ if ($PCO_Accion=="editar_formulario")
                                     <a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_FrmActivarInlineDes; ?>"><i class="fa fa-question-circle icon-info"></i></a>
                                 </span>
                             </div>
+						</div>
+
+
+						<div id='campo39' style="display:none;">
+                            <label for="imagen"><?php echo $MULTILANG_Imagen; ?></label>
+                            <div class="form-group input-group">
+                                <input type="text" name="imagen" id="imagen" class="form-control" value="<?php echo @$registro_campo_editar["imagen"]; ?>" placeholder="<?php echo $MULTILANG_MnuHlpAwesome; ?>">
+                                <span class="input-group-addon">
+                                    <!--
+                                    <a data-toggle="modal" href="#myModalSelectorIconos" title="<?php echo $MULTILANG_MnuDesImagen; ?>">
+                                           <i class="fa fa-hand-o-right"></i> <i class="fa fa-picture-o"></i>
+                                    </a>
+                                    -->
+                                </span>
+                            </div>  
 						</div>
 
 					<?php
