@@ -504,7 +504,15 @@
 					//Genera la lista de campos a ser actualizados desde la definicion de tabla para no olvidar ninguno
 					$ListaCampos=explode(",",$ListaCamposSinID_formulario_objeto);
 					for ($i=0; $i<count($ListaCampos);$i++)
-						@$ListaCamposyValores.=$ListaCampos[$i]."='".$$ListaCampos[$i]."',";
+                        {
+                            $nuevo_valor_asignar=$$ListaCampos[$i];
+                            //Escapa algunos campos especiales
+                            if ($ListaCampos[$i]=="accion_usuario")
+                                {
+                                    $nuevo_valor_asignar=addslashes($nuevo_valor_asignar);
+                                }
+                            @$ListaCamposyValores.=$ListaCampos[$i]."='".$nuevo_valor_asignar."',";
+                        }
 					$ListaCamposyValores.="id=id"; //Agregado para evitar coma final
 
 					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario_objeto SET ".$ListaCamposyValores." WHERE id=?","$idcampomodificado");
@@ -1453,16 +1461,16 @@ if ($PCO_Accion=="editar_formulario")
                                 <select id="tipo_accion" name="tipo_accion" class="form-control">
                                     <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                     <optgroup label="<?php echo $MULTILANG_FrmAccionT1; ?>">
-                                        <option value="interna_guardar"><?php echo $MULTILANG_FrmAccionGuardar; ?></option>
-                                        <option value="interna_actualizar"><?php echo $MULTILANG_FrmAccionActualizar; ?></option>
-                                        <option value="interna_eliminar"><?php echo $MULTILANG_FrmAccionEliminar; ?></option>
-                                        <option value="interna_escritorio"><?php echo $MULTILANG_FrmAccionRegresar; ?></option>
-                                        <option value="interna_cargar"><?php echo $MULTILANG_FrmAccionCargar; ?></option>
-                                        <option value="interna_limpiar"><?php echo $MULTILANG_FrmAccionLimpiar; ?></option>
+                                        <option value="interna_guardar"     <?php if (@$registro_campo_editar["tipo_accion"]=="interna_guardar") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmAccionGuardar; ?></option>
+                                        <option value="interna_actualizar"  <?php if (@$registro_campo_editar["tipo_accion"]=="interna_actualizar") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmAccionActualizar; ?></option>
+                                        <option value="interna_eliminar"    <?php if (@$registro_campo_editar["tipo_accion"]=="interna_eliminar") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmAccionEliminar; ?></option>
+                                        <option value="interna_escritorio"  <?php if (@$registro_campo_editar["tipo_accion"]=="interna_escritorio") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmAccionRegresar; ?></option>
+                                        <option value="interna_cargar"      <?php if (@$registro_campo_editar["tipo_accion"]=="interna_cargar") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmAccionCargar; ?></option>
+                                        <option value="interna_limpiar"     <?php if (@$registro_campo_editar["tipo_accion"]=="interna_limpiar") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmAccionLimpiar; ?></option>
                                     </optgroup>
                                     <optgroup label="<?php echo $MULTILANG_FrmAccionT2; ?>">
-                                        <option value="externa_formulario"><?php echo $MULTILANG_FrmAccionExterna; ?></option>
-                                        <option value="externa_javascript"><?php echo $MULTILANG_FrmAccionJS; ?></option>
+                                        <option value="externa_formulario"  <?php if (@$registro_campo_editar["tipo_accion"]=="externa_formulario") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmAccionExterna; ?></option>
+                                        <option value="externa_javascript"  <?php if (@$registro_campo_editar["tipo_accion"]=="externa_javascript") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmAccionJS; ?></option>
                                     </optgroup>
                                 </select>
                                 <span class="input-group-addon">
@@ -1475,7 +1483,7 @@ if ($PCO_Accion=="editar_formulario")
 
 						<div id='campo41' style="display:none;">
                             <div class="form-group input-group">
-                                <input type="text" name="accion_usuario" class="form-control" placeholder="<?php echo $MULTILANG_FrmAccionCMD; ?>">
+                                <input type="text" name="accion_usuario" value="<?php echo @$registro_campo_editar["accion_usuario"]; ?>" class="form-control" placeholder="<?php echo $MULTILANG_FrmAccionCMD; ?>">
                                 <span class="input-group-addon">
                                     <a href="#" data-placement="left" data-toggle="popover" data-html="true" title="<?php echo $MULTILANG_Ayuda; ?>" data-content="<?php echo $MULTILANG_FrmAccionDesCMD; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
