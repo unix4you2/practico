@@ -706,7 +706,7 @@ if ($PCO_Accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(39);
+					OcultarCampos(41);
 					// Muestra campos segun tipo de objeto
 					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,14,17,25,36,37");
 					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25,36,37");
@@ -723,7 +723,7 @@ if ($PCO_Accion=="editar_formulario")
 					if (tipo_objeto_activo=="objeto_canvas")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,30,31,36");
 					if (tipo_objeto_activo=="objeto_camara")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,31,36");
                     if (tipo_objeto_activo=="form_consulta")   VisualizarCampos("9,17,24,32,33,34,36");
-                    if (tipo_objeto_activo=="boton_comando")   VisualizarCampos("1,9,36,37,38,39");
+                    if (tipo_objeto_activo=="boton_comando")   VisualizarCampos("1,9,36,37,38,39,40,41");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -1445,6 +1445,43 @@ if ($PCO_Accion=="editar_formulario")
                                 </span>
                             </div>  
 						</div>
+
+
+						<div id='campo40' style="display:none;">
+                            <label for="tipo_accion"><?php echo $MULTILANG_FrmTipoAccion; ?></label>
+                            <div class="form-group input-group">
+                                <select id="tipo_accion" name="tipo_accion" class="form-control">
+                                    <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                                    <optgroup label="<?php echo $MULTILANG_FrmAccionT1; ?>">
+                                        <option value="interna_guardar"><?php echo $MULTILANG_FrmAccionGuardar; ?></option>
+                                        <option value="interna_actualizar"><?php echo $MULTILANG_FrmAccionActualizar; ?></option>
+                                        <option value="interna_eliminar"><?php echo $MULTILANG_FrmAccionEliminar; ?></option>
+                                        <option value="interna_escritorio"><?php echo $MULTILANG_FrmAccionRegresar; ?></option>
+                                        <option value="interna_cargar"><?php echo $MULTILANG_FrmAccionCargar; ?></option>
+                                        <option value="interna_limpiar"><?php echo $MULTILANG_FrmAccionLimpiar; ?></option>
+                                    </optgroup>
+                                    <optgroup label="<?php echo $MULTILANG_FrmAccionT2; ?>">
+                                        <option value="externa_formulario"><?php echo $MULTILANG_FrmAccionExterna; ?></option>
+                                        <option value="externa_javascript"><?php echo $MULTILANG_FrmAccionJS; ?></option>
+                                    </optgroup>
+                                </select>
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    <a href="#" title="<?php echo $MULTILANG_FrmDesAccion; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
+                            </div>
+						</div>
+
+
+						<div id='campo41' style="display:none;">
+                            <div class="form-group input-group">
+                                <input type="text" name="accion_usuario" class="form-control" placeholder="<?php echo $MULTILANG_FrmAccionCMD; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" data-placement="left" data-toggle="popover" data-html="true" title="<?php echo $MULTILANG_Ayuda; ?>" data-content="<?php echo $MULTILANG_FrmAccionDesCMD; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
+                            </div>
+						</div>
+
 
 					<?php
 						//Despues de agregar todos los parametros de campos, Si se detecta que es edicion de un campo se llama a la funcion de visualizacion de campos especificos

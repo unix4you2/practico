@@ -51,7 +51,7 @@ LogCambios="
 * Enhan: Agregada funcion JavaScript PCO_AgregarElementoDiv que permite agregar dinamicamente elementos HTML a un marco determinado.
 * Enhan: Informes DataTable tienen ahora soporte multiidioma
 * Enhan: El modo de depuracion muestra ahora el query generador al final de cada informe para el usuario admin
-* Enhan: **[Natalia Arroyave]** Mejora en el logo de la aplicación
+* Enhan: **[Natalia Arroyave]** Mejora en el logo de la aplicación. Geometrización y mejora de paleta.
 "
 
 ########################################################################
@@ -60,6 +60,8 @@ ScriptBasedatos="
 ALTER TABLE core_informe ADD COLUMN soporte_datatable char(1) DEFAULT 'N';
 ALTER TABLE core_formulario_objeto ADD COLUMN modo_inline int(1) DEFAULT 0;
 ALTER TABLE core_formulario_objeto ADD COLUMN imagen varchar(250) default '';
+ALTER TABLE core_formulario_objeto ADD COLUMN tipo_accion varchar(250) default '';
+ALTER TABLE core_formulario_objeto ADD COLUMN accion_usuario text;
 "
 
 ########################################################################

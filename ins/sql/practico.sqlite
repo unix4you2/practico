@@ -130,7 +130,9 @@ CREATE TABLE core_formulario_objeto (
   pestana_objeto text default '',
   personalizacion_tag text,
   modo_inline integer DEFAULT 0,
-  imagen text default ''
+  imagen text default '',
+  tipo_accion text default '',
+  accion_usuario text
 
 );
 

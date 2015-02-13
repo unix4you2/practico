@@ -131,6 +131,8 @@ CREATE TABLE core_formulario_objeto (
   personalizacion_tag text,
   modo_inline int(1) default '0',
   imagen varchar(250) default '',
+  tipo_accion varchar(250) default '',
+  accion_usuario text,
   PRIMARY KEY  (id)
 );
 

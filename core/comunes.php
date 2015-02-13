@@ -3045,11 +3045,35 @@ function selector_iconos_awesome()
 			$cadena_modo_inline='';
             if ($registro_campos["modo_inline"])
                 $cadena_modo_inline='display:inline;';
-            
+
+            //Define el tipo de boton de acuerdo al tipo de accion
+            if ($registro_campos["tipo_accion"]=="interna_guardar")
+                $comando_javascript="document.getElementById('datos').submit();";    
+            if ($registro_campos["tipo_accion"]=="interna_limpiar")
+                $comando_javascript="document.getElementById('datos').reset();";
+            if ($registro_campos["tipo_accion"]=="interna_escritorio")
+                $comando_javascript="document.core_ver_menu.submit();";
+            if ($registro_campos["tipo_accion"]=="interna_actualizar")
+                $comando_javascript="document.datos.PCO_Accion.value='actualizar_datos_formulario';document.datos.submit();";
+            if ($registro_campos["tipo_accion"]=="interna_eliminar")
+                $comando_javascript="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit();";
+            if ($registro_campos["tipo_accion"]=="interna_cargar")
+                {
+                    echo '<input type="hidden" name="objeto" value="'.$registro_campos["accion_usuario"].'">';
+                    $comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.submit();";
+                }
+            if ($registro_campos["tipo_accion"]=="externa_formulario")
+                $comando_javascript="document.datos.PCO_Accion.value='".$registro_campos["accion_usuario"]."';document.datos.submit();";
+            if ($registro_campos["tipo_accion"]=="externa_javascript")
+                $comando_javascript=$registro_campos["accion_usuario"];
+
+            //Genera la cadena del enlace
+            $cadena_javascript='href="javascript:'.@$comando_javascript.'"';
+
             //Abre el marco del control de datos style="display:inline;"
 			$salida.='<div style="'.$cadena_modo_inline.'" class="form-group input-group">';
             // Muestra el campo
-			$salida.='<a class="btn '.$registro_campos["personalizacion_tag"].'"><i class="'.$registro_campos["imagen"].'"></i> '.$registro_campos["titulo"].'</a>';
+			$salida.='<a class="btn '.$registro_campos["personalizacion_tag"].'" '.@$cadena_javascript.'><i class="'.$registro_campos["imagen"].'"></i> '.$registro_campos["titulo"].'</a>';
             //Cierra marco del control de datos
             $salida.= '</div>';
             
