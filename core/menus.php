@@ -123,7 +123,7 @@ function selector_objetos_menu()
 if ($PCO_Accion=="actualizar_menu")
 	{
 		// Actualiza los datos del item
-		ejecutar_sql_unaria("UPDATE ".$TablasCore."menu SET texto=?,peso=?,url=?,posible_clic=?,tipo_comando=?,comando=?,nivel_usuario=?,posible_arriba=?,posible_centro=?,posible_escritorio=?,seccion=?,imagen=? WHERE id=? ","$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$posible_clic$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$id");
+		ejecutar_sql_unaria("UPDATE ".$TablasCore."menu SET texto=?,peso=?,url=?,destino=?,tipo_comando=?,comando=?,nivel_usuario=?,posible_arriba=?,posible_centro=?,posible_escritorio=?,seccion=?,imagen=? WHERE id=? ","$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$id");
 		auditar("Actualiza menu item $texto c&oacute;digo $id");
 		echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 	}
@@ -252,15 +252,17 @@ if ($PCO_Accion=="detalles_menu")
                     <div class="col-md-6">
                             
                             [<?php echo $MULTILANG_MnuComandos; ?>]
-                            
-                            <label for="posible_clic"><?php echo $MULTILANG_MnuClic; ?>:</label>
-                            <select id="posible_clic" name="posible_clic" class="form-control" >
-                                <option value="0"><?php echo $MULTILANG_No; ?></option>
-                                <option value="1" <?php if ($registro["posible_clic"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
+
+                            <br><label for="destino"><?php echo $MULTILANG_MnuTgt; ?>:</label>
+                            <select id="destino" name="destino" class="form-control" >
+                                <option value="_self" <?php if ($registro["destino"]=="_self") echo 'selected'; ?> ><?php echo $MULTILANG_MnuTgtSelf; ?></option>
+                                <option value="_blank" <?php if ($registro["destino"]=="_blank") echo 'selected'; ?> ><?php echo $MULTILANG_MnuTgtBlank; ?></option>
+                                <option value="_parent" <?php if ($registro["destino"]=="_parent") echo 'selected'; ?> ><?php echo $MULTILANG_MnuTgtParent; ?></option>
+                                <option value="_top" <?php if ($registro["destino"]=="_top") echo 'selected'; ?> ><?php echo $MULTILANG_MnuTgtTop; ?></option>
                             </select>
-                            
+
                             <div class="form-group input-group">
-                                <input name="url" value="<?php echo $registro["url"]; ?>" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuURL; ?>">
+                                <input name="url" value="<?php echo $registro["url"]; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuURL; ?>">
                                 <span class="input-group-addon">
                                     <a href="#" title="<?php echo $MULTILANG_MnuTitURL; ?>: <?php echo $MULTILANG_MnuDesURL; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
                                 </span>
@@ -370,7 +372,7 @@ if ($PCO_Accion=="eliminar_menu")
 			if ($mensaje_error=="")
 				{
 					// Guarda los datos del comando o item de menu
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$posible_clic$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen");
 					auditar("Agrega en menu: $texto");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
@@ -507,14 +509,16 @@ if ($PCO_Accion=="administrar_menu")
                             
                             [<?php echo $MULTILANG_MnuComandos; ?>]
                             
-                            <label for="posible_clic"><?php echo $MULTILANG_MnuClic; ?>:</label>
-                            <select id="posible_clic" name="posible_clic" class="form-control" >
-                                <option value="0"><?php echo $MULTILANG_No; ?></option>
-                                <option value="1"><?php echo $MULTILANG_Si; ?></option>
+                            <br><label for="destino"><?php echo $MULTILANG_MnuTgt; ?>:</label>
+                            <select id="destino" name="destino" class="form-control" >
+                                <option value="_self"><?php echo $MULTILANG_MnuTgtSelf; ?></option>
+                                <option value="_blank"><?php echo $MULTILANG_MnuTgtBlank; ?></option>
+                                <option value="_parent"><?php echo $MULTILANG_MnuTgtParent; ?></option>
+                                <option value="_top"><?php echo $MULTILANG_MnuTgtTop; ?></option>
                             </select>
                             
                             <div class="form-group input-group">
-                                <input name="url"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuURL; ?>">
+                                <input name="url" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuURL; ?>">
                                 <span class="input-group-addon">
                                     <a href="#" title="<?php echo $MULTILANG_MnuTitURL; ?>: <?php echo $MULTILANG_MnuDesURL; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
                                 </span>
@@ -770,8 +774,13 @@ if ($PCO_Accion=="administrar_menu")
                             echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
                                  <input type="hidden" name="objeto" value="'.$registro["comando"].'"></form>';
                         }
+                    
                     // Imprime la imagen
-                    echo '<a title="'.$registro["texto"].'" href="javascript:document.desk_'.$registro["id"].'.submit();">';
+                    //Si tiene una URL trata la opcion como enlace estandar, sino como opcion de menu especial
+                    if ($registro["url"]!="")
+                        echo '<a title="'.$registro["texto"].'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
+                    else
+                        echo '<a title="'.$registro["texto"].'" href="javascript:document.desk_'.$registro["id"].'.submit();">';
                     echo '<button class="btn">
                         <i class="'.$registro["imagen"].' fa-3x fa-fw"></i><br>
                         <span class="btn-xs">'.$registro["texto"].'</span>
@@ -821,7 +830,11 @@ if ($PCO_Accion=="administrar_menu")
                                     echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
                                          <input type="hidden" name="objeto" value="'.$registro_opciones_acordeon["comando"].'"></form>';
                                 }
-                            echo '<a title="'.$registro_opciones_acordeon["texto"].'" href="javascript:document.acorde_'.$registro_opciones_acordeon["id"].'.submit();">';
+                            //Si tiene una URL trata la opcion como enlace estandar, sino como opcion de menu especial
+                            if ($registro_opciones_acordeon["url"]!="")
+                                echo '<a title="'.$registro_opciones_acordeon["texto"].'" href="'.$registro_opciones_acordeon["url"].'" target="'.$registro_opciones_acordeon["destino"].'">';
+                            else
+                                echo '<a title="'.$registro_opciones_acordeon["texto"].'" href="javascript:document.acorde_'.$registro_opciones_acordeon["id"].'.submit();">';
                             echo '<button type="button" class="btn btn-default btn-outline"><i class="'.$registro_opciones_acordeon["imagen"].' fa-fw"></i>
                                     <span class="btn-xs">'.$registro_opciones_acordeon["texto"].'</span>
                                     </button>';

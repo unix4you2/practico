@@ -199,6 +199,7 @@
 	$MULTILANG_UsuariosChat='Users that are offline at this moment will see all the messages when they login again to the system.';
     $MULTILANG_AdminArchivos='File manager';
     $MULTILANG_ErrorConnLDAP='An error ocurred during LDAP server connection. Please check your settings and try again.  Details:<br>';
+    $MULTILANG_ErrorRW='There is not rights to write the file!';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';
@@ -659,7 +660,7 @@
 	$MULTILANG_MnuClic='Possible to click?';
 	$MULTILANG_MnuURL='Static URL';
 	$MULTILANG_MnuTitURL='Bring to a URL or execute a javascript?';
-	$MULTILANG_MnuDesURL='Enter full URL or a command defined javascript javascript: command to be replaced within an anchor HREF generated around the object';
+	$MULTILANG_MnuDesURL='Enter full URL or a command defined javascript javascript: command to be replaced within an anchor HREF generated around the object. If you need to pass string parameters to javascript commands you could use single cuotes';
 	$MULTILANG_MnuTipo='Command type';
 	$MULTILANG_MnuInterno='Internal';
 	$MULTILANG_MnuPersonal='Personal';
@@ -679,6 +680,11 @@
 	$MULTILANG_MnuAdvElimina='IMPORTANT: Deleting this registry you could unlink some system options.\n'.$MULTILANG_Confirma;
 	$MULTILANG_MnuHlpComandoInf='Maybe you want to add to the command this srtring <b>:htm:Informes</b>  to say Practico <br>that puts all the data in Html format and with that CSS style sheet';
 	$MULTILANG_MnuHlpAwesome='You can use the same syntax used for menu icons';
+    $MULTILANG_MnuTgtBlank='New window or tab';
+    $MULTILANG_MnuTgtSelf='Same window or frame that it was clicked';
+    $MULTILANG_MnuTgtParent='Parent frame or window';
+    $MULTILANG_MnuTgtTop='Full body of the window';
+    $MULTILANG_MnuTgt='Target (Only options using an URL)';
 
 	//Objetos, seguridad y otros
 	$MULTILANG_ObjError='The type of object received in this command is unknown';

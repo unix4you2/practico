@@ -199,6 +199,7 @@
 	$MULTILANG_UsuariosChat='Aquellos usuarios desconectados en el momento recibiran los mensajes cuando ingresen nuevamente al sistema.';
     $MULTILANG_AdminArchivos='Administrador de archivos';
     $MULTILANG_ErrorConnLDAP='Ha ocurrido un error durante la conexion con el servidor de autenticacion LDAP. Verifique sus configuraciones e intente nuevamente.  Detalles:<br>';
+    $MULTILANG_ErrorRW='No se tienen permisos para escribir sobre el archivo!';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';
@@ -656,7 +657,7 @@
 	$MULTILANG_MnuClic='Posible hacer clic?';
 	$MULTILANG_MnuURL='URL est&aacute;tica';
 	$MULTILANG_MnuTitURL='Llevar a una URL o ejecutar un javascript?';
-	$MULTILANG_MnuDesURL='Ingrese una URL completa o un comando javascript definido por javascript:comando para ser reemplazadas dentro de un HREF de un ancla generada alrededor del objeto';
+	$MULTILANG_MnuDesURL='Ingrese una URL completa o un comando javascript definido por javascript:comando para ser reemplazadas dentro de un HREF de un ancla generada alrededor del objeto.  Si requiere parametros tipo cadena para sus comandos javascript utilice comillas simples para encerrarlos';
 	$MULTILANG_MnuTipo='Tipo de comando';
 	$MULTILANG_MnuInterno='Interno';
 	$MULTILANG_MnuPersonal='Personal';
@@ -676,6 +677,11 @@
 	$MULTILANG_MnuAdvElimina='IMPORTANTE:  Al eliminar el registro pueden quedar sin vincular algunas opciones del sistema.\n'.$MULTILANG_Confirma;
 	$MULTILANG_MnuHlpComandoInf='Es probable que para los tipo Informe quiera agregar al comando final un <b>:htm:Informes</b> para indicar a Practico<br>que debe entregar sus resultados en html y con esa hoja de estilos';
 	$MULTILANG_MnuHlpAwesome='Puede usar la misma notacion de los iconos de menu';
+    $MULTILANG_MnuTgtBlank='Nueva ventana o pesta&ntilde;a';
+    $MULTILANG_MnuTgtSelf='Misma ventana o marco actual';
+    $MULTILANG_MnuTgtParent='Ventana padre';
+    $MULTILANG_MnuTgtTop='Todo el cuerpo de la ventana actual';
+    $MULTILANG_MnuTgt='Destino (S&oacute;lo opciones con URL)';
 
 	//Objetos, seguridad y otros
 	$MULTILANG_ObjError='El tipo de objeto recibido en este comando es desconocido';

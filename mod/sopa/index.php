@@ -27,9 +27,7 @@
 
 		Section: Modulos complementarios
 	*/
-?>
 
-<?php
 	// Valida sesion activa de Practico
 	@session_start();
 	if (!isset($PCOSESS_SesionAbierta)) 

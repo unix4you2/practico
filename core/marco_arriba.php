@@ -377,8 +377,12 @@
                                                 echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
                                                      <input type="hidden" name="objeto" value="'.$registro["comando"].'"></form>';
                                             }
-										echo '<a href="javascript:document.top_'.$registro["id"].'.submit();">
-                                        <button class="btn-circle btn-info btn-xs">
+                                        //Si tiene una URL trata la opcion como enlace estandar, sino como opcion de menu especial
+                                        if ($registro["url"]!="")
+                                            echo '<a title="'.$registro["texto"].'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
+                                        else
+                                            echo '<a href="javascript:document.top_'.$registro["id"].'.submit();">';
+                                        echo '<button class="btn-circle btn-info btn-xs">
                                         <i class="'.$registro["imagen"].'"></i>
                                         </button> '.$registro["texto"].'</a>';
 									}

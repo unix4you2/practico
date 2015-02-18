@@ -21,6 +21,16 @@ ESTILOS ADICIONALES PARA BOOTSTRAP
 
 /*@import "../less/datepicker/datepicker.less";*/
 
+html, body, .pcoder_container {
+  height: 100%;
+}
+
+textarea.pcoder_form-control {
+  height: 100%;
+}
+
+
+
 *.icon-white {color: white}
 *.icon-red {color: red}
 *.icon-green {color: green}

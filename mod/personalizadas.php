@@ -32,12 +32,12 @@
 
 			Comentario:
 			Agregue en este archivo las funciones o acciones que desee vincular a menues especificos o realizacion de operaciones internas.
-			Utilice el condicional para diferenciar la accion recibida y ser asi ejecutada. Puede vincularlos mediante forms.*/
+			Utilice el condicional para diferenciar la accion recibida y ser asi ejecutada. Puede vincularlos mediante forms.
+
+            Por favor considere la construccion de un nuevo modulo antes que implementar rutinas sobre este archivo
+            Please consider to build a new module before to deploy rutines in this file
+            */
 		
-?>
-
-
-<?php
 
 if ($PCO_Accion=="Mi_accion_XYZ") 
 	{

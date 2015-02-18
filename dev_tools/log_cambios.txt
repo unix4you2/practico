@@ -45,6 +45,8 @@ LogCambios="
 * Added: Algunos controles de formulario pueden soportar ahora el modo de estilo inline durante su publicacion sobre el formulario
 * Added: Nuevos controles de botones de comando para formularios permiten agregar botones en medio del form y no sólo en su barra de estado
 * Added: Algunos controles de formulario podrán soportar imágenes derivadas de las librerías de iconos disponibles.
+* Added: Las opciones de menu ahora soportan targets diferentes y direcciones de URL extensas además de comandos JavaScript
+* Added: Inicio del editor de código en línea de Práctico. Módulo PCODER (Practico CODe EditoR)
 * Fixed: Mensaje de confirmación en cambio de perfil
 * Fixed: Reactivado el control tipo Canvas
 * Enhan: Se cambia correo de instalación predeterminado a uno genérico.
@@ -52,6 +54,8 @@ LogCambios="
 * Enhan: Informes DataTable tienen ahora soporte multiidioma
 * Enhan: El modo de depuracion muestra ahora el query generador al final de cada informe para el usuario admin
 * Enhan: **[Natalia Arroyave]** Mejora en el logo de la aplicación. Geometrización y mejora de paleta.
+
+Importante: Quienes hayan ejecutado actualizaciones previas de la misma version podrian ver errores de ejecución de SQL.  Esto es normal.
 "
 
 ########################################################################
@@ -62,6 +66,10 @@ ALTER TABLE core_formulario_objeto ADD COLUMN modo_inline int(1) DEFAULT 0;
 ALTER TABLE core_formulario_objeto ADD COLUMN imagen varchar(250) default '';
 ALTER TABLE core_formulario_objeto ADD COLUMN tipo_accion varchar(250) default '';
 ALTER TABLE core_formulario_objeto ADD COLUMN accion_usuario text;
+ALTER TABLE core_menu CHANGE COLUMN posible_clic destino VARCHAR(250);
+UPDATE core_menu SET destino='' WHERE destino='0';
+UPDATE core_menu SET destino='' WHERE destino='1';
+ALTER TABLE core_menu CHANGE COLUMN url url TEXT;
 "
 
 ########################################################################
