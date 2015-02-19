@@ -51,45 +51,77 @@
 		Lista de elementos < option > usados en el combo
 
 */
-	if ($PCO_Accion=="opciones_combo_box") 
-		{           
-            $PCO_MensajeError="";
-            $PCO_SalidaCombos="";
-            //Valida variables minimas para la consulta
-            if (@$origen_lista_tablas=="" || @$origen_lista_opciones=="" || @$origen_lista_valores=="")
-                {
-                    $PCO_MensajeError.="<option>[Error] Parametros de seleccion</option>";
-                    if (@$origen_lista_tablas=="") $PCO_MensajeError.="<option>[Causa] Falta origen_lista_tablas</option>";
-                    if (@$origen_lista_opciones=="") $PCO_MensajeError.="<option>[Causa] Falta origen_lista_opciones</option>";
-                    if (@$origen_lista_valores=="") $PCO_MensajeError.="<option>[Causa] Falta origen_lista_valores</option>";
-                }
+if ($PCO_Accion=="opciones_combo_box") 
+    {           
+        $PCO_MensajeError="";
+        $PCO_SalidaCombos="";
+        //Valida variables minimas para la consulta
+        if (@$origen_lista_tablas=="" || @$origen_lista_opciones=="" || @$origen_lista_valores=="")
+            {
+                $PCO_MensajeError.="<option>[Error] Parametros de seleccion</option>";
+                if (@$origen_lista_tablas=="") $PCO_MensajeError.="<option>[Causa] Falta origen_lista_tablas</option>";
+                if (@$origen_lista_opciones=="") $PCO_MensajeError.="<option>[Causa] Falta origen_lista_opciones</option>";
+                if (@$origen_lista_valores=="") $PCO_MensajeError.="<option>[Causa] Falta origen_lista_valores</option>";
+            }
 
-            //Pendiente proteger tablas o campos CORE
-            // ******************** //
+        //Pendiente proteger tablas o campos CORE
+        // ******************** //
 
-            //Si no ha obtenido mensajes de error inicia la consulta
-            if ($PCO_MensajeError=="")
-                {
-                    // Se buscan los registros para el combo
-                    $complemento_condicion_filtrado="";
-                    if (@$condicion_filtrado_listas!="")
-                        $complemento_condicion_filtrado=" AND ($condicion_filtrado_listas) ";
-                    $consulta_registros_combo=ejecutar_sql("SELECT $origen_lista_opciones as opcion, $origen_lista_valores as valor FROM $origen_lista_tablas WHERE 1 $complemento_condicion_filtrado ");
-                    while ($registro_opciones_combo = $consulta_registros_combo->fetch())
-                        {
-                            $PCO_SalidaCombos.=$PCO_Prefijo.$registro_opciones_combo["valor"].$PCO_Infijo.$registro_opciones_combo["opcion"].$PCO_Posfijo;
-                        }
-                }
+        //Si no ha obtenido mensajes de error inicia la consulta
+        if ($PCO_MensajeError=="")
+            {
+                // Se buscan los registros para el combo
+                $complemento_condicion_filtrado="";
+                if (@$condicion_filtrado_listas!="")
+                    $complemento_condicion_filtrado=" AND ($condicion_filtrado_listas) ";
+                $consulta_registros_combo=ejecutar_sql("SELECT $origen_lista_opciones as opcion, $origen_lista_valores as valor FROM $origen_lista_tablas WHERE 1 $complemento_condicion_filtrado ");
+                while ($registro_opciones_combo = $consulta_registros_combo->fetch())
+                    {
+                        $PCO_SalidaCombos.=$PCO_Prefijo.$registro_opciones_combo["valor"].$PCO_Infijo.$registro_opciones_combo["opcion"].$PCO_Posfijo;
+                    }
+            }
 
-//echo '<select class="selectpicker show-tick">';
+        //echo '<select class="selectpicker show-tick">';
+        //Retorna el resultado final
+        if ($PCO_MensajeError!="")
+            echo $PCO_MensajeError;
+        else
+            echo $PCO_SalidaCombos;
+        //echo "</select>";
+    }
 
-            //Retorna el resultado final
-            if ($PCO_MensajeError!="")
-                echo $PCO_MensajeError;
-            else
-                echo $PCO_SalidaCombos;
 
-//echo "</select>";
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: valor_campo_tabla
+	Hace una consulta a la base de datos sobre un campo y tabla especificos y retorna su valor.  Acepta condiciones de filtrado
 
-		}
+	Variables de entrada:
+
+        campo - Campo que se desea retornar
+        tabla - En donde se busca el valor
+        condicion - condicion de filtrado que debe cumplir el registro
+
+	Salida:
+		Valor del campo o vacio si no se encuentra nada
+    
+    Ejemplo de llamado:
+    index.php?PCO_Accion=valor_campo_tabla&campo=login&tabla=core_usuario&condicion=login%3d'admin'&Presentar_FullScreen=1
+
+*/
+if ($PCO_Accion=="valor_campo_tabla") 
+    {
+        if($condicion=="") $condicion="1=1";
+        $registro=ejecutar_sql("SELECT $campo FROM $tabla WHERE $condicion ")->fetch();
+        if ($registro[0]!="")
+            {
+                @ob_clean();
+                echo trim($registro[0]);
+            }
+        else
+            {
+                echo "";
+            }
+    }
 

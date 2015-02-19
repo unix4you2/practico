@@ -18,6 +18,7 @@ README.md
 CHANGELOG.md
 AUTHORS
 index.php
+core/ajax.php
 core/comunes.php
 core/formularios.php
 core/informes.php
@@ -29,6 +30,7 @@ core/usuarios.php
 img/favicon.ico
 img/pcoder.png
 inc/bootstrap/css/practico.css
+inc/bootstrap/js/practico.js
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 mod/pcoder/*
@@ -50,6 +52,8 @@ LogCambios="
 * Added: Algunos controles de formulario podrán soportar imágenes derivadas de las librerías de iconos disponibles.
 * Added: Las opciones de menu ahora soportan targets diferentes y direcciones de URL extensas además de comandos JavaScript
 * Added: Inicio del editor de código en línea de Práctico. Módulo PCODER (Practico CODe EditoR)
+* Added: Funcion JavaScript generica para obtener valores mediante AJAX: PCO_ObtenerContenidoAjax
+* Added: Funcion Ajax para devolver como WS valores de campos.  Pendiente ajustar restricciones de campos
 * Fixed: Mensaje de confirmación en cambio de perfil
 * Fixed: Reactivado el control tipo Canvas
 * Enhan: Se cambia correo de instalación predeterminado a uno genérico.

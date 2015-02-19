@@ -215,7 +215,7 @@
         include("core/actualizacion.php");
     if ($PCO_Accion=="administrar_monitoreo" || $PCO_Accion=="guardar_monitoreo" || $PCO_Accion=="eliminar_monitoreo" || $PCO_Accion=="ver_monitoreo")
         include("core/monitoreo.php");
-    if ($PCO_Accion=="opciones_combo_box")
+    if ($PCO_Accion=="valor_campo_tabla" || $PCO_Accion=="opciones_combo_box")
         include("core/ajax.php");
 
 

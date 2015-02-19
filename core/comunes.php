@@ -598,7 +598,7 @@ function completar_parametros($string,$data) {
 				{
 					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
 					if ($PCOSESS_LoginUsuario=='admin' && $ModoDepuracion)
-						$mensaje_final=$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.completar_parametros($query,$parametros);
+						$mensaje_final=$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.@completar_parametros($query,$parametros);
 					else
 						$mensaje_final='<b>'.$MULTILANG_Detalles.'</b>: '.$MULTILANG_ErrorSoloAdmin;
 					//Presenta el mensaje sobre el HTML y como Emergente JS
