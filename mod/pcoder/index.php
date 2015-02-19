@@ -48,12 +48,23 @@
     @require($PCODER_vistas.'vista.php');
     @require($PCODER_controladores.'controlador.php');
 
-    $PCODER_archivo = "core/configuracion.php";
+
+    $PCODER_archivo = "../testpcoder.php";
     $PCODER_partes_extension = explode(".","core/ajax.php");
     $PCODER_extension = $PCODER_partes_extension[count($PCODER_partes_extension)-1];
+    //Carga y Escapa el contenido del archivo
     $PCODERcontenido_archivo=@file_get_contents($PCODER_archivo);
+    $PCODERcontenido_archivo=@htmlspecialchars($PCODERcontenido_archivo);
+
+    //Cargar otras caracteristicas del archivo
+    $PCODER_TamanoElemento=@round(filesize($PCODER_archivo)/1024);
+    $PCODER_TipoElemento=filetype($PCODER_archivo);
+    $PCODER_FechaElemento=date("d F Y H:i:s", filemtime($PCODER_archivo));
 
 
+    //DOCS: http://stackoverflow.com/questions/15186558/loading-a-html-file-into-ace-editor-pre-tag
+    //DOCS: <pre id="editor"><INTE ? php echo htmlentities(file_get_contents($input_dir."abc.html")); ? ></pre>
+    //$PCODERcontenido_archivo=@htmlspecialchars(addslashes($PCODERcontenido_archivo));
 
 /* ################################################################## */
 /* ################################################################## */
@@ -64,59 +75,165 @@
     Entradas:
 
         Normalmente los parametros son: ?PCO_Accion=cargar_pcoder&Presentar_FullScreen=1&Precarga_EstilosBS=1
+        * Comando: javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCOMOD_CargarPcoder&Presentar_FullScreen=1&Precarga_EstilosBS=1','Pcoder','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=900, height=700');
 
 	Salida:
 		Archivo para edicion en pantalla
 */
-if ($PCO_Accion=="cargar_pcoder") 
+if ($PCO_Accion=="PCOMOD_CargarPcoder") 
 	{
 ?>
-<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<style type="text/css">
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: #BFBFBF;
+}
+</style>
 
+<body>
 
-    <div id="wrapper" class="container-fluid">  
+    <div class="row container-fluid">
+        <div class="col-lg-12 container-fluid">
+            <?php 
+                // Verifica que el archivo exista
+                $existencia_ok=1;
+                if (!file_exists($PCODER_archivo)) 
+                    {
+                        mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error.': '.$MULTILANG_ErrorExistencia.'. '.$MULTILANG_Cargando.'='.$PCODER_archivo, '', '', '', 'alert alert-danger alert-dismissible');
+                        $existencia_ok=0;
+                    }
 
-        <div id="page-wrapper container-fluid">
-            <div class="container-fluid">
-                <div class="row container-fluid">
-                    <div class="col-lg-12 container-fluid">
-
-                        <div class="form-group">
-                            <textarea name="javascript" data-editor="javascript" class="form-control container-fluid" style="width:100%; height:600px;"><?php echo $PCODERcontenido_archivo; ?></textarea>
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <div class="row container-fluid">
-                    <div class="col-lg-12 container-fluid">
-                        <?php 
-                            // Verifica permisos de escritura
-                            $permisos_ok=1;
-                            if (!is_writable($PCODER_archivo))
-                                {
-                                    $permisos_encontrados=substr(sprintf('%o', fileperms($PCODER_archivo)), -4);
-                                    mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error, $MULTILANG_ErrorRW.'. '.$MULTILANG_Estado.': '.$permisos_encontrados, '', '', 'alert alert-warning alert-dismissible');
-                                    $permisos_ok=0;
-                                }
-                        ?>
-                    </div>
-                </div>
-
-            </div>
+                // Verifica permisos de escritura
+                $permisos_ok=1;
+                if (!is_writable($PCODER_archivo) && $existencia_ok)
+                    {
+                        $permisos_encontrados=@substr(sprintf('%o', fileperms($PCODER_archivo)), -4);
+                        mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error.': '.$MULTILANG_ErrorRW.'. '.$MULTILANG_Estado.'='.$permisos_encontrados, '', '', '', 'alert alert-warning alert-dismissible');
+                        $permisos_ok=0;
+                    }
+            ?>
         </div>
     </div>
+
+<nav class="navbar navbar-default  navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href=""><img src="img/pcoder.png"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse btn-xs" id="barra_superior">
+      <ul class="nav navbar-nav">
+        <li class="btn-primary">
+            &nbsp;<?php echo $MULTILANG_Nombre; ?>: <?php echo $PCODER_archivo; ?>
+            <span class="badge"><?php echo $PCODER_TamanoElemento; ?> Kb</span>
+            &nbsp;
+        </li>
+      </ul>
+      
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="row">
+
+
+    <div class="row container-full">
+        <div class="col-lg-12 container-full">
+
+            <div class="form-group">
+                <textarea name="javascript" data-editor="javascript" class="form-control container-fluid" style="width:100%; height:600px;"><?php echo $PCODERcontenido_archivo; ?></textarea>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
 
 
     <!-- jQuery -->
 	<script type="text/javascript" src="inc/jquery/jquery-2.1.0.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="inc/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- JavaScript Personalizado del tema -->
-    <script src="inc/bootstrap/js/sb-admin-2.js"></script>
-    <script src="inc/bootstrap/js/practico.js"></script>
 
     <script language="JavaScript">
         //Carga los tooltips programados en la hoja.  Por defecto todos los elementos con data-toggle=tootip

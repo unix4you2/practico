@@ -69,8 +69,15 @@
     <link href="inc/bootstrap/css/plugins/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- CSS Personalizado (Plantilla y Practico) -->
-    <link href="inc/bootstrap/css/sb-admin-2.css" rel="stylesheet">
-    <link href="inc/bootstrap/css/practico.css" rel="stylesheet">
+    <?php 
+        //Evita el cargue si se trata de una opcion especifica
+        if ($PCO_Accion!="PCOMOD_CargarPcoder") {
+    ?>
+        <link href="inc/bootstrap/css/sb-admin-2.css" rel="stylesheet">
+        <link href="inc/bootstrap/css/practico.css" rel="stylesheet">
+    <?php 
+        }
+    ?>
 
     <!-- Custom Fonts -->
     <link href="inc/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">

@@ -199,7 +199,8 @@
 	$MULTILANG_UsuariosChat='Users that are offline at this moment will see all the messages when they login again to the system.';
     $MULTILANG_AdminArchivos='File manager';
     $MULTILANG_ErrorConnLDAP='An error ocurred during LDAP server connection. Please check your settings and try again.  Details:<br>';
-    $MULTILANG_ErrorRW='There is not rights to write the file!';
+    $MULTILANG_ErrorRW='There is not rights to write the file! Any change to its content could be lost';
+    $MULTILANG_ErrorExistencia='The filename you asked for edittion doesnt exists!';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';

@@ -27,8 +27,11 @@ core/marco_arriba_bs.php
 core/menus.php
 core/usuarios.php
 img/favicon.ico
+img/pcoder.png
+inc/bootstrap/css/practico.css
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
+mod/pcoder/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
