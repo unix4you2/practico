@@ -52,6 +52,19 @@
     $PCODER_archivo = "../testpcoder.php";
     PCODER_cargar_archivo($PCODER_archivo);
 
+    $PCODER_Mensajes=0;
+    // Verifica que el archivo exista
+    $existencia_ok=1;
+    if (!file_exists($PCODER_archivo)) { $existencia_ok=0; $PCODER_Mensajes=1; } 
+    
+    // Verifica permisos de escritura
+    $permisos_ok=1;
+    $permisos_encontrados=@substr(sprintf('%o', fileperms($PCODER_archivo)), -4);
+    if (!is_writable($PCODER_archivo) && $existencia_ok) { $permisos_ok=0; $PCODER_Mensajes=1; } 
+    
+    // Verifica si existe el directorio para el editor ACE
+    $editor_ok=1;
+    if (@!file_exists("inc/ace")) { $editor_ok=0; $PCODER_Mensajes=1; } 
 
 /* ################################################################## */
 /* ################################################################## */
@@ -74,78 +87,28 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
     html, body {
         margin: 0;
         padding: 0;
-        height: 100%;
-        min-height: 100%;
+        /*height: 100%;*/
+        /*min-height: 100%;*/
         width: 100%;
-        background: #BFBFBF;  /*002a36*/
+        background: #888888;  /* 002a36 | BFBFBF | 888888 */
         overflow-x: hidden;
         overflow-y: hidden;
     }
+    #marco_editor_codigo { 
+        margin-top:33px;
+    }
     #editor_codigo { 
         width: 100%; 
-        height: 600px;
-        /*height: 100%;*/
-        min-height: 100%;
+        height: 600px;  /*Define el tamano segun resolucion*/
     }
 </style>
 <body>
 
 
-
-
-
-
-<div class="row" style="height: 100%; min-height: 100%;">
-    <div class="row container-full" style="height: 100%; min-height: 100%;">
-        <div class="col-lg-12 container-full" style="height: 100%; min-height: 100%;">
-            <div class="form-group" style="height: 100%; min-height: 100%;">
-                
-
-    <div class="row container-fluid">
-        <div class="col-lg-12 container-fluid">
-            <?php 
-                // Verifica que el archivo exista
-                $existencia_ok=1;
-                if (!file_exists($PCODER_archivo)) 
-                    {
-                        mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error.': '.$MULTILANG_ErrorExistencia.'. '.$MULTILANG_Cargando.'='.$PCODER_archivo, '', '', '', 'alert alert-danger alert-dismissible');
-                        $existencia_ok=0;
-                    }
-
-                // Verifica permisos de escritura
-                $permisos_ok=1;
-                if (!is_writable($PCODER_archivo) && $existencia_ok)
-                    {
-                        $permisos_encontrados=@substr(sprintf('%o', fileperms($PCODER_archivo)), -4);
-                        mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error.': '.$MULTILANG_ErrorRW.'. '.$MULTILANG_Estado.'='.$permisos_encontrados, '', '', '', 'alert alert-warning alert-dismissible');
-                        $permisos_ok=0;
-                    }
-
-                // Verifica si existe el directorio para el editor ACE
-                $editor_ok=1;
-                if (@!file_exists("inc/ace"))
-                    {
-                        mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error.': '.$MULTILANG_ErrorNoACE.': '.$PCODER_archivo, '', '', '', 'alert alert-danger alert-dismissible');
-                        $editor_ok=0;
-                        die();
-                    }
-            ?>
-        </div>
-    </div>
-
-
-
-
-<nav class="navbar navbar-default  navbar-inverse">
+<nav id="barra_superior" class="navbar navbar-default navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
       <a class="navbar-brand" href=""><img src="img/pcoder.png"></a>
     </div>
 
@@ -184,20 +147,45 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-                
+
+
+<div class="row">
+<?php 
+    if ($PCODER_Mensajes==1) echo '<br><br>';
+    //Presenta mensajes de error o informacion
+    if ($existencia_ok==0)
+        mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error.': '.$MULTILANG_ErrorExistencia.'. '.$MULTILANG_Cargando.'='.$PCODER_archivo, '', '', '', 'alert alert-danger alert-dismissible');
+    if ($permisos_ok==0)
+        mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error.': '.$MULTILANG_ErrorRW.'. '.$MULTILANG_Estado.'='.$permisos_encontrados, '', '', '', 'alert alert-warning alert-dismissible');
+    if ($editor_ok==0)
+        {
+            mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error.': '.$MULTILANG_ErrorNoACE.': '.$PCODER_archivo, '', '', '', 'alert alert-danger alert-dismissible');
+            //die();
+        }
+?>
+</div>
+
+
+<div id="marco_editor_codigo" class="row">
+    <div class="row container-full">
+        <div class="col-lg-12 container-full">
+            <div class="form-group">
                 <!-- Dispone el control de area de texto y el div donde se empotrara el editor -->
                 <textarea id="area_texto" name="area_texto" style="visibility:hidden; display:none;"><?php echo $PCODERcontenido_archivo; ?></textarea>
-                <div id="editor_codigo" class="form-control container-fluid"></div>
+                <div id="editor_codigo"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-
-<nav class="navbar navbar-default nav-inverse">
+<nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav text-inverse">
 
         <li class="btn-xs">
             <label for="tamano_fuente">Tamano Fuente</label>
@@ -262,7 +250,13 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+        <a class="btn btn-xs" onclick="">
+            <i class="fa fa-plus-square fa-fw"></i> Aumentar 
+        </a>
+        <br>
+        <a class="btn btn-xs">
+            <i class="fa fa-minus-square fa-fw"></i> Disminuir 
+        </a>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -271,10 +265,8 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
 
 
-            </div>
-        </div>
-    </div>
-</div>
+
+
 
 
 
@@ -298,8 +290,23 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
     </script>
 
     <script src="inc/ace/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-    
-    <script>
+
+
+<script type="text/javascript">
+
+        function RedimensionarEditor()
+            {
+                var alto_pantalla=$(document).height();
+                alto_editor=alto_pantalla-200;
+
+
+
+
+
+
+
+                document.getElementById("editor_codigo").style.height=alto_editor+"px";
+            }
         function CambiarFuenteEditor(tamano)
             {
                 //Cambia la fuente del editor al tamano recibido
@@ -334,7 +341,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
         // Inicia el editor de codigo con las opciones predeterminadas
         CambiarFuenteEditor("14px");
-        CambiarTemaEditor("ace/theme/ambiance");  //twilight|eclipse|ambiance|ETC
+        CambiarTemaEditor("ace/theme/tomorrow_night");  //tomorrow_night|twilight|eclipse|ambiance|ETC
         CambiarModoEditor("ace/mode/<?php echo $PCODER_ModoEditor; ?>");
         CaracteresInvisiblesEditor(0);
         editor.clearSelection();
@@ -343,6 +350,8 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
         editor.getSession().on('change', function(){
           document.getElementById("area_texto").value=editor.getSession().getValue();
         });
+        
+        RedimensionarEditor();
     </script>
 
     <?php
