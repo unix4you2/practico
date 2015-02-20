@@ -201,6 +201,7 @@
     $MULTILANG_ErrorConnLDAP='An error ocurred during LDAP server connection. Please check your settings and try again.  Details:<br>';
     $MULTILANG_ErrorRW='There is not rights to write the file! Any change to its content could be lost';
     $MULTILANG_ErrorExistencia='The filename you asked for edittion doesnt exists!';
+    $MULTILANG_ErrorNoACE='ACE module was not found trying to edit file';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';

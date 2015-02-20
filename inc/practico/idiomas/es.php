@@ -201,6 +201,7 @@
     $MULTILANG_ErrorConnLDAP='Ha ocurrido un error durante la conexion con el servidor de autenticacion LDAP. Verifique sus configuraciones e intente nuevamente.  Detalles:<br>';
     $MULTILANG_ErrorRW='No se tienen permisos para escribir sobre el archivo! Cualquier cambio realizado podr&iacute;a perderse';
     $MULTILANG_ErrorExistencia='El archivo indicado para edicion no existe!';
+    $MULTILANG_ErrorNoACE='No se encuentra el modulo ACE para edici&oacute;n del archivo';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';

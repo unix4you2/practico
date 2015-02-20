@@ -48,34 +48,21 @@
     @require($PCODER_vistas.'vista.php');
     @require($PCODER_controladores.'controlador.php');
 
-
+    //Carga el archivo recibido
     $PCODER_archivo = "../testpcoder.php";
-    $PCODER_partes_extension = explode(".","core/ajax.php");
-    $PCODER_extension = $PCODER_partes_extension[count($PCODER_partes_extension)-1];
-    //Carga y Escapa el contenido del archivo
-    $PCODERcontenido_archivo=@file_get_contents($PCODER_archivo);
-    $PCODERcontenido_archivo=@htmlspecialchars($PCODERcontenido_archivo);
+    PCODER_cargar_archivo($PCODER_archivo);
 
-    //Cargar otras caracteristicas del archivo
-    $PCODER_TamanoElemento=@round(filesize($PCODER_archivo)/1024);
-    $PCODER_TipoElemento=filetype($PCODER_archivo);
-    $PCODER_FechaElemento=date("d F Y H:i:s", filemtime($PCODER_archivo));
-
-
-    //DOCS: http://stackoverflow.com/questions/15186558/loading-a-html-file-into-ace-editor-pre-tag
-    //DOCS: <pre id="editor"><INTE ? php echo htmlentities(file_get_contents($input_dir."abc.html")); ? ></pre>
-    //$PCODERcontenido_archivo=@htmlspecialchars(addslashes($PCODERcontenido_archivo));
 
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: cargar_pcoder
-	Abre el Practico Coder y carga un archivo sobre el para su edicion
+	Function: PCOMOD_CargarPcoder
+	Abre el Practico Code Editor y carga un archivo sobre el para su edicion
 
     Entradas:
 
         Normalmente los parametros son: ?PCO_Accion=cargar_pcoder&Presentar_FullScreen=1&Precarga_EstilosBS=1
-        * Comando: javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCOMOD_CargarPcoder&Presentar_FullScreen=1&Precarga_EstilosBS=1','Pcoder','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=900, height=700');
+        * Comando: javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCOMOD_CargarPcoder&Presentar_FullScreen=1&Precarga_EstilosBS=1','Pcoder','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');
 
 	Salida:
 		Archivo para edicion en pantalla
@@ -84,16 +71,35 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 	{
 ?>
 <style type="text/css">
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    background: #BFBFBF;
-}
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        min-height: 100%;
+        width: 100%;
+        background: #BFBFBF;  /*002a36*/
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+    #editor_codigo { 
+        width: 100%; 
+        height: 600px;
+        /*height: 100%;*/
+        min-height: 100%;
+    }
 </style>
-
 <body>
+
+
+
+
+
+
+<div class="row" style="height: 100%; min-height: 100%;">
+    <div class="row container-full" style="height: 100%; min-height: 100%;">
+        <div class="col-lg-12 container-full" style="height: 100%; min-height: 100%;">
+            <div class="form-group" style="height: 100%; min-height: 100%;">
+                
 
     <div class="row container-fluid">
         <div class="col-lg-12 container-fluid">
@@ -114,9 +120,21 @@ html, body {
                         mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error.': '.$MULTILANG_ErrorRW.'. '.$MULTILANG_Estado.'='.$permisos_encontrados, '', '', '', 'alert alert-warning alert-dismissible');
                         $permisos_ok=0;
                     }
+
+                // Verifica si existe el directorio para el editor ACE
+                $editor_ok=1;
+                if (@!file_exists("inc/ace"))
+                    {
+                        mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error.': '.$MULTILANG_ErrorNoACE.': '.$PCODER_archivo, '', '', '', 'alert alert-danger alert-dismissible');
+                        $editor_ok=0;
+                        die();
+                    }
             ?>
         </div>
     </div>
+
+
+
 
 <nav class="navbar navbar-default  navbar-inverse">
   <div class="container-fluid">
@@ -166,67 +184,97 @@ html, body {
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
-<div class="row">
-
-
-    <div class="row container-full">
-        <div class="col-lg-12 container-full">
-
-            <div class="form-group">
-                <textarea name="javascript" data-editor="javascript" class="form-control container-fluid" style="width:100%; height:600px;"><?php echo $PCODERcontenido_archivo; ?></textarea>
-            </div>
-
-        </div>
-    </div>
-</div>
+                
+                <!-- Dispone el control de area de texto y el div donde se empotrara el editor -->
+                <textarea id="area_texto" name="area_texto" style="visibility:hidden; display:none;"><?php echo $PCODERcontenido_archivo; ?></textarea>
+                <div id="editor_codigo" class="form-control container-fluid"></div>
 
 
-<nav class="navbar navbar-default">
+
+<nav class="navbar navbar-default nav-inverse">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
+
+        <li class="btn-xs">
+            <label for="tamano_fuente">Tamano Fuente</label>
+            <select id="tamano_fuente" size="1" class="form-control btn-xs" onchange="CambiarFuenteEditor(this.value)">
+              <option value="10px">10px</option>
+              <option value="11px">11px</option>
+              <option value="12px">12px</option>
+              <option value="13px">13px</option>
+              <option value="14px" selected="selected">14px</option>
+              <option value="16px">16px</option>
+              <option value="18px">18px</option>
+              <option value="20px">20px</option>
+              <option value="24px">24px</option>
+            </select>
         </li>
+
+        <li class="btn-xs">
+            <label for="tema_grafico">Apariencia</label>
+            <select id="tema_grafico" size="1" class="form-control btn-xs" onchange="CambiarTemaEditor(this.value)">
+              <optgroup label="Brillantes / Bright">
+                  <?php
+                    //Presenta los temas claros disponibles
+                    for ($i=0;$i<count($PCODER_TemasBrillantes);$i++)
+                        echo '<option value="ace/theme/'.$PCODER_TemasBrillantes[$i]["Valor"].'">'.$PCODER_TemasBrillantes[$i]["Nombre"].'</option>';
+                  ?>
+              </optgroup>
+              <optgroup label="Oscuros / Dark">
+                  <?php
+                    //Presenta los temas claros disponibles
+                    for ($i=0;$i<count($PCODER_TemasOscuros);$i++)
+                        echo '<option value="ace/theme/'.$PCODER_TemasOscuros[$i]["Valor"].'">'.$PCODER_TemasOscuros[$i]["Nombre"].'</option>';
+                  ?>
+              </optgroup>
+            </select>
+        </li>
+
+        <li class="btn-xs">
+            <label for="modo_archivo">Lenguaje</label>
+            <select id="modo_archivo" size="1" class="form-control btn-xs" onchange="CambiarModoEditor(this.value)">
+                  <?php
+                    //Presenta los temas claros disponibles
+                    for ($i=0;$i<count($PCODER_Modos);$i++)
+                        {
+                            //Determina si el lenguaje o modo de archivo actual es la opcion a desplegar
+                            $modo_seleccion='';
+                            if($PCODER_Modos[$i]["Nombre"]==$PCODER_ModoEditor)
+                                $modo_seleccion='SELECTED';
+                            //PResenta la opcion
+                            echo '<option value="ace/mode/'.$PCODER_Modos[$i]["Nombre"].'" '.$modo_seleccion.' >'.$PCODER_Modos[$i]["Nombre"].'</option>';
+                        }
+                  ?>
+            </select>
+        </li>
+
+        <li class="btn-xs">
+            <label for="modo_invisibles">Ver caracteres invisibles</label>
+            <select id="modo_invisibles" size="1" class="form-control btn-xs" onchange="CaracteresInvisiblesEditor(this.value)">
+                <option value="0"><?php echo $MULTILANG_No; ?></option>
+                <option value="1"><?php echo $MULTILANG_Si; ?></option>
+            </select>
+        </li>
+
       </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -249,49 +297,53 @@ html, body {
         })
     </script>
 
-    <?php
-        // Si existe el directorio para el editor ACE lo incluye
-        if (@file_exists("inc/ace"))
+    <script src="inc/ace/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script>
+        function CambiarFuenteEditor(tamano)
             {
-    ?>
-            <script src="inc/ace/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-            
-            <script>
-                /*
-                // Habilita el editor ACE para los textareas con el atributo data-editor
-                $(function () {
-                    $('textarea[data-editor]').each(function () {
-                        var textarea = $(this);
+                //Cambia la fuente del editor al tamano recibido
+                editor.setFontSize(tamano);
+            }
+        function CambiarTemaEditor(tema)
+            {
+                //Cambia la apariencia grafica del editor
+                editor.setTheme(tema);
+            }
+        function CambiarModoEditor(modo)
+            {
+                var ModoFiltrado = modo.replace(/_/g, " ");
+                ModoFiltrado = ModoFiltrado.toLowerCase();
+                //Cambia el modo de sintaxis y errores resaltado por el editor
+                editor.getSession().setMode(ModoFiltrado);
+            }
+        function CaracteresInvisiblesEditor(estado)
+            {
+                //Cambia el modo del editor para mostrar (true) u ocultar (false) los caracteres invisibles
+                if (estado==0)
+                    editor.setShowInvisibles(false);
+                else
+                    editor.setShowInvisibles(true);
+            }
 
-                        var mode = textarea.data('editor');
+        // Crea el editor
+        editor = ace.edit("editor_codigo");
+        
+        //Actualiza el editor con el valor cargado inicialmente en el textarea
+        editor.setValue(document.getElementById("area_texto").value);
 
-                        var editDiv = $('<div>', {
-                            position: 'absolute',
-                            width: textarea.width(),
-                            height: textarea.height(),
-                            'class': textarea.attr('class')
-                        }).insertBefore(textarea);
-
-                        textarea.css('visibility', 'hidden');
-                        textarea.css('display', 'none');
-
-                        var editor = ace.edit(editDiv[0]);
-                        //editor.renderer.setShowGutter(false); //Ocultar numero de lineas, ayudas, opciones de colapsar, etc
-                        editor.getSession().setValue(textarea.val());
-                        editor.getSession().setMode("ace/mode/" + mode);
-                        editor.setTheme("ace/theme/eclipse"); //Establece el tema a utilizar twilight|eclipse
-
-                        //En cada evento de cambio actualiza el textarea
-                        editor.getSession().on('change', function(){
-                          textarea.val(editor.getSession().getValue());
-                        });
-                    });
-                });
-                */
-            </script>
-    <?php        
-            } // Fin Si existe ACE
-    ?>
+        // Inicia el editor de codigo con las opciones predeterminadas
+        CambiarFuenteEditor("14px");
+        CambiarTemaEditor("ace/theme/ambiance");  //twilight|eclipse|ambiance|ETC
+        CambiarModoEditor("ace/mode/<?php echo $PCODER_ModoEditor; ?>");
+        CaracteresInvisiblesEditor(0);
+        editor.clearSelection();
+        
+        //En cada evento de cambio actualiza el textarea
+        editor.getSession().on('change', function(){
+          document.getElementById("area_texto").value=editor.getSession().getValue();
+        });
+    </script>
 
     <?php
         // Estadisticas de uso anonimo con GABeacon
