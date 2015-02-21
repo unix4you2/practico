@@ -30,11 +30,15 @@
 function PCODER_cargar_archivo($PCODER_archivo)
     {
         global $PCODER_extension,$PCODERcontenido_archivo,$PCODER_TamanoElemento,$PCODER_TipoElemento,$PCODER_FechaElemento;
-        global $PCODER_Modos,$PCODER_ModoEditor;
+        global $PCODER_Modos,$PCODER_ModoEditor,$PCODER_NombreArchivo,$PCODER_TokenEdicion;
         
         //Obtiene la extension del archivo
         $PCODER_partes_extension = explode(".",$PCODER_archivo);
         $PCODER_extension = $PCODER_partes_extension[count($PCODER_partes_extension)-1];
+
+        //Obtiene el nombre del archivo para el titulo de ventana
+        $PCODER_PartesNombreArchivo=explode(DIRECTORY_SEPARATOR,$PCODER_archivo);
+        $PCODER_NombreArchivo = $PCODER_PartesNombreArchivo[count($PCODER_PartesNombreArchivo)-1];
 
         //Identifica el tipo de documento a ser aplicado segun la extension del archivo
         $PCODER_ModoEditor='';
@@ -45,16 +49,29 @@ function PCODER_cargar_archivo($PCODER_archivo)
             }
 
         //Carga y Escapa el contenido del archivo
-        $PCODERcontenido_archivo=@file_get_contents($PCODER_archivo);
-        $PCODERcontenido_archivo=@htmlspecialchars($PCODERcontenido_archivo);
+        $PCODERcontenido_original_archivo=@file_get_contents($PCODER_archivo);
+        $PCODERcontenido_archivo=@htmlspecialchars($PCODERcontenido_original_archivo);
 
         //Cargar otras caracteristicas del archivo
         $PCODER_TamanoElemento=@round(filesize($PCODER_archivo)/1024);
-        $PCODER_TipoElemento=filetype($PCODER_archivo);
-        $PCODER_FechaElemento=date("d F Y H:i:s", filemtime($PCODER_archivo));
+        $PCODER_TipoElemento=@filetype($PCODER_archivo);
+        $PCODER_FechaElemento=@date("d F Y H:i:s", @filemtime($PCODER_archivo));
 
+        //Define un Token con el antes y despues
+        $PCODER_TokenEdicion=md5($PCODER_archivo.$PCODER_TamanoElemento.$PCODER_FechaElemento.$PCODERcontenido_original_archivo);
 
         //DOCS: http://stackoverflow.com/questions/15186558/loading-a-html-file-into-ace-editor-pre-tag
         //DOCS: <pre id="editor"><INTE ? php echo htmlentities(file_get_contents($input_dir."abc.html")); ? ></pre>
         //$PCODERcontenido_archivo=@htmlspecialchars(addslashes($PCODERcontenido_archivo));
+    }
+
+
+
+function PCODER_guardar_archivo($PCODER_archivo,$PCODER_contenido_archivo)
+    {
+
+
+
+
+
     }

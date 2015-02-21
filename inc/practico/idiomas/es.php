@@ -103,6 +103,7 @@
 	$MULTILANG_Informes='Informes';
 	$MULTILANG_Ingresar='Ingresar';
 	$MULTILANG_Instante='Instante';
+    $MULTILANG_Ir='Ir';
 	$MULTILANG_IrEscritorio='Ir a mi escritorio';
 	$MULTILANG_LlavePaso='Llave de paso';
 	$MULTILANG_Maquina='Maquina';
@@ -133,6 +134,7 @@
 	$MULTILANG_Registrarme='Registrarme';
     $MULTILANG_Regresar='Regresar';
     $MULTILANG_Resultados='Resultados';
+    $MULTILANG_SaltarLinea='Saltar a l&iacute;nea';
     $MULTILANG_Si='Si';
 	$MULTILANG_Siguiente='Siguiente';
     $MULTILANG_Servidor='Servidor';

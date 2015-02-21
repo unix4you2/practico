@@ -48,8 +48,9 @@
     @require($PCODER_vistas.'vista.php');
     @require($PCODER_controladores.'controlador.php');
 
-    //Carga el archivo recibido
-    $PCODER_archivo = "../testpcoder.php";
+    //Carga el archivo recibido, si no recibe nada carga un demo
+    if (@$PCODER_archivo=="")
+        $PCODER_archivo = "mod/pcoder/demo/archivo_demo.php";
     PCODER_cargar_archivo($PCODER_archivo);
 
     $PCODER_Mensajes=0;
@@ -65,6 +66,24 @@
     // Verifica si existe el directorio para el editor ACE
     $editor_ok=1;
     if (@!file_exists("inc/ace")) { $editor_ok=0; $PCODER_Mensajes=1; } 
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCOMOD_GuardarArchivo
+	Almacena un archivo previamente abierto con el PCODER
+
+	Salida:
+		Archivo para edicion en pantalla
+*/
+if ($PCO_Accion=="PCOMOD_GuardarArchivo") 
+	{
+        
+
+	}
+
 
 /* ################################################################## */
 /* ################################################################## */
@@ -95,7 +114,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
         overflow-y: hidden;
     }
     #marco_editor_codigo { 
-        margin-top:33px;
+        margin-top:34px;
     }
     #editor_codigo { 
         width: 100%; 
@@ -104,50 +123,34 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 </style>
 <body>
 
+<div id="contenedor_principal">
 
-<nav id="barra_superior" class="navbar navbar-default navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <a class="navbar-brand" href=""><img src="img/pcoder.png"></a>
-    </div>
+    <nav id="barra_superior" class="navbar navbar-default navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse btn-xs" id="barra_superior">
-      <ul class="nav navbar-nav">
-        <li class="btn-primary">
-            &nbsp;<?php echo $MULTILANG_Nombre; ?>: <?php echo $PCODER_archivo; ?>
-            <span class="badge"><?php echo $PCODER_TamanoElemento; ?> Kb</span>
-            &nbsp;
-        </li>
-      </ul>
-      
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+            <!-- LOGO PCODER -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href=""><img src="img/pcoder.png"></a>
+            </div>
 
+            <!-- BARRA DE HERRAMIENTAS --> 
+            <div class="navbar-form navbar-left">
+                <a class="btn btn-warning btn-xs" OnClick="Guardar();"><i class="fa fa-save fa-fw"></i></a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-default btn-xs" OnClick="Deshacer();"><i class="fa fa-undo"></i></a>
+                <a class="btn btn-default btn-xs" OnClick="Rehacer();"><i class="fa fa-repeat"></i></a>
+            </div>
+
+            <!-- INFORMACION DEL ARCHIVO -->
+            <ul class="nav navbar-nav navbar-form navbar-right">
+                <li class="btn-default btn-xs btn-info">
+                    &nbsp;<?php echo $MULTILANG_Tipo; ?> <span class="badge"><?php echo $PCODER_TipoElemento; ?></span>&nbsp;<br>
+                    &nbsp;<?php echo $PCODER_FechaElemento; ?> <span class="badge"><?php echo $PCODER_TamanoElemento; ?> Kb</span>&nbsp;<br>
+                </li>
+            </ul>
+
+        </div><!-- /.container-fluid -->
+    </nav>
 
 <div class="row">
 <?php 
@@ -171,7 +174,9 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
         <div class="col-lg-12 container-full">
             <div class="form-group">
                 <!-- Dispone el control de area de texto y el div donde se empotrara el editor -->
+                
                 <textarea id="area_texto" name="area_texto" style="visibility:hidden; display:none;"><?php echo $PCODERcontenido_archivo; ?></textarea>
+                <input name="PCODER_TokenEdicion" type="hidden" value="<?php echo $PCODER_TokenEdicion; ?>">
                 <div id="editor_codigo"></div>
             </div>
         </div>
@@ -179,7 +184,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 </div>
 
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
+<nav id="barra_inferior" class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
 
@@ -204,7 +209,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
         <li class="btn-xs">
             <label for="tema_grafico">Apariencia</label>
-            <select id="tema_grafico" size="1" class="form-control btn-xs" onchange="CambiarTemaEditor(this.value)">
+            <select id="tema_grafico" size="1" class="form-control btn-xs btn-primary" onchange="CambiarTemaEditor(this.value)">
               <optgroup label="Brillantes / Bright">
                   <?php
                     //Presenta los temas claros disponibles
@@ -224,7 +229,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
         <li class="btn-xs">
             <label for="modo_archivo">Lenguaje</label>
-            <select id="modo_archivo" size="1" class="form-control btn-xs" onchange="CambiarModoEditor(this.value)">
+            <select id="modo_archivo" size="1" class="form-control btn-xs btn-info" onchange="CambiarModoEditor(this.value)">
                   <?php
                     //Presenta los temas claros disponibles
                     for ($i=0;$i<count($PCODER_Modos);$i++)
@@ -249,19 +254,28 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
         </li>
 
       </ul>
+
+
+
+
       <ul class="nav navbar-nav navbar-right">
-        <a class="btn btn-xs" onclick="">
-            <i class="fa fa-plus-square fa-fw"></i> Aumentar 
-        </a>
-        <br>
-        <a class="btn btn-xs">
-            <i class="fa fa-minus-square fa-fw"></i> Disminuir 
-        </a>
+            <a class="btn btn-xs" onclick="AumentarEditor();"><i class="fa fa-plus-square fa-fw"></i></a>
+            <br>
+            <a class="btn btn-xs" onclick="DisminuirEditor();"><i class="fa fa-minus-square fa-fw"></i></a>
       </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+            <input id="linea_salto" name="linea_salto" type="text" class="btn-xs btn-default" placeholder="<?php echo $MULTILANG_SaltarLinea; ?>">
+            <button onClick="SaltarALinea();" class="btn btn-default btn-xs"><?php echo $MULTILANG_Ir; ?> <i class="fa fa-arrow-circle-right"></i></button>
+      </ul>
+
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
+
+</div>
 
 
 
@@ -293,18 +307,32 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
 
 <script type="text/javascript">
-
+        var alto_inicial_editor=0;
         function RedimensionarEditor()
             {
+                var margen_correccion=3; //Pixeles
                 var alto_pantalla=$(document).height();
-                alto_editor=alto_pantalla-200;
-
-
-
-
-
-
-
+                var alto_contenedor_principal=$(contenedor_principal).height();
+                var alto_barra_superior=$(barra_superior).height();
+                var alto_barra_inferior=$(barra_inferior).height();
+                alto_editor = alto_pantalla - alto_barra_superior - alto_barra_inferior - margen_correccion;
+                alto_inicial_editor=alto_editor;
+                document.getElementById("editor_codigo").style.height=alto_editor+"px";
+            }
+        function DisminuirEditor()
+            {
+                var alto_actual=$(editor_codigo).height();
+                alto_editor = alto_actual - 15;
+                if (alto_editor<600)
+                    alto_editor=alto_actual;
+                document.getElementById("editor_codigo").style.height=alto_editor+"px";
+            }
+        function AumentarEditor()
+            {
+                var alto_actual=$(editor_codigo).height();
+                alto_editor = alto_actual + 15;
+                if (alto_editor>alto_inicial_editor)
+                    alto_editor=alto_inicial_editor;
                 document.getElementById("editor_codigo").style.height=alto_editor+"px";
             }
         function CambiarFuenteEditor(tamano)
@@ -332,6 +360,27 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
                 else
                     editor.setShowInvisibles(true);
             }
+        function ActualizarTituloEditor(titulo)
+            {
+                //Cambia el titulo presentado en la ventada del editor
+                document.title = titulo;
+                $(document).attr('title',titulo);
+            }
+        function SaltarALinea()
+            {
+                var linea = document.getElementById("linea_salto").value;
+                //Salta a una linea especifica del editor
+                editor.gotoLine(linea, 1, true);
+            }
+        function Deshacer()
+            {
+                editor.undo();
+            }
+        function Rehacer()
+            {
+                editor.redo();
+            }
+
 
         // Crea el editor
         editor = ace.edit("editor_codigo");
@@ -340,6 +389,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
         editor.setValue(document.getElementById("area_texto").value);
 
         // Inicia el editor de codigo con las opciones predeterminadas
+        ActualizarTituloEditor("<?php echo $PCODER_NombreArchivo.' {PCodEr}'; ?>");
         CambiarFuenteEditor("14px");
         CambiarTemaEditor("ace/theme/tomorrow_night");  //tomorrow_night|twilight|eclipse|ambiance|ETC
         CambiarModoEditor("ace/mode/<?php echo $PCODER_ModoEditor; ?>");
@@ -351,7 +401,12 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
           document.getElementById("area_texto").value=editor.getSession().getValue();
         });
         
+        //Ajusta tamano del editor al inicio y en cada cambio de tamano de la ventana
         RedimensionarEditor();
+        $( window ).resize(function() {
+          RedimensionarEditor();
+        });
+
     </script>
 
     <?php

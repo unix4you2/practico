@@ -103,6 +103,7 @@
 	$MULTILANG_Informes='Reports';
 	$MULTILANG_Ingresar='Sign in';
 	$MULTILANG_Instante='Instant';
+    $MULTILANG_Ir='Go';
 	$MULTILANG_IrEscritorio='Go to my desk';
 	$MULTILANG_LlavePaso='SignKey';
 	$MULTILANG_Maquina='Host';
@@ -133,7 +134,8 @@
     $MULTILANG_Registrarme='Sign In';
     $MULTILANG_Regresar='Return';
     $MULTILANG_Resultados='Results';
-	$MULTILANG_Si='Yes';
+	$MULTILANG_SaltarLinea='Jump to line';
+    $MULTILANG_Si='Yes';
     $MULTILANG_Siguiente='Next';
 	$MULTILANG_Servidor='Server';
 	$MULTILANG_SeleccioneUno='Choose one';
