@@ -35,7 +35,7 @@
 			echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
 			die();
 		}
-    
+
 	// Configuraciones basicas del modulo
 	$PCODER_raiz_modulo = "mod/pcoder/";
 	$PCODER_modelos = $PCODER_raiz_modulo."modelo/";
@@ -80,8 +80,21 @@
 */
 if ($PCO_Accion=="PCOMOD_GuardarArchivo") 
 	{
-        
-
+        //Guarda el archivo
+        $PCODER_Respuesta = file_put_contents($PCODER_archivo, $_POST["PCODER_AreaTexto"]) or die("can't open file");
+        //Vuelve a cargar el archivo para continuar con su edicion
+        auditar("Modifica archivo $PCODER_archivo");
+        echo '
+        <body>
+        <form name="continuar_edicion" action="index.php" method="POST">
+            <input type="Hidden" name="PCO_Accion" value="PCOMOD_CargarPcoder">
+            <input type="Hidden" name="PCODER_archivo" value="'.$PCODER_archivo.'">
+            <input type="Hidden" name="PCODER_TokenEdicion" value="'.$PCODER_TokenEdicion.'">
+            <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+            <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
+        <script type="" language="JavaScript"> document.continuar_edicion.submit();  </script>
+        </body>
+        ';
 	}
 
 
@@ -169,19 +182,26 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 </div>
 
 
+
 <div id="marco_editor_codigo" class="row">
     <div class="row container-full">
         <div class="col-lg-12 container-full">
             <div class="form-group">
                 <!-- Dispone el control de area de texto y el div donde se empotrara el editor -->
-                
-                <textarea id="area_texto" name="area_texto" style="visibility:hidden; display:none;"><?php echo $PCODERcontenido_archivo; ?></textarea>
-                <input name="PCODER_TokenEdicion" type="hidden" value="<?php echo $PCODER_TokenEdicion; ?>">
+                <form name="form_archivo_editado" action="<?php echo $ArchivoCORE; ?>" method="POST">
+                    <textarea id="PCODER_AreaTexto" name="PCODER_AreaTexto" style="visibility:hidden; display:none;"><?php echo $PCODERcontenido_archivo; ?></textarea>
+                    <input name="PCODER_TokenEdicion" type="hidden" value="<?php echo $PCODER_TokenEdicion; ?>">
+                    <input name="PCODER_archivo" type="hidden" value="<?php echo $PCODER_archivo; ?>">
+                    <input type="Hidden" name="Presentar_FullScreen" value="<?php echo $Presentar_FullScreen; ?>">
+                    <input type="Hidden" name="Precarga_EstilosBS" value="<?php echo $Precarga_EstilosBS; ?>">
+                    <input name="PCO_Accion" type="hidden" value="PCOMOD_GuardarArchivo">
+                </form>
                 <div id="editor_codigo"></div>
             </div>
         </div>
     </div>
 </div>
+
 
 
 <nav id="barra_inferior" class="navbar navbar-default navbar-fixed-bottom">
@@ -380,13 +400,17 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
             {
                 editor.redo();
             }
+        function Guardar()
+            {
+                document.form_archivo_editado.submit();
+            }
 
 
         // Crea el editor
         editor = ace.edit("editor_codigo");
         
         //Actualiza el editor con el valor cargado inicialmente en el textarea
-        editor.setValue(document.getElementById("area_texto").value);
+        editor.setValue(document.getElementById("PCODER_AreaTexto").value);
 
         // Inicia el editor de codigo con las opciones predeterminadas
         ActualizarTituloEditor("<?php echo $PCODER_NombreArchivo.' {PCodEr}'; ?>");
@@ -398,7 +422,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
         
         //En cada evento de cambio actualiza el textarea
         editor.getSession().on('change', function(){
-          document.getElementById("area_texto").value=editor.getSession().getValue();
+          document.getElementById("PCODER_AreaTexto").value=editor.getSession().getValue();
         });
         
         //Ajusta tamano del editor al inicio y en cada cambio de tamano de la ventana
