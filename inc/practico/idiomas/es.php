@@ -204,6 +204,8 @@
     $MULTILANG_ErrorRW='No se tienen permisos para escribir sobre el archivo! Cualquier cambio realizado podr&iacute;a perderse';
     $MULTILANG_ErrorExistencia='El archivo indicado para edicion no existe!';
     $MULTILANG_ErrorNoACE='No se encuentra el modulo ACE para edici&oacute;n del archivo';
+    $MULTILANG_AyudaExplorador='Importante:  Algunas carpetas son presentadas a manera informativa sobre su existencia.  Sin embargo, estas son expandibles solamente cuando tienen archivos editables';
+    $MULTILANG_EnlacePcoder='Editor de C&oacute;digo {PCoder}';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';

@@ -244,6 +244,11 @@
                                         <li>
                                             <a href="javascript:document.fileman_admin_embebido.submit();"><i class="fa fa fa-cloud-upload fa-fw"></i> <?php echo $MULTILANG_AdminArchivos; ?></a>
                                         </li>
+
+                                        <li>
+                                            <a href="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCOMOD_CargarPcoder&Presentar_FullScreen=1&Precarga_EstilosBS=1','Pcoder','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_EnlacePcoder; ?></a>
+                                        </li>
+
                             <?php
                                     }
                             ?>

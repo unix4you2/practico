@@ -204,6 +204,8 @@
     $MULTILANG_ErrorRW='There is not rights to write the file! Any change to its content could be lost';
     $MULTILANG_ErrorExistencia='The filename you asked for edittion doesnt exists!';
     $MULTILANG_ErrorNoACE='ACE module was not found trying to edit file';
+    $MULTILANG_AyudaExplorador='Important:  Some folders are showed as information about it exists only.  Perhaps, folders expand if they have editable files only.';
+    $MULTILANG_EnlacePcoder='{PCoder}: Code Editor';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';

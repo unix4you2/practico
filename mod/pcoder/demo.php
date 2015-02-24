@@ -1,11 +1,22 @@
-<?php
-	/*
-	Copyright (C) 2013  John F. Arroyave Gutiérrez
-						unix4you2@gmail.com
+ 
+ 
+================================================================================
 
-	PCODER DEMO FILE - ARCHIVO DE DEMOSTRACION PCODER
-	*/
-?>
+	Copyright (C) 2015  John F. Arroyave Gutiérrez
+                        PCODER - Practico CODe EditoR
+						unix4you2@gmail.com
+	
+    IMPORTANTE: Este es un archivo de demostracion cargado por el editor cuando
+                no se recibe un archivo especifico para ser cargado.  Utilice 
+                el boton de Abrir en la parte superior para cargar un archivo.
+    
+	
+    IMPORTANT:  This is a demo file that is used by the code editor when you
+                dont say to it which file should open. You can use the Open
+                button in the top bar to load a file.
+
+================================================================================
+
 
 
 <?php
@@ -115,7 +126,7 @@
 	Function: guardar_datos_formulario
 	Guarda un registro sobre la tabla de aplicacion cuando es llamada la accion de guardar datos sobre un formulario.  Tomando todos los datos del formulario construye un query valido en SQL para hacer la insercion de los datos que debieron recibirse por metodo POST desde el formulario
 */
-	if ($PCO_Accion=="guardar_datos_formulario")
+	if ($PCO_Accion=="guardar_datos_formuassasssalario")
 		{
 			// POR CORREGIR:  Si el diseno cuenta con varios campos que ven hacia un mismo campo de base de datos el query no es valido
 

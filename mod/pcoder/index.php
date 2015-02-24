@@ -29,8 +29,8 @@
 
 	// Valida sesion activa de Practico
 	@session_start();
-	
-    if (!isset($PCOSESS_SesionAbierta)) 
+
+    if (!isset($PCOSESS_SesionAbierta) || @$PCOSESS_LoginUsuario!="admin") 
 		{
 			echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
 			die();
@@ -50,7 +50,7 @@
 
     //Carga el archivo recibido, si no recibe nada carga un demo
     if (@$PCODER_archivo=="")
-        $PCODER_archivo = "mod/pcoder/demo/archivo_demo.php";
+        $PCODER_archivo = "mod/pcoder/demo.php";
     PCODER_cargar_archivo($PCODER_archivo);
 
     $PCODER_Mensajes=0;
@@ -67,7 +67,8 @@
     $editor_ok=1;
     if (@!file_exists("inc/ace")) { $editor_ok=0; $PCODER_Mensajes=1; } 
 
-
+// Main function file
+include("mod/pcoder/phpFileTree/php_file_tree.php");
 
 /* ################################################################## */
 /* ################################################################## */
@@ -115,28 +116,37 @@ if ($PCO_Accion=="PCOMOD_GuardarArchivo")
 if ($PCO_Accion=="PCOMOD_CargarPcoder") 
 	{
 ?>
-<style type="text/css">
-    html, body {
-        margin: 0;
-        padding: 0;
-        /*height: 100%;*/
-        /*min-height: 100%;*/
-        width: 100%;
-        background: #888888;  /* 002a36 | BFBFBF | 888888 */
-        overflow-x: hidden;
-        overflow-y: hidden;
-    }
-    #marco_editor_codigo { 
-        margin-top:34px;
-    }
-    #editor_codigo { 
-        width: 100%; 
-        height: 600px;  /*Define el tamano segun resolucion*/
-    }
-</style>
+    <style type="text/css">
+        html, body {
+            margin: 0;
+            padding: 0;
+            /*height: 100%;*/
+            /*min-height: 100%;*/
+            width: 100%;
+            background: #888888;  /* 002a36 | BFBFBF | 888888 */
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+        #marco_editor_codigo { 
+            margin-top:34px;
+        }
+        #marco_explorador { 
+            overflow-y: auto;
+            overflow-x: auto;
+        }
+        #editor_codigo { 
+            width: 100%; 
+            height: 600px;  /*Define el tamano segun resolucion*/
+        }
+    </style>
+
+    <!-- Agrega archivos necesarios para el Explorador en arbol de directorios -->
+    <link href="mod/pcoder/phpFileTree/styles/default/default.css" rel="stylesheet" type="text/css" media="screen" />
+    <script src="mod/pcoder/phpFileTree/php_file_tree.js" type="text/javascript"></script>
 <body>
 
 <div id="contenedor_principal">
+
 
     <nav id="barra_superior" class="navbar navbar-default navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
@@ -148,10 +158,14 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
             <!-- BARRA DE HERRAMIENTAS --> 
             <div class="navbar-form navbar-left">
-                <a class="btn btn-warning btn-xs" OnClick="Guardar();"><i class="fa fa-save fa-fw"></i></a>
+                <a class="btn btn-primary btn-xs" data-toggle="modal" href="#NavegadorArchivos" title="<?php echo $MULTILANG_Explorar; ?>"><i class="fa fa-folder-open fa-fw"></i></a>                  
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-danger btn-xs" OnClick="Guardar();" title="<?php echo $MULTILANG_Guardar; ?>"><i class="fa fa-save fa-fw"></i></a>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a class="btn btn-default btn-xs" OnClick="Deshacer();"><i class="fa fa-undo"></i></a>
                 <a class="btn btn-default btn-xs" OnClick="Rehacer();"><i class="fa fa-repeat"></i></a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-warning btn-xs" OnClick="MaximizarEditor();" title="Recargar ventana, Util despues de maximizar" ><i class="fa fa-refresh"></i> Ajuste inicial de ventana</a>
             </div>
 
             <!-- INFORMACION DEL ARCHIVO -->
@@ -165,45 +179,69 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
         </div><!-- /.container-fluid -->
     </nav>
 
-<div class="row">
-<?php 
-    if ($PCODER_Mensajes==1) echo '<br><br>';
-    //Presenta mensajes de error o informacion
-    if ($existencia_ok==0)
-        mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error.': '.$MULTILANG_ErrorExistencia.'. '.$MULTILANG_Cargando.'='.$PCODER_archivo, '', '', '', 'alert alert-danger alert-dismissible');
-    if ($permisos_ok==0)
-        mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error.': '.$MULTILANG_ErrorRW.'. '.$MULTILANG_Estado.'='.$permisos_encontrados, '', '', '', 'alert alert-warning alert-dismissible');
-    if ($editor_ok==0)
-        {
-            mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error.': '.$MULTILANG_ErrorNoACE.': '.$PCODER_archivo, '', '', '', 'alert alert-danger alert-dismissible');
-            //die();
-        }
-?>
-</div>
+
+    <div class="row">
+        <?php 
+            if ($PCODER_Mensajes==1) echo '<br><br>';
+            //Presenta mensajes de error o informacion
+            if ($existencia_ok==0)
+                mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error.': '.$MULTILANG_ErrorExistencia.'. '.$MULTILANG_Cargando.'='.$PCODER_archivo, '', '', '', 'alert alert-danger alert-dismissible');
+            if ($permisos_ok==0)
+                {
+                    mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error.': '.$MULTILANG_ErrorRW.'. '.$MULTILANG_Estado.'='.$permisos_encontrados, '', '', '', 'alert alert-warning alert-dismissible');
+                }
+            if ($editor_ok==0)
+                {
+                    mensaje('<i class="fa fa-warning text-info texto-blink"></i> '.$MULTILANG_Error.': '.$MULTILANG_ErrorNoACE.': '.$PCODER_archivo, '', '', '', 'alert alert-danger alert-dismissible');
+                    die();
+                }
+        ?>
+    </div>
 
 
+    <!-- EXPLORADOR DE ARCHIVOS -->
+    <?php abrir_dialogo_modal("NavegadorArchivos",$MULTILANG_Explorar.' - '.$MULTILANG_CargarArchivo); ?>
+        <i class="well well-sm btn-xs btn-block"><?php echo $MULTILANG_AyudaExplorador; ?></i>
+        <div id="marco_explorador" class="embed-responsive embed-responsive-4by3">
+            <?php
+                //Presenta el arbol de carpetas
+                //echo @php_file_tree($_SERVER['DOCUMENT_ROOT'], "http://example.com/?file=[link]/");
+                //echo @php_file_tree(".", "javascript:alert('You clicked on [link]');");
+                //echo @php_file_tree(".", "javascript:alert('You clicked on [link]');",$PCODER_ExtensionesPermitidas);
+                //$PCODER_ExtensionesPermitidas = array("txt", "php", "inc", "css", "txt");
+                echo @php_file_tree(".", "javascript:PCODER_CargarArchivo('[link]');");
+            ?>  
+        </div>
+    <?php 
+        $barra_herramientas_modal='
+        <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+        cerrar_dialogo_modal($barra_herramientas_modal);
+    ?>
 
-<div id="marco_editor_codigo" class="row">
-    <div class="row container-full">
-        <div class="col-lg-12 container-full">
-            <div class="form-group">
-                <!-- Dispone el control de area de texto y el div donde se empotrara el editor -->
-                <form name="form_archivo_editado" action="<?php echo $ArchivoCORE; ?>" method="POST">
-                    <textarea id="PCODER_AreaTexto" name="PCODER_AreaTexto" style="visibility:hidden; display:none;"><?php echo $PCODERcontenido_archivo; ?></textarea>
-                    <input name="PCODER_TokenEdicion" type="hidden" value="<?php echo $PCODER_TokenEdicion; ?>">
-                    <input name="PCODER_archivo" type="hidden" value="<?php echo $PCODER_archivo; ?>">
-                    <input type="Hidden" name="Presentar_FullScreen" value="<?php echo $Presentar_FullScreen; ?>">
-                    <input type="Hidden" name="Precarga_EstilosBS" value="<?php echo $Precarga_EstilosBS; ?>">
-                    <input name="PCO_Accion" type="hidden" value="PCOMOD_GuardarArchivo">
-                </form>
-                <div id="editor_codigo"></div>
+
+    <!-- ZONA DE EDICION -->
+    <form name="form_archivo_editado" action="index.php" method="POST">
+        <textarea id="PCODER_AreaTexto" name="PCODER_AreaTexto" style="visibility:hidden; display:none;"><?php echo $PCODERcontenido_archivo; ?></textarea>
+        <input name="PCODER_TokenEdicion" type="hidden" value="<?php echo $PCODER_TokenEdicion; ?>">
+        <input name="PCODER_archivo" type="hidden" value="<?php echo $PCODER_archivo; ?>">
+        <input type="Hidden" name="Presentar_FullScreen" value="<?php echo $Presentar_FullScreen; ?>">
+        <input type="Hidden" name="Precarga_EstilosBS" value="<?php echo $Precarga_EstilosBS; ?>">
+        <input name="PCO_Accion" type="hidden" value="PCOMOD_GuardarArchivo">
+    </form>
+
+    <div class="row">
+        <div class="row container-full">
+            <div id="marco_editor_codigo" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 container-full">
+                <div class="form-group">
+                    <!-- Dispone el control de area de texto y el div donde se empotrara el editor -->
+                    <div id="editor_codigo"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-
+    <!-- CONFIGURACIONES Y UTILIDADES DEL EDITOR -->
 <nav id="barra_inferior" class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -326,11 +364,38 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
     <script src="inc/ace/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
         var alto_inicial_editor=0;
+        function MaximizarEditor()
+            {
+                var offset = (navigator.userAgent.indexOf("Mac") != -1 ||
+                navigator.userAgent.indexOf("Gecko") != -1 ||
+                navigator.appName.indexOf("Netscape") != -1) ? 0 : 4;
+                window.moveTo(-offset, -offset);
+                window.resizeTo(screen.availWidth + (2 * offset),
+                screen.availHeight + (2 * offset));
+                /*
+                Forma 2:
+                window.moveTo(0,0);
+                window.outerHeight = screen.availHeight;
+                window.outerWidth = screen.availWidth;
+                
+                Forma 3:
+                $(window).hieght();
+                $(window).width();
+                
+                Forma 4:
+                $(window).resize(function()
+                {   
+                    setDisplayBoardSize();
+                });
+                */
+                //Recarga el documento se queda en ciclo... ciudado
+                location.reload();
+            }
         function RedimensionarEditor()
             {
-                var margen_correccion=3; //Pixeles
+                var margen_correccion=3; //Pixeles Antes 3
                 var alto_pantalla=$(document).height();
                 var alto_contenedor_principal=$(contenedor_principal).height();
                 var alto_barra_superior=$(barra_superior).height();
@@ -404,10 +469,21 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
             {
                 document.form_archivo_editado.submit();
             }
-
-
+        function PCODER_CargarArchivo(archivo)
+            {
+                document.form_archivo_editado.PCO_Accion.value="PCOMOD_CargarPcoder";
+                document.form_archivo_editado.PCODER_archivo.value=archivo;
+                document.form_archivo_editado.PCODER_TokenEdicion.value="<?php echo @$PCODER_TokenEdicion; ?>";
+                document.form_archivo_editado.Presentar_FullScreen.value="<?php echo @$Presentar_FullScreen; ?>";
+                document.form_archivo_editado.Precarga_EstilosBS.value="<?php echo @$Precarga_EstilosBS; ?>";
+                document.form_archivo_editado.submit();
+            }
+    
+        //MaximizarEditor();
+        
         // Crea el editor
         editor = ace.edit("editor_codigo");
+        
         
         //Actualiza el editor con el valor cargado inicialmente en el textarea
         editor.setValue(document.getElementById("PCODER_AreaTexto").value);
@@ -424,14 +500,14 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
         editor.getSession().on('change', function(){
           document.getElementById("PCODER_AreaTexto").value=editor.getSession().getValue();
         });
-        
+
         //Ajusta tamano del editor al inicio y en cada cambio de tamano de la ventana
         RedimensionarEditor();
         $( window ).resize(function() {
           RedimensionarEditor();
         });
-
     </script>
+
 
     <?php
         // Estadisticas de uso anonimo con GABeacon
@@ -445,6 +521,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
         if(@$CodigoGoogleAnalytics!="")
             echo $PrefijoGA.$CodigoGoogleAnalytics.$PosfijoGA;	
     ?>
+
 </body>
 </html>
 <?php
