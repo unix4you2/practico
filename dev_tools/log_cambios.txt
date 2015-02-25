@@ -56,11 +56,13 @@ LogCambios="
 * Added: Funcion Ajax para devolver como WS valores de campos.  Pendiente ajustar restricciones de campos
 * Fixed: Mensaje de confirmación en cambio de perfil
 * Fixed: Reactivado el control tipo Canvas
+* Fixed: Campos de tipo etiqueta con valores de variables PHP ahora indican su valor sin encerrarlos en la expresion HTML
 * Enhan: Se cambia correo de instalación predeterminado a uno genérico.
 * Enhan: Agregada funcion JavaScript PCO_AgregarElementoDiv que permite agregar dinamicamente elementos HTML a un marco determinado.
 * Enhan: Informes DataTable tienen ahora soporte multiidioma
 * Enhan: El modo de depuracion muestra ahora el query generador al final de cada informe para el usuario admin
 * Enhan: **[Natalia Arroyave]** Mejora en el logo de la aplicación. Geometrización y mejora de paleta.
+* Enhan: Multiarchivos en PCoder y ayudas de teclado
 
 Importante: Quienes hayan ejecutado actualizaciones previas de la misma version podrian ver errores de ejecución de SQL.  Esto es normal.
 "

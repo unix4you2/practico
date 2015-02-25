@@ -46,7 +46,8 @@
 	$MULTILANG_Atencion='Attention';
 	$MULTILANG_Ayuda='Help';
 	$MULTILANG_Basedatos='Data base';
-	$MULTILANG_BarraHtas='Toolbar';
+	$MULTILANG_Basicos='Basics';
+    $MULTILANG_BarraHtas='Toolbar';
     $MULTILANG_Buscar='Search';
 	$MULTILANG_Campo='Field';
 	$MULTILANG_Cancelar='Cancel';
@@ -72,7 +73,8 @@
 	$MULTILANG_Defina='Define';
 	$MULTILANG_Descargar='Download';
     $MULTILANG_Deshabilitado='Disabled';
-	$MULTILANG_Detalles='Details';
+	$MULTILANG_Desplazar='Displace';
+    $MULTILANG_Detalles='Details';
 	$MULTILANG_Disene='Design';
 	$MULTILANG_Editar='Edit';
 	$MULTILANG_Ejecutar='Execute';
@@ -137,8 +139,9 @@
 	$MULTILANG_SaltarLinea='Jump to line';
     $MULTILANG_Si='Yes';
     $MULTILANG_Siguiente='Next';
-	$MULTILANG_Servidor='Server';
-	$MULTILANG_SeleccioneUno='Choose one';
+	$MULTILANG_Seleccionar='Select';
+    $MULTILANG_SeleccioneUno='Choose one';
+    $MULTILANG_Servidor='Server';
 	$MULTILANG_Suspender='Suspend';
 	$MULTILANG_Tablas='Tables';
 	$MULTILANG_TablaDatos='Data table';
@@ -206,6 +209,7 @@
     $MULTILANG_ErrorNoACE='ACE module was not found trying to edit file';
     $MULTILANG_AyudaExplorador='Important:  Some folders are showed as information about it exists only.  Perhaps, folders expand if they have editable files only.';
     $MULTILANG_EnlacePcoder='{PCoder}: Code Editor';
+    $MULTILANG_AtajosTitPcoder='Keyboard shortcut';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';

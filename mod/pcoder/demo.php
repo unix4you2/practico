@@ -1,20 +1,30 @@
  
  
 ================================================================================
-
-	Copyright (C) 2015  John F. Arroyave Gutiérrez
-                        PCODER - Practico CODe EditoR
-						unix4you2@gmail.com
+================================================================================
+	
 	
     IMPORTANTE: Este es un archivo de demostracion cargado por el editor cuando
-                no se recibe un archivo especifico para ser cargado.  Utilice 
+                no se recibe un archivo especifico para ser presentado.  Utilice 
                 el boton de Abrir en la parte superior para cargar un archivo.
+                
+                Los archivos a editar deberian contar con los permisos correctos
+                del lado del servidor para poder ser escritos o manipulados.
     
 	
     IMPORTANT:  This is a demo file that is used by the code editor when you
                 dont say to it which file should open. You can use the Open
                 button in the top bar to load a file.
+                
+                Files to be edited should be with the correct permissions on
+                server side to allow write them
 
+
+	Copyright (C) 2015  John F. Arroyave Gutiérrez
+                        PCODER - Practico CODe EditoR
+						unix4you2@gmail.com
+
+================================================================================
 ================================================================================
 
 

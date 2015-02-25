@@ -2433,7 +2433,7 @@ function selector_iconos_awesome()
 					if (isset($nombre_variable))
 						{
 							$valor_variable=$$nombre_variable;
-							$cadena_valor=' value="'.$valor_variable.'" ';							
+							$cadena_valor=$valor_variable;							
 						}
 				}
 			//Si viene de una busqueda de registro pone el valor de registro

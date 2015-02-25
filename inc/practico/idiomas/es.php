@@ -46,7 +46,8 @@
 	$MULTILANG_Atencion='Atenci&oacute;n';
 	$MULTILANG_Ayuda='Ayuda';
 	$MULTILANG_Basedatos='Base de datos';
-	$MULTILANG_BarraHtas='Barra de herramientas';
+	$MULTILANG_Basicos='B&aacute;sicos';
+    $MULTILANG_BarraHtas='Barra de herramientas';
     $MULTILANG_Buscar='Buscar';
 	$MULTILANG_Campo='Campo';
 	$MULTILANG_Cancelar='Cancelar';
@@ -72,6 +73,7 @@
 	$MULTILANG_Defina='Defina';
 	$MULTILANG_Descargar='Descargar';
     $MULTILANG_Deshabilitado='Deshabilitado';
+    $MULTILANG_Desplazar='Desplazar';
 	$MULTILANG_Detalles='Detalles';
 	$MULTILANG_Disene='Dise&ntilde;e';
 	$MULTILANG_Editar='Editar';
@@ -137,8 +139,9 @@
     $MULTILANG_SaltarLinea='Saltar a l&iacute;nea';
     $MULTILANG_Si='Si';
 	$MULTILANG_Siguiente='Siguiente';
+    $MULTILANG_Seleccionar='Seleccionar';
+    $MULTILANG_SeleccioneUno='Seleccione uno';
     $MULTILANG_Servidor='Servidor';
-	$MULTILANG_SeleccioneUno='Seleccione uno';
 	$MULTILANG_Suspender='Suspender';
 	$MULTILANG_Tablas='Tablas';
 	$MULTILANG_TablaDatos='Tabla de datos';
@@ -206,6 +209,7 @@
     $MULTILANG_ErrorNoACE='No se encuentra el modulo ACE para edici&oacute;n del archivo';
     $MULTILANG_AyudaExplorador='Importante:  Algunas carpetas son presentadas a manera informativa sobre su existencia.  Sin embargo, estas son expandibles solamente cuando tienen archivos editables';
     $MULTILANG_EnlacePcoder='Editor de C&oacute;digo {PCoder}';
+    $MULTILANG_AtajosTitPcoder='Atajos de teclado';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';

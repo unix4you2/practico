@@ -36,6 +36,7 @@
     chmod 777 core
     chmod 777 tmp
     chmod 777 ins
+    chmod 777 mod/pcoder/demo.php
 
     #chown -R www-data *
     #chown -R www *
