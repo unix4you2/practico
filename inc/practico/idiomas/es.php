@@ -97,6 +97,7 @@
 	$MULTILANG_Guardar='Guardar';
 	$MULTILANG_Habilitado='Habilitado';
 	$MULTILANG_Habilitar='Habilitar';
+    $MULTILANG_Historico='Hist&oacute;rico';
 	$MULTILANG_Hora='Hora';
 	$MULTILANG_IdiomaPredeterminado='Idioma predeterminado';
 	$MULTILANG_Imagen='Imagen';

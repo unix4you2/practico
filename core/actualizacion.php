@@ -106,6 +106,7 @@ if ($PCO_Accion=="actualizar_practico")
     <ul class="nav nav-tabs nav-justified">
     <li class="active"><a href="#pestana_actualizacion" data-toggle="tab"><i class="fa fa-upload"></i> <?php echo $MULTILANG_Actualizacion; ?></a></li>
     <li><a href="#pestana_copias" data-toggle="tab"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Copias; ?></a></li>
+    <li><a href="#historico_actualizaciones" data-toggle="tab"><i class="fa fa-history"></i> <?php echo $MULTILANG_Historico; ?></a></li>
     </ul>
 
     <div class="tab-content">
@@ -146,6 +147,39 @@ if ($PCO_Accion=="actualizar_practico")
             ?>
         </div>
         <!-- FIN TAB COPIAS DE SEGURIDAD -->
+
+        <!-- INICIO TAB HISTORICO DE ACTUALIZACIONES -->
+        <div class="tab-pane fade" id="historico_actualizaciones">
+                <div class="well well-sm"><b>Ultimos 30 registros / Last 30 records</b></div>
+                <table id="TablaAcciones" class="table table-condensed table-hover table-unbordered btn-xs table-striped">
+                    <thead>
+					<tr>
+						<th><b><?php echo $MULTILANG_UsrLogin; ?></b></th>
+						<th><b><?php echo $MULTILANG_UsrAudDes; ?></b></th>
+						<th><b><?php echo $MULTILANG_Fecha; ?></b></th>
+						<th><b><?php echo $MULTILANG_Hora; ?></b></th>
+					</tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                        // Busca por las auditorias asociadas a actualizacion de plataforma:
+                        // Acciones:  Actualiza version de plataforma | _Actualizacion_ | Analiza archivo tmp/Practico | Carga archivo en carpeta tmp - Practico
+                        $resultado=@ejecutar_sql("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE (accion LIKE '%Actualiza version de plataforma%' OR accion LIKE '%_Actualizacion_%' OR accion LIKE '%Analiza archivo tmp/Practico%' OR accion LIKE '%Carga archivo en carpeta tmp - Practico%') ORDER BY fecha DESC, hora DESC LIMIT 0,30");
+                        while($registro = $resultado->fetch())
+                            {
+                                echo '<tr>
+                                        <td>'.$registro["usuario_login"].'</td>
+                                        <td>'.$registro["accion"].'</td>
+                                        <td>'.$registro["fecha"].'</td>
+                                        <td>'.$registro["hora"].'</td>
+                                    </tr>';
+                            }
+                    ?>
+                    </tbody>
+                </table>
+
+        </div>
+        <!-- FIN TAB HISTORICO DE ACTUALIZACIONES -->
         
     </div>
 

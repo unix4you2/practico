@@ -18,6 +18,7 @@ README.md
 CHANGELOG.md
 AUTHORS
 index.php
+core/actualizacion.php
 core/ajax.php
 core/comunes.php
 core/formularios.php
@@ -61,6 +62,7 @@ LogCambios="
 * Added: Editor de código en línea de Práctico. Módulo PCODER (Practico CODe EditoR)
 * Added: Funcion JavaScript generica para obtener valores mediante AJAX: PCO_ObtenerContenidoAjax
 * Added: Funcion Ajax para devolver como WS valores de campos.  Pendiente ajustar restricciones de campos
+* Added: Asistente de actualización y aplicación de parches puede ahora presentar el histórico de parches aplicados basado en la auditoría
 * Fixed: Mensaje de confirmación en cambio de perfil
 * Fixed: Reactivado el control tipo Canvas
 * Fixed: Campos de tipo etiqueta con valores de variables PHP ahora indican su valor sin encerrarlos en la expresion HTML
