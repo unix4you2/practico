@@ -126,9 +126,17 @@ Group: Mod  {
    File: fileman_admin_embebido  (mod/fileman/index.php)
    File: Funciones personalizadas  (mod/personalizadas.php)
    File: Funciones personalizadas para WebServices  (mod/personalizadas_ws.php)
-   File: guardar_seguimiento  (mod/pcc_erp/index.php)
    File: ldap/.../lib/schema_functions.php  (mod/ldap/phpldapadmin-1.2.3/lib/schema_functions.php)
    File: ldap_admin_embebido  (mod/ldap/index.php)
+   File: pcc_erp/index.php  (mod/pcc_erp/index.php)
+
+   Group: Pcoder  {
+
+      File: demo.php  (mod/pcoder/demo.php)
+      File: http://stackoverflow.com/questions/15186558/loading-a-html-file-into-ace-editor-pre-tag  (mod/pcoder/controlador/controlador.php)
+      File: PCODER - Practico CODe EditoR  (mod/pcoder/index.php)
+      }  # Group: Pcoder
+
    File: probar_ejemplo_mvc  (mod/mvc/index.php)
 
    Group: Sopa  {
