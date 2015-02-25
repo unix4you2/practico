@@ -61,7 +61,6 @@
     <link href="inc/bootstrap/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/morris.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/timeline.css" rel="stylesheet">
-    <link href="inc/bootstrap/css/plugins/social-buttons.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/slider/slider.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/select/bootstrap-select.min.css" rel="stylesheet">

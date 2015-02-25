@@ -50,14 +50,18 @@ $(function() {
                     //Cuenta ingresos unicos de usuarios
                     $registro_auditoria_usuarios=ejecutar_sql("SELECT count(*) as cantidad FROM ".$TablasCore."auditoria WHERE fecha='".$registro_auditoria["fecha"]."' GROUP BY usuario_login")->fetch();
                     $total_usuarios_unicos=$registro_auditoria_usuarios["cantidad"];
+                    if ($total_usuarios_unicos=="") $total_usuarios_unicos=0;
                     //Cuenta registros de la API
                     $registro_auditoria_api=ejecutar_sql("SELECT count(*) as cantidad FROM ".$TablasCore."auditoria WHERE fecha='".$registro_auditoria["fecha"]."' AND usuario_login LIKE 'API.%' GROUP BY usuario_login")->fetch();
                     $total_uso_api=$registro_auditoria_api["cantidad"];
+                    if ($total_uso_api=="") $total_uso_api=0;
                     //Agrega datos al arreglo
+                    $fecha_grafico=$registro_auditoria["fecha"];
+                    $cantidad_grafico=$registro_auditoria["cantidad"];
                     $cadena_datos.= "
                         {
-                            fecha: '".$registro_auditoria["fecha"]."',
-                            Operaciones: ".$registro_auditoria["cantidad"].",
+                            fecha: '".$fecha_grafico."',
+                            Operaciones: ".$cantidad_grafico.",
                             Usuarios: ".$total_usuarios_unicos.",
                             UsoAPI: ".$total_uso_api."
                         },

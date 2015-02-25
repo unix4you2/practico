@@ -23,6 +23,7 @@ core/comunes.php
 core/formularios.php
 core/informes.php
 core/marco_abajo.php
+core/marco_admin_morris.php
 core/marco_arriba.php
 core/marco_arriba_bs.php
 core/marco_chat.php
@@ -63,6 +64,7 @@ LogCambios="
 * Fixed: Mensaje de confirmación en cambio de perfil
 * Fixed: Reactivado el control tipo Canvas
 * Fixed: Campos de tipo etiqueta con valores de variables PHP ahora indican su valor sin encerrarlos en la expresion HTML
+* Fixed: Gráficos Morris con valores cero
 * Enhan: Se cambia correo de instalación predeterminado a uno genérico.
 * Enhan: Agregada funcion JavaScript PCO_AgregarElementoDiv que permite agregar dinamicamente elementos HTML a un marco determinado.
 * Enhan: Informes DataTable tienen ahora soporte multiidioma
@@ -70,6 +72,7 @@ LogCambios="
 * Enhan: **[Natalia Arroyave]** Mejora en el logo de la aplicación. Geometrización y mejora de paleta.
 * Enhan: Multiarchivos en PCoder y ayudas de teclado
 * Enhan: Al agregar usuarios se redirecciona al perfil del mismo para agregarle permisos
+* Enhan: Se evita el plugin social buttons de Bootstrap para acelerar la carga evitando descargas de netdna.bootstrapcdn.com
 
 Importante: Quienes hayan ejecutado actualizaciones previas de la misma version podrian ver errores de ejecución de SQL.  Esto es normal.
 "
