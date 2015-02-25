@@ -1216,7 +1216,16 @@ if ($PCO_Accion=="permisos_usuario")
                     $Llave_recuperacion="";
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno$_SeparadorCampos_$Llave_recuperacion");
 					auditar("Agrega usuario $login para $nombre");
-					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+                    //Redirecciona a la lista de usuarios con el usuario prefiltrado por si se le quiere asignar permisos
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="listar_usuarios">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_AvisoSistema.'">
+                        <input type="Hidden" name="PCO_ErrorDescripcion" value="'.$MULTILANG_UsrCreacionOK.'">
+                        <input type="Hidden" name="PCO_ErrorIcono" value="fa-info-circle">
+                        <input type="Hidden" name="PCO_ErrorEstilo" value="alert-success">
+                        <input type="Hidden" name="login_filtro" value="'.$login.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
 				{

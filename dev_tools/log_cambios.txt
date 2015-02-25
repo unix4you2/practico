@@ -69,6 +69,7 @@ LogCambios="
 * Enhan: El modo de depuracion muestra ahora el query generador al final de cada informe para el usuario admin
 * Enhan: **[Natalia Arroyave]** Mejora en el logo de la aplicación. Geometrización y mejora de paleta.
 * Enhan: Multiarchivos en PCoder y ayudas de teclado
+* Enhan: Al agregar usuarios se redirecciona al perfil del mismo para agregarle permisos
 
 Importante: Quienes hayan ejecutado actualizaciones previas de la misma version podrian ver errores de ejecución de SQL.  Esto es normal.
 "

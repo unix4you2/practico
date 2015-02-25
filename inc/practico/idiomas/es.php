@@ -210,6 +210,8 @@
     $MULTILANG_AyudaExplorador='Importante:  Algunas carpetas son presentadas a manera informativa sobre su existencia.  Sin embargo, estas son expandibles solamente cuando tienen archivos editables';
     $MULTILANG_EnlacePcoder='Editor de C&oacute;digo {PCoder}';
     $MULTILANG_AtajosTitPcoder='Atajos de teclado';
+    $MULTILANG_AvisoSistema='Aviso del sistema';
+
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';
@@ -823,6 +825,7 @@
     $MULTILANG_UsrResetOK='Se ha restablecido el acceso a su cuenta con la clave suministrada.  Intente su acceso nuevamente.';
     $MULTILANG_UsrPerfil='Perfil del usuario';
     $MULTILANG_UsrActualizarAdmin='Sus configuraciones indican que a&uacute;n no actualiza la direcci&oacute;n de correo electronico para el super usuario.  Esto es necesario para poder recibir alertas o recuperaciones de contrase&ntilde;a.  Vaya al menu de usuario en la parte superior derecha y haga clic sobre su nombre de usuario para actualizar el perfil.';
+    $MULTILANG_UsrCreacionOK='El usuario ha sido creado satisfactoriamente.  Se filtra ahora para agregar cualquier opcion de menu o informe que corresponda.  Puede cancelar si no es necesario definir permisos en este momento.';
    
 
 	//Proceso de instalacion

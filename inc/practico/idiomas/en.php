@@ -210,6 +210,8 @@
     $MULTILANG_AyudaExplorador='Important:  Some folders are showed as information about it exists only.  Perhaps, folders expand if they have editable files only.';
     $MULTILANG_EnlacePcoder='{PCoder}: Code Editor';
     $MULTILANG_AtajosTitPcoder='Keyboard shortcut';
+    $MULTILANG_AvisoSistema='System message';
+    
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';
@@ -826,6 +828,7 @@
     $MULTILANG_UsrResetOK='Password restored. Please try to login again';
     $MULTILANG_UsrPerfil='User profile';
     $MULTILANG_UsrActualizarAdmin='Your settings says that you should change your profile to update the email address for the admin user.<br>Please go to the upper user menu and Clic over Super user or user name option to change it.';
+    $MULTILANG_UsrCreacionOK='The account user was added.  Now is filtered to add any menu option or report that you need.  You could cancel this operation if is not necessary to assign right at this moment.';
     
 
 	//Proceso de instalacion
