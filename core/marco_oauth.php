@@ -32,7 +32,7 @@
 
 ?>
 
-
+    <div class="oculto_impresion">
     <!-- Modal Proveedores Oauth -->
     <?php abrir_dialogo_modal("myModalOAUTH",$MULTILANG_ConfiguracionGeneral,"modal-wide"); ?>
 
@@ -1140,3 +1140,4 @@
     ?>
 
 					</form>
+    </div>

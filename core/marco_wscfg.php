@@ -123,7 +123,7 @@
 				}
 		}
 ?>
-
+    <div class="oculto_impresion">
     <!-- Modal WebServices -->
     <?php abrir_dialogo_modal("myModalWEBSERVICES",$NombreRAD.' - '.$MULTILANG_WSLlavesNuevo,"modal-wide"); ?>
 
@@ -248,3 +248,4 @@
             cerrar_dialogo_modal($barra_herramientas_modal);
         ?>
 
+    </div>

@@ -30,6 +30,7 @@
 /* ################################################################## */
 /* ################################################################## */
 
+    echo '<div class="oculto_impresion">';
     // Modal Ventana de chat
     abrir_dialogo_modal("Dialogo_Chat",$MULTILANG_UsrLista);
 
@@ -92,3 +93,4 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
     cerrar_dialogo_modal($barra_herramientas_modal);
 
+    echo '</div>';

@@ -51,15 +51,15 @@
     // Incluye encabezados, estilos y demas del HEAD
     include_once("core/marco_arriba_bs.php");
 ?>
-<body oncontextmenu="return false;">
+<body oncontextmenu="return false;" >
     <!--Marco oculto para generacion de formularios y elementos dinamicos anidados -->
     <div id="PCODIV_FormulariosDinamicos" style="visibility: hidden; display: none;"></div>
 
-    <div id="wrapper">  
+    <div id="wrapper">
 
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-static-top oculto_impresion" role="navigation" style="margin-bottom: 0">
             
             
             <div class="navbar-header">

@@ -62,7 +62,7 @@
 				}
 		}
 
-
+    echo '<div class="oculto_impresion">';
     // Modal Parametros
     abrir_dialogo_modal("myModalPARAMETROS",$NombreRAD.' - '.$MULTILANG_ParametrosApp);
 
@@ -245,3 +245,4 @@
 
 
 					</form>
+    </div>

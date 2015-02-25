@@ -21,6 +21,16 @@ ESTILOS ADICIONALES PARA BOOTSTRAP
 
 /*@import "../less/datepicker/datepicker.less";*/
 
+/* Definicion para los marcos que no deben aparecer a la hora de imprimir */
+@media print {
+*.oculto_impresion
+    {
+        display: none;
+        width: 0px;
+    }
+}
+
+
 *.icon-white {color: white}
 *.icon-red {color: red}
 *.icon-green {color: green}

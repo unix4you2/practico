@@ -30,7 +30,7 @@
 	if (@$PCOSESS_LoginUsuario!="admin" || !$PCOSESS_SesionAbierta)
 		die();
 
-
+    echo '<div class="oculto_impresion">';
     //Modal Botones de Desarrollo
     abrir_dialogo_modal("myModalDESARROLLO",$MULTILANG_TitDisenador); ?>
 
@@ -107,4 +107,4 @@
     $barra_herramientas_modal='
         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
     cerrar_dialogo_modal($barra_herramientas_modal);
-
+    echo '</div';

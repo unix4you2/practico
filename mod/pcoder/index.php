@@ -162,14 +162,13 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
             <!-- BARRA DE HERRAMIENTAS --> 
             <div class="navbar-form navbar-left">
                 <button id="boton_navegador_archivos" class="btn btn-primary btn-xs" data-toggle="modal" href="#NavegadorArchivos" title="<?php echo $MULTILANG_Explorar; ?>"><i class="fa fa-folder-open fa-fw"></i></button>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
                 <a class="btn btn-danger btn-xs" OnClick="Guardar();" title="<?php echo $MULTILANG_Guardar; ?>"><i class="fa fa-save fa-fw"></i></a>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
                 <!--<a class="btn btn-default btn-xs" OnClick="Deshacer();"><i class="fa fa-undo"></i></a>
                 <a class="btn btn-default btn-xs" OnClick="Rehacer();"><i class="fa fa-repeat"></i></a>-->
                 <a class="btn btn-info btn-xs" data-toggle="modal" href="#AtajosTeclado"><i class="fa fa-keyboard-o"></i> <?php echo $MULTILANG_AtajosTitPcoder; ?></a>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a class="btn btn-warning btn-xs" OnClick="MaximizarEditor();" title="Recargar ventana, Util despues de maximizar" ><i class="fa fa-refresh"></i> Ajuste inicial de ventana</a>
+                <a class="btn btn-warning btn-xs" OnClick="MaximizarEditor();" title="Recargar ventana, Util despues de maximizar" ><i class="fa fa-refresh"></i> Ajuste de ventana</a>
             </div>
 
             <!-- INFORMACION DEL ARCHIVO -->

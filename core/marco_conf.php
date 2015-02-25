@@ -32,9 +32,9 @@
 
 ?>
 
-
+    <div class="oculto_impresion">
     <!-- Modal Configuracion -->
-    <?php abrir_dialogo_modal("myModalCONFIGURACION",$NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral,"modal-wide"); ?>
+    <?php abrir_dialogo_modal("myModalCONFIGURACION",$NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral,"modal-wide oculto_impresion"); ?>
 
 					<form action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="hidden" name="PCO_Accion" value="guardar_configuracion">
@@ -365,3 +365,4 @@
     ?>
 
     </form>
+    </div>
