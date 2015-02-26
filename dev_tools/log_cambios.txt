@@ -75,6 +75,7 @@ LogCambios="
 * Enhan: Multiarchivos en PCoder y ayudas de teclado
 * Enhan: Al agregar usuarios se redirecciona al perfil del mismo para agregarle permisos
 * Enhan: Se evita el plugin social buttons de Bootstrap para acelerar la carga evitando descargas de netdna.bootstrapcdn.com
+* Enhan: El enlace a PCoder es ahora omnipresente para los admin en la parte superior.  De esa manera se garantiza su uso cuando involuntariamente se genere un error de sintaxis por el programador sobre algún código propio.  De esta manera PCoder estará disponible para poder ingresar a editar y reparar el error.
 
 Importante: Quienes hayan ejecutado actualizaciones previas de la misma version podrian ver errores de ejecución de SQL.  Esto es normal.
 "

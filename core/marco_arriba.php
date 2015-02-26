@@ -86,8 +86,10 @@
 				?>
 				<?php 
 					//Despliega botones de desarrollo
-					if (@$PCOSESS_LoginUsuario=="admin" && $PCOSESS_SesionAbierta)
-						echo '<a data-toggle="modal" class="btn btn-danger btn-xs" href="#myModalDESARROLLO"><i class="fa fa-puzzle-piece"></i> '.$MULTILANG_DesAppBoton.'</a>';
+                    $PCO_EnlacePCODER="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCOMOD_CargarPcoder&Presentar_FullScreen=1&Precarga_EstilosBS=1','Pcoder','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');";
+					if (@$PCOSESS_LoginUsuario=="admin" && $PCOSESS_SesionAbierta)    
+                        echo '<a data-toggle="modal" class="btn btn-primary btn-xs " href="'.$PCO_EnlacePCODER.'"><i class="fa fa-file-code-o"></i> PCoder</a>
+                        <a data-toggle="modal" class="btn btn-danger btn-xs" href="#myModalDESARROLLO"><i class="fa fa-puzzle-piece"></i> '.$MULTILANG_DesAppBoton.'</a>';
 				?>
 				<?php 
                     //Agrega boton de retorno al inicio si la accion es diferente al escritorio
@@ -244,11 +246,6 @@
                                         <li>
                                             <a href="javascript:document.fileman_admin_embebido.submit();"><i class="fa fa fa-cloud-upload fa-fw"></i> <?php echo $MULTILANG_AdminArchivos; ?></a>
                                         </li>
-
-                                        <li>
-                                            <a href="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCOMOD_CargarPcoder&Presentar_FullScreen=1&Precarga_EstilosBS=1','Pcoder','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_EnlacePcoder; ?></a>
-                                        </li>
-
                             <?php
                                     }
                             ?>
