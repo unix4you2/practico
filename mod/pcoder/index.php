@@ -167,7 +167,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
                 <!--<a class="btn btn-default btn-xs" OnClick="Deshacer();"><i class="fa fa-undo"></i></a>
                 <a class="btn btn-default btn-xs" OnClick="Rehacer();"><i class="fa fa-repeat"></i></a>-->
                 <a class="btn btn-info btn-xs" data-toggle="modal" href="#AtajosTeclado"><i class="fa fa-keyboard-o"></i> <?php echo $MULTILANG_AtajosTitPcoder; ?></a>
-                <a class="btn btn-warning btn-xs" OnClick="MaximizarEditor();" title="Recargar ventana, Util despues de maximizar" ><i class="fa fa-refresh"></i> Ajuste de ventana</a>
+                <a class="btn btn-warning btn-xs" OnClick="if(window.confirm('<?php echo $MULTILANG_PcoderAjusteConfirma; ?>')===true) MaximizarEditor();" title="Recargar ventana, Util despues de maximizar" ><i class="fa fa-refresh"></i> <?php echo $MULTILANG_PcoderAjuste; ?></a>
             </div>
 
             <!-- INFORMACION DEL ARCHIVO -->

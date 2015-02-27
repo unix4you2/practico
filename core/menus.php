@@ -669,7 +669,7 @@ if ($PCO_Accion=="administrar_menu")
                             <ul class="chat">';
 
 
-                    // Busca y carga las opciones
+                    // Busca y carga las opciones de menu
                     // Si el usuario es diferente al administrador agrega condiciones al query
                     if ($PCOSESS_LoginUsuario!="admin")
                         {
@@ -716,6 +716,52 @@ if ($PCO_Accion=="administrar_menu")
                                 </li>';
                             $conteo_opciones++;
                         }
+
+                    
+                    // Busca y carga las opciones de informes
+                    $complemento_palabras_like="";
+                    if ($Palabra1!="") $complemento_palabras_like.=" titulo LIKE '%$Palabra1%' ";
+                    if ($Palabra2!="") $complemento_palabras_like.=" OR titulo LIKE '%$Palabra2%' ";
+                    if ($Palabra3!="") $complemento_palabras_like.=" OR titulo LIKE '%$Palabra3%' ";
+                    if ($Palabra4!="") $complemento_palabras_like.=" OR titulo LIKE '%$Palabra4%' ";
+                    // Si el usuario es diferente al administrador agrega condiciones al query
+                    if ($PCOSESS_LoginUsuario!="admin")
+                        {
+                            $Complemento_tablas=",".$TablasCore."usuario_informe";
+                            $Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario'";
+                        }
+                    $resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE 1 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
+
+                    // Imprime las opciones con sus formularios
+                    $conteo_opciones=0;
+                    while($registro = $resultado->fetch())
+                        {
+                            echo '<form action="'.$ArchivoCORE.'" method="post" name="deskinf_'.$registro["id"].'" id="deskinf_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
+                            echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
+                                 <input type="hidden" name="objeto" value="inf:'.$registro["id"].'"></form>';
+                            //Presenta la opcion de menu
+                            echo '
+                                <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <i class="fa fa-file-text fa-2x fa-fw icon-gray"></i>
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <a href="javascript:document.deskinf_'.$registro["id"].'.submit();">
+                                                <strong class="primary-font">'.$registro["titulo"].'</strong> 
+                                            </a>
+                                            <small class="pull-right text-muted">
+                                                <i class="fa fa-file-text fa-fw"></i> [Reporte]=inf:'.$registro["id"].'
+                                            </small>
+                                        </div>
+                                        <p>
+                                            <i class="icon-gray">&nbsp;&nbsp;&nbsp;'.$registro["categoria"].'</i>
+                                        </p>
+                                    </div>
+                                </li>';
+                            $conteo_opciones++;
+                        }
+
 
             //Finaliza el marco de resultados
             echo '

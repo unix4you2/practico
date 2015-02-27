@@ -212,7 +212,8 @@
     $MULTILANG_EnlacePcoder='Editor de C&oacute;digo {PCoder}';
     $MULTILANG_AtajosTitPcoder='Atajos de teclado';
     $MULTILANG_AvisoSistema='Aviso del sistema';
-
+    $MULTILANG_PcoderAjuste='Ajuste de ventana';
+    $MULTILANG_PcoderAjusteConfirma='Esta a punto de recargar el documento actual con el fin de establecer el tamano de ventana al tamano maximo disponible segun su pantalla.  Al recargar el documento puede perder cualquier cambio no almacenado.  Desea continuar?';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';
