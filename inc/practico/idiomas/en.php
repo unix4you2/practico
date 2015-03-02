@@ -383,7 +383,7 @@
 	$MULTILANG_FrmTitFila='Must Practico use a full row for the object?';
 	$MULTILANG_FrmDesFila='Allows to display the object in a unique row of the table used in the form';
 	$MULTILANG_FrmLista='Options list';
-	$MULTILANG_FrmTitLista='What options are to be chosen';
+	$MULTILANG_FrmTitLista='What options are to be chosen.  Enter a comma character only to say Practico that put an empty value at the beginning.  Leave in blank to use as default the first record founded.';
 	$MULTILANG_FrmDesLista='Enter a list of options separated by commas. If you need to take the options table dynamically from another application to use the Data Source fields for options. Should fill both options (fixed list and data source) the result will be the combination';
 	$MULTILANG_FrmDesLista2='Commas separated';
 	$MULTILANG_FrmOrigen='Options list source';

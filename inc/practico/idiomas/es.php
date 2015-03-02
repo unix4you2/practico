@@ -380,7 +380,7 @@
 	$MULTILANG_FrmTitFila='Se debe utilizar una fila completa para el objeto?';
 	$MULTILANG_FrmDesFila='Permite desplegar el objeto en una fila exclusiva de la tabla usada en el formulario';
 	$MULTILANG_FrmLista='Lista de opciones';
-	$MULTILANG_FrmTitLista='Qu&eacute; opciones aparecen para ser escogidas';
+	$MULTILANG_FrmTitLista='Qu&eacute; opciones aparecen para ser escogidas.  Ingrese una coma solamente para indicar que se desea el valor predeterminado como vacio.  Dejar vacio para que se tome el primer valor del registro.';
 	$MULTILANG_FrmDesLista='Ingrese una lista de opciones separadas por coma.  Si requiere tomar las opciones din&aacute;micamente desde otra tabla de la aplicaci&oacute;n utilice los campos de Origen de datos para opciones.  En caso de llenar ambas opciones (lista fija y origen de datos) el resultado ser&aacute; su combinaci&oacute;n';
 	$MULTILANG_FrmDesLista2='Separadas por coma';
 	$MULTILANG_FrmOrigen='Origen de la lista de opciones';

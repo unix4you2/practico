@@ -2310,8 +2310,12 @@ function selector_iconos_awesome()
                 <div id="PCO_ListaOpciones_'.$registro_campos["campo"].'" style="display: inline-table;">';
 
                     // Toma los valores desde la lista de opciones (cuando es estatico)
-                    $opciones_lista = explode(",", $registro_campos["lista_opciones"]);
-                    $valores_lista = explode(",", $registro_campos["lista_opciones"]);
+                    //Si el campo es una simple coma entonces es para agregar el vacio al comienzo, sino hace la lista
+                    if ($registro_campos["lista_opciones"]!=",")
+                        {
+                            $opciones_lista = explode(",", $registro_campos["lista_opciones"]);
+                            $valores_lista = explode(",", $registro_campos["lista_opciones"]);
+                        }
                     
                     // Si se desea tomar los valores del combo desde una tabla hace la consulta
                     if ($registro_campos["origen_lista_opciones"]!="" && $registro_campos["origen_lista_valores"]!="")
