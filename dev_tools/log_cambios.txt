@@ -69,6 +69,7 @@ LogCambios="
 * Fixed: Reactivado el control tipo Canvas
 * Fixed: Campos de tipo etiqueta con valores de variables PHP ahora indican su valor sin encerrarlos en la expresion HTML
 * Fixed: Gráficos Morris con valores cero
+* Fixed: Errores de base de datos no desplegados por falta de librerías son ahora presentados con descripciones completas.
 * Enhan: Se cambia correo de instalación predeterminado a uno genérico.
 * Enhan: Agregada funcion JavaScript PCO_AgregarElementoDiv que permite agregar dinamicamente elementos HTML a un marco determinado.
 * Enhan: Informes DataTable tienen ahora soporte multiidioma
