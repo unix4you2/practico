@@ -2345,7 +2345,7 @@ function selector_iconos_awesome()
                                 }
                         }
 
-                    for ($i=0;$i<count($opciones_lista);$i++)
+                    for ($i=0;$i<count(@$opciones_lista);$i++)
                         {
                             // Determina si la opcion a agregar es la misma del valor del registro
                             $cadena_predeterminado='';
