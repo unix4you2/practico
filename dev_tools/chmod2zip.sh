@@ -37,6 +37,7 @@
     chmod 777 tmp
     chmod 777 ins
     chmod 777 mod/pcoder/demo.php
+    chmod -R 777 mod/pcc_erp/*
 
     #chown -R www-data *
     #chown -R www *

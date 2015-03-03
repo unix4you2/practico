@@ -2311,10 +2311,19 @@ function selector_iconos_awesome()
 
                     // Toma los valores desde la lista de opciones (cuando es estatico)
                     //Si el campo es una simple coma entonces es para agregar el vacio al comienzo, sino hace la lista
-                    if ($registro_campos["lista_opciones"]!=",")
+                    if ($registro_campos["lista_opciones"]!='')
                         {
-                            $opciones_lista = explode(",", $registro_campos["lista_opciones"]);
-                            $valores_lista = explode(",", $registro_campos["lista_opciones"]);
+                            //Es diferente de vacio asi que ahora verifica si es solo una coma para poner valor inicial en blanco o si debe expandir todo
+                            if ($registro_campos["lista_opciones"]==',')
+                                {
+                                    $opciones_lista[] = "";
+                                    $valores_lista[] = "";
+                                }
+                            else
+                                {
+                                    $opciones_lista = explode(",", $registro_campos["lista_opciones"]);
+                                    $valores_lista = explode(",", $registro_campos["lista_opciones"]);
+                                }
                         }
                     
                     // Si se desea tomar los valores del combo desde una tabla hace la consulta

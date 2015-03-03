@@ -64,6 +64,7 @@ LogCambios="
 * Added: Funcion Ajax para devolver como WS valores de campos.  Pendiente ajustar restricciones de campos
 * Added: Asistente de actualización y aplicación de parches puede ahora presentar el histórico de parches aplicados basado en la auditoría
 * Added: Buscador presenta dentro de sus resultados posibles informes autorizados al usuario actual
+* Added: Los botones dentro de formularios ahora permiten el uso de imagenes e iconos de cualquiera de las librerías existentes en Práctico (los mismos de los menues)
 * Fixed: Mensaje de confirmación en cambio de perfil
 * Fixed: Reactivado el control tipo Canvas
 * Fixed: Campos de tipo etiqueta con valores de variables PHP ahora indican su valor sin encerrarlos en la expresion HTML
@@ -78,6 +79,7 @@ LogCambios="
 * Enhan: Se evita el plugin social buttons de Bootstrap para acelerar la carga evitando descargas de netdna.bootstrapcdn.com
 * Enhan: El enlace a PCoder es ahora omnipresente para los admin en la parte superior.  De esa manera se garantiza su uso cuando involuntariamente se genere un error de sintaxis por el programador sobre algún código propio.  De esta manera PCoder estará disponible para poder ingresar a editar y reparar el error.
 * Enhan: Las listas de selección ahora pueden especificar si su primer valor será vacío o será el valor del primer registro encontrado.  Simplemente agrega una coma sola al campo de lista de valores para indicar este comportamiento.
+* Enhan: Las listas de permiten fusionar valores estaticos (ingresados en la lista de valores separados por coma) y valores obtenidos desde una tabla dinámicamente.
 
 Importante: Quienes hayan ejecutado actualizaciones previas de la misma version podrian ver errores de ejecución de SQL.  Esto es normal.
 "
