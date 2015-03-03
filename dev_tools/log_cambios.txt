@@ -70,6 +70,7 @@ LogCambios="
 * Fixed: Campos de tipo etiqueta con valores de variables PHP ahora indican su valor sin encerrarlos en la expresion HTML
 * Fixed: Gráficos Morris con valores cero
 * Fixed: Errores de base de datos no desplegados por falta de librerías son ahora presentados con descripciones completas.
+* Fixed: [Tester: Jaime A. Berrio Arenas] Clonacionde formularios no opera correctamente por diferencia entre campos
 * Enhan: Se cambia correo de instalación predeterminado a uno genérico.
 * Enhan: Agregada funcion JavaScript PCO_AgregarElementoDiv que permite agregar dinamicamente elementos HTML a un marco determinado.
 * Enhan: Informes DataTable tienen ahora soporte multiidioma
@@ -84,6 +85,7 @@ LogCambios="
 * Enhan: Forzado de charset UTF8 para evitar problemas de multiples confirguraciones
 
 Importante: Quienes hayan ejecutado actualizaciones previas de la misma version podrian ver errores de ejecución de SQL.  Esto es normal.
+Aviso:  Con el cambio forzado a UTF8 aquellos programadores que tuviesen mal configurado su set de caracteres sobre las tablas del servidor podrían ver cambios en las palabras con acentos.  Deben ser reescritas para que la información sea consistente y corregir así la falta de confguración previa de la colación de su motor.
 "
 
 ########################################################################
