@@ -1869,6 +1869,8 @@ function selector_iconos_awesome()
 				$cadena_validacion=' onkeypress="return validar_teclado(event, \''.$registro_campos["validacion_datos"].'\');" ';
 			
             $cadena_complementaria_datepicker='';
+            $cadena_ID_datepicker='';
+            $cadena_clase_datepicker='';
             if ($registro_campos["validacion_datos"]=="fecha")
 				{
 					$cadena_ID_datepicker=' id="DatePicker_'.$registro_campos["campo"].'" ';
@@ -3288,7 +3290,8 @@ function selector_iconos_awesome()
                                                         $consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND columna=? AND visible=1 AND peso >? AND peso <=? ORDER BY peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario$_SeparadorCampos_$cl$_SeparadorCampos_$limite_inferior$_SeparadorCampos_$limite_superior");
                                                         
                                                             //Inicia columna de formulario
-                                                            echo '<td>';
+                                                            $PCO_AnchoColumnas=round(100 / $registro_formulario["columnas"]);
+                                                            echo '<td width="'.$PCO_AnchoColumnas.'%">';
                                                             // Crea los campos definidos por cada columna de formulario
                                                             while ($registro_campos = $consulta_campos->fetch())
                                                                 {
