@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno="15"
-VersionCompatibleMes="2"
+VersionCompatibleAno=""
+VersionCompatibleMes=""
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno="15"
-VersionFinalMes="3"
+VersionFinalAno=""
+VersionFinalMes=""
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
@@ -18,27 +18,8 @@ README.md
 CHANGELOG.md
 AUTHORS
 index.php
-core/actualizacion.php
-core/ajax.php
 core/comunes.php
-core/formularios.php
-core/informes.php
-core/marco_abajo.php
-core/marco_admin_morris.php
-core/marco_arriba.php
-core/marco_arriba_bs.php
-core/marco_chat.php
-core/marco_conf.php
-core/marco_dev.php
-core/marco_oauth.php
-core/marco_param.php
-core/marco_wscfg.php
-core/menus.php
-core/usuarios.php
 img/favicon.ico
-img/pcoder.png
-inc/bootstrap/css/practico.css
-inc/bootstrap/js/practico.js
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 mod/pcoder/*
@@ -52,54 +33,13 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Ahora se permite definir informes para ser presentados en formato DataTable, con filtrados, ordenamiento, búsquedas y paginación en caliente.
-* Added: La ficha de cada usuario es editable haciendo clic sobre su nombre en el menu de usuario.  Adicionalmente después de la instalación de la plataforma el usuario admin es redirigido en su primer ingreso para cambiar/actualizar su ficha.
-* Added: Ahora los informes embebidos soportan botones de comando sin importar si se encuentran dentro de otros formularios
-* Added: Algunos controles de formulario pueden soportar ahora el modo de estilo inline durante su publicacion sobre el formulario
-* Added: Nuevos controles de botones de comando para formularios permiten agregar botones en medio del form y no sólo en su barra de estado
-* Added: Algunos controles de formulario podrán soportar imágenes derivadas de las librerías de iconos disponibles.
-* Added: Las opciones de menu ahora soportan targets diferentes y direcciones de URL extensas además de comandos JavaScript
-* Added: Editor de código en línea de Práctico. Módulo PCODER (Practico CODe EditoR)
-* Added: Funcion JavaScript generica para obtener valores mediante AJAX: PCO_ObtenerContenidoAjax
-* Added: Funcion Ajax para devolver como WS valores de campos.  Pendiente ajustar restricciones de campos
-* Added: Asistente de actualización y aplicación de parches puede ahora presentar el histórico de parches aplicados basado en la auditoría
-* Added: Buscador presenta dentro de sus resultados posibles informes autorizados al usuario actual
-* Added: Los botones dentro de formularios ahora permiten el uso de imagenes e iconos de cualquiera de las librerías existentes en Práctico (los mismos de los menues)
-* Fixed: Mensaje de confirmación en cambio de perfil
-* Fixed: Reactivado el control tipo Canvas
-* Fixed: Campos de tipo etiqueta con valores de variables PHP ahora indican su valor sin encerrarlos en la expresion HTML
-* Fixed: Gráficos Morris con valores cero
-* Fixed: Errores de base de datos no desplegados por falta de librerías son ahora presentados con descripciones completas.
-* Fixed: **[Tester: Jaime A. Berrio Arenas]** Clonacionde formularios no opera correctamente por diferencia entre campos
-* Enhan: Se cambia correo de instalación predeterminado a uno genérico.
-* Enhan: Agregada funcion JavaScript PCO_AgregarElementoDiv que permite agregar dinamicamente elementos HTML a un marco determinado.
-* Enhan: Informes DataTable tienen ahora soporte multiidioma
-* Enhan: El modo de depuracion muestra ahora el query generador al final de cada informe para el usuario admin
-* Enhan: **[Natalia Arroyave]** Mejora en el logo de la aplicación. Geometrización y mejora de paleta.
-* Enhan: Multiarchivos en PCoder y ayudas de teclado
-* Enhan: Al agregar usuarios se redirecciona al perfil del mismo para agregarle permisos
-* Enhan: Se evita el plugin social buttons de Bootstrap para acelerar la carga evitando descargas de netdna.bootstrapcdn.com
-* Enhan: El enlace a PCoder es ahora omnipresente para los admin en la parte superior.  De esa manera se garantiza su uso cuando involuntariamente se genere un error de sintaxis por el programador sobre algún código propio.  De esta manera PCoder estará disponible para poder ingresar a editar y reparar el error.
-* Enhan: Las listas de selección ahora pueden especificar si su primer valor será vacío o será el valor del primer registro encontrado.  Simplemente agrega una coma sola al campo de lista de valores para indicar este comportamiento.
-* Enhan: Las listas de permiten fusionar valores estaticos (ingresados en la lista de valores separados por coma) y valores obtenidos desde una tabla dinámicamente.
-* Enhan: Forzado de charset UTF8 para evitar problemas de multiples confirguraciones
 
-Importante: Quienes hayan ejecutado actualizaciones previas de la misma version podrian ver errores de ejecución de SQL.  Esto es normal.
-Aviso:  Con el cambio forzado a UTF8 aquellos programadores que tuviesen mal configurado su set de caracteres sobre las tablas del servidor podrían ver cambios en las palabras con acentos.  Deben ser reescritas para que la información sea consistente y corregir así la falta de confguración previa de la colación de su motor.
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-ALTER TABLE core_informe ADD COLUMN soporte_datatable char(1) DEFAULT 'N';
-ALTER TABLE core_formulario_objeto ADD COLUMN modo_inline int(1) DEFAULT 0;
-ALTER TABLE core_formulario_objeto ADD COLUMN imagen varchar(250) default '';
-ALTER TABLE core_formulario_objeto ADD COLUMN tipo_accion varchar(250) default '';
-ALTER TABLE core_formulario_objeto ADD COLUMN accion_usuario text;
-ALTER TABLE core_menu CHANGE COLUMN posible_clic destino VARCHAR(250);
-UPDATE core_menu SET destino='' WHERE destino='0';
-UPDATE core_menu SET destino='' WHERE destino='1';
-ALTER TABLE core_menu CHANGE COLUMN url url TEXT;
+
 "
 
 ########################################################################
