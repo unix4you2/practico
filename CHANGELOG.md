@@ -6,6 +6,39 @@
 |_____\___/ \__, |  \__,_|\___|  \___\__,_|_| |_| |_|_.__/|_|\___/|___/
             |___/ 
 ```
+## Versión 15.3 (2015-03-01)
+* Added: Ahora se permite definir informes para ser presentados en formato DataTable, con filtrados, ordenamiento, búsquedas y paginación en caliente.
+* Added: La ficha de cada usuario es editable haciendo clic sobre su nombre en el menu de usuario.  Adicionalmente después de la instalación de la plataforma el usuario admin es redirigido en su primer ingreso para cambiar/actualizar su ficha.
+* Added: Ahora los informes embebidos soportan botones de comando sin importar si se encuentran dentro de otros formularios
+* Added: Algunos controles de formulario pueden soportar ahora el modo de estilo inline durante su publicacion sobre el formulario
+* Added: Nuevos controles de botones de comando para formularios permiten agregar botones en medio del form y no sólo en su barra de estado
+* Added: Algunos controles de formulario podrán soportar imágenes derivadas de las librerías de iconos disponibles.
+* Added: Las opciones de menu ahora soportan targets diferentes y direcciones de URL extensas además de comandos JavaScript
+* Added: Editor de código en línea de Práctico. Módulo PCODER (Practico CODe EditoR)
+* Added: Funcion JavaScript generica para obtener valores mediante AJAX: PCO_ObtenerContenidoAjax
+* Added: Funcion Ajax para devolver como WS valores de campos.  Pendiente ajustar restricciones de campos
+* Added: Asistente de actualización y aplicación de parches puede ahora presentar el histórico de parches aplicados basado en la auditoría
+* Added: Buscador presenta dentro de sus resultados posibles informes autorizados al usuario actual
+* Added: Los botones dentro de formularios ahora permiten el uso de imagenes e iconos de cualquiera de las librerías existentes en Práctico (los mismos de los menues)
+* Fixed: Mensaje de confirmación en cambio de perfil
+* Fixed: Reactivado el control tipo Canvas
+* Fixed: Campos de tipo etiqueta con valores de variables PHP ahora indican su valor sin encerrarlos en la expresion HTML
+* Fixed: Gráficos Morris con valores cero
+* Fixed: Errores de base de datos no desplegados por falta de librerías son ahora presentados con descripciones completas.
+* Fixed: Tester: [Jaime A. Berrio Arenas] Clonacionde formularios no opera correctamente por diferencia entre campos
+* Enhan: Se cambia correo de instalación predeterminado a uno genérico.
+* Enhan: Agregada funcion JavaScript PCO_AgregarElementoDiv que permite agregar dinamicamente elementos HTML a un marco determinado.
+* Enhan: Informes DataTable tienen ahora soporte multiidioma
+* Enhan: El modo de depuracion muestra ahora el query generador al final de cada informe para el usuario admin
+* Enhan: Design: [Natalia Arroyave] Mejora en el logo de la aplicación. Geometrización y mejora de paleta.
+* Enhan: Multiarchivos en PCoder y ayudas de teclado
+* Enhan: Al agregar usuarios se redirecciona al perfil del mismo para agregarle permisos
+* Enhan: Se evita el plugin social buttons de Bootstrap para acelerar la carga evitando descargas de netdna.bootstrapcdn.com
+* Enhan: El enlace a PCoder es ahora omnipresente para los admin en la parte superior.  De esa manera se garantiza su uso cuando involuntariamente se genere un error de sintaxis por el programador sobre algún código propio.  De esta manera PCoder estará disponible para poder ingresar a editar y reparar el error.
+* Enhan: Las listas de selección ahora pueden especificar si su primer valor será vacío o será el valor del primer registro encontrado.  Simplemente agrega una coma sola al campo de lista de valores para indicar este comportamiento.
+* Enhan: Las listas de permiten fusionar valores estaticos (ingresados en la lista de valores separados por coma) y valores obtenidos desde una tabla dinámicamente.
+* Enhan: Forzado de charset UTF8 para evitar problemas de multiples confirguraciones
+
 ## Versión 15.2 (2015-02-08)
 * Added: Personalización de Tags HTML para el diseñador de formularios
 * Added: Soporte para datepicker por bootstrap
