@@ -1398,7 +1398,7 @@ if ($PCO_Accion=="editar_formulario")
 
 						<div id='campo35' style="display:none;">
                             <div class="form-group input-group">
-                                <input type="text" name="condicion_filtrado_listas" class="form-control" value="<?php echo @$registro_campo_editar["condicion_filtrado_listas"]; ?>" placeholder="<?php echo $MULTILANG_FrmFiltroLista; ?>">
+                                <input type="text" name="condicion_filtrado_listas" class="form-control" value="<?php echo @htmlentities($registro_campo_editar["condicion_filtrado_listas"]); ?>" placeholder="<?php echo $MULTILANG_FrmFiltroLista; ?>">
                                 <span class="input-group-addon">
                                     <a href="#" title="<?php echo $MULTILANG_FrmDesFiltroLista; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
