@@ -3127,7 +3127,7 @@ function selector_iconos_awesome()
 */
 		function cargar_formulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0)
 		  {
-				global $ConexionPDO,$ArchivoCORE,$TablasCore;
+                global $ConexionPDO,$ArchivoCORE,$TablasCore;
 				global $_SeparadorCampos_;
 				// Carga variables de definicion de tablas
 				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
@@ -3320,7 +3320,26 @@ function selector_iconos_awesome()
                                                                             if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="boton_comando") $objeto_formateado = @cargar_objeto_boton_comando($registro_campos,@$registro_datos_formulario);
                                                                             //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
-                                                                            if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorBusquedaBD,1);
+                                                                            //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
+                                                                            //padre el valor del campo foraneo del form hijo para llamar a buscar form con
+                                                                            //el valor de Id correspondiente
+                                                                            if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario)
+                                                                                {
+                                                                                    //Busca la tabla principal del subformulario anidado
+                                                                                    $PCO_ValorCampoBind=$registro_campos["formulario_vinculado"];
+                                                                                    if($PCO_ValorCampoBind=="") $PCO_ValorCampoBind="";
+                                                                                    $consulta_tabla_subform=ejecutar_sql("SELECT tabla_datos FROM ".$TablasCore."formulario WHERE id=? ","$PCO_ValorCampoBind")->fetch();
+                                                                                    $PCO_TablaSubform=$consulta_tabla_subform["tabla_datos"];
+                                                                                    
+                                                                                    //Determina el valor del campo a vincular en el registro padre (el actual).  Deberia dar el id que se va a buscar
+                                                                                    $PCO_ValorCampoPadre=@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]];
+                                                                                    if($PCO_ValorCampoPadre=="") $PCO_ValorCampoPadre=0;
+                                                                                    $PCO_CampoForaneoSubform=$registro_campos["formulario_campo_foraneo"];
+                                                                                    //Busca el ID de registro correspondiente en la tabla de datos para llamar con el valor coincidente
+                                                                                    $consulta_registro_subform=ejecutar_sql("SELECT $PCO_CampoForaneoSubform FROM $PCO_TablaSubform WHERE $PCO_CampoForaneoSubform=? ","$PCO_ValorCampoPadre")->fetch();
+
+                                                                                    @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorCampoPadre,1);
+                                                                                }
 
                                                                             //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
                                                                             if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
@@ -3367,7 +3386,26 @@ function selector_iconos_awesome()
                                                         if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="boton_comando") $objeto_formateado = @cargar_objeto_boton_comando($registro_campos,@$registro_datos_formulario);
                                                         //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
-                                                        if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario) @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorBusquedaBD,1);
+                                                        //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
+                                                        //padre el valor del campo foraneo del form hijo para llamar a buscar form con
+                                                        //el valor de Id correspondiente
+                                                        if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario)
+                                                            {
+                                                                //Busca la tabla principal del subformulario anidado
+                                                                $PCO_ValorCampoBind=$registro_campos["formulario_vinculado"];
+                                                                if($PCO_ValorCampoBind=="") $PCO_ValorCampoBind="";
+                                                                $consulta_tabla_subform=ejecutar_sql("SELECT tabla_datos FROM ".$TablasCore."formulario WHERE id=? ","$PCO_ValorCampoBind")->fetch();
+                                                                $PCO_TablaSubform=$consulta_tabla_subform["tabla_datos"];
+                                                                
+                                                                //Determina el valor del campo a vincular en el registro padre (el actual).  Deberia dar el id que se va a buscar
+                                                                $PCO_ValorCampoPadre=@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]];
+                                                                if($PCO_ValorCampoPadre=="") $PCO_ValorCampoPadre=0;
+                                                                $PCO_CampoForaneoSubform=$registro_campos["formulario_campo_foraneo"];
+                                                                //Busca el ID de registro correspondiente en la tabla de datos para llamar con el valor coincidente
+                                                                $consulta_registro_subform=ejecutar_sql("SELECT $PCO_CampoForaneoSubform FROM $PCO_TablaSubform WHERE $PCO_CampoForaneoSubform=? ","$PCO_ValorCampoPadre")->fetch();
+
+                                                                @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorCampoPadre,1);
+                                                            }
 
                                                         //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
                                                         if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
