@@ -3741,14 +3741,17 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							if ($registro_botones["tipo_accion"]=="interna_cargar")
 								{
 									$comando_javascript="
-										document.FRMBASEINFORME.PCO_Accion.value='cargar_objeto';
+                                        document.FRMBASEINFORME.PCO_Accion.value='cargar_objeto';
 										document.FRMBASEINFORME.objeto.value='frm:".$registro_botones["accion_usuario"].":DETFRMVALBASE';
 										document.FRMBASEINFORME.submit()";
 								}
 							if ($registro_botones["tipo_accion"]=="externa_formulario")
 								{
 									$comando_javascript="
-										document.FRMBASEINFORME.PCO_Accion.value='".$registro_botones["accion_usuario"]."';
+										document.FRMBASEINFORME.PCO_Tabla.value='".$tabla_vinculada."';
+										document.FRMBASEINFORME.PCO_Campo.value='".$campo_vinculado."';
+										document.FRMBASEINFORME.PCO_Valor.value='DELFRMVALVALOR';
+                                        document.FRMBASEINFORME.PCO_Accion.value='".$registro_botones["accion_usuario"]."';
 										document.FRMBASEINFORME.submit()";
 								}
 							if ($registro_botones["tipo_accion"]=="externa_javascript")

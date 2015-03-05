@@ -327,10 +327,14 @@
 </form>
 <form name="FRMBASEINFORME" action="<?php echo $ArchivoCORE; ?>" method="POST">
     <input type="Hidden" name="PCO_Accion" value="">
-    <input type="Hidden" name="tabla" value="">
-    <input type="Hidden" name="campo" value="">
-    <input type="Hidden" name="valor" value="">
-    <input type="Hidden" name="objeto" value="">
+    <input type="Hidden" name="tabla" value="">  <!-- Compatibilidad hacia atras -->
+    <input type="Hidden" name="campo" value="">  <!-- Compatibilidad hacia atras -->
+    <input type="Hidden" name="valor" value="">  <!-- Compatibilidad hacia atras -->
+    <input type="Hidden" name="objeto" value=""> <!-- Compatibilidad hacia atras -->
+    <input type="Hidden" name="PCO_Tabla" value="">
+    <input type="Hidden" name="PCO_Campo" value="">
+    <input type="Hidden" name="PCO_Valor" value="">
+    <input type="Hidden" name="PCO_Objeto" value="">
 </form>
 
 <?php 
