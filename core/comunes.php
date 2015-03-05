@@ -1973,12 +1973,9 @@ function selector_iconos_awesome()
 					$nombre_variable = substr($registro_campos["valor_predeterminado"], 1);
 					global ${$nombre_variable};
 					if (isset($nombre_variable))
-						{
-							$valor_variable=$$nombre_variable;
-							$cadena_valor=' value="'.$valor_variable.'" ';							
-						}
+                        $cadena_valor=$$nombre_variable;
 				}
-			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=' value="'.$registro_datos_formulario["$nombre_campo"].'" ';
+			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 			// Muestra el campo
 			$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor.'" >';
@@ -2217,8 +2214,15 @@ function selector_iconos_awesome()
 			$nombre_campo=$registro_campos["campo"];
 
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
-			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
-			
+			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="")
+                {
+                    //Si se tiene un valor de registro entonces lo prefiere, sino usa el de busqueda
+                    if ($registro_datos_formulario["$nombre_campo"]!="")
+                        $cadena_valor=$registro_datos_formulario["$nombre_campo"];
+                    else
+                        $cadena_valor=$PCO_ValorBusquedaBD;
+                }
+
 			// Define si el control es un ComboBox o un ListBox dependiendo de su altura (!=0 es listbox)
 			if ($registro_campos["alto"]!='0')
 				$cadena_altura='size='.$registro_campos["alto"];
@@ -2364,7 +2368,8 @@ function selector_iconos_awesome()
 			// Muestra boton de busqueda cuando el campo sea usado para esto
 			if ($registro_campos["etiqueta_busqueda"]!="")
 				{
-					$salida.= '<span class="input-group-addon"><input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.PCO_ValorBusquedaBD.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.PCO_Accion.value=\'cargar_objeto\';document.datos.submit()"></span>';
+					echo $cadena_valor;
+                    $salida.= '<span class="input-group-addon"><input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.PCO_ValorBusquedaBD.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.PCO_Accion.value=\'cargar_objeto\';document.datos.submit()"></span>';
 					$salida.= '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
 					$salida.= '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
 					$salida.= '<input type="Hidden" name="PCO_CampoBusquedaBD" value="'.$registro_campos["campo"].'" >';
@@ -3336,6 +3341,12 @@ function selector_iconos_awesome()
                                                                                     
                                                                                     //Determina el valor del campo a vincular en el registro padre (el actual).  Deberia dar el id que se va a buscar
                                                                                     $PCO_ValorCampoPadre=@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]];
+                                                                                    //Si no se encuentra el dato o registro entonces mira si vienen desde un boton de busqueda y usa su valor
+                                                                                    if($PCO_ValorCampoPadre=="" && $PCO_ValorBusquedaBD!="")
+                                                                                        {
+                                                                                            //$PCO_ValorCampoPadre=$PCO_ValorBusquedaBD;
+                                                                                        }
+                                                                                    //Si no obtiene ningun valor entonces lo pone en cero para evitar error de sintaxis en Bind de SQL
                                                                                     if($PCO_ValorCampoPadre=="") $PCO_ValorCampoPadre=0;
                                                                                     $PCO_CampoForaneoSubform=$registro_campos["formulario_campo_foraneo"];
                                                                                     //Busca el ID de registro correspondiente en la tabla de datos para llamar con el valor coincidente
@@ -3402,6 +3413,12 @@ function selector_iconos_awesome()
                                                                 
                                                                 //Determina el valor del campo a vincular en el registro padre (el actual).  Deberia dar el id que se va a buscar
                                                                 $PCO_ValorCampoPadre=@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]];
+                                                                //Si no se encuentra el dato o registro entonces mira si vienen desde un boton de busqueda y usa su valor
+                                                                if($PCO_ValorCampoPadre=="" && $PCO_ValorBusquedaBD!="")
+                                                                    {
+                                                                        //$PCO_ValorCampoPadre=$PCO_ValorBusquedaBD;
+                                                                    }
+                                                                //Si no obtiene ningun valor entonces lo pone en cero para evitar error de sintaxis en Bind de SQL
                                                                 if($PCO_ValorCampoPadre=="") $PCO_ValorCampoPadre=0;
                                                                 $PCO_CampoForaneoSubform=$registro_campos["formulario_campo_foraneo"];
                                                                 //Busca el ID de registro correspondiente en la tabla de datos para llamar con el valor coincidente
