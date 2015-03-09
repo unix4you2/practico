@@ -3733,8 +3733,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 									$comando_javascript="
 										document.FRMBASEINFORME.PCO_Accion.value='eliminar_registro_informe';
-										document.FRMBASEINFORME.tabla.value='".$tabla_vinculada."';
-										document.FRMBASEINFORME.campo.value='".$campo_vinculado."';
+										document.FRMBASEINFORME.tabla.value='".@$tabla_vinculada."';
+										document.FRMBASEINFORME.campo.value='".@$campo_vinculado."';
 										document.FRMBASEINFORME.valor.value='DELFRMVALVALOR';
 										document.FRMBASEINFORME.submit()";
 								}
@@ -3748,8 +3748,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							if ($registro_botones["tipo_accion"]=="externa_formulario")
 								{
 									$comando_javascript="
-										document.FRMBASEINFORME.PCO_Tabla.value='".$tabla_vinculada."';
-										document.FRMBASEINFORME.PCO_Campo.value='".$campo_vinculado."';
+										document.FRMBASEINFORME.PCO_Tabla.value='".@$tabla_vinculada."';
+										document.FRMBASEINFORME.PCO_Campo.value='".@$campo_vinculado."';
 										document.FRMBASEINFORME.PCO_Valor.value='DELFRMVALVALOR';
                                         document.FRMBASEINFORME.PCO_Accion.value='".$registro_botones["accion_usuario"]."';
 										document.FRMBASEINFORME.submit()";
@@ -3764,15 +3764,20 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 						}
 
 					// Imprime encabezados de columna
-					$resultado_columnas=ejecutar_sql($consulta);
+					$resultado_columnas=@ejecutar_sql($consulta);
+                    $ConteoColumnas=$resultado_columnas->rowCount();
 				
-					$numero_columnas=0;
-					foreach(@$resultado_columnas->fetch(PDO::FETCH_ASSOC) as $key=>$val)
-						{
-							$SalidaFinalInforme.= '<th>'.$key.'</th>';
-							$SalidaFinalInformePDF.= '<th>'.$key.'</th>';
-							$numero_columnas++;
-						}
+                    //Si se tienen registros para mirar las columnas las agrega
+                    if ($ConteoColumnas>0)
+					{
+                        $numero_columnas=0;
+                        foreach($resultado_columnas->fetch(PDO::FETCH_ASSOC) as $key=>$val)
+                            {
+                                $SalidaFinalInforme.= '<th>'.$key.'</th>';
+                                $SalidaFinalInformePDF.= '<th>'.$key.'</th>';
+                                $numero_columnas++;
+                            }
+                    }
 
 					//Si el informe tiene botones entonces agrega columna adicional
 					if ($total_botones>0)
@@ -3813,16 +3818,19 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					$SalidaFinalInformePDF.= '</tbody>';
 					if ($formato=="htm")
 						{
-							$SalidaFinalInforme.= '<tfoot>
-								<tr><td colspan='.$numero_columnas.'>
-									<b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
-								</td></tr>
-							</tfoot>';
-							$SalidaFinalInformePDF.= '<tfoot>
-								<tr><td colspan='.$numero_columnas.'>
-									<b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
-								</td></tr>
-							</tfoot>';
+                            //Cuando es embebido (=1) no agrega los totales de registro
+                            if (!$embebido)
+                                {
+                                    $SalidaFinalInforme.= '<tfoot>
+                                        <tr><td colspan='.$numero_columnas.'>
+                                            <b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
+                                        </td></tr>';
+                                    $SalidaFinalInformePDF.= '<tfoot>
+                                        <tr><td colspan='.$numero_columnas.'>
+                                            <b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
+                                        </td></tr>';
+                                }
+                            echo '</tfoot>';
 						}
 					$SalidaFinalInforme.= '</table>';
 					$SalidaFinalInformePDF.= '</table>';
