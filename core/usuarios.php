@@ -519,6 +519,49 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="formulario_recuperac
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: copiar_informes
+	Elimina los permisos definidos en informes para un usuario y los reemplaza  con los permisos definidos actualmente para otro usuario
+
+	Variables de entrada:
+
+		usuariod - Usuario destino (al que seran copiados los informes)
+		usuarioo - Usuario oorigen (del que se toman los permisos de informes como base para ser copiados)
+
+	Salida:
+		Informes del usuario destino actualizados
+
+	Ver tambien:
+		<permisos_usuario> | <informes_usuario>
+*/
+if ($PCO_Accion=="copiar_informes")
+	{
+		// Elimina opciones existentes
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE usuario=? ","$usuariod");
+		// Copia permisos si el usuario origen es diferente de vacio, sino lo deja sin nada
+        if ($usuarioo!="")
+            {
+                $resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_informe." FROM ".$TablasCore."usuario_informe WHERE usuario=? ","$usuarioo");
+                while($registro = $resultado->fetch())
+                    {
+                        $menuinsertar=$registro["informe"];
+                        ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES (?,?)","$usuariod$_SeparadorCampos_$menuinsertar");
+                    }
+            }
+		auditar("Copia informes de $usuarioo al usuario $usuariod");
+		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+			<input type="Hidden" name="PCO_Accion" value="informes_usuario">
+			<input type="Hidden" name="usuario" value="'.$usuariod.'">
+			</form>
+			<script type="" language="JavaScript">
+			alert("'.$MULTILANG_UsrCopia.'");
+			document.cancelar.submit();  </script>';
+	}
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: copiar_permisos
 	Elimina los permisos definidos para un usuario y los reemplaza  con los permisos definidos actualmente para otro usuario
 
@@ -810,6 +853,25 @@ if ($PCO_Accion=="informes_usuario")
     {
         abrir_ventana($MULTILANG_UsrAdmInf,'panel-info');
 ?>
+
+			<form name="datoscopia" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<input type="hidden" name="usuariod" value="<?php echo $usuario; ?>">
+			<input type="hidden" name="PCO_Accion" value="copiar_informes">
+
+			<font face="" size="3" color="#971515"><b><?php echo $MULTILANG_UsrCopiaPer; ?>: </b></font>
+				<select name="usuarioo" class="selectpicker " data-live-search=true data-size=5 data-style="btn btn-default btn-xs ">
+						<option value=""><?php echo $MULTILANG_UsrDelPer; ?></option>
+						<?php
+							$resultado=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login<>'admin' AND login<>? ORDER BY login","$usuario");
+							while($registro = $resultado->fetch())
+								{
+									echo '<option value="'.$registro["login"].'">'.$registro["login"].'</option>';
+								}
+						?>
+				</select>
+					<input type="Button" name="" value="<?php echo $MULTILANG_Ejecutar; ?>" class="btn btn-xs btn-danger" onClick="document.datoscopia.submit()">
+			</form><hr>
+
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
                 <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
                 <input type="hidden" name="PCO_Accion" value="agregar_informe_usuario">
