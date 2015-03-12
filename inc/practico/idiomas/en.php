@@ -831,7 +831,9 @@
     $MULTILANG_UsrPerfil='User profile';
     $MULTILANG_UsrActualizarAdmin='Your settings says that you should change your profile to update the email address for the admin user.<br>Please go to the upper user menu and Clic over Super user or user name option to change it.';
     $MULTILANG_UsrCreacionOK='The account user was added.  Now is filtered to add any menu option or report that you need.  You could cancel this operation if is not necessary to assign right at this moment.';
-    
+    $MULTILANG_UsrSaltarInformes='Jump to REPORT rights for this user';
+    $MULTILANG_UsrSaltarMenues='Jump to MENU rights for this user';
+
 
 	//Proceso de instalacion
 	$MULTILANG_Instalacion='Installation Process';

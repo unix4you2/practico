@@ -83,9 +83,11 @@
 			if ($PCO_Accion== "agregar_informe_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
 			if ($PCO_Accion== "eliminar_informe_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
             if ($PCO_Accion== "copiar_permisos")					$retorno = permiso_agregado_accion("listar_usuarios");
+            if ($PCO_Accion== "copiar_informes")					$retorno = permiso_agregado_accion("listar_usuarios");
 			// Funciones en core/menus.php
 			if ($PCO_Accion== "Ver_menu")							$retorno = 1;
-			if ($PCO_Accion== "guardar_menu")						$retorno = permiso_agregado_accion("administrar_menu");
+			if ($PCO_Accion== "buscar_permisos_practico")			$retorno = 1;
+            if ($PCO_Accion== "guardar_menu")						$retorno = permiso_agregado_accion("administrar_menu");
 			if ($PCO_Accion== "eliminar_menu")						$retorno = permiso_agregado_accion("administrar_menu");
 			if ($PCO_Accion== "detalles_menu")						$retorno = permiso_agregado_accion("administrar_menu");
 			if ($PCO_Accion== "actualizar_menu")					$retorno = permiso_agregado_accion("administrar_menu");

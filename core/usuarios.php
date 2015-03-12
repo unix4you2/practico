@@ -853,7 +853,11 @@ if ($PCO_Accion=="informes_usuario")
     {
         abrir_ventana($MULTILANG_UsrAdmInf,'panel-info');
 ?>
-
+			<form name="salto" action="<?php echo $ArchivoCORE; ?>" method="POST">
+                <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
+                <input type="hidden" name="PCO_Accion" value="permisos_usuario">
+            </form>
+            
 			<form name="datoscopia" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="hidden" name="usuariod" value="<?php echo $usuario; ?>">
 			<input type="hidden" name="PCO_Accion" value="copiar_informes">
@@ -889,7 +893,9 @@ if ($PCO_Accion=="informes_usuario")
 					?>
 				</select>
                 <button class="btn btn-success btn-xs"  onClick="document.datos.submit()"><i class="fa fa-plus fa-fw"></i> <?php echo $MULTILANG_Agregar; ?></button>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:document.core_ver_menu.submit();" class="btn btn-default btn-xs"><i class="fa fa-home"></i> <?php echo $MULTILANG_FrmAccionRegresar; ?></a>
+				<br><br>
+                <a href="javascript:document.core_ver_menu.submit();" class="btn btn-default btn-xs"><i class="fa fa-home"></i> <?php echo $MULTILANG_FrmAccionRegresar; ?></a>
+                <a href="javascript:document.salto.submit();" class="btn btn-warning btn-xs"><i class="fa fa-external-link-square"></i> <?php echo $MULTILANG_UsrSaltarMenues; ?></a>
 
             </form>
         <hr>
@@ -1043,6 +1049,10 @@ if ($PCO_Accion=="permisos_usuario")
     {
         abrir_ventana($MULTILANG_UsrAdmPer, 'panel-info');
 ?>
+			<form name="salto" action="<?php echo $ArchivoCORE; ?>" method="POST">
+                <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
+                <input type="hidden" name="PCO_Accion" value="informes_usuario">
+            </form>
 
 			<form name="datoscopia" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="hidden" name="usuariod" value="<?php echo $usuario; ?>">
@@ -1079,7 +1089,9 @@ if ($PCO_Accion=="permisos_usuario")
 					?>
 				</select>
                 <button class="btn btn-success btn-xs"  onClick="document.datos.submit()"><i class="fa fa-plus fa-fw"></i> <?php echo $MULTILANG_Agregar; ?></button>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:document.core_ver_menu.submit();" class="btn btn-default btn-xs"><i class="fa fa-home"></i> <?php echo $MULTILANG_FrmAccionRegresar; ?></a>
+				<br><br>
+                <a href="javascript:document.core_ver_menu.submit();" class="btn btn-default btn-xs"><i class="fa fa-home"></i> <?php echo $MULTILANG_FrmAccionRegresar; ?></a>
+                <a href="javascript:document.salto.submit();" class="btn btn-warning btn-xs"><i class="fa fa-external-link-square"></i> <?php echo $MULTILANG_UsrSaltarInformes; ?></a>
             </form>
             <hr>
 
