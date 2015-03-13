@@ -227,14 +227,14 @@
     include("mod/personalizadas.php"); 
     // Incluye otros modulos que residan sobre carpetas en mod/* cuya entrada es index.php
     $directorio_modulos=opendir("mod");
-    while (($elemento=readdir($directorio_modulos))!=false) {
+    while (($PCOVAR_Elemento=readdir($directorio_modulos))!=false) {
         //Lo procesa solo si es directorio
-        if (is_dir("mod/".$elemento) && $elemento!="." && $elemento!="..") {
+        if (is_dir("mod/".$PCOVAR_Elemento) && $PCOVAR_Elemento!="." && $PCOVAR_Elemento!="..") {
             //Busca la entrada del modulo sino muestra error
-            if (file_exists("mod/".$elemento."/index.php"))
-                include("mod/".$elemento."/index.php");
+            if (file_exists("mod/".$PCOVAR_Elemento."/index.php"))
+                include("mod/".$PCOVAR_Elemento."/index.php");
             else
-                mensaje($MULTILANG_ErrorTiempoEjecucion, $MULTILANG_ErrorModulo.'<br><b>'.$MULTILANG_Detalles.': '.$elemento.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+                mensaje($MULTILANG_ErrorTiempoEjecucion, $MULTILANG_ErrorModulo.'<br><b>'.$MULTILANG_Detalles.': '.$PCOVAR_Elemento.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
         }
     }
 

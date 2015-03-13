@@ -45,20 +45,20 @@
                         // Incluye archivos de idioma para ser seleccionados
                         $path_idiomas="../inc/practico/idiomas/";
                         $directorio_idiomas=opendir($path_idiomas);
-                        while (($elemento=readdir($directorio_idiomas))!=false)
+                        while (($PCOVAR_Elemento=readdir($directorio_idiomas))!=false)
                             {
                                 //Lo procesa solo si es un archivo diferente del index
-                                if (!is_dir($path_idiomas.$elemento) && $elemento!="." && $elemento!=".."  && $elemento!="index.html")
+                                if (!is_dir($path_idiomas.$PCOVAR_Elemento) && $PCOVAR_Elemento!="." && $PCOVAR_Elemento!=".."  && $PCOVAR_Elemento!="index.html")
                                     {
-                                        include_once($path_idiomas.$elemento);
+                                        include_once($path_idiomas.$PCOVAR_Elemento);
                                         //Establece espanol como predeterminado
                                         $seleccion="";
-                                        if ($elemento=="es.php") $seleccion="SELECTED";
-                                        $valor_opcion=str_replace(".php","",$elemento);
+                                        if ($PCOVAR_Elemento=="es.php") $seleccion="SELECTED";
+                                        $valor_opcion=str_replace(".php","",$PCOVAR_Elemento);
                                         //Presenta la opcion
-                                        echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$elemento.')</option>';
-                                        if (file_exists("mod/".$elemento."/index.php"))
-                                            include("mod/".$elemento."/index.php");
+                                        echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$PCOVAR_Elemento.')</option>';
+                                        if (file_exists("mod/".$PCOVAR_Elemento."/index.php"))
+                                            include("mod/".$PCOVAR_Elemento."/index.php");
                                     }
                             }		
                         ?>

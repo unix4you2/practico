@@ -60,6 +60,7 @@ CREATE TABLE core_menu (
   posible_escritorio int(1) default '0',
   seccion varchar(250) default '',  #Cuando Posible centro=1 define la seccion donde va por agrupacion
   imagen varchar(250) default '',
+  posible_izquierda int(1) default '0',
   PRIMARY KEY  (id)
 );
 

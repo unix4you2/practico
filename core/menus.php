@@ -123,7 +123,7 @@ function selector_objetos_menu()
 if ($PCO_Accion=="actualizar_menu")
 	{
 		// Actualiza los datos del item
-		ejecutar_sql_unaria("UPDATE ".$TablasCore."menu SET texto=?,peso=?,url=?,destino=?,tipo_comando=?,comando=?,nivel_usuario=?,posible_arriba=?,posible_centro=?,posible_escritorio=?,seccion=?,imagen=? WHERE id=? ","$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$id");
+		ejecutar_sql_unaria("UPDATE ".$TablasCore."menu SET posible_izquierda=?,texto=?,peso=?,url=?,destino=?,tipo_comando=?,comando=?,nivel_usuario=?,posible_arriba=?,posible_centro=?,posible_escritorio=?,seccion=?,imagen=? WHERE id=? ","$posible_izquierda$_SeparadorCampos_$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$id");
 		auditar("Actualiza menu item $texto c&oacute;digo $id");
 		echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 	}
@@ -193,7 +193,7 @@ if ($PCO_Accion=="detalles_menu")
                             </select>
 
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                         <label for="posible_arriba"><?php echo $MULTILANG_MnuArriba; ?>:</label>
                                         <div class="form-group input-group">
                                             <select id="posible_arriba" name="posible_arriba" class="form-control" >
@@ -205,7 +205,7 @@ if ($PCO_Accion=="detalles_menu")
                                             </span>
                                         </div>
                                 </div>    
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                         <label for="posible_escritorio"><?php echo $MULTILANG_MnuEscritorio; ?>:</label>
                                         <div class="form-group input-group">
                                             <select id="posible_escritorio" name="posible_escritorio" class="form-control" >
@@ -217,7 +217,7 @@ if ($PCO_Accion=="detalles_menu")
                                             </span>
                                         </div>
                                 </div>    
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                         <label for="posible_centro"><?php echo $MULTILANG_MnuCentro; ?>:</label>
                                         <div class="form-group input-group">
                                             <select id="posible_centro" name="posible_centro" class="form-control" >
@@ -226,6 +226,18 @@ if ($PCO_Accion=="detalles_menu")
                                             </select>
                                             <span class="input-group-addon">
                                                 <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesCentro; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            </span>
+                                        </div>
+                                </div>
+                                <div class="col-md-3">
+                                        <label for="posible_izquierda"><?php echo $MULTILANG_MnuIzquierda; ?>:</label>
+                                        <div class="form-group input-group">
+                                            <select id="posible_izquierda" name="posible_izquierda" class="form-control" >
+                                                <option value="0"><?php echo $MULTILANG_No; ?></option>
+                                                <option value="1" <?php if ($registro["posible_izquierda"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
+                                            </select>
+                                            <span class="input-group-addon">
+                                                <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesIzquierdo; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                             </span>
                                         </div>
                                 </div>
@@ -372,7 +384,7 @@ if ($PCO_Accion=="eliminar_menu")
 			if ($mensaje_error=="")
 				{
 					// Guarda los datos del comando o item de menu
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)","$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$posible_izquierda");
 					auditar("Agrega en menu: $texto");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
@@ -449,7 +461,7 @@ if ($PCO_Accion=="administrar_menu")
                             </select>
 
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                         <label for="posible_arriba"><?php echo $MULTILANG_MnuArriba; ?>:</label>
                                         <div class="form-group input-group">
                                             <select id="posible_arriba" name="posible_arriba" class="form-control" >
@@ -461,7 +473,7 @@ if ($PCO_Accion=="administrar_menu")
                                             </span>
                                         </div>
                                 </div>    
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                         <label for="posible_escritorio"><?php echo $MULTILANG_MnuEscritorio; ?>:</label>
                                         <div class="form-group input-group">
                                             <select id="posible_escritorio" name="posible_escritorio" class="form-control" >
@@ -473,7 +485,7 @@ if ($PCO_Accion=="administrar_menu")
                                             </span>
                                         </div>
                                 </div>    
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                         <label for="posible_centro"><?php echo $MULTILANG_MnuCentro; ?>:</label>
                                         <div class="form-group input-group">
                                             <select id="posible_centro" name="posible_centro" class="form-control" >
@@ -482,6 +494,18 @@ if ($PCO_Accion=="administrar_menu")
                                             </select>
                                             <span class="input-group-addon">
                                                 <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesCentro; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            </span>
+                                        </div>
+                                </div>
+                                <div class="col-md-3">
+                                        <label for="posible_izquierda"><?php echo $MULTILANG_MnuIzquierda; ?>:</label>
+                                        <div class="form-group input-group">
+                                            <select id="posible_izquierda" name="posible_izquierda" class="form-control" >
+                                                <option value="0"><?php echo $MULTILANG_No; ?></option>
+                                                <option value="1"><?php echo $MULTILANG_Si; ?></option>
+                                            </select>
+                                            <span class="input-group-addon">
+                                                <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesIzquierdo; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                             </span>
                                         </div>
                                 </div>

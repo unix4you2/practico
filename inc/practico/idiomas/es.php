@@ -662,10 +662,12 @@
 	$MULTILANG_MnuArriba='Posible arriba?';
 	$MULTILANG_MnuEscritorio='Posible escritorio?';
 	$MULTILANG_MnuCentro='Posible en el centro?';
+    $MULTILANG_MnuIzquierda='Posible lateral?';
 	$MULTILANG_MnuSeccion='Secci&oacute;n';
 	$MULTILANG_MnuDesArriba='Se debe habilitar esta opci&oacute;n para ser desplegada en la barra de menu superior-horizontal?';
 	$MULTILANG_MnuDesEscritorio='Se debe habilitar esta opci&oacute;n para ser desplegada como un icono en el escritorio del usuario?';
 	$MULTILANG_MnuDesCentro='Se debe habilitar esta opci&oacute;n para ser desplegada en la parte central del aplicativo, dentro de ventanas clasificadas/agrupadas por el valor definido en el campo Seccion?';
+    $MULTILANG_MnuDesIzquierdo='Se debe habilitar esta opci&oacute;n para ser desplegada en la barra lateral izquierda del aplicativo?';
 	$MULTILANG_MnuDesImagen='Desplegar una lista de im&aacute;genes disponibles en el sistema';
 	$MULTILANG_MnuComandos='CONFIGURACION DE COMANDOS Y ACCIONES';
 	$MULTILANG_MnuClic='Posible hacer clic?';

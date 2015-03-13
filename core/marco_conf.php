@@ -167,18 +167,18 @@
                                             $path_idiomas="inc/practico/idiomas/";
                                             $directorio_idiomas=opendir($path_idiomas);
                                             $IdiomaPredeterminadoActual=$IdiomaPredeterminado;
-                                            while (($elemento=readdir($directorio_idiomas))!=false)
+                                            while (($PCOVAR_Elemento=readdir($directorio_idiomas))!=false)
                                                 {
                                                     //Lo procesa solo si es un archivo diferente del index
-                                                    if (!is_dir($path_idiomas.$elemento) && $elemento!="." && $elemento!=".."  && $elemento!="index.html")
+                                                    if (!is_dir($path_idiomas.$PCOVAR_Elemento) && $PCOVAR_Elemento!="." && $PCOVAR_Elemento!=".."  && $PCOVAR_Elemento!="index.html")
                                                         {
-                                                            include($path_idiomas.$elemento);
+                                                            include($path_idiomas.$PCOVAR_Elemento);
                                                             //Establece espanol como predeterminado
                                                             $seleccion="";
-                                                            $valor_opcion=str_replace(".php","",$elemento);
+                                                            $valor_opcion=str_replace(".php","",$PCOVAR_Elemento);
                                                             if ($valor_opcion==$IdiomaPredeterminadoActual) $seleccion="SELECTED";
                                                             //Presenta la opcion
-                                                            echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$elemento.')</option>';
+                                                            echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$PCOVAR_Elemento.')</option>';
                                                         }
                                                 }		
                                             //Vuelve a cargar el predeterminado actual

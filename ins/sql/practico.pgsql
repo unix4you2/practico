@@ -60,6 +60,7 @@ CREATE TABLE core_menu (
   posible_escritorio integer default '0',
   seccion varchar(250) default '', 
   imagen varchar(250) default '',
+  posible_izquierda integer default '0',
   PRIMARY KEY  (id)
 );
 

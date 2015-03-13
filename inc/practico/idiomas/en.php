@@ -665,11 +665,13 @@
 	$MULTILANG_MnuArriba='TopMenu Possible?';
 	$MULTILANG_MnuEscritorio='Desktop Possible?';
 	$MULTILANG_MnuCentro='Middle Possible?';
+    $MULTILANG_MnuIzquierda='Sidebar Possible?';
 	$MULTILANG_MnuSeccion='Section';
 	$MULTILANG_MnuDesArriba='You must enable this option to be displayed in the top menu-bar horizontally?';
 	$MULTILANG_MnuDesEscritorio='You must enable this option to be displayed as an icon on the users desktop?';
 	$MULTILANG_MnuDesCentro='You must enable this option to be deployed in the central part of the application, within windows classified / grouped by the value defined in the Section field?';
-	$MULTILANG_MnuDesImagen='Display a list of images available on the system';
+	$MULTILANG_MnuDesIzquierdo='You must enable this option to be deployed in the side bar of the application';
+    $MULTILANG_MnuDesImagen='Display a list of images available on the system';
 	$MULTILANG_MnuComandos='CONFIGURATION COMMANDS AND ACTIONS';
 	$MULTILANG_MnuClic='Possible to click?';
 	$MULTILANG_MnuURL='Static URL';
