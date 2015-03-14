@@ -94,7 +94,8 @@ if ($WSId=="verificar_credenciales")
 				// Conexion a LDAP
 				$auth_ldap_conexion = ldap_connect( $Auth_LDAPServidor, $Auth_LDAPPuerto );
 				//if no coneccion  or echo ("No se puede conectar a LDAP");
-				//ldap_set_option($auth_ldap_conexion, LDAP_OPT_PROTOCOL_VERSION, 3);
+				ldap_set_option($auth_ldap_conexion, LDAP_OPT_REFERRALS, 0); //ActiveDirectory
+                ldap_set_option($auth_ldap_conexion, LDAP_OPT_PROTOCOL_VERSION, 3); //ActiveDirectory
 				//Verifica si se debe preencriptar la clave
 				if ($Auth_TipoEncripcion!="plano")
 					$clave=hash($Auth_TipoEncripcion, $clave);

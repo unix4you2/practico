@@ -24,6 +24,7 @@ core/marco_arriba.php
 core/marco_conf.php
 core/menus.php
 core/usuarios.php
+core/ws_funciones.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 "
@@ -43,6 +44,7 @@ LogCambios="
 * Fixed: Se mejora escapado de caracteres en campos de filtrado de listas para formularios
 * Fixed: Búsquedas dinámicas sobre subformularios ahora usan los registros maestros
 * Fixed: Tester [Jaime A. Berrio] Valores Hidden sobre formularios con variables PHP
+* Fixed: Tester [Nestor Ramos Arteaga] Ajuste a parámetros de conexión por LDAP para ActiveDirectory
 * Enhan: Mejorada la apariencia y disposición de controles gráficos en formularios.  El espacio disponible se divide por el número de columnas del formulario
 * Enhan: Eliminados warnings en informes sin resultados que no capturan nombres de columna
 * Enhan: Los informes embebidos ahora no presentan sus totales para hacerlos más limpios sobre otros formularios.  El total se conserva en informes con vista estándar.
