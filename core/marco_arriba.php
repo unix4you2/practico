@@ -249,6 +249,47 @@
                             <?php
                                     }
                             ?>
+                            
+                            <?php
+                                //Busca las posibles opciones del lado izquierdo
+                                // Si el usuario es diferente al administrador agrega condiciones al query
+                                if ($PCOSESS_LoginUsuario!="admin")
+                                    {
+                                        $Complemento_tablas=",".$TablasCore."usuario_menu";
+                                        $Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+                                    }
+                                $resultado=ejecutar_sql("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_izquierda=1 ".@$Complemento_condicion);
+
+                                while($registro = $resultado->fetch())
+                                    {
+                                        echo '<li>';
+
+                                            echo '<form action="'.$ArchivoCORE.'" method="post" name="top_'.$registro["id"].'" id="top_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
+                                            // Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
+                                            if ($registro["tipo_comando"]=="Interno" || $registro["tipo_comando"]=="Personal")
+                                                {
+                                                    echo '<input type="hidden" name="PCO_Accion" value="'.$registro["comando"].'"></form>';
+                                                }
+                                            // Verifica si se trata de una opcion para cargar un objeto de practico
+                                            if ($registro["tipo_comando"]=="Objeto")
+                                                {
+                                                    echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
+                                                         <input type="hidden" name="objeto" value="'.$registro["comando"].'"></form>';
+                                                }
+                                            //Si tiene una URL trata la opcion como enlace estandar, sino como opcion de menu especial
+                                            if ($registro["url"]!="")
+                                                echo '<a title="'.$registro["texto"].'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
+                                            else
+                                                echo '<a href="javascript:document.top_'.$registro["id"].'.submit();">';
+                                            echo '
+                                            <i class="'.$registro["imagen"].'"></i>
+                                            '.$registro["texto"].'</a>';
+
+                                        echo '</li>';
+                                    }
+                            ?>
+
+
                         </ul>
                     <!--FIN DE OPCIONES BARRA LATERAL-->
 
