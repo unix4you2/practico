@@ -95,6 +95,7 @@
 	$MULTILANG_Grande='Big';
 	$MULTILANG_Grafico='Graphic';
 	$MULTILANG_Guardar='Save';
+    $MULTILANG_Guardando='Saving';
 	$MULTILANG_Habilitado='Enabled';
 	$MULTILANG_Habilitar='Enable';
     $MULTILANG_Historico='History';

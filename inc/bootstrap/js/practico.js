@@ -46,6 +46,7 @@ function PCO_ObtenerContenidoAjax(PCO_ASINCRONICO,PCO_URL,PCO_PARAMETROS)
                     {
                         contenido_recibido=xmlhttp.responseText;
                         contenido_recibido = contenido_recibido.trim();
+                        //Cuando es asincronico devuelve la respuesta cuando este lista
                         if(PCO_ASINCRONICO==1)
                             return contenido_recibido;
                     }
@@ -67,7 +68,7 @@ function PCO_ObtenerContenidoAjax(PCO_ASINCRONICO,PCO_URL,PCO_PARAMETROS)
         //xmlhttp.send();
         xmlhttp.send(PCO_PARAMETROS);
         
-        //Cuando la solicitud es asincronica devuelve el resultado
+        //Cuando la solicitud es asincronica devuelve el resultado al momento de llamado
         if(PCO_ASINCRONICO==0)
             return contenido_recibido;
     }

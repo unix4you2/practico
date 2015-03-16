@@ -162,7 +162,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
             <div class="navbar-form navbar-left">
                 <button id="boton_navegador_archivos" class="btn btn-primary btn-xs" data-toggle="modal" href="#NavegadorArchivos" title="<?php echo $MULTILANG_Explorar; ?>"><i class="fa fa-folder-open fa-fw"></i></button>
                 &nbsp;&nbsp;&nbsp;
-                <a class="btn btn-danger btn-xs" OnClick="Guardar();" title="<?php echo $MULTILANG_Guardar; ?>"><i class="fa fa-save fa-fw"></i></a>
+                <button id="boton_guardar" class="btn btn-danger btn-xs" OnClick="Guardar();" href="#VentanaAlmacenamiento" title="<?php echo $MULTILANG_Guardar; ?>"><i class="fa fa-save fa-fw"></i></button>
                 &nbsp;&nbsp;&nbsp;
                 <!--<a class="btn btn-default btn-xs" OnClick="Deshacer();"><i class="fa fa-undo"></i></a>
                 <a class="btn btn-default btn-xs" OnClick="Rehacer();"><i class="fa fa-repeat"></i></a>-->
@@ -217,6 +217,16 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
     <?php 
         $barra_herramientas_modal='
         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+        cerrar_dialogo_modal($barra_herramientas_modal);
+    ?>
+
+
+    <!-- EXPLORADOR DE ARCHIVOS -->
+    <?php
+        abrir_dialogo_modal("VentanaAlmacenamiento","");
+        echo '<i class="fa fa-save fa-fw fa-2x"></i>'.$MULTILANG_Guardar.' '.$MULTILANG_Finalizado;
+        $barra_herramientas_modal='
+        <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
         cerrar_dialogo_modal($barra_herramientas_modal);
     ?>
 
@@ -480,7 +490,19 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
             }
         function Guardar()
             {
-                document.form_archivo_editado.submit();
+                //document.form_archivo_editado.submit(); Metodo estandar, requiere enviar todo y recargar pagina
+                //Metodo con AJAX, Evita el metodo estandar enviando todo sin recargar pagina
+                var ValorTextArea = $('#PCODER_AreaTexto').val();
+                $.ajax({                                        
+                    type: "POST", 
+                    url: "index.php",            
+                    data: "PCODER_TokenEdicion=<?php echo $PCODER_TokenEdicion; ?>&PCODER_archivo=<?php echo $PCODER_archivo; ?>&Presentar_FullScreen=<?php echo $Presentar_FullScreen; ?>&Precarga_EstilosBS=<?php echo $Precarga_EstilosBS; ?>&PCO_Accion=PCOMOD_GuardarArchivo&PCODER_AreaTexto=" + ValorTextArea,
+                    cache: false,
+                    dataType: "html",            
+                    success: function(data) {
+                        $('#VentanaAlmacenamiento').modal('show'); 
+                    }
+                });
             }
         function PCODER_CargarArchivo(archivo)
             {

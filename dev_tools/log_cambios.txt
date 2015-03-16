@@ -26,8 +26,11 @@ core/marco_conf.php
 core/menus.php
 core/usuarios.php
 core/ws_funciones.php
+inc/bootstrap/js/practico.js
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
+mod/pcoder/demo.php
+mod/pcoder/index.php
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -42,6 +45,7 @@ LogCambios="
 * Added: Copia de permisos para informes desde un usuario a otro
 * Added: Tester [Jaime A. Berrio] Ahora los botones de acción en informes y vinculados a una acción de usuario transportan de manera automática el valor del ID de registro, el nombre de la tabla y el campo de la tabla.
 * Added: Boton nuevo permite saltar entre los permisos para menues y reportes de un usuario sin tener que regresar al escritorio
+* Added: PCoder ahora puede almacenar archivos sin actualizar hoja y mover el cursor de punto mediante llamados AJAX
 * Fixed: Se mejora escapado de caracteres en campos de filtrado de listas para formularios
 * Fixed: Búsquedas dinámicas sobre subformularios ahora usan los registros maestros
 * Fixed: Tester [Jaime A. Berrio] Valores Hidden sobre formularios con variables PHP
