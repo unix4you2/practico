@@ -87,17 +87,18 @@ if ($PCO_Accion=="PCOMOD_GuardarArchivo")
         $PCODER_Respuesta = file_put_contents($PCODER_archivo, $_POST["PCODER_AreaTexto"]) or die("can't open file");
         //Vuelve a cargar el archivo para continuar con su edicion
         auditar("Modifica archivo $PCODER_archivo");
-        echo '
-        <body>
-        <form name="continuar_edicion" action="index.php" method="POST">
-            <input type="Hidden" name="PCO_Accion" value="PCOMOD_CargarPcoder">
-            <input type="Hidden" name="PCODER_archivo" value="'.$PCODER_archivo.'">
-            <input type="Hidden" name="PCODER_TokenEdicion" value="'.$PCODER_TokenEdicion.'">
-            <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
-            <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
-        <script type="" language="JavaScript"> document.continuar_edicion.submit();  </script>
-        </body>
-        ';
+        //Continua presentando todo el editor solo si se pide el echo
+        if ($PCO_ECHO==1)
+            echo '
+                <body>
+                <form name="continuar_edicion" action="index.php" method="POST">
+                    <input type="Hidden" name="PCO_Accion" value="PCOMOD_CargarPcoder">
+                    <input type="Hidden" name="PCODER_archivo" value="'.$PCODER_archivo.'">
+                    <input type="Hidden" name="PCODER_TokenEdicion" value="'.$PCODER_TokenEdicion.'">
+                    <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+                    <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
+                <script type="" language="JavaScript"> document.continuar_edicion.submit();  </script>
+                </body>';
 	}
 
 
@@ -148,7 +149,6 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 <body>
 
 <div id="contenedor_principal">
-
 
     <nav id="barra_superior" class="navbar navbar-default navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
@@ -244,12 +244,13 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
     
 
     <!-- ZONA DE EDICION -->
-    <form name="form_archivo_editado" action="index.php" method="POST" target="">
+    <form name="form_archivo_editado" action="index.php" method="POST" target="frame_almacenamiento">
         <textarea id="PCODER_AreaTexto" name="PCODER_AreaTexto" style="visibility:hidden; display:none;"><?php echo $PCODERcontenido_archivo; ?></textarea>
         <input name="PCODER_TokenEdicion" type="hidden" value="<?php echo $PCODER_TokenEdicion; ?>">
         <input name="PCODER_archivo" type="hidden" value="<?php echo $PCODER_archivo; ?>">
         <input type="Hidden" name="Presentar_FullScreen" value="<?php echo $Presentar_FullScreen; ?>">
         <input type="Hidden" name="Precarga_EstilosBS" value="<?php echo $Precarga_EstilosBS; ?>">
+        <input type="Hidden" name="PCO_ECHO" value="0"> <!-- Determina si la respuesta debe ser con o sin eco -->
         <input name="PCO_Accion" type="hidden" value="PCOMOD_GuardarArchivo">
     </form>
 
@@ -488,10 +489,16 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
             {
                 editor.redo();
             }
+        function AvisoAlmacenamiento()
+            {
+                $('#VentanaAlmacenamiento').modal('show'); 
+            }
         function Guardar()
             {
-                //document.form_archivo_editado.submit(); Metodo estandar, requiere enviar todo y recargar pagina
-                //Metodo con AJAX, Evita el metodo estandar enviando todo sin recargar pagina
+                //Metodo estandar, envia todo sobre el iframe para evitar recargar la pagina
+                document.form_archivo_editado.submit();
+                //Metodo con AJAX, Evita el metodo estandar enviando todo sin recargar pagina aunque inseguro en el transporte.  No usar como primera opcion
+                /*
                 var ValorTextArea = $('#PCODER_AreaTexto').val();
                 $.ajax({                                        
                     type: "POST", 
@@ -502,7 +509,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
                     success: function(data) {
                         $('#VentanaAlmacenamiento').modal('show'); 
                     }
-                });
+                });*/
             }
         function PCODER_CargarArchivo(archivo)
             {
@@ -551,6 +558,9 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
         if(@$CodigoGoogleAnalytics!="")
             echo $PrefijoGA.$CodigoGoogleAnalytics.$PosfijoGA;	
     ?>
+
+<!-- Marco para recepcion de eventos generados por el boton de guardar -->
+<iframe OnLoad="if (frame_almacenamiento.location.href != 'about:blank') AvisoAlmacenamiento();" height="0" width="0" name="frame_almacenamiento" src="about:blank" style="visibility:hidden; display:none"></iframe>
 
 </body>
 </html>
