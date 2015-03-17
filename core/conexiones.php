@@ -99,11 +99,12 @@
 					$ConexionPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				}
 			
-			// Evita el "General error: 2014 Cannot execute queries while other unbuffered queries are active"
 			if ($MotorBD=="mysql")
 				{
-                    $ConexionPDO->exec("SET NAMES utf8"); //Forzado UTF8 - Collation recomendada: utf8_general_ci
-					$ConexionPDO->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
+                    $ConexionPDO->exec("SET NAMES 'utf8';");
+                    $ConexionPDO->exec("SET NAMES utf8;"); //Forzado UTF8 - Collation recomendada: utf8_general_ci
+					//Evita el "General error: 2014 Cannot execute queries while other unbuffered queries are active"
+                    $ConexionPDO->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
 				}
 
 			//$this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);

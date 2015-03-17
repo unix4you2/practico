@@ -11,7 +11,7 @@ CREATE TABLE core_parametros (
   creditos text,
   funciones_personalizadas text,
   PRIMARY KEY  (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO core_parametros VALUES (0,'Nombre completo de su empresa','PAR_NombreCortoEmpresa','PAR_NombreAplicacion','PAR_VersionAplicacion','20120101','Texto de su licencia','Texto asociado a los creditos de su aplicacion','');
 
@@ -27,7 +27,7 @@ CREATE TABLE core_usuario (
   usuario_interno int(1) NULL DEFAULT 0,
   llave_recuperacion varchar(250) NOT NULL default '',
   PRIMARY KEY  (login)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO core_usuario VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','Super usuario',1,'sucorreo@dominio.com','20110601','d41d8cd98f00b204e9800998ecf8427e',1,'');
 
@@ -41,7 +41,7 @@ CREATE TABLE core_auditoria (
   fecha date NOT NULL,
   hora time NOT NULL,
   PRIMARY KEY  (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_menu;
 CREATE TABLE core_menu (
@@ -62,7 +62,7 @@ CREATE TABLE core_menu (
   imagen varchar(250) default '',
   posible_izquierda int(1) default '0',
   PRIMARY KEY  (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_usuario_menu;
 CREATE TABLE core_usuario_menu (
@@ -70,7 +70,7 @@ CREATE TABLE core_usuario_menu (
   usuario varchar(250) NOT NULL default '',
   menu int(10) NOT NULL default '0',
   PRIMARY KEY  (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_formulario;
 CREATE TABLE core_formulario (
@@ -83,7 +83,7 @@ CREATE TABLE core_formulario (
   javascript text,
   borde_visible int(10) default '0',
   PRIMARY KEY  (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_formulario_objeto;
 CREATE TABLE core_formulario_objeto (
@@ -135,7 +135,7 @@ CREATE TABLE core_formulario_objeto (
   tipo_accion varchar(250) default '',
   accion_usuario text,
   PRIMARY KEY  (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_formulario_boton;
 CREATE TABLE core_formulario_boton (
@@ -151,7 +151,7 @@ CREATE TABLE core_formulario_boton (
   retorno_texto text,
   confirmacion_texto varchar(250) default '',
   PRIMARY KEY  (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_informe;
 CREATE TABLE core_informe (
@@ -169,7 +169,7 @@ CREATE TABLE core_informe (
   variables_filtro text,
   soporte_datatable char(1) DEFAULT 'N', # S=Si, N=No
   PRIMARY KEY  (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_informe_campos;
 CREATE TABLE core_informe_campos (
@@ -179,7 +179,7 @@ CREATE TABLE core_informe_campos (
   valor_alias varchar(250),
   peso int(10) default 0,
   PRIMARY KEY (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_informe_tablas;
 CREATE TABLE core_informe_tablas (
@@ -188,7 +188,7 @@ CREATE TABLE core_informe_tablas (
   valor_tabla varchar(250),
   valor_alias varchar(250),
   PRIMARY KEY (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_informe_condiciones;
 CREATE TABLE core_informe_condiciones (
@@ -199,7 +199,7 @@ CREATE TABLE core_informe_condiciones (
   valor_der varchar(250),
   peso int(3) default '0',
   PRIMARY KEY (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_informe_boton;
 CREATE TABLE core_informe_boton (
@@ -213,7 +213,7 @@ CREATE TABLE core_informe_boton (
   peso int(10),
   confirmacion_texto varchar(250) default '',
   PRIMARY KEY  (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_usuario_informe;
 CREATE TABLE core_usuario_informe (
@@ -221,7 +221,7 @@ CREATE TABLE core_usuario_informe (
   usuario varchar(250) NOT NULL,
   informe int(10) NOT NULL,
   PRIMARY KEY  (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_llaves_api;
 CREATE TABLE core_llaves_api (
@@ -234,7 +234,7 @@ CREATE TABLE core_llaves_api (
   ip_autorizada varchar(255) NOT NULL,
   funciones_autorizadas text,
   PRIMARY KEY (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_chat;
 CREATE TABLE core_chat (
@@ -245,7 +245,7 @@ CREATE TABLE core_chat (
   sent DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
   recd INTEGER UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_monitoreo;
 CREATE TABLE core_monitoreo (
@@ -268,4 +268,4 @@ CREATE TABLE core_monitoreo (
   alerta_sonora int(10) default '0',
   milisegundos_lectura int(10) default '1',
   PRIMARY KEY (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
