@@ -544,6 +544,19 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
         $( window ).resize(function() {
           RedimensionarEditor();
         });
+        
+        //Captura el evento de Ctrl+S para guardar el archivo
+        $(window).bind('keydown', function(event) {
+            if (event.ctrlKey || event.metaKey) {
+                switch (String.fromCharCode(event.which).toLowerCase()) {
+                case 's':  //<-- Cambiar para otras letras ;)
+                    event.preventDefault();
+                    Guardar();
+                    break;
+                }
+            }
+        });
+                
     </script>
 
     <?php

@@ -53,6 +53,7 @@ LogCambios="
 * Enhan: Mejorada la apariencia y disposición de controles gráficos en formularios.  El espacio disponible se divide por el número de columnas del formulario
 * Enhan: Eliminados warnings en informes sin resultados que no capturan nombres de columna
 * Enhan: Los informes embebidos ahora no presentan sus totales para hacerlos más limpios sobre otros formularios.  El total se conserva en informes con vista estándar.
+* Enhan: Agregado el atajo Ctrl+S para guardar en PCoder
 "
 
 ########################################################################
