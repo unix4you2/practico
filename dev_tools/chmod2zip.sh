@@ -38,6 +38,10 @@
     chmod 777 ins
     chmod 777 mod/pcoder/demo.php
     chmod -R 777 mod/pcc_erp/*
+    
+    #Permisos de archivos basicos de configuracion
+    chmod 777 core/configuracion.php
+    chmod 777 core/ws_oauth.php
 
     #chown -R www-data *
     #chown -R www *
