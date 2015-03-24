@@ -2271,79 +2271,54 @@ if ($PCO_Accion=="editar_formulario")
 					// Inserta el nuevo objeto al form
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?) ","$nuevo_titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible");
 					$id=$ConexionPDO->lastInsertId();
+
 					// Busca los elementos que componen el formulario para hacerles la copia
+                    //Determina cuantos campos tiene la tabla
+                    $ArregloCampos=explode(',',$ListaCamposSinID_formulario_objeto);
+                    $TotalCampos=count($ArregloCampos);
 					// Registros de formulario_objeto
 					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario=?","$formulario");
 					while($registro = $consulta->fetch())
 						{
-							//Establece valores para cada campo a insertar
-							$tipo=$registro["tipo"];
-							$titulo=$registro["titulo"];
-							$campo=$registro["campo"];
-							$ayuda_titulo=$registro["ayuda_titulo"];
-							$ayuda_texto=$registro["ayuda_texto"];
-							$nuevo_formulario=$id;
-							$peso=$registro["peso"];
-							$columna=$registro["columna"];
-							$obligatorio=$registro["obligatorio"];
-							$visible=$registro["visible"];
-							$valor_predeterminado=$registro["valor_predeterminado"];
-							$validacion_datos=$registro["validacion_datos"];
-							$etiqueta_busqueda=$registro["etiqueta_busqueda"];
-							$ajax_busqueda=$registro["ajax_busqueda"];
-							$valor_unico=$registro["valor_unico"];
-							$solo_lectura=$registro["solo_lectura"];
-							$ancho=$registro["ancho"];
-							$alto=$registro["alto"];
-							$barra_herramientas=$registro["barra_herramientas"];
-							$fila_unica=$registro["fila_unica"];
-							$lista_opciones=$registro["lista_opciones"];
-							$origen_lista_opciones=$registro["origen_lista_opciones"];
-							$origen_lista_valores=$registro["origen_lista_valores"];
-							$valor_etiqueta=$registro["valor_etiqueta"];
-							$url_iframe=$registro["url_iframe"];
-							$objeto_en_ventana=$registro["objeto_en_ventana"];
-							$informe_vinculado=$registro["informe_vinculado"];
-							$maxima_longitud=$registro["maxima_longitud"];
-							$valor_minimo=$registro["valor_minimo"];
-							$valor_maximo=$registro["valor_maximo"];
-							$valor_salto=$registro["valor_salto"];
-							$formato_salida=$registro["formato_salida"];
-							$plantilla_archivo=$registro["plantilla_archivo"];
-							$peso_archivo=$registro["peso_archivo"];
-							$tamano_pincel=$registro["tamano_pincel"];
-							$color_trazo=$registro["color_trazo"];
-							$formulario_vinculado=$registro["formulario_vinculado"];
-							$formulario_campo_vinculo=$registro["formulario_campo_vinculo"];
-							$formulario_campo_foraneo=$registro["formulario_campo_foraneo"];
-                            $condicion_filtrado_listas=$registro["condicion_filtrado_listas"];
-                            $pestana_objeto=$registro["pestana_objeto"];
-                            $personalizacion_tag=$registro["personalizacion_tag"];
-                            $modo_inline=$registro["modo_inline"];
-                            $imagen=$registro["imagen"];
-                            $tipo_accion=$registro["tipo_accion"];
-                            $accion_usuario=$registro["accion_usuario"];
-
+                            //Genera cadena de interrogantes y valores segun cantidad de campos
+                            $CadenaInterrogantes='?'; //Agrega el primer interrogante
+                            $CadenaValores=$registro[1];
+                            for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
+                                {
+                                    //Cadena de interrogantes
+                                    $CadenaInterrogantes.=',?';
+                                    //Cadena de valores (el campo No 5 corresponde al ID de formulario nuevo)
+                                    if ($PCOCampo!=5)
+                                        $CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
+                                    else
+                                        $CadenaValores.=$_SeparadorCampos_.$id;
+                                }
 							//Inserta el nuevo objeto al form
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$tipo$_SeparadorCampos_$titulo$_SeparadorCampos_$campo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$nuevo_formulario$_SeparadorCampos_$peso$_SeparadorCampos_$columna$_SeparadorCampos_$obligatorio$_SeparadorCampos_$visible$_SeparadorCampos_$valor_predeterminado$_SeparadorCampos_$validacion_datos$_SeparadorCampos_$etiqueta_busqueda$_SeparadorCampos_$ajax_busqueda$_SeparadorCampos_$valor_unico$_SeparadorCampos_$solo_lectura$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$barra_herramientas$_SeparadorCampos_$fila_unica$_SeparadorCampos_$lista_opciones$_SeparadorCampos_$origen_lista_opciones$_SeparadorCampos_$origen_lista_valores$_SeparadorCampos_$valor_etiqueta$_SeparadorCampos_$url_iframe$_SeparadorCampos_$objeto_en_ventana$_SeparadorCampos_$informe_vinculado$_SeparadorCampos_$maxima_longitud$_SeparadorCampos_$valor_minimo$_SeparadorCampos_$valor_maximo$_SeparadorCampos_$valor_salto$_SeparadorCampos_$formato_salida$_SeparadorCampos_$plantilla_archivo$_SeparadorCampos_$peso_archivo$_SeparadorCampos_$tamano_pincel$_SeparadorCampos_$color_trazo$_SeparadorCampos_$formulario_vinculado$_SeparadorCampos_$formulario_campo_vinculo$_SeparadorCampos_$formulario_campo_foraneo$_SeparadorCampos_$condicion_filtrado_listas$_SeparadorCampos_$pestana_objeto$_SeparadorCampos_$personalizacion_tag$_SeparadorCampos_$modo_inline$_SeparadorCampos_$imagen$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario");
+                            ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto ($ListaCamposSinID_formulario_objeto) VALUES ($CadenaInterrogantes) ","$CadenaValores");                            
 						}				
+
+                    //Determina cuantos campos tiene la tabla
+                    $ArregloCampos=explode(',',$ListaCamposSinID_formulario_boton);
+                    $TotalCampos=count($ArregloCampos);
 					// Registros de formulario_boton
 					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
 					while($registro = $consulta->fetch())
 						{
-							//Establece valores para cada campo a insertar
-							$titulo=$registro["titulo"];
-							$estilo=$registro["estilo"];
-							$nuevo_formulario=$id;
-							$tipo_accion=$registro["tipo_accion"];
-							$accion_usuario=$registro["accion_usuario"];
-							$visible=$registro["visible"];
-							$peso=$registro["peso"];
-							$retorno_titulo=$registro["retorno_titulo"];
-							$retorno_texto=$registro["retorno_texto"];
-							$confirmacion_texto=$registro["confirmacion_texto"];
+                            //Genera cadena de interrogantes y valores segun cantidad de campos
+                            $CadenaInterrogantes='?'; //Agrega el primer interrogante
+                            $CadenaValores=$registro[1];
+                            for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
+                                {
+                                    //Cadena de interrogantes
+                                    $CadenaInterrogantes.=',?';
+                                    //Cadena de valores (el campo No 2 corresponde al ID de formulario nuevo)
+                                    if ($PCOCampo!=2)
+                                        $CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
+                                    else
+                                        $CadenaValores.=$_SeparadorCampos_.$id;
+                                }
 							//Inserta el nuevo objeto al form
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$nuevo_formulario$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$retorno_titulo$_SeparadorCampos_$retorno_texto$_SeparadorCampos_$confirmacion_texto");
+                            ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton ($ListaCamposSinID_formulario_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 						}
 					auditar("Crea copia de formulario $formulario");
 

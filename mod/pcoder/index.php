@@ -544,7 +544,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
         $( window ).resize(function() {
           RedimensionarEditor();
         });
-        
+
         //Captura el evento de Ctrl+S para guardar el archivo
         $(window).bind('keydown', function(event) {
             if (event.ctrlKey || event.metaKey) {
@@ -573,7 +573,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
     ?>
 
 <!-- Marco para recepcion de eventos generados por el boton de guardar -->
-<iframe OnLoad="if (frame_almacenamiento.location.href != 'about:blank') AvisoAlmacenamiento();" height="0" width="0" name="frame_almacenamiento" src="about:blank" style="visibility:hidden; display:none"></iframe>
+<iframe OnLoad="if (frame_almacenamiento.location.href != 'about:blank') AvisoAlmacenamiento();" height="0" width="0" name="frame_almacenamiento" id="frame_almacenamiento" src="about:blank" style="visibility:hidden; display:none"></iframe>
 
 </body>
 </html>

@@ -91,6 +91,9 @@
 	<script type="text/javascript" src="inc/practico/javascript/validaform.js"></script>
 	<script type="text/javascript" src="inc/practico/javascript/html5slider.js"></script>
 
+    <!-- JavaScript Conversiones HTML-Canvas -->
+	<script type="text/javascript" src="inc/html2canvas/dist/html2canvas.min.js"></script>
+
 	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/chat.css" />
 	<!--<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/screen.css" />-->
 	<!--[if lte IE 7]>

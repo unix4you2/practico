@@ -73,3 +73,65 @@ function PCO_ObtenerContenidoAjax(PCO_ASINCRONICO,PCO_URL,PCO_PARAMETROS)
             return contenido_recibido;
     }
 
+
+
+
+
+
+
+
+            function ImprimirMarco()
+                {
+                    $("#btnPrint").live("click", function () {
+                        var $("#MarcoImpresionCanvas").innerHTML().print();
+                        var printWindow = window.open('', '', 'height=400,width=800');
+                        printWindow.document.write('<html><head><title>DIV Contents</title>');
+                        printWindow.document.write('</head><body >');
+                        printWindow.document.write(divContents);
+                        printWindow.document.write('</body></html>');
+                        printWindow.document.close();
+                        printWindow.print();
+                    });        
+                    
+                    
+                    
+                }
+
+
+function PCO_Canvas_SobrePagina1()
+    {
+        html2canvas(document.body).then(function(canvas) {
+            document.body.appendChild(canvas);
+        });
+    }
+
+function PCO_Canvas_SobrePagina2()
+    {
+        html2canvas(document.body, {
+	        onrendered: function(canvas) {
+	        	$("#page").hide();
+	            document.body.appendChild(canvas);
+	            window.print();
+	            $('canvas').remove();
+	            $("#page").show();
+	        }
+	    });
+    }
+    
+function PCO_Canvas_SobrePagina3()
+    {
+        html2canvas(document.body, {
+	        onrendered: function(canvas) {
+	        	$("#page").hide();
+                document.getElementById("MarcoImpresionCanvas").appendChild(canvas);    //Agrega el canvas a un marco especifico
+                //ImprimirMarco();
+	            $("canvas").remove();
+	            $("#page").show();
+	        }
+	    });
+    }
+    
+    
+    
+    
+    
