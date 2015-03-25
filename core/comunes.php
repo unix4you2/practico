@@ -1756,51 +1756,6 @@ function selector_iconos_awesome()
                             <td><button id="lib_elusiveicon" class="btn btn-default" data-iconset="elusiveicon" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
                         </tr>
                     </table>
-
-
-
-			<?php
-            /*
-            //DEPRECATED !!!
-			//Busca en el directorio de iconos por imagenes listas para ser usadas
-			$columnas=15;
-			$columna_actual=1;
-			$directorio="img/";
-            @$TemasIconos[]=array(Nombre => "Tango Desktop",	Tamano => "32x32",	Prefijo => "tango_");
-			@$TemasIconos[]=array(Nombre => "Developer",		Tamano => "32x32",	Prefijo => "dev_");
-			@$TemasIconos[]=array(Nombre => "Finance",		Tamano => "32x32",	Prefijo => "finance_");
-			@$TemasIconos[]=array(Nombre => "Medical",		Tamano => "32x32",	Prefijo => "medical_");
-			@$TemasIconos[]=array(Nombre => "Moskis",		Tamano => "32x32",	Prefijo => "moskis_");
-			@$TemasIconos[]=array(Nombre => "Social",		Tamano => "32x32",	Prefijo => "social_");
-			@$TemasIconos[]=array(Nombre => "Woo",			Tamano => "32x32",	Prefijo => "woo_");
-			@$TemasIconos[]=array(Nombre => "Once",			Tamano => "32x32",	Prefijo => "once_");
-			@$TemasIconos[]=array(Nombre => "Ginux",			Tamano => "32x32",	Prefijo => "ginux_");
-			echo '
-            <DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 350px">';
-			for ($i=0;$i<count($TemasIconos);$i++)
-				{
-					$columna_actual=1;
-					$dh = opendir($directorio);
-					echo "<font size=3>&nbsp;&nbsp;<b><br><br>".$TemasIconos[$i]["Nombre"]." (".$TemasIconos[$i]["Tamano"]." pixels)<hr></b></font>";
-					echo '<table border=0 cellspacing=4>';
-					while (($file = readdir($dh)) !== false)
-						{
-							$impreso=0;
-							if (($file != ".") && ($file != "..") && (stristr($file,$TemasIconos[$i]["Prefijo"])  ))
-								{
-									if ($columna_actual==1)	echo '<tr>';
-									echo '<td><a href="javascript:document.datos.imagen.value=\''.$file.'\';OcultarPopUp(\'FormularioImagenes\');" title="'.$file.'"><img src='.$directorio.$file.' border=0 width=32 height=32></a></td>';	
-									$impreso=1;
-									if ($impreso) $columna_actual++;
-									if ($columna_actual==$columnas) $columna_actual=1;
-									if ($columna_actual==$columnas)	echo '</tr>';
-								}
-						}
-					echo '</table>';
-				}
-			echo '</DIV>';
-            */
-			?>
             
                   </div>
                   <div class="modal-footer">
@@ -2755,7 +2710,7 @@ function selector_iconos_awesome()
 			$adjunto_url_archivo=$partes_adjunto_archivo[0];
 			$adjunto_tipo_archivo=$partes_adjunto_archivo[1];
 			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="" && $registro_datos_formulario["$nombre_campo"]!="")
-				$salida.='<a target="_BLANK" href="'.$adjunto_url_archivo.'"><i class="fa fa-search"></i><b>'.$MULTILANG_FrmArchivoLink.'</b><img src="img/woo_save_download_32.png" border=0 width="20" height="20" align="absmiddle"></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>('.$MULTILANG_Tipo.': '.$adjunto_tipo_archivo.')</i><br>';
+				$salida.='<a target="_BLANK" href="'.$adjunto_url_archivo.'"><i class="fa fa-search"></i><b>'.$MULTILANG_FrmArchivoLink.'</b><i class="fa fa-floppy-o fa-fw"></i></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>('.$MULTILANG_Tipo.': '.$adjunto_tipo_archivo.')</i><br>';
 
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="")

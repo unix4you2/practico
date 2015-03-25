@@ -917,7 +917,7 @@ if ($PCO_Accion=="editar_formulario")
                                                     for ($i=1;$i<=100;$i++)
                                                         {
                                                             $seleccion_campo="";
-                                                            if ($registro_campo_editar["peso"]==$i)
+                                                            if (@$registro_campo_editar["peso"]==$i)
                                                                 $seleccion_campo="SELECTED";														
                                                             echo '<option value="'.$i.'" '.$seleccion_campo.'>'.$i.'</option>';
                                                         }
@@ -1187,7 +1187,7 @@ if ($PCO_Accion=="editar_formulario")
                                     while($registro_informes = $consulta_informs->fetch())
                                         {
                                             $seleccion_campo="";
-                                            if ($registro_campo_editar["informe_vinculado"]==$registro_informes["id"])
+                                            if (@$registro_campo_editar["informe_vinculado"]==$registro_informes["id"])
                                                 $seleccion_campo="SELECTED";
                                             echo '<option value="'.$registro_informes["id"].'" '.$seleccion_campo.'>(Id.'.$registro_informes["id"].') '.$registro_informes["titulo"].'</option>';
                                         }
@@ -1366,7 +1366,7 @@ if ($PCO_Accion=="editar_formulario")
                                     while($registro_formularios = $consulta_forms->fetch())
                                         {
                                             $seleccion_campo="";
-                                            if ($registro_campo_editar["formulario_vinculado"]==$registro_formularios["id"])
+                                            if (@$registro_campo_editar["formulario_vinculado"]==$registro_formularios["id"])
                                                 $seleccion_campo="SELECTED";
                                             echo '<option value="'.$registro_formularios["id"].'" '.$seleccion_campo.'>(Id.'.$registro_formularios["id"].') '.$registro_formularios["titulo"].'</option>';
                                         }
