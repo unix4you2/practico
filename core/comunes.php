@@ -68,6 +68,7 @@
 			if ($PCO_Accion== "eliminar_accion_informe")			$retorno = permiso_agregado_accion("administrar_informes");
 			// Funciones en core/usuarios.php
 			if ($PCO_Accion== "cambiar_clave")						$retorno = 1;
+            if ($PCO_Accion== "actualizar_perfil_usuario")			$retorno = 1;
             if ($PCO_Accion== "ver_seguimiento_monitoreo")			$retorno = permiso_agregado_accion("listar_usuarios");
 			if ($PCO_Accion== "resetear_clave")						$retorno = permiso_agregado_accion("listar_usuarios");
 			if ($PCO_Accion== "ver_seguimiento_general")			$retorno = permiso_agregado_accion("listar_usuarios");
@@ -85,6 +86,7 @@
 			if ($PCO_Accion== "eliminar_informe_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
             if ($PCO_Accion== "copiar_permisos")					$retorno = permiso_agregado_accion("listar_usuarios");
             if ($PCO_Accion== "copiar_informes")					$retorno = permiso_agregado_accion("listar_usuarios");
+            
 			// Funciones en core/menus.php
 			if ($PCO_Accion== "Ver_menu")							$retorno = 1;
 			if ($PCO_Accion== "buscar_permisos_practico")			$retorno = 1;
@@ -126,7 +128,7 @@
 			if ($PCO_Accion== "aplicar_parche")						$retorno = permiso_agregado_accion("analizar_parche");
 			// Funciones en core/ajax.php
 			if ($PCO_Accion== "opciones_combo_box")					$retorno = 1;
-			if ($PCO_Accion== "valor_campo_tabla")						$retorno = 1;
+			if ($PCO_Accion== "valor_campo_tabla")					$retorno = 1;
 			
 			
 			//echo $PCOSESS_LoginUsuario.':Permiso heredado accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
