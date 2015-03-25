@@ -1181,7 +1181,7 @@ if ($PCO_Accion=="editar_formulario")
                             <label for="informe_vinculado"><?php echo $MULTILANG_FrmInforme; ?></label>
                             <div class="form-group input-group">
                                 <select id="informe_vinculado" name="informe_vinculado" class="form-control">
-                                <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                                <option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                 <?php
                                     $consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe ORDER BY titulo");
                                     while($registro_informes = $consulta_informs->fetch())
@@ -1360,7 +1360,7 @@ if ($PCO_Accion=="editar_formulario")
                             <label for="formulario_vinculado"><?php echo $MULTILANG_FrmFormulario; ?></label>
                             <div class="form-group input-group">
                                 <select id="formulario_vinculado" name="formulario_vinculado" class="form-control">
-                                <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                                <option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                 <?php
                                     $consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario ORDER BY titulo");
                                     while($registro_formularios = $consulta_forms->fetch())

@@ -57,6 +57,7 @@ LogCambios="
 * Enhan: Los informes embebidos ahora no presentan sus totales para hacerlos más limpios sobre otros formularios.  El total se conserva en informes con vista estándar.
 * Enhan: Agregado el atajo Ctrl+S para facilitar el guardar archivos editados en PCoder
 * Enhan: Copia de formularios ahora es dinamica segun la definicion de la base de datos
+* Enhan: ErrorLog del lado del servidor ahora es mas limpio
 "
 
 ########################################################################

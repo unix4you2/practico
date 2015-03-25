@@ -577,7 +577,7 @@ function completar_parametros($string,$data) {
 					if ($lista_parametros!="")
 						{
 							$cantidad_parametros=substr_count($query,'?');
-							$parametros=explode($_SeparadorCampos_,$lista_parametros);
+							$parametros=@explode($_SeparadorCampos_,$lista_parametros);
 							// if ($cantidad_parametros!=count($parametros)) //La cantidad de parametros en query es diferente a los recibidos
 							//Recorre cada parametro y toma su valor
 							for ($i=1;$i<=$cantidad_parametros;$i++)
@@ -643,7 +643,7 @@ function completar_parametros($string,$data) {
 					if ($lista_parametros!="")
 						{
 							$cantidad_parametros=substr_count($query,'?');
-							$parametros=explode($_SeparadorCampos_,$lista_parametros);
+							$parametros=@explode($_SeparadorCampos_,$lista_parametros);
 							// if ($cantidad_parametros!=count($parametros)) //La cantidad de parametros en query es diferente a los recibidos
 							//Recorre cada parametro y toma su valor
 							for ($i=1;$i<=$cantidad_parametros;$i++)
@@ -4025,7 +4025,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 	*/
 /* ################################################################## */
 /* ################################################################## */
-	if ($PCO_Accion=="cambiar_estado_campo")
+	if (@$PCO_Accion=="cambiar_estado_campo")
 		{		
 			/*
 				Function: cambiar_estado_campo
