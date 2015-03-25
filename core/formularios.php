@@ -1341,7 +1341,7 @@ if ($PCO_Accion=="editar_formulario")
                                 <span class="input-group-addon">
                                     <i class="fa fa-yelp texto-verde"></i>
                                 </span>
-                                <input type="color" name="color_trazo" value="<?php if ($registro_campo_editar["color_trazo"]!="") echo $registro_campo_editar["color_trazo"]; else echo '#000000'; ?>" class="form-control" placeholder="<?php echo $MULTILANG_FrmTipoColor; ?> (Hex)">
+                                <input type="color" name="color_trazo" value="<?php if (@$registro_campo_editar["color_trazo"]!="") echo $registro_campo_editar["color_trazo"]; else echo '#000000'; ?>" class="form-control" placeholder="<?php echo $MULTILANG_FrmTipoColor; ?> (Hex)">
                             </div>
                             <?php
                                 mensaje('<i class="fa fa-info fa-2x text-info texto-blink"></i> '.$MULTILANG_Ayuda, $MULTILANG_FrmImagenDes, '', '', 'alert alert-info alert-dismissible');

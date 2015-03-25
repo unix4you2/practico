@@ -79,7 +79,7 @@ function PCO_ObtenerContenidoAjax(PCO_ASINCRONICO,PCO_URL,PCO_PARAMETROS)
 
 
 
-
+/*
             function ImprimirMarco()
                 {
                     $("#btnPrint").live("click", function () {
@@ -91,12 +91,9 @@ function PCO_ObtenerContenidoAjax(PCO_ASINCRONICO,PCO_URL,PCO_PARAMETROS)
                         printWindow.document.write('</body></html>');
                         printWindow.document.close();
                         printWindow.print();
-                    });        
-                    
-                    
-                    
+                    });
                 }
-
+*/
 
 function PCO_Canvas_SobrePagina1()
     {
