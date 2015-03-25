@@ -2237,7 +2237,7 @@ if ($PCO_Accion=="editar_formulario")
 /* ################################################################## */
 /*
 	Function: copiar_formulario
-	Agrega un formulario vacio para la aplicacion
+	Agrega un formulario a partir de otro para la aplicacion
 
 	(start code)
 		INSERT INTO ".$TablasCore."formulario VALUES (0, '$titulo','$ayuda_titulo','$ayuda_texto','$color_fondo','$tabla_datos','$columnas')

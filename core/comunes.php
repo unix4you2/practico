@@ -52,6 +52,7 @@
 			if ($PCO_Accion== "mis_informes")						$retorno = 1;
 			if ($PCO_Accion== "guardar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
 			if ($PCO_Accion== "editar_informe")						$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "clonar_diseno_informe")				$retorno = permiso_agregado_accion("administrar_informes");
 			if ($PCO_Accion== "eliminar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
 			if ($PCO_Accion== "actualizar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
 			if ($PCO_Accion== "eliminar_informe_tabla")				$retorno = permiso_agregado_accion("administrar_informes");
@@ -123,6 +124,11 @@
 			if ($PCO_Accion== "cargar_archivo")						$retorno = permiso_agregado_accion("actualizar_practico");
 			if ($PCO_Accion== "analizar_parche")					$retorno = permiso_agregado_accion("cargar_archivo");
 			if ($PCO_Accion== "aplicar_parche")						$retorno = permiso_agregado_accion("analizar_parche");
+			// Funciones en core/ajax.php
+			if ($PCO_Accion== "opciones_combo_box")					$retorno = 1;
+			if ($PCO_Accion== "valor_campo_tabla")						$retorno = 1;
+			
+			
 			//echo $PCOSESS_LoginUsuario.':Permiso heredado accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
 			return $retorno;
 		}

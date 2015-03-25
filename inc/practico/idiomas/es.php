@@ -474,8 +474,8 @@
 	$MULTILANG_FrmHlpFunciones='Todas las funciones JavaScript definidas en este espacio ser&aacute;n inclu&iacute;das al formulario cada vez que sea cargado.<br>Si requiere comportamientos adicionales o eventos especificos lanzados por medio de botones o dem&aacute;s objetos<br> en su formulario este es el espacio para definirlos.<br><b>Al utilizar comillas en parametros y funciones estas deben ser siempre dobles</b>, no simples.<br>La funci&oacute;n FrmAutoRun siempre debe existir (aunque sea vac&iacute;a) pues ser&aacute; ejecutada autom&aacute;ticamente en cada carga del Formulario.';
     $MULTILANG_FrmHlpFinalFunciones='Este codigo hace parte del formulario.  Cierre y haga clic en Crear/Actualizar formulario para aplicar los cambios.';
 	$MULTILANG_FrmCopiar='Crear copia';
-	$MULTILANG_FrmAdvCopiar='Se creara una copia nueva del formulario actual.  Esta seguro?';
-	$MULTILANG_FrmMsjCopia='Ahora puede ingresar a editar su nuevo formulario.  Se ha creado una copia como: ';
+	$MULTILANG_FrmAdvCopiar='Se creara una copia nueva del objeto seleccionado.  Esta seguro?';
+	$MULTILANG_FrmMsjCopia='Ahora puede ingresar a editar su nuevo objeto.  Se ha creado una copia como: ';
 	$MULTILANG_FrmBordesVisibles='Bordes de tabla visibles?';
 	$MULTILANG_FrmFormatoSalida='Formato de salida';
 	$MULTILANG_FrmPlantillaArchivo='Plantilla para el nombre del archivo';

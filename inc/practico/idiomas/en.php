@@ -477,8 +477,8 @@
 	$MULTILANG_FrmHlpFunciones='All JavaScript functions defined here will be included in the form.<br>If you need some additional events linked by buttons or any object in the form<br> this field let you define them.<br><b>When you need to use parameters or any quote use always double quotes!</b>.<br>The FrmAutoRun function must be exist (even empty) cause it will be executed automatically on every form load.';
     $MULTILANG_FrmHlpFinalFunciones='This code is a part of your form.  Close and clic Save/Update form to apply changes.';
 	$MULTILANG_FrmCopiar='Make a copy';
-	$MULTILANG_FrmAdvCopiar='A new copy of this will be created.  Are you sure?';
-	$MULTILANG_FrmMsjCopia='Now you can go to edit your new form.  A copy was maded as: ';
+	$MULTILANG_FrmAdvCopiar='A new copy of this object will be created.  Are you sure?';
+	$MULTILANG_FrmMsjCopia='Now you can go to edit your new object.  A copy was maded as: ';
 	$MULTILANG_FrmBordesVisibles='Are table borders visible?';
 	$MULTILANG_FrmFormatoSalida='Output format';
 	$MULTILANG_FrmPlantillaArchivo='Name template for the file';
