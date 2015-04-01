@@ -174,7 +174,7 @@ if ($WSId=="verificar_credenciales")
 */
 	function ejecutar_login_oauth($user,$OAuth_servicio)
 		{
-			global $TablasCore,$uid,$ListaCamposSinID_parametros,$resultado_webservice,$ListaCamposSinID_parametros,$ListaCamposSinID_auditoria,$direccion_auditoria,$PCO_HoraOperacion,$PCO_FechaOperacion,$ArchivoCORE;
+			global $TablasCore,$uid,$ListaCamposSinID_parametros,$resultado_webservice,$ListaCamposSinID_parametros,$ListaCamposSinID_auditoria,$PCO_DireccionAuditoria,$PCO_HoraOperacion,$PCO_FechaOperacion,$ArchivoCORE;
 
 			// Si el modo depuracion esta activo muestra arreglo user devuelto por el proveedor
 			global $ModoDepuracion;
@@ -252,8 +252,8 @@ if ($WSId=="verificar_credenciales")
 			if (!isset($_SESSION["Version_Aplicacion"])) $_SESSION["Version_Aplicacion"]=$registro_parametros["version"];
 
 			// Lleva a auditoria con query manual por la falta de $PCOSESS_LoginUsuario
-			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('".$registro["login"]."','Ingresa al sistema desde $direccion_auditoria','$PCO_FechaOperacion','$PCO_HoraOperacion')");
-			auditar("Ingresa al sistema desde $direccion_auditoria",$_SESSION["PCOSESS_LoginUsuario"]);
+			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('".$registro["login"]."','Ingresa al sistema desde $PCO_DireccionAuditoria','$PCO_FechaOperacion','$PCO_HoraOperacion')");
+			auditar("Ingresa al sistema desde $PCO_DireccionAuditoria",$_SESSION["PCOSESS_LoginUsuario"]);
 			// Actualiza fecha del ultimo ingreso para el usuario
 			ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login='".$registro["login"]."'","$PCO_FechaOperacion");
 

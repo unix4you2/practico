@@ -23,7 +23,7 @@
 	$PCO_FechaOperacionGuiones=date("Y-m-d");
 	$PCO_HoraOperacion=date("His");
 	$PCO_HoraOperacionPuntos=date("H:i");
-	$direccion_auditoria=$_SERVER ['REMOTE_ADDR'];
+	$PCO_DireccionAuditoria=$_SERVER ['REMOTE_ADDR'];
 
 	// Quitar comentario si se desea modo depuracion en proceso de instalacion
 	ini_set("display_errors", 1);

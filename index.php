@@ -79,7 +79,7 @@
     $PCO_FechaOperacionGuiones=date("Y-m-d");
     $PCO_HoraOperacion=date("His");
     $PCO_HoraOperacionPuntos=date("H:i");
-    $direccion_auditoria=$_SERVER ['REMOTE_ADDR'];
+    $PCO_DireccionAuditoria=$_SERVER ['REMOTE_ADDR'];
 
     // Define cadena usada para separar campos en operaciones de bases de datos
     $_SeparadorCampos_="||_||";
@@ -138,7 +138,7 @@
             }
             // Valida permisos asignados al usuario actual para la accion llamada a ejecutar
             if (!permiso_accion($PCO_Accion)) {
-                echo $MULTILANG_SecErrorTit."<hr>".$MULTILANG_SecErrorDes."<hr>[US=<b>$PCOSESS_LoginUsuario</b>|CMD=<b>$PCO_Accion</b>|IP=<b>$direccion_auditoria</b>|DTE=<b>$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos</b>]";
+                echo $MULTILANG_SecErrorTit."<hr>".$MULTILANG_SecErrorDes."<hr>[US=<b>$PCOSESS_LoginUsuario</b>|CMD=<b>$PCO_Accion</b>|IP=<b>$PCO_DireccionAuditoria</b>|DTE=<b>$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos</b>]";
                 auditar("SEC: Intento de acceso no autorizado CMD=$PCO_Accion");
                 exit(1);
             }

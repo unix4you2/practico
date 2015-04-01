@@ -295,7 +295,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="establecer_nueva_con
                 ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET llave_recuperacion=? WHERE login=?","$LlaveRecuperacion$_SeparadorCampos_$PCO_UsuarioRestablecimiento");
                 ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login=? ","$PCO_UsuarioRestablecimiento");
                 mensaje($MULTILANG_UsrResetCuenta,$MULTILANG_UsrResetOK,'','fa fa-unlock-alt fa-4x','alert alert-info alert-dismissible');
-                auditar("Restablece clave de acceso desde $direccion_auditoria",$PCO_UsuarioRestablecimiento);
+                auditar("Restablece clave de acceso desde $PCO_DireccionAuditoria",$PCO_UsuarioRestablecimiento);
             }
         else
             {

@@ -70,7 +70,7 @@
 					$ok_captcha=0;
 					// Lleva auditoria con query manual por la falta de $Login_Usuario y solamente si no hay un posible sqlinjection
 					if ($uid_orig==$uid && $clave_orig==$clave)
-						auditar("Elimina sesiones activas al intentar acceso con CAPTCHA incorrecto desde $direccion_auditoria",$uid);
+						auditar("Elimina sesiones activas al intentar acceso con CAPTCHA incorrecto desde $PCO_DireccionAuditoria",$uid);
 				}
 			session_destroy();
 
@@ -138,7 +138,7 @@
 						if (!isset($_SESSION["Version_Aplicacion"])) $_SESSION["Version_Aplicacion"]=$registro_parametros["version"];
 
 						// Lleva a auditoria con query manual por la falta de $Login_Usuario
-						auditar("Ingresa al sistema desde $direccion_auditoria",$uid);
+						auditar("Ingresa al sistema desde $PCO_DireccionAuditoria",$uid);
 						// Actualiza fecha del ultimo ingreso para el usuario
 						ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login=? ","$PCO_FechaOperacion$_SeparadorCampos_$uid");
 				  }
@@ -169,7 +169,7 @@
 */
 	if ($PCO_Accion=="Terminar_sesion")
 	{
-		auditar("Cierra sesion desde $direccion_auditoria");
+		auditar("Cierra sesion desde $PCO_DireccionAuditoria");
 		session_destroy();
 		echo '<form name="Redireccion" method="POST"><input type="Hidden" name="PCO_Accion" value="Mensaje_cierre_sesion"></form><script type="" language="JavaScript">	document.Redireccion.submit();  </script>';
 	}

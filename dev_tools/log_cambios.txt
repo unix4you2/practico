@@ -25,6 +25,8 @@ core/marco_abajo.php
 core/marco_arriba.php
 core/marco_conf.php
 core/menus.php
+core/sesion.php
+core/tablas.php
 core/usuarios.php
 core/ws_funciones.php
 inc/bootstrap/js/practico.js
