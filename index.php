@@ -87,13 +87,13 @@
     // Recupera variables recibidas para su uso como globales (equivale a register_globals=on en php.ini)
     if (!ini_get('register_globals'))
     {
-        $numero = count($_REQUEST);
-        $tags = array_keys($_REQUEST);// obtiene los nombres de las varibles
-        $valores = array_values($_REQUEST);// obtiene los valores de las varibles
+        $PCO_NumeroParametros = count($_REQUEST);
+        $PCO_NombresParametros = array_keys($_REQUEST);// obtiene los nombres de las varibles
+        $PCO_ValoresParametros = array_values($_REQUEST);// obtiene los valores de las varibles
         // crea las variables y les asigna el valor
-        for($i=0;$i<$numero;$i++)
+        for($i=0;$i<$PCO_NumeroParametros;$i++)
             {
-                $$tags[$i]=$valores[$i];
+                $$PCO_NombresParametros[$i]=$PCO_ValoresParametros[$i];
             }
         // Agrega ademas las variables de sesion
         if (!empty($_SESSION)) extract($_SESSION);
