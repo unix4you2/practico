@@ -736,11 +736,11 @@ echo '
 							$archivo = fopen($archivo_origen, "r");
 							if ($archivo)
 								{
-									$evitar_linea = fgets($archivo, 8192); //nombre
+									$PCO_EvitarLinea = fgets($archivo, 8192); //nombre
 									$NombreTabla= fgets($archivo, 8192);
-									$evitar_linea = fgets($archivo, 8192); //descripcion tabla
+									$PCO_EvitarLinea = fgets($archivo, 8192); //descripcion tabla
 									$DescripcionTabla= fgets($archivo, 8192);
-									$evitar_linea = fgets($archivo, 8192); //campos
+									$PCO_EvitarLinea = fgets($archivo, 8192); //campos
 									while (!feof($archivo))
 										{
 											$PCO_Linea = fgets($archivo, 8192);
@@ -837,11 +837,11 @@ echo '
 													$archivo = fopen($archivo_origen, "r");
 													if ($archivo)
 														{
-															$evitar_linea = fgets($archivo, 8192); //nombre
+															$PCO_EvitarLinea = fgets($archivo, 8192); //nombre
 															$NombreTabla= fgets($archivo, 8192);
-															$evitar_linea = fgets($archivo, 8192); //descripcion tabla
+															$PCO_EvitarLinea = fgets($archivo, 8192); //descripcion tabla
 															$DescripcionTabla= fgets($archivo, 8192);
-															$evitar_linea = fgets($archivo, 8192); //campos
+															$PCO_EvitarLinea = fgets($archivo, 8192); //campos
 															$conteocampo=0;
 															$DescripcionCampos="";
 															while (!feof($archivo))
