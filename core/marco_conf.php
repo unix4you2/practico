@@ -144,14 +144,14 @@
                                                 //descarta comentario inicial de archivo
                                                 if ($archivo)
                                                     {
-                                                        $linea = fgets($archivo, 1024);
+                                                        $PCO_Linea = fgets($archivo, 1024);
                                                         while (!feof($archivo))
                                                             {
-                                                                $linea = fgets($archivo, 1024);
-                                                                if (trim($linea)==$ZonaHoraria)
-                                                                    echo "<option value='".trim($linea)."' selected>".trim($linea)."</option>";
+                                                                $PCO_Linea = fgets($archivo, 1024);
+                                                                if (trim($PCO_Linea)==$ZonaHoraria)
+                                                                    echo "<option value='".trim($PCO_Linea)."' selected>".trim($PCO_Linea)."</option>";
                                                                 else
-                                                                    echo "<option value='".trim($linea)."'>".trim($linea)."</option>";
+                                                                    echo "<option value='".trim($PCO_Linea)."'>".trim($PCO_Linea)."</option>";
                                                             }
                                                         fclose($archivo);
                                                     }

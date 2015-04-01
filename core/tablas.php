@@ -743,10 +743,10 @@ echo '
 									$evitar_linea = fgets($archivo, 8192); //campos
 									while (!feof($archivo))
 										{
-											$linea = fgets($archivo, 8192);
-											$campos = explode("|", $linea);
+											$PCO_Linea = fgets($archivo, 8192);
+											$campos = explode("|", $PCO_Linea);
 											// Verifica si el campo de texto no es vacio y lo agrega
-											if (strlen($linea)>5)
+											if (strlen($PCO_Linea)>5)
 												{
 													$nombre_campo=$campos[1];
 													$tipo=$campos[2];
@@ -846,10 +846,10 @@ echo '
 															$DescripcionCampos="";
 															while (!feof($archivo))
 																{
-																	$linea = fgets($archivo, 8192);
-																	$campos = explode("|", $linea);
+																	$PCO_Linea = fgets($archivo, 8192);
+																	$campos = explode("|", $PCO_Linea);
 																	// Verifica si el campo de texto no es vacio
-																	if (strlen($linea)>5)
+																	if (strlen($PCO_Linea)>5)
 																		{
 																			$conteocampo++;
 																			$DescripcionCampos.=$campos[0]."\n";

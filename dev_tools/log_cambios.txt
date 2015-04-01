@@ -60,6 +60,7 @@ LogCambios="
 * Enhan: Agregado el atajo Ctrl+S para facilitar el guardar archivos editados en PCoder
 * Enhan: Copia de formularios ahora es dinamica segun la definicion de la base de datos
 * Enhan: ErrorLog del lado del servidor ahora es mas limpio
+* Enhan: Cambio de variables globales en posible conflicto hacia el formato $PCO_
 "
 
 ########################################################################
