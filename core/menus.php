@@ -757,7 +757,6 @@ if ($PCO_Accion=="administrar_menu")
                     $resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE 1 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
 
                     // Imprime las opciones con sus formularios
-                    $conteo_opciones=0;
                     while($registro = $resultado->fetch())
                         {
                             echo '<form action="'.$ArchivoCORE.'" method="post" name="deskinf_'.$registro["id"].'" id="deskinf_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
