@@ -74,7 +74,17 @@ function PCO_ObtenerContenidoAjax(PCO_ASINCRONICO,PCO_URL,PCO_PARAMETROS)
     }
 
 
+function PCOJS_MostrarMensaje(TituloPopUp, Mensaje)
+	{
+		$('#PCO_Modal_MensajeTitulo').html(TituloPopUp);
+		$('#PCO_Modal_MensajeCuerpo').html(Mensaje);
 
+		// Se muestra
+		$('#PCO_Modal_Mensaje').modal('show');
+
+		//Comando para que la ventana aparezca sobre otras
+		$("#PCO_Modal_Mensaje").css("z-index", "1500");
+	}
 
 
 

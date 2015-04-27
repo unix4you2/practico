@@ -55,8 +55,26 @@
     <!--Marco oculto para generacion de formularios y elementos dinamicos anidados -->
     <div id="PCODIV_FormulariosDinamicos" style="visibility: hidden; display: none;"></div>
 
+
     <div id="wrapper">
 
+		<!-- Modal para mensajes generales -->
+		<div id="PCO_Modal_Mensaje" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+						<h4 id="PCO_Modal_MensajeTitulo" class="modal-title"></h4>
+					</div>
+					<div class="modal-body">
+						<p id="PCO_Modal_MensajeCuerpo"></p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline btn-info" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top oculto_impresion" role="navigation" style="margin-bottom: 0">
