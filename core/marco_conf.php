@@ -250,6 +250,7 @@
                                         <select id="Auth_TipoMotorNEW" name="Auth_TipoMotorNEW" class="selectpicker" >
                                             <option value="practico" <?php if ($Auth_TipoMotor=="practico") echo "SELECTED"; ?> ><?php echo $MULTILANG_AuthPractico; ?></option>
                                             <option value="ldap" <?php if ($Auth_TipoMotor=="ldap") echo "SELECTED"; ?> ><?php echo $MULTILANG_AuthLDAP; ?></option>
+                                            <option value="federado" <?php if ($Auth_TipoMotor=="federado") echo "SELECTED"; ?> ><?php echo $MULTILANG_AuthFederado; ?></option>
                                         </select>
                                         <span class="input-group-addon">
                                             <a href="#" title="<?php echo $MULTILANG_Importante; ?>: <?php echo $MULTILANG_AyudaDesAuth; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>

@@ -47,7 +47,7 @@
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."parametros SET federado_servidor=?,federado_usuario=?,federado_clave=?,federado_motor=?,federado_basedatos=?,federado_tabla=?,federado_campousuario=?,federado_campoclave=?,federado_encripcion=?,nombre_empresa_largo=?,fecha_lanzamiento=?,nombre_empresa_corto=?,nombre_aplicacion=?,version=?,funciones_personalizadas=? ","$federado_servidor$_SeparadorCampos_$federado_usuario$_SeparadorCampos_$federado_clave$_SeparadorCampos_$federado_motor$_SeparadorCampos_$federado_basedatos$_SeparadorCampos_$federado_tabla$_SeparadorCampos_$federado_campousuario$_SeparadorCampos_$federado_campoclave$_SeparadorCampos_$federado_encripcion$_SeparadorCampos_$nombre_empresa_largo$_SeparadorCampos_$fecha_lanzamiento$_SeparadorCampos_$nombre_empresa_corto$_SeparadorCampos_$nombre_aplicacion$_SeparadorCampos_$version_nueva$_SeparadorCampos_$funciones_personalizadas");
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."parametros SET federado_puerto=?,federado_servidor=?,federado_usuario=?,federado_clave=?,federado_motor=?,federado_basedatos=?,federado_tabla=?,federado_campousuario=?,federado_campoclave=?,federado_encripcion=?,nombre_empresa_largo=?,fecha_lanzamiento=?,nombre_empresa_corto=?,nombre_aplicacion=?,version=?,funciones_personalizadas=? ","$federado_puerto$_SeparadorCampos_$federado_servidor$_SeparadorCampos_$federado_usuario$_SeparadorCampos_$federado_clave$_SeparadorCampos_$federado_motor$_SeparadorCampos_$federado_basedatos$_SeparadorCampos_$federado_tabla$_SeparadorCampos_$federado_campousuario$_SeparadorCampos_$federado_campoclave$_SeparadorCampos_$federado_encripcion$_SeparadorCampos_$nombre_empresa_largo$_SeparadorCampos_$fecha_lanzamiento$_SeparadorCampos_$nombre_empresa_corto$_SeparadorCampos_$nombre_aplicacion$_SeparadorCampos_$version_nueva$_SeparadorCampos_$funciones_personalizadas");
 					auditar("Actualiza parametros de aplicacion");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit(); </script>';
 				}
@@ -152,6 +152,13 @@
                                             <?php echo $MULTILANG_Servidor; ?>:
                                         </span>
                                         <input name="federado_servidor" value="<?php echo @$parametros["federado_servidor"]; ?>" type="text" class="form-control">
+                                        <span class="input-group-addon">
+                                            <?php echo $MULTILANG_Puerto; ?>:
+                                        </span>
+                                        <input name="federado_puerto" value="<?php echo @$parametros["federado_puerto"]; ?>" type="text" class="form-control">
+                                    </div>
+
+                                    <div class="form-group input-group">
                                         <span class="input-group-addon">
                                             <?php echo $MULTILANG_Usuario; ?>:
                                         </span>

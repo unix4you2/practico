@@ -19,6 +19,7 @@ CHANGELOG.md
 AUTHORS
 index.php
 core/comunes.php
+core/conexiones.php
 core/formularios.php
 core/informes.php
 core/marco_abajo.php
@@ -66,6 +67,8 @@ LogCambios="
 * Enhan: Copia de formularios ahora es dinamica segun la definicion de la base de datos
 * Enhan: ErrorLog del lado del servidor ahora es mas limpio
 * Enhan: Cambio de variables globales en posible conflicto hacia el formato $PCO_
+* Enhan: Cambio de la forma de conexion a enfoque funcional para mejorar procesos de autenticacion federada
+* Enhan: Cambio en funciones de ejecución de sentencias SQL para que permitan ejecución sobre múltiples conexiones
 "
 
 ########################################################################
@@ -81,6 +84,7 @@ ALTER TABLE core_parametros ADD COLUMN federado_tabla varchar(255) NULL DEFAULT 
 ALTER TABLE core_parametros ADD COLUMN federado_campousuario varchar(255) NULL DEFAULT '';
 ALTER TABLE core_parametros ADD COLUMN federado_campoclave varchar(255) NULL DEFAULT '';
 ALTER TABLE core_parametros ADD COLUMN federado_encripcion varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD COLUMN federado_puerto varchar(255) NULL DEFAULT '';
 "
 
 ########################################################################

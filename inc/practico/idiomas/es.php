@@ -887,7 +887,7 @@
 	$MULTILANG_MotorAuth='Motor de autenticaci&oacute;n';
 	$MULTILANG_AuthPractico='Interno (Tablas propias de Pr&aacute;ctico usando MD5)';
 	$MULTILANG_AuthLDAP='LDAP (Servidor de directorio)';
-	$MULTILANG_AuthGoogle='Google / Google+ (Mediante OAuth2)';
+	$MULTILANG_AuthFederado='Federado (Ver configuraci&oacute;n en parametros de aplicaci&oacute;n)';
 	$MULTILANG_AyudaDesAuth='El uso de un motor de autenticaci&oacute;n diferente a Pr&aacute;ctico no excluye la creaci&oacute;n de los usuarios sobre la herramienta.  El motor externo servira como metodo para validar el login y clave correspondiente como un m&eacute;todo de autenticaci&oacute;n centralizado; pero el resto de caracter&iacute;sticas del perfil ser&aacute;n tomadas desde el usuario Pr&aacute;ctico.  El cambio de contrase&ntilde;a en Pr&aacute;ctico ser&aacute; deshabilitado para que sea controlada solamente por el motor externo.  El usuario admin seguir&aacute; siendo siempre aut&oacute;nomo para no perder control de acceso por errores de configuraci&oacute;n.';
 	$MULTILANG_AyudaTitCript='Tipo de encripcion de claves usado por el motor';
 	$MULTILANG_AyudaDesCript='Especifique el tipo de encripcion utilizado por el sistema de autenticacion que va a utilizar.  Pr&aacute;ctico encriptar&aacute; el valor de clave ingresado por el usuario antes de enviarla al motor a verificaci&oacute;n.';

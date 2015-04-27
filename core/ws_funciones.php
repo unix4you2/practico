@@ -76,8 +76,7 @@ if ($WSId=="verificar_credenciales")
 		if (!$error_parametros && ($Auth_TipoMotor=="practico" || $uid=="admin"))
 			{
 				$ClaveEnMD5=hash("md5", $clave);
-				$resultado_usuario=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE estado=1 AND login=? AND clave=? ","$uid$_SeparadorCampos_$ClaveEnMD5");
-				$registro = $resultado_usuario->fetch();
+				$registro=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE estado=1 AND login=? AND clave=? ","$uid$_SeparadorCampos_$ClaveEnMD5")->fetch();
 				if ($registro["login"]!="")
 					$ok_login_verifica='1';
 			}
@@ -114,15 +113,22 @@ if ($WSId=="verificar_credenciales")
 			}
 
 		//Verifica MOTOR autenticacion federado
-		if (!$error_parametros && ($Auth_TipoMotor=="federado" || $uid!="admin"))
+		if (!$error_parametros && ($Auth_TipoMotor=="federado" && $uid!="admin"))
 			{
-				/*
-				$ClaveEnMD5=hash("md5", $clave);
-				$resultado_usuario=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE estado=1 AND login=? AND clave=? ","$uid$_SeparadorCampos_$ClaveEnMD5");
-				$registro = $resultado_usuario->fetch();
-				if ($registro["login"]!="")
-					$ok_login_verifica='1';
-				*/
+				//Busca parametros de configuracion para el motor federado
+				$Param_MotorFederado=ejecutar_sql("SELECT $ListaCamposSinID_parametros FROM ".$TablasCore."parametros ")->fetch();
+				
+				//Crea la nueva conexion al motor de autenticacion remoto segun los parametros encontrados
+				$PCO_ConexionFederada=PCO_NuevaConexionBD($Param_MotorFederado["federado_motor"],$Param_MotorFederado["federado_puerto"],$Param_MotorFederado["federado_basedatos"],$Param_MotorFederado["federado_servidor"],$Param_MotorFederado["federado_usuario"],$Param_MotorFederado["federado_clave"]);
+
+				//Ejecuta el Query sobre la conexion federada
+				//$ClaveEnMD5=hash("md5", $clave);
+				
+				$ClaveEnMD5=$clave;
+
+				$registro=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE ".$Param_MotorFederado["federado_campousuario"]."=? AND ".$Param_MotorFederado["federado_campoclave"]."=? ","$uid$_SeparadorCampos_$ClaveEnMD5",$PCO_ConexionFederada)->fetch();
+				if ($registro[$Param_MotorFederado["federado_campousuario"]]!="")
+					$ok_login_verifica='1';				
 			}
 
 		// Inicia el XML de salida basico solamente con el estado de aceptacion

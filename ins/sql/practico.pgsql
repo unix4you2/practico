@@ -19,6 +19,7 @@ CREATE TABLE core_parametros (
   federado_campousuario varchar(255) NULL DEFAULT '',
   federado_campoclave varchar(255) NULL DEFAULT '',
   federado_encripcion varchar(255) NULL DEFAULT '',
+  federado_puerto varchar(255) NULL DEFAULT '',
   PRIMARY KEY  (id)
 );
 

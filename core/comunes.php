@@ -554,7 +554,7 @@ function completar_parametros($string,$data) {
 
 /* ################################################################## */
 /* ################################################################## */
-	function ejecutar_sql($query,$lista_parametros="")
+	function ejecutar_sql($query,$lista_parametros="",$ConexionBD="")
 		{
 			/*
 				Function: ejecutar_sql
@@ -564,12 +564,20 @@ function completar_parametros($string,$data) {
 
 					query - Consulta preformateada para ser ejecutada en el motor
 					lista_parametros - Lista de variables PHP con parametros que deben ser preparados para el query separados por $_SeparadorCampos_
+					ConexionBD - Determina si la consulta debe ser ejecutada en otra conexion o motor.  Se hace obligatorio enviar parametros cuando se envia otra conexion
 					
 				Salida:
 					Retorna mensaje en pantalla con la descripcion devuelta por el driver en caso de error
 					Retorna una variable con el arreglo de resultados en caso de ser exitosa la consulta
 			*/
-			global $ConexionPDO,$ModoDepuracion;
+			
+			//Determina si se debe usar la conexion global del sistema o una especifica de usuario
+			if($ConexionBD=="")
+				global $ConexionPDO;
+			else
+				$ConexionPDO=$ConexionBD;
+			
+			global $ModoDepuracion;
 			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin;
 			global $PCO_Accion;
 			global $PCOSESS_LoginUsuario,$_SeparadorCampos_;
@@ -625,7 +633,7 @@ function completar_parametros($string,$data) {
 
 /* ################################################################## */
 /* ################################################################## */
-	function ejecutar_sql_unaria($query,$lista_parametros="")
+	function ejecutar_sql_unaria($query,$lista_parametros="",$ConexionBD="")
 		{
 			/*
 				Function: ejecutar_sql_unaria
@@ -635,12 +643,20 @@ function completar_parametros($string,$data) {
 
 					query - Consulta preformateada para ser ejecutada en el motor
 					param - Lista de parametros que deben ser preparados para el query separados por coma
+					ConexionBD - Determina si la consulta debe ser ejecutada en otra conexion o motor.  Se hace obligatorio enviar parametros cuando se envia otra conexion
 
 				Salida:
 					Retorna una cadena que contiene una descripcion de error PDO en caso de error y agrega un mensaje en pantalla con la descripcion devuelta por el driver
 					Retorna una cadena vacia si la consulta es ejecutada sin problemas.
 			*/
-			global $ConexionPDO,$ModoDepuracion;
+
+			//Determina si se debe usar la conexion global del sistema o una especifica de usuario
+			if($ConexionBD=="")
+				global $ConexionPDO;
+			else
+				$ConexionPDO=$ConexionBD;
+			
+			global $ModoDepuracion;
 			global $PCOSESS_LoginUsuario,$_SeparadorCampos_;
 			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin,$MULTILANG_ContacteAdmin,$MULTILANG_MotorBD;
 			try
@@ -688,7 +704,7 @@ function completar_parametros($string,$data) {
 
 /* ################################################################## */
 /* ################################################################## */
-	function ejecutar_sql_procedimiento($procedimiento)
+	function ejecutar_sql_procedimiento($procedimiento,$ConexionBD="")
 		{
 			/*
 				Function: ejecutar_sql_procedimiento
@@ -697,12 +713,18 @@ function completar_parametros($string,$data) {
 				Variables de entrada:
 
 					procedimiento - Procedimiento que debe residir en la base de datos y que ha de ser ejecutado
+					ConexionBD - Determina si la consulta debe ser ejecutada en otra conexion o motor.  Se hace obligatorio enviar parametros cuando se envia otra conexion
 
 				Salida:
 					Retorna 0 en caso de tener problemas con la ejecucion del procedimiento
 					Retorna una cadena vacia si el procedimiento es llamado y ejecutado sin problemas
 			*/
-			global $ConexionPDO;
+			//Determina si se debe usar la conexion global del sistema o una especifica de usuario
+			if($ConexionBD=="")
+				global $ConexionPDO;
+			else
+				$ConexionPDO=$ConexionBD;
+
 			try
 				{
 					$ConexionPDO->exec($procedimiento);
@@ -736,7 +758,7 @@ function completar_parametros($string,$data) {
 */
 	function auditar($PCO_Accion,$usuario="")
 		{
-			global $ConexionPDO,$ArchivoCORE,$TablasCore;
+			global $ArchivoCORE,$TablasCore;
 			global $ListaCamposSinID_auditoria,$_SeparadorCampos_;
 			global $PCOSESS_LoginUsuario,$PCO_FechaOperacion,$PCO_HoraOperacion;
 			//Establece el usuario para el registro

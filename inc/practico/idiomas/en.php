@@ -890,7 +890,7 @@
 	$MULTILANG_MotorAuth='Authentication engine';
 	$MULTILANG_AuthPractico='Internal (Practico Tables using MD5)';
 	$MULTILANG_AuthLDAP='LDAP (Directory server)';
-	$MULTILANG_AuthGoogle='Google / Google+ (By OAuth2)';
+	$MULTILANG_AuthFederado='Federated (See config under application parameters)';
 	$MULTILANG_AyudaDesAuth='Using a different authentication engine Practico not preclude the creation of users of the tool. The outboard motor will serve as a method to validate the login and corresponding password as a centralized authentication method, but the other features of the profile are taken from the Practico user. The Practico password change will be disabled to be controlled only by the external motor. The admin user will always remain autonomous to keep access control configuration errors.';
 	$MULTILANG_AyudaTitCript='Key encryption type used by the engine';
 	$MULTILANG_AyudaDesCript='Specify the type of encryption used by the authentication system to be used. Practico will encrypt the key value entered by the user before sending the verification engine.';
