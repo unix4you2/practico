@@ -872,11 +872,13 @@
 	$MULTILANG_AyudaLlave='Sign value for user accounts';
 	$MULTILANG_NotasImportantesInst1=' <u>IMPORTANT 1 </u>: The database used for Practico must already exist to connect to it and generate the required structures. Check with your hosting provider or system administrator how to create a database with sufficient privilege to work with Practico. <br> <br> <u> IMPORTANT 2 </u>: The installer will remove all existing tables on database indicated and that match the names of tables that Practico uses. If you think you may have important information in them is recommended to make a backup before proceeding. To share a single database between different Practico installations you can change the table prefixes used by each.';
 	$MULTILANG_ParametrosApp='Parameters for your application';
+	$MULTILANG_ParamNombreEmpresaLargo='Full name of your organization or company';
 	$MULTILANG_ParamNombreEmpresa='Short name of your organization or company';
+	$MULTILANG_ParamFechaLanzamiento='Date of deployment';
 	$MULTILANG_ParamNombreApp='Application name';
 	$MULTILANG_ParamVersionApp='Initial release version of its application';
 	$MULTILANG_AyudaTitNomEmp='Name to display on top';
-	$MULTILANG_AyudaDesNomEmp='This text will be used in reports and application areas that require a short name to identify your organization.';
+	$MULTILANG_AyudaDesNomEmp='This text will be used in reports and application areas that require a name to identify your organization.';
 	$MULTILANG_AyudaTitNomApp='Descriptive name';
 	$MULTILANG_AyudaDesNomApp='The specified name always appears at the top of your application.';
 	$MULTILANG_NotasImportantesInst2='<u>IMPORTANT</u>: Other parameters such as long and short name of your company, release date, license texts and credits will be able to be modified later in the options available for the administrator user.';

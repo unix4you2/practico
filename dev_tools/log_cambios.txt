@@ -24,6 +24,7 @@ core/informes.php
 core/marco_abajo.php
 core/marco_arriba.php
 core/marco_conf.php
+core/marco_param.php
 core/menus.php
 core/sesion.php
 core/tablas.php
@@ -69,6 +70,7 @@ LogCambios="
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
 ALTER TABLE core_menu ADD COLUMN posible_izquierda INT(1) NULL DEFAULT 0;
+
 "
 
 ########################################################################
