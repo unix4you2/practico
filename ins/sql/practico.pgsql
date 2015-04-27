@@ -10,6 +10,15 @@ CREATE TABLE core_parametros (
   licencia text,
   creditos text,
   funciones_personalizadas text,
+  federado_servidor varchar(255) NULL DEFAULT '',
+  federado_usuario varchar(255) NULL DEFAULT '',
+  federado_clave varchar(255) NULL DEFAULT '',
+  federado_motor varchar(255) NULL DEFAULT '',
+  federado_basedatos varchar(255) NULL DEFAULT '',
+  federado_tabla varchar(255) NULL DEFAULT '',
+  federado_campousuario varchar(255) NULL DEFAULT '',
+  federado_campoclave varchar(255) NULL DEFAULT '',
+  federado_encripcion varchar(255) NULL DEFAULT '',
   PRIMARY KEY  (id)
 );
 

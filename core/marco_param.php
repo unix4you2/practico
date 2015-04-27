@@ -47,7 +47,7 @@
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."parametros SET nombre_empresa_largo=?,fecha_lanzamiento=?,nombre_empresa_corto=?,nombre_aplicacion=?,version=?,funciones_personalizadas=? ","$nombre_empresa_largo$_SeparadorCampos_$fecha_lanzamiento$_SeparadorCampos_$nombre_empresa_corto$_SeparadorCampos_$nombre_aplicacion$_SeparadorCampos_$version_nueva$_SeparadorCampos_$funciones_personalizadas");
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."parametros SET federado_servidor=?,federado_usuario=?,federado_clave=?,federado_motor=?,federado_basedatos=?,federado_tabla=?,federado_campousuario=?,federado_campoclave=?,federado_encripcion=?,nombre_empresa_largo=?,fecha_lanzamiento=?,nombre_empresa_corto=?,nombre_aplicacion=?,version=?,funciones_personalizadas=? ","$federado_servidor$_SeparadorCampos_$federado_usuario$_SeparadorCampos_$federado_clave$_SeparadorCampos_$federado_motor$_SeparadorCampos_$federado_basedatos$_SeparadorCampos_$federado_tabla$_SeparadorCampos_$federado_campousuario$_SeparadorCampos_$federado_campoclave$_SeparadorCampos_$federado_encripcion$_SeparadorCampos_$nombre_empresa_largo$_SeparadorCampos_$fecha_lanzamiento$_SeparadorCampos_$nombre_empresa_corto$_SeparadorCampos_$nombre_aplicacion$_SeparadorCampos_$version_nueva$_SeparadorCampos_$funciones_personalizadas");
 					auditar("Actualiza parametros de aplicacion");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit(); </script>';
 				}
@@ -146,38 +146,36 @@
                                     </div>
                                 </div>
 
-
-
                                 <div class="tab-pane fade" id="authfederada-tab">
                                     <div class="form-group input-group">
                                         <span class="input-group-addon">
                                             <?php echo $MULTILANG_Servidor; ?>:
                                         </span>
-                                        <input name="servidor_federado" value="<?php echo @$parametros["servidor_federado"]; ?>" type="text" class="form-control">
+                                        <input name="federado_servidor" value="<?php echo @$parametros["federado_servidor"]; ?>" type="text" class="form-control">
                                         <span class="input-group-addon">
                                             <?php echo $MULTILANG_Usuario; ?>:
                                         </span>
-                                        <input name="usuario_federado" value="<?php echo @$parametros["usuario_federado"]; ?>" type="text" class="form-control">
+                                        <input name="federado_usuario" value="<?php echo @$parametros["federado_usuario"]; ?>" type="text" class="form-control">
                                         <span class="input-group-addon">
                                             <?php echo $MULTILANG_Contrasena; ?>:
                                         </span>
-                                        <input name="clave_federada" value="<?php echo @$parametros["clave_federada"]; ?>" type="text" class="form-control">
+                                        <input name="federado_clave" value="<?php echo @$parametros["federado_clave"]; ?>" type="text" class="form-control">
                                     </div>
 
-                                    <label for="motor_federado"><?php echo $MULTILANG_MotorBD; ?>:</label>
+                                    <label for="federado_motor"><?php echo $MULTILANG_MotorBD; ?>:</label>
                                     <div class="form-group input-group">
-                                        <select id="motor_federado" name="motor_federado" class="selectpicker" >
-                                            <option value="mysql"	 <?php if (@$parametros["motor_federado"]=="mysql") echo "SELECTED"; ?> >MySQL - MariaDB (3.x/4.x/5.x)</option>
-                                            <option value="pgsql"	 <?php if (@$parametros["motor_federado"]=="pgsql") echo "SELECTED"; ?> >PostgreSQL</option>
-                                            <option value="sqlite"	 <?php if (@$parametros["motor_federado"]=="sqlite") echo "SELECTED"; ?> >SQLite v2 - SQLite v3</option>
-                                            <option value="sqlsrv"	 <?php if (@$parametros["motor_federado"]=="sqlsrv") echo "SELECTED"; ?> >FreeTDS/Microsoft SQL Server: Win32 [max version 2008]</option>
-                                            <option value="mssql"	 <?php if (@$parametros["motor_federado"]=="mssql") echo "SELECTED"; ?> >FreeTDS/Microsoft SQL Server: Win32&Linux, [max version 2000]</option>
-                                            <option value="ibm"		 <?php if (@$parametros["motor_federado"]=="ibm") echo "SELECTED"; ?> >IBM (DB2)</option>
-                                            <option value="dblib"	 <?php if (@$parametros["motor_federado"]=="dblib") echo "SELECTED"; ?> >DBLIB</option>
-                                            <option value="odbc"	 <?php if (@$parametros["motor_federado"]=="odbc") echo "SELECTED"; ?> >Microsoft Access (ODBC v3: IBM DB2, unixODBC, Win32 ODBC)</option>
-                                            <option value="oracle"	 <?php if (@$parametros["motor_federado"]=="oracle") echo "SELECTED"; ?> >ORACLE (OCI Oracle Call Interface)</option>
-                                            <option value="ifmx"	 <?php if (@$parametros["motor_federado"]=="ifmx") echo "SELECTED"; ?> >Informix (IBM Informix Dynamic Server)</option>
-                                            <option value="fbd"		 <?php if (@$parametros["motor_federado"]=="fbd") echo "SELECTED"; ?> >Firebird (Firebird/Interbase 6)</option>
+                                        <select id="federado_motor" name="federado_motor" class="selectpicker" >
+                                            <option value="mysql"	 <?php if (@$parametros["federado_motor"]=="mysql") echo "SELECTED"; ?> >MySQL - MariaDB (3.x/4.x/5.x)</option>
+                                            <option value="pgsql"	 <?php if (@$parametros["federado_motor"]=="pgsql") echo "SELECTED"; ?> >PostgreSQL</option>
+                                            <option value="sqlite"	 <?php if (@$parametros["federado_motor"]=="sqlite") echo "SELECTED"; ?> >SQLite v2 - SQLite v3</option>
+                                            <option value="sqlsrv"	 <?php if (@$parametros["federado_motor"]=="sqlsrv") echo "SELECTED"; ?> >FreeTDS/Microsoft SQL Server: Win32 [max version 2008]</option>
+                                            <option value="mssql"	 <?php if (@$parametros["federado_motor"]=="mssql") echo "SELECTED"; ?> >FreeTDS/Microsoft SQL Server: Win32&Linux, [max version 2000]</option>
+                                            <option value="ibm"		 <?php if (@$parametros["federado_motor"]=="ibm") echo "SELECTED"; ?> >IBM (DB2)</option>
+                                            <option value="dblib"	 <?php if (@$parametros["federado_motor"]=="dblib") echo "SELECTED"; ?> >DBLIB</option>
+                                            <option value="odbc"	 <?php if (@$parametros["federado_motor"]=="odbc") echo "SELECTED"; ?> >Microsoft Access (ODBC v3: IBM DB2, unixODBC, Win32 ODBC)</option>
+                                            <option value="oracle"	 <?php if (@$parametros["federado_motor"]=="oracle") echo "SELECTED"; ?> >ORACLE (OCI Oracle Call Interface)</option>
+                                            <option value="ifmx"	 <?php if (@$parametros["federado_motor"]=="ifmx") echo "SELECTED"; ?> >Informix (IBM Informix Dynamic Server)</option>
+                                            <option value="fbd"		 <?php if (@$parametros["federado_motor"]=="fbd") echo "SELECTED"; ?> >Firebird (Firebird/Interbase 6)</option>
                                         </select>
                                     </div>
 
@@ -185,66 +183,66 @@
                                         <span class="input-group-addon">
                                             <?php echo $MULTILANG_Basedatos; ?>:
                                         </span>
-                                        <input name="basedatos_federada" value="<?php echo @$parametros["basedatos_federada"]; ?>" type="text" class="form-control">
+                                        <input name="federado_basedatos" value="<?php echo @$parametros["federado_basedatos"]; ?>" type="text" class="form-control">
                                         <span class="input-group-addon">
                                             <?php echo $MULTILANG_TablaDatos; ?>:
                                         </span>
-                                        <input name="tabla_federada" value="<?php echo @$parametros["tabla_federada"]; ?>" type="text" class="form-control">
+                                        <input name="federado_tabla" value="<?php echo @$parametros["federado_tabla"]; ?>" type="text" class="form-control">
                                     </div>
                                     
                                     <div class="form-group input-group">
                                         <span class="input-group-addon">
                                             <?php echo $MULTILANG_CampoUsuarioFederado; ?>:
                                         </span>
-                                        <input name="campo_usuario_federado" value="<?php echo @$parametros["campo_usuario_federado"]; ?>" type="text" class="form-control">
+                                        <input name="federado_campousuario" value="<?php echo @$parametros["federado_campousuario"]; ?>" type="text" class="form-control">
                                         <span class="input-group-addon">
                                             <?php echo $MULTILANG_CampoClaveFederado; ?>:
                                         </span>
-                                        <input name="campo_clave_federada" value="<?php echo @$parametros["campo_clave_federada"]; ?>" type="text" class="form-control">
+                                        <input name="federado_campoclave" value="<?php echo @$parametros["federado_campoclave"]; ?>" type="text" class="form-control">
                                     </div>
                                     
-                                    <label for="encripcion_federada"><?php echo $MULTILANG_AlgoritmoCripto; ?>:</label>
+                                    <label for="federado_encripcion"><?php echo $MULTILANG_AlgoritmoCripto; ?>:</label>
                                     <div class="form-group input-group">
-                                        <select id="encripcion_federada" name="encripcion_federada" class="selectpicker" >
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="plano") echo "SELECTED"; ?> value="plano">Texto plano/Plain text</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="md5") echo "SELECTED"; ?> value="md5">MD5</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="md4") echo "SELECTED"; ?> value="md4">MD4</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="md2") echo "SELECTED"; ?> value="md2">MD2</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="sha1") echo "SELECTED"; ?> value="sha1">SHA 1</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="sha256") echo "SELECTED"; ?> value="sha256">SHA 256</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="sha384") echo "SELECTED"; ?> value="sha384">SHA 384</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="sha512") echo "SELECTED"; ?> value="sha512">SHA 512</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="crc32") echo "SELECTED"; ?> value="crc32">CRC 32</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="crc32b") echo "SELECTED"; ?> value="crc32b">CRC 32B</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="adler32") echo "SELECTED"; ?> value="adler32">Adler 32</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="gost") echo "SELECTED"; ?> value="gost">Gost</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="whirlpool") echo "SELECTED"; ?> value="whirlpool">Whirlpool</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="snefru") echo "SELECTED"; ?> value="snefru">Snefru</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="ripemd128") echo "SELECTED"; ?> value="ripemd128">Ripemd 128</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="ripemd160") echo "SELECTED"; ?> value="ripemd160">Ripemd 160</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="ripemd256") echo "SELECTED"; ?> value="ripemd256">Ripemd 256</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="ripemd320") echo "SELECTED"; ?> value="ripemd320">Ripemd 320</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="tiger128,3") echo "SELECTED"; ?> value="tiger128,3">Tiger 128,3</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="tiger128,4") echo "SELECTED"; ?> value="tiger128,4">Tiger 128,4</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="tiger160,3") echo "SELECTED"; ?> value="tiger160,3">Tiger 160,3</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="tiger160,4") echo "SELECTED"; ?> value="tiger160,4">Tiger 160,4</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="tiger192,3") echo "SELECTED"; ?> value="tiger192,3">Tiger 192,3</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="tiger192,4") echo "SELECTED"; ?> value="tiger192,4">Tiger 192,4</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="haval128,3") echo "SELECTED"; ?> value="haval128,3">Haval 128,3</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="haval128,4") echo "SELECTED"; ?> value="haval128,4">Haval 128,4</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="haval128,5") echo "SELECTED"; ?> value="haval128,5">Haval 128,5</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="haval160,3") echo "SELECTED"; ?> value="haval160,3">Haval 160,3</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="haval160,4") echo "SELECTED"; ?> value="haval160,4">Haval 160,4</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="haval160,5") echo "SELECTED"; ?> value="haval160,5">Haval 160,5</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="haval192,3") echo "SELECTED"; ?> value="haval192,3">Haval 192,3</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="haval192,4") echo "SELECTED"; ?> value="haval192,4">Haval 192,4</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="haval192,5") echo "SELECTED"; ?> value="haval192,5">Haval 192,5</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="haval224,3") echo "SELECTED"; ?> value="haval224,3">Haval 224,3</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="haval224,4") echo "SELECTED"; ?> value="haval224,4">Haval 224,4</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="haval224,5") echo "SELECTED"; ?> value="haval224,5">Haval 224,5</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="haval256,3") echo "SELECTED"; ?> value="haval256,3">Haval 256,3</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="haval256,4") echo "SELECTED"; ?> value="haval256,4">Haval 256,4</option>
-                                            <option  <?php if (@$parametros["encripcion_federada"]=="haval256,5") echo "SELECTED"; ?> value="haval256,5">Haval 256,5</option>
+                                        <select id="federado_encripcion" name="federado_encripcion" class="selectpicker" >
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="plano") echo "SELECTED"; ?> value="plano">Texto plano/Plain text</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="md5") echo "SELECTED"; ?> value="md5">MD5</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="md4") echo "SELECTED"; ?> value="md4">MD4</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="md2") echo "SELECTED"; ?> value="md2">MD2</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="sha1") echo "SELECTED"; ?> value="sha1">SHA 1</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="sha256") echo "SELECTED"; ?> value="sha256">SHA 256</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="sha384") echo "SELECTED"; ?> value="sha384">SHA 384</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="sha512") echo "SELECTED"; ?> value="sha512">SHA 512</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="crc32") echo "SELECTED"; ?> value="crc32">CRC 32</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="crc32b") echo "SELECTED"; ?> value="crc32b">CRC 32B</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="adler32") echo "SELECTED"; ?> value="adler32">Adler 32</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="gost") echo "SELECTED"; ?> value="gost">Gost</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="whirlpool") echo "SELECTED"; ?> value="whirlpool">Whirlpool</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="snefru") echo "SELECTED"; ?> value="snefru">Snefru</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="ripemd128") echo "SELECTED"; ?> value="ripemd128">Ripemd 128</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="ripemd160") echo "SELECTED"; ?> value="ripemd160">Ripemd 160</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="ripemd256") echo "SELECTED"; ?> value="ripemd256">Ripemd 256</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="ripemd320") echo "SELECTED"; ?> value="ripemd320">Ripemd 320</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="tiger128,3") echo "SELECTED"; ?> value="tiger128,3">Tiger 128,3</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="tiger128,4") echo "SELECTED"; ?> value="tiger128,4">Tiger 128,4</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="tiger160,3") echo "SELECTED"; ?> value="tiger160,3">Tiger 160,3</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="tiger160,4") echo "SELECTED"; ?> value="tiger160,4">Tiger 160,4</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="tiger192,3") echo "SELECTED"; ?> value="tiger192,3">Tiger 192,3</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="tiger192,4") echo "SELECTED"; ?> value="tiger192,4">Tiger 192,4</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval128,3") echo "SELECTED"; ?> value="haval128,3">Haval 128,3</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval128,4") echo "SELECTED"; ?> value="haval128,4">Haval 128,4</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval128,5") echo "SELECTED"; ?> value="haval128,5">Haval 128,5</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval160,3") echo "SELECTED"; ?> value="haval160,3">Haval 160,3</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval160,4") echo "SELECTED"; ?> value="haval160,4">Haval 160,4</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval160,5") echo "SELECTED"; ?> value="haval160,5">Haval 160,5</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval192,3") echo "SELECTED"; ?> value="haval192,3">Haval 192,3</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval192,4") echo "SELECTED"; ?> value="haval192,4">Haval 192,4</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval192,5") echo "SELECTED"; ?> value="haval192,5">Haval 192,5</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval224,3") echo "SELECTED"; ?> value="haval224,3">Haval 224,3</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval224,4") echo "SELECTED"; ?> value="haval224,4">Haval 224,4</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval224,5") echo "SELECTED"; ?> value="haval224,5">Haval 224,5</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval256,3") echo "SELECTED"; ?> value="haval256,3">Haval 256,3</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval256,4") echo "SELECTED"; ?> value="haval256,4">Haval 256,4</option>
+                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval256,5") echo "SELECTED"; ?> value="haval256,5">Haval 256,5</option>
                                         </select>
                                     </div>                                    
 

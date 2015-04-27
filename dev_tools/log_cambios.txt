@@ -53,6 +53,8 @@ LogCambios="
 * Added: Boton nuevo permite saltar entre los permisos para menues y reportes de un usuario sin tener que regresar al escritorio
 * Added: PCoder ahora puede almacenar archivos sin actualizar hoja y mover el cursor de punto mediante llamados AJAX
 * Added: Iniciada implementacion de HTML2CANVAS
+* Added: Adicion de campos personalizables sobre parametros de aplicacion
+* Added: Implementación de autenticación federada
 * Fixed: Se mejora escapado de caracteres en campos de filtrado de listas para formularios
 * Fixed: Búsquedas dinámicas sobre subformularios ahora usan los registros maestros
 * Fixed: Tester [Jaime A. Berrio] Valores Hidden sobre formularios con variables PHP
@@ -70,7 +72,15 @@ LogCambios="
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
 ALTER TABLE core_menu ADD COLUMN posible_izquierda INT(1) NULL DEFAULT 0;
-
+ALTER TABLE core_parametros ADD COLUMN federado_servidor varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD COLUMN federado_usuario varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD COLUMN federado_clave varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD COLUMN federado_motor varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD COLUMN federado_basedatos varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD COLUMN federado_tabla varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD COLUMN federado_campousuario varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD COLUMN federado_campoclave varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD COLUMN federado_encripcion varchar(255) NULL DEFAULT '';
 "
 
 ########################################################################

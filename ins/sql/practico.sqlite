@@ -10,6 +10,15 @@ CREATE TABLE core_parametros (
   licencia text,
   creditos text,
   funciones_personalizadas text
+  federado_servidor text,
+  federado_usuario text,
+  federado_clave text,
+  federado_motor text,
+  federado_basedatos text,
+  federado_tabla text,
+  federado_campousuario text,
+  federado_campoclave text,
+  federado_encripcion text
   
 );
 
