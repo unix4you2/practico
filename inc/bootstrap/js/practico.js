@@ -76,13 +76,14 @@ function PCO_ObtenerContenidoAjax(PCO_ASINCRONICO,PCO_URL,PCO_PARAMETROS)
 
 function PCOJS_MostrarMensaje(TituloPopUp, Mensaje)
 	{
+		//Lleva los valores a cada parte del dialogo modal
 		$('#PCO_Modal_MensajeTitulo').html(TituloPopUp);
 		$('#PCO_Modal_MensajeCuerpo').html(Mensaje);
 
-		// Se muestra
+		// Se muestra el cuadro modal
 		$('#PCO_Modal_Mensaje').modal('show');
 
-		//Comando para que la ventana aparezca sobre otras
+		//Hacer que la ventana este siempre por encima
 		$("#PCO_Modal_Mensaje").css("z-index", "1500");
 	}
 
