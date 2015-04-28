@@ -144,6 +144,9 @@
             }
         }
 
+    // Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios
+    include("mod/personalizadas_pre.php"); 
+
     // Inicia la presentacion de la pagina si no esta activado el fullscreen
     if (@$Presentar_FullScreen!=1) $Presentar_FullScreen="";
     if (@$Precarga_EstilosBS!=1) $Precarga_EstilosBS="";
@@ -223,8 +226,10 @@
 
 
 /* ################################################################## */
-    // Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios
-    include("mod/personalizadas.php"); 
+    // Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios. Incluye compatibilidad hacia atras en personalizadas.php
+    if (file_exists("mod/personalizadas.php")) include("mod/personalizadas.php");
+    include("mod/personalizadas_pos.php");
+
     // Incluye otros modulos que residan sobre carpetas en mod/* cuya entrada es index.php
     $directorio_modulos=opendir("mod");
     while (($PCOVAR_Elemento=readdir($directorio_modulos))!=false) {

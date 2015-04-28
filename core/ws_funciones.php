@@ -172,8 +172,12 @@ if ($WSId=="verificar_credenciales")
 			// Inserta datos del usuario
 			$clavemd5=MD5(TextoAleatorio(20));
 			$pasomd5=MD5($LlaveDePaso);
-			@ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno) VALUES ('$login_chk','$clavemd5','$nombre_chk',1,'$correo_chk','$PCO_FechaOperacion','$pasomd5','$interno_chk')");
-			auditar("OAuth:Agregado usuario $login_chk para ".$OAuth_servicio);
+			//Agrega el registro de usuario si aun no existe
+			if (!existe_valor($TablasCore."usuario","login",$login_chk))
+				{
+					@ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno) VALUES ('$login_chk','$clavemd5','$nombre_chk',1,'$correo_chk','$PCO_FechaOperacion','$pasomd5','$interno_chk')");
+					auditar("OAuth:Agregado usuario $login_chk para ".$OAuth_servicio);
+				}
 		}
 
 

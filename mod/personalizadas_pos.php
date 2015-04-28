@@ -19,7 +19,7 @@
 	*/
 			/*
 			Title: Funciones personalizadas
-			Ubicacion *[/personalizadas.php]*.  Archivo que contiene la declaracion de variables y funciones por parte del usuario o administrador del sistema
+			Ubicacion *[/personalizadas_pos.php]*.  Archivo que contiene la declaracion de variables y funciones por parte del usuario o administrador del sistema que deben ser cargadas justo antes de finalizar la aplicacion
 
 			Codigo de ejemplo:
 				(start code)
@@ -39,7 +39,7 @@
             */
 		
 
-if ($PCO_Accion=="Mi_accion_XYZ") 
+if ($PCO_Accion=="Mi_AccionPoscarga_XYZ") 
 	{
 
 

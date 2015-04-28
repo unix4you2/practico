@@ -37,6 +37,8 @@ inc/practico/def_basedatos.php
 inc/html2canvas/*
 mod/pcoder/demo.php
 mod/pcoder/index.php
+mod/personalizadas_pre.php
+mod/personalizadas_pos.php
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -55,7 +57,8 @@ LogCambios="
 * Added: PCoder ahora puede almacenar archivos sin actualizar hoja y mover el cursor de punto mediante llamados AJAX
 * Added: Iniciada implementacion de HTML2CANVAS
 * Added: Adicion de campos personalizables sobre parametros de aplicacion
-* Added: Implementación de autenticación federada
+* Added: Soporte para autenticación federada. Ahora se pueden autenticar los usuarios frente a bases de datos en otros sistemas.
+* Added: Agregado un archivo para funciones personalizadas tanto al comienzo como al final de la aplicacion (personalizadas pre y pos)
 * Fixed: Se mejora escapado de caracteres en campos de filtrado de listas para formularios
 * Fixed: Búsquedas dinámicas sobre subformularios ahora usan los registros maestros
 * Fixed: Tester [Jaime A. Berrio] Valores Hidden sobre formularios con variables PHP
@@ -70,6 +73,7 @@ LogCambios="
 * Enhan: Cambio de variables globales en posible conflicto hacia el formato $PCO_
 * Enhan: Cambio de la forma de conexion a enfoque funcional para mejorar procesos de autenticacion federada
 * Enhan: Cambio en funciones de ejecución de sentencias SQL para que permitan ejecución sobre múltiples conexiones
+* Enhan: En motores de autenticacion diferentes a los internos, la creacion del usuario se hace sólo si este no existe todavía.
 "
 
 ########################################################################
