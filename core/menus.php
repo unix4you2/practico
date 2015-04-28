@@ -673,126 +673,137 @@ if ($PCO_Accion=="administrar_menu")
                 </div>
                 </form>';
 
-            //Descompone la frase de busqueda en palabras para buscar las cuatro primeras como las mas relevantes
-                $PalabrasBusqueda=explode(" ",$PCO_BusquedaPermisos);
-                $Palabra1=@$PalabrasBusqueda[0];
-                $Palabra2=@$PalabrasBusqueda[1];
-                $Palabra3=@$PalabrasBusqueda[2];
-                $Palabra4=@$PalabrasBusqueda[3];
-            $complemento_palabras_like="";
-            if ($Palabra1!="") $complemento_palabras_like.=" texto LIKE '%$Palabra1%' ";
-            if ($Palabra2!="") $complemento_palabras_like.=" OR texto LIKE '%$Palabra2%' ";
-            if ($Palabra3!="") $complemento_palabras_like.=" OR texto LIKE '%$Palabra3%' ";
-            if ($Palabra4!="") $complemento_palabras_like.=" OR texto LIKE '%$Palabra4%' ";
+			//Realiza el proceso de busqueda solamente si recibe algun criterio
+			if ($PCO_BusquedaPermisos!="")
+				{
+					
+					//Descompone la frase de busqueda en palabras para buscar las cuatro primeras como las mas relevantes
+						$PalabrasBusqueda=explode(" ",$PCO_BusquedaPermisos);
+						$Palabra1=@$PalabrasBusqueda[0];
+						$Palabra2=@$PalabrasBusqueda[1];
+						$Palabra3=@$PalabrasBusqueda[2];
+						$Palabra4=@$PalabrasBusqueda[3];
+					$complemento_palabras_like="";
+					if ($Palabra1!="") $complemento_palabras_like.=" texto LIKE '%$Palabra1%' ";
+					if ($Palabra2!="") $complemento_palabras_like.=" OR texto LIKE '%$Palabra2%' ";
+					if ($Palabra3!="") $complemento_palabras_like.=" OR texto LIKE '%$Palabra3%' ";
+					if ($Palabra4!="") $complemento_palabras_like.=" OR texto LIKE '%$Palabra4%' ";
 
-            //Inicia el marco con resultados
-            echo '
-                    <h3>'.$MULTILANG_Resultados.':</h3>
-                    <div class="panel panel-default"> <!-- Clase chat-panel para altura -->
-                        <div class="panel-body">
-                            <ul class="chat">';
-
-
-                    // Busca y carga las opciones de menu
-                    // Si el usuario es diferente al administrador agrega condiciones al query
-                    if ($PCOSESS_LoginUsuario!="admin")
-                        {
-                            $Complemento_tablas=",".$TablasCore."usuario_menu";
-                            $Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";
-                        }
-                    $resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE 1 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
-
-                    // Imprime las opciones con sus formularios
-                    $conteo_opciones=0;
-                    while($registro = $resultado->fetch())
-                        {
-                            echo '<form action="'.$ArchivoCORE.'" method="post" name="desk_'.$registro["id"].'" id="desk_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
-                            // Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
-                            if ($registro["tipo_comando"]=="Interno" || $registro["tipo_comando"]=="Personal")
-                                {
-                                    echo '<input type="hidden" name="PCO_Accion" value="'.$registro["comando"].'"></form>';
-                                }
-                            // Verifica si se trata de una opcion para cargar un objeto de practico
-                            if ($registro["tipo_comando"]=="Objeto")
-                                {
-                                    echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
-                                         <input type="hidden" name="objeto" value="'.$registro["comando"].'"></form>';
-                                }
-                            //Presenta la opcion de menu
-                            echo '
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <i class="'.$registro["imagen"].' fa-2x fa-fw icon-gray"></i>
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <a href="javascript:document.desk_'.$registro["id"].'.submit();">
-                                                <strong class="primary-font">'.$registro["texto"].'</strong> 
-                                            </a>
-                                            <small class="pull-right text-muted">
-                                                <i class="fa fa-rocket fa-fw"></i> ['.$registro["tipo_comando"].']='.$registro["comando"].'
-                                            </small>
-                                        </div>
-                                        <p>
-                                            <i class="icon-gray">&nbsp;&nbsp;&nbsp;'.$registro["seccion"].'</i>
-                                        </p>
-                                    </div>
-                                </li>';
-                            $conteo_opciones++;
-                        }
-
-                    
-                    // Busca y carga las opciones de informes
-                    $complemento_palabras_like="";
-                    if ($Palabra1!="") $complemento_palabras_like.=" titulo LIKE '%$Palabra1%' ";
-                    if ($Palabra2!="") $complemento_palabras_like.=" OR titulo LIKE '%$Palabra2%' ";
-                    if ($Palabra3!="") $complemento_palabras_like.=" OR titulo LIKE '%$Palabra3%' ";
-                    if ($Palabra4!="") $complemento_palabras_like.=" OR titulo LIKE '%$Palabra4%' ";
-                    // Si el usuario es diferente al administrador agrega condiciones al query
-                    if ($PCOSESS_LoginUsuario!="admin")
-                        {
-                            $Complemento_tablas=",".$TablasCore."usuario_informe";
-                            $Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario'";
-                        }
-                    $resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE 1 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
-
-                    // Imprime las opciones con sus formularios
-                    while($registro = $resultado->fetch())
-                        {
-                            echo '<form action="'.$ArchivoCORE.'" method="post" name="deskinf_'.$registro["id"].'" id="deskinf_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
-                            echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
-                                 <input type="hidden" name="objeto" value="inf:'.$registro["id"].'"></form>';
-                            //Presenta la opcion de menu
-                            echo '
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <i class="fa fa-file-text fa-2x fa-fw icon-gray"></i>
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <a href="javascript:document.deskinf_'.$registro["id"].'.submit();">
-                                                <strong class="primary-font">'.$registro["titulo"].'</strong> 
-                                            </a>
-                                            <small class="pull-right text-muted">
-                                                <i class="fa fa-file-text fa-fw"></i> [Reporte]=inf:'.$registro["id"].'
-                                            </small>
-                                        </div>
-                                        <p>
-                                            <i class="icon-gray">&nbsp;&nbsp;&nbsp;'.$registro["categoria"].'</i>
-                                        </p>
-                                    </div>
-                                </li>';
-                            $conteo_opciones++;
-                        }
+					//Inicia el marco con resultados
+					echo '
+							<h3>'.$MULTILANG_Resultados.':</h3>
+							<div class="panel panel-default"> <!-- Clase chat-panel para altura -->
+								<div class="panel-body">
+									<ul class="chat">';
 
 
-            //Finaliza el marco de resultados
-            echo '
-                            </ul>
-                        </div> <!-- /.panel-body -->
-                    </div> <!-- /.panel .chat-panel -->
-                    <h4>'.$MULTILANG_TotalRegistros.': '.$conteo_opciones.'</h4>
-                    ';
+							// Busca y carga las opciones de menu
+							// Si el usuario es diferente al administrador agrega condiciones al query
+							if ($PCOSESS_LoginUsuario!="admin")
+								{
+									$Complemento_tablas=",".$TablasCore."usuario_menu";
+									$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";
+								}
+							$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE 1 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
+
+							// Imprime las opciones con sus formularios
+							$conteo_opciones=0;
+							while($registro = $resultado->fetch())
+								{
+									echo '<form action="'.$ArchivoCORE.'" method="post" name="desk_'.$registro["id"].'" id="desk_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
+									// Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
+									if ($registro["tipo_comando"]=="Interno" || $registro["tipo_comando"]=="Personal")
+										{
+											echo '<input type="hidden" name="PCO_Accion" value="'.$registro["comando"].'"></form>';
+										}
+									// Verifica si se trata de una opcion para cargar un objeto de practico
+									if ($registro["tipo_comando"]=="Objeto")
+										{
+											echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
+												 <input type="hidden" name="objeto" value="'.$registro["comando"].'"></form>';
+										}
+									//Presenta la opcion de menu
+									echo '
+										<li class="left clearfix">
+											<span class="chat-img pull-left">
+												<i class="'.$registro["imagen"].' fa-2x fa-fw icon-gray"></i>
+											</span>
+											<div class="chat-body clearfix">
+												<div class="header">
+													<a href="javascript:document.desk_'.$registro["id"].'.submit();">
+														<strong class="primary-font">'.$registro["texto"].'</strong> 
+													</a>
+													<small class="pull-right text-muted">
+														<i class="fa fa-rocket fa-fw"></i> ['.$registro["tipo_comando"].']='.$registro["comando"].'
+													</small>
+												</div>
+												<p>
+													<i class="icon-gray">&nbsp;&nbsp;&nbsp;'.$registro["seccion"].'</i>
+												</p>
+											</div>
+										</li>';
+									$conteo_opciones++;
+								}
+
+							
+							// Busca y carga las opciones de informes
+							$complemento_palabras_like="";
+							if ($Palabra1!="") $complemento_palabras_like.=" titulo LIKE '%$Palabra1%' ";
+							if ($Palabra2!="") $complemento_palabras_like.=" OR titulo LIKE '%$Palabra2%' ";
+							if ($Palabra3!="") $complemento_palabras_like.=" OR titulo LIKE '%$Palabra3%' ";
+							if ($Palabra4!="") $complemento_palabras_like.=" OR titulo LIKE '%$Palabra4%' ";
+							// Si el usuario es diferente al administrador agrega condiciones al query
+							if ($PCOSESS_LoginUsuario!="admin")
+								{
+									$Complemento_tablas=",".$TablasCore."usuario_informe";
+									$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario'";
+								}
+							$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE 1 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
+
+							// Imprime las opciones con sus formularios
+							while($registro = $resultado->fetch())
+								{
+									echo '<form action="'.$ArchivoCORE.'" method="post" name="deskinf_'.$registro["id"].'" id="deskinf_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
+									echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
+										 <input type="hidden" name="objeto" value="inf:'.$registro["id"].'"></form>';
+									//Presenta la opcion de menu
+									echo '
+										<li class="left clearfix">
+											<span class="chat-img pull-left">
+												<i class="fa fa-file-text fa-2x fa-fw icon-gray"></i>
+											</span>
+											<div class="chat-body clearfix">
+												<div class="header">
+													<a href="javascript:document.deskinf_'.$registro["id"].'.submit();">
+														<strong class="primary-font">'.$registro["titulo"].'</strong> 
+													</a>
+													<small class="pull-right text-muted">
+														<i class="fa fa-file-text fa-fw"></i> [Reporte]=inf:'.$registro["id"].'
+													</small>
+												</div>
+												<p>
+													<i class="icon-gray">&nbsp;&nbsp;&nbsp;'.$registro["categoria"].'</i>
+												</p>
+											</div>
+										</li>';
+									$conteo_opciones++;
+								}
+
+
+					//Finaliza el marco de resultados
+					echo '
+									</ul>
+								</div> <!-- /.panel-body -->
+							</div> <!-- /.panel .chat-panel -->
+							<h4>'.$MULTILANG_TotalRegistros.': '.$conteo_opciones.'</h4>
+							';	
+					
+				} //Fin si realmente recibio un criterio
+			else
+				{
+					mensaje($MULTILANG_Resultados, $MULTILANG_InfDataTableNoRegistros, '', 'fa fa-search fa-3x', 'alert alert-warning alert-dismissible');
+				}
+
 	} 
 
 

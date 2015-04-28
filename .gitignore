@@ -3,3 +3,4 @@ temp/*
 practico.sqlite3
 core/configuracion.php
 mod/pcc_erp/*
+mod/colmedicos_sgsst/*
