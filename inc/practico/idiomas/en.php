@@ -765,8 +765,7 @@
 	$MULTILANG_UsrNivelPW='Security level';
 	$MULTILANG_UsrVerificaPW='Verify Password';
 	$MULTILANG_UsrHlpNoPW='The authentication engine is defined for the external type tool.<br>
-				The key change is disabled as it should be managed centrally<br>
-				by you in the tool defined by system administrator';
+				The key change is disabled as it should be managed centrally for you in the tool defined by system administrator';
 	$MULTILANG_UsrErrPW1='You forgot to enter any of the requested data';
 	$MULTILANG_UsrErrPW2='You have entered two different passwords';
 	$MULTILANG_UsrErrPW3='The key for you entered does not meet the minimum safety recommendations';

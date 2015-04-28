@@ -60,6 +60,7 @@ LogCambios="
 * Fixed: Búsquedas dinámicas sobre subformularios ahora usan los registros maestros
 * Fixed: Tester [Jaime A. Berrio] Valores Hidden sobre formularios con variables PHP
 * Fixed: Tester [Nestor Ramos Arteaga] Ajuste a parámetros de conexión por LDAP para ActiveDirectory
+* Fixed: Funcion de creacion de usuarios por Oauth y accesos federados
 * Enhan: Mejorada la apariencia y disposición de controles gráficos en formularios.  El espacio disponible se divide por el número de columnas del formulario
 * Enhan: Eliminados warnings en informes sin resultados que no capturan nombres de columna
 * Enhan: Los informes embebidos ahora no presentan sus totales para hacerlos más limpios sobre otros formularios.  El total se conserva en informes con vista estándar.

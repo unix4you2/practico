@@ -626,7 +626,7 @@ if ($PCO_Accion=="cambiar_clave")
 ?>
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<?php
-				mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'60%','fa fa-exclamation-triangle fa-5x','TextosEscritorio');
+				mensaje($MULTILANG_Importante, $MULTILANG_UsrDesPW, '', 'fa fa-info fa-4x', 'alert alert-info alert-dismissible');
 
                 //Continua las Banderas recibidas para el tipo de carga de contenido
                 if (@$Presentar_FullScreen==1)  echo '<input type="Hidden" name="Presentar_FullScreen" value="1">';
@@ -682,7 +682,7 @@ if ($PCO_Accion=="cambiar_clave")
                         }
                     else
                         {
-                            echo '<br><h4>'.$MULTILANG_Importante.': '.$MULTILANG_UsrHlpNoPW.' ('.$Auth_TipoMotor.')</h4>';
+                            mensaje($MULTILANG_Atencion, $MULTILANG_UsrHlpNoPW.' (<b>'.$MULTILANG_TipoMotor.': '.$Auth_TipoMotor.'</b>)', '', 'fa fa-remove fa-5x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
                         }
                 ?>
             </div>

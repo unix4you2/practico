@@ -105,11 +105,9 @@ if ($WSId=="verificar_credenciales")
                     mensaje($MULTILANG_Error.': '.$MULTILANG_AuthLDAP,$MULTILANG_ErrorConnLDAP, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 				// Si logra el acceso por LDAP consulta datos del usuario sobre Practico para llenar el XML pero
 				// Si el usuario no existe se devolvera el valor de aceptacion solamente y el resto vacios
-				$resultado_usuario=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login=? ","$uid");
-				$registro = $resultado_usuario->fetch();
+				$registro=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login=? ","$uid")->fetch();
 				if ($DepuracionLDAP)
                     echo "<script language='JavaScript'> alert('$auth_ldap_cadena'); </script>";
-                die();
 			}
 
 		//Verifica MOTOR autenticacion federado
@@ -120,15 +118,18 @@ if ($WSId=="verificar_credenciales")
 				
 				//Crea la nueva conexion al motor de autenticacion remoto segun los parametros encontrados
 				$PCO_ConexionFederada=PCO_NuevaConexionBD($Param_MotorFederado["federado_motor"],$Param_MotorFederado["federado_puerto"],$Param_MotorFederado["federado_basedatos"],$Param_MotorFederado["federado_servidor"],$Param_MotorFederado["federado_usuario"],$Param_MotorFederado["federado_clave"]);
-
-				//Ejecuta el Query sobre la conexion federada
-				//$ClaveEnMD5=hash("md5", $clave);
 				
+				//$ClaveEnMD5=hash("md5", $clave);
 				$ClaveEnMD5=$clave;
 
-				$registro=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE ".$Param_MotorFederado["federado_campousuario"]."=? AND ".$Param_MotorFederado["federado_campoclave"]."=? ","$uid$_SeparadorCampos_$ClaveEnMD5",$PCO_ConexionFederada)->fetch();
-				if ($registro[$Param_MotorFederado["federado_campousuario"]]!="")
-					$ok_login_verifica='1';				
+				//Ejecuta el Query sobre la conexion federada
+				$registro=ejecutar_sql("SELECT ".$Param_MotorFederado["federado_campousuario"]." as login, ".$Param_MotorFederado["federado_campousuario"]." as nombre, 5 as nivel FROM ".$Param_MotorFederado["federado_tabla"]." WHERE ".$Param_MotorFederado["federado_campousuario"]."=? AND ".$Param_MotorFederado["federado_campoclave"]."=? ","$uid$_SeparadorCampos_$ClaveEnMD5",$PCO_ConexionFederada)->fetch();
+				if ($registro["login"]!="")
+					{
+						$ok_login_verifica='1';
+						//Genera las credenciales en caso que no existan
+						oauth_crear_usuario("PCOFederado",$registro["login"],$registro["login"],"",1);
+					}
 			}
 
 		// Inicia el XML de salida basico solamente con el estado de aceptacion
@@ -165,13 +166,13 @@ if ($WSId=="verificar_credenciales")
 	Ver tambien:
 		<autenticacion_oauth> | <ejecutar_login_oauth>
 */
-	function oauth_crear_usuario($OAuth_servicio,$login_chk='',$nombre_chk='',$correo_chk='')
+	function oauth_crear_usuario($OAuth_servicio,$login_chk='',$nombre_chk='',$correo_chk='',$interno_chk=0)
 		{
 			global $TablasCore,$LlaveDePaso,$PCO_FechaOperacion,$ListaCamposSinID_usuario;
 			// Inserta datos del usuario
 			$clavemd5=MD5(TextoAleatorio(20));
 			$pasomd5=MD5($LlaveDePaso);
-			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES ('$login_chk','$clavemd5','$nombre_chk','Auth:".$OAuth_servicio."',1,'4','$correo_chk','$PCO_FechaOperacion','$pasomd5')");
+			@ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno) VALUES ('$login_chk','$clavemd5','$nombre_chk',1,'$correo_chk','$PCO_FechaOperacion','$pasomd5','$interno_chk')");
 			auditar("OAuth:Agregado usuario $login_chk para ".$OAuth_servicio);
 		}
 
