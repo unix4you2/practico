@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno="15"
-VersionCompatibleMes="3"
+VersionCompatibleAno=""
+VersionCompatibleMes=""
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno="15"
-VersionFinalMes="5"
+VersionFinalAno=""
+VersionFinalMes=""
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
@@ -19,17 +19,6 @@ CHANGELOG.md
 AUTHORS
 index.php
 core/comunes.php
-core/conexiones.php
-core/formularios.php
-core/informes.php
-core/marco_abajo.php
-core/marco_arriba.php
-core/marco_conf.php
-core/marco_param.php
-core/menus.php
-core/sesion.php
-core/tablas.php
-core/usuarios.php
 core/ws_funciones.php
 inc/bootstrap/js/practico.js
 inc/practico/idiomas/*
@@ -37,8 +26,6 @@ inc/practico/def_basedatos.php
 inc/html2canvas/*
 mod/pcoder/demo.php
 mod/pcoder/index.php
-mod/personalizadas_pre.php
-mod/personalizadas_pos.php
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -49,47 +36,13 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Disponible la copia/Clonado rápido de informes desde el listado de informes
-* Added: Se permite ubicacion de opciones en la barra de menu izquierda. Será ubicados debajo de las opciones administrativas predeterminadas.
-* Added: Copia de permisos para informes desde un usuario a otro
-* Added: Tester [Jaime A. Berrio] Ahora los botones de acción en informes y vinculados a una acción de usuario transportan de manera automática el valor del ID de registro, el nombre de la tabla y el campo de la tabla.
-* Added: Boton nuevo permite saltar entre los permisos para menues y reportes de un usuario sin tener que regresar al escritorio
-* Added: PCoder ahora puede almacenar archivos sin actualizar hoja y mover el cursor de punto mediante llamados AJAX
-* Added: Iniciada implementacion de HTML2CANVAS
-* Added: Adicion de campos personalizables sobre parametros de aplicacion
-* Added: Soporte para autenticación federada. Ahora se pueden autenticar los usuarios frente a bases de datos en otros sistemas.
-* Added: Agregado un archivo para funciones personalizadas tanto al comienzo como al final de la aplicacion (personalizadas pre y pos)
-* Fixed: Se mejora escapado de caracteres en campos de filtrado de listas para formularios
-* Fixed: Búsquedas dinámicas sobre subformularios ahora usan los registros maestros
-* Fixed: Tester [Jaime A. Berrio] Valores Hidden sobre formularios con variables PHP
-* Fixed: Tester [Nestor Ramos Arteaga] Ajuste a parámetros de conexión por LDAP para ActiveDirectory
-* Fixed: Funcion de creacion de usuarios por Oauth y accesos federados
-* Enhan: Mejorada la apariencia y disposición de controles gráficos en formularios.  El espacio disponible se divide por el número de columnas del formulario
-* Enhan: Eliminados warnings en informes sin resultados que no capturan nombres de columna
-* Enhan: Los informes embebidos ahora no presentan sus totales para hacerlos más limpios sobre otros formularios.  El total se conserva en informes con vista estándar.
-* Enhan: Agregado el atajo Ctrl+S para facilitar el guardar archivos editados en PCoder
-* Enhan: Copia de formularios ahora es dinamica segun la definicion de la base de datos
-* Enhan: ErrorLog del lado del servidor ahora es mas limpio
-* Enhan: Cambio de variables globales en posible conflicto hacia el formato $PCO_
-* Enhan: Cambio de la forma de conexion a enfoque funcional para mejorar procesos de autenticacion federada
-* Enhan: Cambio en funciones de ejecución de sentencias SQL para que permitan ejecución sobre múltiples conexiones
-* Enhan: En motores de autenticacion diferentes a los internos, la creacion del usuario se hace sólo si este no existe todavía.
+* Fixed: Corregida la seleccion del tipo de encripcion para motores de autenticacion federados. Ahora se aplica la encripcion correcta.
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-ALTER TABLE core_menu ADD COLUMN posible_izquierda INT(1) NULL DEFAULT 0;
-ALTER TABLE core_parametros ADD COLUMN federado_servidor varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD COLUMN federado_usuario varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD COLUMN federado_clave varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD COLUMN federado_motor varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD COLUMN federado_basedatos varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD COLUMN federado_tabla varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD COLUMN federado_campousuario varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD COLUMN federado_campoclave varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD COLUMN federado_encripcion varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD COLUMN federado_puerto varchar(255) NULL DEFAULT '';
+
 "
 
 ########################################################################

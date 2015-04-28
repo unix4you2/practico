@@ -6,6 +6,33 @@
 |_____\___/ \__, |  \__,_|\___|  \___\__,_|_| |_| |_|_.__/|_|\___/|___/
             |___/ 
 ```
+## Versión 15.5 (2015-05-01)
+* Added: Disponible la copia/Clonado rápido de informes desde el listado de informes
+* Added: Se permite ubicacion de opciones en la barra de menu izquierda. Será ubicados debajo de las opciones administrativas predeterminadas.
+* Added: Copia de permisos para informes desde un usuario a otro
+* Added: Tester [Jaime A. Berrio] Ahora los botones de acción en informes y vinculados a una acción de usuario transportan de manera automática el valor del ID de registro, el nombre de la tabla y el campo de la tabla.
+* Added: Boton nuevo permite saltar entre los permisos para menues y reportes de un usuario sin tener que regresar al escritorio
+* Added: PCoder ahora puede almacenar archivos sin actualizar hoja y mover el cursor de punto mediante llamados AJAX
+* Added: Iniciada implementacion de HTML2CANVAS
+* Added: Adicion de campos personalizables sobre parametros de aplicacion
+* Added: Soporte para autenticación federada. Ahora se pueden autenticar los usuarios frente a bases de datos en otros sistemas.
+* Added: Agregado un archivo para funciones personalizadas tanto al comienzo como al final de la aplicacion (personalizadas pre y pos)
+* Fixed: Se mejora escapado de caracteres en campos de filtrado de listas para formularios
+* Fixed: Búsquedas dinámicas sobre subformularios ahora usan los registros maestros
+* Fixed: Tester [Jaime A. Berrio] Valores Hidden sobre formularios con variables PHP
+* Fixed: Tester [Nestor Ramos Arteaga] Ajuste a parámetros de conexión por LDAP para ActiveDirectory
+* Fixed: Funcion de creacion de usuarios por Oauth y accesos federados
+* Enhan: Mejorada la apariencia y disposición de controles gráficos en formularios.  El espacio disponible se divide por el número de columnas del formulario
+* Enhan: Eliminados warnings en informes sin resultados que no capturan nombres de columna
+* Enhan: Los informes embebidos ahora no presentan sus totales para hacerlos más limpios sobre otros formularios.  El total se conserva en informes con vista estándar.
+* Enhan: Agregado el atajo Ctrl+S para facilitar el guardar archivos editados en PCoder
+* Enhan: Copia de formularios ahora es dinamica segun la definicion de la base de datos
+* Enhan: ErrorLog del lado del servidor ahora es mas limpio
+* Enhan: Cambio de variables globales en posible conflicto hacia el formato $PCO_
+* Enhan: Cambio de la forma de conexion a enfoque funcional para mejorar procesos de autenticacion federada
+* Enhan: Cambio en funciones de ejecución de sentencias SQL para que permitan ejecución sobre múltiples conexiones
+* Enhan: En motores de autenticacion diferentes a los internos, la creacion del usuario se hace sólo si este no existe todavía.
+
 ## Versión 15.3 (2015-03-01)
 * Added: Ahora se permite definir informes para ser presentados en formato DataTable, con filtrados, ordenamiento, búsquedas y paginación en caliente.
 * Added: La ficha de cada usuario es editable haciendo clic sobre su nombre en el menu de usuario.  Adicionalmente después de la instalación de la plataforma el usuario admin es redirigido en su primer ingreso para cambiar/actualizar su ficha.
