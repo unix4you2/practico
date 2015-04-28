@@ -50,6 +50,7 @@ Group: Modulos Principales  {
    Group: Core  {
 
       File: Articulador  (index.php)
+      File: Buffer  (inc/html2canvas/dist/html2canvas.svg.js)
       File: Conexiones PDO  (core/conexiones.php)
 
       Group: Dev_tools  {
@@ -112,6 +113,7 @@ Group: Modulos (en desarrollo)  {
 Group: Index  {
 
    Index: Everything
+   Class Index: Classes
    File Index: Files
    Function Index: Functions
    Variable Index: Variables
@@ -124,7 +126,8 @@ Group: Mod  {
 
    File: convertidor_pdf_funcion_predeterminada  (mod/pdf/index.php)
    File: fileman_admin_embebido  (mod/fileman/index.php)
-   File: Funciones personalizadas  (mod/personalizadas.php)
+   File: Funciones personalizadas  (mod/personalizadas_pos.php)
+   File: Funciones personalizadas en precarga  (mod/personalizadas_pre.php)
    File: Funciones personalizadas para WebServices  (mod/personalizadas_ws.php)
    File: ldap/.../lib/schema_functions.php  (mod/ldap/phpldapadmin-1.2.3/lib/schema_functions.php)
    File: ldap_admin_embebido  (mod/ldap/index.php)
