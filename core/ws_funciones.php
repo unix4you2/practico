@@ -119,8 +119,11 @@ if ($WSId=="verificar_credenciales")
 				//Crea la nueva conexion al motor de autenticacion remoto segun los parametros encontrados
 				$PCO_ConexionFederada=PCO_NuevaConexionBD($Param_MotorFederado["federado_motor"],$Param_MotorFederado["federado_puerto"],$Param_MotorFederado["federado_basedatos"],$Param_MotorFederado["federado_servidor"],$Param_MotorFederado["federado_usuario"],$Param_MotorFederado["federado_clave"]);
 				
-				//$ClaveEnMD5=hash("md5", $clave);
-				$ClaveEnMD5=$clave;
+				//Aplica la encripcion usada por el motoro federado al campo de clave antes de compararlo frente a la BD
+				if ($Param_MotorFederado["federado_encripcion"]=="plano")
+					$ClaveEnMD5=$clave;
+				else
+					$ClaveEnMD5=hash($Param_MotorFederado["federado_encripcion"], $clave);
 
 				//Ejecuta el Query sobre la conexion federada
 				$registro=ejecutar_sql("SELECT ".$Param_MotorFederado["federado_campousuario"]." as login, ".$Param_MotorFederado["federado_campousuario"]." as nombre, 5 as nivel FROM ".$Param_MotorFederado["federado_tabla"]." WHERE ".$Param_MotorFederado["federado_campousuario"]."=? AND ".$Param_MotorFederado["federado_campoclave"]."=? ","$uid$_SeparadorCampos_$ClaveEnMD5",$PCO_ConexionFederada)->fetch();
