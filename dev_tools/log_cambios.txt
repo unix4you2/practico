@@ -20,10 +20,8 @@ AUTHORS
 index.php
 core/menus.php
 core/ws_funciones.php
-inc/bootstrap/js/practico.js
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
-inc/html2canvas/*
 mod/pcoder/demo.php
 mod/pcoder/index.php
 "

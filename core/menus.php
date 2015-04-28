@@ -801,7 +801,7 @@ if ($PCO_Accion=="administrar_menu")
 				} //Fin si realmente recibio un criterio
 			else
 				{
-					mensaje($MULTILANG_Resultados, $MULTILANG_InfDataTableNoRegistros, '', 'fa fa-search fa-3x', 'alert alert-warning alert-dismissible');
+					mensaje($MULTILANG_Resultados, $MULTILANG_BuscaCriterios.'<br>'.$MULTILANG_InfDataTableNoRegistros, '', 'fa fa-search fa-3x', 'alert alert-warning alert-dismissible');
 				}
 
 	} 
