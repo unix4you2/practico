@@ -861,13 +861,24 @@ if ($PCO_Accion=="administrar_menu")
                         echo '<a title="'.$registro["texto"].'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
                     else
                         echo '<a title="'.$registro["texto"].'" href="javascript:document.desk_'.$registro["id"].'.submit();">';
-                    echo '<button class="btn">
-                        <i class="'.$registro["imagen"].' fa-3x fa-fw"></i><br>
-                        <span class="btn-xs">'.$registro["texto"].'</span>
-                        </button>';
+
+                    //Determina si la opcion es una imagen o no
+                    $PCO_EsImagen=0;
+                    if (strpos($registro["imagen"],".png") || strpos($registro["imagen"],".jpg") || strpos($registro["imagen"],".gif"))
+						$PCO_EsImagen=1;
+                    //Si no detecta ninguna extension de archivo de imagen entonces pone boton en bootstrap
+                    if (!$PCO_EsImagen)
+						echo '<button class="btn">
+							<i class="'.$registro["imagen"].' fa-3x fa-fw"></i><br>
+							<span class="btn-xs">'.$registro["texto"].'</span>
+							</button>';
+                    else
+						echo '<img src="'.$registro["imagen"].'" border="0" />';
                     echo '</a>';
 				}
 			echo '</td></tr></table><br>';
+
+
 
 			// Carga las opciones del ACORDEON
 			echo '<div align="center">';
@@ -915,9 +926,18 @@ if ($PCO_Accion=="administrar_menu")
                                 echo '<a title="'.$registro_opciones_acordeon["texto"].'" href="'.$registro_opciones_acordeon["url"].'" target="'.$registro_opciones_acordeon["destino"].'">';
                             else
                                 echo '<a title="'.$registro_opciones_acordeon["texto"].'" href="javascript:document.acorde_'.$registro_opciones_acordeon["id"].'.submit();">';
+
+							//Determina si la opcion es una imagen o no
+							$PCO_EsImagen=0;
+							if (strpos($registro_opciones_acordeon["imagen"],".png") || strpos($registro_opciones_acordeon["imagen"],".jpg") || strpos($registro_opciones_acordeon["imagen"],".gif"))
+								$PCO_EsImagen=1;
+							//Si no detecta ninguna extension de archivo de imagen entonces pone boton en bootstrap
+							if (!$PCO_EsImagen)
                             echo '<button type="button" class="btn btn-default btn-outline"><i class="'.$registro_opciones_acordeon["imagen"].' fa-fw"></i>
                                     <span class="btn-xs">'.$registro_opciones_acordeon["texto"].'</span>
                                     </button>';
+							else
+								echo '<img src="'.$registro_opciones_acordeon["imagen"].'" border="0" />';
                             echo '</a>&nbsp;';
 						}
 					cerrar_ventana();

@@ -35,6 +35,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added: Las opciones de menu ahora soportan imagenes sobre rutas relativas.  Al ingresar un archivo en el campo imagen en la creacion de menus el sistema deja de un lado los estilos y agrega la imagen cruda.
 * Added: El asistente de actualización permite ahora escoger el tipo de backup realizado al sistema entre sólo y scripts y scripts+base de datos
 * Fixed: Corregida la seleccion del tipo de encripcion para motores de autenticacion federados. Ahora se aplica la encripcion correcta.
 * Fixed: Cuando no se ingresa nada en el buscador la busqueda arrojaba errores
