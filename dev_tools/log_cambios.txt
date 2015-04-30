@@ -18,6 +18,7 @@ README.md
 CHANGELOG.md
 AUTHORS
 index.php
+core/actualizacion.php
 core/menus.php
 core/ws_funciones.php
 inc/practico/idiomas/*
@@ -34,6 +35,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added: El asistente de actualización permite ahora escoger el tipo de backup realizado al sistema entre sólo y scripts y scripts+base de datos
 * Fixed: Corregida la seleccion del tipo de encripcion para motores de autenticacion federados. Ahora se aplica la encripcion correcta.
 * Fixed: Cuando no se ingresa nada en el buscador la busqueda arrojaba errores
 "

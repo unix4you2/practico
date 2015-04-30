@@ -285,6 +285,10 @@
     $MULTILANG_ActDesEscritura='ATENCION: Se han encontrado errores de escritura en los archivos que van a ser actualizados.
         <br><br>Para mantener la integridad de la plataforma no se permitira actualizar hasta que no corrija o actualice los permisos de los archivos indicados en el listado anterior en color rojo y con el texto "'.$MULTILANG_ActErrEscritura.'" de manera que puedan ser escribibles por Practico.
         <br><br>Una vez actualizados los permisos intente nuevamente.';
+    $MULTILANG_ActBackupTipo='Tipo de copia de seguridad';
+    $MULTILANG_ActBackup1='Solo scripts reemplazados por el parche';
+    $MULTILANG_ActBackup3='Scripts reemplazados y base de datos actual';
+    $MULTILANG_ActBackupDes='La realizacion de copias de seguridad puede ser una tarea costosa para el sistema.  En sistemas ampliamente utilizados una copia de seguridad incluyendo su base de datos deber&iacute;a ser realizada por otros medios donde garantice que no se ve alterada por el trabajo concurrente de los usuarios.';
 
 	//Formularios
 	$MULTILANG_ErrFrmDuplicado='Ha ocurrido un error de valor duplicado en el campo. El valor ingresado ya existe en la base de datos. Campo: ';

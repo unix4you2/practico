@@ -281,6 +281,21 @@ if ($PCO_Accion=="cargar_archivo")
 if ($PCO_Accion=="analizar_parche")
 	{
 		abrir_ventana($MULTILANG_ErrorDescomprimiendo.' '.$archivo_cargado, 'panel-info');
+
+		echo '
+		<form action="'.$ArchivoCORE.'" method="post">
+			<label for="PCO_TipoBackup">'.$MULTILANG_ActBackupTipo.':</label>
+			<div class="form-group input-group">
+				<select id="PCO_TipoBackup" name="PCO_TipoBackup" class="selectpicker btn-warning" >
+					<option value="Archivos">'.$MULTILANG_ActBackup1.'</option>
+					<option value="Archivos+Basedatos">'.$MULTILANG_ActBackup3.'</option>
+				</select>
+				<span class="input-group-addon">
+					<a href="#" title="'.$MULTILANG_ActBackupDes.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+				</span>
+			</div>
+		'.$MULTILANG_ActBackupDes.'<hr>';	
+		
 		echo '<u>'.$MULTILANG_ContenidoParche.':</u><br>';
 		$mensaje_error="";
 
@@ -368,7 +383,7 @@ if ($PCO_Accion=="analizar_parche")
                 
                 //Agrega el boton de continuar solamente si todos los archivos pueden escribirse para evitar inconsistencias
                 if ($errores_permisos_escritura==0)
-                    echo '<form action="'.$ArchivoCORE.'" method="post">
+                    echo '
 						<input type="Hidden" name="PCO_Accion" value="aplicar_parche">
 						<input type="Hidden" name="version_actual" value="'.$version_actual.'">
 						<input type="Hidden" name="version_final" value="'.$version_final.'">
@@ -381,7 +396,10 @@ if ($PCO_Accion=="analizar_parche")
 			}
 		else
 			{
-				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+				echo '
+				</form> <!-- Cierra Form de curso normal -->
+				
+				<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ActErrGral.'">
 					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
@@ -464,49 +482,55 @@ if ($PCO_Accion=="aplicar_parche")
 		if ($mensaje_error=="")
 			{				
 				//Hace una copia de seguridad de los archivos a reemplazar por el parche
-				$archivo_destino_backup_app="bkp/bkp_".$PCO_FechaOperacion."-".date("Hi")."_app.zip";
-				$archivo_destino_backup_bdd="bkp/bkp_".$PCO_FechaOperacion."-".date("Hi")."_bdd.gz";
-				$archivo_backup = new PclZip($archivo_destino_backup_app);
-
-				if (($lista_contenido = $archivo->listContent()) == 0)
-					echo $MULTILANG_ErrLista.": ".$archivo->errorInfo(true);
-
-				$lista_archivos_a_comprimir="";
-				for ($i=0; $i<sizeof($lista_contenido); $i++)
+				if ($PCO_TipoBackup=="Archivos" || $PCO_TipoBackup=="Archivos+Basedatos")
 					{
-						//Si el archivo destino existe entonces lo agrega a la lista de archivos del backup
-						if (file_exists($lista_contenido[$i][filename]) && !is_dir($lista_contenido[$i][filename]))
+						$archivo_destino_backup_app="bkp/bkp_".$PCO_FechaOperacion."-".date("Hi")."_app.zip";
+						$archivo_backup = new PclZip($archivo_destino_backup_app);
+
+						if (($lista_contenido = $archivo->listContent()) == 0)
+							echo $MULTILANG_ErrLista.": ".$archivo->errorInfo(true);
+
+						$lista_archivos_a_comprimir="";
+						for ($i=0; $i<sizeof($lista_contenido); $i++)
 							{
-								$lista_archivos_a_comprimir.=$lista_contenido[$i][filename].",";
-								echo "<li> ".$MULTILANG_HaciendoBkp.": ".$lista_contenido[$i][filename];
+								//Si el archivo destino existe entonces lo agrega a la lista de archivos del backup
+								if (file_exists($lista_contenido[$i][filename]) && !is_dir($lista_contenido[$i][filename]))
+									{
+										$lista_archivos_a_comprimir.=$lista_contenido[$i][filename].",";
+										echo "<li> ".$MULTILANG_HaciendoBkp.": ".$lista_contenido[$i][filename];
+									}
 							}
+						$lista_archivos_a_comprimir=substr($lista_archivos_a_comprimir, 0, strlen($lista_archivos_a_comprimir)-1);
+						$lista_archivos_backup = $archivo_backup->create($lista_archivos_a_comprimir);				
 					}
-				$lista_archivos_a_comprimir=substr($lista_archivos_a_comprimir, 0, strlen($lista_archivos_a_comprimir)-1);
-				$lista_archivos_backup = $archivo_backup->create($lista_archivos_a_comprimir);				
 
 				//Hace copia de seguridad de la base de datos
-				include("core/backups.php");
-				$objeto_backup_db = new DBBackup(array(
-					'driver' => $MotorBD,
-					'host' => $ServidorBD,
-					'user' => $UsuarioBD,
-					'password' => $PasswordBD,
-					'database' => $BaseDatos,
-					'prefix' => $TablasCore
-				));
-				$resultado_backup = $objeto_backup_db->backup();
-				if(!$resultado_backup['error'])
+				if ($PCO_TipoBackup=="Archivos+Basedatos")
 					{
-						// Un echo nl2br($backup['msg']); podría mostrar contenido
-						// Por ahora, comprime el archivo resultante y lo guarda.
-						$resultado_backup_comprimido = gzencode($resultado_backup['msg'], 9);
-						$puntero_archivo_destino_backup_bdd = fopen($archivo_destino_backup_bdd, "w");
-						fwrite($puntero_archivo_destino_backup_bdd, $resultado_backup_comprimido);
-						fclose($puntero_archivo_destino_backup_bdd);
-					}
-				else
-					{
-						echo '<hr><b>'.$MULTILANG_ErrBkpBD.'.</b>';
+						$archivo_destino_backup_bdd="bkp/bkp_".$PCO_FechaOperacion."-".date("Hi")."_bdd.gz";
+						include("core/backups.php");
+						$objeto_backup_db = new DBBackup(array(
+							'driver' => $MotorBD,
+							'host' => $ServidorBD,
+							'user' => $UsuarioBD,
+							'password' => $PasswordBD,
+							'database' => $BaseDatos,
+							'prefix' => $TablasCore
+						));
+						$resultado_backup = $objeto_backup_db->backup();
+						if(!$resultado_backup['error'])
+							{
+								// Un echo nl2br($backup['msg']); podría mostrar contenido
+								// Por ahora, comprime el archivo resultante y lo guarda.
+								$resultado_backup_comprimido = gzencode($resultado_backup['msg'], 9);
+								$puntero_archivo_destino_backup_bdd = fopen($archivo_destino_backup_bdd, "w");
+								fwrite($puntero_archivo_destino_backup_bdd, $resultado_backup_comprimido);
+								fclose($puntero_archivo_destino_backup_bdd);
+							}
+						else
+							{
+								echo '<hr><b>'.$MULTILANG_ErrBkpBD.'.</b>';
+							}
 					}
 
 				//Descomprime el archivo de parche

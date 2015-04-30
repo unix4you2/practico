@@ -288,6 +288,10 @@
     $MULTILANG_ActDesEscritura='WARNING: There are write errors in the files that are going to be upgraded.
         <br><br>To keep the integrity in the software you cant upgrade until you fix the file permissions to be writeable by Practico.  Files are marked in the list in red color and the text "'.$MULTILANG_ActErrEscritura.'".  
         <br><br>Fix the problem and try again.';
+    $MULTILANG_ActBackupTipo='Backup mode';
+    $MULTILANG_ActBackup1='Scripts replaced during this process only';
+    $MULTILANG_ActBackup3='Scripts replaced and all my database';
+    $MULTILANG_ActBackupDes='Doing a full backup could be a heavy task for the system.  In systems widely used a full backup process should be done by another tool that allow you to have consistent files even with users working on the fly.';
 
 	//Formularios
 	$MULTILANG_ErrFrmDuplicado='Failed duplicated value in the field. The value you entered already exists in the database. Field: ';
