@@ -299,9 +299,20 @@
                                                 echo '<a title="'.$registro["texto"].'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
                                             else
                                                 echo '<a href="javascript:document.top_'.$registro["id"].'.submit();">';
-                                            echo '
-                                            <i class="'.$registro["imagen"].'"></i>
-                                            '.$registro["texto"].'</a>';
+
+											//Determina si la opcion es una imagen o no
+											$PCO_EsImagen=0;
+											if (strpos($registro["imagen"],".png") || strpos($registro["imagen"],".jpg") || strpos($registro["imagen"],".gif"))
+												$PCO_EsImagen=1;
+											//Si no detecta ninguna extension de archivo de imagen entonces pone boton en bootstrap
+											if (!$PCO_EsImagen)
+												echo '
+												<i class="'.$registro["imagen"].'"></i>
+												'.$registro["texto"];
+											else
+												echo '<img src="'.$registro["imagen"].'" border="0" />';
+                                            
+                                            echo '</a>';
 
                                         echo '</li>';
                                     }
@@ -447,9 +458,20 @@
                                             echo '<a title="'.$registro["texto"].'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
                                         else
                                             echo '<a href="javascript:document.top_'.$registro["id"].'.submit();">';
-                                        echo '<button class="btn-circle btn-info btn-xs">
-                                        <i class="'.$registro["imagen"].'"></i>
-                                        </button> '.$registro["texto"].'</a>';
+
+										//Determina si la opcion es una imagen o no
+										$PCO_EsImagen=0;
+										if (strpos($registro["imagen"],".png") || strpos($registro["imagen"],".jpg") || strpos($registro["imagen"],".gif"))
+											$PCO_EsImagen=1;
+										//Si no detecta ninguna extension de archivo de imagen entonces pone boton en bootstrap
+										if (!$PCO_EsImagen)
+											echo '<button class="btn-circle btn-info btn-xs">
+											<i class="'.$registro["imagen"].'"></i>
+											</button> '.$registro["texto"];
+										else
+											echo '<img src="'.$registro["imagen"].'" border="0" />';
+                                        
+                                        echo '</a>';
 									}
                                 echo '</li>';
 							}
