@@ -707,6 +707,7 @@
     $MULTILANG_MnuTgtParent='Parent frame or window';
     $MULTILANG_MnuTgtTop='Full body of the window';
     $MULTILANG_MnuTgt='Target (Only options using an URL)';
+    $MULTILANG_ImagenMenu='Image: Select an icon or enter a relative path';
 
 	//Objetos, seguridad y otros
 	$MULTILANG_ObjError='The type of object received in this command is unknown';

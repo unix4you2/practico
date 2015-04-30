@@ -520,13 +520,14 @@ if ($PCO_Accion=="administrar_menu")
                             </div>
 
                             <div class="form-group input-group">
-                                <input name="imagen"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Imagen; ?>">
+                                <input name="imagen"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_ImagenMenu; ?>">
                                 <span class="input-group-addon">
                                     <a data-toggle="modal" href="#myModalSelectorIconos" title="<?php echo $MULTILANG_MnuDesImagen; ?>">
                                            <i class="fa fa-hand-o-right"></i> <i class="fa fa-picture-o"></i>
                                     </a>
                                 </span>
                             </div>
+
 
                     </div>    
                     <div class="col-md-6">

@@ -704,6 +704,7 @@
     $MULTILANG_MnuTgtParent='Ventana padre';
     $MULTILANG_MnuTgtTop='Todo el cuerpo de la ventana actual';
     $MULTILANG_MnuTgt='Destino (S&oacute;lo opciones con URL)';
+    $MULTILANG_ImagenMenu='Imagen: Seleccione un icono o indique la ruta relativa';
 
 	//Objetos, seguridad y otros
 	$MULTILANG_ObjError='El tipo de objeto recibido en este comando es desconocido';
