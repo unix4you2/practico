@@ -42,15 +42,15 @@
 			El consumo de los web services requiere el envio de los siguientes parametros minimos a la raiz de Practico en cada llamado:
 			
 			* WS=1: Siempre iniciado en 1 indica a Practico que debe activar el modo de WebServices
-			* WSKey: La llave generada para consumir los WebServices, la llave de paso de instalacion es incluida por defecto
-			* WSId: El identificador unico del metodo o funcion de webservices a llamar
+			* PCO_WSKey: La llave generada para consumir los WebServices, la llave de paso de instalacion es incluida por defecto
+			* PCO_WSId: El identificador unico del metodo o funcion de webservices a llamar
 			* OTROS: Parametros adicionales requeridos por la funcion pueden ser enviados por URL o metodo POST al llamar el WebService.
 
-			Ejemplo:  www.sudominio.com/practico/?WSOn=1&WSKey=AFSX345DF&WSId=verificar_credenciales
+			Ejemplo:  www.sudominio.com/practico/?PCO_WSOn=1&PCO_WSKey=AFSX345DF&PCO_WSId=verificar_credenciales
 			*/
 
 
-if ($WSId=="Mi_WebService") 
+if ($PCO_WSId=="Mi_WebService") 
 	{
 
 

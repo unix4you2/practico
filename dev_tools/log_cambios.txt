@@ -16,11 +16,16 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 README.md
 CHANGELOG.md
-AUTHORS
+AUTHORS	
 index.php
 core/actualizacion.php
+core/comunes.php
+core/marco_oauth.php
 core/menus.php
+core/sesion.php
 core/ws_funciones.php
+core/ws_nucleo.php
+core/ws_oauth.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 mod/pcoder/demo.php
@@ -39,6 +44,9 @@ LogCambios="
 * Added: El asistente de actualización permite ahora escoger el tipo de backup realizado al sistema entre sólo y scripts y scripts+base de datos
 * Fixed: Corregida la seleccion del tipo de encripcion para motores de autenticacion federados. Ahora se aplica la encripcion correcta.
 * Fixed: Cuando no se ingresa nada en el buscador la busqueda arrojaba errores
+* Enhan: Sobreescritura de variables para WebServices asi: $WSId a $PCO_WSId, 
+
+IMPORTANTE:  Aquellos usuarios que hagan uso extensivo de webservices deberian hacer los ajustes de nombre para sus variables de modo que estos sigan operantes despues del cambio.  Un simple buscar y reemplazar WSId por PCO_WSId en todos sus documentos debería ser suficiente.  Igual para las demás variables.
 "
 
 ########################################################################

@@ -46,7 +46,7 @@
 				// Construye la URI de retorno
 				$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
 				// Construye la URI de redireccion base para concatenar el servicio especifico
-				$URI = $protocolo_webservice.$prefijo_webservice."?WSOn=1&WSId=autenticacion_oauth&OAuthSrv=";
+				$URI = $protocolo_webservice.$prefijo_webservice."?PCO_WSOn=1&PCO_WSId=autenticacion_oauth&OAuthSrv=";
 			?>
 
 					<form name="configoauth" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">

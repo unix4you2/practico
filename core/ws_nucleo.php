@@ -33,23 +33,23 @@
 
 	// Bypass para casos de URI de redireccion por Oauth
 	$ByPassWS=0;
-	if (@$WSId=='autenticacion_oauth')
+	if (@$PCO_WSId=='autenticacion_oauth')
 		$ByPassWS=1;
 
 	// Verifica si se trata de un llamado por web-services
 	$ModoWSActivado=0;
-	if (@$WSOn==1)
+	if (@$PCO_WSOn==1)
 		{
 			// Verifica si se ha recibido una llave
-			if (@$WSKey!="" || $ByPassWS)
+			if (@$PCO_WSKey!="" || $ByPassWS)
 				{
 					// Verifica si se ha recibido un identificador de servicio
-					if (@$WSId!="")
+					if (@$PCO_WSId!="")
 						{
 							// Verifica validez de la llave recibida para el webservice
 							$llave_ws_valida=0;
 							// Verifica si la llave es la misma de instalacion (llave propia)
-							if (@$WSKey==$LlaveDePaso || $ByPassWS)
+							if (@$PCO_WSKey==$LlaveDePaso || $ByPassWS)
 								{
 									$llave_ws_valida=1;
 									// Define valores para la llave de instalacion
@@ -61,14 +61,14 @@
 							else
 								{
 									// Valida si la llave esta en la BD de API
-									$consulta_llave=ejecutar_sql("SELECT id,".$ListaCamposSinID_llaves_api." FROM ".$TablasCore."llaves_api WHERE llave=? ","$WSKey");
+									$consulta_llave=ejecutar_sql("SELECT id,".$ListaCamposSinID_llaves_api." FROM ".$TablasCore."llaves_api WHERE llave=? ","$PCO_WSKey");
 									// Si no se retorno error en la consulta y tiene datos hace el fetch
 									if($consulta_llave!="1" && $consulta_llave!="")
 										$registro_llave = $consulta_llave->fetch();
 									// Si encuentra una llave valida entonces su secreto
 									if ($registro_llave["llave"]!="")
 										{
-											if($registro_llave["secreto"]==$WSSecret)
+											if($registro_llave["secreto"]==$PCO_WSSecret)
 												{
 													$llave_ws_valida=1;
 													// Define valores para la llave
@@ -92,7 +92,7 @@
 							if ($ModoWSActivado)
 								{
 									//Valida si tiene acceso a la funcion llamada
-									if (strpos($funciones_autorizadas, $WSId)!==FALSE || $funciones_autorizadas=="*" || $ByPassWS)
+									if (strpos($funciones_autorizadas, $PCO_WSId)!==FALSE || $funciones_autorizadas=="*" || $ByPassWS)
 										{
 											//Valida si la IP del cliente es una de las autorizadas
 											if (@strpos($ip_autorizada, $_SERVER['REMOTE_ADDR'])!==FALSE || $ip_autorizada=="*" || $ByPassWS)
@@ -110,7 +110,7 @@
 																	include_once("mod/personalizadas_ws.php");
 																}
 															// Lleva a auditoria
-															auditar("$WSId","API.".$nombre_cliente);
+															auditar("$PCO_WSId","API.".$nombre_cliente);
 														}
 													else
 														{
@@ -124,7 +124,7 @@
 										}
 									else
 										{
-											mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr06.$WSId, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+											mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr06.$PCO_WSId, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 										}		
 								}
 							else

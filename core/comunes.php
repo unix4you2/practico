@@ -1417,9 +1417,9 @@ function ventana_login()
                                                 // Crea el formulario correspondiente para llamar el login con el proveedor
                                                 echo '
                                                     <form name="login_'.$sitio.'" method="POST" action="'.$ArchivoCORE.'" style="margin: 2; display: inline!important;">
-                                                    <input type="hidden" name="WSOn" value="1">
+                                                    <input type="hidden" name="PCO_WSOn" value="1">
                                                     <input type="hidden" name="OAuthSrv" value="'.$sitio.'">
-                                                    <input type="hidden" name="WSId" value="autenticacion_oauth">
+                                                    <input type="hidden" name="PCO_WSId" value="autenticacion_oauth">
                                                     <input type="image" src="inc/oauth/logos/'.strtolower($sitio).'.png" border=0 width=81 height=30 style="background:#FFFFFF;"> <!--94x35|81x30-->
                                                     </form>&nbsp;&nbsp;';
                                                 // Retorna valor de activacion a variable AlMenosUnOAuth

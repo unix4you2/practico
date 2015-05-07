@@ -45,7 +45,7 @@ prefijo_webservice = "127.0.0.1/practico/"
 
 
 # Construye la URL del webservice
-posfijo_webservice = "?WSOn=1&WSKey=" + LlaveDePaso + "&WSId=verificar_credenciales&uid=" + uid + "&clave=" + clave
+posfijo_webservice = "?PCO_WSOn=1&PCO_WSKey=" + LlaveDePaso + "&PCO_WSId=verificar_credenciales&uid=" + uid + "&clave=" + clave
 webservice_validacion = protocolo_webservice + prefijo_webservice + posfijo_webservice
 
 # Carga la URL indicada para el webservice
