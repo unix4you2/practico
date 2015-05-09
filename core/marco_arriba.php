@@ -282,7 +282,7 @@
                                     {
                                         echo '<li>';
 
-                                            echo '<form action="'.$ArchivoCORE.'" method="post" name="top_'.$registro["id"].'" id="top_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
+                                            echo '<form action="'.$ArchivoCORE.'" method="post" name="left_'.$registro["id"].'" id="left_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
                                             // Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
                                             if ($registro["tipo_comando"]=="Interno" || $registro["tipo_comando"]=="Personal")
                                                 {
@@ -298,7 +298,7 @@
                                             if ($registro["url"]!="")
                                                 echo '<a title="'.$registro["texto"].'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
                                             else
-                                                echo '<a href="javascript:document.top_'.$registro["id"].'.submit();">';
+                                                echo '<a href="javascript:document.left_'.$registro["id"].'.submit();">';
 
 											//Determina si la opcion es una imagen o no
 											$PCO_EsImagen=0;
