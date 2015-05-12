@@ -25,6 +25,7 @@ core/marco_arriba_bs.php
 core/marco_oauth.php
 core/menus.php
 core/sesion.php
+core/usuarios.php
 core/ws_funciones.php
 core/ws_nucleo.php
 core/ws_oauth.php
@@ -48,6 +49,7 @@ LogCambios="
 * Fixed: Cuando no se ingresa nada en el buscador la busqueda arrojaba errores
 * Fixed: Menus superiores y laterales generaban conflicto por doble Id de formulario
 * Enhan: Sobreescritura de variables para WebServices asi: WSId a PCO_WSId, WSOn a PCO_WSOn, WSKey a PCO_WSKey, WSSecret a PCO_WSSecret
+* Enhan: Autenticación federada prohibe actualizar perfiles de usuario y cambiar sus claves pues todo se toma del sistema federado.  Solo el admin sigue con la independencia.
 
 IMPORTANTE:  Aquellos usuarios que hagan uso extensivo de webservices deberian hacer los ajustes de nombre para sus variables de modo que estos sigan operantes despues del cambio.  Un simple buscar y reemplazar WSId por PCO_WSId en todos sus documentos debería ser suficiente.  Igual para las demás variables.
 "

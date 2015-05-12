@@ -200,11 +200,16 @@ if ($PCO_Accion=="actualizar_perfil_usuario")
             Ver tambien:
                 <listar_usuarios> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario> | <muestra_seguridad_clave> | <seguridad_clave>
         */
-		abrir_ventana($MULTILANG_UsrPerfil, 'panel-info');
         
         //Busca datos del usuario actual
         $registro_usuario=ejecutar_sql("SELECT * FROM ".$TablasCore."usuario WHERE login=? ","$PCOSESS_LoginUsuario")->fetch();
 ?>
+
+                <?php
+                    //Permite cambio solamente si es admin o el motor de autenticacion es practico
+                    if ($Auth_TipoMotor=="practico" || $PCOSESS_LoginUsuario=="admin")
+                        {
+                ?>
 
 				<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 					<input type="hidden" name="PCO_Accion" value="guardar_perfil_usuario">
@@ -241,17 +246,23 @@ if ($PCO_Accion=="actualizar_perfil_usuario")
                         </span>
                     </div>
                 </form>
-            <br><br>
-            <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Actualizar; ?></a>
-            <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+            <br>
+                <?php
+                            echo '
+                                <a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> '.$MULTILANG_Actualizar.'</a>
+                                <a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
+
+                        }
+                    else
+                        {
+                            mensaje($MULTILANG_Atencion, $MULTILANG_UsrHlpNoPW.' (<b>'.$MULTILANG_TipoMotor.': '.$Auth_TipoMotor.'</b>)', '', 'fa fa-remove fa-5x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
+                        }
+                ?>
 
 		 <?php
             // Si el usuario es administrador y el correo es un valor predeterminado en versiones viejas lo cambia
             if ($PCOSESS_LoginUsuario=="admin" && $registro_usuario["correo"]=="unix4you2@gmail.com")
                 echo '<script language="JavaScript">document.datos.correo.value="sucorreo@dominio.com";</script>';
-
-            cerrar_ventana();
-			//$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
     }
 
 
@@ -624,6 +635,13 @@ if ($PCO_Accion=="copiar_permisos")
 if ($PCO_Accion=="cambiar_clave")
 	{
 ?>
+                <?php
+                    //Permite cambio solamente si es admin o el motor de autenticacion es practico
+                    if ($Auth_TipoMotor=="practico" || $PCOSESS_LoginUsuario=="admin")
+                        {
+                ?>
+
+
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<?php
 				mensaje($MULTILANG_Importante, $MULTILANG_UsrDesPW, '', 'fa fa-info fa-4x', 'alert alert-info alert-dismissible');
@@ -673,9 +691,6 @@ if ($PCO_Accion=="cambiar_clave")
             <div align=center>
                 <hr>
                 <?php
-                    //Permite cambio solamente si es admin o el motor de autenticacion es practico
-                    if ($Auth_TipoMotor=="practico" || $PCOSESS_LoginUsuario=="admin")
-                        {
                             echo '
                                 <a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> '.$MULTILANG_Actualizar.'</a>
                                 <a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';

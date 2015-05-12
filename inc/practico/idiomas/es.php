@@ -769,7 +769,7 @@
 	$MULTILANG_UsrNivelPW='Nivel de seguridad';
 	$MULTILANG_UsrVerificaPW='Verificar contrase&ntilde;a';
 	$MULTILANG_UsrHlpNoPW='El motor de autenticaci&oacute;n definido para la herramienta es de tipo externo.<br>
-				El cambio de clave se encuentra deshabilitado pues debe ser gestionado de manera centralizada por usted en la herramienta definida por el administrador de sistemas';
+				Los cambios de clave o actualizacion de perfil de usuarios se encuentran deshabilitados pues deben ser gestionados de manera centralizada por usted en la herramienta definida por el administrador del sistema.';
 	$MULTILANG_UsrErrPW1='Usted ha olvidado ingresar alguno de los datos solicitados';
 	$MULTILANG_UsrErrPW2='Usted ha ingresado dos contrase&ntilde;as diferentes';
 	$MULTILANG_UsrErrPW3='La clave por usted ingresada no cumple con las recomendaciones minimas de seguridad';
