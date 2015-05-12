@@ -339,7 +339,7 @@
                                 }
                         ?>
                         <div align=center>
-                        <i>Copyright <i class="fa fa-copyright"></i> <a href="http://www.practico.org">Practico.org</a></i>
+                        <font size=1><i class="fa fa-copyright"></i> <i><?php echo $MULTILANG_GeneradoPor; ?> <a href="http://www.practico.org">Practico</a></i></font>
                         </div>
                     </div>
 

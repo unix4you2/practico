@@ -92,6 +92,7 @@
 	$MULTILANG_Formularios='Formularios';
 	$MULTILANG_Funciones='Funciones preautorizadas';
 	$MULTILANG_FuncionesDes='Por motivos de seguridad, sus funciones personalizadas o modulos desarrollados usted debe preautorizar su uso en este cuadro para los usuarios.  Agregue las funciones o acciones separadas por cualqueir caracter.';
+	$MULTILANG_GeneradoPor='Generado por';
 	$MULTILANG_Grande='Grande';
 	$MULTILANG_Grafico='Gr&aacute;fico';
 	$MULTILANG_Guardar='Guardar';

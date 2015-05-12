@@ -92,6 +92,7 @@
 	$MULTILANG_Formularios='Forms';
 	$MULTILANG_Funciones='Preauthorized functions';
 	$MULTILANG_FuncionesDes='For security reasons, your custom functions or modules should be pre-authorized in this field. Add the functions or actions separated by any character.';
+	$MULTILANG_GeneradoPor='Powered by';
 	$MULTILANG_Grande='Big';
 	$MULTILANG_Grafico='Graphic';
 	$MULTILANG_Guardar='Save';
