@@ -20,6 +20,7 @@ AUTHORS
 index.php
 core/actualizacion.php
 core/comunes.php
+core/informes.php
 core/marco_arriba.php
 core/marco_arriba_bs.php
 core/marco_oauth.php

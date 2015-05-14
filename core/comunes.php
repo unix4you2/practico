@@ -3536,8 +3536,8 @@ function selector_iconos_awesome()
 function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0)
 	{
 		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
-		// Carga variables de sesion por si son comparadas en alguna condicion
-		global $PCOSESS_LoginUsuario,$Nombre_usuario,$Descripcion_usuario,$Nivel_usuario,$Correo_usuario,$LlaveDePasoUsuario;
+		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
+		global $PCOSESS_LoginUsuario,$Nombre_usuario,$Descripcion_usuario,$Nivel_usuario,$Correo_usuario,$LlaveDePasoUsuario,$PCO_FechaOperacion;
 		// Carga variables de definicion de tablas
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
 		global $MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano,$MULTILANG_MonCommSQL;
@@ -3551,6 +3551,18 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		$Identificador_informe=$registro_informe["id"];
 		//Si no encuentra informe presenta error
 		if ($registro_informe["id"]=="") mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Informes." $informe)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+
+            //Si hay variables de filtro definidas busca su valor en el contexto global
+            if($registro_informe["variables_filtro"]!="")
+                {
+                    $arreglo_variables_filtro = @explode(",",$registro_informe["variables_filtro"]);
+                    //Busca y convierte cada variable recibida en global
+                    foreach ($arreglo_variables_filtro as $nombre_variable_filtro)
+                        {
+                            if (isset($$nombre_variable_filtro))
+								global $$nombre_variable_filtro;
+                        }
+                }
 
 			// Inicia CONSTRUCCION DE CONSULTA DINAMICA
 			$numero_columnas=0;
@@ -3582,17 +3594,6 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			// Elimina la ultima coma en el listado de tablas
 			$consulta=substr($consulta, 0, strlen($consulta)-1);
 
-            //Si hay variables de filtro definidas busca su valor en el contexto global
-            if($registro_informe["variables_filtro"]!="")
-                {
-                    $arreglo_variables_filtro = @explode(",",$registro_informe["variables_filtro"]);
-                    //Busca y convierte cada variable recibida en global
-                    foreach ($arreglo_variables_filtro as $nombre_variable_filtro)
-                        {
-                            global $$nombre_variable_filtro;
-                        }
-                }
-
 			// Busca las CONDICIONES para el informe
 			$consulta.=" WHERE ";
 			$consulta_condiciones=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_condiciones." FROM ".$TablasCore."informe_condiciones WHERE informe=? ORDER BY peso","$informe");
@@ -3603,25 +3604,60 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					$valor_izquierdo=$registro_condiciones["valor_izq"];
 					$valor_derecho=$registro_condiciones["valor_der"];
 					
-					// CONVIERTE VARIABLES DE SESION PHP A VALORES PARA EL QUERY
+					// CONVIERTE VARIABLES DE SESION PHP A VALORES PARA EL QUERY Cuando el primer simbolos es un PESOS ($), es decir, solo se ingreso una variable
+					
+					//LADO IZQUIERDO DE LA CONDICION
 					//Si el valor Izquierdo a comparar inicia por signo pesos y es una variable PHP la usa como tal
 					if (@$valor_izquierdo[0]=="$")
 						{
 							//Quita el signo pesos inicial para buscar la variable
 							$variable_a_buscar=substr($valor_izquierdo, 1, strlen($valor_izquierdo));
-							// Si la variable esta definida toma su valor encerrado entre comillas para el query
-							if (@isset($variable_a_buscar)) 
-								$valor_izquierdo="'".$$variable_a_buscar."'";
+							// Si la variable esta definida toma su valor encerrado entre comillas para el query y evitar conflictos de variables con espacios y demas.
+							if (@isset($variable_a_buscar))
+								$valor_izquierdo="'".${$variable_a_buscar}."'";
 						}
+					//Evalua casos donde se tienen variables PHP escapadas por llaves.  Ej  "%{$Variable}%" si fuera para un LIKE, por ejemplo.
+					if (strpos($valor_izquierdo,"{")!==FALSE && strrpos($valor_izquierdo,"}")!==FALSE)
+						{
+							//Determina las posiciones de las llaves en la cadena
+							$PosLlaveIzquierda=strpos($valor_izquierdo,"{");
+							$PosLlaveDerecha=strrpos($valor_izquierdo,"}");
+							//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
+							$NombreVariable=substr($valor_izquierdo,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
+							if (@isset($NombreVariable))
+								{
+									$ValorVariable=${$NombreVariable};
+									//Reemplaza el valor encontrado en la cadena de valor original
+									$valor_izquierdo=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$valor_izquierdo);
+								}
+						}
+
+					//LADO DERECHO DE LA CONDICION
 					//Si el valor Derecho a comparar inicia por signo pesos y es una variable PHP la usa como tal
 					if (@$valor_derecho[0]=="$")
 						{
 							//Quita el signo pesos inicial para buscar la variable
 							$variable_a_buscar=substr($valor_derecho, 1, strlen($valor_derecho));
-							// Si la variable esta definida toma su valor encerrado entre comillas para el query
+							// Si la variable esta definida toma su valor encerrado entre comillas para el query y evitar conflictos de variables con espacios y demas.
 							if (@isset($variable_a_buscar)) 
-								$valor_derecho="'".$$variable_a_buscar."'";
+								$valor_derecho="'".${$variable_a_buscar}."'";
 						}
+					//Evalua casos donde se tienen variables PHP escapadas por llaves.  Ej  "%{$Variable}%" si fuera para un LIKE, por ejemplo.
+					if (strpos($valor_derecho,"{")!==FALSE && strrpos($valor_derecho,"}")!==FALSE)
+						{
+							//Determina las posiciones de las llaves en la cadena
+							$PosLlaveIzquierda=strpos($valor_derecho,"{");
+							$PosLlaveDerecha=strrpos($valor_derecho,"}");
+							//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
+							$NombreVariable=substr($valor_derecho,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
+							if (@isset($NombreVariable))
+								{
+									$ValorVariable=${$NombreVariable};
+									//Reemplaza el valor encontrado en la cadena de valor original
+									$valor_derecho=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$valor_derecho);								
+								}
+						}
+
 					$consulta.=" ".$valor_izquierdo." ".$registro_condiciones["operador"]." ".$valor_derecho." ";
 					$hay_condiciones=1;
 				}

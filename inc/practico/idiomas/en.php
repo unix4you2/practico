@@ -552,7 +552,7 @@
 	$MULTILANG_InfDiferenteDe='Different';
 	$MULTILANG_InfIgualA='Equal';
     $MULTILANG_InfPatron='Match pattern (Uses % as joker)';
-	$MULTILANG_InfDesManual='In any manual fields you can enclose expressions or character string values ​​using double quotes.   You can compare with session vars putting the PHP variable.  i.e.: $PCOSESS_LoginUsuario, $Nombre_usuario, $Descripcion_usuario, $Nivel_usuario, $Correo_usuario, $LlaveDePasoUsuario';
+	$MULTILANG_InfDesManual='In any manual fields you can enclose expressions or character string values ​​using double quotes.   You can compare with session vars putting the PHP variable.  i.e.: $PCOSESS_LoginUsuario, $Nombre_usuario, $Descripcion_usuario, $Nivel_usuario, $Correo_usuario, $LlaveDePasoUsuario.  If you want to use PHP variables in the middle of a string you can put it inside braces Ie: {$Variable} and they will be replaced by their global value.';
 	$MULTILANG_InfOperador='Add an aggregator of expressions or a logical operator ';
 	$MULTILANG_InfOpParentesisA='Parenthesis open';
 	$MULTILANG_InfOpParentesisC='Parenthesis close';
@@ -646,8 +646,8 @@
 	$MULTILANG_InfGeneraPDF='PDF Export?';
 	$MULTILANG_InfGeneraPDFInfoTit='Available for tabular reports only';
 	$MULTILANG_InfGeneraPDFInfoDesc='This option requires the PDF generator module that is available in downloads link at Practicos website. If you activate this option the report time could be more than a normal report when you have a lot of records in your results';
-    $MULTILANG_InfVblesFiltro='Filter variables';
-    $MULTILANG_InfVblesDesFiltro='PHP variables (without dollar character $ and comma separated only) that should be finded in global environment to be available for filter condittions';
+    $MULTILANG_InfVblesFiltro='Global variables required for filter';
+    $MULTILANG_InfVblesDesFiltro='PHP variables (without dollar character $ and comma separated only) that should be taked from global environment to be available for filter in the condittions option while you build a query';
     $MULTILANG_InfDataTableResXPag='records per page';
     $MULTILANG_InfDataTableViendoP='Viewing page';
     $MULTILANG_InfDataTableDe='of';

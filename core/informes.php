@@ -752,7 +752,7 @@ if ($PCO_Accion=="editar_informe")
 												<input type="hidden" name="tabla" value="informe_campos">
 												<input type="hidden" name="campo" value="peso">
 												<input type="hidden" name="informe" value="'.$informe.'">
-												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+												<input type="hidden" name="nombre_tabla" value="'.@$nombre_tabla.'">
 												<input type="hidden" name="accion_retorno" value="editar_informe">
 												<input type="hidden" name="valor" value="'.$peso_aumentado.'">
 												<input type="Hidden" name="popup_activo" value="InformeCampos">
@@ -763,7 +763,7 @@ if ($PCO_Accion=="editar_informe")
 												<input type="hidden" name="tabla" value="informe_campos">
 												<input type="hidden" name="campo" value="peso">
 												<input type="hidden" name="informe" value="'.$informe.'">
-												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+												<input type="hidden" name="nombre_tabla" value="'.@$nombre_tabla.'">
 												<input type="hidden" name="accion_retorno" value="editar_informe">
 												<input type="hidden" name="valor" value="'.$peso_disminuido.'">
 												<input type="Hidden" name="popup_activo" value="InformeCampos">
@@ -925,7 +925,7 @@ if ($PCO_Accion=="editar_informe")
 												<input type="hidden" name="tabla" value="informe_condiciones">
 												<input type="hidden" name="campo" value="peso">
 												<input type="hidden" name="informe" value="'.$informe.'">
-												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+												<input type="hidden" name="nombre_tabla" value="'.@$nombre_tabla.'">
 												<input type="hidden" name="accion_retorno" value="editar_informe">
 												<input type="hidden" name="valor" value="'.$peso_aumentado.'">
 												<input type="Hidden" name="popup_activo" value="InformeCondiciones">
@@ -936,7 +936,7 @@ if ($PCO_Accion=="editar_informe")
 												<input type="hidden" name="tabla" value="informe_condiciones">
 												<input type="hidden" name="campo" value="peso">
 												<input type="hidden" name="informe" value="'.$informe.'">
-												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+												<input type="hidden" name="nombre_tabla" value="'.@$nombre_tabla.'">
 												<input type="hidden" name="accion_retorno" value="editar_informe">
 												<input type="hidden" name="valor" value="'.$peso_disminuido.'">
 												<input type="Hidden" name="popup_activo" value="InformeCondiciones">

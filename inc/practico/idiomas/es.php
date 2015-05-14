@@ -549,7 +549,7 @@
 	$MULTILANG_InfDiferenteDe='Diferente';
 	$MULTILANG_InfIgualA='Igual';
     $MULTILANG_InfPatron='Coincide con el patr&oacute;n (Utilice % como comodin)';
-	$MULTILANG_InfDesManual='En cualquiera de los campos manuales puede encerrar expresiones o valores tipo cadena de caracteres utilizando comillas dobles.  Tambien puede comparar frente a las variables de sesion del usuario simplemente con poner alguna de ellas en notacion PHP, por ejemplo: $PCOSESS_LoginUsuario, $Nombre_usuario, $Descripcion_usuario, $Nivel_usuario, $Correo_usuario, $LlaveDePasoUsuario';
+	$MULTILANG_InfDesManual='En cualquiera de los campos manuales puede encerrar expresiones o valores tipo cadena de caracteres utilizando comillas dobles.  Tambien puede comparar frente a las variables de sesion del usuario simplemente con poner alguna de ellas en notacion PHP, por ejemplo: $PCOSESS_LoginUsuario, $Nombre_usuario, $Descripcion_usuario, $Nivel_usuario, $Correo_usuario, $LlaveDePasoUsuario o cualquier otra del entorno global.  Para usar variables PHP en medio de una cadena puede encerrarlas entre llaves Ej:{$Variable} y estas seran reemplazadas por su valor global.';
 	$MULTILANG_InfOperador='Agregar un agrupador de expresiones o un operador l&oacute;gico ';
 	$MULTILANG_InfOpParentesisA='Abrir par&eacute;ntesis';
 	$MULTILANG_InfOpParentesisC='Cerrar par&eacute;ntesis';
@@ -643,8 +643,8 @@
 	$MULTILANG_InfGeneraPDF='Exportar PDF?';
 	$MULTILANG_InfGeneraPDFInfoTit='Aplica s&oacute;lo para informes tabulares';
 	$MULTILANG_InfGeneraPDFInfoDesc='El uso de esta opci&oacute;n requiere la descarga e instalaci&oacute;n del m&oacute;dulo adicional para generaci&oacute;n de PDFs de Pr&aacute;ctico.  Se encuentra disponible en la zona de descargas en web oficial de la herramienta.  Activar esta opci&oacute;n puede represetar tiempos adicionales en la generaci&oacute;n de su informe cuando el vol&uacute;men de resultados es alto.';
-    $MULTILANG_InfVblesFiltro='Variables para filtro';
-    $MULTILANG_InfVblesDesFiltro='Variables PHP (Sin el signo pesos $ y separadas unicamente por una coma) que deberan ser buscadas en el ambito global para estar disponibles en condiciones de filtrado';
+    $MULTILANG_InfVblesFiltro='Variables globales requeridas para filtro';
+    $MULTILANG_InfVblesDesFiltro='Variables PHP (Sin el signo pesos $ y separadas unicamente por una coma) que deberan ser tomadas del ambito global para estar disponibles en la opcion de Condiciones durante la construcci&oacute;n de querys';
     $MULTILANG_InfDataTableResXPag='resultados por p&aacute;gina';
     $MULTILANG_InfDataTableViendoP='Viendo p&aacute;gina';
     $MULTILANG_InfDataTableDe='de';
