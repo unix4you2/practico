@@ -60,7 +60,7 @@
 	Ver tambien:
 		<Iniciar_login> | <cambiar_clave>
 */
-if ($PCO_WSId=="verificar_credenciales") 
+if (@$PCO_WSId=="verificar_credenciales") 
 	{
 		$uid=filtrar_cadena_sql(@$uid);
 		$clave=filtrar_cadena_sql(@$clave);
@@ -321,7 +321,7 @@ function error_oauth($client,$OAuth_servicio)
 	Ver tambien:
 		<Iniciar_login>
 */
-if ($PCO_WSId=="autenticacion_oauth") 
+if (@$PCO_WSId=="autenticacion_oauth") 
 	{
 		require('inc/http/http.php');			// Incluye funciones del cliente HTTP para conexiones desde PHP
 		require('inc/oauth/oauth_client.php');	// Incluye las librerias del modulo OAuth 1.0 y 2.0
