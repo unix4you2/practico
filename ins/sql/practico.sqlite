@@ -177,7 +177,8 @@ CREATE TABLE core_informe (
   formato_grafico text,
   genera_pdf text,
   variables_filtro text,
-  soporte_datatable text DEFAULT 'N'
+  soporte_datatable text DEFAULT 'N',
+  formulario_filtrado text DEFAULT ''
 
 );
 

@@ -192,7 +192,7 @@ if ($PCO_Accion=="actualizar_informe")
 		if ($mensaje_error=="")
 			{
 				// Actualiza los datos 
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET soporte_datatable=?, variables_filtro=?, genera_pdf=?, formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=? WHERE id=? ","$soporte_datatable$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$id");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET formulario_filtrado=?, soporte_datatable=?, variables_filtro=?, genera_pdf=?, formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=? WHERE id=? ","$formulario_filtrado$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$id");
 				auditar("Actualiza informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="editar_informe">
@@ -1468,6 +1468,26 @@ if ($PCO_Accion=="editar_informe")
                 </span>
             </div>
 
+            <label for="formulario_filtrado"><?php echo $MULTILANG_InfFormFiltrado; ?>:</label>
+            <div class="form-group input-group">
+                <select id="formulario_filtrado" name="formulario_filtrado" class="form-control" >
+					<option value=""></option>
+					<?php
+						$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario ORDER BY titulo");
+						while($registro_formularios = $consulta_forms->fetch())
+							{
+								$seleccion_campo="";
+								if (@$registro_informe["formulario_filtrado"]==$registro_formularios["id"])
+									$seleccion_campo="SELECTED";
+								echo '<option value="'.$registro_formularios["id"].'" '.$seleccion_campo.'>(Id.'.$registro_formularios["id"].') '.$registro_formularios["titulo"].'</option>';
+							}
+					?>
+                </select>
+                <span class="input-group-addon">
+                    <a href="#" title="<?php echo $MULTILANG_InfFormFiltradoDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                </span>
+            </div>
+
             <label for="soporte_datatable"><?php echo $MULTILANG_InfDataTableTit; ?>:</label>
             <div class="form-group input-group">
                 <select id="soporte_datatable" name="soporte_datatable" class="form-control" >
@@ -1585,7 +1605,7 @@ if ($PCO_Accion=="guardar_informe")
 			{
 				$agrupamiento='';
                 $ordenamiento='';
-                ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|',?,?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable");
+                ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|',?,?,?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtro");
 				$id=$ConexionPDO->lastInsertId();
 				auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -1860,6 +1880,21 @@ if ($PCO_Accion=="administrar_informes")
                 <input name="variables_filtro" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfVblesFiltro; ?>">
                 <span class="input-group-addon">
                     <a href="#" title="<?php echo $MULTILANG_InfVblesDesFiltro; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                </span>
+            </div>
+
+            <label for="formulario_filtrado"><?php echo $MULTILANG_InfFormFiltrado; ?>:</label>
+            <div class="form-group input-group">
+                <select id="formulario_filtrado" name="formulario_filtrado" class="form-control" >
+					<option value=""></option>
+					<?php
+						$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario ORDER BY titulo");
+						while($registro_formularios = $consulta_forms->fetch())
+							echo '<option value="'.$registro_formularios["id"].'">(Id.'.$registro_formularios["id"].') '.$registro_formularios["titulo"].'</option>';
+					?>
+                </select>
+                <span class="input-group-addon">
+                    <a href="#" title="<?php echo $MULTILANG_InfFormFiltradoDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                 </span>
             </div>
 

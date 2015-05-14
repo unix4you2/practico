@@ -178,6 +178,7 @@ CREATE TABLE core_informe (
   genera_pdf char(1), 
   variables_filtro text,
   soporte_datatable char(1) DEFAULT 'N',
+  formulario_filtrado VARCHAR(5) DEFAULT '',
   PRIMARY KEY  (id)
 );
 

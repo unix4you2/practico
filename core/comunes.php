@@ -3122,10 +3122,11 @@ function selector_iconos_awesome()
 		function cargar_formulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0)
 		  {
                 global $ConexionPDO,$ArchivoCORE,$TablasCore;
+                global $PCO_InformeFiltro;
 				global $_SeparadorCampos_;
 				// Carga variables de definicion de tablas
 				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
-				global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion;
+				global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
 				
 				// Busca datos del formulario
 				$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
@@ -3203,9 +3204,11 @@ function selector_iconos_awesome()
 					echo'<form id="datos" name="datos" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 						<input type="Hidden" name="PCO_Accion" value="guardar_datos_formulario">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="PCO_FormularioActivo" value="'.$formulario.'">
 						<input type="Hidden" name="id_registro_datos" value="'.@$registro_datos_formulario["id"].'">
                         <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
+                        <input type="Hidden" name="objeto" value=""> <!--Requerido si se va a transferir el control a un objeto FRM o INF-->
 						';
 
                 // Inicio de la generacion de encabezados pestanas
@@ -3452,7 +3455,7 @@ function selector_iconos_awesome()
 			// Si tiene botones agrega barra de estado y los ubica
 			$consulta_botones = ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_boton." FROM ".$TablasCore."formulario_boton WHERE formulario=? AND visible=1 ORDER BY peso","$formulario");
 			
-			if($consulta_botones->rowCount()>0)
+			if($consulta_botones->rowCount()>0 || $PCO_InformeFiltro!="") //Crea la barra incluso si no hay botones en diseno pero se encuentra que el llamado es desde un informe que requiere filtro
 				{
 					abrir_barra_estado();
                     echo '<div align="center">';
@@ -3470,10 +3473,7 @@ function selector_iconos_awesome()
 							if ($registro_botones["tipo_accion"]=="interna_eliminar")
 								$comando_javascript="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit();";
 							if ($registro_botones["tipo_accion"]=="interna_cargar")
-								{
-									echo '<input type="hidden" name="objeto" value="'.$registro_botones["accion_usuario"].'">';
-									$comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.submit();";
-								}
+								$comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='".$registro_botones["accion_usuario"]."';document.datos.submit();";
 							if ($registro_botones["tipo_accion"]=="externa_formulario")
 								$comando_javascript="document.datos.PCO_Accion.value='".$registro_botones["accion_usuario"]."';document.datos.submit();";
 							if ($registro_botones["tipo_accion"]=="externa_javascript")
@@ -3488,9 +3488,16 @@ function selector_iconos_awesome()
 
                             echo '&nbsp;&nbsp;'; //Agrega espacio temporal entre controles
 						}
+
+					//Si se encuentra que el form viene llamado desde un informe que lo requiere para filtro agrega un boton de retorno al informe automaticamente
+					$comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='inf:".$PCO_InformeFiltro.":1';document.datos.submit();";
+					$cadena_javascript='href="javascript:'.@$comando_javascript.'"';
+					echo '<a class="'.$estilo_basico_boton.' btn-warning" '.@$cadena_javascript.'>'.$MULTILANG_InfRetornoFormFiltrado.'</a>';
+
                     echo '</div>';
 					cerrar_barra_estado();
 				}
+
 
 			//Cierra todo el formulario
 			//Si se quiere anular el formulario y su accion cuando se trata de un sub-formulario de consulta
@@ -3551,6 +3558,24 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		$Identificador_informe=$registro_informe["id"];
 		//Si no encuentra informe presenta error
 		if ($registro_informe["id"]=="") mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Informes." $informe)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+
+		//Identifica si el informe requiere un formulario de filtrado previo
+		if ($registro_informe["formulario_filtrado"]!="")
+			{
+				//Determina si solicita el informe desde el formulario de filtrado apropiado, sino redirecciona a este
+				global $PCO_FormularioActivo;
+				if ($registro_informe["formulario_filtrado"]!=$PCO_FormularioActivo)
+					{
+						echo '<form name="precarga_form_filtro" action="'.$ArchivoCORE.'" method="POST">
+							<input type="Hidden" name="PCO_Accion" value="cargar_objeto">
+							<input type="Hidden" name="PCO_InformeFiltro" value="'.$registro_informe["id"].'">
+							<input type="Hidden" name="objeto" value="frm:'.$registro_informe["formulario_filtrado"].':1">
+							<input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+							<input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
+						<script type="" language="JavaScript"> document.precarga_form_filtro.submit();  </script>';
+						die();
+					}
+			}
 
             //Si hay variables de filtro definidas busca su valor en el contexto global
             if($registro_informe["variables_filtro"]!="")
@@ -3624,6 +3649,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							$PosLlaveDerecha=strrpos($valor_izquierdo,"}");
 							//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
 							$NombreVariable=substr($valor_izquierdo,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
+							//Si la variable no esta definida la busca en el entorno global
+							global $$NombreVariable;
 							if (@isset($NombreVariable))
 								{
 									$ValorVariable=${$NombreVariable};
@@ -3650,6 +3677,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							$PosLlaveDerecha=strrpos($valor_derecho,"}");
 							//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
 							$NombreVariable=substr($valor_derecho,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
+							//Si la variable no esta definida la busca en el entorno global
+							global $$NombreVariable;
 							if (@isset($NombreVariable))
 								{
 									$ValorVariable=${$NombreVariable};
