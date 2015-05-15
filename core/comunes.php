@@ -3065,17 +3065,23 @@ function selector_iconos_awesome()
             if ($registro_campos["tipo_accion"]=="interna_eliminar")
                 $comando_javascript="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit();";
             if ($registro_campos["tipo_accion"]=="interna_cargar")
-                {
-                    echo '<input type="hidden" name="objeto" value="'.$registro_campos["accion_usuario"].'">';
-                    $comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.submit();";
-                }
+                $comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='".$registro_campos["accion_usuario"]."';document.datos.submit();";
             if ($registro_campos["tipo_accion"]=="externa_formulario")
                 $comando_javascript="document.datos.PCO_Accion.value='".$registro_campos["accion_usuario"]."';document.datos.submit();";
             if ($registro_campos["tipo_accion"]=="externa_javascript")
                 $comando_javascript=$registro_campos["accion_usuario"];
 
+			//Verifica si el registro de botones presenta algun texto de confirmacion y lo antepone al script
+			$cadena_confirmacion_accion_pre="";
+			$cadena_confirmacion_accion_pos="";
+			if (@$registro_campos["confirmacion_texto"]!="")
+				{
+					$cadena_confirmacion_accion_pre=" if (confirm('".$registro_campos["confirmacion_texto"]."')) {";
+					$cadena_confirmacion_accion_pos=" } else {} ";
+				}
+
             //Genera la cadena del enlace
-            $cadena_javascript='href="javascript:'.@$comando_javascript.'"';
+            $cadena_javascript='href="javascript:  '.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.'  "';
 
             //Abre el marco del control de datos style="display:inline;"
 			$salida.='<div style="'.$cadena_modo_inline.'" class="form-group input-group">';
@@ -3479,8 +3485,17 @@ function selector_iconos_awesome()
 							if ($registro_botones["tipo_accion"]=="externa_javascript")
 								$comando_javascript=$registro_botones["accion_usuario"];
 
+                            //Verifica si el registro de botones presenta algun texto de confirmacion y lo antepone al script
+                            $cadena_confirmacion_accion_pre="";
+                            $cadena_confirmacion_accion_pos="";
+							if ($registro_botones["confirmacion_texto"]!="")
+								{
+									$cadena_confirmacion_accion_pre=" if (confirm('".$registro_botones["confirmacion_texto"]."')) {";
+									$cadena_confirmacion_accion_pos=" } else {} ";
+								}                            
+                            
                             //Genera la cadena del enlace
-                            $cadena_javascript='href="javascript:'.@$comando_javascript.'"';
+                            $cadena_javascript='href="javascript:  '.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.'  "';
                             
 							//Si no se especifica un estilo para el boton entonces se usa el predeterminado
                             $estilo_basico_boton="btn btn-default";
@@ -3810,7 +3825,19 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 								{
 									$comando_javascript=$registro_botones["accion_usuario"];
 								}
-							$cadena_javascript='onclick="'.@$comando_javascript.'"';
+								
+
+                            //Verifica si el registro de botones presenta algun texto de confirmacion y lo antepone al script
+                            $cadena_confirmacion_accion_pre="";
+                            $cadena_confirmacion_accion_pos="";
+							if ($registro_botones["confirmacion_texto"]!="")
+								{
+									$cadena_confirmacion_accion_pre=" if (confirm('".$registro_botones["confirmacion_texto"]."')) {";
+									$cadena_confirmacion_accion_pos=" } else {} ";
+								}
+                            
+                            //Genera la cadena del enlace
+							$cadena_javascript='onclick="'.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.' "';
 							@$cadena_generica_botones.='<input type="Button"  class="'.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.$cadena_javascript.' >&nbsp;';
 							$total_botones++;
 						}
