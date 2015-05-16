@@ -189,6 +189,7 @@ CREATE TABLE core_informe_campos (
   valor_campo varchar(250),
   valor_alias varchar(250),
   peso integer,
+  visible integer DEFAULT 1,
   PRIMARY KEY (id)
 );
 

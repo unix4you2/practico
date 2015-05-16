@@ -189,6 +189,7 @@ CREATE TABLE core_informe_campos (
   valor_campo varchar(250),
   valor_alias varchar(250),
   peso int(10) default 0,
+  visible int(1) DEFAULT 1,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

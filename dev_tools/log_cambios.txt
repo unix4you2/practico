@@ -48,6 +48,7 @@ LogCambios="
 * Added: El asistente de actualización permite ahora escoger el tipo de backup realizado al sistema entre sólo y scripts y scripts+base de datos
 * Added: Los informes ahora permiten recibir variables PHP declaradas en sus variables de filtro y además variables PHP ingresadas en sus condiciones.  Para estas últimas no se requiere su declaración en el informe pues son buscadas en su entorno global en caso de no ser encontradas y estar escapadas entre llaves.
 * Added: Se permite vincular formularios de filtro a informes para captura de variables PHP previas requeridas por las condiciones.  Esta funcion autodetecta formularios cargados como filtro y genera automaticamente el boton de redireccion al informe asociado.
+* Added: Ahora los campos de un informe pueden ser establecidos como visibles u ocultos.  Esto permitirá utilizar campos de ID para operaciones estando de primeros en el informe y además ocultos junto con otros campos a los que se defina esta propiedad.
 * Fixed: Corregida la seleccion del tipo de encripcion para motores de autenticacion federados. Ahora se aplica la encripcion correcta.
 * Fixed: Cuando no se ingresa nada en el buscador la busqueda arrojaba errores
 * Fixed: Menus superiores y laterales generaban conflicto por doble Id de formulario
@@ -62,6 +63,7 @@ IMPORTANTE:  Aquellos usuarios que hagan uso extensivo de webservices deberian h
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
 ALTER TABLE core_informe ADD COLUMN formulario_filtrado VARCHAR(5) NOT NULL DEFAULT '';
+ALTER TABLE core_informe_campos ADD COLUMN visible INT(1) NULL DEFAULT 1;
 "
 
 ########################################################################
