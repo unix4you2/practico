@@ -105,8 +105,8 @@ if ($PCO_Accion=="actualizar_practico")
 
     <ul class="nav nav-tabs nav-justified">
     <li class="active"><a href="#pestana_actualizacion" data-toggle="tab"><i class="fa fa-upload"></i> <?php echo $MULTILANG_Actualizacion; ?></a></li>
-    <li><a href="#pestana_copias" data-toggle="tab"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Copias; ?></a></li>
     <li><a href="#historico_actualizaciones" data-toggle="tab"><i class="fa fa-history"></i> <?php echo $MULTILANG_Historico; ?></a></li>
+    <li><a href="#pestana_copias" data-toggle="tab"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Copias; ?></a></li>
     </ul>
 
     <div class="tab-content">

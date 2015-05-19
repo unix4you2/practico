@@ -55,6 +55,7 @@ LogCambios="
 * Fixed: Textos de confirmación para botones de formulario e informes son activados.  Ahora al agregar un texto de confirmación éste es tenido en cuenta para preguntarle al usuario antes de ejecutar la acción.
 * Enhan: Sobreescritura de variables para WebServices asi: WSId a PCO_WSId, WSOn a PCO_WSOn, WSKey a PCO_WSKey, WSSecret a PCO_WSSecret
 * Enhan: Autenticación federada prohibe actualizar perfiles de usuario y cambiar sus claves pues todo se toma del sistema federado.  Solo el admin sigue con la independencia.
+* Enhan: Reubicación de pestaña de historico de actualizaciones a la segunda posición, dejando las copias de seguridad al final.
 
 IMPORTANTE:  Aquellos usuarios que hagan uso extensivo de webservices deberian hacer los ajustes de nombre para sus variables de modo que estos sigan operantes despues del cambio.  Un simple buscar y reemplazar WSId por PCO_WSId en todos sus documentos debería ser suficiente.  Igual para las demás variables.
 "
