@@ -3504,10 +3504,13 @@ function selector_iconos_awesome()
                             echo '&nbsp;&nbsp;'; //Agrega espacio temporal entre controles
 						}
 
-					//Si se encuentra que el form viene llamado desde un informe que lo requiere para filtro agrega un boton de retorno al informe automaticamente
-					$comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='inf:".$PCO_InformeFiltro.":1';document.datos.submit();";
-					$cadena_javascript='href="javascript:'.@$comando_javascript.'"';
-					echo '<a class="'.$estilo_basico_boton.' btn-warning" '.@$cadena_javascript.'>'.$MULTILANG_InfRetornoFormFiltrado.'</a>';
+					if ($PCO_InformeFiltro!="")
+						{
+							//Si se encuentra que el form viene llamado desde un informe que lo requiere para filtro agrega un boton de retorno al informe automaticamente
+							$comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='inf:".$PCO_InformeFiltro.":1';document.datos.submit();";
+							$cadena_javascript='href="javascript:'.@$comando_javascript.'"';
+							echo '<a class="'.$estilo_basico_boton.' btn-warning" '.@$cadena_javascript.'>'.$MULTILANG_InfRetornoFormFiltrado.'</a>';
+						}
 
                     echo '</div>';
 					cerrar_barra_estado();
@@ -3609,6 +3612,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			//Busca los CAMPOS definidos para el informe
 			$consulta="SELECT ";
 			$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY peso","$informe");
+			
+			$PCO_ColumnasOcultas[]="ArregloDeCamposOcultos";
 			while ($registro_campos = $consulta_campos->fetch())
 				{
 					//Si tiene alias definido lo agrega
@@ -3616,6 +3621,17 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					if ($registro_campos["valor_alias"]!="") $posfijo_campo=" as ".$registro_campos["valor_alias"];
 					//Agrega el campo a la consulta
 					$consulta.=$registro_campos["valor_campo"].$posfijo_campo.",";
+					//Crea un arreglo con los campos marcados como ocultos para filtrarlos luego
+					if ($registro_campos["visible"]==0)
+						{
+							$PCO_ColumnasOcultas[]=$registro_campos["valor_campo"].$posfijo_campo;
+							//Lleva el campo oculto despues del punto
+							$PCO_PartesCampo=explode(".",$registro_campos["valor_campo"].$posfijo_campo);
+							$PCO_ColumnasOcultas[]=$PCO_PartesCampo[1];
+							//Lleva el campo oculto si es un alias
+							$PCO_PartesCampo=explode(" as ",$registro_campos["valor_campo"].$posfijo_campo);
+							$PCO_ColumnasOcultas[]=$PCO_PartesCampo[1];
+						}
 				}
 			// Elimina la ultima coma en el listado de campos
 			$consulta=substr($consulta, 0, strlen($consulta)-1);
@@ -3852,9 +3868,18 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
                         $numero_columnas=0;
                         foreach($resultado_columnas->fetch(PDO::FETCH_ASSOC) as $key=>$val)
                             {
-                                $SalidaFinalInforme.= '<th>'.$key.'</th>';
-                                $SalidaFinalInformePDF.= '<th>'.$key.'</th>';
-                                $numero_columnas++;
+                                //Imprime el encabezado siempre y cuando no se trate de un campo que se desea ocultar
+                                if (!in_array($key,$PCO_ColumnasOcultas))
+									{
+										$SalidaFinalInforme.= '<th>'.$key.'</th>';
+										$SalidaFinalInformePDF.= '<th>'.$key.'</th>';
+									}
+								else
+									{
+										//Agrega la columna al indice de columnas ocultas para no mostrarla luego
+										$PCO_NumerosColumnasOcultas[]=$numero_columnas;
+									}
+								$numero_columnas++;
                             }
                     }
 
@@ -3876,8 +3901,12 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							$SalidaFinalInformePDF.= '<tr>';
 							for ($i=0;$i<$numero_columnas;$i++)
 								{
-									$SalidaFinalInforme.= '<td>'.$registro_informe[$i].'</td>';
-									$SalidaFinalInformePDF.= '<td>'.$registro_informe[$i].'</td>';
+									//Muestra la columna solo si no se trata de una de las ocultas
+									if (!in_array($i,$PCO_NumerosColumnasOcultas))
+										{											
+											$SalidaFinalInforme.= '<td>'.$registro_informe[$i].'</td>';
+											$SalidaFinalInformePDF.= '<td>'.$registro_informe[$i].'</td>';
+										}
 								}
 							//Si el informe tiene botones los agrega
 							if ($total_botones>0)
