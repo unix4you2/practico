@@ -124,8 +124,8 @@
 			if ($PCO_Accion== "cargar_objeto")						$retorno = 1;
 			// Funciones en core/actualizacion.php
 			if ($PCO_Accion== "cargar_archivo")						$retorno = permiso_agregado_accion("actualizar_practico");
-			if ($PCO_Accion== "analizar_parche")					$retorno = permiso_agregado_accion("cargar_archivo");
-			if ($PCO_Accion== "aplicar_parche")						$retorno = permiso_agregado_accion("analizar_parche");
+			if ($PCO_Accion== "analizar_parche")					$retorno = permiso_agregado_accion("actualizar_practico");
+			if ($PCO_Accion== "aplicar_parche")						$retorno = permiso_agregado_accion("actualizar_practico");
 			// Funciones en core/ajax.php
 			if ($PCO_Accion== "opciones_combo_box")					$retorno = 1;
 			if ($PCO_Accion== "valor_campo_tabla")					$retorno = 1;
