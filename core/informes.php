@@ -1813,8 +1813,13 @@ if ($PCO_Accion=="guardar_informe")
 <objetos_practicos>
 	<descripcion>
 		<tipo_objeto>Informe</tipo_objeto>
-		<version_compatible>$PCO_VersionActual</version_compatible>
+		<version_practico>$PCO_VersionActual</version_practico>
 		<tipo_exportacion>$tipo_copia_objeto</tipo_exportacion>
+		<sistema_origen>$Nombre_Aplicacion</sistema_origen>
+		<version>$Version_Aplicacion</version>
+		<usuario_generador>$PCOSESS_LoginUsuario</usuario_generador>
+		<fecha_exportacion>$PCO_FechaOperacionGuiones</fecha_exportacion>
+		<hora_exportacion>$PCO_HoraOperacionPuntos</hora_exportacion>
 	</descripcion>";
 							// Exporta tabla core_informe
 							$Contenido_XML .= "
@@ -1847,6 +1852,30 @@ if ($PCO_Accion=="guardar_informe")
 									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_informe_campos);
 							$Contenido_XML .= "
 	</core_informe_campos>";
+								}
+
+							// Registros de informe_condiciones
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe=?","$informe");
+							while($registro = $consulta->fetch())
+								{
+									//Exporta la tabla de core_informe_condiciones
+									$Contenido_XML .= "
+	<core_informe_condiciones>";
+									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_informe_condiciones);
+							$Contenido_XML .= "
+	</core_informe_condiciones>";
+								}
+
+							// Registros de informe_tablas
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_tablas WHERE informe=?","$informe");
+							while($registro = $consulta->fetch())
+								{
+									//Exporta la tabla de core_informe_tablas
+									$Contenido_XML .= "
+	<core_informe_tablas>";
+									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_informe_tablas);
+							$Contenido_XML .= "
+	</core_informe_tablas>";
 								}
 
 							// Finaliza el archivo XML

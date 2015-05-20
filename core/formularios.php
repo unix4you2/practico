@@ -2346,8 +2346,13 @@ if ($PCO_Accion=="editar_formulario")
 <objetos_practicos>
 	<descripcion>
 		<tipo_objeto>Formulario</tipo_objeto>
-		<version_compatible>$PCO_VersionActual</version_compatible>
+		<version_practico>$PCO_VersionActual</version_practico>
 		<tipo_exportacion>$tipo_copia_objeto</tipo_exportacion>
+		<sistema_origen>$Nombre_Aplicacion</sistema_origen>
+		<version>$Version_Aplicacion</version>
+		<usuario_generador>$PCOSESS_LoginUsuario</usuario_generador>
+		<fecha_exportacion>$PCO_FechaOperacionGuiones</fecha_exportacion>
+		<hora_exportacion>$PCO_HoraOperacionPuntos</hora_exportacion>
 	</descripcion>";
 							// Exporta tabla core_formulario
 							$Contenido_XML .= "
