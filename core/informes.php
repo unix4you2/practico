@@ -1661,139 +1661,221 @@ if ($PCO_Accion=="guardar_informe")
 		{
 			$mensaje_error="";
 			if ($informe=="")
-				$mensaje_error=$MULTILANG_ErrorTiempoEjecucion.".  No ID Inf";
+				$mensaje_error=$MULTILANG_ErrorTiempoEjecucion.".  No ingreso ID de Informe - Report ID not entered";
+			if ($tipo_copia_objeto=="")
+				$mensaje_error=$MULTILANG_ErrorTiempoEjecucion.".  No indicado modo de copia - Copy mode not entered";
+				
+			$Contenido_XML="";
 
 			if ($mensaje_error=="")
 				{
-					// Busca datos y Crea copia del informe
-					$consulta=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=?","$informe");
-					$registro = $consulta->fetch();
-					// Establece valores para cada campo a insertar en el nuevo form
-					$nuevo_titulo='[COPIA] '.$registro["titulo"];
-					$descripcion=$registro["descripcion"];
-					$categoria=$registro["categoria"];
-					$agrupamiento=$registro["agrupamiento"];
-					$ordenamiento=$registro["ordenamiento"];
-					$ancho=$registro["ancho"];
-					$alto=$registro["alto"];
-					$formato_final=$registro["formato_final"];
-					$formato_grafico=$registro["formato_grafico"];
-					$genera_pdf=$registro["genera_pdf"];
-					$variables_filtro=$registro["variables_filtro"];
-					$soporte_datatable=$registro["soporte_datatable"];
+					//Hace la copia del objeto segun el tipo solicitado
+					if ($tipo_copia_objeto=="EnLinea")
+						{	
+							// Busca datos y Crea copia del informe
+							$consulta=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=?","$informe");
+							$registro = $consulta->fetch();
+							// Establece valores para cada campo a insertar en el nuevo form
+							$nuevo_titulo='[COPIA] '.$registro["titulo"];
+							$descripcion=$registro["descripcion"];
+							$categoria=$registro["categoria"];
+							$agrupamiento=$registro["agrupamiento"];
+							$ordenamiento=$registro["ordenamiento"];
+							$ancho=$registro["ancho"];
+							$alto=$registro["alto"];
+							$formato_final=$registro["formato_final"];
+							$formato_grafico=$registro["formato_grafico"];
+							$genera_pdf=$registro["genera_pdf"];
+							$variables_filtro=$registro["variables_filtro"];
+							$soporte_datatable=$registro["soporte_datatable"];
+							$formulario_filtrado=$registro["formulario_filtrado"];
 
-					// Inserta el nuevo informe
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ","$nuevo_titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable");
-					
-					$id=$ConexionPDO->lastInsertId();
+							// Inserta el nuevo informe
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ","$nuevo_titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado");
+							
+							$id=$ConexionPDO->lastInsertId();
 
-					// Busca los elementos que componen el informe para hacerles la copia
-                    //Determina cuantos campos tiene la tabla
-                    $ArregloCampos=explode(',',$ListaCamposSinID_informe_condiciones);
-                    $TotalCampos=count($ArregloCampos);
-					// Registros de informe_condiciones
-					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe=?","$informe");
-					while($registro = $consulta->fetch())
-						{
-                            //Genera cadena de interrogantes y valores segun cantidad de campos
-                            $CadenaInterrogantes='?'; //Agrega el primer interrogante
-                            $CadenaValores=$id;
-                            for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
-                                {
-                                    //Cadena de interrogantes
-                                    $CadenaInterrogantes.=',?';
-                                    //Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
-                                    if ($PCOCampo!=0)
-                                        $CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
-                                    else
-                                        $CadenaValores.=$_SeparadorCampos_.$id;
-                                }
-							//Inserta el nuevo objeto al informe
-                            ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_condiciones ($ListaCamposSinID_informe_condiciones) VALUES ($CadenaInterrogantes) ","$CadenaValores");                            
-						}				
+							// Busca los elementos que componen el informe para hacerles la copia
+							//Determina cuantos campos tiene la tabla
+							$ArregloCampos=explode(',',$ListaCamposSinID_informe_condiciones);
+							$TotalCampos=count($ArregloCampos);
+							// Registros de informe_condiciones
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe=?","$informe");
+							while($registro = $consulta->fetch())
+								{
+									//Genera cadena de interrogantes y valores segun cantidad de campos
+									$CadenaInterrogantes='?'; //Agrega el primer interrogante
+									$CadenaValores=$id;
+									for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
+										{
+											//Cadena de interrogantes
+											$CadenaInterrogantes.=',?';
+											//Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
+											if ($PCOCampo!=0)
+												$CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
+											else
+												$CadenaValores.=$_SeparadorCampos_.$id;
+										}
+									//Inserta el nuevo objeto al informe
+									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_condiciones ($ListaCamposSinID_informe_condiciones) VALUES ($CadenaInterrogantes) ","$CadenaValores");                            
+								}				
 
-                    //Determina cuantos campos tiene la tabla
-                    $ArregloCampos=explode(',',$ListaCamposSinID_informe_tablas);
-                    $TotalCampos=count($ArregloCampos);
-					// Registros de formulario_boton
-					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
-					while($registro = $consulta->fetch())
-						{
-                            //Genera cadena de interrogantes y valores segun cantidad de campos
-                            $CadenaInterrogantes='?'; //Agrega el primer interrogante
-                            $CadenaValores=$id;
-                            for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
-                                {
-                                    //Cadena de interrogantes
-                                    $CadenaInterrogantes.=',?';
-                                    //Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
-                                    if ($PCOCampo!=0)
-                                        $CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
-                                    else
-                                        $CadenaValores.=$_SeparadorCampos_.$id;
-                                }
-							//Inserta el nuevo objeto al informe
-                            ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_tablas ($ListaCamposSinID_informe_tablas) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+							//Determina cuantos campos tiene la tabla
+							$ArregloCampos=explode(',',$ListaCamposSinID_informe_tablas);
+							$TotalCampos=count($ArregloCampos);
+							// Registros de formulario_boton
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
+							while($registro = $consulta->fetch())
+								{
+									//Genera cadena de interrogantes y valores segun cantidad de campos
+									$CadenaInterrogantes='?'; //Agrega el primer interrogante
+									$CadenaValores=$id;
+									for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
+										{
+											//Cadena de interrogantes
+											$CadenaInterrogantes.=',?';
+											//Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
+											if ($PCOCampo!=0)
+												$CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
+											else
+												$CadenaValores.=$_SeparadorCampos_.$id;
+										}
+									//Inserta el nuevo objeto al informe
+									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_tablas ($ListaCamposSinID_informe_tablas) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+								}
+								
+								
+							//Determina cuantos campos tiene la tabla
+							$ArregloCampos=explode(',',$ListaCamposSinID_informe_campos);
+							$TotalCampos=count($ArregloCampos);
+							// Registros de formulario_boton
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
+							while($registro = $consulta->fetch())
+								{
+									//Genera cadena de interrogantes y valores segun cantidad de campos
+									$CadenaInterrogantes='?'; //Agrega el primer interrogante
+									$CadenaValores=$id;
+									for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
+										{
+											//Cadena de interrogantes
+											$CadenaInterrogantes.=',?';
+											//Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
+											if ($PCOCampo!=0)
+												$CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
+											else
+												$CadenaValores.=$_SeparadorCampos_.$id;
+										}
+									//Inserta el nuevo objeto al informe
+									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_campos ($ListaCamposSinID_informe_campos) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+								}
+
+							//Determina cuantos campos tiene la tabla
+							$ArregloCampos=explode(',',$ListaCamposSinID_informe_boton);
+							$TotalCampos=count($ArregloCampos);
+							// Registros de formulario_boton
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_boton WHERE informe=? ","$informe");
+							while($registro = $consulta->fetch())
+								{
+									//Genera cadena de interrogantes y valores segun cantidad de campos
+									$CadenaInterrogantes='?'; //Agrega el primer interrogante
+									$CadenaValores=$registro[1];
+									for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
+										{
+											//Cadena de interrogantes
+											$CadenaInterrogantes.=',?';
+											//Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
+											if ($PCOCampo!=2)
+												$CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
+											else
+												$CadenaValores.=$_SeparadorCampos_.$id;
+										}
+									//Inserta el nuevo objeto al informe
+									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton ($ListaCamposSinID_informe_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+								}
+
+							auditar("Crea copia de informe $informe");
+
+							// Regresa a la administracion de informes
+							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+							<input type="Hidden" name="PCO_Accion" value="administrar_informes">
+							</form>
+							<script type="" language="JavaScript"> 
+							alert("'.$MULTILANG_FrmMsjCopia.$nuevo_titulo.' ID: '.$id.'");
+							document.cancelar.submit();  </script>';
 						}
-						
-						
-                    //Determina cuantos campos tiene la tabla
-                    $ArregloCampos=explode(',',$ListaCamposSinID_informe_campos);
-                    $TotalCampos=count($ArregloCampos);
-					// Registros de formulario_boton
-					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
-					while($registro = $consulta->fetch())
+
+
+					//Hace la copia del objeto segun el tipo solicitado
+					if ($tipo_copia_objeto=="XML_IdEstatico" || $tipo_copia_objeto=="XML_IdDinamico")
 						{
-                            //Genera cadena de interrogantes y valores segun cantidad de campos
-                            $CadenaInterrogantes='?'; //Agrega el primer interrogante
-                            $CadenaValores=$id;
-                            for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
-                                {
-                                    //Cadena de interrogantes
-                                    $CadenaInterrogantes.=',?';
-                                    //Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
-                                    if ($PCOCampo!=0)
-                                        $CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
-                                    else
-                                        $CadenaValores.=$_SeparadorCampos_.$id;
-                                }
-							//Inserta el nuevo objeto al informe
-                            ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_campos ($ListaCamposSinID_informe_campos) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+							// Inicia el archivo XML
+							$Contenido_XML.="<?xml version=\"1.0\" encoding=\"utf-8\" ?>
+<objetos_practicos>
+	<descripcion>
+		<tipo_objeto>Informe</tipo_objeto>
+		<version_compatible>$PCO_VersionActual</version_compatible>
+		<tipo_exportacion>$tipo_copia_objeto</tipo_exportacion>
+	</descripcion>";
+							// Exporta tabla core_informe
+							$Contenido_XML .= "
+	<core_informe>";
+							// Busca datos y genera XML de cada registro
+							$consulta=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=?","$informe");
+							$registro = $consulta->fetch();
+							$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_informe);
+							$Contenido_XML .= "
+	</core_informe>";
+							// Registros de informe_boton
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_boton WHERE informe=?","$informe");
+							while($registro = $consulta->fetch())
+								{
+									//Exporta la tabla de core_informe_boton
+									$Contenido_XML .= "
+	<core_informe_boton>";
+									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_informe_boton);
+							$Contenido_XML .= "
+	</core_informe_boton>";
+								}
+
+							// Registros de informe_campos
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe=?","$informe");
+							while($registro = $consulta->fetch())
+								{
+									//Exporta la tabla de core_informe_campos
+									$Contenido_XML .= "
+	<core_informe_campos>";
+									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_informe_campos);
+							$Contenido_XML .= "
+	</core_informe_campos>";
+								}
+
+							// Finaliza el archivo XML
+							$Contenido_XML .= "
+</objetos_practicos>";
+
+							auditar("Crea copia $tipo_copia_objeto de informe $informe");
+							
+							//Guarda la cadena generada en el archivo XML
+							$PCO_NombreArchivoXML="RepID_".$informe."_".$PCO_FechaOperacion."_".$PCO_HoraOperacion.".xml";
+							$PCO_PunteroArchivo = fopen("tmp/".$PCO_NombreArchivoXML, "w");
+							if($PCO_PunteroArchivo==false)
+								die("No se puede abrir el archivo de exportacion");
+							fputs ($PCO_PunteroArchivo, $Contenido_XML);
+							fclose ($PCO_PunteroArchivo);
+							
+							//Presenta la ventana con informacion y enlace de descarga
+							abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
+								<div align=center>
+								<?php echo $MULTILANG_FrmCopiaFinalizada; ?>
+								<br><br>
+								<a class="btn btn-success" href="tmp/<?php echo $PCO_NombreArchivoXML; ?>" target="_BLANK"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar; ?></a>
+								<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+								</div>
+
+							<?php
+							cerrar_ventana();
 						}
 
-                    //Determina cuantos campos tiene la tabla
-                    $ArregloCampos=explode(',',$ListaCamposSinID_informe_boton);
-                    $TotalCampos=count($ArregloCampos);
-					// Registros de formulario_boton
-					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_boton WHERE informe=? ","$informe");
-					while($registro = $consulta->fetch())
-						{
-                            //Genera cadena de interrogantes y valores segun cantidad de campos
-                            $CadenaInterrogantes='?'; //Agrega el primer interrogante
-                            $CadenaValores=$registro[1];
-                            for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
-                                {
-                                    //Cadena de interrogantes
-                                    $CadenaInterrogantes.=',?';
-                                    //Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
-                                    if ($PCOCampo!=2)
-                                        $CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
-                                    else
-                                        $CadenaValores.=$_SeparadorCampos_.$id;
-                                }
-							//Inserta el nuevo objeto al informe
-                            ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton ($ListaCamposSinID_informe_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
-						}
-
-					auditar("Crea copia de informe $informe");
-
-					// Regresa a la administracion de informes
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="administrar_informes">
-					</form>
-					<script type="" language="JavaScript"> 
-					alert("'.$MULTILANG_FrmMsjCopia.$nuevo_titulo.' ID: '.$id.'");
-					document.cancelar.submit();  </script>';
 				}
 			else
 				{
@@ -1805,6 +1887,45 @@ if ($PCO_Accion=="guardar_informe")
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: definir_copia_informes
+	Presenta opciones para generar una copia del informe seleccionado usando diferentes formatos
+*/
+if ($PCO_Accion=="definir_copia_informes")
+	{
+		 ?>
+
+        <form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<input type="Hidden" name="PCO_Accion" value="clonar_diseno_informe">
+			<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
+
+            <br>
+			<?php abrir_ventana($MULTILANG_FrmTipoObjeto, 'panel-primary'); ?>
+			<h4><?php echo $MULTILANG_FrmTipoCopiaExporta; ?>: <b><?php echo $titulo_informe; ?></b> (ID=<?php echo $informe; ?>)</h4>
+            <label for="tipo_copia_objeto"><?php echo $MULTILANG_FrmTipoCopia; ?>:</label>
+            <select id="tipo_copia_objeto" name="tipo_copia_objeto" class="form-control btn-warning" >
+                <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                <option value="EnLinea"><?php echo $MULTILANG_FrmTipoCopia1; ?></option>
+                <option value="XML_IdEstatico"><?php echo $MULTILANG_FrmTipoCopia2; ?></option>
+                <option value="XML_IdDinamico"><?php echo $MULTILANG_FrmTipoCopia3; ?></option>
+            </select>
+			<hr>
+			<b><?php echo $MULTILANG_Ayuda; ?></b><br>
+			<?php echo $MULTILANG_FrmTipoCopiaDes; ?>
+            </form>
+            <br>
+            <div align=center>
+            <a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCopiar; ?></a>
+            <a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+            </div>
+
+		<?php
+		cerrar_ventana();
+	}
 
 
 /* ################################################################## */
@@ -1970,8 +2091,9 @@ if ($PCO_Accion=="administrar_informes")
 								<td>'.$registro["categoria"].'</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="dco'.$registro["id"].'" id="dco'.$registro["id"].'">
-												<input type="hidden" name="PCO_Accion" value="clonar_diseno_informe">
+												<input type="hidden" name="PCO_Accion" value="definir_copia_informes">
 												<input type="hidden" name="informe" value="'.$registro["id"].'">
+												<input type="hidden" name="titulo_informe" value="'.$registro["titulo"].'">
                                                 <a class="btn btn-default btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["id"].');"><i class="fa fa-code-fork"></i> '.$MULTILANG_FrmCopiar.'</a>
 										</form>
 								</td>

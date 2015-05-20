@@ -53,6 +53,7 @@
 			if ($PCO_Accion== "guardar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
 			if ($PCO_Accion== "editar_informe")						$retorno = permiso_agregado_accion("administrar_informes");
 			if ($PCO_Accion== "clonar_diseno_informe")				$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "definir_copia_informes")				$retorno = permiso_agregado_accion("administrar_informes");
 			if ($PCO_Accion== "eliminar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
 			if ($PCO_Accion== "actualizar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
 			if ($PCO_Accion== "eliminar_informe_tabla")				$retorno = permiso_agregado_accion("administrar_informes");
@@ -108,6 +109,7 @@
 			if ($PCO_Accion== "actualizar_datos_formulario")		$retorno = 1;
 			if ($PCO_Accion== "actualizar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
 			if ($PCO_Accion== "copiar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
+			if ($PCO_Accion== "definir_copia_formularios")			$retorno = permiso_agregado_accion("administrar_formularios");
 			if ($PCO_Accion== "actualizar_campo_formulario")		$retorno = permiso_agregado_accion("administrar_formularios");
 			if ($PCO_Accion== "guardar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
 			if ($PCO_Accion== "eliminar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
@@ -213,6 +215,36 @@
 				}
 			//echo $PCOSESS_LoginUsuario.':Permiso raiz admin='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
 			return $retorno;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: registro_a_xml
+	Traduce un registro de base de datos a notacion XML y retorna su cadena equivalente
+
+	Ver tambien:
+		<copiar_formulario> | <copiar_informe>
+*/
+	function registro_a_xml($Registro_BD,$ListaCampos,$NombreCampoVinculo="",$ValorCampoVinculo="")
+		{
+			//Inicializa la variable de retorno
+			$Contenido_XML="";
+			// Busca datos y genera XML de cada registro
+			$Elementos_tabla=explode(",",$ListaCampos);
+			
+			foreach ($Elementos_tabla as $ElementoExportar)
+				{
+					$EtiquetaAperturaXML="<$ElementoExportar>";
+					$EtiquetaCierreXML="</$ElementoExportar>";
+					$ValorEtiqueta=$Registro_BD[$ElementoExportar];
+					$Contenido_XML .= "
+		".$EtiquetaAperturaXML.$ValorEtiqueta.$EtiquetaCierreXML;
+				}	
+			
+			//Retorna la cadena equivalente
+			return $Contenido_XML;
 		}
 
 

@@ -515,6 +515,15 @@
     $MULTILANG_FrmActualizaAjax='Dynamic reload';
     $MULTILANG_FrmActivarInline='<i>Inline</i> view: Work in onjunction with next and previous elements';
     $MULTILANG_FrmActivarInlineDes='Allow to put the control using an inline style to keep a new line before publish the control over the form. Acording the effect you want, previous or next element should activate this properti too';
+    $MULTILANG_FrmTipoCopia='Select what kind of copy do you want';
+    $MULTILANG_FrmTipoCopia1='Online';
+    $MULTILANG_FrmTipoCopia2='XML with current ID';
+    $MULTILANG_FrmTipoCopia3='XML with dynamic ID';
+    $MULTILANG_FrmTipoCopiaDes='<li>Online:</li> Creates a new object with a new ID.  That includes all the components linked to allow you create new forms or reports from an existing object.
+			<li>XML with current ID: Exports the object using XML sintax to allow you import it over other system using the current ID.  Usefull if you want to overwrite forms or reports with enhacements from other systems.</li>
+			<li>XML with dynamic ID: Exports the object using XML sintax but the new ID for the object is generated dinamically each time you import the file, with a different ID.  Usefull to replicate the functionallity of "Online" option but over differents systems.</li>';
+	$MULTILANG_FrmTipoCopiaExporta='Copying / Exporting';
+	$MULTILANG_FrmCopiaFinalizada='The copy process already finished.  You could clic on donwload button to get the XML file.';
 
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';

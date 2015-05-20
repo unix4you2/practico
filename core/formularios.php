@@ -2232,7 +2232,6 @@ if ($PCO_Accion=="editar_formulario")
 		}
 
 
-
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -2253,82 +2252,162 @@ if ($PCO_Accion=="editar_formulario")
 		{
 			$mensaje_error="";
 			if ($formulario=="")
-				$mensaje_error=$MULTILANG_ErrorTiempoEjecucion.".  No ID Form";
+				$mensaje_error=$MULTILANG_ErrorTiempoEjecucion.".  No ingreso ID de Formulario / Form ID not entered";
+			if ($tipo_copia_objeto=="")
+				$mensaje_error=$MULTILANG_ErrorTiempoEjecucion.".  No indicado modo de copia / Copy mode not entered";
+
+			$Contenido_XML="";
 
 			if ($mensaje_error=="")
 				{
-					// Busca datos y Crea copia del formulario
-					$consulta=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
-					$registro = $consulta->fetch();
-					// Establece valores para cada campo a insertar en el nuevo form
-					$nuevo_titulo='[COPIA] '.$registro["titulo"];
-					$ayuda_titulo=$registro["ayuda_titulo"];
-					$ayuda_texto=$registro["ayuda_texto"];
-					$tabla_datos=$registro["tabla_datos"];
-					$columnas=$registro["columnas"];
-					$javascript=$registro["javascript"];
-					$borde_visible=$registro["borde_visible"];
-					// Inserta el nuevo objeto al form
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?) ","$nuevo_titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible");
-					$id=$ConexionPDO->lastInsertId();
+					//Hace la copia del objeto segun el tipo solicitado
+					if ($tipo_copia_objeto=="EnLinea")
+						{	
+							// Busca datos y Crea copia del formulario
+							$consulta=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
+							$registro = $consulta->fetch();
+							// Establece valores para cada campo a insertar en el nuevo form
+							$nuevo_titulo='[COPIA] '.$registro["titulo"];
+							$ayuda_titulo=$registro["ayuda_titulo"];
+							$ayuda_texto=$registro["ayuda_texto"];
+							$tabla_datos=$registro["tabla_datos"];
+							$columnas=$registro["columnas"];
+							$javascript=$registro["javascript"];
+							$borde_visible=$registro["borde_visible"];
+							// Inserta el nuevo objeto al form
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?) ","$nuevo_titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible");
+							$id=$ConexionPDO->lastInsertId();
 
-					// Busca los elementos que componen el formulario para hacerles la copia
-                    //Determina cuantos campos tiene la tabla
-                    $ArregloCampos=explode(',',$ListaCamposSinID_formulario_objeto);
-                    $TotalCampos=count($ArregloCampos);
-					// Registros de formulario_objeto
-					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario=?","$formulario");
-					while($registro = $consulta->fetch())
-						{
-                            //Genera cadena de interrogantes y valores segun cantidad de campos
-                            $CadenaInterrogantes='?'; //Agrega el primer interrogante
-                            $CadenaValores=$registro[1];
-                            for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
-                                {
-                                    //Cadena de interrogantes
-                                    $CadenaInterrogantes.=',?';
-                                    //Cadena de valores (el campo No 5 corresponde al ID de formulario nuevo)
-                                    if ($PCOCampo!=5)
-                                        $CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
-                                    else
-                                        $CadenaValores.=$_SeparadorCampos_.$id;
-                                }
-							//Inserta el nuevo objeto al form
-                            ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto ($ListaCamposSinID_formulario_objeto) VALUES ($CadenaInterrogantes) ","$CadenaValores");                            
-						}				
+							// Busca los elementos que componen el formulario para hacerles la copia
+							//Determina cuantos campos tiene la tabla
+							$ArregloCampos=explode(',',$ListaCamposSinID_formulario_objeto);
+							$TotalCampos=count($ArregloCampos);
+							// Registros de formulario_objeto
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario=?","$formulario");
+							while($registro = $consulta->fetch())
+								{
+									//Genera cadena de interrogantes y valores segun cantidad de campos
+									$CadenaInterrogantes='?'; //Agrega el primer interrogante
+									$CadenaValores=$registro[1];
+									for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
+										{
+											//Cadena de interrogantes
+											$CadenaInterrogantes.=',?';
+											//Cadena de valores (el campo No 5 corresponde al ID de formulario nuevo)
+											if ($PCOCampo!=5)
+												$CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
+											else
+												$CadenaValores.=$_SeparadorCampos_.$id;
+										}
+									//Inserta el nuevo objeto al form
+									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto ($ListaCamposSinID_formulario_objeto) VALUES ($CadenaInterrogantes) ","$CadenaValores");                            
+								}				
 
-                    //Determina cuantos campos tiene la tabla
-                    $ArregloCampos=explode(',',$ListaCamposSinID_formulario_boton);
-                    $TotalCampos=count($ArregloCampos);
-					// Registros de formulario_boton
-					$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
-					while($registro = $consulta->fetch())
-						{
-                            //Genera cadena de interrogantes y valores segun cantidad de campos
-                            $CadenaInterrogantes='?'; //Agrega el primer interrogante
-                            $CadenaValores=$registro[1];
-                            for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
-                                {
-                                    //Cadena de interrogantes
-                                    $CadenaInterrogantes.=',?';
-                                    //Cadena de valores (el campo No 2 corresponde al ID de formulario nuevo)
-                                    if ($PCOCampo!=2)
-                                        $CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
-                                    else
-                                        $CadenaValores.=$_SeparadorCampos_.$id;
-                                }
-							//Inserta el nuevo objeto al form
-                            ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton ($ListaCamposSinID_formulario_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+							//Determina cuantos campos tiene la tabla
+							$ArregloCampos=explode(',',$ListaCamposSinID_formulario_boton);
+							$TotalCampos=count($ArregloCampos);
+							// Registros de formulario_boton
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
+							while($registro = $consulta->fetch())
+								{
+									//Genera cadena de interrogantes y valores segun cantidad de campos
+									$CadenaInterrogantes='?'; //Agrega el primer interrogante
+									$CadenaValores=$registro[1];
+									for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
+										{
+											//Cadena de interrogantes
+											$CadenaInterrogantes.=',?';
+											//Cadena de valores (el campo No 2 corresponde al ID de formulario nuevo)
+											if ($PCOCampo!=2)
+												$CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
+											else
+												$CadenaValores.=$_SeparadorCampos_.$id;
+										}
+									//Inserta el nuevo objeto al form
+									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton ($ListaCamposSinID_formulario_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+								}
+							auditar("Crea copia $tipo_copia_objeto de formulario $formulario");
+
+							// Regresa a la administracion de formularios
+							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+							<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
+							</form>
+							<script type="" language="JavaScript"> 
+							alert("'.$MULTILANG_FrmMsjCopia.$nuevo_titulo.' ID: '.$id.'");
+							document.cancelar.submit();  </script>';
 						}
-					auditar("Crea copia de formulario $formulario");
 
-					// Regresa a la administracion de formularios
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
-					</form>
-					<script type="" language="JavaScript"> 
-					alert("'.$MULTILANG_FrmMsjCopia.$nuevo_titulo.' ID: '.$id.'");
-					document.cancelar.submit();  </script>';
+
+					//Hace la copia del objeto segun el tipo solicitado
+					if ($tipo_copia_objeto=="XML_IdEstatico" || $tipo_copia_objeto=="XML_IdDinamico")
+						{
+							// Inicia el archivo XML
+							$Contenido_XML.="<?xml version=\"1.0\" encoding=\"utf-8\" ?>
+<objetos_practicos>
+	<descripcion>
+		<tipo_objeto>Formulario</tipo_objeto>
+		<version_compatible>$PCO_VersionActual</version_compatible>
+		<tipo_exportacion>$tipo_copia_objeto</tipo_exportacion>
+	</descripcion>";
+							// Exporta tabla core_formulario
+							$Contenido_XML .= "
+	<core_formulario>";
+							// Busca datos y genera XML de cada registro
+							$consulta=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
+							$registro = $consulta->fetch();
+							$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_formulario);
+							$Contenido_XML .= "
+	</core_formulario>";
+							// Registros de formulario_objeto
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario=?","$formulario");
+							while($registro = $consulta->fetch())
+								{
+									//Exporta la tabla de core_formulario_objeto
+									$Contenido_XML .= "
+	<core_formulario_objeto>";
+									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_formulario_objeto);                        
+							$Contenido_XML .= "
+	</core_formulario_objeto>";
+								}
+
+							// Registros de formulario_boton
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=?","$formulario");
+							while($registro = $consulta->fetch())
+								{
+									//Exporta la tabla de core_formulario_objeto
+									$Contenido_XML .= "
+	<core_formulario_boton>";
+									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_formulario_boton);                        
+							$Contenido_XML .= "
+	</core_formulario_boton>";
+								}
+
+							// Finaliza el archivo XML
+							$Contenido_XML .= "
+</objetos_practicos>";
+
+							auditar("Crea copia $tipo_copia_objeto de formulario $formulario");
+							
+							//Guarda la cadena generada en el archivo XML
+							$PCO_NombreArchivoXML="FormID_".$formulario."_".$PCO_FechaOperacion."_".$PCO_HoraOperacion.".xml";
+							$PCO_PunteroArchivo = fopen("tmp/".$PCO_NombreArchivoXML, "w");
+							if($PCO_PunteroArchivo==false)
+								die("No se puede abrir el archivo de exportacion");
+							fputs ($PCO_PunteroArchivo, $Contenido_XML);
+							fclose ($PCO_PunteroArchivo);
+							
+							//Presenta la ventana con informacion y enlace de descarga
+							abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
+								<div align=center>
+								<?php echo $MULTILANG_FrmCopiaFinalizada; ?>
+								<br><br>
+								<a class="btn btn-success" href="tmp/<?php echo $PCO_NombreArchivoXML; ?>" target="_BLANK"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar; ?></a>
+								<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+								</div>
+
+							<?php
+							cerrar_ventana();
+						}
 				}
 			else
 				{
@@ -2340,6 +2419,45 @@ if ($PCO_Accion=="editar_formulario")
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: definir_copia_formularios
+	Presenta opciones para generar una copia del formulario seleccionado usando diferentes formatos
+*/
+if ($PCO_Accion=="definir_copia_formularios")
+	{
+		 ?>
+
+        <form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<input type="Hidden" name="PCO_Accion" value="copiar_formulario">
+			<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">
+
+            <br>
+			<?php abrir_ventana($MULTILANG_FrmTipoObjeto, 'panel-primary'); ?>
+			<h4><?php echo $MULTILANG_FrmTipoCopiaExporta; ?>: <b><?php echo $titulo_formulario; ?></b> (ID=<?php echo $formulario; ?>)</h4>
+            <label for="tipo_copia_objeto"><?php echo $MULTILANG_FrmTipoCopia; ?>:</label>
+            <select id="tipo_copia_objeto" name="tipo_copia_objeto" class="form-control btn-warning" >
+                <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                <option value="EnLinea"><?php echo $MULTILANG_FrmTipoCopia1; ?></option>
+                <option value="XML_IdEstatico"><?php echo $MULTILANG_FrmTipoCopia2; ?></option>
+                <option value="XML_IdDinamico"><?php echo $MULTILANG_FrmTipoCopia3; ?></option>
+            </select>
+			<hr>
+			<b><?php echo $MULTILANG_Ayuda; ?></b><br>
+			<?php echo $MULTILANG_FrmTipoCopiaDes; ?>
+            </form>
+            <br>
+            <div align=center>
+            <a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCopiar; ?></a>
+            <a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+            </div>
+
+		<?php
+		cerrar_ventana();
+	}
 
 
 /* ################################################################## */
@@ -2495,8 +2613,9 @@ function FrmAutoRun()
 								<td>'.str_replace($TablasApp,'',$registro["tabla_datos"]).'</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="dco'.$registro["id"].'" id="dco'.$registro["id"].'">
-												<input type="hidden" name="PCO_Accion" value="copiar_formulario">
+												<input type="hidden" name="PCO_Accion" value="definir_copia_formularios">
 												<input type="hidden" name="formulario" value="'.$registro["id"].'">
+												<input type="hidden" name="titulo_formulario" value="'.$registro["titulo"].'">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["tabla_datos"].'">
                                                 <a class="btn btn-default btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["id"].');"><i class="fa fa-code-fork"></i> '.$MULTILANG_FrmCopiar.'</a>
 										</form>

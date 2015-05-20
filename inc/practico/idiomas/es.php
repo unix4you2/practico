@@ -512,6 +512,15 @@
     $MULTILANG_FrmActualizaAjax='Actualizar din&aacute;micamente';
     $MULTILANG_FrmActivarInline='Modo de vista <i>Inline</i> (Conjunto con el elemento anterior y siguiente)';
     $MULTILANG_FrmActivarInlineDes='Permite que el control sea diagramado con estilo inline, lo que impide el salto de linea previo a ser ubicado en el formulario.  Dependiendo del efecto deseado, el control anterior o siguiente tambien debera contar con esta propiedad activada.';
+    $MULTILANG_FrmTipoCopia='Indique el tipo de copia que desea realizar';
+    $MULTILANG_FrmTipoCopia1='En linea';
+    $MULTILANG_FrmTipoCopia2='XML con ID Actual';
+    $MULTILANG_FrmTipoCopia3='XML con ID Din&aacute;mico';
+    $MULTILANG_FrmTipoCopiaDes='<li>En linea: Crea un nuevo objeto con ID independiente identico al actual pero con todos sus elementos internos vinculados de manera que se pueda manipular para generar nuevas pantallas, formularios o informes derivados.</li>
+			<li>XML con ID Actual: Exporta el objeto actual en formato XML para que pueda ser importado sobre otro sistema conservando su mismo ID de objeto.  Util si desea sobreescribir formularios o informes previos con mejoras desde otros sistemas.</li>
+			<li>XML con ID Din&aacute;mico: Exporta el objeto en formato XML pero generando este de manera dinamica para que cuando sea importado se genere un nuevo objeto cada vez, con ID diferente por cada vez que importe el archivo.  Util para replicar el comportamiento de la opci&oacute;n "En Linea" pero sobre diferentes sistemas.</li>';
+	$MULTILANG_FrmTipoCopiaExporta='Copiando / Exportando';
+	$MULTILANG_FrmCopiaFinalizada='Se ha finalizado la copia del objeto.  Puede hacer clic en el boton de descargar para obtener su archivo XML equivalente.';
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

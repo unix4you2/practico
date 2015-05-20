@@ -42,10 +42,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="generator" content="Practico <?php  $version = file("inc/version_actual.txt"); echo trim($version[0]); ?>" />
+	<meta name="generator" content="Practico <?php  $PCO_VersionActual = file("inc/version_actual.txt"); $PCO_VersionActual = trim($PCO_VersionActual[0]); echo $PCO_VersionActual; ?>" />
 	<meta name="description" content="Generador de aplicaciones web - www.practico.org" />
     <meta name="author" content="John Arroyave G. - {www.practico.org} - {unix4you2 at gmail.com}">
-	<title><?php echo $NombreRAD; ?> <?php echo trim($version[0]); ?></title>
+	<title><?php echo $NombreRAD; ?> <?php echo $PCO_VersionActual; ?></title>
 
     <!-- CSS Core de Bootstrap -->
     <link href="inc/bootstrap/css/bootstrap.min.css" rel="stylesheet"  media="screen">
