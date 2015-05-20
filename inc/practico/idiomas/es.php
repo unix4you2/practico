@@ -42,8 +42,10 @@
 	$MULTILANG_Apagado='Apagado';
 	$MULTILANG_Aplicacion='Aplicaci&oacute;n';
     $MULTILANG_Aplicando='Aplicando';
+    $MULTILANG_Archivo='Archivo';
 	$MULTILANG_Asistente='Asistente';
 	$MULTILANG_Atencion='Atenci&oacute;n';
+	$MULTILANG_Avanzado='Avanzado';
 	$MULTILANG_Ayuda='Ayuda';
 	$MULTILANG_Basedatos='Base de datos';
 	$MULTILANG_Basicos='B&aacute;sicos';
@@ -54,6 +56,7 @@
 	$MULTILANG_Capturar='Capturar';
 	$MULTILANG_CaracteresCaptcha='N&uacute;mero de caracteres para captcha?';
     $MULTILANG_Cargando='Cargando';
+    $MULTILANG_Cargar='Cargar';
 	$MULTILANG_Cerrar='Cerrar';
 	$MULTILANG_CerrarSesion='Cerrar sesi&oacute;n';
 	$MULTILANG_Cliente='Cliente';
@@ -78,6 +81,7 @@
 	$MULTILANG_Disene='Dise&ntilde;e';
 	$MULTILANG_Editar='Editar';
 	$MULTILANG_Ejecutar='Ejecutar';
+	$MULTILANG_Elementos='Elementos';
 	$MULTILANG_Eliminar='Eliminar';
 	$MULTILANG_Embebido='Embebido';
 	$MULTILANG_Encendido='Encendido';
@@ -103,7 +107,9 @@
 	$MULTILANG_Hora='Hora';
 	$MULTILANG_IdiomaPredeterminado='Idioma predeterminado';
 	$MULTILANG_Imagen='Imagen';
+	$MULTILANG_Importando='Importando';
 	$MULTILANG_Importante='Importante';
+	$MULTILANG_Importar='Importar';
 	$MULTILANG_InfoAdicional='Informaci&oacute;n adicional';
 	$MULTILANG_Informes='Informes';
 	$MULTILANG_Ingresar='Ingresar';
@@ -119,6 +125,7 @@
 	$MULTILANG_No='No';
 	$MULTILANG_Nombre='Nombre';
 	$MULTILANG_NombreRAD='Nombre RAD';
+	$MULTILANG_Objeto='Objeto';
 	$MULTILANG_OlvideClave='Olvid&eacute; mi clave';
     $MULTILANG_Opcional='Opcional';
     $MULTILANG_Opcion='Opci&oacute;n';
@@ -521,6 +528,8 @@
 			<li>XML con ID Din&aacute;mico: Exporta el objeto en formato XML pero generando este de manera dinamica para que cuando sea importado se genere un nuevo objeto cada vez, con ID diferente por cada vez que importe el archivo.  Util para replicar el comportamiento de la opci&oacute;n "En Linea" pero sobre diferentes sistemas.</li>';
 	$MULTILANG_FrmTipoCopiaExporta='Copiando / Exportando';
 	$MULTILANG_FrmCopiaFinalizada='Se ha finalizado la copia del objeto.  Puede hacer clic en el boton de descargar para obtener su archivo XML equivalente.';
+	$MULTILANG_FrmImportar='Importar dise&ntilde;o desde archivo';
+	$MULTILANG_FrmImportarConflicto='Existen conflictos que deben ser resueltos antes de continuar con la importacion.';
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

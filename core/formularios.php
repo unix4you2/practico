@@ -2365,6 +2365,7 @@ if ($PCO_Accion=="editar_formulario")
 	</core_formulario>";
 							// Registros de formulario_objeto
 							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario=?","$formulario");
+							$conteo_elementos_xml=0;
 							while($registro = $consulta->fetch())
 								{
 									//Exporta la tabla de core_formulario_objeto
@@ -2373,7 +2374,12 @@ if ($PCO_Accion=="editar_formulario")
 									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_formulario_objeto);                        
 							$Contenido_XML .= "
 	</core_formulario_objeto>";
+									$conteo_elementos_xml++;
 								}
+							//Agrega el total de elementos y resetea contador para el siguiente
+									$Contenido_XML .= "
+	<total_core_formulario_objeto>$conteo_elementos_xml</total_core_formulario_objeto>";
+							$conteo_elementos_xml=0;
 
 							// Registros de formulario_boton
 							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=?","$formulario");
@@ -2385,7 +2391,12 @@ if ($PCO_Accion=="editar_formulario")
 									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_formulario_boton);                        
 							$Contenido_XML .= "
 	</core_formulario_boton>";
+									$conteo_elementos_xml++;
 								}
+							//Agrega el total de elementos y resetea contador para el siguiente
+									$Contenido_XML .= "
+	<total_core_formulario_boton>$conteo_elementos_xml</total_core_formulario_boton>";
+							$conteo_elementos_xml=0;
 
 							// Finaliza el archivo XML
 							$Contenido_XML .= "
@@ -2468,6 +2479,165 @@ if ($PCO_Accion=="definir_copia_formularios")
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: analizar_importacion_formulario
+	Revisa el archivo cargado sobre /tmp para validar si se trata de un objeto definido correctamente
+
+	Variables de entrada:
+
+		archivo_cargado - Ruta absoluta hacia el archivo cargado en el paso anterior del asistente
+
+	Salida:
+		Analisis del archivo y detalles del objeto
+*/
+if ($PCO_Accion=="analizar_importacion_formulario")
+	{
+		echo "<br>";
+		abrir_ventana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
+
+		if ($mensaje_error=="")
+			{
+                $existen_conflictos_entre_ids=0;
+                //Carga el archivo en una cadena
+                $cadena_xml_importado = file_get_contents($archivo_cargado);
+				// Usa SimpleXML Directamente para interpretar respuesta
+				$xml_importado = @simplexml_load_string($cadena_xml_importado);
+
+                //Presenta contenido del archivo
+                echo "<b>$MULTILANG_Detalles $MULTILANG_Archivo</b>:<br>
+					<li> $MULTILANG_Version (Practico): {$xml_importado->descripcion[0]->version_practico}<br>
+					<li> $MULTILANG_Tipo $MULTILANG_Archivo: {$xml_importado->descripcion[0]->tipo_exportacion}<br>
+					<li> $MULTILANG_Aplicacion: {$xml_importado->descripcion[0]->sistema_origen} {$xml_importado->descripcion[0]->version}<br>
+					<li> $MULTILANG_GeneradoPor: {$xml_importado->descripcion[0]->usuario_generador} ({$xml_importado->descripcion[0]->fecha_exportacion} {$xml_importado->descripcion[0]->hora_exportacion})<hr>
+					<b>$MULTILANG_Detalles $MULTILANG_Objeto</b>:<br>
+					<li> $MULTILANG_Tipo: {$xml_importado->descripcion[0]->tipo_objeto}<br>
+					<li> $MULTILANG_Titulo: {$xml_importado->core_formulario[0]->titulo}<br>
+
+					
+                
+                <hr>
+                <b>$MULTILANG_Elementos</b>:
+                
+                
+                
+                <br><hr>
+                ";
+                
+                //Agrega el boton de continuar solamente si no hay conflictos entre IDs
+                if ($existen_conflictos_entre_ids==0)
+                    echo '
+						<input type="Hidden" name="PCO_Accion" value="aplicar_parche">
+						<input type="Hidden" name="version_actual" value="'.$version_actual.'">
+						<input type="Hidden" name="version_final" value="'.$version_final.'">
+						<input type="Hidden" name="archivo_cargado" value="'.$archivo_cargado.'">
+                        <button type="submit" class="btn btn-danger btn-block"><i class="fa fa-warning texto-blink icon-yellow"></i> '.$MULTILANG_Importar.' <i class="fa fa-warning texto-blink icon-yellow"></i></button>
+					</form>';
+                else
+                    mensaje('<i class="fa fa-warning fa-2x text-red texto-blink"></i> '.$MULTILANG_Error, $MULTILANG_FrmImportarConflicto, '', '', 'alert alert-danger alert-dismissible');
+				auditar("$MULTILANG_Importando $archivo_cargado");
+			}
+		else
+			{
+				echo '			
+				<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ActErrGral.'">
+					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+					</form>
+					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+			}
+		echo '</center>';
+		echo '<br><a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
+
+		cerrar_ventana();
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: importar_formulario
+	Presenta el paso 1 de importacion de formularios
+*/
+if ($PCO_Accion=="importar_formulario")
+	{
+		abrir_ventana($NombreRAD.' - '.$MULTILANG_FrmImportar,'panel-info');
+?>
+
+    <ul class="nav nav-tabs nav-justified">
+    <li class="active"><a href="#pestana_importacion" data-toggle="tab"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_Cargar; ?> XML</a></li>
+    <li><a href="#historico_importaciones" data-toggle="tab"><i class="fa fa-history"></i> <?php echo $MULTILANG_Historico; ?></a></li>
+    </ul>
+
+    <div class="tab-content">
+        
+        <!-- INICIO TAB IMPORTACION -->
+        <div class="tab-pane fadein active" id="pestana_importacion">
+            <br>
+            <div align="center">
+                        <form action="<?php echo $ArchivoCORE; ?>" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="extension_archivo" value=".xml">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="8192000">
+                            <input type="Hidden" name="PCO_Accion" value="cargar_archivo">
+                            <input type="Hidden" name="siguiente_accion" value="analizar_importacion_formulario">
+                            <input type="Hidden" name="texto_boton_siguiente" value="Continuar con la revisi&oacute;n">
+                            <input type="Hidden" name="carpeta" value="tmp">
+                            <input name="archivo" type="file" class="form-control btn btn-info">
+                            <br>
+                            <button type="submit"  class="btn btn-success"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_CargarArchivo; ?></button> (<?php echo $MULTILANG_ActSobreescritos; ?>)
+                        </form> 
+                        <hr>
+            </div>
+        </div>
+        <!-- FIN TAB IMPORTACION -->
+        
+
+        <!-- INICIO TAB HISTORICO DE IMPORTACIONES -->
+        <div class="tab-pane fade" id="historico_importaciones">
+                <div class="well well-sm"><b>Ultimos 30 registros / Last 30 records</b></div>
+                <table id="TablaAcciones" class="table table-condensed table-hover table-unbordered btn-xs table-striped">
+                    <thead>
+					<tr>
+						<th><b><?php echo $MULTILANG_UsrLogin; ?></b></th>
+						<th><b><?php echo $MULTILANG_UsrAudDes; ?></b></th>
+						<th><b><?php echo $MULTILANG_Fecha; ?></b></th>
+						<th><b><?php echo $MULTILANG_Hora; ?></b></th>
+					</tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                        // Busca por las auditorias asociadas a actualizacion de plataforma:
+                        // Acciones:  Actualiza version de plataforma | _Actualizacion_ | Analiza archivo tmp/Practico | Carga archivo en carpeta tmp - Practico
+                        $resultado=@ejecutar_sql("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE (accion LIKE '%Actualiza version de plataforma%' OR accion LIKE '%_Actualizacion_%' OR accion LIKE '%Analiza archivo tmp/Practico%' OR accion LIKE '%Carga archivo en carpeta tmp - Practico%') ORDER BY fecha DESC, hora DESC LIMIT 0,30");
+                        while($registro = $resultado->fetch())
+                            {
+                                echo '<tr>
+                                        <td>'.$registro["usuario_login"].'</td>
+                                        <td>'.$registro["accion"].'</td>
+                                        <td>'.$registro["fecha"].'</td>
+                                        <td>'.$registro["hora"].'</td>
+                                    </tr>';
+                            }
+                    ?>
+                    </tbody>
+                </table>
+
+        </div>
+        <!-- FIN TAB HISTORICO DE IMPORTACIONES -->
+        
+    </div>
+
+<?php
+		abrir_barra_estado();
+		echo '<a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
+		cerrar_barra_estado();
+		cerrar_ventana();
+        $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: administrar_formularios
 	Presenta ventanas con la posibilidad de agregar nuevo formulario a la aplicacion y el listado para administrar o editar los existentes
 
@@ -2544,7 +2714,7 @@ function FrmAutoRun()
                                     // Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
                                     if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
                                         echo '<option value="'.$registro[0].'" >'.str_replace($TablasApp,'',$registro[0]).'</option>';
-                                }		
+                                }
                     ?>
                 </select>
                 <span class="input-group-addon">
@@ -2582,10 +2752,16 @@ function FrmAutoRun()
             <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCreaDisena; ?></a>
             <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 
-		<?php
-		cerrar_ventana();	
+		<?php	cerrar_ventana();	?>
 
-?>
+
+        <form name="importacion" id="importacion" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<input type="Hidden" name="PCO_Accion" value="importar_formulario">
+			<?php abrir_ventana($MULTILANG_FrmAgregar." ($MULTILANG_Avanzado)", 'panel-default'); ?>
+            </form>
+            <a class="btn btn-warning btn-block" href="javascript:document.importacion.submit();"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_FrmImportar; ?></a>
+		<?php	cerrar_ventana();	?>
+
 
   </div>    
   <div class="col-md-8">

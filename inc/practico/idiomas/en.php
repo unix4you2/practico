@@ -42,8 +42,10 @@
 	$MULTILANG_Apagado='Off';
 	$MULTILANG_Aplicacion='Application';
     $MULTILANG_Aplicando='Applying';
+    $MULTILANG_Archivo='File';
 	$MULTILANG_Asistente='Wizard';
 	$MULTILANG_Atencion='Attention';
+	$MULTILANG_Avanzado='Advanced';
 	$MULTILANG_Ayuda='Help';
 	$MULTILANG_Basedatos='Data base';
 	$MULTILANG_Basicos='Basics';
@@ -54,6 +56,7 @@
 	$MULTILANG_Capturar='Capture';
 	$MULTILANG_CaracteresCaptcha='Number of characters for captcha?';
     $MULTILANG_Cargando='Loading';
+    $MULTILANG_Cargar='Upload';
 	$MULTILANG_Cerrar='Close';
 	$MULTILANG_CerrarSesion='Logout';
 	$MULTILANG_Cliente='Client';
@@ -78,6 +81,7 @@
 	$MULTILANG_Disene='Design';
 	$MULTILANG_Editar='Edit';
 	$MULTILANG_Ejecutar='Execute';
+	$MULTILANG_Elementos='Elements';
 	$MULTILANG_Eliminar='Delete';
 	$MULTILANG_Embebido='Embed';
 	$MULTILANG_Encendido='On';
@@ -103,7 +107,9 @@
 	$MULTILANG_Hora='Time';
 	$MULTILANG_IdiomaPredeterminado='Default language';
 	$MULTILANG_Imagen='Picture';
+	$MULTILANG_Importando='Importing';
 	$MULTILANG_Importante='Important';
+	$MULTILANG_Importar='Importar';
 	$MULTILANG_InfoAdicional='Additional information';
 	$MULTILANG_Informes='Reports';
 	$MULTILANG_Ingresar='Sign in';
@@ -119,6 +125,7 @@
 	$MULTILANG_No='No';
 	$MULTILANG_Nombre='Name';
 	$MULTILANG_NombreRAD='RAD Name';
+    $MULTILANG_Objeto='Object';
     $MULTILANG_OlvideClave='I forgot my password';
 	$MULTILANG_Opcional='Optional';
     $MULTILANG_Opcion='Option';
@@ -524,6 +531,8 @@
 			<li>XML with dynamic ID: Exports the object using XML sintax but the new ID for the object is generated dinamically each time you import the file, with a different ID.  Usefull to replicate the functionallity of "Online" option but over differents systems.</li>';
 	$MULTILANG_FrmTipoCopiaExporta='Copying / Exporting';
 	$MULTILANG_FrmCopiaFinalizada='The copy process already finished.  You could clic on donwload button to get the XML file.';
+	$MULTILANG_FrmImportar='Import a design from a file';
+	$MULTILANG_FrmImportarConflicto='There are conflicts that you need to solve before continue with the importing process';
 
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';
