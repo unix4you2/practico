@@ -523,9 +523,9 @@
     $MULTILANG_FrmTipoCopia1='En linea';
     $MULTILANG_FrmTipoCopia2='XML con ID Actual';
     $MULTILANG_FrmTipoCopia3='XML con ID Din&aacute;mico';
-    $MULTILANG_FrmTipoCopiaDes='<li>En linea: Crea un nuevo objeto con ID independiente identico al actual pero con todos sus elementos internos vinculados de manera que se pueda manipular para generar nuevas pantallas, formularios o informes derivados.</li>
-			<li>XML con ID Actual: Exporta el objeto actual en formato XML para que pueda ser importado sobre otro sistema conservando su mismo ID de objeto.  Util si desea sobreescribir formularios o informes previos con mejoras desde otros sistemas.</li>
-			<li>XML con ID Din&aacute;mico: Exporta el objeto en formato XML pero generando este de manera dinamica para que cuando sea importado se genere un nuevo objeto cada vez, con ID diferente por cada vez que importe el archivo.  Util para replicar el comportamiento de la opci&oacute;n "En Linea" pero sobre diferentes sistemas.</li>';
+    $MULTILANG_FrmTipoCopiaDes1='En linea: Crea un nuevo objeto con ID independiente identico al actual pero con todos sus elementos internos vinculados de manera que se pueda manipular para generar nuevas pantallas, formularios o informes derivados.';
+    $MULTILANG_FrmTipoCopiaDes2='XML con ID Actual: Exporta/Importa el objeto actual en formato XML para que pueda ser importado sobre otro sistema conservando su mismo ID de objeto.  Util si desea sobreescribir formularios o informes previos con mejoras desde otros sistemas.';
+    $MULTILANG_FrmTipoCopiaDes3='XML con ID Din&aacute;mico: Exporta/Importa el objeto en formato XML pero generando este de manera dinamica para que cuando sea importado se genere un nuevo objeto cada vez, con ID diferente por cada vez que importe el archivo.  Util para replicar el comportamiento de la opci&oacute;n "En Linea" pero sobre diferentes sistemas.';
 	$MULTILANG_FrmTipoCopiaExporta='Copiando / Exportando';
 	$MULTILANG_FrmCopiaFinalizada='Se ha finalizado la copia del objeto.  Puede hacer clic en el boton de descargar para obtener su archivo XML equivalente.';
 	$MULTILANG_FrmImportar='Importar dise&ntilde;o desde archivo';

@@ -118,6 +118,9 @@
 			if ($PCO_Accion== "eliminar_campo_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
 			if ($PCO_Accion== "guardar_accion_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
 			if ($PCO_Accion== "eliminar_accion_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
+			if ($PCO_Accion== "confirmar_importacion_formulario")	$retorno = permiso_agregado_accion("administrar_formularios");
+			if ($PCO_Accion== "analizar_importacion_formulario")	$retorno = permiso_agregado_accion("administrar_formularios");
+			if ($PCO_Accion== "importar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
 			// Funciones en core/sesion.php
 			if ($PCO_Accion== "Iniciar_login")						$retorno = 1;
 			if ($PCO_Accion== "Terminar_sesion")					$retorno = 1;
@@ -227,7 +230,7 @@
 	Ver tambien:
 		<copiar_formulario> | <copiar_informe>
 */
-	function registro_a_xml($Registro_BD,$ListaCampos,$NombreCampoVinculo="",$ValorCampoVinculo="")
+	function registro_a_xml($Registro_BD,$ListaCampos,$CodificarBase64=1)
 		{
 			//Inicializa la variable de retorno
 			$Contenido_XML="";
@@ -239,6 +242,8 @@
 					$EtiquetaAperturaXML="<$ElementoExportar>";
 					$EtiquetaCierreXML="</$ElementoExportar>";
 					$ValorEtiqueta=$Registro_BD[$ElementoExportar];
+					if ($CodificarBase64==1)
+						$ValorEtiqueta=base64_encode($ValorEtiqueta);
 					$Contenido_XML .= "
 		".$EtiquetaAperturaXML.$ValorEtiqueta.$EtiquetaCierreXML;
 				}	

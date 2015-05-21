@@ -2113,7 +2113,7 @@ if ($PCO_Accion=="editar_formulario")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: eliminar_formulario
+	Function: PCOFUNC_eliminar_formulario
 	Elimina un formulario definido para la aplicacion incluyendo todos los objetos definidos en su interior
 
 	Variables de entrada:
@@ -2132,12 +2132,38 @@ if ($PCO_Accion=="editar_formulario")
 	Ver tambien:
 		<administrar_formularios>
 */
+	function PCOFUNC_eliminar_formulario($formulario="")
+		{
+			global $TablasCore;
+			if ($formulario!="")
+				{
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario=? ","$formulario");
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
+					auditar("Elimina formulario $formulario");
+				}				
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: eliminar_formulario
+	Alias de paso para PCOFUNC_eliminar_formulario
+
+	Variables de entrada:
+
+		formulario - ID unico de identificacion del formulario a eliminar
+
+	Salida:
+		Registro eliminado
+
+	Ver tambien:
+		<administrar_formularios>
+*/
 	if ($PCO_Accion=="eliminar_formulario")
 		{
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario=? ","$formulario");
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
-			auditar("Elimina formulario $formulario");
+			PCOFUNC_eliminar_formulario($formulario);
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_formularios"></form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 		}
@@ -2378,7 +2404,7 @@ if ($PCO_Accion=="editar_formulario")
 								}
 							//Agrega el total de elementos y resetea contador para el siguiente
 									$Contenido_XML .= "
-	<total_core_formulario_objeto>$conteo_elementos_xml</total_core_formulario_objeto>";
+	<total_core_formulario_objeto><cantidad_objetos>$conteo_elementos_xml</cantidad_objetos></total_core_formulario_objeto>";
 							$conteo_elementos_xml=0;
 
 							// Registros de formulario_boton
@@ -2395,7 +2421,7 @@ if ($PCO_Accion=="editar_formulario")
 								}
 							//Agrega el total de elementos y resetea contador para el siguiente
 									$Contenido_XML .= "
-	<total_core_formulario_boton>$conteo_elementos_xml</total_core_formulario_boton>";
+	<total_core_formulario_boton><cantidad_objetos>$conteo_elementos_xml</cantidad_objetos></total_core_formulario_boton>";
 							$conteo_elementos_xml=0;
 
 							// Finaliza el archivo XML
@@ -2417,7 +2443,7 @@ if ($PCO_Accion=="editar_formulario")
 								<div align=center>
 								<?php echo $MULTILANG_FrmCopiaFinalizada; ?>
 								<br><br>
-								<a class="btn btn-success" href="tmp/<?php echo $PCO_NombreArchivoXML; ?>" target="_BLANK"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar; ?></a>
+								<a class="btn btn-success" href="tmp/<?php echo $PCO_NombreArchivoXML; ?>" target="_BLANK" download><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar; ?></a>
 								<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 								</div>
 
@@ -2463,7 +2489,9 @@ if ($PCO_Accion=="definir_copia_formularios")
             </select>
 			<hr>
 			<b><?php echo $MULTILANG_Ayuda; ?></b><br>
-			<?php echo $MULTILANG_FrmTipoCopiaDes; ?>
+			<li><?php echo $MULTILANG_FrmTipoCopiaDes1; ?></li>
+			<li><?php echo $MULTILANG_FrmTipoCopiaDes2; ?></li>
+			<li><?php echo $MULTILANG_FrmTipoCopiaDes3; ?></li>
             </form>
             <br>
             <div align=center>
@@ -2473,6 +2501,71 @@ if ($PCO_Accion=="definir_copia_formularios")
 
 		<?php
 		cerrar_ventana();
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: confirmar_importacion_formulario
+	Lee el archivo cargado sobre /tmp y regenera el objeto alli existente
+
+	Variables de entrada:
+
+		archivo_cargado - Ruta absoluta hacia el archivo analizado en el paso anterior del asistente
+
+	Salida:
+		Objetos generados a partir de la definicion del archivo
+*/
+if ($PCO_Accion=="confirmar_importacion_formulario")
+	{
+		echo "<br>";
+		abrir_ventana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
+		if ($archivo_cargado=="")
+			$mensaje_error=$MULTILANG_ErrorTiempoEjecucion;
+		else
+			{
+                //Carga el archivo en una cadena
+                $cadena_xml_importado = file_get_contents($archivo_cargado);
+				// Usa SimpleXML Directamente para interpretar respuesta
+				$xml_importado = @simplexml_load_string($cadena_xml_importado);
+			}
+		if ($xml_importado->descripcion[0]->version_practico!=$PCO_VersionActual) $mensaje_error=$MULTILANG_ActErrGral;
+
+		if ($mensaje_error=="")
+			{
+				//Si es tipo estatico elimina el formulario existente con el mismo ID
+				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
+					PCOFUNC_eliminar_formulario(base64_decode($xml_importado->core_formulario[0]->id));
+
+
+
+
+
+
+
+
+
+
+
+				echo '<a class="btn btn-block btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
+				auditar("$MULTILANG_Importando $archivo_cargado");
+				
+			}
+		else
+			{
+				echo '			
+				<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ActErrGral.'">
+					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+					</form>
+					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+			}
+		echo '</center>';
+
+		cerrar_ventana();
+        $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 
 
@@ -2504,30 +2597,47 @@ if ($PCO_Accion=="analizar_importacion_formulario")
 
                 //Presenta contenido del archivo
                 echo "<b>$MULTILANG_Detalles $MULTILANG_Archivo</b>:<br>
-					<li> $MULTILANG_Version (Practico): {$xml_importado->descripcion[0]->version_practico}<br>
-					<li> $MULTILANG_Tipo $MULTILANG_Archivo: {$xml_importado->descripcion[0]->tipo_exportacion}<br>
-					<li> $MULTILANG_Aplicacion: {$xml_importado->descripcion[0]->sistema_origen} {$xml_importado->descripcion[0]->version}<br>
-					<li> $MULTILANG_GeneradoPor: {$xml_importado->descripcion[0]->usuario_generador} ({$xml_importado->descripcion[0]->fecha_exportacion} {$xml_importado->descripcion[0]->hora_exportacion})<hr>
+					<li> <u>$MULTILANG_Version (Practico)</u>: {$xml_importado->descripcion[0]->version_practico}<br>
+					<li> <u>$MULTILANG_Tipo $MULTILANG_Archivo</u>: ";
+				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico") echo $MULTILANG_FrmTipoCopiaDes2;
+				else echo $MULTILANG_FrmTipoCopiaDes3;
+
+				echo "<br>
+					<li> <u>$MULTILANG_Aplicacion</u>: {$xml_importado->descripcion[0]->sistema_origen} {$xml_importado->descripcion[0]->version}<br>
+					<li> <u>$MULTILANG_GeneradoPor</u>: {$xml_importado->descripcion[0]->usuario_generador} ({$xml_importado->descripcion[0]->fecha_exportacion} {$xml_importado->descripcion[0]->hora_exportacion})<hr>
 					<b>$MULTILANG_Detalles $MULTILANG_Objeto</b>:<br>
 					<li> $MULTILANG_Tipo: {$xml_importado->descripcion[0]->tipo_objeto}<br>
-					<li> $MULTILANG_Titulo: {$xml_importado->core_formulario[0]->titulo}<br>
+					<li> $MULTILANG_Titulo: ".base64_decode($xml_importado->core_formulario[0]->titulo)."<br>
+                <hr>";
+                
+				//Recorre los core_formulario_objeto
+				echo '<div class="btn btn-block btn-primary">'.$MULTILANG_FrmDesCampos.'</div><ul class="list-group">';
+				for ($PCO_i=0;$PCO_i<$xml_importado->total_core_formulario_objeto[0]->cantidad_objetos;$PCO_i++)
+					echo '<a class="list-group-item">
+						<span class="badge">ID '.$MULTILANG_Objeto.': '.base64_decode($xml_importado->core_formulario_objeto[$PCO_i]->id).'</span>
+						<b>'.base64_decode($xml_importado->core_formulario_objeto[$PCO_i]->titulo).'</b><i>
+						&nbsp;&nbsp;&nbsp;<u>'.$MULTILANG_Tipo.'</u>: '.base64_decode($xml_importado->core_formulario_objeto[$PCO_i]->tipo).'
+						&nbsp;&nbsp;&nbsp;<u>'.$MULTILANG_Campo.'</u>: '.base64_decode($xml_importado->core_formulario_objeto[$PCO_i]->campo).'
+						</i></a>';
+				echo '</ul>';
 
-					
-                
-                <hr>
-                <b>$MULTILANG_Elementos</b>:
-                
-                
-                
-                <br><hr>
-                ";
+				//Recorre los core_formulario_boton
+				echo '<div class="btn btn-block btn-primary">'.$MULTILANG_FrmAcciones.'</div><ul class="list-group">';
+				for ($PCO_i=0;$PCO_i<$xml_importado->total_core_formulario_boton[0]->cantidad_objetos;$PCO_i++)
+					echo '<a class="list-group-item">
+						<span class="badge">ID '.$MULTILANG_Objeto.': '.base64_decode($xml_importado->core_formulario_boton[$PCO_i]->id).'</span>
+						<b>'.base64_decode($xml_importado->core_formulario_boton[$PCO_i]->titulo).'</b><i>
+						&nbsp;&nbsp;&nbsp;<u>'.$MULTILANG_FrmTipoAcc.'</u>: '.base64_decode($xml_importado->core_formulario_boton[$PCO_i]->tipo_accion).'
+						&nbsp;&nbsp;&nbsp;<u>'.$MULTILANG_FrmAccUsuario.'</u>: '.base64_decode($xml_importado->core_formulario_boton[$PCO_i]->accion_usuario).'
+						</i></a>';
+				echo '</ul>';
+                echo "<br><hr>";
                 
                 //Agrega el boton de continuar solamente si no hay conflictos entre IDs
                 if ($existen_conflictos_entre_ids==0)
                     echo '
-						<input type="Hidden" name="PCO_Accion" value="aplicar_parche">
-						<input type="Hidden" name="version_actual" value="'.$version_actual.'">
-						<input type="Hidden" name="version_final" value="'.$version_final.'">
+                    <form name="goahead" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="confirmar_importacion_formulario">
 						<input type="Hidden" name="archivo_cargado" value="'.$archivo_cargado.'">
                         <button type="submit" class="btn btn-danger btn-block"><i class="fa fa-warning texto-blink icon-yellow"></i> '.$MULTILANG_Importar.' <i class="fa fa-warning texto-blink icon-yellow"></i></button>
 					</form>';
@@ -2549,6 +2659,7 @@ if ($PCO_Accion=="analizar_importacion_formulario")
 		echo '<br><a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 
 		cerrar_ventana();
+        $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 
 
@@ -2560,6 +2671,7 @@ if ($PCO_Accion=="analizar_importacion_formulario")
 */
 if ($PCO_Accion=="importar_formulario")
 	{
+		echo "<br>";
 		abrir_ventana($NombreRAD.' - '.$MULTILANG_FrmImportar,'panel-info');
 ?>
 
@@ -2607,7 +2719,7 @@ if ($PCO_Accion=="importar_formulario")
                     <?php
                         // Busca por las auditorias asociadas a actualizacion de plataforma:
                         // Acciones:  Actualiza version de plataforma | _Actualizacion_ | Analiza archivo tmp/Practico | Carga archivo en carpeta tmp - Practico
-                        $resultado=@ejecutar_sql("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE (accion LIKE '%Actualiza version de plataforma%' OR accion LIKE '%_Actualizacion_%' OR accion LIKE '%Analiza archivo tmp/Practico%' OR accion LIKE '%Carga archivo en carpeta tmp - Practico%') ORDER BY fecha DESC, hora DESC LIMIT 0,30");
+                        $resultado=@ejecutar_sql("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE accion LIKE '%$MULTILANG_FrmImportar%' AND accion LIKE '%.xml%' ORDER BY fecha DESC, hora DESC LIMIT 0,30");
                         while($registro = $resultado->fetch())
                             {
                                 echo '<tr>

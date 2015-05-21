@@ -1891,13 +1891,13 @@ if ($PCO_Accion=="guardar_informe")
 								die("No se puede abrir el archivo de exportacion");
 							fputs ($PCO_PunteroArchivo, $Contenido_XML);
 							fclose ($PCO_PunteroArchivo);
-							
+
 							//Presenta la ventana con informacion y enlace de descarga
 							abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
 								<div align=center>
 								<?php echo $MULTILANG_FrmCopiaFinalizada; ?>
 								<br><br>
-								<a class="btn btn-success" href="tmp/<?php echo $PCO_NombreArchivoXML; ?>" target="_BLANK"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar; ?></a>
+								<a class="btn btn-success" href="tmp/<?php echo $PCO_NombreArchivoXML; ?>" target="_BLANK" download><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar; ?></a>
 								<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 								</div>
 
@@ -1944,7 +1944,9 @@ if ($PCO_Accion=="definir_copia_informes")
             </select>
 			<hr>
 			<b><?php echo $MULTILANG_Ayuda; ?></b><br>
-			<?php echo $MULTILANG_FrmTipoCopiaDes; ?>
+			<li><?php echo $MULTILANG_FrmTipoCopiaDes1; ?></li>
+			<li><?php echo $MULTILANG_FrmTipoCopiaDes2; ?></li>
+			<li><?php echo $MULTILANG_FrmTipoCopiaDes3; ?></li>
             </form>
             <br>
             <div align=center>

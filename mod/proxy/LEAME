@@ -1,0 +1,15 @@
+                ____                 _   _           
+               |  _ \ _ __ __ _  ___| |_(_) ___ ___  
+               | |_) | '__/ _` |/ __| __| |/ __/ _ \ 
+               |  __/| | | (_| | (__| |_| | (_| (_) |
+               |_|   |_|  \__,_|\___|\__|_|\___\___/ 
+                                      
+- Modulo embebido de navegacion por Proxy desde Práctico.
+
+Modo de Uso:
+	1) Descomprimir el modulo mediante su proceso de instalacion normal o manualmente sobre /mod
+	2) Accesar Practico con credenciales de administrador y agregar un nuevo menu asi:
+		Texto:   Navegacion por proxy    (o el deseado por usted)
+		Tipo:    Interno
+		Accion:  PCO_Proxy
+	3) Haha clic sobre la nueva opcion para lanzar el módulo embebido
