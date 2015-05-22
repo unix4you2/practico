@@ -59,6 +59,7 @@ LogCambios="
 * Enhan: Autenticación federada prohibe actualizar perfiles de usuario y cambiar sus claves pues todo se toma del sistema federado.  Solo el admin sigue con la independencia.
 * Enhan: Reubicación de pestaña de historico de actualizaciones a la segunda posición, dejando las copias de seguridad al final.
 * Enhan: Agregada variable PCO_VersionActual para indicar la versión de la herramienta.
+* Enhan: Agregado indicador de modo de depuracion encendido en la parte superior.  Ademas el modo de depuración solo afecta al admin para evitar que otros usuarios vean mensajes de alerta que pueden no interesarles
 
 IMPORTANTE:  Aquellos usuarios que hagan uso extensivo de webservices deberian hacer los ajustes de nombre para sus variables de modo que estos sigan operantes despues del cambio.  Un simple buscar y reemplazar WSId por PCO_WSId en todos sus documentos debería ser suficiente.  Igual para las demás variables.
 "

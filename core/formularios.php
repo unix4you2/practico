@@ -2293,7 +2293,10 @@ if ($PCO_Accion=="editar_formulario")
 							$consulta=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
 							$registro = $consulta->fetch();
 							// Establece valores para cada campo a insertar en el nuevo form
-							$nuevo_titulo='[COPIA] '.$registro["titulo"];
+							/* ##########################################################################################################*/
+							/* ####### IMPORTANTE:  Ajustes sobre esta funcionde copia se deberian replicar en importaciones XML ########*/
+							/* ##########################################################################################################*/
+							$titulo='[COPIA] '.$registro["titulo"];
 							$ayuda_titulo=$registro["ayuda_titulo"];
 							$ayuda_texto=$registro["ayuda_texto"];
 							$tabla_datos=$registro["tabla_datos"];
@@ -2301,8 +2304,8 @@ if ($PCO_Accion=="editar_formulario")
 							$javascript=$registro["javascript"];
 							$borde_visible=$registro["borde_visible"];
 							// Inserta el nuevo objeto al form
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?) ","$nuevo_titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible");
-							$id=$ConexionPDO->lastInsertId();
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible");
+							$idObjetoInsertado=$ConexionPDO->lastInsertId();
 
 							// Busca los elementos que componen el formulario para hacerles la copia
 							//Determina cuantos campos tiene la tabla
@@ -2323,7 +2326,7 @@ if ($PCO_Accion=="editar_formulario")
 											if ($PCOCampo!=5)
 												$CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
 											else
-												$CadenaValores.=$_SeparadorCampos_.$id;
+												$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 										}
 									//Inserta el nuevo objeto al form
 									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto ($ListaCamposSinID_formulario_objeto) VALUES ($CadenaInterrogantes) ","$CadenaValores");                            
@@ -2347,7 +2350,7 @@ if ($PCO_Accion=="editar_formulario")
 											if ($PCOCampo!=2)
 												$CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
 											else
-												$CadenaValores.=$_SeparadorCampos_.$id;
+												$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 										}
 									//Inserta el nuevo objeto al form
 									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton ($ListaCamposSinID_formulario_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
@@ -2520,6 +2523,7 @@ if ($PCO_Accion=="definir_copia_formularios")
 if ($PCO_Accion=="confirmar_importacion_formulario")
 	{
 		echo "<br>";
+		$mensaje_error="";
 		abrir_ventana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
 		if ($archivo_cargado=="")
 			$mensaje_error=$MULTILANG_ErrorTiempoEjecucion;
@@ -2535,21 +2539,93 @@ if ($PCO_Accion=="confirmar_importacion_formulario")
 		if ($mensaje_error=="")
 			{
 				//Si es tipo estatico elimina el formulario existente con el mismo ID
+				$ListaCamposParaID="";
+				$InterroganteParaID="";
+				$ValorInsercionParaID="";
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
-					PCOFUNC_eliminar_formulario(base64_decode($xml_importado->core_formulario[0]->id));
+					{
+						$ListaCamposParaID="id,";
+						$InterroganteParaID="?,";
+						$ValorInsercionParaID=base64_decode($xml_importado->core_formulario[0]->id).$_SeparadorCampos_;
+						PCOFUNC_eliminar_formulario(base64_decode($xml_importado->core_formulario[0]->id));
+					}
 
+				// Establece valores para cada campo a insertar en el nuevo form
+				/* ##########################################################################################################*/
+				/* ####### IMPORTANTE: Ajustes sobre esta funcion se deberian replicar en funcion de copia asociadas ########*/
+				/* ##########################################################################################################*/
+				$titulo=base64_decode($xml_importado->core_formulario[0]->titulo);
+				$ayuda_titulo=base64_decode($xml_importado->core_formulario[0]->ayuda_titulo);
+				$ayuda_texto=base64_decode($xml_importado->core_formulario[0]->ayuda_texto);
+				$tabla_datos=base64_decode($xml_importado->core_formulario[0]->tabla_datos);
+				$columnas=base64_decode($xml_importado->core_formulario[0]->columnas);
+				$javascript=base64_decode($xml_importado->core_formulario[0]->javascript);
+				$borde_visible=base64_decode($xml_importado->core_formulario[0]->borde_visible);
+				// Inserta el nuevo objeto al form
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposParaID.$ListaCamposSinID_formulario.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible");
+				
+				//Determina el ID del registro
+				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
+					$idObjetoInsertado=base64_decode($xml_importado->core_formulario[0]->id);
+				else
+					$idObjetoInsertado=$ConexionPDO->lastInsertId();
 
+				// Busca los elementos que componen el formulario para hacerles la copia
+				//Determina cuantos campos tiene la tabla
+				$ArregloCampos=explode(',',$ListaCamposSinID_formulario_objeto);
+				$TotalCampos=count($ArregloCampos);
+				// Registros de formulario_objeto
+				for ($PCO_i=0;$PCO_i<$xml_importado->total_core_formulario_objeto[0]->cantidad_objetos;$PCO_i++)
+					{
+						//Genera cadena de interrogantes y valores segun cantidad de campos
+						$CadenaInterrogantes='?'; //Agrega el primer interrogante
+						$CadenaValores=base64_decode($xml_importado->core_formulario_objeto[$PCO_i]->tipo);
 
+						for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
+							{
+								//Cadena de interrogantes
+								$CadenaInterrogantes.=',?';
+								//Cadena de valores (el campo No 5 corresponde al ID de formulario nuevo)
+								if ($PCOCampo!=5)
+									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_formulario_objeto[$PCO_i]->$ArregloCampos[$PCOCampo]);
+								else
+									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
+							}
+						//Inserta el nuevo objeto al form
+						ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto ($ListaCamposSinID_formulario_objeto) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+					}
 
+				//Determina cuantos campos tiene la tabla
+				$ArregloCampos=explode(',',$ListaCamposSinID_formulario_boton);
+				$TotalCampos=count($ArregloCampos);
+				// Registros de formulario_objeto
+				for ($PCO_i=0;$PCO_i<$xml_importado->total_core_formulario_boton[0]->cantidad_objetos;$PCO_i++)
+					{
+						//Genera cadena de interrogantes y valores segun cantidad de campos
+						$CadenaInterrogantes='?'; //Agrega el primer interrogante
+						$CadenaValores=base64_decode($xml_importado->core_formulario_boton[$PCO_i]->titulo);
 
+						for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
+							{
+								//Cadena de interrogantes
+								$CadenaInterrogantes.=',?';
+								//Cadena de valores (el campo No 2 corresponde al ID de formulario nuevo)
+								if ($PCOCampo!=2)
+									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_formulario_boton[$PCO_i]->$ArregloCampos[$PCOCampo]);
+								else
+									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
+							}
+						//Inserta el nuevo objeto al form
+						ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton ($ListaCamposSinID_formulario_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+					}
 
-
-
-
-
-
-				echo '<a class="btn btn-block btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
-				auditar("$MULTILANG_Importando $archivo_cargado");
+				echo '
+				<b>'.$MULTILANG_FrmImportarGenerado.':</b><br>
+				<li>ID: '.$idObjetoInsertado.'</li>
+				<li>Titulo: '.$titulo.'</li>
+				<br>
+				<a class="btn btn-block btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
+				auditar("$MULTILANG_Importando $archivo_cargado en objeto $idObjetoInsertado");
 				
 			}
 		else

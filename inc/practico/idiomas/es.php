@@ -530,6 +530,7 @@
 	$MULTILANG_FrmCopiaFinalizada='Se ha finalizado la copia del objeto.  Puede hacer clic en el boton de descargar para obtener su archivo XML equivalente.';
 	$MULTILANG_FrmImportar='Importar dise&ntilde;o desde archivo';
 	$MULTILANG_FrmImportarConflicto='Existen conflictos que deben ser resueltos antes de continuar con la importacion.';
+	$MULTILANG_FrmImportarGenerado='Se ha generado el nuevo objeto';
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

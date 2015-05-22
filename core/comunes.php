@@ -3639,7 +3639,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
                     //Busca y convierte cada variable recibida en global
                     foreach ($arreglo_variables_filtro as $nombre_variable_filtro)
                         {
-                            if (isset($$nombre_variable_filtro))
+                            //if (isset($$nombre_variable_filtro))  // {Deprecated}
 								global $$nombre_variable_filtro;
                         }
                 }

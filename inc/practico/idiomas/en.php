@@ -533,6 +533,7 @@
 	$MULTILANG_FrmCopiaFinalizada='The copy process already finished.  You could click on donwload button to get the XML file.';
 	$MULTILANG_FrmImportar='Import a design from a file';
 	$MULTILANG_FrmImportarConflicto='There are conflicts that you need to solve before continue with the importing process';
+	$MULTILANG_FrmImportarGenerado='New object has been created';
 
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';
