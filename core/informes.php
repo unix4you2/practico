@@ -2165,7 +2165,7 @@ if ($PCO_Accion=="confirmar_importacion_informe")
 								//Cadena de interrogantes
 								$CadenaInterrogantes.=',?';
 								//Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
-								if ($PCOCampo!=1)
+								if ($PCOCampo!=2)
 									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_informe_boton[$PCO_i]->$ArregloCampos[$PCOCampo]);
 								else
 									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
