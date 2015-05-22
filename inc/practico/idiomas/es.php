@@ -531,6 +531,7 @@
 	$MULTILANG_FrmImportar='Importar dise&ntilde;o desde archivo';
 	$MULTILANG_FrmImportarConflicto='Existen conflictos que deben ser resueltos antes de continuar con la importacion.';
 	$MULTILANG_FrmImportarGenerado='Se ha generado el nuevo objeto';
+	$MULTILANG_FrmImportarAlerta='Se ha encontrado otro elemento con el mismo ID interno y tipo que el que usted desea importar.  El elemento que desea importar eliminara el existente y reemplazara el mismo con las definiciones desde el archivo XML.  Se recomienda que verifique previamente si desea sobreescribir el elemento en cuesti&oacute;n antes de continuar.';
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

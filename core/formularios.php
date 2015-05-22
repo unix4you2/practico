@@ -2362,7 +2362,7 @@ if ($PCO_Accion=="editar_formulario")
 							<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
 							</form>
 							<script type="" language="JavaScript"> 
-							alert("'.$MULTILANG_FrmMsjCopia.$nuevo_titulo.' ID: '.$id.'");
+							alert("'.$MULTILANG_FrmMsjCopia.$nuevo_titulo.' ID: '.$idObjetoInsertado.'");
 							document.cancelar.submit();  </script>';
 						}
 
@@ -2625,7 +2625,7 @@ if ($PCO_Accion=="confirmar_importacion_formulario")
 				<li>Titulo: '.$titulo.'</li>
 				<br>
 				<a class="btn btn-block btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
-				auditar("$MULTILANG_Importando $archivo_cargado en objeto $idObjetoInsertado");
+				auditar("Importa $archivo_cargado en objeto $idObjetoInsertado");
 				
 			}
 		else
@@ -2671,6 +2671,11 @@ if ($PCO_Accion=="analizar_importacion_formulario")
 				// Usa SimpleXML Directamente para interpretar respuesta
 				$xml_importado = @simplexml_load_string($cadena_xml_importado);
 
+                //Presenta alerta cuando encuentra otro elemento con el mismo ID y se trata de una importacion estatica
+                if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
+					if (existe_valor($TablasCore."formulario","id",base64_decode($xml_importado->core_formulario[0]->id)))
+						mensaje($MULTILANG_Atencion, $MULTILANG_FrmImportarAlerta, '', 'fa fa-fw fa-2x fa-warning', 'alert alert-dismissible alert-danger');
+                
                 //Presenta contenido del archivo
                 echo "<b>$MULTILANG_Detalles $MULTILANG_Archivo</b>:<br>
 					<li> <u>$MULTILANG_Version (Practico)</u>: {$xml_importado->descripcion[0]->version_practico}<br>
@@ -2684,6 +2689,7 @@ if ($PCO_Accion=="analizar_importacion_formulario")
 					<b>$MULTILANG_Detalles $MULTILANG_Objeto</b>:<br>
 					<li> $MULTILANG_Tipo: {$xml_importado->descripcion[0]->tipo_objeto}<br>
 					<li> $MULTILANG_Titulo: ".base64_decode($xml_importado->core_formulario[0]->titulo)."<br>
+					<li> ID: ".base64_decode($xml_importado->core_formulario[0]->id)."<br>
                 <hr>";
                 
 				//Recorre los core_formulario_objeto
@@ -2707,8 +2713,8 @@ if ($PCO_Accion=="analizar_importacion_formulario")
 						&nbsp;&nbsp;&nbsp;<u>'.$MULTILANG_FrmAccUsuario.'</u>: '.base64_decode($xml_importado->core_formulario_boton[$PCO_i]->accion_usuario).'
 						</i></a>';
 				echo '</ul>';
+
                 echo "<br><hr>";
-                
                 //Agrega el boton de continuar solamente si no hay conflictos entre IDs
                 if ($existen_conflictos_entre_ids==0)
                     echo '
@@ -2719,7 +2725,6 @@ if ($PCO_Accion=="analizar_importacion_formulario")
 					</form>';
                 else
                     mensaje('<i class="fa fa-warning fa-2x text-red texto-blink"></i> '.$MULTILANG_Error, $MULTILANG_FrmImportarConflicto, '', '', 'alert alert-danger alert-dismissible');
-				auditar("$MULTILANG_Importando $archivo_cargado");
 			}
 		else
 			{
@@ -2795,7 +2800,7 @@ if ($PCO_Accion=="importar_formulario")
                     <?php
                         // Busca por las auditorias asociadas a actualizacion de plataforma:
                         // Acciones:  Actualiza version de plataforma | _Actualizacion_ | Analiza archivo tmp/Practico | Carga archivo en carpeta tmp - Practico
-                        $resultado=@ejecutar_sql("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE accion LIKE '%$MULTILANG_FrmImportar%' AND accion LIKE '%.xml%' ORDER BY fecha DESC, hora DESC LIMIT 0,30");
+                        $resultado=@ejecutar_sql("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE accion LIKE '%Import%' AND accion LIKE '%.xml en objeto%' ORDER BY fecha DESC, hora DESC LIMIT 0,30");
                         while($registro = $resultado->fetch())
                             {
                                 echo '<tr>

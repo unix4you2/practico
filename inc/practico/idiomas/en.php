@@ -534,6 +534,7 @@
 	$MULTILANG_FrmImportar='Import a design from a file';
 	$MULTILANG_FrmImportarConflicto='There are conflicts that you need to solve before continue with the importing process';
 	$MULTILANG_FrmImportarGenerado='New object has been created';
+	$MULTILANG_FrmImportarAlerta='An element with the same internal ID and type that you want to import was founded in the system.  The file that you want to import will delete  the actual object and will fill it with the elements in the file.  We recommend you to check previously if you really want to overwrite the element before continue.';
 
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';

@@ -1559,6 +1559,43 @@ if ($PCO_Accion=="editar_informe")
 	}
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCOFUNC_eliminar_informe
+	Elimina un informe definido para la aplicacion incluyendo todos los objetos definidos en su interior
+
+	Variables de entrada:
+
+		informe - ID unico de identificacion del formulario a eliminar
+
+	(start code)
+		DELETE FROM ".$TablasCore."formulario WHERE id='$formulario'
+		DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario'
+		DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario
+	(end)
+
+	Salida:
+		Registro eliminado
+
+	Ver tambien:
+		<administrar_formularios>
+*/
+	function PCOFUNC_eliminar_informe($informe="")
+		{
+			global $TablasCore;
+			if ($informe!="")
+				{
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe WHERE id=? ","$informe");
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE informe=? ","$informe");
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_boton WHERE informe=? ","$informe");
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe=? ","$informe");
+					auditar("Elimina informe $informe");
+				}
+		}
+
 
 /* ################################################################## */
 /* ################################################################## */
@@ -1570,14 +1607,6 @@ if ($PCO_Accion=="editar_informe")
 
 		informe - ID del informe que sera eliminado
 
-		(start code)
-			DELETE FROM ".$TablasCore."informe WHERE id='$informe'
-			DELETE FROM ".$TablasCore."informe_campos WHERE informe='$informe'
-			DELETE FROM ".$TablasCore."informe_tablas WHERE informe='$informe'
-			DELETE FROM ".$TablasCore."informe_condiciones WHERE informe='$informe'
-			DELETE FROM ".$TablasCore."usuario_informe WHERE informe='$informe'
-		(end)
-
 	Salida:
 		Informe eliminado
 
@@ -1587,12 +1616,7 @@ if ($PCO_Accion=="editar_informe")
 */
 if ($PCO_Accion=="eliminar_informe")
 	{
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe WHERE id=? ","$informe");
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE informe=? ","$informe");
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe=? ","$informe");
-		auditar("Elimina informe $informe");
+		PCOFUNC_eliminar_informe($informe);
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_informes"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
@@ -1675,8 +1699,11 @@ if ($PCO_Accion=="guardar_informe")
 							// Busca datos y Crea copia del informe
 							$consulta=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=?","$informe");
 							$registro = $consulta->fetch();
-							// Establece valores para cada campo a insertar en el nuevo form
-							$nuevo_titulo='[COPIA] '.$registro["titulo"];
+							// Establece valores para cada campo a insertar en el nuevo informe
+							/* ##########################################################################################################*/
+							/* ####### IMPORTANTE:  Ajustes sobre esta funcionde copia se deberian replicar en importaciones XML ########*/
+							/* ##########################################################################################################*/
+							$titulo='[COPIA] '.$registro["titulo"];
 							$descripcion=$registro["descripcion"];
 							$categoria=$registro["categoria"];
 							$agrupamiento=$registro["agrupamiento"];
@@ -1691,9 +1718,9 @@ if ($PCO_Accion=="guardar_informe")
 							$formulario_filtrado=$registro["formulario_filtrado"];
 
 							// Inserta el nuevo informe
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ","$nuevo_titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado");
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado");
 							
-							$id=$ConexionPDO->lastInsertId();
+							$idObjetoInsertado=$ConexionPDO->lastInsertId();
 
 							// Busca los elementos que componen el informe para hacerles la copia
 							//Determina cuantos campos tiene la tabla
@@ -1705,7 +1732,7 @@ if ($PCO_Accion=="guardar_informe")
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
 									$CadenaInterrogantes='?'; //Agrega el primer interrogante
-									$CadenaValores=$id;
+									$CadenaValores=$idObjetoInsertado;
 									for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
 										{
 											//Cadena de interrogantes
@@ -1714,7 +1741,7 @@ if ($PCO_Accion=="guardar_informe")
 											if ($PCOCampo!=0)
 												$CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
 											else
-												$CadenaValores.=$_SeparadorCampos_.$id;
+												$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 										}
 									//Inserta el nuevo objeto al informe
 									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_condiciones ($ListaCamposSinID_informe_condiciones) VALUES ($CadenaInterrogantes) ","$CadenaValores");                            
@@ -1729,7 +1756,7 @@ if ($PCO_Accion=="guardar_informe")
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
 									$CadenaInterrogantes='?'; //Agrega el primer interrogante
-									$CadenaValores=$id;
+									$CadenaValores=$idObjetoInsertado;
 									for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
 										{
 											//Cadena de interrogantes
@@ -1738,7 +1765,7 @@ if ($PCO_Accion=="guardar_informe")
 											if ($PCOCampo!=0)
 												$CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
 											else
-												$CadenaValores.=$_SeparadorCampos_.$id;
+												$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 										}
 									//Inserta el nuevo objeto al informe
 									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_tablas ($ListaCamposSinID_informe_tablas) VALUES ($CadenaInterrogantes) ","$CadenaValores");
@@ -1754,7 +1781,7 @@ if ($PCO_Accion=="guardar_informe")
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
 									$CadenaInterrogantes='?'; //Agrega el primer interrogante
-									$CadenaValores=$id;
+									$CadenaValores=$idObjetoInsertado;
 									for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
 										{
 											//Cadena de interrogantes
@@ -1763,7 +1790,7 @@ if ($PCO_Accion=="guardar_informe")
 											if ($PCOCampo!=0)
 												$CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
 											else
-												$CadenaValores.=$_SeparadorCampos_.$id;
+												$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 										}
 									//Inserta el nuevo objeto al informe
 									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_campos ($ListaCamposSinID_informe_campos) VALUES ($CadenaInterrogantes) ","$CadenaValores");
@@ -1772,7 +1799,7 @@ if ($PCO_Accion=="guardar_informe")
 							//Determina cuantos campos tiene la tabla
 							$ArregloCampos=explode(',',$ListaCamposSinID_informe_boton);
 							$TotalCampos=count($ArregloCampos);
-							// Registros de formulario_boton
+							// Registros de informe_boton
 							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_boton WHERE informe=? ","$informe");
 							while($registro = $consulta->fetch())
 								{
@@ -1787,7 +1814,7 @@ if ($PCO_Accion=="guardar_informe")
 											if ($PCOCampo!=2)
 												$CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
 											else
-												$CadenaValores.=$_SeparadorCampos_.$id;
+												$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 										}
 									//Inserta el nuevo objeto al informe
 									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton ($ListaCamposSinID_informe_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
@@ -1983,6 +2010,400 @@ if ($PCO_Accion=="definir_copia_informes")
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: confirmar_importacion_informe
+	Lee el archivo cargado sobre /tmp y regenera el objeto alli existente
+
+	Variables de entrada:
+
+		archivo_cargado - Ruta absoluta hacia el archivo analizado en el paso anterior del asistente
+
+	Salida:
+		Objetos generados a partir de la definicion del archivo
+*/
+if ($PCO_Accion=="confirmar_importacion_informe")
+	{
+		echo "<br>";
+		$mensaje_error="";
+		abrir_ventana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
+		if ($archivo_cargado=="")
+			$mensaje_error=$MULTILANG_ErrorTiempoEjecucion;
+		else
+			{
+                //Carga el archivo en una cadena
+                $cadena_xml_importado = file_get_contents($archivo_cargado);
+				// Usa SimpleXML Directamente para interpretar respuesta
+				$xml_importado = @simplexml_load_string($cadena_xml_importado);
+			}
+		if ($xml_importado->descripcion[0]->version_practico!=$PCO_VersionActual) $mensaje_error=$MULTILANG_ActErrGral;
+
+		if ($mensaje_error=="")
+			{
+				//Si es tipo estatico elimina el informe existente con el mismo ID
+				$ListaCamposParaID="";
+				$InterroganteParaID="";
+				$ValorInsercionParaID="";
+				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
+					{
+						$ListaCamposParaID="id,";
+						$InterroganteParaID="?,";
+						$ValorInsercionParaID=base64_decode($xml_importado->core_informe[0]->id).$_SeparadorCampos_;
+						PCOFUNC_eliminar_informe(base64_decode($xml_importado->core_informe[0]->id));
+					}
+
+				// Establece valores para cada campo a insertar en el nuevo informe
+				/* ##########################################################################################################*/
+				/* ####### IMPORTANTE: Ajustes sobre esta funcion se deberian replicar en funcion de copia asociadas ########*/
+				/* ##########################################################################################################*/
+				$titulo=base64_decode($xml_importado->core_informe[0]->titulo);
+				$descripcion=base64_decode($xml_importado->core_informe[0]->descripcion);
+				$categoria=base64_decode($xml_importado->core_informe[0]->categoria);
+				$agrupamiento=base64_decode($xml_importado->core_informe[0]->agrupamiento);
+				$ordenamiento=base64_decode($xml_importado->core_informe[0]->ordenamiento);
+				$ancho=base64_decode($xml_importado->core_informe[0]->ancho);
+				$alto=base64_decode($xml_importado->core_informe[0]->alto);
+				$formato_final=base64_decode($xml_importado->core_informe[0]->formato_final);
+				$formato_grafico=base64_decode($xml_importado->core_informe[0]->formato_grafico);
+				$genera_pdf=base64_decode($xml_importado->core_informe[0]->genera_pdf);
+				$variables_filtro=base64_decode($xml_importado->core_informe[0]->variables_filtro);
+				$soporte_datatable=base64_decode($xml_importado->core_informe[0]->soporte_datatable);
+				$formulario_filtrado=base64_decode($xml_importado->core_informe[0]->formulario_filtrado);
+
+				// Inserta el nuevo informe
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposParaID.$ListaCamposSinID_informe.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado");
+				
+				//Determina el ID del registro
+				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
+					$idObjetoInsertado=base64_decode($xml_importado->core_informe[0]->id);
+				else
+					$idObjetoInsertado=$ConexionPDO->lastInsertId();
+
+				// Busca los elementos que componen el informe para hacerles la copia
+				//Determina cuantos campos tiene la tabla
+				$ArregloCampos=explode(',',$ListaCamposSinID_informe_condiciones);
+				$TotalCampos=count($ArregloCampos);
+				// Registros de informe_condiciones
+				for ($PCO_i=0;$PCO_i<$xml_importado->total_core_informe_condiciones[0]->cantidad_objetos;$PCO_i++)
+					{
+						//Genera cadena de interrogantes y valores segun cantidad de campos
+						$CadenaInterrogantes='?'; //Agrega el primer interrogante
+						$CadenaValores=$idObjetoInsertado;
+
+						for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
+							{
+								//Cadena de interrogantes
+								$CadenaInterrogantes.=',?';
+								//Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
+								if ($PCOCampo!=0)
+									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_informe_condiciones[$PCO_i]->$ArregloCampos[$PCOCampo]);
+								else
+									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
+							}
+						//Inserta el nuevo objeto al informe
+						ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_condiciones ($ListaCamposSinID_informe_condiciones) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+					}
+
+				//Determina cuantos campos tiene la tabla
+				$ArregloCampos=explode(',',$ListaCamposSinID_informe_tablas);
+				$TotalCampos=count($ArregloCampos);
+				// Registros de informe_tablas
+				for ($PCO_i=0;$PCO_i<$xml_importado->total_core_informe_tablas[0]->cantidad_objetos;$PCO_i++)
+					{
+						//Genera cadena de interrogantes y valores segun cantidad de campos
+						$CadenaInterrogantes='?'; //Agrega el primer interrogante
+						$CadenaValores=$idObjetoInsertado;
+
+						for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
+							{
+								//Cadena de interrogantes
+								$CadenaInterrogantes.=',?';
+								//Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
+								if ($PCOCampo!=0)
+									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_informe_tablas[$PCO_i]->$ArregloCampos[$PCOCampo]);
+								else
+									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
+							}
+						//Inserta el nuevo objeto al informe
+						ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_tablas ($ListaCamposSinID_informe_tablas) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+					}
+
+				//Determina cuantos campos tiene la tabla
+				$ArregloCampos=explode(',',$ListaCamposSinID_informe_campos);
+				$TotalCampos=count($ArregloCampos);
+				// Registros de informe_campos
+				for ($PCO_i=0;$PCO_i<$xml_importado->total_core_informe_campos[0]->cantidad_objetos;$PCO_i++)
+					{
+						//Genera cadena de interrogantes y valores segun cantidad de campos
+						$CadenaInterrogantes='?'; //Agrega el primer interrogante
+						$CadenaValores=$idObjetoInsertado;
+
+						for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
+							{
+								//Cadena de interrogantes
+								$CadenaInterrogantes.=',?';
+								//Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
+								if ($PCOCampo!=0)
+									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_informe_campos[$PCO_i]->$ArregloCampos[$PCOCampo]);
+								else
+									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
+							}
+						//Inserta el nuevo objeto al informe
+						ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_campos ($ListaCamposSinID_informe_campos) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+					}
+
+				//Determina cuantos campos tiene la tabla
+				$ArregloCampos=explode(',',$ListaCamposSinID_informe_boton);
+				$TotalCampos=count($ArregloCampos);
+				// Registros de informe_boton
+				for ($PCO_i=0;$PCO_i<$xml_importado->total_core_informe_boton[0]->cantidad_objetos;$PCO_i++)
+					{
+						//Genera cadena de interrogantes y valores segun cantidad de campos
+						$CadenaInterrogantes='?'; //Agrega el primer interrogante
+						$CadenaValores=base64_decode($xml_importado->core_informe_boton[$PCO_i]->titulo);
+
+						for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
+							{
+								//Cadena de interrogantes
+								$CadenaInterrogantes.=',?';
+								//Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
+								if ($PCOCampo!=1)
+									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_informe_boton[$PCO_i]->$ArregloCampos[$PCOCampo]);
+								else
+									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
+							}
+						//Inserta el nuevo objeto al informe
+						ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton ($ListaCamposSinID_informe_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+					}
+
+				echo '
+				<b>'.$MULTILANG_FrmImportarGenerado.':</b><br>
+				<li>ID: '.$idObjetoInsertado.'</li>
+				<li>Titulo: '.$titulo.'</li>
+				<br>
+				<a class="btn btn-block btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
+				auditar("Importa $archivo_cargado en objeto $idObjetoInsertado");
+				
+			}
+		else
+			{
+				echo '			
+				<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ActErrGral.'">
+					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+					</form>
+					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+			}
+		echo '</center>';
+
+		cerrar_ventana();
+        $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: analizar_importacion_informe
+	Revisa el archivo cargado sobre /tmp para validar si se trata de un objeto definido correctamente
+
+	Variables de entrada:
+
+		archivo_cargado - Ruta absoluta hacia el archivo cargado en el paso anterior del asistente
+
+	Salida:
+		Analisis del archivo y detalles del objeto
+*/
+if ($PCO_Accion=="analizar_importacion_informe")
+	{
+		echo "<br>";
+		abrir_ventana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
+
+		if ($mensaje_error=="")
+			{
+                $existen_conflictos_entre_ids=0;
+                //Carga el archivo en una cadena
+                $cadena_xml_importado = file_get_contents($archivo_cargado);
+				// Usa SimpleXML Directamente para interpretar respuesta
+				$xml_importado = @simplexml_load_string($cadena_xml_importado);
+
+                //Presenta alerta cuando encuentra otro elemento con el mismo ID y se trata de una importacion estatica
+                if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
+					if (existe_valor($TablasCore."informe","id",base64_decode($xml_importado->core_informe[0]->id)))
+						mensaje($MULTILANG_Atencion, $MULTILANG_FrmImportarAlerta, '', 'fa fa-fw fa-2x fa-warning', 'alert alert-dismissible alert-danger');
+                
+                //Presenta contenido del archivo
+                echo "<b>$MULTILANG_Detalles $MULTILANG_Archivo</b>:<br>
+					<li> <u>$MULTILANG_Version (Practico)</u>: {$xml_importado->descripcion[0]->version_practico}<br>
+					<li> <u>$MULTILANG_Tipo $MULTILANG_Archivo</u>: ";
+				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico") echo $MULTILANG_FrmTipoCopiaDes2;
+				else echo $MULTILANG_FrmTipoCopiaDes3;
+
+				echo "<br>
+					<li> <u>$MULTILANG_Aplicacion</u>: {$xml_importado->descripcion[0]->sistema_origen} {$xml_importado->descripcion[0]->version}<br>
+					<li> <u>$MULTILANG_GeneradoPor</u>: {$xml_importado->descripcion[0]->usuario_generador} ({$xml_importado->descripcion[0]->fecha_exportacion} {$xml_importado->descripcion[0]->hora_exportacion})<hr>
+					<b>$MULTILANG_Detalles $MULTILANG_Objeto</b>:<br>
+					<li> $MULTILANG_Tipo: {$xml_importado->descripcion[0]->tipo_objeto}<br>
+					<li> $MULTILANG_Titulo: ".base64_decode($xml_importado->core_informe[0]->titulo)."<br>
+					<li> ID: ".base64_decode($xml_importado->core_informe[0]->id)."<br>
+                <hr>";
+                
+				//Recorre los core_informe_tablas
+				echo '<div class="btn btn-block btn-primary">'.$MULTILANG_InfTablasOrigen.'</div><ul class="list-group">';
+				for ($PCO_i=0;$PCO_i<$xml_importado->total_core_informe_tablas[0]->cantidad_objetos;$PCO_i++)
+					echo '<a class="list-group-item">
+						<span class="badge">ID '.$MULTILANG_Objeto.': '.base64_decode($xml_importado->core_informe_tablas[$PCO_i]->id).'</span>
+						<b>'.base64_decode($xml_importado->core_informe_tablas[$PCO_i]->valor_tabla).'</b><i>
+						&nbsp;&nbsp;&nbsp;<u>'.$MULTILANG_InfAlias.'</u>: '.base64_decode($xml_importado->core_informe_tablas[$PCO_i]->valor_alias).'
+						</i></a>';
+				echo '</ul>';
+                
+				//Recorre los core_informe_campos
+				echo '<div class="btn btn-block btn-primary">'.$MULTILANG_InfCamposDef.'</div><ul class="list-group">';
+				for ($PCO_i=0;$PCO_i<$xml_importado->total_core_informe_campos[0]->cantidad_objetos;$PCO_i++)
+					echo '<a class="list-group-item">
+						<span class="badge">ID '.$MULTILANG_Objeto.': '.base64_decode($xml_importado->core_informe_campos[$PCO_i]->id).'</span>
+						<b>'.base64_decode($xml_importado->core_informe_campos[$PCO_i]->valor_campo).'</b><i>
+						&nbsp;&nbsp;&nbsp;<u>'.$MULTILANG_InfAlias.'</u>: '.base64_decode($xml_importado->core_informe_campos[$PCO_i]->valor_alias).'
+						</i></a>';
+				echo '</ul>';
+
+				//Recorre los core_informe_condiciones
+				echo '<div class="btn btn-block btn-primary">'.$MULTILANG_InfDefCond.'</div><ul class="list-group">';
+				for ($PCO_i=0;$PCO_i<$xml_importado->total_core_informe_condiciones[0]->cantidad_objetos;$PCO_i++)
+					echo '<a class="list-group-item">
+						<span class="badge">ID '.$MULTILANG_Objeto.': '.base64_decode($xml_importado->core_informe_condiciones[$PCO_i]->id).'</span>
+						<b>'.base64_decode($xml_importado->core_informe_condiciones[$PCO_i]->valor_izq).' '.base64_decode($xml_importado->core_informe_condiciones[$PCO_i]->operador).' '.base64_decode($xml_importado->core_informe_condiciones[$PCO_i]->valor_der).'</b><i>
+						</i></a>';
+				echo '</ul>';
+
+				//Recorre los core_informe_boton
+				echo '<div class="btn btn-block btn-primary">'.$MULTILANG_FrmTitComandos.'</div><ul class="list-group">';
+				for ($PCO_i=0;$PCO_i<$xml_importado->total_core_informe_boton[0]->cantidad_objetos;$PCO_i++)
+					echo '<a class="list-group-item">
+						<span class="badge">ID '.$MULTILANG_Objeto.': '.base64_decode($xml_importado->core_informe_boton[$PCO_i]->id).'</span>
+						<b>'.base64_decode($xml_importado->core_informe_boton[$PCO_i]->titulo).'</b><i>
+						&nbsp;&nbsp;&nbsp;<u>'.$MULTILANG_FrmTipoAcc.'</u>: '.base64_decode($xml_importado->core_informe_boton[$PCO_i]->tipo_accion).'
+						&nbsp;&nbsp;&nbsp;<u>'.$MULTILANG_FrmAccUsuario.'</u>: '.base64_decode($xml_importado->core_informe_boton[$PCO_i]->accion_usuario).'
+						</i></a>';
+				echo '</ul>';
+
+                echo "<br><hr>";
+                //Agrega el boton de continuar solamente si no hay conflictos entre IDs
+                if ($existen_conflictos_entre_ids==0)
+                    echo '
+                    <form name="goahead" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="confirmar_importacion_informe">
+						<input type="Hidden" name="archivo_cargado" value="'.$archivo_cargado.'">
+                        <button type="submit" class="btn btn-danger btn-block"><i class="fa fa-warning texto-blink icon-yellow"></i> '.$MULTILANG_Importar.' <i class="fa fa-warning texto-blink icon-yellow"></i></button>
+					</form>';
+                else
+                    mensaje('<i class="fa fa-warning fa-2x text-red texto-blink"></i> '.$MULTILANG_Error, $MULTILANG_FrmImportarConflicto, '', '', 'alert alert-danger alert-dismissible');
+			}
+		else
+			{
+				echo '			
+				<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ActErrGral.'">
+					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+					</form>
+					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+			}
+		echo '</center>';
+		echo '<br><a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
+
+		cerrar_ventana();
+        $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: importar_informe
+	Presenta el paso 1 de importacion de informes
+*/
+if ($PCO_Accion=="importar_informe")
+	{
+		echo "<br>";
+		abrir_ventana($NombreRAD.' - '.$MULTILANG_FrmImportar,'panel-info');
+?>
+
+    <ul class="nav nav-tabs nav-justified">
+    <li class="active"><a href="#pestana_importacion" data-toggle="tab"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_Cargar; ?> XML</a></li>
+    <li><a href="#historico_importaciones" data-toggle="tab"><i class="fa fa-history"></i> <?php echo $MULTILANG_Historico; ?></a></li>
+    </ul>
+
+    <div class="tab-content">
+        
+        <!-- INICIO TAB IMPORTACION -->
+        <div class="tab-pane fadein active" id="pestana_importacion">
+            <br>
+            <div align="center">
+                        <form action="<?php echo $ArchivoCORE; ?>" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="extension_archivo" value=".xml">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="8192000">
+                            <input type="Hidden" name="PCO_Accion" value="cargar_archivo">
+                            <input type="Hidden" name="siguiente_accion" value="analizar_importacion_informe">
+                            <input type="Hidden" name="texto_boton_siguiente" value="Continuar con la revisi&oacute;n">
+                            <input type="Hidden" name="carpeta" value="tmp">
+                            <input name="archivo" type="file" class="form-control btn btn-info">
+                            <br>
+                            <button type="submit"  class="btn btn-success"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_CargarArchivo; ?></button> (<?php echo $MULTILANG_ActSobreescritos; ?>)
+                        </form> 
+                        <hr>
+            </div>
+        </div>
+        <!-- FIN TAB IMPORTACION -->
+        
+
+        <!-- INICIO TAB HISTORICO DE IMPORTACIONES -->
+        <div class="tab-pane fade" id="historico_importaciones">
+                <div class="well well-sm"><b>Ultimos 30 registros / Last 30 records</b></div>
+                <table id="TablaAcciones" class="table table-condensed table-hover table-unbordered btn-xs table-striped">
+                    <thead>
+					<tr>
+						<th><b><?php echo $MULTILANG_UsrLogin; ?></b></th>
+						<th><b><?php echo $MULTILANG_UsrAudDes; ?></b></th>
+						<th><b><?php echo $MULTILANG_Fecha; ?></b></th>
+						<th><b><?php echo $MULTILANG_Hora; ?></b></th>
+					</tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                        // Busca por las auditorias asociadas a actualizacion de plataforma:
+                        // Acciones:  Actualiza version de plataforma | _Actualizacion_ | Analiza archivo tmp/Practico | Carga archivo en carpeta tmp - Practico
+                        $resultado=@ejecutar_sql("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE accion LIKE '%Import%' AND accion LIKE '%.xml en objeto%' ORDER BY fecha DESC, hora DESC LIMIT 0,30");
+                        while($registro = $resultado->fetch())
+                            {
+                                echo '<tr>
+                                        <td>'.$registro["usuario_login"].'</td>
+                                        <td>'.$registro["accion"].'</td>
+                                        <td>'.$registro["fecha"].'</td>
+                                        <td>'.$registro["hora"].'</td>
+                                    </tr>';
+                            }
+                    ?>
+                    </tbody>
+                </table>
+
+        </div>
+        <!-- FIN TAB HISTORICO DE IMPORTACIONES -->
+        
+    </div>
+
+<?php
+		abrir_barra_estado();
+		echo '<a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
+		cerrar_barra_estado();
+		cerrar_ventana();
+        $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: administrar_informes
 	Presenta la lista de todos los informes definidos en el sistema con la posibilidad de agregar nuevos o de administrar los existentes.
 
@@ -2108,12 +2529,16 @@ if ($PCO_Accion=="administrar_informes")
             <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCreaDisena; ?></a>
             <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 
-		<?php
-		cerrar_ventana();	
+		<?php cerrar_ventana(); ?>
 
-?>
+        <form name="importacion" id="importacion" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<input type="Hidden" name="PCO_Accion" value="importar_informe">
+			<?php abrir_ventana($MULTILANG_InfTituloAgr." ($MULTILANG_Avanzado)", 'panel-default'); ?>
+            </form>
+            <a class="btn btn-warning btn-block" href="javascript:document.importacion.submit();"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_FrmImportar; ?></a>
+		<?php	cerrar_ventana();	?>
 
-  </div>    
+  </div>
   <div class="col-md-8">
 
 
