@@ -526,9 +526,9 @@
     $MULTILANG_FrmTipoCopia1='Online';
     $MULTILANG_FrmTipoCopia2='XML with current ID';
     $MULTILANG_FrmTipoCopia3='XML with dynamic ID';
-    $MULTILANG_FrmTipoCopiaDes1='<li>Online: Creates a new object with a new ID.  That includes all the components linked to allow you create new forms or reports from an existing object.</li>';
-    $MULTILANG_FrmTipoCopiaDes2='<li>XML with current ID: Exports/Imports the object using XML sintax to allow you import it over other system using the current ID.  Usefull if you want to overwrite forms or reports with enhacements from other systems.</li>';
-    $MULTILANG_FrmTipoCopiaDes3='<li>XML with dynamic ID: Exports/Imports the object using XML sintax but the new ID for the object is generated dinamically each time you import the file, with a different ID.  Usefull to replicate the functionallity of "Online" option but over differents systems.</li>';
+    $MULTILANG_FrmTipoCopiaDes1='Online: Creates a new object with a new ID.  That includes all the components linked to allow you create new forms or reports from an existing object. This works inmediately over the running system, cloning the selected object.';
+    $MULTILANG_FrmTipoCopiaDes2='XML with current ID: Exports/Imports the object using XML sintax to allow you import it over other system using the current ID.  Usefull if you want to overwrite forms or reports with enhacements from other systems.';
+    $MULTILANG_FrmTipoCopiaDes3='XML with dynamic ID: Exports/Imports the object using XML sintax but the new ID for the object is generated dinamically each time you import the file, with a different ID.  Usefull to replicate the functionallity of "Online" option but over differents systems.';
 	$MULTILANG_FrmTipoCopiaExporta='Copying / Exporting';
 	$MULTILANG_FrmCopiaFinalizada='The copy process already finished.  You could click on donwload button to get the XML file.';
 	$MULTILANG_FrmImportar='Import a design from a file';

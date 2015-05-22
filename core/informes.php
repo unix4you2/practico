@@ -1832,6 +1832,7 @@ if ($PCO_Accion=="guardar_informe")
 	</core_informe>";
 							// Registros de informe_boton
 							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_boton WHERE informe=?","$informe");
+							$conteo_elementos_xml=0;
 							while($registro = $consulta->fetch())
 								{
 									//Exporta la tabla de core_informe_boton
@@ -1840,7 +1841,12 @@ if ($PCO_Accion=="guardar_informe")
 									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_informe_boton);
 							$Contenido_XML .= "
 	</core_informe_boton>";
+									$conteo_elementos_xml++;
 								}
+							//Agrega el total de elementos y resetea contador para el siguiente
+									$Contenido_XML .= "
+	<total_core_informe_boton><cantidad_objetos>$conteo_elementos_xml</cantidad_objetos></total_core_informe_boton>";
+							$conteo_elementos_xml=0;
 
 							// Registros de informe_campos
 							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe=?","$informe");
@@ -1852,7 +1858,12 @@ if ($PCO_Accion=="guardar_informe")
 									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_informe_campos);
 							$Contenido_XML .= "
 	</core_informe_campos>";
+									$conteo_elementos_xml++;
 								}
+							//Agrega el total de elementos y resetea contador para el siguiente
+									$Contenido_XML .= "
+	<total_core_informe_campos><cantidad_objetos>$conteo_elementos_xml</cantidad_objetos></total_core_informe_campos>";
+							$conteo_elementos_xml=0;
 
 							// Registros de informe_condiciones
 							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe=?","$informe");
@@ -1864,7 +1875,12 @@ if ($PCO_Accion=="guardar_informe")
 									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_informe_condiciones);
 							$Contenido_XML .= "
 	</core_informe_condiciones>";
+									$conteo_elementos_xml++;
 								}
+							//Agrega el total de elementos y resetea contador para el siguiente
+									$Contenido_XML .= "
+	<total_core_informe_condiciones><cantidad_objetos>$conteo_elementos_xml</cantidad_objetos></total_core_informe_condiciones>";
+							$conteo_elementos_xml=0;
 
 							// Registros de informe_tablas
 							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_tablas WHERE informe=?","$informe");
@@ -1876,7 +1892,12 @@ if ($PCO_Accion=="guardar_informe")
 									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_informe_tablas);
 							$Contenido_XML .= "
 	</core_informe_tablas>";
+									$conteo_elementos_xml++;
 								}
+							//Agrega el total de elementos y resetea contador para el siguiente
+									$Contenido_XML .= "
+	<total_core_informe_tablas><cantidad_objetos>$conteo_elementos_xml</cantidad_objetos></total_core_informe_tablas>";
+							$conteo_elementos_xml=0;
 
 							// Finaliza el archivo XML
 							$Contenido_XML .= "
