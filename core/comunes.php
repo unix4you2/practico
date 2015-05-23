@@ -719,6 +719,8 @@ function completar_parametros($string,$data) {
                                     else
                                         //$consulta->bindValue($i, $parametros[$i-1]);
                                     */
+                                        //$consulta->bindValue($i, iconv("UTF-8", "ISO-8859-1//TRANSLIT", $parametros[$i-1]));
+                                        //$consulta->bindValue($i, utf8_encode($parametros[$i-1]));
                                         $consulta->bindValue($i, $parametros[$i-1]);
 									//echo 'Parametro '.$i.'='.$parametros[$i-1]."<br>"; //PARA DEPURACION
 								}

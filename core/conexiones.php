@@ -124,6 +124,7 @@
 					
 					if ($PCOConnMotorBD=="mysql")
 						{
+							$ConexionPDO->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, "SET NAMES 'utf8'");
 							$ConexionPDO->exec("SET NAMES 'utf8';");
 							$ConexionPDO->exec("SET NAMES utf8;"); //Forzado UTF8 - Collation recomendada: utf8_general_ci
 							//Evita el "General error: 2014 Cannot execute queries while other unbuffered queries are active"

@@ -224,6 +224,7 @@
     $MULTILANG_PcoderAjuste='Window adjustment';
     $MULTILANG_PcoderAjusteConfirma='You are going to reload this window to resize window as your maximum resolution.  When you reload this window you can lost any change that you dont already saved.  Do you want to continue?';
     $MULTILANG_BuscaCriterios='You should enter a key word to search';
+    $MULTILANG_EstadoPHP='PHP Info';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';

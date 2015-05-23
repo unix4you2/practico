@@ -38,9 +38,9 @@
         //Tiempo inicial de carga
         var tiempo_inicio_javascript = (new Date()).getTime();
     </script>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="generator" content="Practico <?php  $PCO_VersionActual = file("inc/version_actual.txt"); $PCO_VersionActual = trim($PCO_VersionActual[0]); echo $PCO_VersionActual; ?>" />
 	<meta name="description" content="Generador de aplicaciones web - www.practico.org" />
