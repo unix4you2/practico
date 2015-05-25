@@ -361,24 +361,24 @@
                                 <div class="tab-pane fade" id="estadophp-tab" style="HEIGHT:20000px;">
 									<br>
 										<style type="text/css">
-											#phpinfo {}
-											#phpinfo pre {}
-											#phpinfo a:link {}
-											#phpinfo a:hover {}
-											#phpinfo table { border:1px solid #000000; width:90%; box-shadow: 10px 10px 5px #888888;}
-											#phpinfo .center {}
-											#phpinfo .center table {}
-											#phpinfo .center th {text-align:center; background-color:#323232; color:#ffffff;}
-											#phpinfo td, th {padding: 3px; background-color:#cccccc; border:1px solid #000000;}
-											#phpinfo h1 {text-align:center;}
-											#phpinfo h2 {text-align:center;}
-											#phpinfo .p {}
-											#phpinfo .e {}
-											#phpinfo .h {}
-											#phpinfo .v {}
-											#phpinfo .vr {}
-											#phpinfo img {width:0px;heigh:0px; visible:none;}
-											#phpinfo hr {}
+											/*#PCO_phpinfo {}
+											#PCO_phpinfo pre {}
+											#PCO_phpinfo a:link {}
+											#PCO_phpinfo a:hover {}
+											#PCO_phpinfo table { border:1px solid #000000; width:90%; box-shadow: 10px 10px 5px #888888;}
+											#PCO_phpinfo .center {}
+											#PCO_phpinfo .center table {}
+											#PCO_phpinfo .center th {text-align:center; background-color:#323232; color:#ffffff;}
+											#PCO_phpinfo td, th {padding: 3px; background-color:#cccccc; border:1px solid #000000;}
+											#PCO_phpinfo h1 {text-align:center;}
+											#PCO_phpinfo h2 {text-align:center;}
+											#PCO_phpinfo .p {}
+											#PCO_phpinfo .e {}
+											#PCO_phpinfo .h {}
+											#PCO_phpinfo .v {}
+											#PCO_phpinfo .vr {}
+											#PCO_phpinfo img {width:0px;heigh:0px; visible:none;}
+											#PCO_phpinfo hr {}*/
 										</style>
 											
 											<!-- Nav tabs -->
@@ -400,7 +400,7 @@
 											</ul>
 
 											<div class="tab-pane fade in active" id="phpINFO_GENERAL-tab">
-												<DIV id="phpinfo" align=center style="background:#FFFFFF; DISPLAY: compact; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
+												<DIV id="PCO_phpinfo" align=center style="background:#FFFFFF; DISPLAY: compact; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
 												<br>
 												<?php
 													ob_start () ;
@@ -415,7 +415,7 @@
 											</div>
 
 											<div class="tab-pane fade" id="phpINFO_CONFIGURATION-tab">
-												<DIV id="phpinfo" align=center style="background:#FFFFFF; DISPLAY: compact; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
+												<DIV id="PCO_phpinfo" align=center style="background:#FFFFFF; DISPLAY: compact; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
 												<?php
 													ob_start () ;
 													phpinfo (INFO_CONFIGURATION) ;
@@ -429,7 +429,7 @@
 											</div>
 
 											<div class="tab-pane fade" id="phpINFO_MODULES-tab">
-												<DIV id="phpinfo" align=center style="background:#FFFFFF; DISPLAY: block; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
+												<DIV id="PCO_phpinfo" align=center style="background:#FFFFFF; DISPLAY: block; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
 												<?php
 													ob_start () ;
 													phpinfo (INFO_MODULES) ;
@@ -443,7 +443,7 @@
 											</div>
 
 											<div class="tab-pane fade" id="phpINFO_ENVIRONMENT-tab">
-												<DIV id="phpinfo" align=center style="background:#FFFFFF; DISPLAY: block; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
+												<DIV id="PCO_phpinfo" align=center style="background:#FFFFFF; DISPLAY: block; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
 												<?php
 													ob_start () ;
 													phpinfo (INFO_ENVIRONMENT) ;
@@ -457,7 +457,7 @@
 											</div>
 											
 											<div class="tab-pane fade" id="phpINFO_VARIABLES-tab">
-												<DIV id="phpinfo" align=center style="background:#FFFFFF; DISPLAY: block; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
+												<DIV id="PCO_phpinfo" align=center style="background:#FFFFFF; DISPLAY: block; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
 												<?php
 													ob_start () ;
 													phpinfo (INFO_VARIABLES) ;
@@ -471,7 +471,7 @@
 											</div>
 											
 											<div class="tab-pane fade" id="phpINFO_LICENSE-tab">
-												<DIV id="phpinfo" align=center style="background:#FFFFFF; DISPLAY: block; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
+												<DIV id="PCO_phpinfo" align=center style="background:#FFFFFF; DISPLAY: block; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
 												<?php
 													ob_start () ;
 													phpinfo (INFO_LICENSE) ;
@@ -485,7 +485,7 @@
 											</div>
 
 											<div class="tab-pane fade" id="phpINFO_CREDITS-tab">
-												<DIV id="phpinfo" align=center style="background:#FFFFFF; DISPLAY: block; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
+												<DIV id="PCO_phpinfo" align=center style="background:#FFFFFF; DISPLAY: block; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
 												<?php
 													ob_start () ;
 													phpinfo (INFO_CREDITS) ;
