@@ -37,6 +37,7 @@
 	$MULTILANG_Actualizar='Actualizar';
     $MULTILANG_Administre='Administre';
 	$MULTILANG_Agregar='Agregar';
+	$MULTILANG_Ambiente='Ambiente';
 	$MULTILANG_Anonimo='An&oacute;nimo';
 	$MULTILANG_Anterior='Anterior';
 	$MULTILANG_Apagado='Apagado';
@@ -63,6 +64,7 @@
 	$MULTILANG_CodigoBarras='C&oacute;digo de barras';
 	$MULTILANG_Columna='Columna';
 	$MULTILANG_Comando='Comando';
+	$MULTILANG_Configuracion='Configuraci&oacute;n';
 	$MULTILANG_ConfiguracionGeneral='Configuraci&oacute;n General';
 	$MULTILANG_ConfiguracionVarias='Configuraci&oacute;n de opciones varias';
 	$MULTILANG_Confirma='Est&aacute; seguro que desea continuar ?';
@@ -72,6 +74,7 @@
     $MULTILANG_Copias='Copias de seguridad';
 	$MULTILANG_Correcto='Correcto';
 	$MULTILANG_Correo='Correo';
+	$MULTILANG_Creditos='Cr&eacute;ditos';
 	$MULTILANG_Cualquiera='Cualquiera';
 	$MULTILANG_Defina='Defina';
 	$MULTILANG_Descargar='Descargar';
@@ -97,6 +100,7 @@
 	$MULTILANG_Funciones='Funciones preautorizadas';
 	$MULTILANG_FuncionesDes='Por motivos de seguridad, sus funciones personalizadas o modulos desarrollados usted debe preautorizar su uso en este cuadro para los usuarios.  Agregue las funciones o acciones separadas por cualqueir caracter.';
 	$MULTILANG_GeneradoPor='Generado por';
+	$MULTILANG_General='General';
 	$MULTILANG_Grande='Grande';
 	$MULTILANG_Grafico='Gr&aacute;fico';
 	$MULTILANG_Guardar='Guardar';
@@ -116,9 +120,11 @@
 	$MULTILANG_Instante='Instante';
     $MULTILANG_Ir='Ir';
 	$MULTILANG_IrEscritorio='Ir a mi escritorio';
+	$MULTILANG_Licencia='Licencia';
 	$MULTILANG_LlavePaso='Llave de paso';
 	$MULTILANG_Maquina='Maquina';
 	$MULTILANG_Matriz='Matriz';
+	$MULTILANG_Modulos='M&oacute;dulos';
 	$MULTILANG_Mostrando='Mostrando';
     $MULTILANG_MotorBD='Motor de Base de Datos';
 	$MULTILANG_Ninguno='Ninguno';
@@ -163,6 +169,7 @@
 	$MULTILANG_Ultimo='Ultimo';
     $MULTILANG_Usuario='Usuario';
 	$MULTILANG_Vacio='Vac&iacute;o';
+	$MULTILANG_Variables='Variables';
 	$MULTILANG_Version='Versi&oacute;n';
 	$MULTILANG_ZonaHoraria='Zona horaria';
 	$MULTILANG_VistaImpresion='Vista de impresion';

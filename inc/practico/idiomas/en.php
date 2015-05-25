@@ -37,6 +37,7 @@
 	$MULTILANG_Actualizar='Upgrade';
 	$MULTILANG_Administre='Manage';
 	$MULTILANG_Agregar='Add';
+	$MULTILANG_Ambiente='Environment';
 	$MULTILANG_Anonimo='Anonymous';
 	$MULTILANG_Anterior='Previous';
 	$MULTILANG_Apagado='Off';
@@ -64,6 +65,7 @@
 	$MULTILANG_Columna='Column';
 	$MULTILANG_Comando='Commando';
 	$MULTILANG_ConfiguracionGeneral='General Settings';
+	$MULTILANG_Configuracion='Configuration';
 	$MULTILANG_ConfiguracionVarias='Configuring multiple options';
 	$MULTILANG_Confirma='Are you sure you want to continue?';
 	$MULTILANG_Continuar='Continue';
@@ -72,6 +74,7 @@
     $MULTILANG_Copias='Backups';
 	$MULTILANG_Correcto='Right';
 	$MULTILANG_Correo='Email';
+	$MULTILANG_Creditos='About';
 	$MULTILANG_Cualquiera='Any';
 	$MULTILANG_Defina='Define';
 	$MULTILANG_Descargar='Download';
@@ -97,6 +100,7 @@
 	$MULTILANG_Funciones='Preauthorized functions';
 	$MULTILANG_FuncionesDes='For security reasons, your custom functions or modules should be pre-authorized in this field. Add the functions or actions separated by any character.';
 	$MULTILANG_GeneradoPor='Powered by';
+	$MULTILANG_General='General';
 	$MULTILANG_Grande='Big';
 	$MULTILANG_Grafico='Graphic';
 	$MULTILANG_Guardar='Save';
@@ -116,9 +120,11 @@
 	$MULTILANG_Instante='Instant';
     $MULTILANG_Ir='Go';
 	$MULTILANG_IrEscritorio='Go to my desk';
+	$MULTILANG_Licencia='License';
 	$MULTILANG_LlavePaso='SignKey';
 	$MULTILANG_Maquina='Host';
 	$MULTILANG_Matriz='Matrix';
+    $MULTILANG_Modulos='Modules';
     $MULTILANG_Mostrando='Showing';
 	$MULTILANG_MotorBD='Database Engine';
 	$MULTILANG_Ninguno='None';
@@ -163,6 +169,7 @@
 	$MULTILANG_Ultimo='Last';
     $MULTILANG_Usuario='User';
 	$MULTILANG_Vacio='Empty';
+	$MULTILANG_Variables='Variables';
 	$MULTILANG_Version='Versi&oacute;n';
 	$MULTILANG_ZonaHoraria='Time zone';
 	$MULTILANG_VistaImpresion='Printer view';

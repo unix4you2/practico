@@ -358,9 +358,8 @@
                                 </div>
 
 
-                                <div class="tab-pane fade" id="estadophp-tab">
+                                <div class="tab-pane fade" id="estadophp-tab" style="HEIGHT:20000px;">
 									<br>
-									<DIV align=center style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 500px">
 										<style type="text/css">
 											#phpinfo {}
 											#phpinfo pre {}
@@ -378,23 +377,127 @@
 											#phpinfo .h {}
 											#phpinfo .v {}
 											#phpinfo .vr {}
-											#phpinfo img {}
+											#phpinfo img {width:0px;heigh:0px; visible:none;}
 											#phpinfo hr {}
 										</style>
-										<div id="phpinfo">
-											<?php
-												ob_start () ;
-												phpinfo () ;
-												$pinfo = ob_get_contents () ;
-												ob_end_clean () ;
-												// the name attribute "module_Zend Optimizer" of an anker-tag is not xhtml valide, so replace it with "module_Zend_Optimizer"
-												echo ( str_replace ( "module_Zend Optimizer", "module_Zend_Optimizer", preg_replace ( '%^.*<body>(.*)</body>.*$%ms', '$1', $pinfo ) ) ) ;
-											?>
-										</div>
-										<br>
-                                    </DIV>
-                                </div>
+											
+											<!-- Nav tabs -->
+											<ul class="nav nav-pills btn-xs">
+												<li class="active"><a href="#phpINFO_GENERAL-tab" data-toggle="tab"><?php echo $MULTILANG_General; ?></a>
+												</li>
+												<li><a href="#phpINFO_CONFIGURATION-tab" data-toggle="tab"><?php echo $MULTILANG_Configuracion; ?></a>
+												</li>
+												<li><a href="#phpINFO_MODULES-tab" data-toggle="tab"><?php echo $MULTILANG_Modulos; ?></a>
+												</li>
+												<li><a href="#phpINFO_ENVIRONMENT-tab" data-toggle="tab"><?php echo $MULTILANG_Ambiente; ?></a>
+												</li>
+												<li><a href="#phpINFO_VARIABLES-tab" data-toggle="tab"><?php echo $MULTILANG_Variables; ?></a>
+												</li>
+												<li><a href="#phpINFO_LICENSE-tab" data-toggle="tab"><?php echo $MULTILANG_Licencia; ?></a>
+												</li>
+												<li><a href="#phpINFO_CREDITS-tab" data-toggle="tab"><?php echo $MULTILANG_Creditos; ?></a>
+												</li>
+											</ul>
 
+											<div class="tab-pane fade in active" id="phpINFO_GENERAL-tab">
+												<DIV id="phpinfo" align=center style="background:#FFFFFF; DISPLAY: compact; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
+												<br>
+												<?php
+													ob_start () ;
+													phpinfo (INFO_GENERAL) ;
+													$pinfo = ob_get_contents () ;
+													ob_end_clean () ;
+													// the name attribute "module_Zend Optimizer" of an anker-tag is not xhtml valide, so replace it with "module_Zend_Optimizer"
+													echo ( str_replace ( "module_Zend Optimizer", "module_Zend_Optimizer", preg_replace ( '%^.*<body>(.*)</body>.*$%ms', '$1', $pinfo ) ) ) ;
+												?>
+												<br><br><br><br><br>
+												</DIV>
+											</div>
+
+											<div class="tab-pane fade" id="phpINFO_CONFIGURATION-tab">
+												<DIV id="phpinfo" align=center style="background:#FFFFFF; DISPLAY: compact; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
+												<?php
+													ob_start () ;
+													phpinfo (INFO_CONFIGURATION) ;
+													$pinfo = ob_get_contents () ;
+													ob_end_clean () ;
+													// the name attribute "module_Zend Optimizer" of an anker-tag is not xhtml valide, so replace it with "module_Zend_Optimizer"
+													echo ( str_replace ( "module_Zend Optimizer", "module_Zend_Optimizer", preg_replace ( '%^.*<body>(.*)</body>.*$%ms', '$1', $pinfo ) ) ) ;
+												?>
+												<br><br><br><br><br>
+												</DIV>
+											</div>
+
+											<div class="tab-pane fade" id="phpINFO_MODULES-tab">
+												<DIV id="phpinfo" align=center style="background:#FFFFFF; DISPLAY: block; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
+												<?php
+													ob_start () ;
+													phpinfo (INFO_MODULES) ;
+													$pinfo = ob_get_contents () ;
+													ob_end_clean () ;
+													// the name attribute "module_Zend Optimizer" of an anker-tag is not xhtml valide, so replace it with "module_Zend_Optimizer"
+													echo ( str_replace ( "module_Zend Optimizer", "module_Zend_Optimizer", preg_replace ( '%^.*<body>(.*)</body>.*$%ms', '$1', $pinfo ) ) ) ;
+												?>
+												<br><br><br><br><br>
+												</DIV>
+											</div>
+
+											<div class="tab-pane fade" id="phpINFO_ENVIRONMENT-tab">
+												<DIV id="phpinfo" align=center style="background:#FFFFFF; DISPLAY: block; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
+												<?php
+													ob_start () ;
+													phpinfo (INFO_ENVIRONMENT) ;
+													$pinfo = ob_get_contents () ;
+													ob_end_clean () ;
+													// the name attribute "module_Zend Optimizer" of an anker-tag is not xhtml valide, so replace it with "module_Zend_Optimizer"
+													echo ( str_replace ( "module_Zend Optimizer", "module_Zend_Optimizer", preg_replace ( '%^.*<body>(.*)</body>.*$%ms', '$1', $pinfo ) ) ) ;
+												?>
+												<br><br><br><br><br>
+												</DIV>
+											</div>
+											
+											<div class="tab-pane fade" id="phpINFO_VARIABLES-tab">
+												<DIV id="phpinfo" align=center style="background:#FFFFFF; DISPLAY: block; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
+												<?php
+													ob_start () ;
+													phpinfo (INFO_VARIABLES) ;
+													$pinfo = ob_get_contents () ;
+													ob_end_clean () ;
+													// the name attribute "module_Zend Optimizer" of an anker-tag is not xhtml valide, so replace it with "module_Zend_Optimizer"
+													echo ( str_replace ( "module_Zend Optimizer", "module_Zend_Optimizer", preg_replace ( '%^.*<body>(.*)</body>.*$%ms', '$1', $pinfo ) ) ) ;
+												?>
+												<br><br><br><br><br>
+												</DIV>
+											</div>
+											
+											<div class="tab-pane fade" id="phpINFO_LICENSE-tab">
+												<DIV id="phpinfo" align=center style="background:#FFFFFF; DISPLAY: block; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
+												<?php
+													ob_start () ;
+													phpinfo (INFO_LICENSE) ;
+													$pinfo = ob_get_contents () ;
+													ob_end_clean () ;
+													// the name attribute "module_Zend Optimizer" of an anker-tag is not xhtml valide, so replace it with "module_Zend_Optimizer"
+													echo ( str_replace ( "module_Zend Optimizer", "module_Zend_Optimizer", preg_replace ( '%^.*<body>(.*)</body>.*$%ms', '$1', $pinfo ) ) ) ;
+												?>
+												<br><br><br><br><br>
+												</DIV>
+											</div>
+
+											<div class="tab-pane fade" id="phpINFO_CREDITS-tab">
+												<DIV id="phpinfo" align=center style="background:#FFFFFF; DISPLAY: block; OVERFLOW: auto; WIDTH: 95%; POSITION: absolute;">
+												<?php
+													ob_start () ;
+													phpinfo (INFO_CREDITS) ;
+													$pinfo = ob_get_contents () ;
+													ob_end_clean () ;
+													// the name attribute "module_Zend Optimizer" of an anker-tag is not xhtml valide, so replace it with "module_Zend_Optimizer"
+													echo ( str_replace ( "module_Zend Optimizer", "module_Zend_Optimizer", preg_replace ( '%^.*<body>(.*)</body>.*$%ms', '$1', $pinfo ) ) ) ;
+												?>
+												<br><br><br><br><br>
+												</DIV>
+											</div>
+                                </div>
 
                             </div>
                             <!-- FIN de las pestanas -->
