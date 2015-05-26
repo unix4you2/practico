@@ -350,7 +350,7 @@
 	$MULTILANG_FrmDesTitulo='Text that will appear next to the field telling the user the information that must be entered. You can use basic HTML to additional format.';
 	$MULTILANG_FrmCampo='Linked field';
 	$MULTILANG_FrmFiltroLista='List filter condition';
-	$MULTILANG_FrmDesFiltroLista='Special condition that records must have to be displayed.  This condition could use any field in your source table that are not selected as values too.  Fixed values should be enclosed in double cuotes and you can use another expresions like ORDER BY, GROUP BY, LIMIT, Etc. This field will be added after a WHERE clausule in the query.  REMEMBER: If you dont have a Condition but you want a ORDER BY OR GROUP BY then add at least an 1=1 before to apply to the condittion.';
+	$MULTILANG_FrmDesFiltroLista='Special condition that records must have to be displayed.  This condition could use any field in your source table that are not selected as values too.  Fixed values should be enclosed in double cuotes and you can use another expresions like ORDER BY, GROUP BY, LIMIT, Etc. This field will be added after a WHERE clausule in the query.  REMEMBER: If you dont have a Condition but you want a ORDER BY OR GROUP BY then add at least an 1=1 before to apply to the condittion. You could use {$Variable} to refer a PHP Variable too';
 	$MULTILANG_FrmCampoOb1='Mandatory field for data binding controls';
 	$MULTILANG_FrmDesCampo='Field data table which will link information.  In file fields this could contain the relative path to the file uploaded in the server.  Every file should have at least one field to store its path';
 	$MULTILANG_FrmValUnico='Single value field';

@@ -2367,7 +2367,29 @@ function selector_iconos_awesome()
                             $campo_opciones=$registro_campos["origen_lista_opciones"];
                             //Define si los registros a mostrar en la lista deben estar filtrados por alguna condicion
                             $condicion_filtrado_listas=$registro_campos["condicion_filtrado_listas"];
-                            if ($condicion_filtrado_listas=="") $condicion_filtrado_listas="1";
+                            if ($condicion_filtrado_listas=="")
+								$condicion_filtrado_listas="1";
+                            else
+								{
+									//Evalua casos donde se tienen variables PHP escapadas por llaves.  Ej  "%{$Variable}%" si fuera para un LIKE, por ejemplo o para una variable en un where  campo="{$Variable}"
+									if (strpos($condicion_filtrado_listas,"{")!==FALSE && strrpos($condicion_filtrado_listas,"}")!==FALSE)
+										{
+											//Determina las posiciones de las llaves en la cadena
+											$PosLlaveIzquierda=strpos($condicion_filtrado_listas,"{");
+											$PosLlaveDerecha=strrpos($condicion_filtrado_listas,"}");
+											//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
+											$NombreVariable=substr($condicion_filtrado_listas,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
+											//Si la variable no esta definida la busca en el entorno global
+											global $$NombreVariable;
+											if (@isset($NombreVariable))
+												{
+													$ValorVariable=${$NombreVariable};
+													//Reemplaza el valor encontrado en la cadena de valor original
+													$condicion_filtrado_listas=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$condicion_filtrado_listas);								
+												}
+										}
+								}
+
                             // Consulta los campos para el tag select
                             $resultado_opciones=ejecutar_sql("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE $condicion_filtrado_listas");   //Deprecated.  ORDER BY $campo_opciones
                             while ($registro_opciones = $resultado_opciones->fetch())
