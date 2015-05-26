@@ -917,7 +917,7 @@
 	$MULTILANG_NotasImportantesInst2='<u>IMPORTANTE</u>: Otros parametros como nombre largo y corto de su empresa, fecha de lanzamiento, textos de licencia y creditos podran ser modificados posteriormente mediante las opciones disponibles para el usuario administrador.';
 	$MULTILANG_AyudaTitCaptcha='Longitud de la palabra';
 	$MULTILANG_AyudaDesCaptcha='Indica el n&uacute;mero de s&iacute;mbolos utilizados en la palabra de seguridad que deben ingresar los usuarios para cada acceso al sistema.';
-	$MULTILANG_ModoDepuracion='Activar modo de depuraci&oacute;n?';
+	$MULTILANG_ModoDepuracion='Modo de depuraci&oacute;n';
 	$MULTILANG_AyudaTitDebug='Presentar errores y advertencias';
 	$MULTILANG_AyudaDesDebug='Para sitios en producci&oacute;n esta opci&oacute;n debe estar apagada.  Cuando se enciende ense&ntilde;a durante la ejecuci&oacute;n de la aplicaci&oacute;n todos los errores y mensajes que puedan ser generados por el preprocesador de hipertexto - PHP';
 	$MULTILANG_MotorAuth='Motor de autenticaci&oacute;n';

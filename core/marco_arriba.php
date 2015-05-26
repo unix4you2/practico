@@ -57,6 +57,7 @@
 
 
     <div id="wrapper">
+ 
 
 		<!-- Modal para mensajes generales -->
 		<div id="PCO_Modal_Mensaje" class="modal fade">
@@ -365,8 +366,11 @@
                     <div class="col-lg-12">
                         <br>
 
-
-
+						<?php
+							//Presenta advertencia sobre el modo de depuracion.  Se asume que debe estar siempre apagado en produccion
+							if ($ModoDepuracion)
+								mensaje($MULTILANG_ModoDepuracion, "", '', 'fa fa-fw fa-2x fa-info-circle texto-blink', 'alert alert-dismissible alert-danger');
+						?>
 
 
 <!-- INICIA MARCO DE CHAT -->
