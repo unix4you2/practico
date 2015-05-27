@@ -97,12 +97,14 @@
 			if ($PCO_Accion== "actualizar_menu")					$retorno = permiso_agregado_accion("administrar_menu");
 			// Funciones en core/tablas.php
 			if ($PCO_Accion== "asistente_tablas")					$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "guardar_crear_tabla_asistente")		$retorno = permiso_agregado_accion("asistente_tablas");
-			if ($PCO_Accion== "editar_tabla")						$retorno = permiso_agregado_accion("guardar_crear_tabla_asistente");
+			if ($PCO_Accion== "guardar_crear_tabla_asistente")		$retorno = permiso_agregado_accion("administrar_tablas");
+			if ($PCO_Accion== "editar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
 			if ($PCO_Accion== "eliminar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "eliminar_campo")						$retorno = permiso_agregado_accion("editar_tabla");
-			if ($PCO_Accion== "guardar_crear_campo")				$retorno = permiso_agregado_accion("editar_tabla");
+			if ($PCO_Accion== "eliminar_campo")						$retorno = permiso_agregado_accion("administrar_tablas");
+			if ($PCO_Accion== "guardar_crear_campo")				$retorno = permiso_agregado_accion("administrar_tablas");
 			if ($PCO_Accion== "guardar_crear_tabla")				$retorno = permiso_agregado_accion("administrar_tablas");
+			if ($PCO_Accion== "definir_copia_tablas")				$retorno = permiso_agregado_accion("administrar_tablas");
+			if ($PCO_Accion== "copia_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
 			// Funciones en core/formularios.php
 			if ($PCO_Accion== "guardar_datos_formulario")			$retorno = 1;
 			if ($PCO_Accion== "eliminar_datos_formulario")			$retorno = 1;

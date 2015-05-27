@@ -568,7 +568,114 @@ echo '
 		}
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: copiar_tabla
+	Genera el archivo de copia de una tabla
 
+	Ver tambien:
+		<administrar_tablas>
+*/
+	if ($PCO_Accion=="copiar_tabla")
+		{
+			$mensaje_error="";
+			if ($nombre_tabla=="")
+				$mensaje_error=$MULTILANG_ErrorTiempoEjecucion.".  No ingresado el nombre de tabla / Table name not entered";
+
+			if ($mensaje_error=="")
+				{
+				//Hace copia de seguridad de la base de datos
+				if ($tipo_copia_objeto=="Estructura+Datos")
+					{
+						$archivo_destino_backup_bdd="tmp/Tbl_".$nombre_tabla."_".$PCO_FechaOperacion."_".$PCO_HoraOperacion.".gz";
+						include_once("core/backups.php");
+						$objeto_backup_db = new DBBackup(array(
+							'driver' => $MotorBD,
+							'host' => $ServidorBD,
+							'user' => $UsuarioBD,
+							'password' => $PasswordBD,
+							'database' => $BaseDatos,
+							'prefix' => $nombre_tabla
+						));
+						$resultado_backup = $objeto_backup_db->backup();
+						if(!$resultado_backup['error'])
+							{
+								// Por ahora, comprime el archivo resultante y lo guarda.
+								$resultado_backup_comprimido = gzencode($resultado_backup['msg'], 9);
+								$puntero_archivo_destino_backup_bdd = fopen($archivo_destino_backup_bdd, "w");
+								fwrite($puntero_archivo_destino_backup_bdd, $resultado_backup_comprimido);
+								fclose($puntero_archivo_destino_backup_bdd);
+								
+								
+								//Presenta la ventana con informacion y enlace de descarga
+								abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
+									<div align=center>
+									<?php echo $MULTILANG_FrmCopiaFinalizada; ?>
+									<br><br>
+									<a class="btn btn-success" href="<?php echo $archivo_destino_backup_bdd; ?>" target="_BLANK" download><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar; ?></a>
+									<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+									</div>
+
+								<?php
+								cerrar_ventana();
+							}
+						else
+							{
+								echo '<hr><b>'.$MULTILANG_ErrBkpBD.'.</b>';
+							}
+					}
+
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: definir_copia_tablas
+	Presenta opciones para generar una copia de la tabla seleccionada
+*/
+if ($PCO_Accion=="definir_copia_tablas")
+	{
+		 ?>
+
+        <form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<input type="Hidden" name="PCO_Accion" value="copiar_tabla">
+			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
+
+            <br>
+			<?php abrir_ventana($MULTILANG_FrmTipoObjeto, 'panel-primary'); ?>
+			<h4><?php echo $MULTILANG_FrmTipoCopiaExporta; ?>: <b><?php echo $nombre_tabla; ?></b></h4>
+            <label for="tipo_copia_objeto"><?php echo $MULTILANG_FrmTipoCopia; ?>:</label>
+            <select id="tipo_copia_objeto" name="tipo_copia_objeto" class="form-control btn-warning" >
+                <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                <option value="Estructura"><?php echo $MULTILANG_TblTipoCopia1; ?></option>
+                <option value="Datos"><?php echo $MULTILANG_TblTipoCopia2; ?></option>
+                <option value="Estructura+Datos"><?php echo $MULTILANG_TblTipoCopia3; ?></option>
+            </select>
+
+            </form>
+            <br>
+            <div align=center>
+            <a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCopiar; ?></a>
+            <a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+            </div>
+
+		<?php
+		cerrar_ventana();
+	}
+	
+	
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -634,6 +741,7 @@ echo '
                             <th><b><?php echo $MULTILANG_TblRegistros; ?></b></th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -656,6 +764,13 @@ echo '
 						echo '<tr>
 								<td><font color=gray>'.$PrefijoRegistro.'</font><b><font size=2>'.str_replace($PrefijoRegistro,'',$registro[0]).'</font></b></td>
 								<td>'.$total_registros.'</td>
+								<td align="center">
+										<form action="'.$ArchivoCORE.'" method="POST" name="dco'.$registro["0"].'" id="dco'.$registro["0"].'">
+												<input type="hidden" name="PCO_Accion" value="definir_copia_tablas">
+												<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
+                                                <a class="btn btn-default btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["0"].');"><i class="fa fa-code-fork"></i> '.$MULTILANG_FrmCopiar.'</a>
+										</form>
+								</td>
 								<td align="center">';
 
 					if ($PrefijoRegistro!=$TablasCore && $total_registros==0)							

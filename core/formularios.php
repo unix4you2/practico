@@ -2264,12 +2264,8 @@ if ($PCO_Accion=="editar_formulario")
 	Function: copiar_formulario
 	Agrega un formulario a partir de otro para la aplicacion
 
-	(start code)
-		INSERT INTO ".$TablasCore."formulario VALUES (0, '$titulo','$ayuda_titulo','$ayuda_texto','$color_fondo','$tabla_datos','$columnas')
-	(end)
-
 	Salida:
-		Registro agregado y paso a las ventanas de edicion de formulario para agregar los elementos internos
+		Archivo con el elemento exportado
 
 	Ver tambien:
 		<administrar_formularios>

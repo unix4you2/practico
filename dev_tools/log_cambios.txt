@@ -29,6 +29,7 @@ core/marco_conf.php
 core/marco_oauth.php
 core/menus.php
 core/sesion.php
+core/tablas.php
 core/usuarios.php
 core/ws_funciones.php
 core/ws_nucleo.php
@@ -56,6 +57,7 @@ LogCambios="
 * Added: Pestana de informacion sobre PHP en el marco de configuración.
 * Added: Los controles de listas de selección sobre formularios ahora soportan el uso de variables PHP dentro de sus variables de filtrado.
 * Added: El modo de depuracion informa a todos los usuarios cuando se encuentra activo.
+* Added: Se permite realización de copias de seguridad independientes por tabla con sentencias de creacion, inserción de datos y creación más inserción de datos.
 * Fixed: Corregida la seleccion del tipo de encripcion para motores de autenticacion federados. Ahora se aplica la encripcion correcta.
 * Fixed: Cuando no se ingresa nada en el buscador la busqueda arrojaba errores
 * Fixed: Menus superiores y laterales generaban conflicto por doble Id de formulario

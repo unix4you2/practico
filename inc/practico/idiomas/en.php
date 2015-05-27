@@ -792,6 +792,9 @@
 	$MULTILANG_TblAsCampos='Fields containing';
 	$MULTILANG_TblTotCampos='Total fields';
 	$MULTILANG_TblHlpAsist='All tables and fields can be personalized in the next step, <br> adding, removing or changing the properties of those that you want.';
+    $MULTILANG_TblTipoCopia1='Structure only (CREATE Sentence)';
+    $MULTILANG_TblTipoCopia2='Data (INSERT Sentences)';
+    $MULTILANG_TblTipoCopia3='Structure and Data (CREATE and INSERT sentences)';
 
 	//Usuarios
 	$MULTILANG_UsrCopia='Permissions copy completed. Please check below.';

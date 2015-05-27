@@ -789,6 +789,9 @@
 	$MULTILANG_TblAsCampos='Campos que contiene';
 	$MULTILANG_TblTotCampos='Total campos';
 	$MULTILANG_TblHlpAsist='Todas las tablas y sus campos podr&aacute;n ser personalizados en el siguiente paso,<br> agregando, eliminando o cambiando las propiedades de aquellos que desee.';
+    $MULTILANG_TblTipoCopia1='Solo estructura (Sentencia CREATE)';
+    $MULTILANG_TblTipoCopia2='Datos (Sentencias INSERT)';
+    $MULTILANG_TblTipoCopia3='Estructura y datos (Sentencias CREATE e INSERT)';
 	
 	//Usuarios
 	$MULTILANG_UsrCopia='Copia de permisos finalizada.  Por favor verifique a continuacion.';

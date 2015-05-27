@@ -508,7 +508,7 @@ if ($PCO_Accion=="aplicar_parche")
 				if ($PCO_TipoBackup=="Archivos+Basedatos")
 					{
 						$archivo_destino_backup_bdd="bkp/bkp_".$PCO_FechaOperacion."-".date("Hi")."_bdd.gz";
-						include("core/backups.php");
+						include_once("core/backups.php");
 						$objeto_backup_db = new DBBackup(array(
 							'driver' => $MotorBD,
 							'host' => $ServidorBD,
