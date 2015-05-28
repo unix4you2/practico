@@ -27,6 +27,140 @@
 	*/
 
 
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	// Function: PCO_BackupObtenerDatosTabla
+	Recupera los datos en formato Insert asociados a una tabla
+	
+	Variables de entrada:
+
+		PCO_NombreTabla - Nombre de la tabla de la que se desea obtener los datos
+
+	Salida:
+		Sentencias necesarias para insertar los datos en las tablas
+*/
+	function PCO_BackupObtenerDatosTabla($PCO_NombreTabla="")
+		{
+			$RegistrosEncontrados = ejecutar_sql('SELECT * FROM '.$PCO_NombreTabla)->fetchAll(PDO::FETCH_NUM);
+			$Datos = '';
+			foreach ($RegistrosEncontrados as $Registro)
+				{
+					foreach($Registro as &$Valor)
+						{
+							$Valor = htmlentities(addslashes($Valor));
+						}
+					$Datos .= 'INSERT INTO '. $PCO_NombreTabla .' VALUES (\'' . implode('\',\'', $Registro) . '\');'."\n";
+				}
+			return $Datos;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	// Function: PCO_BackupObtenerColumnasTabla
+	Recupera los campos asociados a una tabla de datos
+	
+	Variables de entrada:
+
+		PCO_NombreTabla - Nombre de la tabla de la que se desea obtener la estructura
+
+	Salida:
+		Sentencia de creacion de la tabla
+*/
+	function PCO_BackupObtenerColumnasTabla($PCO_NombreTabla="")
+		{
+			$ConsultaCreate = ejecutar_sql('SHOW CREATE TABLE '.$PCO_NombreTabla)->fetchAll();
+			$ConsultaCreate[0][1] = preg_replace("/AUTO_INCREMENT=[\w]*./", '', $ConsultaCreate[0][1]);
+			return $ConsultaCreate[0][1].";"."\n";
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	// Function: PCO_BackupObtenerTablasBD
+	Recupera las tablas desde la base de datos
+	
+	Variables de entrada:
+
+		PCO_ListaTablas - Lista de tablas separadas por coma o simbolo * para todas las tablas
+
+	Salida:
+		Retorna un arreglo con todas las tablas y su backup dividido en tres campos logicos de Nombre, SentenciaCreate y SentenciaInsert
+		Retorna 0 cuando se obtiene algun error
+*/
+	function PCO_BackupObtenerTablasBD($PCO_ListaTablas="",$TipoDeCopia="Estructura")
+		{
+			$TablasExistentes = ejecutar_sql('SHOW TABLES')->fetchAll();
+			$TablasSolicitadasBackup=explode(",",$PCO_ListaTablas);
+			$i=0;
+			foreach($TablasExistentes as $Tabla)
+				{
+					//Determina si la tabla esta dentro de las deseadas para backup
+					if (in_array($Tabla[0],$TablasSolicitadasBackup) || $PCO_ListaTablas=="*")
+						{
+							$ArregloFinalTablas[$i]['Nombre']=$Tabla[0];
+							if ($TipoDeCopia=="Estructura" || $TipoDeCopia=="Estructura+Datos")
+								$ArregloFinalTablas[$i]['SentenciaCreate']=PCO_BackupObtenerColumnasTabla($Tabla[0]);
+							if ($TipoDeCopia=="Datos" || $TipoDeCopia=="Estructura+Datos")
+								$ArregloFinalTablas[$i]['SentenciaInsert']=PCO_BackupObtenerDatosTabla($Tabla[0]);
+							$i++;
+						}
+				}
+			return $ArregloFinalTablas;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	// Function: PCO_Backup
+	Ejecuta un respaldo parcial o total de la base de datos sobre un archivo determinado
+	
+	Variables de entrada:
+
+		PCO_ListaTablas - Lista de tablas separadas por coma o simbolo * para todas las tablas
+		TipoDeCopia - Lista de tablas separadas por coma  Estructura|Datos|Estructura+Datos
+		ArchivoDestino - Ruta completa al archivo de destino del backup
+
+	Salida:
+		Retorna 1 ante un proceso exitoso
+		Retorna 0 cuando se obtiene algun error
+*/
+	function PCO_Backup($PCO_ListaTablas,$ArchivoDestino="",$TipoDeCopia="Estructura")
+		{
+			$EstadoOperacion=1;  //Asume que no hay errores
+			$ContenidoBackup="";
+			if ($ArchivoDestino=="") $EstadoOperacion=0;
+			
+			//Si no hay errores continua con el proceso
+			if ($EstadoOperacion==1)
+				{
+					//Lanza el proceso de copia
+					$ArregloContenidos=PCO_BackupObtenerTablasBD($PCO_ListaTablas,$TipoDeCopia);
+					//Recorre las tablas agregando todo al Backup
+					for($i=0;$i<count($ArregloContenidos);$i++)
+						{
+							if ($TipoDeCopia=="Estructura" || $TipoDeCopia=="Estructura+Datos")
+								$ContenidoBackup.=$ArregloContenidos[$i]['SentenciaCreate'];
+							if ($TipoDeCopia=="Datos" || $TipoDeCopia=="Estructura+Datos")
+								$ContenidoBackup.=$ArregloContenidos[$i]['SentenciaInsert'];
+						}
+
+					// Comprime el archivo resultante y lo guarda
+					$resultado_backup_comprimido = gzencode($ContenidoBackup, 9);
+					$puntero_archivo_destino_backup_bdd = fopen($ArchivoDestino, "w");
+					fwrite($puntero_archivo_destino_backup_bdd, $resultado_backup_comprimido);
+					fclose($puntero_archivo_destino_backup_bdd);
+				}
+			//Retorna el resultado general de la operacion de copia
+			return $EstadoOperacion;
+		}
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*

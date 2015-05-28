@@ -585,47 +585,26 @@ echo '
 
 			if ($mensaje_error=="")
 				{
-				//Hace copia de seguridad de la base de datos
-				if ($tipo_copia_objeto=="Estructura+Datos")
-					{
-						$archivo_destino_backup_bdd="tmp/Tbl_".$nombre_tabla."_".$PCO_FechaOperacion."_".$PCO_HoraOperacion.".gz";
-						include_once("core/backups.php");
-						$objeto_backup_db = new DBBackup(array(
-							'driver' => $MotorBD,
-							'host' => $ServidorBD,
-							'user' => $UsuarioBD,
-							'password' => $PasswordBD,
-							'database' => $BaseDatos,
-							'prefix' => $nombre_tabla
-						));
-						$resultado_backup = $objeto_backup_db->backup();
-						if(!$resultado_backup['error'])
-							{
-								// Por ahora, comprime el archivo resultante y lo guarda.
-								$resultado_backup_comprimido = gzencode($resultado_backup['msg'], 9);
-								$puntero_archivo_destino_backup_bdd = fopen($archivo_destino_backup_bdd, "w");
-								fwrite($puntero_archivo_destino_backup_bdd, $resultado_backup_comprimido);
-								fclose($puntero_archivo_destino_backup_bdd);
-								
-								
-								//Presenta la ventana con informacion y enlace de descarga
-								abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
-									<div align=center>
-									<?php echo $MULTILANG_FrmCopiaFinalizada; ?>
-									<br><br>
-									<a class="btn btn-success" href="<?php echo $archivo_destino_backup_bdd; ?>" target="_BLANK" download><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar; ?></a>
-									<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
-									</div>
+					$archivo_destino_backup_bdd="tmp/Tbl_".$nombre_tabla."_".$PCO_FechaOperacion."_".$PCO_HoraOperacion.".gz";
+					//Hace copia de seguridad de la tabla seleccionada
+					if (PCO_Backup($nombre_tabla,$archivo_destino_backup_bdd,$tipo_copia_objeto))
+						{
+							//Presenta la ventana con informacion y enlace de descarga
+							abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
+								<div align=center>
+								<?php echo $MULTILANG_FrmCopiaFinalizada; ?>
+								<br><br>
+								<a class="btn btn-success" href="<?php echo $archivo_destino_backup_bdd; ?>" target="_BLANK" download><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar; ?></a>
+								<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+								</div>
 
-								<?php
-								cerrar_ventana();
-							}
-						else
-							{
-								echo '<hr><b>'.$MULTILANG_ErrBkpBD.'.</b>';
-							}
-					}
-
+							<?php
+							cerrar_ventana();
+						}
+					else
+						{
+							echo '<hr><b>'.$MULTILANG_ErrBkpBD.'.</b>';
+						}
 				}
 			else
 				{

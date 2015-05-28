@@ -508,24 +508,9 @@ if ($PCO_Accion=="aplicar_parche")
 				if ($PCO_TipoBackup=="Archivos+Basedatos")
 					{
 						$archivo_destino_backup_bdd="bkp/bkp_".$PCO_FechaOperacion."-".date("Hi")."_bdd.gz";
-						include_once("core/backups.php");
-						$objeto_backup_db = new DBBackup(array(
-							'driver' => $MotorBD,
-							'host' => $ServidorBD,
-							'user' => $UsuarioBD,
-							'password' => $PasswordBD,
-							'database' => $BaseDatos,
-							'prefix' => $TablasCore
-						));
-						$resultado_backup = $objeto_backup_db->backup();
-						if(!$resultado_backup['error'])
+						//Hace copia de seguridad de la base de datos
+						if (PCO_Backup("*",$archivo_destino_backup_bdd,"Estructura+Datos"))
 							{
-								// Un echo nl2br($backup['msg']); podría mostrar contenido
-								// Por ahora, comprime el archivo resultante y lo guarda.
-								$resultado_backup_comprimido = gzencode($resultado_backup['msg'], 9);
-								$puntero_archivo_destino_backup_bdd = fopen($archivo_destino_backup_bdd, "w");
-								fwrite($puntero_archivo_destino_backup_bdd, $resultado_backup_comprimido);
-								fclose($puntero_archivo_destino_backup_bdd);
 							}
 						else
 							{
