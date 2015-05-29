@@ -306,7 +306,6 @@
             </script>
     <?php        
             } // Fin Si existe ACE
-    echo $PCO_CamposSummerNote;
     ?>
 	
     <script language="JavaScript">
