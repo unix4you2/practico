@@ -795,6 +795,10 @@
     $MULTILANG_TblTipoCopia1='Structure only (CREATE Sentence)';
     $MULTILANG_TblTipoCopia2='Data (INSERT Sentences)';
     $MULTILANG_TblTipoCopia3='Structure and Data (CREATE and INSERT sentences)';
+    $MULTILANG_TblImportar='Import from file';
+    $MULTILANG_TblImportarSQL='Upload a compressed SQL';
+    $MULTILANG_TblSQLConsejo='If you execute the SQL sentences of this file you could be erasing, creating or overwritting tables and many other information, even designs and other things the you exported in that records. <br><br><b>We recomend you that make a backup before continue.</b>';
+    $MULTILANG_TblEjecutarSQL='Run SQL sentences in this file (could take some time)';
 
 	//Usuarios
 	$MULTILANG_UsrCopia='Permissions copy completed. Please check below.';

@@ -597,7 +597,6 @@ echo '
 								<a class="btn btn-success" href="<?php echo $archivo_destino_backup_bdd; ?>" target="_BLANK" download><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar; ?></a>
 								<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 								</div>
-
 							<?php
 							cerrar_ventana();
 						}
@@ -653,7 +652,156 @@ if ($PCO_Accion=="definir_copia_tablas")
 		<?php
 		cerrar_ventana();
 	}
-	
+
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: confirmar_importacion_tabla
+	Lee el archivo cargado sobre /tmp y ejecuta los scripts SQL
+
+	Variables de entrada:
+
+		archivo_cargado - Ruta absoluta hacia el archivo analizado en el paso anterior del asistente
+
+	Salida:
+		Tablas generadas a partir de la definicion del archivo
+*/
+if ($PCO_Accion=="confirmar_importacion_tabla")
+	{
+		echo "<br>";
+		$mensaje_error="";
+		abrir_ventana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
+		
+		if ($archivo_cargado=="") $mensaje_error=$MULTILANG_ErrorTiempoEjecucion;
+
+		if ($mensaje_error=="")
+			{
+				$RutaScriptSQL=$archivo_cargado;
+				$archivo_consultas=fopen($RutaScriptSQL,"r");
+				$total_consultas= fread($archivo_consultas,filesize($RutaScriptSQL));
+				fclose($archivo_consultas);
+				//Descomprime el archivo
+				$total_consultas = gzdecode($total_consultas);
+				//Crea arreglo de consultas y las recorre
+				$arreglo_consultas = PCO_SegmentarSQL($total_consultas);
+				foreach($arreglo_consultas as $consulta)
+					{
+						//Ejecuta el query
+						ejecutar_sql_unaria($consulta);
+						$total_ejecutadas++;
+					}
+				//Presenta mensaje de finalizacion
+				echo '
+				<b>'.$MULTILANG_FrmImportarGenerado.':</b><br>
+				<br>
+				<a class="btn btn-block btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
+				auditar("Importa $archivo_cargado en tablas de aplicacion");
+			}
+		else
+			{
+				echo '			
+				<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ActErrGral.'">
+					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+					</form>
+					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+			}
+		echo '</center>';
+
+		cerrar_ventana();
+        $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: importar_tabla
+	Presenta el paso 1 de importacion de tablas
+*/
+if ($PCO_Accion=="importar_tabla")
+	{
+		echo "<br>";
+		abrir_ventana($NombreRAD.' - '.$MULTILANG_TblImportar,'panel-info');
+?>
+
+    <ul class="nav nav-tabs nav-justified">
+    <li class="active"><a href="#pestana_importacion" data-toggle="tab"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_TblImportarSQL; ?></a></li>
+    <li><a href="#historico_importaciones" data-toggle="tab"><i class="fa fa-history"></i> <?php echo $MULTILANG_Historico; ?></a></li>
+    </ul>
+
+    <div class="tab-content">
+        
+        <!-- INICIO TAB IMPORTACION -->
+        <div class="tab-pane fadein active" id="pestana_importacion">
+            <br>
+            <b><?php echo $MULTILANG_Atencion.":</b><br>".$MULTILANG_TblSQLConsejo; ?>
+            <br><br>
+            <div align="center">
+                        <form action="<?php echo $ArchivoCORE; ?>" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="extension_archivo" value=".gz">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="8192000">
+                            <input type="Hidden" name="PCO_Accion" value="cargar_archivo">
+                            <input type="Hidden" name="siguiente_accion" value="confirmar_importacion_tabla">
+                            <input type="Hidden" name="texto_boton_siguiente" value="<?php echo $MULTILANG_TblEjecutarSQL; ?>">
+                            <input type="Hidden" name="carpeta" value="tmp">
+                            <input name="archivo" type="file" class="form-control btn btn-info">
+                            <br>
+                            <button type="submit"  class="btn btn-success"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_CargarArchivo; ?></button> (<?php echo $MULTILANG_ActSobreescritos; ?>)
+                        </form> 
+                        <hr>
+            </div>
+        </div>
+        <!-- FIN TAB IMPORTACION -->
+        
+
+        <!-- INICIO TAB HISTORICO DE IMPORTACIONES -->
+        <div class="tab-pane fade" id="historico_importaciones">
+                <div class="well well-sm"><b>Ultimos 30 registros / Last 30 records</b></div>
+                <table id="TablaAcciones" class="table table-condensed table-hover table-unbordered btn-xs table-striped">
+                    <thead>
+					<tr>
+						<th><b><?php echo $MULTILANG_UsrLogin; ?></b></th>
+						<th><b><?php echo $MULTILANG_UsrAudDes; ?></b></th>
+						<th><b><?php echo $MULTILANG_Fecha; ?></b></th>
+						<th><b><?php echo $MULTILANG_Hora; ?></b></th>
+					</tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                        // Busca por las auditorias asociadas a actualizacion de plataforma:
+                        // Acciones:  Actualiza version de plataforma | _Actualizacion_ | Analiza archivo tmp/Practico | Carga archivo en carpeta tmp - Practico
+                        $resultado=@ejecutar_sql("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE accion LIKE '%Import%' AND accion LIKE '%.gz%' ORDER BY fecha DESC, hora DESC LIMIT 0,30");
+                        while($registro = $resultado->fetch())
+                            {
+                                echo '<tr>
+                                        <td>'.$registro["usuario_login"].'</td>
+                                        <td>'.$registro["accion"].'</td>
+                                        <td>'.$registro["fecha"].'</td>
+                                        <td>'.$registro["hora"].'</td>
+                                    </tr>';
+                            }
+                    ?>
+                    </tbody>
+                </table>
+
+        </div>
+        <!-- FIN TAB HISTORICO DE IMPORTACIONES -->
+        
+    </div>
+
+<?php
+		abrir_barra_estado();
+		echo '<a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
+		cerrar_barra_estado();
+		cerrar_ventana();
+        $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
+	}
+
 	
 /* ################################################################## */
 /* ################################################################## */
@@ -699,14 +847,20 @@ if ($PCO_Accion=="definir_copia_tablas")
 					</tr>
 				</table>
 			</td>
-			<td width=50>
-			</td>
+			<td width=50></td>
 			<td align=center>
 				<form name="datosasis" id="datosasis" action="<?php echo $ArchivoCORE; ?>" method="POST">
 				<input type="Hidden" name="PCO_Accion" value="asistente_tablas">
 				<?php echo $MULTILANG_Asistente; ?><br>
-				<a href="javascript:document.datosasis.submit();" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TblTitAsis; ?>: <?php echo $MULTILANG_TblDesAsis; ?>"><i class="fa fa-magic fa-5x texto-naranja"></i></a>
+				<a href="javascript:document.datosasis.submit();" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TblTitAsis; ?>: <?php echo $MULTILANG_TblDesAsis; ?>"><i class="btn fa fa-magic fa-5x texto-naranja"></i></a>
 				</form>
+			</td>
+			<td width=50></td>
+			<td align=center>
+				<form name="importacion" id="importacion" action="<?php echo $ArchivoCORE; ?>" method="POST">
+					<input type="Hidden" name="PCO_Accion" value="importar_tabla">
+				</form>
+				<a class="btn btn-warning btn-block" href="javascript:document.importacion.submit();"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_TblImportar; ?></a>
 			</td>
 			<tr>
 			</table>

@@ -792,6 +792,10 @@
     $MULTILANG_TblTipoCopia1='Solo estructura (Sentencia CREATE)';
     $MULTILANG_TblTipoCopia2='Datos (Sentencias INSERT)';
     $MULTILANG_TblTipoCopia3='Estructura y datos (Sentencias CREATE e INSERT)';
+    $MULTILANG_TblImportar='Importar desde archivo';
+    $MULTILANG_TblImportarSQL='Cargar SQL comprimido';
+    $MULTILANG_TblSQLConsejo='Al ejecutar las sentencias SQL contenidas en el archivo usted podria estar eliminando, creando o sobreescribiendo tablas, registros y demas informacion asociada, asi como dise&ntilde;os y otros elementos contenidos en los registros asociados. <br><br><b>Se recomienda que haga una copia de seguridad previo a este proceso antes de continuar.</b>';
+    $MULTILANG_TblEjecutarSQL='Ejecutar sentencias SQL del archivo (puede tardar)';
 	
 	//Usuarios
 	$MULTILANG_UsrCopia='Copia de permisos finalizada.  Por favor verifique a continuacion.';

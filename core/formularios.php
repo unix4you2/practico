@@ -2944,11 +2944,11 @@ function FrmAutoRun()
 		<?php	cerrar_ventana();	?>
 
 
-        <form name="importacion" id="importacion" action="<?php echo $ArchivoCORE; ?>" method="POST">
+		<form name="importacion" id="importacion" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="importar_formulario">
 			<?php abrir_ventana($MULTILANG_FrmAgregar." ($MULTILANG_Avanzado)", 'panel-default'); ?>
-            </form>
-            <a class="btn btn-warning btn-block" href="javascript:document.importacion.submit();"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_FrmImportar; ?></a>
+		</form>
+		<a class="btn btn-warning btn-block" href="javascript:document.importacion.submit();"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_FrmImportar; ?></a>
 		<?php	cerrar_ventana();	?>
 
 
