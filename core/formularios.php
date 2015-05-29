@@ -732,7 +732,7 @@ if ($PCO_Accion=="editar_formulario")
 					if (tipo_objeto_activo=="objeto_camara")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,31,36");
                     if (tipo_objeto_activo=="form_consulta")   VisualizarCampos("9,17,24,32,33,34,36");
                     if (tipo_objeto_activo=="boton_comando")   VisualizarCampos("1,9,36,37,38,39,40,41");
-					if (tipo_objeto_activo=="area_responsive") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17,36,37");
+					if (tipo_objeto_activo=="area_responsive") VisualizarCampos("1,2,6,9,15,17,36");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}

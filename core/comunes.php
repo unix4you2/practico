@@ -2287,15 +2287,10 @@ function selector_iconos_awesome()
 		{
 			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
-			global $PCO_CamposSummerNote;
+			global $PCO_CamposSummerNote,$PCO_AlturasCamposSummerNote;
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
-
-			// Define cadenas de tamano de campo
-			$cadena_ancho_visual=' cols="'.$registro_campos["ancho"].'" ';
-			$cadena_alto_visual=' rows="'.$registro_campos["alto"].'" ';
-			$cadena_longitud_visual=$cadena_ancho_visual.$cadena_alto_visual;
 
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
@@ -2320,6 +2315,7 @@ function selector_iconos_awesome()
 			';
 
 			$PCO_CamposSummerNote.=$registro_campos["campo"]."|";
+			$PCO_AlturasCamposSummerNote.=$registro_campos["alto"]."|";
 
 
 

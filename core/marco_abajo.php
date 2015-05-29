@@ -315,16 +315,24 @@
             <?php
                 //Desglosa la cadena de posibles SummerNote
                 $CamposSummerNote=@explode("|",$PCO_CamposSummerNote);
+                $AlturasSummerNote=@explode("|",$PCO_AlturasCamposSummerNote);
                 for ($i=0; $i<count($CamposSummerNote);$i++)
 					{
 						$NombreCampoSummer=$CamposSummerNote[$i];
 						//Si hay un valor de ID lo activa (Para evitar pipe al final)
 						if ($NombreCampoSummer!="")
-							echo "
-								$('#Summer_$NombreCampoSummer').summernote({
-								lang: '".$IdiomaPredeterminado."-".strtoupper($IdiomaPredeterminado)."', // default: 'en-US'
-								  onChange: function(contents) { document.datos.$NombreCampoSummer.value=contents; }
-								});";
+							{
+								//Si el campo tiene una altura la agrega
+								$cadena_altura="";
+								if ($AlturasSummerNote[$i]!="" && $AlturasSummerNote[$i]!="0")
+									$cadena_altura="height: ".$AlturasSummerNote[$i].", ";
+								echo "
+									$('#Summer_$NombreCampoSummer').summernote({
+									lang: '".$IdiomaPredeterminado."-".strtoupper($IdiomaPredeterminado)."', // default: 'en-US'
+									  $cadena_altura
+									  onChange: function(contents) { document.datos.$NombreCampoSummer.value=contents; }
+									});";
+							}
 					}
             ?>
         });
