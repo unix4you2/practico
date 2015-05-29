@@ -2603,7 +2603,6 @@ function selector_iconos_awesome()
 			// Muestra boton de busqueda cuando el campo sea usado para esto
 			if ($registro_campos["etiqueta_busqueda"]!="")
 				{
-					echo $cadena_valor;
                     $salida.= '<span class="input-group-addon"><input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.PCO_ValorBusquedaBD.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.PCO_Accion.value=\'cargar_objeto\';document.datos.submit()"></span>';
 					$salida.= '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
 					$salida.= '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
