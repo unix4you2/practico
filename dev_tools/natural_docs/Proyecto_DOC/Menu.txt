@@ -132,6 +132,7 @@ Group: Mod  {
    File: ldap/.../lib/schema_functions.php  (mod/ldap/phpldapadmin-1.2.3/lib/schema_functions.php)
    File: ldap_admin_embebido  (mod/ldap/index.php)
    File: pcc_erp/index.php  (mod/pcc_erp/index.php)
+   File: PCO_Proxy  (mod/proxy/index.php)
 
    Group: Pcoder  {
 

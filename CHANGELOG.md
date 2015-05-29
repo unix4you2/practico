@@ -6,6 +6,31 @@
 |_____\___/ \__, |  \__,_|\___|  \___\__,_|_| |_| |_|_.__/|_|\___/|___/
             |___/ 
 ```
+
+## Versión 15.6 (2015-05-31)
+* Added: Las opciones de menu ahora soportan imagenes sobre rutas relativas a cualquier parte de la aplicación o módulo.  Al ingresar un archivo en el campo imagen en la creacion de menus el sistema deja de un lado los estilos y agrega la imagen cruda en su tamaño total.
+* Added: El asistente de actualización permite ahora escoger el tipo de backup realizado al sistema entre sólo y scripts y scripts+base de datos
+* Added: Los informes ahora permiten recibir variables PHP declaradas en sus variables de filtro y además variables PHP ingresadas en sus condiciones.  Para estas últimas no se requiere su declaración en el informe pues son buscadas en su entorno global en caso de no ser encontradas y estar escapadas entre llaves.
+* Added: Se permite vincular formularios de filtro a informes para captura de variables PHP previas requeridas por las condiciones.  Esta funcion autodetecta formularios cargados como filtro y genera automaticamente el boton de redireccion al informe asociado.
+* Added: Ahora los campos de un informe pueden ser establecidos como visibles u ocultos.  Esto permitirá utilizar campos de ID para operaciones estando de primeros en el informe y además ocultos junto con otros campos a los que se defina esta propiedad.
+* Added: Generación de archivos XML con objetos tipo formulario e informe que permiten transportar diseños entre instancias de aplicaciones en Práctico
+* Added: Pestana de informacion sobre PHP en el marco de configuración.
+* Added: Los controles de listas de selección sobre formularios ahora soportan el uso de variables PHP dentro de sus variables de filtrado.
+* Added: El modo de depuracion informa a todos los usuarios cuando se encuentra activo.
+* Added: Se permite realización de copias de seguridad independientes por tabla con sentencias de creacion, inserción de datos y creación más inserción de datos.
+* Fixed: Corregida la seleccion del tipo de encripcion para motores de autenticacion federados. Ahora se aplica la encripcion correcta.
+* Fixed: Cuando no se ingresa nada en el buscador la busqueda arrojaba errores
+* Fixed: Menus superiores y laterales generaban conflicto por doble Id de formulario
+* Fixed: Textos de confirmación para botones de formulario e informes son activados.  Ahora al agregar un texto de confirmación éste es tenido en cuenta para preguntarle al usuario antes de ejecutar la acción.
+* Fixed: Eliminacion de informes no eliminaba botones asociados
+* Enhan: Sobreescritura de variables para WebServices asi: WSId a PCO_WSId, WSOn a PCO_WSOn, WSKey a PCO_WSKey, WSSecret a PCO_WSSecret
+* Enhan: Autenticación federada prohibe actualizar perfiles de usuario y cambiar sus claves pues todo se toma del sistema federado.  Solo el admin sigue con la independencia.
+* Enhan: Reubicación de pestaña de historico de actualizaciones a la segunda posición, dejando las copias de seguridad al final.
+* Enhan: Agregada variable PCO_VersionActual para indicar la versión de la herramienta.
+* Enhan: Agregado indicador de modo de depuracion encendido en la parte superior.  Ademas el modo de depuración solo afecta al admin para evitar que otros usuarios vean mensajes de alerta que pueden no interesarles
+* Enhan: Mejorada la clase de copias de bases de datos.  Se reescribe totalmente para lograr mayor flexibilidad en copias de una, varias o todas las tablas.  con o sin estructura o datos.
+IMPORTANTE:  Aquellos usuarios que hagan uso extensivo de webservices deberian hacer los ajustes de nombre para sus variables de modo que estos sigan operantes despues del cambio.  Un simple buscar y reemplazar WSId por PCO_WSId en todos sus documentos debería ser suficiente.  Igual para las demás variables.
+
 ## Versión 15.5 (2015-05-01)
 * Added: Disponible la copia/Clonado rápido de informes desde el listado de informes
 * Added: Se permite ubicacion de opciones en la barra de menu izquierda. Será ubicados debajo de las opciones administrativas predeterminadas.
