@@ -319,7 +319,7 @@
 	$MULTILANG_FrmTipoTit1='Controles de datos';
 	$MULTILANG_FrmTipo1='Campo de texto corto';
 	$MULTILANG_FrmTipo2='Campo de texto libre';
-	$MULTILANG_FrmTipo3='Campo de texto con formato enriquecido';
+	$MULTILANG_FrmTipo3='Campo de texto con formato (CKEditor)';
 	$MULTILANG_FrmTipo4='Campo de selecci&oacute;n (ComboBox o lista desplegable)';
 	$MULTILANG_FrmTipo5='Campo de selecci&oacute;n (RadioButton)';
 	$MULTILANG_FrmTipoTit2='Presentaci&oacute;n y otros contenidos';
@@ -336,6 +336,7 @@
 	$MULTILANG_FrmTipo14='Canvas (Captura Webcam - HTML5)';
 	$MULTILANG_FrmTipo15='SubFormulario (Para consulta en Solo lectura)';
     $MULTILANG_FrmTipo16='Boton de comando';
+    $MULTILANG_FrmTipo17='Campo de texto con formato (Responsive)';
 	$MULTILANG_FrmTipoPincel='Tama&ntilde;o del pincel';
 	$MULTILANG_FrmTipoColor='Color del trazo';
 	$MULTILANG_FrmTipoAdvertencia='Este tipo de controles deberia ser almacenado en su tabla dentro de campos de texto largo/ilimitado';

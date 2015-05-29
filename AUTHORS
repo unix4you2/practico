@@ -94,6 +94,12 @@ Bootstrap
     URL: http://getbootstrap.com/
 	Copyright 2011-2014 Twitter, Inc.
 
+SummerNote
+	Location: inc/summernote/*
+	License: MIT License
+    URL: http://summernote.org/
+	Created and Maintained by Summernote team
+
 Media files and CSS files under:
 		img/*
 		skin/*

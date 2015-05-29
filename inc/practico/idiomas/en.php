@@ -322,7 +322,7 @@
 	$MULTILANG_FrmTipoTit1='Data Controls';
 	$MULTILANG_FrmTipo1='Short text field';
 	$MULTILANG_FrmTipo2='Free/Unlimited text field';
-	$MULTILANG_FrmTipo3='Richly formatted text field';
+	$MULTILANG_FrmTipo3='Richly formatted text field (CKEditor)';
 	$MULTILANG_FrmTipo4='Selection field (ComboBox dropdown list)';
 	$MULTILANG_FrmTipo5='Selection field (RadioButton)';
 	$MULTILANG_FrmTipoTit2='Presentation and other content';
@@ -339,6 +339,7 @@
 	$MULTILANG_FrmTipo14='Canvas (Webcam capture - HTML5)';
 	$MULTILANG_FrmTipo15='SubForm (To query and ReadOnly)';
     $MULTILANG_FrmTipo16='Command button';
+    $MULTILANG_FrmTipo17='Richly formatted text field (Responsive)';
 	$MULTILANG_FrmTipoPincel='Brush size';
 	$MULTILANG_FrmTipoColor='Line color';
 	$MULTILANG_FrmTipoAdvertencia='This kind of data controls should be stored in your table into a long text or unlimited field';

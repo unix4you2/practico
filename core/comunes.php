@@ -2268,6 +2268,79 @@ function selector_iconos_awesome()
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: cargar_objeto_area_responsive
+	Genera el codigo HTML y CSS correspondiente a un campo de texto con formato responsive usando SummerNote
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		registro_datos_formulario - Arreglo asociativo con nombres de campo y valores cuando se hacen llamados de registro especificos
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
+	function cargar_objeto_area_responsive($registro_campos,$registro_datos_formulario)
+		{
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
+			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+			global $PCO_CamposSummerNote;
+
+			$salida='';
+			$nombre_campo=$registro_campos["campo"];
+
+			// Define cadenas de tamano de campo
+			$cadena_ancho_visual=' cols="'.$registro_campos["ancho"].'" ';
+			$cadena_alto_visual=' rows="'.$registro_campos["alto"].'" ';
+			$cadena_longitud_visual=$cadena_ancho_visual.$cadena_alto_visual;
+
+			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
+			$cadena_valor='';
+			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=$registro_campos["valor_predeterminado"];
+			//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.
+			if (substr($registro_campos["valor_predeterminado"], 0,1)=="$")
+				{
+					$nombre_variable = substr($registro_campos["valor_predeterminado"], 1);
+					global ${$nombre_variable};
+					if (isset($nombre_variable))
+						{
+							$valor_variable=$$nombre_variable;
+							$cadena_valor=' value="'.$valor_variable.'" ';							
+						}
+				}
+			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
+
+
+			// Muestra el campo
+			$salida.= '
+				<div id="Summer_'.$registro_campos["campo"].'" class="summernote"></div>
+			';
+
+			$PCO_CamposSummerNote.=$registro_campos["campo"]."|";
+
+
+
+
+
+
+
+			// Muestra el campo
+			$salida.= '<textarea id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' style="visibility:hidden; display:none;" >'.$cadena_valor.'</textarea>';
+			
+			// Muestra indicadores de obligatoriedad o ayuda
+			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" data-toggle="popover" data-placement="auto"  title="'.$MULTILANG_TitObligatorio.'" data-content="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" data-toggle="popover" data-placement="auto"  title="'.$registro_campos["ayuda_titulo"].'" data-content="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+
+			return $salida;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: cargar_objeto_texto_formato
 	Genera el codigo HTML y CSS correspondiente a un campo de texto largo (textarea alterado por CKEditor) vinculado a un campo de datos sobre un formulario
 
@@ -3559,6 +3632,7 @@ function selector_iconos_awesome()
                                                                             if ($tipo_de_objeto=="texto_clave") $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                                             if ($tipo_de_objeto=="texto_largo") $objeto_formateado = @cargar_objeto_texto_largo($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="texto_formato") { $objeto_formateado = @cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
+                                                                            if ($tipo_de_objeto=="area_responsive") $objeto_formateado = @cargar_objeto_area_responsive($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = @cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                                             if ($tipo_de_objeto=="lista_radio") $objeto_formateado = @cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="etiqueta") $objeto_formateado = @cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
@@ -3571,6 +3645,7 @@ function selector_iconos_awesome()
                                                                             if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="boton_comando") $objeto_formateado = @cargar_objeto_boton_comando($registro_campos,@$registro_datos_formulario);
                                                                             //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
+                                                                            
                                                                             //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
                                                                             //padre el valor del campo foraneo del form hijo para llamar a buscar form con
                                                                             //el valor de Id correspondiente
@@ -3631,6 +3706,7 @@ function selector_iconos_awesome()
                                                         if ($tipo_de_objeto=="texto_clave") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                         if ($tipo_de_objeto=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
+                                                        if ($tipo_de_objeto=="area_responsive") $objeto_formateado = @cargar_objeto_area_responsive($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                         if ($tipo_de_objeto=="lista_radio") $objeto_formateado = cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);

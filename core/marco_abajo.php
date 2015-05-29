@@ -118,6 +118,10 @@
 
 	<!-- Canvas -->
     <script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>
+    
+    <!-- SummerNote -->
+    <script src="inc/summernote/summernote.min.js"></script>
+    <script src="inc/summernote/lang/summernote-<?php echo $IdiomaPredeterminado; ?>-<?php echo strtoupper($IdiomaPredeterminado); ?>.js"></script>
 
     <!-- JavaScript Personalizado del tema -->
     <script src="inc/bootstrap/js/sb-admin-2.js"></script>
@@ -302,8 +306,29 @@
             </script>
     <?php        
             } // Fin Si existe ACE
+    echo $PCO_CamposSummerNote;
     ?>
-
+	
+    <script language="JavaScript">
+		//Activa visualmente todos los div tipo SummerNote y los asocia a cada textarea
+        $(document).ready(function() {
+            <?php
+                //Desglosa la cadena de posibles SummerNote
+                $CamposSummerNote=@explode("|",$PCO_CamposSummerNote);
+                for ($i=0; $i<count($CamposSummerNote);$i++)
+					{
+						$NombreCampoSummer=$CamposSummerNote[$i];
+						//Si hay un valor de ID lo activa (Para evitar pipe al final)
+						if ($NombreCampoSummer!="")
+							echo "
+								$('#Summer_$NombreCampoSummer').summernote({
+								lang: '".$IdiomaPredeterminado."-".strtoupper($IdiomaPredeterminado)."', // default: 'en-US'
+								  onChange: function(contents) { document.datos.$NombreCampoSummer.value=contents; }
+								});";
+					}
+            ?>
+        });
+    </script>
 
     <?php
         // Estadisticas de uso anonimo con GABeacon

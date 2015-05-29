@@ -732,6 +732,7 @@ if ($PCO_Accion=="editar_formulario")
 					if (tipo_objeto_activo=="objeto_camara")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,31,36");
                     if (tipo_objeto_activo=="form_consulta")   VisualizarCampos("9,17,24,32,33,34,36");
                     if (tipo_objeto_activo=="boton_comando")   VisualizarCampos("1,9,36,37,38,39,40,41");
+					if (tipo_objeto_activo=="area_responsive") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17,36,37");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -771,6 +772,7 @@ if ($PCO_Accion=="editar_formulario")
                                     <option value="texto_clave"     data-icon="glyphicon-eye-close"         <?php if (@$registro_campo_editar["tipo"]=="texto_clave")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo10; ?></option>
                                     <option value="texto_largo"     data-icon="glyphicon-text-width"        <?php if (@$registro_campo_editar["tipo"]=="texto_largo")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo2; ?></option>
                                     <option value="texto_formato"   data-icon="glyphicon-font"              <?php if (@$registro_campo_editar["tipo"]=="texto_formato")   echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo3; ?></option>
+                                    <option value="area_responsive" data-icon="glyphicon-edit"              <?php if (@$registro_campo_editar["tipo"]=="area_responsive") echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo17; ?></option>
                                     <option value="lista_seleccion" data-icon="glyphicon-ok"                <?php if (@$registro_campo_editar["tipo"]=="lista_seleccion") echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo4; ?></option>
                                     <option value="lista_radio"     data-icon="glyphicon-record"            <?php if (@$registro_campo_editar["tipo"]=="lista_radio")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo5; ?></option>
                                     <option value="deslizador"      data-icon="glyphicon-resize-horizontal" <?php if (@$registro_campo_editar["tipo"]=="deslizador")      echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo9; ?></option>
