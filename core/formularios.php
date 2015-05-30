@@ -732,7 +732,7 @@ if ($PCO_Accion=="editar_formulario")
 					if (tipo_objeto_activo=="objeto_camara")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,31,36");
                     if (tipo_objeto_activo=="form_consulta")   VisualizarCampos("9,17,24,32,33,34,36");
                     if (tipo_objeto_activo=="boton_comando")   VisualizarCampos("1,9,36,37,38,39,40,41");
-					if (tipo_objeto_activo=="area_responsive") VisualizarCampos("1,2,6,9,15,17,36");
+					if (tipo_objeto_activo=="area_responsive") VisualizarCampos("1,2,6,9,15,16,17,36");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -1026,11 +1026,20 @@ if ($PCO_Accion=="editar_formulario")
                             <label for="barra_herramientas"><?php echo $MULTILANG_FrmBarra; ?>:</label>
                             <div class="form-group input-group">
                                 <select  id="barra_herramientas" name="barra_herramientas" class="form-control" >
-                                    <option value="0" <?php if (@$registro_campo_editar["barra_herramientas"]=="0") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo1; ?></option>
-                                    <option value="1" <?php if (@$registro_campo_editar["barra_herramientas"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo2; ?></option>
-                                    <option value="2" <?php if (@$registro_campo_editar["barra_herramientas"]=="2") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo3; ?></option>
-                                    <option value="3" <?php if (@$registro_campo_editar["barra_herramientas"]=="3") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo4; ?></option>
-                                    <option value="4" <?php if (@$registro_campo_editar["barra_herramientas"]=="4") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo5; ?></option>
+									<optgroup label="<?php echo $MULTILANG_FrmBarraCKEditor; ?>">
+										<option value="0" <?php if (@$registro_campo_editar["barra_herramientas"]=="0") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo1; ?></option>
+										<option value="1" <?php if (@$registro_campo_editar["barra_herramientas"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo2; ?></option>
+										<option value="2" <?php if (@$registro_campo_editar["barra_herramientas"]=="2") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo3; ?></option>
+										<option value="3" <?php if (@$registro_campo_editar["barra_herramientas"]=="3") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo4; ?></option>
+										<option value="4" <?php if (@$registro_campo_editar["barra_herramientas"]=="4") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo5; ?></option>
+                                    </optgroup>
+									<optgroup label="<?php echo $MULTILANG_FrmBarraSummer; ?>">
+										<option value="5" <?php if (@$registro_campo_editar["barra_herramientas"]=="5") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo1Summer; ?></option>
+										<option value="6" <?php if (@$registro_campo_editar["barra_herramientas"]=="6") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo2Summer; ?></option>
+										<option value="7" <?php if (@$registro_campo_editar["barra_herramientas"]=="7") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo3Summer; ?></option>
+										<option value="8" <?php if (@$registro_campo_editar["barra_herramientas"]=="8") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo4Summer; ?></option>
+										<option value="9" <?php if (@$registro_campo_editar["barra_herramientas"]=="9") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo5Summer; ?></option>
+                                    </optgroup>
                                 </select>
                                 <span class="input-group-addon">
                                     <a href="#" title="<?php echo $MULTILANG_FrmTitBarra; ?>: <?php echo $MULTILANG_FrmDesBarra; ?>"><i class="fa fa-question-circle icon-info"></i></a>

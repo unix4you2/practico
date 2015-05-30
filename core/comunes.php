@@ -2287,7 +2287,7 @@ function selector_iconos_awesome()
 		{
 			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
-			global $PCO_CamposSummerNote,$PCO_AlturasCamposSummerNote;
+			global $PCO_CamposSummerNote,$PCO_AlturasCamposSummerNote,$PCO_HerramientasCamposSummerNote;
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
@@ -2307,28 +2307,17 @@ function selector_iconos_awesome()
 						}
 				}
 			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
-
-
+			
 			// Muestra el campo
-			$salida.= '
-				<div id="Summer_'.$registro_campos["campo"].'" class="summernote"></div>
-			';
-
+			$salida.= '<div id="Summer_'.$registro_campos["campo"].'" class="summernote"></div>';
+			
+			//Agrega el campo a la lista de campos de este tipo para ser activados al final
 			$PCO_CamposSummerNote.=$registro_campos["campo"]."|";
 			$PCO_AlturasCamposSummerNote.=$registro_campos["alto"]."|";
+			$PCO_HerramientasCamposSummerNote.=$registro_campos["barra_herramientas"]."|";
 
-
-
-
-
-
-
-			// Muestra el campo
+			// Agrega el campo del form pero oculto
 			$salida.= '<textarea id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' style="visibility:hidden; display:none;" >'.$cadena_valor.'</textarea>';
-			
-			// Muestra indicadores de obligatoriedad o ayuda
-			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" data-toggle="popover" data-placement="auto"  title="'.$MULTILANG_TitObligatorio.'" data-content="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" data-toggle="popover" data-placement="auto"  title="'.$registro_campos["ayuda_titulo"].'" data-content="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
 
 			return $salida;
 		}
