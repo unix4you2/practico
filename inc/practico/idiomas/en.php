@@ -322,7 +322,7 @@
 	$MULTILANG_FrmTipoTit1='Data Controls';
 	$MULTILANG_FrmTipo1='Short text field';
 	$MULTILANG_FrmTipo2='Free/Unlimited text field';
-	$MULTILANG_FrmTipo3='Richly formatted text field';
+	$MULTILANG_FrmTipo3='Richly formatted text field (CKEditor)';
 	$MULTILANG_FrmTipo4='Selection field (ComboBox dropdown list)';
 	$MULTILANG_FrmTipo5='Selection field (RadioButton)';
 	$MULTILANG_FrmTipoTit2='Presentation and other content';
@@ -339,6 +339,7 @@
 	$MULTILANG_FrmTipo14='Canvas (Webcam capture - HTML5)';
 	$MULTILANG_FrmTipo15='SubForm (To query and ReadOnly)';
     $MULTILANG_FrmTipo16='Command button';
+    $MULTILANG_FrmTipo17='Richly formatted text field (Responsive)';
 	$MULTILANG_FrmTipoPincel='Brush size';
 	$MULTILANG_FrmTipoColor='Line color';
 	$MULTILANG_FrmTipoAdvertencia='This kind of data controls should be stored in your table into a long text or unlimited field';
@@ -394,11 +395,18 @@
 	$MULTILANG_FrmDesAlto='IMPORTANT: the number of rows for simple text or in pixels for rich-text formatting. If the text exceeds the number of rows are automatically added scrollbars.  For image or bar code fields this value is for the size of the picture.';
 	$MULTILANG_FrmDesAlto2='Minimum recommended format fields: 100';
 	$MULTILANG_FrmBarra='Formatting bar';
+	$MULTILANG_FrmBarraCKEditor='Disponibles para CKEditor';
+	$MULTILANG_FrmBarraSummer='Disponibles para SummerNote (Responsive)';
 	$MULTILANG_FrmBarraTipo1='Basic: Document, character and paragraph formatting';
 	$MULTILANG_FrmBarraTipo2='Standard: Basic + links and font styles';
 	$MULTILANG_FrmBarraTipo3='Extended: Standard + clipboard, search-replace and spelling';
 	$MULTILANG_FrmBarraTipo4='Advanced: Extended + Insert objects and colors';
 	$MULTILANG_FrmBarraTipo5='Full: Advanced + Forms and full screen';
+	$MULTILANG_FrmBarraTipo1Summer='Basic: Character and paragraph formatting';
+	$MULTILANG_FrmBarraTipo2Summer='Standard: Basic + font styles';
+	$MULTILANG_FrmBarraTipo3Summer='Extended: Standard + Tables, links and lines';
+	$MULTILANG_FrmBarraTipo4Summer='Advanced: Extended + FullScreen and HTML Source';
+	$MULTILANG_FrmBarraTipo5Summer='Full: Advanced + Insert images and videos';
 	$MULTILANG_FrmTitBarra='Editor type used';
 	$MULTILANG_FrmDesBarra='Indicates the type of toolbar that appears at the top of the control and the user to perform different tasks of editing. IMPORTANT: Each type of editor requires a different space on the form as it should deploy a number of icons and different options';
 	$MULTILANG_FrmFila='Single row for this object?';

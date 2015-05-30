@@ -118,6 +118,11 @@
 
 	<!-- Canvas -->
     <script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>
+    
+    <!-- SummerNote -->
+    <script src="inc/summernote/summernote.min.js"></script>
+    <script src="inc/summernote/plugin/summernote-ext-video.js"></script>
+    <script src="inc/summernote/lang/summernote-<?php echo $IdiomaPredeterminado; ?>-<?php echo strtoupper($IdiomaPredeterminado); ?>.js"></script>
 
     <!-- JavaScript Personalizado del tema -->
     <script src="inc/bootstrap/js/sb-admin-2.js"></script>
@@ -303,7 +308,75 @@
     <?php        
             } // Fin Si existe ACE
     ?>
+	
+    <script language="JavaScript">
+		//Activa visualmente todos los div tipo SummerNote y los asocia a cada textarea
+        $(document).ready(function() {
+            <?php
+                //Desglosa la cadena de posibles SummerNote
+                $CamposSummerNote=@explode("|",$PCO_CamposSummerNote);
+                $AlturasSummerNote=@explode("|",$PCO_AlturasCamposSummerNote);
+                $HerramientasSummerNote=@explode("|",$PCO_HerramientasCamposSummerNote);
+                
+                for ($i=0; $i<count($CamposSummerNote);$i++)
+					{
+						$NombreCampoSummer=$CamposSummerNote[$i];
+						//Si hay un valor de ID lo activa (Para evitar pipe al final)
 
+						if ($NombreCampoSummer!="")
+							{
+								//Si el campo tiene una altura la agrega
+								$cadena_altura="";
+								if ($AlturasSummerNote[$i]!="" && $AlturasSummerNote[$i]!="0")
+									$cadena_altura="height: ".$AlturasSummerNote[$i].", ";
+									
+								//Construye el tipo de barra de herramientas, iniciando por la completa o sino asignando la que corresponda
+								$cadena_barraherramientas_Base="
+										['Operaciones', ['undo', 'redo']],";
+								$cadena_barraherramientas_Basica="
+									['Caracter', ['bold', 'italic', 'underline', 'strikethrough', 'clear', 'color']],
+									['Parrafo1', ['ul', 'ol']],
+									['Parrafo2', ['paragraph']],
+									['Parrafo3', ['height']],";
+								$cadena_barraherramientas_Estandar="
+									['Estilos', ['style']],
+									['Fuentes1', ['fontname']],
+									['Fuentes2', ['fontsize']],";
+								$cadena_barraherramientas_Extendida="
+									['Insertar1', ['link', 'table', 'hr']],";
+								$cadena_barraherramientas_Avanzada="
+									['Otros', ['fullscreen', 'codeview']], ";
+								$cadena_barraherramientas_Completa="
+									['Insertar2', ['picture', 'video']], ";
+
+								$cadena_barraherramientas=$cadena_barraherramientas_Base;
+								if ($HerramientasSummerNote[$i]=="5") //BASICA
+									$cadena_barraherramientas=$cadena_barraherramientas_Base.$cadena_barraherramientas_Basica;
+								if ($HerramientasSummerNote[$i]=="6") //ESTANDAR
+									$cadena_barraherramientas=$cadena_barraherramientas_Estandar.$cadena_barraherramientas_Base.$cadena_barraherramientas_Basica;								
+								if ($HerramientasSummerNote[$i]=="7") //EXTENDIDA
+									$cadena_barraherramientas=$cadena_barraherramientas_Estandar.$cadena_barraherramientas_Base.$cadena_barraherramientas_Basica.$cadena_barraherramientas_Extendida;
+								if ($HerramientasSummerNote[$i]=="8") //AVANZADA
+									$cadena_barraherramientas=$cadena_barraherramientas_Estandar.$cadena_barraherramientas_Base.$cadena_barraherramientas_Basica.$cadena_barraherramientas_Extendida.$cadena_barraherramientas_Avanzada;
+								if ($HerramientasSummerNote[$i]=="9") //COMPLETA
+									$cadena_barraherramientas=$cadena_barraherramientas_Estandar.$cadena_barraherramientas_Base.$cadena_barraherramientas_Basica.$cadena_barraherramientas_Extendida.$cadena_barraherramientas_Avanzada.$cadena_barraherramientas_Completa;
+
+								$cadena_barraherramientas="toolbar: [".$cadena_barraherramientas."],";
+
+								echo "
+									$('#Summer_$NombreCampoSummer').summernote({
+									lang: '".$IdiomaPredeterminado."-".strtoupper($IdiomaPredeterminado)."', // default: 'en-US'
+									  $cadena_altura
+									  $cadena_barraherramientas
+									  onChange: function(contents) { document.datos.$NombreCampoSummer.value=contents; }
+									});";
+								//Asigna el valor inicial del textarea al marco visual a manera de codigo
+								echo "$('#Summer_".$NombreCampoSummer."').code(document.datos.".$NombreCampoSummer.".value);";
+							}
+					}
+            ?>
+        }); //Fin del document.ready
+    </script>
 
     <?php
         // Estadisticas de uso anonimo con GABeacon

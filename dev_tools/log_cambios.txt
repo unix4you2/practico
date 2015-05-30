@@ -19,8 +19,12 @@ CHANGELOG.md
 AUTHORS	
 index.php
 core/comunes.php
+core/formularios.php
+core/marco_abajo.php
+core/marco_arriba_bs.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
+inc/summernote/*
 mod/pcoder/demo.php
 mod/pcoder/index.php
 "
@@ -33,6 +37,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added: Nuevo editor WYSIWYG Responsive
 * Fixed: Eliminada la impresion de cadena_valor en las listas usadas para recuperar registros.
 
 "

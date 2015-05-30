@@ -319,7 +319,7 @@
 	$MULTILANG_FrmTipoTit1='Controles de datos';
 	$MULTILANG_FrmTipo1='Campo de texto corto';
 	$MULTILANG_FrmTipo2='Campo de texto libre';
-	$MULTILANG_FrmTipo3='Campo de texto con formato enriquecido';
+	$MULTILANG_FrmTipo3='Campo de texto con formato (CKEditor)';
 	$MULTILANG_FrmTipo4='Campo de selecci&oacute;n (ComboBox o lista desplegable)';
 	$MULTILANG_FrmTipo5='Campo de selecci&oacute;n (RadioButton)';
 	$MULTILANG_FrmTipoTit2='Presentaci&oacute;n y otros contenidos';
@@ -336,6 +336,7 @@
 	$MULTILANG_FrmTipo14='Canvas (Captura Webcam - HTML5)';
 	$MULTILANG_FrmTipo15='SubFormulario (Para consulta en Solo lectura)';
     $MULTILANG_FrmTipo16='Boton de comando';
+    $MULTILANG_FrmTipo17='Campo de texto con formato (Responsive)';
 	$MULTILANG_FrmTipoPincel='Tama&ntilde;o del pincel';
 	$MULTILANG_FrmTipoColor='Color del trazo';
 	$MULTILANG_FrmTipoAdvertencia='Este tipo de controles deberia ser almacenado en su tabla dentro de campos de texto largo/ilimitado';
@@ -391,11 +392,18 @@
 	$MULTILANG_FrmDesAlto='IMPORTANTE: en n&uacute;mero de filas para texto simple o en pixeles para texto con formato.  En caso que el texto supere el n&uacute;mero de filas se agregar&aacute;n autom&aacute;ticamente barras de desplazamiento. Para campos con imagenes o codigos de barra esto representa su tamano en pixeles.';
 	$MULTILANG_FrmDesAlto2='M&iacute;nimo recomendado en campos con formato: 100';
 	$MULTILANG_FrmBarra='Barra de edici&oacute;n';
+	$MULTILANG_FrmBarraCKEditor='Disponibles para CKEditor';
+	$MULTILANG_FrmBarraSummer='Disponibles para SummerNote (Responsive)';
 	$MULTILANG_FrmBarraTipo1='B&aacute;sica: Documento, formato de caracter y p&aacute;rrafo';
 	$MULTILANG_FrmBarraTipo2='Est&aacute;ndar: B&aacute;sica + Enlaces, estilos de fuente';
 	$MULTILANG_FrmBarraTipo3='Extendida: Est&aacute;ndar + Portapapeles, buscar-reemplazar y ortograf&iacute;a';
 	$MULTILANG_FrmBarraTipo4='Avanzada: Extendida + Insertar objetos y colores';
 	$MULTILANG_FrmBarraTipo5='Completa: Avanzada +  Formularios y pantalla completa';
+	$MULTILANG_FrmBarraTipo1Summer='B&aacute;sica: Formato de caracter y p&aacute;rrafo';
+	$MULTILANG_FrmBarraTipo2Summer='Est&aacute;ndar: B&aacute;sica + Estilos de fuente';
+	$MULTILANG_FrmBarraTipo3Summer='Extendida: Est&aacute;ndar + Tablas, enlaces y lineas';
+	$MULTILANG_FrmBarraTipo4Summer='Avanzada: Extendida + Pantalla completa y Fuente HTML';
+	$MULTILANG_FrmBarraTipo5Summer='Completa: Avanzada + Insertar objetos de video o imagen';
 	$MULTILANG_FrmTitBarra='Tipo de editor utilizado';
 	$MULTILANG_FrmDesBarra='Indica el tipo de barra de herramientas que aparecer&aacute; en la parte superior del control y que permitir&aacute; realizar al usuario las diferentes tareas de edici&oacute;n del texto. IMPORTANTE: Cada tipo de editor requiere un espacio diferente en el formulario ya que debe desplegar un n&uacute;mero de iconos y opciones diferentes';
 	$MULTILANG_FrmFila='Fila &uacute;nica para este objeto?';
