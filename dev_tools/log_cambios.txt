@@ -24,6 +24,7 @@ core/marco_abajo.php
 core/marco_arriba_bs.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
+inc/summernote/*
 mod/pcoder/demo.php
 mod/pcoder/index.php
 "
