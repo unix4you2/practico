@@ -45,6 +45,7 @@
     
     //Permite WebServices propios mediante el acceso a este script en solicitudes Cross-Domain
     header('Access-Control-Allow-Origin: *');
+	header ('Content-type: text/html; charset=utf-8');
     
     // Inicio de la sesion
     @session_start();
