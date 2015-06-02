@@ -461,6 +461,10 @@
 	$MULTILANG_FrmDesRetorno='Text that will appear as a header on the desktop after performing the action indicated by the user';
 	$MULTILANG_FrmTxtRetorno='Return text';
 	$MULTILANG_FrmTxtDesRetorno='Full Text with description of action taken or delivered to the user message after running control';
+	$MULTILANG_FrmTxtRetornoIcono='Iconf for return';
+	$MULTILANG_FrmTxtDesRetornoIcono='Set an icon to put in the message.  Use AwesomeFonts notation.  I.E.:  fa-info-circle  to show an information icon.';
+	$MULTILANG_FrmTxtRetornoEstilo='Return style';
+	$MULTILANG_FrmTxtDesRetornoEstilo='Set the CSS style for the return message.  Use BootStrap alerts notation.  I.E.: alert-danger, alert,warning,alert-info,alert-default,alert-success, etc';
 	$MULTILANG_FrmConfirma='Confirmation Text';
 	$MULTILANG_FrmDesConfirma='If its filled, Text that will appear as a popup warning control execution and waiting for user confirmation to proceed';
 	$MULTILANG_FrmBtnGuardarBut='Add Action / Button';

@@ -3358,23 +3358,28 @@ function selector_iconos_awesome()
             if ($registro_campos["modo_inline"])
                 $cadena_modo_inline='display:inline;';
 
+			//Transfiere variables de mensajes de retorno asociadas al boton
+			$comando_javascript="";
+			if ($registro_campos["retorno_titulo"]!="")
+				$comando_javascript="document.datos.PCO_ErrorTitulo.value='".$registro_botones["retorno_titulo"]."'; document.datos.PCO_ErrorDescripcion.value='".$registro_botones["retorno_texto"]."'; document.datos.PCO_ErrorIcono.value='".$registro_botones["retorno_icono"]."'; document.datos.PCO_ErrorEstilo.value='".$registro_botones["retorno_estilo"]."';";
+
             //Define el tipo de boton de acuerdo al tipo de accion
             if ($registro_campos["tipo_accion"]=="interna_guardar")
-                $comando_javascript="document.getElementById('datos').submit();";    
+                $comando_javascript.="document.getElementById('datos').submit();";    
             if ($registro_campos["tipo_accion"]=="interna_limpiar")
-                $comando_javascript="document.getElementById('datos').reset();";
+                $comando_javascript.="document.getElementById('datos').reset();";
             if ($registro_campos["tipo_accion"]=="interna_escritorio")
-                $comando_javascript="document.core_ver_menu.submit();";
+                $comando_javascript.="document.core_ver_menu.submit();";
             if ($registro_campos["tipo_accion"]=="interna_actualizar")
-                $comando_javascript="document.datos.PCO_Accion.value='actualizar_datos_formulario';document.datos.submit();";
+                $comando_javascript.="document.datos.PCO_Accion.value='actualizar_datos_formulario';document.datos.submit();";
             if ($registro_campos["tipo_accion"]=="interna_eliminar")
-                $comando_javascript="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit();";
+                $comando_javascript.="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit();";
             if ($registro_campos["tipo_accion"]=="interna_cargar")
-                $comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='".$registro_campos["accion_usuario"]."';document.datos.submit();";
+                $comando_javascript.="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='".$registro_campos["accion_usuario"]."';document.datos.submit();";
             if ($registro_campos["tipo_accion"]=="externa_formulario")
-                $comando_javascript="document.datos.PCO_Accion.value='".$registro_campos["accion_usuario"]."';document.datos.submit();";
+                $comando_javascript.="document.datos.PCO_Accion.value='".$registro_campos["accion_usuario"]."';document.datos.submit();";
             if ($registro_campos["tipo_accion"]=="externa_javascript")
-                $comando_javascript=$registro_campos["accion_usuario"];
+                $comando_javascript.=$registro_campos["accion_usuario"];
 
 			//Verifica si el registro de botones presenta algun texto de confirmacion y lo antepone al script
 			$cadena_confirmacion_accion_pre="";

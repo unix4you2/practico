@@ -159,7 +159,9 @@ CREATE TABLE core_formulario_boton (
   peso integer,
   retorno_titulo text default '',
   retorno_texto text,
-  confirmacion_texto text default ''
+  confirmacion_texto text default '',
+  retorno_icono text DEFAULT '',
+  retorno_estilo text DEFAULT ''
   
 );
 

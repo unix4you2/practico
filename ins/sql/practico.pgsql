@@ -160,6 +160,8 @@ CREATE TABLE core_formulario_boton (
   retorno_titulo varchar(50) default '',
   retorno_texto text,
   confirmacion_texto varchar(250) default '',
+  retorno_icono varchar(50) DEFAULT '',
+  retorno_estilo varchar(50) DEFAULT '',
   PRIMARY KEY  (id)
 );
 

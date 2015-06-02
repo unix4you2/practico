@@ -663,7 +663,7 @@
 			if ($mensaje_error=="")
 				{
 					//$accion_usuario=addslashes($accion_usuario); //DEPRECATED Version 15.1-
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$formulario$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$retorno_titulo$_SeparadorCampos_$retorno_texto$_SeparadorCampos_$confirmacion_texto");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$formulario$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$retorno_titulo$_SeparadorCampos_$retorno_texto$_SeparadorCampos_$confirmacion_texto$_SeparadorCampos_$retorno_icono$_SeparadorCampos_$retorno_estilo");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea boton $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_formulario">
@@ -1623,6 +1623,20 @@ if ($PCO_Accion=="editar_formulario")
                             <a href="#" title="<?php echo $MULTILANG_FrmTxtDesRetorno; ?>"><i class="fa fa-question-circle text-info"></i></a>
                         </span>
                     </div>
+
+                    <div class="form-group input-group">
+                        <input type="text" name="retorno_icono" class="form-control" placeholder="<?php echo $MULTILANG_FrmTxtRetornoIcono; ?>">
+                        <span class="input-group-addon">
+                            <a href="#" title="<?php echo $MULTILANG_FrmTxtDesRetornoIcono; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                        </span>
+                    </div>
+                    
+                    <div class="form-group input-group">
+						<input type="text" name="retorno_estilo" class="form-control" placeholder="<?php echo $MULTILANG_FrmTxtRetornoEstilo; ?>">
+                        <span class="input-group-addon">
+                            <a href="#" title="<?php echo $MULTILANG_FrmTxtDesRetornoEstilo; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                        </span>
+                    </div>                    
 
                     <div class="form-group input-group">
                         <input type="text" name="confirmacion_texto" class="form-control" placeholder="<?php echo $MULTILANG_FrmConfirma; ?>">
@@ -2614,7 +2628,7 @@ if ($PCO_Accion=="confirmar_importacion_formulario")
 				//Determina cuantos campos tiene la tabla
 				$ArregloCampos=explode(',',$ListaCamposSinID_formulario_boton);
 				$TotalCampos=count($ArregloCampos);
-				// Registros de formulario_objeto
+				// Registros de formulario_boton
 				for ($PCO_i=0;$PCO_i<$xml_importado->total_core_formulario_boton[0]->cantidad_objetos;$PCO_i++)
 					{
 						//Genera cadena de interrogantes y valores segun cantidad de campos
