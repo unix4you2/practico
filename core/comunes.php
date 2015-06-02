@@ -287,9 +287,9 @@
 			if ($PCO_Accion== "guardar_crear_campo")				$retorno = permiso_agregado_accion("administrar_tablas");
 			if ($PCO_Accion== "guardar_crear_tabla")				$retorno = permiso_agregado_accion("administrar_tablas");
 			if ($PCO_Accion== "definir_copia_tablas")				$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "copia_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
+			if ($PCO_Accion== "copiar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
 			if ($PCO_Accion== "importar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "confirmar_importacion_tabla")			$retorno = permiso_agregado_accion("administrar_tablas");
+			if ($PCO_Accion== "confirmar_importacion_tabla")		$retorno = permiso_agregado_accion("administrar_tablas");
 			// Funciones en core/formularios.php
 			if ($PCO_Accion== "guardar_datos_formulario")			$retorno = 1;
 			if ($PCO_Accion== "eliminar_datos_formulario")			$retorno = 1;
