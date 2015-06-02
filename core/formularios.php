@@ -79,13 +79,18 @@
 					ejecutar_sql_unaria("DELETE FROM ".$tabla." WHERE $campo = '$valor' ");
 					auditar("Elimina registro donde ".$campo." = ".$valor." en ".$tabla);
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="editar_formulario">
+						<input type="Hidden" name="PCO_AccionDEPRECATED" value="editar_formulario">
+						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 						<input type="Hidden" name="nombre_tabla" value="'.$tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="popup_activo" value="FormularioCampos">
                         <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
-					<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+						<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
+						<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@$PCO_ErrorTitulo.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@$PCO_ErrorDescripcion.'">
+					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 		}
 
@@ -172,7 +177,19 @@
 					// Actualiza los datos
 					ejecutar_sql_unaria("UPDATE ".$registro_formulario["tabla_datos"]." SET $cadena_nuevos_valores WHERE id=? ","$id_registro_datos");
 					auditar("Actualiza registro $id_registro_datos en ".$registro_formulario["tabla_datos"]);
-					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+					//echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+						<input type="Hidden" name="formulario" value="'.$formulario.'">
+                        <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+                        <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
+						<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
+						<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@$PCO_ErrorTitulo.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@$PCO_ErrorDescripcion.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
 				{
@@ -366,9 +383,19 @@
 					auditar("Inserta registro en ".$registro_formulario["tabla_datos"]);
 					//Si no hay errores en carga de archivos redirecciona normal, sino redirecciona con los errores
 					if ($errores_de_carga=="")
-						echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+						//echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+						echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
+						<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@$PCO_ErrorTitulo.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@$PCO_ErrorDescripcion.'">
+                        <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+                        <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 					else
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$errores_de_carga.'">

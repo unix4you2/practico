@@ -3513,10 +3513,14 @@ function selector_iconos_awesome()
 				//Si se quiere anular el formulario y su accion cuando se trata de un sub-formulario de consulta
 				if (!$anular_form)
 					echo'<form id="datos" name="datos" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-						<input type="Hidden" name="PCO_Accion" value="guardar_datos_formulario">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
-						<input type="Hidden" name="PCO_FormularioActivo" value="'.$formulario.'">
 						<input type="Hidden" name="id_registro_datos" value="'.@$registro_datos_formulario["id"].'">
+						<input type="Hidden" name="PCO_FormularioActivo" value="'.$formulario.'">
+						<input type="Hidden" name="PCO_Accion" value="guardar_datos_formulario">
+						<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
+						<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@$PCO_ErrorTitulo.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@$PCO_ErrorDescripcion.'">
                         <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
                         <input type="Hidden" name="objeto" value=""> <!--Requerido si se va a transferir el control a un objeto FRM o INF-->
@@ -3775,23 +3779,28 @@ function selector_iconos_awesome()
                     echo '<div align="center">';
 					while ($registro_botones = $consulta_botones->fetch())
 						{
+							//Transfiere variables de mensajes de retorno asociadas al boton
+							$comando_javascript="";
+							if ($registro_botones["retorno_titulo"]!="")
+								$comando_javascript="document.datos.PCO_ErrorTitulo.value='".$registro_botones["retorno_titulo"]."'; document.datos.PCO_ErrorDescripcion.value='".$registro_botones["retorno_texto"]."'; document.datos.PCO_ErrorIcono.value='".$registro_botones["retorno_icono"]."'; document.datos.PCO_ErrorEstilo.value='".$registro_botones["retorno_estilo"]."';";							
+							
 							//Define el tipo de boton de acuerdo al tipo de accion
 							if ($registro_botones["tipo_accion"]=="interna_guardar")
-                                $comando_javascript="document.getElementById('datos').submit();";    
+                                $comando_javascript.="document.getElementById('datos').submit();";    
 							if ($registro_botones["tipo_accion"]=="interna_limpiar")
-                                $comando_javascript="document.getElementById('datos').reset();";
+                                $comando_javascript.="document.getElementById('datos').reset();";
                             if ($registro_botones["tipo_accion"]=="interna_escritorio")
-                                $comando_javascript="document.core_ver_menu.submit();";
+                                $comando_javascript.="document.core_ver_menu.submit();";
 							if ($registro_botones["tipo_accion"]=="interna_actualizar")
-								$comando_javascript="document.datos.PCO_Accion.value='actualizar_datos_formulario';document.datos.submit();";
+								$comando_javascript.="document.datos.PCO_Accion.value='actualizar_datos_formulario';document.datos.submit();";
 							if ($registro_botones["tipo_accion"]=="interna_eliminar")
-								$comando_javascript="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit();";
+								$comando_javascript.="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit();";
 							if ($registro_botones["tipo_accion"]=="interna_cargar")
-								$comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='".$registro_botones["accion_usuario"]."';document.datos.submit();";
+								$comando_javascript.="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='".$registro_botones["accion_usuario"]."';document.datos.submit();";
 							if ($registro_botones["tipo_accion"]=="externa_formulario")
-								$comando_javascript="document.datos.PCO_Accion.value='".$registro_botones["accion_usuario"]."';document.datos.submit();";
+								$comando_javascript.="document.datos.PCO_Accion.value='".$registro_botones["accion_usuario"]."';document.datos.submit();";
 							if ($registro_botones["tipo_accion"]=="externa_javascript")
-								$comando_javascript=$registro_botones["accion_usuario"];
+								$comando_javascript.=$registro_botones["accion_usuario"];
 
                             //Verifica si el registro de botones presenta algun texto de confirmacion y lo antepone al script
                             $cadena_confirmacion_accion_pre="";
@@ -3800,8 +3809,8 @@ function selector_iconos_awesome()
 								{
 									$cadena_confirmacion_accion_pre=" if (confirm('".$registro_botones["confirmacion_texto"]."')) {";
 									$cadena_confirmacion_accion_pos=" } else {} ";
-								}                            
-                            
+								}
+
                             //Genera la cadena del enlace
                             $cadena_javascript='href="javascript:  '.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.'  "';
                             
