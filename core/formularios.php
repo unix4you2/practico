@@ -740,7 +740,7 @@ if ($PCO_Accion=="editar_formulario")
 
 
     <!-- INICIO MODAL ADICION DE CAMPOS -->
-    <?php abrir_dialogo_modal("myModalElementoFormulario",$MULTILANG_FrmMsj1); ?>
+    <?php abrir_dialogo_modal("myModalElementoFormulario",$MULTILANG_FrmMsj1,"modal-wide oculto_impresion"); ?>
               
 				<?php			
 				//Si se trata de la edicion de un campo entonces busca su registro para agregar valores al form
@@ -1149,26 +1149,8 @@ if ($PCO_Accion=="editar_formulario")
 							<tr>
 								<td colspan=2>
 									<?php echo $MULTILANG_FrmEtiqueta; ?>:<br>
-									<textarea rows="20" name="valor_etiqueta" id="valor_etiqueta" class="ckeditor"><?php echo @$registro_campo_editar["valor_etiqueta"]; ?></textarea>
-									<script type="text/javascript" src="inc/ckeditor/ckeditor.js"></script>
-									<script type="text/javascript">
-										CKEDITOR.replace( 'valor_etiqueta', {	toolbar : [ 
-											['-']
-											['Source','-','NewPage','DocProps','Preview','Print','-','Templates']
-											['Bold', 'Italic', 'Underline', 'Strike', 'Subscript','Superscript','-','RemoveFormat']
-											['NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl']
-											['Link','Unlink','Anchor']
-											['Styles','Format','Font','FontSize']
-											['Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo']
-											['Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt']
-											['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe']
-											['TextColor','BGColor']
-											['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField']
-											['Maximize', 'ShowBlocks']
-										 ] } );
-										CKEDITOR.config.width = '550';
-										CKEDITOR.config.height = '450';
-									</script>
+									<div id="Summer_valor_etiqueta" class="summernote"></div>
+									<textarea rows="20" name="valor_etiqueta" id="valor_etiqueta" style="visibility:hidden; display:none;"><?php echo @$registro_campo_editar["valor_etiqueta"]; ?></textarea>
 								</td>
 							</tr>
 							</table>

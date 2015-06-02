@@ -41,6 +41,7 @@ LogCambios="
 * Fixed: Eliminada la impresion de cadena_valor en las listas usadas para recuperar registros.
 * Fixed: [Tester Jonathan Sánchez Giraldo] Valores de título y texto de retorno no eran visualizados correctamente en el escritorio después de realizar una acción.
 * Enhan: Nuevo editor WYSIWYG Responsive es cambiado a predeterminado en la edición de controles tipo etiquetas (textos estáticos) sobre formularios.
+* Enhan: Se cambia el area disponible en la seleccion de propiedades para los controles de formulario
 
 "
 

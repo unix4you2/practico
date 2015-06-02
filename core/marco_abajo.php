@@ -374,8 +374,62 @@
 								echo "$('#Summer_".$NombreCampoSummer."').code(document.datos.".$NombreCampoSummer.".value);";
 							}
 					}
+					
+				//Activa el summernote para la edicion de controles de texto como etiqueta en formularios si se esta en esa accion
+				if ($PCO_Accion=="editar_formulario")
+					{
+						echo "
+							$('#Summer_valor_etiqueta').summernote({
+							lang: 'es-ES',
+							  height: 300,
+							  toolbar: [
+								['Estilos', ['style']],
+								['Fuentes1', ['fontname']],
+								['Fuentes2', ['fontsize']],
+								['Operaciones', ['undo', 'redo']],
+								['Caracter', ['bold', 'italic', 'underline', 'strikethrough', 'clear', 'color']],
+								['Parrafo1', ['ul', 'ol']],
+								['Parrafo2', ['paragraph']],
+								['Parrafo3', ['height']],
+								['Insertar1', ['link', 'table', 'hr']],
+								['Otros', ['fullscreen', 'codeview']], 
+								['Insertar2', ['picture', 'video']],
+								],
+							  onChange: function(contents) { document.datosform.valor_etiqueta.value=contents; }
+							});
+							$('#Summer_valor_etiqueta').code(document.datosform.valor_etiqueta.value);
+						";
+					}
             ?>
         }); //Fin del document.ready
+    </script>
+
+    <script language="JavaScript">
+		/*
+		//Activa visualmente todos los div tipo SummerNote y los asocia a cada textarea
+        $(document).ready(function() {
+			$('#Summer_valor_etiqueta').summernote({
+			lang: 'es-ES',
+			  height: 300,
+			  toolbar: [
+				['Estilos', ['style']],
+				['Fuentes1', ['fontname']],
+				['Fuentes2', ['fontsize']],
+				['Operaciones', ['undo', 'redo']],
+				['Caracter', ['bold', 'italic', 'underline', 'strikethrough', 'clear', 'color']],
+				['Parrafo1', ['ul', 'ol']],
+				['Parrafo2', ['paragraph']],
+				['Parrafo3', ['height']],
+				['Insertar1', ['link', 'table', 'hr']],
+				['Otros', ['fullscreen', 'codeview']], 
+				['Insertar2', ['picture', 'video']],
+				],
+
+			  onChange: function(contents) { document.datos.valor_etiqueta.value=contents; }
+			});
+			$('#Summer_valor_etiqueta').code(document.datos.valor_etiqueta.value);
+        }); //Fin del document.ready
+        */
     </script>
 
     <?php
