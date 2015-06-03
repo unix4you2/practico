@@ -460,8 +460,7 @@
 	$MULTILANG_FrmTxtDesRetorno='Texto completo con la descripci&oacute;n de acci&oacute;n realizada o mensaje entregado al usuario despu&eacute;s de ejecutar el control';
 	$MULTILANG_FrmTxtRetornoIcono='Icono de retorno';
 	$MULTILANG_FrmTxtDesRetornoIcono='Indica la imagen o icono ubicado al lado izquierdo del mensaje.  Utilice notacion AwesomeFonts.  Ejemplo:  fa-info-circle  para presentar un icono de informacion.';
-	$MULTILANG_FrmTxtRetornoEstilo='Estilo de retorno';
-	$MULTILANG_FrmTxtDesRetornoEstilo='Establece el estilo del mensaje de retorno.  Utilice notacion BootStrap de alertas.  Ejemplo: alert-danger, alert,warning,alert-info,alert-default,alert-success, etc';
+	$MULTILANG_FrmTxtRetornoEstilo='Estilo grafico del mensaje de retorno (si aplica)';
 	$MULTILANG_FrmConfirma='Texto de confirmaci&oacute;n';
 	$MULTILANG_FrmDesConfirma='En caso de ser diligenciado: Texto que aparecer&aacute; como ventana emergente advirtiendo la ejecuci&oacute;n del control y esperando confirmaci&oacute;n del usuario para proceder';
 	$MULTILANG_FrmBtnGuardarBut='Agregar acci&oacute;n/bot&oacute;n';

@@ -43,7 +43,10 @@ LogCambios="
 * Fixed: [Tester Jonathan Sánchez Giraldo] Valores de título y texto de retorno no eran visualizados correctamente en el escritorio después de realizar una acción.  Variables PCO_ErrorIcono,PCO_ErrorEstilo,PCO_ErrorTitulo y PCO_ErrorDescripcion ahora son transportadas entre acciones.
 * Enhan: Nuevo editor WYSIWYG Responsive es cambiado a predeterminado en la edición de controles tipo etiquetas (textos estáticos) sobre formularios.
 * Enhan: Se cambia el area disponible en la seleccion de propiedades para los controles de formulario
+* Enhan: Se elimina el filtrado de cadenas con htmlentities en campos de texto recuperados desde base de datos.  No se hace necesario cuando el charset está correctamente configurado en servidor y base de datos.
+* Enhan: La selección de estilos gráficos para mensajes de retorno se hace ahora desde una lista de selección para facilitar su ingreso
 
+IMPORTANTE:  Usuarios que apliquen sucesivamente parches 003 o superiores de la versión 15.6 podrían ver dos mensajes de error SQL si ya han aplicado el parche 002.  Esto es normal.
 "
 
 ########################################################################

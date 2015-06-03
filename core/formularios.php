@@ -1632,10 +1632,15 @@ if ($PCO_Accion=="editar_formulario")
                     </div>
                     
                     <div class="form-group input-group">
-						<input type="text" name="retorno_estilo" class="form-control" placeholder="<?php echo $MULTILANG_FrmTxtRetornoEstilo; ?>">
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_FrmTxtDesRetornoEstilo; ?>"><i class="fa fa-question-circle text-info"></i></a>
-                        </span>
+                        <label for="retorno_estilo"><?php echo $MULTILANG_FrmTxtRetornoEstilo; ?></label>
+						<select id="retorno_estilo" name="retorno_estilo" class="form-control">
+							<option value=""><?php echo $MULTILANG_Predeterminado; ?> alert-danger</option>
+							<option value="alert-success">Finalizado (alert-success)</option>
+							<option value="alert-info">Informacion (alert-info)</option>
+							<option value="alert-warning">Advertencia (alert-warning)</option>
+							<option value="alert-danger">Error/Peligro (alert-danger)</option>
+							<option value="alert-default">Sin estilo (alert-default)</option>
+						</select>
                     </div>                    
 
                     <div class="form-group input-group">
