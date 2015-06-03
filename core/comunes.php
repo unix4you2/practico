@@ -2073,7 +2073,7 @@ function selector_iconos_awesome()
 				}
 			$valor_variable_escapada=$registro_datos_formulario["$nombre_campo"];
 			//$valor_variable_escapada=addslashes ( '"'.$valor_variable_escapada.'"' );
-			$valor_variable_escapada=htmlentities($valor_variable_escapada); //Presenta la cadena como caracteres especiales HTML para ayudar a presentar correctamente tildes, comillas y barras
+			//$valor_variable_escapada=htmlentities($valor_variable_escapada); //Presenta la cadena como caracteres especiales HTML para ayudar a presentar correctamente tildes, comillas y barras
 			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=' value="'.$valor_variable_escapada.'" ';
 
 			// Define cadenas en caso de tener validaciones
