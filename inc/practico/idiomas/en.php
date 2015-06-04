@@ -445,7 +445,7 @@
 	$MULTILANG_FrmAccionT1='Internal actions';
 	$MULTILANG_FrmAccionGuardar='Save data';
 	$MULTILANG_FrmAccionLimpiar='Clean data';
-	$MULTILANG_FrmAccionEliminar='Delete data';
+	$MULTILANG_FrmAccionEliminar='Delete data (requires a unique value field ,even hidden)';
 	$MULTILANG_FrmAccionActualizar='Update data';
 	$MULTILANG_FrmAccionRegresar='Go back to desktop';
 	$MULTILANG_FrmAccionCargar='Object load';

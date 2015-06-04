@@ -442,7 +442,7 @@
 	$MULTILANG_FrmAccionT1='Acciones internas';
 	$MULTILANG_FrmAccionGuardar='Guardar datos';
 	$MULTILANG_FrmAccionLimpiar='Limpiar datos';
-	$MULTILANG_FrmAccionEliminar='Eliminar datos';
+	$MULTILANG_FrmAccionEliminar='Eliminar datos (requiere un campo de valor unico, aunque sea oculto)';
 	$MULTILANG_FrmAccionActualizar='Actualizar datos';
 	$MULTILANG_FrmAccionRegresar='Regresar a escritorio';
 	$MULTILANG_FrmAccionCargar='Cargar un objeto';

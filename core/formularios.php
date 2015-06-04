@@ -64,19 +64,20 @@
 			// Busca datos del formulario
 			$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
 			$registro_formulario = $consulta_formulario->fetch();
-
-			// Busca los campos del form marcados como valor unico y verifica que no existan valores en la tabla
 			$tabla=$registro_formulario["tabla_datos"];
 
-			$consulta_campos_unicos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND valor_unico=1","$formulario");
+			$consulta_campos_unicos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND valor_unico=1","$formulario");
 			while ($registro_campos_unicos = $consulta_campos_unicos->fetch())
 				{
 					$campo=$registro_campos_unicos["campo"];
 					$valor=$$campo;
 					// Busca si el campo cuenta con el valor en la tabla
 
-					// Inserta los datos
+					// Elimina los datos
 					ejecutar_sql_unaria("DELETE FROM ".$tabla." WHERE $campo = '$valor' ");
+					
+					//POSIBILIDAD DE REEMPLAZAR POR ESTE QUERY SI LA TABLA MANEJA CAMPO ID:  ejecutar_sql_unaria("DELETE FROM ".$tabla." WHERE id=$id_registro_datos ");
+					
 					auditar("Elimina registro donde ".$campo." = ".$valor." en ".$tabla);
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_AccionDEPRECATED" value="editar_formulario">
