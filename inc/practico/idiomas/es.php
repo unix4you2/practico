@@ -807,6 +807,13 @@
     $MULTILANG_TblImportarSQL='Cargar SQL comprimido';
     $MULTILANG_TblSQLConsejo='Al ejecutar las sentencias SQL contenidas en el archivo usted podria estar eliminando, creando o sobreescribiendo tablas, registros y demas informacion asociada, asi como dise&ntilde;os y otros elementos contenidos en los registros asociados. <br><br><b>Se recomienda que haga una copia de seguridad previo a este proceso antes de continuar.</b>';
     $MULTILANG_TblEjecutarSQL='Ejecutar sentencias SQL del archivo (puede tardar)';
+    $MULTILANG_TblDecodificarActual='Codificacion o set de caracteres actual de los registros o tabla de datos';
+    $MULTILANG_TblCodificar='CODIFICAR los registros antes de ser llevados al backup usando';
+    $MULTILANG_TblCodificacionNINGUNO='NINGUNO, Use la codificaci&oacute;n o set de caracteres original de la tabla';
+    $MULTILANG_TblTransliteracion='Usar transliteracion o ignorado de caracteres';
+    $MULTILANG_TblTransliteracionHlp='La transliteraci&oacute;n significa que cuando un caracter no puede ser representado en el set de caracteres final, se puede aproximar a uno o varios caracteres parecidos. Si decide ignorarlos entonces cuando el caracter no pueda ser traducido sera descartado sin generar error. De otro modo, se corta desde el primer caracter ilegal y se genera un E_NOTICE.';
+    $MULTILANG_TblTranslit='Transliterando';
+    $MULTILANG_TblIgnora='Ignorando';
 	
 	//Usuarios
 	$MULTILANG_UsrCopia='Copia de permisos finalizada.  Por favor verifique a continuacion.';

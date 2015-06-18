@@ -810,6 +810,13 @@
     $MULTILANG_TblImportarSQL='Upload a compressed SQL';
     $MULTILANG_TblSQLConsejo='If you execute the SQL sentences of this file you could be erasing, creating or overwritting tables and many other information, even designs and other things the you exported in that records. <br><br><b>We recomend you that make a backup before continue.</b>';
     $MULTILANG_TblEjecutarSQL='Run SQL sentences in this file (could take some time)';
+    $MULTILANG_TblDecodificarActual='Collation or charset for the actual records or data table';
+    $MULTILANG_TblCodificar='ENCODE records before save them to the backup file using';
+    $MULTILANG_TblCodificacionNINGUNO='NONE, Use the original table collation or charset';
+    $MULTILANG_TblTransliteracion='Use character transliteration';
+    $MULTILANG_TblTransliteracionHlp='If transliteration is activated when a character cant be represented in the target charset, it can be approximated through one or several similarly looking characters. If you decide to ignore then invalid characters will be omited, Otherwise the string is truncated and, E_NOTICE is generated and the function will return FALSE.';
+    $MULTILANG_TblTranslit='Translitering';
+    $MULTILANG_TblIgnora='Ignoring';
 
 	//Usuarios
 	$MULTILANG_UsrCopia='Permissions copy completed. Please check below.';

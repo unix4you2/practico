@@ -223,3 +223,16 @@ function sanitize($text) {
 	$text = str_replace("\n","<br>",$text);
 	return $text;
 }
+
+function analytics() {
+        // Estadisticas de uso anonimo con GABeacon
+        $PrefijoGA='<img src="https://ga-beacon.appspot.com/';
+        $PosfijoGA='/Practico/Chat?pixel" border=0 ALT=""/>';
+        // Este valor indica un ID generico de GA UA-847800-9 No edite esta linea sobre el codigo
+        // Para validar que su ID es diferente al generico de seguimiento.  En lugar de esto cambie
+        // su valor a traves del panel de configuracion de Practico con el entregado como ID de GoogleAnalytics
+        $Infijo=base64_decode("VUEtODQ3ODAwLTk=");
+        echo $PrefijoGA.$Infijo.$PosfijoGA;
+        if(@$CodigoGoogleAnalytics!="")
+            echo $PrefijoGA.$CodigoGoogleAnalytics.$PosfijoGA;	
+}

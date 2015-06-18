@@ -137,9 +137,5 @@ function PCO_Canvas_SobrePagina3()
 	            $("#page").show();
 	        }
 	    });
-    }
-    
-    
-    
-    
+    }    
     

@@ -55,6 +55,8 @@
     <!--Marco oculto para generacion de formularios y elementos dinamicos anidados -->
     <div id="PCODIV_FormulariosDinamicos" style="visibility: hidden; display: none;"></div>
 
+<!-- INICIA MARCO DE CHAT -->
+<!--<div id="main_container" style="overflow: auto;">-->
 
     <div id="wrapper">
  
@@ -373,8 +375,7 @@
 						?>
 
 
-<!-- INICIA MARCO DE CHAT -->
-<!--<div id="main_container" style="overflow: auto;">-->
+
 
 
 

@@ -587,7 +587,7 @@ echo '
 				{
 					$archivo_destino_backup_bdd="tmp/Tbl_".$nombre_tabla."_".$PCO_FechaOperacion."_".$PCO_HoraOperacion.".gz";
 					//Hace copia de seguridad de la tabla seleccionada
-					if (PCO_Backup($nombre_tabla,$archivo_destino_backup_bdd,$tipo_copia_objeto))
+					if (PCO_Backup($nombre_tabla,$archivo_destino_backup_bdd,$tipo_copia_objeto,$codificacion_actual,$codificacion_destino))
 						{
 							//Presenta la ventana con informacion y enlace de descarga
 							abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
@@ -640,6 +640,39 @@ if ($PCO_Accion=="definir_copia_tablas")
                 <option value="Estructura"><?php echo $MULTILANG_TblTipoCopia1; ?></option>
                 <option value="Datos"><?php echo $MULTILANG_TblTipoCopia2; ?></option>
                 <option value="Estructura+Datos"><?php echo $MULTILANG_TblTipoCopia3; ?></option>
+            </select>
+			<br>
+            <label for="codificacion_actual"><?php echo $MULTILANG_TblDecodificarActual; ?>:</label>
+            <select id="codificacion_actual" name="codificacion_actual" class="form-control btn-info" >
+                <option value="UTF-8">UTF-8</option>
+                <option value="ASCII">ASCII</option>
+                <option value="Windows-1252">Windows-1252</option>
+                <option value="ISO-8859-1">ISO-8859-1</option>
+                <option value="ISO-8859-6">ISO-8859-6</option>
+                <option value="ISO-8859-15">ISO-8859-15</option>
+                <option value="CP1256">CP1256</option>
+            </select>
+
+			<br>
+            <label for="codificacion_destino"><?php echo $MULTILANG_TblCodificar; ?>:</label>
+            <select id="codificacion_destino" name="codificacion_destino" class="form-control btn-info" >
+                <option value=""><?php echo $MULTILANG_TblCodificacionNINGUNO; ?></option>
+                <option value="UTF-8">UTF-8</option>
+                <option value="ASCII">ASCII</option>
+                <option value="Windows-1252">Windows-1252</option>
+                <option value="ISO-8859-1">ISO-8859-1</option>
+                <option value="ISO-8859-6">ISO-8859-6</option>
+                <option value="ISO-8859-15">ISO-8859-15</option>
+                <option value="CP1256">CP1256</option>
+            </select>
+
+			<br>
+            <label for="transliterar_conversion"><?php echo $MULTILANG_TblTransliteracion; ?>:</label>
+            <?php echo $MULTILANG_TblTransliteracionHlp; ?>
+            <select id="transliterar_conversion" name="transliterar_conversion" class="form-control btn-default" >
+                <option value="0"><?php echo $MULTILANG_No; ?></option>
+                <option value="1"><?php echo $MULTILANG_Si; ?> (<?php echo  $MULTILANG_TblTranslit; ?>)</option>
+                <option value="2"><?php echo $MULTILANG_Si; ?> (<?php echo  $MULTILANG_TblIgnora; ?>)</option>
             </select>
 
             </form>

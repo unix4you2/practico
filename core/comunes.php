@@ -41,7 +41,7 @@
 	Salida:
 		Sentencias necesarias para insertar los datos en las tablas
 */
-	function PCO_BackupObtenerDatosTabla($PCO_NombreTabla="")
+	function PCO_BackupObtenerDatosTabla($PCO_NombreTabla="",$codificacion_actual,$codificacion_destino,$transliterar_conversion)
 		{
 			$RegistrosEncontrados = ejecutar_sql('SELECT * FROM '.$PCO_NombreTabla)->fetchAll(PDO::FETCH_NUM);
 			$Datos = '';
@@ -49,6 +49,18 @@
 				{
 					foreach($Registro as &$Valor)
 						{
+							//Determina si se quiere un cambio de codificacion de caracteres y lo ejecuta
+							if ($codificacion_actual!=$codificacion_destino && $codificacion_destino!="")
+								{
+									//Determina si se tiene o no transliteracion
+									$ComplementoTransliteracion="";
+									if($transliterar_conversion==1)
+										$ComplementoTransliteracion="//TRANSLIT";
+									if($transliterar_conversion==2)
+										$ComplementoTransliteracion="//IGNORE";
+									//Hace la conversion de la cadena
+									$Valor = iconv($codificacion_actual,$codificacion_destino.$ComplementoTransliteracion,$Valor);
+								}
 							$Valor = htmlentities(addslashes($Valor));
 						}
 					$Datos .= 'INSERT INTO '. $PCO_NombreTabla .' VALUES (\'' . implode('\',\'', $Registro) . '\');'."\n";
@@ -92,7 +104,7 @@
 		Retorna un arreglo con todas las tablas y su backup dividido en tres campos logicos de Nombre, SentenciaCreate y SentenciaInsert
 		Retorna 0 cuando se obtiene algun error
 */
-	function PCO_BackupObtenerTablasBD($PCO_ListaTablas="",$TipoDeCopia="Estructura")
+	function PCO_BackupObtenerTablasBD($PCO_ListaTablas="",$TipoDeCopia="Estructura",$codificacion_actual,$codificacion_destino,$transliterar_conversion)
 		{
 			$TablasExistentes = ejecutar_sql('SHOW TABLES')->fetchAll();
 			$TablasSolicitadasBackup=explode(",",$PCO_ListaTablas);
@@ -106,7 +118,7 @@
 							if ($TipoDeCopia=="Estructura" || $TipoDeCopia=="Estructura+Datos")
 								$ArregloFinalTablas[$i]['SentenciaCreate']=PCO_BackupObtenerColumnasTabla($Tabla[0]);
 							if ($TipoDeCopia=="Datos" || $TipoDeCopia=="Estructura+Datos")
-								$ArregloFinalTablas[$i]['SentenciaInsert']=PCO_BackupObtenerDatosTabla($Tabla[0]);
+								$ArregloFinalTablas[$i]['SentenciaInsert']=PCO_BackupObtenerDatosTabla($Tabla[0],$codificacion_actual,$codificacion_destino,$transliterar_conversion);
 							$i++;
 						}
 				}
@@ -130,7 +142,7 @@
 		Retorna 1 ante un proceso exitoso
 		Retorna 0 cuando se obtiene algun error
 */
-	function PCO_Backup($PCO_ListaTablas,$ArchivoDestino="",$TipoDeCopia="Estructura")
+	function PCO_Backup($PCO_ListaTablas,$ArchivoDestino="",$TipoDeCopia="Estructura",$codificacion_actual="UTF-8",$codificacion_destino="UTF-8",$transliterar_conversion=0)
 		{
 			$EstadoOperacion=1;  //Asume que no hay errores
 			$ContenidoBackup="";
@@ -140,7 +152,7 @@
 			if ($EstadoOperacion==1)
 				{
 					//Lanza el proceso de copia
-					$ArregloContenidos=PCO_BackupObtenerTablasBD($PCO_ListaTablas,$TipoDeCopia);
+					$ArregloContenidos=PCO_BackupObtenerTablasBD($PCO_ListaTablas,$TipoDeCopia,$codificacion_actual,$codificacion_destino,$transliterar_conversion);
 					//Recorre las tablas agregando todo al Backup
 					for($i=0;$i<count($ArregloContenidos);$i++)
 						{
