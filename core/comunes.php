@@ -50,7 +50,7 @@
 					foreach($Registro as &$Valor)
 						{
 							//Determina si se quiere un cambio de codificacion de caracteres y lo ejecuta
-							if ($codificacion_actual!=$codificacion_destino && $codificacion_destino!="")
+							if ($codificacion_destino!="")
 								{
 									//Determina si se tiene o no transliteracion
 									$ComplementoTransliteracion="";
