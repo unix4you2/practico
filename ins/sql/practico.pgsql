@@ -144,6 +144,8 @@ CREATE TABLE core_formulario_objeto (
   imagen varchar(250) default '',
   tipo_accion varchar(250) default '',
   accion_usuario text,
+  valor_check_activo varchar(250) DEFAULT '',
+  valor_check_inactivo varchar(250) DEFAULT '',
   PRIMARY KEY  (id)
 );
 

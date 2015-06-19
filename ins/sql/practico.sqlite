@@ -143,7 +143,9 @@ CREATE TABLE core_formulario_objeto (
   modo_inline integer DEFAULT 0,
   imagen text default '',
   tipo_accion text default '',
-  accion_usuario text
+  accion_usuario text,
+  valor_check_activo text DEFAULT '',
+  valor_check_inactivo text DEFAULT ''
 
 );
 
