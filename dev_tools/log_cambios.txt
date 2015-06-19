@@ -40,6 +40,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 * Added: La exportación de tablas ahora permite codificar o decodificar los contenidos al vuelo sobre diferentes sets de caracteres y transliterarlos si es necesario
 * Added: Nuevo editor WYSIWYG Responsive
+* Added: Agregado el control de formulario tipo checkbox o caja de verificación
 * Added: Ahora se soportan estilos e iconos diferentes basados en bootstrap y AwesomeFont para los mensajes de retorno al escritorio a través de botones de comando en formularios
 * Fixed: Eliminada la impresion de cadena_valor en las listas usadas para recuperar registros.
 * Fixed: [Tester Jonathan Sánchez Giraldo] Valores de título y texto de retorno no eran visualizados correctamente en el escritorio después de realizar una acción.  Variables PCO_ErrorIcono,PCO_ErrorEstilo,PCO_ErrorTitulo y PCO_ErrorDescripcion ahora son transportadas entre acciones.
@@ -49,7 +50,7 @@ LogCambios="
 * Enhan: La selección de estilos gráficos para mensajes de retorno se hace ahora desde una lista de selección para facilitar su ingreso
 * Enhan: Campo de valor único para eliminación de datos en formularios ahora no tiene que ser visible
 
-IMPORTANTE:  Usuarios que apliquen sucesivamente parches 003 o superiores de la versión 15.6 podrían ver dos mensajes de error SQL si ya han aplicado el parche 002.  Esto es normal.
+IMPORTANTE:  Usuarios que apliquen sucesivamente parches 003 o superiores de la versión 15.6 podrían ver algunos mensajes de error SQL si ya han aplicado el parche 002.  Esto es normal.
 "
 
 ########################################################################
@@ -57,6 +58,8 @@ IMPORTANTE:  Usuarios que apliquen sucesivamente parches 003 o superiores de la 
 ScriptBasedatos="
 ALTER TABLE core_formulario_boton ADD COLUMN retorno_icono VARCHAR(50) NULL DEFAULT '';
 ALTER TABLE core_formulario_boton ADD COLUMN retorno_estilo VARCHAR(50) NULL DEFAULT '';
+ALTER TABLE core_formulario_objeto ADD COLUMN valor_check_activo VARCHAR(250) NULL DEFAULT '';
+ALTER TABLE core_formulario_objeto ADD COLUMN valor_check_inactivo VARCHAR(250) NULL DEFAULT '';
 "
 
 ########################################################################

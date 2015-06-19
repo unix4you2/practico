@@ -38,6 +38,7 @@
 	$MULTILANG_Administre='Manage';
 	$MULTILANG_Agregar='Add';
 	$MULTILANG_Ambiente='Environment';
+	$MULTILANG_Ambos='Both';
 	$MULTILANG_Anonimo='Anonymous';
 	$MULTILANG_Anterior='Previous';
 	$MULTILANG_Apagado='Off';
@@ -340,6 +341,7 @@
 	$MULTILANG_FrmTipo15='SubForm (To query and ReadOnly)';
     $MULTILANG_FrmTipo16='Command button';
     $MULTILANG_FrmTipo17='Richly formatted text field (Responsive)';
+	$MULTILANG_FrmTipo18='Verify field (CheckBox)';
 	$MULTILANG_FrmTipoPincel='Brush size';
 	$MULTILANG_FrmTipoColor='Line color';
 	$MULTILANG_FrmTipoAdvertencia='This kind of data controls should be stored in your table into a long text or unlimited field';
@@ -358,7 +360,7 @@
 	$MULTILANG_FrmTitUnico='Uniqueness for input values';
 	$MULTILANG_FrmDesUnico='Indicates whether the field can store or repeated values ​​in the database. Should be enabled for fields representing primary keys in their Design and disabled for the rest.  You should take care in that forms that you need this field to do upgrades and its duplicated error message.';
 	$MULTILANG_FrmPredeterminado='Default value';
-	$MULTILANG_FrmDesPredeterminado='Sets the value that appears automatically filled in the field to open the form view. This value can be out of data validation.  If a PHP session variable is entered then Practico will take its value';
+	$MULTILANG_FrmDesPredeterminado='Sets the value that appears automatically filled in the field to open the form view. This value can be out of data validation.  If a PHP session variable is entered then Practico will take its value.';
 	$MULTILANG_FrmValida='Data validation';
 	$MULTILANG_FrmValida1='Numbers only 0-9';
 	$MULTILANG_FrmValida2='Only letters A-Z';
@@ -554,7 +556,10 @@
 	$MULTILANG_FrmImportarConflicto='There are conflicts that you need to solve before continue with the importing process';
 	$MULTILANG_FrmImportarGenerado='New object has been created';
 	$MULTILANG_FrmImportarAlerta='An element with the same internal ID and type that you want to import was founded in the system.  The file that you want to import will delete  the actual object and will fill it with the elements in the file.  We recommend you to check previously if you really want to overwrite the element before continue.';
-
+	$MULTILANG_FrmValOnCheck= 'Value when is activated';
+	$MULTILANG_FrmValOffCheck='Value when is not activated';
+	$MULTILANG_FrmValCheckDes='Define the value to be assigned to the field that will be stored in the database according to the control status';
+	
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';
 	$MULTILANG_InfErr2='You must enter a valid title for the report.';

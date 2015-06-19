@@ -742,7 +742,7 @@ if ($PCO_Accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(41);
+					OcultarCampos(42);
 					// Muestra campos segun tipo de objeto
 					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,14,17,25,36,37");
 					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25,36,37");
@@ -750,6 +750,7 @@ if ($PCO_Accion=="editar_formulario")
 					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17,36,37");
 					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,12,15,17,18,19,20,35,36,37");
 					if (tipo_objeto_activo=="lista_radio") VisualizarCampos("1,2,7,8,9,10,17,18,19,20,35,36,37");
+					if (tipo_objeto_activo=="casilla_check") VisualizarCampos("1,2,4,9,17,36,42");
 					if (tipo_objeto_activo=="etiqueta")   VisualizarCampos("9,17,21,36");
 					if (tipo_objeto_activo=="url_iframe")   VisualizarCampos("9,14,15,17,22,24,36,37");
 					if (tipo_objeto_activo=="informe")   VisualizarCampos("9,17,23,24,36");
@@ -796,15 +797,16 @@ if ($PCO_Accion=="editar_formulario")
                             <select  id="tipo" name="tipo" class="selectpicker"  data-style="btn-info" OnChange="CambiarCamposVisibles(this.options[this.selectedIndex].value);">
                                 <option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                 <optgroup label="<?php echo $MULTILANG_FrmTipoTit1; ?>">
-                                    <option value="texto_corto"     data-icon="glyphicon-log-in"            <?php if (@$registro_campo_editar["tipo"]=="texto_corto")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo1; ?></option>
-                                    <option value="texto_clave"     data-icon="glyphicon-eye-close"         <?php if (@$registro_campo_editar["tipo"]=="texto_clave")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo10; ?></option>
-                                    <option value="texto_largo"     data-icon="glyphicon-text-width"        <?php if (@$registro_campo_editar["tipo"]=="texto_largo")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo2; ?></option>
-                                    <option value="texto_formato"   data-icon="glyphicon-font"              <?php if (@$registro_campo_editar["tipo"]=="texto_formato")   echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo3; ?></option>
-                                    <option value="area_responsive" data-icon="glyphicon-edit"              <?php if (@$registro_campo_editar["tipo"]=="area_responsive") echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo17; ?></option>
-                                    <option value="lista_seleccion" data-icon="glyphicon-ok"                <?php if (@$registro_campo_editar["tipo"]=="lista_seleccion") echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo4; ?></option>
-                                    <option value="lista_radio"     data-icon="glyphicon-record"            <?php if (@$registro_campo_editar["tipo"]=="lista_radio")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo5; ?></option>
-                                    <option value="deslizador"      data-icon="glyphicon-resize-horizontal" <?php if (@$registro_campo_editar["tipo"]=="deslizador")      echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo9; ?></option>
-                                    <option value="campo_etiqueta"  data-icon="glyphicon-tags"              <?php if (@$registro_campo_editar["tipo"]=="campo_etiqueta")  echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo11; ?></option>
+                                    <option value="texto_corto"     data-icon="glyphicon-log-in"					<?php if (@$registro_campo_editar["tipo"]=="texto_corto")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo1; ?></option>
+                                    <option value="texto_clave"     data-icon="glyphicon-eye-close"					<?php if (@$registro_campo_editar["tipo"]=="texto_clave")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo10; ?></option>
+                                    <option value="texto_largo"     data-icon="glyphicon-text-width"				<?php if (@$registro_campo_editar["tipo"]=="texto_largo")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo2; ?></option>
+                                    <option value="texto_formato"   data-icon="glyphicon-font"						<?php if (@$registro_campo_editar["tipo"]=="texto_formato")   echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo3; ?></option>
+                                    <option value="area_responsive" data-icon="glyphicon-edit"						<?php if (@$registro_campo_editar["tipo"]=="area_responsive") echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo17; ?></option>
+                                    <option value="lista_seleccion" data-icon="glyphicon glyphicon-indent-right"	<?php if (@$registro_campo_editar["tipo"]=="lista_seleccion") echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo4; ?></option>
+                                    <option value="lista_radio"     data-icon="glyphicon-record"					<?php if (@$registro_campo_editar["tipo"]=="lista_radio")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo5; ?></option>
+                                    <option value="casilla_check"   data-icon="glyphicon glyphicon-check"			<?php if (@$registro_campo_editar["tipo"]=="casilla_check")   echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo18; ?></option>
+                                    <option value="deslizador"      data-icon="glyphicon-resize-horizontal"			<?php if (@$registro_campo_editar["tipo"]=="deslizador")      echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo9; ?></option>
+                                    <option value="campo_etiqueta"  data-icon="glyphicon-tags"						<?php if (@$registro_campo_editar["tipo"]=="campo_etiqueta")  echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo11; ?></option>
                                 </optgroup>
                                 <optgroup label="<?php echo $MULTILANG_FrmTipoTit4; ?>">
                                     <option value="archivo_adjunto" data-icon="glyphicon-file"              <?php if (@$registro_campo_editar["tipo"]=="archivo_adjunto") echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo12; ?></option>
@@ -1508,6 +1510,29 @@ if ($PCO_Accion=="editar_formulario")
                                 <span class="input-group-addon">
                                     <a href="#" data-placement="left" data-toggle="popover" data-html="true" title="<?php echo $MULTILANG_Ayuda; ?>" data-content="<?php echo $MULTILANG_FrmAccionDesCMD; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
+                            </div>
+						</div>
+
+
+
+						<div id='campo42' style="display:none;">
+                            <div class="row">
+                                <div class="col-md-6">
+										<div class="form-group input-group">
+											<input type="text" name="valor_check_activo" class="form-control" value="<?php echo @$registro_campo_editar["valor_check_activo"]; ?>" placeholder="<?php echo $MULTILANG_FrmValOnCheck; ?>">
+											<span class="input-group-addon">
+												<a href="#" title="<?php echo $MULTILANG_FrmValCheckDes; ?>"><i class="fa fa-question-circle text-info"></i></a>
+											</span>
+										</div>
+                                </div>    
+                                <div class="col-md-6">
+										<div class="form-group input-group">
+											<input type="text" name="valor_check_inactivo" class="form-control" value="<?php echo @$registro_campo_editar["valor_check_inactivo"]; ?>" placeholder="<?php echo $MULTILANG_FrmValOffCheck; ?>">
+											<span class="input-group-addon">
+												<a href="#" title="<?php echo $MULTILANG_FrmValCheckDes; ?>"><i class="fa fa-question-circle text-info"></i></a>
+											</span>
+										</div>
+                                </div>
                             </div>
 						</div>
 

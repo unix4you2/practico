@@ -701,6 +701,7 @@ if ($PCO_Accion=="definir_copia_tablas")
                 <option value="0"><?php echo $MULTILANG_No; ?></option>
                 <option value="1"><?php echo $MULTILANG_Si; ?> (<?php echo  $MULTILANG_TblTranslit; ?>)</option>
                 <option value="2"><?php echo $MULTILANG_Si; ?> (<?php echo  $MULTILANG_TblIgnora; ?>)</option>
+                <option value="3"><?php echo $MULTILANG_Si; ?> (<?php echo  "$MULTILANG_Ambos: $MULTILANG_TblIgnora / $MULTILANG_TblTranslit"; ?>)</option>
             </select>
 
             </form>

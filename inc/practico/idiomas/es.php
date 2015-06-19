@@ -38,6 +38,7 @@
     $MULTILANG_Administre='Administre';
 	$MULTILANG_Agregar='Agregar';
 	$MULTILANG_Ambiente='Ambiente';
+	$MULTILANG_Ambos='Ambos';
 	$MULTILANG_Anonimo='An&oacute;nimo';
 	$MULTILANG_Anterior='Anterior';
 	$MULTILANG_Apagado='Apagado';
@@ -337,6 +338,7 @@
 	$MULTILANG_FrmTipo15='SubFormulario (Para consulta en Solo lectura)';
     $MULTILANG_FrmTipo16='Boton de comando';
     $MULTILANG_FrmTipo17='Campo de texto con formato (Responsive)';
+    $MULTILANG_FrmTipo18='Casilla de verificaci&oacute;n (CheckBox)';
 	$MULTILANG_FrmTipoPincel='Tama&ntilde;o del pincel';
 	$MULTILANG_FrmTipoColor='Color del trazo';
 	$MULTILANG_FrmTipoAdvertencia='Este tipo de controles deberia ser almacenado en su tabla dentro de campos de texto largo/ilimitado';
@@ -551,6 +553,9 @@
 	$MULTILANG_FrmImportarConflicto='Existen conflictos que deben ser resueltos antes de continuar con la importacion.';
 	$MULTILANG_FrmImportarGenerado='Se ha generado el nuevo objeto';
 	$MULTILANG_FrmImportarAlerta='Se ha encontrado otro elemento con el mismo ID interno y tipo que el que usted desea importar.  El elemento que desea importar eliminara el existente y reemplazara el mismo con las definiciones desde el archivo XML.  Se recomienda que verifique previamente si desea sobreescribir el elemento en cuesti&oacute;n antes de continuar.';
+	$MULTILANG_FrmValOnCheck= 'Valor cuando esta activado';
+	$MULTILANG_FrmValOffCheck='Valor cuando esta sin activar';
+	$MULTILANG_FrmValCheckDes='Establece el valor que debe ser asignado internamente al campo que sera almacenado en base de datos dependiendo del estado del control';
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

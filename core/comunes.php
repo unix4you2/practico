@@ -58,6 +58,8 @@
 										$ComplementoTransliteracion="//TRANSLIT";
 									if($transliterar_conversion==2)
 										$ComplementoTransliteracion="//IGNORE";
+									if($transliterar_conversion==3)
+										$ComplementoTransliteracion="//IGNORE//TRANSLIT";
 									//Hace la conversion de la cadena
 									$Valor = iconv($codificacion_actual,$codificacion_destino.$ComplementoTransliteracion,$Valor);
 								}
@@ -2921,6 +2923,80 @@ function selector_iconos_awesome()
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: cargar_objeto_casilla_check
+	Genera el codigo HTML y CSS correspondiente a una casilla de verificacion (checkbox) vinculado a un campo de datos sobre un formulario
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		registro_datos_formulario - Arreglo asociativo con nombres de campo y valores cuando se hacen llamados de registro especificos
+		formulario - ID unico del formulario al cual pertenece el objeto
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
+	function cargar_objeto_casilla_check($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
+		{
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
+            global $funciones_activacion_datepickers;
+			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+
+			$salida='';
+			$nombre_campo=$registro_campos["campo"];
+
+			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
+			$cadena_valor='';
+			
+			
+			//Toma el valor predeterminado y lo asigna
+			$cadena_valor_almacenada=$registro_campos["valor_predeterminado"];
+			//Si el valor predeterminado es el mismo de valor check activo entonces activa el control
+			if ($registro_campos["valor_predeterminado"]==$registro_campos["valor_check_activo"])
+				$cadena_valor="checked";
+			
+			//Reemplaza el valor del campo en caso de tener alguno viniendo del registro
+			$nombre_campo=$registro_campos["campo"];
+			$valor_de_registro=$registro_datos_formulario["$nombre_campo"];
+			if ($valor_de_registro!="")
+				{
+					$cadena_valor_almacenada=$valor_de_registro;
+					//Si el valor de registro es el asociado al valor de activo entonces activa el control, sino lo desactiva
+					if ($valor_de_registro==$registro_campos["valor_check_activo"])
+						$cadena_valor="checked";
+					else
+						$cadena_valor="";
+				}
+
+            // Muestra el campo
+            $salida.= '
+				<input type="hidden" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor_almacenada.'">
+				<div class="checkbox">
+					<label>
+						<input onchange="JSFUNC_Actualizar_'.$registro_campos["campo"].'(this);" type="checkbox" id="JSVAR_'.$registro_campos["campo"].'" name="JSVAR_'.$registro_campos["campo"].'" '.$cadena_valor.' > '.$registro_campos["titulo"].'
+					</label>
+				</div>
+				<script language="JavaScript">
+					function JSFUNC_Actualizar_'.$registro_campos["campo"].'(objeto_checkbox)
+						{
+							//Si es marcado asigna el valor, sino asigna el otro
+							if (objeto_checkbox.checked)
+								document.datos.'.$registro_campos["campo"].'.value="'.$registro_campos["valor_check_activo"].'";
+							else
+								document.datos.'.$registro_campos["campo"].'.value="'.$registro_campos["valor_check_inactivo"].'";
+						}
+				</script>
+            ';
+			return $salida;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: cargar_objeto_deslizador
 	Genera el codigo HTML y CSS correspondiente a un campo tipo range de HTML5 vinculado a un campo de datos sobre un formulario
 
@@ -3641,6 +3717,7 @@ function selector_iconos_awesome()
                                                                             if ($tipo_de_objeto=="area_responsive") $objeto_formateado = @cargar_objeto_area_responsive($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = @cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                                             if ($tipo_de_objeto=="lista_radio") $objeto_formateado = @cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
+                                                                            if ($tipo_de_objeto=="casilla_check") $objeto_formateado = @cargar_objeto_casilla_check($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="etiqueta") $objeto_formateado = @cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="url_iframe") $objeto_formateado = @cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="informe") @cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
@@ -3715,6 +3792,7 @@ function selector_iconos_awesome()
                                                         if ($tipo_de_objeto=="area_responsive") $objeto_formateado = @cargar_objeto_area_responsive($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                         if ($tipo_de_objeto=="lista_radio") $objeto_formateado = cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
+                                                        if ($tipo_de_objeto=="casilla_check") $objeto_formateado = @cargar_objeto_casilla_check($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="informe") cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
