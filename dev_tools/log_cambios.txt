@@ -24,6 +24,7 @@ core/marco_abajo.php
 core/marco_arriba.php
 core/marco_arriba_bs.php
 core/marco_nav.php
+core/marco_navizq.php
 core/tablas.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php

@@ -169,41 +169,39 @@
 						while($registro = $resultado->fetch())
 							{
 								echo '<li role="presentation">';
-								// Verifica si se trata de un comando interno y crea formulario y enlace correspondiente
-								//if ($registro["tipo_comando"]=="Interno")
-									{
-										echo '<form action="'.$ArchivoCORE.'" method="post" name="top_'.$registro["id"].'" id="top_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
-                                        // Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
-                                        if ($registro["tipo_comando"]=="Interno" || $registro["tipo_comando"]=="Personal")
-                                            {
-                                                echo '<input type="hidden" name="PCO_Accion" value="'.$registro["comando"].'"></form>';
-                                            }
-                                        // Verifica si se trata de una opcion para cargar un objeto de practico
-                                        if ($registro["tipo_comando"]=="Objeto")
-                                            {
-                                                echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
-                                                     <input type="hidden" name="objeto" value="'.$registro["comando"].'"></form>';
-                                            }
-                                        //Si tiene una URL trata la opcion como enlace estandar, sino como opcion de menu especial
-                                        if ($registro["url"]!="")
-                                            echo '<a title="'.$registro["texto"].'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
-                                        else
-                                            echo '<a href="javascript:document.top_'.$registro["id"].'.submit();">';
+									echo '<form action="'.$ArchivoCORE.'" method="post" name="top_'.$registro["id"].'" id="top_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
+										// Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
+										if ($registro["tipo_comando"]=="Interno" || $registro["tipo_comando"]=="Personal")
+											{
+												echo '<input type="hidden" name="PCO_Accion" value="'.$registro["comando"].'">';
+											}
+										// Verifica si se trata de una opcion para cargar un objeto de practico
+										if ($registro["tipo_comando"]=="Objeto")
+											{
+												echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
+													 <input type="hidden" name="objeto" value="'.$registro["comando"].'">';
+											}
+									echo '</form>';
+									
+									//Si tiene una URL trata la opcion como enlace estandar, sino como opcion de menu especial
+									if ($registro["url"]!="")
+										echo '<a title="'.$registro["texto"].'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
+									else
+										echo '<a href="javascript:document.top_'.$registro["id"].'.submit();">';
 
-										//Determina si la opcion es una imagen o no
-										$PCO_EsImagen=0;
-										if (strpos($registro["imagen"],".png") || strpos($registro["imagen"],".jpg") || strpos($registro["imagen"],".gif"))
-											$PCO_EsImagen=1;
-										//Si no detecta ninguna extension de archivo de imagen entonces pone boton en bootstrap
-										if (!$PCO_EsImagen)
-											echo '<button class="btn-circle btn-info btn-xs">
-											<i class="'.$registro["imagen"].'"></i>
-											</button> '.$registro["texto"];
-										else
-											echo '<img src="'.$registro["imagen"].'" border="0" />';
-                                        
-                                        echo '</a>';
-									}
+											//Determina si la opcion es una imagen o no
+											$PCO_EsImagen=0;
+											if (strpos($registro["imagen"],".png") || strpos($registro["imagen"],".jpg") || strpos($registro["imagen"],".gif"))
+												$PCO_EsImagen=1;
+											//Si no detecta ninguna extension de archivo de imagen entonces pone boton en bootstrap
+											if (!$PCO_EsImagen)
+												echo '<button class="btn-circle btn-info btn-xs">
+												<i class="'.$registro["imagen"].'"></i>
+												</button> '.$registro["texto"];
+											else
+												echo '<img src="'.$registro["imagen"].'" border="0" />';
+									
+									echo '</a>';
                                 echo '</li>';
 							}
                         echo '</ul>';
@@ -215,16 +213,12 @@
                             $registro_usuario=ejecutar_sql("SELECT correo FROM ".$TablasCore."usuario WHERE login=? ","$PCOSESS_LoginUsuario")->fetch();
                             if ($registro_usuario["correo"]=="sucorreo@dominio.com" || $registro_usuario["correo"]=="unix4you2@gmail.com")
                                 mensaje($MULTILANG_Importante, $MULTILANG_UsrActualizarAdmin, '', 'fa fa-bell fa-3x', 'alert alert-danger alert-dismissible');
-
                         }
-
 
 				?>
 
 
-
-
-	<!-- INICIO  DE CONTENIDOS DE APLICACION -->
+	<!-- INICIO  DE CONTENIDOS DE APLICACION DISENADA POR EL USUARIO -->
 
 
 
