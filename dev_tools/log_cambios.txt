@@ -52,6 +52,8 @@ LogCambios="
 * Enhan: Se elimina el filtrado de cadenas con htmlentities en campos de texto recuperados desde base de datos.  No se hace necesario cuando el charset está correctamente configurado en servidor y base de datos.
 * Enhan: La selección de estilos gráficos para mensajes de retorno se hace ahora desde una lista de selección para facilitar su ingreso
 * Enhan: Campo de valor único para eliminación de datos en formularios ahora no tiene que ser visible
+* Enhan: Separados algunos apartados de código por legibilidad
+* Enhan: Enlace a Practico se abre en ventana separa para evitar que expire la sesion al regresar
 
 IMPORTANTE:  Usuarios que apliquen sucesivamente parches 003 o superiores de la versión 15.6 podrían ver algunos mensajes de error SQL si ya han aplicado el parche 002.  Esto es normal.
 "

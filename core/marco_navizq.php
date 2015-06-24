@@ -150,7 +150,7 @@
                                 }
                         ?>
                         <div align=center>
-							<font size=1><i class="fa fa-copyright"></i> <i><?php echo $MULTILANG_GeneradoPor; ?> <a href="http://www.practico.org">Practico</a></i></font>
+							<font size=1><i class="fa fa-copyright"></i> <i><?php echo $MULTILANG_GeneradoPor; ?> <a href="http://www.practico.org" target="_BLANK">Pr&aacute;ctico</a></i></font>
                         </div>
                     </div>
 
