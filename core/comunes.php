@@ -267,6 +267,7 @@
 			// Funciones en core/usuarios.php
 			if ($PCO_Accion== "cambiar_clave")						$retorno = 1;
             if ($PCO_Accion== "actualizar_perfil_usuario")			$retorno = 1;
+            if ($PCO_Accion== "guardar_perfil_usuario")				$retorno = 1;
             if ($PCO_Accion== "ver_seguimiento_monitoreo")			$retorno = permiso_agregado_accion("listar_usuarios");
 			if ($PCO_Accion== "resetear_clave")						$retorno = permiso_agregado_accion("listar_usuarios");
 			if ($PCO_Accion== "ver_seguimiento_general")			$retorno = permiso_agregado_accion("listar_usuarios");
