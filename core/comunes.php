@@ -3980,82 +3980,35 @@ function selector_iconos_awesome()
 
 
 
+
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: cargar_informe
-	Genera el codigo HTML correspondiente a un formulario de la aplicacion y hace los llamados necesarios para la diagramacion por pantalla de los diferentes objetos que lo componen.
+	Function: construir_consulta_informe
+	Genera el codigo SQL correspondiente a informe especifico por ID, es la consulta cruda de los datos para ser aplicada posteriormente a otra operacion
 
 	Variables de entrada:
 
-		informe - ID unico del informe que se desea cargar
-		en_ventana - Indica si el informe debe ser cargado en una ventana o directamente sobre el escritorio de aplicacion
-		formato - Determina el formato en el cual es generado el informe como HTM o XLS (Alpha)
-		estilo - Determina el estilo CSS utilizado para presentar el informe, debe existir dentro de las hojas de estilo de la plantilla
-		embebido - Determina si el informe es presentado dentro de otro objeto o no, como por ejemplo un formulario
-
-	(start code)
-		SELECT * FROM ".$TablasCore."informe WHERE id='$informe'
-		SELECT * FROM ".$TablasCore."informe_campos WHERE informe='$informe'
-		SELECT * FROM ".$TablasCore."informe_tablas WHERE informe='$informe'
-		SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe='$informe' ORDER BY peso
-	(end)
+		informe - ID unico del informe del cual se desea construir el query
 
 	Salida:
 
-		HTML, CSS y Javascript asociado al formulario
+		SQL con el query requerido por el informe
 
 	Ver tambien:
-		<cargar_formulario>
+		<cargar_informe>
 */
-function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0)
+function construir_consulta_informe($informe)
 	{
-		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
+		global $ConexionPDO,$ArchivoCORE,$TablasCore,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
 		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
 		global $PCOSESS_LoginUsuario,$Nombre_usuario,$Descripcion_usuario,$Nivel_usuario,$Correo_usuario,$LlaveDePasoUsuario,$PCO_FechaOperacion;
 		// Carga variables de definicion de tablas
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
-		global $MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano,$MULTILANG_MonCommSQL;
-		global $IdiomaPredeterminado;
-        global $PCO_InformesDataTable;
-        global $ModoDepuracion;
 
-		// Busca datos del informe
-		$consulta_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
-		$registro_informe=$consulta_informe->fetch();
-		$Identificador_informe=$registro_informe["id"];
-		//Si no encuentra informe presenta error
-		if ($registro_informe["id"]=="") mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Informes." $informe)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
-		//Identifica si el informe requiere un formulario de filtrado previo
-		if ($registro_informe["formulario_filtrado"]!="")
-			{
-				//Determina si solicita el informe desde el formulario de filtrado apropiado, sino redirecciona a este
-				global $PCO_FormularioActivo;
-				if ($registro_informe["formulario_filtrado"]!=$PCO_FormularioActivo)
-					{
-						echo '<form name="precarga_form_filtro" action="'.$ArchivoCORE.'" method="POST">
-							<input type="Hidden" name="PCO_Accion" value="cargar_objeto">
-							<input type="Hidden" name="PCO_InformeFiltro" value="'.$registro_informe["id"].'">
-							<input type="Hidden" name="objeto" value="frm:'.$registro_informe["formulario_filtrado"].':1">
-							<input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
-							<input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
-						<script type="" language="JavaScript"> document.precarga_form_filtro.submit();  </script>';
-						die();
-					}
-			}
-
-            //Si hay variables de filtro definidas busca su valor en el contexto global
-            if($registro_informe["variables_filtro"]!="")
-                {
-                    $arreglo_variables_filtro = @explode(",",$registro_informe["variables_filtro"]);
-                    //Busca y convierte cada variable recibida en global
-                    foreach ($arreglo_variables_filtro as $nombre_variable_filtro)
-                        {
-                            //if (isset($$nombre_variable_filtro))  // {Deprecated}
-								global $$nombre_variable_filtro;
-                        }
-                }
 
 			// Inicia CONSTRUCCION DE CONSULTA DINAMICA
 			$numero_columnas=0;
@@ -4185,6 +4138,92 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					$campoorden=$registro_informe["ordenamiento"];
 					$consulta.= " ORDER BY $campoorden";
 				}
+
+		return $consulta;
+	}
+
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: cargar_informe
+	Genera el codigo HTML correspondiente a un informe de la aplicacion y hace los llamados necesarios para la diagramacion por pantalla de los diferentes objetos que lo componen.
+
+	Variables de entrada:
+
+		informe - ID unico del informe que se desea cargar
+		en_ventana - Indica si el informe debe ser cargado en una ventana o directamente sobre el escritorio de aplicacion
+		formato - Determina el formato en el cual es generado el informe como HTM o XLS (Alpha)
+		estilo - Determina el estilo CSS utilizado para presentar el informe, debe existir dentro de las hojas de estilo de la plantilla
+		embebido - Determina si el informe es presentado dentro de otro objeto o no, como por ejemplo un formulario
+
+	(start code)
+		SELECT * FROM ".$TablasCore."informe WHERE id='$informe'
+		SELECT * FROM ".$TablasCore."informe_campos WHERE informe='$informe'
+		SELECT * FROM ".$TablasCore."informe_tablas WHERE informe='$informe'
+		SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe='$informe' ORDER BY peso
+	(end)
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al formulario
+
+	Ver tambien:
+		<cargar_formulario> | <construir_consulta_informe>
+*/
+function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0)
+	{
+		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
+		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
+		global $PCOSESS_LoginUsuario,$Nombre_usuario,$Descripcion_usuario,$Nivel_usuario,$Correo_usuario,$LlaveDePasoUsuario,$PCO_FechaOperacion;
+		// Carga variables de definicion de tablas
+		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
+		global $MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano,$MULTILANG_MonCommSQL;
+		global $IdiomaPredeterminado;
+        global $PCO_InformesDataTable;
+        global $ModoDepuracion;
+
+		// Busca datos del informe
+		$consulta_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
+		$registro_informe=$consulta_informe->fetch();
+		$Identificador_informe=$registro_informe["id"];
+		//Si no encuentra informe presenta error
+		if ($registro_informe["id"]=="") mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Informes." $informe)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+
+		//Identifica si el informe requiere un formulario de filtrado previo
+		if ($registro_informe["formulario_filtrado"]!="")
+			{
+				//Determina si solicita el informe desde el formulario de filtrado apropiado, sino redirecciona a este
+				global $PCO_FormularioActivo;
+				if ($registro_informe["formulario_filtrado"]!=$PCO_FormularioActivo)
+					{
+						echo '<form name="precarga_form_filtro" action="'.$ArchivoCORE.'" method="POST">
+							<input type="Hidden" name="PCO_Accion" value="cargar_objeto">
+							<input type="Hidden" name="PCO_InformeFiltro" value="'.$registro_informe["id"].'">
+							<input type="Hidden" name="objeto" value="frm:'.$registro_informe["formulario_filtrado"].':1">
+							<input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+							<input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
+						<script type="" language="JavaScript"> document.precarga_form_filtro.submit();  </script>';
+						die();
+					}
+			}
+
+            //Si hay variables de filtro definidas busca su valor en el contexto global
+            if($registro_informe["variables_filtro"]!="")
+                {
+                    $arreglo_variables_filtro = @explode(",",$registro_informe["variables_filtro"]);
+                    //Busca y convierte cada variable recibida en global
+                    foreach ($arreglo_variables_filtro as $nombre_variable_filtro)
+                        {
+                            //if (isset($$nombre_variable_filtro))  // {Deprecated}
+								global $$nombre_variable_filtro;
+                        }
+                }
+
+		//Genera la condicion SQL para el informe
+		$consulta=construir_consulta_informe($informe);
 
 		// Si el informe tiene formato_final = T (tabla de datos)
 		if ($registro_informe["formato_final"]=="T")
