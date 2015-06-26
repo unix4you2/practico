@@ -41,6 +41,9 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added: Agregado un tipo de validación de campos: ahora se soporta Tiempos/Horas
+* Added: Agregado un tipo de validación de campos: ahora se soporta Fechas con Horas con selectores independientes y también unificados
+* Added: Agregado un tipo de validación de campos: Sólo fechas con seleccion por años, meses y dias separados
 * Added: La exportación de tablas ahora permite codificar o decodificar los contenidos al vuelo sobre diferentes sets de caracteres y transliterarlos si es necesario
 * Added: Nuevo editor WYSIWYG Responsive
 * Added: Agregado el control de formulario tipo checkbox o caja de verificación

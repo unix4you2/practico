@@ -362,7 +362,11 @@
 	$MULTILANG_FrmValida1='S&oacute;lo n&uacute;meros 0-9';
 	$MULTILANG_FrmValida2='S&oacute;lo letras A-Z';
 	$MULTILANG_FrmValida3='Letras y n&uacute;meros';
-	$MULTILANG_FrmValida4='Campo de fecha';
+	$MULTILANG_FrmValida4='Campo de fecha usando calendario unificado';
+	$MULTILANG_FrmValida7='Campo de fecha usando selectores independientes (ano, mes y dia)';
+	$MULTILANG_FrmValida5='Campo de hora';
+	$MULTILANG_FrmValida6='Campo de fecha y hora';
+	$MULTILANG_FrmValida8='Campo de fecha y hora con selector unificado';
 	$MULTILANG_FrmValidaDes='Tipo de filtro a ser aplicado cuando el usuario ingresa informaci&oacute;n por teclado';
 	$MULTILANG_FrmLectura='Campo de solo lectura';
 	$MULTILANG_FrmTitLectura='Define si se puede cambiar su valor';

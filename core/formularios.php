@@ -893,10 +893,14 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <select  name="validacion_datos" class="form-control" >
                                     <option value=""><?php $MULTILANG_Ninguno; ?></option>
-                                    <option value="numerico"     <?php if (@$registro_campo_editar["validacion_datos"]=="numerico")     echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida1; ?></option>
-                                    <option value="alfabetico"   <?php if (@$registro_campo_editar["validacion_datos"]=="alfabetico")   echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida2; ?></option>
-                                    <option value="alfanumerico" <?php if (@$registro_campo_editar["validacion_datos"]=="alfanumerico") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida3; ?></option>
-                                    <option value="fecha"        <?php if (@$registro_campo_editar["validacion_datos"]=="fecha")        echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida4; ?></option>
+                                    <option value="numerico"      <?php if (@$registro_campo_editar["validacion_datos"]=="numerico")      echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida1; ?></option>
+                                    <option value="alfabetico"    <?php if (@$registro_campo_editar["validacion_datos"]=="alfabetico")    echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida2; ?></option>
+                                    <option value="alfanumerico"  <?php if (@$registro_campo_editar["validacion_datos"]=="alfanumerico")  echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida3; ?></option>
+                                    <option value="fecha"         <?php if (@$registro_campo_editar["validacion_datos"]=="fecha")         echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida4; ?></option>
+                                    <option value="fechaxanos"    <?php if (@$registro_campo_editar["validacion_datos"]=="fechaxanos")    echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida7; ?></option>
+                                    <option value="hora"          <?php if (@$registro_campo_editar["validacion_datos"]=="hora")          echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida5; ?></option>
+                                    <option value="fechahora"     <?php if (@$registro_campo_editar["validacion_datos"]=="fechahora")     echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida6; ?></option>
+									<option value="fechahorafull" <?php if (@$registro_campo_editar["validacion_datos"]=="fechahorafull") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida8; ?></option>
                                 </select>
                                 <span class="input-group-addon">
                                     <a href="#" title="<?php echo $MULTILANG_FrmValidaDes; ?>"><i class="fa fa-question-circle icon-info"></i></a>

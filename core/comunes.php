@@ -2093,24 +2093,61 @@ function selector_iconos_awesome()
 
 			// Define cadenas en caso de tener validaciones
 			$cadena_validacion='';
-			if ($registro_campos["validacion_datos"]!="" && $registro_campos["validacion_datos"]!="fecha")
+			if ($registro_campos["validacion_datos"]!="" && $registro_campos["validacion_datos"]!="fecha" && $registro_campos["validacion_datos"]!="hora" && $registro_campos["validacion_datos"]!="fechahora" && $registro_campos["validacion_datos"]!="fechaxanos" && $registro_campos["validacion_datos"]!="fechahorafull")
 				$cadena_validacion=' onkeypress="return validar_teclado(event, \''.$registro_campos["validacion_datos"].'\');" ';
 			
             $cadena_complementaria_datepicker='';
             $cadena_ID_datepicker='';
             $cadena_clase_datepicker='';
-            if ($registro_campos["validacion_datos"]=="fecha")
+            $cadena_ID_datepickerEspecifica='';
+            //Genera cadenas especificas segun el datepicker requerido
+			if ($registro_campos["validacion_datos"]=="fecha" || $registro_campos["validacion_datos"]=="hora" || $registro_campos["validacion_datos"]=="fechahora" || $registro_campos["validacion_datos"]=="fechaxanos" || $registro_campos["validacion_datos"]=="fechahorafull")
 				{
+					if ($registro_campos["validacion_datos"]=="fecha")
+						{
+							$cadena_ID_datepickerEspecifica="
+									pickTime: false";
+							$cadena_complementaria_datepicker=' data-date-format="YYYY-MM-DD" ';
+						}
+					if ($registro_campos["validacion_datos"]=="fechaxanos")
+						{
+							$cadena_ID_datepickerEspecifica="
+									viewMode: 'years',
+									pickTime: false";
+							$cadena_complementaria_datepicker=' data-date-format="YYYY-MM-DD" ';
+						}
+					if ($registro_campos["validacion_datos"]=="hora")
+						{
+							$cadena_ID_datepickerEspecifica="
+									pickDate: false,
+									pickTime: true";
+							$cadena_complementaria_datepicker=' data-date-format="HH:mm:ss" ';
+						}
+					if ($registro_campos["validacion_datos"]=="fechahora")
+						{
+							$cadena_ID_datepickerEspecifica="
+									pickDate: true,
+									pickTime: true";
+							$cadena_complementaria_datepicker=' data-date-format="YYYY-MM-DD HH:mm:ss" ';
+						}
+					if ($registro_campos["validacion_datos"]=="fechahorafull")
+						{
+							$cadena_ID_datepickerEspecifica="
+									sideBySide: true,
+									pickDate: true,
+									pickTime: true";
+							$cadena_complementaria_datepicker=' data-date-format="YYYY-MM-DD HH:mm:ss" ';
+						}
+					//Genera parametros finales para los datepicker
 					$cadena_ID_datepicker=' id="DatePicker_'.$registro_campos["campo"].'" ';
                     $cadena_clase_datepicker=' date ';
                     @$funciones_activacion_datepickers.="
                         $(function () {
                             $('#DatePicker_".$registro_campos["campo"]."').datetimepicker({
                                 language: '$IdiomaPredeterminado',
-                                pickTime: false
+                                ".$cadena_ID_datepickerEspecifica."
                             });
                         });";
-                    $cadena_complementaria_datepicker=' data-date-format="YYYY-MM-DD" ';
 				}
 
 			// Si el campo es de tipo clave cambia el input a password
@@ -2139,8 +2176,8 @@ function selector_iconos_awesome()
                     $salida.= '</span>';
 				}
 
-            //Agrega el icono de calendario al campo de fecha
-			if ($registro_campos["validacion_datos"]=="fecha")
+            //Agrega el icono de calendario a campos con validaciones tipo datepicker al detectar una cadena de ID para algun datepicker
+			if ($cadena_ID_datepicker!="")
 				{
                     $salida.='
                     <span class="input-group-addon">

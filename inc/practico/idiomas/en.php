@@ -365,7 +365,11 @@
 	$MULTILANG_FrmValida1='Numbers only 0-9';
 	$MULTILANG_FrmValida2='Only letters A-Z';
 	$MULTILANG_FrmValida3='Letters and numbers';
-	$MULTILANG_FrmValida4='Date field';
+	$MULTILANG_FrmValida4='Date field using unified calendar';
+	$MULTILANG_FrmValida7='Date field using separated pickers (year, month and day)';
+	$MULTILANG_FrmValida5='Time field';
+	$MULTILANG_FrmValida6='Date and Time field';
+	$MULTILANG_FrmValida8='Date and Time field using unified selector';
 	$MULTILANG_FrmValidaDes='Filter type to be applied when the user enters information by keyboard';
 	$MULTILANG_FrmLectura='Read only field';
 	$MULTILANG_FrmTitLectura='Defines whether you can change its value or not';
