@@ -3981,6 +3981,93 @@ function selector_iconos_awesome()
 
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: generar_botones_informe
+	Genera el codigo HTML correspondiente a los botones definidos para cada registro de un informe indicado por su ID
+
+	Variables de entrada:
+
+		informe - ID unico del informe del cual se desea construir el query
+
+	Salida:
+
+		HTML con los botones
+
+	Ver tambien:
+		<cargar_informe>
+*/
+function generar_botones_informe($informe)
+	{
+		global $ConexionPDO,$ArchivoCORE,$TablasCore,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
+		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
+		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
+		
+		//Inicializa la cadena de botones vacia
+		$cadena_generica_botones='';
+
+		// Busca si el informe tiene acciones (botones), los cuenta y prepara dentro de un arreglo para repetir en cada registro
+		$consulta_botones=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_boton." FROM ".$TablasCore."informe_boton WHERE informe=? AND visible=1 ORDER BY peso","$informe");
+		while($registro_botones=$consulta_botones->fetch())
+			{
+				//Construye una cadena generica con todos los botones para ser reemplazada luego con valores
+				if ($registro_botones["tipo_accion"]=="interna_eliminar")
+					{
+						$valores = explode(".",$registro_botones["accion_usuario"]);
+						$tabla_vinculada=@$valores[0];
+						$campo_vinculado=@$valores[1];
+					
+						//Si solo se indico el campo, sin la tabla, intenta usar solo el campo
+						if ($campo_vinculado=="" && $tabla_vinculada!="")
+							{
+								$campo_vinculado=$valores[0];
+								$tabla_vinculada="";
+							}
+
+						$comando_javascript="
+							document.FRMBASEINFORME.PCO_Accion.value='eliminar_registro_informe';
+							document.FRMBASEINFORME.tabla.value='".@$tabla_vinculada."';
+							document.FRMBASEINFORME.campo.value='".@$campo_vinculado."';
+							document.FRMBASEINFORME.valor.value='DELFRMVALVALOR';
+							document.FRMBASEINFORME.submit()";
+					}
+				if ($registro_botones["tipo_accion"]=="interna_cargar")
+					{
+						$comando_javascript="
+							document.FRMBASEINFORME.PCO_Accion.value='cargar_objeto';
+							document.FRMBASEINFORME.objeto.value='frm:".$registro_botones["accion_usuario"].":DETFRMVALBASE';
+							document.FRMBASEINFORME.submit()";
+					}
+				if ($registro_botones["tipo_accion"]=="externa_formulario")
+					{
+						$comando_javascript="
+							document.FRMBASEINFORME.PCO_Tabla.value='".@$tabla_vinculada."';
+							document.FRMBASEINFORME.PCO_Campo.value='".@$campo_vinculado."';
+							document.FRMBASEINFORME.PCO_Valor.value='DELFRMVALVALOR';
+							document.FRMBASEINFORME.PCO_Accion.value='".$registro_botones["accion_usuario"]."';
+							document.FRMBASEINFORME.submit()";
+					}
+				if ($registro_botones["tipo_accion"]=="externa_javascript")
+					{
+						$comando_javascript=$registro_botones["accion_usuario"];
+					}
+
+				//Verifica si el registro de botones presenta algun texto de confirmacion y lo antepone al script
+				$cadena_confirmacion_accion_pre="";
+				$cadena_confirmacion_accion_pos="";
+				if ($registro_botones["confirmacion_texto"]!="")
+					{
+						$cadena_confirmacion_accion_pre=" if (confirm('".$registro_botones["confirmacion_texto"]."')) {";
+						$cadena_confirmacion_accion_pos=" } else {} ";
+					}
+				
+				//Genera la cadena del enlace
+				$cadena_javascript='onclick="'.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.' "';
+				@$cadena_generica_botones.='<input type="Button"  class="'.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.$cadena_javascript.' >&nbsp;';
+			}
+		return $cadena_generica_botones;
+	}
 
 
 /* ################################################################## */
@@ -4007,8 +4094,6 @@ function construir_consulta_informe($informe)
 		global $PCOSESS_LoginUsuario,$Nombre_usuario,$Descripcion_usuario,$Nivel_usuario,$Correo_usuario,$LlaveDePasoUsuario,$PCO_FechaOperacion;
 		// Carga variables de definicion de tablas
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
-
-
 
 			// Inicia CONSTRUCCION DE CONSULTA DINAMICA
 			$numero_columnas=0;
@@ -4141,8 +4226,6 @@ function construir_consulta_informe($informe)
 
 		return $consulta;
 	}
-
-
 
 
 /* ################################################################## */
@@ -4282,70 +4365,12 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							$SalidaFinalInforme.= '<table class="font-size: 11px; font-family: Verdana, Tahoma, Arial;"><thead><tr>';
 							$SalidaFinalInformePDF.= '<table class="font-size: 11px; font-family: Verdana, Tahoma, Arial;"><thead><tr>';
 						}
+						
+					
 
+					//Busca si tiene acciones (botones) para cada registro y los genera
+					$cadena_generica_botones=generar_botones_informe($informe);
 
-					// Busca si el informe tiene acciones (botones), los cuenta y prepara dentro de un arreglo para repetir en cada registro
-					$consulta_botones=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_boton." FROM ".$TablasCore."informe_boton WHERE informe=? AND visible=1 ORDER BY peso","$informe");
-					$total_botones=0;
-					while($registro_botones=$consulta_botones->fetch())
-						{
-							//Construye una cadena generica con todos los botones para ser reemplazada luego con valores
-							if ($registro_botones["tipo_accion"]=="interna_eliminar")
-								{
-									$valores = explode(".",$registro_botones["accion_usuario"]);
-									$tabla_vinculada=@$valores[0];
-									$campo_vinculado=@$valores[1];
-								
-									//Si solo se indico el campo, sin la tabla, intenta usar solo el campo
-									if ($campo_vinculado=="" && $tabla_vinculada!="")
-										{
-											$campo_vinculado=$valores[0];
-											$tabla_vinculada="";
-										}
-
-									$comando_javascript="
-										document.FRMBASEINFORME.PCO_Accion.value='eliminar_registro_informe';
-										document.FRMBASEINFORME.tabla.value='".@$tabla_vinculada."';
-										document.FRMBASEINFORME.campo.value='".@$campo_vinculado."';
-										document.FRMBASEINFORME.valor.value='DELFRMVALVALOR';
-										document.FRMBASEINFORME.submit()";
-								}
-							if ($registro_botones["tipo_accion"]=="interna_cargar")
-								{
-									$comando_javascript="
-                                        document.FRMBASEINFORME.PCO_Accion.value='cargar_objeto';
-										document.FRMBASEINFORME.objeto.value='frm:".$registro_botones["accion_usuario"].":DETFRMVALBASE';
-										document.FRMBASEINFORME.submit()";
-								}
-							if ($registro_botones["tipo_accion"]=="externa_formulario")
-								{
-									$comando_javascript="
-										document.FRMBASEINFORME.PCO_Tabla.value='".@$tabla_vinculada."';
-										document.FRMBASEINFORME.PCO_Campo.value='".@$campo_vinculado."';
-										document.FRMBASEINFORME.PCO_Valor.value='DELFRMVALVALOR';
-                                        document.FRMBASEINFORME.PCO_Accion.value='".$registro_botones["accion_usuario"]."';
-										document.FRMBASEINFORME.submit()";
-								}
-							if ($registro_botones["tipo_accion"]=="externa_javascript")
-								{
-									$comando_javascript=$registro_botones["accion_usuario"];
-								}
-								
-
-                            //Verifica si el registro de botones presenta algun texto de confirmacion y lo antepone al script
-                            $cadena_confirmacion_accion_pre="";
-                            $cadena_confirmacion_accion_pos="";
-							if ($registro_botones["confirmacion_texto"]!="")
-								{
-									$cadena_confirmacion_accion_pre=" if (confirm('".$registro_botones["confirmacion_texto"]."')) {";
-									$cadena_confirmacion_accion_pos=" } else {} ";
-								}
-                            
-                            //Genera la cadena del enlace
-							$cadena_javascript='onclick="'.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.' "';
-							@$cadena_generica_botones.='<input type="Button"  class="'.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.$cadena_javascript.' >&nbsp;';
-							$total_botones++;
-						}
 
 					// Imprime encabezados de columna
 					$resultado_columnas=@ejecutar_sql($consulta);
@@ -4373,7 +4398,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
                     }
 
 					//Si el informe tiene botones entonces agrega columna adicional
-					if ($total_botones>0)
+					if ($cadena_generica_botones!="")
 						{
 							$SalidaFinalInforme.= '<th></th>';
 							$SalidaFinalInformePDF.= '<th></th>';
@@ -4398,7 +4423,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 										}
 								}
 							//Si el informe tiene botones los agrega
-							if ($total_botones>0)
+							if ($cadena_generica_botones!="")
 								{
 									//Transforma la cadena generica con los datos especificos del registro, toma por ahora el primer campo
 									$cadena_botones_registro=str_replace("DELFRMVALVALOR",$registro_informe[0],$cadena_generica_botones);
