@@ -4471,15 +4471,6 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		//Genera la consulta en SQL para el informe
 		$consulta=construir_consulta_informe($informe,0); //Construye query del informe sin evitar campos ocultos (0)
 
-		//Genera formulario para pasar el informe a Excel
-		echo '<form name="exportacion_informe" target="_blank" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="exportar_informe">
-			<input type="Hidden" name="PCO_Formato" value="xls">
-			<input type="Hidden" name="PCO_Consulta" value="'.base64_encode(construir_consulta_informe($informe,1)).'">
-			<input type=submit value=xls>
-			</form>
-		';
-
 		// Si el informe tiene formato_final = T (tabla de datos)
 		if ($registro_informe["formato_final"]=="T")
 			{
@@ -4497,43 +4488,35 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
 					echo '<DIV style="DISPLAY: block; OVERFLOW: auto; POSITION: relative; WIDTH: '.$registro_informe["ancho"].'; HEIGHT: '.$registro_informe["alto"].'">';
 					
-				//Genera enlace al PDF cuando se detecta el modulo y ademas el informe lo tiene activado
+				//Genera enlaces a las opciones de descarga
 				if (@file_exists("mod/pdf") && $registro_informe["genera_pdf"]=='S')
 					{
 						echo '<div align=right><a href="tmp/Inf_'.$Identificador_informe.'-'.$PCOSESS_LoginUsuario.'.pdf" target="_BLANK"><i class="fa fa-file-pdf-o"></i> PDF&nbsp;</a></div>';
+						
+						//Genera formulario para pasar el informe a Excel
+						echo '<form name="exportacion_informe" action="'.$ArchivoCORE.'" method="POST">
+							<input type="Hidden" name="PCO_Accion" value="exportar_informe">
+							<input type="Hidden" name="PCO_Formato" value="xls">
+							<input type="Hidden" name="PCO_Titulo" value="'.$registro_informe["titulo"].'">
+							<input type="Hidden" name="PCO_IDInforme" value="'.$informe.'">
+							<input type="Hidden" name="PCO_Consulta" value="'.base64_encode(construir_consulta_informe($informe,1)).'">
+							<input type="Hidden" name="Precarga_EstilosBS" value="0">
+							<input type="Hidden" name="Presentar_FullScreen" value="1">
+							<input type=submit value=xls>
+							</form>
+						';
+						
+						
+						
 					}
 
-					// Crea encabezado por tipo de formato:  1=html   2=Excel
-					if($formato=="htm")
-						{
-							echo '
-								<html>
-								<body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0" style="font-size: 12px; font-family: Arial, Verdana, Tahoma;">';
-						}
+					//DEPRECATED echo '	<html>		<body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0" style="font-size: 12px; font-family: Arial, Verdana, Tahoma;">';
 
-					if($formato=="xls")
-						{
-							$fecha = date("d-m-Y");
-							$tituloinforme=trim($registro_informe["titulo"]);
-							$tituloinforme="Informe";
-							$nombrearchivo=$tituloinforme."_".$fecha;
-							header('Content-type: application/vnd.ms-excel');
-							header("Content-Disposition: attachment; filename=$nombrearchivo.xls");
-							header("Pragma: no-cache");
-							header("Expires: 0");
-						}
+					//Si el informe va a soportar datatable entonces lo agrega a las tablas que deben ser convertidas en el pageonload
+					if ($registro_informe["soporte_datatable"]=="S")
+						@$PCO_InformesDataTable.="TablaInforme_".$registro_informe["id"]."|";
+					$SalidaFinalInforme.= '<table class="table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead><tr>';
 
-					if($formato=="htm")
-						{
-                            //Si el informe va a soportar datatable entonces lo agrega a las tablas que deben ser convertidas en el pageonload
-                            if ($registro_informe["soporte_datatable"]=="S")
-                                @$PCO_InformesDataTable.="TablaInforme_".$registro_informe["id"]."|";
-                            $SalidaFinalInforme.= '<table class="table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead><tr>';
-						}
-					if($formato=="xls")
-						{
-							$SalidaFinalInforme.= '<table class="font-size: 11px; font-family: Verdana, Tahoma, Arial;"><thead><tr>';
-						}
 
 					//Busca si tiene acciones (botones) para cada registro y los genera
 					$cadena_generica_botones=generar_botones_informe($informe);
@@ -4581,63 +4564,31 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							$SalidaFinalInforme.= '</tr>';
 							$numero_filas++;
 						}
+						
 					$SalidaFinalInforme.= '</tbody>';
-					if ($formato=="htm")
-						{
-                            //Cuando es embebido (=1) no agrega los totales de registro
-                            if (!$embebido)
-                                {
-                                    $SalidaFinalInforme.= '<tfoot>
-                                        <tr><td colspan='.$numero_columnas.'>
-                                            <b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
-                                        </td></tr>';
-                                }
-                            echo '</tfoot>';
-						}
-					$SalidaFinalInforme.= '</table>';
 
-					if($formato=="htm")
-						echo '</body></html>';
+					//Cuando es embebido (=1) no agrega los totales de registro
+					if (!$embebido)
+						{
+							$SalidaFinalInforme.= '<tfoot>
+								<tr><td colspan='.$numero_columnas.'>
+									<b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
+								</td></tr>';
+						}
+					$SalidaFinalInforme.= '</tfoot>
+							</table>';
+				// DEPRECATED $SalidaFinalInforme.= '</body></html>';
+
 				//Imprime el HTML generado para el informe
 				echo $SalidaFinalInforme;
-				
-				//Genera el PDF cuando se encuentra el modulo y el informe lo tiene activado
-				if (@file_exists("mod/pdf") && $registro_informe["genera_pdf"]=='S')
-					{
-						require_once('mod/pdf/html2pdf/html2pdf.class.php');
-						try
-							{
-								//Define parametros para generar el PDF
-								$IdiomaPDF=$IdiomaPredeterminado;			// Acepta solo ca|cs|da|de|en|es|fr|it|nl|pt|tr
-								$OrientacionPDF='P';						// P|ortrait  L|andscape
-								$TamanoPaginaPDF='A4';						// A4|A5|LETTER|LEGAL|100×200...|
-								$MargenPaginaMM='10';						// Como Entero o arreglo (Izq,Der,Arr,Aba) ej:  10  o  array(1, 25, 25, 5)
-								$ModoVistaPDF='fullpage';					// fullpage|fullwidth|real|default
-								$FuentePredeterminadaPDF='Arial';			// Arial|Courier|Courier-Bold|Courier-BoldOblique|Courier-Oblique|Helvetica|Helvetica-Bold|Helvetica-BoldOblique|Helvetica-Oblique|Symbol|Times-Roman|Times-Bold|Times-BoldItalic|Times-Italic|ZapfDingbats
-								$ContrasenaLecturaPDF='';					// Si se asigna un valor pedira contrasena para poderlo leer
-								$JavaScriptPDF='';							// Ej.  print(true);
-								// Inicia la generacion del PDF
-								$html2pdf = new HTML2PDF($OrientacionPDF,$TamanoPaginaPDF,$IdiomaPDF, true, 'UTF-8', $MargenPaginaMM);
-								if ($ContrasenaLecturaPDF!="")
-									$html2pdf->pdf->SetProtection(array('print'), $ContrasenaLecturaPDF);
-								if ($JavaScriptPDF!="")
-									$html2pdf->pdf->IncludeJS($JavaScriptPDF);
-								$html2pdf->pdf->SetDisplayMode($ModoVistaPDF);
-								$html2pdf->setDefaultFont($FuentePredeterminadaPDF);
-								$html2pdf->WriteHTML($SalidaFinalInformePDF);
-								$html2pdf->Output('tmp/Inf_'.$Identificador_informe.'-'.$PCOSESS_LoginUsuario.'.pdf', 'F'); // Antes: $html2pdf->Output('tmp/exemple.pdf'); enviaba salida al navegador directamente
-							}
-						catch (HTML2PDF_exception $e)
-							{
-								echo $e;
-								exit;
-							}
-					}
 
 				// Si se ha definido un tamano fijo entonces cierra el marco
 				if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
 					echo '</DIV>';
 			} // Fin si informe es T (tabla)
+
+
+
 
 		//Verifica si es un informe grafico sin dimensiones
 		if ($registro_informe["formato_final"]=="G" && ( $registro_informe["ancho"]=="" || $registro_informe["alto"]=="" ))

@@ -35,6 +35,53 @@
 
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: calcular_columna_hojacalculo
+	Recibe un numero de columa y retorna su notacion en letras 1=A, 2=B... 26=Z, 27=AA, 28=AB...
+
+	Variables de entrada:
+
+		ColumnaDeseada - Numero de columna a convertir
+
+	Salida:
+		Cadena de letras correspondiente a la columna para una hoja de calculo estandar
+*/
+function calcular_columna_hojacalculo($ColumnaDeseada)
+	{
+		//TODO:  Esto genera maximo hasta 702 Columnas (iniciando desde 0=A hasta 701=ZZ) aumentar a ilimitado
+		if ($ColumnaDeseada>702) $ColumnaDeseada=702;
+		
+		$CadenaLetrasColumna='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$LongitudLetrasColumna=strlen($CadenaLetrasColumna);
+		$ColumnaGenerada=0;
+		$PosicionPrefijo=-1;
+		$PosicionCaracter=0;
+		$ColumnasIteradas=array();
+		
+		while($ColumnaGenerada<$ColumnaDeseada)
+			{
+				//Si hay un prefijo definido
+				if ($PosicionPrefijo>=0)
+					{
+						$Prefijo=$CadenaLetrasColumna[$PosicionPrefijo];
+					}
+				$ColumnasIteradas[]=$Prefijo.$CadenaLetrasColumna[$PosicionCaracter];
+
+				$PosicionCaracter++;
+				$ColumnaGenerada++;	
+
+				//Si llega al final de la cadena empieza nuevamente
+				if($PosicionCaracter>$LongitudLetrasColumna-1)
+					{
+						$PosicionCaracter=0;
+						$PosicionPrefijo++;
+					}
+			}
+
+		return $ColumnasIteradas[$ColumnaDeseada-1];
+	}
 
 
 /* ################################################################## */
@@ -46,7 +93,9 @@
 	Variables de entrada:
 
 		PCO_Consulta - Consulta en SQL que genera los datos a ser exportados
-		PCO_Formato - El formato en que debe ser devuelto el informe
+		PCO_Formato - El formato en que debe ser devuelto el informe  xls|
+		PCO_Titulo - El titulo del informe generado
+		PCO_IDInforme - El ID del informe que se esta generando en el momento
 
 	Salida:
 		Datos del informe en archivo entregado para descarga
@@ -56,183 +105,83 @@
 
 			//Devuelve la consulta a su valor inicial
 			$PCO_Consulta=base64_decode($PCO_Consulta);
-			
-			echo $PCO_Consulta;
+		
+			//Limpia la salida generada hasta el momento para entregar un archivo limpio
+			ob_clean();
 
-		// Si el informe tiene formato_final = T (tabla de datos)
-		if ($registro_informe["formato_final"]=="T")
-			{
-				$SalidaFinalInforme='';
-				$SalidaFinalInformePDF='';
-				if ($en_ventana)
-					{
-						//Cuando es embebido (=1) no imprime el boton de retorno pues se asume dentro de un formulario
-						if (!$embebido)
-							echo '<div align=center><button type="Button" onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home fa-fw"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
-						//Carga la ventana con el informe
-						abrir_ventana($Nombre_Aplicacion.' - '.$registro_informe["titulo"],'panel panel-info',$registro_informe["ancho"]);
-					}
+			//Exporta a Excel
+			if ($PCO_Formato=="xls")
+				{
 
-				// Si se ha definido un tamano fijo entonces crea el marco
-				if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
-					echo '<DIV style="DISPLAY: block; OVERFLOW: auto; POSITION: relative; WIDTH: '.$registro_informe["ancho"].'; HEIGHT: '.$registro_informe["alto"].'">';
-					
-				//Genera enlace al PDF cuando se detecta el modulo y ademas el informe lo tiene activado
-				if (@file_exists("mod/pdf") && $registro_informe["genera_pdf"]=='S')
-					{
-						echo '<div align=right><a href="tmp/Inf_'.$Identificador_informe.'-'.$PCOSESS_LoginUsuario.'.pdf" target="_BLANK"><i class="fa fa-file-pdf-o"></i> PDF&nbsp;</a></div>';
-					}
+					// Create new PHPExcel object
+					$objPHPExcel = new PHPExcel();
 
-					// Crea encabezado por tipo de formato:  1=html   2=Excel
-					if($formato=="htm")
-						{
-							echo '
-								<html>
-								<body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0" style="font-size: 12px; font-family: Arial, Verdana, Tahoma;">';
-						}
+					// Establece propiedades del documento
+					$objPHPExcel->getProperties()->setCreator("Practico Framework PHP")
+												 ->setLastModifiedBy($PCOSESS_LoginUsuario)
+												 ->setTitle($PCO_Titulo)
+												 ->setSubject("$Nombre_Aplicacion $PCO_FechaOperacionGuiones desde $PCO_DireccionAuditoria")
+												 ->setDescription("Reporte formato $PCO_Formato, generado por Practico Framework PHP. www.practico.org")
+												 ->setKeywords("$PCO_Formato Reporte Practico")
+												 ->setCategory("$PCO_Formato");
+					//AGREGA LOS CONTENIDOS
+						$FilaActiva=1;
 
-					if($formato=="xls")
-						{
-							$fecha = date("d-m-Y");
-							$tituloinforme=trim($registro_informe["titulo"]);
-							$tituloinforme="Informe";
-							$nombrearchivo=$tituloinforme."_".$fecha;
-							header('Content-type: application/vnd.ms-excel');
-							header("Content-Disposition: attachment; filename=$nombrearchivo.xls");
-							header("Pragma: no-cache");
-							header("Expires: 0");
-						}
+						//Encabezados (primera fila)
+							//Determina si el informe tiene o no campos ocultos
+							$PCO_ColumnasOcultas=determinar_campos_ocultos($PCO_IDInforme);
+							
+							//Obtiene ColumnasVisibles, NumerosColumnasOcultas, NumeroColumnas dentro de EtiquetasConsulta
+							$EtiquetasConsulta=generar_etiquetas_consulta($PCO_Consulta,$PCO_IDInforme); //Enviar el informe para que se determinen tambien sus columnas ocultas
 
-					if($formato=="htm")
-						{
-                            //Si el informe va a soportar datatable entonces lo agrega a las tablas que deben ser convertidas en el pageonload
-                            if ($registro_informe["soporte_datatable"]=="S")
-                                @$PCO_InformesDataTable.="TablaInforme_".$registro_informe["id"]."|";
-                            $SalidaFinalInforme.= '<table class="table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead><tr>';
-							$SalidaFinalInformePDF.= '<table class="'.$estilo.'"><thead><tr>';
-						}
-					if($formato=="xls")
-						{
-							$SalidaFinalInforme.= '<table class="font-size: 11px; font-family: Verdana, Tahoma, Arial;"><thead><tr>';
-							$SalidaFinalInformePDF.= '<table class="font-size: 11px; font-family: Verdana, Tahoma, Arial;"><thead><tr>';
-						}
-
-					//Busca si tiene acciones (botones) para cada registro y los genera
-					$cadena_generica_botones=generar_botones_informe($informe);
-					
-					//Determina si el informe tiene o no campos ocultos
-					$PCO_ColumnasOcultas=determinar_campos_ocultos($informe);
-					
-					//Obtiene ColumnasVisibles, NumerosColumnasOcultas, NumeroColumnas dentro de EtiquetasConsulta
-					$EtiquetasConsulta=generar_etiquetas_consulta($consulta,$informe); //Enviar el informe para que se determinen tambien sus columnas ocultas
-
-					//Genera HTML con las columnas
-					foreach($EtiquetasConsulta[0]["ColumnasVisibles"] as $EtiquetaColumna)
-						$SalidaFinalInforme.= '<th>'.$EtiquetaColumna.'</th>';
-
-					//Si el informe tiene botones entonces agrega columna adicional
-					if ($cadena_generica_botones!="")
-						{
-							$SalidaFinalInforme.= '<th></th>';
-							$SalidaFinalInformePDF.= '<th></th>';
-						}
-					$SalidaFinalInforme.= '</tr></thead><tbody>';
-					$SalidaFinalInformePDF.= '</tr></thead><tbody>';
-
-					// Imprime registros del resultado
-					$numero_filas=0;
-					$consulta_ejecucion=ejecutar_sql($consulta);
-					while($registro_informe=$consulta_ejecucion->fetch())
-						{
-							$SalidaFinalInforme.= '<tr>';
-							$SalidaFinalInformePDF.= '<tr>';
-							for ($i=0;$i<$EtiquetasConsulta[0]["NumeroColumnas"];$i++)
+							//Genera columnas del encabezado
+							$ConteoColumna=1;
+							foreach($EtiquetasConsulta[0]["ColumnasVisibles"] as $EtiquetaColumna)
 								{
-									//Muestra la columna solo si no se trata de una de las ocultas
-									if (!in_array($i,$EtiquetasConsulta[0]["NumerosColumnasOcultas"]))
-										{											
-											$SalidaFinalInforme.= '<td>'.$registro_informe[$i].'</td>';
-											$SalidaFinalInformePDF.= '<td>'.$registro_informe[$i].'</td>';
+									$ColumnaSalida=calcular_columna_hojacalculo($ConteoColumna);
+									$objPHPExcel->setActiveSheetIndex(0)->setCellValue("$ColumnaSalida$FilaActiva", $EtiquetaColumna);
+									$ConteoColumna++;								
+								}
+								
+						//Registros con los resultados
+							$consulta_ejecucion=ejecutar_sql($PCO_Consulta);
+							while($registro_informe=$consulta_ejecucion->fetch())
+								{
+									//Se mueve a la siguiente fila
+									$FilaActiva++;
+									for ($i=0;$i<$EtiquetasConsulta[0]["NumeroColumnas"];$i++)
+										{
+											//Muestra la columna solo si no se trata de una de las ocultas
+											if (!in_array($i,$EtiquetasConsulta[0]["NumerosColumnasOcultas"]))
+												{											
+													$ColumnaSalida=calcular_columna_hojacalculo($i+1);
+													$objPHPExcel->setActiveSheetIndex(0)->setCellValue("$ColumnaSalida$FilaActiva", $registro_informe[$i]);
+												}
 										}
 								}
-							//Si el informe tiene botones los agrega
-							if ($cadena_generica_botones!="")
-								{
-									//Transforma la cadena generica con los datos especificos del registro, toma por ahora el primer campo
-									$cadena_botones_registro=str_replace("DELFRMVALVALOR",$registro_informe[0],$cadena_generica_botones);
-									$cadena_botones_registro=str_replace("DETFRMVALBASE",$registro_informe[0],$cadena_botones_registro);
-									//Muestra los botones preparados para el registro
-									$SalidaFinalInforme.= '<th>'.$cadena_botones_registro.'</th>';
-									$SalidaFinalInformePDF.= '<th>'.$cadena_botones_registro.'</th>';
-								}
-							$SalidaFinalInforme.= '</tr>';
-							$SalidaFinalInformePDF.= '</tr>';
-							$numero_filas++;
-						}
-					$SalidaFinalInforme.= '</tbody>';
-					$SalidaFinalInformePDF.= '</tbody>';
-					if ($formato=="htm")
-						{
-                            //Cuando es embebido (=1) no agrega los totales de registro
-                            if (!$embebido)
-                                {
-                                    $SalidaFinalInforme.= '<tfoot>
-                                        <tr><td colspan='.$numero_columnas.'>
-                                            <b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
-                                        </td></tr>';
-                                    $SalidaFinalInformePDF.= '<tfoot>
-                                        <tr><td colspan='.$numero_columnas.'>
-                                            <b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
-                                        </td></tr>';
-                                }
-                            echo '</tfoot>';
-						}
-					$SalidaFinalInforme.= '</table>';
-					$SalidaFinalInformePDF.= '</table>';
 
-					if($formato=="htm")
-						echo '</body></html>';
-				//Imprime el HTML generado para el informe
-				echo $SalidaFinalInforme;
-				
-				//Genera el PDF cuando se encuentra el modulo y el informe lo tiene activado
-				if (@file_exists("mod/pdf") && $registro_informe["genera_pdf"]=='S')
-					{
-						require_once('mod/pdf/html2pdf/html2pdf.class.php');
-						try
-							{
-								//Define parametros para generar el PDF
-								$IdiomaPDF=$IdiomaPredeterminado;			// Acepta solo ca|cs|da|de|en|es|fr|it|nl|pt|tr
-								$OrientacionPDF='P';						// P|ortrait  L|andscape
-								$TamanoPaginaPDF='A4';						// A4|A5|LETTER|LEGAL|100×200...|
-								$MargenPaginaMM='10';						// Como Entero o arreglo (Izq,Der,Arr,Aba) ej:  10  o  array(1, 25, 25, 5)
-								$ModoVistaPDF='fullpage';					// fullpage|fullwidth|real|default
-								$FuentePredeterminadaPDF='Arial';			// Arial|Courier|Courier-Bold|Courier-BoldOblique|Courier-Oblique|Helvetica|Helvetica-Bold|Helvetica-BoldOblique|Helvetica-Oblique|Symbol|Times-Roman|Times-Bold|Times-BoldItalic|Times-Italic|ZapfDingbats
-								$ContrasenaLecturaPDF='';					// Si se asigna un valor pedira contrasena para poderlo leer
-								$JavaScriptPDF='';							// Ej.  print(true);
-								// Inicia la generacion del PDF
-								$html2pdf = new HTML2PDF($OrientacionPDF,$TamanoPaginaPDF,$IdiomaPDF, true, 'UTF-8', $MargenPaginaMM);
-								if ($ContrasenaLecturaPDF!="")
-									$html2pdf->pdf->SetProtection(array('print'), $ContrasenaLecturaPDF);
-								if ($JavaScriptPDF!="")
-									$html2pdf->pdf->IncludeJS($JavaScriptPDF);
-								$html2pdf->pdf->SetDisplayMode($ModoVistaPDF);
-								$html2pdf->setDefaultFont($FuentePredeterminadaPDF);
-								$html2pdf->WriteHTML($SalidaFinalInformePDF);
-								$html2pdf->Output('tmp/Inf_'.$Identificador_informe.'-'.$PCOSESS_LoginUsuario.'.pdf', 'F'); // Antes: $html2pdf->Output('tmp/exemple.pdf'); enviaba salida al navegador directamente
-							}
-						catch (HTML2PDF_exception $e)
-							{
-								echo $e;
-								exit;
-							}
-					}
+					// Establece la celda activa
+					$objPHPExcel->setActiveSheetIndex(0);
+					// Renombra la hoja del libro
+					$objPHPExcel->getActiveSheet()->setTitle($MULTILANG_Resultados);
+					// Establece la hoja activa para cuando se abra el excel
+					$objPHPExcel->setActiveSheetIndex(0);
 
-				// Si se ha definido un tamano fijo entonces cierra el marco
-				if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
-					echo '</DIV>';
-			} // Fin si informe es T (tabla)
+					// Redirecciona la salida al navegador del cliente (Excel5)
+					header('Content-Type: application/vnd.ms-excel');
+					header('Content-Disposition: attachment;filename="'.$MULTILANG_Resultados.'_'.$PCO_FechaOperacionGuiones.'_'.$PCO_HoraOperacion.'.xls"');
+					header('Cache-Control: max-age=0');
+					// Establece control de cache para internet explorer 9
+					header('Cache-Control: max-age=1');
+					// Establece otros parametros cuando se trabaja con internet explorer sobre SSL
+					header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Fecha en el pasado para que siempre se considere expirado en cache
+					header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // Siempre se considera modificado
+					header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+					header ('Pragma: public'); // HTTP/1.0
 
+					$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+					$objWriter->save('php://output');
+				}
 
 
 

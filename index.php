@@ -129,6 +129,9 @@
 
     limpiar_entradas(); // Evita XSS
 
+	// Incluye clases para procesar archivos en csv, xls, ods, pdf, otros
+	require_once ('inc/phpexcel/Classes/PHPExcel.php');
+
     // Valida llaves de paso y permisos de accion
     if ($PCO_Accion!= "" && $PCO_Accion!="Iniciar_login" && $PCO_Accion!="Terminar_sesion" && $PCO_Accion!="Mensaje_cierre_sesion" && $PCO_Accion!="ver_monitoreo" && $PCO_Accion!="recuperar_contrasena")
         {
