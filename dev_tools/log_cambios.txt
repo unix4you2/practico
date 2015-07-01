@@ -20,6 +20,7 @@ AUTHORS
 index.php
 core/comunes.php
 core/formularios.php
+core/informes.php
 core/marco_abajo.php
 core/marco_arriba.php
 core/marco_arriba_bs.php
