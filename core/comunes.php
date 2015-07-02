@@ -4016,7 +4016,7 @@ function selector_iconos_awesome()
 							//Si se encuentra que el form viene llamado desde un informe que lo requiere para filtro agrega un boton de retorno al informe automaticamente
 							$comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='inf:".$PCO_InformeFiltro.":1';document.datos.submit();";
 							$cadena_javascript='href="javascript:'.@$comando_javascript.'"';
-							echo '<a class="'.$estilo_basico_boton.' btn-warning" '.@$cadena_javascript.'>'.$MULTILANG_InfRetornoFormFiltrado.'</a>';
+							echo '<a class="'.$estilo_basico_boton.' btn btn-warning" '.@$cadena_javascript.'>'.$MULTILANG_InfRetornoFormFiltrado.'</a>';
 						}
 
                     echo '</div>';
