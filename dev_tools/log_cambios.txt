@@ -67,8 +67,6 @@ LogCambios="
 * Enhan: Enlace a Practico se abre en ventana separa para evitar que expire la sesion al regresar
 * Enhan: Separada la generación de botones y consultas en informes
 * Enhan: Separadas la generación de consultas y campos ocultos en informes
-
-IMPORTANTE:  Usuarios que apliquen sucesivamente parches 003 o superiores de la versión 15.6 podrían ver algunos mensajes de error SQL si ya han aplicado el parche 002.  Esto es normal.
 "
 
 ########################################################################

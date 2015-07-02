@@ -7,6 +7,30 @@
             |___/ 
 ```
 
+## Versión 15.7 (2015-07-05)
+* Added: Agregado un tipo de validación de campos: ahora se soporta Tiempos/Horas
+* Added: Agregado un tipo de validación de campos: ahora se soporta Fechas con Horas con selectores independientes y también unificados
+* Added: Agregado un tipo de validación de campos: Sólo fechas con seleccion por años, meses y dias separados
+* Added: La exportación de tablas ahora permite codificar o decodificar los contenidos al vuelo sobre diferentes sets de caracteres y transliterarlos si es necesario
+* Added: Nuevo editor WYSIWYG Responsive
+* Added: Agregado el control de formulario tipo checkbox o caja de verificación
+* Added: Ahora se soportan estilos e iconos diferentes basados en bootstrap y AwesomeFont para los mensajes de retorno al escritorio a través de botones de comando en formularios
+* Added: Exportación automatica a Excel 5 (.xls) de los resultados de informes
+* Added: Exportación automatica a Excel 2007 (.xlsx) de los resultados de informes
+* Added: Exportación automatica a LibreOffice (.ods) de los resultados de informes
+* Fixed: Eliminada la impresion de cadena_valor en las listas usadas para recuperar registros.
+* Fixed: [Tester Jonathan Sánchez Giraldo] Valores de título y texto de retorno no eran visualizados correctamente en el escritorio después de realizar una acción.  Variables PCO_ErrorIcono,PCO_ErrorEstilo,PCO_ErrorTitulo y PCO_ErrorDescripcion ahora son transportadas entre acciones.
+* Fixed: Corrección en cierre de etiqueta DIV para marco_dev
+* Enhan: Nuevo editor WYSIWYG Responsive es cambiado a predeterminado en la edición de controles tipo etiquetas (textos estáticos) sobre formularios.
+* Enhan: Se cambia el area disponible en la seleccion de propiedades para los controles de formulario
+* Enhan: Se elimina el filtrado de cadenas con htmlentities en campos de texto recuperados desde base de datos.  No se hace necesario cuando el charset está correctamente configurado en servidor y base de datos.
+* Enhan: La selección de estilos gráficos para mensajes de retorno se hace ahora desde una lista de selección para facilitar su ingreso
+* Enhan: Campo de valor único para eliminación de datos en formularios ahora no tiene que ser visible
+* Enhan: Separados algunos apartados de código por legibilidad
+* Enhan: Enlace a Practico se abre en ventana separa para evitar que expire la sesion al regresar
+* Enhan: Separada la generación de botones y consultas en informes
+* Enhan: Separadas la generación de consultas y campos ocultos en informes
+
 ## Versión 15.6 (2015-05-31)
 * Added: Las opciones de menu ahora soportan imagenes sobre rutas relativas a cualquier parte de la aplicación o módulo.  Al ingresar un archivo en el campo imagen en la creacion de menus el sistema deja de un lado los estilos y agrega la imagen cruda en su tamaño total.
 * Added: El asistente de actualización permite ahora escoger el tipo de backup realizado al sistema entre sólo y scripts y scripts+base de datos
