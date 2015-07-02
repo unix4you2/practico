@@ -50,7 +50,6 @@ Group: Modulos Principales  {
    Group: Core  {
 
       File: Articulador  (index.php)
-      File: Buffer  (inc/html2canvas/dist/html2canvas.svg.js)
       File: Conexiones PDO  (core/conexiones.php)
 
       Group: Dev_tools  {
@@ -62,6 +61,15 @@ Group: Modulos Principales  {
          }  # Group: Dev_tools
 
       File: Documentacion para desarrolladores  (dev_tools/docs/variables.php)
+
+      Group: Inc  {
+
+         File: Buffer  (inc/html2canvas/dist/html2canvas.svg.js)
+         File: Check for symmetry, then construct the eigenvalue decomposition  (inc/phpexcel/Classes/PHPExcel/Shared/JAMA/EigenvalueDecomposition.php)
+         File: phpexcel/.../Excel5/Escher.php  (inc/phpexcel/Classes/PHPExcel/Reader/Excel5/Escher.php)
+         File: phpexcel/.../Reader/Excel5.php  (inc/phpexcel/Classes/PHPExcel/Reader/Excel5.php)
+         }  # Group: Inc
+
       File: Libreria base  (core/comunes.php)
       }  # Group: Core
 
@@ -93,6 +101,9 @@ Group: Modulos Principales  {
       File: Seccion Escritorio Administrativo  (core/marco_admin_morris.php)
       File: Modulo ajax  (core/ajax.php)
       File: Seccion superior  (core/marco_arriba_bs.php)
+      File: Seccion marco de exportaciones  (core/marco_export.php)
+      File: Seccion superior  (core/marco_navizq.php)
+      File: Seccion superior  (core/marco_nav.php)
       }  # Group: Modulos
 
    Group: Inc  {
@@ -136,7 +147,6 @@ Group: Mod  {
 
    Group: Pcoder  {
 
-      File: demo.php  (mod/pcoder/demo.php)
       File: http://stackoverflow.com/questions/15186558/loading-a-html-file-into-ace-editor-pre-tag  (mod/pcoder/controlador/controlador.php)
       File: PCODER - Practico CODe EditoR  (mod/pcoder/index.php)
       }  # Group: Pcoder
