@@ -94,6 +94,7 @@
 	$MULTILANG_Estado='Status';
 	$MULTILANG_Etiqueta='Label';
     $MULTILANG_Explorar='Explore';
+	$MULTILANG_Exportar='Export';
 	$MULTILANG_Fecha='Date';
 	$MULTILANG_Finalizado='Finished';
     $MULTILANG_Filtro='Filter';
@@ -691,9 +692,9 @@
 	$MULTILANG_InfcamTabCond='Fields, Tables and Conditions';
 	$MULTILANG_InfAdvEliminar='IMPORTANT: Deleting this report users can not access it again. You can not undo this operation. This also eliminates any internal design of the report.\n'.$MULTILANG_Confirma;
 	$MULTILANG_InfErrTamano='The report you are trying to generate is a graph type  report but the designer did not specify the height and width of the resulting graph.<br>Should provide an valid size of graphic to generate an image.';
-	$MULTILANG_InfGeneraPDF='PDF Export?';
+	$MULTILANG_InfGeneraPDF='Allow to export this report?';
 	$MULTILANG_InfGeneraPDFInfoTit='Available for tabular reports only';
-	$MULTILANG_InfGeneraPDFInfoDesc='This option requires the PDF generator module that is available in downloads link at Practicos website. If you activate this option the report time could be more than a normal report when you have a lot of records in your results';
+	$MULTILANG_InfGeneraPDFInfoDesc='This option requires php_xml and php_zip extensions if you want to export LibreOffice, OpenOffice or Office 2007 files.  If you activate this option the report time could be more than a normal report when you have a lot of records in your results because user will launch the query to see the records on screen, and then launch the same query if he wants to export them.';
     $MULTILANG_InfVblesFiltro='Global variables required for filter';
     $MULTILANG_InfVblesDesFiltro='PHP variables (without dollar character $ and comma separated only) that should be taked from global environment to be available for filter in the condittions option while you build a query';
     $MULTILANG_InfDataTableResXPag='records per page';

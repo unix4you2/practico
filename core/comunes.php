@@ -4425,7 +4425,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		global $PCOSESS_LoginUsuario,$Nombre_usuario,$Descripcion_usuario,$Nivel_usuario,$Correo_usuario,$LlaveDePasoUsuario,$PCO_FechaOperacion;
 		// Carga variables de definicion de tablas
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
-		global $MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano,$MULTILANG_MonCommSQL;
+		global $MULTILANG_Exportar,$MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano,$MULTILANG_MonCommSQL;
 		global $IdiomaPredeterminado;
         global $PCO_InformesDataTable;
         global $ModoDepuracion;
@@ -4480,8 +4480,19 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 						//Cuando es embebido (=1) no imprime el boton de retorno pues se asume dentro de un formulario
 						if (!$embebido)
 							echo '<div align=center><button type="Button" onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home fa-fw"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
+
+						$TituloVentanaInforme=$Nombre_Aplicacion.' - '.$registro_informe["titulo"];
+						//Define si requiere o no boton de exportacion en la barra de titulo
+						if ($registro_informe["genera_pdf"]=='S')
+							{
+								$TituloVentanaInforme='
+								<a class="btn btn-primary btn-xs pull-right" data-toggle="modal" href="#myModalEXPORTACION">
+									<div><i class="fa fa-floppy-o fa-fw"></i> '.$MULTILANG_Exportar.'</div>
+								</a>'.$TituloVentanaInforme;
+							}
+
 						//Carga la ventana con el informe
-						abrir_ventana($Nombre_Aplicacion.' - '.$registro_informe["titulo"],'panel panel-info',$registro_informe["ancho"]);
+						abrir_ventana($TituloVentanaInforme,'panel panel-info',$registro_informe["ancho"]);
 					}
 
 				// Si se ha definido un tamano fijo entonces crea el marco
@@ -4489,26 +4500,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					echo '<DIV style="DISPLAY: block; OVERFLOW: auto; POSITION: relative; WIDTH: '.$registro_informe["ancho"].'; HEIGHT: '.$registro_informe["alto"].'">';
 					
 				//Genera enlaces a las opciones de descarga
-				if (@file_exists("mod/pdf") && $registro_informe["genera_pdf"]=='S')
-					{
-						echo '<div align=right><a href="tmp/Inf_'.$Identificador_informe.'-'.$PCOSESS_LoginUsuario.'.pdf" target="_BLANK"><i class="fa fa-file-pdf-o"></i> PDF&nbsp;</a></div>';
-						
-						//Genera formulario para pasar el informe a Excel
-						echo '<form name="exportacion_informe" action="'.$ArchivoCORE.'" method="POST">
-							<input type="Hidden" name="PCO_Accion" value="exportar_informe">
-							<input type="Hidden" name="PCO_Formato" value="xls">
-							<input type="Hidden" name="PCO_Titulo" value="'.$registro_informe["titulo"].'">
-							<input type="Hidden" name="PCO_IDInforme" value="'.$informe.'">
-							<input type="Hidden" name="PCO_Consulta" value="'.base64_encode(construir_consulta_informe($informe,1)).'">
-							<input type="Hidden" name="Precarga_EstilosBS" value="0">
-							<input type="Hidden" name="Presentar_FullScreen" value="1">
-							<input type=submit value=xls>
-							</form>
-						';
-						
-						
-						
-					}
+				if ($registro_informe["genera_pdf"]=='S')
+					include_once("core/marco_export.php");
 
 					//DEPRECATED echo '	<html>		<body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0" style="font-size: 12px; font-family: Arial, Verdana, Tahoma;">';
 

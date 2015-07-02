@@ -94,6 +94,17 @@ Bootstrap
     URL: http://getbootstrap.com/
 	Copyright 2011-2014 Twitter, Inc.
 
+TCPDF
+	Location: inc/tcpdf_min/*
+	License: GNU Lesser Public License
+    URL: http://www.tcpdf.org/
+
+Php2Excel
+	Location: inc/phpexcel/*
+	License: GNU Lesser Public License
+    URL: https://phpexcel.codeplex.com/
+	Created and Maintained by CodePlex team
+
 SummerNote
 	Location: inc/summernote/*
 	License: MIT License
