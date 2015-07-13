@@ -88,6 +88,7 @@
 	$MULTILANG_Elementos='Elementos';
 	$MULTILANG_Eliminar='Eliminar';
 	$MULTILANG_Embebido='Embebido';
+	$MULTILANG_Encabezados='Encabezados';
 	$MULTILANG_Encendido='Encendido';
 	$MULTILANG_Error='Error';
 	$MULTILANG_Escritorio='Escritorio';

@@ -97,6 +97,67 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 		PCO_Titulo - El titulo del informe generado
 		PCO_IDInforme - El ID del informe que se esta generando en el momento
 
+	Ejemplos de asignacion de celdas:
+		* VALORES FIJOS: 	$objPHPExcel->setActiveSheetIndex(0)->setCellValue("A3", "MiValor");
+		* FORMULAS:      	$objPHPExcel->setActiveSheetIndex(0)->setCellValue('C2', '=sum(A2:B2)');
+
+							$objXLS->getActiveSheet()->getColumnDimension("A")->setAutoSize(true);
+							$objXLS->getActiveSheet()->getColumnDimension('B')->setWidth(12);
+							$objXLS->getActiveSheet()->getColumnDimension("C")->setAutoSize(true);
+							$objXLS->getActiveSheet()->getRowDimension('1')->setRowHeight(30);
+
+							OTROS FORMATOS:
+							$objPHPExcel->getActiveSheet()->getStyle("A$FilaActiva")->getAlignment()->setWrapText(true);
+							$objPHPExcel->getActiveSheet()->getStyle("A$FilaActiva")->getFont()->setSize(16);
+							$objPHPExcel->getActiveSheet()->getStyle("A$FilaActiva")->getFont()->setBold(true);
+							
+							UNIR CELDAS:
+							$objPHPExcel->getActiveSheet()->mergeCells('A1:C1');
+							$objPHPExcel->setActiveSheetIndex(0)->mergeCells('A1:C1');
+
+
+
+							ASIGNACION DE ESTILOS DE BORDE
+							$borders = array(
+								  'borders' => array(
+									'allborders' => array(
+									  'style' => PHPExcel_Style_Border::BORDER_THIN,
+									  'color' => array('argb' => 'FF000000'),
+									)
+								  ),
+								);
+							$objPHPExcel->getActiveSheet()->getStyle('A1:D1')->applyFromArray($borders);
+							 
+							Otra: $objPHPExcel->getActiveSheet()->getStyle('A')->applyFromArray($borders);
+
+							ASIGNACION DE ESTILOS DE FUENTE:
+							$styleArray = array(
+								'font' => array(
+									'bold' => true,
+								),
+								'alignment' => array(
+									'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_RIGHT,
+								),
+								'borders' => array(
+									'top' => array(
+										'style' => PHPExcel_Style_Border::BORDER_THIN,
+									),
+								),
+								'fill' => array(
+									'type' => PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR,
+									'rotation' => 90,
+									'startcolor' => array(
+										'argb' => 'FFA0A0A0',
+									),
+									'endcolor' => array(
+										'argb' => 'FFFFFFFF',
+									),
+								),
+							);
+							 
+							$objPHPExcel->getActiveSheet()->getStyle('A1:C1')->applyFromArray($styleArray);
+
+
 	Salida:
 		Datos del informe en archivo entregado para descarga
 */
@@ -123,8 +184,16 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 												 ->setDescription("Reporte formato $PCO_Formato, generado por Practico Framework PHP. www.practico.org")
 												 ->setKeywords("$PCO_Formato Reporte Practico")
 												 ->setCategory("$PCO_Formato");
-					//AGREGA LOS CONTENIDOS
+					//INICIO: ADICION DE CONTENIDOS
 						$FilaActiva=1;
+						
+						//Agrega encabezados cuando aplica
+						if ($PCO_Encabezados!="")
+							{
+								$EncabezadoInforme=$Nombre_Aplicacion.' - '.$PCO_Titulo;
+								$objPHPExcel->setActiveSheetIndex(0)->setCellValue("A$FilaActiva", $EncabezadoInforme);							
+								$FilaActiva++;
+							}
 
 						//Encabezados (primera fila)
 							//Determina si el informe tiene o no campos ocultos
@@ -141,6 +210,11 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 									$objPHPExcel->setActiveSheetIndex(0)->setCellValue("$ColumnaSalida$FilaActiva", $EtiquetaColumna);
 									$ConteoColumna++;								
 								}
+
+						//Fusiona celdas del titulo cuando aplica
+						$MaximaColumna=calcular_columna_hojacalculo($ConteoColumna);
+						if ($PCO_Encabezados!="")
+							$objPHPExcel->getActiveSheet()->mergeCells("A1:$MaximaColumna"."1");
 								
 						//Registros con los resultados
 							$consulta_ejecucion=ejecutar_sql($PCO_Consulta);
@@ -158,6 +232,8 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 												}
 										}
 								}
+
+					//FIN: ADICION DE CONTENIDOS
 
 					// Establece la celda activa
 					$objPHPExcel->setActiveSheetIndex(0);

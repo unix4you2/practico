@@ -28,7 +28,7 @@
 
 	//Variables globales
 	global $NombreRAD,$ArchivoCORE;
-	global $MULTILANG_InfFormato,$MULTILANG_Importante,$MULTILANG_InfGeneraPDFInfoDesc,$MULTILANG_Exportar,$MULTILANG_Cerrar;
+	global $MULTILANG_InfFormato,$MULTILANG_Importante,$MULTILANG_InfGeneraPDFInfoDesc,$MULTILANG_Exportar,$MULTILANG_Cerrar,$MULTILANG_InfTitulo,$MULTILANG_ParamNombreApp,$MULTILANG_Encabezados,$MULTILANG_Ninguno;
 
 ?>
 
@@ -46,12 +46,12 @@
 			<input type="Hidden" name="Precarga_EstilosBS" value="0">
 			<input type="Hidden" name="Presentar_FullScreen" value="1">
 
-            <label for="formato_final"><?php echo $MULTILANG_InfFormato; ?>:</label>
+            <label for="PCO_Formato"><?php echo $MULTILANG_InfFormato; ?>:</label>
             <div class="form-group input-group">
                 <select id="PCO_Formato" name="PCO_Formato" class="form-control" >
-                    <option value="ods"  >Libre Office (.ODS - Open Document)</option>
                     <option value="xls"  >Excel 5 (.XLS)</option>
                     <option value="xlsx" >Excel 2007 (.XLSX - XML Document)</option>
+                    <option value="ods"  >Libre Office (.ODS - Open Document)</option>
                     <option value="csv"  >Separado por comas (.CSV - Comma Separated Values)</option>
                     <option value="html" >Pagina web (.HTML - Web Document)</option>
                 </select>
@@ -59,6 +59,16 @@
                     <a href="#" title="<?php echo $MULTILANG_Importante; ?>: <?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                 </span>
             </div>		
+
+            <label for="PCO_Encabezados"><?php echo $MULTILANG_Encabezados; ?>:</label>
+            <div class="form-group input-group">
+                <select id="PCO_Encabezados" name="PCO_Encabezados" class="form-control" >
+                    <option value="xls"  ><?php echo $MULTILANG_ParamNombreApp; ?> - <?php echo $MULTILANG_InfTitulo; ?></option>
+                    <option value="" ><?php echo $MULTILANG_Ninguno; ?></option>
+                </select>
+            </div>	
+
+
 		</form>
 
     <?php 
