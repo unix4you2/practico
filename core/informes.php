@@ -191,7 +191,7 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 						if ($PCO_Encabezados!="")
 							{
 								$EncabezadoInforme=$Nombre_Aplicacion.' - '.$PCO_Titulo;
-								$objPHPExcel->setActiveSheetIndex(0)->setCellValue("A$FilaActiva", $EncabezadoInforme);							
+								$objPHPExcel->setActiveSheetIndex(0)->setCellValue("A$FilaActiva", $EncabezadoInforme);
 								$FilaActiva++;
 							}
 
@@ -208,6 +208,18 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 								{
 									$ColumnaSalida=calcular_columna_hojacalculo($ConteoColumna);
 									$objPHPExcel->setActiveSheetIndex(0)->setCellValue("$ColumnaSalida$FilaActiva", $EtiquetaColumna);
+									$objPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('E3E3E3');
+									$objPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getFont()->setBold(true);
+									
+									//Dibuja los bordes de columnas de enbcabezado si aplica
+									if ($PCO_BordesCelda!="")
+										{
+											$objPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getBorders()->getTop()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+											$objPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getBorders()->getBottom()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+											$objPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getBorders()->getLeft()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+											$objPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+										}
+
 									$ConteoColumna++;
 									
 									//Si se activa el ancho automatico
@@ -219,9 +231,20 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 						if ($PCO_Encabezados!="")
 							{
 								$ColumnasAUnir=calcular_columna_hojacalculo($ConteoColumna-1);
-								$objPHPExcel->getActiveSheet()->mergeCells("A1:$$ColumnasAUnir"."1");
+								$objPHPExcel->getActiveSheet()->mergeCells("A1:$ColumnasAUnir"."1");
 								$objPHPExcel->getActiveSheet()->getStyle("A1")->getFont()->setSize(14);
 								$objPHPExcel->getActiveSheet()->getStyle("A1")->getFont()->setBold(true);
+								$objPHPExcel->getActiveSheet()->getStyle("A1")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('D0D0D0');
+								$objPHPExcel->getActiveSheet()->getRowDimension(1)->setRowHeight(-1);
+
+								//Dibuja los bordes del encabezado si aplica
+								if ($PCO_BordesCelda!="")
+									{
+										$objPHPExcel->getActiveSheet()->getStyle("A1")->getBorders()->getTop()->setBorderStyle(PHPExcel_Style_Border::BORDER_THICK);
+										$objPHPExcel->getActiveSheet()->getStyle("A1")->getBorders()->getBottom()->setBorderStyle(PHPExcel_Style_Border::BORDER_THICK);
+										$objPHPExcel->getActiveSheet()->getStyle("A1")->getBorders()->getLeft()->setBorderStyle(PHPExcel_Style_Border::BORDER_THICK);
+										$objPHPExcel->getActiveSheet()->getStyle("A1")->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THICK);
+									}
 							}
 								
 						//Registros con los resultados
@@ -237,6 +260,20 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 												{											
 													$ColumnaSalida=calcular_columna_hojacalculo($i+1);
 													$objPHPExcel->setActiveSheetIndex(0)->setCellValue("$ColumnaSalida$FilaActiva", $registro_informe[$i]);
+												
+													//Dibuja los bordes si aplica
+													if ($PCO_BordesCelda!="")
+														{
+															//Se distingue el lado del borde por TBLR (Top,Bottom,Left,Right)
+															if (!stripos($PCO_BordesCelda,"T")===FALSE)
+																$objPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getBorders()->getTop()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+															if (!stripos($PCO_BordesCelda,"B")===FALSE)
+																$objPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getBorders()->getBottom()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+															if (!stripos($PCO_BordesCelda,"L")===FALSE)
+																$objPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getBorders()->getLeft()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+															if (!stripos($PCO_BordesCelda,"R")===FALSE)
+																$objPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+														}
 												}
 										}
 								}

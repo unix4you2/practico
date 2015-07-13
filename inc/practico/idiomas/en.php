@@ -712,6 +712,14 @@
     $MULTILANG_InfFormFiltradoDes='Select a form designed to enter the filter variables for the report.  This help you to link a form that ask users for some data before to load the report.';
     $MULTILANG_InfRetornoFormFiltrado='See filtered report';
     $MULTILANG_InfAutoajusteAncho='Auto-width for generated cells';
+    $MULTILANG_InfBordesCelda='Draw cell border';
+    $MULTILANG_InfBordesTodos='All sides';
+    $MULTILANG_InfBordesArriba='Top only';
+    $MULTILANG_InfBordesAbajo='Bottomb only';
+    $MULTILANG_InfBordesArrAba='Top and Bottom';
+    $MULTILANG_InfBordesIzq='Left side only';
+    $MULTILANG_InfBordesDer='Right side only';
+    $MULTILANG_InfBordesIzqDer='Left and right sides';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';

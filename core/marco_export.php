@@ -28,7 +28,7 @@
 
 	//Variables globales
 	global $NombreRAD,$ArchivoCORE;
-	global $MULTILANG_InfFormato,$MULTILANG_Importante,$MULTILANG_InfGeneraPDFInfoDesc,$MULTILANG_Exportar,$MULTILANG_Cerrar,$MULTILANG_InfTitulo,$MULTILANG_ParamNombreApp,$MULTILANG_Encabezados,$MULTILANG_Ninguno,$MULTILANG_InfAutoajusteAncho,$MULTILANG_Si,$MULTILANG_No;
+	global $MULTILANG_InfFormato,$MULTILANG_Importante,$MULTILANG_InfGeneraPDFInfoDesc,$MULTILANG_Exportar,$MULTILANG_Cerrar,$MULTILANG_InfTitulo,$MULTILANG_ParamNombreApp,$MULTILANG_Encabezados,$MULTILANG_Ninguno,$MULTILANG_InfAutoajusteAncho,$MULTILANG_Si,$MULTILANG_No,$MULTILANG_InfBordesCelda,$MULTILANG_InfBordesTodos,$MULTILANG_InfBordesArriba,$MULTILANG_InfBordesAbajo,$MULTILANG_InfBordesArrAba,$MULTILANG_InfBordesIzq,$MULTILANG_InfBordesDer,$MULTILANG_InfBordesIzqDer;
 
 ?>
 
@@ -76,6 +76,19 @@
                 </select>
             </div>	
 
+            <label for="PCO_BordesCelda"><?php echo $MULTILANG_InfBordesCelda; ?>:</label>
+            <div class="form-group input-group">
+                <select id="PCO_BordesCelda" name="PCO_BordesCelda" class="form-control" >
+                    <option value="" ><?php echo $MULTILANG_Ninguno; ?></option>
+                    <option value="_LRTB" ><?php echo $MULTILANG_InfBordesTodos; ?></option>
+                    <option value="_T" ><?php echo $MULTILANG_InfBordesArriba; ?></option>
+                    <option value="_B" ><?php echo $MULTILANG_InfBordesAbajo; ?></option>
+                    <option value="_TB" ><?php echo $MULTILANG_InfBordesArrAba; ?></option>
+                    <option value="_L" ><?php echo $MULTILANG_InfBordesIzq; ?></option>
+                    <option value="_R" ><?php echo $MULTILANG_InfBordesDer; ?></option>
+                    <option value="_LR" ><?php echo $MULTILANG_InfBordesIzqDer; ?></option>
+                </select>
+            </div>	
 
 		</form>
 

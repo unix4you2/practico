@@ -709,6 +709,14 @@
     $MULTILANG_InfFormFiltradoDes='Seleccione un formulario disenado para capturar variables de filtro que seran pasadas a las condiciones del informe.  Esto le permite vincular un formulario que solicite siempre datos de filtrado al usuario antes de cargar los resultados.';
     $MULTILANG_InfRetornoFormFiltrado='Ver informe filtrado';
     $MULTILANG_InfAutoajusteAncho='Autoajustar ancho de celdas';
+    $MULTILANG_InfBordesCelda='Dibujar bordes a las celdas';
+    $MULTILANG_InfBordesTodos='Todos los lados';
+    $MULTILANG_InfBordesArriba='Solo arriba';
+    $MULTILANG_InfBordesAbajo='Solo abajo';
+    $MULTILANG_InfBordesArrAba='Arriba y abajo';
+    $MULTILANG_InfBordesIzq='Solo al lado izquierdo';
+    $MULTILANG_InfBordesDer='Solo al lado derecho';
+    $MULTILANG_InfBordesIzqDer='Al lado izquierdo y derecho';
 	
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';
