@@ -708,6 +708,7 @@
     $MULTILANG_InfFormFiltrado='Fomulario con variables de filtrado';
     $MULTILANG_InfFormFiltradoDes='Seleccione un formulario disenado para capturar variables de filtro que seran pasadas a las condiciones del informe.  Esto le permite vincular un formulario que solicite siempre datos de filtrado al usuario antes de cargar los resultados.';
     $MULTILANG_InfRetornoFormFiltrado='Ver informe filtrado';
+    $MULTILANG_InfAutoajusteAncho='Autoajustar ancho de celdas';
 	
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';

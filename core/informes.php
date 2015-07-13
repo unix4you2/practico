@@ -208,13 +208,21 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 								{
 									$ColumnaSalida=calcular_columna_hojacalculo($ConteoColumna);
 									$objPHPExcel->setActiveSheetIndex(0)->setCellValue("$ColumnaSalida$FilaActiva", $EtiquetaColumna);
-									$ConteoColumna++;								
+									$ConteoColumna++;
+									
+									//Si se activa el ancho automatico
+									if ($PCO_AnchoAuto==1)	$objPHPExcel->getActiveSheet()->getColumnDimension($ColumnaSalida)->setAutoSize(true);
 								}
 
-						//Fusiona celdas del titulo cuando aplica
+						//Fusiona celdas del titulo y le da formato cuando aplica
 						$MaximaColumna=calcular_columna_hojacalculo($ConteoColumna);
 						if ($PCO_Encabezados!="")
-							$objPHPExcel->getActiveSheet()->mergeCells("A1:$MaximaColumna"."1");
+							{
+								$ColumnasAUnir=calcular_columna_hojacalculo($ConteoColumna-1);
+								$objPHPExcel->getActiveSheet()->mergeCells("A1:$$ColumnasAUnir"."1");
+								$objPHPExcel->getActiveSheet()->getStyle("A1")->getFont()->setSize(14);
+								$objPHPExcel->getActiveSheet()->getStyle("A1")->getFont()->setBold(true);
+							}
 								
 						//Registros con los resultados
 							$consulta_ejecucion=ejecutar_sql($PCO_Consulta);

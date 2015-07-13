@@ -711,6 +711,7 @@
     $MULTILANG_InfFormFiltrado='Form with Filter variables';
     $MULTILANG_InfFormFiltradoDes='Select a form designed to enter the filter variables for the report.  This help you to link a form that ask users for some data before to load the report.';
     $MULTILANG_InfRetornoFormFiltrado='See filtered report';
+    $MULTILANG_InfAutoajusteAncho='Auto-width for generated cells';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';

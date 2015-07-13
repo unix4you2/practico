@@ -28,7 +28,7 @@
 
 	//Variables globales
 	global $NombreRAD,$ArchivoCORE;
-	global $MULTILANG_InfFormato,$MULTILANG_Importante,$MULTILANG_InfGeneraPDFInfoDesc,$MULTILANG_Exportar,$MULTILANG_Cerrar,$MULTILANG_InfTitulo,$MULTILANG_ParamNombreApp,$MULTILANG_Encabezados,$MULTILANG_Ninguno;
+	global $MULTILANG_InfFormato,$MULTILANG_Importante,$MULTILANG_InfGeneraPDFInfoDesc,$MULTILANG_Exportar,$MULTILANG_Cerrar,$MULTILANG_InfTitulo,$MULTILANG_ParamNombreApp,$MULTILANG_Encabezados,$MULTILANG_Ninguno,$MULTILANG_InfAutoajusteAncho,$MULTILANG_Si,$MULTILANG_No;
 
 ?>
 
@@ -65,6 +65,14 @@
                 <select id="PCO_Encabezados" name="PCO_Encabezados" class="form-control" >
                     <option value="xls"  ><?php echo $MULTILANG_ParamNombreApp; ?> - <?php echo $MULTILANG_InfTitulo; ?></option>
                     <option value="" ><?php echo $MULTILANG_Ninguno; ?></option>
+                </select>
+            </div>	
+
+            <label for="PCO_AnchoAuto"><?php echo $MULTILANG_InfAutoajusteAncho; ?>:</label>
+            <div class="form-group input-group">
+                <select id="PCO_AnchoAuto" name="PCO_AnchoAuto" class="form-control" >
+                    <option value="1" ><?php echo $MULTILANG_Si; ?></option>
+                    <option value="0" ><?php echo $MULTILANG_No; ?></option>
                 </select>
             </div>	
 
