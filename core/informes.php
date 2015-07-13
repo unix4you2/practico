@@ -109,11 +109,10 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 			//Limpia la salida generada hasta el momento para entregar un archivo limpio
 			ob_clean();
 
-			//Exporta a Excel 5 (.XLS)
-			if ($PCO_Formato=="xls")
+			//Exporta a los diferentes formatos segun lo recibido como parametro
+			if ($PCO_Formato=="xls" || $PCO_Formato=="xlsx" || $PCO_Formato=="ods" || $PCO_Formato=="csv")
 				{
-
-					// Create new PHPExcel object
+					// Crea nuevo objeto PHPExcel
 					$objPHPExcel = new PHPExcel();
 
 					// Establece propiedades del documento
@@ -164,12 +163,20 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 					$objPHPExcel->setActiveSheetIndex(0);
 					// Renombra la hoja del libro
 					$objPHPExcel->getActiveSheet()->setTitle($MULTILANG_Resultados);
-					// Establece la hoja activa para cuando se abra el excel
+					// Establece la hoja activa para cuando se abra el archivo en la aplicacion del usuario
 					$objPHPExcel->setActiveSheetIndex(0);
 
 					// Redirecciona la salida al navegador del cliente
-					header('Content-Type: application/vnd.ms-excel');
-					header('Content-Disposition: attachment;filename="'.$MULTILANG_Resultados.'_'.$PCO_FechaOperacionGuiones.'_'.$PCO_HoraOperacion.'.xls"');
+					if ($PCO_Formato=="xls") //Exporta a Excel 5 (.XLS)
+						header('Content-Type: application/vnd.ms-excel');
+					if ($PCO_Formato=="xlsx") //Exporta a Excel 2007 (.XLSX)
+						header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+					if ($PCO_Formato=="ods") //Exporta a LibreOffice (.ODS)
+						header('Content-Type: application/vnd.oasis.opendocument.spreadsheet');
+					if ($PCO_Formato=="csv") //Exporta a valores separados por comas (.CSV)
+						header('Content-Type: application/csv; charset=UTF-8');
+					
+					header('Content-Disposition: attachment;filename="'.$MULTILANG_Resultados.'_'.$PCO_FechaOperacionGuiones.'_'.$PCO_HoraOperacion.'.'.$PCO_Formato.'"');
 					header('Cache-Control: max-age=0');
 					// Establece control de cache para internet explorer 9
 					header('Cache-Control: max-age=1');
@@ -179,160 +186,18 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 					header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
 					header ('Pragma: public'); // HTTP/1.0
 
-					$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+					if ($PCO_Formato=="xls") //Exporta a Excel 5 (.XLS)
+						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+					if ($PCO_Formato=="xlsx") //Exporta a Excel 2007 (.XLSX)
+						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+					if ($PCO_Formato=="ods") //Exporta a LibreOffice (.ODS)
+						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'OpenDocument');
+					if ($PCO_Formato=="csv") //Exporta a valores separados por comas (.CSV)
+						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
+					
+					//Escribe el archivo hacia el navegador del usuario
 					$objWriter->save('php://output');
 				}
-
-			//Exporta a Excel 2007 (.XLSX)
-			if ($PCO_Formato=="xlsx")
-				{
-
-					// Create new PHPExcel object
-					$objPHPExcel = new PHPExcel();
-
-					// Establece propiedades del documento
-					$objPHPExcel->getProperties()->setCreator("Practico Framework PHP")
-												 ->setLastModifiedBy($PCOSESS_LoginUsuario)
-												 ->setTitle($PCO_Titulo)
-												 ->setSubject("$Nombre_Aplicacion $PCO_FechaOperacionGuiones desde $PCO_DireccionAuditoria")
-												 ->setDescription("Reporte formato $PCO_Formato, generado por Practico Framework PHP. www.practico.org")
-												 ->setKeywords("$PCO_Formato Reporte Practico")
-												 ->setCategory("$PCO_Formato");
-					//AGREGA LOS CONTENIDOS
-						$FilaActiva=1;
-
-						//Encabezados (primera fila)
-							//Determina si el informe tiene o no campos ocultos
-							$PCO_ColumnasOcultas=determinar_campos_ocultos($PCO_IDInforme);
-							
-							//Obtiene ColumnasVisibles, NumerosColumnasOcultas, NumeroColumnas dentro de EtiquetasConsulta
-							$EtiquetasConsulta=generar_etiquetas_consulta($PCO_Consulta,$PCO_IDInforme); //Enviar el informe para que se determinen tambien sus columnas ocultas
-
-							//Genera columnas del encabezado
-							$ConteoColumna=1;
-							foreach($EtiquetasConsulta[0]["ColumnasVisibles"] as $EtiquetaColumna)
-								{
-									$ColumnaSalida=calcular_columna_hojacalculo($ConteoColumna);
-									$objPHPExcel->setActiveSheetIndex(0)->setCellValue("$ColumnaSalida$FilaActiva", $EtiquetaColumna);
-									$ConteoColumna++;								
-								}
-								
-						//Registros con los resultados
-							$consulta_ejecucion=ejecutar_sql($PCO_Consulta);
-							while($registro_informe=$consulta_ejecucion->fetch())
-								{
-									//Se mueve a la siguiente fila
-									$FilaActiva++;
-									for ($i=0;$i<$EtiquetasConsulta[0]["NumeroColumnas"];$i++)
-										{
-											//Muestra la columna solo si no se trata de una de las ocultas
-											if (!in_array($i,$EtiquetasConsulta[0]["NumerosColumnasOcultas"]))
-												{											
-													$ColumnaSalida=calcular_columna_hojacalculo($i+1);
-													$objPHPExcel->setActiveSheetIndex(0)->setCellValue("$ColumnaSalida$FilaActiva", $registro_informe[$i]);
-												}
-										}
-								}
-
-					// Establece la celda activa
-					$objPHPExcel->setActiveSheetIndex(0);
-					// Renombra la hoja del libro
-					$objPHPExcel->getActiveSheet()->setTitle($MULTILANG_Resultados);
-					// Establece la hoja activa para cuando se abra el excel
-					$objPHPExcel->setActiveSheetIndex(0);
-
-					// Redirecciona la salida al navegador del cliente
-					header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-					header('Content-Disposition: attachment;filename="'.$MULTILANG_Resultados.'_'.$PCO_FechaOperacionGuiones.'_'.$PCO_HoraOperacion.'.xlsx"');
-					header('Cache-Control: max-age=0');
-					// Establece control de cache para internet explorer 9
-					header('Cache-Control: max-age=1');
-					// Establece otros parametros cuando se trabaja con internet explorer sobre SSL
-					header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Fecha en el pasado para que siempre se considere expirado en cache
-					header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // Siempre se considera modificado
-					header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-					header ('Pragma: public'); // HTTP/1.0
-
-					$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-					$objWriter->save('php://output');
-				}
-				
-			//Exporta a LibreOffice (.ODS)
-			if ($PCO_Formato=="ods")
-				{
-
-					// Create new PHPExcel object
-					$objPHPExcel = new PHPExcel();
-
-					// Establece propiedades del documento
-					$objPHPExcel->getProperties()->setCreator("Practico Framework PHP")
-												 ->setLastModifiedBy($PCOSESS_LoginUsuario)
-												 ->setTitle($PCO_Titulo)
-												 ->setSubject("$Nombre_Aplicacion $PCO_FechaOperacionGuiones desde $PCO_DireccionAuditoria")
-												 ->setDescription("Reporte formato $PCO_Formato, generado por Practico Framework PHP. www.practico.org")
-												 ->setKeywords("$PCO_Formato Reporte Practico")
-												 ->setCategory("$PCO_Formato");
-					//AGREGA LOS CONTENIDOS
-						$FilaActiva=1;
-
-						//Encabezados (primera fila)
-							//Determina si el informe tiene o no campos ocultos
-							$PCO_ColumnasOcultas=determinar_campos_ocultos($PCO_IDInforme);
-							
-							//Obtiene ColumnasVisibles, NumerosColumnasOcultas, NumeroColumnas dentro de EtiquetasConsulta
-							$EtiquetasConsulta=generar_etiquetas_consulta($PCO_Consulta,$PCO_IDInforme); //Enviar el informe para que se determinen tambien sus columnas ocultas
-
-							//Genera columnas del encabezado
-							$ConteoColumna=1;
-							foreach($EtiquetasConsulta[0]["ColumnasVisibles"] as $EtiquetaColumna)
-								{
-									$ColumnaSalida=calcular_columna_hojacalculo($ConteoColumna);
-									$objPHPExcel->setActiveSheetIndex(0)->setCellValue("$ColumnaSalida$FilaActiva", $EtiquetaColumna);
-									$ConteoColumna++;								
-								}
-								
-						//Registros con los resultados
-							$consulta_ejecucion=ejecutar_sql($PCO_Consulta);
-							while($registro_informe=$consulta_ejecucion->fetch())
-								{
-									//Se mueve a la siguiente fila
-									$FilaActiva++;
-									for ($i=0;$i<$EtiquetasConsulta[0]["NumeroColumnas"];$i++)
-										{
-											//Muestra la columna solo si no se trata de una de las ocultas
-											if (!in_array($i,$EtiquetasConsulta[0]["NumerosColumnasOcultas"]))
-												{											
-													$ColumnaSalida=calcular_columna_hojacalculo($i+1);
-													$objPHPExcel->setActiveSheetIndex(0)->setCellValue("$ColumnaSalida$FilaActiva", $registro_informe[$i]);
-												}
-										}
-								}
-
-					// Establece la celda activa
-					$objPHPExcel->setActiveSheetIndex(0);
-					// Renombra la hoja del libro
-					$objPHPExcel->getActiveSheet()->setTitle($MULTILANG_Resultados);
-					// Establece la hoja activa para cuando se abra el excel
-					$objPHPExcel->setActiveSheetIndex(0);
-
-					// Redirecciona la salida al navegador del cliente
-					header('Content-Type: application/vnd.oasis.opendocument.spreadsheet');
-					header('Content-Disposition: attachment;filename="'.$MULTILANG_Resultados.'_'.$PCO_FechaOperacionGuiones.'_'.$PCO_HoraOperacion.'.ods"');
-					header('Cache-Control: max-age=0');
-					// Establece control de cache para internet explorer 9
-					header('Cache-Control: max-age=1');
-					// Establece otros parametros cuando se trabaja con internet explorer sobre SSL
-					header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Fecha en el pasado para que siempre se considere expirado en cache
-					header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // Siempre se considera modificado
-					header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-					header ('Pragma: public'); // HTTP/1.0
-
-					$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'OpenDocument');
-					$objWriter->save('php://output');
-				}
-				
-				
-				
 
 		}
 
