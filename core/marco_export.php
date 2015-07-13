@@ -51,8 +51,9 @@
                 <select id="PCO_Formato" name="PCO_Formato" class="form-control" >
                     <option value="ods"  >Libre Office (.ODS - Open Document)</option>
                     <option value="xls"  >Excel 5 (.XLS)</option>
-                    <option value="xlsx" >Excel 2007 (.XLSX - Documento XML)</option>
-                    <option value="csv"  >Separado por comas (.CSV - CommaSeparatedValues)</option>
+                    <option value="xlsx" >Excel 2007 (.XLSX - XML Document)</option>
+                    <option value="csv"  >Separado por comas (.CSV - Comma Separated Values)</option>
+                    <option value="html" >Pagina web (.HTML - Web Document)</option>
                 </select>
                 <span class="input-group-addon">
                     <a href="#" title="<?php echo $MULTILANG_Importante; ?>: <?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>

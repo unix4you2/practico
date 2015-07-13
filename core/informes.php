@@ -110,7 +110,7 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 			ob_clean();
 
 			//Exporta a los diferentes formatos segun lo recibido como parametro
-			if ($PCO_Formato=="xls" || $PCO_Formato=="xlsx" || $PCO_Formato=="ods" || $PCO_Formato=="csv")
+			if ($PCO_Formato=="xls" || $PCO_Formato=="xlsx" || $PCO_Formato=="ods" || $PCO_Formato=="csv" || $PCO_Formato=="html")
 				{
 					// Crea nuevo objeto PHPExcel
 					$objPHPExcel = new PHPExcel();
@@ -175,6 +175,8 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 						header('Content-Type: application/vnd.oasis.opendocument.spreadsheet');
 					if ($PCO_Formato=="csv") //Exporta a valores separados por comas (.CSV)
 						header('Content-Type: application/csv; charset=UTF-8');
+					if ($PCO_Formato=="html") //Exporta a formato web (.HTML)
+						header('Content-Type: application/html; charset=UTF-8');
 					
 					header('Content-Disposition: attachment;filename="'.$MULTILANG_Resultados.'_'.$PCO_FechaOperacionGuiones.'_'.$PCO_HoraOperacion.'.'.$PCO_Formato.'"');
 					header('Cache-Control: max-age=0');
@@ -194,6 +196,8 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'OpenDocument');
 					if ($PCO_Formato=="csv") //Exporta a valores separados por comas (.CSV)
 						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
+					if ($PCO_Formato=="html") //Exporta a formato web (.HTML)
+						$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'HTML');
 					
 					//Escribe el archivo hacia el navegador del usuario
 					$objWriter->save('php://output');
