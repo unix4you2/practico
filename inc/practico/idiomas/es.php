@@ -112,6 +112,7 @@
 	$MULTILANG_Habilitar='Habilitar';
     $MULTILANG_Historico='Hist&oacute;rico';
 	$MULTILANG_Hora='Hora';
+	$MULTILANG_Horizontal='Horizontal';
 	$MULTILANG_IdiomaPredeterminado='Idioma predeterminado';
 	$MULTILANG_Imagen='Imagen';
 	$MULTILANG_Importando='Importando';
@@ -174,6 +175,7 @@
 	$MULTILANG_Vacio='Vac&iacute;o';
 	$MULTILANG_Variables='Variables';
 	$MULTILANG_Version='Versi&oacute;n';
+	$MULTILANG_Vertical='Vertical';
 	$MULTILANG_ZonaHoraria='Zona horaria';
 	$MULTILANG_VistaImpresion='Vista de impresion';
 	$MULTILANG_IDGABeacon='ID Google Analytics';
@@ -717,6 +719,10 @@
     $MULTILANG_InfBordesIzq='Solo al lado izquierdo';
     $MULTILANG_InfBordesDer='Solo al lado derecho';
     $MULTILANG_InfBordesIzqDer='Al lado izquierdo y derecho';
+	$MULTILANG_OrientacionPagina='Orientaci&oacute;n de p&aacute;gina';
+	$MULTILANG_InfTamanoPapel='Tama&ntilde;o de papel';
+	$MULTILANG_InfReducir='Auto-ajustar contenidos';
+	$MULTILANG_InfTitPersonalizar='Personalizar presentaci&oacute;n y distribuci&oacute;n (opcional)';
 	
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';

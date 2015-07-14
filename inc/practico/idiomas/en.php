@@ -112,6 +112,7 @@
 	$MULTILANG_Habilitar='Enable';
     $MULTILANG_Historico='History';
 	$MULTILANG_Hora='Time';
+	$MULTILANG_Horizontal='Landscape';
 	$MULTILANG_IdiomaPredeterminado='Default language';
 	$MULTILANG_Imagen='Picture';
 	$MULTILANG_Importando='Importing';
@@ -174,6 +175,7 @@
 	$MULTILANG_Vacio='Empty';
 	$MULTILANG_Variables='Variables';
 	$MULTILANG_Version='Versi&oacute;n';
+	$MULTILANG_Vertical='Portrait';
 	$MULTILANG_ZonaHoraria='Time zone';
 	$MULTILANG_VistaImpresion='Printer view';
 	$MULTILANG_IDGABeacon='Google Analytics ID';
@@ -720,6 +722,10 @@
     $MULTILANG_InfBordesIzq='Left side only';
     $MULTILANG_InfBordesDer='Right side only';
     $MULTILANG_InfBordesIzqDer='Left and right sides';
+	$MULTILANG_OrientacionPagina='Page layout';
+	$MULTILANG_InfTamanoPapel='Paper zise';
+	$MULTILANG_InfReducir='Auto-size content';
+	$MULTILANG_InfTitPersonalizar='Custom presentation and layout (optional)';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';

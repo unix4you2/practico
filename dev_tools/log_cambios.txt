@@ -33,8 +33,11 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added: Autoajuste por páginas para informes exportados
+* Added: Tamaños de papel específicos para la generación de informes
+* Added: Orientaciones vertical y horizontal para las hojas generadas en el informe
 * Added: Posibilidad de definir bordes alrededor de resultados en informes
-* Added: Posibilidad de encabezados en informes
+* Added: Posibilidad de encabezados en informes (Aplicacion + Titulo) y (Usuario + Fecha)
 * Added: Autoajuste de celdas en informes exportados
 * Added: Exportación automática de informes a formato CSV
 * Added: Exportación automática de informes a formato HTML
