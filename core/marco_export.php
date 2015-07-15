@@ -45,7 +45,7 @@
 			<input type="Hidden" name="Precarga_EstilosBS" value="0">
 			<input type="Hidden" name="Presentar_FullScreen" value="1">
 
-            <label for="PCO_Formato"><?php echo $MULTILANG_InfFormato; ?>:</label>
+            <label for="PCO_Formato"><i class="fa fa-file"></i> <?php echo $MULTILANG_InfFormato; ?>:</label>
             <div class="form-group input-group">
                 <select id="PCO_Formato" name="PCO_Formato" class="selectpicker" data-style="btn-warning">
                     <option value="xls"  >Excel 5 (.XLS)</option>
@@ -62,7 +62,7 @@
 			<hr>
 			<h4><b><?php echo $MULTILANG_InfTitPersonalizar; ?></b></h4>
 			
-            <label for="PCO_Encabezados"><?php echo $MULTILANG_Encabezados; ?>:</label>
+            <label for="PCO_Encabezados"><i class="fa fa-list-alt"></i> <?php echo $MULTILANG_Encabezados; ?>:</label>
             <div class="form-group input-group">
                 <select id="PCO_Encabezados" name="PCO_Encabezados"  class="selectpicker" data-style="btn-info" >
                     <option value="xls"  ><?php echo $MULTILANG_ParamNombreApp; ?> - <?php echo $MULTILANG_InfTitulo; ?></option>
@@ -73,7 +73,7 @@
 
 			<div class="row">
 				<div class="col-md-6">
-					<label for="PCO_AnchoAuto"><?php echo $MULTILANG_InfAutoajusteAncho; ?>:</label>
+					<label for="PCO_AnchoAuto"><i class="fa fa-text-width"></i> <?php echo $MULTILANG_InfAutoajusteAncho; ?>:</label>
 					<div class="form-group input-group">
 						<select id="PCO_AnchoAuto" name="PCO_AnchoAuto"  class="selectpicker" data-style="btn-default" >
 							<option value="1" ><?php echo $MULTILANG_Si; ?></option>
@@ -82,7 +82,7 @@
 					</div>	
 				</div>
 				<div class="col-md-6">
-					<label for="PCO_BordesCelda"><?php echo $MULTILANG_InfBordesCelda; ?>:</label>
+					<label for="PCO_BordesCelda"><i class="fa fa-table"></i> <?php echo $MULTILANG_InfBordesCelda; ?>:</label>
 					<div class="form-group input-group">
 						<select id="PCO_BordesCelda" name="PCO_BordesCelda" class="selectpicker" data-style="btn-default"  >
 							<option value="" ><?php echo $MULTILANG_Ninguno; ?></option>
@@ -101,7 +101,7 @@
 
 			<div class="row">
 				<div class="col-md-6">
-					<label for="PCO_Orientacion"><?php echo $MULTILANG_OrientacionPagina; ?>:</label>
+					<label for="PCO_Orientacion"><i class="fa fa-repeat"></i> <?php echo $MULTILANG_OrientacionPagina; ?>:</label>
 					<div class="form-group input-group">
 						<select id="PCO_Orientacion" name="PCO_Orientacion" class="selectpicker" data-style="btn-default"  >
 							<option value="ORIENTATION_PORTRAIT" ><?php echo $MULTILANG_Vertical; ?></option>
@@ -110,7 +110,7 @@
 					</div>	
 				</div>
 				<div class="col-md-6">
-					<label for="PCO_TamanoPapel"><?php echo $MULTILANG_InfTamanoPapel; ?>:</label>
+					<label for="PCO_TamanoPapel"><i class="fa fa-file-o"></i> <?php echo $MULTILANG_InfTamanoPapel; ?>:</label>
 					<div class="form-group input-group">
 						<select id="PCO_TamanoPapel" name="PCO_TamanoPapel" class="selectpicker" data-style="btn-default"  >
 							<optgroup label="<?php echo $MULTILANG_Basicos; ?>">
@@ -190,8 +190,8 @@
 
 			<hr>
 			<div class="row">
-				<div class="col-md-6">
-					<label for="PCO_Autoajustar"><?php echo $MULTILANG_InfReducir; ?> en <?php echo $MULTILANG_Pagina; ?>(s):</label>
+				<div class="col-md-8">
+					<label for="PCO_Autoajustar"><i class="fa fa-text-height"></i> <?php echo $MULTILANG_InfReducir; ?> en <?php echo $MULTILANG_Pagina; ?>(s):</label>
 					<div class="form-group input-group">
 						<select id="PCO_Autoajustar" name="PCO_Autoajustar" class="selectpicker" data-style="btn-default"  >
 							<option value="0" ><?php echo $MULTILANG_No; ?></option>
@@ -199,7 +199,7 @@
 						</select>
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<label for="PCO_Ancho"><?php echo $MULTILANG_FrmAncho; ?>:</label>
 					<div class="form-group input-group">
 						<select id="PCO_Ancho" name="PCO_Ancho" class="selectpicker" data-style="btn-default"  >
@@ -236,7 +236,7 @@
 						</select>
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<label for="PCO_Alto"><?php echo $MULTILANG_InfAlto; ?>:</label>
 					<div class="form-group input-group">
 						<select id="PCO_Alto" name="PCO_Alto" class="selectpicker" data-style="btn-default"  >
