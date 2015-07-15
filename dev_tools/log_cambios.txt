@@ -20,6 +20,7 @@ AUTHORS
 index.php
 core/comunes.php
 core/informes.php
+core/marco_dev.php
 core/marco_export.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
@@ -43,6 +44,8 @@ LogCambios="
 * Added: Exportación automática de informes a formato HTML
 * Fixed: Botones automaticos de formularios de filtrado aparecían sin estilo.
 * Enhan: Reducción de código y optimización a funciones de exportación
+* Enhan: Adición de iconos a opciones de exportación
+* Enhan: Reescritura de panel de desarrollo para permitir futuras adiciones.
 "
 
 ########################################################################

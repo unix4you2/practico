@@ -32,9 +32,9 @@
 
     echo '<div class="oculto_impresion">';
     //Modal Botones de Desarrollo
-    abrir_dialogo_modal("myModalDESARROLLO",$MULTILANG_TitDisenador); ?>
+    abrir_dialogo_modal("myModalDESARROLLO",$MULTILANG_TitDisenador,""); ?>
 
-                <table class="table">
+                <table class="table table-responsive table-hover table-unbordered">
                     <tr>
                         <td valign=top><h1><span class="label label-primary">1</span></h1></td>
                         <td align=left valign=top>
@@ -42,10 +42,10 @@
                         <br><?php echo $MULTILANG_DesTablas; ?>
                         </td>
                         <td>
-                        <form action="" method="post" name="wzd_1" id="wzd_1" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+                        <form action="" method="post">
                         <input type="hidden" name="PCO_Accion" value="administrar_tablas">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-table fa-fw fa-4x"></i></button>
                         </form>
-                            <i class="fa fa-table fa-4x fa-border"  onClick="document.wzd_1.submit();"></i>
                         </td>
                     </tr>
                     <tr>
@@ -55,10 +55,10 @@
                         <br><?php echo $MULTILANG_DesForms; ?>
                         </td>
                         <td>
-                            <form action="" method="post" name="wzd_2" id="wzd_2" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+                            <form action="" method="post">
                                 <input type="hidden" name="PCO_Accion" value="administrar_formularios">
+								<button type="submit" class="btn btn-success"><i class="fa fa-list-alt fa-fw fa-4x"></i></button>
                             </form>
-                                <i class="fa fa-list-alt fa-4x fa-border"  onClick="document.wzd_2.submit();"></i>
                         </td>
                     </tr>
                     <tr>
@@ -68,10 +68,10 @@
                         <br><?php echo $MULTILANG_DesInformes; ?>
                         </td>
                         <td>
-                            <form action="" method="post" name="wzd_3" id="wzd_3" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+                            <form action="" method="post">
                                 <input type="hidden" name="PCO_Accion" value="administrar_informes">
+                                <button type="submit" class="btn btn-info"><i class="fa fa-file-text fa-fw fa-4x"></i></button>
                             </form>
-                                <i class="fa fa-file-text fa-4x fa-border" onClick="document.wzd_3.submit();"></i>
                         </td>
                     </tr>
                     <tr>
@@ -81,10 +81,10 @@
                         <br><?php echo $MULTILANG_DesMenus; ?>
                         </td>
                         <td>
-                            <form action="" method="post" name="wzd_4" id="wzd_4" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+                            <form action="" method="post">
                                 <input type="hidden" name="PCO_Accion" value="administrar_menu">
+                                <button type="submit" class="btn btn-warning"><i class="fa fa-external-link-square fa-fw fa-4x"></i></button>
                             </form>
-                            <i class="fa fa-external-link-square fa-4x fa-border " onClick="document.wzd_4.submit();"></i>
                         </td>
                     </tr>
                     <tr>
@@ -94,10 +94,10 @@
                         <br><?php echo $MULTILANG_DesUsuarios; ?>
                         </td>
                         <td>
-                            <form action="" method="post" name="wzd_5" id="wzd_5" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+                            <form action="" method="post">
                                 <input type="hidden" name="PCO_Accion" value="listar_usuarios">
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-user fa-fw fa-4x"></i></button>
                             </form>
-                            <i class="fa fa-user fa-4x fa-border " onClick="document.wzd_5.submit();"></i>
                         </td>
                     </tr>
 
