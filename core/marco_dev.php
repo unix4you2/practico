@@ -34,7 +34,7 @@
     //Modal Botones de Desarrollo
     abrir_dialogo_modal("myModalDESARROLLO",$MULTILANG_TitDisenador,""); ?>
 
-                <table class="table table-responsive table-hover table-unbordered">
+                <table class="table table-responsive table-hover table-unbordered btn-xs">
                     <tr>
                         <td valign=top><h1><span class="label label-primary">1</span></h1></td>
                         <td align=left valign=top>
