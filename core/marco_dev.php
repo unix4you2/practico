@@ -136,19 +136,14 @@
 						<!-- INICIO TAB AVANZADAS 2 -->
 						<div class="tab-pane fade" id="avanzada2">
 							<div class="well btn-xs">
-	hola
-
+								
+								<a data-toggle="modal" class="btn btn-warning btn-block" href=""><i class="fa fa-trash fa-fw"></i> <?php echo $MULTILANG_DefLimpiarTemp; ?></a>
+								
 							</div> <!--well-->
 						</div>
 						<!-- FIN TAB AVANZADAS 2 -->
 					
-					
-					
 				</div>
-				
-
-				
-				
 				
 			</div>
 		</div>

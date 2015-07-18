@@ -255,6 +255,7 @@
 	$MULTILANG_DefAvanzadas='Herramientas avanzadas';
 	$MULTILANG_DefMantenimientos='Mantenimientos';
 	$MULTILANG_DefPcoder='Editor de c&oacute;digo en l&iacute;nea';
+	$MULTILANG_DefLimpiarTemp='Limpiar carpeta de trabajo /tmp';
 
 	//Cierre de sesion
 	$MULTILANG_SesionCerrada='Su sesi&oacute;n ha sido cerrada';
