@@ -20,8 +20,10 @@ AUTHORS
 index.php
 core/comunes.php
 core/informes.php
+core/marco_conf.php
 core/marco_dev.php
 core/marco_export.php
+core/marco_nav.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 "

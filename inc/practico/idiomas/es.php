@@ -180,7 +180,7 @@
 	$MULTILANG_VistaImpresion='Vista de impresion';
 	$MULTILANG_IDGABeacon='ID Google Analytics';
 	$MULTILANG_AyudaGABeacon='Aquellos desarrolladores que deseen tener un seguimiento historico detallado o incluso en tiempo real del uso de su herramienta a traves de Google Analytics pueden diligenciar aqui el ID obtenido en su panel de Google.  Practico reportara todo movimiento a su panel de Analytics';
-	
+
 	//Ventana de login
 	$MULTILANG_TituloLogin='Ingreso al sistema';
 	$MULTILANG_CodigoSeguridad='Codigo de seguridad';
@@ -252,6 +252,9 @@
 	$MULTILANG_UsuariosPermisos='Usuarios y permisos';
 	$MULTILANG_DefUsuarios='para acceder a su aplicaci&oacute;n';
 	$MULTILANG_DesUsuarios='Establece las credenciales de acceso para cada usuario, as&iacute; como los permisos con que cuenta cada uno para accesar formularios, informes o cualquier opcion de menu previamente definida.';
+	$MULTILANG_DefAvanzadas='Herramientas avanzadas';
+	$MULTILANG_DefMantenimientos='Mantenimientos';
+	$MULTILANG_DefPcoder='Editor de c&oacute;digo en l&iacute;nea';
 
 	//Cierre de sesion
 	$MULTILANG_SesionCerrada='Su sesi&oacute;n ha sido cerrada';

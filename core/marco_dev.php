@@ -32,11 +32,15 @@
 
     echo '<div class="oculto_impresion">';
     //Modal Botones de Desarrollo
-    abrir_dialogo_modal("myModalDESARROLLO",$MULTILANG_TitDisenador,""); ?>
+    abrir_dialogo_modal("myModalDESARROLLO",$MULTILANG_TitDisenador,"modal-wide"); ?>
+
+
+		<div class="row">
+			<div class="col-md-6">
 
                 <table class="table table-responsive table-hover table-unbordered btn-xs">
                     <tr>
-                        <td valign=top><h1><span class="label label-primary">1</span></h1></td>
+                        <td valign=top><h2><span class="label label-primary">1</span></h2></td>
                         <td align=left valign=top>
                         <?php echo $MULTILANG_DefTablas; ?>: <u><b><?php echo strtoupper($MULTILANG_Basedatos); ?></b></u>
                         <br><?php echo $MULTILANG_DesTablas; ?>
@@ -49,7 +53,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td valign=top><h1><span class="label label-success">2</span></h1></td>
+                        <td valign=top><h2><span class="label label-success">2</span></h2></td>
                         <td align=left valign=top>
                         <?php echo $MULTILANG_Disene; ?> <u><b><?php echo strtoupper($MULTILANG_Formularios); ?></b> </u> <?php echo $MULTILANG_DefForms; ?>
                         <br><?php echo $MULTILANG_DesForms; ?>
@@ -62,7 +66,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td valign=top><h1><span class="label label-info">3</span></h1></td>
+                        <td valign=top><h2><span class="label label-info">3</span></h2></td>
                         <td align=left valign=top>
                         <?php echo $MULTILANG_Disene; ?> <u><b><?php echo strtoupper($MULTILANG_Informes); ?></b> </u> <?php echo $MULTILANG_DefInformes; ?>
                         <br><?php echo $MULTILANG_DesInformes; ?>
@@ -75,7 +79,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td valign=top><h1><span class="label label-warning">4</span></h1></td>
+                        <td valign=top><h2><span class="label label-warning">4</span></h2></td>
                         <td align=left valign=top>
                         <?php echo $MULTILANG_Administre; ?> <u><b><?php echo strtoupper($MULTILANG_OpcionesMenu); ?></b> </u> <?php echo $MULTILANG_DefMenus; ?>
                         <br><?php echo $MULTILANG_DesMenus; ?>
@@ -88,7 +92,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td valign=top><h1><span class="label label-danger">5</span></h1></td>
+                        <td valign=top><h2><span class="label label-danger">5</span></h2></td>
                         <td align=left valign=top>
                         <?php echo $MULTILANG_Defina; ?> <u><b><?php echo strtoupper($MULTILANG_UsuariosPermisos); ?></b> </u> <?php echo $MULTILANG_DefUsuarios; ?>
                         <br><?php echo $MULTILANG_DesUsuarios; ?>
@@ -100,8 +104,59 @@
                             </form>
                         </td>
                     </tr>
-
                 </table>
+
+			</div>
+			<div class="col-md-1">
+			</div>
+			<div class="col-md-5">
+				
+				<!--<div align=center><h4>Diseño avanzado</h4></div>-->
+
+				<ul class="nav nav-tabs nav-justified">
+				<li class="active"><a href="#avanzada1" data-toggle="tab"><i class="fa fa-cogs fa-fw"></i> <?php echo $MULTILANG_DefAvanzadas; ?></a></li>
+				<li><a href="#avanzada2" data-toggle="tab"><i class="fa fa-tachometer fa-fw"></i> <?php echo $MULTILANG_DefMantenimientos; ?></a></li>
+				</ul>
+
+				<div class="tab-content">
+
+						<!-- INICIO TAB AVANZADAS 1 -->
+						<div class="tab-pane fadein active" id="avanzada1">
+							<div class="well btn-xs">
+							
+								<?php
+									$PCO_EnlacePCODER="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCOMOD_CargarPcoder&Presentar_FullScreen=1&Precarga_EstilosBS=1','Pcoder','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');";
+								?>
+								<a data-toggle="modal" class="btn btn-primary btn-block" href="<?php echo $PCO_EnlacePCODER; ?>"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: PCoder</a>
+
+							</div> <!--well-->
+						</div>
+						<!-- FIN TAB AVANZADAS 1 -->
+						
+						<!-- INICIO TAB AVANZADAS 2 -->
+						<div class="tab-pane fade" id="avanzada2">
+							<div class="well btn-xs">
+	hola
+
+							</div> <!--well-->
+						</div>
+						<!-- FIN TAB AVANZADAS 2 -->
+					
+					
+					
+				</div>
+				
+
+				
+				
+				
+			</div>
+		</div>
+
+
+
+
+
 
 <?php 
     $barra_herramientas_modal='

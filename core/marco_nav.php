@@ -55,11 +55,9 @@
 			//	echo $MULTILANG_SubtituloPractico1.' '.$MULTILANG_SubtituloPractico2;
 		?>
 		<?php 
-			//Despliega botones de desarrollo
-			$PCO_EnlacePCODER="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCOMOD_CargarPcoder&Presentar_FullScreen=1&Precarga_EstilosBS=1','Pcoder','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');";
+			//Despliega boton de desarrollo
 			if (@$PCOSESS_LoginUsuario=="admin" && $PCOSESS_SesionAbierta)    
-				echo '<a data-toggle="modal" class="btn btn-primary btn-xs " href="'.$PCO_EnlacePCODER.'"><i class="fa fa-file-code-o"></i> PCoder</a>
-				<a data-toggle="modal" class="btn btn-danger btn-xs" href="#myModalDESARROLLO"><i class="fa fa-puzzle-piece"></i> '.$MULTILANG_DesAppBoton.'</a>';
+				echo '<a data-toggle="modal" class="btn btn-danger btn-xs" href="#myModalDESARROLLO"><i class="fa fa-puzzle-piece"></i> '.$MULTILANG_DesAppBoton.'</a>';
 		?>
 		<?php 
 			//Agrega boton de retorno al inicio si la accion es diferente al escritorio

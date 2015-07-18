@@ -252,6 +252,9 @@
 	$MULTILANG_UsuariosPermisos='Users and Permissions';
 	$MULTILANG_DefUsuarios='to access your application';
 	$MULTILANG_DesUsuarios='Sets the access credentials for each user, and the permissions available to each to access forms, reports or any previously defined menu options.';
+	$MULTILANG_DefAvanzadas='Advanced tools';
+	$MULTILANG_DefMantenimientos='Maintenance';
+	$MULTILANG_DefPcoder='Online code editor';
 
 	//Cierre de sesion
 	$MULTILANG_SesionCerrada='Your session has been closed';
