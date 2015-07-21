@@ -31,7 +31,7 @@
 			<font color=gray>
 			Welcome &nbsp;&nbsp; Willkommen &nbsp;&nbsp; Ongi Etorri<br>
 			<font size=5>Bienvenido<br></font>
-			 Bienvenuto &nbsp;&nbsp; Bienvenue &nbsp;&nbsp; bem-vindo<br><br>
+			 Bienvenuto &nbsp;&nbsp; Bienvenue &nbsp;&nbsp; bem-vindo &nbsp;&nbsp; स्वागत<br><br>
 			</font>
 
             <hr>
@@ -50,7 +50,7 @@
                                 //Lo procesa solo si es un archivo diferente del index
                                 if (!is_dir($path_idiomas.$PCOVAR_Elemento) && $PCOVAR_Elemento!="." && $PCOVAR_Elemento!=".."  && $PCOVAR_Elemento!="index.html")
                                     {
-                                        include_once($path_idiomas.$PCOVAR_Elemento);
+                                        include($path_idiomas.$PCOVAR_Elemento);
                                         //Establece espanol como predeterminado
                                         $seleccion="";
                                         if ($PCOVAR_Elemento=="es.php") $seleccion="SELECTED";

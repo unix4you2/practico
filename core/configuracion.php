@@ -76,7 +76,7 @@
 	$ModoDepuracion=0;
 	$BuscarActualizaciones=0;
 	$ZonaHoraria='America/Bogota';
-	$IdiomaPredeterminado='in';
+	$IdiomaPredeterminado='hi';
 	$CaracteresCaptcha=4;
 	$CodigoGoogleAnalytics='UA-847800-9';
 	

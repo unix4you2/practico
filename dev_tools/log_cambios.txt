@@ -36,6 +36,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added: Disponibilidad de idioma Hindú
 * Added: Autoajuste por páginas para informes exportados
 * Added: Tamaños de papel específicos para la generación de informes
 * Added: Orientaciones vertical y horizontal para las hojas generadas en el informe
@@ -45,6 +46,8 @@ LogCambios="
 * Added: Exportación automática de informes a formato CSV
 * Added: Exportación automática de informes a formato HTML
 * Fixed: Botones automaticos de formularios de filtrado aparecían sin estilo.
+* Fixed: Etiquetas de idiomas al momento de instalación.
+* Fixed: Correciones menores en archivos de idioma
 * Enhan: Reducción de código y optimización a funciones de exportación
 * Enhan: Adición de iconos a opciones de exportación
 * Enhan: Reescritura de panel de desarrollo para permitir futuras adiciones.

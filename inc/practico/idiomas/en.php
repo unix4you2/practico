@@ -343,7 +343,7 @@
 	$MULTILANG_FrmTipo10='Password field';
 	$MULTILANG_FrmTipo11='Field value as label';
 	$MULTILANG_FrmTipoTit4='Special Data Controls';
-	$MULTILANG_FrmTipo12='Archivo adjunto';
+	$MULTILANG_FrmTipo12='Attached file';
 	$MULTILANG_FrmTipo13='Canvas (Drawing area - HTML5)';
 	$MULTILANG_FrmTipo14='Canvas (Webcam capture - HTML5)';
 	$MULTILANG_FrmTipo15='SubForm (To query and ReadOnly)';
@@ -409,8 +409,8 @@
 	$MULTILANG_FrmDesAlto='IMPORTANT: the number of rows for simple text or in pixels for rich-text formatting. If the text exceeds the number of rows are automatically added scrollbars.  For image or bar code fields this value is for the size of the picture.';
 	$MULTILANG_FrmDesAlto2='Minimum recommended format fields: 100';
 	$MULTILANG_FrmBarra='Formatting bar';
-	$MULTILANG_FrmBarraCKEditor='Disponibles para CKEditor';
-	$MULTILANG_FrmBarraSummer='Disponibles para SummerNote (Responsive)';
+	$MULTILANG_FrmBarraCKEditor='Available for CKEditor';
+	$MULTILANG_FrmBarraSummer='Available for SummerNote (Responsive)';
 	$MULTILANG_FrmBarraTipo1='Basic: Document, character and paragraph formatting';
 	$MULTILANG_FrmBarraTipo2='Standard: Basic + links and font styles';
 	$MULTILANG_FrmBarraTipo3='Extended: Standard + clipboard, search-replace and spelling';
@@ -443,7 +443,7 @@
 	$MULTILANG_FrmInforme='Linked report';
 	$MULTILANG_FrmFormulario='Linked Subform';
 	$MULTILANG_FrmDesCampoVinculo='Put here the local fields name (parent form field) to be used for search data in the sub-form';
-	$MULTILANG_FrmDesCampoForaneo='Put here the Foraign filed from the subform to be used to compare or search data in the local field to show data.';
+	$MULTILANG_FrmDesCampoForaneo='Put here the Foreign filed from the subform to be used to compare or search data in the local field to show data.';
 	$MULTILANG_FrmVentana='Create a window for the object?';
 	$MULTILANG_FrmDesVentana='It is NOT recommended to activate this field when you want to embed GRAPHIC type reports';
 	$MULTILANG_FrmLongMaxima='Maximum length';
@@ -475,7 +475,7 @@
 	$MULTILANG_FrmDesRetorno='Text that will appear as a header on the desktop after performing the action indicated by the user';
 	$MULTILANG_FrmTxtRetorno='Return text';
 	$MULTILANG_FrmTxtDesRetorno='Full Text with description of action taken or delivered to the user message after running control';
-	$MULTILANG_FrmTxtRetornoIcono='Iconf for return';
+	$MULTILANG_FrmTxtRetornoIcono='Icon for return';
 	$MULTILANG_FrmTxtDesRetornoIcono='Set an icon to put in the message.  Use AwesomeFonts notation.  I.E.:  fa-info-circle  to show an information icon.';
 	$MULTILANG_FrmTxtRetornoEstilo='CSS style for the return message (if applies)';
 	$MULTILANG_FrmConfirma='Confirmation Text';
@@ -531,10 +531,10 @@
 	$MULTILANG_FrmDesPlantillaArchivo='The template is the form or pattern that will be renamed the file after the user uploaded to the server. This may include different variables to alter the name and extension thereof as examples. You can also leave it blank so that the files are loaded with the original name of the folder system loads (not recommended for security).';
 	$MULTILANG_FrmErrorCargaGeneral='There was an error during the upload';
 	$MULTILANG_FrmErrorCargaTamano='The file size is greater than the allowed size';
-	$MULTILANG_FrmPlantillaEjemplos='<i>Some format modifiers:<li>_ORIGINAL_ : Original file name</li><li>_CAMPOTABLA_ : Linked field name over the table</li><li>_FECHA_ : Actual date in AAAAMMDD format</li><li>_HORA_ : Actual server time in  HHMMSS format</li><li>_MICRO_ : Time microseconds</li><li>_HORAINTERNET_ : Internet time between 000 and 999</li><li>_USUARIO_ : User login name</li></i><b>Examples:</b><li>_USUARIO__ORIGINAL_: Renames the original file with the user name login</li><li>formatos/_ORIGINAL_: Will upload the file into a formatos/ folder using the original name.  This folder have to be created by admin user before using the file manager in the cargas folder.</li><li>_FECHA__HORA__USUARIO_.pdf: Renames all the original file for something like 20140502_135400_admin.pdf</li><li>reportes/_FECHA_.xls: Will upload the file into reportes folder and will force the final extension to .xls too.</li><li>foto__USUARIO_.jpg: This file will have two fixed strings (foto_ at beginning and .jpg at the end) but inside them Practico will append the username.  Pay attention to the double underline character, one of them will separate the name and the other is for the format modifier.  You will obtain somthing like foto_avelez.jpg</li>A general rule: any string inside the pattern that dont match any format modifier will be a fixed string in the file name.';
+	$MULTILANG_FrmPlantillaEjemplos='<i>Some format modifiers:<li>_ORIGINAL_ : Original file name</li><li>_CAMPOTABLA_ : Linked field name over the table</li><li>_FECHA_ : Actual date in AAAAMMDD format</li><li>_HORA_ : Actual server time in  HHMMSS format</li><li>_MICRO_ : Time microseconds</li><li>_HORAINTERNET_ : Internet time between 000 and 999</li><li>_USUARIO_ : User login name</li></i><b>Examples:</b><li>_USUARIO__ORIGINAL_: Renames the original file with the user name login</li><li>formatos/_ORIGINAL_: Will upload the file into a formatos/ folder using the original name.  This folder have to be created by admin user before using the file manager in the cargas folder.</li><li>_FECHA__HORA__USUARIO_.pdf: Renames all the original file for something like 20140502_135400_admin.pdf</li><li>reportes/_FECHA_.xls: Will upload the file into reportes folder and will force the final extension to .xls too.</li><li>foto__USUARIO_.jpg: This file will have two fixed strings (foto_ at beginning and .jpg at the end) but inside them Practico will append the username.  Pay attention to the double underline character, one of them will separate the name and the other is for the format modifier.  You will obtain something like foto_avelez.jpg</li>A general rule: any string inside the pattern that dont match any format modifier will be a fixed string in the file name.';
 	$MULTILANG_FrmArchivoLink='[Open already uploaded file]';
 	$MULTILANG_FrmCanvasLink='[Open drawing already added]';
-	$MULTILANG_FrmErrorCam='There is an error with the video device.  Please cheack that you have a video device or webcam installed and the you answer Afirmative or Accept in your browser to allow Practico to use the device.';
+	$MULTILANG_FrmErrorCam='There is an error with the video device.  Please check that you have a video device or webcam installed and the you answer Affirmative or Accept in your browser to allow Practico to use the device.';
     $MULTILANG_FrmPestana='Forms tab title in which the control will be published';
     $MULTILANG_FrmDesPestana='Assign the tab for this object in the form.  Practico automatically creates tabs according to the values entered in each object.';
     $MULTILANG_FrmTagPersonalizado='HTML Custom Tag';
@@ -553,17 +553,17 @@
     $MULTILANG_FrmBtnFull='Load in FullScreen';
     $MULTILANG_FrmBtnObjetivo='HTML Target';
     $MULTILANG_FrmActualizaAjax='Dynamic reload';
-    $MULTILANG_FrmActivarInline='<i>Inline</i> view: Work in onjunction with next and previous elements';
-    $MULTILANG_FrmActivarInlineDes='Allow to put the control using an inline style to keep a new line before publish the control over the form. Acording the effect you want, previous or next element should activate this properti too';
+    $MULTILANG_FrmActivarInline='<i>Inline</i> view: Work in conjunction with next and previous elements';
+    $MULTILANG_FrmActivarInlineDes='Allow to put the control using an inline style to keep a new line before publish the control over the form. Acording the effect you want, previous or next element should activate this property too';
     $MULTILANG_FrmTipoCopia='Select what kind of copy do you want';
     $MULTILANG_FrmTipoCopia1='Online';
     $MULTILANG_FrmTipoCopia2='XML with current ID';
     $MULTILANG_FrmTipoCopia3='XML with dynamic ID';
-    $MULTILANG_FrmTipoCopiaDes1='Online: Creates a new object with a new ID.  That includes all the components linked to allow you create new forms or reports from an existing object. This works inmediately over the running system, cloning the selected object.';
-    $MULTILANG_FrmTipoCopiaDes2='XML with current ID: Exports/Imports the object using XML sintax to allow you import it over other system using the current ID.  Usefull if you want to overwrite forms or reports with enhacements from other systems.';
-    $MULTILANG_FrmTipoCopiaDes3='XML with dynamic ID: Exports/Imports the object using XML sintax but the new ID for the object is generated dinamically each time you import the file, with a different ID.  Usefull to replicate the functionallity of "Online" option but over differents systems.';
+    $MULTILANG_FrmTipoCopiaDes1='Online: Creates a new object with a new ID.  That includes all the components linked to allow you create new forms or reports from an existing object. This works immediately over the running system, cloning the selected object.';
+    $MULTILANG_FrmTipoCopiaDes2='XML with current ID: Exports/Imports the object using XML syntax to allow you import it over other system using the current ID.  Usefull if you want to overwrite forms or reports with enhancements from other systems.';
+    $MULTILANG_FrmTipoCopiaDes3='XML with dynamic ID: Exports/Imports the object using XML syntax but the new ID for the object is generated dynamically each time you import the file, with a different ID.  Useful to replicate the functionality of "Online" option but over differents systems.';
 	$MULTILANG_FrmTipoCopiaExporta='Copying / Exporting';
-	$MULTILANG_FrmCopiaFinalizada='The copy process already finished.  You could click on donwload button to get the XML file.';
+	$MULTILANG_FrmCopiaFinalizada='The copy process already finished.  You could click on download button to get the XML file.';
 	$MULTILANG_FrmImportar='Import a design from a file';
 	$MULTILANG_FrmImportarConflicto='There are conflicts that you need to solve before continue with the importing process';
 	$MULTILANG_FrmImportarGenerado='New object has been created';
@@ -585,7 +585,7 @@
 	$MULTILANG_InfTablaManual='Enter a table manually';
 	$MULTILANG_InfDesTablaManual='If you dont want to select a table from top list, you could type here a table name.  This option is useful when you need to access information in internal tables of Practico or tables created by other applications';
 	$MULTILANG_InfAliasManual='Specify an alias manually';
-	$MULTILANG_InfDesAliasManual='Useful to define the name of a table generated from a subquery or manually specified';
+	$MULTILANG_InfDesAliasManual='Useful to define the name of a table generated from a sub query or manually specified';
 	$MULTILANG_InfBtnAgregaTabla='Add Table';
 	$MULTILANG_InfTablasDef='Tables defined in this report';
 	$MULTILANG_InfAlias='Alias';
@@ -594,7 +594,7 @@
 	$MULTILANG_InfCampoDatos='Data Field';
 	$MULTILANG_InfCampoManual='Specify a field manually';
 	$MULTILANG_InfDesCampoManual='If you dont want to select a field from top list you could type here a field name.  This option is useful when you need to access information in Practico internal fields or fields created by other applications';
-	$MULTILANG_InfDesAliasManual2='Useful to define the name of a field generated manually or a agrupated subquery';
+	$MULTILANG_InfDesAliasManual2='Useful to define the name of a field generated manually or a grouped sub query';
 	$MULTILANG_InfBtnAgregaCampo='Add Field';
 	$MULTILANG_InfCamposDef='Fields defined in this report';
 	$MULTILANG_InfAddCondicion='Add a new condition to the report';
@@ -651,9 +651,9 @@
 	$MULTILANG_InfTitBotones='Add buttons or actions to each record';
 	$MULTILANG_InfDelReg='Delete Record';
 	$MULTILANG_InfCargaForm='Load a form by ID';
-	$MULTILANG_InfHlpAccion='If you want to load a form use this sintax  ID:1:FieldForSearch<br>To delete the associated record type the table.field used to compare it.';
+	$MULTILANG_InfHlpAccion='If you want to load a form use this syntax  ID:1:FieldForSearch<br>To delete the associated record type the table.field used to compare it.';
 	$MULTILANG_InfVinculo='Linked field';
-	$MULTILANG_InfDesVinculo='IMPORTANT: We assume the first field or column as a single and primery key value<br>
+	$MULTILANG_InfDesVinculo='IMPORTANT: We assume the first field or column as a single and primary key value<br>
 				to do removal or form opening operations.<br>
 				It is recommended to use fields that has a really single value<br>
 				unless you are wishing group operations.';
@@ -678,7 +678,7 @@
 	$MULTILANG_InfParam='Edit general settings of the report';
 	$MULTILANG_InfTitNivel='Who can see this report?';
 	$MULTILANG_InfDesNivel='Specify the user profile must be to see this report as available.';
-	$MULTILANG_InfAlto='Heigth';
+	$MULTILANG_InfAlto='Height';
 	$MULTILANG_InfTitAncho='Set fixed width?';
 	$MULTILANG_InfDesAncho='This value also applies if you have specified a Height value. If you require the report to appear within a specified fixed width size in pixels, leave blank to be deployed data without size restrictions. In the case of chart image specifies its size.';
 	$MULTILANG_InfTitAlto='Set fixed height?';
@@ -713,7 +713,7 @@
     $MULTILANG_InfDataTableNoRegistros='There is no records that match search criteria';
     $MULTILANG_InfDataTableNoRegistrosDisponibles='No records available';
     $MULTILANG_InfDataTableTit='DataTables support?';
-    $MULTILANG_InfDataTableDes='Allow to transform the report in a DataTable to filter, search, sort and get pages of results dinamically';
+    $MULTILANG_InfDataTableDes='Allow to transform the report in a DataTable to filter, search, sort and get pages of results dynamically';
     $MULTILANG_InfFormFiltrado='Form with Filter variables';
     $MULTILANG_InfFormFiltradoDes='Select a form designed to enter the filter variables for the report.  This help you to link a form that ask users for some data before to load the report.';
     $MULTILANG_InfRetornoFormFiltrado='See filtered report';
@@ -721,13 +721,13 @@
     $MULTILANG_InfBordesCelda='Draw cell border';
     $MULTILANG_InfBordesTodos='All sides';
     $MULTILANG_InfBordesArriba='Top only';
-    $MULTILANG_InfBordesAbajo='Bottomb only';
+    $MULTILANG_InfBordesAbajo='Bottom only';
     $MULTILANG_InfBordesArrAba='Top and Bottom';
     $MULTILANG_InfBordesIzq='Left side only';
     $MULTILANG_InfBordesDer='Right side only';
     $MULTILANG_InfBordesIzqDer='Left and right sides';
 	$MULTILANG_OrientacionPagina='Page layout';
-	$MULTILANG_InfTamanoPapel='Paper zise';
+	$MULTILANG_InfTamanoPapel='Paper size';
 	$MULTILANG_InfReducir='Auto-size content';
 	$MULTILANG_InfTitPersonalizar='Custom presentation and layout (optional)';
 
@@ -761,7 +761,7 @@
 	$MULTILANG_MnuObjeto='Object';
 	$MULTILANG_MnuAccion='Internal action / command / object';
 	$MULTILANG_MnuTitAccion='Type one of three possible values ​​as follows:';
-	$MULTILANG_MnuDesAccion='1) AN OBJECT in Pr&aacute;ctico that you want to link to this menu option using this sintax frm:XXX  or  inf:XXX  where you should replace XXX with the object ID (ID form or ID for the report),  2) INTERNAL ACTION in Pr&aacute;ctico where you want to redirect the user (you can see in Practicos footer as admin), or 3) CUSTOM COMMAND: A command secuence defined by the user, this secuence should exists in personalizadas.php file or any other module installed.';
+	$MULTILANG_MnuDesAccion='1) AN OBJECT in Practico that you want to link to this menu option using this syntax frm:XXX  or  inf:XXX  where you should replace XXX with the object ID (ID form or ID for the report),  2) INTERNAL ACTION in Practico where you want to redirect the user (you can see in Practicos footer as admin), or 3) CUSTOM COMMAND: A command secuence defined by the user, this secuence should exists in personalizadas.php file or any other module installed.';
 	$MULTILANG_MnuTitNivel='Who can see this option?';
 	$MULTILANG_MnuDesNivel='Specify the user profile must be to see this option available.';
 	$MULTILANG_MnuActualiza='Reload menu';
@@ -838,7 +838,7 @@
     $MULTILANG_TblTipoCopia3='Structure and Data (CREATE and INSERT sentences)';
     $MULTILANG_TblImportar='Import from file';
     $MULTILANG_TblImportarSQL='Upload a compressed SQL';
-    $MULTILANG_TblSQLConsejo='If you execute the SQL sentences of this file you could be erasing, creating or overwritting tables and many other information, even designs and other things the you exported in that records. <br><br><b>We recomend you that make a backup before continue.</b>';
+    $MULTILANG_TblSQLConsejo='If you execute the SQL sentences of this file you could be erasing, creating or overwriting tables and many other information, even designs and other things the you exported in that records. <br><br><b>We recomend you that make a backup before continue.</b>';
     $MULTILANG_TblEjecutarSQL='Run SQL sentences in this file (could take some time)';
     $MULTILANG_TblDecodificarActual='Collation or charset for the actual records or data table';
     $MULTILANG_TblCodificar='ENCODE records before save them to the backup file using';
@@ -956,7 +956,7 @@
 	$MULTILANG_AyudaDesBD='For different engines you must have created SQLite database first. For SQLite only required to specify the file name associated with BD (eg practico.sqlite3) and Practico will try to create for you the file if you have the appropriate permissions on your web server.';
 	$MULTILANG_PrefijoCore='Pr&aacute;ctico internal tables prefix';
 	$MULTILANG_PrefijoApp='Application tables prefix';
-	$MULTILANG_AyudaTitPreCore='NO se recomienda dejar en blanco o Mayúsculas';
+	$MULTILANG_AyudaTitPreCore='Its not recomended an empty value or upper cases';
 	$MULTILANG_AyudaDesPreCore='';
 	$MULTILANG_AyudaTitPreApp='Important';
 	$MULTILANG_AyudaDesPreApp='The prefix used for application tables can be used to separate different Practical facilities on the same database or it can be left empty to link / integrate with other applications Practical pre-existing. Not recommended uppercase for compatibility between engines.';
@@ -1068,7 +1068,7 @@
 	$MULTILANG_MonOcultaTit='Title hidding';
 	$MULTILANG_MonCorreoAlerta='Alerts email';
 	$MULTILANG_MonAlertaSnd='Soundest alert';
-	$MULTILANG_MonMsLectura='Miliseconds for reading';
+	$MULTILANG_MonMsLectura='Milliseconds for reading';
 	$MULTILANG_MonDefinidos='Pages & Monitors defined';
 	$MULTILANG_MonErr='Name field is mandatory';
 	$MULTILANG_MonEstado='System status';
