@@ -307,11 +307,11 @@
 	$MULTILANG_ErrBkpBD='An error occurred during the database backup';
 	$MULTILANG_ActMsj4='If any of the files could not be written by this wizard by permissions issues, the patch can also be applied manually by the administrator or by copying only files missing';
 	$MULTILANG_ActMsj5='File structure or type unsupported';
-	$MULTILANG_ActAlertaVersion='There is a new version of Practico available to download.<br>We recomend you to download the new version or upgrade package from the oficial website and upgrade your system to have the new features.';
+	$MULTILANG_ActAlertaVersion='There is a new version of Practico available to download.<br>We recommend you to download the new version or upgrade package from the official website and upgrade your system to have the new features.';
 	$MULTILANG_ActBuscarVersion='Look for new versions automatically';
     $MULTILANG_ActErrEscritura='Write error';
     $MULTILANG_ActDesEscritura='WARNING: There are write errors in the files that are going to be upgraded.
-        <br><br>To keep the integrity in the software you cant upgrade until you fix the file permissions to be writeable by Practico.  Files are marked in the list in red color and the text "'.$MULTILANG_ActErrEscritura.'".  
+        <br><br>To keep the integrity in the software you cant upgrade until you fix the file permissions to be writable by Practico.  Files are marked in the list in red color and the text "'.$MULTILANG_ActErrEscritura.'".  
         <br><br>Fix the problem and try again.';
     $MULTILANG_ActBackupTipo='Backup mode';
     $MULTILANG_ActBackup1='Scripts replaced during this process only';
@@ -319,7 +319,7 @@
     $MULTILANG_ActBackupDes='Doing a full backup could be a heavy task for the system.  In systems widely used a full backup process should be done by another tool that allow you to have consistent files even with users working on the fly.';
 
 	//Formularios
-	$MULTILANG_ErrFrmDuplicado='Failed duplicated value in the field. The value you entered already exists in the database. Field: ';
+	$MULTILANG_ErrFrmDuplicado='Failed duplicate value in the field. The value you entered already exists in the database. Field: ';
 	$MULTILANG_ErrFrmObligatorio='You forgot to enter mandatory field: ';
 	$MULTILANG_ErrFrmDatos='There is a problem in the input data';
 	$MULTILANG_ErrFrmCampo1='You must enter a valid title or label for the field.';
@@ -366,7 +366,7 @@
 	$MULTILANG_FrmDesCampo='Field data table which will link information.  In file fields this could contain the relative path to the file uploaded in the server.  Every file should have at least one field to store its path';
 	$MULTILANG_FrmValUnico='Single value field';
 	$MULTILANG_FrmTitUnico='Uniqueness for input values';
-	$MULTILANG_FrmDesUnico='Indicates whether the field can store or repeated values ​​in the database. Should be enabled for fields representing primary keys in their Design and disabled for the rest.  You should take care in that forms that you need this field to do upgrades and its duplicated error message.';
+	$MULTILANG_FrmDesUnico='Indicates whether the field can store or repeated values ​​in the database. Should be enabled for fields representing primary keys in their Design and disabled for the rest.  You should take care in that forms that you need this field to do upgrades and its duplicate error message.';
 	$MULTILANG_FrmPredeterminado='Default value';
 	$MULTILANG_FrmDesPredeterminado='Sets the value that appears automatically filled in the field to open the form view. This value can be out of data validation.  If a PHP session variable is entered then Practico will take its value.';
 	$MULTILANG_FrmValida='Data validation';
@@ -443,7 +443,7 @@
 	$MULTILANG_FrmInforme='Linked report';
 	$MULTILANG_FrmFormulario='Linked Subform';
 	$MULTILANG_FrmDesCampoVinculo='Put here the local fields name (parent form field) to be used for search data in the sub-form';
-	$MULTILANG_FrmDesCampoForaneo='Put here the Foreign filed from the subform to be used to compare or search data in the local field to show data.';
+	$MULTILANG_FrmDesCampoForaneo='Put here the Foreign field from the subform to be used to compare or search data in the local field to show data.';
 	$MULTILANG_FrmVentana='Create a window for the object?';
 	$MULTILANG_FrmDesVentana='It is NOT recommended to activate this field when you want to embed GRAPHIC type reports';
 	$MULTILANG_FrmLongMaxima='Maximum length';
@@ -521,10 +521,10 @@
 	$MULTILANG_FrmAdvDelForm='IMPORTANT: Deleting the form users can not access it again to query operations or data entry defined. You can not undo this operation. This also eliminates any internal design of the form.\n'.$MULTILANG_Confirma;
 	$MULTILANG_FrmAdvScriptForm='Scripts edit (Advanced)';
 	$MULTILANG_FrmHlpFunciones='All JavaScript functions defined here will be included in the form.<br>If you need some additional events linked by buttons or any object in the form<br> this field let you define them.<br><b>When you need to use parameters or any quote use always double quotes!</b>.<br>The FrmAutoRun function must be exist (even empty) cause it will be executed automatically on every form load.';
-    $MULTILANG_FrmHlpFinalFunciones='This code is a part of your form.  Close and clic Save/Update form to apply changes.';
+    $MULTILANG_FrmHlpFinalFunciones='This code is a part of your form.  Close and click Save/Update form to apply changes.';
 	$MULTILANG_FrmCopiar='Make a copy';
 	$MULTILANG_FrmAdvCopiar='A new copy of this object will be created.  Are you sure?';
-	$MULTILANG_FrmMsjCopia='Now you can go to edit your new object.  A copy was maded as: ';
+	$MULTILANG_FrmMsjCopia='Now you can go to edit your new object.  A copy was made as: ';
 	$MULTILANG_FrmBordesVisibles='Are table borders visible?';
 	$MULTILANG_FrmFormatoSalida='Output format';
 	$MULTILANG_FrmPlantillaArchivo='Name template for the file';
