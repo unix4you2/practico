@@ -1,12 +1,17 @@
-John F. Arroyave Gutiérrez
-Copyright (c) 2013 John F. Arroyave Gutiérrez <unix4you2@gmail.com>
-License GPLv2
-See the LICENSE file for details
+                      Practico Framework for PHP
+========================================================================
+Copyright (c) 2013 John F. Arroyave Gutiérrez unix4you2@gmail.com
+                                              www.practico.org
 
+Licensed under GPLv2 terms. See the LICENSE file for details
 That is the license for the whole package.
-Parts of the package are under other, compatible licenses:
 
-Important:  All source files in this project should be codified as UTF-8 Without BOM
+------------------------------------------------------------------------
+Important: All source files in this project should be  UTF-8 Without BOM
+------------------------------------------------------------------------
+
+Practico uses a lot of tools to build and deploy its applications, parts
+of the package are under other, compatible licenses:
 
 PCLZip (PhpConcept Library - Zip Module 2.8.2):
 	Location: inc/pclzip/pclzip.lib.php:
@@ -16,7 +21,7 @@ PCLZip (PhpConcept Library - Zip Module 2.8.2):
 
 CKEditor
 	Location: inc/ckeditor/*
-	License: GNU General Public License Version 2, or at your choice as LGPL ó MPL
+	License: GNU GPL License version 2, or at your choice as LGPL ó MPL
 	Made by: Frederico Knabben - Copyright © 2003-2011, CKSource
 	http://ckeditor.com
 	See inc/ckeditor/LICENSE.html for details
@@ -76,14 +81,18 @@ ElFinder
 	http://elfinder.org/
 	Chief developer: Dmitry "dio" Levashov <dio@std42.ru>
 	Maintainer: Troex Nevelin <troex@fury.scancode.ru>
-	Developers: Alexey Sukhotin <strogg@yandex.ru>, Naoki Sawada <hypweb@gmail.com>
-	Icons: [PixelMixer](http://pixelmixer.ru), [Yusuke Kamiyamane](http://p.yusukekamiyamane.com)
+	Developers: Alexey Sukhotin <strogg@yandex.ru>,
+	Naoki Sawada <hypweb@gmail.com>
+	Icons: [PixelMixer](http://pixelmixer.ru),
+	[Yusuke Kamiyamane](http://p.yusukekamiyamane.com)
 
 Font-Awesome
 	Location: inc/font-awesome/fonts/*
 	Font License: SIL OFL 1.1
 	URL: http://scripts.sil.org/OFL
-	Location: Applies to all CSS and LESS files in the following directories: font-awesome/css/, font-awesome/less/, and font-awesome/scss/.
+	Location: Applies to all CSS and LESS files in the following
+	          directories: font-awesome/css/, font-awesome/less/,
+	          and font-awesome/scss/.
 	Code License: MIT License
 	URL: http://opensource.org/licenses/mit-license.html
 
