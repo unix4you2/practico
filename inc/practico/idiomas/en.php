@@ -258,6 +258,7 @@
 	$MULTILANG_DefMantenimientos='Maintenance';
 	$MULTILANG_DefPcoder='Online code editor';
 	$MULTILANG_DefLimpiarTemp='Clean temporary folder /tmp';
+	$MULTILANG_DefLimpiarBackups='Clean existing backups on /bkp';
 
 	//Cierre de sesion
 	$MULTILANG_SesionCerrada='Your session has been closed';

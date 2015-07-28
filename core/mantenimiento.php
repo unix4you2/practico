@@ -27,6 +27,36 @@
 <?php
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: limpiar_backups
+	Limpia los archivos de backups contenidos en la carpeta /bkp y que normalmente son realizados despues de cada proceso de parcheo o actualizacion
+*/
+if ($PCO_Accion=="limpiar_backups")
+	{
+
+		//Presenta el listado de archivos
+		echo listado_visual_exploracion_archivos("bkp/","",$MULTILANG_ArchivosLimpiados,0);
+		
+		//Elimina los archivos presentados, menos el index
+		$ListadoArchivosEliminar=listado_exploracion_archivos("bkp/","");
+		$TotalAhorro=0;
+		foreach ($ListadoArchivosEliminar as $Archivo)
+			{
+				if ($Archivo["Nombre"]!="index.html")
+					{
+						@unlink($Archivo["Enlace"]);
+						$TotalAhorro+=$Archivo["Tamano"];
+					}
+			}
+
+		abrir_barra_estado();
+		echo '<div align=center><h3>'.$MULTILANG_EspacioLiberado.': <b>'.$TotalAhorro.' Kb</b></h3></div>
+		<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
+		cerrar_barra_estado();
+	}
+
 
 /* ################################################################## */
 /* ################################################################## */

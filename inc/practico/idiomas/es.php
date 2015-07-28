@@ -258,6 +258,7 @@
 	$MULTILANG_DefMantenimientos='Mantenimientos';
 	$MULTILANG_DefPcoder='Editor de c&oacute;digo en l&iacute;nea';
 	$MULTILANG_DefLimpiarTemp='Limpiar carpeta de trabajo /tmp';
+	$MULTILANG_DefLimpiarBackups='Limpiar copias de seguridad existentes en /bkp';
 
 	//Cierre de sesion
 	$MULTILANG_SesionCerrada='Su sesi&oacute;n ha sido cerrada';

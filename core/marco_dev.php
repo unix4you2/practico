@@ -138,6 +138,7 @@
 							<div class="well btn-xs">
 
 								<a class="btn btn-warning btn-block" OnClick="PCO_VentanaPopup('index.php?PCO_Accion=limpiar_temporales&Presentar_FullScreen=1&Precarga_EstilosBS=1','Mantenimiento','toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500');"><i class="fa fa-trash fa-fw"></i> <?php echo $MULTILANG_DefLimpiarTemp; ?></a>
+								<a class="btn btn-danger btn-block" OnClick="if (confirm('<?php echo $MULTILANG_Confirma; ?>')) { PCO_VentanaPopup('index.php?PCO_Accion=limpiar_backups&Presentar_FullScreen=1&Precarga_EstilosBS=1','Mantenimiento','toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500'); }"><i class="fa fa-trash fa-fw"></i> <?php echo $MULTILANG_DefLimpiarBackups; ?></a>
 
 							</div> <!--well-->
 						</div>

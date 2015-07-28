@@ -258,6 +258,7 @@
 	$MULTILANG_DefMantenimientos='रखरखाव';
 	$MULTILANG_DefPcoder='ऑनलाइन कोड संपादक';
 	$MULTILANG_DefLimpiarTemp='स्वच्छ अस्थायी फ़ोल्डर /tmp';
+	$MULTILANG_DefLimpiarBackups='पर साफ मौजूदा बैकअप /bkp';
 
 	//Cierre de sesion
 	$MULTILANG_SesionCerrada='आपका सत्र बंद कर दिया गया है';
