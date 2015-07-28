@@ -53,6 +53,7 @@ LogCambios="
 * Fixed: Botones automaticos de formularios de filtrado aparecían sin estilo.
 * Fixed: Etiquetas de idiomas al momento de instalación.
 * Fixed: Correciones menores en archivos de idioma
+* Fixed: Errores de sintaxis en listas de seleccion de formularios ahora no evitan la continuidad de ejecucion
 * Enhan: La función de exploración de archivos hace uso de una función extra para retorno de los valores, lo que permite usar sus resultados con otros fines como backups, etc.
 * Enhan: Reducción de código y optimización a funciones de exportación
 * Enhan: Adición de iconos a opciones de exportación

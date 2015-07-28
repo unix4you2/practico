@@ -2856,7 +2856,8 @@ function selector_iconos_awesome()
 
                             // Consulta los campos para el tag select
                             $resultado_opciones=ejecutar_sql("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE $condicion_filtrado_listas");   //Deprecated.  ORDER BY $campo_opciones
-                            while ($registro_opciones = $resultado_opciones->fetch())
+                            // Muestra resultados solo si $resultado_opciones es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch()
+                            while ($resultado_opciones!="1" && $registro_opciones = $resultado_opciones->fetch())
                                 {
                                     $opciones_lista[] = $registro_opciones["opciones"];
                                     $valores_lista[] = $registro_opciones["valores"];
