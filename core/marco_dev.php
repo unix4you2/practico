@@ -136,9 +136,9 @@
 						<!-- INICIO TAB AVANZADAS 2 -->
 						<div class="tab-pane fade" id="avanzada2">
 							<div class="well btn-xs">
-								
-								<a data-toggle="modal" class="btn btn-warning btn-block" href=""><i class="fa fa-trash fa-fw"></i> <?php echo $MULTILANG_DefLimpiarTemp; ?></a>
-								
+
+								<a class="btn btn-warning btn-block" OnClick="PCO_VentanaPopup('index.php?PCO_Accion=limpiar_temporales&Presentar_FullScreen=1&Precarga_EstilosBS=1','Mantenimiento','toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500');"><i class="fa fa-trash fa-fw"></i> <?php echo $MULTILANG_DefLimpiarTemp; ?></a>
+
 							</div> <!--well-->
 						</div>
 						<!-- FIN TAB AVANZADAS 2 -->

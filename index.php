@@ -227,6 +227,8 @@
         include("core/monitoreo.php");
     if ($PCO_Accion=="valor_campo_tabla" || $PCO_Accion=="opciones_combo_box")
         include("core/ajax.php");
+	if ($PCO_Accion=="limpiar_temporales")
+		include("core/mantenimiento.php");
 
 
 /* ################################################################## */

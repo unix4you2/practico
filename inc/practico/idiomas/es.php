@@ -237,6 +237,7 @@
     $MULTILANG_PcoderAjusteConfirma='Esta a punto de recargar el documento actual con el fin de establecer el tamano de ventana al tamano maximo disponible segun su pantalla.  Al recargar el documento puede perder cualquier cambio no almacenado.  Desea continuar?';
     $MULTILANG_BuscaCriterios='Debe indicar al menos una palabra o criterio de b&uacute;squeda';
     $MULTILANG_EstadoPHP='Informaci&oacute;n de su PHP';
+    $MULTILANG_ArchivosLimpiados='Archivos Limpiados/Purgados';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';

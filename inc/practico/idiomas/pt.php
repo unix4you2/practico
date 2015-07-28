@@ -237,6 +237,7 @@
     $MULTILANG_PcoderAjusteConfirma='Você est&aacute; indo para recarregar esta janela para redimensionar a janela como sua resolução m&aacute;xima. Quando você recarregue esta janela, você pode perder qualquer mudança que você j&aacute; dont salvo. Você quer continuar?';
     $MULTILANG_BuscaCriterios='Você deve digitar uma palavra-chave para pesquisa';
     $MULTILANG_EstadoPHP='PHP Informações';
+    $MULTILANG_ArchivosLimpiados='Limpos / arquivos purgados';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Design do aplicativo';

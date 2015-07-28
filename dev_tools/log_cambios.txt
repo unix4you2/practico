@@ -18,8 +18,11 @@ README.md
 CHANGELOG.md
 AUTHORS	
 index.php
+core/actualizacion.php
 core/comunes.php
+core/conexiones.php
 core/informes.php
+core/mantenimiento.php
 core/marco_conf.php
 core/marco_dev.php
 core/marco_export.php
@@ -45,12 +48,17 @@ LogCambios="
 * Added: Autoajuste de celdas en informes exportados
 * Added: Exportación automática de informes a formato CSV
 * Added: Exportación automática de informes a formato HTML
+* Added: La funcion para exploración de archivos tiene ahora un parámetro adicional para ocultar los botones de descarga asociados a cada elemento
 * Fixed: Botones automaticos de formularios de filtrado aparecían sin estilo.
 * Fixed: Etiquetas de idiomas al momento de instalación.
 * Fixed: Correciones menores en archivos de idioma
+* Enhan: La función de exploración de archivos hace uso de una función extra para retorno de los valores, lo que permite usar sus resultados con otros fines como backups, etc.
 * Enhan: Reducción de código y optimización a funciones de exportación
 * Enhan: Adición de iconos a opciones de exportación
 * Enhan: Reescritura de panel de desarrollo para permitir futuras adiciones.
+* Enhan: La funcion para exploración de archivos usada por el módulo de actualización se mueve a un punto donde pueda ser utilizada por cualquier módulo
+* Enhan: Funcion de exploracion de archivos presenta sumar la cantidad en KBytes de los archivos
+
 "
 
 ########################################################################

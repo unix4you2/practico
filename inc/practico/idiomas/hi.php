@@ -237,6 +237,7 @@
     $MULTILANG_PcoderAjusteConfirma='आप अपनी अधिकतम संकल्प के रूप में खिड़की के आकार करने के लिए इस विंडो को फिर से लोड करने के लिए जा रहे हैं। आप इस विंडो को फिर से लोड जब आप पहले से ही बचाया न कि किसी भी परिवर्तन खो सकते हैं। क्या आप जारी रखना चाहते हैं?';
     $MULTILANG_BuscaCriterios='आप खोज करने के लिए एक महत्वपूर्ण शब्द दर्ज करना चाहिए';
     $MULTILANG_EstadoPHP='PHP जानकारी';
+    $MULTILANG_ArchivosLimpiados='साफ / पर्ज फ़ाइलों';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='आवेदन डिजाइन';

@@ -25,73 +25,6 @@
 ?>
 
 <?php
-
-
-/* ################################################################## */
-/* ################################################################## */
-/*
-	Function: listado_exploracion_archivos
-	Presenta una lista de los archivos contenidos en una carpeta con modificadores para las opciones
-*/
-function listado_exploracion_archivos($RutaExploracion="",$Filtro_contenido="",$TituloExploracion="")
-    {
-        global $MULTILANG_TotalRegistros,$MULTILANG_Explorar,$MULTILANG_Filtro,$MULTILANG_Descargar,$MULTILANG_Tipo,$MULTILANG_Fecha,$MULTILANG_Peso;
-        //Si la ruta de exploracion es diferente de vacio hace el proceso de busqueda de archivos
-        if ($RutaExploracion!="")
-            {
-                //Inicia Marco de presentacion de archivos
-                echo '
-                    <div class="panel panel-default"> <!-- Clase chat-panel para altura -->
-                        <div class="well well-sm"><span class="label label-primary">'.$TituloExploracion.'</span> '.$MULTILANG_Explorar.' <b>'.$RutaExploracion.'</b> '.$MULTILANG_Filtro.' '.$Filtro_contenido.':</div>
-                        <div class="panel-body">
-                            <ul class="chat">';
-
-                $ConteoElementos=0;
-                $ContenidoDirectorio = opendir($RutaExploracion);
-                while (($Elemento = readdir($ContenidoDirectorio)) !== false)
-                    {
-                        if (($Elemento != ".") && ($Elemento != "..") && stristr($Elemento,$Filtro_contenido))
-                            {
-                                $TamanoElemento=round(filesize($RutaExploracion.$Elemento)/1024);
-                                $TipoElemento=filetype($RutaExploracion.$Elemento);
-                                $FechaElemento=date("d F Y H:i:s", filemtime($RutaExploracion.$Elemento));
-                                echo '
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <i class="fa fa-file-archive-o fa-2x fa-fw icon-gray"></i>
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <strong class="primary-font">'.$Elemento.'</strong> 
-                                            <small class="pull-right text-muted">
-                                                <a  href="'.$RutaExploracion.$Elemento.'" class="btn btn-xs btn-default"><i class="fa fa-download fa-fw"></i> '.$MULTILANG_Descargar.'</a>
-                                                <br>
-                                                '.$MULTILANG_Peso.' <span class="badge">'.$TamanoElemento.' Kb</span>
-                                            </small>
-                                        </div>
-                                        <p>
-                                            <i class="icon-gray">&nbsp;&nbsp;&nbsp;
-                                            '.$MULTILANG_Fecha.': '.$FechaElemento.'
-                                            ('.$MULTILANG_Tipo.' '.$TipoElemento.')
-                                            </i>
-                                        </p>
-                                    </div>
-                                </li>';    
-                                $ConteoElementos++;
-                            }
-                    }
-
-                //Cierra Marco de presentacion de archivos
-                echo '
-                            </ul>
-                        </div> <!-- /.panel-body -->
-                    <div class="well well-sm">'.$MULTILANG_TotalRegistros.': <b>'.$ConteoElementos.'</b></div>
-                    </div> <!-- /.panel .chat-panel -->';
-            }
-    }
-
-
-
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -142,8 +75,8 @@ if ($PCO_Accion=="actualizar_practico")
         <!-- INICIO TAB COPIAS DE SEGURIDAD -->
         <div class="tab-pane fade" id="pestana_copias">
             <?php
-                listado_exploracion_archivos("bkp/","_bdd.gz","Base de datos");
-                listado_exploracion_archivos("bkp/","_app.zip","Archivos y Scripts de Pr&aacute;ctico");
+                listado_visual_exploracion_archivos("bkp/","_bdd.gz","Base de datos",1);
+                listado_visual_exploracion_archivos("bkp/","_app.zip","Archivos y Scripts de Pr&aacute;ctico",1);
             ?>
         </div>
         <!-- FIN TAB COPIAS DE SEGURIDAD -->
@@ -569,4 +502,4 @@ if ($PCO_Accion=="aplicar_parche")
 		cerrar_ventana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
-?>
+

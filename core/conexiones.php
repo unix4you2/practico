@@ -140,7 +140,7 @@
 				}
 			catch( PDOException $ErrorPDO)
 				{
-					include_once("core/comunes.php"); //Incluye la libreria de base al menos para presentar mensaje de error
+					@include_once("core/comunes.php"); //Incluye la libreria de base al menos para presentar mensaje de error
 					$mensaje_final="Error de conexion con la base de datos. <hr>Verifique los valores existentes en el archivo <b>configuracion.php</b> y la disponibilidad de PDO y modulos asociados a su motor de bases de datos en su <b>php.ini</b>.";
 					mensaje('<i class="fa fa-warning fa-3x text-danger texto-blink"></i> '.$mensaje_final, "<li><b>Detalles:</b> ".$ErrorPDO->getMessage(), '', '', 'alert alert-danger alert-dismissible');
 					$hay_error=1; //usada globalmente durante el proceso de instalacion
