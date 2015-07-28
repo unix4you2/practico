@@ -238,6 +238,7 @@
     $MULTILANG_BuscaCriterios='आप खोज करने के लिए एक महत्वपूर्ण शब्द दर्ज करना चाहिए';
     $MULTILANG_EstadoPHP='PHP जानकारी';
     $MULTILANG_ArchivosLimpiados='साफ / पर्ज फ़ाइलों';
+    $MULTILANG_EspacioLiberado='डिस्क स्थान मुक्त कर दिया';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='आवेदन डिजाइन';

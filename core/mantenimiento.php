@@ -42,14 +42,19 @@ if ($PCO_Accion=="limpiar_temporales")
 		
 		//Elimina los archivos presentados, menos el index
 		$ListadoArchivosEliminar=listado_exploracion_archivos("tmp/","");
+		$TotalAhorro=0;
 		foreach ($ListadoArchivosEliminar as $Archivo)
 			{
 				if ($Archivo["Nombre"]!="index.html")
-					@unlink($Archivo["Enlace"]);
+					{
+						@unlink($Archivo["Enlace"]);
+						$TotalAhorro+=$Archivo["Tamano"];
+					}
 			}
 
 		abrir_barra_estado();
-		echo '<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
+		echo '<div align=center><h3>'.$MULTILANG_EspacioLiberado.': <b>'.$TotalAhorro.' Kb</b></h3></div>
+		<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
 		cerrar_barra_estado();
 	}
 

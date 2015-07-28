@@ -238,6 +238,7 @@
     $MULTILANG_BuscaCriterios='Você deve digitar uma palavra-chave para pesquisa';
     $MULTILANG_EstadoPHP='PHP Informações';
     $MULTILANG_ArchivosLimpiados='Limpos / arquivos purgados';
+    $MULTILANG_EspacioLiberado='O espaço em disco liberado';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Design do aplicativo';
