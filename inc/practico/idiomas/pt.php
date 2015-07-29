@@ -850,6 +850,9 @@
     $MULTILANG_TblTransliteracionHlp='Se transliteração é ativado quando um personagem não pode ser representado no charset de destino, ele pode ser aproximado através de um ou vários personagens que procuram de forma semelhante. Se você decidir ignorar caracteres inválidos em seguida, será omitido, Caso contrário, a cadeia é truncada e, E_NOTICE é gerado e a função irá retornar FALSE.';
     $MULTILANG_TblTranslit='Translitering';
     $MULTILANG_TblIgnora='Ignorando';
+    $MULTILANG_TblAnaliza='Analisar tabelas';
+    $MULTILANG_TblReparar='Reparação tabelas';
+    $MULTILANG_TblOptimizar='Otimizar tabelas';
 
 	//Usuarios
 	$MULTILANG_UsrCopia='Permissões de cópia concluída. Por favor, verifique abaixo.';

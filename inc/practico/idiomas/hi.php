@@ -850,6 +850,9 @@
     $MULTILANG_TblTransliteracionHlp='एक चरित्र लक्ष्य वर्णसमूह में प्रतिनिधित्व नहीं कर सकते हो जब लिप्यंतरण सक्रिय हो जाता है, तो यह एक या कई इसी तरह की तलाश में पात्रों के माध्यम से अनुमानित किया जा सकता है। यदि आप अमान्य वर्ण omited किया जाएगा तो की अनदेखी करने का निर्णय लेते हैं तो स्ट्रिंग छोटा कर दिया है और, E_NOTICE उत्पन्न होता है और समारोह झूठी वापसी करेंगे।';
     $MULTILANG_TblTranslit='Translitering';
     $MULTILANG_TblIgnora='उपेक्षा कर';
+    $MULTILANG_TblAnaliza='तालिकाओं का विश्लेषण करें';
+    $MULTILANG_TblReparar='मरम्मत टेबल';
+    $MULTILANG_TblOptimizar='टेबल का अनुकूलन';
 
 	//Usuarios
 	$MULTILANG_UsrCopia='अनुमतियां पूरा कॉपी करें। नीचे की जाँच करें।';

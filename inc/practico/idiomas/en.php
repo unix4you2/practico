@@ -850,6 +850,9 @@
     $MULTILANG_TblTransliteracionHlp='If transliteration is activated when a character cant be represented in the target charset, it can be approximated through one or several similarly looking characters. If you decide to ignore then invalid characters will be omited, Otherwise the string is truncated and, E_NOTICE is generated and the function will return FALSE.';
     $MULTILANG_TblTranslit='Translitering';
     $MULTILANG_TblIgnora='Ignoring';
+    $MULTILANG_TblAnaliza='Analyze tables';
+    $MULTILANG_TblReparar='Repair tables';
+    $MULTILANG_TblOptimizar='Optimize tables';
 
 	//Usuarios
 	$MULTILANG_UsrCopia='Permissions copy completed. Please check below.';

@@ -847,6 +847,9 @@
     $MULTILANG_TblTransliteracionHlp='La transliteraci&oacute;n significa que cuando un caracter no puede ser representado en el set de caracteres final, se puede aproximar a uno o varios caracteres parecidos. Si decide ignorarlos entonces cuando el caracter no pueda ser traducido sera descartado sin generar error. De otro modo, se corta desde el primer caracter ilegal y se genera un E_NOTICE.';
     $MULTILANG_TblTranslit='Transliterando';
     $MULTILANG_TblIgnora='Ignorando';
+    $MULTILANG_TblAnaliza='Analizar tablas';
+    $MULTILANG_TblReparar='Reparar tablas';
+    $MULTILANG_TblOptimizar='Optimizar tablas';
 	
 	//Usuarios
 	$MULTILANG_UsrCopia='Copia de permisos finalizada.  Por favor verifique a continuacion.';

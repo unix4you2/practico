@@ -227,7 +227,7 @@
         include("core/monitoreo.php");
     if ($PCO_Accion=="valor_campo_tabla" || $PCO_Accion=="opciones_combo_box")
         include("core/ajax.php");
-	if ($PCO_Accion=="limpiar_temporales" || $PCO_Accion=="limpiar_backups")
+	if ($PCO_Accion=="limpiar_temporales" || $PCO_Accion=="limpiar_backups" || $PCO_Accion=="analizar_tablas_aplicacion" || $PCO_Accion=="optimizar_tablas_aplicacion" || $PCO_Accion=="reparar_tablas_aplicacion" || $PCO_Accion=="analizar_tablas_practico" || $PCO_Accion=="optimizar_tablas_practico" || $PCO_Accion=="reparar_tablas_practico")
 		include("core/mantenimiento.php");
 
 
