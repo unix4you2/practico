@@ -152,6 +152,15 @@
 				Ver tambien:
 					<actualizar_perfil_usuario> | <listar_usuarios>
 			*/
+
+			//Verifica si esta o no en modo DEMO para hacer la operacion
+			if ($PCO_ModoDEMO==1)
+				{
+					mensaje($MULTILANG_TitDemo, $MULTILANG_MsjDemo, '', 'fa fa-fw fa-2x fa-thumbs-down', 'alert alert-dismissible alert-danger');
+					echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
+					die();
+				}
+
 			$mensaje_error="";
 
 			// Verifica campos nulos
@@ -727,6 +736,15 @@ if ($PCO_Accion=="cambiar_clave")
 */
 if ($PCO_Accion=="actualizar_clave")
 	{
+
+		//Verifica si esta o no en modo DEMO para hacer la operacion
+		if ($PCO_ModoDEMO==1)
+			{
+				mensaje($MULTILANG_TitDemo, $MULTILANG_MsjDemo, '', 'fa fa-fw fa-2x fa-thumbs-down', 'alert alert-dismissible alert-danger');
+				echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
+				die();
+			}
+
 		$mensaje_error="";
 		// Verifica campos nulos
 		if ($clave1=="" || $clave2=="")

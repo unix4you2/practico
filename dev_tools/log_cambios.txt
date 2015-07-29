@@ -16,6 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 README.md
 CHANGELOG.md
+DEMO.md
 AUTHORS	
 index.php
 core/actualizacion.php
@@ -27,6 +28,8 @@ core/marco_conf.php
 core/marco_dev.php
 core/marco_export.php
 core/marco_nav.php
+core/objetos.php
+core/usuarios.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 "
@@ -51,6 +54,7 @@ LogCambios="
 * Added: La funcion para exploración de archivos tiene ahora un parámetro adicional para ocultar los botones de descarga asociados a cada elemento
 * Added: Funciones de mantenimiento en el panel de desarrollo permiten ahora limpiar los archivos temporales y de copias de seguridad.
 * Added: Funciones de mantenimiento para base de datos y tablas de aplicación y propias de Práctico sobre motores MySQL y MariaDB
+* Added: Un modo DEMO que impide el cambio de contraseñas, aplicación de parches, cambios de configuración y cambios de perfil ha sido agregado por medio del archivo DEMO en la raiz para aquellas instalaciones que se deseen con esta finalidad.
 * Fixed: Botones automaticos de formularios de filtrado aparecían sin estilo.
 * Fixed: Etiquetas de idiomas al momento de instalación.
 * Fixed: Correciones menores en archivos de idioma

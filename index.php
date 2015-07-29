@@ -56,10 +56,15 @@
             die();
     }
     else include("core/configuracion.php");
-    
+
     //Incluye idioma espanol, o sobreescribe vbles por configuracion de usuario
     include("inc/practico/idiomas/es.php");
     include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
+
+    //Determina si la plataforma se encuentra en modo DEMO
+    $PCO_ModoDEMO=0;
+    if (file_exists("DEMO"))
+		$PCO_ModoDEMO=1; echo "<script language='JavaScript'> PCO_ModoDEMO=1; </script>";
 
     //Activa errores del preprocesador en modo de depuracion (configuracion.php)
     if ($ModoDepuracion && @$PCOSESS_LoginUsuario=="admin")

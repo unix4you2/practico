@@ -104,12 +104,15 @@ Group: Modulos Principales  {
       File: Seccion marco de exportaciones  (core/marco_export.php)
       File: Seccion superior  (core/marco_navizq.php)
       File: Seccion superior  (core/marco_nav.php)
+      File: Modulo mantenimientos  (core/mantenimiento.php)
       }  # Group: Modulos
 
    Group: Inc  {
 
       File: Idioma espanol  (inc/practico/idiomas/es.php)
       File: Idioma espanol  (inc/practico/idiomas/en.php)
+      File: Idioma espanol  (inc/practico/idiomas/pt.php)
+      File: Idioma espanol  (inc/practico/idiomas/hi.php)
       File: Libreria Definicion de base de datos  (inc/practico/def_basedatos.php)
       }  # Group: Inc
 

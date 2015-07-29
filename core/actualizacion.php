@@ -54,7 +54,7 @@ if ($PCO_Accion=="actualizar_practico")
                 <br>
                 <i class="fa fa-inbox fa-2x fa-fw"></i><b> <?php echo $MULTILANG_ActUsando; ?>: <?php include("inc/version_actual.txt"); ?></b><br>
                 <hr>
-                        <form action="<?php echo $ArchivoCORE; ?>" method="post" enctype="multipart/form-data">
+                        <form name="form_carga_actualizacion" action="<?php echo $ArchivoCORE; ?>" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="extension_archivo" value=".zip">
                             <input type="hidden" name="MAX_FILE_SIZE" value="8192000">
                             <input type="Hidden" name="PCO_Accion" value="cargar_archivo">
@@ -64,7 +64,7 @@ if ($PCO_Accion=="actualizar_practico")
                             <b><?php echo $MULTILANG_ActPaquete; ?>: </b><br>
                             <input name="archivo" type="file" class="form-control btn btn-info">
                             <br>
-                            <button type="submit"  class="btn btn-success"><i class="fa fa-upload"></i> <?php echo $MULTILANG_CargarArchivo; ?></button> (<?php echo $MULTILANG_ActSobreescritos; ?>)
+                            <button OnClick="form_carga_actualizacion.submit();"  class="btn btn-success"><i class="fa fa-upload"></i> <?php echo $MULTILANG_CargarArchivo; ?></button> (<?php echo $MULTILANG_ActSobreescritos; ?>)
                         </form> 
                         <hr>
 
@@ -366,6 +366,15 @@ if ($PCO_Accion=="analizar_parche")
 */
 if ($PCO_Accion=="aplicar_parche")
 	{
+
+		//Verifica si esta o no en modo DEMO para hacer la operacion
+		if ($PCO_ModoDEMO==1)
+			{
+				mensaje($MULTILANG_TitDemo, $MULTILANG_MsjDemo, '', 'fa fa-fw fa-2x fa-thumbs-down', 'alert alert-dismissible alert-danger');
+				echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
+				die();
+			}
+
 		//Divide los queries de un cadena
 		function split_sql($sql)
 			{

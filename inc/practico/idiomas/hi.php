@@ -239,6 +239,8 @@
     $MULTILANG_EstadoPHP='PHP जानकारी';
     $MULTILANG_ArchivosLimpiados='साफ / पर्ज फ़ाइलों';
     $MULTILANG_EspacioLiberado='डिस्क स्थान मुक्त कर दिया';
+    $MULTILANG_TitDemo='समारोह उपलब्ध अनुरोध नहीं किया है';
+    $MULTILANG_MsjDemo='आप डेमो (या प्रदर्शन) मोड में एक सुविधा में हैं। इस तरह की सुविधा से आप सभी सुरक्षा नियंत्रण के साथ स्वतंत्र रूप से बातचीत करने की अनुमति नहीं है। यह आपको हमेशा मंच कोशिश करना चाहते हैं सभी उपयोगकर्ताओं के लिए उपलब्ध हो जाएगा सुनिश्चित करता है।';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='आवेदन डिजाइन';

@@ -239,6 +239,8 @@
     $MULTILANG_EstadoPHP='Informaci&oacute;n de su PHP';
     $MULTILANG_ArchivosLimpiados='Archivos Limpiados/Purgados';
     $MULTILANG_EspacioLiberado='Espacio liberado en disco';
+    $MULTILANG_TitDemo='La funcion solicitada no se encuentra disponible';
+    $MULTILANG_MsjDemo='Usted se encuentra en una instalacion en modo DEMO (o demostracion).  Este tipo de instalaciones no permiten interactuar libremente con todos los controles por seguridad.  Esto ayuda a garantizar que el acceso siempre este disponible para todos los usuarios que quieran probar la plataforma.';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';
