@@ -1021,7 +1021,7 @@ function completar_parametros($string,$data) {
 			catch( PDOException $ErrorPDO)
 				{
 					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
-					if ($PCOSESS_LoginUsuario=='admin' && $ModoDepuracion)
+					if ($PCOSESS_LoginUsuario=='admin')
 						$mensaje_final=$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.@completar_parametros($query,$parametros);
 					else
 						$mensaje_final='<b>'.$MULTILANG_Detalles.'</b>: '.$MULTILANG_ErrorSoloAdmin;
@@ -1100,7 +1100,7 @@ function completar_parametros($string,$data) {
 			catch( PDOException $ErrorPDO)
 				{
 					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
-					if ($PCOSESS_LoginUsuario=='admin' && $ModoDepuracion)
+					if ($PCOSESS_LoginUsuario=='admin')
                         echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.completar_parametros($query,$parametros).'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
 					else
 						echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$MULTILANG_ErrorSoloAdmin.'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
@@ -3089,7 +3089,8 @@ function selector_iconos_awesome()
 					if ($condicion_filtrado_listas=="") $condicion_filtrado_listas="1";
 					// Consulta los campos para el tag select
 					$resultado_opciones=ejecutar_sql("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE $condicion_filtrado_listas ORDER BY $campo_opciones");
-					while ($registro_opciones = $resultado_opciones->fetch())
+					// Muestra resultados solo si $resultado_opciones es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch()
+					while ($resultado_opciones!="1" && $registro_opciones = $resultado_opciones->fetch())
 						{
 							$opciones_lista[] = $registro_opciones["opciones"];
 							$valores_lista[] = $registro_opciones["valores"];
@@ -3741,8 +3742,6 @@ function selector_iconos_awesome()
 				// Busca datos del formulario
 				$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
 				$registro_formulario = @$consulta_formulario->fetch();
-				
-				
 
 				echo '
 				<script type="text/javascript">
@@ -4474,7 +4473,9 @@ function generar_etiquetas_consulta($ConsultaSQL="",$informe)
 			{
 				// Imprime encabezados de columna si encuentra al menos un registro
 				$resultado_columnas=@ejecutar_sql($ConsultaSQL);
-				$ConteoRegistros=$resultado_columnas->rowCount();
+				//Procesa resultados solo si es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch(), rowCount() y demas metodos
+				if ($resultado_columnas!="1")
+					$ConteoRegistros=$resultado_columnas->rowCount();
 
 				//Si se tienen registros para mirar las columnas las agrega
 				if ($ConteoRegistros>0)
@@ -4645,7 +4646,9 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					// Imprime registros del resultado
 					$numero_filas=0;
 					$consulta_ejecucion=ejecutar_sql($consulta);
-					while($registro_informe=$consulta_ejecucion->fetch())
+				
+					//Procesa resultados solo si es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch(), rowCount() y demas metodos
+					while($consulta_ejecucion!="1" && $registro_informe=$consulta_ejecucion->fetch())
 						{
 							$SalidaFinalInforme.= '<tr>';
 							for ($i=0;$i<$EtiquetasConsulta[0]["NumeroColumnas"];$i++)

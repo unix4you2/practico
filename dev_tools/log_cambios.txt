@@ -53,13 +53,15 @@ LogCambios="
 * Fixed: Botones automaticos de formularios de filtrado aparecían sin estilo.
 * Fixed: Etiquetas de idiomas al momento de instalación.
 * Fixed: Correciones menores en archivos de idioma
-* Fixed: Errores de sintaxis en listas de seleccion de formularios ahora no evitan la continuidad de ejecucion
+* Fixed: Errores de sintaxis en listas de seleccion y controles tipo radio de formularios ahora no evitan la continuidad de ejecucion cuando sus sentencias tienen problemas de ejecución en el motor
+* Fixed: Errores de sintaxis SQL en informes ahora no evitan la continuidad de ejecucion cuando sus sentencias tienen problemas de ejecución en el motor
 * Enhan: La función de exploración de archivos hace uso de una función extra para retorno de los valores, lo que permite usar sus resultados con otros fines como backups, etc.
 * Enhan: Reducción de código y optimización a funciones de exportación
 * Enhan: Adición de iconos a opciones de exportación
 * Enhan: Reescritura de panel de desarrollo para permitir futuras adiciones.
 * Enhan: La funcion para exploración de archivos usada por el módulo de actualización se mueve a un punto donde pueda ser utilizada por cualquier módulo
 * Enhan: Funcion de exploracion de archivos presenta sumar la cantidad en KBytes de los archivos
+* Enhan: Ahora las consultas y funciones SQL presentan siempre el mensaje con los detalles del error al usuario admin, aún cuando el modo de depueración se encuentre apagado.
 
 "
 
