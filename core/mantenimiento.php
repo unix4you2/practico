@@ -89,16 +89,23 @@ if ($PCO_Accion=="limpiar_temporales")
 	}
 
 
+
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: analizar_tablas_aplicacion
-	Analiza el estado de las tablas de aplicacion.  Aplica solo MySQL y MariaDB
+	Function: mantenimiento_tablas
+	
+	Ejecuta operaciones de mantenimiento a las tablas del motor.  Aplica solo MySQL y MariaDB
+	
+	Variables de entrada:
+
+		PCO_PrefijoTablas - Prefijo utilizado para identificar las tablas a realizar el mantenimiento.  Hacer llegar un nombre completo de tabla equivale a realizar el mantenimiento a una tabla especifica a menos que esta coincida con otra tabla de nombre mas largo.
+		PCO_TipoOperacion - Tipo de operacion a realizar:  ANALYZE|OPTIMIZE|REPAIR
 */
-if ($PCO_Accion=="analizar_tablas_aplicacion")
+if ($PCO_Accion=="mantenimiento_tablas")
 	{
-		//Busca las tablas de aplicacion
-        $resultado_conteos_tablas=consultar_tablas($TablasApp);
+		//Busca las tablas son el prefijo especificado
+        $resultado_conteos_tablas=consultar_tablas($PCO_PrefijoTablas);
 		//Inicia la tabla de resultados
 		echo '
 			<table class="table table-responsive table-unbordered table-hover table-condensed btn-xs">
@@ -116,9 +123,9 @@ if ($PCO_Accion=="analizar_tablas_aplicacion")
 			{
 				$nombre_tabla=@$registro_conteos_tablas[0];
 				//Si la tabla es de aplicacion hace la operacion
-				if (@strpos($nombre_tabla,$TablasApp)!==FALSE)
+				if (@strpos($nombre_tabla,$PCO_PrefijoTablas)!==FALSE)
 					{
-						$registro_conteos_tablas=ejecutar_sql("ANALYZE TABLE ".$nombre_tabla."")->fetch();
+						$registro_conteos_tablas=ejecutar_sql("$PCO_TipoOperacion TABLE $nombre_tabla")->fetch();
 						echo '
 							<tr>
 								<td>'.$registro_conteos_tablas[0].'</td>
@@ -136,245 +143,3 @@ if ($PCO_Accion=="analizar_tablas_aplicacion")
 		cerrar_barra_estado();
 	}
 
-
-/* ################################################################## */
-/* ################################################################## */
-/*
-	Function: optimizar_tablas_aplicacion
-	Optimiza el estado de las tablas de aplicacion.  Aplica solo MySQL y MariaDB
-*/
-if ($PCO_Accion=="optimizar_tablas_aplicacion")
-	{
-		//Busca las tablas de aplicacion
-        $resultado_conteos_tablas=consultar_tablas($TablasApp);
-		//Inicia la tabla de resultados
-		echo '
-			<table class="table table-responsive table-unbordered table-hover table-condensed btn-xs">
-				<thead>
-					<tr>
-						<th>'.$MULTILANG_Tablas.'</th>
-						<th>'.$MULTILANG_Accion.'</th>
-						<th>'.$MULTILANG_Detalles.'</th>
-						<th>'.$MULTILANG_Resultados.'</th>
-					</tr>
-				</thead>
-				<tbody>';
-		//Recorre las tablas y presenta resultados de la operacion con cada una
-		while ($registro_conteos_tablas = $resultado_conteos_tablas->fetch())
-			{
-				$nombre_tabla=@$registro_conteos_tablas[0];
-				//Si la tabla es de aplicacion hace la operacion
-				if (@strpos($nombre_tabla,$TablasApp)!==FALSE)
-					{
-						$registro_conteos_tablas=ejecutar_sql("OPTIMIZE TABLE ".$nombre_tabla."")->fetch();
-						echo '
-							<tr>
-								<td>'.$registro_conteos_tablas[0].'</td>
-								<td>'.$registro_conteos_tablas[1].'</td>
-								<td>'.$registro_conteos_tablas[2].'</td>
-								<td>'.$registro_conteos_tablas[3].'</td>
-							</tr>';
-					}
-			}
-        //Finaliza tabla de resultados
-		echo '</tbody>
-			</table>';
-		abrir_barra_estado();
-		echo '<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
-		cerrar_barra_estado();
-	}
-
-
-
-/* ################################################################## */
-/* ################################################################## */
-/*
-	Function: reparar_tablas_aplicacion
-	Repara el estado de las tablas de aplicacion.  Aplica solo MySQL y MariaDB
-*/
-if ($PCO_Accion=="reparar_tablas_aplicacion")
-	{
-		//Busca las tablas de aplicacion
-        $resultado_conteos_tablas=consultar_tablas($TablasApp);
-		//Inicia la tabla de resultados
-		echo '
-			<table class="table table-responsive table-unbordered table-hover table-condensed btn-xs">
-				<thead>
-					<tr>
-						<th>'.$MULTILANG_Tablas.'</th>
-						<th>'.$MULTILANG_Accion.'</th>
-						<th>'.$MULTILANG_Detalles.'</th>
-						<th>'.$MULTILANG_Resultados.'</th>
-					</tr>
-				</thead>
-				<tbody>';
-		//Recorre las tablas y presenta resultados de la operacion con cada una
-		while ($registro_conteos_tablas = $resultado_conteos_tablas->fetch())
-			{
-				$nombre_tabla=@$registro_conteos_tablas[0];
-				//Si la tabla es de aplicacion hace la operacion
-				if (@strpos($nombre_tabla,$TablasApp)!==FALSE)
-					{
-						$registro_conteos_tablas=ejecutar_sql("REPAIR TABLE ".$nombre_tabla."")->fetch();
-						echo '
-							<tr>
-								<td>'.$registro_conteos_tablas[0].'</td>
-								<td>'.$registro_conteos_tablas[1].'</td>
-								<td>'.$registro_conteos_tablas[2].'</td>
-								<td>'.$registro_conteos_tablas[3].'</td>
-							</tr>';
-					}
-			}
-        //Finaliza tabla de resultados
-		echo '</tbody>
-			</table>';
-		abrir_barra_estado();
-		echo '<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
-		cerrar_barra_estado();
-	}
-
-
-
-/* ################################################################## */
-/* ################################################################## */
-/*
-	Function: analizar_tablas_practico
-	Analiza el estado de las tablas de aplicacion.  Aplica solo MySQL y MariaDB
-*/
-if ($PCO_Accion=="analizar_tablas_practico")
-	{
-		//Busca las tablas de aplicacion
-        $resultado_conteos_tablas=consultar_tablas($TablasCore);
-		//Inicia la tabla de resultados
-		echo '
-			<table class="table table-responsive table-unbordered table-hover table-condensed btn-xs">
-				<thead>
-					<tr>
-						<th>'.$MULTILANG_Tablas.'</th>
-						<th>'.$MULTILANG_Accion.'</th>
-						<th>'.$MULTILANG_Detalles.'</th>
-						<th>'.$MULTILANG_Resultados.'</th>
-					</tr>
-				</thead>
-				<tbody>';
-		//Recorre las tablas y presenta resultados de la operacion con cada una
-		while ($registro_conteos_tablas = $resultado_conteos_tablas->fetch())
-			{
-				$nombre_tabla=@$registro_conteos_tablas[0];
-				//Si la tabla es de aplicacion hace la operacion
-				if (@strpos($nombre_tabla,$TablasCore)!==FALSE)
-					{
-						$registro_conteos_tablas=ejecutar_sql("ANALYZE TABLE ".$nombre_tabla."")->fetch();
-						echo '
-							<tr>
-								<td>'.$registro_conteos_tablas[0].'</td>
-								<td>'.$registro_conteos_tablas[1].'</td>
-								<td>'.$registro_conteos_tablas[2].'</td>
-								<td>'.$registro_conteos_tablas[3].'</td>
-							</tr>';
-					}
-			}
-        //Finaliza tabla de resultados
-		echo '</tbody>
-			</table>';
-		abrir_barra_estado();
-		echo '<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
-		cerrar_barra_estado();
-	}
-
-
-/* ################################################################## */
-/* ################################################################## */
-/*
-	Function: optimizar_tablas_practico
-	Optimiza el estado de las tablas de Practico.  Aplica solo MySQL y MariaDB
-*/
-if ($PCO_Accion=="optimizar_tablas_practico")
-	{
-		//Busca las tablas de aplicacion
-        $resultado_conteos_tablas=consultar_tablas($TablasCore);
-		//Inicia la tabla de resultados
-		echo '
-			<table class="table table-responsive table-unbordered table-hover table-condensed btn-xs">
-				<thead>
-					<tr>
-						<th>'.$MULTILANG_Tablas.'</th>
-						<th>'.$MULTILANG_Accion.'</th>
-						<th>'.$MULTILANG_Detalles.'</th>
-						<th>'.$MULTILANG_Resultados.'</th>
-					</tr>
-				</thead>
-				<tbody>';
-		//Recorre las tablas y presenta resultados de la operacion con cada una
-		while ($registro_conteos_tablas = $resultado_conteos_tablas->fetch())
-			{
-				$nombre_tabla=@$registro_conteos_tablas[0];
-				//Si la tabla es de aplicacion hace la operacion
-				if (@strpos($nombre_tabla,$TablasCore)!==FALSE)
-					{
-						$registro_conteos_tablas=ejecutar_sql("OPTIMIZE TABLE ".$nombre_tabla."")->fetch();
-						echo '
-							<tr>
-								<td>'.$registro_conteos_tablas[0].'</td>
-								<td>'.$registro_conteos_tablas[1].'</td>
-								<td>'.$registro_conteos_tablas[2].'</td>
-								<td>'.$registro_conteos_tablas[3].'</td>
-							</tr>';
-					}
-			}
-        //Finaliza tabla de resultados
-		echo '</tbody>
-			</table>';
-		abrir_barra_estado();
-		echo '<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
-		cerrar_barra_estado();
-	}
-
-
-
-/* ################################################################## */
-/* ################################################################## */
-/*
-	Function: reparar_tablas_practico
-	Repara el estado de las tablas de Practico.  Aplica solo MySQL y MariaDB
-*/
-if ($PCO_Accion=="reparar_tablas_practico")
-	{
-		//Busca las tablas de aplicacion
-        $resultado_conteos_tablas=consultar_tablas($TablasCore);
-		//Inicia la tabla de resultados
-		echo '
-			<table class="table table-responsive table-unbordered table-hover table-condensed btn-xs">
-				<thead>
-					<tr>
-						<th>'.$MULTILANG_Tablas.'</th>
-						<th>'.$MULTILANG_Accion.'</th>
-						<th>'.$MULTILANG_Detalles.'</th>
-						<th>'.$MULTILANG_Resultados.'</th>
-					</tr>
-				</thead>
-				<tbody>';
-		//Recorre las tablas y presenta resultados de la operacion con cada una
-		while ($registro_conteos_tablas = $resultado_conteos_tablas->fetch())
-			{
-				$nombre_tabla=@$registro_conteos_tablas[0];
-				//Si la tabla es de aplicacion hace la operacion
-				if (@strpos($nombre_tabla,$TablasCore)!==FALSE)
-					{
-						$registro_conteos_tablas=ejecutar_sql("REPAIR TABLE ".$nombre_tabla."")->fetch();
-						echo '
-							<tr>
-								<td>'.$registro_conteos_tablas[0].'</td>
-								<td>'.$registro_conteos_tablas[1].'</td>
-								<td>'.$registro_conteos_tablas[2].'</td>
-								<td>'.$registro_conteos_tablas[3].'</td>
-							</tr>';
-					}
-			}
-        //Finaliza tabla de resultados
-		echo '</tbody>
-			</table>';
-		abrir_barra_estado();
-		echo '<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
-		cerrar_barra_estado();
-	}
