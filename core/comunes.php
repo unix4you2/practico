@@ -3936,8 +3936,8 @@ function selector_iconos_awesome()
                                                                             
                                                                             //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
                                                                             //padre el valor del campo foraneo del form hijo para llamar a buscar form con
-                                                                            //el valor de Id correspondiente
-                                                                            if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario)
+                                                                            //el valor de Id correspondiente. Ademas valida si el form existe
+                                                                            if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario && existe_valor($TablasCore."formulario","id",$registro_campos["formulario_vinculado"]))
                                                                                 {
                                                                                     //Busca la tabla principal del subformulario anidado
                                                                                     $PCO_ValorCampoBind=$registro_campos["formulario_vinculado"];
@@ -3960,6 +3960,12 @@ function selector_iconos_awesome()
 
                                                                                     @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorCampoPadre,1);
                                                                                 }
+                                                                            else
+																				{
+																					//Presenta mensaje de error al no poder empotrar subformulario
+																					if($tipo_de_objeto=="form_consulta")
+																						mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste.'.  FormID: '.$registro_campos["formulario_vinculado"], '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');																				
+																				}
 
                                                                             //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
                                                                             if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
@@ -4010,8 +4016,8 @@ function selector_iconos_awesome()
                                                         //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
                                                         //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
                                                         //padre el valor del campo foraneo del form hijo para llamar a buscar form con
-                                                        //el valor de Id correspondiente
-                                                        if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario)
+                                                        //el valor de Id correspondiente. Ademas valida si el form existe
+                                                        if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario && existe_valor($TablasCore."formulario","id",$registro_campos["formulario_vinculado"]))
                                                             {
                                                                 //Busca la tabla principal del subformulario anidado
                                                                 $PCO_ValorCampoBind=$registro_campos["formulario_vinculado"];
@@ -4034,6 +4040,12 @@ function selector_iconos_awesome()
 
                                                                 @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorCampoPadre,1);
                                                             }
+														else
+															{
+																//Presenta mensaje de error al no poder empotrar subformulario
+																if($tipo_de_objeto=="form_consulta")
+																	mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste.'.  FormID: '.$registro_campos["formulario_vinculado"], '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');																				
+															}
 
                                                         //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
                                                         if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
