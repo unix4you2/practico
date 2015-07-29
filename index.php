@@ -45,7 +45,7 @@
     
     //Permite WebServices propios mediante el acceso a este script en solicitudes Cross-Domain
     header('Access-Control-Allow-Origin: *');
-	header ('Content-type: text/html; charset=utf-8');
+	header('Content-type: text/html; charset=utf-8');
     
     // Inicio de la sesion
     @session_start();
@@ -249,6 +249,7 @@
         }
     }
 
+/* ################################################################## */
     // Finaliza el contenido central y presenta el pie de pagina de aplicacion
     // siempre y cuando no se esta en fullscreen.  Si la precarga esta activa tambien lo incluye
     if (@$Presentar_FullScreen!=1 || @$Precarga_EstilosBS==1)
