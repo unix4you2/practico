@@ -171,6 +171,7 @@
 	$MULTILANG_TipoMotor='Tipo de motor';
 	$MULTILANG_Titulo='T&iacute;tulo';
 	$MULTILANG_TotalRegistros='Total de registros gravados';
+	$MULTILANG_Truncar='Truncar';
 	$MULTILANG_Ultimo='Ultimo';
     $MULTILANG_Usuario='Do Utilizador';
 	$MULTILANG_Vacio='Vazio';

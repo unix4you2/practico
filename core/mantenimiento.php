@@ -100,12 +100,11 @@ if ($PCO_Accion=="limpiar_temporales")
 	Variables de entrada:
 
 		PCO_PrefijoTablas - Prefijo utilizado para identificar las tablas a realizar el mantenimiento.  Hacer llegar un nombre completo de tabla equivale a realizar el mantenimiento a una tabla especifica a menos que esta coincida con otra tabla de nombre mas largo.
-		PCO_TipoOperacion - Tipo de operacion a realizar:  ANALYZE|OPTIMIZE|REPAIR
+		PCO_TipoOperacion - Tipo de operacion a realizar:  ANALYZE|OPTIMIZE|REPAIR|TRUNCATE|DELETE
 */
 if ($PCO_Accion=="mantenimiento_tablas")
 	{
-		//Busca las tablas son el prefijo especificado
-        $resultado_conteos_tablas=consultar_tablas($PCO_PrefijoTablas);
+		
 		//Inicia la tabla de resultados
 		echo '
 			<table class="table table-responsive table-unbordered table-hover table-condensed btn-xs">
@@ -118,23 +117,42 @@ if ($PCO_Accion=="mantenimiento_tablas")
 					</tr>
 				</thead>
 				<tbody>';
-		//Recorre las tablas y presenta resultados de la operacion con cada una
-		while ($registro_conteos_tablas = $resultado_conteos_tablas->fetch())
+
+		//Si la operacion es de mantenimientos
+		if ($PCO_TipoOperacion=="ANALYZE" || $PCO_TipoOperacion=="OPTIMIZE" || $PCO_TipoOperacion=="REPAIR")
 			{
-				$nombre_tabla=@$registro_conteos_tablas[0];
-				//Si la tabla es de aplicacion hace la operacion
-				if (@strpos($nombre_tabla,$PCO_PrefijoTablas)!==FALSE)
+				//Busca las tablas son el prefijo especificado
+				$resultado_conteos_tablas=consultar_tablas($PCO_PrefijoTablas);
+				//Recorre las tablas y presenta resultados de la operacion con cada una
+				while ($registro_conteos_tablas = $resultado_conteos_tablas->fetch())
 					{
-						$registro_conteos_tablas=ejecutar_sql("$PCO_TipoOperacion TABLE $nombre_tabla")->fetch();
-						echo '
-							<tr>
-								<td>'.$registro_conteos_tablas[0].'</td>
-								<td>'.$registro_conteos_tablas[1].'</td>
-								<td>'.$registro_conteos_tablas[2].'</td>
-								<td>'.$registro_conteos_tablas[3].'</td>
-							</tr>';
+						$nombre_tabla=@$registro_conteos_tablas[0];
+						//Si la tabla es de aplicacion hace la operacion
+						if (@strpos($nombre_tabla,$PCO_PrefijoTablas)!==FALSE)
+							{
+								$registro_conteos_tablas=ejecutar_sql("$PCO_TipoOperacion TABLE $nombre_tabla")->fetch();
+								echo '
+									<tr>
+										<td>'.$registro_conteos_tablas[0].'</td>
+										<td>'.$registro_conteos_tablas[1].'</td>
+										<td>'.$registro_conteos_tablas[2].'</td>
+										<td>'.$registro_conteos_tablas[3].'</td>
+									</tr>';
+							}
 					}
 			}
+
+		if ($PCO_TipoOperacion=="TRUNCATE")
+			$resultado_consulta=ejecutar_sql("TRUNCATE TABLE $PCO_PrefijoTablas");
+
+		if ($PCO_TipoOperacion=="DELETE")
+			$resultado_consulta=ejecutar_sql("DELETE FROM $PCO_PrefijoTablas");
+
+		echo '
+			<tr>
+				<td colspan=4><h4><b>'.$PCO_TipoOperacion.'</b> '.$PCO_PrefijoTablas.': <b>'.$MULTILANG_Finalizado.' <i class="fa fa-thumbs-o-up fa-fw"></i></b></h4></td>
+			</tr>';
+				
         //Finaliza tabla de resultados
 		echo '</tbody>
 			</table>';

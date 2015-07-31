@@ -935,6 +935,7 @@ if ($PCO_Accion=="importar_tabla")
                             <th><b><?php echo $MULTILANG_Nombre; ?></b></th>
                             <th><b><?php echo $MULTILANG_TblRegistros; ?></b></th>
                             <th><?php echo $MULTILANG_Tareas; ?></th>
+                            <th class="warning"><?php echo $MULTILANG_DefMantenimientos; ?></th>
                             <th class="danger"><?php echo $MULTILANG_ZonaPeligro; ?></th>
                         </tr>
                     </thead>
@@ -993,14 +994,8 @@ if ($PCO_Accion=="importar_tabla")
 						echo '</td>';
 
 
-						//ZONA DE PELIGRO
-						echo '<td class="danger">';
-								echo '<form action="'.$ArchivoCORE.'" method="POST" name="vacdco'.$registro["0"].'" id="vacdco'.$registro["0"].'" style="display:inline;">
-										<input type="hidden" name="PCO_Accion" value="vaciar_tabla">
-										<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
-										<a class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_TblVaciar.'" href="javascript:confirmar_evento(\''.$MULTILANG_TblVaciarAdv.'\',vacdco'.$registro["0"].');"><i class="fa fa-trash-o fa-fw"></i></a>
-									</form>';
-
+						//ZONA MANTENIMIENTO
+						echo '<td class="warning">';
 								echo '<form style="display:inline;">
 										<a class="btn btn-info btn-xs"  data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_TblAnaliza.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=ANALYZE&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-eye fa-fw"></i></a>
 									</form>';
@@ -1008,11 +1003,19 @@ if ($PCO_Accion=="importar_tabla")
 										<a class="btn btn-primary btn-xs"  data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_TblOptimizar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=OPTIMIZE&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-line-chart fa-fw"></i></a>
 									</form>';
 								echo '<form style="display:inline;">
-										<a class="btn btn-danger btn-xs"  data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_TblReparar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=REPAIR&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-wrench fa-fw"></i></a>
+										<a class="btn btn-default btn-xs"  data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_TblReparar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=REPAIR&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-wrench fa-fw"></i></a>
 									</form>';
+						echo '</td>';
 
-						echo '
-								</td>';
+						//ZONA DE PELIGRO
+						echo '<td class="danger">';
+								echo '<form style="display:inline;">
+										<a class="btn btn-danger btn-xs"  data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Truncar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=TRUNCATE&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-eraser fa-fw"></i></a>
+									</form>';
+								echo '<form style="display:inline;">
+										<a class="btn btn-danger btn-xs"  data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_TblVaciar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=DELETE&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-trash-o fa-fw"></i></a>
+									</form>';
+						echo '</td>';
 
 
 						echo '	</tr>';

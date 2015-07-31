@@ -171,6 +171,7 @@
 	$MULTILANG_TipoMotor='इंजन के प्रकार';
 	$MULTILANG_Titulo='शीर्षक';
 	$MULTILANG_TotalRegistros='कुल अभिलेख पाया';
+	$MULTILANG_Truncar='छोटा कर';
 	$MULTILANG_Ultimo='अंतिम';
     $MULTILANG_Usuario='उपयोगकर्ता';
 	$MULTILANG_Vacio='खाली';
