@@ -61,6 +61,7 @@ LogCambios="
 * Fixed: Errores de sintaxis en listas de seleccion y controles tipo radio de formularios ahora no evitan la continuidad de ejecucion cuando sus sentencias tienen problemas de ejecución en el motor
 * Fixed: Errores de sintaxis SQL en informes ahora no evitan la continuidad de ejecucion cuando sus sentencias tienen problemas de ejecución en el motor
 * Fixed: Se evitan errores que detienen ejecucion de la herramienta cuando se empotran subformularios inexistentes o que han sido eliminados
+* Fixed: [Tester: Jaime Berrio] El modo DEMO inhabilita los login al ingresar el usuario al modo webservices y devolver un XML mal formado
 * Enhan: La función de exploración de archivos hace uso de una función extra para retorno de los valores, lo que permite usar sus resultados con otros fines como backups, etc.
 * Enhan: Reducción de código y optimización a funciones de exportación
 * Enhan: Adición de iconos a opciones de exportación

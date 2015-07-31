@@ -1,4 +1,4 @@
-========================================================================
+/*========================================================================
         ARCHIVO PARA ACTIVAR/DESACTIVAR EL MODO DEMO DE PRACTICO
 ========================================================================
 
@@ -19,3 +19,4 @@
 ## COMO DESACTIVAR:
 * Forma 1: Renombre el archivo DEMO a su nombre original DEMO.md
 * Forma 2: Elimine cualquier archivo llamado DEMO en su carpeta raiz
+*/
