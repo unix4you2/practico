@@ -165,6 +165,7 @@
 	$MULTILANG_Suspender='निलंबित';
 	$MULTILANG_Tablas='टेबल्स';
 	$MULTILANG_TablaDatos='डेटा तालिका';
+	$MULTILANG_Tareas='कार्य';
 	$MULTILANG_TiempoCarga='लोड होने का समय';
 	$MULTILANG_Tipo='टाइप';
 	$MULTILANG_TipoMotor='इंजन के प्रकार';
@@ -177,6 +178,7 @@
 	$MULTILANG_Version='संस्करण';
 	$MULTILANG_Vertical='चित्र';
 	$MULTILANG_ZonaHoraria='समय क्षेत्र';
+	$MULTILANG_ZonaPeligro='खतरनाक क्षेत्र';
 	$MULTILANG_VistaImpresion='मुद्रक देखें';
 	$MULTILANG_IDGABeacon='गूगल विश्लेषिकी आईडी';
 	$MULTILANG_AyudaGABeacon='जो लोग चाहते हैं डेवलपर्स यहां अपने Google Analytics कक्ष से अद्वितीय पहचान डाल सकता है गूगल विश्लेषिकी का उपयोग कर अपने सॉफ्टवेयर के बारे में एक पूर्ण प्रवेश या वास्तविक समय आँकड़े है। Practico वास्तविक समय में सभी आंकड़े तू अपने Analytics पैनल भेज देंगे।';
@@ -855,6 +857,8 @@
     $MULTILANG_TblAnaliza='तालिकाओं का विश्लेषण करें';
     $MULTILANG_TblReparar='मरम्मत टेबल';
     $MULTILANG_TblOptimizar='टेबल का अनुकूलन';
+    $MULTILANG_TblVaciar='खाली';
+    $MULTILANG_TblVaciarAdv='इस क्रिया को इस तालिका में सभी रिकॉर्ड को हटाना होगा, तो आप यकीन कर रहे हैं?';
 
 	//Usuarios
 	$MULTILANG_UsrCopia='अनुमतियां पूरा कॉपी करें। नीचे की जाँच करें।';

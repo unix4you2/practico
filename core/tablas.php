@@ -929,14 +929,13 @@ if ($PCO_Accion=="importar_tabla")
 			<hr>
 
 		<h3><?php echo $MULTILANG_TblTablasBD; ?></h3>
-				<table class="table table-hover table-condensed btn-xs table-striped" >
+				<table class="table table-hover table-condensed btn-xs table-striped table-responsive" >
                     <thead>
                         <tr>
                             <th><b><?php echo $MULTILANG_Nombre; ?></b></th>
                             <th><b><?php echo $MULTILANG_TblRegistros; ?></b></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <th><?php echo $MULTILANG_Tareas; ?></th>
+                            <th class="danger"><?php echo $MULTILANG_ZonaPeligro; ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -958,36 +957,65 @@ if ($PCO_Accion=="importar_tabla")
 
 						echo '<tr>
 								<td><font color=gray>'.$PrefijoRegistro.'</font><b><font size=2>'.str_replace($PrefijoRegistro,'',$registro[0]).'</font></b></td>
-								<td>'.$total_registros.'</td>
-								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST" name="dco'.$registro["0"].'" id="dco'.$registro["0"].'">
-												<input type="hidden" name="PCO_Accion" value="definir_copia_tablas">
-												<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
-                                                <a class="btn btn-default btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["0"].');"><i class="fa fa-code-fork"></i> '.$MULTILANG_FrmCopiar.'</a>
-										</form>
-								</td>
-								<td align="center">';
+								<td>'.$total_registros.'</td>';
+						echo '<td>';
+						
+								//Boton de copiar tabla
+								echo '<form action="'.$ArchivoCORE.'" method="POST" name="dco'.$registro["0"].'" id="dco'.$registro["0"].'" style="display:inline;">
+										<input type="hidden" name="PCO_Accion" value="definir_copia_tablas">
+										<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
+										<a class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_FrmCopiar.'" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["0"].');"><i class="fa fa-code-fork fa-fw"></i></a>
+									</form>';
 
-					if ($PrefijoRegistro!=$TablasCore && $total_registros==0)							
-						echo '
-										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["0"].'" id="f'.$registro["0"].'">
-												<input type="hidden" name="PCO_Accion" value="eliminar_tabla">
-												<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
-                                                <a href="#" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelTabla.'\',f'.$registro["0"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
+								//Determina si activar o no el boton de eliminar
+								if ($PrefijoRegistro!=$TablasCore && $total_registros==0)							
+									echo '<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["0"].'" id="f'.$registro["0"].'" style="display:inline;">
+											<input type="hidden" name="PCO_Accion" value="eliminar_tabla">
+											<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
+											<a href="#" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelTabla.'\',f'.$registro["0"].');"><i class="fa fa-times fa-fw"></i></a>
 										</form>';
-						echo '
-								</td>
-								<td align="center">';
-					if ($PrefijoRegistro!=$TablasCore)
-						echo '
-										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="PCO_Accion" value="editar_tabla">
-												<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
-                                                <button type="submit" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i> '.$MULTILANG_Editar.'</button>
+								else
+									echo '<form style="display:inline;">
+												<a href="#" class="btn btn-danger btn-xs" disabled="disabled"><i class="fa fa-times fa-fw"></i></a>
+											</form>';						
+								
+								//Determina si activa o no el boton de editar
+								if ($PrefijoRegistro!=$TablasCore)
+									echo '<form action="'.$ArchivoCORE.'" method="POST" style="display:inline;">
+											<input type="hidden" name="PCO_Accion" value="editar_tabla">
+											<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
+											<button type="submit" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o fa-fw"></i></button>
 										</form>';
+								else
+									echo '<form style="display:inline;">
+											<button type="submit" class="btn btn-warning btn-xs" disabled="disabled"><i class="fa fa-pencil-square-o fa-fw"></i></button>
+										</form>';
+						echo '</td>';
+
+
+						//ZONA DE PELIGRO
+						echo '<td class="danger">';
+								echo '<form action="'.$ArchivoCORE.'" method="POST" name="vacdco'.$registro["0"].'" id="vacdco'.$registro["0"].'" style="display:inline;">
+										<input type="hidden" name="PCO_Accion" value="vaciar_tabla">
+										<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
+										<a class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_TblVaciar.'" href="javascript:confirmar_evento(\''.$MULTILANG_TblVaciarAdv.'\',vacdco'.$registro["0"].');"><i class="fa fa-trash-o fa-fw"></i></a>
+									</form>';
+
+								echo '<form style="display:inline;">
+										<a class="btn btn-info btn-xs"  data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_TblAnaliza.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=ANALYZE&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-eye fa-fw"></i></a>
+									</form>';
+								echo '<form style="display:inline;">
+										<a class="btn btn-primary btn-xs"  data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_TblOptimizar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=OPTIMIZE&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-line-chart fa-fw"></i></a>
+									</form>';
+								echo '<form style="display:inline;">
+										<a class="btn btn-danger btn-xs"  data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_TblReparar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=REPAIR&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-wrench fa-fw"></i></a>
+									</form>';
+
 						echo '
-								</td>
-							</tr>';
+								</td>';
+
+
+						echo '	</tr>';
 				}
 				echo '</tbody>
                     </table>';	

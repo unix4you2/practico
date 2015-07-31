@@ -165,6 +165,7 @@
 	$MULTILANG_Suspender='Suspend';
 	$MULTILANG_Tablas='Tables';
 	$MULTILANG_TablaDatos='Data table';
+	$MULTILANG_Tareas='Tasks';
 	$MULTILANG_TiempoCarga='Load time';
 	$MULTILANG_Tipo='Type';
 	$MULTILANG_TipoMotor='Engine type';
@@ -177,6 +178,7 @@
 	$MULTILANG_Version='Version';
 	$MULTILANG_Vertical='Portrait';
 	$MULTILANG_ZonaHoraria='Time zone';
+	$MULTILANG_ZonaPeligro='Danger zone';
 	$MULTILANG_VistaImpresion='Printer view';
 	$MULTILANG_IDGABeacon='Google Analytics ID';
 	$MULTILANG_AyudaGABeacon='Those developers who want to have a full log or real time statistics about their software using Google Analytics can put here the unique ID from their Google Analytics Panel.  Practico will send all statistics tu your Analytics Panel in real time.';
@@ -855,6 +857,8 @@
     $MULTILANG_TblAnaliza='Analyze tables';
     $MULTILANG_TblReparar='Repair tables';
     $MULTILANG_TblOptimizar='Optimize tables';
+    $MULTILANG_TblVaciar='Empty';
+    $MULTILANG_TblVaciarAdv='This action will delete all records in this table, are you sure?';
 
 	//Usuarios
 	$MULTILANG_UsrCopia='Permissions copy completed. Please check below.';

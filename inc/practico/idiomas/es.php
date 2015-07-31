@@ -165,6 +165,7 @@
 	$MULTILANG_Suspender='Suspender';
 	$MULTILANG_Tablas='Tablas';
 	$MULTILANG_TablaDatos='Tabla de datos';
+	$MULTILANG_Tareas='Tareas';
 	$MULTILANG_TiempoCarga='Tiempo de carga';
 	$MULTILANG_Tipo='Tipo';
 	$MULTILANG_TipoMotor='Tipo de motor';
@@ -177,6 +178,7 @@
 	$MULTILANG_Version='Versi&oacute;n';
 	$MULTILANG_Vertical='Vertical';
 	$MULTILANG_ZonaHoraria='Zona horaria';
+	$MULTILANG_ZonaPeligro='Zona de peligro';
 	$MULTILANG_VistaImpresion='Vista de impresion';
 	$MULTILANG_IDGABeacon='ID Google Analytics';
 	$MULTILANG_AyudaGABeacon='Aquellos desarrolladores que deseen tener un seguimiento historico detallado o incluso en tiempo real del uso de su herramienta a traves de Google Analytics pueden diligenciar aqui el ID obtenido en su panel de Google.  Practico reportara todo movimiento a su panel de Analytics';
@@ -852,7 +854,9 @@
     $MULTILANG_TblAnaliza='Analizar tablas';
     $MULTILANG_TblReparar='Reparar tablas';
     $MULTILANG_TblOptimizar='Optimizar tablas';
-	
+    $MULTILANG_TblVaciar='Vaciar';
+    $MULTILANG_TblVaciarAdv='Esta operacion eliminara todos los registros de la tabla, esta seguro?';
+
 	//Usuarios
 	$MULTILANG_UsrCopia='Copia de permisos finalizada.  Por favor verifique a continuacion.';
 	$MULTILANG_UsrDesPW='Las contrase&ntilde;as con condiciones m&iacute;nimas de seguridad deben tener una longitud de <b>al menos 8 caracteres</b>, n&uacute;meros, letras en may&uacute;scula y en min&uacute;scula o s&iacute;mbolos permitidos como <font color=blue>$ *</font>.  Para que su contrase&ntilde;a sea considerada segura por este sistema <b>debe cumplir al menos con un nivel de seguridad del 81%</b>';

@@ -165,6 +165,7 @@
 	$MULTILANG_Suspender='Suspender';
 	$MULTILANG_Tablas='Tabelas';
 	$MULTILANG_TablaDatos='Tabela de dados';
+	$MULTILANG_Tareas='Tarefas';
 	$MULTILANG_TiempoCarga='O tempo de carregamento';
 	$MULTILANG_Tipo='Tipo';
 	$MULTILANG_TipoMotor='Tipo de motor';
@@ -177,6 +178,7 @@
 	$MULTILANG_Version='Versão';
 	$MULTILANG_Vertical='Retrato';
 	$MULTILANG_ZonaHoraria='Fuso hor&aacute;rio';
+	$MULTILANG_ZonaPeligro='Zona de perigo';
 	$MULTILANG_VistaImpresion='Vista Printer';
 	$MULTILANG_IDGABeacon='Google Analytics ID';
 	$MULTILANG_AyudaGABeacon='Os desenvolvedores que querem ter um registro completo ou estat&iacute;sticas em tempo real sobre o seu software usando o Google Analytics pode colocar aqui a identificação única do seu Painel do Google Analytics. Practico ir&aacute; enviar todas as estat&iacute;sticas de tu seu Painel de Analytics em tempo real';
@@ -855,6 +857,8 @@
     $MULTILANG_TblAnaliza='Analisar tabelas';
     $MULTILANG_TblReparar='Reparação tabelas';
     $MULTILANG_TblOptimizar='Otimizar tabelas';
+    $MULTILANG_TblVaciar='Vazio';
+    $MULTILANG_TblVaciarAdv='Esta ação ir&aacute; excluir todos os registros nesta tabela, você tem certeza?';
 
 	//Usuarios
 	$MULTILANG_UsrCopia='Permissões de cópia concluída. Por favor, verifique abaixo.';

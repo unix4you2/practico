@@ -29,6 +29,7 @@ core/marco_dev.php
 core/marco_export.php
 core/marco_nav.php
 core/objetos.php
+core/tablas.php
 core/usuarios.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
@@ -55,6 +56,7 @@ LogCambios="
 * Added: Funciones de mantenimiento en el panel de desarrollo permiten ahora limpiar los archivos temporales y de copias de seguridad.
 * Added: Funciones de mantenimiento para base de datos y tablas de aplicación y propias de Práctico sobre motores MySQL y MariaDB
 * Added: Un modo DEMO que impide el cambio de contraseñas, aplicación de parches, cambios de configuración y cambios de perfil ha sido agregado por medio del archivo DEMO en la raiz para aquellas instalaciones que se deseen con esta finalidad.
+* Added: Opciones de mantenimiento a tablas directamente sobre el listado de tablas del sistema
 * Fixed: Botones automaticos de formularios de filtrado aparecían sin estilo.
 * Fixed: Etiquetas de idiomas al momento de instalación.
 * Fixed: Correciones menores en archivos de idioma
