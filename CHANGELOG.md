@@ -7,6 +7,36 @@
             |___/ 
 ```
 
+## Versión 15.8 (2015-08-01)
+* Added: Disponibilidad de idioma Hindú
+* Added: Autoajuste por páginas para informes exportados
+* Added: Tamaños de papel específicos para la generación de informes
+* Added: Orientaciones vertical y horizontal para las hojas generadas en el informe
+* Added: Posibilidad de definir bordes alrededor de resultados en informes
+* Added: Posibilidad de encabezados en informes (Aplicacion + Titulo) y (Usuario + Fecha)
+* Added: Autoajuste de celdas en informes exportados
+* Added: Exportación automática de informes a formato CSV
+* Added: Exportación automática de informes a formato HTML
+* Added: La funcion para exploración de archivos tiene ahora un parámetro adicional para ocultar los botones de descarga asociados a cada elemento
+* Added: Funciones de mantenimiento en el panel de desarrollo permiten ahora limpiar los archivos temporales y de copias de seguridad.
+* Added: Funciones de mantenimiento para base de datos y tablas de aplicación y propias de Práctico sobre motores MySQL y MariaDB
+* Added: Un modo DEMO que impide el cambio de contraseñas, aplicación de parches, cambios de configuración y cambios de perfil ha sido agregado por medio del archivo DEMO en la raiz para aquellas instalaciones que se deseen con esta finalidad.
+* Added: Opciones de mantenimiento a tablas directamente sobre el listado de tablas del sistema
+* Fixed: Botones automaticos de formularios de filtrado aparecían sin estilo.
+* Fixed: Etiquetas de idiomas al momento de instalación.
+* Fixed: Correciones menores en archivos de idioma
+* Fixed: Errores de sintaxis en listas de seleccion y controles tipo radio de formularios ahora no evitan la continuidad de ejecucion cuando sus sentencias tienen problemas de ejecución en el motor
+* Fixed: Errores de sintaxis SQL en informes ahora no evitan la continuidad de ejecucion cuando sus sentencias tienen problemas de ejecución en el motor
+* Fixed: Se evitan errores que detienen ejecucion de la herramienta cuando se empotran subformularios inexistentes o que han sido eliminados
+* Fixed: [Tester: Jaime A. Berrio] El modo DEMO inhabilita los login al ingresar el usuario al modo webservices y devolver un XML mal formado
+* Enhan: La función de exploración de archivos hace uso de una función extra para retorno de los valores, lo que permite usar sus resultados con otros fines como backups, etc.
+* Enhan: Reducción de código y optimización a funciones de exportación
+* Enhan: Adición de iconos a opciones de exportación
+* Enhan: Reescritura de panel de desarrollo para permitir futuras adiciones.
+* Enhan: La funcion para exploración de archivos usada por el módulo de actualización se mueve a un punto donde pueda ser utilizada por cualquier módulo
+* Enhan: Funcion de exploracion de archivos presenta sumar la cantidad en KBytes de los archivos
+* Enhan: Ahora las consultas y funciones SQL presentan siempre el mensaje con los detalles del error al usuario admin, aún cuando el modo de depueración se encuentre apagado.
+
 ## Versión 15.7 (2015-07-05)
 * Added: Agregado un tipo de validación de campos: ahora se soporta Tiempos/Horas
 * Added: Agregado un tipo de validación de campos: ahora se soporta Fechas con Horas con selectores independientes y también unificados
