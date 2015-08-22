@@ -228,6 +228,8 @@ CREATE TABLE core_informe_boton (
   visible integer default '1',
   peso integer,
   confirmacion_texto varchar(250) default '',
+  destino varchar(250) default '_self',
+  pantalla_completa integer default '0',
   PRIMARY KEY  (id)
 );
 

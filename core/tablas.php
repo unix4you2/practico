@@ -627,89 +627,128 @@ if ($PCO_Accion=="definir_copia_tablas")
 	{
 		 ?>
 
-        <form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="copiar_tabla">
-			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
+		<div class="row">
+			<div class="col col-md-6">
 
-            <br>
-			<?php abrir_ventana($MULTILANG_FrmTipoObjeto, 'panel-primary'); ?>
-			<h4><?php echo $MULTILANG_FrmTipoCopiaExporta; ?>: <b><?php echo $nombre_tabla; ?></b></h4>
-            <label for="tipo_copia_objeto"><?php echo $MULTILANG_FrmTipoCopia; ?>:</label>
-            <select id="tipo_copia_objeto" name="tipo_copia_objeto" class="form-control btn-warning" >
-                <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
-                <option value="Estructura"><?php echo $MULTILANG_TblTipoCopia1; ?></option>
-                <option value="Datos"><?php echo $MULTILANG_TblTipoCopia2; ?></option>
-                <option value="Estructura+Datos"><?php echo $MULTILANG_TblTipoCopia3; ?></option>
-            </select>
-			<br>
-            <label for="codificacion_actual"><?php echo $MULTILANG_TblDecodificarActual; ?>:</label>
-            <select id="codificacion_actual" name="codificacion_actual" class="form-control btn-info" >
-                <optgroup label="Comunes">
-					<option value="UTF-8">UTF-8</option>
-					<option value="ASCII">ASCII</option>
-					<option value="Windows-1252">Windows-1252</option>
-					<option value="ISO-8859-1">ISO-8859-1</option>
-                </optgroup>
-                <optgroup label="Otras disponibles MbString">
-					<?php
-						//Presenta las listas de set de caracteres soportadas por la extension mbstring de PHP (si esta instalada)
-						if (function_exists('mb_list_encodings'))
-							{
-								$arreglo_charsets=mb_list_encodings();
-								for ($i=0;$i<count($arreglo_charsets);$i++)
-									echo '<option value="'.$arreglo_charsets[$i].'">'.$arreglo_charsets[$i].'</option>';
-							}
-						else
-							{
-								echo '<option value="">Para ver mas opciones instale y active mbstring en su PHP</option>';
-							}
-					?>
-                </optgroup>                
-            </select>
+				<?php abrir_ventana($MULTILANG_FrmTipoObjeto, 'panel-primary'); ?>
+				<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+					<input type="Hidden" name="PCO_Accion" value="copiar_tabla">
+					<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 
-			<br>
-            <label for="codificacion_destino"><?php echo $MULTILANG_TblCodificar; ?>:</label>
-            <select id="codificacion_destino" name="codificacion_destino" class="form-control btn-info" >
-                <option value=""><?php echo $MULTILANG_TblCodificacionNINGUNO; ?></option>
-                <optgroup label="Comunes">
-					<option value="UTF-8">UTF-8</option>
-					<option value="ASCII">ASCII</option>
-					<option value="Windows-1252">Windows-1252</option>
-					<option value="ISO-8859-1">ISO-8859-1</option>
-                </optgroup>
-                <optgroup label="Otras disponibles MbString">
-					<?php
-						//Presenta las listas de set de caracteres soportadas por la extension mbstring de PHP (si esta instalada)
-						if (function_exists('mb_list_encodings'))
-							{
-								$arreglo_charsets=mb_list_encodings();
-								for ($i=0;$i<count($arreglo_charsets);$i++)
-									echo '<option value="'.$arreglo_charsets[$i].'">'.$arreglo_charsets[$i].'</option>';
-							}
-						else
-							{
-								echo '<option value="">Para ver mas opciones instale y active mbstring en su PHP</option>';
-							}
-					?>
-                </optgroup>
-            </select>
+					<br>
+					<h4><?php echo $MULTILANG_FrmTipoCopiaExporta; ?>: <b><?php echo $nombre_tabla; ?></b></h4>
+					<label for="tipo_copia_objeto"><?php echo $MULTILANG_FrmTipoCopia; ?>:</label>
+					<select id="tipo_copia_objeto" name="tipo_copia_objeto" class="form-control btn-warning" >
+						<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+						<option value="Estructura"><?php echo $MULTILANG_TblTipoCopia1; ?></option>
+						<option value="Datos"><?php echo $MULTILANG_TblTipoCopia2; ?></option>
+						<option value="Estructura+Datos"><?php echo $MULTILANG_TblTipoCopia3; ?></option>
+					</select>
+					<br>
+					<label for="codificacion_actual"><?php echo $MULTILANG_TblDecodificarActual; ?>:</label>
+					<select id="codificacion_actual" name="codificacion_actual" class="form-control btn-info" >
+						<optgroup label="Comunes">
+							<option value="UTF-8">UTF-8</option>
+							<option value="ASCII">ASCII</option>
+							<option value="Windows-1252">Windows-1252</option>
+							<option value="ISO-8859-1">ISO-8859-1</option>
+						</optgroup>
+						<optgroup label="Otras disponibles MbString">
+							<?php
+								//Presenta las listas de set de caracteres soportadas por la extension mbstring de PHP (si esta instalada)
+								if (function_exists('mb_list_encodings'))
+									{
+										$arreglo_charsets=mb_list_encodings();
+										for ($i=0;$i<count($arreglo_charsets);$i++)
+											echo '<option value="'.$arreglo_charsets[$i].'">'.$arreglo_charsets[$i].'</option>';
+									}
+								else
+									{
+										echo '<option value="">Para ver mas opciones instale y active mbstring en su PHP</option>';
+									}
+							?>
+						</optgroup>                
+					</select>
 
-			<br>
-            <label for="transliterar_conversion"><?php echo $MULTILANG_TblTransliteracion; ?>:</label>
-            <?php echo $MULTILANG_TblTransliteracionHlp; ?>
-            <select id="transliterar_conversion" name="transliterar_conversion" class="form-control btn-default" >
-                <option value="0"><?php echo $MULTILANG_No; ?></option>
-                <option value="1"><?php echo $MULTILANG_Si; ?> (<?php echo  $MULTILANG_TblTranslit; ?>)</option>
-                <option value="2"><?php echo $MULTILANG_Si; ?> (<?php echo  $MULTILANG_TblIgnora; ?>)</option>
-                <option value="3"><?php echo $MULTILANG_Si; ?> (<?php echo  "$MULTILANG_Ambos: $MULTILANG_TblIgnora / $MULTILANG_TblTranslit"; ?>)</option>
-            </select>
+					<br>
+					<label for="codificacion_destino"><?php echo $MULTILANG_TblCodificar; ?>:</label>
+					<select id="codificacion_destino" name="codificacion_destino" class="form-control btn-info" >
+						<option value=""><?php echo $MULTILANG_TblCodificacionNINGUNO; ?></option>
+						<optgroup label="Comunes">
+							<option value="UTF-8">UTF-8</option>
+							<option value="ASCII">ASCII</option>
+							<option value="Windows-1252">Windows-1252</option>
+							<option value="ISO-8859-1">ISO-8859-1</option>
+						</optgroup>
+						<optgroup label="Otras disponibles MbString">
+							<?php
+								//Presenta las listas de set de caracteres soportadas por la extension mbstring de PHP (si esta instalada)
+								if (function_exists('mb_list_encodings'))
+									{
+										$arreglo_charsets=mb_list_encodings();
+										for ($i=0;$i<count($arreglo_charsets);$i++)
+											echo '<option value="'.$arreglo_charsets[$i].'">'.$arreglo_charsets[$i].'</option>';
+									}
+								else
+									{
+										echo '<option value="">Para ver mas opciones instale y active mbstring en su PHP</option>';
+									}
+							?>
+						</optgroup>
+					</select>
 
-            </form>
-            <br>
-            <div align=center>
-            <a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCopiar; ?></a>
-            <a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
-            </div>
+					<br>
+					<label for="transliterar_conversion"><?php echo $MULTILANG_TblTransliteracion; ?>:</label>
+					<?php echo $MULTILANG_TblTransliteracionHlp; ?>
+					<select id="transliterar_conversion" name="transliterar_conversion" class="form-control btn-default" >
+						<option value="0"><?php echo $MULTILANG_No; ?></option>
+						<option value="1"><?php echo $MULTILANG_Si; ?> (<?php echo  $MULTILANG_TblTranslit; ?>)</option>
+						<option value="2"><?php echo $MULTILANG_Si; ?> (<?php echo  $MULTILANG_TblIgnora; ?>)</option>
+						<option value="3"><?php echo $MULTILANG_Si; ?> (<?php echo  "$MULTILANG_Ambos: $MULTILANG_TblIgnora / $MULTILANG_TblTranslit"; ?>)</option>
+					</select>
+
+				</form>
+				<br>
+				<div align=center>
+				<a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCopiar; ?></a>
+				<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+				</div>
+				<?php cerrar_ventana(); ?>
+
+			</div>
+			<div class="col col-md-6">
+			
+			
+				<!---
+				<?php abrir_ventana($MULTILANG_FrmTipoObjeto, 'panel-primary'); ?>
+				<form name="datos2" id="datos2" action="<?php echo $ArchivoCORE; ?>" method="POST">
+					<input type="Hidden" name="PCO_Accion" value="copiar_tabla">
+					<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
+
+					<br>
+					
+					<h4><?php echo $MULTILANG_FrmTipoCopiaExporta; ?>: <b><?php echo $nombre_tabla; ?></b></h4>
+					<label for="tipo_copia_objeto"><?php echo $MULTILANG_FrmTipoCopia; ?>:</label>
+					<select id="tipo_copia_objeto" name="tipo_copia_objeto" class="form-control btn-warning" >
+						<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+						<option value="Estructura"><?php echo $MULTILANG_TblTipoCopia1; ?></option>
+						<option value="Datos"><?php echo $MULTILANG_TblTipoCopia2; ?></option>
+						<option value="Estructura+Datos"><?php echo $MULTILANG_TblTipoCopia3; ?></option>
+					</select>
+
+				</form>
+				<br>
+				<div align=center>
+				<a class="btn btn-success" href="javascript:document.datos2.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCopiar; ?></a>
+				<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+				</div>
+				<?php cerrar_ventana(); ?>
+				-->
+			
+			
+			</div>
+		
+		</div>
 
 		<?php
 		cerrar_ventana();

@@ -4190,6 +4190,9 @@ function generar_botones_informe($informe)
 		$consulta_botones=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_boton." FROM ".$TablasCore."informe_boton WHERE informe=? AND visible=1 ORDER BY peso","$informe");
 		while($registro_botones=$consulta_botones->fetch())
 			{
+				$destino_formulario=$registro_botones["destino"];
+				$pantalla_completa_formulario=$registro_botones["pantalla_completa"];
+				$precargar_estilos_formulario=$registro_botones["precargar_estilos"];
 				//Construye una cadena generica con todos los botones para ser reemplazada luego con valores
 				if ($registro_botones["tipo_accion"]=="interna_eliminar")
 					{
@@ -4209,14 +4212,20 @@ function generar_botones_informe($informe)
 							document.FRMBASEINFORME.tabla.value='".@$tabla_vinculada."';
 							document.FRMBASEINFORME.campo.value='".@$campo_vinculado."';
 							document.FRMBASEINFORME.valor.value='DELFRMVALVALOR';
-							document.FRMBASEINFORME.submit()";
+							document.FRMBASEINFORME.Precarga_EstilosBS.value='".@$precargar_estilos_formulario."';
+							document.FRMBASEINFORME.Presentar_FullScreen.value='".@$pantalla_completa_formulario."';
+							document.FRMBASEINFORME.target = '".@$destino_formulario."';
+							document.FRMBASEINFORME.submit();";
 					}
 				if ($registro_botones["tipo_accion"]=="interna_cargar")
 					{
 						$comando_javascript="
 							document.FRMBASEINFORME.PCO_Accion.value='cargar_objeto';
 							document.FRMBASEINFORME.objeto.value='frm:".$registro_botones["accion_usuario"].":DETFRMVALBASE';
-							document.FRMBASEINFORME.submit()";
+							document.FRMBASEINFORME.Precarga_EstilosBS.value='".@$precargar_estilos_formulario."';
+							document.FRMBASEINFORME.Presentar_FullScreen.value='".@$pantalla_completa_formulario."';
+							document.FRMBASEINFORME.target = '".@$destino_formulario."';
+							document.FRMBASEINFORME.submit();";
 					}
 				if ($registro_botones["tipo_accion"]=="externa_formulario")
 					{
@@ -4225,7 +4234,10 @@ function generar_botones_informe($informe)
 							document.FRMBASEINFORME.PCO_Campo.value='".@$campo_vinculado."';
 							document.FRMBASEINFORME.PCO_Valor.value='DELFRMVALVALOR';
 							document.FRMBASEINFORME.PCO_Accion.value='".$registro_botones["accion_usuario"]."';
-							document.FRMBASEINFORME.submit()";
+							document.FRMBASEINFORME.Precarga_EstilosBS.value='".@$precargar_estilos_formulario."';
+							document.FRMBASEINFORME.Presentar_FullScreen.value='".@$pantalla_completa_formulario."';
+							document.FRMBASEINFORME.target = '".@$destino_formulario."';
+							document.FRMBASEINFORME.submit();";
 					}
 				if ($registro_botones["tipo_accion"]=="externa_javascript")
 					{
@@ -4568,7 +4580,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				global $PCO_FormularioActivo;
 				if ($registro_informe["formulario_filtrado"]!=$PCO_FormularioActivo)
 					{
-						echo '<form name="precarga_form_filtro" action="'.$ArchivoCORE.'" method="POST">
+						echo '<form name="precarga_form_filtro" action="'.$ArchivoCORE.'" method="POST" target="_self">
 							<input type="Hidden" name="PCO_Accion" value="cargar_objeto">
 							<input type="Hidden" name="PCO_InformeFiltro" value="'.$registro_informe["id"].'">
 							<input type="Hidden" name="objeto" value="frm:'.$registro_informe["formulario_filtrado"].':1">

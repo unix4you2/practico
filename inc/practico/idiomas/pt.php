@@ -738,6 +738,8 @@
 	$MULTILANG_InfTamanoPapel='Tamanho do papel';
 	$MULTILANG_InfReducir='Conteúdo-size Auto';
 	$MULTILANG_InfTitPersonalizar='Apresentação personalizada e layout (opcional)';
+	$MULTILANG_InfEjecutarAccionEn='Executar esta ação em';
+	$MULTILANG_InfPrecargarEstilos='Folhas de estilo CSS Preload Bootstrap';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Editar item de menu';

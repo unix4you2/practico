@@ -735,6 +735,8 @@
 	$MULTILANG_InfTamanoPapel='Tama&ntilde;o de papel';
 	$MULTILANG_InfReducir='Auto-ajustar contenidos';
 	$MULTILANG_InfTitPersonalizar='Personalizar presentaci&oacute;n y distribuci&oacute;n (opcional)';
+	$MULTILANG_InfEjecutarAccionEn='Ejecutar esta accion en';
+	$MULTILANG_InfPrecargarEstilos='Precargar hojas de estilo CSS Bootstrap';
 	
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';

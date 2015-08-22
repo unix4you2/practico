@@ -889,7 +889,7 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 			if ($tipo_accion=="") $mensaje_error=$MULTILANG_InfErr5;
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton (".$ListaCamposSinID_informe_boton.") VALUES (?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$informe$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$confirmacion_texto");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton (".$ListaCamposSinID_informe_boton.") VALUES (?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$informe$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$confirmacion_texto$_SeparadorCampos_$destino$_SeparadorCampos_$pantalla_completa$_SeparadorCampos_$precargar_estilos");
 					auditar("Crea boton $titulo para informe $informe");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_informe">
 						<input type="Hidden" name="informe" value="'.$informe.'">
@@ -1523,12 +1523,15 @@ if ($PCO_Accion=="editar_informe")
 
 
             <!-- Modal Agregar acciones del informe -->
-            <?php abrir_dialogo_modal("myModalAgregaAccionesInforme",$MULTILANG_InfTitBotones); ?>
+            <?php abrir_dialogo_modal("myModalAgregaAccionesInforme",$MULTILANG_InfTitBotones,"modal-wide"); ?>
 
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="PCO_Accion" value="guardar_accion_informe">
 				<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
+
+		<div class="row">
+			<div class="col col-md-6">
 
                     <div class="form-group input-group">
                         <input name="titulo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmTitulo; ?>">
@@ -1576,6 +1579,9 @@ if ($PCO_Accion=="editar_informe")
                     <?php echo $MULTILANG_InfVinculo; ?>:
                     <br><?php echo $MULTILANG_InfDesVinculo; ?><hr>
 
+			</div>
+			<div class="col col-md-6">
+
                     <div class="row">
                         <div class="col-md-6">
                             
@@ -1615,6 +1621,37 @@ if ($PCO_Accion=="editar_informe")
                             <a href="#" title="<?php echo $MULTILANG_FrmDesConfirma; ?>"><i class="fa fa-question-circle  fa-fw icon-info"></i></a>
                         </span>
                     </div>
+                    
+                    <hr>
+                    <label for="destino"><?php echo $MULTILANG_InfEjecutarAccionEn; ?>:</label>
+                    <div class="form-group input-group">
+                        <select id="destino" name="destino" class="form-control">
+							<option value="_self"><?php echo $MULTILANG_MnuTgtSelf; ?> (_SELF)</option>
+							<option value="_blank"><?php echo $MULTILANG_MnuTgtBlank; ?> (_BLANK)</option>
+							<option value="_parent"><?php echo $MULTILANG_MnuTgtParent; ?> (_PARENT)</option>
+							<option value="_top"><?php echo $MULTILANG_MnuTgtTop; ?> (_TOP)</option>
+                        </select>
+                    </div>
+
+                    <label for="pantalla_completa"><?php echo $MULTILANG_FrmBtnFull; ?>:</label>
+                    <div class="form-group input-group">
+                        <select id="pantalla_completa" name="pantalla_completa" class="form-control">
+							<option value="0"><?php echo $MULTILANG_No; ?></option>
+							<option value="1"><?php echo $MULTILANG_Si; ?></option>
+                        </select>
+                    </div>
+
+                    <label for="precargar_estilos"><?php echo $MULTILANG_InfPrecargarEstilos; ?>:</label>
+                    <div class="form-group input-group">
+                        <select id="precargar_estilos" name="precargar_estilos" class="form-control">
+							<option value="1"><?php echo $MULTILANG_Si; ?></option>
+							<option value="0"><?php echo $MULTILANG_No; ?></option>
+                        </select>
+                    </div>
+
+
+			</div>
+		</div>
 
                 </form>
                 <a class="btn btn-success btn-block" href="javascript:document.datosfield.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmBtnGuardar; ?></a>

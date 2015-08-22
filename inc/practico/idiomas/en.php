@@ -738,6 +738,8 @@
 	$MULTILANG_InfTamanoPapel='Paper size';
 	$MULTILANG_InfReducir='Auto-size content';
 	$MULTILANG_InfTitPersonalizar='Custom presentation and layout (optional)';
+	$MULTILANG_InfEjecutarAccionEn='Run this action in';
+	$MULTILANG_InfPrecargarEstilos='Preload Bootstrap CSS style sheets';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';

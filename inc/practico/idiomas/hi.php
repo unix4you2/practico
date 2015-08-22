@@ -738,6 +738,8 @@
 	$MULTILANG_InfTamanoPapel='पेपर का आकार';
 	$MULTILANG_InfReducir='ऑटो-आकार सामग्री';
 	$MULTILANG_InfTitPersonalizar='कस्टम प्रस्तुति और लेआउट (वैकल्पिक)';
+	$MULTILANG_InfEjecutarAccionEn='में इस कार्रवाई चलाएँ';
+	$MULTILANG_InfPrecargarEstilos='प्रीलोड बूटस्ट्रैप सीएसएस शैली पत्रक';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='संपादन मेनू आइटम';

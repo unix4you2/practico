@@ -227,7 +227,9 @@ CREATE TABLE core_informe_boton (
   accion_usuario text default '',
   visible integer default '1',
   peso integer,
-  confirmacion_texto text default ''
+  confirmacion_texto text default '',
+  destino text default '_self',
+  pantalla_completa integer default '0'
   
 );
 
