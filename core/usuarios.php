@@ -535,7 +535,6 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="formulario_recuperac
     }
 
 
-
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -555,18 +554,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="formulario_recuperac
 */
 if ($PCO_Accion=="copiar_informes")
 	{
-		// Elimina opciones existentes
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE usuario=? ","$usuariod");
-		// Copia permisos si el usuario origen es diferente de vacio, sino lo deja sin nada
-        if ($usuarioo!="")
-            {
-                $resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_informe." FROM ".$TablasCore."usuario_informe WHERE usuario=? ","$usuarioo");
-                while($registro = $resultado->fetch())
-                    {
-                        $menuinsertar=$registro["informe"];
-                        ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES (?,?)","$usuariod$_SeparadorCampos_$menuinsertar");
-                    }
-            }
+		PCO_copiar_informes($usuarioo,$usuariod);
 		auditar("Copia informes de $usuarioo al usuario $usuariod");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="informes_usuario">
@@ -578,45 +566,23 @@ if ($PCO_Accion=="copiar_informes")
 	}
 
 
-
 /* ################################################################## */
 /* ################################################################## */
 /*
 	Function: copiar_permisos
-	Elimina los permisos definidos para un usuario y los reemplaza  con los permisos definidos actualmente para otro usuario
+	Llama a la funcion interna de copia de permisos
 
 	Variables de entrada:
 
 		usuariod - Usuario destino (al que seran copiados los permisos)
 		usuarioo - Usuario oorigen (del que se toman los permisos como base para ser copiados)
 
-		(start code)
-			DELETE FROM ".$TablasCore."usuario_menu WHERE usuario='$usuariod'
-			SELECT * FROM ".$TablasCore."usuario_menu WHERE usuario='$usuarioo'
-			Repetir con cada permiso del usuario origen:
-				INSERT INTO ".$TablasCore."usuario_menu VALUES (0,'$usuariod','$menuinsertar')
-		(end)
-
-	Salida:
-		Permisos del usuario destino actualizados
-
 	Ver tambien:
 		<permisos_usuario> | <informes_usuario>
 */
 if ($PCO_Accion=="copiar_permisos")
 	{
-		// Elimina opciones existentes
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$usuariod");
-		// Copia permisos si el usuario origen es diferente de vacio, sino lo deja sin nada
-        if ($usuarioo!="")
-            {
-                $resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$usuarioo");
-                while($registro = $resultado->fetch())
-                    {
-                        $menuinsertar=$registro["menu"];
-                        ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuariod$_SeparadorCampos_$menuinsertar");
-                    }
-            }
+		PCO_copiar_permisos($usuarioo,$usuariod);
 		auditar("Copia permisos de $usuarioo al usuario $usuariod");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="permisos_usuario">

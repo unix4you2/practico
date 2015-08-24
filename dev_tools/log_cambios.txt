@@ -19,6 +19,7 @@ core/comunes.php
 core/informes.php
 core/marco_arriba.php
 core/tablas.php
+core/usuarios.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 "
@@ -34,6 +35,7 @@ LogCambios="
 * Added: Las acciones en botones de informes pueden ser transferidas a ventanas nuevas, misma ventana, ventana padre o marco superior según los target disponibles para el estándar HTML
 * Fixed: 
 * Enhan: El campo de comandos de usuario en las acciones de informes ha sido ampliado a longitud indefinida
+* Enhan: Las operaciones de copia de informes y menues entre usuarios son ahora realizadas mediante una función.
 
 "
 
