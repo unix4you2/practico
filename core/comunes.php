@@ -238,23 +238,21 @@
 	Salida:
 		Registros de permisos actualizados en BD
 */
-function PCO_copiar_permisos($usuarioo="",$usuariod="")
+function PCO_copiar_permisos($usuario_origen="",$usuario_destino="")
     {
 		global $TablasCore,$ListaCamposSinID_usuario_menu,$_SeparadorCampos_;
 		// Elimina opciones existentes
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$usuariod");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$usuario_destino");
 		// Copia permisos si el usuario origen es diferente de vacio, sino lo deja sin nada
-        if ($usuarioo!="")
+        if ($usuario_origen!="")
             {
-                $resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$usuarioo");
+                $resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario='$usuario_origen' ");
                 while($registro = $resultado->fetch())
                     {
                         $menuinsertar=$registro["menu"];
-                        ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuariod$_SeparadorCampos_$menuinsertar");
+                        ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuario_destino$_SeparadorCampos_$menuinsertar");
                     }
             }
-
-		return 0;
     }
 
 
@@ -272,23 +270,21 @@ function PCO_copiar_permisos($usuarioo="",$usuariod="")
 	Salida:
 		Registros de permisos actualizados en BD
 */
-function PCO_copiar_informes($usuarioo="",$usuariod="")
+function PCO_copiar_informes($usuario_origen="",$usuario_destino="")
     {
 		global $TablasCore,$ListaCamposSinID_usuario_informe,$_SeparadorCampos_;
 		// Elimina opciones existentes
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE usuario=? ","$usuariod");
+		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE usuario=? ","$usuario_destino");
 		// Copia permisos si el usuario origen es diferente de vacio, sino lo deja sin nada
-        if ($usuarioo!="")
+        if ($usuario_origen!="")
             {
-                $resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_informe." FROM ".$TablasCore."usuario_informe WHERE usuario=? ","$usuarioo");
+                $resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_informe." FROM ".$TablasCore."usuario_informe WHERE usuario='$usuario_origen' ");
                 while($registro = $resultado->fetch())
                     {
                         $menuinsertar=$registro["informe"];
-                        ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES (?,?)","$usuariod$_SeparadorCampos_$menuinsertar");
+                        ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES (?,?)","$usuario_destino$_SeparadorCampos_$menuinsertar");
                     }
             }
-
-		return 0;
     }
 
 

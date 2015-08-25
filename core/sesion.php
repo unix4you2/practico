@@ -141,6 +141,15 @@
 						auditar("Ingresa al sistema desde $PCO_DireccionAuditoria",$uid);
 						// Actualiza fecha del ultimo ingreso para el usuario
 						ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login=? ","$PCO_FechaOperacion$_SeparadorCampos_$uid");
+
+						//Copia permisos de la plantilla si aplica
+						if ($registro["plantilla_permisos"]!="")
+							{
+								$plantilla_origen=$registro["plantilla_permisos"];
+								auditar("Carga permisos a su perfil desde plantilla $plantilla_origen",$uid);
+								PCO_copiar_permisos($plantilla_origen,$uid);
+								PCO_copiar_informes($plantilla_origen,$uid);
+							}
 				  }
 
 			// Si la clave es incorrecta muestra de nuevo la ventana de ingreso

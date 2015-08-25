@@ -942,7 +942,11 @@
     $MULTILANG_UsrCreacionOK='O usuário conta foi adicionada. Agora é filtrada para adicionar qualquer opção de menu ou relatório que você precisa. Você pode cancelar esta operação se não é necessário atribuir neste exato momento.';
     $MULTILANG_UsrSaltarInformes='Ir para relatório sobre os direitos para este usuário';
     $MULTILANG_UsrSaltarMenues='Ir para direitos MENU para esse usuário';
-
+    $MULTILANG_UsrEsPlantilla='Use isso como um usu&aacute;rio permissões modelo para os outros?';
+    $MULTILANG_UsrEsPlantillaDes='Direitos de menu e relat&oacute;rios atribu&iacute;dos a esse usuário ser&aacute; copiado automaticamente durante cada entrada de pessoas a us&aacute;-lo como um modelo. Isto permite-lhe manter atualizados os perfis de usu&aacute;rio de acordo com modelos gerais';
+    $MULTILANG_UsrPlantillaAplicar='Permissões de modelo para aplicar a cada entrada';
+    $MULTILANG_UsrPlantillaAplicarDes='As permissões atribu&iacute;das ao usu&aacute;rio selecionado na lista que eles serão transferidos para este novo usu&aacute;rio cada um para fazer uma renda';
+    $MULTILANG_UsrPermisoManual='Direitos manuais';
 
 	//Proceso de instalacion
 	$MULTILANG_Instalacion='Processo de Instalação';

@@ -35,7 +35,9 @@ CREATE TABLE core_usuario (
   ultimo_acceso text  default '20000101',
   llave_paso text  default 'd41d8cd98f00b204e9800998ecf8427e',
   usuario_interno integer DEFAULT 0,
-  llave_recuperacion text default ''
+  llave_recuperacion text default '',
+  es_plantilla integer DEFAULT 0,
+  plantilla_permisos text default ''
   
 );
 

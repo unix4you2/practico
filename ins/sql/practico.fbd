@@ -29,13 +29,15 @@ DROP TABLE IF EXISTS core_usuario;
 CREATE TABLE core_usuario (
   login varchar(250) NOT NULL,
   clave varchar(50) NOT NULL default 'd41d8cd98fd41d8cd98fd41d8cd98fd41d8cd98f',
-  nombre varchar(100) NOT NULL default '',
+  nombre varchar(250) NOT NULL default '',
   estado int(1) NOT NULL default '1',
   correo varchar(200) NOT NULL default '',
   ultimo_acceso date NOT NULL default '20000101',
   llave_paso varchar(50) NOT NULL default 'd41d8cd98f00b204e9800998ecf8427e',
   usuario_interno int(1) NULL DEFAULT 0,
   llave_recuperacion varchar(250) NOT NULL default '',
+  es_plantilla int(1) DEFAULT 0,
+  plantilla_permisos varchar(250) default '',
   PRIMARY KEY  (login)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

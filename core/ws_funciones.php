@@ -200,7 +200,8 @@ if (@$PCO_WSId=="verificar_credenciales")
 */
 	function ejecutar_login_oauth($user,$OAuth_servicio)
 		{
-			global $TablasCore,$uid,$ListaCamposSinID_parametros,$resultado_webservice,$ListaCamposSinID_parametros,$ListaCamposSinID_auditoria,$PCO_DireccionAuditoria,$PCO_HoraOperacion,$PCO_FechaOperacion,$ArchivoCORE;
+			global $APIGoogle_Template,$APIFacebook_Template,$APIDropbox_Template;
+			global $TablasCore,$uid,$ListaCamposSinID_usuario,$ListaCamposSinID_parametros,$resultado_webservice,$ListaCamposSinID_parametros,$ListaCamposSinID_auditoria,$PCO_DireccionAuditoria,$PCO_HoraOperacion,$PCO_FechaOperacion,$ArchivoCORE;
 
 			// Si el modo depuracion esta activo muestra arreglo user devuelto por el proveedor
 			global $ModoDepuracion;
@@ -218,6 +219,7 @@ if (@$PCO_WSId=="verificar_credenciales")
 					$login_chk=$user->email;
 					$nombre_chk=$user->name;
 					$correo_chk=$user->email;
+					$plantilla_origen_permisos=$APIGoogle_Template;
 				}
 			if ($OAuth_servicio=='Facebook')
 				{
@@ -225,6 +227,7 @@ if (@$PCO_WSId=="verificar_credenciales")
 					$login_chk=$user->username;
 					$nombre_chk=$user->name;
 					$correo_chk=$user->email;
+					$plantilla_origen_permisos=$APIFacebook_Template;
 				}
 			if ($OAuth_servicio=='Dropbox')
 				{
@@ -232,10 +235,11 @@ if (@$PCO_WSId=="verificar_credenciales")
 					$login_chk=$user->uid;
 					$nombre_chk=$user->display_name;
 					$correo_chk=$user->email;
+					$plantilla_origen_permisos=$APIDropbox_Template;
 				}
 
 			// Busca datos del usuario Practico, segun tipo de servicio OAuth para tener configuraciones de permisos y parametros propios de la herramienta
-			$consulta_busqueda_usuario_oauth="SELECT login, nombre, clave, descripcion, nivel, correo, llave_paso FROM ".$TablasCore."usuario WHERE login='$login_chk' AND descripcion LIKE '%Auth:$OAuth_servicio%' ";
+			$consulta_busqueda_usuario_oauth="SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login='$login_chk' AND descripcion LIKE '%Auth:$OAuth_servicio%' ";
 			$resultado_usuario=ejecutar_sql($consulta_busqueda_usuario_oauth);
 			$registro = $resultado_usuario->fetch();
 
@@ -248,10 +252,13 @@ if (@$PCO_WSId=="verificar_credenciales")
 					$registro = $resultado_usuario->fetch();
 				}
 
-			// Hace la copia opcional de permisos desde usuario plantilla
-			// ############ PENDIENTE ##################
-			// ############ PENDIENTE ##################
-			// ############ PENDIENTE ##################
+			//Copia permisos de la plantilla si aplica
+			if ($registro["plantilla_permisos"]!="")
+				{
+					auditar("Carga permisos a su perfil desde plantilla $plantilla_origen_permisos",$login_chk);
+					PCO_copiar_permisos($plantilla_origen_permisos,$login_chk);
+					PCO_copiar_informes($plantilla_origen_permisos,$login_chk);
+				}
 
 			// Se buscan datos de la aplicacion
 			$consulta_parametros=ejecutar_sql("SELECT id,".$ListaCamposSinID_parametros." FROM ".$TablasCore."parametros");

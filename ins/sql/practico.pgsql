@@ -36,6 +36,8 @@ CREATE TABLE core_usuario (
   llave_paso varchar(50) NOT NULL default 'd41d8cd98f00b204e9800998ecf8427e',
   usuario_interno integer DEFAULT 0,
   llave_recuperacion varchar(250) NOT NULL default '',
+  es_plantilla integer DEFAULT 0,
+  plantilla_permisos varchar(250) default '',
   PRIMARY KEY  (login)
 );
 

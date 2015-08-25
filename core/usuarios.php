@@ -1287,7 +1287,7 @@ if ($PCO_Accion=="permisos_usuario")
 					$clavemd5=MD5($clave);
 					$pasomd5=MD5($LlaveDePaso);
                     $Llave_recuperacion="";
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno$_SeparadorCampos_$Llave_recuperacion");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno$_SeparadorCampos_$Llave_recuperacion$_SeparadorCampos_$es_plantilla$_SeparadorCampos_$plantilla_permisos");
 					auditar("Agrega usuario $login para $nombre");
                     //Redirecciona a la lista de usuarios con el usuario prefiltrado por si se le quiere asignar permisos
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -1335,70 +1335,108 @@ if ($PCO_Accion=="agregar_usuario")
 				<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 					<input type="hidden" name="PCO_Accion" value="guardar_usuario">
 
-                    <div class="form-group input-group">
-                        <input name="login" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrLogin; ?>">
-                        <span class="input-group-addon">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_UsrDesLogin; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                        </span>
-                    </div>
+					<div class="row">
+						<div class="col-md-6">
 
-                    <div class="form-group input-group">
-                        <input name="nombre"  onkeypress="return validar_teclado(event, 'alfanumerico');" maxlength="100" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrNombre; ?>">
-                        <span class="input-group-addon">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                        </span>
-                    </div>
+							<div class="form-group input-group">
+								<input name="login" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrLogin; ?>">
+								<span class="input-group-addon">
+									<a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+									<a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_UsrDesLogin; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+								</span>
+							</div>
 
-                    <div class="form-group input-group">
-                        <input name="clave"   onkeyup="muestra_seguridad_clave(this.value, this.form)" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
-                        <span class="input-group-addon">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                        </span>
-                        <span class="input-group-addon">
-                            <?php echo $MULTILANG_UsrNivelPW; ?>:
-                        </span>
-                        <input id="seguridad" value="0" size="3" name="seguridad" class="form-control" type="text" readonly onfocus="blur()">
-                        <span class="input-group-addon">
-                            %
-                        </span>
-                    </div>
+							<div class="form-group input-group">
+								<input name="nombre"  onkeypress="return validar_teclado(event, 'alfanumerico');" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrNombre; ?>">
+								<span class="input-group-addon">
+									<a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+								</span>
+							</div>
 
-                    <div class="form-group input-group">
-                        <input name="clave1" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?> (Confirma)">
-                        <span class="input-group-addon">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                        </span>
-                    </div>
+							<div class="form-group input-group">
+								<input name="clave"   onkeyup="muestra_seguridad_clave(this.value, this.form)" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
+								<span class="input-group-addon">
+									<a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+								</span>
+								<span class="input-group-addon">
+									<?php echo $MULTILANG_UsrNivelPW; ?>:
+								</span>
+								<input id="seguridad" value="0" size="3" name="seguridad" class="form-control" type="text" readonly onfocus="blur()">
+								<span class="input-group-addon">
+									%
+								</span>
+							</div>
 
-                    <div class="form-group input-group">
-                        <span class="input-group-addon">
-                            <i class="fa fa-at fa-fw "></i>
-                        </span>
-                        <input name="correo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Correo; ?>">
-                        <span class="input-group-addon">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_UsrTitCorreo; ?>: <?php echo $MULTILANG_UsrDesCorreo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                        </span>
-                    </div>
+							<div class="form-group input-group">
+								<input name="clave1" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?> (Confirma)">
+								<span class="input-group-addon">
+									<a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+								</span>
+							</div>
 
-                    <label for="estado"><?php echo $MULTILANG_UsrEstado; ?>:</label>
-                    <div class="form-group input-group">
-                        <select id="estado" name="estado" class="form-control" >
-                            <option value="1"><?php echo $MULTILANG_Habilitado; ?></option>
-                            <option value="0"><?php echo $MULTILANG_Deshabilitado; ?></option>
-                        </select>
-                    </div>
+							<div class="form-group input-group">
+								<span class="input-group-addon">
+									<i class="fa fa-at fa-fw "></i>
+								</span>
+								<input name="correo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Correo; ?>">
+								<span class="input-group-addon">
+									<a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_UsrTitCorreo; ?>: <?php echo $MULTILANG_UsrDesCorreo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+								</span>
+							</div>
 
-                    <label for="usuario_interno"><?php echo $MULTILANG_UsrInterno; ?>:</label>
-                    <div class="form-group input-group">
-                        <select id="usuario_interno" name="usuario_interno" class="form-control" >
-                            <option value="1"><?php echo $MULTILANG_Si; ?></option>
-                            <option value="0"><?php echo $MULTILANG_No; ?></option>
-                        </select>
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_UsrTitNivel; ?>: <?php echo $MULTILANG_UsrDesInterno; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                        </span>
-                    </div>
+
+						</div>
+						<div class="col-md-6">
+
+							<label for="estado"><?php echo $MULTILANG_UsrEstado; ?>:</label>
+							<div class="form-group input-group">
+								<select id="estado" name="estado" class="form-control" >
+									<option value="1"><?php echo $MULTILANG_Habilitado; ?></option>
+									<option value="0"><?php echo $MULTILANG_Deshabilitado; ?></option>
+								</select>
+							</div>
+
+							<label for="usuario_interno"><?php echo $MULTILANG_UsrInterno; ?>:</label>
+							<div class="form-group input-group">
+								<select id="usuario_interno" name="usuario_interno" class="form-control" >
+									<option value="1"><?php echo $MULTILANG_Si; ?></option>
+									<option value="0"><?php echo $MULTILANG_No; ?></option>
+								</select>
+								<span class="input-group-addon">
+									<a href="#" title="<?php echo $MULTILANG_UsrTitNivel; ?>: <?php echo $MULTILANG_UsrDesInterno; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+								</span>
+							</div>
+
+							<label for="es_plantilla"><?php echo $MULTILANG_UsrEsPlantilla; ?>:</label>
+							<div class="form-group input-group">
+								<select id="es_plantilla" name="es_plantilla" class="form-control" >
+									<option value="0"><?php echo $MULTILANG_No; ?></option>
+									<option value="1"><?php echo $MULTILANG_Si; ?></option>
+								</select>
+								<span class="input-group-addon">
+									<a href="#" title="<?php echo $MULTILANG_UsrEsPlantillaDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+								</span>
+							</div>
+
+							<label for="plantilla_permisos"><?php echo $MULTILANG_UsrPlantillaAplicar; ?>:</label>
+							<div class="form-group input-group">
+								<select id="plantilla_permisos" name="plantilla_permisos" class="form-control" >
+									<option value=""><?php echo $MULTILANG_Ninguno; ?> (<?php echo $MULTILANG_UsrPermisoManual; ?>)</option>
+									<?php
+										//Busca los usuarios definidos como plantilla
+										$usuarios_plantilla=ejecutar_sql("SELECT ".$ListaCamposSinID_usuario." FROM ".$TablasCore."usuario WHERE es_plantilla=1");
+										while ($registro_plantilla=$usuarios_plantilla->fetch())
+											echo '<option value="'.$registro_plantilla["login"].'">'.$registro_plantilla["login"].'</option>';									
+									?>
+								</select>
+								<span class="input-group-addon">
+									<a href="#" title="<?php echo $MULTILANG_UsrPlantillaAplicarDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+								</span>
+							</div>
+
+						</div>
+					</div>
+
                 </form>
 
             <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Guardar; ?></a>
@@ -1448,7 +1486,7 @@ if ($PCO_Accion=="ver_seguimiento_monitoreo")
                     ';
 
 
-				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria ORDER BY fecha DESC, hora DESC LIMIT 0,30");
+				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria ORDER BY id DESC LIMIT 0,30");
 				while($registro = $resultado->fetch())
 					{
 						echo '<tr><td align="center">'.$registro["id"].'</td>
@@ -1658,7 +1696,7 @@ if ($PCO_Accion=="ver_seguimiento_general")
 				if (@$mesi=="") {$mesi=date("n"); $mesf=$mesi;}
 				if (@$diai=="") {$diai=date("j"); $diaf=$diai;}
 
-				$resultado=@ejecutar_sql("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria WHERE fecha>='$anoi$mesi$diai' AND fecha<= '$anof$mesf$diaf' AND accion LIKE '%$accionbuscar%' AND usuario_login LIKE '%$usuario%' ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg");
+				$resultado=@ejecutar_sql("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria WHERE fecha>='$anoi$mesi$diai' AND fecha<= '$anof$mesf$diaf' AND accion LIKE '%$accionbuscar%' AND usuario_login LIKE '%$usuario%' ORDER BY id DESC LIMIT $inicio_reg,$fin_reg");
 				while($registro = $resultado->fetch())
 					{
 						echo '<tr>
