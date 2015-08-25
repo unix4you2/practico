@@ -869,7 +869,7 @@ if ($PCO_Accion=="administrar_menu")
 						$PCO_EsImagen=1;
                     //Si no detecta ninguna extension de archivo de imagen entonces pone boton en bootstrap
                     if (!$PCO_EsImagen)
-						echo '<button class="btn">
+						echo '<button class="btn btn-default">
 							<i class="'.$registro["imagen"].' fa-3x fa-fw"></i><br>
 							<span class="btn-xs">'.$registro["texto"].'</span>
 							</button>';
