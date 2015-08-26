@@ -38,6 +38,7 @@ LogCambios="
 * Added: Las acciones en botones de informes pueden ser transferidas a ventanas nuevas, misma ventana, ventana padre o marco superior según los target disponibles para el estándar HTML
 * Added: El sistema de plantillas utilizado por la autenticación por OAuth ahora está disponible dentro de los usuarios estándar de la aplicación
 * Fixed: Apariencia de botones de menu en Firefox.  Se agrega por defecto el tema de botones a las opciones del escritorio para mejorar su visualización.
+* Fixed: Eliminacion de warnings del lado del servidor web por variable WS_On no definida
 * Enhan: El campo de comandos de usuario en las acciones de informes ha sido ampliado a longitud indefinida
 * Enhan: Las operaciones de copia de informes y menues entre usuarios son ahora realizadas mediante una función.
 * Enhan: El campo de nombre de usuario es ampliado para permitir nombres de hasta 250 caracteres

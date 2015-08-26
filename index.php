@@ -64,7 +64,7 @@
     //Determina si la plataforma se encuentra en modo DEMO
     include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
     $PCO_ModoDEMO=0;
-    if (file_exists("DEMO") && $PCO_WSOn!=1)
+    if (file_exists("DEMO") && @$PCO_WSOn!=1)
 		{ $PCO_ModoDEMO=1; echo "<script language='JavaScript'> PCO_ModoDEMO=1; </script>"; }
 
     //Activa errores del preprocesador en modo de depuracion (configuracion.php)

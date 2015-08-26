@@ -3106,6 +3106,34 @@ function selector_iconos_awesome()
             </div>';
 			return $salida;
 		}
+/*
+
+
+ALTERNATIVA 1:
+<object data="http://www.web-source.net" width="600" height="400">
+    <embed src="http://www.web-source.net" width="600" height="400"> </embed>
+    Error: Embedded data could not be displayed.
+</object>
+
+
+ALTERNATIVA 2:
+<div id="divId"></div>
+<script type='text/javascript'>
+    $(document).ready(function (){
+        $('#divId').load(URL of target);     
+    });
+</script>
+
+
+ALTERNATIVA 3:
+$('#SampleElement').load('YourURL');
+
+
+*/
+
+
+
+
 
 
 /* ################################################################## */

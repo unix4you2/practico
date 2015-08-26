@@ -719,6 +719,8 @@ if ($PCO_Accion=="definir_copia_tablas")
 			<div class="col col-md-6">
 			
 			
+				
+			
 				<!---
 				<?php abrir_ventana($MULTILANG_FrmTipoObjeto, 'panel-primary'); ?>
 				<form name="datos2" id="datos2" action="<?php echo $ArchivoCORE; ?>" method="POST">
