@@ -48,3 +48,24 @@
     #chown -R apache *
     #chown -R http *
     #chown -R root *
+
+# Bash de supervivencia
+# $0: Nombre del Shell-Script que se está ejecutando.
+# $n: Parámetros pasados en la posición n, n=1,2,...(formato $#)
+# $#: Número de argumentos.
+# $*: Lista de todos los argumentos menos $0
+# $$: PID del proceso que se está ejecutando.
+# $!: PID del último proceso ejecutado.
+# $?: Salida del último proceso ejecutado.
+# read -p "Entra vble: " vble  Lee por teclado (hace eco)
+# read -s -p "Entra vble: " vble  Lee por teclado (no hace eco)
+# Leer por lineas:
+#   oldIFS=$IFS  #Almacenamos el valor original de la variable IFS
+#   IFS=$'\n'    #Cambiamos el valor del IFS
+#   for line in $(cat file.txt)
+#     do
+#       echo $line
+#     done
+#   IFS=$oldIFS  #Restauramos el IFS
+#
+#Fuentes: patorjk.com/software/taag/  (Favoritas: Small y Standar)

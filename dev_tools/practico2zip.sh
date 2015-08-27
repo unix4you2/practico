@@ -41,6 +41,9 @@
 #Incluye el archivo que ajusta todos los permisos previa generacion del zip
 	source dev_tools/chmod2zip.sh
 
+#Incluye la compresion de archivos CSS y JS
+	source dev_tools/cssjs2min.sh
+
 # PARAMETROS BASICOS DEL EMPAQUETADO
 	#Lista de archivos y carpetas a empaquetar (relativos a la raiz y separados por espacio)
 	ListaArchivos=" AUTHORS index.php LICENSE DEMO.md CHANGELOG.md README.md bkp core img inc ins mod skin tmp "

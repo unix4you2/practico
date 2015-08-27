@@ -74,7 +74,7 @@
         if ($PCO_Accion!="PCOMOD_CargarPcoder") {
     ?>
         <link href="inc/bootstrap/css/sb-admin-2.css" rel="stylesheet">
-        <link href="inc/bootstrap/css/practico.css" rel="stylesheet">
+        <link href="inc/bootstrap/css/practico.min.css" rel="stylesheet">
     <?php 
         }
     ?>

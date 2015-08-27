@@ -2,6 +2,7 @@
 
 #	Copyright (C) 2013  John F. Arroyave Gutiérrez
 #						unix4you2@gmail.com
+#						www.practico.org
 
 #	This program is free software; you can redistribute it and/or
 #	modify it under the terms of the GNU General Public License
@@ -108,6 +109,9 @@ enlace:  http://www.unixlandia.org/index.php/Politicas_envio_de_parches
 #Incluye el archivo que ajusta todos los permisos previa generacion del zip
 	source dev_tools/chmod2zip.sh
 
+#Incluye la compresion de archivos CSS y JS
+	source dev_tools/cssjs2min.sh
+
 # Variables de trabajo adicionales
 	oldIFS=$IFS  # conserva el separador de campo
 	IFS=$'\n'  # nuevo separador de campo, el caracter fin de línea
@@ -209,3 +213,5 @@ enlace:  http://www.unixlandia.org/index.php/Politicas_envio_de_parches
 #       echo $line
 #     done
 #   IFS=$oldIFS  #Restauramos el IFS
+#
+#Fuentes: patorjk.com/software/taag/  (Favoritas: Small y Standar)
