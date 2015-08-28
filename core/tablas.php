@@ -1007,19 +1007,7 @@ if ($PCO_Accion=="importar_tabla")
 										<input type="hidden" name="PCO_Accion" value="definir_copia_tablas">
 										<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
 										<a class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_FrmCopiar.'" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["0"].');"><i class="fa fa-code-fork fa-fw"></i></a>
-									</form>';
-
-								//Determina si activar o no el boton de eliminar
-								if ($PrefijoRegistro!=$TablasCore && $total_registros==0)							
-									echo '<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["0"].'" id="f'.$registro["0"].'" style="display:inline;">
-											<input type="hidden" name="PCO_Accion" value="eliminar_tabla">
-											<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
-											<a href="#" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelTabla.'\',f'.$registro["0"].');"><i class="fa fa-times fa-fw"></i></a>
-										</form>';
-								else
-									echo '<form style="display:inline;">
-												<a href="#" class="btn btn-danger btn-xs" disabled="disabled"><i class="fa fa-times fa-fw"></i></a>
-											</form>';						
+									</form>';					
 								
 								//Determina si activa o no el boton de editar
 								if ($PrefijoRegistro!=$TablasCore)
@@ -1059,6 +1047,19 @@ if ($PCO_Accion=="importar_tabla")
 								echo '<form style="display:inline;">
 										<a class="btn btn-danger btn-xs" '.$EstadoActivacion.' data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_TblVaciar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=DELETE&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-trash-o fa-fw"></i></a>
 									</form>';
+
+								//Determina si activar o no el boton de eliminar
+								if ($PrefijoRegistro!=$TablasCore && $total_registros==0)							
+									echo '<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["0"].'" id="f'.$registro["0"].'" style="display:inline;">
+											<input type="hidden" name="PCO_Accion" value="eliminar_tabla">
+											<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
+											<a href="#" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelTabla.'\',f'.$registro["0"].');"><i class="fa fa-times fa-fw"></i></a>
+										</form>';
+								else
+									echo '<form style="display:inline;">
+												<a href="#" class="btn btn-danger btn-xs" disabled="disabled"><i class="fa fa-times fa-fw"></i></a>
+											</form>';	
+
 						echo '</td>';
 
 
