@@ -87,6 +87,32 @@ function PCOJS_MostrarMensaje(TituloPopUp, Mensaje)
 		$("#PCO_Modal_Mensaje").css("z-index", "1500");
 	}
 
+function PCOJS_MostrarMensajeCargando(TituloPopUp, Mensaje)
+	{
+		//Lleva los valores a cada parte del dialogo modal
+		$('#PCO_Modal_MensajeCargandoTitulo').html(TituloPopUp);
+		$('#PCO_Modal_MensajeCargandoCuerpo').html(Mensaje);
+
+		// Se muestra el cuadro modal
+		$('#PCO_Modal_MensajeCargando').modal('show');
+
+		//Hacer que la ventana este siempre por encima
+		$("#PCO_Modal_MensajeCargando").css("z-index", "1500");
+	}
+
+
+function PCOJS_OcultarMensajeCargando(TituloPopUp, Mensaje)
+	{
+		//Lleva los valores a cada parte del dialogo modal
+		$('#PCO_Modal_MensajeCargandoTitulo').html(TituloPopUp);
+		$('#PCO_Modal_MensajeCargandoCuerpo').html(Mensaje);
+
+		// Se muestra el cuadro modal
+		$('#PCO_Modal_MensajeCargando').modal('show');
+
+		//Hacer que la ventana este siempre por encima
+		$("#PCO_Modal_MensajeCargando").css("z-index", "1500");
+	}
 
 
 
