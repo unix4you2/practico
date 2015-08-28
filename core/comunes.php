@@ -439,6 +439,7 @@ function listado_visual_exploracion_archivos($RutaExploracion="",$Filtro_conteni
 			if ($PCO_Accion== "eliminar_registro_informe")			$retorno = 1;
 			if ($PCO_Accion== "eliminar_accion_informe")			$retorno = permiso_agregado_accion("administrar_informes");
 			if ($PCO_Accion== "exportar_informe")					$retorno = 1;
+			if ($PCO_Accion== "importar_informe")					$retorno = 1;
 			// Funciones en core/usuarios.php
 			if ($PCO_Accion== "cambiar_clave")						$retorno = 1;
             if ($PCO_Accion== "actualizar_perfil_usuario")			$retorno = 1;
