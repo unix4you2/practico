@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno="15"
-VersionCompatibleMes="8"
+VersionCompatibleAno=""
+VersionCompatibleMes=""
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno="15"
-VersionFinalMes="9"
+VersionFinalAno=""
+VersionFinalMes=""
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
@@ -16,14 +16,6 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
-core/informes.php
-core/marco_abajo.php
-core/marco_arriba.php
-core/menus.php
-core/tablas.php
-core/sesion.php
-core/usuarios.php
-core/ws_funciones.php
 inc/bootstrap/css/practico.min.css
 inc/bootstrap/js/practico.min.js
 inc/practico/idiomas/*
@@ -38,29 +30,13 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Las acciones en botones de informes pueden ser transferidas a ventanas nuevas, misma ventana, ventana padre o marco superior según los target disponibles para el estándar HTML
-* Added: El sistema de plantillas utilizado por la autenticación por OAuth ahora está disponible dentro de los usuarios estándar de la aplicación
-* Added: Funciones para desplegar dialogo emergente con estados y progresos
-* Fixed: Apariencia de botones de menu en Firefox.  Se agrega por defecto el tema de botones a las opciones del escritorio para mejorar su visualización.
-* Fixed: Eliminacion de warnings del lado del servidor web por variable WS_On no definida
-* Enhan: El boton de eliminar tabla en la administración de tablas de datos ha sido movido a la zona de peligro
-* Enhan: El campo de comandos de usuario en las acciones de informes ha sido ampliado a longitud indefinida
-* Enhan: Las operaciones de copia de informes y menues entre usuarios son ahora realizadas mediante una función.
-* Enhan: El campo de nombre de usuario es ampliado para permitir nombres de hasta 250 caracteres
-* Enhan: Agregadas optimizaciones a archivos CSS y JS. Incorporados los scripts para automatizar las optimizaciones en cada construccion
+
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-ALTER TABLE core_informe_boton ADD COLUMN destino VARCHAR(250) DEFAULT '_self';
-ALTER TABLE core_informe_boton ADD COLUMN pantalla_completa INT(1) DEFAULT '0';
-ALTER TABLE core_informe_boton ADD COLUMN precargar_estilos INT(1) DEFAULT '1';
-ALTER TABLE core_informe_boton CHANGE COLUMN accion_usuario accion_usuario TEXT;
 
-ALTER TABLE core_usuario ADD COLUMN es_plantilla INT(1) DEFAULT '0';
-ALTER TABLE core_usuario ADD COLUMN plantilla_permisos VARCHAR(250) DEFAULT '';
-ALTER TABLE core_usuario CHANGE COLUMN nombre nombre VARCHAR(250) DEFAULT '';
 "
 
 ########################################################################
