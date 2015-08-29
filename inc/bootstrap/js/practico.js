@@ -87,11 +87,39 @@ function PCOJS_MostrarMensaje(TituloPopUp, Mensaje)
 		$("#PCO_Modal_Mensaje").css("z-index", "1500");
 	}
 
-function PCOJS_MostrarMensajeCargando(TituloPopUp, Mensaje)
+function PCOJS_EstablecerPorcentajeProgreso(Porcentaje)
+	{
+		$('#PCO_Modal_MensajeCargandoPorcentaje').css('width', Porcentaje+'%').attr('aria-valuenow', Porcentaje);
+	}
+
+function PCOJS_OcultarMensajeCargando()
+	{
+		// Se oculta el cuadro modal
+		$('#PCO_Modal_MensajeCargando').modal('hide');
+		$('#PCO_Modal_MensajeCargando').hide();
+	}
+
+function PCOJS_MostrarMensajeCargando(TituloPopUp, Mensaje, PermitirCierre, Progreso)
 	{
 		//Lleva los valores a cada parte del dialogo modal
 		$('#PCO_Modal_MensajeCargandoTitulo').html(TituloPopUp);
 		$('#PCO_Modal_MensajeCargandoCuerpo').html(Mensaje);
+		
+		//Si no se habilita el cierre del cuadro oculta el boton
+		if (PermitirCierre!=1)
+			$('#PCO_Modal_MensajeCargandoBotonCerrar').hide();
+			
+		//Si se tiene un valor para la barra de progreso la muestra. Si es negativo la oculta
+		if (Progreso>=0)
+			{
+				PCOJS_EstablecerPorcentajeProgreso(Progreso);
+			}
+		else
+			{
+				$('#PCO_Modal_MensajeCargandoBarra').hide();
+				$('#PCO_Modal_MensajeCargandoPorcentaje').hide();
+				$('#PCO_Modal_MensajeCargandoPorcentaje').attr('aria-hidden', 'true').hide();
+			}
 
 		// Se muestra el cuadro modal
 		$('#PCO_Modal_MensajeCargando').modal('show');
@@ -99,21 +127,6 @@ function PCOJS_MostrarMensajeCargando(TituloPopUp, Mensaje)
 		//Hacer que la ventana este siempre por encima
 		$("#PCO_Modal_MensajeCargando").css("z-index", "1500");
 	}
-
-
-function PCOJS_OcultarMensajeCargando(TituloPopUp, Mensaje)
-	{
-		//Lleva los valores a cada parte del dialogo modal
-		$('#PCO_Modal_MensajeCargandoTitulo').html(TituloPopUp);
-		$('#PCO_Modal_MensajeCargandoCuerpo').html(Mensaje);
-
-		// Se muestra el cuadro modal
-		$('#PCO_Modal_MensajeCargando').modal('show');
-
-		//Hacer que la ventana este siempre por encima
-		$("#PCO_Modal_MensajeCargando").css("z-index", "1500");
-	}
-
 
 
 /*
