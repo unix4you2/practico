@@ -41,7 +41,7 @@ CREATE TABLE core_usuario (
   PRIMARY KEY  (login)
 );
 
-INSERT INTO core_usuario VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','Super usuario',1,'sucorreo@dominio.com','20110601','d41d8cd98f00b204e9800998ecf8427e',1,'');
+INSERT INTO core_usuario VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','Super usuario',1,'sucorreo@dominio.com','20110601','d41d8cd98f00b204e9800998ecf8427e',1,'',0,'');
 
 UPDATE core_usuario SET ultimo_acceso=CAST(now() AS date);
 
