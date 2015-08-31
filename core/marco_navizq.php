@@ -34,17 +34,20 @@
 	if ($PCOSESS_SesionAbierta && @$PCOSESS_LoginUsuario!="")
 		{
 ?>
+
             <div id="boton_menu_izquierdo" style="position: absolute; left: 1px; top: 60px;  z-index: 2;">
                 <i class="fa fa-indent fa-border texto-negro texto-blink" OnClick="javascript:barra_navegacion_izquierda_toggle('<?php if (@$ModoBarraMenuRecibido=="flotante") echo "flotante"; else echo "responsive"; ?>');"></i>
             </div>
             <div id="barra_navegacion_izquierda" class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     
+                    
                     <!--INICIO DE OPCIONES BARRA LATERAL-->
                         <ul class="nav" id="side-menu">
                             
-
                             <br>
+                            <div id="PCODIV_ArribaMenuLateral"></div>
+                            
                             <form name="datos_busqueda_home" action="<?php echo $ArchivoCORE; ?>" method="POST">
                             <li class="sidebar-search">
                                 <div class="input-group custom-search-form">
@@ -129,7 +132,7 @@
                                     }
                             ?>
 
-
+							<div id="PCODIV_AbajoMenuLateral"></div>
                         </ul>
                     <!--FIN DE OPCIONES BARRA LATERAL-->
 

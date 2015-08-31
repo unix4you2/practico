@@ -115,13 +115,12 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <br>
-
+						<div id="PCODIV_ArribaMenuSuperior"></div>
 						<?php
 							//Presenta advertencia sobre el modo de depuracion.  Se asume que debe estar siempre apagado en produccion
 							if ($ModoDepuracion)
 								mensaje($MULTILANG_ModoDepuracion, "", '', 'fa fa-fw fa-2x fa-info-circle texto-blink', 'alert alert-dismissible alert-danger');
 						?>
-
 
 
 
@@ -174,7 +173,6 @@
 		}
 	include_once("core/marco_chat.php");
 ?>
-
 
 
 				<?php
@@ -240,9 +238,8 @@
                         }
 
 				?>
-
+	<div id="PCODIV_AbajoMenuSuperior"></div>
 
 	<!-- INICIO  DE CONTENIDOS DE APLICACION DISENADA POR EL USUARIO -->
-
 
 

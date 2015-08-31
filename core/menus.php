@@ -831,7 +831,9 @@ if ($PCO_Accion=="administrar_menu")
 	if ($PCO_Accion=="Ver_menu" && $PCOSESS_SesionAbierta)
 		{ 
 			// Carga las opciones del ESCRITORIO
-			echo '<table class="table table-unbordered table-condensed"><tr><td>';
+			echo '
+			<div id="PCODIV_ArribaEscritorio"></div>
+			<table class="table table-unbordered table-condensed"><tr><td>';
 			// Si el usuario es diferente al administrador agrega condiciones al query
 			if ($PCOSESS_LoginUsuario!="admin")
 				{
