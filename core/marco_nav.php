@@ -50,7 +50,7 @@
 		<?php
 			//Presenta titulo de la aplicacion
 			if ($PCOSESS_SesionAbierta)
-				echo '<div id="PCODIV_TituloAplicacion"><b>'.$Nombre_Empresa_Corto.' - '.$Nombre_Aplicacion.' </b> <i> v'.$Version_Aplicacion.'</i></div>';
+				echo '<div id="PCODIV_TituloAplicacion" style="display:inline;"><b>'.$Nombre_Empresa_Corto.' - '.$Nombre_Aplicacion.' </b> <i> v'.$Version_Aplicacion.'</i></div>';
 			//else
 			//	echo $MULTILANG_SubtituloPractico1.' '.$MULTILANG_SubtituloPractico2;
 		?>
