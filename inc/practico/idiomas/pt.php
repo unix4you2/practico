@@ -535,6 +535,7 @@
 	$MULTILANG_FrmMsjCopia='Agora você pode ir para editar o seu novo objeto. Uma cópia foi maded como: ';
 	$MULTILANG_FrmBordesVisibles='São os limites da tabela visível?';
 	$MULTILANG_FrmFormatoSalida='formato de saída';
+	$MULTILANG_FrmFormatoEntrada='Formato de entrada';
 	$MULTILANG_FrmPlantillaArchivo='Template nome para o arquivo';
 	$MULTILANG_FrmDesPlantillaArchivo='O molde é a forma ou padrão que será renomeado o arquivo depois que o usuário enviado para o servidor. Isto pode incluir diferentes variáveis a alterar o nome e a sua extensão como exemplos. Você também pode deixá-lo em branco para que os arquivos são carregados com o nome original das cargas do sistema pasta (não recomendado para segurança).';
 	$MULTILANG_FrmErrorCargaGeneral='Ocorreu um erro durante o carregamento';
@@ -862,6 +863,10 @@
     $MULTILANG_TblOptimizar='Otimizar tabelas';
     $MULTILANG_TblVaciar='Vazio';
     $MULTILANG_TblVaciarAdv='Esta ação ir&aacute; excluir todos os registros nesta tabela, você tem certeza?';
+    $MULTILANG_TblImportarXLS='Carregar a partir de planilha';
+    $MULTILANG_TblXLSConsejo='Carregando e combinar campos em um arquivo de planilha com o seu banco de dados atual que você pode ser a exclusão, criando ou substituindo tabelas, registros e outras informações relacionadas, bem como projetos e outros elementos contidos nos registros associados. <br><br><b>É recomendado que você faça um backup antes de este processo antes de continuar.</b><br><br>A primeira linha da planilha deve conter como títulos o nome exato do campo na tabela da qual você deseja importar valores.';
+    $MULTILANG_TblTablaImportacion='Por favor, selecione a tabela na qual você deseja importar os dados';
+    $MULTILANG_TblCorrespondencia='A correspondência entre os campos e colunas de arquivo da tabela';
 
 	//Usuarios
 	$MULTILANG_UsrCopia='Permissões de cópia concluída. Por favor, verifique abaixo.';

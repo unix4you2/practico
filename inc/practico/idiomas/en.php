@@ -535,6 +535,7 @@
 	$MULTILANG_FrmMsjCopia='Now you can go to edit your new object.  A copy was made as: ';
 	$MULTILANG_FrmBordesVisibles='Are table borders visible?';
 	$MULTILANG_FrmFormatoSalida='Output format';
+	$MULTILANG_FrmFormatoEntrada='Input format';
 	$MULTILANG_FrmPlantillaArchivo='Name template for the file';
 	$MULTILANG_FrmDesPlantillaArchivo='The template is the form or pattern that will be renamed the file after the user uploaded to the server. This may include different variables to alter the name and extension thereof as examples. You can also leave it blank so that the files are loaded with the original name of the folder system loads (not recommended for security).';
 	$MULTILANG_FrmErrorCargaGeneral='There was an error during the upload';
@@ -847,7 +848,7 @@
     $MULTILANG_TblTipoCopia2='Data (INSERT Sentences)';
     $MULTILANG_TblTipoCopia3='Structure and Data (CREATE and INSERT sentences)';
     $MULTILANG_TblImportar='Import from file';
-    $MULTILANG_TblImportarSQL='Upload a compressed SQL';
+    $MULTILANG_TblImportarSQL='Upload a compressed SQL script';
     $MULTILANG_TblSQLConsejo='If you execute the SQL sentences of this file you could be erasing, creating or overwriting tables and many other information, even designs and other things the you exported in that records. <br><br><b>We recomend you that make a backup before continue.</b>';
     $MULTILANG_TblEjecutarSQL='Run SQL sentences in this file (could take some time)';
     $MULTILANG_TblDecodificarActual='Collation or charset for the actual records or data table';
@@ -862,6 +863,10 @@
     $MULTILANG_TblOptimizar='Optimize tables';
     $MULTILANG_TblVaciar='Empty';
     $MULTILANG_TblVaciarAdv='This action will delete all records in this table, are you sure?';
+    $MULTILANG_TblImportarXLS='Upload from spreadsheet';
+    $MULTILANG_TblXLSConsejo='Loading and match fields in a spreadsheet file with your current database you might be deleting, creating or overwriting tables, records and other related information, as well as designs and other elements contained in the associated records. <br><br><b>It is recommended that you make a backup prior to this process before continuing.</b><br><br>The first row of the spreadsheet should contain as headings the exact name of the field in the table on which you want to import values.';
+    $MULTILANG_TblTablaImportacion='Please select the table on which you want to import data';
+    $MULTILANG_TblCorrespondencia='Correspondence between table fields and columns of file';
 
 	//Usuarios
 	$MULTILANG_UsrCopia='Permissions copy completed. Please check below.';

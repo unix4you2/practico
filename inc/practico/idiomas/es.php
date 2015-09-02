@@ -532,6 +532,7 @@
 	$MULTILANG_FrmMsjCopia='Ahora puede ingresar a editar su nuevo objeto.  Se ha creado una copia como: ';
 	$MULTILANG_FrmBordesVisibles='Bordes de tabla visibles?';
 	$MULTILANG_FrmFormatoSalida='Formato de salida';
+	$MULTILANG_FrmFormatoEntrada='Formato de entrada';
 	$MULTILANG_FrmPlantillaArchivo='Plantilla para el nombre del archivo';
 	$MULTILANG_FrmDesPlantillaArchivo='La plantilla es la forma o patron en que sera renombrado el archivo una vez subido por el usuario al servidor.  Esto puede incluir diferentes variables para alterar el nombre y la extension del mismo como los ejemplos. Tambien puede dejarla en blanco para que los archivos sean cargados con el nombre original sobre la carpeta de cargas del sistema (No recomendado por seguridad).';
 	$MULTILANG_FrmErrorCargaGeneral='Ha ocurrido un error durante la carga del archivo';
@@ -844,7 +845,7 @@
     $MULTILANG_TblTipoCopia2='Datos (Sentencias INSERT)';
     $MULTILANG_TblTipoCopia3='Estructura y datos (Sentencias CREATE e INSERT)';
     $MULTILANG_TblImportar='Importar desde archivo';
-    $MULTILANG_TblImportarSQL='Cargar SQL comprimido';
+    $MULTILANG_TblImportarSQL='Cargar script SQL comprimido';
     $MULTILANG_TblSQLConsejo='Al ejecutar las sentencias SQL contenidas en el archivo usted podria estar eliminando, creando o sobreescribiendo tablas, registros y demas informacion asociada, asi como dise&ntilde;os y otros elementos contenidos en los registros asociados. <br><br><b>Se recomienda que haga una copia de seguridad previo a este proceso antes de continuar.</b>';
     $MULTILANG_TblEjecutarSQL='Ejecutar sentencias SQL del archivo (puede tardar)';
     $MULTILANG_TblDecodificarActual='Codificacion o set de caracteres actual de los registros o tabla de datos';
@@ -859,7 +860,11 @@
     $MULTILANG_TblOptimizar='Optimizar tablas';
     $MULTILANG_TblVaciar='Vaciar';
     $MULTILANG_TblVaciarAdv='Esta operacion eliminara todos los registros de la tabla, esta seguro?';
-
+    $MULTILANG_TblImportarXLS='Desde hojas de c&aacute;lculo';
+    $MULTILANG_TblXLSConsejo='Al cargar y aparear campos de un archivo de hoja de calculo con su base de datos actual usted podria estar eliminando, creando o sobreescribiendo tablas, registros y demas informacion asociada, asi como dise&ntilde;os y otros elementos contenidos en los registros asociados. <br><br><b>Se recomienda que haga una copia de seguridad previo a este proceso antes de continuar.</b><br><br><font color=red><b>Importante:</b> </font>La primera fila de la hoja de calculo debera contener como encabezados el nombre exacto del campo en la tabla sobre la cual se desea importar los valores.';
+    $MULTILANG_TblTablaImportacion='Por favor seleccione la tabla sobre la cual desea importar los datos';
+    $MULTILANG_TblCorrespondencia='Correspondencia entre campos de tabla y columnas de archivo';
+    
 	//Usuarios
 	$MULTILANG_UsrCopia='Copia de permisos finalizada.  Por favor verifique a continuacion.';
 	$MULTILANG_UsrDesPW='Las contrase&ntilde;as con condiciones m&iacute;nimas de seguridad deben tener una longitud de <b>al menos 8 caracteres</b>, n&uacute;meros, letras en may&uacute;scula y en min&uacute;scula o s&iacute;mbolos permitidos como <font color=blue>$ *</font>.  Para que su contrase&ntilde;a sea considerada segura por este sistema <b>debe cumplir al menos con un nivel de seguridad del 81%</b>';

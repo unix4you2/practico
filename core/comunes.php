@@ -397,6 +397,176 @@ function listado_visual_exploracion_archivos($RutaExploracion="",$Filtro_conteni
             }
     }
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: opciones_combo_desdecsv
+	Genera una lista de seleccion con la variable recibida y los items separados por un caracter especifico
+*/
+function opciones_combo_desdecsv($lista_opciones,$caracter_separador,$valor_comparacion="")
+	{
+		$SalidaFormateada="";
+		$campos = explode($caracter_separador, $lista_opciones);
+		for ($i=0;$i<count($campos);$i++)
+			{
+				$cadena_seleccion="";
+				if ($campos[$i]==$valor_comparacion)
+				$cadena_seleccion=" selected ";
+				$SalidaFormateada.= '<option value="'.$campos[$i].'" '.$cadena_seleccion.'>'.$campos[$i].'</option>';
+			}
+		return $SalidaFormateada;
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: aparear_campostabla_vs_hojacalculo
+	Abre un archivo de hoja de cálculo y lo compara frente a los campos de una tabla de datos para ver si existen, tipos de dato, etc.
+	
+	Variables de entrada:
+
+		PathArchivo - Ruta completa al archivo que se desea cargar
+		NombreTabla - Nombre de la tabla a revisar campos
+*/
+function aparear_campostabla_vs_hojacalculo($NombreTabla,$PathArchivo)
+	{
+		global $MULTILANG_Campo,$MULTILANG_Columna,$MULTILANG_Tablas,$MULTILANG_Archivo;
+
+		$SalidaFormateada.='<table class="table table-condensed btn-xs table-hover table-striped table-unbordered table-responsive" id="TablaArchivoCSV_Apareado"><thead><tr>
+			<th>'.$MULTILANG_Campo.' ('.$MULTILANG_Tablas.')</th>
+			<th></th>
+			<th>'.$MULTILANG_Columna.' ('.$MULTILANG_Archivo.')</th>
+			</tr></thead><tbody>';
+
+		//Busca las columnas definidas en el archivo
+		$ColumnasArchivo = columnas_desde_hojacalculo($PathArchivo);
+		//Genera la lista en minuscula para ser pasada a los combos
+		$ListaColumnas="";
+		foreach ($ColumnasArchivo as $ColumnaLista)
+			$ListaColumnas.="|".strtolower($ColumnaLista);
+		
+		//Busca las columnas definidas en la tabla
+		$CamposTabla=consultar_columnas($NombreTabla);
+
+		//Busca por cada campo de tabla algun equivalente en las columnas
+		for($i=0;$i<count($CamposTabla);$i++)
+			{				
+				$SalidaFormateada.= '<tr>';
+					$SalidaFormateada.= '<td>'.$CamposTabla[$i]["nombre"].'</td>';
+					$SalidaFormateada.= '<td><i class="fa fa-exchange"></i></td>';
+					//Genera combo de columnas de archivo preseleccionando uno si aplica
+					$OpcionesCombo=opciones_combo_desdecsv($ListaColumnas,"|",strtolower($CamposTabla[$i]["nombre"]));
+					//Presenta combo
+					$SalidaFormateada.= '<td><select id="PCO_campoimportado_'.strtolower($CamposTabla[$i]["nombre"]).'" name="PCO_campoimportado_'.strtolower($CamposTabla[$i]["nombre"]).'" class="btn btn-xs btn-default">'.$OpcionesCombo.'</select></td>';
+				$SalidaFormateada.= '</tr>';
+				//.$objPHPExcel->getActiveSheet()->getCellByColumnAndRow($Columna, $Fila)->getFormattedValue().'</td>';	// METODO1: getCell('A1')->getFormattedValue(); METODO2: getCellByColumnAndRow(1, 2)->getFormattedValue();
+			}
+		$SalidaFormateada.= '</tbody></table>';
+		return $SalidaFormateada;
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: columnas_desde_hojacalculo
+	Abre un archivo de hoja de cálculo y busca las columnas definidas en la primera fila de la primera hoja
+	
+	Variables de entrada:
+
+		PathArchivo - Ruta completa al archivo que se desea analizar
+
+	Variables de salida:
+
+		ArregloColumnas - Variable con la lista de columas encontradas
+*/
+function columnas_desde_hojacalculo($PathArchivo)
+	{
+		$ArregloColumnas=array();
+
+		//Crea el objeto para lectura del archivo
+		$XLFileType = PHPExcel_IOFactory::identify($PathArchivo);
+		$objReader = PHPExcel_IOFactory::createReader($XLFileType);
+		$objReader->setLoadSheetsOnly(0);	//Asume que la primera hoja tiene los datos.  ALTERNATIVA INDICANDO EL NOMBRE DE HOJA : $objReader->setLoadSheetsOnly('Hoja1');
+		$objPHPExcel = $objReader->load($PathArchivo);
+
+		$Fila=1;
+		$MaximaColumna=0;
+
+		//Determina el numero de columna maxima y genera la primera fila como encabezados
+		while ($objPHPExcel->getActiveSheet()->getCellByColumnAndRow($MaximaColumna, $Fila)->getFormattedValue()!="")
+			{
+				$ArregloColumnas[]=$objPHPExcel->getActiveSheet()->getCellByColumnAndRow($MaximaColumna, $Fila)->getFormattedValue();
+				$MaximaColumna++;
+			}
+
+		return $ArregloColumnas;
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: datatable_desde_hojacalculo
+	Abre un archivo de hoja de cálculo y lo presenta en formato DataTable
+	
+	Variables de entrada:
+
+		PathArchivo - Ruta completa al archivo que se desea cargar
+		NroLineas - Cantidad de lineas para ser agregadas al DataTable.  Cero para ilimitado
+*/
+function datatable_desde_hojacalculo($PathArchivo,$NroLineas)
+	{
+		global $PCO_InformesDataTable;
+		
+		@$PCO_InformesDataTable.="TablaArchivoCSV_Importado|"; //Agrega la tabla a la lista de DataTables para ser convertida
+		$SalidaFormateada.='<table class="table table-condensed btn-xs table-hover table-striped table-unbordered table-responsive" id="TablaArchivoCSV_Importado"><thead><tr>';
+
+		//Crea el objeto para lectura del archivo
+		$XLFileType = PHPExcel_IOFactory::identify($PathArchivo);
+		$objReader = PHPExcel_IOFactory::createReader($XLFileType);
+		$objReader->setLoadSheetsOnly(0);	//Asume que la primera hoja tiene los datos.  ALTERNATIVA INDICANDO EL NOMBRE DE HOJA : $objReader->setLoadSheetsOnly('Hoja1');
+		$objPHPExcel = $objReader->load($PathArchivo);
+
+		$Fila=1;
+		$Columna=0;
+		$MaximaFila=$NroLineas;
+		$MaximaColumna=0;
+
+		//Determina el numero de columna maxima y genera la primera fila como encabezados
+		$ColumnasEncabezado=columnas_desde_hojacalculo($PathArchivo);
+		foreach ($ColumnasEncabezado as $TituloColuma)
+			{
+				//$SalidaFormateada.= '<th>COL_'.($MaximaColumna+1).'<br>'.$TituloColuma.'</th>';
+				$SalidaFormateada.= '<th>'.$TituloColuma.'</th>';
+				$MaximaColumna++;
+			}
+
+		$SalidaFormateada.= '</tr></thead><tbody>';
+
+		$Fila++; //Obvia la primera fila pues ya fue usada como encabezados
+		//Recorre la hoja segun las columnas encontradas y las filas solicitadas
+		while ($Fila<=$MaximaFila)
+			{
+				//Asume que la primera columna siempre tiene dato (llave o algo minimo) para agregarla a la tabla, sino no es agregada
+				if ($objPHPExcel->getActiveSheet()->getCellByColumnAndRow($Columna, $Fila)->getFormattedValue()!="")
+					{
+						$SalidaFormateada.= '</tr>';
+						while ($Columna<$MaximaColumna)
+							{
+								$SalidaFormateada.= '<td>'.$objPHPExcel->getActiveSheet()->getCellByColumnAndRow($Columna, $Fila)->getFormattedValue().'</td>';	// METODO1: getCell('A1')->getFormattedValue(); METODO2: getCellByColumnAndRow(1, 2)->getFormattedValue();
+								$Columna++;
+							}
+						$SalidaFormateada.= '</tr>';
+						$Columna=0;
+					}
+				$Fila++;
+			}
+		$SalidaFormateada.= '</tbody></table>';
+		return $SalidaFormateada;
+	}
+
 
 /* ################################################################## */
 /* ################################################################## */
@@ -481,6 +651,9 @@ function listado_visual_exploracion_archivos($RutaExploracion="",$Filtro_conteni
 			if ($PCO_Accion== "copiar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
 			if ($PCO_Accion== "importar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
 			if ($PCO_Accion== "confirmar_importacion_tabla")		$retorno = permiso_agregado_accion("administrar_tablas");
+			if ($PCO_Accion== "analizar_importacion_csv")			$retorno = permiso_agregado_accion("administrar_tablas");
+			if ($PCO_Accion== "escogertabla_importacion_csv")		$retorno = permiso_agregado_accion("administrar_tablas");
+
 			// Funciones en core/formularios.php
 			if ($PCO_Accion== "guardar_datos_formulario")			$retorno = 1;
 			if ($PCO_Accion== "eliminar_datos_formulario")			$retorno = 1;

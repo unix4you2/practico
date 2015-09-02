@@ -628,7 +628,7 @@ if ($PCO_Accion=="definir_copia_tablas")
 		 ?>
 
 		<div class="row">
-			<div class="col col-md-6">
+			<div class="col col-md-12">
 
 				<?php abrir_ventana($MULTILANG_FrmTipoObjeto, 'panel-primary'); ?>
 				<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
@@ -716,40 +716,7 @@ if ($PCO_Accion=="definir_copia_tablas")
 				<?php cerrar_ventana(); ?>
 
 			</div>
-			<div class="col col-md-6">
-			
-			
-				
-			
-				<!---
-				<?php abrir_ventana($MULTILANG_FrmTipoObjeto, 'panel-primary'); ?>
-				<form name="datos2" id="datos2" action="<?php echo $ArchivoCORE; ?>" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="copiar_tabla">
-					<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 
-					<br>
-					
-					<h4><?php echo $MULTILANG_FrmTipoCopiaExporta; ?>: <b><?php echo $nombre_tabla; ?></b></h4>
-					<label for="tipo_copia_objeto"><?php echo $MULTILANG_FrmTipoCopia; ?>:</label>
-					<select id="tipo_copia_objeto" name="tipo_copia_objeto" class="form-control btn-warning" >
-						<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
-						<option value="Estructura"><?php echo $MULTILANG_TblTipoCopia1; ?></option>
-						<option value="Datos"><?php echo $MULTILANG_TblTipoCopia2; ?></option>
-						<option value="Estructura+Datos"><?php echo $MULTILANG_TblTipoCopia3; ?></option>
-					</select>
-
-				</form>
-				<br>
-				<div align=center>
-				<a class="btn btn-success" href="javascript:document.datos2.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCopiar; ?></a>
-				<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
-				</div>
-				<?php cerrar_ventana(); ?>
-				-->
-			
-			
-			</div>
-		
 		</div>
 
 		<?php
@@ -820,6 +787,100 @@ if ($PCO_Accion=="confirmar_importacion_tabla")
 	}
 
 
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: analizar_importacion_csv
+	Revisa los archivos de hoja de calculo cargados antes de subirlos a la tabla de datos
+*/
+if ($PCO_Accion=="analizar_importacion_csv")
+	{
+		 ?>
+
+		<h2><?php echo $MULTILANG_Importando; ?>  <b><?php echo str_replace("tmp/","",$archivo_cargado); ?> <i class="fa fa-arrow-right"></i> <?php echo $nombre_tabla; ?></b></h2>
+		<div class="row">
+			<div class="col col-md-12">
+				<?php
+					abrir_ventana($MULTILANG_InfCargaPrev.' '.str_replace("tmp/","",$archivo_cargado), 'panel-primary'); 
+					echo datatable_desde_hojacalculo($archivo_cargado,100);
+				?>
+				<?php cerrar_ventana(); ?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col col-md-6">
+				<?php
+					abrir_ventana($MULTILANG_TblCorrespondencia, 'panel-warning'); 
+				?>
+					<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="ejecutar_importacion_csv">
+						<input type="Hidden" name="archivo_cargado" value="<?php echo $archivo_cargado; ?>">
+						<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
+				<?php
+					echo aparear_campostabla_vs_hojacalculo($nombre_tabla,$archivo_cargado);
+				?>
+					</form>
+				<?php cerrar_ventana(); ?>
+			</div>
+			<div class="col col-md-6">
+
+					<br>
+					<div align=center>
+						<b><?php echo $MULTILANG_Confirma; ?><br></b>
+					<a class="btn btn-danger" href="javascript:document.datos.submit();"><i class="fa fa-arrow-circle-right"></i> <?php echo $MULTILANG_Importar; ?></a>
+					<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> <?php echo $MULTILANG_Cancelar; ?></a>
+					</div>
+					
+					
+			</div>
+		</div>
+
+		<?php
+		cerrar_ventana();
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: analizar_importacion_csv
+	Revisa los archivos de hoja de calculo cargados antes de subirlos a la tabla de datos
+*/
+if ($PCO_Accion=="escogertabla_importacion_csv")
+	{
+		abrir_ventana($MULTILANG_Seleccionar, 'panel-primary'); ?>
+				<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+					<input type="Hidden" name="PCO_Accion" value="analizar_importacion_csv">
+					<input type="Hidden" name="archivo_cargado" value="<?php echo $archivo_cargado; ?>">
+
+					<h4><label for="nombre_tabla"><?php echo $MULTILANG_TablaDatos; ?>:</label></h4>
+					
+					<?php echo $MULTILANG_TblTablaImportacion; ?>
+					<select id="nombre_tabla" name="nombre_tabla" class="form-control btn-warning">
+					<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+						 <?php
+								$resultado=consultar_tablas();
+								while ($registro = $resultado->fetch())
+									{
+										// Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
+										if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
+											echo '<option value="'.$registro[0].'" >'.str_replace($TablasApp,'',$registro[0]).'</option>';
+									}
+						?>
+					</select>
+
+				</form>
+				<br>
+				<div align=center>
+				<a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-arrow-circle-right"></i> <?php echo $MULTILANG_Continuar; ?></a>
+				<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+				</div>
+		<?php
+		cerrar_ventana();
+	}
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -834,19 +895,22 @@ if ($PCO_Accion=="importar_tabla")
 
     <ul class="nav nav-tabs nav-justified">
     <li class="active"><a href="#pestana_importacion" data-toggle="tab"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_TblImportarSQL; ?></a></li>
+    <li><a href="#pestana_importacion_csv" data-toggle="tab"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_TblImportarXLS; ?></a></li>
     <li><a href="#historico_importaciones" data-toggle="tab"><i class="fa fa-history"></i> <?php echo $MULTILANG_Historico; ?></a></li>
     </ul>
 
     <div class="tab-content">
         
-        <!-- INICIO TAB IMPORTACION -->
+        <!-- INICIO TAB IMPORTACION SQL -->
         <div class="tab-pane fadein active" id="pestana_importacion">
             <br>
             <b><?php echo $MULTILANG_Atencion.":</b><br>".$MULTILANG_TblSQLConsejo; ?>
-            <br><br>
-            <div align="center">
+            <br><hr>
                         <form action="<?php echo $ArchivoCORE; ?>" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="extension_archivo" value=".gz">
+							<label for="extension_archivo"><?php echo $MULTILANG_FrmFormatoEntrada; ?>:</label>
+							<select id="extension_archivo" name="extension_archivo" class="form-control">
+								<option value=".gz">.GZ (<?php echo $MULTILANG_TblImportarSQL; ?>)</option>
+							</select>
                             <input type="hidden" name="MAX_FILE_SIZE" value="8192000">
                             <input type="Hidden" name="PCO_Accion" value="cargar_archivo">
                             <input type="Hidden" name="siguiente_accion" value="confirmar_importacion_tabla">
@@ -856,11 +920,37 @@ if ($PCO_Accion=="importar_tabla")
                             <br>
                             <button type="submit"  class="btn btn-success"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_CargarArchivo; ?></button> (<?php echo $MULTILANG_ActSobreescritos; ?>)
                         </form> 
-                        <hr>
-            </div>
+                        <br><hr>
         </div>
-        <!-- FIN TAB IMPORTACION -->
-        
+        <!-- FIN TAB IMPORTACION SQL -->
+
+        <!-- INICIO TAB IMPORTACION HOJAS DE CALCULO-->
+        <div class="tab-pane fadein" id="pestana_importacion_csv">
+            <br>
+            <b><?php echo $MULTILANG_Atencion.":</b><br>".$MULTILANG_TblXLSConsejo; ?>
+            <br><hr>
+                        <form action="<?php echo $ArchivoCORE; ?>" method="post" enctype="multipart/form-data">
+							<label for="extension_archivo"><?php echo $MULTILANG_FrmFormatoEntrada; ?>:</label>
+							<select id="extension_archivo" name="extension_archivo" class="form-control">
+								<option value=".xls"  >Excel 5 (.XLS)</option>
+								<option value=".xlsx" >Excel 2007 (.XLSX - XML Document)</option>
+								<option value=".ods"  >Libre Office (.ODS - Open Document)</option>
+								<option value=".csv"  >Separado por comas (.CSV - Comma Separated Values)</option>
+							</select>
+							<br>
+                            <input type="hidden" name="MAX_FILE_SIZE" value="8192000">
+                            <input type="Hidden" name="PCO_Accion" value="cargar_archivo">
+                            <input type="Hidden" name="siguiente_accion" value="escogertabla_importacion_csv">
+                            <input type="Hidden" name="texto_boton_siguiente" value="<?php echo $MULTILANG_Continuar; ?>">
+                            <input type="Hidden" name="carpeta" value="tmp">
+                            <input name="archivo" type="file" class="form-control btn btn-info">
+                            <br>
+                            <button type="submit"  class="btn btn-success"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_CargarArchivo; ?></button> (<?php echo $MULTILANG_ActSobreescritos; ?>)
+                        </form> 
+                        <br><hr>
+        </div>
+        <!-- FIN TAB IMPORTACION HOJAS DE CALCULO -->
+
 
         <!-- INICIO TAB HISTORICO DE IMPORTACIONES -->
         <div class="tab-pane fade" id="historico_importaciones">

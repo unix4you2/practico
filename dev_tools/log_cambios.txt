@@ -21,6 +21,7 @@ core/marco_arriba.php
 core/marco_nav.php
 core/marco_navizq.php
 core/menus.php
+core/tablas.php
 inc/bootstrap/css/practico.min.css
 inc/bootstrap/js/practico.min.js
 inc/practico/idiomas/*
