@@ -56,7 +56,7 @@
     <div id="PCODIV_FormulariosDinamicos" style="visibility: hidden; display: none;"></div>
 
 <!-- INICIA MARCO DE CHAT -->
-<!--<div id="main_container" style="overflow: auto;">-->
+<!-- <div id="main_container" style="overflow: auto;"> -->
 
     <div id="wrapper">
  
