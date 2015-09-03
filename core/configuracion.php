@@ -90,3 +90,6 @@
 	$Auth_LDAPPuerto='389';
 	$Auth_LDAPDominio='dc=practico,dc=org';
 	$Auth_LDAPOU='Usuarios';
+	
+	// Cadena separadora de campos
+	$_SeparadorCampos_='||_||';

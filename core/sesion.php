@@ -124,7 +124,11 @@
 						// Antes con depreciada: session_register('PCOSESS_LoginUsuario');
 						@session_start();
 						if (!isset($_SESSION["PCOSESS_LoginUsuario"])) $_SESSION["PCOSESS_LoginUsuario"]=(string)$resultado_webservice->credencial[0]->login;
-						if (!isset($_SESSION["username"])) $_SESSION["username"]=(string)$registro["login"]; //Usada para el modulo de chat
+						
+						//Agrega variable de sesion para el modulo de chat.  Quita puntos, espacios y otros caracteres del usuario que generen errores en JS
+						$NombreUsuarioChat = preg_replace("/[^a-zA-Z0-9]/", "_", $registro["login"] );
+						if (!isset($_SESSION["username"])) $_SESSION["username"]=(string)$NombreUsuarioChat;
+						
 						if (!isset($_SESSION["Nombre_usuario"])) $_SESSION["Nombre_usuario"]=(string)$resultado_webservice->credencial[0]->nombre;
 						if (!isset($_SESSION["Descripcion_usuario"])) $_SESSION["Descripcion_usuario"]=(string)$resultado_webservice->credencial[0]->descripcion;
 						if (!isset($_SESSION["Nivel_usuario"])) $_SESSION["Nivel_usuario"]=(string)$resultado_webservice->credencial[0]->nivel;

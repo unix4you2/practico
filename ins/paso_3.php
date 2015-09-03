@@ -124,7 +124,10 @@
 	\$Auth_LDAPServidor='%s';
 	\$Auth_LDAPPuerto='%s';
 	\$Auth_LDAPDominio='%s';
-	\$Auth_LDAPOU='%s';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW);
+	\$Auth_LDAPOU='%s';
+	
+	// Define cadena usada para separar campos en operaciones de bases de datos
+	\$_SeparadorCampos_='||_||';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW);
 	// Escribe el archivo de configuracion
 	$archivo_config=fopen("../core/configuracion.php","w");
 	if($archivo_config==null)

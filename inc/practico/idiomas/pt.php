@@ -244,6 +244,8 @@
     $MULTILANG_EspacioLiberado='O espaço em disco liberado';
     $MULTILANG_TitDemo='A função não est&aacute; dispon&iacute;vel Apelou';
     $MULTILANG_MsjDemo='Você est&aacute; em uma instalação em modo DEMO (ou demonstração). Essas instalações não permitem que você interaja livremente com todos os controles de segurança. Isso ajuda a garantir que você estar&aacute; sempre dispon&iacute;vel para todos os usu&aacute;rios que querem experimentar a plataforma.';
+    $MULTILANG_SeparadorCampos='Valor de string para separador de campo';
+    $MULTILANG_SeparadorCamposDes='Usado para separar valores em consultas sobre o motor de base de dados. Este deve ser um valor incomum para manter qualquer correspondência com os dados inseridos por usu&aacute;rios';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Design do aplicativo';

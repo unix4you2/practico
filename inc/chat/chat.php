@@ -48,7 +48,7 @@ if (!isset($_SESSION['openChatBoxes'])) {
 
 function chatHeartbeat() {
 	
-	global $TablasCore;
+	global $TablasCore,$ZonaHoraria;
 	
 	$usuario_chat=$_SESSION['username'];
 	$consulta=ejecutar_sql("select * from ".$TablasCore."chat where (".$TablasCore."chat.destinatario = ? AND recd = 0) order by id ASC","$usuario_chat");
@@ -92,6 +92,7 @@ EOD;
 	if (!empty($_SESSION['openChatBoxes'])) {
 	foreach ($_SESSION['openChatBoxes'] as $chatbox => $time) {
 		if (!isset($_SESSION['tsChatBoxes'][$chatbox])) {
+			date_default_timezone_set($ZonaHoraria);
 			$now = time()-strtotime($time);
 			$time = date('g:iA M dS', strtotime($time));
 
@@ -123,7 +124,7 @@ EOD;
 }
 
 	$usuario_chat=$_SESSION['username'];
-	ejecutar_sql_unaria("update ".$TablasCore."chat set recd = 1 where ".$TablasCore."chat.destinatario = ? and recd = 0","$usuario_chat");
+	ejecutar_sql_unaria("UPDATE ".$TablasCore."chat SET recd = 1 WHERE ".$TablasCore."chat.destinatario = ? and recd = 0","$usuario_chat");
 
 	if ($items != '') {
 		$items = substr($items, 0, -1);
@@ -165,9 +166,10 @@ function startChatSession() {
 	}
 
 header('Content-type: application/json');
+$UsuarioChat = @$_SESSION['username'];
 ?>
 {
-		"username": "<?php echo $_SESSION['username'];?>",
+		"username": "<?php echo $UsuarioChat; ?>",
 		"items": [
 			<?php echo $items;?>
         ]
@@ -179,11 +181,11 @@ header('Content-type: application/json');
 }
 
 function sendChat() {
-	global $TablasCore;
+	global $TablasCore,$_SeparadorCampos_,$ZonaHoraria;
 	$remitente = $_SESSION['username'];
 	$destinatario = $_POST['destinatario'];
 	$message = $_POST['message'];
-
+	date_default_timezone_set($ZonaHoraria);
 	$_SESSION['openChatBoxes'][$_POST['destinatario']] = date('Y-m-d H:i:s', time());
 	
 	$messagesan = sanitize($message);
@@ -203,7 +205,7 @@ EOD;
 
 	unset($_SESSION['tsChatBoxes'][$_POST['destinatario']]);
 
-	ejecutar_sql_unaria("insert into ".$TablasCore."chat (".$TablasCore."chat.remitente,".$TablasCore."chat.destinatario,message,sent) values (?,?,?,NOW());","$remitente||$destinatario||$message");
+	ejecutar_sql_unaria("INSERT INTO ".$TablasCore."chat (".$TablasCore."chat.remitente,".$TablasCore."chat.destinatario,message,sent) values (?,?,?,NOW());","$remitente$_SeparadorCampos_$destinatario$_SeparadorCampos_$message");
 	echo "1";
 	exit(0);
 }

@@ -242,6 +242,16 @@
                                             <a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_AyudaGABeacon; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                         </span>
                                     </div>
+
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-text-width fa-fw"></i> <?php echo $MULTILANG_SeparadorCampos; ?>:
+                                        </span>
+                                        <input name="_SeparadorCampos_NEW" value="<?php echo $_SeparadorCampos_; ?>" type="text" class="form-control" readonly>
+                                        <span class="input-group-addon">
+                                            <a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_SeparadorCamposDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                        </span>
+                                    </div>
                                 </div>
 
 

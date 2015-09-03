@@ -18,12 +18,17 @@ index.php
 core/comunes.php
 core/marco_abajo.php
 core/marco_arriba.php
+core/marco_chat.php
+core/marco_conf.php
 core/marco_nav.php
 core/marco_navizq.php
 core/menus.php
+core/objetos.php
+core/sesion.php
 core/tablas.php
 inc/bootstrap/css/practico.min.css
 inc/bootstrap/js/practico.min.js
+inc/chat/chat.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 "
@@ -45,6 +50,11 @@ LogCambios="
 	* PCODIV_AbajoEscritorio: Justo antes de cerrar la aplicación en la parte inferior del escritorio
 	* PCODIV_TituloAplicacion: En la parte superior de la aplicación, incluye los valores por defecto
 * Added: Asistente de importación de datos desde archivos de hoja de cálculo
+* Fixed: Acentos idioma portugues
+* Fixed: Nombres de usuario filtrados para evitar errores de JS en modulo de chat
+* Fixed: Inserción de mensajes en módulo de chat basados en la variable de separacion de campos
+* Enhan: Variable de separador de campos es movida al archivo de configuracion principal
+* Enhan: Eliminados warnings por zona horaria no definida en el modulo de chat
 "
 
 ########################################################################

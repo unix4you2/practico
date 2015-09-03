@@ -41,7 +41,7 @@
             $resultado=ejecutar_sql("SELECT $ListaCamposSinID_usuario from ".$TablasCore."usuario WHERE login<>'$PCOSESS_LoginUsuario' ");
 
             //Presenta la lista de usuarios
-            echo '<table class="table">
+            echo '<table class="table table-condensed table-hover btn-xs table-responsive">
                         <tr>
                             <td valign=middle align=center  bgcolor=darkgray>
                                 <font size=2 color=black>
@@ -62,12 +62,13 @@
                         </tr>';
             while($usuarios_chat = $resultado->fetch())
                 {
+                    $NombreUsuarioChat = preg_replace("/[^a-zA-Z0-9]/", "_", $usuarios_chat["login"] );
                     echo '
                         <tr>
                             <td valign=middle align=left>
                                 <i class="fa fa-user texto-azul"></i>
                                 <font size=2 color=black>
-                                    <b>'.$usuarios_chat["login"].'</b>
+                                    <b>'.$NombreUsuarioChat.'</b>
                                 </font>
                             </td>
                             <td valign=middle align=left>
@@ -81,7 +82,7 @@
                                 </font>
                             </td>
                             <td valign=middle>
-                                <button type="button" class="btn btn-success" onClick="chatWith(\''.$usuarios_chat["login"].'\'); OcultarPopUp(\'BarraFlotanteChat\'); "><i class="fa fa-weixin "></i></button>
+                                <button type="button" class="btn btn-success btn-xs" onClick="chatWith(\''.$NombreUsuarioChat.'\'); OcultarPopUp(\'BarraFlotanteChat\'); "><i class="fa fa-weixin "></i></button>
                             </td>
                         </tr>
                     ';
