@@ -1,7 +1,7 @@
 .chatbox {
 	position: fixed;
 	position:expression("absolute");
-	width: 225px;
+	width: 210px;							/* Ancho barra de titulo */
 	display:none;
 }
 
@@ -22,7 +22,7 @@
 
 .chatboxcontent {
 	font-family: arial,sans-serif;
-	font-size: 13px;
+	font-size: 12px;						/* Tamano de fuente */
 	color: #333333;
 	height:200px;
 	width:209px;
@@ -79,5 +79,3 @@
 .chatboxoptions {
 	float: right;
 }
-
-
