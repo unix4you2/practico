@@ -28,8 +28,7 @@ core/sesion.php
 core/tablas.php
 inc/bootstrap/css/practico.min.css
 inc/bootstrap/js/practico.min.js
-inc/chat/chat.php
-inc/chat/js/chat.js
+inc/chat/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 "

@@ -80,13 +80,4 @@
 	float: right;
 }
 
-.chatboxoptions a {
-	text-decoration: none;
-	color: white;
-	font-weight:bold;
-	font-family:Verdana,Arial,"Bitstream Vera Sans",sans-serif;
-}
 
-.chatboxtitle {
-	float: left;
-}

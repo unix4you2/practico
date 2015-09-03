@@ -83,7 +83,7 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 	$(" <div />" ).attr("id","chatbox_"+chatboxtitle)
 	.addClass("chatbox")
 	//Define la barra de titulo de cada ventana de chat con las variables de arriba
-	.html('<div class="chatboxhead"><div class="chatboxtitle">'+BotonNombreUsuario+'</div><div class="chatboxoptions">   '+BotonMinimizarChat+'   '+BotonCerrarChat+'</div><br clear="all"/></div><div class="chatboxcontent"></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
+	.html('<div class="chatboxhead"><div class="btn-group inline">'+BotonNombreUsuario+'</div><div class="chatboxoptions">   '+BotonMinimizarChat+'   '+BotonCerrarChat+'</div><br clear="all"/></div><div class="chatboxcontent"></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
 	.appendTo($( "body" ));
 			   
 	$("#chatbox_"+chatboxtitle).css('bottom', '0px');
