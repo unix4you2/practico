@@ -36,7 +36,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added:  Nuevos marcos agregados permiten ahora que el diseñador agregue contenido dinámicamente a las diferentes áreas de la aplicación.  Los marcos disponibles son:
+* Added: Nuevos marcos agregados permiten ahora que el diseñador agregue contenido dinámicamente a las diferentes áreas de la aplicación.  Los marcos disponibles son:
 	* PCODIV_ArribaMenuSuperior: Justo antes de las opciones de menu programadas para la parte superior
 	* PCODIV_AbajoMenuSuperior: Justos después de las opciones de menú programadas para la parte superior
 	* PCODIV_ArribaMenuLateral: Justo antes del buscador de la herramienta
@@ -44,6 +44,7 @@ LogCambios="
 	* PCODIV_ArribaEscritorio: Justo después del título "Escritorio" y su línea divisoria
 	* PCODIV_AbajoEscritorio: Justo antes de cerrar la aplicación en la parte inferior del escritorio
 	* PCODIV_TituloAplicacion: En la parte superior de la aplicación, incluye los valores por defecto
+* Added: Asistente de importación de datos desde archivos de hoja de cálculo
 "
 
 ########################################################################

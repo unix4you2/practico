@@ -403,7 +403,7 @@ function listado_visual_exploracion_archivos($RutaExploracion="",$Filtro_conteni
 	Function: opciones_combo_desdecsv
 	Genera una lista de seleccion con la variable recibida y los items separados por un caracter especifico
 */
-function opciones_combo_desdecsv($lista_opciones,$caracter_separador,$valor_comparacion="")
+function opciones_combo_desdecsv($lista_opciones,$caracter_separador,$valor_comparacion="",$usar_indice=0)
 	{
 		$SalidaFormateada="";
 		$campos = explode($caracter_separador, $lista_opciones);
@@ -412,7 +412,12 @@ function opciones_combo_desdecsv($lista_opciones,$caracter_separador,$valor_comp
 				$cadena_seleccion="";
 				if ($campos[$i]==$valor_comparacion)
 				$cadena_seleccion=" selected ";
-				$SalidaFormateada.= '<option value="'.$campos[$i].'" '.$cadena_seleccion.'>'.$campos[$i].'</option>';
+				
+				$cadena_valor=$campos[$i];
+				//Si se indica que se debe utilizar el indice se retorna el numero de item, en lugar de su valor
+				if ($usar_indice==1)
+					$cadena_valor=$i;
+				$SalidaFormateada.= '<option value="'.$cadena_valor.'" '.$cadena_seleccion.'>'.$campos[$i].'</option>';
 			}
 		return $SalidaFormateada;
 	}
@@ -456,7 +461,7 @@ function aparear_campostabla_vs_hojacalculo($NombreTabla,$PathArchivo)
 					$SalidaFormateada.= '<td>'.$CamposTabla[$i]["nombre"].'</td>';
 					$SalidaFormateada.= '<td><i class="fa fa-exchange"></i></td>';
 					//Genera combo de columnas de archivo preseleccionando uno si aplica
-					$OpcionesCombo=opciones_combo_desdecsv($ListaColumnas,"|",strtolower($CamposTabla[$i]["nombre"]));
+					$OpcionesCombo=opciones_combo_desdecsv($ListaColumnas,"|",strtolower($CamposTabla[$i]["nombre"]),1); //Solicita el indice en lugar del valor
 					//Presenta combo
 					$SalidaFormateada.= '<td><select id="PCO_campoimportado_'.strtolower($CamposTabla[$i]["nombre"]).'" name="PCO_campoimportado_'.strtolower($CamposTabla[$i]["nombre"]).'" class="btn btn-xs btn-default">'.$OpcionesCombo.'</select></td>';
 				$SalidaFormateada.= '</tr>';
@@ -653,6 +658,7 @@ function datatable_desde_hojacalculo($PathArchivo,$NroLineas)
 			if ($PCO_Accion== "confirmar_importacion_tabla")		$retorno = permiso_agregado_accion("administrar_tablas");
 			if ($PCO_Accion== "analizar_importacion_csv")			$retorno = permiso_agregado_accion("administrar_tablas");
 			if ($PCO_Accion== "escogertabla_importacion_csv")		$retorno = permiso_agregado_accion("administrar_tablas");
+			if ($PCO_Accion== "ejecutar_importacion_csv")			$retorno = permiso_agregado_accion("administrar_tablas");
 
 			// Funciones en core/formularios.php
 			if ($PCO_Accion== "guardar_datos_formulario")			$retorno = 1;

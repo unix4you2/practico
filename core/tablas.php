@@ -724,8 +724,6 @@ if ($PCO_Accion=="definir_copia_tablas")
 	}
 
 
-
-
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -787,6 +785,104 @@ if ($PCO_Accion=="confirmar_importacion_tabla")
 	}
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: ejecutar_importacion_csv
+	Pasa los registros desde la hoja de calculo a una tabla de datos
+
+	Variables de entrada:
+
+		archivo_cargado - Ruta absoluta hacia el archivo analizado en el paso anterior del asistente
+		nombre_tabla - Nombre de la tabla donde se hace la importacion
+		lista_campos_apareados (arreglo) - Una lista de posibles variables definidas (o no) con los campos hacia los cuales debe apuntar cada una.  Los campos obedecen al patron generado por la funcion aparear_campostabla_vs_hojacalculo() asi: PCO_campoimportado_XXXXXX donde XXXXXX es el nombre del campo en la tabla y su valor es el numero de la columna en el archivo cargado
+
+	Salida:
+		Consultas SQL generadas y ejecutadas para la adicion de registros en la base de datos
+*/
+if ($PCO_Accion=="ejecutar_importacion_csv")
+	{
+		echo "<br>";
+		$mensaje_error="";
+		abrir_ventana($MULTILANG_Importar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
+		
+		if ($archivo_cargado=="") $mensaje_error=$MULTILANG_ErrorTiempoEjecucion;
+
+		if ($mensaje_error=="")
+			{
+				//Crea el objeto para lectura del archivo
+				$XLFileType = PHPExcel_IOFactory::identify($archivo_cargado);
+				$objReader = PHPExcel_IOFactory::createReader($XLFileType);
+				$objReader->setLoadSheetsOnly(0);	//Asume que la primera hoja tiene los datos.  ALTERNATIVA INDICANDO EL NOMBRE DE HOJA : $objReader->setLoadSheetsOnly('Hoja1');
+				$objPHPExcel = $objReader->load($archivo_cargado);
+
+				//Recorre el archivo mientras no encuentre un valor vacio en la primer fila (asumido como llave)
+				$Fila=1;
+				$ColumnaDeLlave=0;
+				$FinEscaneo=0; //Pasa a 1 si se llega a una fila con la columna 0 vacia
+
+				$Fila++; //Obvia la primera fila pues se trata del encabezado
+				while (!$FinEscaneo)
+					{
+						//Asume que la primera columna siempre tiene dato (llave o algo minimo) para agregarla a la tabla, sino no es agregada
+						if ($objPHPExcel->getActiveSheet()->getCellByColumnAndRow($ColumnaDeLlave, $Fila)->getFormattedValue()!="")
+							{
+								//Busca las columnas definidas en la tabla
+								$CamposTabla=consultar_columnas($nombre_tabla);
+
+								//Busca por cada campo de tabla algun equivalente en las columnas
+								$ListaCamposImportacion="";
+								$ListaValoresImportacion="";
+								for($i=0;$i<count($CamposTabla);$i++)
+									{				
+										$CampoAProcesar = $CamposTabla[$i]["nombre"];
+										$VariableDinamicaNombreCampo="PCO_campoimportado_".$CampoAProcesar;
+										$ColumnaDinamicaArchivo=$$VariableDinamicaNombreCampo;
+										
+										//echo $VariableDinamicaNombreCampo;
+										if ($ColumnaDinamicaArchivo!=0) //Descarta el primer indice de combo
+											{
+												$ListaCamposImportacion.=$CampoAProcesar.",";
+												$ListaValoresImportacion.='"'.$objPHPExcel->getActiveSheet()->getCellByColumnAndRow($ColumnaDinamicaArchivo-1, $Fila)->getFormattedValue().'",';
+											}
+									}
+								//Elimina coma en la lista de campos y valores
+								$ListaCamposImportacion=substr($ListaCamposImportacion, 0, strlen($ListaCamposImportacion)-1);
+								$ListaValoresImportacion=substr($ListaValoresImportacion, 0, strlen($ListaValoresImportacion)-1);
+								//Ejecuta la consulta
+								$ConsultaImportacionSQL="INSERT INTO $nombre_tabla ($ListaCamposImportacion) VALUES ($ListaValoresImportacion) ";
+								ejecutar_sql($ConsultaImportacionSQL);
+							}
+						else
+							{
+								$FinEscaneo=1;
+							}
+						$Fila++;
+					}
+				$Fila-=2; //Quita el encabezado y la ultima vacia
+				echo "<b>$MULTILANG_TotalRegistros:</b> $Fila<hr>";
+
+				//Presenta mensaje de finalizacion
+				echo '
+				<a class="btn btn-block btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
+				auditar("Importa tabla desde $archivo_cargado en $nombre_tabla");
+			}
+		else
+			{
+				echo '			
+				<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ActErrGral.'">
+					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+					</form>
+					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+			}
+		echo '</center>';
+
+		cerrar_ventana();
+        $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
+	}
+
 
 /* ################################################################## */
 /* ################################################################## */
@@ -796,9 +892,12 @@ if ($PCO_Accion=="confirmar_importacion_tabla")
 */
 if ($PCO_Accion=="analizar_importacion_csv")
 	{
-		 ?>
 
-		<h2><?php echo $MULTILANG_Importando; ?>  <b><?php echo str_replace("tmp/","",$archivo_cargado); ?> <i class="fa fa-arrow-right"></i> <?php echo $nombre_tabla; ?></b></h2>
+		//Determina el tipo de archivo detectado
+		$XLFileType = PHPExcel_IOFactory::identify($archivo_cargado);
+	?>
+
+		<h3><?php echo $MULTILANG_Importando; ?>  <b><?php echo str_replace("tmp/","",$archivo_cargado); ?> (<?php echo $XLFileType; ?>) <i class="fa fa-arrow-right"></i> <?php echo $nombre_tabla; ?></b></h3>
 		<div class="row">
 			<div class="col col-md-12">
 				<?php
@@ -811,28 +910,30 @@ if ($PCO_Accion=="analizar_importacion_csv")
 		<div class="row">
 			<div class="col col-md-6">
 				<?php
-					abrir_ventana($MULTILANG_TblCorrespondencia, 'panel-warning'); 
+					abrir_ventana($MULTILANG_TblCorrespondencia, 'panel-danger'); 
 				?>
 					<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="ejecutar_importacion_csv">
 						<input type="Hidden" name="archivo_cargado" value="<?php echo $archivo_cargado; ?>">
 						<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
-				<?php
-					echo aparear_campostabla_vs_hojacalculo($nombre_tabla,$archivo_cargado);
-				?>
+						<?php
+							echo aparear_campostabla_vs_hojacalculo($nombre_tabla,$archivo_cargado);
+						?>
 					</form>
 				<?php cerrar_ventana(); ?>
 			</div>
 			<div class="col col-md-6">
-
-					<br>
-					<div align=center>
-						<b><?php echo $MULTILANG_Confirma; ?><br></b>
-					<a class="btn btn-danger" href="javascript:document.datos.submit();"><i class="fa fa-arrow-circle-right"></i> <?php echo $MULTILANG_Importar; ?></a>
-					<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> <?php echo $MULTILANG_Cancelar; ?></a>
+					<div align="center">
+						<div class="alert alert-warning">
+							<h3><?php echo $MULTILANG_Atencion; ?></h3>
+							<?php echo $MULTILANG_TblApareaMsg; ?><hr>
+							<b><?php echo $MULTILANG_Confirma; ?><br></b>
+							<a class="btn btn-danger" href="javascript:document.datos.submit();"><i class="fa fa-arrow-circle-right"></i> <?php echo $MULTILANG_Si; ?>, <?php echo $MULTILANG_Importar; ?></a>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> <?php echo $MULTILANG_No; ?>, <?php echo $MULTILANG_Cancelar; ?></a>
+							<br><br>
+						</div>
 					</div>
-					
-					
 			</div>
 		</div>
 
@@ -934,8 +1035,8 @@ if ($PCO_Accion=="importar_tabla")
 							<select id="extension_archivo" name="extension_archivo" class="form-control">
 								<option value=".xls"  >Excel 5 (.XLS)</option>
 								<option value=".xlsx" >Excel 2007 (.XLSX - XML Document)</option>
-								<option value=".ods"  >Libre Office (.ODS - Open Document)</option>
-								<option value=".csv"  >Separado por comas (.CSV - Comma Separated Values)</option>
+								<!-- <option value=".ods"  >Libre Office (.ODS - Open Document)</option> -->
+								<!-- <option value=".csv"  >Separado por comas (.CSV - Comma Separated Values)</option>-->
 							</select>
 							<br>
                             <input type="hidden" name="MAX_FILE_SIZE" value="8192000">

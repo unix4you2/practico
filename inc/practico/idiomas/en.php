@@ -867,6 +867,7 @@
     $MULTILANG_TblXLSConsejo='Loading and match fields in a spreadsheet file with your current database you might be deleting, creating or overwriting tables, records and other related information, as well as designs and other elements contained in the associated records. <br><br><b>It is recommended that you make a backup prior to this process before continuing.</b><br><br>The first row of the spreadsheet should contain as headings the exact name of the field in the table on which you want to import values.';
     $MULTILANG_TblTablaImportacion='Please select the table on which you want to import data';
     $MULTILANG_TblCorrespondencia='Correspondence between table fields and columns of file';
+    $MULTILANG_TblApareaMsg='Check the fields on the left side of the table and matched by their name from the selection list column. If necessary make the pairings manuals preview according to existing columns in the file at the top. <br> <br> unpaired Fields will be ignored and filled with the default value is taken into the engine';
 
 	//Usuarios
 	$MULTILANG_UsrCopia='Permissions copy completed. Please check below.';

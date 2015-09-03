@@ -864,6 +864,7 @@
     $MULTILANG_TblXLSConsejo='Al cargar y aparear campos de un archivo de hoja de calculo con su base de datos actual usted podria estar eliminando, creando o sobreescribiendo tablas, registros y demas informacion asociada, asi como dise&ntilde;os y otros elementos contenidos en los registros asociados. <br><br><b>Se recomienda que haga una copia de seguridad previo a este proceso antes de continuar.</b><br><br><font color=red><b>Importante:</b> </font>La primera fila de la hoja de calculo debera contener como encabezados el nombre exacto del campo en la tabla sobre la cual se desea importar los valores.';
     $MULTILANG_TblTablaImportacion='Por favor seleccione la tabla sobre la cual desea importar los datos';
     $MULTILANG_TblCorrespondencia='Correspondencia entre campos de tabla y columnas de archivo';
+    $MULTILANG_TblApareaMsg='Revise al lado izquierdo los campos de la tabla y la columna apareada por su nombre desde la lista de seleccion.  Si es necesario haga los apareamientos manuales segun la vista previa de las columnas existentes en el archivo en la parte superior. <br><br>Los campos sin aparear seran ignorados y llenados con el valor predeterminado que se tenga en el motor.';
     
 	//Usuarios
 	$MULTILANG_UsrCopia='Copia de permisos finalizada.  Por favor verifique a continuacion.';
