@@ -88,6 +88,9 @@
     $PCO_HoraOperacionPuntos=date("H:i");
     $PCO_DireccionAuditoria=$_SERVER ['REMOTE_ADDR'];
 
+    // Define cadena usada para separar campos en operaciones de bases de datos.  Obsoleta desde 15.9.  Confirmada eliminacion en 16.1
+    if (!isset($_SeparadorCampos_)) $_SeparadorCampos_="||_||";
+
     // Recupera variables recibidas para su uso como globales (equivale a register_globals=on en php.ini)
     if (!ini_get('register_globals'))
     {
