@@ -5,19 +5,13 @@
 	display:none;
 }
 
-.chatboxhead {
+.chatboxhead {								/* Titulo cuadro de chat */
 	background-color: #f99d39;
-	padding:7px;
-	color: #ffffff;
-
-	border-right:1px solid #f99d39;
-	border-left:1px solid #f99d39;
+	padding:5px;
 }
 
 .chatboxblink {
-	background-color: #176689;
-	border-right:1px solid #176689;
-	border-left:1px solid #176689;
+	background-color: #F97F39;
 }
 
 .chatboxcontent {
@@ -36,8 +30,8 @@
 	line-height: 1.3em;
 }
 
-.chatboxinput {
-	padding: 5px;
+.chatboxinput {								/* Caja de texto */
+	/*padding: 3px;*/
 	background-color: #ffffff;
 	border-left:1px solid #cccccc;
 	border-right:1px solid #cccccc;
