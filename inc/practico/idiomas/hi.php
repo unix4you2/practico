@@ -226,7 +226,6 @@
 	$MULTILANG_ErrGoogleAPIMod='OAuth2 गूगल के लिए डिफ़ॉल्ट प्रमाणन पद्धति के रूप में विन्यस्त किया गया था.<br>Anyway the Practicos module for google-api is not installed yet.<br>Please download the google-api module from Practicos website and reload again.';
 	$MULTILANG_ErrFuncion='<br>PHP समारोह नहीं मौजूद है या अपने सर्वर में अक्षम है करता है: ';
 	$MULTILANG_ErrDirectiva='पर्यावरण वर अपने PHP या वेब सर्वर विन्यास पर सक्रिय किया जाना चाहिए';
-	$MULTILANG_UsuariosChat='वे व्यवस्था करने के लिए फिर से प्रवेश जब इस पल में ऑफ़लाइन हैं कि उपयोगकर्ता सभी संदेशों को देखेंगे।';
     $MULTILANG_AdminArchivos='फ़ाइल प्रबंधक';
     $MULTILANG_ErrorConnLDAP='एक त्रुटि LDAP सर्वर कनेक्शन के दौरान हुई। कृपया अपनी सेटिंग देखें और पुनः प्रयास करें। विवरण:<br>';
     $MULTILANG_ErrorRW='फ़ाइल लिखने के लिए अधिकार नहीं है! इसकी सामग्री में कोई परिवर्तन खो दिया जा सकता है';
@@ -1111,3 +1110,11 @@
     $MULTILANG_MailIntro4='Remember that our messages never ask you about personal information, security keys by email</span>, dont answer any message or fill any form that ask you about this kind of information out of our '.$NombreRAD.' system.';
     $MULTILANG_MailIntro5='All the information in this email and all its attachments is confidential for the bussiness and could be used for people who is related to it only. If you receive this message by error please delete it and tell sender about the error, any other operation with this email and its content will be under legal protection.';
     $MULTILANG_MailIntro6='<br><br>A system powered by <a href=http://www.practico.org>www.practico.org</a>';
+
+	//Modulo de chat
+	$MULTILANG_UsuariosChat='वे व्यवस्था करने के लिए फिर से प्रवेश जब इस पल में ऑफ़लाइन हैं कि उपयोगकर्ता सभी संदेशों को देखेंगे।';
+	$MULTILANG_ChatActivar='चैट मॉड्यूल सक्षम करें?';
+	$MULTILANG_ChatTipo1='केवल आंतरिक उपयोगकर्ताओं के बीच';
+	$MULTILANG_ChatTipo2='केवल बाहरी उपयोगकर्ताओं के बीच';
+	$MULTILANG_ChatTipo3='सभी उपयोगकर्ताओं के लिए';
+	$MULTILANG_ChatTipo4='केवल व्यवस्थापक के लिए';

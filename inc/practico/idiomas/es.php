@@ -226,7 +226,6 @@
 	$MULTILANG_ErrGoogleAPIMod='El metodo de autenticacion esta configurado como OAuth2 para Google.<br>Sin embargo el modulo de Practico google-api no se encuentra instalado.<br>Descargue e instale el modulo desde la web oficial de Practico y actualice la pagina nuevamente.';
 	$MULTILANG_ErrFuncion='<br>Funcion de PHP no existe o se encuentra deshabilitada en su servidor: ';
 	$MULTILANG_ErrDirectiva='La directiva o variable de configuracion PHP indicada debe estar habilitada en su configuracion de PHP o servidor web';
-	$MULTILANG_UsuariosChat='Aquellos usuarios desconectados en el momento recibiran los mensajes cuando ingresen nuevamente al sistema.';
     $MULTILANG_AdminArchivos='Administrador de archivos';
     $MULTILANG_ErrorConnLDAP='Ha ocurrido un error durante la conexion con el servidor de autenticacion LDAP. Verifique sus configuraciones e intente nuevamente.  Detalles:<br>';
     $MULTILANG_ErrorRW='No se tienen permisos para escribir sobre el archivo! Cualquier cambio realizado podr&iacute;a perderse';
@@ -1110,3 +1109,10 @@
     $MULTILANG_MailIntro5='La informaci&oacute;n contenida en este correo electr&oacute;nico y en todos sus archivos anexos, es confidencial y/o exclusiva del negocio y puede ser utilizada &uacute;nicamente por la (s) persona (s) a la (s) cual (es) est&eacute; dirigida. Si usted no es el destinatario autorizado, cualquier modificaci&oacute;n, retenci&oacute;n, difusi&oacute;n, distribuci&oacute;n o copia total o parcial de este mensaje y/o de la informaci&oacute;n contenida en este y/o en sus archivos anexos esta prohibida y son sancionados por la ley. Si recibe este mensaje por error, s&iacute;rvase borrarlo de inmediato, notificarle de su error a la persona que lo envi&oacute; y abstenerse de divulgar su contenido e informaci&oacute;n anexa.';
     $MULTILANG_MailIntro6='<br><br>Sistema potenciado por <a href=http://www.practico.org>www.practico.org</a>';
 
+	//Modulo de chat
+	$MULTILANG_UsuariosChat='Aquellos usuarios desconectados en el momento recibiran los mensajes cuando ingresen nuevamente al sistema.';
+	$MULTILANG_ChatActivar='Activar el modulo de chat?';
+	$MULTILANG_ChatTipo1='Solo entre usuarios Internos';
+	$MULTILANG_ChatTipo2='Solo entre usuarios Externos';
+	$MULTILANG_ChatTipo3='Entre todos los usuarios';
+	$MULTILANG_ChatTipo4='Exclusivo para admin';

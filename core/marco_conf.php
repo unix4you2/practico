@@ -252,6 +252,17 @@
                                             <a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_SeparadorCamposDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                         </span>
                                     </div>
+
+                                    <label for="Activar_ModuloChatNEW"><i class="fa fa-comments fa-2x fa-fw"></i> <?php echo $MULTILANG_ChatActivar; ?>:</label>
+                                    <div class="form-group input-group">
+                                        <select id="Activar_ModuloChatNEW" name="Activar_ModuloChatNEW" class="selectpicker" >
+                                            <option value="0" <?php if (@$Activar_ModuloChat=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?>, <?php echo $MULTILANG_Apagado; ?></option>
+                                            <option value="1" <?php if (@$Activar_ModuloChat=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?>, <?php echo $MULTILANG_ChatTipo1; ?></option>
+                                            <option value="2" <?php if (@$Activar_ModuloChat=="2") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?>, <?php echo $MULTILANG_ChatTipo2; ?></option>
+                                            <option value="3" <?php if (@$Activar_ModuloChat=="3") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?>, <?php echo $MULTILANG_ChatTipo3; ?></option>
+                                            <option value="4" <?php if (@$Activar_ModuloChat=="4") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?>, <?php echo $MULTILANG_ChatTipo4; ?></option>
+                                        </select>
+                                    </div>
                                 </div>
 
 

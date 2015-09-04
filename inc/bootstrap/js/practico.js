@@ -99,6 +99,13 @@ function PCOJS_OcultarMensajeCargando()
 		$('#PCO_Modal_MensajeCargando').hide();
 	}
 
+function PCOJS_OcultarVentanaChat()
+	{
+		// Se oculta el cuadro modal
+		$('#Dialogo_Chat').modal('hide');
+		$('#Dialogo_Chat').hide();
+	}
+
 function PCOJS_MostrarMensajeCargando(TituloPopUp, Mensaje, PermitirCierre, Progreso)
 	{
 		//Lleva los valores a cada parte del dialogo modal

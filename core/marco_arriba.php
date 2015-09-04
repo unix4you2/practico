@@ -171,7 +171,10 @@
 			include_once("core/marco_oauth.php");
 			include_once("core/marco_param.php");
 		}
-	include_once("core/marco_chat.php");
+	
+	//Carga marco de chat solamente si esta habilitado
+	if (isset($Activar_ModuloChat) && $Activar_ModuloChat>0)
+		include_once("core/marco_chat.php");
 ?>
 
 

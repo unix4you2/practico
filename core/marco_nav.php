@@ -140,7 +140,6 @@
 				}// Fin de despliegue opciones de configuracion
 		?>
 
-
 		<?php
 			//Presenta el menu de login de usuario
 			if ($PCOSESS_SesionAbierta)
@@ -151,20 +150,18 @@
 							<i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
 						</a>
 						<ul class="dropdown-menu dropdown-user">
-							
+							<li><a href="javascript:document.actualizar_perfil.submit();"><i class="fa fa-user fa-fw"></i> <?php echo $Nombre_usuario;?></a></li>
+							<li><a href="javascript:document.reseteo_clave.submit();"><i class="fa fa-key fa-fw"></i> <?php echo $MULTILANG_UsrReset; ?></a></li>
 							<?php
-								//Presenta opciones de cambio solo si no se esta en modo demo
-								//if ($PCO_ModoDEMO!=1)
-									{
+								//Carga opcion de chat solamente si esta habilitado
+								if (isset($Activar_ModuloChat) && $Activar_ModuloChat>0)
+								{
 							?>	
-										<li><a href="javascript:document.actualizar_perfil.submit();"><i class="fa fa-user fa-fw"></i> <?php echo $Nombre_usuario;?></a></li>
-										<li><a href="javascript:document.reseteo_clave.submit();"><i class="fa fa-key fa-fw"></i> <?php echo $MULTILANG_UsrReset; ?></a></li>
-										<li><a data-toggle="modal" href="#Dialogo_Chat"><i class="fa fa-comment fa-fw"></i> Chat</a></li>
-										<li class="divider"></li>
+									<li><a data-toggle="modal" href="#Dialogo_Chat"><i class="fa fa-comment fa-fw"></i> Chat</a></li>
 							<?php
-									}
+								}
 							?>
-							
+							<li class="divider"></li>
 							<li><a href="javascript:cerrar_sesion.submit();"><i class="fa fa-sign-out fa-fw texto-blink"></i> <?php echo $MULTILANG_CerrarSesion; ?></a></li>
 						</ul>
 						<!-- /.dropdown-user -->
@@ -172,7 +169,6 @@
 		<?php
 				}
 		?>
-
 
 	</ul>
 	<!-- CIERRA /.navbar-top-links -->

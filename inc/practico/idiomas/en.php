@@ -226,7 +226,6 @@
 	$MULTILANG_ErrGoogleAPIMod='OAuth2 for Google was configured as default auth method.<br>Anyway the Practicos module for google-api is not installed yet.<br>Please download the google-api module from Practicos website and reload again.';
 	$MULTILANG_ErrFuncion='<br>PHP Function doesnt exists or is disabled in your server: ';
 	$MULTILANG_ErrDirectiva='The environment var should be enabled on your PHP or web server configuration';
-	$MULTILANG_UsuariosChat='Users that are offline at this moment will see all the messages when they login again to the system.';
     $MULTILANG_AdminArchivos='File manager';
     $MULTILANG_ErrorConnLDAP='An error ocured during LDAP server connection. Please check your settings and try again.  Details:<br>';
     $MULTILANG_ErrorRW='There is not rights to write the file! Any change to its content could be lost';
@@ -1112,3 +1111,11 @@
     $MULTILANG_MailIntro4='Remember that our messages never ask you about personal information, security keys by email</span>, dont answer any message or fill any form that ask you about this kind of information out of our '.$NombreRAD.' system.';
     $MULTILANG_MailIntro5='All the information in this email and all its attachments is confidential for the bussiness and could be used for people who is related to it only. If you receive this message by error please delete it and tell sender about the error, any other operation with this email and its content will be under legal protection.';
     $MULTILANG_MailIntro6='<br><br>A system powered by <a href=http://www.practico.org>www.practico.org</a>';
+
+	//Modulo de chat
+	$MULTILANG_UsuariosChat='Users that are offline at this moment will see all the messages when they login again to the system.';
+	$MULTILANG_ChatActivar='Enable chat module?';
+	$MULTILANG_ChatTipo1='Only between internal users';
+	$MULTILANG_ChatTipo2='Only between external users';
+	$MULTILANG_ChatTipo3='For all users';
+	$MULTILANG_ChatTipo4='Only for admin';

@@ -32,7 +32,7 @@
 
     echo '<div class="oculto_impresion">';
     // Modal Ventana de chat
-    abrir_dialogo_modal("Dialogo_Chat",$MULTILANG_UsrLista);
+    abrir_dialogo_modal("Dialogo_Chat",$MULTILANG_UsrLista,"modal-wide");
 
     echo $MULTILANG_UsuariosChat;
     //Consulta los usuarios siempre y cuando tenga sesion activa
@@ -41,25 +41,29 @@
             $resultado=ejecutar_sql("SELECT $ListaCamposSinID_usuario from ".$TablasCore."usuario WHERE login<>'$PCOSESS_LoginUsuario' ");
 
             //Presenta la lista de usuarios
-            echo '<table class="table table-condensed table-hover btn-xs table-responsive">
-                        <tr>
-                            <td valign=middle align=center  bgcolor=darkgray>
-                                <font size=2 color=black>
-                                    <b>'.$MULTILANG_Usuario.'</b>
-                                </font>
-                            </td>
-                            <td valign=middle align=center  bgcolor=darkgray>
-                                <font size=2 color=black>
-                                    '.$MULTILANG_Nombre.'
-                                </font>
-                            </td>
-                            <td  bgcolor=darkgray valign=middle align=center>
-                                <font size=2 color=black>
-                                    '.$MULTILANG_UsrAcceso.'
-                                </font>
-                            </td>
-                            <td bgcolor=darkgray></td>
-                        </tr>';
+            @$PCO_InformesDataTable.="TablaUsuariosChat|"; //Agrega la tabla a la lista de DataTables para ser convertida
+            echo '<hr><table class="table table-condensed table-hover btn-xs table-responsive  table-unbordered  table-striped " id="TablaUsuariosChat">
+							<thead>
+								<tr>
+									<th valign=middle align=center  bgcolor=darkgray>
+										<font size=2 color=black>
+											<b>'.$MULTILANG_Usuario.'</b>
+										</font>
+									</th>
+									<th valign=middle align=center  bgcolor=darkgray>
+										<font size=2 color=black>
+											'.$MULTILANG_Nombre.'
+										</font>
+									</th>
+									<th  bgcolor=darkgray valign=middle align=center>
+										<font size=2 color=black>
+											'.$MULTILANG_UsrAcceso.'
+										</font>
+									</th>
+									<th bgcolor=darkgray></th>
+								</tr>
+							</thead>
+                        <tbody>';
             while($usuarios_chat = $resultado->fetch())
                 {
                     $NombreUsuarioChat = preg_replace("/[^a-zA-Z0-9]/", "_", $usuarios_chat["login"] );
@@ -82,12 +86,14 @@
                                 </font>
                             </td>
                             <td valign=middle>
-                                <button type="button" class="btn btn-success btn-xs" onClick="chatWith(\''.$NombreUsuarioChat.'\'); OcultarPopUp(\'BarraFlotanteChat\'); "><i class="fa fa-weixin "></i></button>
+                                <button type="button" class="btn btn-success btn-xs" onClick="chatWith(\''.$NombreUsuarioChat.'\'); PCOJS_OcultarVentanaChat(); "><i class="fa fa-weixin "></i> Chat</button>
                             </td>
                         </tr>
                     ';
                 }
-            echo '</table>';
+            echo '
+				</tbody>
+				</table>';
         }
 
     $barra_herramientas_modal='

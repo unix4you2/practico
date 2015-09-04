@@ -226,7 +226,6 @@
 	$MULTILANG_ErrGoogleAPIMod='OAuth2 para o Google foi configurado como m&eacute;todo de autenticação padrão.<br>De qualquer forma o m&oacute;dulo Practicos para google-api ainda não estiver instalado.<br>Faça o download do m&oacute;dulo google-api do site Practicos e recarregar novamente.';
 	$MULTILANG_ErrFuncion='<br>PHP does not Função existe ou est&aacute; desabilitado no seu servidor: ';
 	$MULTILANG_ErrDirectiva='O ambiente var deve ser ativado na configuração do PHP ou servidor web';
-	$MULTILANG_UsuariosChat='Usu&aacuterios que estão off-line nesse momento ver&aacute; todas as mensagens quando eles login novamente para o sistema.';
     $MULTILANG_AdminArchivos='Gerenciador de arquivos';
     $MULTILANG_ErrorConnLDAP='Ocorreu um erro durante a conexão com o servidor LDAP. Por favor, verifique suas configurações e tente novamente. detalhes:<br>';
     $MULTILANG_ErrorRW='Não h&aacute; direitos para gravar o arquivo! Qualquer alteração do seu conte&uacute;do poderia ser perdido';
@@ -1111,3 +1110,11 @@
     $MULTILANG_MailIntro4='Lembre-se que nossos mensagens nunca lhe perguntar sobre informações pessoais, chaves de segurança por e-mail</span>, não responder qualquer mensagem ou preencher qualquer formul&aacute;rio que lhe perguntar sobre esse tipo de informação fora de nosso '.$NombreRAD.' sistema.';
     $MULTILANG_MailIntro5='Todas as informações contidas neste e-mail e todos os seus anexos &eacute; confidencial para o bussiness e poderia ser usado para pessoas que est&aacute; relacionada apenas a ele. Se você receber esta mensagem por engano, por favor apague-o e diga remetente sobre o erro, qualquer outra operação com este e-mail e seu conte&uacute;do estarão sob proteção legal.';
     $MULTILANG_MailIntro6='<br><br>Um sistema alimentado por <a href=http://www.practico.org>www.practico.org</a>';
+
+	//Modulo de chat
+	$MULTILANG_UsuariosChat='Usu&aacuterios que estão off-line nesse momento ver&aacute; todas as mensagens quando eles login novamente para o sistema.';
+	$MULTILANG_ChatActivar='Ativar módulo de bate-papo?';
+	$MULTILANG_ChatTipo1='Somente entre os usuários internos';
+	$MULTILANG_ChatTipo2='Somente entre os usuários externos';
+	$MULTILANG_ChatTipo3='Para todos os usuários';
+	$MULTILANG_ChatTipo4='Somente para administração';

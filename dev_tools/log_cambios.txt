@@ -50,11 +50,14 @@ LogCambios="
 	* PCODIV_AbajoEscritorio: Justo antes de cerrar la aplicación en la parte inferior del escritorio
 	* PCODIV_TituloAplicacion: En la parte superior de la aplicación, incluye los valores por defecto
 * Added: Asistente de importación de datos desde archivos de hoja de cálculo
+* Added: Módulo de chat permite búsquedas de usuario mediante control datatable
 * Fixed: Acentos idioma portugues
 * Fixed: Nombres de usuario filtrados para evitar errores de JS en modulo de chat
 * Fixed: Inserción de mensajes en módulo de chat basados en la variable de separacion de campos
+* Fixed: Al hacer clic sobre un botón de chat con un usuario se abre la ventana de chat y se cierra automáticamente la de selección de usuarios
 * Enhan: Variable de separador de campos es movida al archivo de configuracion principal
 * Enhan: Eliminados warnings por zona horaria no definida en el modulo de chat
+* Enhan: Módulo de chat mejora controles mediante bootstrap y disminuye tiempos en el heartbeat
 "
 
 ########################################################################
