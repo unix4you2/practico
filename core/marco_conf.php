@@ -42,9 +42,9 @@
                         
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#basedatos-tab" data-toggle="tab"><?php echo $MULTILANG_MotorBD; ?></a>
+                                <li class="active"><a href="#configvarias-tab" data-toggle="tab"><?php echo $MULTILANG_ConfiguracionVarias; ?></a>
                                 </li>
-                                <li><a href="#configvarias-tab" data-toggle="tab"><?php echo $MULTILANG_ConfiguracionVarias; ?></a>
+                                <li><a href="#basedatos-tab" data-toggle="tab"><?php echo $MULTILANG_MotorBD; ?></a>
                                 </li>
                                 <li><a href="#motorauth-tab" data-toggle="tab"><?php echo $MULTILANG_MotorAuth; ?></a>
                                 </li>
@@ -54,7 +54,7 @@
 
                             <!-- INICIO de las pestanas -->
                             <div class="tab-content">
-                                <div class="tab-pane fade in active" id="basedatos-tab">
+                                <div class="tab-pane fade" id="basedatos-tab">
                                     <label for="MotorBDNEW"><i class="fa fa-database fa-2x fa-fw"></i> <?php echo $MULTILANG_TipoMotor; ?>:</label>
                                     <div class="form-group input-group">
                                         <select id="MotorBDNEW" name="MotorBDNEW" class="selectpicker" >
@@ -136,133 +136,144 @@
                                 </div>
 
 
-                                <div class="tab-pane fade" id="configvarias-tab">
-                                    <label for="ZonaHorariaNEW"><i class="fa fa-globe fa-2x fa-fw"></i> <?php echo $MULTILANG_ZonaHoraria; ?>:</label>
-                                    <div class="form-group input-group">
-                                        <select id="ZonaHorariaNEW" name="ZonaHorariaNEW" class="selectpicker" >
-                                            <?php
-                                                $archivo_origen="inc/practico/zonas_horarias.txt";
-                                                $archivo = fopen($archivo_origen, "r");
-                                                //descarta comentario inicial de archivo
-                                                if ($archivo)
-                                                    {
-                                                        $PCO_Linea = fgets($archivo, 1024);
-                                                        while (!feof($archivo))
-                                                            {
-                                                                $PCO_Linea = fgets($archivo, 1024);
-                                                                if (trim($PCO_Linea)==$ZonaHoraria)
-                                                                    echo "<option value='".trim($PCO_Linea)."' selected>".trim($PCO_Linea)."</option>";
-                                                                else
-                                                                    echo "<option value='".trim($PCO_Linea)."'>".trim($PCO_Linea)."</option>";
-                                                            }
-                                                        fclose($archivo);
-                                                    }
-                                            ?>
-                                        </select>
-                                    </div>
+                                <div class="tab-pane fade in active" id="configvarias-tab">
 
-                                    <label for="IdiomaPredeterminadoNEW"><i class="fa fa-language fa-fw fa-2x"></i> <?php echo $MULTILANG_IdiomaPredeterminado; ?>:</label>
-                                    <div class="form-group input-group">
-                                        <select id="IdiomaPredeterminadoNEW" name="IdiomaPredeterminadoNEW" class="selectpicker" >
-                                            <?php
-                                            // Incluye archivos de idioma para ser seleccionados
-                                            $path_idiomas="inc/practico/idiomas/";
-                                            $directorio_idiomas=opendir($path_idiomas);
-                                            $IdiomaPredeterminadoActual=$IdiomaPredeterminado;
-                                            while (($PCOVAR_Elemento=readdir($directorio_idiomas))!=false)
-                                                {
-                                                    //Lo procesa solo si es un archivo diferente del index
-                                                    if (!is_dir($path_idiomas.$PCOVAR_Elemento) && $PCOVAR_Elemento!="." && $PCOVAR_Elemento!=".."  && $PCOVAR_Elemento!="index.html")
-                                                        {
-                                                            include($path_idiomas.$PCOVAR_Elemento);
-                                                            //Establece espanol como predeterminado
-                                                            $seleccion="";
-                                                            $valor_opcion=str_replace(".php","",$PCOVAR_Elemento);
-                                                            if ($valor_opcion==$IdiomaPredeterminadoActual) $seleccion="SELECTED";
-                                                            //Presenta la opcion
-                                                            echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$PCOVAR_Elemento.')</option>';
-                                                        }
-                                                }		
-                                            //Vuelve a cargar el predeterminado actual
-                                            include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
-                                            ?>
-                                        </select>
-                                    </div>
 
-                                    <label for="CaracteresCaptchaNEW"><i class="fa fa-key fa-2x fa-fw"></i> <?php echo $MULTILANG_CaracteresCaptcha; ?>:</label>
-                                    <div class="form-group input-group">
-                                        <select id="CaracteresCaptchaNEW" name="CaracteresCaptchaNEW" class="selectpicker" >
-                                            <option value="1" <?php if ($CaracteresCaptcha=="1") echo "SELECTED"; ?> >1</option>
-                                            <option value="2" <?php if ($CaracteresCaptcha=="2") echo "SELECTED"; ?> >2</option>
-                                            <option value="3" <?php if ($CaracteresCaptcha=="3") echo "SELECTED"; ?> >3</option>
-                                            <option value="4" <?php if ($CaracteresCaptcha=="4") echo "SELECTED"; ?> >4</option>
-                                            <option value="5" <?php if ($CaracteresCaptcha=="5") echo "SELECTED"; ?> >5</option>
-                                            <option value="6" <?php if ($CaracteresCaptcha=="6") echo "SELECTED"; ?> >6</option>
-                                        </select>
-                                        <span class="input-group-addon">
-                                            <a href="#" title="<?php echo $MULTILANG_AyudaTitCaptcha; ?>: <?php echo $MULTILANG_AyudaDesCaptcha; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                                        </span>
-                                    </div>
+									<div class="row">
+										<div class="col-md-6">
+											
+											<label for="ZonaHorariaNEW"><i class="fa fa-globe fa-2x fa-fw"></i> <?php echo $MULTILANG_ZonaHoraria; ?>:</label>
+											<div class="form-group input-group">
+												<select id="ZonaHorariaNEW" name="ZonaHorariaNEW" class="selectpicker" >
+													<?php
+														$archivo_origen="inc/practico/zonas_horarias.txt";
+														$archivo = fopen($archivo_origen, "r");
+														//descarta comentario inicial de archivo
+														if ($archivo)
+															{
+																$PCO_Linea = fgets($archivo, 1024);
+																while (!feof($archivo))
+																	{
+																		$PCO_Linea = fgets($archivo, 1024);
+																		if (trim($PCO_Linea)==$ZonaHoraria)
+																			echo "<option value='".trim($PCO_Linea)."' selected>".trim($PCO_Linea)."</option>";
+																		else
+																			echo "<option value='".trim($PCO_Linea)."'>".trim($PCO_Linea)."</option>";
+																	}
+																fclose($archivo);
+															}
+													?>
+												</select>
+											</div>
+											
+											<label for="CaracteresCaptchaNEW"><i class="fa fa-key fa-2x fa-fw"></i> <?php echo $MULTILANG_CaracteresCaptcha; ?>:</label>
+											<div class="form-group input-group">
+												<select id="CaracteresCaptchaNEW" name="CaracteresCaptchaNEW" class="selectpicker" >
+													<option value="1" <?php if ($CaracteresCaptcha=="1") echo "SELECTED"; ?> >1</option>
+													<option value="2" <?php if ($CaracteresCaptcha=="2") echo "SELECTED"; ?> >2</option>
+													<option value="3" <?php if ($CaracteresCaptcha=="3") echo "SELECTED"; ?> >3</option>
+													<option value="4" <?php if ($CaracteresCaptcha=="4") echo "SELECTED"; ?> >4</option>
+													<option value="5" <?php if ($CaracteresCaptcha=="5") echo "SELECTED"; ?> >5</option>
+													<option value="6" <?php if ($CaracteresCaptcha=="6") echo "SELECTED"; ?> >6</option>
+												</select>
+												<span class="input-group-addon">
+													<a href="#" title="<?php echo $MULTILANG_AyudaTitCaptcha; ?>: <?php echo $MULTILANG_AyudaDesCaptcha; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+											</div>
 
-                                    <label for="ModoDepuracionNEW"><i class="fa fa-bug fa-2x fa-fw"></i>  <?php echo $MULTILANG_ModoDepuracion; ?>:</label>
-                                    <div class="form-group input-group">
-                                        <select id="ModoDepuracionNEW" name="ModoDepuracionNEW" class="selectpicker" >
-                                            <option value="1" <?php if ($ModoDepuracion=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Encendido; ?></option>
-                                            <option value="0" <?php if ($ModoDepuracion=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_Apagado; ?></option>
-                                        </select>
-                                        <span class="input-group-addon">
-                                            <a href="#" title="<?php echo $MULTILANG_AyudaTitDebug; ?>: <?php echo $MULTILANG_AyudaDesDebug; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                                        </span>
-                                    </div>
+											<label for="Activar_ModuloChatNEW"><i class="fa fa-comments fa-2x fa-fw"></i> <?php echo $MULTILANG_ChatActivar; ?>:</label>
+											<div class="form-group input-group">
+												<select id="Activar_ModuloChatNEW" name="Activar_ModuloChatNEW" class="selectpicker" >
+													<option value="0" <?php if (@$Activar_ModuloChat=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?>, <?php echo $MULTILANG_Apagado; ?></option>
+													<option value="1" <?php if (@$Activar_ModuloChat=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?>, <?php echo $MULTILANG_ChatTipo1; ?></option>
+													<option value="2" <?php if (@$Activar_ModuloChat=="2") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?>, <?php echo $MULTILANG_ChatTipo2; ?></option>
+													<option value="3" <?php if (@$Activar_ModuloChat=="3") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?>, <?php echo $MULTILANG_ChatTipo3; ?></option>
+													<option value="4" <?php if (@$Activar_ModuloChat=="4") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?>, <?php echo $MULTILANG_ChatTipo4; ?></option>
+												</select>
+											</div>
 
-                                    <label for="BuscarActualizacionesNEW"><i class="fa fa-upload fa-2x fa-fw"></i> <?php echo $MULTILANG_BuscarActual; ?>:</label>
-                                    <div class="form-group input-group">
-                                        <select id="BuscarActualizacionesNEW" name="BuscarActualizacionesNEW" class="selectpicker" >
-                                            <option value="1" <?php if (@$BuscarActualizaciones=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Encendido; ?></option>
-                                            <option value="0" <?php if (@$BuscarActualizaciones=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_Apagado; ?></option>
-                                        </select>
-                                        <span class="input-group-addon">
-                                            <a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_DescActual; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                                        </span>
-                                    </div>
+											<div class="form-group input-group">
+												<span class="input-group-addon">
+													<i class="fa fa-tag fa-fw"></i> <?php echo $MULTILANG_NombreRAD; ?>:
+												</span>
+												<input name="NombreRADNEW" value="<?php echo $NombreRAD; ?>" type="text" class="form-control">
+											</div>
 
-                                    <div class="form-group input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-tag fa-fw"></i> <?php echo $MULTILANG_NombreRAD; ?>:
-                                        </span>
-                                        <input name="NombreRADNEW" value="<?php echo $NombreRAD; ?>" type="text" class="form-control">
-                                    </div>
+											<div class="form-group input-group">
+												<span class="input-group-addon">
+													<i class="fa fa-text-width fa-fw"></i> <?php echo $MULTILANG_SeparadorCampos; ?>:
+												</span>
+												<input name="_SeparadorCampos_NEW" value="<?php echo $_SeparadorCampos_; ?>" type="text" class="form-control" readonly>
+												<span class="input-group-addon">
+													<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_SeparadorCamposDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+											</div>
 
-                                    <div class="form-group input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-line-chart fa-fw"></i> <?php echo $MULTILANG_IDGABeacon; ?>:
-                                        </span>
-                                        <input name="CodigoGoogleAnalyticsNEW" value="<?php if (@$CodigoGoogleAnalytics!="") echo $CodigoGoogleAnalytics; ?>" type="text" class="form-control">
-                                        <span class="input-group-addon">
-                                            <a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_AyudaGABeacon; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                                        </span>
-                                    </div>
+										</div>
+										<div class="col-md-6">
 
-                                    <div class="form-group input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-text-width fa-fw"></i> <?php echo $MULTILANG_SeparadorCampos; ?>:
-                                        </span>
-                                        <input name="_SeparadorCampos_NEW" value="<?php echo $_SeparadorCampos_; ?>" type="text" class="form-control" readonly>
-                                        <span class="input-group-addon">
-                                            <a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_SeparadorCamposDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                                        </span>
-                                    </div>
+											<label for="IdiomaPredeterminadoNEW"><i class="fa fa-language fa-fw fa-2x"></i> <?php echo $MULTILANG_IdiomaPredeterminado; ?>:</label>
+											<div class="form-group input-group">
+												<select id="IdiomaPredeterminadoNEW" name="IdiomaPredeterminadoNEW" class="selectpicker" >
+													<?php
+													// Incluye archivos de idioma para ser seleccionados
+													$path_idiomas="inc/practico/idiomas/";
+													$directorio_idiomas=opendir($path_idiomas);
+													$IdiomaPredeterminadoActual=$IdiomaPredeterminado;
+													while (($PCOVAR_Elemento=readdir($directorio_idiomas))!=false)
+														{
+															//Lo procesa solo si es un archivo diferente del index
+															if (!is_dir($path_idiomas.$PCOVAR_Elemento) && $PCOVAR_Elemento!="." && $PCOVAR_Elemento!=".."  && $PCOVAR_Elemento!="index.html")
+																{
+																	include($path_idiomas.$PCOVAR_Elemento);
+																	//Establece espanol como predeterminado
+																	$seleccion="";
+																	$valor_opcion=str_replace(".php","",$PCOVAR_Elemento);
+																	if ($valor_opcion==$IdiomaPredeterminadoActual) $seleccion="SELECTED";
+																	//Presenta la opcion
+																	echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$PCOVAR_Elemento.')</option>';
+																}
+														}		
+													//Vuelve a cargar el predeterminado actual
+													include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
+													?>
+												</select>
+											</div>
 
-                                    <label for="Activar_ModuloChatNEW"><i class="fa fa-comments fa-2x fa-fw"></i> <?php echo $MULTILANG_ChatActivar; ?>:</label>
-                                    <div class="form-group input-group">
-                                        <select id="Activar_ModuloChatNEW" name="Activar_ModuloChatNEW" class="selectpicker" >
-                                            <option value="0" <?php if (@$Activar_ModuloChat=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?>, <?php echo $MULTILANG_Apagado; ?></option>
-                                            <option value="1" <?php if (@$Activar_ModuloChat=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?>, <?php echo $MULTILANG_ChatTipo1; ?></option>
-                                            <option value="2" <?php if (@$Activar_ModuloChat=="2") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?>, <?php echo $MULTILANG_ChatTipo2; ?></option>
-                                            <option value="3" <?php if (@$Activar_ModuloChat=="3") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?>, <?php echo $MULTILANG_ChatTipo3; ?></option>
-                                            <option value="4" <?php if (@$Activar_ModuloChat=="4") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?>, <?php echo $MULTILANG_ChatTipo4; ?></option>
-                                        </select>
-                                    </div>
+											<label for="ModoDepuracionNEW"><i class="fa fa-bug fa-2x fa-fw"></i>  <?php echo $MULTILANG_ModoDepuracion; ?>:</label>
+											<div class="form-group input-group">
+												<select id="ModoDepuracionNEW" name="ModoDepuracionNEW" class="selectpicker" >
+													<option value="1" <?php if ($ModoDepuracion=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Encendido; ?></option>
+													<option value="0" <?php if ($ModoDepuracion=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_Apagado; ?></option>
+												</select>
+												<span class="input-group-addon">
+													<a href="#" title="<?php echo $MULTILANG_AyudaTitDebug; ?>: <?php echo $MULTILANG_AyudaDesDebug; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+											</div>
+
+											<label for="BuscarActualizacionesNEW"><i class="fa fa-upload fa-2x fa-fw"></i> <?php echo $MULTILANG_BuscarActual; ?>:</label>
+											<div class="form-group input-group">
+												<select id="BuscarActualizacionesNEW" name="BuscarActualizacionesNEW" class="selectpicker" >
+													<option value="1" <?php if (@$BuscarActualizaciones=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Encendido; ?></option>
+													<option value="0" <?php if (@$BuscarActualizaciones=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_Apagado; ?></option>
+												</select>
+												<span class="input-group-addon">
+													<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_DescActual; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+											</div>
+
+											<div class="form-group input-group">
+												<span class="input-group-addon">
+													<i class="fa fa-line-chart fa-fw"></i> <?php echo $MULTILANG_IDGABeacon; ?>:
+												</span>
+												<input name="CodigoGoogleAnalyticsNEW" value="<?php if (@$CodigoGoogleAnalytics!="") echo $CodigoGoogleAnalytics; ?>" type="text" class="form-control">
+												<span class="input-group-addon">
+													<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_AyudaGABeacon; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+											</div>
+
+										</div>
+									</div>
                                 </div>
 
 
