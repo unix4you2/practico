@@ -76,15 +76,17 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 	}
 
 	//Variables para el titulo de cada ventana
-	BotonNombreUsuario=	'<a class="btn btn-xs btn-warning" href="javascript:void(0)" onclick="javascript:toggleChatBoxGrowth(\''+chatboxtitle+'\')">'+chatboxtitle+'</a>';
+	BotonNombreUsuario=	'<a class="btn btn-xs btn-warning" href="javascript:void(0)" onclick="javascript:toggleChatBoxGrowth(\''+chatboxtitle+'\')"><i class="fa fa-comment-o"></i> '+chatboxtitle+'</a>';
 	BotonMinimizarChat=	'<a class="btn btn-xs btn-warning" href="javascript:void(0)" onclick="javascript:toggleChatBoxGrowth(\''+chatboxtitle+'\')"><i class="fa fa-angle-double-down fa-fw"></i></a>';
 	BotonCerrarChat=	'<a class="btn btn-xs btn-warning" href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')"><i class="fa fa-times fa-fw"></i></a>';
 	CajaDeTexto=		'<div class="chatboxinput"><textarea class="chatboxtextarea form-control btn-xs btn-default" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>';
+	CajaConversacion=	'<div class="chatboxcontent"></div>';
+	
 	
 	$(" <div />" ).attr("id","chatbox_"+chatboxtitle)
 	.addClass("chatbox")
 	//Define la barra de titulo de cada ventana de chat con las variables de arriba
-	.html('<div class="chatboxhead"><div class="btn-group inline">'+BotonNombreUsuario+'</div><div class="chatboxoptions">   '+BotonMinimizarChat+'   '+BotonCerrarChat+'</div><br clear="all"/></div><div class="chatboxcontent"></div>'+CajaDeTexto)
+	.html('<div class="chatboxhead"><div class="btn-group inline">'+BotonNombreUsuario+'</div><div class="chatboxoptions">   '+BotonMinimizarChat+'   '+BotonCerrarChat+'</div><br clear="all"/></div>'+CajaConversacion+CajaDeTexto)
 	.appendTo($( "body" ));
 			   
 	$("#chatbox_"+chatboxtitle).css('bottom', '0px');
