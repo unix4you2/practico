@@ -529,7 +529,7 @@
 	$MULTILANG_FrmCamposAcciones='Fields and actions';
 	$MULTILANG_FrmAdvDelForm='IMPORTANT: Deleting the form users can not access it again to query operations or data entry defined. You can not undo this operation. This also eliminates any internal design of the form.\n'.$MULTILANG_Confirma;
 	$MULTILANG_FrmAdvScriptForm='Scripts edit (Advanced)';
-	$MULTILANG_FrmHlpFunciones='All JavaScript functions defined here will be included in the form.<br>If you need some additional events linked by buttons or any object in the form<br> this field let you define them.<br><b>When you need to use parameters or any quote use always double quotes!</b>.<br>The FrmAutoRun function must be exist (even empty) cause it will be executed automatically on every form load.';
+	$MULTILANG_FrmHlpFunciones='All JavaScript functions defined here will be included in the form.<br>If you need some additional events linked by buttons or any object in the form this field let you define them.<br>The FrmAutoRun function must be exist (even empty) cause it will be executed automatically on every form load.';
     $MULTILANG_FrmHlpFinalFunciones='This code is a part of your form.  Close and click Save/Update form to apply changes.';
 	$MULTILANG_FrmCopiar='Make a copy';
 	$MULTILANG_FrmAdvCopiar='A new copy of this object will be created.  Are you sure?';

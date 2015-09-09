@@ -16,6 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/formularios.php
 core/marco_abajo.php
 core/marco_arriba.php
 core/marco_chat.php
@@ -52,6 +53,8 @@ LogCambios="
 * Added: Asistente de importación de datos desde archivos de hoja de cálculo
 * Added: Módulo de chat permite búsquedas de usuario mediante control datatable
 * Added: Panel de configuración permite activar o desactivar el módulo de chat a diferentes niveles de usuario
+* Added: Función PCO_HTMLSpecialChars_Decode() se encuentra disponible como un equivalente en JavaScript a la funcion htmlspecialchars_decode de PHP
+* Added: Función PCO_HTMLSpecialChars() se encuentra disponible como un equivalente en JavaScript a la funcion htmlspecialchars de PHP
 * Fixed: Acentos idioma portugues
 * Fixed: Nombres de usuario filtrados para evitar errores de JS en modulo de chat
 * Fixed: Inserción de mensajes en módulo de chat basados en la variable de separacion de campos
@@ -60,6 +63,7 @@ LogCambios="
 * Enhan: Eliminados warnings por zona horaria no definida en el modulo de chat
 * Enhan: Módulo de chat mejora controles mediante bootstrap y disminuye tiempos en el heartbeat
 * Enhan: Reorganización de la configuración de opciones varias en el panel de la herramienta
+* Enhan: Eliminado mensaje de uso de dobles comillas en javascript de formularios pues ya no es necesario
 "
 
 ########################################################################
