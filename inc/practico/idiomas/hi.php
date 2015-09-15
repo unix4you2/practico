@@ -19,8 +19,8 @@
 	*/
 
 	/*
-		Title: Idioma espanol
-		Ubicacion *[/inc/idioma/es.php]*.  Incluye la definicion de variables utilizadas para presentar mensajes en el idioma correspondiente
+		Title: Idioma hindi
+		Ubicacion *[/inc/idioma/hi.php]*.  Incluye la definicion de variables utilizadas para presentar mensajes en el idioma correspondiente
 		NOTAS IMPORTANTES:
 			* Por cuestiones de rendimiento se recomienda la definicion usando comillas simples.
 			* Usar las dobles solo cuando se requieran variables o caracteres especiales.
