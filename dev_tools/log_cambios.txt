@@ -32,6 +32,7 @@ inc/bootstrap/js/practico.min.js
 inc/chat/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
+img/pbrowser.png
 "
 
 #[ArchivosObligatorios] Separados por espacio

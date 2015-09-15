@@ -1,4 +1,28 @@
+<?php
+	/*
+	Copyright (C) 2013  John F. Arroyave Gutiérrez
+						unix4you2@gmail.com
+
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	*/
+?>
 <?php 
+	// Valida sesion activa de Practico
+	@session_start();
+
+
 
 if (basename(__FILE__) == basename($_SERVER['PHP_SELF']))
 {
@@ -17,7 +41,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>';
 </head>
 <body onload="document.getElementById('address_box').focus()">
 <div id="container">
-  <h1 id="title"><img align="absmiddle" src="../../../img/practico_login.png" border=0 width="50" height="34"></h1>
+  <h1 id="title"><img align="absmiddle" src="../../../img/pbrowser.png" border=0></h1>
 <?php
 
 switch ($data['category'])
@@ -95,7 +119,7 @@ switch ($data['category'])
       ?>
     </ul>
   </form>
-  <div id="footer"><a href="http://www.practico.org/"><i>Practico.org</i></a> <!--<?php echo $GLOBALS['_version'] ?> --></div>
+  <div id="footer">Esta navegando como <b><?php echo $_SESSION['PCOSESS_LoginUsuario']; ?></b> - <a href="http://www.practico.org/"><i>Practico.org</i></a> <!--<?php echo $GLOBALS['_version'] ?> --></div>
 </div>
 </body>
 </html>
