@@ -232,6 +232,7 @@ CREATE TABLE core_informe_boton (
   confirmacion_texto varchar(250) default '',
   destino varchar(250) default '_self',
   pantalla_completa integer default '0',
+  precargar_estilos integer default '1',
   PRIMARY KEY  (id)
 );
 

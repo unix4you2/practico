@@ -59,6 +59,7 @@ LogCambios="
 * Fixed: Nombres de usuario filtrados para evitar errores de JS en modulo de chat
 * Fixed: Inserción de mensajes en módulo de chat basados en la variable de separacion de campos
 * Fixed: Al hacer clic sobre un botón de chat con un usuario se abre la ventana de chat y se cierra automáticamente la de selección de usuarios
+* Fixed: Precarga de estilos en botones de informe
 * Enhan: Variable de separador de campos es movida al archivo de configuracion principal
 * Enhan: Eliminados warnings por zona horaria no definida en el modulo de chat
 * Enhan: Módulo de chat mejora controles mediante bootstrap y disminuye tiempos en el heartbeat
@@ -69,7 +70,7 @@ LogCambios="
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-
+ALTER TABLE core_informe_boton ADD COLUMN precargar_estilos int(1) default '1';
 "
 
 ########################################################################

@@ -232,6 +232,7 @@ CREATE TABLE core_informe_boton (
   confirmacion_texto varchar(250) default '',
   destino varchar(250) default '_self',
   pantalla_completa int(1) default '0',
+  precargar_estilos int(1) default '1',
   PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

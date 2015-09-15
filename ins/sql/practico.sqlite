@@ -231,8 +231,9 @@ CREATE TABLE core_informe_boton (
   peso integer,
   confirmacion_texto text default '',
   destino text default '_self',
-  pantalla_completa integer default '0'
-  
+  pantalla_completa integer default '0',
+  precargar_estilos integer default '1'
+
 );
 
 DROP TABLE IF EXISTS core_usuario_informe;
