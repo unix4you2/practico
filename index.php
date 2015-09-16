@@ -1,7 +1,9 @@
 <?php
     /*
-    Copyright (C) 2013  John F. Arroyave Gutiérrez
-                        unix4you2@gmail.com
+	 _										  
+	|_) _ _  _ _|_. _ _					  	Copyright (C) 2013
+	|  | (_|(_  | |(_(_) 				  	John F. Arroyave Gutiérrez
+	  www.practico.org					  	unix4you2@gmail.com
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -17,30 +19,27 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,MA 02110-1301,USA.
 
-    <pre>
-    <b>Importante: Si usted esta visualizando este mensaje en su navegador,
-    entonces PHP no esta instalado correctamente en su servidor web!</b>
-    </pre>
-    */
+    <pre><b>
+    Importante: Si usted esta visualizando este mensaje en su navegador,
+    entonces PHP no esta instalado correctamente en su servidor web!</b></pre>
 
-    /*
-        Title: Articulador
-        Ubicacion *[index.php]*.  Archivo que contiene llamados a los demas
-        modulos y procesos de validacion de cabeceras.
+	Title: Modulo Articulador
+	Ubicacion *[index.php]*.  Archivo que contiene llamados a los demas
+	modulos y procesos de validacion de cabeceras.
 
-        Operaciones resumidas:
-            (start code)
-                Inicio variables de session
-                Inclusion de archivo de configuracion
-                Definicion de variables y parametros de funcionamiento
-                Inclusion de conexiones PDO y funciones comunes
-                Validacion de credenciales y datos de sesion
-                Inclusion de marco superior
-                Inclusion de modulos segun accion
-                Proyeccion de contenidos centrales por cada modulo (externo)
-                Inclusion de funciones personalizadas
-                Inclusion de marco inferior
-            (end)
+	Operaciones resumidas:
+		(start code)
+			Inicio variables de session
+			Inclusion de archivo de configuracion
+			Definicion de variables y parametros de funcionamiento
+			Inclusion de conexiones PDO y funciones comunes
+			Validacion de credenciales y datos de sesion
+			Inclusion de marco superior
+			Inclusion de modulos segun accion
+			Proyeccion de contenidos centrales por cada modulo (externo)
+			Inclusion de funciones personalizadas
+			Inclusion de marco inferior
+		(end)
     */
     
     //Permite WebServices propios mediante el acceso a este script en solicitudes Cross-Domain
