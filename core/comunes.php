@@ -615,6 +615,9 @@ function datatable_desde_hojacalculo($PathArchivo,$NroLineas)
 			if ($PCO_Accion== "eliminar_accion_informe")			$retorno = permiso_agregado_accion("administrar_informes");
 			if ($PCO_Accion== "exportar_informe")					$retorno = 1;
 			if ($PCO_Accion== "importar_informe")					$retorno = 1;
+			if ($PCO_Accion== "analizar_importacion_informe")		$retorno = permiso_agregado_accion("administrar_informes");
+			if ($PCO_Accion== "confirmar_importacion_informe")		$retorno = permiso_agregado_accion("administrar_informes");
+			
 			// Funciones en core/usuarios.php
 			if ($PCO_Accion== "cambiar_clave")						$retorno = 1;
             if ($PCO_Accion== "actualizar_perfil_usuario")			$retorno = 1;
