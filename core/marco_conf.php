@@ -135,9 +135,7 @@
                                     </div>
                                 </div>
 
-
                                 <div class="tab-pane fade in active" id="configvarias-tab">
-
 
 									<div class="row">
 										<div class="col-md-6">

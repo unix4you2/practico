@@ -1,9 +1,75 @@
 <?php
+/*
+=====================================================================
+   PBROWSER (Practico Browser)
+   Sistema Simple de Navegacion por Proxy basado en PHP
+   Copyright (C) 2013  John F. Arroyave Gutiérrez
+                       unix4you2@gmail.com
+                       www.practico.org
+ First version by PHProxy - Abdullah Arif (See AUTHORS file for details)
 
-//error_reporting(E_ALL);
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>
+*/
+
+
+    //Permite WebServices propios mediante el acceso a este script en solicitudes Cross-Domain
+    header('Access-Control-Allow-Origin: *');
+	header('Content-type: text/html; charset=utf-8');
+    
+    // BLOQUE BASICO DE INCLUSION ######################################
+    // Inicio de la sesion
+    @session_start();
+
+    //Incluye archivo inicial de configuracion
+	include_once("configuracion.php");
+
+    //Incluye idioma espanol, o sobreescribe vbles por configuracion de usuario
+    include("../inc/idiomas/es.php");
+    include("../inc/idiomas/".$IdiomaPredeterminado.".php");
+    // #################################################################
+
+    // Datos de fecha, hora y direccion IP para algunas operaciones
+    $PCO_PBROWSER_FechaOperacion=date("Ymd");
+    $PCO_PBROWSER_FechaOperacionGuiones=date("Y-m-d");
+    $PCO_PBROWSER_HoraOperacion=date("His");
+    $PCO_PBROWSER_HoraOperacionPuntos=date("H:i");
+    $PCO_PBROWSER_DireccionAuditoria=$_SERVER ['REMOTE_ADDR'];
+
+	// Establece version actual del sistema
+	$PCO_PBROWSER_VersionActual = file("../version_actual.txt");
+	$PCO_PBROWSER_VersionActual = trim($PCO_PBROWSER_VersionActual[0]);
+
+	$PCO_PBROWSER_IncluirForm=1;
+
+    // Recupera variables recibidas para su uso como globales (equivale a register_globals=on en php.ini)
+    if (!ini_get('register_globals'))
+    {
+        $PCO_PBROWSER_NumeroParametros = count($_REQUEST);
+        $PCO_PBROWSER_NombresParametros = array_keys($_REQUEST);// obtiene los nombres de las varibles
+        $PCO_PBROWSER_ValoresParametros = array_values($_REQUEST);// obtiene los valores de las varibles
+        // crea las variables y les asigna el valor
+        for($i=0;$i<$PCO_PBROWSER_NumeroParametros;$i++)
+            {
+                $$PCO_PBROWSER_NombresParametros[$i]=$PCO_PBROWSER_ValoresParametros[$i];
+            }
+        // Agrega ademas las variables de sesion
+        if (!empty($_SESSION)) extract($_SESSION);
+    }
+
 
 //
-// OPCIONES BASICAS
+// CONFIGURABLE OPTIONS
 //
 
 $_config            = array
@@ -12,14 +78,13 @@ $_config            = array
                         'flags_var_name'           => 'hl',
                         'get_form_name'            => '____pgfa',
                         'basic_auth_var_name'      => '____pbavn',
-                        'max_file_size'            => 1048576*10,  //-1   1048576=1MB
+                        'max_file_size'            => -1,
                         'allow_hotlinking'         => 0,
                         'upon_hotlink'             => 1,
                         'compress_output'          => 0
                     );
 $_flags             = array
                     (
-                        'include_form'    => 1, 
                         'remove_scripts'  => 1,
                         'accept_cookies'  => 1,
                         'show_images'     => 1,
@@ -32,7 +97,6 @@ $_flags             = array
                     );
 $_frozen_flags      = array
                     (
-                        'include_form'    => 0, 
                         'remove_scripts'  => 0,
                         'accept_cookies'  => 0,
                         'show_images'     => 0,
@@ -41,21 +105,8 @@ $_frozen_flags      = array
                         'base64_encode'   => 0,
                         'strip_meta'      => 0,
                         'strip_title'     => 0,
-                        'session_cookies' => 1
+                        'session_cookies' => 0
                     );                    
-$_labels            = array
-                    (
-                        'include_form'    => array('Incluir Formulario', 'Incluir un mini formulario para introducir una URL en cada pagina'), 
-                        'remove_scripts'  => array('Remover Scripts', 'Remueve los scripts del lado del cliente (ej JavaScript)'), 
-                        'accept_cookies'  => array('Aceptar Cookies', 'Permite almacenar cookies'), 
-                        'show_images'     => array('Ver Imagenes', 'Mostrar las imagenes en las paginas'), 
-                        'show_referer'    => array('Ver referencia', 'Ver el sitio de referencia actual'), 
-                        'rotate13'        => array('Rotate13', 'Usa codificacion ROT13 en la direccion'), 
-                        'base64_encode'   => array('Base64', 'Usa codificacion base64 en la direccion'), 
-                        'strip_meta'      => array('Obviar Meta', 'Obviar etiquetas de metainformacion'), 
-                        'strip_title'     => array('Obviar Titulo', 'Obvia el titulo de la pagina web'), 
-                        'session_cookies' => array('Cookies de sesion', 'Almacenar cookies para esta sesion solamente') 
-                    );
                     
 $_hosts             = array
                     (
@@ -65,7 +116,7 @@ $_hotlink_domains   = array();
 $_insert            = array();
 
 //
-// FIR CONFIGURACIONES BASICAS
+// END CONFIGURABLE OPTIONS. The ride for you ends here. Close the file.
 //
 
 $_iflags            = '';
@@ -77,7 +128,9 @@ $_system            = array
                         'stripslashes' => get_magic_quotes_gpc()
                     );
 $_proxify           = array('text/html' => 1, 'application/xml+xhtml' => 1, 'application/xhtml+xml' => 1, 'text/css' => 1);
-$_version           = '0.5b2';
+
+$_version           = $PCO_PBROWSER_VersionActual;
+
 $_http_host         = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : (isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'localhost');
 $_script_url        = 'http' . ((isset($_ENV['HTTPS']) && $_ENV['HTTPS'] == 'on') || $_SERVER['SERVER_PORT'] == 443 ? 's' : '') . '://' . $_http_host . ($_SERVER['SERVER_PORT'] != 80 && $_SERVER['SERVER_PORT'] != 443 ? ':' . $_SERVER['SERVER_PORT'] : '') . $_SERVER['PHP_SELF'];
 $_script_base       = substr($_script_url, 0, strrpos($_script_url, '/')+1);
@@ -1115,25 +1168,15 @@ else
         }
     }
     
-    if ($_flags['include_form'] && !isset($_GET['nf']))
+    if (!isset($_GET['nf']))
     {
-        $_url_form      = '<div style="width:100%;margin:0;text-align:center;border-bottom:1px solid #725554;color:#000000;background-color:#BBBBBB;font-size:11px;font-weight:bold;font-family:Bitstream Vera Sans,arial,sans-serif;padding:4px;">'
-                        . '<form method="post" action="' . $_script_url . '">'
-                        . ' <label for="____' . $_config['url_var_name'] . '"><img align="absmiddle" src="../../../img/practico_login.png" border=0 width="44" height="30"> <a href="' . $_url . '">Direccion</a>:</label> <input id="____' . $_config['url_var_name'] . '" type="text" size="80" name="' . $_config['url_var_name'] . '" value="' . $_url . '" />'
-                        . ' <input type="submit" name="go" value="Navegar" />'
-                        . ' [Ir: <a href="' . $_script_url . '?' . $_config['url_var_name'] . '=' . encode_url($_url_parts['prev_dir']) .' ">arriba un nivel</a>, <a href="' . $_script_base . '">pagina principal</a>]'
-                        . '<br /><hr />';
+        // Define contenido que va al principio del BODY
+        $_Contenido_Previo_BODY = '';
 
-        foreach ($_flags as $flag_name => $flag_value)
-        {
-            if (!$_frozen_flags[$flag_name])
-            {
-                $_url_form .= '<label><input type="checkbox" name="' . $_config['flags_var_name'] . '[' . $flag_name . ']"' . ($flag_value ? ' checked="checked"' : '') . ' /> ' . $_labels[$flag_name][0] . '</label> ';
-            }
-        }
-
-        $_url_form .= '</form></div>';
-        $_response_body = preg_replace('#\<\s*body(.*?)\>#si', "$0\n$_url_form" , $_response_body, 1);
+        //Se agrega el contenido a $_response_body mediante un reemplazo por expresion regular
+        //POR AHORA SE ANULA LA INCLUSION DEL FORM
+        $_response_body = preg_replace('#\<\s*body(.*?)\>#si', "$0\n$_Contenido_Previo_BODY" , $_response_body, 1);
+        
     }
 }
 
@@ -1156,5 +1199,4 @@ foreach ($_response_headers as $name => $array)
 }
 
 echo $_response_body;
-
 ?>
