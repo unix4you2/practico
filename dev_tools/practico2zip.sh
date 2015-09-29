@@ -73,7 +73,7 @@
 #source dev_tools/log_cambios.txt
 
 #[ArchivosExcluidos] Separados por espacio. Residen en alguna carpeta a comprimir pero deben evitarse
-ListaExcluidos=" skin/nomo_editada\* mod/ldap\* mod/pam\* mod/pdf\* mod/proxy\* core/configuracion.php core/doc_configuracion.php core/doc_intro.php practico.sqlite3 "
+ListaExcluidos=" skin/nomo_editada\* mod/ldap\* mod/pam\* mod/pdf\* mod/pbrowser\* core/configuracion.php core/doc_configuracion.php core/doc_intro.php practico.sqlite3 "
 
 # Banderas para la compresion
 	Comando="zip "
