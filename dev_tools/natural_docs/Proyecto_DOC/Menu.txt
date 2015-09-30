@@ -49,7 +49,6 @@ Group: Modulos Principales  {
 
    Group: Core  {
 
-      File: Articulador  (index.php)
       File: Conexiones PDO  (core/conexiones.php)
 
       Group: Dev_tools  {
@@ -110,9 +109,9 @@ Group: Modulos Principales  {
    Group: Inc  {
 
       File: Idioma espanol  (inc/practico/idiomas/es.php)
-      File: Idioma espanol  (inc/practico/idiomas/en.php)
-      File: Idioma espanol  (inc/practico/idiomas/pt.php)
-      File: Idioma espanol  (inc/practico/idiomas/hi.php)
+      File: Idioma hindi  (inc/practico/idiomas/hi.php)
+      File: Idioma ingles  (inc/practico/idiomas/en.php)
+      File: Idioma portugues  (inc/practico/idiomas/pt.php)
       File: Libreria Definicion de base de datos  (inc/practico/def_basedatos.php)
       }  # Group: Inc
 
@@ -145,8 +144,17 @@ Group: Mod  {
    File: Funciones personalizadas para WebServices  (mod/personalizadas_ws.php)
    File: ldap/.../lib/schema_functions.php  (mod/ldap/phpldapadmin-1.2.3/lib/schema_functions.php)
    File: ldap_admin_embebido  (mod/ldap/index.php)
+
+   Group: Pbrowser  {
+
+      File: Idioma espanol para modulo de PBrowser  (mod/pbrowser/inc/idiomas/es.php)
+      File: Idioma hindi para modulo de PBrowser  (mod/pbrowser/inc/idiomas/hi.php)
+      File: Idioma ingles para modulo de PBrowser  (mod/pbrowser/inc/idiomas/en.php)
+      File: Idioma portugues para modulo de PBrowser  (mod/pbrowser/inc/idiomas/pt.php)
+      File: PCO_PBrowser  (mod/pbrowser/index.php)
+      }  # Group: Pbrowser
+
    File: pcc_erp/index.php  (mod/pcc_erp/index.php)
-   File: PCO_Proxy  (mod/proxy/index.php)
 
    Group: Pcoder  {
 

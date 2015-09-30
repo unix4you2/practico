@@ -23,7 +23,7 @@
 		Ubicacion *[/core/configuracion.php]*.  Archivo que contiene la declaracion de variables basicas
 	*/
 
-	$PCO_PBROWSER_StandAlone=1; //1=StandAlone 0=Modulo de Practico
+	$PCO_PBROWSER_StandAlone=0; //1=StandAlone 0=Modulo de Practico
 
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='en';
