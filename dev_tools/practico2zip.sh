@@ -103,7 +103,7 @@ ListaExcluidos=" skin/nomo_editada\* mod/ldap\* mod/pam\* mod/pdf\* core/configu
 	cd natural_docs
     ./GenerarDocumentacion.sh
     # Pasa archivos generados al repositorio web
-    cp -r Salida_DOC/* ../../../practico_web/dev_docs/
+    cp -r Salida_DOC/* ../../../unix4you2.github.io/dev_docs/
     cd ..
 
 
