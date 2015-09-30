@@ -135,6 +135,43 @@ function PCOJS_MostrarMensajeCargando(TituloPopUp, Mensaje, PermitirCierre, Prog
 		$("#PCO_Modal_MensajeCargando").css("z-index", "1500");
 	}
 
+function PCOJS_ActualizarComboBox(ObjetoListaOpciones)
+    {
+		//Actualiza el listpicker y sus opciones identificado por el nombre del campo o id
+		var PCO_NombreCombo=".combo-" + ObjetoListaOpciones;
+		$(PCO_NombreCombo).selectpicker("refresh");
+    }
+
+function PCOJS_LimpiarComboBox(ObjetoListaOpciones)
+    {
+		//Limpia una lista de seleccion determinada por su propiedad de ID
+        document.getElementById(ObjetoListaOpciones).options.length=0;
+        //Despues de limpiar un combo obliga a su actualizacion visual
+        PCOJS_ActualizarComboBox(ObjetoListaOpciones);
+    }
+
+function PCOJS_AgregarOpcionComboBox(ObjetoListaOpciones,ValorOpcion,EtiquetaOpcion)
+    {
+		//Determina el ID del objeto para realizar la operacion
+		var IDObjetoListaOpciones = document.getElementById(ObjetoListaOpciones);
+		//Agrega el elemento
+		var PCOEtiqueta_option = document.createElement("option");
+		PCOEtiqueta_option.value = ValorOpcion;
+		PCOEtiqueta_option.text = EtiquetaOpcion;
+		IDObjetoListaOpciones.add(PCOEtiqueta_option);
+    }
+
+function PCOJS_OpcionesCombo_DesdeCSV(ObjetoListaOpciones,Cadena,SeparadorLineas)
+    {
+		//Toma los valores contenidos en una cadena y los convierte en opciones de combo
+		var ContadorOpciones;
+		ArregloOpciones = Cadena.split(SeparadorLineas);
+        for (ContadorOpciones in ArregloOpciones) 
+			PCOJS_AgregarOpcionComboBox(ObjetoListaOpciones,ArregloOpciones[ContadorOpciones],ArregloOpciones[ContadorOpciones]);
+        //Obliga a una actualizacion de la lista despues de agregar todos los elementos
+        PCOJS_ActualizarComboBox(ObjetoListaOpciones);
+    }
+
 //Funcion para conversion de texto a HTML
 function PCO_HTMLSpecialChars(string)
     {

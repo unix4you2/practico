@@ -22,14 +22,15 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
+    // BLOQUE BASICO DE INCLUSION ######################################
+    // Inicio de la sesion
+    @session_start();
 
     //Permite WebServices propios mediante el acceso a este script en solicitudes Cross-Domain
     header('Access-Control-Allow-Origin: *');
 	header('Content-type: text/html; charset=utf-8');
     
-    // BLOQUE BASICO DE INCLUSION ######################################
-    // Inicio de la sesion
-    @session_start();
+
 
     //Incluye archivo inicial de configuracion
 	include_once("configuracion.php");
@@ -37,7 +38,7 @@
     //Incluye idioma espanol, o sobreescribe vbles por configuracion de usuario
     include("../inc/idiomas/es.php");
     include("../inc/idiomas/".$IdiomaPredeterminado.".php");
-    // #################################################################
+    // FIN BLOQUE BASICO DE INCLUSION ##################################
 
     // Datos de fecha, hora y direccion IP para algunas operaciones
     $PCO_PBROWSER_FechaOperacion=date("Ymd");

@@ -20,6 +20,8 @@ inc/bootstrap/css/practico.min.css
 inc/bootstrap/js/practico.min.js
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
+mod/pbrowser/index.php
+mod/pbrowser/core/index.php
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -30,7 +32,8 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-
+* Added: Funciones para operar listas de selección: PCOJS_ActualizarComboBox(), PCOJS_LimpiarComboBox(), PCOJS_AgregarOpcionComboBox(), PCOJS_OpcionesCombo_DesdeCSV()
+* Enhan: Controles de acceso por sesion para pbrowser
 "
 
 ########################################################################
