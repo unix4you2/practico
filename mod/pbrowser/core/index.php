@@ -25,15 +25,27 @@
     // BLOQUE BASICO DE INCLUSION ######################################
     // Inicio de la sesion
     @session_start();
+	// Agrega las variables de sesion
+	if (!empty($_SESSION)) extract($_SESSION);
 
     //Permite WebServices propios mediante el acceso a este script en solicitudes Cross-Domain
     header('Access-Control-Allow-Origin: *');
 	header('Content-type: text/html; charset=utf-8');
-    
-
 
     //Incluye archivo inicial de configuracion
 	include_once("configuracion.php");
+
+	// Determina si no se trabaja en modo StandAlone y verifica entonces credenciales
+	if ($PCO_PBROWSER_StandAlone==0)
+		{
+			// Valida sesion activa de Practico
+			if (!isset($PCOSESS_SesionAbierta)) 
+				{
+					echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
+					die();
+				}
+		}
+
 
     //Incluye idioma espanol, o sobreescribe vbles por configuracion de usuario
     include("../inc/idiomas/es.php");
