@@ -742,7 +742,7 @@ if ($PCO_Accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(42);
+					OcultarCampos(43);
 					// Muestra campos segun tipo de objeto
 					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,14,17,25,36,37");
 					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25,36,37");
@@ -760,7 +760,7 @@ if ($PCO_Accion=="editar_formulario")
 					if (tipo_objeto_activo=="objeto_canvas")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,30,31,36");
 					if (tipo_objeto_activo=="objeto_camara")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,31,36");
                     if (tipo_objeto_activo=="form_consulta")   VisualizarCampos("9,17,24,32,33,34,36");
-                    if (tipo_objeto_activo=="boton_comando")   VisualizarCampos("1,9,36,37,38,39,40,41");
+                    if (tipo_objeto_activo=="boton_comando")   VisualizarCampos("1,9,36,37,38,39,40,41,43");
 					if (tipo_objeto_activo=="area_responsive") VisualizarCampos("1,2,6,9,15,16,17,36");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
@@ -829,9 +829,14 @@ if ($PCO_Accion=="editar_formulario")
                         </div>
 						<hr>
 
+
+		<div class="row">
+			<div class="col col-md-6">
+
+
 						<div id='campo1' style="display:none;">
                             <div class="form-group input-group">
-                                <input type="text" name="titulo" class="form-control" value="<?php echo @$registro_campo_editar["titulo"]; ?>" placeholder="<?php echo $MULTILANG_FrmTitulo; ?>">
+                                <input type="text" name="titulo" class="form-control input-sm" value="<?php echo @$registro_campo_editar["titulo"]; ?>" placeholder="<?php echo $MULTILANG_FrmTitulo; ?>"  OnInput="ActualizarTexto_botoncomando_vista_previa(this.value);">
                                 <span class="input-group-addon">
                                     <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
                                     <a href="#" title="<?php echo $MULTILANG_FrmDesTitulo; ?>"><i class="fa fa-question-circle text-info"></i></a>
@@ -845,7 +850,7 @@ if ($PCO_Accion=="editar_formulario")
                                 <span class="input-group-addon">
                                     <?php echo $nombre_tabla; ?>.
                                 </span>
-                                    <select id="campo" name="campo" class="form-control" >
+                                    <select id="campo" name="campo" class="form-control input-sm" >
                                     <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                     <?php
                                         $resultadocampos=consultar_columnas($nombre_tabla);
@@ -867,7 +872,7 @@ if ($PCO_Accion=="editar_formulario")
                                     <a href="#" title="<?php echo $MULTILANG_FrmDesCampo; ?>"><i class="fa fa-question-circle icon-info"></i></a>
                                 </span>
                             </div>
-                            <input name="campo_manual"  value="<?php if (!@existe_campo_tabla($registro_campo_editar["campo"],$nombre_tabla)) echo @$registro_campo_editar["campo"]; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>">
+                            <input name="campo_manual"  value="<?php if (!@existe_campo_tabla($registro_campo_editar["campo"],$nombre_tabla)) echo @$registro_campo_editar["campo"]; ?>" type="text" class="form-control input-sm" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>">
 						</div>
 
 						<div id='campo3' style="display:none;">
@@ -881,17 +886,17 @@ if ($PCO_Accion=="editar_formulario")
 
 						<div id='campo4' style="display:none;">
                             <div class="form-group input-group">
-                                <input type="text" name="valor_predeterminado" class="form-control" value="<?php echo @$registro_campo_editar["valor_predeterminado"]; ?>" placeholder="<?php echo $MULTILANG_FrmPredeterminado; ?>">
+                                <input type="text" name="valor_predeterminado" class="form-control input-sm" value="<?php echo @$registro_campo_editar["valor_predeterminado"]; ?>" placeholder="<?php echo $MULTILANG_FrmPredeterminado; ?>">
                                 <span class="input-group-addon">
                                     <a href="#" title="<?php echo $MULTILANG_FrmDesPredeterminado; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
-                            </div>                                    
+                            </div>
 						</div>
 
 						<div id='campo5' style="display:none;">
                             <label for="validacion_datos"><?php echo $MULTILANG_FrmValida; ?>:</label>
                             <div class="form-group input-group">
-                                <select  name="validacion_datos" class="form-control" >
+                                <select  name="validacion_datos" class="form-control input-sm" >
                                     <option value=""><?php $MULTILANG_Ninguno; ?></option>
                                     <option value="numerico"      <?php if (@$registro_campo_editar["validacion_datos"]=="numerico")      echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida1; ?></option>
                                     <option value="alfabetico"    <?php if (@$registro_campo_editar["validacion_datos"]=="alfabetico")    echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida2; ?></option>
@@ -912,7 +917,7 @@ if ($PCO_Accion=="editar_formulario")
 						<div id='campo6' style="display:none;">
                             <label for="solo_lectura"><?php echo $MULTILANG_FrmLectura; ?>:</label>
                             <div class="form-group input-group">
-                                <select id="solo_lectura" name="solo_lectura" class="form-control" >
+                                <select id="solo_lectura" name="solo_lectura" class="form-control input-sm" >
                                     <option value="READONLY" <?php if (@$registro_campo_editar["solo_lectura"]=="READONLY") echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
                                     <option value=""         <?php if (@$registro_campo_editar["solo_lectura"]=="")         echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
                                 </select>
@@ -925,7 +930,7 @@ if ($PCO_Accion=="editar_formulario")
 
 						<div id='campo7' style="display:none;">
                             <div class="form-group input-group">
-                                <input type="text" name="ayuda_titulo" class="form-control" value="<?php echo @$registro_campo_editar["ayuda_titulo"]; ?>" placeholder="<?php echo $MULTILANG_FrmAyuda; ?>">
+                                <input type="text" name="ayuda_titulo" class="form-control input-sm" value="<?php echo @$registro_campo_editar["ayuda_titulo"]; ?>" placeholder="<?php echo $MULTILANG_FrmAyuda; ?>">
                                 <span class="input-group-addon">
                                     <a href="#" title="<?php echo $MULTILANG_FrmDesAyuda; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
@@ -935,7 +940,7 @@ if ($PCO_Accion=="editar_formulario")
 
 						<div id='campo8' style="display:none;">
                             <div class="form-group input-group">
-                                <textarea name="ayuda_texto" rows="2" class="form-control" placeholder="<?php echo $MULTILANG_FrmTxtAyuda; ?>"><?php echo @$registro_campo_editar["ayuda_texto"]; ?></textarea>
+                                <textarea name="ayuda_texto" rows="2" class="form-control input-sm" placeholder="<?php echo $MULTILANG_FrmTxtAyuda; ?>"><?php echo @$registro_campo_editar["ayuda_texto"]; ?></textarea>
                                 <span class="input-group-addon">
                                     <a href="#" title="<?php echo $MULTILANG_FrmDesTxtAyuda; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
@@ -943,162 +948,9 @@ if ($PCO_Accion=="editar_formulario")
 						</div>
 
 
-						<div id='campo9' style="display:none;">
-                            <div class="row">
-                                <div class="col-md-6">
-                                        <label for="peso"><?php echo $MULTILANG_Peso; ?>:</label>
-                                        <div class="form-group input-group">
-                                            <select id="peso" name="peso" class="form-control" >
-                                                <?php
-                                                    for ($i=1;$i<=100;$i++)
-                                                        {
-                                                            $seleccion_campo="";
-                                                            if (@$registro_campo_editar["peso"]==$i)
-                                                                $seleccion_campo="SELECTED";														
-                                                            echo '<option value="'.$i.'" '.$seleccion_campo.'>'.$i.'</option>';
-                                                        }
-                                                ?>
-                                            </select>
-                                            <span class="input-group-addon">
-                                                <a href="#" title="<?php echo $MULTILANG_FrmDesPeso; ?>"><i class="fa fa-question-circle icon-info"></i></a>
-                                            </span>
-                                        </div>
-                                </div>    
-                                <div class="col-md-6">
-                                        <label for="columna"><?php echo $MULTILANG_Columna; ?>:</label>
-                                        <div class="form-group input-group">
-                                            <select id="columna" name="columna" class="form-control" >
-                                                <?php
-                                                    // Obtiene numero de columnas para el formulario
-                                                    $consulta_columnas=ejecutar_sql("SELECT columnas FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
-                                                    $registro_columnas = $consulta_columnas->fetch();
-                                                    $columnas_formulario=$registro_columnas["columnas"];
-                                                    for ($i=1;$i<=$columnas_formulario;$i++)
-                                                        {
-                                                            $seleccion_campo="";
-                                                            if ($registro_campo_editar["columna"]==$i)
-                                                                $seleccion_campo="SELECTED";
-                                                            echo '<option value="'.$i.'" '.$seleccion_campo.'>'.$i.'</option>';
-                                                        }
-                                                ?>
-                                            </select>
-                                            <span class="input-group-addon">
-                                                <a href="#" title="<?php echo $MULTILANG_FrmDesColumna; ?>"><i class="fa fa-question-circle icon-info"></i></a>
-                                            </span>
-                                        </div>
-                                </div>
-                            </div>
-						</div>
-
-
-						<div id='campo10' style="display:none;">
-                            <div class="row">
-                                <div class="col-md-6">
-                                        <label for="obligatorio"><?php echo $MULTILANG_FrmObligatorio; ?>:</label>
-                                        <div class="form-group input-group">
-                                            <select id="obligatorio" name="obligatorio" class="form-control" >
-                                                <option value="1" <?php if (@$registro_campo_editar["obligatorio"]==1) echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
-                                                <option value="0" <?php if (@$registro_campo_editar["obligatorio"]==0) echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
-                                            </select>
-                                        </div>                                    
-                                </div>    
-                                <div class="col-md-6">
-                                        <label for="visible"><?php echo $MULTILANG_FrmVisible; ?>:</label>
-                                        <div class="form-group input-group">
-                                        <select  id="visible" name="visible" class="form-control" >
-                                            <option value="1" <?php if (@$registro_campo_editar["visible"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
-                                            <option value="0" <?php if (@$registro_campo_editar["visible"]=="0") echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
-                                        </select>
-                                            <span class="input-group-addon">
-                                                <a href="#" title="<?php echo $MULTILANG_FrmDesVisible; ?>"><i class="fa fa-question-circle icon-info"></i></a>
-                                            </span>
-                                        </div>
-                                </div>
-                            </div>
-						</div>
-
-
-						<div id='campo11' style="display:none;">
-                            <div class="form-group input-group">
-                                <input type="text" name="etiqueta_busqueda" class="form-control" value="<?php echo @$registro_campo_editar["etiqueta_busqueda"]; ?>" placeholder="<?php echo $MULTILANG_FrmLblBusqueda; ?>">
-                                <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTitBusqueda; ?>: <?php echo $MULTILANG_FrmDesBusqueda; ?>"><i class="fa fa-question-circle text-info"></i></a>
-                                </span>
-                            </div>
-						</div>
-
-
-						<div id='campo12' style="display:none;">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" id="ajax_busqueda" name="ajax_busqueda" <?php if (@$registro_campo_editar["ajax_busqueda"]==1) echo 'checked'; ?> > <?php echo $MULTILANG_FrmAjax; ?>
-                                </label>
-                                <a href="#" title="<?php echo $MULTILANG_FrmTitAjax; ?>: <?php echo $MULTILANG_FrmDesAjax; ?>" name="<?php echo $MULTILANG_FrmDesUnico; ?>"><i class="fa fa-question-circle"></i></a>
-                            </div>
-						</div>
-
-
-						<div id='campo14' style="display:none;">
-                            <div class="form-group input-group">
-                                <input type="text" name="ancho" class="form-control" value="<?php echo @$registro_campo_editar["ancho"]; ?>" placeholder="<?php echo $MULTILANG_FrmAncho; ?>">
-                                <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTitAncho; ?>: <?php echo $MULTILANG_FrmDesAncho; ?> (<?php echo $MULTILANG_FrmDesAncho2; ?>)"><i class="fa fa-question-circle text-info"></i></a>
-                                </span>
-                            </div>
-						</div>
-
-						<div id='campo15' style="display:none;">
-                            <div class="form-group input-group">
-                                <input type="text" name="alto" class="form-control" value="<?php echo @$registro_campo_editar["alto"]; ?>" placeholder="<?php echo $MULTILANG_FrmAlto; ?>">
-                                <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTitAlto; ?>: <?php echo $MULTILANG_FrmDesAlto; ?> (<?php echo $MULTILANG_FrmDesAlto2; ?>)"><i class="fa fa-question-circle text-info"></i></a>
-                                </span>
-                            </div>
-						</div>
-
-						<div id='campo16' style="display:none;">
-                            <label for="barra_herramientas"><?php echo $MULTILANG_FrmBarra; ?>:</label>
-                            <div class="form-group input-group">
-                                <select  id="barra_herramientas" name="barra_herramientas" class="form-control" >
-									<optgroup label="<?php echo $MULTILANG_FrmBarraCKEditor; ?>">
-										<option value="0" <?php if (@$registro_campo_editar["barra_herramientas"]=="0") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo1; ?></option>
-										<option value="1" <?php if (@$registro_campo_editar["barra_herramientas"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo2; ?></option>
-										<option value="2" <?php if (@$registro_campo_editar["barra_herramientas"]=="2") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo3; ?></option>
-										<option value="3" <?php if (@$registro_campo_editar["barra_herramientas"]=="3") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo4; ?></option>
-										<option value="4" <?php if (@$registro_campo_editar["barra_herramientas"]=="4") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo5; ?></option>
-                                    </optgroup>
-									<optgroup label="<?php echo $MULTILANG_FrmBarraSummer; ?>">
-										<option value="5" <?php if (@$registro_campo_editar["barra_herramientas"]=="5") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo1Summer; ?></option>
-										<option value="6" <?php if (@$registro_campo_editar["barra_herramientas"]=="6") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo2Summer; ?></option>
-										<option value="7" <?php if (@$registro_campo_editar["barra_herramientas"]=="7") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo3Summer; ?></option>
-										<option value="8" <?php if (@$registro_campo_editar["barra_herramientas"]=="8") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo4Summer; ?></option>
-										<option value="9" <?php if (@$registro_campo_editar["barra_herramientas"]=="9") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo5Summer; ?></option>
-                                    </optgroup>
-                                </select>
-                                <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTitBarra; ?>: <?php echo $MULTILANG_FrmDesBarra; ?>"><i class="fa fa-question-circle icon-info"></i></a>
-                                </span>
-                            </div>
-						</div>
-
-
-						<div id='campo17' style="display:none;">
-                            <label for="solo_lectura"><?php echo $MULTILANG_FrmFila; ?>:</label>
-                            <div class="form-group input-group">
-                                <select id="fila_unica" name="fila_unica" class="form-control" >
-										<option value="0" <?php if (@$registro_campo_editar["fila_unica"]=="0") echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
-										<option value="1" <?php if (@$registro_campo_editar["fila_unica"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
-                                </select>
-                                <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTitFila; ?>: <?php echo $MULTILANG_FrmDesFila; ?>"><i class="fa fa-question-circle icon-info"></i></a>
-                                </span>
-                            </div>
-						</div>
-
-
 						<div id='campo18' style="display:none;">
                             <div class="form-group input-group">
-                                <input type="text" name="lista_opciones" class="form-control" value="<?php echo @$registro_campo_editar["lista_opciones"]; ?>" placeholder="<?php echo $MULTILANG_FrmLista; ?>">
+                                <input type="text" name="lista_opciones" class="form-control input-sm" value="<?php echo @$registro_campo_editar["lista_opciones"]; ?>" placeholder="<?php echo $MULTILANG_FrmLista; ?>">
                                 <span class="input-group-addon">
                                     <a href="#" title="<?php echo $MULTILANG_FrmTitLista; ?> (<?php echo $MULTILANG_FrmDesLista2; ?>)"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
@@ -1109,7 +961,7 @@ if ($PCO_Accion=="editar_formulario")
 						<div id='campo19' style="display:none;">
                             <label for="origen_lista_opciones"><?php echo $MULTILANG_FrmOrigen; ?>:</label>
                             <div class="form-group input-group">
-                                <select id="origen_lista_opciones" name="origen_lista_opciones" class="form-control" >
+                                <select id="origen_lista_opciones" name="origen_lista_opciones" class="form-control input-sm" >
                                     <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                     <?php
                                         $resultado=consultar_tablas();
@@ -1145,7 +997,7 @@ if ($PCO_Accion=="editar_formulario")
 						<div id='campo20' style="display:none;">
                             <label for="origen_lista_valores"><?php echo $MULTILANG_FrmOrigenVal; ?>:</label>
                             <div class="form-group input-group">
-                                <select id="origen_lista_valores" name="origen_lista_valores" class="form-control" >
+                                <select id="origen_lista_valores" name="origen_lista_valores" class="form-control input-sm" >
                                     <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                     <?php
                                         $resultado=consultar_tablas();
@@ -1178,102 +1030,12 @@ if ($PCO_Accion=="editar_formulario")
 						</div>
 
 
-						<div id='campo21' style="display:none;">
-							<table class="TextosVentana">
-							<tr>
-								<td colspan=2>
-									<?php echo $MULTILANG_FrmEtiqueta; ?>:<br>
-									<div id="Summer_valor_etiqueta" class="summernote"></div>
-									<textarea rows="20" name="valor_etiqueta" id="valor_etiqueta" style="visibility:hidden; display:none;"><?php echo @$registro_campo_editar["valor_etiqueta"]; ?></textarea>
-								</td>
-							</tr>
-							</table>
-						</div>
-
-
-						<div id='campo22' style="display:none;">
+						<div id='campo35' style="display:none;">
                             <div class="form-group input-group">
+                                <input type="text" name="condicion_filtrado_listas" class="form-control input-sm" value="<?php echo @htmlentities($registro_campo_editar["condicion_filtrado_listas"]); ?>" placeholder="<?php echo $MULTILANG_FrmFiltroLista; ?>">
                                 <span class="input-group-addon">
-                                    <i class="fa fa-globe"></i>
+                                    <a href="#" title="<?php echo $MULTILANG_FrmDesFiltroLista; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
-                                <input type="text" name="url_iframe" class="form-control" value="<?php echo @$registro_campo_editar["url_iframe"]; ?>" placeholder="<?php echo $MULTILANG_FrmURL; ?>">
-                                <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesURL; ?>"><i class="fa fa-question-circle text-info"></i></a>
-                                </span>
-                            </div>
-						</div>
-
-
-						<div id='campo23' style="display:none;">
-                            <label for="informe_vinculado"><?php echo $MULTILANG_FrmInforme; ?></label>
-                            <div class="form-group input-group">
-                                <select id="informe_vinculado" name="informe_vinculado" class="form-control">
-                                <option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
-                                <?php
-                                    $consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe ORDER BY titulo");
-                                    while($registro_informes = $consulta_informs->fetch())
-                                        {
-                                            $seleccion_campo="";
-                                            if (@$registro_campo_editar["informe_vinculado"]==$registro_informes["id"])
-                                                $seleccion_campo="SELECTED";
-                                            echo '<option value="'.$registro_informes["id"].'" '.$seleccion_campo.'>(Id.'.$registro_informes["id"].') '.$registro_informes["titulo"].'</option>';
-                                        }
-                                ?>
-                                </select>
-                            </div>
-						</div>
-
-
-						<div id='campo24' style="display:none;">
-                            <label for="objeto_en_ventana"><?php echo $MULTILANG_FrmVentana; ?></label>
-                            <div class="form-group input-group">
-                                <select id="objeto_en_ventana" name="objeto_en_ventana" class="form-control">
-                                    <option value="0" <?php if (@$registro_campo_editar["objeto_en_ventana"]=="0") echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
-                                    <option value="1" <?php if (@$registro_campo_editar["objeto_en_ventana"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
-                                </select>
-                                <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesVentana; ?>"><i class="fa fa-question-circle text-info"></i></a>
-                                </span>
-                            </div>
-						</div>
-
-
-						<div id='campo25' style="display:none;">
-                            <div class="form-group input-group">
-                                <input type="text" name="maxima_longitud" class="form-control" value="<?php echo @$registro_campo_editar["maxima_longitud"]; ?>" placeholder="<?php echo $MULTILANG_FrmLongMaxima; ?>">
-                                <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTit1LongMaxima; ?>: (<?php echo $MULTILANG_FrmTit2LongMaxima; ?>)"><i class="fa fa-question-circle text-info"></i></a>
-                                </span>
-                            </div>
-						</div>
-
-
-						<div id='campo26' style="display:none;">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group input-group">
-                                        <input type="text" name="valor_minimo" class="form-control" value="<?php if (@$registro_campo_editar["valor_minimo"]!='1') echo @$registro_campo_editar["valor_minimo"]; else echo '1'; ?>" placeholder="<?php echo $MULTILANG_FrmValorMinimo; ?>">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-hand-o-down"></i>
-                                        </span>
-                                    </div>
-                                </div>    
-                                <div class="col-md-4">
-                                    <div class="form-group input-group">
-                                        <input type="text" name="valor_maximo" class="form-control" value="<?php if (@$registro_campo_editar["valor_maximo"]!='100') echo @$registro_campo_editar["valor_maximo"]; else echo '100'; ?>" placeholder="<?php echo $MULTILANG_FrmValorMaximo; ?>">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-hand-o-up"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group input-group">
-                                        <input type="text" name="valor_salto" class="form-control" value="<?php if (@$registro_campo_editar["valor_salto"]!='1') echo @$registro_campo_editar["valor_salto"]; else echo '1'; ?>" placeholder="<?php echo $MULTILANG_FrmValorSalto; ?>">
-                                        <span class="input-group-addon">
-                                            <a href="#" title="<?php echo $MULTILANG_FrmTitValorSalto; ?>"><i class="fa fa-question-circle text-info"></i></a>
-                                        </span>
-                                    </div>
-                                </div>
                             </div>
 						</div>
 
@@ -1281,7 +1043,7 @@ if ($PCO_Accion=="editar_formulario")
 						<div id='campo27' style="display:none;">
                             <label for="formato_salida"><?php echo $MULTILANG_FrmFormatoSalida; ?>:</label>
                             <div class="form-group input-group">
-                                <select id="formato_salida" name="formato_salida" class="form-control">
+                                <select id="formato_salida" name="formato_salida" class="form-control input-sm">
                                 <option value=""><?php echo $MULTILANG_MnuTexto; ?></option>
                                 <optgroup label="<?php echo $MULTILANG_CodigoBarras; ?>">
                                     <option value="std25" <?php if (@$registro_campo_editar["formato_salida"]=="std25") echo "SELECTED"; ?> >Standard 2 of 5 (industrial, Numerio Sin limite)</option>
@@ -1307,24 +1069,10 @@ if ($PCO_Accion=="editar_formulario")
                             </div>
 						</div>
 
-
-						<div id='campo28' style="display:none;">
-                            <div class="form-group input-group">
-                                <input type="text" name="plantilla_archivo" class="form-control" value="<?php echo @$registro_campo_editar["plantilla_archivo"]; ?>" placeholder="<?php echo $MULTILANG_FrmPlantillaArchivo; ?>">
-                                <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesPlantillaArchivo; ?>"><i class="fa fa-question-circle text-info"></i></a>
-                                </span>
-                            </div>
-                            <?php
-                                mensaje('<i class="fa fa-info fa-2x text-info texto-blink"></i> '.$MULTILANG_Ayuda, $MULTILANG_FrmPlantillaEjemplos, '', '', 'alert alert-info alert-dismissible');
-                            ?>
-						</div>
-
-
 						<div id='campo29' style="display:none;">
                             <label for="peso_archivo"><?php echo $MULTILANG_Peso; ?> (Max)</label>
                             <div class="form-group input-group">
-                                <select id="peso_archivo" name="peso_archivo" class="form-control">
+                                <select id="peso_archivo" name="peso_archivo" class="form-control input-sm">
                                     <option value="50">50 KB</option>
                                     <option value="100" <?php if (@$registro_campo_editar["peso_archivo"]=="100") echo "SELECTED"; ?> >100 KB</option>
                                     <option value="150" <?php if (@$registro_campo_editar["peso_archivo"]=="150") echo "SELECTED"; ?> >150 KB</option>
@@ -1348,7 +1096,7 @@ if ($PCO_Accion=="editar_formulario")
                                 <span class="input-group-addon">
                                     <i class="fa fa-paint-brush texto-rojo"></i>
                                 </span>
-                                <select id="tamano_pincel" name="tamano_pincel" class="form-control">
+                                <select id="tamano_pincel" name="tamano_pincel" class="form-control input-sm">
                                     <option value="1">1</option>
                                     <option value="2" <?php if (@$registro_campo_editar["tamano_pincel"]=="2") echo "SELECTED"; ?> >2</option>
                                     <option value="3" <?php if (@$registro_campo_editar["tamano_pincel"]=="3") echo "SELECTED"; ?> >3</option>
@@ -1383,10 +1131,56 @@ if ($PCO_Accion=="editar_formulario")
 						</div>
 
 
+						<div id='campo21' style="display:none;">
+							<table class="TextosVentana">
+							<tr>
+								<td colspan=2>
+									<?php echo $MULTILANG_FrmEtiqueta; ?>:<br>
+									<div id="Summer_valor_etiqueta" class="summernote"></div>
+									<textarea rows="20" name="valor_etiqueta" id="valor_etiqueta" style="visibility:hidden; display:none;"><?php echo @$registro_campo_editar["valor_etiqueta"]; ?></textarea>
+								</td>
+							</tr>
+							</table>
+						</div>
+
+
+						<div id='campo22' style="display:none;">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-globe"></i>
+                                </span>
+                                <input type="text" name="url_iframe" class="form-control input-sm" value="<?php echo @$registro_campo_editar["url_iframe"]; ?>" placeholder="<?php echo $MULTILANG_FrmURL; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_FrmDesURL; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
+                            </div>
+						</div>
+
+
+						<div id='campo23' style="display:none;">
+                            <label for="informe_vinculado"><?php echo $MULTILANG_FrmInforme; ?></label>
+                            <div class="form-group input-group">
+                                <select id="informe_vinculado" name="informe_vinculado" class="form-control input-sm">
+                                <option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                                <?php
+                                    $consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe ORDER BY titulo");
+                                    while($registro_informes = $consulta_informs->fetch())
+                                        {
+                                            $seleccion_campo="";
+                                            if (@$registro_campo_editar["informe_vinculado"]==$registro_informes["id"])
+                                                $seleccion_campo="SELECTED";
+                                            echo '<option value="'.$registro_informes["id"].'" '.$seleccion_campo.'>(Id.'.$registro_informes["id"].') '.$registro_informes["titulo"].'</option>';
+                                        }
+                                ?>
+                                </select>
+                            </div>
+						</div>
+
+
 						<div id='campo32' style="display:none;">
                             <label for="formulario_vinculado"><?php echo $MULTILANG_FrmFormulario; ?></label>
                             <div class="form-group input-group">
-                                <select id="formulario_vinculado" name="formulario_vinculado" class="form-control">
+                                <select id="formulario_vinculado" name="formulario_vinculado" class="form-control input-sm">
                                 <option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                 <?php
                                     $consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario ORDER BY titulo");
@@ -1405,7 +1199,7 @@ if ($PCO_Accion=="editar_formulario")
 
 						<div id='campo33' style="display:none;">
                             <div class="form-group input-group">
-                                <input type="text" name="formulario_campo_vinculo" class="form-control" value="<?php echo @$registro_campo_editar["formulario_campo_vinculo"]; ?>" placeholder="<?php echo $MULTILANG_FrmCampo; ?>">
+                                <input type="text" name="formulario_campo_vinculo" class="form-control input-sm" value="<?php echo @$registro_campo_editar["formulario_campo_vinculo"]; ?>" placeholder="<?php echo $MULTILANG_FrmCampo; ?>">
                                 <span class="input-group-addon">
                                     <a href="#" title="<?php echo $MULTILANG_FrmDesCampoVinculo; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
@@ -1415,39 +1209,9 @@ if ($PCO_Accion=="editar_formulario")
 
 						<div id='campo34' style="display:none;">
                             <div class="form-group input-group">
-                                <input type="text" name="formulario_campo_foraneo" class="form-control" value="<?php echo @$registro_campo_editar["formulario_campo_foraneo"]; ?>" placeholder="<?php echo $MULTILANG_FrmCampo; ?>">
+                                <input type="text" name="formulario_campo_foraneo" class="form-control input-sm" value="<?php echo @$registro_campo_editar["formulario_campo_foraneo"]; ?>" placeholder="<?php echo $MULTILANG_FrmCampo; ?>">
                                 <span class="input-group-addon">
                                     <a href="#" title="<?php echo $MULTILANG_FrmDesCampoForaneo; ?>"><i class="fa fa-question-circle text-info"></i></a>
-                                </span>
-                            </div>
-						</div>
-
-
-						<div id='campo35' style="display:none;">
-                            <div class="form-group input-group">
-                                <input type="text" name="condicion_filtrado_listas" class="form-control" value="<?php echo @htmlentities($registro_campo_editar["condicion_filtrado_listas"]); ?>" placeholder="<?php echo $MULTILANG_FrmFiltroLista; ?>">
-                                <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesFiltroLista; ?>"><i class="fa fa-question-circle text-info"></i></a>
-                                </span>
-                            </div>
-						</div>
-
-
-						<div id='campo36' style="display:none;">
-                            <div class="form-group input-group">
-                                <input type="text" name="pestana_objeto" class="form-control" value="<?php echo @$registro_campo_editar["pestana_objeto"]; ?>" placeholder="<?php echo $MULTILANG_FrmPestana; ?>">
-                                <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesPestana; ?>"><i class="fa fa-question-circle text-info"></i></a>
-                                </span>
-                            </div>
-						</div>
-
-
-						<div id='campo37' style="display:none;">
-                            <div class="form-group input-group">
-                                <input type="text" name="personalizacion_tag" class="form-control" value="<?php echo @$registro_campo_editar["personalizacion_tag"]; ?>" placeholder="<?php echo $MULTILANG_FrmTagPersonalizado; ?>">
-                                <span class="input-group-addon">
-                                    <a href="#" data-toggle="popover" data-html="true" data-placement="top" title="<?php echo $MULTILANG_Ayuda; ?>" data-content="<?php echo $MULTILANG_FrmDesTagPersonalizado; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1456,7 +1220,7 @@ if ($PCO_Accion=="editar_formulario")
 						<div id='campo38' style="display:none;">
                             <label for="modo_inline"><?php echo $MULTILANG_FrmActivarInline; ?>:</label>
                             <div class="form-group input-group">
-                                <select id="modo_inline" name="modo_inline" class="form-control" >
+                                <select id="modo_inline" name="modo_inline" class="form-control input-sm" >
 										<option value="0" <?php if (@$registro_campo_editar["modo_inline"]=="0") echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
 										<option value="1" <?php if (@$registro_campo_editar["modo_inline"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
                                 </select>
@@ -1470,7 +1234,7 @@ if ($PCO_Accion=="editar_formulario")
 						<div id='campo39' style="display:none;">
                             <label for="imagen"><?php echo $MULTILANG_Imagen; ?></label>
                             <div class="form-group input-group">
-                                <input type="text" name="imagen" id="imagen" class="form-control" value="<?php echo @$registro_campo_editar["imagen"]; ?>" placeholder="<?php echo $MULTILANG_MnuHlpAwesome; ?>">
+                                <input type="text" name="imagen" id="imagen" class="form-control input-sm" value="<?php echo @$registro_campo_editar["imagen"]; ?>" placeholder="<?php echo $MULTILANG_MnuHlpAwesome; ?>">
                                 <span class="input-group-addon">
                                     <!--
                                     <a data-toggle="modal" href="#myModalSelectorIconos" title="<?php echo $MULTILANG_MnuDesImagen; ?>">
@@ -1485,7 +1249,7 @@ if ($PCO_Accion=="editar_formulario")
 						<div id='campo40' style="display:none;">
                             <label for="tipo_accion"><?php echo $MULTILANG_FrmTipoAccion; ?></label>
                             <div class="form-group input-group">
-                                <select id="tipo_accion" name="tipo_accion" class="form-control">
+                                <select id="tipo_accion" name="tipo_accion" class="form-control input-sm">
                                     <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                     <optgroup label="<?php echo $MULTILANG_FrmAccionT1; ?>">
                                         <option value="interna_guardar"     <?php if (@$registro_campo_editar["tipo_accion"]=="interna_guardar") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmAccionGuardar; ?></option>
@@ -1510,7 +1274,7 @@ if ($PCO_Accion=="editar_formulario")
 
 						<div id='campo41' style="display:none;">
                             <div class="form-group input-group">
-                                <input type="text" name="accion_usuario" value="<?php echo @$registro_campo_editar["accion_usuario"]; ?>" class="form-control" placeholder="<?php echo $MULTILANG_FrmAccionCMD; ?>">
+                                <input type="text" name="accion_usuario" value="<?php echo @$registro_campo_editar["accion_usuario"]; ?>" class="form-control input-sm" placeholder="<?php echo $MULTILANG_FrmAccionCMD; ?>">
                                 <span class="input-group-addon">
                                     <a href="#" data-placement="left" data-toggle="popover" data-html="true" title="<?php echo $MULTILANG_Ayuda; ?>" data-content="<?php echo $MULTILANG_FrmAccionDesCMD; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
@@ -1518,12 +1282,11 @@ if ($PCO_Accion=="editar_formulario")
 						</div>
 
 
-
 						<div id='campo42' style="display:none;">
                             <div class="row">
                                 <div class="col-md-6">
 										<div class="form-group input-group">
-											<input type="text" name="valor_check_activo" class="form-control" value="<?php echo @$registro_campo_editar["valor_check_activo"]; ?>" placeholder="<?php echo $MULTILANG_FrmValOnCheck; ?>">
+											<input type="text" name="valor_check_activo" class="form-control input-sm" value="<?php echo @$registro_campo_editar["valor_check_activo"]; ?>" placeholder="<?php echo $MULTILANG_FrmValOnCheck; ?>">
 											<span class="input-group-addon">
 												<a href="#" title="<?php echo $MULTILANG_FrmValCheckDes; ?>"><i class="fa fa-question-circle text-info"></i></a>
 											</span>
@@ -1531,7 +1294,7 @@ if ($PCO_Accion=="editar_formulario")
                                 </div>    
                                 <div class="col-md-6">
 										<div class="form-group input-group">
-											<input type="text" name="valor_check_inactivo" class="form-control" value="<?php echo @$registro_campo_editar["valor_check_inactivo"]; ?>" placeholder="<?php echo $MULTILANG_FrmValOffCheck; ?>">
+											<input type="text" name="valor_check_inactivo" class="form-control input-sm" value="<?php echo @$registro_campo_editar["valor_check_inactivo"]; ?>" placeholder="<?php echo $MULTILANG_FrmValOffCheck; ?>">
 											<span class="input-group-addon">
 												<a href="#" title="<?php echo $MULTILANG_FrmValCheckDes; ?>"><i class="fa fa-question-circle text-info"></i></a>
 											</span>
@@ -1540,6 +1303,319 @@ if ($PCO_Accion=="editar_formulario")
                             </div>
 						</div>
 
+
+						<div id='campo12' style="display:none;">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="ajax_busqueda" name="ajax_busqueda" <?php if (@$registro_campo_editar["ajax_busqueda"]==1) echo 'checked'; ?> > <?php echo $MULTILANG_FrmAjax; ?>
+                                </label>
+                                <a href="#" title="<?php echo $MULTILANG_FrmTitAjax; ?>: <?php echo $MULTILANG_FrmDesAjax; ?>" name="<?php echo $MULTILANG_FrmDesUnico; ?>"><i class="fa fa-question-circle"></i></a>
+                            </div>
+						</div>
+
+
+			</div>
+			<div class="col col-md-6">
+
+
+						<div id='campo9' style="display:none;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                        <label for="peso"><?php echo $MULTILANG_Peso; ?>:</label>
+                                        <div class="form-group input-group">
+                                            <select id="peso" name="peso" class="form-control input-sm" >
+                                                <?php
+                                                    for ($i=1;$i<=100;$i++)
+                                                        {
+                                                            $seleccion_campo="";
+                                                            if (@$registro_campo_editar["peso"]==$i)
+                                                                $seleccion_campo="SELECTED";														
+                                                            echo '<option value="'.$i.'" '.$seleccion_campo.'>'.$i.'</option>';
+                                                        }
+                                                ?>
+                                            </select>
+                                            <span class="input-group-addon">
+                                                <a href="#" title="<?php echo $MULTILANG_FrmDesPeso; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                            </span>
+                                        </div>
+                                </div>    
+                                <div class="col-md-6">
+                                        <label for="columna"><?php echo $MULTILANG_Columna; ?>:</label>
+                                        <div class="form-group input-group">
+                                            <select id="columna" name="columna" class="form-control input-sm" >
+                                                <?php
+                                                    // Obtiene numero de columnas para el formulario
+                                                    $consulta_columnas=ejecutar_sql("SELECT columnas FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
+                                                    $registro_columnas = $consulta_columnas->fetch();
+                                                    $columnas_formulario=$registro_columnas["columnas"];
+                                                    for ($i=1;$i<=$columnas_formulario;$i++)
+                                                        {
+                                                            $seleccion_campo="";
+                                                            if ($registro_campo_editar["columna"]==$i)
+                                                                $seleccion_campo="SELECTED";
+                                                            echo '<option value="'.$i.'" '.$seleccion_campo.'>'.$i.'</option>';
+                                                        }
+                                                ?>
+                                            </select>
+                                            <span class="input-group-addon">
+                                                <a href="#" title="<?php echo $MULTILANG_FrmDesColumna; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                            </span>
+                                        </div>
+                                </div>
+                            </div>
+						</div>
+
+
+						<div id='campo10' style="display:none;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                        <label for="obligatorio"><?php echo $MULTILANG_FrmObligatorio; ?>:</label>
+                                        <div class="form-group input-group">
+                                            <select id="obligatorio" name="obligatorio" class="form-control input-sm" >
+                                                <option value="1" <?php if (@$registro_campo_editar["obligatorio"]==1) echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
+                                                <option value="0" <?php if (@$registro_campo_editar["obligatorio"]==0) echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
+                                            </select>
+                                        </div>                                    
+                                </div>    
+                                <div class="col-md-6">
+                                        <label for="visible"><?php echo $MULTILANG_FrmVisible; ?>:</label>
+                                        <div class="form-group input-group">
+                                        <select  id="visible" name="visible" class="form-control" >
+                                            <option value="1" <?php if (@$registro_campo_editar["visible"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
+                                            <option value="0" <?php if (@$registro_campo_editar["visible"]=="0") echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
+                                        </select>
+                                            <span class="input-group-addon">
+                                                <a href="#" title="<?php echo $MULTILANG_FrmDesVisible; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                            </span>
+                                        </div>
+                                </div>
+                            </div>
+						</div>
+
+
+						<div id='campo11' style="display:none;">
+                            <div class="form-group input-group">
+                                <input type="text" name="etiqueta_busqueda" class="form-control input-sm" value="<?php echo @$registro_campo_editar["etiqueta_busqueda"]; ?>" placeholder="<?php echo $MULTILANG_FrmLblBusqueda; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_FrmTitBusqueda; ?>: <?php echo $MULTILANG_FrmDesBusqueda; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
+                            </div>
+						</div>
+
+
+						<div id='campo14' style="display:none;">
+                            <div class="form-group input-group">
+                                <input type="text" name="ancho" class="form-control input-sm" value="<?php echo @$registro_campo_editar["ancho"]; ?>" placeholder="<?php echo $MULTILANG_FrmAncho; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_FrmTitAncho; ?>: <?php echo $MULTILANG_FrmDesAncho; ?> (<?php echo $MULTILANG_FrmDesAncho2; ?>)"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
+                            </div>
+						</div>
+
+						<div id='campo15' style="display:none;">
+                            <div class="form-group input-group">
+                                <input type="text" name="alto" class="form-control input-sm" value="<?php echo @$registro_campo_editar["alto"]; ?>" placeholder="<?php echo $MULTILANG_FrmAlto; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_FrmTitAlto; ?>: <?php echo $MULTILANG_FrmDesAlto; ?> (<?php echo $MULTILANG_FrmDesAlto2; ?>)"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
+                            </div>
+						</div>
+
+						<div id='campo16' style="display:none;">
+                            <label for="barra_herramientas"><?php echo $MULTILANG_FrmBarra; ?>:</label>
+                            <div class="form-group input-group">
+                                <select  id="barra_herramientas" name="barra_herramientas" class="form-control input-sm" >
+									<optgroup label="<?php echo $MULTILANG_FrmBarraCKEditor; ?>">
+										<option value="0" <?php if (@$registro_campo_editar["barra_herramientas"]=="0") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo1; ?></option>
+										<option value="1" <?php if (@$registro_campo_editar["barra_herramientas"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo2; ?></option>
+										<option value="2" <?php if (@$registro_campo_editar["barra_herramientas"]=="2") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo3; ?></option>
+										<option value="3" <?php if (@$registro_campo_editar["barra_herramientas"]=="3") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo4; ?></option>
+										<option value="4" <?php if (@$registro_campo_editar["barra_herramientas"]=="4") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo5; ?></option>
+                                    </optgroup>
+									<optgroup label="<?php echo $MULTILANG_FrmBarraSummer; ?>">
+										<option value="5" <?php if (@$registro_campo_editar["barra_herramientas"]=="5") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo1Summer; ?></option>
+										<option value="6" <?php if (@$registro_campo_editar["barra_herramientas"]=="6") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo2Summer; ?></option>
+										<option value="7" <?php if (@$registro_campo_editar["barra_herramientas"]=="7") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo3Summer; ?></option>
+										<option value="8" <?php if (@$registro_campo_editar["barra_herramientas"]=="8") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo4Summer; ?></option>
+										<option value="9" <?php if (@$registro_campo_editar["barra_herramientas"]=="9") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmBarraTipo5Summer; ?></option>
+                                    </optgroup>
+                                </select>
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_FrmTitBarra; ?>: <?php echo $MULTILANG_FrmDesBarra; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                </span>
+                            </div>
+						</div>
+
+
+						<div id='campo17' style="display:none;">
+                            <label for="solo_lectura"><?php echo $MULTILANG_FrmFila; ?>:</label>
+                            <div class="form-group input-group">
+                                <select id="fila_unica" name="fila_unica" class="form-control input-sm" >
+										<option value="0" <?php if (@$registro_campo_editar["fila_unica"]=="0") echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
+										<option value="1" <?php if (@$registro_campo_editar["fila_unica"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_FrmTitFila; ?>: <?php echo $MULTILANG_FrmDesFila; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                </span>
+                            </div>
+						</div>
+
+
+						<div id='campo24' style="display:none;">
+                            <label for="objeto_en_ventana"><?php echo $MULTILANG_FrmVentana; ?></label>
+                            <div class="form-group input-group">
+                                <select id="objeto_en_ventana" name="objeto_en_ventana" class="form-control input-sm">
+                                    <option value="0" <?php if (@$registro_campo_editar["objeto_en_ventana"]=="0") echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
+                                    <option value="1" <?php if (@$registro_campo_editar["objeto_en_ventana"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_FrmDesVentana; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
+                            </div>
+						</div>
+
+
+						<div id='campo25' style="display:none;">
+                            <div class="form-group input-group">
+                                <input type="text" name="maxima_longitud" class="form-control input-sm" value="<?php echo @$registro_campo_editar["maxima_longitud"]; ?>" placeholder="<?php echo $MULTILANG_FrmLongMaxima; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_FrmTit1LongMaxima; ?>: (<?php echo $MULTILANG_FrmTit2LongMaxima; ?>)"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
+                            </div>
+						</div>
+
+
+						<div id='campo26' style="display:none;">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group input-group">
+                                        <input type="text" name="valor_minimo" class="form-control input-sm" value="<?php if (@$registro_campo_editar["valor_minimo"]!='1') echo @$registro_campo_editar["valor_minimo"]; else echo '1'; ?>" placeholder="<?php echo $MULTILANG_FrmValorMinimo; ?>">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-hand-o-down"></i>
+                                        </span>
+                                    </div>
+                                </div>    
+                                <div class="col-md-4">
+                                    <div class="form-group input-group">
+                                        <input type="text" name="valor_maximo" class="form-control input-sm" value="<?php if (@$registro_campo_editar["valor_maximo"]!='100') echo @$registro_campo_editar["valor_maximo"]; else echo '100'; ?>" placeholder="<?php echo $MULTILANG_FrmValorMaximo; ?>">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-hand-o-up"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group input-group">
+                                        <input type="text" name="valor_salto" class="form-control input-sm" value="<?php if (@$registro_campo_editar["valor_salto"]!='1') echo @$registro_campo_editar["valor_salto"]; else echo '1'; ?>" placeholder="<?php echo $MULTILANG_FrmValorSalto; ?>">
+                                        <span class="input-group-addon">
+                                            <a href="#" title="<?php echo $MULTILANG_FrmTitValorSalto; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+						</div>
+
+
+						<div id='campo28' style="display:none;">
+                            <div class="form-group input-group">
+                                <input type="text" name="plantilla_archivo" class="form-control input-sm" value="<?php echo @$registro_campo_editar["plantilla_archivo"]; ?>" placeholder="<?php echo $MULTILANG_FrmPlantillaArchivo; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_FrmDesPlantillaArchivo; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
+                            </div>
+                            <?php
+                                mensaje('<i class="fa fa-info fa-2x text-info texto-blink"></i> '.$MULTILANG_Ayuda, '<font size=1>'.$MULTILANG_FrmPlantillaEjemplos.'</font>', '', '', 'alert alert-info alert-dismissible');
+                            ?>
+						</div>
+
+
+
+						<div id='campo36' style="display:none;">
+                            <div class="form-group input-group">
+                                <input type="text" name="pestana_objeto" class="form-control input-sm" value="<?php echo @$registro_campo_editar["pestana_objeto"]; ?>" placeholder="<?php echo $MULTILANG_FrmPestana; ?>">
+                                <span class="input-group-addon">
+                                    <a href="#" title="<?php echo $MULTILANG_FrmDesPestana; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
+                            </div>
+						</div>
+
+
+						<div id='campo43' style="display:none;">
+							<script language="JavaScript">
+								function ActualizarTexto_botoncomando_vista_previa(texto_nuevo)
+									{
+										//Asigna la etiqueta
+										$('#botoncomando_vista_previa').text(texto_nuevo);
+									}
+									
+								function ActualizarEstilo_botoncomando_vista_previa()
+									{
+										//Remueve estilos actuales
+										$("#botoncomando_vista_previa").removeClass();
+										//Aplica los estilos segun el campo
+										$( "#botoncomando_vista_previa" ).addClass(document.datosform.personalizacion_tag.value);
+									}
+								
+								function Actualizar_botoncomando_vista_previa(texto_nuevo)
+									{
+										//Actualiza el campo de estilos
+										document.datosform.personalizacion_tag.value=document.datosform.estilo0.value+document.datosform.estilo1.value;
+										//Aplica el estilo
+										ActualizarEstilo_botoncomando_vista_previa();
+									}
+							</script>
+
+							<div class="row">
+								<div class="col col-md-5">
+									<label for="estilo0"><?php echo $MULTILANG_FrmEstilo; ?>:</label>
+									<div class="form-group input-group">
+										<select id="estilo0" name="estilo0" class="form-control input-sm" OnChange="Actualizar_botoncomando_vista_previa();">
+											<option value=""><?php echo $MULTILANG_Ninguno; ?></option>
+											<option value=" btn "><?php echo $MULTILANG_BtnEstiloSimple; ?></option>
+											<option value=" btn btn-default "><?php echo $MULTILANG_BtnEstiloPredeterminado; ?></option>
+											<option value=" btn btn-primary "><?php echo $MULTILANG_BtnEstiloPrimario; ?></option>
+											<option value=" btn btn-success "><?php echo $MULTILANG_BtnEstiloFinalizado; ?></option>
+											<option value=" btn btn-info "><?php echo $MULTILANG_BtnEstiloInformacion; ?></option>
+											<option value=" btn btn-warning "><?php echo $MULTILANG_BtnEstiloAdvertencia; ?></option>
+											<option value=" btn btn-danger "><?php echo $MULTILANG_BtnEstiloPeligro; ?></option>
+										</select>
+									</div>
+
+									<label for="estilo1"><?php echo $MULTILANG_Tamano; ?>:</label>
+									<div class="form-group input-group">
+										<select id="estilo1" name="estilo1" class="form-control input-sm" OnChange="Actualizar_botoncomando_vista_previa();">
+											<option value=""><?php echo $MULTILANG_Predeterminado; ?></option>
+											<option value=" btn-xs "><?php echo $MULTILANG_Pequeno; ?></option>
+											<option value=" btn-sm "><?php echo $MULTILANG_Mediano; ?></option>
+											<option value=" btn-lg "><?php echo $MULTILANG_Grande; ?></option>
+										</select>
+									</div>
+								</div>
+								<div class="col col-md-7 jumbotron">
+									<div align="center">
+										<?php echo $MULTILANG_VistaPrev; ?>:<br><br>
+										<button type="button" name="botoncomando_vista_previa" id="botoncomando_vista_previa" class=""></button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div id='campo37' style="display:none;">
+							<label for="personalizacion_tag"><?php echo $MULTILANG_Personalizado; ?>:</label>
+                            <div class="form-group input-group">
+                                <input type="text" name="personalizacion_tag" class="form-control input-sm" value="<?php echo @$registro_campo_editar["personalizacion_tag"]; ?>" placeholder="<?php echo $MULTILANG_FrmTagPersonalizado; ?>: BootStrap o Customizado"  OnInput="ActualizarEstilo_botoncomando_vista_previa(); ActualizarEstilo_listaopciones_vista_previa(); ">
+                                <span class="input-group-addon">
+                                    <a href="#" data-toggle="popover" data-html="true" data-placement="top" title="<?php echo $MULTILANG_Ayuda; ?>" data-content="<?php echo $MULTILANG_FrmDesTagPersonalizado; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
+                            </div>
+						</div>
+
+
+			</div>
+		</div>
+
+
+						
 
 					<?php
 						//Despues de agregar todos los parametros de campos, Si se detecta que es edicion de un campo se llama a la funcion de visualizacion de campos especificos
@@ -1559,27 +1635,88 @@ if ($PCO_Accion=="editar_formulario")
 
 
     <!-- INICIO MODAL ADICION DE BOTONES -->
-    <?php abrir_dialogo_modal("myModalBotonFormulario",$MULTILANG_FrmAgregaBot); ?>
+    <?php abrir_dialogo_modal("myModalBotonFormulario",$MULTILANG_FrmAgregaBot,"modal-wide"); ?>
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="PCO_Accion" value="guardar_accion_formulario">
 				<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 				<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">
 
+				<script language="JavaScript">
+					function ActualizarTexto_boton_vista_previa(texto_nuevo)
+						{
+							//Asigna la etiqueta
+							$('#boton_vista_previa').text(texto_nuevo);
+						}
+						
+					function ActualizarEstilo_boton_vista_previa()
+						{
+							//Remueve estilos actuales
+							$("#boton_vista_previa").removeClass();
+							//Aplica los estilos segun el campo
+							$( "#boton_vista_previa" ).addClass(document.datosfield.estilo.value);
+						}
+					
+					function Actualizar_boton_vista_previa(texto_nuevo)
+						{
+							//Actualiza el campo de estilos
+							document.datosfield.estilo.value=document.datosfield.estilo0.value+document.datosfield.estilo1.value;
+							//Aplica el estilo
+							ActualizarEstilo_boton_vista_previa();
+						}
+				</script>
+
+		<div class="row">
+			<div class="col col-md-6">
+
                     <div class="form-group input-group">
-                        <input type="text" name="titulo" class="form-control" placeholder="<?php echo $MULTILANG_FrmTituloBot; ?>">
+                        <input type="text" name="titulo" class="form-control" placeholder="<?php echo $MULTILANG_FrmTituloBot; ?>"  OnInput="ActualizarTexto_boton_vista_previa(this.value);">
                         <span class="input-group-addon">
                             <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
                             <a href="#" title="<?php echo $MULTILANG_FrmDesBot; ?>"><i class="fa fa-question-circle text-info"></i></a>
                         </span>
                     </div>
-                    
-                    <label for="estilo"><?php echo $MULTILANG_FrmEstilo; ?>:</label>
-                    <div class="form-group input-group">
-                        <input type="text" id="estilo" name="estilo" class="form-control" placeholder="<?php echo $MULTILANG_FrmEstilo; ?>: BootStrap o Customizado">
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_FrmDesEstilo; ?>"><i class="fa fa-question-circle text-info"></i></a>
-                        </span>
-                    </div>
+
+					<div class="row">
+						<div class="col col-md-5">
+							<label for="estilo0"><?php echo $MULTILANG_FrmEstilo; ?>:</label>
+							<div class="form-group input-group">
+								<select id="estilo0" name="estilo0" class="form-control input-sm" OnChange="Actualizar_boton_vista_previa();">
+									<option value=""><?php echo $MULTILANG_Ninguno; ?></option>
+									<option value=" btn "><?php echo $MULTILANG_BtnEstiloSimple; ?></option>
+									<option value=" btn btn-default "><?php echo $MULTILANG_BtnEstiloPredeterminado; ?></option>
+									<option value=" btn btn-primary "><?php echo $MULTILANG_BtnEstiloPrimario; ?></option>
+									<option value=" btn btn-success "><?php echo $MULTILANG_BtnEstiloFinalizado; ?></option>
+									<option value=" btn btn-info "><?php echo $MULTILANG_BtnEstiloInformacion; ?></option>
+									<option value=" btn btn-warning "><?php echo $MULTILANG_BtnEstiloAdvertencia; ?></option>
+									<option value=" btn btn-danger "><?php echo $MULTILANG_BtnEstiloPeligro; ?></option>
+								</select>
+							</div>
+
+							<label for="estilo1"><?php echo $MULTILANG_Tamano; ?>:</label>
+							<div class="form-group input-group">
+								<select id="estilo1" name="estilo1" class="form-control input-sm" OnChange="Actualizar_boton_vista_previa();">
+									<option value=""><?php echo $MULTILANG_Predeterminado; ?></option>
+									<option value=" btn-xs "><?php echo $MULTILANG_Pequeno; ?></option>
+									<option value=" btn-sm "><?php echo $MULTILANG_Mediano; ?></option>
+									<option value=" btn-lg "><?php echo $MULTILANG_Grande; ?></option>
+								</select>
+							</div>
+							
+							<label for="estilo"><?php echo $MULTILANG_Personalizado; ?>:</label>
+							<div class="form-group input-group">
+								<input type="text" id="estilo" name="estilo" class="form-control input-sm" placeholder="<?php echo $MULTILANG_Avanzado; ?>: BootStrap o Customizado"  OnInput="ActualizarEstilo_boton_vista_previa();">
+								<span class="input-group-addon">
+									<a href="#" title="<?php echo $MULTILANG_FrmDesEstilo; ?>"><i class="fa fa-question-circle text-info"></i></a>
+								</span>
+							</div>
+						</div>
+						<div class="col col-md-7 jumbotron">
+							<div align="center">
+								<?php echo $MULTILANG_VistaPrev; ?>:<br><br>
+								<button type="button" name="boton_vista_previa" id="boton_vista_previa" class=""></button>
+							</div>
+						</div>
+					</div>
 
                     <label for="tipo_accion"><?php echo $MULTILANG_FrmTipoAccion; ?></label>
                     <div class="form-group input-group">
@@ -1610,6 +1747,9 @@ if ($PCO_Accion=="editar_formulario")
                             <a href="#" data-placement="left" data-toggle="popover" data-html="true" title="<?php echo $MULTILANG_Ayuda; ?>" data-content="<?php echo $MULTILANG_FrmAccionDesCMD; ?>"><i class="fa fa-question-circle text-info"></i></a>
                         </span>
                     </div>
+
+			</div>
+			<div class="col col-md-6">
 
                     <div class="row">
                         <div class="col-md-6">
@@ -1704,7 +1844,8 @@ if ($PCO_Accion=="editar_formulario")
                         </div>
                     </div>
                     -->
-
+			</div>
+		</div>
                     </form>
     <?php 
         $barra_herramientas_modal='

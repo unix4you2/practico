@@ -128,6 +128,7 @@
 	$MULTILANG_LlavePaso='Llave de paso';
 	$MULTILANG_Maquina='Maquina';
 	$MULTILANG_Matriz='Matriz';
+	$MULTILANG_Mediano='Mediano';
 	$MULTILANG_Modulos='M&oacute;dulos';
 	$MULTILANG_Mostrando='Mostrando';
     $MULTILANG_MotorBD='Motor de Base de Datos';
@@ -146,6 +147,7 @@
 	$MULTILANG_Paso='Paso';
 	$MULTILANG_Peso='Peso';
 	$MULTILANG_Pequeno='peque&ntilde;o';
+	$MULTILANG_Personalizado='Personalizado';
     $MULTILANG_Pestana='Pesta&ntilde;a';
 	$MULTILANG_Predeterminado='Predeterminado';
     $MULTILANG_Previo='Previo';
@@ -165,6 +167,7 @@
 	$MULTILANG_Suspender='Suspender';
 	$MULTILANG_Tablas='Tablas';
 	$MULTILANG_TablaDatos='Tabla de datos';
+	$MULTILANG_Tamano='Tama&ntilde;o';
 	$MULTILANG_Tareas='Tareas';
 	$MULTILANG_TiempoCarga='Tiempo de carga';
 	$MULTILANG_Tipo='Tipo';
@@ -202,6 +205,7 @@
 	$MULTILANG_DesObligatorio='Este campo ha sido marcado como obligatorio.  Si no se ingresa un valor para &eacute;ste el sistema no almacenar&aacute; el registro ingresado por el usuario.';
 
 	//Errores y avisos varios
+	$MULTILANG_VistaPrev='Vista previa';
 	$MULTILANG_TituloInsExiste='ATENCION: La carpeta de instalaci&oacute;n existe en el servidor';
 	$MULTILANG_TextoInsExiste='Este mensaje aparecer&aacute; de manera permanente a todos sus usuarios mientras usted no elimine el directorio utilizado durante el proceso de instalaci&oacute;n de Pr&aacute;ctico.  Es fundamental que la carpeta sea eliminada despu&eacute;s de finalizar una instalaci&oacute;n para evitar que algun usuario an&oacute;nimo inicie nuevamente el proceso sobreescribiendo archivos de configuraci&oacute;n o bases de datos con informaci&oacute;n de importancia para usted.<br><br>Si ya ha finalizado un proceso de instalaci&oacute;n de Pr&aacute;ctico para su uso en producci&oacute;n es importante que elimine esta carpeta antes de continuar.  Si no desea eliminar esta carpeta puede optar por renombrarla en instalaciones temporales o de prueba.<br><br>Si est&aacute; visualizando este mensaje al ejecutar este script por primera vez y desea realizar una instalaci&oacute;n nueva, puede iniciar el asistente haciendo <a class="btn btn-primary btn-xs" href="javascript:document.location=\'ins\';"><i class="fa fa-rocket"></i> Clic AQUI</a> ';
 	$MULTILANG_ErrorTiempoEjecucion='Error en tiempo de ejecucion';
@@ -554,9 +558,7 @@
                 <li><u>data-max-options=#</u> Combinado con multiple, determina el maximo de elementos a ser seleccionados.
                 <li><u>data-size=auto|#</u> Determina cuantas opciones presentar en la lista. Por defecto es auto.</li>
                 <li><u>data-style=btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u> Cambia el estilo grafico del control
-                <li><u>disabled</u> Deshabilita el control.</li>
-            <br><b>Botones de comando (command buttons):</b>
-                <li><u>btn btn-xs btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u></li>';
+                <li><u>disabled</u> Deshabilita el control.</li>';
     $MULTILANG_FrmBtnFull='Cargar en pantalla completa';
     $MULTILANG_FrmBtnObjetivo='Objetivo HTML';
     $MULTILANG_FrmActualizaAjax='Actualizar din&aacute;micamente';
@@ -739,6 +741,13 @@
 	$MULTILANG_InfTitPersonalizar='Personalizar presentaci&oacute;n y distribuci&oacute;n (opcional)';
 	$MULTILANG_InfEjecutarAccionEn='Ejecutar esta accion en';
 	$MULTILANG_InfPrecargarEstilos='Precargar hojas de estilo CSS Bootstrap';
+	$MULTILANG_BtnEstiloSimple='Boton simple, Estilo plano';
+	$MULTILANG_BtnEstiloPredeterminado='Estilo predeterminado';
+	$MULTILANG_BtnEstiloPrimario='Estilo primario';
+	$MULTILANG_BtnEstiloFinalizado='Estilo finalizado';
+	$MULTILANG_BtnEstiloInformacion='Estilo informacion';
+	$MULTILANG_BtnEstiloAdvertencia='Estilo advertencia';
+	$MULTILANG_BtnEstiloPeligro='Estilo peligro';
 	
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';

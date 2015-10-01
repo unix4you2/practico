@@ -128,6 +128,7 @@
 	$MULTILANG_LlavePaso='महत्वपूर्ण संकेत';
 	$MULTILANG_Maquina='मेज़बान';
 	$MULTILANG_Matriz='मैट्रिक्स';
+	$MULTILANG_Mediano='मध्यम';
     $MULTILANG_Modulos='मॉड्यूल';
     $MULTILANG_Mostrando='दिखा रहा है';
 	$MULTILANG_MotorBD='डेटाबेस इंजन';
@@ -146,6 +147,7 @@
 	$MULTILANG_Paso='चरण';
 	$MULTILANG_Peso=' भार';
 	$MULTILANG_Pequeno='छोटा';
+	$MULTILANG_Personalizado='रिवाज';
     $MULTILANG_Pestana='टैब';
 	$MULTILANG_Predeterminado='चूक';
     $MULTILANG_Previo='पिछला';
@@ -165,6 +167,7 @@
 	$MULTILANG_Suspender='निलंबित';
 	$MULTILANG_Tablas='टेबल्स';
 	$MULTILANG_TablaDatos='डेटा तालिका';
+	$MULTILANG_Tamano='आकार';
 	$MULTILANG_Tareas='कार्य';
 	$MULTILANG_TiempoCarga='लोड होने का समय';
 	$MULTILANG_Tipo='टाइप';
@@ -202,6 +205,7 @@
 	$MULTILANG_DesObligatorio='इस क्षेत्र अनिवार्य रूप में चिह्नित किया गया है। आप इस के लिए एक मान दर्ज नहीं करते हैं तो सिस्टम उपयोगकर्ता इनपुट रिकॉर्ड की दुकान नहीं करता है।';
 
 	//Errores y avisos varios
+	$MULTILANG_VistaPrev='पूर्वावलोकन';
 	$MULTILANG_TituloInsExiste='ध्यान दें: स्थापना फ़ोल्डर सर्वर पर मौजूद';
 	$MULTILANG_TextoInsExiste='इस संदेश को आप Practico की स्थापना के लिए प्रयोग किया जाता निर्देशिका को नष्ट नहीं है के रूप में सभी उपयोगकर्ताओं के लिए स्थायी रूप से दिखाई देता है। यह आप पहले से ही के लिए Practico के स्थापित एक पूरा कर लिया है, तो प्रक्रिया फिर से व्यापार <br> आप को महत्व की जानकारी के साथ विन्यास फाइल या डेटाबेस overwritting आरंभ फ़ोल्डर किसी भी बेनामी उपयोगकर्ता को रोकने के लिए एक अधिष्ठापन के अंत के बाद हटा दिया गया है कि आवश्यक है उत्पादन में प्रयोग आगे बढ़ने से पहले इस फ़ोल्डर को दूर करने के लिए महत्वपूर्ण है। आप इस फ़ोल्डर को नष्ट करना चाहते हैं तो आप अस्थायी या परीक्षण में नाम बदलने के लिए चुन सकते हैं। शब्दकोश हिन्दी यदि आप पहली बार इस स्क्रिप्ट चल रहा है और एक नया स्थापना करना चाहते हैं जब यह संदेश देख रहे हैं, तो आप विज़ार्ड शुरू कर सकते हैं  <a class="btn btn-primary btn-xs" href="javascript:document.location=\'ins\';"><i class="fa fa-rocket"></i> यहाँ पर क्लिक</a> ';
 	$MULTILANG_ErrorTiempoEjecucion='रनटाइम त्रुटि';
@@ -557,9 +561,7 @@
                 <li><u>data-max-options=#</u> तत्वों की अधिकतम चयनित.
                 <li><u>data-size=auto|#</u> आइटम की सूची में पता चला रहे हैं कितने पंक्तियाँ.</li>
                 <li><u>data-style=btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u> ग्राफिक शैली
-                <li><u>disabled</u> नियंत्रण अक्षम</li>
-            <br><b>आदेश बटन (command buttons):</b>
-                <li><u>btn btn-xs btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u></li>';
+                <li><u>disabled</u> नियंत्रण अक्षम</li>';
     $MULTILANG_FrmBtnFull='फुल स्क्रीन में लोड';
     $MULTILANG_FrmBtnObjetivo='एचटीएमएल लक्ष्य';
     $MULTILANG_FrmActualizaAjax='गतिशील पुनः लोड';
@@ -742,6 +744,13 @@
 	$MULTILANG_InfTitPersonalizar='कस्टम प्रस्तुति और लेआउट (वैकल्पिक)';
 	$MULTILANG_InfEjecutarAccionEn='में इस कार्रवाई चलाएँ';
 	$MULTILANG_InfPrecargarEstilos='प्रीलोड बूटस्ट्रैप सीएसएस शैली पत्रक';
+	$MULTILANG_BtnEstiloSimple='सरल बटन, सादे शैली';
+	$MULTILANG_BtnEstiloPredeterminado='डिफ़ॉल्ट शैली';
+	$MULTILANG_BtnEstiloPrimario='प्राथमिक शैली';
+	$MULTILANG_BtnEstiloFinalizado='सफलता शैली';
+	$MULTILANG_BtnEstiloInformacion='सूचना शैली';
+	$MULTILANG_BtnEstiloAdvertencia='चेतावनी शैली';
+	$MULTILANG_BtnEstiloPeligro='डेंजर शैली';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='संपादन मेनू आइटम';

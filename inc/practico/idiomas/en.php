@@ -128,6 +128,7 @@
 	$MULTILANG_LlavePaso='Sign Key';
 	$MULTILANG_Maquina='Host';
 	$MULTILANG_Matriz='Matrix';
+	$MULTILANG_Mediano='Medium';
     $MULTILANG_Modulos='Modules';
     $MULTILANG_Mostrando='Showing';
 	$MULTILANG_MotorBD='Database Engine';
@@ -146,6 +147,7 @@
 	$MULTILANG_Paso='Step';
 	$MULTILANG_Peso='Weight';
 	$MULTILANG_Pequeno='small';
+	$MULTILANG_Personalizado='Custom';
     $MULTILANG_Pestana='Tab';
 	$MULTILANG_Predeterminado='Default';
     $MULTILANG_Previo='Previous';
@@ -165,6 +167,7 @@
 	$MULTILANG_Suspender='Suspend';
 	$MULTILANG_Tablas='Tables';
 	$MULTILANG_TablaDatos='Data table';
+	$MULTILANG_Tamano='Size';
 	$MULTILANG_Tareas='Tasks';
 	$MULTILANG_TiempoCarga='Load time';
 	$MULTILANG_Tipo='Type';
@@ -202,6 +205,7 @@
 	$MULTILANG_DesObligatorio='This field has been marked as mandatory. If you do not enter a value for this the system does not store the user input record.';
 
 	//Errores y avisos varios
+	$MULTILANG_VistaPrev='Preview';
 	$MULTILANG_TituloInsExiste='ATTENTION: The installation folder exists on the server';
 	$MULTILANG_TextoInsExiste='This message appears permanently to all users as you do not delete the directory used for the installation of Practico. It is essential that the folder is deleted after the end of an installation to prevent any anonymous user initiate the process again overwritting configuration files or databases with information of importance to you<br><br>If you have already completed an install of Practico for use in production is important to remove this folder before proceeding. If you want to delete this folder you can choose to rename in temporary or trial. <br> <br> If you are viewing this message when running this script for the first time and want to make a new installation, you can launch the wizard  <a class="btn btn-primary btn-xs" href="javascript:document.location=\'ins\';"><i class="fa fa-rocket"></i> Clicking HERE</a> ';
 	$MULTILANG_ErrorTiempoEjecucion='RunTime Error';
@@ -557,9 +561,7 @@
                 <li><u>data-max-options=#</u> Maximum of elements selected.
                 <li><u>data-size=auto|#</u> How many rows are showed in the item list.</li>
                 <li><u>data-style=btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u> Graphic style
-                <li><u>disabled</u> Disables the control</li>
-            <br><b>Botones de comando (command buttons):</b>
-                <li><u>btn btn-xs btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u></li>';
+                <li><u>disabled</u> Disables the control</li>';
     $MULTILANG_FrmBtnFull='Load in FullScreen';
     $MULTILANG_FrmBtnObjetivo='HTML Target';
     $MULTILANG_FrmActualizaAjax='Dynamic reload';
@@ -742,6 +744,13 @@
 	$MULTILANG_InfTitPersonalizar='Custom presentation and layout (optional)';
 	$MULTILANG_InfEjecutarAccionEn='Run this action in';
 	$MULTILANG_InfPrecargarEstilos='Preload Bootstrap CSS style sheets';
+	$MULTILANG_BtnEstiloSimple='Simple button, plain style';
+	$MULTILANG_BtnEstiloPredeterminado='Default style';
+	$MULTILANG_BtnEstiloPrimario='Primary style';
+	$MULTILANG_BtnEstiloFinalizado='Success style';
+	$MULTILANG_BtnEstiloInformacion='Information style';
+	$MULTILANG_BtnEstiloAdvertencia='Warning style';
+	$MULTILANG_BtnEstiloPeligro='Danger style';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';

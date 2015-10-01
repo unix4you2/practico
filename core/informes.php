@@ -1529,25 +1529,84 @@ if ($PCO_Accion=="editar_informe")
 				<input type="Hidden" name="PCO_Accion" value="guardar_accion_informe">
 				<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
+				<script language="JavaScript">
+					function ActualizarTexto_boton_vista_previa(texto_nuevo)
+						{
+							//Asigna la etiqueta
+							$('#boton_vista_previa').text(texto_nuevo);
+						}
+						
+					function ActualizarEstilo_boton_vista_previa()
+						{
+							//Remueve estilos actuales
+							$("#boton_vista_previa").removeClass();
+							//Aplica los estilos segun el campo
+							$( "#boton_vista_previa" ).addClass(document.datosfield.estilo.value);
+						}
+					
+					function Actualizar_boton_vista_previa(texto_nuevo)
+						{
+							//Actualiza el campo de estilos
+							document.datosfield.estilo.value=document.datosfield.estilo0.value+document.datosfield.estilo1.value;
+							//Aplica el estilo
+							ActualizarEstilo_boton_vista_previa();
+						}
+				</script>
+
 
 		<div class="row">
 			<div class="col col-md-6">
 
                     <div class="form-group input-group">
-                        <input name="titulo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmTitulo; ?>">
+                        <input name="titulo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmTitulo; ?>" OnInput="ActualizarTexto_boton_vista_previa(this.value);">
                         <span class="input-group-addon">
                             <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
                             <a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_FrmDesBot; ?>"><i class="fa fa-question-circle  fa-fw icon-info"></i></a>
                         </span>
                     </div>
 
-                    <label for="estilo"><?php echo $MULTILANG_FrmEstilo; ?>:</label>
-                    <div class="form-group input-group">
-                        <input type="text" id="estilo" name="estilo" class="form-control" placeholder="<?php echo $MULTILANG_FrmEstilo; ?>: BootStrap o Customizado">
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_FrmDesEstilo; ?>"><i class="fa fa-question-circle text-info"></i></a>
-                        </span>
-                    </div>
+					<div class="row">
+						<div class="col col-md-5">
+							<label for="estilo0"><?php echo $MULTILANG_FrmEstilo; ?>:</label>
+							<div class="form-group input-group">
+								<select id="estilo0" name="estilo0" class="form-control input-sm" OnChange="Actualizar_boton_vista_previa();">
+									<option value=""><?php echo $MULTILANG_Ninguno; ?></option>
+									<option value=" btn "><?php echo $MULTILANG_BtnEstiloSimple; ?></option>
+									<option value=" btn btn-default "><?php echo $MULTILANG_BtnEstiloPredeterminado; ?></option>
+									<option value=" btn btn-primary "><?php echo $MULTILANG_BtnEstiloPrimario; ?></option>
+									<option value=" btn btn-success "><?php echo $MULTILANG_BtnEstiloFinalizado; ?></option>
+									<option value=" btn btn-info "><?php echo $MULTILANG_BtnEstiloInformacion; ?></option>
+									<option value=" btn btn-warning "><?php echo $MULTILANG_BtnEstiloAdvertencia; ?></option>
+									<option value=" btn btn-danger "><?php echo $MULTILANG_BtnEstiloPeligro; ?></option>
+								</select>
+							</div>
+
+							<label for="estilo1"><?php echo $MULTILANG_Tamano; ?>:</label>
+							<div class="form-group input-group">
+								<select id="estilo1" name="estilo1" class="form-control input-sm" OnChange="Actualizar_boton_vista_previa();">
+									<option value=""><?php echo $MULTILANG_Predeterminado; ?></option>
+									<option value=" btn-xs "><?php echo $MULTILANG_Pequeno; ?></option>
+									<option value=" btn-sm "><?php echo $MULTILANG_Mediano; ?></option>
+									<option value=" btn-lg "><?php echo $MULTILANG_Grande; ?></option>
+								</select>
+							</div>
+							
+							<label for="estilo"><?php echo $MULTILANG_Personalizado; ?>:</label>
+							<div class="form-group input-group">
+								<input type="text" id="estilo" name="estilo" class="form-control input-sm" placeholder="<?php echo $MULTILANG_Avanzado; ?>: BootStrap o Customizado"  OnInput="ActualizarEstilo_boton_vista_previa();">
+								<span class="input-group-addon">
+									<a href="#" title="<?php echo $MULTILANG_FrmDesEstilo; ?>"><i class="fa fa-question-circle text-info"></i></a>
+								</span>
+							</div>
+						</div>
+						<div class="col col-md-7 jumbotron">
+							<div align="center">
+								<?php echo $MULTILANG_VistaPrev; ?>:<br><br>
+								<button type="button" name="boton_vista_previa" id="boton_vista_previa" class=""></button>
+							</div>
+						</div>
+					</div>
+
 
                     <label for="tipo_accion"><?php echo $MULTILANG_FrmTipoAccion; ?>:</label>
                     <div class="form-group input-group">
@@ -1574,10 +1633,13 @@ if ($PCO_Accion=="editar_informe")
                             <a href="#" title="<?php echo $MULTILANG_FrmAccionDesCMD; ?>"><i class="fa fa-question-circle  fa-fw icon-info"></i></a>
                         </span>
                     </div>
+                    
+                    <div class="btn-xs">
                     <?php echo $MULTILANG_InfHlpAccion; ?><br><br>
                     
-                    <?php echo $MULTILANG_InfVinculo; ?>:
-                    <br><?php echo $MULTILANG_InfDesVinculo; ?><hr>
+                    <b><?php echo $MULTILANG_InfVinculo; ?>:</b>
+                    <br><?php echo $MULTILANG_InfDesVinculo; ?>
+                    </div>
 
 			</div>
 			<div class="col col-md-6">

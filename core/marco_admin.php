@@ -96,6 +96,12 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
 <form name="administrar_formularios" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 	<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
 </form>
+<form name="administrar_menu" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="administrar_menu">
+</form>
+<form name="administrar_informes" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="administrar_informes">
+</form>
 <form name="listar_usuarios" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 	<input type="Hidden" name="PCO_Accion" value="listar_usuarios">
 </form>
@@ -111,7 +117,8 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
         </div>
         <!-- /.col-lg-12 -->
     </div>
-    
+ 
+     <div class="row">
         <div class="col-lg-3 col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -167,6 +174,52 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
         </div>
 
         <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-file-text fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo ContarRegistros($TablasCore."informe"); ?></div>
+                            <div><?php echo $MULTILANG_Informes; ?></div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer" OnClick="document.administrar_informes.submit();">
+                        <span class="pull-left" ><?php echo $MULTILANG_Detalles?></span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-external-link-square fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo ContarRegistros($TablasCore."menu"); ?></div>
+                            <div><?php echo $MULTILANG_OpcionesMenu; ?></div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer" OnClick="document.administrar_menu.submit();">
+                        <span class="pull-left" ><?php echo $MULTILANG_Detalles?></span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
             <div class="panel panel-yellow">
                 <div class="panel-heading">
                     <div class="row">
@@ -190,11 +243,11 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
         </div>
 
         <div class="col-lg-3 col-md-6">
-            <div class="panel panel-red">
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-file-text fa-5x"></i>
+                            <i class="fa fa-eye fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge"><?php echo ContarRegistros($TablasCore."auditoria"); ?></div>
@@ -212,6 +265,9 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
             </div>
         </div>
 
+    </div>
+
+<hr>
 
     <div class="row">
         <div  class="col-lg-3 col-md-6">
@@ -245,7 +301,6 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
         <!-- /.col-lg-4 -->
     </div>
     <!-- /.row -->
-
 
 <?php
 

@@ -128,6 +128,7 @@
 	$MULTILANG_LlavePaso='Registe-chave';
 	$MULTILANG_Maquina='Hospedeiro';
 	$MULTILANG_Matriz='Matriz';
+	$MULTILANG_Mediano='M&eacute;dio';
     $MULTILANG_Modulos='M&oacute;dulos';
     $MULTILANG_Mostrando='Mostrando';
 	$MULTILANG_MotorBD='Motor de banco de dados';
@@ -146,6 +147,7 @@
 	$MULTILANG_Paso='Passo';
 	$MULTILANG_Peso='Peso';
 	$MULTILANG_Pequeno='Pequeno';
+	$MULTILANG_Personalizado='Personalizadas';
     $MULTILANG_Pestana='Aba';
 	$MULTILANG_Predeterminado='Padrão';
     $MULTILANG_Previo='Anterior';
@@ -165,6 +167,7 @@
 	$MULTILANG_Suspender='Suspender';
 	$MULTILANG_Tablas='Tabelas';
 	$MULTILANG_TablaDatos='Tabela de dados';
+	$MULTILANG_Tamano='Tamanho';
 	$MULTILANG_Tareas='Tarefas';
 	$MULTILANG_TiempoCarga='O tempo de carregamento';
 	$MULTILANG_Tipo='Tipo';
@@ -202,6 +205,7 @@
 	$MULTILANG_DesObligatorio='Este campo tem sido marcada como obrigat&oacute;ria. Se você não inserir um valor para este sistema não armazena o registro de entrada do usu&aacute;rio.';
 
 	//Errores y avisos varios
+	$MULTILANG_VistaPrev='visualização';
 	$MULTILANG_TituloInsExiste='ATENÇÃO: A pasta de instalação existe no servidor';
 	$MULTILANG_TextoInsExiste='Esta mensagem &eacute; exibida permanentemente para todos os usu&aacute;rios que você não exclua o diret&oacute;rio usado para a instalação de Practico. &eacute; essencial que a pasta &eacute; exclu&iacute;do ap&oacute;s o final de uma instalação para evitar qualquer usu&aacute;rio anônimo iniciar o processo novamente overwritting arquivos de configuração ou bancos de dados com informações de importância para você<br><br>Se você j&aacute; tiver conclu&iacute;do uma instalação do Practico para utilização na produção &eacute; importante para remover essa pasta antes de prosseguir. Se você deseja excluir esta pasta, você pode escolher para renomear em tempor&aacute;rio ou julgamento. <br> <br> Se você est&aacute; vendo esta mensagem ao executar esse script pela primeira vez e quer fazer uma nova instalação, você pode iniciar o assistente  <a class="btn btn-primary btn-xs" href="javascript:document.location=\'ins\';"><i class="fa fa-rocket"></i> Clique AQUI</a> ';
 	$MULTILANG_ErrorTiempoEjecucion='Erro de tempo';
@@ -557,9 +561,7 @@
                 <li><u>data-max-options=#</u> M&aacute;ximo de elementos selecionados.
                 <li><u>data-size=auto|#</u> Quantas linhas são mostrados na lista de itens.</li>
                 <li><u>data-style=btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u> estilo gr&aacute;fico
-                <li><u>disabled</u> Desabilita o controle</li>
-            <br><b>Botones de Comando (command buttons):</b>
-                <li><u>btn btn-xs btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u></li>';
+                <li><u>disabled</u> Desabilita o controle</li>';
     $MULTILANG_FrmBtnFull='Carga em FullScreen';
     $MULTILANG_FrmBtnObjetivo='HTML alvo';
     $MULTILANG_FrmActualizaAjax='recarregamento dinâmico';
@@ -742,6 +744,13 @@
 	$MULTILANG_InfTitPersonalizar='Apresentação personalizada e layout (opcional)';
 	$MULTILANG_InfEjecutarAccionEn='Executar esta ação em';
 	$MULTILANG_InfPrecargarEstilos='Folhas de estilo CSS Preload Bootstrap';
+	$MULTILANG_BtnEstiloSimple='Botão simples, estilo simples';
+	$MULTILANG_BtnEstiloPredeterminado='Estilo padrão';
+	$MULTILANG_BtnEstiloPrimario='Estilo primário';
+	$MULTILANG_BtnEstiloFinalizado='Estilo de sucesso';
+	$MULTILANG_BtnEstiloInformacion='Estilo de Informação';
+	$MULTILANG_BtnEstiloAdvertencia='Aviso estilo';
+	$MULTILANG_BtnEstiloPeligro='Estilo de perigo';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Editar item de menu';
