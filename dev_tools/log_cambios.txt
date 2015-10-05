@@ -21,6 +21,7 @@ core/formularios.php
 core/marco_abajo.php
 core/marco_admin.php
 core/marco_arriba_bs.php
+core/marco_dev.php
 inc/bootstrap/css/practico.min.css
 inc/bootstrap/js/practico.min.js
 inc/practico/idiomas/*
@@ -43,6 +44,7 @@ LogCambios="
 * Added: Acceso y conteo de informes en el panel de inicio del admin
 * Added: Acceso y conteo de menues creados en el panel de inicio del admin
 * Added: Actualizacion completa de PCoder a su última versión
+* Fixed: Se evita inclusión del módulo PCoder directamente desde Práctico pues ya es autogestionado
 * Enhan: Controles de acceso por sesion para pbrowser
 * Enhan: La inclusion de JQuery es cambiada al principio para tenerla siempre disponible
 * Enhan: Mejora en maquetacion para adicion de controles a formularios ahorra espacio y permite vistas previas

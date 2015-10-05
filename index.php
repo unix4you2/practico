@@ -247,7 +247,11 @@
         if (is_dir("mod/".$PCOVAR_Elemento) && $PCOVAR_Elemento!="." && $PCOVAR_Elemento!="..") {
             //Busca la entrada del modulo sino muestra error
             if (file_exists("mod/".$PCOVAR_Elemento."/index.php"))
-                include("mod/".$PCOVAR_Elemento."/index.php");
+				{
+					//Incluye el archivo menos algunos modulos especiales de la herramienta
+					if ($PCOVAR_Elemento!="pcoder")
+						include("mod/".$PCOVAR_Elemento."/index.php");
+				}
             else
                 mensaje($MULTILANG_ErrorTiempoEjecucion, $MULTILANG_ErrorModulo.'<br><b>'.$MULTILANG_Detalles.': '.$PCOVAR_Elemento.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
         }
