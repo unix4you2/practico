@@ -36,7 +36,7 @@
     chmod 777 core
     chmod 777 tmp
     chmod 777 ins
-    chmod 777 mod/pcoder/demo.php
+    chmod 777 mod/pcoder/demos/*
     chmod -R 777 mod/pcc_erp/*
     
     #Permisos de archivos basicos de configuracion
