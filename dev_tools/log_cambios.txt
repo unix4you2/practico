@@ -27,6 +27,7 @@ inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 mod/pbrowser/index.php
 mod/pbrowser/core/index.php
+mod/pcoder/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -41,6 +42,7 @@ LogCambios="
 * Added: Seleccion visual de los estilos para botones de informes, acciones de formularios y botones sobre formularios
 * Added: Acceso y conteo de informes en el panel de inicio del admin
 * Added: Acceso y conteo de menues creados en el panel de inicio del admin
+* Added: Actualizacion completa de PCoder a su última versión
 * Enhan: Controles de acceso por sesion para pbrowser
 * Enhan: La inclusion de JQuery es cambiada al principio para tenerla siempre disponible
 * Enhan: Mejora en maquetacion para adicion de controles a formularios ahorra espacio y permite vistas previas
