@@ -34,17 +34,17 @@
 							.							-> Directorio Actual de PCoder (generalmente sobre mod/pcoder)
 							../../						-> Raiz de PCoder (Donde reside LICENSE, AUTHORS, Etc)
 							$_SERVER['DOCUMENT_ROOT']	-> Raiz de Todo el servidor web  */
-	$PCO_PCODER_RaizExploracionArchivos="../../../";
+	$PCO_PCODER_RaizExploracionArchivos=".";
 
 
 	//Define las extensiones permitidas por el editor de texto
-	$PCO_PCODER_ExtensionesPermitidas = array("txt", "inc", "css", "cpp", "c", "java", "php", "htm", "html", "py", "md", "bat", "sh", "ini", "log", "conf", "asc", "csv", "xml", "pl", "asp", "aspx", "jsp", "nfo", "yml", "json", "xsl", "ans", "dat", "err", "mdown", "lisp", "man");
+	$PCO_PCODER_ExtensionesPermitidas = array("txt", "inc", "css", "cpp", "c", "java", "php", "htm", "html", "md", "sh", "ini", "log", "conf", "csv", "xml", "json", "dat");
 
 
 	/*  Determina si solamente se permiten abrir las extensiones conocidas
 		Posibles Valores:  1=Solo permite abrir ciertas extensiones
 		                   0=Abre cualquier tipo de extension         */
-	$PCO_PCODER_ForzarExtensionesConocidas = 0;
+	$PCO_PCODER_ForzarExtensionesConocidas = 1;
 
 
 	$ZonaHoraria='America/Bogota';
