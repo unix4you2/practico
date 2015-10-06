@@ -23,6 +23,7 @@ core/marco_admin.php
 core/marco_arriba_bs.php
 core/marco_dev.php
 inc/bootstrap/css/practico.min.css
+inc/ace/*
 inc/bootstrap/js/practico.min.js
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
