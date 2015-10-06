@@ -25,20 +25,23 @@
 	/*	Define si PCoder se ejecuta en modo StandAlone (Independiente)
 		para cualquier proyecto o servidor o como un modulo de Practico
 		Posibles Valores:  1=StandAlone   0=Modulo de Practico        */
-	$PCO_PCODER_StandAlone=0;
+	$PCO_PCODER_StandAlone=1;
 
 
 	/*	Define el Path inicial sobre el cual el usuario puede navegar
-		por el sistema de archivos del servidor para editarlos
-		Posibles valores:	../../../  					-> Raiz Instalacion PCoder cuando es independiente o Raiz de Practico si esta como modulo
-							.							-> Directorio Actual de PCoder (generalmente sobre mod/pcoder)
+		por el sistema de archivos del servidor para editarlos. A mayor
+		numero de carpetas a leer sera mas lenta la apertura del editor.
+		Posibles valores:	.							-> Directorio Actual de PCoder (generalmente sobre mod/pcoder)
+							../							-> Raiz de PCoder (generalmente sobre mod/pcoder/mod)
 							../../						-> Raiz de PCoder (Donde reside LICENSE, AUTHORS, Etc)
+							../../../  					-> Raiz Instalacion PCoder cuando es independiente o Raiz de Practico si esta como modulo
+							Otros						-> Agregue aqui tantos niveles superiores como desee segun su ruta de instalacion
 							$_SERVER['DOCUMENT_ROOT']	-> Raiz de Todo el servidor web  */
 	$PCO_PCODER_RaizExploracionArchivos=".";
 
 
 	//Define las extensiones permitidas por el editor de texto
-	$PCO_PCODER_ExtensionesPermitidas = array("txt", "inc", "css", "cpp", "c", "java", "php", "htm", "html", "md", "sh", "ini", "log", "conf", "csv", "xml", "json", "dat");
+	$PCO_PCODER_ExtensionesPermitidas = array("txt", "inc", "css", "cpp", "c", "java", "php", "htm", "html", "py", "md", "bat", "sh", "ini", "log", "conf", "asc", "csv", "xml", "pl", "asp", "aspx", "jsp", "nfo", "yml", "json", "xsl", "ans", "dat", "err", "mdown", "lisp", "man");
 
 
 	/*  Determina si solamente se permiten abrir las extensiones conocidas

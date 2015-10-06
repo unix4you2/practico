@@ -26,15 +26,36 @@
 	
 	?>
         <i class="well well-sm btn-xs btn-block"><?php echo $MULTILANG_PCODER_AyudaExplorador; ?></i>
+
+		<label for="path_exploracion_archivos"><?php echo $MULTILANG_PCODER_PathDisponible; ?>:</label>
+		<select id="path_exploracion_archivos" size="1" class="form-control btn-info" onchange="ExplorarPath()">
+		  <option value="<?php echo $PCO_PCODER_RaizExploracionArchivos; ?>">[<?php echo $PCO_PCODER_RaizExploracionArchivos; ?>] (<?php echo $MULTILANG_PCODER_Predeterminado; ?>)</option>
+		  <optgroup label="<?php echo $MULTILANG_PCODER_Comunes; ?>">
+			  <option value=".">[.] <?php echo $MULTILANG_PCODER_Path1Punto; ?></option>
+			  <option value="../">[../] <?php echo $MULTILANG_PCODER_Path2Punto; ?></option>
+			  <option value="../../">[../../] <?php echo $MULTILANG_PCODER_Path3Punto; ?></option>
+			  <option value="../../../">[../../../] <?php echo $MULTILANG_PCODER_Path4Punto; ?></option>
+			  <option value="<?php echo $_SERVER['DOCUMENT_ROOT']; ?>">[<?php echo $_SERVER['DOCUMENT_ROOT']; ?>] <?php echo $MULTILANG_PCODER_PathFull; ?></option>
+		  </optgroup>
+		</select>
+
+		<!--
+		<div class="input-group">
+		  <span class="input-group-addon" id="basic-addon1"><i class="fa fa-hdd-o"></i></span>
+		  <input name="path_exploracion_archivos_manual" type="text" class="form-control" placeholder="o ingrese aqui un path manual">
+		</div>
+		-->
+
+        <div id="progreso_marco_explorador">
+			<div class="progress">
+				<div class="progress-bar progress-bar-striped active progress-bar-warning" role="progressbar" aria-valuenow="100" style="width: 100%">
+					<i class="fa fa-circle-o-notch fa-spin"></i> <?php echo $MULTILANG_PCODER_Cargando; ?>
+				</div>
+			</div>
+        </div>
+		
         <div id="marco_explorador" class="embed-responsive embed-responsive-4by3">
-            <?php
-                //Presenta el arbol de carpetas.  Ver archivo configuracion.php
-				//Valida ademas si se puede abrir cualquier tipo de extension o solo algunas
-                if ($PCO_PCODER_ForzarExtensionesConocidas==1)
-					echo @php_file_tree($PCO_PCODER_RaizExploracionArchivos, "javascript:PCODER_CargarArchivo('[link]');",$PCO_PCODER_ExtensionesPermitidas);
-                else
-					echo @php_file_tree($PCO_PCODER_RaizExploracionArchivos, "javascript:PCODER_CargarArchivo('[link]');");
-            ?>  
+			<iframe name="iframe_marco_explorador" id="iframe_marco_explorador" class="embed-responsive-item" src="" style="overflow-x: hidden; overflow-y: hidden;"></iframe>
         </div>
 <?php 
         $barra_herramientas_modal='

@@ -55,6 +55,7 @@
 	$MULTILANG_PCODER_Modificado='Modificado';
 	$MULTILANG_PCODER_No='Não';
 	$MULTILANG_PCODER_Otros='Outros';
+	$MULTILANG_PCODER_Predeterminado='Padrão';
 	$MULTILANG_PCODER_Preferencias='Preferências';
 	$MULTILANG_PCODER_Rehacer='Refazer';
 	$MULTILANG_PCODER_Salir='Sair';
@@ -82,3 +83,10 @@
 	$MULTILANG_PCODER_LenguajeProg='Linguagem de programação';
 	$MULTILANG_PCODER_VerCaracteres='Mostrar escondido caracteres';
 	$MULTILANG_PCODER_CerrarVentana='As alterações podem perder';
+	$MULTILANG_PCODER_PathDisponible='Caminhos de exploração dispon&iacute;veis';
+	$MULTILANG_PCODER_Path1Punto='Pasta atual de PCoder (geralmente mais mod/pcoder)';
+	$MULTILANG_PCODER_Path2Punto='Raiz de PCoder como Module (geralmente mais mod/pcoder/mod)';
+	$MULTILANG_PCODER_Path3Punto='Raiz de PCoder como autônomo (onde você pode encontrar LICENSE, AUTHORS, Etc)';
+	$MULTILANG_PCODER_Path4Punto='Instale raiz para PCoder como autônomo ou Practico raiz se &eacute; um módulo';
+	$MULTILANG_PCODER_PathFull='WebServer Root. Poderia ser monitores segundo lento para os ficheiros dispon&iacute;veis.';
+	

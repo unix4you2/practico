@@ -42,6 +42,7 @@
 	$MULTILANG_PCODER_Caracteres='Caracteres';
 	$MULTILANG_PCODER_Cargando='Cargando';
 	$MULTILANG_PCODER_Cerrar='Cerrar';
+	$MULTILANG_PCODER_Comunes='Comunes';
 	$MULTILANG_PCODER_Deshacer='Deshacer';
 	$MULTILANG_PCODER_Desplazar='Desplazar';
 	$MULTILANG_PCODER_Editar='Editar';
@@ -55,6 +56,7 @@
 	$MULTILANG_PCODER_Modificado='Modificado';
 	$MULTILANG_PCODER_No='No';
 	$MULTILANG_PCODER_Otros='Otros';
+	$MULTILANG_PCODER_Predeterminado='Predeterminado';
 	$MULTILANG_PCODER_Preferencias='Preferencias';
 	$MULTILANG_PCODER_Rehacer='Rehacer';
 	$MULTILANG_PCODER_Salir='Salir';
@@ -82,4 +84,10 @@
 	$MULTILANG_PCODER_LenguajeProg='Lenguaje de programaci&oacute;n';
 	$MULTILANG_PCODER_VerCaracteres='Ver caracteres invisibles';
 	$MULTILANG_PCODER_CerrarVentana='Finalizar edici&oacute;n';
+	$MULTILANG_PCODER_PathDisponible='Rutas de exploracion disponibles';
+	$MULTILANG_PCODER_Path1Punto='Directorio Actual de PCoder (generalmente sobre mod/pcoder)';
+	$MULTILANG_PCODER_Path2Punto='Raiz de PCoder Modulo (generalmente sobre mod/pcoder/mod)';
+	$MULTILANG_PCODER_Path3Punto='Raiz de PCoder StandAlone (Donde reside LICENSE, AUTHORS, Etc)';
+	$MULTILANG_PCODER_Path4Punto='Raiz Instalacion PCoder cuando es independiente o Raiz de Practico si esta como modulo';
+	$MULTILANG_PCODER_PathFull='Raiz de Todo el servidor web. Podria tardar segun cantidad de archivos posibles.';
 

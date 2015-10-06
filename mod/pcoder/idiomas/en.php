@@ -55,6 +55,7 @@
 	$MULTILANG_PCODER_Modificado='Modified';
 	$MULTILANG_PCODER_No='No';
 	$MULTILANG_PCODER_Otros='Others';
+	$MULTILANG_PCODER_Predeterminado='Default';
 	$MULTILANG_PCODER_Preferencias='Preferences';
 	$MULTILANG_PCODER_Rehacer='Redo';
 	$MULTILANG_PCODER_Salir='Quit';
@@ -82,3 +83,9 @@
 	$MULTILANG_PCODER_LenguajeProg='Programming language';
 	$MULTILANG_PCODER_VerCaracteres='Show hidden chars';
 	$MULTILANG_PCODER_CerrarVentana='Changes may lost';
+	$MULTILANG_PCODER_PathDisponible='Exploration paths available';
+	$MULTILANG_PCODER_Path1Punto='Current folder of PCoder (generally over mod/pcoder)';
+	$MULTILANG_PCODER_Path2Punto='Root of PCoder as Module (generally over mod/pcoder/mod)';
+	$MULTILANG_PCODER_Path3Punto='Root of PCoder as StandAlone (where you can find LICENSE, AUTHORS, Etc)';
+	$MULTILANG_PCODER_Path4Punto='Install root for PCoder as StandAlone or Practico root if is a module';
+	$MULTILANG_PCODER_PathFull='WebServer Root. Could be slow acording to the available files.';

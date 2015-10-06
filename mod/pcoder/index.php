@@ -1,7 +1,6 @@
 <?php
 	/*
 	   PCODER (Editor de Codigo en la Nube)
-	   Sistema de Edicion de Codigo basado en PHP
 	   Copyright (C) 2013  John F. Arroyave Gutiérrez
 						   unix4you2@gmail.com
 						   www.practico.org
@@ -32,14 +31,6 @@
 
     //Incluye archivo inicial de configuracion
 	include_once("inc/configuracion.php");
-	
-	//Si se encuentra configurado como modulo de Practico sobreescribe algunas configuraciones desde alli
-	if ($PCO_PCODER_StandAlone==0)
-		{
-			//Raiz de exploracion
-			$PCO_PCODER_RaizExploracionArchivos="../../../";
-		}
-		
 
 	// Determina si no se trabaja en modo StandAlone y verifica entonces credenciales
 	if ($PCO_PCODER_StandAlone==0)
@@ -114,7 +105,7 @@ if (@$PCOSESS_LoginUsuario=="admin" || $PCO_PCODER_StandAlone==1)
     if (@!file_exists("../../inc/ace")) { $editor_ok=0; $PCODER_Mensajes=1; } 
 
 	// Clase para exploracion de archivos
-	include("phpFileTree/php_file_tree.php");
+	include_once("lib/phpFileTree/php_file_tree.php");
 
 /* ################################################################## */
 /* ################################################################## */
@@ -189,15 +180,11 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
             overflow-x: hidden;
             overflow-y: hidden;
         }
-        #marco_explorador { 
-            overflow-y: auto;
-            overflow-x: auto;
-        }
     </style>
 
     <!-- Agrega archivos necesarios para el Explorador en arbol de directorios -->
-    <link href="phpFileTree/styles/default/default.css" rel="stylesheet" type="text/css" media="screen" />
-    <script src="phpFileTree/php_file_tree.js" type="text/javascript"></script>
+    <link href="lib/phpFileTree/styles/default/default.css" rel="stylesheet" type="text/css" media="screen" />
+    <script src="lib/phpFileTree/php_file_tree.js" type="text/javascript"></script>
     
     <!-- jQuery -->
 	<script type="text/javascript" src="../../inc/jquery/jquery-2.1.0.min.js"></script>
@@ -397,13 +384,31 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 				//$('#editor_codigo').height( alto_final ).css({ });			//Asignacion en pixeles
 				$('#editor_codigo').height( porcentaje_final+"vh" ).css({ });	//Asignacion en porcentaje
 			}
+			
+		function ExplorarPath()
+			{
+				//Presenta la barra de carga que deberia ocultarse automaticamente en el OnLoad del Iframe
+				$('#progreso_marco_explorador').show();
+				
+				//Se encarga de actualizar el path de navegacion de acuerdo al valor del combo o caja de texto
+				/*
+				if (path_exploracion_archivos_manual.value!="")
+					$('#iframe_marco_explorador').attr('src', 'explorador.php?PCO_PCODER_Accion=PCOMOD_ExplorarPath&PathExploracion='+path_exploracion_archivos_manual.value);
+				else
+				*/
+					$('#iframe_marco_explorador').attr('src', 'explorador.php?PCO_PCODER_Accion=PCOMOD_ExplorarPath&PathExploracion='+path_exploracion_archivos.value);
+			}
+
+		//Evento que quita la barra de progreso de carga para el explorador cada que finaliza el cargue de su IFrame
+				$('#iframe_marco_explorador').load(function(){
+				$('#progreso_marco_explorador').hide();
+			});
 
         function ActualizarBarraEstado()
             {
 				//Actualiza la barra de estado del editor
 				var NroLineasDocumento=editor.session.getLength();
 				var NroCaracteresDocumento=editor.session.getValue().length;
-				
 				//Actualiza los contenedores con la informacion de estado
 				$("#NroLineasDocumento").html("<?php echo $MULTILANG_PCODER_Lineas; ?>: "+NroLineasDocumento);
 				$("#NroCaracteresDocumento").html("<?php echo $MULTILANG_PCODER_Caracteres; ?>: "+NroCaracteresDocumento);
