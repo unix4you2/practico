@@ -38,10 +38,13 @@
 	$MULTILANG_PCODER_Archivo='फ़ाइल';
 	$MULTILANG_PCODER_Ayuda='मदद';
 	$MULTILANG_PCODER_Basicos='मूल बातें';
+	$MULTILANG_PCODER_Buscar='खोज';
 	$MULTILANG_PCODER_Cancelar='रद्द करना';
 	$MULTILANG_PCODER_Caracteres='वर्ण';
 	$MULTILANG_PCODER_Cargando='लदान';
 	$MULTILANG_PCODER_Cerrar='बंद करे';
+	$MULTILANG_PCODER_Copiar='प्रतिलिपि';
+	$MULTILANG_PCODER_Cortar='कमी';
 	$MULTILANG_PCODER_Deshacer='पूर्ववत';
 	$MULTILANG_PCODER_Desplazar='चाल';
 	$MULTILANG_PCODER_Editar='संपादित';
@@ -49,14 +52,18 @@
 	$MULTILANG_PCODER_Estado='स्थिति';
 	$MULTILANG_PCODER_Explorar='अन्वेषण';
 	$MULTILANG_PCODER_Finalizado='समाप्त';
+	$MULTILANG_PCODER_Formato='प्रारूप';
+	$MULTILANG_PCODER_Guardando='रखना';
 	$MULTILANG_PCODER_Guardar='सहेजें';
 	$MULTILANG_PCODER_Ir='जाना';
 	$MULTILANG_PCODER_Lineas='पंक्तियां';
 	$MULTILANG_PCODER_Modificado='संशोधित';
 	$MULTILANG_PCODER_No='नहीं';
 	$MULTILANG_PCODER_Otros='अन्य लोग';
+	$MULTILANG_PCODER_Pegar='पेस्ट';
 	$MULTILANG_PCODER_Predeterminado='चूक';
 	$MULTILANG_PCODER_Preferencias='प्राथमिकताएं';
+	$MULTILANG_PCODER_Reemplazar='की जगह';
 	$MULTILANG_PCODER_Rehacer='फिर से करना';
 	$MULTILANG_PCODER_Salir='छोड़ना';
 	$MULTILANG_PCODER_Seleccionar='चुनना';
@@ -65,6 +72,11 @@
 	$MULTILANG_PCODER_Tipo='टाइप';
 
 	//Mensajes de error y varios
+	$MULTILANG_PCODER_AumSangria='बढ़ते हुए अंतर में';
+	$MULTILANG_PCODER_DisSangria='समान का आर्डर कम करें';
+	$MULTILANG_PCODER_ConvMay='अपरकेस कन्वर्ट';
+	$MULTILANG_PCODER_ConvMin='लोअरकेस करने के लिए कन्वर्ट';
+	$MULTILANG_PCODER_OrdenaSel='आदेश चयन';
 	$MULTILANG_PCODER_CargarArchivo='फाइल लोड करो';
     $MULTILANG_PCODER_Ajuste='विंडो समायोजन';
 	$MULTILANG_PCODER_DefPcoder='ऑनलाइन कोड संपादक';
@@ -89,4 +101,4 @@
 	$MULTILANG_PCODER_Path3Punto='आप पा सकते हैं जहां स्टैंडअलोन के रूप में PCoder (की जड़ LICENSE, AUTHORS, Etc)';
 	$MULTILANG_PCODER_Path4Punto='एक मॉड्यूल है, तो स्टैंडअलोन या Practico रूट के रूप में PCoder के लिए रूट स्थापित';
 	$MULTILANG_PCODER_PathFull='वेबसर्वर रूट। उपलब्ध फाइल करने के लिए धीमी गति अनुसार हो सकता है।';
-	
+	$MULTILANG_PCODER_CaracNoImprimibles='दिखाएँ / छुपाएँ अदृश्य पात्रों';

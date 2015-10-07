@@ -38,11 +38,14 @@
 	$MULTILANG_PCODER_Archivo='Archivo';
 	$MULTILANG_PCODER_Ayuda='Ayuda';
 	$MULTILANG_PCODER_Basicos='B&aacute;sicos';
+	$MULTILANG_PCODER_Buscar='Buscar';
 	$MULTILANG_PCODER_Cancelar='Cancelar';
 	$MULTILANG_PCODER_Caracteres='Caracteres';
 	$MULTILANG_PCODER_Cargando='Cargando';
 	$MULTILANG_PCODER_Cerrar='Cerrar';
 	$MULTILANG_PCODER_Comunes='Comunes';
+	$MULTILANG_PCODER_Copiar='Copiar';
+	$MULTILANG_PCODER_Cortar='Cortar';
 	$MULTILANG_PCODER_Deshacer='Deshacer';
 	$MULTILANG_PCODER_Desplazar='Desplazar';
 	$MULTILANG_PCODER_Editar='Editar';
@@ -50,14 +53,18 @@
 	$MULTILANG_PCODER_Estado='Estado';
 	$MULTILANG_PCODER_Explorar='Explorar';
 	$MULTILANG_PCODER_Finalizado='Finalizado';
+	$MULTILANG_PCODER_Formato='Formato';
+	$MULTILANG_PCODER_Guardando='Guardando';
 	$MULTILANG_PCODER_Guardar='Guardar';
 	$MULTILANG_PCODER_Ir='Ir';
 	$MULTILANG_PCODER_Lineas='L&iacute;neas';
 	$MULTILANG_PCODER_Modificado='Modificado';
 	$MULTILANG_PCODER_No='No';
 	$MULTILANG_PCODER_Otros='Otros';
+	$MULTILANG_PCODER_Pegar='Pegar';
 	$MULTILANG_PCODER_Predeterminado='Predeterminado';
 	$MULTILANG_PCODER_Preferencias='Preferencias';
+	$MULTILANG_PCODER_Reemplazar='Reemplazar';
 	$MULTILANG_PCODER_Rehacer='Rehacer';
 	$MULTILANG_PCODER_Salir='Salir';
 	$MULTILANG_PCODER_Seleccionar='Seleccionar';
@@ -66,6 +73,11 @@
 	$MULTILANG_PCODER_Tipo='Tipo';
 
 	//Mensajes de error y varios
+	$MULTILANG_PCODER_AumSangria='Aumentar sangr&iacute;a';
+	$MULTILANG_PCODER_DisSangria='Disminuir sangr&iacute;a';
+	$MULTILANG_PCODER_ConvMay='Convertir a may&uacute;scula';
+	$MULTILANG_PCODER_ConvMin='Convertir a min&uacute;scula';
+	$MULTILANG_PCODER_OrdenaSel='Ordenar la seleccion';
 	$MULTILANG_PCODER_CargarArchivo='Cargar el archivo';
     $MULTILANG_PCODER_Ajuste='Ajuste de ventana';
 	$MULTILANG_PCODER_DefPcoder='Editor de c&oacute;digo en l&iacute;nea';
@@ -90,4 +102,4 @@
 	$MULTILANG_PCODER_Path3Punto='Raiz de PCoder StandAlone (Donde reside LICENSE, AUTHORS, Etc)';
 	$MULTILANG_PCODER_Path4Punto='Raiz Instalacion PCoder cuando es independiente o Raiz de Practico si esta como modulo';
 	$MULTILANG_PCODER_PathFull='Raiz de Todo el servidor web. Podria tardar segun cantidad de archivos posibles.';
-
+	$MULTILANG_PCODER_CaracNoImprimibles='Ver/Ocultar Caracteres no imprimibles';

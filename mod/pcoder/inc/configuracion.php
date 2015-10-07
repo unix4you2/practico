@@ -25,7 +25,7 @@
 	/*	Define si PCoder se ejecuta en modo StandAlone (Independiente)
 		para cualquier proyecto o servidor o como un modulo de Practico
 		Posibles Valores:  1=StandAlone   0=Modulo de Practico        */
-	$PCO_PCODER_StandAlone=1;
+	$PCO_PCODER_StandAlone=0;
 
 
 	/*	Define el Path inicial sobre el cual el usuario puede navegar
@@ -43,6 +43,8 @@
 	//Define las extensiones permitidas por el editor de texto
 	$PCO_PCODER_ExtensionesPermitidas = array("txt", "inc", "css", "cpp", "c", "java", "php", "htm", "html", "py", "md", "bat", "sh", "ini", "log", "conf", "asc", "csv", "xml", "pl", "asp", "aspx", "jsp", "nfo", "yml", "json", "xsl", "ans", "dat", "err", "mdown", "lisp", "man");
 
+	//Extensiones de archivo para cargar directamente en el editor
+	$PCO_PCODER_ExtensionesExternas = array("gif", "jpg", "png", "bmp", "pdf");
 
 	/*  Determina si solamente se permiten abrir las extensiones conocidas
 		Posibles Valores:  1=Solo permite abrir ciertas extensiones
@@ -53,4 +55,4 @@
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='es';
 	$CodigoGoogleAnalytics='UA-847800-9';
-
+	

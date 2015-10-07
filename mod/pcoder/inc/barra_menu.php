@@ -21,9 +21,12 @@
 	*/
 
     // BARRA DE MENU DEL APLICATIVO
+    //   https://github.com/ajaxorg/ace/blob/master/lib/ace/commands/default_commands.js#L171
+    //   http://ace.c9.io/api/editor.html
+    //   http://ace.c9.io/build/kitchen-sink.html
 ?>
 
-<div id="contenedor_menu">
+<div id="contenedor_menu" >
 
 	<nav class="navbar navbar-default navbar-inverse" style="margin:0px; padding:0px;"> <!-- navbar-fixed-top navbar-fixed-bottom navbar-static-top navbar-inverse -->
 		<div class="container-fluid">
@@ -57,12 +60,37 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $MULTILANG_PCODER_Editar; ?> <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#" OnClick="Deshacer();"><i class="fa fa-undo fa-fw"></i> <?php echo $MULTILANG_PCODER_Deshacer; ?></a></li>
-							<li><a href="#" OnClick="Rehacer(); "><i class="fa fa-repeat fa-fw"></i> <?php echo $MULTILANG_PCODER_Rehacer; ?></a></li>
+							<li><a href="#" OnClick="editor.undo();"><i class="fa fa-undo fa-fw"></i> <?php echo $MULTILANG_PCODER_Deshacer; ?></a></li>
+							<li><a href="#" OnClick="editor.redo();"><i class="fa fa-repeat fa-fw"></i> <?php echo $MULTILANG_PCODER_Rehacer; ?></a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#" OnClick="editor.execCommand('cut');"><i class="fa fa-scissors fa-fw"></i> <?php echo $MULTILANG_PCODER_Cortar; ?></a></li>
+							<li><a href="#" OnClick="editor.execCommand('copy');"><i class="fa fa-files-o fa-fw"></i> <?php echo $MULTILANG_PCODER_Copiar; ?></a></li>
+							<li><a href="#" OnClick="editor.execCommand('paste');"><i class="fa fa-clipboard fa-fw"></i> <?php echo $MULTILANG_PCODER_Pegar; ?></a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#" OnClick="editor.execCommand('find');"><i class="fa fa-search fa-fw"></i> <?php echo $MULTILANG_PCODER_Buscar; ?></a></li>
+							<li><a href="#" OnClick="editor.execCommand('replace');"><i class="fa fa-exchange fa-fw"></i> <?php echo $MULTILANG_PCODER_Reemplazar; ?></a></li>
 						</ul>
 					</li>
 					<!--<li><a href="#">EJEMPLO ENLACE</a></li>-->
 
+					<!-- MENU FORMATO -->
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $MULTILANG_PCODER_Formato; ?> <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#" OnClick="editor.indent();"><i class="fa fa-indent fa-fw"></i> <?php echo $MULTILANG_PCODER_AumSangria; ?></a></li>
+							<li><a href="#" OnClick="editor.outdent();"><i class="fa fa-outdent fa-fw"></i> <?php echo $MULTILANG_PCODER_DisSangria; ?></a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#" OnClick="editor.execCommand('touppercase');"><i class="fa fa-font fa-fw"></i> <?php echo $MULTILANG_PCODER_ConvMay; ?></a></li>
+							<li><a href="#" OnClick="editor.execCommand('tolowercase');"><i class="fa fa-info fa-fw"></i> <?php echo $MULTILANG_PCODER_ConvMin; ?></a></li>
+						</ul>
+					</li>
+					
+					<!-- BOTONES INDEPENDIENTES -->
+					<li><a href="#" OnClick="editor.execCommand('find');" data-toggle="tooltip" data-placement="bottom" title="<?php echo $MULTILANG_PCODER_Buscar; ?>"><i class="fa fa-search fa-fw text-danger "></i></a></li>
+					<li><a href="#" OnClick="editor.execCommand('sortlines');" data-toggle="tooltip" data-placement="bottom" title="<?php echo $MULTILANG_PCODER_OrdenaSel; ?>"><i class="fa fa-sort-alpha-asc fa-fw text-primary"></i></a></li>
+					<li><a href="#" OnClick="IntercambiarEstadoCaracteresInvisibles();" data-toggle="tooltip" data-placement="bottom" title="<?php echo $MULTILANG_PCODER_CaracNoImprimibles; ?>"><i class="fa fa-eye-slash fa-fw text-default"></i></a></li>
+				
+				
 				</ul>
 					
 				<ul class="nav navbar-nav navbar-right">
@@ -73,6 +101,7 @@
 							<li><a data-toggle="modal" href="#AtajosTeclado"><i class="fa fa-keyboard-o fa-fw"></i> <?php echo $MULTILANG_PCODER_AtajosTitPcoder; ?></a></li>
 							<li role="separator" class="divider"></li>
 							<li><a data-toggle="modal" href="#myModalACERCADEPCODER"><i class="fa fa-info-circle fa-fw"></i> <?php echo $MULTILANG_PCODER_Acerca; ?></a></li>
+							<li><a href="#" OnClick="editor.execCommand('showSettingsMenu');"><i class="fa fa-cogs fa-fw"></i> <?php echo $MULTILANG_PCODER_Otros; ?></a></li>
 						</ul>
 					</li>
 				</ul>

@@ -38,10 +38,13 @@
 	$MULTILANG_PCODER_Archivo='File';
 	$MULTILANG_PCODER_Ayuda='Help';
 	$MULTILANG_PCODER_Basicos='Basics';
+	$MULTILANG_PCODER_Buscar='Find';
 	$MULTILANG_PCODER_Cancelar='Cancel';
 	$MULTILANG_PCODER_Caracteres='Characters';
 	$MULTILANG_PCODER_Cargando='Loading';
 	$MULTILANG_PCODER_Cerrar='Close';
+	$MULTILANG_PCODER_Copiar='Copy';
+	$MULTILANG_PCODER_Cortar='Cut';
 	$MULTILANG_PCODER_Deshacer='Undo';
 	$MULTILANG_PCODER_Desplazar='Move';
 	$MULTILANG_PCODER_Editar='Edit';
@@ -49,14 +52,18 @@
 	$MULTILANG_PCODER_Estado='Status';
 	$MULTILANG_PCODER_Explorar='Explore';
 	$MULTILANG_PCODER_Finalizado='Finished';
+	$MULTILANG_PCODER_Formato='Format';
+	$MULTILANG_PCODER_Guardando='Saving';
 	$MULTILANG_PCODER_Guardar='Save';
 	$MULTILANG_PCODER_Ir='Go';
 	$MULTILANG_PCODER_Lineas='Lines';
 	$MULTILANG_PCODER_Modificado='Modified';
 	$MULTILANG_PCODER_No='No';
 	$MULTILANG_PCODER_Otros='Others';
+	$MULTILANG_PCODER_Pegar='Paste';
 	$MULTILANG_PCODER_Predeterminado='Default';
 	$MULTILANG_PCODER_Preferencias='Preferences';
+	$MULTILANG_PCODER_Reemplazar='Replace';
 	$MULTILANG_PCODER_Rehacer='Redo';
 	$MULTILANG_PCODER_Salir='Quit';
 	$MULTILANG_PCODER_Seleccionar='Select';
@@ -65,6 +72,11 @@
 	$MULTILANG_PCODER_Tipo='Type';
 
 	//Mensajes de error y varios
+	$MULTILANG_PCODER_AumSangria='Increase indent';
+	$MULTILANG_PCODER_DisSangria='Decrease indent';
+	$MULTILANG_PCODER_ConvMay='Convert to uppercase';
+	$MULTILANG_PCODER_ConvMin='Convert to lowercase';
+	$MULTILANG_PCODER_OrdenaSel='Order selection';
 	$MULTILANG_PCODER_CargarArchivo='Load file';
     $MULTILANG_PCODER_Ajuste='Window adjustment';
 	$MULTILANG_PCODER_DefPcoder='Online Code Editor';
@@ -89,3 +101,4 @@
 	$MULTILANG_PCODER_Path3Punto='Root of PCoder as StandAlone (where you can find LICENSE, AUTHORS, Etc)';
 	$MULTILANG_PCODER_Path4Punto='Install root for PCoder as StandAlone or Practico root if is a module';
 	$MULTILANG_PCODER_PathFull='WebServer Root. Could be slow acording to the available files.';
+	$MULTILANG_PCODER_CaracNoImprimibles='Show/Hide Invisible characters';

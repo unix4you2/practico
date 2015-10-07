@@ -22,8 +22,24 @@
 
     // VENTANA ALMACENAMIENTO
 	
-        abrir_dialogo_modal("VentanaAlmacenamiento","");
-        echo '<i class="fa fa-save fa-fw fa-2x"></i>'.$MULTILANG_PCODER_Guardar.' '.$MULTILANG_PCODER_Finalizado;
+        abrir_dialogo_modal("VentanaAlmacenamiento",$MULTILANG_PCODER_Estado);
+?>
+
+        <div id="progreso_marco_guardar">
+			<div class="progress">
+				<div class="progress-bar progress-bar-striped active progress-bar-info" role="progressbar" aria-valuenow="100" style="width: 100%">
+					<i class="fa fa-circle-o-notch fa-fw fa-spin"></i> <?php echo $MULTILANG_PCODER_Guardando; ?>
+				</div>
+			</div>
+        </div>
+
+        <div align="center" id="finalizado_marco_guardar">
+			<i class="fa fa-save fa-fw fa-2x"></i> <?php echo $MULTILANG_PCODER_Guardar; ?> <?php echo $MULTILANG_PCODER_Finalizado; ?> !!!
+        </div>
+
+<?php        
         $barra_herramientas_modal='
-        <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_PCODER_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+        <div id="boton_marco_guardar">
+			<button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_PCODER_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>
+		</div>';
         cerrar_dialogo_modal($barra_herramientas_modal);

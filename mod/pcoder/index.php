@@ -227,7 +227,9 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="../../inc/bootstrap/js/bootstrap.min.js"></script>
     
+    <!-- Carga editor ACE y sus extensiones -->
 	<script src="../../inc/ace/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../inc/ace/src-min-noconflict/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
 
     <script type="text/javascript">
         function CambiarFuenteEditor(tamano)
@@ -255,6 +257,14 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
                 else
                     editor.setShowInvisibles(true);
             }
+        function IntercambiarEstadoCaracteresInvisibles()
+            {
+				//InterCambia el modo del editor para mostrar (true) u ocultar (false) los caracteres invisibles segun su estado actual
+				if (editor.getShowInvisibles()==true)
+					editor.setShowInvisibles(false);
+				else
+					editor.setShowInvisibles(true);
+            }
         function ActualizarTituloEditor(titulo)
             {
                 //Cambia el titulo presentado en la ventada del editor
@@ -272,35 +282,24 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 						document.getElementById("linea_salto").value="";			
 					}
             }
-        function Deshacer()
-            {
-                editor.undo();
-            }
-        function Rehacer()
-            {
-                editor.redo();
-            }
         function AvisoAlmacenamiento()
             {
-                $('#VentanaAlmacenamiento').modal('show'); 
+                //$('#VentanaAlmacenamiento').modal('show');
+                //Oculta mensaje de guardando y presenta el mensaje de guardar finalizado
+				$('#progreso_marco_guardar').hide();
+				$('#finalizado_marco_guardar').show();
+				$('#boton_marco_guardar').show();
             }
         function Guardar()
             {
+				//Oculta mensaje de guardar finalizado y presenta el de guardando
+				$('#progreso_marco_guardar').show();
+				$('#finalizado_marco_guardar').hide();
+				$('#boton_marco_guardar').hide();
+				//Presenta la ventana informativa sobre el proceso de almacenamiento
+				$('#VentanaAlmacenamiento').modal('show');
                 //Metodo estandar, envia todo sobre el iframe para evitar recargar la pagina
                 document.form_archivo_editado.submit();
-                //Metodo con AJAX, Evita el metodo estandar enviando todo sin recargar pagina aunque inseguro en el transporte.  No usar como primera opcion
-                /*
-                var ValorTextArea = $('#PCODER_AreaTexto').val();
-                $.ajax({                                        
-                    type: "POST", 
-                    url: "index.php",            
-                    data: "PCODER_TokenEdicion=<?php echo $PCODER_TokenEdicion; ?>&PCODER_archivo=<?php echo $PCODER_archivo; ?>&Presentar_FullScreen=<?php echo $Presentar_FullScreen; ?>&Precarga_EstilosBS=<?php echo $Precarga_EstilosBS; ?>&PCO_Accion=PCOMOD_GuardarArchivo&PCODER_AreaTexto=" + ValorTextArea,
-                    cache: false,
-                    dataType: "html",            
-                    success: function(data) {
-                        $('#VentanaAlmacenamiento').modal('show'); 
-                    }
-                });*/
             }
  		function PCO_VentanaPopup(theURL,winName,features)
 			{ 
@@ -314,53 +313,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
                 zona.innerHTML = elemento;
                 capa.appendChild(zona);
             }
-		 function PCO_ObtenerContenidoAjax(PCO_ASINCRONICO,PCO_URL,PCO_PARAMETROS)
-			{
-				var xmlhttp;
-				if (window.XMLHttpRequest)
-					{   // codigo for IE7+, Firefox, Chrome, Opera, Safari
-						xmlhttp=new XMLHttpRequest();
-					}
-				else
-					{   // codigo for IE6, IE5
-						xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-					}
-
-				//funcion que se llama cada vez que cambia la propiedad readyState
-				xmlhttp.onreadystatechange=function()
-					{
-						//readyState 4: peticion finalizada y respuesta lista
-						//status 200: OK
-						if (xmlhttp.readyState===4 && xmlhttp.status===200)
-							{
-								contenido_recibido=xmlhttp.responseText;
-								contenido_recibido = contenido_recibido.trim();
-								//Cuando es asincronico devuelve la respuesta cuando este lista
-								if(PCO_ASINCRONICO==1)
-									return contenido_recibido;
-							}
-					};
-
-				/* open(metodo, url, asincronico)
-				* metodo: post o get
-				* url: localizacion del archivo en el servidor
-				* asincronico: comunicacion asincronica true o false.*/
-				if(PCO_ASINCRONICO==1)
-					xmlhttp.open("POST",PCO_URL,true);
-				else
-					xmlhttp.open("POST",PCO_URL,false);
-
-				//establece el header para la respuesta
-				xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-
-				//enviamos las variables al archivo get_combo2.php
-				//xmlhttp.send();
-				xmlhttp.send(PCO_PARAMETROS);
-				
-				//Cuando la solicitud es asincronica devuelve el resultado al momento de llamado
-				if(PCO_ASINCRONICO==0)
-					return contenido_recibido;
-			}
+ 
         function PCODER_CargarArchivo(archivo)
             {
                 //Oculta el modal de seleccion del archivo
@@ -415,15 +368,20 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 				$("#TipoDocumento").html("<?php echo $MULTILANG_PCODER_Tipo; ?>: <?php echo $PCODER_TipoElemento; ?>");
 				$("#TamanoDocumento").html("<?php echo $MULTILANG_PCODER_Tamano; ?>: <b><?php echo $PCODER_TamanoElemento; ?> Kb</b>");
 				$("#FechaModificadoDocumento").html("<?php echo $MULTILANG_PCODER_Modificado; ?>: <b><?php echo $PCODER_FechaElemento; ?></b>");
-				
+				$("#RutaDocumento").html("<i class='fa fa-hdd-o text-info'> <?php echo $PCODER_NombreArchivo; ?></i>");
+
 				//Llama periodicamente la rutina de actualizacion de la barra
 				window.setTimeout(ActualizarBarraEstado, 1500);
 			}
 		window.setTimeout(ActualizarBarraEstado, 2000);
 
+
+		//Incluye extension de lenguaje para ACE
+		ace.require("ace/ext/language_tools");
         // Crea el editor
         editor = ace.edit("editor_codigo");
-        editor.getSession().setUseWorker(false); //Evita el error 404 para "worker-php.js Failed to load resource: the server responded with a status of 404 (Not Found)"
+        //editor.getSession().setUseWorker(false); //Evita el error 404 para "worker-php.js Failed to load resource: the server responded with a status of 404 (Not Found)"
+        editor.getSession().setUseWorker(true); //Evita el error 404 para "worker-php.js Failed to load resource: the server responded with a status of 404 (Not Found)"
         
         //Actualiza el editor con el valor cargado inicialmente en el textarea
         editor.setValue(document.getElementById("PCODER_AreaTexto").value);
@@ -433,8 +391,21 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
         CambiarFuenteEditor("14px");
         CambiarTemaEditor("ace/theme/ambiance");  //tomorrow_night|twilight|eclipse|ambiance|ETC
         CambiarModoEditor("ace/mode/<?php echo $PCODER_ModoEditor; ?>");
+        
+        
+        
+        //Activa la autocompletacion de codigo y los snippets
+		editor.setOptions({
+			enableBasicAutocompletion: true,
+			enableSnippets: true,
+			enableLiveAutocompletion: true
+		});
+        
+        //Elimina la visualizacion de margen de impresion
+        editor.setShowPrintMargin(0);
         CaracteresInvisiblesEditor(0);
         editor.clearSelection();
+        
         
         //En cada evento de cambio actualiza el textarea
         editor.getSession().on('change', function(){
@@ -460,6 +431,20 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
         });
                 
     </script>
+
+	<script language="JavaScript">
+		//Carga los tooltips programados en la hoja.  Por defecto todos los elementos con data-toggle=tootip
+		$(function () {
+		  $('[data-toggle="tooltip"]').tooltip();
+		})
+	</script>
+
+	<script language="JavaScript">
+		//Carga los popovers programados en la hoja.  Por defecto todos los elementos con data-toggle=popover
+		$(function () {
+		  $('[data-toggle="popover"]').popover()
+		})
+	</script>
 
     <?php
         // Estadisticas de uso anonimo con GABeacon

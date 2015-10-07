@@ -33,41 +33,41 @@
 					<button class="btn btn-primary btn-xs" onClick="SaltarALinea();"><?php echo $MULTILANG_PCODER_Ir; ?> <i class="fa fa-arrow-circle-right"></i></button>
 				</div>
 
-				<!-- LINEAS DEL DOCUMENTO -->
 				<font color="gray">
+					
+					<!-- LINEAS DEL DOCUMENTO -->
 					<div id="NroLineasDocumento" class="btn-xs" style="display:inline;">
 						0
 					</div>
-				</font>
 
-				<!-- CARACTERES DEL DOCUMENTO -->
-				<font color="gray">
+					<!-- CARACTERES DEL DOCUMENTO -->
 					<div id="NroCaracteresDocumento" class="btn-xs" style="display:inline;">
 						0
 					</div>
-				</font>
 
-				<!-- TIPO DOCUMENTO -->
-				<font color="gray">
+					<!-- TIPO DOCUMENTO -->
 					<div id="TipoDocumento" class="btn-xs" style="display:inline;">
 						0
 					</div>
-				</font>
 
-				<!-- TAMANO DEL DOCUMENTO -->
-				<font color="gray">
+					<!-- TAMANO DEL DOCUMENTO -->
 					<div id="TamanoDocumento" class="btn-xs" style="display:inline;">
 						0
 					</div>
-				</font>
 
-				<!-- FECHA MODIFICACION -->
-				<font color="gray">
+					<!-- FECHA MODIFICACION -->
 					<div id="FechaModificadoDocumento" class="btn-xs" style="display:inline;">
 						0
 					</div>
-				</font>
 
+					<!-- NOMBRE DE ARCHIVO -->
+					<font color="white">
+					<div id="RutaDocumento" class="btn-xs" style="display:inline;">
+						0
+					</div>
+					</font>
+
+				</font>
 
     </div>
 

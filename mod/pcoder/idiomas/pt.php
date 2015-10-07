@@ -38,10 +38,13 @@
 	$MULTILANG_PCODER_Archivo='Arquivo';
 	$MULTILANG_PCODER_Ayuda='Socorro';
 	$MULTILANG_PCODER_Basicos='B&aacute;sico';
+	$MULTILANG_PCODER_Buscar='Encontrar';
 	$MULTILANG_PCODER_Cancelar='Cancelar';
 	$MULTILANG_PCODER_Caracteres='Caracter';
 	$MULTILANG_PCODER_Cargando='Carregando';
 	$MULTILANG_PCODER_Cerrar='Fechar';
+	$MULTILANG_PCODER_Copiar='C&aacute;pia';
+	$MULTILANG_PCODER_Cortar='Cortar';
 	$MULTILANG_PCODER_Deshacer='Desfazer';
 	$MULTILANG_PCODER_Desplazar='Passo';
 	$MULTILANG_PCODER_Editar='Editar';
@@ -49,14 +52,18 @@
 	$MULTILANG_PCODER_Estado='Estatuto';
 	$MULTILANG_PCODER_Explorar='Explorar';
 	$MULTILANG_PCODER_Finalizado='Terminado';
+	$MULTILANG_PCODER_Formato='Formato';
+	$MULTILANG_PCODER_Guardando='Guardar';
 	$MULTILANG_PCODER_Guardar='Guardar';
 	$MULTILANG_PCODER_Ir='Ir';
 	$MULTILANG_PCODER_Lineas='Linhas';
 	$MULTILANG_PCODER_Modificado='Modificado';
 	$MULTILANG_PCODER_No='Não';
 	$MULTILANG_PCODER_Otros='Outros';
+	$MULTILANG_PCODER_Pegar='Colar';
 	$MULTILANG_PCODER_Predeterminado='Padrão';
 	$MULTILANG_PCODER_Preferencias='Preferências';
+	$MULTILANG_PCODER_Reemplazar='Substituir';
 	$MULTILANG_PCODER_Rehacer='Refazer';
 	$MULTILANG_PCODER_Salir='Sair';
 	$MULTILANG_PCODER_Seleccionar='Selecionar';
@@ -65,6 +72,11 @@
 	$MULTILANG_PCODER_Tipo='Tipo';
 
 	//Mensajes de error y varios
+	$MULTILANG_PCODER_AumSangria='Aumenta o travessão';
+	$MULTILANG_PCODER_DisSangria='Diminuir travessão';
+	$MULTILANG_PCODER_ConvMay='Converter para mai&uacute;sculas';
+	$MULTILANG_PCODER_ConvMin='Converter para min&uacute;sculas';
+	$MULTILANG_PCODER_OrdenaSel='Seleção de ordem';
 	$MULTILANG_PCODER_CargarArchivo='Carregar arquivo';
     $MULTILANG_PCODER_Ajuste='Ajuste janela';
 	$MULTILANG_PCODER_DefPcoder='Editor de c&oacute;digo on-line';
@@ -89,4 +101,4 @@
 	$MULTILANG_PCODER_Path3Punto='Raiz de PCoder como autônomo (onde você pode encontrar LICENSE, AUTHORS, Etc)';
 	$MULTILANG_PCODER_Path4Punto='Instale raiz para PCoder como autônomo ou Practico raiz se &eacute; um módulo';
 	$MULTILANG_PCODER_PathFull='WebServer Root. Poderia ser monitores segundo lento para os ficheiros dispon&iacute;veis.';
-	
+	$MULTILANG_PCODER_CaracNoImprimibles='Exposição / Esconder personagens invis&iacute;veis';
