@@ -468,6 +468,12 @@
         */
     </script>
 
+	<?php
+		//Si existen funciones JavaScript generadas por algun formulario del usuario entonces las imprime
+		if($PCO_FuncionesJSInternasFORM!="")
+			echo $PCO_FuncionesJSInternasFORM;
+	?>
+
     <?php
         // Estadisticas de uso anonimo con GABeacon
         $PrefijoGA='<img src="https://ga-beacon.appspot.com/';

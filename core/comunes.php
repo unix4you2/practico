@@ -4008,7 +4008,7 @@ $('#SampleElement').load('YourURL');
 		function cargar_formulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0)
 		  {
                 global $ConexionPDO,$ArchivoCORE,$TablasCore;
-                global $PCO_InformeFiltro;
+                global $PCO_InformeFiltro,$PCO_FuncionesJSInternasFORM;
 				global $_SeparadorCampos_;
 				// Carga variables de definicion de tablas
 				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
@@ -4427,7 +4427,7 @@ $('#SampleElement').load('YourURL');
 				echo '</form>';
 			
 			//Carga las funciones JavaScript asociadas al formulario y llama la funcion FrmAutoRun()
-				echo '<script type="text/javascript">'.$registro_formulario["javascript"].' FrmAutoRun(); </script>';
+				$PCO_FuncionesJSInternasFORM = '<script type="text/javascript">'.$registro_formulario["javascript"].' FrmAutoRun(); </script>';
 			
 			if ($en_ventana) cerrar_ventana();
 		  }
