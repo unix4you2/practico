@@ -36,6 +36,8 @@
 	//Lexico general
 	$MULTILANG_PCODER_Abrir='Open';
 	$MULTILANG_PCODER_Archivo='File';
+	$MULTILANG_PCODER_Acercar='Zoom in';
+	$MULTILANG_PCODER_Alejar='Zoom out';
 	$MULTILANG_PCODER_Ayuda='Help';
 	$MULTILANG_PCODER_Basicos='Basics';
 	$MULTILANG_PCODER_Buscar='Find';
@@ -70,6 +72,7 @@
 	$MULTILANG_PCODER_Si='Yes';
 	$MULTILANG_PCODER_Tamano='Size';
 	$MULTILANG_PCODER_Tipo='Type';
+	$MULTILANG_PCODER_Ver='View';
 
 	//Mensajes de error y varios
 	$MULTILANG_PCODER_AumSangria='Increase indent';
@@ -86,7 +89,6 @@
 	$MULTILANG_PCODER_ErrorExistencia='The file you want to open doesnt exists!';
 	$MULTILANG_PCODER_ErrorRW='You dont have rights to write this file! Any change will be lost!';
 	$MULTILANG_PCODER_ErrorNoACE='There is no ACE module installed to edit this file';
-	$MULTILANG_PCODER_AyudaExplorador='Important:  Some folders are showd as an informative option about them.  Anyway, they are expanded if they have editable files only';
 	$MULTILANG_PCODER_SaltarLinea='Jump to line';
 	$MULTILANG_PCODER_Acerca='About';
 	$MULTILANG_PCODER_ResumenLicencia='This tool is Free Software under GNU-GPL v3 License';
@@ -95,10 +97,13 @@
 	$MULTILANG_PCODER_LenguajeProg='Programming language';
 	$MULTILANG_PCODER_VerCaracteres='Show hidden chars';
 	$MULTILANG_PCODER_CerrarVentana='Changes may lost';
-	$MULTILANG_PCODER_PathDisponible='Exploration paths available';
 	$MULTILANG_PCODER_Path1Punto='Current folder of PCoder (generally over mod/pcoder)';
 	$MULTILANG_PCODER_Path2Punto='Root of PCoder as Module (generally over mod/pcoder/mod)';
 	$MULTILANG_PCODER_Path3Punto='Root of PCoder as StandAlone (where you can find LICENSE, AUTHORS, Etc)';
 	$MULTILANG_PCODER_Path4Punto='Install root for PCoder as StandAlone or Practico root if is a module';
 	$MULTILANG_PCODER_PathFull='WebServer Root. Could be slow acording to the available files.';
 	$MULTILANG_PCODER_CaracNoImprimibles='Show/Hide Invisible characters';
+	$MULTILANG_PCODER_PantallaCompleta='Full screen';
+	$MULTILANG_PCODER_PanelIzq='Left panel';
+	$MULTILANG_PCODER_PanelDer='Right panel';
+

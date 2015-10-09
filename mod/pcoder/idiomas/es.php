@@ -36,6 +36,8 @@
 	//Lexico general
 	$MULTILANG_PCODER_Abrir='Abrir';
 	$MULTILANG_PCODER_Archivo='Archivo';
+	$MULTILANG_PCODER_Acercar='Acercar';
+	$MULTILANG_PCODER_Alejar='Alejar';
 	$MULTILANG_PCODER_Ayuda='Ayuda';
 	$MULTILANG_PCODER_Basicos='B&aacute;sicos';
 	$MULTILANG_PCODER_Buscar='Buscar';
@@ -71,6 +73,7 @@
 	$MULTILANG_PCODER_Si='Si';
 	$MULTILANG_PCODER_Tamano='Tama&ntilde;o';
 	$MULTILANG_PCODER_Tipo='Tipo';
+	$MULTILANG_PCODER_Ver='Ver';
 
 	//Mensajes de error y varios
 	$MULTILANG_PCODER_AumSangria='Aumentar sangr&iacute;a';
@@ -87,7 +90,6 @@
 	$MULTILANG_PCODER_ErrorExistencia='El archivo indicado para edicion no existe!';
 	$MULTILANG_PCODER_ErrorRW='No se tienen permisos para escribir sobre el archivo! Cualquier cambio realizado podr&iacute;a perderse';
 	$MULTILANG_PCODER_ErrorNoACE='No se encuentra el modulo ACE para edici&oacute;n del archivo';
-	$MULTILANG_PCODER_AyudaExplorador='Importante:  Algunas carpetas son presentadas a manera informativa sobre su existencia.  Sin embargo, estas son expandibles solamente cuando tienen archivos editables';
 	$MULTILANG_PCODER_SaltarLinea='Saltar a l&iacute;nea';
 	$MULTILANG_PCODER_Acerca='Acerca de';
 	$MULTILANG_PCODER_ResumenLicencia='Esta herramienta es Software Libre distribuido bajo licencia GNU-GPL v3';
@@ -96,10 +98,13 @@
 	$MULTILANG_PCODER_LenguajeProg='Lenguaje de programaci&oacute;n';
 	$MULTILANG_PCODER_VerCaracteres='Ver caracteres invisibles';
 	$MULTILANG_PCODER_CerrarVentana='Finalizar edici&oacute;n';
-	$MULTILANG_PCODER_PathDisponible='Rutas de exploracion disponibles';
 	$MULTILANG_PCODER_Path1Punto='Directorio Actual de PCoder (generalmente sobre mod/pcoder)';
 	$MULTILANG_PCODER_Path2Punto='Raiz de PCoder Modulo (generalmente sobre mod/pcoder/mod)';
 	$MULTILANG_PCODER_Path3Punto='Raiz de PCoder StandAlone (Donde reside LICENSE, AUTHORS, Etc)';
 	$MULTILANG_PCODER_Path4Punto='Raiz Instalacion PCoder cuando es independiente o Raiz de Practico si esta como modulo';
 	$MULTILANG_PCODER_PathFull='Raiz de Todo el servidor web. Podria tardar segun cantidad de archivos posibles.';
 	$MULTILANG_PCODER_CaracNoImprimibles='Ver/Ocultar Caracteres no imprimibles';
+	$MULTILANG_PCODER_PantallaCompleta='Pantalla completa';
+	$MULTILANG_PCODER_PanelIzq='Panel izquierdo';
+	$MULTILANG_PCODER_PanelDer='Panel derecho';
+	

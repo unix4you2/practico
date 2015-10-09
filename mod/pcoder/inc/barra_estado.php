@@ -23,52 +23,58 @@
     // BARRA DE MENU DEL APLICATIVO
 ?>
 
-<div id="contenedor_barra_estado">
-	
-    <div class="well well-sm" style="border:0px; margin:0px; padding:0px; background: #272727;">
+<div class="row">
+	<div class="col-md-12">
 
-				<!-- FORMULARIO IR A -->
-				<div style="display:inline;">
-					<input type="text" id="linea_salto" size=10 name="linea_salto" class="input-mini btn-xs btn-default" placeholder="<?php echo $MULTILANG_PCODER_SaltarLinea; ?>">
-					<button class="btn btn-primary btn-xs" onClick="SaltarALinea();"><?php echo $MULTILANG_PCODER_Ir; ?> <i class="fa fa-arrow-circle-right"></i></button>
-				</div>
+		<div id="contenedor_barra_estado">
+			
+			<div class="well well-sm" style="border:0px; margin:0px; padding:0px; background: #272727;">
 
-				<font color="gray">
-					
-					<!-- LINEAS DEL DOCUMENTO -->
-					<div id="NroLineasDocumento" class="btn-xs" style="display:inline;">
-						0
-					</div>
+						<!-- FORMULARIO IR A -->
+						<div style="display:inline;">
+							<input type="text" id="linea_salto" size=10 name="linea_salto" class="input-mini btn-xs btn-default" placeholder="<?php echo $MULTILANG_PCODER_SaltarLinea; ?>">
+							<button class="btn btn-primary btn-xs" onClick="SaltarALinea();"><?php echo $MULTILANG_PCODER_Ir; ?> <i class="fa fa-arrow-circle-right"></i></button>
+						</div>
 
-					<!-- CARACTERES DEL DOCUMENTO -->
-					<div id="NroCaracteresDocumento" class="btn-xs" style="display:inline;">
-						0
-					</div>
+						<font color="gray">
+							
+							<!-- LINEAS DEL DOCUMENTO -->
+							<div id="NroLineasDocumento" class="btn-xs" style="display:inline;">
+								0
+							</div>
 
-					<!-- TIPO DOCUMENTO -->
-					<div id="TipoDocumento" class="btn-xs" style="display:inline;">
-						0
-					</div>
+							<!-- CARACTERES DEL DOCUMENTO -->
+							<div id="NroCaracteresDocumento" class="btn-xs" style="display:inline;">
+								0
+							</div>
 
-					<!-- TAMANO DEL DOCUMENTO -->
-					<div id="TamanoDocumento" class="btn-xs" style="display:inline;">
-						0
-					</div>
+							<!-- TIPO DOCUMENTO -->
+							<div id="TipoDocumento" class="btn-xs" style="display:inline;">
+								0
+							</div>
 
-					<!-- FECHA MODIFICACION -->
-					<div id="FechaModificadoDocumento" class="btn-xs" style="display:inline;">
-						0
-					</div>
+							<!-- TAMANO DEL DOCUMENTO -->
+							<div id="TamanoDocumento" class="btn-xs" style="display:inline;">
+								0
+							</div>
 
-					<!-- NOMBRE DE ARCHIVO -->
-					<font color="white">
-					<div id="RutaDocumento" class="btn-xs" style="display:inline;">
-						0
-					</div>
-					</font>
+							<!-- FECHA MODIFICACION -->
+							<div id="FechaModificadoDocumento" class="btn-xs" style="display:inline;">
+								0
+							</div>
 
-				</font>
+							<!-- NOMBRE DE ARCHIVO -->
+							<font color="white">
+							<div id="RutaDocumento" class="btn-xs" style="display:inline;">
+								0
+							</div>
+							</font>
 
-    </div>
+						</font>
 
-</div><!-- /.contenedor -->
+			</div>
+
+		</div><!-- /.contenedor -->
+
+	</div>
+</div>

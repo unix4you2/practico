@@ -36,6 +36,8 @@
 	//Lexico general
 	$MULTILANG_PCODER_Abrir='Aberto';
 	$MULTILANG_PCODER_Archivo='Arquivo';
+	$MULTILANG_PCODER_Acercar='Mais Zoom';
+	$MULTILANG_PCODER_Alejar='Menos zoom';
 	$MULTILANG_PCODER_Ayuda='Socorro';
 	$MULTILANG_PCODER_Basicos='B&aacute;sico';
 	$MULTILANG_PCODER_Buscar='Encontrar';
@@ -70,6 +72,7 @@
 	$MULTILANG_PCODER_Si='Sim';
 	$MULTILANG_PCODER_Tamano='Tamanho';
 	$MULTILANG_PCODER_Tipo='Tipo';
+	$MULTILANG_PCODER_Ver='Visão';
 
 	//Mensajes de error y varios
 	$MULTILANG_PCODER_AumSangria='Aumenta o travessão';
@@ -86,7 +89,6 @@
 	$MULTILANG_PCODER_ErrorExistencia='O arquivo que você deseja abrir doesnt existe!';
 	$MULTILANG_PCODER_ErrorRW='Você não tem direitos para escrever este arquivo! Qualquer alteração ser&aacute; perdida!';
 	$MULTILANG_PCODER_ErrorNoACE='Não h&aacute; módulo ACE instalado para editar este arquivo';
-	$MULTILANG_PCODER_AyudaExplorador='Importante: Algumas pastas estão showd como uma opção informativo sobre eles. De qualquer forma, eles são expandidos se eles têm apenas arquivos edit&aacute;veis';
 	$MULTILANG_PCODER_SaltarLinea='Ir para linha';
 	$MULTILANG_PCODER_Acerca='Cerca de';
 	$MULTILANG_PCODER_ResumenLicencia='Esta ferramenta &eacute; um Software Livre sob GNU-GPL v3 License';
@@ -95,10 +97,12 @@
 	$MULTILANG_PCODER_LenguajeProg='Linguagem de programação';
 	$MULTILANG_PCODER_VerCaracteres='Mostrar escondido caracteres';
 	$MULTILANG_PCODER_CerrarVentana='As alterações podem perder';
-	$MULTILANG_PCODER_PathDisponible='Caminhos de exploração dispon&iacute;veis';
 	$MULTILANG_PCODER_Path1Punto='Pasta atual de PCoder (geralmente mais mod/pcoder)';
 	$MULTILANG_PCODER_Path2Punto='Raiz de PCoder como Module (geralmente mais mod/pcoder/mod)';
 	$MULTILANG_PCODER_Path3Punto='Raiz de PCoder como autônomo (onde você pode encontrar LICENSE, AUTHORS, Etc)';
 	$MULTILANG_PCODER_Path4Punto='Instale raiz para PCoder como autônomo ou Practico raiz se &eacute; um módulo';
 	$MULTILANG_PCODER_PathFull='WebServer Root. Poderia ser monitores segundo lento para os ficheiros dispon&iacute;veis.';
 	$MULTILANG_PCODER_CaracNoImprimibles='Exposição / Esconder personagens invis&iacute;veis';
+	$MULTILANG_PCODER_PantallaCompleta='Tela cheia';
+	$MULTILANG_PCODER_PanelIzq='Painel esquerdo';
+	$MULTILANG_PCODER_PanelDer='Painel direito';

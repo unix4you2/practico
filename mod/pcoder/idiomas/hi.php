@@ -36,6 +36,8 @@
 	//Lexico general
 	$MULTILANG_PCODER_Abrir='खुला';
 	$MULTILANG_PCODER_Archivo='फ़ाइल';
+	$MULTILANG_PCODER_Acercar='ज़ूम इन';
+	$MULTILANG_PCODER_Alejar='ज़ूम आउट';
 	$MULTILANG_PCODER_Ayuda='मदद';
 	$MULTILANG_PCODER_Basicos='मूल बातें';
 	$MULTILANG_PCODER_Buscar='खोज';
@@ -70,6 +72,7 @@
 	$MULTILANG_PCODER_Si='हाँ';
 	$MULTILANG_PCODER_Tamano='आकार';
 	$MULTILANG_PCODER_Tipo='टाइप';
+	$MULTILANG_PCODER_Ver='राय';
 
 	//Mensajes de error y varios
 	$MULTILANG_PCODER_AumSangria='बढ़ते हुए अंतर में';
@@ -86,7 +89,6 @@
 	$MULTILANG_PCODER_ErrorExistencia='आप खोलना चाहते हैं फ़ाइल नहीं मौजूद करता है!';
 	$MULTILANG_PCODER_ErrorRW='आप इस फ़ाइल को लिखने के लिए अधिकार नहीं है! कोई भी परिवर्तन खो जाएगा!';
 	$MULTILANG_PCODER_ErrorNoACE='इस फ़ाइल को संपादित करने के लिए कोई स्थापित ऐस मॉड्यूल है';
-	$MULTILANG_PCODER_AyudaExplorador='महत्वपूर्ण: कुछ फ़ोल्डरों उनके बारे में एक जानकारीपूर्ण विकल्प के रूप में showd कर रहे हैं। वे केवल संपादन योग्य फाइल किया है वैसे भी, अगर वे विस्तार कर रहे हैं';
 	$MULTILANG_PCODER_SaltarLinea='लाइन के लिए कूदो';
 	$MULTILANG_PCODER_Acerca='के बारे में';
 	$MULTILANG_PCODER_ResumenLicencia='यह उपकरण के तहत नि: शुल्क सॉफ्टवेयर है GNU-GPL v3 License';
@@ -95,10 +97,12 @@
 	$MULTILANG_PCODER_LenguajeProg='प्रोग्रामिंग भाषा';
 	$MULTILANG_PCODER_VerCaracteres='शो छिपा घर का काम';
 	$MULTILANG_PCODER_CerrarVentana='परिवर्तन खो सकता है';
-	$MULTILANG_PCODER_PathDisponible='उपलब्ध अन्वेषण रास्तों';
 	$MULTILANG_PCODER_Path1Punto='PCoder की वर्तमान फ़ोल्डर (आम तौर पर खत्मmod/pcoder)';
 	$MULTILANG_PCODER_Path2Punto='मॉड्यूल के रूप में PCoder (आम तौर पर खत्म की जड़mod/pcoder/mod)';
 	$MULTILANG_PCODER_Path3Punto='आप पा सकते हैं जहां स्टैंडअलोन के रूप में PCoder (की जड़ LICENSE, AUTHORS, Etc)';
 	$MULTILANG_PCODER_Path4Punto='एक मॉड्यूल है, तो स्टैंडअलोन या Practico रूट के रूप में PCoder के लिए रूट स्थापित';
 	$MULTILANG_PCODER_PathFull='वेबसर्वर रूट। उपलब्ध फाइल करने के लिए धीमी गति अनुसार हो सकता है।';
 	$MULTILANG_PCODER_CaracNoImprimibles='दिखाएँ / छुपाएँ अदृश्य पात्रों';
+	$MULTILANG_PCODER_PantallaCompleta='पूर्ण स्क्रीन';
+	$MULTILANG_PCODER_PanelIzq='बाएं पैनल';
+	$MULTILANG_PCODER_PanelDer='राइट पैनल';

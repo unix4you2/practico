@@ -470,7 +470,7 @@
 
 	<?php
 		//Si existen funciones JavaScript generadas por algun formulario del usuario entonces las imprime
-		if($PCO_FuncionesJSInternasFORM!="")
+		if(@$PCO_FuncionesJSInternasFORM!="")
 			echo $PCO_FuncionesJSInternasFORM;
 	?>
 

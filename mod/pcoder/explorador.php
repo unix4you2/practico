@@ -75,6 +75,17 @@
     <!-- Agrega archivos necesarios para el Explorador en arbol de directorios -->
     <link href="lib/phpFileTree/styles/default/default.css" rel="stylesheet" type="text/css" media="screen" />
     <script src="lib/phpFileTree/php_file_tree.js" type="text/javascript"></script>
+    
+	 <style type="text/css">
+		.php-file-tree A {
+			color: #FFFFFF;
+			text-decoration: none;
+		}
+		
+		.php-file-tree A:hover {
+			color: #FFFF00;
+		}
+	</style>
 </head>
 <body>
 
