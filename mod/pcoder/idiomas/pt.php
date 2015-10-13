@@ -106,3 +106,6 @@
 	$MULTILANG_PCODER_PantallaCompleta='Tela cheia';
 	$MULTILANG_PCODER_PanelIzq='Painel esquerdo';
 	$MULTILANG_PCODER_PanelDer='Painel direito';
+	$MULTILANG_PCODER_OcultarPanel='Painel cerrar';
+	$MULTILANG_PCODER_RevisarSintaxis='Verifique a sintaxe da linguagem, enquanto eu escrevo';
+	

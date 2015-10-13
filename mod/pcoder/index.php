@@ -180,6 +180,17 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
             overflow-x: hidden;
             overflow-y: hidden;
         }
+
+		/* Personalizacion del estilo bootstrap para el alto del menu */
+			.navbar-nav > li > a, .navbar-brand {
+				padding-top:0px !important; padding-bottom:0 !important;
+				height: 30px;
+			}
+			.navbar {min-height:30px !important;}
+		/*Adicion de clase para el alto de menu*/
+			.navbar-xs { min-height:30px; height: 30px; }
+			.navbar-xs .navbar-brand{ padding: 0px 12px;font-size: 16px;line-height: 30px; }
+			.navbar-xs .navbar-nav > li > a {  padding-top: 0px; padding-bottom: 0px; line-height: 30px; }
     </style>
 
     <!-- Agrega archivos necesarios para el Explorador en arbol de directorios -->
@@ -205,11 +216,13 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
 		<div class="row">
 			<div class="col-md-2" style="margin:0px; padding:0px;" id="panel_izquierdo">
+				<div algin="center">
 				<?php
-					include_once ("inc/marco_explorador.php");
+					include_once ("inc/panel_izquierdo.php");
 				?>
+				</div>
 			</div>
-			<div class="col-md-8" style="margin:0px; padding:0px;" id="panel_editor_codigo">
+			<div class="col-md-8" style="margin:0px;" id="panel_editor_codigo">
 				<form name="form_archivo_editado" action="index.php" method="POST" target="frame_almacenamiento" style="visibility: hidden; display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<textarea id="PCODER_AreaTexto" name="PCODER_AreaTexto" style="visibility:hidden; display:none;"><?php echo $PCODERcontenido_archivo; ?></textarea>
 					<input name="PCODER_TokenEdicion" type="hidden" value="<?php echo $PCODER_TokenEdicion; ?>">
@@ -222,6 +235,9 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 				<div id="editor_codigo" style="display:block; width:100%; height:100vh;" width="100%" height="100vh"></div>
 			</div>
 			<div class="col-md-2" style="margin:0px; padding:0px;" id="panel_derecho">
+				<?php
+					include_once ("inc/panel_derecho.php");
+				?>
 			</div>
 		</div>
 
@@ -239,6 +255,14 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 	<script src="../../inc/ace/src-min-noconflict/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
 
     <script type="text/javascript">
+		//##############################################################
+		//###              INICIALIZACION DE VARIABLES               ###
+		//##############################################################
+		panel_izquierdo=0;
+        panel_derecho=0;
+		
+		
+		
         function CambiarFuenteEditor(tamano)
             {
                 //Cambia la fuente del editor al tamano recibido
@@ -263,6 +287,30 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
                     editor.setShowInvisibles(false);
                 else
                     editor.setShowInvisibles(true);
+            }
+        function VerificarSintaxisEditor(estado)
+            {
+                //Cambia el la verificacion de sintaxis del editor
+                if (estado==0)
+                    editor.session.setOption("useWorker", false);
+                else
+                    editor.session.setOption("useWorker", true);
+            }
+        function VerificarAutocompletadoEditor(estado)
+            {
+                //Cambia el la verificacion de sintaxis del editor
+                if (estado==0)
+					{
+						 editor.session.setOption("enableBasicAutocompletion", false);
+						 editor.session.setOption("enableSnippets", false);
+						 editor.session.setOption("enableLiveAutocompletion", false);
+					}
+                else
+					{
+						editor.session.setOption("enableBasicAutocompletion", true);
+						editor.session.setOption("enableSnippets", true);
+						editor.session.setOption("enableLiveAutocompletion", true);
+					}
             }
         function IntercambiarEstadoCaracteresInvisibles()
             {
@@ -329,36 +377,59 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
                 PCO_VentanaPopup('index.php?PCO_Accion=PCOMOD_CargarPcoder&Presentar_FullScreen=1&Precarga_EstilosBS=1&PCODER_archivo='+archivo,'{P} '+archivo,'toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=1024, height=700');
             }
 
-		ExplorarPath();	//Lanza por primera vez la exploracion de archivos para el panel izquierdo
-        panel_izquierdo=0;
-        panel_derecho=0;
         function AjustarPanelesLaterales()
             {
 				//Redimensiona, ajusta y aplica clases al editor segun el estado de visualizacion las barras laterales
 				ancho_panel_editor=12-panel_izquierdo-panel_derecho; //Actualiza segun los anchos de cada panel
-				
-				
-				
-				
-				
-				
-				
+
 				//Remueve las clases tipicas de los paneles y aplica las nuevas
 				$("#panel_izquierdo").removeClass("col-md-2");
 				$("#panel_derecho").removeClass("col-md-2");
-				$("#panel_izquierdo").addClass("col-md-"+panel_izquierdo);
-				$("#panel_derecho").addClass("col-md-"+panel_derecho);
-				//Si el valor es cero entonces se ocultan
-				if(panel_izquierdo==0) $("#panel_izquierdo").hide();
-				if(panel_derecho==0) $("#panel_derecho").hide();
-				
-				
-				//Remueve las clases tipicas del editor de codigo y aplica la nueva
-				$("#panel_editor_codigo").removeClass("col-md-8");
-				$("#panel_editor_codigo").addClass("col-md-"+ancho_panel_editor);
-				
-			}
+				//Si el valor es cero entonces se ocultan sino agrega la clase
+				if(panel_izquierdo==0)
+					$("#panel_izquierdo").hide();
+				else
+					$("#panel_izquierdo").addClass("col-md-"+panel_izquierdo);
+				if(panel_derecho==0)
+					$("#panel_derecho").hide();
+				else
+					$("#panel_derecho").addClass("col-md-"+panel_derecho);
 
+				//Remueve las clases tipicas del editor de codigo y aplica la nueva
+				$("#panel_editor_codigo").removeClass("col-md-8"); //Cuando estan los dos paneles activos
+				$("#panel_editor_codigo").removeClass("col-md-10"); //Cuando esta un solo panel activo
+				$("#panel_editor_codigo").addClass("col-md-"+ancho_panel_editor);
+			}
+		function ActivarPanelIzquierdo()
+			{
+				panel_izquierdo=2;
+				$("#panel_izquierdo").show();
+				$("#panel_izquierdo").removeClass("col-md-0");
+				$("#panel_izquierdo").addClass("col-md-"+panel_izquierdo);
+				AjustarPanelesLaterales();
+			}
+		function ActivarPanelDerecho()
+			{
+				panel_derecho=2;
+				$("#panel_derecho").show();
+				$("#panel_derecho").removeClass("col-md-0");
+				$("#panel_derecho").addClass("col-md-"+panel_derecho);
+				AjustarPanelesLaterales();
+			}
+		function DesactivarPanelIzquierdo()
+			{
+				panel_izquierdo=0;
+				$("#panel_izquierdo").removeClass("col-md-2");
+				$("#panel_izquierdo").hide();
+				AjustarPanelesLaterales();
+			}
+		function DesactivarPanelDerecho()
+			{
+				panel_derecho=0;
+				$("#panel_derecho").removeClass("col-md-2");
+				$("#panel_derecho").hide();
+				AjustarPanelesLaterales();
+			}
         function RedimensionarEditor()
             {
 				//Obtiene las dimensiones actuales de la ventana de edicion y algunos objetos
@@ -376,7 +447,6 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 				var alto_final=alto_ventana-alto_contenedor_menu-alto_contenedor_barra_estado-alto_contenedor_mensajes_error;
 				//$('#editor_codigo').height( alto_final ).css({ });			//Asignacion en pixeles
 				$('#editor_codigo').height( porcentaje_final+"vh" ).css({ });	//Asignacion en porcentaje
-				
 				AjustarPanelesLaterales();
 			}
 
@@ -419,39 +489,18 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 				tamano=parseInt(tamano)-2;
 				CambiarFuenteEditor(tamano+"px");
 			}
-		function ActivarPanelIzquierdo()
-			{
-				panel_izquierdo=2;
-				$("#panel_izquierdo").show();
-				$("#panel_izquierdo").removeClass("col-md-0");
-				$("#panel_izquierdo").addClass("col-md-"+panel_izquierdo);
-				AjustarPanelesLaterales();
-			}
-		function ActivarPanelDerecho()
-			{
-				panel_derecho=2;
-				$("#panel_derecho").show();
-				$("#panel_derecho").removeClass("col-md-0");
-				$("#panel_derecho").addClass("col-md-"+panel_derecho);
-				AjustarPanelesLaterales();
-			}
 		function ExplorarPath()
 			{
-				//Si el panel izquierdo esta oculto lo muestra y actualiza paneles
-				if(panel_izquierdo==0)
-					ActivarPanelIzquierdo();
-
 				//Presenta la barra de carga que deberia ocultarse automaticamente en el OnLoad del Iframe
 				$('#progreso_marco_explorador').show();
 				
-				//Se encarga de actualizar el path de navegacion de acuerdo al valor del combo o caja de texto
+				//Se encarga de actualizar el path de navegacion de acuerdo al valor del combo
 				$('#iframe_marco_explorador').attr('src', 'explorador.php?PCO_PCODER_Accion=PCOMOD_ExplorarPath&PathExploracion='+path_exploracion_archivos.value);
 			}
-
-		//Evento que quita la barra de progreso de carga para el explorador cada que finaliza el cargue de su IFrame
+				//Evento que quita la barra de progreso de carga para el explorador cada que finaliza el cargue de su IFrame
 				$('#iframe_marco_explorador').load(function(){
-				$('#progreso_marco_explorador').hide();
-			});
+					$('#progreso_marco_explorador').hide();
+				});
 
         function ActualizarBarraEstado()
             {
@@ -469,15 +518,13 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 				//Llama periodicamente la rutina de actualizacion de la barra
 				window.setTimeout(ActualizarBarraEstado, 1500);
 			}
-		window.setTimeout(ActualizarBarraEstado, 2000);
-
+		
 
 		//Incluye extension de lenguaje para ACE
 		ace.require("ace/ext/language_tools");
         // Crea el editor
         editor = ace.edit("editor_codigo");
-        //editor.getSession().setUseWorker(false); //Evita el error 404 para "worker-php.js Failed to load resource: the server responded with a status of 404 (Not Found)"
-        editor.getSession().setUseWorker(true); //Evita el error 404 para "worker-php.js Failed to load resource: the server responded with a status of 404 (Not Found)"
+        editor.getSession().setUseWorker(true); //Llevar a false para evitar el error 404 para "worker-php.js Failed to load resource: the server responded with a status of 404 (Not Found)"
         
         //Actualiza el editor con el valor cargado inicialmente en el textarea
         editor.setValue(document.getElementById("PCODER_AreaTexto").value);
@@ -512,21 +559,27 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
         $( window ).resize(function() {
 			RedimensionarEditor();
         });
-        RedimensionarEditor();
-        AjustarPanelesLaterales();
+        
 
-        //Captura el evento de Ctrl+S para guardar el archivo
-        $(window).bind('keydown', function(event) {
-            if (event.ctrlKey || event.metaKey) {
-                switch (String.fromCharCode(event.which).toLowerCase()) {
-                case 's':  //<-- Cambiar para otras letras ;)
-                    event.preventDefault();
-                    Guardar();
-                    break;
-                }
-            }
-        });
-                
+		// CAPTURA DE EVENTOS DE TECLADO #############################################################
+			//Captura el evento de Ctrl+S para guardar el archivo
+			$(window).bind('keydown', function(event) {
+				if (event.ctrlKey || event.metaKey) {
+					switch (String.fromCharCode(event.which).toLowerCase()) {
+					case 's':  //<-- Cambiar para otras letras ;)
+						event.preventDefault();
+						Guardar();
+						break;
+					}
+				}
+			});
+
+		// FUNCIONES DE INICIALIZACION ###############################################################
+			ExplorarPath();
+			RedimensionarEditor();
+			window.setTimeout(ActualizarBarraEstado, 2000);
+
+
     </script>
 
 	<script language="JavaScript">
@@ -546,10 +599,10 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
     <?php
         // Estadisticas de uso anonimo con GABeacon
         $PrefijoGA='<img src="https://ga-beacon.appspot.com/';
-        $PosfijoGA='/Practico/'.$PCO_Accion.'?pixel" border=0 ALT=""/>';
+        $PosfijoGA='/PCoder/'.$PCO_Accion.'?pixel" border=0 ALT=""/>';
         // Este valor indica un ID generico de GA UA-847800-9 No edite esta linea sobre el codigo
         // Para validar que su ID es diferente al generico de seguimiento.  En lugar de esto cambie
-        // su valor a traves del panel de configuracion de Practico con el entregado como ID de GoogleAnalytics
+        // su valor a traves del panel de configuracion con el entregado como ID de GoogleAnalytics
         $Infijo=base64_decode("VUEtODQ3ODAwLTk=");
         echo $PrefijoGA.$Infijo.$PosfijoGA;
         if(@$CodigoGoogleAnalytics!="")

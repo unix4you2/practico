@@ -106,4 +106,6 @@
 	$MULTILANG_PCODER_PantallaCompleta='Full screen';
 	$MULTILANG_PCODER_PanelIzq='Left panel';
 	$MULTILANG_PCODER_PanelDer='Right panel';
+	$MULTILANG_PCODER_OcultarPanel='Panel hide';
+	$MULTILANG_PCODER_RevisarSintaxis='Check language syntax while I write';
 

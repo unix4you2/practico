@@ -70,7 +70,7 @@
 						<label for="modo_archivo"><?php echo $MULTILANG_PCODER_LenguajeProg; ?></label>
 						<select id="modo_archivo" size="1" class="form-control btn-info" onchange="CambiarModoEditor(this.value)">
 							  <?php
-								//Presenta los temas claros disponibles
+								//Presenta los lenguajes disponibles
 								for ($i=0;$i<count($PCODER_Modos);$i++)
 									{
 										//Determina si el lenguaje o modo de archivo actual es la opcion a desplegar
@@ -91,7 +91,25 @@
 						</select>
 				</div>
 			</div>
-
+			<hr>
+			<div class="row">
+				<div class="col-lg-6">
+						<label for="verificacion_sintaxis"><?php echo $MULTILANG_PCODER_RevisarSintaxis; ?></label>
+						<select id="verificacion_sintaxis" size="1" class="form-control btn-success" onchange="VerificarSintaxisEditor(this.value)">
+							<option value="0"><?php echo $MULTILANG_PCODER_No; ?></option>
+							<option value="1"><?php echo $MULTILANG_PCODER_Si; ?></option>
+						</select>
+				</div>
+				<div class="col-lg-6">
+					<!--
+						<label for="verificacion_autocompletado"><?php echo $MULTILANG_PCODER_RevisarSintaxis; ?></label>
+						<select id="verificacion_autocompletado" size="1" class="form-control btn-success" onchange="VerificarAutocompletadoEditor(this.value)">
+							<option value="0"><?php echo $MULTILANG_PCODER_No; ?></option>
+							<option value="1"><?php echo $MULTILANG_PCODER_Si; ?></option>
+						</select>
+					-->
+				</div>
+			</div>
     <?php 
         $barra_herramientas_modal='
         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_PCODER_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';

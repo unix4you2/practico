@@ -31,7 +31,7 @@
 
 		<div id="contenedor_menu" >
 
-			<nav class="navbar navbar-default navbar-inverse" style="margin:0px; padding:0px;"> <!-- navbar-fixed-top navbar-fixed-bottom navbar-static-top navbar-inverse -->
+			<nav class="navbar navbar-default navbar-inverse navbar-xs" style="margin:0px; padding:0px;"> <!-- navbar-fixed-top navbar-fixed-bottom navbar-static-top navbar-inverse -->
 				<div class="container-fluid">
 					<!-- Logo y boton colapsable -->
 					<div class="navbar-header">
@@ -52,7 +52,7 @@
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $MULTILANG_PCODER_Archivo; ?> <span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a id="boton_navegador_archivos" data-toggle="modal"  href="#NavegadorArchivos" OnClick="ExplorarPath();">   <i class="fa fa-folder-open fa-fw"></i> <?php echo $MULTILANG_PCODER_Abrir; ?></a>		</li>
+									<li><a id="boton_navegador_archivos" data-toggle="modal"  href="#NavegadorArchivos" OnClick="ActivarPanelIzquierdo();">   <i class="fa fa-folder-open fa-fw"></i> <?php echo $MULTILANG_PCODER_Abrir; ?></a>		</li>
 									<li><a id="boton_guardar"            OnClick="Guardar();" href="#VentanaAlmacenamiento">					<i class="fa fa-floppy-o fa-fw"></i> <?php echo $MULTILANG_PCODER_Guardar; ?>			<span class="pull-right text-muted small"><i>Ctrl+S</i></span></a></li>
 									<li role="separator" class="divider"></li>
 									<li><a href="javascript:self.close();"><i class="fa fa-times fa-fw"></i> <?php echo $MULTILANG_PCODER_Salir; ?>: <?php echo $MULTILANG_PCODER_CerrarVentana; ?></a></li>
@@ -72,6 +72,8 @@
 									<li role="separator" class="divider"></li>
 									<li><a href="#" OnClick="editor.execCommand('find');"><i class="fa fa-search fa-fw"></i> <?php echo $MULTILANG_PCODER_Buscar; ?></a></li>
 									<li><a href="#" OnClick="editor.execCommand('replace');"><i class="fa fa-exchange fa-fw"></i> <?php echo $MULTILANG_PCODER_Reemplazar; ?></a></li>
+									<li role="separator" class="divider"></li>
+									<li><a data-toggle="modal" href="#myModalPREFERENCIAS"><i class="fa fa-wrench fa-fw text-warning"></i> <?php echo $MULTILANG_PCODER_Preferencias; ?></a></li>
 								</ul>
 							</li>
 							<!--<li><a href="#">EJEMPLO ENLACE</a></li>-->
@@ -112,7 +114,6 @@
 						</ul>
 							
 						<ul class="nav navbar-nav navbar-right">
-							<a data-toggle="modal" href="#myModalPREFERENCIAS" class="navbar-text"><i class="fa fa-wrench fa-fw text-info"></i> <?php echo $MULTILANG_PCODER_Preferencias; ?></a>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-question-circle text-info"></i> <?php echo $MULTILANG_PCODER_Ayuda; ?> <span class="caret"></span></a>
 								<ul class="dropdown-menu">
