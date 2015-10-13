@@ -436,10 +436,10 @@ if ($PCO_Accion=="aplicar_parche")
 						for ($i=0; $i<sizeof($lista_contenido); $i++)
 							{
 								//Si el archivo destino existe entonces lo agrega a la lista de archivos del backup
-								if (file_exists($lista_contenido[$i][filename]) && !is_dir($lista_contenido[$i][filename]))
+								if (@file_exists($lista_contenido[$i][filename]) && @!is_dir($lista_contenido[$i][filename]))
 									{
-										$lista_archivos_a_comprimir.=$lista_contenido[$i][filename].",";
-										echo "<li> ".$MULTILANG_HaciendoBkp.": ".$lista_contenido[$i][filename];
+										@$lista_archivos_a_comprimir.=$lista_contenido[$i][filename].",";
+										echo "<li> ".$MULTILANG_HaciendoBkp.": ".@$lista_contenido[$i][filename];
 									}
 							}
 						$lista_archivos_a_comprimir=substr($lista_archivos_a_comprimir, 0, strlen($lista_archivos_a_comprimir)-1);
