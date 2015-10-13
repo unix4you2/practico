@@ -4628,7 +4628,7 @@ function construir_consulta_informe($informe,$evitar_campos_ocultos=0)
 					$nombre_campo=$registro_campos["valor_campo"].$posfijo_campo;
 
 					//Agrega el campo a la consulta si no se encuentra en el arreglo de ocultos o no se quieren evitar esos campos
-					if (!in_array($nombre_campo,$PCO_ColumnasOcultas) || $evitar_campos_ocultos==0)
+					if (@!in_array($nombre_campo,$PCO_ColumnasOcultas) || $evitar_campos_ocultos==0)
 						$consulta.=$nombre_campo.",";
 				}
 
@@ -4723,6 +4723,8 @@ function construir_consulta_informe($informe,$evitar_campos_ocultos=0)
 			if (!$hay_condiciones)
 			$consulta.=" 1 ";
 
+			//Busca si debe ser ordenado o agrupado
+			$registro_informe=ejecutar_sql("SELECT agrupamiento,ordenamiento FROM ".$TablasCore."informe WHERE id=? ","$informe")->fetch();
 			if (@$registro_informe["agrupamiento"]!="")
 				{
 					$campoagrupa=$registro_informe["agrupamiento"];
@@ -4796,7 +4798,7 @@ function generar_etiquetas_consulta($ConsultaSQL="",$informe)
                             }
                     }
 			}
-		$Resultados[]=array(ColumnasVisibles => $PCO_ColumnasVisibles, NumerosColumnasOcultas=>$PCO_NumerosColumnasOcultas	,NumeroColumnas => $numero_columnas);
+		@$Resultados[]=array(ColumnasVisibles => $PCO_ColumnasVisibles, NumerosColumnasOcultas=>$PCO_NumerosColumnasOcultas	,NumeroColumnas => $numero_columnas);
 		return $Resultados;
 	}
 
@@ -4953,7 +4955,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							for ($i=0;$i<$EtiquetasConsulta[0]["NumeroColumnas"];$i++)
 								{
 									//Muestra la columna solo si no se trata de una de las ocultas
-									if (!in_array($i,$EtiquetasConsulta[0]["NumerosColumnasOcultas"]))
+									if (@!in_array($i,$EtiquetasConsulta[0]["NumerosColumnasOcultas"]))
 										{											
 											$SalidaFinalInforme.= '<td>'.$registro_informe[$i].'</td>';
 										}
@@ -4976,7 +4978,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					//Cuando es embebido (=1) no agrega los totales de registro
 					if (!$embebido)
 						{
-							$SalidaFinalInforme.= '<tfoot>
+							@$SalidaFinalInforme.= '<tfoot>
 								<tr><td colspan='.$numero_columnas.'>
 									<b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
 								</td></tr>';

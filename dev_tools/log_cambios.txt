@@ -46,11 +46,13 @@ LogCambios="
 * Added: Acceso y conteo de menues creados en el panel de inicio del admin
 * Added: Actualizacion completa de PCoder a su última versión
 * Fixed: Se evita inclusión del módulo PCoder directamente desde Práctico pues ya es autogestionado
+* Fixed: [Tester: Jaime Berrio A.] Cláusulas ORDER BY y GROUP BY no son tomadas en informes
 * Enhan: Controles de acceso por sesion para pbrowser
 * Enhan: La inclusion de JQuery es cambiada al principio para tenerla siempre disponible
 * Enhan: Mejora en maquetacion para adicion de controles a formularios ahorra espacio y permite vistas previas
 * Enhan: Mejorada la maquetación en el panel de inicio para el admin
 * Enhan: Las funciones personalizadas de JS de los form se agregan al final de todo el documento
+* Enhan: Ocultados warnings innecesarios en generacion de informes para el modo de depuracion
 "
 
 ########################################################################
