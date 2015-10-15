@@ -299,6 +299,10 @@
 													$tamano_archivo = $_FILES[$variable_de_archivo]['size']; //Tamano del archivo cargado
 													$nombre_archivo_temporal = $_FILES[$variable_de_archivo]['tmp_name']; //Nombre del archivo temporal en servidor
 													$peso_final_permitido=$registro_campos["peso_archivo"]*1024;
+													//Determina la extension del archivo
+													$extension_archivo=end(explode(".", $nombre_archivo));
+													if ($extension_archivo==$nombre_archivo) $extension_archivo="";
+													
 													// Comprueba tamano del archivo
 													if ($tamano_archivo > $peso_final_permitido)
 														{
@@ -340,6 +344,10 @@
 																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
 															$cadena_formato_a_buscar="_MICRO_";
 															$cadena_formato_a_reemplazar=date("u");
+															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
+																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
+															$cadena_formato_a_buscar="_EXTENSION_";
+															$cadena_formato_a_reemplazar=$extension_archivo;
 															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
 																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
 															// Intenta la carga del archivo solo si realmente se recibio uno
