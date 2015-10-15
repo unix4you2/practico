@@ -73,6 +73,15 @@ function PCO_ObtenerContenidoAjax(PCO_ASINCRONICO,PCO_URL,PCO_PARAMETROS)
             return contenido_recibido;
     }
 
+function PCOJS_StrReplace(busca_por, reemplaza_por, cadena_original)
+    {
+    	str 	= new String(cadena_original);
+    	rExp	= "/"+busca_por+"/g";
+    	rExp	= eval(rExp);
+    	newS	= String(reemplaza_por);
+    	str = new String(str.replace(rExp, newS));
+    	return str;
+    }
 
 function PCOJS_MostrarMensaje(TituloPopUp, Mensaje)
 	{

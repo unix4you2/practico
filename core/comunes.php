@@ -4906,6 +4906,13 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 						//Carga la ventana con el informe
 						abrir_ventana($TituloVentanaInforme,'panel panel-info',$registro_informe["ancho"]);
+						
+						//Agrega la descripcion del informe en caso de contar con ella
+						if ($registro_informe["descripcion"]!='')
+							{
+								 mensaje('<i class="fa fa-flag fa-fw"></i>',$registro_informe["descripcion"], '', '', 'alert alert-success alert-dismissible');
+							}
+						
 					}
 
 				// Si se ha definido un tamano fijo entonces crea el marco
@@ -4921,8 +4928,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					//Si el informe va a soportar datatable entonces lo agrega a las tablas que deben ser convertidas en el pageonload
 					if ($registro_informe["soporte_datatable"]=="S")
 						@$PCO_InformesDataTable.="TablaInforme_".$registro_informe["id"]."|";
-					$SalidaFinalInforme.= '<table class="table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead><tr>';
-
+					$SalidaFinalInforme.= '<!--<div class="table-responsive">-->
+											<table class="table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead><tr>';
 
 					//Busca si tiene acciones (botones) para cada registro y los genera
 					$cadena_generica_botones=generar_botones_informe($informe);
@@ -4983,8 +4990,10 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 									<b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
 								</td></tr>';
 						}
+					//Cierra pie de pagina, tabla y marco responsive para la tabla
 					$SalidaFinalInforme.= '</tfoot>
-							</table>';
+							</table>
+							<!--</div>-->';
 				// DEPRECATED $SalidaFinalInforme.= '</body></html>';
 
 				//Imprime el HTML generado para el informe

@@ -45,6 +45,9 @@ LogCambios="
 * Added: Acceso y conteo de informes en el panel de inicio del admin
 * Added: Acceso y conteo de menues creados en el panel de inicio del admin
 * Added: Actualizacion completa de PCoder a su última versión
+* Added: Se imprime la descripción de los informes en la parte superior de los mismos cuando esta es diligenciada
+* Added: Marco responsive para tablas muy extensas permite ahora desplazarlas horizontalmente
+* Added: Nueva funcion PCOJS_StrReplace() disponible como un equivalente de str_replace de PHP en JavaScript
 * Fixed: Se evita inclusión del módulo PCoder directamente desde Práctico pues ya es autogestionado
 * Fixed: [Tester: Jaime Berrio A.] Cláusulas ORDER BY y GROUP BY no son tomadas en informes
 * Enhan: Controles de acceso por sesion para pbrowser

@@ -217,6 +217,7 @@
                 for ($i=0; $i<count($TablasDataTable);$i++)
                     echo '$("#'.$TablasDataTable[$i].'").dataTable(
                         {
+                            "scrollX": true,
                             "language": {
                                 "lengthMenu": "'.$MULTILANG_Mostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
                                 "zeroRecords": "Nothing found - sorry",
