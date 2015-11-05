@@ -269,6 +269,8 @@
 	$MULTILANG_DefPcoder='Editor de c&oacute;digo en l&iacute;nea';
 	$MULTILANG_DefLimpiarTemp='Limpiar carpeta de trabajo /tmp';
 	$MULTILANG_DefLimpiarBackups='Limpiar copias de seguridad existentes en /bkp';
+	$MULTILANG_DefPMyDB='Administrador avanzado de base de datos';
+	$MULTILANG_ConfirmaPMyDB='IMPORTANTE: La incorrecta manipulacion de las tablas y su informacion por medio del administrador avanzado de base de datos puede ocasionar perdida parcial o total de la informacion asi como funcionamientos impredecibles en su aplicacion.  Se recomienda utilizar este gestor de base de datos con el cuidado que implica.';
 
 	//Cierre de sesion
 	$MULTILANG_SesionCerrada='Su sesi&oacute;n ha sido cerrada';

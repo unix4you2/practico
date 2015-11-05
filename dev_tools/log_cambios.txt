@@ -30,6 +30,7 @@ inc/practico/def_basedatos.php
 mod/pbrowser/index.php
 mod/pbrowser/core/index.php
 mod/pcoder/*
+mod/pmydb/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -49,6 +50,7 @@ LogCambios="
 * Added: Marco responsive para tablas muy extensas permite ahora desplazarlas horizontalmente
 * Added: Nueva funcion PCOJS_StrReplace() disponible como un equivalente de str_replace de PHP en JavaScript
 * Added: Nuevo formato en carga de archivos permite extraer la extension del archivo original
+* Added: Administrador completo para el motor de base de datos basado en PMyDB https://github.com/unix4you2/pmydb
 * Fixed: Se evita inclusión del módulo PCoder directamente desde Práctico pues ya es autogestionado
 * Fixed: [Tester: Jaime Berrio A.] Cláusulas ORDER BY y GROUP BY no son tomadas en informes
 * Enhan: Controles de acceso por sesion para pbrowser

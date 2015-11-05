@@ -249,7 +249,7 @@
             if (file_exists("mod/".$PCOVAR_Elemento."/index.php"))
 				{
 					//Incluye el archivo menos algunos modulos especiales de la herramienta
-					if ($PCOVAR_Elemento!="pcoder")
+					if ($PCOVAR_Elemento!="pcoder" && $PCOVAR_Elemento!="pmydb")
 						include("mod/".$PCOVAR_Elemento."/index.php");
 				}
             else

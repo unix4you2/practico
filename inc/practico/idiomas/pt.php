@@ -269,6 +269,8 @@
 	$MULTILANG_DefPcoder='Editor de c&oacute;digo on-line';
 	$MULTILANG_DefLimpiarTemp='Pasta tempor&aacute;ria limpo /tmp';
 	$MULTILANG_DefLimpiarBackups='Backups limpas existentes sobre / bkp';
+	$MULTILANG_DefPMyDB='Administrador de banco de dados avançada';
+	$MULTILANG_ConfirmaPMyDB='IMPORTANTE: O manuseio inadequado das mesas e informações por meio de banco de dados administrador avançado pode causar perda parcial ou total de informações, bem como performances imprevisíveis na sua aplicação. Recomendamos a utilização deste gerenciador de banco com o cuidado envolvido.';
 
 	//Cierre de sesion
 	$MULTILANG_SesionCerrada='Sua sessão foi encerrada';

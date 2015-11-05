@@ -127,7 +127,30 @@
 								<?php
 									$PCO_EnlacePCODER="javascript:PCO_VentanaPopup('mod/pcoder','Pcoder','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=1024, height=700');";
 								?>
-								<a data-toggle="modal" class="btn btn-primary btn-block" href="<?php echo $PCO_EnlacePCODER; ?>"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: PCoder</a>
+								<a class="btn btn-primary btn-block" href="<?php echo $PCO_EnlacePCODER; ?>"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: PCoder</a>
+								
+								<!-- Formulario para la carga directa de PMyDB -->
+								<form target="_blank" action='mod/pmydb/index.php' method='post' name="PMyDB">
+									<?php 
+										//Establece el motor predefinido para PMyDB segun el establecido en Practico
+										if ($MotorBD=="mysql") $MotorPMyDB="server";
+										//if ($MotorBD=="") $MotorPMyDB="sqlite";
+										if ($MotorBD=="sqlite") $MotorPMyDB="sqlite2";
+										if ($MotorBD=="pgsql") $MotorPMyDB="pgsql";
+										if ($MotorBD=="oracle") $MotorPMyDB="oracle";
+										if ($MotorBD=="mssql" || $MotorBD=="sqlsrv") $MotorPMyDB="mssql";
+										if ($MotorBD=="fbd") $MotorPMyDB="firebird";
+										//if ($MotorBD=="") $MotorPMyDB="simpledb";
+										//if ($MotorBD=="") $MotorPMyDB="mongo";
+										//if ($MotorBD=="") $MotorPMyDB="elastic";
+									?>
+									<input type="hidden" name="auth[driver]"	value="<?php echo $MotorPMyDB; ?>">
+									<input type="hidden" name="auth[server]"	value="<?php echo $ServidorBD; ?>">
+									<input type="hidden" name="auth[username]"	value="<?php echo $UsuarioBD; ?>">
+									<input type="hidden" name="auth[password]"	value="<?php echo $PasswordBD; ?>">
+									<input type="hidden" name="auth[db]"		value="<?php echo $BaseDatos; ?>">
+								</form><br>
+								<a class="btn btn-warning btn-block" href="javascript:if(confirm('<?php echo $MULTILANG_ConfirmaPMyDB; ?>'))document.PMyDB.submit();"><i class="fa fa-database fa-fw"></i> <?php echo $MULTILANG_DefPMyDB; ?>: PMyDB</a>
 
 							</div> <!--well-->
 						</div>

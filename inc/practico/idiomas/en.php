@@ -269,6 +269,8 @@
 	$MULTILANG_DefPcoder='Online code editor';
 	$MULTILANG_DefLimpiarTemp='Clean temporary folder /tmp';
 	$MULTILANG_DefLimpiarBackups='Clean existing backups on /bkp';
+	$MULTILANG_DefPMyDB='Advanced database administrator';
+	$MULTILANG_ConfirmaPMyDB='IMPORTANT: Improper handling of the tables and their information through advanced database administrator may cause partial or total loss of information as well as unpredictable performances in its application. We recommend using this database manager with the care involved.';
 
 	//Cierre de sesion
 	$MULTILANG_SesionCerrada='Your session has been closed';
