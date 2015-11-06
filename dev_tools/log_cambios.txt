@@ -51,6 +51,7 @@ LogCambios="
 * Added: Nueva funcion PCOJS_StrReplace() disponible como un equivalente de str_replace de PHP en JavaScript
 * Added: Nuevo formato en carga de archivos permite extraer la extension del archivo original
 * Added: Administrador completo para el motor de base de datos basado en PMyDB https://github.com/unix4you2/pmydb
+* Added: Ahora los informes pueden ser personalizados para permitir edicion en linea con datatables
 * Fixed: Se evita inclusión del módulo PCoder directamente desde Práctico pues ya es autogestionado
 * Fixed: [Tester: Jaime Berrio A.] Cláusulas ORDER BY y GROUP BY no son tomadas en informes
 * Enhan: Controles de acceso por sesion para pbrowser

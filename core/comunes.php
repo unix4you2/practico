@@ -4806,6 +4806,98 @@ function generar_etiquetas_consulta($ConsultaSQL="",$informe)
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: campos_reales_informe
+	Retorna un arreglo con nombres de campos completos, sus nombres reales en base de datos y los nombres de las tablas correspondientes
+
+	Variables de entrada:
+
+		informe - ID de informe lo usa para conocer todas sus columnas
+
+	Salida:
+
+		* Variable de tipo arreglo con los Resultados
+
+	Ver tambien:
+		<cargar_informe>
+*/
+function campos_reales_informe($informe)
+	{
+		global $ConexionPDO,$ArchivoCORE,$TablasCore;
+		global $ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas;
+
+			//Busca los CAMPOS definidos para el informe y sus TABLAS correspondientes
+			$ListaCampos_NombreCompleto=array();	//Nombre completo del campo
+			$ListaCampos_NombreSimple=array();		//Lado izquierdo solamente cuando se cuenta con Alias
+			$ListaTablas_NombreSimple=array();		//Nombre de la tabla de donde sale el campo
+			$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY peso","$informe");
+			while ($registro_campos = $consulta_campos->fetch())
+				{
+					//Si tiene alias definido lo agrega
+					$posfijo_campo="";
+					if ($registro_campos["valor_alias"]!="") $posfijo_campo=" as ".$registro_campos["valor_alias"];
+					$nombre_campo=$registro_campos["valor_campo"].$posfijo_campo;
+
+					//Agrega el campo a la lista de nombres completos
+					$ListaCampos_NombreCompleto[]=$nombre_campo;
+					
+					//Establece el nombre del campo simple (el real en base de datos)
+						//Elimina la posibilidad de un alias " as " tomando la primera parte solamente
+						$PartesListaCampos_NombreCompleto=explode(" as ",$nombre_campo);
+						$nombre_campo_simple=$PartesListaCampos_NombreCompleto[0];
+						//Elimina la posibilidad de un punto " . " indicando la tabla
+						if (strpos($nombre_campo_simple,"."))
+							{
+								$PartesListaCampos_NombreCompleto=explode(".",$nombre_campo_simple);
+								$nombre_campo_simple=$PartesListaCampos_NombreCompleto[1];
+							}
+
+					//Agrega el campo a la lista de nombres simples
+					$ListaCampos_NombreSimple[]=$nombre_campo_simple;
+					
+					//Determina la tabla a la que pertenece el campo
+					//Se verifica inicialmente si el campo ya indica la tabla para evitar ambiguedades en consultas de varias tablas
+					$PartesListaCampos_NombreCompleto=explode(" as ",$nombre_campo);
+					$nombre_campo_simple=$PartesListaCampos_NombreCompleto[0];
+					//Si el campo tiene puntos indica la tabla, sino la buscamos
+					if (strpos($nombre_campo_simple,"."))
+						{
+							$PartesListaCampos_NombreCompleto=explode(".",$nombre_campo_simple);
+							$nombre_tabla_simple=$PartesListaCampos_NombreCompleto[0];
+							$ListaTablas_NombreSimple[]=$nombre_tabla_simple;
+						}
+					else
+						{
+							$nombre_tabla_simple="";
+							//Busca en las TABLAS definidas para el informe
+							$consulta_tablas=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_tablas." FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
+							while ($registro_tablas = $consulta_tablas->fetch())
+								{
+									$tabla_actual=$registro_tablas["valor_tabla"];
+									//Si la tabla tiene alias lo ignora
+									if (strpos($tabla_actual," as "))
+										{
+											$PartesTablaActual=explode(" as ",$tabla_actual);
+											$tabla_actual=$PartesTablaActual[0];
+										}
+									//Si no se ha encontrado la tabla entra a comparar frente a la actual
+									if ($nombre_tabla_simple=="")
+										{
+											if (existe_campo_tabla($nombre_campo_simple,$tabla_actual))
+												$nombre_tabla_simple=$tabla_actual;
+										}
+								}
+							$ListaTablas_NombreSimple[]=$nombre_tabla_simple;
+						}
+				}
+
+		@$Resultados[]=array(ListaCampos_NombreCompleto => $ListaCampos_NombreCompleto, ListaCampos_NombreSimple=>$ListaCampos_NombreSimple	,ListaTablas_NombreSimple => $ListaTablas_NombreSimple);
+		return $Resultados;
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: cargar_informe
 	Genera el codigo HTML correspondiente a un informe de la aplicacion y hace los llamados necesarios para la diagramacion por pantalla de los diferentes objetos que lo componen.
 
@@ -4951,10 +5043,13 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 						}
 					$SalidaFinalInforme.= '</tr></thead><tbody>';
 
+					//Busca los campos y tablas reales del informe para construir luego los ID unicos
+					$CamposReales=campos_reales_informe($informe);
+
 					// Imprime registros del resultado
 					$numero_filas=0;
 					$consulta_ejecucion=ejecutar_sql($consulta);
-				
+
 					//Procesa resultados solo si es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch(), rowCount() y demas metodos
 					while($consulta_ejecucion!="1" && $registro_informe=$consulta_ejecucion->fetch())
 						{
@@ -4963,14 +5058,23 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 								{
 									//Muestra la columna solo si no se trata de una de las ocultas
 									if (@!in_array($i,$EtiquetasConsulta[0]["NumerosColumnasOcultas"]))
-										{											
-											$SalidaFinalInforme.= '<td>'.$registro_informe[$i].'</td>';
+										{
+											$ValorCampoIdentificador=$registro_informe[0]; //Toma por ahora el primer campo (OCULTO O NO)
+											$Nombre_CampoLlave=$CamposReales[0]["ListaCampos_NombreSimple"][0]; //Toma por ahora el primer campo (OCULTO O NO)
+											$Nombre_CampoEditable=$CamposReales[0]["ListaCampos_NombreSimple"][$i];
+											$Nombre_TablaEditable=$CamposReales[0]["ListaTablas_NombreSimple"][$i];
+											$IdentificadorDeCampoEditable="$Nombre_TablaEditable:$Nombre_CampoEditable:$Nombre_CampoLlave:$ValorCampoIdentificador";
+											
+											//Agregar validacion para poner el id solamente cuando se desea editar
+											
+											$SalidaFinalInforme.= '
+												<td id="'.$IdentificadorDeCampoEditable.'" contenteditable="true">'.$registro_informe[$i].'</td>';
 										}
 								}
 							//Si el informe tiene botones los agrega
 							if ($cadena_generica_botones!="")
 								{
-									//Transforma la cadena generica con los datos especificos del registro, toma por ahora el primer campo
+									//Transforma la cadena generica con los datos especificos del registro, toma por ahora el primer campo (OCULTO O NO)
 									$cadena_botones_registro=str_replace("DELFRMVALVALOR",$registro_informe[0],$cadena_generica_botones);
 									$cadena_botones_registro=str_replace("DETFRMVALBASE",$registro_informe[0],$cadena_botones_registro);
 									//Muestra los botones preparados para el registro
