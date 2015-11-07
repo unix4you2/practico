@@ -753,6 +753,7 @@
 	$MULTILANG_BtnEstiloInformacion='सूचना शैली';
 	$MULTILANG_BtnEstiloAdvertencia='चेतावनी शैली';
 	$MULTILANG_BtnEstiloPeligro='डेंजर शैली';
+	$MULTILANG_InfEditableLinea='ऑनलाइन संपादन योग्य';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='संपादन मेनू आइटम';

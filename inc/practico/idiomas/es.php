@@ -750,6 +750,7 @@
 	$MULTILANG_BtnEstiloInformacion='Estilo informacion';
 	$MULTILANG_BtnEstiloAdvertencia='Estilo advertencia';
 	$MULTILANG_BtnEstiloPeligro='Estilo peligro';
+	$MULTILANG_InfEditableLinea='Editable en l&iacute;nea';
 	
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';

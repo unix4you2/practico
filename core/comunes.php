@@ -4829,6 +4829,7 @@ function campos_reales_informe($informe)
 			$ListaCampos_NombreCompleto=array();	//Nombre completo del campo
 			$ListaCampos_NombreSimple=array();		//Lado izquierdo solamente cuando se cuenta con Alias
 			$ListaTablas_NombreSimple=array();		//Nombre de la tabla de donde sale el campo
+			$ListaCampos_PermitirEdicion=array();	//Guarda los estados de edicion en linea para el campo
 			$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY peso","$informe");
 			while ($registro_campos = $consulta_campos->fetch())
 				{
@@ -4839,6 +4840,9 @@ function campos_reales_informe($informe)
 
 					//Agrega el campo a la lista de nombres completos
 					$ListaCampos_NombreCompleto[]=$nombre_campo;
+					
+					//Agrega el estado de edicion o no para el campo
+					$ListaCampos_PermitirEdicion[]=$registro_campos["editable"];
 					
 					//Establece el nombre del campo simple (el real en base de datos)
 						//Elimina la posibilidad de un alias " as " tomando la primera parte solamente
@@ -4890,7 +4894,7 @@ function campos_reales_informe($informe)
 						}
 				}
 
-		@$Resultados[]=array(ListaCampos_NombreCompleto => $ListaCampos_NombreCompleto, ListaCampos_NombreSimple=>$ListaCampos_NombreSimple	,ListaTablas_NombreSimple => $ListaTablas_NombreSimple);
+		@$Resultados[]=array(ListaCampos_NombreCompleto => $ListaCampos_NombreCompleto, ListaCampos_NombreSimple=>$ListaCampos_NombreSimple	,ListaTablas_NombreSimple => $ListaTablas_NombreSimple, ListaCampos_PermitirEdicion => $ListaCampos_PermitirEdicion);
 		return $Resultados;
 	}
 
@@ -5065,10 +5069,13 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 											$Nombre_TablaEditable=$CamposReales[0]["ListaTablas_NombreSimple"][$i];
 											$IdentificadorDeCampoEditable="$Nombre_TablaEditable:$Nombre_CampoEditable:$Nombre_CampoLlave:$ValorCampoIdentificador";
 											
-											//Agregar validacion para poner el id solamente cuando se desea editar
+											//Determina la activacion o no de la cadena de edicion del campo
+											$CadenaActivadora_Edicion="";
+											if ($CamposReales[0]["ListaCampos_PermitirEdicion"][$i]==1)
+												$CadenaActivadora_Edicion=' id="'.$IdentificadorDeCampoEditable.'" contenteditable="true" ';
 											
 											$SalidaFinalInforme.= '
-												<td id="'.$IdentificadorDeCampoEditable.'" contenteditable="true">'.$registro_informe[$i].'</td>';
+												<td '.$CadenaActivadora_Edicion.' >'.$registro_informe[$i].'</td>';
 										}
 								}
 							//Si el informe tiene botones los agrega
@@ -5266,8 +5273,11 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 					tabla - Nombre de la tabla que contiene el registro a actualizar.
 					campo - Nombre del campo que sera actualizado.
-					id - Identificador unico del campo a ser actualizado.
+					id - Valor Identificador unico del campo a ser actualizado.
+					PCO_CambioEstado_CampoLlave - Nombre del campo que sera utulizado para comparar.  Si no se recibe se asume id
 					valor - Valor a ser asignado en el campo del registro cuyo identificador coincida con el recibido.
+					PCO_CambioEstado_NegarRetorno - Determina si se debe o no retornar despues de un cambio.  Valor vacio hace que se ejecute la operacion por defecto y retorne.
+					PCO_CambioEstado_NoUsarCore - Determina si anular o no el prefijo de tablas Core de la operacion. 1=anula, otros valores dejaran el prefijo core
 
 				Salida:
 
@@ -5282,19 +5292,27 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
                     if (@$formulario!="") $TipoCampo.="Frm:".$formulario;
                     if (@$informe!="") $TipoCampo.="Inf:".$informe;
                     
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."$tabla SET $campo = $valor WHERE id = ? ","$id");
+                    //Define el campo sobre el cual se hace la operacion
+                    if (@$PCO_CambioEstado_CampoLlave=="")	$PCO_CambioEstado_CampoLlave="id";
+                    
+                    //Algunas operaciones requieren por defecto usar los prefijos Core.  Si se desea pueden anularse con el parametro en 1
+                    $PrefijoTablas=$TablasCore;
+                    if ($PCO_CambioEstado_NoUsarCore==1) $PrefijoTablas="";
+                    
+					ejecutar_sql_unaria("UPDATE ".$PrefijoTablas."$tabla SET $campo = '$valor' WHERE $PCO_CambioEstado_CampoLlave = ? ","$id");
 					@auditar("Cambia estado del campo $campo en objetoID $TipoCampo");
-
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="'.$accion_retorno.'">
-						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="formulario" value="'.@$formulario.'">
-						<input type="Hidden" name="informe" value="'.@$informe.'">
-						<input type="Hidden" name="popup_activo" value="'.$popup_activo.'">
-						<script type="" language="JavaScript">
-						//setTimeout ("document.cancelar.submit();", 10); 
-						document.cancelar.submit();
-						</script>';
+					
+					if (@$PCO_CambioEstado_NegarRetorno=="")
+						echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+							<input type="Hidden" name="PCO_Accion" value="'.$accion_retorno.'">
+							<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+							<input type="Hidden" name="formulario" value="'.@$formulario.'">
+							<input type="Hidden" name="informe" value="'.@$informe.'">
+							<input type="Hidden" name="popup_activo" value="'.$popup_activo.'">
+							<script type="" language="JavaScript">
+							//setTimeout ("document.cancelar.submit();", 10); 
+							document.cancelar.submit();
+							</script>';
 				}
 			else
 				{

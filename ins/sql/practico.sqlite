@@ -195,7 +195,8 @@ CREATE TABLE core_informe_campos (
   valor_campo text,
   valor_alias text,
   peso integer,
-  visible integer DEFAULT 1
+  visible integer DEFAULT 1,
+  editable integer DEFAULT 0
 
 );
 

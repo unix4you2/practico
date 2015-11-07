@@ -94,12 +94,26 @@
 						<p id="PCO_Modal_MensajeCargandoCuerpo"></p>
 						<div align="right"><i class="fa fa-circle-o-notch fa-fw fa-spin fa-1x"></i></div>
 						
-						<a href="javascript:PCOJS_OcultarMensajeCargando();">saaa</a>
+						<a href="javascript:PCOJS_OcultarMensajeCargando();"><?php echo $MULTILANG_Cerrar; ?></a>
 					</div>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
 
+		<!-- Modal para mensajes de carga -->
+		<div id="PCO_Modal_MensajeCargandoSimple" class="modal" data-backdrop="false">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-body" align="center">
+						<div class="progress" id="PCO_Modal_MensajeCargandoBarra">
+							<div id="PCO_Modal_MensajeCargandoPorcentaje" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+						</div>
+						<i class="fa fa-circle-o-notch fa-fw fa-spin fa-1x"></i> <?php echo $MULTILANG_Guardando; ?>...
+						
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 
 
     </div>
@@ -235,6 +249,26 @@
                     );';
             ?>
         });
+
+		//Si hay tablas con propiedad de editables espera por eventos sobre sus campos
+		$(function(){
+			$("td[contenteditable=true]").blur(function(){
+				var nuevo_valor_campo = $(this).text();
+				var datos_campo_peticion = $(this).attr("id");
+				var partes_campo_peticion = datos_campo_peticion.split(":");
+				var tabla_peticion=partes_campo_peticion[0];
+				var campo_peticion=partes_campo_peticion[1];
+				var PCO_CambioEstado_CampoLlave=partes_campo_peticion[2];
+				var id_peticion=partes_campo_peticion[3];
+				
+				var ParametrosApertura="PCO_Accion=cambiar_estado_campo&Presentar_FullScreen=1&PCO_CambioEstado_NoUsarCore=1&PCO_CambioEstado_NegarRetorno=1&tabla="+tabla_peticion+"&campo="+campo_peticion+"&id="+id_peticion+"&valor="+nuevo_valor_campo+"&PCO_CambioEstado_CampoLlave="+PCO_CambioEstado_CampoLlave;
+				Actualizacion=PCO_ObtenerContenidoAjax(1,"index.php",ParametrosApertura);
+				
+				//Presenta mensaje temporal de actualizacion durante 1 segundo
+				PCOJS_MostrarMensajeCargandoSimple(1000);
+			});
+		});
+
     </script>
 
     <?php

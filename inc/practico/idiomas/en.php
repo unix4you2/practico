@@ -753,6 +753,7 @@
 	$MULTILANG_BtnEstiloInformacion='Information style';
 	$MULTILANG_BtnEstiloAdvertencia='Warning style';
 	$MULTILANG_BtnEstiloPeligro='Danger style';
+	$MULTILANG_InfEditableLinea='Online editable';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';

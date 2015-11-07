@@ -753,6 +753,7 @@
 	$MULTILANG_BtnEstiloInformacion='Estilo de Informação';
 	$MULTILANG_BtnEstiloAdvertencia='Aviso estilo';
 	$MULTILANG_BtnEstiloPeligro='Estilo de perigo';
+	$MULTILANG_InfEditableLinea='edit&aacute;vel on-line';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Editar item de menu';

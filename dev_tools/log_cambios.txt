@@ -51,20 +51,24 @@ LogCambios="
 * Added: Nueva funcion PCOJS_StrReplace() disponible como un equivalente de str_replace de PHP en JavaScript
 * Added: Nuevo formato en carga de archivos permite extraer la extension del archivo original
 * Added: Administrador completo para el motor de base de datos basado en PMyDB https://github.com/unix4you2/pmydb
-* Added: Ahora los informes pueden ser personalizados para permitir edicion en linea con datatables
+* Added: Ahora los informes pueden ser personalizados para permitir edicion en linea de algunas de sus columnas por los usuarios
+* Added: Nuevas función permite visualizar mensajes de carga temporales durante ciertos milisegundos PCOJS_MostrarMensajeCargandoSimple(Milisegundos);
 * Fixed: Se evita inclusión del módulo PCoder directamente desde Práctico pues ya es autogestionado
 * Fixed: [Tester: Jaime Berrio A.] Cláusulas ORDER BY y GROUP BY no son tomadas en informes
+* Fixed: Eliminado texto innecesario en mensajes de progreso
 * Enhan: Controles de acceso por sesion para pbrowser
 * Enhan: La inclusion de JQuery es cambiada al principio para tenerla siempre disponible
 * Enhan: Mejora en maquetacion para adicion de controles a formularios ahorra espacio y permite vistas previas
 * Enhan: Mejorada la maquetación en el panel de inicio para el admin
 * Enhan: Las funciones personalizadas de JS de los form se agregan al final de todo el documento
 * Enhan: Ocultados warnings innecesarios en generacion de informes y aplicacion de parches de actualización en modo de depuración
+
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
+ALTER TABLE core_informe_campos ADD COLUMN editable INT(1) NULL DEFAULT '0';
 "
 
 ########################################################################

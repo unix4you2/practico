@@ -144,6 +144,26 @@ function PCOJS_MostrarMensajeCargando(TituloPopUp, Mensaje, PermitirCierre, Prog
 		$("#PCO_Modal_MensajeCargando").css("z-index", "1500");
 	}
 
+function PCOJS_MostrarMensajeCargandoSimple(MiliSegundos)
+	{
+		// Se muestra el cuadro modal
+		$('#PCO_Modal_MensajeCargandoSimple').modal('show');
+
+		//Hacer que la ventana este siempre por encima
+		$("#PCO_Modal_MensajeCargandoSimple").css("z-index", "1500");
+		
+		//Si recibe un valor de segundos diferente de cero entonces programa el cierre automatico
+		if (MiliSegundos!=0)
+			setTimeout(function(){PCOJS_OcultarMensajeCargandoSimple()},MiliSegundos);
+	}
+
+function PCOJS_OcultarMensajeCargandoSimple()
+	{
+		// Se oculta el cuadro modal
+		$('#PCO_Modal_MensajeCargandoSimple').modal('hide');
+		$('#PCO_Modal_MensajeCargandoSimple').hide();
+	}
+
 function PCOJS_ActualizarComboBox(ObjetoListaOpciones)
     {
 		//Actualiza el listpicker y sus opciones identificado por el nombre del campo o id
