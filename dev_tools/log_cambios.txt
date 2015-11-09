@@ -20,8 +20,11 @@ core/informes.php
 core/formularios.php
 core/marco_abajo.php
 core/marco_admin.php
+core/marco_arriba.php
 core/marco_arriba_bs.php
+core/marco_navizq.php
 core/marco_dev.php
+core/menus.php
 inc/bootstrap/css/practico.min.css
 inc/ace/*
 inc/bootstrap/js/practico.min.js
@@ -56,6 +59,7 @@ LogCambios="
 * Fixed: Se evita inclusión del módulo PCoder directamente desde Práctico pues ya es autogestionado
 * Fixed: [Tester: Jaime Berrio A.] Cláusulas ORDER BY y GROUP BY no son tomadas en informes
 * Fixed: Eliminado texto innecesario en mensajes de progreso
+* Fixed: Opciones de menu son presentadas de manera consistente de acuerdo a su peso
 * Enhan: Controles de acceso por sesion para pbrowser
 * Enhan: La inclusion de JQuery es cambiada al principio para tenerla siempre disponible
 * Enhan: Mejora en maquetacion para adicion de controles a formularios ahorra espacio y permite vistas previas

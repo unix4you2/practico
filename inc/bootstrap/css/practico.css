@@ -65,6 +65,9 @@ ESTILOS ADICIONALES PARA BOOTSTRAP
   width: 90%;
 }
 
+/* Boton del menu responsive siempre visible */
+/*.navbar-toggle { display:block; } */
+
 /* ANIMACIONES */
 *.texto-blink {
     -moz-animation: blink 2s infinite linear;

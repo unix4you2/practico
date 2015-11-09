@@ -840,7 +840,7 @@ if ($PCO_Accion=="administrar_menu")
 					$Complemento_tablas=",".$TablasCore."usuario_menu";
 					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
-			$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_escritorio=1 ".@$Complemento_condicion);
+			$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_escritorio=1 ".@$Complemento_condicion." ORDER BY peso");
 
 			// Imprime las opciones con sus formularios
 			while($registro = $resultado->fetch())

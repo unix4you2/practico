@@ -41,7 +41,6 @@
             <div id="barra_navegacion_izquierda" class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     
-                    
                     <!--INICIO DE OPCIONES BARRA LATERAL-->
                         <ul class="nav" id="side-menu">
                             
@@ -90,7 +89,7 @@
                                         $Complemento_tablas=",".$TablasCore."usuario_menu";
                                         $Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
                                     }
-                                $resultado=ejecutar_sql("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_izquierda=1 ".@$Complemento_condicion);
+                                $resultado=ejecutar_sql("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_izquierda=1 ".@$Complemento_condicion." ORDER BY peso");
 
                                 while($registro = $resultado->fetch())
                                     {
