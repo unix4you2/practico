@@ -2017,7 +2017,7 @@ function ventana_login()
 			Function: ventana_login
 			Despliega la ventana de ingreso al sistema con el formulario para usuario, contrasena y captcha.
 		*/
-		  global $ArchivoCORE,$LlaveDePaso;
+		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor;
 		  global $MULTILANG_Cerrar,$MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes,$MULTILANG_Registrarme,$MULTILANG_OlvideClave;
 			// Variables para OAuth desde el archivo de configuracion
 			global $APIGoogle_ClientId,$APIGoogle_ClientSecret;
@@ -2185,14 +2185,22 @@ function ventana_login()
                                         -->
                                     </div>
                                     <div class="col-md-6">
-                                        <form name="recuperacion" id="recuperacion" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-                                        <input type="Hidden" name="PCO_Accion" value="recuperar_contrasena">
-                                        <input type="Hidden" name="PCO_SubAccion" value="formulario_recuperacion">
-                                        </form>
-                                        <a class="btn btn-xs" onClick="document.recuperacion.submit();">
-                                            <i class="fa fa-unlock-alt"></i>
-                                            <?php echo $MULTILANG_OlvideClave; ?>
-                                        </a>
+										<?php
+											//Presenta opciones de recuperacion solamente cuando el motor de autenticacion sea practico
+											if ($Auth_TipoMotor=="practico")
+												{
+										?>
+													<form name="recuperacion" id="recuperacion" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+													<input type="Hidden" name="PCO_Accion" value="recuperar_contrasena">
+													<input type="Hidden" name="PCO_SubAccion" value="formulario_recuperacion">
+													</form>
+													<a class="btn btn-xs" onClick="document.recuperacion.submit();">
+														<i class="fa fa-unlock-alt"></i>
+														<?php echo $MULTILANG_OlvideClave; ?>
+													</a>
+										<?php
+												}
+										?>
                                     </div>
                                 </div>
                                 
