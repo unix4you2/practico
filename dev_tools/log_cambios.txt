@@ -66,7 +66,7 @@ LogCambios="
 * Enhan: Mejorada la maquetación en el panel de inicio para el admin
 * Enhan: Las funciones personalizadas de JS de los form se agregan al final de todo el documento
 * Enhan: Ocultados warnings innecesarios en generacion de informes y aplicacion de parches de actualización en modo de depuración
-
+* Enhan: La opción para recuperación de contraseña en el login es presentada sólo para el motor de autenticación interna de Práctico.  Motores federados o externos no tendrían por qué presentarla.
 "
 
 ########################################################################
