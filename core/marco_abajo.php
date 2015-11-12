@@ -108,7 +108,7 @@
 						<div class="progress" id="PCO_Modal_MensajeCargandoBarra">
 							<div id="PCO_Modal_MensajeCargandoPorcentaje" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
 						</div>
-						<i class="fa fa-circle-o-notch fa-fw fa-spin fa-1x"></i> <?php echo $MULTILANG_Guardando; ?>...
+						<i class="fa fa-circle-o-notch fa-fw fa-spin fa-1x"></i> <?php echo $MULTILANG_Cargando; ?>...
 						
 					</div>
 				</div><!-- /.modal-content -->
