@@ -56,6 +56,7 @@ LogCambios="
 * Added: Administrador completo para el motor de base de datos basado en PMyDB https://github.com/unix4you2/pmydb
 * Added: Ahora los informes pueden ser personalizados para permitir edicion en linea de algunas de sus columnas por los usuarios
 * Added: Nuevas función permite visualizar mensajes de carga temporales durante ciertos milisegundos PCOJS_MostrarMensajeCargandoSimple(Milisegundos);
+* Added: Las condiciones de filtrado en controles de listas de seleccion y listas de radio ahora aceptan multiples variables encerradas entre llaves
 * Fixed: Se evita inclusión del módulo PCoder directamente desde Práctico pues ya es autogestionado
 * Fixed: [Tester: Jaime Berrio A.] Cláusulas ORDER BY y GROUP BY no son tomadas en informes
 * Fixed: Eliminado texto innecesario en mensajes de progreso
@@ -68,6 +69,7 @@ LogCambios="
 * Enhan: Ocultados warnings innecesarios en generacion de informes y aplicacion de parches de actualización en modo de depuración
 * Enhan: La opción para recuperación de contraseña en el login es presentada sólo para el motor de autenticación interna de Práctico.  Motores federados o externos no tendrían por qué presentarla.
 * Enhan: Las alertas sobre el directorio de instalacion presente y la actualizacion de datos son ahora presentadas al usuario administrador solamente y en el escritorio.
+* Enhan: Las listas de radio limpian sus valores vacios presentando solamente aquellos con informacion y opciones validas
 "
 
 ########################################################################

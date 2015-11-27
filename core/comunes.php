@@ -3090,21 +3090,31 @@ function selector_iconos_awesome()
 								$condicion_filtrado_listas="1";
                             else
 								{
-									//Evalua casos donde se tienen variables PHP escapadas por llaves.  Ej  "%{$Variable}%" si fuera para un LIKE, por ejemplo o para una variable en un where  campo="{$Variable}"
-									if (strpos($condicion_filtrado_listas,"{")!==FALSE && strrpos($condicion_filtrado_listas,"}")!==FALSE)
+									//Mientras existan llaves abriendo y cerrando dentro de la condicion intenta establecer valor de variables
+									$SalidaFiltradoBypass=0;
+									while(strpos($condicion_filtrado_listas,"{")!==FALSE && strpos($condicion_filtrado_listas,"}")!==FALSE && $SalidaFiltradoBypass==0)
 										{
-											//Determina las posiciones de las llaves en la cadena
-											$PosLlaveIzquierda=strpos($condicion_filtrado_listas,"{");
-											$PosLlaveDerecha=strrpos($condicion_filtrado_listas,"}");
-											//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
-											$NombreVariable=substr($condicion_filtrado_listas,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
-											//Si la variable no esta definida la busca en el entorno global
-											global $$NombreVariable;
-											if (@isset($NombreVariable))
+											//Evalua casos donde se tienen variables PHP escapadas por llaves.  Ej  "%{$Variable}%" si fuera para un LIKE, por ejemplo o para una variable en un where  campo="{$Variable}"
+											if (strpos($condicion_filtrado_listas,"{")!==FALSE && strpos($condicion_filtrado_listas,"}")!==FALSE)
 												{
-													$ValorVariable=${$NombreVariable};
-													//Reemplaza el valor encontrado en la cadena de valor original
-													$condicion_filtrado_listas=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$condicion_filtrado_listas);								
+													//Determina las posiciones de las llaves en la cadena
+													$PosLlaveIzquierda=strpos($condicion_filtrado_listas,"{");
+													$PosLlaveDerecha=strpos($condicion_filtrado_listas,"}");
+													//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
+													$NombreVariable=substr($condicion_filtrado_listas,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
+													//Si la variable no esta definida la busca en el entorno global
+													global $$NombreVariable;
+													if (@isset($NombreVariable))
+														{
+															$ValorVariable=${$NombreVariable};
+															//Reemplaza el valor encontrado en la cadena de valor original
+															$condicion_filtrado_listas=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$condicion_filtrado_listas);								
+														}
+													else
+														{
+															//Puede que no se logre reemplazar nada porque la variable no esta definida entonces sale por ByPass para evitar ciclo infinito
+															$SalidaFiltradoBypass=1;
+														}
 												}
 										}
 								}
@@ -3360,6 +3370,10 @@ $('#SampleElement').load('YourURL');
 			$opciones_lista = explode(",", $registro_campos["lista_opciones"]);
 			$valores_lista = explode(",", $registro_campos["lista_opciones"]);
 			
+			//Elimina los elementos vacios de los arreglos
+			$opciones_lista = array_filter($opciones_lista);
+			$valores_lista = array_filter($valores_lista);
+
 			// Si se desea tomar los valores del combo desde una tabla hace la consulta
 			if ($registro_campos["origen_lista_opciones"]!="" && $registro_campos["origen_lista_valores"]!="")
 				{
@@ -3369,7 +3383,38 @@ $('#SampleElement').load('YourURL');
 					$campo_opciones=$registro_campos["origen_lista_opciones"];
 					//Define si los registros a mostrar en la lista deben estar filtrados por alguna condicion
 					$condicion_filtrado_listas=$registro_campos["condicion_filtrado_listas"];
-					if ($condicion_filtrado_listas=="") $condicion_filtrado_listas="1";
+					if ($condicion_filtrado_listas=="")
+						$condicion_filtrado_listas="1";
+					else
+						{
+							//Mientras existan llaves abriendo y cerrando dentro de la condicion intenta establecer valor de variables
+							$SalidaFiltradoBypass=0;
+							while(strpos($condicion_filtrado_listas,"{")!==FALSE && strpos($condicion_filtrado_listas,"}")!==FALSE && $SalidaFiltradoBypass==0)
+								{
+									//Evalua casos donde se tienen variables PHP escapadas por llaves.  Ej  "%{$Variable}%" si fuera para un LIKE, por ejemplo o para una variable en un where  campo="{$Variable}"
+									if (strpos($condicion_filtrado_listas,"{")!==FALSE && strpos($condicion_filtrado_listas,"}")!==FALSE)
+										{
+											//Determina las posiciones de las llaves en la cadena
+											$PosLlaveIzquierda=strpos($condicion_filtrado_listas,"{");
+											$PosLlaveDerecha=strpos($condicion_filtrado_listas,"}");
+											//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
+											$NombreVariable=substr($condicion_filtrado_listas,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
+											//Si la variable no esta definida la busca en el entorno global
+											global $$NombreVariable;
+											if (@isset($NombreVariable))
+												{
+													$ValorVariable=${$NombreVariable};
+													//Reemplaza el valor encontrado en la cadena de valor original
+													$condicion_filtrado_listas=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$condicion_filtrado_listas);								
+												}
+											else
+												{
+													//Puede que no se logre reemplazar nada porque la variable no esta definida entonces sale por ByPass para evitar ciclo infinito
+													$SalidaFiltradoBypass=1;
+												}
+										}
+								}
+						}
 					// Consulta los campos para el tag select
 					$resultado_opciones=ejecutar_sql("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE $condicion_filtrado_listas ORDER BY $campo_opciones");
 					// Muestra resultados solo si $resultado_opciones es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch()
@@ -3379,6 +3424,7 @@ $('#SampleElement').load('YourURL');
 							$valores_lista[] = $registro_opciones["valores"];
 						}
 				}
+
 
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="")
