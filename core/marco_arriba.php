@@ -74,7 +74,11 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <br>
+						<?php
+							//Agrega un enter minimo para las paginas si hay sesion activa
+							if ($PCOSESS_SesionAbierta)
+								echo '<br>';
+						?>
 						<div id="PCODIV_ArribaMenuSuperior"></div>
 						<?php
 							//Presenta advertencia sobre el modo de depuracion.  Se asume que debe estar siempre apagado en produccion

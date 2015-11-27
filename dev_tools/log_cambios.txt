@@ -70,6 +70,7 @@ LogCambios="
 * Enhan: La opción para recuperación de contraseña en el login es presentada sólo para el motor de autenticación interna de Práctico.  Motores federados o externos no tendrían por qué presentarla.
 * Enhan: Las alertas sobre el directorio de instalacion presente y la actualizacion de datos son ahora presentadas al usuario administrador solamente y en el escritorio.
 * Enhan: Las listas de radio limpian sus valores vacios presentando solamente aquellos con informacion y opciones validas
+* Enhan: Se evita salto de linea adicional en secciones sin sesion activa
 "
 
 ########################################################################
