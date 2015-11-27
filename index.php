@@ -196,10 +196,10 @@
         if (@$PCO_ErrorDetener=="1") die();
     }
 
-    // Si existe el directorio de instalacion y no es modo fullscreen presenta un mensaje constante de advertencia
-    if (@file_exists("ins") && @$Presentar_FullScreen!=1) {
-        mensaje($MULTILANG_TituloInsExiste, $MULTILANG_TextoInsExiste, '', 'fa fa-exclamation-triangle fa-5x texto-rojo texto-blink', 'alert alert-warning alert-dismissible');
-    }
+	// Si existe el directorio de instalacion y no es modo fullscreen presenta un mensaje constante de advertencia en el escritorio
+	if (@file_exists("ins") && @$PCOSESS_LoginUsuario=="admin" && @$Presentar_FullScreen!=1 && $PCO_Accion=="Ver_menu") {
+		mensaje($MULTILANG_TituloInsExiste, $MULTILANG_TextoInsExiste, '', 'fa fa-exclamation-triangle fa-5x texto-rojo texto-blink', 'alert alert-warning alert-dismissible');
+	}
 
 	//Despliega escritorio del admin
 	if (@$PCOSESS_LoginUsuario=="admin" && $PCOSESS_SesionAbierta && $PCO_Accion=="Ver_menu") {

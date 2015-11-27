@@ -828,8 +828,10 @@ if ($PCO_Accion=="administrar_menu")
 	Ver tambien:
 		<administrar_menu>
 */
+
 	if ($PCO_Accion=="Ver_menu" && $PCOSESS_SesionAbierta)
 		{ 
+			
 			// Carga las opciones del ESCRITORIO
 			echo '
 			<div id="PCODIV_ArribaEscritorio"></div>
