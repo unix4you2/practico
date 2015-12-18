@@ -134,4 +134,4 @@ ListaExcluidos=" skin/nomo_editada\* mod/ldap\* mod/pam\* mod/pdf\* core/configu
 #     done
 #   IFS=$oldIFS  #Restauramos el IFS
 #
-#Fuentes: patorjk.com/software/taag/  (Favoritas: Small y Standar)
+#Fuentes: patorjk.com/software/taag/  (Favoritas: Small, Standar y Mini)
