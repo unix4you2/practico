@@ -151,15 +151,24 @@ Group: Mod  {
       File: Idioma hindi para modulo de PBrowser  (mod/pbrowser/inc/idiomas/hi.php)
       File: Idioma ingles para modulo de PBrowser  (mod/pbrowser/inc/idiomas/en.php)
       File: Idioma portugues para modulo de PBrowser  (mod/pbrowser/inc/idiomas/pt.php)
-      File: PCO_PBrowser  (mod/pbrowser/index.php)
       }  # Group: Pbrowser
 
    File: pcc_erp/index.php  (mod/pcc_erp/index.php)
 
    Group: Pcoder  {
 
-      File: http://stackoverflow.com/questions/15186558/loading-a-html-file-into-ace-editor-pre-tag  (mod/pcoder/controlador/controlador.php)
-      File: PCODER - Practico CODe EditoR  (mod/pcoder/index.php)
+      File: http://stackoverflow.com/questions/15186558/loading-a-html-file-into-ace-editor-pre-tag  (mod/pcoder/inc/comunes.php)
+
+      Group: Idiomas  {
+
+         File: Idioma espanol para modulo de PCoder  (mod/pcoder/idiomas/es.php)
+         File: Idioma hindi para modulo de PBrowser  (mod/pcoder/idiomas/hi.php)
+         File: Idioma ingles para modulo de PCoder  (mod/pcoder/idiomas/en.php)
+         File: Idioma portugues para modulo de PCoder  (mod/pcoder/idiomas/pt.php)
+         }  # Group: Idiomas
+
+      File: index.php  (mod/pcoder/index.php)
+      File: PCOMOD_ExplorarPath  (mod/pcoder/explorador.php)
       }  # Group: Pcoder
 
    File: probar_ejemplo_mvc  (mod/mvc/index.php)

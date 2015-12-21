@@ -45,35 +45,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Funciones para operar listas de selección: PCOJS_ActualizarComboBox(), PCOJS_LimpiarComboBox(), PCOJS_AgregarOpcionComboBox(), PCOJS_OpcionesCombo_DesdeCSV()
-* Added: Seleccion visual de los estilos para botones de informes, acciones de formularios y botones sobre formularios
-* Added: Acceso y conteo de informes en el panel de inicio del admin
-* Added: Acceso y conteo de menues creados en el panel de inicio del admin
-* Added: Actualizacion completa de PCoder a su última versión
-* Added: Se imprime la descripción de los informes en la parte superior de los mismos cuando esta es diligenciada
-* Added: Marco responsive para tablas muy extensas permite ahora desplazarlas horizontalmente
-* Added: Nueva funcion PCOJS_StrReplace() disponible como un equivalente de str_replace de PHP en JavaScript
-* Added: Nuevo formato en carga de archivos permite extraer la extension del archivo original
-* Added: Administrador completo para el motor de base de datos basado en PMyDB https://github.com/unix4you2/pmydb
-* Added: Ahora los informes pueden ser personalizados para permitir edicion en linea de algunas de sus columnas por los usuarios
-* Added: Nuevas función permite visualizar mensajes de carga temporales durante ciertos milisegundos PCOJS_MostrarMensajeCargandoSimple(Milisegundos);
-* Added: Las condiciones de filtrado en controles de listas de seleccion y listas de radio ahora aceptan multiples variables encerradas entre llaves
-* Added: Los procesos de importacion de tablas pueden ser ahora intervenidos indicando los campos ignorados, campos fijos y valores de campos fijos mediante listas que utilicen la variable de $_SeparadorCampos_.  Las listas posibles son: $PCO_lista_campos_ignorados, $PCO_lista_campos_fijos y $PCO_lista_valores_fijos
-* Added: Los procesos de importacion soportan ahora el establecimiento de politicas de accion para los tipos de registro encontrados.  La unicidad de los registros puede ser establecida por dos variables: $PCO_condicion_fija_campo_unico con condiciones fijas para el WHERE y $PCO_condicion_variable_campos_llave con la lista de campos separada por comas para aquellos campos que deben ser comparados dinamicamente con su valor actual
-* Fixed: Se evita inclusión del módulo PCoder directamente desde Práctico pues ya es autogestionado
-* Fixed: [Tester: Jaime Berrio A.] Cláusulas ORDER BY y GROUP BY no son tomadas en informes
-* Fixed: Eliminado texto innecesario en mensajes de progreso
-* Fixed: Opciones de menu son presentadas de manera consistente de acuerdo a su peso
-* Enhan: Controles de acceso por sesion para pbrowser
-* Enhan: La inclusion de JQuery es cambiada al principio para tenerla siempre disponible
-* Enhan: Mejora en maquetacion para adicion de controles a formularios ahorra espacio y permite vistas previas
-* Enhan: Mejorada la maquetación en el panel de inicio para el admin
-* Enhan: Las funciones personalizadas de JS de los form se agregan al final de todo el documento
-* Enhan: Ocultados warnings innecesarios en generacion de informes y aplicacion de parches de actualización en modo de depuración
-* Enhan: La opción para recuperación de contraseña en el login es presentada sólo para el motor de autenticación interna de Práctico.  Motores federados o externos no tendrían por qué presentarla.
-* Enhan: Las alertas sobre el directorio de instalacion presente y la actualizacion de datos son ahora presentadas al usuario administrador solamente y en el escritorio.
-* Enhan: Las listas de radio limpian sus valores vacios presentando solamente aquellos con informacion y opciones validas
-* Enhan: Se evita salto de linea adicional en secciones sin sesion activa
+
 "
 
 ########################################################################
