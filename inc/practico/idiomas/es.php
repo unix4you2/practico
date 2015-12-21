@@ -878,6 +878,8 @@
     $MULTILANG_TblTablaImportacion='Por favor seleccione la tabla sobre la cual desea importar los datos';
     $MULTILANG_TblCorrespondencia='Correspondencia entre campos de tabla y columnas de archivo';
     $MULTILANG_TblApareaMsg='Revise al lado izquierdo los campos de la tabla y la columna apareada por su nombre desde la lista de seleccion.  Si es necesario haga los apareamientos manuales segun la vista previa de las columnas existentes en el archivo en la parte superior. <br><br>Los campos sin aparear seran ignorados y llenados con el valor predeterminado que se tenga en el motor.';
+    $MULTILANG_TblPoliticaImportacion='<b>Qu&eacute; hacer si un registro que se est&aacute; importando ya existe?:</b><br>Especifique c&oacute;mo quiere que sea procesado cada registro duplicado o ya existente en el sistema en caso que al tratar de importarlo ya se encuentre en la base de datos.';
+    $MULTILANG_TblIgnorarRegistro='Ignorar el registro';
     
 	//Usuarios
 	$MULTILANG_UsrCopia='Copia de permisos finalizada.  Por favor verifique a continuacion.';

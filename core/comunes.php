@@ -436,7 +436,12 @@ function opciones_combo_desdecsv($lista_opciones,$caracter_separador,$valor_comp
 */
 function aparear_campostabla_vs_hojacalculo($NombreTabla,$PathArchivo)
 	{
-		global $MULTILANG_Campo,$MULTILANG_Columna,$MULTILANG_Tablas,$MULTILANG_Archivo;
+		global $MULTILANG_Campo,$MULTILANG_Columna,$MULTILANG_Tablas,$MULTILANG_Archivo,$_SeparadorCampos_,$MULTILANG_Campo,$MULTILANG_Deshabilitado,$MULTILANG_FrmPredeterminado;
+		//Obtiene posibles variables de filtro globales
+		global $PCO_lista_campos_ignorados,$PCO_lista_campos_fijos,$PCO_lista_valores_fijos;
+		$ArregloCamposIgnorados=explode($_SeparadorCampos_,$PCO_lista_campos_ignorados);
+		$ArregloCamposFijos=explode($_SeparadorCampos_,$PCO_lista_campos_fijos);
+		$ArregloValoresFijos=explode($_SeparadorCampos_,$PCO_lista_valores_fijos);
 
 		$SalidaFormateada.='<table class="table table-condensed btn-xs table-hover table-striped table-unbordered table-responsive" id="TablaArchivoCSV_Apareado"><thead><tr>
 			<th>'.$MULTILANG_Campo.' ('.$MULTILANG_Tablas.')</th>
@@ -462,6 +467,15 @@ function aparear_campostabla_vs_hojacalculo($NombreTabla,$PathArchivo)
 					$SalidaFormateada.= '<td><i class="fa fa-exchange"></i></td>';
 					//Genera combo de columnas de archivo preseleccionando uno si aplica
 					$OpcionesCombo=opciones_combo_desdecsv($ListaColumnas,"|",strtolower($CamposTabla[$i]["nombre"]),1); //Solicita el indice en lugar del valor
+					
+					//Si el campo es un campo ignorado deja un combo vacio
+					if (  in_array($CamposTabla[$i]["nombre"],$ArregloCamposIgnorados)  )
+						$OpcionesCombo='<option value="">'.$MULTILANG_Campo.' '.strtoupper($CamposTabla[$i]["nombre"]).' '.$MULTILANG_Deshabilitado.'</option>';
+						
+					//Si el campo es un campo de valor fijo lo indica en el combo pero como valor queda ignorado
+					if (  in_array($CamposTabla[$i]["nombre"],$ArregloCamposFijos)  )
+						$OpcionesCombo='<option value="">'.$MULTILANG_Campo.' '.strtoupper($CamposTabla[$i]["nombre"]).' '.$MULTILANG_FrmPredeterminado.'='.$ArregloValoresFijos[array_search($CamposTabla[$i]["nombre"], $ArregloCamposFijos)].'</option>';
+
 					//Presenta combo
 					$SalidaFormateada.= '<td><select id="PCO_campoimportado_'.strtolower($CamposTabla[$i]["nombre"]).'" name="PCO_campoimportado_'.strtolower($CamposTabla[$i]["nombre"]).'" class="btn btn-xs btn-default">'.$OpcionesCombo.'</select></td>';
 				$SalidaFormateada.= '</tr>';

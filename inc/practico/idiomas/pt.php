@@ -881,7 +881,9 @@
     $MULTILANG_TblTablaImportacion='Por favor, selecione a tabela na qual você deseja importar os dados';
     $MULTILANG_TblCorrespondencia='A correspondência entre os campos e colunas de arquivo da tabela';
     $MULTILANG_TblApareaMsg='Confira os campos no lado esquerdo da tabela e acompanhado por seu nome da lista de seleção de coluna. Se for necess&aacute;rio fazer manuais os emparelhamentos visualizar acordo com as colunas existentes no arquivo na parte superior. <br> não pareado Campos ser&aacute; ignorado e preenchido com o valor padrão &eacute; levado para dentro do motor';
-
+	$MULTILANG_TblPoliticaImportacion='<b>O que fazer se um registro que está sendo importado já existe?:</b><br>Especifique como você deseja que ele seja processado cada registro duplicado no sistema em caso Ao tentar importar Já no banco de dados.';
+	$MULTILANG_TblIgnorarRegistro='Ignorar o registro';
+	
 	//Usuarios
 	$MULTILANG_UsrCopia='Permissões de c&oacute;pia conclu&iacute;da. Por favor, verifique abaixo.';
 	$MULTILANG_UsrDesPW='Senhas com condições m&iacute;nimas de segurança deve ter um comprimento de <b>pelo menos 8 caracteres</b>, n&uacute;meros, letras mai&uacute;sculas e min&uacute;sculas, como s&iacute;mbolos <font color=blue>$ * </font>. Para ter sua senha &eacute; considerado seguro por este sistema <b> deve cumprir pelo menos um n&iacute;vel de segurança 81%</b>';

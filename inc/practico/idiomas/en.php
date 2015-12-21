@@ -881,7 +881,9 @@
     $MULTILANG_TblTablaImportacion='Please select the table on which you want to import data';
     $MULTILANG_TblCorrespondencia='Correspondence between table fields and columns of file';
     $MULTILANG_TblApareaMsg='Check the fields on the left side of the table and matched by their name from the selection list column. If necessary make the pairings manuals preview according to existing columns in the file at the top. <br> <br> unpaired Fields will be ignored and filled with the default value is taken into the engine';
-
+	$MULTILANG_TblPoliticaImportacion='<b>What to do if a record that is being imported already exists?:</b><br>Specify how you want it to be processed each duplicate record in the system in case when trying to import already in the database.';
+	$MULTILANG_TblIgnorarRegistro='Ignore the record';
+	
 	//Usuarios
 	$MULTILANG_UsrCopia='Permissions copy completed. Please check below.';
 	$MULTILANG_UsrDesPW='Passwords with minimum safety conditions should have a length of <b>at least 8 characters</b>, numbers, uppercase and lowercase symbols such as <font color=blue>$ * </font>. To have your password is considered safe by this system <b> must meet at least one security level of 81%</b>';

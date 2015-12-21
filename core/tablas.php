@@ -802,6 +802,18 @@ if ($PCO_Accion=="confirmar_importacion_tabla")
 */
 if ($PCO_Accion=="ejecutar_importacion_csv")
 	{
+		//Define los arreglos con campos fijos, sus valores y campos ignorados
+		$ArregloCamposIgnorados=explode($_SeparadorCampos_,$PCO_lista_campos_ignorados);
+		$ArregloCamposFijos=explode($_SeparadorCampos_,$PCO_lista_campos_fijos);
+		$ArregloValoresFijos=explode($_SeparadorCampos_,$PCO_lista_valores_fijos);
+		$ArregloCamposLlave=explode(",",$PCO_condicion_variable_campos_llave);
+		
+		$RegistrosIgnorados=0;
+		$RegistrosInsertados=0;
+		
+		//Si no recibe una condicion de filtrado fija entonces asigna una minima (1==1)
+		if ($PCO_condicion_fija_campo_unico=="") $PCO_condicion_fija_campo_unico=" 1==1 ";
+		
 		echo "<br>";
 		$mensaje_error="";
 		abrir_ventana($MULTILANG_Importar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
@@ -833,6 +845,7 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 								//Busca por cada campo de tabla algun equivalente en las columnas
 								$ListaCamposImportacion="";
 								$ListaValoresImportacion="";
+								$ListaCamposLlaveUnica="";
 								for($i=0;$i<count($CamposTabla);$i++)
 									{				
 										$CampoAProcesar = $CamposTabla[$i]["nombre"];
@@ -844,14 +857,43 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 											{
 												$ListaCamposImportacion.=$CampoAProcesar.",";
 												$ListaValoresImportacion.='"'.$objPHPExcel->getActiveSheet()->getCellByColumnAndRow($ColumnaDinamicaArchivo-1, $Fila)->getFormattedValue().'",';
+												
+												//Verifica si el campo es de tipo llave unica y lo agrega a los campos de condicion
+												if (  in_array($CamposTabla[$i]["nombre"],$ArregloCamposLlave)  )
+													$ListaCamposLlaveUnica.=$CampoAProcesar."='".$objPHPExcel->getActiveSheet()->getCellByColumnAndRow($ColumnaDinamicaArchivo-1, $Fila)->getFormattedValue()."' AND ";
 											}
 									}
+								
+								//Agrega los campos de valor fijo, que se supone no fueron agregados a la consulta en el FOR previo
+								for($i=0;$i<count($ArregloCamposFijos);$i++)
+									{				
+										$ListaCamposImportacion.=$ArregloCamposFijos[$i].",";
+										$ListaValoresImportacion.='"'.$ArregloValoresFijos[$i].'",';
+									}
+
 								//Elimina coma en la lista de campos y valores
 								$ListaCamposImportacion=substr($ListaCamposImportacion, 0, strlen($ListaCamposImportacion)-1);
 								$ListaValoresImportacion=substr($ListaValoresImportacion, 0, strlen($ListaValoresImportacion)-1);
-								//Ejecuta la consulta
+								//Construye la consulta
 								$ConsultaImportacionSQL="INSERT INTO $nombre_tabla ($ListaCamposImportacion) VALUES ($ListaValoresImportacion) ";
-								ejecutar_sql($ConsultaImportacionSQL);
+								
+								//Verifica si el registro ya existe o no segun los campos de llave y si realmente recibio listas y campos para filtrar
+								if ($ListaCamposLlaveUnica=="") $ListaCamposLlaveUnica=" 1==1 AND ";
+								if ($ListaCamposLlaveUnica!=" 1==1 AND " || $PCO_condicion_fija_campo_unico!=" 1==1 ")
+									{
+										$ConsultaUnicidad="SELECT id FROM $nombre_tabla WHERE $ListaCamposLlaveUnica $PCO_condicion_fija_campo_unico ";
+										$registro_existencia=ejecutar_sql($ConsultaUnicidad)->fetch();
+										if ($registro_existencia["id"]!="")
+											{
+												$RegistrosIgnorados++;
+											}
+										else
+											{
+												//Ejecuta la consulta
+												ejecutar_sql($ConsultaImportacionSQL);
+												$RegistrosInsertados++;
+											}
+									}
 							}
 						else
 							{
@@ -860,7 +902,9 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 						$Fila++;
 					}
 				$Fila-=2; //Quita el encabezado y la ultima vacia
-				echo "<b>$MULTILANG_TotalRegistros:</b> $Fila<hr>";
+				echo "<hr><b>$MULTILANG_TotalRegistros:</b> $Fila <br>";
+				echo "<b>Insertados:</b> $RegistrosInsertados <br>";
+				echo "<b>Ignorados:</b> $RegistrosIgnorados<hr>";
 
 				//Presenta mensaje de finalizacion
 				echo '
@@ -901,25 +945,31 @@ if ($PCO_Accion=="analizar_importacion_csv")
 		<div class="row">
 			<div class="col col-md-12">
 				<?php
-					abrir_ventana($MULTILANG_InfCargaPrev.' '.str_replace("tmp/","",$archivo_cargado), 'panel-primary'); 
-					echo datatable_desde_hojacalculo($archivo_cargado,100);
+					abrir_ventana($MULTILANG_InfCargaPrev.' '.str_replace("tmp/","",$archivo_cargado).' (primeras 50 lineas - first 50 lines)', 'panel-primary'); 
+					echo datatable_desde_hojacalculo($archivo_cargado,50);
 				?>
 				<?php cerrar_ventana(); ?>
 			</div>
 		</div>
+		
+		<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 		<div class="row">
 			<div class="col col-md-6">
 				<?php
 					abrir_ventana($MULTILANG_TblCorrespondencia, 'panel-danger'); 
 				?>
-					<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="ejecutar_importacion_csv">
 						<input type="Hidden" name="archivo_cargado" value="<?php echo $archivo_cargado; ?>">
+						<input type="Hidden" name="PCO_lista_campos_fijos" value="<?php echo $PCO_lista_campos_fijos; ?>">
+						<input type="Hidden" name="PCO_lista_valores_fijos" value="<?php echo $PCO_lista_valores_fijos; ?>">
+						<input type="Hidden" name="PCO_lista_campos_ignorados" value="<?php echo $PCO_lista_campos_ignorados; ?>">
 						<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
+						<input type="Hidden" name="PCO_condicion_fija_campo_unico" value="<?php echo $PCO_condicion_fija_campo_unico; ?>">
+						<input type="Hidden" name="PCO_condicion_variable_campos_llave" value="<?php echo $PCO_condicion_variable_campos_llave; ?>">
 						<?php
 							echo aparear_campostabla_vs_hojacalculo($nombre_tabla,$archivo_cargado);
 						?>
-					</form>
+
 				<?php cerrar_ventana(); ?>
 			</div>
 			<div class="col col-md-6">
@@ -927,7 +977,15 @@ if ($PCO_Accion=="analizar_importacion_csv")
 						<div class="alert alert-warning">
 							<h3><?php echo $MULTILANG_Atencion; ?></h3>
 							<?php echo $MULTILANG_TblApareaMsg; ?><hr>
+							
+							<?php echo $MULTILANG_TblPoliticaImportacion; ?><hr>							
+							<select id="PCO_politica_registros_duplicados" name="PCO_politica_registros_duplicados" class="form-control btn-warning">
+								<option value="ignorar"><?php echo $MULTILANG_TblIgnorarRegistro; ?></option>
+							</select>
+							<hr>
+							
 							<b><?php echo $MULTILANG_Confirma; ?><br></b>
+							
 							<a class="btn btn-danger" href="javascript:document.datos.submit();"><i class="fa fa-arrow-circle-right"></i> <?php echo $MULTILANG_Si; ?>, <?php echo $MULTILANG_Importar; ?></a>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> <?php echo $MULTILANG_No; ?>, <?php echo $MULTILANG_Cancelar; ?></a>
@@ -936,6 +994,8 @@ if ($PCO_Accion=="analizar_importacion_csv")
 					</div>
 			</div>
 		</div>
+		</form>
+
 
 		<?php
 		cerrar_ventana();

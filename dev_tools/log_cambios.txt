@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno=""
-VersionCompatibleMes=""
+VersionCompatibleAno="16"
+VersionCompatibleMes="0"
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno=""
-VersionFinalMes=""
+VersionFinalAno="16"
+VersionFinalMes="1"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
@@ -25,6 +25,7 @@ core/marco_arriba_bs.php
 core/marco_navizq.php
 core/marco_dev.php
 core/menus.php
+core/tablas.php
 inc/bootstrap/css/practico.min.css
 inc/ace/*
 inc/bootstrap/js/practico.min.js
@@ -57,6 +58,8 @@ LogCambios="
 * Added: Ahora los informes pueden ser personalizados para permitir edicion en linea de algunas de sus columnas por los usuarios
 * Added: Nuevas función permite visualizar mensajes de carga temporales durante ciertos milisegundos PCOJS_MostrarMensajeCargandoSimple(Milisegundos);
 * Added: Las condiciones de filtrado en controles de listas de seleccion y listas de radio ahora aceptan multiples variables encerradas entre llaves
+* Added: Los procesos de importacion de tablas pueden ser ahora intervenidos indicando los campos ignorados, campos fijos y valores de campos fijos mediante listas que utilicen la variable de $_SeparadorCampos_.  Las listas posibles son: $PCO_lista_campos_ignorados, $PCO_lista_campos_fijos y $PCO_lista_valores_fijos
+* Added: Los procesos de importacion soportan ahora el establecimiento de politicas de accion para los tipos de registro encontrados.  La unicidad de los registros puede ser establecida por dos variables: $PCO_condicion_fija_campo_unico con condiciones fijas para el WHERE y $PCO_condicion_variable_campos_llave con la lista de campos separada por comas para aquellos campos que deben ser comparados dinamicamente con su valor actual
 * Fixed: Se evita inclusión del módulo PCoder directamente desde Práctico pues ya es autogestionado
 * Fixed: [Tester: Jaime Berrio A.] Cláusulas ORDER BY y GROUP BY no son tomadas en informes
 * Fixed: Eliminado texto innecesario en mensajes de progreso
