@@ -31,14 +31,12 @@ ESTILOS ADICIONALES PARA BOOTSTRAP
 }
 
 /* Define estilo especial para los dialogos modales de manera que se oscurezca el fondo */
-body.modal-open #wrap{
-    -webkit-filter: blur(7px);
-    -moz-filter: blur(25px);
-    -o-filter: blur(25px);
-    -ms-filter: blur(25px);
-    filter: blur(25px);
+.modal-backdrop.in
+{
+    opacity:0.8 !important;
+    position:fixed;// This makes it cover the entire scrollable page, not just browser height
+    height:100%;
 }
-.modal-backdrop {background: #000000;}
 
 
 
