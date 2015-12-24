@@ -819,7 +819,7 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 		abrir_ventana($MULTILANG_Importar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
 		
 		if ($archivo_cargado=="") $mensaje_error=$MULTILANG_ErrorTiempoEjecucion;
-
+		
 		if ($mensaje_error=="")
 			{
 				//Crea el objeto para lectura del archivo
@@ -832,6 +832,8 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 				$Fila=1;
 				$ColumnaDeLlave=0;
 				$FinEscaneo=0; //Pasa a 1 si se llega a una fila con la columna 0 vacia
+				$CadenaRegistrosInsertados="";
+				$CadenaRegistrosIgnorados="";
 
 				$Fila++; //Obvia la primera fila pues se trata del encabezado
 				while (!$FinEscaneo)
@@ -886,12 +888,14 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 										if ($registro_existencia["id"]!="")
 											{
 												$RegistrosIgnorados++;
+												$CadenaRegistrosIgnorados.=$ListaCamposLlaveUnica;
 											}
 										else
 											{
 												//Ejecuta la consulta
 												ejecutar_sql($ConsultaImportacionSQL);
 												$RegistrosInsertados++;
+												$CadenaRegistrosInsertados.=$ListaCamposLlaveUnica;
 											}
 									}
 							}
@@ -903,9 +907,34 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 					}
 				$Fila-=2; //Quita el encabezado y la ultima vacia
 				echo "<hr><b>$MULTILANG_TotalRegistros:</b> $Fila <br>";
-				echo "<b>Insertados:</b> $RegistrosInsertados <br>";
-				echo "<b>Ignorados:</b> $RegistrosIgnorados<hr>";
-
+		?>
+			<div class="panel-group" id="accordion">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><b>Total IMPORTADOS: <?php echo $RegistrosInsertados; ?></b>.  Clic para ver el detalle</a>
+						</h4>
+					</div>
+					<div id="collapseOne" class="panel-collapse collapse">
+						<div class="panel-body">
+							<p><?php echo str_replace(" AND ","<BR>",$CadenaRegistrosInsertados); ?></p>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><b>Total IGNORADOS: <?php echo $RegistrosIgnorados; ?></b>.  Clic para ver el detalle</a>
+						</h4>
+					</div>
+					<div id="collapseTwo" class="panel-collapse collapse">
+						<div class="panel-body">
+							<p><?php echo str_replace(" AND ","<BR>",$CadenaRegistrosIgnorados); ?></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php
 				//Presenta mensaje de finalizacion
 				echo '
 				<a class="btn btn-block btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
