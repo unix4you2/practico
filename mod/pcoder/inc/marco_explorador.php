@@ -22,28 +22,14 @@
 
     // EXPLORADOR DE ARCHIVOS
 	?>
-		<div class="" style="margin-left:15px;">
+		<div class="" style="margin-left:17px;">
 			<select id="path_exploracion_archivos" size="1" class="form-control btn-primary btn-xs" onchange="ExplorarPath()">
 				<option value="<?php echo $PCO_PCODER_RaizExploracionArchivos; ?>">     PATH: [<?php echo $PCO_PCODER_RaizExploracionArchivos; ?>] (<?php echo $MULTILANG_PCODER_Predeterminado; ?>)</option>
 				<optgroup label="<?php echo $MULTILANG_PCODER_Comunes; ?>">
-					<option value=".">[.] <?php echo $MULTILANG_PCODER_Path1Punto; ?></option>
-					<option value="../">[../] <?php echo $MULTILANG_PCODER_Path2Punto; ?></option>
-					<option value="../../">[../../] <?php echo $MULTILANG_PCODER_Path3Punto; ?></option>
-					<option value="../../../">[../../../] <?php echo $MULTILANG_PCODER_Path4Punto; ?></option>
-					<option value="<?php echo $_SERVER['DOCUMENT_ROOT']; ?>">[<?php echo $_SERVER['DOCUMENT_ROOT']; ?>] <?php echo $MULTILANG_PCODER_PathFull; ?></option>
+					<option value="/">[/] <?php echo $MULTILANG_PCODER_PathDisco; ?></option>
+					<option value="<?php echo $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR; ?>">[<?php echo $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR; ?>] <?php echo $MULTILANG_PCODER_PathFull; ?></option>
 				</optgroup>
 			</select>
 		</div>
-
-        <div id="progreso_marco_explorador">
-			<div class="progress">
-				<div class="progress-bar progress-bar-striped active progress-bar-warning" role="progressbar" aria-valuenow="100" style="width: 100%">
-					<i class="fa fa-circle-o-notch fa-spin"></i> <?php echo $MULTILANG_PCODER_Cargando; ?>
-				</div>
-			</div>
-        </div>
+		<div id="marco_explorador" class="explorador_archivos"></div>
 		
-        <div id="marco_explorador" class="embed-responsive embed-responsive-4by3" style="height:50vh;">
-			<iframe name="iframe_marco_explorador" id="iframe_marco_explorador" class="embed-responsive-item" src="" style=" overflow-x: hidden; overflow-y: hidden;"></iframe>
-        </div>
-

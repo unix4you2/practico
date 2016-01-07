@@ -31,26 +31,14 @@
 	/*	Define el Path inicial sobre el cual el usuario puede navegar
 		por el sistema de archivos del servidor para editarlos. A mayor
 		numero de carpetas a leer sera mas lenta la apertura del editor.
-		Posibles valores:	.							-> Directorio Actual de PCoder (generalmente sobre mod/pcoder)
+		Posibles valores:	/							-> Todo su disco!!!
+							.							-> Directorio Actual de PCoder (generalmente sobre mod/pcoder)
 							../							-> Raiz de PCoder (generalmente sobre mod/pcoder/mod)
 							../../						-> Raiz de PCoder (Donde reside LICENSE, AUTHORS, Etc)
 							../../../  					-> Raiz Instalacion PCoder cuando es independiente o Raiz de Practico si esta como modulo
 							Otros						-> Agregue aqui tantos niveles superiores como desee segun su ruta de instalacion
 							$_SERVER['DOCUMENT_ROOT']	-> Raiz de Todo el servidor web  */
-	$PCO_PCODER_RaizExploracionArchivos=".";
-
-
-	//Define las extensiones permitidas por el editor de texto
-	$PCO_PCODER_ExtensionesPermitidas = array("txt", "inc", "css", "cpp", "c", "js", "java", "php", "htm", "html", "py", "md", "bat", "sh", "ini", "log", "conf", "asc", "csv", "xml", "pl", "asp", "aspx", "jsp", "nfo", "yml", "json", "xsl", "ans", "dat", "err", "mdown", "lisp", "man");
-
-	//Extensiones de archivo para cargar directamente en el editor
-	$PCO_PCODER_ExtensionesExternas = array("gif", "jpg", "png", "bmp", "pdf");
-
-	/*  Determina si solamente se permiten abrir las extensiones conocidas
-		Posibles Valores:  1=Solo permite abrir ciertas extensiones
-		                   0=Abre cualquier tipo de extension         */
-	$PCO_PCODER_ForzarExtensionesConocidas = 1;
-
+	$PCO_PCODER_RaizExploracionArchivos=$_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR;
 
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='es';

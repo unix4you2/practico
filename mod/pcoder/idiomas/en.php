@@ -45,8 +45,10 @@
 	$MULTILANG_PCODER_Caracteres='Characters';
 	$MULTILANG_PCODER_Cargando='Loading';
 	$MULTILANG_PCODER_Cerrar='Close';
+	$MULTILANG_PCODER_Columna='Column';
 	$MULTILANG_PCODER_Copiar='Copy';
 	$MULTILANG_PCODER_Cortar='Cut';
+	$MULTILANG_PCODER_Depurar='Debug';
 	$MULTILANG_PCODER_Deshacer='Undo';
 	$MULTILANG_PCODER_Desplazar='Move';
 	$MULTILANG_PCODER_Editar='Edit';
@@ -58,13 +60,14 @@
 	$MULTILANG_PCODER_Guardando='Saving';
 	$MULTILANG_PCODER_Guardar='Save';
 	$MULTILANG_PCODER_Ir='Go';
+	$MULTILANG_PCODER_Linea='Line';
 	$MULTILANG_PCODER_Lineas='Lines';
 	$MULTILANG_PCODER_Modificado='Modified';
 	$MULTILANG_PCODER_No='No';
 	$MULTILANG_PCODER_Otros='Others';
 	$MULTILANG_PCODER_Pegar='Paste';
 	$MULTILANG_PCODER_Predeterminado='Default';
-	$MULTILANG_PCODER_Preferencias='Preferences';
+	$MULTILANG_PCODER_Preferencias='{P}Coder editors Preferences';
 	$MULTILANG_PCODER_Reemplazar='Replace';
 	$MULTILANG_PCODER_Rehacer='Redo';
 	$MULTILANG_PCODER_Salir='Quit';
@@ -86,9 +89,7 @@
 	$MULTILANG_PCODER_EnlacePcoder='Code Editor {P}Coder';
 	$MULTILANG_PCODER_AtajosTitPcoder='Keyboard shortcuts';
 	$MULTILANG_PCODER_PcoderAjuste='Window adjustment';
-	$MULTILANG_PCODER_ErrorExistencia='The file you want to open doesnt exists!';
 	$MULTILANG_PCODER_ErrorRW='You dont have rights to write this file! Any change will be lost!';
-	$MULTILANG_PCODER_ErrorNoACE='There is no ACE module installed to edit this file';
 	$MULTILANG_PCODER_SaltarLinea='Jump to line';
 	$MULTILANG_PCODER_Acerca='About';
 	$MULTILANG_PCODER_ResumenLicencia='This tool is Free Software under GNU-GPL v3 License';
@@ -97,15 +98,20 @@
 	$MULTILANG_PCODER_LenguajeProg='Programming language';
 	$MULTILANG_PCODER_VerCaracteres='Show hidden chars';
 	$MULTILANG_PCODER_CerrarVentana='Changes may lost';
-	$MULTILANG_PCODER_Path1Punto='Current folder of PCoder (generally over mod/pcoder)';
-	$MULTILANG_PCODER_Path2Punto='Root of PCoder as Module (generally over mod/pcoder/mod)';
-	$MULTILANG_PCODER_Path3Punto='Root of PCoder as StandAlone (where you can find LICENSE, AUTHORS, Etc)';
-	$MULTILANG_PCODER_Path4Punto='Install root for PCoder as StandAlone or Practico root if is a module';
-	$MULTILANG_PCODER_PathFull='WebServer Root. Could be slow acording to the available files.';
+	$MULTILANG_PCODER_PathFull='WebServer Root';
+	$MULTILANG_PCODER_PathDisco='Hard disk root';
 	$MULTILANG_PCODER_CaracNoImprimibles='Show/Hide Invisible characters';
 	$MULTILANG_PCODER_PantallaCompleta='Full screen';
 	$MULTILANG_PCODER_PanelIzq='Left panel';
 	$MULTILANG_PCODER_PanelDer='Right panel';
 	$MULTILANG_PCODER_OcultarPanel='Panel hide';
 	$MULTILANG_PCODER_RevisarSintaxis='Check language syntax while I write';
-
+	$MULTILANG_PCODER_SeleccionarTodo='Select all';
+	$MULTILANG_PCODER_DepuraErrorSiguiente='Go to next error';
+	$MULTILANG_PCODER_DepuraErrorPrevio='Go to previous error';
+	$MULTILANG_PCODER_EnrollarSeleccion='Fold selected text';
+	$MULTILANG_PCODER_DesenrollarTodo='Unfold all';
+	$MULTILANG_PCODER_DuplicarSeleccion='Duplicate selection';
+	$MULTILANG_PCODER_InvertirSeleccion='Invert Selection';
+	$MULTILANG_PCODER_UnirSeleccion='Join selected in one line';
+	

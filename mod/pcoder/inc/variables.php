@@ -20,6 +20,21 @@
 	 along with this program.  If not, see <http://www.gnu.org/licenses/>
 	*/
 
+	//Parametros para la configuracion de la base de datos
+	$ServidorBD='localhost';	// Direccion IP o nombre de host
+	$BaseDatos='pcoder.sdb';   // Path completo cuando se trata de sqlite2, ej: '/path/to/database.sdb'
+	$UsuarioBD='root';
+	$PasswordBD='mypass';
+	$MotorBD='sqlite';		// Puede variar segun el driver PDO: mysql|pgsql|sqlite|sqlsrv|mssql|ibm|dblib|odbc|oracle|ifmx|fbd
+	$PuertoBD='';	// Vacio para predeterminado
+	$PCODER_TablaUsuariosDDL="
+		CREATE TABLE core_usuario (
+		  login text PRIMARY KEY,
+		  clave text default 'd41d8cd98fd41d8cd98fd41d8cd98fd41d8cd98f',
+		  correo text  default ''
+		); ";
+	$PCODER_TablaUsuarios="core_usuario";
+
 
     //Define los modos o lenguajes soportados por el editor
 	$PCODER_Modos[]=array(Nombre => "ABAP",	Extensiones => "abap");

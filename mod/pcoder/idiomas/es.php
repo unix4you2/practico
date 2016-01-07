@@ -45,9 +45,11 @@
 	$MULTILANG_PCODER_Caracteres='Caracteres';
 	$MULTILANG_PCODER_Cargando='Cargando';
 	$MULTILANG_PCODER_Cerrar='Cerrar';
+	$MULTILANG_PCODER_Columna='Columna';
 	$MULTILANG_PCODER_Comunes='Comunes';
 	$MULTILANG_PCODER_Copiar='Copiar';
 	$MULTILANG_PCODER_Cortar='Cortar';
+	$MULTILANG_PCODER_Depurar='Depurar';
 	$MULTILANG_PCODER_Deshacer='Deshacer';
 	$MULTILANG_PCODER_Desplazar='Desplazar';
 	$MULTILANG_PCODER_Editar='Editar';
@@ -59,13 +61,14 @@
 	$MULTILANG_PCODER_Guardando='Guardando';
 	$MULTILANG_PCODER_Guardar='Guardar';
 	$MULTILANG_PCODER_Ir='Ir';
+	$MULTILANG_PCODER_Linea='L&iacute;nea';
 	$MULTILANG_PCODER_Lineas='L&iacute;neas';
 	$MULTILANG_PCODER_Modificado='Modificado';
 	$MULTILANG_PCODER_No='No';
 	$MULTILANG_PCODER_Otros='Otros';
 	$MULTILANG_PCODER_Pegar='Pegar';
 	$MULTILANG_PCODER_Predeterminado='Predeterminado';
-	$MULTILANG_PCODER_Preferencias='Preferencias';
+	$MULTILANG_PCODER_Preferencias='Preferencias del editor {P}Coder';
 	$MULTILANG_PCODER_Reemplazar='Reemplazar';
 	$MULTILANG_PCODER_Rehacer='Rehacer';
 	$MULTILANG_PCODER_Salir='Salir';
@@ -87,9 +90,7 @@
 	$MULTILANG_PCODER_EnlacePcoder='Editor de C&oacute;digo {P}Coder';
 	$MULTILANG_PCODER_AtajosTitPcoder='Atajos de teclado';
 	$MULTILANG_PCODER_PcoderAjuste='Ajuste de ventana';
-	$MULTILANG_PCODER_ErrorExistencia='El archivo indicado para edicion no existe!';
 	$MULTILANG_PCODER_ErrorRW='No se tienen permisos para escribir sobre el archivo! Cualquier cambio realizado podr&iacute;a perderse';
-	$MULTILANG_PCODER_ErrorNoACE='No se encuentra el modulo ACE para edici&oacute;n del archivo';
 	$MULTILANG_PCODER_SaltarLinea='Saltar a l&iacute;nea';
 	$MULTILANG_PCODER_Acerca='Acerca de';
 	$MULTILANG_PCODER_ResumenLicencia='Esta herramienta es Software Libre distribuido bajo licencia GNU-GPL v3';
@@ -98,16 +99,19 @@
 	$MULTILANG_PCODER_LenguajeProg='Lenguaje de programaci&oacute;n';
 	$MULTILANG_PCODER_VerCaracteres='Ver caracteres invisibles';
 	$MULTILANG_PCODER_CerrarVentana='Finalizar edici&oacute;n';
-	$MULTILANG_PCODER_Path1Punto='Directorio Actual de PCoder (generalmente sobre mod/pcoder)';
-	$MULTILANG_PCODER_Path2Punto='Raiz de PCoder Modulo (generalmente sobre mod/pcoder/mod)';
-	$MULTILANG_PCODER_Path3Punto='Raiz de PCoder StandAlone (Donde reside LICENSE, AUTHORS, Etc)';
-	$MULTILANG_PCODER_Path4Punto='Raiz Instalacion PCoder cuando es independiente o Raiz de Practico si esta como modulo';
-	$MULTILANG_PCODER_PathFull='Raiz de Todo el servidor web. Podria tardar segun cantidad de archivos posibles.';
+	$MULTILANG_PCODER_PathFull='Raiz de Todo el servidor web';
+	$MULTILANG_PCODER_PathDisco='Raiz del disco duro';
 	$MULTILANG_PCODER_CaracNoImprimibles='Ver/Ocultar Caracteres no imprimibles';
 	$MULTILANG_PCODER_PantallaCompleta='Pantalla completa';
 	$MULTILANG_PCODER_PanelIzq='Panel izquierdo';
 	$MULTILANG_PCODER_PanelDer='Panel derecho';
 	$MULTILANG_PCODER_OcultarPanel='Ocultar panel';
 	$MULTILANG_PCODER_RevisarSintaxis='Revisar sintaxis del lenguaje mientras se escribe';
-	
-	
+	$MULTILANG_PCODER_SeleccionarTodo='Seleccionar todo';
+	$MULTILANG_PCODER_DepuraErrorSiguiente='Ir al error siguiente';
+	$MULTILANG_PCODER_DepuraErrorPrevio='Ir al error previo';
+	$MULTILANG_PCODER_EnrollarSeleccion='Enrollar la selecci&oacute;n';
+	$MULTILANG_PCODER_DesenrollarTodo='Desenrollar todo';
+	$MULTILANG_PCODER_DuplicarSeleccion='Duplicar selecci&oacute;n';
+	$MULTILANG_PCODER_InvertirSeleccion='Invertir selecci&oacute;n';
+	$MULTILANG_PCODER_UnirSeleccion='Convertir selecci&oacute;n a una linea';

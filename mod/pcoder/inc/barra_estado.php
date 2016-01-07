@@ -43,6 +43,11 @@
 								0
 							</div>
 
+							<!-- COLUMNA ACTUAL DEL DOCUMENTO -->
+							<div id="NroColumnaDocumento" class="btn-xs" style="display:inline;">
+								0
+							</div>
+
 							<!-- CARACTERES DEL DOCUMENTO -->
 							<div id="NroCaracteresDocumento" class="btn-xs" style="display:inline;">
 								0
