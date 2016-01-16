@@ -13,6 +13,7 @@ UL.jqueryFileTree LI {
 	margin: 0px;
 	white-space: nowrap;
 	margin-left: 17px;
+	cursor:pointer;
 }
 
 UL.jqueryFileTree A {
