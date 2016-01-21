@@ -211,16 +211,13 @@
 		function CargarIframeURL(iframeName, url)
 			{
 				//url=url+'&output=embed';
-				if(isAvailable(url, callback, timeout))
+				var $iframe = $('#' + iframeName);
+				if ( $iframe.length )
 					{
-						var $iframe = $('#' + iframeName);
-						if ( $iframe.length )
-							{
-								$iframe.attr('src',url);   
-								return false;
-							}
-						return true;
+						$iframe.attr('src',url);   
+						return false;
 					}
+				return true;
 			}
 
 		function PEXPLORER_Navegar()
