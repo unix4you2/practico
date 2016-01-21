@@ -19,19 +19,32 @@
 	 You should have received a copy of the GNU General Public License
 	 along with this program.  If not, see <http://www.gnu.org/licenses/>
 	*/
-
-    // PANEL IZQUIERDO DEL EDITOR
 ?>
 
-	<div class="col-md-2" style="margin:0px; padding:0px;" id="panel_izquierdo">
+<div class="row">
+	<div class="col-md-12">
 		
-		<!-- Boton de ocultacion del panel -->
-		<div align="right"><a class="btn btn-xs text-danger" Onclick="PCODER_DesactivarPanelIzquierdo();"><i class="fa fa-backward"></i> <?php echo $MULTILANG_PCODER_OcultarPanel; ?></a></div>
-		
-		<?php
-			//Presenta el explorador de archivos del lado del servidor
-			include_once ("inc/marco_explorador.php");
-		?>
+		<div id="panel_central_inferior" >
+			<!--
+				<ul class="nav nav-tabs btn-xs" role="tablist">
+					<li class="active"><a href="#consola_comandos" aria-controls="pestanasuperior_editores" role="tab" data-toggle="tab">Terminal</a></li>
+					<li><a href="#menu1" aria-controls="pestanasuperior_preferencias" role="tab" data-toggle="tab">Preferencias</a></li>
+				</ul>
 
+				<div class="tab-content">
+					<div id="consola_comandos" class="tab-pane fade in active">
+						<iframe name="frame_terminal" id="frame_terminal" src="mod/consola" style="border:0px;"></iframe>
+					</div>
+					
+					<div id="menu1" class="tab-pane fade">
+					<h3>Menu 1</h3>
+					<p>Some content in menu 1.</p>
+					</div>
+
+				</div>
+			-->
+		</div>
 
 	</div>
+</div>
+

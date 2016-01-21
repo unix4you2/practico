@@ -19,19 +19,20 @@
 	 You should have received a copy of the GNU General Public License
 	 along with this program.  If not, see <http://www.gnu.org/licenses/>
 	*/
-
-    // PANEL IZQUIERDO DEL EDITOR
 ?>
+<div class="row">
+	<div class="col-md-12">
 
-	<div class="col-md-2" style="margin:0px; padding:0px;" id="panel_izquierdo">
-		
-		<!-- Boton de ocultacion del panel -->
-		<div align="right"><a class="btn btn-xs text-danger" Onclick="PCODER_DesactivarPanelIzquierdo();"><i class="fa fa-backward"></i> <?php echo $MULTILANG_PCODER_OcultarPanel; ?></a></div>
-		
-		<?php
-			//Presenta el explorador de archivos del lado del servidor
-			include_once ("inc/marco_explorador.php");
-		?>
+		<div id="panel_central_superior" >
 
+			<!-- ################ INICIO PESTANAS SUPERIORES ############### -->
+			<ul class="nav nav-tabs btn-xs" role="tablist">
+				<li class="active"><a id="pestana_editor_archivos" href="#pestana_superior_editores" data-toggle="tab" OnClick=""><i class="fa fa-pencil-square-o fa-fw"></i> <?php echo $MULTILANG_PCODER_EditorArchivos; ?></a></li>
+				<li><a id="pestana_consola" data-toggle="tab" href="#pestana_consola_comandos"><i class="fa fa-desktop fa-fw"></i> <?php echo $MULTILANG_PCODER_TerminalRemota; ?></a></li>
+				<li><a id="pestana_explorador" data-toggle="tab" href="#pestana_explorador_web"><i class="fa fa-globe fa-fw"></i> <?php echo $MULTILANG_PCODER_NavegadorEmbebido; ?></a></li>
+			</ul>
+
+		</div>
 
 	</div>
+</div>

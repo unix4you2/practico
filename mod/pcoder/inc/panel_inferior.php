@@ -20,15 +20,24 @@
 	 along with this program.  If not, see <http://www.gnu.org/licenses/>
 	*/
 
-    // BARRA DE MENU DEL APLICATIVO
+    // BARRA DE ESTADO DEL APLICATIVO
 ?>
 
 <div class="row">
 	<div class="col-md-12">
 
-		<div id="contenedor_barra_estado">
+		<div id="panel_inferior">
 			
-			<div class="well well-sm" style="border:0px; margin:0px; padding:0px; background: #272727;">
+			<div class="well well-sm" style="border:0px; margin:0px; padding:0px; padding-bottom:1px; background: #272727;">
+
+						<!-- FORMULARIO DISPOSICION DE PANTALLA -->
+						<div style="display:inline;">
+							&nbsp;
+							<button data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_PCODER_DividirNO; ?>" class="btn btn-success btn-xs" onClick="PCODER_DividirPantalla_NO();"><i class="fa fa-stop fa-fw"></i></button>
+							<button data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_PCODER_DividirHorizontal; ?>" class="btn btn-danger btn-xs" onClick="PCODER_DividirPantalla_Horizontal();"><i class="fa fa-pause fa-rotate-90 fa-fw"></i></button>
+							<button data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_PCODER_DividirVertical; ?>" class="btn btn-danger btn-xs" onClick="PCODER_DividirPantalla_Vertical();"><i class="fa fa-pause fa-fw"></i></button>
+							&nbsp;
+						</div>
 
 						<!-- FORMULARIO IR A -->
 						<div style="display:inline;">
@@ -40,40 +49,27 @@
 							
 							<!-- LINEAS DEL DOCUMENTO -->
 							<div id="NroLineasDocumento" class="btn-xs" style="display:inline;">
-								0
 							</div>
 
 							<!-- COLUMNA ACTUAL DEL DOCUMENTO -->
 							<div id="NroColumnaDocumento" class="btn-xs" style="display:inline;">
-								0
 							</div>
 
 							<!-- CARACTERES DEL DOCUMENTO -->
 							<div id="NroCaracteresDocumento" class="btn-xs" style="display:inline;">
-								0
 							</div>
 
 							<!-- TIPO DOCUMENTO -->
 							<div id="TipoDocumento" class="btn-xs" style="display:inline;">
-								0
 							</div>
 
 							<!-- TAMANO DEL DOCUMENTO -->
 							<div id="TamanoDocumento" class="btn-xs" style="display:inline;">
-								0
 							</div>
 
 							<!-- FECHA MODIFICACION -->
 							<div id="FechaModificadoDocumento" class="btn-xs" style="display:inline;">
-								0
 							</div>
-
-							<!-- NOMBRE DE ARCHIVO -->
-							<font color="white">
-							<div id="RutaDocumento" class="btn-xs" style="display:inline;">
-								0
-							</div>
-							</font>
 
 						</font>
 

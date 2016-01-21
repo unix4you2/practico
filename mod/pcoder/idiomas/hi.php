@@ -75,6 +75,7 @@
 	$MULTILANG_PCODER_Si='हाँ';
 	$MULTILANG_PCODER_Tamano='आकार';
 	$MULTILANG_PCODER_Tipo='टाइप';
+	$MULTILANG_PCODER_Trabajando='कार्य';
 	$MULTILANG_PCODER_Ver='राय';
 
 	//Mensajes de error y varios
@@ -114,4 +115,12 @@
 	$MULTILANG_PCODER_DuplicarSeleccion='डुप्लीकेट चयन';
 	$MULTILANG_PCODER_InvertirSeleccion='उलटा चयन';
 	$MULTILANG_PCODER_UnirSeleccion='एक लाइन में चयनित शामिल हों';
+	$MULTILANG_PCODER_DividirNO='कोई विभाजन कोड संपादक';
+	$MULTILANG_PCODER_DividirHorizontal='क्षैतिज विभाजन';
+	$MULTILANG_PCODER_DividirVertical='कार्यक्षेत्र विभाजन';
+	$MULTILANG_PCODER_ClicSeleccionar='चुनने के लिए क्लिक करें';
+	$MULTILANG_PCODER_ExploradorColores='रंग एक्सप्लोरर';
+	$MULTILANG_PCODER_TerminalRemota='दूरस्थ टर्मिनल';
+	$MULTILANG_PCODER_EditorArchivos='फ़ाइल संपादक';
+	$MULTILANG_PCODER_NavegadorEmbebido='एंबेडेड वेब ब्राउज़र';
 	

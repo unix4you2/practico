@@ -22,5 +22,54 @@
 
     // PANEL DERECHO DEL EDITOR
 ?>
-<div align="left"><a class="btn btn-xs text-primary" href="#" Onclick="DesactivarPanelDerecho();"><i class="fa fa-forward"></i> <?php echo $MULTILANG_PCODER_OcultarPanel; ?></a></div>
+	<div class="col-md-2" style="margin:0px; padding:0px;" id="panel_derecho">
+		
+		<!-- Boton de ocultacion del panel -->
+		<div align="left"><a class="btn btn-xs text-danger" Onclick="PCODER_DesactivarPanelDerecho();"><i class="fa fa-forward"></i> <?php echo $MULTILANG_PCODER_OcultarPanel; ?></a></div>
 
+
+
+		<!-- ################# SELECTOR DE COLORES ##################-->
+			<br>
+			<div id="SelectorColores" align="center" class="alert alert-info" style="margin-right:25px;">
+				<?php echo $MULTILANG_PCODER_ExploradorColores; ?>:<br>
+				<input type="text" id="ValorSelectorColores" class="btn btn-primary btn-xs" value="" placeholder="<?php echo $MULTILANG_PCODER_ClicSeleccionar; ?>"/>
+				<style>
+					.colorpicker-2x .colorpicker-saturation {
+						width: 200px;
+						height: 200px;
+					}
+					.colorpicker-2x .colorpicker-hue,
+					.colorpicker-2x .colorpicker-alpha {
+						width: 30px;
+						height: 200px;
+					}
+					.colorpicker-2x .colorpicker-color,
+					.colorpicker-2x .colorpicker-color div{
+						height: 30px;
+					}
+				</style>
+				<script>
+					$(function(){
+						$('#ValorSelectorColores').colorpicker({
+							customClass: 'colorpicker-2x',
+							sliders: {
+								saturation: {
+									maxLeft: 200,
+									maxTop: 200
+								},
+								hue: {
+									maxTop: 200
+								},
+								alpha: {
+									maxTop: 200
+								}
+							}
+						});
+					});
+				</script>
+			</div>
+
+
+
+	</div>

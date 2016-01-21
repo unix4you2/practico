@@ -75,6 +75,7 @@
 	$MULTILANG_PCODER_Si='Sim';
 	$MULTILANG_PCODER_Tamano='Tamanho';
 	$MULTILANG_PCODER_Tipo='Tipo';
+	$MULTILANG_PCODER_Trabajando='Trabalhando';
 	$MULTILANG_PCODER_Ver='Visão';
 
 	//Mensajes de error y varios
@@ -114,3 +115,12 @@
 	$MULTILANG_PCODER_DuplicarSeleccion='Seleção duplicado';
 	$MULTILANG_PCODER_InvertirSeleccion='Seleção invertida';
 	$MULTILANG_PCODER_UnirSeleccion='Adira selecionado em uma linha';
+	$MULTILANG_PCODER_DividirNO='Nenhum editor de código de divisão';
+	$MULTILANG_PCODER_DividirHorizontal='Divisão horizontal';
+	$MULTILANG_PCODER_DividirVertical='Divisão vertical';
+	$MULTILANG_PCODER_ClicSeleccionar='Clique para selecionar';
+	$MULTILANG_PCODER_ExploradorColores='Explorador Cor';
+	$MULTILANG_PCODER_TerminalRemota='Terminal remoto';
+	$MULTILANG_PCODER_EditorArchivos='Editor de arquivo';
+	$MULTILANG_PCODER_NavegadorEmbebido='Navegador web embutido';
+	
