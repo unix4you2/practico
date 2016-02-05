@@ -35,6 +35,8 @@
 
 	//Lexico general
 	$MULTILANG_PCODER_Abrir='Aberto';
+	$MULTILANG_PCODER_Aceptar='Aceitar';
+	$MULTILANG_PCODER_Activar='Habilitar';
 	$MULTILANG_PCODER_Archivo='Arquivo';
 	$MULTILANG_PCODER_Acercar='Mais Zoom';
 	$MULTILANG_PCODER_Alejar='Menos zoom';
@@ -44,14 +46,17 @@
 	$MULTILANG_PCODER_Cancelar='Cancelar';
 	$MULTILANG_PCODER_Caracteres='Caracter';
 	$MULTILANG_PCODER_Cargando='Carregando';
+	$MULTILANG_PCODER_Carpeta='Pasta';
 	$MULTILANG_PCODER_Cerrar='Fechar';
 	$MULTILANG_PCODER_Columna='Coluna';
 	$MULTILANG_PCODER_Copiar='C&aacute;pia';
 	$MULTILANG_PCODER_Cortar='Cortar';
 	$MULTILANG_PCODER_Depurar='Depurar';
+	$MULTILANG_PCODER_Desactivar='Incapacitar';
 	$MULTILANG_PCODER_Deshacer='Desfazer';
 	$MULTILANG_PCODER_Desplazar='Passo';
 	$MULTILANG_PCODER_Editar='Editar';
+	$MULTILANG_PCODER_Eliminado='Suprimido';
 	$MULTILANG_PCODER_Error='Erro';
 	$MULTILANG_PCODER_Estado='Estatuto';
 	$MULTILANG_PCODER_Explorar='Explorar';
@@ -59,15 +64,21 @@
 	$MULTILANG_PCODER_Formato='Formato';
 	$MULTILANG_PCODER_Guardando='Guardar';
 	$MULTILANG_PCODER_Guardar='Guardar';
+	$MULTILANG_PCODER_Herramientas='Ferramentas';
 	$MULTILANG_PCODER_Ir='Ir';
 	$MULTILANG_PCODER_Linea='Linha';
 	$MULTILANG_PCODER_Lineas='Linhas';
 	$MULTILANG_PCODER_Modificado='Modificado';
 	$MULTILANG_PCODER_No='Não';
+	$MULTILANG_PCODER_Nombre='Nome';
+	$MULTILANG_PCODER_Nuevo='Novo';
+	$MULTILANG_PCODER_Operacion='Operação';
 	$MULTILANG_PCODER_Otros='Outros';
 	$MULTILANG_PCODER_Pegar='Colar';
+	$MULTILANG_PCODER_Permisos='Permissões';
 	$MULTILANG_PCODER_Predeterminado='Padrão';
 	$MULTILANG_PCODER_Preferencias='Preferências do editor {P}Coder';
+	$MULTILANG_PCODER_Propietario='Proprietário';
 	$MULTILANG_PCODER_Reemplazar='Substituir';
 	$MULTILANG_PCODER_Rehacer='Refazer';
 	$MULTILANG_PCODER_Salir='Sair';
@@ -76,6 +87,7 @@
 	$MULTILANG_PCODER_Tamano='Tamanho';
 	$MULTILANG_PCODER_Tipo='Tipo';
 	$MULTILANG_PCODER_Trabajando='Trabalhando';
+	$MULTILANG_PCODER_Ubicacion='Location';
 	$MULTILANG_PCODER_Ver='Visão';
 
 	//Mensajes de error y varios
@@ -123,4 +135,21 @@
 	$MULTILANG_PCODER_TerminalRemota='Terminal remoto';
 	$MULTILANG_PCODER_EditorArchivos='Editor de arquivo';
 	$MULTILANG_PCODER_NavegadorEmbebido='Navegador web embutido';
-	
+	$MULTILANG_PCODER_AdvertenciaCierre='Você está tentando desligar todo o editor {PI} Código. Arquivos editados que você armazenou ainda a não perder. Sua confirmação é necessária para continuar.';
+	$MULTILANG_PCODER_ErrGuardarDefecto='Você deve especificar uma arquivo válido para salvar ou abrir um arquivo para editar!';
+	$MULTILANG_PCODER_ErrGuardarNoPermiso='Você não tem direitos para escrever este arquivo usando o seu usuário do servidor web !. Verifique as permissões e tente novamente.';
+	$MULTILANG_PCODER_CrearArchivo='Novo arquivo';
+	$MULTILANG_PCODER_CrearCarpeta='Novo pasta';
+	$MULTILANG_PCODER_EditarPermisos='Editar permissões';
+	$MULTILANG_PCODER_SubirArchivo='Subir arquivo';
+	$MULTILANG_PCODER_RecargarExplorador='Explorador de recarga';
+	$MULTILANG_PCODER_EliminarElemento='Excluir o arquivo / pasta';
+	$MULTILANG_PCODER_OperacionesFS='Archivos, carpetas y tareas de permisos';
+	$MULTILANG_PCODER_ElementoCreado='O elemento foi criado';
+	$MULTILANG_PCODER_ElementoExiste='O elemento já existe';
+	$MULTILANG_PCODER_ElementoNoCreado='O elemento não pode ser criado, excluído ou modificado ao longo do sistema de arquivos. Por favor verifique as suas permissões';
+	$MULTILANG_PCODER_NrosLinea='N&uacute;meros de linha Si / No';
+	$MULTILANG_PCODER_CheqSintaxis='Verificação de sintaxe';
+	$MULTILANG_PCODER_LenguajeResaltado='Idioma realçado';
+	$MULTILANG_PCODER_ExtensionNoSoportada='The file extension that you are trying to open is not supported.  You could add it to the supported extensions if you want to edit this file using PCoder.';
+

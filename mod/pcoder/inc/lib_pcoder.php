@@ -21,6 +21,140 @@
 	*/
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCODER_EliminarElemento
+	Elimina un elemento en el sistema de ficheros
+	Retorna:
+		1	Operacion exitosa
+		-1	Error
+*/
+if ($PCO_Accion=="PCODER_EliminarElemento") 
+	{
+		$ResultadoOperacion="0";
+		//Realiza operacion segun el tipo de elemento
+		if($PCODER_TipoElementoFS=="archivo")
+			$Eliminacion=unlink($PCODER_ElementoFS);
+		if($PCODER_TipoElementoFS=="carpeta")
+			$Eliminacion=rmdir($PCODER_ElementoFS);
+		//Determina valor a devolver
+		if ($Eliminacion)
+			$ResultadoOperacion="1";
+		else
+			$ResultadoOperacion="-1";
+		@ob_clean();
+        echo $ResultadoOperacion;
+        die();
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCODER_EditarPermisos
+	Cambia los permisos o propietario de un elemento en el sistema de ficheros
+	Retorna:
+		1	Operacion exitosa
+		-1	Error cambiando permisos y propietario
+		-2	Error cambiando permisos
+		-3	Error cambiando propietario
+*/
+if ($PCO_Accion=="PCODER_EditarPermisos") 
+	{
+		$ResultadoOperacion="0";
+
+		//Cambia permisos
+		$CambioPermisos=chmod($PCODER_ElementoFS, $PCODER_PermisosFS );
+		
+		//Cambia propietario
+		$CambioPropietario=chown($PCODER_ElementoFS, $PCODER_PropietarioFS );
+		
+		if ($CambioPermisos && $CambioPropietario)
+			{
+				$ResultadoOperacion="1";
+			}
+		else
+			{
+				if (!$CambioPermisos && !$CambioPropietario)
+					{
+						$ResultadoOperacion="-1";
+					}
+				else
+					{
+						if (!$CambioPermisos)
+							$ResultadoOperacion="-2";
+						if (!$CambioPropietario)
+							$ResultadoOperacion="-3";
+					}
+			}
+		@ob_clean();
+        echo $ResultadoOperacion;
+        die();
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCODER_CrearCarpeta
+	Crea una nueva carpeta sobre el sistema de ficheros
+	Retorna:
+		1	Operacion exitosa
+		-1	La carpeta ya existe
+		-2	La carpeta no se pudo crear
+*/
+if ($PCO_Accion=="PCODER_CrearCarpeta") 
+	{
+		$ResultadoOperacion="0";
+		//Crea el archivo solo si no existe
+		$ExisteElemento=file_exists($PCODER_ElementoFS);
+		if(!$ExisteElemento)
+			{
+				$CreacionElemento=mkdir($PCODER_ElementoFS);
+				if ($CreacionElemento)
+					$ResultadoOperacion="1";
+				else
+					$ResultadoOperacion="-2";
+			}
+		else
+			$ResultadoOperacion="-1";
+		@ob_clean();
+        echo $ResultadoOperacion;
+        die();
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCODER_CrearArchivo
+	Crea un nuevo archivo sobre el sistema de ficheros
+	Retorna:
+		1	Operacion exitosa
+		-1	El archivo ya existe
+		-2	El archivo no se pudo crear
+*/
+if ($PCO_Accion=="PCODER_CrearArchivo") 
+	{
+		$ResultadoOperacion="0";
+		//Crea el archivo solo si no existe
+		$ExisteElemento=file_exists($PCODER_ElementoFS);
+		if(!$ExisteElemento)
+			{
+				$CreacionElemento=touch($PCODER_ElementoFS);
+				if ($CreacionElemento)
+					$ResultadoOperacion="1";
+				else
+					$ResultadoOperacion="-2";
+			}
+		else
+			$ResultadoOperacion="-1";
+		@ob_clean();
+        echo $ResultadoOperacion;
+        die();
+	}
+
 
 /* ################################################################## */
 /* ################################################################## */
@@ -61,9 +195,26 @@ if ($PCO_Accion=="PCOMOD_GuardarArchivo")
 if ($PCO_Accion=="PCOMOD_ObtenerPermisosArchivo") 
 	{
 		$permisos_encontrados=@substr(sprintf('%o', fileperms($PCODER_archivo)), -4);
+        @ob_clean();
         echo $permisos_encontrados;
+        die();
 	}
-	
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCOMOD_ObtenerPropietarioArchivo
+	Determina el propietario de un archivo
+*/
+if ($PCO_Accion=="PCOMOD_ObtenerPropietarioArchivo") 
+	{
+		$propietario_encontrado=@posix_getpwuid(fileowner($PCODER_archivo))['name'];
+        @ob_clean();
+        echo $propietario_encontrado;
+        die();
+	}
+
 
 /* ################################################################## */
 /* ################################################################## */
@@ -76,7 +227,9 @@ if ($PCO_Accion=="PCOMOD_VerificarPermisosRW")
 		$permisos_ok=1;
 		$permisos_encontrados=@substr(sprintf('%o', fileperms($PCODER_archivo)), -4);
 		if (!is_writable($PCODER_archivo)) { $permisos_ok=0; }
+        @ob_clean();
         echo $permisos_ok;
+        die();
 	}
 
 
@@ -91,6 +244,7 @@ if ($PCO_Accion=="PCOMOD_ObtenerTipoElemento")
 		$PCODER_TipoElemento=@filetype($PCODER_archivo);
 		@ob_clean();
         echo $PCODER_TipoElemento;
+        die();
 	}
 
 
@@ -105,6 +259,7 @@ if ($PCO_Accion=="PCOMOD_ObtenerTamanoDocumento")
         $PCODER_TamanoElemento=@round(filesize($PCODER_archivo)/1024);
 		@ob_clean();
         echo $PCODER_TamanoElemento;
+        die();
 	}
 
 
@@ -119,6 +274,7 @@ if ($PCO_Accion=="PCOMOD_ObtenerFechaElemento")
         $PCODER_FechaElemento=@date("d F Y H:i:s", @filemtime($PCODER_archivo));
 		@ob_clean();
         echo $PCODER_FechaElemento;
+        die();
 	}
 
 
@@ -139,6 +295,7 @@ if ($PCO_Accion=="PCOMOD_ObtenerTokenEdicion")
         $PCODER_TokenEdicion=md5($PCODER_archivo.$PCODER_TamanoElemento.$PCODER_FechaElemento.$PCODERcontenido_original_archivo);
    		@ob_clean();
         echo $PCODER_TokenEdicion;
+        die();
 	}
 
 
@@ -157,15 +314,27 @@ if ($PCO_Accion=="PCOMOD_ObtenerModoEditor")
         $PCODER_extension = $PCODER_partes_extension[count($PCODER_partes_extension)-1];
 
         //Identifica el tipo de documento a ser aplicado segun la extension del archivo
-        $PCODER_ModoEditor='';
+        $PCODER_ModoEditor="";
         for ($i=0;$i<count($PCODER_Modos) && $PCODER_ModoEditor=='';$i++)
             {
-               if(strpos($PCODER_Modos[$i]["Extensiones"], $PCODER_extension) !== false)
-                    $PCODER_ModoEditor=$PCODER_Modos[$i]["Nombre"];
+				//Lleva las extensiones a un array para buscar en el
+				$ArregloExtensiones=explode("|",$PCODER_Modos[$i]["Extensiones"]);
+                if(in_array($PCODER_extension,$ArregloExtensiones))
+					{
+						$PCODER_ModoEditor=$PCODER_Modos[$i]["Nombre"];
+					}
             }
+		//Valida que no se trate de un archivo sin extension despues de revisar todo
+		if($PCODER_ModoEditor=="")
+			{
+				//Asigna por defecto el modo de texto plano
+				if(count($PCODER_partes_extension)==1)
+					$PCODER_ModoEditor="Text";
+			}
 
    		@ob_clean();
         echo $PCODER_ModoEditor;
+        die();
 	}
 
 
@@ -183,6 +352,7 @@ if ($PCO_Accion=="PCOMOD_ObtenerNombreArchivo")
 
    		@ob_clean();
         echo $PCODER_NombreArchivo;
+        die();
 	}
 
 
@@ -204,4 +374,5 @@ if ($PCO_Accion=="PCOMOD_ObtenerContenidoArchivo")
         //$PCODER_ContenidoArchivo=@htmlspecialchars(addslashes($PCODER_ContenidoArchivo));
    		@ob_clean();
         echo $PCODER_ContenidoArchivo;
+        die();
 	}

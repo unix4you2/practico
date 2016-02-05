@@ -35,6 +35,8 @@
 
 	//Lexico general
 	$MULTILANG_PCODER_Abrir='खुला';
+	$MULTILANG_PCODER_Aceptar='स्वीकार करना';
+	$MULTILANG_PCODER_Activar='सक्षम';
 	$MULTILANG_PCODER_Archivo='फ़ाइल';
 	$MULTILANG_PCODER_Acercar='ज़ूम इन';
 	$MULTILANG_PCODER_Alejar='ज़ूम आउट';
@@ -44,14 +46,17 @@
 	$MULTILANG_PCODER_Cancelar='रद्द करना';
 	$MULTILANG_PCODER_Caracteres='वर्ण';
 	$MULTILANG_PCODER_Cargando='लदान';
+	$MULTILANG_PCODER_Carpeta='फ़ोल्डर';
 	$MULTILANG_PCODER_Cerrar='बंद करे';
 	$MULTILANG_PCODER_Columna='स्तंभ';
 	$MULTILANG_PCODER_Copiar='प्रतिलिपि';
 	$MULTILANG_PCODER_Cortar='कमी';
 	$MULTILANG_PCODER_Depurar='डीबग';
+	$MULTILANG_PCODER_Desactivar='अक्षम करें';
 	$MULTILANG_PCODER_Deshacer='पूर्ववत';
 	$MULTILANG_PCODER_Desplazar='चाल';
 	$MULTILANG_PCODER_Editar='संपादित';
+	$MULTILANG_PCODER_Eliminado='नष्ट कर दिया';
 	$MULTILANG_PCODER_Error='एरर';
 	$MULTILANG_PCODER_Estado='स्थिति';
 	$MULTILANG_PCODER_Explorar='अन्वेषण';
@@ -59,15 +64,21 @@
 	$MULTILANG_PCODER_Formato='प्रारूप';
 	$MULTILANG_PCODER_Guardando='रखना';
 	$MULTILANG_PCODER_Guardar='सहेजें';
+	$MULTILANG_PCODER_Herramientas='उपकरण';
 	$MULTILANG_PCODER_Ir='जाना';
 	$MULTILANG_PCODER_Linea='पंक्तियां';
 	$MULTILANG_PCODER_Lineas='पंक्तियां';
 	$MULTILANG_PCODER_Modificado='संशोधित';
 	$MULTILANG_PCODER_No='नहीं';
+	$MULTILANG_PCODER_Nombre='नाम';
+	$MULTILANG_PCODER_Nuevo='नई';
+	$MULTILANG_PCODER_Operacion='आपरेशन';
 	$MULTILANG_PCODER_Otros='अन्य लोग';
 	$MULTILANG_PCODER_Pegar='पेस्ट';
+	$MULTILANG_PCODER_Permisos='अनुमतियां';
 	$MULTILANG_PCODER_Predeterminado='चूक';
 	$MULTILANG_PCODER_Preferencias='{P}Coder संपादक वरीयताओं';
+	$MULTILANG_PCODER_Propietario='मालिक';
 	$MULTILANG_PCODER_Reemplazar='की जगह';
 	$MULTILANG_PCODER_Rehacer='फिर से करना';
 	$MULTILANG_PCODER_Salir='छोड़ना';
@@ -76,6 +87,7 @@
 	$MULTILANG_PCODER_Tamano='आकार';
 	$MULTILANG_PCODER_Tipo='टाइप';
 	$MULTILANG_PCODER_Trabajando='कार्य';
+	$MULTILANG_PCODER_Ubicacion='Location';
 	$MULTILANG_PCODER_Ver='राय';
 
 	//Mensajes de error y varios
@@ -123,4 +135,21 @@
 	$MULTILANG_PCODER_TerminalRemota='दूरस्थ टर्मिनल';
 	$MULTILANG_PCODER_EditorArchivos='फ़ाइल संपादक';
 	$MULTILANG_PCODER_NavegadorEmbebido='एंबेडेड वेब ब्राउज़र';
-	
+	$MULTILANG_PCODER_AdvertenciaCierre='आप पूरे {पीआई} कोड संपादक को बंद करने के प्रयास कर रहे हैं। आप संग्रहित किया है एडिट फ़ाइलों को अभी भी याद नहीं होगा। आपका पुष्टि जारी रखने के लिए आवश्यक है।';
+	$MULTILANG_PCODER_ErrGuardarDefecto='आप को बचाने या संपादित करने के लिए एक फ़ाइल को खोलने के लिए एक वैध फ़ाइल निर्दिष्ट करना होगा!';
+	$MULTILANG_PCODER_ErrGuardarNoPermiso='यदि आप अपने वेब सर्वर उपयोगकर्ता का उपयोग कर इस फाइल को लिखने के अधिकार के लिए है न !. अनुमतियों की जाँच करें और फिर कोशिश करें।';
+	$MULTILANG_PCODER_CrearArchivo='नई फ़ाइल';
+	$MULTILANG_PCODER_CrearCarpeta='नया फोल्डर';
+	$MULTILANG_PCODER_EditarPermisos='अनुमतियाँ संपादित';
+	$MULTILANG_PCODER_SubirArchivo='दस्तावेज अपलोड करें';
+	$MULTILANG_PCODER_RecargarExplorador='एक्सप्लोरर पुनः लोड';
+	$MULTILANG_PCODER_EliminarElemento='फ़ाइल / फ़ोल्डर हटाना';
+	$MULTILANG_PCODER_OperacionesFS='फाइल, फोल्डर और अनुमतियाँ कार्यों';
+	$MULTILANG_PCODER_ElementoCreado='तत्व बनाया गया है';
+	$MULTILANG_PCODER_ElementoExiste='तत्व पहले से मौजूद है';
+	$MULTILANG_PCODER_ElementoNoCreado='तत्व, बनाया नहीं जा सकता है नष्ट कर दिया या फ़ाइल प्रणाली पर संशोधित। अपनी अनुमतियाँ जाँच';
+	$MULTILANG_PCODER_NrosLinea='दिखाएँ / छुपाएँ लाइन नंबर';
+	$MULTILANG_PCODER_CheqSintaxis='सिंटेक्स की जांच';
+	$MULTILANG_PCODER_LenguajeResaltado='प्रकाश डाला भाषा';
+	$MULTILANG_PCODER_ExtensionNoSoportada='The file extension that you are trying to open is not supported.  You could add it to the supported extensions if you want to edit this file using PCoder.';
+

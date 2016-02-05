@@ -25,7 +25,7 @@
 	<div class="col-md-2" style="margin:0px; padding:0px;" id="panel_derecho">
 		
 		<!-- Boton de ocultacion del panel -->
-		<div align="left"><a class="btn btn-xs text-danger" Onclick="PCODER_DesactivarPanelDerecho();"><i class="fa fa-forward"></i> <?php echo $MULTILANG_PCODER_OcultarPanel; ?></a></div>
+		<div align="left" id="boton_ocultacion_panel_derecho"><a class="btn btn-xs text-danger" Onclick="PCODER_DesactivarPanelDerecho();"><i class="fa fa-forward"></i> <?php echo $MULTILANG_PCODER_OcultarPanel; ?></a></div>
 
 
 

@@ -26,7 +26,7 @@
 	<div class="col-md-2" style="margin:0px; padding:0px;" id="panel_izquierdo">
 		
 		<!-- Boton de ocultacion del panel -->
-		<div align="right"><a class="btn btn-xs text-danger" Onclick="PCODER_DesactivarPanelIzquierdo();"><i class="fa fa-backward"></i> <?php echo $MULTILANG_PCODER_OcultarPanel; ?></a></div>
+		<div align="right" id="boton_ocultacion_panel_izquierdo"><a class="btn btn-xs text-danger" Onclick="PCODER_DesactivarPanelIzquierdo();"><i class="fa fa-backward"></i> <?php echo $MULTILANG_PCODER_OcultarPanel; ?></a></div>
 		
 		<?php
 			//Presenta el explorador de archivos del lado del servidor

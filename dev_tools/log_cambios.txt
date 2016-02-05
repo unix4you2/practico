@@ -34,7 +34,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 * Added: Agregados acordiones colapsables para presentar resultados de procesos de importacion
 * Added: Plugin de JQuery para exploracion de archivos
-* Added: Actualización de PCoder a su ultima versión. Soporte SplitViews, terminal y explorador
+* Added: Actualización de PCoder a su ultima versión: 16.3
 * Added: Plugin para selección de colores y paletas
 * Enhan: Mejorado el estilo para oscurecer la aplicación cuando se abre un diálogo modal y poder dar así un mayor énfasis al mensaje en pantalla.
 "

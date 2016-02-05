@@ -229,6 +229,15 @@
 				CargarIframeURL('frame_navegador', document.form_barra_navegacion.url.value);
 			}
 
+		function ActualizarBarraURL()
+			{
+				//Actualiza periodicamente la barra de URL del navegador embebido
+
+				//Llama periodicamente la rutina de actualizacion de la barra
+				window.setTimeout(ActualizarBarraURL, 10000);
+			}
+			
+
 		//Ajusta tamano de la consola en cada cambio de tamano de la ventana
 		$( window ).resize(function() {
 			PEXPLORER_RecalcularMaquetacion();
@@ -236,6 +245,7 @@
 
 		//Inicializacion
 		PEXPLORER_RecalcularMaquetacion();
+		ActualizarBarraURL();
 	</script>
 
 </body>

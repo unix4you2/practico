@@ -174,7 +174,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
     <!-- Selector de colores -->
 	<script type="text/javascript" src="../../inc/jquery/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 </head>
-<body>
+<body onbeforeunload="return '<?php echo $MULTILANG_PCODER_AdvertenciaCierre; ?>';">
 
 	<!-- ######### FORMULARIOS Y MARCOS DE TRABAJO OCULTOS ######### -->
 	<form name="form_archivo_editado" action="index.php" method="POST" target="frame_almacenamiento" style="visibility: hidden; display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
@@ -199,13 +199,30 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 						<div id="PCO_Modal_MensajeCargandoPorcentaje" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
 					</div>
 					<i class="fa fa-circle-o-notch fa-fw fa-spin fa-1x"></i> <?php echo $MULTILANG_PCODER_Trabajando; ?>...
-					
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
 
+	<!-- Modal para mensajes generales -->
+	<div id="PCO_Modal_Mensaje" class="modal fade" data-backdrop="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php echo $MULTILANG_PCODER_Cerrar; ?></span></button>
+					<h4 id="PCO_Modal_MensajeTitulo" class="modal-title"></h4>
+				</div>
+				<div class="modal-body">
+					<p id="PCO_Modal_MensajeCuerpo"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline btn-info" data-dismiss="modal"><?php echo $MULTILANG_PCODER_Cerrar; ?></button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 
+	<?php include_once ("inc/marco_operarfs.php");	?>
 
 	<!-- ################# INICIO DE LA MAQUETACION ################ -->
 		<?php include_once ("inc/panel_superior.php"); 	?>
@@ -290,6 +307,18 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 		var MULTILANG_PCODER_Modificado="<?php echo $MULTILANG_PCODER_Modificado; ?>";
 		var MULTILANG_PCODER_ErrorRW="<?php echo $MULTILANG_PCODER_ErrorRW; ?>";
 		var MULTILANG_PCODER_Estado="<?php echo $MULTILANG_PCODER_Estado; ?>";
+		var MULTILANG_PCODER_ErrGuardarDefecto="<?php echo $MULTILANG_PCODER_ErrGuardarDefecto; ?>";
+		var MULTILANG_PCODER_ErrGuardarNoPermiso="<?php echo $MULTILANG_PCODER_ErrGuardarNoPermiso; ?>";
+		var MULTILANG_PCODER_Guardando="<?php echo $MULTILANG_PCODER_Guardando; ?>";
+		var MULTILANG_PCODER_Error="<?php echo $MULTILANG_PCODER_Error; ?>";
+		var MULTILANG_PCODER_Finalizado="<?php echo $MULTILANG_PCODER_Finalizado; ?>";
+		var MULTILANG_PCODER_ElementoCreado="<?php echo $MULTILANG_PCODER_ElementoCreado; ?>";
+		var MULTILANG_PCODER_ElementoExiste="<?php echo $MULTILANG_PCODER_ElementoExiste; ?>";
+		var MULTILANG_PCODER_ElementoNoCreado="<?php echo $MULTILANG_PCODER_ElementoNoCreado; ?>";
+		var MULTILANG_PCODER_Propietario="<?php echo $MULTILANG_PCODER_Propietario; ?>";
+		var MULTILANG_PCODER_Permisos="<?php echo $MULTILANG_PCODER_Permisos; ?>";
+		var MULTILANG_PCODER_Eliminado="<?php echo $MULTILANG_PCODER_Eliminado; ?>";
+		var MULTILANG_PCODER_ExtensionNoSoportada="<?php echo $MULTILANG_PCODER_ExtensionNoSoportada; ?>";
 	</script>
 	<script type="text/javascript" src="js/pcoder.min.js"></script>
 
@@ -311,7 +340,6 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 		});
 	</script>
 <script language="JavaScript">
-	
     function activaTab(tab){
         $('.nav-tabs a[href="#' + tab + '"]').tab('show');
     };
@@ -334,6 +362,8 @@ $('#pestana_consola_comandos').trigger('click');
     });
 */
 }
+
+
 
 </script>
 </body>

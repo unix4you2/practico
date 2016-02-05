@@ -67,19 +67,12 @@
 			<hr>
 			<div class="row">
 				<div class="col-lg-6">
-						<label for="modo_archivo"><?php echo $MULTILANG_PCODER_LenguajeProg; ?></label>
-						<select id="modo_archivo" size="1" class="form-control btn-info" onchange="CambiarModoEditor(this.value)">
+						<label for="modo_archivo_preferencias"><?php echo $MULTILANG_PCODER_LenguajeProg; ?></label>
+						<select id="modo_archivo_preferencias" size="1" class="form-control btn-info" onchange="CambiarModoEditor(this.value)">
 							  <?php
 								//Presenta los lenguajes disponibles
 								for ($i=0;$i<count($PCODER_Modos);$i++)
-									{
-										//Determina si el lenguaje o modo de archivo actual es la opcion a desplegar
-										$modo_seleccion='';
-										if($PCODER_Modos[$i]["Nombre"]==$PCODER_ModoEditor)
-											$modo_seleccion='SELECTED';
-										//PResenta la opcion
-										echo '<option value="ace/mode/'.$PCODER_Modos[$i]["Nombre"].'" '.$modo_seleccion.' >'.$PCODER_Modos[$i]["Nombre"].'</option>';
-									}
+									echo '<option value="ace/mode/'.$PCODER_Modos[$i]["Nombre"].'">'.$PCODER_Modos[$i]["Nombre"].'</option>';
 							  ?>
 						</select>
 				</div>

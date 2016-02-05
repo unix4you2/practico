@@ -27,9 +27,9 @@
 
 			<!-- ################ INICIO PESTANAS SUPERIORES ############### -->
 			<ul class="nav nav-tabs btn-xs" role="tablist">
-				<li class="active"><a id="pestana_editor_archivos" href="#pestana_superior_editores" data-toggle="tab" OnClick=""><i class="fa fa-pencil-square-o fa-fw"></i> <?php echo $MULTILANG_PCODER_EditorArchivos; ?></a></li>
-				<li><a id="pestana_consola" data-toggle="tab" href="#pestana_consola_comandos"><i class="fa fa-desktop fa-fw"></i> <?php echo $MULTILANG_PCODER_TerminalRemota; ?></a></li>
-				<li><a id="pestana_explorador" data-toggle="tab" href="#pestana_explorador_web"><i class="fa fa-globe fa-fw"></i> <?php echo $MULTILANG_PCODER_NavegadorEmbebido; ?></a></li>
+				<li class="active"><a id="pestana_editor_archivos" href="#pestana_superior_editores" data-toggle="tab" OnClick=""><i class="fa fa-pencil-square-o fa-fw text-danger"></i> <?php echo $MULTILANG_PCODER_EditorArchivos; ?></a></li>
+				<li><a id="pestana_consola" data-toggle="tab" href="#pestana_consola_comandos"><i class="fa fa-terminal fa-fw text-warning"></i> <?php echo $MULTILANG_PCODER_TerminalRemota; ?></a></li>
+				<li><a id="pestana_explorador" data-toggle="tab" href="#pestana_explorador_web"><i class="fa fa-globe fa-fw text-success"></i> <?php echo $MULTILANG_PCODER_NavegadorEmbebido; ?></a></li>
 			</ul>
 
 		</div>

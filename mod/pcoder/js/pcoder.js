@@ -47,6 +47,18 @@ function PCO_ObtenerContenidoAjax(PCO_ASINCRONICO,PCO_URL,PCO_PARAMETROS)
 		if(PCO_ASINCRONICO==0)
 			return contenido_recibido;
 	}
+function PCOJS_MostrarMensaje(TituloPopUp, Mensaje)
+	{
+		//Lleva los valores a cada parte del dialogo modal
+		$('#PCO_Modal_MensajeTitulo').html(TituloPopUp);
+		$('#PCO_Modal_MensajeCuerpo').html(Mensaje);
+
+		// Se muestra el cuadro modal
+		$('#PCO_Modal_Mensaje').modal('show');
+
+		//Hacer que la ventana este siempre por encima
+		$("#PCO_Modal_Mensaje").css("z-index", "1500");
+	}
 function PCO_MostrarMensajeCargandoSimple(MiliSegundos)
 	{
 		// Se muestra el cuadro modal
@@ -98,6 +110,10 @@ function CambiarModoEditor(modo)
 		ModoFiltrado = ModoFiltrado.toLowerCase();
 		//Cambia el modo de sintaxis y errores resaltado por el editor
 		editor.getSession().setMode(ModoFiltrado);
+
+		//Actualiza las listas de seleccion con el modo correspondiente
+		document.getElementById("modo_archivo_preferencias").value=modo;
+		document.getElementById("modo_archivo_top").value=modo;
 		try
 			{
 				EditorClonado.getSession().setMode(ModoFiltrado);
@@ -112,19 +128,13 @@ function CaracteresInvisiblesEditor(estado)
 		else
 			editor.setShowInvisibles(true);
 	}
-function VerificarSintaxisEditor(estado)
-	{
-		//Cambia el la verificacion de sintaxis del editor
-		if (estado==0)
-			editor.session.setOption("useWorker", false);
-		else
-			editor.session.setOption("useWorker", true);
-	}
-function VerificarAutocompletadoEditor(estado)
+
+function IntercambiarAutocompletadoEditor(estado)
 	{
 		//Cambia el la verificacion de sintaxis del editor
 		if (estado==0)
 			{
+				//editor.setOptions(enableLiveAutocompletion: false})
 				 editor.session.setOption("enableBasicAutocompletion", false);
 				 editor.session.setOption("enableSnippets", false);
 				 editor.session.setOption("enableLiveAutocompletion", false);
@@ -140,9 +150,47 @@ function IntercambiarEstadoCaracteresInvisibles()
 	{
 		//InterCambia el modo del editor para mostrar (true) u ocultar (false) los caracteres invisibles segun su estado actual
 		if (editor.getShowInvisibles()==true)
-			editor.setShowInvisibles(false);
+			{
+				editor.setShowInvisibles(false);
+				EditorClonado.setShowInvisibles(false);
+			}
 		else
-			editor.setShowInvisibles(true);
+			{
+				editor.setShowInvisibles(true);
+				EditorClonado.setShowInvisibles(true);
+			}
+	}
+function VerificarSintaxisEditor()
+	{
+		//Cambia el la verificacion de sintaxis del editor
+		if (document.getElementById("Check_VerificarSintaxisEditor").value=="1")
+			{
+				editor.session.setOption("useWorker", false);
+				EditorClonado.session.setOption("useWorker", false);
+				document.getElementById("Check_VerificarSintaxisEditor").value="0";
+				$('#Check_VerificarSintaxisEditor').prop('checked', false);
+			}
+		else
+			{
+				editor.session.setOption("useWorker", true);
+				EditorClonado.session.setOption("useWorker", true);
+				document.getElementById("Check_VerificarSintaxisEditor").value="1";
+				$('#Check_VerificarSintaxisEditor').prop('checked', true);
+			}
+	}
+function IntercambiarVisibilidadNumerosDeLinea()
+	{
+		//InterCambia el modo del editor para mostrar (true) u ocultar (false) los numeros de linea
+		if (editor.renderer.getShowGutter()==true)
+			{
+				editor.renderer.setShowGutter(false);
+				EditorClonado.renderer.setShowGutter(false);
+			}
+		else
+			{
+				editor.renderer.setShowGutter(true);
+				EditorClonado.renderer.setShowGutter(true);
+			}
 	}
 function ActualizarTituloEditor(titulo)
 	{
@@ -165,16 +213,32 @@ function QuitarAvisoAlmacenamiento()
 	{
 		//Deja el mensaje de almacenamiento al menos un segundo (para archivos pequenos almacenados rapido), luego lo oculta
 		setTimeout("PCO_OcultarMensajeCargandoSimple();", 500);
+		
+		//TODO: Devolver el foco al editor
+		//editor.focus();											//Establece el foco al editor
+		//$('#editor_codigo').trigger('click');
 	}
 
 function Guardar()
 	{
-		//Solamente guarda si no se trata del archivo demo
-		if (document.form_archivo_editado.PCODER_archivo.value != "demos/demo.txt")
+		var MensajeErrorAlmacenamiento="";
+		//Si se trata del archivo demo
+		if (document.form_archivo_editado.PCODER_archivo.value == "demos/demo.txt")
+			MensajeErrorAlmacenamiento=MULTILANG_PCODER_ErrGuardarDefecto;
+		//Verifica permisos
+		if (ListaArchivos[IndiceArchivoActual].PermisosRW!="1")
+			MensajeErrorAlmacenamiento=MULTILANG_PCODER_ErrGuardarNoPermiso;
+			
+		//Ejecuta el proceso de almacenamiento
+		if (MensajeErrorAlmacenamiento == "")
 			{
 				//Metodo estandar, envia todo sobre el iframe para evitar recargar la pagina
 				PCO_MostrarMensajeCargandoSimple();
 				document.form_archivo_editado.submit();
+			}
+		else
+			{
+				PCOJS_MostrarMensaje(MULTILANG_PCODER_Guardando+": "+MULTILANG_PCODER_Error,MensajeErrorAlmacenamiento);			
 			}
 	}
 function PCO_VentanaPopup(theURL,winName,features)
@@ -191,6 +255,183 @@ function PCO_AgregarElementoDiv(marco,elemento)
 	}
 //###################################################################################################################
 //###################################################################################################################
+function EjecutarOperacionFS()
+	{
+		//Toma los valores de parametros de la ventana de operaciones FS, valida y hace el llamado a la operacion
+		var path_operacion_elemento=document.getElementById("path_operacion_elemento").value;
+		var operacion_fs=document.getElementById("operacion_fs").value;
+		var nombre_elemento=document.getElementById("nombre_elemento").value;
+		var permisos_elemento=document.getElementById("permisos_elemento").value;
+		var propietario_elemento=document.getElementById("propietario_elemento").value;
+		
+		//CREAR ARCHIVO
+			if (operacion_fs=="CrearArchivo")
+				{
+					ResultadoOperacion=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCODER_CrearArchivo&PCODER_ElementoFS="+path_operacion_elemento+"/"+nombre_elemento);
+					if (ResultadoOperacion==1)
+						{
+							PCOJS_MostrarMensaje(MULTILANG_PCODER_Finalizado, MULTILANG_PCODER_ElementoCreado);
+							//Recarga la lista de archivos en el explorador para reflejar el nuevo elemento
+							ExplorarPath();
+							//Oculta el marco de operaciones FS
+							$('#myModalOPERARFS').modal('hide');
+							//Carga el archivo recien creado para su edicion
+							PCODER_CargarArchivo(path_operacion_elemento+"/"+nombre_elemento);
+						}
+					if (ResultadoOperacion==-1)
+						{
+							PCOJS_MostrarMensaje(MULTILANG_PCODER_Error, MULTILANG_PCODER_ElementoExiste);
+						}
+					if (ResultadoOperacion==-2)
+						{
+							PCOJS_MostrarMensaje(MULTILANG_PCODER_Error, MULTILANG_PCODER_ElementoNoCreado);
+						}
+				}
+
+		//CREAR CARPETA
+			if (operacion_fs=="CrearCarpeta")
+				{
+					ResultadoOperacion=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCODER_CrearCarpeta&PCODER_ElementoFS="+path_operacion_elemento+"/"+nombre_elemento);
+					if (ResultadoOperacion==1)
+						{
+							PCOJS_MostrarMensaje(MULTILANG_PCODER_Finalizado, MULTILANG_PCODER_ElementoCreado);
+							//Recarga la lista de archivos en el explorador para reflejar el nuevo elemento
+							ExplorarPath();
+							//Oculta el marco de operaciones FS
+							$('#myModalOPERARFS').modal('hide');
+						}
+					if (ResultadoOperacion==-1)
+						{
+							PCOJS_MostrarMensaje(MULTILANG_PCODER_Error, MULTILANG_PCODER_ElementoExiste);
+						}
+					if (ResultadoOperacion==-2)
+						{
+							PCOJS_MostrarMensaje(MULTILANG_PCODER_Error, MULTILANG_PCODER_ElementoNoCreado);
+						}
+				}
+
+		//EDITAR PERMISOS
+			if (operacion_fs=="EditarPermisos")
+				{
+					ResultadoOperacion=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCODER_EditarPermisos&PCODER_ElementoFS="+path_operacion_elemento+"&PCODER_PropietarioFS="+propietario_elemento+"&PCODER_PermisosFS="+permisos_elemento);
+					if (ResultadoOperacion==1)
+						{
+							PCOJS_MostrarMensaje(MULTILANG_PCODER_Finalizado, MULTILANG_PCODER_ElementoCreado);
+							//Oculta el marco de operaciones FS
+							$('#myModalOPERARFS').modal('hide');
+						}
+					else
+						{
+							PCOJS_MostrarMensaje(MULTILANG_PCODER_Error, MULTILANG_PCODER_ElementoNoCreado);
+						}
+				}
+
+		//ELIMINAR ELEMENTO
+			if (operacion_fs=="EliminarElemento")
+				{
+					//Determina el tipo de elemento a eliminar
+					PCODER_TipoElementoFS="archivo";
+					if (UltimaCarpetaSeleccionada!="")
+						PCODER_TipoElementoFS="carpeta";
+					ResultadoOperacion=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCODER_EliminarElemento&PCODER_ElementoFS="+path_operacion_elemento+"&PCODER_TipoElementoFS="+PCODER_TipoElementoFS);
+					if (ResultadoOperacion==1)
+						{
+							PCOJS_MostrarMensaje(MULTILANG_PCODER_Finalizado, MULTILANG_PCODER_Eliminado);
+							//Recarga la lista de archivos en el explorador para reflejar el nuevo elemento
+							ExplorarPath();
+							//Oculta el marco de operaciones FS
+							$('#myModalOPERARFS').modal('hide');
+						}
+					else
+						{
+							PCOJS_MostrarMensaje(MULTILANG_PCODER_Error, MULTILANG_PCODER_ElementoNoCreado);
+						}
+				}
+	}
+
+function OperacionFS_CrearArchivo()
+	{
+		//Presenta el cuadro de dialogo
+		$('#myModalOPERARFS').css('z-index', '500');	//Asigna un index inferior a los dialogos emergentes de resultado
+		$('#myModalOPERARFS').modal('show');
+		
+		//Asigna valores por defecto a algunos campos y controles
+		document.getElementById('nombre_elemento').value='';
+		document.getElementById('operacion_fs').value='CrearArchivo';
+		document.getElementById('permisos_elemento').value=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerPermisosArchivo&PCODER_archivo="+document.getElementById('nombre_elemento').value);
+		document.getElementById('propietario_elemento').value=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerPropietarioArchivo&PCODER_archivo="+document.getElementById('nombre_elemento').value);
+
+		//Oculta o muestra elementos necesarios segun la operacion
+		$('#operacion_fs').attr("disabled", true);
+		$("#cuadro_entrada_path_operacion_elemento").show();
+		$("#cuadro_entrada_marco_explorador").show();
+		$("#cuadro_entrada_operacion_fs").show();
+		$("#cuadro_entrada_nombre_elemento").show();
+		$("#cuadro_entrada_permisos_elemento").hide();
+	}
+
+function OperacionFS_CrearCarpeta()
+	{
+		//Presenta el cuadro de dialogo
+		$('#myModalOPERARFS').css('z-index', '500');	//Asigna un index inferior a los dialogos emergentes de resultado
+		$('#myModalOPERARFS').modal('show');
+		
+		//Asigna valores por defecto a algunos campos y controles
+		document.getElementById('nombre_elemento').value='';
+		document.getElementById('operacion_fs').value='CrearCarpeta';
+		document.getElementById('permisos_elemento').value=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerPermisosArchivo&PCODER_archivo="+document.getElementById('nombre_elemento').value);
+		document.getElementById('propietario_elemento').value=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerPropietarioArchivo&PCODER_archivo="+document.getElementById('nombre_elemento').value);
+
+		//Oculta o muestra elementos necesarios segun la operacion
+		$('#operacion_fs').attr("disabled", true);
+		$("#cuadro_entrada_path_operacion_elemento").show();
+		$("#cuadro_entrada_marco_explorador").show();
+		$("#cuadro_entrada_operacion_fs").show();
+		$("#cuadro_entrada_nombre_elemento").show();
+		$("#cuadro_entrada_permisos_elemento").hide();
+	}
+
+function OperacionFS_EditarPermisos()
+	{
+		//Presenta el cuadro de dialogo
+		$('#myModalOPERARFS').css('z-index', '500');	//Asigna un index inferior a los dialogos emergentes de resultado
+		$('#myModalOPERARFS').modal('show');
+		
+		//Asigna valores por defecto a algunos campos y controles
+		document.getElementById('nombre_elemento').value=UltimaCarpetaSeleccionada+UltimoArchivoSeleccionado;
+		document.getElementById('operacion_fs').value='EditarPermisos';
+		document.getElementById('permisos_elemento').value=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerPermisosArchivo&PCODER_archivo="+document.getElementById('nombre_elemento').value);
+		document.getElementById('propietario_elemento').value=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerPropietarioArchivo&PCODER_archivo="+document.getElementById('nombre_elemento').value);
+
+		//Oculta o muestra elementos necesarios segun la operacion
+		$('#operacion_fs').attr("disabled", true);
+		$("#cuadro_entrada_path_operacion_elemento").show();
+		$("#cuadro_entrada_marco_explorador").hide();
+		$("#cuadro_entrada_operacion_fs").show();
+		$("#cuadro_entrada_nombre_elemento").hide();
+		$("#cuadro_entrada_permisos_elemento").show();
+	}
+
+function OperacionFS_EliminarElemento()
+	{
+		//Presenta el cuadro de dialogo
+		$('#myModalOPERARFS').css('z-index', '500');	//Asigna un index inferior a los dialogos emergentes de resultado
+		$('#myModalOPERARFS').modal('show');
+		
+		//Asigna valores por defecto a algunos campos y controles
+		document.getElementById('nombre_elemento').value=UltimaCarpetaSeleccionada+UltimoArchivoSeleccionado;
+		document.getElementById('operacion_fs').value='EliminarElemento';
+		document.getElementById('permisos_elemento').value=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerPermisosArchivo&PCODER_archivo="+document.getElementById('nombre_elemento').value);
+		document.getElementById('propietario_elemento').value=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerPropietarioArchivo&PCODER_archivo="+document.getElementById('nombre_elemento').value);
+
+		//Oculta o muestra elementos necesarios segun la operacion
+		$('#operacion_fs').attr("disabled", true);
+		$("#cuadro_entrada_path_operacion_elemento").show();
+		$("#cuadro_entrada_marco_explorador").hide();
+		$("#cuadro_entrada_operacion_fs").show();
+		$("#cuadro_entrada_nombre_elemento").hide();
+		$("#cuadro_entrada_permisos_elemento").hide();
+	}
 function PCODER_DesactivarPanelIzquierdo()
 	{
 		AnchoPanelIzquierdo=0;
@@ -229,6 +470,13 @@ function PCODER_RecalcularPanelesLaterales()  //AjustarPanelesLaterales();
 		$("#panel_central").removeClass("col-md-10"); //Cuando esta un solo panel activo
 		$("#panel_central").removeClass("col-md-12"); //Cuando esta un solo panel activo
 		$("#panel_central").addClass("col-md-"+AnchoPanelCentral);
+		
+		//Reasigna el ALTO de los paneles
+		var AltoBotonOcultacionPI = $("#boton_ocultacion_panel_izquierdo").height();
+		var AltoComboSeleccionPath = $("#path_exploracion_archivos").height();
+		var AltoOperacionesArchivos = $("#marco_operaciones_archivos").height();
+		var AltoDisponible_PanelesLateralIzq = $("#panel_central_medio").height() - AltoBotonOcultacionPI - AltoComboSeleccionPath - AltoOperacionesArchivos;
+		$('#marco_explorador').height( AltoDisponible_PanelesLateralIzq+"px" ).css({ });		
 	}
 function PCODER_ActivarPanelIzquierdo()
 	{
@@ -407,21 +655,33 @@ function DisminuirTamanoFuente()
 		tamano=parseInt(tamano)-2;
 		CambiarFuenteEditor(tamano+"px");
 	}
-function ExplorarPath()
+function ExplorarPath(DesdeOnChange)
 	{
-		//Inicializa el explorador de archivos
+		//Inicializa el explorador de archivos (panel izquierdo)
 		$(document).ready( function() {
 			$('#marco_explorador').fileTree({ root: path_exploracion_archivos.value, script: '../../inc/jquery/plugins/jquery.fileTree-1.01/connectors/jqueryFileTree.php' }, function(archivo_seleccionado) {
-				//alert(file);
-				//PCODER_CargarArchivo('[link]');
 				PCODER_CargarArchivo(archivo_seleccionado);
 
 				//Simula clic sobre la pestana de archivos para pasar automaticamente a esta vista
 				$('#pestana_editor_archivos').trigger('click');
 			});
-
+		});
+		
+		//Inicializa el explorador de archivos (creacion de archivos y carpetas)
+		$(document).ready( function() {
+			$('#marco_explorador_creacionarchivo').fileTree({ root: path_exploracion_archivos.value, script: '../../inc/jquery/plugins/jquery.fileTree-1.01/connectors/jqueryFileTree.php?nofiles=true' }, function(path_seleccionado_creacion) {
+			});
 		});
 	}
+
+function ActualizarPathActual()
+	{
+		document.getElementById("path_operacion_elemento").value=UltimaCarpetaSeleccionada+UltimoArchivoSeleccionado;
+		//Llama periodicamente la rutina de actualizacion
+		window.setTimeout(ActualizarPathActual, 500);
+	}
+
+
 function ActualizarBarraEstado()
 	{
 		//Actualiza ademas las posiciones del cursor sobre el arreglo de archivos abiertos
@@ -595,31 +855,40 @@ function PCODER_CargarArchivo(path_archivo)
 		if (BusquedaArchivoAbierto==-1)
 			{
 				//Busca algunos datos del archivo
-				ValorTipoElemento=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerTipoElemento&PCODER_archivo="+path_archivo);
-				ValorTamanoDocumento=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerTamanoDocumento&PCODER_archivo="+path_archivo);
-				ValorFechaModificadoDocumento=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerFechaElemento&PCODER_archivo="+path_archivo);
-				ValorTokenEdicion=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerTokenEdicion&PCODER_archivo="+path_archivo);
 				ValorModoEditor=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerModoEditor&PCODER_archivo="+path_archivo);
-				ValorNombreArchivo=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerNombreArchivo&PCODER_archivo="+path_archivo);
-				ValorContenidoArchivo=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerContenidoArchivo&PCODER_archivo="+path_archivo);
-				ValorPermisosRW=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_VerificarPermisosRW&PCODER_archivo="+path_archivo);
-				ValorPermisosArchivo=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerPermisosArchivo&PCODER_archivo="+path_archivo);
-				ValorVistaSplit=""; //Valor inicial de la vista dividida (sin dividir)
 
-				//Agrega nuevo elemento al arreglo
-				ListaArchivos[IndiceAperturaArchivo] = { TipoDocumento: ValorTipoElemento, TamanoDocumento: ValorTamanoDocumento, FechaModificadoDocumento: ValorFechaModificadoDocumento, RutaDocumento: path_archivo, TokenEdicion: ValorTokenEdicion, ModoEditor: ValorModoEditor, NombreArchivo: ValorNombreArchivo, LineaActual: 1, ColumnaActual: 0 , PermisosRW: ValorPermisosRW, PermisosArchivo: ValorPermisosArchivo, VistaSplit: ValorVistaSplit};
-				
-				//Crea dinamicamente el textarea con el numero de indice y con su valor predeterminado
-				AgregarNuevoTextarea(document.form_textareas_archivos,"PCODER_AreaTexto"+IndiceAperturaArchivo,ValorContenidoArchivo);
-				
-				//Actualiza los indices de posiciones en el vector
-				IndiceUltimoArchivoAbierto=IndiceAperturaArchivo;
-				IndiceArchivoActual=IndiceAperturaArchivo;
-				IndiceAperturaArchivo++;
+				//Si el modo es uno de los soportados sigue adelante
+				if(ValorModoEditor!="")
+					{
+						ValorTipoElemento=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerTipoElemento&PCODER_archivo="+path_archivo);
+						ValorTamanoDocumento=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerTamanoDocumento&PCODER_archivo="+path_archivo);
+						ValorFechaModificadoDocumento=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerFechaElemento&PCODER_archivo="+path_archivo);
+						ValorTokenEdicion=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerTokenEdicion&PCODER_archivo="+path_archivo);
+						ValorNombreArchivo=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerNombreArchivo&PCODER_archivo="+path_archivo);
+						ValorContenidoArchivo=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerContenidoArchivo&PCODER_archivo="+path_archivo);
+						ValorPermisosRW=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_VerificarPermisosRW&PCODER_archivo="+path_archivo);
+						ValorPermisosArchivo=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerPermisosArchivo&PCODER_archivo="+path_archivo);
+						ValorVistaSplit=""; //Valor inicial de la vista dividida (sin dividir)
 
-				//Actualiza todo el editor con el archivo recier cargado
-				PCODER_CambiarArchivoActual(IndiceArchivoActual,1);
-				CambiarModoEditor("ace/mode/"+ListaArchivos[IndiceArchivoActual].ModoEditor); //Hace cambio forzado de tipo de editor cuando se abre un nuevo archivo
+						//Agrega nuevo elemento al arreglo
+						ListaArchivos[IndiceAperturaArchivo] = { TipoDocumento: ValorTipoElemento, TamanoDocumento: ValorTamanoDocumento, FechaModificadoDocumento: ValorFechaModificadoDocumento, RutaDocumento: path_archivo, TokenEdicion: ValorTokenEdicion, ModoEditor: ValorModoEditor, NombreArchivo: ValorNombreArchivo, LineaActual: 1, ColumnaActual: 0 , PermisosRW: ValorPermisosRW, PermisosArchivo: ValorPermisosArchivo, VistaSplit: ValorVistaSplit};
+						
+						//Crea dinamicamente el textarea con el numero de indice y con su valor predeterminado
+						AgregarNuevoTextarea(document.form_textareas_archivos,"PCODER_AreaTexto"+IndiceAperturaArchivo,ValorContenidoArchivo);
+						
+						//Actualiza los indices de posiciones en el vector
+						IndiceUltimoArchivoAbierto=IndiceAperturaArchivo;
+						IndiceArchivoActual=IndiceAperturaArchivo;
+						IndiceAperturaArchivo++;
+
+						//Actualiza todo el editor con el archivo recier cargado
+						PCODER_CambiarArchivoActual(IndiceArchivoActual,1);
+						CambiarModoEditor("ace/mode/"+ListaArchivos[IndiceArchivoActual].ModoEditor); //Hace cambio forzado de tipo de editor cuando se abre un nuevo archivo
+					}
+				else
+					{
+						PCOJS_MostrarMensaje(MULTILANG_PCODER_Error, MULTILANG_PCODER_ExtensionNoSoportada);
+					}
 			}
 		else
 			{
@@ -631,14 +900,16 @@ function PCODER_CargarArchivo(path_archivo)
 //##############################################################
 //###              INICIALIZACION DE VARIABLES               ###
 //##############################################################
-var ListaArchivos = new Array();								//Contiene la lista de los archivos cargados
-var IndiceAperturaArchivo=0;									//Posicion del arreglo sobre la que se desea guardar datos al abrir un archivo
-var IndiceUltimoArchivoAbierto=IndiceAperturaArchivo;			//Posicion del arreglo que contiene el ultimo archivo abierto
-var IndiceArchivoActual=IndiceAperturaArchivo;					//Posicion del arreglo con los datos del archivo actual
+var ListaArchivos = new Array();															//Contiene la lista de los archivos cargados
+var IndiceAperturaArchivo=0;																//Posicion del arreglo sobre la que se desea guardar datos al abrir un archivo
+var IndiceUltimoArchivoAbierto=IndiceAperturaArchivo;										//Posicion del arreglo que contiene el ultimo archivo abierto
+var IndiceArchivoActual=IndiceAperturaArchivo;												//Posicion del arreglo con los datos del archivo actual
 var ValorModoEditor;
+var UltimaCarpetaSeleccionada=document.getElementById("path_exploracion_archivos").value;	//Utilizado en modificacion de conector JQueryFileTree para obtener carpeta seleccionada
+var UltimoArchivoSeleccionado="";															//Utilizado en modificacion de conector JQueryFileTree para obtener archivo seleccionado
 AnchoPanelIzquierdo=0;
 AnchoPanelDerecho=0;
-
+			
 //Evento que quita la barra de progreso de carga para el explorador cada que finaliza el cargue de su IFrame
 $('#iframe_marco_explorador').load(function(){
 	$('#progreso_marco_explorador').hide();
@@ -667,6 +938,7 @@ editor.setOptions({
 	enableSnippets: true,
 	enableLiveAutocompletion: true
 });
+
 editor.setAnimatedScroll(true);
 
 //Elimina la visualizacion de margen de impresion
@@ -694,11 +966,17 @@ $(window).bind('keydown', function(event) {
 			event.preventDefault();
 			Guardar();
 			break;
+		case 'o':
+			event.preventDefault();
+			PCODER_ActivarPanelIzquierdo();
+			break;
+		case 'q':
+			event.preventDefault();
+			PCODER_CerrarArchivoActual();
+			break;
 		}
 	}
 });
-
-
 
 //Genera una nueva sesion del editor ACE
 function ClonarSesionEditor(session)
@@ -721,6 +999,7 @@ function ClonarPropiedadesEditor()
 		EditorClonado.setWrapBehavioursEnabled(editor.getWrapBehavioursEnabled());
 		EditorClonado.setTheme(editor.getTheme());
 		EditorClonado.setFontSize(editor.getFontSize());
+		EditorClonado.renderer.setShowGutter(editor.renderer.getShowGutter());
 		
 		//Modo de resaltado
 		ModoClonado="ace/mode/"+ListaArchivos[IndiceArchivoActual].ModoEditor;
@@ -728,9 +1007,6 @@ function ClonarPropiedadesEditor()
 		ModoFiltrado = ModoFiltrado.toLowerCase();
 		//Cambia el modo de sintaxis y errores resaltado por el editor
 		EditorClonado.getSession().setMode(ModoFiltrado);
-
-		//Evita el chequeo de sintaxis en el editor auxiliar
-		EditorClonado.getSession().setUseWorker(false);
 	}
 	
 //Clona el editor hacia uno nuevo para permitir los split
@@ -744,6 +1020,6 @@ EditorClonado.setSession( ClonarSesionEditor(NuevaSessionEditor) );
 
 // FUNCIONES DE INICIALIZACION ###############################################################
 	ExplorarPath();
+	ActualizarPathActual();
 	PCODER_RecalcularMaquetacion();
 	window.setTimeout(ActualizarBarraEstado, 1000);
-
