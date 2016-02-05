@@ -6,6 +6,12 @@
 |_____\___/ \__, |  \__,_|\___|  \___\__,_|_| |_| |_|_.__/|_|\___/|___/
             |___/ 
 ```
+## Versión 16.2 (2016-02-07)
+* Added: Agregados acordiones colapsables para presentar resultados de procesos de importacion
+* Added: Plugin de JQuery para exploracion de archivos
+* Added: Actualización de PCoder a su ultima versión: 16.3
+* Added: Plugin para selección de colores y paletas
+* Enhan: Mejorado el estilo para oscurecer la aplicación cuando se abre un diálogo modal y poder dar así un mayor énfasis al mensaje en pantalla.
 
 ## Versión 16.1 (2015-12-24)
 * Added: Funciones para operar listas de selección: PCOJS_ActualizarComboBox(), PCOJS_LimpiarComboBox(), PCOJS_AgregarOpcionComboBox(), PCOJS_OpcionesCombo_DesdeCSV()
