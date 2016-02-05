@@ -157,7 +157,7 @@ Group: Mod  {
 
    Group: Pcoder  {
 
-      File: http://stackoverflow.com/questions/15186558/loading-a-html-file-into-ace-editor-pre-tag  (mod/pcoder/inc/comunes.php)
+      File: Conexiones PDO  (mod/pcoder/inc/conexiones.php)
 
       Group: Idiomas  {
 
@@ -167,8 +167,11 @@ Group: Mod  {
          File: Idioma portugues para modulo de PCoder  (mod/pcoder/idiomas/pt.php)
          }  # Group: Idiomas
 
-      File: index.php  (mod/pcoder/index.php)
-      File: PCOMOD_ExplorarPath  (mod/pcoder/explorador.php)
+      File: inc/comunes.php  (mod/pcoder/inc/comunes.php)
+      File: inc/lib_pcoder.php  (mod/pcoder/inc/lib_pcoder.php)
+      File: Libreria base  (mod/pcoder/inc/comunes_bd.php)
+      File: PCOMOD_CargarPcoder  (mod/pcoder/index.php)
+      File: PCONSOLE_Cargar  (mod/pcoder/mod/consola/index.php)
       }  # Group: Pcoder
 
    File: probar_ejemplo_mvc  (mod/mvc/index.php)

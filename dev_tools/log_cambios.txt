@@ -15,9 +15,6 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 index.php
-core/tablas.php
-inc/jquery/plugins/*
-mod/pcoder/*
 inc/bootstrap/css/practico.min.css
 inc/bootstrap/js/practico.min.js
 inc/practico/idiomas/*
@@ -32,11 +29,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Agregados acordiones colapsables para presentar resultados de procesos de importacion
-* Added: Plugin de JQuery para exploracion de archivos
-* Added: Actualización de PCoder a su ultima versión: 16.3
-* Added: Plugin para selección de colores y paletas
-* Enhan: Mejorado el estilo para oscurecer la aplicación cuando se abre un diálogo modal y poder dar así un mayor énfasis al mensaje en pantalla.
+
 "
 
 ########################################################################

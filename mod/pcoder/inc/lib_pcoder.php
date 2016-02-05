@@ -209,7 +209,8 @@ if ($PCO_Accion=="PCOMOD_ObtenerPermisosArchivo")
 */
 if ($PCO_Accion=="PCOMOD_ObtenerPropietarioArchivo") 
 	{
-		$propietario_encontrado=@posix_getpwuid(fileowner($PCODER_archivo))['name'];
+		$propietario_encontrado=@posix_getpwuid(fileowner($PCODER_archivo));
+		$propietario_encontrado=$propietario_encontrado['name'];
         @ob_clean();
         echo $propietario_encontrado;
         die();
