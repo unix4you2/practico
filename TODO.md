@@ -61,5 +61,9 @@
 * Descripción: Aunque los tiempos iniciales son mas bájos que los demás, se debe hacer un benchmark oficial.  Voluntarios para algo como http://www.techempower.com/benchmarks/
 * Estimado: 21 de marzo de 2014
 
+- [ ] Exportación de objetos
+* Prioridad: Baja
+* Descripción: Permitir exportar los botones de un formulario para ser agregados a otro
+* Estimado: 
 
 
