@@ -2137,6 +2137,7 @@ function ventana_login()
 
 
                 <!--Login Estandar-->
+                <div id="EnfasisLoginZoom" class="EnfasisLoginZoom">
                 <div class="col-md-4 col-md-offset-4">
                     <div class="login-panel panel panel-default">
                         <div class="panel-heading">
@@ -2222,6 +2223,7 @@ function ventana_login()
                         <script language="JavaScript"> login_usuario.uid.focus(); </script>
                         </div> <!-- /panel-body -->
                     </div>
+                </div>
                 </div>
                 <!--FIN Login Estandar-->
 <?php

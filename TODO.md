@@ -66,4 +66,8 @@
 * Descripción: Permitir exportar los botones de un formulario para ser agregados a otro
 * Estimado: 
 
+- [ ] Set de iconos nuevo
+* Prioridad: Baja
+* Descripción: https://design.google.com/icons/ - http://google.github.io/material-design-icons/
+* Estimado: 
 

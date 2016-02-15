@@ -139,10 +139,15 @@ ESTILOS ADICIONALES PARA BOOTSTRAP
     }
 }
 
-
-
-
-
+/* Enfasis de la caja de login */
+.EnfasisLoginZoom {
+	transition: .6s; -webkit-transition: .6s;
+	transform:scale(0.95,.95); -webkit-transform:scale(.95);
+}
+.EnfasisLoginZoom:hover {
+	transition: .6s; -webkit-transition: .6s;
+	-webkit-transform:scale(1); transform:scale(1,1);
+}
 
 
 /*
