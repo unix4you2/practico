@@ -2043,6 +2043,14 @@ if ($PCO_Accion=="editar_informe")
 						</td>
 					</tr>
 				</table>
+				
+			<br>
+            <div class="well well-sm btn-xs" style="color:Blue;">
+				<font color="#FF0000"><b><?php echo strtoupper($MULTILANG_VistaPrev); ?> </b>(<?php echo $MULTILANG_MonCommSQL?>, <i>variables reemplazadas/vars replaced</i>):<br></font>
+				<?php echo construir_consulta_informe($registro_informe['id'],0); ?>
+            </div>
+            
+
 			<?php
 				cerrar_ventana();
 			?>
