@@ -164,6 +164,8 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
     <!-- Estilos selector de color -->
     <link rel="stylesheet" href="../../inc/jquery/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
 
+    <link href="../../inc/bootstrap/css/plugins/select/bootstrap-select.min.css" rel="stylesheet">
+
     <!-- jQuery -->
 	<script type="text/javascript" src="../../inc/jquery/jquery-2.1.0.min.js"></script>
 	<!-- Plugins adicionales JQuery -->
@@ -171,8 +173,9 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 	<script type="text/javascript" src="../../inc/jquery/plugins/jquery.fileTree-1.01/jqueryFileTree.js"></script>
     <link  type="text/css" href="../../inc/jquery/plugins/jquery.fileTree-1.01/jqueryFileTree.css" rel="stylesheet" media="screen">
     
-    <!-- Selector de colores -->
+    <!-- Plugins JQuery -->
 	<script type="text/javascript" src="../../inc/jquery/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+
 </head>
 <body onbeforeunload="return '<?php echo $MULTILANG_PCODER_AdvertenciaCierre; ?>';">
 
@@ -276,8 +279,39 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 						<div id="pestana_explorador_web" class="tab-pane fade">
 							<iframe name="frame_explorador" id="frame_explorador" src="mod/explorador" style="border:0px;"></iframe>
 						</div>
-					</div>
 
+						<div id="pestana_diferencias_archivos" class="tab-pane fade">
+							<div class="row">
+								<div class="col-md-12">
+									<div id="panel_controles_diff" align="left" style="color:#FFFFFF; margin-top:7px; margin-bottom:5px;">
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<b><?php echo $MULTILANG_PCODER_Archivo; ?> #1: </b>
+										<select style="margin-right:50px;" name="archivo_diff_1" id="archivo_diff_1" size="1" class="selectpicker" data-style="btn-success btn-xs" OnChange="PCODER_EjecutarDiff();">
+										</select>
+										<b><?php echo $MULTILANG_PCODER_Archivo; ?> #2: </b>
+										<select                            name="archivo_diff_2" id="archivo_diff_2" size="1" class="selectpicker" data-style="btn-warning btn-xs" OnChange="PCODER_EjecutarDiff();">
+										</select>
+										<br>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<?php echo $MULTILANG_PCODER_Formato; ?>: &nbsp;&nbsp;&nbsp;&nbsp;
+										<select                            name="formato_diff" id="formato_diff" size="1" class="selectpicker" data-style="btn-default btn-xs" OnChange="PCODER_EjecutarDiff();">
+											<option value="oscuro">Oscuro / Dark</option>
+											<option value="claro">Claro / Light</option>
+										</select>
+										<?php echo $MULTILANG_PCODER_Tipo; ?>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<select                            name="modo_visual_diff" id="modo_visual_diff" size="1" class="selectpicker" data-style="btn-default btn-xs" OnChange="PCODER_EjecutarDiff();">
+											<option value="ladoalado">Lado a Lado / Side by Side</option>
+											<option value="enlinea">Entre lineas / In line</option>
+											<option value="unificado">Unificado / Unified</option>
+											<option value="encontexto">En contexto / By context</option>
+										</select>
+									</div>
+								</div>	
+							</div>
+							<iframe name="frame_diferencias" id="frame_diferencias" src="mod/php-diff-1.0/generador" style="border:0px;"></iframe>
+						</div>
+						
+					</div>
 				</div>
 
 				<?php include_once ("inc/panel_centralinferior.php");	?>
@@ -291,7 +325,10 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="../../inc/bootstrap/js/bootstrap.min.js"></script>
-    
+    <!-- Plugins JQuery -->
+    <script type="text/javascript" src="../../inc/bootstrap/js/plugins/select/bootstrap-select.min.js"></script>
+
+
     <!-- Carga editor ACE y sus extensiones -->
 	<script src="../../inc/ace/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../inc/ace/src-min-noconflict/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>

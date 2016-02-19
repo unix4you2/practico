@@ -27,9 +27,10 @@
 
 			<!-- ################ INICIO PESTANAS SUPERIORES ############### -->
 			<ul class="nav nav-tabs btn-xs" role="tablist">
-				<li class="active"><a id="pestana_editor_archivos" href="#pestana_superior_editores" data-toggle="tab" OnClick=""><i class="fa fa-pencil-square-o fa-fw text-danger"></i> <?php echo $MULTILANG_PCODER_EditorArchivos; ?></a></li>
-				<li><a id="pestana_consola" data-toggle="tab" href="#pestana_consola_comandos"><i class="fa fa-terminal fa-fw text-warning"></i> <?php echo $MULTILANG_PCODER_TerminalRemota; ?></a></li>
-				<li><a id="pestana_explorador" data-toggle="tab" href="#pestana_explorador_web"><i class="fa fa-globe fa-fw text-success"></i> <?php echo $MULTILANG_PCODER_NavegadorEmbebido; ?></a></li>
+				<li class="active"><a id="pestana_editor_archivos" data-toggle="tooltip" data-placement="bottom" title="<?php echo $MULTILANG_PCODER_EditorArchivos; ?>" OnClick="$('#pestana_editor_archivos').attr('href', '#pestana_superior_editores'); $('#pestana_editor_archivos').attr('data-toggle', 'tab');"><i class="fa fa-pencil-square-o fa-fw fa-2x text-danger"></i></a></li>
+				<li><a id="pestana_consola" data-toggle="tooltip" data-placement="bottom" title="<?php echo $MULTILANG_PCODER_TerminalRemota; ?>" OnClick="$('#pestana_consola').attr('href', '#pestana_consola_comandos'); $('#pestana_consola').attr('data-toggle', 'tab');"><i class="fa fa-terminal fa-fw fa-2x text-warning"></i></a></li>
+				<li><a id="pestana_explorador" data-toggle="tooltip" data-placement="bottom" title="<?php echo $MULTILANG_PCODER_NavegadorEmbebido; ?>" OnClick="$('#pestana_explorador').attr('href', '#pestana_explorador_web'); $('#pestana_explorador').attr('data-toggle', 'tab');"><i class="fa fa-globe fa-fw fa-2x text-info"></i></a></li>
+				<li><a id="pestana_diferencias" data-toggle="tooltip" data-placement="bottom" title="<?php echo $MULTILANG_PCODER_HerramientaDiferencias; ?>" OnClick="$('#pestana_diferencias').attr('href', '#pestana_diferencias_archivos'); $('#pestana_diferencias').attr('data-toggle', 'tab');"><i class="fa fa-eye-slash fa-fw fa-2x text-danger"></i></a></li>
 			</ul>
 
 		</div>

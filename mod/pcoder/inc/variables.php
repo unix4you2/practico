@@ -115,7 +115,7 @@
 	$PCODER_Modos[]=array(Nombre => "Pascal",	Extensiones => "pas|p|dfm");
 	$PCODER_Modos[]=array(Nombre => "Perl",	Extensiones => "pl|pm");
 	$PCODER_Modos[]=array(Nombre => "pgSQL",	Extensiones => "pgsql");
-	$PCODER_Modos[]=array(Nombre => "PHP",	Extensiones => "php|phtml|inc|ctp");
+	$PCODER_Modos[]=array(Nombre => "PHP",	Extensiones => "php|phtml|inc|ctp|snt");
 	$PCODER_Modos[]=array(Nombre => "Powershell",	Extensiones => "ps1");
 	$PCODER_Modos[]=array(Nombre => "Praat",	Extensiones => "praat|praatscript|psc|proc");
 	$PCODER_Modos[]=array(Nombre => "Prolog",	Extensiones => "plg|prolog");

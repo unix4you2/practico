@@ -1,0 +1,112 @@
+body {
+	color:#FFFFFF;
+	background: #222222;
+	font-family: Arial;
+	font-size: 12px;
+	margin-top:0;
+}
+.Differences {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	empty-cells: show;
+}
+
+.Differences thead th {
+	text-align: left;
+	border-bottom: 1px solid #000;
+	background: #aaa;
+	color: #000;
+	padding: 4px;
+	font-size: 15px;
+}
+
+/* Numeros de Linea */
+.Differences tbody th {
+	color: #66EEFF;
+	text-align: right;
+	background: #373737;
+	width: 4em;
+	padding: 1px 2px;
+	border-right: 1px solid #000;
+	vertical-align: top;
+	font-size: 12px;
+}
+
+.Differences td {
+	color: #e6e1dc;
+	padding: 1px 2px;
+	font-family: Consolas, monospace;
+	font-size: 12px;
+}
+
+.DifferencesSideBySide .ChangeInsert td.Left {
+	color: #000000;
+	background: #949494;
+}
+
+.DifferencesSideBySide .ChangeInsert td.Right {
+	color: #000000;
+	background: #C5C5C5;
+}
+
+.DifferencesSideBySide .ChangeDelete td.Left {
+	color: #B31E0D;
+	background: #f88;
+}
+
+.DifferencesSideBySide .ChangeDelete td.Right {
+	color: #000000;
+	background: #faa;
+}
+
+.DifferencesSideBySide .ChangeReplace .Left {
+	color: #373737;
+	background: #fe9;
+}
+
+.DifferencesSideBySide .ChangeReplace .Right {
+	color: #373737;
+	background: #fd8;
+}
+
+.Differences ins, .Differences del {
+	text-decoration: none;
+}
+
+.DifferencesSideBySide .ChangeReplace ins, .DifferencesSideBySide .ChangeReplace del {
+	color: #000000;
+	background: #FFA12D;
+}
+
+.Differences .Skipped {
+	color: #000000;
+	background: #f7f7f7;
+}
+
+.DifferencesInline .ChangeReplace .Left,
+.DifferencesInline .ChangeDelete .Left {
+	color: #000000;
+	background: #fdd;
+}
+
+.DifferencesInline .ChangeReplace .Right,
+.DifferencesInline .ChangeInsert .Right {
+	color: #000000;
+	background: #dfd;
+}
+
+.DifferencesInline .ChangeReplace ins {
+	color: #373737;
+	background: #9e9;
+}
+
+.DifferencesInline .ChangeReplace del {
+	color: #ff0000;
+	background: #e99;
+}
+
+pre {
+	width: 100%;
+	overflow: auto;
+}

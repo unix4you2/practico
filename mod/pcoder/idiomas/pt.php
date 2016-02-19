@@ -87,7 +87,7 @@
 	$MULTILANG_PCODER_Tamano='Tamanho';
 	$MULTILANG_PCODER_Tipo='Tipo';
 	$MULTILANG_PCODER_Trabajando='Trabalhando';
-	$MULTILANG_PCODER_Ubicacion='Location';
+	$MULTILANG_PCODER_Ubicacion='Localização';
 	$MULTILANG_PCODER_Ver='Visão';
 
 	//Mensajes de error y varios
@@ -151,5 +151,5 @@
 	$MULTILANG_PCODER_NrosLinea='N&uacute;meros de linha Si / No';
 	$MULTILANG_PCODER_CheqSintaxis='Verificação de sintaxe';
 	$MULTILANG_PCODER_LenguajeResaltado='Idioma realçado';
-	$MULTILANG_PCODER_ExtensionNoSoportada='The file extension that you are trying to open is not supported.  You could add it to the supported extensions if you want to edit this file using PCoder.';
-
+	$MULTILANG_PCODER_ExtensionNoSoportada='A extensão do arquivo que você está tentando abrir não é suportado. Você pode adicioná-lo às extensões suportadas se você quiser editar esse arquivo usando PCoder.';
+	$MULTILANG_PCODER_HerramientaDiferencias='Ferramenta de diferenças';
