@@ -17,6 +17,7 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/informes.php
+core/marco_export.php
 inc/bootstrap/css/practico.min.css
 inc/bootstrap/js/practico.min.js
 inc/practico/idiomas/*
