@@ -16,10 +16,12 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/informes.php
 inc/bootstrap/css/practico.min.css
 inc/bootstrap/js/practico.min.js
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
+mod/pcoder/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -30,7 +32,9 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Fixed: Al cambiar pesos y realizar acciones entre campos y condiciones de informes se cruzaban los ID de elementos.  Ahira se evita el error de JS derivado.
 * Enhan: Se hace énfasis en ventana de login mediante zoom y velocidad de transición.
+* Enhan: Actualización a mejoras PCoder
 "
 
 ########################################################################

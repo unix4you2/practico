@@ -1128,8 +1128,8 @@ if ($PCO_Accion=="editar_informe")
 								echo '<tr>
 										<td><b>'.$registro["valor_campo"].'</b></td>
 										<td>'.$registro["valor_alias"].'</td>
-										<td>
-											<form action="'.$ArchivoCORE.'" method="POST" name="ifoce'.$registro["id"].'" id="ifoce'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+										<td nowrap>
+											<form action="'.$ArchivoCORE.'" method="POST" name="caifoce'.$registro["id"].'" id="caifoce'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 												<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
 												<input type="hidden" name="tabla" value="informe_campos">
@@ -1140,7 +1140,7 @@ if ($PCO_Accion=="editar_informe")
 												<input type="hidden" name="valor" value="'.$peso_aumentado.'">
 												<input type="Hidden" name="popup_activo" value="InformeCampos">
 											</form>
-											<form action="'.$ArchivoCORE.'" method="POST" name="ifopa'.$registro["id"].'" id="ifopa'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+											<form action="'.$ArchivoCORE.'" method="POST" name="caifopa'.$registro["id"].'" id="caifopa'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 												<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
 												<input type="hidden" name="tabla" value="informe_campos">
@@ -1153,15 +1153,15 @@ if ($PCO_Accion=="editar_informe")
 											</form>';
 										if (@$registro["campo"]!="id")
 											echo '
-												<a href="javascript:ifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="auto" ><i class="fa fa-caret-down"></i></a> 
+												<a href="javascript:caifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="auto" ><i class="fa fa-caret-down"></i></a> 
 												'.$registro["peso"].'
-												<a href="javascript:ifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="auto" ><i class="fa fa-caret-up"></i></a>
+												<a href="javascript:caifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="auto" ><i class="fa fa-caret-up"></i></a>
 												';
 								echo '		
 										</td>';
 										
 								echo '<td align=center>
-											<form action="'.$ArchivoCORE.'" method="POST" name="ifv'.$registro["id"].'" id="ifv'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+											<form action="'.$ArchivoCORE.'" method="POST" name="caifv'.$registro["id"].'" id="caifv'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 												<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
 												<input type="hidden" name="tabla" value="informe_campos">
@@ -1172,13 +1172,13 @@ if ($PCO_Accion=="editar_informe")
 												<input type="Hidden" name="popup_activo" value="InformeCampos">
 											';
 									if ($registro["visible"])
-										echo '<input type="hidden" name="valor" value="0"><a href="javascript:ifv'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" class="btn btn-warning btn-xs"><i class="fa fa-lightbulb-o"></i></a>';
+										echo '<input type="hidden" name="valor" value="0"><a href="javascript:caifv'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" class="btn btn-warning btn-xs"><i class="fa fa-lightbulb-o"></i></a>';
 									else
-										echo '<input type="hidden" name="valor" value="1"><a href="javascript:ifv'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" class="btn btn-default btn-xs"><i class="fa fa-lightbulb-o"></i></a>';
+										echo '<input type="hidden" name="valor" value="1"><a href="javascript:caifv'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" class="btn btn-default btn-xs"><i class="fa fa-lightbulb-o"></i></a>';
 								echo '</form></td>';
 
 								echo '<td align=center>
-											<form action="'.$ArchivoCORE.'" method="POST" name="ife'.$registro["id"].'" id="ife'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+											<form action="'.$ArchivoCORE.'" method="POST" name="caife'.$registro["id"].'" id="caife'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 												<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
 												<input type="hidden" name="tabla" value="informe_campos">
@@ -1189,17 +1189,17 @@ if ($PCO_Accion=="editar_informe")
 												<input type="Hidden" name="popup_activo" value="InformeCampos">
 											';
 									if ($registro["editable"])
-										echo '<input type="hidden" name="valor" value="0"><a href="javascript:ife'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>';
+										echo '<input type="hidden" name="valor" value="0"><a href="javascript:caife'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>';
 									else
-										echo '<input type="hidden" name="valor" value="1"><a href="javascript:ife'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></a>';
+										echo '<input type="hidden" name="valor" value="1"><a href="javascript:caife'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></a>';
 								echo '</form></td>';
 
 								echo '		<td>
-												<form action="'.$ArchivoCORE.'" method="POST" name="dfc'.$registro["id"].'" id="dfc'.$registro["id"].'">
+												<form action="'.$ArchivoCORE.'" method="POST" name="cadfc'.$registro["id"].'" id="cadfc'.$registro["id"].'">
 														<input type="hidden" name="PCO_Accion" value="eliminar_informe_campo">
 														<input type="hidden" name="campo" value="'.$registro["id"].'">
 														<input type="hidden" name="informe" value="'.$informe.'">
-                                                        <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvBorrado.'\',dfc'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
+                                                        <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvBorrado.'\',cadfc'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 												</form>
 										</td>
 									</tr>';
