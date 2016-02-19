@@ -5062,7 +5062,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 						$TituloVentanaInforme=$Nombre_Aplicacion.' - '.$registro_informe["titulo"];
 						//Define si requiere o no boton de exportacion en la barra de titulo
-						if ($registro_informe["genera_pdf"]=='S')
+						if ($registro_informe["genera_pdf"]=='S' && $embebido!=1)
 							{
 								$TituloVentanaInforme='
 								<a class="btn btn-primary btn-xs pull-right" data-toggle="modal" href="#myModalEXPORTACION">
@@ -5086,7 +5086,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					echo '<DIV style="DISPLAY: block; OVERFLOW: auto; POSITION: relative; WIDTH: '.$registro_informe["ancho"].'; HEIGHT: '.$registro_informe["alto"].'">';
 					
 				//Genera enlaces a las opciones de descarga
-				if ($registro_informe["genera_pdf"]=='S')
+				if ($registro_informe["genera_pdf"]=='S'  && $embebido!=1)
 					include_once("core/marco_export.php");
 
 					//DEPRECATED echo '	<html>		<body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0" style="font-size: 12px; font-family: Arial, Verdana, Tahoma;">';
