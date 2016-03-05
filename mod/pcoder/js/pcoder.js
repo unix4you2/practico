@@ -200,7 +200,7 @@ function IntercambiarEstadoCaracteresInvisibles()
 	}
 function VerificarSintaxisEditor()
 	{
-		//Cambia el la verificacion de sintaxis del editor
+		//Cambia la verificacion de sintaxis del editor
 		if (document.getElementById("Check_VerificarSintaxisEditor").value=="1")
 			{
 				editor.session.setOption("useWorker", false);
@@ -216,6 +216,26 @@ function VerificarSintaxisEditor()
 				$('#Check_VerificarSintaxisEditor').prop('checked', true);
 			}
 	}
+function VerificarAutocompletado()
+	{
+		//Cambia el autocompletado del editor
+		if (document.getElementById("Check_VerificarAutocompletado").value=="1")
+			{
+				editor.setOptions({enableBasicAutocompletion: false, enableLiveAutocompletion: false});
+				EditorClonado.setOptions({enableBasicAutocompletion: false, enableLiveAutocompletion: false});
+				//EditorClonado.session.setOption("useWorker", false);
+				document.getElementById("Check_VerificarAutocompletado").value="0";
+				$('#Check_VerificarAutocompletado').prop('checked', false);
+			}
+		else
+			{
+				editor.setOptions({enableBasicAutocompletion: true, enableLiveAutocompletion: true});
+				EditorClonado.setOptions({enableBasicAutocompletion: true, enableLiveAutocompletion: true});
+				//EditorClonado.session.setOption("useWorker", true);
+				document.getElementById("Check_VerificarAutocompletado").value="1";
+				$('#Check_VerificarAutocompletado').prop('checked', true);
+			}
+	}
 function IntercambiarVisibilidadNumerosDeLinea()
 	{
 		//InterCambia el modo del editor para mostrar (true) u ocultar (false) los numeros de linea
@@ -229,6 +249,41 @@ function IntercambiarVisibilidadNumerosDeLinea()
 				editor.renderer.setShowGutter(true);
 				EditorClonado.renderer.setShowGutter(true);
 			}
+	}
+function ActivarBuscadorArchivos()
+	{
+		//InterCambia la visibilidad del buscador
+		if (BuscadorArchivosVisible==1)
+			{
+				$("#contenedor_buscador_archivos").css("display", "none");
+				$("#marco_explorador").show();
+				$("#marco_operaciones_archivos").show();
+				BuscadorArchivosVisible=0;
+			}
+		else
+			{
+				$("#contenedor_buscador_archivos").css("display", "block");
+				$("#marco_explorador").hide();
+				$("#marco_operaciones_archivos").hide();
+				BuscadorArchivosVisible=1;
+			}
+	}
+function LanzarBusquedaArchivos()
+	{
+		//Verifica que se tenga un Path para buscar, en caso que la ultima selecciona haya sido sobre un archivo asigna el path del combo
+		if (UltimaCarpetaSeleccionada=="")
+			UltimaCarpetaSeleccionada=document.getElementById("path_exploracion_archivos").value;
+
+		//Determina estado del check
+		if ($('#SensibleMayuscula').is(":checked"))
+			SensibleMayuscula=1;
+		else
+			SensibleMayuscula=0;
+
+		//Llama al buscador de archivos con los parametros requeridos
+		ResultadoBuscador=PCO_ObtenerContenidoAjax(0,"mod/buscador/index.php","DirectorioExploracion="+UltimaCarpetaSeleccionada+"&PatronBusqueda="+document.FormBuscadorArchivos.archivo_busqueda.value+"&SensibleMayuscula="+SensibleMayuscula);
+		//$('#resultados_buscador_archivo').html("<ul>"+ResultadoBuscador+"</ul>");
+		$('#resultados_buscador_archivo').html(ResultadoBuscador);
 	}
 function ActualizarTituloEditor(titulo)
 	{
@@ -1016,6 +1071,7 @@ var UltimaCarpetaSeleccionada=document.getElementById("path_exploracion_archivos
 var UltimoArchivoSeleccionado="";															//Utilizado en modificacion de conector JQueryFileTree para obtener archivo seleccionado
 AnchoPanelIzquierdo=0;
 AnchoPanelDerecho=0;
+BuscadorArchivosVisible=0;
 			
 //Evento que quita la barra de progreso de carga para el explorador cada que finaliza el cargue de su IFrame
 $('#iframe_marco_explorador').load(function(){
@@ -1067,6 +1123,7 @@ $( window ).resize(function() {
 // CAPTURA DE EVENTOS DE TECLADO DESDE LA VENTANA  #############################################################
 //Captura el evento de Ctrl+S para guardar el archivo
 $(window).bind('keydown', function(event) {
+	//alert(String.fromCharCode(event.which).toLowerCase());
 	if (event.ctrlKey || event.metaKey) {
 		switch (String.fromCharCode(event.which).toLowerCase()) {
 		case 's':  //<-- Cambiar para otras letras ;)
@@ -1108,6 +1165,24 @@ editor.commands.addCommand({
 			},
 		readOnly: true
 	});
+editor.commands.addCommand({
+		name: 'aumentarfuenteeditor',
+		bindKey: {win: 'Ctrl-+', mac: 'Command-Option-+'},
+		exec: function(editor) {
+			AumentarTamanoFuente();
+			},
+		readOnly: true
+	});
+editor.commands.addCommand({
+		name: 'disminuirfuenteeditor',
+		bindKey: {win: 'Ctrl--', mac: 'Command-Option--'},
+		exec: function(editor) {
+			DisminuirTamanoFuente();
+			},
+		readOnly: true
+	});
+
+
 
 //Genera una nueva sesion del editor ACE
 function ClonarSesionEditor(session)

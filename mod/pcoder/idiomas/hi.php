@@ -153,3 +153,5 @@
 	$MULTILANG_PCODER_LenguajeResaltado='प्रकाश डाला भाषा';
 	$MULTILANG_PCODER_ExtensionNoSoportada='फाइल एक्सटेंशन है कि आप को खोलने के लिए कोशिश कर रहे हैं समर्थित नहीं है। आप समर्थित एक्सटेंशन के लिए इसे जोड़ने सकता है अगर आप इस फाइल को PCoder का उपयोग कर संपादित करना चाहते हैं';
 	$MULTILANG_PCODER_HerramientaDiferencias='मतभेद उपकरण';
+	$MULTILANG_PCODER_SensibleMayusculas='अक्षर संवेदनशील';
+	$MULTILANG_PCODER_Autocompletado='स्वत: पूर्ण रूप में आप टाइप';

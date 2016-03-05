@@ -154,3 +154,6 @@
 	$MULTILANG_PCODER_LenguajeResaltado='Lenguaje de resaltado';
 	$MULTILANG_PCODER_ExtensionNoSoportada='La extensión del archivo que intenta abrir no se encuentra soprotada.  Si lo desea puede agregarla a la lista de extensiones soportadas en caso que aun quiera editarla mediante PCoder.';
 	$MULTILANG_PCODER_HerramientaDiferencias='Visor de diferencias';
+	$MULTILANG_PCODER_SensibleMayusculas='Distinguir May&uacute;sculas / Min&uacute;sculas';
+	$MULTILANG_PCODER_Autocompletado='Autocompletado mientras se escribe';
+

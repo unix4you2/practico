@@ -57,6 +57,7 @@
 									<li><a id="boton_navegador_archivos" style="cursor:pointer;" OnClick="OperacionFS_CrearArchivo();">		<i class="fa fa-file-o fa-fw"></i> <?php echo $MULTILANG_PCODER_Nuevo; ?></a></li>
 									<li role="separator" class="divider"></li>
 									<li><a id="boton_navegador_archivos" style="cursor:pointer;" OnClick="PCODER_ActivarPanelIzquierdo();">		<i class="fa fa-folder-open fa-fw"></i> <?php echo $MULTILANG_PCODER_Abrir; ?>			<span class="pull-right text-muted small"><i>Ctrl+O</i></span></a></li>
+									<li><a id="boton_buscador_archivos1" style="cursor:pointer;" OnClick="BuscadorArchivosVisible=0; PCODER_ActivarPanelIzquierdo(); ActivarBuscadorArchivos();">		<i class="fa fa-search fa-fw"></i> <?php echo $MULTILANG_PCODER_Buscar; ?>			</a></li>
 									<li><a id="boton_guardar"            style="cursor:pointer;" OnClick="Guardar();">							<i class="fa fa-floppy-o fa-fw"></i> <?php echo $MULTILANG_PCODER_Guardar; ?>			<span class="pull-right text-muted small"><i>Ctrl+S</i></span></a></li>
 									<li role="separator" class="divider"></li>
 									<li><a style="cursor:pointer;" id="boton_cerraractual"       OnClick="PCODER_CerrarArchivoActual();">		<i class="fa fa-times fa-fw"></i> <?php echo $MULTILANG_PCODER_Cerrar; ?>				<span class="pull-right text-muted small"><i>Ctrl+Q</i></span></a></li>
@@ -139,6 +140,10 @@
 									<li><a style="cursor:pointer;" OnClick="editor.execCommand('goToPreviousError');"><i class="fa fa-outdent fa-fw"></i><?php echo $MULTILANG_PCODER_DepuraErrorPrevio; ?> <span class="pull-right text-muted small"><i>Alt+Shift+E</i></span></a></li>
 									<li role="separator" class="divider"></li>
 									<li><a style="cursor:pointer;" OnClick="VerificarSintaxisEditor(0);"><input type="checkbox" id="Check_VerificarSintaxisEditor" value="1" checked readonly> <?php echo $MULTILANG_PCODER_Activar; ?>/<?php echo $MULTILANG_PCODER_Desactivar; ?> <?php echo $MULTILANG_PCODER_CheqSintaxis; ?></a></li>
+
+									<li><a style="cursor:pointer;" OnClick="VerificarAutocompletado(0);"><input type="checkbox" id="Check_VerificarAutocompletado" value="1" checked readonly> <?php echo $MULTILANG_PCODER_Activar; ?>/<?php echo $MULTILANG_PCODER_Desactivar; ?> <?php echo $MULTILANG_PCODER_Autocompletado; ?></a></li>
+
+
 								</ul>
 							</li>
 
@@ -148,11 +153,9 @@
 								<ul class="dropdown-menu">
 									<li><a style="cursor:pointer;" OnClick="PCODER_ActivarPanelDerecho();"><i class="fa fa-paint-brush fa-fw"></i> <?php echo $MULTILANG_PCODER_ExploradorColores; ?></a></li>
 									<li><a style="cursor:pointer;" OnClick="$('#pestana_diferencias').trigger('click');"><i class="fa fa-eye-slash fa-fw"></i> <?php echo $MULTILANG_PCODER_HerramientaDiferencias; ?></a></li>
+									<li><a id="boton_buscador_archivos2" style="cursor:pointer;" OnClick="BuscadorArchivosVisible=0; PCODER_ActivarPanelIzquierdo(); ActivarBuscadorArchivos();">		<i class="fa fa-search fa-fw"></i> <?php echo $MULTILANG_PCODER_Buscar; ?> <?php echo $MULTILANG_PCODER_Archivo; ?>			</a></li>
 								</ul>
 							</li>
-
-				
-
 
 							<!-- BOTONES INDEPENDIENTES -->
 							<li><a style="cursor:pointer;" OnClick="editor.execCommand('find');" data-toggle="tooltip" data-placement="bottom" title="<?php echo $MULTILANG_PCODER_Buscar; ?>"><i class="fa fa-search fa-fw text-danger "></i></a></li>
@@ -179,7 +182,7 @@
 									<li><a style="cursor:pointer;" OnClick="$('#AtajosTeclado').modal('show'); $('#AtajosTeclado').css('z-index', '1500');"><i class="fa fa-keyboard-o fa-fw"></i> <?php echo $MULTILANG_PCODER_AtajosTitPcoder; ?></a></li>
 									<li role="separator" class="divider"></li>
 									<li><a style="cursor:pointer;" OnClick="$('#myModalACERCADEPCODER').modal('show'); $('#myModalACERCADEPCODER').css('z-index', '1500');"><i class="fa fa-info-circle fa-fw"></i> <?php echo $MULTILANG_PCODER_Acerca; ?></a></li>
-									<li><a style="cursor:pointer;" OnClick="editor.execCommand('showSettingsMenu');"><i class="fa fa-cogs fa-fw"></i> <?php echo $MULTILANG_PCODER_Otros; ?></a></li>
+									<!--<li><a style="cursor:pointer;" OnClick="editor.execCommand('showSettingsMenu');"><i class="fa fa-cogs fa-fw"></i> <?php echo $MULTILANG_PCODER_Otros; ?></a></li>-->
 								</ul>
 							</li>
 						</ul>
