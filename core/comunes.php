@@ -2176,12 +2176,12 @@ function ventana_login()
                                             echo '<hr>
                                                 <a data-toggle="modal" href="#myModalLOGINOAUTH" class="btn btn-info  btn-block">
                                                     <div>
-                                                        '.$MULTILANG_OauthLogin.'
-                                                        <i class="fa fa-facebook-square"></i>
-                                                        <i class="fa fa-google-plus-square"></i>
-                                                        <i class="fa fa-twitter"></i>
-                                                        <i class="fa fa-linkedin-square"></i>
-                                                        <i class="fa fa-dropbox"></i>
+                                                        '.$MULTILANG_OauthLogin.'<br>
+                                                        <i class="fa fa-2x fa-facebook-square"></i>
+                                                        <i class="fa fa-2x fa-google-plus-square"></i>
+                                                        <i class="fa fa-2x fa-twitter"></i>
+                                                        <i class="fa fa-2x fa-linkedin-square"></i>
+                                                        <i class="fa fa-2x fa-dropbox"></i>
                                                     </div>
                                                 </a>';
                                     ?>

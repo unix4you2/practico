@@ -169,16 +169,17 @@ if (@$PCO_WSId=="verificar_credenciales")
 	Ver tambien:
 		<autenticacion_oauth> | <ejecutar_login_oauth>
 */
-	function oauth_crear_usuario($OAuth_servicio,$login_chk='',$nombre_chk='',$correo_chk='',$interno_chk=0)
+	function oauth_crear_usuario($OAuth_servicio,$login_chk='',$nombre_chk='',$correo_chk='',$interno_chk=0,$plantilla_permisos_chk='')
 		{
 			global $TablasCore,$LlaveDePaso,$PCO_FechaOperacion,$ListaCamposSinID_usuario;
 			// Inserta datos del usuario
 			$clavemd5=MD5(TextoAleatorio(20));
 			$pasomd5=MD5($LlaveDePaso);
+			$descripcion="Auth:$OAuth_servicio";
 			//Agrega el registro de usuario si aun no existe
 			if (!existe_valor($TablasCore."usuario","login",$login_chk))
 				{
-					@ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno) VALUES ('$login_chk','$clavemd5','$nombre_chk',1,'$correo_chk','$PCO_FechaOperacion','$pasomd5','$interno_chk')");
+					@ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno,plantilla_permisos,descripcion) VALUES ('$login_chk','$clavemd5','$nombre_chk',1,'$correo_chk','$PCO_FechaOperacion','$pasomd5','$interno_chk','$plantilla_permisos_chk','$descripcion')");
 					auditar("OAuth:Agregado usuario $login_chk para ".$OAuth_servicio);
 				}
 		}
@@ -240,13 +241,12 @@ if (@$PCO_WSId=="verificar_credenciales")
 
 			// Busca datos del usuario Practico, segun tipo de servicio OAuth para tener configuraciones de permisos y parametros propios de la herramienta
 			$consulta_busqueda_usuario_oauth="SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login='$login_chk' AND descripcion LIKE '%Auth:$OAuth_servicio%' ";
-			$resultado_usuario=ejecutar_sql($consulta_busqueda_usuario_oauth);
-			$registro = $resultado_usuario->fetch();
+			$registro=ejecutar_sql($consulta_busqueda_usuario_oauth)->fetch();
 
 			// Agrega el usuario cuando es primer login desde el servicio
 			if ($registro["login"]=="")
 				{
-					oauth_crear_usuario($OAuth_servicio,$login_chk,$nombre_chk,$correo_chk);
+					oauth_crear_usuario($OAuth_servicio,$login_chk,$nombre_chk,$correo_chk,0,$plantilla_origen_permisos);
 					// Actualiza el registro desde nueva consulta
 					$resultado_usuario=ejecutar_sql($consulta_busqueda_usuario_oauth);
 					$registro = $resultado_usuario->fetch();

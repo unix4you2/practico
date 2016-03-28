@@ -196,7 +196,7 @@
 	$MULTILANG_LoginNoWSDes='La funcion file_get_contents() no puede cargar correctamente el archivo XML generado por el web service de autenticacion de Practico.<br>  Verifique la instalacion de su servidor web para validar que la funcion opera correctamente y sin restricciones.<br>  Una forma de validar si el proceso de autenticacion es correcto pero es su servidor quien no deja abrir el resultado<br>es abriendo el siguiente enlace y viendo si carga correctamente el XML.<br>  Activar el modo de depuracion en la configuracion de Practico puede ayudar a ver mas detalles.';
 	$MULTILANG_OauthLogin='Iniciar con mi red social';
 	$MULTILANG_LoginClasico='Usar mi cuenta Practico';
-	$MULTILANG_LoginOauthDes='<b>Redes sociales y proveedores externos disponibles</b><br>Haga clic sobre el logo para ingresar usando las credenciales de su sitio favorito.';
+	$MULTILANG_LoginOauthDes='Haga clic sobre el logo de su red social o proveedor favorito para ingresar al sistema usando las mismas credenciales.';
 
 	//Banderas de campos en formularios
 	$MULTILANG_TitValorUnico='El valor ingresado no acepta duplicados';
