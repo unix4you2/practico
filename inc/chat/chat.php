@@ -228,7 +228,7 @@ function sanitize($text) {
 
 function analytics() {
         // Estadisticas de uso anonimo con GABeacon
-        $PrefijoGA='<img src="https://ga-beacon.appspot.com/';
+        $PrefijoGA='<img src="https://rastreador-visitas.appspot.com/';
         $PosfijoGA='/Practico/Chat?pixel" border=0 ALT=""/>';
         // Este valor indica un ID generico de GA UA-847800-9 No edite esta linea sobre el codigo
         // Para validar que su ID es diferente al generico de seguimiento.  En lugar de esto cambie

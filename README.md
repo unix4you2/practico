@@ -66,4 +66,4 @@ Si encuentra útil este proyecto y desea contribuir al desarrollo del mismo pued
 
 
 
-[![Analytics](https://ga-beacon.appspot.com/UA-847800-9/ArbolFuentes/README?pixel)](https://github.com/igrigorik/ga-beacon)
+[![Analytics](https://rastreador-visitas.appspot.com/UA-847800-9/ArbolFuentes/README?pixel)](https://github.com/practico/rastreador-visitas)

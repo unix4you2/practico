@@ -17,13 +17,16 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/informes.php
+core/marco_abajo.php
 core/marco_export.php
+core/monitoreo.php
 core/ws_funciones.php
 inc/bootstrap/css/practico.min.css
 inc/bootstrap/js/practico.min.js
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 mod/pcoder/*
+inc/chat/chat.php
 img/practico_social.png
 "
 
