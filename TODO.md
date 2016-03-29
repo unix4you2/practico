@@ -6,10 +6,10 @@
 * Descripción: Enlace de referencia: http://www.pedroventura.com/php/problemas-codificacion-web-configurar-codificacion-utf8-php-mysql-y-html/
 * Estimado: 15 de agosto de 2013 
 
-- [ ] Recuperación de contraseña
-* Prioridad: Baja
-* Descripción: Establecer mecanismos para recordar contraseñas por correo.  Permitir activar o desactivar la funcionalidad por configuración.
-* Estimado: 2 de septiembre de 2013
+- [ ] Personalizar la App desplegada en AppEngine para el rastreo del uso de la aplicación
+* Prioridad: Media
+* Descripción: Permitir que cada desarrollador pueda direccionar a una aplicación de rastreo propia sobre AppEngine de Google las solicitudes de la herramienta
+* Estimado: 5 de mayo de 2016
 
 - [ ] Permitir nombre del admin personalizable
 * Prioridad: Media
@@ -35,11 +35,6 @@
 * Prioridad: Media
 * Descripción: Permitir agregar imágenes, encabezados y pies de pagina para informes en formato PDF
 * Estimado: 31 de octubre de 2013
-
-- [ ] Traducción al portugués
-* Prioridad: Baja
-* Descripción: Generar el archivo de traducción del sistema al idioma Portugués
-* Estimado: 30 de agosto de 2013
 
 - [ ] Sistema de caché
 * Prioridad: Baja

@@ -46,6 +46,7 @@ LogCambios="
 * Enhan: Se hace énfasis en ventana de login mediante zoom y velocidad de transición.
 * Enhan: Actualización a mejoras PCoder
 * Enhan: Mejorada ventana de login para opciones OAuth
+* Enhan: Actualizado el AppEngine para rastreo de visitas a la aplicación
 "
 
 ########################################################################
