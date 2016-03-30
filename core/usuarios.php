@@ -1287,7 +1287,7 @@ if ($PCO_Accion=="permisos_usuario")
 					$clavemd5=MD5($clave);
 					$pasomd5=MD5($LlaveDePaso);
                     $Llave_recuperacion="";
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno$_SeparadorCampos_$Llave_recuperacion$_SeparadorCampos_$es_plantilla$_SeparadorCampos_$plantilla_permisos");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno$_SeparadorCampos_$Llave_recuperacion$_SeparadorCampos_$es_plantilla$_SeparadorCampos_$plantilla_permisos$_SeparadorCampos_$descripcion_usuario");
 					auditar("Agrega usuario $login para $nombre");
                     //Redirecciona a la lista de usuarios con el usuario prefiltrado por si se le quiere asignar permisos
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
