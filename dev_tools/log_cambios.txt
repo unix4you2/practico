@@ -17,6 +17,7 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/informes.php
+core/usuarios.php
 core/marco_abajo.php
 core/marco_export.php
 core/monitoreo.php
