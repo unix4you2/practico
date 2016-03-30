@@ -201,6 +201,76 @@ function PCOJS_OpcionesCombo_DesdeCSV(ObjetoListaOpciones,Cadena,SeparadorLineas
         PCOJS_ActualizarComboBox(ObjetoListaOpciones);
     }
 
+function PCOJS_GeoLocalizar(latitude,longitude,altitude,accuracy,heading,speed)
+    {
+		/*Establece la ubicacion del usuario y retorna el objeto
+			Active los parametros (valor 1) en el llamado a la funcion para incluirlos en el retorno
+				latitude (latitud): La posicion norte-sur sobre la tierra.
+				longitude (Longitud): La posicion de occidente a oriente sobre la tierra
+				altitude (altitud): La altura de la posicion, solo si el dispositivo de visualizacion tiene la capacidad de medir la altitud.
+				accuracy (exactitud): Precision de las alturas, exactitud, que es medida en metros.
+				heading: Direccion y recorrido, medida en grados alrededor de un circulo.
+				speed (velocidad): La velocidad de desplazamiento en una partida determinada en metros por segundo.
+			Retorna:
+				Valores separador por coma segun los parametros activados (1)
+				GPS_SINSOPORTE: Si el navegador del cliente no soporta geolocalizacion
+				GPS_DENEGADO: Si el usuario no autoriza al navegador para accesar su ubicacion
+				GPS_NOSERVICIO: Si no se puede acceder a la ubicacion. GPS inactivo?
+				GPS_TIMEOUT: El servicio ha tardado demasiado tiempo en responder.  Por defecto 15 segundos, cache de 75 segundos
+				GPS_ERROR: Ha ocurrido un error desconocido	
+		*/
+
+		var ResultadoGeolocalizacion="";
+		//Determina si el navegador soporta HTML5 y geolocalizacion
+		if(navigator.geolocation)
+			{
+				navigator.geolocation.getCurrentPosition(function(objPosition)
+				{
+					var lat = objPosition.coords.latitude;
+					var lon = objPosition.coords.longitude;
+					var alt = objPosition.coords.altitude;
+					var acc = objPosition.coords.accuracy;
+					var hea = objPosition.coords.heading;
+					var spd = objPosition.coords.speed;
+					//Construye la respuesta para el usuario segun parametros requeridos
+					if (latitude==1)	ResultadoGeolocalizacion=ResultadoGeolocalizacion+lat+",";
+					if (longitude==1)	ResultadoGeolocalizacion=ResultadoGeolocalizacion+lon+",";
+					if (altitude==1)	ResultadoGeolocalizacion=ResultadoGeolocalizacion+alt+",";
+					if (accuracy==1)	ResultadoGeolocalizacion=ResultadoGeolocalizacion+acc+",";
+					if (heading==1)		ResultadoGeolocalizacion=ResultadoGeolocalizacion+hea+",";
+					if (speed==1)		ResultadoGeolocalizacion=ResultadoGeolocalizacion+spd+",";
+					alert("GPS:"+ResultadoGeolocalizacion);
+
+				}, function(objPositionError)
+				{
+					switch (objPositionError.code)
+					{
+						case objPositionError.PERMISSION_DENIED:
+							ResultadoGeolocalizacion = "GPS_DENEGADO";
+						break;
+						case objPositionError.POSITION_UNAVAILABLE:
+							ResultadoGeolocalizacion = "GPS_NOSERVICIO";
+						break;
+						case objPositionError.TIMEOUT:
+							ResultadoGeolocalizacion = "GPS_TIMEOUT";
+						break;
+						default:
+							ResultadoGeolocalizacion = "GPS_ERROR";
+					}
+
+				}, {
+					maximumAge: 75000,
+					timeout: 15000
+				});
+			}
+		else
+			{
+				ResultadoGeolocalizacion="GPS_SINSOPORTE";
+			}
+		return ResultadoGeolocalizacion;
+    }
+
+
 //Funcion para conversion de texto a HTML
 function PCO_HTMLSpecialChars(string)
     {

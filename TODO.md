@@ -6,6 +6,21 @@
 * Descripción: Enlace de referencia: http://www.pedroventura.com/php/problemas-codificacion-web-configurar-codificacion-utf8-php-mysql-y-html/
 * Estimado: 15 de agosto de 2013 
 
+- [ ] Agregar funcion que permite activar en caliente con JS las celdas de un informe.  Generalizar la existente.
+* Prioridad: Baja
+* Descripción:
+	function ActivarInline()
+		{
+			//TablaInforme_3
+			//Activa el editor en linea para la tabla cuando se hace clic en una celda
+			$('#TablaInforme_3').on( 'click', 'tbody td:not(:first-child)', function (e) {
+				editor.inline( this );
+			} );
+		}
+* Estimado: Julio 2016
+
+
+
 - [ ] Personalizar la App desplegada en AppEngine para el rastreo del uso de la aplicación
 * Prioridad: Media
 * Descripción: Permitir que cada desarrollador pueda direccionar a una aplicación de rastreo propia sobre AppEngine de Google las solicitudes de la herramienta

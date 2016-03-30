@@ -39,6 +39,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 * Added: Se agrega una vista previa del Query SQL que es generado por los parámetros definidos en los informes
+* Added: Nueva función para geolocalización: PCOJS_GeoLocalizar(Latitud,Longitud,Altitud,Precision,Direccion,Velocidad).  Envíe los parametros en 1 ó 0 (todos obligatorios) para determinar qué quiere que le retorne la funcion.
 * Fixed: Al cambiar pesos y realizar acciones entre campos y condiciones de informes se cruzaban los ID de elementos.  Ahira se evita el error de JS derivado.
 * Fixed: [Reportado: José Llanos (Venezuela)]:  Al empotrar un informe con botón de exportación en un formulario ese botón hace que todas las acciones de botones en el formulario cambien a la descarga del informe.  Se corrige para evitar que en informes embebidos se incluya tal botón.
 * Fixed: Agregado campo descripcion a tabla de usuarios para permitir busquedas durante login por OAuth
