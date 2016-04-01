@@ -145,6 +145,7 @@
 	$MULTILANG_Pagina='पृष्ठ';
 	$MULTILANG_ParamApp='आवेदन मापदंडों';
 	$MULTILANG_Paso='चरण';
+	$MULTILANG_Pausar='Pause';
 	$MULTILANG_Peso=' भार';
 	$MULTILANG_Pequeno='छोटा';
 	$MULTILANG_Personalizado='रिवाज';
@@ -1112,7 +1113,7 @@
 	$MULTILANG_MonDefinidos='Pages & Monitors defined';
 	$MULTILANG_MonErr='Name field is mandatory';
 	$MULTILANG_MonEstado='व्यवस्था की स्थिति';
-	$MULTILANG_MonAcerca='&copy; Monitoring system based on <a href="http://www.practico.org" style="color:#FFFFFF"><font color=white><b>Practico.org</b></font></a>';
+	$MULTILANG_MonAcerca='&copy; Monitoring system based on <a target="_blank" href="http://www.practico.org" style="color:#FFFFFF"><font color=white><b>Practico.org</b></font></a>';
 	$MULTILANG_AplicaPara='इस के लिए लागू होता है: ';
 	$MULTILANG_MonLinea='लाइन पर';
 	$MULTILANG_MonCaido='नीचे';

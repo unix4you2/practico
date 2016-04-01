@@ -145,6 +145,7 @@
 	$MULTILANG_Pagina='Page';
 	$MULTILANG_ParamApp='Aplication parameters';
 	$MULTILANG_Paso='Step';
+	$MULTILANG_Pausar='Pause';
 	$MULTILANG_Peso='Weight';
 	$MULTILANG_Pequeno='small';
 	$MULTILANG_Personalizado='Custom';
@@ -1113,7 +1114,7 @@
 	$MULTILANG_MonDefinidos='Pages & Monitors defined';
 	$MULTILANG_MonErr='Name field is mandatory';
 	$MULTILANG_MonEstado='System status';
-	$MULTILANG_MonAcerca='&copy; Monitoring system based on <a href="http://www.practico.org" style="color:#FFFFFF"><font color=white><b>Practico.org</b></font></a>';
+	$MULTILANG_MonAcerca='&copy; Monitoring system based on <a target="_blank" href="http://www.practico.org" style="color:#FFFFFF"><font color=white><b>Practico.org</b></font></a>';
 	$MULTILANG_AplicaPara='This applies for: ';
 	$MULTILANG_MonLinea='ON LINE';
 	$MULTILANG_MonCaido='DOWN';

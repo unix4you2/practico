@@ -145,6 +145,7 @@
 	$MULTILANG_Pagina='Pagina';
 	$MULTILANG_ParamApp='Par&aacute;metros de aplicaci&oacute;n';
 	$MULTILANG_Paso='Paso';
+	$MULTILANG_Pausar='Pausar';
 	$MULTILANG_Peso='Peso';
 	$MULTILANG_Pequeno='peque&ntilde;o';
 	$MULTILANG_Personalizado='Personalizado';
@@ -1110,7 +1111,7 @@
 	$MULTILANG_MonDefinidos='Paginas y Monitores definidos';
 	$MULTILANG_MonErr='Se requiere el campo de nombre como minimo';
 	$MULTILANG_MonEstado='Estado del sistema';
-	$MULTILANG_MonAcerca='&copy; Sistema de monitoreo basado en <a href="http://www.practico.org" style="color:#FFFFFF"><font color=white><b>Practico.org</b></font></a>';
+	$MULTILANG_MonAcerca='&copy; Sistema de monitoreo basado en <a target="_blank" href="http://www.practico.org" style="color:#FFFFFF"><font color=white><b>Practico.org</b></font></a>';
 	$MULTILANG_AplicaPara='Esto aplica para: ';
 	$MULTILANG_MonLinea='EN LINEA';
 	$MULTILANG_MonCaido='CAIDO';

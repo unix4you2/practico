@@ -1,0 +1,120 @@
+html, body {
+	background: #272727;  /* 002a36 | BFBFBF | 888888 | 272727 | 000000 */
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+/* Personalizacion del estilo bootstrap para el alto del menu */
+	.navbar-nav > li > a, .navbar-brand {
+		padding-top:0px !important; padding-bottom:0 !important;
+		height: 27px;
+	}
+.navbar {min-height:27px !important;}
+
+/*Adicion de clase para el alto de menu*/
+	.navbar-xs { min-height:27px; height: 27px; font-size: 13px; }
+	.navbar-xs .navbar-brand{ padding: 0px 12px;font-size: 15px;line-height: 27px; }
+	.navbar-xs .navbar-nav > li > a { padding-top: 0px; padding-bottom: 0px; line-height: 27px; }
+	.navbar-xs .navbar-nav > li > ul > li { font-size: 13px; }
+	.navbar-xs .navbar-nav > li > ul { background: darkgray;  }
+
+
+/*Clase para las pestanas de archivos*/
+	.nav-xs>li>a, .nav-xs {
+		padding: 2px;
+		font-size: 11px;
+		margin-bottom: 0px;
+	}
+
+/*Estilos para cambiar tamano de pestanas*/
+	.nav-tabs > li > a
+	{
+		/* adjust padding for height*/
+		padding-top: 1px; 
+		padding-bottom: 1px;
+	}
+
+	.nav-tabs > li.active > a:focus, .nav-tabs > li.active > a
+	{
+		margin-top: 1px;
+	}
+	.nav-tabs > li {
+		margin-bottom: 0px; 
+	}
+	.nav-tabs > li.active {
+		margin-bottom: -1px;    
+	}
+
+.tooltip-inner {
+	max-width: none;
+	white-space: nowrap;
+	font-size: 10px;
+}
+
+/*Clase para el buscador de archivos*/
+	.buscador_archivos {
+		margin: 0px;
+		width: 100%;
+		height: 70vh;	/* vh o px */
+		overflow: auto;
+		padding: 0px;
+	}
+
+/*Clase para el explorador de archivos*/
+	.explorador_archivos {
+		margin: 0px;
+		width: 100%;
+		height: 100vh;	/* vh o px */
+		overflow: auto;
+		padding: 0px;
+	}
+
+	.explorador_archivos_mini {
+		margin: 0px;
+		width: 100%;
+		height: 150px;	/* vh o px */
+		overflow: auto;
+		padding: 0px;
+	}
+
+/*Personalizacion de barras de desplazamiento*/
+	/*Barra de desplazamiento como tal*/
+	::-webkit-scrollbar {
+		width: 10px;
+		height: 10px;
+	}
+	/*Botones de los extremos de la barra*/
+	::-webkit-scrollbar-button:start:decrement,
+	::-webkit-scrollbar-button:end:increment  {
+		display: none;
+	}
+
+	/*Barra sobre la que se mueve el boton flotante*/
+	::-webkit-scrollbar-track  {
+	}
+
+	/*Espacio libre de la barra de desplazamiento*/
+	::-webkit-scrollbar-track-piece  {
+		background-color: #3b3b3b;
+		-webkit-border-radius: 6px;
+	}
+	
+	/*Boton flotante de la barra de desplazamiento*/
+	::-webkit-scrollbar-thumb:vertical {
+		-webkit-border-radius: 6px;
+		background: #666 no-repeat center;
+	}
+	::-webkit-scrollbar-thumb:horizontal {
+		-webkit-border-radius: 6px;
+		background: #666 no-repeat center;
+	}
+
+	/*Esquina donde se encuentran las barras*/
+	::-webkit-scrollbar-corner {
+		display: none;
+	}
+
+	/*Esquina donde se encuentran las barras - cuando es redimensionable*/
+	::-webkit-resizer {
+		display: none;
+	}

@@ -729,15 +729,50 @@ if ($PCO_Accion=="administrar_monitoreo")
 		*/
 if ($PCO_Accion=="ver_monitoreo")
 	{
-
+    // Incluye encabezados, estilos y demas del HEAD
+    include_once("core/configuracion.php");
 ?>
-		<html>
-			<head>
-				<title><?php echo $MULTILANG_MonEstado; ?></title>
-                <link rel="stylesheet" href="inc/font-awesome/css/font-awesome.min.css">
-			</head>
-		<body bgcolor="#000000" vlink="#000000" leftmargin="0" topmargin="0" oncontextmenu="return false;" style="font-family: Verdana, Tahoma, Arial; font-size: 11px;">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+	<title>Monitor</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta name="generator" content="Practico Framework PHP" />
+ 	<meta name="description" content="Generador de aplicaciones web" />
+    <meta name="author" content="John Arroyave G. - {www.practico.org} - {unix4you2 at gmail.com}">
 
+    <!-- CSS Core de Bootstrap -->
+    <link href="inc/bootstrap/css/bootstrap.min.css" rel="stylesheet"  media="screen">
+    <link href="inc/bootstrap/css/bootstrap-theme.css" rel="stylesheet"  media="screen">
+
+	<!-- Estilos especificos Monitoreo -->
+    <link href="inc/bootstrap/css/monitoreo.css" rel="stylesheet"  media="screen">
+    
+    <!-- Custom Fonts -->
+    <link href="inc/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- Estilos selector de color -->
+    <link href="inc/bootstrap/css/plugins/select/bootstrap-select.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+	<script type="text/javascript" src="inc/jquery/jquery-2.1.0.min.js"></script>
+</head>
+
+		<body oncontextmenu="return false;" style="font-family: Verdana, Tahoma, Arial; font-size: 11px;">
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<?php
 			//Busa la mayor y menor pagina definida
 			$resultado=ejecutar_sql("SELECT MIN(pagina) as minimo,MAX(pagina) as maximo FROM ".$TablasCore."monitoreo ");
@@ -764,117 +799,155 @@ if ($PCO_Accion=="ver_monitoreo")
 			window.setTimeout("actualizar()",<?php echo $MilisegundosPagina; ?>);
 		</script>
 
-		<!-- INICIA LA TABLA PRINCIPAL -->
-		<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="color:white;">
-			<tr><td height="100%" valign="<?php if ($PCO_Accion=="Ver_menu") echo 'TOP'; else echo 'MIDDLE'; ?>" align="center">
 
-				<?php
-					$ErroresMonitoreoPractico=0;
 
-					//Path imagenes e iconos y sus propiedades
-					$Path_imagenes="img/";
-					//$Imagen_fallo='<img src=".$Path_imagenes."icn_12.gif border=0 align=top ".$Tamano_iconos.">';
-                    $Imagen_fallo='<i class="fa fa-exclamation-triangle icon-orange"></i>';
-					//$Imagen_ok='<img src=".$Path_imagenes."icn_11.gif border=0 align=top ".$Tamano_iconos.">';
-                    $Imagen_ok='<i class="fa fa-check-circle icon-green"></i>';
-					//$Imagen_generica='<img src=".$Path_imagenes."icn_rdp.png border=0 align=top ".$Tamano_iconos.">';
-                    $Imagen_generica='<i class="fa fa-certificate"></i>';
-					$Tamano_iconos=" width=20 heigth=20 ";
-                    //$Imagen_generica_sql='<img src=".$Path_imagenes."icn_03.gif border=0 align=top ".$Tamano_iconos.">';
-                    $Imagen_generica_sql='<i class="fa fa-database"></i>';
-					//$Imagen_generica_shell='<img src=".$Path_imagenes."icn_07.gif border=0 align=top ".$Tamano_iconos.">';
-                    $Imagen_generica_shell='<i class="fa fa-terminal"></i>';
-					$Sonido_alarma="inc/practico/sonidos/alarma.mp3";
+	<!-- ################# INICIO DE LA MAQUETACION ################ -->
+		<?php include_once ("core/monitoreo_superior.php"); 	?>
+		<DIV class="row">
+			<div class="col-md-12" style="margin:0px;" id="panel_central">
+				
+				<?php include_once ("inc/panel_centralsuperior.php");	?>
 
-					//Variables de apariencia
-					$ancho_tablas_maquinas=150;
-					// Valores de presentacion predeterminados
-					$color_fondo_estado="#CAF9CB";
-					$color_texto_estado="green";
+				<!-- INICIA LA TABLA PRINCIPAL -->
+				<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="color:white;">
+					<tr><td>
+						<!-- NOTA COPYRIGHT	 -->
+						<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MarcoInferior"><tr>
+							<td align="left" valign="bottom" width="50%">
+							</td>
+							<td align="right" valign="bottom" width="50%">
+								<font color=lightgray size=1><i><?php echo $MULTILANG_MonAcerca; ?></i>&nbsp;&nbsp;</font>
+							</td>
+						</tr></table>
+					</td></tr>
+					<tr><td height="100%" valign="<?php if ($PCO_Accion=="Ver_menu") echo 'TOP'; else echo 'MIDDLE'; ?>" align="center">
+						
+							<?php
+								$ErroresMonitoreoPractico=0;
 
-					$color_fondo_estado_sql="#CAF9CB";
-					$color_texto_estado_sql="green";
+								//Path imagenes e iconos y sus propiedades
+								$Path_imagenes="img/";
+								//$Imagen_fallo='<img src=".$Path_imagenes."icn_12.gif border=0 align=top ".$Tamano_iconos.">';
+								$Imagen_fallo='<i class="fa fa-exclamation-triangle icon-orange"></i>';
+								//$Imagen_ok='<img src=".$Path_imagenes."icn_11.gif border=0 align=top ".$Tamano_iconos.">';
+								$Imagen_ok='<i class="fa fa-check-circle icon-green"></i>';
+								//$Imagen_generica='<img src=".$Path_imagenes."icn_rdp.png border=0 align=top ".$Tamano_iconos.">';
+								$Imagen_generica='<i class="fa fa-certificate"></i>';
+								$Tamano_iconos=" width=20 heigth=20 ";
+								//$Imagen_generica_sql='<img src=".$Path_imagenes."icn_03.gif border=0 align=top ".$Tamano_iconos.">';
+								$Imagen_generica_sql='<i class="fa fa-database"></i>';
+								//$Imagen_generica_shell='<img src=".$Path_imagenes."icn_07.gif border=0 align=top ".$Tamano_iconos.">';
+								$Imagen_generica_shell='<i class="fa fa-terminal"></i>';
+								$Sonido_alarma="inc/practico/sonidos/alarma.mp3";
 
-					$color_fondo_ascii="transparent"; 	//Transparent o el codigo de color
-					$color_texto_ascii="#FFFFFF";
-					$barras_texto_ascii="hidden";		//hidden|auto
+								//Variables de apariencia
+								$ancho_tablas_maquinas=150;
+								// Valores de presentacion predeterminados
+								$color_fondo_estado="#CAF9CB";
+								$color_texto_estado="green";
 
-					$PosicionImagenes=0; //La posicion global para saber que imagen sigue
+								$color_fondo_estado_sql="#CAF9CB";
+								$color_texto_estado_sql="green";
 
-					//Limpia los arreglos de monitores
-					unset($Maquinas);
-					unset($ComandosShell);
-					unset($ComandosSQL);
-					unset($Imagenes);
-					//Recorre la pagina en cuestion
-					$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE pagina='$PaginaMonitoreo' ORDER BY peso ");
-					while($registro = $resultado->fetch())
-						{
-							//Evalua elementos tipo Etiqueta
-							if ($registro["tipo"]=="Etiqueta")
-								{
-									echo $registro["nombre"];
-								}
-							//Evalua elementos tipo Maquina o host
-							if ($registro["tipo"]=="Maquina")
-								{
-									$Maquinas[]=@array(Nombre => $registro["nombre"],	Host => $registro["host"],	Puerto => $registro["puerto"],		TipoMonitor=>$registro["tipo_ping"],	Icono=> $Imagen_generica,		CorreoAlerta=>$registro["correo_alerta"]);
-									PresentarEstadoMaquina($Maquinas[count($Maquinas)-1],$color_fondo_estado,$color_texto_estado);
-								}
-							//Evalua elementos tipo Comando shell
-							if ($registro["tipo"]=="ComandoShell")
-								{
-									$ComandosShell[]=array(Nombre => $registro["nombre"],	Comando=>$registro["comando"],	Ancho=>$registro["ancho"],	Alto=>$registro["alto"]);
-									EjecutarComando($ComandosShell[count($ComandosShell)-1]);
-								}
-							//Evalua elementos tipo Consulta SQL
-							if ($registro["tipo"]=="ComandoSQL")
-								{
-									$ComandosSQL[]=array(Nombre => $registro["nombre"],	Comando=>$registro["comando"],	TamanoResult=>$registro["tamano_resultado"],	OcultarTitulos=>$registro["ocultar_titulos"]);
-									PresentarEstadoSQL($ComandosSQL[count($ComandosSQL)-1],$color_fondo_estado_sql,$color_texto_estado_sql);
-								}
-							//Evalua elementos tipo Imagen
-							if ($registro["tipo"]=="Imagen")
-								{
-									$Imagenes[]=array(Nombre => $registro["nombre"],	Path=>$registro["path"],	Ancho=>$registro["ancho"],	Alto=>$registro["alto"],	Salto=>"0");	
-									PresentarImagen($Imagenes[count($Imagenes)-1]);
-								}
-							//Evalua elementos tipo Embebido
-							if ($registro["tipo"]=="Embebido")
-								{
-									echo '<iframe src="'.$registro["path"].'" width="'.$registro["ancho"].'" height="'.$registro["alto"].'"></iframe>';
-								}
-							//Agrega los saltos de linea
-							for ($i=0;$i<$registro["saltos"];$i++) echo "<br>";
-						}
+								$color_fondo_ascii="transparent"; 	//Transparent o el codigo de color
+								$color_texto_ascii="#FFFFFF";
+								$barras_texto_ascii="hidden";		//hidden|auto
 
-					// Si encuentra algun error en el monitoreo reproduce la alarma
-					if ($ErroresMonitoreoPractico)
-						{
-							$Ruta_Servidor="http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
-							$Ruta_Servidor=str_replace(basename($_SERVER['PHP_SELF']),"",$Ruta_Servidor);
-							$Ruta_Servidor.=$Sonido_alarma;
-							//Tipos de reproduccion
-							//echo '<embed height="50" width="100" src="'.$Sonido_alarma.'">';
-							//echo '<object height="50" width="100" data="'.$Sonido_alarma.'"></object>';
-							//echo '<bgsound src="'.$Sonido_alarma.'" loop="1"></bgsound>';
-							//echo '<audio autoplay id="bgsound"><source src="'.$Sonido_alarma.'" type="audio/mp3"><p>Navegador no soporta Audio en HTML5</p></audio>';
-							echo '<iframe src="'.$Ruta_Servidor.'" width="0" height="0"></iframe>';
-						}
+								$PosicionImagenes=0; //La posicion global para saber que imagen sigue
 
-				?>
-			<!-- PIE DE PAGINA -->	
-			<tr><td>
-				<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MarcoInferior"><tr>
-					<td align="left" valign="bottom" width="50%">
-					</td>
-					<td align="right" valign="bottom" width="50%">
-						<font color=lightgray size=1><i><?php echo $MULTILANG_MonAcerca; ?></i>&nbsp;&nbsp;</font>
-					</td>
-				</tr></table>
-			</td></tr>
-		<!-- FINALIZA LA TABLA PRINCIPAL -->
-		</td></tr></table>
+								//Limpia los arreglos de monitores
+								unset($Maquinas);
+								unset($ComandosShell);
+								unset($ComandosSQL);
+								unset($Imagenes);
+								//Recorre la pagina en cuestion
+								$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE pagina='$PaginaMonitoreo' ORDER BY peso ");
+								while($registro = $resultado->fetch())
+									{
+										//Evalua elementos tipo Etiqueta
+										if ($registro["tipo"]=="Etiqueta")
+											{
+												echo $registro["nombre"];
+											}
+										//Evalua elementos tipo Maquina o host
+										if ($registro["tipo"]=="Maquina")
+											{
+												$Maquinas[]=@array(Nombre => $registro["nombre"],	Host => $registro["host"],	Puerto => $registro["puerto"],		TipoMonitor=>$registro["tipo_ping"],	Icono=> $Imagen_generica,		CorreoAlerta=>$registro["correo_alerta"]);
+												PresentarEstadoMaquina($Maquinas[count($Maquinas)-1],$color_fondo_estado,$color_texto_estado);
+											}
+										//Evalua elementos tipo Comando shell
+										if ($registro["tipo"]=="ComandoShell")
+											{
+												$ComandosShell[]=array(Nombre => $registro["nombre"],	Comando=>$registro["comando"],	Ancho=>$registro["ancho"],	Alto=>$registro["alto"]);
+												EjecutarComando($ComandosShell[count($ComandosShell)-1]);
+											}
+										//Evalua elementos tipo Consulta SQL
+										if ($registro["tipo"]=="ComandoSQL")
+											{
+												$ComandosSQL[]=array(Nombre => $registro["nombre"],	Comando=>$registro["comando"],	TamanoResult=>$registro["tamano_resultado"],	OcultarTitulos=>$registro["ocultar_titulos"]);
+												PresentarEstadoSQL($ComandosSQL[count($ComandosSQL)-1],$color_fondo_estado_sql,$color_texto_estado_sql);
+											}
+										//Evalua elementos tipo Imagen
+										if ($registro["tipo"]=="Imagen")
+											{
+												$Imagenes[]=array(Nombre => $registro["nombre"],	Path=>$registro["path"],	Ancho=>$registro["ancho"],	Alto=>$registro["alto"],	Salto=>"0");	
+												PresentarImagen($Imagenes[count($Imagenes)-1]);
+											}
+										//Evalua elementos tipo Embebido
+										if ($registro["tipo"]=="Embebido")
+											{
+												echo '<iframe src="'.$registro["path"].'" width="'.$registro["ancho"].'" height="'.$registro["alto"].'"></iframe>';
+											}
+										//Agrega los saltos de linea
+										for ($i=0;$i<$registro["saltos"];$i++) echo "<br>";
+									}
+
+								// Si encuentra algun error en el monitoreo reproduce la alarma
+								if ($ErroresMonitoreoPractico)
+									{
+										$Ruta_Servidor="http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+										$Ruta_Servidor=str_replace(basename($_SERVER['PHP_SELF']),"",$Ruta_Servidor);
+										$Ruta_Servidor.=$Sonido_alarma;
+										//Tipos de reproduccion
+										//echo '<embed height="50" width="100" src="'.$Sonido_alarma.'">';
+										//echo '<object height="50" width="100" data="'.$Sonido_alarma.'"></object>';
+										//echo '<bgsound src="'.$Sonido_alarma.'" loop="1"></bgsound>';
+										//echo '<audio autoplay id="bgsound"><source src="'.$Sonido_alarma.'" type="audio/mp3"><p>Navegador no soporta Audio en HTML5</p></audio>';
+										echo '<iframe src="'.$Ruta_Servidor.'" width="0" height="0"></iframe>';
+									}
+
+							?>
+				<!-- FINALIZA LA TABLA PRINCIPAL -->
+				</td></tr></table>
+
+			</div>
+		</DIV>
+	<!-- ################## FIN DE LA MAQUETACION ################## -->
+
+
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="inc/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Plugins JQuery -->
+    <script type="text/javascript" src="inc/bootstrap/js/plugins/select/bootstrap-select.min.js"></script>
+
+	<script language="JavaScript">
+		function RecargarToolTipsEnlaces()
+			{
+				//Carga los tooltips programados en la hoja.  Por defecto todos los elementos con data-toggle=tootip
+				$(function () {
+				  $('[data-toggle="tooltip"]').tooltip();
+				})
+			}
+		RecargarToolTipsEnlaces();
+	</script>
+
+	<script language="JavaScript">
+		//Carga los popovers programados en la hoja.  Por defecto todos los elementos con data-toggle=popover
+		$(function () {
+		  $('[data-toggle="popover"]').popover()
+		});
+	</script>
+
 		<?php
 			// Estadisticas de uso anonimo con GABeacon
 			$PrefijoGA='<img src="https://rastreador-visitas.appspot.com/';
@@ -890,5 +963,6 @@ if ($PCO_Accion=="ver_monitoreo")
 		</body>
 		</html>
 <?php
+
 	} //Fin ver_monitoreo
 
