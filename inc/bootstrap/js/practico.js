@@ -201,74 +201,95 @@ function PCOJS_OpcionesCombo_DesdeCSV(ObjetoListaOpciones,Cadena,SeparadorLineas
         PCOJS_ActualizarComboBox(ObjetoListaOpciones);
     }
 
-function PCOJS_GeoLocalizar(latitude,longitude,altitude,accuracy,heading,speed)
-    {
-		/*Establece la ubicacion del usuario y retorna el objeto
-			Active los parametros (valor 1) en el llamado a la funcion para incluirlos en el retorno
-				latitude (latitud): La posicion norte-sur sobre la tierra.
-				longitude (Longitud): La posicion de occidente a oriente sobre la tierra
-				altitude (altitud): La altura de la posicion, solo si el dispositivo de visualizacion tiene la capacidad de medir la altitud.
-				accuracy (exactitud): Precision de las alturas, exactitud, que es medida en metros.
-				heading: Direccion y recorrido, medida en grados alrededor de un circulo.
-				speed (velocidad): La velocidad de desplazamiento en una partida determinada en metros por segundo.
-			Retorna:
-				Valores separador por coma segun los parametros activados (1)
-				GPS_SINSOPORTE: Si el navegador del cliente no soporta geolocalizacion
-				GPS_DENEGADO: Si el usuario no autoriza al navegador para accesar su ubicacion
-				GPS_NOSERVICIO: Si no se puede acceder a la ubicacion. GPS inactivo?
-				GPS_TIMEOUT: El servicio ha tardado demasiado tiempo en responder.  Por defecto 15 segundos, cache de 75 segundos
-				GPS_ERROR: Ha ocurrido un error desconocido	
-		*/
 
-		var ResultadoGeolocalizacion="";
-		//Determina si el navegador soporta HTML5 y geolocalizacion
-		if(navigator.geolocation)
+//######################################################################
+// Objeto PCO global para Practico    ##################################
+	var PCOJS = {};  
+
+	// Propiedades /////////////////////////////////////////////////////
+	PCOJS.Geolocalizacion = '';
+
+	// Metodos /////////////////////////////////////////////////////////
+	PCOJS.GeoLocalizar_Exito  = function(objPosition)
+		{
+			var CadenaResultado="";
+			var lat = objPosition.coords.latitude;
+			var lon = objPosition.coords.longitude;
+			var alt = objPosition.coords.altitude;
+			var acc = objPosition.coords.accuracy;
+			var hea = objPosition.coords.heading;
+			var spd = objPosition.coords.speed;
+			CadenaResultado=lat+","+lon+","+alt+","+acc+","+hea+","+spd;
+			PCOJS.Geolocalizacion = CadenaResultado;
+		};
+
+	PCOJS.GeoLocalizar_Error   = function(objPositionError)
+		{
+			var CadenaResultado="";
+			switch (objPositionError.code)
 			{
-				navigator.geolocation.getCurrentPosition(function(objPosition)
-				{
-					var lat = objPosition.coords.latitude;
-					var lon = objPosition.coords.longitude;
-					var alt = objPosition.coords.altitude;
-					var acc = objPosition.coords.accuracy;
-					var hea = objPosition.coords.heading;
-					var spd = objPosition.coords.speed;
-					//Construye la respuesta para el usuario segun parametros requeridos
-					if (latitude==1)	ResultadoGeolocalizacion=ResultadoGeolocalizacion+lat+",";
-					if (longitude==1)	ResultadoGeolocalizacion=ResultadoGeolocalizacion+lon+",";
-					if (altitude==1)	ResultadoGeolocalizacion=ResultadoGeolocalizacion+alt+",";
-					if (accuracy==1)	ResultadoGeolocalizacion=ResultadoGeolocalizacion+acc+",";
-					if (heading==1)		ResultadoGeolocalizacion=ResultadoGeolocalizacion+hea+",";
-					if (speed==1)		ResultadoGeolocalizacion=ResultadoGeolocalizacion+spd+",";
-					alert("GPS:"+ResultadoGeolocalizacion);
-
-				}, function(objPositionError)
-				{
-					switch (objPositionError.code)
-					{
-						case objPositionError.PERMISSION_DENIED:
-							ResultadoGeolocalizacion = "GPS_DENEGADO";
-						break;
-						case objPositionError.POSITION_UNAVAILABLE:
-							ResultadoGeolocalizacion = "GPS_NOSERVICIO";
-						break;
-						case objPositionError.TIMEOUT:
-							ResultadoGeolocalizacion = "GPS_TIMEOUT";
-						break;
-						default:
-							ResultadoGeolocalizacion = "GPS_ERROR";
-					}
-
-				}, {
-					maximumAge: 75000,
-					timeout: 15000
-				});
+				case objPositionError.PERMISSION_DENIED:
+					CadenaResultado = "GPS_DENEGADO";
+				break;
+				case objPositionError.POSITION_UNAVAILABLE:
+					CadenaResultado = "GPS_NOSERVICIO";
+				break;
+				case objPositionError.TIMEOUT:
+					CadenaResultado = "GPS_TIMEOUT";
+				break;
+				default:
+					CadenaResultado = "GPS_ERROR";
 			}
-		else
-			{
-				ResultadoGeolocalizacion="GPS_SINSOPORTE";
-			}
-		return ResultadoGeolocalizacion;
-    }
+			PCOJS.Geolocalizacion = CadenaResultado;
+		};
+
+	PCOJS.GeoLocalizarUsuario = function()
+		{
+			/*Establece la ubicacion del usuario y retorna
+					latitude (latitud): La posicion norte-sur sobre la tierra.
+					longitude (Longitud): La posicion de occidente a oriente sobre la tierra
+					altitude (altitud): La altura de la posicion, solo si el dispositivo de visualizacion tiene la capacidad de medir la altitud.
+					accuracy (exactitud): Precision de las alturas, exactitud, que es medida en metros.
+					heading: Direccion y recorrido, medida en grados alrededor de un circulo.
+					speed (velocidad): La velocidad de desplazamiento en una partida determinada en metros por segundo.
+				Retorna:
+					Valores separador por coma segun los parametros activados (1)
+					GPS_SINSOPORTE: Si el navegador del cliente no soporta geolocalizacion
+					GPS_DENEGADO: Si el usuario no autoriza al navegador para accesar su ubicacion
+					GPS_NOSERVICIO: Si no se puede acceder a la ubicacion. GPS inactivo?
+					GPS_TIMEOUT: El servicio ha tardado demasiado tiempo en responder.  Por defecto 15 segundos, cache de 75 segundos
+					GPS_ERROR: Ha ocurrido un error desconocido
+				Tenga en cuenta:
+					El tiempo de retorno del dispositivo puede no ser inmediato, se recomienda capturar el valor mediante una funcion con delay a menos que la funcion de geolocalizacion sea llamada siempre al comienzo con tiempo suficiente.
+					Ej:  setTimeout(function(){ alert("GPS:"+PCOJS.Geolocalizacion); }, 3000);
+			*/
+			var CadenaResultado="";
+
+			//Determina si el navegador soporta HTML5 y geolocalizacion
+			if(navigator.geolocation)
+				{
+					navigator.geolocation.getCurrentPosition(PCOJS.GeoLocalizar_Exito,PCOJS.GeoLocalizar_Error, {
+						maximumAge: 75000,
+						timeout: 15000
+					});
+				}
+			else
+				{
+					CadenaResultado="GPS_SINSOPORTE";
+					PCOJS.Geolocalizacion = CadenaResultado;
+				}
+		};
+
+// Fin Objeto PCO global para Practico #################################
+//######################################################################
+
+
+
+
+
+
+
+
 
 
 //Funcion para conversion de texto a HTML
