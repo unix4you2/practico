@@ -2,6 +2,7 @@
 	/*
 	Copyright (C) 2013  John F. Arroyave Gutiérrez
 						unix4you2@gmail.com
+						www.practico.org
 
 	This program is free software; you can redistribute it and/or
 	modify it under the terms of the GNU General Public License

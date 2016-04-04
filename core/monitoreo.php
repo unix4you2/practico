@@ -2,6 +2,7 @@
 	/*
 	Copyright (C) 2013  John F. Arroyave Gutiérrez
 						unix4you2@gmail.com
+						www.practico.org
 
 	This program is free software; you can redistribute it and/or
 	modify it under the terms of the GNU General Public License
@@ -183,6 +184,8 @@
 			
 			//Verifica estado de la maquina y servicio
 			$estado_actual=ServicioOnline($Maquina["Host"],$Maquina["Puerto"],$Maquina["TipoMonitor"]);
+			$estilo_caja_estado="panel-primary";
+			$estilo_texto_estado="text-primary";
 
 			if ($estado_actual)
 				$estado_final="$Imagen_ok $MULTILANG_MonLinea";
@@ -191,6 +194,9 @@
 					$estado_final="<blink> $Imagen_fallo $MULTILANG_MonCaido $Imagen_fallo</blink>";
 					$color_fondo_estado="#FF3B36";
 					$color_texto_estado="#FFFF00";
+					$estilo_caja_estado="panel-danger";
+					$estilo_texto_estado="text-danger";
+					
 					$ErroresMonitoreoPractico=1;
 					//Envia mensaje de notificacion por correo
 					enviar_correo("noreply@practico.org",$Maquina["CorreoAlerta"],$MULTILANG_MonTitulo." $MULTILANG_MonCaido [$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos] ",$Maquina["Nombre"]." [".$Maquina["Host"].":".$Maquina["Puerto"]."] -> ".$Maquina["TipoMonitor"]);				
@@ -207,29 +213,35 @@
 			else*/
 				$icono_maquina=$Imagen_generica;
 
+
 			echo '
-				<table width="'.$ancho_tablas_maquinas.'" border=1 cellpadding=1 cellspacing=0 bgcolor="#DDDDDD" style="color:black; width:'.$ancho_tablas_maquinas.'px; display: inline!important; font-family: Verdana, Tahoma, Arial; font-size: 9px; margin-top: 5px; margin-right: 5px; margin-left: 5px; margin-bottom: 5px;">
-					<tr>
-						<td width="'.$ancho_tablas_maquinas.'" bgcolor="#D8D8FF" align=center>
-							<table width="100%" border=0 cellpadding=2 cellspacing=0 style="color:black; font-family: Verdana, Tahoma, Arial; font-size: 11px;"><tr>
-								<td>
-									'.$icono_maquina.'
-								</td>
-								<td bgcolor="#D8D8FF" align=right>
-									<font size=2><b>'.$Maquina["Nombre"].'</b></font><br>
-								</td>
-							</tr></table>
-							('.$Maquina["Host"].$Separador_DosPuntos.$Maquina["Puerto"].')
-						</td>
-					</tr>
-					<tr>
-						<td colspan=2 align=center bgcolor="'.$color_fondo_estado.'">
-							<font size=3 color="'.$color_texto_estado.'"><b>'.$estado_final.'</b></font>
-						</td>
-					</tr>
-				</table>
+				<div class="col-lg-2 col-md-2">
+					<div class="panel '.$estilo_caja_estado.'">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-1">
+									<i class="fa fa-desktop fa-2x "></i>
+								</div>
+								<div class="col-xs-10 text-right">
+									<div>'.$Maquina["Nombre"].'<br>
+									<font size=1>('.$Maquina["Host"].$Separador_DosPuntos.$Maquina["Puerto"].')</font>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="#">
+							<div class="panel-footer">
+								<span class="pull-left '.$estilo_texto_estado.'" >
+									<font><b>'.$estado_final.'</b></font>
+								</span>
+								<span class="pull-right"><i class="fa fa-bar-chart '.$estilo_texto_estado.'"></i></span>
+								<div class="clearfix"></div>
+							</div>
+						</a>
+					</div>
+				</div>
 			';
-		
+
 		}
 
 
@@ -241,9 +253,10 @@
 				Function: PresentarEstadoSQL
 				Ejecuta un query SQL y presenta el resultado formateado como tabla
 			*/
-			global $Path_imagenes,$Imagen_generica_sql,$Tamano_iconos;
-			$SalidaFinalInforme='<table border=0 cellspacing=0 cellpadding=2 style="color:black; width:'.$ancho_tablas_maquinas.'px; display: inline!important; font-family: Verdana, Tahoma, Arial; font-size: 11px;">';
+			global $Path_imagenes,$Imagen_generica_sql,$Tamano_iconos,$MULTILANG_MonCommSQL;
+			$SalidaFinalInforme='<table class="table table-responsive table-condensed btn-xs table-unbordered table-hover" style="font-family: Monospace, Sans-serif, Terminal, Tahoma;">';
 
+			$estilo_caja_comandos="panel-warning";
 
 			// Busca e Imprime encabezados de columna si no se tienen que ocultar
 					$resultado_columnas=ejecutar_sql($ComandoSQL["Comando"]);
@@ -266,40 +279,43 @@
 					$SalidaFinalInforme.= '<tr>';
 					for ($i=0;$i<$numero_columnas;$i++)
 						{
-							$SalidaFinalInforme.= '<td style="font-size: '.$ComandoSQL["TamanoResult"].'px;">'.$registro_informe[$i].'</td>';
+							$SalidaFinalInforme.= '<td style="font-family: Monospace, Sans-serif, Terminal, Tahoma; font-size: '.$ComandoSQL["TamanoResult"].'px;">'.$registro_informe[$i].'</td>';
 						}
 					$SalidaFinalInforme.= '</tr>';
 				}
 			$SalidaFinalInforme.="</tr></table>";
 
 			$icono_maquina=$Imagen_generica_sql;
+
 			echo '
-				<table width="'.$ancho_tablas_maquinas.'" border=1 cellpadding=1 cellspacing=0 bgcolor="#DDDDDD" style="color:black; width:'.$ancho_tablas_maquinas.'px; display: inline!important; font-family: Verdana, Tahoma, Arial; font-size: 9px; margin-top: 5px; margin-right: 5px; margin-left: 5px; margin-bottom: 5px;">
-					<tr>
-						<td bgcolor="#D8D8FF" align=center>
-							<table width="100%" border=0 cellpadding=2 cellspacing=0 style="color:black; font-family: Verdana, Tahoma, Arial; font-size: 11px;"><tr>
-								<td>
-									'.$icono_maquina.'
-								</td>
-								<td bgcolor="#D8D8FF" align=right>
-									<font size=2><b>'.$ComandoSQL["Nombre"].'</b></font><br>
-								</td>
-							</tr></table>
-						</td>
-					</tr>
-					<tr>
-						<td colspan=2 align=center bgcolor="'.$color_fondo_estado_sql.'">
-							<font size=3 color="'.$color_texto_estado_sql.'"><b>'.$SalidaFinalInforme.'</b></font>
-						</td>
-					</tr>
-				</table>
+				<div class="col-lg-'.$ComandoSQL["Ancho"].' col-md-'.$ComandoSQL["Ancho"].'">
+					<div class="panel '.$estilo_caja_comandos.'">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-1">
+									<i class="fa fa-database fa-2x "></i>					
+								</div>
+								<div class="col-xs-10 text-right">
+									<div>'.$ComandoSQL["Nombre"].'<br>
+									<font size=1>('.$MULTILANG_MonCommSQL.')</font>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div align=left class="panel-footer panel-info" style="color: black; margin-left:0px;">
+								'.$SalidaFinalInforme.'
+			 			</div>
+					</div>
+				</div>
 			';
+
+
 		}
 
 
 /* ################################################################## */
 /* ################################################################## */
-	function PresentarTextoASCII($texto,$ancho,$alto)
+	function PresentarTextoASCII($texto)
 		{
 			/*
 				Function: PresentarTextoASCII
@@ -308,7 +324,9 @@
 			global $color_fondo_ascii,$color_texto_ascii,$barras_texto_ascii;
 
 			//Presenta la salida
-			echo '<textarea cols="'.$ancho.'" rows="'.$alto.'" style="overflow: '.$barras_texto_ascii.'; color: '.$color_texto_ascii.'; background-color: '.$color_fondo_ascii.'; font-size:11px; font-family: Monospace, Sans-serif, Tahoma; display: inline!important; border:0px;">'.$texto.'</textarea>';
+			echo '<divs align="left" style="font-size:11px; font-family: Monospace, Sans-serif, Terminal, Tahoma;">'.str_replace(" ","&nbsp;",nl2br($texto)).'</divs>';
+
+			//echo '<textarea cols="'.$ancho.'" rows="'.$alto.'" style="overflow: '.$barras_texto_ascii.'; margin-left:0; margin-right:0; margin-top:0; margin-bottom:0; font-size:11px; font-family: Monospace, Sans-serif, Tahoma; display: inline!important; border:0px;">'.$texto.'</textarea>';
 		}
 
 
@@ -322,7 +340,74 @@
 			*/
 
 			//Presenta la imagen
-			echo '<img src="'.$ImagenRRD["Path"].'" width="'.$ImagenRRD["Ancho"].'" height="'.$ImagenRRD["Alto"].'" border=0>';
+			//echo '<img src="'.$ImagenRRD["Path"].'" width="'.$ImagenRRD["Ancho"].'" height="'.$ImagenRRD["Alto"].'" border=0>';
+			$estilo_caja_imagenes="panel-info";
+
+			$ImagenOrigen =$ImagenRRD["Path"];
+			//verificamos si en la ruta nos han indicado el directorio en el que se encuentra. En ese caso elimina y deja solo el archivo
+			if ( strpos($ImagenOrigen, '/') !== FALSE )
+				$ImagenOrigen = preg_replace('/\.php$/', '' ,array_pop(explode('/', $ImagenOrigen)));
+
+			echo '
+				<div class="col-lg-'.$ImagenRRD["Ancho"].' col-md-'.$ImagenRRD["Ancho"].'">
+					<div class="panel '.$estilo_caja_imagenes.'">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-1">
+									<i class="fa fa-picture-o fa-2x"></i>					
+								</div>
+								<div class="col-xs-10 text-right">
+									<div>'.$ImagenRRD["Nombre"].'<br>
+									<font size=1>('.$ImagenOrigen.')</font>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div align=left class="" style="margin:0;">
+								<img src="'.$ImagenRRD["Path"].'" width="100%" height="'.$ImagenRRD["Alto"].'" border=0>
+			 			</div>
+					</div>
+				</div>
+			';
+
+		}
+												
+
+/* ################################################################## */
+/* ################################################################## */
+	function PresentarEmbebido($nombre,$path,$ancho,$alto)
+		{
+			/*
+				Function: PresentarImagen
+				Muestra una imagen en un path relativo a la ejecucion de la herramienta y de un tamano en pixeles determinado
+			*/
+
+			//Presenta la imagen
+			//echo '<iframe src="'.$path.'" width="'.$ancho.'" height="'.$alto.'"></iframe>';
+			$estilo_caja_imagenes="panel-success";
+			
+			echo '
+				<div class="col-lg-'.$ancho.' col-md-'.$ancho.'">
+					<div class="panel '.$estilo_caja_imagenes.'">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-1">
+									<i class="fa fa-globe fa-2x"></i>					
+								</div>
+								<div class="col-xs-10 text-right">
+									<div>'.$nombre.'<br>
+									<font size=1>('.$path.')</font>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div align=left class="" style="margin:0;">
+								<iframe src="'.$path.'" border=0 width="100%" height="'.$alto.'"></iframe>
+			 			</div>
+					</div>
+				</div>
+			';
+
 		}
 
 
@@ -334,35 +419,56 @@
 				Function: EjecutarComando
 				Ejecuta comandos autorizados en el servidor para mostrar su respuesta
 			*/
-			global $Path_imagenes,$Imagen_generica_shell,$Tamano_iconos,$color_fondo_ascii;
+			global $Path_imagenes,$Imagen_generica_shell,$Tamano_iconos,$color_fondo_ascii, $MULTILANG_MonCommShell;
 			
 			//Ejecuta el comando
 			$salida_comando = shell_exec($comando_ejecutar["Comando"]);
 			//Presenta la salida
 			$icono_maquina=$Imagen_generica_shell;
+			$estilo_caja_comandos="panel-success";
+
 			echo '
-				<table width="'.$ancho_tablas_maquinas.'" border=1 cellpadding=1 cellspacing=0 style="color:black; width:'.$ancho_tablas_maquinas.'px; display: inline!important; font-family: Verdana, Tahoma, Arial; font-size: 9px; margin-top: 5px; margin-right: 5px; margin-left: 5px; margin-bottom: 5px;">
-					<tr>
-						<td bgcolor="#D8D8FF" align=center>
-							<table width="100%" border=0 cellpadding=2 cellspacing=0 style="color:black; font-family: Verdana, Tahoma, Arial; font-size: 11px;"><tr>
-								<td>
-									'.$icono_maquina.'
-								</td>
-								<td bgcolor="#D8D8FF" align=right>
-									<font size=2><b>'.$comando_ejecutar["Nombre"].'</b></font><br>
-								</td>
-							</tr></table>
-						</td>
-					</tr>
-					<tr>
-						<td colspan=2 align=center bgcolor="'.$color_fondo_ascii.'">';
-							PresentarTextoASCII($salida_comando,$comando_ejecutar["Ancho"],$comando_ejecutar["Alto"]);
-			echo '		</td>
-					</tr>
-				</table>
+				<div class="col-lg-'.$comando_ejecutar["Ancho"].' col-md-'.$comando_ejecutar["Ancho"].'">
+					<div class="panel '.$estilo_caja_comandos.'">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-1">
+									<i class="fa fa-terminal fa-2x "></i>					
+								</div>
+								<div class="col-xs-10 text-right">
+									<div>'.$comando_ejecutar["Nombre"].'<br>
+									<font size=1>('.$MULTILANG_MonCommShell.')</font>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div align=left class="panel-footer panel-info" style="color: black; margin-left:0px;">';
+								PresentarTextoASCII($salida_comando);
+			echo ' 		</div>
+						
+					</div>
+				</div>
 			';
 		}
 
+
+/* ################################################################## */
+/* ################################################################## */
+	function PresentarEtiqueta($texto_etiqueta,$ancho_etiqueta)
+		{
+			/*
+				Function: PresentarEtiqueta
+				Muestra un texto en pantalla
+			*/
+			//Presenta la salida
+			echo '
+				<div class="col-lg-'.$ancho_etiqueta.' col-md-'.$ancho_etiqueta.'">
+							<div class="alert alert-inverse alert-sm" style="top-margin:0px;">
+								<b>'.$texto_etiqueta.'</b>
+			 			</div>
+				</div>
+			';
+		}
 
 /* ################################################################## */
 /* ################################################################## */
@@ -788,17 +894,29 @@ if ($PCO_Accion=="ver_monitoreo")
 			//Busca cuantos milisegundos esperar segun la pagina definida y sus elementos
 			$resultado=ejecutar_sql("SELECT SUM(milisegundos_lectura) as total_espera FROM ".$TablasCore."monitoreo WHERE pagina='$PaginaMonitoreo' ");
 			$registro = $resultado->fetch();
-			$MilisegundosPagina=$registro["total_espera"];
+			$MilisegundosPagina=$registro["total_espera"];			
 		?>
 
 		<script language="JavaScript">
 			var EstadoPausa=0;
+			var ValorCronometro=<?php echo round($MilisegundosPagina/1000); ?>;
 			function actualizar()
 				{
 					if (EstadoPausa==0)
 						document.location="index.php?PCO_Accion=ver_monitoreo&Presentar_FullScreen=1&Pagina=<?php echo $SiguientePagina; ?>";
 				}
 			window.setTimeout("actualizar()",<?php echo $MilisegundosPagina; ?>);
+
+			//Actualiza el cronometro en la parte superior
+			function actualizar_reloj()
+				{
+					$("#MarcoCronometro").html(ValorCronometro+"s");
+					//MarcoCronometro
+						window.setTimeout("actualizar_reloj()",1000);
+					if (EstadoPausa==0)
+						ValorCronometro--;	
+				}
+			actualizar_reloj()
 		</script>
 
 
@@ -808,7 +926,6 @@ if ($PCO_Accion=="ver_monitoreo")
 		<DIV class="row">
 			<div class="col-md-12" style="margin:0px;" id="panel_central">
 				
-				<?php include_once ("inc/panel_centralsuperior.php");	?>
 
 				<!-- INICIA LA TABLA PRINCIPAL -->
 				<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="color:white;">
@@ -869,7 +986,7 @@ if ($PCO_Accion=="ver_monitoreo")
 										//Evalua elementos tipo Etiqueta
 										if ($registro["tipo"]=="Etiqueta")
 											{
-												echo $registro["nombre"];
+												PresentarEtiqueta($registro["nombre"],$registro["ancho"]);
 											}
 										//Evalua elementos tipo Maquina o host
 										if ($registro["tipo"]=="Maquina")
@@ -886,7 +1003,7 @@ if ($PCO_Accion=="ver_monitoreo")
 										//Evalua elementos tipo Consulta SQL
 										if ($registro["tipo"]=="ComandoSQL")
 											{
-												$ComandosSQL[]=array(Nombre => $registro["nombre"],	Comando=>$registro["comando"],	TamanoResult=>$registro["tamano_resultado"],	OcultarTitulos=>$registro["ocultar_titulos"]);
+												$ComandosSQL[]=array(Nombre => $registro["nombre"],	Comando=>$registro["comando"],	TamanoResult=>$registro["tamano_resultado"],	OcultarTitulos=>$registro["ocultar_titulos"],	Ancho=>$registro["ancho"]);
 												PresentarEstadoSQL($ComandosSQL[count($ComandosSQL)-1],$color_fondo_estado_sql,$color_texto_estado_sql);
 											}
 										//Evalua elementos tipo Imagen
@@ -898,7 +1015,7 @@ if ($PCO_Accion=="ver_monitoreo")
 										//Evalua elementos tipo Embebido
 										if ($registro["tipo"]=="Embebido")
 											{
-												echo '<iframe src="'.$registro["path"].'" width="'.$registro["ancho"].'" height="'.$registro["alto"].'"></iframe>';
+												PresentarEmbebido($registro["nombre"],$registro["path"],$registro["ancho"],$registro["alto"]);
 											}
 										//Agrega los saltos de linea
 										for ($i=0;$i<$registro["saltos"];$i++) echo "<br>";
