@@ -62,8 +62,8 @@
 							</li>
 
 							<!-- BOTONES INDEPENDIENTES -->
-							<li><a style="cursor:pointer;" OnClick="editor.execCommand('find');" data-toggle="tooltip" data-placement="bottom" title="Pausa en esta ventana / Pause this window"><i class="fa fa-pause fa-fw text-danger "></i> <?php echo $MULTILANG_Pausar; ?></a></li>
-							<li><a style="cursor:pointer;" OnClick="IntercambiarPantallaCompleta();" data-toggle="tooltip" data-placement="bottom" title="Continuar monitoreo / Continue with monitoring"><i class="fa fa-play fa-fw text-success"></i> <?php echo $MULTILANG_Continuar; ?></a></li>
+							<li><a style="cursor:pointer;" OnClick="EstadoPausa=1;" data-toggle="tooltip" data-placement="bottom" title="Pausa en esta ventana / Pause this window"><i class="fa fa-pause fa-fw text-danger "></i> <?php echo $MULTILANG_Pausar; ?></a></li>
+							<li><a style="cursor:pointer;" OnClick="EstadoPausa=0; actualizar();" data-toggle="tooltip" data-placement="bottom" title="Continuar monitoreo / Continue with monitoring"><i class="fa fa-play fa-fw text-success"></i> <?php echo $MULTILANG_Continuar; ?></a></li>
 
 						</ul>
 							

@@ -792,9 +792,11 @@ if ($PCO_Accion=="ver_monitoreo")
 		?>
 
 		<script language="JavaScript">
+			var EstadoPausa=0;
 			function actualizar()
 				{
-					document.location="index.php?PCO_Accion=ver_monitoreo&Presentar_FullScreen=1&Pagina=<?php echo $SiguientePagina; ?>";
+					if (EstadoPausa==0)
+						document.location="index.php?PCO_Accion=ver_monitoreo&Presentar_FullScreen=1&Pagina=<?php echo $SiguientePagina; ?>";
 				}
 			window.setTimeout("actualizar()",<?php echo $MilisegundosPagina; ?>);
 		</script>
