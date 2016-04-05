@@ -38,10 +38,11 @@ CREATE TABLE core_usuario (
   llave_recuperacion varchar(250) NOT NULL default '',
   es_plantilla int(1) DEFAULT 0,
   plantilla_permisos varchar(250) default '',
+  descripcion varchar(250) NULL,
   PRIMARY KEY  (login)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-INSERT INTO core_usuario VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','Super usuario',1,'sucorreo@dominio.com','20110601','d41d8cd98f00b204e9800998ecf8427e',1,'',0,'');
+INSERT INTO core_usuario VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','Super usuario',1,'sucorreo@dominio.com','20110601','d41d8cd98f00b204e9800998ecf8427e',1,'',0,'','');
 
 UPDATE core_usuario SET ultimo_acceso=CURDATE();
 
@@ -289,5 +290,7 @@ CREATE TABLE core_monitoreo (
   correo_alerta VARCHAR(255) NOT NULL DEFAULT '',
   alerta_sonora int(10) default '0',
   milisegundos_lectura int(10) default '1',
+  alerta_vibracion int(10) default '0',
+  ultimo_estado varchar(250) DEFAULT '',
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

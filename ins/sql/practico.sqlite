@@ -37,11 +37,12 @@ CREATE TABLE core_usuario (
   usuario_interno integer DEFAULT 0,
   llave_recuperacion text default '',
   es_plantilla integer DEFAULT 0,
-  plantilla_permisos text default ''
+  plantilla_permisos text default '',
+  descripcion text
   
 );
 
-INSERT INTO core_usuario VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','Super usuario',1,'sucorreo@dominio.com','20110601','d41d8cd98f00b204e9800998ecf8427e',1,'',0,'');
+INSERT INTO core_usuario VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','Super usuario',1,'sucorreo@dominio.com','20110601','d41d8cd98f00b204e9800998ecf8427e',1,'',0,'','');
 
 UPDATE core_usuario SET ultimo_acceso=date();
 
@@ -287,7 +288,9 @@ CREATE TABLE core_monitoreo (
   ocultar_titulos integer,
   path text DEFAULT '',
   correo_alerta text DEFAULT '',
-  alerta_sonora integer
+  alerta_sonora integer,
   milisegundos_lectura integer default '1',
+  alerta_vibracion integer default '0',
+  ultimo_estado text DEFAULT ''
 
 );
