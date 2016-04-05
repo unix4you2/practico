@@ -854,7 +854,7 @@ if ($PCO_Accion=="ver_monitoreo")
     <link href="inc/bootstrap/css/bootstrap-theme.css" rel="stylesheet"  media="screen">
 
 	<!-- Estilos especificos Monitoreo -->
-    <link href="inc/bootstrap/css/monitoreo.css" rel="stylesheet"  media="screen">
+    <link href="inc/bootstrap/css/monitoreo.min.css" rel="stylesheet"  media="screen">
     
     <!-- Custom Fonts -->
     <link href="inc/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -869,15 +869,6 @@ if ($PCO_Accion=="ver_monitoreo")
 		<body oncontextmenu="return false;" style="font-family: Verdana, Tahoma, Arial; font-size: 11px;">
 
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		<?php
 			//Busa la mayor y menor pagina definida

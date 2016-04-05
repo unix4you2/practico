@@ -40,7 +40,7 @@
 
 # INFORMACION DE ARCHIVOS A PROCESAR
 	#Lista de archivos de Hojas de Estilo SIN extension
-	ListaArchivosCSS=" inc/bootstrap/css/practico "
+	ListaArchivosCSS=" inc/bootstrap/css/practico inc/bootstrap/css/monitoreo "
 	ExtensionArchivosCSS=".css"
 	#Lista de archivos de JavaScript SIN extension
 	ListaArchivosJS=" inc/bootstrap/js/practico "
