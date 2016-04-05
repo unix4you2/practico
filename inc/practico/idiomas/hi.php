@@ -1117,6 +1117,7 @@
 	$MULTILANG_AplicaPara='इस के लिए लागू होता है: ';
 	$MULTILANG_MonLinea='लाइन पर';
 	$MULTILANG_MonCaido='नीचे';
+	$MULTILANG_MonAlertaVibrar='मोबाइल उपकरणों पर कंपन';
 
     //Modulo de correos
     $MULTILANG_MailIntro1='स्वचालित मंच संदेश';

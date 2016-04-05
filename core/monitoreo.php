@@ -167,7 +167,7 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function PresentarEstadoMaquina($Maquina,$color_fondo_estado,$color_texto_estado)
+	function PresentarEstadoMaquina($IDRegistroMonitor)
 		{
 			/*
 				Function: PresentarEstadoMaquina
@@ -177,13 +177,20 @@
 
 					<MaquinaOnline>
 			*/
-			global $ancho_tablas_maquinas,$Path_imagenes,$Imagen_fallo,$Imagen_generica,$Imagen_ok,$Tamano_iconos;
-			global $ErroresMonitoreoPractico; // Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay errores
+			global $ListaCamposSinID_monitoreo,$TablasCore;
+			global $Path_imagenes,$Imagen_fallo,$Imagen_ok;
+			global $ErroresMonitoreoPractico; 			// Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay errores
+			global $ErroresMonitoreoAlertaAuditiva; 	// Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay error en el monitor y este tiene activada la alerta sonora
+			global $ErroresMonitoreoAlertaVibratoria; 	// Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay error en el monitor y tiene habilitada la alerta vibratoria
+			
 			global $MULTILANG_MonTitulo,$PCO_FechaOperacionGuiones,$PCO_HoraOperacionPuntos;
 			global $MULTILANG_MonLinea,$MULTILANG_MonCaido;
 			
+			//Busca los datos del monitor
+			$Maquina=ejecutar_sql("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
+			
 			//Verifica estado de la maquina y servicio
-			$estado_actual=ServicioOnline($Maquina["Host"],$Maquina["Puerto"],$Maquina["TipoMonitor"]);
+			$estado_actual=ServicioOnline($Maquina["host"],$Maquina["puerto"],$Maquina["tipo_ping"]);
 			$estilo_caja_estado="panel-primary";
 			$estilo_texto_estado="text-primary";
 
@@ -192,27 +199,36 @@
 			else
 				{
 					$estado_final="<blink> $Imagen_fallo $MULTILANG_MonCaido $Imagen_fallo</blink>";
-					$color_fondo_estado="#FF3B36";
-					$color_texto_estado="#FFFF00";
 					$estilo_caja_estado="panel-danger";
 					$estilo_texto_estado="text-danger";
 					
 					$ErroresMonitoreoPractico=1;
-					//Envia mensaje de notificacion por correo
-					enviar_correo("noreply@practico.org",$Maquina["CorreoAlerta"],$MULTILANG_MonTitulo." $MULTILANG_MonCaido [$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos] ",$Maquina["Nombre"]." [".$Maquina["Host"].":".$Maquina["Puerto"]."] -> ".$Maquina["TipoMonitor"]);				
+					//Envia mensaje de notificacion por correo si el buzon ha sido indicado
+					if ($Maquina["correo_alerta"]!="")
+						enviar_correo("noreply@practico.org",$Maquina["correo_alerta"],$MULTILANG_MonTitulo." $MULTILANG_MonCaido [$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos] ",$Maquina["nombre"]." [".$Maquina["host"].":".$Maquina["puerto"]."] -> ".$Maquina["tipo_ping"]);				
+				
+					//Si tiene activada la alerta auditiva la agenda
+					if ($Maquina["alerta_sonora"]==1)
+						$ErroresMonitoreoAlertaAuditiva=1;
+					//Si tiene activada la alerta vibratoria la agenda
+					if ($Maquina["alerta_vibracion"]==1)
+						$ErroresMonitoreoAlertaVibratoria=1;
 				}
 			
-			//Determina si a la maquina o servicio se le ha indicado un icono
+			//Determina si a la maquina o servicio es validado por socket
 			$Separador_DosPuntos = "";
-			if ($Maquina["TipoMonitor"]=="socket")
+			if ($Maquina["tipo_ping"]=="socket")
 				$Separador_DosPuntos = ":";
-            
-            /*
-			if ($Maquina["Icono"]!="")
-				$icono_maquina='<img src="'.$Path_imagenes.$Maquina["Icono"].'" border=0 '.$Tamano_iconos.'>';
-			else*/
-				$icono_maquina=$Imagen_generica;
 
+			//Determina icono a mostrar si esta inactiva la alerta sonora
+			$IconoAlertaSonora='<i class="fa fa-volume-up text-success"></i>';
+			if ($Maquina["alerta_sonora"]==0)
+				$IconoAlertaSonora='';
+
+			//Determina icono a mostrar si esta inactiva la alerta de vibracion
+			$IconoAlertaVibracion='<i class="fa fa-mobile text-success"></i>';
+			if ($Maquina["alerta_vibracion"]==0)
+				$IconoAlertaVibracion='';
 
 			echo '
 				<div class="col-lg-2 col-md-2">
@@ -223,8 +239,8 @@
 									<i class="fa fa-desktop fa-2x "></i>
 								</div>
 								<div class="col-xs-10 text-right">
-									<div>'.$Maquina["Nombre"].'<br>
-									<font size=1>('.$Maquina["Host"].$Separador_DosPuntos.$Maquina["Puerto"].')</font>
+									<div>'.$Maquina["nombre"].'<br>
+									<font size=1>('.$Maquina["host"].$Separador_DosPuntos.$Maquina["puerto"].')</font> 
 									</div>
 								</div>
 							</div>
@@ -234,7 +250,7 @@
 								<span class="pull-left '.$estilo_texto_estado.'" >
 									<font><b>'.$estado_final.'</b></font>
 								</span>
-								<span class="pull-right"><i class="fa fa-bar-chart '.$estilo_texto_estado.'"></i></span>
+								<span class="pull-right">  '.$IconoAlertaSonora.'  '.$IconoAlertaVibracion.'  <i class="fa fa-bar-chart '.$estilo_texto_estado.'"></i></span>
 								<div class="clearfix"></div>
 							</div>
 						</a>
@@ -645,6 +661,7 @@ if ($PCO_Accion=="administrar_monitoreo")
 
                     <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-save"></i> <?php echo $MULTILANG_Agregar; ?></a>
                     <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+                    <br><br>
                     <a class="btn btn-warning btn-block" href="index.php?PCO_Accion=ver_monitoreo&Presentar_FullScreen=1" target="_BLANK"><i class="fa fa-globe"></i> <?php echo " $MULTILANG_MonPgInicio -> $MULTILANG_MonTitulo ";?></a>
 
                 </div>    
@@ -739,6 +756,17 @@ if ($PCO_Accion=="administrar_monitoreo")
                     <label for="alerta_sonora"><?php echo $MULTILANG_MonAlertaSnd; ?>:</label>
                     <div class="form-group input-group">
                         <select id="alerta_sonora" name="alerta_sonora" class="form-control" >
+                            <option value="1"><?php echo $MULTILANG_Si; ?></option>
+                            <option value="0"><?php echo $MULTILANG_No; ?></option>
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                    </div>
+
+                    <label for="alerta_vibracion"><?php echo $MULTILANG_MonAlertaVibrar; ?>:</label>
+                    <div class="form-group input-group">
+                        <select id="alerta_vibracion" name="alerta_vibracion" class="form-control" >
                             <option value="1"><?php echo $MULTILANG_Si; ?></option>
                             <option value="0"><?php echo $MULTILANG_No; ?></option>
                         </select>
@@ -916,43 +944,34 @@ if ($PCO_Accion=="ver_monitoreo")
 	<!-- ################# INICIO DE LA MAQUETACION ################ -->
 		<?php include_once ("core/monitoreo_superior.php"); 	?>
 		<DIV class="row">
-			<div class="col-md-12" style="margin:0px;" id="panel_central">
-				
+			<div class="col-md-12" style="margin:0px;">
 
 				<!-- INICIA LA TABLA PRINCIPAL -->
-				<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="color:white;">
-					<tr><td>
-						<!-- NOTA COPYRIGHT	 -->
-						<table width="100%" cellspacing="0" cellpadding="0" border=0 class="MarcoInferior"><tr>
-							<td align="left" valign="bottom" width="50%">
-							</td>
-							<td align="right" valign="bottom" width="50%">
-								<font color=lightgray size=1><i><?php echo $MULTILANG_MonAcerca; ?></i>&nbsp;&nbsp;</font>
-							</td>
-						</tr></table>
-					</td></tr>
-					<tr><td height="100%" valign="<?php if ($PCO_Accion=="Ver_menu") echo 'TOP'; else echo 'MIDDLE'; ?>" align="center">
-						
+				<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="color:white;">
+					<tr>
+						<td align="right">
+							<!-- NOTA COPYRIGHT	 -->
+							<font color="#CACACA" size=1><i><?php echo $MULTILANG_MonAcerca; ?></i>&nbsp;&nbsp;<br><br></font>
+						</td>
+					</tr>
+					<tr>
+						<td width="100%" height="100%" valign="TOP" align="center">
+
 							<?php
 								$ErroresMonitoreoPractico=0;
+								$ErroresMonitoreoAlertaAuditiva=0;
+								$ErroresMonitoreoAlertaVibratoria=0;
 
 								//Path imagenes e iconos y sus propiedades
 								$Path_imagenes="img/";
-								//$Imagen_fallo='<img src=".$Path_imagenes."icn_12.gif border=0 align=top ".$Tamano_iconos.">';
 								$Imagen_fallo='<i class="fa fa-exclamation-triangle icon-orange"></i>';
-								//$Imagen_ok='<img src=".$Path_imagenes."icn_11.gif border=0 align=top ".$Tamano_iconos.">';
 								$Imagen_ok='<i class="fa fa-check-circle icon-green"></i>';
-								//$Imagen_generica='<img src=".$Path_imagenes."icn_rdp.png border=0 align=top ".$Tamano_iconos.">';
 								$Imagen_generica='<i class="fa fa-certificate"></i>';
 								$Tamano_iconos=" width=20 heigth=20 ";
-								//$Imagen_generica_sql='<img src=".$Path_imagenes."icn_03.gif border=0 align=top ".$Tamano_iconos.">';
 								$Imagen_generica_sql='<i class="fa fa-database"></i>';
-								//$Imagen_generica_shell='<img src=".$Path_imagenes."icn_07.gif border=0 align=top ".$Tamano_iconos.">';
 								$Imagen_generica_shell='<i class="fa fa-terminal"></i>';
 								$Sonido_alarma="inc/practico/sonidos/alarma.mp3";
 
-								//Variables de apariencia
-								$ancho_tablas_maquinas=150;
 								// Valores de presentacion predeterminados
 								$color_fondo_estado="#CAF9CB";
 								$color_texto_estado="green";
@@ -983,8 +1002,7 @@ if ($PCO_Accion=="ver_monitoreo")
 										//Evalua elementos tipo Maquina o host
 										if ($registro["tipo"]=="Maquina")
 											{
-												$Maquinas[]=@array(Nombre => $registro["nombre"],	Host => $registro["host"],	Puerto => $registro["puerto"],		TipoMonitor=>$registro["tipo_ping"],	Icono=> $Imagen_generica,		CorreoAlerta=>$registro["correo_alerta"]);
-												PresentarEstadoMaquina($Maquinas[count($Maquinas)-1],$color_fondo_estado,$color_texto_estado);
+												PresentarEstadoMaquina($registro["id"]);
 											}
 										//Evalua elementos tipo Comando shell
 										if ($registro["tipo"]=="ComandoShell")
@@ -1016,18 +1034,36 @@ if ($PCO_Accion=="ver_monitoreo")
 								// Si encuentra algun error en el monitoreo reproduce la alarma
 								if ($ErroresMonitoreoPractico)
 									{
-										$Ruta_Servidor="http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
-										$Ruta_Servidor=str_replace(basename($_SERVER['PHP_SELF']),"",$Ruta_Servidor);
-										$Ruta_Servidor.=$Sonido_alarma;
-										//Tipos de reproduccion
-										//echo '<embed height="50" width="100" src="'.$Sonido_alarma.'">';
-										//echo '<object height="50" width="100" data="'.$Sonido_alarma.'"></object>';
-										//echo '<bgsound src="'.$Sonido_alarma.'" loop="1"></bgsound>';
-										//echo '<audio autoplay id="bgsound"><source src="'.$Sonido_alarma.'" type="audio/mp3"><p>Navegador no soporta Audio en HTML5</p></audio>';
-										echo '<iframe src="'.$Ruta_Servidor.'" width="0" height="0"></iframe>';
+										//Si alguno de los monitores con error tenia activada la alerta auditiva
+										if ($ErroresMonitoreoAlertaAuditiva==1)
+											{
+												$Ruta_Servidor="http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+												$Ruta_Servidor=str_replace(basename($_SERVER['PHP_SELF']),"",$Ruta_Servidor);
+												$Ruta_Servidor.=$Sonido_alarma;
+												//Tipos de reproduccion
+												//echo '<embed height="50" width="100" src="'.$Sonido_alarma.'">';
+												//echo '<object height="50" width="100" data="'.$Sonido_alarma.'"></object>';
+												//echo '<bgsound src="'.$Sonido_alarma.'" loop="1"></bgsound>';
+												//echo '<audio autoplay id="bgsound"><source src="'.$Sonido_alarma.'" type="audio/mp3"><p>Navegador no soporta Audio en HTML5</p></audio>';
+												echo '<iframe src="'.$Ruta_Servidor.'" width="0" height="0"></iframe>';
+											}
+
+										//Si alguno de los monitores con error tenia activada la alerta auditiva
+										if ($ErroresMonitoreoAlertaVibratoria==1)
+											{
+												echo '
+													<script>
+														navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+														if (navigator.vibrate) {
+														navigator.vibrate([100, 50, 100, 50, 100, 250]);
+														//Vibra,Pausa,Vibra...
+														}
+													</script>';
+											}
 									}
 
 							?>
+
 				<!-- FINALIZA LA TABLA PRINCIPAL -->
 				</td></tr></table>
 

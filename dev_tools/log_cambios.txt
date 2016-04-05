@@ -52,7 +52,8 @@ LogCambios="
 * Enhan: Actualización a mejoras PCoder
 * Enhan: Mejorada ventana de login para opciones OAuth
 * Enhan: Actualizado el AppEngine para rastreo de visitas a la aplicación
-* Enhan: Ahora el monitoreo es responsive
+* Enhan: Ahora el monitoreo es responsive y sus monitores tipo máquina pueden controlar de manera independiente las alertas a correo, sonoras o de vibración.
+* Enhan: Establecidos valores predeterminados durante la creación de monitores.  Mejora adicional a las ayudas
 "
 
 ########################################################################

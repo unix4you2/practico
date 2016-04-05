@@ -1118,6 +1118,7 @@
 	$MULTILANG_AplicaPara='This applies for: ';
 	$MULTILANG_MonLinea='ON LINE';
 	$MULTILANG_MonCaido='DOWN';
+	$MULTILANG_MonAlertaVibrar='Vibrate on mobile devices';
 
     //Modulo de correos
     $MULTILANG_MailIntro1='Automatic platform message';

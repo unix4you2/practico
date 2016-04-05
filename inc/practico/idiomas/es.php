@@ -1116,6 +1116,7 @@
 	$MULTILANG_AplicaPara='Esto aplica para: ';
 	$MULTILANG_MonLinea='EN LINEA';
 	$MULTILANG_MonCaido='CAIDO';
+	$MULTILANG_MonAlertaVibrar='Vibrar en dispositivos moviles';
 
     //Modulo de correos
     $MULTILANG_MailIntro1='Mensaje autom&aacute;tico de la plataforma';
