@@ -114,7 +114,7 @@
 	Ver tambien:
 		<Modulo correos>
 */
-function enviar_correo($remitente,$destinatario,$asunto,$cuerpo_mensaje,$destinatario_cc="",$destinatario_bcc="")
+function PCO_EnviarCorreo($remitente,$destinatario,$asunto,$cuerpo_mensaje,$destinatario_cc="",$destinatario_bcc="")
 	{
 		global $texto_prefijo_correo,$texto_posfijo_correo,$NombreRAD;
 		//para el envío en formato HTML
@@ -130,5 +130,11 @@ function enviar_correo($remitente,$destinatario,$asunto,$cuerpo_mensaje,$destina
 		return $estado_envio;
 	}
 
+function enviar_correo($remitente,$destinatario,$asunto,$cuerpo_mensaje,$destinatario_cc="",$destinatario_bcc="")
+	{
+		//DEPRECATED
+		$estado_envio=PCO_EnviarCorreo($remitente,$destinatario,$asunto,$cuerpo_mensaje,$destinatario_cc,$destinatario_bcc);
+		return $estado_envio;
+	}
 
 ?>

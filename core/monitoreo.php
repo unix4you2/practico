@@ -198,21 +198,32 @@
 				$estado_final="$Imagen_ok $MULTILANG_MonLinea";
 			else
 				{
-					$estado_final="<blink> $Imagen_fallo $MULTILANG_MonCaido $Imagen_fallo</blink>";
+					$estado_final="$Imagen_fallo $MULTILANG_MonCaido $Imagen_fallo";
 					$estilo_caja_estado="panel-danger";
 					$estilo_texto_estado="text-danger";
 					
 					$ErroresMonitoreoPractico=1;
-					//Envia mensaje de notificacion por correo si el buzon ha sido indicado
-					if ($Maquina["correo_alerta"]!="")
-						enviar_correo("noreply@practico.org",$Maquina["correo_alerta"],$MULTILANG_MonTitulo." $MULTILANG_MonCaido [$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos] ",$Maquina["nombre"]." [".$Maquina["host"].":".$Maquina["puerto"]."] -> ".$Maquina["tipo_ping"]);				
-				
+
 					//Si tiene activada la alerta auditiva la agenda
 					if ($Maquina["alerta_sonora"]==1)
 						$ErroresMonitoreoAlertaAuditiva=1;
 					//Si tiene activada la alerta vibratoria la agenda
 					if ($Maquina["alerta_vibracion"]==1)
 						$ErroresMonitoreoAlertaVibratoria=1;
+				}
+
+			//Actualiza el estado del monitor en caso de haber cambiado y envia alertas
+			$EstadoMonitor=$MULTILANG_MonLinea;
+			if ($ErroresMonitoreoPractico==1)	$EstadoMonitor=$MULTILANG_MonCaido;
+			$EstadoAnteriorMonitor=$Maquina["ultimo_estado"];
+			if ($EstadoAnteriorMonitor!=$EstadoMonitor)
+				{
+					//Envia mensaje de alerta de cambios por correo si el buzon ha sido indicado
+					if ($Maquina["correo_alerta"]!="")
+						PCO_EnviarCorreo("noreply@practico.org",$Maquina["correo_alerta"],$MULTILANG_MonTitulo." $MULTILANG_MonCaido [$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos] ",$Maquina["nombre"]." [".$Maquina["host"].":".$Maquina["puerto"]."] -> ".$Maquina["tipo_ping"]);
+				
+					//Actualiza el estado actual del monitor
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."monitoreo SET ultimo_estado='$EstadoMonitor' WHERE id='$IDRegistroMonitor' ");
 				}
 			
 			//Determina si a la maquina o servicio es validado por socket
@@ -231,14 +242,17 @@
 				$IconoAlertaVibracion='';
 
 			echo '
-				<div class="col-lg-2 col-md-2">
+				<!--<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">-->
+				<div class="col-md-2 col-lg-2">
 					<div class="panel '.$estilo_caja_estado.'">
 						<div class="panel-heading">
 							<div class="row">
-								<div class="col-xs-1">
+								<!--<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">-->
+								<div class="col-md-1 col-lg-1">
 									<i class="fa fa-desktop fa-2x "></i>
 								</div>
-								<div class="col-xs-10 text-right">
+								<!--<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-right">-->
+								<div class="col-md-10 col-lg-10 text-right">
 									<div>'.$Maquina["nombre"].'<br>
 									<font size=1>('.$Maquina["host"].$Separador_DosPuntos.$Maquina["puerto"].')</font> 
 									</div>
@@ -696,11 +710,23 @@ if ($PCO_Accion=="administrar_monitoreo")
                         </span>
                     </div>
 
+
+					<label for="ancho"><?php echo $MULTILANG_FrmAncho; ?>:</label>
+					<div class="form-group input-group">
+						<select id="ancho" name="ancho" class="form-control" >
+							<?php
+									for ($i=1;$i<=12;$i++)
+										{
+												echo '<option value="'.$i.'">'.$i.'</option>';
+										}
+							?>
+						</select>
+						<span class="input-group-addon">
+							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommShell,$MULTILANG_Imagen, $MULTILANG_Embebido"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+						</span>
+					</div>
+						
                     <div class="form-group input-group">
-                        <input type="text" name="ancho" class="form-control" placeholder="<?php echo $MULTILANG_FrmAncho; ?>">
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommShell (caracteres),$MULTILANG_Imagen (pixeles), $MULTILANG_Embebido (pixeles)"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                        </span>
                         <input type="text" name="alto" class="form-control" placeholder="<?php echo $MULTILANG_InfAlto; ?>">
                         <span class="input-group-addon">
                             <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommShell (caracteres),$MULTILANG_Imagen (pixeles), $MULTILANG_Embebido (pixeles)"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
@@ -721,7 +747,7 @@ if ($PCO_Accion=="administrar_monitoreo")
                             pixeles
                         </span>
                         <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommSQL"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommSQL, $MULTILANG_Etiqueta"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 
@@ -914,7 +940,7 @@ if ($PCO_Accion=="ver_monitoreo")
 			//Busca cuantos milisegundos esperar segun la pagina definida y sus elementos
 			$resultado=ejecutar_sql("SELECT SUM(milisegundos_lectura) as total_espera FROM ".$TablasCore."monitoreo WHERE pagina='$PaginaMonitoreo' ");
 			$registro = $resultado->fetch();
-			$MilisegundosPagina=$registro["total_espera"];			
+			$MilisegundosPagina=$registro["total_espera"]+1;			
 		?>
 
 		<script language="JavaScript">
