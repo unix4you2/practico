@@ -583,6 +583,258 @@ if ($PCO_Accion=="eliminar_monitoreo")
 				}
 		}
 
+
+/* ################################################################## */
+/* ################################################################## */
+		/*
+			Function: formato_monitor
+			Presenta el formato utilizado para agregar monitores
+		*/
+	function FormatoMonitor($IDRegistroMonitor)
+		{
+			global $ArchivoCORE,$ListaCamposSinID_monitoreo,$TablasCore,$MULTILANG_MonNuevo,$MULTILANG_Tipo,$MULTILANG_Etiqueta,$MULTILANG_Maquina,$MULTILANG_MonCommShell,$MULTILANG_MonCommSQL,$MULTILANG_Imagen,$MULTILANG_Embebido;
+			global $MULTILANG_Actualizar,$MULTILANG_Regresar,$MULTILANG_MnuURL,$MULTILANG_InfAlto,$MULTILANG_Ayuda,$MULTILANG_MonDesTipo,$MULTILANG_Pagina,$MULTILANG_Peso,$MULTILANG_Nombre,$MULTILANG_MonSaltos,$MULTILANG_MonMsLectura,$MULTILANG_Agregar,$MULTILANG_IrEscritorio,$MULTILANG_Maquina,$MULTILANG_AplicaPara,$MULTILANG_Tipo,$MULTILANG_Puerto,$MULTILANG_MonMetodo,$MULTILANG_MonCommSQL,$MULTILANG_MonCommShell,$MULTILANG_FrmAncho,$MULTILANG_Imagen,$MULTILANG_Embebido,$MULTILANG_MonTamano,$MULTILANG_Etiqueta,$MULTILANG_MonOcultaTit,$MULTILANG_No,$MULTILANG_Si,$MULTILANG_MonCorreoAlerta,$MULTILANG_MonAlertaSnd,$MULTILANG_MonAlertaVibrar;
+			
+			//Busca los datos del monitor
+			if ($IDRegistroMonitor!="")
+				$Maquina=ejecutar_sql("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
+
+			//Define la accion a ejecutar
+			if ($IDRegistroMonitor=="")
+				{
+					$AccionFormulario="guardar_monitoreo";
+					$TextoBotonFormulario=$MULTILANG_Agregar;
+					$TextoBotonCancelar=$MULTILANG_IrEscritorio;
+				}
+			else
+				{
+					$AccionFormulario="actualizar_monitoreo";
+					$TextoBotonFormulario=$MULTILANG_Actualizar;
+					$TextoBotonCancelar=$MULTILANG_Regresar;
+				}
+
+			echo '
+        <form name="datos" action="'.$ArchivoCORE.'" method="POST">
+
+            <input type="hidden" name="PCO_Accion" value="'.$AccionFormulario.'">
+            <input type="hidden" name="IDRegistroMonitor" value="'.$IDRegistroMonitor.'">
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <h4><b><i class="fa fa-link fa-fw icon-orange"></i>'.$MULTILANG_MonNuevo.':</b></h4>
+
+                    <label for="tipo">'.$MULTILANG_Tipo.':</label>
+                    <div class="form-group input-group">
+                        <select id="tipo" name="tipo" class="form-control" >
+                            <option value="Etiqueta">'.$MULTILANG_Etiqueta.'</option>
+                            <option value="Maquina" selected>'.$MULTILANG_Maquina.'</option>
+                            <option value="ComandoShell">'.$MULTILANG_MonCommShell.'</option>
+                            <option value="ComandoSQL">'.$MULTILANG_MonCommSQL.'</option>
+                            <option value="Imagen">'.$MULTILANG_Imagen.'</option>
+                            <option value="Embebido">'.$MULTILANG_Embebido.'</option>
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="#" title="'.$MULTILANG_Ayuda.': '.$MULTILANG_MonDesTipo.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                    </div>
+
+                    <label for="tipo">'.$MULTILANG_Pagina.':</label>
+                    <div class="form-group input-group">
+                        <select id="pagina" name="pagina" class="form-control" >';
+
+                                    for ($i=1;$i<=20;$i++)
+                                        {
+                                                echo '<option value="'.$i.'">'.$i.'</option>';
+                                        }
+             echo '
+                        </select>
+
+                    </div>
+
+                    <label for="peso">'.$MULTILANG_Peso.':</label>
+                    <div class="form-group input-group">
+                        <select id="peso" name="peso" class="form-control" >';
+
+                                    for ($i=1;$i<=50;$i++)
+                                        {
+                                                echo '<option value="'.$i.'">'.$i.'</option>';
+                                        }
+            echo '
+                        </select>
+                    </div>
+
+                    <input type="text" name="nombre" class="form-control" placeholder="'.$MULTILANG_Nombre.'">
+
+                    <label for="saltos">'.$MULTILANG_MonSaltos.':</label>
+                    <div class="form-group input-group">
+                        <select id="saltos" name="saltos" class="form-control" >';
+
+                                    for ($i=0;$i<=15;$i++)
+                                        {
+                                                echo '<option value="'.$i.'">'.$i.'</option>';
+                                        }
+			echo '
+                        </select>
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">
+                            '.$MULTILANG_MonMsLectura.'
+                        </span>
+                        <input type="text" name="milisegundos_lectura" value="1000" class="form-control" placeholder="'.$MULTILANG_MonMsLectura.'">
+                    </div>
+
+                    <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-save"></i> '.$TextoBotonFormulario.'</a>
+                    <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$TextoBotonCancelar.'</a>
+
+                </div>
+                <div class="col-md-6">
+
+                    <div class="form-group input-group">
+                        <input type="text" name="host" class="form-control" placeholder="'.$MULTILANG_Maquina.' / IP">
+                        <span class="input-group-addon">
+                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                        <input type="text" name="puerto" class="form-control" placeholder="'.$MULTILANG_Puerto.'">
+                        <span class="input-group-addon">
+                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                    </div>
+
+                    <label for="tipo_ping">'.$MULTILANG_MonMetodo.':</label>
+                    <div class="form-group input-group">
+                        <select id="tipo_ping" name="tipo_ping" class="form-control" >
+                            <option value="socket">Socket</option>
+                            <option value="ping">Ping</option>
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                    </div>
+
+                    <div class="form-group input-group">
+                        <textarea name="comando" class="form-control" placeholder="'.$MULTILANG_Comando.'"></textarea>
+                        <span class="input-group-addon">
+                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommShell.', '.$MULTILANG_MonCommSQL.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                    </div>
+
+
+					<label for="ancho">'.$MULTILANG_FrmAncho.':</label>
+					<div class="form-group input-group">
+						<select id="ancho" name="ancho" class="form-control" >';
+
+									for ($i=1;$i<=12;$i++)
+										{
+												echo '<option value="'.$i.'">'.$i.'</option>';
+										}
+			echo '
+						</select>
+						<span class="input-group-addon">
+							<a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommShell.', '.$MULTILANG_Imagen.', '.$MULTILANG_Embebido.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+						</span>
+					</div>
+						
+                    <div class="form-group input-group">
+                        <input type="text" name="alto" class="form-control" placeholder="'.$MULTILANG_InfAlto.'">
+                        <span class="input-group-addon">
+                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommShell.', '.$MULTILANG_Imagen.', '.$MULTILANG_Embebido.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                    </div>
+
+                    <label for="tamano_resultado">'.$MULTILANG_MonTamano.':</label>
+                    <div class="form-group input-group">
+                        <select id="tamano_resultado" name="tamano_resultado" class="form-control" >';
+
+                                    for ($i=5;$i<=100;$i++)
+                                        {
+                                                echo '<option value="'.$i.'">'.$i.'</option>';
+                                        }
+			echo '
+                        </select>
+                        <span class="input-group-addon">
+                            pixeles
+                        </span>
+                        <span class="input-group-addon">
+                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommSQL.', '.$MULTILANG_Etiqueta.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                    </div>
+
+                    <label for="ocultar_titulos">'.$MULTILANG_MonOcultaTit.':</label>
+                    <div class="form-group input-group">
+                        <select id="ocultar_titulos" name="ocultar_titulos" class="form-control" >
+                            <option value="0">'.$MULTILANG_No.'</option>
+                            <option value="1">'.$MULTILANG_Si.'</option>
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommSQL.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                    </div>
+
+                    <div class="form-group input-group">
+                        <input type="text" name="path" class="form-control" placeholder="'.$MULTILANG_MnuURL.'">
+                        <span class="input-group-addon">
+                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Imagen.', '.$MULTILANG_Embebido.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-at fa-fw"></i>
+                        </span>
+                        <input type="text" name="correo_alerta" class="form-control" placeholder="'.$MULTILANG_MonCorreoAlerta.'">
+                        <span class="input-group-addon">
+                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                    </div>
+
+                    <label for="alerta_sonora">'.$MULTILANG_MonAlertaSnd.':</label>
+                    <div class="form-group input-group">
+                        <select id="alerta_sonora" name="alerta_sonora" class="form-control" >
+                            <option value="1">'.$MULTILANG_Si.'</option>
+                            <option value="0">'.$MULTILANG_No.'</option>
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                    </div>
+
+                    <label for="alerta_vibracion">'.$MULTILANG_MonAlertaVibrar.':</label>
+                    <div class="form-group input-group">
+                        <select id="alerta_vibracion" name="alerta_vibracion" class="form-control" >
+                            <option value="1">'.$MULTILANG_Si.'</option>
+                            <option value="0">'.$MULTILANG_No.'</option>
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>';
+
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+		/*
+			Function: detalles_monitoreo
+			Presenta formulario para editar un monitor
+
+			Ver tambien:
+			<guardar_monitoreo>
+		*/
+if ($PCO_Accion=="detalles_monitoreo")
+	{
+		abrir_ventana($MULTILANG_MonConfig,'panel-primary');
+		FormatoMonitor($IDRegistroMonitor);
+        cerrar_ventana();
+    } //Fin detalles_monitoreo
+
+
 /* ################################################################## */
 /* ################################################################## */
 		/*
@@ -603,210 +855,13 @@ if ($PCO_Accion=="administrar_monitoreo")
 	{
 		$PCO_Accion=escapar_contenido($PCO_Accion); //Limpia cadena para evitar XSS
 		abrir_ventana($MULTILANG_MonConfig,'panel-primary');
+		
+		FormatoMonitor();
+		
 ?>
 
-        <form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-            <input type="hidden" name="PCO_Accion" value="guardar_monitoreo">
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <h4><b><i class="fa fa-link fa-fw icon-orange"></i><?php echo $MULTILANG_MonNuevo; ?>:</b></h4>
-
-                    <label for="tipo"><?php echo $MULTILANG_Tipo; ?>:</label>
-                    <div class="form-group input-group">
-                        <select id="tipo" name="tipo" class="form-control" >
-                            <option value="Etiqueta"><?php echo $MULTILANG_Etiqueta; ?></option>
-                            <option value="Maquina" selected><?php echo $MULTILANG_Maquina; ?></option>
-                            <option value="ComandoShell"><?php echo $MULTILANG_MonCommShell; ?></option>
-                            <option value="ComandoSQL"><?php echo $MULTILANG_MonCommSQL; ?></option>
-                            <option value="Imagen"><?php echo $MULTILANG_Imagen; ?></option>
-                            <option value="Embebido"><?php echo $MULTILANG_Embebido; ?></option>
-                        </select>
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_MonDesTipo; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                        </span>
-                    </div>
-
-                    <label for="tipo"><?php echo $MULTILANG_Pagina; ?>:</label>
-                    <div class="form-group input-group">
-                        <select id="pagina" name="pagina" class="form-control" >
-                            <?php
-                                    for ($i=1;$i<=20;$i++)
-                                        {
-                                                echo '<option value="'.$i.'">'.$i.'</option>';
-                                        }
-                            ?>
-                        </select>
-
-                    </div>
-
-                    <label for="peso"><?php echo $MULTILANG_Peso; ?>:</label>
-                    <div class="form-group input-group">
-                        <select id="peso" name="peso" class="form-control" >
-                            <?php
-                                    for ($i=1;$i<=50;$i++)
-                                        {
-                                                echo '<option value="'.$i.'">'.$i.'</option>';
-                                        }
-                            ?>
-                        </select>
-                    </div>
-
-                    <input type="text" name="nombre" class="form-control" placeholder="<?php echo $MULTILANG_Nombre; ?>">
-
-                    <label for="saltos"><?php echo $MULTILANG_MonSaltos; ?>:</label>
-                    <div class="form-group input-group">
-                        <select id="saltos" name="saltos" class="form-control" >
-                            <?php
-                                    for ($i=0;$i<=15;$i++)
-                                        {
-                                                echo '<option value="'.$i.'">'.$i.'</option>';
-                                        }
-                            ?>
-                        </select>
-                    </div>
-
-                    <div class="form-group input-group">
-                        <span class="input-group-addon">
-                            <?php echo $MULTILANG_MonMsLectura; ?>
-                        </span>
-                        <input type="text" name="milisegundos_lectura" value="1000" class="form-control" placeholder="<?php echo $MULTILANG_MonMsLectura; ?>">
-                    </div>
-
-                    <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-save"></i> <?php echo $MULTILANG_Agregar; ?></a>
-                    <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
-                    <br><br>
-                    <a class="btn btn-warning btn-block" href="index.php?PCO_Accion=ver_monitoreo&Presentar_FullScreen=1" target="_BLANK"><i class="fa fa-globe"></i> <?php echo " $MULTILANG_MonPgInicio -> $MULTILANG_MonTitulo ";?></a>
-
-                </div>    
-                <div class="col-md-6">
-
-                    <div class="form-group input-group">
-                        <input type="text" name="host" class="form-control" placeholder="<?php echo $MULTILANG_Maquina; ?> / IP">
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                        </span>
-                        <input type="text" name="puerto" class="form-control" placeholder="<?php echo $MULTILANG_Puerto; ?>">
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                        </span>
-                    </div>
-
-                    <label for="tipo_ping"><?php echo $MULTILANG_MonMetodo; ?>:</label>
-                    <div class="form-group input-group">
-                        <select id="tipo_ping" name="tipo_ping" class="form-control" >
-                            <option value="socket">Socket</option>
-                            <option value="ping">Ping</option>
-                        </select>
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                        </span>
-                    </div>
-
-                    <div class="form-group input-group">
-                        <textarea name="comando" class="form-control" placeholder="<?php echo $MULTILANG_Comando; ?>"></textarea>
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommShell, $MULTILANG_MonCommSQL"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                        </span>
-                    </div>
-
-
-					<label for="ancho"><?php echo $MULTILANG_FrmAncho; ?>:</label>
-					<div class="form-group input-group">
-						<select id="ancho" name="ancho" class="form-control" >
-							<?php
-									for ($i=1;$i<=12;$i++)
-										{
-												echo '<option value="'.$i.'">'.$i.'</option>';
-										}
-							?>
-						</select>
-						<span class="input-group-addon">
-							<a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommShell,$MULTILANG_Imagen, $MULTILANG_Embebido"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-						</span>
-					</div>
-						
-                    <div class="form-group input-group">
-                        <input type="text" name="alto" class="form-control" placeholder="<?php echo $MULTILANG_InfAlto; ?>">
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommShell (caracteres),$MULTILANG_Imagen (pixeles), $MULTILANG_Embebido (pixeles)"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                        </span>
-                    </div>
-
-                    <label for="tamano_resultado"><?php echo $MULTILANG_MonTamano; ?>:</label>
-                    <div class="form-group input-group">
-                        <select id="tamano_resultado" name="tamano_resultado" class="form-control" >
-                            <?php
-                                    for ($i=1;$i<=100;$i++)
-                                        {
-                                                echo '<option value="'.$i.'">'.$i.'</option>';
-                                        }
-                            ?>
-                        </select>
-                        <span class="input-group-addon">
-                            pixeles
-                        </span>
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommSQL, $MULTILANG_Etiqueta"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                        </span>
-                    </div>
-
-                    <label for="ocultar_titulos"><?php echo $MULTILANG_MonOcultaTit; ?>:</label>
-                    <div class="form-group input-group">
-                        <select id="ocultar_titulos" name="ocultar_titulos" class="form-control" >
-                            <option value="0"><?php echo $MULTILANG_No; ?></option>
-                            <option value="1"><?php echo $MULTILANG_Si; ?></option>
-                        </select>
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_MonCommSQL"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                        </span>
-                    </div>
-
-                    <div class="form-group input-group">
-                        <input type="text" name="path" class="form-control" placeholder="<?php echo $MULTILANG_MnuURL; ?>">
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_Imagen, $MULTILANG_Embebido"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                        </span>
-                    </div>
-
-                    <div class="form-group input-group">
-                        <span class="input-group-addon">
-                            <i class="fa fa-at fa-fw"></i>
-                        </span>
-                        <input type="text" name="correo_alerta" class="form-control" placeholder="<?php echo $MULTILANG_MonCorreoAlerta; ?>">
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                        </span>
-                    </div>
-
-                    <label for="alerta_sonora"><?php echo $MULTILANG_MonAlertaSnd; ?>:</label>
-                    <div class="form-group input-group">
-                        <select id="alerta_sonora" name="alerta_sonora" class="form-control" >
-                            <option value="1"><?php echo $MULTILANG_Si; ?></option>
-                            <option value="0"><?php echo $MULTILANG_No; ?></option>
-                        </select>
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                        </span>
-                    </div>
-
-                    <label for="alerta_vibracion"><?php echo $MULTILANG_MonAlertaVibrar; ?>:</label>
-                    <div class="form-group input-group">
-                        <select id="alerta_vibracion" name="alerta_vibracion" class="form-control" >
-                            <option value="1"><?php echo $MULTILANG_Si; ?></option>
-                            <option value="0"><?php echo $MULTILANG_No; ?></option>
-                        </select>
-                        <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_AplicaPara; ?> <?php echo "$MULTILANG_Tipo: $MULTILANG_Maquina"; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                        </span>
-                    </div>
-
-
-                </div>
-            </div>
-
-        </form>
-
+		<br><br>
+		<a class="btn btn-warning btn-block" href="index.php?PCO_Accion=ver_monitoreo&Presentar_FullScreen=1" target="_BLANK"><i class="fa fa-globe"></i> <?php echo " $MULTILANG_MonPgInicio -> $MULTILANG_MonTitulo ";?></a>
 
 
         <hr>
@@ -830,25 +885,6 @@ if ($PCO_Accion=="administrar_monitoreo")
 				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE 1=1 ORDER BY pagina,peso ");
 				while($registro = $resultado->fetch())
 					{
-						$cadena_detalles=$MULTILANG_Detalles.": ".$registro["nombre"]." (".$registro["id"].")\\n-----------------\\n"
-						."\\n $MULTILANG_Pagina: ".$registro["pagina"]
-						."\\n $MULTILANG_Peso: ".$registro["peso"]
-						."\\n $MULTILANG_Tipo: ".$registro["tipo"]
-						."\\n $MULTILANG_Nombre: ".$registro["nombre"]
-						."\\n $MULTILANG_Maquina: ".$registro["host"]
-						."\\n $MULTILANG_Puerto: ".$registro["puerto"]
-						."\\n $MULTILANG_MonMetodo: ".$registro["tipo_ping"]
-						."\\n $MULTILANG_MonSaltos: ".$registro["saltos"]
-						."\\n $MULTILANG_Comando: ".$registro["comando"]
-						."\\n $MULTILANG_FrmAncho: ".$registro["ancho"]
-						."\\n $MULTILANG_InfAlto: ".$registro["alto"]
-						."\\n $MULTILANG_MonTamano: ".$registro["tamano_resultado"]
-						."\\n $MULTILANG_MonOcultaTit: ".$registro["ocultar_titulos"]
-						."\\n $MULTILANG_MnuURL: ".$registro["path"]
-						."\\n $MULTILANG_MonCorreoAlerta: ".$registro["correo_alerta"]
-						."\\n $MULTILANG_MonAlertaSnd: ".$registro["alerta_sonora"]
-						."\\n $MULTILANG_MonMsLectura: ".$registro["milisegundos_lectura"]
-						."\\n\\n-------------------\\n".$MULTILANG_Finalizado;
 						echo '<tr>
 								<td>'.$registro["pagina"].'</td>
 								<td>'.$registro["peso"].'</td>
@@ -863,7 +899,11 @@ if ($PCO_Accion=="administrar_monitoreo")
 										</form>
 								</td>
 								<td align="center">
-									<input type="Button" OnClick="window.alert(\''.$cadena_detalles.'\');" value="'.$MULTILANG_Detalles.'" class="btn btn-info btn-xs">
+										<form action="'.$ArchivoCORE.'" method="POST">
+												<input type="hidden" name="PCO_Accion" value="detalles_monitoreo">
+												<input type="hidden" name="IDRegistroMonitor" value="'.$registro["id"].'">
+												<input type="submit" value="'.$MULTILANG_Detalles.'" class="btn btn-info btn-xs">
+										</form>
 								</td>
 							</tr>';
 					}
