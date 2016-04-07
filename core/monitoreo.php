@@ -587,6 +587,51 @@ if ($PCO_Accion=="eliminar_monitoreo")
 /* ################################################################## */
 /* ################################################################## */
 		/*
+			Function: actualizar_monitoreo
+			Actualiza los datos de un monitor definido por el usuario
+
+			Salida:
+				Entradas en la tabla de monitoreo actualizadas
+
+			Ver tambien:
+			<administrar_monitoreo>
+		*/
+	if ($PCO_Accion=="actualizar_monitoreo")
+		{
+			$mensaje_error="";
+			// Verifica campos nulos
+			if ($nombre=="")
+				$mensaje_error.=$MULTILANG_MonErr."<br>";
+
+			if ($mensaje_error=="")
+				{
+					// Actualiza los datos del comando de monitoreo
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."monitoreo SET tipo='$tipo',pagina='$pagina',peso='$peso',nombre='$nombre',host='$host',puerto='$puerto',tipo_ping='$tipo_ping',saltos='$saltos',comando='$comando',ancho='$ancho',alto='$alto',tamano_resultado='$tamano_resultado',ocultar_titulos='$ocultar_titulos',path='$path',correo_alerta='$correo_alerta',alerta_sonora='$alerta_sonora',milisegundos_lectura='$milisegundos_lectura',alerta_vibracion='$alerta_vibracion' WHERE id='$IDRegistroMonitor'");
+					
+					auditar("Actualiza el monitor: $IDRegistroMonitor");
+					echo '
+					<form name="continuar_admin_mon" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="administrar_monitoreo">
+					</form>
+					<script type="" language="JavaScript"> 
+					alert("'.$MULTILANG_Aplicando.'");
+					document.continuar_admin_mon.submit();  </script>';
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="administrar_monitoreo">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+		/*
 			Function: formato_monitor
 			Presenta el formato utilizado para agregar monitores
 		*/
@@ -625,13 +670,22 @@ if ($PCO_Accion=="eliminar_monitoreo")
 
                     <label for="tipo">'.$MULTILANG_Tipo.':</label>
                     <div class="form-group input-group">
-                        <select id="tipo" name="tipo" class="form-control" >
-                            <option value="Etiqueta">'.$MULTILANG_Etiqueta.'</option>
-                            <option value="Maquina" selected>'.$MULTILANG_Maquina.'</option>
-                            <option value="ComandoShell">'.$MULTILANG_MonCommShell.'</option>
-                            <option value="ComandoSQL">'.$MULTILANG_MonCommSQL.'</option>
-                            <option value="Imagen">'.$MULTILANG_Imagen.'</option>
-                            <option value="Embebido">'.$MULTILANG_Embebido.'</option>
+                        <select id="tipo" name="tipo" class="form-control" >';
+					//Define los estados de seleccion para las listas
+					if (@$Maquina["tipo"]=="Etiqueta") 		$Seleccion_Etiqueta="SELECTED";
+					if (@$Maquina["tipo"]=="Maquina") 		$Seleccion_Maquina="SELECTED";
+					if (@$Maquina["tipo"]=="ComandoShell") 	$Seleccion_ComandoShell="SELECTED";
+					if (@$Maquina["tipo"]=="ComandoSQL")	$Seleccion_ComandoSQL="SELECTED";
+					if (@$Maquina["tipo"]=="Imagen") 		$Seleccion_Imagen="SELECTED";
+					if (@$Maquina["tipo"]=="Embebido") 		$Seleccion_Embebido="SELECTED";
+
+             echo '
+                            <option value="Etiqueta"		'.$Seleccion_Etiqueta.'>'.$MULTILANG_Etiqueta.'</option>
+                            <option value="Maquina"			'.$Seleccion_Maquina.'>'.$MULTILANG_Maquina.'</option>
+                            <option value="ComandoShell"	'.$Seleccion_ComandoShell.'>'.$MULTILANG_MonCommShell.'</option>
+                            <option value="ComandoSQL"		'.$Seleccion_ComandoSQL.'>'.$MULTILANG_MonCommSQL.'</option>
+                            <option value="Imagen"			'.$Seleccion_Imagen.'>'.$MULTILANG_Imagen.'</option>
+                            <option value="Embebido"		'.$Seleccion_Embebido.'>'.$MULTILANG_Embebido.'</option>
                         </select>
                         <span class="input-group-addon">
                             <a href="#" title="'.$MULTILANG_Ayuda.': '.$MULTILANG_MonDesTipo.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
@@ -644,7 +698,9 @@ if ($PCO_Accion=="eliminar_monitoreo")
 
                                     for ($i=1;$i<=20;$i++)
                                         {
-                                                echo '<option value="'.$i.'">'.$i.'</option>';
+                                                $EstadoSeleccion='';
+                                                if (@$Maquina["pagina"]==$i) $EstadoSeleccion="SELECTED";
+                                                echo '<option value="'.$i.'" '.$EstadoSeleccion.'>'.$i.'</option>';
                                         }
              echo '
                         </select>
@@ -657,13 +713,15 @@ if ($PCO_Accion=="eliminar_monitoreo")
 
                                     for ($i=1;$i<=50;$i++)
                                         {
-                                                echo '<option value="'.$i.'">'.$i.'</option>';
+                                                $EstadoSeleccion='';
+                                                if (@$Maquina["peso"]==$i) $EstadoSeleccion="SELECTED";
+                                                echo '<option value="'.$i.'" '.$EstadoSeleccion.'>'.$i.'</option>';
                                         }
             echo '
                         </select>
                     </div>
 
-                    <input type="text" name="nombre" class="form-control" placeholder="'.$MULTILANG_Nombre.'">
+                    <input type="text" name="nombre" value="'.@$Maquina["nombre"].'"class="form-control" placeholder="'.$MULTILANG_Nombre.'">
 
                     <label for="saltos">'.$MULTILANG_MonSaltos.':</label>
                     <div class="form-group input-group">
@@ -671,7 +729,9 @@ if ($PCO_Accion=="eliminar_monitoreo")
 
                                     for ($i=0;$i<=15;$i++)
                                         {
-                                                echo '<option value="'.$i.'">'.$i.'</option>';
+                                                $EstadoSeleccion='';
+                                                if (@$Maquina["saltos"]==$i) $EstadoSeleccion="SELECTED";
+                                                echo '<option value="'.$i.'" '.$EstadoSeleccion.'>'.$i.'</option>';
                                         }
 			echo '
                         </select>
@@ -680,8 +740,11 @@ if ($PCO_Accion=="eliminar_monitoreo")
                     <div class="form-group input-group">
                         <span class="input-group-addon">
                             '.$MULTILANG_MonMsLectura.'
-                        </span>
-                        <input type="text" name="milisegundos_lectura" value="1000" class="form-control" placeholder="'.$MULTILANG_MonMsLectura.'">
+                        </span>';
+				$MilisengundosMonitor=1000;
+				if (@$Maquina["milisegundos_lectura"]!="") $MilisengundosMonitor=@$Maquina["milisegundos_lectura"];
+            echo '            
+                        <input type="text" name="milisegundos_lectura" value="'.$MilisengundosMonitor.'" class="form-control" placeholder="'.$MULTILANG_MonMsLectura.'">
                     </div>
 
                     <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-save"></i> '.$TextoBotonFormulario.'</a>
@@ -691,11 +754,11 @@ if ($PCO_Accion=="eliminar_monitoreo")
                 <div class="col-md-6">
 
                     <div class="form-group input-group">
-                        <input type="text" name="host" class="form-control" placeholder="'.$MULTILANG_Maquina.' / IP">
+                        <input type="text" name="host" value="'.@$Maquina["host"].'" class="form-control" placeholder="'.$MULTILANG_Maquina.' / IP">
                         <span class="input-group-addon">
                             <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
-                        <input type="text" name="puerto" class="form-control" placeholder="'.$MULTILANG_Puerto.'">
+                        <input type="text" name="puerto"  value="'.@$Maquina["puerto"].'" class="form-control" placeholder="'.$MULTILANG_Puerto.'">
                         <span class="input-group-addon">
                             <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
@@ -703,9 +766,13 @@ if ($PCO_Accion=="eliminar_monitoreo")
 
                     <label for="tipo_ping">'.$MULTILANG_MonMetodo.':</label>
                     <div class="form-group input-group">
-                        <select id="tipo_ping" name="tipo_ping" class="form-control" >
-                            <option value="socket">Socket</option>
-                            <option value="ping">Ping</option>
+                        <select id="tipo_ping" name="tipo_ping" class="form-control" >';
+					//Define los estados de seleccion para las listas
+					if (@$Maquina["tipo_ping"]=="socket") 		$Seleccion_socket="SELECTED";
+					if (@$Maquina["tipo_ping"]=="ping") 		$Seleccion_ping="SELECTED";
+            echo '
+                            <option value="socket"	'.$Seleccion_socket.'>Socket</option>
+                            <option value="ping"  '.$Seleccion_ping.'>Ping</option>
                         </select>
                         <span class="input-group-addon">
                             <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
@@ -713,7 +780,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
                     </div>
 
                     <div class="form-group input-group">
-                        <textarea name="comando" class="form-control" placeholder="'.$MULTILANG_Comando.'"></textarea>
+                        <textarea name="comando" class="form-control" placeholder="'.$MULTILANG_Comando.'">'.@$Maquina["comando"].'</textarea>
                         <span class="input-group-addon">
                             <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommShell.', '.$MULTILANG_MonCommSQL.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
@@ -726,7 +793,9 @@ if ($PCO_Accion=="eliminar_monitoreo")
 
 									for ($i=1;$i<=12;$i++)
 										{
-												echo '<option value="'.$i.'">'.$i.'</option>';
+                                                $EstadoSeleccion='';
+                                                if (@$Maquina["ancho"]==$i) $EstadoSeleccion="SELECTED";
+												echo '<option value="'.$i.'" '.$EstadoSeleccion.'>'.$i.'</option>';
 										}
 			echo '
 						</select>
@@ -736,7 +805,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
 					</div>
 						
                     <div class="form-group input-group">
-                        <input type="text" name="alto" class="form-control" placeholder="'.$MULTILANG_InfAlto.'">
+                        <input type="text" name="alto" value="'.@$Maquina["alto"].'" class="form-control" placeholder="'.$MULTILANG_InfAlto.'">
                         <span class="input-group-addon">
                             <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommShell.', '.$MULTILANG_Imagen.', '.$MULTILANG_Embebido.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
@@ -748,7 +817,9 @@ if ($PCO_Accion=="eliminar_monitoreo")
 
                                     for ($i=5;$i<=100;$i++)
                                         {
-                                                echo '<option value="'.$i.'">'.$i.'</option>';
+                                                $EstadoSeleccion='';
+                                                if (@$Maquina["tamano_resultado"]==$i) $EstadoSeleccion="SELECTED";
+                                                echo '<option value="'.$i.'" '.$EstadoSeleccion.'>'.$i.'</option>';
                                         }
 			echo '
                         </select>
@@ -762,9 +833,13 @@ if ($PCO_Accion=="eliminar_monitoreo")
 
                     <label for="ocultar_titulos">'.$MULTILANG_MonOcultaTit.':</label>
                     <div class="form-group input-group">
-                        <select id="ocultar_titulos" name="ocultar_titulos" class="form-control" >
-                            <option value="0">'.$MULTILANG_No.'</option>
-                            <option value="1">'.$MULTILANG_Si.'</option>
+                        <select id="ocultar_titulos" name="ocultar_titulos" class="form-control" >';
+					//Define los estados de seleccion para las listas
+					if (@$Maquina["ocultar_titulos"]=="0") 		$Seleccion_No="SELECTED";
+					if (@$Maquina["ocultar_titulos"]=="1") 		$Seleccion_Si="SELECTED";
+            echo '
+                            <option value="0" '.$Seleccion_No.'>'.$MULTILANG_No.'</option>
+                            <option value="1" '.$Seleccion_Si.'>'.$MULTILANG_Si.'</option>
                         </select>
                         <span class="input-group-addon">
                             <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommSQL.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
@@ -772,7 +847,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
                     </div>
 
                     <div class="form-group input-group">
-                        <input type="text" name="path" class="form-control" placeholder="'.$MULTILANG_MnuURL.'">
+                        <input type="text" name="path"  value="'.@$Maquina["path"].'" class="form-control" placeholder="'.$MULTILANG_MnuURL.'">
                         <span class="input-group-addon">
                             <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Imagen.', '.$MULTILANG_Embebido.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
@@ -782,7 +857,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
                         <span class="input-group-addon">
                             <i class="fa fa-at fa-fw"></i>
                         </span>
-                        <input type="text" name="correo_alerta" class="form-control" placeholder="'.$MULTILANG_MonCorreoAlerta.'">
+                        <input type="text" name="correo_alerta" value="'.@$Maquina["correo_alerta"].'" class="form-control" placeholder="'.$MULTILANG_MonCorreoAlerta.'">
                         <span class="input-group-addon">
                             <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
@@ -790,9 +865,13 @@ if ($PCO_Accion=="eliminar_monitoreo")
 
                     <label for="alerta_sonora">'.$MULTILANG_MonAlertaSnd.':</label>
                     <div class="form-group input-group">
-                        <select id="alerta_sonora" name="alerta_sonora" class="form-control" >
-                            <option value="1">'.$MULTILANG_Si.'</option>
-                            <option value="0">'.$MULTILANG_No.'</option>
+                        <select id="alerta_sonora" name="alerta_sonora" class="form-control" >';
+					//Define los estados de seleccion para las listas
+					if (@$Maquina["alerta_sonora"]=="0") 		$Seleccion_NoAS="SELECTED";
+					if (@$Maquina["alerta_sonora"]=="1") 		$Seleccion_SiAS="SELECTED";
+            echo '
+                            <option value="0" '.$Seleccion_NoAS.'>'.$MULTILANG_No.'</option>
+                            <option value="1" '.$Seleccion_SiAS.'>'.$MULTILANG_Si.'</option>
                         </select>
                         <span class="input-group-addon">
                             <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
@@ -801,9 +880,13 @@ if ($PCO_Accion=="eliminar_monitoreo")
 
                     <label for="alerta_vibracion">'.$MULTILANG_MonAlertaVibrar.':</label>
                     <div class="form-group input-group">
-                        <select id="alerta_vibracion" name="alerta_vibracion" class="form-control" >
-                            <option value="1">'.$MULTILANG_Si.'</option>
-                            <option value="0">'.$MULTILANG_No.'</option>
+                        <select id="alerta_vibracion" name="alerta_vibracion" class="form-control" >';
+					//Define los estados de seleccion para las listas
+					if (@$Maquina["alerta_vibracion"]=="0") 		$Seleccion_NoAV="SELECTED";
+					if (@$Maquina["alerta_vibracion"]=="1") 		$Seleccion_SiAV="SELECTED";
+			echo '
+                            <option value="0" '.$Seleccion_NoAV.'>'.$MULTILANG_No.'</option>
+                            <option value="1" '.$Seleccion_SiAV.'>'.$MULTILANG_Si.'</option>
                         </select>
                         <span class="input-group-addon">
                             <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
