@@ -220,7 +220,7 @@
 				{
 					//Envia mensaje de alerta de cambios por correo si el buzon ha sido indicado
 					if ($Maquina["correo_alerta"]!="")
-						PCO_EnviarCorreo("noreply@practico.org",$Maquina["correo_alerta"],$MULTILANG_MonTitulo." $MULTILANG_MonCaido [$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos] ",$Maquina["nombre"]." [".$Maquina["host"].":".$Maquina["puerto"]."] -> ".$Maquina["tipo_ping"]);
+						PCO_EnviarCorreo("noreply@practico.org",$Maquina["correo_alerta"],$Maquina["nombre"]." $EstadoMonitor [$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos] ",$Maquina["nombre"]." [".$Maquina["host"].":".$Maquina["puerto"]."] -> ".$Maquina["tipo_ping"]);
 				
 					//Actualiza el estado actual del monitor
 					ejecutar_sql_unaria("UPDATE ".$TablasCore."monitoreo SET ultimo_estado='$EstadoMonitor' WHERE id='$IDRegistroMonitor' ");
