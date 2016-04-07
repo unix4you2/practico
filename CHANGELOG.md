@@ -6,6 +6,22 @@
 |_____\___/ \__, |  \__,_|\___|  \___\__,_|_| |_| |_|_.__/|_|\___/|___/
             |___/ 
 ```
+## Versión 16.3 (2016-03-10)
+* Added: Se agrega una vista previa del Query SQL que es generado por los parámetros definidos en los informes
+* Added: Nueva función para geolocalización: PCOJS.GeoLocalizarUsuario().  La funcion le devolvera siempre sobre la variable JS llamada PCO.Geolocalizacion una cadena separada por comas así: Latitud,Longitud,Altitud,Precision,Direccion,Velocidad.  Cualquiera de los parametros que no sea soportado por el cliente GPS será null o NaN.
+* Added: Sistema de monitoreo mejorado, nueva maquetacion y opciones.  Si cuenta con sistemas de monitoreo corriendo es bueno que revise los ajustes de presentacion pues han cambiado los parametros de algunos tipos de monitor.  Se permite edición de monitores en caliente.
+* Fixed: Al cambiar pesos y realizar acciones entre campos y condiciones de informes se cruzaban los ID de elementos.  Ahira se evita el error de JS derivado.
+* Fixed: [Reportado: José Llanos (Venezuela)]:  Al empotrar un informe con botón de exportación en un formulario ese botón hace que todas las acciones de botones en el formulario cambien a la descarga del informe.  Se corrige para evitar que en informes embebidos se incluya tal botón.
+* Fixed: Agregado campo descripcion a tabla de usuarios para permitir busquedas durante login por OAuth
+* Fixed: Creacion de usuarios por OAuth ahora reconoce desde qué proveedor ha sido creado el registro de usuario
+* Fixed: Paginas de monitoreo vacias ahora pasan a la siguiente sin problema despues de 1ms
+* Enhan: Se hace énfasis en ventana de login mediante zoom y velocidad de transición.
+* Enhan: Actualización a mejoras PCoder
+* Enhan: Mejorada ventana de login para opciones OAuth
+* Enhan: Actualizado el AppEngine para rastreo de visitas a la aplicación
+* Enhan: Ahora el monitoreo es responsive y sus monitores tipo máquina pueden controlar de manera independiente las alertas a correo, sonoras o de vibración.
+* Enhan: Establecidos valores predeterminados durante la creación de monitores.  Mejora adicional a las ayudas
+
 ## Versión 16.2 (2016-02-07)
 * Added: Agregados acordiones colapsables para presentar resultados de procesos de importacion
 * Added: Plugin de JQuery para exploracion de archivos
