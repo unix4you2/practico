@@ -48,7 +48,7 @@
 	Adicionales:
 		http://stackoverflow.com/questions/29003118/get-driving-distance-between-two-points-using-google-maps-api
 */
-	function PCO_DistanciaDosCoordenadas($Latitud1, $Longitud1, $Latitud2, $Longitud2, $UnidadMedida="m")
+	function PCO_DistanciaCoordenadasSimple($Latitud1, $Longitud1, $Latitud2, $Longitud2, $UnidadMedida="m")
 		{
 			$theta = $Longitud1 - $Longitud2;
 			$Millas = (sin(deg2rad($Latitud1)) * sin(deg2rad($Latitud2))) + (cos(deg2rad($Latitud1)) * cos(deg2rad($Latitud2)) * cos(deg2rad($theta)));

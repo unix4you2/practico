@@ -28,7 +28,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Nueva función PCO_DistanciaDosCoordenadas(Latitud1,Longitud1,Latitud2,Longitud2,UnidadMedida) permite calcular la distancia entre dos puntos en metros, kilometros o millas desde código PHP.
+* Added: Nueva función PCO_DistanciaCoordenadasSimple(Latitud1,Longitud1,Latitud2,Longitud2,UnidadMedida) permite calcular la distancia entre dos puntos en metros, kilometros o millas desde código PHP.
 "
 
 ########################################################################
