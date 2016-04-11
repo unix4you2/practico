@@ -28,6 +28,47 @@
 
 
 
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	// Function: PCO_DistanciaDosCoordenadas
+	Retorna la distancia entre dos puntos indicados por latitud y longitud
+	
+	Variables de entrada:
+
+		Punto1 - Determinado por latitud1 y longitud1
+		Punto1 - Determinado por latitud2 y longitud2
+		UnidadMedida - Determinado por latitud y longitud   m=metros|km=kilometros|mi=millas
+
+	Salida:
+		Valor de la distancia expresado en la unidad solicitada
+
+	Adicionales:
+		http://stackoverflow.com/questions/29003118/get-driving-distance-between-two-points-using-google-maps-api
+*/
+	function PCO_DistanciaDosCoordenadas($Latitud1, $Longitud1, $Latitud2, $Longitud2, $UnidadMedida="m")
+		{
+			$theta = $Longitud1 - $Longitud2;
+			$Millas = (sin(deg2rad($Latitud1)) * sin(deg2rad($Latitud2))) + (cos(deg2rad($Latitud1)) * cos(deg2rad($Latitud2)) * cos(deg2rad($theta)));
+			$Millas = acos($Millas);
+			$Millas = rad2deg($Millas);
+			$Millas = $Millas * 60 * 1.1515;
+			$Kilometros = $Millas * 1.609344;
+			$Metros=$Kilometros/1000;
+			
+			//Determina el valor a retornar segun lo indicado por el llamado a funcion
+			$ValorRetorno=$Metros;
+			if ($UnidadMedida=="mi")
+				$ValorRetorno=$Millas;
+			if ($UnidadMedida=="km")
+				$ValorRetorno=$Kilometros;
+
+			return $ValorRetorno;
+		}
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*
