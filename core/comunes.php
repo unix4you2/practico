@@ -28,6 +28,54 @@
 
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	// Function: PCO_DistanciaDosCoordenadas
+	Retorna el nombre legible de una direccion (en lenguaje natural) indicados por latitud y longitud
+	
+	Variables de entrada:
+
+		Latitud - Asociada al punto deseado			Ejemplos Furatena: 6.249326, -75.565550    Castropol:  6.217010, -75.566734
+		Longitud - Asociada al punto deseado
+		APIKey_GoogleMaps - Utilizada para hacer el llamado a la API
+
+	Salida:
+		Arreglo con todos los resultados
+*/
+	function PCO_DireccionPorCoordenas($Latitud, $Longitud, $APIKey_GoogleMaps)
+		{
+			$URLMaps = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".$Latitud.",".$Longitud."&key=".$APIKey_GoogleMaps."&language=es";
+			$Resultado = array();
+			$DatosRecibidos = @cargar_url($URLMaps);
+			$Resultado = json_decode($DatosRecibidos, true);
+			return $Resultado;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	// Function: PCO_DireccionPorIDSitio
+	Retorna el nombre legible de una direccion (en lenguaje natural) indicados por el PlaceID usado por Google
+	
+	Variables de entrada:
+
+		PlaceID - Asociada al punto deseado			Ejemplo Castropol:  EkNDbC4gMTcgIzM3YS05NiBhIDM3YS0xNzIsIE1lZGVsbMOtbiwgTWVkZWxsw61uLCBBbnRpb3F1aWEsIENvbG9tYmlh
+		APIKey_GoogleMaps - Utilizada para hacer el llamado a la API
+
+	Salida:
+		Arreglo con todos los resultados
+*/
+	function PCO_DireccionPorIDSitio($PlaceID, $APIKey_GoogleMaps)
+		{
+			$URLMaps = "https://maps.googleapis.com/maps/api/geocode/json?place_id=".$PlaceID."&key=".$APIKey_GoogleMaps."&language=es";
+			$Resultado = array();
+			$DatosRecibidos = @cargar_url($URLMaps);
+			$Resultado = json_decode($DatosRecibidos, true);
+			return $Resultado;
+		}
+
 
 
 /* ################################################################## */
@@ -47,6 +95,7 @@
 
 	Adicionales:
 		http://stackoverflow.com/questions/29003118/get-driving-distance-between-two-points-using-google-maps-api
+		* http://stackoverflow.com/questions/14041227/distance-from-point-a-to-b-using-google-maps-php-and-mysql  ver working example
 */
 	function PCO_DistanciaCoordenadasSimple($Latitud1, $Longitud1, $Latitud2, $Longitud2, $UnidadMedida="m")
 		{
