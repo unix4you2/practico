@@ -56,7 +56,7 @@
 		?>
 		<?php 
 			//Despliega boton de desarrollo
-			if (@$PCOSESS_LoginUsuario=="admin" && $PCOSESS_SesionAbierta)    
+			if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCOSESS_SesionAbierta)    
 				echo '<a data-toggle="modal" class="btn btn-danger btn-xs" href="#myModalDESARROLLO"><i class="fa fa-puzzle-piece"></i> '.$MULTILANG_DesAppBoton.'</a>';
 		?>
 		<?php 
@@ -66,7 +66,7 @@
 		?>
 		<?php 
 			//Despliega opciones de configuracion
-			if (@$PCOSESS_LoginUsuario=="admin" && $PCOSESS_SesionAbierta)
+			if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCOSESS_SesionAbierta)
 				{
 		?>
 					<li class="dropdown">

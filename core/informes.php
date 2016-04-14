@@ -20,12 +20,12 @@
 
 			/*
 				Title: Modulo informes
-				Ubicacion *[/core/informes.php]*.  Archivo de funciones relacionadas con la administracion de informes de la aplicacion.
+				Ubicacion *[/core/informes.php]*.  Archivo de funciones relacionadas con la gestion de informes de la aplicacion.
 			*/
 ?>
 <?php
 			/*
-				Section: Operaciones basicas de administracion
+				Section: Operaciones Basicas de Administracion
 				Funciones asociadas al mantenimiento de informes en el sistema.
 			*/
 ?>
@@ -3140,8 +3140,8 @@ if ($PCO_Accion=="mis_informes")
 	{
 			// Carga las opciones del ACORDEON DE INFORMES
 			echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
-			// Si el usuario es diferente al administrador agrega condiciones al query
-			if ($PCOSESS_LoginUsuario!="admin")
+			// Si el usuario es diferente a un Administrador agrega condiciones al query
+			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 				{
 					$Complemento_tablas=",".$TablasCore."usuario_informe";
 					$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
@@ -3157,8 +3157,8 @@ if ($PCO_Accion=="mis_informes")
 					abrir_ventana($MULTILANG_Informes.': '.$seccion_menu_activa.' ('.$conteo_opciones.')', 'panel-primary');
 					// Busca las opciones dentro de la categoria
 
-					// Si el usuario es diferente al administrador agrega condiciones al query
-					if ($PCOSESS_LoginUsuario!="admin")
+					// Si el usuario es diferente a un Administrador agrega condiciones al query
+					if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 						{
 							$Complemento_tablas=",".$TablasCore."usuario_informe";
 							$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
@@ -3171,9 +3171,9 @@ if ($PCO_Accion=="mis_informes")
                             $icono_informe="fa-file-text-o";
                             if($registro_opciones_acordeon["formato_final"]=="G")
                                 $icono_informe="fa-pie-chart";
-                            //Determina si el registro fue generado para el admin o un usuario estandar y genera el objeto a enlazar
+                            //Determina si el registro fue generado para un Administrador o un usuario estandar y genera el objeto a enlazar
                             $objeto_enlazar=$registro_opciones_acordeon["id"];
-                            if ($PCOSESS_LoginUsuario!="admin") $objeto_enlazar=$registro_opciones_acordeon["informe"];
+                            if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario)) $objeto_enlazar=$registro_opciones_acordeon["informe"];
                             //Presenta el enlace al informe
 							echo '<div style="float:left">
 									<form action="'.$ArchivoCORE.'" method="post" name="acordeinf_'.$registro_opciones_acordeon["id"].'" id="acordeinf_'.$registro_opciones_acordeon["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">

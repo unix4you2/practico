@@ -71,7 +71,7 @@
 
                             <?php
                                 //Siempre presenta el administrador de archivos al superusuario
-                                if($PCOSESS_SesionAbierta && @$PCOSESS_LoginUsuario=="admin" && $PCO_Accion!="")
+                                if($PCOSESS_SesionAbierta && PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion!="")
                                     {
                             ?>
                                         <li>
@@ -84,7 +84,7 @@
                             <?php
                                 //Busca las posibles opciones del lado izquierdo
                                 // Si el usuario es diferente al administrador agrega condiciones al query
-                                if ($PCOSESS_LoginUsuario!="admin")
+                                if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
                                     {
                                         $Complemento_tablas=",".$TablasCore."usuario_menu";
                                         $Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
@@ -143,7 +143,7 @@
                         <br>
                         <?php
                             // Muestra la accion actual si el usuario es administrador y la accion no es vacia - Sirve como guia a la hora de crear objetos
-                            if(@$PCOSESS_LoginUsuario=="admin" && $PCO_Accion!="")
+                            if(PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion!="")
                                 {
                                     echo "<strong><i class='fa fa-cog fa-fw'></i> $MULTILANG_Accion:</strong> $PCO_Accion <br>";
                                     echo "<strong><i class='fa fa-clock-o fa-fw'></i> $MULTILANG_TiempoCarga:</strong> <div id='PCO_TCarga' name='PCO_TCarga' style='display: inline-block;'></div> s<br>";

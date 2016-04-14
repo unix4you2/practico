@@ -31,7 +31,7 @@
 		ArchivoCORE - Nombre del archivo principal que procesa todas las solicitudes
 
 		(start code)
-			if ($PCOSESS_LoginUsuario!="admin")
+			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 				{
 					$Complemento_tablas=",".$TablasCore."usuario_menu";
 					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
@@ -127,7 +127,7 @@
 
 <?php 
 	//Despliega marcos de administracion a ser activados por el menu superior
-	if (@$PCOSESS_LoginUsuario=="admin" && $PCOSESS_SesionAbierta)
+	if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCOSESS_SesionAbierta)
 		{
 			include_once("core/marco_dev.php");
 			include_once("core/marco_conf.php");
@@ -148,7 +148,7 @@
 						// Carga las opciones del menu superior
 
 						// Si el usuario es diferente al administrador agrega condiciones al query
-						if ($PCOSESS_LoginUsuario!="admin")
+						if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 							{
 								$Complemento_tablas=",".$TablasCore."usuario_menu";
 								$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
@@ -197,7 +197,7 @@
 					}
 
                     // Si el usuario es administrador valida que ya haya cambiado al menos su correo
-                    if (@$PCOSESS_LoginUsuario=="admin" && @$Presentar_FullScreen!=1 && $PCO_Accion=="Ver_menu")
+                    if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$Presentar_FullScreen!=1 && $PCO_Accion=="Ver_menu")
                         {
                             $registro_usuario=ejecutar_sql("SELECT correo FROM ".$TablasCore."usuario WHERE login=? ","$PCOSESS_LoginUsuario")->fetch();
                             if ($registro_usuario["correo"]=="sucorreo@dominio.com" || $registro_usuario["correo"]=="unix4you2@gmail.com")

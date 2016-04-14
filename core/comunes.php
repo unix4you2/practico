@@ -121,6 +121,35 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	// Function: PCO_EsAdministrador
+	Determina si un login de usuario es administrador de plataforma o no (si es super usuario)
+	
+	Variables de entrada:
+
+		Usuario - Login de usuario a verificar
+
+	Salida:
+		Cero (0) o uno (1) segun la pertenencia o no del usuario al grupo de admins
+*/
+	function PCO_EsAdministrador($Usuario)
+		{
+			global $PCOVAR_Administradores;
+			$ArregloAdmins=explode(",",$PCOVAR_Administradores);
+
+			//Recorre el arreglo de super-usuarios
+			$Resultado = 0;
+			foreach ($ArregloAdmins as $UsuarioAdmin)
+				{
+					if (trim($UsuarioAdmin)==$Usuario)
+						$Resultado = 1;
+				}
+			return $Resultado;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	// Function: PCO_BackupObtenerDatosTabla
 	Recupera los datos en formato Insert asociados a una tabla
 	
@@ -915,7 +944,7 @@ function RestaurarEtiquetasHTML($input)
 			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 			$retorno=0;
 			// Permisos o acciones raiz para el admin
-			if ($PCOSESS_LoginUsuario=="admin")
+			if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 				{
 					switch ($PCO_Accion)
 						{
@@ -995,7 +1024,7 @@ function RestaurarEtiquetasHTML($input)
 
 			// Evalua inicialmente permisos para el admin (evita queries)
 			// $retorno=permiso_raiz_admin($PCO_Accion);
-			if ($PCOSESS_LoginUsuario=="admin") $retorno=1;
+			if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario)) $retorno=1;
 
 			// Si es un usuario estandar siempre entra, si es el admin entra si no es permiso raiz
 			if (!$retorno)
@@ -1372,7 +1401,7 @@ function completar_parametros($string,$data) {
 			catch( PDOException $ErrorPDO)
 				{
 					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
-					if ($PCOSESS_LoginUsuario=='admin')
+					if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 						$mensaje_final=$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.@completar_parametros($query,$parametros);
 					else
 						$mensaje_final='<b>'.$MULTILANG_Detalles.'</b>: '.$MULTILANG_ErrorSoloAdmin;
@@ -1451,7 +1480,7 @@ function completar_parametros($string,$data) {
 			catch( PDOException $ErrorPDO)
 				{
 					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
-					if ($PCOSESS_LoginUsuario=='admin')
+					if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
                         echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.completar_parametros($query,$parametros).'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
 					else
 						echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$MULTILANG_ErrorSoloAdmin.'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
@@ -2033,7 +2062,7 @@ function completar_parametros($string,$data) {
 			global $MULTILANG_Atencion,$MULTILANG_ActAlertaVersion;
 			// Genera un aleatorio entre 1 y 10 para no sacar siempre el aviso y buscar nuevas versiones.
 			$buscar=rand(0,7);
-			if ($PCOSESS_LoginUsuario=="admin" && $PCO_Accion=="Ver_menu" && $buscar==1)
+			if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion=="Ver_menu" && $buscar==1)
 				{
 					$path_ultima_version="https://raw.githubusercontent.com/unix4you2/practico/master/dev_tools/version_publicada.txt";
 					$version_actualizada = @cargar_url($path_ultima_version);
@@ -5417,7 +5446,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		if ($en_ventana) cerrar_ventana();
 
         //Si el usuario es admin le muestra el query generador.
-        if (@$PCOSESS_LoginUsuario=="admin" && $ModoDepuracion)
+        if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $ModoDepuracion)
             mensaje($MULTILANG_MonCommSQL, $consulta, '', 'fa fa-fw fa-2x fa-database', 'alert alert-info alert-dismissible ');
 
 	}

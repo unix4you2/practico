@@ -66,7 +66,7 @@
 		{ $PCO_ModoDEMO=1; echo "<script language='JavaScript'> PCO_ModoDEMO=1; </script>"; }
 
     //Activa errores del preprocesador en modo de depuracion (configuracion.php)
-    if ($ModoDepuracion && @$PCOSESS_LoginUsuario=="admin")
+    if ($ModoDepuracion && PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
         {
             ini_set("display_errors", 1);
             error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_DEPRECATED | E_STRICT | E_USER_DEPRECATED | E_USER_ERROR | E_USER_WARNING); //Otras disponibles | E_PARSE | E_CORE_ERROR | E_CORE_WARNING |
@@ -86,8 +86,8 @@
     $PCO_HoraOperacionPuntos=date("H:i");
     $PCO_DireccionAuditoria=$_SERVER ['REMOTE_ADDR'];
 
-    // Define cadena usada para separar campos en operaciones de bases de datos.  Obsoleta desde 15.9.  Confirmada eliminacion en 16.1
-    if (!isset($_SeparadorCampos_)) $_SeparadorCampos_="||_||";
+    // Define cadena con usuarios Administradores/disenadores.  Obsoleta desde 16.2  Confirmada eliminacion en 17.1
+    if (!isset($PCOVAR_Administradores)) $PCOVAR_Administradores="admin";
 
     // Recupera variables recibidas para su uso como globales (equivale a register_globals=on en php.ini)
     if (!ini_get('register_globals'))
@@ -120,8 +120,8 @@
     // Incluye archivo con funciones de correo electronico
     include_once("core/correos.php");
 
-    // Almacena tiempo de inicio para calculo de tiempos de ejecucion del script (informados al admin)
-    if(@$PCOSESS_LoginUsuario=="admin" && $PCO_Accion!="") {
+    // Almacena tiempo de inicio para calculo de tiempos de ejecucion del script (informados a los Administradores)
+    if(PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion!="") {
         $tiempo_inicio_script = obtener_microtime();
     }
 
@@ -183,7 +183,7 @@
     // Prueba que todas las extensiones requeridas se encuentren habilitadas
     verificar_extensiones();
 
-    // Valida existencia de versiones nuevas cuando el admin esta logueado
+    // Valida existencia de versiones nuevas cuando un Administrador esta logueado
     buscar_actualizaciones(@$PCOSESS_LoginUsuario,$PCO_Accion);
 
     // Presenta mensajes con errores generales cuando son encontrados durante la ejecucion
@@ -197,12 +197,12 @@
     }
 
 	// Si existe el directorio de instalacion y no es modo fullscreen presenta un mensaje constante de advertencia en el escritorio
-	if (@file_exists("ins") && @$PCOSESS_LoginUsuario=="admin" && @$Presentar_FullScreen!=1 && $PCO_Accion=="Ver_menu") {
+	if (@file_exists("ins") && PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$Presentar_FullScreen!=1 && $PCO_Accion=="Ver_menu") {
 		mensaje($MULTILANG_TituloInsExiste, $MULTILANG_TextoInsExiste, '', 'fa fa-exclamation-triangle fa-5x texto-rojo texto-blink', 'alert alert-warning alert-dismissible');
 	}
 
-	//Despliega escritorio del admin
-	if (@$PCOSESS_LoginUsuario=="admin" && $PCOSESS_SesionAbierta && $PCO_Accion=="Ver_menu") {
+	//Despliega escritorio de los Administradores
+	if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCOSESS_SesionAbierta && $PCO_Accion=="Ver_menu") {
         include_once("core/marco_admin.php");
     }
 

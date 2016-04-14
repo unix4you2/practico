@@ -27,7 +27,7 @@
 	*/
 
 	//Valida que quien llame este marco tenga permisos suficientes
-	if (@$PCOSESS_LoginUsuario!="admin" || !$PCOSESS_SesionAbierta)
+	if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario) || !$PCOSESS_SesionAbierta)
 		die();
 
 ?>

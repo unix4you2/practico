@@ -700,7 +700,7 @@ if ($PCO_Accion=="administrar_menu")
 
 							// Busca y carga las opciones de menu
 							// Si el usuario es diferente al administrador agrega condiciones al query
-							if ($PCOSESS_LoginUsuario!="admin")
+							if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 								{
 									$Complemento_tablas=",".$TablasCore."usuario_menu";
 									$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";
@@ -754,7 +754,7 @@ if ($PCO_Accion=="administrar_menu")
 							if ($Palabra3!="") $complemento_palabras_like.=" OR titulo LIKE '%$Palabra3%' ";
 							if ($Palabra4!="") $complemento_palabras_like.=" OR titulo LIKE '%$Palabra4%' ";
 							// Si el usuario es diferente al administrador agrega condiciones al query
-							if ($PCOSESS_LoginUsuario!="admin")
+							if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 								{
 									$Complemento_tablas=",".$TablasCore."usuario_informe";
 									$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario'";
@@ -837,7 +837,7 @@ if ($PCO_Accion=="administrar_menu")
 			<div id="PCODIV_ArribaEscritorio"></div>
 			<table class="table table-unbordered table-condensed"><tr><td>';
 			// Si el usuario es diferente al administrador agrega condiciones al query
-			if ($PCOSESS_LoginUsuario!="admin")
+			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 				{
 					$Complemento_tablas=",".$TablasCore."usuario_menu";
 					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
@@ -888,7 +888,7 @@ if ($PCO_Accion=="administrar_menu")
 			// Carga las opciones del ACORDEON
 			echo '<div align="center">';
 			// Si el usuario es diferente al administrador agrega condiciones al query
-			if ($PCOSESS_LoginUsuario!="admin")
+			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 				{
 					$Complemento_tablas=",".$TablasCore."usuario_menu";
 					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
@@ -904,7 +904,7 @@ if ($PCO_Accion=="administrar_menu")
 					// Busca las opciones dentro de la seccion
 
 					// Si el usuario es diferente al administrador agrega condiciones al query
-					if ($PCOSESS_LoginUsuario!="admin")
+					if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 						{
 							$Complemento_tablas=",".$TablasCore."usuario_menu";
 							$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0

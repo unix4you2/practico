@@ -73,7 +73,7 @@ if (@$PCO_WSId=="verificar_credenciales")
 			$error_parametros=1;
 		
 		//Verifica MOTOR autenticacion interna
-		if (!$error_parametros && ($Auth_TipoMotor=="practico" || $uid=="admin"))
+		if (!$error_parametros && ($Auth_TipoMotor=="practico" || PCO_EsAdministrador($uid)))
 			{
 				$ClaveEnMD5=hash("md5", $clave);
 				$registro=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE estado=1 AND login=? AND clave=? ","$uid$_SeparadorCampos_$ClaveEnMD5")->fetch();
@@ -82,7 +82,7 @@ if (@$PCO_WSId=="verificar_credenciales")
 			}
 
 		//Verifica MOTOR autenticacion por LDAP
-		if (!$error_parametros && ($Auth_TipoMotor=="ldap" && $uid!="admin"))
+		if (!$error_parametros && ($Auth_TipoMotor=="ldap" && !PCO_EsAdministrador($uid)))
 			{
 				$DepuracionLDAP=0; //Activar para depuracion durante autenticaciones LDAP
                 $auth_ldap_dc="";
@@ -111,7 +111,7 @@ if (@$PCO_WSId=="verificar_credenciales")
 			}
 
 		//Verifica MOTOR autenticacion federado
-		if (!$error_parametros && ($Auth_TipoMotor=="federado" && $uid!="admin"))
+		if (!$error_parametros && ($Auth_TipoMotor=="federado" && !PCO_EsAdministrador($uid)))
 			{
 				//Busca parametros de configuracion para el motor federado
 				$Param_MotorFederado=ejecutar_sql("SELECT $ListaCamposSinID_parametros FROM ".$TablasCore."parametros ")->fetch();

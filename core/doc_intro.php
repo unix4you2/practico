@@ -25,7 +25,7 @@ Title: Introduccion
 
 	(see ../img/practico_login.png)
 
-	Practico es un proyecto de *software libre publicado bajo licencia GNU GPL v2.0* para la creacion de aplicaciones web de una manera completamente visual, rapida y sin mayores conocimientos previos de programacion.  Su nucleo incorpora los scripts necesarios para una facil instalacion y la generacion dinamica de objetos como formularios, informes, administracion de usuarios y conexion a multiples motores de bases de datos
+	Practico es un proyecto de *software libre publicado bajo licencia GNU GPL v2.0* para la creacion de aplicaciones web de una manera completamente visual, rapida y sin mayores conocimientos previos de programacion.  Su nucleo incorpora los scripts necesarios para una facil instalacion y la generacion dinamica de objetos como formularios, informes, gestion de usuarios y conexion a multiples motores de bases de datos
 
 Section: Principales caracteristicas
 

@@ -107,7 +107,7 @@ if ($PCO_Accion=="opciones_combo_box")
 		Valor del campo o vacio si no se encuentra nada
     
     Ejemplo de llamado:
-    index.php?PCO_Accion=valor_campo_tabla&campo=login&tabla=core_usuario&condicion=login%3d'admin'&Presentar_FullScreen=1
+    index.php?PCO_Accion=valor_campo_tabla&campo=login&tabla=core_usuario&condicion=login%3d'pepito.perez'&Presentar_FullScreen=1
 
 */
 if ($PCO_Accion=="valor_campo_tabla") 

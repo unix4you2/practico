@@ -1063,6 +1063,8 @@
 	$MULTILANG_BuscarActual='Search for upgrades automatically';
 	$MULTILANG_DescActual='Search randomly on admin logins to check for new Practicos versions.  This option could turn a little slower admin loads while checks for new versions';
 	$MULTILANG_ConfGraficas='Change graphic configurations';
+	$MULTILANG_UsuariosAdmin='Super users';
+	$MULTILANG_UsuariosAdminDes='A comma separated list of the users that are the platform administrators and application designers.  If you want to remove the admin user please be sure that you have another super user or you will lost admin rights.';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';

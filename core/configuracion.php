@@ -97,3 +97,6 @@
 
 	// Define cadena usada para separar campos en operaciones de bases de datos
 	$_SeparadorCampos_='||_||';
+	
+	// Define cadena separada por comas con usuarios administradores de la aplicacion
+	$PCOVAR_Administradores='admin';

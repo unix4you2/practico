@@ -1061,6 +1061,8 @@
 	$MULTILANG_BuscarActual='Buscar actualizaciones automaticamente';
 	$MULTILANG_DescActual='Se conecta de manera aleatoria durante algunos ingresos del admin para verificar si existen versiones nuevas de Practico.  Puede poner un poco lenta la carga del panel para el usuario admin mientras busca nuevas versiones.';
 	$MULTILANG_ConfGraficas='Cambiar configuraciones graficas';
+	$MULTILANG_UsuariosAdmin='Usuarios administradores';
+	$MULTILANG_UsuariosAdminDes='Lista de usuarios separados unicamente por coma y que seran considerados como administradores de la plataforma y dise&ntilde;adores de aplicaci&oacute;n.  En caso de retirar al admin por defecto asegurese de contar con otro usuario administrador, de lo contrario tendra que editar manualmente su archivo de configuracion para restablecer los accesos administrativos.';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';

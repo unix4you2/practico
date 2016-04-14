@@ -216,7 +216,7 @@ if ($PCO_Accion=="actualizar_perfil_usuario")
 
                 <?php
                     //Permite cambio solamente si es admin o el motor de autenticacion es practico
-                    if ($Auth_TipoMotor=="practico" || $PCOSESS_LoginUsuario=="admin")
+                    if ($Auth_TipoMotor=="practico" || PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
                         {
                 ?>
 
@@ -266,12 +266,6 @@ if ($PCO_Accion=="actualizar_perfil_usuario")
                         {
                             mensaje($MULTILANG_Atencion, $MULTILANG_UsrHlpNoPW.' (<b>'.$MULTILANG_TipoMotor.': '.$Auth_TipoMotor.'</b>)', '', 'fa fa-remove fa-5x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
                         }
-                ?>
-
-		 <?php
-            // Si el usuario es administrador y el correo es un valor predeterminado en versiones viejas lo cambia
-            if ($PCOSESS_LoginUsuario=="admin" && $registro_usuario["correo"]=="unix4you2@gmail.com")
-                echo '<script language="JavaScript">document.datos.correo.value="sucorreo@dominio.com";</script>';
     }
 
 
@@ -384,7 +378,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="ingresar_clave_nueva
                 <hr>
                 <?php
                     //Permite cambio solamente si es admin o el motor de autenticacion es practico
-                    if ($Auth_TipoMotor=="practico" || $PCOSESS_LoginUsuario=="admin")
+                    if ($Auth_TipoMotor=="practico" || PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
                         {
                             echo '<a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> '.$MULTILANG_Actualizar.'</a>';
                         }
@@ -612,7 +606,7 @@ if ($PCO_Accion=="cambiar_clave")
 ?>
                 <?php
                     //Permite cambio solamente si es admin o el motor de autenticacion es practico
-                    if ($Auth_TipoMotor=="practico" || $PCOSESS_LoginUsuario=="admin")
+                    if ($Auth_TipoMotor=="practico" || PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
                         {
                 ?>
 
@@ -865,7 +859,7 @@ if ($PCO_Accion=="informes_usuario")
 				<select name="usuarioo" class="selectpicker " data-live-search=true data-size=5 data-style="btn btn-default btn-xs ">
 						<option value=""><?php echo $MULTILANG_UsrDelPer; ?></option>
 						<?php
-							$resultado=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login<>'admin' AND login<>? ORDER BY login","$usuario");
+							$resultado=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login<>? ORDER BY login","$usuario");
 							while($registro = $resultado->fetch())
 								{
 									echo '<option value="'.$registro["login"].'">'.$registro["login"].'</option>';
@@ -1032,12 +1026,6 @@ if ($PCO_Accion=="eliminar_permiso")
 
 		usuario - UID/Login de usuario al que se desea agregar el permiso
 
-		(start code)
-			SELECT login FROM ".$TablasCore."usuario WHERE login<>'admin' AND login<>'$usuario' ORDER BY login
-			SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE nivel_usuario<=".$Nivel_usuario
-			SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu,".$TablasCore."usuario_menu WHERE ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$usuario'
-		(end)
-
 	Salida:
 		Listado de opciones de menu disponibles en el perfil del usuario
 
@@ -1061,7 +1049,7 @@ if ($PCO_Accion=="permisos_usuario")
 				<select name="usuarioo" class="selectpicker " data-live-search=true data-size=5 data-style="btn btn-default btn-xs ">
 						<option value=""><?php echo $MULTILANG_UsrDelPer; ?></option>
 						<?php
-							$resultado=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login<>'admin' AND login<>? ORDER BY login","$usuario");
+							$resultado=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login<>? ORDER BY login","$usuario");
 							while($registro = $resultado->fetch())
 								{
 									echo '<option value="'.$registro["login"].'">'.$registro["login"].'</option>';
@@ -1800,11 +1788,6 @@ if ($PCO_Accion=="listar_usuarios")
 					nombre_filtro - Nombre del usuario (o parte)
 					login_filtro - Parte del UID o Login
 
-				Proceso simplificado:
-					(start code)
-						SELECT * FROM ".$TablasCore."usuario WHERE (login LIKE '%$login_filtro%') AND (nombre LIKE '%$nombre_filtro%' ) AND login<>'admin' ORDER BY login,nombre";
-					(end)
-
 				Salida de la funcion:
 					* Listado de usuarios filtrado por algun criterio y ordenado por login y nombre
 
@@ -1873,30 +1856,36 @@ if ($PCO_Accion=="listar_usuarios")
                     </thead>
                     </body>
 					';
-				$resultado=ejecutar_sql("SELECT ".$ListaCamposSinID_usuario." FROM ".$TablasCore."usuario WHERE (login LIKE '%$login_filtro%') AND (nombre LIKE '%$nombre_filtro%' ) AND login<>'admin' ORDER BY login,nombre");
+				$resultado=ejecutar_sql("SELECT ".$ListaCamposSinID_usuario." FROM ".$TablasCore."usuario WHERE (login LIKE '%$login_filtro%') AND (nombre LIKE '%$nombre_filtro%' ) ORDER BY login,nombre");
 				$i=0;
 				while($registro = $resultado->fetch())
 					{
+						$TextoBotonCambioEstado=$MULTILANG_Habilitar;
+						if ($registro["estado"]==1) $TextoBotonCambioEstado=$MULTILANG_Suspender;
+						
 						echo '<tr><td align="left">'.$registro["login"].'</td>
 								<td>'.$registro["nombre"].'</td>
 								<td>'.$registro["ultimo_acceso"].'</td>
-								<td align="center">
+								<td align="center">';
+						if (!PCO_EsAdministrador($registro["login"]))
+								echo '
 										<form action="'.$ArchivoCORE.'" method="POST">
 												<input type="hidden" name="PCO_Accion" value="cambiar_estado_usuario">
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
 												<input type="hidden" name="estado" value="'.$registro["estado"].'">
-                                                <button type="submit" class="btn btn-warning btn-xs">';
-												if ($registro["estado"]==1) echo $MULTILANG_Suspender;
-												else echo $MULTILANG_Habilitar;
-                                                echo '</button>
-										</form>
+                                                <button type="submit" class="btn btn-warning btn-xs">'.$TextoBotonCambioEstado.'</button>
+										</form>';
+						echo '
 								</td>
-								<td align="center">
+								<td align="center">';
+						if (!PCO_EsAdministrador($registro["login"]))	
+								echo '		
 										<form action="'.$ArchivoCORE.'" method="POST"  name="f'.$i.'">
 												<input type="hidden" name="PCO_Accion" value="eliminar_usuario">
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
                                                 <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_UsrAdvSupr.'\',f'.$i.');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
-										</form>
+										</form>';
+						echo '
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
@@ -1919,8 +1908,11 @@ if ($PCO_Accion=="listar_usuarios")
                                                 <button type="submit" class="btn btn-default btn-xs">'.$MULTILANG_UsrAuditoria.'</button>
 										</form>
 								</td>
-							</tr>
-                            <tr>
+							</tr>';
+                       
+                       //Si no es un administrador permite el cambio de clave
+                       if (!PCO_EsAdministrador($registro["login"]))
+                        echo '    <tr>
 								<td colspan=3>
 								</td>
 								<td colspan=5 align=center>
@@ -1929,7 +1921,7 @@ if ($PCO_Accion=="listar_usuarios")
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
                                                 <div class="form-group input-group">
                                                     <span class="input-group-addon">
-                                                        '.$MULTILANG_UsrNuevoPW.':
+                                                        '.$MULTILANG_UsrNuevoPW.' <b>'.$registro["login"].'</b>:
                                                     </span>
                                                     <input type="text" name="nueva_clave" size=12 class="form-control" value="'.TextoAleatorio(10).'">
                                                     <span class="input-group-addon">
