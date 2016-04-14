@@ -2302,6 +2302,16 @@ if ($PCO_Accion=="editar_formulario")
 							</select>
 						</td>
 					</tr>
+					<tr>
+						<td>
+							<label for="estilo_pestanas"><?php echo $MULTILANG_FrmEstiloPestanas; ?>:</label>
+                            <select id="estilo_pestanas" name="estilo_pestanas" class="form-control">
+								<option value="nav-tabs" <?php if ($registro_form["estilo_pestanas"]=="nav-tabs") echo "SELECTED"; ?> ><?php echo $MULTILANG_FrmEstiloTabs; ?></option>
+								<option value="nav-pills" <?php if ($registro_form["estilo_pestanas"]=="nav-pills") echo "SELECTED"; ?> ><?php echo $MULTILANG_FrmEstiloPills; ?></option>
+								<option value="" <?php if ($registro_form["estilo_pestanas"]=="") echo "SELECTED"; ?> ><?php echo $MULTILANG_FrmEstiloOculto; ?></option>
+							</select>
+						</td>
+					</tr>
 				</table>
             </form>
                             
@@ -2409,7 +2419,7 @@ if ($PCO_Accion=="editar_formulario")
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario SET titulo=?,ayuda_titulo=?,ayuda_texto=?,tabla_datos=?,columnas=?,javascript=?,borde_visible=? WHERE id= ? ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$formulario");
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario SET titulo=?,ayuda_titulo=?,ayuda_texto=?,tabla_datos=?,columnas=?,javascript=?,borde_visible=?,estilo_pestanas=? WHERE id= ? ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$formulario");
 					auditar("Actualiza formulario $formulario para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
@@ -2456,7 +2466,7 @@ if ($PCO_Accion=="editar_formulario")
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas");
 					$id=$ConexionPDO->lastInsertId();
 					auditar("Crea formulario $id para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -2518,8 +2528,9 @@ if ($PCO_Accion=="editar_formulario")
 							$columnas=$registro["columnas"];
 							$javascript=$registro["javascript"];
 							$borde_visible=$registro["borde_visible"];
+							$estilo_pestanas=$registro["estilo_pestanas"];
 							// Inserta el nuevo objeto al form
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible");
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas");
 							$idObjetoInsertado=$ConexionPDO->lastInsertId();
 
 							// Busca los elementos que componen el formulario para hacerles la copia
@@ -2776,8 +2787,9 @@ if ($PCO_Accion=="confirmar_importacion_formulario")
 				$columnas=base64_decode($xml_importado->core_formulario[0]->columnas);
 				$javascript=base64_decode($xml_importado->core_formulario[0]->javascript);
 				$borde_visible=base64_decode($xml_importado->core_formulario[0]->borde_visible);
+				$estilo_pestanas=base64_decode($xml_importado->core_formulario[0]->estilo_pestanas);
 				// Inserta el nuevo objeto al form
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposParaID.$ListaCamposSinID_formulario.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposParaID.$ListaCamposSinID_formulario.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas");
 				
 				//Determina el ID del registro
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
@@ -3149,6 +3161,13 @@ function FrmAutoRun()
                 <option value="0"><?php echo $MULTILANG_No; ?></option>
                 <option value="1"><?php echo $MULTILANG_Si; ?></option>
             </select>
+
+			<label for="estilo_pestanas"><?php echo $MULTILANG_FrmEstiloPestanas; ?>:</label>
+			<select id="estilo_pestanas" name="estilo_pestanas" class="form-control">
+				<option value="nav-tabs"><?php echo $MULTILANG_FrmEstiloTabs; ?></option>
+				<option value="nav-pills"><?php echo $MULTILANG_FrmEstiloPills; ?></option>
+				<option value=""><?php echo $MULTILANG_FrmEstiloOculto; ?></option>
+			</select>
 
             </form>
             <br>

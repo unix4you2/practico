@@ -586,6 +586,10 @@
 	$MULTILANG_FrmValOnCheck= 'Value when is activated';
 	$MULTILANG_FrmValOffCheck='Value when is not activated';
 	$MULTILANG_FrmValCheckDes='Define the value to be assigned to the field that will be stored in the database according to the control status';
+	$MULTILANG_FrmEstiloPestanas='Tabs style (if applies)';
+	$MULTILANG_FrmEstiloTabs='Tabs (nav-tab)';
+	$MULTILANG_FrmEstiloPills='Buttons (nav-pills)';
+	$MULTILANG_FrmEstiloOculto='Hidden';
 	
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';

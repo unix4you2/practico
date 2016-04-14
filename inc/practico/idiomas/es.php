@@ -584,6 +584,11 @@
 	$MULTILANG_FrmValOnCheck= 'Valor cuando esta activado';
 	$MULTILANG_FrmValOffCheck='Valor cuando esta sin activar';
 	$MULTILANG_FrmValCheckDes='Establece el valor que debe ser asignado internamente al campo que sera almacenado en base de datos dependiendo del estado del control';
+	$MULTILANG_FrmEstiloPestanas='Estilo de pesta&ntilde;as (si aplica)';
+	$MULTILANG_FrmEstiloTabs='Pesta&ntilde;as (nav-tab)';
+	$MULTILANG_FrmEstiloPills='Botones (nav-pills)';
+	$MULTILANG_FrmEstiloOculto='Ocultas';
+
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

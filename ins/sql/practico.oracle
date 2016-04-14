@@ -95,6 +95,7 @@ CREATE TABLE core_formulario (
   columnas int(10) default '1',
   javascript text,
   borde_visible int(10) default '0',
+  estilo_pestanas varchar(10) default 'nav-tabs',
   PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

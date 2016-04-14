@@ -16,6 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/formularios.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 "
@@ -32,12 +33,15 @@ LogCambios="
 * Added: Nuevas funciones para obtener el nombre de un sitio en lenguaje natural mediante API de Google:
 		 PCO_DireccionPorCoordenas(Latitud, Longitud, APIKey_GoogleMaps)
 		 PCO_DireccionPorIDSitio(PlaceID, APIKey_GoogleMaps)
+* Added: Las pestanas de formulario cuentan ahora con un identificador PCO_LinkPestanaFormulario_XXX que permite llamar su enlace desde JQuery por ejemplo así:  $("#PCO_LinkPestanaFormulario_2").trigger("click");
+* Added: Los formularios ahora pueden especificar el tipo de pestañas a utilizar (pestanas, botones, ocultas).  En el caso de ocultar sus pestanas y contar con varias el diseño de interfaz debería tener los elementos necesarios para navegar entre pestañas en caso de ser necesario.
+
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-
+ALTER TABLE core_formulario ADD estilo_pestanas varchar(10) DEFAULT 'nav-tabs';
 "
 
 ########################################################################

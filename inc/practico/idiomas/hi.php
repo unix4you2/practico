@@ -586,6 +586,10 @@
 	$MULTILANG_FrmValOnCheck= 'मूल्य जब सक्रिय होता है';
 	$MULTILANG_FrmValOffCheck='मूल्य जब सक्रिय नहीं है';
 	$MULTILANG_FrmValCheckDes='मूल्य निर्धारित नियंत्रण की स्थिति के अनुसार डेटाबेस में संग्रहीत किया जाएगा कि क्षेत्र के लिए आवंटित किया जाना';
+	$MULTILANG_FrmEstiloPestanas='टैब्स शैली (यदि लागू होता है)';
+	$MULTILANG_FrmEstiloTabs='टैब्स (nav-tab)';
+	$MULTILANG_FrmEstiloPills='बटन (nav-pills)';
+	$MULTILANG_FrmEstiloOculto='छिपा हुआ';
 	
 	//Informes
 	$MULTILANG_InfErr1='आप कम से कम एक डेटा श्रृंखला के लिए इसी क्षेत्रों के लिए मूल्यों को निर्दिष्ट करना होगा। यदि आप एक ग्राफ उत्पन्न करने के लिए चाहते हैं न तो हिन्दी तो आप डेटा तालिका करने के लिए रिपोर्ट प्रकार में परिवर्तन करना होगा';

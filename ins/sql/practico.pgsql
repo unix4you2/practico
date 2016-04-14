@@ -95,6 +95,7 @@ CREATE TABLE core_formulario (
   columnas integer default '1',
   javascript text,
   borde_visible integer default '0',
+  estilo_pestanas varchar(10) default 'nav-tabs',
   PRIMARY KEY  (id)
 );
 

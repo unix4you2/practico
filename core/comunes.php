@@ -4271,15 +4271,20 @@ $('#SampleElement').load('YourURL');
                 //Presenta barra de navegacion de pestanas si se encuentra al menos una
                 if ($conteo_pestanas>0 && ($ultimo_nombre_pestanas!=""))
                     {
+						//Determina el estilo de las pestanas
+						$CadenaEstiloPestanas=""; //Estilo por defecto para aplicar a las pestanas
+						if($registro_formulario["estilo_pestanas"]=="")
+							$CadenaEstiloPestanas="visibility:hidden; height:0px;"; //Oculta las pestanas
+
                         $consulta_formulario_pestana=   ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
-                        echo '<ul class="nav nav-tabs nav-justified">';  //nav-pills
+                        echo '<ul class="nav '.$registro_formulario["estilo_pestanas"].' nav-justified" style="'.$CadenaEstiloPestanas.'">';
                         $estado_activa_primera_pestana=' class="active" ';
                         $pestana_activa=1;
                         while($registro_formulario_pestana = @$consulta_formulario_pestana->fetch())
                             {
                                 $titulo_pestana_formulario=$registro_formulario_pestana["pestana_objeto"];
                                 if ($titulo_pestana_formulario=="") $titulo_pestana_formulario="<i class='fa fa-stack-overflow'></i>";
-                                echo '<li '.$estado_activa_primera_pestana.'><a href="#pestana_formulario_'.$pestana_activa.'" data-toggle="tab">'.$titulo_pestana_formulario.'</a></li>';
+                                echo '<li '.$estado_activa_primera_pestana.'  ><a  href="#PCO_PestanaFormulario_'.$pestana_activa.'" data-toggle="tab" id="PCO_LinkPestanaFormulario_'.$pestana_activa.'">'.$titulo_pestana_formulario.'</a></li>';
                                 //Limpia para las siguientes pestanas
                                 $estado_activa_primera_pestana='';
                                 $pestana_activa++;
@@ -4303,7 +4308,7 @@ $('#SampleElement').load('YourURL');
                                 //Genera el contenedor de la pestana
                                 echo '
                                 <!-- INICIO de las pestanas No '.$pestana_activa.' -->
-                                    <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="pestana_formulario_'.$pestana_activa.'">';
+                                    <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="PCO_PestanaFormulario_'.$pestana_activa.'">';
                                     
                                         //Booleana que determina si se debe incluir el javascript de ckeditor
                                         $existe_campo_textoformato=0;

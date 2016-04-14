@@ -94,8 +94,9 @@ CREATE TABLE core_formulario (
   tabla_datos text default '',
   columnas integer default '1',
   javascript text,
-  borde_visible integer default '0'
-  
+  borde_visible integer default '0',
+  estilo_pestanas text default 'nav-tabs'
+
 );
 
 DROP TABLE IF EXISTS core_formulario_objeto;

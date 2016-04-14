@@ -30,7 +30,7 @@
     $ListaCamposSinID_formulario_objeto='tipo,titulo,campo,ayuda_titulo,ayuda_texto,formulario,peso,columna,obligatorio,visible,valor_predeterminado,validacion_datos,etiqueta_busqueda,ajax_busqueda,valor_unico,solo_lectura,ancho,alto,barra_herramientas,fila_unica,lista_opciones,origen_lista_opciones,origen_lista_valores,valor_etiqueta,url_iframe,objeto_en_ventana,informe_vinculado,maxima_longitud,valor_minimo,valor_maximo,valor_salto,formato_salida,plantilla_archivo,peso_archivo,tamano_pincel,color_trazo,formulario_vinculado,formulario_campo_vinculo,formulario_campo_foraneo,condicion_filtrado_listas,pestana_objeto,personalizacion_tag,modo_inline,imagen,tipo_accion,accion_usuario,valor_check_activo,valor_check_inactivo';
     $ListaCamposSinID_formulario_boton='titulo,estilo,formulario,tipo_accion,accion_usuario,visible,peso,retorno_titulo,retorno_texto,confirmacion_texto,retorno_icono,retorno_estilo';
 	//Recordar:  Cambios sobre esta estructura deberian actualizar scripts en formularios.php donde $PCO_Accion=="copiar_formulario"
-    $ListaCamposSinID_formulario='titulo,ayuda_titulo,ayuda_texto,tabla_datos,columnas,javascript,borde_visible';
+    $ListaCamposSinID_formulario='titulo,ayuda_titulo,ayuda_texto,tabla_datos,columnas,javascript,borde_visible,estilo_pestanas';
 	$ListaCamposSinID_informe_condiciones='informe,valor_izq,operador,valor_der,peso';
 	$ListaCamposSinID_informe_campos='informe,valor_campo,valor_alias,peso,visible,editable';
 	$ListaCamposSinID_informe_tablas='informe,valor_tabla,valor_alias';

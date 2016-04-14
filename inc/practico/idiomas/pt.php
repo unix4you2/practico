@@ -586,7 +586,11 @@
 	$MULTILANG_FrmValOnCheck= 'Valor quando &eacute; activado';
 	$MULTILANG_FrmValOffCheck='Valor quando não est&aacute; activada';
 	$MULTILANG_FrmValCheckDes='Definir o valor a ser atribu&iacute;do ao campo que vai ser armazenado na base de dados de acordo com o estado de controlo';
-	
+	$MULTILANG_FrmEstiloPestanas='Estilo Tabs (se aplicável)';
+	$MULTILANG_FrmEstiloTabs='Tabs (nav-tab)';
+	$MULTILANG_FrmEstiloPills='Botões (nav-pills)';
+	$MULTILANG_FrmEstiloOculto='Escondido';
+
 	//Informes
 	$MULTILANG_InfErr1='Você deve especificar valores para os campos correspondentes a, pelo menos, uma s&eacute;rie de dados. <br> Se você não quer gerar um gr&aacute;fico, em seguida, você deve alterar o tipo de relat&oacute;rio a tabela de dados';
 	$MULTILANG_InfErr2='Você deve digitar um t&iacute;tulo v&aacute;lido para o relat&oacute;rio.';
