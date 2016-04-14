@@ -37,6 +37,7 @@ core/usuarios.php
 core/ws_funciones.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
+inc/font-awesome/*
 mod/pcoder/index.php
 mod/pcoder/inc/*
 "
@@ -60,6 +61,7 @@ LogCambios="
 * Enhan: Confirmada eliminacion de la variable $_SeparadorCampos_ anunciada para la versión 16.1.  Se había dejado hasta la versión 16.3 para dar tiempo a versiones previas de ser actualizadas.  Quienes no lo hayan hecho podrán entrar a su archivo configuracion.php y agregarla manualmente.  
 * Enhan: Ahora los SuperUsuarios aparecen dentro de la lista de usuarios disponibles para realizar copia de permisos e informes en otros usuarios, sin embargo se debe tener en cuenta que aún así sus permisos podrán estar en blanco pues los SuperUsuarios no usan las mismas ACL que los usuarios estándar.
 * Enhan: Los SuperUsuarios aparecen dentro de los listados de usuarios, sin embargo no se dejan suspender, eliminar o resetear claves.
+* Enhan: Actualización de FontAwesome versión 4.6.1
 "
 
 ########################################################################
