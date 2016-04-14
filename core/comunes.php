@@ -4301,7 +4301,7 @@ $('#SampleElement').load('YourURL');
                         $pestana_activa=1;
 
                         //Inicio de los tab-content
-                        echo '<div class="tab-content">';
+                        echo '<div class="tab-content" >';
                         while($registro_formulario_pestana = @$consulta_formulario_pestana->fetch())
                             {
                                 $titulo_pestana_formulario=$registro_formulario_pestana["pestana_objeto"];
@@ -4321,7 +4321,12 @@ $('#SampleElement').load('YourURL');
                                         $consulta_obj_fila_unica=ejecutar_sql("SELECT id,peso,visible FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario");
                                         //Define si debe o no dibujar borde de las celdas
                                         $estilo_bordes="table-unbordered";
-                                        if ($registro_formulario["borde_visible"]==1) $estilo_bordes="table-bordered";
+                                        $ancho_bordes="border-width: 0px;";
+                                        if ($registro_formulario["borde_visible"]==1)
+											{
+												$estilo_bordes="table-bordered";
+												$ancho_bordes="border-width: 1px;";
+											}
 
                                         while ($registro_obj_fila_unica = $consulta_obj_fila_unica->fetch())
                                             {
@@ -4329,8 +4334,8 @@ $('#SampleElement').load('YourURL');
                                                 $ultimo_id=$registro_obj_fila_unica["id"];
                                                 // Inicia la tabla con los campos
                                                 echo '
-                                                    <div class="table-responsive">
-                                                    <table class="table table-responsive '.$estilo_bordes.' table-condensed btn-xs"><tr>';
+                                                    <div class="table-responsive" style="border-width: 0px;">
+                                                    <table class="table table-responsive '.$estilo_bordes.' table-condensed btn-xs" style="'.$ancho_bordes.'"><tr>';
                                                 //Recorre todas las comunas definidas para el formulario buscando objetos
                                                 for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
                                                     {

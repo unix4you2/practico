@@ -35,6 +35,7 @@ LogCambios="
 		 PCO_DireccionPorIDSitio(PlaceID, APIKey_GoogleMaps)
 * Added: Las pestanas de formulario cuentan ahora con un identificador PCO_LinkPestanaFormulario_XXX que permite llamar su enlace desde JQuery por ejemplo así:  $("#PCO_LinkPestanaFormulario_2").trigger("click");
 * Added: Los formularios ahora pueden especificar el tipo de pestañas a utilizar (pestanas, botones, ocultas).  En el caso de ocultar sus pestanas y contar con varias el diseño de interfaz debería tener los elementos necesarios para navegar entre pestañas en caso de ser necesario.
+* Enhan: Mejorados los estilos de tablas responsive para formularios cuando no se presentan bordes y en versiones moviles
 
 "
 
