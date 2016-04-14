@@ -114,7 +114,7 @@
     }
 
 
-if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) || $PCO_PCODER_StandAlone==1)
+if ($PCOSESS_LoginUsuario=="admin" || $PCO_PCODER_StandAlone==1)
 {
     //Carga el archivo recibido, si no recibe nada carga un demo
     if (@$PCODER_archivo=="")
