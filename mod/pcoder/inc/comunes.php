@@ -23,6 +23,36 @@
 
 /* ################################################################## */
 /* ################################################################## */
+/*
+	// Function: PCO_EsAdministrador
+	Determina si un login de usuario es administrador de plataforma o no (si es super usuario)
+	
+	Variables de entrada:
+
+		Usuario - Login de usuario a verificar
+
+	Salida:
+		Cero (0) o uno (1) segun la pertenencia o no del usuario al grupo de admins
+*/
+	function PCO_EsAdministrador($Usuario)
+		{
+			global $PCOVAR_Administradores;
+			$ArregloAdmins=explode(",",$PCOVAR_Administradores);
+
+			//Recorre el arreglo de super-usuarios
+			$Resultado = 0;
+			if ($Usuario!="")
+				foreach ($ArregloAdmins as $UsuarioAdmin)
+					{
+						if (trim($UsuarioAdmin)==$Usuario)
+							$Resultado = 1;
+					}
+			return $Resultado;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
     function abrir_dialogo_modal($identificador,$titulo="",$estilo_modal="")
         {
             /*

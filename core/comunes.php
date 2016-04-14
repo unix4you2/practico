@@ -138,11 +138,12 @@
 
 			//Recorre el arreglo de super-usuarios
 			$Resultado = 0;
-			foreach ($ArregloAdmins as $UsuarioAdmin)
-				{
-					if (trim($UsuarioAdmin)==$Usuario)
-						$Resultado = 1;
-				}
+			if ($Usuario!="")
+				foreach ($ArregloAdmins as $UsuarioAdmin)
+					{
+						if (trim($UsuarioAdmin)==$Usuario)
+							$Resultado = 1;
+					}
 			return $Resultado;
 		}
 

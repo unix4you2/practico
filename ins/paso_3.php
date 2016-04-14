@@ -126,7 +126,7 @@
 	\$Auth_LDAPDominio='%s';
 	\$Auth_LDAPOU='%s';
 	
-	// Especifica si el administrador desea activar o no el modulo de chat para usuarios asi:
+	// Especifica si desea activar o no el modulo de chat para usuarios asi:
 	// 0=No, 1=Solo usuarios internos, 2=Solo usuarios externos, 3=Todos los usuarios, 4=Exclusivo para admin (podra iniciar conversacion y chat con cualquier otro usuario aun con modulo desactivado)
 	\$Activar_ModuloChat=0;
 	

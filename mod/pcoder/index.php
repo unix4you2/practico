@@ -39,6 +39,10 @@
             error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_DEPRECATED | E_STRICT | E_USER_DEPRECATED | E_USER_ERROR | E_USER_WARNING); //Otras disponibles | E_PARSE | E_CORE_ERROR | E_CORE_WARNING |
         }
 
+	//Si esta como modulo de practico intenta incluir sus configuraciones
+	if ($PCO_PCODER_StandAlone==0)
+		include_once("../../core/configuracion.php");
+
     //Incluye archivo inicial de configuracion
 	include_once("inc/configuracion.php");
 
@@ -110,7 +114,7 @@
     }
 
 
-if (@$PCOSESS_LoginUsuario=="admin" || $PCO_PCODER_StandAlone==1)
+if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) || $PCO_PCODER_StandAlone==1)
 {
     //Carga el archivo recibido, si no recibe nada carga un demo
     if (@$PCODER_archivo=="")
