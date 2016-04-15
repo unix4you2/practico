@@ -150,3 +150,64 @@
 
 	//Genera la conexion inicial del sistema
 	$ConexionPDO=PCO_NuevaConexionBD($MotorBD,$PuertoBD,$BaseDatos,$ServidorBD,$UsuarioBD,$PasswordBD);
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCO_ConexionNoSQL
+	Crea una nueva conexion a un motor NoSQL y retorna la variable en cuestion para ser utilizada
+	
+	Variables de entrada:
+
+		- PCOConnMotorBD: Tipo de motor utilizado   couchbase|couchdb|mongodb|cassandra|redis
+		- PCOConnServidorBD: Host o servidor que ofrece el servicio
+		- PCOConnPuertoBD: Puerto de conexion (opcional)
+		- PCOConnBaseDatos: Nombre de la base de datos, bucket, coleccion o analogo a conectar
+		- PCOConnUsuarioBD: Usuario con privilegios para accesar
+		- PCOConnPasswordBD: Clave del usuario que accesa
+
+	Salida:
+		Retorna variable llamada ConexionNoSQL con la conexion establecida o null en caso de error
+	
+	Ejemplos:
+		$ConexionNoSQL=PCO_ConexionNoSQL("couchbase","http://127.0.0.1","8091","practico","","");
+*/
+	function PCO_ConexionNoSQL($PCOConnMotorBD,$PCOConnServidorBD,$PCOConnPuertoBD,$PCOConnBaseDatos,$PCOConnUsuarioBD,$PCOConnPasswordBD)
+		{
+			$ConexionNoSQL=null;
+			try
+				{
+					// Crea la conexion
+					if ($PCOConnMotorBD=="couchbase")
+						{
+							$Cluster = new CouchbaseCluster($PCOConnServidorBD.':'.$PCOConnPuertoBD);
+							$Bucket = $Cluster->openBucket($PCOConnBaseDatos);
+							$ConexionNoSQL=$Bucket;
+						}
+					if ($PCOConnMotorBD=="couchdb")
+						{
+							//TODO
+						}
+					if ($PCOConnMotorBD=="mongodb")
+						{
+							//TODO
+						}
+					if ($PCOConnMotorBD=="cassandra")
+						{
+							//TODO
+						}
+					if ($PCOConnMotorBD=="redis")
+						{
+							//TODO
+						}
+					//Retorna la variable de conexion creada
+					return $ConexionNoSQL;
+				}
+			catch( Exception $ErrorPDO)
+				{
+					@include_once("core/comunes.php"); //Incluye la libreria de base al menos para presentar mensaje de error
+					$mensaje_final="Error de conexion con la base de datos NoSQL. Verifique la disponibilidad de modulos asociados a su motor NoSQL en su <b>php.ini</b>.";
+					mensaje('<i class="fa fa-warning fa-3x text-danger texto-blink"></i> '.$mensaje_final, "<li><b>Detalles:</b> ".$ErrorPDO->getMessage(), '', '', 'alert alert-danger alert-dismissible');
+				}
+		}
