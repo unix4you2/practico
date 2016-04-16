@@ -168,14 +168,13 @@
 		- PCOConnPasswordBD: Clave del usuario que accesa
 
 	Salida:
-		Retorna variable llamada ConexionNoSQL con la conexion establecida o null en caso de error
+		Retorna arreglo asociativo con el tipo de conexion y el enlace a la misma llamada ResultadoConexion
 	
 	Ejemplos:
 		$ConexionNoSQL=PCO_ConexionNoSQL("couchbase","http://127.0.0.1","8091","practico","","");
 */
 	function PCO_ConexionNoSQL($PCOConnMotorBD,$PCOConnServidorBD,$PCOConnPuertoBD,$PCOConnBaseDatos,$PCOConnUsuarioBD,$PCOConnPasswordBD)
 		{
-			$ConexionNoSQL=null;
 			try
 				{
 					// Crea la conexion
@@ -183,7 +182,8 @@
 						{
 							$Cluster = new CouchbaseCluster($PCOConnServidorBD.':'.$PCOConnPuertoBD);
 							$Bucket = $Cluster->openBucket($PCOConnBaseDatos);
-							$ConexionNoSQL=$Bucket;
+							@$ResultadoConexion["TipoMotor"]=$PCOConnMotorBD;
+							@$ResultadoConexion["Enlace"]=$Bucket;
 						}
 					if ($PCOConnMotorBD=="couchdb")
 						{
@@ -202,12 +202,13 @@
 							//TODO
 						}
 					//Retorna la variable de conexion creada
-					return $ConexionNoSQL;
+					return $ResultadoConexion;
 				}
-			catch( Exception $ErrorPDO)
+			catch( Exception $CODError)
 				{
 					@include_once("core/comunes.php"); //Incluye la libreria de base al menos para presentar mensaje de error
 					$mensaje_final="Error de conexion con la base de datos NoSQL. Verifique la disponibilidad de modulos asociados a su motor NoSQL en su <b>php.ini</b>.";
-					mensaje('<i class="fa fa-warning fa-3x text-danger texto-blink"></i> '.$mensaje_final, "<li><b>Detalles:</b> ".$ErrorPDO->getMessage(), '', '', 'alert alert-danger alert-dismissible');
+					mensaje('<i class="fa fa-warning fa-3x text-danger texto-blink"></i> '.$mensaje_final, "<li><b>Detalles:</b> ".$CODError->getMessage(), '', '', 'alert alert-danger alert-dismissible');
 				}
 		}
+

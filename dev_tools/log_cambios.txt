@@ -57,6 +57,7 @@ LogCambios="
 		 PCO_DireccionPorIDSitio(PlaceID, APIKey_GoogleMaps)
 * Added: Las pestanas de formulario cuentan ahora con un identificador PCO_LinkPestanaFormulario_XXX que permite llamar su enlace desde JQuery por ejemplo así:  $("#PCO_LinkPestanaFormulario_2").trigger("click");
 * Added: Los formularios ahora pueden especificar el tipo de pestañas a utilizar (pestanas, botones, ocultas).  En el caso de ocultar sus pestanas y contar con varias el diseño de interfaz debería tener los elementos necesarios para navegar entre pestañas en caso de ser necesario.
+* Added: Inicio de soporte a motores NoSQL: CouchBase
 * Enhan: Mejorados los estilos de tablas responsive para formularios cuando no se presentan bordes y en versiones moviles
 * Enhan: Confirmada eliminacion de la variable $_SeparadorCampos_ anunciada para la versión 16.1.  Se había dejado hasta la versión 16.3 para dar tiempo a versiones previas de ser actualizadas.  Quienes no lo hayan hecho podrán entrar a su archivo configuracion.php y agregarla manualmente.  
 * Enhan: Ahora los SuperUsuarios aparecen dentro de la lista de usuarios disponibles para realizar copia de permisos e informes en otros usuarios, sin embargo se debe tener en cuenta que aún así sus permisos podrán estar en blanco pues los SuperUsuarios no usan las mismas ACL que los usuarios estándar.

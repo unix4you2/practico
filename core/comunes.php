@@ -1417,6 +1417,55 @@ function completar_parametros($string,$data) {
 		}
 
 
+/* ################################################################## */
+/* ################################################################## */
+	function ejecutar_nosql($ConexionNoSQL,$LlaveRegistro="")
+		{
+			/*
+				Function: ejecutar_nosql
+				Ejecuta consultas hacia motores NoSQL
+
+				Variables de entrada:
+
+					ConexionNoSQL - Variable de conexion previamente creada
+					LlaveRegistro - Consulta preformateada para ser ejecutada en el motor
+					
+				Salida:
+					Retorna mensaje en pantalla con la descripcion devuelta por el driver en caso de error
+					Retorna una variable con el arreglo de resultados en caso de ser exitosa la consulta
+			*/
+			
+			global $ModoDepuracion;
+			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin;
+			global $PCO_Accion;
+			global $PCOSESS_LoginUsuario;
+			try
+				{
+					if ($ConexionNoSQL[TipoMotor]=="couchbase")
+						{
+							//Si la llave de registro para consulta unica fue entregada hace la operacion
+							if ($LlaveRegistro!="")
+								$ResultadosNoSQL = $ConexionNoSQL[Enlace]->get($LlaveRegistro);
+						}
+					return $ResultadosNoSQL;
+				}
+			catch( Exception $CODError)
+				{
+					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
+					if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+						$mensaje_final=$CODError->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: ';
+					else
+						$mensaje_final='<b>'.$MULTILANG_Detalles.'</b>: '.$MULTILANG_ErrorSoloAdmin;
+					//Presenta el mensaje sobre el HTML y como Emergente JS
+                    mensaje($MULTILANG_ErrorTiempoEjecucion,$mensaje_final, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+					echo '<script type="" language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\\n\\n'.$mensaje_final.'");</script>';
+					//Redirecciona segun la accion
+					if ($PCO_Accion=="Iniciar_login")
+						echo '<form name="Acceso" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value=""></form><script type="" language="JavaScript">	document.Acceso.submit();  </script>';
+					return 1;
+				}
+		}
+
 
 /* ################################################################## */
 /* ################################################################## */

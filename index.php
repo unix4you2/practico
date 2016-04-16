@@ -66,10 +66,14 @@
 		{ $PCO_ModoDEMO=1; echo "<script language='JavaScript'> PCO_ModoDEMO=1; </script>"; }
 
     //Activa errores del preprocesador en modo de depuracion (configuracion.php)
-    if ($ModoDepuracion && PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+    if ($ModoDepuracion && @$PCOSESS_SesionAbierta)
         {
-            ini_set("display_errors", 1);
-            error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_DEPRECATED | E_STRICT | E_USER_DEPRECATED | E_USER_ERROR | E_USER_WARNING); //Otras disponibles | E_PARSE | E_CORE_ERROR | E_CORE_WARNING |
+			include_once("core/comunes.php");
+			if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+				{
+					ini_set("display_errors", 1);
+					error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_DEPRECATED | E_STRICT | E_USER_DEPRECATED | E_USER_ERROR | E_USER_WARNING); //Otras disponibles | E_PARSE | E_CORE_ERROR | E_CORE_WARNING |
+				}
         }
     else
         {
