@@ -121,6 +121,44 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	// Function: PCO_EsDispositivoMovil
+	Determina si la aplicacion esta corriendo en un dispositivo movil o PC de escritorio segun el agente reportado
+	
+	Variables de entrada:
+
+		HTTP_USER_AGENT - Tomada desde el entorno
+
+	Salida:
+		Verdadero o falso segun el navegador del usuario
+
+*/
+function PCO_EsDispositivoMovil()
+	{
+		$aMobileUA = array(
+			'/iphone/i' => 'iPhone', 
+			'/ipod/i' => 'iPod', 
+			'/ipad/i' => 'iPad', 
+			'/android/i' => 'Android', 
+			'/blackberry/i' => 'BlackBerry', 
+			'/webos/i' => 'Mobile'
+			);
+
+		//Retorna verdadero si es detectado un agente de usuario movil
+		foreach($aMobileUA as $sMobileKey => $sMobileOS)
+			{
+				if(preg_match($sMobileKey, $_SERVER['HTTP_USER_AGENT']))
+					{
+						return true;
+					}
+			}
+		//En otro caso retorna falso 
+		return false;
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	// Function: PCO_EsAdministrador
 	Determina si un login de usuario es administrador de plataforma o no (si es super usuario)
 	
