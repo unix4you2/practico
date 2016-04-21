@@ -71,7 +71,7 @@ LogCambios="
 * Enhan: Los SuperUsuarios aparecen dentro de los listados de usuarios, sin embargo no se dejan suspender, eliminar o resetear claves.
 * Enhan: Actualización de FontAwesome versión 4.6.1
 * Enhan: Mejorada la maquetacion de bordes para dispositivos móviles
-* Enhan: Mejorada la carga de tooltips cuando su contenido es muy extenso
+* Enhan: Mejorada la carga de tooltips cuando su contenido es muy extenso y ahora soportan HTML dentro de ellos
 "
 
 ########################################################################
