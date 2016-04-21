@@ -25,24 +25,6 @@ function barra_navegacion_izquierda_toggle(modo)
             ocultar_navegacion_izquierda();
     }
 
-function PCOJS_EsDispositivoMovil() 
-	{ 
-		if( navigator.userAgent.match(/Android/i)
-			|| navigator.userAgent.match(/webOS/i)
-			|| navigator.userAgent.match(/iPhone/i)
-			|| navigator.userAgent.match(/iPad/i)
-			|| navigator.userAgent.match(/iPod/i)
-			|| navigator.userAgent.match(/BlackBerry/i)
-			|| navigator.userAgent.match(/Windows Phone/i)		)
-			{
-				return true;
-			}
-		else
-			{
-				return false;
-			}
-	}
-
 function PCO_ObtenerContenidoAjax(PCO_ASINCRONICO,PCO_URL,PCO_PARAMETROS)
     {
         var xmlhttp;
@@ -295,6 +277,28 @@ function PCOJS_OpcionesCombo_DesdeCSV(ObjetoListaOpciones,Cadena,SeparadorLineas
 				{
 					CadenaResultado="GPS_SINSOPORTE";
 					PCOJS.Geolocalizacion = CadenaResultado;
+				}
+		};
+
+	PCOJS.EsDispositivoMovil = function()
+		{ 
+			/*	Determina el tipo de navegador utilizado por el usuario retornando true si es movil o false si es de escritorio
+				Vease tambien:
+					Funcion disponible en PHP PCO_EsDispositivoMovil() que cumple la misma funcion
+			*/
+			if( navigator.userAgent.match(/Android/i)
+				|| navigator.userAgent.match(/webOS/i)
+				|| navigator.userAgent.match(/iPhone/i)
+				|| navigator.userAgent.match(/iPad/i)
+				|| navigator.userAgent.match(/iPod/i)
+				|| navigator.userAgent.match(/BlackBerry/i)
+				|| navigator.userAgent.match(/Windows Phone/i)		)
+				{
+					return true;
+				}
+			else
+				{
+					return false;
 				}
 		};
 

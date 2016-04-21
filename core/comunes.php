@@ -4425,7 +4425,7 @@ $('#SampleElement').load('YourURL');
                                 //Genera el contenedor de la pestana
                                 echo '
                                 <!-- INICIO de las pestanas No '.$pestana_activa.' -->
-                                    <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="PCO_PestanaFormulario_'.$pestana_activa.'">';
+                                    <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="PCO_PestanaFormulario_'.$pestana_activa.'" >';
                                     
                                         //Booleana que determina si se debe incluir el javascript de ckeditor
                                         $existe_campo_textoformato=0;
@@ -4451,8 +4451,8 @@ $('#SampleElement').load('YourURL');
                                                 $ultimo_id=$registro_obj_fila_unica["id"];
                                                 // Inicia la tabla con los campos
                                                 echo '
-                                                    <div class="table-responsive" style="border-width: 0px;">
-                                                    <table class="table table-responsive '.$estilo_bordes.' table-condensed btn-xs" style="'.$ancho_bordes.'"><tr>';
+                                                    <div class="table-responsive" style="border-width: 0px; margin-top:0; margin-bottom:0; margin-left:0; margin-right:0; ">
+                                                    <table class="table table-responsive '.$estilo_bordes.' table-condensed btn-xs" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0; padding: 0px; border-spacing: 0px; "><tr>';
                                                 //Recorre todas las comunas definidas para el formulario buscando objetos
                                                 for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
                                                     {
@@ -4461,7 +4461,7 @@ $('#SampleElement').load('YourURL');
                                                         
                                                             //Inicia columna de formulario
                                                             $PCO_AnchoColumnas=round(100 / $registro_formulario["columnas"]);
-                                                            echo '<td width="'.$PCO_AnchoColumnas.'%">';
+                                                            echo '<td width="'.$PCO_AnchoColumnas.'%" >';
                                                             // Crea los campos definidos por cada columna de formulario
                                                             while ($registro_campos = $consulta_campos->fetch())
                                                                 {
@@ -4555,8 +4555,8 @@ $('#SampleElement').load('YourURL');
                                                         // Formatea cada campo de acuerdo a su tipo
                                                         // CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas arriba tambien
                                                         echo '
-                                                        <div class="table-responsive">
-                                                        <table class="table table-condensed btn-xs '.$estilo_bordes.'"><tr><td>';
+                                                        <div class="table-responsive" style="border-width: 0px; margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;">
+                                                        <table class="table table-condensed btn-xs '.$estilo_bordes.'" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;  padding: 0px; border-spacing: 0px; "><tr><td>';
                                                         $tipo_de_objeto=@$registro_campos["tipo"];
                                                         if ($tipo_de_objeto=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                         if ($tipo_de_objeto=="texto_clave") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);

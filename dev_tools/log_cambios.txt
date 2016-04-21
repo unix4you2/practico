@@ -37,6 +37,9 @@ core/usuarios.php
 core/ws_funciones.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
+inc/bootstrap/js/practico.min.js
+inc/bootstrap/css/practico.min.css
+inc/bootstrap/css/monitoreo.min.css
 inc/font-awesome/*
 mod/pcoder/index.php
 mod/pcoder/inc/*
@@ -58,12 +61,13 @@ LogCambios="
 * Added: Las pestanas de formulario cuentan ahora con un identificador PCO_LinkPestanaFormulario_XXX que permite llamar su enlace desde JQuery por ejemplo así:  $("#PCO_LinkPestanaFormulario_2").trigger("click");
 * Added: Los formularios ahora pueden especificar el tipo de pestañas a utilizar (pestanas, botones, ocultas).  En el caso de ocultar sus pestanas y contar con varias el diseño de interfaz debería tener los elementos necesarios para navegar entre pestañas en caso de ser necesario.
 * Added: Inicio de soporte a motores NoSQL: CouchBase
-* Added: Nuevas funciones en JavaScript PCOJS_EsDispositivoMovil() y en PHP PCO_EsDispositivoMovil() pueden ser utilizadas para detectar si el dispositivo en que se ejecuta la aplicación es un dispositivo móvil o PC de escritorio.
+* Added: Nuevas funciones en JavaScript PCOJS.EsDispositivoMovil y en PHP PCO_EsDispositivoMovil() pueden ser utilizadas para detectar si el dispositivo en que se ejecuta la aplicación es un dispositivo móvil o PC de escritorio.
 * Enhan: Mejorados los estilos de tablas responsive para formularios cuando no se presentan bordes y en versiones moviles
 * Enhan: Confirmada eliminacion de la variable $_SeparadorCampos_ anunciada para la versión 16.1.  Se había dejado hasta la versión 16.3 para dar tiempo a versiones previas de ser actualizadas.  Quienes no lo hayan hecho podrán entrar a su archivo configuracion.php y agregarla manualmente.  
 * Enhan: Ahora los SuperUsuarios aparecen dentro de la lista de usuarios disponibles para realizar copia de permisos e informes en otros usuarios, sin embargo se debe tener en cuenta que aún así sus permisos podrán estar en blanco pues los SuperUsuarios no usan las mismas ACL que los usuarios estándar.
 * Enhan: Los SuperUsuarios aparecen dentro de los listados de usuarios, sin embargo no se dejan suspender, eliminar o resetear claves.
 * Enhan: Actualización de FontAwesome versión 4.6.1
+* Enhan: Mejorada la maquetacion de bordes para dispositivos móviles
 "
 
 ########################################################################
