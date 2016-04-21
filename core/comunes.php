@@ -3381,10 +3381,10 @@ function selector_iconos_awesome()
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
                 //if ($registro_campos["ajax_busqueda"] == "1") $salida.= '<a class="btn btn-default btn-xs" href="javascript:PCO_ObtenerListaOpciones_'.$registro_campos["campo"].'();" title="'.$MULTILANG_Actualizar.'"><i class="fa fa-refresh icon-blue"></i></a>';
-                if ($registro_campos["ajax_busqueda"] == "1") $salida.= '<a data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_FrmActualizaAjax.'" class="btn btn-success btn-xs" href="javascript:PCO_ObtenerListaOpciones_'.$registro_campos["campo"].'();"><i class="fa fa-refresh"></i></a>&nbsp;&nbsp;&nbsp;';
-                if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$MULTILANG_TitValorUnico.'" data-content="'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
-                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$MULTILANG_TitObligatorio.'" data-content="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$registro_campos["ayuda_titulo"].'" data-content="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ajax_busqueda"] == "1") $salida.= '<a  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmActualizaAjax.'" class="btn btn-success btn-xs" href="javascript:PCO_ObtenerListaOpciones_'.$registro_campos["campo"].'();"><i class="fa fa-refresh"></i></a>&nbsp;&nbsp;&nbsp;';
+                if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="'.$MULTILANG_TitValorUnico.'<br>'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="'.$MULTILANG_TitObligatorio.'<br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true" data-placement="auto" title="'.$registro_campos["ayuda_titulo"].'<br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
             //Cierra marco del control de datos
