@@ -598,7 +598,7 @@
 	$MULTILANG_InfErrCondicion='The specified condition is invalid or lacks at least one side for comparison.';
 	$MULTILANG_InfErrCampo='You must enter a valid field name for the data source of the report.';
 	$MULTILANG_InfErrTabla='You must enter a valid table name for the data source of the report.';
-	$MULTILANG_InfErr4='You must enter a valid title or label for the button.';
+	$MULTILANG_InfErr4='You must enter a valid title, label or image for the button.';
 	$MULTILANG_InfErr5='You must enter a valid action to be executed when control is activated.';
 	$MULTILANG_InfAgregaTabla='Add a new table to the report';
 	$MULTILANG_InfTablaManual='Enter a table manually';

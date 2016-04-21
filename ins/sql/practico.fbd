@@ -236,6 +236,7 @@ CREATE TABLE core_informe_boton (
   destino varchar(250) default '_self',
   pantalla_completa int(1) default '0',
   precargar_estilos int(1) default '1',
+  imagen varchar(250) DEFAULT '',
   PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

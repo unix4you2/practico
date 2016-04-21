@@ -149,6 +149,12 @@ ESTILOS ADICIONALES PARA BOOTSTRAP
 	-webkit-transform:scale(1); transform:scale(1,1);
 }
 
+/* Estilo predeterminado para los tooltips */
+.tooltip-inner {
+	max-width: 350px;
+	font-size: 11px;
+}
+
 
 /*
 body {

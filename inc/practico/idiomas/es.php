@@ -597,7 +597,7 @@
 	$MULTILANG_InfErrCondicion='La condici&oacute;n especificada no es v&aacute;lida o carece de al menos uno de sus lados de comparaci&oacute;n.';
 	$MULTILANG_InfErrCampo='Debe indicar un nombre de campo v&aacute;lida para el origen de datos del informe.';
 	$MULTILANG_InfErrTabla='Debe indicar un nombre de tabla v&aacute;lida para el origen de datos del informe.';
-	$MULTILANG_InfErr4='Debe indicar un t&iacute;tulo o etiqueta v&aacute;lida para el bot&oacute;n.';
+	$MULTILANG_InfErr4='Debe indicar un t&iacute;tulo, etiqueta v&aacute;lida o imagen para el bot&oacute;n.';
 	$MULTILANG_InfErr5='Debe indicar una acci&oacute;n v&aacute;lido para ser ejecutada cuando se active el control.';
 	$MULTILANG_InfAgregaTabla='Agregar una nueva tabla al informe';
 	$MULTILANG_InfTablaManual='Especificar tabla manualmente';

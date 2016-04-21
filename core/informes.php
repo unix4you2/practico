@@ -885,11 +885,11 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 	if ($PCO_Accion=="guardar_accion_informe")
 		{
 			$mensaje_error="";
-			if ($titulo=="") $mensaje_error=$MULTILANG_InfErr4;
+			if ($titulo=="" && $imagen=="") $mensaje_error=$MULTILANG_InfErr4;
 			if ($tipo_accion=="") $mensaje_error=$MULTILANG_InfErr5;
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton (".$ListaCamposSinID_informe_boton.") VALUES (?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$informe$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$confirmacion_texto$_SeparadorCampos_$destino$_SeparadorCampos_$pantalla_completa$_SeparadorCampos_$precargar_estilos");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_boton (".$ListaCamposSinID_informe_boton.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$informe$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$confirmacion_texto$_SeparadorCampos_$destino$_SeparadorCampos_$pantalla_completa$_SeparadorCampos_$precargar_estilos$_SeparadorCampos_$imagen");
 					auditar("Crea boton $titulo para informe $informe");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_informe">
 						<input type="Hidden" name="informe" value="'.$informe.'">
@@ -986,7 +986,7 @@ if ($PCO_Accion=="editar_informe")
                             (<?php echo $MULTILANG_Opcional; ?>)
                         </span>
                         <span class="input-group-addon">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesTablaManual; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                            <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesTablaManual; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                         </span>
                     </div>
 
@@ -996,7 +996,7 @@ if ($PCO_Accion=="editar_informe")
                             (<?php echo $MULTILANG_Opcional; ?>)
                         </span>
                         <span class="input-group-addon">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesAliasManual; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                            <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesAliasManual; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                         </span>
                     </div>
                     
@@ -1087,7 +1087,7 @@ if ($PCO_Accion=="editar_informe")
                             (<?php echo $MULTILANG_Opcional; ?>)
                         </span>
                         <span class="input-group-addon">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesCampoManual; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                            <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesCampoManual; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                         </span>
                     </div>
 
@@ -1097,7 +1097,7 @@ if ($PCO_Accion=="editar_informe")
                             (<?php echo $MULTILANG_Opcional; ?>)
                         </span>
                         <span class="input-group-addon">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesAliasManual2; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                            <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesAliasManual2; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                         </span>
                     </div>
                 </form>
@@ -1153,9 +1153,9 @@ if ($PCO_Accion=="editar_informe")
 											</form>';
 										if (@$registro["campo"]!="id")
 											echo '
-												<a href="javascript:caifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="auto" ><i class="fa fa-caret-down"></i></a> 
+												<a href="javascript:caifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" class="btn btn-success btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="auto" ><i class="fa fa-caret-down"></i></a> 
 												'.$registro["peso"].'
-												<a href="javascript:caifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="auto" ><i class="fa fa-caret-up"></i></a>
+												<a href="javascript:caifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" class="btn btn-success btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="auto" ><i class="fa fa-caret-up"></i></a>
 												';
 								echo '		
 										</td>';
@@ -1361,9 +1361,9 @@ if ($PCO_Accion=="editar_informe")
 											</form>';
 										if (@$registro["campo"]!="id")
 											echo '
-												<a href="javascript:ifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="auto" ><i class="fa fa-caret-down"></i></a> 
+												<a href="javascript:ifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" class="btn btn-success btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="auto" ><i class="fa fa-caret-down"></i></a> 
 												'.$registro["peso"].'
-												<a href="javascript:ifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="auto" ><i class="fa fa-caret-up"></i></a>
+												<a href="javascript:ifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" class="btn btn-success btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="auto" ><i class="fa fa-caret-up"></i></a>
 												';
 								echo '		
 										</td>
@@ -1372,7 +1372,7 @@ if ($PCO_Accion=="editar_informe")
 														<input type="hidden" name="PCO_Accion" value="eliminar_informe_condicion">
 														<input type="hidden" name="condicion" value="'.$registro["id"].'">
 														<input type="hidden" name="informe" value="'.$informe.'">
-                                                        <a href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvBorrado.'\',dfco'.$registro["id"].');" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="auto" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
+                                                        <a href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvBorrado.'\',dfco'.$registro["id"].');" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
 												</form>
 										</td>
 									</tr>';
@@ -1577,10 +1577,22 @@ if ($PCO_Accion=="editar_informe")
                     <div class="form-group input-group">
                         <input name="titulo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmTitulo; ?>" OnInput="ActualizarTexto_boton_vista_previa(this.value);">
                         <span class="input-group-addon">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                            <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" data-html="true" title="<?php echo $MULTILANG_TitObligatorio; ?><br>(Si no especifica imagen/If you dont use an image)"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
                             <a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_FrmDesBot; ?>"><i class="fa fa-question-circle  fa-fw icon-info"></i></a>
                         </span>
                     </div>
+
+					<label for="imagen"><?php echo $MULTILANG_Imagen; ?></label>
+					<div class="form-group input-group">
+						<input type="text" name="imagen" id="imagen" class="form-control input-sm" value="<?php echo @$registro_campo_editar["imagen"]; ?>" placeholder="<?php echo $MULTILANG_MnuHlpAwesome; ?>">
+						<span class="input-group-addon">
+							<!--
+							<a data-toggle="modal" href="#myModalSelectorIconos" title="<?php echo $MULTILANG_MnuDesImagen; ?>">
+								   <i class="fa fa-hand-o-right"></i> <i class="fa fa-picture-o"></i>
+							</a>
+							-->
+						</span>
+					</div>
 
 					<div class="row">
 						<div class="col col-md-5">
@@ -1639,7 +1651,7 @@ if ($PCO_Accion=="editar_informe")
                             </optgroup>
                         </select>
                         <span class="input-group-addon">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                            <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
                             <a href="#" title="<?php echo $MULTILANG_FrmDesAccion; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
@@ -1825,7 +1837,7 @@ if ($PCO_Accion=="editar_informe")
 														<input type="hidden" name="informe" value="'.$informe.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 														<input type="Hidden" name="popup_activo" value="FormularioAcciones">
-                                                        <a href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvDelBoton.'\',bf'.$registro["id"].');" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
+                                                        <a href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvDelBoton.'\',bf'.$registro["id"].');" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
 												</form>
 										</td>';
 
@@ -1921,37 +1933,37 @@ if ($PCO_Accion=="editar_informe")
                 <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> </span>
                 <input name="titulo" value="<?php echo $registro_informe['titulo']; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfTitulo; ?>">
                 <span class="input-group-addon">
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesTitulo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesTitulo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                 </span>
             </div>
 
             <div class="form-group input-group">
                 <input name="descripcion" type="text" value="<?php echo $registro_informe['descripcion']; ?>" class="form-control" placeholder="<?php echo $MULTILANG_InfDescripcion; ?>">
                 <span class="input-group-addon">
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesDescrip; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesDescrip; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                 </span>
             </div>
 
             <div class="form-group input-group">
                 <input name="categoria" type="text" value="<?php echo $registro_informe['categoria']; ?>" class="form-control" placeholder="<?php echo $MULTILANG_InfCategoria; ?>">
                 <span class="input-group-addon">
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesCateg; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesCateg; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                 </span>
             </div>
 
             <div class="form-group input-group">
                 <input name="ancho" type="text" value="<?php echo $registro_informe['ancho']; ?>" class="form-control" placeholder="<?php echo $MULTILANG_FrmAncho; ?>">
                 <span class="input-group-addon">
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfTitAncho; ?>: <?php echo $MULTILANG_InfDesAncho; ?> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)"><i class="fa fa-question-circle fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfTitAncho; ?>: <?php echo $MULTILANG_InfDesAncho; ?> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)"><i class="fa fa-question-circle fa-fw "></i></a>
                 </span>
             </div>
 
             <div class="form-group input-group">
                 <input name="alto" type="text" value="<?php echo $registro_informe['alto']; ?>" class="form-control" placeholder="<?php echo $MULTILANG_InfAlto; ?>">
                 <span class="input-group-addon">
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfTitAlto; ?>: <?php echo $MULTILANG_InfDesAlto; ?> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)"><i class="fa fa-question-circle fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfTitAlto; ?>: <?php echo $MULTILANG_InfDesAlto; ?> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)"><i class="fa fa-question-circle fa-fw "></i></a>
                 </span>
             </div>
 
@@ -2228,7 +2240,7 @@ if ($PCO_Accion=="guardar_informe")
 							$idObjetoInsertado=$ConexionPDO->lastInsertId();
 
 							// Busca los elementos que componen el informe para hacerles la copia
-							//Determina cuantos campos tiene la tabla
+							//Determina cuantos condiciones tiene la tabla
 							$ArregloCampos=explode(',',$ListaCamposSinID_informe_condiciones);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de informe_condiciones
@@ -2252,7 +2264,7 @@ if ($PCO_Accion=="guardar_informe")
 									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_condiciones ($ListaCamposSinID_informe_condiciones) VALUES ($CadenaInterrogantes) ","$CadenaValores");                            
 								}				
 
-							//Determina cuantos campos tiene la tabla
+							//Determina cuantos tablas tiene la tabla
 							$ArregloCampos=explode(',',$ListaCamposSinID_informe_tablas);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de formulario_boton
@@ -2301,7 +2313,7 @@ if ($PCO_Accion=="guardar_informe")
 									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_campos ($ListaCamposSinID_informe_campos) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 								}
 
-							//Determina cuantos campos tiene la tabla
+							//Determina cuantos botones tiene la tabla
 							$ArregloCampos=explode(',',$ListaCamposSinID_informe_boton);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de informe_boton
@@ -2939,37 +2951,37 @@ if ($PCO_Accion=="administrar_informes")
                 <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> </span>
                 <input name="titulo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfTitulo; ?>">
                 <span class="input-group-addon">
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesTitulo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesTitulo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                 </span>
             </div>
 
             <div class="form-group input-group">
                 <input name="descripcion" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfDescripcion; ?>">
                 <span class="input-group-addon">
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesDescrip; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesDescrip; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                 </span>
             </div>
 
             <div class="form-group input-group">
                 <input name="categoria" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfCategoria; ?>">
                 <span class="input-group-addon">
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfDesCateg; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesCateg; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                 </span>
             </div>
 
             <div class="form-group input-group">
                 <input name="ancho" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmAncho; ?>">
                 <span class="input-group-addon">
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfTitAncho; ?>: <?php echo $MULTILANG_InfDesAncho; ?> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)"><i class="fa fa-question-circle fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfTitAncho; ?>: <?php echo $MULTILANG_InfDesAncho; ?> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)"><i class="fa fa-question-circle fa-fw "></i></a>
                 </span>
             </div>
 
             <div class="form-group input-group">
                 <input name="alto" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfAlto; ?>">
                 <span class="input-group-addon">
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_InfTitAlto; ?>: <?php echo $MULTILANG_InfDesAlto; ?> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)"><i class="fa fa-question-circle fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfTitAlto; ?>: <?php echo $MULTILANG_InfDesAlto; ?> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)"><i class="fa fa-question-circle fa-fw "></i></a>
                 </span>
             </div>
 

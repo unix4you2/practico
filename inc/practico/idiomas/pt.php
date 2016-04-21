@@ -598,7 +598,7 @@
 	$MULTILANG_InfErrCondicion='A condição especificada &eacute; inv&aacute;lido ou não tem pelo menos um lado para comparação.';
 	$MULTILANG_InfErrCampo='Você deve digitar um nome de campo v&aacute;lido para a fonte de dados do relat&oacute;rio.';
 	$MULTILANG_InfErrTabla='Você deve digitar um nome de tabela v&aacute;lido para a fonte de dados do relat&oacute;rio.';
-	$MULTILANG_InfErr4='Você deve digitar um t&iacute;tulo v&aacute;lido ou r&oacute;tulo para o botão.';
+	$MULTILANG_InfErr4='Você deve digitar um t&iacute;tulo v&aacute;lido ou r&oacute;tulo ou imagen para o botão.';
 	$MULTILANG_InfErr5='Você deve digitar uma ação v&aacute;lida a ser executado quando o controle &eacute; ativado.';
 	$MULTILANG_InfAgregaTabla='Adicionar uma nova tabela para o relat&oacute;rio';
 	$MULTILANG_InfTablaManual='Digite uma tabela manualmente';
