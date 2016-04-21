@@ -18,6 +18,7 @@ index.php
 core/ajax.php
 core/comunes.php
 core/doc_intro.php
+core/formularios.php
 core/informes.php
 core/marco_abajo.php
 core/marco_admin.php

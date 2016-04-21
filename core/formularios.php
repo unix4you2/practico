@@ -2010,7 +2010,7 @@ if ($PCO_Accion=="editar_formulario")
 														<input type="hidden" name="formulario" value="'.$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 														<input type="Hidden" name="popup_activo" value="FormularioDiseno">
-                                                        <a href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvDelCampo.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
+                                                        <a href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvDelCampo.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
 												</form>
 										</td>
 
@@ -2021,7 +2021,7 @@ if ($PCO_Accion=="editar_formulario")
 														<input type="hidden" name="formulario" value="'.$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 														<input type="Hidden" name="popup_activo" value="FormularioCampos">
-                                                        <button type="submit" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i></button>
+                                                        <button type="submit" class="btn btn-info btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i></button>
 												</form>
 										</td>';
 									}
@@ -2126,7 +2126,7 @@ if ($PCO_Accion=="editar_formulario")
 														<input type="hidden" name="formulario" value="'.$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 														<input type="Hidden" name="popup_activo" value="FormularioAcciones">
-                                                        <a href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvDelBoton.'\',bf'.$registro["id"].');" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
+                                                        <a href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvDelBoton.'\',bf'.$registro["id"].');" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
 												</form>
 										</td>';
 
@@ -2211,8 +2211,8 @@ if ($PCO_Accion=="editar_formulario")
                                 <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> </span>
                                 <input name="titulo" value="<?php echo $registro_form["titulo"]; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmTitVen; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmDesTit; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmDesTit; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                                 </span>
                             </div>
                         </td>
@@ -2222,7 +2222,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <input name="ayuda_titulo" value="<?php echo $registro_form["ayuda_titulo"]; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmHlp; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmDesHlp; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmDesHlp; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                                 </span>
                             </div>
 						</td>
@@ -2232,7 +2232,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <textarea name="ayuda_texto"  class="form-control" placeholder="<?php echo $MULTILANG_FrmTxt; ?>" rows="3"><?php echo $registro_form["ayuda_texto"]; ?></textarea>
                                 <span class="input-group-addon">
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmDesTxt; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle  fa-fw "></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmDesTxt; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle  fa-fw "></i></a>
                                 </span>
                             </div>
 						</td>
@@ -3104,22 +3104,22 @@ function FrmAutoRun()
                 <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> </span>
                 <input name="titulo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmTitVen; ?>">
                 <span class="input-group-addon">
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmDesTit; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmDesTit; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                 </span>
             </div>
 
             <div class="form-group input-group">
                 <input name="ayuda_titulo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmHlp; ?>">
                 <span class="input-group-addon">
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmDesHlp; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmDesHlp; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                 </span>
             </div>
 
             <div class="form-group input-group">
                 <textarea name="ayuda_texto"  class="form-control" placeholder="<?php echo $MULTILANG_FrmTxt; ?>" rows="3"></textarea>
                 <span class="input-group-addon">
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmDesTxt; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle  fa-fw "></i></a>
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmDesTxt; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle  fa-fw "></i></a>
                 </span>
             </div>
 
