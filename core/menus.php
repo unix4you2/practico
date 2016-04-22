@@ -175,7 +175,7 @@ if ($PCO_Accion=="detalles_menu")
                             <div class="form-group input-group">
                                 <input name="texto" value="<?php echo $registro["texto"]; ?>" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuTexto; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
                                 </span>
                             </div>
 
@@ -201,7 +201,7 @@ if ($PCO_Accion=="detalles_menu")
                                                 <option value="1" <?php if ($registro["posible_arriba"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
                                             </select>
                                             <span class="input-group-addon">
-                                                <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesArriba; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuUbicacion; ?></b><br><?php echo $MULTILANG_MnuDesArriba; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                             </span>
                                         </div>
                                 </div>    
@@ -213,7 +213,7 @@ if ($PCO_Accion=="detalles_menu")
                                                 <option value="1" <?php if ($registro["posible_escritorio"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
                                             </select>
                                             <span class="input-group-addon">
-                                                <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesEscritorio; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuUbicacion; ?></b><br><?php echo $MULTILANG_MnuDesEscritorio; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                             </span>
                                         </div>
                                 </div>    
@@ -225,7 +225,7 @@ if ($PCO_Accion=="detalles_menu")
                                                 <option value="1" <?php if ($registro["posible_centro"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
                                             </select>
                                             <span class="input-group-addon">
-                                                <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesCentro; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuUbicacion; ?></b><br><?php echo $MULTILANG_MnuDesCentro; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                             </span>
                                         </div>
                                 </div>
@@ -237,7 +237,7 @@ if ($PCO_Accion=="detalles_menu")
                                                 <option value="1" <?php if ($registro["posible_izquierda"]) echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
                                             </select>
                                             <span class="input-group-addon">
-                                                <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesIzquierdo; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuUbicacion; ?></b><br><?php echo $MULTILANG_MnuDesIzquierdo; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                             </span>
                                         </div>
                                 </div>
@@ -247,7 +247,7 @@ if ($PCO_Accion=="detalles_menu")
                             <div class="form-group input-group">
                                 <input name="seccion" value="<?php echo $registro["seccion"]; ?>" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuSeccion; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
                                 </span>
                             </div>
 
@@ -276,7 +276,7 @@ if ($PCO_Accion=="detalles_menu")
                             <div class="form-group input-group">
                                 <input name="url" value="<?php echo $registro["url"]; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuURL; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_MnuTitURL; ?>: <?php echo $MULTILANG_MnuDesURL; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuTitURL; ?></b><br><?php echo $MULTILANG_MnuDesURL; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
                                 </span>
                             </div>
                             
@@ -288,7 +288,7 @@ if ($PCO_Accion=="detalles_menu")
                                     <option value="Personal" <?php if ($registro["tipo_comando"]=="Personal") echo 'selected'; ?> >3. <?php echo $MULTILANG_MnuPersonal; ?></option>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>: <?php echo $MULTILANG_MnuDesAccion; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuTitAccion; ?></b><br><?php echo $MULTILANG_MnuDesAccion; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                 </span>
                             </div>
                             
@@ -446,7 +446,7 @@ if ($PCO_Accion=="administrar_menu")
                             <div class="form-group input-group">
                                 <input name="texto"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuTexto; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
                                 </span>
                             </div>
 
@@ -469,7 +469,7 @@ if ($PCO_Accion=="administrar_menu")
                                                 <option value="1"><?php echo $MULTILANG_Si; ?></option>
                                             </select>
                                             <span class="input-group-addon">
-                                                <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesArriba; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuUbicacion; ?></b><br><?php echo $MULTILANG_MnuDesArriba; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                             </span>
                                         </div>
                                 </div>    
@@ -481,7 +481,7 @@ if ($PCO_Accion=="administrar_menu")
                                                 <option value="1" selected><?php echo $MULTILANG_Si; ?></option>
                                             </select>
                                             <span class="input-group-addon">
-                                                <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesEscritorio; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuUbicacion; ?></b><br><?php echo $MULTILANG_MnuDesEscritorio; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                             </span>
                                         </div>
                                 </div>    
@@ -493,7 +493,7 @@ if ($PCO_Accion=="administrar_menu")
                                                 <option value="1"><?php echo $MULTILANG_Si; ?></option>
                                             </select>
                                             <span class="input-group-addon">
-                                                <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesCentro; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuUbicacion; ?></b><br><?php echo $MULTILANG_MnuDesCentro; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                             </span>
                                         </div>
                                 </div>
@@ -505,7 +505,7 @@ if ($PCO_Accion=="administrar_menu")
                                                 <option value="1"><?php echo $MULTILANG_Si; ?></option>
                                             </select>
                                             <span class="input-group-addon">
-                                                <a href="#" title="<?php echo $MULTILANG_MnuUbicacion; ?>: <?php echo $MULTILANG_MnuDesIzquierdo; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuUbicacion; ?></b><br><?php echo $MULTILANG_MnuDesIzquierdo; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                             </span>
                                         </div>
                                 </div>
@@ -515,7 +515,7 @@ if ($PCO_Accion=="administrar_menu")
                             <div class="form-group input-group">
                                 <input name="seccion"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuSeccion; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
                                 </span>
                             </div>
 
@@ -545,7 +545,7 @@ if ($PCO_Accion=="administrar_menu")
                             <div class="form-group input-group">
                                 <input name="url" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuURL; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_MnuTitURL; ?>: <?php echo $MULTILANG_MnuDesURL; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuTitURL; ?></b><br><?php echo $MULTILANG_MnuDesURL; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
                                 </span>
                             </div>
                             
@@ -557,7 +557,7 @@ if ($PCO_Accion=="administrar_menu")
                                     <option value="Personal">3. <?php echo $MULTILANG_MnuPersonal; ?></option>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_MnuTitAccion; ?>: <?php echo $MULTILANG_MnuDesAccion; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuTitAccion; ?></b><br><?php echo $MULTILANG_MnuDesAccion; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                 </span>
                             </div>
                             
@@ -609,14 +609,14 @@ if ($PCO_Accion=="administrar_menu")
 										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
 												<input type="hidden" name="PCO_Accion" value="eliminar_menu">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
-                                                <a href="javascript:confirmar_evento(\''.$MULTILANG_MnuAdvElimina.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
+                                                <a href="javascript:confirmar_evento(\''.$MULTILANG_MnuAdvElimina.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
 												<input type="hidden" name="PCO_Accion" value="detalles_menu">
 												<input type="hidden" name="id" value="'.$registro["id"].'">
-                                                <button type="submit" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i></button>
+                                                <button type="submit" class="btn btn-warning btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i></button>
 										</form>
 								</td>
 							</tr>';

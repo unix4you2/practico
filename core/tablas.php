@@ -191,8 +191,8 @@ if ($PCO_Accion=="editar_tabla")
                                 <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> </span>
                                 <input name="nombre_campo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Nombre; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TblTitNombre; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle"></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<b><?php echo $MULTILANG_TblTitNombre; ?></b><br><?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle"></i></a>
                                 </span>
                             </div>
                         </td>
@@ -273,8 +273,8 @@ if ($PCO_Accion=="editar_tabla")
                             <div class="form-group input-group">
                                 <input name="longitud" type="text" class="form-control" placeholder="<?php echo $MULTILANG_TblLongitud; ?> (<?php echo $MULTILANG_MnuSiAplica; ?>)">
                                 <span class="input-group-addon">
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_Importante; ?>: <?php echo $MULTILANG_TblDesLongitud; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_TblDesLongitud2; ?>"><i class="fa fa-question-circle"></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<b><?php echo $MULTILANG_Importante; ?></b><br><?php echo $MULTILANG_TblDesLongitud; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_TblDesLongitud2; ?>"><i class="fa fa-question-circle"></i></a>
                                 </span>
                             </div>
 						</td>
@@ -288,7 +288,7 @@ if ($PCO_Accion=="editar_tabla")
                                     <option value="" selected><?php echo $MULTILANG_No; ?></option>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_TblTitAutoinc; ?>: <?php echo $MULTILANG_TblDesAutoinc; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_TblTitAutoinc; ?></b><br><?php echo $MULTILANG_TblDesAutoinc; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
                                 </span>
                             </div>
 						</td>
@@ -314,13 +314,13 @@ if ($PCO_Accion=="editar_tabla")
                                     <option value="CURRENT_TIMESTAMP" ><?php echo $MULTILANG_TblFechaHora; ?></option>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_TblDesPredet; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TblDesPredet; ?>"><i class="fa fa-question-circle icon-info"></i></a>
                                 </span>
                             </div>
                                 <div class="form-group input-group">
                                     <input name="predeterminado_valor" type="text" class="form-control">
                                     <span class="input-group-addon">
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TblDesPredet; ?>"><i class="fa fa-question-circle"></i></a>
+                                        <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TblDesPredet; ?>"><i class="fa fa-question-circle"></i></a>
                                     </span>
                                 </div>
 						</td>
@@ -378,7 +378,7 @@ if ($PCO_Accion=="editar_tabla")
 												<input type="hidden" name="PCO_Accion" value="eliminar_campo">
 												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 												<input type="hidden" name="nombre_campo" value="'.$registro[$i]["nombre"].'">
-                                                <a href="#" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelCampo.'\',f'.$registro[$i]["nombre"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
+                                                <a href="#" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelCampo.'\',f'.$registro[$i]["nombre"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 												&nbsp;&nbsp;
 										</form>
 								</td>';
@@ -1213,8 +1213,8 @@ if ($PCO_Accion=="importar_tabla")
                                 <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> <?php echo $TablasApp; ?></span>
                                 <input name="nombre_tabla" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Nombre; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_TblDesTabla; ?>" name="<?php echo $MULTILANG_TblDesTabla; ?>"><i class="fa fa-question-circle"></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_TblDesTabla; ?>" name="<?php echo $MULTILANG_TblDesTabla; ?>"><i class="fa fa-question-circle"></i></a>
                                 </span>
                             </div>
                         </td>
@@ -1235,7 +1235,7 @@ if ($PCO_Accion=="importar_tabla")
 				<form name="datosasis" id="datosasis" action="<?php echo $ArchivoCORE; ?>" method="POST">
 				<input type="Hidden" name="PCO_Accion" value="asistente_tablas">
 				<?php echo $MULTILANG_Asistente; ?><br>
-				<a href="javascript:document.datosasis.submit();" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TblTitAsis; ?>: <?php echo $MULTILANG_TblDesAsis; ?>"><i class="btn fa fa-magic fa-5x texto-naranja"></i></a>
+				<a href="javascript:document.datosasis.submit();"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<b><?php echo $MULTILANG_TblTitAsis; ?></b><br><?php echo $MULTILANG_TblDesAsis; ?>"><i class="btn fa fa-magic fa-5x texto-naranja"></i></a>
 				</form>
 			</td>
 			<td width=50></td>
@@ -1286,7 +1286,7 @@ if ($PCO_Accion=="importar_tabla")
 								echo '<form action="'.$ArchivoCORE.'" method="POST" name="dco'.$registro["0"].'" id="dco'.$registro["0"].'" style="display:inline;">
 										<input type="hidden" name="PCO_Accion" value="definir_copia_tablas">
 										<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
-										<a class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_FrmCopiar.'" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["0"].');"><i class="fa fa-code-fork fa-fw"></i></a>
+										<a class="btn btn-default btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmCopiar.'" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["0"].');"><i class="fa fa-code-fork fa-fw"></i></a>
 									</form>';					
 								
 								//Determina si activa o no el boton de editar
@@ -1294,7 +1294,7 @@ if ($PCO_Accion=="importar_tabla")
 									echo '<form action="'.$ArchivoCORE.'" method="POST" style="display:inline;">
 											<input type="hidden" name="PCO_Accion" value="editar_tabla">
 											<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
-											<button type="submit" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o fa-fw"></i></button>
+											<button type="submit" class="btn btn-warning btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o fa-fw"></i></button>
 										</form>';
 								else
 									echo '<form style="display:inline;">
@@ -1306,13 +1306,13 @@ if ($PCO_Accion=="importar_tabla")
 						//ZONA MANTENIMIENTO
 						echo '<td class="warning">';
 								echo '<form style="display:inline;">
-										<a class="btn btn-info btn-xs"  data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_TblAnaliza.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=ANALYZE&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-eye fa-fw"></i></a>
+										<a class="btn btn-info btn-xs"   data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_TblAnaliza.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=ANALYZE&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-eye fa-fw"></i></a>
 									</form>';
 								echo '<form style="display:inline;">
-										<a class="btn btn-primary btn-xs"  data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_TblOptimizar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=OPTIMIZE&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-line-chart fa-fw"></i></a>
+										<a class="btn btn-primary btn-xs"   data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_TblOptimizar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=OPTIMIZE&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-line-chart fa-fw"></i></a>
 									</form>';
 								echo '<form style="display:inline;">
-										<a class="btn btn-default btn-xs"  data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_TblReparar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=REPAIR&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-wrench fa-fw"></i></a>
+										<a class="btn btn-default btn-xs"   data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_TblReparar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=REPAIR&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-wrench fa-fw"></i></a>
 									</form>';
 						echo '</td>';
 
@@ -1322,10 +1322,10 @@ if ($PCO_Accion=="importar_tabla")
 						if ($PrefijoRegistro==$TablasCore) $EstadoActivacion=' disabled="disabled" ';
 						echo '<td class="danger">';
 								echo '<form style="display:inline;">
-										<a class="btn btn-danger btn-xs" '.$EstadoActivacion.' data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Truncar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=TRUNCATE&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-eraser fa-fw"></i></a>
+										<a class="btn btn-danger btn-xs" '.$EstadoActivacion.'  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Truncar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=TRUNCATE&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-eraser fa-fw"></i></a>
 									</form>';
 								echo '<form style="display:inline;">
-										<a class="btn btn-danger btn-xs" '.$EstadoActivacion.' data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_TblVaciar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=DELETE&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-trash-o fa-fw"></i></a>
+										<a class="btn btn-danger btn-xs" '.$EstadoActivacion.'  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_TblVaciar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=DELETE&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-trash-o fa-fw"></i></a>
 									</form>';
 
 								//Determina si activar o no el boton de eliminar
@@ -1333,7 +1333,7 @@ if ($PCO_Accion=="importar_tabla")
 									echo '<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["0"].'" id="f'.$registro["0"].'" style="display:inline;">
 											<input type="hidden" name="PCO_Accion" value="eliminar_tabla">
 											<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
-											<a href="#" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="'.$MULTILANG_Eliminar.'" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelTabla.'\',f'.$registro["0"].');"><i class="fa fa-times fa-fw"></i></a>
+											<a href="#" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelTabla.'\',f'.$registro["0"].');"><i class="fa fa-times fa-fw"></i></a>
 										</form>';
 								else
 									echo '<form style="display:inline;">
@@ -1478,8 +1478,8 @@ if ($PCO_Accion=="importar_tabla")
                                 <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> <?php echo $TablasApp; ?></span>
                                 <input name="nombre_tabla" type="text" class="form-control" placeholder="<?php echo $MULTILANG_TblAsistNombre; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_FrmObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_TblDesTabla; ?>" name="<?php echo $MULTILANG_TblDesTabla; ?>"><i class="fa fa-question-circle"></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_TblDesTabla; ?>" name="<?php echo $MULTILANG_TblDesTabla; ?>"><i class="fa fa-question-circle"></i></a>
                                 </span>
                             </div>
 						</td>
@@ -1588,8 +1588,8 @@ if ($PCO_Accion=="importar_tabla")
 					<tr>
 						<td align="center">Nombre:</td>
 						<td><?php echo $TablasApp; ?><input type="text" name="nombre_tabla" size="20" class="CampoTexto">
-						<a href="#" title="Campo obligatorio" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-						<a href="#" title="Ayuda general de tablas" name="Una tabla de datos es una estrctura que le permite almacenar informaci&oacute;n. Ingrese en este espacio el nombre de la tabla sin guiones, puntos, espacios o caracteres especiales. SENSIBLE A MAYUSCULAS"><i class="fa fa-question-circle"></i></a></td>
+						<a  href="#" data-toggle="tooltip" data-html="true"  title="Campo obligatorio" name=""><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+						<a  href="#" data-toggle="tooltip" data-html="true"  title="Ayuda general de tablas" name="Una tabla de datos es una estrctura que le permite almacenar informaci&oacute;n. Ingrese en este espacio el nombre de la tabla sin guiones, puntos, espacios o caracteres especiales. SENSIBLE A MAYUSCULAS"><i class="fa fa-question-circle"></i></a></td>
 					</tr>
 					<tr>
 						<td>

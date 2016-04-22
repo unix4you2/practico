@@ -688,7 +688,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
                             <option value="Embebido"		'.$Seleccion_Embebido.'>'.$MULTILANG_Embebido.'</option>
                         </select>
                         <span class="input-group-addon">
-                            <a href="#" title="'.$MULTILANG_Ayuda.': '.$MULTILANG_MonDesTipo.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<b>'.$MULTILANG_Ayuda.'</b><br>'.$MULTILANG_MonDesTipo.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 
@@ -756,11 +756,11 @@ if ($PCO_Accion=="eliminar_monitoreo")
                     <div class="form-group input-group">
                         <input type="text" name="host" value="'.@$Maquina["host"].'" class="form-control" placeholder="'.$MULTILANG_Maquina.' / IP">
                         <span class="input-group-addon">
-                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                         <input type="text" name="puerto"  value="'.@$Maquina["puerto"].'" class="form-control" placeholder="'.$MULTILANG_Puerto.'">
                         <span class="input-group-addon">
-                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 
@@ -775,14 +775,14 @@ if ($PCO_Accion=="eliminar_monitoreo")
                             <option value="ping"  '.$Seleccion_ping.'>Ping</option>
                         </select>
                         <span class="input-group-addon">
-                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 
                     <div class="form-group input-group">
                         <textarea name="comando" class="form-control" placeholder="'.$MULTILANG_Comando.'">'.@$Maquina["comando"].'</textarea>
                         <span class="input-group-addon">
-                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommShell.', '.$MULTILANG_MonCommSQL.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommShell.', '.$MULTILANG_MonCommSQL.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 
@@ -800,14 +800,14 @@ if ($PCO_Accion=="eliminar_monitoreo")
 			echo '
 						</select>
 						<span class="input-group-addon">
-							<a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommShell.', '.$MULTILANG_Imagen.', '.$MULTILANG_Embebido.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+							<a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommShell.', '.$MULTILANG_Imagen.', '.$MULTILANG_Embebido.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 						</span>
 					</div>
 						
                     <div class="form-group input-group">
                         <input type="text" name="alto" value="'.@$Maquina["alto"].'" class="form-control" placeholder="'.$MULTILANG_InfAlto.'">
                         <span class="input-group-addon">
-                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommShell.', '.$MULTILANG_Imagen.', '.$MULTILANG_Embebido.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommShell.', '.$MULTILANG_Imagen.', '.$MULTILANG_Embebido.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 
@@ -827,7 +827,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
                             pixeles
                         </span>
                         <span class="input-group-addon">
-                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommSQL.', '.$MULTILANG_Etiqueta.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommSQL.', '.$MULTILANG_Etiqueta.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 
@@ -842,14 +842,14 @@ if ($PCO_Accion=="eliminar_monitoreo")
                             <option value="1" '.$Seleccion_Si.'>'.$MULTILANG_Si.'</option>
                         </select>
                         <span class="input-group-addon">
-                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommSQL.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommSQL.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 
                     <div class="form-group input-group">
                         <input type="text" name="path"  value="'.@$Maquina["path"].'" class="form-control" placeholder="'.$MULTILANG_MnuURL.'">
                         <span class="input-group-addon">
-                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Imagen.', '.$MULTILANG_Embebido.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Imagen.', '.$MULTILANG_Embebido.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 
@@ -859,7 +859,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
                         </span>
                         <input type="text" name="correo_alerta" value="'.@$Maquina["correo_alerta"].'" class="form-control" placeholder="'.$MULTILANG_MonCorreoAlerta.'">
                         <span class="input-group-addon">
-                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 
@@ -874,7 +874,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
                             <option value="1" '.$Seleccion_SiAS.'>'.$MULTILANG_Si.'</option>
                         </select>
                         <span class="input-group-addon">
-                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 
@@ -889,7 +889,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
                             <option value="1" '.$Seleccion_SiAV.'>'.$MULTILANG_Si.'</option>
                         </select>
                         <span class="input-group-addon">
-                            <a href="#" title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 

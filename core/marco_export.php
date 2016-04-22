@@ -55,7 +55,7 @@
                     <option value="html" >Pagina web (.HTML - Web Document)</option>
                 </select>
                 <span class="input-group-addon">
-                    <a href="#" title="<?php echo $MULTILANG_Importante; ?>: <?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Importante; ?></b><br><?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                 </span>
             </div>
 

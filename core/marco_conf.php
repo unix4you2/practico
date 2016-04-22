@@ -71,7 +71,7 @@
                                             <option value="fbd"		 <?php if ($MotorBD=="fbd") echo "SELECTED"; ?> >Firebird (Firebird/Interbase 6)</option>
                                         </select>
                                         <span class="input-group-addon">
-                                            <a href="#" title="<?php echo $MULTILANG_AyudaTitMotor; ?>: <?php echo $MULTILANG_AyudaDesMotor; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_AyudaTitMotor; ?></b><br><?php echo $MULTILANG_AyudaDesMotor; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                         </span>
                                     </div>
                                     
@@ -85,7 +85,7 @@
                                         </span>
                                         <input name="PuertoBDNEW" value="<?php echo $PuertoBD; ?>" type="text" class="form-control">
                                         <span class="input-group-addon">
-                                            <a href="#" title="<?php echo $MULTILANG_PuertoNoPredeterminado; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_PuertoNoPredeterminado; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                         </span>
                                     </div>
                                     
@@ -95,7 +95,7 @@
                                         </span>
                                         <input name="BaseDatosNEW" value="<?php echo $BaseDatos; ?>" type="text" class="form-control">
                                         <span class="input-group-addon">
-                                            <a href="#" title="<?php echo $MULTILANG_AyudaTitBD; ?>: <?php echo $MULTILANG_AyudaDesBD; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_AyudaTitBD; ?></b><br><?php echo $MULTILANG_AyudaDesBD; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                         </span>
                                         <span class="input-group-addon">
                                             <i class="fa fa-user fa-fw"></i> <?php echo $MULTILANG_Usuario; ?>:
@@ -113,14 +113,14 @@
                                         </span>
                                         <input name="TablasCoreNEW" value="<?php echo $TablasCore; ?>" type="text" class="form-control">
                                         <span class="input-group-addon">
-                                            <a href="#" title="<?php echo $MULTILANG_AyudaTitPreCore; ?>: <?php echo $MULTILANG_AyudaDesPreCore; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw"></i></a>
+                                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_AyudaTitPreCore; ?></b><br><?php echo $MULTILANG_AyudaDesPreCore; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw"></i></a>
                                         </span>
                                         <span class="input-group-addon">
                                             <?php echo $MULTILANG_PrefijoApp; ?>:
                                         </span>
                                         <input name="TablasAppNEW" value="<?php echo $TablasApp; ?>" type="text" class="form-control">
                                         <span class="input-group-addon">
-                                            <a href="#" title="<?php echo $MULTILANG_AyudaTitPreApp; ?>: <?php echo $MULTILANG_AyudaDesPreApp; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_AyudaTitPreApp; ?></b><br><?php echo $MULTILANG_AyudaDesPreApp; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                         </span>
                                     </div>
                                     
@@ -130,7 +130,7 @@
                                         </span>
                                         <input name="LlaveDePasoNEW" value="<?php echo $LlaveDePaso; ?>" type="text" class="form-control">
                                         <span class="input-group-addon">
-                                            <a href="#" title="<?php echo $MULTILANG_AyudaLlave; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_AyudaLlave; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                         </span>
                                     </div>
                                 </div>
@@ -175,7 +175,7 @@
 													<option value="6" <?php if ($CaracteresCaptcha=="6") echo "SELECTED"; ?> >6</option>
 												</select>
 												<span class="input-group-addon">
-													<a href="#" title="<?php echo $MULTILANG_AyudaTitCaptcha; ?>: <?php echo $MULTILANG_AyudaDesCaptcha; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_AyudaTitCaptcha; ?></b><br><?php echo $MULTILANG_AyudaDesCaptcha; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 												</span>
 											</div>
 
@@ -203,7 +203,7 @@
 												</span>
 												<input name="_SeparadorCampos_NEW" value="<?php echo $_SeparadorCampos_; ?>" type="text" class="form-control" readonly>
 												<span class="input-group-addon">
-													<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_SeparadorCamposDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_SeparadorCamposDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 												</span>
 											</div>
 
@@ -213,7 +213,7 @@
 												</span>
 												<input name="PCOVAR_AdministradoresNEW" value="<?php echo $PCOVAR_Administradores; ?>" type="text" class="form-control">
 												<span class="input-group-addon">
-													<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_UsuariosAdminDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_UsuariosAdminDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 												</span>
 											</div>
 
@@ -255,7 +255,7 @@
 													<option value="0" <?php if ($ModoDepuracion=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_Apagado; ?></option>
 												</select>
 												<span class="input-group-addon">
-													<a href="#" title="<?php echo $MULTILANG_AyudaTitDebug; ?>: <?php echo $MULTILANG_AyudaDesDebug; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_AyudaTitDebug; ?></b><br><?php echo $MULTILANG_AyudaDesDebug; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 												</span>
 											</div>
 
@@ -266,7 +266,7 @@
 													<option value="0" <?php if (@$BuscarActualizaciones=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_Apagado; ?></option>
 												</select>
 												<span class="input-group-addon">
-													<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_DescActual; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_DescActual; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 												</span>
 											</div>
 
@@ -276,7 +276,7 @@
 												</span>
 												<input name="CodigoGoogleAnalyticsNEW" value="<?php if (@$CodigoGoogleAnalytics!="") echo $CodigoGoogleAnalytics; ?>" type="text" class="form-control">
 												<span class="input-group-addon">
-													<a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_AyudaGABeacon; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_AyudaGABeacon; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 												</span>
 											</div>
 
@@ -298,7 +298,7 @@
 													<option value="federado" <?php if ($Auth_TipoMotor=="federado") echo "SELECTED"; ?> ><?php echo $MULTILANG_AuthFederado; ?></option>
 												</select>
 												<span class="input-group-addon">
-													<a href="#" title="<?php echo $MULTILANG_Importante; ?>: <?php echo $MULTILANG_AyudaDesAuth; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Importante; ?></b><br><?php echo $MULTILANG_AyudaDesAuth; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 												</span>
 											</div>
 
@@ -310,7 +310,7 @@
 													<option value="https" <?php if (@$Auth_ProtoTransporte=="https") echo "SELECTED"; ?> ><?php echo $MULTILANG_ProtoTransHTTPS; ?></option>
 												</select>
 												<span class="input-group-addon">
-													<a href="#" title="<?php echo $MULTILANG_Importante; ?>: <?php echo $MULTILANG_ProtoDescripcion; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Importante; ?></b><br><?php echo $MULTILANG_ProtoDescripcion; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 												</span>
 											</div>
 										
@@ -363,7 +363,7 @@
 													<option  <?php if ($Auth_TipoEncripcion=="haval256,5") echo "SELECTED"; ?> value="haval256,5">Haval 256,5</option>
 												</select>
 												<span class="input-group-addon">
-													<a href="#" title="<?php echo $MULTILANG_AyudaTitCript; ?>: <?php echo $MULTILANG_AyudaDesCript; ?>"><i class="fa fa-exclamation-triangle icon-orange fa-fw"></i></a>
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_AyudaTitCript; ?></b><br><?php echo $MULTILANG_AyudaDesCript; ?>"><i class="fa fa-exclamation-triangle icon-orange fa-fw"></i></a>
 												</span>
 											</div>
 
@@ -373,7 +373,7 @@
 												</span>
 												<input name="Auth_LDAPServidorNEW" value="<?php echo $Auth_LDAPServidor; ?>" type="text" class="form-control">
 												<span class="input-group-addon">
-													<a href="#" title="<?php echo $MULTILANG_AyudaDesLdapIP; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_AyudaDesLdapIP; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 												</span>
 												<span class="input-group-addon">
 													<?php echo $MULTILANG_Puerto; ?>:
@@ -387,7 +387,7 @@
 												</span>
 												<input name="Auth_LDAPDominioNEW" value="<?php echo $Auth_LDAPDominio; ?>" type="text" class="form-control">
 												<span class="input-group-addon">
-													<a href="#" title="(<?php echo $MULTILANG_Opcional; ?>) <?php echo $MULTILANG_AyudaDesLdapDominio; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="(<?php echo $MULTILANG_Opcional; ?>) <?php echo $MULTILANG_AyudaDesLdapDominio; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 												</span>
 											</div>
 
@@ -397,7 +397,7 @@
 												</span>
 												<input name="Auth_LDAPOUNEW" value="<?php echo $Auth_LDAPOU; ?>" type="text" class="form-control">
 												<span class="input-group-addon">
-													<a href="#" title="(<?php echo $MULTILANG_Opcional; ?>) <?php echo $MULTILANG_AyudaDesLdapUO; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="(<?php echo $MULTILANG_Opcional; ?>) <?php echo $MULTILANG_AyudaDesLdapUO; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 												</span>
 											</div>
 										</div>

@@ -136,7 +136,7 @@
                         <div class="form-group input-group">
                             <input name="nombre" type="text" class="form-control" placeholder="<?php echo $MULTILANG_WSLlavesNombre; ?>">
                             <span class="input-group-addon">
-                                <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
                             </span>
                         </div>
 
@@ -164,14 +164,14 @@
                         <div class="form-group input-group">
                             <input name="dominio_autorizado" type="text" class="form-control" placeholder="<?php echo $MULTILANG_WSLlavesDominio; ?>">
                             <span class="input-group-addon">
-                                <a href="#" title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
                             </span>
                         </div>
 
                         <div class="form-group input-group">
                             <input name="ip_autorizada" type="text" class="form-control" placeholder="<?php echo $MULTILANG_WSLlavesIP; ?>">
                             <span class="input-group-addon">
-                                <a href="#" title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
                             </span>
                         </div>
 
@@ -182,7 +182,7 @@
                         <div class="form-group input-group">
                             <textarea name="funciones_autorizadas" rows=8 class="form-control"><?php echo @$parametros["funciones_autorizadas"]; ?></textarea>
                             <span class="input-group-addon">
-                                <a href="#" title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_WSLlavesAsterisco; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                             </span>
                         </div>
 

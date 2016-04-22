@@ -229,8 +229,8 @@ if ($PCO_Accion=="actualizar_perfil_usuario")
                         </span>
                         <input readonly name="login" maxlength="250" type="text" class="form-control" value="<?php echo $PCOSESS_LoginUsuario; ?>">
                         <span class="input-group-addon">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_UsrDesLogin; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                            <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                            <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_UsrDesLogin; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                         </span>
                     </div>
 
@@ -240,7 +240,7 @@ if ($PCO_Accion=="actualizar_perfil_usuario")
                         </span>
                         <input name="nombre"  onkeypress="return validar_teclado(event, 'alfanumerico');" maxlength="100" type="text" class="form-control" value="<?php echo $registro_usuario["nombre"]; ?>">
                         <span class="input-group-addon">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                            <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
                         </span>
                     </div>
 
@@ -250,8 +250,8 @@ if ($PCO_Accion=="actualizar_perfil_usuario")
                         </span>
                         <input name="correo" type="text" class="form-control" value="<?php echo $registro_usuario["correo"]; ?>">
                         <span class="input-group-addon">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_UsrTitCorreo; ?>: <?php echo $MULTILANG_UsrDesCorreo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                            <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                            <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<b><?php echo $MULTILANG_UsrTitCorreo; ?></b><br><?php echo $MULTILANG_UsrDesCorreo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                         </span>
                     </div>
                 </form>
@@ -352,7 +352,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="ingresar_clave_nueva
                     </span>
                     <input name="clave1"   onkeyup="muestra_seguridad_clave(this.value, this.form)" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
                     <span class="input-group-addon">
-                        <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                        <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
                     </span>
                     <span class="input-group-addon">
                         <?php echo $MULTILANG_UsrNivelPW; ?>:
@@ -369,7 +369,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="ingresar_clave_nueva
                     </span>
                     <input name="clave2" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?> (Confirma)">
                     <span class="input-group-addon">
-                        <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                        <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
                     </span>
                 </div>            
 
@@ -635,7 +635,7 @@ if ($PCO_Accion=="cambiar_clave")
                     </span>
                     <input name="clave1"   onkeyup="muestra_seguridad_clave(this.value, this.form)" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
                     <span class="input-group-addon">
-                        <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                        <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
                     </span>
                     <span class="input-group-addon">
                         <?php echo $MULTILANG_UsrNivelPW; ?>:
@@ -652,7 +652,7 @@ if ($PCO_Accion=="cambiar_clave")
                     </span>
                     <input name="clave2" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?> (Confirma)">
                     <span class="input-group-addon">
-                        <a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                        <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
                     </span>
                 </div>            
 
@@ -1329,22 +1329,22 @@ if ($PCO_Accion=="agregar_usuario")
 							<div class="form-group input-group">
 								<input name="login" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrLogin; ?>">
 								<span class="input-group-addon">
-									<a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-									<a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_UsrDesLogin; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+									<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+									<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_UsrDesLogin; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
 								</span>
 							</div>
 
 							<div class="form-group input-group">
 								<input name="nombre"  onkeypress="return validar_teclado(event, 'alfanumerico');" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrNombre; ?>">
 								<span class="input-group-addon">
-									<a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+									<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
 								</span>
 							</div>
 
 							<div class="form-group input-group">
 								<input name="clave"   onkeyup="muestra_seguridad_clave(this.value, this.form)" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
 								<span class="input-group-addon">
-									<a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+									<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
 								</span>
 								<span class="input-group-addon">
 									<?php echo $MULTILANG_UsrNivelPW; ?>:
@@ -1358,7 +1358,7 @@ if ($PCO_Accion=="agregar_usuario")
 							<div class="form-group input-group">
 								<input name="clave1" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?> (Confirma)">
 								<span class="input-group-addon">
-									<a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+									<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
 								</span>
 							</div>
 
@@ -1368,7 +1368,7 @@ if ($PCO_Accion=="agregar_usuario")
 								</span>
 								<input name="correo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Correo; ?>">
 								<span class="input-group-addon">
-									<a href="#" data-toggle="tooltip" data-placement="top" title="<?php echo $MULTILANG_UsrTitCorreo; ?>: <?php echo $MULTILANG_UsrDesCorreo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+									<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<b><?php echo $MULTILANG_UsrTitCorreo; ?></b><br><?php echo $MULTILANG_UsrDesCorreo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
 								</span>
 							</div>
 
@@ -1391,7 +1391,7 @@ if ($PCO_Accion=="agregar_usuario")
 									<option value="0"><?php echo $MULTILANG_No; ?></option>
 								</select>
 								<span class="input-group-addon">
-									<a href="#" title="<?php echo $MULTILANG_UsrTitNivel; ?>: <?php echo $MULTILANG_UsrDesInterno; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+									<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_UsrTitNivel; ?></b><br><?php echo $MULTILANG_UsrDesInterno; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 								</span>
 							</div>
 
@@ -1402,7 +1402,7 @@ if ($PCO_Accion=="agregar_usuario")
 									<option value="1"><?php echo $MULTILANG_Si; ?></option>
 								</select>
 								<span class="input-group-addon">
-									<a href="#" title="<?php echo $MULTILANG_UsrEsPlantillaDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+									<a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_UsrEsPlantillaDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 								</span>
 							</div>
 
@@ -1418,7 +1418,7 @@ if ($PCO_Accion=="agregar_usuario")
 									?>
 								</select>
 								<span class="input-group-addon">
-									<a href="#" title="<?php echo $MULTILANG_UsrPlantillaAplicarDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+									<a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_UsrPlantillaAplicarDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 								</span>
 							</div>
 

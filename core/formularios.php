@@ -832,7 +832,7 @@ if ($PCO_Accion=="editar_formulario")
                                 </optgroup>
                             </select>
                             <span class="input-group-addon">
-                                <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
                             </span>
                         </div>
 						<hr>
@@ -846,8 +846,8 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <input type="text" name="titulo" class="form-control input-sm" value="<?php echo @$registro_campo_editar["titulo"]; ?>" placeholder="<?php echo $MULTILANG_FrmTitulo; ?>"  OnInput="ActualizarTexto_botoncomando_vista_previa(this.value);">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesTitulo; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesTitulo; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -876,8 +876,8 @@ if ($PCO_Accion=="editar_formulario")
                                     ?>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmCampoOb1; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesCampo; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmCampoOb1; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesCampo; ?>"><i class="fa fa-question-circle icon-info"></i></a>
                                 </span>
                             </div>
                             <input name="campo_manual"  value="<?php if (!@existe_campo_tabla($registro_campo_editar["campo"],$nombre_tabla)) echo @$registro_campo_editar["campo"]; ?>" type="text" class="form-control input-sm" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>">
@@ -888,7 +888,7 @@ if ($PCO_Accion=="editar_formulario")
                                 <label>
                                     <input type="checkbox" id="valor_unico" name="valor_unico" <?php if (@$registro_campo_editar["valor_unico"]==1) echo 'checked'; ?> > <?php echo $MULTILANG_FrmValUnico; ?>
                                 </label>
-                                <a href="#" title="<?php echo $MULTILANG_FrmTitUnico; ?>" name="<?php echo $MULTILANG_FrmDesUnico; ?>"><i class="fa fa-question-circle"></i></a>
+                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmTitUnico; ?>" name="<?php echo $MULTILANG_FrmDesUnico; ?>"><i class="fa fa-question-circle"></i></a>
                             </div>
 						</div>
 
@@ -896,7 +896,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <input type="text" name="valor_predeterminado" class="form-control input-sm" value="<?php echo @$registro_campo_editar["valor_predeterminado"]; ?>" placeholder="<?php echo $MULTILANG_FrmPredeterminado; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesPredeterminado; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesPredeterminado; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -916,7 +916,7 @@ if ($PCO_Accion=="editar_formulario")
 									<option value="fechahorafull" <?php if (@$registro_campo_editar["validacion_datos"]=="fechahorafull") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida8; ?></option>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmValidaDes; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmValidaDes; ?>"><i class="fa fa-question-circle icon-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -930,7 +930,7 @@ if ($PCO_Accion=="editar_formulario")
                                     <option value=""         <?php if (@$registro_campo_editar["solo_lectura"]=="")         echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTitLectura; ?>: <?php echo $MULTILANG_FrmDesLectura; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTitLectura; ?></b><br><?php echo $MULTILANG_FrmDesLectura; ?>"><i class="fa fa-question-circle icon-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -940,7 +940,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <input type="text" name="ayuda_titulo" class="form-control input-sm" value="<?php echo @$registro_campo_editar["ayuda_titulo"]; ?>" placeholder="<?php echo $MULTILANG_FrmAyuda; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesAyuda; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesAyuda; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -950,7 +950,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <textarea name="ayuda_texto" rows="2" class="form-control input-sm" placeholder="<?php echo $MULTILANG_FrmTxtAyuda; ?>"><?php echo @$registro_campo_editar["ayuda_texto"]; ?></textarea>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesTxtAyuda; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesTxtAyuda; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -960,7 +960,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <input type="text" name="lista_opciones" class="form-control input-sm" value="<?php echo @$registro_campo_editar["lista_opciones"]; ?>" placeholder="<?php echo $MULTILANG_FrmLista; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTitLista; ?> (<?php echo $MULTILANG_FrmDesLista2; ?>)"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmTitLista; ?> (<?php echo $MULTILANG_FrmDesLista2; ?>)"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -995,8 +995,8 @@ if ($PCO_Accion=="editar_formulario")
                                     ?>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTitOrigen; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTitOrigen2; ?>: <?php echo $MULTILANG_FrmDesOrigen; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmTitOrigen; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTitOrigen2; ?></b><br><?php echo $MULTILANG_FrmDesOrigen; ?>"><i class="fa fa-question-circle icon-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1031,8 +1031,8 @@ if ($PCO_Accion=="editar_formulario")
                                     ?>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTitOrigenVal; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTitOrigen2; ?>: <?php echo $MULTILANG_FrmDesOrigenVal; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmTitOrigenVal; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTitOrigen2; ?></b><br><?php echo $MULTILANG_FrmDesOrigenVal; ?>"><i class="fa fa-question-circle icon-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1042,7 +1042,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <input type="text" name="condicion_filtrado_listas" class="form-control input-sm" value="<?php echo @htmlentities($registro_campo_editar["condicion_filtrado_listas"]); ?>" placeholder="<?php echo $MULTILANG_FrmFiltroLista; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesFiltroLista; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesFiltroLista; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1159,7 +1159,7 @@ if ($PCO_Accion=="editar_formulario")
                                 </span>
                                 <input type="text" name="url_iframe" class="form-control input-sm" value="<?php echo @$registro_campo_editar["url_iframe"]; ?>" placeholder="<?php echo $MULTILANG_FrmURL; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesURL; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesURL; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1209,7 +1209,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <input type="text" name="formulario_campo_vinculo" class="form-control input-sm" value="<?php echo @$registro_campo_editar["formulario_campo_vinculo"]; ?>" placeholder="<?php echo $MULTILANG_FrmCampo; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesCampoVinculo; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesCampoVinculo; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1219,7 +1219,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <input type="text" name="formulario_campo_foraneo" class="form-control input-sm" value="<?php echo @$registro_campo_editar["formulario_campo_foraneo"]; ?>" placeholder="<?php echo $MULTILANG_FrmCampo; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesCampoForaneo; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesCampoForaneo; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1233,7 +1233,7 @@ if ($PCO_Accion=="editar_formulario")
 										<option value="1" <?php if (@$registro_campo_editar["modo_inline"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_Ayuda; ?>: <?php echo $MULTILANG_FrmActivarInlineDes; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_FrmActivarInlineDes; ?>"><i class="fa fa-question-circle icon-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1273,8 +1273,8 @@ if ($PCO_Accion=="editar_formulario")
                                     </optgroup>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesAccion; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesAccion; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1284,7 +1284,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <input type="text" name="accion_usuario" value="<?php echo @$registro_campo_editar["accion_usuario"]; ?>" class="form-control input-sm" placeholder="<?php echo $MULTILANG_FrmAccionCMD; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" data-placement="left" data-toggle="popover" data-html="true" title="<?php echo $MULTILANG_Ayuda; ?>" data-content="<?php echo $MULTILANG_FrmAccionDesCMD; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a href="#" data-placement="left"  data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_FrmAccionDesCMD; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1296,7 +1296,7 @@ if ($PCO_Accion=="editar_formulario")
 										<div class="form-group input-group">
 											<input type="text" name="valor_check_activo" class="form-control input-sm" value="<?php echo @$registro_campo_editar["valor_check_activo"]; ?>" placeholder="<?php echo $MULTILANG_FrmValOnCheck; ?>">
 											<span class="input-group-addon">
-												<a href="#" title="<?php echo $MULTILANG_FrmValCheckDes; ?>"><i class="fa fa-question-circle text-info"></i></a>
+												<a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmValCheckDes; ?>"><i class="fa fa-question-circle text-info"></i></a>
 											</span>
 										</div>
                                 </div>    
@@ -1304,7 +1304,7 @@ if ($PCO_Accion=="editar_formulario")
 										<div class="form-group input-group">
 											<input type="text" name="valor_check_inactivo" class="form-control input-sm" value="<?php echo @$registro_campo_editar["valor_check_inactivo"]; ?>" placeholder="<?php echo $MULTILANG_FrmValOffCheck; ?>">
 											<span class="input-group-addon">
-												<a href="#" title="<?php echo $MULTILANG_FrmValCheckDes; ?>"><i class="fa fa-question-circle text-info"></i></a>
+												<a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmValCheckDes; ?>"><i class="fa fa-question-circle text-info"></i></a>
 											</span>
 										</div>
                                 </div>
@@ -1317,7 +1317,7 @@ if ($PCO_Accion=="editar_formulario")
                                 <label>
                                     <input type="checkbox" id="ajax_busqueda" name="ajax_busqueda" <?php if (@$registro_campo_editar["ajax_busqueda"]==1) echo 'checked'; ?> > <?php echo $MULTILANG_FrmAjax; ?>
                                 </label>
-                                <a href="#" title="<?php echo $MULTILANG_FrmTitAjax; ?>: <?php echo $MULTILANG_FrmDesAjax; ?>" name="<?php echo $MULTILANG_FrmDesUnico; ?>"><i class="fa fa-question-circle"></i></a>
+                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTitAjax; ?></b><br><?php echo $MULTILANG_FrmDesAjax; ?>" name="<?php echo $MULTILANG_FrmDesUnico; ?>"><i class="fa fa-question-circle"></i></a>
                             </div>
 						</div>
 
@@ -1343,7 +1343,7 @@ if ($PCO_Accion=="editar_formulario")
                                                 ?>
                                             </select>
                                             <span class="input-group-addon">
-                                                <a href="#" title="<?php echo $MULTILANG_FrmDesPeso; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesPeso; ?>"><i class="fa fa-question-circle icon-info"></i></a>
                                             </span>
                                         </div>
                                 </div>    
@@ -1366,7 +1366,7 @@ if ($PCO_Accion=="editar_formulario")
                                                 ?>
                                             </select>
                                             <span class="input-group-addon">
-                                                <a href="#" title="<?php echo $MULTILANG_FrmDesColumna; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesColumna; ?>"><i class="fa fa-question-circle icon-info"></i></a>
                                             </span>
                                         </div>
                                 </div>
@@ -1393,7 +1393,7 @@ if ($PCO_Accion=="editar_formulario")
                                             <option value="0" <?php if (@$registro_campo_editar["visible"]=="0") echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
                                         </select>
                                             <span class="input-group-addon">
-                                                <a href="#" title="<?php echo $MULTILANG_FrmDesVisible; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesVisible; ?>"><i class="fa fa-question-circle icon-info"></i></a>
                                             </span>
                                         </div>
                                 </div>
@@ -1405,7 +1405,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <input type="text" name="etiqueta_busqueda" class="form-control input-sm" value="<?php echo @$registro_campo_editar["etiqueta_busqueda"]; ?>" placeholder="<?php echo $MULTILANG_FrmLblBusqueda; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTitBusqueda; ?>: <?php echo $MULTILANG_FrmDesBusqueda; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTitBusqueda; ?></b><br><?php echo $MULTILANG_FrmDesBusqueda; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1415,7 +1415,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <input type="text" name="ancho" class="form-control input-sm" value="<?php echo @$registro_campo_editar["ancho"]; ?>" placeholder="<?php echo $MULTILANG_FrmAncho; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTitAncho; ?>: <?php echo $MULTILANG_FrmDesAncho; ?> (<?php echo $MULTILANG_FrmDesAncho2; ?>)"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTitAncho; ?></b><br><?php echo $MULTILANG_FrmDesAncho; ?> (<?php echo $MULTILANG_FrmDesAncho2; ?>)"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1424,7 +1424,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <input type="text" name="alto" class="form-control input-sm" value="<?php echo @$registro_campo_editar["alto"]; ?>" placeholder="<?php echo $MULTILANG_FrmAlto; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTitAlto; ?>: <?php echo $MULTILANG_FrmDesAlto; ?> (<?php echo $MULTILANG_FrmDesAlto2; ?>)"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTitAlto; ?></b><br><?php echo $MULTILANG_FrmDesAlto; ?> (<?php echo $MULTILANG_FrmDesAlto2; ?>)"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1449,7 +1449,7 @@ if ($PCO_Accion=="editar_formulario")
                                     </optgroup>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTitBarra; ?>: <?php echo $MULTILANG_FrmDesBarra; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTitBarra; ?></b><br><?php echo $MULTILANG_FrmDesBarra; ?>"><i class="fa fa-question-circle icon-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1463,7 +1463,7 @@ if ($PCO_Accion=="editar_formulario")
 										<option value="1" <?php if (@$registro_campo_editar["fila_unica"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTitFila; ?>: <?php echo $MULTILANG_FrmDesFila; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTitFila; ?></b><br><?php echo $MULTILANG_FrmDesFila; ?>"><i class="fa fa-question-circle icon-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1477,7 +1477,7 @@ if ($PCO_Accion=="editar_formulario")
                                     <option value="1" <?php if (@$registro_campo_editar["objeto_en_ventana"]=="1") echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesVentana; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesVentana; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1487,7 +1487,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <input type="text" name="maxima_longitud" class="form-control input-sm" value="<?php echo @$registro_campo_editar["maxima_longitud"]; ?>" placeholder="<?php echo $MULTILANG_FrmLongMaxima; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmTit1LongMaxima; ?>: (<?php echo $MULTILANG_FrmTit2LongMaxima; ?>)"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTit1LongMaxima; ?></b><br>(<?php echo $MULTILANG_FrmTit2LongMaxima; ?>)"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1515,7 +1515,7 @@ if ($PCO_Accion=="editar_formulario")
                                     <div class="form-group input-group">
                                         <input type="text" name="valor_salto" class="form-control input-sm" value="<?php if (@$registro_campo_editar["valor_salto"]!='1') echo @$registro_campo_editar["valor_salto"]; else echo '1'; ?>" placeholder="<?php echo $MULTILANG_FrmValorSalto; ?>">
                                         <span class="input-group-addon">
-                                            <a href="#" title="<?php echo $MULTILANG_FrmTitValorSalto; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmTitValorSalto; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                         </span>
                                     </div>
                                 </div>
@@ -1527,7 +1527,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <input type="text" name="plantilla_archivo" class="form-control input-sm" value="<?php echo @$registro_campo_editar["plantilla_archivo"]; ?>" placeholder="<?php echo $MULTILANG_FrmPlantillaArchivo; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesPlantillaArchivo; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesPlantillaArchivo; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
                             <?php
@@ -1541,7 +1541,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <input type="text" name="pestana_objeto" class="form-control input-sm" value="<?php echo @$registro_campo_editar["pestana_objeto"]; ?>" placeholder="<?php echo $MULTILANG_FrmPestana; ?>">
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesPestana; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesPestana; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1613,7 +1613,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="form-group input-group">
                                 <input type="text" name="personalizacion_tag" class="form-control input-sm" value="<?php echo @$registro_campo_editar["personalizacion_tag"]; ?>" placeholder="<?php echo $MULTILANG_FrmTagPersonalizado; ?>: BootStrap o Customizado"  OnInput="ActualizarEstilo_botoncomando_vista_previa(); ActualizarEstilo_listaopciones_vista_previa(); ">
                                 <span class="input-group-addon">
-                                    <a href="#" data-toggle="popover" data-html="true" data-placement="top" title="<?php echo $MULTILANG_Ayuda; ?>" data-content="<?php echo $MULTILANG_FrmDesTagPersonalizado; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true" data-placement="auto" title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_FrmDesTagPersonalizado; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1679,8 +1679,8 @@ if ($PCO_Accion=="editar_formulario")
                     <div class="form-group input-group">
                         <input type="text" name="titulo" class="form-control" placeholder="<?php echo $MULTILANG_FrmTituloBot; ?>"  OnInput="ActualizarTexto_boton_vista_previa(this.value);">
                         <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-                            <a href="#" title="<?php echo $MULTILANG_FrmDesBot; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesBot; ?>"><i class="fa fa-question-circle text-info"></i></a>
                         </span>
                     </div>
 
@@ -1714,7 +1714,7 @@ if ($PCO_Accion=="editar_formulario")
 							<div class="form-group input-group">
 								<input type="text" id="estilo" name="estilo" class="form-control input-sm" placeholder="<?php echo $MULTILANG_Avanzado; ?>: BootStrap o Customizado"  OnInput="ActualizarEstilo_boton_vista_previa();">
 								<span class="input-group-addon">
-									<a href="#" title="<?php echo $MULTILANG_FrmDesEstilo; ?>"><i class="fa fa-question-circle text-info"></i></a>
+									<a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesEstilo; ?>"><i class="fa fa-question-circle text-info"></i></a>
 								</span>
 							</div>
 						</div>
@@ -1744,15 +1744,15 @@ if ($PCO_Accion=="editar_formulario")
                             </optgroup>
                         </select>
                         <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-                            <a href="#" title="<?php echo $MULTILANG_FrmDesAccion; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesAccion; ?>"><i class="fa fa-question-circle text-info"></i></a>
                         </span>
                     </div>
 
                     <div class="form-group input-group">
                         <input type="text" name="accion_usuario" class="form-control" placeholder="<?php echo $MULTILANG_FrmAccionCMD; ?>">
                         <span class="input-group-addon">
-                            <a href="#" data-placement="left" data-toggle="popover" data-html="true" title="<?php echo $MULTILANG_Ayuda; ?>" data-content="<?php echo $MULTILANG_FrmAccionDesCMD; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                            <a href="#" data-placement="left"  data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_FrmAccionDesCMD; ?>"><i class="fa fa-question-circle text-info"></i></a>
                         </span>
                     </div>
 
@@ -1770,7 +1770,7 @@ if ($PCO_Accion=="editar_formulario")
                                     ?>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesPeso; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesPeso; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
                         </div>    
@@ -1782,7 +1782,7 @@ if ($PCO_Accion=="editar_formulario")
                                     <option value="0"><?php echo $MULTILANG_No; ?></option>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmBotDesVisible; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmBotDesVisible; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
                         </div>
@@ -1791,21 +1791,21 @@ if ($PCO_Accion=="editar_formulario")
                     <div class="form-group input-group">
                         <input type="text" name="retorno_titulo" class="form-control" placeholder="<?php echo $MULTILANG_FrmRetorno; ?>">
                         <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_FrmDesRetorno; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesRetorno; ?>"><i class="fa fa-question-circle text-info"></i></a>
                         </span>
                     </div>
 
                     <div class="form-group input-group">
                         <textarea name="retorno_texto" rows="2" class="form-control" placeholder="<?php echo $MULTILANG_FrmTxtRetorno; ?>"></textarea>
                         <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_FrmTxtDesRetorno; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmTxtDesRetorno; ?>"><i class="fa fa-question-circle text-info"></i></a>
                         </span>
                     </div>
 
                     <div class="form-group input-group">
                         <input type="text" name="retorno_icono" class="form-control" placeholder="<?php echo $MULTILANG_FrmTxtRetornoIcono; ?>">
                         <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_FrmTxtDesRetornoIcono; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmTxtDesRetornoIcono; ?>"><i class="fa fa-question-circle text-info"></i></a>
                         </span>
                     </div>
                     
@@ -1824,7 +1824,7 @@ if ($PCO_Accion=="editar_formulario")
                     <div class="form-group input-group">
                         <input type="text" name="confirmacion_texto" class="form-control" placeholder="<?php echo $MULTILANG_FrmConfirma; ?>">
                         <span class="input-group-addon">
-                            <a href="#" title="<?php echo $MULTILANG_FrmDesConfirma; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesConfirma; ?>"><i class="fa fa-question-circle text-info"></i></a>
                         </span>
                     </div>
 
@@ -1874,7 +1874,7 @@ if ($PCO_Accion=="editar_formulario")
 							<td><b><?php echo $MULTILANG_Campo; ?></b></td>
 							<td><b><?php echo $MULTILANG_Columna; ?></b></td>
 							<td><b><?php echo $MULTILANG_Peso; ?></b></td>
-							<td><b><?php echo $MULTILANG_FrmObligatorio; ?></b> <a href="#" title="<?php echo $MULTILANG_Importante; ?>: <?php echo $MULTILANG_FrmDesObliga; ?>"><i class="fa fa-question-circle"></i></a></td>
+							<td><b><?php echo $MULTILANG_FrmObligatorio; ?></b> <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Importante; ?></b><br><?php echo $MULTILANG_FrmDesObliga; ?>"><i class="fa fa-question-circle"></i></a></td>
 							<td><b><?php echo $MULTILANG_FrmVisible; ?></b></td>
 							<td></td>
 							<td></td>
@@ -2266,7 +2266,7 @@ if ($PCO_Accion=="editar_formulario")
 								?>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle  fa-fw icon-orange"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle  fa-fw icon-orange"></i></a>
                                 </span>
                             </div>
                             <input type="text" name="tabla_datos_manual"  value="<?php if($es_tabla_manual==1) echo $registro_form["tabla_datos"]; ?>" class="form-control" placeholder="<?php echo $MULTILANG_InfTablaManual; ?>">
@@ -2288,7 +2288,7 @@ if ($PCO_Accion=="editar_formulario")
                                     ?>
                                 </select>
                                 <span class="input-group-addon">
-                                    <a href="#" title="<?php echo $MULTILANG_FrmDesNumeroCols; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesNumeroCols; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                 </span>
                             </div>
 						</td>
@@ -3138,7 +3138,7 @@ function FrmAutoRun()
                     ?>
                 </select>
                 <span class="input-group-addon">
-                    <a href="#" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle  fa-fw icon-orange"></i></a>
+                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle  fa-fw icon-orange"></i></a>
                 </span>
             </div>
             <input type="text" name="tabla_datos_manual" class="form-control" placeholder="<?php echo $MULTILANG_InfTablaManual; ?>">
@@ -3152,7 +3152,7 @@ function FrmAutoRun()
                     ?>
                 </select>
                 <span class="input-group-addon">
-                    <a href="#" title="<?php echo $MULTILANG_FrmDesNumeroCols; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesNumeroCols; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                 </span>
             </div>
 

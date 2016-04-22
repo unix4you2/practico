@@ -97,7 +97,7 @@
                                         </span>
                                         <input name="nombre_empresa_largo" value="<?php echo $parametros["nombre_empresa_largo"]; ?>" type="text" class="form-control">
                                         <span class="input-group-addon">
-                                            <a href="#" title="(<?php echo $MULTILANG_AyudaTitNomEmp; ?>) <?php echo $MULTILANG_AyudaDesNomEmp; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<b>(<?php echo $MULTILANG_AyudaTitNomEmp; ?>)</b><br><?php echo $MULTILANG_AyudaDesNomEmp; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                         </span>
                                     </div>
 
@@ -107,7 +107,7 @@
                                         </span>
                                         <input name="nombre_empresa_corto" value="<?php echo $parametros["nombre_empresa_corto"]; ?>" type="text" class="form-control">
                                         <span class="input-group-addon">
-                                            <a href="#" title="(<?php echo $MULTILANG_AyudaTitNomEmp; ?>) <?php echo $MULTILANG_AyudaDesNomEmp; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<b>(<?php echo $MULTILANG_AyudaTitNomEmp; ?>)</b><br><?php echo $MULTILANG_AyudaDesNomEmp; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                         </span>
                                     </div>
 
@@ -117,7 +117,7 @@
                                         </span>
                                         <input name="nombre_aplicacion" value="<?php echo $parametros["nombre_aplicacion"]; ?>" type="text" class="form-control">
                                         <span class="input-group-addon">
-                                            <a href="#" title="(<?php echo $MULTILANG_AyudaTitNomApp; ?>) <?php echo $MULTILANG_AyudaDesNomApp; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<b>(<?php echo $MULTILANG_AyudaTitNomApp; ?>)</b><br><?php echo $MULTILANG_AyudaDesNomApp; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                         </span>
                                     </div>
 
@@ -141,7 +141,7 @@
                                         </span>
                                         <textarea name="funciones_personalizadas" rows="5" class="form-control"><?php echo $parametros["funciones_personalizadas"]; ?></textarea>
                                         <span class="input-group-addon">
-                                            <a href="#" title="(<?php echo $MULTILANG_Ayuda; ?>) <?php echo $MULTILANG_FuncionesDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<b>(<?php echo $MULTILANG_Ayuda; ?>)</b><br><?php echo $MULTILANG_FuncionesDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                         </span>
                                     </div>
                                 </div>

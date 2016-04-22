@@ -2834,9 +2834,9 @@ function selector_iconos_awesome()
 			//Si hay algun indicador adicional del campo abre los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '<span class="input-group-addon">';
-                if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#" data-toggle="popover" data-placement="auto" title="'.$MULTILANG_TitValorUnico.'" data-content="'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
-                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$MULTILANG_TitObligatorio.'" data-content="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="popover" data-placement="auto"  title="'.$registro_campos["ayuda_titulo"].'" data-content="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitValorUnico.'</b><br>'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto"  title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
             //Si habia algun indicador adicional del campo cierra los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
@@ -2951,8 +2951,8 @@ function selector_iconos_awesome()
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
-                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$MULTILANG_TitObligatorio.'" data-content="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" data-toggle="popover" data-placement="auto" title="'.$registro_campos["ayuda_titulo"].'" data-content="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
             //Si habia algun indicador adicional del campo cierra los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
@@ -3146,8 +3146,8 @@ function selector_iconos_awesome()
 					</script>';
 
 			// Muestra indicadores de obligatoriedad o ayuda
-			if ($registro_campos["obligatorio"]) $salida.= '<a href="#" data-toggle="popover" data-placement="auto"  title="'.$MULTILANG_TitObligatorio.'" data-content="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#" data-toggle="popover" data-placement="auto"  title="'.$registro_campos["ayuda_titulo"].'" data-content="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+			if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto"  title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto"  title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
 			
 			//Activa booleana de existencia de tipo de campo para evitar doble inclusion de javascript
 			$existe_campo_textoformato=1;
@@ -3381,10 +3381,10 @@ function selector_iconos_awesome()
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
                 //if ($registro_campos["ajax_busqueda"] == "1") $salida.= '<a class="btn btn-default btn-xs" href="javascript:PCO_ObtenerListaOpciones_'.$registro_campos["campo"].'();" title="'.$MULTILANG_Actualizar.'"><i class="fa fa-refresh icon-blue"></i></a>';
-                if ($registro_campos["ajax_busqueda"] == "1") $salida.= '<a  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmActualizaAjax.'" class="btn btn-success btn-xs" href="javascript:PCO_ObtenerListaOpciones_'.$registro_campos["campo"].'();"><i class="fa fa-refresh"></i></a>&nbsp;&nbsp;&nbsp;';
-                if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="'.$MULTILANG_TitValorUnico.'<br>'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
-                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="'.$MULTILANG_TitObligatorio.'<br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true" data-placement="auto" title="'.$registro_campos["ayuda_titulo"].'<br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ajax_busqueda"] == "1") $salida.= '<a  data-toggle="tooltip" data-html="true"  data-placement="top" title="<b>'.$MULTILANG_FrmActualizaAjax.'</b>" class="btn btn-success btn-xs" href="javascript:PCO_ObtenerListaOpciones_'.$registro_campos["campo"].'();"><i class="fa fa-refresh"></i></a>&nbsp;&nbsp;&nbsp;';
+                if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitValorUnico.'</b><br>'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true" data-placement="auto" title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
             //Cierra marco del control de datos
@@ -3667,9 +3667,9 @@ $('#SampleElement').load('YourURL');
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
-                if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$MULTILANG_TitValorUnico.'" data-content="'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
-                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$MULTILANG_TitObligatorio.'" data-content="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$registro_campos["ayuda_titulo"].'" data-content="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitValorUnico.'</b><br>'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
             //Si habia algun indicador adicional del campo cierra los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
@@ -3815,8 +3815,8 @@ $('#SampleElement').load('YourURL');
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
-                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$MULTILANG_TitObligatorio.'" data-content="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$registro_campos["ayuda_titulo"].'" data-content="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
             //Si habia algun indicador adicional del campo cierra los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
@@ -3898,8 +3898,8 @@ $('#SampleElement').load('YourURL');
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
-                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$MULTILANG_TitObligatorio.'" data-content="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$registro_campos["ayuda_titulo"].'" data-content="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
             //Si habia algun indicador adicional del campo cierra los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
@@ -4024,8 +4024,8 @@ $('#SampleElement').load('YourURL');
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
-                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$MULTILANG_TitObligatorio.'" data-content="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$registro_campos["ayuda_titulo"].'" data-content="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
             //Si habia algun indicador adicional del campo cierra los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
@@ -4163,8 +4163,8 @@ $('#SampleElement').load('YourURL');
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
-                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$MULTILANG_TitObligatorio.'" data-content="'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="popover" data-placement="auto" title="'.$registro_campos["ayuda_titulo"].'" data-content="'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
             //Si habia algun indicador adicional del campo cierra los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
@@ -4344,7 +4344,7 @@ $('#SampleElement').load('YourURL');
 					}
 				// Define la barra de herramientas mini superior (en barra de titulo)
 				@$barra_herramientas_mini.='
-						<a href="#" title="'.$MULTILANG_VistaImpresion.'" name="">
+						<a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_VistaImpresion.'" name="">
 							<i class="fa fa-print" OnClick="ImprimirMarco(\'MARCO_IMPRESION\');"></i>
 						</a>';
 

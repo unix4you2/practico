@@ -15,6 +15,7 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 index.php
+core/actualizacion.php
 core/ajax.php
 core/comunes.php
 core/doc_intro.php
@@ -25,6 +26,7 @@ core/marco_admin.php
 core/marco_admin_morris.php
 core/marco_arriba.php
 core/marco_conf.php
+core/marco_export.php
 core/marco_dev.php
 core/marco_nav.php
 core/marco_navizq.php
@@ -32,8 +34,9 @@ core/marco_oauth.php
 core/marco_param.php
 core/marco_wscfg.php
 core/menus.php
+core/monitoreo.php
 core/objetos.php
-core/formularios.php
+core/tablas.php
 core/usuarios.php
 core/ws_funciones.php
 inc/practico/idiomas/*
@@ -71,7 +74,7 @@ LogCambios="
 * Enhan: Los SuperUsuarios aparecen dentro de los listados de usuarios, sin embargo no se dejan suspender, eliminar o resetear claves.
 * Enhan: Actualización de FontAwesome versión 4.6.1
 * Enhan: Mejorada la maquetacion de bordes para dispositivos móviles
-* Enhan: Mejorada la carga de tooltips cuando su contenido es muy extenso y ahora soportan HTML dentro de ellos
+* Enhan: Mejorada la carga de tooltips de manera automática al pasar el ratón, se autoajustan cuando su contenido es muy extenso y ahora soportan HTML dentro de ellos
 "
 
 ########################################################################

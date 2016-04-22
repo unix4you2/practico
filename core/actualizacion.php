@@ -224,7 +224,7 @@ if ($PCO_Accion=="analizar_parche")
 					<option value="Archivos+Basedatos">'.$MULTILANG_ActBackup3.'</option>
 				</select>
 				<span class="input-group-addon">
-					<a href="#" title="'.$MULTILANG_ActBackupDes.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+					<a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_ActBackupDes.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 				</span>
 			</div>
 		'.$MULTILANG_ActBackupDes.'<hr>';	
