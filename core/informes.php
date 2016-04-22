@@ -1587,6 +1587,9 @@ if ($PCO_Accion=="editar_informe")
 						<input type="text" name="imagen" id="imagen" class="form-control input-sm" value="<?php echo @$registro_campo_editar["imagen"]; ?>" placeholder="<?php echo $MULTILANG_MnuHlpAwesome; ?>">
 						<span class="input-group-addon">
 							<!--
+							<?php 
+								selector_iconos_awesome();
+							?>
 							<a data-toggle="modal" href="#myModalSelectorIconos" title="<?php echo $MULTILANG_MnuDesImagen; ?>">
 								   <i class="fa fa-hand-o-right"></i> <i class="fa fa-picture-o"></i>
 							</a>
