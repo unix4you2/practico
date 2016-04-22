@@ -4817,7 +4817,18 @@ function generar_botones_informe($informe)
 				
 				//Genera la cadena del enlace
 				$cadena_javascript='onclick="'.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.' "';
-				@$cadena_generica_botones.='<input type="Button"  class="'.$registro_botones["estilo"].'" value="'.$registro_botones["titulo"].'" '.$cadena_javascript.' >&nbsp;';
+				//Determina si el boton llevara texto o si el texto se usa como ayuda
+				$Cadena_Ayuda="";
+				$Cadena_Boton=" ".$registro_botones["titulo"];
+				//Determina si debe o no poner un elemento de imagen
+				if ($registro_botones["imagen"]!="")
+					{
+						$Cadena_Imagen="<i class='fa ".$registro_botones["imagen"]."'></i>";
+						$Cadena_Boton="";
+						$Cadena_Ayuda='data-toggle="tooltip" data-html="true" data-placement="auto" title="'.$registro_botones["titulo"].'"';
+					}
+
+				@$cadena_generica_botones.='<button type="button" class="'.$registro_botones["estilo"].'" '.$Cadena_Ayuda.' '.$cadena_javascript.'>'.$Cadena_Imagen.$Cadena_Boton.'</button>&nbsp;';
 			}
 		return $cadena_generica_botones;
 	}
