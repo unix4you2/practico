@@ -160,7 +160,7 @@
 	
 	Variables de entrada:
 
-		- PCOConnMotorBD: Tipo de motor utilizado   couchbase|couchdb|mongodb|cassandra|redis
+		- PCOConnMotorBD: Tipo de motor utilizado   CouchBase|CouchDB|MongoDB|Cassandra|Redis|HBase (http://nosql-database.org/)
 		- PCOConnServidorBD: Host o servidor que ofrece el servicio
 		- PCOConnPuertoBD: Puerto de conexion (opcional)
 		- PCOConnBaseDatos: Nombre de la base de datos, bucket, coleccion o analogo a conectar
