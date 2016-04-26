@@ -90,42 +90,10 @@
 
 
 
-
-<form method="POST" name="core_ver_menu" action="<?php echo $ArchivoCORE; ?>" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="PCO_Accion" value="Ver_menu">
-    <input type="Hidden" name="Presentar_FullScreen" value="<?php echo $Presentar_FullScreen; ?>">
-    <input type="Hidden" name="Precarga_EstilosBS" value="<?php echo $Precarga_EstilosBS; ?>">
-</form>
-<form method="POST" name="cerrar_sesion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    <input type="Hidden" name="PCO_Accion" value="Terminar_sesion">
-</form>
-<form method="POST" name="actualizar_perfil" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    <input type="Hidden" name="PCO_Accion" value="actualizar_perfil_usuario">
-</form>
-<form method="POST" name="reseteo_clave" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    <input type="Hidden" name="PCO_Accion" value="cambiar_clave">
-</form>
-<form method="POST" name="mis_informes" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    <input type="Hidden" name="PCO_Accion" value="mis_informes">
-</form>
-<form method="POST" name="fileman_admin_embebido" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    <input type="Hidden" name="PCO_Accion" value="fileman_admin_embebido">
-</form>
-<form name="FRMBASEINFORME" id="FRMBASEINFORME" action="<?php echo $ArchivoCORE; ?>" method="POST" target="_self">
-    <input type="Hidden" name="PCO_Accion" value="">
-    <input type="Hidden" name="tabla" value="">  <!-- Compatibilidad hacia atras -->
-    <input type="Hidden" name="campo" value="">  <!-- Compatibilidad hacia atras -->
-    <input type="Hidden" name="valor" value="">  <!-- Compatibilidad hacia atras -->
-    <input type="Hidden" name="objeto" value=""> <!-- Compatibilidad hacia atras -->
-    <input type="Hidden" name="PCO_Tabla" value="">
-    <input type="Hidden" name="PCO_Campo" value="">
-    <input type="Hidden" name="PCO_Valor" value="">
-    <input type="Hidden" name="PCO_Objeto" value="">
-    <input type="Hidden" name="Presentar_FullScreen" value="<?php echo $Presentar_FullScreen; ?>">
-    <input type="Hidden" name="Precarga_EstilosBS" value="<?php echo $Precarga_EstilosBS; ?>">
-</form>
-
 <?php 
+	//Incluye formularios de uso comun para transporte de datos
+	include_once("core/marco_forms.php");
+
 	//Despliega marcos de administracion a ser activados por el menu superior
 	if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCOSESS_SesionAbierta)
 		{

@@ -28,6 +28,7 @@ function barra_navegacion_izquierda_toggle(modo)
 function PCO_ObtenerContenidoAjax(PCO_ASINCRONICO,PCO_URL,PCO_PARAMETROS)
     {
         var xmlhttp;
+        var contenido_recibido="";
         if (window.XMLHttpRequest)
             {   // codigo for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp=new XMLHttpRequest();

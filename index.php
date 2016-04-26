@@ -173,8 +173,12 @@
                 {
                     include("core/marco_arriba_bs.php");
                     //Inicia lo basico de la pagina
-                    echo '<body oncontextmenu="return false;">
-                        <div id="wrapper">
+                    echo '<body oncontextmenu="return false;">';
+
+					//Incluye formularios de uso comun para transporte de datos
+					include_once("core/marco_forms.php");
+
+                    echo '    <div id="wrapper">
                         <!-- CONTENIDO DE APLICACION -->
                         <div id="page-wrapper">
                             <div class="container-fluid">
