@@ -3525,7 +3525,7 @@ function selector_iconos_awesome()
 			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			$salida='
             <div class="embed-responsive embed-responsive-4by3"  '.$registro_campos["personalizacion_tag"].' >
-                <iframe src="'.$registro_campos["url_iframe"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
+                <iframe  id="'.$registro_campos["titulo"].'" name="'.$registro_campos["titulo"].'" src="'.$registro_campos["url_iframe"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
             </div>';
 			return $salida;
 		}
