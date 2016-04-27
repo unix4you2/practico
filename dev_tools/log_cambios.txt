@@ -67,6 +67,7 @@ LogCambios="
 * Added: Inicio de soporte a motores NoSQL: CouchBase
 * Added: Nuevas funciones en JavaScript PCOJS.EsDispositivoMovil y en PHP PCO_EsDispositivoMovil() pueden ser utilizadas para detectar si el dispositivo en que se ejecuta la aplicación es un dispositivo móvil o PC de escritorio.
 * Added: Ahora los botones de acción en los informes soportan imágenes (iconos) en la misma notación de las opciones de menú, lo que permitirá agregar botones de sólo gráficos sin texto y ahorrar más espacio en su interfaz de usuario.
+* Added: Ahora los controles de tipo IFrame sobre formularios son etiquetados automáticamente con el titulo del control (Los títulos pueden ser asignados cambiando momentaneamente el tipo de control a otro que los soporte)
 * Fixed: La información de ayuda asociada a algunas opciones como tooltips es ahora presentada de manera flotante y sin interferir con la funcionalidad del aplicativo.  Esto aplica para todos los tooltip incluyendo los forms ya diseñados evitando al usuario el tener que hacer clic sobre las ayudas para poder verlas y los marcos extras y barras de desplazamiento cuando son extensas.
 * Fixed: Definido por defecto el valor vacio como retorno de la funcion PCO_ObtenerContenidoAjax para evitar errores JS.
 * Fixed: Formularios utilizados para transportar datos y realizar acciones en la parte superior del documento están ahora disponibles incluso cuando se ejecuta la aplicación a fullscreen 
