@@ -2802,7 +2802,7 @@ function selector_iconos_awesome()
 
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="")
-                $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+                $salida.='<label id="PCOEtiqueta_'.$registro_campos["campo"].'" for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
 			//Abre el marco del control de datos style="display:inline;"
 			$salida.='<div class="form-group input-group '.$cadena_clase_datepicker.'" '.$cadena_ID_datepicker.'>';
             // Muestra el campo
@@ -3196,7 +3196,7 @@ function selector_iconos_awesome()
 
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="")
-                $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+                $salida.='<label id="PCOEtiqueta_'.$registro_campos["campo"].'" for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
 
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
@@ -3525,7 +3525,7 @@ function selector_iconos_awesome()
 			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			$salida='
             <div class="embed-responsive embed-responsive-4by3"  '.$registro_campos["personalizacion_tag"].' >
-                <iframe  id="'.$registro_campos["titulo"].'" name="'.$registro_campos["titulo"].'" src="'.$registro_campos["url_iframe"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
+                <iframe id="'.$registro_campos["titulo"].'" name="'.$registro_campos["titulo"].'" src="'.$registro_campos["url_iframe"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
             </div>';
 			return $salida;
 		}
@@ -5624,4 +5624,3 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 		}
-
