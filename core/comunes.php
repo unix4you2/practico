@@ -94,8 +94,9 @@
 		Valor de la distancia expresado en la unidad solicitada
 
 	Adicionales:
-		http://stackoverflow.com/questions/29003118/get-driving-distance-between-two-points-using-google-maps-api
+		* http://stackoverflow.com/questions/29003118/get-driving-distance-between-two-points-using-google-maps-api
 		* http://stackoverflow.com/questions/14041227/distance-from-point-a-to-b-using-google-maps-php-and-mysql  ver working example
+		* http://jafrancov.com/2011/06/geocode-gmaps-api-v3/
 */
 	function PCO_DistanciaCoordenadasSimple($Latitud1, $Longitud1, $Latitud2, $Longitud2, $UnidadMedida="m")
 		{

@@ -303,6 +303,16 @@ function PCOJS_OpcionesCombo_DesdeCSV(ObjetoListaOpciones,Cadena,SeparadorLineas
 				}
 		};
 
+	PCOJS.GoogleMaps_DireccionPorCoordenadas = function(DireccionNatural,APIKey_GoogleMaps)
+		{
+			/*	Determina la informacion, incluyendo coordenadas de una direccion en lenguaje natural
+			*/
+			URLMaps = "https://maps.googleapis.com/maps/api/geocode/json?address="+DireccionNatural+"&key="+APIKey_GoogleMaps+"&language=es";
+			ValorRecuperado=PCO_ObtenerContenidoAjax(0,URLMaps,"");
+			return ValorRecuperado;
+		};
+
+
 // Fin Objeto PCO global para Practico #################################
 //######################################################################
 
