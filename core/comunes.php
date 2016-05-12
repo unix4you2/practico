@@ -4923,7 +4923,27 @@ function construir_consulta_informe($informe,$evitar_campos_ocultos=0)
 					//Si tiene alias definido lo agrega
 					$posfijo_campo="";
 					if ($registro_campos["valor_alias"]!="") $posfijo_campo=" as ".$registro_campos["valor_alias"];
-					$nombre_campo=$registro_campos["valor_campo"].$posfijo_campo;
+					
+					$OrigenValorCampo=$registro_campos["valor_campo"];
+					//Evalua casos donde se tienen variables PHP escapadas por llaves.  Ej  "%{$Variable}%" si fuera para una operacion cualquiera sobre el campo.
+					if (strpos($OrigenValorCampo,"{")!==FALSE && strrpos($OrigenValorCampo,"}")!==FALSE)
+						{
+							//Determina las posiciones de las llaves en la cadena
+							$PosLlaveIzquierda=strpos($OrigenValorCampo,"{");
+							$PosLlaveDerecha=strrpos($OrigenValorCampo,"}");
+							//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
+							$NombreVariable=substr($OrigenValorCampo,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
+							//Si la variable no esta definida la busca en el entorno global
+							global $$NombreVariable;
+							if (@isset($NombreVariable))
+								{
+									$ValorVariable=${$NombreVariable};
+									//Reemplaza el valor encontrado en la cadena de valor original
+									$OrigenValorCampo=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$OrigenValorCampo);
+								}
+						}					
+					
+					$nombre_campo=$OrigenValorCampo.$posfijo_campo;
 
 					//Agrega el campo a la consulta si no se encuentra en el arreglo de ocultos o no se quieren evitar esos campos
 					if (@!in_array($nombre_campo,$PCO_ColumnasOcultas) || $evitar_campos_ocultos==0)
