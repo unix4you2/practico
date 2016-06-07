@@ -27,6 +27,7 @@ core/marco_admin_morris.php
 core/marco_arriba.php
 core/marco_conf.php
 core/marco_export.php
+core/marco_forms.php
 core/marco_dev.php
 core/marco_nav.php
 core/marco_navizq.php
