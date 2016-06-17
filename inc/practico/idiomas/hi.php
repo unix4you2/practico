@@ -1140,3 +1140,11 @@
 	$MULTILANG_ChatTipo2='केवल बाहरी उपयोगकर्ताओं के बीच';
 	$MULTILANG_ChatTipo3='सभी उपयोगकर्ताओं के लिए';
 	$MULTILANG_ChatTipo4='केवल व्यवस्थापक के लिए';
+
+	//Modulo de replicas
+	$MULTILANG_ReplicaTitulo='अतिरिक्त कनेक्शन और प्रतिकृति';
+	$MULTILANG_ReplicaDefinidos='स्वचालित प्रतिकृति सर्वर परिभाषित';
+	$MULTILANG_AgregarReplica='एक नए कनेक्शन जोड़े';
+	$MULTILANG_ReplicaTodo='एक दर्पण के रूप में प्रयोग करें';
+	$MULTILANG_AyudaReplica='परिभाषित मुख्य प्रणाली पर सभी डेटाबेस कार्रवाई इस कनेक्शन पर दोहराया जाना चाहिए। इस valus नहीं है, तो Practico कनेक्शन को परिभाषित करने और इसे तैयार कोड या व्यक्ति के संचालन के द्वारा इस्तेमाल किया जा केवल जब आप चाहते कर देगा।';
+	$MULTILANG_ConnAdicionales='Extra database connections defined';

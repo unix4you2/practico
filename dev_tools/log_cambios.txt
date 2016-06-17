@@ -18,6 +18,8 @@ index.php
 core/actualizacion.php
 core/ajax.php
 core/comunes.php
+core/conexiones.php
+core/conexiones_extra.php
 core/doc_intro.php
 core/formularios.php
 core/informes.php
@@ -37,6 +39,7 @@ core/marco_wscfg.php
 core/menus.php
 core/monitoreo.php
 core/objetos.php
+core/replicacion.php
 core/tablas.php
 core/usuarios.php
 core/ws_funciones.php
@@ -58,6 +61,8 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added: Posibilidad de agregar múltiples conexiones a diferentes servidores y motores de bases de datos al mismo tiempo para realizar operaciones independientes en cada una mediante su llamado como $NombreConexion en funciones personalizadas.
+* Added: Sistema automático de réplica de operaciones sobre múltiples servidores y motores de bases de datos.
 * Added: Los campos de origen para los valores en informes ahora pueden involucrar variables PHP dentro de sus operaciones.  La sintaxis para que una variable PHP sea reconocida dentro de los campos es {$SuVariablePHP}.  En caso de requerir el uso de llaves podrán utilizar la llaves dobles.
 * Added: Ahora puede definir múltiples usuarios admin.  Esto no sólo le permitirá múltiples usuarios administradores de plataforma y diseñadores, sino que también por seguridad le permitiría anular el usuario admin por defecto y crear uno con nombre diferente para realizar sus operaciones. 
 * Added: Nueva función PCO_DistanciaCoordenadasSimple(Latitud1,Longitud1,Latitud2,Longitud2,UnidadMedida) permite calcular la distancia entre dos puntos en metros, kilometros o millas desde código PHP.
@@ -89,6 +94,18 @@ LogCambios="
 ScriptBasedatos="
 ALTER TABLE core_formulario ADD estilo_pestanas varchar(10) DEFAULT 'nav-tabs';
 ALTER TABLE core_informe_boton ADD imagen varchar(250) DEFAULT '';
+CREATE TABLE core_replicasbd (
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(255) NOT NULL DEFAULT '',
+  servidorbd VARCHAR(255) NOT NULL DEFAULT '',
+  basedatos VARCHAR(255) NOT NULL DEFAULT '',
+  usuariobd VARCHAR(255) NOT NULL DEFAULT '',
+  passwordbd VARCHAR(255) NOT NULL DEFAULT '',
+  motorbd VARCHAR(255) NOT NULL DEFAULT '',
+  puertobd VARCHAR(255) NOT NULL DEFAULT '',
+  tipo_replica INTEGER(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 "
 
 ########################################################################

@@ -296,3 +296,17 @@ CREATE TABLE core_monitoreo (
   ultimo_estado VARCHAR(250) DEFAULT '',
   PRIMARY KEY (id)
 );
+
+DROP TABLE IF EXISTS core_replicasbd;
+CREATE TABLE core_replicasbd (
+  id serial,
+  nombre VARCHAR(255) NOT NULL DEFAULT '',
+  servidorbd VARCHAR(255) NOT NULL DEFAULT '',
+  basedatos VARCHAR(255) NOT NULL DEFAULT '',
+  usuariobd VARCHAR(255) NOT NULL DEFAULT '',
+  passwordbd VARCHAR(255) NOT NULL DEFAULT '',
+  motorbd VARCHAR(255) NOT NULL DEFAULT '',
+  puertobd VARCHAR(255) NOT NULL DEFAULT '',
+  tipo_replica INTEGER DEFAULT '0',
+  PRIMARY KEY (id)
+);

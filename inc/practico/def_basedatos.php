@@ -41,3 +41,4 @@
 	$ListaCamposSinID_llaves_api='nombre,llave,secreto,uri,dominio_autorizado,ip_autorizada,funciones_autorizadas';
 	$ListaCamposSinID_chat='from,to,message,sent,recd';
 	$ListaCamposSinID_monitoreo='tipo,pagina,peso,nombre,host,puerto,tipo_ping,saltos,comando,ancho,alto,tamano_resultado,ocultar_titulos,path,correo_alerta,alerta_sonora,milisegundos_lectura,alerta_vibracion,ultimo_estado';
+	$ListaCamposSinID_replicasbd='nombre,servidorbd,basedatos,usuariobd,passwordbd,motorbd,puertobd,tipo_replica';

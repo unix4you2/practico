@@ -111,13 +111,25 @@
 							</li>
 							<li class="divider"></li>
 							<li>
+								<a data-toggle="modal" href="javascript:document.ver_replicaciones.submit();">
+									<div>
+										<form name="ver_replicaciones" action="<?php echo $ArchivoCORE; ?>" method="POST">
+											<input type="Hidden" name="PCO_Accion" value="administrar_replicacion">
+										</form>
+										<i class="fa fa-cubes fa-fw"></i> <?php echo $MULTILANG_ReplicaTitulo; ?>
+										<span class="pull-right text-muted small">5</span>
+									</div>
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
 								<a data-toggle="modal" href="javascript:document.ver_monitoreo.submit();">
 									<div>
 										<form name="ver_monitoreo" action="<?php echo $ArchivoCORE; ?>" method="POST">
 											<input type="Hidden" name="PCO_Accion" value="administrar_monitoreo">
 										</form>
 										<i class="fa fa-lightbulb-o fa-fw"></i> <?php echo $MULTILANG_MonTitulo; ?>
-										<span class="pull-right text-muted small">5</span>
+										<span class="pull-right text-muted small">6</span>
 									</div>
 								</a>
 							</li>
@@ -129,7 +141,7 @@
 											<input type="Hidden" name="PCO_Accion" value="actualizar_practico">
 										</form>
 										<i class="fa fa-download fa-fw"></i> <?php echo $MULTILANG_Actualizacion; ?>/<?php echo $MULTILANG_Copias; ?>
-										<span class="pull-right text-muted small">6</span>
+										<span class="pull-right text-muted small">7</span>
 									</div>
 								</a>
 							</li>

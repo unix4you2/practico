@@ -113,13 +113,16 @@
     if (!isset($PCOSESS_SesionAbierta)) $PCOSESS_SesionAbierta=0;
 
     // Inicia las conexiones con la BD y las deja listas para las operaciones
-    include("core/conexiones.php");
+    include_once("core/conexiones.php");
 
     // Incluye definiciones comunes de la base de datos
     include_once("inc/practico/def_basedatos.php");
     
     // Incluye archivo con algunas funciones comunes usadas por la herramienta
     include_once("core/comunes.php");
+
+	// Genera conexiones individuales o conexiones para replicacion de transacciones
+	include_once("core/conexiones_extra.php");
 
     // Incluye archivo con funciones de correo electronico
     include_once("core/correos.php");
@@ -241,7 +244,8 @@
         include("core/ajax.php");
 	if ($PCO_Accion=="mantenimiento_tablas" || $PCO_Accion=="limpiar_temporales" || $PCO_Accion=="limpiar_backups")
 		include("core/mantenimiento.php");
-
+    if ($PCO_Accion=="administrar_replicacion" || $PCO_Accion=="eliminar_replica" || $PCO_Accion=="detalles_replicacion" || $PCO_Accion=="guardar_replicacion" || $PCO_Accion=="actualizar_replicacion")
+        include("core/replicacion.php");
 
 /* ################################################################## */
     // Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios. Incluye compatibilidad hacia atras en personalizadas.php

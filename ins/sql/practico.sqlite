@@ -296,3 +296,17 @@ CREATE TABLE core_monitoreo (
   ultimo_estado text DEFAULT ''
 
 );
+
+DROP TABLE IF EXISTS core_replicasbd;
+CREATE TABLE core_replicasbd (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nombre text DEFAULT '',
+  servidorbd text DEFAULT '',
+  basedatos text DEFAULT '',
+  usuariobd text DEFAULT '',
+  passwordbd text DEFAULT '',
+  motorbd text DEFAULT '',
+  puertobd text DEFAULT '',
+  tipo_replica integer DEFAULT '0'
+  
+);

@@ -1140,3 +1140,11 @@
 	$MULTILANG_ChatTipo2='Solo entre usuarios Externos';
 	$MULTILANG_ChatTipo3='Entre todos los usuarios';
 	$MULTILANG_ChatTipo4='Exclusivo para admin';
+
+	//Modulo de replicas
+	$MULTILANG_ReplicaTitulo='Conexiones extra y Replicaci&oacute;n';
+	$MULTILANG_ReplicaDefinidos='Servidores de replicaci&oacute;n autom&aacute;tica definidos';
+	$MULTILANG_AgregarReplica='Agregar nueva conexion';
+	$MULTILANG_ReplicaTodo='Usar como replica espejo';
+	$MULTILANG_AyudaReplica='Determina si todas las operaciones realizadas sobre la base de datos del sistema deben ser replicadas sobre esta conexion.  En caso de esta su valor en NO, Practico solamente creara la conexion y la dejara lista para ser usada por codigo o por operaciones individuales cuando usted lo requiera.';
+	$MULTILANG_ConnAdicionales='Conexiones a bases de datos adicionales';
