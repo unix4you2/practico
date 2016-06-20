@@ -19,11 +19,6 @@ Vagrant.configure("2") do |config|
   # `vagrant box outdated`. This is not recommended.
   # config.vm.box_check_update = false
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
-
   # Redireccion del puerto apache en la VM para su uso local sobre el puerto 81 del anfitrion
     config.vm.network :forwarded_port, host: 8080, guest: 80
 
@@ -71,12 +66,21 @@ Vagrant.configure("2") do |config|
 	#Instalacion de PHP
 	sudo yum -y install php php-mysql php-gd php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-snmp php-soap curl curl-devel
 	sudo systemctl restart httpd.service
-
+	
+	sudo mv /var/www/html /var/www/html_old
+	sudo ln -s /vagrant /var/www/html
+	
 	#Instalacion de MariaDB
 	sudo yum -y install mariadb-server mariadb
 	sudo systemctl start mariadb.service
 	sudo systemctl enable mariadb.service
 	
+	#Instalacion de la base de datos
+	mysql --user=root -e "CREATE DATABASE IF NOT EXISTS practico;"	
+	mysql -h "localhost" --user=root --database=practico < "ins/sql/practico.mysql"
+	mysql --user=root -e "FLUSH PRIVILEGES;"		
+	mysql --user=root -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('mypass');"
+
 	echo "-------------- FIN APROVISIONAMIENTO --------------"
   SHELL
 
