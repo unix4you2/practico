@@ -6,6 +6,35 @@
 |_____\___/ \__, |  \__,_|\___|  \___\__,_|_| |_| |_|_.__/|_|\___/|___/
             |___/ 
 ```
+
+## Versión 16.5 (2016-05-29)
+* Added: Posibilidad de agregar múltiples conexiones a diferentes servidores y motores de bases de datos al mismo tiempo para realizar operaciones independientes en cada una mediante su llamado como $NombreConexion en funciones personalizadas.
+* Added: Sistema automático de réplica de operaciones sobre múltiples servidores y motores de bases de datos.
+* Added: Los campos de origen para los valores en informes ahora pueden involucrar variables PHP dentro de sus operaciones.  La sintaxis para que una variable PHP sea reconocida dentro de los campos es {$SuVariablePHP}.  En caso de requerir el uso de llaves podrán utilizar la llaves dobles.
+* Added: Ahora puede definir múltiples usuarios admin.  Esto no sólo le permitirá múltiples usuarios administradores de plataforma y diseñadores, sino que también por seguridad le permitiría anular el usuario admin por defecto y crear uno con nombre diferente para realizar sus operaciones. 
+* Added: Nueva función PCO_DistanciaCoordenadasSimple(Latitud1,Longitud1,Latitud2,Longitud2,UnidadMedida) permite calcular la distancia entre dos puntos en metros, kilometros o millas desde código PHP.
+* Added: Nuevas funciones para obtener el nombre de un sitio en lenguaje natural mediante API de Google:
+		 PCO_DireccionPorCoordenas(Latitud, Longitud, APIKey_GoogleMaps)
+		 PCO_DireccionPorIDSitio(PlaceID, APIKey_GoogleMaps)
+		 PCOJS.GoogleMaps_DireccionPorCoordenadas(DireccionNatural,APIKey_GoogleMaps) permite conocer las coordenadas en latitud y longitud y demás información extra entregada por Google Maps
+* Added: Las pestanas de formulario cuentan ahora con un identificador PCO_LinkPestanaFormulario_XXX que permite llamar su enlace desde JQuery por ejemplo así:  $("#PCO_LinkPestanaFormulario_2").trigger("click");
+* Added: Los formularios ahora pueden especificar el tipo de pestañas a utilizar (pestanas, botones, ocultas).  En el caso de ocultar sus pestanas y contar con varias el diseño de interfaz debería tener los elementos necesarios para navegar entre pestañas en caso de ser necesario.
+* Added: Inicio de soporte a motores NoSQL: CouchBase
+* Added: Nuevas funciones en JavaScript PCOJS.EsDispositivoMovil y en PHP PCO_EsDispositivoMovil() pueden ser utilizadas para detectar si el dispositivo en que se ejecuta la aplicación es un dispositivo móvil o PC de escritorio.
+* Added: Ahora los botones de acción en los informes soportan imágenes (iconos) en la misma notación de las opciones de menú, lo que permitirá agregar botones de sólo gráficos sin texto y ahorrar más espacio en su interfaz de usuario.
+* Added: Ahora los controles de tipo IFrame sobre formularios son etiquetados automáticamente con el titulo del control (Los títulos pueden ser asignados cambiando momentaneamente el tipo de control a otro que los soporte)
+* Added: Las etiqeutas en campos de texto y listas de seleccion son ahora marcadas con su propio ID en el arbol DOM para permitir operarlas mediante JQuery con el prefijo PCOEtiqueta_  seguido del nombre de campo.
+* Fixed: La información de ayuda asociada a algunas opciones como tooltips es ahora presentada de manera flotante y sin interferir con la funcionalidad del aplicativo.  Esto aplica para todos los tooltip incluyendo los forms ya diseñados evitando al usuario el tener que hacer clic sobre las ayudas para poder verlas y los marcos extras y barras de desplazamiento cuando son extensas.
+* Fixed: Definido por defecto el valor vacio como retorno de la funcion PCO_ObtenerContenidoAjax para evitar errores JS.
+* Fixed: Formularios utilizados para transportar datos y realizar acciones en la parte superior del documento están ahora disponibles incluso cuando se ejecuta la aplicación a fullscreen 
+* Enhan: Mejorados los estilos de tablas responsive para formularios cuando no se presentan bordes y en versiones moviles
+* Enhan: Confirmada eliminacion de la variable $_SeparadorCampos_ anunciada para la versión 16.1.  Se había dejado hasta la versión 16.3 para dar tiempo a versiones previas de ser actualizadas.  Quienes no lo hayan hecho podrán entrar a su archivo configuracion.php y agregarla manualmente.  
+* Enhan: Ahora los SuperUsuarios aparecen dentro de la lista de usuarios disponibles para realizar copia de permisos e informes en otros usuarios, sin embargo se debe tener en cuenta que aún así sus permisos podrán estar en blanco pues los SuperUsuarios no usan las mismas ACL que los usuarios estándar.
+* Enhan: Los SuperUsuarios aparecen dentro de los listados de usuarios, sin embargo no se dejan suspender, eliminar o resetear claves.
+* Enhan: Actualización de FontAwesome versión 4.6.1
+* Enhan: Mejorada la maquetacion de bordes para dispositivos móviles
+* Enhan: Mejorada la carga de tooltips de manera automática al pasar el ratón, se autoajustan cuando su contenido es muy extenso y ahora soportan HTML dentro de ellos
+
 ## Versión 16.3 (2016-03-10)
 * Added: Se agrega una vista previa del Query SQL que es generado por los parámetros definidos en los informes
 * Added: Nueva función para geolocalización: PCOJS.GeoLocalizarUsuario().  La funcion le devolvera siempre sobre la variable JS llamada PCO.Geolocalizacion una cadena separada por comas así: Latitud,Longitud,Altitud,Precision,Direccion,Velocidad.  Cualquiera de los parametros que no sea soportado por el cliente GPS será null o NaN.
