@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "CentOS7_Practico"
 
   # Redireccion del puerto apache en la VM para su uso local sobre el puerto 81 del anfitrion
-    config.vm.network :forwarded_port, host: 8080, guest: 80
+    config.vm.network :forwarded_port, host: 8181, guest: 80
 
   # Red privada (host-only)
   config.vm.network "private_network", ip: "192.168.55.100"
@@ -55,6 +55,10 @@ Vagrant.configure("2") do |config|
 	mysql --user=root -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('mypass');"
 
 	echo "-------------- FIN APROVISIONAMIENTO --------------"
+	echo "Puede ingresar mediante http://localhost:8181 "
+	echo "                        http://192.168.55.100 "
+	echo "Usuario y Contrasena:   admin / admin"
+	echo "---------------------------------------------------"
   SHELL
 
 end
