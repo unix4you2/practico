@@ -1147,6 +1147,6 @@
 	$MULTILANG_ReplicaDefinidos='Automatic replication servers defined';
 	$MULTILANG_AgregarReplica='Add a new connection';
 	$MULTILANG_ReplicaTodo='Use it as a mirror';
-	$MULTILANG_AyudaReplica='Define if all database operations over the main system should be replicated over this connection.  If this valus is NO, Practico will define the connection and make it ready to be used by code or individual operations only when you want.';
+	$MULTILANG_AyudaReplica='Define if all database operations over the main system should be replicated over this connection.  If this valus is NO, Practico will define the connection and make it ready to be used by code or individual operations only when you want.  This applies for data upgrade operations (Insert,Update,Delete) that was maked by the ejecutar_sql_unaria() internal function';
 	$MULTILANG_ConnAdicionales='Extra database connections defined';
 

@@ -1508,7 +1508,7 @@ function completar_parametros($string,$data) {
 
 /* ################################################################## */
 /* ################################################################## */
-	function ejecutar_sql_unaria($query,$lista_parametros="",$ConexionBD="")
+	function ejecutar_sql_unaria($query,$lista_parametros="",$ConexionBD="",$ReplicaRecursiva=1)
 		{
 			/*
 				Function: ejecutar_sql_unaria
@@ -1519,11 +1519,26 @@ function completar_parametros($string,$data) {
 					query - Consulta preformateada para ser ejecutada en el motor
 					param - Lista de parametros que deben ser preparados para el query separados por coma
 					ConexionBD - Determina si la consulta debe ser ejecutada en otra conexion o motor.  Se hace obligatorio enviar parametros cuando se envia otra conexion
+					ReplicaRecursiva - Indica si se deben buscar o no conexiones adicionales para realizar replica de oepraciones.  Normalmente inicia en 1, pero las llamadas sucesivas se hacen en 0 para evitar llamadas infinitas
 
 				Salida:
 					Retorna una cadena que contiene una descripcion de error PDO en caso de error y agrega un mensaje en pantalla con la descripcion devuelta por el driver
 					Retorna una cadena vacia si la consulta es ejecutada sin problemas.
 			*/
+			global $ListaCamposSinID_replicasbd,$TablasCore;
+			//Si aplica la replica recursiva entonces busca las conexiones
+			if ($ReplicaRecursiva==1)
+				{
+					//Busca conexiones configuradas como replica
+					$ConexionesReplica=ejecutar_sql("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE tipo_replica=1 ");
+					//Recorre cada conexion de replica encontrada para realizar la operacion
+					while ($registro_conexion = $ConexionesReplica->fetch())
+						{
+							global $$registro_conexion["nombre"];
+							//Hace el llamado a la operacion de replica sobre la conexion encontrada
+							ejecutar_sql_unaria($query,$lista_parametros,$$registro_conexion["nombre"],0);
+						}
+				}
 
 			//Determina si se debe usar la conexion global del sistema o una especifica de usuario
 			if($ConexionBD=="")
