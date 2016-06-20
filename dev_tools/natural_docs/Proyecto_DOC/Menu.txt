@@ -104,6 +104,9 @@ Group: Modulos Principales  {
       File: Seccion superior  (core/marco_navizq.php)
       File: Seccion superior  (core/marco_nav.php)
       File: Modulo mantenimientos  (core/mantenimiento.php)
+      File: Conexiones PDO  (core/conexiones_extra.php)
+      File: Modulo replicacion de operaciones  (core/replicacion.php)
+      File: Seccion con formularios comunes  (core/marco_forms.php)
       }  # Group: Modulos
 
    Group: Inc  {
