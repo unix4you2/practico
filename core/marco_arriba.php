@@ -105,7 +105,7 @@
 		}
 	
 	//Carga marco de chat solamente si esta habilitado
-	if (isset($Activar_ModuloChat) && $Activar_ModuloChat>0)
+	if (isset($Activar_ModuloChat) && $Activar_ModuloChat>0 && @$_SESSION['username']!="")
 		include_once("core/marco_chat.php");
 ?>
 

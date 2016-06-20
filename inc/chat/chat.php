@@ -22,10 +22,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 session_start();
 
 //Incluye los archivos de configuracion de Practico y define vbles de conexion
-include("../../core/configuracion.php");
+include_once("../../core/configuracion.php");
 
 // Inicia las conexiones con la BD y las deja listas para las operaciones
-include("../../core/conexiones.php");
+include_once("../../core/conexiones.php");
 
 // Incluye definiciones comunes de la base de datos
 include_once("../../inc/practico/def_basedatos.php");
