@@ -812,6 +812,8 @@ function datatable_desde_hojacalculo($PathArchivo,$NroLineas)
 			if ($PCO_Accion== "eliminar_informe_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
             if ($PCO_Accion== "copiar_permisos")					$retorno = permiso_agregado_accion("listar_usuarios");
             if ($PCO_Accion== "copiar_informes")					$retorno = permiso_agregado_accion("listar_usuarios");
+            if ($PCO_Accion== "agregar_usuario_autoregistro")		$retorno = 1;
+            if ($PCO_Accion== "guardar_usuario_autoregistro")		$retorno = 1;
             
 			// Funciones en core/menus.php
 			if ($PCO_Accion== "Ver_menu")							$retorno = 1;
@@ -2255,6 +2257,7 @@ function ventana_login()
 			Despliega la ventana de ingreso al sistema con el formulario para usuario, contrasena y captcha.
 		*/
 		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor;
+		  global $Auth_PermitirAutoRegistro,$Auth_PermitirResteoClaves;
 		  global $MULTILANG_Cerrar,$MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes,$MULTILANG_Registrarme,$MULTILANG_OlvideClave;
 			// Variables para OAuth desde el archivo de configuracion
 			global $APIGoogle_ClientId,$APIGoogle_ClientSecret;
@@ -2415,17 +2418,26 @@ function ventana_login()
                                 
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <!--
-                                        <a class="btn btn-xs">
-                                            <i class="typcn fa typcn-user-add"></i>
-                                            <?php echo $MULTILANG_Registrarme; ?>
-                                        </a>
-                                        -->
+										<?php
+											//Presenta opciones de recuperacion solamente cuando el motor de autenticacion sea practico
+											if ($Auth_TipoMotor=="practico" && $Auth_PermitirAutoRegistro==1)
+												{
+										?>
+													<form name="auto_registro" id="auto_registro" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+													<input type="Hidden" name="PCO_Accion" value="agregar_usuario_autoregistro">
+													</form>
+													<a class="btn btn-xs" onClick="document.auto_registro.submit();">
+														<i class="typcn fa typcn-user-add"></i>
+														<?php echo $MULTILANG_Registrarme; ?>
+													</a>
+										<?php
+												}
+										?>
                                     </div>
                                     <div class="col-md-6">
 										<?php
 											//Presenta opciones de recuperacion solamente cuando el motor de autenticacion sea practico
-											if ($Auth_TipoMotor=="practico")
+											if ($Auth_TipoMotor=="practico" && $Auth_PermitirResteoClaves==1)
 												{
 										?>
 													<form name="recuperacion" id="recuperacion" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">

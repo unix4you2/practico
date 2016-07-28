@@ -53,6 +53,7 @@
 	$MULTILANG_Basedatos='Base de datos';
 	$MULTILANG_Basicos='B&aacute;sicos';
     $MULTILANG_BarraHtas='Barra de herramientas';
+    $MULTILANG_Bienvenido='Bienvenido';
     $MULTILANG_Buscar='Buscar';
 	$MULTILANG_Campo='Campo';
 	$MULTILANG_Cancelar='Cancelar';
@@ -972,6 +973,8 @@
     $MULTILANG_UsrPlantillaAplicar='Plantilla de permisos para aplicar en cada ingreso';
     $MULTILANG_UsrPlantillaAplicarDes='Los permisos asignados al usuario seleccionado en la lista seran tranferidos a este nuevo usuario cada que haga un ingreso';
     $MULTILANG_UsrPermisoManual='Permisos manuales';
+    $MULTILANG_UsrDesClaveACorreo='Verifique que la cuenta de correo es correcta.  Sera verificada posteriormente ya que a esta cuenta sera enviada una clave aleatoria inicial para su ingreso al sistema.';
+    $MULTILANG_UsrFinRegistro='El registro de usuario ha sido realizado de manera satisfactoria.  Revise su buzon de correo donde encontrara la contrasena inicial para ingresar.<br><br>Nota: Recuerde revisar tambien su carpeta de elementos no deseados o SPAM en caso de no recibir su mensaje en su bandeja de entrada estandar.';
 
 	//Proceso de instalacion
 	$MULTILANG_Instalacion='Proceso de instalaci&oacute;n';
@@ -1063,6 +1066,12 @@
 	$MULTILANG_ConfGraficas='Cambiar configuraciones graficas';
 	$MULTILANG_UsuariosAdmin='Usuarios administradores';
 	$MULTILANG_UsuariosAdminDes='Lista de usuarios separados unicamente por coma y que seran considerados como administradores de la plataforma y dise&ntilde;adores de aplicaci&oacute;n.  En caso de retirar al admin por defecto asegurese de contar con otro usuario administrador, de lo contrario tendra que editar manualmente su archivo de configuracion para restablecer los accesos administrativos.';
+	$MULTILANG_PermitirReseteoClave='Permitir recuperaci&oacute;n de claves';
+	$MULTILANG_DesPermitirReseteoClave='Presenta una opcion en la ventana de acceso al sistema que permite a los usuarios abrir el asistente de recuperacion de claves.  Unicamente cuando el motor de autenticacion utilizado es el interno de Practico.';
+	$MULTILANG_PermitirAutoRegistro='Permitir auto-registro de usuarios al sistema';
+	$MULTILANG_DesPermitirAutoRegistro='Presenta una opcion en la ventana de acceso al sistema que permite a los nuevos usuarios hacer su registro de manera autonoma.  Unicamente cuando el motor de autenticacion utilizado es el interno de Practico.';
+	$MULTILANG_UsuarioAutoRegistro='Usuario plantilla auto-registros';
+	$MULTILANG_DesUsuarioAutoRegistro='Determina el usuario plantilla utilizado para inicializar los permisos a los usuarios que hacen un auto-registro en el sistema';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';

@@ -83,7 +83,10 @@
 	// Tipo de motor usado para la autenticacion de usuarios
 	$Auth_TipoMotor='practico';
 	$Auth_ProtoTransporte='http';
-	
+	$Auth_PermitirResteoClaves='1';
+	$Auth_PermitirAutoRegistro='1';
+	$Auth_PlantillaAutoRegistro='';
+
 	// Configuracion LDAP - Auth_TipoMotor=ldap
 	$Auth_TipoEncripcion='plano';
 	$Auth_LDAPServidor='localhost';

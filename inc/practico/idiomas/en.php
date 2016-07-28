@@ -52,6 +52,7 @@
 	$MULTILANG_Basedatos='Database';
 	$MULTILANG_Basicos='Basics';
     $MULTILANG_BarraHtas='Toolbar';
+    $MULTILANG_Bienvenido='Wellcome';
     $MULTILANG_Buscar='Search';
 	$MULTILANG_Campo='Field';
 	$MULTILANG_Cancelar='Cancel';
@@ -973,7 +974,8 @@
     $MULTILANG_UsrPlantillaAplicar='Template permissions to apply to each entry';
     $MULTILANG_UsrPlantillaAplicarDes='The permissions assigned to the user selected in the list they will be transferred to this new user each to make an income';
     $MULTILANG_UsrPermisoManual='Manual rights';
-
+    $MULTILANG_UsrDesClaveACorreo='Please check that the email account is correct.  This account will be verified because in that account we will send you a random password to access the system.';
+    $MULTILANG_UsrFinRegistro='Your sign up process was finished succesfully.  Please check your mail inbox where you find a welcome message with a random password to access the system.<br><br>Important: Remember to check your SPAM folder too if you dont see any message in your standar inbox.';
 
 	//Proceso de instalacion
 	$MULTILANG_Instalacion='Installation Process';
@@ -1065,6 +1067,12 @@
 	$MULTILANG_ConfGraficas='Change graphic configurations';
 	$MULTILANG_UsuariosAdmin='Super users';
 	$MULTILANG_UsuariosAdminDes='A comma separated list of the users that are the platform administrators and application designers.  If you want to remove the admin user please be sure that you have another super user or you will lost admin rights.';
+	$MULTILANG_PermitirReseteoClave='Allow to recover passwords';
+	$MULTILANG_DesPermitirReseteoClave='Puts a password recovery option in the login window that allow users to open a password recovery wizard.  This is available only for the Practicos internal auth engine.';
+	$MULTILANG_PermitirAutoRegistro='Allow users self sign up in the system';
+	$MULTILANG_DesPermitirAutoRegistro='Puts a sign-up option in the login window that allow users to open a form to self register in the system.  This is available only for the Practicos internal auth engine.';
+	$MULTILANG_UsuarioAutoRegistro='Template user for self-sign up';
+	$MULTILANG_DesUsuarioAutoRegistro='Says which user will be used for the rights in the self-registered users';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';

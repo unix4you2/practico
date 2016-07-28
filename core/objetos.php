@@ -217,7 +217,10 @@ $salida=sprintf("<?php
 	// Tipo de motor usado para la autenticacion de usuarios
 	\$Auth_TipoMotor='%s';
 	\$Auth_ProtoTransporte='%s';
-	
+	\$Auth_PermitirReseteoClaves='%s';
+	\$Auth_PermitirAutoRegistro='%s';
+	\$Auth_PlantillaAutoRegistro='%s';
+
 	// Configuracion LDAP - Auth_TipoMotor=ldap
 	\$Auth_TipoEncripcion='%s';
 	\$Auth_LDAPServidor='%s';
@@ -233,7 +236,7 @@ $salida=sprintf("<?php
 	\$_SeparadorCampos_='%s';
 	
 	// Define cadena separada por comas con usuarios administradores de la aplicacion
-	\$PCOVAR_Administradores='%s';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$CodigoGoogleAnalyticsNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW,$Activar_ModuloChatNEW,$_SeparadorCampos_NEW,$PCOVAR_AdministradoresNEW);
+	\$PCOVAR_Administradores='%s';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$CodigoGoogleAnalyticsNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_PermitirReseteoClavesNEW,$Auth_PermitirAutoRegistroNEW,$Auth_PlantillaAutoRegistroNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW,$Activar_ModuloChatNEW,$_SeparadorCampos_NEW,$PCOVAR_AdministradoresNEW);
 			// Escribe el archivo de configuracion
 			$archivo_config=fopen("core/configuracion.php","w");
 			if($archivo_config==null)

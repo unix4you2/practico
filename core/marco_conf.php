@@ -313,7 +313,39 @@
 													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Importante; ?></b><br><?php echo $MULTILANG_ProtoDescripcion; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 												</span>
 											</div>
-										
+
+											<label for="Auth_PermitirResteoClavesNEW"><i class="fa fa-key fa-2x fa-fw"></i> <?php echo $MULTILANG_PermitirReseteoClave; ?>:</label>
+											<div class="form-group input-group">
+												<select id="Auth_PermitirReseteoClavesNEW" name="Auth_PermitirReseteoClavesNEW" class="selectpicker" >
+													<option value="1" <?php if (@$Auth_PermitirReseteoClaves=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?></option>
+													<option value="0" <?php if (@$Auth_PermitirReseteoClaves=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?></option>
+												</select>
+												<span class="input-group-addon">
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_DesPermitirReseteoClave; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+											</div>
+
+											<label for="Auth_PermitirAutoRegistroNEW"><i class="fa fa-user-plus fa-2x fa-fw"></i> <?php echo $MULTILANG_PermitirAutoRegistro; ?>:</label>
+											<div class="form-group input-group">
+												<select id="Auth_PermitirAutoRegistroNEW" name="Auth_PermitirAutoRegistroNEW" class="selectpicker" >
+													<option value="1" <?php if (@$Auth_PermitirAutoRegistro=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?></option>
+													<option value="0" <?php if (@$Auth_PermitirAutoRegistro=="0" || @$Auth_PermitirAutoRegistro=="") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?></option>
+												</select>
+												<span class="input-group-addon">
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_DesPermitirAutoRegistro; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+											</div>
+
+											<div class="form-group input-group">
+												<span class="input-group-addon">
+													<?php echo $MULTILANG_UsuarioAutoRegistro; ?>
+												</span>
+												<input name="Auth_PlantillaAutoRegistroNEW" value="<?php echo $Auth_PlantillaAutoRegistro; ?>" type="text" class="form-control">
+												<span class="input-group-addon">
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="(<?php echo $MULTILANG_Opcional; ?>) <?php echo $MULTILANG_DesUsuarioAutoRegistro; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+											</div>
+
 										</div>
 										<div class="col-md-6">
 

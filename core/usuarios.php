@@ -428,7 +428,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_llave"
                 $destinatario=$registro["correo"];
                 $asunto="[".$NombreRAD."] ".$MULTILANG_UsrAsuntoReset;
                 $cuerpo_mensaje="<br><br>".$MULTILANG_UsrResetLink.":<br><b><a href=$EnlaceRecuperacion>$EnlaceRecuperacion</a></b>";
-                enviar_correo($remitente,$destinatario,$asunto,$cuerpo_mensaje);
+                PCO_EnviarCorreo($remitente,$destinatario,$asunto,$cuerpo_mensaje);
                 mensaje("$MULTILANG_UsrResetCuenta: $cuenta_destinatario",$MULTILANG_UsrMensajeReset,'','fa fa-unlock-alt fa-4x','alert alert-info alert-dismissible');
             }
         else
@@ -463,7 +463,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_con_us
                 $destinatario=$registro["correo"];
                 $asunto="[".$NombreRAD."] ".$MULTILANG_UsrAsuntoReset;
                 $cuerpo_mensaje="<br><br>".$MULTILANG_Usuario." ".$NombreRAD.": <b>".$registro["login"]."</b>";
-                enviar_correo($remitente,$destinatario,$asunto,$cuerpo_mensaje);
+                PCO_EnviarCorreo($remitente,$destinatario,$asunto,$cuerpo_mensaje);
                 mensaje($MULTILANG_Atencion,$MULTILANG_UsrMensajeReset,'','fa fa-unlock-alt fa-4x','alert alert-info alert-dismissible');
             }
         else
@@ -1225,6 +1225,143 @@ if ($PCO_Accion=="permisos_usuario")
 
 /* ################################################################## */
 /* ################################################################## */
+	if ($PCO_Accion=="guardar_usuario_autoregistro")
+		{
+			/*
+				Function: guardar_usuario_autoregistro
+				Almacena la informacion basica de un usuario en la base de datos
+
+				Variables minimas de entrada:
+					login - Nickname o login para el usuario.  Debe ser un identificador unico y no existir ya en el sistema
+					nombre - Nombre completo del usuario.
+					correo - Correo del usuario para envio de la clave
+
+				Salida de la funcion:
+					* Usuario registrado en el sistema.  El proceso agrega ademas las claves en MD5 y la llave de paso definida en el archivo de <Libreria base> 
+
+				Ver tambien:
+					<agregar_usuario_autoregistro> | <eliminar_usuario>
+			*/
+			$mensaje_error="";
+
+			$clave=TextoAleatorio(10);
+			$plantilla_permisos=$Auth_PlantillaAutoRegistro;
+			$usuario_interno=0;
+			$estado=1;
+			$seguridad=100;
+			$es_plantilla=0;
+
+			// Verifica que no existe el usuario
+			if ($login!="")
+				{
+					$resultado_usuario=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login=? ","$login");
+					$registro_usuario = $resultado_usuario->fetch();
+					if ($registro_usuario["login"]!="")
+						$mensaje_error=$MULTILANG_UsrErrCrea1;
+				}
+
+			// Verifica campos nulos
+			if ($nombre=="" || $login=="" || $correo=="")
+				$mensaje_error=$MULTILANG_UsrErrCrea2;
+
+			if ($mensaje_error=="")
+				{
+					// Inserta datos del usuario
+					$clavemd5=MD5($clave);
+					$pasomd5=MD5($LlaveDePaso);
+                    $Llave_recuperacion="";
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno$_SeparadorCampos_$Llave_recuperacion$_SeparadorCampos_$es_plantilla$_SeparadorCampos_$plantilla_permisos$_SeparadorCampos_$descripcion_usuario");
+					auditar("Agrega usuario $login para $nombre",$login);
+					//Envia correo informativo
+					$cuerpo_mensaje="<br>".$MULTILANG_Bienvenido." ".$nombre.",<br><hr>Login: <b>".$login."</b><br>Password: <b>".$clave."</b>";
+					PCO_EnviarCorreo("noreply@practico.org",$correo,$MULTILANG_Bienvenido." [$NombreRAD]",$cuerpo_mensaje);
+                    //Presenta mensaje final
+					echo "<br>";
+					mensaje($MULTILANG_Atencion, $MULTILANG_UsrFinRegistro, '', 'fa fa-fw fa-2x fa-info-circle', 'alert alert-success');
+					echo "<center>";
+					echo '<a class="btn btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-sign-in"></i> '.$MULTILANG_Ingresar.'</a>';
+				}
+			else
+				{
+					echo "<br>";
+					mensaje($MULTILANG_ErrorDatos, $mensaje_error, '', 'fa fa-fw fa-3x fa-exclamation-circle', 'alert alert-danger');
+					echo "<center>";
+					echo '<a class="btn btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> '.$MULTILANG_Cancelar.'</a>';
+				}
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+if ($PCO_Accion=="agregar_usuario_autoregistro")
+	{
+        /*
+            Function: agregar_usuario_autoregistro
+            Presenta el formulario base para la adicion de usuarios al sistema en modo de auto-registro
+
+            Salida de la funcion:
+                * Llamada al proceso <guardar_usuario_autoregistro> para almacenar la informacion correspondiente al nuevo usuario.
+
+            Ver tambien:
+                <listar_usuarios> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario> | <muestra_seguridad_clave> | <seguridad_clave>
+        */
+		echo "<br>";
+		abrir_ventana($MULTILANG_UsrAdicion, 'panel-info');
+        mensaje($MULTILANG_Importante,$MULTILANG_UsrDesClaveACorreo,'','fa fa-info-circle fa-5x texto-azul','alert alert-default alert-dismissible');
+
+?>
+
+		<!-- VALOR MD5 PARA VACIO:  d41d8cd98f00b204e9800998ecf8427e-->
+				<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
+					<input type="hidden" name="PCO_Accion" value="guardar_usuario_autoregistro">
+
+					<div class="row">
+						<div class="col-md-12">
+
+							<div class="form-group input-group">
+								<input name="login" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrLogin; ?>">
+								<span class="input-group-addon">
+									<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+									<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_UsrDesLogin; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+								</span>
+							</div>
+
+							<div class="form-group input-group">
+								<input name="nombre"  onkeypress="return validar_teclado(event, 'alfanumerico');" maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrNombre; ?>">
+								<span class="input-group-addon">
+									<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+								</span>
+							</div>
+
+							<div class="form-group input-group">
+								<span class="input-group-addon">
+									<i class="fa fa-envelope fa-fw "></i>
+								</span>
+								<input name="correo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Correo; ?>">
+								<span class="input-group-addon">
+									<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<b><?php echo $MULTILANG_UsrTitCorreo; ?></b><br><?php echo $MULTILANG_UsrDesCorreo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+								</span>
+							</div>
+
+
+						</div>
+
+					</div>
+
+                </form>
+
+            <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Registrarme; ?></a>
+            <br>
+            <a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> <?php echo $MULTILANG_Cancelar; ?></a>
+
+		 <?php
+            cerrar_ventana();
+			$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
+    }
+
+
+/* ################################################################## */
+/* ################################################################## */
 	if ($PCO_Accion=="guardar_usuario")
 		{
 			/*
@@ -1300,7 +1437,6 @@ if ($PCO_Accion=="permisos_usuario")
 		}
 
 
-
 /* ################################################################## */
 /* ################################################################## */
 if ($PCO_Accion=="agregar_usuario")
@@ -1364,7 +1500,7 @@ if ($PCO_Accion=="agregar_usuario")
 
 							<div class="form-group input-group">
 								<span class="input-group-addon">
-									<i class="fa fa-at fa-fw "></i>
+									<i class="fa fa-envelope fa-fw "></i>
 								</span>
 								<input name="correo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Correo; ?>">
 								<span class="input-group-addon">

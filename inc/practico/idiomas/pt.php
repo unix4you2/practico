@@ -52,6 +52,7 @@
 	$MULTILANG_Basedatos='Base de dados';
 	$MULTILANG_Basicos='B&aacute;sico';
     $MULTILANG_BarraHtas='Barra de ferramentas';
+    $MULTILANG_Bienvenido='Bem vindo';
     $MULTILANG_Buscar='Pesquisa';
 	$MULTILANG_Campo='Campo';
 	$MULTILANG_Cancelar='Cancelar';
@@ -973,6 +974,8 @@
     $MULTILANG_UsrPlantillaAplicar='Permissões de modelo para aplicar a cada entrada';
     $MULTILANG_UsrPlantillaAplicarDes='As permissões atribu&iacute;das ao usu&aacute;rio selecionado na lista que eles serão transferidos para este novo usu&aacute;rio cada um para fazer uma renda';
     $MULTILANG_UsrPermisoManual='Direitos manuais';
+    $MULTILANG_UsrDesClaveACorreo='Por favor verifique se a conta de e-mail está correto. Esta conta será verificada porque nessa conta, vamos enviar uma senha aleatória para acessar o sistema';
+    $MULTILANG_UsrFinRegistro='O seu processo de inscrição foi concluída com sucesso. Por favor, verifique sua caixa de entrada de correio onde você encontra uma mensagem de boas-vindas com uma senha aleatória para acessar o sistema <br>. Importante: Lembre-se de verificar a sua pasta de SPAM também, se você não vê nenhuma mensagem em sua caixa de entrada standar.';
 
 	//Proceso de instalacion
 	$MULTILANG_Instalacion='Processo de Instalação';
@@ -1064,6 +1067,12 @@
 	$MULTILANG_ConfGraficas='Alterar configurações gr&aacute;ficas';
 	$MULTILANG_UsuariosAdmin='Super usuários';
 	$MULTILANG_UsuariosAdminDes='Uma vírgula lista dos usuários que são os administradores da plataforma e designers de aplicativos separados. Se você deseja remover o usuário admin certifique-se de que você tem um outro super usuário ou você vai perder os direitos de administrador';
+	$MULTILANG_PermitirReseteoClave='permitem recuperar senhas';
+	$MULTILANG_DesPermitirReseteoClave='Coloca uma opção de recuperação de senha na janela de login que permitem aos usuários abrir um assistente de recuperação de senha. Esta opção está disponível apenas para o motor auth interna Practico.';
+	$MULTILANG_PermitirAutoRegistro='Permitir que os usuários auto inscrever-se no sistema';
+	$MULTILANG_DesPermitirAutoRegistro='Coloca uma opção de inscrição na janela de login que permitem aos usuários abrir um formulário para auto-registo no sistema. Esta opção está disponível apenas para o motor auth interna Practicos.';
+	$MULTILANG_UsuarioAutoRegistro='usuário do modelo de auto-inscrever';
+	$MULTILANG_DesUsuarioAutoRegistro='Diz que o usuário será usado para os direitos dos utilizadores de auto-registrados';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Erro';
