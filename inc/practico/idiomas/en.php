@@ -1073,6 +1073,7 @@
 	$MULTILANG_DesPermitirAutoRegistro='Puts a sign-up option in the login window that allow users to open a form to self register in the system.  This is available only for the Practicos internal auth engine.';
 	$MULTILANG_UsuarioAutoRegistro='Template user for self-sign up';
 	$MULTILANG_DesUsuarioAutoRegistro='Says which user will be used for the rights in the self-registered users';
+	$MULTILANG_NoRecomendado='Not recommended for security reasons';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';

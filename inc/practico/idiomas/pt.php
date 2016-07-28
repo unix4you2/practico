@@ -1073,6 +1073,7 @@
 	$MULTILANG_DesPermitirAutoRegistro='Coloca uma opção de inscrição na janela de login que permitem aos usuários abrir um formulário para auto-registo no sistema. Esta opção está disponível apenas para o motor auth interna Practicos.';
 	$MULTILANG_UsuarioAutoRegistro='usuário do modelo de auto-inscrever';
 	$MULTILANG_DesUsuarioAutoRegistro='Diz que o usuário será usado para os direitos dos utilizadores de auto-registrados';
+	$MULTILANG_NoRecomendado='Não recomendado por motivos de segurança';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Erro';

@@ -36,6 +36,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 * Added: Sistema de autoregistro en la plataforma permite ahora a los usuarios crear sus propias credenciales y verificarlas por correo
+* Added: Ahora se permite activar o desactivar el código captcha durante el login por medio del panel de configuración
 * Added: Panel de configuración de la herramienta ahora permite definir cuándo tener activos los enlaces de recuperar contraseña y auto-reistro cuando el motor de autenticación utilizado es el interno.
 * Added: Vagrantfile lista para su uso con Vagrant
 * Added: Modulo simulador de dispositivos moviles sobre /mod/pmobile puede ser llamado con el parametro URL (entre otros como Ancho y Alto) para simular su presentacion sobre un dispositivo movil.

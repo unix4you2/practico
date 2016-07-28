@@ -1073,6 +1073,7 @@
 	$MULTILANG_DesPermitirAutoRegistro='लॉगिन विंडो है कि उपयोगकर्ताओं प्रणाली में आत्म रजिस्टर करने के लिए एक प्रपत्र खोलने के लिए अनुमति में एक साइन-अप विकल्प डालता है। यह केवल Practicos आंतरिक प्रमाणीकरण इंजन के लिए उपलब्ध है।';
 	$MULTILANG_UsuarioAutoRegistro='के लिए खाका उपयोगकर्ता को आत्म हस्ताक्षर';
 	$MULTILANG_DesUsuarioAutoRegistro='कहते हैं जो उपयोगकर्ता आत्म-पंजीकृत उपयोगकर्ताओं में अधिकारों के लिए इस्तेमाल किया जाएगा';
+	$MULTILANG_NoRecomendado='सुरक्षा कारणों के लिए नहीं की सिफारिश की';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - त्रुटि';

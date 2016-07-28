@@ -167,6 +167,7 @@
 											<label for="CaracteresCaptchaNEW"><i class="fa fa-key fa-2x fa-fw"></i> <?php echo $MULTILANG_CaracteresCaptcha; ?>:</label>
 											<div class="form-group input-group">
 												<select id="CaracteresCaptchaNEW" name="CaracteresCaptchaNEW" class="selectpicker" >
+													<option value="0" <?php if ($CaracteresCaptcha=="0") echo "SELECTED"; ?> >0 (<?php echo $MULTILANG_Deshabilitado." - ".$MULTILANG_NoRecomendado; ?>)</option>
 													<option value="1" <?php if ($CaracteresCaptcha=="1") echo "SELECTED"; ?> >1</option>
 													<option value="2" <?php if ($CaracteresCaptcha=="2") echo "SELECTED"; ?> >2</option>
 													<option value="3" <?php if ($CaracteresCaptcha=="3") echo "SELECTED"; ?> >3</option>

@@ -2257,7 +2257,7 @@ function ventana_login()
 			Despliega la ventana de ingreso al sistema con el formulario para usuario, contrasena y captcha.
 		*/
 		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor;
-		  global $Auth_PermitirAutoRegistro,$Auth_PermitirResteoClaves;
+		  global $Auth_PermitirAutoRegistro,$Auth_PermitirReseteoClaves,$CaracteresCaptcha;
 		  global $MULTILANG_Cerrar,$MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes,$MULTILANG_Registrarme,$MULTILANG_OlvideClave;
 			// Variables para OAuth desde el archivo de configuracion
 			global $APIGoogle_ClientId,$APIGoogle_ClientSecret;
@@ -2384,14 +2384,24 @@ function ventana_login()
                                         <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
                                         <input name="clave" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
                                     </div>
-                                    <div class="form-group col-xs-12">
-                                        <?php echo $MULTILANG_CodigoSeguridad; ?>:
-                                        <img src="core/captcha.php">
-                                    </div>
-                                    <div class="form-group input-group input-group-sm">
-                                        <span class="input-group-addon"><i class="fa fa-hand-o-right fa-fw"></i></span>
-                                        <input type="text" name="captcha" maxlength=6 class="form-control"  placeholder="<?php echo $MULTILANG_IngreseCodigoSeguridad; ?>">
-                                    </div>
+                                    
+									<?php
+										//Presenta captcha si esta habilitado
+										if ($CaracteresCaptcha>0)
+											{
+									?>
+										<div class="form-group col-xs-12">
+											<?php echo $MULTILANG_CodigoSeguridad; ?>:
+											<img src="core/captcha.php">
+										</div>
+										<div class="form-group input-group input-group-sm">
+											<span class="input-group-addon"><i class="fa fa-hand-o-right fa-fw"></i></span>
+											<input type="text" name="captcha" maxlength=6 class="form-control"  placeholder="<?php echo $MULTILANG_IngreseCodigoSeguridad; ?>">
+										</div>
+										<?php
+												}
+										?>
+                                    
                                     <div class="form-group input-group input-group-sm col-xs-12">
                                         <a class="btn btn-success btn-block" href="javascript:document.login_usuario.submit();"><i class="fa fa-check-circle"></i> <?php echo $MULTILANG_Ingresar; ?></a>
                                     </div>
@@ -2437,7 +2447,7 @@ function ventana_login()
                                     <div class="col-md-6">
 										<?php
 											//Presenta opciones de recuperacion solamente cuando el motor de autenticacion sea practico
-											if ($Auth_TipoMotor=="practico" && $Auth_PermitirResteoClaves==1)
+											if ($Auth_TipoMotor=="practico" && $Auth_PermitirReseteoClaves==1)
 												{
 										?>
 													<form name="recuperacion" id="recuperacion" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">

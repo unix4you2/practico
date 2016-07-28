@@ -1072,6 +1072,7 @@
 	$MULTILANG_DesPermitirAutoRegistro='Presenta una opcion en la ventana de acceso al sistema que permite a los nuevos usuarios hacer su registro de manera autonoma.  Unicamente cuando el motor de autenticacion utilizado es el interno de Practico.';
 	$MULTILANG_UsuarioAutoRegistro='Usuario plantilla auto-registros';
 	$MULTILANG_DesUsuarioAutoRegistro='Determina el usuario plantilla utilizado para inicializar los permisos a los usuarios que hacen un auto-registro en el sistema';
+	$MULTILANG_NoRecomendado='No recomendado por seguridad';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';
