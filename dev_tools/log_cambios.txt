@@ -40,7 +40,7 @@ LogCambios="
 * Added: Panel de configuración de la herramienta ahora permite definir cuándo tener activos los enlaces de recuperar contraseña y auto-reistro cuando el motor de autenticación utilizado es el interno.
 * Added: Vagrantfile lista para su uso con Vagrant
 * Added: Modulo simulador de dispositivos moviles sobre /mod/pmobile puede ser llamado con el parametro URL (entre otros como Ancho y Alto) para simular su presentacion sobre un dispositivo movil.
-
+* Fixed: Imagen de logo social inexistente es retirada de la ventana de login. Mejorada maquetación.
 "
 
 ########################################################################
