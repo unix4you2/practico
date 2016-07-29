@@ -2256,7 +2256,7 @@ function ventana_login()
 			Function: ventana_login
 			Despliega la ventana de ingreso al sistema con el formulario para usuario, contrasena y captcha.
 		*/
-		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor;
+		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor,$MULTILANG_OauthButt;
 		  global $Auth_PermitirAutoRegistro,$Auth_PermitirReseteoClaves,$CaracteresCaptcha;
 		  global $MULTILANG_Cerrar,$MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes,$MULTILANG_Registrarme,$MULTILANG_OlvideClave;
 			// Variables para OAuth desde el archivo de configuracion
@@ -2294,11 +2294,9 @@ function ventana_login()
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-body mdl-primary">
-                        <div align=center>
-                            <img name="img_login" id="img_login" src="img/practico_social.png" alt="" border="0">
-                        </div>
+
                         <?php
-                            mensaje("",$MULTILANG_LoginOauthDes,'','fa fa-info-circle fa-3x text-info','alert alert-info');
+                            mensaje($MULTILANG_OauthButt,$MULTILANG_LoginOauthDes,'','fa fa-info-circle fa-3x text-info','alert alert-info');
                         ?>
 
                         <table class="table">
@@ -2315,7 +2313,7 @@ function ventana_login()
                                                     <input type="hidden" name="PCO_WSOn" value="1">
                                                     <input type="hidden" name="OAuthSrv" value="'.$sitio.'">
                                                     <input type="hidden" name="PCO_WSId" value="autenticacion_oauth">
-                                                    <input type="image" src="inc/oauth/logos/'.strtolower($sitio).'.png" border=0 width=81 height=30 style="background:#FFFFFF;"> <!--94x35|81x30-->
+                                                    <input type="image" src="inc/oauth/logos/'.strtolower($sitio).'.png" border=0 width=94 height=35 style="background:#FFFFFF;"> <!--94x35|81x30-->
                                                     </form>&nbsp;&nbsp;';
                                                 // Retorna valor de activacion a variable AlMenosUnOAuth
                                                 return 1;
@@ -2345,7 +2343,6 @@ function ventana_login()
                                         if ($APIVK_ClientId!=''				&& $APIVK_ClientSecret!='')				$AlMenosUnOAuth+=CreaFormOauth('VK');
                                         if ($APIWithings_ClientId!=''		&& $APIWithings_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Withings');
                                     ?>
-                                    <hr>
                                 </td></tr>
                         </table>
 
@@ -2433,6 +2430,7 @@ function ventana_login()
 											if ($Auth_TipoMotor=="practico" && $Auth_PermitirAutoRegistro==1)
 												{
 										?>
+													<br>
 													<form name="auto_registro" id="auto_registro" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 													<input type="Hidden" name="PCO_Accion" value="agregar_usuario_autoregistro">
 													</form>
@@ -2450,6 +2448,7 @@ function ventana_login()
 											if ($Auth_TipoMotor=="practico" && $Auth_PermitirReseteoClaves==1)
 												{
 										?>
+													<br>
 													<form name="recuperacion" id="recuperacion" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 													<input type="Hidden" name="PCO_Accion" value="recuperar_contrasena">
 													<input type="Hidden" name="PCO_SubAccion" value="formulario_recuperacion">
