@@ -2256,7 +2256,7 @@ function ventana_login()
 			Function: ventana_login
 			Despliega la ventana de ingreso al sistema con el formulario para usuario, contrasena y captcha.
 		*/
-		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor,$MULTILANG_OauthButt;
+		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor,$MULTILANG_OauthButt,$NombreRAD;
 		  global $Auth_PermitirAutoRegistro,$Auth_PermitirReseteoClaves,$CaracteresCaptcha;
 		  global $MULTILANG_Cerrar,$MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes,$MULTILANG_Registrarme,$MULTILANG_OlvideClave;
 			// Variables para OAuth desde el archivo de configuracion
@@ -2349,7 +2349,7 @@ function ventana_login()
                       </div>
                       <div class="modal-footer">
                         <button class="btn btn-info" type="button" data-dismiss="modal">
-                            <?php echo $MULTILANG_LoginClasico; ?>
+                            <?php echo $MULTILANG_LoginClasico; ?> <?php echo $NombreRAD; ?>  
                             {<i class="fa fa-paypal"></i>}
                         </button>
                         <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>

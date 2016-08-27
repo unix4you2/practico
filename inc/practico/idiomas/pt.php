@@ -197,7 +197,7 @@
 	$MULTILANG_LoginNoWSTit='Erro ao tentar carregar o webservice autenticação';
 	$MULTILANG_LoginNoWSDes='Os file_get_contents () função não pode carregar o arquivo XML de sa&iacute;da constru&iacute;do pelo processo de autenticação Practico.<br>  Verifique se o seu servidor web de configuração / instalação para ver que este funtion pode funciona corretamente e sem restrições.<br>  Uma maneira de verificar que processo Practicos &eacute; bom, mas o servidor não permite que para carregar o arquivo XML<br>est&aacute; abrindo o seguinte link e verificar se o seu navegador carrega o XML corretamente. Ativando o modo de depuração em seus Practicos config você pode ver mais detalhes: ';
 	$MULTILANG_OauthLogin='Entre usando minha rede social';
-	$MULTILANG_LoginClasico='Entrar com conta Practicos';
+	$MULTILANG_LoginClasico='Entrar com conta';
 	$MULTILANG_LoginOauthDes='<b>Redes sociais e outros provedores de autenticação dispon&iacute;veis</b><br>Clique sobre o logotipo de login usando o nome de usu&aacute;rio ea senha de seu site favorito.';
 
 	//Banderas de campos en formularios

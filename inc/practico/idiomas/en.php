@@ -197,7 +197,7 @@
 	$MULTILANG_LoginNoWSTit='Error trying to load the authentication webservice';
 	$MULTILANG_LoginNoWSDes='The file_get_contents() function can not to load the XML output file built by Practico authentication process.<br>  Check your web server configuration/installation to see that this funtion can works correctly and without restrictions.<br>  A way to check that Practicos process is fine but your server doesnt allow to load the XML file<br>is opening the next link and checking if your browser loads the XML correctly.  Activating debug mode on your Practicos config you could see more details: ';
 	$MULTILANG_OauthLogin='Login using my social network';
-	$MULTILANG_LoginClasico='Login with Practicos account';
+	$MULTILANG_LoginClasico='Login with my account of ';
 	$MULTILANG_LoginOauthDes='Click over the logo of your favorite social network or provider to login using the same username and password.';
 
 	//Banderas de campos en formularios
