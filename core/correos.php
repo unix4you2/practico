@@ -93,6 +93,29 @@
 		</html>'; 
 
 
+
+
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+Configuraciones de provvedor favorito para envio de correos
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -116,17 +139,76 @@
 */
 function PCO_EnviarCorreo($remitente,$destinatario,$asunto,$cuerpo_mensaje,$destinatario_cc="",$destinatario_bcc="")
 	{
-		global $texto_prefijo_correo,$texto_posfijo_correo,$NombreRAD;
-		//para el envío en formato HTML
-		$headers = "MIME-Version: 1.0\n";
-		$headers .= "Content-type: text/html; charset=iso-8859-1\n";
-		$headers .= "From: ".$NombreRAD." <".$remitente.">\n";
-		$headers .= "Reply-To: ".$remitente."\n";
-		$headers .= "Return-path: ".$remitente."\n";
-		$headers .= $destinatario_cc;
-		$headers .= $destinatario_bcc;
-		$mensaje_final=$texto_prefijo_correo.$cuerpo_mensaje.$texto_posfijo_correo;
-		$estado_envio = mail($destinatario,$asunto,$mensaje_final,$headers);
+		global $texto_prefijo_correo,$texto_posfijo_correo,$NombreRAD,$PCOVAR_ProvedorSMTP,$MULTILANG_Usuario;
+		
+		//Usa el proveedor interno del servidor:  Sendmail, Postfix, etc.
+		if ($PCOVAR_ProvedorSMTP=="Interno")
+			{
+				//para el envío en formato HTML
+				$headers = "MIME-Version: 1.0\n";
+				$headers .= "Content-type: text/html; charset=iso-8859-1\n";
+				$headers .= "From: ".$NombreRAD." <".$remitente.">\n";
+				$headers .= "Reply-To: ".$remitente."\n";
+				$headers .= "Return-path: ".$remitente."\n";
+				$headers .= $destinatario_cc;
+				$headers .= $destinatario_bcc;
+				$mensaje_final=$texto_prefijo_correo.$cuerpo_mensaje.$texto_posfijo_correo;
+				$estado_envio = mail($destinatario,$asunto,$mensaje_final,$headers);
+			}
+
+		//Usa proveedor externo de correo
+		if ($PCOVAR_ProvedorSMTP=="SendGrid")
+			{
+				
+				$PCOVAR_APIKeySendGrid="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";
+				//Pendiente:  parametrizar el envio de mensajes de solo texto si se desea.
+
+				// REVISAR ESTE COMPOSER require 'vendor/autoload.php';
+				Dotenv::load(__DIR__);
+				$sendgrid_apikey = getenv($PCOVAR_APIKeySendGrid);
+				$sendgrid = new SendGrid($sendgrid_apikey);
+				$url = 'https://api.sendgrid.com/';
+				$pass = $sendgrid_apikey;
+				$template_id = '<your_template_id>';
+				$js = array(
+				  'sub' => array(':name' => array('Elmer')),
+				  'filters' => array('templates' => array('settings' => array('enable' => 1, 'template_id' => $template_id)))
+				);
+
+				$params = array(
+					'to'        => $destinatario,
+					'toname'    => $MULTILANG_Usuario." - ".$NombreRAD,
+					'from'      => $remitente,
+					'fromname'  => $NombreRAD,
+					'subject'   => $asunto,
+					'text'      => "I'm text!",
+					'html'      => $cuerpo_mensaje,
+					'x-smtpapi' => json_encode($js),
+				  );
+
+				$request =  $url.'api/mail.send.json';
+
+				// Generate curl request
+				$session = curl_init($request);
+				// Tell PHP not to use SSLv3 (instead opting for TLS)
+				curl_setopt($session, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
+				curl_setopt($session, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $sendgrid_apikey));
+				// Tell curl to use HTTP POST
+				curl_setopt ($session, CURLOPT_POST, true);
+				// Tell curl that this is the body of the POST
+				curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
+				// Tell curl not to return headers, but do return the response
+				curl_setopt($session, CURLOPT_HEADER, false);
+				curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+
+				// obtain response
+				$response = curl_exec($session);
+				curl_close($session);
+
+				// print everything out
+				print_r($response);
+
+			}
 		return $estado_envio;
 	}
 

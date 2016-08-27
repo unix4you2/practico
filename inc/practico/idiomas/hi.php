@@ -565,7 +565,10 @@
                 <li><u>data-max-options=#</u> तत्वों की अधिकतम चयनित.
                 <li><u>data-size=auto|#</u> आइटम की सूची में पता चला रहे हैं कितने पंक्तियाँ.</li>
                 <li><u>data-style=btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u> ग्राफिक शैली
-                <li><u>disabled</u> नियंत्रण अक्षम</li>';
+                <li><u>disabled</u> नियंत्रण अक्षम</li>
+                <BR>
+                <b>Botones (command button):</b>
+                <li><u>btn-group btn-group-justified</u> Expande control al ancho del contenedor.</li>';
     $MULTILANG_FrmBtnFull='फुल स्क्रीन में लोड';
     $MULTILANG_FrmBtnObjetivo='एचटीएमएल लक्ष्य';
     $MULTILANG_FrmActualizaAjax='गतिशील पुनः लोड';

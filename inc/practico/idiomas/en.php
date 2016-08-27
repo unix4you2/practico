@@ -565,7 +565,10 @@
                 <li><u>data-max-options=#</u> Maximum of elements selected.
                 <li><u>data-size=auto|#</u> How many rows are showed in the item list.</li>
                 <li><u>data-style=btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u> Graphic style
-                <li><u>disabled</u> Disables the control</li>';
+                <li><u>disabled</u> Disables the control</li>
+                <BR>
+                <b>Buttons (command button):</b>
+                <li><u>btn-group btn-group-justified</u> Expand the button to its containers width.</li>';
     $MULTILANG_FrmBtnFull='Load in FullScreen';
     $MULTILANG_FrmBtnObjetivo='HTML Target';
     $MULTILANG_FrmActualizaAjax='Dynamic reload';
