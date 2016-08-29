@@ -151,6 +151,7 @@ CREATE TABLE core_formulario_objeto (
   valor_check_activo varchar(250) DEFAULT '',
   valor_check_inactivo varchar(250) DEFAULT '',
   valor_placeholder varchar(255) DEFAULT '',
+  ocultar_etiqueta integer DEFAULT 0,
   PRIMARY KEY  (id)
 );
 

@@ -2843,7 +2843,7 @@ function selector_iconos_awesome()
 				}
 
             //Agrega etiqueta del campo si es diferente de vacio
-			if ($registro_campos["titulo"]!="")
+			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
                 $salida.='<label id="PCOEtiqueta_'.$registro_campos["campo"].'" for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
 			//Abre el marco del control de datos style="display:inline;"
 			$salida.='<div class="form-group input-group '.$cadena_clase_datepicker.'" '.$cadena_ID_datepicker.'>';
@@ -2987,7 +2987,7 @@ function selector_iconos_awesome()
 			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
             //Agrega etiqueta del campo si es diferente de vacio
-			if ($registro_campos["titulo"]!="")
+			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
                 $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
@@ -3242,7 +3242,7 @@ function selector_iconos_awesome()
 				$cadena_altura='size='.$registro_campos["alto"];
 
             //Agrega etiqueta del campo si es diferente de vacio
-			if ($registro_campos["titulo"]!="")
+			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
                 $salida.='<label id="PCOEtiqueta_'.$registro_campos["campo"].'" for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
 
 			//Abre el marco del control de datos
@@ -3543,8 +3543,9 @@ function selector_iconos_awesome()
 			//$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor.'" >';
 
             //Agrega marco bootstrap antes de devolver contenidos
-            $salida='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>'.
-            '<div id="'.$registro_campos["campo"].'">'.$salida.'</div>';
+			if ($registro_campos["ocultar_etiqueta"]=="0")
+				$salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+            $salida.='<div id="'.$registro_campos["campo"].'">'.$salida.'</div>';
 			return $salida;
 		}
 
@@ -3696,7 +3697,7 @@ $('#SampleElement').load('YourURL');
 
 
             //Agrega etiqueta del campo si es diferente de vacio
-			if ($registro_campos["titulo"]!="")
+			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
                 $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
@@ -3838,7 +3839,7 @@ $('#SampleElement').load('YourURL');
 			$cadena_valor=' data-slider-value="'.$valor_de_campo.'" value="'.$valor_de_campo.'" ';
 
             //Agrega etiqueta del campo si es diferente de vacio
-			if ($registro_campos["titulo"]!="")
+			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
                 $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
@@ -3933,7 +3934,7 @@ $('#SampleElement').load('YourURL');
 				$salida.='<a target="_BLANK" href="'.$adjunto_url_archivo.'"><i class="fa fa-search"></i><b>'.$MULTILANG_FrmArchivoLink.'</b><i class="fa fa-floppy-o fa-fw"></i></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>('.$MULTILANG_Tipo.': '.$adjunto_tipo_archivo.')</i><br>';
 
             //Agrega etiqueta del campo si es diferente de vacio
-			if ($registro_campos["titulo"]!="")
+			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
                 $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
@@ -4003,7 +4004,7 @@ $('#SampleElement').load('YourURL');
 				}
 
             //Agrega etiqueta del campo si es diferente de vacio
-			if ($registro_campos["titulo"]!="")
+			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
                 $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
@@ -4130,7 +4131,7 @@ $('#SampleElement').load('YourURL');
 			// Muestra el campo
 			$escala_reduccion=1;
             //Agrega etiqueta del campo si es diferente de vacio
-			if ($registro_campos["titulo"]!="")
+			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
                 $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';

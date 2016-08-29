@@ -750,23 +750,23 @@ if ($PCO_Accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(44);
+					OcultarCampos(45);
 					// Muestra campos segun tipo de objeto
-					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,14,17,25,36,37,44");
-					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25,36,37,44");
-					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17,36,37,44");
+					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,14,17,25,36,37,44,45");
+					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25,36,37,44,45");
+					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17,36,37,44,45");
 					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17,36,37");
-					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,12,15,17,18,19,20,35,36,37");
-					if (tipo_objeto_activo=="lista_radio") VisualizarCampos("1,2,7,8,9,10,17,18,19,20,35,36,37");
+					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,12,15,17,18,19,20,35,36,37,45");
+					if (tipo_objeto_activo=="lista_radio") VisualizarCampos("1,2,7,8,9,10,17,18,19,20,35,36,37,45");
 					if (tipo_objeto_activo=="casilla_check") VisualizarCampos("1,2,4,9,17,36,42");
 					if (tipo_objeto_activo=="etiqueta")   VisualizarCampos("9,17,21,36");
 					if (tipo_objeto_activo=="url_iframe")   VisualizarCampos("9,14,15,17,22,24,36,37");
 					if (tipo_objeto_activo=="informe")   VisualizarCampos("9,17,23,24,36");
-					if (tipo_objeto_activo=="deslizador")   VisualizarCampos("1,2,4,7,8,9,17,26,36,37");
-					if (tipo_objeto_activo=="campo_etiqueta")   VisualizarCampos("1,2,4,9,17,14,15,27,36");
-					if (tipo_objeto_activo=="archivo_adjunto")   VisualizarCampos("1,2,7,8,9,17,28,29,36,37");
-					if (tipo_objeto_activo=="objeto_canvas")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,30,31,36");
-					if (tipo_objeto_activo=="objeto_camara")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,31,36");
+					if (tipo_objeto_activo=="deslizador")   VisualizarCampos("1,2,4,7,8,9,17,26,36,37,45");
+					if (tipo_objeto_activo=="campo_etiqueta")   VisualizarCampos("1,2,4,9,17,14,15,27,36,45");
+					if (tipo_objeto_activo=="archivo_adjunto")   VisualizarCampos("1,2,7,8,9,17,28,29,36,37,45");
+					if (tipo_objeto_activo=="objeto_canvas")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,30,31,36,45");
+					if (tipo_objeto_activo=="objeto_camara")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,31,36,45");
                     if (tipo_objeto_activo=="form_consulta")   VisualizarCampos("9,17,24,32,33,34,36");
                     if (tipo_objeto_activo=="boton_comando")   VisualizarCampos("1,9,36,37,38,39,40,41,43");
 					if (tipo_objeto_activo=="area_responsive") VisualizarCampos("1,2,6,9,15,16,17,36");
@@ -850,6 +850,16 @@ if ($PCO_Accion=="editar_formulario")
                                     <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesTitulo; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
+						</div>
+
+						<div id='campo45' style="display:none;">
+							<label for="ocultar_etiqueta"><?php echo $MULTILANG_FrmOcultarEtiqueta; ?>:</label>
+							<div class="form-group input-group">
+								<select id="ocultar_etiqueta" name="ocultar_etiqueta" class="form-control input-sm" >
+									<option value="1" <?php if (@$registro_campo_editar["ocultar_etiqueta"]==1) echo 'SELECTED'; ?>><?php echo $MULTILANG_Si; ?></option>
+									<option value="0" <?php if (@$registro_campo_editar["ocultar_etiqueta"]==0) echo 'SELECTED'; ?>><?php echo $MULTILANG_No; ?></option>
+								</select>
+							</div>
 						</div>
 
 						<div id='campo2' style="display:none;">

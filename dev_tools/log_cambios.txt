@@ -44,12 +44,14 @@ LogCambios="
 * Fixed: Imagen de logo social inexistente es retirada de la ventana de login. Mejorada maquetación.
 * Enhan: Ahora la etiqueta de boton de inicio con sesion de Práctico contiene el nombre de la aplicación configurada por el usuario.
 * Added: Ahora los campos de tipo texto, texto largo y tipo contraseñas soportan el uso de etiquetas placeholder desde el diseño del formulario
+* Added: Ahora los campos pueden especificar si se desea o no presentar la etiqueta o label sobre el formulario
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
 ALTER TABLE core_formulario_objeto ADD valor_placeholder varchar(255) DEFAULT '';
+ALTER TABLE core_formulario_objeto ADD ocultar_etiqueta int(1) DEFAULT 0;
 
 "
 
