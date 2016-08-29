@@ -150,6 +150,7 @@ CREATE TABLE core_formulario_objeto (
   accion_usuario text,
   valor_check_activo varchar(250) DEFAULT '',
   valor_check_inactivo varchar(250) DEFAULT '',
+  valor_placeholder varchar(255) DEFAULT '',
   PRIMARY KEY  (id)
 );
 

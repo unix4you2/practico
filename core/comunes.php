@@ -2753,6 +2753,11 @@ function selector_iconos_awesome()
 			if ($registro_campos["maxima_longitud"]!=0)
 				$cadena_longitud_permitida=' maxlength="'.$registro_campos["maxima_longitud"].'" ';
 
+			// Especifica textos de placeholder si existen
+			$cadena_placeholder='';
+			if ($registro_campos["valor_placeholder"]!="")
+				$cadena_placeholder=' placeholder="'.$registro_campos["valor_placeholder"].'" ';
+
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
 			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
@@ -2843,7 +2848,7 @@ function selector_iconos_awesome()
 			//Abre el marco del control de datos style="display:inline;"
 			$salida.='<div class="form-group input-group '.$cadena_clase_datepicker.'" '.$cadena_ID_datepicker.'>';
             // Muestra el campo
-			$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control " '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$cadena_complementaria_datepicker.'  '.$registro_campos["personalizacion_tag"].'  >';
+			$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control " '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$cadena_complementaria_datepicker.'  '.$registro_campos["personalizacion_tag"].' '.$cadena_placeholder.' >';
 
 			// Muestra boton de busqueda cuando el campo sea usado para esto
 			if ($registro_campos["etiqueta_busqueda"]!="")
@@ -2960,6 +2965,11 @@ function selector_iconos_awesome()
 			$cadena_alto_visual=' rows="'.$registro_campos["alto"].'" ';
 			$cadena_longitud_visual=$cadena_ancho_visual.$cadena_alto_visual;
 
+			// Especifica textos de placeholder si existen
+			$cadena_placeholder='';
+			if ($registro_campos["valor_placeholder"]!="")
+				$cadena_placeholder=' placeholder="'.$registro_campos["valor_placeholder"].'" ';
+
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
 			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=$registro_campos["valor_predeterminado"];
@@ -2982,7 +2992,7 @@ function selector_iconos_awesome()
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.= '<textarea id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="form-control" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].'  >'.$cadena_valor.'</textarea>';
+			$salida.= '<textarea id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="form-control" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' '.$cadena_placeholder.' >'.$cadena_valor.'</textarea>';
 			//Si hay algun indicador adicional del campo abre los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '<span class="input-group-addon">';

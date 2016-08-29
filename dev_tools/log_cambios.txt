@@ -16,6 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/formularios.php
 core/marco_conf.php
 core/objetos.php
 core/usuarios.php
@@ -42,11 +43,13 @@ LogCambios="
 * Added: Modulo simulador de dispositivos moviles sobre /mod/pmobile puede ser llamado con el parametro URL (entre otros como Ancho y Alto) para simular su presentacion sobre un dispositivo movil.
 * Fixed: Imagen de logo social inexistente es retirada de la ventana de login. Mejorada maquetación.
 * Enhan: Ahora la etiqueta de boton de inicio con sesion de Práctico contiene el nombre de la aplicación configurada por el usuario.
+* Added: Ahora los campos de tipo texto, texto largo y tipo contraseñas soportan el uso de etiquetas placeholder desde el diseño del formulario
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
+ALTER TABLE core_formulario_objeto ADD valor_placeholder varchar(255) DEFAULT '';
 
 "
 

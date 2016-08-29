@@ -750,11 +750,11 @@ if ($PCO_Accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(43);
+					OcultarCampos(44);
 					// Muestra campos segun tipo de objeto
-					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,14,17,25,36,37");
-					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25,36,37");
-					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17,36,37");
+					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,14,17,25,36,37,44");
+					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25,36,37,44");
+					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,6,7,8,9,10,14,15,17,36,37,44");
 					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17,36,37");
 					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,12,15,17,18,19,20,35,36,37");
 					if (tipo_objeto_activo=="lista_radio") VisualizarCampos("1,2,7,8,9,10,17,18,19,20,35,36,37");
@@ -897,6 +897,15 @@ if ($PCO_Accion=="editar_formulario")
                                 <input type="text" name="valor_predeterminado" class="form-control input-sm" value="<?php echo @$registro_campo_editar["valor_predeterminado"]; ?>" placeholder="<?php echo $MULTILANG_FrmPredeterminado; ?>">
                                 <span class="input-group-addon">
                                     <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesPredeterminado; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
+                            </div>
+						</div>
+
+						<div id='campo44' style="display:none;">
+                            <div class="form-group input-group">
+                                <input type="text" name="valor_placeholder" class="form-control input-sm" value="<?php echo @$registro_campo_editar["valor_placeholder"]; ?>" placeholder="<?php echo $MULTILANG_FrmTextoPlaceHolder; ?>">
+                                <span class="input-group-addon">
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesPlaceHolder; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>

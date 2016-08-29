@@ -594,7 +594,10 @@
 	$MULTILANG_FrmEstiloTabs='टैब्स (nav-tab)';
 	$MULTILANG_FrmEstiloPills='बटन (nav-pills)';
 	$MULTILANG_FrmEstiloOculto='छिपा हुआ';
-	
+	$MULTILANG_FrmTextoPlaceHolder='प्लेसहोल्डर पाठ';
+	$MULTILANG_FrmDesPlaceHolder='एक पाठ क्षेत्र में दिखाने के लिए जब यह एक मूल्य है कि उपयोगकर्ताओं को मदद पता है कि वहाँ क्या प्रवेश करना चाहिए नहीं है';
+	$MULTILANG_FrmOcultarEtiqueta='फार्म में क्षेत्र लेबल छुपाएं';
+
 	//Informes
 	$MULTILANG_InfErr1='आप कम से कम एक डेटा श्रृंखला के लिए इसी क्षेत्रों के लिए मूल्यों को निर्दिष्ट करना होगा। यदि आप एक ग्राफ उत्पन्न करने के लिए चाहते हैं न तो हिन्दी तो आप डेटा तालिका करने के लिए रिपोर्ट प्रकार में परिवर्तन करना होगा';
 	$MULTILANG_InfErr2='आप रिपोर्ट के लिए एक वैध शीर्षक दर्ज करना होगा.';

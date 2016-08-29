@@ -594,7 +594,10 @@
 	$MULTILANG_FrmEstiloTabs='Tabs (nav-tab)';
 	$MULTILANG_FrmEstiloPills='Buttons (nav-pills)';
 	$MULTILANG_FrmEstiloOculto='Hidden';
-	
+	$MULTILANG_FrmTextoPlaceHolder='Placeholder text';
+	$MULTILANG_FrmDesPlaceHolder='A text to show in the field when this doesnt have a value that help users to know what should enter there';
+	$MULTILANG_FrmOcultarEtiqueta='Hide the field label in the form';
+
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';
 	$MULTILANG_InfErr2='You must enter a valid title for the report.';
