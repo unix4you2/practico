@@ -3486,6 +3486,7 @@ function selector_iconos_awesome()
 	function cargar_objeto_campoetiqueta($registro_campos,$registro_datos_formulario)
 		{
 			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
+			$salida="";
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
 			$Contenido_BARRAS='';
@@ -3536,7 +3537,7 @@ function selector_iconos_awesome()
 						$cadena_valor=CodigoQR($Contenido_BARRAS);
 				}
 
-			$salida=$cadena_valor;
+			//$salida=$cadena_valor;
 			//Agrega ademas el valor como hidden para disponer de el cuando se requiera en otro llamado o funcion personalizada
 			$tipo_entrada="hidden";
 			// Muestra el campo
@@ -3544,8 +3545,8 @@ function selector_iconos_awesome()
 
             //Agrega marco bootstrap antes de devolver contenidos
 			if ($registro_campos["ocultar_etiqueta"]=="0")
-				$salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
-            $salida.='<div id="'.$registro_campos["campo"].'">'.$salida.'</div>';
+				$salida='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+            $salida.='<div id="'.$registro_campos["campo"].'">'.$cadena_valor.'</div>';
 			return $salida;
 		}
 
