@@ -45,6 +45,8 @@ LogCambios="
 * Enhan: Ahora la etiqueta de boton de inicio con sesion de Práctico contiene el nombre de la aplicación configurada por el usuario.
 * Added: Ahora los campos de tipo texto, texto largo y tipo contraseñas soportan el uso de etiquetas placeholder desde el diseño del formulario
 * Added: Ahora los campos pueden especificar si se desea o no presentar la etiqueta o label sobre el formulario
+* Added: Los objetos tipo boton de comando en formularios ahora pueden agregar su propio ID de html usando la propiedad oculta de campo de base de datos
+
 "
 
 ########################################################################

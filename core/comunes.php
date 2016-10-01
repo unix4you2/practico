@@ -4285,11 +4285,16 @@ $('#SampleElement').load('YourURL');
 					$cadena_confirmacion_accion_pos=" } else {} ";
 				}
 
+            //Genera cadena par el identificador del elemento usando el campo "campo". Normalmente oculto
+            $cadena_identificador='';
+            if ($registro_campos["campo"]!="")
+                $cadena_identificador='id="'.$registro_campos["campo"].'"';
+
             //Genera la cadena del enlace
             $cadena_javascript='href="javascript:  '.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.'  "';
 
             //Abre el marco del control de datos style="display:inline;"
-			$salida.='<div style="'.$cadena_modo_inline.'" class="form-group input-group">';
+			$salida.='<div '.$cadena_identificador.' style="'.$cadena_modo_inline.'" class="form-group input-group">';
             // Muestra el campo
 			$salida.='<a class="btn '.$registro_campos["personalizacion_tag"].'" '.@$cadena_javascript.'><i class="'.$registro_campos["imagen"].'"></i> '.$registro_campos["titulo"].'</a>';
             //Cierra marco del control de datos
