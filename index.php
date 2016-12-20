@@ -48,7 +48,7 @@
     
     // Inicio de la sesion
     @session_start();
-
+ 
     //Determina si es un primer inicio o no hay configuracion
     if (!file_exists("core/configuracion.php")) {
             header("Location: ins/");
@@ -191,7 +191,7 @@
                 }
         }
 
-/*
+
     // Prueba que todas las extensiones requeridas se encuentren habilitadas
     verificar_extensiones();
 
@@ -217,7 +217,8 @@
 	if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCOSESS_SesionAbierta && $PCO_Accion=="Ver_menu") {
         include_once("core/marco_admin.php");
     }
-*/
+
+
 /* ################################################################## */
     // Cuando no se tiene ninguna accion para procesar se carga la pagina de inicio de sesion
     if ($PCO_Accion=="" && $PCOSESS_SesionAbierta==0) ventana_login();

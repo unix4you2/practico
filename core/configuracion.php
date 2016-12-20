@@ -73,7 +73,7 @@
 	$TablasCore='core_';  // Cuidado al cambiar: Prefijo de Tablas base para uso de Practico
 	$TablasApp='app_';  // Cuidado al cambiar: Prefijo para Tablas de datos definidas por el usuario
 	$LlaveDePaso='H76T9QFT7P';  // Valor unico para firmar los usuarios del aplicativo.  No debe ser cambiado despues de puesto en marcha a menos que se haga un update manual el usuario que no coincida con la llave no podra ingresar.
-	$ModoDepuracion=1;
+	$ModoDepuracion=0;
 	$BuscarActualizaciones=0;
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='es';

@@ -89,7 +89,6 @@
 			$webservice_validacion = $protocolo_webservice.$prefijo_webservice."?PCO_WSOn=1&PCO_WSKey=".$LlaveDePaso."&PCO_WSSecret=".$LlaveDePaso."&PCO_WSId=verificar_credenciales&uid=".$uid."&clave=".$clave;
 			// Carga el contenido en una variable para validar la conexion
 			$contenido_url = @cargar_url($webservice_validacion);
-
 			// Valida si se logro cargar o no el contenido
 			if ($contenido_url!="")
 				{
@@ -108,6 +107,7 @@
 			$clave_correcta=0;
 			if ($clave!="" && $ok_login==1 && $ok_captcha==1)
 				  {
+
 						// Busca datos del usuario Practico, sin importar metodo de autenticacion para tener configuraciones de permisos y parametros propios de la herramienta
 						$resultado_usuario=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login='$uid'");
 						$registro = $resultado_usuario->fetch();
