@@ -60,5 +60,5 @@
 			$ConexExtra_puertobd=$registro["puertobd"];
 			$ConexExtra_tipo_replica=$registro["tipo_replica"];
 			//Genera la variable de conexion
-			$$ConexExtra_nombre=PCO_NuevaConexionBD($ConexExtra_motorbd,$ConexExtra_puertobd,$ConexExtra_basedatos,$ConexExtra_servidorbd,$ConexExtra_usuariobd,$ConexExtra_passwordbd);
+			${$ConexExtra_nombre}=PCO_NuevaConexionBD($ConexExtra_motorbd,$ConexExtra_puertobd,$ConexExtra_basedatos,$ConexExtra_servidorbd,$ConexExtra_usuariobd,$ConexExtra_passwordbd);
 		}

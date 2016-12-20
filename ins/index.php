@@ -38,7 +38,7 @@
 		// crea las variables y les asigna el valor
 		for($i=0;$i<$PCO_NumeroParametros;$i++)
 			{
-				$$PCO_NombresParametros[$i]=$PCO_ValoresParametros[$i];
+				${$PCO_NombresParametros[$i]}=$PCO_ValoresParametros[$i];
 			}
 		// Agrega ademas las variables de sesion
 		if (!empty($_SESSION)) extract($_SESSION);
@@ -50,7 +50,7 @@
 	function split_sql($sql)
 		{
 			$sql = trim($sql);
-			$sql = ereg_replace("\n#[^\n]*\n", "\n", $sql);
+			$sql = preg_replace("/\n#[^\n]*\n/", "\n", $sql);
 
 			$buffer = array();
 			$ret = array();

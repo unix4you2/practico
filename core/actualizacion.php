@@ -379,7 +379,7 @@ if ($PCO_Accion=="aplicar_parche")
 		function split_sql($sql)
 			{
 				$sql = trim($sql);
-				$sql = ereg_replace("\n#[^\n]*\n", "\n", $sql);
+				$sql = preg_replace("/\n#[^\n]*\n/", "\n", $sql);
 
 				$buffer = array();
 				$ret = array();

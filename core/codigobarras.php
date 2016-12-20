@@ -29,7 +29,7 @@
 		// crea las variables y les asigna el valor
 		for($i=0;$i<$numero;$i++)
 			{
-				$$tags[$i]=$valores[$i];
+				${$tags[$i]}=$valores[$i];
 			}
 		// Agrega ademas las variables de sesion
 		if (!empty($_SESSION)) extract($_SESSION);

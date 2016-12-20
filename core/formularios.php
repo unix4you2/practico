@@ -70,7 +70,7 @@
 			while ($registro_campos_unicos = $consulta_campos_unicos->fetch())
 				{
 					$campo=$registro_campos_unicos["campo"];
-					$valor=$$campo;
+					$valor=${$campo};
 					// Busca si el campo cuenta con el valor en la tabla
 
 					// Elimina los datos
@@ -131,7 +131,7 @@
 			while ($registro_campos_unicos = $consulta_campos_unicos->fetch())
 				{
 					$campo=$registro_campos_unicos["campo"];
-					$valor=$$campo;
+					$valor=${$campo};
 					// Busca si el campo cuenta con el valor en la tabla
 					$consulta_existente=ejecutar_sql("SELECT id FROM ".$tabla." WHERE $campo='$valor'");
 					$registro_existente = $consulta_existente->fetch();
@@ -146,7 +146,7 @@
 			while ($registro_campos_obligatorios = $consulta_campos_obligatorios->fetch())
 				{
 					$campo=$registro_campos_obligatorios["campo"];
-					$valor=$$campo;
+					$valor=${$campo};
 					// Verifica si es vacio para retornar el error
 					if ($valor=="")
 						$mensaje_error.=$MULTILANG_ErrFrmObligatorio.$campo.'<br>';
@@ -169,7 +169,7 @@
                             //Verifica que el campo se encuentre dentro de la tabla, para descartar campos manuales mal escritos o usados para javascripts y otros fines.
                             if (existe_campo_tabla($registro_campos["campo"],$registro_formulario["tabla_datos"]))
                                 {
-                                    $cadena_nuevos_valores.=$registro_campos["campo"]."='".$$registro_campos["campo"]."',";
+                                    $cadena_nuevos_valores.=$registro_campos["campo"]."='".${$registro_campos["campo"]}."',";
                                 }
 						}
 					// Elimina comas al final de las listas
@@ -250,7 +250,7 @@
 			while ($registro_campos_unicos = $consulta_campos_unicos->fetch())
 				{
 					$campo=$registro_campos_unicos["campo"];
-					$valor=$$campo;
+					$valor=${$campo};
 					// Busca si el campo cuenta con el valor en la tabla
 					$consulta_existente=ejecutar_sql("SELECT id FROM ".$tabla." WHERE $campo='$valor'");
 					$registro_existente = $consulta_existente->fetch();
@@ -264,7 +264,7 @@
 			while ($registro_campos_obligatorios = $consulta_campos_obligatorios->fetch())
 				{
 					$campo=$registro_campos_obligatorios["campo"];
-					$valor=$$campo;
+					$valor=${$campo};
 					// Verifica si es vacio para retornar el error
 					if ($valor=="")
 						$mensaje_error.=$MULTILANG_ErrFrmObligatorio.$campo.'<br>';
@@ -365,8 +365,8 @@
 											else
 												{
 													$nombre_de_campo_query=$registro_campos["campo"].",";
-													//ANTES DE QUERY CON PARAMETROS $valor_de_campo_query="'".$$registro_campos["campo"]."',";
-													$valor_de_campo_query=$$registro_campos["campo"];
+													//ANTES DE QUERY CON PARAMETROS $valor_de_campo_query="'".${$registro_campos["campo"]}."',";
+													$valor_de_campo_query=${$registro_campos["campo"]};
 													//Compresion previa para campos especiales (MUY experimental por cuanto puede generar errores de query)
 														if ($registro_campos["tipo"]=="objeto_canvas" || $registro_campos["tipo"]=="objeto_camara")
 															$valor_de_campo_query=gzencode($valor_de_campo_query,9);
@@ -541,7 +541,7 @@
 					$ListaCampos=explode(",",$ListaCamposSinID_formulario_objeto);
 					for ($i=0; $i<count($ListaCampos);$i++)
                         {
-                            $nuevo_valor_asignar=$$ListaCampos[$i];
+                            $nuevo_valor_asignar=${$ListaCampos[$i]};
                             //Escapa algunos campos especiales
                             if ($ListaCampos[$i]=="accion_usuario")
                                 {
@@ -614,7 +614,7 @@
 					for ($i=0; $i<count($ListaCampos);$i++)
 						{
 							$ListaInterrogantes.="?,";
-							@$ListaCamposyValores.=$$ListaCampos[$i].$_SeparadorCampos_;
+							@$ListaCamposyValores.=${$ListaCampos[$i]}.$_SeparadorCampos_;
 						}
 					//Elimina partes finales innecesarias (coma y separador de campos)
 					$ListaInterrogantes = substr ($ListaInterrogantes, 0, - 1);

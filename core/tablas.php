@@ -852,7 +852,7 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 									{				
 										$CampoAProcesar = $CamposTabla[$i]["nombre"];
 										$VariableDinamicaNombreCampo="PCO_campoimportado_".$CampoAProcesar;
-										$ColumnaDinamicaArchivo=$$VariableDinamicaNombreCampo;
+										$ColumnaDinamicaArchivo=${$VariableDinamicaNombreCampo};
 										
 										//echo $VariableDinamicaNombreCampo;
 										if ($ColumnaDinamicaArchivo!=0) //Descarta el primer indice de combo

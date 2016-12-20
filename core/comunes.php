@@ -351,7 +351,7 @@ function PCO_EsDispositivoMovil()
 	function PCO_SegmentarSQL($sql)
 		{
 			$sql = trim($sql);
-			$sql = ereg_replace("\n#[^\n]*\n", "\n", $sql);
+			$sql = preg_replace("/\n#[^\n]*\n/", "\n", $sql);
 
 			$buffer = array();
 			$ret = array();
@@ -1536,9 +1536,9 @@ function completar_parametros($string,$data) {
 					//Recorre cada conexion de replica encontrada para realizar la operacion
 					while ($registro_conexion = $ConexionesReplica->fetch())
 						{
-							global $$registro_conexion["nombre"];
+							global ${$registro_conexion["nombre"]};
 							//Hace el llamado a la operacion de replica sobre la conexion encontrada
-							ejecutar_sql_unaria($query,$lista_parametros,$$registro_conexion["nombre"],0);
+							ejecutar_sql_unaria($query,$lista_parametros,${$registro_conexion["nombre"]},0);
 						}
 				}
 
@@ -2768,7 +2768,7 @@ function selector_iconos_awesome()
 					global ${$nombre_variable};
 					if (isset($nombre_variable))
 						{
-							$valor_variable=$$nombre_variable;
+							$valor_variable=${$nombre_variable};
 							$cadena_valor=' value="'.$valor_variable.'" ';							
 						}
 				}
@@ -2924,7 +2924,7 @@ function selector_iconos_awesome()
 					$nombre_variable = substr($registro_campos["valor_predeterminado"], 1);
 					global ${$nombre_variable};
 					if (isset($nombre_variable))
-                        $cadena_valor=$$nombre_variable;
+                        $cadena_valor=${$nombre_variable};
 				}
 			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
@@ -2980,7 +2980,7 @@ function selector_iconos_awesome()
 					global ${$nombre_variable};
 					if (isset($nombre_variable))
 						{
-							$valor_variable=$$nombre_variable;
+							$valor_variable=${$nombre_variable};
 							$cadena_valor=' value="'.$valor_variable.'" ';							
 						}
 				}
@@ -3045,7 +3045,7 @@ function selector_iconos_awesome()
 					global ${$nombre_variable};
 					if (isset($nombre_variable))
 						{
-							$valor_variable=$$nombre_variable;
+							$valor_variable=${$nombre_variable};
 							$cadena_valor=' value="'.$valor_variable.'" ';							
 						}
 				}
@@ -3108,7 +3108,7 @@ function selector_iconos_awesome()
 					global ${$nombre_variable};
 					if (isset($nombre_variable))
 						{
-							$valor_variable=$$nombre_variable;
+							$valor_variable=${$nombre_variable};
 							$cadena_valor=' value="'.$valor_variable.'" ';							
 						}
 				}
@@ -3372,7 +3372,7 @@ function selector_iconos_awesome()
 													//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
 													$NombreVariable=substr($condicion_filtrado_listas,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
 													//Si la variable no esta definida la busca en el entorno global
-													global $$NombreVariable;
+													global ${$NombreVariable};
 													if (@isset($NombreVariable))
 														{
 															$ValorVariable=${$NombreVariable};
@@ -3499,7 +3499,7 @@ function selector_iconos_awesome()
 					global ${$nombre_variable};
 					if (isset($nombre_variable))
 						{
-							$valor_variable=$$nombre_variable;
+							$valor_variable=${$nombre_variable};
 							$cadena_valor=$valor_variable;							
 						}
 				}
@@ -3671,7 +3671,7 @@ $('#SampleElement').load('YourURL');
 											//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
 											$NombreVariable=substr($condicion_filtrado_listas,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
 											//Si la variable no esta definida la busca en el entorno global
-											global $$NombreVariable;
+											global ${$NombreVariable};
 											if (@isset($NombreVariable))
 												{
 													$ValorVariable=${$NombreVariable};
@@ -3922,7 +3922,7 @@ $('#SampleElement').load('YourURL');
 					global ${$nombre_variable};
 					if (isset($nombre_variable))
 						{
-							$valor_variable=$$nombre_variable;
+							$valor_variable=${$nombre_variable};
 							$cadena_valor=' value="'.$valor_variable.'" ';							
 						}
 				}
@@ -4987,7 +4987,7 @@ function construir_consulta_informe($informe,$evitar_campos_ocultos=0)
 							//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
 							$NombreVariable=substr($OrigenValorCampo,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
 							//Si la variable no esta definida la busca en el entorno global
-							global $$NombreVariable;
+							global ${$NombreVariable};
 							if (@isset($NombreVariable))
 								{
 									$ValorVariable=${$NombreVariable};
@@ -5051,7 +5051,7 @@ function construir_consulta_informe($informe,$evitar_campos_ocultos=0)
 							//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
 							$NombreVariable=substr($valor_izquierdo,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
 							//Si la variable no esta definida la busca en el entorno global
-							global $$NombreVariable;
+							global ${$NombreVariable};
 							if (@isset($NombreVariable))
 								{
 									$ValorVariable=${$NombreVariable};
@@ -5079,7 +5079,7 @@ function construir_consulta_informe($informe,$evitar_campos_ocultos=0)
 							//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
 							$NombreVariable=substr($valor_derecho,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
 							//Si la variable no esta definida la busca en el entorno global
-							global $$NombreVariable;
+							global ${$NombreVariable};
 							if (@isset($NombreVariable))
 								{
 									$ValorVariable=${$NombreVariable};
@@ -5343,8 +5343,8 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				//Busca y convierte cada variable recibida en global
 				foreach ($arreglo_variables_filtro as $nombre_variable_filtro)
 					{
-						//if (isset($$nombre_variable_filtro))  // {Deprecated}
-							global $$nombre_variable_filtro;
+						//if (isset(${$nombre_variable_filtro}))  // {Deprecated}
+							global ${$nombre_variable_filtro};
 					}
 			}
 

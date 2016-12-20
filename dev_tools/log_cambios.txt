@@ -15,16 +15,22 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 index.php
+core/codigobarras.php
+core/conexiones.php
+core/conexiones_extra.php
 core/comunes.php
 core/formularios.php
 core/marco_conf.php
 core/objetos.php
+core/tablas.php
 core/usuarios.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/bootstrap/js/practico.min.js
 inc/bootstrap/css/practico.min.css
 inc/bootstrap/css/monitoreo.min.css
+mod/pbrowser/core/index.php
+mod/pcoder/index.php
 mod/pmobile/*
 "
 
@@ -46,7 +52,11 @@ LogCambios="
 * Added: Ahora los campos de tipo texto, texto largo y tipo contraseñas soportan el uso de etiquetas placeholder desde el diseño del formulario
 * Added: Ahora los campos pueden especificar si se desea o no presentar la etiqueta o label sobre el formulario
 * Added: Los objetos tipo boton de comando en formularios ahora pueden agregar su propio ID de html usando la propiedad oculta de campo de base de datos
-
+* Fixed: Ahora se muestra mensaje de error cuando no se cuenta con un Driver de bases de datos válido
+* Fixed: Compatibilidad para PHP 7. Error en variables $$vble["campo"] ahora son cambiadas a ${$vble["campo"]}
+* Fixed: Problema con valor predeterminado sobre la tabla core_chat, campo sent.  Es dejado sin valor predeterminado.
+* Fixed: Compatibilidad PHP 7.  Reemplazadas funciones deprecated de ereg_replace (Sintaxis POSIX) por preg_replace (Sintaxis PCRE)
+* Fixed: Compatibilidad PHP 7.  BarCode Coder Library (BCC Library).  Reemplazo de variables $$
 "
 
 ########################################################################

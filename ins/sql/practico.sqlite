@@ -269,7 +269,7 @@ CREATE TABLE core_chat (
   remitente text DEFAULT '',
   destinatario text DEFAULT '',
   message text,
-  sent text DEFAULT '0000-00-00 00:00:00',
+  sent text,
   recd INTEGER DEFAULT '0'
 
 );

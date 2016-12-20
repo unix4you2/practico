@@ -102,7 +102,7 @@
         // crea las variables y les asigna el valor
         for($i=0;$i<$PCO_NumeroParametros;$i++)
             {
-                $$PCO_NombresParametros[$i]=$PCO_ValoresParametros[$i];
+                ${$PCO_NombresParametros[$i]}=$PCO_ValoresParametros[$i];
             }
         // Agrega ademas las variables de sesion
         if (!empty($_SESSION)) extract($_SESSION);
@@ -117,7 +117,7 @@
 
     // Incluye definiciones comunes de la base de datos
     include_once("inc/practico/def_basedatos.php");
-    
+
     // Incluye archivo con algunas funciones comunes usadas por la herramienta
     include_once("core/comunes.php");
 
@@ -191,6 +191,7 @@
                 }
         }
 
+/*
     // Prueba que todas las extensiones requeridas se encuentren habilitadas
     verificar_extensiones();
 
@@ -216,7 +217,7 @@
 	if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCOSESS_SesionAbierta && $PCO_Accion=="Ver_menu") {
         include_once("core/marco_admin.php");
     }
-
+*/
 /* ################################################################## */
     // Cuando no se tiene ninguna accion para procesar se carga la pagina de inicio de sesion
     if ($PCO_Accion=="" && $PCOSESS_SesionAbierta==0) ventana_login();
