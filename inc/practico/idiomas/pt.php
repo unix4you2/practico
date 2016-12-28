@@ -1032,6 +1032,8 @@
 	$MULTILANG_ModoDepuracion='Modo de depuração';
 	$MULTILANG_AyudaTitDebug='Mostrar erros e avisos';
 	$MULTILANG_AyudaDesDebug='Para zonas de produção, esta opção deve estar desligado. Quando você ativar esse valor, Practico ir&aacute; mostrar-lhe durante a execução do aplicativo todos os erros e mensagens que podem ser gerados pelo pr&eacute;-processador de hipertexto - PHP';
+	$MULTILANG_AyudaTitDebugBD='Salvar registro de consulta';
+	$MULTILANG_AyudaDesDebugBD='Para locais de produção, esta opção deve estar desativada. Ao ativar esse valor, o Practico salva uma cópia de todas as consultas e transações enviadas ao banco de dados por meio do módulo de auditoria.';
 	$MULTILANG_MotorAuth='Mecanismo de autenticao';
 	$MULTILANG_AuthPractico='Internos (Tabelas Practico usando MD5)';
 	$MULTILANG_AuthLDAP='LDAP (servidor de diret&oacute;rio)';

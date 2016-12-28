@@ -1030,6 +1030,8 @@
 	$MULTILANG_ModoDepuracion='Modo de depuraci&oacute;n';
 	$MULTILANG_AyudaTitDebug='Presentar errores y advertencias';
 	$MULTILANG_AyudaDesDebug='Para sitios en producci&oacute;n esta opci&oacute;n debe estar apagada.  Cuando se enciende ense&ntilde;a durante la ejecuci&oacute;n de la aplicaci&oacute;n todos los errores y mensajes que puedan ser generados por el preprocesador de hipertexto - PHP';
+	$MULTILANG_AyudaTitDebugBD='Guardar log de consultas';
+	$MULTILANG_AyudaDesDebugBD='Para sitios en producci&oacute;n esta opci&oacute;n debe estar apagada.  Cuando se enciende permite guardar una copia sobre el modulo de auditoria de todas las transacciones realizadas sobre el motor de base de datos';
 	$MULTILANG_MotorAuth='Motor de autenticaci&oacute;n';
 	$MULTILANG_AuthPractico='Interno (Tablas propias de Pr&aacute;ctico usando MD5)';
 	$MULTILANG_AuthLDAP='LDAP (Servidor de directorio)';

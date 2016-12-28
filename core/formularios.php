@@ -614,7 +614,8 @@
 					for ($i=0; $i<count($ListaCampos);$i++)
 						{
 							$ListaInterrogantes.="?,";
-							@$ListaCamposyValores.=${$ListaCampos[$i]}.$_SeparadorCampos_;
+							$NombreVariableGarbage=$ListaCampos[$i];
+							@$ListaCamposyValores.=${$NombreVariableGarbage}.$_SeparadorCampos_;
 						}
 					//Elimina partes finales innecesarias (coma y separador de campos)
 					$ListaInterrogantes = substr ($ListaInterrogantes, 0, - 1);
@@ -1432,7 +1433,7 @@ if ($PCO_Accion=="editar_formulario")
 
 						<div id='campo14' style="display:none;">
                             <div class="form-group input-group">
-                                <input type="text" name="ancho" class="form-control input-sm" value="<?php echo @$registro_campo_editar["ancho"]; ?>" placeholder="<?php echo $MULTILANG_FrmAncho; ?>">
+                                <input type="text" name="ancho" class="form-control input-sm" value="<?php if (@$registro_campo_editar["ancho"]!="") echo @$registro_campo_editar["ancho"]; else echo "0"; ?>" placeholder="<?php echo $MULTILANG_FrmAncho; ?>">
                                 <span class="input-group-addon">
                                     <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTitAncho; ?></b><br><?php echo $MULTILANG_FrmDesAncho; ?> (<?php echo $MULTILANG_FrmDesAncho2; ?>)"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
@@ -1441,7 +1442,7 @@ if ($PCO_Accion=="editar_formulario")
 
 						<div id='campo15' style="display:none;">
                             <div class="form-group input-group">
-                                <input type="text" name="alto" class="form-control input-sm" value="<?php echo @$registro_campo_editar["alto"]; ?>" placeholder="<?php echo $MULTILANG_FrmAlto; ?>">
+                                <input type="text" name="alto" class="form-control input-sm" value="<?php if (@$registro_campo_editar["alto"]!="") echo @$registro_campo_editar["alto"]; else echo "0"; ?>" placeholder="<?php echo $MULTILANG_FrmAlto; ?>">
                                 <span class="input-group-addon">
                                     <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTitAlto; ?></b><br><?php echo $MULTILANG_FrmDesAlto; ?> (<?php echo $MULTILANG_FrmDesAlto2; ?>)"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
@@ -1504,7 +1505,7 @@ if ($PCO_Accion=="editar_formulario")
 
 						<div id='campo25' style="display:none;">
                             <div class="form-group input-group">
-                                <input type="text" name="maxima_longitud" class="form-control input-sm" value="<?php echo @$registro_campo_editar["maxima_longitud"]; ?>" placeholder="<?php echo $MULTILANG_FrmLongMaxima; ?>">
+                                <input type="text" name="maxima_longitud" class="form-control input-sm" value="<?php  if (@$registro_campo_editar["maxima_longitud"]!="") echo @$registro_campo_editar["maxima_longitud"]; else echo "0"; ?>" placeholder="<?php echo $MULTILANG_FrmLongMaxima; ?>">
                                 <span class="input-group-addon">
                                     <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTit1LongMaxima; ?></b><br>(<?php echo $MULTILANG_FrmTit2LongMaxima; ?>)"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
@@ -1516,7 +1517,7 @@ if ($PCO_Accion=="editar_formulario")
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group input-group">
-                                        <input type="text" name="valor_minimo" class="form-control input-sm" value="<?php if (@$registro_campo_editar["valor_minimo"]!='1') echo @$registro_campo_editar["valor_minimo"]; else echo '1'; ?>" placeholder="<?php echo $MULTILANG_FrmValorMinimo; ?>">
+                                        <input type="text" name="valor_minimo" class="form-control input-sm" value="<?php if (@$registro_campo_editar["valor_minimo"]!="1") echo @$registro_campo_editar["valor_minimo"]; else echo "1"; ?>" placeholder="<?php echo $MULTILANG_FrmValorMinimo; ?>">
                                         <span class="input-group-addon">
                                             <i class="fa fa-hand-o-down"></i>
                                         </span>
@@ -1524,7 +1525,7 @@ if ($PCO_Accion=="editar_formulario")
                                 </div>    
                                 <div class="col-md-4">
                                     <div class="form-group input-group">
-                                        <input type="text" name="valor_maximo" class="form-control input-sm" value="<?php if (@$registro_campo_editar["valor_maximo"]!='100') echo @$registro_campo_editar["valor_maximo"]; else echo '100'; ?>" placeholder="<?php echo $MULTILANG_FrmValorMaximo; ?>">
+                                        <input type="text" name="valor_maximo" class="form-control input-sm" value="<?php if (@$registro_campo_editar["valor_maximo"]!="100") echo @$registro_campo_editar["valor_maximo"]; else echo "100"; ?>" placeholder="<?php echo $MULTILANG_FrmValorMaximo; ?>">
                                         <span class="input-group-addon">
                                             <i class="fa fa-hand-o-up"></i>
                                         </span>
@@ -1532,7 +1533,7 @@ if ($PCO_Accion=="editar_formulario")
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group input-group">
-                                        <input type="text" name="valor_salto" class="form-control input-sm" value="<?php if (@$registro_campo_editar["valor_salto"]!='1') echo @$registro_campo_editar["valor_salto"]; else echo '1'; ?>" placeholder="<?php echo $MULTILANG_FrmValorSalto; ?>">
+                                        <input type="text" name="valor_salto" class="form-control input-sm" value="<?php if (@$registro_campo_editar["valor_salto"]!="1") echo @$registro_campo_editar["valor_salto"]; else echo "1"; ?>" placeholder="<?php echo $MULTILANG_FrmValorSalto; ?>">
                                         <span class="input-group-addon">
                                             <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmTitValorSalto; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                         </span>

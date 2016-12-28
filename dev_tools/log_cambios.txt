@@ -57,6 +57,11 @@ LogCambios="
 * Fixed: Problema con valor predeterminado sobre la tabla core_chat, campo sent.  Es dejado sin valor predeterminado.
 * Fixed: Compatibilidad PHP 7.  Reemplazadas funciones deprecated de ereg_replace (Sintaxis POSIX) por preg_replace (Sintaxis PCRE)
 * Fixed: Compatibilidad PHP 7.  BarCode Coder Library (BCC Library).  Reemplazo de variables $$
+* Fixed: Agregadas definiciones de campos y tablas nuevas en def_basedatos.php
+* Enhan: Ampliada longitud del campo de accion sobre las auditorías para permitir hacer log completo y captura de los eventos SQL
+* Added: Modo de depuración del SQL permite almacenar sobre auditoría todas las operaciones enviadas al motor de base de datos.
+* Added: Compatibilidad MariaDB y MySQL 5.7 en clausulas order by cuando sql_mode=only_full_group_by se agregan los campos de id al order by para evitar conflictos con esta nueva configuración.
+
 "
 
 ########################################################################
@@ -64,7 +69,12 @@ LogCambios="
 ScriptBasedatos="
 ALTER TABLE core_formulario_objeto ADD valor_placeholder varchar(255) DEFAULT '';
 ALTER TABLE core_formulario_objeto ADD ocultar_etiqueta int(1) DEFAULT 0;
-
+ALTER TABLE core_auditoria CHANGE accion accion text;
+ALTER TABLE core_formulario_objeto CHANGE ancho ancho int(10) NULL DEFAULT '0';
+ALTER TABLE core_formulario_objeto CHANGE alto alto int(10) NULL DEFAULT '0';
+ALTER TABLE core_formulario_objeto CHANGE valor_minimo valor_minimo int(10) NULL DEFAULT '0';
+ALTER TABLE core_formulario_objeto CHANGE valor_maximo valor_maximo int(10) NULL DEFAULT '100';
+ALTER TABLE core_formulario_objeto CHANGE valor_salto valor_salto int(10) NULL DEFAULT '1';
 "
 
 ########################################################################

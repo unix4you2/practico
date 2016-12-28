@@ -208,6 +208,7 @@ $salida=sprintf("<?php
 	\$TablasApp='%s';  // Cuidado al cambiar: Prefijo para Tablas de datos definidas por el usuario
 	\$LlaveDePaso='%s';  // Valor unico para firmar los usuarios del aplicativo.  No debe ser cambiado despues de puesto en marcha a menos que se haga un update manual el usuario que no coincida con la llave no podra ingresar.
 	\$ModoDepuracion=%s;
+	\$DepuracionSQL=%s;
 	\$BuscarActualizaciones=%s;
 	\$ZonaHoraria='%s';
 	\$IdiomaPredeterminado='%s';
@@ -236,7 +237,7 @@ $salida=sprintf("<?php
 	\$_SeparadorCampos_='%s';
 	
 	// Define cadena separada por comas con usuarios administradores de la aplicacion
-	\$PCOVAR_Administradores='%s';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$CodigoGoogleAnalyticsNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_PermitirReseteoClavesNEW,$Auth_PermitirAutoRegistroNEW,$Auth_PlantillaAutoRegistroNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW,$Activar_ModuloChatNEW,$_SeparadorCampos_NEW,$PCOVAR_AdministradoresNEW);
+	\$PCOVAR_Administradores='%s';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$DepuracionSQLNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$CaracteresCaptchaNEW,$CodigoGoogleAnalyticsNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_PermitirReseteoClavesNEW,$Auth_PermitirAutoRegistroNEW,$Auth_PlantillaAutoRegistroNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW,$Activar_ModuloChatNEW,$_SeparadorCampos_NEW,$PCOVAR_AdministradoresNEW);
 			// Escribe el archivo de configuracion
 			$archivo_config=fopen("core/configuracion.php","w");
 			if($archivo_config==null)

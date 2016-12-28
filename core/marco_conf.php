@@ -133,6 +133,18 @@
                                             <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_AyudaLlave; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                         </span>
                                     </div>
+
+									<label for="DepuracionSQLNEW"><i class="fa fa-bug fa-2x fa-fw"></i>  <?php echo $MULTILANG_ModoDepuracion; ?></label>
+									<div class="form-group input-group">
+										<select id="DepuracionSQLNEW" name="DepuracionSQLNEW" class="selectpicker" >
+											<option value="0" <?php if ($DepuracionSQL=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_Apagado; ?></option>
+											<option value="1" <?php if ($DepuracionSQL=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Encendido; ?></option>
+										</select>
+										<span class="input-group-addon">
+											<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_AyudaTitDebugBD; ?></b><br><?php echo $MULTILANG_AyudaDesDebugBD; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+										</span>
+									</div>
+
                                 </div>
 
                                 <div class="tab-pane fade in active" id="configvarias-tab">

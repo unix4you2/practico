@@ -1382,7 +1382,7 @@ function completar_parametros($string,$data) {
 
 /* ################################################################## */
 /* ################################################################## */
-	function ejecutar_sql($query,$lista_parametros="",$ConexionBD="")
+	function ejecutar_sql($query,$lista_parametros="",$ConexionBD="",$EvitarLogSQL=0)
 		{
 			/*
 				Function: ejecutar_sql
@@ -1408,7 +1408,7 @@ function completar_parametros($string,$data) {
 			global $ModoDepuracion;
 			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin;
 			global $PCO_Accion;
-			global $PCOSESS_LoginUsuario,$_SeparadorCampos_;
+			global $PCOSESS_LoginUsuario,$_SeparadorCampos_,$DepuracionSQL;
 			
 			// Filtra la cadena antes de ser ejecutada
 			$query=filtrar_cadena_sql($query);
@@ -1437,6 +1437,12 @@ function completar_parametros($string,$data) {
 								}
 						}
 					$consulta->execute();
+					
+					//Lleva el log a auditoria en caso de estar encendido
+					if ($EvitarLogSQL==0)
+						if ($DepuracionSQL==1)
+							auditar($query);
+					
 					return $consulta;
 					//return $consulta->fetchAll();
 				}
@@ -1510,7 +1516,7 @@ function completar_parametros($string,$data) {
 
 /* ################################################################## */
 /* ################################################################## */
-	function ejecutar_sql_unaria($query,$lista_parametros="",$ConexionBD="",$ReplicaRecursiva=1)
+	function ejecutar_sql_unaria($query,$lista_parametros="",$ConexionBD="",$ReplicaRecursiva=1,$EvitarLogSQL=0)
 		{
 			/*
 				Function: ejecutar_sql_unaria
@@ -1581,6 +1587,12 @@ function completar_parametros($string,$data) {
 								}
 						}
 					$consulta->execute();
+
+					//Lleva el log a auditoria en caso de estar encendido
+					if ($EvitarLogSQL==0)
+						if ($DepuracionSQL==1)
+							auditar($query);
+
 					return "";
 				}
 			catch( PDOException $ErrorPDO)
@@ -1661,9 +1673,8 @@ function completar_parametros($string,$data) {
 			else
 				$usuario_auditar=$usuario;
 			//Lleva el registro
-			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES (?,?,?,?)","$usuario_auditar$_SeparadorCampos_$PCO_Accion$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$PCO_HoraOperacion");
+			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES (?,?,?,?)","$usuario_auditar$_SeparadorCampos_$PCO_Accion$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$PCO_HoraOperacion","","",1,1);
 		}
-
 
 
 /* ################################################################## */
@@ -4322,16 +4333,6 @@ $('#SampleElement').load('YourURL');
 		PCO_ValorBusquedaBD - Opcional, indica el valor que sera buscado sobre el PCO_CampoBusquedaBD para encontrar los valores de cada objeto en el formulario
 		anular_form - Opcional, indica si las etiquetas del formulario HTML deben ser eliminadas y agregar los campos crudos dentro del form
 
-	(start code)
-		SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'
-		SELECT id,peso,visible FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY peso
-		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND columna='$cl' AND visible=1 AND peso >'$limite_inferior' AND peso <='$limite_superior' ORDER BY peso
-		Por cada registro
-			Llamar creacion de objeto correspondiente
-		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND id='$ultimo_id'
-		SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario' AND visible=1 ORDER BY peso
-	(end)
-
 	Salida:
 
 		HTML, CSS y Javascript asociado al formulario
@@ -4435,7 +4436,7 @@ $('#SampleElement').load('YourURL');
 
                 // Inicio de la generacion de encabezados pestanas
                 //Cuenta las pestanas segun los objetos del form y ademas mira si es solo una con valor vacio (sin pestanas)
-                $consulta_conteo_pestanas=      ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
+                $consulta_conteo_pestanas=      ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto,id ORDER BY pestana_objeto","$formulario");
                 $conteo_pestanas=0;
                 while($registro_conteo_pestanas = @$consulta_conteo_pestanas->fetch())
                     {
@@ -4450,7 +4451,7 @@ $('#SampleElement').load('YourURL');
 						if($registro_formulario["estilo_pestanas"]=="")
 							$CadenaEstiloPestanas="visibility:hidden; height:0px;"; //Oculta las pestanas
 
-                        $consulta_formulario_pestana=   ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
+                        $consulta_formulario_pestana=   ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto,id ORDER BY pestana_objeto","$formulario");
                         echo '<ul class="nav '.$registro_formulario["estilo_pestanas"].' nav-justified" style="'.$CadenaEstiloPestanas.'">';
                         $estado_activa_primera_pestana=' class="active" ';
                         $pestana_activa=1;
@@ -4470,7 +4471,7 @@ $('#SampleElement').load('YourURL');
                 //Genera las pestanas con su contenido
                 if ($conteo_pestanas>0)
                     {
-                        $consulta_formulario_pestana=   ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
+                        $consulta_formulario_pestana=   ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto,id ORDER BY pestana_objeto","$formulario");
                         $estado_activa_primera_pestana='in active';
                         $pestana_activa=1;
 
