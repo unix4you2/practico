@@ -41,7 +41,7 @@
 	$ServidorBD='localhost';	// Direccion IP o nombre de host
 	$BaseDatos='practico';   // Path completo cuando se trata de sqlite2, ej: '/path/to/database.sdb'
 	$UsuarioBD='root';
-	$PasswordBD='mypass';
+	$PasswordBD='SVPXI7EkTu';
 	$MotorBD='mysql';		// Puede variar segun el driver PDO: mysql|pgsql|sqlite|sqlsrv|mssql|ibm|dblib|odbc|oracle|ifmx|fbd
 	$PuertoBD='';	// Vacio para predeterminado
 
@@ -74,31 +74,26 @@
 	$TablasApp='app_';  // Cuidado al cambiar: Prefijo para Tablas de datos definidas por el usuario
 	$LlaveDePaso='H76T9QFT7P';  // Valor unico para firmar los usuarios del aplicativo.  No debe ser cambiado despues de puesto en marcha a menos que se haga un update manual el usuario que no coincida con la llave no podra ingresar.
 	$ModoDepuracion=0;
-	$DepuracionSQL=0;
 	$BuscarActualizaciones=0;
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='es';
 	$CaracteresCaptcha=4;
-	$CodigoGoogleAnalytics='UA-847800-9';
 	
 	// Tipo de motor usado para la autenticacion de usuarios
 	$Auth_TipoMotor='practico';
 	$Auth_ProtoTransporte='http';
-	$Auth_PermitirReseteoClaves='1';
-	$Auth_PermitirAutoRegistro='1';
-	$Auth_PlantillaAutoRegistro='';
-
+	
 	// Configuracion LDAP - Auth_TipoMotor=ldap
 	$Auth_TipoEncripcion='plano';
 	$Auth_LDAPServidor='';
 	$Auth_LDAPPuerto='';
 	$Auth_LDAPDominio='';
 	$Auth_LDAPOU='';
-
+	
 	// Especifica si desea activar o no el modulo de chat para usuarios asi:
 	// 0=No, 1=Solo usuarios internos, 2=Solo usuarios externos, 3=Todos los usuarios, 4=Exclusivo para admin (podra iniciar conversacion y chat con cualquier otro usuario aun con modulo desactivado)
 	$Activar_ModuloChat=0;
-
+	
 	// Define cadena usada para separar campos en operaciones de bases de datos
 	$_SeparadorCampos_='||_||';
 	
