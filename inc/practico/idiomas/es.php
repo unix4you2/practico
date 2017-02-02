@@ -595,6 +595,7 @@
 	$MULTILANG_FrmTextoPlaceHolder='Texto para el placeholder';
 	$MULTILANG_FrmDesPlaceHolder='Un texto que aparecera en el campo cuando se encuentre vacio para que el usuario tenga una guia de lo que debe diligenciar alli';
 	$MULTILANG_FrmOcultarEtiqueta='Ocultar la etiqueta del campo en el formulario';
+	$MULTILANG_FrmIdHTML='Identificador único del objeto en HTML.  Requerido si desea realizar programacion por eventos para este control, usar sentencias JQuery, y JS en general sobre el en tiempo de ejecucion.';
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

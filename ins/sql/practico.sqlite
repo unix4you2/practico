@@ -1,4 +1,3 @@
-
 DROP TABLE IF EXISTS core_parametros;
 CREATE TABLE core_parametros (
   id integer PRIMARY KEY AUTOINCREMENT,
@@ -151,8 +150,9 @@ CREATE TABLE core_formulario_objeto (
   valor_check_activo text DEFAULT '',
   valor_check_inactivo text DEFAULT '',
   valor_placeholder text DEFAULT '',
-  ocultar_etiqueta integer DEFAULT 0
-
+  ocultar_etiqueta integer DEFAULT 0,
+  id_html text DEFAULT ''
+ 
 );
 
 DROP TABLE IF EXISTS core_formulario_boton;

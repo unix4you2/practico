@@ -597,6 +597,7 @@
 	$MULTILANG_FrmTextoPlaceHolder='Placeholder text';
 	$MULTILANG_FrmDesPlaceHolder='A text to show in the field when this doesnt have a value that help users to know what should enter there';
 	$MULTILANG_FrmOcultarEtiqueta='Hide the field label in the form';
+	$MULTILANG_FrmIdHTML='Unique HTML identifier for this object.  Is useful when you want to program events for this control using JQuery or JS on runtime';
 
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';
@@ -1166,4 +1167,3 @@
 	$MULTILANG_ReplicaTodo='Use it as a mirror';
 	$MULTILANG_AyudaReplica='Define if all database operations over the main system should be replicated over this connection.  If this valus is NO, Practico will define the connection and make it ready to be used by code or individual operations only when you want.  This applies for data upgrade operations (Insert,Update,Delete) that was maked by the ejecutar_sql_unaria() internal function';
 	$MULTILANG_ConnAdicionales='Extra database connections defined';
-

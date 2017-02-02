@@ -1,4 +1,3 @@
-
 DROP TABLE IF EXISTS core_parametros;
 CREATE TABLE core_parametros (
   id serial,
@@ -50,7 +49,7 @@ DROP TABLE IF EXISTS core_auditoria;
 CREATE TABLE core_auditoria (
   id serial,
   usuario_login varchar(250) NOT NULL,
-  accion varchar(250) NOT NULL,
+  accion text,
   fecha date NOT NULL,
   hora time NOT NULL,
   PRIMARY KEY  (id)
@@ -152,6 +151,7 @@ CREATE TABLE core_formulario_objeto (
   valor_check_inactivo varchar(250) DEFAULT '',
   valor_placeholder varchar(255) DEFAULT '',
   ocultar_etiqueta integer DEFAULT 0,
+  id_html varchar(255) DEFAULT '',
   PRIMARY KEY  (id)
 );
 

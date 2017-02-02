@@ -597,6 +597,7 @@
 	$MULTILANG_FrmTextoPlaceHolder='Eexto do espaço reservado';
 	$MULTILANG_FrmDesPlaceHolder='Um texto para mostrar no campo quando este não tem um valor que ajudar os usuários para saber o que deve entrar lá';
 	$MULTILANG_FrmOcultarEtiqueta='Ocultar o rótulo de campo na forma';
+	$MULTILANG_FrmIdHTML='Identificador único del objeto en HTML';
 
 	//Informes
 	$MULTILANG_InfErr1='Você deve especificar valores para os campos correspondentes a, pelo menos, uma s&eacute;rie de dados. <br> Se você não quer gerar um gr&aacute;fico, em seguida, você deve alterar o tipo de relat&oacute;rio a tabela de dados';
