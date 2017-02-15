@@ -19,6 +19,7 @@
 	*/
 
 	$NombreRAD="Pr&aacute;ctico";
+	date_default_timezone_set("America/Bogota");
 	$PCO_FechaOperacion=date("Ymd");
 	$PCO_FechaOperacionGuiones=date("Y-m-d");
 	$PCO_HoraOperacion=date("His");
