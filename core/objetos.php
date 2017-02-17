@@ -483,5 +483,3 @@ $salida=sprintf("<?php
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 		}
-
-

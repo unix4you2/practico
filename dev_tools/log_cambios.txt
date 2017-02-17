@@ -62,7 +62,8 @@ LogCambios="
 * Added: Modo de depuración del SQL permite almacenar sobre auditoría todas las operaciones enviadas al motor de base de datos.
 * Added: Compatibilidad MariaDB y MySQL 5.7 en clausulas order by cuando sql_mode=only_full_group_by se agregan los campos de id al order by para evitar conflictos con esta nueva configuración.
 * Added: Nueva propiedad de ID_HTML permite identificar de manera única los elementos agregados al formulario.  Todos los valores de campo en instalaciones existentes son transferidos automáticamente a este nuevo campo para efectos de compatibilidad.
-* Fixed: MEjora a las funciones para recuperación de variables globales en PHP
+* Fixed: Mejora a las funciones para recuperación de variables globales en PHP
+* Enhan: Se evitan mensajes de warning durante tiempo de instalación.
 "
 
 ########################################################################
@@ -78,7 +79,14 @@ ALTER TABLE core_formulario_objeto CHANGE valor_maximo valor_maximo int(10) NULL
 ALTER TABLE core_formulario_objeto CHANGE valor_salto valor_salto int(10) NULL DEFAULT '1';
 ALTER TABLE core_formulario_objeto ADD id_html varchar(255) DEFAULT '';
 UPDATE core_formulario_objeto SET id_html=campo;
-
+DROP TABLE IF EXISTS core_formulario_objeto_evento;
+CREATE TABLE core_formulario_objeto_evento (
+  id int(10) AUTO_INCREMENT,
+  objeto int(10),
+  evento varchar(250) default '',
+  javascript text,
+  PRIMARY KEY  (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 "
 
 ########################################################################

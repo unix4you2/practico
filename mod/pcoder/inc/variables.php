@@ -108,7 +108,7 @@
 	$PCODER_Modos[]=array(Nombre => "MATLAB",	Extensiones => "matlab");
 	$PCODER_Modos[]=array(Nombre => "MEL",	Extensiones => "mel");
 	$PCODER_Modos[]=array(Nombre => "MUSHCode",	Extensiones => "mc|mush");
-	$PCODER_Modos[]=array(Nombre => "MySQL",	Extensiones => "mysql");
+	$PCODER_Modos[]=array(Nombre => "MySQL",	Extensiones => "mysql|sqlite|oracle|odbc|ifmx|dblib|fbd|ibm");
 	$PCODER_Modos[]=array(Nombre => "Nix",	Extensiones => "nix");
 	$PCODER_Modos[]=array(Nombre => "ObjectiveC",	Extensiones => "m|mm");
 	$PCODER_Modos[]=array(Nombre => "OCaml",	Extensiones => "ml|mli");
@@ -138,7 +138,7 @@
 	$PCODER_Modos[]=array(Nombre => "snippets",	Extensiones => "snippets");
 	$PCODER_Modos[]=array(Nombre => "Soy_Template",	Extensiones => "soy");
 	$PCODER_Modos[]=array(Nombre => "Space",	Extensiones => "space");
-	$PCODER_Modos[]=array(Nombre => "SQL",	Extensiones => "sql|dblib|fbd|ibm|ifmx|mssql|odbc|oracle|sqlite|sqlsrv");
+	$PCODER_Modos[]=array(Nombre => "SQL",	Extensiones => "sql|mssql|sqlsrv");
 	$PCODER_Modos[]=array(Nombre => "Stylus",	Extensiones => "styl|stylus");
 	$PCODER_Modos[]=array(Nombre => "SVG",	Extensiones => "svg");
 	$PCODER_Modos[]=array(Nombre => "Tcl",	Extensiones => "tcl");

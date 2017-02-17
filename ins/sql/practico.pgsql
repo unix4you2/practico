@@ -117,8 +117,8 @@ CREATE TABLE core_formulario_objeto (
   ajax_busqueda integer default '1',
   valor_unico integer default '0',
   solo_lectura varchar(10) default '',
-  ancho integer,
-  alto integer,
+  ancho integer default '0',
+  alto integer default '0',
   barra_herramientas integer,
   fila_unica integer,
   lista_opciones text,
@@ -128,10 +128,10 @@ CREATE TABLE core_formulario_objeto (
   url_iframe varchar(250),
   objeto_en_ventana integer,
   informe_vinculado integer,
-  maxima_longitud integer default 0,
-  valor_minimo integer,
-  valor_maximo integer,
-  valor_salto integer,
+  maxima_longitud integer default '0',
+  valor_minimo integer default '0',
+  valor_maximo integer default '100',
+  valor_salto integer default '1',
   formato_salida varchar(250) default '',
   plantilla_archivo varchar(250) default '',
   peso_archivo integer,
@@ -151,7 +151,15 @@ CREATE TABLE core_formulario_objeto (
   valor_check_inactivo varchar(250) DEFAULT '',
   valor_placeholder varchar(255) DEFAULT '',
   ocultar_etiqueta integer DEFAULT 0,
-  id_html varchar(255) DEFAULT '',
+  PRIMARY KEY  (id)
+);
+
+DROP TABLE IF EXISTS core_formulario_objeto_evento;
+CREATE TABLE core_formulario_objeto_evento (
+  id serial,
+  objeto integer,
+  evento varchar(250) default '',
+  javascript text,
   PRIMARY KEY  (id)
 );
 

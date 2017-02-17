@@ -147,4 +147,3 @@
 
 	include("core/marco_abajo.php");
 ?>
-

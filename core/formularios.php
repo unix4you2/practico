@@ -899,7 +899,7 @@ if ($PCO_Accion=="editar_formulario")
                             </div>
 						</div>
 
-						<div id='campo46' style="display:none;">
+                        <div id='campo46' style="display:none;">
                             <div class="form-group input-group">
                                 <input name="id_html"  value="<?php echo @$registro_campo_editar["id_html"]; ?>" type="text" class="form-control input-sm" placeholder="ID HTML">
                                 <span class="input-group-addon">

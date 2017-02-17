@@ -134,7 +134,7 @@
                                         </span>
                                     </div>
 
-									<label for="DepuracionSQLNEW"><i class="fa fa-bug fa-2x fa-fw"></i>  <?php echo $MULTILANG_ModoDepuracion; ?></label>
+                                    <label for="DepuracionSQLNEW"><i class="fa fa-bug fa-2x fa-fw"></i>  <?php echo $MULTILANG_ModoDepuracion; ?></label>
 									<div class="form-group input-group">
 										<select id="DepuracionSQLNEW" name="DepuracionSQLNEW" class="selectpicker" >
 											<option value="0" <?php if ($DepuracionSQL=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_Apagado; ?></option>
