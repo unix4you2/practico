@@ -1166,3 +1166,37 @@
 	$MULTILANG_ReplicaTodo='Usar como replica espejo';
 	$MULTILANG_AyudaReplica='Determina si todas las operaciones realizadas sobre la base de datos del sistema deben ser replicadas sobre esta conexion.  Si asigna su valor en NO, Practico solamente creara la conexion y la dejara lista para ser usada por codigo o por operaciones individuales cuando usted lo requiera.  Esto solo aplicara para operaciones de alteracion (Insertar,Actualizar,Eliminar) realizadas mediante la funcion ejecutar_sql_unaria()';
 	$MULTILANG_ConnAdicionales='Conexiones a bases de datos adicionales';
+	
+	//Eventos javascript
+    $MULTILANG_EventoClick='Click sobre un elemento';
+    $MULTILANG_EventoDobleClick='Doble click sobre un elemento';
+    $MULTILANG_EventoMouseDown='Se pulsa un botón del ratón sobre un elemento';
+    $MULTILANG_EventoMouseEnter='El puntero del ratón entra en el área de un elemento';
+    $MULTILANG_EventoMouseLeave='El puntero del ratón sale del área de un elemento';
+    $MULTILANG_EventoMouseMove='El puntero del ratón se está moviendo sobre el área de un elemento';
+    $MULTILANG_EventoMouseOver='El puntero del ratón se sitúa encima del área de un elemento';
+    $MULTILANG_EventoMouseOut='El puntero del ratón sale fuera del área del elemento o fuera de uno de sus hijos';
+    $MULTILANG_EventoMouseUp='Un botón del ratón se libera estando sobre un elemento';
+    $MULTILANG_EventoContextMenu='Se pulsa el botón derecho del ratón (antes de que aparezca el menú contextual)';
+    $MULTILANG_EventoKeyDown='El usuario tiene pulsada una tecla (para elementos de formulario y body)';
+    $MULTILANG_EventoKeyPress='El usuario pulsa una tecla (momento justo en que la pulsa) (para elementos de formulario y body)';
+    $MULTILANG_EventoKeyUp='El usuario libera una tecla que tenía pulsada (para elementos de formulario y body)';
+    $MULTILANG_EventoFocus='Un elemento del formulario toma el foco';
+    $MULTILANG_EventoBlur='Un elemento del formulario pierde el foco';
+    $MULTILANG_EventoChange='Un elemento del formulario cambia';
+    $MULTILANG_EventoSelect='El usuario selecciona el texto de un elemento input o textarea';
+    $MULTILANG_EventoSubmit='Se pulsa el botón de envío del formulario (antes del envío)';
+    $MULTILANG_EventoReset='Se pulsa el botón reset del formulario';
+    $MULTILANG_EventoCut='Los datos seleccionados en un cuadro de texto son cortados';
+    $MULTILANG_EventoCopy='Los datos seleccionados en un cuadro de texto son copiados';
+    $MULTILANG_EventoPaste='Se ha pegado un contenido en un cuadro de texto';
+    $MULTILANG_EventoLoad='Se ha completado la carga de la ventana o marco';
+    $MULTILANG_EventoUnload='El usuario ha cerrado la ventana o marco';
+    $MULTILANG_EventoResize='El usuario ha cambiado el tamaño de la ventana o marco';
+    $MULTILANG_EventoClose='El usuario intenta cerrar la ventana o marco';
+    $MULTILANG_EventoScroll='El usuario desplaza el contenido en una ventana o control que soporta scroll';
+    $MULTILANG_EventoAnimFin='Una animacion CSS ha finalizado';
+    $MULTILANG_EventoAnimInicio='Una animacion CSS ha iniciado';
+    $MULTILANG_EventoAnimIteracion='Una animacion CSS ha reiniciado/repetido';
+
+	

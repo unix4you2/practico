@@ -85,7 +85,7 @@
 	$Auth_TipoMotor='practico';
 	$Auth_ProtoTransporte='http';
 	$Auth_PermitirReseteoClaves='1';
-	$Auth_PermitirAutoRegistro='1';
+	$Auth_PermitirAutoRegistro='0';
 	$Auth_PlantillaAutoRegistro='';
 
 	// Configuracion LDAP - Auth_TipoMotor=ldap

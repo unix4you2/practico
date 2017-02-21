@@ -1164,4 +1164,37 @@
 	$MULTILANG_AgregarReplica='एक नए कनेक्शन जोड़े';
 	$MULTILANG_ReplicaTodo='एक दर्पण के रूप में प्रयोग करें';
 	$MULTILANG_AyudaReplica='परिभाषित मुख्य प्रणाली पर सभी डेटाबेस कार्रवाई इस कनेक्शन पर दोहराया जाना चाहिए। इस valus नहीं है, तो Practico कनेक्शन को परिभाषित करने और इसे तैयार कोड या व्यक्ति के संचालन के द्वारा इस्तेमाल किया जा केवल जब आप चाहते कर देगा।.   This applies for data upgrade operations (Insert,Update,Delete) that was maked by the ejecutar_sql_unaria() internal function';
-	$MULTILANG_ConnAdicionales='Extra database connections defined';
+	$MULTILANG_ConnAdicionales='अतिरिक्त डेटाबेस कनेक्शन परिभाषित';
+
+    //Eventos javascript
+    $MULTILANG_EventoClick='एक तत्व पर क्लिक करें';
+    $MULTILANG_EventoDobleClick='एक तत्व पर डबल क्लिक करें';
+    $MULTILANG_EventoMouseDown='माउस बटन एक तत्व पर दबाया जाता है';
+    $MULTILANG_EventoMouseEnter='एक तत्व में माउस संकेतक पाने';
+    $MULTILANG_EventoMouseLeave='माउस सूचक एक तत्व से बाहर निकलना';
+    $MULTILANG_EventoMouseMove='माउस सूचक एक तत्व के ऊपर बढ़ रहा है';
+    $MULTILANG_EventoMouseOver='माउस सूचक एक तत्व खत्म हो गया है';
+    $MULTILANG_EventoMouseOut='माउस सूचक एक तत्व या अपने बच्चे के बाहर चला जाता है';
+    $MULTILANG_EventoMouseUp='माउस बटन एक तत्व पर जारी की है';
+    $MULTILANG_EventoContextMenu='माउस सही बटन दबाया (पहले संदर्भ मेनू दिखाई देता है)';
+    $MULTILANG_EventoKeyDown='उपयोगकर्ता एक दबाया कुंजी (प्रपत्र नियंत्रण और शरीर) है';
+    $MULTILANG_EventoKeyPress='उपयोगकर्ता प्रेस एक कुंजी (जो पल में दबाया जाता है) (फार्म तत्वों और शरीर)';
+    $MULTILANG_EventoKeyUp='उपयोगकर्ता एक चाबी है कि दबाया गया था (फार्म तत्वों और शरीर) जारी';
+    $MULTILANG_EventoFocus='एक प्रपत्र तत्व ध्यान केंद्रित हो जाता है';
+    $MULTILANG_EventoBlur='एक प्रपत्र तत्व फोकस खो देता है';
+    $MULTILANG_EventoChange='एक प्रपत्र तत्व परिवर्तन';
+    $MULTILANG_EventoSelect='उपयोगकर्ता एक इनपुट या textarea से पाठ का चयन';
+    $MULTILANG_EventoSubmit='फार्म जमा बटन (भेजने से पहले) दबाया जाता है';
+    $MULTILANG_EventoReset='पर्चा रीसेट बटन दबाया जाता है';
+    $MULTILANG_EventoCut='एक पाठ नियंत्रण में चयनित डेटा cutted थे';
+    $MULTILANG_EventoCopy='एक पाठ नियंत्रण में चयनित डेटा नकल थे';
+    $MULTILANG_EventoPaste='सामग्री एक पाठ नियंत्रण में पारित किया गया था';
+    $MULTILANG_EventoLoad='खिड़की या फ्रेम लोड पूरा किया गया';
+    $MULTILANG_EventoUnload='उपयोगकर्ता विंडो बंद करें या फ्रेम';
+    $MULTILANG_EventoResize='उपयोगकर्ता बदलता खिड़की ओ फ्रेम आकार';
+    $MULTILANG_EventoClose='उपयोगकर्ता विंडो या फ्रेम बंद करने की कोशिश';
+    $MULTILANG_EventoScroll='उपयोगकर्ता Windows या नियंत्रण पर एक पुस्तक है कि यह समर्थन करते हैं';
+    $MULTILANG_EventoAnimFin='एक सीएसएस एनीमेशन समाप्त हो गया है गया था';
+    $MULTILANG_EventoAnimInicio='एक सीएसएस एनीमेशन शुरू किया गया था';
+    $MULTILANG_EventoAnimIteracion='एक सीएसएस एनीमेशन फिर आरंभ / दोहराया गया था';
+

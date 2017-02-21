@@ -154,14 +154,118 @@ CREATE TABLE core_formulario_objeto (
   PRIMARY KEY  (id)
 );
 
-DROP TABLE IF EXISTS core_formulario_objeto_evento;
-CREATE TABLE core_formulario_objeto_evento (
+DROP TABLE IF EXISTS core_evento_objeto;
+CREATE TABLE core_evento_objeto (
   id serial,
   objeto integer,
   evento varchar(250) default '',
   javascript text,
   PRIMARY KEY  (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS core_evento_inventario;
+CREATE TABLE core_evento_inventario (
+  id serial,
+  evento varchar(250) default '',
+  categoria varchar(250) default '',
+  descripcion varchar(250) default '',
+  PRIMARY KEY  (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onclick',                    'Raton (Mouse)',        '$MULTILANG_EventoClick');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('ondblclick',                 'Raton (Mouse)',        '$MULTILANG_EventoDobleClick');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onmousedown',                'Raton (Mouse)',        '$MULTILANG_EventoMouseDown');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onmouseenter',               'Raton (Mouse)',        '$MULTILANG_EventoMouseEnter');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onmouseleave',               'Raton (Mouse)',        '$MULTILANG_EventoMouseLeave');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onmousemove',                'Raton (Mouse)',        '$MULTILANG_EventoMouseMove');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onmouseover',                'Raton (Mouse)',        '$MULTILANG_EventoMouseOver');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onmouseout',                 'Raton (Mouse)',        '$MULTILANG_EventoMouseOut');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onmouseup',                  'Raton (Mouse)',        '$MULTILANG_EventoMouseUp');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('contextmenu',                'Raton (Mouse)',        '$MULTILANG_EventoContextMenu');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onkeydown',                  'Teclado (Keyboard)',   '$MULTILANG_EventoKeyDown');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onkeypress',                 'Teclado (Keyboard)',   '$MULTILANG_EventoKeyPress');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onkeyup',                    'Teclado (Keyboard)',   '$MULTILANG_EventoKeyUp');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onfocus',                    'Formularios (Forms)',  '$MULTILANG_EventoFocus');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onblur',                     'Formularios (Forms)',  '$MULTILANG_EventoBlur');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onchange',                   'Formularios (Forms)',  '$MULTILANG_EventoChange');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onselect',                   'Formularios (Forms)',  '$MULTILANG_EventoSelect');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onsubmit',                   'Formularios (Forms)',  '$MULTILANG_EventoSubmit');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onreset',                    'Formularios (Forms)',  '$MULTILANG_EventoReset');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('oncut',                      'Formularios (Forms)',  '$MULTILANG_EventoCut');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('oncopy',                     'Formularios (Forms)',  '$MULTILANG_EventoCopy');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onpaste',                    'Formularios (Forms)',  '$MULTILANG_EventoPaste');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onload',                     'Ventanas y Marcos (Windows & Frames)','$MULTILANG_EventoLoad');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onunload',                   'Ventanas y Marcos (Windows & Frames)','$MULTILANG_EventoUnload');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onresize',                   'Ventanas y Marcos (Windows & Frames)','$MULTILANG_EventoResize');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onclose',                    'Ventanas y Marcos (Windows & Frames)','$MULTILANG_EventoClose');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onscroll',                   'Ventanas y Marcos (Windows & Frames)','$MULTILANG_EventoScroll');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('animationend',               'Animaciones y Transiciones','$MULTILANG_EventoAnimFin');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('animationiteration',         'Animaciones y Transiciones','$MULTILANG_EventoAnimIteracion');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('animationstart',             'Animaciones y Transiciones','$MULTILANG_EventoAnimInicio');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('beginEvent',                 'Animaciones y Transiciones','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('endEvent',                   'Animaciones y Transiciones','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('repeatEvent',                'Animaciones y Transiciones','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('transitionend',              'Animaciones y Transiciones','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('chargingchange',             'Bateria y carga (Battery & charge)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('chargingtimechange',         'Bateria y carga (Battery & charge)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('dischargingtimechange',      'Bateria y carga (Battery & charge)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('levelchange',                'Bateria y carga (Battery & charge)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('alerting',                   'Llamadas y Telefonia (Calls)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('busy',                       'Llamadas y Telefonia (Calls)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('callschanged',               'Llamadas y Telefonia (Calls)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('connected',                  'Llamadas y Telefonia (Calls)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('connecting',                 'Llamadas y Telefonia (Calls)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('dialing',                    'Llamadas y Telefonia (Calls)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('disconnected',               'Llamadas y Telefonia (Calls)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('disconnecting',              'Llamadas y Telefonia (Calls)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('error',                      'Llamadas y Telefonia (Calls)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('held',                       'Llamadas y Telefonia (Calls)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('holding',                    'Llamadas y Telefonia (Calls)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('incoming',                   'Llamadas y Telefonia (Calls)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('resuming',                   'Llamadas y Telefonia (Calls)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('statechange',                'Llamadas y Telefonia (Calls)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMAttrModified',            'Cambios DOM (DOM changes)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMCharacterDataModified',   'Cambios DOM (DOM changes)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMContentLoaded',           'Cambios DOM (DOM changes)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMElementNameChanged',      'Cambios DOM (DOM changes)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMNodeInserted',            'Cambios DOM (DOM changes)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMNodeInsertedIntoDocument','Cambios DOM (DOM changes)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMNodeRemoved',             'Cambios DOM (DOM changes)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMNodeRemovedFromDocument', 'Cambios DOM (DOM changes)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMSubtreeModified',         'Cambios DOM (DOM changes)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('drag',                       'Arrastre de elementos (Drag&Drop)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('dragend',                    'Arrastre de elementos (Drag&Drop)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('dragenter',                  'Arrastre de elementos (Drag&Drop)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('dragleave',                  'Arrastre de elementos (Drag&Drop)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('dragover',                   'Arrastre de elementos (Drag&Drop)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('dragstart',                  'Arrastre de elementos (Drag&Drop)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('drop',                       'Arrastre de elementos (Drag&Drop)','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('audioprocess',               'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('canplay',                    'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('canplaythrough',             'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('durationchange',             'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('emptied',                    'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('ended',                      'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('loadeddata',                 'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('loadedmetadata',             'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('pause',                      'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('play',                       'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('playing',                    'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('ratechange',                 'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('seeked',                     'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('seeking',                    'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('stalled',                    'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('suspend',                    'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('timeupdate',                 'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('volumechange',               'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('waiting',                    'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('complete',                   'Audio & Video','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('disabled',                   'Conexion a Internet','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('enabled',                    'Conexion a Internet','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onoffline',                  'Conexion a Internet','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('ononline',                   'Conexion a Internet','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('statuschange',               'Conexion a Internet','');
+INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('connectionInfoUpdate',       'Conexion a Internet','');
 
 DROP TABLE IF EXISTS core_formulario_boton;
 CREATE TABLE core_formulario_boton (

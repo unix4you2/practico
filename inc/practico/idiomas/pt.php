@@ -1166,4 +1166,36 @@
 	$MULTILANG_AgregarReplica='Adicionar uma nova conexão';
 	$MULTILANG_ReplicaTodo='Use-o como um espelho';
 	$MULTILANG_AyudaReplica='Definir se todas as operações de banco de dados sobre o sistema principal deve ser replicado através desta ligação. Se este valus é NÃO, Practico vai definir a conexão e torná-lo pronto para ser usado por operações de código ou individual apenas quando quiser.   This applies for data upgrade operations (Insert,Update,Delete) that was maked by the ejecutar_sql_unaria() internal function';
-	$MULTILANG_ConnAdicionales='Extra database connections defined';
+	$MULTILANG_ConnAdicionales='Conexões de banco de dados extras definidas';
+
+    //Eventos javascript
+    $MULTILANG_EventoClick='Clique sobre um elemento';
+    $MULTILANG_EventoDobleClick='Clique duas vezes sobre um elemento';
+    $MULTILANG_EventoMouseDown='O botão do mouse é pressionado sobre um elemento';
+    $MULTILANG_EventoMouseEnter='Ponteiro do mouse entrar em um elemento';
+    $MULTILANG_EventoMouseLeave='Ponteiro do mouse sair de um elemento';
+    $MULTILANG_EventoMouseMove='Ponteiro do mouse está se movendo sobre um elemento';
+    $MULTILANG_EventoMouseOver='O ponteiro do mouse está sobre um elemento';
+    $MULTILANG_EventoMouseOut='Ponteiro do mouse sai de um elemento ou seu childs';
+    $MULTILANG_EventoMouseUp='O botão do mouse é liberado sobre um elemento';
+    $MULTILANG_EventoContextMenu='Botão direito do mouse pressionado (antes do menu de contexto aparecer)';
+    $MULTILANG_EventoKeyDown='O usuário tem uma tecla pressionada (controles de formulário e corpo)';
+    $MULTILANG_EventoKeyPress='Usuário pressionar uma tecla (momento em que é pressionado) (elementos de formulário e corpo)';
+    $MULTILANG_EventoKeyUp='Liberar usuário uma tecla que foi pressionada (elementos de formulário e corpo)';
+    $MULTILANG_EventoFocus='Um elemento de formulário obtém o foco';
+    $MULTILANG_EventoBlur='Um elemento de formulário perdeu o foco';
+    $MULTILANG_EventoChange='Um elemento do formulário muda';
+    $MULTILANG_EventoSelect='O usuário seleciona o texto de uma entrada ou área de texto';
+    $MULTILANG_EventoSubmit='O botão enviar formulário é pressionado (antes do envio)';
+    $MULTILANG_EventoReset='O botão de reinicialização do formulário é pressionado';
+    $MULTILANG_EventoCut='Os dados selecionados em um controle de texto foram cortados';
+    $MULTILANG_EventoCopy='Os dados selecionados em um controle de texto foram copiados';
+    $MULTILANG_EventoPaste='O conteúdo foi colado em um controle de texto';
+    $MULTILANG_EventoLoad='A carga da janela ou do quadro foi concluída';
+    $MULTILANG_EventoUnload='Janela ou quadro de fechamento do usuário';
+    $MULTILANG_EventoResize='O usuário muda a janela o tamanho do quadro';
+    $MULTILANG_EventoClose='O usuário tenta fechar janela ou quadro';
+    $MULTILANG_EventoScroll='O usuário faz um rolo sobre janelas ou controle que o suportam';
+    $MULTILANG_EventoAnimFin='Uma animação CSS terminou';
+    $MULTILANG_EventoAnimInicio='Uma animação CSS foi iniciada';
+    $MULTILANG_EventoAnimIteracion='Uma animação CSS foi reiniciada / repetida';

@@ -1167,3 +1167,35 @@
 	$MULTILANG_ReplicaTodo='Use it as a mirror';
 	$MULTILANG_AyudaReplica='Define if all database operations over the main system should be replicated over this connection.  If this valus is NO, Practico will define the connection and make it ready to be used by code or individual operations only when you want.  This applies for data upgrade operations (Insert,Update,Delete) that was maked by the ejecutar_sql_unaria() internal function';
 	$MULTILANG_ConnAdicionales='Extra database connections defined';
+	
+	//Eventos javascript
+    $MULTILANG_EventoClick='Click over an element';
+    $MULTILANG_EventoDobleClick='Double click over an element';
+    $MULTILANG_EventoMouseDown='Mouse button is pressed over an element';
+    $MULTILANG_EventoMouseEnter='Mouse pointer get in an element';
+    $MULTILANG_EventoMouseLeave='Mouse pointer get out of an element';
+    $MULTILANG_EventoMouseMove='Mouse pointer is moving over an element';
+    $MULTILANG_EventoMouseOver='Mouse pointer is over an element';
+    $MULTILANG_EventoMouseOut='Mouse pointer goes out of an element or its childs';
+    $MULTILANG_EventoMouseUp='Mouse button is released over an element';
+    $MULTILANG_EventoContextMenu='Mouse right button pressed (before context menu appears)';
+    $MULTILANG_EventoKeyDown='User has a pressed key (form controls and body)';
+    $MULTILANG_EventoKeyPress='User press a key (moment in that is pressed) (form elements and body)';
+    $MULTILANG_EventoKeyUp='User release a key that was pressed (form elements and body)';
+    $MULTILANG_EventoFocus='A form element gets the focus';
+    $MULTILANG_EventoBlur='A form element loses the focus';
+    $MULTILANG_EventoChange='A form element changes';
+    $MULTILANG_EventoSelect='User selects text from an input or textarea';
+    $MULTILANG_EventoSubmit='Form submit button is pressed (before sending)';
+    $MULTILANG_EventoReset='Form reset button is pressed';
+    $MULTILANG_EventoCut='Data selected in a text control were cutted';
+    $MULTILANG_EventoCopy='Data selected in a text control were copied';
+    $MULTILANG_EventoPaste='Content was pasted in a text control';
+    $MULTILANG_EventoLoad='Window or frame load was completed';
+    $MULTILANG_EventoUnload='User close window or frame';
+    $MULTILANG_EventoResize='User changes window o frame sizes';
+    $MULTILANG_EventoClose='User try to close window or frame';
+    $MULTILANG_EventoScroll='User do a scroll over windows or control that support it';
+    $MULTILANG_EventoAnimFin='A CSS animation was ended';
+    $MULTILANG_EventoAnimInicio='A CSS animation was started';
+    $MULTILANG_EventoAnimIteracion='A CSS animation was restarted/repeated';
