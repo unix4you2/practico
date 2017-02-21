@@ -2864,7 +2864,7 @@ function selector_iconos_awesome()
 			//Abre el marco del control de datos style="display:inline;"
 			$salida.='<div class="form-group input-group '.$cadena_clase_datepicker.'" '.$cadena_ID_datepicker.'>';
             // Muestra el campo
-			$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control " '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$cadena_complementaria_datepicker.'  '.$registro_campos["personalizacion_tag"].' '.$cadena_placeholder.' >';
+			$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control " '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$cadena_complementaria_datepicker.'  '.$registro_campos["personalizacion_tag"].' '.$cadena_placeholder.' >';
 
 			// Muestra boton de busqueda cuando el campo sea usado para esto
 			if ($registro_campos["etiqueta_busqueda"]!="")
@@ -3008,7 +3008,7 @@ function selector_iconos_awesome()
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.= '<textarea id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="form-control" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' '.$cadena_placeholder.' >'.$cadena_valor.'</textarea>';
+			$salida.= '<textarea id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="form-control" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' '.$cadena_placeholder.' >'.$cadena_valor.'</textarea>';
 			//Si hay algun indicador adicional del campo abre los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '<span class="input-group-addon">';
@@ -3076,7 +3076,7 @@ function selector_iconos_awesome()
 			$PCO_HerramientasCamposSummerNote.=$registro_campos["barra_herramientas"]."|";
 
 			// Agrega el campo del form pero oculto
-			$salida.= '<textarea id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' style="visibility:hidden; display:none;" >'.$cadena_valor.'</textarea>';
+			$salida.= '<textarea id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' style="visibility:hidden; display:none;" >'.$cadena_valor.'</textarea>';
 
 			return $salida;
 		}
@@ -3131,7 +3131,7 @@ function selector_iconos_awesome()
 			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 			// Muestra el campo
-			$salida.= '<textarea id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="ckeditor" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].'  >'.$cadena_valor.'</textarea>';
+			$salida.= '<textarea id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="ckeditor" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].'  >'.$cadena_valor.'</textarea>';
 			
 			// Define las barras posibles para el editor
 			$barra_documento="['Source','-','NewPage','DocProps','Preview','Print','-','Templates']";
@@ -3264,7 +3264,7 @@ function selector_iconos_awesome()
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.= '<select id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" data-container="body" class="selectpicker combo-'.$registro_campos["campo"].' show-tick" '.@$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'" '.$registro_campos["personalizacion_tag"].' >';
+			$salida.= '<select id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" data-container="body" class="selectpicker combo-'.$registro_campos["campo"].' show-tick" '.@$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'" '.$registro_campos["personalizacion_tag"].' >';
             
                 //Genera Script Ajax y DIV para cambio de opciones en caliente
                 $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_opciones"]);
@@ -3590,7 +3590,7 @@ function selector_iconos_awesome()
 			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			$salida='
             <div class="embed-responsive embed-responsive-4by3"  '.$registro_campos["personalizacion_tag"].' >
-                <iframe id="'.$registro_campos["titulo"].'" name="'.$registro_campos["titulo"].'" src="'.$registro_campos["url_iframe"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
+                <iframe id="'.$registro_campos["id_html"].'" name="'.$registro_campos["titulo"].'" src="'.$registro_campos["url_iframe"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
             </div>';
 			return $salida;
 		}
@@ -3861,7 +3861,7 @@ $('#SampleElement').load('YourURL');
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-            $salida.= '<input class="span2" type="text" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" data-slider-min="'.$registro_campos["valor_minimo"].'" data-slider-max="'.$registro_campos["valor_maximo"].'" data-slider-step="'.$registro_campos["valor_salto"].'" '.$cadena_valor.' '.$registro_campos["personalizacion_tag"].' >';
+            $salida.= '<input class="span2" type="text" id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" data-slider-min="'.$registro_campos["valor_minimo"].'" data-slider-max="'.$registro_campos["valor_maximo"].'" data-slider-step="'.$registro_campos["valor_salto"].'" '.$cadena_valor.' '.$registro_campos["personalizacion_tag"].' >';
             //  data-slider-selection="after" data-slider-tooltip="hide">
 
             //Guarda la funcion para activar el slider posterior a su carga
@@ -3956,7 +3956,7 @@ $('#SampleElement').load('YourURL');
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control btn-default" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$registro_campos["personalizacion_tag"].' >';
+			$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control btn-default" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$registro_campos["personalizacion_tag"].' >';
 
 			//Si hay algun indicador adicional del campo abre los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
@@ -4304,7 +4304,7 @@ $('#SampleElement').load('YourURL');
             //Genera cadena par el identificador del elemento usando el campo "campo". Normalmente oculto
             $cadena_identificador='';
             if ($registro_campos["campo"]!="")
-                $cadena_identificador='id="'.$registro_campos["campo"].'"';
+                $cadena_identificador='id="'.$registro_campos["id_html"].'"';
 
             //Genera la cadena del enlace
             $cadena_javascript='href="javascript:  '.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.'  "';
@@ -4543,6 +4543,7 @@ $('#SampleElement').load('YourURL');
                                                                     //Imprime el campo solamente si no es fila unica, si es fila_unica guarda en una variable para uso posterior
                                                                     if($registro_campos["fila_unica"]=="0")
                                                                         {
+                                                                            echo '<div id="PCOContenedor_'.$registro_campos["id_html"].'">';
                                                                             // Formatea cada campo de acuerdo a su tipo
                                                                             // CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas abajo tambien
                                                                             $tipo_de_objeto=@$registro_campos["tipo"];
@@ -4601,7 +4602,7 @@ $('#SampleElement').load('YourURL');
                                                                             //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
                                                                             if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
                                                                                 echo $objeto_formateado;
-                                                                            
+                                                                            echo '</div>'; //Marco contenedor
                                                                         }
                                                                     
                                                                     //Cierra el marco para el estilo inline del objeto
@@ -4624,7 +4625,7 @@ $('#SampleElement').load('YourURL');
                                                         // Formatea cada campo de acuerdo a su tipo
                                                         // CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas arriba tambien
                                                         echo '
-                                                        <div class="table-responsive" style="border-width: 0px; margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;">
+                                                        <div id="PCOContenedor_'.$registro_campos["id_html"].'" class="table-responsive" style="border-width: 0px; margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;">
                                                         <table class="table table-condensed btn-xs '.$estilo_bordes.'" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;  padding: 0px; border-spacing: 0px; "><tr><td>';
                                                         $tipo_de_objeto=@$registro_campos["tipo"];
                                                         if ($tipo_de_objeto=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
@@ -4637,7 +4638,7 @@ $('#SampleElement').load('YourURL');
                                                         if ($tipo_de_objeto=="casilla_check") $objeto_formateado = @cargar_objeto_casilla_check($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
-                                                        if ($tipo_de_objeto=="informe") cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
+                                                        if ($tipo_de_objeto=="informe") @cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
                                                         if ($tipo_de_objeto=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
