@@ -1168,6 +1168,7 @@
 	$MULTILANG_ConnAdicionales='Conexiones a bases de datos adicionales';
 	
 	//Eventos javascript
+    $MULTILANG_EventosTit='Eventos y disparadores del objeto';
     $MULTILANG_EventoClick='Click sobre un elemento';
     $MULTILANG_EventoDobleClick='Doble click sobre un elemento';
     $MULTILANG_EventoMouseDown='Se pulsa un botón del ratón sobre un elemento';

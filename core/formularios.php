@@ -779,7 +779,7 @@ if ($PCO_Accion=="editar_formulario")
 
     <!-- INICIO MODAL ADICION DE CAMPOS -->
     <?php abrir_dialogo_modal("myModalElementoFormulario",$MULTILANG_FrmMsj1,"modal-wide oculto_impresion"); ?>
-              
+
 				<?php			
 				//Si se trata de la edicion de un campo entonces busca su registro para agregar valores al form
 				if (@$popup_activo=="FormularioCampos")
@@ -788,6 +788,27 @@ if ($PCO_Accion=="editar_formulario")
 						$registro_campo_editar = $consulta_campo_editar->fetch();
 					}
 				?>
+
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#propiedades_basicas-tab" data-toggle="tab"><i class="fa fa-wrench" aria-hidden="true"></i> &nbsp;<?php echo $MULTILANG_FrmTipoTit1; ?>: <?php echo $MULTILANG_Configuracion; ?></a>
+                </li>
+                <li><a href="#eventos_objeto-tab" data-toggle="tab"><i class="fa fa-bolt" aria-hidden="true"></i><i class="fa fa-linode" aria-hidden="true"></i> &nbsp;<?php echo $MULTILANG_EventosTit; ?></a>
+                </li>
+            </ul>
+
+
+        <!-- INICIO de las pestanas -->
+        <div class="tab-content">
+            
+
+    <!-- ############################################################## -->
+    <!-- ##################  INICIO DE LAS PROPIEDADES ################ -->
+    <!-- ############################################################## -->
+            <div class="tab-pane  active" id="propiedades_basicas-tab">
+                
+                <br>
 				<form name="datosform" id="datosform" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<?php 
 					//Define tipo de accion si se trata de creacion o modificacion
@@ -869,7 +890,7 @@ if ($PCO_Accion=="editar_formulario")
                                 <span class="input-group-addon">
                                     <?php echo $nombre_tabla; ?>.
                                 </span>
-                                    <select id="campo" name="campo" class="form-control input-sm" >
+                                    <select id="campo" name="campo" onchange="document.datosform.id_html.value=document.datosform.campo.value+document.datosform.campo_manual.value;" class="form-control input-sm" >
                                     <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                     <?php
                                         $resultadocampos=consultar_columnas($nombre_tabla);
@@ -893,7 +914,7 @@ if ($PCO_Accion=="editar_formulario")
                             </div>
 
                             <div class="form-group input-group">
-                                <input name="campo_manual"  value="<?php if (!@existe_campo_tabla($registro_campo_editar["campo"],$nombre_tabla)) echo @$registro_campo_editar["campo"]; ?>" type="text" class="form-control input-sm" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>">
+                                <input name="campo_manual" onchange="document.datosform.id_html.value=document.datosform.campo.value+document.datosform.campo_manual.value;" value="<?php if (!@existe_campo_tabla($registro_campo_editar["campo"],$nombre_tabla)) echo @$registro_campo_editar["campo"]; ?>" type="text" class="form-control input-sm" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>">
                                 <span class="input-group-addon">
                                 </span>
                             </div>
@@ -1652,12 +1673,35 @@ if ($PCO_Accion=="editar_formulario")
                             </div>
 						</div>
 
-
 			</div>
 		</div>
 
+            <div align="center">
+            <button type="button" class="btn btn-success" OnClick="document.datosform.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmBtnGuardar; ?></button>
+            </div>
 
-						
+            </div>
+    <!-- ############################################################## -->
+    <!-- ##################  CIERRE DE LAS PROPIEDADES ################ -->
+    <!-- ############################################################## -->
+
+
+    <!-- ############################################################## -->
+    <!-- ##################  INICIO DE LOS EVENTOS     ################ -->
+    <!-- ############################################################## -->
+            <div class="tab-pane  active" id="eventos_objeto-tab">
+                
+                <br>
+            </div>
+    <!-- ############################################################## -->
+    <!-- ##################  CIERRE DE LOS EVENTOS     ################ -->
+    <!-- ############################################################## -->
+
+
+
+
+                            </div>
+                            <!-- FIN de las pestanas -->
 
 					<?php
 						//Despues de agregar todos los parametros de campos, Si se detecta que es edicion de un campo se llama a la funcion de visualizacion de campos especificos
@@ -1669,7 +1713,6 @@ if ($PCO_Accion=="editar_formulario")
                     </form>
     <?php 
         $barra_herramientas_modal='
-            <button type="button" class="btn btn-success" OnClick="document.datosform.submit();"><i class="fa fa-floppy-o"></i> '.$MULTILANG_FrmBtnGuardar.'</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
         cerrar_dialogo_modal($barra_herramientas_modal);
     ?>

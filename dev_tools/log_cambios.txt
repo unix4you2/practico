@@ -32,6 +32,7 @@ inc/bootstrap/css/monitoreo.min.css
 mod/pbrowser/core/index.php
 mod/pcoder/index.php
 mod/pmobile/*
+inc/font-awesome/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -65,6 +66,8 @@ LogCambios="
 * Added: Nueva propiedad de ID_HTML permite identificar de manera única los elementos agregados al formulario.  Todos los valores de campo en instalaciones existentes son transferidos automáticamente a este nuevo campo para efectos de compatibilidad.  La funcionalidad genera además un marco contenedor invisible llamado PCOContenedor_xxxxxx con el id html del objeto para efectos de poder realizar manipulaciones en caliente del árbol DOM y programar eventos a cada elemento.  Se excluyen controles RadioButton, CheckBox
 * Fixed: Mejora a las funciones para recuperación de variables globales en PHP
 * Enhan: Se evitan mensajes de warning durante tiempo de instalación.
+* Enhan: Durante la edición del nombre de campo en un control de formulario (desde la lista o manual) se asigna automáticamente el valor al campo de ID_HTML para efectos de mantener uniformidad en los controles y unicidad para sus eventos.  Si se requiere un ID_HTML diferente al nombre del campo entonces se debería realizar su edición posterior.
+* Added: Actualizada la versión de Font-Awesome de 4.6.1 a 4.7
 "
 
 ########################################################################

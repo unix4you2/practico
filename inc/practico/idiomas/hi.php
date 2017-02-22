@@ -1167,6 +1167,7 @@
 	$MULTILANG_ConnAdicionales='अतिरिक्त डेटाबेस कनेक्शन परिभाषित';
 
     //Eventos javascript
+    $MULTILANG_EventosTit='Eventos y disparadores del objeto';
     $MULTILANG_EventoClick='एक तत्व पर क्लिक करें';
     $MULTILANG_EventoDobleClick='एक तत्व पर डबल क्लिक करें';
     $MULTILANG_EventoMouseDown='माउस बटन एक तत्व पर दबाया जाता है';
