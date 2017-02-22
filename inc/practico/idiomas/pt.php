@@ -95,6 +95,7 @@
     $MULTILANG_Escritorio='&Aacute;rea de Trabalho';
 	$MULTILANG_Estado='Estado';
 	$MULTILANG_Etiqueta='Etiqueta';
+    $MULTILANG_Evento='Evento';
     $MULTILANG_Explorar='Explorar';
 	$MULTILANG_Exportar='Exportação';
 	$MULTILANG_Fecha='Encontro';
@@ -1169,7 +1170,8 @@
 	$MULTILANG_ConnAdicionales='Conexões de banco de dados extras definidas';
 
     //Eventos javascript
-    $MULTILANG_EventosTit='Eventos y disparadores del objeto';
+    $MULTILANG_EventosTit='Eventos e objeto Triggers';
+    $MULTILANG_EventosPrevio='Antes que você possa automatizar as operações através de eventos ou aciona um controle de objeto ou em forma deve primeiro criar o controle básico e, em seguida, entrar novamente para ativar as opções de edição.';
     $MULTILANG_EventoClick='Clique sobre um elemento';
     $MULTILANG_EventoDobleClick='Clique duas vezes sobre um elemento';
     $MULTILANG_EventoMouseDown='O botão do mouse é pressionado sobre um elemento';
@@ -1200,3 +1202,14 @@
     $MULTILANG_EventoAnimFin='Uma animação CSS terminou';
     $MULTILANG_EventoAnimInicio='Uma animação CSS foi iniciada';
     $MULTILANG_EventoAnimIteracion='Uma animação CSS foi reiniciada / repetida';
+    $MULTILANG_EventoTipoRaton='Mouse Events or Pointing Device';
+    $MULTILANG_EventoTipoTeclado='Keyboard Events';
+    $MULTILANG_EventoTipoFormulario='Form Control Events';
+    $MULTILANG_EventoTipoVentana='Events for windows and frames';
+    $MULTILANG_EventoTipoAnima='Events for animations and transitions';
+    $MULTILANG_EventoTipoBateria='Events related to battery and its charge';
+    $MULTILANG_EventoTipoLlamadas='Events associated with calls and telephony';
+    $MULTILANG_EventoTipoDOM='Events on the DOM tree';
+    $MULTILANG_EventoTipoArrastrar='Events associated with drag and drop elements';
+    $MULTILANG_EventoTipoAudio='Audio and video events';
+    $MULTILANG_EventoTipoInternet='Internet Connection Events';

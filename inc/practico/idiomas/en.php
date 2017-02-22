@@ -95,6 +95,7 @@
     $MULTILANG_Escritorio='Desktop';
 	$MULTILANG_Estado='Status';
 	$MULTILANG_Etiqueta='Label';
+    $MULTILANG_Evento='Event';
     $MULTILANG_Explorar='Explore';
 	$MULTILANG_Exportar='Export';
 	$MULTILANG_Fecha='Date';
@@ -1170,6 +1171,7 @@
 	
 	//Eventos javascript
     $MULTILANG_EventosTit='Object events & triggers';
+    $MULTILANG_EventosPrevio='Before you can automate operations using events or triggers with an object or form control you must first create the base control and then enter edit it again to activate the options.';
     $MULTILANG_EventoClick='Click over an element';
     $MULTILANG_EventoDobleClick='Double click over an element';
     $MULTILANG_EventoMouseDown='Mouse button is pressed over an element';
@@ -1200,3 +1202,14 @@
     $MULTILANG_EventoAnimFin='A CSS animation was ended';
     $MULTILANG_EventoAnimInicio='A CSS animation was started';
     $MULTILANG_EventoAnimIteracion='A CSS animation was restarted/repeated';
+    $MULTILANG_EventoTipoRaton='Mouse Events or Pointing Device';
+    $MULTILANG_EventoTipoTeclado='Keyboard Events';
+    $MULTILANG_EventoTipoFormulario='Form Control Events';
+    $MULTILANG_EventoTipoVentana='Events for windows and frames';
+    $MULTILANG_EventoTipoAnima='Events for animations and transitions';
+    $MULTILANG_EventoTipoBateria='Events related to battery and its charge';
+    $MULTILANG_EventoTipoLlamadas='Events associated with calls and telephony';
+    $MULTILANG_EventoTipoDOM='Events on the DOM tree';
+    $MULTILANG_EventoTipoArrastrar='Events associated with drag and drop elements';
+    $MULTILANG_EventoTipoAudio='Audio and video events';
+    $MULTILANG_EventoTipoInternet='Internet Connection Events';

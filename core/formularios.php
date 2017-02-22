@@ -794,7 +794,7 @@ if ($PCO_Accion=="editar_formulario")
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#propiedades_basicas-tab" data-toggle="tab"><i class="fa fa-wrench" aria-hidden="true"></i> &nbsp;<?php echo $MULTILANG_FrmTipoTit1; ?>: <?php echo $MULTILANG_Configuracion; ?></a>
                 </li>
-                <li><a href="#eventos_objeto-tab" data-toggle="tab"><i class="fa fa-bolt" aria-hidden="true"></i><i class="fa fa-linode" aria-hidden="true"></i> &nbsp;<?php echo $MULTILANG_EventosTit; ?></a>
+                <li><a href="#eventos_objeto-tab" data-toggle="tab"><i class="fa fa-bolt" aria-hidden="true"></i> &nbsp;<?php echo $MULTILANG_EventosTit; ?></a>
                 </li>
             </ul>
 
@@ -1689,9 +1689,53 @@ if ($PCO_Accion=="editar_formulario")
     <!-- ############################################################## -->
     <!-- ##################  INICIO DE LOS EVENTOS     ################ -->
     <!-- ############################################################## -->
-            <div class="tab-pane  active" id="eventos_objeto-tab">
-                
+            <div class="tab-pane" id="eventos_objeto-tab">
                 <br>
+                
+                
+                <?php
+                    if (@$registro_campo_editar["id"]=="")
+                        {
+                            echo '  <br><br><table align=center width="60%"><tr><td>
+                                    <i class="fa fa-pull-left fa-info-circle fa-4x text-info" aria-hidden="true"></i>'.$MULTILANG_EventosPrevio.'
+                                    </td></tr></table><br><br>';
+                        }
+                    else
+                        {
+                            ?>
+
+                                <label for="tipo_evento"><?php echo $MULTILANG_Evento; ?>:</label>
+                                <div class="form-group input-group">
+                                    <select  id="tipo_evento" name="tipo_evento" data-size=10 data-live-search=true class="selectpicker"  data-style="btn-warning" OnChange="BuscarEventoExistente(this.options[this.selectedIndex].value);">
+                                        <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                                        <?php
+                                            //Presenta los tipos de evento disponibles
+                                            $CategoriaEvento="";
+                                            $resultado_eventos = ejecutar_sql("SELECT * FROM ".$TablasCore."evento_inventario WHERE 1 ORDER BY categoria");
+                                            while ($registro_eventos = $resultado_eventos->fetch())
+                                                {
+                                                    if ($CategoriaEvento!=$registro_eventos["categoria"])
+                                                        {
+                                                            echo '<optgroup label="'.$registro_eventos["categoria"].'">';
+                                                            $CategoriaEvento=$registro_eventos["categoria"];
+                                                        }
+                                                    echo '<option value="'.$registro_eventos["evento"].'" data-subtext="'.${str_replace("$","",$registro_eventos["descripcion"])}.'" >'.$registro_eventos["evento"].': </option>';
+                                                    //TODO: Cerrar cada optgroup cuando cambia de categoria para optimizar mas la sintaxis
+                                                }
+                                        ?>
+                                    </select>
+                                    <span class="input-group-addon">
+                                        <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    </span>
+                                </div>
+        						<hr>
+                <?php
+                        }
+                
+                ?>
+                
+                
+                
             </div>
     <!-- ############################################################## -->
     <!-- ##################  CIERRE DE LOS EVENTOS     ################ -->

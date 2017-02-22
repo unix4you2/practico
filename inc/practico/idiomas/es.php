@@ -96,6 +96,7 @@
 	$MULTILANG_Escritorio='Escritorio';
     $MULTILANG_Estado='Estado';
 	$MULTILANG_Etiqueta='Etiqueta';
+    $MULTILANG_Evento='Evento';
     $MULTILANG_Explorar='Explorar';
     $MULTILANG_Exportar='Exportar';
 	$MULTILANG_Fecha='Fecha';
@@ -1169,6 +1170,7 @@
 	
 	//Eventos javascript
     $MULTILANG_EventosTit='Eventos y disparadores del objeto';
+    $MULTILANG_EventosPrevio='Antes de que usted pueda automatizar operaciones mediante eventos o disparadores con un objeto o control de formulario primero debe crear el control base y luego entrar a editarlo nuevamente para activar las opciones.';
     $MULTILANG_EventoClick='Click sobre un elemento';
     $MULTILANG_EventoDobleClick='Doble click sobre un elemento';
     $MULTILANG_EventoMouseDown='Se pulsa un botón del ratón sobre un elemento';
@@ -1199,5 +1201,14 @@
     $MULTILANG_EventoAnimFin='Una animacion CSS ha finalizado';
     $MULTILANG_EventoAnimInicio='Una animacion CSS ha iniciado';
     $MULTILANG_EventoAnimIteracion='Una animacion CSS ha reiniciado/repetido';
-
-	
+    $MULTILANG_EventoTipoRaton='Eventos de Raton o Dispositivo apuntador';
+    $MULTILANG_EventoTipoTeclado='Eventos de Teclado';
+    $MULTILANG_EventoTipoFormulario='Eventos sobre controles de formulario';
+    $MULTILANG_EventoTipoVentana='Eventos para ventanas y marcos';
+    $MULTILANG_EventoTipoAnima='Eventos para animaciones y transiciones';
+    $MULTILANG_EventoTipoBateria='Eventos relacionados con la bateria y su carga';
+    $MULTILANG_EventoTipoLlamadas='Eventos asociados a llamadas y telefonia';
+    $MULTILANG_EventoTipoDOM='Eventos sobre el arbol DOM';
+    $MULTILANG_EventoTipoArrastrar='Eventos asociados a arrastrar y soltar elementos';
+    $MULTILANG_EventoTipoAudio='Eventos sobre audio y video';
+    $MULTILANG_EventoTipoInternet='Eventos sobre la conexion a Internet';

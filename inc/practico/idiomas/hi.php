@@ -95,6 +95,7 @@
     $MULTILANG_Escritorio='डेस्कटॉप';
 	$MULTILANG_Estado='स्थिति';
 	$MULTILANG_Etiqueta='लेबल';
+    $MULTILANG_Evento='Evento';
     $MULTILANG_Explorar='अन्वेषण';
 	$MULTILANG_Exportar='निर्यात';
 	$MULTILANG_Fecha='तारीख';
@@ -1167,7 +1168,8 @@
 	$MULTILANG_ConnAdicionales='अतिरिक्त डेटाबेस कनेक्शन परिभाषित';
 
     //Eventos javascript
-    $MULTILANG_EventosTit='Eventos y disparadores del objeto';
+    $MULTILANG_EventosTit='घटनाक्रम और ट्रिगर वस्तु';
+    $MULTILANG_EventosPrevio='इससे पहले कि आप घटनाओं के माध्यम से संचालन को स्वचालित या चलाता कर सकते हैं एक वस्तु या प्रपत्र नियंत्रण पहला बुनियादी नियंत्रण बना सकते हैं और तब संपादन विकल्प को सक्रिय करने के लिए फिर से दर्ज करना होगा।';
     $MULTILANG_EventoClick='एक तत्व पर क्लिक करें';
     $MULTILANG_EventoDobleClick='एक तत्व पर डबल क्लिक करें';
     $MULTILANG_EventoMouseDown='माउस बटन एक तत्व पर दबाया जाता है';
@@ -1198,4 +1200,15 @@
     $MULTILANG_EventoAnimFin='एक सीएसएस एनीमेशन समाप्त हो गया है गया था';
     $MULTILANG_EventoAnimInicio='एक सीएसएस एनीमेशन शुरू किया गया था';
     $MULTILANG_EventoAnimIteracion='एक सीएसएस एनीमेशन फिर आरंभ / दोहराया गया था';
+    $MULTILANG_EventoTipoRaton='Mouse Events or Pointing Device';
+    $MULTILANG_EventoTipoTeclado='Keyboard Events';
+    $MULTILANG_EventoTipoFormulario='Form Control Events';
+    $MULTILANG_EventoTipoVentana='Events for windows and frames';
+    $MULTILANG_EventoTipoAnima='Events for animations and transitions';
+    $MULTILANG_EventoTipoBateria='Events related to battery and its charge';
+    $MULTILANG_EventoTipoLlamadas='Events associated with calls and telephony';
+    $MULTILANG_EventoTipoDOM='Events on the DOM tree';
+    $MULTILANG_EventoTipoArrastrar='Events associated with drag and drop elements';
+    $MULTILANG_EventoTipoAudio='Audio and video events';
+    $MULTILANG_EventoTipoInternet='Internet Connection Events';
 
