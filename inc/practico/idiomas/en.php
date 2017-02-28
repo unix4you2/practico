@@ -999,7 +999,7 @@
 	$MULTILANG_CumplirRequisitos='Must meet the following';
 	$MULTILANG_CumplirPDO='PDO extension enabled';
 	$MULTILANG_CumplirDrivers='PDO Driver for the type of engine of your target database';
-	$MULTILANG_CumplirGD='GD Extension 2 + handling of graphics and support for FreeType 2 +';
+	$MULTILANG_CumplirGD='GD Extension 2 + handling of graphics and support for FreeType 2 +.<li>SimpleXML extension';
 	$MULTILANG_ChequeoDirectorios1='Checking directories';
 	$MULTILANG_ChequeoDirectorios2='The following files and directories must have write permissions for the application to operate correctly';
 	$MULTILANG_ErrorEscritura='<b> found errors when trying to write to the installation directories! </b>: <br> rule path must belong to the user running webserver Practical scripts (usually apache <br> www, www-data or similar) and have 755 permissions for folders and 644 case for. <br> A quick way to update these permissions can be run from the root of the Practical commands: <li> find. -type d-exec chmod 755 {} \; (change all folder permissions) <li> find. -type f-exec chmod 644 {} \; (change all file permissions) <li> chown-R www-data * (assuming that www-data is the user who runs the web service)';

@@ -999,7 +999,7 @@
 	$MULTILANG_CumplirRequisitos='Deve atender aos seguintes';
 	$MULTILANG_CumplirPDO='Extensão PDO ativado';
 	$MULTILANG_CumplirDrivers='PDO Driver para o tipo de motor de seu banco de dados de destino';
-	$MULTILANG_CumplirGD='GD Extensão 2 + manipulação de gr&aacute;ficos e suporte para FreeType 2 +';
+	$MULTILANG_CumplirGD='GD Extensão 2 + manipulação de gr&aacute;ficos e suporte para FreeType 2 +.<li>SimpleXML extension';
 	$MULTILANG_ChequeoDirectorios1='Verificando diret&oacute;rios';
 	$MULTILANG_ChequeoDirectorios2='Os seguintes arquivos e diret&oacute;rios devem ter permissões de gravação para o aplicativo para funcionar corretamente';
 	$MULTILANG_ErrorEscritura='<b> erros encontrados quando se tenta escrever para os diret&oacute;rios de instalação! </b>: <br> caminho regra deve pertencer ao usu&aacute;rio a execução de scripts de webserver pr&aacute;ticos (normalmente apache <br> www, www-data ou semelhante) e tem 755 permissões para pastas e 644 casos para. <br> Uma maneira r&aacute;pida de atualizar essas permissões podem ser executados a partir da raiz dos comandos Practico: <li> find. -type d-exec chmod 755 {} \; (alterar todas as permissões de pasta) <li> find. -type f-exec chmod 644 {} \; (alterar todas as permissões de arquivo) <li> chown-R www-data * (assumindo que www-data &eacute; o usu&aacute;rio que executa o serviço de web)';
