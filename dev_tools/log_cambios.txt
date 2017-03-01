@@ -31,6 +31,9 @@ inc/bootstrap/css/practico.min.css
 inc/bootstrap/css/monitoreo.min.css
 mod/pbrowser/core/index.php
 mod/pcoder/index.php
+mod/pcoder/inc/*
+mod/pcoder/js/*
+inc/ace/*
 mod/pmobile/*
 mod/pmydb/*
 inc/font-awesome/*
@@ -70,6 +73,7 @@ LogCambios="
 * Enhan: Durante la edición del nombre de campo en un control de formulario (desde la lista o manual) se asigna automáticamente el valor al campo de ID_HTML para efectos de mantener uniformidad en los controles y unicidad para sus eventos.  Si se requiere un ID_HTML diferente al nombre del campo entonces se debería realizar su edición posterior.
 * Added: Actualizada la versión de Font-Awesome de 4.6.1 a 4.7
 * Added: Actualizada la versión de PMyDB a 17.3 con mejoras sobre múltiples motores, temas y dependencias bootstrap eliminadas.
+* Added: Actualizado el editor ACE a version 1.2.6
 "
 
 ########################################################################

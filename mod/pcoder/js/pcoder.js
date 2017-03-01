@@ -1149,6 +1149,7 @@ $(window).bind('keydown', function(event) {
 });
 
 // CAPTURA DE EVENTOS DE TECLADO DESDE EL EDITOR  #############################################################
+/*
 editor.commands.addCommand({
 		name: 'deshacer',
 		bindKey: {win: 'Ctrl-Z', mac: 'Command-Option-Z'},
@@ -1165,6 +1166,7 @@ editor.commands.addCommand({
 			},
 		readOnly: true
 	});
+*/
 editor.commands.addCommand({
 		name: 'aumentarfuenteeditor',
 		bindKey: {win: 'Ctrl-+', mac: 'Command-Option-+'},

@@ -777,6 +777,31 @@ if ($PCO_Accion=="editar_formulario")
 		</script>
 
 
+
+    <!-- Modal EditorEventosJavascript -->
+    <?php abrir_dialogo_modal("myModalEventosJAVASCRIPT",$MULTILANG_EventosTit,"modal-wide"); ?>
+        <textarea name="javascript_eventos" data-editor="javascript" class="form-control" style="width: 800px; height: 450px;"></textarea>
+    <?php 
+        $barra_herramientas_modal='
+            <button type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-save"></i> '.$MULTILANG_Guardar.' </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+        cerrar_dialogo_modal($barra_herramientas_modal);
+    ?>
+    <!-- Fin Modal EditorEventosJavascript -->
+
+    <script language="JavaScript">
+        function PopUpEventosJavascript()
+            {
+                //Oculta el modal de edicion del control
+                $('#myModalElementoFormulario').modal('hide');
+                //Presenta modal con la creacion del evento
+                $('#myModalEventosJAVASCRIPT').modal('show');
+            }
+    </script>
+
+
+
+
     <!-- INICIO MODAL ADICION DE CAMPOS -->
     <?php abrir_dialogo_modal("myModalElementoFormulario",$MULTILANG_FrmMsj1,"modal-wide oculto_impresion"); ?>
 
@@ -1703,31 +1728,39 @@ if ($PCO_Accion=="editar_formulario")
                     else
                         {
                             ?>
+                            
 
-                                <label for="tipo_evento"><?php echo $MULTILANG_Evento; ?>:</label>
-                                <div class="form-group input-group">
-                                    <select  id="tipo_evento" name="tipo_evento" data-size=10 data-live-search=true class="selectpicker"  data-style="btn-warning" OnChange="BuscarEventoExistente(this.options[this.selectedIndex].value);">
-                                        <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
-                                        <?php
-                                            //Presenta los tipos de evento disponibles
-                                            $CategoriaEvento="";
-                                            $resultado_eventos = ejecutar_sql("SELECT * FROM ".$TablasCore."evento_inventario WHERE 1 ORDER BY categoria");
-                                            while ($registro_eventos = $resultado_eventos->fetch())
-                                                {
-                                                    if ($CategoriaEvento!=$registro_eventos["categoria"])
+                                    
+                            
+                            
+                            
+                                        <label for="tipo_evento"><?php echo $MULTILANG_Evento; ?>:</label>
+                                        <div class="form-group input-group">
+                                            <select  id="tipo_evento" name="tipo_evento" data-size=10 data-live-search=true class="selectpicker"  data-style="btn-warning" OnChange="BuscarEventoExistente(this.options[this.selectedIndex].value);">
+                                                <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                                                <?php
+                                                    //Presenta los tipos de evento disponibles para controles (01,02 y 03)
+                                                    $CategoriaEvento="";
+                                                    $resultado_eventos = ejecutar_sql("SELECT * FROM ".$TablasCore."evento_inventario WHERE (categoria LIKE '01%' or categoria LIKE '02%' or categoria LIKE '03%') ORDER BY categoria");
+                                                    while ($registro_eventos = $resultado_eventos->fetch())
                                                         {
-                                                            echo '<optgroup label="'.$registro_eventos["categoria"].'">';
-                                                            $CategoriaEvento=$registro_eventos["categoria"];
+                                                            if ($CategoriaEvento!=$registro_eventos["categoria"])
+                                                                {
+                                                                    echo '<optgroup label="'.$registro_eventos["categoria"].'">';
+                                                                    $CategoriaEvento=$registro_eventos["categoria"];
+                                                                }
+                                                            echo '<option value="'.$registro_eventos["evento"].'" data-subtext="'.${str_replace("$","",$registro_eventos["descripcion"])}.'" >'.$registro_eventos["evento"].': </option>';
+                                                            //TODO: Cerrar cada optgroup cuando cambia de categoria para optimizar mas la sintaxis
                                                         }
-                                                    echo '<option value="'.$registro_eventos["evento"].'" data-subtext="'.${str_replace("$","",$registro_eventos["descripcion"])}.'" >'.$registro_eventos["evento"].': </option>';
-                                                    //TODO: Cerrar cada optgroup cuando cambia de categoria para optimizar mas la sintaxis
-                                                }
-                                        ?>
-                                    </select>
-                                    <span class="input-group-addon">
-                                        <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-                                    </span>
-                                </div>
+                                                ?>
+                                            </select>
+
+                                            <span class="input-group-addon">
+                                                <a class="btn btn-primary btn-xs"  onclick="PopUpEventosJavascript();">
+                                                    <i class="fa fa-plus"></i> <?php echo $MULTILANG_Agregar; ?> <?php echo $MULTILANG_Evento; ?>
+                                                </a>
+                                            </span>
+                                        </div>
         						<hr>
                 <?php
                         }
