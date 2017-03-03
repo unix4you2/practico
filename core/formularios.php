@@ -776,29 +776,51 @@ if ($PCO_Accion=="editar_formulario")
 				}
 		</script>
 
-
-
     <!-- Modal EditorEventosJavascript -->
     <?php abrir_dialogo_modal("myModalEventosJAVASCRIPT",$MULTILANG_EventosTit,"modal-wide"); ?>
-        <textarea name="javascript_eventos" data-editor="javascript" class="form-control" style="width: 800px; height: 450px;"></textarea>
+        <form name="form_evento" target="_blank" action="<?php echo $ArchivoCORE; ?>">
+            <input type="Hidden" name="PCO_Accion" value="actualizar_java_evento">
+            <?php echo $MULTILANG_Evento?>: <input type="text" name="evento_objeto" value="" readonly style="background-color: transparent; border: 0px solid; font-weight: bold;  color: #0000FF;">
+            <?php echo $MULTILANG_Objeto?> ID: <input type="text" name="id_objeto_evento" value="" readonly style="background-color: transparent; border: 0px solid; font-weight: bold; color: #0000FF;">
+            <?php echo $MULTILANG_Tipo?> ID: <input type="text" name="tipo" value="" readonly style="background-color: transparent; border: 0px solid; font-weight: bold; color: #0000FF;">
+            <div id="ContenedorJavaScriptEventos" class="well" style="margin: 0px; padding: 0px;">
+            <textarea id="javascript_eventos" name="javascript_eventos" data-editor="javascript" class="form-control" style="width: 800px; height: 450px;"></textarea>
+            </div>
+        </form>
     <?php 
         $barra_herramientas_modal='
-            <button type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-save"></i> '.$MULTILANG_Guardar.' </button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+            <button type="button" class="btn btn-success" onclick="document.form_evento.submit();"><i class="fa fa-save"></i> '.$MULTILANG_Guardar.' </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
         cerrar_dialogo_modal($barra_herramientas_modal);
     ?>
     <!-- Fin Modal EditorEventosJavascript -->
 
+
+
     <script language="JavaScript">
         function PopUpEventosJavascript()
             {
-                //Oculta el modal de edicion del control
-                $('#myModalElementoFormulario').modal('hide');
-                //Presenta modal con la creacion del evento
-                $('#myModalEventosJAVASCRIPT').modal('show');
+                AnchoContenedorScript = $("#myModalEventosJAVASCRIPT").width();
+                //Verifica que se haya seleccionado un evento
+                if (document.datosform.tipo_evento.value!="")
+                    {
+                        //Actualiza valores del form de evento
+                        document.form_evento.evento_objeto.value=document.datosform.tipo_evento.value;
+                        document.form_evento.id_objeto_evento.value=document.datosform.idcampomodificado.value;
+                        document.form_evento.tipo.value=document.datosform.tipo.value;
+                        
+                        //Oculta el modal de edicion del control
+                        $('#myModalElementoFormulario').modal('hide');
+                        //Presenta modal con la creacion del evento
+                        $('#myModalEventosJAVASCRIPT').modal('show');
+                    }
+                else
+                    {
+                        //Presenta mensaje de error
+                        alert("<?php echo $MULTILANG_Seleccionar; ?> <?php echo $MULTILANG_Evento; ?> !!!");
+                    }
             }
     </script>
-
 
 
 
@@ -1728,12 +1750,6 @@ if ($PCO_Accion=="editar_formulario")
                     else
                         {
                             ?>
-                            
-
-                                    
-                            
-                            
-                            
                                         <label for="tipo_evento"><?php echo $MULTILANG_Evento; ?>:</label>
                                         <div class="form-group input-group">
                                             <select  id="tipo_evento" name="tipo_evento" data-size=10 data-live-search=true class="selectpicker"  data-style="btn-warning" OnChange="BuscarEventoExistente(this.options[this.selectedIndex].value);">
@@ -2549,6 +2565,40 @@ if ($PCO_Accion=="editar_formulario")
 			PCOFUNC_eliminar_formulario($formulario);
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_formularios"></form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: actualizar_java_evento
+	Actualiza el script asociado a un evento javascript de un control de formulario
+
+	Salida:
+		Registro de evento creado o actualizado
+*/
+	if ($PCO_Accion=="actualizar_java_evento")
+		{
+			//Busca si ya existe un evento del mismo tipo para ese objeto
+			$registro_evento_previo=ejecutar_sql("SELECT * FROM ".$TablasCore."evento_objeto WHERE objeto=? AND evento=? ","$id_objeto_evento$_SeparadorCampos_$evento_objeto")->fetch();
+			if ($registro_evento_previo["id"]=="")
+			    {
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."evento_objeto (".$ListaCamposSinID_evento_objeto.") VALUES (?,?,?)","$id_objeto_evento$_SeparadorCampos_$evento_objeto$_SeparadorCampos_$javascript_eventos");
+					auditar("Agrega evento javascript para $id_objeto_evento");
+			    }
+			else
+			    {
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."evento_objeto SET javascript=? WHERE id=? ","$javascript_eventos$_SeparadorCampos_$id_objeto_evento");
+					auditar("Actualiza evento javascript para $id_objeto_evento");
+			    }
+
+/*
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
+					<input type="Hidden" name="PCO_Accion" value="editar_formulario">
+					<input type="Hidden" name="formulario" value="'.$formulario.'"></form>
+								<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+*/
 		}
 
 

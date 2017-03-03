@@ -842,6 +842,7 @@ function datatable_desde_hojacalculo($PathArchivo,$NroLineas)
 			if ($PCO_Accion== "guardar_datos_formulario")			$retorno = 1;
 			if ($PCO_Accion== "eliminar_datos_formulario")			$retorno = 1;
 			if ($PCO_Accion== "actualizar_datos_formulario")		$retorno = 1;
+			if ($PCO_Accion== "actualizar_javascript_evento")		$retorno = 1;
 			if ($PCO_Accion== "actualizar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
 			if ($PCO_Accion== "copiar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
 			if ($PCO_Accion== "definir_copia_formularios")			$retorno = permiso_agregado_accion("administrar_formularios");

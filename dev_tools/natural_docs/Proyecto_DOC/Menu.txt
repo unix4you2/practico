@@ -156,8 +156,6 @@ Group: Mod  {
       File: Idioma portugues para modulo de PBrowser  (mod/pbrowser/inc/idiomas/pt.php)
       }  # Group: Pbrowser
 
-   File: pcc_erp/index.php  (mod/pcc_erp/index.php)
-
    Group: Pcoder  {
 
       File: Conexiones PDO  (mod/pcoder/inc/conexiones.php)
@@ -177,6 +175,7 @@ Group: Mod  {
       File: PCONSOLE_Cargar  (mod/pcoder/mod/consola/index.php)
       }  # Group: Pcoder
 
+   File: PCOMOD_SimularMovil  (mod/pmobile/index.php)
    File: probar_ejemplo_mvc  (mod/mvc/index.php)
 
    Group: Sopa  {
