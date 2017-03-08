@@ -96,6 +96,7 @@
 	$MULTILANG_Estado='स्थिति';
 	$MULTILANG_Etiqueta='लेबल';
     $MULTILANG_Evento='Evento';
+    $MULTILANG_Existentes='Existing';
     $MULTILANG_Explorar='अन्वेषण';
 	$MULTILANG_Exportar='निर्यात';
 	$MULTILANG_Fecha='तारीख';
@@ -1211,4 +1212,3 @@
     $MULTILANG_EventoTipoArrastrar='Events associated with drag and drop elements';
     $MULTILANG_EventoTipoAudio='Audio and video events';
     $MULTILANG_EventoTipoInternet='Internet Connection Events';
-

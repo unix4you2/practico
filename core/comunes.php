@@ -842,7 +842,9 @@ function datatable_desde_hojacalculo($PathArchivo,$NroLineas)
 			if ($PCO_Accion== "guardar_datos_formulario")			$retorno = 1;
 			if ($PCO_Accion== "eliminar_datos_formulario")			$retorno = 1;
 			if ($PCO_Accion== "actualizar_datos_formulario")		$retorno = 1;
-			if ($PCO_Accion== "actualizar_javascript_evento")		$retorno = 1;
+			if ($PCO_Accion== "actualizar_java_evento")		        $retorno = permiso_agregado_accion("administrar_formularios");
+			if ($PCO_Accion== "editar_evento_objeto")		        $retorno = permiso_agregado_accion("administrar_formularios");
+			if ($PCO_Accion== "eliminar_evento_objeto")		        $retorno = permiso_agregado_accion("administrar_formularios");
 			if ($PCO_Accion== "actualizar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
 			if ($PCO_Accion== "copiar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
 			if ($PCO_Accion== "definir_copia_formularios")			$retorno = permiso_agregado_accion("administrar_formularios");
@@ -4784,13 +4786,53 @@ $('#SampleElement').load('YourURL');
 			if (!$anular_form)
 				echo '</form>';
 			
+			//Carga todos los eventos asociados a los controles de formulario
+			$eventos_controles_formulario=ejecutar_sql("SELECT ".$TablasCore."evento_objeto.*,".$TablasCore."formulario_objeto.id_html FROM ".$TablasCore."evento_objeto,".$TablasCore."formulario_objeto WHERE ".$TablasCore."evento_objeto.objeto=".$TablasCore."formulario_objeto.id  AND ".$TablasCore."formulario_objeto.formulario=$formulario ");
+			while($registro_eventos_definidos = $eventos_controles_formulario->fetch())
+				{
+				    //Limpia el metodo, asume no conocerlo
+				    $MetodoJQuery="";
+                    //1-Raton
+                    if ($registro_eventos_definidos["evento"]=="onclick") $MetodoJQuery="click";
+                    if ($registro_eventos_definidos["evento"]=="ondblclick") $MetodoJQuery="dblclick";
+                    if ($registro_eventos_definidos["evento"]=="onmousedown") $MetodoJQuery="mousedown";
+                    if ($registro_eventos_definidos["evento"]=="onmouseenter") $MetodoJQuery="mouseenter";
+                    if ($registro_eventos_definidos["evento"]=="onmouseleave") $MetodoJQuery="mouseleave";
+                    if ($registro_eventos_definidos["evento"]=="onmousemove") $MetodoJQuery="mousemove";
+                    if ($registro_eventos_definidos["evento"]=="onmouseover") $MetodoJQuery="mouseover";
+                    if ($registro_eventos_definidos["evento"]=="onmouseout") $MetodoJQuery="mouseout";
+                    if ($registro_eventos_definidos["evento"]=="onmouseup") $MetodoJQuery="mouseup";
+                    if ($registro_eventos_definidos["evento"]=="contextmenu") $MetodoJQuery="contextmenu";
+                    //2-Teclado
+                    if ($registro_eventos_definidos["evento"]=="onkeydown") $MetodoJQuery="keydown";
+                    if ($registro_eventos_definidos["evento"]=="onkeypress") $MetodoJQuery="keypress";
+                    if ($registro_eventos_definidos["evento"]=="onkeyup") $MetodoJQuery="keyup";
+                    //3-Formularios
+                    if ($registro_eventos_definidos["evento"]=="onfocus") $MetodoJQuery="focus";
+                    if ($registro_eventos_definidos["evento"]=="onblur") $MetodoJQuery="blur";
+                    if ($registro_eventos_definidos["evento"]=="onchange") $MetodoJQuery="change";
+                    if ($registro_eventos_definidos["evento"]=="onselect") $MetodoJQuery="select";
+                    if ($registro_eventos_definidos["evento"]=="onsubmit") $MetodoJQuery="submit";
+                    if ($registro_eventos_definidos["evento"]=="oncut") $MetodoJQuery="reset";
+                    if ($registro_eventos_definidos["evento"]=="oncopy") $MetodoJQuery="click";
+                    if ($registro_eventos_definidos["evento"]=="onpaste") $MetodoJQuery="click";
+					//Imprime el script asociado al evento siempre y cuando la funcion sea reconocida
+					if ($MetodoJQuery!="")
+					    {
+        					$PCO_FuncionesJSInternasFORM .= '
+        					    <script language=\'JavaScript\'>
+                                    $( "#'.$registro_eventos_definidos["id_html"].'" ).'.$MetodoJQuery.'(function() {
+                                      '.$registro_eventos_definidos["javascript"].'
+                                    });
+        					    </script>';
+					    }
+				}
+
 			//Carga las funciones JavaScript asociadas al formulario y llama la funcion FrmAutoRun()
-				$PCO_FuncionesJSInternasFORM = '<script type="text/javascript">'.$registro_formulario["javascript"].' FrmAutoRun(); </script>';
+				$PCO_FuncionesJSInternasFORM .= '<script type="text/javascript">'.$registro_formulario["javascript"].' FrmAutoRun(); </script>';
 			
 			if ($en_ventana) cerrar_ventana();
 		  }
-
-
 
 
 /* ################################################################## */

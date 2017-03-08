@@ -696,6 +696,43 @@
 		}
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: editar_evento_objeto
+	Edita el evento asociado a un objeto determinado en una ventana independiente que se lanza como popup
+*/
+	if ($PCO_Accion=="editar_evento_objeto")
+		{
+			//Busca si ya existe un evento del mismo tipo para ese objeto
+			$registro_evento_previo=ejecutar_sql("SELECT * FROM ".$TablasCore."evento_objeto WHERE objeto=? AND evento=? ","$id_objeto_evento$_SeparadorCampos_$evento_objeto")->fetch();
+        ?>
+            <iframe name="iframe_almacenamiento" src="about:blank" style="visibility: hidden; display: none;"></iframe>
+            <form name="form_evento" target="iframe_almacenamiento" action="<?php echo $ArchivoCORE; ?>" style="padding: 0px; margin: 0px;">
+                <input type="Hidden" name="PCO_Accion" value="actualizar_java_evento">
+                <?php echo $MULTILANG_Evento?>: <input type="text" name="evento_objeto" value="<?php echo $evento_objeto; ?>" readonly style="width:200px; background-color: transparent; border: 0px solid; font-weight: bold;  color: #0000FF;">
+                <?php echo $MULTILANG_Objeto?> ID: <input type="text" name="id_objeto_evento" value="<?php echo $id_objeto_evento; ?>" readonly style="width:40px; background-color: transparent; border: 0px solid; font-weight: bold; color: #0000FF;">
+                <?php echo $MULTILANG_Tipo?> <?php echo $MULTILANG_Objeto?>: <input type="text" name="tipo" value="<?php echo $tipo; ?>" readonly style="width:200px; background-color: transparent; border: 0px solid; font-weight: bold; color: #0000FF;">
+                <input type="Hidden" name="Presentar_FullScreen" value="1">
+                <input type="Hidden" name="Precarga_EstilosBS" value="0">
+                <div class="well" style="margin: 0px; padding: 0px;">
+                <textarea id="javascript_eventos" name="javascript_eventos" data-editor="javascript" class="form-control" style="width: 783px; height: 480px;"><?php echo $registro_evento_previo["javascript"]; ?></textarea>
+                </div>
+            </form>
+            <form name="form_evento_eliminar" action="<?php echo $ArchivoCORE; ?>" style="padding: 0px; margin: 0px;">
+                <input type="Hidden" name="PCO_Accion" value="eliminar_evento_objeto">
+                <input type="Hidden" name="evento" value="<?php echo $registro_evento_previo["id"]; ?>">
+                <input type="Hidden" name="Presentar_FullScreen" value="1">
+                <input type="Hidden" name="Precarga_EstilosBS" value="0">
+            </form>
+            <?php 
+                echo '<br>
+                    <button type="button" class="btn btn-success" onclick="PCOJS_MostrarMensajeCargandoSimple(1000); document.form_evento.submit();"><i class="fa fa-save"></i> '.$MULTILANG_Guardar.' </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-danger" onclick="form_evento_eliminar.submit();"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.' '.$MULTILANG_Evento.'</button>';
+		}
+
 
 /* ################################################################## */
 /* ################################################################## */
@@ -776,53 +813,16 @@ if ($PCO_Accion=="editar_formulario")
 				}
 		</script>
 
-    <!-- Modal EditorEventosJavascript -->
-    <?php abrir_dialogo_modal("myModalEventosJAVASCRIPT",$MULTILANG_EventosTit,"modal-wide"); ?>
-        <form name="form_evento" target="_blank" action="<?php echo $ArchivoCORE; ?>">
-            <input type="Hidden" name="PCO_Accion" value="actualizar_java_evento">
-            <?php echo $MULTILANG_Evento?>: <input type="text" name="evento_objeto" value="" readonly style="background-color: transparent; border: 0px solid; font-weight: bold;  color: #0000FF;">
-            <?php echo $MULTILANG_Objeto?> ID: <input type="text" name="id_objeto_evento" value="" readonly style="background-color: transparent; border: 0px solid; font-weight: bold; color: #0000FF;">
-            <?php echo $MULTILANG_Tipo?> ID: <input type="text" name="tipo" value="" readonly style="background-color: transparent; border: 0px solid; font-weight: bold; color: #0000FF;">
-            <div id="ContenedorJavaScriptEventos" class="well" style="margin: 0px; padding: 0px;">
-            <textarea id="javascript_eventos" name="javascript_eventos" data-editor="javascript" class="form-control" style="width: 800px; height: 450px;"></textarea>
-            </div>
-        </form>
-    <?php 
-        $barra_herramientas_modal='
-            <button type="button" class="btn btn-success" onclick="document.form_evento.submit();"><i class="fa fa-save"></i> '.$MULTILANG_Guardar.' </button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-        cerrar_dialogo_modal($barra_herramientas_modal);
-    ?>
-    <!-- Fin Modal EditorEventosJavascript -->
-
-
-
-    <script language="JavaScript">
-        function PopUpEventosJavascript()
-            {
-                AnchoContenedorScript = $("#myModalEventosJAVASCRIPT").width();
-                //Verifica que se haya seleccionado un evento
-                if (document.datosform.tipo_evento.value!="")
-                    {
-                        //Actualiza valores del form de evento
-                        document.form_evento.evento_objeto.value=document.datosform.tipo_evento.value;
-                        document.form_evento.id_objeto_evento.value=document.datosform.idcampomodificado.value;
-                        document.form_evento.tipo.value=document.datosform.tipo.value;
-                        
-                        //Oculta el modal de edicion del control
-                        $('#myModalElementoFormulario').modal('hide');
-                        //Presenta modal con la creacion del evento
-                        $('#myModalEventosJAVASCRIPT').modal('show');
-                    }
-                else
-                    {
-                        //Presenta mensaje de error
+        <script language="JavaScript">
+            function PopUpEventosJavascript()
+                {
+                    //Verifica que se haya seleccionado un evento y abre el popup, sino muestra error
+                    if (document.datosform.tipo_evento.value!="")
+                        PCO_VentanaPopup('index.php?PCO_Accion=editar_evento_objeto&id_objeto_evento='+document.datosform.idcampomodificado.value+'&evento_objeto='+document.datosform.tipo_evento.value+'&tipo='+document.datosform.tipo.value+'&Presentar_FullScreen=1&Precarga_EstilosBS=1','Evento_'+document.datosform.tipo_evento.value+'_ID'+document.datosform.idcampomodificado.value,'toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=no, fullscreen=no, width=850, height=600');
+                    else
                         alert("<?php echo $MULTILANG_Seleccionar; ?> <?php echo $MULTILANG_Evento; ?> !!!");
-                    }
-            }
-    </script>
-
-
+                }
+        </script>
 
     <!-- INICIO MODAL ADICION DE CAMPOS -->
     <?php abrir_dialogo_modal("myModalElementoFormulario",$MULTILANG_FrmMsj1,"modal-wide oculto_impresion"); ?>
@@ -1752,7 +1752,7 @@ if ($PCO_Accion=="editar_formulario")
                             ?>
                                         <label for="tipo_evento"><?php echo $MULTILANG_Evento; ?>:</label>
                                         <div class="form-group input-group">
-                                            <select  id="tipo_evento" name="tipo_evento" data-size=10 data-live-search=true class="selectpicker"  data-style="btn-warning" OnChange="BuscarEventoExistente(this.options[this.selectedIndex].value);">
+                                            <select  id="tipo_evento" name="tipo_evento" data-size=10 data-live-search=true class="selectpicker"  data-style="btn-warning">
                                                 <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                                 <?php
                                                     //Presenta los tipos de evento disponibles para controles (01,02 y 03)
@@ -1778,12 +1778,40 @@ if ($PCO_Accion=="editar_formulario")
                                             </span>
                                         </div>
         						<hr>
-                <?php
+                            
+                            <?php
+                    		        abrir_ventana($MULTILANG_Existentes, 'panel-primary');
+                    		?>
+                    				<table class="table table-condensed btn-xs table-hover table-unbordered ">
+                    					<thead>
+                                        <tr>
+                    						<td><b><?php echo $MULTILANG_Evento; ?></b></td>
+                    						<td></td>
+                    						<td></td>
+                    					</tr>
+                                        </thead>
+                                        <tbody>
+                    		 <?php
+                                    $IdentificadorObjeto=$registro_campo_editar["id"];
+                    				$consulta_eventos_definidos=ejecutar_sql("SELECT id,".$ListaCamposSinID_evento_objeto." FROM ".$TablasCore."evento_objeto WHERE objeto='$IdentificadorObjeto' ");
+                    				while($registro_eventos_definidos = $consulta_eventos_definidos->fetch())
+                    					{
+                    						echo '<tr>
+                    								<td>'.$registro_eventos_definidos["evento"].'</td>
+                    								<td align="center">
+                    										<form action="'.$ArchivoCORE.'" method="POST" name="dfe'.$registro_eventos_definidos["id"].'" id="dfe'.$registro_eventos_definidos["id"].'">
+                    										</form>
+                    								</td>
+                    								<td align="right">
+                                                            <button class="btn btn-default btn-xs" onclick="PCO_VentanaPopup(\'index.php?PCO_Accion=editar_evento_objeto&id_objeto_evento='.$registro_eventos_definidos["objeto"].'&evento_objeto='.$registro_eventos_definidos["evento"].'&tipo=\'+document.datosform.tipo.value+\'&Presentar_FullScreen=1&Precarga_EstilosBS=1\',\'Evento_'.$registro_eventos_definidos["evento"].'_ID'.$registro_eventos_definidos["id"].'\',\'toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=no, fullscreen=no, width=850, height=600\');"><i class="fa fa-pencil"></i> '.$MULTILANG_Editar.' / <i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</button>
+                    								</td>
+                    							</tr>';
+                    					}
+                    				echo '</tbody>
+                                    </table>';
+                    			cerrar_ventana();
                         }
-                
                 ?>
-                
-                
                 
             </div>
     <!-- ############################################################## -->
@@ -2571,6 +2599,26 @@ if ($PCO_Accion=="editar_formulario")
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: eliminar_evento_objeto
+	Elimina el script asociado a un evento javascript de un control de formulario
+
+	Salida:
+		Elimina un evento asociado a un objeto
+*/
+	if ($PCO_Accion=="eliminar_evento_objeto")
+		{
+			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."evento_objeto WHERE id=? ","$evento");
+			auditar("Elimina evento javascript $evento");
+			echo '<script TYPE="text/javascript" LANGUAGE="JavaScript">
+    			alert("'.$MULTILANG_Eliminar.' '.$MULTILANG_Evento.' '.$MULTILANG_Finalizado.'");
+    			window.close();
+			</script>';
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: actualizar_java_evento
 	Actualiza el script asociado a un evento javascript de un control de formulario
 
@@ -2588,17 +2636,10 @@ if ($PCO_Accion=="editar_formulario")
 			    }
 			else
 			    {
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."evento_objeto SET javascript=? WHERE id=? ","$javascript_eventos$_SeparadorCampos_$id_objeto_evento");
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."evento_objeto SET javascript=? WHERE objeto=? AND evento=? ","$javascript_eventos$_SeparadorCampos_$id_objeto_evento$_SeparadorCampos_$evento_objeto");
 					auditar("Actualiza evento javascript para $id_objeto_evento");
 			    }
-
-/*
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
-					<input type="Hidden" name="PCO_Accion" value="editar_formulario">
-					<input type="Hidden" name="formulario" value="'.$formulario.'"></form>
-								<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-*/
+			die();
 		}
 
 

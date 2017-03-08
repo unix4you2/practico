@@ -96,6 +96,7 @@
 	$MULTILANG_Estado='Status';
 	$MULTILANG_Etiqueta='Label';
     $MULTILANG_Evento='Event';
+    $MULTILANG_Existentes='Existing';
     $MULTILANG_Explorar='Explore';
 	$MULTILANG_Exportar='Export';
 	$MULTILANG_Fecha='Date';
