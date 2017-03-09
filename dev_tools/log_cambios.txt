@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno="16"
-VersionCompatibleMes="5"
+VersionCompatibleAno=""
+VersionCompatibleMes=""
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno="17"
-VersionFinalMes="3"
+VersionFinalAno=""
+VersionFinalMes=""
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
@@ -15,28 +15,9 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 index.php
-core/codigobarras.php
-core/conexiones.php
-core/conexiones_extra.php
 core/comunes.php
-core/formularios.php
-core/marco_conf.php
-core/objetos.php
-core/tablas.php
-core/usuarios.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
-inc/bootstrap/js/practico.min.js
-inc/bootstrap/css/practico.min.css
-inc/bootstrap/css/monitoreo.min.css
-mod/pbrowser/core/index.php
-mod/pcoder/index.php
-mod/pcoder/inc/*
-mod/pcoder/js/*
-inc/ace/*
-mod/pmobile/*
-mod/pmydb/*
-inc/font-awesome/*
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -47,158 +28,13 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Sistema de autoregistro en la plataforma permite ahora a los usuarios crear sus propias credenciales y verificarlas por correo
-* Added: Ahora se permite activar o desactivar el código captcha durante el login por medio del panel de configuración
-* Added: Panel de configuración de la herramienta ahora permite definir cuándo tener activos los enlaces de recuperar contraseña y auto-reistro cuando el motor de autenticación utilizado es el interno.
-* Added: Vagrantfile lista para su uso con Vagrant
-* Added: Modulo simulador de dispositivos moviles sobre /mod/pmobile puede ser llamado con el parametro URL (entre otros como Ancho y Alto) para simular su presentacion sobre un dispositivo movil.
-* Added: Posibilidad de automatizar casi 100 tipos de eventos JAvaScript diferentes sobre controles de formulario, ventanas, marcos, batería de dispositivos, ratón, etc.
-* Fixed: Imagen de logo social inexistente es retirada de la ventana de login. Mejorada maquetación.
-* Enhan: Ahora la etiqueta de boton de inicio con sesion de Práctico contiene el nombre de la aplicación configurada por el usuario.
-* Added: Ahora los campos de tipo texto, texto largo y tipo contraseñas soportan el uso de etiquetas placeholder desde el diseño del formulario
-* Added: Ahora los campos pueden especificar si se desea o no presentar la etiqueta o label sobre el formulario
-* Added: Los objetos tipo boton de comando en formularios ahora pueden agregar su propio ID de html usando la propiedad oculta de campo de base de datos
-* Fixed: Ahora se muestra mensaje de error cuando no se cuenta con un Driver de bases de datos válido
-* Fixed: Compatibilidad para PHP 7. Error en variables $$vble["campo"] ahora son cambiadas a ${$vble["campo"]}
-* Fixed: Problema con valor predeterminado sobre la tabla core_chat, campo sent.  Es dejado sin valor predeterminado.
-* Fixed: Compatibilidad PHP 7.  Reemplazadas funciones deprecated de ereg_replace (Sintaxis POSIX) por preg_replace (Sintaxis PCRE)
-* Fixed: Compatibilidad PHP 7.  BarCode Coder Library (BCC Library).  Reemplazo de variables $$
-* Fixed: Agregadas definiciones de campos y tablas nuevas en def_basedatos.php
-* Enhan: Ampliada longitud del campo de accion sobre las auditorías para permitir hacer log completo y captura de los eventos SQL
-* Added: Modo de depuración del SQL permite almacenar sobre auditoría todas las operaciones enviadas al motor de base de datos.
 * Added: Compatibilidad MariaDB y MySQL 5.7 en clausulas order by cuando sql_mode=only_full_group_by se agregan los campos de id al order by para evitar conflictos con esta nueva configuración.
-* Added: Nueva propiedad de ID_HTML permite identificar de manera única los elementos agregados al formulario.  Todos los valores de campo en instalaciones existentes son transferidos automáticamente a este nuevo campo para efectos de compatibilidad.  La funcionalidad genera además un marco contenedor invisible llamado PCOContenedor_xxxxxx con el id html del objeto para efectos de poder realizar manipulaciones en caliente del árbol DOM y programar eventos a cada elemento.  Se excluyen controles RadioButton, CheckBox
-* Fixed: Mejora a las funciones para recuperación de variables globales en PHP
-* Enhan: Se evitan mensajes de warning durante tiempo de instalación.
-* Enhan: Durante la edición del nombre de campo en un control de formulario (desde la lista o manual) se asigna automáticamente el valor al campo de ID_HTML para efectos de mantener uniformidad en los controles y unicidad para sus eventos.  Si se requiere un ID_HTML diferente al nombre del campo entonces se debería realizar su edición posterior.
-* Added: Actualizada la versión de Font-Awesome de 4.6.1 a 4.7
-* Added: Actualizada la versión de PMyDB a 17.3 con mejoras sobre múltiples motores, temas y dependencias bootstrap eliminadas.
-* Added: Actualizado el editor ACE a version 1.2.6
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-ALTER TABLE core_formulario_objeto ADD valor_placeholder varchar(255) DEFAULT '';
-ALTER TABLE core_formulario_objeto ADD ocultar_etiqueta int(1) DEFAULT 0;
-ALTER TABLE core_auditoria CHANGE accion accion text;
-ALTER TABLE core_formulario_objeto CHANGE ancho ancho int(10) NULL DEFAULT '0';
-ALTER TABLE core_formulario_objeto CHANGE alto alto int(10) NULL DEFAULT '0';
-ALTER TABLE core_formulario_objeto CHANGE valor_minimo valor_minimo int(10) NULL DEFAULT '0';
-ALTER TABLE core_formulario_objeto CHANGE valor_maximo valor_maximo int(10) NULL DEFAULT '100';
-ALTER TABLE core_formulario_objeto CHANGE valor_salto valor_salto int(10) NULL DEFAULT '1';
-ALTER TABLE core_formulario_objeto ADD id_html varchar(255) DEFAULT '';
-UPDATE core_formulario_objeto SET id_html=campo;
-DROP TABLE IF EXISTS core_evento_objeto;
-CREATE TABLE core_evento_objeto (
-  id int(10) AUTO_INCREMENT,
-  objeto int(10),
-  evento varchar(250) default '',
-  javascript text,
-  PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-DROP TABLE IF EXISTS core_evento_inventario;
-CREATE TABLE core_evento_inventario (
-  id int(10) AUTO_INCREMENT,
-  evento varchar(250) default '',
-  categoria varchar(250) default '',
-  descripcion varchar(250) default '',
-  PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onclick',                    '01. Raton (Mouse)',        '$MULTILANG_EventoClick');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('ondblclick',                 '01. Raton (Mouse)',        '$MULTILANG_EventoDobleClick');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onmousedown',                '01. Raton (Mouse)',        '$MULTILANG_EventoMouseDown');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onmouseenter',               '01. Raton (Mouse)',        '$MULTILANG_EventoMouseEnter');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onmouseleave',               '01. Raton (Mouse)',        '$MULTILANG_EventoMouseLeave');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onmousemove',                '01. Raton (Mouse)',        '$MULTILANG_EventoMouseMove');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onmouseover',                '01. Raton (Mouse)',        '$MULTILANG_EventoMouseOver');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onmouseout',                 '01. Raton (Mouse)',        '$MULTILANG_EventoMouseOut');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onmouseup',                  '01. Raton (Mouse)',        '$MULTILANG_EventoMouseUp');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('contextmenu',                '01. Raton (Mouse)',        '$MULTILANG_EventoContextMenu');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onkeydown',                  '02. Teclado (Keyboard)',   '$MULTILANG_EventoKeyDown');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onkeypress',                 '02. Teclado (Keyboard)',   '$MULTILANG_EventoKeyPress');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onkeyup',                    '02. Teclado (Keyboard)',   '$MULTILANG_EventoKeyUp');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onfocus',                    '03. Formularios (Forms)',  '$MULTILANG_EventoFocus');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onblur',                     '03. Formularios (Forms)',  '$MULTILANG_EventoBlur');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onchange',                   '03. Formularios (Forms)',  '$MULTILANG_EventoChange');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onselect',                   '03. Formularios (Forms)',  '$MULTILANG_EventoSelect');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onsubmit',                   '03. Formularios (Forms)',  '$MULTILANG_EventoSubmit');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onreset',                    '03. Formularios (Forms)',  '$MULTILANG_EventoReset');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('oncut',                      '03. Formularios (Forms)',  '$MULTILANG_EventoCut');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('oncopy',                     '03. Formularios (Forms)',  '$MULTILANG_EventoCopy');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onpaste',                    '03. Formularios (Forms)',  '$MULTILANG_EventoPaste');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onload',                     '04. Ventanas y Marcos (Windows & Frames)','$MULTILANG_EventoLoad');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onunload',                   '04. Ventanas y Marcos (Windows & Frames)','$MULTILANG_EventoUnload');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onresize',                   '04. Ventanas y Marcos (Windows & Frames)','$MULTILANG_EventoResize');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onclose',                    '04. Ventanas y Marcos (Windows & Frames)','$MULTILANG_EventoClose');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onscroll',                   '04. Ventanas y Marcos (Windows & Frames)','$MULTILANG_EventoScroll');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('animationend',               '05. Animaciones y Transiciones','$MULTILANG_EventoAnimFin');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('animationiteration',         '05. Animaciones y Transiciones','$MULTILANG_EventoAnimIteracion');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('animationstart',             '05. Animaciones y Transiciones','$MULTILANG_EventoAnimInicio');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('beginEvent',                 '05. Animaciones y Transiciones','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('endEvent',                   '05. Animaciones y Transiciones','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('repeatEvent',                '05. Animaciones y Transiciones','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('transitionend',              '05. Animaciones y Transiciones','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('chargingchange',             '06. Bateria y carga (Battery & charge)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('chargingtimechange',         '06. Bateria y carga (Battery & charge)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('dischargingtimechange',      '06. Bateria y carga (Battery & charge)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('levelchange',                '06. Bateria y carga (Battery & charge)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('alerting',                   '07. Llamadas y Telefonia (Calls)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('busy',                       '07. Llamadas y Telefonia (Calls)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('callschanged',               '07. Llamadas y Telefonia (Calls)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('connected',                  '07. Llamadas y Telefonia (Calls)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('connecting',                 '07. Llamadas y Telefonia (Calls)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('dialing',                    '07. Llamadas y Telefonia (Calls)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('disconnected',               '07. Llamadas y Telefonia (Calls)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('disconnecting',              '07. Llamadas y Telefonia (Calls)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('error',                      '07. Llamadas y Telefonia (Calls)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('held',                       '07. Llamadas y Telefonia (Calls)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('holding',                    '07. Llamadas y Telefonia (Calls)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('incoming',                   '07. Llamadas y Telefonia (Calls)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('resuming',                   '07. Llamadas y Telefonia (Calls)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('statechange',                '07. Llamadas y Telefonia (Calls)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMAttrModified',            '08. Cambios DOM (DOM changes)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMCharacterDataModified',   '08. Cambios DOM (DOM changes)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMContentLoaded',           '08. Cambios DOM (DOM changes)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMElementNameChanged',      '08. Cambios DOM (DOM changes)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMNodeInserted',            '08. Cambios DOM (DOM changes)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMNodeInsertedIntoDocument','08. Cambios DOM (DOM changes)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMNodeRemoved',             '08. Cambios DOM (DOM changes)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMNodeRemovedFromDocument', '08. Cambios DOM (DOM changes)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('DOMSubtreeModified',         '08. Cambios DOM (DOM changes)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('drag',                       '09. Arrastre de elementos (Drag&Drop)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('dragend',                    '09. Arrastre de elementos (Drag&Drop)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('dragenter',                  '09. Arrastre de elementos (Drag&Drop)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('dragleave',                  '09. Arrastre de elementos (Drag&Drop)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('dragover',                   '09. Arrastre de elementos (Drag&Drop)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('dragstart',                  '09. Arrastre de elementos (Drag&Drop)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('drop',                       '09. Arrastre de elementos (Drag&Drop)','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('audioprocess',               '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('canplay',                    '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('canplaythrough',             '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('durationchange',             '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('emptied',                    '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('ended',                      '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('loadeddata',                 '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('loadedmetadata',             '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('pause',                      '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('play',                       '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('playing',                    '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('ratechange',                 '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('seeked',                     '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('seeking',                    '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('stalled',                    '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('suspend',                    '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('timeupdate',                 '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('volumechange',               '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('waiting',                    '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('complete',                   '10. Audio & Video','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('disabled',                   '11. Conexion a Internet','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('enabled',                    '11. Conexion a Internet','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onoffline',                  '11. Conexion a Internet','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('ononline',                   '11. Conexion a Internet','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('statuschange',               '11. Conexion a Internet','');
-INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('connectionInfoUpdate',       '11. Conexion a Internet','');
+
 "
 
 ########################################################################
