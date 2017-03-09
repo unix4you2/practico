@@ -107,6 +107,12 @@
             // Agrega ademas las variables de sesion
             if (!empty($_SESSION)) extract($_SESSION);
         }
+    
+    //Si el idioma seleccionado por el usuario es diferente al predeterminado lo incluye
+    if($PCOSESS_IdiomaUsuario!=$IdiomaPredeterminado)
+        {
+            include("inc/practico/idiomas/".$PCOSESS_IdiomaUsuario.".php");
+        }
 
     // Verifica algunas variables minimas de trabajo en el primer inicio para evitar NOTICE y WARNINGs
     if (!isset($PCO_Accion)) $PCO_Accion="";

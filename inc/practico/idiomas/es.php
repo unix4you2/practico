@@ -254,6 +254,8 @@
     $MULTILANG_MsjDemo='Usted se encuentra en una instalacion en modo DEMO (o demostracion).  Este tipo de instalaciones no permiten interactuar libremente con todos los controles por seguridad.  Esto ayuda a garantizar que el acceso siempre este disponible para todos los usuarios que quieran probar la plataforma.';
     $MULTILANG_SeparadorCampos='Cadena separadora de campos';
     $MULTILANG_SeparadorCamposDes='Utilizada para separar valores en Queries y consultas sobre el motor de base de datos.  Generalmente debe ser un valor poco comun que no pueda ser encontrado en las variables entradas por el usuario';
+    $MULTILANG_SelectorIdioma='El usuario puede cambiar idioma en login';
+    $MULTILANG_SelectorIdiomaAyuda='Presenta una lista de seleccion durante el inicio de sesion con los idiomas disponibles en la plataforma para que el usuario lo seleccione.';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';

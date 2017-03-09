@@ -140,6 +140,7 @@
 						if (!isset($_SESSION["Nombre_Empresa_Corto"])) $_SESSION["Nombre_Empresa_Corto"]=$registro_parametros["nombre_empresa_corto"];
 						if (!isset($_SESSION["Nombre_Aplicacion"])) $_SESSION["Nombre_Aplicacion"]=$registro_parametros["nombre_aplicacion"];
 						if (!isset($_SESSION["Version_Aplicacion"])) $_SESSION["Version_Aplicacion"]=$registro_parametros["version"];
+						if (!isset($_SESSION["PCOSESS_IdiomaUsuario"])) $_SESSION["PCOSESS_IdiomaUsuario"]=$idioma_login;
 
 						// Lleva a auditoria con query manual por la falta de $Login_Usuario
 						auditar("Ingresa al sistema desde $PCO_DireccionAuditoria",$uid);
@@ -222,4 +223,3 @@
 		@session_destroy();
 		cerrar_ventana();
 	}
-

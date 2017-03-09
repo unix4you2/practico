@@ -233,33 +233,52 @@
 										</div>
 										<div class="col-md-6">
 
-											<label for="IdiomaPredeterminadoNEW"><i class="fa fa-language fa-fw fa-2x"></i> <?php echo $MULTILANG_IdiomaPredeterminado; ?>:</label>
-											<div class="form-group input-group">
-												<select id="IdiomaPredeterminadoNEW" name="IdiomaPredeterminadoNEW" class="selectpicker" >
-													<?php
-													// Incluye archivos de idioma para ser seleccionados
-													$path_idiomas="inc/practico/idiomas/";
-													$directorio_idiomas=opendir($path_idiomas);
-													$IdiomaPredeterminadoActual=$IdiomaPredeterminado;
-													while (($PCOVAR_Elemento=readdir($directorio_idiomas))!=false)
-														{
-															//Lo procesa solo si es un archivo diferente del index
-															if (!is_dir($path_idiomas.$PCOVAR_Elemento) && $PCOVAR_Elemento!="." && $PCOVAR_Elemento!=".."  && $PCOVAR_Elemento!="index.html")
-																{
-																	include($path_idiomas.$PCOVAR_Elemento);
-																	//Establece espanol como predeterminado
-																	$seleccion="";
-																	$valor_opcion=str_replace(".php","",$PCOVAR_Elemento);
-																	if ($valor_opcion==$IdiomaPredeterminadoActual) $seleccion="SELECTED";
-																	//Presenta la opcion
-																	echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$PCOVAR_Elemento.')</option>';
-																}
-														}		
-													//Vuelve a cargar el predeterminado actual
-													include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
-													?>
-												</select>
-											</div>
+
+                                            <div class="row">
+        										<div class="col-md-6">
+        											<label for="IdiomaPredeterminadoNEW"><i class="fa fa-language fa-fw fa-2x"></i> <?php echo $MULTILANG_IdiomaPredeterminado; ?>:</label>
+        											<div class="form-group input-group">
+        												<select id="IdiomaPredeterminadoNEW" name="IdiomaPredeterminadoNEW" class="selectpicker" >
+        													<?php
+        													// Incluye archivos de idioma para ser seleccionados
+        													$path_idiomas="inc/practico/idiomas/";
+        													$directorio_idiomas=opendir($path_idiomas);
+        													$IdiomaPredeterminadoActual=$IdiomaPredeterminado;
+        													while (($PCOVAR_Elemento=readdir($directorio_idiomas))!=false)
+        														{
+        															//Lo procesa solo si es un archivo diferente del index
+        															if (!is_dir($path_idiomas.$PCOVAR_Elemento) && $PCOVAR_Elemento!="." && $PCOVAR_Elemento!=".."  && $PCOVAR_Elemento!="index.html")
+        																{
+        																	include($path_idiomas.$PCOVAR_Elemento);
+        																	//Establece espanol como predeterminado
+        																	$seleccion="";
+        																	$valor_opcion=str_replace(".php","",$PCOVAR_Elemento);
+        																	if ($valor_opcion==$IdiomaPredeterminadoActual) $seleccion="SELECTED";
+        																	//Presenta la opcion
+        																	echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$PCOVAR_Elemento.')</option>';
+        																}
+        														}		
+        													//Vuelve a cargar el predeterminado actual
+        													include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
+        													?>
+        												</select>
+        											</div>
+        										</div>
+        
+        										<div class="col-md-6">
+        											<label for="IdiomaEnLoginNEW"><i class="fa fa-language fa-fw fa-2x"></i> <?php echo $MULTILANG_SelectorIdioma; ?>:</label>
+        											<div class="form-group input-group">
+        												<select id="IdiomaEnLoginNEW" name="IdiomaEnLoginNEW" class="selectpicker" >
+        													<option value="1" <?php if ($IdiomaEnLogin=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?></option>
+        													<option value="0" <?php if ($IdiomaEnLogin=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?></option>
+        												</select>
+        												<span class="input-group-addon">
+        													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_SelectorIdiomaAyuda; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+        												</span>
+        											</div>
+        										</div>
+        									</div>
+
 
 											<label for="ModoDepuracionNEW"><i class="fa fa-bug fa-2x fa-fw"></i>  <?php echo $MULTILANG_ModoDepuracion; ?>:</label>
 											<div class="form-group input-group">

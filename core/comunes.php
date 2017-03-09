@@ -2276,8 +2276,8 @@ function ventana_login()
 			Despliega la ventana de ingreso al sistema con el formulario para usuario, contrasena y captcha.
 		*/
 		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor,$MULTILANG_OauthButt,$NombreRAD;
-		  global $Auth_PermitirAutoRegistro,$Auth_PermitirReseteoClaves,$CaracteresCaptcha;
-		  global $MULTILANG_Cerrar,$MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes,$MULTILANG_Registrarme,$MULTILANG_OlvideClave;
+		  global $Auth_PermitirAutoRegistro,$Auth_PermitirReseteoClaves,$CaracteresCaptcha,$IdiomaEnLogin;
+		  global $IdiomaPredeterminado,$MULTILANG_IdiomaPredeterminado,$MULTILANG_Cerrar,$MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes,$MULTILANG_Registrarme,$MULTILANG_OlvideClave;
 			// Variables para OAuth desde el archivo de configuracion
 			global $APIGoogle_ClientId,$APIGoogle_ClientSecret;
 			global $APIFacebook_ClientId,$APIFacebook_ClientSecret;
@@ -2401,6 +2401,44 @@ function ventana_login()
                                         <input name="clave" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
                                     </div>
                                     
+                                    
+									<?php
+										//Presenta selector de idiomas si esta habilitado
+										if ($IdiomaEnLogin==1)
+											{
+									?>
+    									<div class="form-group input-group">
+    									    <span class="input-group-addon"><i class="fa fa-language fa-fw"></i></span>
+    										<select id="idioma_login" name="idioma_login" class="selectpicker" >
+    											<?php
+    											// Incluye archivos de idioma para ser seleccionados
+    											$path_idiomas="inc/practico/idiomas/";
+    											$directorio_idiomas=opendir($path_idiomas);
+    											$IdiomaPredeterminadoActual=$IdiomaPredeterminado;
+    											while (($PCOVAR_Elemento=readdir($directorio_idiomas))!=false)
+    												{
+    													//Lo procesa solo si es un archivo diferente del index
+    													if (!is_dir($path_idiomas.$PCOVAR_Elemento) && $PCOVAR_Elemento!="." && $PCOVAR_Elemento!=".."  && $PCOVAR_Elemento!="index.html")
+    														{
+    															include($path_idiomas.$PCOVAR_Elemento);
+    															//Establece espanol como predeterminado
+    															$seleccion="";
+    															$valor_opcion=str_replace(".php","",$PCOVAR_Elemento);
+    															if ($valor_opcion==$IdiomaPredeterminadoActual) $seleccion="SELECTED";
+    															//Presenta la opcion
+    															echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$PCOVAR_Elemento.')</option>';
+    														}
+    												}		
+    											//Vuelve a cargar el predeterminado actual
+    											include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
+    											?>
+    										</select>
+    									</div>
+										<?php
+												}
+										?>
+
+
 									<?php
 										//Presenta captcha si esta habilitado
 										if ($CaracteresCaptcha>0)
