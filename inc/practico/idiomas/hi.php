@@ -1145,6 +1145,7 @@
 	$MULTILANG_MonLinea='लाइन पर';
 	$MULTILANG_MonCaido='नीचे';
 	$MULTILANG_MonAlertaVibrar='मोबाइल उपकरणों पर कंपन';
+	$MULTILANG_MonSensorRango='किसी श्रेणी में सेंसर';
 
     //Modulo de correos
     $MULTILANG_MailIntro1='स्वचालित मंच संदेश';

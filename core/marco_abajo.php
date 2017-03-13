@@ -163,8 +163,8 @@
     ?>
 
     <!-- DataTables JavaScript -->
-    <script src="inc/bootstrap/js/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="inc/bootstrap/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="inc/bootstrap/js/plugins/dataTables/jquery.dataTables.min.js"></script>
+    <script src="inc/bootstrap/js/plugins/dataTables/dataTables.bootstrap.min.js"></script>
 
 	<!-- Canvas -->
     <script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>
@@ -229,24 +229,26 @@
                 //Desglosa la cadena de posibles tablas con formato DataTable y las convierte
                 $TablasDataTable=@explode("|",$PCO_InformesDataTable);
                 for ($i=0; $i<count($TablasDataTable);$i++)
-                    echo '$("#'.$TablasDataTable[$i].'").dataTable(
-                        {
-                            "scrollX": true,
-                            "language": {
-                                "lengthMenu": "'.$MULTILANG_Mostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
-                                "zeroRecords": "Nothing found - sorry",
-                                "info": "'.$MULTILANG_InfDataTableViendoP.' _PAGE_ '.$MULTILANG_InfDataTableDe.' _PAGES_",
-                                "infoEmpty": "'.$MULTILANG_InfDataTableNoRegistrosDisponibles.'",
-                                "infoFiltered": "('.$MULTILANG_InfDataTableFiltradoDe.' _MAX_ '.$MULTILANG_InfDataTableRegTotal.')",
-                                oPaginate: { sFirst:"'.$MULTILANG_Primero.'",sLast:"'.$MULTILANG_Ultimo.'",sNext:"'.$MULTILANG_Siguiente.'",sPrevious:"'.$MULTILANG_Previo.'" },
-                                sEmptyTable:"'.$MULTILANG_InfDataTableNoDatos.'",
-                                sSearch:"'.$MULTILANG_Buscar.':",
-                                sLoadingRecords:"'.$MULTILANG_Cargando.'...",
-                                sProcessing:"'.$MULTILANG_Procesando.'...",
-                                sZeroRecords:"'.$MULTILANG_InfDataTableNoRegistros.'"
+                    echo '
+                        var oTable'.$i.' = $("#'.$TablasDataTable[$i].'").dataTable(
+                            {
+                                "scrollX": true,
+                                "language": {
+                                    "lengthMenu": "'.$MULTILANG_Mostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
+                                    "zeroRecords": "Nothing found - sorry",
+                                    "info": "'.$MULTILANG_InfDataTableViendoP.' _PAGE_ '.$MULTILANG_InfDataTableDe.' _PAGES_",
+                                    "infoEmpty": "'.$MULTILANG_InfDataTableNoRegistrosDisponibles.'",
+                                    "infoFiltered": "('.$MULTILANG_InfDataTableFiltradoDe.' _MAX_ '.$MULTILANG_InfDataTableRegTotal.')",
+                                    oPaginate: { sFirst:"'.$MULTILANG_Primero.'",sLast:"'.$MULTILANG_Ultimo.'",sNext:"'.$MULTILANG_Siguiente.'",sPrevious:"'.$MULTILANG_Previo.'" },
+                                    sEmptyTable:"'.$MULTILANG_InfDataTableNoDatos.'",
+                                    sSearch:"'.$MULTILANG_Buscar.':",
+                                    sLoadingRecords:"'.$MULTILANG_Cargando.'...",
+                                    sProcessing:"'.$MULTILANG_Procesando.'...",
+                                    sZeroRecords:"'.$MULTILANG_InfDataTableNoRegistros.'"
+                                }
                             }
-                        }
-                    );';
+                        );
+                    ';
             ?>
         });
 

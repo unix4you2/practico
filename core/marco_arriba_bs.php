@@ -30,7 +30,6 @@
 		Uso de la variable <Precarga_EstilosBS>
 	*/
 ?>
-<!DOCTYPE html>
 <html lang="<?php echo $IdiomaPredeterminado; ?>">
 <head>
     <script type="text/javascript">
@@ -64,7 +63,7 @@
     <link href="inc/bootstrap/css/plugins/slider/slider.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/select/bootstrap-select.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/iconpicker/bootstrap-iconpicker.min.css" rel="stylesheet">
-    <link href="inc/bootstrap/css/plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="inc/bootstrap/css/plugins/dataTables.bootstrap.min.css" rel="stylesheet">
     
     <link href="inc/summernote/summernote.css" rel="stylesheet">
 

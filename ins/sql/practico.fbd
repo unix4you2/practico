@@ -409,6 +409,8 @@ CREATE TABLE core_monitoreo (
   milisegundos_lectura int(10) default '1',
   alerta_vibracion int(10) default '0',
   ultimo_estado varchar(250) DEFAULT '',
+  valor_minimo int(11),
+  valor_maximo int(11),
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

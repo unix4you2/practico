@@ -4400,7 +4400,9 @@ $('#SampleElement').load('YourURL');
 				// Carga variables de definicion de tablas
 				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
 				global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
-				
+                global $PCO_InformesDataTable;
+
+
 				// Busca datos del formulario
 				$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
 				$registro_formulario = @$consulta_formulario->fetch();
@@ -5494,7 +5496,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					if ($registro_informe["soporte_datatable"]=="S")
 						@$PCO_InformesDataTable.="TablaInforme_".$registro_informe["id"]."|";
 					$SalidaFinalInforme.= '<!--<div class="table-responsive">-->
-											<table class="table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead><tr>';
+											<table width="100%" class="btn-xs table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead><tr>';
 
 					//Busca si tiene acciones (botones) para cada registro y los genera
 					$cadena_generica_botones=generar_botones_informe($informe);
@@ -5544,7 +5546,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 												$CadenaActivadora_Edicion=' id="'.$IdentificadorDeCampoEditable.'" contenteditable="true" ';
 											
 											$SalidaFinalInforme.= '
-												<td '.$CadenaActivadora_Edicion.' >'.$registro_informe[$i].'</td>';
+												<td '.$CadenaActivadora_Edicion.'>'.$registro_informe[$i].'</td>';
 										}
 								}
 							//Si el informe tiene botones los agrega
@@ -5560,12 +5562,12 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							$numero_filas++;
 						}
 						
-					$SalidaFinalInforme.= '</tbody>';
+					$SalidaFinalInforme.= '</tbody><tfoot>';
 
 					//Cuando es embebido (=1) no agrega los totales de registro
 					if (!$embebido)
 						{
-							@$SalidaFinalInforme.= '<tfoot>
+							@$SalidaFinalInforme.= '
 								<tr><td colspan='.$numero_columnas.'>
 									<b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
 								</td></tr>';

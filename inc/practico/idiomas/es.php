@@ -1146,6 +1146,7 @@
 	$MULTILANG_MonLinea='EN LINEA';
 	$MULTILANG_MonCaido='CAIDO';
 	$MULTILANG_MonAlertaVibrar='Vibrar en dispositivos moviles';
+	$MULTILANG_MonSensorRango='Sensor en un rango';
 
     //Modulo de correos
     $MULTILANG_MailIntro1='Mensaje autom&aacute;tico de la plataforma';

@@ -562,7 +562,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
 			if ($mensaje_error=="")
 				{
 					// Guarda los datos del comando de monitoreo
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."monitoreo (".$ListaCamposSinID_monitoreo.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)","$tipo$_SeparadorCampos_$pagina$_SeparadorCampos_$peso$_SeparadorCampos_$nombre$_SeparadorCampos_$host$_SeparadorCampos_$puerto$_SeparadorCampos_$tipo_ping$_SeparadorCampos_$saltos$_SeparadorCampos_$comando$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$tamano_resultado$_SeparadorCampos_$ocultar_titulos$_SeparadorCampos_$path$_SeparadorCampos_$correo_alerta$_SeparadorCampos_$alerta_sonora$_SeparadorCampos_$milisegundos_lectura$_SeparadorCampos_$alerta_vibracion$_SeparadorCampos_$ultimo_estado");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."monitoreo (".$ListaCamposSinID_monitoreo.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)","$tipo$_SeparadorCampos_$pagina$_SeparadorCampos_$peso$_SeparadorCampos_$nombre$_SeparadorCampos_$host$_SeparadorCampos_$puerto$_SeparadorCampos_$tipo_ping$_SeparadorCampos_$saltos$_SeparadorCampos_$comando$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$tamano_resultado$_SeparadorCampos_$ocultar_titulos$_SeparadorCampos_$path$_SeparadorCampos_$correo_alerta$_SeparadorCampos_$alerta_sonora$_SeparadorCampos_$milisegundos_lectura$_SeparadorCampos_$alerta_vibracion$_SeparadorCampos_$ultimo_estado$_SeparadorCampos_$valor_minimo$_SeparadorCampos_$valor_maximo");
 					auditar("Agrega en monitor: $nombre");
 					echo '
 					<form name="continuar_admin_mon" action="'.$ArchivoCORE.'" method="POST">
@@ -638,7 +638,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
 	function FormatoMonitor($IDRegistroMonitor)
 		{
 			global $ArchivoCORE,$ListaCamposSinID_monitoreo,$TablasCore,$MULTILANG_MonNuevo,$MULTILANG_Tipo,$MULTILANG_Etiqueta,$MULTILANG_Maquina,$MULTILANG_MonCommShell,$MULTILANG_MonCommSQL,$MULTILANG_Imagen,$MULTILANG_Embebido;
-			global $MULTILANG_Actualizar,$MULTILANG_Regresar,$MULTILANG_MnuURL,$MULTILANG_InfAlto,$MULTILANG_Ayuda,$MULTILANG_MonDesTipo,$MULTILANG_Pagina,$MULTILANG_Peso,$MULTILANG_Nombre,$MULTILANG_MonSaltos,$MULTILANG_MonMsLectura,$MULTILANG_Agregar,$MULTILANG_IrEscritorio,$MULTILANG_Maquina,$MULTILANG_AplicaPara,$MULTILANG_Tipo,$MULTILANG_Puerto,$MULTILANG_MonMetodo,$MULTILANG_MonCommSQL,$MULTILANG_MonCommShell,$MULTILANG_FrmAncho,$MULTILANG_Imagen,$MULTILANG_Embebido,$MULTILANG_MonTamano,$MULTILANG_Etiqueta,$MULTILANG_MonOcultaTit,$MULTILANG_No,$MULTILANG_Si,$MULTILANG_MonCorreoAlerta,$MULTILANG_MonAlertaSnd,$MULTILANG_MonAlertaVibrar;
+			global $MULTILANG_MonSensorRango,$MULTILANG_FrmValorMinimo,$MULTILANG_FrmValorMaximo,$MULTILANG_Actualizar,$MULTILANG_Regresar,$MULTILANG_MnuURL,$MULTILANG_InfAlto,$MULTILANG_Ayuda,$MULTILANG_MonDesTipo,$MULTILANG_Pagina,$MULTILANG_Peso,$MULTILANG_Nombre,$MULTILANG_MonSaltos,$MULTILANG_MonMsLectura,$MULTILANG_Agregar,$MULTILANG_IrEscritorio,$MULTILANG_Maquina,$MULTILANG_AplicaPara,$MULTILANG_Tipo,$MULTILANG_Puerto,$MULTILANG_MonMetodo,$MULTILANG_MonCommSQL,$MULTILANG_MonCommShell,$MULTILANG_FrmAncho,$MULTILANG_Imagen,$MULTILANG_Embebido,$MULTILANG_MonTamano,$MULTILANG_Etiqueta,$MULTILANG_MonOcultaTit,$MULTILANG_No,$MULTILANG_Si,$MULTILANG_MonCorreoAlerta,$MULTILANG_MonAlertaSnd,$MULTILANG_MonAlertaVibrar;
 			
 			//Busca los datos del monitor
 			if ($IDRegistroMonitor!="")
@@ -678,6 +678,8 @@ if ($PCO_Accion=="eliminar_monitoreo")
 					if (@$Maquina["tipo"]=="ComandoSQL")	$Seleccion_ComandoSQL="SELECTED";
 					if (@$Maquina["tipo"]=="Imagen") 		$Seleccion_Imagen="SELECTED";
 					if (@$Maquina["tipo"]=="Embebido") 		$Seleccion_Embebido="SELECTED";
+					if (@$Maquina["tipo"]=="SensorRango") 	$Seleccion_SensorRango="SELECTED";
+
 
              echo '
                             <option value="Etiqueta"		'.$Seleccion_Etiqueta.'>'.$MULTILANG_Etiqueta.'</option>
@@ -686,6 +688,8 @@ if ($PCO_Accion=="eliminar_monitoreo")
                             <option value="ComandoSQL"		'.$Seleccion_ComandoSQL.'>'.$MULTILANG_MonCommSQL.'</option>
                             <option value="Imagen"			'.$Seleccion_Imagen.'>'.$MULTILANG_Imagen.'</option>
                             <option value="Embebido"		'.$Seleccion_Embebido.'>'.$MULTILANG_Embebido.'</option>
+                            <option value="SensorRango"		'.$Seleccion_SensorRango.'>'.$MULTILANG_MonSensorRango.'</option>
+
                         </select>
                         <span class="input-group-addon">
                             <a  href="#" data-toggle="tooltip" data-html="true"  title="<b>'.$MULTILANG_Ayuda.'</b><br>'.$MULTILANG_MonDesTipo.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
@@ -782,7 +786,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
                     <div class="form-group input-group">
                         <textarea name="comando" class="form-control" placeholder="'.$MULTILANG_Comando.'">'.@$Maquina["comando"].'</textarea>
                         <span class="input-group-addon">
-                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommShell.', '.$MULTILANG_MonCommSQL.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommShell.', '.$MULTILANG_MonCommSQL.', '.$MULTILANG_MonSensorRango.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 
@@ -890,6 +894,26 @@ if ($PCO_Accion=="eliminar_monitoreo")
                         </select>
                         <span class="input-group-addon">
                             <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-thermometer-empty fa-fw"></i>
+                        </span>
+                        <input type="text" name="valor_minimo" value="'.@$Maquina["valor_minimo"].'" class="form-control" placeholder="'.$MULTILANG_FrmValorMinimo.'">
+                        <span class="input-group-addon">
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonSensorRango.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                    </div>
+
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-thermometer-full fa-fw"></i>
+                        </span>
+                        <input type="text" name="valor_maximo" value="'.@$Maquina["valor_maximo"].'" class="form-control" placeholder="'.$MULTILANG_FrmValorMaximo.'">
+                        <span class="input-group-addon">
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonSensorRango.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 
@@ -1261,4 +1285,3 @@ if ($PCO_Accion=="ver_monitoreo")
 <?php
 
 	} //Fin ver_monitoreo
-

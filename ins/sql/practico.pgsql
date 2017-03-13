@@ -409,6 +409,8 @@ CREATE TABLE core_monitoreo (
   milisegundos_lectura integer default '1',
   alerta_vibracion integer default '0',
   ultimo_estado VARCHAR(250) DEFAULT '',
+  valor_minimo integer,
+  valor_maximo integer,
   PRIMARY KEY (id)
 );
 

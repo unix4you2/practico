@@ -418,7 +418,9 @@ CREATE TABLE core_monitoreo (
   alerta_sonora integer,
   milisegundos_lectura integer default '1',
   alerta_vibracion integer default '0',
-  ultimo_estado text DEFAULT ''
+  ultimo_estado text DEFAULT '',
+  valor_minimo integer,
+  valor_maximo integer
 
 );
 
