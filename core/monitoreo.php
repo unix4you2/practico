@@ -27,6 +27,23 @@
 
 
 <?php 
+
+function normalizar_cadena ($cadena){
+    /*
+    $originales  = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔ';
+    $modificadas = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyR';
+    $cadena = utf8_decode($cadena);
+    $cadena = strtr($cadena, utf8_decode($originales), $modificadas);
+    $cadena = strtolower($cadena);
+    return utf8_encode($cadena);
+    */
+    $charset='ISO-8859-1'; // o 'UTF-8'
+$str = iconv($charset, 'ASCII//TRANSLIT', $cadena);
+return $str;
+    
+}
+
+
 /* ################################################################## */
 /* ################################################################## */
 	function MedirVelocidad($url_medidor="http://localhost/cargar_bytes.php",$unidad_medida="KB")
@@ -178,7 +195,7 @@
 					<MaquinaOnline>
 			*/
 			global $ListaCamposSinID_monitoreo,$TablasCore;
-			global $Path_imagenes,$Imagen_fallo,$Imagen_ok;
+			global $Imagen_fallo,$Imagen_ok;
 			global $ErroresMonitoreoPractico; 			// Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay errores
 			global $ErroresMonitoreoAlertaAuditiva; 	// Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay error en el monitor y este tiene activada la alerta sonora
 			global $ErroresMonitoreoAlertaVibratoria; 	// Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay error en el monitor y tiene habilitada la alerta vibratoria
@@ -271,7 +288,114 @@
 					</div>
 				</div>
 			';
+		}
 
+
+/* ################################################################## */
+/* ################################################################## */
+	function PresentarSensorRango($IDRegistroMonitor)
+		{
+			/*
+				Function: PresentarSensorRango
+				Presenta un grafico con el estado numerico de un sensor, minimos y maximos
+			*/
+			global $ListaCamposSinID_monitoreo,$TablasCore;
+			global $Imagen_fallo,$Imagen_ok;
+			global $ErroresMonitoreoPractico; 			// Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay errores
+			global $ErroresMonitoreoAlertaAuditiva; 	// Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay error en el monitor y este tiene activada la alerta sonora
+			global $ErroresMonitoreoAlertaVibratoria; 	// Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay error en el monitor y tiene habilitada la alerta vibratoria
+			
+			global $MULTILANG_MonTitulo,$PCO_FechaOperacionGuiones,$PCO_HoraOperacionPuntos;
+			global $MULTILANG_MonLinea,$MULTILANG_MonCaido;
+			global $MULTILANG_FrmValorMinimo,$MULTILANG_FrmValorMaximo;
+			
+			//Busca los datos del monitor
+			$Sensor=ejecutar_sql("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
+
+            //Obtiene el valor de acuerdo al tipo de comando
+            $Palabras = explode(' ',trim($Sensor["comando"]));
+            if (strtoupper($Palabras[0])=="SELECT")
+                {
+        			$registro_sensor=ejecutar_sql($Sensor["comando"])->fetch();
+        			$valor_sensor=trim($registro_sensor[0]);
+                }
+            else
+                {
+		        	$valor_sensor = trim(shell_exec($comando_ejecutar["Comando"]));
+                }
+            
+            //Evalua el valor encontrado para saber si esta en el rango deseado
+            $SensorFueraRango=0;
+			if ($valor_sensor >= $Sensor["valor_minimo"] && $valor_sensor <= $Sensor["valor_maximo"] )
+			    {
+			        
+			    }
+			else
+				{
+					$ErroresMonitoreoPractico=1;
+					$SensorFueraRango=1;
+
+					//Si tiene activada la alerta auditiva la agenda
+					if ($Sensor["alerta_sonora"]==1)
+						$ErroresMonitoreoAlertaAuditiva=1;
+					//Si tiene activada la alerta vibratoria la agenda
+					if ($Sensor["alerta_vibracion"]==1)
+						$ErroresMonitoreoAlertaVibratoria=1;
+				}
+
+			//Actualiza el estado del monitor en caso de haber cambiado y envia alertas
+			$EstadoMonitor=$MULTILANG_MonLinea;
+			if ($SensorFueraRango==1)	$EstadoMonitor=$MULTILANG_MonCaido;
+			$EstadoAnteriorMonitor=$Sensor["ultimo_estado"];
+			if ($EstadoAnteriorMonitor!=$EstadoMonitor)
+				{
+					//Envia mensaje de alerta de cambios por correo si el buzon ha sido indicado
+					if ($Sensor["correo_alerta"]!="")
+						PCO_EnviarCorreo("noreply@practico.org",$Sensor["correo_alerta"],$Sensor["nombre"]." $EstadoMonitor [$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos] ",$Sensor["nombre"]);
+				
+					//Actualiza el estado actual del monitor
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."monitoreo SET ultimo_estado='$EstadoMonitor' WHERE id='$IDRegistroMonitor' ");
+				}
+
+            //Define cadena de colores cuando el sensor esta fuera de rango
+            $CadenaColores=""; //Asume color predeterminado
+            if ($SensorFueraRango)
+                $CadenaColores='colors: ["#FF1C00", "#D73B3E", "#B22222"]'; //Asume color predeterminado
+			
+			echo '
+                <!--Agrega marco para el grafico de dona-->
+				<div class="col-md-'.$Sensor["ancho"].' col-lg-'.$Sensor["ancho"].'">
+                    <div id="grafico-sensor-'.$Sensor["id"].'"></div>
+				</div>
+
+                <script language="JavaScript">
+                //Agrega la funcion para generar la dona con los datos
+                $(function() {
+                    grafico=Morris.Donut({
+                        element: "grafico-sensor-'.$Sensor["id"].'",
+                        data: [
+                                                {
+                                                    label: "Min",
+                                                    value: "'.$Sensor["valor_minimo"].'"
+                                                },
+                                                {
+                                                    label: "Max",
+                                                    value: "'.$Sensor["valor_maximo"].'"
+                                                },
+                                                {
+                                                    label: "'.$Sensor["nombre"].'",
+                                                    value: "'.$valor_sensor.'"
+                                                },
+                        ],
+                        resize: false,
+                        labelColor: "#eeeeee",
+                        backgroundColor: "#FFFFFF",
+                        '.$CadenaColores.'
+                    });
+                    //Establece por defecto el item de grafico a mostrar
+                    grafico.select(2);
+                });
+                </script>';
 		}
 
 
@@ -283,7 +407,7 @@
 				Function: PresentarEstadoSQL
 				Ejecuta un query SQL y presenta el resultado formateado como tabla
 			*/
-			global $Path_imagenes,$Imagen_generica_sql,$Tamano_iconos,$MULTILANG_MonCommSQL;
+			global $Imagen_generica_sql,$Tamano_iconos,$MULTILANG_MonCommSQL;
 			$SalidaFinalInforme='<table class="table table-responsive table-condensed btn-xs table-unbordered table-hover" style="font-family: Monospace, Sans-serif, Terminal, Tahoma;">';
 
 			$estilo_caja_comandos="panel-warning";
@@ -449,7 +573,7 @@
 				Function: EjecutarComando
 				Ejecuta comandos autorizados en el servidor para mostrar su respuesta
 			*/
-			global $Path_imagenes,$Imagen_generica_shell,$Tamano_iconos,$color_fondo_ascii, $MULTILANG_MonCommShell;
+			global $Imagen_generica_shell,$Tamano_iconos,$color_fondo_ascii, $MULTILANG_MonCommShell;
 			
 			//Ejecuta el comando
 			$salida_comando = shell_exec($comando_ejecutar["Comando"]);
@@ -638,7 +762,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
 	function FormatoMonitor($IDRegistroMonitor)
 		{
 			global $ArchivoCORE,$ListaCamposSinID_monitoreo,$TablasCore,$MULTILANG_MonNuevo,$MULTILANG_Tipo,$MULTILANG_Etiqueta,$MULTILANG_Maquina,$MULTILANG_MonCommShell,$MULTILANG_MonCommSQL,$MULTILANG_Imagen,$MULTILANG_Embebido;
-			global $MULTILANG_MonSensorRango,$MULTILANG_FrmValorMinimo,$MULTILANG_FrmValorMaximo,$MULTILANG_Actualizar,$MULTILANG_Regresar,$MULTILANG_MnuURL,$MULTILANG_InfAlto,$MULTILANG_Ayuda,$MULTILANG_MonDesTipo,$MULTILANG_Pagina,$MULTILANG_Peso,$MULTILANG_Nombre,$MULTILANG_MonSaltos,$MULTILANG_MonMsLectura,$MULTILANG_Agregar,$MULTILANG_IrEscritorio,$MULTILANG_Maquina,$MULTILANG_AplicaPara,$MULTILANG_Tipo,$MULTILANG_Puerto,$MULTILANG_MonMetodo,$MULTILANG_MonCommSQL,$MULTILANG_MonCommShell,$MULTILANG_FrmAncho,$MULTILANG_Imagen,$MULTILANG_Embebido,$MULTILANG_MonTamano,$MULTILANG_Etiqueta,$MULTILANG_MonOcultaTit,$MULTILANG_No,$MULTILANG_Si,$MULTILANG_MonCorreoAlerta,$MULTILANG_MonAlertaSnd,$MULTILANG_MonAlertaVibrar;
+			global $MULTILANG_Comando,$MULTILANG_MonSensorRango,$MULTILANG_FrmValorMinimo,$MULTILANG_FrmValorMaximo,$MULTILANG_Actualizar,$MULTILANG_Regresar,$MULTILANG_MnuURL,$MULTILANG_InfAlto,$MULTILANG_Ayuda,$MULTILANG_MonDesTipo,$MULTILANG_Pagina,$MULTILANG_Peso,$MULTILANG_Nombre,$MULTILANG_MonSaltos,$MULTILANG_MonMsLectura,$MULTILANG_Agregar,$MULTILANG_IrEscritorio,$MULTILANG_Maquina,$MULTILANG_AplicaPara,$MULTILANG_Tipo,$MULTILANG_Puerto,$MULTILANG_MonMetodo,$MULTILANG_MonCommSQL,$MULTILANG_MonCommShell,$MULTILANG_FrmAncho,$MULTILANG_Imagen,$MULTILANG_Embebido,$MULTILANG_MonTamano,$MULTILANG_Etiqueta,$MULTILANG_MonOcultaTit,$MULTILANG_No,$MULTILANG_Si,$MULTILANG_MonCorreoAlerta,$MULTILANG_MonAlertaSnd,$MULTILANG_MonAlertaVibrar;
 			
 			//Busca los datos del monitor
 			if ($IDRegistroMonitor!="")
@@ -804,7 +928,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
 			echo '
 						</select>
 						<span class="input-group-addon">
-							<a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommShell.', '.$MULTILANG_Imagen.', '.$MULTILANG_Embebido.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+							<a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommShell.', '.$MULTILANG_Imagen.', '.$MULTILANG_Embebido.', '.$MULTILANG_MonSensorRango.' "><i class="fa fa-question-circle fa-fw text-info"></i></a>
 						</span>
 					</div>
 						
@@ -863,7 +987,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
                         </span>
                         <input type="text" name="correo_alerta" value="'.@$Maquina["correo_alerta"].'" class="form-control" placeholder="'.$MULTILANG_MonCorreoAlerta.'">
                         <span class="input-group-addon">
-                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.', '.$MULTILANG_MonSensorRango.'  "><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 
@@ -878,7 +1002,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
                             <option value="1" '.$Seleccion_SiAS.'>'.$MULTILANG_Si.'</option>
                         </select>
                         <span class="input-group-addon">
-                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.', '.$MULTILANG_MonSensorRango.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 
@@ -893,7 +1017,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
                             <option value="1" '.$Seleccion_SiAV.'>'.$MULTILANG_Si.'</option>
                         </select>
                         <span class="input-group-addon">
-                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.', '.$MULTILANG_MonSensorRango.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
 
@@ -1136,7 +1260,6 @@ if ($PCO_Accion=="ver_monitoreo")
 								$ErroresMonitoreoAlertaVibratoria=0;
 
 								//Path imagenes e iconos y sus propiedades
-								$Path_imagenes="img/";
 								$Imagen_fallo='<i class="fa fa-exclamation-triangle icon-orange"></i>';
 								$Imagen_ok='<i class="fa fa-check-circle icon-green"></i>';
 								$Imagen_generica='<i class="fa fa-certificate"></i>';
@@ -1200,6 +1323,11 @@ if ($PCO_Accion=="ver_monitoreo")
 											{
 												PresentarEmbebido($registro["nombre"],$registro["path"],$registro["ancho"],$registro["alto"]);
 											}
+										//Evalua elementos tipo SensorRango
+										if ($registro["tipo"]=="SensorRango")
+											{
+												PresentarSensorRango($registro["id"]);
+											}
 										//Agrega los saltos de linea
 										for ($i=0;$i<$registro["saltos"];$i++) echo "<br>";
 									}
@@ -1249,6 +1377,9 @@ if ($PCO_Accion=="ver_monitoreo")
     <script type="text/javascript" src="inc/bootstrap/js/bootstrap.min.js"></script>
     <!-- Plugins JQuery -->
     <script type="text/javascript" src="inc/bootstrap/js/plugins/select/bootstrap-select.min.js"></script>
+
+    <script src="inc/bootstrap/js/plugins/morris/raphael.min.js"></script>
+    <script src="inc/bootstrap/js/plugins/morris/morris.min.js"></script>
 
 	<script language="JavaScript">
 		function RecargarToolTipsEnlaces()

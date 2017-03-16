@@ -160,8 +160,9 @@
 	$MULTILANG_Procesando='Procesando';
     $MULTILANG_ProcesoFin='Proceso finalizado';
 	$MULTILANG_Puerto='Puerto';
+    $MULTILANG_Recurrente='Recurrente';
 	$MULTILANG_Registrarme='Registrarme';
-    $MULTILANG_Regresar='Regresar';
+    $MULTILANG_Repetir='Repetir';
     $MULTILANG_Resultados='Resultados';
     $MULTILANG_SaltarLinea='Saltar a l&iacute;nea';
     $MULTILANG_Si='Si';

@@ -110,6 +110,8 @@
 								$ConexionPDO = new PDO("ibm:DRIVER={IBM DB2 ODBC DRIVER};DATABASE=$PCOConnBaseDatos; HOSTNAME=$PCOConnServidorBD; PORT=$PCOConnPuertoBD; PROTOCOL=TCPIP;","$PCOConnUsuarioBD","$PCOConnPasswordBD");
 					if ($PCOConnMotorBD=="dblib")
 								$ConexionPDO = new PDO("dblib:dbname=$PCOConnBaseDatos;host=$PCOConnServidorBD".":"."$PCOConnPuertoBD","$PCOConnUsuarioBD","$PCOConnPasswordBD");
+					if ($PCOConnMotorBD=="dblib_mssql")
+								$ConexionPDO = new PDO("dblib:dbname=$PCOConnBaseDatos;host=$PCOConnServidorBD".":"."$PCOConnPuertoBD","$PCOConnUsuarioBD","$PCOConnPasswordBD");
 					if ($PCOConnMotorBD=="odbc")
 								$ConexionPDO = new PDO("odbc:Driver={Microsoft Access Driver (*.mdb)};Dbq=C:\accounts.mdb;Uid=$PCOConnUsuarioBD");
 					if ($PCOConnMotorBD=="ifmx")
@@ -210,4 +212,3 @@
 					mensaje('<i class="fa fa-warning fa-3x text-danger texto-blink"></i> '.$mensaje_final, "<li><b>Detalles:</b> ".$CODError->getMessage(), '', '', 'alert alert-danger alert-dismissible');
 				}
 		}
-

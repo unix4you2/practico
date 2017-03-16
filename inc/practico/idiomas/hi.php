@@ -159,6 +159,7 @@
     $MULTILANG_Procesando='प्रसंस्करण';
     $MULTILANG_ProcesoFin='प्रक्रिया पूरी की';
 	$MULTILANG_Puerto='बंदरगाह';
+    $MULTILANG_Recurrente='Recurrent';
     $MULTILANG_Registrarme='साइन इन करें';
     $MULTILANG_Regresar='वापसी';
     $MULTILANG_Resultados='परिणाम';

@@ -138,7 +138,7 @@
 	$PCODER_Modos[]=array(Nombre => "snippets",	Extensiones => "snippets");
 	$PCODER_Modos[]=array(Nombre => "Soy_Template",	Extensiones => "soy");
 	$PCODER_Modos[]=array(Nombre => "Space",	Extensiones => "space");
-	$PCODER_Modos[]=array(Nombre => "SQL",	Extensiones => "sql|dblib|fbd|ibm|ifmx|mssql|odbc|oracle|sqlite|sqlsrv");
+	$PCODER_Modos[]=array(Nombre => "SQL",	Extensiones => "sql|dblib|dblib_mssql|fbd|ibm|ifmx|mssql|odbc|oracle|sqlite|sqlsrv");
 	$PCODER_Modos[]=array(Nombre => "Stylus",	Extensiones => "styl|stylus");
 	$PCODER_Modos[]=array(Nombre => "SVG",	Extensiones => "svg");
 	$PCODER_Modos[]=array(Nombre => "Tcl",	Extensiones => "tcl");
@@ -194,5 +194,3 @@
     $PCODER_TemasOscuros[]=array(Nombre => "Tomorrow Night 80s",	Valor => "tomorrow_night_eighties");
     $PCODER_TemasOscuros[]=array(Nombre => "Twilight",	Valor => "twilight");
     $PCODER_TemasOscuros[]=array(Nombre => "Vibrant Ink",	Valor => "vibrant_ink");
-
-

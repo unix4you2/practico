@@ -159,6 +159,7 @@
     $MULTILANG_Procesando='Processamento';
     $MULTILANG_ProcesoFin='Processo conclu&iacute;do';
 	$MULTILANG_Puerto='Porto';
+    $MULTILANG_Recurrente='Recurrent';
     $MULTILANG_Registrarme='Em assinar';
     $MULTILANG_Regresar='Retorna';
     $MULTILANG_Resultados='Resultados';

@@ -46,8 +46,9 @@
 				<option value="sqlite">SQLite v2 - SQLite v3</option>
 				<option value="sqlsrv">FreeTDS/Microsoft SQL Server: Win32 [max version 2008]</option>
 				<option value="mssql">FreeTDS/Microsoft SQL Server: Win32&Linux, [max version 2000]</option>
+				<option value="dblib_mssql">DBLIB: Microsoft SQL Server via FreeTDS (requiere indicar puerto)</option>
+				<option value="dblib">DBLIB: Sybase</option>
 				<option value="ibm">IBM (DB2)</option>
-				<option value="dblib">DBLIB</option>
 				<option value="odbc">Microsoft Access (ODBC v3: IBM DB2, unixODBC, Win32 ODBC)</option>
 				<option value="oracle">ORACLE (OCI Oracle Call Interface)</option>
 				<option value="ifmx">Informix (IBM Informix Dynamic Server)</option>
@@ -356,4 +357,3 @@
 		  </form>';
 	cerrar_barra_estado();
 ?>
-

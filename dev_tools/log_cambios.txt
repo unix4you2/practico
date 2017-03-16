@@ -39,10 +39,11 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 * Added: Posibilidad de seleccionar el idioma en la ventana de login de manera independiente para cada usuario.  Configurable desde el panel de control, sección de idioma.  Esto crea una variable de sesión llamada $PCOSESS_IdiomaUsuario con lo seleccionado por éste que podrá ser utilizada posteriormente por el programador.
 * Added: Compatibilidad MariaDB y MySQL 5.7 en clausulas order by cuando sql_mode=only_full_group_by se agregan los campos de id al order by para evitar conflictos con esta nueva configuración.
-* Added: El sistema de monitoreo permite agregar monitores donde se requiere medir rangos especificos.  El valor a comparar entre el rango minimo y maximo puede ser obtenido mediante comandos SQL y Shell.
+* Added: El sistema de monitoreo permite agregar monitores donde se requiere medir rangos especificos.  El valor a comparar entre el rango minimo y maximo puede ser obtenido mediante comandos SQL y Shell que deberan retornar unicamente valores enteros.
 * Added: Actualizacion del plugin DataTables a la versión 1.10.13 y en versiones optimizadas de archivos (minimizadas)
 * Fixed: Cierre adecuado de los pie de pagina en tablas de informes al momento de ser embebidos.
-
+* Added: Ayudas en adición de monitores.
+* Added: Scripts especificos de instalacion sobre SQL Server bajo conexiones DBLib
 "
 
 ########################################################################
