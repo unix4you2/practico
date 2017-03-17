@@ -44,6 +44,7 @@ LogCambios="
 * Added: Actualizacion del plugin DataTables a la versión 1.10.13 y en versiones optimizadas de archivos (minimizadas)
 * Fixed: Cierre adecuado de los pie de pagina en tablas de informes al momento de ser embebidos.
 * Added: Ayudas en adición de monitores.
+* Added: Visor del sistema de monitoreo permite configurar una página para que sea recurrente y se actualice sólo esta, en lugar de rotar por todas las páginas definidas.
 * Added: Scripts especificos de instalacion sobre SQL Server bajo conexiones DBLib
 * Fixed: Módulo de gestion de archivos ahora distingue entre usuarios definidos como administratores en el panel de configuración para agregar los recursos.
 

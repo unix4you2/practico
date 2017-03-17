@@ -28,21 +28,6 @@
 
 <?php 
 
-function normalizar_cadena ($cadena){
-    /*
-    $originales  = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔ';
-    $modificadas = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyR';
-    $cadena = utf8_decode($cadena);
-    $cadena = strtr($cadena, utf8_decode($originales), $modificadas);
-    $cadena = strtolower($cadena);
-    return utf8_encode($cadena);
-    */
-    $charset='ISO-8859-1'; // o 'UTF-8'
-$str = iconv($charset, 'ASCII//TRANSLIT', $cadena);
-return $str;
-    
-}
-
 
 /* ################################################################## */
 /* ################################################################## */
@@ -321,9 +306,9 @@ return $str;
                 }
             else
                 {
-		        	$valor_sensor = trim(shell_exec($comando_ejecutar["Comando"]));
+		        	$valor_sensor = trim(shell_exec($Sensor["comando"]));
                 }
-            
+
             //Evalua el valor encontrado para saber si esta en el rango deseado
             $SensorFueraRango=0;
 			if ($valor_sensor >= $Sensor["valor_minimo"] && $valor_sensor <= $Sensor["valor_maximo"] )
@@ -413,7 +398,7 @@ return $str;
 			$estilo_caja_comandos="panel-warning";
 
 			// Busca e Imprime encabezados de columna si no se tienen que ocultar
-					$resultado_columnas=ejecutar_sql($ComandoSQL["Comando"]);
+					$resultado_columnas=ejecutar_sql($ComandoSQL["comando"]);
 					$numero_columnas=0;
 					$SalidaFinalInforme.='<thead><tr>';
 					foreach($resultado_columnas->fetch(PDO::FETCH_ASSOC) as $key=>$val)
@@ -427,7 +412,7 @@ return $str;
 					$SalidaFinalInforme.="</tr></thead>";
 
 			//Ejecuta el query
-			$consulta_ejecucion=ejecutar_sql($ComandoSQL["Comando"]);
+			$consulta_ejecucion=ejecutar_sql($ComandoSQL["comando"]);
 			while($registro_informe=$consulta_ejecucion->fetch())
 				{
 					$SalidaFinalInforme.= '<tr>';
@@ -576,7 +561,7 @@ return $str;
 			global $Imagen_generica_shell,$Tamano_iconos,$color_fondo_ascii, $MULTILANG_MonCommShell;
 			
 			//Ejecuta el comando
-			$salida_comando = shell_exec($comando_ejecutar["Comando"]);
+			$salida_comando = shell_exec($comando_ejecutar["comando"]);
 			//Presenta la salida
 			$icono_maquina=$Imagen_generica_shell;
 			$estilo_caja_comandos="panel-success";
@@ -1208,11 +1193,22 @@ if ($PCO_Accion=="ver_monitoreo")
 			//Salta a la siguiente pagina, si la pagina es mayor a las permitidas retorna a la primera
 			$SiguientePagina=$PaginaMonitoreo+1;
 			if($SiguientePagina>$MaximoPaginas) $SiguientePagina=$PaginaInicio;
+			
+			//Si esta encendido el itinerador entonces la pagina siguiente sera la misma pagina siempre
+			if($PaginaRecuerrente!="") $SiguientePagina=$PaginaMonitoreo;
+			
 			//Busca cuantos milisegundos esperar segun la pagina definida y sus elementos
 			$resultado=ejecutar_sql("SELECT SUM(milisegundos_lectura) as total_espera FROM ".$TablasCore."monitoreo WHERE pagina='$PaginaMonitoreo' ");
 			$registro = $resultado->fetch();
 			$MilisegundosPagina=$registro["total_espera"]+1;			
 		?>
+
+        <form name="formulario_monitoreo" action="index.php" style="visibility: hidden; display: none;">
+            <input type="hidden" name="PCO_Accion" value="ver_monitoreo">
+            <input type="hidden" name="Presentar_FullScreen" value="1">
+            <input type="hidden" name="Pagina" value="<?php echo $SiguientePagina; ?>">
+            <input type="hidden" name="PaginaRecuerrente" value="<?php if($PaginaRecuerrente!="") echo $PaginaMonitoreo; ?>">
+        </form>
 
 		<script language="JavaScript">
 			var EstadoPausa=0;
@@ -1220,7 +1216,8 @@ if ($PCO_Accion=="ver_monitoreo")
 			function actualizar()
 				{
 					if (EstadoPausa==0)
-						document.location="index.php?PCO_Accion=ver_monitoreo&Presentar_FullScreen=1&Pagina=<?php echo $SiguientePagina; ?>";
+					    document.formulario_monitoreo.submit();
+						//document.location="index.php?PCO_Accion=ver_monitoreo&Presentar_FullScreen=1&Pagina=<?php echo $SiguientePagina; ?>";
 				}
 			window.setTimeout("actualizar()",<?php echo $MilisegundosPagina; ?>);
 
