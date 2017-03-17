@@ -27,6 +27,7 @@ inc/practico/idiomas/*
 inc/bootstrap/css/plugins/*
 inc/bootstrap/js/plugins/dataTables/*
 inc/practico/def_basedatos.php
+mod/fileman/carpetas.php
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -44,6 +45,8 @@ LogCambios="
 * Fixed: Cierre adecuado de los pie de pagina en tablas de informes al momento de ser embebidos.
 * Added: Ayudas en adición de monitores.
 * Added: Scripts especificos de instalacion sobre SQL Server bajo conexiones DBLib
+* Fixed: Módulo de gestion de archivos ahora distingue entre usuarios definidos como administratores en el panel de configuración para agregar los recursos.
+
 "
 
 ########################################################################

@@ -26,8 +26,42 @@
 	
 	if ($Usuario_activo=="") die(); //Termina ejecucion si no hay un usuario valido en la sesion
 
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	// Function: PCO_EsAdministrador
+	Determina si un login de usuario es administrador de plataforma o no (si es super usuario)
+	
+	Variables de entrada:
+
+		Usuario - Login de usuario a verificar
+
+	Salida:
+		Cero (0) o uno (1) segun la pertenencia o no del usuario al grupo de admins
+*/
+    include ("../../../../core/configuracion.php");
+	function PCO_EsAdministrador($Usuario)
+		{
+			global $PCOVAR_Administradores;
+			$ArregloAdmins=explode(",",$PCOVAR_Administradores);
+
+			//Recorre el arreglo de super-usuarios
+			$Resultado = 0;
+			if ($Usuario!="")
+				foreach ($ArregloAdmins as $UsuarioAdmin)
+					{
+						if (trim($UsuarioAdmin)==$Usuario)
+							$Resultado = 1;
+					}
+			return $Resultado;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
 	//Si el usuario es el admin cambia la definicion de raices para agregar una que permite ver todos los usuarios
-	if ($Usuario_activo=="admin")
+	if (PCO_EsAdministrador(@$Usuario_activo))
 		{
             $Partes_Directorio_instalacion = explode(DIRECTORY_SEPARATOR, getcwd());
             $Directorio_instalacion= $Partes_Directorio_instalacion[count($Partes_Directorio_instalacion)-5];
@@ -91,7 +125,7 @@
 		}
 
 	//Si el usuario es diferente al admin agrega solo raiz a la carpeta publica y a la personal
-	if ($Usuario_activo!="admin" && $Usuario_activo!="")
+	if (PCO_EsAdministrador(@$Usuario_activo)==0 && $Usuario_activo!="")
 		{
 			$opts = array
 				(

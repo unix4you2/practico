@@ -106,4 +106,4 @@
 	$_SeparadorCampos_='||_||';
 	
 	// Define cadena separada por comas con usuarios administradores de la aplicacion
-	$PCOVAR_Administradores='admin';
+	$PCOVAR_Administradores='admin,pepito';
