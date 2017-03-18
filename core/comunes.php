@@ -4317,13 +4317,13 @@ $('#SampleElement').load('YourURL');
 
             //Define el tipo de boton de acuerdo al tipo de accion
             if ($registro_campos["tipo_accion"]=="interna_guardar")
-                $comando_javascript.="document.getElementById('datos').submit();";    
+                $comando_javascript.="PCOJS_ValidarCamposYProcesarFormulario(); ";    
             if ($registro_campos["tipo_accion"]=="interna_limpiar")
                 $comando_javascript.="document.getElementById('datos').reset();";
             if ($registro_campos["tipo_accion"]=="interna_escritorio")
                 $comando_javascript.="document.core_ver_menu.submit();";
             if ($registro_campos["tipo_accion"]=="interna_actualizar")
-                $comando_javascript.="document.datos.PCO_Accion.value='actualizar_datos_formulario';document.datos.submit();";
+                $comando_javascript.="document.datos.PCO_Accion.value='actualizar_datos_formulario'; PCOJS_ValidarCamposYProcesarFormulario(); ";
             if ($registro_campos["tipo_accion"]=="interna_eliminar")
                 $comando_javascript.="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit();";
             if ($registro_campos["tipo_accion"]=="interna_cargar")
@@ -4399,7 +4399,7 @@ $('#SampleElement').load('YourURL');
 				global $_SeparadorCampos_;
 				// Carga variables de definicion de tablas
 				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
-				global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
+				global $MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
                 global $PCO_InformesDataTable;
 
 
@@ -4773,13 +4773,13 @@ $('#SampleElement').load('YourURL');
 							
 							//Define el tipo de boton de acuerdo al tipo de accion
 							if ($registro_botones["tipo_accion"]=="interna_guardar")
-                                $comando_javascript.="document.getElementById('datos').submit();";    
+                                $comando_javascript.="PCOJS_ValidarCamposYProcesarFormulario();";    
 							if ($registro_botones["tipo_accion"]=="interna_limpiar")
                                 $comando_javascript.="document.getElementById('datos').reset();";
                             if ($registro_botones["tipo_accion"]=="interna_escritorio")
                                 $comando_javascript.="document.core_ver_menu.submit();";
 							if ($registro_botones["tipo_accion"]=="interna_actualizar")
-								$comando_javascript.="document.datos.PCO_Accion.value='actualizar_datos_formulario';document.datos.submit();";
+								$comando_javascript.="document.datos.PCO_Accion.value='actualizar_datos_formulario'; PCOJS_ValidarCamposYProcesarFormulario();";
 							if ($registro_botones["tipo_accion"]=="interna_eliminar")
 								$comando_javascript.="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit();";
 							if ($registro_botones["tipo_accion"]=="interna_cargar")
@@ -4870,7 +4870,40 @@ $('#SampleElement').load('YourURL');
 
 			//Carga las funciones JavaScript asociadas al formulario y llama la funcion FrmAutoRun()
 				$PCO_FuncionesJSInternasFORM .= '<script type="text/javascript">'.$registro_formulario["javascript"].' FrmAutoRun(); </script>';
-			
+
+            //Busca la lista de campos marcados como obligatorios sobre el form
+            $consulta_campos_obligatorios=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND obligatorio=1","$formulario");
+            $ListaCamposObligatorios="";
+            while ($registro_campos_obligatorios=$consulta_campos_obligatorios->fetch())
+                $ListaCamposObligatorios.="|".$registro_campos_obligatorios["id_html"];
+
+            //Agrega funcion para la intercepcion del submit del formulario
+            echo '
+            <script type="text/javascript">
+                function PCOJS_ValidarCamposYProcesarFormulario()
+                    {
+                        console.log("validando campos: '.$ListaCamposObligatorios.'");
+                        ListaCamposValidar="'.$ListaCamposObligatorios.'".split("|");
+                        MensajeCamposObligatorios="";
+                        //Recorre todos los campos de la lista en busca de sus valores
+                        for (Campo in ListaCamposValidar)
+                            {
+                                //Si se tiene un nombre de campo como obligatorio valida que tenga valor
+                                if (ListaCamposValidar[Campo]!="")
+                                    {
+                                        //Valida su valor actual
+                                        if ($("#"+ListaCamposValidar[Campo]).val() == "" )
+                                            MensajeCamposObligatorios+="<br><i class=\'fa fa-info-circle\'></i> '.$MULTILANG_ErrFrmObligatorio.' <b>"+ListaCamposValidar[Campo]+"</b>";
+                                    }
+                            }
+                        // Valida si hay errores y muestra el emerente, sino continua adelante y procesa el form
+                        if (MensajeCamposObligatorios!="")
+                            PCOJS_MostrarMensaje("'.$MULTILANG_AvisoSistema.'", MensajeCamposObligatorios);
+                        else
+                            document.getElementById(\'datos\').submit();
+                    }
+            </script> ';
+
 			if ($en_ventana) cerrar_ventana();
 		  }
 
