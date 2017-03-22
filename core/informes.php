@@ -2170,7 +2170,7 @@ if ($PCO_Accion=="guardar_informe")
 				$agrupamiento='';
                 $ordenamiento='';
                 ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|',?,?,?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtro");
-				$id=$ConexionPDO->lastInsertId();
+				$id=obtener_ultimo_id_insertado($ConexionPDO);
 				auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 				<input type="Hidden" name="PCO_Accion" value="editar_informe">
@@ -2240,7 +2240,7 @@ if ($PCO_Accion=="guardar_informe")
 							// Inserta el nuevo informe
 							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado");
 							
-							$idObjetoInsertado=$ConexionPDO->lastInsertId();
+							$idObjetoInsertado=obtener_ultimo_id_insertado($ConexionPDO);
 
 							// Busca los elementos que componen el informe para hacerles la copia
 							//Determina cuantos condiciones tiene la tabla
@@ -2595,7 +2595,7 @@ if ($PCO_Accion=="confirmar_importacion_informe")
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
 					$idObjetoInsertado=base64_decode($xml_importado->core_informe[0]->id);
 				else
-					$idObjetoInsertado=$ConexionPDO->lastInsertId();
+					$idObjetoInsertado=obtener_ultimo_id_insertado($ConexionPDO);
 
 				// Busca los elementos que componen el informe para hacerles la copia
 				//Determina cuantos campos tiene la tabla

@@ -1385,6 +1385,46 @@ function completar_parametros($string,$data) {
 
 /* ################################################################## */
 /* ################################################################## */
+	function obtener_ultimo_id_insertado($ConexionBD="")
+		{
+			/*
+				Function: obtener_ultimo_id_insertado
+				Segun el motor, obtiene el ultimo ID de registro insertado en la conexion especificada
+
+				Variables de entrada:
+
+					ConexionBD - Determina si la consulta debe ser ejecutada en otra conexion o motor.  Se hace obligatorio enviar parametros cuando se envia otra conexion
+					
+				Salida:
+					Retorna valor de ID de registro o vacio si no se encuentra alguno
+			*/
+			global $MotorBD;
+
+            $id_ultimo_registro_insertado="";
+			$id_ultimo_registro_insertado=$ConexionBD->lastInsertId();
+			//Si el motor no soporta adecuadamente el lastInsertId() hace funcion manual
+			if ($MotorBD=="dblib_mssql")
+				{
+					$registro_ultimo_id=ejecutar_sql("SELECT SCOPE_IDENTITY()","",$ConexionBD,1)->fetch();
+					$id_ultimo_registro_insertado=$registro_ultimo_id[0];
+				}
+			if ($MotorBD=="oracle")
+				{
+					$registro_ultimo_id=ejecutar_sql("SELECT SEQNAME.CURRVAL FROM DUAL;","",$ConexionBD,1)->fetch();
+					$id_ultimo_registro_insertado=$registro_ultimo_id[0];
+				}
+			if ($MotorBD=="pgsql")
+				{
+					$registro_ultimo_id=ejecutar_sql("SELECT lastval();","",$ConexionBD,1)->fetch();
+					$id_ultimo_registro_insertado=$registro_ultimo_id[0];
+				}
+
+            return $id_ultimo_registro_insertado;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
 	function ejecutar_sql($query,$lista_parametros="",$ConexionBD="",$EvitarLogSQL=0)
 		{
 			/*
@@ -1596,7 +1636,7 @@ function completar_parametros($string,$data) {
 						if ($DepuracionSQL==1)
 							auditar($query,"SQLog:$PCOSESS_LoginUsuario");
 
-					return "";
+					return $consulta;
 				}
 			catch( PDOException $ErrorPDO)
 				{

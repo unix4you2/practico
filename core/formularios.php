@@ -623,7 +623,7 @@
 					// Define la consulta de insercion del nuevo campo
 					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (".$ListaInterrogantes.")";
 					ejecutar_sql_unaria($consulta_insercion,"$ListaCamposyValores");
-					$id=$ConexionPDO->lastInsertId();
+					$id=obtener_ultimo_id_insertado($ConexionPDO);
 					auditar("Crea campo $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -674,7 +674,7 @@
 				{
 					//$accion_usuario=addslashes($accion_usuario); //DEPRECATED Version 15.1-
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$formulario$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$retorno_titulo$_SeparadorCampos_$retorno_texto$_SeparadorCampos_$confirmacion_texto$_SeparadorCampos_$retorno_icono$_SeparadorCampos_$retorno_estilo");
-					$id=$ConexionPDO->lastInsertId();
+					$id=obtener_ultimo_id_insertado($ConexionPDO);
 					auditar("Crea boton $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -2712,7 +2712,7 @@ if ($PCO_Accion=="editar_formulario")
 			if ($mensaje_error=="")
 				{
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas");
-					$id=$ConexionPDO->lastInsertId();
+					$id=obtener_ultimo_id_insertado($ConexionPDO);
 					auditar("Crea formulario $id para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
@@ -2776,7 +2776,7 @@ if ($PCO_Accion=="editar_formulario")
 							$estilo_pestanas=$registro["estilo_pestanas"];
 							// Inserta el nuevo objeto al form
 							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas");
-							$idObjetoInsertado=$ConexionPDO->lastInsertId();
+							$idObjetoInsertado=obtener_ultimo_id_insertado($ConexionPDO);
 
 							// Busca los elementos que componen el formulario para hacerles la copia
 							//Determina cuantos campos tiene la tabla
@@ -3040,7 +3040,7 @@ if ($PCO_Accion=="confirmar_importacion_formulario")
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
 					$idObjetoInsertado=base64_decode($xml_importado->core_formulario[0]->id);
 				else
-					$idObjetoInsertado=$ConexionPDO->lastInsertId();
+					$idObjetoInsertado=obtener_ultimo_id_insertado($ConexionPDO);
 
 				// Busca los elementos que componen el formulario para hacerles la copia
 				//Determina cuantos campos tiene la tabla

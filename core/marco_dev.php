@@ -138,7 +138,7 @@
 										if ($MotorBD=="sqlite") $MotorPMyDB="sqlite2";
 										if ($MotorBD=="pgsql") $MotorPMyDB="pgsql";
 										if ($MotorBD=="oracle") $MotorPMyDB="oracle";
-										if ($MotorBD=="mssql" || $MotorBD=="sqlsrv") $MotorPMyDB="mssql";
+										if ($MotorBD=="mssql" || $MotorBD=="sqlsrv" || $MotorBD=="dblib_mssql") $MotorPMyDB="mssql";
 										if ($MotorBD=="fbd") $MotorPMyDB="firebird";
 										//if ($MotorBD=="") $MotorPMyDB="simpledb";
 										//if ($MotorBD=="") $MotorPMyDB="mongo";
