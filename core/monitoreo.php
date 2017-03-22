@@ -398,7 +398,7 @@
 			$estilo_caja_comandos="panel-warning";
 
 			// Busca e Imprime encabezados de columna si no se tienen que ocultar
-					$resultado_columnas=ejecutar_sql($ComandoSQL["comando"]);
+					$resultado_columnas=ejecutar_sql($ComandoSQL["Comando"]);
 					$numero_columnas=0;
 					$SalidaFinalInforme.='<thead><tr>';
 					foreach($resultado_columnas->fetch(PDO::FETCH_ASSOC) as $key=>$val)
@@ -412,7 +412,7 @@
 					$SalidaFinalInforme.="</tr></thead>";
 
 			//Ejecuta el query
-			$consulta_ejecucion=ejecutar_sql($ComandoSQL["comando"]);
+			$consulta_ejecucion=ejecutar_sql($ComandoSQL["Comando"]);
 			while($registro_informe=$consulta_ejecucion->fetch())
 				{
 					$SalidaFinalInforme.= '<tr>';
@@ -561,7 +561,7 @@
 			global $Imagen_generica_shell,$Tamano_iconos,$color_fondo_ascii, $MULTILANG_MonCommShell;
 			
 			//Ejecuta el comando
-			$salida_comando = shell_exec($comando_ejecutar["comando"]);
+			$salida_comando = shell_exec($comando_ejecutar["Comando"]);
 			//Presenta la salida
 			$icono_maquina=$Imagen_generica_shell;
 			$estilo_caja_comandos="panel-success";
