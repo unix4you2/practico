@@ -41,6 +41,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+
 * Added: Ahora los formularios con campos marcados como obligatorios realizan su proceso de validación en caliente del lado del cliente.  El proceso de validación del lado del servidor continúa para efectos de garantizar integridad de los datos.  Los usuarios verán una ventana emergente de manera automática cuando les falte algún campo por diligenciar indicando además su nombre.
 * Added: Posibilidad de seleccionar el idioma en la ventana de login de manera independiente para cada usuario.  Configurable desde el panel de control, sección de idioma.  Esto crea una variable de sesión llamada $PCOSESS_IdiomaUsuario con lo seleccionado por éste que podrá ser utilizada posteriormente por el programador.
 * Added: El sistema de monitoreo permite agregar monitores donde se requiere medir rangos especificos.  El valor a comparar entre el rango minimo y maximo puede ser obtenido mediante comandos SQL y Shell que deberan retornar unicamente valores enteros.
@@ -54,6 +55,9 @@ LogCambios="
 * Fixed: Login automático desde el panel de desarrollo hacia gestores de bases de datos configurados bajo SQL Server y drivers dblib.
 * Enhan: Ahora la funcion ejecutar_sql_unaria() retorna el arreglo asociativo fetch(PDO::FETCH_ASSOC) correspondiente al resultado de la ejecucion en caso de ser requerido.
 * Added: Nueva funcion obtener_ultimo_id_insertado($ConexionPDO) devuelve el id de registro del último registro insertado por medio de la conexion.
+* Added: Los objetos de tipo botón de comando sobre formularios soportan ahora la propiedad id_html para ser manipulables desde JS y crear eventos.
+
+NOTA: Personas que hayan aplicado parches 17.3-Actualizacion_XXX pueden observar mensajes de error al ejecutar esta actualizacion derivados de scripts SQL previamente ejecutados.
 "
 
 ########################################################################

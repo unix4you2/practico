@@ -4393,7 +4393,7 @@ $('#SampleElement').load('YourURL');
             //Abre el marco del control de datos style="display:inline;"
 			$salida.='<div '.$cadena_identificador.' style="'.$cadena_modo_inline.'" class="form-group input-group">';
             // Muestra el campo
-			$salida.='<a class="btn '.$registro_campos["personalizacion_tag"].'" '.@$cadena_javascript.'><i class="'.$registro_campos["imagen"].'"></i> '.$registro_campos["titulo"].'</a>';
+			$salida.='<a id="'.$registro_campos["id_html"].'" class="btn '.$registro_campos["personalizacion_tag"].'" '.@$cadena_javascript.'><i class="'.$registro_campos["imagen"].'"></i> '.$registro_campos["titulo"].'</a>';
             //Cierra marco del control de datos
             $salida.= '</div>';
             
