@@ -46,10 +46,8 @@
 	function PCO_DireccionPorCoordenas($Latitud, $Longitud, $APIKey_GoogleMaps)
 		{
 			$URLMaps = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".$Latitud.",".$Longitud."&key=".$APIKey_GoogleMaps."&language=es";
-			$Resultado = array();
 			$DatosRecibidos = @cargar_url($URLMaps);
-			$Resultado = json_decode($DatosRecibidos, true);
-			return $Resultado;
+			return json_decode($DatosRecibidos, true);
 		}
 
 
@@ -70,10 +68,8 @@
 	function PCO_DireccionPorIDSitio($PlaceID, $APIKey_GoogleMaps)
 		{
 			$URLMaps = "https://maps.googleapis.com/maps/api/geocode/json?place_id=".$PlaceID."&key=".$APIKey_GoogleMaps."&language=es";
-			$Resultado = array();
 			$DatosRecibidos = @cargar_url($URLMaps);
-			$Resultado = json_decode($DatosRecibidos, true);
-			return $Resultado;
+			return json_decode($DatosRecibidos, true);
 		}
 
 
@@ -105,17 +101,12 @@
 			$Millas = acos($Millas);
 			$Millas = rad2deg($Millas);
 			$Millas = $Millas * 60 * 1.1515;
-			$Kilometros = $Millas * 1.609344;
-			$Metros=$Kilometros/1000;
-			
-			//Determina el valor a retornar segun lo indicado por el llamado a funcion
-			$ValorRetorno=$Metros;
 			if ($UnidadMedida=="mi")
-				$ValorRetorno=$Millas;
+				return $Millas;
+			$Kilometros = $Millas * 1.609344;
 			if ($UnidadMedida=="km")
-				$ValorRetorno=$Kilometros;
-
-			return $ValorRetorno;
+				return $Kilometros;				
+			return $Kilometros/1000;//retorna metros
 		}
 
 
