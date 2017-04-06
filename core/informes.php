@@ -1280,17 +1280,17 @@ if ($PCO_Accion=="editar_informe")
                       <div class="col-md-4">
                                                     
                                 <div class="form-group input-group">
-                                    <input name="valor_izq_manual" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>">
+                                    <input name="valor_izq_manual" id="valor_izq_manual" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>">
                                 </div>
                       </div>    
                       <div class="col-md-4">
                                 <div class="form-group input-group">
-                                    <input name="operador_manual" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>">
+                                    <input name="operador_manual" id="operador_manual" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>">
                                 </div>
                       </div>
                       <div class="col-md-4">
                                 <div class="form-group input-group">
-                                    <input name="valor_der_manual" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>">
+                                    <input name="valor_der_manual" id="valor_der_manual" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>">
                                     <span class="input-group-addon">
                                         <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_InfDesManual; ?>"><i class="fa fa-question-circle  fa-fw icon-info"></i></a>
                                     </span>
@@ -1321,7 +1321,16 @@ if ($PCO_Accion=="editar_informe")
                 </form>
                 <br><br>
                 <a class="btn btn-success btn-block" href="javascript:document.datosformco.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_InfBtnAddCondic; ?></a>
-
+                <script language="JavaScript">
+                    var TempoCondiciones = setInterval(ValidarOperadoresLogicos, 500);
+                    function ValidarOperadoresLogicos()
+                        {
+                            if ( $("#valor_izq").val() != "" || $("#operador").val() != "" || $("#valor_der").val() != "" || $("#valor_izq_manual").val() != "" || $("#operador_manual").val() != "" || $("#valor_der_manual").val() != "" )
+                                $('#operador_logico').prop('disabled', 'disabled');
+                            else
+                                $('#operador_logico').prop('disabled', false);
+                        }
+                </script>
 
 				<hr><b><?php echo $MULTILANG_InfDefCond; ?></b>
 				<table class="table table-condensed btn-xs table-unbordered table-hover">
