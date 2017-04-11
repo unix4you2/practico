@@ -1074,6 +1074,7 @@
 	$MULTILANG_AuthOauthURI='URI redireccion';
 	$MULTILANG_OauthTitURI='Antes de continuar, usted debe registrar una aplicaci&oacute;n con el proveedor correspondiente y obtener el ID, Secreto y URI para asociarla al servicio.  La URI a registrar con su proveedor es aquella calculada automaticamente por Practico en ese campo.';
 	$MULTILANG_OauthDesURI='Tenga en cuenta que la URI de retorno debe estar asociada a un dominio o IP publica para poder ser resuelta por el proveedor. Esta URI se calcula automaticamente dependiendo del path al momento de instalacion.  Para ir a la URL donde se registran las aplicaciones haga clic sobre el logo correspondiente.';
+	$MULTILANG_OauthPredeterminado='Una vez registrado algun proveedor de OAuth, usted puede configurar su sistema para que las opciones OAuth sean las presentadas de manera predeterminada al momento de login desde el panel de configuracion.';
 	$MULTILANG_BuscarActual='Buscar actualizaciones automaticamente';
 	$MULTILANG_DescActual='Se conecta de manera aleatoria durante algunos ingresos del admin para verificar si existen versiones nuevas de Practico.  Puede poner un poco lenta la carga del panel para el usuario admin mientras busca nuevas versiones.';
 	$MULTILANG_ConfGraficas='Cambiar configuraciones graficas';
@@ -1113,6 +1114,7 @@
 
 	//OAuth
 	$MULTILANG_OauthButt='Autenticacion OAuth';
+	$MULTILANG_PreferirOauth='Presentar las opciones OAuth por defecto durante el login';
 	$MULTILANG_ProtoTransporte='Protocolo de transporte preferido';
 	$MULTILANG_ProtoTransAUTO='Autodetectar por URL';
 	$MULTILANG_ProtoTransHTTP='HTTP sin cifrar';

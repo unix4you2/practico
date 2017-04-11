@@ -22,6 +22,7 @@ core/marco_abajo.php
 core/marco_arriba.php
 core/marco_conf.php
 core/marco_dev.php
+core/marco_oauth.php
 core/monitoreo.php
 core/monitoreo_superior.php
 core/objetos.php
@@ -57,6 +58,9 @@ LogCambios="
 * Added: Nueva funcion obtener_ultimo_id_insertado($ConexionPDO) devuelve el id de registro del último registro insertado por medio de la conexion.
 * Added: Los objetos de tipo botón de comando sobre formularios soportan ahora la propiedad id_html para ser manipulables desde JS y crear eventos.
 * Fixed: #78 Ahora durante el diseño de informes se inhabilita la adición de operadores lógicos cuando se ha hecho cambios en alguno de los campos de expresiones u operadores de comparación para evitar errores de sintaxis posteriores sobre SQL.
+* Added: Ahora cuando se cuenta con proveedores OAuth registrados se puede configurar para que la pantalla de acceso al sistema los presente de manera predeterminada en lugar del acceso por autenticación nativa.
+* Fixed: Ahora no se generan múltiples funciones de validación en los casos donde se proyectos subformularios con campos obligatorios.  Sólo es generada una función para todos.  La variable PCOJS_ListaCamposValidar queda con el arreglo de campos a validar en caso que se requiera intervenir.
+* Enhan: Los sensores por rango para el sistema de monitoreo permiten evaluar ahora valores fijos.  Si el valor mínimo y máximo de un valor de sensor en rango son iguales entonces el sensor cambiará el modo a evaluación de igualdad del valor.
 
 NOTA: Personas que hayan aplicado parches 17.3-Actualizacion_XXX pueden observar mensajes de error al ejecutar esta actualizacion derivados de scripts SQL previamente ejecutados.
 "

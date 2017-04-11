@@ -506,6 +506,32 @@
     </script>
 
 	<?php
+        //Agrega funcion para la intercepcion del submit del formulario
+        echo '
+        <script type="text/javascript">
+            PCOJS_ListaCamposValidar="'.$POSTForm_ListaCamposObligatorios.'".split("|");
+            function PCOJS_ValidarCamposYProcesarFormulario()
+                {
+                    MensajeCamposObligatorios="";
+                    //Recorre todos los campos de la lista en busca de sus valores
+                    for (Campo in PCOJS_ListaCamposValidar)
+                        {
+                            //Si se tiene un nombre de campo como obligatorio valida que tenga valor
+                            if (PCOJS_ListaCamposValidar[Campo]!="")
+                                {
+                                    //Valida su valor actual
+                                    if ($("#"+PCOJS_ListaCamposValidar[Campo]).val() == "" )
+                                        MensajeCamposObligatorios+="<br><i class=\'fa fa-info-circle\'></i> '.$MULTILANG_ErrFrmObligatorio.' <b>"+PCOJS_ListaCamposValidar[Campo]+"</b>";
+                                }
+                        }
+                    // Valida si hay errores y muestra el emerente, sino continua adelante y procesa el form
+                    if (MensajeCamposObligatorios!="")
+                        PCOJS_MostrarMensaje("'.$MULTILANG_AvisoSistema.'", MensajeCamposObligatorios);
+                    else
+                        document.getElementById(\'datos\').submit();
+                }
+        </script> ';
+
 		//Si existen funciones JavaScript generadas por algun formulario del usuario entonces las imprime
 		if(@$PCO_FuncionesJSInternasFORM!="")
 			echo $PCO_FuncionesJSInternasFORM;

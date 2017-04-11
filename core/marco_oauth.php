@@ -55,7 +55,8 @@
 					<?php
 						echo '<b>'.$MULTILANG_Importante.'</b>:<br>';
 						echo '<li>'.$MULTILANG_OauthTitURI; 						
-						echo '<li>'.$MULTILANG_OauthDesURI.'<hr>'; 
+						echo '<li>'.$MULTILANG_OauthDesURI; 
+						echo '<li>'.$MULTILANG_OauthPredeterminado.'<hr>'; 
 					?>
 
 					<table class="table table-condensed table-unbordered btn-xs">

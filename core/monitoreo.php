@@ -311,22 +311,35 @@
 
             //Evalua el valor encontrado para saber si esta en el rango deseado
             $SensorFueraRango=0;
-			if ($valor_sensor >= $Sensor["valor_minimo"] && $valor_sensor <= $Sensor["valor_maximo"] )
-			    {
-			        
-			    }
-			else
-				{
-					$ErroresMonitoreoPractico=1;
-					$SensorFueraRango=1;
-
-					//Si tiene activada la alerta auditiva la agenda
-					if ($Sensor["alerta_sonora"]==1)
-						$ErroresMonitoreoAlertaAuditiva=1;
-					//Si tiene activada la alerta vibratoria la agenda
-					if ($Sensor["alerta_vibracion"]==1)
-						$ErroresMonitoreoAlertaVibratoria=1;
-				}
+            //Si los valores minimos y maximos son iguales entonces el sensor cambia a comparar por igualdad, dandole capacidad de evaluar valores fijos.
+            if ($Sensor["valor_minimo"] == $Sensor["valor_maximo"])
+                {
+        			if ($valor_sensor != $Sensor["valor_minimo"])
+        				{
+        					$ErroresMonitoreoPractico=1;
+        					$SensorFueraRango=1;
+        					//Si tiene activada la alerta auditiva la agenda
+        					if ($Sensor["alerta_sonora"]==1)
+        						$ErroresMonitoreoAlertaAuditiva=1;
+        					//Si tiene activada la alerta vibratoria la agenda
+        					if ($Sensor["alerta_vibracion"]==1)
+        						$ErroresMonitoreoAlertaVibratoria=1;
+        				}
+                }
+            else
+                {
+        			if ($valor_sensor < $Sensor["valor_minimo"] || $valor_sensor > $Sensor["valor_maximo"] )
+        				{
+        					$ErroresMonitoreoPractico=1;
+        					$SensorFueraRango=1;
+        					//Si tiene activada la alerta auditiva la agenda
+        					if ($Sensor["alerta_sonora"]==1)
+        						$ErroresMonitoreoAlertaAuditiva=1;
+        					//Si tiene activada la alerta vibratoria la agenda
+        					if ($Sensor["alerta_vibracion"]==1)
+        						$ErroresMonitoreoAlertaVibratoria=1;
+        				}
+                }
 
 			//Actualiza el estado del monitor en caso de haber cambiado y envia alertas
 			$EstadoMonitor=$MULTILANG_MonLinea;

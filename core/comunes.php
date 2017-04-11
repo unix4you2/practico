@@ -2306,7 +2306,7 @@ function ventana_login()
 			Function: ventana_login
 			Despliega la ventana de ingreso al sistema con el formulario para usuario, contrasena y captcha.
 		*/
-		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor,$MULTILANG_OauthButt,$NombreRAD;
+		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor,$MULTILANG_OauthButt,$NombreRAD,$Auth_PresentarOauthInicio;
 		  global $Auth_PermitirAutoRegistro,$Auth_PermitirReseteoClaves,$CaracteresCaptcha,$IdiomaEnLogin;
 		  global $IdiomaPredeterminado,$MULTILANG_IdiomaPredeterminado,$MULTILANG_Cerrar,$MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes,$MULTILANG_Registrarme,$MULTILANG_OlvideClave;
 			// Variables para OAuth desde el archivo de configuracion
@@ -2494,17 +2494,29 @@ function ventana_login()
                                     <?php
                                         // Muestra boton de login por red social si aplica
                                         if ($AlMenosUnOAuth>0)
-                                            echo '<hr>
-                                                <a data-toggle="modal" href="#myModalLOGINOAUTH" class="btn btn-info  btn-block">
-                                                    <div>
-                                                        '.$MULTILANG_OauthLogin.'<br>
-                                                        <i class="fa fa-2x fa-facebook-square"></i>
-                                                        <i class="fa fa-2x fa-google-plus-square"></i>
-                                                        <i class="fa fa-2x fa-twitter"></i>
-                                                        <i class="fa fa-2x fa-linkedin-square"></i>
-                                                        <i class="fa fa-2x fa-dropbox"></i>
-                                                    </div>
-                                                </a>';
+                                            {
+                                                echo '<hr>
+                                                    <a id="boton_login_oauth" data-toggle="modal" href="#myModalLOGINOAUTH" class="btn btn-info  btn-block">
+                                                        <div>
+                                                            '.$MULTILANG_OauthLogin.'<br>
+                                                            <i class="fa fa-2x fa-facebook-square"></i>
+                                                            <i class="fa fa-2x fa-google-plus-square"></i>
+                                                            <i class="fa fa-2x fa-twitter"></i>
+                                                            <i class="fa fa-2x fa-linkedin-square"></i>
+                                                            <i class="fa fa-2x fa-dropbox"></i>
+                                                        </div>
+                                                    </a>';
+                                                
+                                                //Si esta predeterminado mostrar las opciones al comienzo entonces hace el trigger sobre el enlace
+                                                if ($Auth_PresentarOauthInicio==1)
+                                                    {
+                                                        echo '<script language="JavaScript">
+                                                        $( document ).ready(function() {
+                                                            $("#boton_login_oauth").trigger("click");
+                                                            });
+                                                        </script>';
+                                                    }
+                                            }
                                     ?>
                                 </form>
                                 <?php
@@ -4432,7 +4444,7 @@ $('#SampleElement').load('YourURL');
 				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
 				global $MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
                 global $PCO_InformesDataTable;
-
+                global $POSTForm_ListaCamposObligatorios;
 
 				// Busca datos del formulario
 				$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");

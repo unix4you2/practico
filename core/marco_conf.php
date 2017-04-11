@@ -465,6 +465,19 @@
 													<a  href="#" data-toggle="tooltip" data-html="true"  title="(<?php echo $MULTILANG_Opcional; ?>) <?php echo $MULTILANG_AyudaDesLdapUO; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 												</span>
 											</div>
+
+											<label for="Auth_PresentarOauthInicioNEW"><i class="fa fa-shield fa-2x fa-fw"></i> <?php echo $MULTILANG_PreferirOauth; ?>:</label>
+											<div class="form-group input-group">
+												<select id="Auth_PresentarOauthInicioNEW" name="Auth_PresentarOauthInicioNEW" class="selectpicker" >
+													<option value="1" <?php if (@$Auth_PresentarOauthInicio=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?></option>
+													<option value="0" <?php if (@$Auth_PresentarOauthInicio=="0" || @$Auth_PresentarOauthInicio=="") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?></option>
+												</select>
+												<span class="input-group-addon">
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_OauthPredeterminado; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+											</div>
+
+
 										</div>
 									</div>
 
