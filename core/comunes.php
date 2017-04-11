@@ -4444,7 +4444,7 @@ $('#SampleElement').load('YourURL');
 				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
 				global $MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
                 global $PCO_InformesDataTable;
-                global $POSTForm_ListaCamposObligatorios;
+                global $POSTForm_ListaCamposObligatorios,$POSTForm_ListaTitulosObligatorios;
 
 				// Busca datos del formulario
 				$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
@@ -4917,9 +4917,14 @@ $('#SampleElement').load('YourURL');
             //Busca la lista de campos marcados como obligatorios sobre el form
             $consulta_campos_obligatorios=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND obligatorio=1","$formulario");
             $ListaCamposObligatorios="";
+            $ListaTitulosObligatorios="";
             while ($registro_campos_obligatorios=$consulta_campos_obligatorios->fetch())
-                $ListaCamposObligatorios.="|".$registro_campos_obligatorios["id_html"];
+                {
+                    $ListaCamposObligatorios.="|".$registro_campos_obligatorios["id_html"];
+                    $ListaTitulosObligatorios.="|".$registro_campos_obligatorios["titulo"];
+                }
             $POSTForm_ListaCamposObligatorios.=$ListaCamposObligatorios;
+            $POSTForm_ListaTitulosObligatorios.=$ListaTitulosObligatorios;
 
 			if ($en_ventana) cerrar_ventana();
 		  }

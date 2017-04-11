@@ -90,7 +90,7 @@
 	$Auth_PermitirReseteoClaves='0';
 	$Auth_PermitirAutoRegistro='1';
 	$Auth_PlantillaAutoRegistro='';
-	$Auth_PresentarOauthInicio='1';
+	$Auth_PresentarOauthInicio='0';
 
 	// Configuracion LDAP - Auth_TipoMotor=ldap
 	$Auth_TipoEncripcion='plano';

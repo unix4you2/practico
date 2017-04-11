@@ -510,10 +510,12 @@
         echo '
         <script type="text/javascript">
             PCOJS_ListaCamposValidar="'.$POSTForm_ListaCamposObligatorios.'".split("|");
+            PCOJS_ListaTitulosValidar="'.$POSTForm_ListaTitulosObligatorios.'".split("|");
             function PCOJS_ValidarCamposYProcesarFormulario()
                 {
                     MensajeCamposObligatorios="";
                     //Recorre todos los campos de la lista en busca de sus valores
+                    ConteoCamposValidacion=0;
                     for (Campo in PCOJS_ListaCamposValidar)
                         {
                             //Si se tiene un nombre de campo como obligatorio valida que tenga valor
@@ -521,8 +523,9 @@
                                 {
                                     //Valida su valor actual
                                     if ($("#"+PCOJS_ListaCamposValidar[Campo]).val() == "" )
-                                        MensajeCamposObligatorios+="<br><i class=\'fa fa-info-circle\'></i> '.$MULTILANG_ErrFrmObligatorio.' <b>"+PCOJS_ListaCamposValidar[Campo]+"</b>";
+                                        MensajeCamposObligatorios+="<br><i class=\'fa fa-info-circle\'></i> '.$MULTILANG_ErrFrmObligatorio.' <b>"+PCOJS_ListaTitulosValidar[ConteoCamposValidacion]+"</b>";
                                 }
+                            ConteoCamposValidacion++;
                         }
                     // Valida si hay errores y muestra el emerente, sino continua adelante y procesa el form
                     if (MensajeCamposObligatorios!="")
