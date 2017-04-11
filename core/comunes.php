@@ -4919,33 +4919,7 @@ $('#SampleElement').load('YourURL');
             $ListaCamposObligatorios="";
             while ($registro_campos_obligatorios=$consulta_campos_obligatorios->fetch())
                 $ListaCamposObligatorios.="|".$registro_campos_obligatorios["id_html"];
-
-            //Agrega funcion para la intercepcion del submit del formulario
-            echo '
-            <script type="text/javascript">
-                function PCOJS_ValidarCamposYProcesarFormulario()
-                    {
-                        console.log("validando campos: '.$ListaCamposObligatorios.'");
-                        ListaCamposValidar="'.$ListaCamposObligatorios.'".split("|");
-                        MensajeCamposObligatorios="";
-                        //Recorre todos los campos de la lista en busca de sus valores
-                        for (Campo in ListaCamposValidar)
-                            {
-                                //Si se tiene un nombre de campo como obligatorio valida que tenga valor
-                                if (ListaCamposValidar[Campo]!="")
-                                    {
-                                        //Valida su valor actual
-                                        if ($("#"+ListaCamposValidar[Campo]).val() == "" )
-                                            MensajeCamposObligatorios+="<br><i class=\'fa fa-info-circle\'></i> '.$MULTILANG_ErrFrmObligatorio.' <b>"+ListaCamposValidar[Campo]+"</b>";
-                                    }
-                            }
-                        // Valida si hay errores y muestra el emerente, sino continua adelante y procesa el form
-                        if (MensajeCamposObligatorios!="")
-                            PCOJS_MostrarMensaje("'.$MULTILANG_AvisoSistema.'", MensajeCamposObligatorios);
-                        else
-                            document.getElementById(\'datos\').submit();
-                    }
-            </script> ';
+            $POSTForm_ListaCamposObligatorios.=$ListaCamposObligatorios;
 
 			if ($en_ventana) cerrar_ventana();
 		  }
