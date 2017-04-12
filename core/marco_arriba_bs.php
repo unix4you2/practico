@@ -48,7 +48,24 @@
     <!-- CSS Core de Bootstrap -->
     <link href="inc/bootstrap/css/bootstrap.min.css" rel="stylesheet"  media="screen">
     <link href="inc/bootstrap/css/bootstrap-theme.css" rel="stylesheet"  media="screen">
+
+
+    <!-- Material Design for Bootstrap -->
+    <!-- TEMA 1 -->
+    <!-- Material Design fonts -->
+    <link rel="stylesheet" href="XXXhttp://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link href="XXXhttps://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
+    <link href="XXXinc/bootstrap_temas/material_design/css/bootstrap-material-design.css" rel="stylesheet">
+    <link href="XXXinc/bootstrap_temas/material_design/css/ripples.min.css" rel="stylesheet">
+    <!-- Dropdown.js -->
+    <link href="XXX//cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.css" rel="stylesheet">
+    <!-- TEMA 2 -->
+    <link href="XXXinc/bootstrap_temas/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+
+
+
+
     <!-- librerías opcionales que activan el soporte de HTML5 para IE8 -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

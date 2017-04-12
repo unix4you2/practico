@@ -124,6 +124,57 @@
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="inc/bootstrap/js/bootstrap.min.js"></script>
 
+
+
+
+    <!-- Material Design for Bootstrap -->
+    <script src="XXXinc/bootstrap_temas/material_design/js/material.min.js"></script>
+    <script src="XXXinc/bootstrap_temas/material_design/js/ripples.min.js"></script>
+    <script>
+      //$.material.init();
+    </script>
+    <!-- Sliders -->
+    <script src="XXX//cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
+    <script>
+/*
+      $(function () {
+        $.material.init();
+        $(".shor").noUiSlider({
+          start: 40,
+          connect: "lower",
+          range: {
+            min: 0,
+            max: 100
+          }
+        });
+    
+        $(".svert").noUiSlider({
+          orientation: "vertical",
+          start: 40,
+          connect: "lower",
+          range: {
+            min: 0,
+            max: 100
+          }
+        });
+      });
+*/
+    </script>
+    <!-- Dropdown.js -->
+    <script src="XXXhttps://cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.js"></script>
+    <script>
+      //$("#dropdown-menu select").dropdown();
+    </script>
+    <script src="XXXinc/bootstrap_temas/mdbootstrap/js/mdb.min.js"></script>
+
+
+
+
+
+
+
+
+
     <!-- Plugins JavaScript requeridos por DateTimePicker -->
     <script src="inc/bootstrap/js/plugins/moment/moment-with-locales.min.js"></script>
 
