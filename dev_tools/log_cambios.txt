@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno="17"
-VersionCompatibleMes="3"
+VersionCompatibleAno=""
+VersionCompatibleMes=""
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno="17"
-VersionFinalMes="4"
+VersionFinalAno=""
+VersionFinalMes=""
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
@@ -16,22 +16,8 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
-core/formularios.php
-core/informes.php
-core/marco_abajo.php
-core/marco_arriba.php
-core/marco_conf.php
-core/marco_dev.php
-core/marco_oauth.php
-core/monitoreo.php
-core/monitoreo_superior.php
-core/objetos.php
-core/sesion.php
 inc/practico/idiomas/*
-inc/bootstrap/css/plugins/*
-inc/bootstrap/js/plugins/dataTables/*
 inc/practico/def_basedatos.php
-mod/fileman/carpetas.php
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -43,34 +29,12 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 
-* Added: Ahora los formularios con campos marcados como obligatorios realizan su proceso de validación en caliente del lado del cliente.  El proceso de validación del lado del servidor continúa para efectos de garantizar integridad de los datos.  Los usuarios verán una ventana emergente de manera automática cuando les falte algún campo por diligenciar indicando además su nombre.
-* Added: Posibilidad de seleccionar el idioma en la ventana de login de manera independiente para cada usuario.  Configurable desde el panel de control, sección de idioma.  Esto crea una variable de sesión llamada $PCOSESS_IdiomaUsuario con lo seleccionado por éste que podrá ser utilizada posteriormente por el programador.
-* Added: El sistema de monitoreo permite agregar monitores donde se requiere medir rangos especificos.  El valor a comparar entre el rango minimo y maximo puede ser obtenido mediante comandos SQL y Shell que deberan retornar unicamente valores enteros.
-* Added: Actualizacion del plugin DataTables a la versión 1.10.13 y en versiones optimizadas de archivos (minimizadas)
-* Fixed: Cierre adecuado de los pie de pagina en tablas de informes al momento de ser embebidos.
-* Added: Ayudas en adición de monitores.
-* Added: Visor del sistema de monitoreo permite configurar una página para que sea recurrente y se actualice sólo esta, en lugar de rotar por todas las páginas definidas.
-* Added: Scripts especificos de instalacion sobre SQL Server bajo conexiones DBLib
-* Fixed: Módulo de gestion de archivos ahora distingue entre usuarios definidos como administratores en el panel de configuración para agregar los recursos.
-* Added: Compatibilidad MariaDB y MySQL 5.7 en clausulas order by cuando sql_mode=only_full_group_by se agregan los campos de id al order by para evitar conflictos con esta nueva configuración.
-* Fixed: Login automático desde el panel de desarrollo hacia gestores de bases de datos configurados bajo SQL Server y drivers dblib.
-* Enhan: Ahora la funcion ejecutar_sql_unaria() retorna el arreglo asociativo fetch(PDO::FETCH_ASSOC) correspondiente al resultado de la ejecucion en caso de ser requerido.
-* Added: Nueva funcion obtener_ultimo_id_insertado($ConexionPDO) devuelve el id de registro del último registro insertado por medio de la conexion.
-* Added: Los objetos de tipo botón de comando sobre formularios soportan ahora la propiedad id_html para ser manipulables desde JS y crear eventos.
-* Fixed: #78 Ahora durante el diseño de informes se inhabilita la adición de operadores lógicos cuando se ha hecho cambios en alguno de los campos de expresiones u operadores de comparación para evitar errores de sintaxis posteriores sobre SQL.
-* Added: Ahora cuando se cuenta con proveedores OAuth registrados se puede configurar para que la pantalla de acceso al sistema los presente de manera predeterminada en lugar del acceso por autenticación nativa.
-* Fixed: Ahora no se generan múltiples funciones de validación en los casos donde se proyectos subformularios con campos obligatorios.  Sólo es generada una función para todos.  La variable PCOJS_ListaCamposValidar queda con el arreglo de campos a validar en caso que se requiera intervenir.
-* Enhan: Los sensores por rango para el sistema de monitoreo permiten evaluar ahora valores fijos.  Si el valor mínimo y máximo de un valor de sensor en rango son iguales entonces el sensor cambiará el modo a evaluación de igualdad del valor.
-* Added: Se agrega posibilidad de detectar el estado de conexion del cliente (sin importar si es PC, movil, tableta, etc) y presentar un mensaje para impedir la actividad del sistema hasta que se retorne la conexion.   Opera en ambas vías, tanto para cuando el cliente tiene problemas de conectividad como cuando el servidor donde corre el sistema no puede responder.  Para probar simplemente desconecte su red y espere el cambio de estado, luego conecte la red y vera que es restablecido el sistema.  El tiempo preestablecido para estos chequeos es de 5 segundos, no personalizables por ahora.
-
-NOTA: Personas que hayan aplicado parches 17.3-Actualizacion_XXX pueden observar mensajes de error al ejecutar esta actualizacion derivados de scripts SQL previamente ejecutados.
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-ALTER TABLE core_monitoreo ADD valor_minimo int(11);
-ALTER TABLE core_monitoreo ADD valor_maximo int(11);
+
 "
 
 ########################################################################
