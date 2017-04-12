@@ -256,7 +256,8 @@
     $MULTILANG_SeparadorCamposDes='Usado para separar valores em consultas sobre o motor de base de dados. Este deve ser um valor incomum para manter qualquer correspondência com os dados inseridos por usu&aacute;rios';
     $MULTILANG_SelectorIdioma='Os usuários podem alterar o idioma na hora de login';
     $MULTILANG_SelectorIdiomaAyuda='Mostra uma lista de seleção durante o login com todas as linguagens disponíveis na plataforma.';
-    
+    $MULTILANG_ErrorConexionInternet='Parece que você está sem conexão com a internet, a conexão com o sistema será restaurado quando sua conexão com a Internet ser comum.<br><br>Verifique sua conexão de rede ou sinal de dados estão ativos.';
+
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Design do aplicativo';
 	$MULTILANG_TitDisenador='Projetando a aplicação<b>&eacute; simples e r&aacute;pido:</b>';

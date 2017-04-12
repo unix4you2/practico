@@ -540,6 +540,29 @@
 			echo $PCO_FuncionesJSInternasFORM;
 	?>
 
+	<?php
+        //Agrega funcion para verificar periodicamente la conectividad del cliente
+        echo '
+        <script type="text/javascript">
+            function VerificarConectividad()
+                {
+                    $.ajax({
+                        url: "inc/version_actual.txt",
+                        cache: false
+                    })
+                    .done(function( contenido_respuesta_html ) {
+                        $("#PCO_Modal_MensajeCargando").modal("hide");
+                    });
+                }
+            var ValidadorConexion = setInterval(VerificarConectividad, 5000);
+            $(document).ajaxError(function(){
+                if (window.console && window.console.error) {
+                    PCOJS_MostrarMensajeCargando("'.$MULTILANG_EventoTipoInternet.'", " <i class=\"fa fa-4x fa-globe fa-pull-left fa-border \"></i>'.$MULTILANG_ErrorConexionInternet.'", 0, 100);
+                }
+            });
+        </script> ';
+	?>
+
     <?php
         // Estadisticas de uso anonimo con GABeacon
         $PrefijoGA='<img src="https://rastreador-visitas.appspot.com/';

@@ -61,6 +61,7 @@ LogCambios="
 * Added: Ahora cuando se cuenta con proveedores OAuth registrados se puede configurar para que la pantalla de acceso al sistema los presente de manera predeterminada en lugar del acceso por autenticación nativa.
 * Fixed: Ahora no se generan múltiples funciones de validación en los casos donde se proyectos subformularios con campos obligatorios.  Sólo es generada una función para todos.  La variable PCOJS_ListaCamposValidar queda con el arreglo de campos a validar en caso que se requiera intervenir.
 * Enhan: Los sensores por rango para el sistema de monitoreo permiten evaluar ahora valores fijos.  Si el valor mínimo y máximo de un valor de sensor en rango son iguales entonces el sensor cambiará el modo a evaluación de igualdad del valor.
+* Added: Se agrega posibilidad de detectar el estado de conexion del cliente (sin importar si es PC, movil, tableta, etc) y presentar un mensaje para impedir la actividad del sistema hasta que se retorne la conexion.   Opera en ambas vías, tanto para cuando el cliente tiene problemas de conectividad como cuando el servidor donde corre el sistema no puede responder.  Para probar simplemente desconecte su red y espere el cambio de estado, luego conecte la red y vera que es restablecido el sistema.  El tiempo preestablecido para estos chequeos es de 5 segundos, no personalizables por ahora.
 
 NOTA: Personas que hayan aplicado parches 17.3-Actualizacion_XXX pueden observar mensajes de error al ejecutar esta actualizacion derivados de scripts SQL previamente ejecutados.
 "
