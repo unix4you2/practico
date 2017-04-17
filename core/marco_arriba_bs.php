@@ -46,9 +46,15 @@
 	<title><?php echo $NombreRAD; ?> <?php echo $PCO_VersionActual; ?></title>
 
     <!-- CSS Core de Bootstrap -->
-    <link href="inc/bootstrap/css/bootstrap.min.css" rel="stylesheet"  media="screen">
-    <link href="inc/bootstrap/css/bootstrap-theme.css" rel="stylesheet"  media="screen">
-    
+    <?php
+        //Define el tema por defecto para versiones previas a 17.4-001
+        if ($Tema_PracticoFramework=="")  $Tema_PracticoFramework="bootstrap";
+        echo '<link href="inc/bootstrap/css/tema_'.$Tema_PracticoFramework.'.min.css" rel="stylesheet"  media="screen">';
+        //Si el tema es el predeterminado conserva efectos de controles en versiones previas a 17.4-001
+        if ($Tema_PracticoFramework=="bootstrap")
+            echo '<link href="inc/bootstrap/css/bootstrap-theme.css" rel="stylesheet"  media="screen">';
+    ?>
+
     <!-- librerías opcionales que activan el soporte de HTML5 para IE8 -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
