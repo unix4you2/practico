@@ -80,7 +80,8 @@
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='es';
 	$IdiomaEnLogin=0;
-	
+	$Tema_PracticoFramework='bootstrap';
+
 	$CaracteresCaptcha=4;
 	$CodigoGoogleAnalytics='UA-847800-9';
 	

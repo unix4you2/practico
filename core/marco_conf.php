@@ -313,6 +313,32 @@
 												</span>
 											</div>
 
+											<label for="Tema_PracticoFrameworkNEW"><i class="fa fa-low-vision fa-2x fa-fw"></i>  <?php echo $MULTILANG_FrmDesEstilo; ?>:</label>
+											<div class="form-group input-group">
+												<select id="Tema_PracticoFrameworkNEW" name="Tema_PracticoFrameworkNEW" class="selectpicker" data-size=7>
+													<option value="bootstrap" <?php if ($Tema_PracticoFramework=="bootstrap") echo "SELECTED"; ?> >Bootstrap predeterminado (default)</option>
+													<option value="cerulean" <?php if ($Tema_PracticoFramework=="cerulean") echo "SELECTED"; ?> >Cerulean - A calm blu sky</option>
+													<option value="cosmo" <?php if ($Tema_PracticoFramework=="cosmo") echo "SELECTED"; ?> >Cosmo - An ode to Metro</option>
+													<option value="cyborg" <?php if ($Tema_PracticoFramework=="cyborg") echo "SELECTED"; ?> >Cyborg - Jet black and electric blue</option>
+													<option value="darkly" <?php if ($Tema_PracticoFramework=="darkly") echo "SELECTED"; ?> >Darkly - Flatly in night mode</option>
+													<option value="flatly" <?php if ($Tema_PracticoFramework=="flatly") echo "SELECTED"; ?> >Flatly - Flat and modern</option>
+													<option value="journal" <?php if ($Tema_PracticoFramework=="journal") echo "SELECTED"; ?> >Journal - Crisp like a new sheet of paper</option>
+													<option value="lumen" <?php if ($Tema_PracticoFramework=="lumen") echo "SELECTED"; ?> >Lumen - Light and shadow</option>
+													<option value="paper" <?php if ($Tema_PracticoFramework=="paper") echo "SELECTED"; ?> >Paper - Material design is the metaphor</option>
+													<option value="readable" <?php if ($Tema_PracticoFramework=="readable") echo "SELECTED"; ?> >Readable - Optimized for legibility</option>
+													<option value="sandstone" <?php if ($Tema_PracticoFramework=="sandstone") echo "SELECTED"; ?> >SandStone - A touch of warmth</option>
+													<option value="simplex" <?php if ($Tema_PracticoFramework=="simplex") echo "SELECTED"; ?> >Simplex - Mini and minimalist</option>
+													<option value="slate" <?php if ($Tema_PracticoFramework=="slate") echo "SELECTED"; ?> >Slate - Shades of gunmetal gray</option>
+													<option value="spacelab" <?php if ($Tema_PracticoFramework=="spacelab") echo "SELECTED"; ?> >SpaceLab - Silvery and sleek</option>
+													<option value="superhero" <?php if ($Tema_PracticoFramework=="superhero") echo "SELECTED"; ?> >SuperHero - The brave and the blue</option>
+													<option value="united" <?php if ($Tema_PracticoFramework=="united") echo "SELECTED"; ?> >United - Ubuntu orange and unique font</option>
+													<option value="yeti" <?php if ($Tema_PracticoFramework=="yeti") echo "SELECTED"; ?> >Yeti - A friendly foundation</option>
+												</select>
+												<span class="input-group-addon">
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="Tema bootstrap / Bootstrap theme"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+											</div>
+
 										</div>
 									</div>
                                 </div>
