@@ -17,10 +17,12 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/objetos.php
+core/monitoreo.php
 core/marco_abajo.php
 core/marco_arriba_bs.php
 core/marco_conf.php
 inc/bootstrap/css/*
+mod/pcoder/index.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 "

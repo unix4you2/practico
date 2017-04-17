@@ -152,7 +152,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
     <meta name="author" content="John Arroyave G. - {www.practico.org} - {unix4you2 at gmail.com}">
 
     <!-- CSS Core de Bootstrap -->
-    <link href="../../inc/bootstrap/css/bootstrap.min.css" rel="stylesheet"  media="screen">
+    <link href="../../inc/bootstrap/css/tema_bootstrap.min.css" rel="stylesheet"  media="screen">
     <link href="../../inc/bootstrap/css/bootstrap-theme.css" rel="stylesheet"  media="screen">
 
     <!-- Custom Fonts -->
