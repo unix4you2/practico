@@ -130,6 +130,8 @@
 	$MULTILANG_IrEscritorio='Ir a mi escritorio';
 	$MULTILANG_Licencia='Licencia';
 	$MULTILANG_LlavePaso='Llave de paso';
+	$MULTILANG_CorreoAdministrador='Correo del Administrador del Sistema';
+	$MULTILANG_AyudaCorreoAdministrador='Correo electr&oacute;nico del administrador del sistema';
 	$MULTILANG_Maquina='Maquina';
 	$MULTILANG_Matriz='Matriz';
 	$MULTILANG_Mediano='Mediano';
