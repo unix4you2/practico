@@ -46,12 +46,8 @@
 	<title><?php echo $NombreRAD; ?> <?php echo $PCO_VersionActual; ?></title>
 
     <!-- CSS Core de Bootstrap -->
-    <link href="inc/bootstrap/css/bootstrap.min.css" rel="stylesheet"  media="screen">
+    <link href="inc/bootstrap/css/tema_paper.min.css" rel="stylesheet"  media="screen">
     <link href="XXXinc/bootstrap/css/bootstrap-theme.css" rel="stylesheet"  media="screen">
-
-    <link href="XXXinc/bootstrap_temas/bootswatch/cerulean/ce.min.css" rel="stylesheet"  media="screen">
-
-
 
     <!-- librerías opcionales que activan el soporte de HTML5 para IE8 -->
     <!--[if lt IE 9]>
