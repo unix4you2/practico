@@ -52,7 +52,7 @@
         echo '<link href="inc/bootstrap/css/tema_'.$Tema_PracticoFramework.'.min.css" rel="stylesheet"  media="screen">';
         //Si el tema es el predeterminado conserva efectos de controles en versiones previas a 17.4-001
         if ($Tema_PracticoFramework=="bootstrap")
-            echo '<link href="inc/bootstrap/css/bootstrap-theme.css" rel="stylesheet"  media="screen">';
+            echo '<link href="inc/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"  media="screen">';
     ?>
 
     <!-- librerías opcionales que activan el soporte de HTML5 para IE8 -->
