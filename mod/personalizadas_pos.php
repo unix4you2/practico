@@ -44,6 +44,3 @@ if ($PCO_Accion=="Mi_AccionPoscarga_XYZ")
 
 
 	}
-
-
-

@@ -28,6 +28,86 @@
 
 
 
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	// Function: PCO_ManejadorExcepciones
+	Captura las excepciones generados por PHP durante la ejecucion y las presenta al usuario
+
+	Salida:
+		Mensajes de alerta en pantalla con los detalles entregados por PHP
+*/
+function PCO_ManejadorExcepciones($DetalleExcepcion)
+    {
+        global $ModoDepuracion,$MULTILANG_Atencion,$MULTILANG_Archivo;
+        if ($ModoDepuracion)
+            {
+                $Detalles=error_get_last();
+                $Tipo=$Detalles["type"];
+                $Mensaje=$Detalles["message"];
+                $Archivo=$Detalles["file"];
+                $Linea=$Detalles["line"];
+                if ($Archivo!="" && $Mensaje!="")
+                    mensaje($MULTILANG_Atencion." (PHP Exception cod $Tipo)","$Archivo (linea $Linea)<br>$Mensaje", '', 'fa fa-exclamation-triangle texto-rojo texto-blink', 'alert alert-warning');
+            }
+    }
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	// Function: PCO_ManejadorErrores
+	Captura los errores generados por PHP durante la ejecucion y los presenta al usuario
+
+	Salida:
+		Mensajes de alerta en pantalla con los detalles entregados por PHP
+*/
+function PCO_ManejadorErrores($DetalleExcepcion)
+    {
+        global $ModoDepuracion,$MULTILANG_Atencion,$MULTILANG_Archivo;
+        if ($ModoDepuracion)
+            {
+                $Detalles=error_get_last();
+                $Tipo=$Detalles["type"];
+                $Mensaje=$Detalles["message"];
+                $Archivo=$Detalles["file"];
+                $Linea=$Detalles["line"];
+                if ($Archivo!="" && $Mensaje!="")
+                    mensaje($MULTILANG_Atencion." (PHP Error cod $Tipo)","$Archivo (linea $Linea)<br>$Mensaje", '', 'fa fa-exclamation-triangle texto-rojo texto-blink', 'alert alert-danger');
+            }
+    }
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	// Function: PCO_BuscarErroresSintaxisPHP
+	Verifica la sintaxis de un archivo PHP.  Utilizada normalmente antes de cualquier inclusion para evitar que se incluyan archivos con errores del lado del usuario.
+	
+	Variables de entrada:
+
+		ArchivoFuente - Archivo que se desea verificar sintaxis 
+		Funcion exec - Activada en PHP
+
+	Salida:
+		0 si no hay errores de sintaxis
+		1 si hay errores ademas de los mensajes en la salida estandar
+*/
+function PCO_BuscarErroresSintaxisPHP($ArchivoFuente)
+    {
+        global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles;
+        $SalidaFuncion=0;
+        @exec('php -l '.escapeshellarg($ArchivoFuente), $Salida, $Codigo);
+        if ($Codigo)  //Si se tiene un valor diferente de cero retornado por el comando
+            {
+                mensaje($MULTILANG_ErrorTiempoEjecucion,"<b>".$MULTILANG_Detalles."</b>: Se deberia evitar la inclusion del archivo $ArchivoFuente pues PHP retorna el mensaje: <i>".$Salida[0].$Salida[1].$Salida[2]."<i>.  Se recomienda validar su sintaxis para que pueda ser incluido sin problemas.", '', 'fa fa-exclamation-triangle fa-3x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
+                $SalidaFuncion=1;
+            }
+        return $SalidaFuncion;
+    }
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*

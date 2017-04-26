@@ -107,7 +107,8 @@
 																{
 																	@ob_clean(); //Limpia salida antes de llamar los WS
 																	include_once("core/ws_funciones.php");
-																	include_once("mod/personalizadas_ws.php");
+																	if (PCO_BuscarErroresSintaxisPHP("mod/personalizadas_ws.php")==0)
+																	    include_once("mod/personalizadas_ws.php");
 																}
 															// Lleva a auditoria
 															auditar("$PCO_WSId","API.".$nombre_cliente);

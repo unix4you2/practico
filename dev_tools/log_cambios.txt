@@ -16,11 +16,13 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/correos.php
 core/objetos.php
 core/monitoreo.php
 core/marco_abajo.php
 core/marco_arriba_bs.php
 core/marco_conf.php
+core/ws_nucleo.php
 inc/bootstrap/css/*
 mod/pcoder/index.php
 inc/practico/idiomas/*
@@ -38,7 +40,8 @@ LogCambios="
 * Added: Posibilidad de seleccionar el tema grafico para el framework gracias a bootswatch
 * Enhan: Tema predeterminado de bootstrap es ahora tomado desde el archivo optimizado
 * Enhan: Eliminados archivos innecesarios de bootstrap sobre produccion.  Se dejan solo los optimizados.
-
+* Added: Creada funcion PCO_BuscarErroresSintaxisPHP(path_archivo) que permite evaluar el codigo realizado en modulos externos a Practico y creados por el programador, de manera que se pueda validar la sintaxis de un archivo antes de ser incluido en la ejecucion.  Retorna 0 si no hay errores o 1 si hay errores de sintaxis en el archivo.
+* Added: Creadas funciones propias para la captura de errores y excepciones de PHP durante y presentacion de los detalles al usuario cuando se encuentra activado el modo de depuracion.
 "
 
 ########################################################################

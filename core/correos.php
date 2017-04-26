@@ -1,6 +1,6 @@
 <?php
 	/*
-	Copyright (C) 2013  John F. Arroyave Gutiérrez
+	Copyright (C) 2013  John F. Arroyave Gutiï¿½rrez
 						unix4you2@gmail.com
 
 	This program is free software; you can redistribute it and/or
@@ -25,7 +25,7 @@
 
 	
 	// Valida sesion activa de Practico
-	@session_start();
+//	@session_start();
 	if (!isset($PCOSESS_SesionAbierta)) 
 		{
 			echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
@@ -144,7 +144,7 @@ function PCO_EnviarCorreo($remitente,$destinatario,$asunto,$cuerpo_mensaje,$dest
 		//Usa el proveedor interno del servidor:  Sendmail, Postfix, etc.
 		if ($PCOVAR_ProvedorSMTP=="Interno")
 			{
-				//para el envío en formato HTML
+				//para el envï¿½o en formato HTML
 				$headers = "MIME-Version: 1.0\n";
 				$headers .= "Content-type: text/html; charset=iso-8859-1\n";
 				$headers .= "From: ".$NombreRAD." <".$remitente.">\n";

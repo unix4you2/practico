@@ -109,7 +109,7 @@
         }
     
     //Si el idioma seleccionado por el usuario es diferente al predeterminado lo incluye
-    if($PCOSESS_IdiomaUsuario!=$IdiomaPredeterminado)
+    if($PCOSESS_IdiomaUsuario!=$IdiomaPredeterminado && $PCOSESS_IdiomaUsuario!="")
         {
             include("inc/practico/idiomas/".$PCOSESS_IdiomaUsuario.".php");
         }
@@ -133,6 +133,10 @@
     // Incluye archivo con funciones de correo electronico
     include_once("core/correos.php");
 
+    // Establece funciones propias para el manejo de errores y excepciones
+    set_exception_handler('PCO_ManejadorExcepciones');
+    set_error_handler('PCO_ManejadorErrores');
+
     // Almacena tiempo de inicio para calculo de tiempos de ejecucion del script (informados a los Administradores)
     if(PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion!="") {
         $tiempo_inicio_script = obtener_microtime();
@@ -142,6 +146,7 @@
     include_once("core/ws_oauth.php");
 
     // Determina si al momento de ejecucion se encuentra activado el modo webservices
+    PCO_BuscarErroresSintaxisPHP("mod/personalizadas_ws.php");
     include_once("core/ws_nucleo.php");
 
     limpiar_entradas(); // Evita XSS
@@ -166,7 +171,8 @@
         }
 
     // Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios
-    include("mod/personalizadas_pre.php"); 
+    if (PCO_BuscarErroresSintaxisPHP("mod/personalizadas_pre.php")==0)
+        include("mod/personalizadas_pre.php"); 
 
     // Inicia la presentacion de la pagina si no esta activado el fullscreen
     if (@$Presentar_FullScreen!=1) $Presentar_FullScreen="";
@@ -258,7 +264,8 @@
 /* ################################################################## */
     // Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios. Incluye compatibilidad hacia atras en personalizadas.php
     if (file_exists("mod/personalizadas.php")) include("mod/personalizadas.php");
-    include("mod/personalizadas_pos.php");
+    if (PCO_BuscarErroresSintaxisPHP("mod/personalizadas_pos.php")==0)
+        include("mod/personalizadas_pos.php");
 
     // Incluye otros modulos que residan sobre carpetas en mod/* cuya entrada es index.php
     $directorio_modulos=opendir("mod");
@@ -268,9 +275,12 @@
             //Busca la entrada del modulo sino muestra error
             if (file_exists("mod/".$PCOVAR_Elemento."/index.php"))
 				{
-					//Incluye el archivo menos algunos modulos especiales de la herramienta
+					//Incluye el archivo menos algunos modulos especiales de la herramienta que se ejecutan por separado
 					if ($PCOVAR_Elemento!="pcoder" && $PCOVAR_Elemento!="pmydb")
-						include("mod/".$PCOVAR_Elemento."/index.php");
+					    {
+						    if (PCO_BuscarErroresSintaxisPHP("mod/".$PCOVAR_Elemento."/index.php")==0)
+						        include("mod/".$PCOVAR_Elemento."/index.php");
+					    }
 				}
             else
                 mensaje($MULTILANG_ErrorTiempoEjecucion, $MULTILANG_ErrorModulo.'<br><b>'.$MULTILANG_Detalles.': '.$PCOVAR_Elemento.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
