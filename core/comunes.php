@@ -2293,7 +2293,7 @@ function completar_parametros($string,$data) {
 
 /* ################################################################## */
 /* ################################################################## */
-	function buscar_actualizaciones($PCOSESS_LoginUsuario='',$PCO_Accion='')
+	function buscar_actualizaciones($PCOSESS_LoginUsuario='',$PCO_Accion)
 		{
 			global $MULTILANG_Atencion,$MULTILANG_ActAlertaVersion;
 			// Genera un aleatorio entre 1 y 10 para no sacar siempre el aviso y buscar nuevas versiones.
@@ -5091,7 +5091,9 @@ function generar_botones_informe($informe)
 					}
 				if ($registro_botones["tipo_accion"]=="externa_javascript")
 					{
-						$comando_javascript=$registro_botones["accion_usuario"];
+						$comando_javascript="
+							document.FRMBASEINFORME.PCO_Valor.value='DELFRMVALVALOR';  ";
+						$comando_javascript.=$registro_botones["accion_usuario"];
 					}
 
 				//Verifica si el registro de botones presenta algun texto de confirmacion y lo antepone al script
@@ -5869,7 +5871,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 	*/
 /* ################################################################## */
 /* ################################################################## */
-	if (@$PCO_Accion=="cambiar_estado_campo")
+	if ($PCO_Accion=="cambiar_estado_campo")
 		{		
 			/*
 				Function: cambiar_estado_campo

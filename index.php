@@ -66,19 +66,17 @@
 		{ $PCO_ModoDEMO=1; echo "<script language='JavaScript'> PCO_ModoDEMO=1; </script>"; }
 
     //Activa errores del preprocesador en modo de depuracion (configuracion.php)
-    if ($ModoDepuracion && @$PCOSESS_SesionAbierta)
+    if ($ModoDepuracion && $_SESSION['PCOSESS_SesionAbierta'])
         {
 			include_once("core/comunes.php");
-			if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+			if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
 				{
 					ini_set("display_errors", 1);
 					error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_DEPRECATED | E_STRICT | E_USER_DEPRECATED | E_USER_ERROR | E_USER_WARNING); //Otras disponibles | E_PARSE | E_CORE_ERROR | E_CORE_WARNING |
 				}
         }
     else
-        {
-            error_reporting(0);
-        }
+        error_reporting(0);
 
     // Establece la zona horaria por defecto para la aplicacion
     date_default_timezone_set($ZonaHoraria);
