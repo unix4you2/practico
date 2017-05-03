@@ -43,6 +43,7 @@ LogCambios="
 * Added: Creada funcion PCO_BuscarErroresSintaxisPHP(path_archivo) que permite evaluar el codigo realizado en modulos externos a Practico y creados por el programador, de manera que se pueda validar la sintaxis de un archivo antes de ser incluido en la ejecucion.  Retorna 0 si no hay errores o 1 si hay errores de sintaxis en el archivo.
 * Added: Creadas funciones propias para la captura de errores y excepciones de PHP durante y presentacion de los detalles al usuario cuando se encuentra activado el modo de depuracion.
 * Added: Aquellos botones tipo comando JavaScript agregados a los informes pueden ahora transportar sobre JavaScript el valor de las variables de identificador de registro mediante el formulario document.FRMBASEINFORME.PCO_Valor.value
+* Enhan: El sistema de monitoreo se simplifica para presentar los embebidos sin su direccion y titulo mas pequeno.
 "
 
 ########################################################################

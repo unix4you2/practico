@@ -544,11 +544,11 @@
 						<div class="panel-heading">
 							<div class="row">
 								<div class="col-xs-1">
-									<i class="fa fa-globe fa-2x"></i>					
+									<i class="fa fa-globe fa-1x"></i>					
 								</div>
 								<div class="col-xs-10 text-right">
 									<div>'.$nombre.'<br>
-									<font size=1>('.$path.')</font>
+									<!--<font size=1>('.$path.')</font>-->
 									</div>
 								</div>
 							</div>
