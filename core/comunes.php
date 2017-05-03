@@ -4550,7 +4550,7 @@ $('#SampleElement').load('YourURL');
                             //ventana_impresion.document.write( \'<link rel="stylesheet" type="text/css" href="general.css">\' );
 						  
 						  //Agrega titulo del formulario
-							ventana_impresion.document.write( \'<div align=CENTER><b>'.$registro_formulario["titulo"].'</b></div><hr>\' );
+							//ventana_impresion.document.write( \'<div align=CENTER><b>'.$registro_formulario["titulo"].'</b></div><hr>\' );
 
 						  //Agrega el concenito del DIV al documento
 							ventana_impresion.document.write( marco_contenidos.innerHTML );
@@ -4792,7 +4792,7 @@ $('#SampleElement').load('YourURL');
                                                         // CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas arriba tambien
                                                         echo '
                                                         <div id="PCOContenedor_'.$registro_campos["id_html"].'" class="table-responsive" style="border-width: 0px; margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;">
-                                                        <table class="table table-condensed btn-xs '.$estilo_bordes.'" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;  padding: 0px; border-spacing: 0px; "><tr><td>';
+                                                        <table class="table table-condensed btn-xs '.$estilo_bordes.'" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;  padding: 0px; border-spacing: 0px; width:100%; "><tr><td>';
                                                         $tipo_de_objeto=@$registro_campos["tipo"];
                                                         if ($tipo_de_objeto=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                         if ($tipo_de_objeto=="texto_clave") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);

@@ -18,6 +18,8 @@ index.php
 core/comunes.php
 core/correos.php
 core/objetos.php
+core/informes.php
+core/formularios.php
 core/monitoreo.php
 core/marco_abajo.php
 core/marco_arriba_bs.php
@@ -44,6 +46,9 @@ LogCambios="
 * Added: Creadas funciones propias para la captura de errores y excepciones de PHP durante y presentacion de los detalles al usuario cuando se encuentra activado el modo de depuracion.
 * Added: Aquellos botones tipo comando JavaScript agregados a los informes pueden ahora transportar sobre JavaScript el valor de las variables de identificador de registro mediante el formulario document.FRMBASEINFORME.PCO_Valor.value
 * Enhan: El sistema de monitoreo se simplifica para presentar los embebidos sin su direccion y titulo mas pequeno.
+* Enhan: Elementos de formulario marcados como fila unica ahora son maquetados dentro de una tabla al 100% del ancho del formulario.
+* Enhan: Eliminada la impresión del título de formulario en funciones de ImprimirMarco.
+* Fixed: Clonación de informes presenta correctamente el ID del nuevo informe clonado.
 "
 
 ########################################################################

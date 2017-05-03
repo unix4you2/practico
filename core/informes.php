@@ -2356,7 +2356,7 @@ if ($PCO_Accion=="guardar_informe")
 							<input type="Hidden" name="PCO_Accion" value="administrar_informes">
 							</form>
 							<script type="" language="JavaScript"> 
-							alert("'.$MULTILANG_FrmMsjCopia.$nuevo_titulo.' ID: '.$id.'");
+							alert("'.$MULTILANG_FrmMsjCopia.$nuevo_titulo.' ID: '.$idObjetoInsertado.'");
 							document.cancelar.submit();  </script>';
 						}
 
