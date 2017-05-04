@@ -678,7 +678,7 @@
 	$MULTILANG_InfDesAgrupa='Utilice esta opcion solamente si su informe maneja operaciones como suma, promedio o conteo dentro de los campos desplegados.  Ej. SUM(campo), AVG(campo), COUNT(*).  En esos casos indique por cu&aacute;l o cuales campos separados por coma se debe agrupar los resultados';
 	$MULTILANG_InfTitOrdena='Como se ordenan los resultados?';
 	$MULTILANG_InfDesOrdena='Permite ordenar los resultados por alguno de los desplegados.  Indique por cu&aacute;l o cuales campos separados por coma se debe ordenar los resultados, si lo desea despu&eacute;s de cada campo puede utilizar el modificador ASC o DESC para indicar si es ascedente o descendente';
-	$MULTILANG_InfActCriterios='Actualizar criterios de agrupoaci&oacute;n y ordenamiento';
+	$MULTILANG_InfActCriterios='Actualizar criterios de agrupaci&oacute;n y ordenamiento';
 	$MULTILANG_InfTitBotones='Agregar botones y acciones a cada registro';
 	$MULTILANG_InfDelReg='Eliminar registro';
 	$MULTILANG_InfCargaForm='Cargar un formulario por ID';
