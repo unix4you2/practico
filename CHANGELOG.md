@@ -38,6 +38,7 @@
 * Fixed: Por defecto cuando no se especifica un proveedor SMTP predeterminado para el envío de mensajes el sistema tomará por defecto el proveedor Interno (Sendmail, Postfix, etc.)
 * Fixed: Para aquellos desarrolladores que eliminan las funciones FrmAutoRun de sus formularios ahora el sistema detecta ese escenario y solo llama a la funcion FrmAutoRun cuando en realidad existe.
 * Added: La clonación en línea y mediante archivos XML de formularios incluye ahora los eventos JS internos definidos en cada control.
+* Added: Agregados botones para edicion rápida de eventos en controles que tengan alguno creado.
 
 ## Versión 17.4 (2017-04-02)
 Added: Ahora los formularios con campos marcados como obligatorios realizan su proceso de validación en caliente del lado del cliente. El proceso de validación del lado del servidor continúa para efectos de garantizar integridad de los datos. Los usuarios verán una ventana emergente de manera automática cuando les falte algún campo por diligenciar indicando además su nombre.
