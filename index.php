@@ -144,7 +144,8 @@
     include_once("core/ws_oauth.php");
 
     // Determina si al momento de ejecucion se encuentra activado el modo webservices
-    PCO_BuscarErroresSintaxisPHP("mod/personalizadas_ws.php");
+    if (PCO_BuscarErroresSintaxisPHP("mod/personalizadas_ws.php")==0)
+        include("mod/personalizadas_ws.php"); 
     include_once("core/ws_nucleo.php");
 
     limpiar_entradas(); // Evita XSS
@@ -193,7 +194,7 @@
 
                     echo '    <div id="wrapper">
                         <!-- CONTENIDO DE APLICACION -->
-                        <div id="page-wrapper">
+                        <div id="page-wrapper">  <!-- ANTES page-wrapper-->
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -252,7 +253,7 @@
         include("core/actualizacion.php");
     if ($PCO_Accion=="actualizar_monitoreo" || $PCO_Accion=="detalles_monitoreo" || $PCO_Accion=="administrar_monitoreo" || $PCO_Accion=="guardar_monitoreo" || $PCO_Accion=="eliminar_monitoreo" || $PCO_Accion=="ver_monitoreo")
         include("core/monitoreo.php");
-    if ($PCO_Accion=="valor_campo_tabla" || $PCO_Accion=="opciones_combo_box")
+    if ($PCO_Accion=="cambiar_estado_campo" || $PCO_Accion=="valor_campo_tabla" || $PCO_Accion=="opciones_combo_box")
         include("core/ajax.php");
 	if ($PCO_Accion=="mantenimiento_tablas" || $PCO_Accion=="limpiar_temporales" || $PCO_Accion=="limpiar_backups")
 		include("core/mantenimiento.php");

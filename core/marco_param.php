@@ -210,7 +210,7 @@
                                     
                                     <label for="federado_encripcion"><?php echo $MULTILANG_AlgoritmoCripto; ?>:</label>
                                     <div class="form-group input-group">
-                                        <select id="federado_encripcion" name="federado_encripcion" class="selectpicker" >
+                                        <select id="federado_encripcion" name="federado_encripcion" class="selectpicker"  data-size=10 data-live-search=true>
                                             <option  <?php if (@$parametros["federado_encripcion"]=="plano") echo "SELECTED"; ?> value="plano">Texto plano/Plain text</option>
                                             <option  <?php if (@$parametros["federado_encripcion"]=="md5") echo "SELECTED"; ?> value="md5">MD5</option>
                                             <option  <?php if (@$parametros["federado_encripcion"]=="md4") echo "SELECTED"; ?> value="md4">MD4</option>

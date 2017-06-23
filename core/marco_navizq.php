@@ -39,13 +39,12 @@
                 <i class="fa fa-indent fa-border texto-negro texto-blink" OnClick="javascript:barra_navegacion_izquierda_toggle('<?php if (@$ModoBarraMenuRecibido=="flotante") echo "flotante"; else echo "responsive"; ?>');"></i>
             </div>
             <div id="barra_navegacion_izquierda" class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    
+                <!-- DEPRECATED <div class="sidebar-nav navbar-collapse">-->
                     <!--INICIO DE OPCIONES BARRA LATERAL-->
                         <ul class="nav" id="side-menu">
                             
-                            <br>
-                            <div id="PCODIV_ArribaMenuLateral"></div>
+
+                            <div id="PCODIV_ArribaMenuLateral" align=right></div>
                             
                             <form name="datos_busqueda_home" action="<?php echo $ArchivoCORE; ?>" method="POST">
                             <li class="sidebar-search">
@@ -109,7 +108,7 @@
                                                 }
                                             //Si tiene una URL trata la opcion como enlace estandar, sino como opcion de menu especial
                                             if ($registro["url"]!="")
-                                                echo '<a title="'.$registro["texto"].'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
+                                                echo '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($registro["texto"]).'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
                                             else
                                                 echo '<a href="javascript:document.left_'.$registro["id"].'.submit();">';
 
@@ -121,7 +120,7 @@
 											if (!$PCO_EsImagen)
 												echo '
 												<i class="'.$registro["imagen"].'"></i>
-												'.$registro["texto"];
+												'.PCO_ReemplazarVariablesPHPEnCadena($registro["texto"]);
 											else
 												echo '<img src="'.$registro["imagen"].'" border="0" />';
                                             
@@ -156,8 +155,7 @@
                         </div>
                     </div>
 
-                </div>
-                <!-- FIN DEL /.sidebar-collapse -->
+                <!-- DEPRECATED </div> FIN DEL /.sidebar-collapse -->
             </div>
             <!-- FIN DEL /.navbar-static-side -->
 <?php

@@ -111,6 +111,40 @@ function PCO_BuscarErroresSintaxisPHP($ArchivoFuente)
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: PCO_ReemplazarVariablesPHPEnCadena
+	Devuelve una cadena evaluada donde se reemplazan las expresiones de variables PHP con el formato {$variable} por su valor definido
+
+	Variables de entrada:
+
+		cadena_original - Cadena con las variables expresadas
+
+	Salida:
+
+		Cadena con las variables reemplazadas
+
+	Ver tambien:
+		<construir_consulta_informe>
+*/
+function PCO_ReemplazarVariablesPHPEnCadena($cadena_original)
+	{
+	    //Reemplaza todas las ocurrencias de variables por el valor de la misma en su variable global
+        $cadena_final = preg_replace_callback(
+            '~\{\$(.*?)\}~si',
+            function($ocurrencia)
+            {
+                //Declara la variable como global, pues no se sabe qué variable y en qué ambito se encuentra
+                global ${$ocurrencia[1]};
+                //Obtiene el valor de la variable
+                return eval('return $' . $ocurrencia[1] . ';');
+            },
+            $cadena_original);
+		return $cadena_final;
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	// Function: PCO_DistanciaDosCoordenadas
 	Retorna el nombre legible de una direccion (en lenguaje natural) indicados por latitud y longitud
 	
@@ -2740,7 +2774,7 @@ function ventana_login()
 
 /* ################################################################## */
 /* ################################################################## */
-    function abrir_dialogo_modal($identificador,$titulo="",$estilo_modal="")
+    function abrir_dialogo_modal($identificador,$titulo="",$estilo_modal="",$impresion_directa=1)
         {
             /*
             Procedure: abrir_modal
@@ -2758,7 +2792,7 @@ function ventana_login()
             Ver tambien:
             <cerrar_modal>
             */
-            echo '
+            $salida= '
                 <div class="modal fade '.$estilo_modal.'" id="'.$identificador.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -2767,13 +2801,17 @@ function ventana_login()
                                 <h4 class="modal-title" id="myModalLabel">'.$titulo.'</h4>
                             </div>
                             <div class="modal-body mdl-primary">';
+            if($impresion_directa==1)
+                echo $salida;
+            else
+                return $salida;
         }
 
 
 
 /* ################################################################## */
 /* ################################################################## */
-	function cerrar_dialogo_modal($contenido_piepagina)
+	function cerrar_dialogo_modal($contenido_piepagina,$impresion_directa=1)
 	  {
 		/*
 			Function: cerrar_modal
@@ -2782,7 +2820,7 @@ function ventana_login()
 			Ver tambien:
 			<abrir_modal>	
 		*/
-        echo '
+        $salida= '
                             </div>
                             <div class="modal-footer">
                                 '.$contenido_piepagina.'
@@ -2790,6 +2828,10 @@ function ventana_login()
                         </div>
                     </div>
                 </div>';
+        if($impresion_directa==1)
+            echo $salida;
+        else
+            return $salida;
 	  }
 
 
@@ -3024,7 +3066,7 @@ function selector_iconos_awesome()
 
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-                $salida.='<label id="PCOEtiqueta_'.$registro_campos["campo"].'" for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+                $salida.='<label id="PCOEtiqueta_'.$registro_campos["campo"].'" for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
 			//Abre el marco del control de datos style="display:inline;"
 			$salida.='<div class="form-group input-group '.$cadena_clase_datepicker.'" '.$cadena_ID_datepicker.'>';
             // Muestra el campo
@@ -3168,7 +3210,7 @@ function selector_iconos_awesome()
 
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-                $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+                $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
@@ -3423,7 +3465,7 @@ function selector_iconos_awesome()
 
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-                $salida.='<label id="PCOEtiqueta_'.$registro_campos["campo"].'" for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+                $salida.='<label id="PCOEtiqueta_'.$registro_campos["campo"].'" for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
 
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
@@ -3584,7 +3626,7 @@ function selector_iconos_awesome()
                             $cadena_predeterminado='';
                             if ($valores_lista[$i]==@$cadena_valor)
                                 $cadena_predeterminado=' SELECTED ';
-                            $salida.= "<option value='".$valores_lista[$i]."' ".$cadena_predeterminado.">".$opciones_lista[$i]."</option>";
+                            $salida.= "<option value='".PCO_ReemplazarVariablesPHPEnCadena($valores_lista[$i])."' ".$cadena_predeterminado.">".PCO_ReemplazarVariablesPHPEnCadena($opciones_lista[$i])."</option>";
                         }
 
                 //Cierra DIV para cambio de opciones en caliente
@@ -3640,7 +3682,7 @@ function selector_iconos_awesome()
 	function cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario)
 		{
 			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
-			$salida=$registro_campos["valor_etiqueta"];
+			$salida=PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_etiqueta"]);
 			return $salida;
 		}
 
@@ -3725,7 +3767,7 @@ function selector_iconos_awesome()
 
             //Agrega marco bootstrap antes de devolver contenidos
 			if ($registro_campos["ocultar_etiqueta"]=="0")
-				$salida='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+				$salida='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
             $salida.='<div id="'.$registro_campos["campo"].'">'.$cadena_valor.'</div>';
 			return $salida;
 		}
@@ -3879,7 +3921,7 @@ $('#SampleElement').load('YourURL');
 
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-                $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+                $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
@@ -3889,7 +3931,7 @@ $('#SampleElement').load('YourURL');
 					$cadena_predeterminado='';
 					if ($valores_lista[$i]==$cadena_valor)
 						$cadena_predeterminado=' CHECKED ';
-					$salida.= "<input class='Radios' type='radio' name='".$registro_campos["campo"]."' value='".$valores_lista[$i]."' ".$cadena_predeterminado." ".$registro_campos["personalizacion_tag"]." >".$opciones_lista[$i]."<br>";
+					$salida.= "<input class='Radios' type='radio' name='".$registro_campos["campo"]."' value='".PCO_ReemplazarVariablesPHPEnCadena($valores_lista[$i])."' ".$cadena_predeterminado." ".$registro_campos["personalizacion_tag"]." >".PCO_ReemplazarVariablesPHPEnCadena($opciones_lista[$i])."<br>";
 				}
 			//Si hay algun indicador adicional del campo abre los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
@@ -3963,7 +4005,7 @@ $('#SampleElement').load('YourURL');
 				<input type="hidden" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor_almacenada.'">
 				<div class="checkbox">
 					<label>
-						<input onchange="JSFUNC_Actualizar_'.$registro_campos["campo"].'(this);" type="checkbox" id="JSVAR_'.$registro_campos["campo"].'" name="JSVAR_'.$registro_campos["campo"].'" '.$cadena_valor.' > '.$registro_campos["titulo"].'
+						<input onchange="JSFUNC_Actualizar_'.$registro_campos["campo"].'(this);" type="checkbox" id="JSVAR_'.$registro_campos["campo"].'" name="JSVAR_'.$registro_campos["campo"].'" '.$cadena_valor.' > '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).'
 					</label>
 				</div>
 				<script language="JavaScript">
@@ -4021,7 +4063,7 @@ $('#SampleElement').load('YourURL');
 
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-                $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+                $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
@@ -4116,7 +4158,7 @@ $('#SampleElement').load('YourURL');
 
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-                $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+                $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
@@ -4186,7 +4228,7 @@ $('#SampleElement').load('YourURL');
 
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-                $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+                $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
@@ -4313,7 +4355,7 @@ $('#SampleElement').load('YourURL');
 			$escala_reduccion=1;
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-                $salida.='<label for="'.$registro_campos["campo"].'">'.$registro_campos["titulo"].':</label>';
+                $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			$salida.='
@@ -4476,10 +4518,83 @@ $('#SampleElement').load('YourURL');
             //Abre el marco del control de datos style="display:inline;"
 			$salida.='<div '.$cadena_identificador.' style="'.$cadena_modo_inline.'" class="form-group input-group">';
             // Muestra el campo
-			$salida.='<a id="'.$registro_campos["id_html"].'" class="btn '.$registro_campos["personalizacion_tag"].'" '.@$cadena_javascript.'><i class="'.$registro_campos["imagen"].'"></i> '.$registro_campos["titulo"].'</a>';
+			$salida.='<a id="'.$registro_campos["id_html"].'" class="btn '.$registro_campos["personalizacion_tag"].'" '.@$cadena_javascript.'><i class="'.$registro_campos["imagen"].'"></i> '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).'</a>';
             //Cierra marco del control de datos
             $salida.= '</div>';
             
+			return $salida;
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: agregar_funciones_edicion_objeto
+	Genera el codigo HTML y CSS correspondiente los botones y demas elementos para la edicion en caliente de un objeto
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		tipo_elemento - Tipo de elemento a ser generado
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
+	function agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,$tipo_elemento)
+		{
+		    global $MULTILANG_Evento,$TablasCore,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
+			$salida='';
+            if ($tipo_elemento=="ComplementoDisenoElemento")
+                {
+                    $salida='onmouseenter="$(this).css(\'border\', \'1px solid\'); $(this).css(\'border-color\', \'#ff0000\');  //c2a7a7
+                    $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'visibility\':\'visible\'});
+                    $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'display\':\'block\'}); "
+                    onmouseleave="$(this).css(\'border\', \'0px solid\'); $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'visibility\':\'hidden\'}); $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'display\':\'none\'});  "';
+                }
+            if ($tipo_elemento=="ComplementoDisenoMarcoOpciones")
+                {
+                    //Determina estados de activacion o no para controles segun valores actuales del registro
+                    $EstadoDeshabilitadoMoverIzquierda="";
+                    $EstadoDeshabilitadoMoverDerecha="";
+                    $EstadoDeshabilitadoMoverArriba="";
+                    if($registro_campos["columna"]-1<=0) $EstadoDeshabilitadoMoverIzquierda="disabled";
+                    if($registro_campos["columna"]+1>$registro_formulario["columnas"]) $EstadoDeshabilitadoMoverDerecha="disabled";
+                    if($registro_campos["peso"]-1<=0) $EstadoDeshabilitadoMoverArriba="disabled";
+                    
+                    //Busca si el elemento tiene o no eventos para poner un boton de enlace
+                    $ComplementoBotonEventos="";
+                    $RegistroConteoEventos=ejecutar_sql("SELECT COUNT(*) as conteo_eventos FROM ".$TablasCore."evento_objeto WHERE objeto=? ",$registro_campos["id"])->fetch();
+                    if($RegistroConteoEventos["conteo_eventos"]>0)
+                        $ComplementoBotonEventos='<br><a class="btn btn-xs btn-default" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Evento.'(s)" href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&pestana_activa_editor=eventos_objeto-tab&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-bolt fa-fw texto-blink"></i></a>';
+
+                    //Pone controles
+                    $salida='<div id="PCOEditorContenedor_'.$registro_campos["id"].'" style="margin:2px; display:none; visibility:hidden; position: absolute; z-index:1000;">
+                            <div style="display: inline-block">
+                                <a class="btn btn-xs btn-warning" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'" href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-fw fa-pencil"></i></a>
+                                '.$ComplementoBotonEventos.'
+                            </div>
+                            <div style="display: inline-block">
+                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverIzquierda.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Anterior.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-left"></i></a>
+                            </div>
+                            <div style="display: inline-block">
+                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverArriba.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDisminuyePeso.' a '.($registro_campos["peso"]-1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["peso"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-up"></i></a>
+                                <br>
+                                <a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmAumentaPeso.' a '.($registro_campos["peso"]+1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["peso"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-down"></i></a>
+                            </div>
+                            <div style="display: inline-block">
+                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-right"></i></a>
+                            </div>
+                            <div style="display: inline-block">
+                                <a class="btn btn-xs " data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Cerrar.'" href="javascript:$(this).css(\'border\', \'0px solid\'); $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'visibility\':\'hidden\'}); $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'display\':\'none\'}); "><i class="fa fa-times"></i></a>
+                                <br>
+                                <a onclick=\'return confirm("'.$MULTILANG_FrmAdvDelCampo.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=eliminar_campo_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&nombre_tabla='.$registro_formulario["tabla_datos"].'\' class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-trash"></i></a>
+                            </div>
+                        </div>';
+                }
 			return $salida;
 		}
 
@@ -4497,6 +4612,7 @@ $('#SampleElement').load('YourURL');
 		PCO_CampoBusquedaBD - Opcional, indica el campo sobre el cual se deben realizar busquedas para el cargue automatico de campos del formulario desde la base de datos
 		PCO_ValorBusquedaBD - Opcional, indica el valor que sera buscado sobre el PCO_CampoBusquedaBD para encontrar los valores de cada objeto en el formulario
 		anular_form - Opcional, indica si las etiquetas del formulario HTML deben ser eliminadas y agregar los campos crudos dentro del form
+		modo_diseno_formulario - Opcional, indica si se esta disenando el formulario para presentar algunos controles extra
 
 	(start code)
 		SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'
@@ -4515,14 +4631,14 @@ $('#SampleElement').load('YourURL');
 	Ver tambien:
 		<cargar_informe>
 */
-		function cargar_formulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0)
+		function cargar_formulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno_formulario=0)
 		  {
                 global $ConexionPDO,$ArchivoCORE,$TablasCore;
                 global $PCO_InformeFiltro,$PCO_FuncionesJSInternasFORM;
 				global $_SeparadorCampos_;
 				// Carga variables de definicion de tablas
 				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
-				global $MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
+				global $MULTILANG_Elementos,$MULTILANG_Agregar,$MULTILANG_Configuracion,$MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
                 global $PCO_InformesDataTable;
                 global $POSTForm_ListaCamposObligatorios,$POSTForm_ListaTitulosObligatorios;
 
@@ -4585,8 +4701,24 @@ $('#SampleElement').load('YourURL');
 
 				// Establece color de fondo para el form
 				$color_fondo="#f2f2f2";
+				
+				//Determina si esta en modo diseno para agregar algunos elementos extra al titulo del form
+                if ($modo_diseno_formulario)
+                    {
+						$ComplementoTituloFormulario='
+						<div class="pull-right">
+                            <a class="btn btn-warning btn-xs" data-toggle="modal" title="'.$MULTILANG_FrmAdvScriptForm.'" href="#myModalActualizaJAVASCRIPT">
+                                <div><i class="fa fa-file-code-o"></i> JS</div>
+                            </a>
+                            &nbsp;
+    						<a class="btn btn-default btn-xs" href="javascript:PCOJS_AlternarBarraFlotanteIzquierda();">
+    							<div><i class="fa fa-cog fa-spin fa-fw"></i> '.$MULTILANG_Configuracion.' / '.$MULTILANG_Agregar.' '.$MULTILANG_Elementos.'</div>
+    						</a>
+						</div>';
+                    }
+				
 				// Crea ventana si aplica para el form
-				if ($en_ventana) abrir_ventana($registro_formulario["titulo"],'panel-primary','',$barra_herramientas_mini);
+				if ($en_ventana) abrir_ventana($registro_formulario["titulo"].$ComplementoTituloFormulario,'panel-primary','',$barra_herramientas_mini);
 				// Muestra ayuda en caso de tenerla
 				$imagen_ayuda='fa fa-info-circle fa-5x texto-azul';
 				if ($registro_formulario["ayuda_titulo"]!="" || $registro_formulario["ayuda_texto"]!="")
@@ -4709,7 +4841,15 @@ $('#SampleElement').load('YourURL');
                                                                     //Imprime el campo solamente si no es fila unica, si es fila_unica guarda en una variable para uso posterior
                                                                     if($registro_campos["fila_unica"]=="0")
                                                                         {
-                                                                            echo '<div id="PCOContenedor_'.$registro_campos["id_html"].'">';
+                                                                            //Si esta en modo de diseno el formulario agrega elementos extra para la edicion de cada control
+                                                                            $ComplementoDisenoElemento='';
+                                                                            $ComplementoDisenoMarcoOpciones='';
+                                                                            if ($modo_diseno_formulario)
+                                                                                {
+                                                                                    $ComplementoDisenoElemento=agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,"ComplementoDisenoElemento");
+                                                                                    $ComplementoDisenoMarcoOpciones=agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,"ComplementoDisenoMarcoOpciones");
+                                                                                }
+                                                                            echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'"> '.$ComplementoDisenoMarcoOpciones;
                                                                             // Formatea cada campo de acuerdo a su tipo
                                                                             // CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas abajo tambien
                                                                             $tipo_de_objeto=@$registro_campos["tipo"];
@@ -4790,8 +4930,15 @@ $('#SampleElement').load('YourURL');
                                                         //echo '&nbsp;&nbsp;'.$registro_campos["titulo"];
                                                         // Formatea cada campo de acuerdo a su tipo
                                                         // CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas arriba tambien
-                                                        echo '
-                                                        <div id="PCOContenedor_'.$registro_campos["id_html"].'" class="table-responsive" style="border-width: 0px; margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;">
+                                                        //Si esta en modo de diseno el formulario agrega elementos extra para la edicion de cada control
+                                                        $ComplementoDisenoElemento='';
+                                                        $ComplementoDisenoMarcoOpciones='';
+                                                        if ($modo_diseno_formulario)
+                                                            {
+                                                                $ComplementoDisenoElemento=agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,"ComplementoDisenoElemento");
+                                                                $ComplementoDisenoMarcoOpciones=agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,"ComplementoDisenoMarcoOpciones");
+                                                            }
+                                                        echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'" class="table-responsive" style="border-width: 0px; margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;">'.$ComplementoDisenoMarcoOpciones.'
                                                         <table class="table table-condensed btn-xs '.$estilo_bordes.'" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;  padding: 0px; border-spacing: 0px; width:100%; "><tr><td>';
                                                         $tipo_de_objeto=@$registro_campos["tipo"];
                                                         if ($tipo_de_objeto=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
@@ -4992,7 +5139,9 @@ $('#SampleElement').load('YourURL');
 				}
 
 			//Carga las funciones JavaScript asociadas al formulario y llama la funcion FrmAutoRun()
-				$PCO_FuncionesJSInternasFORM .= '<script type="text/javascript">'.$registro_formulario["javascript"].' FrmAutoRun(); </script>';
+				$PCO_FuncionesJSInternasFORM .= '<script type="text/javascript">'.$registro_formulario["javascript"].' 
+    				if (typeof FrmAutoRun === "function") { FrmAutoRun(); }
+    				</script>';
 
             //Busca la lista de campos marcados como obligatorios sobre el form
             $consulta_campos_obligatorios=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND obligatorio=1","$formulario");
@@ -5216,23 +5365,7 @@ function construir_consulta_informe($informe,$evitar_campos_ocultos=0)
 					
 					$OrigenValorCampo=$registro_campos["valor_campo"];
 					//Evalua casos donde se tienen variables PHP escapadas por llaves.  Ej  "%{$Variable}%" si fuera para una operacion cualquiera sobre el campo.
-					if (strpos($OrigenValorCampo,"{")!==FALSE && strrpos($OrigenValorCampo,"}")!==FALSE)
-						{
-							//Determina las posiciones de las llaves en la cadena
-							$PosLlaveIzquierda=strpos($OrigenValorCampo,"{");
-							$PosLlaveDerecha=strrpos($OrigenValorCampo,"}");
-							//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
-							$NombreVariable=substr($OrigenValorCampo,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
-							//Si la variable no esta definida la busca en el entorno global
-							global ${$NombreVariable};
-							if (@isset($NombreVariable))
-								{
-									$ValorVariable=${$NombreVariable};
-									//Reemplaza el valor encontrado en la cadena de valor original
-									$OrigenValorCampo=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$OrigenValorCampo);
-								}
-						}					
-					
+                    $OrigenValorCampo=PCO_ReemplazarVariablesPHPEnCadena($OrigenValorCampo);
 					$nombre_campo=$OrigenValorCampo.$posfijo_campo;
 
 					//Agrega el campo a la consulta si no se encuentra en el arreglo de ocultos o no se quieren evitar esos campos
@@ -5266,64 +5399,9 @@ function construir_consulta_informe($informe,$evitar_campos_ocultos=0)
 					//Agrega condicion a la consulta
 					$valor_izquierdo=$registro_condiciones["valor_izq"];
 					$valor_derecho=$registro_condiciones["valor_der"];
-					
-					// CONVIERTE VARIABLES DE SESION PHP A VALORES PARA EL QUERY Cuando el primer simbolos es un PESOS ($), es decir, solo se ingreso una variable
-					
-					//LADO IZQUIERDO DE LA CONDICION
-					//Si el valor Izquierdo a comparar inicia por signo pesos y es una variable PHP la usa como tal
-					if (@$valor_izquierdo[0]=="$")
-						{
-							//Quita el signo pesos inicial para buscar la variable
-							$variable_a_buscar=substr($valor_izquierdo, 1, strlen($valor_izquierdo));
-							// Si la variable esta definida toma su valor encerrado entre comillas para el query y evitar conflictos de variables con espacios y demas.
-							if (@isset($variable_a_buscar))
-								$valor_izquierdo="'".${$variable_a_buscar}."'";
-						}
 					//Evalua casos donde se tienen variables PHP escapadas por llaves.  Ej  "%{$Variable}%" si fuera para un LIKE, por ejemplo.
-					if (strpos($valor_izquierdo,"{")!==FALSE && strrpos($valor_izquierdo,"}")!==FALSE)
-						{
-							//Determina las posiciones de las llaves en la cadena
-							$PosLlaveIzquierda=strpos($valor_izquierdo,"{");
-							$PosLlaveDerecha=strrpos($valor_izquierdo,"}");
-							//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
-							$NombreVariable=substr($valor_izquierdo,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
-							//Si la variable no esta definida la busca en el entorno global
-							global ${$NombreVariable};
-							if (@isset($NombreVariable))
-								{
-									$ValorVariable=${$NombreVariable};
-									//Reemplaza el valor encontrado en la cadena de valor original
-									$valor_izquierdo=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$valor_izquierdo);
-								}
-						}
-
-					//LADO DERECHO DE LA CONDICION
-					//Si el valor Derecho a comparar inicia por signo pesos y es una variable PHP la usa como tal
-					if (@$valor_derecho[0]=="$")
-						{
-							//Quita el signo pesos inicial para buscar la variable
-							$variable_a_buscar=substr($valor_derecho, 1, strlen($valor_derecho));
-							// Si la variable esta definida toma su valor encerrado entre comillas para el query y evitar conflictos de variables con espacios y demas.
-							if (@isset($variable_a_buscar)) 
-								$valor_derecho="'".${$variable_a_buscar}."'";
-						}
-					//Evalua casos donde se tienen variables PHP escapadas por llaves.  Ej  "%{$Variable}%" si fuera para un LIKE, por ejemplo.
-					if (strpos($valor_derecho,"{")!==FALSE && strrpos($valor_derecho,"}")!==FALSE)
-						{
-							//Determina las posiciones de las llaves en la cadena
-							$PosLlaveIzquierda=strpos($valor_derecho,"{");
-							$PosLlaveDerecha=strrpos($valor_derecho,"}");
-							//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
-							$NombreVariable=substr($valor_derecho,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
-							//Si la variable no esta definida la busca en el entorno global
-							global ${$NombreVariable};
-							if (@isset($NombreVariable))
-								{
-									$ValorVariable=${$NombreVariable};
-									//Reemplaza el valor encontrado en la cadena de valor original
-									$valor_derecho=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$valor_derecho);								
-								}
-						}
+                    $valor_izquierdo=PCO_ReemplazarVariablesPHPEnCadena($valor_izquierdo);
+                    $valor_derecho=PCO_ReemplazarVariablesPHPEnCadena($valor_derecho);
 
 					$consulta.=" ".$valor_izquierdo." ".$registro_condiciones["operador"]." ".$valor_derecho." ";
 					$hay_condiciones=1;
@@ -5859,79 +5937,3 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
             mensaje($MULTILANG_MonCommSQL, $consulta, '', 'fa fa-fw fa-2x fa-database', 'alert alert-info alert-dismissible ');
 
 	}
-
-
-
-
-
-/* ################################################################## */
-/* ################################################################## */
-	/*
-		Section: Acciones a ser ejecutadas (si aplica) en cada cargue de la herramienta
-	*/
-/* ################################################################## */
-/* ################################################################## */
-	if ($PCO_Accion=="cambiar_estado_campo")
-		{		
-			/*
-				Function: cambiar_estado_campo
-				Abre los espacios de trabajo dinamicos sobre el contenedor principal donde se despliega informacion
-
-				Variables de entrada:
-
-					tabla - Nombre de la tabla que contiene el registro a actualizar.
-					campo - Nombre del campo que sera actualizado.
-					id - Valor Identificador unico del campo a ser actualizado.
-					PCO_CambioEstado_CampoLlave - Nombre del campo que sera utulizado para comparar.  Si no se recibe se asume id
-					valor - Valor a ser asignado en el campo del registro cuyo identificador coincida con el recibido.
-					PCO_CambioEstado_NegarRetorno - Determina si se debe o no retornar despues de un cambio.  Valor vacio hace que se ejecute la operacion por defecto y retorne.
-					PCO_CambioEstado_NoUsarCore - Determina si anular o no el prefijo de tablas Core de la operacion. 1=anula, otros valores dejaran el prefijo core
-
-				Salida:
-
-					Valor actualizado en el campo y retorno al escritorio de la aplicacion.  En caso de error se retorna al escritorio sin realizar cambios ante el fallo del query.
-			*/
-
-			$mensaje_error="";
-			if ($mensaje_error=="")
-				{
-                    //Determina el tipo de objeto sobre el que se hace el cambio
-                    $TipoCampo="";
-                    if (@$formulario!="") $TipoCampo.="Frm:".$formulario;
-                    if (@$informe!="") $TipoCampo.="Inf:".$informe;
-                    
-                    //Define el campo sobre el cual se hace la operacion
-                    if (@$PCO_CambioEstado_CampoLlave=="")	$PCO_CambioEstado_CampoLlave="id";
-                    
-                    //Algunas operaciones requieren por defecto usar los prefijos Core.  Si se desea pueden anularse con el parametro en 1
-                    $PrefijoTablas=$TablasCore;
-                    if ($PCO_CambioEstado_NoUsarCore==1) $PrefijoTablas="";
-                    
-					ejecutar_sql_unaria("UPDATE ".$PrefijoTablas."$tabla SET $campo = '$valor' WHERE $PCO_CambioEstado_CampoLlave = ? ","$id");
-					@auditar("Cambia estado del campo $campo en objetoID $TipoCampo");
-					
-					if (@$PCO_CambioEstado_NegarRetorno=="")
-						echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-							<input type="Hidden" name="PCO_Accion" value="'.$accion_retorno.'">
-							<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-							<input type="Hidden" name="formulario" value="'.@$formulario.'">
-							<input type="Hidden" name="informe" value="'.@$informe.'">
-							<input type="Hidden" name="popup_activo" value="'.$popup_activo.'">
-							<script type="" language="JavaScript">
-							//setTimeout ("document.cancelar.submit();", 10); 
-							document.cancelar.submit();
-							</script>';
-				}
-			else
-				{
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="editar_formulario">
-						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="formulario" value="'.$formulario.'">
-						<input type="Hidden" name="informe" value="'.$informe.'">
-						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
-						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
-						</form>
-						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-				}
-		}

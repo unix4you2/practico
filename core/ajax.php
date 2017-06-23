@@ -125,3 +125,78 @@ if ($PCO_Accion=="valor_campo_tabla")
             }
     }
 
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+	/*
+		Section: Acciones a ser ejecutadas (si aplica) en cada cargue de la herramienta
+	*/
+/* ################################################################## */
+/* ################################################################## */
+	if (@$PCO_Accion=="cambiar_estado_campo")
+		{		
+			/*
+				Function: cambiar_estado_campo
+				Abre los espacios de trabajo dinamicos sobre el contenedor principal donde se despliega informacion
+
+				Variables de entrada:
+
+					tabla - Nombre de la tabla que contiene el registro a actualizar.
+					campo - Nombre del campo que sera actualizado.
+					id - Valor Identificador unico del campo a ser actualizado.
+					PCO_CambioEstado_CampoLlave - Nombre del campo que sera utulizado para comparar.  Si no se recibe se asume id
+					valor - Valor a ser asignado en el campo del registro cuyo identificador coincida con el recibido.
+					PCO_CambioEstado_NegarRetorno - Determina si se debe o no retornar despues de un cambio.  Valor vacio hace que se ejecute la operacion por defecto y retorne.
+					PCO_CambioEstado_NoUsarCore - Determina si anular o no el prefijo de tablas Core de la operacion. 1=anula, otros valores dejaran el prefijo core
+
+				Salida:
+
+					Valor actualizado en el campo y retorno al escritorio de la aplicacion.  En caso de error se retorna al escritorio sin realizar cambios ante el fallo del query.
+			*/
+
+			$mensaje_error="";
+			if ($mensaje_error=="")
+				{
+                    //Determina el tipo de objeto sobre el que se hace el cambio
+                    $TipoCampo="";
+                    if (@$formulario!="") $TipoCampo.="Frm:".$formulario;
+                    if (@$informe!="") $TipoCampo.="Inf:".$informe;
+                    
+                    //Define el campo sobre el cual se hace la operacion
+                    if (@$PCO_CambioEstado_CampoLlave=="")	$PCO_CambioEstado_CampoLlave="id";
+                    
+                    //Algunas operaciones requieren por defecto usar los prefijos Core.  Si se desea pueden anularse con el parametro en 1
+                    $PrefijoTablas=$TablasCore;
+                    if ($PCO_CambioEstado_NoUsarCore==1) $PrefijoTablas="";
+                    
+					ejecutar_sql_unaria("UPDATE ".$PrefijoTablas."$tabla SET $campo = '$valor' WHERE $PCO_CambioEstado_CampoLlave = ? ","$id");
+					@auditar("Cambia estado del campo $campo en objetoID $TipoCampo");
+					
+					if (@$PCO_CambioEstado_NegarRetorno=="")
+						echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+							<input type="Hidden" name="PCO_Accion" value="'.$accion_retorno.'">
+							<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+							<input type="Hidden" name="formulario" value="'.@$formulario.'">
+							<input type="Hidden" name="informe" value="'.@$informe.'">
+							<input type="Hidden" name="popup_activo" value="'.$popup_activo.'">
+							<script type="" language="JavaScript">
+							//setTimeout ("document.cancelar.submit();", 10); 
+							document.cancelar.submit();
+							</script>';
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="editar_formulario">
+						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="informe" value="'.$informe.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+		}
+

@@ -70,7 +70,8 @@
     <link href="inc/bootstrap/css/plugins/select/bootstrap-select.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/iconpicker/bootstrap-iconpicker.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/dataTables.bootstrap.min.css" rel="stylesheet">
-    
+    <link href="inc/bootstrap/css/plugins/simple-sidebar.css" rel="stylesheet">
+
     <link href="inc/summernote/summernote.css" rel="stylesheet">
 
     <!-- CSS Personalizado (Plantilla y Practico) -->

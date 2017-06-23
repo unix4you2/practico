@@ -60,6 +60,17 @@
 
     <div id="wrapper">
  
+ 
+        <!-- Sidebar oculto al lado izquierdo -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav btn-xs">
+                <div id="PCODIV_SeccionLateralFlotanteUsoInterno" align=right></div>
+                <div id="PCODIV_SeccionLateralFlotante" align=right></div>
+            </ul>
+        </div>
+        <!--Elemento requerido para uso de barra lateral oculta-->
+        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="display: none; visibility:hidden;"></a>
+        <!-- /#sidebar-wrapper oculto al lado izquierdo-->
 
 
 		<?php
@@ -67,13 +78,12 @@
 			include_once("core/marco_nav.php");
 		?>
 
-
-
         <!-- CONTENIDO DE APLICACION -->
-        <div id="page-wrapper">
+        <div id="page-wrapper">  <!-- page-content-wrapper -->
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
+                        
 						<?php
 							//Agrega un enter minimo para las paginas si hay sesion activa
 							if ($PCOSESS_SesionAbierta)
@@ -85,10 +95,6 @@
 							if ($ModoDepuracion)
 								mensaje($MULTILANG_ModoDepuracion, "", '', 'fa fa-fw fa-2x fa-info-circle texto-blink', 'alert alert-dismissible alert-danger');
 						?>
-
-
-
-
 
 <?php 
 	//Incluye formularios de uso comun para transporte de datos
@@ -142,7 +148,7 @@
 									
 									//Si tiene una URL trata la opcion como enlace estandar, sino como opcion de menu especial
 									if ($registro["url"]!="")
-										echo '<a title="'.$registro["texto"].'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
+										echo '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($registro["texto"]).'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
 									else
 										echo '<a href="javascript:document.top_'.$registro["id"].'.submit();">';
 
@@ -154,7 +160,7 @@
 											if (!$PCO_EsImagen)
 												echo '<button class="btn-circle btn-info btn-xs">
 												<i class="'.$registro["imagen"].'"></i>
-												</button> '.$registro["texto"];
+												</button> '.PCO_ReemplazarVariablesPHPEnCadena($registro["texto"]);
 											else
 												echo '<img src="'.$registro["imagen"].'" border="0" />';
 									
@@ -176,5 +182,3 @@
 	<div id="PCODIV_AbajoMenuSuperior"></div>
 
 	<!-- INICIO  DE CONTENIDOS DE APLICACION DISENADA POR EL USUARIO -->
-
-

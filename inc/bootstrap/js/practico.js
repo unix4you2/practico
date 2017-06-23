@@ -24,6 +24,19 @@ function barra_navegacion_izquierda_toggle(modo)
         else
             ocultar_navegacion_izquierda();
     }
+function PCOJS_OcultarBarraFlotanteIzquierda()
+    {
+        $( "#wrapper" ).removeClass( "toggled" );
+    }
+function PCOJS_VerBarraFlotanteIzquierda()
+    {
+        $( "#wrapper" ).addClass( "toggled" );
+    }
+function PCOJS_AlternarBarraFlotanteIzquierda()
+    {
+        $( "#wrapper" ).toggleClass( "toggled" );
+        //javascript:$("#menu-toggle")[0].click();
+    }
 
 function PCO_ObtenerContenidoAjax(PCO_ASINCRONICO,PCO_URL,PCO_PARAMETROS)
     {
@@ -446,5 +459,4 @@ function PCO_Canvas_SobrePagina3()
 	            $("#page").show();
 	        }
 	    });
-    }    
-    
+    }

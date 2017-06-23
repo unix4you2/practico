@@ -461,7 +461,7 @@
 			<input type="Hidden" name="PCO_Accion" value="editar_formulario">
 			<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 			<input type="Hidden" name="formulario" value="'.$formulario.'">
-			<input type="Hidden" name="popup_activo" value="FormularioAcciones">
+			<input type="Hidden" name="popup_activo" value="'.$popup_activo.'">
 			</form>
 			<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 		}
@@ -490,13 +490,16 @@
 */
 	if ($PCO_Accion=="eliminar_campo_formulario")
 		{
+		    //Elimina los eventos relacionados
+			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."evento_objeto WHERE objeto=? ","$campo");
+            //Elimina el control como tal
 			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE id=? ","$campo");
 			auditar("Elimina campo del formulario $formulario");
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="editar_formulario">
 			<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 			<input type="Hidden" name="formulario" value="'.$formulario.'">
-			<input type="Hidden" name="popup_activo" value="FormularioDiseno">
+			<input type="Hidden" name="popup_activo" value="'.$popup_activo.'">
 			</form>
 			<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 		}
@@ -553,9 +556,11 @@
 
 					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario_objeto SET ".$ListaCamposyValores." WHERE id=?","$idcampomodificado");
 					auditar("Modifica diseno campo $idcampomodificado para formulario $formulario");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_formulario">
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					    <input type="Hidden" name="PCO_Accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="popup_activo" value="">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
@@ -565,6 +570,7 @@
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="popup_activo" value="">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -625,9 +631,11 @@
 					ejecutar_sql_unaria($consulta_insercion,"$ListaCamposyValores");
 					$id=obtener_ultimo_id_insertado($ConexionPDO);
 					auditar("Crea campo $id para formulario $formulario");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_formulario">
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					    <input type="Hidden" name="PCO_Accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="popup_activo" value="">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
@@ -637,6 +645,7 @@
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="popup_activo" value="">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -690,6 +699,7 @@
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="popup_activo" value="">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -2207,7 +2217,7 @@ if ($PCO_Accion=="editar_formulario")
 														<input type="hidden" name="campo" value="'.$registro["id"].'">
 														<input type="hidden" name="formulario" value="'.$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-														<input type="Hidden" name="popup_activo" value="FormularioDiseno">
+			                                            <input type="Hidden" name="popup_activo" value="FormularioDiseno">
                                                         <a href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvDelCampo.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
 												</form>
 										</td>
@@ -2343,74 +2353,72 @@ if ($PCO_Accion=="editar_formulario")
     <!-- FIN MODAL DISENO DE BOTONES -->
         
 
-    <div class="row">
-        <div class="col-md-4">
-      
+    <?php
+		// Inicia presentacion de ventana de edicion de formulario
+		$consulta_form=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
+		$registro_form = $consulta_form->fetch();
 
-			<?php 
-				abrir_ventana($MULTILANG_BarraHtas, 'panel-info'); 
-			?>
-                <div align=center>
-				<?php echo $MULTILANG_FrmObjetos; ?><br>
-                    <a data-toggle="modal" href="#myModalElementoFormulario" title="<?php echo $MULTILANG_FrmDesObjetos; ?>">
+        //Barra basica de edicion de contenidos y controles
+        $ContenidoBarraFlotante_Herramientas='
+            <div align=center style="color:#FFFFFF;"><br>
+    			'.$MULTILANG_FrmObjetos.'<br>
+                    <a data-toggle="modal" href="#myModalElementoFormulario" title="'.$MULTILANG_FrmDesObjetos.'">
                             <i class="fa fa-th-list fa-3x fa-fw"></i>
                     </a>                
-                    <a data-toggle="modal" href="#myModalDisenoFormulario" title="<?php echo $MULTILANG_FrmDesCampos; ?>">
+                    <a data-toggle="modal" href="#myModalDisenoFormulario" title="'.$MULTILANG_FrmDesCampos.'">
                             <i class="fa fa-pencil-square-o fa-3x fa-fw"></i>
                     </a>
-				<hr>
-				<?php echo $MULTILANG_FrmAcciones; ?><br>
-                    <a data-toggle="modal" href="#myModalBotonFormulario" title="<?php echo $MULTILANG_FrmDesBoton; ?>">
+    			<br>
+    			'.$MULTILANG_FrmAcciones.'<br>
+                    <a data-toggle="modal" href="#myModalBotonFormulario" title="'.$MULTILANG_FrmDesBoton.'">
                             <i class="fa fa-bolt fa-3x fa-fw"></i>
                     </a>
-                    <a data-toggle="modal" href="#myModalDisenoBotones" title="<?php echo $MULTILANG_FrmDesAcciones; ?>">
+                    <a data-toggle="modal" href="#myModalDisenoBotones" title="'.$MULTILANG_FrmDesAcciones.'">
                             <i class="fa fa-pencil-square-o fa-3x fa-fw"></i>
                     </a>
-				<hr>
-				<form action="<?php echo $ArchivoCORE; ?>" method="POST" name="cancelar"><input type="Hidden" name="PCO_Accion" value="administrar_formularios"></form>
-                <button type="button" class="btn btn-danger btn-block" onclick="document.cancelar.submit()"><?php echo $MULTILANG_FrmVolverLista; ?></button>
-                </div>
+    			<br>
+    			<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="PCO_Accion" value="administrar_formularios"></form>
+                <button type="button" class="btn btn-danger btn-xs" onclick="document.cancelar.submit()">'.$MULTILANG_FrmVolverLista.'</button>
+                <br><br>
+                <button class="btn btn-xs btn-warning" onclick="PCOJS_OcultarBarraFlotanteIzquierda();">'.$MULTILANG_Cerrar.' '.$MULTILANG_BarraHtas.'</button>
+            </div>';
+        //Elimina saltos de linea del contenido para ser asignado directamente al DIV con JQuery
+        $ContenidoBarraFlotante_Herramientas=preg_replace("[\n|\r|\n\r]", '', trim($ContenidoBarraFlotante_Herramientas));
 
-			<?php
-				cerrar_ventana();
+        //Formulario de configuracion del formulario
+        $ContenidoBarraFlotante_EditForm='
+            <div align=center style="color:#FFFFFF;"><hr>
+                <b>'.$MULTILANG_FrmDetalles.'</b>
 
-
-
-				// Inicia presentacion de ventana de edicion de formulario
-				$consulta_form=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
-				$registro_form = $consulta_form->fetch();
-				abrir_ventana($MULTILANG_FrmDetalles, 'panel-primary');
-			?>
-			<form name="datosact" id="datosact" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<form name="datosact" id="datosact" action="'.$ArchivoCORE.'" method="POST">
                 <input type="Hidden" name="PCO_Accion" value="actualizar_formulario">
-                <input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
-                <input type="Hidden" name="formulario" value="<?php echo $registro_form["id"]; ?>">
+                <input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+                <input type="Hidden" name="formulario" value="'.$registro_form["id"].'">
 
 
-                <!-- Modal EditorJavascript -->
-                <?php abrir_dialogo_modal("myModalActualizaJAVASCRIPT",$MULTILANG_FrmTitComandos,"modal-wide"); ?>
-                    <?php echo $MULTILANG_FrmHlpFunciones; ?>
-                    <div class="well">
-                    <textarea name="javascript"  data-editor="javascript" class="form-control" style="width: 800px; height: 450px;"><?php echo $registro_form["javascript"]; ?></textarea>
-                    </div>
-                <?php 
-                    $barra_herramientas_modal='
-						<i class="btn-xs">'.$MULTILANG_FrmHlpFinalFunciones.'</i>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-                    cerrar_dialogo_modal($barra_herramientas_modal);
-                ?>
-                <!-- Fin Modal EditorJavascript -->
+                    <!-- Modal EditorJavascript -->';
+                    $ContenidoBarraFlotante_EditForm.=abrir_dialogo_modal("myModalActualizaJAVASCRIPT",$MULTILANG_FrmTitComandos,"modal-wide",0);
+                    $ContenidoBarraFlotante_EditForm.='
+                        <div class="well" style="color:#000000;">'.$MULTILANG_FrmHlpFunciones.'
+                        <textarea name="javascript" id="javascript" data-editor="javascript" class="form-control" style="width: 950px; height: 450px;"></textarea>
+                        </div>';
+                        $barra_herramientas_modal='
+                			<button type="button" class="btn btn-success" onclick="javascript:document.datosact.submit();">'.$MULTILANG_Actualizar.' JS <i class="fa fa-floppy-o"></i></button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+                    $ContenidoBarraFlotante_EditForm.=cerrar_dialogo_modal($barra_herramientas_modal,0);
+        $ContenidoBarraFlotante_EditForm.='
+                    <!-- Fin Modal EditorJavascript -->
 
 
-				<table class="table table-condensed table-unbordered">
+				<table class="table table-condensed table-unbordered" style="color:#FFFFFF; font-size:12px;">
 					<tr>
 						<td>
                             <div class="form-group input-group">
                                 <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> </span>
-                                <input name="titulo" value="<?php echo $registro_form["titulo"]; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmTitVen; ?>">
+                                <input name="titulo" value="'.$registro_form["titulo"].'" type="text" class="form-control input-sm" placeholder="'.$MULTILANG_FrmTitVen.'">
                                 <span class="input-group-addon">
-                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmDesTit; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_TitObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDesTit.': '.$MULTILANG_TblDesNombre.'"><i class="fa fa-question-circle fa-fw "></i></a>
                                 </span>
                             </div>
                         </td>
@@ -2418,9 +2426,9 @@ if ($PCO_Accion=="editar_formulario")
 					<tr>
 						<td>
                             <div class="form-group input-group">
-                                <input name="ayuda_titulo" value="<?php echo $registro_form["ayuda_titulo"]; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmHlp; ?>">
+                                <input name="ayuda_titulo" value="'.$registro_form["ayuda_titulo"].'" type="text" class="form-control input-sm" placeholder="'.$MULTILANG_FrmHlp.'">
                                 <span class="input-group-addon">
-                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmDesHlp; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDesHlp.': '.$MULTILANG_TblDesNombre.'"><i class="fa fa-question-circle fa-fw "></i></a>
                                 </span>
                             </div>
 						</td>
@@ -2428,20 +2436,20 @@ if ($PCO_Accion=="editar_formulario")
 					<tr>
 						<td valign="top">
                             <div class="form-group input-group">
-                                <textarea name="ayuda_texto"  class="form-control" placeholder="<?php echo $MULTILANG_FrmTxt; ?>" rows="3"><?php echo $registro_form["ayuda_texto"]; ?></textarea>
+                                <textarea name="ayuda_texto"  class="form-control input-sm" placeholder="'.$MULTILANG_FrmTxt.'" rows="3">'.$registro_form["ayuda_texto"].'</textarea>
                                 <span class="input-group-addon">
-                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmDesTxt; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle  fa-fw "></i></a>
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDesTxt.': '.$MULTILANG_TblDesNombre.'"><i class="fa fa-question-circle  fa-fw "></i></a>
                                 </span>
                             </div>
 						</td>
 					</tr>
 					<tr>
-						<td>
-                            <label for="tabla_datos"><?php echo $MULTILANG_TablaDatos; ?>:</label>
+						<td align=center>
+                            <label for="tabla_datos">'.$MULTILANG_TablaDatos.':</label>
                             <div class="form-group input-group">
                                 <select  id="tabla_datos" name="tabla_datos"  class="form-control" >
-								<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
-								 <?php
+								<option value="">'.$MULTILANG_SeleccioneUno.'</option>';
+
 										//Asumimos que la tabla es manual
 										$es_tabla_manual=1;
 										//Recorre las tablas definidas
@@ -2458,76 +2466,92 @@ if ($PCO_Accion=="editar_formulario")
 																//Si se detecta el nombre dentro de la lista la tabla deja de ser manual
 																$es_tabla_manual=0;
 															}
-														echo '<option value="'.$registro[0].'" '.$estado_seleccion_tabla.'>'.str_replace($TablasApp,'',$registro[0]).'</option>';
+														$ContenidoBarraFlotante_EditForm.='<option value="'.$registro[0].'" '.$estado_seleccion_tabla.'>'.str_replace($TablasApp,'',$registro[0]).'</option>';
 													}
 											}		
-								?>
+        $ContenidoBarraFlotante_EditForm.='
                                 </select>
                                 <span class="input-group-addon">
-                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle  fa-fw icon-orange"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_TitObligatorio.'"><i class="fa fa-exclamation-triangle  fa-fw icon-orange"></i></a>
                                 </span>
                             </div>
-                            <input type="text" name="tabla_datos_manual"  value="<?php if($es_tabla_manual==1) echo $registro_form["tabla_datos"]; ?>" class="form-control" placeholder="<?php echo $MULTILANG_InfTablaManual; ?>">
+                            <input type="text" name="tabla_datos_manual"  value="';
+                            if($es_tabla_manual==1) echo $registro_form["tabla_datos"];
+        $ContenidoBarraFlotante_EditForm.='" class="form-control" placeholder="'.$MULTILANG_InfTablaManual.'">
 						</td>
 					</tr>
 					<tr>
-						<td>
-                            <label for="columnas"><?php echo $MULTILANG_FrmNumeroCols; ?>:</label>
+						<td align=center>
+                            <label for="columnas">'.$MULTILANG_FrmNumeroCols.':</label>
                             <div class="form-group input-group">
-                                <select id="columnas" name="columnas" class="form-control">
-                                    <?php
+                                <select id="columnas" name="columnas" class="form-control">';
                                         for ($i=1;$i<=12;$i++)
                                             {
                                                 $estado_seleccion_cols="";
                                                 if ($i==$registro_form["columnas"])
                                                     $estado_seleccion_cols="SELECTED";
-                                                echo '<option value="'.$i.'" '.$estado_seleccion_cols.'>'.$i.'</option>';
+                                                $ContenidoBarraFlotante_EditForm.='<option value="'.$i.'" '.$estado_seleccion_cols.'>'.$i.'</option>';
                                             }
-                                    ?>
+        $ContenidoBarraFlotante_EditForm.='
                                 </select>
                                 <span class="input-group-addon">
-                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesNumeroCols; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_FrmDesNumeroCols.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                 </span>
                             </div>
 						</td>
 					</tr>
 					<tr>
-						<td>
-							<label for="borde_visible"><?php echo $MULTILANG_FrmBordesVisibles; ?>:</label>
+						<td align=center>
+							<label for="borde_visible">'.$MULTILANG_FrmBordesVisibles.':</label>
                             <select id="borde_visible" name="borde_visible" class="form-control">
-								<option value="0" <?php if ($registro_form["borde_visible"]==0) echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?></option>
-								<option value="1" <?php if ($registro_form["borde_visible"]==1) echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?></option>
+								<option value="0" ';
+								if ($registro_form["borde_visible"]==0) $ContenidoBarraFlotante_EditForm.=' SELECTED ';
+        $ContenidoBarraFlotante_EditForm.='>'.$MULTILANG_No.'</option>
+								<option value="1" ';
+								if ($registro_form["borde_visible"]==1) $ContenidoBarraFlotante_EditForm.=' SELECTED ';
+		$ContenidoBarraFlotante_EditForm.='>'.$MULTILANG_Si.'</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td>
-							<label for="estilo_pestanas"><?php echo $MULTILANG_FrmEstiloPestanas; ?>:</label>
+						<td align=center>
+							<label for="estilo_pestanas">'.$MULTILANG_FrmEstiloPestanas.':</label>
                             <select id="estilo_pestanas" name="estilo_pestanas" class="form-control">
-								<option value="nav-tabs" <?php if ($registro_form["estilo_pestanas"]=="nav-tabs") echo "SELECTED"; ?> ><?php echo $MULTILANG_FrmEstiloTabs; ?></option>
-								<option value="nav-pills" <?php if ($registro_form["estilo_pestanas"]=="nav-pills") echo "SELECTED"; ?> ><?php echo $MULTILANG_FrmEstiloPills; ?></option>
-								<option value="" <?php if ($registro_form["estilo_pestanas"]=="") echo "SELECTED"; ?> ><?php echo $MULTILANG_FrmEstiloOculto; ?></option>
+								<option value="nav-tabs" ';
+								if ($registro_form["estilo_pestanas"]=="nav-tabs") $ContenidoBarraFlotante_EditForm.=' SELECTED ';
+		$ContenidoBarraFlotante_EditForm.='>'.$MULTILANG_FrmEstiloTabs.'</option>
+								<option value="nav-pills" ';
+								if ($registro_form["estilo_pestanas"]=="nav-pills") $ContenidoBarraFlotante_EditForm.=' SELECTED ';
+		$ContenidoBarraFlotante_EditForm.='>'.$MULTILANG_FrmEstiloPills.'</option>
+								<option value="" ';
+								if ($registro_form["estilo_pestanas"]=="") $ContenidoBarraFlotante_EditForm.=' SELECTED ';
+		$ContenidoBarraFlotante_EditForm.='>'.$MULTILANG_FrmEstiloOculto.'</option>
 							</select>
 						</td>
 					</tr>
 				</table>
             </form>
-                            
-                <a class="btn btn-primary btn-block" data-toggle="modal" href="#myModalActualizaJAVASCRIPT">
-                    <div>
-                        <i class="fa fa-file-code-o"></i> <?php echo $MULTILANG_FrmAdvScriptForm; ?>
-                    </div>
-                </a>
-                <a class="btn btn-success btn-block" href="javascript:document.datosact.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Actualizar; ?></a>
-		<?php
-			//Cierra actualizacion de formulario
-			cerrar_ventana();
-		?>
+            <a class="btn btn-success btn-xs" href="javascript:document.datosact.submit();"><i class="fa fa-floppy-o"></i> '.$MULTILANG_Actualizar.' '.$MULTILANG_Formularios.'</a>
 
-    </div>    
-        <div class="col-md-8">
+            </div>';
+        //Elimina saltos de linea del contenido para ser asignado directamente al DIV con JQuery
+        $ContenidoBarraFlotante_EditForm=preg_replace("[\n|\r|\n\r]", '', trim($ContenidoBarraFlotante_EditForm));
+    ?>
+
+    <textarea name="ghost_javascript" id="ghost_javascript" style="width: 0px; height: 0px; display:none; visibility:hidden;"><?php echo $registro_form["javascript"]; ?></textarea>
+	<script language="JavaScript">
+	    //Asigna contenidos generados a la barra flotante
+		$('#PCODIV_SeccionLateralFlotanteUsoInterno').html('<?php echo htmlspecialchars_decode($ContenidoBarraFlotante_Herramientas); ?>');
+		$('#PCODIV_SeccionLateralFlotanteUsoInterno').append('<?php echo htmlspecialchars_decode($ContenidoBarraFlotante_EditForm); ?>');
+		//Reasigna valor de script desde la variable inicial de carga
+		document.datosact.javascript.value=ghost_javascript.value;
+	</script>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
             <?php
-                cargar_formulario($formulario);
+            	//function cargar_formulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno=0)
+                cargar_formulario($formulario,1,"","",0,1); //Cargar el form en modo de diseno
             ?>
         </div>
     </div>
@@ -2564,7 +2588,13 @@ if ($PCO_Accion=="editar_formulario")
 			global $TablasCore;
 			if ($formulario!="")
 				{
+				    //Elimina los eventos relacionados con sus objetos
+					$EventosFormulario=ejecutar_sql("SELECT ".$TablasCore."evento_objeto.id FROM ".$TablasCore."evento_objeto,".$TablasCore."formulario_objeto WHERE ".$TablasCore."formulario_objeto.formulario=$formulario AND ".$TablasCore."formulario_objeto.id=".$TablasCore."evento_objeto.objeto ","");
+		            while($RegistroEventosFormulario=$EventosFormulario->fetch())
+			            ejecutar_sql_unaria("DELETE FROM ".$TablasCore."evento_objeto WHERE id=? ",$RegistroEventosFormulario["id"]);	
+			            
 					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
+					
 					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario=? ","$formulario");
 					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
 					auditar("Elimina formulario $formulario");
@@ -2669,6 +2699,7 @@ if ($PCO_Accion=="editar_formulario")
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
 					<input type="Hidden" name="PCO_Accion" value="editar_formulario">
+					<input type="Hidden" name="popup_activo" value="">
 					<input type="Hidden" name="formulario" value="'.$formulario.'"></form>
 								<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -2678,6 +2709,7 @@ if ($PCO_Accion=="editar_formulario")
 						<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+					    <input type="Hidden" name="popup_activo" value="">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -2717,6 +2749,7 @@ if ($PCO_Accion=="editar_formulario")
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
 					<input type="Hidden" name="PCO_Accion" value="editar_formulario">
+					<input type="Hidden" name="popup_activo" value="">
 					<input type="Hidden" name="formulario" value="'.$id.'"></form>
 								<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -2726,6 +2759,7 @@ if ($PCO_Accion=="editar_formulario")
 						<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+						<input type="Hidden" name="popup_activo" value="">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -2800,7 +2834,28 @@ if ($PCO_Accion=="editar_formulario")
 												$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 										}
 									//Inserta el nuevo objeto al form
-									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto ($ListaCamposSinID_formulario_objeto) VALUES ($CadenaInterrogantes) ","$CadenaValores");                            
+									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto ($ListaCamposSinID_formulario_objeto) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+
+									//Por cada elemento busca si tiene eventos y los copia tambien
+									$idObjetoInsertadoParaEvento=obtener_ultimo_id_insertado($ConexionPDO);
+									$ArregloCamposEvento=explode(',',$ListaCamposSinID_evento_objeto);
+							        $TotalCamposEvento=count($ArregloCamposEvento);
+        							$consulta_eventos=ejecutar_sql("SELECT ".$TablasCore."evento_objeto.* FROM ".$TablasCore."evento_objeto WHERE ".$TablasCore."evento_objeto.objeto=? ",$registro["id"]);
+        							while($registro_eventos = $consulta_eventos->fetch())
+        								{
+        									//Genera cadena de interrogantes y valores segun cantidad de campos
+        									$CadenaInterrogantesEventos='?'; //Agrega el primer interrogante
+        									$CadenaValoresEventos=$idObjetoInsertadoParaEvento;
+        									for ($PCOCampoEvento=1;$PCOCampoEvento<$TotalCamposEvento;$PCOCampoEvento++)
+        										{
+        											//Cadena de interrogantes
+        											$CadenaInterrogantesEventos.=',?';
+        											//Cadena de valores (el campo No 1 corresponde al ID de objeto nuevo)
+        											$CadenaValoresEventos.=$_SeparadorCampos_.$registro_eventos[$PCOCampoEvento+1];
+        										}
+        									//Inserta el nuevo objeto al form
+        									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."evento_objeto ($ListaCamposSinID_evento_objeto) VALUES ($CadenaInterrogantesEventos) ","$CadenaValoresEventos");    
+        								}
 								}				
 
 							//Determina cuantos campos tiene la tabla
@@ -2827,7 +2882,6 @@ if ($PCO_Accion=="editar_formulario")
 									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton ($ListaCamposSinID_formulario_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 								}
 							auditar("Crea copia $tipo_copia_objeto de formulario $formulario");
-
 							// Regresa a la administracion de formularios
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 							<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
@@ -2879,6 +2933,24 @@ if ($PCO_Accion=="editar_formulario")
 							//Agrega el total de elementos y resetea contador para el siguiente
 									$Contenido_XML .= "
 	<total_core_formulario_objeto><cantidad_objetos>$conteo_elementos_xml</cantidad_objetos></total_core_formulario_objeto>";
+							$conteo_elementos_xml=0;
+
+							// Registros de eventos por formulario_objeto
+							$consulta=ejecutar_sql("SELECT ".$TablasCore."evento_objeto.* FROM ".$TablasCore."evento_objeto,".$TablasCore."formulario_objeto WHERE ".$TablasCore."formulario_objeto.id=".$TablasCore."evento_objeto.objeto  AND ".$TablasCore."formulario_objeto.formulario=?","$formulario");
+							$conteo_elementos_xml=0;
+							while($registro = $consulta->fetch())
+								{
+									//Exporta la tabla de core_formulario_objeto
+									$Contenido_XML .= "
+	<core_evento_objeto>";
+									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_evento_objeto);                        
+							$Contenido_XML .= "
+	</core_evento_objeto>";
+									$conteo_elementos_xml++;
+								}
+							//Agrega el total de elementos y resetea contador para el siguiente
+									$Contenido_XML .= "
+	<total_core_evento_objeto><cantidad_objetos>$conteo_elementos_xml</cantidad_objetos></total_core_evento_objeto>";
 							$conteo_elementos_xml=0;
 
 							// Registros de formulario_boton
@@ -3065,6 +3137,25 @@ if ($PCO_Accion=="confirmar_importacion_formulario")
 							}
 						//Inserta el nuevo objeto al form
 						ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_objeto ($ListaCamposSinID_formulario_objeto) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+						
+                        //Determina cual fue el ID para el ultimo elemento insertado
+						$idObjetoInsertadoParaEvento=obtener_ultimo_id_insertado($ConexionPDO);
+                        //Averigua el ID ORIGINAL del objeto recien insertado
+                        $IDOriginalObjeto=base64_decode($xml_importado->core_formulario_objeto[$PCO_i]->id);
+                        //Recorre la lista de todos los eventos en el XML
+        				for ($PCO_iEvento=0;$PCO_iEvento<$xml_importado->total_core_evento_objeto[0]->cantidad_objetos;$PCO_iEvento++)
+        					{
+        					    $RegistroEvento_id=base64_decode($xml_importado->core_evento_objeto[$PCO_iEvento]->id);
+        					    $RegistroEvento_objeto=base64_decode($xml_importado->core_evento_objeto[$PCO_iEvento]->objeto);
+        					    $RegistroEvento_evento=base64_decode($xml_importado->core_evento_objeto[$PCO_iEvento]->evento);
+        					    $RegistroEvento_javascript=base64_decode($xml_importado->core_evento_objeto[$PCO_iEvento]->javascript);
+                                //Si el objeto del evento original es igual al id original del evento recien insertado crea el nuevo registro de evento
+                                if ($RegistroEvento_objeto==$IDOriginalObjeto)
+                                    {
+    									$CadenaValoresEventos="{$idObjetoInsertadoParaEvento}{$_SeparadorCampos_}{$RegistroEvento_evento}{$_SeparadorCampos_}{$RegistroEvento_javascript}";
+    									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."evento_objeto ($ListaCamposSinID_evento_objeto) VALUES (?,?,?) ","$CadenaValoresEventos");    
+                                    }
+        					}
 					}
 
 				//Determina cuantos campos tiene la tabla
@@ -3172,6 +3263,16 @@ if ($PCO_Accion=="analizar_importacion_formulario")
 						<b>'.base64_decode($xml_importado->core_formulario_objeto[$PCO_i]->titulo).'</b><i>
 						&nbsp;&nbsp;&nbsp;<u>'.$MULTILANG_Tipo.'</u>: '.base64_decode($xml_importado->core_formulario_objeto[$PCO_i]->tipo).'
 						&nbsp;&nbsp;&nbsp;<u>'.$MULTILANG_Campo.'</u>: '.base64_decode($xml_importado->core_formulario_objeto[$PCO_i]->campo).'
+						</i></a>';
+				echo '</ul>';
+
+				//Recorre los core_evento_objeto
+				echo '<div class="btn btn-block btn-primary">'.$MULTILANG_EventosTit.'</div><ul class="list-group">';
+				for ($PCO_i=0;$PCO_i<$xml_importado->total_core_evento_objeto[0]->cantidad_objetos;$PCO_i++)
+					echo '<a class="list-group-item">
+						<span class="badge">ID '.$MULTILANG_Evento.': '.base64_decode($xml_importado->core_evento_objeto[$PCO_i]->id).'</span>
+						<b>'.$MULTILANG_Objeto.' '.base64_decode($xml_importado->core_evento_objeto[$PCO_i]->objeto).'</b><i>
+						&nbsp;&nbsp;&nbsp;<u>'.$MULTILANG_Evento.'</u>: '.base64_decode($xml_importado->core_evento_objeto[$PCO_i]->evento).'
 						</i></a>';
 				echo '</ul>';
 
@@ -3483,6 +3584,7 @@ function FrmAutoRun()
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="det'.$registro["id"].'" id="det'.$registro["id"].'">
 												<input type="hidden" name="PCO_Accion" value="editar_formulario">
+												<input type="Hidden" name="popup_activo" value="">
 												<input type="hidden" name="formulario" value="'.$registro["id"].'">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["tabla_datos"].'">
                                                 <a class="btn btn-default btn-xs" href="javascript:document.det'.$registro["id"].'.submit();"><i class="fa fa-list-alt"></i> '.$MULTILANG_FrmCamposAcciones.'</a>

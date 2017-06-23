@@ -61,7 +61,7 @@
 
 
 		<!-- Modal para mensajes generales -->
-		<div id="PCO_Modal_Mensaje" class="modal fade">
+		<div id="PCO_Modal_Mensaje" class="modal fade oculto_impresion">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -80,7 +80,7 @@
 
 
 		<!-- Modal para mensajes de carga -->
-		<div id="PCO_Modal_MensajeCargando" class="modal fade"  data-backdrop="static" data-keyboard="false">
+		<div id="PCO_Modal_MensajeCargando" class="modal fade oculto_impresion"  data-backdrop="static" data-keyboard="false">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -101,7 +101,7 @@
 		</div><!-- /.modal -->
 
 		<!-- Modal para mensajes de carga -->
-		<div id="PCO_Modal_MensajeCargandoSimple" class="modal" data-backdrop="false">
+		<div id="PCO_Modal_MensajeCargandoSimple" class="modal oculto_impresion" data-backdrop="false">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
 					<div class="modal-body" align="center">
@@ -206,7 +206,11 @@
             echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalTablaInforme").modal("show"); }); </script>';
         if (@$popup_activo=="InformeCondiciones")
             echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalCondicionesInforme").modal("show"); }); </script>';
+        //Habilita pesatanas activas en el popup activo
+        if (@$pestana_activa_editor=="eventos_objeto-tab")
+            echo '<script type="text/javascript"> $(window).load(function(){ $(\'.nav-tabs a[href="#eventos_objeto-tab"]\').tab(\'show\'); }); </script>';
     ?>
+
 
     <script language="JavaScript">
         //Carga los tooltips programados en la hoja.  Por defecto todos los elementos con data-toggle=tootip
@@ -233,6 +237,10 @@
                         var oTable'.$i.' = $("#'.$TablasDataTable[$i].'").dataTable(
                             {
                                 "scrollX": true,
+                                "bAutoWidth": true,
+                                "fnInitComplete": function() {
+                                this.fnAdjustColumnSizing(true);
+                                },
                                 "language": {
                                     "lengthMenu": "'.$MULTILANG_Mostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
                                     "zeroRecords": "Nothing found - sorry",
@@ -475,6 +483,14 @@
 					}
             ?>
         }); //Fin del document.ready
+    </script>
+
+    <!-- Menu Toggle Script -->
+    <script language="JavaScript">
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
     </script>
 
     <script language="JavaScript">

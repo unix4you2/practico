@@ -543,8 +543,7 @@
 	$MULTILANG_FrmCamposAcciones='Campos e ações';
 	$MULTILANG_FrmAdvDelForm='IMPORTANTE: Eliminar os usu&aacute;rios de formul&aacute;rio não pode acess&aacute;-lo novamente para operações de consulta ou de entrada de dados definidos. Você não pode desfazer esta operação. Isso tamb&eacute;m elimina alterações de design interno do formul&aacute;rio.\n'.$MULTILANG_Confirma;
 	$MULTILANG_FrmAdvScriptForm='Editar scripts (Avançado)';
-	$MULTILANG_FrmHlpFunciones='Todas as funções de JavaScript aqui definidos ser&aacute; inclu&iacute;do no formul&aacute;rio.<br>Se você precisa de alguns eventos adicionais ligados por botões ou qualquer objeto em forma este campo permitem que você defini-los.<br>FrmAutoRun função deve ser existe (ainda vazio) porque ele ser&aacute; executado automaticamente em cada carregamento de formul&aacute;rio.';
-    $MULTILANG_FrmHlpFinalFunciones='Este c&oacute;digo &eacute; uma parte de sua forma. Forma estreita e clic Salvar / Atualizar para aplicar as alterações.';
+	$MULTILANG_FrmHlpFunciones='Todas as funções de JavaScript aqui definidos ser&aacute; inclu&iacute;do no formul&aacute;rio.<br>FrmAutoRun função deve ser existe (ainda vazio) porque ele ser&aacute; executado automaticamente em cada carregamento de formul&aacute;rio.';
 	$MULTILANG_FrmCopiar='Faça uma c&oacute;pia';
 	$MULTILANG_FrmAdvCopiar='Uma nova c&oacute;pia deste objeto ser&aacute; criado. Você tem certeza?';
 	$MULTILANG_FrmMsjCopia='Agora você pode ir para editar o seu novo objeto. Uma c&oacute;pia foi maded como: ';

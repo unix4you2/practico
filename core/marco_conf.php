@@ -155,7 +155,7 @@
 											
 											<label for="ZonaHorariaNEW"><i class="fa fa-globe fa-2x fa-fw"></i> <?php echo $MULTILANG_ZonaHoraria; ?>:</label>
 											<div class="form-group input-group">
-												<select id="ZonaHorariaNEW" name="ZonaHorariaNEW" class="selectpicker" >
+												<select id="ZonaHorariaNEW" name="ZonaHorariaNEW" class="selectpicker " data-size=10 data-live-search=true>
 													<?php
 														$archivo_origen="inc/practico/zonas_horarias.txt";
 														$archivo = fopen($archivo_origen, "r");
@@ -412,7 +412,7 @@
 
 											<label for="Auth_TipoEncripcionNEW"><i class="fa fa-puzzle-piece fa-fw"></i> <?php echo $MULTILANG_AlgoritmoCripto; ?>:</label>
 											<div class="form-group input-group">
-												<select id="Auth_TipoEncripcionNEW" name="Auth_TipoEncripcionNEW" class="selectpicker" >
+												<select id="Auth_TipoEncripcionNEW" name="Auth_TipoEncripcionNEW" class="selectpicker"  data-size=10 data-live-search=true>
 													<option  <?php if ($Auth_TipoEncripcion=="plano") echo "SELECTED"; ?> value="plano">Texto plano/Plain text</option>
 													<option  <?php if ($Auth_TipoEncripcion=="md5") echo "SELECTED"; ?> value="md5">MD5</option>
 													<option  <?php if ($Auth_TipoEncripcion=="md4") echo "SELECTED"; ?> value="md4">MD4</option>

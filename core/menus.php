@@ -863,9 +863,9 @@ if ($PCO_Accion=="administrar_menu")
                     // Imprime la imagen
                     //Si tiene una URL trata la opcion como enlace estandar, sino como opcion de menu especial
                     if ($registro["url"]!="")
-                        echo '<a title="'.$registro["texto"].'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
+                        echo '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($registro["texto"]).'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
                     else
-                        echo '<a title="'.$registro["texto"].'" href="javascript:document.desk_'.$registro["id"].'.submit();">';
+                        echo '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($registro["texto"]).'" href="javascript:document.desk_'.$registro["id"].'.submit();">';
 
                     //Determina si la opcion es una imagen o no
                     $PCO_EsImagen=0;
@@ -875,7 +875,7 @@ if ($PCO_Accion=="administrar_menu")
                     if (!$PCO_EsImagen)
 						echo '<button class="btn btn-default">
 							<i class="'.$registro["imagen"].' fa-3x fa-fw"></i><br>
-							<span class="btn-xs">'.$registro["texto"].'</span>
+							<span class="btn-xs">'.PCO_ReemplazarVariablesPHPEnCadena($registro["texto"]).'</span>
 							</button>';
                     else
 						echo '<img src="'.$registro["imagen"].'" border="0" />';
@@ -928,9 +928,9 @@ if ($PCO_Accion=="administrar_menu")
                                 }
                             //Si tiene una URL trata la opcion como enlace estandar, sino como opcion de menu especial
                             if ($registro_opciones_acordeon["url"]!="")
-                                echo '<a title="'.$registro_opciones_acordeon["texto"].'" href="'.$registro_opciones_acordeon["url"].'" target="'.$registro_opciones_acordeon["destino"].'">';
+                                echo '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($registro_opciones_acordeon["texto"]).'" href="'.$registro_opciones_acordeon["url"].'" target="'.$registro_opciones_acordeon["destino"].'">';
                             else
-                                echo '<a title="'.$registro_opciones_acordeon["texto"].'" href="javascript:document.acorde_'.$registro_opciones_acordeon["id"].'.submit();">';
+                                echo '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($registro_opciones_acordeon["texto"]).'" href="javascript:document.acorde_'.$registro_opciones_acordeon["id"].'.submit();">';
 
 							//Determina si la opcion es una imagen o no
 							$PCO_EsImagen=0;
@@ -939,7 +939,7 @@ if ($PCO_Accion=="administrar_menu")
 							//Si no detecta ninguna extension de archivo de imagen entonces pone boton en bootstrap
 							if (!$PCO_EsImagen)
                             echo '<button type="button" class="btn btn-default btn-outline"><i class="'.$registro_opciones_acordeon["imagen"].' fa-fw"></i>
-                                    <span class="btn-xs">'.$registro_opciones_acordeon["texto"].'</span>
+                                    <span class="btn-xs">'.PCO_ReemplazarVariablesPHPEnCadena($registro_opciones_acordeon["texto"]).'</span>
                                     </button>';
 							else
 								echo '<img src="'.$registro_opciones_acordeon["imagen"].'" border="0" />';

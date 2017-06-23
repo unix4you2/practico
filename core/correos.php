@@ -141,8 +141,8 @@ function PCO_EnviarCorreo($remitente,$destinatario,$asunto,$cuerpo_mensaje,$dest
 	{
 		global $texto_prefijo_correo,$texto_posfijo_correo,$NombreRAD,$PCOVAR_ProvedorSMTP,$MULTILANG_Usuario;
 		
-		//Usa el proveedor interno del servidor:  Sendmail, Postfix, etc.
-		if ($PCOVAR_ProvedorSMTP=="Interno")
+		//Usa el proveedor interno del servidor:  Sendmail, Postfix, etc. cuando asi esta definido o cuando no existe uno definido
+		if ($PCOVAR_ProvedorSMTP=="Interno" || @$PCOVAR_ProvedorSMTP=="")
 			{
 				//para el env�o en formato HTML
 				$headers = "MIME-Version: 1.0\n";
@@ -160,7 +160,7 @@ function PCO_EnviarCorreo($remitente,$destinatario,$asunto,$cuerpo_mensaje,$dest
 		if ($PCOVAR_ProvedorSMTP=="SendGrid")
 			{
 				
-				$PCOVAR_APIKeySendGrid="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";
+				$PCOVAR_APIKeySendGrid="XXXXX"; //Tomar este valor desde configuraciones
 				//Pendiente:  parametrizar el envio de mensajes de solo texto si se desea.
 
 				// REVISAR ESTE COMPOSER require 'vendor/autoload.php';

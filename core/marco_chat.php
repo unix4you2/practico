@@ -42,7 +42,7 @@
 
             //Presenta la lista de usuarios
             @$PCO_InformesDataTable.="TablaUsuariosChat|"; //Agrega la tabla a la lista de DataTables para ser convertida
-            echo '<hr><table class="table table-condensed table-hover btn-xs table-responsive  table-unbordered  table-striped " id="TablaUsuariosChat">
+            echo '<hr><table width="100%" class="table table-condensed table-hover btn-xs table-responsive  table-unbordered  table-striped " id="TablaUsuariosChat">
 							<thead>
 								<tr>
 									<th valign=middle align=center  bgcolor=darkgray>

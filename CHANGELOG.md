@@ -7,6 +7,88 @@
             |___/ 
 ```
 
+## Versión 17.7 (2017-07-02)
+* Added: Posibilidad de seleccionar el tema grafico para el framework gracias a bootswatch
+* Enhan: Tema predeterminado de bootstrap es ahora tomado desde el archivo optimizado
+* Enhan: Eliminados archivos innecesarios de bootstrap sobre produccion.  Se dejan solo los optimizados.
+* Added: Creada funcion PCO_BuscarErroresSintaxisPHP(path_archivo) que permite evaluar el codigo realizado en modulos externos a Practico y creados por el programador, de manera que se pueda validar la sintaxis de un archivo antes de ser incluido en la ejecucion.  Retorna 0 si no hay errores o 1 si hay errores de sintaxis en el archivo.
+* Added: Creadas funciones propias para la captura de errores y excepciones de PHP durante y presentacion de los detalles al usuario cuando se encuentra activado el modo de depuracion.
+* Added: Aquellos botones tipo comando JavaScript agregados a los informes pueden ahora transportar sobre JavaScript el valor de las variables de identificador de registro mediante el formulario document.FRMBASEINFORME.PCO_Valor.value
+* Enhan: El sistema de monitoreo se simplifica para presentar los embebidos sin su direccion y titulo mas pequeno.
+* Enhan: Elementos de formulario marcados como fila unica ahora son maquetados dentro de una tabla al 100% del ancho del formulario.
+* Enhan: Eliminada la impresión del título de formulario en funciones de ImprimirMarco.
+* Fixed: Clonación de informes presenta correctamente el ID del nuevo informe clonado.
+* Enhan: Las condiciones y campos en informes ahora soportan más de una variable PHP.  Para esto se debe recordar que la sintaxis es mediante la oficial de PHP encerrada entre llaves y comenzando por signo pesos: {$ variable}.  Cualquier informe donde se relacionen las variables PHP simplemente con signo pesos al comienzo debe ser actualizado previamente a la sintaxis sugerida para garantizar la compatibilidad.
+* Added: Las etiquetas en opciones de menu ahora soportan variables PHP bajo la notación oficial de llaves y empezando por signo pesos.  Dando mayor compatibilidad hacia aplicaciones que soportan multiples idiomas. 
+* Added: Las etiquetas en campos de formulario ahora soportan variables PHP bajo la notación oficial de llaves y empezando por signo pesos.  Dando mayor compatibilidad hacia aplicaciones que soportan multiples idiomas.  Esto incluye además las etiquetas o contenidos fijos que puedan agregarse sobre controles HTML y botones de comando facilitando el diseño de aplicaciones multiligue.
+* Enhan: Marcos para presentacion de contenidos emergentes son ahora ocultados en formatos de impresion
+* Enhan: El marco superior que contiene la barra de titulo, logo y dropdown ha sido marcado con el id BarraNavegacionSuperior para facilitar operaciones desde JS
+* Enhan: Simplificados los estilos de la barra de navegacion izquierda para facilitar su compatibilidad con el nuevo disenador de formularios.
+* Added: Creada una nueva seccion (marco) llamado PCODIV_SeccionLateralFlotante al que se puede insertar contenidos dinamicamente y que puede ser visualizada mediante triggers al elemento $("#menu-toggle").click() o mediante las funciones PCOJS_OcultarBarraFlotanteIzquierda, PCOJS_VerBarraFlotanteIzquierda o PCOJS_AlternarBarraFlotanteIzquierda
+* Added: Mejorada la edicion de formularios.  Ahora se permite realizar algunas operaciones en caliente sobre los campos.
+* Enhan: Se mueven las funciones de cambios de estado para los campos hacia el archivo de ajax.php facilitando los procesos de depuracion.
+* Enhan: Mejorada la búsqueda en Zonas horarias para el panel de configuración. 
+* Enhan: Disenador de formularios se presenta ahora en pantalla completa mostrando el tamaño real final del objeto.  Su edición de elementos se hace ahora desde la barra deslizante izquierda.
+* Enhan: Mejorada la selección de algoritmos de encripción para autenticación por LDAP el panel de configuración. 
+* Enhan: Mejorada la selección de algoritmos de encripción para autenticación federada en el panel de parámetros. 
+* Added: Agregadas las funciones "bAutoWidth": true, "fnInitComplete": function() { this.fnAdjustColumnSizing(true); },  a todas las tablas de datos para facilitar su redimensionamiento cuando cambia de tamano la ventana activa.
+* Fixed: Eliminacion de formularios tiene en cuenta el eliminar los eventos JS asociados a sus elementos internos.
+* Fixed: Eliminacion individual de controles tiene en cuenta el eliminar los eventos JS asociados a este.
+* Enhan: La edicion de scripts JS asociados al formulario se hacen directamente sobre este, permitiendo actualizar sobre el mismo editor sin necesidad de cerrar la ventana y actualizar todo el formulario. 
+* Fixed: Por defecto cuando no se especifica un proveedor SMTP predeterminado para el envío de mensajes el sistema tomará por defecto el proveedor Interno (Sendmail, Postfix, etc.)
+* Fixed: Para aquellos desarrolladores que eliminan las funciones FrmAutoRun de sus formularios ahora el sistema detecta ese escenario y solo llama a la funcion FrmAutoRun cuando en realidad existe.
+* Added: La clonación en línea y mediante archivos XML de formularios incluye ahora los eventos JS internos definidos en cada control.
+
+## Versión 17.4 (2017-04-02)
+Added: Ahora los formularios con campos marcados como obligatorios realizan su proceso de validación en caliente del lado del cliente. El proceso de validación del lado del servidor continúa para efectos de garantizar integridad de los datos. Los usuarios verán una ventana emergente de manera automática cuando les falte algún campo por diligenciar indicando además su nombre.
+Added: Posibilidad de seleccionar el idioma en la ventana de login de manera independiente para cada usuario. Configurable desde el panel de control, sección de idioma. Esto crea una variable de sesión llamada $PCOSESS_IdiomaUsuario con lo seleccionado por éste que podrá ser utilizada posteriormente por el programador.
+Added: El sistema de monitoreo permite agregar monitores donde se requiere medir rangos especificos. El valor a comparar entre el rango minimo y maximo puede ser obtenido mediante comandos SQL y Shell que deberan retornar unicamente valores enteros.
+Added: Actualizacion del plugin DataTables a la versión 1.10.13 y en versiones optimizadas de archivos (minimizadas)
+Fixed: Cierre adecuado de los pie de pagina en tablas de informes al momento de ser embebidos.
+Added: Ayudas en adición de monitores.
+Added: Visor del sistema de monitoreo permite configurar una página para que sea recurrente y se actualice sólo esta, en lugar de rotar por todas las páginas definidas.
+Added: Scripts especificos de instalacion sobre SQL Server bajo conexiones DBLib
+Fixed: Módulo de gestion de archivos ahora distingue entre usuarios definidos como administratores en el panel de configuración para agregar los recursos.
+Added: Compatibilidad MariaDB y MySQL 5.7 en clausulas order by cuando sql_mode=only_full_group_by se agregan los campos de id al order by para evitar conflictos con esta nueva configuración.
+Fixed: Login automático desde el panel de desarrollo hacia gestores de bases de datos configurados bajo SQL Server y drivers dblib.
+Enhan: Ahora la funcion ejecutar_sql_unaria() retorna el arreglo asociativo fetch(PDO::FETCH_ASSOC) correspondiente al resultado de la ejecucion en caso de ser requerido.
+Added: Nueva funcion obtener_ultimo_id_insertado($ConexionPDO) devuelve el id de registro del último registro insertado por medio de la conexion.
+Added: Los objetos de tipo botón de comando sobre formularios soportan ahora la propiedad id_html para ser manipulables desde JS y crear eventos.
+Fixed: #78 Ahora durante el diseño de informes se inhabilita la adición de operadores lógicos cuando se ha hecho cambios en alguno de los campos de expresiones u operadores de comparación para evitar errores de sintaxis posteriores sobre SQL.
+Added: Ahora cuando se cuenta con proveedores OAuth registrados se puede configurar para que la pantalla de acceso al sistema los presente de manera predeterminada en lugar del acceso por autenticación nativa.
+Fixed: Ahora no se generan múltiples funciones de validación en los casos donde se proyectos subformularios con campos obligatorios. Sólo es generada una función para todos. La variable PCOJS_ListaCamposValidar queda con el arreglo de campos a validar en caso que se requiera intervenir.
+Enhan: Los sensores por rango para el sistema de monitoreo permiten evaluar ahora valores fijos. Si el valor mínimo y máximo de un valor de sensor en rango son iguales entonces el sensor cambiará el modo a evaluación de igualdad del valor.
+Added: Se agrega posibilidad de detectar el estado de conexion del cliente (sin importar si es PC, movil, tableta, etc) y presentar un mensaje para impedir la actividad del sistema hasta que se retorne la conexion. Opera en ambas vías, tanto para cuando el cliente tiene problemas de conectividad como cuando el servidor donde corre el sistema no puede responder. Para probar simplemente desconecte su red y espere el cambio de estado, luego conecte la red y vera que es restablecido el sistema. El tiempo preestablecido para estos chequeos es de 5 segundos, no personalizables por ahora.
+NOTA: Personas que hayan aplicado parches 17.3-Actualizacion_XXX pueden observar mensajes de error al ejecutar esta actualizacion derivados de scripts SQL previamente ejecutados.
+
+## Versión 17.3 (2017-03-05)
+* Added: Sistema de autoregistro en la plataforma permite ahora a los usuarios crear sus propias credenciales y verificarlas por correo
+* Added: Ahora se permite activar o desactivar el código captcha durante el login por medio del panel de configuración
+* Added: Panel de configuración de la herramienta ahora permite definir cuándo tener activos los enlaces de recuperar contraseña y auto-reistro cuando el motor de autenticación utilizado es el interno.
+* Added: Vagrantfile lista para su uso con Vagrant
+* Added: Modulo simulador de dispositivos moviles sobre /mod/pmobile puede ser llamado con el parametro URL (entre otros como Ancho y Alto) para simular su presentacion sobre un dispositivo movil.
+* Added: Posibilidad de automatizar casi 100 tipos de eventos JAvaScript diferentes sobre controles de formulario, ventanas, marcos, batería de dispositivos, ratón, etc.
+* Fixed: Imagen de logo social inexistente es retirada de la ventana de login. Mejorada maquetación.
+* Enhan: Ahora la etiqueta de boton de inicio con sesion de Práctico contiene el nombre de la aplicación configurada por el usuario.
+* Added: Ahora los campos de tipo texto, texto largo y tipo contraseñas soportan el uso de etiquetas placeholder desde el diseño del formulario
+* Added: Ahora los campos pueden especificar si se desea o no presentar la etiqueta o label sobre el formulario
+* Added: Los objetos tipo boton de comando en formularios ahora pueden agregar su propio ID de html usando la propiedad oculta de campo de base de datos
+* Fixed: Ahora se muestra mensaje de error cuando no se cuenta con un Driver de bases de datos válido
+* Fixed: Compatibilidad para PHP 7. Error en variables $$vble["campo"] ahora son cambiadas a ${$vble["campo"]}
+* Fixed: Problema con valor predeterminado sobre la tabla core_chat, campo sent. Es dejado sin valor predeterminado.
+* Fixed: Compatibilidad PHP 7. Reemplazadas funciones deprecated de ereg_replace (Sintaxis POSIX) por preg_replace (Sintaxis PCRE)
+* Fixed: Compatibilidad PHP 7. BarCode Coder Library (BCC Library). Reemplazo de variables $$
+* Fixed: Agregadas definiciones de campos y tablas nuevas en def_basedatos.php
+* Enhan: Ampliada longitud del campo de accion sobre las auditorías para permitir hacer log completo y captura de los eventos SQL
+* Added: Modo de depuración del SQL permite almacenar sobre auditoría todas las operaciones enviadas al motor de base de datos.
+* Added: Nueva propiedad de ID_HTML permite identificar de manera única los elementos agregados al formulario. Todos los valores de campo en instalaciones existentes son transferidos automáticamente a este nuevo campo para efectos de compatibilidad. La funcionalidad genera además un marco contenedor invisible llamado PCOContenedor_xxxxxx con el id html del objeto para efectos de poder realizar manipulaciones en caliente del árbol DOM y programar eventos a cada elemento. Se excluyen controles RadioButton, CheckBox
+* Fixed: Mejora a las funciones para recuperación de variables globales en PHP
+* Enhan: Se evitan mensajes de warning durante tiempo de instalación.
+* Enhan: Durante la edición del nombre de campo en un control de formulario (desde la lista o manual) se asigna automáticamente el valor al campo de ID_HTML para efectos de mantener uniformidad en los controles y unicidad para sus eventos. Si se requiere un ID_HTML diferente al nombre del campo entonces se debería realizar su edición posterior.
+* Added: Actualizada la versión de Font-Awesome de 4.6.1 a 4.7
+* Added: Actualizada la versión de PMyDB a 17.3 con mejoras sobre múltiples motores, temas y dependencias bootstrap eliminadas.
+* Added: Actualizado el editor ACE a version 1.2.6
+
 ## Versión 16.5 (2016-05-29)
 * Added: Posibilidad de agregar múltiples conexiones a diferentes servidores y motores de bases de datos al mismo tiempo para realizar operaciones independientes en cada una mediante su llamado como $NombreConexion en funciones personalizadas.
 * Added: Sistema automático de réplica de operaciones sobre múltiples servidores y motores de bases de datos.
