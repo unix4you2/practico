@@ -78,6 +78,7 @@ LogCambios="
 * Fixed: Para aquellos desarrolladores que eliminan las funciones FrmAutoRun de sus formularios ahora el sistema detecta ese escenario y solo llama a la funcion FrmAutoRun cuando en realidad existe.
 * Added: La clonación en línea y mediante archivos XML de formularios incluye ahora los eventos JS internos definidos en cada control.
 * Added: Agregados botones para edicion rápida de eventos en controles que tengan alguno creado.
+* Enhan: Se agrega forzado para evitar cache y hacer la actualizacion del archivo incluido de JS propio de Practico cada que este tenga cambios.
 
 "
 
