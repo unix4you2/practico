@@ -49,10 +49,26 @@
     <?php
         //Define el tema por defecto para versiones previas a 17.4-001
         if ($Tema_PracticoFramework=="")  $Tema_PracticoFramework="bootstrap";
-        echo '<link href="inc/bootstrap/css/tema_'.$Tema_PracticoFramework.'.min.css" rel="stylesheet"  media="screen">';
-        //Si el tema es el predeterminado conserva efectos de controles en versiones previas a 17.4-001
-        if ($Tema_PracticoFramework=="bootstrap")
-            echo '<link href="inc/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"  media="screen">';
+        
+        if ($Tema_PracticoFramework!="material")
+            {
+                echo '<link href="inc/bootstrap/css/tema_'.$Tema_PracticoFramework.'.min.css" rel="stylesheet"  media="screen">';
+                //Si el tema es el predeterminado conserva efectos de controles en versiones previas a 17.4-001
+                if ($Tema_PracticoFramework=="bootstrap")
+                    echo '<link href="inc/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"  media="screen">';
+            }
+        else
+            {
+                echo '<link href="inc/bootstrap/css/tema_bootstrap.min.css" rel="stylesheet"  media="screen">';
+                echo '
+                  <!-- Material Design fonts -->
+                  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+                  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+                  <!-- Bootstrap Material Design -->
+                  <link rel="stylesheet" type="text/css" href="inc/bootstrap-material-design/css/bootstrap-material-design.css">
+                  <link rel="stylesheet" type="text/css" href="inc/bootstrap-material-design/css/ripples.min.css">';
+            }
     ?>
 
     <!-- librerías opcionales que activan el soporte de HTML5 para IE8 -->

@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno="17"
-VersionCompatibleMes="4"
+VersionCompatibleAno=""
+VersionCompatibleMes=""
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno="17"
-VersionFinalMes="7"
+VersionFinalAno=""
+VersionFinalMes=""
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
@@ -15,28 +15,16 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 index.php
-core/ajax.php
 core/comunes.php
-core/correos.php
-core/objetos.php
-core/informes.php
-core/formularios.php
-core/monitoreo.php
 core/marco_abajo.php
-core/marco_chat.php
 core/marco_arriba.php
 core/marco_arriba_bs.php
-core/marco_nav.php
-core/marco_navizq.php
 core/marco_conf.php
-core/marco_param.php
-core/menus.php
-core/ws_nucleo.php
-inc/bootstrap/css/plugins/*
-inc/bootstrap/js/practico*
+inc/bootstrap-material-design/*
 mod/pcoder/index.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
+inc/bootstrap/js/practico*
 "
 
 #[ArchivosObligatorios] Separados por espacio
@@ -47,38 +35,11 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Posibilidad de seleccionar el tema grafico para el framework gracias a bootswatch
-* Enhan: Tema predeterminado de bootstrap es ahora tomado desde el archivo optimizado
-* Enhan: Eliminados archivos innecesarios de bootstrap sobre produccion.  Se dejan solo los optimizados.
-* Added: Creada funcion PCO_BuscarErroresSintaxisPHP(path_archivo) que permite evaluar el codigo realizado en modulos externos a Practico y creados por el programador, de manera que se pueda validar la sintaxis de un archivo antes de ser incluido en la ejecucion.  Retorna 0 si no hay errores o 1 si hay errores de sintaxis en el archivo.
-* Added: Creadas funciones propias para la captura de errores y excepciones de PHP durante y presentacion de los detalles al usuario cuando se encuentra activado el modo de depuracion.
-* Added: Aquellos botones tipo comando JavaScript agregados a los informes pueden ahora transportar sobre JavaScript el valor de las variables de identificador de registro mediante el formulario document.FRMBASEINFORME.PCO_Valor.value
-* Enhan: El sistema de monitoreo se simplifica para presentar los embebidos sin su direccion y titulo mas pequeno.
-* Enhan: Elementos de formulario marcados como fila unica ahora son maquetados dentro de una tabla al 100% del ancho del formulario.
-* Enhan: Eliminada la impresión del título de formulario en funciones de ImprimirMarco.
-* Fixed: Clonación de informes presenta correctamente el ID del nuevo informe clonado.
-* Enhan: Las condiciones y campos en informes ahora soportan más de una variable PHP.  Para esto se debe recordar que la sintaxis es mediante la oficial de PHP encerrada entre llaves y comenzando por signo pesos: {$ variable}.  Cualquier informe donde se relacionen las variables PHP simplemente con signo pesos al comienzo debe ser actualizado previamente a la sintaxis sugerida para garantizar la compatibilidad.
-* Added: Las etiquetas en opciones de menu ahora soportan variables PHP bajo la notación oficial de llaves y empezando por signo pesos.  Dando mayor compatibilidad hacia aplicaciones que soportan multiples idiomas. 
-* Added: Las etiquetas en campos de formulario ahora soportan variables PHP bajo la notación oficial de llaves y empezando por signo pesos.  Dando mayor compatibilidad hacia aplicaciones que soportan multiples idiomas.  Esto incluye además las etiquetas o contenidos fijos que puedan agregarse sobre controles HTML y botones de comando facilitando el diseño de aplicaciones multiligue.
-* Enhan: Marcos para presentacion de contenidos emergentes son ahora ocultados en formatos de impresion
-* Enhan: El marco superior que contiene la barra de titulo, logo y dropdown ha sido marcado con el id BarraNavegacionSuperior para facilitar operaciones desde JS
-* Enhan: Simplificados los estilos de la barra de navegacion izquierda para facilitar su compatibilidad con el nuevo disenador de formularios.
-* Added: Creada una nueva seccion (marco) llamado PCODIV_SeccionLateralFlotante al que se puede insertar contenidos dinamicamente y que puede ser visualizada mediante triggers al elemento $("#menu-toggle").click() o mediante las funciones PCOJS_OcultarBarraFlotanteIzquierda, PCOJS_VerBarraFlotanteIzquierda o PCOJS_AlternarBarraFlotanteIzquierda
-* Added: Mejorada la edicion de formularios.  Ahora se permite realizar algunas operaciones en caliente sobre los campos.
-* Enhan: Se mueven las funciones de cambios de estado para los campos hacia el archivo de ajax.php facilitando los procesos de depuracion.
-* Enhan: Mejorada la búsqueda en Zonas horarias para el panel de configuración. 
-* Enhan: Disenador de formularios se presenta ahora en pantalla completa mostrando el tamaño real final del objeto.  Su edición de elementos se hace ahora desde la barra deslizante izquierda.
-* Enhan: Mejorada la selección de algoritmos de encripción para autenticación por LDAP el panel de configuración. 
-* Enhan: Mejorada la selección de algoritmos de encripción para autenticación federada en el panel de parámetros. 
-* Added: Agregadas las funciones "bAutoWidth": true, "fnInitComplete": function() { this.fnAdjustColumnSizing(true); },  a todas las tablas de datos para facilitar su redimensionamiento cuando cambia de tamano la ventana activa.
-* Fixed: Eliminacion de formularios tiene en cuenta el eliminar los eventos JS asociados a sus elementos internos.
-* Fixed: Eliminacion individual de controles tiene en cuenta el eliminar los eventos JS asociados a este.
-* Enhan: La edicion de scripts JS asociados al formulario se hacen directamente sobre este, permitiendo actualizar sobre el mismo editor sin necesidad de cerrar la ventana y actualizar todo el formulario. 
-* Fixed: Por defecto cuando no se especifica un proveedor SMTP predeterminado para el envío de mensajes el sistema tomará por defecto el proveedor Interno (Sendmail, Postfix, etc.)
-* Fixed: Para aquellos desarrolladores que eliminan las funciones FrmAutoRun de sus formularios ahora el sistema detecta ese escenario y solo llama a la funcion FrmAutoRun cuando en realidad existe.
-* Added: La clonación en línea y mediante archivos XML de formularios incluye ahora los eventos JS internos definidos en cada control.
-* Added: Agregados botones para edicion rápida de eventos en controles que tengan alguno creado.
-* Enhan: Se agrega forzado para evitar cache y hacer la actualizacion del archivo incluido de JS propio de Practico cada que este tenga cambios.
+* Added: Tema gráfico basado en Material Design de Google 0.5.10 para Bootstrap
+* Added: Marco de advertencia para aquellos usuarios que no se encuentren con JavaScript habilitado en sus navegadores 
+* Added: Los siguientes elementos soportan ahora variables en notación {$PHP} para facilitar el diseño de aplicaciones multi-idioma: botones en la barra de acciones de formulario, titulos de formulario, titulos de informes, titulos y textos de ayuda en formularios, descripción de informes, todos los titulos y textos de ayuda para controles de formulario, textos de confirmación en botones de comando, textos de confirmación sobre botones de acción en informes.
+
+
 
 "
 

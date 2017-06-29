@@ -3099,7 +3099,7 @@ function selector_iconos_awesome()
                 $salida.= '<span class="input-group-addon">';
                 if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitValorUnico.'</b><br>'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto"  title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto"  title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
             //Si habia algun indicador adicional del campo cierra los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
@@ -3220,7 +3220,7 @@ function selector_iconos_awesome()
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
             //Si habia algun indicador adicional del campo cierra los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
@@ -3415,7 +3415,7 @@ function selector_iconos_awesome()
 
 			// Muestra indicadores de obligatoriedad o ayuda
 			if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto"  title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto"  title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+			if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto"  title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
 			
 			//Activa booleana de existencia de tipo de campo para evitar doble inclusion de javascript
 			$existe_campo_textoformato=1;
@@ -3652,7 +3652,7 @@ function selector_iconos_awesome()
                 if ($registro_campos["ajax_busqueda"] == "1") $salida.= '<a  data-toggle="tooltip" data-html="true"  data-placement="top" title="<b>'.$MULTILANG_FrmActualizaAjax.'</b>" class="btn btn-success btn-xs" href="javascript:PCO_ObtenerListaOpciones_'.$registro_campos["campo"].'();"><i class="fa fa-refresh"></i></a>&nbsp;&nbsp;&nbsp;';
                 if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitValorUnico.'</b><br>'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true" data-placement="auto" title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true" data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
             //Cierra marco del control de datos
@@ -3939,7 +3939,7 @@ $('#SampleElement').load('YourURL');
                 // Muestra indicadores de obligatoriedad o ayuda
                 if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitValorUnico.'</b><br>'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
             //Si habia algun indicador adicional del campo cierra los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
@@ -4086,7 +4086,7 @@ $('#SampleElement').load('YourURL');
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
             //Si habia algun indicador adicional del campo cierra los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
@@ -4169,7 +4169,7 @@ $('#SampleElement').load('YourURL');
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
             //Si habia algun indicador adicional del campo cierra los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
@@ -4295,7 +4295,7 @@ $('#SampleElement').load('YourURL');
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
             //Si habia algun indicador adicional del campo cierra los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
@@ -4434,7 +4434,7 @@ $('#SampleElement').load('YourURL');
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$registro_campos["ayuda_titulo"].'</b><br>'.$registro_campos["ayuda_texto"].'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
             //Si habia algun indicador adicional del campo cierra los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '</span>';
@@ -4503,7 +4503,7 @@ $('#SampleElement').load('YourURL');
 			$cadena_confirmacion_accion_pos="";
 			if (@$registro_campos["confirmacion_texto"]!="")
 				{
-					$cadena_confirmacion_accion_pre=" if (confirm('".$registro_campos["confirmacion_texto"]."')) {";
+					$cadena_confirmacion_accion_pre=" if (confirm('".PCO_ReemplazarVariablesPHPEnCadena($registro_campos["confirmacion_texto"])."')) {";
 					$cadena_confirmacion_accion_pos=" } else {} ";
 				}
 
@@ -4718,11 +4718,11 @@ $('#SampleElement').load('YourURL');
                     }
 				
 				// Crea ventana si aplica para el form
-				if ($en_ventana) abrir_ventana($registro_formulario["titulo"].$ComplementoTituloFormulario,'panel-primary','',$barra_herramientas_mini);
+				if ($en_ventana) abrir_ventana(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["titulo"]).$ComplementoTituloFormulario,'panel-primary','',$barra_herramientas_mini);
 				// Muestra ayuda en caso de tenerla
 				$imagen_ayuda='fa fa-info-circle fa-5x texto-azul';
 				if ($registro_formulario["ayuda_titulo"]!="" || $registro_formulario["ayuda_texto"]!="")
-					mensaje($registro_formulario["ayuda_titulo"],$registro_formulario["ayuda_texto"],'100%',$imagen_ayuda,'alert alert-info alert-dismissible');
+					mensaje(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["ayuda_titulo"]),PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["ayuda_texto"]),'100%',$imagen_ayuda,'alert alert-info alert-dismissible');
 
 				//Inicia el formulario de datos
 				echo '<div id="MARCO_IMPRESION">';
@@ -5064,7 +5064,7 @@ $('#SampleElement').load('YourURL');
                             $cadena_confirmacion_accion_pos="";
 							if ($registro_botones["confirmacion_texto"]!="")
 								{
-									$cadena_confirmacion_accion_pre=" if (confirm('".$registro_botones["confirmacion_texto"]."')) {";
+									$cadena_confirmacion_accion_pre=" if (confirm('".PCO_ReemplazarVariablesPHPEnCadena($registro_botones["confirmacion_texto"])."')) {";
 									$cadena_confirmacion_accion_pos=" } else {} ";
 								}
 
@@ -5073,7 +5073,7 @@ $('#SampleElement').load('YourURL');
                             
 							//Si no se especifica un estilo para el boton entonces se usa el predeterminado
                             $estilo_basico_boton="btn btn-default";
-                            echo '<a class="'.$estilo_basico_boton.' '.$registro_botones["estilo"].'" '.@$cadena_javascript.'>'.$registro_botones["titulo"].'</a>';
+                            echo '<a class="'.$estilo_basico_boton.' '.$registro_botones["estilo"].'" '.@$cadena_javascript.'>'.PCO_ReemplazarVariablesPHPEnCadena($registro_botones["titulo"]).'</a>';
 
                             echo '&nbsp;&nbsp;'; //Agrega espacio temporal entre controles
 						}
@@ -5250,7 +5250,7 @@ function generar_botones_informe($informe)
 				$cadena_confirmacion_accion_pos="";
 				if ($registro_botones["confirmacion_texto"]!="")
 					{
-						$cadena_confirmacion_accion_pre=" if (confirm('".$registro_botones["confirmacion_texto"]."')) {";
+						$cadena_confirmacion_accion_pre=" if (confirm('".PCO_ReemplazarVariablesPHPEnCadena($registro_botones["confirmacion_texto"])."')) {";
 						$cadena_confirmacion_accion_pos=" } else {} ";
 					}
 				
@@ -5676,7 +5676,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 						if (!$embebido)
 							echo '<div align=center><button type="Button" onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home fa-fw"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 
-						$TituloVentanaInforme=$Nombre_Aplicacion.' - '.$registro_informe["titulo"];
+						$TituloVentanaInforme=$Nombre_Aplicacion.' - '.PCO_ReemplazarVariablesPHPEnCadena($registro_informe["titulo"]);
 						//Define si requiere o no boton de exportacion en la barra de titulo
 						if ($registro_informe["genera_pdf"]=='S' && $embebido!=1)
 							{
@@ -5692,7 +5692,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 						//Agrega la descripcion del informe en caso de contar con ella
 						if ($registro_informe["descripcion"]!='')
 							{
-								 mensaje('<i class="fa fa-flag fa-fw"></i>',$registro_informe["descripcion"], '', '', 'alert alert-success alert-dismissible');
+								 mensaje('<i class="fa fa-flag fa-fw"></i>',PCO_ReemplazarVariablesPHPEnCadena($registro_informe["descripcion"]), '', '', 'alert alert-success alert-dismissible');
 							}
 						
 					}

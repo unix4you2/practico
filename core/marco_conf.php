@@ -333,6 +333,7 @@
 													<option value="superhero" <?php if ($Tema_PracticoFramework=="superhero") echo "SELECTED"; ?> >SuperHero - The brave and the blue</option>
 													<option value="united" <?php if ($Tema_PracticoFramework=="united") echo "SELECTED"; ?> >United - Ubuntu orange and unique font</option>
 													<option value="yeti" <?php if ($Tema_PracticoFramework=="yeti") echo "SELECTED"; ?> >Yeti - A friendly foundation</option>
+													<option value="material" <?php if ($Tema_PracticoFramework=="material") echo "SELECTED"; ?> >Material Design - for BootStrap</option>
 												</select>
 												<span class="input-group-addon">
 													<a  href="#" data-toggle="tooltip" data-html="true"  title="Tema bootstrap / Bootstrap theme"><i class="fa fa-question-circle fa-fw text-info"></i></a>

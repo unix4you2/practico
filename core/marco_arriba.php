@@ -52,6 +52,13 @@
     include_once("core/marco_arriba_bs.php");
 ?>
 <body oncontextmenu="return false;" >
+    
+    <noscript>
+      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+        Your web browser must have JavaScript enabled in order for this application to display correctly.
+      </div>
+    </noscript>
+
     <!--Marco oculto para generacion de formularios y elementos dinamicos anidados -->
     <div id="PCODIV_FormulariosDinamicos" style="visibility: hidden; display: none;"></div>
 

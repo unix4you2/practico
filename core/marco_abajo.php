@@ -580,6 +580,20 @@
             </script> ';
 	?>
 
+	<?php
+	    //Carga tema de MaterialDesign cuando aplica
+        if ($Tema_PracticoFramework=="material")
+            {
+                echo '
+                    <script src="inc/bootstrap-material-design/js/material.min.js"></script>
+                    <script src="inc/bootstrap-material-design/js/ripples.min.js"></script>
+                
+                    <script language="JavaScript">
+                        $.material.init();
+                    </script>';
+            }
+	?>
+
     <?php
         // Estadisticas de uso anonimo con GABeacon
         $PrefijoGA='<img src="https://rastreador-visitas.appspot.com/';
