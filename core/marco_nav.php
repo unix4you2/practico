@@ -61,7 +61,7 @@
 		<?php 
 			//Agrega boton de retorno al inicio si la accion es diferente al escritorio
 			if ($PCO_Accion!="Ver_menu" && $PCOSESS_SesionAbierta)
-				echo '<a class="btn btn-success btn-xs" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i></a>';
+				echo '<a class="btn btn-success btn-xs" href="javascript:document.location=\'index.php\';"><i class="fa fa-home"></i></a>';
 		?>
 		<?php 
 			//Despliega opciones de configuracion

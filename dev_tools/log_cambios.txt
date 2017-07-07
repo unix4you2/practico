@@ -17,6 +17,7 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/marco_abajo.php
+core/marco_nav.php
 core/marco_arriba.php
 core/marco_arriba_bs.php
 core/marco_conf.php
@@ -24,6 +25,7 @@ inc/bootstrap-material-design/*
 mod/pcoder/index.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
+inc/bootstrap/css/*
 inc/bootstrap/js/practico*
 "
 
@@ -38,8 +40,9 @@ LogCambios="
 * Added: Tema gráfico basado en Material Design de Google 0.5.10 para Bootstrap
 * Added: Marco de advertencia para aquellos usuarios que no se encuentren con JavaScript habilitado en sus navegadores 
 * Added: Los siguientes elementos soportan ahora variables en notación {$PHP} para facilitar el diseño de aplicaciones multi-idioma: botones en la barra de acciones de formulario, titulos de formulario, titulos de informes, titulos y textos de ayuda en formularios, descripción de informes, todos los titulos y textos de ayuda para controles de formulario, textos de confirmación en botones de comando, textos de confirmación sobre botones de acción en informes.
-
-
+* Added: Tema gráfico Amelia.
+* Fixed: Corrección en aplicación de estilos gráficos para fondos de aplicación.
+* Enhan: Al hacer clic sobre el icono home de la barra superior se limpia cualquier contenido de la URL redireccionando al index.php
 
 "
 

@@ -50,15 +50,35 @@
 <?php
     // Incluye encabezados, estilos y demas del HEAD
     include_once("core/marco_arriba_bs.php");
+
+    //Segun el tema actual asigna la variable body-bg del tema al background de los elementos principales y escritorio
+    if ($Tema_PracticoFramework=="bootstrap") { $PCO_ColorFondoGeneral="#ffffff"; }
+    if ($Tema_PracticoFramework=="cerulean") { $PCO_ColorFondoGeneral="#ffffff"; }
+    if ($Tema_PracticoFramework=="cosmo") { $PCO_ColorFondoGeneral="#060606"; }
+    if ($Tema_PracticoFramework=="cyborg") { $PCO_ColorFondoGeneral="#060606"; }
+    if ($Tema_PracticoFramework=="darkly") { $PCO_ColorFondoGeneral="#222222"; }
+    if ($Tema_PracticoFramework=="flatly") { $PCO_ColorFondoGeneral="#2f324a"; }
+    if ($Tema_PracticoFramework=="journal") { $PCO_ColorFondoGeneral="#ffffff"; }
+    if ($Tema_PracticoFramework=="lumen") { $PCO_ColorFondoGeneral="#ffffff"; }
+    if ($Tema_PracticoFramework=="paper") { $PCO_ColorFondoGeneral="#ffffff"; }
+    if ($Tema_PracticoFramework=="readable") { $PCO_ColorFondoGeneral="#ffffff"; }
+    if ($Tema_PracticoFramework=="sandstone") { $PCO_ColorFondoGeneral="#1a221c"; }
+    if ($Tema_PracticoFramework=="simplex") { $PCO_ColorFondoGeneral="#fcfcfc"; }
+    if ($Tema_PracticoFramework=="slate") { $PCO_ColorFondoGeneral="#272b30"; }
+    if ($Tema_PracticoFramework=="spacelab") { $PCO_ColorFondoGeneral="#ffffff"; }
+    if ($Tema_PracticoFramework=="superhero") { $PCO_ColorFondoGeneral="#2b3e50"; }
+    if ($Tema_PracticoFramework=="united") { $PCO_ColorFondoGeneral="#ffffff"; }
+    if ($Tema_PracticoFramework=="yeti") { $PCO_ColorFondoGeneral="#2f2f2f"; }
+    if ($Tema_PracticoFramework=="amelia") { $PCO_ColorFondoGeneral="#108a93"; }
+    if ($Tema_PracticoFramework=="material") { $PCO_ColorFondoGeneral="#ffffff"; }
 ?>
-<body oncontextmenu="return false;" >
-    
+
+<body oncontextmenu="return false;"  style="background-color: <?php echo $PCO_ColorFondoGeneral; ?>;">
     <noscript>
       <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
         Your web browser must have JavaScript enabled in order for this application to display correctly.
       </div>
     </noscript>
-
     <!--Marco oculto para generacion de formularios y elementos dinamicos anidados -->
     <div id="PCODIV_FormulariosDinamicos" style="visibility: hidden; display: none;"></div>
 
@@ -86,7 +106,7 @@
 		?>
 
         <!-- CONTENIDO DE APLICACION -->
-        <div id="page-wrapper">  <!-- page-content-wrapper -->
+        <div id="page-wrapper" style="background-color: <?php echo $PCO_ColorFondoGeneral; ?>;">  <!-- page-content-wrapper -->
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
