@@ -23,6 +23,7 @@ core/marco_arriba_bs.php
 core/marco_conf.php
 inc/bootstrap-material-design/*
 mod/pcoder/index.php
+mod/fileman/elfinder/js/i18n/elfinder.es.js
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/bootstrap/css/*

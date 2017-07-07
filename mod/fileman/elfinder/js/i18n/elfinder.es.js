@@ -83,7 +83,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
 			'cmdhelp'      : 'Acerca de este software',
 			'cmdhome'      : 'Inicio',
 			'cmdinfo'      : 'Obtener información',
-			'cmdmkdir'     : 'Nueva arpeta',
+			'cmdmkdir'     : 'Nueva carpeta',
 			'cmdmkfile'    : 'Nuevo archivo de texto',
 			'cmdopen'      : 'Abrir',
 			'cmdpaste'     : 'Pegar',
@@ -288,4 +288,3 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
 		}
 	}
 }
-
