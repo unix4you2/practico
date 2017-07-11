@@ -152,6 +152,7 @@ CREATE TABLE core_formulario_objeto (
   valor_placeholder varchar(255) DEFAULT '',
   ocultar_etiqueta integer DEFAULT 0,
   id_html varchar(255) DEFAULT '',
+  validacion_extras varchar(255) DEFAULT '',
   PRIMARY KEY  (id)
 );
 

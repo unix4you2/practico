@@ -602,7 +602,11 @@
 	$MULTILANG_FrmTextoPlaceHolder='Eexto do espaço reservado';
 	$MULTILANG_FrmDesPlaceHolder='Um texto para mostrar no campo quando este não tem um valor que ajudar os usuários para saber o que deve entrar lá';
 	$MULTILANG_FrmOcultarEtiqueta='Ocultar o rótulo de campo na forma';
-	$MULTILANG_FrmIdHTML='Identificador único del objeto en HTML';
+	$MULTILANG_FrmIdHTML='Identificador único do objeto em HTML';
+	$MULTILANG_FrmValidaExtra='Caracteres adicionais permitidos';
+	$MULTILANG_FrmValidaAyuda='Qualquer personagem aqui será permitido para o validador';
+	$MULTILANG_FrmValida9='Números apenas 0-9 (inteiro)';
+	$MULTILANG_FrmValida10='Somente charset no campo de validação extra';
 
 	//Informes
 	$MULTILANG_InfErr1='Você deve especificar valores para os campos correspondentes a, pelo menos, uma s&eacute;rie de dados. <br> Se você não quer gerar um gr&aacute;fico, em seguida, você deve alterar o tipo de relat&oacute;rio a tabela de dados';

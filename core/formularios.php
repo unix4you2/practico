@@ -1014,23 +1014,40 @@ if ($PCO_Accion=="editar_formulario")
 						</div>
 
 						<div id='campo5' style="display:none;">
-                            <label for="validacion_datos"><?php echo $MULTILANG_FrmValida; ?>:</label>
-                            <div class="form-group input-group">
-                                <select  name="validacion_datos" class="form-control input-sm" >
-                                    <option value=""><?php $MULTILANG_Ninguno; ?></option>
-                                    <option value="numerico"      <?php if (@$registro_campo_editar["validacion_datos"]=="numerico")      echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida1; ?></option>
-                                    <option value="alfabetico"    <?php if (@$registro_campo_editar["validacion_datos"]=="alfabetico")    echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida2; ?></option>
-                                    <option value="alfanumerico"  <?php if (@$registro_campo_editar["validacion_datos"]=="alfanumerico")  echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida3; ?></option>
-                                    <option value="fecha"         <?php if (@$registro_campo_editar["validacion_datos"]=="fecha")         echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida4; ?></option>
-                                    <option value="fechaxanos"    <?php if (@$registro_campo_editar["validacion_datos"]=="fechaxanos")    echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida7; ?></option>
-                                    <option value="hora"          <?php if (@$registro_campo_editar["validacion_datos"]=="hora")          echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida5; ?></option>
-                                    <option value="fechahora"     <?php if (@$registro_campo_editar["validacion_datos"]=="fechahora")     echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida6; ?></option>
-									<option value="fechahorafull" <?php if (@$registro_campo_editar["validacion_datos"]=="fechahorafull") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida8; ?></option>
-                                </select>
-                                <span class="input-group-addon">
-                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmValidaDes; ?>"><i class="fa fa-question-circle icon-info"></i></a>
-                                </span>
-                            </div>
+						    
+						    
+                    		<div class="row">
+                    			<div class="col col-md-6">
+                                    <label for="validacion_datos"><?php echo $MULTILANG_FrmValida; ?>:</label>
+                                    <div class="form-group input-group">
+                                        <select  name="validacion_datos" class="form-control input-sm" >
+                                            <option value=""><?php $MULTILANG_Ninguno; ?></option>
+                                            <option value="numerico"        <?php if (@$registro_campo_editar["validacion_datos"]=="numerico")            echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida1;  ?></option>
+                                            <option value="numerico_entero" <?php if (@$registro_campo_editar["validacion_datos"]=="numerico_entero")     echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida9;  ?></option>
+                                            <option value="alfabetico"      <?php if (@$registro_campo_editar["validacion_datos"]=="alfabetico")          echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida2;  ?></option>
+                                            <option value="alfanumerico"    <?php if (@$registro_campo_editar["validacion_datos"]=="alfanumerico")        echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida3;  ?></option>
+                                            <option value="fecha"           <?php if (@$registro_campo_editar["validacion_datos"]=="fecha")               echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida4;  ?></option>
+                                            <option value="fechaxanos"      <?php if (@$registro_campo_editar["validacion_datos"]=="fechaxanos")          echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida7;  ?></option>
+                                            <option value="hora"            <?php if (@$registro_campo_editar["validacion_datos"]=="hora")                echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida5;  ?></option>
+                                            <option value="fechahora"       <?php if (@$registro_campo_editar["validacion_datos"]=="fechahora")           echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida6;  ?></option>
+        									<option value="fechahorafull"   <?php if (@$registro_campo_editar["validacion_datos"]=="fechahorafull")       echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida8;  ?></option>
+        									<option value="personalizado"   <?php if (@$registro_campo_editar["validacion_datos"]=="personalizado")       echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmValida10; ?></option>
+                                        </select>
+                                        <span class="input-group-addon">
+                                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmValidaDes; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
+                    			<div class="col col-md-6">
+                                    <label for="validacion_extras"><?php echo $MULTILANG_FrmValidaExtra; ?>:</label>
+                                    <div class="form-group input-group">
+                                        <input type="text" name="validacion_extras" class="form-control input-sm" value="<?php echo @$registro_campo_editar["validacion_extras"]; ?>">
+                                        <span class="input-group-addon">
+                                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmValidaAyuda; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                        </span>
+                                    </div>
+                    			</div>
+                    		</div>
 						</div>
 
 

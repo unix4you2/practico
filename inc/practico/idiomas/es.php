@@ -391,8 +391,8 @@
 	$MULTILANG_FrmPredeterminado='Valor predeterminado';
 	$MULTILANG_FrmDesPredeterminado='Establece el valor que aparece diligenciado automaticamente en el campo al abrir la vista del formulario.  Este valor puede estar en contravia de la validaci&oacute;n de datos.  Si se ingresan variables PHP definidas en la sesion entonces se tomara su valor.';
 	$MULTILANG_FrmValida='Validacion de datos';
-	$MULTILANG_FrmValida1='S&oacute;lo n&uacute;meros 0-9';
-	$MULTILANG_FrmValida2='S&oacute;lo letras A-Z';
+	$MULTILANG_FrmValida1='S&oacute;lo n&uacute;meros 0-9 (con decimales)';
+	$MULTILANG_FrmValida2='S&oacute;lo letras a-z A-Z (sin punto)';
 	$MULTILANG_FrmValida3='Letras y n&uacute;meros';
 	$MULTILANG_FrmValida4='Campo de fecha usando calendario unificado';
 	$MULTILANG_FrmValida7='Campo de fecha usando selectores independientes (ano, mes y dia)';
@@ -601,6 +601,10 @@
 	$MULTILANG_FrmDesPlaceHolder='Un texto que aparecera en el campo cuando se encuentre vacio para que el usuario tenga una guia de lo que debe diligenciar alli';
 	$MULTILANG_FrmOcultarEtiqueta='Ocultar la etiqueta del campo en el formulario';
 	$MULTILANG_FrmIdHTML='Identificador único del objeto en HTML.  Requerido si desea realizar programacion por eventos para este control, usar sentencias JQuery, y JS en general sobre el en tiempo de ejecucion.';
+	$MULTILANG_FrmValidaExtra='Caracteres extra permitidos';
+	$MULTILANG_FrmValidaAyuda='Cualquier caracter ingresado en el campo ser&aacute; permitido por el validador';
+	$MULTILANG_FrmValida9='S&oacute;lo n&uacute;meros 0-9 (enteros)';
+	$MULTILANG_FrmValida10='S&oacute;lo los indicados en el campo de validaci&oacute;n extra';
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

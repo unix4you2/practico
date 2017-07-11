@@ -16,6 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/formularios.php
 core/marco_abajo.php
 core/marco_nav.php
 core/marco_arriba.php
@@ -44,13 +45,16 @@ LogCambios="
 * Added: Tema gráfico Amelia.
 * Fixed: Corrección en aplicación de estilos gráficos para fondos de aplicación.
 * Enhan: Al hacer clic sobre el icono home de la barra superior se limpia cualquier contenido de la URL redireccionando al index.php
+* Added: Nueva opcion de validacion de numeros sin punto decimal para controles de formulario
+* Added: Los controles con validaciones soportan ahora cadenas con caracteres extra permitidos para el ingreso de datos.
+* Enhan: A partir de ahora campos validados como solo letras no contendran el caracter punto.  Si se desea tener el caracter punto dentro del set permitido se deberá agregar a la personalización del control sobre los caracteres extra permitidos.
 
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-
+ALTER TABLE core_formulario_objeto ADD validacion_extras varchar(255) DEFAULT '';
 "
 
 ########################################################################

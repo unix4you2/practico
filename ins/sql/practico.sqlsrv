@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS core_parametros;
 CREATE TABLE core_parametros (
-  id int IDENTITY(0,1) PRIMARY KEY,
+  id int(10) NOT NULL AUTO_INCREMENT,
   nombre_empresa_largo varchar(250) NOT NULL,
   nombre_empresa_corto varchar(50) NOT NULL,
   nombre_aplicacion varchar(100) NOT NULL,
@@ -18,162 +18,161 @@ CREATE TABLE core_parametros (
   federado_campousuario varchar(255) NULL DEFAULT '',
   federado_campoclave varchar(255) NULL DEFAULT '',
   federado_encripcion varchar(255) NULL DEFAULT '',
-  federado_puerto varchar(255) NULL DEFAULT ''
+  federado_puerto varchar(255) NULL DEFAULT '',
+  PRIMARY KEY  (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-);
-
--- SET IDENTITY_INSERT core_parametros ON
-INSERT INTO core_parametros (nombre_empresa_largo,nombre_empresa_corto,nombre_aplicacion,version,fecha_lanzamiento,licencia,creditos,funciones_personalizadas) VALUES ('Nombre completo de su empresa','PAR_NombreCortoEmpresa','PAR_NombreAplicacion','PAR_VersionAplicacion','20150101','Texto de su licencia','Texto asociado a los creditos de su aplicacion','');
--- SET IDENTITY_INSERT core_parametros OFF
+INSERT INTO core_parametros (id,nombre_empresa_largo,nombre_empresa_corto,nombre_aplicacion,version,fecha_lanzamiento,licencia,creditos,funciones_personalizadas) VALUES (0,'Nombre completo de su empresa','PAR_NombreCortoEmpresa','PAR_NombreAplicacion','PAR_VersionAplicacion','20150101','Texto de su licencia','Texto asociado a los creditos de su aplicacion','');
 
 DROP TABLE IF EXISTS core_usuario;
 CREATE TABLE core_usuario (
   login varchar(250) NOT NULL,
   clave varchar(50) NOT NULL default 'd41d8cd98fd41d8cd98fd41d8cd98fd41d8cd98f',
   nombre varchar(250) NOT NULL default '',
-  estado int NOT NULL default '1',
+  estado int(1) NOT NULL default '1',
   correo varchar(200) NOT NULL default '',
   ultimo_acceso date NOT NULL default '20000101',
   llave_paso varchar(50) NOT NULL default 'd41d8cd98f00b204e9800998ecf8427e',
-  usuario_interno int NULL DEFAULT 0,
+  usuario_interno int(1) NULL DEFAULT 0,
   llave_recuperacion varchar(250) NOT NULL default '',
-  es_plantilla int DEFAULT 0,
+  es_plantilla int(1) DEFAULT 0,
   plantilla_permisos varchar(250) default '',
   descripcion varchar(250) NULL,
   PRIMARY KEY  (login)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO core_usuario VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','Super usuario',1,'sucorreo@dominio.com','20110601','d41d8cd98f00b204e9800998ecf8427e',1,'',0,'','');
 
-UPDATE core_usuario SET ultimo_acceso=GETDATE();
+UPDATE core_usuario SET ultimo_acceso=CURDATE();
 
 DROP TABLE IF EXISTS core_auditoria;
 CREATE TABLE core_auditoria (
-  id int IDENTITY(0,1) PRIMARY KEY,
+  id int(10) NOT NULL AUTO_INCREMENT,
   usuario_login varchar(250) NOT NULL,
   accion text,
   fecha date NOT NULL,
-  hora time NOT NULL
-
-);
+  hora time NOT NULL,
+  PRIMARY KEY  (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_menu;
 CREATE TABLE core_menu (
-  id int IDENTITY(0,1) PRIMARY KEY,
+  id int(10) AUTO_INCREMENT,
   texto varchar(250) default '',
-  padre int default '0',
-  peso int default '0',
+  padre int(10) default '0',
+  peso int(3) default '0',
   url TEXT,
   destino varchar(250) default '',
-  tipo_comando varchar(15) default 'Interno',
+  tipo_comando varchar(15) default 'Interno',  #Interno=De sistema,Personal=funciones en archivo,Objeto=creadas por DynApps
   comando varchar(250) default '',
-  nivel_usuario int default '0',
-  columna int default '1',
-  posible_arriba int default '0',
-  posible_centro int default '1',
-  posible_escritorio int default '0',
-  seccion varchar(250) default '',
+  nivel_usuario int(10) default '0', # -1=No aplica, sino Rol minimo de usuario que accesan la opcion 
+  columna int(1) default '1',
+  posible_arriba int(1) default '0',
+  posible_centro int(1) default '1',
+  posible_escritorio int(1) default '0',
+  seccion varchar(250) default '',  #Cuando Posible centro=1 define la seccion donde va por agrupacion
   imagen varchar(250) default '',
-  posible_izquierda int default '0'
-
-);
+  posible_izquierda int(1) default '0',
+  PRIMARY KEY  (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_usuario_menu;
 CREATE TABLE core_usuario_menu (
-  id int IDENTITY(0,1) PRIMARY KEY,
+  id int(10) NOT NULL AUTO_INCREMENT,
   usuario varchar(250) NOT NULL default '',
-  menu int NOT NULL default '0'
-
-);
+  menu int(10) NOT NULL default '0',
+  PRIMARY KEY  (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_formulario;
 CREATE TABLE core_formulario (
-  id int IDENTITY(0,1) PRIMARY KEY,
+  id int(10) AUTO_INCREMENT,
   titulo varchar(250) default '',
   ayuda_titulo varchar(250) default '',
   ayuda_texto text,
   tabla_datos varchar(250) default '',
-  columnas int default '1',
+  columnas int(10) default '1',
   javascript text,
-  borde_visible int default '0',
-  estilo_pestanas varchar(10) default 'nav-tabs'
-
-);
+  borde_visible int(10) default '0',
+  estilo_pestanas varchar(10) default 'nav-tabs',
+  PRIMARY KEY  (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_formulario_objeto;
 CREATE TABLE core_formulario_objeto (
-  id int IDENTITY(0,1) PRIMARY KEY,
+  id int(10) AUTO_INCREMENT,
   tipo varchar(20),
   titulo varchar(250) default '',
   campo varchar(250) default '',
   ayuda_titulo varchar(50) default '',
   ayuda_texto text,
-  formulario int,
-  peso int,
-  columna int default '1',
-  obligatorio int default '0',
-  visible int default '1',
+  formulario int(10),
+  peso int(10),
+  columna int(1) default '1',
+  obligatorio int(1) default '0',
+  visible int(1) default '1',
   valor_predeterminado varchar(250) default '',
   validacion_datos varchar(20) default '',
   etiqueta_busqueda varchar(50) default '',
-  ajax_busqueda int default '1',
-  valor_unico int default '0',
+  ajax_busqueda int(1) default '1',
+  valor_unico int(1) default '0',
   solo_lectura varchar(10) default '',
-  ancho int default '0',
-  alto int default '0',
-  barra_herramientas int,
-  fila_unica int,
+  ancho int(10) default '0',
+  alto int(10) default '0',
+  barra_herramientas int(1),
+  fila_unica int(1),
   lista_opciones text,
   origen_lista_opciones varchar(250),
   origen_lista_valores varchar(250),
   valor_etiqueta text,
   url_iframe varchar(250),
-  objeto_en_ventana int,
-  informe_vinculado int,
-  maxima_longitud int default '0',
-  valor_minimo int default '0',
-  valor_maximo int default '100',
-  valor_salto int default '1',
+  objeto_en_ventana int(1),
+  informe_vinculado int(10),
+  maxima_longitud int(10) default '0',
+  valor_minimo int(10) default '0',
+  valor_maximo int(10) default '100',
+  valor_salto int(10) default '1',
   formato_salida varchar(250) default '',
   plantilla_archivo varchar(250) default '',
-  peso_archivo int,
-  tamano_pincel int,
+  peso_archivo int(10),
+  tamano_pincel int(2),
   color_trazo varchar(20) default '',
-  formulario_vinculado int,
+  formulario_vinculado int(10),
   formulario_campo_vinculo varchar(250) default '',
   formulario_campo_foraneo varchar(250) default '',
   condicion_filtrado_listas varchar(250) default '',
   pestana_objeto varchar(250) default '',
   personalizacion_tag text,
-  modo_inline int default '0',
+  modo_inline int(1) default '0',
   imagen varchar(250) default '',
   tipo_accion varchar(250) default '',
   accion_usuario text,
   valor_check_activo varchar(250) DEFAULT '',
   valor_check_inactivo varchar(250) DEFAULT '',
   valor_placeholder varchar(255) DEFAULT '',
-  ocultar_etiqueta int DEFAULT 0,
-  id_html varchar(255) DEFAULT ''
-
-);
+  ocultar_etiqueta int(1) DEFAULT 0,
+  id_html varchar(255) DEFAULT '',
+  validacion_extras varchar(255) DEFAULT '',
+  PRIMARY KEY  (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_evento_objeto;
 CREATE TABLE core_evento_objeto (
-  id int IDENTITY(0,1) PRIMARY KEY,
-  objeto int,
+  id int(10) AUTO_INCREMENT,
+  objeto int(10),
   evento varchar(250) default '',
-  javascript text
-
-);
+  javascript text,
+  PRIMARY KEY  (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_evento_inventario;
 CREATE TABLE core_evento_inventario (
-  id int IDENTITY(0,1) PRIMARY KEY,
+  id int(10) AUTO_INCREMENT,
   evento varchar(250) default '',
   categoria varchar(250) default '',
-  descripcion varchar(250) default ''
-
-);
+  descripcion varchar(250) default '',
+  PRIMARY KEY  (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onclick',                    '01. Raton (Mouse)',        '$MULTILANG_EventoClick');
 INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('ondblclick',                 '01. Raton (Mouse)',        '$MULTILANG_EventoDobleClick');
@@ -272,153 +271,153 @@ INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('conne
 
 DROP TABLE IF EXISTS core_formulario_boton;
 CREATE TABLE core_formulario_boton (
-  id int IDENTITY(0,1) PRIMARY KEY,
+  id int(10) AUTO_INCREMENT,
   titulo varchar(250) default '',
   estilo varchar(250) default '',
-  formulario int,
+  formulario int(10),
   tipo_accion varchar(250) default '',
   accion_usuario text,
-  visible int default '1',
-  peso int,
+  visible int(1) default '1',
+  peso int(10),
   retorno_titulo varchar(50) default '',
   retorno_texto text,
   confirmacion_texto varchar(250) default '',
   retorno_icono VARCHAR(50) NULL DEFAULT '',
-  retorno_estilo VARCHAR(50) NULL DEFAULT ''
-
-);
+  retorno_estilo VARCHAR(50) NULL DEFAULT '',
+  PRIMARY KEY  (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_informe;
 CREATE TABLE core_informe (
-  id int IDENTITY(0,1) PRIMARY KEY,
+  id int(10) AUTO_INCREMENT,
   titulo varchar(250),
   descripcion varchar(250),
-  categoria varchar(250),
+  categoria varchar(250),  # define la seccion donde va por agrupacion en la seccion de informes
   agrupamiento varchar(250),
   ordenamiento varchar(250),
   ancho varchar(5),
   alto varchar(5),
-  formato_final char(1),
-  formato_grafico text,
-  genera_pdf char(1),
+  formato_final char(1), # T=Tabla, G=Grafico
+  formato_grafico text, # Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
+  genera_pdf char(1), # S=Si, N=No
   variables_filtro text,
-  soporte_datatable char(1) DEFAULT 'N',
-  formulario_filtrado VARCHAR(5) DEFAULT ''
-
-);
+  soporte_datatable char(1) DEFAULT 'N', # S=Si, N=No
+  formulario_filtrado VARCHAR(5) DEFAULT '',
+  PRIMARY KEY  (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_informe_campos;
 CREATE TABLE core_informe_campos (
-  id int IDENTITY(0,1) PRIMARY KEY,
-  informe int,
+  id int(10) AUTO_INCREMENT,
+  informe int(10),
   valor_campo varchar(250),
   valor_alias varchar(250),
-  peso int default 0,
-  visible int DEFAULT 1,
-  editable int DEFAULT 0
-
-);
+  peso int(10) default 0,
+  visible int(1) DEFAULT 1,
+  editable int(1) DEFAULT 0,
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_informe_tablas;
 CREATE TABLE core_informe_tablas (
-  id int IDENTITY(0,1) PRIMARY KEY,
-  informe int,
+  id int(10) AUTO_INCREMENT,
+  informe int(10),
   valor_tabla varchar(250),
-  valor_alias varchar(250)
-
-);
+  valor_alias varchar(250),
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_informe_condiciones;
 CREATE TABLE core_informe_condiciones (
-  id int IDENTITY(0,1) PRIMARY KEY,
-  informe int,
+  id int(10) AUTO_INCREMENT,
+  informe int(10),
   valor_izq varchar(250),
   operador varchar(250),
   valor_der varchar(250),
-  peso int default '0'
-
-);
+  peso int(3) default '0',
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_informe_boton;
 CREATE TABLE core_informe_boton (
-  id int IDENTITY(0,1) PRIMARY KEY,
+  id int(10) AUTO_INCREMENT,
   titulo varchar(250) default '',
   estilo varchar(250) default '',
-  informe int,
+  informe int(10),
   tipo_accion varchar(250) default '',
   accion_usuario varchar(250) default '',
-  visible int default '1',
-  peso int,
+  visible int(1) default '1',
+  peso int(10),
   confirmacion_texto varchar(250) default '',
   destino varchar(250) default '_self',
-  pantalla_completa int default '0',
-  precargar_estilos int default '1',
-  imagen varchar(250) DEFAULT ''
-
-);
+  pantalla_completa int(1) default '0',
+  precargar_estilos int(1) default '1',
+  imagen varchar(250) DEFAULT '',
+  PRIMARY KEY  (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_usuario_informe;
 CREATE TABLE core_usuario_informe (
-  id int IDENTITY(0,1) PRIMARY KEY,
+  id int(10) NOT NULL AUTO_INCREMENT,
   usuario varchar(250) NOT NULL,
-  informe int NOT NULL
-
-);
+  informe int(10) NOT NULL,
+  PRIMARY KEY  (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_llaves_api;
 CREATE TABLE core_llaves_api (
-  id int IDENTITY(0,1) PRIMARY KEY,
+  id int(10) NOT NULL AUTO_INCREMENT,
   nombre varchar(15) NOT NULL,
   llave varchar(50) NOT NULL,
   secreto varchar(50) NOT NULL,
   uri varchar(255) NOT NULL,
   dominio_autorizado varchar(255) NOT NULL,
   ip_autorizada varchar(255) NOT NULL,
-  funciones_autorizadas text
-
-);
+  funciones_autorizadas text,
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_chat;
 CREATE TABLE core_chat (
-  id int IDENTITY(0,1) PRIMARY KEY,
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   remitente VARCHAR(255) NOT NULL DEFAULT '',
   destinatario VARCHAR(255) NOT NULL DEFAULT '',
   message TEXT NOT NULL,
   sent DATETIME,
-  recd int NOT NULL DEFAULT 0
-
-);
+  recd INTEGER UNSIGNED NOT NULL DEFAULT 0,
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_monitoreo;
 CREATE TABLE core_monitoreo (
-  id int IDENTITY(0,1) PRIMARY KEY,
-  tipo VARCHAR(20) NOT NULL DEFAULT '',
-  pagina int NOT NULL,
-  peso int NOT NULL,
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  tipo VARCHAR(20) NOT NULL DEFAULT '',			 # Etiqueta,Maquinas,ComandosShell,ComandosSQL,ImagenesRRD,Embebido
+  pagina int(10) NOT NULL,
+  peso int(10) NOT NULL,
   nombre VARCHAR(255) NOT NULL DEFAULT '',
   host VARCHAR(255) NOT NULL DEFAULT '',
   puerto VARCHAR(255) NOT NULL DEFAULT '',
   tipo_ping VARCHAR(255) NOT NULL DEFAULT '',
-  saltos int NOT NULL,
+  saltos int(10) NOT NULL,
   comando TEXT,
-  ancho int NOT NULL,
-  alto int NOT NULL, 
-  tamano_resultado int NOT NULL,
-  ocultar_titulos int NOT NULL,
+  ancho int(10) NOT NULL,
+  alto int(10) NOT NULL, 
+  tamano_resultado int(10) NOT NULL,
+  ocultar_titulos int(10) NOT NULL,
   path VARCHAR(255) NOT NULL DEFAULT '',
   correo_alerta VARCHAR(255) NOT NULL DEFAULT '',
-  alerta_sonora int default '0',
-  milisegundos_lectura int default '1',
-  alerta_vibracion int default '0',
+  alerta_sonora int(10) default '0',
+  milisegundos_lectura int(10) default '1',
+  alerta_vibracion int(10) default '0',
   ultimo_estado varchar(250) DEFAULT '',
-  valor_minimo int,
-  valor_maximo int
-
-);
+  valor_minimo int(11),
+  valor_maximo int(11),
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_replicasbd;
 CREATE TABLE core_replicasbd (
-  id int IDENTITY(0,1) PRIMARY KEY,
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(255) NOT NULL DEFAULT '',
   servidorbd VARCHAR(255) NOT NULL DEFAULT '',
   basedatos VARCHAR(255) NOT NULL DEFAULT '',
@@ -426,6 +425,6 @@ CREATE TABLE core_replicasbd (
   passwordbd VARCHAR(255) NOT NULL DEFAULT '',
   motorbd VARCHAR(255) NOT NULL DEFAULT '',
   puertobd VARCHAR(255) NOT NULL DEFAULT '',
-  tipo_replica int NOT NULL DEFAULT 0
-
-);
+  tipo_replica INTEGER(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

@@ -393,8 +393,8 @@
 	$MULTILANG_FrmPredeterminado='Default value';
 	$MULTILANG_FrmDesPredeterminado='Sets the value that appears automatically filled in the field to open the form view. This value can be out of data validation.  If a PHP session variable is entered then Practico will take its value.';
 	$MULTILANG_FrmValida='Data validation';
-	$MULTILANG_FrmValida1='Numbers only 0-9';
-	$MULTILANG_FrmValida2='Only letters A-Z';
+	$MULTILANG_FrmValida1='Numbers only 0-9 (with decimal)';
+	$MULTILANG_FrmValida2='Only letters a-z A-Z (no dots)';
 	$MULTILANG_FrmValida3='Letters and numbers';
 	$MULTILANG_FrmValida4='Date field using unified calendar';
 	$MULTILANG_FrmValida7='Date field using separated pickers (year, month and day)';
@@ -603,7 +603,11 @@
 	$MULTILANG_FrmDesPlaceHolder='A text to show in the field when this doesnt have a value that help users to know what should enter there';
 	$MULTILANG_FrmOcultarEtiqueta='Hide the field label in the form';
 	$MULTILANG_FrmIdHTML='Unique HTML identifier for this object.  Is useful when you want to program events for this control using JQuery or JS on runtime';
-
+	$MULTILANG_FrmValidaExtra='Extra characters allowed';
+	$MULTILANG_FrmValidaAyuda='Any character here will be allowed for the validator';
+	$MULTILANG_FrmValida9='Numbers only 0-9 (integer)';
+	$MULTILANG_FrmValida10='Only charset in the extra validation field';
+	
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';
 	$MULTILANG_InfErr2='You must enter a valid title for the report.';

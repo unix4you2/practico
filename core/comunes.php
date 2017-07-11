@@ -3002,7 +3002,7 @@ function selector_iconos_awesome()
 			// Define cadenas en caso de tener validaciones
 			$cadena_validacion='';
 			if ($registro_campos["validacion_datos"]!="" && $registro_campos["validacion_datos"]!="fecha" && $registro_campos["validacion_datos"]!="hora" && $registro_campos["validacion_datos"]!="fechahora" && $registro_campos["validacion_datos"]!="fechaxanos" && $registro_campos["validacion_datos"]!="fechahorafull")
-				$cadena_validacion=' onkeypress="return validar_teclado(event, \''.$registro_campos["validacion_datos"].'\');" ';
+				$cadena_validacion=' onkeypress="return PCOJS_ValidarTeclado(event, \''.$registro_campos["validacion_datos"].'\', \''.$registro_campos["validacion_extras"].'\');" ';
 			
             $cadena_complementaria_datepicker='';
             $cadena_ID_datepicker='';
