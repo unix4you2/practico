@@ -602,7 +602,7 @@
 	$MULTILANG_FrmOcultarEtiqueta='Ocultar la etiqueta del campo en el formulario';
 	$MULTILANG_FrmIdHTML='Identificador único del objeto en HTML.  Requerido si desea realizar programacion por eventos para este control, usar sentencias JQuery, y JS en general sobre el en tiempo de ejecucion.';
 	$MULTILANG_FrmValidaExtra='Caracteres extra permitidos';
-	$MULTILANG_FrmValidaAyuda='Cualquier caracter ingresado en el campo ser&aacute; permitido por el validador';
+	$MULTILANG_FrmValidaAyuda='Cualquier caracter ingresado en el campo ser&aacute; permitido por el validador.  No se permiten las comillas dobles o simples.';
 	$MULTILANG_FrmValida9='S&oacute;lo n&uacute;meros 0-9 (enteros)';
 	$MULTILANG_FrmValida10='S&oacute;lo los indicados en el campo de validaci&oacute;n extra';
 

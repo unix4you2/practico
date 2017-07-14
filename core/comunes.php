@@ -4646,6 +4646,10 @@ $('#SampleElement').load('YourURL');
 				$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
 				$registro_formulario = @$consulta_formulario->fetch();
 
+                //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa
+				if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
+				    $ComplementoIdObjetoEnTitulo=" <i>[ID=$formulario]</i>";
+
 				echo '
 				<script type="text/javascript">
 					function AgregarElemento(columna,fila,elemento)
@@ -4718,7 +4722,7 @@ $('#SampleElement').load('YourURL');
                     }
 				
 				// Crea ventana si aplica para el form
-				if ($en_ventana) abrir_ventana(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["titulo"]).$ComplementoTituloFormulario,'panel-primary','',$barra_herramientas_mini);
+				if ($en_ventana) abrir_ventana(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["titulo"]).$ComplementoTituloFormulario.$ComplementoIdObjetoEnTitulo,'panel-primary','',$barra_herramientas_mini);
 				// Muestra ayuda en caso de tenerla
 				$imagen_ayuda='fa fa-info-circle fa-5x texto-azul';
 				if ($registro_formulario["ayuda_titulo"]!="" || $registro_formulario["ayuda_texto"]!="")
@@ -4745,7 +4749,7 @@ $('#SampleElement').load('YourURL');
 
                 // Inicio de la generacion de encabezados pestanas
                 //Cuenta las pestanas segun los objetos del form y ademas mira si es solo una con valor vacio (sin pestanas)
-                $consulta_conteo_pestanas=      ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
+                $consulta_conteo_pestanas=      ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
                 $conteo_pestanas=0;
                 while($registro_conteo_pestanas = @$consulta_conteo_pestanas->fetch())
                     {
@@ -4760,7 +4764,7 @@ $('#SampleElement').load('YourURL');
 						if($registro_formulario["estilo_pestanas"]=="")
 							$CadenaEstiloPestanas="visibility:hidden; height:0px;"; //Oculta las pestanas
 
-                        $consulta_formulario_pestana=   ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
+                        $consulta_formulario_pestana=   ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
                         echo '<ul class="nav '.$registro_formulario["estilo_pestanas"].' nav-justified" style="'.$CadenaEstiloPestanas.'">';
                         $estado_activa_primera_pestana=' class="active" ';
                         $pestana_activa=1;
@@ -4780,7 +4784,7 @@ $('#SampleElement').load('YourURL');
                 //Genera las pestanas con su contenido
                 if ($conteo_pestanas>0)
                     {
-                        $consulta_formulario_pestana=   ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
+                        $consulta_formulario_pestana=   ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
                         $estado_activa_primera_pestana='in active';
                         $pestana_activa=1;
 
@@ -5625,6 +5629,10 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
         global $PCO_InformesDataTable;
         global $ModoDepuracion;
 
+        //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa
+		if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
+		    $ComplementoIdObjetoEnTitulo=" <i>[ID=$informe]</i>";
+
 		// Busca datos del informe
 		$consulta_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
 		$registro_informe=$consulta_informe->fetch();
@@ -5687,7 +5695,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							}
 
 						//Carga la ventana con el informe
-						abrir_ventana($TituloVentanaInforme,'panel panel-info',$registro_informe["ancho"]);
+						abrir_ventana($TituloVentanaInforme.$ComplementoIdObjetoEnTitulo,'panel panel-info',$registro_informe["ancho"]);
 						
 						//Agrega la descripcion del informe en caso de contar con ella
 						if ($registro_informe["descripcion"]!='')
