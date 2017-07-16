@@ -257,6 +257,7 @@
     $MULTILANG_SelectorIdioma='Os usuários podem alterar o idioma na hora de login';
     $MULTILANG_SelectorIdiomaAyuda='Mostra uma lista de seleção durante o login com todas as linguagens disponíveis na plataforma.';
     $MULTILANG_ErrorConexionInternet='Parece que você está sem conexão com a internet, a conexão com o sistema será restaurado quando sua conexão com a Internet ser comum.<br><br>Verifique sua conexão de rede ou sinal de dados estão ativos.';
+    $MULTILANG_NombreRADDes='Nome usado para o gerador de aplicativos. Isso também é usado para títulos de janelas';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Design do aplicativo';

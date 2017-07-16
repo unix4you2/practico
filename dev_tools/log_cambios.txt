@@ -48,6 +48,8 @@ LogCambios="
 * Added: Nueva opcion de validacion de numeros sin punto decimal para controles de formulario
 * Added: Los controles con validaciones soportan ahora cadenas con caracteres extra permitidos para el ingreso de datos.
 * Enhan: A partir de ahora campos validados como solo letras no contendran el caracter punto.  Si se desea tener el caracter punto dentro del set permitido se deberá agregar a la personalización del control sobre los caracteres extra permitidos.
+* Enhan: Mejoradas algunas ayudas y tooltips del sistema.
+
 
 "
 

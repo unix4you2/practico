@@ -257,6 +257,7 @@
     $MULTILANG_SelectorIdioma='Users can change language at login time';
     $MULTILANG_SelectorIdiomaAyuda='Shows a select list during the login with all languages availables in the platform.';
     $MULTILANG_ErrorConexionInternet='It looks like you have run out of Internet, the connection to the system will be restored when your Internet connection is normal.<br><br>Check that your network connection or data signal is active.';
+    $MULTILANG_NombreRADDes='Name used for the application generator.  This is used for window titles too';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';

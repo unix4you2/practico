@@ -209,7 +209,10 @@
 													<i class="fa fa-tag fa-fw"></i> <?php echo $MULTILANG_NombreRAD; ?>:
 												</span>
 												<input name="NombreRADNEW" value="<?php echo $NombreRAD; ?>" type="text" class="form-control">
-											</div>
+												<span class="input-group-addon">
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_NombreRADDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+    										</div>
 
 											<div class="form-group input-group">
 												<span class="input-group-addon">
