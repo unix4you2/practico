@@ -207,7 +207,7 @@
 	$MULTILANG_TitValorUnico='The value entered does not accept duplicate';
 	$MULTILANG_DesValorUnico='The system will validate the information entered in this field, if there is already a record with that value in the database will not be allowed entry.';
 	$MULTILANG_TitObligatorio='Required field';
-	$MULTILANG_DesObligatorio='This field has been marked as mandatory. If you do not enter a value for this the system does not store the user input record.';
+	$MULTILANG_DesObligatorio='You should enter a value for this field.';
 
 	//Errores y avisos varios
 	$MULTILANG_VistaPrev='Preview';

@@ -208,7 +208,7 @@
 	$MULTILANG_TitValorUnico='El valor ingresado no acepta duplicados';
 	$MULTILANG_DesValorUnico='El sistema validar&aacute; la informaci&oacute;n ingresada en este campo, en caso de ya existir en la base de datos no se permitir&aacute; su ingreso.';
 	$MULTILANG_TitObligatorio='Campo obligatorio';
-	$MULTILANG_DesObligatorio='Este campo ha sido marcado como obligatorio.  Si no se ingresa un valor para &eacute;ste el sistema no almacenar&aacute; el registro ingresado por el usuario.';
+	$MULTILANG_DesObligatorio='Usted debe ingresar un valor en este campo';
 
 	//Errores y avisos varios
 	$MULTILANG_VistaPrev='Vista previa';
