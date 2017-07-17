@@ -3208,13 +3208,18 @@ function selector_iconos_awesome()
 				}
 			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
+			// Define cadenas en caso de tener validaciones
+			$cadena_validacion='';
+			if ($registro_campos["validacion_datos"]!="" && $registro_campos["validacion_datos"]!="fecha" && $registro_campos["validacion_datos"]!="hora" && $registro_campos["validacion_datos"]!="fechahora" && $registro_campos["validacion_datos"]!="fechaxanos" && $registro_campos["validacion_datos"]!="fechahorafull")
+				$cadena_validacion=' onkeypress="return PCOJS_ValidarTeclado(event, \''.$registro_campos["validacion_datos"].'\', \''.$registro_campos["validacion_extras"].'\');" ';
+
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
                 $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.= '<textarea id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="form-control" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' '.$cadena_placeholder.' >'.$cadena_valor.'</textarea>';
+			$salida.= '<textarea id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="form-control" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' '.$cadena_placeholder.'  '.$cadena_validacion.' >'.$cadena_valor.'</textarea>';
 			//Si hay algun indicador adicional del campo abre los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '<span class="input-group-addon">';
@@ -3272,9 +3277,9 @@ function selector_iconos_awesome()
 						}
 				}
 			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
-			
+
 			// Muestra el campo
-			$salida.= '<div id="Summer_'.$registro_campos["campo"].'" class="summernote"></div>';
+			$salida.= '<div id="Summer_'.$registro_campos["campo"].'" class="summernote" ></div>';
 			
 			//Agrega el campo a la lista de campos de este tipo para ser activados al final
 			$PCO_CamposSummerNote.=$registro_campos["campo"]."|";
@@ -4796,7 +4801,7 @@ $('#SampleElement').load('YourURL');
                                 //Genera el contenedor de la pestana
                                 echo '
                                 <!-- INICIO de las pestanas No '.$pestana_activa.' -->
-                                    <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="PCO_PestanaFormulario_'.$pestana_activa.'" >';
+                                    <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="PCO_PestanaFormulario_'.$pestana_activa.'" >';
                                     
                                         //Booleana que determina si se debe incluir el javascript de ckeditor
                                         $existe_campo_textoformato=0;
@@ -5135,7 +5140,7 @@ $('#SampleElement').load('YourURL');
 					    {
         					$PCO_FuncionesJSInternasFORM .= '
         					    <script language=\'JavaScript\'>
-                                    $( "#'.$registro_eventos_definidos["id_html"].'" ).'.$MetodoJQuery.'(function() {
+                                    $( "#'.$registro_eventos_definidos["id_html"].'" ).'.$MetodoJQuery.'(function(PCOJS_Evento) {
                                       '.$registro_eventos_definidos["javascript"].'
                                     });
         					    </script>';

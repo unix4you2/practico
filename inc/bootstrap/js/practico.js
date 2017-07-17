@@ -45,9 +45,10 @@ function PCOJS_ValidarTeclado(elEvento, permitidos, permitidos_extra)
 		var numeros_enteros = "0123456789" + permitidos_extra;
 		var caracteres = " abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ" + permitidos_extra;
 		var numeros_caracteres = numeros_enteros + caracteres;
-		var teclas_especiales = [8, 37, 39, 9];
-		// 8 = BackSpace, 37 = flecha izquierda, 39 = flecha derecha 9=suprimir
-									 
+		var teclas_especiales = [8, 9, 13, 33, 34, 35, 36, 37, 38, 39, 40, 45, 46];
+        //Fuente 1: https://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
+        //Fuente 2: https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_event_key_keycode
+
 		// Seleccionar los caracteres a partir del parámetro de la función 
 		switch(permitidos)
 			{
@@ -70,21 +71,25 @@ function PCOJS_ValidarTeclado(elEvento, permitidos, permitidos_extra)
 
 		// Obtener la tecla pulsada
 		var evento = elEvento || window.event;
-		var codigoCaracter = evento.charCode || evento.keyCode;
+		var codigoCaracter = "";
+		if (permitidos == numeros ||  permitidos == numeros_enteros)
+		    codigoCaracter = evento.which || evento.charCode;
+		else
+		    codigoCaracter = evento.charCode || evento.keyCode;
+		
 		var caracter = String.fromCharCode(codigoCaracter);
 
-		if(codigoCaracter=="37" || codigoCaracter=="39")
-			{
-				return false;
-			}
 		// Comprobar si la tecla pulsada es alguna de las teclas especiales
-		// (teclas de borrado y flechas horizontales)
 		var tecla_especial = false;
 		for(var i in teclas_especiales)
 			{    
 				if(codigoCaracter == teclas_especiales[i])
 					{
-						tecla_especial = true;
+						//Saber si es un punto (caracter comun con la tecla especial DELETE o SUPR en algunas distribuciones de teclado)
+						if (caracter==="." && permitidos==numeros_enteros)
+						    tecla_especial = false;
+						else
+						    tecla_especial = true;
 						break;
 					}
 			}

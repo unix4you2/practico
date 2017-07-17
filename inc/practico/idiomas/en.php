@@ -395,7 +395,7 @@
 	$MULTILANG_FrmDesPredeterminado='Sets the value that appears automatically filled in the field to open the form view. This value can be out of data validation.  If a PHP session variable is entered then Practico will take its value.';
 	$MULTILANG_FrmValida='Data validation';
 	$MULTILANG_FrmValida1='Numbers only 0-9 (with decimal)';
-	$MULTILANG_FrmValida2='Only letters a-z A-Z (no dots)';
+	$MULTILANG_FrmValida2='Only letters a-z A-Z';
 	$MULTILANG_FrmValida3='Letters and numbers';
 	$MULTILANG_FrmValida4='Date field using unified calendar';
 	$MULTILANG_FrmValida7='Date field using separated pickers (year, month and day)';

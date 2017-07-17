@@ -393,7 +393,7 @@
 	$MULTILANG_FrmDesPredeterminado='Establece el valor que aparece diligenciado automaticamente en el campo al abrir la vista del formulario.  Este valor puede estar en contravia de la validaci&oacute;n de datos.  Si se ingresan variables PHP definidas en la sesion entonces se tomara su valor.';
 	$MULTILANG_FrmValida='Validacion de datos';
 	$MULTILANG_FrmValida1='S&oacute;lo n&uacute;meros 0-9 (con decimales)';
-	$MULTILANG_FrmValida2='S&oacute;lo letras a-z A-Z (sin punto)';
+	$MULTILANG_FrmValida2='S&oacute;lo letras a-z A-Z';
 	$MULTILANG_FrmValida3='Letras y n&uacute;meros';
 	$MULTILANG_FrmValida4='Campo de fecha usando calendario unificado';
 	$MULTILANG_FrmValida7='Campo de fecha usando selectores independientes (ano, mes y dia)';
