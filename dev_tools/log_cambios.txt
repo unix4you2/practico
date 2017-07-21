@@ -62,6 +62,7 @@ ALTER TABLE core_formulario_objeto ADD validacion_extras varchar(255) DEFAULT ''
 DROP TABLE IF EXISTS core_kanban;
 CREATE TABLE core_kanban (
   id int(10) NOT NULL AUTO_INCREMENT,
+  login_admintablero varchar(250),
   titulo varchar(255),
   descripcion text,
   asignado_a varchar(250),
@@ -73,8 +74,8 @@ CREATE TABLE core_kanban (
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 ALTER TABLE core_kanban ADD INDEX columna(columna);
-INSERT INTO core_kanban (titulo,descripcion,columna) VALUES ('[USO INTERNO PRACTICO: ColumnasKanban]', 'Analisis,Desarrollo,Pruebas,Terminado,Produccion','-2');
-
+ALTER TABLE core_kanban ADD INDEX login_admintablero(login_admintablero);
+INSERT INTO core_kanban (login_admintablero,titulo,descripcion,columna) VALUES ('admin','[USO INTERNO PRACTICO: ColumnasKanban]', 'Analisis,Desarrollo,Pruebas,Terminado,Produccion','-2');
 
 "
 

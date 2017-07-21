@@ -438,3 +438,21 @@ CREATE TABLE core_replicasbd (
   tipo_replica integer DEFAULT '0'
   
 );
+
+DROP TABLE IF EXISTS core_kanban;
+CREATE TABLE core_kanban (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  login_admintablero text DEFAULT '',
+  titulo text DEFAULT '',
+  descripcion text DEFAULT '',
+  asignado_a text DEFAULT '',
+  categoria text DEFAULT '',
+  columna integer DEFAULT '0',
+  peso integer DEFAULT '0',
+  estilo text DEFAULT '',
+  fecha text DEFAULT ''
+
+);
+ALTER TABLE core_kanban ADD INDEX columna(columna);
+ALTER TABLE core_kanban ADD INDEX login_admintablero(login_admintablero);
+INSERT INTO core_kanban (login_admintablero,titulo,descripcion,columna) VALUES ('admin','[PRACTICO][ColumnasKanban]', 'Analisis,Desarrollo,Pruebas,Terminado,Produccion','-2');
