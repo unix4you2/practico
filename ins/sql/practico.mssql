@@ -445,4 +445,4 @@ CREATE TABLE core_kanban (
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 ALTER TABLE core_kanban ADD INDEX columna(columna);
 ALTER TABLE core_kanban ADD INDEX login_admintablero(login_admintablero);
-INSERT INTO core_kanban (login_admintablero,titulo,descripcion,columna) VALUES ('admin','[PRACTICO][ColumnasKanban]', 'Analisis,Desarrollo,Pruebas,Terminado,Produccion','-2');
+INSERT INTO core_kanban (login_admintablero,titulo,descripcion,columna) VALUES ('admin','[USO INTERNO PRACTICO: ColumnasKanban]', 'Analisis,Diseno,Desarrollo,Pruebas,Terminado,Produccion','-2');
