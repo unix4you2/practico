@@ -27,8 +27,6 @@
 	*/
 
 
-
-
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -157,12 +155,12 @@ function PCO_ReemplazarVariablesPHPEnCadena($cadena_original)
 	Salida:
 		Arreglo con todos los resultados
 */
-	function PCO_DireccionPorCoordenas($Latitud, $Longitud, $APIKey_GoogleMaps)
-		{
-			$URLMaps = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".$Latitud.",".$Longitud."&key=".$APIKey_GoogleMaps."&language=es";
-			$DatosRecibidos = @cargar_url($URLMaps);
-			return json_decode($DatosRecibidos, true);
-		}
+function PCO_DireccionPorCoordenas($Latitud, $Longitud, $APIKey_GoogleMaps)
+	{
+		$URLMaps = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".$Latitud.",".$Longitud."&key=".$APIKey_GoogleMaps."&language=es";
+		$DatosRecibidos = @cargar_url($URLMaps);
+		return json_decode($DatosRecibidos, true);
+	}
 
 
 /* ################################################################## */
@@ -179,13 +177,12 @@ function PCO_ReemplazarVariablesPHPEnCadena($cadena_original)
 	Salida:
 		Arreglo con todos los resultados
 */
-	function PCO_DireccionPorIDSitio($PlaceID, $APIKey_GoogleMaps)
-		{
-			$URLMaps = "https://maps.googleapis.com/maps/api/geocode/json?place_id=".$PlaceID."&key=".$APIKey_GoogleMaps."&language=es";
-			$DatosRecibidos = @cargar_url($URLMaps);
-			return json_decode($DatosRecibidos, true);
-		}
-
+function PCO_DireccionPorIDSitio($PlaceID, $APIKey_GoogleMaps)
+	{
+		$URLMaps = "https://maps.googleapis.com/maps/api/geocode/json?place_id=".$PlaceID."&key=".$APIKey_GoogleMaps."&language=es";
+		$DatosRecibidos = @cargar_url($URLMaps);
+		return json_decode($DatosRecibidos, true);
+	}
 
 
 /* ################################################################## */
@@ -208,20 +205,20 @@ function PCO_ReemplazarVariablesPHPEnCadena($cadena_original)
 		* http://stackoverflow.com/questions/14041227/distance-from-point-a-to-b-using-google-maps-php-and-mysql  ver working example
 		* http://jafrancov.com/2011/06/geocode-gmaps-api-v3/
 */
-	function PCO_DistanciaCoordenadasSimple($Latitud1, $Longitud1, $Latitud2, $Longitud2, $UnidadMedida="m")
-		{
-			$theta = $Longitud1 - $Longitud2;
-			$Millas = (sin(deg2rad($Latitud1)) * sin(deg2rad($Latitud2))) + (cos(deg2rad($Latitud1)) * cos(deg2rad($Latitud2)) * cos(deg2rad($theta)));
-			$Millas = acos($Millas);
-			$Millas = rad2deg($Millas);
-			$Millas = $Millas * 60 * 1.1515;
-			if ($UnidadMedida=="mi")
-				return $Millas;
-			$Kilometros = $Millas * 1.609344;
-			if ($UnidadMedida=="km")
-				return $Kilometros;				
-			return $Kilometros/1000;//retorna metros
-		}
+function PCO_DistanciaCoordenadasSimple($Latitud1, $Longitud1, $Latitud2, $Longitud2, $UnidadMedida="m")
+	{
+		$theta = $Longitud1 - $Longitud2;
+		$Millas = (sin(deg2rad($Latitud1)) * sin(deg2rad($Latitud2))) + (cos(deg2rad($Latitud1)) * cos(deg2rad($Latitud2)) * cos(deg2rad($theta)));
+		$Millas = acos($Millas);
+		$Millas = rad2deg($Millas);
+		$Millas = $Millas * 60 * 1.1515;
+		if ($UnidadMedida=="mi")
+			return $Millas;
+		$Kilometros = $Millas * 1.609344;
+		if ($UnidadMedida=="km")
+			return $Kilometros;				
+		return $Kilometros/1000;//retorna metros
+	}
 
 
 /* ################################################################## */
@@ -275,21 +272,21 @@ function PCO_EsDispositivoMovil()
 	Salida:
 		Cero (0) o uno (1) segun la pertenencia o no del usuario al grupo de admins
 */
-	function PCO_EsAdministrador($Usuario)
-		{
-			global $PCOVAR_Administradores;
-			$ArregloAdmins=explode(",",$PCOVAR_Administradores);
+function PCO_EsAdministrador($Usuario)
+	{
+		global $PCOVAR_Administradores;
+		$ArregloAdmins=explode(",",$PCOVAR_Administradores);
 
-			//Recorre el arreglo de super-usuarios
-			$Resultado = 0;
-			if ($Usuario!="")
-				foreach ($ArregloAdmins as $UsuarioAdmin)
-					{
-						if (trim($UsuarioAdmin)==$Usuario)
-							$Resultado = 1;
-					}
-			return $Resultado;
-		}
+		//Recorre el arreglo de super-usuarios
+		$Resultado = 0;
+		if ($Usuario!="")
+			foreach ($ArregloAdmins as $UsuarioAdmin)
+				{
+					if (trim($UsuarioAdmin)==$Usuario)
+						$Resultado = 1;
+				}
+		return $Resultado;
+	}
 
 
 /* ################################################################## */
@@ -305,34 +302,31 @@ function PCO_EsDispositivoMovil()
 	Salida:
 		Sentencias necesarias para insertar los datos en las tablas
 */
-	function PCO_BackupObtenerDatosTabla($PCO_NombreTabla="",$codificacion_actual,$codificacion_destino,$transliterar_conversion)
-		{
-			$RegistrosEncontrados = ejecutar_sql('SELECT * FROM '.$PCO_NombreTabla)->fetchAll(PDO::FETCH_NUM);
-			$Datos = '';
-			foreach ($RegistrosEncontrados as $Registro)
-				{
-					foreach($Registro as &$Valor)
-						{
-							//Determina si se quiere un cambio de codificacion de caracteres y lo ejecuta
-							if ($codificacion_destino!="")
-								{
-									//Determina si se tiene o no transliteracion
-									$ComplementoTransliteracion="";
-									if($transliterar_conversion==1)
-										$ComplementoTransliteracion="//TRANSLIT";
-									if($transliterar_conversion==2)
-										$ComplementoTransliteracion="//IGNORE";
-									if($transliterar_conversion==3)
-										$ComplementoTransliteracion="//IGNORE//TRANSLIT";
-									//Hace la conversion de la cadena
-									$Valor = iconv($codificacion_actual,$codificacion_destino.$ComplementoTransliteracion,$Valor);
-								}
-							$Valor = htmlentities(addslashes($Valor));
-						}
-					$Datos .= 'INSERT INTO '. $PCO_NombreTabla .' VALUES (\'' . implode('\',\'', $Registro) . '\');'."\n";
-				}
-			return $Datos;
-		}
+function PCO_BackupObtenerDatosTabla($PCO_NombreTabla="",$codificacion_actual,$codificacion_destino,$transliterar_conversion)
+	{
+		$RegistrosEncontrados = ejecutar_sql('SELECT * FROM '.$PCO_NombreTabla)->fetchAll(PDO::FETCH_NUM);
+		$Datos = '';
+		foreach ($RegistrosEncontrados as $Registro)
+			{
+				foreach($Registro as &$Valor)
+					{
+						//Determina si se quiere un cambio de codificacion de caracteres y lo ejecuta
+						if ($codificacion_destino!="")
+							{
+								//Determina si se tiene o no transliteracion
+								$ComplementoTransliteracion="";
+								if($transliterar_conversion==1) $ComplementoTransliteracion="//TRANSLIT";
+								if($transliterar_conversion==2) $ComplementoTransliteracion="//IGNORE";
+								if($transliterar_conversion==3) $ComplementoTransliteracion="//IGNORE//TRANSLIT";
+								//Hace la conversion de la cadena
+								$Valor = iconv($codificacion_actual,$codificacion_destino.$ComplementoTransliteracion,$Valor);
+							}
+						$Valor = htmlentities(addslashes($Valor));
+					}
+				$Datos .= 'INSERT INTO '. $PCO_NombreTabla .' VALUES (\'' . implode('\',\'', $Registro) . '\');'."\n";
+			}
+		return $Datos;
+	}
 
 
 /* ################################################################## */
@@ -348,12 +342,12 @@ function PCO_EsDispositivoMovil()
 	Salida:
 		Sentencia de creacion de la tabla
 */
-	function PCO_BackupObtenerColumnasTabla($PCO_NombreTabla="")
-		{
-			$ConsultaCreate = ejecutar_sql('SHOW CREATE TABLE '.$PCO_NombreTabla)->fetchAll();
-			$ConsultaCreate[0][1] = preg_replace("/AUTO_INCREMENT=[\w]*./", '', $ConsultaCreate[0][1]);
-			return $ConsultaCreate[0][1].";"."\n";
-		}
+function PCO_BackupObtenerColumnasTabla($PCO_NombreTabla="")
+	{
+		$ConsultaCreate = ejecutar_sql('SHOW CREATE TABLE '.$PCO_NombreTabla)->fetchAll();
+		$ConsultaCreate[0][1] = preg_replace("/AUTO_INCREMENT=[\w]*./", '', $ConsultaCreate[0][1]);
+		return $ConsultaCreate[0][1].";"."\n";
+	}
 
 
 /* ################################################################## */
@@ -370,26 +364,26 @@ function PCO_EsDispositivoMovil()
 		Retorna un arreglo con todas las tablas y su backup dividido en tres campos logicos de Nombre, SentenciaCreate y SentenciaInsert
 		Retorna 0 cuando se obtiene algun error
 */
-	function PCO_BackupObtenerTablasBD($PCO_ListaTablas="",$TipoDeCopia="Estructura",$codificacion_actual,$codificacion_destino,$transliterar_conversion)
-		{
-			$TablasExistentes = ejecutar_sql('SHOW TABLES')->fetchAll();
-			$TablasSolicitadasBackup=explode(",",$PCO_ListaTablas);
-			$i=0;
-			foreach($TablasExistentes as $Tabla)
-				{
-					//Determina si la tabla esta dentro de las deseadas para backup
-					if (in_array($Tabla[0],$TablasSolicitadasBackup) || $PCO_ListaTablas=="*")
-						{
-							$ArregloFinalTablas[$i]['Nombre']=$Tabla[0];
-							if ($TipoDeCopia=="Estructura" || $TipoDeCopia=="Estructura+Datos")
-								$ArregloFinalTablas[$i]['SentenciaCreate']=PCO_BackupObtenerColumnasTabla($Tabla[0]);
-							if ($TipoDeCopia=="Datos" || $TipoDeCopia=="Estructura+Datos")
-								$ArregloFinalTablas[$i]['SentenciaInsert']=PCO_BackupObtenerDatosTabla($Tabla[0],$codificacion_actual,$codificacion_destino,$transliterar_conversion);
-							$i++;
-						}
-				}
-			return $ArregloFinalTablas;
-		}
+function PCO_BackupObtenerTablasBD($PCO_ListaTablas="",$TipoDeCopia="Estructura",$codificacion_actual,$codificacion_destino,$transliterar_conversion)
+	{
+		$TablasExistentes = ejecutar_sql('SHOW TABLES')->fetchAll();
+		$TablasSolicitadasBackup=explode(",",$PCO_ListaTablas);
+		$i=0;
+		foreach($TablasExistentes as $Tabla)
+			{
+				//Determina si la tabla esta dentro de las deseadas para backup
+				if (in_array($Tabla[0],$TablasSolicitadasBackup) || $PCO_ListaTablas=="*")
+					{
+						$ArregloFinalTablas[$i]['Nombre']=$Tabla[0];
+						if ($TipoDeCopia=="Estructura" || $TipoDeCopia=="Estructura+Datos")
+							$ArregloFinalTablas[$i]['SentenciaCreate']=PCO_BackupObtenerColumnasTabla($Tabla[0]);
+						if ($TipoDeCopia=="Datos" || $TipoDeCopia=="Estructura+Datos")
+							$ArregloFinalTablas[$i]['SentenciaInsert']=PCO_BackupObtenerDatosTabla($Tabla[0],$codificacion_actual,$codificacion_destino,$transliterar_conversion);
+						$i++;
+					}
+			}
+		return $ArregloFinalTablas;
+	}
 
 
 /* ################################################################## */
@@ -408,35 +402,33 @@ function PCO_EsDispositivoMovil()
 		Retorna 1 ante un proceso exitoso
 		Retorna 0 cuando se obtiene algun error
 */
-	function PCO_Backup($PCO_ListaTablas,$ArchivoDestino="",$TipoDeCopia="Estructura",$codificacion_actual="UTF-8",$codificacion_destino="UTF-8",$transliterar_conversion=0)
-		{
-			$EstadoOperacion=1;  //Asume que no hay errores
-			$ContenidoBackup="";
-			if ($ArchivoDestino=="") $EstadoOperacion=0;
-			
-			//Si no hay errores continua con el proceso
-			if ($EstadoOperacion==1)
-				{
-					//Lanza el proceso de copia
-					$ArregloContenidos=PCO_BackupObtenerTablasBD($PCO_ListaTablas,$TipoDeCopia,$codificacion_actual,$codificacion_destino,$transliterar_conversion);
-					//Recorre las tablas agregando todo al Backup
-					for($i=0;$i<count($ArregloContenidos);$i++)
-						{
-							if ($TipoDeCopia=="Estructura" || $TipoDeCopia=="Estructura+Datos")
-								$ContenidoBackup.=$ArregloContenidos[$i]['SentenciaCreate'];
-							if ($TipoDeCopia=="Datos" || $TipoDeCopia=="Estructura+Datos")
-								$ContenidoBackup.=$ArregloContenidos[$i]['SentenciaInsert'];
-						}
+function PCO_Backup($PCO_ListaTablas,$ArchivoDestino="",$TipoDeCopia="Estructura",$codificacion_actual="UTF-8",$codificacion_destino="UTF-8",$transliterar_conversion=0)
+	{
+		$EstadoOperacion=1;  //Asume que no hay errores
+		$ContenidoBackup="";
+		if ($ArchivoDestino=="") $EstadoOperacion=0;
+		
+		//Si no hay errores continua con el proceso
+		if ($EstadoOperacion==1)
+			{
+				//Lanza el proceso de copia
+				$ArregloContenidos=PCO_BackupObtenerTablasBD($PCO_ListaTablas,$TipoDeCopia,$codificacion_actual,$codificacion_destino,$transliterar_conversion);
+				//Recorre las tablas agregando todo al Backup
+				for($i=0;$i<count($ArregloContenidos);$i++)
+					{
+						if ($TipoDeCopia=="Estructura" || $TipoDeCopia=="Estructura+Datos") $ContenidoBackup.=$ArregloContenidos[$i]['SentenciaCreate'];
+						if ($TipoDeCopia=="Datos" || $TipoDeCopia=="Estructura+Datos")      $ContenidoBackup.=$ArregloContenidos[$i]['SentenciaInsert'];
+					}
 
-					// Comprime el archivo resultante y lo guarda
-					$resultado_backup_comprimido = gzencode($ContenidoBackup, 9);
-					$puntero_archivo_destino_backup_bdd = fopen($ArchivoDestino, "w");
-					fwrite($puntero_archivo_destino_backup_bdd, $resultado_backup_comprimido);
-					fclose($puntero_archivo_destino_backup_bdd);
-				}
-			//Retorna el resultado general de la operacion de copia
-			return $EstadoOperacion;
-		}
+				// Comprime el archivo resultante y lo guarda
+				$resultado_backup_comprimido = gzencode($ContenidoBackup, 9);
+				$puntero_archivo_destino_backup_bdd = fopen($ArchivoDestino, "w");
+				fwrite($puntero_archivo_destino_backup_bdd, $resultado_backup_comprimido);
+				fclose($puntero_archivo_destino_backup_bdd);
+			}
+		//Retorna el resultado general de la operacion de copia
+		return $EstadoOperacion;
+	}
 
 
 /* ################################################################## */
@@ -452,40 +444,40 @@ function PCO_EsDispositivoMovil()
 	Salida:
 		Cadena SQL dividida
 */
-	//Divide los queries de un cadena
-	function PCO_SegmentarSQL($sql)
-		{
-			$sql = trim($sql);
-			$sql = preg_replace("/\n#[^\n]*\n/", "\n", $sql);
+//Divide los queries de un cadena
+function PCO_SegmentarSQL($sql)
+	{
+		$sql = trim($sql);
+		$sql = preg_replace("/\n#[^\n]*\n/", "\n", $sql);
 
-			$buffer = array();
-			$ret = array();
-			$in_string = false;
+		$buffer = array();
+		$ret = array();
+		$in_string = false;
 
-			for($i=0; $i<strlen($sql)-1; $i++) {
-				if($sql[$i] == ";" && !$in_string) {
-					$ret[] = substr($sql, 0, $i);
-					$sql = substr($sql, $i + 1);
-					$i = 0;
-				}
-
-				if($in_string && ($sql[$i] == $in_string) && $buffer[1] != "\\") {
-					$in_string = false;
-				}
-				elseif(!$in_string && ($sql[$i] == '"' || $sql[$i] == "'") && (!isset($buffer[0]) || $buffer[0] != "\\")) {
-					$in_string = $sql[$i];
-				}
-				if(isset($buffer[1])) {
-					$buffer[0] = $buffer[1];
-				}
-				$buffer[1] = $sql[$i];
+		for($i=0; $i<strlen($sql)-1; $i++) {
+			if($sql[$i] == ";" && !$in_string) {
+				$ret[] = substr($sql, 0, $i);
+				$sql = substr($sql, $i + 1);
+				$i = 0;
 			}
 
-			if(!empty($sql)) {
-				$ret[] = $sql;
+			if($in_string && ($sql[$i] == $in_string) && $buffer[1] != "\\") {
+				$in_string = false;
 			}
-			return($ret);
+			elseif(!$in_string && ($sql[$i] == '"' || $sql[$i] == "'") && (!isset($buffer[0]) || $buffer[0] != "\\")) {
+				$in_string = $sql[$i];
+			}
+			if(isset($buffer[1])) {
+				$buffer[0] = $buffer[1];
+			}
+			$buffer[1] = $sql[$i];
 		}
+
+		if(!empty($sql)) {
+			$ret[] = $sql;
+		}
+		return($ret);
+	}
 
 
 /* ################################################################## */
@@ -865,123 +857,123 @@ function datatable_desde_hojacalculo($PathArchivo,$NroLineas)
 		Retorna 1 en caso de encontrar el permiso
 		Retorna 0 cuando no se encuentra un permiso
 */
-	function permiso_heredado_accion($PCO_Accion)
-		{
-			global $PCOSESS_LoginUsuario;
-			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
-			$retorno=0;
+function permiso_heredado_accion($PCO_Accion)
+	{
+		global $PCOSESS_LoginUsuario;
+		// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
+		$retorno=0;
 
-			// Verifica mapeo de permisos para acciones que llaman a otras, heredadas.  Valores en = 1  son funciones publicas:
-			// FUNCION_solicitada_por_el_usuario				FUNCION_madre_de_entrada_a_funcion_solicitada
-			if ($PCO_Accion== "mis_informes")						$retorno = 1;
-			if ($PCO_Accion== "guardar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "editar_informe")						$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "clonar_diseno_informe")				$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "definir_copia_informes")				$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "eliminar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "actualizar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "eliminar_informe_tabla")				$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "guardar_informe_tabla")				$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "eliminar_informe_campo")				$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "guardar_informe_campo")				$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "guardar_informe_condicion")			$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "eliminar_informe_condicion")			$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "actualizar_grafico_informe")			$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "actualizar_agrupamiento_informe")	$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "guardar_accion_informe")				$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "eliminar_registro_informe")			$retorno = 1;
-			if ($PCO_Accion== "eliminar_accion_informe")			$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "exportar_informe")					$retorno = 1;
-			if ($PCO_Accion== "importar_informe")					$retorno = 1;
-			if ($PCO_Accion== "analizar_importacion_informe")		$retorno = permiso_agregado_accion("administrar_informes");
-			if ($PCO_Accion== "confirmar_importacion_informe")		$retorno = permiso_agregado_accion("administrar_informes");
-			
-			// Funciones en core/usuarios.php
-			if ($PCO_Accion== "cambiar_clave")						$retorno = 1;
-            if ($PCO_Accion== "actualizar_perfil_usuario")			$retorno = 1;
-            if ($PCO_Accion== "guardar_perfil_usuario")				$retorno = 1;
-            if ($PCO_Accion== "ver_seguimiento_monitoreo")			$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($PCO_Accion== "resetear_clave")						$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($PCO_Accion== "ver_seguimiento_general")			$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($PCO_Accion== "ver_seguimiento_especifico")			$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($PCO_Accion== "actualizar_clave")					$retorno = permiso_heredado_accion("cambiar_clave");
-			if ($PCO_Accion== "agregar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($PCO_Accion== "guardar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($PCO_Accion== "eliminar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($PCO_Accion== "cambiar_estado_usuario")				$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($PCO_Accion== "permisos_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($PCO_Accion== "agregar_permiso")					$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($PCO_Accion== "eliminar_permiso")					$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($PCO_Accion== "informes_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($PCO_Accion== "agregar_informe_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
-			if ($PCO_Accion== "eliminar_informe_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
-            if ($PCO_Accion== "copiar_permisos")					$retorno = permiso_agregado_accion("listar_usuarios");
-            if ($PCO_Accion== "copiar_informes")					$retorno = permiso_agregado_accion("listar_usuarios");
-            if ($PCO_Accion== "agregar_usuario_autoregistro")		$retorno = 1;
-            if ($PCO_Accion== "guardar_usuario_autoregistro")		$retorno = 1;
-            
-			// Funciones en core/menus.php
-			if ($PCO_Accion== "Ver_menu")							$retorno = 1;
-			if ($PCO_Accion== "buscar_permisos_practico")			$retorno = 1;
-            if ($PCO_Accion== "guardar_menu")						$retorno = permiso_agregado_accion("administrar_menu");
-			if ($PCO_Accion== "eliminar_menu")						$retorno = permiso_agregado_accion("administrar_menu");
-			if ($PCO_Accion== "detalles_menu")						$retorno = permiso_agregado_accion("administrar_menu");
-			if ($PCO_Accion== "actualizar_menu")					$retorno = permiso_agregado_accion("administrar_menu");
-			// Funciones en core/tablas.php
-			if ($PCO_Accion== "asistente_tablas")					$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "guardar_crear_tabla_asistente")		$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "editar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "eliminar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "eliminar_campo")						$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "guardar_crear_campo")				$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "guardar_crear_tabla")				$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "definir_copia_tablas")				$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "copiar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "importar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "confirmar_importacion_tabla")		$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "analizar_importacion_csv")			$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "escogertabla_importacion_csv")		$retorno = permiso_agregado_accion("administrar_tablas");
-			if ($PCO_Accion== "ejecutar_importacion_csv")			$retorno = permiso_agregado_accion("administrar_tablas");
+		// Verifica mapeo de permisos para acciones que llaman a otras, heredadas.  Valores en = 1  son funciones publicas:
+		// FUNCION_solicitada_por_el_usuario				FUNCION_madre_de_entrada_a_funcion_solicitada
+		if ($PCO_Accion== "mis_informes")						    $retorno = 1;
+		else if ($PCO_Accion== "guardar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "editar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "clonar_diseno_informe")				$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "definir_copia_informes")			$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "eliminar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "actualizar_informe")				$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "eliminar_informe_tabla")			$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "guardar_informe_tabla")				$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "eliminar_informe_campo")			$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "guardar_informe_campo")				$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "guardar_informe_condicion")			$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "eliminar_informe_condicion")		$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "actualizar_grafico_informe")		$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "actualizar_agrupamiento_informe")	$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "guardar_accion_informe")			$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "eliminar_registro_informe")			$retorno = 1;
+		else if ($PCO_Accion== "eliminar_accion_informe")			$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "exportar_informe")					$retorno = 1;
+		else if ($PCO_Accion== "importar_informe")					$retorno = 1;
+		else if ($PCO_Accion== "analizar_importacion_informe")		$retorno = permiso_agregado_accion("administrar_informes");
+		else if ($PCO_Accion== "confirmar_importacion_informe")		$retorno = permiso_agregado_accion("administrar_informes");
+		
+		// Funciones en core/usuarios.php
+		else if ($PCO_Accion== "cambiar_clave")						$retorno = 1;
+        else if ($PCO_Accion== "actualizar_perfil_usuario")			$retorno = 1;
+        else if ($PCO_Accion== "guardar_perfil_usuario")			$retorno = 1;
+        else if ($PCO_Accion== "ver_seguimiento_monitoreo")			$retorno = permiso_agregado_accion("listar_usuarios");
+		else if ($PCO_Accion== "resetear_clave")					$retorno = permiso_agregado_accion("listar_usuarios");
+		else if ($PCO_Accion== "ver_seguimiento_general")			$retorno = permiso_agregado_accion("listar_usuarios");
+		else if ($PCO_Accion== "ver_seguimiento_especifico")		$retorno = permiso_agregado_accion("listar_usuarios");
+		else if ($PCO_Accion== "actualizar_clave")					$retorno = permiso_heredado_accion("cambiar_clave");
+		else if ($PCO_Accion== "agregar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
+		else if ($PCO_Accion== "guardar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
+		else if ($PCO_Accion== "eliminar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
+		else if ($PCO_Accion== "cambiar_estado_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
+		else if ($PCO_Accion== "permisos_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
+		else if ($PCO_Accion== "agregar_permiso")					$retorno = permiso_agregado_accion("listar_usuarios");
+		else if ($PCO_Accion== "eliminar_permiso")					$retorno = permiso_agregado_accion("listar_usuarios");
+		else if ($PCO_Accion== "informes_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
+		else if ($PCO_Accion== "agregar_informe_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
+		else if ($PCO_Accion== "eliminar_informe_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
+        else if ($PCO_Accion== "copiar_permisos")					$retorno = permiso_agregado_accion("listar_usuarios");
+        else if ($PCO_Accion== "copiar_informes")					$retorno = permiso_agregado_accion("listar_usuarios");
+        else if ($PCO_Accion== "agregar_usuario_autoregistro")		$retorno = 1;
+        else if ($PCO_Accion== "guardar_usuario_autoregistro")		$retorno = 1;
+        
+		// Funciones en core/menus.php
+		else if ($PCO_Accion== "Ver_menu")							$retorno = 1;
+		else if ($PCO_Accion== "buscar_permisos_practico")			$retorno = 1;
+        else if ($PCO_Accion== "guardar_menu")						$retorno = permiso_agregado_accion("administrar_menu");
+		else if ($PCO_Accion== "eliminar_menu")						$retorno = permiso_agregado_accion("administrar_menu");
+		else if ($PCO_Accion== "detalles_menu")						$retorno = permiso_agregado_accion("administrar_menu");
+		else if ($PCO_Accion== "actualizar_menu")					$retorno = permiso_agregado_accion("administrar_menu");
+		// Funciones en core/tablas.php
+		else if ($PCO_Accion== "asistente_tablas")					$retorno = permiso_agregado_accion("administrar_tablas");
+		else if ($PCO_Accion== "guardar_crear_tabla_asistente")		$retorno = permiso_agregado_accion("administrar_tablas");
+		else if ($PCO_Accion== "editar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
+		else if ($PCO_Accion== "eliminar_tabla")					$retorno = permiso_agregado_accion("administrar_tablas");
+		else if ($PCO_Accion== "eliminar_campo")					$retorno = permiso_agregado_accion("administrar_tablas");
+		else if ($PCO_Accion== "guardar_crear_campo")				$retorno = permiso_agregado_accion("administrar_tablas");
+		else if ($PCO_Accion== "guardar_crear_tabla")				$retorno = permiso_agregado_accion("administrar_tablas");
+		else if ($PCO_Accion== "definir_copia_tablas")				$retorno = permiso_agregado_accion("administrar_tablas");
+		else if ($PCO_Accion== "copiar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
+		else if ($PCO_Accion== "importar_tabla")					$retorno = permiso_agregado_accion("administrar_tablas");
+		else if ($PCO_Accion== "confirmar_importacion_tabla")		$retorno = permiso_agregado_accion("administrar_tablas");
+		else if ($PCO_Accion== "analizar_importacion_csv")			$retorno = permiso_agregado_accion("administrar_tablas");
+		else if ($PCO_Accion== "escogertabla_importacion_csv")		$retorno = permiso_agregado_accion("administrar_tablas");
+		else if ($PCO_Accion== "ejecutar_importacion_csv")			$retorno = permiso_agregado_accion("administrar_tablas");
 
-			// Funciones en core/formularios.php
-			if ($PCO_Accion== "guardar_datos_formulario")			$retorno = 1;
-			if ($PCO_Accion== "eliminar_datos_formulario")			$retorno = 1;
-			if ($PCO_Accion== "actualizar_datos_formulario")		$retorno = 1;
-			if ($PCO_Accion== "actualizar_java_evento")		        $retorno = permiso_agregado_accion("administrar_formularios");
-			if ($PCO_Accion== "editar_evento_objeto")		        $retorno = permiso_agregado_accion("administrar_formularios");
-			if ($PCO_Accion== "eliminar_evento_objeto")		        $retorno = permiso_agregado_accion("administrar_formularios");
-			if ($PCO_Accion== "actualizar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
-			if ($PCO_Accion== "copiar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
-			if ($PCO_Accion== "definir_copia_formularios")			$retorno = permiso_agregado_accion("administrar_formularios");
-			if ($PCO_Accion== "actualizar_campo_formulario")		$retorno = permiso_agregado_accion("administrar_formularios");
-			if ($PCO_Accion== "guardar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
-			if ($PCO_Accion== "eliminar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
-			if ($PCO_Accion== "editar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
-			if ($PCO_Accion== "guardar_campo_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
-			if ($PCO_Accion== "eliminar_campo_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
-			if ($PCO_Accion== "guardar_accion_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
-			if ($PCO_Accion== "eliminar_accion_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
-			if ($PCO_Accion== "confirmar_importacion_formulario")	$retorno = permiso_agregado_accion("administrar_formularios");
-			if ($PCO_Accion== "analizar_importacion_formulario")	$retorno = permiso_agregado_accion("administrar_formularios");
-			if ($PCO_Accion== "importar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
-			// Funciones en core/sesion.php
-			if ($PCO_Accion== "Iniciar_login")						$retorno = 1;
-			if ($PCO_Accion== "Terminar_sesion")					$retorno = 1;
-			if ($PCO_Accion== "Mensaje_cierre_sesion")				$retorno = 1;
-			// Funciones en core/objetos.php
-			if ($PCO_Accion== "cargar_objeto")						$retorno = 1;
-			// Funciones en core/actualizacion.php
-			if ($PCO_Accion== "cargar_archivo")						$retorno = permiso_agregado_accion("actualizar_practico");
-			if ($PCO_Accion== "analizar_parche")					$retorno = permiso_agregado_accion("actualizar_practico");
-			if ($PCO_Accion== "aplicar_parche")						$retorno = permiso_agregado_accion("actualizar_practico");
-			// Funciones en core/ajax.php
-			if ($PCO_Accion== "opciones_combo_box")					$retorno = 1;
-			if ($PCO_Accion== "valor_campo_tabla")					$retorno = 1;
-			
-			
-			//echo $PCOSESS_LoginUsuario.':Permiso heredado accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
-			return $retorno;
-		}
+		// Funciones en core/formularios.php
+		else if ($PCO_Accion== "guardar_datos_formulario")			$retorno = 1;
+		else if ($PCO_Accion== "eliminar_datos_formulario")			$retorno = 1;
+		else if ($PCO_Accion== "actualizar_datos_formulario")		$retorno = 1;
+		else if ($PCO_Accion== "actualizar_java_evento")		    $retorno = permiso_agregado_accion("administrar_formularios");
+		else if ($PCO_Accion== "editar_evento_objeto")		        $retorno = permiso_agregado_accion("administrar_formularios");
+		else if ($PCO_Accion== "eliminar_evento_objeto")		    $retorno = permiso_agregado_accion("administrar_formularios");
+		else if ($PCO_Accion== "actualizar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
+		else if ($PCO_Accion== "copiar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
+		else if ($PCO_Accion== "definir_copia_formularios")			$retorno = permiso_agregado_accion("administrar_formularios");
+		else if ($PCO_Accion== "actualizar_campo_formulario")		$retorno = permiso_agregado_accion("administrar_formularios");
+		else if ($PCO_Accion== "guardar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
+		else if ($PCO_Accion== "eliminar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
+		else if ($PCO_Accion== "editar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
+		else if ($PCO_Accion== "guardar_campo_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
+		else if ($PCO_Accion== "eliminar_campo_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
+		else if ($PCO_Accion== "guardar_accion_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
+		else if ($PCO_Accion== "eliminar_accion_formulario")		$retorno = permiso_agregado_accion("editar_formulario");
+		else if ($PCO_Accion== "confirmar_importacion_formulario")	$retorno = permiso_agregado_accion("administrar_formularios");
+		else if ($PCO_Accion== "analizar_importacion_formulario")	$retorno = permiso_agregado_accion("administrar_formularios");
+		else if ($PCO_Accion== "importar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
+		// Funciones en core/sesion.php
+		else if ($PCO_Accion== "Iniciar_login")						$retorno = 1;
+		else if ($PCO_Accion== "Terminar_sesion")					$retorno = 1;
+		else if ($PCO_Accion== "Mensaje_cierre_sesion")				$retorno = 1;
+		// Funciones en core/objetos.php
+		else if ($PCO_Accion== "cargar_objeto")						$retorno = 1;
+		// Funciones en core/actualizacion.php
+		else if ($PCO_Accion== "cargar_archivo")					$retorno = permiso_agregado_accion("actualizar_practico");
+		else if ($PCO_Accion== "analizar_parche")					$retorno = permiso_agregado_accion("actualizar_practico");
+		else if ($PCO_Accion== "aplicar_parche")					$retorno = permiso_agregado_accion("actualizar_practico");
+		// Funciones en core/ajax.php
+		else if ($PCO_Accion== "opciones_combo_box")				$retorno = 1;
+		else if ($PCO_Accion== "valor_campo_tabla")					$retorno = 1;
+		
+		
+		//echo $PCOSESS_LoginUsuario.':Permiso heredado accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
+		return $retorno;
+	}
 
 
 /* ################################################################## */
@@ -1005,7 +997,7 @@ function RestaurarEtiquetasHTML($input)
 								if(strtolower($regs[0]) != 'br')
 									$opened[] = $regs[0];
 							}
-						elseif(preg_match("/^\/([a-z]+)$/i", $tag, $regs) && in_array($regs[1],$opened))
+						else if(preg_match("/^\/([a-z]+)$/i", $tag, $regs) && in_array($regs[1],$opened))
 							{
 								// a tag has been closed
 								unset($opened[array_pop(array_keys($opened, $regs[1]))]);
@@ -1055,22 +1047,22 @@ function RestaurarEtiquetasHTML($input)
 		Retorna 1 en caso de encontrar el permiso
 		Retorna 0 cuando no se encuentra un permiso
 */
-	function permiso_agregado_accion($PCO_Accion)
-		{
-			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
-			$retorno=0;
-			global $ConexionPDO,$TablasCore,$PCOSESS_LoginUsuario;
-			
-			$consulta = $ConexionPDO->prepare("SELECT ".$TablasCore."menu.id FROM ".$TablasCore."usuario_menu,".$TablasCore."menu WHERE ".$TablasCore."menu.id=".$TablasCore."usuario_menu.menu AND usuario='$PCOSESS_LoginUsuario' AND ".$TablasCore."menu.comando='$PCO_Accion' ");
-			$consulta->execute();
-			$registro = $consulta->fetch();
-			if ($registro[0]!="")
-				{
-					$retorno=1;
-				}
-			//echo $PCOSESS_LoginUsuario.':Permiso agregado accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
-			return $retorno;
-		}
+function permiso_agregado_accion($PCO_Accion)
+	{
+		// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
+		$retorno=0;
+		global $ConexionPDO,$TablasCore,$PCOSESS_LoginUsuario;
+		
+		$consulta = $ConexionPDO->prepare("SELECT ".$TablasCore."menu.id FROM ".$TablasCore."usuario_menu,".$TablasCore."menu WHERE ".$TablasCore."menu.id=".$TablasCore."usuario_menu.menu AND usuario='$PCOSESS_LoginUsuario' AND ".$TablasCore."menu.comando='$PCO_Accion' ");
+		$consulta->execute();
+		$registro = $consulta->fetch();
+		if ($registro[0]!="")
+			{
+				$retorno=1;
+			}
+		//echo $PCOSESS_LoginUsuario.':Permiso agregado accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
+		return $retorno;
+	}
 
 
 /* ################################################################## */
@@ -1088,36 +1080,36 @@ function RestaurarEtiquetasHTML($input)
 		Retorna 1 en caso de encontrar el permiso
 		Retorna 0 cuando no se encuentra un permiso
 */
-	function permiso_raiz_admin($PCO_Accion)
-		{
-			global $PCOSESS_LoginUsuario;
-			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
-			$retorno=0;
-			// Permisos o acciones raiz para el admin
-			if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-				{
-					switch ($PCO_Accion)
-						{
-							case "cambiar_clave":
-							case "guardar_configuracion":
-							case "guardar_configws":
-							case "guardar_params":
-							case "administrar_tablas":
-							case "administrar_formularios":
-							case "administrar_informes":
-							case "administrar_menu":
-							case "listar_usuarios":
-							case "actualizar_practico":
-								$retorno = 1;
-								break;
-							default:
-								$retorno = 0;
-								break;
-						}
-				}
-			//echo $PCOSESS_LoginUsuario.':Permiso raiz admin='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
-			return $retorno;
-		}
+function permiso_raiz_admin($PCO_Accion)
+	{
+		global $PCOSESS_LoginUsuario;
+		// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
+		$retorno=0;
+		// Permisos o acciones raiz para el admin
+		if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+			{
+				switch ($PCO_Accion)
+					{
+						case "cambiar_clave":
+						case "guardar_configuracion":
+						case "guardar_configws":
+						case "guardar_params":
+						case "administrar_tablas":
+						case "administrar_formularios":
+						case "administrar_informes":
+						case "administrar_menu":
+						case "listar_usuarios":
+						case "actualizar_practico":
+							$retorno = 1;
+							break;
+						default:
+							$retorno = 0;
+							break;
+					}
+			}
+		//echo $PCOSESS_LoginUsuario.':Permiso raiz admin='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
+		return $retorno;
+	}
 
 
 /* ################################################################## */
@@ -1129,27 +1121,27 @@ function RestaurarEtiquetasHTML($input)
 	Ver tambien:
 		<copiar_formulario> | <copiar_informe>
 */
-	function registro_a_xml($Registro_BD,$ListaCampos,$CodificarBase64=1)
-		{
-			//Inicializa la variable de retorno
-			$Contenido_XML="";
-			// Busca datos y genera XML de cada registro
-			$Elementos_tabla=explode(",",$ListaCampos);
-			
-			foreach ($Elementos_tabla as $ElementoExportar)
-				{
-					$EtiquetaAperturaXML="<$ElementoExportar>";
-					$EtiquetaCierreXML="</$ElementoExportar>";
-					$ValorEtiqueta=$Registro_BD[$ElementoExportar];
-					if ($CodificarBase64==1)
-						$ValorEtiqueta=base64_encode($ValorEtiqueta);
-					$Contenido_XML .= "
-		".$EtiquetaAperturaXML.$ValorEtiqueta.$EtiquetaCierreXML;
-				}	
-			
-			//Retorna la cadena equivalente
-			return $Contenido_XML;
-		}
+function registro_a_xml($Registro_BD,$ListaCampos,$CodificarBase64=1)
+	{
+		//Inicializa la variable de retorno
+		$Contenido_XML="";
+		// Busca datos y genera XML de cada registro
+		$Elementos_tabla=explode(",",$ListaCampos);
+		
+		foreach ($Elementos_tabla as $ElementoExportar)
+			{
+				$EtiquetaAperturaXML="<$ElementoExportar>";
+				$EtiquetaCierreXML="</$ElementoExportar>";
+				$ValorEtiqueta=$Registro_BD[$ElementoExportar];
+				if ($CodificarBase64==1)
+					$ValorEtiqueta=base64_encode($ValorEtiqueta);
+				$Contenido_XML .= "
+	".$EtiquetaAperturaXML.$ValorEtiqueta.$EtiquetaCierreXML;
+			}	
+		
+		//Retorna la cadena equivalente
+		return $Contenido_XML;
+	}
 
 
 /* ################################################################## */
@@ -1166,41 +1158,41 @@ function RestaurarEtiquetasHTML($input)
 		Retorna 1 en caso de encontrar el permiso
 		Retorna 0 cuando no se encuentra un permiso
 */
-	function permiso_accion($PCO_Accion)
-		{
-			global $PCOSESS_LoginUsuario,$TablasCore;
-			// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
-			$retorno=0;
+function permiso_accion($PCO_Accion)
+	{
+		global $PCOSESS_LoginUsuario,$TablasCore;
+		// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
+		$retorno=0;
 
-			// Evalua inicialmente permisos para el admin (evita queries)
-			// $retorno=permiso_raiz_admin($PCO_Accion);
-			if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario)) $retorno=1;
+		// Evalua inicialmente permisos para el admin (evita queries)
+		// $retorno=permiso_raiz_admin($PCO_Accion);
+		if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario)) $retorno=1;
 
-			// Si es un usuario estandar siempre entra, si es el admin entra si no es permiso raiz
-			if (!$retorno)
-				{
-					// Busca permisos agregados directamente al usuario
-					$retorno=permiso_agregado_accion($PCO_Accion);
-					// Si no encuentra permisos directos, busca en los heredados de los directos
-					if (!$retorno)
-						{
-							// Si no encuentra el permiso directo llama los heredados
-							$retorno=permiso_heredado_accion($PCO_Accion);
-						}
-					//Si no encuentra en los heredados busca en preautorizados por configuracion
-					if (!$retorno)
-						{
-							$resultado=ejecutar_sql("SELECT id from ".$TablasCore."parametros WHERE funciones_personalizadas LIKE '%$PCO_Accion%' ");
-							$parametros = $resultado->fetch();
-							//Si encuentra un registro con la accion preautorizada entonces autoriza al usuario
-							if ($parametros["id"]!="")
-								$retorno=1;
-						}
-				}
+		// Si es un usuario estandar siempre entra, si es el admin entra si no es permiso raiz
+		if (!$retorno)
+			{
+				// Busca permisos agregados directamente al usuario
+				$retorno=permiso_agregado_accion($PCO_Accion);
+				// Si no encuentra permisos directos, busca en los heredados de los directos
+				if (!$retorno)
+					{
+						// Si no encuentra el permiso directo llama los heredados
+						$retorno=permiso_heredado_accion($PCO_Accion);
+					}
+				//Si no encuentra en los heredados busca en preautorizados por configuracion
+				if (!$retorno)
+					{
+						$resultado=ejecutar_sql("SELECT id from ".$TablasCore."parametros WHERE funciones_personalizadas LIKE '%$PCO_Accion%' ");
+						$parametros = $resultado->fetch();
+						//Si encuentra un registro con la accion preautorizada entonces autoriza al usuario
+						if ($parametros["id"]!="")
+							$retorno=1;
+					}
+			}
 
-			//echo $PCOSESS_LoginUsuario.':Permiso accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
-			return $retorno;
-		}
+		//echo $PCOSESS_LoginUsuario.':Permiso accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
+		return $retorno;
+	}
 
 
 /* ################################################################## */
@@ -1217,13 +1209,12 @@ function RestaurarEtiquetasHTML($input)
 	Salida:
 		Cadena filtrada
 */
-	function escapar_contenido($texto)
-		{
-			//$texto = preg_replace('|[^a-z0-9-~+_.?#=!&;,/:%@$\|*\'()\\x80-\\xff]|i', '', $texto); // Muy estricto
-			$texto = str_ireplace("script","",$texto);
-
-			return $texto;
-		}
+function escapar_contenido($texto)
+	{
+		//$texto = preg_replace('|[^a-z0-9-~+_.?#=!&;,/:%@$\|*\'()\\x80-\\xff]|i', '', $texto); // Muy estricto
+		$texto = str_ireplace("script","",$texto);
+		return $texto;
+	}
 
 
 /* ################################################################## */
@@ -1243,213 +1234,205 @@ function RestaurarEtiquetasHTML($input)
 
 /* ################################################################## */
 /* ################################################################## */
-  function limpiar_entradas()
+function limpiar_entradas()
+    {
+		/*
+			Function: limpiar_entradas
+			Limpia cadenas y URLs a ser impresas segun acciones para evitar XSS
+
+			Salida:
+				Cadenas y variables filtradas sobre sus valores globales
+		*/
+    	global $PCO_Accion,$PCO_ErrorTitulo,$PCO_ErrorDescripcion;
+    	// Escapar siempre las acciones pues deberian tener solo letras, numeros y underlines.
+    	$PCO_Accion=escapar_contenido($PCO_Accion);
+    	$PCO_Accion = preg_replace("/[^A-Za-z0-9_]/", "", $PCO_Accion);
+    	
+    	// Escapa siempre los mensajes de error
+    	$PCO_ErrorTitulo=escapar_contenido($PCO_ErrorTitulo);
+    	$PCO_ErrorTitulo = preg_replace("/[^A-Za-z0-9_ ><]/", "", $PCO_ErrorTitulo);
+    	$PCO_ErrorDescripcion=escapar_contenido($PCO_ErrorDescripcion);
+    	$PCO_ErrorDescripcion = preg_replace("/[^A-Za-z0-9_ ><]/", "", $PCO_ErrorDescripcion);
+    	
+    	// Escapa otras variables de uso comun
+    	global $PCO_ErrorTitulo,$PCO_ErrorDescripcion;
+    	$PCO_ErrorTitulo=escapar_contenido($PCO_ErrorTitulo);
+    	$PCO_ErrorDescripcion=escapar_contenido($PCO_ErrorDescripcion);
+    
+    	// Escapar algunas variables segun la accion recibida
+    	if ($PCO_Accion=="ver_seguimiento_general")
+    		{
+    			global $accionbuscar,$fin_reg,$inicio_reg;
+    			$accionbuscar=escapar_contenido($accionbuscar);
+    			$inicio_reg=escapar_contenido($inicio_reg);
+    			$fin_reg=escapar_contenido($fin_reg);
+    		}
+    	else if ($PCO_Accion=="administrar_formularios")
+    		{
+    			global $PCO_ErrorDescripcion,$PCO_ErrorTitulo;
+    			$PCO_ErrorDescripcion=escapar_contenido($PCO_ErrorDescripcion);
+    			$PCO_ErrorTitulo=escapar_contenido($PCO_ErrorTitulo);
+    		}
+    	else if ($PCO_Accion=="actualizar_menu")
+    		{
+    			global $id;
+    			$id=escapar_contenido($id);
+    		}
+    	else if ($PCO_Accion=="detalles_menu")
+    		{
+    			global $id;
+    			$id=escapar_contenido($id);
+    		}
+    	else if ($PCO_Accion=="editar_informe")
+    		{
+    			// 
+    			global $informe;
+    			$informe=escapar_contenido($informe);
+    		}
+    	else if ($PCO_Accion=="listar_usuarios")
+    		{
+    			global $login_filtro,$nombre_filtro;
+    			$login_filtro=escapar_contenido($login_filtro);
+    			$nombre_filtro=escapar_contenido($nombre_filtro);
+    		}
+    	else if ($PCO_Accion=="cargar_objeto")
+    		{
+    			global $objeto;
+    			$objeto=escapar_contenido($objeto);
+    		}
+    	else if ($PCO_Accion=="guardar_formulario")
+    		{
+    			global $tabla_datos;
+    			$tabla_datos=escapar_contenido($tabla_datos); // Revisar si afecta el script de autorun
+    		}
+    	else if ($PCO_Accion=="Iniciar_login")
+    		{
+    			global $uid,$clave,$captcha;
+    			$uid=escapar_contenido($uid);
+    			$clave=escapar_contenido($clave);
+    			$captcha=escapar_contenido($captcha);
+    		}
+    }
+
+
+/* ################################################################## */
+/* ################################################################## */
+function TextoAleatorio($longitud)
 	{
-			/*
-				Function: limpiar_entradas
-				Limpia cadenas y URLs a ser impresas segun acciones para evitar XSS
+		/*
+			Function: TextoAleatorio
+			Genera un texto alfanumerico aleatorio de una longitud determinada
 
-				Salida:
-					Cadenas y variables filtradas sobre sus valores globales
-			*/
-		global $PCO_Accion,$PCO_ErrorTitulo,$PCO_ErrorDescripcion;
-		// Escapar siempre las acciones pues deberian tener solo letras, numeros y underlines.
-		$PCO_Accion=escapar_contenido($PCO_Accion);
-		$PCO_Accion = preg_replace("/[^A-Za-z0-9_]/", "", $PCO_Accion);
-		
-		// Escapa siempre los mensajes de error
-		$PCO_ErrorTitulo=escapar_contenido($PCO_ErrorTitulo);
-		$PCO_ErrorTitulo = preg_replace("/[^A-Za-z0-9_ ><]/", "", $PCO_ErrorTitulo);
-		$PCO_ErrorDescripcion=escapar_contenido($PCO_ErrorDescripcion);
-		$PCO_ErrorDescripcion = preg_replace("/[^A-Za-z0-9_ ><]/", "", $PCO_ErrorDescripcion);
-		
-		// Escapa otras variables de uso comun
-		global $PCO_ErrorTitulo,$PCO_ErrorDescripcion;
-		$PCO_ErrorTitulo=escapar_contenido($PCO_ErrorTitulo);
-		$PCO_ErrorDescripcion=escapar_contenido($PCO_ErrorDescripcion);
+			Variables de entrada:
 
-		// Escapar algunas variables segun la accion recibida
-		if ($PCO_Accion=="ver_seguimiento_general")
-			{
-				global $accionbuscar,$fin_reg,$inicio_reg;
-				$accionbuscar=escapar_contenido($accionbuscar);
-				$inicio_reg=escapar_contenido($inicio_reg);
-				$fin_reg=escapar_contenido($fin_reg);
-			}
+				longitud - Numero de caracteres que deben ser retornados en la cadena
 
-		if ($PCO_Accion=="administrar_formularios")
+			Salida:
+				Cadena aleatoria
+		*/
+		$plantilla = "23456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		$clave="";
+		for($i=0;$i<$longitud;$i++)
 			{
-				global $PCO_ErrorDescripcion,$PCO_ErrorTitulo;
-				$PCO_ErrorDescripcion=escapar_contenido($PCO_ErrorDescripcion);
-				$PCO_ErrorTitulo=escapar_contenido($PCO_ErrorTitulo);
+				$clave .= $plantilla{rand(0,strlen($plantilla)-1)};
 			}
-
-		if ($PCO_Accion=="actualizar_menu")
-			{
-				global $id;
-				$id=escapar_contenido($id);
-			}
-
-		if ($PCO_Accion=="detalles_menu")
-			{
-				global $id;
-				$id=escapar_contenido($id);
-			}
-
-		if ($PCO_Accion=="editar_informe")
-			{
-				// 
-				global $informe;
-				$informe=escapar_contenido($informe);
-			}
-
-		if ($PCO_Accion=="listar_usuarios")
-			{
-				global $login_filtro,$nombre_filtro;
-				$login_filtro=escapar_contenido($login_filtro);
-				$nombre_filtro=escapar_contenido($nombre_filtro);
-			}
-			
-		if ($PCO_Accion=="cargar_objeto")
-			{
-				global $objeto;
-				$objeto=escapar_contenido($objeto);
-			}
-
-		if ($PCO_Accion=="guardar_formulario")
-			{
-				global $tabla_datos;
-				$tabla_datos=escapar_contenido($tabla_datos); // Revisar si afecta el script de autorun
-			}
-			
-		if ($PCO_Accion=="Iniciar_login")
-			{
-				global $uid,$clave,$captcha;
-				$uid=escapar_contenido($uid);
-				$clave=escapar_contenido($clave);
-				$captcha=escapar_contenido($captcha);
-			}
+		return $clave;
 	}
 
 
 /* ################################################################## */
 /* ################################################################## */
-	function TextoAleatorio($longitud)
-		{
-			/*
-				Function: TextoAleatorio
-				Genera un texto alfanumerico aleatorio de una longitud determinada
+function CodigoQR($contenido,$recuperacion_errores="L",$ancho_pixeles=3,$margen_pixeles=1,$ruta_almacenamiento="tmp/",$archivo="")
+	{
+		/*
+			Function: CodigoQR
+			Genera un codigo QR a partir de los parametros recibidos
 
-				Variables de entrada:
+			Variables de entrada:
 
-					longitud - Numero de caracteres que deben ser retornados en la cadena
+				contenido - Texto que debera ser representado en el codigo QR
+				recuperacion_errores - Recuperacion de errores para el codigo (L,M,Q,H) L el mas bajo, H el mas alto
+				ancho_pixeles - Tamano de cada cuadro del codigo en pixeles
+				margen_pixeles - La margen externa del codigo QR
+				ruta_almacenamiento - Path sobre el cual se almacenara el codigo, debe contar con permisos de escritura
+				archivo - nombre de archivo (sin extension) sobre el cual sera guardado el codigo
 
-				Salida:
-					Cadena aleatoria
-			*/
-			$plantilla = "23456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-			$clave="";
-			for($i=0;$i<$longitud;$i++)
-				{
-					$clave .= $plantilla{rand(0,strlen($plantilla)-1)};
-				}
-			return $clave;
-		}
-
-
-/* ################################################################## */
-/* ################################################################## */
-	function CodigoQR($contenido,$recuperacion_errores="L",$ancho_pixeles=3,$margen_pixeles=1,$ruta_almacenamiento="tmp/",$archivo="")
-		{
-			/*
-				Function: CodigoQR
-				Genera un codigo QR a partir de los parametros recibidos
-
-				Variables de entrada:
-
-					contenido - Texto que debera ser representado en el codigo QR
-					recuperacion_errores - Recuperacion de errores para el codigo (L,M,Q,H) L el mas bajo, H el mas alto
-					ancho_pixeles - Tamano de cada cuadro del codigo en pixeles
-					margen_pixeles - La margen externa del codigo QR
-					ruta_almacenamiento - Path sobre el cual se almacenara el codigo, debe contar con permisos de escritura
-					archivo - nombre de archivo (sin extension) sobre el cual sera guardado el codigo
-
-				Salida:
-					Imagen generada para el codigo QR
-			*/
-			include_once("inc/qrcode/qrcode.php");
-			//Si no se recibe un archivo entonces genera uno aleatorio
-			if ($archivo=="") $archivo="QR".TextoAleatorio(15);
-			//Genera el archivo con el QR
-			$Ruta_QRC=$ruta_almacenamiento.$archivo.".png";
-			QRcode::png($contenido, $Ruta_QRC, $recuperacion_errores, $ancho_pixeles, $margen_pixeles);
-			//Devuelve el codigo QR como etiqueta de imagen HTML
-			return '<img src="'.$Ruta_QRC.'" alt="" border="0">';
-		}
+			Salida:
+				Imagen generada para el codigo QR
+		*/
+		include_once("inc/qrcode/qrcode.php");
+		//Si no se recibe un archivo entonces genera uno aleatorio
+		if ($archivo=="") $archivo="QR".TextoAleatorio(15);
+		//Genera el archivo con el QR
+		$Ruta_QRC=$ruta_almacenamiento.$archivo.".png";
+		QRcode::png($contenido, $Ruta_QRC, $recuperacion_errores, $ancho_pixeles, $margen_pixeles);
+		//Devuelve el codigo QR como etiqueta de imagen HTML
+		return '<img src="'.$Ruta_QRC.'" alt="" border="0">';
+	}
 
 
 /* ################################################################## */
 /* ################################################################## */
-	function filtrar_cadena_sql($cadena)
-		{
-			/*
-				Function: filtrar_cadena_sql
-				Filtra los caracteres existentes en una cadena de manera que no permita comillas sencillas, backslash o cualquier otro caracter que genere problemas en las consultas o posibles fallos de seguridad derivados de un SQLInjection
+function filtrar_cadena_sql($cadena)
+	{
+		/*
+			Function: filtrar_cadena_sql
+			Filtra los caracteres existentes en una cadena de manera que no permita comillas sencillas, backslash o cualquier otro caracter que genere problemas en las consultas o posibles fallos de seguridad derivados de un SQLInjection
 
-				Variables de entrada:
+			Variables de entrada:
 
-					cadena - Cadena a filtrar
+				cadena - Cadena a filtrar
 
-				Salida:
-					Retorna cadena sin caracteres ilegales o posibles inyecciones
+			Salida:
+				Retorna cadena sin caracteres ilegales o posibles inyecciones
 
-					' or "='
-					'' or 1=1 -- and ''=''
-					admin' --
-					admin' #
-					admin'/*
-					' or 1=1--
-					' or 1=1#
-					' or 1=1/*
-					') or '1'='1--
-					') or ('1'='1--
-					1' and ''=' 
-					' OR 'A'='A
-			*/
-			global $PCO_Accion;
+				' or "='
+				'' or 1=1 -- and ''=''
+				admin' --
+				admin' #
+				admin'/*
+				' or 1=1--
+				' or 1=1#
+				' or 1=1/*
+				') or '1'='1--
+				') or ('1'='1--
+				1' and ''=' 
+				' OR 'A'='A
+		*/
+		global $PCO_Accion;
 
-			if ($PCO_Accion=="Iniciar_login")
-				{
-					$cadena = str_ireplace("''","'",$cadena);
-					$cadena = str_ireplace("\\","",$cadena);
-					$cadena = str_ireplace("COPY","",$cadena);
-					$cadena = str_ireplace("DELETE","",$cadena);
-					$cadena = str_ireplace("DROP","",$cadena);
-					$cadena = str_ireplace("DUMP","",$cadena);
-					$cadena = str_ireplace(" OR ","",$cadena);
-					$cadena = str_ireplace("%","",$cadena);
-					$cadena = str_ireplace("LIKE","",$cadena);
-					$cadena = str_ireplace("--","",$cadena);
-					$cadena = str_ireplace("^","",$cadena);
-					$cadena = str_ireplace("[","",$cadena);
-					$cadena = str_ireplace("]","",$cadena);
-					$cadena = str_ireplace("!","",$cadena);
-					$cadena = str_ireplace("¡","",$cadena);
-					$cadena = str_ireplace("?","",$cadena);
-					$cadena = str_ireplace("&","",$cadena);
-				}
-				
-			// Expresiones que siempre deben ser filtradas	
-			$cadena = str_ireplace("BENCHMARK","",$cadena);
+		if ($PCO_Accion=="Iniciar_login")
+			{
+				$cadena = str_ireplace("''","'",$cadena);
+				$cadena = str_ireplace("\\","",$cadena);
+				$cadena = str_ireplace("COPY","",$cadena);
+				$cadena = str_ireplace("DELETE","",$cadena);
+				$cadena = str_ireplace("DROP","",$cadena);
+				$cadena = str_ireplace("DUMP","",$cadena);
+				$cadena = str_ireplace(" OR ","",$cadena);
+				$cadena = str_ireplace("%","",$cadena);
+				$cadena = str_ireplace("LIKE","",$cadena);
+				$cadena = str_ireplace("--","",$cadena);
+				$cadena = str_ireplace("^","",$cadena);
+				$cadena = str_ireplace("[","",$cadena);
+				$cadena = str_ireplace("]","",$cadena);
+				$cadena = str_ireplace("!","",$cadena);
+				$cadena = str_ireplace("¡","",$cadena);
+				$cadena = str_ireplace("?","",$cadena);
+				$cadena = str_ireplace("&","",$cadena);
+			}
+			
+		// Expresiones que siempre deben ser filtradas	
+		$cadena = str_ireplace("BENCHMARK","",$cadena);
 
-			/*
-			array_walk($_POST, 'filtrar_cadena_sql');
-			array_walk($_GET, 'filtrar_cadena_sql');
-			//$cadena = str_ireplace("SELECT","",$cadena);
-			//$cadena = str_ireplace("=","",$cadena);
-			*/
-			return $cadena;
-		}
+		/*
+		array_walk($_POST, 'filtrar_cadena_sql');
+		array_walk($_GET, 'filtrar_cadena_sql');
+		//$cadena = str_ireplace("SELECT","",$cadena);
+		//$cadena = str_ireplace("=","",$cadena);
+		*/
+		return $cadena;
+	}
 
 
 /* ##################################################################
@@ -1490,305 +1473,304 @@ function completar_parametros($string,$data) {
 
 /* ################################################################## */
 /* ################################################################## */
-	function obtener_ultimo_id_insertado($ConexionBD="")
-		{
-			/*
-				Function: obtener_ultimo_id_insertado
-				Segun el motor, obtiene el ultimo ID de registro insertado en la conexion especificada
+function obtener_ultimo_id_insertado($ConexionBD="")
+	{
+		/*
+			Function: obtener_ultimo_id_insertado
+			Segun el motor, obtiene el ultimo ID de registro insertado en la conexion especificada
 
-				Variables de entrada:
+			Variables de entrada:
 
-					ConexionBD - Determina si la consulta debe ser ejecutada en otra conexion o motor.  Se hace obligatorio enviar parametros cuando se envia otra conexion
-					
-				Salida:
-					Retorna valor de ID de registro o vacio si no se encuentra alguno
-			*/
-			global $MotorBD;
+				ConexionBD - Determina si la consulta debe ser ejecutada en otra conexion o motor.  Se hace obligatorio enviar parametros cuando se envia otra conexion
+				
+			Salida:
+				Retorna valor de ID de registro o vacio si no se encuentra alguno
+		*/
+		global $MotorBD;
 
-            $id_ultimo_registro_insertado="";
-			$id_ultimo_registro_insertado=$ConexionBD->lastInsertId();
-			//Si el motor no soporta adecuadamente el lastInsertId() hace funcion manual
-			if ($MotorBD=="dblib_mssql")
-				{
-					$registro_ultimo_id=ejecutar_sql("SELECT SCOPE_IDENTITY()","",$ConexionBD,1)->fetch();
-					$id_ultimo_registro_insertado=$registro_ultimo_id[0];
-				}
-			if ($MotorBD=="oracle")
-				{
-					$registro_ultimo_id=ejecutar_sql("SELECT SEQNAME.CURRVAL FROM DUAL;","",$ConexionBD,1)->fetch();
-					$id_ultimo_registro_insertado=$registro_ultimo_id[0];
-				}
-			if ($MotorBD=="pgsql")
-				{
-					$registro_ultimo_id=ejecutar_sql("SELECT lastval();","",$ConexionBD,1)->fetch();
-					$id_ultimo_registro_insertado=$registro_ultimo_id[0];
-				}
+        $id_ultimo_registro_insertado="";
+		$id_ultimo_registro_insertado=$ConexionBD->lastInsertId();
+		//Si el motor no soporta adecuadamente el lastInsertId() hace funcion manual
+		if ($MotorBD=="dblib_mssql")
+			{
+				$registro_ultimo_id=ejecutar_sql("SELECT SCOPE_IDENTITY()","",$ConexionBD,1)->fetch();
+				$id_ultimo_registro_insertado=$registro_ultimo_id[0];
+			}
+		else if ($MotorBD=="oracle")
+			{
+				$registro_ultimo_id=ejecutar_sql("SELECT SEQNAME.CURRVAL FROM DUAL;","",$ConexionBD,1)->fetch();
+				$id_ultimo_registro_insertado=$registro_ultimo_id[0];
+			}
+		else if ($MotorBD=="pgsql")
+			{
+				$registro_ultimo_id=ejecutar_sql("SELECT lastval();","",$ConexionBD,1)->fetch();
+				$id_ultimo_registro_insertado=$registro_ultimo_id[0];
+			}
 
-            return $id_ultimo_registro_insertado;
-		}
-
-
-/* ################################################################## */
-/* ################################################################## */
-	function ejecutar_sql($query,$lista_parametros="",$ConexionBD="",$EvitarLogSQL=0)
-		{
-			/*
-				Function: ejecutar_sql
-				Ejecuta consultas que retornan registros (SELECTs).
-
-				Variables de entrada:
-
-					query - Consulta preformateada para ser ejecutada en el motor
-					lista_parametros - Lista de variables PHP con parametros que deben ser preparados para el query separados por $_SeparadorCampos_
-					ConexionBD - Determina si la consulta debe ser ejecutada en otra conexion o motor.  Se hace obligatorio enviar parametros cuando se envia otra conexion
-					
-				Salida:
-					Retorna mensaje en pantalla con la descripcion devuelta por el driver en caso de error
-					Retorna una variable con el arreglo de resultados en caso de ser exitosa la consulta
-			*/
-			
-			//Determina si se debe usar la conexion global del sistema o una especifica de usuario
-			if($ConexionBD=="")
-				global $ConexionPDO;
-			else
-				$ConexionPDO=$ConexionBD;
-			
-			global $ModoDepuracion;
-			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin;
-			global $PCO_Accion;
-			global $PCOSESS_LoginUsuario,$_SeparadorCampos_,$DepuracionSQL;
-			
-			// Filtra la cadena antes de ser ejecutada
-			$query=filtrar_cadena_sql($query);
-
-			try
-				{
-					$consulta = $ConexionPDO->prepare($query);
-					//Cuando se reciben parametros entonces se asume recepcion de querys con  interrogaciones  ?
-					//que deben ser preparados antes de ejecutarse con cada uno de los parametros recibidos
-					if ($lista_parametros!="")
-						{
-							$cantidad_parametros=substr_count($query,'?');
-							$parametros=@explode($_SeparadorCampos_,$lista_parametros);
-							// if ($cantidad_parametros!=count($parametros)) //La cantidad de parametros en query es diferente a los recibidos
-							//Recorre cada parametro y toma su valor
-							for ($i=1;$i<=$cantidad_parametros;$i++)
-								{
-                                    /*
-                                    //Si no recibe valor en el parametro hace el bind con vacio para al menos hacerlo valido
-                                    if($parametros[$i-1] == "")
-                                        $consulta->bindValue($i,'');  // $consulta->bindValue($i,PDO::PARAM_NULL);
-                                    else
-                                    */
-                                        $consulta->bindValue($i, $parametros[$i-1]);
-									//echo 'Parametro '.$i.'='.$parametros[$i-1]."<br>"; //PARA DEPURACION
-								}
-						}
-					$consulta->execute();
-
-					//Lleva el log a auditoria en caso de estar encendido
-					if ($EvitarLogSQL==0)
-						if ($DepuracionSQL==1)
-							auditar($query,"SQLog:$PCOSESS_LoginUsuario");
-
-					return $consulta;
-					//return $consulta->fetchAll();
-				}
-			catch( PDOException $ErrorPDO)
-				{
-					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
-					if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-						$mensaje_final=$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.@completar_parametros($query,$parametros);
-					else
-						$mensaje_final='<b>'.$MULTILANG_Detalles.'</b>: '.$MULTILANG_ErrorSoloAdmin;
-					//Presenta el mensaje sobre el HTML y como Emergente JS
-                    mensaje($MULTILANG_ErrorTiempoEjecucion,$mensaje_final, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-					echo '<script type="" language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\\n\\n'.$mensaje_final.'");</script>';
-					//Redirecciona segun la accion
-					if ($PCO_Accion=="Iniciar_login")
-						echo '<form name="Acceso" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value=""></form><script type="" language="JavaScript">	document.Acceso.submit();  </script>';
-					return 1;
-				}
-		}
+        return $id_ultimo_registro_insertado;
+	}
 
 
 /* ################################################################## */
 /* ################################################################## */
-	function ejecutar_nosql($ConexionNoSQL,$LlaveRegistro="")
-		{
-			/*
-				Function: ejecutar_nosql
-				Ejecuta consultas hacia motores NoSQL
+function ejecutar_sql($query,$lista_parametros="",$ConexionBD="",$EvitarLogSQL=0)
+	{
+		/*
+			Function: ejecutar_sql
+			Ejecuta consultas que retornan registros (SELECTs).
 
-				Variables de entrada:
+			Variables de entrada:
 
-					ConexionNoSQL - Variable de conexion previamente creada
-					LlaveRegistro - Consulta preformateada para ser ejecutada en el motor
-					
-				Salida:
-					Retorna mensaje en pantalla con la descripcion devuelta por el driver en caso de error
-					Retorna una variable con el arreglo de resultados en caso de ser exitosa la consulta
-			*/
-			
-			global $ModoDepuracion;
-			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin;
-			global $PCO_Accion;
-			global $PCOSESS_LoginUsuario;
-			try
-				{
-					if ($ConexionNoSQL[TipoMotor]=="couchbase")
-						{
-							//Si la llave de registro para consulta unica fue entregada hace la operacion
-							if ($LlaveRegistro!="")
-								$ResultadosNoSQL = $ConexionNoSQL[Enlace]->get($LlaveRegistro);
-						}
-					return $ResultadosNoSQL;
-				}
-			catch( Exception $CODError)
-				{
-					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
-					if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-						$mensaje_final=$CODError->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: ';
-					else
-						$mensaje_final='<b>'.$MULTILANG_Detalles.'</b>: '.$MULTILANG_ErrorSoloAdmin;
-					//Presenta el mensaje sobre el HTML y como Emergente JS
-                    mensaje($MULTILANG_ErrorTiempoEjecucion,$mensaje_final, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-					echo '<script type="" language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\\n\\n'.$mensaje_final.'");</script>';
-					//Redirecciona segun la accion
-					if ($PCO_Accion=="Iniciar_login")
-						echo '<form name="Acceso" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value=""></form><script type="" language="JavaScript">	document.Acceso.submit();  </script>';
-					return 1;
-				}
-		}
+				query - Consulta preformateada para ser ejecutada en el motor
+				lista_parametros - Lista de variables PHP con parametros que deben ser preparados para el query separados por $_SeparadorCampos_
+				ConexionBD - Determina si la consulta debe ser ejecutada en otra conexion o motor.  Se hace obligatorio enviar parametros cuando se envia otra conexion
+				
+			Salida:
+				Retorna mensaje en pantalla con la descripcion devuelta por el driver en caso de error
+				Retorna una variable con el arreglo de resultados en caso de ser exitosa la consulta
+		*/
+		
+		//Determina si se debe usar la conexion global del sistema o una especifica de usuario
+		if($ConexionBD=="")
+			global $ConexionPDO;
+		else
+			$ConexionPDO=$ConexionBD;
+		
+		global $ModoDepuracion;
+		global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin;
+		global $PCO_Accion;
+		global $PCOSESS_LoginUsuario,$_SeparadorCampos_,$DepuracionSQL;
+		
+		// Filtra la cadena antes de ser ejecutada
+		$query=filtrar_cadena_sql($query);
 
+		try
+			{
+				$consulta = $ConexionPDO->prepare($query);
+				//Cuando se reciben parametros entonces se asume recepcion de querys con  interrogaciones  ?
+				//que deben ser preparados antes de ejecutarse con cada uno de los parametros recibidos
+				if ($lista_parametros!="")
+					{
+						$cantidad_parametros=substr_count($query,'?');
+						$parametros=@explode($_SeparadorCampos_,$lista_parametros);
+						// if ($cantidad_parametros!=count($parametros)) //La cantidad de parametros en query es diferente a los recibidos
+						//Recorre cada parametro y toma su valor
+						for ($i=1;$i<=$cantidad_parametros;$i++)
+							{
+                                /*
+                                //Si no recibe valor en el parametro hace el bind con vacio para al menos hacerlo valido
+                                if($parametros[$i-1] == "")
+                                    $consulta->bindValue($i,'');  // $consulta->bindValue($i,PDO::PARAM_NULL);
+                                else
+                                */
+                                    $consulta->bindValue($i, $parametros[$i-1]);
+								//echo 'Parametro '.$i.'='.$parametros[$i-1]."<br>"; //PARA DEPURACION
+							}
+					}
+				$consulta->execute();
 
-/* ################################################################## */
-/* ################################################################## */
-	function ejecutar_sql_unaria($query,$lista_parametros="",$ConexionBD="",$ReplicaRecursiva=1,$EvitarLogSQL=0)
-		{
-			/*
-				Function: ejecutar_sql_unaria
-				Ejecuta consultas que no retornan registros tales como CREATE, INSERT, DELETE, UPDATE entre otros.
+				//Lleva el log a auditoria en caso de estar encendido
+				if ($EvitarLogSQL==0)
+					if ($DepuracionSQL==1)
+						auditar($query,"SQLog:$PCOSESS_LoginUsuario");
 
-				Variables de entrada:
-
-					query - Consulta preformateada para ser ejecutada en el motor
-					param - Lista de parametros que deben ser preparados para el query separados por coma
-					ConexionBD - Determina si la consulta debe ser ejecutada en otra conexion o motor.  Se hace obligatorio enviar parametros cuando se envia otra conexion
-					ReplicaRecursiva - Indica si se deben buscar o no conexiones adicionales para realizar replica de oepraciones.  Normalmente inicia en 1, pero las llamadas sucesivas se hacen en 0 para evitar llamadas infinitas
-
-				Salida:
-					Retorna una cadena que contiene una descripcion de error PDO en caso de error y agrega un mensaje en pantalla con la descripcion devuelta por el driver
-					Retorna una cadena vacia si la consulta es ejecutada sin problemas.
-			*/
-			global $ListaCamposSinID_replicasbd,$TablasCore,$DepuracionSQL;
-			//Si aplica la replica recursiva entonces busca las conexiones
-			if ($ReplicaRecursiva==1)
-				{
-					//Busca conexiones configuradas como replica
-					$ConexionesReplica=ejecutar_sql("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE tipo_replica=1 ");
-					//Recorre cada conexion de replica encontrada para realizar la operacion
-					while ($registro_conexion = $ConexionesReplica->fetch())
-						{
-							global ${$registro_conexion["nombre"]};
-							//Hace el llamado a la operacion de replica sobre la conexion encontrada
-							ejecutar_sql_unaria($query,$lista_parametros,${$registro_conexion["nombre"]},0);
-						}
-				}
-
-			//Determina si se debe usar la conexion global del sistema o una especifica de usuario
-			if($ConexionBD=="")
-				global $ConexionPDO;
-			else
-				$ConexionPDO=$ConexionBD;
-			
-			global $ModoDepuracion;
-			global $PCOSESS_LoginUsuario,$_SeparadorCampos_;
-			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin,$MULTILANG_ContacteAdmin,$MULTILANG_MotorBD;
-			try
-				{
-					$consulta = $ConexionPDO->prepare($query);
-					//Cuando se reciben parametros entonces se asume recepcion de querys con  interrogaciones  ?
-					//que deben ser preparados antes de ejecutarse con cada uno de los parametros recibidos
-					if ($lista_parametros!="")
-						{
-							$cantidad_parametros=substr_count($query,'?');
-							$parametros=@explode($_SeparadorCampos_,$lista_parametros);
-							// if ($cantidad_parametros!=count($parametros)) //La cantidad de parametros en query es diferente a los recibidos
-							//Recorre cada parametro y toma su valor
-							for ($i=1;$i<=$cantidad_parametros;$i++)
-								{
-                                    //Si no recibe valor en el parametro hace el bind con null para al menos hacerlo valido
-                                    /*
-                                    if($parametros[$i-1] == '')
-                                        //$consulta->bindValue($i,PDO::PARAM_NULL);
-                                        //$consulta->bindValue($i,'');
-                                        //$consulta->bindValue($i,$parametros[$i-1]);
-                                        $consulta->bindParam($i,$parametros[$i-1]);
-                                    else
-                                        //$consulta->bindValue($i, $parametros[$i-1]);
-                                    */
-                                        //$consulta->bindValue($i, iconv("UTF-8", "ISO-8859-1//TRANSLIT", $parametros[$i-1]));
-                                        //$consulta->bindValue($i, utf8_encode($parametros[$i-1]));
-                                        $consulta->bindValue($i, $parametros[$i-1]);
-									//echo 'Parametro '.$i.'='.$parametros[$i-1]."<br>"; //PARA DEPURACION
-								}
-						}
-					$consulta->execute();
-
-					//Lleva el log a auditoria en caso de estar encendido
-					if ($EvitarLogSQL==0)
-						if ($DepuracionSQL==1)
-							auditar($query,"SQLog:$PCOSESS_LoginUsuario");
-
-					return $consulta;
-				}
-			catch( PDOException $ErrorPDO)
-				{
-					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
-					if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-                        echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.completar_parametros($query,$parametros).'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
-					else
-						echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$MULTILANG_ErrorSoloAdmin.'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
-					return $MULTILANG_ErrorTiempoEjecucion;
-				}
-		}
-
+				return $consulta;
+				//return $consulta->fetchAll();
+			}
+		catch( PDOException $ErrorPDO)
+			{
+				//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
+				if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+					$mensaje_final=$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.@completar_parametros($query,$parametros);
+				else
+					$mensaje_final='<b>'.$MULTILANG_Detalles.'</b>: '.$MULTILANG_ErrorSoloAdmin;
+				//Presenta el mensaje sobre el HTML y como Emergente JS
+                mensaje($MULTILANG_ErrorTiempoEjecucion,$mensaje_final, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+				echo '<script type="" language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\\n\\n'.$mensaje_final.'");</script>';
+				//Redirecciona segun la accion
+				if ($PCO_Accion=="Iniciar_login")
+					echo '<form name="Acceso" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value=""></form><script type="" language="JavaScript">	document.Acceso.submit();  </script>';
+				return 1;
+			}
+	}
 
 
 /* ################################################################## */
 /* ################################################################## */
-	function ejecutar_sql_procedimiento($procedimiento,$ConexionBD="")
-		{
-			/*
-				Function: ejecutar_sql_procedimiento
-				Ejecuta procedimientos almacenados por la base de datos
+function ejecutar_nosql($ConexionNoSQL,$LlaveRegistro="")
+	{
+		/*
+			Function: ejecutar_nosql
+			Ejecuta consultas hacia motores NoSQL
 
-				Variables de entrada:
+			Variables de entrada:
 
-					procedimiento - Procedimiento que debe residir en la base de datos y que ha de ser ejecutado
-					ConexionBD - Determina si la consulta debe ser ejecutada en otra conexion o motor.  Se hace obligatorio enviar parametros cuando se envia otra conexion
+				ConexionNoSQL - Variable de conexion previamente creada
+				LlaveRegistro - Consulta preformateada para ser ejecutada en el motor
+				
+			Salida:
+				Retorna mensaje en pantalla con la descripcion devuelta por el driver en caso de error
+				Retorna una variable con el arreglo de resultados en caso de ser exitosa la consulta
+		*/
+		
+		global $ModoDepuracion;
+		global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin;
+		global $PCO_Accion;
+		global $PCOSESS_LoginUsuario;
+		try
+			{
+				if ($ConexionNoSQL[TipoMotor]=="couchbase")
+					{
+						//Si la llave de registro para consulta unica fue entregada hace la operacion
+						if ($LlaveRegistro!="")
+							$ResultadosNoSQL = $ConexionNoSQL[Enlace]->get($LlaveRegistro);
+					}
+				return $ResultadosNoSQL;
+			}
+		catch( Exception $CODError)
+			{
+				//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
+				if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+					$mensaje_final=$CODError->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: ';
+				else
+					$mensaje_final='<b>'.$MULTILANG_Detalles.'</b>: '.$MULTILANG_ErrorSoloAdmin;
+				//Presenta el mensaje sobre el HTML y como Emergente JS
+                mensaje($MULTILANG_ErrorTiempoEjecucion,$mensaje_final, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+				echo '<script type="" language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\\n\\n'.$mensaje_final.'");</script>';
+				//Redirecciona segun la accion
+				if ($PCO_Accion=="Iniciar_login")
+					echo '<form name="Acceso" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value=""></form><script type="" language="JavaScript">	document.Acceso.submit();  </script>';
+				return 1;
+			}
+	}
 
-				Salida:
-					Retorna 0 en caso de tener problemas con la ejecucion del procedimiento
-					Retorna una cadena vacia si el procedimiento es llamado y ejecutado sin problemas
-			*/
-			//Determina si se debe usar la conexion global del sistema o una especifica de usuario
-			if($ConexionBD=="")
-				global $ConexionPDO;
-			else
-				$ConexionPDO=$ConexionBD;
 
-			try
-				{
-					$ConexionPDO->exec($procedimiento);
-					return "";
-				}
-			catch(PDOException $e)
-				{
-					return $e->getMessage();
-				}
-		}
+/* ################################################################## */
+/* ################################################################## */
+function ejecutar_sql_unaria($query,$lista_parametros="",$ConexionBD="",$ReplicaRecursiva=1,$EvitarLogSQL=0)
+	{
+		/*
+			Function: ejecutar_sql_unaria
+			Ejecuta consultas que no retornan registros tales como CREATE, INSERT, DELETE, UPDATE entre otros.
+
+			Variables de entrada:
+
+				query - Consulta preformateada para ser ejecutada en el motor
+				param - Lista de parametros que deben ser preparados para el query separados por coma
+				ConexionBD - Determina si la consulta debe ser ejecutada en otra conexion o motor.  Se hace obligatorio enviar parametros cuando se envia otra conexion
+				ReplicaRecursiva - Indica si se deben buscar o no conexiones adicionales para realizar replica de oepraciones.  Normalmente inicia en 1, pero las llamadas sucesivas se hacen en 0 para evitar llamadas infinitas
+
+			Salida:
+				Retorna una cadena que contiene una descripcion de error PDO en caso de error y agrega un mensaje en pantalla con la descripcion devuelta por el driver
+				Retorna una cadena vacia si la consulta es ejecutada sin problemas.
+		*/
+		global $ListaCamposSinID_replicasbd,$TablasCore,$DepuracionSQL;
+		//Si aplica la replica recursiva entonces busca las conexiones
+		if ($ReplicaRecursiva==1)
+			{
+				//Busca conexiones configuradas como replica
+				$ConexionesReplica=ejecutar_sql("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE tipo_replica=1 ");
+				//Recorre cada conexion de replica encontrada para realizar la operacion
+				while ($registro_conexion = $ConexionesReplica->fetch())
+					{
+						global ${$registro_conexion["nombre"]};
+						//Hace el llamado a la operacion de replica sobre la conexion encontrada
+						ejecutar_sql_unaria($query,$lista_parametros,${$registro_conexion["nombre"]},0);
+					}
+			}
+
+		//Determina si se debe usar la conexion global del sistema o una especifica de usuario
+		if($ConexionBD=="")
+			global $ConexionPDO;
+		else
+			$ConexionPDO=$ConexionBD;
+		
+		global $ModoDepuracion;
+		global $PCOSESS_LoginUsuario,$_SeparadorCampos_;
+		global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin,$MULTILANG_ContacteAdmin,$MULTILANG_MotorBD;
+		try
+			{
+				$consulta = $ConexionPDO->prepare($query);
+				//Cuando se reciben parametros entonces se asume recepcion de querys con  interrogaciones  ?
+				//que deben ser preparados antes de ejecutarse con cada uno de los parametros recibidos
+				if ($lista_parametros!="")
+					{
+						$cantidad_parametros=substr_count($query,'?');
+						$parametros=@explode($_SeparadorCampos_,$lista_parametros);
+						// if ($cantidad_parametros!=count($parametros)) //La cantidad de parametros en query es diferente a los recibidos
+						//Recorre cada parametro y toma su valor
+						for ($i=1;$i<=$cantidad_parametros;$i++)
+							{
+                                //Si no recibe valor en el parametro hace el bind con null para al menos hacerlo valido
+                                /*
+                                if($parametros[$i-1] == '')
+                                    //$consulta->bindValue($i,PDO::PARAM_NULL);
+                                    //$consulta->bindValue($i,'');
+                                    //$consulta->bindValue($i,$parametros[$i-1]);
+                                    $consulta->bindParam($i,$parametros[$i-1]);
+                                else
+                                    //$consulta->bindValue($i, $parametros[$i-1]);
+                                */
+                                    //$consulta->bindValue($i, iconv("UTF-8", "ISO-8859-1//TRANSLIT", $parametros[$i-1]));
+                                    //$consulta->bindValue($i, utf8_encode($parametros[$i-1]));
+                                    $consulta->bindValue($i, $parametros[$i-1]);
+								//echo 'Parametro '.$i.'='.$parametros[$i-1]."<br>"; //PARA DEPURACION
+							}
+					}
+				$consulta->execute();
+
+				//Lleva el log a auditoria en caso de estar encendido
+				if ($EvitarLogSQL==0)
+					if ($DepuracionSQL==1)
+						auditar($query,"SQLog:$PCOSESS_LoginUsuario");
+
+				return $consulta;
+			}
+		catch( PDOException $ErrorPDO)
+			{
+				//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
+				if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+                    echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.completar_parametros($query,$parametros).'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
+				else
+					echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$MULTILANG_ErrorSoloAdmin.'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
+				return $MULTILANG_ErrorTiempoEjecucion;
+			}
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+function ejecutar_sql_procedimiento($procedimiento,$ConexionBD="")
+	{
+		/*
+			Function: ejecutar_sql_procedimiento
+			Ejecuta procedimientos almacenados por la base de datos
+
+			Variables de entrada:
+
+				procedimiento - Procedimiento que debe residir en la base de datos y que ha de ser ejecutado
+				ConexionBD - Determina si la consulta debe ser ejecutada en otra conexion o motor.  Se hace obligatorio enviar parametros cuando se envia otra conexion
+
+			Salida:
+				Retorna 0 en caso de tener problemas con la ejecucion del procedimiento
+				Retorna una cadena vacia si el procedimiento es llamado y ejecutado sin problemas
+		*/
+		//Determina si se debe usar la conexion global del sistema o una especifica de usuario
+		if($ConexionBD=="")
+			global $ConexionPDO;
+		else
+			$ConexionPDO=$ConexionBD;
+
+		try
+			{
+				$ConexionPDO->exec($procedimiento);
+				return "";
+			}
+		catch(PDOException $e)
+			{
+				return $e->getMessage();
+			}
+	}
 
 
 
@@ -1810,53 +1792,49 @@ function completar_parametros($string,$data) {
 
 		Registro de auditoria llevado sobre la tabla
 */
-	function auditar($PCO_Accion,$usuario="")
-		{
-			global $ArchivoCORE,$TablasCore;
-			global $ListaCamposSinID_auditoria,$_SeparadorCampos_;
-			global $PCOSESS_LoginUsuario,$PCO_FechaOperacion,$PCO_HoraOperacion;
-			//Establece el usuario para el registro
-			if ($usuario=="")
-				$usuario_auditar=$PCOSESS_LoginUsuario;
-			else
-				$usuario_auditar=$usuario;
-			//Lleva el registro
-			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES (?,?,?,?)","$usuario_auditar$_SeparadorCampos_$PCO_Accion$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$PCO_HoraOperacion","","",1,1);
-		}
+function auditar($PCO_Accion,$usuario="")
+	{
+		global $ArchivoCORE,$TablasCore;
+		global $ListaCamposSinID_auditoria,$_SeparadorCampos_;
+		global $PCOSESS_LoginUsuario,$PCO_FechaOperacion,$PCO_HoraOperacion;
+		//Establece el usuario para el registro
+		if ($usuario=="")
+			$usuario_auditar=$PCOSESS_LoginUsuario;
+		else
+			$usuario_auditar=$usuario;
+		//Lleva el registro
+		ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES (?,?,?,?)","$usuario_auditar$_SeparadorCampos_$PCO_Accion$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$PCO_HoraOperacion","","",1,1);
+	}
 
 
 
 /* ################################################################## */
 /* ################################################################## */
-	function existe_valor($tabla,$campo,$valor)
-		{
-			/*
-				Function: existe_valor
-				Busca dentro de alguna tabla para verificar si existe o no un valor determinado.  Funcion utilizada para validacion de unicidad de valores en formularios de datos.
+function existe_valor($tabla,$campo,$valor)
+	{
+		/*
+			Function: existe_valor
+			Busca dentro de alguna tabla para verificar si existe o no un valor determinado.  Funcion utilizada para validacion de unicidad de valores en formularios de datos.
+			
+			Variables de entrada:
+
+				tabla - Nombre de la tabla donde se desea buscar.
+				campo - Campo de la tabla sobre el cual se desea comparar la existencia del valor.
+				valor - Valor a buscar dentro del campo.
 				
-				Variables de entrada:
-
-					tabla - Nombre de la tabla donde se desea buscar.
-					campo - Campo de la tabla sobre el cual se desea comparar la existencia del valor.
-					valor - Valor a buscar dentro del campo.
-					
-				Salida:
-					Retorna 1 en caso de encontrar un valor dentro de la tabla y campo especificadas y que coincida con el parametro buscado
-					Retorna 0 cuando no se encuentra un valor en la tabla que coincida con el buscado
-			*/
-			global $ConexionPDO;
-			$consulta = $ConexionPDO->prepare("SELECT $campo FROM $tabla WHERE $campo='$valor'");
-			$consulta->execute();
-			$registro = $consulta->fetch();
-			if ($registro[0]!="")
-				{
-					return 1;
-				}
-			else
-				{
-					return 0;
-				}
-		}
+			Salida:
+				Retorna 1 en caso de encontrar un valor dentro de la tabla y campo especificadas y que coincida con el parametro buscado
+				Retorna 0 cuando no se encuentra un valor en la tabla que coincida con el buscado
+		*/
+		global $ConexionPDO;
+		$consulta = $ConexionPDO->prepare("SELECT $campo FROM $tabla WHERE $campo='$valor'");
+		$consulta->execute();
+		$registro = $consulta->fetch();
+		if ($registro[0]!="")
+				return 1;
+		else
+				return 0;
+	}
 
 
 
@@ -1867,269 +1845,269 @@ function completar_parametros($string,$data) {
 	*/
 /* ################################################################## */
 /* ################################################################## */
-	function informacion_conexion()
-		{
-			/*
-				Function: informacion_conexion
-				Imprime la informacion asociada a la conexion establecida mediante PDO.
+function informacion_conexion()
+	{
+		/*
+			Function: informacion_conexion
+			Imprime la informacion asociada a la conexion establecida mediante PDO.
 
-				Ver tambien:
-				<imprimir_drivers_disponibles> | <Definicion de conexion PDO>
-			*/
-			echo "<hr><center><blink><b><font color=yellow>".$MULTILANG_Detalles.":</font></b></blink><br>";
-			echo $MULTILANG_Controlador.': '.$ConexionPDO->getAttribute(PDO::ATTR_DRIVER_NAME).'<br>';
-			echo $MULTILANG_Version.' '.$MULTILANG_Servidor.': '.$ConexionPDO->getAttribute(PDO::ATTR_SERVER_VERSION).'<br>';
-			echo $MULTILANG_Estado.': '.$ConexionPDO->getAttribute(PDO::ATTR_CONNECTION_STATUS).'<br>';
-			echo $MULTILANG_Version.' '.$MULTILANG_Cliente.': '.$ConexionPDO->getAttribute(PDO::ATTR_CLIENT_VERSION).'<br>';
-			echo $MULTILANG_InfoAdicional.': '.$ConexionPDO->getAttribute(PDO::ATTR_SERVER_INFO).'<hr>';
-		}
+			Ver tambien:
+			<imprimir_drivers_disponibles> | <Definicion de conexion PDO>
+		*/
+		echo "<hr><center><blink><b><font color=yellow>".$MULTILANG_Detalles.":</font></b></blink><br>";
+		echo $MULTILANG_Controlador.': '.$ConexionPDO->getAttribute(PDO::ATTR_DRIVER_NAME).'<br>';
+		echo $MULTILANG_Version.' '.$MULTILANG_Servidor.': '.$ConexionPDO->getAttribute(PDO::ATTR_SERVER_VERSION).'<br>';
+		echo $MULTILANG_Estado.': '.$ConexionPDO->getAttribute(PDO::ATTR_CONNECTION_STATUS).'<br>';
+		echo $MULTILANG_Version.' '.$MULTILANG_Cliente.': '.$ConexionPDO->getAttribute(PDO::ATTR_CLIENT_VERSION).'<br>';
+		echo $MULTILANG_InfoAdicional.': '.$ConexionPDO->getAttribute(PDO::ATTR_SERVER_INFO).'<hr>';
+	}
 
 
 
 /* ################################################################## */
 /* ################################################################## */
-	function imprimir_drivers_disponibles()
-		{
-			/*
-				Function: imprimir_drivers_disponibles
-				Imprime el arreglo devuelto por la funcion getAvailableDrivers() para conocer los drivers soportados por la instalacion actual de PHP del lado del servidor.
+function imprimir_drivers_disponibles()
+	{
+		/*
+			Function: imprimir_drivers_disponibles
+			Imprime el arreglo devuelto por la funcion getAvailableDrivers() para conocer los drivers soportados por la instalacion actual de PHP del lado del servidor.
 
-				Salida:
-					Listado de drivers PDO soportados
-				
-				Ver tambien:
-				<informacion_conexion>
-			*/
+			Salida:
+				Listado de drivers PDO soportados
 			
-			/*foreach(PDO::getAvailableDrivers() as $driver)
-				{
-					echo "<hr>".$driver;
-				}*/
-			print_r(PDO::getAvailableDrivers());
-		}
+			Ver tambien:
+			<informacion_conexion>
+		*/
+		
+		/*foreach(PDO::getAvailableDrivers() as $driver)
+			{
+				echo "<hr>".$driver;
+			}*/
+		print_r(PDO::getAvailableDrivers());
+	}
 
 
 
 /* ################################################################## */
 /* ################################################################## */
-	function consultar_tablas($prefijo="")
-		{
-			/*
-				Function: consultar_tablas
-				Determina las tablas en la base de datos activa para la conexion dependiendo del motor utilizado.
+function consultar_tablas($prefijo="")
+	{
+		/*
+			Function: consultar_tablas
+			Determina las tablas en la base de datos activa para la conexion dependiendo del motor utilizado.
 
-				Variables de entrada:
+			Variables de entrada:
 
-					prefijo - Prefijo del nombre de tablas que seran retornadas
+				prefijo - Prefijo del nombre de tablas que seran retornadas
 
-				Salida:
-					Resultado de un query con las tablas  o falso en caso de error
-				
-				Ver tambien:
-				<Definicion de conexion PDO>
-			*/
-			global $ConexionPDO;
-			global $MotorBD;
-			global $BaseDatos;
-			global $MULTILANG_ErrorTiempoEjecucion;
-
-			if($MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc")
-					$consulta = "SELECT name FROM sysobjects WHERE xtype='U';";
-			if($MotorBD=="sqlite")
-					$consulta = "SELECT name FROM sqlite_master WHERE type IN ('table','view') AND name NOT LIKE 'sqlite_%' UNION ALL SELECT name FROM sqlite_temp_master WHERE type IN ('table','view') ORDER BY 1";
-			if($MotorBD=="oracle")
-					$consulta = "SELECT table_name FROM cat;";  //  Si falla probar con esta:  $consulta = "SELECT table_name FROM tabs;";
-			if($MotorBD=="ifmx" || $MotorBD=="fbd")
-					$consulta = "SELECT RDB$RELATION_NAME FROM RDB$RELATIONS WHERE RDB$SYSTEM_FLAG = 0 AND RDB$VIEW_BLR IS NULL ORDER BY RDB$RELATION_NAME;";
-			if($MotorBD=="mysql")
-					$consulta = "SHOW tables FROM ".$BaseDatos." ";
-			if($MotorBD=="pgsql")
-					$consulta = "SELECT relname AS name FROM pg_stat_user_tables ORDER BY relname;";
-
-			try
-				{
-					$consulta_tablas=ejecutar_sql($consulta);
-					return $consulta_tablas;
-				}
-			catch( PDOException $ErrorPDO)
-				{
-                    mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage(), '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-					return false;
-				}
-		}
-
-
-
-/* ################################################################## */
-/* ################################################################## */
-	function consultar_columnas($tabla)
-		{
-			/*
-				Function: consultar_nombres_columnas
-				Devuelve un arreglo escalar y asociativo con los nombres de las columnas de una tabla y sus datos generales
-
-				Variables de entrada:
-
-					tabla - Nombre de la tabla de la que se desea consultar los nombre de columnas o campos
-					
-				Salida:
-					Vector de campos/columnas
-				
-				Ver tambien:
-				<consultar_tablas>
-			*/
-			global $ConexionPDO;
-			global $MotorBD;
-			global $BaseDatos;
-			global $MULTILANG_ErrorTiempoEjecucion;
-
-			//Busca los campos dependiendo del motor de BD configurado actualmente
-			if ($MotorBD=="mysql" || $MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc" || $MotorBD=="oracle" || $MotorBD=="ifmx" || $MotorBD=="fbd")
-				{
-					$columna=0;
-					$resultado=ejecutar_sql("DESCRIBE $tabla ");
-					//echo $resultado;
-					//Evalua si se retorno 1 (error) por la funcion para saber si sigue o no
-					//if($resultado!="1")
-						{
-							while($registro = $resultado->fetch())
-								{
-									$columnas[$columna]["nombre"] = $registro["Field"];
-									$columnas[$columna]["tipo"] = $registro["Type"];
-									$columnas[$columna]["nulo"] = $registro["Null"];
-									$columnas[$columna]["llave"] = $registro["Key"];
-									$columnas[$columna]["predefinido"] = $registro["Default"];
-									$columnas[$columna]["extras"] = $registro["Extra"];
-									$columna++;
-								}							
-						}
-					/*else
-						{
-									$columnas[$columna]["nombre"] = "ERROR: Tabla no conectada";
-									$columnas[$columna]["tipo"] = "ERROR: Tabla no conectada";
-									$columnas[$columna]["nulo"] = "ERROR: Tabla no conectada";
-									$columnas[$columna]["llave"] = "ERROR: Tabla no conectada";
-									$columnas[$columna]["predefinido"] = "ERROR: Tabla no conectada";
-									$columnas[$columna]["extras"] = "ERROR: Tabla no conectada";
-									$columna++;
-						}*/
-				}
-
-			if ($MotorBD=="pgsql")
-				{
-					$columna=0;
-					$resultado=ejecutar_sql("SELECT * from INFORMATION_SCHEMA.COLUMNS where table_name = ? ","$tabla");
-					while($registro = $resultado->fetch())
-						{
-							$columnas[$columna]["nombre"] = $registro["column_name"];
-							$columnas[$columna]["tipo"] = $registro["data_type"];
-							$columnas[$columna]["nulo"] = $registro["is_nullable"];
-							$columnas[$columna]["llave"] = "";
-							$columnas[$columna]["predefinido"] = $registro["column_default"];
-							$columnas[$columna]["extras"] = $registro["udt_name"];
-							$columna++;
-						}
-				}
-
-			if ($MotorBD=="sqlite")
-				{
-					$columna=0;
-					$resultado=ejecutar_sql("SELECT * FROM sqlite_master WHERE type='table' AND name=? ","$tabla");
-					$registro = $resultado->fetch();
-					//Toma los campos encontrados en el SQL de la tabla, los separa y los depura para devolver valores
-					$campos=explode(",",$registro["sql"]);
-					for($i=0;$i<count($campos);$i++)
-						{
-							$campos[$i]=trim($campos[$i]);  // Elimina espacios al comienzo y final
-							$campos[$i]=str_replace("  "," ",$campos[$i]);  //Elimina espacios dobles
-							if ($i==0) $campos[$i]=str_replace("CREATE TABLE $tabla (","",$campos[$i]);  //Elimina instruccion create del primer campo
-							if ($i==count($campos)-1) $campos[$i]=str_replace("))",")",$campos[$i]);  //Elimina ultimos parentesis
-							//echo $i." valor:".$campos[$i]."<hr>"; //  Usado para depuracion en tiempo de desarrollo
-							$analisis_campo=explode(" ",$campos[$i]);
-							$columnas[$columna]["nombre"] = $analisis_campo[0];
-							$columnas[$columna]["tipo"] = $analisis_campo[1];
-							$palabra_siguiente=2;
-							if (trim(strtoupper($analisis_campo[$palabra_siguiente]))=="PRIMARY")
-								{
-									$columnas[$columna]["llave"] = $analisis_campo[$palabra_siguiente];
-									$palabra_siguiente+=2;
-								}
-							if (trim(strtoupper($analisis_campo[$palabra_siguiente]))=="NOT")
-								{
-									$columnas[$columna]["nulo"] =  $analisis_campo[$palabra_siguiente]." ".$analisis_campo[$palabra_siguiente+1];
-									$palabra_siguiente+=2;
-								}
-							if (trim(strtoupper($analisis_campo[$palabra_siguiente]))=="DEFAULT")
-								{
-									$columnas[$columna]["predefinido"] =  $analisis_campo[$palabra_siguiente+1];
-									$palabra_siguiente+=2;
-								}
-							$columnas[$columna]["extras"] = $registro[""];
-							$columna++;
-						}
-				}
-
-
-			//Retorna el arreglo asociativo
-			return $columnas;
-
-
-			/*//Forma 1 (General solo nombres)
-			$resultado=ejecutar_sql("SELECT * FROM ".$tabla);
-			$columnas = array();
-			foreach($resultado->fetch(PDO::FETCH_ASSOC) as $key=>$val)
-				{
-					$columnas[]["nombre"] = $key;
-				}
-			return $columnas;*/
-
-			/*//Forma 2
-			$resultado=ejecutar_sql("SELECT * FROM ".$tabla);
-			$columnas = array();
-			for ($i = 0; $i < $resultado->columnCount(); $i++)
-				{
-					$col = $resultado->getColumnMeta($i);
-					$columnas[] = $col['name'];
-				}
-			return $columnas;*/
-		}
-
-
-/* ################################################################## */
-/* ################################################################## */
-	function existe_campo_tabla($campo,$tabla)
-		{
-			/*
-				Function: existe_campo_tabla
-				Determina si un campo dado existe dentro de una tabla especifica
-
-				Variables de entrada:
-
-					tabla - Nombre de la tabla de la que se desea buscar el campo
-					campo - Nombre del campo a verificar
-					
-				Salida:
-					verdadero o falso dependiendo de si existe o no el campo en la tabla
-				
-				Ver tambien:
-				<consultar_tablas>
-			*/
+			Salida:
+				Resultado de un query con las tablas  o falso en caso de error
 			
-			//Asume que el campo no existe
-			$estado=false;
+			Ver tambien:
+			<Definicion de conexion PDO>
+		*/
+		global $ConexionPDO;
+		global $MotorBD;
+		global $BaseDatos;
+		global $MULTILANG_ErrorTiempoEjecucion;
 
-			//Busca todos los campos de la tabla
-			$resultadocampos=consultar_columnas($tabla);
-			for($i=0;$i<count($resultadocampos);$i++)
-				{
-					//Si el campo en el arreglo es igual al campo buscado cambia el estado a verdadero
-					if ($resultadocampos[$i]["nombre"]==$campo)
-						$estado=true;
-				}
+		if($MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc")
+				$consulta = "SELECT name FROM sysobjects WHERE xtype='U';";
+		if($MotorBD=="sqlite")
+				$consulta = "SELECT name FROM sqlite_master WHERE type IN ('table','view') AND name NOT LIKE 'sqlite_%' UNION ALL SELECT name FROM sqlite_temp_master WHERE type IN ('table','view') ORDER BY 1";
+		if($MotorBD=="oracle")
+				$consulta = "SELECT table_name FROM cat;";  //  Si falla probar con esta:  $consulta = "SELECT table_name FROM tabs;";
+		if($MotorBD=="ifmx" || $MotorBD=="fbd")
+				$consulta = "SELECT RDB$RELATION_NAME FROM RDB$RELATIONS WHERE RDB$SYSTEM_FLAG = 0 AND RDB$VIEW_BLR IS NULL ORDER BY RDB$RELATION_NAME;";
+		if($MotorBD=="mysql")
+				$consulta = "SHOW tables FROM ".$BaseDatos." ";
+		if($MotorBD=="pgsql")
+				$consulta = "SELECT relname AS name FROM pg_stat_user_tables ORDER BY relname;";
 
-			//Retorna el resultado
-			return $estado;
-		}
+		try
+			{
+				$consulta_tablas=ejecutar_sql($consulta);
+				return $consulta_tablas;
+				//return ejecutar_sql($consulta);
+			}
+		catch( PDOException $ErrorPDO)
+			{
+                mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage(), '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+				return false;
+			}
+	}
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+function consultar_columnas($tabla)
+	{
+		/*
+			Function: consultar_nombres_columnas
+			Devuelve un arreglo escalar y asociativo con los nombres de las columnas de una tabla y sus datos generales
+
+			Variables de entrada:
+
+				tabla - Nombre de la tabla de la que se desea consultar los nombre de columnas o campos
+				
+			Salida:
+				Vector de campos/columnas
+			
+			Ver tambien:
+			<consultar_tablas>
+		*/
+		global $ConexionPDO;
+		global $MotorBD;
+		global $BaseDatos;
+		global $MULTILANG_ErrorTiempoEjecucion;
+
+		//Busca los campos dependiendo del motor de BD configurado actualmente
+		if ($MotorBD=="mysql" || $MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc" || $MotorBD=="oracle" || $MotorBD=="ifmx" || $MotorBD=="fbd")
+			{
+				$columna=0;
+				$resultado=ejecutar_sql("DESCRIBE $tabla ");
+				//echo $resultado;
+				//Evalua si se retorno 1 (error) por la funcion para saber si sigue o no
+				//if($resultado!="1")
+					{
+						while($registro = $resultado->fetch())
+							{
+								$columnas[$columna]["nombre"] = $registro["Field"];
+								$columnas[$columna]["tipo"] = $registro["Type"];
+								$columnas[$columna]["nulo"] = $registro["Null"];
+								$columnas[$columna]["llave"] = $registro["Key"];
+								$columnas[$columna]["predefinido"] = $registro["Default"];
+								$columnas[$columna]["extras"] = $registro["Extra"];
+								$columna++;
+							}							
+					}
+				/*else
+					{
+								$columnas[$columna]["nombre"] = "ERROR: Tabla no conectada";
+								$columnas[$columna]["tipo"] = "ERROR: Tabla no conectada";
+								$columnas[$columna]["nulo"] = "ERROR: Tabla no conectada";
+								$columnas[$columna]["llave"] = "ERROR: Tabla no conectada";
+								$columnas[$columna]["predefinido"] = "ERROR: Tabla no conectada";
+								$columnas[$columna]["extras"] = "ERROR: Tabla no conectada";
+								$columna++;
+					}*/
+			}
+		else if ($MotorBD=="pgsql")
+			{
+				$columna=0;
+				$resultado=ejecutar_sql("SELECT * from INFORMATION_SCHEMA.COLUMNS where table_name = ? ","$tabla");
+				while($registro = $resultado->fetch())
+					{
+						$columnas[$columna]["nombre"] = $registro["column_name"];
+						$columnas[$columna]["tipo"] = $registro["data_type"];
+						$columnas[$columna]["nulo"] = $registro["is_nullable"];
+						$columnas[$columna]["llave"] = "";
+						$columnas[$columna]["predefinido"] = $registro["column_default"];
+						$columnas[$columna]["extras"] = $registro["udt_name"];
+						$columna++;
+					}
+			}
+		else if ($MotorBD=="sqlite")
+			{
+				$columna=0;
+				$resultado=ejecutar_sql("SELECT * FROM sqlite_master WHERE type='table' AND name=? ","$tabla");
+				$registro = $resultado->fetch();
+				//Toma los campos encontrados en el SQL de la tabla, los separa y los depura para devolver valores
+				$campos=explode(",",$registro["sql"]);
+				for($i=0;$i<count($campos);$i++)
+					{
+						$campos[$i]=trim($campos[$i]);  // Elimina espacios al comienzo y final
+						$campos[$i]=str_replace("  "," ",$campos[$i]);  //Elimina espacios dobles
+						if ($i==0) $campos[$i]=str_replace("CREATE TABLE $tabla (","",$campos[$i]);  //Elimina instruccion create del primer campo
+						if ($i==count($campos)-1) $campos[$i]=str_replace("))",")",$campos[$i]);  //Elimina ultimos parentesis
+						//echo $i." valor:".$campos[$i]."<hr>"; //  Usado para depuracion en tiempo de desarrollo
+						$analisis_campo=explode(" ",$campos[$i]);
+						$columnas[$columna]["nombre"] = $analisis_campo[0];
+						$columnas[$columna]["tipo"] = $analisis_campo[1];
+						$palabra_siguiente=2;
+						if (trim(strtoupper($analisis_campo[$palabra_siguiente]))=="PRIMARY")
+							{
+								$columnas[$columna]["llave"] = $analisis_campo[$palabra_siguiente];
+								$palabra_siguiente+=2;
+							}
+						if (trim(strtoupper($analisis_campo[$palabra_siguiente]))=="NOT")
+							{
+								$columnas[$columna]["nulo"] =  $analisis_campo[$palabra_siguiente]." ".$analisis_campo[$palabra_siguiente+1];
+								$palabra_siguiente+=2;
+							}
+						if (trim(strtoupper($analisis_campo[$palabra_siguiente]))=="DEFAULT")
+							{
+								$columnas[$columna]["predefinido"] =  $analisis_campo[$palabra_siguiente+1];
+								$palabra_siguiente+=2;
+							}
+						$columnas[$columna]["extras"] = $registro[""];
+						$columna++;
+					}
+			}
+
+
+		//Retorna el arreglo asociativo
+		return $columnas;
+
+
+		/*//Forma 1 (General solo nombres)
+		$resultado=ejecutar_sql("SELECT * FROM ".$tabla);
+		$columnas = array();
+		foreach($resultado->fetch(PDO::FETCH_ASSOC) as $key=>$val)
+			{
+				$columnas[]["nombre"] = $key;
+			}
+		return $columnas;*/
+
+		/*//Forma 2
+		$resultado=ejecutar_sql("SELECT * FROM ".$tabla);
+		$columnas = array();
+		for ($i = 0; $i < $resultado->columnCount(); $i++)
+			{
+				$col = $resultado->getColumnMeta($i);
+				$columnas[] = $col['name'];
+			}
+		return $columnas;*/
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+function existe_campo_tabla($campo,$tabla)
+	{
+		/*
+			Function: existe_campo_tabla
+			Determina si un campo dado existe dentro de una tabla especifica
+
+			Variables de entrada:
+
+				tabla - Nombre de la tabla de la que se desea buscar el campo
+				campo - Nombre del campo a verificar
+				
+			Salida:
+				verdadero o falso dependiendo de si existe o no el campo en la tabla
+			
+			Ver tambien:
+			<consultar_tablas>
+		*/
+		
+		//Asume que el campo no existe
+		$estado=false;
+
+		//Busca todos los campos de la tabla
+		$resultadocampos=consultar_columnas($tabla);
+		for($i=0;$i<count($resultadocampos);$i++)
+			{
+				//Si el campo en el arreglo es igual al campo buscado cambia el estado a verdadero
+				if ($resultadocampos[$i]["nombre"]==$campo)
+					$estado=true;
+					//return true;
+			}
+
+		//Retorna el resultado
+		return $estado;
+	}
 
 
 /* ################################################################## */
@@ -2141,26 +2119,26 @@ function completar_parametros($string,$data) {
 	Salida:
 		Contenido de la URL recibida
 */
-	function file_get_contents_curl($url)
-		{
-			global $MULTILANG_ErrExtension,$MULTILANG_ErrCURL;
-			//Verifica soporte para cURL
-			if (!extension_loaded('curl'))
-                mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrCURL, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-			//Verifica que la funcion se encuentre activada
-			$funcion_evaluada='curl_init'; $valor_esperado='1';
-			if (ini_get($funcion_evaluada)==$valor_esperado)
-				{
-					//Inicializa el objeto cURL y procesa la solicitud
-					$objeto_curl = curl_init();
-					curl_setopt($objeto_curl, CURLOPT_HEADER, 0);
-					curl_setopt($objeto_curl, CURLOPT_RETURNTRANSFER, 1);
-					curl_setopt($objeto_curl, CURLOPT_URL, $url);
-					$datos_recibidos = curl_exec($objeto_curl);
-					curl_close($objeto_curl);
-				}
-			return $datos_recibidos;
-		}
+function file_get_contents_curl($url)
+	{
+		global $MULTILANG_ErrExtension,$MULTILANG_ErrCURL;
+		//Verifica soporte para cURL
+		if (!extension_loaded('curl'))
+            mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrCURL, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+		//Verifica que la funcion se encuentre activada
+		$funcion_evaluada='curl_init'; $valor_esperado='1';
+		if (ini_get($funcion_evaluada)==$valor_esperado)
+			{
+				//Inicializa el objeto cURL y procesa la solicitud
+				$objeto_curl = curl_init();
+				curl_setopt($objeto_curl, CURLOPT_HEADER, 0);
+				curl_setopt($objeto_curl, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($objeto_curl, CURLOPT_URL, $url);
+				$datos_recibidos = curl_exec($objeto_curl);
+				curl_close($objeto_curl);
+			}
+		return $datos_recibidos;
+	}
 
 
 /* ################################################################## */
@@ -2169,34 +2147,34 @@ function completar_parametros($string,$data) {
 	Function: file_get_contents_socket
 	Un reemplazo para la funcion file_get_contents utilizando Sockets
 */
-	function file_get_contents_socket($url)
-		{
-			$url_parsed = parse_url($url);
-			$host = $url_parsed["host"];
-			$port = $url_parsed["port"];
-			if ($port==0)
-				$port = 80;
-			$path = $url_parsed["path"];
-			if ($url_parsed["query"] != "")
-				$path .= "?".$url_parsed["query"];
+function file_get_contents_socket($url)
+	{
+		$url_parsed = parse_url($url);
+		$host = $url_parsed["host"];
+		$port = $url_parsed["port"];
+		if ($port==0)
+			$port = 80;
+		$path = $url_parsed["path"];
+		if ($url_parsed["query"] != "")
+			$path .= "?".$url_parsed["query"];
 
-			$out = "GET $path HTTP/1.0\r\nHost: $host\r\n\r\n";
+		$out = "GET $path HTTP/1.0\r\nHost: $host\r\n\r\n";
 
-			$fp = fsockopen($host, $port, $errno, $errstr, 30);
+		$fp = fsockopen($host, $port, $errno, $errstr, 30);
 
-			fwrite($fp, $out);
-			$body = false;
-			while (!feof($fp))
-				{
-					$s = fgets($fp, 1024);
-					if ( $body )
-						$in .= $s;
-					if ( $s == "\r\n" )
-						$body = true;
-				}
-			fclose($fp);
-			return $in;
-		}
+		fwrite($fp, $out);
+		$body = false;
+		while (!feof($fp))
+			{
+				$s = fgets($fp, 1024);
+				if ( $body )
+					$in .= $s;
+				if ( $s == "\r\n" )
+					$body = true;
+			}
+		fclose($fp);
+		return $in;
+	}
 
 
 /* ################################################################## */
@@ -2208,24 +2186,24 @@ function completar_parametros($string,$data) {
 	Salida:
 		Contenido de la URL recibida
 */
-	function file_get_contents_nativo($url)
-		{
-            //ORIGINAL$contenido_url = trim(file_get_contents($url));
-            //Define el contexto de navegacion
-            $opciones_navegacion = array(
-              'http'=>array(
-                'method'=>"GET",
-                'header'=>"Accept-language: en\r\n" .
-                          "Cookie: foo=bar\r\n" .  // check function.stream-context-create on php.net
-                          "User-Agent: Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.102011-10-16 20:23:10\r\n" // i.e. An iPad 
-              )
-            );
-            //$opciones_navegacion  = array('http' => array('user_agent' => 'custom user agent string'));
+function file_get_contents_nativo($url)
+	{
+        //ORIGINAL$contenido_url = trim(file_get_contents($url));
+        //Define el contexto de navegacion
+        $opciones_navegacion = array(
+          'http'=>array(
+            'method'=>"GET",
+            'header'=>"Accept-language: en\r\n" .
+                      "Cookie: foo=bar\r\n" .  // check function.stream-context-create on php.net
+                      "User-Agent: Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.102011-10-16 20:23:10\r\n" // i.e. An iPad 
+          )
+        );
+        //$opciones_navegacion  = array('http' => array('user_agent' => 'custom user agent string'));
 
-            $contexto_navegacion = stream_context_create($opciones_navegacion);
-            $datos_recibidos = file_get_contents($url, false, $contexto_navegacion);
-			return $datos_recibidos;
-		}
+        $contexto_navegacion = stream_context_create($opciones_navegacion);
+        $datos_recibidos = file_get_contents($url, false, $contexto_navegacion);
+		return $datos_recibidos;
+	}
 
 
 /* ################################################################## */
@@ -2234,163 +2212,166 @@ function completar_parametros($string,$data) {
 	Function: cargar_url
 	Recibe una URL y pasa su contenido a una cadena de texto
 */
-	function cargar_url($url)
-		{
-			$contenido_url="";
+function cargar_url($url)
+	{
+		$contenido_url="";
 
-			//Intenta con cURL si esta habilitado
-			$funcion_evaluada='curl_init'; $valor_esperado='1';
-			if (@$contenido_url=="")
-				if (ini_get($funcion_evaluada)==$valor_esperado)
-					$contenido_url = trim(file_get_contents_curl($url));
+		//Intenta con cURL si esta habilitado
+		$funcion_evaluada='curl_init'; 
+		$valor_esperado='1';
+		if (@$contenido_url=="")
+			if (ini_get($funcion_evaluada)==$valor_esperado)
+				$contenido_url = trim(file_get_contents_curl($url));
 
-			$funcion_evaluada='allow_url_fopen'; $valor_esperado='1';
-			//Intenta con la funcion nativa de PHP si esta habilitada y no se pudo obtener nada con cURL
-			if (@$contenido_url=="")
-				if (ini_get($funcion_evaluada)==$valor_esperado)
-					$contenido_url = trim(file_get_contents_nativo($url));
+		$funcion_evaluada='allow_url_fopen'; $valor_esperado='1';
+		//Intenta con la funcion nativa de PHP si esta habilitada y no se pudo obtener nada con cURL
+		if (@$contenido_url=="")
+			if (ini_get($funcion_evaluada)==$valor_esperado)
+				$contenido_url = trim(file_get_contents_nativo($url));
 
-			//Intenta con funciones de socket si no se pudo obtener nada con file_get_contents
-			if (@$contenido_url=="")
-				$contenido_url = trim(file_get_contents_socket($url));
+		//Intenta con funciones de socket si no se pudo obtener nada con file_get_contents
+		if (@$contenido_url=="")
+			$contenido_url = trim(file_get_contents_socket($url));
 
-			//Retorna el resultado
-			return $contenido_url;
-		}
-
-
-/* ################################################################## */
-/* ################################################################## */
-	function verificar_extensiones()
-		{
-			/*
-				Function: verificar_extensiones
-				Verifica si las extensiones minimas requeridas por la herramienta se encuentran activadas y despliega mensaje de error si aplica.
-					
-				Salida:
-					Mensajes de error asociados a la no activacion de cada extension
-			*/
-			global $MotorBD;
-			global $Auth_TipoMotor;
-			global $Auth_TipoEncripcion;
-			global $MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,$MULTILANG_ErrCURL,$MULTILANG_ErrLDAP,$MULTILANG_ErrHASH,$MULTILANG_ErrSESS,$MULTILANG_ErrGD,$MULTILANG_ErrPDO,$MULTILANG_ErrDriverPDO,$MULTILANG_ErrGoogleAPIMod,$MULTILANG_ErrFuncion,$MULTILANG_ErrDirectiva;
-
-			//Verifica estado de configuraciones PHP
-			$funcion_evaluada='allow_url_fopen'; $valor_esperado='1';
-				//Intenta encenderla (para servidores con suPHP)
-				if (ini_get($funcion_evaluada)!=$valor_esperado) {ini_set($funcion_evaluada,$valor_esperado);}
-				//Verifica si pudo ser encendida en tiempo de ejecucion, sino muestra mensaje y solamente si no hay cURL pues es un sustituto
-				if (ini_get($funcion_evaluada)!=$valor_esperado && !extension_loaded('curl'))
-					mensaje($MULTILANG_ErrFuncion,$funcion_evaluada.': '.$MULTILANG_ErrDirectiva, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-			
-			//Verifica soporte para LDAP cuando esta activado en la herramienta
-			if ($Auth_TipoMotor=='ldap' &&  !extension_loaded('ldap'))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrLDAP, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-
-			//Verifica soporte para HASH cuando se requiere encripcion
-			if ($Auth_TipoEncripcion!="plano" && !extension_loaded('hash'))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrHASH, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-
-			//Verifica soporte para sesiones
-			if (!extension_loaded('session'))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrSESS, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-
-			//Verifica soporte para GD2
-			if (!extension_loaded('gd'))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrGD, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-
-			//Verifica soporte para PDO
-			if (!extension_loaded('pdo'))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrPDO, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-
-			//Verifica soporte para el driver PDO correspondiente al motor utilizado
-			if (!extension_loaded('pdo_'.$MotorBD))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrDriverPDO, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-
-			//Verifica soporte para SimpleXML
-			if (!extension_loaded('SimpleXML'))
-				mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-			
-			// Bloqueos por IP/pais http://stackoverflow.com/questions/15835274/file-get-contents-failed-to-open-stream-connection-refused
-			
-			// Verifica el soporte para funciones especificas PHP
-			$funcion_evaluada='file_get_contents';
-			if (!function_exists($funcion_evaluada))
-                mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrFuncion.'<b>'.$funcion_evaluada.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-
-			// Verifica el soporte para funciones especificas PHP
-			$funcion_evaluada='simplexml_load_string';
-			if (!function_exists($funcion_evaluada))
-                mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrFuncion.'<b>'.$funcion_evaluada.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-		}
-
-
-/* ################################################################## */
-/* ################################################################## */
-	function buscar_actualizaciones($PCOSESS_LoginUsuario='',$PCO_Accion)
-		{
-			global $MULTILANG_Atencion,$MULTILANG_ActAlertaVersion;
-			// Genera un aleatorio entre 1 y 10 para no sacar siempre el aviso y buscar nuevas versiones.
-			$buscar=rand(0,7);
-			if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion=="Ver_menu" && $buscar==1)
-				{
-					$path_ultima_version="https://raw.githubusercontent.com/unix4you2/practico/master/dev_tools/version_publicada.txt";
-					$version_actualizada = @cargar_url($path_ultima_version);
-					$archivo_origen="inc/version_actual.txt";
-					$archivo = fopen($archivo_origen, "r");
-					if ($archivo)
-						{
-							$version_practico = trim(fgets($archivo, 1024));
-							fclose($archivo);
-						}
-					if ($version_actualizada>$version_practico)
-						mensaje($MULTILANG_Atencion,$MULTILANG_ActAlertaVersion,'','fa fa-exclamation-triangle fa-5x','TextosEscritorio');
-				}
-		}
-
-
-/* ################################################################## */
-/* ################################################################## */
-	function consultar_bases_de_datos()
-		{
-			/*
-				Function: consultar_bases_de_datos
-				Determina las bases de datos existentes dependiendo del motor utilizado.
-
-				Salida:
-					Resultado de un query con las bases de datos o falso en caso de error
-				
-				Ver tambien:
-				<Definicion de conexion PDO> | <consultar_tablas>
-			*/
-			global $ConexionPDO;
-			global $MotorBD;
-			global $BaseDatos;
-			global $MULTILANG_ErrorTiempoEjecucion;
-
-			if($MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc" || $MotorBD=="sqlite2" || $MotorBD=="sqlite3")
-				$consulta = "SELECT name FROM sys.Databases;";
-			if($MotorBD=="oracle")
-				$consulta = 'SELECT * FROM v$database;';  //Si falla intentar con este: $consulta = "SELECT * FROM user_tablespaces";
-			if($MotorBD=="ifmx" || $dbtype=="fbd")
-				$consulta = "";
-			if($MotorBD=="mysql")
-				$consulta = "SHOW DATABASES;";
-			if($MotorBD=="pg")
-				$consulta = "SELECT datname AS name FROM pg_database;";
-
-			try
-				{
-					$consulta_basesdatos = $ConexionPDO->prepare($consulta);
-					$consulta_basesdatos->execute();
-					return $consulta_basesdatos;
-				}
-			catch( PDOException $ErrorPDO)
-				{
-					mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage(), '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-					return false;
-				}
+		//Retorna el resultado
+		return $contenido_url;
 	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+function verificar_extensiones()
+	{
+		/*
+			Function: verificar_extensiones
+			Verifica si las extensiones minimas requeridas por la herramienta se encuentran activadas y despliega mensaje de error si aplica.
+				
+			Salida:
+				Mensajes de error asociados a la no activacion de cada extension
+		*/
+		global $MotorBD;
+		global $Auth_TipoMotor;
+		global $Auth_TipoEncripcion;
+		global $MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,$MULTILANG_ErrCURL,$MULTILANG_ErrLDAP,$MULTILANG_ErrHASH,$MULTILANG_ErrSESS,$MULTILANG_ErrGD,$MULTILANG_ErrPDO,$MULTILANG_ErrDriverPDO,$MULTILANG_ErrGoogleAPIMod,$MULTILANG_ErrFuncion,$MULTILANG_ErrDirectiva;
+
+		//Verifica estado de configuraciones PHP
+		$funcion_evaluada='allow_url_fopen'; $valor_esperado='1';
+			//Intenta encenderla (para servidores con suPHP)
+			if (ini_get($funcion_evaluada)!=$valor_esperado) {ini_set($funcion_evaluada,$valor_esperado);}
+			//Verifica si pudo ser encendida en tiempo de ejecucion, sino muestra mensaje y solamente si no hay cURL pues es un sustituto
+			if (ini_get($funcion_evaluada)!=$valor_esperado && !extension_loaded('curl'))
+				mensaje($MULTILANG_ErrFuncion,$funcion_evaluada.': '.$MULTILANG_ErrDirectiva, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+		
+		//Verifica soporte para LDAP cuando esta activado en la herramienta
+		if ($Auth_TipoMotor=='ldap' &&  !extension_loaded('ldap'))
+			mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrLDAP, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+
+		//Verifica soporte para HASH cuando se requiere encripcion
+		if ($Auth_TipoEncripcion!="plano" && !extension_loaded('hash'))
+			mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrHASH, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+
+		//Verifica soporte para sesiones
+		if (!extension_loaded('session'))
+			mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrSESS, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+
+		//Verifica soporte para GD2
+		if (!extension_loaded('gd'))
+			mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrGD, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+
+		//Verifica soporte para PDO
+		if (!extension_loaded('pdo'))
+			mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrPDO, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+
+		//Verifica soporte para el driver PDO correspondiente al motor utilizado
+		if (!extension_loaded('pdo_'.$MotorBD))
+			mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrDriverPDO, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+
+		//Verifica soporte para SimpleXML
+		if (!extension_loaded('SimpleXML'))
+			mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+		
+		// Bloqueos por IP/pais http://stackoverflow.com/questions/15835274/file-get-contents-failed-to-open-stream-connection-refused
+		
+		// Verifica el soporte para funciones especificas PHP
+		$funcion_evaluada='file_get_contents';
+		if (!function_exists($funcion_evaluada))
+            mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrFuncion.'<b>'.$funcion_evaluada.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+
+		// Verifica el soporte para funciones especificas PHP
+		$funcion_evaluada='simplexml_load_string';
+		if (!function_exists($funcion_evaluada))
+            mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrFuncion.'<b>'.$funcion_evaluada.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+function buscar_actualizaciones($PCOSESS_LoginUsuario='',$PCO_Accion)
+	{
+		global $MULTILANG_Atencion,$MULTILANG_ActAlertaVersion;
+		// Genera un aleatorio entre 1 y 10 para no sacar siempre el aviso y buscar nuevas versiones.
+		$buscar=rand(0,7);
+		if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion=="Ver_menu" && $buscar==1)
+			{
+				$path_ultima_version="https://raw.githubusercontent.com/unix4you2/practico/master/dev_tools/version_publicada.txt";
+				$version_actualizada = @cargar_url($path_ultima_version);
+				$archivo_origen="inc/version_actual.txt";
+				$archivo = fopen($archivo_origen, "r");
+				if ($archivo)
+					{
+						$version_practico = trim(fgets($archivo, 1024));
+						fclose($archivo);
+					}
+				if ($version_actualizada>$version_practico)
+					mensaje($MULTILANG_Atencion,$MULTILANG_ActAlertaVersion,'','fa fa-exclamation-triangle fa-5x','TextosEscritorio');
+			}
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+function consultar_bases_de_datos()
+	{
+		/*
+			Function: consultar_bases_de_datos
+			Determina las bases de datos existentes dependiendo del motor utilizado.
+
+			Salida:
+				Resultado de un query con las bases de datos o falso en caso de error
+			
+			Ver tambien:
+			<Definicion de conexion PDO> | <consultar_tablas>
+		*/
+		global $ConexionPDO;
+		global $MotorBD;
+		global $BaseDatos;
+		global $MULTILANG_ErrorTiempoEjecucion;
+
+		if($MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc" || $MotorBD=="sqlite2" || $MotorBD=="sqlite3")
+			$consulta = "SELECT name FROM sys.Databases;";
+		else if($MotorBD=="oracle")
+			$consulta = 'SELECT * FROM v$database;';  //Si falla intentar con este: $consulta = "SELECT * FROM user_tablespaces";
+		else if($MotorBD=="ifmx" || $dbtype=="fbd")
+			$consulta = "";
+		else if($MotorBD=="mysql")
+			$consulta = "SHOW DATABASES;";
+		else if($MotorBD=="pg")
+			$consulta = "SELECT datname AS name FROM pg_database;";
+
+		try
+			{
+				$consulta_basesdatos = $ConexionPDO->prepare($consulta);
+				$consulta_basesdatos->execute();
+				return $consulta_basesdatos;
+				//return $ConexionPDO->prepare($consulta)->execute();
+				//return $consulta_basesdatos->execute();
+			}
+		catch( PDOException $ErrorPDO)
+			{
+				mensaje($MULTILANG_ErrorTiempoEjecucion,$ErrorPDO->getMessage(), '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+				return false;
+			}
+}
 
 
 
@@ -2403,6 +2384,8 @@ function completar_parametros($string,$data) {
 			$consulta->execute();
 			$filas = $consulta->fetchColumn();
 			return $filas;
+			//return $ConexionPDO->prepare("SELECT count(*) FROM $tabla")->execute()->fetchColumn();
+			//return $consulta->fetchColumn();
 		}
 
 
@@ -3017,28 +3000,28 @@ function selector_iconos_awesome()
 									pickTime: false";
 							$cadena_complementaria_datepicker=' data-date-format="YYYY-MM-DD" ';
 						}
-					if ($registro_campos["validacion_datos"]=="fechaxanos")
+					else if ($registro_campos["validacion_datos"]=="fechaxanos")
 						{
 							$cadena_ID_datepickerEspecifica="
 									viewMode: 'years',
 									pickTime: false";
 							$cadena_complementaria_datepicker=' data-date-format="YYYY-MM-DD" ';
 						}
-					if ($registro_campos["validacion_datos"]=="hora")
+					else if ($registro_campos["validacion_datos"]=="hora")
 						{
 							$cadena_ID_datepickerEspecifica="
 									pickDate: false,
 									pickTime: true";
 							$cadena_complementaria_datepicker=' data-date-format="HH:mm:ss" ';
 						}
-					if ($registro_campos["validacion_datos"]=="fechahora")
+					else if ($registro_campos["validacion_datos"]=="fechahora")
 						{
 							$cadena_ID_datepickerEspecifica="
 									pickDate: true,
 									pickTime: true";
 							$cadena_complementaria_datepicker=' data-date-format="YYYY-MM-DD HH:mm:ss" ';
 						}
-					if ($registro_campos["validacion_datos"]=="fechahorafull")
+					else if ($registro_campos["validacion_datos"]=="fechahorafull")
 						{
 							$cadena_ID_datepickerEspecifica="
 									sideBySide: true,
@@ -3059,13 +3042,11 @@ function selector_iconos_awesome()
 				}
 
 			// Si el campo es de tipo clave cambia el input a password
-			if ($registro_campos["tipo"]=="texto_clave")
-				{
+			else if ($registro_campos["tipo"]=="texto_clave")
 					$tipo_entrada="password";
-				}
 
             //Agrega etiqueta del campo si es diferente de vacio
-			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
+			else if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
                 $salida.='<label id="PCOEtiqueta_'.$registro_campos["campo"].'" for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
 			//Abre el marco del control de datos style="display:inline;"
 			$salida.='<div class="form-group input-group '.$cadena_clase_datepicker.'" '.$cadena_ID_datepicker.'>';
@@ -3208,18 +3189,13 @@ function selector_iconos_awesome()
 				}
 			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
-			// Define cadenas en caso de tener validaciones
-			$cadena_validacion='';
-			if ($registro_campos["validacion_datos"]!="" && $registro_campos["validacion_datos"]!="fecha" && $registro_campos["validacion_datos"]!="hora" && $registro_campos["validacion_datos"]!="fechahora" && $registro_campos["validacion_datos"]!="fechaxanos" && $registro_campos["validacion_datos"]!="fechahorafull")
-				$cadena_validacion=' onkeypress="return PCOJS_ValidarTeclado(event, \''.$registro_campos["validacion_datos"].'\', \''.$registro_campos["validacion_extras"].'\');" ';
-
             //Agrega etiqueta del campo si es diferente de vacio
 			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
                 $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.= '<textarea id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="form-control" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' '.$cadena_placeholder.'  '.$cadena_validacion.' >'.$cadena_valor.'</textarea>';
+			$salida.= '<textarea id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="form-control" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' '.$cadena_placeholder.' >'.$cadena_valor.'</textarea>';
 			//Si hay algun indicador adicional del campo abre los add-ons
             if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
                 $salida.= '<span class="input-group-addon">';
@@ -3277,9 +3253,9 @@ function selector_iconos_awesome()
 						}
 				}
 			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
-
+			
 			// Muestra el campo
-			$salida.= '<div id="Summer_'.$registro_campos["campo"].'" class="summernote" ></div>';
+			$salida.= '<div id="Summer_'.$registro_campos["campo"].'" class="summernote"></div>';
 			
 			//Agrega el campo a la lista de campos de este tipo para ser activados al final
 			$PCO_CamposSummerNote.=$registro_campos["campo"]."|";
@@ -3365,7 +3341,7 @@ function selector_iconos_awesome()
 					$barra_editor.=",".$barra_basica;
 					$barra_editor.=",".$barra_parrafo;
 				}
-			if ($registro_campos["barra_herramientas"]=="1")
+			else if ($registro_campos["barra_herramientas"]=="1")
 				{
 					$barra_editor.=",".$barra_documento;
 					$barra_editor.=",".$barra_basica;
@@ -3373,7 +3349,7 @@ function selector_iconos_awesome()
 					$barra_editor.=",".$barra_enlaces;
 					$barra_editor.=",".$barra_estilos;
 				}
-			if ($registro_campos["barra_herramientas"]=="2")
+			else if ($registro_campos["barra_herramientas"]=="2")
 				{
 					$barra_editor.=",".$barra_documento;
 					$barra_editor.=",".$barra_basica;
@@ -3383,7 +3359,7 @@ function selector_iconos_awesome()
 					$barra_editor.=",".$barra_portapapeles;
 					$barra_editor.=",".$barra_edicion;
 				}
-			if ($registro_campos["barra_herramientas"]=="3")
+			else if ($registro_campos["barra_herramientas"]=="3")
 				{
 					$barra_editor.=",".$barra_documento;
 					$barra_editor.=",".$barra_basica;
@@ -3395,7 +3371,7 @@ function selector_iconos_awesome()
 					$barra_editor.=",".$barra_insertar;
 					$barra_editor.=",".$barra_colores;
 				}
-			if ($registro_campos["barra_herramientas"]=="4")
+			else if ($registro_campos["barra_herramientas"]=="4")
 				{
 					$barra_editor.=",".$barra_documento;
 					$barra_editor.=",".$barra_basica;
@@ -3684,12 +3660,12 @@ function selector_iconos_awesome()
 	Ver tambien:
 		<cargar_formulario>
 */
-	function cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario)
-		{
-			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
-			$salida=PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_etiqueta"]);
-			return $salida;
-		}
+function cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario)
+	{
+		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
+		$salida=PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_etiqueta"]);
+		return $salida;
+	}
 
 
 /* ################################################################## */
@@ -3710,72 +3686,72 @@ function selector_iconos_awesome()
 	Ver tambien:
 		<cargar_formulario>
 */
-	function cargar_objeto_campoetiqueta($registro_campos,$registro_datos_formulario)
-		{
-			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
-			$salida="";
-			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
-			$cadena_valor='';
-			$Contenido_BARRAS='';
-			$nombre_campo=$registro_campos["campo"];
-			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=$registro_campos["valor_predeterminado"];
-			//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.
-			if (substr($registro_campos["valor_predeterminado"], 0,1)=="$")
-				{
-					$nombre_variable = substr($registro_campos["valor_predeterminado"], 1);
-					global ${$nombre_variable};
-					if (isset($nombre_variable))
-						{
-							$valor_variable=${$nombre_variable};
-							$cadena_valor=$valor_variable;							
-						}
-				}
-			//Si viene de una busqueda de registro pone el valor de registro
-			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") 
-				{
-					$cadena_valor=$registro_datos_formulario["$nombre_campo"];
-					$Contenido_BARRAS=$cadena_valor; //En caso que se requiera para imprimir en formato especial
-				}
+function cargar_objeto_campoetiqueta($registro_campos,$registro_datos_formulario)
+	{
+		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
+		$salida="";
+		// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
+		$cadena_valor='';
+		$Contenido_BARRAS='';
+		$nombre_campo=$registro_campos["campo"];
+		if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=$registro_campos["valor_predeterminado"];
+		//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.
+		if (substr($registro_campos["valor_predeterminado"], 0,1)=="$")
+			{
+				$nombre_variable = substr($registro_campos["valor_predeterminado"], 1);
+				global ${$nombre_variable};
+				if (isset($nombre_variable))
+					{
+						$valor_variable=${$nombre_variable};
+						$cadena_valor=$valor_variable;							
+					}
+			}
+		//Si viene de una busqueda de registro pone el valor de registro
+		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") 
+			{
+				$cadena_valor=$registro_datos_formulario["$nombre_campo"];
+				$Contenido_BARRAS=$cadena_valor; //En caso que se requiera para imprimir en formato especial
+			}
 
-			//Si el formato de salida es especial entonces muestra lo que corresponda
-			if ($registro_campos["formato_salida"]!="") 
-				{
-					$Tipo_BARRAS=$registro_campos["formato_salida"];
+		//Si el formato de salida es especial entonces muestra lo que corresponda
+		if ($registro_campos["formato_salida"]!="") 
+			{
+				$Tipo_BARRAS=$registro_campos["formato_salida"];
 
-					//Establece tamanos de imagen segun tipo de grafico (codigo barras o datamatrix)
-					if ($Tipo_BARRAS!="datamatrix")
-						{
-							$Ancho_BARRAS=$registro_campos["ancho"];
-							//Si no se definio un ancho fijo entonces trata de calcularlo por la longitud del texto a mostrar
-							if ($Ancho_BARRAS=="" || $Ancho_BARRAS=="0")
-								$Ancho_BARRAS=110+strlen($Contenido_BARRAS)*10;
-							$Alto_BARRAS=$registro_campos["alto"];
-						}
-					if ($Tipo_BARRAS=="datamatrix")
-						{
-							$Ancho_BARRAS=$registro_campos["ancho"];
-							$Alto_BARRAS=$registro_campos["alto"];
-						}
-					
-					//Si es un codigo desde la libreria de codigos de barras lo muestra, si es un QR usa la otra funcion
-					if ($Tipo_BARRAS!="qrcode")
-						$cadena_valor='<img src="core/codigobarras.php?Cadena='.$Contenido_BARRAS.'&Tipo='.$Tipo_BARRAS.'&AnchoCodigo=2&AltoCodigo='.($Alto_BARRAS-6).'&AnchoImagen='.$Ancho_BARRAS.'&AltoImagen='.$Alto_BARRAS.'" border=0>';
-					else
-						$cadena_valor=CodigoQR($Contenido_BARRAS);
-				}
+				//Establece tamanos de imagen segun tipo de grafico (codigo barras o datamatrix)
+				if ($Tipo_BARRAS!="datamatrix")
+					{
+						$Ancho_BARRAS=$registro_campos["ancho"];
+						//Si no se definio un ancho fijo entonces trata de calcularlo por la longitud del texto a mostrar
+						if ($Ancho_BARRAS=="" || $Ancho_BARRAS=="0")
+							$Ancho_BARRAS=110+strlen($Contenido_BARRAS)*10;
+						$Alto_BARRAS=$registro_campos["alto"];
+					}
+				else if ($Tipo_BARRAS=="datamatrix")
+					{
+						$Ancho_BARRAS=$registro_campos["ancho"];
+						$Alto_BARRAS=$registro_campos["alto"];
+					}
+				
+				//Si es un codigo desde la libreria de codigos de barras lo muestra, si es un QR usa la otra funcion
+				if ($Tipo_BARRAS!="qrcode")
+					$cadena_valor='<img src="core/codigobarras.php?Cadena='.$Contenido_BARRAS.'&Tipo='.$Tipo_BARRAS.'&AnchoCodigo=2&AltoCodigo='.($Alto_BARRAS-6).'&AnchoImagen='.$Ancho_BARRAS.'&AltoImagen='.$Alto_BARRAS.'" border=0>';
+				else
+					$cadena_valor=CodigoQR($Contenido_BARRAS);
+			}
 
-			//$salida=$cadena_valor;
-			//Agrega ademas el valor como hidden para disponer de el cuando se requiera en otro llamado o funcion personalizada
-			$tipo_entrada="hidden";
-			// Muestra el campo
-			//$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor.'" >';
+		//$salida=$cadena_valor;
+		//Agrega ademas el valor como hidden para disponer de el cuando se requiera en otro llamado o funcion personalizada
+		$tipo_entrada="hidden";
+		// Muestra el campo
+		//$salida.='<input type="'.$tipo_entrada.'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor.'" >';
 
-            //Agrega marco bootstrap antes de devolver contenidos
-			if ($registro_campos["ocultar_etiqueta"]=="0")
-				$salida='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
-            $salida.='<div id="'.$registro_campos["campo"].'">'.$cadena_valor.'</div>';
-			return $salida;
-		}
+        //Agrega marco bootstrap antes de devolver contenidos
+		if ($registro_campos["ocultar_etiqueta"]=="0")
+			$salida='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
+        $salida.='<div id="'.$registro_campos["campo"].'">'.$cadena_valor.'</div>';
+		return $salida;
+	}
 
 
 /* ################################################################## */
@@ -3853,105 +3829,105 @@ $('#SampleElement').load('YourURL');
 	Ver tambien:
 		<cargar_formulario>
 */
-	function cargar_objeto_lista_radio($registro_campos,$registro_datos_formulario)
-		{
-			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
-			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+function cargar_objeto_lista_radio($registro_campos,$registro_datos_formulario)
+	{
+		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
+		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
 
-			$salida='';
-			$nombre_campo=$registro_campos["campo"];
+		$salida='';
+		$nombre_campo=$registro_campos["campo"];
 
-			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
-			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
+		// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
+		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
-			// Toma los valores desde la lista de opciones (cuando es estatico)
-			$opciones_lista = explode(",", $registro_campos["lista_opciones"]);
-			$valores_lista = explode(",", $registro_campos["lista_opciones"]);
-			
-			//Elimina los elementos vacios de los arreglos
-			$opciones_lista = array_filter($opciones_lista);
-			$valores_lista = array_filter($valores_lista);
+		// Toma los valores desde la lista de opciones (cuando es estatico)
+		$opciones_lista = explode(",", $registro_campos["lista_opciones"]);
+		$valores_lista = explode(",", $registro_campos["lista_opciones"]);
+		
+		//Elimina los elementos vacios de los arreglos
+		$opciones_lista = array_filter($opciones_lista);
+		$valores_lista = array_filter($valores_lista);
 
-			// Si se desea tomar los valores del combo desde una tabla hace la consulta
-			if ($registro_campos["origen_lista_opciones"]!="" && $registro_campos["origen_lista_valores"]!="")
-				{
-					$nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_opciones"]);
-					$nombre_tabla_opciones = $nombre_tabla_opciones[0];
-					$campo_valores=$registro_campos["origen_lista_valores"];
-					$campo_opciones=$registro_campos["origen_lista_opciones"];
-					//Define si los registros a mostrar en la lista deben estar filtrados por alguna condicion
-					$condicion_filtrado_listas=$registro_campos["condicion_filtrado_listas"];
-					if ($condicion_filtrado_listas=="")
-						$condicion_filtrado_listas="1";
-					else
-						{
-							//Mientras existan llaves abriendo y cerrando dentro de la condicion intenta establecer valor de variables
-							$SalidaFiltradoBypass=0;
-							while(strpos($condicion_filtrado_listas,"{")!==FALSE && strpos($condicion_filtrado_listas,"}")!==FALSE && $SalidaFiltradoBypass==0)
-								{
-									//Evalua casos donde se tienen variables PHP escapadas por llaves.  Ej  "%{$Variable}%" si fuera para un LIKE, por ejemplo o para una variable en un where  campo="{$Variable}"
-									if (strpos($condicion_filtrado_listas,"{")!==FALSE && strpos($condicion_filtrado_listas,"}")!==FALSE)
-										{
-											//Determina las posiciones de las llaves en la cadena
-											$PosLlaveIzquierda=strpos($condicion_filtrado_listas,"{");
-											$PosLlaveDerecha=strpos($condicion_filtrado_listas,"}");
-											//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
-											$NombreVariable=substr($condicion_filtrado_listas,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
-											//Si la variable no esta definida la busca en el entorno global
-											global ${$NombreVariable};
-											if (@isset($NombreVariable))
-												{
-													$ValorVariable=${$NombreVariable};
-													//Reemplaza el valor encontrado en la cadena de valor original
-													$condicion_filtrado_listas=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$condicion_filtrado_listas);								
-												}
-											else
-												{
-													//Puede que no se logre reemplazar nada porque la variable no esta definida entonces sale por ByPass para evitar ciclo infinito
-													$SalidaFiltradoBypass=1;
-												}
-										}
-								}
-						}
-					// Consulta los campos para el tag select
-					$resultado_opciones=ejecutar_sql("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE $condicion_filtrado_listas ORDER BY $campo_opciones");
-					// Muestra resultados solo si $resultado_opciones es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch()
-					while ($resultado_opciones!="1" && $registro_opciones = $resultado_opciones->fetch())
-						{
-							$opciones_lista[] = $registro_opciones["opciones"];
-							$valores_lista[] = $registro_opciones["valores"];
-						}
-				}
+		// Si se desea tomar los valores del combo desde una tabla hace la consulta
+		if ($registro_campos["origen_lista_opciones"]!="" && $registro_campos["origen_lista_valores"]!="")
+			{
+				$nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_opciones"]);
+				$nombre_tabla_opciones = $nombre_tabla_opciones[0];
+				$campo_valores=$registro_campos["origen_lista_valores"];
+				$campo_opciones=$registro_campos["origen_lista_opciones"];
+				//Define si los registros a mostrar en la lista deben estar filtrados por alguna condicion
+				$condicion_filtrado_listas=$registro_campos["condicion_filtrado_listas"];
+				if ($condicion_filtrado_listas=="")
+					$condicion_filtrado_listas="1";
+				else
+					{
+						//Mientras existan llaves abriendo y cerrando dentro de la condicion intenta establecer valor de variables
+						$SalidaFiltradoBypass=0;
+						while(strpos($condicion_filtrado_listas,"{")!==FALSE && strpos($condicion_filtrado_listas,"}")!==FALSE && $SalidaFiltradoBypass==0)
+							{
+								//Evalua casos donde se tienen variables PHP escapadas por llaves.  Ej  "%{$Variable}%" si fuera para un LIKE, por ejemplo o para una variable en un where  campo="{$Variable}"
+								if (strpos($condicion_filtrado_listas,"{")!==FALSE && strpos($condicion_filtrado_listas,"}")!==FALSE)
+									{
+										//Determina las posiciones de las llaves en la cadena
+										$PosLlaveIzquierda=strpos($condicion_filtrado_listas,"{");
+										$PosLlaveDerecha=strpos($condicion_filtrado_listas,"}");
+										//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
+										$NombreVariable=substr($condicion_filtrado_listas,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
+										//Si la variable no esta definida la busca en el entorno global
+										global ${$NombreVariable};
+										if (@isset($NombreVariable))
+											{
+												$ValorVariable=${$NombreVariable};
+												//Reemplaza el valor encontrado en la cadena de valor original
+												$condicion_filtrado_listas=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$condicion_filtrado_listas);								
+											}
+										else
+											{
+												//Puede que no se logre reemplazar nada porque la variable no esta definida entonces sale por ByPass para evitar ciclo infinito
+												$SalidaFiltradoBypass=1;
+											}
+									}
+							}
+					}
+				// Consulta los campos para el tag select
+				$resultado_opciones=ejecutar_sql("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE $condicion_filtrado_listas ORDER BY $campo_opciones");
+				// Muestra resultados solo si $resultado_opciones es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch()
+				while ($resultado_opciones!="1" && $registro_opciones = $resultado_opciones->fetch())
+					{
+						$opciones_lista[] = $registro_opciones["opciones"];
+						$valores_lista[] = $registro_opciones["valores"];
+					}
+			}
 
 
-            //Agrega etiqueta del campo si es diferente de vacio
-			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-                $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
-			//Abre el marco del control de datos
-			$salida.='<div class="form-group input-group">';
-			// Muestra el campo
-			for ($i=0;$i<count($opciones_lista);$i++)
-				{
-					// Determina si la opcion a agregar es la misma del valor del registro
-					$cadena_predeterminado='';
-					if ($valores_lista[$i]==$cadena_valor)
-						$cadena_predeterminado=' CHECKED ';
-					$salida.= "<input class='Radios' type='radio' name='".$registro_campos["campo"]."' value='".PCO_ReemplazarVariablesPHPEnCadena($valores_lista[$i])."' ".$cadena_predeterminado." ".$registro_campos["personalizacion_tag"]." >".PCO_ReemplazarVariablesPHPEnCadena($opciones_lista[$i])."<br>";
-				}
-			//Si hay algun indicador adicional del campo abre los add-ons
-            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
-                $salida.= '<span class="input-group-addon">';
-                // Muestra indicadores de obligatoriedad o ayuda
-                if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitValorUnico.'</b><br>'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
-                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
-            //Si habia algun indicador adicional del campo cierra los add-ons
-            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
-                $salida.= '</span>';
-            //Cierra marco del control de datos
-            $salida.= '</div>';
-			return $salida;
-		}
+        //Agrega etiqueta del campo si es diferente de vacio
+		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
+            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
+		//Abre el marco del control de datos
+		$salida.='<div class="form-group input-group">';
+		// Muestra el campo
+		for ($i=0;$i<count($opciones_lista);$i++)
+			{
+				// Determina si la opcion a agregar es la misma del valor del registro
+				$cadena_predeterminado='';
+				if ($valores_lista[$i]==$cadena_valor)
+					$cadena_predeterminado=' CHECKED ';
+				$salida.= "<input class='Radios' type='radio' name='".$registro_campos["campo"]."' value='".PCO_ReemplazarVariablesPHPEnCadena($valores_lista[$i])."' ".$cadena_predeterminado." ".$registro_campos["personalizacion_tag"]." >".PCO_ReemplazarVariablesPHPEnCadena($opciones_lista[$i])."<br>";
+			}
+		//Si hay algun indicador adicional del campo abre los add-ons
+        if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+            $salida.= '<span class="input-group-addon">';
+            // Muestra indicadores de obligatoriedad o ayuda
+            if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitValorUnico.'</b><br>'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
+            if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+            if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
+        //Si habia algun indicador adicional del campo cierra los add-ons
+        if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+            $salida.= '</span>';
+        //Cierra marco del control de datos
+        $salida.= '</div>';
+		return $salida;
+	}
 
 
 /* ################################################################## */
@@ -3973,59 +3949,59 @@ $('#SampleElement').load('YourURL');
 	Ver tambien:
 		<cargar_formulario>
 */
-	function cargar_objeto_casilla_check($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
-		{
-			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
-            global $funciones_activacion_datepickers;
-			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+function cargar_objeto_casilla_check($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
+	{
+		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
+        global $funciones_activacion_datepickers;
+		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
 
-			$salida='';
-			$nombre_campo=$registro_campos["campo"];
+		$salida='';
+		$nombre_campo=$registro_campos["campo"];
 
-			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
-			$cadena_valor='';
-			
-			
-			//Toma el valor predeterminado y lo asigna
-			$cadena_valor_almacenada=$registro_campos["valor_predeterminado"];
-			//Si el valor predeterminado es el mismo de valor check activo entonces activa el control
-			if ($registro_campos["valor_predeterminado"]==$registro_campos["valor_check_activo"])
-				$cadena_valor="checked";
-			
-			//Reemplaza el valor del campo en caso de tener alguno viniendo del registro
-			$nombre_campo=$registro_campos["campo"];
-			$valor_de_registro=$registro_datos_formulario["$nombre_campo"];
-			if ($valor_de_registro!="")
-				{
-					$cadena_valor_almacenada=$valor_de_registro;
-					//Si el valor de registro es el asociado al valor de activo entonces activa el control, sino lo desactiva
-					if ($valor_de_registro==$registro_campos["valor_check_activo"])
-						$cadena_valor="checked";
-					else
-						$cadena_valor="";
-				}
+		// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
+		$cadena_valor='';
+		
+		
+		//Toma el valor predeterminado y lo asigna
+		$cadena_valor_almacenada=$registro_campos["valor_predeterminado"];
+		//Si el valor predeterminado es el mismo de valor check activo entonces activa el control
+		if ($registro_campos["valor_predeterminado"]==$registro_campos["valor_check_activo"])
+			$cadena_valor="checked";
+		
+		//Reemplaza el valor del campo en caso de tener alguno viniendo del registro
+		$nombre_campo=$registro_campos["campo"];
+		$valor_de_registro=$registro_datos_formulario["$nombre_campo"];
+		if ($valor_de_registro!="")
+			{
+				$cadena_valor_almacenada=$valor_de_registro;
+				//Si el valor de registro es el asociado al valor de activo entonces activa el control, sino lo desactiva
+				if ($valor_de_registro==$registro_campos["valor_check_activo"])
+					$cadena_valor="checked";
+				else
+					$cadena_valor="";
+			}
 
-            // Muestra el campo
-            $salida.= '
-				<input type="hidden" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor_almacenada.'">
-				<div class="checkbox">
-					<label>
-						<input onchange="JSFUNC_Actualizar_'.$registro_campos["campo"].'(this);" type="checkbox" id="JSVAR_'.$registro_campos["campo"].'" name="JSVAR_'.$registro_campos["campo"].'" '.$cadena_valor.' > '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).'
-					</label>
-				</div>
-				<script language="JavaScript">
-					function JSFUNC_Actualizar_'.$registro_campos["campo"].'(objeto_checkbox)
-						{
-							//Si es marcado asigna el valor, sino asigna el otro
-							if (objeto_checkbox.checked)
-								document.datos.'.$registro_campos["campo"].'.value="'.$registro_campos["valor_check_activo"].'";
-							else
-								document.datos.'.$registro_campos["campo"].'.value="'.$registro_campos["valor_check_inactivo"].'";
-						}
-				</script>
-            ';
-			return $salida;
-		}
+        // Muestra el campo
+        $salida.= '
+			<input type="hidden" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor_almacenada.'">
+			<div class="checkbox">
+				<label>
+					<input onchange="JSFUNC_Actualizar_'.$registro_campos["campo"].'(this);" type="checkbox" id="JSVAR_'.$registro_campos["campo"].'" name="JSVAR_'.$registro_campos["campo"].'" '.$cadena_valor.' > '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).'
+				</label>
+			</div>
+			<script language="JavaScript">
+				function JSFUNC_Actualizar_'.$registro_campos["campo"].'(objeto_checkbox)
+					{
+						//Si es marcado asigna el valor, sino asigna el otro
+						if (objeto_checkbox.checked)
+							document.datos.'.$registro_campos["campo"].'.value="'.$registro_campos["valor_check_activo"].'";
+						else
+							document.datos.'.$registro_campos["campo"].'.value="'.$registro_campos["valor_check_inactivo"].'";
+					}
+			</script>
+        ';
+		return $salida;
+	}
 
 
 /* ################################################################## */
@@ -4046,59 +4022,59 @@ $('#SampleElement').load('YourURL');
 	Ver tambien:
 		<cargar_formulario>
 */
-	function cargar_objeto_deslizador($registro_campos,$registro_datos_formulario)
-		{
-			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$funciones_activacion_sliders;
-			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+function cargar_objeto_deslizador($registro_campos,$registro_datos_formulario)
+	{
+		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$funciones_activacion_sliders;
+		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
 
-			$salida='';
-			$nombre_campo=$registro_campos["campo"];
+		$salida='';
+		$nombre_campo=$registro_campos["campo"];
 
-			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
-			$cadena_valor='';
-            $valor_de_campo="0";
-            // Si tiene valor predeterminado se asume
-			if ($registro_campos["valor_predeterminado"]!="") $valor_de_campo=$registro_campos["valor_predeterminado"];
-			// toma el valor predeterminado como el minimo (formulario de registro nuevo) en caso de no tener un predeterminado
-            if ($registro_campos["valor_predeterminado"]=="") $valor_de_campo=$registro_campos["valor_minimo"];
-			// Busca el valor segun registro en caso de recibir un registro recuperado
-			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="")
-				$valor_de_campo=$registro_datos_formulario["$nombre_campo"];
-			$cadena_valor=' data-slider-value="'.$valor_de_campo.'" value="'.$valor_de_campo.'" ';
+		// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
+		$cadena_valor='';
+        $valor_de_campo="0";
+        // Si tiene valor predeterminado se asume
+		if ($registro_campos["valor_predeterminado"]!="") $valor_de_campo=$registro_campos["valor_predeterminado"];
+		// toma el valor predeterminado como el minimo (formulario de registro nuevo) en caso de no tener un predeterminado
+        if ($registro_campos["valor_predeterminado"]=="") $valor_de_campo=$registro_campos["valor_minimo"];
+		// Busca el valor segun registro en caso de recibir un registro recuperado
+		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="")
+			$valor_de_campo=$registro_datos_formulario["$nombre_campo"];
+		$cadena_valor=' data-slider-value="'.$valor_de_campo.'" value="'.$valor_de_campo.'" ';
 
-            //Agrega etiqueta del campo si es diferente de vacio
-			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-                $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
-			//Abre el marco del control de datos
-			$salida.='<div class="form-group input-group">';
-			// Muestra el campo
-            $salida.= '<input class="span2" type="text" id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" data-slider-min="'.$registro_campos["valor_minimo"].'" data-slider-max="'.$registro_campos["valor_maximo"].'" data-slider-step="'.$registro_campos["valor_salto"].'" '.$cadena_valor.' '.$registro_campos["personalizacion_tag"].' >';
-            //  data-slider-selection="after" data-slider-tooltip="hide">
+        //Agrega etiqueta del campo si es diferente de vacio
+		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
+            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
+		//Abre el marco del control de datos
+		$salida.='<div class="form-group input-group">';
+		// Muestra el campo
+        $salida.= '<input class="span2" type="text" id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" data-slider-min="'.$registro_campos["valor_minimo"].'" data-slider-max="'.$registro_campos["valor_maximo"].'" data-slider-step="'.$registro_campos["valor_salto"].'" '.$cadena_valor.' '.$registro_campos["personalizacion_tag"].' >';
+        //  data-slider-selection="after" data-slider-tooltip="hide">
 
-            //Guarda la funcion para activar el slider posterior a su carga
-            @$funciones_activacion_sliders.="
-                    $(function(){
-                        window.prettyPrint && prettyPrint();
-                    $('#".$registro_campos["campo"]."').slider({
-                      formater: function(value) {
-                        return 'Valor: '+value;
-                      }
-                    });
-                });";
+        //Guarda la funcion para activar el slider posterior a su carga
+        @$funciones_activacion_sliders.="
+                $(function(){
+                    window.prettyPrint && prettyPrint();
+                $('#".$registro_campos["campo"]."').slider({
+                  formater: function(value) {
+                    return 'Valor: '+value;
+                  }
+                });
+            });";
 
-			//Si hay algun indicador adicional del campo abre los add-ons
-            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
-                $salida.= '<span class="input-group-addon">';
-                // Muestra indicadores de obligatoriedad o ayuda
-                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
-            //Si habia algun indicador adicional del campo cierra los add-ons
-            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
-                $salida.= '</span>';
-            //Cierra marco del control de datos
-            $salida.= '</div>';
-			return $salida;
-		}
+		//Si hay algun indicador adicional del campo abre los add-ons
+        if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+            $salida.= '<span class="input-group-addon">';
+            // Muestra indicadores de obligatoriedad o ayuda
+            if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+            if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
+        //Si habia algun indicador adicional del campo cierra los add-ons
+        if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+            $salida.= '</span>';
+        //Cierra marco del control de datos
+        $salida.= '</div>';
+		return $salida;
+	}
 
 
 
@@ -4120,68 +4096,68 @@ $('#SampleElement').load('YourURL');
 	Ver tambien:
 		<cargar_formulario>
 */
-	function cargar_objeto_archivo_adjunto($registro_campos,$registro_datos_formulario)
-		{
-			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
-			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_FrmArchivoLink,$MULTILANG_Tipo;
+function cargar_objeto_archivo_adjunto($registro_campos,$registro_datos_formulario)
+	{
+		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
+		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_FrmArchivoLink,$MULTILANG_Tipo;
 
-			$salida='';
-			$nombre_campo=$registro_campos["campo"];
-			$tipo_entrada="file";
+		$salida='';
+		$nombre_campo=$registro_campos["campo"];
+		$tipo_entrada="file";
 
-			// Especifica longitud visual de campo en caso de haber sido definida
-			$cadena_longitud_visual=' size="20" ';
-			if ($registro_campos["ancho"]!="0")
-				$cadena_longitud_visual=' size="'.$registro_campos["ancho"].'" ';
+		// Especifica longitud visual de campo en caso de haber sido definida
+		$cadena_longitud_visual=' size="20" ';
+		if ($registro_campos["ancho"]!="0")
+			$cadena_longitud_visual=' size="'.$registro_campos["ancho"].'" ';
 
-			// Especifica longitud maxima de caracteres en caso de haber sido definida
-			$cadena_longitud_permitida=' ';
-			if ($registro_campos["maxima_longitud"]!=0)
-				$cadena_longitud_permitida=' maxlength="'.$registro_campos["maxima_longitud"].'" ';
+		// Especifica longitud maxima de caracteres en caso de haber sido definida
+		$cadena_longitud_permitida=' ';
+		if ($registro_campos["maxima_longitud"]!=0)
+			$cadena_longitud_permitida=' maxlength="'.$registro_campos["maxima_longitud"].'" ';
 
-			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
-			$cadena_valor='';
-			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
-			//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.
-			if (substr($registro_campos["valor_predeterminado"], 0,1)=="$")
-				{
-					$nombre_variable = substr($registro_campos["valor_predeterminado"], 1);
-					global ${$nombre_variable};
-					if (isset($nombre_variable))
-						{
-							$valor_variable=${$nombre_variable};
-							$cadena_valor=' value="'.$valor_variable.'" ';							
-						}
-				}
+		// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
+		$cadena_valor='';
+		if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
+		//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.
+		if (substr($registro_campos["valor_predeterminado"], 0,1)=="$")
+			{
+				$nombre_variable = substr($registro_campos["valor_predeterminado"], 1);
+				global ${$nombre_variable};
+				if (isset($nombre_variable))
+					{
+						$valor_variable=${$nombre_variable};
+						$cadena_valor=' value="'.$valor_variable.'" ';							
+					}
+			}
 
-			// Si detecta un path de archivo en el registro entonces agrega el enlace
-			$partes_adjunto_archivo=explode("|",$registro_datos_formulario["$nombre_campo"]);
-			$adjunto_url_archivo=$partes_adjunto_archivo[0];
-			$adjunto_tipo_archivo=$partes_adjunto_archivo[1];
-			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="" && $registro_datos_formulario["$nombre_campo"]!="")
-				$salida.='<a target="_BLANK" href="'.$adjunto_url_archivo.'"><i class="fa fa-search"></i><b>'.$MULTILANG_FrmArchivoLink.'</b><i class="fa fa-floppy-o fa-fw"></i></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>('.$MULTILANG_Tipo.': '.$adjunto_tipo_archivo.')</i><br>';
+		// Si detecta un path de archivo en el registro entonces agrega el enlace
+		$partes_adjunto_archivo=explode("|",$registro_datos_formulario["$nombre_campo"]);
+		$adjunto_url_archivo=$partes_adjunto_archivo[0];
+		$adjunto_tipo_archivo=$partes_adjunto_archivo[1];
+		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="" && $registro_datos_formulario["$nombre_campo"]!="")
+			$salida.='<a target="_BLANK" href="'.$adjunto_url_archivo.'"><i class="fa fa-search"></i><b>'.$MULTILANG_FrmArchivoLink.'</b><i class="fa fa-floppy-o fa-fw"></i></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>('.$MULTILANG_Tipo.': '.$adjunto_tipo_archivo.')</i><br>';
 
-            //Agrega etiqueta del campo si es diferente de vacio
-			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-                $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
-			//Abre el marco del control de datos
-			$salida.='<div class="form-group input-group">';
-			// Muestra el campo
-			$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control btn-default" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$registro_campos["personalizacion_tag"].' >';
+        //Agrega etiqueta del campo si es diferente de vacio
+		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
+            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
+		//Abre el marco del control de datos
+		$salida.='<div class="form-group input-group">';
+		// Muestra el campo
+		$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control btn-default" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$registro_campos["personalizacion_tag"].' >';
 
-			//Si hay algun indicador adicional del campo abre los add-ons
-            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
-                $salida.= '<span class="input-group-addon">';
-                // Muestra indicadores de obligatoriedad o ayuda
-                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
-            //Si habia algun indicador adicional del campo cierra los add-ons
-            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
-                $salida.= '</span>';
-            //Cierra marco del control de datos
-            $salida.= '</div>';
-			return $salida;
-		}
+		//Si hay algun indicador adicional del campo abre los add-ons
+        if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+            $salida.= '<span class="input-group-addon">';
+            // Muestra indicadores de obligatoriedad o ayuda
+            if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+            if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
+        //Si habia algun indicador adicional del campo cierra los add-ons
+        if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+            $salida.= '</span>';
+        //Cierra marco del control de datos
+        $salida.= '</div>';
+		return $salida;
+	}
 
 
 
@@ -4203,111 +4179,111 @@ $('#SampleElement').load('YourURL');
 	Ver tambien:
 		<cargar_formulario>
 */
-	function cargar_objeto_canvas($registro_campos,$registro_datos_formulario)
-		{
-			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
-			global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
-            global $funciones_activacion_canvas;
+function cargar_objeto_canvas($registro_campos,$registro_datos_formulario)
+	{
+		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
+		global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+        global $funciones_activacion_canvas;
 
-			$salida='';
-			$nombre_campo=$registro_campos["campo"];
+		$salida='';
+		$nombre_campo=$registro_campos["campo"];
 
-			// Si detecta un valor en el registro entonces agrega el contenido
-			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="" && $registro_datos_formulario["$nombre_campo"]!="")
-				{
-					$cadena_decodificada=$registro_datos_formulario["$nombre_campo"];
-					$cadena_decodificada=gzdecode($cadena_decodificada);
-					$salida.='<a href="javascript:AbrirPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\');"><i class="fa fa-picture-o"></i><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
-						<!-- INICIO DE MARCOS POPUP -->
-						<div id="CANVASPrevio'.$registro_campos["campo"].'" class="FormularioPopUps">
-							<div align=center>
-								<table bgcolor="#FFFFFF"><tr><td>
-									<img src="'.$cadena_decodificada.'" border=1>
-								</td></tr></table>
-							</br>
-							<input type="Button"  class="Botones" value=" -- '.$MULTILANG_Cerrar.' -- " onClick="OcultarPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\')">
-							</div>
-						<!-- FIN DE MARCOS POPUP -->
-						</div>';
-				}
+		// Si detecta un valor en el registro entonces agrega el contenido
+		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="" && $registro_datos_formulario["$nombre_campo"]!="")
+			{
+				$cadena_decodificada=$registro_datos_formulario["$nombre_campo"];
+				$cadena_decodificada=gzdecode($cadena_decodificada);
+				$salida.='<a href="javascript:AbrirPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\');"><i class="fa fa-picture-o"></i><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
+					<!-- INICIO DE MARCOS POPUP -->
+					<div id="CANVASPrevio'.$registro_campos["campo"].'" class="FormularioPopUps">
+						<div align=center>
+							<table bgcolor="#FFFFFF"><tr><td>
+								<img src="'.$cadena_decodificada.'" border=1>
+							</td></tr></table>
+						</br>
+						<input type="Button"  class="Botones" value=" -- '.$MULTILANG_Cerrar.' -- " onClick="OcultarPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\')">
+						</div>
+					<!-- FIN DE MARCOS POPUP -->
+					</div>';
+			}
 
-            //Agrega etiqueta del campo si es diferente de vacio
-			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-                $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
-			//Abre el marco del control de datos
-			$salida.='<div class="form-group input-group">';
-			// Muestra el campo
-			$salida.='
-				<!--<a href="javascript:" id="upload" style="width: 100px;">Upload</a>-->
-				<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" style="border: 1px solid #acc;">Su navegador no soporta Canvas</canvas>
-				<a href="javascript:limpiar_CANVAS_'.$registro_campos["campo"].'();"><i class="fa fa-times fa-2x"></i></a>
+        //Agrega etiqueta del campo si es diferente de vacio
+		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
+            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
+		//Abre el marco del control de datos
+		$salida.='<div class="form-group input-group">';
+		// Muestra el campo
+		$salida.='
+			<!--<a href="javascript:" id="upload" style="width: 100px;">Upload</a>-->
+			<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" style="border: 1px solid #acc;">Su navegador no soporta Canvas</canvas>
+			<a href="javascript:limpiar_CANVAS_'.$registro_campos["campo"].'();"><i class="fa fa-times fa-2x"></i></a>
 
-				<script type="text/javascript">';
-            
-            //Prepara la funcion de reactivacion del canvas para el final del script
-            $funciones_activacion_canvas.='
-                    $(function ()
-						{
-							$(\'#CANVAS_'.$registro_campos["campo"].'\').sketch({defaultColor: "'.$registro_campos["color_trazo"].'", defaultSize: "'.$registro_campos["tamano_pincel"].'"});
-						});';
-            
-            $salida.='
-					/*
-					// Genera el vinculo entre el enlace de upload y la funcion
-					$("#upload").bind("click", function ()
-						{
-							var oCanvas = document.getElementById("CANVAS_'.$registro_campos["campo"].'");
-							var strDataURI = oCanvas.toDataURL();
-							//alert(strDataURI); //Muestra el resultado en base64
-						});
-					*/
+			<script type="text/javascript">';
+        
+        //Prepara la funcion de reactivacion del canvas para el final del script
+        $funciones_activacion_canvas.='
+                $(function ()
+					{
+						$(\'#CANVAS_'.$registro_campos["campo"].'\').sketch({defaultColor: "'.$registro_campos["color_trazo"].'", defaultSize: "'.$registro_campos["tamano_pincel"].'"});
+					});';
+        
+        $salida.='
+				/*
+				// Genera el vinculo entre el enlace de upload y la funcion
+				$("#upload").bind("click", function ()
+					{
+						var oCanvas = document.getElementById("CANVAS_'.$registro_campos["campo"].'");
+						var strDataURI = oCanvas.toDataURL();
+						//alert(strDataURI); //Muestra el resultado en base64
+					});
+				*/
 
-					function limpiar_CANVAS_'.$registro_campos["campo"].'()
-						{
-							// Busca el contexto del canvas y le reasigna ancho y alto para limpiarlo
-							var oCanvas = document.getElementById("CANVAS_'.$registro_campos["campo"].'");
-							var oContext = oCanvas.getContext("2d");
-							//FORMA1:
-								oContext.clearRect(0, 0, oCanvas.width, oCanvas.height);
-							/*//FORMA2:
-								oCanvas.width = oCanvas.width;*/
-							/*//FORMA3:
-								oContext.save();
-								oContext.fillStyle = "#FFF";
-								oContext.fillRect(0, 0, oCanvas.width, oCanvas.height);
-								oContext.restore();
-								oCanvas.clear();*/
-							/*//FORMA4:
-								var ancho_anterior = oCanvas.width;
-								oCanvas.width = 1;
-								oCanvas.width = ancho_anterior;*/
-						}
+				function limpiar_CANVAS_'.$registro_campos["campo"].'()
+					{
+						// Busca el contexto del canvas y le reasigna ancho y alto para limpiarlo
+						var oCanvas = document.getElementById("CANVAS_'.$registro_campos["campo"].'");
+						var oContext = oCanvas.getContext("2d");
+						//FORMA1:
+							oContext.clearRect(0, 0, oCanvas.width, oCanvas.height);
+						/*//FORMA2:
+							oCanvas.width = oCanvas.width;*/
+						/*//FORMA3:
+							oContext.save();
+							oContext.fillStyle = "#FFF";
+							oContext.fillRect(0, 0, oCanvas.width, oCanvas.height);
+							oContext.restore();
+							oCanvas.clear();*/
+						/*//FORMA4:
+							var ancho_anterior = oCanvas.width;
+							oCanvas.width = 1;
+							oCanvas.width = ancho_anterior;*/
+					}
 
-					function actualizar_CANVAS_'.$registro_campos["campo"].'()
-						{
-							// Pasa el valor del canvas al campo que se usa en almacenamiento
-							var oCanvas = document.getElementById("CANVAS_'.$registro_campos["campo"].'");
-							var strDataURI = oCanvas.toDataURL();
-							document.datos.'.$registro_campos["campo"].'.value=strDataURI;
-							window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);
-						}
-					window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1500);
-				</script>
-				<input type="hidden" name="'.$registro_campos["campo"].'">';
+				function actualizar_CANVAS_'.$registro_campos["campo"].'()
+					{
+						// Pasa el valor del canvas al campo que se usa en almacenamiento
+						var oCanvas = document.getElementById("CANVAS_'.$registro_campos["campo"].'");
+						var strDataURI = oCanvas.toDataURL();
+						document.datos.'.$registro_campos["campo"].'.value=strDataURI;
+						window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);
+					}
+				window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1500);
+			</script>
+			<input type="hidden" name="'.$registro_campos["campo"].'">';
 
-			//Si hay algun indicador adicional del campo abre los add-ons
-            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
-                $salida.= '<span class="input-group-addon">';
-                // Muestra indicadores de obligatoriedad o ayuda
-                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
-            //Si habia algun indicador adicional del campo cierra los add-ons
-            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
-                $salida.= '</span>';
-            //Cierra marco del control de datos
-            $salida.= '</div>';
-			return $salida;
-		}
+		//Si hay algun indicador adicional del campo abre los add-ons
+        if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+            $salida.= '<span class="input-group-addon">';
+            // Muestra indicadores de obligatoriedad o ayuda
+            if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+            if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
+        //Si habia algun indicador adicional del campo cierra los add-ons
+        if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+            $salida.= '</span>';
+        //Cierra marco del control de datos
+        $salida.= '</div>';
+		return $salida;
+	}
 
 
 
@@ -4329,124 +4305,124 @@ $('#SampleElement').load('YourURL');
 	Ver tambien:
 		<cargar_formulario>
 */
-	function cargar_objeto_camara($registro_campos,$registro_datos_formulario)
-		{
-			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
-			global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink,$MULTILANG_Capturar,$MULTILANG_FrmErrorCam,$MULTILANG_DesObligatorio,$MULTILANG_TitObligatorio;
+function cargar_objeto_camara($registro_campos,$registro_datos_formulario)
+	{
+		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
+		global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink,$MULTILANG_Capturar,$MULTILANG_FrmErrorCam,$MULTILANG_DesObligatorio,$MULTILANG_TitObligatorio;
 
-			$salida='';
-			$nombre_campo=$registro_campos["campo"];
+		$salida='';
+		$nombre_campo=$registro_campos["campo"];
 
-			// Si detecta un valor en el registro entonces agrega el contenido
-			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="" && $registro_datos_formulario["$nombre_campo"]!="")
-				{
-					$cadena_decodificada=$registro_datos_formulario["$nombre_campo"];
-					$cadena_decodificada=gzdecode($cadena_decodificada);
-					$salida.='<a href="javascript:AbrirPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\');"><i class="fa fa-picture-o"></i><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
-						<!-- INICIO DE MARCOS POPUP -->
-						<div id="CANVASPrevio'.$registro_campos["campo"].'" class="FormularioPopUps">
-							<div align=center>
-								<table bgcolor="#FFFFFF"><tr><td>
-									<img src="'.$cadena_decodificada.'" border=1>
-								</td></tr></table>
-							</br>
-							<input type="Button"  class="Botones" value=" -- '.$MULTILANG_Cerrar.' -- " onClick="OcultarPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\')">
-							</div>
-						<!-- FIN DE MARCOS POPUP -->
-						</div>';
+		// Si detecta un valor en el registro entonces agrega el contenido
+		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="" && $registro_datos_formulario["$nombre_campo"]!="")
+			{
+				$cadena_decodificada=$registro_datos_formulario["$nombre_campo"];
+				$cadena_decodificada=gzdecode($cadena_decodificada);
+				$salida.='<a href="javascript:AbrirPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\');"><i class="fa fa-picture-o"></i><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
+					<!-- INICIO DE MARCOS POPUP -->
+					<div id="CANVASPrevio'.$registro_campos["campo"].'" class="FormularioPopUps">
+						<div align=center>
+							<table bgcolor="#FFFFFF"><tr><td>
+								<img src="'.$cadena_decodificada.'" border=1>
+							</td></tr></table>
+						</br>
+						<input type="Button"  class="Botones" value=" -- '.$MULTILANG_Cerrar.' -- " onClick="OcultarPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\')">
+						</div>
+					<!-- FIN DE MARCOS POPUP -->
+					</div>';
+			}
+
+		// Muestra el campo
+		$escala_reduccion=1;
+        //Agrega etiqueta del campo si es diferente de vacio
+		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
+            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
+		//Abre el marco del control de datos
+		$salida.='<div class="form-group input-group">';
+		$salida.='
+			<table border=0>
+				<tr>
+					<td valign=top>
+						<div id="container" style="margin: 0px auto; width: '.$registro_campos["ancho"].'px; height: '.$registro_campos["alto"].'px; border: 1px solid #acc;">
+							<video autoplay id="videoElement"  style="width: '.$registro_campos["ancho"].'px; height: '.$registro_campos["alto"].'px;">
+							</video>
+						</div>
+					</td>
+					<td valign=top>
+                        <i class="fa fa-camera" OnClick="draw(v,context,w,h);"></i>
+						<br>
+						<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.(($registro_campos["ancho"]/$escala_reduccion)).'" height="'.(($registro_campos["alto"]/$escala_reduccion)).'" style="width: '.(($registro_campos["ancho"]/$escala_reduccion)).'px; height: '.(($registro_campos["alto"]/$escala_reduccion)).'px; background-color: #CCC; visibility:visible;"></canvas>
+					</td>
+				</tr>
+			</table>
+
+			<script>
+				var video = document.querySelector("#videoElement");
+				navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+
+				if (navigator.getUserMedia) {       
+					navigator.getUserMedia({video: true}, handleVideo, videoError);
 				}
 
-			// Muestra el campo
-			$escala_reduccion=1;
-            //Agrega etiqueta del campo si es diferente de vacio
-			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-                $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
-			//Abre el marco del control de datos
-			$salida.='<div class="form-group input-group">';
-			$salida.='
-				<table border=0>
-					<tr>
-						<td valign=top>
-							<div id="container" style="margin: 0px auto; width: '.$registro_campos["ancho"].'px; height: '.$registro_campos["alto"].'px; border: 1px solid #acc;">
-								<video autoplay id="videoElement"  style="width: '.$registro_campos["ancho"].'px; height: '.$registro_campos["alto"].'px;">
-								</video>
-							</div>
-						</td>
-						<td valign=top>
-                            <i class="fa fa-camera" OnClick="draw(v,context,w,h);"></i>
-							<br>
-							<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.(($registro_campos["ancho"]/$escala_reduccion)).'" height="'.(($registro_campos["alto"]/$escala_reduccion)).'" style="width: '.(($registro_campos["ancho"]/$escala_reduccion)).'px; height: '.(($registro_campos["alto"]/$escala_reduccion)).'px; background-color: #CCC; visibility:visible;"></canvas>
-						</td>
-					</tr>
-				</table>
+				function handleVideo(stream) {
+					video.src = window.URL.createObjectURL(stream);
+				}
 
-				<script>
-					var video = document.querySelector("#videoElement");
-					navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+				function videoError(e) {
+					alert("'.$MULTILANG_FrmErrorCam.'");
+				}
 
-					if (navigator.getUserMedia) {       
-						navigator.getUserMedia({video: true}, handleVideo, videoError);
+				var v,CANVAS_'.$registro_campos["campo"].',context,w,h;
+				var sel = document.getElementById(\'fileselect\');
+
+				document.addEventListener(\'DOMContentLoaded\', function(){
+				v = document.getElementById(\'videoElement\');
+				CANVAS_'.$registro_campos["campo"].' = document.getElementById(\'CANVAS_'.$registro_campos["campo"].'\');
+				context = CANVAS_'.$registro_campos["campo"].'.getContext(\'2d\');
+				w = CANVAS_'.$registro_campos["campo"].'.width;
+				h = CANVAS_'.$registro_campos["campo"].'.height;
+				},false);
+
+				function draw(v,c,w,h) {
+				if(v.paused || v.ended) return false;
+				context.drawImage(v,0,0,w,h);
+				var uri = CANVAS_'.$registro_campos["campo"].'.toDataURL("image/png");
+				}
+
+				var fr;
+				sel.addEventListener(\'change\',function(e){
+				var f = sel.files[0];
+				fr = new FileReader();
+				fr.readAsDataURL(f);
+				})
+			</script>';
+
+		$salida.='
+			<script>
+				function actualizar_CANVAS_'.$registro_campos["campo"].'()
+					{
+						// Pasa el valor del canvas al campo que se usa en almacenamiento
+						var oCanvas = document.getElementById("CANVAS_'.$registro_campos["campo"].'");
+						var strDataURI = oCanvas.toDataURL();
+						document.datos.'.$registro_campos["campo"].'.value=strDataURI;
+						window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);
 					}
-
-					function handleVideo(stream) {
-						video.src = window.URL.createObjectURL(stream);
-					}
-
-					function videoError(e) {
-						alert("'.$MULTILANG_FrmErrorCam.'");
-					}
-
-					var v,CANVAS_'.$registro_campos["campo"].',context,w,h;
-					var sel = document.getElementById(\'fileselect\');
-
-					document.addEventListener(\'DOMContentLoaded\', function(){
-					v = document.getElementById(\'videoElement\');
-					CANVAS_'.$registro_campos["campo"].' = document.getElementById(\'CANVAS_'.$registro_campos["campo"].'\');
-					context = CANVAS_'.$registro_campos["campo"].'.getContext(\'2d\');
-					w = CANVAS_'.$registro_campos["campo"].'.width;
-					h = CANVAS_'.$registro_campos["campo"].'.height;
-					},false);
-
-					function draw(v,c,w,h) {
-					if(v.paused || v.ended) return false;
-					context.drawImage(v,0,0,w,h);
-					var uri = CANVAS_'.$registro_campos["campo"].'.toDataURL("image/png");
-					}
-
-					var fr;
-					sel.addEventListener(\'change\',function(e){
-					var f = sel.files[0];
-					fr = new FileReader();
-					fr.readAsDataURL(f);
-					})
-				</script>';
-
-			$salida.='
-				<script>
-					function actualizar_CANVAS_'.$registro_campos["campo"].'()
-						{
-							// Pasa el valor del canvas al campo que se usa en almacenamiento
-							var oCanvas = document.getElementById("CANVAS_'.$registro_campos["campo"].'");
-							var strDataURI = oCanvas.toDataURL();
-							document.datos.'.$registro_campos["campo"].'.value=strDataURI;
-							window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);
-						}
-					window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);
-				</script>
-				<input type="hidden" name="'.$registro_campos["campo"].'">';
-			//Si hay algun indicador adicional del campo abre los add-ons
-            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
-                $salida.= '<span class="input-group-addon">';
-                // Muestra indicadores de obligatoriedad o ayuda
-                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
-            //Si habia algun indicador adicional del campo cierra los add-ons
-            if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
-                $salida.= '</span>';
-            //Cierra marco del control de datos
-            $salida.= '</div>';
-			return $salida;
-		}
+				window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);
+			</script>
+			<input type="hidden" name="'.$registro_campos["campo"].'">';
+		//Si hay algun indicador adicional del campo abre los add-ons
+        if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+            $salida.= '<span class="input-group-addon">';
+            // Muestra indicadores de obligatoriedad o ayuda
+            if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+            if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
+        //Si habia algun indicador adicional del campo cierra los add-ons
+        if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
+            $salida.= '</span>';
+        //Cierra marco del control de datos
+        $salida.= '</div>';
+		return $salida;
+	}
 
 
 /* ################################################################## */
@@ -4468,67 +4444,59 @@ $('#SampleElement').load('YourURL');
 	Ver tambien:
 		<cargar_formulario>
 */
-	function cargar_objeto_boton_comando($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
-		{
-			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
-            global $funciones_activacion_datepickers;
-			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
-			$salida='';
+function cargar_objeto_boton_comando($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
+	{
+		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
+        global $funciones_activacion_datepickers;
+		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+		$salida='';
 
-            //Determina si el estilo del objeto debe ser inline o no
-			$cadena_modo_inline='';
-            if ($registro_campos["modo_inline"])
-                $cadena_modo_inline='display:inline;';
+        //Determina si el estilo del objeto debe ser inline o no
+		$cadena_modo_inline='';
+        if ($registro_campos["modo_inline"])
+            $cadena_modo_inline='display:inline;';
 
-			//Transfiere variables de mensajes de retorno asociadas al boton
-			$comando_javascript="";
-			if ($registro_campos["retorno_titulo"]!="")
-				$comando_javascript="document.datos.PCO_ErrorTitulo.value='".$registro_botones["retorno_titulo"]."'; document.datos.PCO_ErrorDescripcion.value='".$registro_botones["retorno_texto"]."'; document.datos.PCO_ErrorIcono.value='".$registro_botones["retorno_icono"]."'; document.datos.PCO_ErrorEstilo.value='".$registro_botones["retorno_estilo"]."';";
+		//Transfiere variables de mensajes de retorno asociadas al boton
+		$comando_javascript="";
+		if ($registro_campos["retorno_titulo"]!="")
+			$comando_javascript="document.datos.PCO_ErrorTitulo.value='".$registro_botones["retorno_titulo"]."'; document.datos.PCO_ErrorDescripcion.value='".$registro_botones["retorno_texto"]."'; document.datos.PCO_ErrorIcono.value='".$registro_botones["retorno_icono"]."'; document.datos.PCO_ErrorEstilo.value='".$registro_botones["retorno_estilo"]."';";
 
-            //Define el tipo de boton de acuerdo al tipo de accion
-            if ($registro_campos["tipo_accion"]=="interna_guardar")
-                $comando_javascript.="PCOJS_ValidarCamposYProcesarFormulario(); ";    
-            if ($registro_campos["tipo_accion"]=="interna_limpiar")
-                $comando_javascript.="document.getElementById('datos').reset();";
-            if ($registro_campos["tipo_accion"]=="interna_escritorio")
-                $comando_javascript.="document.core_ver_menu.submit();";
-            if ($registro_campos["tipo_accion"]=="interna_actualizar")
-                $comando_javascript.="document.datos.PCO_Accion.value='actualizar_datos_formulario'; PCOJS_ValidarCamposYProcesarFormulario(); ";
-            if ($registro_campos["tipo_accion"]=="interna_eliminar")
-                $comando_javascript.="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit();";
-            if ($registro_campos["tipo_accion"]=="interna_cargar")
-                $comando_javascript.="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='".$registro_campos["accion_usuario"]."';document.datos.submit();";
-            if ($registro_campos["tipo_accion"]=="externa_formulario")
-                $comando_javascript.="document.datos.PCO_Accion.value='".$registro_campos["accion_usuario"]."';document.datos.submit();";
-            if ($registro_campos["tipo_accion"]=="externa_javascript")
-                $comando_javascript.=$registro_campos["accion_usuario"];
+        //Define el tipo de boton de acuerdo al tipo de accion
+        if ($registro_campos["tipo_accion"]=="interna_guardar")         $comando_javascript.="PCOJS_ValidarCamposYProcesarFormulario(); ";    
+        else if ($registro_campos["tipo_accion"]=="interna_limpiar")    $comando_javascript.="document.getElementById('datos').reset();";
+        else if ($registro_campos["tipo_accion"]=="interna_escritorio") $comando_javascript.="document.core_ver_menu.submit();";
+        else if ($registro_campos["tipo_accion"]=="interna_actualizar") $comando_javascript.="document.datos.PCO_Accion.value='actualizar_datos_formulario'; PCOJS_ValidarCamposYProcesarFormulario(); ";
+        else if ($registro_campos["tipo_accion"]=="interna_eliminar")   $comando_javascript.="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit();";
+        else if ($registro_campos["tipo_accion"]=="interna_cargar")     $comando_javascript.="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='".$registro_campos["accion_usuario"]."';document.datos.submit();";
+        else if ($registro_campos["tipo_accion"]=="externa_formulario") $comando_javascript.="document.datos.PCO_Accion.value='".$registro_campos["accion_usuario"]."';document.datos.submit();";
+        else if ($registro_campos["tipo_accion"]=="externa_javascript") $comando_javascript.=$registro_campos["accion_usuario"];
 
-			//Verifica si el registro de botones presenta algun texto de confirmacion y lo antepone al script
-			$cadena_confirmacion_accion_pre="";
-			$cadena_confirmacion_accion_pos="";
-			if (@$registro_campos["confirmacion_texto"]!="")
-				{
-					$cadena_confirmacion_accion_pre=" if (confirm('".PCO_ReemplazarVariablesPHPEnCadena($registro_campos["confirmacion_texto"])."')) {";
-					$cadena_confirmacion_accion_pos=" } else {} ";
-				}
+		//Verifica si el registro de botones presenta algun texto de confirmacion y lo antepone al script
+		$cadena_confirmacion_accion_pre="";
+		$cadena_confirmacion_accion_pos="";
+		if (@$registro_campos["confirmacion_texto"]!="")
+			{
+				$cadena_confirmacion_accion_pre=" if (confirm('".PCO_ReemplazarVariablesPHPEnCadena($registro_campos["confirmacion_texto"])."')) {";
+				$cadena_confirmacion_accion_pos=" } else {} ";
+			}
 
-            //Genera cadena par el identificador del elemento usando el campo "campo". Normalmente oculto
-            $cadena_identificador='';
-            if ($registro_campos["campo"]!="")
-                $cadena_identificador='id="'.$registro_campos["id_html"].'"';
+        //Genera cadena par el identificador del elemento usando el campo "campo". Normalmente oculto
+        $cadena_identificador='';
+        if ($registro_campos["campo"]!="")
+            $cadena_identificador='id="'.$registro_campos["id_html"].'"';
 
-            //Genera la cadena del enlace
-            $cadena_javascript='href="javascript:  '.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.'  "';
+        //Genera la cadena del enlace
+        $cadena_javascript='href="javascript:  '.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.'  "';
 
-            //Abre el marco del control de datos style="display:inline;"
-			$salida.='<div '.$cadena_identificador.' style="'.$cadena_modo_inline.'" class="form-group input-group">';
-            // Muestra el campo
-			$salida.='<a id="'.$registro_campos["id_html"].'" class="btn '.$registro_campos["personalizacion_tag"].'" '.@$cadena_javascript.'><i class="'.$registro_campos["imagen"].'"></i> '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).'</a>';
-            //Cierra marco del control de datos
-            $salida.= '</div>';
-            
-			return $salida;
-		}
+        //Abre el marco del control de datos style="display:inline;"
+		$salida.='<div '.$cadena_identificador.' style="'.$cadena_modo_inline.'" class="form-group input-group">';
+        // Muestra el campo
+		$salida.='<a id="'.$registro_campos["id_html"].'" class="btn '.$registro_campos["personalizacion_tag"].'" '.@$cadena_javascript.'><i class="'.$registro_campos["imagen"].'"></i> '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).'</a>';
+        //Cierra marco del control de datos
+        $salida.= '</div>';
+        
+		return $salida;
+	}
 
 
 /* ################################################################## */
@@ -4549,59 +4517,59 @@ $('#SampleElement').load('YourURL');
 	Ver tambien:
 		<cargar_formulario>
 */
-	function agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,$tipo_elemento)
-		{
-		    global $MULTILANG_Evento,$TablasCore,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
-			$salida='';
-            if ($tipo_elemento=="ComplementoDisenoElemento")
-                {
-                    $salida='onmouseenter="$(this).css(\'border\', \'1px solid\'); $(this).css(\'border-color\', \'#ff0000\');  //c2a7a7
-                    $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'visibility\':\'visible\'});
-                    $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'display\':\'block\'}); "
-                    onmouseleave="$(this).css(\'border\', \'0px solid\'); $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'visibility\':\'hidden\'}); $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'display\':\'none\'});  "';
-                }
-            if ($tipo_elemento=="ComplementoDisenoMarcoOpciones")
-                {
-                    //Determina estados de activacion o no para controles segun valores actuales del registro
-                    $EstadoDeshabilitadoMoverIzquierda="";
-                    $EstadoDeshabilitadoMoverDerecha="";
-                    $EstadoDeshabilitadoMoverArriba="";
-                    if($registro_campos["columna"]-1<=0) $EstadoDeshabilitadoMoverIzquierda="disabled";
-                    if($registro_campos["columna"]+1>$registro_formulario["columnas"]) $EstadoDeshabilitadoMoverDerecha="disabled";
-                    if($registro_campos["peso"]-1<=0) $EstadoDeshabilitadoMoverArriba="disabled";
-                    
-                    //Busca si el elemento tiene o no eventos para poner un boton de enlace
-                    $ComplementoBotonEventos="";
-                    $RegistroConteoEventos=ejecutar_sql("SELECT COUNT(*) as conteo_eventos FROM ".$TablasCore."evento_objeto WHERE objeto=? ",$registro_campos["id"])->fetch();
-                    if($RegistroConteoEventos["conteo_eventos"]>0)
-                        $ComplementoBotonEventos='<br><a class="btn btn-xs btn-default" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Evento.'(s)" href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&pestana_activa_editor=eventos_objeto-tab&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-bolt fa-fw texto-blink"></i></a>';
+function agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,$tipo_elemento)
+	{
+	    global $MULTILANG_Evento,$TablasCore,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
+		$salida='';
+        if ($tipo_elemento=="ComplementoDisenoElemento")
+            {
+                $salida='onmouseenter="$(this).css(\'border\', \'1px solid\'); $(this).css(\'border-color\', \'#ff0000\');  //c2a7a7
+                $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'visibility\':\'visible\'});
+                $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'display\':\'block\'}); "
+                onmouseleave="$(this).css(\'border\', \'0px solid\'); $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'visibility\':\'hidden\'}); $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'display\':\'none\'});  "';
+            }
+        if ($tipo_elemento=="ComplementoDisenoMarcoOpciones")
+            {
+                //Determina estados de activacion o no para controles segun valores actuales del registro
+                $EstadoDeshabilitadoMoverIzquierda="";
+                $EstadoDeshabilitadoMoverDerecha="";
+                $EstadoDeshabilitadoMoverArriba="";
+                if($registro_campos["columna"]-1<=0) $EstadoDeshabilitadoMoverIzquierda="disabled";
+                if($registro_campos["columna"]+1>$registro_formulario["columnas"]) $EstadoDeshabilitadoMoverDerecha="disabled";
+                if($registro_campos["peso"]-1<=0) $EstadoDeshabilitadoMoverArriba="disabled";
+                
+                //Busca si el elemento tiene o no eventos para poner un boton de enlace
+                $ComplementoBotonEventos="";
+                $RegistroConteoEventos=ejecutar_sql("SELECT COUNT(*) as conteo_eventos FROM ".$TablasCore."evento_objeto WHERE objeto=? ",$registro_campos["id"])->fetch();
+                if($RegistroConteoEventos["conteo_eventos"]>0)
+                    $ComplementoBotonEventos='<br><a class="btn btn-xs btn-default" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Evento.'(s)" href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&pestana_activa_editor=eventos_objeto-tab&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-bolt fa-fw texto-blink"></i></a>';
 
-                    //Pone controles
-                    $salida='<div id="PCOEditorContenedor_'.$registro_campos["id"].'" style="margin:2px; display:none; visibility:hidden; position: absolute; z-index:1000;">
-                            <div style="display: inline-block">
-                                <a class="btn btn-xs btn-warning" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'" href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-fw fa-pencil"></i></a>
-                                '.$ComplementoBotonEventos.'
-                            </div>
-                            <div style="display: inline-block">
-                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverIzquierda.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Anterior.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-left"></i></a>
-                            </div>
-                            <div style="display: inline-block">
-                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverArriba.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDisminuyePeso.' a '.($registro_campos["peso"]-1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["peso"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-up"></i></a>
-                                <br>
-                                <a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmAumentaPeso.' a '.($registro_campos["peso"]+1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["peso"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-down"></i></a>
-                            </div>
-                            <div style="display: inline-block">
-                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-right"></i></a>
-                            </div>
-                            <div style="display: inline-block">
-                                <a class="btn btn-xs " data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Cerrar.'" href="javascript:$(this).css(\'border\', \'0px solid\'); $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'visibility\':\'hidden\'}); $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'display\':\'none\'}); "><i class="fa fa-times"></i></a>
-                                <br>
-                                <a onclick=\'return confirm("'.$MULTILANG_FrmAdvDelCampo.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=eliminar_campo_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&nombre_tabla='.$registro_formulario["tabla_datos"].'\' class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-trash"></i></a>
-                            </div>
-                        </div>';
-                }
-			return $salida;
-		}
+                //Pone controles
+                $salida='<div id="PCOEditorContenedor_'.$registro_campos["id"].'" style="margin:2px; display:none; visibility:hidden; position: absolute; z-index:1000;">
+                        <div style="display: inline-block">
+                            <a class="btn btn-xs btn-warning" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'" href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-fw fa-pencil"></i></a>
+                            '.$ComplementoBotonEventos.'
+                        </div>
+                        <div style="display: inline-block">
+                            <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverIzquierda.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Anterior.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-left"></i></a>
+                        </div>
+                        <div style="display: inline-block">
+                            <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverArriba.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDisminuyePeso.' a '.($registro_campos["peso"]-1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["peso"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-up"></i></a>
+                            <br>
+                            <a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmAumentaPeso.' a '.($registro_campos["peso"]+1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["peso"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-down"></i></a>
+                        </div>
+                        <div style="display: inline-block">
+                            <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                        <div style="display: inline-block">
+                            <a class="btn btn-xs " data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Cerrar.'" href="javascript:$(this).css(\'border\', \'0px solid\'); $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'visibility\':\'hidden\'}); $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'display\':\'none\'}); "><i class="fa fa-times"></i></a>
+                            <br>
+                            <a onclick=\'return confirm("'.$MULTILANG_FrmAdvDelCampo.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=eliminar_campo_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&nombre_tabla='.$registro_formulario["tabla_datos"].'\' class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-trash"></i></a>
+                        </div>
+                    </div>';
+            }
+		return $salida;
+	}
 
 
 /* ################################################################## */
@@ -4636,536 +4604,512 @@ $('#SampleElement').load('YourURL');
 	Ver tambien:
 		<cargar_informe>
 */
-		function cargar_formulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno_formulario=0)
-		  {
-                global $ConexionPDO,$ArchivoCORE,$TablasCore;
-                global $PCO_InformeFiltro,$PCO_FuncionesJSInternasFORM;
-				global $_SeparadorCampos_;
-				// Carga variables de definicion de tablas
-				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
-				global $MULTILANG_Elementos,$MULTILANG_Agregar,$MULTILANG_Configuracion,$MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
-                global $PCO_InformesDataTable;
-                global $POSTForm_ListaCamposObligatorios,$POSTForm_ListaTitulosObligatorios;
+function cargar_formulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno_formulario=0)
+    {
+        global $ConexionPDO,$ArchivoCORE,$TablasCore;
+        global $PCO_InformeFiltro,$PCO_FuncionesJSInternasFORM;
+		global $_SeparadorCampos_;
+		// Carga variables de definicion de tablas
+		global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
+		global $MULTILANG_Elementos,$MULTILANG_Agregar,$MULTILANG_Configuracion,$MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
+        global $PCO_InformesDataTable;
+        global $POSTForm_ListaCamposObligatorios,$POSTForm_ListaTitulosObligatorios;
 
-				// Busca datos del formulario
-				$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
-				$registro_formulario = @$consulta_formulario->fetch();
+		// Busca datos del formulario
+		$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
+		$registro_formulario = @$consulta_formulario->fetch();
 
-                //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa
-				if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
-				    $ComplementoIdObjetoEnTitulo=" <i>[ID=$formulario]</i>";
+		echo '
+		<script type="text/javascript">
+			function AgregarElemento(columna,fila,elemento)
+				{
+					//carga dinamicamente objetos html a marcos
+					var capa = document.getElementById(ubicacion);
+					var zona = document.createElement("po");
+					zona.innerHTML = elemento;
+					capa.appendChild(zona);
+				}
 
-				echo '
-				<script type="text/javascript">
-					function AgregarElemento(columna,fila,elemento)
-						{
-							//carga dinamicamente objetos html a marcos
-							var capa = document.getElementById(ubicacion);
-							var zona = document.createElement("po");
-							zona.innerHTML = elemento;
-							capa.appendChild(zona);
-						}
+			function ImprimirMarco(nombre)
+				{
+				  var marco_contenidos = document.getElementById(nombre);
+				  var ventana_impresion = window.open(" ", "PopUpImpresion");
+				  
+				  //Agrega estilos basicos
+                    //ventana_impresion.document.write( \'<link rel="stylesheet" type="text/css" href="general.css">\' );
+				  
+				  //Agrega titulo del formulario
+					//ventana_impresion.document.write( \'<div align=CENTER><b>'.$registro_formulario["titulo"].'</b></div><hr>\' );
 
-					function ImprimirMarco(nombre)
-						{
-						  var marco_contenidos = document.getElementById(nombre);
-						  var ventana_impresion = window.open(" ", "PopUpImpresion");
-						  
-						  //Agrega estilos basicos
-                            //ventana_impresion.document.write( \'<link rel="stylesheet" type="text/css" href="general.css">\' );
-						  
-						  //Agrega titulo del formulario
-							//ventana_impresion.document.write( \'<div align=CENTER><b>'.$registro_formulario["titulo"].'</b></div><hr>\' );
+				  //Agrega el concenito del DIV al documento
+					ventana_impresion.document.write( marco_contenidos.innerHTML );
+					ventana_impresion.document.close();
+				  
+				  //Abre ventana de impresion
+					ventana_impresion.print( );
+				  
+				  //Cierra ventana de impresion
+					ventana_impresion.close();
+				}
 
-						  //Agrega el concenito del DIV al documento
-							ventana_impresion.document.write( marco_contenidos.innerHTML );
-							ventana_impresion.document.close();
-						  
-						  //Abre ventana de impresion
-							ventana_impresion.print( );
-						  
-						  //Cierra ventana de impresion
-							ventana_impresion.close();
-						}
-
-				</script>
-				<!--<input type=button onclick=\'AgregarElemento("1","1","hello world");\'>-->';
+		</script>
+		<!--<input type=button onclick=\'AgregarElemento("1","1","hello world");\'>-->';
 
 
-				//Si no encuentra formulario presenta error
-				if ($registro_formulario["id"]=="")	mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Formularios." $formulario)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+		//Si no encuentra formulario presenta error
+		if ($registro_formulario["id"]=="")	mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Formularios." $formulario)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
-				// En caso de recibir un campo base y valor base se hace la busqueda para recuperar la informacion
-				if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="")
-					{
-						$consulta_datos_formulario = $ConexionPDO->prepare("SELECT * FROM ".$registro_formulario["tabla_datos"]." WHERE $PCO_CampoBusquedaBD='$PCO_ValorBusquedaBD'");
-						$consulta_datos_formulario->execute();
-						$registro_datos_formulario = $consulta_datos_formulario->fetch();
-					}
-				// Define la barra de herramientas mini superior (en barra de titulo)
-				@$barra_herramientas_mini.='
-						<a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_VistaImpresion.'" name="">
-							<i class="fa fa-print" OnClick="ImprimirMarco(\'MARCO_IMPRESION\');"></i>
-						</a>';
+		// En caso de recibir un campo base y valor base se hace la busqueda para recuperar la informacion
+		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="")
+			{
+				$consulta_datos_formulario = $ConexionPDO->prepare("SELECT * FROM ".$registro_formulario["tabla_datos"]." WHERE $PCO_CampoBusquedaBD='$PCO_ValorBusquedaBD'");
+				$consulta_datos_formulario->execute();
+				$registro_datos_formulario = $consulta_datos_formulario->fetch();
+			}
+		// Define la barra de herramientas mini superior (en barra de titulo)
+		@$barra_herramientas_mini.='
+				<a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_VistaImpresion.'" name="">
+					<i class="fa fa-print" OnClick="ImprimirMarco(\'MARCO_IMPRESION\');"></i>
+				</a>';
 
-				// Establece color de fondo para el form
-				$color_fondo="#f2f2f2";
-				
-				//Determina si esta en modo diseno para agregar algunos elementos extra al titulo del form
-                if ($modo_diseno_formulario)
+		// Establece color de fondo para el form
+		$color_fondo="#f2f2f2";
+		
+		//Determina si esta en modo diseno para agregar algunos elementos extra al titulo del form
+        if ($modo_diseno_formulario)
+            {
+				$ComplementoTituloFormulario='
+				<div class="pull-right">
+                    <a class="btn btn-warning btn-xs" data-toggle="modal" title="'.$MULTILANG_FrmAdvScriptForm.'" href="#myModalActualizaJAVASCRIPT">
+                        <div><i class="fa fa-file-code-o"></i> JS</div>
+                    </a>
+                    &nbsp;
+					<a class="btn btn-default btn-xs" href="javascript:PCOJS_AlternarBarraFlotanteIzquierda();">
+						<div><i class="fa fa-cog fa-spin fa-fw"></i> '.$MULTILANG_Configuracion.' / '.$MULTILANG_Agregar.' '.$MULTILANG_Elementos.'</div>
+					</a>
+				</div>';
+            }
+		
+		// Crea ventana si aplica para el form
+		if ($en_ventana) abrir_ventana(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["titulo"]).$ComplementoTituloFormulario,'panel-primary','',$barra_herramientas_mini);
+		// Muestra ayuda en caso de tenerla
+		$imagen_ayuda='fa fa-info-circle fa-5x texto-azul';
+		if ($registro_formulario["ayuda_titulo"]!="" || $registro_formulario["ayuda_texto"]!="")
+			mensaje(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["ayuda_titulo"]),PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["ayuda_texto"]),'100%',$imagen_ayuda,'alert alert-info alert-dismissible');
+
+		//Inicia el formulario de datos
+		echo '<div id="MARCO_IMPRESION">';
+		
+		//Si se quiere anular el formulario y su accion cuando se trata de un sub-formulario de consulta
+		if (!$anular_form)
+			echo'<form id="datos" name="datos" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+				<input type="Hidden" name="formulario" value="'.$formulario.'">
+				<input type="Hidden" name="id_registro_datos" value="'.@$registro_datos_formulario["id"].'">
+				<input type="Hidden" name="PCO_FormularioActivo" value="'.$formulario.'">
+				<input type="Hidden" name="PCO_Accion" value="guardar_datos_formulario">
+				<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
+				<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
+				<input type="Hidden" name="PCO_ErrorTitulo" value="'.@$PCO_ErrorTitulo.'">
+				<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@$PCO_ErrorDescripcion.'">
+                <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+                <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
+                <input type="Hidden" name="objeto" value=""> <!--Requerido si se va a transferir el control a un objeto FRM o INF-->
+				';
+
+        // Inicio de la generacion de encabezados pestanas
+        //Cuenta las pestanas segun los objetos del form y ademas mira si es solo una con valor vacio (sin pestanas)
+        $consulta_conteo_pestanas=      ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
+        $conteo_pestanas=0;
+        while($registro_conteo_pestanas = @$consulta_conteo_pestanas->fetch())
+            {
+                $conteo_pestanas++;
+                $ultimo_nombre_pestanas=$registro_conteo_pestanas["pestana_objeto"];
+            }
+        //Presenta barra de navegacion de pestanas si se encuentra al menos una
+        if ($conteo_pestanas>0 && ($ultimo_nombre_pestanas!=""))
+            {
+				//Determina el estilo de las pestanas
+				$CadenaEstiloPestanas=""; //Estilo por defecto para aplicar a las pestanas
+				if($registro_formulario["estilo_pestanas"]=="")
+					$CadenaEstiloPestanas="visibility:hidden; height:0px;"; //Oculta las pestanas
+
+                $consulta_formulario_pestana=   ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
+                echo '<ul class="nav '.$registro_formulario["estilo_pestanas"].' nav-justified" style="'.$CadenaEstiloPestanas.'">';
+                $estado_activa_primera_pestana=' class="active" ';
+                $pestana_activa=1;
+                while($registro_formulario_pestana = @$consulta_formulario_pestana->fetch())
                     {
-						$ComplementoTituloFormulario='
-						<div class="pull-right">
-                            <a class="btn btn-warning btn-xs" data-toggle="modal" title="'.$MULTILANG_FrmAdvScriptForm.'" href="#myModalActualizaJAVASCRIPT">
-                                <div><i class="fa fa-file-code-o"></i> JS</div>
-                            </a>
-                            &nbsp;
-    						<a class="btn btn-default btn-xs" href="javascript:PCOJS_AlternarBarraFlotanteIzquierda();">
-    							<div><i class="fa fa-cog fa-spin fa-fw"></i> '.$MULTILANG_Configuracion.' / '.$MULTILANG_Agregar.' '.$MULTILANG_Elementos.'</div>
-    						</a>
-						</div>';
+                        $titulo_pestana_formulario=$registro_formulario_pestana["pestana_objeto"];
+                        if ($titulo_pestana_formulario=="") $titulo_pestana_formulario="<i class='fa fa-stack-overflow'></i>";
+                        echo '<li '.$estado_activa_primera_pestana.'  ><a  href="#PCO_PestanaFormulario_'.$pestana_activa.'" data-toggle="tab" id="PCO_LinkPestanaFormulario_'.$pestana_activa.'">'.$titulo_pestana_formulario.'</a></li>';
+                        //Limpia para las siguientes pestanas
+                        $estado_activa_primera_pestana='';
+                        $pestana_activa++;
                     }
-				
-				// Crea ventana si aplica para el form
-				if ($en_ventana) abrir_ventana(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["titulo"]).$ComplementoTituloFormulario.$ComplementoIdObjetoEnTitulo,'panel-primary','',$barra_herramientas_mini);
-				// Muestra ayuda en caso de tenerla
-				$imagen_ayuda='fa fa-info-circle fa-5x texto-azul';
-				if ($registro_formulario["ayuda_titulo"]!="" || $registro_formulario["ayuda_texto"]!="")
-					mensaje(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["ayuda_titulo"]),PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["ayuda_texto"]),'100%',$imagen_ayuda,'alert alert-info alert-dismissible');
+                echo '</ul>';
+            }
+        // Fin de la generacion de encabezados pestanas
 
-				//Inicia el formulario de datos
-				echo '<div id="MARCO_IMPRESION">';
-				
-				//Si se quiere anular el formulario y su accion cuando se trata de un sub-formulario de consulta
-				if (!$anular_form)
-					echo'<form id="datos" name="datos" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-						<input type="Hidden" name="formulario" value="'.$formulario.'">
-						<input type="Hidden" name="id_registro_datos" value="'.@$registro_datos_formulario["id"].'">
-						<input type="Hidden" name="PCO_FormularioActivo" value="'.$formulario.'">
-						<input type="Hidden" name="PCO_Accion" value="guardar_datos_formulario">
-						<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
-						<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
-						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@$PCO_ErrorTitulo.'">
-						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@$PCO_ErrorDescripcion.'">
-                        <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
-                        <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
-                        <input type="Hidden" name="objeto" value=""> <!--Requerido si se va a transferir el control a un objeto FRM o INF-->
-						';
+        //Genera las pestanas con su contenido
+        if ($conteo_pestanas>0)
+            {
+                $consulta_formulario_pestana=   ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
+                $estado_activa_primera_pestana='in active';
+                $pestana_activa=1;
 
-                // Inicio de la generacion de encabezados pestanas
-                //Cuenta las pestanas segun los objetos del form y ademas mira si es solo una con valor vacio (sin pestanas)
-                $consulta_conteo_pestanas=      ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
-                $conteo_pestanas=0;
-                while($registro_conteo_pestanas = @$consulta_conteo_pestanas->fetch())
+                //Inicio de los tab-content
+                echo '<div class="tab-content" >';
+                while($registro_formulario_pestana = @$consulta_formulario_pestana->fetch())
                     {
-                        $conteo_pestanas++;
-                        $ultimo_nombre_pestanas=$registro_conteo_pestanas["pestana_objeto"];
-                    }
-                //Presenta barra de navegacion de pestanas si se encuentra al menos una
-                if ($conteo_pestanas>0 && ($ultimo_nombre_pestanas!=""))
-                    {
-						//Determina el estilo de las pestanas
-						$CadenaEstiloPestanas=""; //Estilo por defecto para aplicar a las pestanas
-						if($registro_formulario["estilo_pestanas"]=="")
-							$CadenaEstiloPestanas="visibility:hidden; height:0px;"; //Oculta las pestanas
+                        $titulo_pestana_formulario=$registro_formulario_pestana["pestana_objeto"];
+                        //Genera el contenedor de la pestana
+                        echo '
+                        <!-- INICIO de las pestanas No '.$pestana_activa.' -->
+                            <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="PCO_PestanaFormulario_'.$pestana_activa.'" >';
+                            
+                                //Booleana que determina si se debe incluir el javascript de ckeditor
+                                $existe_campo_textoformato=0;
 
-                        $consulta_formulario_pestana=   ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
-                        echo '<ul class="nav '.$registro_formulario["estilo_pestanas"].' nav-justified" style="'.$CadenaEstiloPestanas.'">';
-                        $estado_activa_primera_pestana=' class="active" ';
-                        $pestana_activa=1;
-                        while($registro_formulario_pestana = @$consulta_formulario_pestana->fetch())
-                            {
-                                $titulo_pestana_formulario=$registro_formulario_pestana["pestana_objeto"];
-                                if ($titulo_pestana_formulario=="") $titulo_pestana_formulario="<i class='fa fa-stack-overflow'></i>";
-                                echo '<li '.$estado_activa_primera_pestana.'  ><a  href="#PCO_PestanaFormulario_'.$pestana_activa.'" data-toggle="tab" id="PCO_LinkPestanaFormulario_'.$pestana_activa.'">'.$titulo_pestana_formulario.'</a></li>';
-                                //Limpia para las siguientes pestanas
-                                $estado_activa_primera_pestana='';
-                                $pestana_activa++;
-                            }
-                        echo '</ul>';
-                    }
-                // Fin de la generacion de encabezados pestanas
+                                //DIAGRAMACION DE LA TABLA CON ELEMENTOS DEL FORMULARIO
+                                $limite_inferior=-9999; // Peso inferior a tener en cuenta en el query
+                                $constante_limite_superior=+9999;
+                                $limite_superior=$constante_limite_superior; // Peso superior a tener en cuenta en el query
+                                //Busca todos los objetos marcados como fila_unica=1 y agrega un registro mas con el limite superior
+                                $consulta_obj_fila_unica=ejecutar_sql("SELECT id,peso,visible FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario");
+                                //Define si debe o no dibujar borde de las celdas
+                                $estilo_bordes="table-unbordered";
+                                $ancho_bordes="border-width: 0px;";
+                                if ($registro_formulario["borde_visible"]==1)
+									{
+										$estilo_bordes="table-bordered";
+										$ancho_bordes="border-width: 1px;";
+									}
 
-                //Genera las pestanas con su contenido
-                if ($conteo_pestanas>0)
-                    {
-                        $consulta_formulario_pestana=   ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
-                        $estado_activa_primera_pestana='in active';
-                        $pestana_activa=1;
-
-                        //Inicio de los tab-content
-                        echo '<div class="tab-content" >';
-                        while($registro_formulario_pestana = @$consulta_formulario_pestana->fetch())
-                            {
-                                $titulo_pestana_formulario=$registro_formulario_pestana["pestana_objeto"];
-                                //Genera el contenedor de la pestana
-                                echo '
-                                <!-- INICIO de las pestanas No '.$pestana_activa.' -->
-                                    <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="PCO_PestanaFormulario_'.$pestana_activa.'" >';
-                                    
-                                        //Booleana que determina si se debe incluir el javascript de ckeditor
-                                        $existe_campo_textoformato=0;
-
-                                        //DIAGRAMACION DE LA TABLA CON ELEMENTOS DEL FORMULARIO
-                                        $limite_inferior=-9999; // Peso inferior a tener en cuenta en el query
-                                        $constante_limite_superior=+9999;
-                                        $limite_superior=$constante_limite_superior; // Peso superior a tener en cuenta en el query
-                                        //Busca todos los objetos marcados como fila_unica=1 y agrega un registro mas con el limite superior
-                                        $consulta_obj_fila_unica=ejecutar_sql("SELECT id,peso,visible FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario");
-                                        //Define si debe o no dibujar borde de las celdas
-                                        $estilo_bordes="table-unbordered";
-                                        $ancho_bordes="border-width: 0px;";
-                                        if ($registro_formulario["borde_visible"]==1)
-											{
-												$estilo_bordes="table-bordered";
-												$ancho_bordes="border-width: 1px;";
-											}
-
-                                        while ($registro_obj_fila_unica = $consulta_obj_fila_unica->fetch())
+                                while ($registro_obj_fila_unica = $consulta_obj_fila_unica->fetch())
+                                    {
+                                        $limite_superior=$registro_obj_fila_unica["peso"];
+                                        $ultimo_id=$registro_obj_fila_unica["id"];
+                                        // Inicia la tabla con los campos
+                                        echo '
+                                            <div class="table-responsive" style="border-width: 0px; margin-top:0; margin-bottom:0; margin-left:0; margin-right:0; ">
+                                            <table class="table table-responsive '.$estilo_bordes.' table-condensed btn-xs" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0; padding: 0px; border-spacing: 0px; "><tr>';
+                                        //Recorre todas las comunas definidas para el formulario buscando objetos
+                                        for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
                                             {
-                                                $limite_superior=$registro_obj_fila_unica["peso"];
-                                                $ultimo_id=$registro_obj_fila_unica["id"];
-                                                // Inicia la tabla con los campos
-                                                echo '
-                                                    <div class="table-responsive" style="border-width: 0px; margin-top:0; margin-bottom:0; margin-left:0; margin-right:0; ">
-                                                    <table class="table table-responsive '.$estilo_bordes.' table-condensed btn-xs" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0; padding: 0px; border-spacing: 0px; "><tr>';
-                                                //Recorre todas las comunas definidas para el formulario buscando objetos
-                                                for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
-                                                    {
-                                                        //Busca los elementos de la coumna actual del formulario con peso menor o igual al peso del objeto fila_unica de la fila unica_actual pero que no son fila_unica
-                                                        $consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND columna=? AND visible=1 AND peso >? AND peso <=? ORDER BY peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario$_SeparadorCampos_$cl$_SeparadorCampos_$limite_inferior$_SeparadorCampos_$limite_superior");
-                                                        
-                                                            //Inicia columna de formulario
-                                                            $PCO_AnchoColumnas=round(100 / $registro_formulario["columnas"]);
-                                                            echo '<td width="'.$PCO_AnchoColumnas.'%" >';
-                                                            // Crea los campos definidos por cada columna de formulario
-                                                            while ($registro_campos = $consulta_campos->fetch())
+                                                //Busca los elementos de la coumna actual del formulario con peso menor o igual al peso del objeto fila_unica de la fila unica_actual pero que no son fila_unica
+                                                $consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND columna=? AND visible=1 AND peso >? AND peso <=? ORDER BY peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario$_SeparadorCampos_$cl$_SeparadorCampos_$limite_inferior$_SeparadorCampos_$limite_superior");
+                                                
+                                                    //Inicia columna de formulario
+                                                    $PCO_AnchoColumnas=round(100 / $registro_formulario["columnas"]);
+                                                    echo '<td width="'.$PCO_AnchoColumnas.'%" >';
+                                                    // Crea los campos definidos por cada columna de formulario
+                                                    while ($registro_campos = $consulta_campos->fetch())
+                                                        {
+                                                            //Determina si el estilo del objeto debe ser inline o no
+                                                            $cadena_modo_inline='';
+                                                            if ($registro_campos["modo_inline"])
+                                                                $cadena_modo_inline='display:inline;';
+                                                            echo '<div style="'.$cadena_modo_inline.'">';
+
+                                                            //Imprime el campo solamente si no es fila unica, si es fila_unica guarda en una variable para uso posterior
+                                                            if($registro_campos["fila_unica"]=="0")
                                                                 {
-                                                                    //Determina si el estilo del objeto debe ser inline o no
-                                                                    $cadena_modo_inline='';
-                                                                    if ($registro_campos["modo_inline"])
-                                                                        $cadena_modo_inline='display:inline;';
-                                                                    echo '<div style="'.$cadena_modo_inline.'">';
-
-                                                                    //Imprime el campo solamente si no es fila unica, si es fila_unica guarda en una variable para uso posterior
-                                                                    if($registro_campos["fila_unica"]=="0")
+                                                                    //Si esta en modo de diseno el formulario agrega elementos extra para la edicion de cada control
+                                                                    $ComplementoDisenoElemento='';
+                                                                    $ComplementoDisenoMarcoOpciones='';
+                                                                    if ($modo_diseno_formulario)
                                                                         {
-                                                                            //Si esta en modo de diseno el formulario agrega elementos extra para la edicion de cada control
-                                                                            $ComplementoDisenoElemento='';
-                                                                            $ComplementoDisenoMarcoOpciones='';
-                                                                            if ($modo_diseno_formulario)
-                                                                                {
-                                                                                    $ComplementoDisenoElemento=agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,"ComplementoDisenoElemento");
-                                                                                    $ComplementoDisenoMarcoOpciones=agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,"ComplementoDisenoMarcoOpciones");
-                                                                                }
-                                                                            echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'"> '.$ComplementoDisenoMarcoOpciones;
-                                                                            // Formatea cada campo de acuerdo a su tipo
-                                                                            // CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas abajo tambien
-                                                                            $tipo_de_objeto=@$registro_campos["tipo"];
-                                                                            if ($tipo_de_objeto=="texto_corto") $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                                            if ($tipo_de_objeto=="texto_clave") $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                                            if ($tipo_de_objeto=="texto_largo") $objeto_formateado = @cargar_objeto_texto_largo($registro_campos,@$registro_datos_formulario);
-                                                                            if ($tipo_de_objeto=="texto_formato") { $objeto_formateado = @cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
-                                                                            if ($tipo_de_objeto=="area_responsive") $objeto_formateado = @cargar_objeto_area_responsive($registro_campos,@$registro_datos_formulario);
-                                                                            if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = @cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                                            if ($tipo_de_objeto=="lista_radio") $objeto_formateado = @cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
-                                                                            if ($tipo_de_objeto=="casilla_check") $objeto_formateado = @cargar_objeto_casilla_check($registro_campos,@$registro_datos_formulario);
-                                                                            if ($tipo_de_objeto=="etiqueta") $objeto_formateado = @cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
-                                                                            if ($tipo_de_objeto=="url_iframe") $objeto_formateado = @cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
-                                                                            if ($tipo_de_objeto=="informe") @cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
-                                                                            if ($tipo_de_objeto=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
-                                                                            if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
-                                                                            if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
-                                                                            if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
-                                                                            if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
-                                                                            if ($tipo_de_objeto=="boton_comando") $objeto_formateado = @cargar_objeto_boton_comando($registro_campos,@$registro_datos_formulario);
-                                                                            //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
-                                                                            
-                                                                            //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
-                                                                            //padre el valor del campo foraneo del form hijo para llamar a buscar form con
-                                                                            //el valor de Id correspondiente. Ademas valida si el form existe
-                                                                            if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario && existe_valor($TablasCore."formulario","id",$registro_campos["formulario_vinculado"]))
-                                                                                {
-                                                                                    //Busca la tabla principal del subformulario anidado
-                                                                                    $PCO_ValorCampoBind=$registro_campos["formulario_vinculado"];
-                                                                                    if($PCO_ValorCampoBind=="") $PCO_ValorCampoBind="";
-                                                                                    $consulta_tabla_subform=ejecutar_sql("SELECT tabla_datos FROM ".$TablasCore."formulario WHERE id=? ","$PCO_ValorCampoBind")->fetch();
-                                                                                    $PCO_TablaSubform=$consulta_tabla_subform["tabla_datos"];
-                                                                                    
-                                                                                    //Determina el valor del campo a vincular en el registro padre (el actual).  Deberia dar el id que se va a buscar
-                                                                                    $PCO_ValorCampoPadre=@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]];
-                                                                                    //Si no se encuentra el dato o registro entonces mira si vienen desde un boton de busqueda y usa su valor
-                                                                                    if($PCO_ValorCampoPadre=="" && $PCO_ValorBusquedaBD!="")
-                                                                                        {
-                                                                                            //$PCO_ValorCampoPadre=$PCO_ValorBusquedaBD;
-                                                                                        }
-                                                                                    //Si no obtiene ningun valor entonces lo pone en cero para evitar error de sintaxis en Bind de SQL
-                                                                                    if($PCO_ValorCampoPadre=="") $PCO_ValorCampoPadre=0;
-                                                                                    $PCO_CampoForaneoSubform=$registro_campos["formulario_campo_foraneo"];
-                                                                                    //Busca el ID de registro correspondiente en la tabla de datos para llamar con el valor coincidente
-                                                                                    $consulta_registro_subform=ejecutar_sql("SELECT $PCO_CampoForaneoSubform FROM $PCO_TablaSubform WHERE $PCO_CampoForaneoSubform=? ","$PCO_ValorCampoPadre")->fetch();
-
-                                                                                    @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorCampoPadre,1);
-                                                                                }
-                                                                            else
-																				{
-																					//Presenta mensaje de error al no poder empotrar subformulario
-																					if($tipo_de_objeto=="form_consulta")
-																						mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste.'.  FormID: '.$registro_campos["formulario_vinculado"], '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');																				
-																				}
-
-                                                                            //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
-                                                                            if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
-                                                                                echo $objeto_formateado;
-                                                                            echo '</div>'; //Marco contenedor
+                                                                            $ComplementoDisenoElemento=agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,"ComplementoDisenoElemento");
+                                                                            $ComplementoDisenoMarcoOpciones=agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,"ComplementoDisenoMarcoOpciones");
                                                                         }
+                                                                    echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'"> '.$ComplementoDisenoMarcoOpciones;
+                                                                    // Formatea cada campo de acuerdo a su tipo
+                                                                    // CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas abajo tambien
+                                                                    $tipo_de_objeto=@$registro_campos["tipo"];
+                                                                    if ($tipo_de_objeto=="texto_corto")             $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
+                                                                    else if ($tipo_de_objeto=="texto_clave")        $objeto_formateado = @cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
+                                                                    else if ($tipo_de_objeto=="texto_largo")        $objeto_formateado = @cargar_objeto_texto_largo($registro_campos,@$registro_datos_formulario);
+                                                                    else if ($tipo_de_objeto=="texto_formato") {    $objeto_formateado = @cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
+                                                                    else if ($tipo_de_objeto=="area_responsive")    $objeto_formateado = @cargar_objeto_area_responsive($registro_campos,@$registro_datos_formulario);
+                                                                    else if ($tipo_de_objeto=="lista_seleccion")    $objeto_formateado = @cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
+                                                                    else if ($tipo_de_objeto=="lista_radio")        $objeto_formateado = @cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
+                                                                    else if ($tipo_de_objeto=="casilla_check")      $objeto_formateado = @cargar_objeto_casilla_check($registro_campos,@$registro_datos_formulario);
+                                                                    else if ($tipo_de_objeto=="etiqueta")           $objeto_formateado = @cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
+                                                                    else if ($tipo_de_objeto=="url_iframe")         $objeto_formateado = @cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
+                                                                    else if ($tipo_de_objeto=="informe")            @cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
+                                                                    else if ($tipo_de_objeto=="deslizador")         $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
+                                                                    else if ($tipo_de_objeto=="campo_etiqueta")     $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
+                                                                    else if ($tipo_de_objeto=="archivo_adjunto")    $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
+                                                                    else if ($tipo_de_objeto=="objeto_canvas")      $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
+                                                                    else if ($tipo_de_objeto=="objeto_camara")      $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
+                                                                    else if ($tipo_de_objeto=="boton_comando")      $objeto_formateado = @cargar_objeto_boton_comando($registro_campos,@$registro_datos_formulario);
+                                                                    //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
                                                                     
-                                                                    //Cierra el marco para el estilo inline del objeto
-                                                                    echo '</div>';
+                                                                    //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
+                                                                    //padre el valor del campo foraneo del form hijo para llamar a buscar form con
+                                                                    //el valor de Id correspondiente. Ademas valida si el form existe
+                                                                    if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario && existe_valor($TablasCore."formulario","id",$registro_campos["formulario_vinculado"]))
+                                                                        {
+                                                                            //Busca la tabla principal del subformulario anidado
+                                                                            $PCO_ValorCampoBind=$registro_campos["formulario_vinculado"];
+                                                                            if($PCO_ValorCampoBind=="") $PCO_ValorCampoBind="";
+                                                                            $consulta_tabla_subform=ejecutar_sql("SELECT tabla_datos FROM ".$TablasCore."formulario WHERE id=? ","$PCO_ValorCampoBind")->fetch();
+                                                                            $PCO_TablaSubform=$consulta_tabla_subform["tabla_datos"];
+                                                                            
+                                                                            //Determina el valor del campo a vincular en el registro padre (el actual).  Deberia dar el id que se va a buscar
+                                                                            $PCO_ValorCampoPadre=@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]];
+                                                                            //Si no se encuentra el dato o registro entonces mira si vienen desde un boton de busqueda y usa su valor
+                                                                            if($PCO_ValorCampoPadre=="" && $PCO_ValorBusquedaBD!="") //$PCO_ValorCampoPadre=$PCO_ValorBusquedaBD;
+                                                                            //Si no obtiene ningun valor entonces lo pone en cero para evitar error de sintaxis en Bind de SQL
+                                                                            if($PCO_ValorCampoPadre=="") $PCO_ValorCampoPadre=0;
+                                                                            $PCO_CampoForaneoSubform=$registro_campos["formulario_campo_foraneo"];
+                                                                            //Busca el ID de registro correspondiente en la tabla de datos para llamar con el valor coincidente
+                                                                            $consulta_registro_subform=ejecutar_sql("SELECT $PCO_CampoForaneoSubform FROM $PCO_TablaSubform WHERE $PCO_CampoForaneoSubform=? ","$PCO_ValorCampoPadre")->fetch();
+
+                                                                            @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorCampoPadre,1);
+                                                                        }
+                                                                    else if($tipo_de_objeto=="form_consulta") //Presenta mensaje de error al no poder empotrar subformulario
+																		mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste.'.  FormID: '.$registro_campos["formulario_vinculado"], '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+																				
+                                                                    if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
+                                                                        echo $objeto_formateado;
+                                                                    echo '</div>'; //Marco contenedor
                                                                 }
-                                                            echo '</td>'; //Fin columna de formulario
-                                                    }
-                                                // Finaliza la tabla con los campos
-                                                echo '</tr></table>
-                                                    </div>';
+                                                            
+                                                            //Cierra el marco para el estilo inline del objeto
+                                                            echo '</div>';
+                                                        }
+                                                    echo '</td>'; //Fin columna de formulario
+                                            }
+                                        // Finaliza la tabla con los campos
+                                        echo '</tr></table>
+                                            </div>';
 
-                                                //Busca datos del registro de fila_unica
-                                                $consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND id=? ","$formulario$_SeparadorCampos_$ultimo_id");
-                                                $registro_campos = $consulta_campos->fetch();
+                                        //Busca datos del registro de fila_unica
+                                        $consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND id=? ","$formulario$_SeparadorCampos_$ultimo_id");
+                                        $registro_campos = $consulta_campos->fetch();
 
-                                                //Agrega el campo de fila unica cuando no se trata del agregado de peso 9999
-                                                if ($registro_campos["visible"]=="1")
+                                        //Agrega el campo de fila unica cuando no se trata del agregado de peso 9999
+                                        if ($registro_campos["visible"]=="1")
+                                            {
+                                                //echo '&nbsp;&nbsp;'.$registro_campos["titulo"];
+                                                // Formatea cada campo de acuerdo a su tipo
+                                                // CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas arriba tambien
+                                                //Si esta en modo de diseno el formulario agrega elementos extra para la edicion de cada control
+                                                $ComplementoDisenoElemento='';
+                                                $ComplementoDisenoMarcoOpciones='';
+                                                if ($modo_diseno_formulario)
                                                     {
-                                                        //echo '&nbsp;&nbsp;'.$registro_campos["titulo"];
-                                                        // Formatea cada campo de acuerdo a su tipo
-                                                        // CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas arriba tambien
-                                                        //Si esta en modo de diseno el formulario agrega elementos extra para la edicion de cada control
-                                                        $ComplementoDisenoElemento='';
-                                                        $ComplementoDisenoMarcoOpciones='';
-                                                        if ($modo_diseno_formulario)
-                                                            {
-                                                                $ComplementoDisenoElemento=agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,"ComplementoDisenoElemento");
-                                                                $ComplementoDisenoMarcoOpciones=agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,"ComplementoDisenoMarcoOpciones");
-                                                            }
-                                                        echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'" class="table-responsive" style="border-width: 0px; margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;">'.$ComplementoDisenoMarcoOpciones.'
-                                                        <table class="table table-condensed btn-xs '.$estilo_bordes.'" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;  padding: 0px; border-spacing: 0px; width:100%; "><tr><td>';
-                                                        $tipo_de_objeto=@$registro_campos["tipo"];
-                                                        if ($tipo_de_objeto=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                        if ($tipo_de_objeto=="texto_clave") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                        if ($tipo_de_objeto=="texto_largo") $objeto_formateado = cargar_objeto_texto_largo($registro_campos,@$registro_datos_formulario);
-                                                        if ($tipo_de_objeto=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
-                                                        if ($tipo_de_objeto=="area_responsive") $objeto_formateado = @cargar_objeto_area_responsive($registro_campos,@$registro_datos_formulario);
-                                                        if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                        if ($tipo_de_objeto=="lista_radio") $objeto_formateado = cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
-                                                        if ($tipo_de_objeto=="casilla_check") $objeto_formateado = @cargar_objeto_casilla_check($registro_campos,@$registro_datos_formulario);
-                                                        if ($tipo_de_objeto=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
-                                                        if ($tipo_de_objeto=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
-                                                        if ($tipo_de_objeto=="informe") @cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
-                                                        if ($tipo_de_objeto=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
-                                                        if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
-                                                        if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
-                                                        if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
-                                                        if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
-                                                        if ($tipo_de_objeto=="boton_comando") $objeto_formateado = @cargar_objeto_boton_comando($registro_campos,@$registro_datos_formulario);
-                                                        //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
-                                                        //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
-                                                        //padre el valor del campo foraneo del form hijo para llamar a buscar form con
-                                                        //el valor de Id correspondiente. Ademas valida si el form existe
-                                                        if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario && existe_valor($TablasCore."formulario","id",$registro_campos["formulario_vinculado"]))
-                                                            {
-                                                                //Busca la tabla principal del subformulario anidado
-                                                                $PCO_ValorCampoBind=$registro_campos["formulario_vinculado"];
-                                                                if($PCO_ValorCampoBind=="") $PCO_ValorCampoBind="";
-                                                                $consulta_tabla_subform=ejecutar_sql("SELECT tabla_datos FROM ".$TablasCore."formulario WHERE id=? ","$PCO_ValorCampoBind")->fetch();
-                                                                $PCO_TablaSubform=$consulta_tabla_subform["tabla_datos"];
-                                                                
-                                                                //Determina el valor del campo a vincular en el registro padre (el actual).  Deberia dar el id que se va a buscar
-                                                                $PCO_ValorCampoPadre=@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]];
-                                                                //Si no se encuentra el dato o registro entonces mira si vienen desde un boton de busqueda y usa su valor
-                                                                if($PCO_ValorCampoPadre=="" && $PCO_ValorBusquedaBD!="")
-                                                                    {
-                                                                        //$PCO_ValorCampoPadre=$PCO_ValorBusquedaBD;
-                                                                    }
-                                                                //Si no obtiene ningun valor entonces lo pone en cero para evitar error de sintaxis en Bind de SQL
-                                                                if($PCO_ValorCampoPadre=="") $PCO_ValorCampoPadre=0;
-                                                                $PCO_CampoForaneoSubform=$registro_campos["formulario_campo_foraneo"];
-                                                                //Busca el ID de registro correspondiente en la tabla de datos para llamar con el valor coincidente
-                                                                $consulta_registro_subform=ejecutar_sql("SELECT $PCO_CampoForaneoSubform FROM $PCO_TablaSubform WHERE $PCO_CampoForaneoSubform=? ","$PCO_ValorCampoPadre")->fetch();
-
-                                                                @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorCampoPadre,1);
-                                                            }
-														else
-															{
-																//Presenta mensaje de error al no poder empotrar subformulario
-																if($tipo_de_objeto=="form_consulta")
-																	mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste.'.  FormID: '.$registro_campos["formulario_vinculado"], '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');																				
-															}
-
-                                                        //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
-                                                        if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
-                                                            echo $objeto_formateado;
-                                                        echo '</td></tr></table>
-                                                        </div>';
+                                                        $ComplementoDisenoElemento=agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,"ComplementoDisenoElemento");
+                                                        $ComplementoDisenoMarcoOpciones=agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,"ComplementoDisenoMarcoOpciones");
                                                     }
+                                                echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'" class="table-responsive" style="border-width: 0px; margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;">'.$ComplementoDisenoMarcoOpciones.'
+                                                <table class="table table-condensed btn-xs '.$estilo_bordes.'" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;  padding: 0px; border-spacing: 0px; width:100%; "><tr><td>';
+                                                $tipo_de_objeto=@$registro_campos["tipo"];
+                                                if ($tipo_de_objeto=="texto_corto")             $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
+                                                else if ($tipo_de_objeto=="texto_clave")        $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
+                                                else if ($tipo_de_objeto=="texto_largo")        $objeto_formateado = cargar_objeto_texto_largo($registro_campos,@$registro_datos_formulario);
+                                                else if ($tipo_de_objeto=="texto_formato") {    $objeto_formateado = cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
+                                                else if ($tipo_de_objeto=="area_responsive")    $objeto_formateado = @cargar_objeto_area_responsive($registro_campos,@$registro_datos_formulario);
+                                                else if ($tipo_de_objeto=="lista_seleccion")    $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
+                                                else if ($tipo_de_objeto=="lista_radio")        $objeto_formateado = cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
+                                                else if ($tipo_de_objeto=="casilla_check")      $objeto_formateado = @cargar_objeto_casilla_check($registro_campos,@$registro_datos_formulario);
+                                                else if ($tipo_de_objeto=="etiqueta")           $objeto_formateado = cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
+                                                else if ($tipo_de_objeto=="url_iframe")         $objeto_formateado = cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
+                                                else if ($tipo_de_objeto=="informe")            @cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
+                                                else if ($tipo_de_objeto=="deslizador")         $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
+                                                else if ($tipo_de_objeto=="campo_etiqueta")     $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
+                                                else if ($tipo_de_objeto=="archivo_adjunto")    $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
+                                                else if ($tipo_de_objeto=="objeto_canvas")      $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
+                                                else if ($tipo_de_objeto=="objeto_camara")      $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
+                                                else if ($tipo_de_objeto=="boton_comando")      $objeto_formateado = @cargar_objeto_boton_comando($registro_campos,@$registro_datos_formulario);
+                                                //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
+                                                //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
+                                                //padre el valor del campo foraneo del form hijo para llamar a buscar form con
+                                                //el valor de Id correspondiente. Ademas valida si el form existe
+                                                if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario && existe_valor($TablasCore."formulario","id",$registro_campos["formulario_vinculado"]))
+                                                    {
+                                                        //Busca la tabla principal del subformulario anidado
+                                                        $PCO_ValorCampoBind=$registro_campos["formulario_vinculado"];
+                                                        if($PCO_ValorCampoBind=="") $PCO_ValorCampoBind="";
+                                                        $consulta_tabla_subform=ejecutar_sql("SELECT tabla_datos FROM ".$TablasCore."formulario WHERE id=? ","$PCO_ValorCampoBind")->fetch();
+                                                        $PCO_TablaSubform=$consulta_tabla_subform["tabla_datos"];
+                                                        
+                                                        //Determina el valor del campo a vincular en el registro padre (el actual).  Deberia dar el id que se va a buscar
+                                                        $PCO_ValorCampoPadre=@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]];
+                                                        //Si no se encuentra el dato o registro entonces mira si vienen desde un boton de busqueda y usa su valor
+                                                        if($PCO_ValorCampoPadre=="" && $PCO_ValorBusquedaBD!="")
+                                                            {
+                                                                //$PCO_ValorCampoPadre=$PCO_ValorBusquedaBD;
+                                                            }
+                                                        //Si no obtiene ningun valor entonces lo pone en cero para evitar error de sintaxis en Bind de SQL
+                                                        if($PCO_ValorCampoPadre=="") $PCO_ValorCampoPadre=0;
+                                                        $PCO_CampoForaneoSubform=$registro_campos["formulario_campo_foraneo"];
+                                                        //Busca el ID de registro correspondiente en la tabla de datos para llamar con el valor coincidente
+                                                        $consulta_registro_subform=ejecutar_sql("SELECT $PCO_CampoForaneoSubform FROM $PCO_TablaSubform WHERE $PCO_CampoForaneoSubform=? ","$PCO_ValorCampoPadre")->fetch();
 
-                                                //Actualiza limite inferior para siguiente lista de campos
-                                                $limite_inferior=$registro_obj_fila_unica["peso"];
+                                                        @cargar_formulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorCampoPadre,1);
+                                                    }
+												else if($tipo_de_objeto=="form_consulta") //Presenta mensaje de error al no poder empotrar subformulario
+													mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste.'.  FormID: '.$registro_campos["formulario_vinculado"], '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');																				
+
+                                                //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
+                                                if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
+                                                    echo $objeto_formateado;
+                                                echo '</td></tr></table>
+                                                </div>';
                                             }
 
-                                echo '
-                                    </div>
-                                <!-- FIN de las pestanas No '.$pestana_activa.'-->';
-                                //Limpia para las siguientes pestanas
-                                $estado_activa_primera_pestana='';
-                                $pestana_activa++;
-                            }
-                        //Fin de los tab-content
-                        echo '</div>';
-                    } //Fin Si conteo pestanas > 0
+                                        //Actualiza limite inferior para siguiente lista de campos
+                                        $limite_inferior=$registro_obj_fila_unica["peso"];
+                                    }
 
-				echo '</div> <!-- cierra MARCO_IMPRESION -->';
+                        echo '
+                            </div>
+                        <!-- FIN de las pestanas No '.$pestana_activa.'-->';
+                        //Limpia para las siguientes pestanas
+                        $estado_activa_primera_pestana='';
+                        $pestana_activa++;
+                    }
+                //Fin de los tab-content
+                echo '</div>';
+            } //Fin Si conteo pestanas > 0
 
-			//Busca los campos definidos como visilbe=0 (o NO) para agregarlos como hidden
-			$consulta_ocultos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=0 ","$formulario");
-			while ($registro_ocultos = $consulta_ocultos->fetch())
+		echo '</div> <!-- cierra MARCO_IMPRESION -->';
+
+	//Busca los campos definidos como visilbe=0 (o NO) para agregarlos como hidden
+	$consulta_ocultos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=0 ","$formulario");
+	while ($registro_ocultos = $consulta_ocultos->fetch())
+		{
+			// Formatea cada campo de acuerdo a su tipo
+			$objeto_formateado = @cargar_objeto_oculto($registro_ocultos,$registro_datos_formulario,$formulario,$en_ventana);
+			//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
+			if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta" && $registro_campos["tipo"]!="boton_comando")
+				echo $objeto_formateado;
+		}
+
+	// Si tiene botones agrega barra de estado y los ubica
+	$consulta_botones = ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_boton." FROM ".$TablasCore."formulario_boton WHERE formulario=? AND visible=1 ORDER BY peso","$formulario");
+	
+	if($consulta_botones->rowCount()>0 || $PCO_InformeFiltro!="") //Crea la barra incluso si no hay botones en diseno pero se encuentra que el llamado es desde un informe que requiere filtro
+		{
+			abrir_barra_estado();
+            echo '<div align="center">';
+			while ($registro_botones = $consulta_botones->fetch())
 				{
-					// Formatea cada campo de acuerdo a su tipo
-					$objeto_formateado = @cargar_objeto_oculto($registro_ocultos,$registro_datos_formulario,$formulario,$en_ventana);
-					//Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
-					if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta" && $registro_campos["tipo"]!="boton_comando")
-						echo $objeto_formateado;
-				}
+					//Transfiere variables de mensajes de retorno asociadas al boton
+					$comando_javascript="";
+					if ($registro_botones["retorno_titulo"]!="")
+						$comando_javascript="document.datos.PCO_ErrorTitulo.value='".$registro_botones["retorno_titulo"]."'; document.datos.PCO_ErrorDescripcion.value='".$registro_botones["retorno_texto"]."'; document.datos.PCO_ErrorIcono.value='".$registro_botones["retorno_icono"]."'; document.datos.PCO_ErrorEstilo.value='".$registro_botones["retorno_estilo"]."';";							
+					
+					//Define el tipo de boton de acuerdo al tipo de accion
+					if ($registro_botones["tipo_accion"]=="interna_guardar")             $comando_javascript.="PCOJS_ValidarCamposYProcesarFormulario();";    
+					else if ($registro_botones["tipo_accion"]=="interna_limpiar")        $comando_javascript.="document.getElementById('datos').reset();";
+                    else if ($registro_botones["tipo_accion"]=="interna_escritorio")     $comando_javascript.="document.core_ver_menu.submit();";
+					else if ($registro_botones["tipo_accion"]=="interna_actualizar")     $comando_javascript.="document.datos.PCO_Accion.value='actualizar_datos_formulario'; PCOJS_ValidarCamposYProcesarFormulario();";
+					else if ($registro_botones["tipo_accion"]=="interna_eliminar")       $comando_javascript.="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit();";
+					else if ($registro_botones["tipo_accion"]=="interna_cargar")         $comando_javascript.="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='".$registro_botones["accion_usuario"]."';document.datos.submit();";
+					else if ($registro_botones["tipo_accion"]=="externa_formulario")     $comando_javascript.="document.datos.PCO_Accion.value='".$registro_botones["accion_usuario"]."';document.datos.submit();";
+					else if ($registro_botones["tipo_accion"]=="externa_javascript")     $comando_javascript.=$registro_botones["accion_usuario"];
 
-			// Si tiene botones agrega barra de estado y los ubica
-			$consulta_botones = ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_boton." FROM ".$TablasCore."formulario_boton WHERE formulario=? AND visible=1 ORDER BY peso","$formulario");
-			
-			if($consulta_botones->rowCount()>0 || $PCO_InformeFiltro!="") //Crea la barra incluso si no hay botones en diseno pero se encuentra que el llamado es desde un informe que requiere filtro
-				{
-					abrir_barra_estado();
-                    echo '<div align="center">';
-					while ($registro_botones = $consulta_botones->fetch())
+                    //Verifica si el registro de botones presenta algun texto de confirmacion y lo antepone al script
+                    $cadena_confirmacion_accion_pre="";
+                    $cadena_confirmacion_accion_pos="";
+					if ($registro_botones["confirmacion_texto"]!="")
 						{
-							//Transfiere variables de mensajes de retorno asociadas al boton
-							$comando_javascript="";
-							if ($registro_botones["retorno_titulo"]!="")
-								$comando_javascript="document.datos.PCO_ErrorTitulo.value='".$registro_botones["retorno_titulo"]."'; document.datos.PCO_ErrorDescripcion.value='".$registro_botones["retorno_texto"]."'; document.datos.PCO_ErrorIcono.value='".$registro_botones["retorno_icono"]."'; document.datos.PCO_ErrorEstilo.value='".$registro_botones["retorno_estilo"]."';";							
-							
-							//Define el tipo de boton de acuerdo al tipo de accion
-							if ($registro_botones["tipo_accion"]=="interna_guardar")
-                                $comando_javascript.="PCOJS_ValidarCamposYProcesarFormulario();";    
-							if ($registro_botones["tipo_accion"]=="interna_limpiar")
-                                $comando_javascript.="document.getElementById('datos').reset();";
-                            if ($registro_botones["tipo_accion"]=="interna_escritorio")
-                                $comando_javascript.="document.core_ver_menu.submit();";
-							if ($registro_botones["tipo_accion"]=="interna_actualizar")
-								$comando_javascript.="document.datos.PCO_Accion.value='actualizar_datos_formulario'; PCOJS_ValidarCamposYProcesarFormulario();";
-							if ($registro_botones["tipo_accion"]=="interna_eliminar")
-								$comando_javascript.="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit();";
-							if ($registro_botones["tipo_accion"]=="interna_cargar")
-								$comando_javascript.="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='".$registro_botones["accion_usuario"]."';document.datos.submit();";
-							if ($registro_botones["tipo_accion"]=="externa_formulario")
-								$comando_javascript.="document.datos.PCO_Accion.value='".$registro_botones["accion_usuario"]."';document.datos.submit();";
-							if ($registro_botones["tipo_accion"]=="externa_javascript")
-								$comando_javascript.=$registro_botones["accion_usuario"];
-
-                            //Verifica si el registro de botones presenta algun texto de confirmacion y lo antepone al script
-                            $cadena_confirmacion_accion_pre="";
-                            $cadena_confirmacion_accion_pos="";
-							if ($registro_botones["confirmacion_texto"]!="")
-								{
-									$cadena_confirmacion_accion_pre=" if (confirm('".PCO_ReemplazarVariablesPHPEnCadena($registro_botones["confirmacion_texto"])."')) {";
-									$cadena_confirmacion_accion_pos=" } else {} ";
-								}
-
-                            //Genera la cadena del enlace
-                            $cadena_javascript='href="javascript:  '.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.'  "';
-                            
-							//Si no se especifica un estilo para el boton entonces se usa el predeterminado
-                            $estilo_basico_boton="btn btn-default";
-                            echo '<a class="'.$estilo_basico_boton.' '.$registro_botones["estilo"].'" '.@$cadena_javascript.'>'.PCO_ReemplazarVariablesPHPEnCadena($registro_botones["titulo"]).'</a>';
-
-                            echo '&nbsp;&nbsp;'; //Agrega espacio temporal entre controles
+							$cadena_confirmacion_accion_pre=" if (confirm('".PCO_ReemplazarVariablesPHPEnCadena($registro_botones["confirmacion_texto"])."')) {";
+							$cadena_confirmacion_accion_pos=" } else {} ";
 						}
 
-					if ($PCO_InformeFiltro!="")
-						{
-							//Si se encuentra que el form viene llamado desde un informe que lo requiere para filtro agrega un boton de retorno al informe automaticamente
-							$comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='inf:".$PCO_InformeFiltro.":1';document.datos.submit();";
-							$cadena_javascript='href="javascript:'.@$comando_javascript.'"';
-							echo '<a class="'.$estilo_basico_boton.' btn btn-warning" '.@$cadena_javascript.'>'.$MULTILANG_InfRetornoFormFiltrado.'</a>';
-						}
+                    //Genera la cadena del enlace
+                    $cadena_javascript='href="javascript:  '.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.'  "';
+                    
+					//Si no se especifica un estilo para el boton entonces se usa el predeterminado
+                    $estilo_basico_boton="btn btn-default";
+                    echo '<a class="'.$estilo_basico_boton.' '.$registro_botones["estilo"].'" '.@$cadena_javascript.'>'.PCO_ReemplazarVariablesPHPEnCadena($registro_botones["titulo"]).'</a>';
 
-                    echo '</div>';
-					cerrar_barra_estado();
+                    echo '&nbsp;&nbsp;'; //Agrega espacio temporal entre controles
 				}
 
-
-			//Cierra todo el formulario
-			//Si se quiere anular el formulario y su accion cuando se trata de un sub-formulario de consulta
-			if (!$anular_form)
-				echo '</form>';
-			
-			//Carga todos los eventos asociados a los controles de formulario
-			$eventos_controles_formulario=ejecutar_sql("SELECT ".$TablasCore."evento_objeto.*,".$TablasCore."formulario_objeto.id_html FROM ".$TablasCore."evento_objeto,".$TablasCore."formulario_objeto WHERE ".$TablasCore."evento_objeto.objeto=".$TablasCore."formulario_objeto.id  AND ".$TablasCore."formulario_objeto.formulario=$formulario ");
-			while($registro_eventos_definidos = $eventos_controles_formulario->fetch())
+			if ($PCO_InformeFiltro!="")
 				{
-				    //Limpia el metodo, asume no conocerlo
-				    $MetodoJQuery="";
-                    //1-Raton
-                    if ($registro_eventos_definidos["evento"]=="onclick") $MetodoJQuery="click";
-                    if ($registro_eventos_definidos["evento"]=="ondblclick") $MetodoJQuery="dblclick";
-                    if ($registro_eventos_definidos["evento"]=="onmousedown") $MetodoJQuery="mousedown";
-                    if ($registro_eventos_definidos["evento"]=="onmouseenter") $MetodoJQuery="mouseenter";
-                    if ($registro_eventos_definidos["evento"]=="onmouseleave") $MetodoJQuery="mouseleave";
-                    if ($registro_eventos_definidos["evento"]=="onmousemove") $MetodoJQuery="mousemove";
-                    if ($registro_eventos_definidos["evento"]=="onmouseover") $MetodoJQuery="mouseover";
-                    if ($registro_eventos_definidos["evento"]=="onmouseout") $MetodoJQuery="mouseout";
-                    if ($registro_eventos_definidos["evento"]=="onmouseup") $MetodoJQuery="mouseup";
-                    if ($registro_eventos_definidos["evento"]=="contextmenu") $MetodoJQuery="contextmenu";
-                    //2-Teclado
-                    if ($registro_eventos_definidos["evento"]=="onkeydown") $MetodoJQuery="keydown";
-                    if ($registro_eventos_definidos["evento"]=="onkeypress") $MetodoJQuery="keypress";
-                    if ($registro_eventos_definidos["evento"]=="onkeyup") $MetodoJQuery="keyup";
-                    //3-Formularios
-                    if ($registro_eventos_definidos["evento"]=="onfocus") $MetodoJQuery="focus";
-                    if ($registro_eventos_definidos["evento"]=="onblur") $MetodoJQuery="blur";
-                    if ($registro_eventos_definidos["evento"]=="onchange") $MetodoJQuery="change";
-                    if ($registro_eventos_definidos["evento"]=="onselect") $MetodoJQuery="select";
-                    if ($registro_eventos_definidos["evento"]=="onsubmit") $MetodoJQuery="submit";
-                    if ($registro_eventos_definidos["evento"]=="oncut") $MetodoJQuery="reset";
-                    if ($registro_eventos_definidos["evento"]=="oncopy") $MetodoJQuery="click";
-                    if ($registro_eventos_definidos["evento"]=="onpaste") $MetodoJQuery="click";
-					//Imprime el script asociado al evento siempre y cuando la funcion sea reconocida
-					if ($MetodoJQuery!="")
-					    {
-        					$PCO_FuncionesJSInternasFORM .= '
-        					    <script language=\'JavaScript\'>
-                                    $( "#'.$registro_eventos_definidos["id_html"].'" ).'.$MetodoJQuery.'(function(PCOJS_Evento) {
-                                      '.$registro_eventos_definidos["javascript"].'
-                                    });
-        					    </script>';
-					    }
+					//Si se encuentra que el form viene llamado desde un informe que lo requiere para filtro agrega un boton de retorno al informe automaticamente
+					$comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='inf:".$PCO_InformeFiltro.":1';document.datos.submit();";
+					$cadena_javascript='href="javascript:'.@$comando_javascript.'"';
+					echo '<a class="'.$estilo_basico_boton.' btn btn-warning" '.@$cadena_javascript.'>'.$MULTILANG_InfRetornoFormFiltrado.'</a>';
 				}
 
-			//Carga las funciones JavaScript asociadas al formulario y llama la funcion FrmAutoRun()
-				$PCO_FuncionesJSInternasFORM .= '<script type="text/javascript">'.$registro_formulario["javascript"].' 
-    				if (typeof FrmAutoRun === "function") { FrmAutoRun(); }
-    				</script>';
+            echo '</div>';
+			cerrar_barra_estado();
+		}
 
-            //Busca la lista de campos marcados como obligatorios sobre el form
-            $consulta_campos_obligatorios=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND obligatorio=1","$formulario");
-            $ListaCamposObligatorios="";
-            $ListaTitulosObligatorios="";
-            while ($registro_campos_obligatorios=$consulta_campos_obligatorios->fetch())
-                {
-                    $ListaCamposObligatorios.="|".$registro_campos_obligatorios["id_html"];
-                    $ListaTitulosObligatorios.="|".$registro_campos_obligatorios["titulo"];
-                }
-            $POSTForm_ListaCamposObligatorios.=$ListaCamposObligatorios;
-            $POSTForm_ListaTitulosObligatorios.=$ListaTitulosObligatorios;
 
-			if ($en_ventana) cerrar_ventana();
-		  }
+    	//Cierra todo el formulario
+    	//Si se quiere anular el formulario y su accion cuando se trata de un sub-formulario de consulta
+    	if (!$anular_form)
+    		echo '</form>';
+    	
+    	//Carga todos los eventos asociados a los controles de formulario
+    	$eventos_controles_formulario=ejecutar_sql("SELECT ".$TablasCore."evento_objeto.*,".$TablasCore."formulario_objeto.id_html FROM ".$TablasCore."evento_objeto,".$TablasCore."formulario_objeto WHERE ".$TablasCore."evento_objeto.objeto=".$TablasCore."formulario_objeto.id  AND ".$TablasCore."formulario_objeto.formulario=$formulario ");
+    	while($registro_eventos_definidos = $eventos_controles_formulario->fetch())
+    		{
+    		    //Limpia el metodo, asume no conocerlo
+    		    $MetodoJQuery="";
+                //1-Raton
+                if ($registro_eventos_definidos["evento"]=="onclick") $MetodoJQuery="click";
+                else if ($registro_eventos_definidos["evento"]=="ondblclick") $MetodoJQuery="dblclick";
+                else if ($registro_eventos_definidos["evento"]=="onmousedown") $MetodoJQuery="mousedown";
+                else if ($registro_eventos_definidos["evento"]=="onmouseenter") $MetodoJQuery="mouseenter";
+                else if ($registro_eventos_definidos["evento"]=="onmouseleave") $MetodoJQuery="mouseleave";
+                else if ($registro_eventos_definidos["evento"]=="onmousemove") $MetodoJQuery="mousemove";
+                else if ($registro_eventos_definidos["evento"]=="onmouseover") $MetodoJQuery="mouseover";
+                else if ($registro_eventos_definidos["evento"]=="onmouseout") $MetodoJQuery="mouseout";
+                else if ($registro_eventos_definidos["evento"]=="onmouseup") $MetodoJQuery="mouseup";
+                else if ($registro_eventos_definidos["evento"]=="contextmenu") $MetodoJQuery="contextmenu";
+                //2-Teclado
+                else if ($registro_eventos_definidos["evento"]=="onkeydown") $MetodoJQuery="keydown";
+                else if ($registro_eventos_definidos["evento"]=="onkeypress") $MetodoJQuery="keypress";
+                else if ($registro_eventos_definidos["evento"]=="onkeyup") $MetodoJQuery="keyup";
+                //3-Formularios
+                else if ($registro_eventos_definidos["evento"]=="onfocus") $MetodoJQuery="focus";
+                else if ($registro_eventos_definidos["evento"]=="onblur") $MetodoJQuery="blur";
+                else if ($registro_eventos_definidos["evento"]=="onchange") $MetodoJQuery="change";
+                else if ($registro_eventos_definidos["evento"]=="onselect") $MetodoJQuery="select";
+                else if ($registro_eventos_definidos["evento"]=="onsubmit") $MetodoJQuery="submit";
+                else if ($registro_eventos_definidos["evento"]=="oncut") $MetodoJQuery="reset";
+                else if ($registro_eventos_definidos["evento"]=="oncopy") $MetodoJQuery="click";
+                else if ($registro_eventos_definidos["evento"]=="onpaste") $MetodoJQuery="click";
+    			//Imprime el script asociado al evento siempre y cuando la funcion sea reconocida
+    			if ($MetodoJQuery!="")
+    			    {
+    					$PCO_FuncionesJSInternasFORM .= '
+    					    <script language=\'JavaScript\'>
+                                $( "#'.$registro_eventos_definidos["id_html"].'" ).'.$MetodoJQuery.'(function(PCOJS_Evento) {
+                                  '.$registro_eventos_definidos["javascript"].'
+                                });
+    					    </script>';
+    			    }
+    		}
+
+    	//Carga las funciones JavaScript asociadas al formulario y llama la funcion FrmAutoRun()
+    		$PCO_FuncionesJSInternasFORM .= '<script type="text/javascript">'.$registro_formulario["javascript"].' 
+    			if (typeof FrmAutoRun === "function") { FrmAutoRun(); }
+    			</script>';
+    
+        //Busca la lista de campos marcados como obligatorios sobre el form
+        $consulta_campos_obligatorios=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND obligatorio=1","$formulario");
+        $ListaCamposObligatorios="";
+        $ListaTitulosObligatorios="";
+        while ($registro_campos_obligatorios=$consulta_campos_obligatorios->fetch())
+            {
+                $ListaCamposObligatorios.="|".$registro_campos_obligatorios["id_html"];
+                $ListaTitulosObligatorios.="|".$registro_campos_obligatorios["titulo"];
+            }
+        $POSTForm_ListaCamposObligatorios.=$ListaCamposObligatorios;
+        $POSTForm_ListaTitulosObligatorios.=$ListaTitulosObligatorios;
+    
+    	if ($en_ventana) cerrar_ventana();
+    }
 
 
 /* ################################################################## */
@@ -5225,7 +5169,7 @@ function generar_botones_informe($informe)
 							document.FRMBASEINFORME.target = '".@$destino_formulario."';
 							document.FRMBASEINFORME.submit();";
 					}
-				if ($registro_botones["tipo_accion"]=="interna_cargar")
+				else if ($registro_botones["tipo_accion"]=="interna_cargar")
 					{
 						$comando_javascript="
 							document.FRMBASEINFORME.PCO_Accion.value='cargar_objeto';
@@ -5235,7 +5179,7 @@ function generar_botones_informe($informe)
 							document.FRMBASEINFORME.target = '".@$destino_formulario."';
 							document.FRMBASEINFORME.submit();";
 					}
-				if ($registro_botones["tipo_accion"]=="externa_formulario")
+				else if ($registro_botones["tipo_accion"]=="externa_formulario")
 					{
 						$comando_javascript="
 							document.FRMBASEINFORME.PCO_Tabla.value='".@$tabla_vinculada."';
@@ -5247,7 +5191,7 @@ function generar_botones_informe($informe)
 							document.FRMBASEINFORME.target = '".@$destino_formulario."';
 							document.FRMBASEINFORME.submit();";
 					}
-				if ($registro_botones["tipo_accion"]=="externa_javascript")
+				else if ($registro_botones["tipo_accion"]=="externa_javascript")
 					{
 						$comando_javascript="
 							document.FRMBASEINFORME.PCO_Valor.value='DELFRMVALVALOR';  ";
@@ -5634,10 +5578,6 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
         global $PCO_InformesDataTable;
         global $ModoDepuracion;
 
-        //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa
-		if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
-		    $ComplementoIdObjetoEnTitulo=" <i>[ID=$informe]</i>";
-
 		// Busca datos del informe
 		$consulta_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
 		$registro_informe=$consulta_informe->fetch();
@@ -5700,7 +5640,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							}
 
 						//Carga la ventana con el informe
-						abrir_ventana($TituloVentanaInforme.$ComplementoIdObjetoEnTitulo,'panel panel-info',$registro_informe["ancho"]);
+						abrir_ventana($TituloVentanaInforme,'panel panel-info',$registro_informe["ancho"]);
 						
 						//Agrega la descripcion del informe en caso de contar con ella
 						if ($registro_informe["descripcion"]!='')
@@ -5926,14 +5866,10 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					}
 
 				// CREA OBJETO SEGUN TIPO DE GRAFICO
-				if ($tipo_grafico=="linea" || $tipo_grafico=="linea_multiples")
-					$chart = new LineChart($registro_informe["ancho"], $registro_informe["alto"]);
-				if ($tipo_grafico=="barrah" || $tipo_grafico=="barrah_multiples")
-					$chart = new HorizontalBarChart($registro_informe["ancho"], $registro_informe["alto"]);
-				if ($tipo_grafico=="barrav" || $tipo_grafico=="barrav_multiples")
-					$chart = new VerticalBarChart($registro_informe["ancho"], $registro_informe["alto"]);
-				if ($tipo_grafico=="torta")
-					$chart = new PieChart($registro_informe["ancho"], $registro_informe["alto"]);
+			    if ($tipo_grafico=="linea" || $tipo_grafico=="linea_multiples")          $chart = new LineChart($registro_informe["ancho"], $registro_informe["alto"]);
+				else if ($tipo_grafico=="barrah" || $tipo_grafico=="barrah_multiples")   $chart = new HorizontalBarChart($registro_informe["ancho"], $registro_informe["alto"]);
+				else if ($tipo_grafico=="barrav" || $tipo_grafico=="barrav_multiples")   $chart = new VerticalBarChart($registro_informe["ancho"], $registro_informe["alto"]);
+	            else if ($tipo_grafico=="torta")                                         $chart = new PieChart($registro_informe["ancho"], $registro_informe["alto"]);
 
 				// PRESENTA EL GRAFICO EN PANTALLA
 				$chart->setDataSet($dataSet);
