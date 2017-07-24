@@ -259,6 +259,8 @@
 		include("core/mantenimiento.php");
     if ($PCO_Accion=="administrar_replicacion" || $PCO_Accion=="eliminar_replica" || $PCO_Accion=="detalles_replicacion" || $PCO_Accion=="guardar_replicacion" || $PCO_Accion=="actualizar_replicacion")
         include("core/replicacion.php");
+    if ($PCO_Accion=="ExplorarTablerosKanban" || $PCO_Accion=="GuardarTareaKanban")
+        include("core/kanban.php");
 
 /* ################################################################## */
     // Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios. Incluye compatibilidad hacia atras en personalizadas.php

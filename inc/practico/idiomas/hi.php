@@ -1212,14 +1212,22 @@
     $MULTILANG_EventoAnimFin='एक सीएसएस एनीमेशन समाप्त हो गया है गया था';
     $MULTILANG_EventoAnimInicio='एक सीएसएस एनीमेशन शुरू किया गया था';
     $MULTILANG_EventoAnimIteracion='एक सीएसएस एनीमेशन फिर आरंभ / दोहराया गया था';
-    $MULTILANG_EventoTipoRaton='Mouse Events or Pointing Device';
-    $MULTILANG_EventoTipoTeclado='Keyboard Events';
-    $MULTILANG_EventoTipoFormulario='Form Control Events';
-    $MULTILANG_EventoTipoVentana='Events for windows and frames';
-    $MULTILANG_EventoTipoAnima='Events for animations and transitions';
-    $MULTILANG_EventoTipoBateria='Events related to battery and its charge';
-    $MULTILANG_EventoTipoLlamadas='Events associated with calls and telephony';
+    $MULTILANG_EventoTipoRaton='माउस ईवेंट या पॉइंटिंग डिवाइस';
+    $MULTILANG_EventoTipoTeclado='कीबोर्ड ईवेंट';
+    $MULTILANG_EventoTipoFormulario='प्रपत्र नियंत्रण घटनाक्रम';
+    $MULTILANG_EventoTipoVentana='खिड़कियां और फ़्रेम के लिए ईवेंट';
+    $MULTILANG_EventoTipoAnima='एनिमेशन और संक्रमण के लिए ईवेंट';
+    $MULTILANG_EventoTipoBateria='बैटरी और इसके चार्ज से संबंधित घटनाएं';
+    $MULTILANG_EventoTipoLlamadas='कॉल और टेलिफोनी के साथ जुड़े ईवेंट';
     $MULTILANG_EventoTipoDOM='Events on the DOM tree';
-    $MULTILANG_EventoTipoArrastrar='Events associated with drag and drop elements';
-    $MULTILANG_EventoTipoAudio='Audio and video events';
-    $MULTILANG_EventoTipoInternet='Internet Connection Events';
+    $MULTILANG_EventoTipoArrastrar='खींचें और ड्रॉप तत्वों से संबंधित ईवेंट';
+    $MULTILANG_EventoTipoAudio='ऑडियो और वीडियो इवेंट्स';
+    $MULTILANG_EventoTipoInternet='इंटरनेट कनेक्शन घटनाएं';
+
+    //ModuloKanban
+    $MULTILANG_TablerosKanban='कंबान बोर्ड';
+    $MULTILANG_AgregarNuevaTarea='Add new task';
+    $MULTILANG_DesTarea='Kanban बोर्ड में जोड़े जाने वाले कार्य या गतिविधि का सामान्य विवरण। आप उपयोगकर्ता की कहानियों या किसी भी अन्य कार्यप्रणाली जैसे गतिविधि को दस्तावेज बनाना चाहते हैं जैसे अन्य विवरण तकनीकों का भी उपयोग कर सकते हैं।';
+    $MULTILANG_AsignadoA='Assigned to';
+    $MULTILANG_AsignadoADes='प्रणाली में पंजीकृत उपयोगकर्ता कार्य या गतिविधि एस्टा की यही कारण है कि पूरा करने के लिए जिम्मेदार (यदि लागू हो) है';
+    $MULTILANG_FechaLimite='Fecha de finalizaci&oacute;n';

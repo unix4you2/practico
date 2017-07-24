@@ -120,6 +120,8 @@
 
 				<div class="tab-content">
 
+
+
 						<!-- INICIO TAB AVANZADAS 1 -->
 						<div class="tab-pane fadein active" id="avanzada1">
 							<div class="well btn-xs">
@@ -130,7 +132,7 @@
 								<a class="btn btn-primary btn-block" href="<?php echo $PCO_EnlacePCODER; ?>"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: PCoder</a>
 								
 								<!-- Formulario para la carga directa de PMyDB -->
-								<form target="_blank" action='mod/pmydb/index.php' method='post' name="PMyDB">
+								<form target="_blank" action='mod/pmydb/index.php' method='post' name="PMyDB" style="display:inline;">
 									<?php 
 										//Establece el motor predefinido para PMyDB segun el establecido en Practico
 										if ($MotorBD=="mysql") $MotorPMyDB="server";
@@ -151,7 +153,13 @@
 									<input type="hidden" name="auth[db]"		value="<?php echo $BaseDatos; ?>">
 								</form><br>
 								<a class="btn btn-warning btn-block" href="javascript:if(confirm('<?php echo $MULTILANG_ConfirmaPMyDB; ?>'))document.PMyDB.submit();"><i class="fa fa-database fa-fw"></i> <?php echo $MULTILANG_DefPMyDB; ?>: PMyDB</a>
+                                <br>
 
+								<!-- Formulario para la carga directa de los tableros Kanban del usuario -->
+								<form action='index.php' method='post' name="KanbanForm" style="display:inline;">
+									<input type="hidden" name="PCO_Accion"	value="ExplorarTablerosKanban">
+								</form>
+								<a class="btn btn-info btn-block" href="javascript:document.KanbanForm.submit();"><i class="fa fa-thumb-tack fa-fw"></i> <?php echo $MULTILANG_TablerosKanban; ?></a>
 							</div> <!--well-->
 						</div>
 						<!-- FIN TAB AVANZADAS 1 -->
@@ -188,7 +196,8 @@
 							</div> <!--well-->
 						</div>
 						<!-- FIN TAB AVANZADAS 2 -->
-					
+
+
 				</div>
 				
 			</div>

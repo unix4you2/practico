@@ -1225,3 +1225,11 @@
     $MULTILANG_EventoTipoArrastrar='Events associated with drag and drop elements';
     $MULTILANG_EventoTipoAudio='Audio and video events';
     $MULTILANG_EventoTipoInternet='Internet Connection Events';
+
+    //ModuloKanban
+    $MULTILANG_TablerosKanban='Kanban Board';
+    $MULTILANG_AgregarNuevaTarea='Add new task';
+    $MULTILANG_DesTarea='General description of the task or activity to be added to the Kanban board. You can even use other description techniques such as user stories or any other methodology you want to document the activity.';
+    $MULTILANG_AsignadoA='Assigned to';
+    $MULTILANG_AsignadoADes='Registered user in the system that is responsible for the completion of this task or activity (if applicable)';
+    $MULTILANG_FechaLimite='Date due';

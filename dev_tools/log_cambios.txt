@@ -18,6 +18,8 @@ index.php
 core/comunes.php
 core/formularios.php
 core/marco_abajo.php
+core/kanban.php
+core/marco_dev.php
 core/marco_nav.php
 core/marco_arriba.php
 core/marco_arriba_bs.php
@@ -51,6 +53,7 @@ LogCambios="
 * Enhan: Mejoradas algunas ayudas y tooltips del sistema.
 * Fixed: Agregado el parametro PCOJS_Evento por defecto a todos los eventos JS generados.
 * Added: Validacion de entrada para campos de texto largo (textareas).
+* Added: Nuevo módulo para manejo de tableros Kanban con el fin de apoyar procesos de desarrollo implicitos de la herramienta y las aplicaciones de cada usuario.
 
 "
 
@@ -75,7 +78,8 @@ CREATE TABLE core_kanban (
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 ALTER TABLE core_kanban ADD INDEX columna(columna);
 ALTER TABLE core_kanban ADD INDEX login_admintablero(login_admintablero);
-INSERT INTO core_kanban (login_admintablero,titulo,descripcion,columna) VALUES ('admin','[USO INTERNO PRACTICO: ColumnasKanban]', 'Analisis,Diseno,Desarrollo,Pruebas,Terminado,Produccion','-2');
+INSERT INTO core_kanban (login_admintablero,titulo,descripcion,columna) VALUES ('admin','[PRACTICO][ColumnasTablero]', 'Analisis,Diseno,Desarrollo,Pruebas,Terminado,Produccion','-2');
+INSERT INTO core_kanban (login_admintablero,titulo,descripcion,columna) VALUES ('admin','[PRACTICO][CategoriasTareas]', 'FrontEnd,BackEnd,Documentacion','-2');
 
 "
 
