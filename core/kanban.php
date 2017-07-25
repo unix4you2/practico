@@ -45,67 +45,7 @@
 		die();
 
 
-//#################################################################################
-//#################################################################################
-//Presenta una tarea especifica tomando la informacion desde un registro de BD
-	function SGSST_PresentarTarea($registro)
-		{
-		    global $PCO_FechaOperacion;
-            
-		    //Determina el numero de participantes
-		    $total_participantes=0;
-		    if($registro["responsables"]!="")
-		        $total_participantes=substr_count($registro["responsables"],",")+1;
-            
-            if ($total_participantes>0)         $EtiquetaPersonas="<i href='javascript:return false;' class='fa fa-fw fa-users' data-toggle='tooltip' data-placement='top' title='".$total_participantes." participantes' ></i>";
-            if ($registro["presupuesto"]>0)     $EtiquetaPresupuesto="<i href='javascript:return false;' class='fa fa-fw fa-money' data-toggle='tooltip' data-placement='top' title='Presupuesto: $".$registro["presupuesto"]."' ></i>";
-            if ($registro["horas_estimadas"]>0) $EtiquetaHoras="<i href='javascript:return false;' class='fa fa-fw fa-clock-o' data-toggle='tooltip' data-placement='top' title='".$registro["horas_estimadas"]." horas' ></i>";
-                                                $EtiquetaCalendario="<i href='javascript:return false;' class='fa fa-fw fa-calendar' data-toggle='tooltip' data-placement='top' title='De ".$registro["fecha_inicio"]." a ".$registro["fecha_fin"]."' ></i>";
-            if ($registro["porcentaje"]>0)      $EtiquetaCompletado="<i href='javascript:return false;' class='fa fa-fw fa-flag-checkered' data-toggle='tooltip' data-placement='top' title='".$registro["porcentaje"]."% completado' ></i>";
-            //$EtiquetaIconoTareas="<i class='fa fa-fw fa-thumb-tack'></i>";  //OPCIONAL
 
-		    //Determina el estilo por defecto para el cuadro
-		    $EstiloCuadro="info";
-		    //Si esta completada la pone en verde
-		    if ($registro["porcentaje"]==100)
-		        {
-		            $EstiloCuadro="green";
-		        }
-		    else
-		        {
-		            //Tareas sin completar con alta prioridad y sin vencer pasan a ser naranja o amarillo
-		            if ($registro["prioridad"]=="Alta" || $registro["prioridad"]=="Urgente") $EstiloCuadro="yellow";
-		            //Si la fecha final ya paso entonces pasa a ser rojo
-		            if (strtotime($PCO_FechaOperacion) > strtotime($registro["fecha_fin"]))
-		                $EstiloCuadro="red";
-		        }
-            
-            //Genera la salida
-            $Salida = '
-                <div class="panel panel-'.$EstiloCuadro.'">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div>&nbsp;
-                                '.$EtiquetaIconoTareas.'
-                                '.$EtiquetaCompletado.'
-                                '.$EtiquetaCalendario.'
-                                '.$EtiquetaPersonas.'
-                                '.$EtiquetaPresupuesto.'
-                                '.$EtiquetaHoras.'
-                            </div>
-                            <div class="text-right">
-                                <div class="btn-xs">
-                                '.$registro["titulo"].'
-                                </div>
-                            </div>
-                        </div>
-                        <div class="btn btn-xs btn-block">
-                            <a class="btn btn-xs btn-block btn-default" href="index.php?PCO_Accion=cargar_objeto&objeto=frm:16:1:id:'.$registro["id"].'"><i class="fa fa-edit text-info"></i> Detalles</a>
-                        </div>
-                    </div>
-                </div>';
-            return $Salida;
-		}
 
 
 //#################################################################################
@@ -300,6 +240,48 @@
 
 //#################################################################################
 //#################################################################################
+//Presenta una tarea especifica tomando la informacion desde un registro de BD
+	function PresentarTareaKanban($RegistroTareas)
+		{
+		    global $PCO_FechaOperacion;
+		    global $MULTILANG_FechaLimite,$MULTILANG_AsignadoA,$MULTILANG_InfCategoria;
+            
+            $EtiquetaIconoTareas=  "<i href='javascript:return false;' class='fa fa-fw fa-thumb-tack' data-toggle='tooltip' data-placement='top' title='".$RegistroTareas["categoria"]."' ></i>";
+            $EtiquetaPersonas=  "<i href='javascript:return false;' class='fa fa-fw fa-users' data-toggle='tooltip' data-placement='top' title='".$MULTILANG_AsignadoA.": ".$RegistroTareas["asignado_a"]."' ></i>";
+            $EtiquetaCalendario="<i href='javascript:return false;' class='fa fa-fw fa-calendar' data-toggle='tooltip' data-placement='top' title='".$MULTILANG_FechaLimite.": ".$RegistroTareas["fecha"]."' ></i>";
+
+		    //Determina el estilo por defecto para el cuadro
+		    $EstiloCuadro=$RegistroTareas["estilo"];
+            //Genera la salida
+            $Salida = '
+                <div class="panel panel-'.$EstiloCuadro.'">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div>&nbsp;
+                                '.$EtiquetaIconoTareas.'
+                                '.$EtiquetaCalendario.'
+                                '.$EtiquetaPersonas.'
+                            </div>
+                            <div class="text-center">
+                                <div class="btn-xs">
+                                <b>'.$RegistroTareas["titulo"].'</b>
+                                </div>
+                            </div>
+                            <div class="text-left">
+                                <div class="btn-xs">
+                                <hr style="border-top: 1px dotted; margin:0; padding:0;">
+                                '.$RegistroTareas["descripcion"].'
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+            return $Salida;
+		}
+
+
+//#################################################################################
+//#################################################################################
 /*
 	Function: ExplorarTablerosKanban
 	PResenta la lista de tableros kanban a los que el usuario tiene acceso y permite realizar operaciones en cada uno
@@ -316,168 +298,176 @@ if (@$PCO_Accion=="ExplorarTablerosKanban")
         //Busca las columnas definidas en el tablero
         $ResultadoColumnas=ejecutar_sql("SELECT descripcion FROM ".$TablasCore."kanban WHERE columna='-2' AND titulo='[PRACTICO][ColumnasTablero]' AND login_admintablero='$PCOSESS_LoginUsuario' ")->fetch();
         $ArregloColumnasTablero=explode(",",$ResultadoColumnas["descripcion"]);
+        $ResultadoCategorias=ejecutar_sql("SELECT descripcion FROM ".$TablasCore."kanban WHERE columna='-2' AND titulo='[PRACTICO][CategoriasTareas]' AND login_admintablero='$PCOSESS_LoginUsuario' ")->fetch();
+        $ArregloCategoriasTareas=explode(",",$ResultadoCategorias["descripcion"]);
     ?>
-
-                    <a data-toggle="modal" href="#myModalActividadKanban" title="'.$MULTILANG_FrmDesBoton.'">
-                            <i class="fa fa-bolt fa-3x fa-fw"></i>
-                    </a>
-
-    <!-- INICIO MODAL ADICION DE BOTONES -->
-    <?php abrir_dialogo_modal("myModalActividadKanban",$MULTILANG_AgregarNuevaTarea,"modal-wide"); ?>
-				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+		<script type="" language="JavaScript">
+		    function CargarCrearTarea(Columna)
+		        {
+            		// Se muestra el cuadro modal
+            		$('#myModalActividadKanban').modal('show');
+            
+            		//Hacer que la ventana este siempre por encima
+            		$("#myModalActividadKanban").css("z-index", "1500");
+            		
+            		//Asigna el valor predeterminado segun lo que llegue en columna
+            		document.datosfield.columna.value=Columna;
+		        }
+		</script>
+		
+        <!-- INICIO MODAL ADICION DE TAREAS -->
+        <?php abrir_dialogo_modal("myModalActividadKanban",$MULTILANG_AgregarNuevaTarea,"modal-wide"); ?>
+			<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="PCO_Accion" value="GuardarTareaKanban">
 
-
-		<div class="row">
-			<div class="col col-md-6">
-
-                    <div class="form-group input-group">
-                        <input type="text" name="titulo" class="form-control" placeholder="<?php echo $MULTILANG_FrmTituloBot; ?>">
-                        <span class="input-group-addon">
-                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-                        </span>
-                    </div>
-
-                    <div class="form-group input-group">
-                        <textarea name="descripcion" rows="15" class="form-control" placeholder="<?php echo $MULTILANG_InfDescripcion; ?>"></textarea>
-                        <span class="input-group-addon">
-                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_DesTarea; ?>"><i class="fa fa-question-circle text-info"></i></a>
-                        </span>
-                    </div>
-
-			</div>
-			<div class="col col-md-6">
-
-					<div class="row">
-						<div class="col col-md-6">
-							<label for="fecha"><?php echo $MULTILANG_FechaLimite; ?>:</label>
-                            <div class="form-group input-group">
-                                <input type="text" data-date-format="YYYY-MM-DD" name="fecha" id="fecha" readonly  class="form-control">
-                                <?php
-                                    @$funciones_activacion_datepickers.="
-                                        $(function () {
-                                            $('#fecha').datetimepicker({
-                                                language: '$IdiomaPredeterminado',
-                                                pickTime: false
-                                            });
-                                        });";
-                                ?>
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </span>
-                            </div>
-						</div>
-						<div class="col col-md-6">
-							<label for="estilo"><?php echo $MULTILANG_FrmEstilo; ?> (color):</label>
-							<div class="form-group input-group">
-								<select id="estilo" name="estilo" class="form-control">
-									<option value=""><?php echo $MULTILANG_Ninguno; ?></option>
-									<option value=" "><?php echo $MULTILANG_BtnEstiloSimple; ?></option>
-									<option value=" default "><?php echo $MULTILANG_BtnEstiloPredeterminado; ?> (gris)</option>
-									<option value=" primary "><?php echo $MULTILANG_BtnEstiloPrimario; ?> (azul oscuro)</option>
-									<option value=" success "><?php echo $MULTILANG_BtnEstiloFinalizado; ?> (verde)</option>
-									<option value=" info "><?php echo $MULTILANG_BtnEstiloInformacion; ?> (azul claro)</option>
-									<option value=" warning "><?php echo $MULTILANG_BtnEstiloAdvertencia; ?> (naranja)</option>
-									<option value=" danger "><?php echo $MULTILANG_BtnEstiloPeligro; ?> (rojo)</option>
-								</select>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col col-md-6">
-                            <label for="asignado_a"><?php echo $MULTILANG_AsignadoA; ?></label>
-                            <div class="form-group input-group">
-                                <select id="asignado_a" name="asignado_a" class="selectpicker" data-live-search=true>
-                                    <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
-                                    <?php
-                                        $ResultadoUsuarios=ejecutar_sql("SELECT login,nombre FROM ".$TablasCore."usuario ORDER BY login");
-                                        while($RegistroUsuario=$ResultadoUsuarios->fetch())
-                                            echo "<option value='".$RegistroUsuario["login"]."'>".$RegistroUsuario["nombre"]." (".$RegistroUsuario["login"].") </option>";
-                                    ?>
-                                </select>
-                                <span class="input-group-addon">
-                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_AsignadoADes; ?>"><i class="fa fa-question-circle text-info"></i></a>
-                                </span>
-                            </div>
-						</div>
-						<div class="col col-md-6">
-                            <label for="categoria"><?php echo $MULTILANG_InfCategoria; ?></label>
-                            <div class="form-group input-group">
-                                <select id="categoria" name="categoria" class="form-control">
-                                    <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+        		<div class="row">
+        			<div class="col col-md-6">
         
-                                </select>
-                            </div>
-						</div>
-					</div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="columna"><?php echo $MULTILANG_Columna; ?></label>
                             <div class="form-group input-group">
-                                <select id="columna" name="columna" class="form-control">
-                                    <?php
-                                        $ConteoColumna=1;
-                                        foreach ($ArregloColumnasTablero as $NombreColumna)
-                                            {
-                                                echo "<option value='$ConteoColumna'>$ConteoColumna. $NombreColumna</option>";
-                                                $ConteoColumna++;
-                                            }
-                                    ?>
-                                </select>
+                                <input type="text" name="titulo" class="form-control" placeholder="<?php echo $MULTILANG_FrmTituloBot; ?>">
+                                <span class="input-group-addon">
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                </span>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="peso"><?php echo $MULTILANG_Peso; ?></label>
+        
                             <div class="form-group input-group">
-                                <select id="peso" name="peso" class="form-control">
-                                    <?php
-                                        for ($i=1;$i<=100;$i++)
-                                            echo '<option value="'.$i.'">'.$i.'</option>';
-                                    ?>
-                                </select>
+                                <textarea name="descripcion" rows="15" class="form-control" placeholder="<?php echo $MULTILANG_InfDescripcion; ?>"></textarea>
+                                <span class="input-group-addon">
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_DesTarea; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
                             </div>
-                        </div>
-                    </div>
+        
+        			</div>
+        			<div class="col col-md-6">
+        
+        					<div class="row">
+        						<div class="col col-md-6">
+        							<label for="fecha"><?php echo $MULTILANG_FechaLimite; ?>:</label>
+                                    <div class="form-group input-group">
+                                        <input type="text" data-date-format="YYYY-MM-DD" name="fecha" value="<?php echo $PCO_FechaOperacionGuiones; ?>" id="fecha" readonly  class="form-control">
+                                        <?php
+                                            @$funciones_activacion_datepickers.="
+                                                $(function () {
+                                                    $('#fecha').datetimepicker({
+                                                        language: '$IdiomaPredeterminado',
+                                                        pickTime: false
+                                                    });
+                                                });";
+                                        ?>
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </span>
+                                    </div>
+        						</div>
+        						<div class="col col-md-6">
+        							<label for="estilo"><?php echo $MULTILANG_FrmEstilo; ?> (color):</label>
+        							<div class="form-group input-group">
+        								<select id="estilo" name="estilo" class="form-control">
+        									<option value=""><?php echo $MULTILANG_Ninguno; ?></option>
+        									<option value="default "><?php echo $MULTILANG_BtnEstiloPredeterminado; ?> (gris)</option>
+        									<option value="primary "><?php echo $MULTILANG_BtnEstiloPrimario; ?> (azul oscuro)</option>
+        									<option value="success "><?php echo $MULTILANG_BtnEstiloFinalizado; ?> (verde)</option>
+        									<option value="info "><?php echo $MULTILANG_BtnEstiloInformacion; ?> (azul claro)</option>
+        									<option value="warning "><?php echo $MULTILANG_BtnEstiloAdvertencia; ?> (naranja)</option>
+        									<option value="danger "><?php echo $MULTILANG_BtnEstiloPeligro; ?> (rojo)</option>
+        								</select>
+        							</div>
+        						</div>
+        					</div>
+        
+        					<div class="row">
+        						<div class="col col-md-6">
+                                    <label for="asignado_a"><?php echo $MULTILANG_AsignadoA; ?></label>
+                                    <div class="form-group input-group">
+                                        <select id="asignado_a" name="asignado_a" class="selectpicker" data-live-search=true>
+                                            <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                                            <?php
+                                                $ResultadoUsuarios=ejecutar_sql("SELECT login,nombre FROM ".$TablasCore."usuario ORDER BY login");
+                                                while($RegistroUsuario=$ResultadoUsuarios->fetch())
+                                                    echo "<option value='".$RegistroUsuario["login"]."'>".$RegistroUsuario["nombre"]." (".$RegistroUsuario["login"].") </option>";
+                                            ?>
+                                        </select>
+                                        <span class="input-group-addon">
+                                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_AsignadoADes; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                        </span>
+                                    </div>
+        						</div>
+        						<div class="col col-md-6">
+                                    <label for="categoria"><?php echo $MULTILANG_InfCategoria; ?></label>
+                                    <div class="form-group input-group">
+                                        <select id="categoria" name="categoria" class="form-control">
+                                            <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                                            <?php
+                                                foreach ($ArregloCategoriasTareas as $NombreCategoria)
+                                                    echo "<option value='$NombreCategoria'>$NombreCategoria</option>";
+                                            ?>
+                                        </select>
+                                    </div>
+        						</div>
+        					</div>
 
-			</div>
-		</div>
-                    </form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="columna"><?php echo $MULTILANG_Columna; ?></label>
+                                    <div class="form-group input-group">
+                                        <select id="columna" name="columna" class="form-control">
+                                            <?php
+                                                $ConteoColumna=1;
+                                                foreach ($ArregloColumnasTablero as $NombreColumna)
+                                                    {
+                                                        echo "<option value='$ConteoColumna'>$ConteoColumna. $NombreColumna</option>";
+                                                        $ConteoColumna++;
+                                                    }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="peso"><?php echo $MULTILANG_Peso; ?></label>
+                                    <div class="form-group input-group">
+                                        <select id="peso" name="peso" class="form-control">
+                                            <?php
+                                                for ($i=1;$i<=100;$i++)
+                                                    echo '<option value="'.$i.'">'.$i.'</option>';
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+        
+        			</div>
+        		</div>
+            </form>
     <?php 
         $barra_herramientas_modal='
             <input type="Button" class="btn btn-success" value="'.$MULTILANG_AgregarNuevaTarea.'" onClick="document.datosfield.submit()">
             <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
         cerrar_dialogo_modal($barra_herramientas_modal);
     ?>
-    <!-- FIN MODAL ADICION DE BOTONES -->
+    <!-- FIN MODAL ADICION DE TAREAS -->
 
-
-   
-        
 <?php
 
-
         echo "<div class='panel panel-default well'>
-                <table width='100%'><tr>";
+                <table cellpadding='10' cellspacing='10' border=1 width='100%' style='border: 1px solid lightgray;'><tr>";
                     //Recorre las columnas del tablero
+                    $ConteoColumna=1;
                     foreach ($ArregloColumnasTablero as $NombreColumna) {
-                        echo "<td>";
-                        echo "<i class=''><center><b>".$NombreColumna."</b></center></i>";
-                        echo "<div class='btn btn-info btn-xs'><i class='fa fa-plus fa-fw'></i></div>";
+                        echo "<td valign=top>";
+                        echo "<i class='fa-2x'><center><b>".$NombreColumna."</b></center></i>";
+                        echo "<div class='btn btn-info btn-xs' onclick='CargarCrearTarea(".$ConteoColumna.");'><i class='fa fa-plus fa-fw'></i></div>";
                         echo "<div class='btn btn-default btn-xs'><i class='fa fa-sort-alpha-asc fa-fw'></i></div>";
                         echo "<div class='btn btn-default btn-xs'><i class='fa fa-sort-numeric-asc fa-fw'></i></div>";
                         echo "<div class='btn btn-default btn-xs'><i class='fa fa-sort-amount-asc fa-fw'></i></div>";
                         echo "<div class='btn btn-default btn-xs'><i class='fa fa-random fa-fw'></i></div>";
-                        echo "<hr>";
+                        echo "<br><br>";
                         //Busca las tarjetas de la columna
-                        
-                        
-                        
-                        
-                        
+                        $ResultadoTareas=ejecutar_sql("SELECT * FROM ".$TablasCore."kanban WHERE columna=$ConteoColumna AND login_admintablero='$PCOSESS_LoginUsuario' ORDER BY peso  ");
+                        while ($RegistroTareas=$ResultadoTareas->fetch())
+                            echo PresentarTareaKanban($RegistroTareas);
                         
                         echo "</td>";
+                        $ConteoColumna++;
                     }
         echo "  <tr></table>
             

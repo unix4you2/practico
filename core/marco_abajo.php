@@ -527,7 +527,7 @@
         <script type="text/javascript">
             PCOJS_ListaCamposValidar="'.$POSTForm_ListaCamposObligatorios.'".split("|");
             PCOJS_ListaTitulosValidar="'.$POSTForm_ListaTitulosObligatorios.'".split("|");
-            function PCOJS_ValidarCamposYProcesarFormulario()
+            function PCOJS_ValidarCamposYProcesarFormulario(AnularSubmit=0)
                 {
                     MensajeCamposObligatorios="";
                     //Recorre todos los campos de la lista en busca de sus valores
@@ -545,9 +545,15 @@
                         }
                     // Valida si hay errores y muestra el emerente, sino continua adelante y procesa el form
                     if (MensajeCamposObligatorios!="")
-                        PCOJS_MostrarMensaje("'.$MULTILANG_AvisoSistema.'", MensajeCamposObligatorios);
+                        {
+                            PCOJS_MostrarMensaje("'.$MULTILANG_AvisoSistema.'", MensajeCamposObligatorios);
+                            return false;
+                        }
                     else
-                        document.getElementById(\'datos\').submit();
+                        {
+                            if (AnularSubmit==0)
+                                document.getElementById(\'datos\').submit();
+                        }
                 }
         </script> ';
 
