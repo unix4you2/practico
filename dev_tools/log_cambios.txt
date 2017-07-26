@@ -54,6 +54,7 @@ LogCambios="
 * Fixed: Agregado el parametro PCOJS_Evento por defecto a todos los eventos JS generados.
 * Added: Validacion de entrada para campos de texto largo (textareas).
 * Added: Nuevo módulo para manejo de tableros Kanban con el fin de apoyar procesos de desarrollo implicitos de la herramienta y las aplicaciones de cada usuario.
+* Enhan: Ahora la funcion existente de validacion de campos en formularios permite anular el envío del formulario mediante un parámetro extra que anula esa funcionalidad.  Util si se desea interceptar la operación o realizar validaciones de manera independiente.
 
 "
 

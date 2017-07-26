@@ -46,167 +46,6 @@
 
 
 
-
-
-//#################################################################################
-//#################################################################################
-//Presenta el planeador de trabajo para un mes determinado
-
-	function mostrar_calendario($mes,$ano,$porcentaje_filtro,$codigo_empresa,$ano_aplicacion)
-		{
-		    global $PCO_FechaOperacion;
-		    global $PCO_FestivosColombia;
-			global  $y,$dia_festivo,$mes_festivo,$festivo; //usadas por websys_festivos
-
-		   //construyo la tabla general
-		   echo '<table class="table table-responsive table-condensed table-bordered " width="100%" cellspacing="5" cellpadding="5" border="0">';
-		   //fila con todos los días de la semana
-		   echo ' <tr>
-					<td width="14%" align=center bgcolor="#63635F"><font color=white><b>Lunes</b></font></td>
-					<td width="14%" align=center bgcolor="#63635F"><font color=white><b>Martes</b></font></td>
-					<td width="14%" align=center bgcolor="#63635F"><font color=white><b>Miercoles</b></font></td>
-					<td width="14%" align=center bgcolor="#63635F"><font color=white><b>Jueves</b></font></td>
-					<td width="14%" align=center bgcolor="#63635F"><font color=white><b>Viernes</b></font></td>
-					<td width="14%" align=center bgcolor="#63635F"><font color=white><b>Sabado</b></font></td>
-					<td width="14%" align=center bgcolor="#63635F"><font color=white><b>Domingo</b></font></td>
-				 </tr>';
-
-		   //Variable para llevar la cuenta del dia actual
-		   $dia_actual = 1;
-
-		   //calculo el numero del dia de la semana del primer dia
-		   $numero_dia = calcula_numero_dia_semana(1,$mes,$ano);
-		   //echo "Numero del dia de demana del primer: $numero_dia <br>";
-
-		   //calculo el último dia del mes
-		   $ultimo_dia = ultimoDia($mes,$ano);
-
-			//PARTE 1: Escribe la primera fila de la semana
-			echo "<tr>";
-			for ($i=0;$i<7;$i++)
-				{
-					if ($i < $numero_dia)
-						{
-						 //si el dia de la semana i es menor que el numero del primer dia de la semana no pongo nada en la celda
-						 echo '<td></td>';
-						}
-					else 
-						{
-							//Busca tareas para ese dia
-							if ($dia_actual>=10) $dia_busqueda=$dia_actual;
-							if ($dia_actual<10 ) $dia_busqueda="0".$dia_actual;
-							if (strlen($mes)<2 ) $mes="0".$mes;
-							
-							$fecha_busqueda=$ano.$mes.$dia_busqueda;
-							$cadena_tareas="";
-							$resultado = ejecutar_sql("SELECT * FROM sgsst_planeador WHERE codigo_empresa='$codigo_empresa' AND ano_aplicacion='$ano_aplicacion' AND '$fecha_busqueda' >=fecha_inicio  AND '$fecha_busqueda' <= fecha_fin AND $porcentaje_filtro ");
-							$cantidad_tareas=0;
-							while($registro = $resultado->fetch())
-								{
-        						    //Agrega el cuadro con informacion de la tarea
-        							$cadena_tareas.=SGSST_PresentarTarea($registro);
-        							$cantidad_tareas++;
-								}
-							
-							//Determina si el dia es festivo para presentar titulos
-        					$cadena_festivo="";
-        					$color_festivo="";
-        					if ($numero_dia==6) $color_festivo="#E0E0E0"; //Domingo
-        					if (isset($PCO_FestivosColombia[$ano*1][$mes*1][$dia_busqueda*1]))
-        						{
-        							$cadena_festivo=" <i class='text-info'>(Festivo)</i> ";
-        							$color_festivo="#FFFFCF";
-        						}
-
-        					//OPCIONAL --- Usa la cantidad de tareas para agregar un titulo al dia del mes 
-        					$titulo_cantidad_tareas="";
-        					/*if ($cantidad_tareas!=0) $titulo_cantidad_tareas='<span class="badge fa fa-1x">'.$cantidad_tareas.' tarea(s)</span>';*/
-        					
-							if ($dia_actual<10) $dia_actual="0".$dia_actual;
-
-        					//Imprime la celda con los datos
-        					echo '<td valign=top bgcolor="'.$color_festivo.'">';
-        					    echo '<div class="fa-2x"><b>'.$dia_actual.'</b>'.$cadena_festivo.'</div>'.$titulo_cantidad_tareas.'';
-            					echo $cadena_tareas;
-        					echo '</td>';
-
-							$dia_actual++;
-						}
-				}
-			echo "</tr>";
-			//PARTE 1: Finaliza la primera fila del calendario
-
-            //////////////////////////////////////////////////////////////
-			//PARTE 2: Recorre todos los demás días hasta el final del mes
-			$numero_dia = 0;
-			while ($dia_actual <= $ultimo_dia)
-				{
-					//si estamos a principio de la semana escribo el <TR>
-					if ($numero_dia == 0)
-						echo "<tr>";
-					
-					//Busca tareas para ese dia
-					if ($dia_actual>=10) $dia_busqueda=$dia_actual;
-					if ($dia_actual<10 ) $dia_busqueda="0".$dia_actual;
-					if (strlen($mes)<2 ) $mes="0".$mes;
-					
-					$fecha_busqueda=$ano.$mes.$dia_busqueda;
-					$cadena_tareas="";
-					$resultado = ejecutar_sql("SELECT * FROM sgsst_planeador WHERE codigo_empresa='$codigo_empresa' AND ano_aplicacion='$ano_aplicacion' AND '$fecha_busqueda' >=fecha_inicio  AND '$fecha_busqueda' <= fecha_fin AND $porcentaje_filtro ");
-					$cantidad_tareas=0;
-					while($registro = $resultado->fetch())
-						{
-						    //Agrega el cuadro con informacion de la tarea
-							$cadena_tareas.=SGSST_PresentarTarea($registro);
-							$cantidad_tareas++;
-						}
-					
-					//Determina si el dia es festivo para presentar titulos
-					$cadena_festivo="";
-					$color_festivo="";
-					if ($numero_dia==6) $color_festivo="#E0E0E0"; //Domingo
-					if (isset($PCO_FestivosColombia[$ano*1][$mes*1][$dia_busqueda*1]))
-						{
-							$cadena_festivo=" <i class='text-info'>(Festivo)</i> ";
-							$color_festivo="#FFFFCF";
-						}
-
-					//OPCIONAL --- Usa la cantidad de tareas para agregar un titulo al dia del mes 
-					$titulo_cantidad_tareas="";
-					/*if ($cantidad_tareas!=0) $titulo_cantidad_tareas='<span class="badge fa fa-1x">'.$cantidad_tareas.' tarea(s)</span>';*/
-
-					if ($dia_actual<10) $dia_actual="0".$dia_actual;
-					
-					//Imprime la celda con los datos
-					echo '<td valign=top bgcolor="'.$color_festivo.'">';
-					    echo '<div class="fa-2x"><b>'.$dia_actual.'</b>'.$cadena_festivo.'</div>'.$titulo_cantidad_tareas.'';
-    					echo $cadena_tareas;
-					echo '</td>';
-					
-					//Se mueve al dia siguiente
-					$dia_actual++;
-					$numero_dia++;
-					//Si es el ultimo de la semana, me pongo al principio de la semana y escribo el </tr>
-					if ($numero_dia == 7){
-						$numero_dia = 0;
-						echo "</tr>";
-					}
-				}
-
-			//OPCIONAL --- compruebo que celdas me faltan por escribir vacias de la última semana del mes 
-			/*for ($i=$numero_dia;$i<7;$i++)
-				echo '<td></td>';*/
-
-            //PARTE 2: Finalizacion
-			echo "</tr>";
-			
-			//Finaliza la tabla inicial (la responsive)
-			echo "</table>";
-		}
-
-
-
-
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -238,10 +77,56 @@
 		}
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: agregar_funciones_edicion_objeto
+	Genera el codigo HTML y CSS correspondiente los botones y demas elementos para la edicion en caliente de un objeto
+
+	Variables de entrada:
+
+		registro_campos - listado de campos sobre el formulario en cuestion
+		tipo_elemento - Tipo de elemento a ser generado
+
+	Salida:
+
+		HTML, CSS y Javascript asociado al objeto publicado dentro del formulario
+
+	Ver tambien:
+		<cargar_formulario>
+*/
+	function AgregarFuncionesEdicionTarea($RegistroTareas,$ColumnasDisponibles)
+		{
+		    global $MULTILANG_Evento,$TablasCore,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
+			$salida='';
+            //Determina estados de activacion o no para controles segun valores actuales del registro
+            $EstadoDeshabilitadoMoverIzquierda="";
+            $EstadoDeshabilitadoMoverDerecha="";
+            $EstadoDeshabilitadoMoverArriba="";
+            if($RegistroTareas["columna"]-1<=0) $EstadoDeshabilitadoMoverIzquierda="disabled";
+            if($RegistroTareas["columna"]+1>$ColumnasDisponibles) $EstadoDeshabilitadoMoverDerecha="disabled";
+            if($RegistroTareas["peso"]-1<=0) $EstadoDeshabilitadoMoverArriba="disabled";
+
+            //Pone controles
+            $salida='<div id="PCOEditorContenedor_Col'.$RegistroTareas["columna"].'_'.$RegistroTareas["id"].'" style="margin:2px; display:none; visibility:hidden; position: absolute; z-index:1000;">
+                    <div align="center" style="display: inline-block">
+                        <a class="btn btn-xs btn-warning" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'" href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&campo='.$RegistroTareas["id"].'&formulario='.$RegistroTareas["formulario"].'&popup_activo=FormularioCampos&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-fw fa-pencil"></i></a>
+                        <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverIzquierda.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Anterior.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$RegistroTareas["formulario"].'&accion_retorno=editar_formulario&valor='.($RegistroTareas["columna"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-left"></i></a>
+                        <a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmAumentaPeso.' a '.($RegistroTareas["peso"]+1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$RegistroTareas["formulario"].'&accion_retorno=editar_formulario&valor='.($RegistroTareas["peso"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-down"></i></a>
+                        <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverArriba.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDisminuyePeso.' a '.($RegistroTareas["peso"]-1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$RegistroTareas["formulario"].'&accion_retorno=editar_formulario&valor='.($RegistroTareas["peso"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-up"></i></a>
+                        <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$RegistroTareas["formulario"].'&accion_retorno=editar_formulario&valor='.($RegistroTareas["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-right"></i></a>
+                        <a onclick=\'return confirm("'.$MULTILANG_FrmAdvDelCampo.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=eliminar_campo_formulario&campo='.$RegistroTareas["id"].'&formulario='.$RegistroTareas["formulario"].'&nombre_tabla='.$registro_formulario["tabla_datos"].'\' class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-trash"></i></a>
+                    </div>
+                </div>';
+
+			return $salida;
+		}
+
+
 //#################################################################################
 //#################################################################################
 //Presenta una tarea especifica tomando la informacion desde un registro de BD
-	function PresentarTareaKanban($RegistroTareas)
+	function PresentarTareaKanban($RegistroTareas,$ColumnasDisponibles)
 		{
 		    global $PCO_FechaOperacion;
 		    global $MULTILANG_FechaLimite,$MULTILANG_AsignadoA,$MULTILANG_InfCategoria;
@@ -253,8 +138,15 @@
 		    //Determina el estilo por defecto para el cuadro
 		    $EstiloCuadro=$RegistroTareas["estilo"];
             //Genera la salida
+            $AccionesTarea=AgregarFuncionesEdicionTarea($RegistroTareas,$ColumnasDisponibles);
+
+            $EventoComplemento='onmouseenter="$(this).css(\'border\', \'1px solid\'); $(this).css(\'border-color\', \'#ff0000\');  //c2a7a7
+            $(\'#PCOEditorContenedor_Col'.$RegistroTareas["columna"].'_'.$RegistroTareas["id"].'\').css({\'visibility\':\'visible\'});
+            $(\'#PCOEditorContenedor_Col'.$RegistroTareas["columna"].'_'.$RegistroTareas["id"].'\').css({\'display\':\'block\'}); "
+            onmouseleave="$(this).css(\'border\', \'0px solid\'); $(\'#PCOEditorContenedor_Col'.$RegistroTareas["columna"].'_'.$RegistroTareas["id"].'\').css({\'visibility\':\'hidden\'}); $(\'#PCOEditorContenedor_Col'.$RegistroTareas["columna"].'_'.$RegistroTareas["id"].'\').css({\'display\':\'none\'});  "';
+
             $Salida = '
-                <div class="panel panel-'.$EstiloCuadro.'">
+                <div class="panel panel-'.$EstiloCuadro.'" '.$EventoComplemento.'>
                     <div class="panel-heading">
                         <div class="row">
                             <div>&nbsp;
@@ -272,6 +164,9 @@
                                 <hr style="border-top: 1px dotted; margin:0; padding:0;">
                                 '.$RegistroTareas["descripcion"].'
                                 </div>
+                            </div>
+                            <div class="text-center">
+                                '.$AccionesTarea.'<br>
                             </div>
                         </div>
                     </div>
@@ -449,24 +344,27 @@ if (@$PCO_Accion=="ExplorarTablerosKanban")
 <?php
 
         echo "<div class='panel panel-default well'>
-                <table cellpadding='10' cellspacing='10' border=1 width='100%' style='border: 1px solid lightgray;'><tr>";
+                <table cellpadding='10' cellspacing='10' border=1 width='100%' class='table table-responsive' style='border: 1px solid lightgray;'><tr>";
                     //Recorre las columnas del tablero
                     $ConteoColumna=1;
+                    $ColumnasDisponibles=count($ArregloColumnasTablero);
+                    $AnchoColumnas=round(100/$ColumnasDisponibles);
                     foreach ($ArregloColumnasTablero as $NombreColumna) {
-                        echo "<td valign=top>";
-                        echo "<i class='fa-2x'><center><b>".$NombreColumna."</b></center></i>";
-                        echo "<div class='btn btn-info btn-xs' onclick='CargarCrearTarea(".$ConteoColumna.");'><i class='fa fa-plus fa-fw'></i></div>";
+                        echo "<td valign=top width='$AnchoColumnas%'>";
+                        echo "<div class='btn pull-left'><i class='fa-1x'><center><b>".$NombreColumna."</b></center></i></div>";
+                        echo "<div class='btn btn-default btn-xs pull-right' onclick='CargarCrearTarea(".$ConteoColumna.");'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
+                        /*
                         echo "<div class='btn btn-default btn-xs'><i class='fa fa-sort-alpha-asc fa-fw'></i></div>";
                         echo "<div class='btn btn-default btn-xs'><i class='fa fa-sort-numeric-asc fa-fw'></i></div>";
                         echo "<div class='btn btn-default btn-xs'><i class='fa fa-sort-amount-asc fa-fw'></i></div>";
-                        echo "<div class='btn btn-default btn-xs'><i class='fa fa-random fa-fw'></i></div>";
-                        echo "<br><br>";
+                        echo "<div class='btn btn-default btn-xs'><i class='fa fa-random fa-fw'></i></div>";*/
+                        echo "<br><br><div id='MarcoTareasColumna$ConteoColumna'>";
                         //Busca las tarjetas de la columna
                         $ResultadoTareas=ejecutar_sql("SELECT * FROM ".$TablasCore."kanban WHERE columna=$ConteoColumna AND login_admintablero='$PCOSESS_LoginUsuario' ORDER BY peso  ");
                         while ($RegistroTareas=$ResultadoTareas->fetch())
-                            echo PresentarTareaKanban($RegistroTareas);
-                        
-                        echo "</td>";
+                            echo PresentarTareaKanban($RegistroTareas,$ColumnasDisponibles);
+
+                        echo "</div></td>";
                         $ConteoColumna++;
                     }
         echo "  <tr></table>
