@@ -153,6 +153,7 @@
 	$MULTILANG_Pequeno='छोटा';
 	$MULTILANG_Personalizado='रिवाज';
     $MULTILANG_Pestana='टैब';
+    $MULTILANG_Plantilla='Template';
 	$MULTILANG_Predeterminado='चूक';
     $MULTILANG_Previo='पिछला';
 	$MULTILANG_Primero='पहले';
@@ -1231,3 +1232,13 @@
     $MULTILANG_AsignadoA='Assigned to';
     $MULTILANG_AsignadoADes='प्रणाली में पंजीकृत उपयोगकर्ता कार्य या गतिविधि एस्टा की यही कारण है कि पूरा करने के लिए जिम्मेदार (यदि लागू हो) है';
     $MULTILANG_FechaLimite='Fecha de finalizaci&oacute;n';
+    $MULTILANG_DelKanban='You are going to delete a task from the board and this action could not be undone later. Are you sure?';
+    $MULTILANG_Historia1='Minimal user history: [Rol,Functionality,Purpose]';
+    $MULTILANG_Historia1Des='As ________ I need ___________ with the purpose of ________.';
+    $MULTILANG_Historia2='Intermediate user history: [Rol,Functionality,Purpose]+[Context/Acceptance requirements,Event]';
+    $MULTILANG_Historia2Des='As ________ I need ___________ with the purpose of ________.BRBRIn case _______ it should _______';
+    $MULTILANG_Historia3='Detailed user history: [ID,Rol,Functionality,Purpose]+[Stage,Context/Acceptance requirements,Event]';
+    $MULTILANG_Historia3Des='ID: ______BRAs ________ I need ___________ with the purpose of ________.BRBRScene: ________. In case _______ it should _______';
+    $MULTILANG_ListaColumnas='Columns list';
+    $MULTILANG_ListaCategorias='Category list';
+

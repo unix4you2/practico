@@ -153,6 +153,7 @@
 	$MULTILANG_Pequeno='Pequeno';
 	$MULTILANG_Personalizado='Personalizadas';
     $MULTILANG_Pestana='Aba';
+    $MULTILANG_Plantilla='Template';
 	$MULTILANG_Predeterminado='Padrão';
     $MULTILANG_Previo='Anterior';
 	$MULTILANG_Primero='Primeiro';
@@ -1233,3 +1234,13 @@
     $MULTILANG_AsignadoA='Assigned to';
     $MULTILANG_AsignadoADes='Utilizador registado no sistema é responsável pelo que a conclusão da tarefa ou atividade ESTA (se aplicável)';
     $MULTILANG_FechaLimite='Fecha de finalizaci&oacute;n';
+    $MULTILANG_DelKanban='You are going to delete a task from the board and this action could not be undone later. Are you sure?';
+    $MULTILANG_Historia1='Minimal user history: [Rol,Functionality,Purpose]';
+    $MULTILANG_Historia1Des='As ________ I need ___________ with the purpose of ________.';
+    $MULTILANG_Historia2='Intermediate user history: [Rol,Functionality,Purpose]+[Context/Acceptance requirements,Event]';
+    $MULTILANG_Historia2Des='As ________ I need ___________ with the purpose of ________.BRBRIn case _______ it should _______';
+    $MULTILANG_Historia3='Detailed user history: [ID,Rol,Functionality,Purpose]+[Stage,Context/Acceptance requirements,Event]';
+    $MULTILANG_Historia3Des='ID: ______BRAs ________ I need ___________ with the purpose of ________.BRBRScene: ________. In case _______ it should _______';
+    $MULTILANG_ListaColumnas='Columns list';
+    $MULTILANG_ListaCategorias='Category list';
+

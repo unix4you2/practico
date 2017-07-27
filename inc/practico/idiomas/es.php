@@ -154,6 +154,7 @@
 	$MULTILANG_Pequeno='peque&ntilde;o';
 	$MULTILANG_Personalizado='Personalizado';
     $MULTILANG_Pestana='Pesta&ntilde;a';
+    $MULTILANG_Plantilla='Plantilla';
 	$MULTILANG_Predeterminado='Predeterminado';
     $MULTILANG_Previo='Previo';
     $MULTILANG_Primero='Primero';
@@ -1232,3 +1233,13 @@
     $MULTILANG_AsignadoA='Asignada a';
     $MULTILANG_AsignadoADes='Usuario registrado en el sistema que es responsable por la finalizaci&oacute;n de esta tarea o actividad (si aplica)';
     $MULTILANG_FechaLimite='Fecha de vencimiento';
+    $MULTILANG_DelKanban='Usted va a eliminar una tarea del tablero y esta accion no se puede deshacer posteriormente.  Esta seguro que desea continuar?';
+    $MULTILANG_Historia1='Historia de usuario minima: [Rol,Funcionalidad,Finalidad]';
+    $MULTILANG_Historia1Des='Como ________ Se necesita ___________ con el fin de ________.';
+    $MULTILANG_Historia2='Historia de usuario intermedia: [Rol,Funcionalidad,Finalidad]+[Contexto/Criterio aceptacion,Evento]';
+    $MULTILANG_Historia2Des='Como ________ Se necesita ___________ con el fin de ________.BRBREn caso que _______ se debe _______';
+    $MULTILANG_Historia3='Historia de usuario detallada: [ID,Rol,Funcionalidad,Finalidad]+[Escenario,Contexto/Criterio aceptacion,Evento]';
+    $MULTILANG_Historia3Des='ID: ______BRComo ________ Se necesita ___________ con el fin de ________.BRBREscenario: ________. En caso que _______ se debe _______';
+    $MULTILANG_ListaColumnas='Lista de columnas';
+    $MULTILANG_ListaCategorias='Lista de categorias';
+
