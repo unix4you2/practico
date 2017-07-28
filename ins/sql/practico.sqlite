@@ -313,6 +313,7 @@ CREATE TABLE core_informe (
   variables_filtro text,
   soporte_datatable text DEFAULT 'N',
   formulario_filtrado text DEFAULT ''
+  tamano_paginacion integer DEFAULT 10,
 
 );
 

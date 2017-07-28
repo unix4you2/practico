@@ -776,6 +776,8 @@
 	$MULTILANG_BtnEstiloAdvertencia='Estilo advertencia';
 	$MULTILANG_BtnEstiloPeligro='Estilo peligro';
 	$MULTILANG_InfEditableLinea='Editable en l&iacute;nea';
+	$MULTILANG_InfPaginacionDatatable='Tama&ntilde;o de p&aacute;gina en DataTables';
+	$MULTILANG_InfPaginacionDatatableDes='Indica el n&uacute;mero de registros que son presentados en los resultados de manera predeterminada';
 	
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';

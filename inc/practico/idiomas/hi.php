@@ -778,6 +778,8 @@
 	$MULTILANG_BtnEstiloAdvertencia='चेतावनी शैली';
 	$MULTILANG_BtnEstiloPeligro='डेंजर शैली';
 	$MULTILANG_InfEditableLinea='ऑनलाइन संपादन योग्य';
+	$MULTILANG_InfPaginacionDatatable='Page size for DataTables';
+	$MULTILANG_InfPaginacionDatatableDes='Tells Practico how many records should it show in default view of a datatable';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='संपादन मेनू आइटम';
@@ -1241,4 +1243,3 @@
     $MULTILANG_Historia3Des='ID: ______BRAs ________ I need ___________ with the purpose of ________.BRBRScene: ________. In case _______ it should _______';
     $MULTILANG_ListaColumnas='Columns list';
     $MULTILANG_ListaCategorias='Category list';
-

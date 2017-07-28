@@ -18,6 +18,8 @@ index.php
 core/comunes.php
 core/formularios.php
 core/marco_abajo.php
+core/marco_chat.php
+core/informes.php
 core/kanban.php
 core/marco_dev.php
 core/marco_nav.php
@@ -55,6 +57,7 @@ LogCambios="
 * Added: Validacion de entrada para campos de texto largo (textareas).
 * Added: Nuevo módulo para manejo de tableros Kanban con el fin de apoyar procesos de desarrollo implicitos de la herramienta y las aplicaciones de cada usuario.
 * Enhan: Ahora la funcion existente de validacion de campos en formularios permite anular el envío del formulario mediante un parámetro extra que anula esa funcionalidad.  Util si se desea interceptar la operación o realizar validaciones de manera independiente.
+* Added: Durante la creación de informes se puede establecer ahora el tamaño de página predeterminado (cuántos registros presentar por página).
 
 "
 
@@ -81,6 +84,7 @@ ALTER TABLE core_kanban ADD INDEX columna(columna);
 ALTER TABLE core_kanban ADD INDEX login_admintablero(login_admintablero);
 INSERT INTO core_kanban (login_admintablero,titulo,descripcion,columna) VALUES ('admin','[PRACTICO][ColumnasTablero]', 'Analisis,Diseno,Desarrollo,Pruebas,Terminado,Produccion','-2');
 INSERT INTO core_kanban (login_admintablero,titulo,descripcion,columna) VALUES ('admin','[PRACTICO][CategoriasTareas]', 'FrontEnd,BackEnd,Documentacion','-2');
+ALTER TABLE core_informe ADD tamano_paginacion int(11) DEFAULT 10;
 
 "
 

@@ -778,6 +778,8 @@
 	$MULTILANG_BtnEstiloAdvertencia='Warning style';
 	$MULTILANG_BtnEstiloPeligro='Danger style';
 	$MULTILANG_InfEditableLinea='Online editable';
+	$MULTILANG_InfPaginacionDatatable='Page size for DataTables';
+	$MULTILANG_InfPaginacionDatatableDes='Tells Practico how many records should it show in default view of a datatable';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';

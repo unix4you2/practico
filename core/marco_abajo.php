@@ -232,31 +232,38 @@
             <?php
                 //Desglosa la cadena de posibles tablas con formato DataTable y las convierte
                 $TablasDataTable=@explode("|",$PCO_InformesDataTable);
+                $TablasDataTablePaginaciones=@explode("|",$PCO_InformesDataTablePaginaciones);
                 for ($i=0; $i<count($TablasDataTable);$i++)
-                    echo '
-                        var oTable'.$i.' = $("#'.$TablasDataTable[$i].'").dataTable(
-                            {
-                                "scrollX": true,
-                                "bAutoWidth": true,
-                                "fnInitComplete": function() {
-                                this.fnAdjustColumnSizing(true);
-                                },
-                                "language": {
-                                    "lengthMenu": "'.$MULTILANG_Mostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
-                                    "zeroRecords": "Nothing found - sorry",
-                                    "info": "'.$MULTILANG_InfDataTableViendoP.' _PAGE_ '.$MULTILANG_InfDataTableDe.' _PAGES_",
-                                    "infoEmpty": "'.$MULTILANG_InfDataTableNoRegistrosDisponibles.'",
-                                    "infoFiltered": "('.$MULTILANG_InfDataTableFiltradoDe.' _MAX_ '.$MULTILANG_InfDataTableRegTotal.')",
-                                    oPaginate: { sFirst:"'.$MULTILANG_Primero.'",sLast:"'.$MULTILANG_Ultimo.'",sNext:"'.$MULTILANG_Siguiente.'",sPrevious:"'.$MULTILANG_Previo.'" },
-                                    sEmptyTable:"'.$MULTILANG_InfDataTableNoDatos.'",
-                                    sSearch:"'.$MULTILANG_Buscar.':",
-                                    sLoadingRecords:"'.$MULTILANG_Cargando.'...",
-                                    sProcessing:"'.$MULTILANG_Procesando.'...",
-                                    sZeroRecords:"'.$MULTILANG_InfDataTableNoRegistros.'"
+                    {
+                        $Paginacion=trim($TablasDataTablePaginaciones[$i]);
+                        if ($Paginacion=="" || $Paginacion==0) $Paginacion=10;
+                        echo '
+                            //alert(" '.$TablasDataTable[$i].'  '.$Paginacion.'"); //Depuracion solamente
+                            var oTable'.$i.' = $("#'.$TablasDataTable[$i].'").dataTable(
+                                {
+                                    "pageLength": '.$Paginacion.',
+                                    "scrollX": true,
+                                    "bAutoWidth": true,
+                                    "fnInitComplete": function() {
+                                    this.fnAdjustColumnSizing(true);
+                                    },
+                                    "language": {
+                                        "lengthMenu": "'.$MULTILANG_Mostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
+                                        "zeroRecords": "Nothing found - sorry",
+                                        "info": "'.$MULTILANG_InfDataTableViendoP.' _PAGE_ '.$MULTILANG_InfDataTableDe.' _PAGES_",
+                                        "infoEmpty": "'.$MULTILANG_InfDataTableNoRegistrosDisponibles.'",
+                                        "infoFiltered": "('.$MULTILANG_InfDataTableFiltradoDe.' _MAX_ '.$MULTILANG_InfDataTableRegTotal.')",
+                                        oPaginate: { sFirst:"'.$MULTILANG_Primero.'",sLast:"'.$MULTILANG_Ultimo.'",sNext:"'.$MULTILANG_Siguiente.'",sPrevious:"'.$MULTILANG_Previo.'" },
+                                        sEmptyTable:"'.$MULTILANG_InfDataTableNoDatos.'",
+                                        sSearch:"'.$MULTILANG_Buscar.':",
+                                        sLoadingRecords:"'.$MULTILANG_Cargando.'...",
+                                        sProcessing:"'.$MULTILANG_Procesando.'...",
+                                        sZeroRecords:"'.$MULTILANG_InfDataTableNoRegistros.'"
+                                    }
                                 }
-                            }
-                        );
-                    ';
+                            );
+                        ';
+                    }
             ?>
         });
 

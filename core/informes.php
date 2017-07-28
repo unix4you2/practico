@@ -573,7 +573,7 @@ if ($PCO_Accion=="actualizar_informe")
 		if ($mensaje_error=="")
 			{
 				// Actualiza los datos 
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET formulario_filtrado=?, soporte_datatable=?, variables_filtro=?, genera_pdf=?, formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=? WHERE id=? ","$formulario_filtrado$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$id");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET tamano_paginacion=?, formulario_filtrado=?, soporte_datatable=?, variables_filtro=?, genera_pdf=?, formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=? WHERE id=? ","$tamano_paginacion$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$id");
 				auditar("Actualiza informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="editar_informe">
@@ -2029,16 +2029,32 @@ if ($PCO_Accion=="editar_informe")
                 </span>
             </div>
 
-            <label for="soporte_datatable"><?php echo $MULTILANG_InfDataTableTit; ?>:</label>
-            <div class="form-group input-group">
-                <select id="soporte_datatable" name="soporte_datatable" class="form-control" >
-                    <option value="S" <?php if ($registro_informe["soporte_datatable"]=="S") echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
-                    <option value="N" <?php if ($registro_informe["soporte_datatable"]=="N") echo 'selected'; ?> ><?php echo $MULTILANG_No; ?></option>
-                </select>
-                <span class="input-group-addon">
-                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_InfDataTableDes; ?>"><i class="fa fa-question-circle fa-fw"></i></a>
-                </span>
+            <div class="row">
+                <div class="col col-md-6">
+                    <label for="soporte_datatable"><?php echo $MULTILANG_InfDataTableTit; ?>:</label>
+                    <div class="form-group input-group">
+                        <select id="soporte_datatable" name="soporte_datatable" class="form-control" >
+                            <option value="S" <?php if ($registro_informe["soporte_datatable"]=="S") echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
+                            <option value="N" <?php if ($registro_informe["soporte_datatable"]=="N") echo 'selected'; ?> ><?php echo $MULTILANG_No; ?></option>
+                        </select>
+                        <span class="input-group-addon">
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_InfDataTableDes; ?>"><i class="fa fa-question-circle fa-fw"></i></a>
+                        </span>
+                    </div>
+                </div>
+                <div class="col col-md-6">
+                    <label for="tamano_paginacion"><?php echo $MULTILANG_InfPaginacionDatatable; ?>:</label>
+                    <div class="form-group input-group">
+                        <input name="tamano_paginacion" value="<?php echo $registro_informe['tamano_paginacion']; ?>" type="text" class="form-control">
+                        <span class="input-group-addon">
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_InfPaginacionDatatableDes; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                        </span>
+                    </div>
+                </div>
             </div>
+
+
+
 
             </form>
             <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa  fa-floppy-o"></i> <?php echo $MULTILANG_InfActualizar; ?></a>
@@ -2178,7 +2194,7 @@ if ($PCO_Accion=="guardar_informe")
 			{
 				$agrupamiento='';
                 $ordenamiento='';
-                ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|',?,?,?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtro");
+                ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|',?,?,?,?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtro$_SeparadorCampos_$tamano_paginacion");
 				$id=obtener_ultimo_id_insertado($ConexionPDO);
 				auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -2245,9 +2261,10 @@ if ($PCO_Accion=="guardar_informe")
 							$variables_filtro=$registro["variables_filtro"];
 							$soporte_datatable=$registro["soporte_datatable"];
 							$formulario_filtrado=$registro["formulario_filtrado"];
+							$tamano_paginacion=$registro["tamano_paginacion"];
 
 							// Inserta el nuevo informe
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado");
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion");
 							
 							$idObjetoInsertado=obtener_ultimo_id_insertado($ConexionPDO);
 
@@ -2596,9 +2613,10 @@ if ($PCO_Accion=="confirmar_importacion_informe")
 				$variables_filtro=base64_decode($xml_importado->core_informe[0]->variables_filtro);
 				$soporte_datatable=base64_decode($xml_importado->core_informe[0]->soporte_datatable);
 				$formulario_filtrado=base64_decode($xml_importado->core_informe[0]->formulario_filtrado);
+				$tamano_paginacion=base64_decode($xml_importado->core_informe[0]->tamano_paginacion);
 
 				// Inserta el nuevo informe
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposParaID.$ListaCamposSinID_informe.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposParaID.$ListaCamposSinID_informe.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion");
 				
 				//Determina el ID del registro
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
@@ -3041,17 +3059,29 @@ if ($PCO_Accion=="administrar_informes")
                 </span>
             </div>
 
-            <label for="soporte_datatable"><?php echo $MULTILANG_InfDataTableTit; ?>:</label>
-            <div class="form-group input-group">
-                <select id="soporte_datatable" name="soporte_datatable" class="selectpicker" >
-                    <option value="S"><?php echo $MULTILANG_Si; ?></option>
-                    <option value="N" selected><?php echo $MULTILANG_No; ?></option>
-                </select>
-                <span class="input-group-addon">
-                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_InfDataTableDes; ?>"><i class="fa fa-question-circle fa-fw"></i></a>
-                </span>
+            <div class="row">
+                <div class="col col-md-6">
+                    <label for="soporte_datatable"><?php echo $MULTILANG_InfDataTableTit; ?>:</label>
+                    <div class="form-group input-group">
+                        <select id="soporte_datatable" name="soporte_datatable" class="selectpicker" >
+                            <option value="S"><?php echo $MULTILANG_Si; ?></option>
+                            <option value="N" selected><?php echo $MULTILANG_No; ?></option>
+                        </select>
+                        <span class="input-group-addon">
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_InfDataTableDes; ?>"><i class="fa fa-question-circle fa-fw"></i></a>
+                        </span>
+                    </div>
+                </div>
+                <div class="col col-md-6">
+                    <label for="tamano_paginacion"><?php echo $MULTILANG_InfPaginacionDatatable; ?>:</label>
+                    <div class="form-group input-group">
+                        <input name="tamano_paginacion" value="10" type="text" class="form-control">
+                        <span class="input-group-addon">
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_InfPaginacionDatatableDes; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                        </span>
+                    </div>
+                </div>
             </div>
-
 
             </form>
 
