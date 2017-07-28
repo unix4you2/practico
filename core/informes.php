@@ -1656,6 +1656,7 @@ if ($PCO_Accion=="editar_informe")
                             <optgroup label="<?php echo $MULTILANG_FrmAccionT1; ?>">
                                 <option value="interna_eliminar"><?php echo $MULTILANG_InfDelReg; ?></option>
                                 <option value="interna_cargar"><?php echo $MULTILANG_InfCargaForm; ?></option>
+                                <option value="interna_cargar_informe"><?php echo $MULTILANG_InfCargaInforme; ?></option>
                             </optgroup>
                             <optgroup label="<?php echo $MULTILANG_FrmAccionT2; ?>">
                                 <option value="externa_formulario"><?php echo $MULTILANG_FrmAccionExterna; ?></option>
@@ -1667,6 +1668,16 @@ if ($PCO_Accion=="editar_informe")
                             <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesAccion; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                         </span>
                     </div>
+
+
+<!--
+                            <optgroup label="<?php echo $MULTILANG_FrmAccionT1; ?>">
+                                <option value="interna_cargar"><?php echo $MULTILANG_FrmAccionCargar; ?></option>
+                                <option value="interna_limpiar"><?php echo $MULTILANG_FrmAccionLimpiar; ?></option>
+                            </optgroup>
+
+-->
+
 
                     <div class="form-group input-group">
                         <input name="accion_usuario" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmAccionCMD; ?>">

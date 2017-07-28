@@ -5236,6 +5236,16 @@ function generar_botones_informe($informe)
 							document.FRMBASEINFORME.target = '".@$destino_formulario."';
 							document.FRMBASEINFORME.submit();";
 					}
+				if ($registro_botones["tipo_accion"]=="interna_cargar_informe")
+					{
+						$comando_javascript="
+							document.FRMBASEINFORME.PCO_Accion.value='cargar_objeto';
+							document.FRMBASEINFORME.objeto.value='inf:".$registro_botones["accion_usuario"].":DETFRMVALBASE';
+							document.FRMBASEINFORME.Precarga_EstilosBS.value='".@$precargar_estilos_formulario."';
+							document.FRMBASEINFORME.Presentar_FullScreen.value='".@$pantalla_completa_formulario."';
+							document.FRMBASEINFORME.target = '".@$destino_formulario."';
+							document.FRMBASEINFORME.submit();";
+					}
 				if ($registro_botones["tipo_accion"]=="externa_formulario")
 					{
 						$comando_javascript="

@@ -689,7 +689,7 @@
 	$MULTILANG_InfTitBotones='Add buttons or actions to each record';
 	$MULTILANG_InfDelReg='Delete Record';
 	$MULTILANG_InfCargaForm='Load a form by ID';
-	$MULTILANG_InfHlpAccion='If you want to load a form use this syntax  ID:1:FieldForSearch<br>To delete the associated record type the table.field used to compare it.';
+	$MULTILANG_InfHlpAccion='If you want to load a form use this syntax  ID:1:FieldForSearch<br>If you want to load a report use this syntax  ID:1<br>To delete the associated record type the table.field used to compare it.';
 	$MULTILANG_InfVinculo='Linked field';
 	$MULTILANG_InfDesVinculo='IMPORTANT: We assume the first field or column as a single and primary key value<br>
 				to do removal or form opening operations.<br>
@@ -780,6 +780,7 @@
 	$MULTILANG_InfEditableLinea='Online editable';
 	$MULTILANG_InfPaginacionDatatable='Page size for DataTables';
 	$MULTILANG_InfPaginacionDatatableDes='Tells Practico how many records should it show in default view of a datatable';
+	$MULTILANG_InfCargaInforme='Load a report by ID';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';

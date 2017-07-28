@@ -780,6 +780,7 @@
 	$MULTILANG_InfEditableLinea='edit&aacute;vel on-line';
 	$MULTILANG_InfPaginacionDatatable='Page size for DataTables';
 	$MULTILANG_InfPaginacionDatatableDes='Tells Practico how many records should it show in default view of a datatable';
+	$MULTILANG_InfCargaInforme='Load a report by ID';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Editar item de menu';

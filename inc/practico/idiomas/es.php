@@ -687,7 +687,7 @@
 	$MULTILANG_InfTitBotones='Agregar botones y acciones a cada registro';
 	$MULTILANG_InfDelReg='Eliminar registro';
 	$MULTILANG_InfCargaForm='Cargar un formulario por ID';
-	$MULTILANG_InfHlpAccion='Si desea cargar un formulario utilice la notaci&oacute;n  ID:1:CampoBusqueda<br>Si desea eliminar el registro asociado indique la tabla.campo usada para comparar';
+	$MULTILANG_InfHlpAccion='Si desea cargar un formulario utilice la notaci&oacute;n  ID:1:CampoBusqueda<br>Si desea cargar un informe utilice la notaci&oacute;n  ID:1<br>Si desea eliminar el registro asociado indique la tabla.campo usada para comparar';
 	$MULTILANG_InfVinculo='Campo de v&iacute;nculo';
 	$MULTILANG_InfDesVinculo='IMPORTANTE: Se asumir&aacute; el primer campo o columna como de valor &uacute;nico<br>
 				para realizar las operaciones de eliminaci&oacute;n o apertura de<br>
@@ -778,7 +778,8 @@
 	$MULTILANG_InfEditableLinea='Editable en l&iacute;nea';
 	$MULTILANG_InfPaginacionDatatable='Tama&ntilde;o de p&aacute;gina en DataTables';
 	$MULTILANG_InfPaginacionDatatableDes='Indica el n&uacute;mero de registros que son presentados en los resultados de manera predeterminada';
-	
+	$MULTILANG_InfCargaInforme='Cargar un informe por ID';
+
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';
 	$MULTILANG_MnuSelImagen='Haga clic sobre una im&aacute;gen para seleccionarla';
