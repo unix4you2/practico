@@ -196,8 +196,8 @@
 
 	//Ventana de login
 	$MULTILANG_TituloLogin='Ingreso al sistema';
-	$MULTILANG_CodigoSeguridad='Codigo de seguridad';
-	$MULTILANG_IngreseCodigoSeguridad='Ingrese el codigo';
+	$MULTILANG_CodigoSeguridad='C&oacute;digo de seguridad';
+	$MULTILANG_IngreseCodigoSeguridad='Ingrese el c&oacute;digo';
 	$MULTILANG_AccesoExclusivo='El acceso a este software es exclusivo para usuarios registrados. Por su seguridad, nunca comparta su nombre de usuario y contrase&ntilde;a.';
 	$MULTILANG_LoginNoWSTit='Error tratando de alcanzar el webservice de autenticacion';
 	$MULTILANG_LoginNoWSDes='La funcion file_get_contents() no puede cargar correctamente el archivo XML generado por el web service de autenticacion de Practico.<br>  Verifique la instalacion de su servidor web para validar que la funcion opera correctamente y sin restricciones.<br>  Una forma de validar si el proceso de autenticacion es correcto pero es su servidor quien no deja abrir el resultado<br>es abriendo el siguiente enlace y viendo si carga correctamente el XML.<br>  Activar el modo de depuracion en la configuracion de Practico puede ayudar a ver mas detalles.';
@@ -215,7 +215,7 @@
 	$MULTILANG_VistaPrev='Vista previa';
 	$MULTILANG_TituloInsExiste='ATENCION: La carpeta de instalaci&oacute;n existe en el servidor';
 	$MULTILANG_TextoInsExiste='Este mensaje aparecer&aacute; de manera permanente a todos sus usuarios mientras usted no elimine el directorio utilizado durante el proceso de instalaci&oacute;n de Pr&aacute;ctico.  Es fundamental que la carpeta sea eliminada despu&eacute;s de finalizar una instalaci&oacute;n para evitar que algun usuario an&oacute;nimo inicie nuevamente el proceso sobreescribiendo archivos de configuraci&oacute;n o bases de datos con informaci&oacute;n de importancia para usted.<br><br>Si ya ha finalizado un proceso de instalaci&oacute;n de Pr&aacute;ctico para su uso en producci&oacute;n es importante que elimine esta carpeta antes de continuar.  Si no desea eliminar esta carpeta puede optar por renombrarla en instalaciones temporales o de prueba.<br><br>Si est&aacute; visualizando este mensaje al ejecutar este script por primera vez y desea realizar una instalaci&oacute;n nueva, puede iniciar el asistente haciendo <a class="btn btn-primary btn-xs" href="javascript:document.location=\'ins\';"><i class="fa fa-rocket"></i> Clic AQUI</a> ';
-	$MULTILANG_ErrorTiempoEjecucion='Error en tiempo de ejecucion';
+	$MULTILANG_ErrorTiempoEjecucion='Error en tiempo de ejecuci&oacute;n';
 	$MULTILANG_ErrorModulo='El modulo central esta tratando de incluir un modulo ubicado en <b>mod/</b> pero no encuentra su punto de accceso.<br>Verifique el estado del m&oacute;dulo, consulte con su administrador o elimine el m&oacute;dulo en conflicto para evitar este mensaje.';
 	$MULTILANG_ContacteAdmin='Contacte con el administrador de su sistema y comunique este mensaje.';
 	$MULTILANG_ReinicieWeb='Por favor haga los ajustes requeridos y reinicie su servicio web.';
@@ -257,7 +257,7 @@
     $MULTILANG_SeparadorCampos='Cadena separadora de campos';
     $MULTILANG_SeparadorCamposDes='Utilizada para separar valores en Queries y consultas sobre el motor de base de datos.  Generalmente debe ser un valor poco comun que no pueda ser encontrado en las variables entradas por el usuario';
     $MULTILANG_SelectorIdioma='El usuario puede cambiar idioma en login';
-    $MULTILANG_SelectorIdiomaAyuda='Presenta una lista de seleccion durante el inicio de sesion con los idiomas disponibles en la plataforma para que el usuario lo seleccione.';
+    $MULTILANG_SelectorIdiomaAyuda='Presenta una lista de seleccion durante el inicio de sesi&oacute;n con los idiomas disponibles en la plataforma para que el usuario lo seleccione.';
     $MULTILANG_ErrorConexionInternet='Parece que te has quedado sin conexion a Internet, la conexión al sistema será restablecida cuando tu conexión a Internet se encuentre normal.<br><br>Verifica que tu conexión de red o señal de datos se encuentren activos.';
     $MULTILANG_NombreRADDes='Nombre del generador de aplicaciones.  Utilizado adem&aacute;s como t&iacute;tulo de todas las ventanas en la aplicaci&oacute;n.';
 
@@ -391,8 +391,8 @@
 	$MULTILANG_FrmTitUnico='Unicidad para los valores ingresados';
 	$MULTILANG_FrmDesUnico='Indica si el campo puede almacenar o no valores repetidos en la base de datos.  Deber&iacute;a estar habilitado para campos que representen claves primarias en su dise&ntilde;o y deshabilitado para el resto.  Debera tener especial cuidado con aquellos formularios donde desee dejar el campo para actualizaciones y que pueda generar error de valor duplicado.';
 	$MULTILANG_FrmPredeterminado='Valor predeterminado';
-	$MULTILANG_FrmDesPredeterminado='Establece el valor que aparece diligenciado automaticamente en el campo al abrir la vista del formulario.  Este valor puede estar en contravia de la validaci&oacute;n de datos.  Si se ingresan variables PHP definidas en la sesion entonces se tomara su valor.';
-	$MULTILANG_FrmValida='Validacion de datos';
+	$MULTILANG_FrmDesPredeterminado='Establece el valor que aparece diligenciado automaticamente en el campo al abrir la vista del formulario.  Este valor puede estar en contrav&iacute;a de la validaci&oacute;n de datos.  Si se ingresan variables PHP definidas en la sesi&oacute;n entonces se tomara su valor.';
+	$MULTILANG_FrmValida='Validaci&oacute;n de datos';
 	$MULTILANG_FrmValida1='S&oacute;lo n&uacute;meros 0-9 (con decimales)';
 	$MULTILANG_FrmValida2='S&oacute;lo letras a-z A-Z';
 	$MULTILANG_FrmValida3='Letras y n&uacute;meros';
@@ -404,12 +404,12 @@
 	$MULTILANG_FrmValidaDes='Tipo de filtro a ser aplicado cuando el usuario ingresa informaci&oacute;n por teclado';
 	$MULTILANG_FrmLectura='Campo de solo lectura';
 	$MULTILANG_FrmTitLectura='Define si se puede cambiar su valor';
-	$MULTILANG_FrmDesLectura='Propiedad util para campos o formularios de consulta por parte del usuario donde se requiere visualizar el valor pero no permitir su modificacion';
+	$MULTILANG_FrmDesLectura='Propiedad util para campos o formularios de consulta por parte del usuario donde se requiere visualizar el valor pero no permitir su modificaci&oacute;n';
 	$MULTILANG_FrmAyuda='T&iacute;tulo de ayuda';
 	$MULTILANG_FrmDesAyuda='Texto que aparecer&aacute; como encabezado para el texto de ayuda del campo explicando al usuario qu&eacute; debe ingresar';
 	$MULTILANG_FrmTxtAyuda='Texto de ayuda';
-	$MULTILANG_FrmDesTxtAyuda='Texto completo con la descripcion de funciones resumida para el campo.  Puede incluir instrucciones de formato, advertencias o cualquier otro mensaje para el usuario';
-	$MULTILANG_FrmDesPeso='Posicion en la que aparece el campo dentro del formulario cuando este se despliega en pantalla. Orden.';
+	$MULTILANG_FrmDesTxtAyuda='Texto completo con la descripci&oacute;n de funciones resumida para el campo.  Puede incluir instrucciones de formato, advertencias o cualquier otro mensaje para el usuario';
+	$MULTILANG_FrmDesPeso='Posici&oacute;n en la que aparece el campo dentro del formulario cuando este se despliega en pantalla. Orden.';
 	$MULTILANG_FrmDesColumna='Columna para ubicar el campo cuando la vista del formulario tenga varias columnas. Aquellos campos en columnas superiores a las definidas en el formulario no ser&aacute;n dibujados';
 	$MULTILANG_FrmObligatorio='Obligatorio';
 	$MULTILANG_FrmVisible='Visible';
@@ -492,7 +492,7 @@
 	$MULTILANG_FrmDesAccion='Comando que deber&aacute; ejecutar el control al ser pulsado.  Para acciones definidas es personalizadas.php los datos del formulario ser&aacute;n enviados a esa rutina para ser procesados';
 	$MULTILANG_FrmAccionCMD='Comando del usuario';
 	$MULTILANG_FrmAccionDesCMD='Nombre de la acci&oacute;n definida en el archivo de personalizaci&oacute;n que procesar&aacute; la informaci&oacute;n o comando en JavaScript a ser ejecutado de manera inmediata en la p&aacute;gina (si requiere par&aacute;metros dentro de su comando utilice comillas sencillas para encerrarlos). Para cargar objetos de Pr&aacute;ctico como formularios o informes puede usar la misma notaci&oacute;n de menus: frm:XX:Par1:Par2:ParN o inf:XX...  El comando javascript ImprimirMarco(\'MARCO_IMPRESION\') le permite imprimir el contenido del formulario.  Tambien puede usar comandos como PCO_VentanaPopup(\'http://www.google.com\',\'SuTitulo\',\'toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, width=640, height=480\'); .Revise siempre la documentacion para una lista completa y actualizada de comandos.';
-	$MULTILANG_FrmDesPeso='Posicion en la que aparece el campo dentro de la barra de estado del formulario cuando este se despliega en pantalla. Orden de izquierda a derecha';
+	$MULTILANG_FrmDesPeso='Posici&oacute;n en la que aparece el campo dentro de la barra de estado del formulario cuando este se despliega en pantalla. Orden de izquierda a derecha';
 	$MULTILANG_FrmBotDesVisible='Determina si el control es visible o no para el usuario';
 	$MULTILANG_FrmRetorno='T&iacute;tulo de retorno';
 	$MULTILANG_FrmDesRetorno='Texto que aparecer&aacute; como encabezado en el escritorio despu&eacute;s de realizar la acci&oacute;n indicada por el usuario';
@@ -533,9 +533,9 @@
 	$MULTILANG_FrmHlp='T&iacute;tulo de ayuda';
 	$MULTILANG_FrmDesHlp='Texto que aparecer&aacute; como encabezado para el texto de ayuda del formulario';
 	$MULTILANG_FrmTxt='Texto de ayuda';
-	$MULTILANG_FrmDesTxt='Texto completo con la descripcion de funciones resumida para el formulario.  Puede ser cualquier texto introductorio para el usuario';
+	$MULTILANG_FrmDesTxt='Texto completo con la descripci&oacute;n de funciones resumida para el formulario.  Puede ser cualquier texto introductorio para el usuario';
 	$MULTILANG_FrmImagen='Color de fondo';
-	$MULTILANG_FrmImagenDes='Si su navegador soporta HTML5 puede seleccionar el color, de lo contrario ingrese un codigo en hexadecimal como por ejemplo #F2F2F2 o su nombre en HTML como por ejemplo LightGray';
+	$MULTILANG_FrmImagenDes='Si su navegador soporta HTML5 puede seleccionar el color, de lo contrario ingrese un c&oacute;digo en hexadecimal como por ejemplo #F2F2F2 o su nombre en HTML como por ejemplo LightGray';
 	$MULTILANG_FrmNumeroCols='N&uacute;mero columnas';
 	$MULTILANG_FrmDesNumeroCols='Indica en cuantas columnas deben desplegarse los campos cuando el formulario sea cargado';
 	$MULTILANG_FrmCreaDisena='Crear y dise&ntilde;ar';
@@ -600,9 +600,9 @@
 	$MULTILANG_FrmEstiloPills='Botones (nav-pills)';
 	$MULTILANG_FrmEstiloOculto='Ocultas';
 	$MULTILANG_FrmTextoPlaceHolder='Texto para el placeholder';
-	$MULTILANG_FrmDesPlaceHolder='Un texto que aparecera en el campo cuando se encuentre vacio para que el usuario tenga una guia de lo que debe diligenciar alli';
+	$MULTILANG_FrmDesPlaceHolder='Un texto que aparecer&aacute; en el campo cuando se encuentre vac&iacute;o para que el usuario tenga una gu&iacute;a de lo que debe diligenciar all&iacute;';
 	$MULTILANG_FrmOcultarEtiqueta='Ocultar la etiqueta del campo en el formulario';
-	$MULTILANG_FrmIdHTML='Identificador único del objeto en HTML.  Requerido si desea realizar programacion por eventos para este control, usar sentencias JQuery, y JS en general sobre el en tiempo de ejecucion.';
+	$MULTILANG_FrmIdHTML='Identificador único del objeto en HTML.  Requerido si desea realizar programacion por eventos para este control, usar sentencias JQuery, y JS en general sobre el en tiempo de ejecuci&oacute;n.';
 	$MULTILANG_FrmValidaExtra='Caracteres extra permitidos';
 	$MULTILANG_FrmValidaAyuda='Cualquier caracter ingresado en el campo ser&aacute; permitido por el validador.  No se permiten las comillas dobles o simples.';
 	$MULTILANG_FrmValida9='S&oacute;lo n&uacute;meros 0-9 (enteros)';
@@ -621,7 +621,7 @@
 	$MULTILANG_InfTablaManual='Especificar tabla manualmente';
 	$MULTILANG_InfDesTablaManual='En caso de no seleccionar una tabla en la parte superior puede indicar aqu&iacute; el nombre de una tabla.  Esta opci&oacuten es &uacute;til cuando requiere acceder a informaci&oacute;n contenida en tablas internas de Pr&aacute;ctico o tablas creadas mediante otras aplicaciones';
 	$MULTILANG_InfAliasManual='Especificar un alias manualmente';
-	$MULTILANG_InfDesAliasManual='Util para definir el nombre de una tabla generada a partir de una subconsulta o indicada manualmente';
+	$MULTILANG_InfDesAliasManual='&Uacute;til para definir el nombre de una tabla generada a partir de una subconsulta o indicada manualmente';
 	$MULTILANG_InfBtnAgregaTabla='Agregar tabla';
 	$MULTILANG_InfTablasDef='Tablas definidas en este informe';
 	$MULTILANG_InfAlias='Alias';
@@ -630,7 +630,7 @@
 	$MULTILANG_InfCampoDatos='Campo de datos';
 	$MULTILANG_InfCampoManual='Especificar campo manualmente';
 	$MULTILANG_InfDesCampoManual='En caso de no seleccionar un campo en la parte superior puede indicar aqu&iacute; el nombre de un campo.  Esta opci&oacuten es &uacute;til cuando requiere acceder a informaci&oacute;n contenida en campos internos de Pr&aacute;ctico o campos creadas mediante otras aplicaciones';
-	$MULTILANG_InfDesAliasManual2='Util para definir el nombre de un campo generado a partir de una subconsulta de agrupaci&oacute;n o indicado manualmente';
+	$MULTILANG_InfDesAliasManual2='&Uacute;til para definir el nombre de un campo generado a partir de una subconsulta de agrupaci&oacute;n o indicado manualmente';
 	$MULTILANG_InfBtnAgregaCampo='Agregar campo';
 	$MULTILANG_InfCamposDef='Campos definidos en este informe';
 	$MULTILANG_InfAddCondicion='Agregar una nueva condici&oacute;n al informe';
@@ -644,7 +644,7 @@
 	$MULTILANG_InfDiferenteDe='Diferente';
 	$MULTILANG_InfIgualA='Igual';
     $MULTILANG_InfPatron='Coincide con el patr&oacute;n (Utilice % como comodin)';
-	$MULTILANG_InfDesManual='En cualquiera de los campos manuales puede encerrar expresiones o valores tipo cadena de caracteres utilizando comillas dobles.  Tambien puede comparar frente a las variables de sesion del usuario simplemente con poner alguna de ellas en notacion PHP, por ejemplo: $PCOSESS_LoginUsuario, $Nombre_usuario, $Descripcion_usuario, $Nivel_usuario, $Correo_usuario, $LlaveDePasoUsuario o cualquier otra del entorno global.  Para usar variables PHP en medio de una cadena puede encerrarlas entre llaves Ej:{$Variable} y estas seran reemplazadas por su valor global.';
+	$MULTILANG_InfDesManual='En cualquiera de los campos manuales puede encerrar expresiones o valores tipo cadena de caracteres utilizando comillas dobles.  Tambien puede comparar frente a las variables de sesi&oacute;n del usuario simplemente con poner alguna de ellas en notacion PHP, por ejemplo: $PCOSESS_LoginUsuario, $Nombre_usuario, $Descripcion_usuario, $Nivel_usuario, $Correo_usuario, $LlaveDePasoUsuario o cualquier otra del entorno global.  Para usar variables PHP en medio de una cadena puede encerrarlas entre llaves Ej:{$Variable} y estas seran reemplazadas por su valor global.';
 	$MULTILANG_InfOperador='Agregar un agrupador de expresiones o un operador l&oacute;gico ';
 	$MULTILANG_InfOpParentesisA='Abrir par&eacute;ntesis';
 	$MULTILANG_InfOpParentesisC='Cerrar par&eacute;ntesis';
@@ -693,7 +693,7 @@
 				para realizar las operaciones de eliminaci&oacute;n o apertura de<br>
 				nuevos formularios.  Se recomienda utilizar campos que realmente sean de<br>
 				valor &uacute;nico a menos que se deseen operaciones grupales.';
-	$MULTILANG_InfDesPeso='Posicion en la que aparece el boton dentro de los creados al lado derecho de cada registro. Orden de izquierda a derecha.';
+	$MULTILANG_InfDesPeso='Posici&oacute;n en la que aparece el boton dentro de los creados al lado derecho de cada registro. Orden de izquierda a derecha.';
 	$MULTILANG_InfFiltrar='Filtrar los resultados mediante condiciones espec&iacute;ficas';
 	$MULTILANG_InfCampoAgrupa='Permite definir campos de agrupaci&oacute;n para informes con operaciones de suma, promedio o conteo y los campos para el ordenamiento de resultados';
 	$MULTILANG_InfTablasOrigen='Tablas de datos origen';
@@ -835,7 +835,7 @@
 	//Tablas
 	$MULTILANG_TblError1='Problema de integridad en dise&ntilde;o';
 	$MULTILANG_TblError2='ERROR DE BASE DE DATOS';
-	$MULTILANG_TblError3='Durante la ejecucion el motor ha retornado el siguiente mensaje';
+	$MULTILANG_TblError3='Durante la ejecuci&oacute;n el motor ha retornado el siguiente mensaje';
 	$MULTILANG_TblAgrCampo='Agregar campos en la tabla de datos';
 	$MULTILANG_TblAgrCampoTabla='Agregar un campo a la tabla';
 	$MULTILANG_TblEntero='Entero';
@@ -1178,7 +1178,7 @@
 	$MULTILANG_ReplicaDefinidos='Servidores de replicaci&oacute;n autom&aacute;tica definidos';
 	$MULTILANG_AgregarReplica='Agregar nueva conexion';
 	$MULTILANG_ReplicaTodo='Usar como replica espejo';
-	$MULTILANG_AyudaReplica='Determina si todas las operaciones realizadas sobre la base de datos del sistema deben ser replicadas sobre esta conexion.  Si asigna su valor en NO, Practico solamente creara la conexion y la dejara lista para ser usada por codigo o por operaciones individuales cuando usted lo requiera.  Esto solo aplicara para operaciones de alteracion (Insertar,Actualizar,Eliminar) realizadas mediante la funcion ejecutar_sql_unaria()';
+	$MULTILANG_AyudaReplica='Determina si todas las operaciones realizadas sobre la base de datos del sistema deben ser replicadas sobre esta conexion.  Si asigna su valor en NO, Practico solamente creara la conexion y la dejara lista para ser usada por c&oacute;digo o por operaciones individuales cuando usted lo requiera.  Esto solo aplicara para operaciones de alteracion (Insertar,Actualizar,Eliminar) realizadas mediante la funcion ejecutar_sql_unaria()';
 	$MULTILANG_ConnAdicionales='Conexiones a bases de datos adicionales';
 	
 	//Eventos javascript
@@ -1242,4 +1242,3 @@
     $MULTILANG_Historia3Des='ID: ______BRComo ________ Se necesita ___________ con el fin de ________.BRBREscenario: ________. En caso que _______ se debe _______';
     $MULTILANG_ListaColumnas='Lista de columnas';
     $MULTILANG_ListaCategorias='Lista de categorias';
-
