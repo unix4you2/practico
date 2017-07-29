@@ -1670,15 +1670,6 @@ if ($PCO_Accion=="editar_informe")
                     </div>
 
 
-<!--
-                            <optgroup label="<?php echo $MULTILANG_FrmAccionT1; ?>">
-                                <option value="interna_cargar"><?php echo $MULTILANG_FrmAccionCargar; ?></option>
-                                <option value="interna_limpiar"><?php echo $MULTILANG_FrmAccionLimpiar; ?></option>
-                            </optgroup>
-
--->
-
-
                     <div class="form-group input-group">
                         <input name="accion_usuario" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmAccionCMD; ?>">
                         <span class="input-group-addon">
@@ -2040,6 +2031,7 @@ if ($PCO_Accion=="editar_informe")
                 </span>
             </div>
 
+            <hr>
             <div class="row">
                 <div class="col col-md-6">
                     <label for="soporte_datatable"><?php echo $MULTILANG_InfDataTableTit; ?>:</label>
@@ -2063,9 +2055,7 @@ if ($PCO_Accion=="editar_informe")
                     </div>
                 </div>
             </div>
-
-
-
+            <hr>
 
             </form>
             <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa  fa-floppy-o"></i> <?php echo $MULTILANG_InfActualizar; ?></a>
@@ -3070,6 +3060,7 @@ if ($PCO_Accion=="administrar_informes")
                 </span>
             </div>
 
+            <hr>
             <div class="row">
                 <div class="col col-md-6">
                     <label for="soporte_datatable"><?php echo $MULTILANG_InfDataTableTit; ?>:</label>
@@ -3093,6 +3084,7 @@ if ($PCO_Accion=="administrar_informes")
                     </div>
                 </div>
             </div>
+            <hr>
 
             </form>
 

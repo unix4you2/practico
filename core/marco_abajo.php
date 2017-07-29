@@ -233,9 +233,13 @@
                 //Desglosa la cadena de posibles tablas con formato DataTable y las convierte
                 $TablasDataTable=@explode("|",$PCO_InformesDataTable);
                 $TablasDataTablePaginaciones=@explode("|",$PCO_InformesDataTablePaginaciones);
+                $TablasDataTableTotales=@explode("|",$PCO_InformesDataTableTotales);
                 for ($i=0; $i<count($TablasDataTable);$i++)
                     {
                         $Paginacion=trim($TablasDataTablePaginaciones[$i]);
+                        $ColumnaTotales=trim($TablasDataTableTotales[$i]);
+                        $ColumnaTotales=1;
+
                         if ($Paginacion=="" || $Paginacion==0) $Paginacion=10;
                         echo '
                             //alert(" '.$TablasDataTable[$i].'  '.$Paginacion.'"); //Depuracion solamente
@@ -248,18 +252,48 @@
                                     this.fnAdjustColumnSizing(true);
                                     },
                                     "language": {
-                                        "lengthMenu": "'.$MULTILANG_Mostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
-                                        "zeroRecords": "Nothing found - sorry",
-                                        "info": "'.$MULTILANG_InfDataTableViendoP.' _PAGE_ '.$MULTILANG_InfDataTableDe.' _PAGES_",
-                                        "infoEmpty": "'.$MULTILANG_InfDataTableNoRegistrosDisponibles.'",
-                                        "infoFiltered": "('.$MULTILANG_InfDataTableFiltradoDe.' _MAX_ '.$MULTILANG_InfDataTableRegTotal.')",
-                                        oPaginate: { sFirst:"'.$MULTILANG_Primero.'",sLast:"'.$MULTILANG_Ultimo.'",sNext:"'.$MULTILANG_Siguiente.'",sPrevious:"'.$MULTILANG_Previo.'" },
-                                        sEmptyTable:"'.$MULTILANG_InfDataTableNoDatos.'",
-                                        sSearch:"'.$MULTILANG_Buscar.':",
-                                        sLoadingRecords:"'.$MULTILANG_Cargando.'...",
-                                        sProcessing:"'.$MULTILANG_Procesando.'...",
-                                        sZeroRecords:"'.$MULTILANG_InfDataTableNoRegistros.'"
+                                            "lengthMenu": "'.$MULTILANG_Mostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
+                                            "zeroRecords": "Nothing found - sorry",
+                                            "info": "'.$MULTILANG_InfDataTableViendoP.' _PAGE_ '.$MULTILANG_InfDataTableDe.' _PAGES_",
+                                            "infoEmpty": "'.$MULTILANG_InfDataTableNoRegistrosDisponibles.'",
+                                            "infoFiltered": "('.$MULTILANG_InfDataTableFiltradoDe.' _MAX_ '.$MULTILANG_InfDataTableRegTotal.')",
+                                            oPaginate: { sFirst:"'.$MULTILANG_Primero.'",sLast:"'.$MULTILANG_Ultimo.'",sNext:"'.$MULTILANG_Siguiente.'",sPrevious:"'.$MULTILANG_Previo.'" },
+                                            sEmptyTable:"'.$MULTILANG_InfDataTableNoDatos.'",
+                                            sSearch:"'.$MULTILANG_Buscar.':",
+                                            sLoadingRecords:"'.$MULTILANG_Cargando.'...",
+                                            sProcessing:"'.$MULTILANG_Procesando.'...",
+                                            sZeroRecords:"'.$MULTILANG_InfDataTableNoRegistros.'"
+                                        },
+
+                                    "footerCallback": function ( row, data, start, end, display ) {
+                                        var api = this.api(), data;
+                                        // Remueve el formato de la celda para obtener solamente el numero entero para la suma
+                                            var intVal = function ( i ) {
+                                                return typeof i === \'string\' ?
+                                                    i.replace(/[\$,]/g, \'\')*1 :
+                                                    typeof i === \'number\' ?
+                                                        i : 0;
+                                            };
+                                        // Total de todas las paginas
+                                            total = api
+                                                .column( '.$ColumnaTotales.' )
+                                                .data()
+                                                .reduce( function (a, b) {
+                                                    return intVal(a) + intVal(b);
+                                                }, 0 );
+                                        // Total de la pagina actual
+                                            pageTotal = api
+                                                .column( '.$ColumnaTotales.', { page: \'current\'} )
+                                                .data()
+                                                .reduce( function (a, b) {
+                                                    return intVal(a) + intVal(b);
+                                                }, 0 );
+                                        // Actualiza el pie de pagina del datatable siempre en la columna 0
+                                        $( api.column( 0 ).footer() ).html(
+                                            \'<div align=right><b>Total pagina: \'+pageTotal +\' Tota reporte: \'+ total + \'</b></div>\'
+                                        );
                                     }
+
                                 }
                             );
                         ';

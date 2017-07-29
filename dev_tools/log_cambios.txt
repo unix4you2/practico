@@ -58,7 +58,8 @@ LogCambios="
 * Added: Nuevo módulo para manejo de tableros Kanban con el fin de apoyar procesos de desarrollo implicitos de la herramienta y las aplicaciones de cada usuario.
 * Enhan: Ahora la funcion existente de validacion de campos en formularios permite anular el envío del formulario mediante un parámetro extra que anula esa funcionalidad.  Util si se desea interceptar la operación o realizar validaciones de manera independiente.
 * Added: Durante la creación de informes se puede establecer ahora el tamaño de página predeterminado (cuántos registros presentar por página).
-
+* Added: Los botones de acción para registros en informes ahora permiten llamar a otros informes por su ID.
+* Added: Ahora se puede especificar cáculos de suma automáticos para alguna columna de los reportes que soportan datatables y presentarlos como resúmen al final de cada uno tanto por página como por total general.
 "
 
 ########################################################################
