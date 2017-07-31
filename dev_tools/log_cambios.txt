@@ -16,22 +16,8 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
-core/formularios.php
-core/marco_abajo.php
-core/marco_chat.php
-core/informes.php
-core/kanban.php
-core/marco_dev.php
-core/marco_nav.php
-core/marco_arriba.php
-core/marco_arriba_bs.php
-core/marco_conf.php
-inc/bootstrap-material-design/*
-mod/pcoder/index.php
-mod/fileman/elfinder/js/i18n/elfinder.es.js
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
-inc/bootstrap/css/*
 inc/bootstrap/js/practico*
 "
 
@@ -43,53 +29,12 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Tema gráfico basado en Material Design de Google 0.5.10 para Bootstrap
-* Added: Marco de advertencia para aquellos usuarios que no se encuentren con JavaScript habilitado en sus navegadores 
-* Added: Los siguientes elementos soportan ahora variables en notación {$PHP} para facilitar el diseño de aplicaciones multi-idioma: botones en la barra de acciones de formulario, titulos de formulario, titulos de informes, titulos y textos de ayuda en formularios, descripción de informes, todos los titulos y textos de ayuda para controles de formulario, textos de confirmación en botones de comando, textos de confirmación sobre botones de acción en informes.
-* Added: Tema gráfico Amelia.
-* Fixed: Corrección en aplicación de estilos gráficos para fondos de aplicación.
-* Enhan: Al hacer clic sobre el icono home de la barra superior se limpia cualquier contenido de la URL redireccionando al index.php
-* Added: Nueva opcion de validacion de numeros sin punto decimal para controles de formulario
-* Added: Los controles con validaciones soportan ahora cadenas con caracteres extra permitidos para el ingreso de datos.
-* Enhan: A partir de ahora campos validados como solo letras no contendran el caracter punto.  Si se desea tener el caracter punto dentro del set permitido se deberá agregar a la personalización del control sobre los caracteres extra permitidos.
-* Enhan: Mejoradas algunas ayudas y tooltips del sistema.
-* Fixed: Agregado el parametro PCOJS_Evento por defecto a todos los eventos JS generados.
-* Added: Validacion de entrada para campos de texto largo (textareas).
-* Added: Nuevo módulo para manejo de tableros Kanban con el fin de apoyar procesos de desarrollo implicitos de la herramienta y las aplicaciones de cada usuario.
-* Enhan: Ahora la funcion existente de validacion de campos en formularios permite anular el envío del formulario mediante un parámetro extra que anula esa funcionalidad.  Util si se desea interceptar la operación o realizar validaciones de manera independiente.
-* Added: Durante la creación de informes se puede establecer ahora el tamaño de página predeterminado (cuántos registros presentar por página).
-* Added: Los botones de acción para registros en informes ahora permiten llamar a otros informes por su ID.
-* Added: Ahora se puede especificar cáculos de suma automáticos para alguna columna de los reportes que soportan datatables y presentarlos como resúmen al final de cada uno tanto por página como por total general.
-* Fixed: Acceso a mod/pcoder es ahora restringido para usuarios que no son tipo administrador o diseñador de aplicación.
 
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-ALTER TABLE core_formulario_objeto ADD validacion_extras varchar(255) DEFAULT '';
-
-DROP TABLE IF EXISTS core_kanban;
-CREATE TABLE core_kanban (
-  id int(10) NOT NULL AUTO_INCREMENT,
-  login_admintablero varchar(250),
-  titulo varchar(255),
-  descripcion text,
-  asignado_a varchar(250),
-  categoria varchar(255),
-  columna int(11),
-  peso int(11),
-  estilo varchar(15),
-  fecha date,
-  PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-ALTER TABLE core_kanban ADD INDEX columna(columna);
-ALTER TABLE core_kanban ADD INDEX login_admintablero(login_admintablero);
-INSERT INTO core_kanban (login_admintablero,titulo,descripcion,columna) VALUES ('admin','[PRACTICO][ColumnasTablero]', 'Analisis,Diseno,Desarrollo,Pruebas,Terminado,Produccion','-2');
-INSERT INTO core_kanban (login_admintablero,titulo,descripcion,columna) VALUES ('admin','[PRACTICO][CategoriasTareas]', 'FrontEnd,BackEnd,Documentacion','-2');
-ALTER TABLE core_informe ADD tamano_paginacion int(11) DEFAULT 10;
-ALTER TABLE core_informe ADD subtotales_columna varchar(255) DEFAULT '';
-ALTER TABLE core_informe ADD subtotales_formato varchar(255) DEFAULT '';
 
 "
 

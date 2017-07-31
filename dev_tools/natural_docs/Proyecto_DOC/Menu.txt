@@ -107,6 +107,7 @@ Group: Modulos Principales  {
       File: Conexiones PDO  (core/conexiones_extra.php)
       File: Modulo replicacion de operaciones  (core/replicacion.php)
       File: Seccion con formularios comunes  (core/marco_forms.php)
+      File: Modulo kanban  (core/kanban.php)
       }  # Group: Modulos
 
    Group: Inc  {
