@@ -304,6 +304,8 @@ CREATE TABLE core_informe (
   soporte_datatable char(1) DEFAULT 'N',
   formulario_filtrado VARCHAR(5) DEFAULT '',
   tamano_paginacion integer DEFAULT '10',
+  subtotales_columna varchar(255) DEFAULT '',
+  subtotales_formato varchar(255) DEFAULT '',
   PRIMARY KEY  (id)
 );
 

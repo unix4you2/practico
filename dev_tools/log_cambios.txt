@@ -60,6 +60,7 @@ LogCambios="
 * Added: Durante la creación de informes se puede establecer ahora el tamaño de página predeterminado (cuántos registros presentar por página).
 * Added: Los botones de acción para registros en informes ahora permiten llamar a otros informes por su ID.
 * Added: Ahora se puede especificar cáculos de suma automáticos para alguna columna de los reportes que soportan datatables y presentarlos como resúmen al final de cada uno tanto por página como por total general.
+
 "
 
 ########################################################################
@@ -86,6 +87,8 @@ ALTER TABLE core_kanban ADD INDEX login_admintablero(login_admintablero);
 INSERT INTO core_kanban (login_admintablero,titulo,descripcion,columna) VALUES ('admin','[PRACTICO][ColumnasTablero]', 'Analisis,Diseno,Desarrollo,Pruebas,Terminado,Produccion','-2');
 INSERT INTO core_kanban (login_admintablero,titulo,descripcion,columna) VALUES ('admin','[PRACTICO][CategoriasTareas]', 'FrontEnd,BackEnd,Documentacion','-2');
 ALTER TABLE core_informe ADD tamano_paginacion int(11) DEFAULT 10;
+ALTER TABLE core_informe ADD subtotales_columna varchar(255) DEFAULT '';
+ALTER TABLE core_informe ADD subtotales_formato varchar(255) DEFAULT '';
 
 "
 

@@ -801,10 +801,12 @@ function columnas_desde_hojacalculo($PathArchivo)
 */
 function datatable_desde_hojacalculo($PathArchivo,$NroLineas)
 	{
-		global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones;
+		global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales;
 		
 		@$PCO_InformesDataTable.="TablaArchivoCSV_Importado|"; //Agrega la tabla a la lista de DataTables para ser convertida
         @$PCO_InformesDataTablePaginaciones.="10|";
+        @$PCO_InformesDataTableTotales.="|";
+        @$PCO_InformesDataTableFormatoTotales.="|";
 		$SalidaFormateada.='<table class="table table-condensed btn-xs table-hover table-striped table-unbordered table-responsive" id="TablaArchivoCSV_Importado"><thead><tr>';
 
 		//Crea el objeto para lectura del archivo
@@ -4645,7 +4647,7 @@ $('#SampleElement').load('YourURL');
 				// Carga variables de definicion de tablas
 				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
 				global $MULTILANG_Elementos,$MULTILANG_Agregar,$MULTILANG_Configuracion,$MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
-                global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones;
+                global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales;
                 global $POSTForm_ListaCamposObligatorios,$POSTForm_ListaTitulosObligatorios;
 
 				// Busca datos del formulario
@@ -5642,7 +5644,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
 		global $MULTILANG_Exportar,$MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano,$MULTILANG_MonCommSQL;
 		global $IdiomaPredeterminado;
-        global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones;
+        global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales;
         global $ModoDepuracion;
 
         //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa
@@ -5736,9 +5738,21 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					    {
 						    @$PCO_InformesDataTable.="TablaInforme_".$registro_informe["id"]."|";
 						    @$PCO_InformesDataTablePaginaciones.=$registro_informe["tamano_paginacion"]."|"; //Agrega tamano predefinido para la tabla
+						    @$PCO_InformesDataTableTotales.=$registro_informe["subtotales_columna"]."|";
+						    @$PCO_InformesDataTableFormatoTotales.=$registro_informe["subtotales_formato"]."|";
 					    }
 					$SalidaFinalInforme.= '<!--<div class="table-responsive">-->
-											<table width="100%" class="btn-xs table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead><tr>';
+											<table width="100%" class="btn-xs table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead>';
+
+                    //if ($registro_informe["personalizacion_encabezados"]!="")
+					$SalidaFinalInforme.= '
+                            <!-- PERSONALIZACION DE ENCABEZADOS, GENERA CONFLICTO CON DATATABLES AL HACER REFERENCIA A INDICES MALOS
+                            <tr>
+            					<th colspan=1 rowspan="2">Columna1</th>
+                                <th colspan="2">Columna2</th>
+                            </tr>
+                            -->
+                        <tr>';
 
 					//Busca si tiene acciones (botones) para cada registro y los genera
 					$cadena_generica_botones=generar_botones_informe($informe);
@@ -5748,6 +5762,10 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					
 					//Obtiene ColumnasVisibles, NumerosColumnasOcultas, NumeroColumnas dentro de EtiquetasConsulta
 					$EtiquetasConsulta=generar_etiquetas_consulta($consulta,$informe); //Enviar el informe para que se determinen tambien sus columnas ocultas
+
+
+
+
 
 					//Genera HTML con las columnas
 					foreach($EtiquetasConsulta[0]["ColumnasVisibles"] as $EtiquetaColumna)

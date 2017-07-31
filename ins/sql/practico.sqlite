@@ -314,6 +314,8 @@ CREATE TABLE core_informe (
   soporte_datatable text DEFAULT 'N',
   formulario_filtrado text DEFAULT ''
   tamano_paginacion integer DEFAULT 10,
+  subtotales_columna text DEFAULT '',
+  subtotales_formato text DEFAULT ''
 
 );
 

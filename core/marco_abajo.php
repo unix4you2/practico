@@ -234,15 +234,21 @@
                 $TablasDataTable=@explode("|",$PCO_InformesDataTable);
                 $TablasDataTablePaginaciones=@explode("|",$PCO_InformesDataTablePaginaciones);
                 $TablasDataTableTotales=@explode("|",$PCO_InformesDataTableTotales);
+                $TablasDataTableFormatosTotales=@explode("|",$PCO_InformesDataTableFormatoTotales);
                 for ($i=0; $i<count($TablasDataTable);$i++)
                     {
                         $Paginacion=trim($TablasDataTablePaginaciones[$i]);
-                        $ColumnaTotales=trim($TablasDataTableTotales[$i]);
-                        $ColumnaTotales=1;
+                        $ColumnaTotales=trim($TablasDataTableTotales[$i])-1;
+                        $ColumnaTotalesVisual=trim($TablasDataTableTotales[$i]);
+                        $CadenaFormateadaTotales=trim($TablasDataTableFormatosTotales[$i]);
+                        //Realiza operaciones de reemplazo de patrones sobre la cadena de formato de Totales si aplica
+                        $CadenaFormateadaTotales=str_replace("_TOTAL_PAGINA_","'+pageTotal +'",$CadenaFormateadaTotales);
+                        $CadenaFormateadaTotales=str_replace("_TOTAL_INFORME_","'+total +'",$CadenaFormateadaTotales);
+                        $CadenaFormateadaTotales=str_replace("_COLUMNA_","$ColumnaTotalesVisual",$CadenaFormateadaTotales);
 
-                        if ($Paginacion=="" || $Paginacion==0) $Paginacion=10;
+                        if ($Paginacion=="" || $Paginacion==0) $Paginacion=10;  //Si no hay paginacion personalizada pone 10 por defecto
                         echo '
-                            //alert(" '.$TablasDataTable[$i].'  '.$Paginacion.'"); //Depuracion solamente
+                            //alert(" '.$TablasDataTable[$i].' Paginacion:'.$Paginacion.'  ColumnaTotales:'.$ColumnaTotales.'  CadenaFormateadaTotales:'.$CadenaFormateadaTotales.'  "); //Depuracion solamente
                             var oTable'.$i.' = $("#'.$TablasDataTable[$i].'").dataTable(
                                 {
                                     "pageLength": '.$Paginacion.',
@@ -250,21 +256,10 @@
                                     "bAutoWidth": true,
                                     "fnInitComplete": function() {
                                     this.fnAdjustColumnSizing(true);
-                                    },
-                                    "language": {
-                                            "lengthMenu": "'.$MULTILANG_Mostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
-                                            "zeroRecords": "Nothing found - sorry",
-                                            "info": "'.$MULTILANG_InfDataTableViendoP.' _PAGE_ '.$MULTILANG_InfDataTableDe.' _PAGES_",
-                                            "infoEmpty": "'.$MULTILANG_InfDataTableNoRegistrosDisponibles.'",
-                                            "infoFiltered": "('.$MULTILANG_InfDataTableFiltradoDe.' _MAX_ '.$MULTILANG_InfDataTableRegTotal.')",
-                                            oPaginate: { sFirst:"'.$MULTILANG_Primero.'",sLast:"'.$MULTILANG_Ultimo.'",sNext:"'.$MULTILANG_Siguiente.'",sPrevious:"'.$MULTILANG_Previo.'" },
-                                            sEmptyTable:"'.$MULTILANG_InfDataTableNoDatos.'",
-                                            sSearch:"'.$MULTILANG_Buscar.':",
-                                            sLoadingRecords:"'.$MULTILANG_Cargando.'...",
-                                            sProcessing:"'.$MULTILANG_Procesando.'...",
-                                            sZeroRecords:"'.$MULTILANG_InfDataTableNoRegistros.'"
-                                        },
-
+                                    },';
+                        //Agrega al datatable el footer con autosuma cuando aplica
+                        if (trim($TablasDataTableTotales[$i])!="" && $CadenaFormateadaTotales!="")
+                            echo '
                                     "footerCallback": function ( row, data, start, end, display ) {
                                         var api = this.api(), data;
                                         // Remueve el formato de la celda para obtener solamente el numero entero para la suma
@@ -290,10 +285,23 @@
                                                 }, 0 );
                                         // Actualiza el pie de pagina del datatable siempre en la columna 0
                                         $( api.column( 0 ).footer() ).html(
-                                            \'<div align=right><b>Total pagina: \'+pageTotal +\' Tota reporte: \'+ total + \'</b></div>\'
+                                            \''.$CadenaFormateadaTotales.'\'
                                         );
-                                    }
-
+                                    },';
+                        echo '
+                                    "language": {
+                                            "lengthMenu": "'.$MULTILANG_Mostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
+                                            "zeroRecords": "Nothing found - sorry",
+                                            "info": "'.$MULTILANG_InfDataTableViendoP.' _PAGE_ '.$MULTILANG_InfDataTableDe.' _PAGES_",
+                                            "infoEmpty": "'.$MULTILANG_InfDataTableNoRegistrosDisponibles.'",
+                                            "infoFiltered": "('.$MULTILANG_InfDataTableFiltradoDe.' _MAX_ '.$MULTILANG_InfDataTableRegTotal.')",
+                                            oPaginate: { sFirst:"'.$MULTILANG_Primero.'",sLast:"'.$MULTILANG_Ultimo.'",sNext:"'.$MULTILANG_Siguiente.'",sPrevious:"'.$MULTILANG_Previo.'" },
+                                            sEmptyTable:"'.$MULTILANG_InfDataTableNoDatos.'",
+                                            sSearch:"'.$MULTILANG_Buscar.':",
+                                            sLoadingRecords:"'.$MULTILANG_Cargando.'...",
+                                            sProcessing:"'.$MULTILANG_Procesando.'...",
+                                            sZeroRecords:"'.$MULTILANG_InfDataTableNoRegistros.'"
+                                        }
                                 }
                             );
                         ';

@@ -43,6 +43,8 @@
             //Presenta la lista de usuarios
             @$PCO_InformesDataTable.="TablaUsuariosChat|"; //Agrega la tabla a la lista de DataTables para ser convertida
             @$PCO_InformesDataTablePaginaciones.="15|";
+            @$PCO_InformesDataTableTotales.="|"; //Vacio. No necesita calculo de subtotales
+            @$PCO_InformesDataTableFormatoTotales.="|"; //Vacio. No necesita formato de subtotales
             echo '<hr><table width="100%" class="table table-condensed table-hover btn-xs table-responsive  table-unbordered  table-striped " id="TablaUsuariosChat">
 							<thead>
 								<tr>
