@@ -40,7 +40,6 @@
         }
 
 
-
     //Incluye archivo inicial de configuracion
 	include_once("inc/configuracion.php");
 
@@ -53,6 +52,26 @@
 		{
 			// Valida sesion activa de Practico
 			if (!isset($PCOSESS_SesionAbierta)) 
+				{
+					echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
+					die();
+				}
+		}
+
+	// Determina si es un usuario administrador para poder abrir el editor
+	if ($PCO_PCODER_StandAlone==0)
+		{
+			$ArregloAdmins=explode(",",$PCOVAR_Administradores);
+			//Recorre el arreglo de super-usuarios
+			$Resultado = 0;
+			if ($PCOSESS_LoginUsuario!="")
+				foreach ($ArregloAdmins as $UsuarioAdmin)
+					{
+						if (trim($UsuarioAdmin)==$PCOSESS_LoginUsuario)
+							$Resultado = 1;
+					}
+			//Anula el acceso
+			if ($Resultado == 0)
 				{
 					echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
 					die();
