@@ -34,6 +34,9 @@ LogCambios="
 * Enhan:  Informes en modo de diseño presentan el ID en la parte superior por comodidad de Rafagol.
 * Added:  Información resumida de las tareas en el tablero de Kanban sobre el dashboard del admin. 
 * Enhan:  Los usuarios definidos como plantilla son ahora restringidos para hacer login al sistema.  Así se mantiene la integridad de permisos sobre los mismos.
+* Added:  Se agrega botón de acceso directo para edición de los formularios en usuarios diseñadores de aplicación o administradores.
+* Added:  Ahora los botones de edición de eventos sobre controles presentan un resúmen de los tipos de evento asociados al control actualmente.
+* Added:  Se agrega botón de acceso directo para edición de los informes en usuarios diseñadores de aplicación o administradores.
 
 "
 

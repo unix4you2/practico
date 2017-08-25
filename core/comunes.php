@@ -4577,8 +4577,19 @@ $('#SampleElement').load('YourURL');
                     $ComplementoBotonEventos="";
                     $RegistroConteoEventos=ejecutar_sql("SELECT COUNT(*) as conteo_eventos FROM ".$TablasCore."evento_objeto WHERE objeto=? ",$registro_campos["id"])->fetch();
                     if($RegistroConteoEventos["conteo_eventos"]>0)
-                        $ComplementoBotonEventos='<br><a class="btn btn-xs btn-default" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Evento.'(s)" href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&pestana_activa_editor=eventos_objeto-tab&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-bolt fa-fw texto-blink"></i></a>';
-
+                        {
+                            //Listado de eventos
+                            $ResultadoEventos=ejecutar_sql("SELECT evento,LENGTH(javascript) as bytes_codigo FROM ".$TablasCore."evento_objeto WHERE objeto=? ",$registro_campos["id"]);
+                            $CadenaDetalleEventos="";
+                            $ConteoEventos=1;
+                            while ($RegistroEventos=$ResultadoEventos->fetch())
+                                {   
+                                    $CadenaDetalleEventos.="<li><b>".$RegistroEventos["evento"]."</b> (".$RegistroEventos["bytes_codigo"]." bytes)";
+                                    $ConteoEventos++;
+                                }
+                            $ComplementoBotonEventos='<br><a class="btn btn-xs btn-default" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Evento.'(s)'.$CadenaDetalleEventos.'" href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&pestana_activa_editor=eventos_objeto-tab&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-bolt fa-fw texto-blink"></i></a>';
+                        }
+                        
                     //Pone controles
                     $salida='<div id="PCOEditorContenedor_'.$registro_campos["id"].'" style="margin:2px; display:none; visibility:hidden; position: absolute; z-index:1000;">
                             <div style="display: inline-block">
@@ -4656,7 +4667,7 @@ $('#SampleElement').load('YourURL');
 
                 //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa y un boton de salto a edicion
                 $BotonSaltoEdicion='
-                            <a class="btn btn-default btn-xs" data-toggle="modal" title="'.$MULTILANG_FrmAdvScriptForm.'" href="index.php?PCO_Accion=editar_formulario&popup_activo=&formulario='.$formulario.'">
+                            <a class="btn btn-default btn-xs" href="index.php?PCO_Accion=editar_formulario&popup_activo=&formulario='.$formulario.'">
                                 <div><i class="fa fa-pencil-square"></i> '.$MULTILANG_Editar.' '.$MULTILANG_Formularios.' <i>[ID='.$formulario.']</i></div>
                             </a>';
 				if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
@@ -5646,14 +5657,18 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		global $PCOSESS_LoginUsuario,$Nombre_usuario,$Descripcion_usuario,$Nivel_usuario,$Correo_usuario,$LlaveDePasoUsuario,$PCO_FechaOperacion;
 		// Carga variables de definicion de tablas
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
-		global $MULTILANG_Exportar,$MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano,$MULTILANG_MonCommSQL;
+		global $MULTILANG_Editar,$MULTILANG_Informes,$MULTILANG_Exportar,$MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano,$MULTILANG_MonCommSQL;
 		global $IdiomaPredeterminado;
         global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales;
         global $ModoDepuracion;
 
-        //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa
+        //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa y un boton de salto a edicion
+        $BotonSaltoEdicion='
+                    <a class="btn btn-default btn-xs" href="index.php?PCO_Accion=editar_informe&informe='.$informe.'">
+                        <div><i class="fa fa-pencil-square"></i> '.$MULTILANG_Editar.' '.$MULTILANG_Informes.' <i>[ID='.$informe.']</i></div>
+                    </a>';
 		if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
-		    $ComplementoIdObjetoEnTitulo=" <i>[ID=$informe]</i>";
+		    $ComplementoIdObjetoEnTitulo="  $BotonSaltoEdicion";
 
 		// Busca datos del informe
 		$consulta_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
