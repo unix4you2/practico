@@ -1938,7 +1938,7 @@ if ($PCO_Accion=="editar_informe")
 
 
 
-			<?php abrir_ventana($MULTILANG_InfParam, 'panel-primary'); ?>
+			<?php abrir_ventana($MULTILANG_InfParam." <i>[ID=".$registro_informe['id']."]</i>", 'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="actualizar_informe">
 			<input type="Hidden" name="id" value="<?php echo $registro_informe['id']; ?>">

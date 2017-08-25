@@ -254,6 +254,9 @@
                                     "pageLength": '.$Paginacion.',
                                     "scrollX": true,
                                     "bAutoWidth": true,
+                                    //"bSort": false,
+                                    //aoColumns: [ { sWidth: "45%" }, { sWidth: "45%" }, { sWidth: "10%", bSearchable: false, bSortable: false } ],
+
                                     "fnInitComplete": function() {
                                     this.fnAdjustColumnSizing(true);
                                     },';

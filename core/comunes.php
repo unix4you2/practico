@@ -4804,7 +4804,7 @@ $('#SampleElement').load('YourURL');
                                 //Genera el contenedor de la pestana
                                 echo '
                                 <!-- INICIO de las pestanas No '.$pestana_activa.' -->
-                                    <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="PCO_PestanaFormulario_'.$pestana_activa.'" >';
+                                    <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="PCO_PestanaFormulario_'.$pestana_activa.'" >';
                                     
                                         //Booleana que determina si se debe incluir el javascript de ckeditor
                                         $existe_campo_textoformato=0;
