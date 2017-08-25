@@ -995,7 +995,7 @@
     $MULTILANG_UsrSaltarInformes='Jump to REPORT rights for this user';
     $MULTILANG_UsrSaltarMenues='Jump to MENU rights for this user';
     $MULTILANG_UsrEsPlantilla='Use this as a template user permissions for others?';
-    $MULTILANG_UsrEsPlantillaDes='Menu rigths and reports assigned to this user will be automatically copied during each entry to persons using it as a template. This allows you to maintain user profiles updated according to general templates.';
+    $MULTILANG_UsrEsPlantillaDes='Menu rigths and reports assigned to this user will be automatically copied during each entry to persons using it as a template. This allows you to maintain user profiles updated according to general templates.  Remember: template users cannot login into the system.';
     $MULTILANG_UsrPlantillaAplicar='Template permissions to apply to each entry';
     $MULTILANG_UsrPlantillaAplicarDes='The permissions assigned to the user selected in the list they will be transferred to this new user each to make an income';
     $MULTILANG_UsrPermisoManual='Manual rights';

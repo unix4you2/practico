@@ -31,6 +31,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 * Enhan:  Informes en modo de diseño presentan el ID en la parte superior por comodidad de Rafagol.
 * Added:  Información resumida de las tareas en el tablero de Kanban sobre el dashboard del admin. 
+* Enhan:  Los usuarios definidos como plantilla son ahora restringidos para hacer login al sistema.  Así se mantiene la integridad de permisos sobre los mismos.
 
 "
 

@@ -992,8 +992,8 @@
     $MULTILANG_UsrCreacionOK='El usuario ha sido creado satisfactoriamente.  Se filtra ahora para agregar cualquier opcion de menu o informe que corresponda.  Puede cancelar si no es necesario definir permisos en este momento.';
     $MULTILANG_UsrSaltarInformes='Saltar a permisos de INFORMES para este usuario';
     $MULTILANG_UsrSaltarMenues='Saltar a permisos de MENUES para este usuario';
-    $MULTILANG_UsrEsPlantilla='Utilizar este usuario como plantilla de permisos para otros?';
-    $MULTILANG_UsrEsPlantillaDes='Los permisos de menu e informes asignados a este usuario seran copiados automaticamente durante cada ingreso a los usuarios que lo utilicen como plantilla. Esto le permite mantener perfiles de usuario actualizados de acuerdo a plantillas generales.';
+    $MULTILANG_UsrEsPlantilla='Utilizar este usuario como plantilla de permisos para otros?. ';
+    $MULTILANG_UsrEsPlantillaDes='Los permisos de menu e informes asignados a este usuario seran copiados automaticamente durante cada ingreso a los usuarios que lo utilicen como plantilla. Esto le permite mantener perfiles de usuario actualizados de acuerdo a plantillas generales.   Tenga en cuenta que los usuarios plantilla son desactivados para su login puesto que son utilizados unicamente para establecer roles y perfiles de permisos.';
     $MULTILANG_UsrPlantillaAplicar='Plantilla de permisos para aplicar en cada ingreso';
     $MULTILANG_UsrPlantillaAplicarDes='Los permisos asignados al usuario seleccionado en la lista seran tranferidos a este nuevo usuario cada que haga un ingreso';
     $MULTILANG_UsrPermisoManual='Permisos manuales';

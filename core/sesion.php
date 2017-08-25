@@ -109,7 +109,7 @@
 				  {
 
 						// Busca datos del usuario Practico, sin importar metodo de autenticacion para tener configuraciones de permisos y parametros propios de la herramienta
-						$resultado_usuario=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login='$uid'");
+						$resultado_usuario=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login='$uid' AND es_plantilla=0 ");
 						$registro = $resultado_usuario->fetch();
 						
 						// Se buscan datos de la aplicacion

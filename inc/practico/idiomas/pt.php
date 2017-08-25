@@ -995,7 +995,7 @@
     $MULTILANG_UsrSaltarInformes='Ir para relat&oacute;rio sobre os direitos para este usu&aacute;rio';
     $MULTILANG_UsrSaltarMenues='Ir para direitos MENU para esse usu&aacute;rio';
     $MULTILANG_UsrEsPlantilla='Use isso como um usu&aacute;rio permissões modelo para os outros?';
-    $MULTILANG_UsrEsPlantillaDes='Direitos de menu e relat&oacute;rios atribu&iacute;dos a esse usu&aacute;rio ser&aacute; copiado automaticamente durante cada entrada de pessoas a us&aacute;-lo como um modelo. Isto permite-lhe manter atualizados os perfis de usu&aacute;rio de acordo com modelos gerais';
+    $MULTILANG_UsrEsPlantillaDes='Direitos de menu e relat&oacute;rios atribu&iacute;dos a esse usu&aacute;rio ser&aacute; copiado automaticamente durante cada entrada de pessoas a us&aacute;-lo como um modelo. Isto permite-lhe manter atualizados os perfis de usu&aacute;rio de acordo com modelos gerais.  Remember: template users cannot login into the system.';
     $MULTILANG_UsrPlantillaAplicar='Permissões de modelo para aplicar a cada entrada';
     $MULTILANG_UsrPlantillaAplicarDes='As permissões atribu&iacute;das ao usu&aacute;rio selecionado na lista que eles serão transferidos para este novo usu&aacute;rio cada um para fazer uma renda';
     $MULTILANG_UsrPermisoManual='Direitos manuais';
