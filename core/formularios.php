@@ -764,6 +764,13 @@
 /* ################################################################## */
 if ($PCO_Accion=="editar_formulario")
 	{
+	    //Si no recibe un nombre de tabla intenta averiguarlo desde el formulario
+	    if ($nombre_tabla=="")
+	        {
+	           $RegistroFormulario=ejecutar_sql("SELECT tabla_datos FROM ".$TablasCore."formulario WHERE id=? ","$formulario")->fetch();
+                $nombre_tabla=$RegistroFormulario["tabla_datos"];
+	        }
+	    
         //Prepara el selector de iconos para las opciones
         selector_iconos_awesome();
 

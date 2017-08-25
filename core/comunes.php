@@ -4646,7 +4646,7 @@ $('#SampleElement').load('YourURL');
 				global $_SeparadorCampos_;
 				// Carga variables de definicion de tablas
 				global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
-				global $MULTILANG_Elementos,$MULTILANG_Agregar,$MULTILANG_Configuracion,$MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
+				global $MULTILANG_Formularios,$MULTILANG_Editar,$MULTILANG_Elementos,$MULTILANG_Agregar,$MULTILANG_Configuracion,$MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
                 global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales;
                 global $POSTForm_ListaCamposObligatorios,$POSTForm_ListaTitulosObligatorios;
 
@@ -4654,9 +4654,13 @@ $('#SampleElement').load('YourURL');
 				$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
 				$registro_formulario = @$consulta_formulario->fetch();
 
-                //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa
+                //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa y un boton de salto a edicion
+                $BotonSaltoEdicion='
+                            <a class="btn btn-default btn-xs" data-toggle="modal" title="'.$MULTILANG_FrmAdvScriptForm.'" href="index.php?PCO_Accion=editar_formulario&popup_activo=&formulario='.$formulario.'">
+                                <div><i class="fa fa-pencil-square"></i> '.$MULTILANG_Editar.' '.$MULTILANG_Formularios.' <i>[ID='.$formulario.']</i></div>
+                            </a>';
 				if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
-				    $ComplementoIdObjetoEnTitulo=" <i>[ID=$formulario]</i>";
+				    $ComplementoIdObjetoEnTitulo="  $BotonSaltoEdicion";
 
 				echo '
 				<script type="text/javascript">
