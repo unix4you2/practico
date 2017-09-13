@@ -716,6 +716,12 @@
 		{
 			//Busca si ya existe un evento del mismo tipo para ese objeto
 			$registro_evento_previo=ejecutar_sql("SELECT * FROM ".$TablasCore."evento_objeto WHERE objeto=? AND evento=? ","$id_objeto_evento$_SeparadorCampos_$evento_objeto")->fetch();
+            $IdEventoPrevio=$registro_evento_previo["id"];
+            $JavaScriptEventoPrevio=$registro_evento_previo["javascript"];
+            
+            $NaturalDocs_PlantillaFuncion="\n/*\nFunction: SUNOMBRE_$evento_objeto\n\tIngrese aqui la descripcion de su funcion, procedimiento o proceso realizado por este evento\n\n\tParametros:\n\n\t\tParametro1 - Descripcion del primer parametro de entrada\n\t\tParametro2 - Descripcion del segundo parametro de entrada\n\n\tProceso simplificado:\n\t\t(start code)\n\t\t\tInstrucciones especificas importantes, Scripts u operaciones de BD, Etc\n\t\t(end)\n\n\tSalida:\n\n\t\tDescriba la salida de esta funcion, procedimiento o proceso\n\n\tVea tambien:\n\n\t\t<FuncionRelacionada1> | <FuncionRelacionada2> | <FuncionRelacionada3>\n*/\n\n";
+            //Agrega una plantilla base cuando se esta creando el evento
+            if($JavaScriptEventoPrevio=="") $JavaScriptEventoPrevio=$NaturalDocs_PlantillaFuncion;
         ?>
             <iframe name="iframe_almacenamiento" src="about:blank" style="visibility: hidden; display: none;"></iframe>
             <form name="form_evento" target="iframe_almacenamiento" action="<?php echo $ArchivoCORE; ?>" style="padding: 0px; margin: 0px;">
@@ -726,21 +732,30 @@
                 <input type="Hidden" name="Presentar_FullScreen" value="1">
                 <input type="Hidden" name="Precarga_EstilosBS" value="0">
                 <div class="well" style="margin: 0px; padding: 0px;">
-                <textarea id="javascript_eventos" name="javascript_eventos" data-editor="javascript" class="form-control" style="width: 783px; height: 480px;"><?php echo $registro_evento_previo["javascript"]; ?></textarea>
+                <textarea id="javascript_eventos" name="javascript_eventos" data-editor="javascript" class="form-control" style="width: 783px; height: 480px;"><?php echo $JavaScriptEventoPrevio; ?></textarea>
                 </div>
             </form>
             <form name="form_evento_eliminar" action="<?php echo $ArchivoCORE; ?>" style="padding: 0px; margin: 0px;">
                 <input type="Hidden" name="PCO_Accion" value="eliminar_evento_objeto">
-                <input type="Hidden" name="evento" value="<?php echo $registro_evento_previo["id"]; ?>">
+                <input type="Hidden" name="evento" value="<?php echo $IdEventoPrevio; ?>">
                 <input type="Hidden" name="Presentar_FullScreen" value="1">
                 <input type="Hidden" name="Precarga_EstilosBS" value="0">
             </form>
             <?php 
                 echo '<br>
-                    <button type="button" class="btn btn-success" onclick="PCOJS_MostrarMensajeCargandoSimple(1000); document.form_evento.submit();"><i class="fa fa-save"></i> '.$MULTILANG_Guardar.' </button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button type="button" class="btn btn-danger" onclick="form_evento_eliminar.submit();"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.' '.$MULTILANG_Evento.'</button>';
+                <div class="row">
+                    <div class="col col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <button type="button" class="btn btn-success" onclick="PCOJS_MostrarMensajeCargandoSimple(1000); document.form_evento.submit();"><i class="fa fa-save"></i> '.$MULTILANG_Guardar.' </button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</button>
+                    </div>
+                    <div class="col col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <button type="button" class="btn btn-danger" onclick="form_evento_eliminar.submit();"><i class="fa fa-trash"></i> '.$MULTILANG_Eliminar.' '.$MULTILANG_Evento.'</button>
+                    </div>
+                    <div class="col col-xs-4 col-sm-4 col-md-4 col-lg-4" align=right>
+                        <!--<button type="button" class="btn btn-info" data-toggle="tooltip" data-html="true"  data-placement="auto" title="'.$MULTILANG_DocumentarDes.'" onclick="$(\'#javascript_eventos\').val(\''.$NaturalDocs_PlantillaFuncion.'\');"><i class="fa fa-file-code-o"></i> '.$MULTILANG_Documentar.'</button>-->
+                        <a class="btn btn-primary" data-toggle="tooltip" data-html="true"  data-placement="auto" title="'.$MULTILANG_DocumentarLink.'" href="http://www.naturaldocs.org/reference/formatting/" target="_blank"><i class="fa fa-book"></i>&nbsp;</a>
+                    </div>
+                </div>';
 		}
 
 

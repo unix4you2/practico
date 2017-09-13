@@ -37,6 +37,7 @@ LogCambios="
 * Added:  Se agrega botón de acceso directo para edición de los formularios en usuarios diseñadores de aplicación o administradores.
 * Added:  Ahora los botones de edición de eventos sobre controles presentan un resúmen de los tipos de evento asociados al control actualmente.
 * Added:  Se agrega botón de acceso directo para edición de los informes en usuarios diseñadores de aplicación o administradores.
+* Added:  La generacion de eventos para controles de formulario incluye ahora un encabezado con plantillas de documentacion en notación NaturalDocs.
 
 "
 

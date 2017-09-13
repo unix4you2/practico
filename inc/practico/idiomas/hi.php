@@ -1248,3 +1248,8 @@
     $MULTILANG_Historia3Des='ID: ______BRAs ________ I need ___________ with the purpose of ________.BRBRScene: ________. In case _______ it should _______';
     $MULTILANG_ListaColumnas='Columns list';
     $MULTILANG_ListaCategorias='Category list';
+
+    //Opciones de Documentacion
+    $MULTILANG_Documentar='दस्तावेज़';
+    $MULTILANG_DocumentarDes='नैसर्गिक दस्तावेज़ संकेतन में कार्य या कार्यविधियों के लिए कोड की शुरुआत में एक प्रलेखन टेम्पलेट जोड़ें';
+    $MULTILANG_DocumentarLink='NaturalDocs के लिए अतिरिक्त दस्तावेज़ मदद खोलें';

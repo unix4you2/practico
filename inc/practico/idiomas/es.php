@@ -1249,3 +1249,8 @@
     $MULTILANG_Historia3Des='ID: ______BRComo ________ Se necesita ___________ con el fin de ________.BRBREscenario: ________. En caso que _______ se debe _______';
     $MULTILANG_ListaColumnas='Lista de columnas';
     $MULTILANG_ListaCategorias='Lista de categorias';
+
+    //Opciones de Documentacion
+    $MULTILANG_Documentar='Documentar';
+    $MULTILANG_DocumentarDes='Agregar al comienzo del c&oacute;digo una plantilla de documentaci&oacute;n para funciones o procedimientos en notaci&oacute;n NaturalDocs';
+    $MULTILANG_DocumentarLink='Abrir ayuda de documentaci&oacute;n extra para NaturalDocs';
