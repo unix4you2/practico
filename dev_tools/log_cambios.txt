@@ -38,7 +38,7 @@ LogCambios="
 * Added:  Ahora los botones de edición de eventos sobre controles presentan un resúmen de los tipos de evento asociados al control actualmente.
 * Added:  Se agrega botón de acceso directo para edición de los informes en usuarios diseñadores de aplicación o administradores.
 * Added:  La generacion de eventos para controles de formulario incluye ahora un encabezado con plantillas de documentacion en notación NaturalDocs.
-
+* Added:  Ahora las pestanas de formulario con etiqueta PCO_NoVisible no seran presentadas a usuarios estandar.  Solamente apareceran a los diseñadores de aplicacion.
 "
 
 ########################################################################

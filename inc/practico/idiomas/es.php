@@ -559,7 +559,7 @@
 	$MULTILANG_FrmCanvasLink='[Ver grafico ya cargado]';
 	$MULTILANG_FrmErrorCam='Error en el dispositivo de video.  Verifique que cuenta con una camara instalada y que ha hecho clic en Permitir o aceptar para permitir a Practico utilizarla.';
     $MULTILANG_FrmPestana='T&iacute;tulo de la Pesta&ntilde;a a que pertenece en el formulario';
-    $MULTILANG_FrmDesPestana='Indica la pesta&ntilde;a a la que pertenece el elemento dentro del formulario.  Practico genera automaticamente las pesta&ntilde;as de acuerdo a los valores ingresados en cada objeto.';
+    $MULTILANG_FrmDesPestana='Indica la pesta&ntilde;a a la que pertenece el elemento dentro del formulario.  Practico genera automaticamente las pesta&ntilde;as de acuerdo a los valores ingresados en cada objeto.  Si especifica una pestana <b>PCO_NoVisible</b> la pestana no aparecera a los usuarios estandar pero sus elementos seran agregados normalmente al form para poder procesarlos.';
     $MULTILANG_FrmTagPersonalizado='Personalizaci&oacute;n del Tag HTML';
     $MULTILANG_FrmDesTagPersonalizado='Permite agregar par&aacute;metros y otras configuraciones HTML a la etiqeuta generada por Pr&aacute;ctico. 
             <hr>Ejemplos para algunos tipos de control:

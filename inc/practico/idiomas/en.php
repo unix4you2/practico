@@ -561,7 +561,7 @@
 	$MULTILANG_FrmCanvasLink='[Open drawing already added]';
 	$MULTILANG_FrmErrorCam='There is an error with the video device.  Please check that you have a video device or webcam installed and the you answer Affirmative or Accept in your browser to allow Practico to use the device.';
     $MULTILANG_FrmPestana='Forms tab title in which the control will be published';
-    $MULTILANG_FrmDesPestana='Assign the tab for this object in the form.  Practico automatically creates tabs according to the values entered in each object.';
+    $MULTILANG_FrmDesPestana='Assign the tab for this object in the form.  Practico automatically creates tabs according to the values entered in each object.  If you specify a PCO_NoVisible tab the eyelash will not appear to standard users (it will be hidden) but its elements will normally be added to the form in order to process them.';
     $MULTILANG_FrmTagPersonalizado='HTML Custom Tag';
     $MULTILANG_FrmDesTagPersonalizado='Allow to add parameters to the HTML Tag created over the form by Practico. 
             <hr>Some examples according to the data control type:

@@ -4776,8 +4776,12 @@ $('#SampleElement').load('YourURL');
                 $conteo_pestanas=0;
                 while($registro_conteo_pestanas = @$consulta_conteo_pestanas->fetch())
                     {
-                        $conteo_pestanas++;
-                        $ultimo_nombre_pestanas=$registro_conteo_pestanas["pestana_objeto"];
+                        $titulo_pestana_formulario=$registro_conteo_pestanas["pestana_objeto"];
+                        if ($titulo_pestana_formulario!="PCO_NoVisible" || PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
+                            {
+                                $conteo_pestanas++;
+                                $ultimo_nombre_pestanas=$registro_conteo_pestanas["pestana_objeto"];
+                            }
                     }
                 //Presenta barra de navegacion de pestanas si se encuentra al menos una
                 if ($conteo_pestanas>0 && ($ultimo_nombre_pestanas!=""))
@@ -4795,7 +4799,9 @@ $('#SampleElement').load('YourURL');
                             {
                                 $titulo_pestana_formulario=$registro_formulario_pestana["pestana_objeto"];
                                 if ($titulo_pestana_formulario=="") $titulo_pestana_formulario="<i class='fa fa-stack-overflow'></i>";
-                                echo '<li '.$estado_activa_primera_pestana.'  ><a  href="#PCO_PestanaFormulario_'.$pestana_activa.'" data-toggle="tab" id="PCO_LinkPestanaFormulario_'.$pestana_activa.'">'.$titulo_pestana_formulario.'</a></li>';
+                                //Presenta la pestana solamente si no es una oculta
+                                if ($titulo_pestana_formulario!="PCO_NoVisible" || PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
+                                    echo '<li '.$estado_activa_primera_pestana.'  ><a  href="#PCO_PestanaFormulario_'.$pestana_activa.'" data-toggle="tab" id="PCO_LinkPestanaFormulario_'.$pestana_activa.'">'.$titulo_pestana_formulario.'</a></li>';
                                 //Limpia para las siguientes pestanas
                                 $estado_activa_primera_pestana='';
                                 $pestana_activa++;

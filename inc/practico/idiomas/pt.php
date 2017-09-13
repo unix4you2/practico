@@ -561,7 +561,7 @@
 	$MULTILANG_FrmCanvasLink='[Abrir desenho j&aacute; adicionado]';
 	$MULTILANG_FrmErrorCam='H&aacute; um erro com o dispositivo de v&iacute;deo. Por favor, verifique se você tem um dispositivo de v&iacute;deo ou webcam instalada ea sua resposta afirmativa ou Aceitar no seu browser para permitir Practico para usar o dispositivo.';
     $MULTILANG_FrmPestana='Formul&aacute;rios t&iacute;tulo da aba no qual o controle ser&aacute; publicado';
-    $MULTILANG_FrmDesPestana='Atribuir a guia para este objeto no formul&aacute;rio. Practico automaticamente cria guias de acordo com os valores inseridos em cada objeto.';
+    $MULTILANG_FrmDesPestana='Atribuir a guia para este objeto no formul&aacute;rio. Practico automaticamente cria guias de acordo com os valores inseridos em cada objeto.  Se você especificar uma guia PCO_NoVisible, o eyelash não aparecerá para usuários padrão (será oculto), mas seus elementos serão normalmente adicionados ao formulário para processá-los.';
     $MULTILANG_FrmTagPersonalizado='Tag HTML personalizada';
     $MULTILANG_FrmDesTagPersonalizado='Permitir para adicionar parâmetros para o Tag HTML criado atrav&eacute;s do formul&aacute;rio por Practico. 
             <hr>Alguns exemplos de acordo com o tipo de controlo de dados:
