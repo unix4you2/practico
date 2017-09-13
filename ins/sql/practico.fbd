@@ -64,7 +64,7 @@ CREATE TABLE core_menu (
   url TEXT,
   destino varchar(250) default '',
   tipo_comando varchar(15) default 'Interno',  #Interno=De sistema,Personal=funciones en archivo,Objeto=creadas por DynApps
-  comando varchar(250) default '',
+  comando text,
   nivel_usuario int(10) default '0', # -1=No aplica, sino Rol minimo de usuario que accesan la opcion 
   columna int(1) default '1',
   posible_arriba int(1) default '0',

@@ -807,7 +807,7 @@
     $MULTILANG_MnuDesImagen='Display a list of images available on the system';
 	$MULTILANG_MnuComandos='CONFIGURATION COMMANDS AND ACTIONS';
 	$MULTILANG_MnuClic='Possible to click?';
-	$MULTILANG_MnuURL='Static URL';
+	$MULTILANG_MnuURL='Static URL or commando in format javascript:command()';
 	$MULTILANG_MnuTitURL='Bring to a URL or execute a javascript?';
 	$MULTILANG_MnuDesURL='Enter full URL or a command defined javascript javascript: command to be replaced within an anchor HREF generated around the object. If you need to pass string parameters to javascript commands you could use single cuotes';
 	$MULTILANG_MnuTipo='Command type';
@@ -833,7 +833,7 @@
     $MULTILANG_MnuTgtSelf='Same window or frame that it was clicked';
     $MULTILANG_MnuTgtParent='Parent frame or window';
     $MULTILANG_MnuTgtTop='Full body of the window';
-    $MULTILANG_MnuTgt='Target (Only options using an URL)';
+    $MULTILANG_MnuTgt='Target (Only options using an URL or JavaScript command)';
     $MULTILANG_ImagenMenu='Image: Select an icon or enter a relative path';
 
 	//Objetos, seguridad y otros

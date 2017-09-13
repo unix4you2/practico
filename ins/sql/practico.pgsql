@@ -64,7 +64,7 @@ CREATE TABLE core_menu (
   url text,
   destino varchar(250) default '',
   tipo_comando varchar(15) default 'Interno', 
-  comando varchar(250) default '',
+  comando text,
   nivel_usuario integer default '0',
   columna integer default '1',
   posible_arriba integer default '0',

@@ -833,7 +833,7 @@
     $MULTILANG_MnuTgtSelf='Mesma janela ou o quadro que foi clicado';
     $MULTILANG_MnuTgtParent='Quadro pai ou janela';
     $MULTILANG_MnuTgtTop='Corpo cheio da janela';
-    $MULTILANG_MnuTgt='Alvo (S&oacute; opções usando uma URL)';
+    $MULTILANG_MnuTgt='Alvo (S&oacute; opções usando uma URL ou JavaScript comando)';
     $MULTILANG_ImagenMenu='Image: Selecione um &iacute;cone ou digite um caminho relativo';
 
 	//Objetos, seguridad y otros

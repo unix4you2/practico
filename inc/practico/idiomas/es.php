@@ -559,7 +559,7 @@
 	$MULTILANG_FrmCanvasLink='[Ver grafico ya cargado]';
 	$MULTILANG_FrmErrorCam='Error en el dispositivo de video.  Verifique que cuenta con una camara instalada y que ha hecho clic en Permitir o aceptar para permitir a Practico utilizarla.';
     $MULTILANG_FrmPestana='T&iacute;tulo de la Pesta&ntilde;a a que pertenece en el formulario';
-    $MULTILANG_FrmDesPestana='Indica la pesta&ntilde;a a la que pertenece el elemento dentro del formulario.  Practico genera automaticamente las pesta&ntilde;as de acuerdo a los valores ingresados en cada objeto.  Si especifica una pestana <b>PCO_NoVisible</b> la pestana no aparecera a los usuarios estandar pero sus elementos seran agregados normalmente al form para poder procesarlos.';
+    $MULTILANG_FrmDesPestana='Indica la pesta&ntilde;a a la que pertenece el elemento dentro del formulario.  Practico genera automaticamente las pesta&ntilde;as de acuerdo a los valores ingresados en cada objeto.  Si especifica una pestana <b>PCO_NoVisible</b> la pestana no aparecera a los usuarios estandar (quedara oculta) pero sus elementos seran agregados normalmente al form para poder procesarlos.';
     $MULTILANG_FrmTagPersonalizado='Personalizaci&oacute;n del Tag HTML';
     $MULTILANG_FrmDesTagPersonalizado='Permite agregar par&aacute;metros y otras configuraciones HTML a la etiqeuta generada por Pr&aacute;ctico. 
             <hr>Ejemplos para algunos tipos de control:
@@ -805,7 +805,7 @@
 	$MULTILANG_MnuDesImagen='Desplegar una lista de im&aacute;genes disponibles en el sistema';
 	$MULTILANG_MnuComandos='CONFIGURACION DE COMANDOS Y ACCIONES';
 	$MULTILANG_MnuClic='Posible hacer clic?';
-	$MULTILANG_MnuURL='URL est&aacute;tica';
+	$MULTILANG_MnuURL='URL est&aacute;tica o comando en formato javascript:comando()';
 	$MULTILANG_MnuTitURL='Llevar a una URL o ejecutar un javascript?';
 	$MULTILANG_MnuDesURL='Ingrese una URL completa o un comando javascript definido por javascript:comando para ser reemplazadas dentro de un HREF de un ancla generada alrededor del objeto.  Si requiere parametros tipo cadena para sus comandos javascript utilice comillas simples para encerrarlos';
 	$MULTILANG_MnuTipo='Tipo de comando';
@@ -831,7 +831,7 @@
     $MULTILANG_MnuTgtSelf='Misma ventana o marco actual';
     $MULTILANG_MnuTgtParent='Ventana padre';
     $MULTILANG_MnuTgtTop='Todo el cuerpo de la ventana actual';
-    $MULTILANG_MnuTgt='Destino (S&oacute;lo opciones con URL)';
+    $MULTILANG_MnuTgt='Destino (S&oacute;lo opciones con URL o comandos Javascript:)';
     $MULTILANG_ImagenMenu='Imagen: Seleccione un icono o indique la ruta relativa';
 
 	//Objetos, seguridad y otros
