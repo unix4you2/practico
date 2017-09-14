@@ -5888,6 +5888,27 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		// Si el informe tiene formato_final = G (grafico)
 		if ($registro_informe["formato_final"]=="G" && $registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
 			{
+
+
+				// CREA OBJETO SEGUN TIPO DE GRAFICO.  Incluye compatibilidad para graficos viejos.
+				//Por defecto define tipo barra para cualquiera de los definidos sin compatibilidad
+				$TipoObjetoGraficoMorris     = "Morris.Bar";
+				if ($tipo_grafico=="torta")
+					$TipoObjetoGraficoMorris = "Morris.Donut";
+				if ($tipo_grafico=="barrah")
+					$TipoObjetoGraficoMorris = "Morris.Bar";
+				if ($tipo_grafico=="barrah")
+					$TipoObjetoGraficoMorris = "Morris.Area";
+				if ($tipo_grafico=="torta")
+					$TipoObjetoGraficoMorris = "Morris.Line";
+
+
+
+
+
+
+                /*
+                //USO DE LIBRERIAS PREVIAS (Practico LibChart)
 				//Consulta el formato de grafico y datos de series para ponerlo en los campos
 				//Dado por: Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
 				$formato_base=explode("|",$registro_informe["formato_grafico"]);
@@ -5998,6 +6019,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				$chart->setTitle($registro_informe["titulo"]);
 				$chart->render("tmp/Inf_".$registro_informe["id"]."-".$PCOSESS_LoginUsuario.".png");
 				echo '<img alt="Grafico" src="tmp/Inf_'.$Identificador_informe.'-'.$PCOSESS_LoginUsuario.'.png" style="border: 1px solid gray;">';
+				*/
 			} // Fin si informe es G (grafico)
 
 		if ($en_ventana) cerrar_ventana();
