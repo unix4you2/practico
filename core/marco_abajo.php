@@ -151,15 +151,8 @@
     <?php
         //Carga solo Morris cuando es pagina principal por ahora para evitar conflictos con DatePicker
         if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$PCOSESS_SesionAbierta && @$PCO_Accion=="Ver_menu")
-        {
-    ?>
-    <script src="inc/bootstrap/js/plugins/morris/raphael.min.js"></script>
-    <script src="inc/bootstrap/js/plugins/morris/morris.min.js"></script>
-    <?php
         // Incluye archivo con las consultas y datos para ser diagramados por Morris
-		if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCOSESS_SesionAbierta)
             include_once("core/marco_admin_morris.php");
-        }
     ?>
 
     <!-- DataTables JavaScript -->
