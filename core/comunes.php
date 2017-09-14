@@ -5888,18 +5888,25 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		// Si el informe tiene formato_final = G (grafico)
 		if ($registro_informe["formato_final"]=="G" && $registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
 			{
+			    //#############################################################################
+                //############################## LIBRERIA MORRIS ##############################
+			    //#############################################################################
 
+				//Consulta el formato de grafico y datos de series para ponerlo en los campos
+				//Dado por: Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
+				$formato_base=explode("|",$registro_informe["formato_grafico"]);
+				$tipo_grafico=$formato_base[0];
+				$lista_nombre_series=explode("!",$formato_base[1]);
+				$lista_etiqueta_series=explode("!",$formato_base[2]);
+				$lista_valor_series=explode("!",$formato_base[3]);
 
-				// CREA OBJETO SEGUN TIPO DE GRAFICO.  Incluye compatibilidad para graficos viejos.
-				//Por defecto define tipo barra para cualquiera de los definidos sin compatibilidad
-				$TipoObjetoGraficoMorris     = "Morris.Bar";
+				// CREA OBJETO SEGUN TIPO DE GRAFICO
+				$TipoObjetoGraficoMorris     = "Morris.Area";  //Por defecto define tipo Area para cualquiera de los definidos sin compatibilidad conocida
 				if ($tipo_grafico=="torta")
 					$TipoObjetoGraficoMorris = "Morris.Donut";
-				if ($tipo_grafico=="barrah")
+				if ($tipo_grafico=="barrah" || $tipo_grafico=="barrav" || $tipo_grafico=="barrah_multiples" || $tipo_grafico=="barrav_multiples")
 					$TipoObjetoGraficoMorris = "Morris.Bar";
-				if ($tipo_grafico=="barrah")
-					$TipoObjetoGraficoMorris = "Morris.Area";
-				if ($tipo_grafico=="torta")
+				if ($tipo_grafico=="linea" || $tipo_grafico=="linea_multiples")
 					$TipoObjetoGraficoMorris = "Morris.Line";
 
 
@@ -5908,8 +5915,10 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 
                 /*
-                //USO DE LIBRERIAS PREVIAS (Practico LibChart)
-				//Consulta el formato de grafico y datos de series para ponerlo en los campos
+			    //#############################################################################
+                //#################### LIBRERIA Practico (Libchart) ###########################
+			    //#############################################################################
+			    //Consulta el formato de grafico y datos de series para ponerlo en los campos
 				//Dado por: Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
 				$formato_base=explode("|",$registro_informe["formato_grafico"]);
 				$tipo_grafico=$formato_base[0];
