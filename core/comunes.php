@@ -5898,6 +5898,48 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				$lista_etiqueta_series=explode("!",$formato_base[2]);
 				$lista_valor_series=explode("!",$formato_base[3]);
 
+				//Elimina los nombres de tabla en caso de tener punto y usa los alias si los tiene
+				for ($i=0;$i<5;$i++)
+					{
+						//Elimina nombres de tabla encontrando el punto y seleccionando siguiente palabra
+						if (strpos($lista_etiqueta_series[$i], "."))
+							{
+								$tmp=explode(".",$lista_etiqueta_series[$i]);
+								$lista_etiqueta_series[$i]=$tmp[1];
+							}
+						if (strpos($lista_valor_series[$i], "."))
+							{
+								$tmp=explode(".",$lista_valor_series[$i]);
+								$lista_valor_series[$i]=$tmp[1];
+							}
+						// Prefiere los alias sobre los nombres de campo cuando encuentra un AS 
+						if (strpos($lista_etiqueta_series[$i], " AS "))
+							{
+								$tmp=explode(" AS ",$lista_etiqueta_series[$i]);
+								$lista_etiqueta_series[$i]=$tmp[1];
+							}
+						if (strpos($lista_valor_series[$i], " AS "))
+							{
+								$tmp=explode(" AS ",$lista_valor_series[$i]);
+								$lista_valor_series[$i]=$tmp[1];
+							}
+					}
+				$nombre_serie_1=$lista_nombre_series[0];
+				$nombre_serie_2=$lista_nombre_series[1];
+				$nombre_serie_3=$lista_nombre_series[2];
+				$nombre_serie_4=$lista_nombre_series[3];
+				$nombre_serie_5=$lista_nombre_series[4];
+				$campo_etiqueta_serie_1=$lista_etiqueta_series[0];
+				$campo_etiqueta_serie_2=$lista_etiqueta_series[1];
+				$campo_etiqueta_serie_3=$lista_etiqueta_series[2];
+				$campo_etiqueta_serie_4=$lista_etiqueta_series[3];
+				$campo_etiqueta_serie_5=$lista_etiqueta_series[4];
+				$campo_valor_serie_1=$lista_valor_series[0];
+				$campo_valor_serie_2=$lista_valor_series[1];
+				$campo_valor_serie_3=$lista_valor_series[2];
+				$campo_valor_serie_4=$lista_valor_series[3];
+				$campo_valor_serie_5=$lista_valor_series[4];
+
 				// CREA OBJETO SEGUN TIPO DE GRAFICO
 				$TipoObjetoGraficoMorris     = "Morris.Area";  //Por defecto define tipo Area para cualquiera de los definidos sin compatibilidad conocida
 				if ($tipo_grafico=="area")
@@ -5908,6 +5950,20 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					$TipoObjetoGraficoMorris = "Morris.Line";
 				if ($tipo_grafico=="dona"  || $tipo_grafico=="torta")
 					$TipoObjetoGraficoMorris = "Morris.Donut";
+					
+				//Define la cadena de llaves para el grafico
+				$CadenaLlaves="'$nombre_serie_1'";                //'Operaciones','Usuarios','UsoAPI'
+				if ($nombre_serie_2!="") $CadenaLlaves.=",'$nombre_serie_2'";
+				if ($nombre_serie_3!="") $CadenaLlaves.=",'$nombre_serie_3'";
+				if ($nombre_serie_4!="") $CadenaLlaves.=",'$nombre_serie_4'";
+				if ($nombre_serie_5!="") $CadenaLlaves.=",'$nombre_serie_5'";
+				
+				//Define la cadena de etiquetas para el grafico
+				$CadenaEtiquetas="'$campo_etiqueta_serie_1'";     //'Operaciones','Usuarios','UsoAPI'
+				if ($campo_etiqueta_serie_2!="") $CadenaEtiquetas.=",'$campo_etiqueta_serie_2'";
+				if ($campo_etiqueta_serie_3!="") $CadenaEtiquetas.=",'$campo_etiqueta_serie_3'";
+				if ($campo_etiqueta_serie_4!="") $CadenaEtiquetas.=",'$campo_etiqueta_serie_4'";
+				if ($campo_etiqueta_serie_5!="") $CadenaEtiquetas.=",'$campo_etiqueta_serie_5'";
             ?>
                 <div id="marco-informe-grafico-ID<?php echo $registro_informe["id"]; ?>"></div>
                 <script language="JavaScript">
@@ -5917,31 +5973,61 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
                             //Nombre del marco que tiene el grafico
                             element: 'marco-informe-grafico-ID<?php echo $registro_informe["id"]; ?>',
                             data: [
+                                        
                             <?php
                                 //Inicia la generacion del arreglo con los datos
-                                $resultado_auditoria=ejecutar_sql($consulta);
+                                $resultado_consulta=ejecutar_sql($consulta);
                                 $cadena_datos="";
-                                while ($registro_auditoria = $resultado_auditoria->fetch())
+                                while ($registro_consulta = $resultado_consulta->fetch())
                                     {
-                                        //Agrega datos al arreglo
-                                        $fecha_grafico=$registro_auditoria["fecha"];
-                                        $cantidad_grafico=$registro_auditoria["conteo"];
                                         $cadena_datos.= "
-                                            {
-                                                fecha: '".$fecha_grafico."',
-                                                Operaciones: ".$cantidad_grafico.",
-                                                //Usuarios: ".$total_usuarios_unicos.",
-                                                //UsoAPI: ".$total_uso_api."
-                                            },
-                                            ";
+                                            {";
+                                        //Agrega datos al arreglo del grafico segun las series disponibles
+								        if ($nombre_serie_1 != "")
+								            {
+								                $NombreVisibleCampo=preg_replace('~[^a-zA-Z0-9_]+~', '', $registro_consulta[$campo_etiqueta_serie_1]);
+								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_1];
+                                                $cadena_datos.= "
+                                                ".$nombre_serie_1.": ".$ValorVisibleCampo;
+								            }
+								        if ($nombre_serie_2 != "")
+								            {
+								                $NombreVisibleCampo=preg_replace('~[^a-zA-Z0-9_]+~', '', $registro_consulta[$campo_etiqueta_serie_2]);
+								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_2];
+                                                $cadena_datos.= ",
+                                                ".$nombre_serie_2.": ".$ValorVisibleCampo;
+								            }
+								        if ($nombre_serie_3 != "")
+								            {
+								                $NombreVisibleCampo=preg_replace('~[^a-zA-Z0-9_]+~', '', $registro_consulta[$campo_etiqueta_serie_3]);
+								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_3];
+                                                $cadena_datos.= ",
+                                                ".$nombre_serie_3.": ".$ValorVisibleCampo;
+								            }
+								        if ($nombre_serie_4 != "")
+								            {
+								                $NombreVisibleCampo=preg_replace('~[^a-zA-Z0-9_]+~', '', $registro_consulta[$campo_etiqueta_serie_4]);
+								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_4];
+                                                $cadena_datos.= ",
+                                                ".$nombre_serie_4.": ".$ValorVisibleCampo;
+								            }
+								        if ($nombre_serie_5 != "")
+								            {
+								                $NombreVisibleCampo=preg_replace('~[^a-zA-Z0-9_]+~', '', $registro_consulta[$campo_etiqueta_serie_5]);
+								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_5];
+                                                $cadena_datos.= ",
+                                                ".$nombre_serie_5.": ".$ValorVisibleCampo;
+								            }
+                                        $cadena_datos.= "
+                                            },";
                                     }
                                 $cadena_datos = substr($cadena_datos, 0, -1);
                                 echo $cadena_datos;
                             ?>
                             ],
-                            xkey: 'fecha',
-                            ykeys: ['Operaciones','Usuarios','UsoAPI'],
-                            labels: ['Operaciones','Usuarios','UsoAPI'],
+                            xkey: ['<?php echo $nombre_serie_1; ?>'],
+                            ykeys: [<?php echo $CadenaLlaves; ?>],
+                            labels: [<?php echo $CadenaEtiquetas; ?>],
                             pointSize: 2,
                             hideHover: 'auto',
                             resize: true
