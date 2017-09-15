@@ -5872,8 +5872,6 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			} // Fin si informe es T (tabla)
 
 
-
-
 		//Verifica si es un informe grafico sin dimensiones
 		if ($registro_informe["formato_final"]=="G" && ( $registro_informe["ancho"]=="" || $registro_informe["alto"]=="" ))
 			{
@@ -5902,18 +5900,57 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 				// CREA OBJETO SEGUN TIPO DE GRAFICO
 				$TipoObjetoGraficoMorris     = "Morris.Area";  //Por defecto define tipo Area para cualquiera de los definidos sin compatibilidad conocida
-				if ($tipo_grafico=="torta")
-					$TipoObjetoGraficoMorris = "Morris.Donut";
-				if ($tipo_grafico=="barrah" || $tipo_grafico=="barrav" || $tipo_grafico=="barrah_multiples" || $tipo_grafico=="barrav_multiples")
+				if ($tipo_grafico=="area")
+                    $TipoObjetoGraficoMorris = "Morris.Area"; 
+				if ($tipo_grafico=="barra" || $tipo_grafico=="barrah" || $tipo_grafico=="barrav" || $tipo_grafico=="barrah_multiples" || $tipo_grafico=="barrav_multiples")
 					$TipoObjetoGraficoMorris = "Morris.Bar";
 				if ($tipo_grafico=="linea" || $tipo_grafico=="linea_multiples")
 					$TipoObjetoGraficoMorris = "Morris.Line";
+				if ($tipo_grafico=="dona"  || $tipo_grafico=="torta")
+					$TipoObjetoGraficoMorris = "Morris.Donut";
+            ?>
+                <div id="marco-informe-grafico-ID<?php echo $registro_informe["id"]; ?>"></div>
+                <script language="JavaScript">
+                    //Genera el codigo Morris para el grafico
+                    $(function() {
+                        <?php echo $TipoObjetoGraficoMorris; ?>({
+                            //Nombre del marco que tiene el grafico
+                            element: 'marco-informe-grafico-ID<?php echo $registro_informe["id"]; ?>',
+                            data: [
+                            <?php
+                                //Inicia la generacion del arreglo con los datos
+                                $resultado_auditoria=ejecutar_sql($consulta);
+                                $cadena_datos="";
+                                while ($registro_auditoria = $resultado_auditoria->fetch())
+                                    {
+                                        //Agrega datos al arreglo
+                                        $fecha_grafico=$registro_auditoria["fecha"];
+                                        $cantidad_grafico=$registro_auditoria["conteo"];
+                                        $cadena_datos.= "
+                                            {
+                                                fecha: '".$fecha_grafico."',
+                                                Operaciones: ".$cantidad_grafico.",
+                                                //Usuarios: ".$total_usuarios_unicos.",
+                                                //UsoAPI: ".$total_uso_api."
+                                            },
+                                            ";
+                                    }
+                                $cadena_datos = substr($cadena_datos, 0, -1);
+                                echo $cadena_datos;
+                            ?>
+                            ],
+                            xkey: 'fecha',
+                            ykeys: ['Operaciones','Usuarios','UsoAPI'],
+                            labels: ['Operaciones','Usuarios','UsoAPI'],
+                            pointSize: 2,
+                            hideHover: 'auto',
+                            resize: true
+                        });
+                    
+                    });
+                </script>
 
-
-
-
-
-
+            <?php
                 /*
 			    //#############################################################################
                 //#################### LIBRERIA Practico (Libchart) ###########################
