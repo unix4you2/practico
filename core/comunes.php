@@ -5923,12 +5923,12 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 								$tmp=explode(" AS ",$lista_valor_series[$i]);
 								$lista_valor_series[$i]=$tmp[1];
 							}
-					}
-				$nombre_serie_1=$lista_nombre_series[0];
-				$nombre_serie_2=$lista_nombre_series[1];
-				$nombre_serie_3=$lista_nombre_series[2];
-				$nombre_serie_4=$lista_nombre_series[3];
-				$nombre_serie_5=$lista_nombre_series[4];
+					} 
+				$nombre_serie_1=preg_replace('~[^a-zA-Z0-9_]~', '', str_replace ( " " , "_", $lista_nombre_series[0] ) );
+				$nombre_serie_2=preg_replace('~[^a-zA-Z0-9_]~', '', str_replace ( " " , "_", $lista_nombre_series[1] ) );
+				$nombre_serie_3=preg_replace('~[^a-zA-Z0-9_]~', '', str_replace ( " " , "_", $lista_nombre_series[2] ) );
+				$nombre_serie_4=preg_replace('~[^a-zA-Z0-9_]~', '', str_replace ( " " , "_", $lista_nombre_series[3] ) );
+				$nombre_serie_5=preg_replace('~[^a-zA-Z0-9_]~', '', str_replace ( " " , "_", $lista_nombre_series[4] ) );
 				$campo_etiqueta_serie_1=$lista_etiqueta_series[0];
 				$campo_etiqueta_serie_2=$lista_etiqueta_series[1];
 				$campo_etiqueta_serie_3=$lista_etiqueta_series[2];
@@ -5939,7 +5939,6 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				$campo_valor_serie_3=$lista_valor_series[2];
 				$campo_valor_serie_4=$lista_valor_series[3];
 				$campo_valor_serie_5=$lista_valor_series[4];
-
 				// CREA OBJETO SEGUN TIPO DE GRAFICO
 				$TipoObjetoGraficoMorris     = "Morris.Area";  //Por defecto define tipo Area para cualquiera de los definidos sin compatibilidad conocida
 				if ($tipo_grafico=="area")
@@ -5959,11 +5958,11 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				if ($nombre_serie_5!="") $CadenaLlaves.=",'$nombre_serie_5'";
 				
 				//Define la cadena de etiquetas para el grafico
-				$CadenaEtiquetas="'$campo_etiqueta_serie_1'";     //'Operaciones','Usuarios','UsoAPI'
-				if ($campo_etiqueta_serie_2!="") $CadenaEtiquetas.=",'$campo_etiqueta_serie_2'";
-				if ($campo_etiqueta_serie_3!="") $CadenaEtiquetas.=",'$campo_etiqueta_serie_3'";
-				if ($campo_etiqueta_serie_4!="") $CadenaEtiquetas.=",'$campo_etiqueta_serie_4'";
-				if ($campo_etiqueta_serie_5!="") $CadenaEtiquetas.=",'$campo_etiqueta_serie_5'";
+				$CadenaEtiquetas="'$nombre_serie_1'";     //'Operaciones','Usuarios','UsoAPI'
+				if ($nombre_serie_2!="") $CadenaEtiquetas.=",'$nombre_serie_2'";
+				if ($nombre_serie_3!="") $CadenaEtiquetas.=",'$nombre_serie_3'";
+				if ($nombre_serie_4!="") $CadenaEtiquetas.=",'$nombre_serie_4'";
+				if ($nombre_serie_5!="") $CadenaEtiquetas.=",'$nombre_serie_5'";
             ?>
                 <div id="marco-informe-grafico-ID<?php echo $registro_informe["id"]; ?>"></div>
                 <script language="JavaScript">
@@ -5973,7 +5972,6 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
                             //Nombre del marco que tiene el grafico
                             element: 'marco-informe-grafico-ID<?php echo $registro_informe["id"]; ?>',
                             data: [
-                                        
                             <?php
                                 //Inicia la generacion del arreglo con los datos
                                 $resultado_consulta=ejecutar_sql($consulta);
@@ -5985,35 +5983,36 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
                                         //Agrega datos al arreglo del grafico segun las series disponibles
 								        if ($nombre_serie_1 != "")
 								            {
-								                $NombreVisibleCampo=preg_replace('~[^a-zA-Z0-9_]+~', '', $registro_consulta[$campo_etiqueta_serie_1]);
+								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_1];
 								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_1];
                                                 $cadena_datos.= "
-                                                ".$nombre_serie_1.": ".$ValorVisibleCampo;
+                                                ".$nombre_serie_1.": ".$ValorVisibleCampo.",
+                                                etiqueta_ejex: '$NombreVisibleCampo'";
 								            }
 								        if ($nombre_serie_2 != "")
 								            {
-								                $NombreVisibleCampo=preg_replace('~[^a-zA-Z0-9_]+~', '', $registro_consulta[$campo_etiqueta_serie_2]);
+								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_2];
 								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_2];
                                                 $cadena_datos.= ",
                                                 ".$nombre_serie_2.": ".$ValorVisibleCampo;
 								            }
 								        if ($nombre_serie_3 != "")
 								            {
-								                $NombreVisibleCampo=preg_replace('~[^a-zA-Z0-9_]+~', '', $registro_consulta[$campo_etiqueta_serie_3]);
+								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_3];
 								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_3];
                                                 $cadena_datos.= ",
                                                 ".$nombre_serie_3.": ".$ValorVisibleCampo;
 								            }
 								        if ($nombre_serie_4 != "")
 								            {
-								                $NombreVisibleCampo=preg_replace('~[^a-zA-Z0-9_]+~', '', $registro_consulta[$campo_etiqueta_serie_4]);
+								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_4];
 								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_4];
                                                 $cadena_datos.= ",
                                                 ".$nombre_serie_4.": ".$ValorVisibleCampo;
 								            }
 								        if ($nombre_serie_5 != "")
 								            {
-								                $NombreVisibleCampo=preg_replace('~[^a-zA-Z0-9_]+~', '', $registro_consulta[$campo_etiqueta_serie_5]);
+								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_5];
 								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_5];
                                                 $cadena_datos.= ",
                                                 ".$nombre_serie_5.": ".$ValorVisibleCampo;
@@ -6025,12 +6024,17 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
                                 echo $cadena_datos;
                             ?>
                             ],
-                            xkey: ['<?php echo $nombre_serie_1; ?>'],
+                            xkey: ['etiqueta_ejex'],
                             ykeys: [<?php echo $CadenaLlaves; ?>],
                             labels: [<?php echo $CadenaEtiquetas; ?>],
                             pointSize: 2,
                             hideHover: 'auto',
-                            resize: true
+                            resize: true,
+                            stacked: false,
+                            preUnits: '',
+                            postUnits: '',
+                            grid: true,
+                            axes: true
                         });
                     
                     });
