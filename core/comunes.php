@@ -4608,7 +4608,7 @@ $('#SampleElement').load('YourURL');
                                 <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-right"></i></a>
                             </div>
                             <div style="display: inline-block">
-                                <a class="btn btn-xs " data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Cerrar.'" href="javascript:$(this).css(\'border\', \'0px solid\'); $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'visibility\':\'hidden\'}); $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'display\':\'none\'}); "><i class="fa fa-times"></i></a>
+                                <a class="btn btn-xs " data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Cerrar.'" href="javascript:OcultarOpcionesEdicion(this,\'#PCOEditorContenedor_'.$registro_campos["id"].'\');"><i class="fa fa-times"></i></a>
                                 <br>
                                 <a onclick=\'return confirm("'.$MULTILANG_FrmAdvDelCampo.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=eliminar_campo_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&nombre_tabla='.$registro_formulario["tabla_datos"].'\' class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-trash"></i></a>
                             </div>
@@ -4705,6 +4705,13 @@ $('#SampleElement').load('YourURL');
 						  //Cierra ventana de impresion
 							ventana_impresion.close();
 						}
+					
+					function OcultarOpcionesEdicion(ObjetoEnlazado,NombreMarcoOpciones)
+					    {
+						    BasuritaVar1=$(ObjetoEnlazado).css(\'border\', \'0px solid\');
+						    BasuritaVar2=$(NombreMarcoOpciones).css({\'visibility\':\'hidden\'});
+						    BasuritaVar3=$(NombreMarcoOpciones).css({\'display\':\'none\'});
+					    }
 
 				</script>
 				<!--<input type=button onclick=\'AgregarElemento("1","1","hello world");\'>-->';
