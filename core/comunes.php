@@ -5897,6 +5897,12 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				$lista_nombre_series=explode("!",$formato_base[1]);
 				$lista_etiqueta_series=explode("!",$formato_base[2]);
 				$lista_valor_series=explode("!",$formato_base[3]);
+	            //Carga detalles extendidos para el formato de grafico y los corrige en el caso de graficos viejos
+	            $barra_apilada=$formato_base[4];    if ($barra_apilada=="") $barra_apilada="false";
+	            $ocultar_grilla=$formato_base[5];   if ($ocultar_grilla=="") $ocultar_grilla="false";
+	            $ocultar_ejes=$formato_base[6];     if ($ocultar_ejes=="") $ocultar_ejes="false";
+	            $unidades_pre=$formato_base[7];     if ($unidades_pre=="") $unidades_pre="";
+	            $unidades_pos=$formato_base[8];     if ($unidades_pos=="") $unidades_pos="";
 
 				//Elimina los nombres de tabla en caso de tener punto y usa los alias si los tiene
 				for ($i=0;$i<5;$i++)
@@ -6030,11 +6036,11 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
                             pointSize: 2,
                             hideHover: 'auto',
                             resize: true,
-                            stacked: false,
-                            preUnits: '',
-                            postUnits: '',
-                            grid: true,
-                            axes: true
+                            stacked: <?php echo $barra_apilada; ?>,
+                            preUnits: '<?php echo $unidades_pre; ?>',
+                            postUnits: '<?php echo $unidades_pos; ?>',
+                            grid: <?php echo $ocultar_grilla; ?>,
+                            axes: <?php echo $ocultar_ejes; ?>
                         });
                     
                     });
