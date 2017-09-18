@@ -517,7 +517,12 @@ if ($PCO_Accion=="actualizar_grafico_informe")
 				$cadena_formato.=$tipo_grafico."|";
 				$cadena_formato.=$nombre_serie_1."!".$nombre_serie_2."!".$nombre_serie_3."!".$nombre_serie_4."!".$nombre_serie_5."|";
 				$cadena_formato.=$campo_etiqueta_serie_1."!".$campo_etiqueta_serie_2."!".$campo_etiqueta_serie_3."!".$campo_etiqueta_serie_4."!".$campo_etiqueta_serie_5."|";
-				$cadena_formato.=$campo_valor_serie_1."!".$campo_valor_serie_2."!".$campo_valor_serie_3."!".$campo_valor_serie_4."!".$campo_valor_serie_5;
+				$cadena_formato.=$campo_valor_serie_1."!".$campo_valor_serie_2."!".$campo_valor_serie_3."!".$campo_valor_serie_4."!".$campo_valor_serie_5."|";
+				$cadena_formato.=$barra_apilada."|";
+				$cadena_formato.=$ocultar_grilla."|";
+				$cadena_formato.=$ocultar_ejes."|";
+				$cadena_formato.=$unidades_pre."|";
+				$cadena_formato.=$unidades_pos."|";
 
 				// Actualiza los datos
 				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET formato_grafico=? WHERE id=? ","$cadena_formato$_SeparadorCampos_$informe");
@@ -1404,9 +1409,8 @@ if ($PCO_Accion=="editar_informe")
 					<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
 				<!-- SELECCION DE SERIES  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-				<hr>
 				<div align=center><b><?php echo $MULTILANG_InfSeriesGrafico1; ?></b> - <?php echo $MULTILANG_InfSeriesGrafico2; ?></div>
-						<table class="TextosVentana" width="100%">
+						<table class="table table-condensed btn-xs table-hover table-unbordered " width="100%">
 						<?php
 							//Consulta el formato de grafico y datos de series para ponerlo en los campos
 							//Dado por: Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
@@ -1417,7 +1421,11 @@ if ($PCO_Accion=="editar_informe")
 							$lista_nombre_series=@explode("!",$formato_base[1]);
 							$lista_etiqueta_series=@explode("!",$formato_base[2]);
 							$lista_valor_series=@explode("!",$formato_base[3]);
-
+				            $barra_apilada_leido=$formato_base[4];
+				            $ocultar_grilla_leido=$formato_base[5];
+				            $ocultar_ejes_leido=$formato_base[6];
+				            $unidades_pre_leido=$formato_base[7];
+				            $unidades_pos_leido=$formato_base[8];
 							//Crea las series
 							$numero_series=5;
 							for ($cs=1;$cs<=$numero_series;$cs++)
@@ -1425,12 +1433,17 @@ if ($PCO_Accion=="editar_informe")
 						?>
 							<tr>
 								<td align="center" valign="TOP">
-									<b><?php echo $MULTILANG_InfNomSerie?> <?php echo $cs; ?></b><br>
-									<input type="text" name="nombre_serie_<?php echo $cs; ?>" value="<?php echo @$lista_nombre_series[$cs-1]; ?>" maxlength="20" size="20" class="CampoTexto">
+									<label for="nombre_serie_<?php echo $cs; ?>"><?php echo $MULTILANG_InfNomSerie; ?> <?php echo $cs; ?>:</label>
+									<input type="text" name="nombre_serie_<?php echo $cs; ?>" id="nombre_serie_<?php echo $cs; ?>" value="<?php echo @$lista_nombre_series[$cs-1]; ?>" maxlength="20" size="20" class="form-control input-sm">
 								</td>
 								<td align="center" valign="TOP">
-									<b><?php echo $MULTILANG_InfCampoEtiqSerie; ?></b><br>
-									<select name="campo_etiqueta_serie_<?php echo $cs; ?>" class="Combos" >
+									<?php
+									    //La etiqueta de eje X es unica por todas las series entonces la pregunta solo para la primera
+									    if ($cs==1)
+									        {
+									?>
+									<label for="campo_etiqueta_serie_<?php echo $cs; ?>"><?php echo $MULTILANG_InfCampoEtiqSerie; ?>:</label>
+									<select name="campo_etiqueta_serie_<?php echo $cs; ?>" id="campo_etiqueta_serie_<?php echo $cs; ?>" class="form-control input-sm btn-info" >
 										<option value=""></option>
 										<?php
 										$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
@@ -1444,10 +1457,17 @@ if ($PCO_Accion=="editar_informe")
 											}
 									?>
 									</select>
+									<?php
+									        } //Fin $cs==1
+									   else
+									        {
+									            echo '<input type="hidden" name="campo_etiqueta_serie_'.$cs.'">';
+									        }
+									?>
 								</td>
 								<td align="center" valign="TOP">
-									<b><?php echo $MULTILANG_InfCampoValor; ?></b><br>
-									<select name="campo_valor_serie_<?php echo $cs; ?>" class="Combos">
+									<label for="campo_valor_serie_<?php echo $cs; ?>"><?php echo $MULTILANG_InfCampoValor; ?>:</label>
+									<select name="campo_valor_serie_<?php echo $cs; ?>" id="campo_valor_serie_<?php echo $cs; ?>" class="form-control input-sm btn-default" >
 										<option value=""></option>
 									<?php
 										$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
@@ -1472,33 +1492,52 @@ if ($PCO_Accion=="editar_informe")
 			<!-- SELECCION DEL TIPO DE GRAFICO  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 				<hr>
 						<div align=center><b><?php echo $MULTILANG_InfVistaGrafico1; ?></b> - <?php echo $MULTILANG_InfVistaGrafico2; ?></div>
-						<table class="TextosVentana">
+						<table class="table table-condensed btn-xs table-unbordered " width="100%">
 							<tr>
 								<td align="LEFT" valign="TOP">
-									<b><?php echo $MULTILANG_InfTipoGrafico; ?>:</b><br>
-									<select name="tipo_grafico" class="Combos" >
-											<option value="barrah" <?php if ($tipo_grafico_leido=="barrah") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico1; ?></option>
-											<option value="barrah_multiples" <?php if ($tipo_grafico_leido=="barrah_multiples") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico2; ?></option>
-											<option value="linea" <?php if ($tipo_grafico_leido=="linea") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico3; ?></option>
-											<option value="linea_multiples" <?php if ($tipo_grafico_leido=="linea_multiples") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico4; ?></option>
-											<option value="barrav" <?php if ($tipo_grafico_leido=="barrav") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico5; ?></option>
-											<option value="barrav_multiples" <?php if ($tipo_grafico_leido=="barrav_multiples") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico6; ?></option>
-											<option value="torta" <?php if ($tipo_grafico_leido=="torta") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico7; ?></option>
+									<label for="tipo_grafico"><?php echo $MULTILANG_InfTipoGrafico; ?>:</label>
+									<select name="tipo_grafico" id="tipo_grafico" class="form-control input-sm btn-danger" >
+											<option value="area" <?php if ($tipo_grafico_leido=="area") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico1; ?></option>
+											<option value="linea" <?php if ($tipo_grafico_leido=="linea") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico5; ?></option>
+											<option value="barra" <?php if ($tipo_grafico_leido=="barra") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico3; ?></option>
+											<option value="dona" <?php if ($tipo_grafico_leido=="dona") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico7; ?></option>
+									</select>
+
+									<label for="barra_apilada">Apilar (aplica solo barras):</label>
+									<select name="barra_apilada" id="barra_apilada" class="form-control input-sm btn-warning" >
+											<option value="false" <?php if ($barra_apilada_leido=="false") echo "SELECTED"; ?>><?php echo $MULTILANG_No; ?></option>
+											<option value="true" <?php if ($barra_apilada_leido=="true") echo "SELECTED"; ?>><?php echo $MULTILANG_Si; ?></option>
 									</select>
 								</td>
-								<td align="RIGHT">
-									<img src="img/tipos_grafico.png" border=0 alt="">
+								<td align="center">
+									<img src="img/tipos_grafico.png?<?php echo filemtime('img/tipos_grafico.png'); ?>" border=0 alt="">
+								</td>
+								<td align="LEFT" valign="TOP">
+									<label for="ocultar_grilla">Ocultar rejilla:</label>
+									<select name="ocultar_grilla" id="ocultar_grilla" class="form-control input-sm btn-warning" >
+											<option value="true" <?php if ($ocultar_grilla_leido=="true") echo "SELECTED"; ?>><?php echo $MULTILANG_No; ?></option>
+											<option value="false" <?php if ($ocultar_grilla_leido=="false") echo "SELECTED"; ?>><?php echo $MULTILANG_Si; ?></option>
+									</select>
+									<label for="ocultar_ejes">Ocultar ejes:</label>
+									<select name="ocultar_ejes" id="ocultar_ejes" class="form-control input-sm btn-warning" >
+											<option value="true" <?php if ($ocultar_ejes_leido=="true") echo "SELECTED"; ?>><?php echo $MULTILANG_No; ?></option>
+											<option value="false" <?php if ($ocultar_ejes_leido=="false") echo "SELECTED"; ?>><?php echo $MULTILANG_Si; ?></option>
+									</select>
+								</td>
+								<td align="LEFT" valign="TOP">
+									<label for="unidades_pre">Unidades pre-valor:</label>
+									<input type="text" name="unidades_pre" id="unidades_pre" value="<?php echo @$unidades_pre_leido; ?>" class="form-control input-sm">
+
+									<label for="unidades_pos">Unidades pos-valor:</label>
+									<input type="text" name="unidades_pos" id="unidades_pos" value="<?php echo @$unidades_pos_leido; ?>" class="form-control input-sm">
 								</td>
 							</tr>
 						</table>
 				</form>
-				<hr><center>
-				<input type="Button"  class="Botones" value="<?php echo $MULTILANG_InfActGraf; ?> >>>" onClick="document.datosformcograf.submit()">
-				<br><br><br>
-				</center>
 
                 <?php 
                     $barra_herramientas_modal='
+                        <button class="btn btn-success" onClick="document.datosformcograf.submit()"><i class="fa fa-save"></i> '.$MULTILANG_InfActGraf.'</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
                     cerrar_dialogo_modal($barra_herramientas_modal);
                 ?>
@@ -2219,7 +2258,7 @@ if ($PCO_Accion=="guardar_informe")
 			{
 				$agrupamiento='';
                 $ordenamiento='';
-                ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|',?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtro$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato");
+                ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|false|false|false|||',?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtro$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato");
 				$id=obtener_ultimo_id_insertado($ConexionPDO);
 				auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">

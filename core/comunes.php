@@ -4608,7 +4608,7 @@ $('#SampleElement').load('YourURL');
                                 <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-right"></i></a>
                             </div>
                             <div style="display: inline-block">
-                                <a class="btn btn-xs " data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Cerrar.'" href="javascript:$(this).css(\'border\', \'0px solid\'); $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'visibility\':\'hidden\'}); $(\'#PCOEditorContenedor_'.$registro_campos["id"].'\').css({\'display\':\'none\'}); "><i class="fa fa-times"></i></a>
+                                <a class="btn btn-xs " data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Cerrar.'" href="javascript:OcultarOpcionesEdicion(this,\'#PCOEditorContenedor_'.$registro_campos["id"].'\');"><i class="fa fa-times"></i></a>
                                 <br>
                                 <a onclick=\'return confirm("'.$MULTILANG_FrmAdvDelCampo.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=eliminar_campo_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&nombre_tabla='.$registro_formulario["tabla_datos"].'\' class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-trash"></i></a>
                             </div>
@@ -4705,6 +4705,13 @@ $('#SampleElement').load('YourURL');
 						  //Cierra ventana de impresion
 							ventana_impresion.close();
 						}
+					
+					function OcultarOpcionesEdicion(ObjetoEnlazado,NombreMarcoOpciones)
+					    {
+						    BasuritaVar1=$(ObjetoEnlazado).css(\'border\', \'0px solid\');
+						    BasuritaVar2=$(NombreMarcoOpciones).css({\'visibility\':\'hidden\'});
+						    BasuritaVar3=$(NombreMarcoOpciones).css({\'display\':\'none\'});
+					    }
 
 				</script>
 				<!--<input type=button onclick=\'AgregarElemento("1","1","hello world");\'>-->';
@@ -5872,8 +5879,6 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 			} // Fin si informe es T (tabla)
 
 
-
-
 		//Verifica si es un informe grafico sin dimensiones
 		if ($registro_informe["formato_final"]=="G" && ( $registro_informe["ancho"]=="" || $registro_informe["alto"]=="" ))
 			{
@@ -5895,6 +5900,12 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				$lista_nombre_series=explode("!",$formato_base[1]);
 				$lista_etiqueta_series=explode("!",$formato_base[2]);
 				$lista_valor_series=explode("!",$formato_base[3]);
+	            //Carga detalles extendidos para el formato de grafico y los corrige en el caso de graficos viejos
+	            $barra_apilada=$formato_base[4];    if ($barra_apilada=="") $barra_apilada="false";
+	            $ocultar_grilla=$formato_base[5];   if ($ocultar_grilla=="") $ocultar_grilla="false";
+	            $ocultar_ejes=$formato_base[6];     if ($ocultar_ejes=="") $ocultar_ejes="false";
+	            $unidades_pre=$formato_base[7];     if ($unidades_pre=="") $unidades_pre="";
+	            $unidades_pos=$formato_base[8];     if ($unidades_pos=="") $unidades_pos="";
 
 				//Elimina los nombres de tabla en caso de tener punto y usa los alias si los tiene
 				for ($i=0;$i<5;$i++)
@@ -5921,12 +5932,12 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 								$tmp=explode(" AS ",$lista_valor_series[$i]);
 								$lista_valor_series[$i]=$tmp[1];
 							}
-					}
-				$nombre_serie_1=$lista_nombre_series[0];
-				$nombre_serie_2=$lista_nombre_series[1];
-				$nombre_serie_3=$lista_nombre_series[2];
-				$nombre_serie_4=$lista_nombre_series[3];
-				$nombre_serie_5=$lista_nombre_series[4];
+					} 
+				$nombre_serie_1=preg_replace('~[^a-zA-Z0-9_]~', '', str_replace ( " " , "_", $lista_nombre_series[0] ) );
+				$nombre_serie_2=preg_replace('~[^a-zA-Z0-9_]~', '', str_replace ( " " , "_", $lista_nombre_series[1] ) );
+				$nombre_serie_3=preg_replace('~[^a-zA-Z0-9_]~', '', str_replace ( " " , "_", $lista_nombre_series[2] ) );
+				$nombre_serie_4=preg_replace('~[^a-zA-Z0-9_]~', '', str_replace ( " " , "_", $lista_nombre_series[3] ) );
+				$nombre_serie_5=preg_replace('~[^a-zA-Z0-9_]~', '', str_replace ( " " , "_", $lista_nombre_series[4] ) );
 				$campo_etiqueta_serie_1=$lista_etiqueta_series[0];
 				$campo_etiqueta_serie_2=$lista_etiqueta_series[1];
 				$campo_etiqueta_serie_3=$lista_etiqueta_series[2];
@@ -5937,67 +5948,122 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				$campo_valor_serie_3=$lista_valor_series[2];
 				$campo_valor_serie_4=$lista_valor_series[3];
 				$campo_valor_serie_5=$lista_valor_series[4];
-				// Libreria para graficos
-				include "inc/libchart/classes/libchart.php";
-
-				//Crea las series para el grafico, dependiendo si es torta (una serie) o cualquier otro (multiples series)
-				if ($tipo_grafico=="torta")
-					{
-						$dataSet = new XYDataSet();
-						// GENERA DATOS DEL GRAFICO
-						$consulta_ejecucion=ejecutar_sql($consulta);
-						while($registro=$consulta_ejecucion->fetch())
-							{
-								if ($nombre_serie_1 != "") $dataSet->addPoint(new Point($registro[$campo_etiqueta_serie_1], $registro[$campo_valor_serie_1]));
-							}
-					}
-				else
-					{
-						$dataSet = new XYSeriesDataSet();
-						if ($nombre_serie_1 != "")	{
-							$serie1 = new XYDataSet();
-							$dataSet->addSerie($nombre_serie_1, $serie1);	}
-						if ($nombre_serie_2 != "")	{
-							$serie2 = new XYDataSet();
-							$dataSet->addSerie($nombre_serie_2, $serie2);	}
-						if ($nombre_serie_3 != "")	{
-							$serie3 = new XYDataSet();
-							$dataSet->addSerie($nombre_serie_3, $serie3);	}
-						if ($nombre_serie_4 != "")	{
-							$serie4 = new XYDataSet();
-							$dataSet->addSerie($nombre_serie_4, $serie4);	}
-						if ($nombre_serie_5 != "")	{
-							$serie5 = new XYDataSet();
-							$dataSet->addSerie($nombre_serie_5, $serie5);	}
-
-						// GENERA DATOS DEL GRAFICO
-						$consulta_ejecucion=ejecutar_sql($consulta);
-						while($registro=$consulta_ejecucion->fetch())
-							{
-								if ($nombre_serie_1 != "") $serie1->addPoint(new Point($registro[$campo_etiqueta_serie_1], $registro[$campo_valor_serie_1]));
-								if ($nombre_serie_2 != "") $serie2->addPoint(new Point($registro[$campo_etiqueta_serie_2], $registro[$campo_valor_serie_2]));
-								if ($nombre_serie_3 != "") $serie3->addPoint(new Point($registro[$campo_etiqueta_serie_3], $registro[$campo_valor_serie_3]));
-								if ($nombre_serie_4 != "") $serie4->addPoint(new Point($registro[$campo_etiqueta_serie_4], $registro[$campo_valor_serie_4]));
-								if ($nombre_serie_5 != "") $serie5->addPoint(new Point($registro[$campo_etiqueta_serie_5], $registro[$campo_valor_serie_5]));
-							}
-					}
-
 				// CREA OBJETO SEGUN TIPO DE GRAFICO
+				$TipoObjetoGraficoMorris     = "Morris.Area";  //Por defecto define tipo Area para cualquiera de los definidos sin compatibilidad conocida
+				if ($tipo_grafico=="area")
+                    $TipoObjetoGraficoMorris = "Morris.Area"; 
+				if ($tipo_grafico=="barra" || $tipo_grafico=="barrah" || $tipo_grafico=="barrav" || $tipo_grafico=="barrah_multiples" || $tipo_grafico=="barrav_multiples")
+					$TipoObjetoGraficoMorris = "Morris.Bar";
 				if ($tipo_grafico=="linea" || $tipo_grafico=="linea_multiples")
-					$chart = new LineChart($registro_informe["ancho"], $registro_informe["alto"]);
-				if ($tipo_grafico=="barrah" || $tipo_grafico=="barrah_multiples")
-					$chart = new HorizontalBarChart($registro_informe["ancho"], $registro_informe["alto"]);
-				if ($tipo_grafico=="barrav" || $tipo_grafico=="barrav_multiples")
-					$chart = new VerticalBarChart($registro_informe["ancho"], $registro_informe["alto"]);
-				if ($tipo_grafico=="torta")
-					$chart = new PieChart($registro_informe["ancho"], $registro_informe["alto"]);
-
-				// PRESENTA EL GRAFICO EN PANTALLA
-				$chart->setDataSet($dataSet);
-				//$chart->getPlot()->setGraphCaptionRatio(0.75);
-				$chart->setTitle($registro_informe["titulo"]);
-				$chart->render("tmp/Inf_".$registro_informe["id"]."-".$PCOSESS_LoginUsuario.".png");
-				echo '<img alt="Grafico" src="tmp/Inf_'.$Identificador_informe.'-'.$PCOSESS_LoginUsuario.'.png" style="border: 1px solid gray;">';
+					$TipoObjetoGraficoMorris = "Morris.Line";
+				if ($tipo_grafico=="dona"  || $tipo_grafico=="torta")
+					$TipoObjetoGraficoMorris = "Morris.Donut";
+					
+				//Define la cadena de llaves para el grafico
+				$CadenaLlaves="'$nombre_serie_1'";                //'Operaciones','Usuarios','UsoAPI'
+				if ($nombre_serie_2!="") $CadenaLlaves.=",'$nombre_serie_2'";
+				if ($nombre_serie_3!="") $CadenaLlaves.=",'$nombre_serie_3'";
+				if ($nombre_serie_4!="") $CadenaLlaves.=",'$nombre_serie_4'";
+				if ($nombre_serie_5!="") $CadenaLlaves.=",'$nombre_serie_5'";
+				
+				//Define la cadena de etiquetas para el grafico
+				$CadenaEtiquetas="'$nombre_serie_1'";     //'Operaciones','Usuarios','UsoAPI'
+				if ($nombre_serie_2!="") $CadenaEtiquetas.=",'$nombre_serie_2'";
+				if ($nombre_serie_3!="") $CadenaEtiquetas.=",'$nombre_serie_3'";
+				if ($nombre_serie_4!="") $CadenaEtiquetas.=",'$nombre_serie_4'";
+				if ($nombre_serie_5!="") $CadenaEtiquetas.=",'$nombre_serie_5'";
+            ?>
+                <div id="marco-informe-grafico-ID<?php echo $registro_informe["id"]; ?>"></div>
+                <script language="JavaScript">
+                    //Genera el codigo Morris para el grafico
+                    $(function() {
+                        <?php echo $TipoObjetoGraficoMorris; ?>({
+                            //Nombre del marco que tiene el grafico
+                            element: 'marco-informe-grafico-ID<?php echo $registro_informe["id"]; ?>',
+                            data: [
+                            <?php
+                                //Inicia la generacion del arreglo con los datos
+                                $resultado_consulta=ejecutar_sql($consulta);
+                                $cadena_datos="";
+                                while ($registro_consulta = $resultado_consulta->fetch())
+                                    {
+                                        //Crea series de datos para los graficos de Barra, Linea o area que utilizan los mismos parametros
+                                        if ($TipoObjetoGraficoMorris!="Morris.Donut")
+                                            {
+                                                $cadena_datos.= "
+                                                    {";
+                                                //Agrega datos al arreglo del grafico segun las series disponibles
+        								        if ($nombre_serie_1 != "")
+        								            {
+        								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_1];
+        								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_1];
+                                                        $cadena_datos.= "
+                                                        ".$nombre_serie_1.": ".$ValorVisibleCampo.",
+                                                        etiqueta_ejex: '$NombreVisibleCampo'";
+        								            }
+        								        if ($nombre_serie_2 != "")
+        								            {
+        								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_2];
+        								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_2];
+                                                        $cadena_datos.= ",
+                                                        ".$nombre_serie_2.": ".$ValorVisibleCampo;
+        								            }
+        								        if ($nombre_serie_3 != "")
+        								            {
+        								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_3];
+        								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_3];
+                                                        $cadena_datos.= ",
+                                                        ".$nombre_serie_3.": ".$ValorVisibleCampo;
+        								            }
+        								        if ($nombre_serie_4 != "")
+        								            {
+        								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_4];
+        								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_4];
+                                                        $cadena_datos.= ",
+                                                        ".$nombre_serie_4.": ".$ValorVisibleCampo;
+        								            }
+        								        if ($nombre_serie_5 != "")
+        								            {
+        								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_5];
+        								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_5];
+                                                        $cadena_datos.= ",
+                                                        ".$nombre_serie_5.": ".$ValorVisibleCampo;
+        								            }
+                                                $cadena_datos.= "
+                                                    },";
+                                            }
+                                        //Crea series de datos para graficos tipo dona
+                                        if ($TipoObjetoGraficoMorris=="Morris.Donut")
+                                            {
+                                                $cadena_datos.= "
+                                                    {";
+        								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_1];
+        								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_1];
+                                                        $cadena_datos.= "
+                                                        label: '".$NombreVisibleCampo."', value: ".$ValorVisibleCampo;
+                                                $cadena_datos.= "
+                                                    },";
+                                            }
+                                    }
+                                $cadena_datos = substr($cadena_datos, 0, -1);
+                                echo $cadena_datos;
+                            ?>
+                            ],
+                            xkey: ['etiqueta_ejex'],
+                            ykeys: [<?php echo $CadenaLlaves; ?>],
+                            labels: [<?php echo $CadenaEtiquetas; ?>],
+                            pointSize: 2,
+                            hideHover: 'auto',
+                            resize: true,
+                            stacked: <?php echo $barra_apilada; ?>,
+                            preUnits: '<?php echo $unidades_pre; ?>',
+                            postUnits: '<?php echo $unidades_pos; ?>',
+                            grid: <?php echo $ocultar_grilla; ?>,
+                            axes: <?php echo $ocultar_ejes; ?>
+                        });
+                    });
+                </script>
+            <?php
 			} // Fin si informe es G (grafico)
 
 		if ($en_ventana) cerrar_ventana();

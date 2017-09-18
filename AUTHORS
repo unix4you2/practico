@@ -1,4 +1,4 @@
-                      Practico Framework for PHP
+Practico Framework for PHP
 ========================================================================
 Copyright (c) 2013 John F. Arroyave Gutiérrez unix4you2@gmail.com
                                               www.practico.org
@@ -25,13 +25,6 @@ CKEditor
 	Made by: Frederico Knabben - Copyright © 2003-2011, CKSource
 	http://ckeditor.com
 	See inc/ckeditor/LICENSE.html for details
-
-LibChart
-	Location: inc/libchart/*
-	License: GNU General Public License Version 3
-	Made by: Jean-Marc Trémeaux - July 2011
-	http://naku.dohcrew.com/libchart/pages/introduction/
-	See inc/libchart/COPYING for details
 
 OAuth 1.0 y 2.0 Class
 	Location: inc/oauth/*

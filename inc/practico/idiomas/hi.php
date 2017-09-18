@@ -670,11 +670,8 @@
 	$MULTILANG_InfVistaGrafico2='वांछित श्रृंखला की संख्या के हिसाब से चुनें';
 	$MULTILANG_InfTipoGrafico='चार्ट प्रकार';
 	$MULTILANG_InfGrafico1='क्षैतिज सलाखों';
-	$MULTILANG_InfGrafico2='क्षैतिज सलाखों (एकाधिक श्रृंखला)';
 	$MULTILANG_InfGrafico3='पंक्ति चार्ट';
-	$MULTILANG_InfGrafico4='रेखा चार्ट (एकाधिक श्रृंखला)';
 	$MULTILANG_InfGrafico5='ऊर्ध्वाधर सलाखों';
-	$MULTILANG_InfGrafico6='कार्यक्षेत्र बार्स (एकाधिक श्रृंखला)';
 	$MULTILANG_InfGrafico7='पाई चार्ट (केवल एक श्रृंखला)';
 	$MULTILANG_InfActGraf='अद्यतन चार्ट प्रारूप';
 	$MULTILANG_InfAgrupa='छँटाई मापदंड और समूह को निर्दिष्ट करता है';

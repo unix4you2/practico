@@ -18,9 +18,11 @@ index.php
 core/marco_abajo.php
 core/marco_arriba_bs.php
 core/comunes.php
+core/informes.php
 core/menus.php
 core/formularios.php
 core/sesion.php
+img/tipos_grafico.png
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/bootstrap/js/practico*
@@ -42,6 +44,13 @@ LogCambios="
 * Added:  Se agrega botón de acceso directo para edición de los informes en usuarios diseñadores de aplicación o administradores.
 * Added:  La generacion de eventos para controles de formulario incluye ahora un encabezado con plantillas de documentacion en notación NaturalDocs.
 * Added:  Ahora las pestanas de formulario con etiqueta PCO_NoVisible no seran presentadas a usuarios estandar.  Solamente apareceran a los diseñadores de aplicacion.
+* Added:  Se han unificado los campos de etiqueta de informes gráficos a sólo el campo de etiqueta para el eje X asignado por la primer serie de gráfico cuando se manejen múltiples series.
+* Enhan:  ATENCION!! Librería Practico Libchart ha sido reemplazada.  Ahora todos los gráficos del sistema son generados mediante librerías Morris y Raphael dando mayor interactividad y mejorando notablemente la presentación.  Los gráficos anteriores deberían conservar su compatibilidad, sin embargo tenga en cuenta que esto puede cambiar la apariencia de su aplicación por lo que se recomienda que verifique la operatividad de sus informes de tipo gráfico pues ya se ajustan además al tamaño de su contenedor.
+* Added:  Compatibilidad de gráficos y transparencias para diferentes temas de aplicación.
+* Enhan:  Mejorado el asistente para generación de informes gráficos.  Se agrega además la posibilidad de personalizar la apariencia de algunas partes del gráfico generado.
+* Enhan:  Se amplían los tipos de gráfico (algunos apilables) a Dona, Linea, Áreas y Barras.
+* Fixed:  Boton de ocultamiento de opciones sobre controles de formulario devuelve un [object Object] en navegadores Firefox y derivados.  Se convierten a función los métodos asociados.
+* Enhan:  Suprimirdas las librerías asociadas a Practico-Libchart. Ahorro de 392Kb por cada cargue.
 "
 
 ########################################################################
