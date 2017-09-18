@@ -5991,47 +5991,63 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
                                 $cadena_datos="";
                                 while ($registro_consulta = $resultado_consulta->fetch())
                                     {
-                                        $cadena_datos.= "
-                                            {";
-                                        //Agrega datos al arreglo del grafico segun las series disponibles
-								        if ($nombre_serie_1 != "")
-								            {
-								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_1];
-								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_1];
+                                        //Crea series de datos para los graficos de Barra, Linea o area que utilizan los mismos parametros
+                                        if ($TipoObjetoGraficoMorris!="Morris.Donut")
+                                            {
                                                 $cadena_datos.= "
-                                                ".$nombre_serie_1.": ".$ValorVisibleCampo.",
-                                                etiqueta_ejex: '$NombreVisibleCampo'";
-								            }
-								        if ($nombre_serie_2 != "")
-								            {
-								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_2];
-								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_2];
-                                                $cadena_datos.= ",
-                                                ".$nombre_serie_2.": ".$ValorVisibleCampo;
-								            }
-								        if ($nombre_serie_3 != "")
-								            {
-								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_3];
-								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_3];
-                                                $cadena_datos.= ",
-                                                ".$nombre_serie_3.": ".$ValorVisibleCampo;
-								            }
-								        if ($nombre_serie_4 != "")
-								            {
-								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_4];
-								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_4];
-                                                $cadena_datos.= ",
-                                                ".$nombre_serie_4.": ".$ValorVisibleCampo;
-								            }
-								        if ($nombre_serie_5 != "")
-								            {
-								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_5];
-								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_5];
-                                                $cadena_datos.= ",
-                                                ".$nombre_serie_5.": ".$ValorVisibleCampo;
-								            }
-                                        $cadena_datos.= "
-                                            },";
+                                                    {";
+                                                //Agrega datos al arreglo del grafico segun las series disponibles
+        								        if ($nombre_serie_1 != "")
+        								            {
+        								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_1];
+        								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_1];
+                                                        $cadena_datos.= "
+                                                        ".$nombre_serie_1.": ".$ValorVisibleCampo.",
+                                                        etiqueta_ejex: '$NombreVisibleCampo'";
+        								            }
+        								        if ($nombre_serie_2 != "")
+        								            {
+        								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_2];
+        								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_2];
+                                                        $cadena_datos.= ",
+                                                        ".$nombre_serie_2.": ".$ValorVisibleCampo;
+        								            }
+        								        if ($nombre_serie_3 != "")
+        								            {
+        								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_3];
+        								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_3];
+                                                        $cadena_datos.= ",
+                                                        ".$nombre_serie_3.": ".$ValorVisibleCampo;
+        								            }
+        								        if ($nombre_serie_4 != "")
+        								            {
+        								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_4];
+        								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_4];
+                                                        $cadena_datos.= ",
+                                                        ".$nombre_serie_4.": ".$ValorVisibleCampo;
+        								            }
+        								        if ($nombre_serie_5 != "")
+        								            {
+        								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_5];
+        								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_5];
+                                                        $cadena_datos.= ",
+                                                        ".$nombre_serie_5.": ".$ValorVisibleCampo;
+        								            }
+                                                $cadena_datos.= "
+                                                    },";
+                                            }
+                                        //Crea series de datos para graficos tipo dona
+                                        if ($TipoObjetoGraficoMorris=="Morris.Donut")
+                                            {
+                                                $cadena_datos.= "
+                                                    {";
+        								                $NombreVisibleCampo=$registro_consulta[$campo_etiqueta_serie_1];
+        								                $ValorVisibleCampo=$registro_consulta[$campo_valor_serie_1];
+                                                        $cadena_datos.= "
+                                                        label: '".$NombreVisibleCampo."', value: ".$ValorVisibleCampo;
+                                                $cadena_datos.= "
+                                                    },";
+                                            }
                                     }
                                 $cadena_datos = substr($cadena_datos, 0, -1);
                                 echo $cadena_datos;
@@ -6049,7 +6065,6 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
                             grid: <?php echo $ocultar_grilla; ?>,
                             axes: <?php echo $ocultar_ejes; ?>
                         });
-                    
                     });
                 </script>
 
