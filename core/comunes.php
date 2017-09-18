@@ -5893,10 +5893,6 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		// Si el informe tiene formato_final = G (grafico)
 		if ($registro_informe["formato_final"]=="G" && $registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
 			{
-			    //#############################################################################
-                //############################## LIBRERIA MORRIS ##############################
-			    //#############################################################################
-
 				//Consulta el formato de grafico y datos de series para ponerlo en los campos
 				//Dado por: Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
 				$formato_base=explode("|",$registro_informe["formato_grafico"]);
@@ -6067,123 +6063,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
                         });
                     });
                 </script>
-
             <?php
-                /*
-			    //#############################################################################
-                //#################### LIBRERIA Practico (Libchart) ###########################
-			    //#############################################################################
-			    //Consulta el formato de grafico y datos de series para ponerlo en los campos
-				//Dado por: Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
-				$formato_base=explode("|",$registro_informe["formato_grafico"]);
-				$tipo_grafico=$formato_base[0];
-				$lista_nombre_series=explode("!",$formato_base[1]);
-				$lista_etiqueta_series=explode("!",$formato_base[2]);
-				$lista_valor_series=explode("!",$formato_base[3]);
-
-				//Elimina los nombres de tabla en caso de tener punto y usa los alias si los tiene
-				for ($i=0;$i<5;$i++)
-					{
-						//Elimina nombres de tabla encontrando el punto y seleccionando siguiente palabra
-						if (strpos($lista_etiqueta_series[$i], "."))
-							{
-								$tmp=explode(".",$lista_etiqueta_series[$i]);
-								$lista_etiqueta_series[$i]=$tmp[1];
-							}
-						if (strpos($lista_valor_series[$i], "."))
-							{
-								$tmp=explode(".",$lista_valor_series[$i]);
-								$lista_valor_series[$i]=$tmp[1];
-							}
-						// Prefiere los alias sobre los nombres de campo cuando encuentra un AS 
-						if (strpos($lista_etiqueta_series[$i], " AS "))
-							{
-								$tmp=explode(" AS ",$lista_etiqueta_series[$i]);
-								$lista_etiqueta_series[$i]=$tmp[1];
-							}
-						if (strpos($lista_valor_series[$i], " AS "))
-							{
-								$tmp=explode(" AS ",$lista_valor_series[$i]);
-								$lista_valor_series[$i]=$tmp[1];
-							}
-					}
-				$nombre_serie_1=$lista_nombre_series[0];
-				$nombre_serie_2=$lista_nombre_series[1];
-				$nombre_serie_3=$lista_nombre_series[2];
-				$nombre_serie_4=$lista_nombre_series[3];
-				$nombre_serie_5=$lista_nombre_series[4];
-				$campo_etiqueta_serie_1=$lista_etiqueta_series[0];
-				$campo_etiqueta_serie_2=$lista_etiqueta_series[1];
-				$campo_etiqueta_serie_3=$lista_etiqueta_series[2];
-				$campo_etiqueta_serie_4=$lista_etiqueta_series[3];
-				$campo_etiqueta_serie_5=$lista_etiqueta_series[4];
-				$campo_valor_serie_1=$lista_valor_series[0];
-				$campo_valor_serie_2=$lista_valor_series[1];
-				$campo_valor_serie_3=$lista_valor_series[2];
-				$campo_valor_serie_4=$lista_valor_series[3];
-				$campo_valor_serie_5=$lista_valor_series[4];
-				// Libreria para graficos
-				include "inc/libchart/classes/libchart.php";
-
-				//Crea las series para el grafico, dependiendo si es torta (una serie) o cualquier otro (multiples series)
-				if ($tipo_grafico=="torta")
-					{
-						$dataSet = new XYDataSet();
-						// GENERA DATOS DEL GRAFICO
-						$consulta_ejecucion=ejecutar_sql($consulta);
-						while($registro=$consulta_ejecucion->fetch())
-							{
-								if ($nombre_serie_1 != "") $dataSet->addPoint(new Point($registro[$campo_etiqueta_serie_1], $registro[$campo_valor_serie_1]));
-							}
-					}
-				else
-					{
-						$dataSet = new XYSeriesDataSet();
-						if ($nombre_serie_1 != "")	{
-							$serie1 = new XYDataSet();
-							$dataSet->addSerie($nombre_serie_1, $serie1);	}
-						if ($nombre_serie_2 != "")	{
-							$serie2 = new XYDataSet();
-							$dataSet->addSerie($nombre_serie_2, $serie2);	}
-						if ($nombre_serie_3 != "")	{
-							$serie3 = new XYDataSet();
-							$dataSet->addSerie($nombre_serie_3, $serie3);	}
-						if ($nombre_serie_4 != "")	{
-							$serie4 = new XYDataSet();
-							$dataSet->addSerie($nombre_serie_4, $serie4);	}
-						if ($nombre_serie_5 != "")	{
-							$serie5 = new XYDataSet();
-							$dataSet->addSerie($nombre_serie_5, $serie5);	}
-
-						// GENERA DATOS DEL GRAFICO
-						$consulta_ejecucion=ejecutar_sql($consulta);
-						while($registro=$consulta_ejecucion->fetch())
-							{
-								if ($nombre_serie_1 != "") $serie1->addPoint(new Point($registro[$campo_etiqueta_serie_1], $registro[$campo_valor_serie_1]));
-								if ($nombre_serie_2 != "") $serie2->addPoint(new Point($registro[$campo_etiqueta_serie_2], $registro[$campo_valor_serie_2]));
-								if ($nombre_serie_3 != "") $serie3->addPoint(new Point($registro[$campo_etiqueta_serie_3], $registro[$campo_valor_serie_3]));
-								if ($nombre_serie_4 != "") $serie4->addPoint(new Point($registro[$campo_etiqueta_serie_4], $registro[$campo_valor_serie_4]));
-								if ($nombre_serie_5 != "") $serie5->addPoint(new Point($registro[$campo_etiqueta_serie_5], $registro[$campo_valor_serie_5]));
-							}
-					}
-
-				// CREA OBJETO SEGUN TIPO DE GRAFICO
-				if ($tipo_grafico=="linea" || $tipo_grafico=="linea_multiples")
-					$chart = new LineChart($registro_informe["ancho"], $registro_informe["alto"]);
-				if ($tipo_grafico=="barrah" || $tipo_grafico=="barrah_multiples")
-					$chart = new HorizontalBarChart($registro_informe["ancho"], $registro_informe["alto"]);
-				if ($tipo_grafico=="barrav" || $tipo_grafico=="barrav_multiples")
-					$chart = new VerticalBarChart($registro_informe["ancho"], $registro_informe["alto"]);
-				if ($tipo_grafico=="torta")
-					$chart = new PieChart($registro_informe["ancho"], $registro_informe["alto"]);
-
-				// PRESENTA EL GRAFICO EN PANTALLA
-				$chart->setDataSet($dataSet);
-				//$chart->getPlot()->setGraphCaptionRatio(0.75);
-				$chart->setTitle($registro_informe["titulo"]);
-				$chart->render("tmp/Inf_".$registro_informe["id"]."-".$PCOSESS_LoginUsuario.".png");
-				echo '<img alt="Grafico" src="tmp/Inf_'.$Identificador_informe.'-'.$PCOSESS_LoginUsuario.'.png" style="border: 1px solid gray;">';
-				*/
 			} // Fin si informe es G (grafico)
 
 		if ($en_ventana) cerrar_ventana();

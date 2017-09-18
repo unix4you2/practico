@@ -50,6 +50,7 @@ LogCambios="
 * Enhan:  Mejorado el asistente para generación de informes gráficos.  Se agrega además la posibilidad de personalizar la apariencia de algunas partes del gráfico generado.
 * Enhan:  Se amplían los tipos de gráfico (algunos apilables) a Dona, Linea, Áreas y Barras.
 * Fixed:  Boton de ocultamiento de opciones sobre controles de formulario devuelve un [object Object] en navegadores Firefox y derivados.  Se convierten a función los métodos asociados.
+* Enhan:  Suprimirdas las librerías asociadas a Practico-Libchart. Ahorro de 392Kb por cada cargue.
 "
 
 ########################################################################

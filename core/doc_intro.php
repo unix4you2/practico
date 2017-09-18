@@ -90,13 +90,6 @@ Section: Detalles de licenciamiento (AUTHORS)
 			http://ckeditor.com
 			See inc/ckeditor/LICENSE.html for details
 
-		LibChart
-			Location: inc/libchart / *
-			License: GNU General Public License Version 3
-			Made by: Jean-Marc Tremeaux - July 2011
-			http://naku.dohcrew.com/libchart/pages/introduction/
-			See inc/libchart/COPYING for details
-
 		Media files and CSS files under:
 				img / *
 				skin / *
@@ -110,4 +103,3 @@ Section: Detalles de licenciamiento (AUTHORS)
 
 */
 ?>
-
