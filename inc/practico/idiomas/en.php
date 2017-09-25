@@ -259,6 +259,7 @@
     $MULTILANG_SelectorIdiomaAyuda='Shows a select list during the login with all languages availables in the platform.';
     $MULTILANG_ErrorConexionInternet='It looks like you have run out of Internet, the connection to the system will be restored when your Internet connection is normal.<br><br>Check that your network connection or data signal is active.';
     $MULTILANG_NombreRADDes='Name used for the application generator.  This is used for window titles too';
+    $MULTILANG_SaltoEdicion='You are about to close the edit of the current element and jump to the edit window of the selected element. Do you wish to continue?';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Application design';

@@ -4554,7 +4554,7 @@ $('#SampleElement').load('YourURL');
 */
 	function agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,$tipo_elemento)
 		{
-		    global $MULTILANG_FrmValida,$MULTILANG_FrmPredeterminado,$MULTILANG_FrmCampo,$MULTILANG_MnuPropiedad,$MULTILANG_Detalles,$MULTILANG_Evento,$TablasCore,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
+		    global $MULTILANG_SaltoEdicion,$MULTILANG_Embebido,$MULTILANG_FrmValida,$MULTILANG_FrmPredeterminado,$MULTILANG_FrmCampo,$MULTILANG_MnuPropiedad,$MULTILANG_Detalles,$MULTILANG_Evento,$TablasCore,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
 			$salida='';
             if ($tipo_elemento=="ComplementoDisenoElemento")
                 {
@@ -4593,30 +4593,35 @@ $('#SampleElement').load('YourURL');
                         
                     //Pone controles
                     $salida='<div id="PCOEditorContenedor_'.$registro_campos["id"].'" style="margin:2px; display:none; visibility:hidden; position: absolute; z-index:1000;">
-                            <div style="display: inline-block">
-                                <a class="btn btn-xs btn-warning" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'" href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-fw fa-pencil"></i></a>
-                                '.$ComplementoBotonEventos.'
-                            </div>
-                            <div style="display: inline-block">
-                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverIzquierda.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Anterior.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-left"></i></a>
-                            </div>
-                            <div style="display: inline-block">
-                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverArriba.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDisminuyePeso.' a '.($registro_campos["peso"]-1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["peso"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-up"></i></a>
-                                <br>
-                                <a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmAumentaPeso.' a '.($registro_campos["peso"]+1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["peso"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-down"></i></a>
-                            </div>
-                            <div style="display: inline-block">
-                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-right"></i></a>
-                            </div>
-                            <div style="display: inline-block">
-                                <a class="btn btn-xs " data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Cerrar.'" href="javascript:OcultarOpcionesEdicion(this,\'#PCOEditorContenedor_'.$registro_campos["id"].'\');"><i class="fa fa-times"></i></a>
-                                <br>
-                                <a onclick=\'return confirm("'.$MULTILANG_FrmAdvDelCampo.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=eliminar_campo_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&nombre_tabla='.$registro_formulario["tabla_datos"].'\' class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-trash"></i></a>
-                            </div>
-                            <div style="display: inline-block">
-                                <a class="btn btn-xs btn-success" data-toggle="tooltip" data-html="true"  data-placement="top" title="<div align=left>'.$MULTILANG_Detalles.' <i>('.$MULTILANG_MnuPropiedad.')</i><br>ID HTML: <b>'.$registro_campos["id_html"].'</b><br>'.$MULTILANG_FrmCampo.': <b>'.$registro_campos["campo"].'</b><br>'.$MULTILANG_FrmPredeterminado.': <b>'.$registro_campos["valor_predeterminado"].'</b><br>'.$MULTILANG_FrmValida.': <b>'.$registro_campos["validacion_datos"].'</b> Extra: <b>'.$registro_campos["validacion_extras"].'</b></div>" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-info-circle"></i></a>
-                            </div>
-                        </div>';
+                                <div style="display: inline-block; vertical-align:top;">
+                                    <a class="btn btn-xs btn-warning" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'" href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-fw fa-pencil"></i></a>
+                                    '.$ComplementoBotonEventos.'
+                                </div>
+                                <div style="display: inline-block;">
+                                    <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverIzquierda.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Anterior.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-left"></i></a>
+                                </div>
+                                <div style="display: inline-block;">
+                                    <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverArriba.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDisminuyePeso.' a '.($registro_campos["peso"]-1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["peso"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-up"></i></a>
+                                    <br>
+                                    <a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmAumentaPeso.' a '.($registro_campos["peso"]+1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["peso"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-down"></i></a>
+                                </div>
+                                <div style="display: inline-block;">
+                                    <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-right"></i></a>
+                                </div>
+                                <div style="display: inline-block; vertical-align:top;">
+                                    <a class="btn btn-xs" data-toggle="tooltip" data-html="true"  data-placement="top" title="<div align=left><font color=yellow>'.$MULTILANG_Detalles.' <i>('.$MULTILANG_MnuPropiedad.')</i></font><br>ID HTML: <b>'.$registro_campos["id_html"].'</b><br>'.$MULTILANG_FrmCampo.': <b>'.$registro_campos["campo"].'</b><br>'.$MULTILANG_FrmPredeterminado.': <b>'.$registro_campos["valor_predeterminado"].'</b><br>'.$MULTILANG_FrmValida.': <b>'.$registro_campos["validacion_datos"].'</b> Extra: <b>'.$registro_campos["validacion_extras"].'</b></div>" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-info-circle"></i></a>';
+                                //Si el objeto es un formulario o informe embebido agrega enlace para su edicion directa
+                                if ($registro_campos["tipo"]=="form_consulta")
+                                    $salida.='<br><a onclick=\'return confirm("'.$MULTILANG_SaltoEdicion.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&formulario='.$registro_campos["formulario_vinculado"].'&popup_activo=\' class="btn btn-primary btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.' '.$MULTILANG_Embebido.'"><i class="fa fa fa-object-ungroup"></i></a>';
+                                if ($registro_campos["tipo"]=="informe")
+                                    $salida.='<br><a onclick=\'return confirm("'.$MULTILANG_SaltoEdicion.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=editar_informe&informe='.$registro_campos["informe_vinculado"].'&popup_activo=\' class="btn btn-primary btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.' '.$MULTILANG_Embebido.'"><i class="fa fa fa-object-ungroup"></i></a>';
+                    $salida.='</div>
+                                <div style="display: inline-block;">
+                                    <a class="btn btn-xs " data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Cerrar.'" href="javascript:OcultarOpcionesEdicion(this,\'#PCOEditorContenedor_'.$registro_campos["id"].'\');"><i class="fa fa-times"></i></a>
+                                    <br>
+                                    <a onclick=\'return confirm("'.$MULTILANG_FrmAdvDelCampo.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=eliminar_campo_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&nombre_tabla='.$registro_formulario["tabla_datos"].'\' class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-trash"></i></a>
+                                </div>
+                                </div>';
                 }
 			return $salida;
 		}
