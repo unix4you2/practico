@@ -5766,7 +5766,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 				// Si se ha definido un tamano fijo entonces crea el marco
 				if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
-					echo '<DIV style="DISPLAY: block; OVERFLOW: auto; POSITION: relative; WIDTH: '.$registro_informe["ancho"].'; HEIGHT: '.$registro_informe["alto"].'">';
+					echo '<DIV style="DISPLAY: block; OVERFLOW: auto; POSITION: relative; WIDTH: '.$registro_informe["ancho"].' !important; HEIGHT: '.$registro_informe["alto"].' !important">';
 					
 				//Genera enlaces a las opciones de descarga
 				if ($registro_informe["genera_pdf"]=='S'  && $embebido!=1)
@@ -5887,7 +5887,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					echo '</DIV>';
 			} // Fin si informe es T (tabla)
 
-
+/*
 		//Verifica si es un informe grafico sin dimensiones
 		if ($registro_informe["formato_final"]=="G" && ( $registro_informe["ancho"]=="" || $registro_informe["alto"]=="" ))
 			{
@@ -5898,10 +5898,14 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					</form>
 					<script type="" language="JavaScript"> document.cancelarXTamano.submit();  </script>';
 			}
-
+*/
 		// Si el informe tiene formato_final = G (grafico)
-		if ($registro_informe["formato_final"]=="G" && $registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
+		if ($registro_informe["formato_final"]=="G")
 			{
+				// Si se ha definido un tamano fijo entonces crea el marco
+				if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="" && $registro_informe["ancho"]!="0" && $registro_informe["alto"]!="0")
+					echo '<DIV style="DISPLAY: block; OVERFLOW: no; POSITION: relative; WIDTH: '.$registro_informe["ancho"].' !important; HEIGHT: '.$registro_informe["alto"].' !important">';
+			
 				//Consulta el formato de grafico y datos de series para ponerlo en los campos
 				//Dado por: Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
 				$formato_base=explode("|",$registro_informe["formato_grafico"]);
@@ -5982,7 +5986,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				if ($nombre_serie_4!="") $CadenaEtiquetas.=",'$nombre_serie_4'";
 				if ($nombre_serie_5!="") $CadenaEtiquetas.=",'$nombre_serie_5'";
             ?>
-                <div id="marco-informe-grafico-ID<?php echo $registro_informe["id"]; ?>"></div>
+                <div id="marco-informe-grafico-ID<?php echo $registro_informe["id"]; ?>" style="height: auto !important;"></div>
                 <script language="JavaScript">
                     //Genera el codigo Morris para el grafico
                     $(function() {
@@ -6073,6 +6077,10 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
                     });
                 </script>
             <?php
+			// Si se ha definido un tamano fijo entonces cierra el marco
+			if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="" && $registro_informe["ancho"]!="0" && $registro_informe["alto"]!="0")
+				echo '</DIV>';
+					
 			} // Fin si informe es G (grafico)
 
 		if ($en_ventana) cerrar_ventana();
