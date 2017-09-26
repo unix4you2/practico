@@ -6072,6 +6072,11 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
                             preUnits: '<?php echo $unidades_pre; ?>',
                             postUnits: '<?php echo $unidades_pos; ?>',
                             grid: <?php echo $ocultar_grilla; ?>,
+                            <?php
+                                //Agrega las unidades para los tipos de grafico Donut
+                                if ($TipoObjetoGraficoMorris=="Morris.Donut")
+                                    echo "formatter: function (value, data) { return '$unidades_pre'+ (value) + '$unidades_pos'; },";
+                            ?>
                             axes: <?php echo $ocultar_ejes; ?>
                         });
                     });

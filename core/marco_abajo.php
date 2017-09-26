@@ -249,7 +249,8 @@
                                     "bAutoWidth": true,
                                     //"bSort": false,
                                     //aoColumns: [ { sWidth: "45%" }, { sWidth: "45%" }, { sWidth: "10%", bSearchable: false, bSortable: false } ],
-
+                                    //"aaSorting": [],  //Un alias a versiones viejas de order:
+                                    "order": [],
                                     "fnInitComplete": function() {
                                     this.fnAdjustColumnSizing(true);
                                     },';
