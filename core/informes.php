@@ -2339,7 +2339,7 @@ if ($PCO_Accion=="guardar_informe")
 							$ArregloCampos=explode(',',$ListaCamposSinID_informe_condiciones);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de informe_condiciones
-							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe=?","$informe");
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe=? ORDER BY peso,id","$informe");
 							while($registro = $consulta->fetch())
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
@@ -2388,7 +2388,7 @@ if ($PCO_Accion=="guardar_informe")
 							$ArregloCampos=explode(',',$ListaCamposSinID_informe_campos);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de formulario_boton
-							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY peso,id","$informe");
 							while($registro = $consulta->fetch())
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
@@ -2412,7 +2412,7 @@ if ($PCO_Accion=="guardar_informe")
 							$ArregloCampos=explode(',',$ListaCamposSinID_informe_boton);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de informe_boton
-							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_boton WHERE informe=? ","$informe");
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_boton WHERE informe=? ORDER BY peso,id","$informe");
 							while($registro = $consulta->fetch())
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
@@ -2470,7 +2470,7 @@ if ($PCO_Accion=="guardar_informe")
 							$Contenido_XML .= "
 	</core_informe>";
 							// Registros de informe_boton
-							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_boton WHERE informe=?","$informe");
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_boton WHERE informe=? ORDER BY peso,id","$informe");
 							$conteo_elementos_xml=0;
 							while($registro = $consulta->fetch())
 								{
@@ -2488,7 +2488,7 @@ if ($PCO_Accion=="guardar_informe")
 							$conteo_elementos_xml=0;
 
 							// Registros de informe_campos
-							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe=?","$informe");
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY peso,id","$informe");
 							while($registro = $consulta->fetch())
 								{
 									//Exporta la tabla de core_informe_campos
@@ -2505,7 +2505,7 @@ if ($PCO_Accion=="guardar_informe")
 							$conteo_elementos_xml=0;
 
 							// Registros de informe_condiciones
-							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe=?","$informe");
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe=? ORDER BY peso,id","$informe");
 							while($registro = $consulta->fetch())
 								{
 									//Exporta la tabla de core_informe_condiciones

@@ -2858,7 +2858,7 @@ if ($PCO_Accion=="editar_formulario")
 							$ArregloCampos=explode(',',$ListaCamposSinID_formulario_objeto);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de formulario_objeto
-							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario=?","$formulario");
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER by peso,id","$formulario");
 							while($registro = $consulta->fetch())
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
@@ -2903,7 +2903,7 @@ if ($PCO_Accion=="editar_formulario")
 							$ArregloCampos=explode(',',$ListaCamposSinID_formulario_boton);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de formulario_boton
-							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=? ORDER BY peso,id","$formulario");
 							while($registro = $consulta->fetch())
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
@@ -2959,7 +2959,7 @@ if ($PCO_Accion=="editar_formulario")
 							$Contenido_XML .= "
 	</core_formulario>";
 							// Registros de formulario_objeto
-							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario=?","$formulario");
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER BY peso,id","$formulario");
 							$conteo_elementos_xml=0;
 							while($registro = $consulta->fetch())
 								{
@@ -2995,7 +2995,7 @@ if ($PCO_Accion=="editar_formulario")
 							$conteo_elementos_xml=0;
 
 							// Registros de formulario_boton
-							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=?","$formulario");
+							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=? ORDER BY peso,id","$formulario");
 							while($registro = $consulta->fetch())
 								{
 									//Exporta la tabla de core_formulario_objeto

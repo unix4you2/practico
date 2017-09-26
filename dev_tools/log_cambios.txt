@@ -16,6 +16,8 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/informes.php
+core/formularios.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/bootstrap/js/practico*
@@ -35,7 +37,7 @@ LogCambios="
 * Enhan: Eliminados parámetros de ancho y alto de informes durante su diseño pues ahora se aplican sólo diseños responsive.
 * Enhan: Actualizada version de JavaScript Vector Library Raphael 2.1.2 a 2.2.1  
 * Enhan: Actualizada version de Morris Library v0.5.0 a v0.5.1
-
+* Fixed: Clonacion de formularios e informes considera ahora los pesos y los id de los elementos a la hora de generar los nuevos objetos de manera que se conserve el orden de los mismos en el nuevo elemento.
 "
 
 ########################################################################
