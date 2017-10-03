@@ -41,6 +41,8 @@ LogCambios="
 * Fixed: Clonacion de formularios e informes considera ahora los pesos y los id de los elementos a la hora de generar los nuevos objetos de manera que se conserve el orden de los mismos en el nuevo elemento.
 * Added: Ahora los gráficos de Dona interpretan y agregan los valores pre y pos ingresados para la torta.
 * Fixed: Ahora los datatables respetan las posibles cláusulas ORDER BY incluidas en los Queries de los informes al evitar su ordenamiento inicial automáticamente.
+* Fixed: Procesos de actualización automática de valores sobre registros contemplan ahora escapar las cadenas correctamente para evitar caracteres especiales, interrogantes y similares.
+
 "
 
 ########################################################################

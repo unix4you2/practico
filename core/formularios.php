@@ -169,14 +169,15 @@
                             //Verifica que el campo se encuentre dentro de la tabla, para descartar campos manuales mal escritos o usados para javascripts y otros fines.
                             if (existe_campo_tabla($registro_campos["campo"],$registro_formulario["tabla_datos"]))
                                 {
-                                    $cadena_nuevos_valores.=$registro_campos["campo"]."='".${$registro_campos["campo"]}."',";
+                                    $cadena_campos_interrogantes.=$registro_campos["campo"]."=?,";
+                                    $cadena_nuevos_valores.=${$registro_campos["campo"]}.$_SeparadorCampos_;
                                 }
 						}
 					// Elimina comas al final de las listas
-					$cadena_nuevos_valores=substr($cadena_nuevos_valores, 0, strlen($cadena_nuevos_valores)-1);
+					$cadena_campos_interrogantes=substr($cadena_campos_interrogantes, 0, strlen($cadena_campos_interrogantes)-1);
 
 					// Actualiza los datos
-					ejecutar_sql_unaria("UPDATE ".$registro_formulario["tabla_datos"]." SET $cadena_nuevos_valores WHERE id=? ","$id_registro_datos");
+					ejecutar_sql_unaria("UPDATE ".$registro_formulario["tabla_datos"]." SET $cadena_campos_interrogantes WHERE id=? ",$cadena_nuevos_valores.$id_registro_datos);
 					auditar("Actualiza registro $id_registro_datos en ".$registro_formulario["tabla_datos"]);
 					//echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
