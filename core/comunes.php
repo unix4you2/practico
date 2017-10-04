@@ -2423,7 +2423,7 @@ function ventana_login()
 			Function: ventana_login
 			Despliega la ventana de ingreso al sistema con el formulario para usuario, contrasena y captcha.
 		*/
-		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor,$MULTILANG_OauthButt,$NombreRAD,$Auth_PresentarOauthInicio;
+		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor,$MULTILANG_OauthButt,$NombreRAD,$Auth_PresentarOauthInicio,$TipoCaptchaLogin;
 		  global $Auth_PermitirAutoRegistro,$Auth_PermitirReseteoClaves,$CaracteresCaptcha,$IdiomaEnLogin;
 		  global $IdiomaPredeterminado,$MULTILANG_IdiomaPredeterminado,$MULTILANG_Cerrar,$MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes,$MULTILANG_Registrarme,$MULTILANG_OlvideClave;
 			// Variables para OAuth desde el archivo de configuracion
@@ -2589,20 +2589,54 @@ function ventana_login()
 
 									<?php
 										//Presenta captcha si esta habilitado
-										if ($CaracteresCaptcha>0)
+										if ($CaracteresCaptcha>0 || $TipoCaptchaLogin=="visual")
 											{
+											    //Si el captcha es tradicional
+        										if ($CaracteresCaptcha>0 && $TipoCaptchaLogin=="tradicional")
+        											{
+        											    echo '
+                    										<div class="form-group col-xs-12">
+                    											'.$MULTILANG_CodigoSeguridad.':
+                    											<img src="core/captcha.php">
+                    										</div>
+                    										<div class="form-group input-group input-group-sm">
+                    											<span class="input-group-addon"><i class="fa fa-hand-o-right fa-fw"></i></span>
+                    											<input type="text" name="captcha" maxlength=6 class="form-control"  placeholder="'.$MULTILANG_IngreseCodigoSeguridad.'">
+                    										</div>';
+        											}
+
+											    //Si el captcha es visual
+        										if ($TipoCaptchaLogin=="visual")
+        											{
+        											    //Llama de todas formas al archivo generador de captcha, solo que este se usa para la variable de sesion solamente
+        											    //echo '<img src="core/captcha.php" width=1 height=1>';
+        											    include ("core/captcha.php");
+        											    echo '
+                                                            <div class="captcha card">
+                                                              <div class="captchaTitle">
+                                                                Haga clic o toque
+                                                                <b>
+                                                                  <span class="captchaQuestion"></span>
+                                                                </b>
+                                                              </div>
+                                                              <div class="capchaIcons">
+                                                              </div>
+                                                            </div>
+                                                            <div class="card">
+                                                              <input type="button" value="Validar" class="submitForm flatButton">
+                                                              <a href="#" class="reCap">
+                                                                <i class="fa fa-refresh"></i>
+                                                              </a>
+                                                              <a href="#" class="voiceCaptcha">
+                                                                <i class="fa fa-volume-up"></i>
+                                                              </a>
+                                                            </div>
+                                                        ';
+                                                      
+        											}
+
+											} //Fin si hay que poner captcha
 									?>
-										<div class="form-group col-xs-12">
-											<?php echo $MULTILANG_CodigoSeguridad; ?>:
-											<img src="core/captcha.php">
-										</div>
-										<div class="form-group input-group input-group-sm">
-											<span class="input-group-addon"><i class="fa fa-hand-o-right fa-fw"></i></span>
-											<input type="text" name="captcha" maxlength=6 class="form-control"  placeholder="<?php echo $MULTILANG_IngreseCodigoSeguridad; ?>">
-										</div>
-										<?php
-												}
-										?>
                                     
                                     <div class="form-group input-group input-group-sm col-xs-12">
                                         <a class="btn btn-success btn-block" href="javascript:document.login_usuario.submit();"><i class="fa fa-check-circle"></i> <?php echo $MULTILANG_Ingresar; ?></a>

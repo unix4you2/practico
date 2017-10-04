@@ -58,6 +58,9 @@
 	$MULTILANG_Cancelar='रद्द';
 	$MULTILANG_Capturar='कैद';
 	$MULTILANG_CaracteresCaptcha='कैप्चा के लिए पात्रों की संख्या?';
+	$MULTILANG_TipoCaptcha='एक्सेस स्क्रीन के लिए उपयोग किए गए कैप्चा का प्रकारा नहीं है';
+	$MULTILANG_TipoCaptchaTradicional='पारंपरिक (संख्याएं और अक्षरों) को PHP जीडी सक्षम होना चाहिए';
+	$MULTILANG_TipoCaptchaVisual='Visual selection of images. No GD library required';
     $MULTILANG_Cargando='लोड हो रहा है';
     $MULTILANG_Cargar='अपलोड';
 	$MULTILANG_Cerrar='बंद करे';

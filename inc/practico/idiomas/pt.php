@@ -58,6 +58,9 @@
 	$MULTILANG_Cancelar='Cancelar';
 	$MULTILANG_Capturar='Captura';
 	$MULTILANG_CaracteresCaptcha='N&uacute;mero de caracteres para captcha?';
+	$MULTILANG_TipoCaptcha='Tipo de captcha usado para tela de acesso';
+	$MULTILANG_TipoCaptchaTradicional='Tradicional (números e letras) requer o PHP GD habilitado.';
+	$MULTILANG_TipoCaptchaVisual='Seleção visual de imagens. Não foi necessária nenhuma biblioteca GD';
     $MULTILANG_Cargando='Carregando';
     $MULTILANG_Cargar='Envio';
 	$MULTILANG_Cerrar='Fechar';
