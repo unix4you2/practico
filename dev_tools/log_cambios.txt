@@ -22,6 +22,9 @@ core/marco_abajo.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/bootstrap/js/practico*
+inc/bootstrap/js/plugins/morris/morris.js
+inc/bootstrap/js/plugins/morris/raphael.min.js
+
 "
 
 #[ArchivosObligatorios] Separados por espacio

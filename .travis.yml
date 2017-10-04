@@ -3,9 +3,9 @@ php:
   # Alias de la version 5.2.17
   #- "5.2"
   # Alias de la version 5.3.x
-  - "5.3"
+  #- "5.3"
   # Alias de la version 5.4.x
-  #- "5.4"
+  - "5.4"
   # Alias de la version 5.5.x
   #- "5.5"
   # Alias de la version 5.6.x
