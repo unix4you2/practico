@@ -2609,32 +2609,8 @@ function ventana_login()
         										if ($TipoCaptchaLogin=="visual")
         											{
         											    //Llama de todas formas al archivo generador de captcha, solo que este se usa para la variable de sesion solamente
-        											    //echo '<img src="core/captcha.php" width=1 height=1>';
         											    include ("core/captcha.php");
-        											    echo '
-                                                            <div class="captcha card">
-                                                              <div class="captchaTitle">
-                                                                Haga clic o toque
-                                                                <b>
-                                                                  <span class="captchaQuestion"></span>
-                                                                </b>
-                                                              </div>
-                                                              <div class="capchaIcons">
-                                                              </div>
-                                                            </div>
-                                                            <div class="card">
-                                                              <input type="button" value="Validar" class="submitForm flatButton">
-                                                              <a href="#" class="reCap">
-                                                                <i class="fa fa-refresh"></i>
-                                                              </a>
-                                                              <a href="#" class="voiceCaptcha">
-                                                                <i class="fa fa-volume-up"></i>
-                                                              </a>
-                                                            </div>
-                                                        ';
-                                                      
         											}
-
 											} //Fin si hay que poner captcha
 									?>
                                     
