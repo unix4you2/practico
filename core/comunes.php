@@ -3475,10 +3475,15 @@ function selector_iconos_awesome()
 			if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
                 $salida.='<label id="PCOEtiqueta_'.$registro_campos["campo"].'" for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
 
+			// Define si el control es solo lectura o no
+			$EstadoLecturaControl="";
+			if ($registro_campos["solo_lectura"]=='READONLY')
+				$EstadoLecturaControl=' disabled ';
+
 			//Abre el marco del control de datos
 			$salida.='<div class="form-group input-group">';
 			// Muestra el campo
-			$salida.= '<select id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" data-container="body" class="selectpicker combo-'.$registro_campos["campo"].' show-tick" '.@$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'" '.$registro_campos["personalizacion_tag"].' >';
+			$salida.= '<select id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" data-container="body" class="selectpicker combo-'.$registro_campos["campo"].' show-tick" '.@$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'" '.$registro_campos["personalizacion_tag"].' '.$EstadoLecturaControl.' >';
             
                 //Genera Script Ajax y DIV para cambio de opciones en caliente
                 $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_opciones"]);

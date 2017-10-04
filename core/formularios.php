@@ -827,7 +827,7 @@ if ($PCO_Accion=="editar_formulario")
 					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25,36,37,44,45,46");
 					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,5,6,7,8,9,10,14,15,17,36,37,44,45,46");
 					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17,36,37,46");
-					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,7,8,9,10,12,15,17,18,19,20,35,36,37,45,46");
+					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,6,7,8,9,10,12,15,17,18,19,20,35,36,37,45,46");
 					if (tipo_objeto_activo=="lista_radio") VisualizarCampos("1,2,7,8,9,10,17,18,19,20,35,36,37,45,46");
 					if (tipo_objeto_activo=="casilla_check") VisualizarCampos("1,2,4,9,17,36,42,46");
 					if (tipo_objeto_activo=="etiqueta")   VisualizarCampos("9,17,21,36,46");
