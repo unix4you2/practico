@@ -16,8 +16,11 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/captcha.php
 core/informes.php
+core/objetos.php
 core/formularios.php
+core/marco_conf.php
 core/marco_abajo.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
@@ -46,6 +49,7 @@ LogCambios="
 * Fixed: Ahora los datatables respetan las posibles cláusulas ORDER BY incluidas en los Queries de los informes al evitar su ordenamiento inicial automáticamente.
 * Fixed: Procesos de actualización automática de valores sobre registros contemplan ahora escapar las cadenas correctamente para evitar caracteres especiales, interrogantes y similares.
 * Added: Los controles de datos de tipo lista de seleccion ahora permiten establecer dentro de sus propiedades si el control inicia o no como solo lectura
+* Added: Ahora la pantalla de acceso puede ser configurada para utilizar captchas visuales, facilitando su uso en dispositivos moviles. 
 "
 
 ########################################################################

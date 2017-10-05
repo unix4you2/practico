@@ -82,6 +82,7 @@
 	$IdiomaEnLogin=0;
 	$Tema_PracticoFramework='bootstrap';
 
+	$TipoCaptchaLogin='visual';
 	$CaracteresCaptcha=4;
 	$CodigoGoogleAnalytics='UA-847800-9';
 	

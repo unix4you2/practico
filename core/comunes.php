@@ -2423,9 +2423,14 @@ function ventana_login()
 			Function: ventana_login
 			Despliega la ventana de ingreso al sistema con el formulario para usuario, contrasena y captcha.
 		*/
-		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor,$MULTILANG_OauthButt,$NombreRAD,$Auth_PresentarOauthInicio;
+		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor,$MULTILANG_OauthButt,$NombreRAD,$Auth_PresentarOauthInicio,$TipoCaptchaLogin;
 		  global $Auth_PermitirAutoRegistro,$Auth_PermitirReseteoClaves,$CaracteresCaptcha,$IdiomaEnLogin;
 		  global $IdiomaPredeterminado,$MULTILANG_IdiomaPredeterminado,$MULTILANG_Cerrar,$MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes,$MULTILANG_Registrarme,$MULTILANG_OlvideClave;
+		  
+		  //Variables para el sistema de captcha
+		  global $MULTILANG_TipoCaptchaPrefijo,$MULTILANG_TipoCaptchaPosfijo;
+          global $MULTILANG_SimboloCaptchaCarro,    $MULTILANG_SimboloCaptchaTijeras,    $MULTILANG_SimboloCaptchaCalculadora,    $MULTILANG_SimboloCaptchaBomba,    $MULTILANG_SimboloCaptchaLibro,    $MULTILANG_SimboloCaptchaPastel,    $MULTILANG_SimboloCaptchaCafe,    $MULTILANG_SimboloCaptchaNube,    $MULTILANG_SimboloCaptchaDiamante,    $MULTILANG_SimboloCaptchaMujer,    $MULTILANG_SimboloCaptchaHombre,    $MULTILANG_SimboloCaptchaBalon,    $MULTILANG_SimboloCaptchaControl,    $MULTILANG_SimboloCaptchaCasa,    $MULTILANG_SimboloCaptchaCelular,    $MULTILANG_SimboloCaptchaArbol,    $MULTILANG_SimboloCaptchaTrofeo,    $MULTILANG_SimboloCaptchaSombrilla,    $MULTILANG_SimboloCaptchaUniversidad,    $MULTILANG_SimboloCaptchaCamara,    $MULTILANG_SimboloCaptchaAmbulancia,    $MULTILANG_SimboloCaptchaAvion,    $MULTILANG_SimboloCaptchaTren,    $MULTILANG_SimboloCaptchaBicicleta,    $MULTILANG_SimboloCaptchaCamion,    $MULTILANG_SimboloCaptchaCorazon;
+
 			// Variables para OAuth desde el archivo de configuracion
 			global $APIGoogle_ClientId,$APIGoogle_ClientSecret;
 			global $APIFacebook_ClientId,$APIFacebook_ClientSecret;
@@ -2588,21 +2593,28 @@ function ventana_login()
 
 
 									<?php
-										//Presenta captcha si esta habilitado
-										if ($CaracteresCaptcha>0)
+									    //Si el captcha es tradicional
+										if ($CaracteresCaptcha>0 && $TipoCaptchaLogin=="tradicional")
 											{
+											    echo '<div class="well">
+            										<div class="form-group col-xs-12">
+            											'.$MULTILANG_CodigoSeguridad.':
+            											<img src="core/captcha.php">
+            										</div>
+            										<div class="form-group input-group input-group-sm">
+            											<span class="input-group-addon"><i class="fa fa-hand-o-right fa-fw"></i></span>
+            											<input type="text" name="captcha" maxlength=6 class="form-control"  placeholder="'.$MULTILANG_IngreseCodigoSeguridad.'">
+            										</div>
+            										</div>';
+											}
+
+									    //Si el captcha es visual
+										if ($CaracteresCaptcha>0 && $TipoCaptchaLogin=="visual")
+											{
+											    //Llama de todas formas al archivo generador de captcha, solo que este se usa para la variable de sesion solamente
+											    include ("core/captcha.php");
+											}
 									?>
-										<div class="form-group col-xs-12">
-											<?php echo $MULTILANG_CodigoSeguridad; ?>:
-											<img src="core/captcha.php">
-										</div>
-										<div class="form-group input-group input-group-sm">
-											<span class="input-group-addon"><i class="fa fa-hand-o-right fa-fw"></i></span>
-											<input type="text" name="captcha" maxlength=6 class="form-control"  placeholder="<?php echo $MULTILANG_IngreseCodigoSeguridad; ?>">
-										</div>
-										<?php
-												}
-										?>
                                     
                                     <div class="form-group input-group input-group-sm col-xs-12">
                                         <a class="btn btn-success btn-block" href="javascript:document.login_usuario.submit();"><i class="fa fa-check-circle"></i> <?php echo $MULTILANG_Ingresar; ?></a>

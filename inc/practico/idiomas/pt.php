@@ -57,7 +57,6 @@
 	$MULTILANG_Campo='Campo';
 	$MULTILANG_Cancelar='Cancelar';
 	$MULTILANG_Capturar='Captura';
-	$MULTILANG_CaracteresCaptcha='N&uacute;mero de caracteres para captcha?';
     $MULTILANG_Cargando='Carregando';
     $MULTILANG_Cargar='Envio';
 	$MULTILANG_Cerrar='Fechar';
@@ -203,6 +202,38 @@
 	$MULTILANG_OauthLogin='Entre usando minha rede social';
 	$MULTILANG_LoginClasico='Entrar com conta';
 	$MULTILANG_LoginOauthDes='<b>Redes sociais e outros provedores de autenticação dispon&iacute;veis</b><br>Clique sobre o logotipo de login usando o nome de usu&aacute;rio ea senha de seu site favorito.';
+	$MULTILANG_CaracteresCaptcha='N&uacute;mero de caracteres para captcha?';
+	$MULTILANG_TipoCaptcha='Tipo de captcha usado para tela de acesso';
+	$MULTILANG_TipoCaptchaTradicional='Tradicional (números e letras) requer o PHP GD habilitado.';
+	$MULTILANG_TipoCaptchaVisual='Seleção visual de imagens. Não foi necessária nenhuma biblioteca GD';
+	$MULTILANG_TipoCaptchaPrefijo='Haga clic o toque el icono de';
+	$MULTILANG_TipoCaptchaPosfijo='para validar';
+    $MULTILANG_SimboloCaptchaCarro='CARRO';
+    $MULTILANG_SimboloCaptchaTijeras='TIJERAS';
+    $MULTILANG_SimboloCaptchaCalculadora='CALCULADORA';
+    $MULTILANG_SimboloCaptchaBomba='BOMBA';
+    $MULTILANG_SimboloCaptchaLibro='LIBRO';
+    $MULTILANG_SimboloCaptchaPastel='PASTEL';
+    $MULTILANG_SimboloCaptchaCafe='CAFE';
+    $MULTILANG_SimboloCaptchaNube='NUBE';
+    $MULTILANG_SimboloCaptchaDiamante='DIAMANTE';
+    $MULTILANG_SimboloCaptchaMujer='MUJER';
+    $MULTILANG_SimboloCaptchaHombre='HOMBRE';
+    $MULTILANG_SimboloCaptchaBalon='BALON';
+    $MULTILANG_SimboloCaptchaControl='CONTROL';
+    $MULTILANG_SimboloCaptchaCasa='CASA';
+    $MULTILANG_SimboloCaptchaCelular='CELULAR';
+    $MULTILANG_SimboloCaptchaArbol='ARBOL';
+    $MULTILANG_SimboloCaptchaTrofeo='TROFEO';
+    $MULTILANG_SimboloCaptchaSombrilla='SOMBRILLA';
+    $MULTILANG_SimboloCaptchaUniversidad='UNIVERSIDAD';
+    $MULTILANG_SimboloCaptchaCamara='CAMARA';
+    $MULTILANG_SimboloCaptchaAmbulancia='AMBULANCIA';
+    $MULTILANG_SimboloCaptchaAvion='AVION';
+    $MULTILANG_SimboloCaptchaTren='TREN';
+    $MULTILANG_SimboloCaptchaBicicleta='BICICLETA';
+    $MULTILANG_SimboloCaptchaCamion='CAMION';
+    $MULTILANG_SimboloCaptchaCorazon='CORAZON';
 
 	//Banderas de campos en formularios
 	$MULTILANG_TitValorUnico='O valor digitado não aceita duplicado';

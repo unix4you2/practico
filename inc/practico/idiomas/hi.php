@@ -57,7 +57,6 @@
 	$MULTILANG_Campo='क्षेत्र';
 	$MULTILANG_Cancelar='रद्द';
 	$MULTILANG_Capturar='कैद';
-	$MULTILANG_CaracteresCaptcha='कैप्चा के लिए पात्रों की संख्या?';
     $MULTILANG_Cargando='लोड हो रहा है';
     $MULTILANG_Cargar='अपलोड';
 	$MULTILANG_Cerrar='बंद करे';
@@ -203,7 +202,39 @@
 	$MULTILANG_OauthLogin='मेरे सामाजिक नेटवर्क का उपयोग कर लॉगिन';
 	$MULTILANG_LoginClasico='Practicos खाते के साथ लॉगिन';
 	$MULTILANG_LoginOauthDes='<b>सामाजिक नेटवर्क और अन्य प्रमाणीकरण प्रदाताओं</b><br>अपने पसंदीदा साइट से यूज़रनेम और पासवर्ड का उपयोग कर लॉगइन करने के लोगो पर क्लिक करें.';
-
+	$MULTILANG_CaracteresCaptcha='कैप्चा के लिए पात्रों की संख्या?';
+	$MULTILANG_TipoCaptcha='एक्सेस स्क्रीन के लिए उपयोग किए गए कैप्चा का प्रकारा नहीं है';
+	$MULTILANG_TipoCaptchaTradicional='पारंपरिक (संख्याएं और अक्षरों) को PHP जीडी सक्षम होना चाहिए';
+	$MULTILANG_TipoCaptchaVisual='Visual selection of images. No GD library required';
+	$MULTILANG_TipoCaptchaPrefijo='Click on the';
+	$MULTILANG_TipoCaptchaPosfijo='icon to validate';
+    $MULTILANG_SimboloCaptchaCarro='CAR';
+    $MULTILANG_SimboloCaptchaTijeras='SCISSORS';
+    $MULTILANG_SimboloCaptchaCalculadora='CALCULATOR';
+    $MULTILANG_SimboloCaptchaBomba='BOMB';
+    $MULTILANG_SimboloCaptchaLibro='BOOK';
+    $MULTILANG_SimboloCaptchaPastel='CAKE';
+    $MULTILANG_SimboloCaptchaCafe='CAFE';
+    $MULTILANG_SimboloCaptchaNube='CLOUD';
+    $MULTILANG_SimboloCaptchaDiamante='DIAMOND';
+    $MULTILANG_SimboloCaptchaMujer='WOMAN';
+    $MULTILANG_SimboloCaptchaHombre='MAN';
+    $MULTILANG_SimboloCaptchaBalon='BALL';
+    $MULTILANG_SimboloCaptchaControl='GAMEPAD';
+    $MULTILANG_SimboloCaptchaCasa='HOUSE';
+    $MULTILANG_SimboloCaptchaCelular='CELLPHONE';
+    $MULTILANG_SimboloCaptchaArbol='TREE';
+    $MULTILANG_SimboloCaptchaTrofeo='TROPHY';
+    $MULTILANG_SimboloCaptchaSombrilla='UMBRELLA';
+    $MULTILANG_SimboloCaptchaUniversidad='UNIVERSITY';
+    $MULTILANG_SimboloCaptchaCamara='CAMERA';
+    $MULTILANG_SimboloCaptchaAmbulancia='AMBULANCE';
+    $MULTILANG_SimboloCaptchaAvion='AIRPLANE';
+    $MULTILANG_SimboloCaptchaTren='TRAIN';
+    $MULTILANG_SimboloCaptchaBicicleta='BIKE';
+    $MULTILANG_SimboloCaptchaCamion='TRUCK';
+    $MULTILANG_SimboloCaptchaCorazon='HEART';
+    
 	//Banderas de campos en formularios
 	$MULTILANG_TitValorUnico='डुप्लिकेट को स्वीकार नहीं करता गई वैल्यू';
 	$MULTILANG_DesValorUnico='पहले से ही प्रवेश की अनुमति नहीं किया जाएगा डेटाबेस में है कि मूल्य के साथ एक रिकॉर्ड है, अगर वहाँ प्रणाली है, इस क्षेत्र में दर्ज की गई जानकारी को मान्य होगा.';

@@ -176,7 +176,15 @@
 													?>
 												</select>
 											</div>
-											
+
+											<label for="TipoCaptchaLoginNEW"><i class="fa fa-male fa-2x fa-fw"></i> <?php echo $MULTILANG_TipoCaptcha; ?>:</label>
+											<div class="form-group input-group">
+												<select id="TipoCaptchaLoginNEW" name="TipoCaptchaLoginNEW" class="selectpicker" >
+													<option value="tradicional"  <?php if ($TipoCaptchaLogin=="" || $TipoCaptchaLogin=="tradicional")       echo "SELECTED"; ?> ><?php echo $MULTILANG_TipoCaptchaTradicional; ?></option>
+													<option value="visual" <?php if ($TipoCaptchaLogin=="visual") echo "SELECTED"; ?> ><?php echo $MULTILANG_TipoCaptchaVisual; ?></option>
+												</select>
+											</div>
+
 											<label for="CaracteresCaptchaNEW"><i class="fa fa-key fa-2x fa-fw"></i> <?php echo $MULTILANG_CaracteresCaptcha; ?>:</label>
 											<div class="form-group input-group">
 												<select id="CaracteresCaptchaNEW" name="CaracteresCaptchaNEW" class="selectpicker" >
