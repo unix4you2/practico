@@ -61,35 +61,35 @@
 
 	if ($TipoCaptchaLogin=="visual")
 	    {
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-car','descripcion' => 'carro');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-scissors','descripcion' => 'tijeras');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-calculator','descripcion' => 'calculadora');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-bomb','descripcion' => 'bomba');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-book','descripcion' => 'libro');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-birthday-cake','descripcion' => 'pastel');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-coffee','descripcion' => 'cafe');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-cloud','descripcion' => 'nube');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-diamond','descripcion' => 'diamante');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-female','descripcion' => 'mujer');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-male','descripcion' => 'hombre');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-futbol-o','descripcion' => 'balon');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-gamepad','descripcion' => 'control');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-home','descripcion' => 'casa');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-mobile','descripcion' => 'celular');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-tree','descripcion' => 'arbol');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-trophy','descripcion' => 'trofeo');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-umbrella','descripcion' => 'sombrilla');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-university','descripcion' => 'universidad');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-video-camera','descripcion' => 'camara');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-ambulance','descripcion' => 'ambulancia');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-plane','descripcion' => 'avion');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-subway','descripcion' => 'tren');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-bicycle','descripcion' => 'bicicleta');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-truck','descripcion' => 'camion');
-            $ArregloSimbolos[]=Array('simbolo' => 'fa-heart','descripcion' => 'corazon');
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-car','descripcion' => $MULTILANG_SimboloCaptchaCarro);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-scissors','descripcion' => $MULTILANG_SimboloCaptchaTijeras);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-calculator','descripcion' => $MULTILANG_SimboloCaptchaCalculadora);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-bomb','descripcion' => $MULTILANG_SimboloCaptchaBomba);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-book','descripcion' => $MULTILANG_SimboloCaptchaLibro);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-birthday-cake','descripcion' => $MULTILANG_SimboloCaptchaPastel);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-coffee','descripcion' => $MULTILANG_SimboloCaptchaCafe);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-cloud','descripcion' => $MULTILANG_SimboloCaptchaNube);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-diamond','descripcion' => $MULTILANG_SimboloCaptchaDiamante);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-female','descripcion' => $MULTILANG_SimboloCaptchaMujer);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-male','descripcion' => $MULTILANG_SimboloCaptchaHombre);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-futbol-o','descripcion' => $MULTILANG_SimboloCaptchaBalon);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-gamepad','descripcion' => $MULTILANG_SimboloCaptchaControl);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-home','descripcion' => $MULTILANG_SimboloCaptchaCasa);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-mobile','descripcion' => $MULTILANG_SimboloCaptchaCelular);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-tree','descripcion' => $MULTILANG_SimboloCaptchaArbol);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-trophy','descripcion' => $MULTILANG_SimboloCaptchaTrofeo);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-umbrella','descripcion' => $MULTILANG_SimboloCaptchaSombrilla);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-university','descripcion' => $MULTILANG_SimboloCaptchaUniversidad);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-video-camera','descripcion' => $MULTILANG_SimboloCaptchaCamara);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-ambulance','descripcion' => $MULTILANG_SimboloCaptchaAmbulancia);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-plane','descripcion' => $MULTILANG_SimboloCaptchaAvion);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-subway','descripcion' => $MULTILANG_SimboloCaptchaTren);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-bicycle','descripcion' => $MULTILANG_SimboloCaptchaBicicleta);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-truck','descripcion' => $MULTILANG_SimboloCaptchaCamion);
+            $ArregloSimbolos[]=Array('simbolo' => 'fa-heart','descripcion' => $MULTILANG_SimboloCaptchaCorazon);
 
         	$CantidadSimbolosDisponibles=25;
-        	$CantidadSimbolosVisibles=5;
+        	$CantidadSimbolosVisibles=$CaracteresCaptcha;
         	$CadenaAleatoriosGenerados=",";
 
             //Toma el aleatorio que sera el simbolo seleccionado
@@ -116,7 +116,7 @@
         	echo '
         	      <div class="well">
                     <input type="hidden" name="captcha" id="captcha">
-            	    Haga clic o toque el icono de <b><u>'.$_SESSION['captcha_temporal'].'</u></b> para validar<br>';
+            	    '.$MULTILANG_TipoCaptchaPrefijo.' <b>'.$_SESSION['captcha_temporal'].'</b> '.$MULTILANG_TipoCaptchaPosfijo.'<br>';
             	    $IdBotones=1;
                 	foreach ($AleatoriosGenerados as $Aleatorio) 
                     	{

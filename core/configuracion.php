@@ -83,7 +83,7 @@
 	$Tema_PracticoFramework='bootstrap';
 
 	$TipoCaptchaLogin='visual';
-	$CaracteresCaptcha=3;
+	$CaracteresCaptcha=4;
 	$CodigoGoogleAnalytics='UA-847800-9';
 	
 	// Tipo de motor usado para la autenticacion de usuarios
