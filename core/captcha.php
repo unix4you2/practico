@@ -108,19 +108,35 @@
                 	            {
                 	                $_SESSION['captcha_temporal'] = $ArregloSimbolos[$Aleatorio][descripcion];    
                 	            }
-                	        
                 	        $SimbolosGenerados++;        	                
         	            }
         	    }
         	//Genera los botones o elementos con los simbolos seleccionados
         	$AleatoriosGenerados=explode(",",$CadenaAleatoriosGenerados);
-        	echo '<div class="well">
-            	    Haga clic o toque el icono de <b>'.$_SESSION['captcha_temporal'].'</b> para validar<br>';
-                	foreach ($AleatoriosGenerados as $Aleatorio)
+        	echo '
+        	      <div class="well">
+                    <input type="hidden" name="captcha" id="captcha">
+            	    Haga clic o toque el icono de <b><u>'.$_SESSION['captcha_temporal'].'</u></b> para validar<br>';
+            	    $IdBotones=1;
+                	foreach ($AleatoriosGenerados as $Aleatorio) 
                     	{
                     	    if (trim($ArregloSimbolos[$Aleatorio][simbolo])!="")
-                    	        echo "<a class='btn'><i class='fa fa-fw fa-2x ".$ArregloSimbolos[$Aleatorio][simbolo]."'></i></a>";
+                    	        {
+                    	            echo "<a class='btn' id='BotonCaptcha$IdBotones' onclick='document.login_usuario.captcha.value=\"".$ArregloSimbolos[$Aleatorio][descripcion]."\"; LimpiarSeleccion(); $(this).addClass(\"btn-info\",0, \"easeOutBounce\");' style='border: solid 0px red;' ><i class='fa fa-fw fa-2x ".$ArregloSimbolos[$Aleatorio][simbolo]."'></i></a>";
+                    	            $IdBotones++;
+                    	        }
                     	}
-        	echo '</div>';
+        	echo '</div>
+        	      <script language="JavaScript">
+        	            function LimpiarSeleccion()
+        	                {
+        	                    i=1;
+        	                    while(i<='.$IdBotones.')
+        	                        {
+        	                            $("#BotonCaptcha"+i).removeClass("btn-info",0, "easeOutBounce");
+        	                            i++;
+        	                        }
+        	                }
+        	      </script>';
 	    } //Fin si el tipo de captch es visual
 ?>
