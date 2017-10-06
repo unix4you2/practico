@@ -50,6 +50,10 @@ LogCambios="
 * Fixed: Procesos de actualización automática de valores sobre registros contemplan ahora escapar las cadenas correctamente para evitar caracteres especiales, interrogantes y similares.
 * Added: Los controles de datos de tipo lista de seleccion ahora permiten establecer dentro de sus propiedades si el control inicia o no como solo lectura
 * Added: Ahora la pantalla de acceso puede ser configurada para utilizar captchas visuales, facilitando su uso en dispositivos moviles. 
+* Added: Los campos de tipo archivo adjunto sobre formularios ahora soportan las propiedades de Visible y Obligatorio.
+* Fixed: Se elimina retorno de valor para la función de validación de campos en el envío de formularios para evitar problemas de compatibilidad con Firefox.  Reportado por @rafaelposadaf
+* Enhan: Se simplifica el proceso de instalacion solicitando menos valores en configuracion que posteriormente serán configurados por el panel de aplicación.
+
 "
 
 ########################################################################

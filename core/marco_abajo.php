@@ -591,10 +591,7 @@
                         }
                     // Valida si hay errores y muestra el emerente, sino continua adelante y procesa el form
                     if (MensajeCamposObligatorios!="")
-                        {
-                            PCOJS_MostrarMensaje("'.$MULTILANG_AvisoSistema.'", MensajeCamposObligatorios);
-                            return false;
-                        }
+                        PCOJS_MostrarMensaje("'.$MULTILANG_AvisoSistema.'", MensajeCamposObligatorios);
                     else
                         {
                             if (AnularSubmit==0)

@@ -38,8 +38,8 @@
 
 					<form action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="hidden" name="PCO_Accion" value="guardar_configuracion">
+                    <input name="ModoDesarrolladorPracticoNEW" value="<?php echo $ModoDesarrolladorPractico; ?>" type="hidden">
 
-                        
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs">
                                 <li class="active"><a href="#configvarias-tab" data-toggle="tab"><?php echo $MULTILANG_ConfiguracionVarias; ?></a>
