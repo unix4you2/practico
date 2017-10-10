@@ -58,6 +58,7 @@ LogCambios="
 * Added: Los formularios permiten ahora especificar cuál será el nombre o id de HTML asignado al mismo.  De esa manera varios formularios pueden convivir en el mismo momento en pantalla manteniendo sus acciones separadas.
 * Enhan: La funcion PCOJS_ValidarCamposYProcesarFormulario ha cambiado para ofrecer otros escenarios con más posibilidades como formularios cohexistiendo en la misma página con diferentes acciones.  Ahora se deben enviar los parámetros de nombre del formulario (id html) y si se desea o no anular su envío cuando se hagan llamados manuales a esta función a través del código.  Programadores que deseen mantener compatibilidad hacia atrás con llamados manuales podrán cambiar su llamado de función a este formato PCOJS_ValidarCamposYProcesarFormulario(FormularioProcesar,AnularSubmit)
 * Fixed: Eliminados parámetros innecesarios durante llamado a función de creación de botones de comando.
+* Added: Ahora los nombres de tabla en informes pueden soportar variables PHP en notacion {$Variable} lo que permite flexibilidad en construcción de consultas dinámicas desde variables del sistema o definidas por el usuario.
 "
 
 ########################################################################

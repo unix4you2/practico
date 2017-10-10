@@ -1073,7 +1073,7 @@ if ($PCO_Accion=="editar_informe")
 															echo '<optgroup label="'.str_replace($TablasApp,'',$registro[0]).'" >';
 															$nombre_tabla=$registro[0];
 															//Busca los campos de la tabla
-															$resultadocampos=consultar_columnas($registro[0]);
+															$resultadocampos=consultar_columnas(PCO_ReemplazarVariablesPHPEnCadena($registro[0]));
 															for($i=0;$i<count($resultadocampos);$i++)
 																echo '<option value="'.$nombre_tabla.'.'.$resultadocampos[$i]["nombre"].'">'.$resultadocampos[$i]["nombre"].'</option>';
 															echo '</optgroup>';

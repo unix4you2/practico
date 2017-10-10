@@ -5457,9 +5457,9 @@ function construir_consulta_informe($informe,$evitar_campos_ocultos=0)
 				{
 					//Si tiene alias definido lo agrega
 					$posfijo_tabla="";
-					if ($registro_tablas["valor_alias"]!="") $posfijo_tabla=" as ".$registro_tablas["valor_alias"];
+					if ($registro_tablas["valor_alias"]!="") $posfijo_tabla=" as ".PCO_ReemplazarVariablesPHPEnCadena($registro_tablas["valor_alias"]);
 					//Agrega tabla a la consulta
-					$consulta.=$registro_tablas["valor_tabla"].$posfijo_tabla.",";
+					$consulta.=PCO_ReemplazarVariablesPHPEnCadena($registro_tablas["valor_tabla"]).$posfijo_tabla.",";
 				}
 			// Elimina la ultima coma en el listado de tablas
 			$consulta=substr($consulta, 0, strlen($consulta)-1);
