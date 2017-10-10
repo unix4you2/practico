@@ -645,7 +645,8 @@
 	$MULTILANG_FrmValidaAyuda='Any character here will be allowed for the validator';
 	$MULTILANG_FrmValida9='Numbers only 0-9 (integer)';
 	$MULTILANG_FrmValida10='Only charset in the extra validation field';
-	
+	$MULTILANG_FrmNombreHTML='Warning: This value is used to generate the unique identifier of the element in HTML and from it automatically generate all the events of the controls and tools linked to your form. If you change this value you may lose that specific event programming and JavaScript in general that you made prior to your change.';
+
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';
 	$MULTILANG_InfErr2='You must enter a valid title for the report.';

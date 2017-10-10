@@ -645,6 +645,7 @@
 	$MULTILANG_FrmValidaAyuda='Qualquer personagem aqui será permitido para o validador';
 	$MULTILANG_FrmValida9='Números apenas 0-9 (inteiro)';
 	$MULTILANG_FrmValida10='Somente charset no campo de validação extra';
+	$MULTILANG_FrmNombreHTML='Aviso: este valor é usado para gerar o identificador exclusivo do elemento em HTML e gerar automaticamente todos os eventos dos controles e ferramentas vinculados ao seu formulário. Se você alterar esse valor, poderá perder a programação de eventos específicos e o JavaScript em geral que você fez antes da sua alteração.';
 
 	//Informes
 	$MULTILANG_InfErr1='Você deve especificar valores para os campos correspondentes a, pelo menos, uma s&eacute;rie de dados. <br> Se você não quer gerar um gr&aacute;fico, em seguida, você deve alterar o tipo de relat&oacute;rio a tabela de dados';

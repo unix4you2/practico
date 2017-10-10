@@ -4488,7 +4488,7 @@ $('#SampleElement').load('YourURL');
 	Ver tambien:
 		<cargar_formulario>
 */
-	function cargar_objeto_boton_comando($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
+	function cargar_objeto_boton_comando($registro_campos,$registro_datos_formulario,$registro_formulario)
 		{
 			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
             global $funciones_activacion_datepickers;
@@ -4503,23 +4503,23 @@ $('#SampleElement').load('YourURL');
 			//Transfiere variables de mensajes de retorno asociadas al boton
 			$comando_javascript="";
 			if ($registro_campos["retorno_titulo"]!="")
-				$comando_javascript="document.datos.PCO_ErrorTitulo.value='".$registro_botones["retorno_titulo"]."'; document.datos.PCO_ErrorDescripcion.value='".$registro_botones["retorno_texto"]."'; document.datos.PCO_ErrorIcono.value='".$registro_botones["retorno_icono"]."'; document.datos.PCO_ErrorEstilo.value='".$registro_botones["retorno_estilo"]."';";
+				$comando_javascript="document.".$registro_formulario["id_html"].".PCO_ErrorTitulo.value='".$registro_botones["retorno_titulo"]."'; document.".$registro_formulario["id_html"].".PCO_ErrorDescripcion.value='".$registro_botones["retorno_texto"]."'; document.".$registro_formulario["id_html"].".PCO_ErrorIcono.value='".$registro_botones["retorno_icono"]."'; document.".$registro_formulario["id_html"].".PCO_ErrorEstilo.value='".$registro_botones["retorno_estilo"]."';";
 
             //Define el tipo de boton de acuerdo al tipo de accion
             if ($registro_campos["tipo_accion"]=="interna_guardar")
-                $comando_javascript.="PCOJS_ValidarCamposYProcesarFormulario(); ";    
+                $comando_javascript.="PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."'); ";    
             if ($registro_campos["tipo_accion"]=="interna_limpiar")
-                $comando_javascript.="document.getElementById('datos').reset();";
+                $comando_javascript.="document.getElementById('".$registro_formulario["id_html"]."').reset();";
             if ($registro_campos["tipo_accion"]=="interna_escritorio")
                 $comando_javascript.="document.core_ver_menu.submit();";
             if ($registro_campos["tipo_accion"]=="interna_actualizar")
-                $comando_javascript.="document.datos.PCO_Accion.value='actualizar_datos_formulario'; PCOJS_ValidarCamposYProcesarFormulario(); ";
+                $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='actualizar_datos_formulario'; PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."'); ";
             if ($registro_campos["tipo_accion"]=="interna_eliminar")
-                $comando_javascript.="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit();";
+                $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='eliminar_datos_formulario';document.".$registro_formulario["id_html"].".submit();";
             if ($registro_campos["tipo_accion"]=="interna_cargar")
-                $comando_javascript.="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='".$registro_campos["accion_usuario"]."';document.datos.submit();";
+                $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='cargar_objeto';document.".$registro_formulario["id_html"].".objeto.value='".$registro_campos["accion_usuario"]."';document.".$registro_formulario["id_html"].".submit();";
             if ($registro_campos["tipo_accion"]=="externa_formulario")
-                $comando_javascript.="document.datos.PCO_Accion.value='".$registro_campos["accion_usuario"]."';document.datos.submit();";
+                $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='".$registro_campos["accion_usuario"]."';document.".$registro_formulario["id_html"].".submit();";
             if ($registro_campos["tipo_accion"]=="externa_javascript")
                 $comando_javascript.=$registro_campos["accion_usuario"];
 
@@ -4688,8 +4688,7 @@ $('#SampleElement').load('YourURL');
                 global $POSTForm_ListaCamposObligatorios,$POSTForm_ListaTitulosObligatorios;
 
 				// Busca datos del formulario
-				$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
-				$registro_formulario = @$consulta_formulario->fetch();
+				$registro_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario")->fetch();
 
                 //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa y un boton de salto a edicion
                 $BotonSaltoEdicion='
@@ -4786,10 +4785,9 @@ $('#SampleElement').load('YourURL');
 
 				//Inicia el formulario de datos
 				echo '<div id="MARCO_IMPRESION">';
-				
 				//Si se quiere anular el formulario y su accion cuando se trata de un sub-formulario de consulta
 				if (!$anular_form)
-					echo'<form id="datos" name="datos" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+					echo'<form id="'.$registro_formulario["id_html"].'" name="'.$registro_formulario["id_html"].'" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="id_registro_datos" value="'.@$registro_datos_formulario["id"].'">
 						<input type="Hidden" name="PCO_FormularioActivo" value="'.$formulario.'">
@@ -4935,7 +4933,7 @@ $('#SampleElement').load('YourURL');
                                                                             if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
-                                                                            if ($tipo_de_objeto=="boton_comando") $objeto_formateado = @cargar_objeto_boton_comando($registro_campos,@$registro_datos_formulario);
+                                                                            if ($tipo_de_objeto=="boton_comando") $objeto_formateado = @cargar_objeto_boton_comando($registro_campos,@$registro_datos_formulario,@$registro_formulario);
                                                                             //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
                                                                             
                                                                             //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
@@ -5023,7 +5021,7 @@ $('#SampleElement').load('YourURL');
                                                         if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
-                                                        if ($tipo_de_objeto=="boton_comando") $objeto_formateado = @cargar_objeto_boton_comando($registro_campos,@$registro_datos_formulario);
+                                                        if ($tipo_de_objeto=="boton_comando") $objeto_formateado = @cargar_objeto_boton_comando($registro_campos,@$registro_datos_formulario,@$registro_formulario);
                                                         //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
                                                         //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
                                                         //padre el valor del campo foraneo del form hijo para llamar a buscar form con
@@ -5105,23 +5103,23 @@ $('#SampleElement').load('YourURL');
 							//Transfiere variables de mensajes de retorno asociadas al boton
 							$comando_javascript="";
 							if ($registro_botones["retorno_titulo"]!="")
-								$comando_javascript="document.datos.PCO_ErrorTitulo.value='".$registro_botones["retorno_titulo"]."'; document.datos.PCO_ErrorDescripcion.value='".$registro_botones["retorno_texto"]."'; document.datos.PCO_ErrorIcono.value='".$registro_botones["retorno_icono"]."'; document.datos.PCO_ErrorEstilo.value='".$registro_botones["retorno_estilo"]."';";							
+								$comando_javascript="document.".$registro_formulario["id_html"].".PCO_ErrorTitulo.value='".$registro_botones["retorno_titulo"]."'; document.".$registro_formulario["id_html"].".PCO_ErrorDescripcion.value='".$registro_botones["retorno_texto"]."'; document.".$registro_formulario["id_html"].".PCO_ErrorIcono.value='".$registro_botones["retorno_icono"]."'; document.".$registro_formulario["id_html"].".PCO_ErrorEstilo.value='".$registro_botones["retorno_estilo"]."';";							
 							
 							//Define el tipo de boton de acuerdo al tipo de accion
 							if ($registro_botones["tipo_accion"]=="interna_guardar")
-                                $comando_javascript.="PCOJS_ValidarCamposYProcesarFormulario();";    
+                                $comando_javascript.="PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."');";    
 							if ($registro_botones["tipo_accion"]=="interna_limpiar")
-                                $comando_javascript.="document.getElementById('datos').reset();";
+                                $comando_javascript.="document.getElementById('".$registro_formulario["id_html"]."').reset();";
                             if ($registro_botones["tipo_accion"]=="interna_escritorio")
                                 $comando_javascript.="document.core_ver_menu.submit();";
 							if ($registro_botones["tipo_accion"]=="interna_actualizar")
-								$comando_javascript.="document.datos.PCO_Accion.value='actualizar_datos_formulario'; PCOJS_ValidarCamposYProcesarFormulario();";
+								$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='actualizar_datos_formulario'; PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."');";
 							if ($registro_botones["tipo_accion"]=="interna_eliminar")
-								$comando_javascript.="document.datos.PCO_Accion.value='eliminar_datos_formulario';document.datos.submit();";
+								$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='eliminar_datos_formulario';document.".$registro_formulario["id_html"].".submit();";
 							if ($registro_botones["tipo_accion"]=="interna_cargar")
-								$comando_javascript.="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='".$registro_botones["accion_usuario"]."';document.datos.submit();";
+								$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='cargar_objeto';document.".$registro_formulario["id_html"].".objeto.value='".$registro_botones["accion_usuario"]."';document.".$registro_formulario["id_html"].".submit();";
 							if ($registro_botones["tipo_accion"]=="externa_formulario")
-								$comando_javascript.="document.datos.PCO_Accion.value='".$registro_botones["accion_usuario"]."';document.datos.submit();";
+								$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='".$registro_botones["accion_usuario"]."';document.".$registro_formulario["id_html"].".submit();";
 							if ($registro_botones["tipo_accion"]=="externa_javascript")
 								$comando_javascript.=$registro_botones["accion_usuario"];
 
@@ -5147,7 +5145,7 @@ $('#SampleElement').load('YourURL');
 					if ($PCO_InformeFiltro!="")
 						{
 							//Si se encuentra que el form viene llamado desde un informe que lo requiere para filtro agrega un boton de retorno al informe automaticamente
-							$comando_javascript="document.datos.PCO_Accion.value='cargar_objeto';document.datos.objeto.value='inf:".$PCO_InformeFiltro.":1';document.datos.submit();";
+							$comando_javascript="document.".$registro_formulario["id_html"].".PCO_Accion.value='cargar_objeto';document.".$registro_formulario["id_html"].".objeto.value='inf:".$PCO_InformeFiltro.":1';document.".$registro_formulario["id_html"].".submit();";
 							$cadena_javascript='href="javascript:'.@$comando_javascript.'"';
 							echo '<a class="'.$estilo_basico_boton.' btn btn-warning" '.@$cadena_javascript.'>'.$MULTILANG_InfRetornoFormFiltrado.'</a>';
 						}
