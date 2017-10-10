@@ -42,6 +42,7 @@
 	$MULTILANG_Anonimo='गुमनाम';
 	$MULTILANG_Anterior='पिछला';
 	$MULTILANG_Apagado='बंद';
+	$MULTILANG_Apariencia='Appearance';
 	$MULTILANG_Aplicacion='आवेदन';
     $MULTILANG_Aplicando='आवेदन करना';
     $MULTILANG_Archivo='फ़ाइल';
@@ -234,7 +235,10 @@
     $MULTILANG_SimboloCaptchaBicicleta='BIKE';
     $MULTILANG_SimboloCaptchaCamion='TRUCK';
     $MULTILANG_SimboloCaptchaCorazon='HEART';
-    
+	$MULTILANG_LogoParteSuperior='आपके आवेदन के शीर्ष बाईं ओर लोगो';
+	$MULTILANG_LogoDuranteLogin='अपने आवेदन लॉगिन के समय में लोगो';
+	$MULTILANG_ResolucionLogos='यदि भरी हुई छवि में संकेत दिया गया संकल्प नहीं है, तो इसे उपयोगकर्ता के लिए हर बार पेश किया जाएगा।';
+
 	//Banderas de campos en formularios
 	$MULTILANG_TitValorUnico='डुप्लिकेट को स्वीकार नहीं करता गई वैल्यू';
 	$MULTILANG_DesValorUnico='पहले से ही प्रवेश की अनुमति नहीं किया जाएगा डेटाबेस में है कि मूल्य के साथ एक रिकॉर्ड है, अगर वहाँ प्रणाली है, इस क्षेत्र में दर्ज की गई जानकारी को मान्य होगा.';

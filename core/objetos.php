@@ -259,6 +259,36 @@ $salida=sprintf("<?php
 					fwrite($archivo_config,$salida,strlen($salida)); 
 					fclose($archivo_config);
 				}
+
+            //Actualiza archivos de logo si aplica
+            if ($_FILES["LogoSuperiorNEW"]['name']!="")
+                {
+					// Procesa el archivo y lo almacena en el path
+					$nombre_archivo = $_FILES["LogoSuperiorNEW"]['name']; //Contiene el nombre original
+					$nombre_archivo_temporal = $_FILES["LogoSuperiorNEW"]['tmp_name']; //Nombre del archivo temporal en servidor
+					$extension_archivo=end(explode(".", $nombre_archivo));
+					//Si la extension es permitida sigue adelante
+					if ($extension_archivo=="png")
+					    {
+        					if (!move_uploaded_file($nombre_archivo_temporal, "img/logo.png" ))
+        						$mensaje_error.=$nombre_archivo.'- '.$MULTILANG_FrmErrorCargaGeneral;
+					    }
+                }
+            if ($_FILES["LogoLoginNEW"]['name']!="")
+                {
+					// Procesa el archivo y lo almacena en el path
+					$nombre_archivo = $_FILES["LogoLoginNEW"]['name']; //Contiene el nombre original
+					$nombre_archivo_temporal = $_FILES["LogoLoginNEW"]['tmp_name']; //Nombre del archivo temporal en servidor
+					$extension_archivo=end(explode(".", $nombre_archivo));
+					//Si la extension es permitida sigue adelante
+					if ($extension_archivo=="png")
+					    {
+        					if (!move_uploaded_file($nombre_archivo_temporal, "img/practico_login.png" ))
+        						$mensaje_error.=$nombre_archivo.'- '.$MULTILANG_FrmErrorCargaGeneral;
+					    }
+                }
+
+            //Presenta resultados de operacion de actualizacion de configuracion y de archivos de logo
 			if ($mensaje_error=="")
 				{
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';

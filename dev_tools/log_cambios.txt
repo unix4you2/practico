@@ -21,6 +21,7 @@ core/informes.php
 core/objetos.php
 core/formularios.php
 core/marco_conf.php
+core/marco_nav.php
 core/marco_abajo.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
@@ -53,6 +54,7 @@ LogCambios="
 * Added: Los campos de tipo archivo adjunto sobre formularios ahora soportan las propiedades de Visible y Obligatorio.
 * Fixed: Se elimina retorno de valor para la función de validación de campos en el envío de formularios para evitar problemas de compatibilidad con Firefox.  Reportado por @rafaelposadaf
 * Enhan: Se simplifica el proceso de instalacion solicitando menos valores en configuracion que posteriormente serán configurados por el panel de aplicación.
+* Added: La personalización de logos en el encabezado y al momento de login puede ser realizada directamente por el panel de configuración.
 
 "
 

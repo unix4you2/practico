@@ -38,7 +38,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="javascript:document.core_ver_menu.submit();"><img src="img/logo.png" border="0" ALT="Practico"></a>
+		<a class="navbar-brand" href="javascript:document.core_ver_menu.submit();"><img width="115" height="30" src="img/logo.png?<?php echo filemtime('img/logo.png'); ?>" border="0" ALT="Practico"></a>
 	</div>
 	<!-- /.navbar-header -->
 

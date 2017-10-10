@@ -108,5 +108,8 @@
 	// Define cadena usada para separar campos en operaciones de bases de datos
 	$_SeparadorCampos_='||_||';
 	
+	// Define si la plataforma se encuentra activa para realizar desarrollo interno de PracticoFramework
+	$ModoDesarrolladorPractico=0;
+
 	// Define cadena separada por comas con usuarios administradores de la aplicacion
 	$PCOVAR_Administradores='admin,pepito';

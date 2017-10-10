@@ -42,6 +42,7 @@
 	$MULTILANG_Anonimo='Anônimo';
 	$MULTILANG_Anterior='Anterior';
 	$MULTILANG_Apagado='Fora';
+	$MULTILANG_Apariencia='Appearance';
 	$MULTILANG_Aplicacion='Aplicação';
     $MULTILANG_Aplicando='Aplicando';
     $MULTILANG_Archivo='Arquivo';
@@ -234,6 +235,9 @@
     $MULTILANG_SimboloCaptchaBicicleta='BICICLETA';
     $MULTILANG_SimboloCaptchaCamion='CAMION';
     $MULTILANG_SimboloCaptchaCorazon='CORAZON';
+	$MULTILANG_LogoParteSuperior='Logotipo no canto superior esquerdo do seu aplicativo';
+	$MULTILANG_LogoDuranteLogin='Logo no momento do login da sua aplicação';
+	$MULTILANG_ResolucionLogos='Se a imagem carregada não tiver a resolução indicada, ela será redimensionada toda vez que ela for apresentada ao usuário.';
 
 	//Banderas de campos en formularios
 	$MULTILANG_TitValorUnico='O valor digitado não aceita duplicado';

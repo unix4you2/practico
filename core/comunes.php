@@ -2543,7 +2543,7 @@ function ventana_login()
                                 <form role="form" name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
                                 <input type="Hidden" name="PCO_Accion" value="Iniciar_login">
                                     <div class="form-group">
-                                        <img name="img_login" id="img_login" src="img/practico_login.png" alt="" border="0"><br><br>
+                                        <img name="img_login" id="img_login" width="230" height="160" src="img/practico_login.png?<?php echo filemtime('img/practico_login.png'); ?>" alt="" border="0"><br><br>
                                     </div>
                                     <div class="form-group input-group">
                                         <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
