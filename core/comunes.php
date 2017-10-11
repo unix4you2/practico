@@ -2430,6 +2430,9 @@ function ventana_login()
 		  //Variables para el sistema de captcha
 		  global $MULTILANG_TipoCaptchaPrefijo,$MULTILANG_TipoCaptchaPosfijo;
           global $MULTILANG_SimboloCaptchaCarro,    $MULTILANG_SimboloCaptchaTijeras,    $MULTILANG_SimboloCaptchaCalculadora,    $MULTILANG_SimboloCaptchaBomba,    $MULTILANG_SimboloCaptchaLibro,    $MULTILANG_SimboloCaptchaPastel,    $MULTILANG_SimboloCaptchaCafe,    $MULTILANG_SimboloCaptchaNube,    $MULTILANG_SimboloCaptchaDiamante,    $MULTILANG_SimboloCaptchaMujer,    $MULTILANG_SimboloCaptchaHombre,    $MULTILANG_SimboloCaptchaBalon,    $MULTILANG_SimboloCaptchaControl,    $MULTILANG_SimboloCaptchaCasa,    $MULTILANG_SimboloCaptchaCelular,    $MULTILANG_SimboloCaptchaArbol,    $MULTILANG_SimboloCaptchaTrofeo,    $MULTILANG_SimboloCaptchaSombrilla,    $MULTILANG_SimboloCaptchaUniversidad,    $MULTILANG_SimboloCaptchaCamara,    $MULTILANG_SimboloCaptchaAmbulancia,    $MULTILANG_SimboloCaptchaAvion,    $MULTILANG_SimboloCaptchaTren,    $MULTILANG_SimboloCaptchaBicicleta,    $MULTILANG_SimboloCaptchaCamion,    $MULTILANG_SimboloCaptchaCorazon;
+            
+            //Variables posiblemente recibidas desde un autoregistro
+            global $AUTO_uid,$AUTO_clave;
 
 			// Variables para OAuth desde el archivo de configuracion
 			global $APIGoogle_ClientId,$APIGoogle_ClientSecret;
@@ -2547,11 +2550,11 @@ function ventana_login()
                                     </div>
                                     <div class="form-group input-group">
                                         <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                                        <input name="uid" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Usuario; ?>">
+                                        <input name="uid" value="<?php echo $AUTO_uid; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Usuario; ?>">
                                     </div>
                                     <div class="form-group input-group">
                                         <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                                        <input name="clave" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
+                                        <input name="clave" value="<?php echo $AUTO_clave; ?>" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
                                     </div>
                                     
                                     

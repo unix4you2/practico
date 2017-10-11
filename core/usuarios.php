@@ -1272,9 +1272,19 @@ if ($PCO_Accion=="permisos_usuario")
                     $Llave_recuperacion="";
 					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno$_SeparadorCampos_$Llave_recuperacion$_SeparadorCampos_$es_plantilla$_SeparadorCampos_$plantilla_permisos$_SeparadorCampos_$descripcion_usuario");
 					auditar("Agrega usuario $login para $nombre",$login);
+
+                    // Construye la URL del sistema para enviarla por correo
+        			if(empty($_SERVER["HTTPS"]))
+        				$protocolo_webservice="http://";
+        			else
+        				$protocolo_webservice="https://";
+        			// Construye la URL para solicitar el webservice.  La URL se debe poder resolver por el servidor web correctamente, ya sea por dominio o IP (interna o publica).  Ver /etc/hosts si algo.
+        			$prefijo_webservice=$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$_SERVER['PHP_SELF'];
+        			$URLAcceso = $protocolo_webservice.$prefijo_webservice."?AUTO_uid=".$login."&AUTO_clave=".$clave;
+
 					//Envia correo informativo
-					$cuerpo_mensaje="<br>".$MULTILANG_Bienvenido." ".$nombre.",<br><hr>Login: <b>".$login."</b><br>Password: <b>".$clave."</b>";
-					PCO_EnviarCorreo("noreply@practico.org",$correo,$MULTILANG_Bienvenido." [$NombreRAD]",$cuerpo_mensaje);
+					$cuerpo_mensaje="<br>".$MULTILANG_Bienvenido." ".$nombre.",<br><hr>Login: <b>".$login."</b><br>Password: <b>".$clave."</b><br><br><b><a href=".$URLAcceso.">[".$MULTILANG_TituloLogin."]</a></b><br><br>";
+					PCO_EnviarCorreo("noreply@".$_SERVER["SERVER_NAME"],$correo,$MULTILANG_Bienvenido." [$NombreRAD]",$cuerpo_mensaje);
                     //Presenta mensaje final
 					echo "<br>";
 					mensaje($MULTILANG_Atencion, $MULTILANG_UsrFinRegistro, '', 'fa fa-fw fa-2x fa-info-circle', 'alert alert-success');
