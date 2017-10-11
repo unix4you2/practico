@@ -61,7 +61,7 @@ LogCambios="
 * Fixed: Eliminados parámetros innecesarios durante llamado a función de creación de botones de comando.
 * Added: Ahora los nombres de tabla en informes pueden soportar variables PHP en notacion {$Variable} lo que permite flexibilidad en construcción de consultas dinámicas desde variables del sistema o definidas por el usuario.
 * Added: Los botones de comando en informes permiten ahora establecer su etiqueta como una imágen y también el texto agregando la palabra especial _TEXTOIZQ_ _TEXTODER_ al campo de imagen donde dependiendo de la ubicacion de la palabra clave se mostrará el texto sobre el botón (Izquierda o derecha).
-* Added: Etiquetas de botones en acciones de informes soportan ahora variables PHP en notacion {$Variable}
+* Added: Etiquetas de botones en acciones de informes y sus textos de confirmacion soportan ahora variables PHP en notacion {$Variable}
 * Added: Los correos de autoregistro enviados por el sistema ahora contienen un enlace para facilitar el acceso al mismo sin que el usuario deba redigitar los datos.
 * Enhan: El envio de correos ahora se hace utilizando como reply la direccion del host o nombre de servidor que hospeda la aplicacion. 
 "

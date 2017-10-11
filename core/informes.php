@@ -954,6 +954,7 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 */
 if ($PCO_Accion=="editar_informe")
 	{
+	    if ($informe=="") $informe=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
 		// Busca datos del informe
 		$resultado_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
 		$registro_informe = $resultado_informe->fetch();
@@ -2226,6 +2227,7 @@ if ($PCO_Accion=="editar_informe")
 */
 if ($PCO_Accion=="eliminar_informe")
 	{
+	    if ($informe=="") $informe=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
 		PCOFUNC_eliminar_informe($informe);
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_informes"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -2587,6 +2589,7 @@ if ($PCO_Accion=="guardar_informe")
 */
 if ($PCO_Accion=="definir_copia_informes")
 	{
+	    if ($informe=="") $informe=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
 		 ?>
 
         <form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
@@ -3221,6 +3224,7 @@ if ($PCO_Accion=="administrar_informes")
 										<form action="'.$ArchivoCORE.'" method="POST" name="dco'.$registro["id"].'" id="dco'.$registro["id"].'">
 												<input type="hidden" name="PCO_Accion" value="definir_copia_informes">
 												<input type="hidden" name="informe" value="'.$registro["id"].'">
+												<input type="hidden" name="PCO_Valor" value="'.$registro["id"].'">
 												<input type="hidden" name="titulo_informe" value="'.$registro["titulo"].'">
                                                 <a class="btn btn-default btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["id"].');"><i class="fa fa-code-fork"></i> '.$MULTILANG_FrmCopiar.'</a>
 										</form>
@@ -3228,6 +3232,7 @@ if ($PCO_Accion=="administrar_informes")
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
 												<input type="hidden" name="PCO_Accion" value="eliminar_informe">
+												<input type="hidden" name="PCO_Valor" value="'.$registro["id"].'">
 												<input type="hidden" name="informe" value="'.$registro["id"].'">
                                                 <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvEliminar.'\',df'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 										</form>
@@ -3236,6 +3241,7 @@ if ($PCO_Accion=="administrar_informes")
 										<form action="'.$ArchivoCORE.'" method="POST">
 												<input type="hidden" name="PCO_Accion" value="editar_informe">
 												<input type="hidden" name="informe" value="'.$registro["id"].'">
+												<input type="hidden" name="PCO_Valor" value="'.$registro["id"].'">
                                                 <button type="submit" class="btn btn-default btn-xs"><i class="fa fa-bars"></i> '.$MULTILANG_InfcamTabCond.'</button>
 										</form>
 								</td>
