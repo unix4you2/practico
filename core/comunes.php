@@ -5838,10 +5838,6 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					//Obtiene ColumnasVisibles, NumerosColumnasOcultas, NumeroColumnas dentro de EtiquetasConsulta
 					$EtiquetasConsulta=generar_etiquetas_consulta($consulta,$informe); //Enviar el informe para que se determinen tambien sus columnas ocultas
 
-
-
-
-
 					//Genera HTML con las columnas
 					foreach($EtiquetasConsulta[0]["ColumnasVisibles"] as $EtiquetaColumna)
 						$SalidaFinalInforme.= '<th>'.$EtiquetaColumna.'</th>';

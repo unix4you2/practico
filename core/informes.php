@@ -3253,6 +3253,7 @@ if ($PCO_Accion=="administrar_informes")
 
 <?php
 			cerrar_ventana();
+			cargar_informe(-1,1,"","",1);
 echo '
   </div>
 </div>
