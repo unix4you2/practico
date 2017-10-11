@@ -59,6 +59,7 @@ LogCambios="
 * Enhan: La funcion PCOJS_ValidarCamposYProcesarFormulario ha cambiado para ofrecer otros escenarios con más posibilidades como formularios cohexistiendo en la misma página con diferentes acciones.  Ahora se deben enviar los parámetros de nombre del formulario (id html) y si se desea o no anular su envío cuando se hagan llamados manuales a esta función a través del código.  Programadores que deseen mantener compatibilidad hacia atrás con llamados manuales podrán cambiar su llamado de función a este formato PCOJS_ValidarCamposYProcesarFormulario(FormularioProcesar,AnularSubmit)
 * Fixed: Eliminados parámetros innecesarios durante llamado a función de creación de botones de comando.
 * Added: Ahora los nombres de tabla en informes pueden soportar variables PHP en notacion {$Variable} lo que permite flexibilidad en construcción de consultas dinámicas desde variables del sistema o definidas por el usuario.
+* Added: Los botones de comando en informes permiten ahora establecer su etiqueta como una imágen y también el texto agregando la palabra especial _TEXTOIZQ_ _TEXTODER_ al campo de imagen donde dependiendo de la ubicacion de la palabra clave se mostrará el texto sobre el botón (Izquierda o derecha).
 "
 
 ########################################################################

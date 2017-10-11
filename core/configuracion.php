@@ -109,7 +109,7 @@
 	$_SeparadorCampos_='||_||';
 	
 	// Define si la plataforma se encuentra activa para realizar desarrollo interno de PracticoFramework
-	$ModoDesarrolladorPractico=0;
+	$ModoDesarrolladorPractico=1;
 
 	// Define cadena separada por comas con usuarios administradores de la aplicacion
 	$PCOVAR_Administradores='admin,pepito';

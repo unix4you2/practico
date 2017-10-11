@@ -5330,18 +5330,32 @@ function generar_botones_informe($informe)
 				
 				//Genera la cadena del enlace
 				$cadena_javascript='onclick="'.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.' "';
-				//Determina si el boton llevara texto o si el texto se usa como ayuda
+				//Determina si el boton llevara texto o si el texto se usa como ayuda.  Por defecto siempre se agrega el texto por defecto.
 				$Cadena_Ayuda="";
-				$Cadena_Boton=" ".$registro_botones["titulo"];
-				//Determina si debe o no poner un elemento de imagen
+				$Cadena_BotonIzq="";
+				$Cadena_BotonDer=" ".$registro_botones["titulo"];
+				//Determina si debe o no poner un elemento de imagen y si sera imagen con texto o sola
 				if ($registro_botones["imagen"]!="")
 					{
 						$Cadena_Imagen="<i class='fa ".$registro_botones["imagen"]."'></i>";
-						$Cadena_Boton="";
+						$Cadena_BotonIzq="";
+						$Cadena_BotonDer="";
 						$Cadena_Ayuda='data-toggle="tooltip" data-html="true" data-placement="auto" title="'.$registro_botones["titulo"].'"';
+					    //Busca si dentro de la imagen se especifico la palabra clave _TEXTOIZQ_ o _TEXTODER_ para agregar ademas el texto
+					    if( strrpos ( $registro_botones["imagen"], "_TEXTOIZQ_" )!==false || strrpos ( $registro_botones["imagen"], "_TEXTODER_" )!==false )
+					        {
+						        $Cadena_Ayuda=''; //En cualquier caso donde se pida imprimir texto se elimina el tooltip
+						        $Cadena_Imagen="<i class='fa ".$registro_botones["imagen"]."'></i>";
+					            //Si se detecta el texto a la izquierda ajusta las variables para tal impresion
+        					    if( strrpos ( $registro_botones["imagen"], "_TEXTOIZQ_" )!==false)
+						            $Cadena_BotonIzq=$registro_botones["titulo"]." ";
+					            //Si se detecta el texto a la derecha ajusta las variables para tal impresion
+        					    if( strrpos ( $registro_botones["imagen"], "_TEXTODER_" )!==false)
+						            $Cadena_BotonDer=" ".$registro_botones["titulo"];
+					        }
 					}
 
-				@$cadena_generica_botones.='<button type="button" class="'.$registro_botones["estilo"].'" '.$Cadena_Ayuda.' '.$cadena_javascript.'>'.$Cadena_Imagen.$Cadena_Boton.'</button>&nbsp;';
+				@$cadena_generica_botones.='<button type="button" class="'.$registro_botones["estilo"].'" '.$Cadena_Ayuda.' '.$cadena_javascript.'>'.$Cadena_BotonIzq.$Cadena_Imagen.$Cadena_BotonDer.'</button>&nbsp;';
 			}
 		return $cadena_generica_botones;
 	}
@@ -5697,7 +5711,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		global $MULTILANG_Editar,$MULTILANG_Informes,$MULTILANG_Exportar,$MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano,$MULTILANG_MonCommSQL;
 		global $IdiomaPredeterminado;
         global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales;
-        global $ModoDepuracion;
+        global $ModoDepuracion,$ModoDesarrolladorPractico;
 
         //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa y un boton de salto a edicion
         $BotonSaltoEdicion='
@@ -5861,8 +5875,11 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 											if ($CamposReales[0]["ListaCampos_PermitirEdicion"][$i]==1)
 												$CadenaActivadora_Edicion=' id="'.$IdentificadorDeCampoEditable.'" contenteditable="true" ';
 											
+											$ValorVisibleFinal=$registro_informe[$i];
+											if ($ModoDesarrolladorPractico==1) $ValorVisibleFinal=PCO_ReemplazarVariablesPHPEnCadena($ValorVisibleFinal);
+
 											$SalidaFinalInforme.= '
-												<td '.$CadenaActivadora_Edicion.'>'.$registro_informe[$i].'</td>';
+												<td '.$CadenaActivadora_Edicion.'>'.$ValorVisibleFinal.'</td>';
 										}
 								}
 							//Si el informe tiene botones los agrega

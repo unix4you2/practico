@@ -1642,6 +1642,7 @@ if ($PCO_Accion=="editar_informe")
 								   <i class="fa fa-hand-o-right"></i> <i class="fa fa-picture-o"></i>
 							</a>
 							-->
+							<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="Ademas de las clases para icono, agregue las palabras <b>_TEXTOIZQ_</b> o <b>_TEXTODER_</b> para combinar iconos con el texto de titulo especificando su ubicacion.<br><br>Add the words _TEXTOIZQ_ or _TEXTODER_ to combine icons with the title text specifying your location"><i class="fa fa-question-circle fa-fw "></i></a>
 						</span>
 					</div>
 
