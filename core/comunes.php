@@ -5331,6 +5331,7 @@ function generar_botones_informe($informe)
 				//Genera la cadena del enlace
 				$cadena_javascript='onclick="'.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.' "';
 				//Determina si el boton llevara texto o si el texto se usa como ayuda.  Por defecto siempre se agrega el texto por defecto.
+				$Cadena_Imagen="";
 				$Cadena_Ayuda="";
 				$Cadena_BotonIzq="";
 				$Cadena_BotonDer=" ".$registro_botones["titulo"];
@@ -5354,7 +5355,8 @@ function generar_botones_informe($informe)
 						            $Cadena_BotonDer=" ".$registro_botones["titulo"];
 					        }
 					}
-
+                $Cadena_BotonIzq=PCO_ReemplazarVariablesPHPEnCadena($Cadena_BotonIzq);
+                $Cadena_BotonDer=PCO_ReemplazarVariablesPHPEnCadena($Cadena_BotonDer);
 				@$cadena_generica_botones.='<button type="button" class="'.$registro_botones["estilo"].'" '.$Cadena_Ayuda.' '.$cadena_javascript.'>'.$Cadena_BotonIzq.$Cadena_Imagen.$Cadena_BotonDer.'</button>&nbsp;';
 			}
 		return $cadena_generica_botones;
