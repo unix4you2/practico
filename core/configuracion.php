@@ -90,7 +90,7 @@
 	$Auth_TipoMotor='practico';
 	$Auth_ProtoTransporte='http';
 	$Auth_PermitirReseteoClaves='0';
-	$Auth_PermitirAutoRegistro='1';
+	$Auth_PermitirAutoRegistro='0';
 	$Auth_PlantillaAutoRegistro='';
 	$Auth_PresentarOauthInicio='0';
 
@@ -109,7 +109,7 @@
 	$_SeparadorCampos_='||_||';
 	
 	// Define si la plataforma se encuentra activa para realizar desarrollo interno de PracticoFramework
-	$ModoDesarrolladorPractico=1;
+	$ModoDesarrolladorPractico=-10000;
 
 	// Define cadena separada por comas con usuarios administradores de la aplicacion
 	$PCOVAR_Administradores='admin,pepito';

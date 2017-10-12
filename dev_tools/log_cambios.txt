@@ -65,6 +65,7 @@ LogCambios="
 * Added: Los correos de autoregistro enviados por el sistema ahora contienen un enlace para facilitar el acceso al mismo sin que el usuario deba redigitar los datos.
 * Enhan: El envio de correos ahora se hace utilizando como reply la direccion del host o nombre de servidor que hospeda la aplicacion. 
 * Added: Las columnas de informes permiten especificar títulos arbitrarios y no derivados de la consulta al motor de bases de datos.  Esto permite incluso agregar formatos HTML, imágenes, etc. a los títulos de columna.  Adicionalmente, este tipo de títulos soportan traducción y variables PHP en notacion {$Variable} para aplicaciones multi-idioma.
+* Enhan: Optimizacion en funciones de importacion de informes y formularios desde especificaciones XML.
 "
 
 ########################################################################
