@@ -64,12 +64,14 @@ LogCambios="
 * Added: Etiquetas de botones en acciones de informes y sus textos de confirmacion soportan ahora variables PHP en notacion {$Variable}
 * Added: Los correos de autoregistro enviados por el sistema ahora contienen un enlace para facilitar el acceso al mismo sin que el usuario deba redigitar los datos.
 * Enhan: El envio de correos ahora se hace utilizando como reply la direccion del host o nombre de servidor que hospeda la aplicacion. 
+* Added: Las columnas de informes permiten especificar títulos arbitrarios y no derivados de la consulta al motor de bases de datos.  Esto permite incluso agregar formatos HTML, imágenes, etc. a los títulos de columna.  Adicionalmente, este tipo de títulos soportan traducción y variables PHP en notacion {$Variable} para aplicaciones multi-idioma.
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
 ALTER TABLE core_formulario ADD id_html varchar(255) DEFAULT 'datos';
+ALTER TABLE core_informe_campos ADD titulo_arbitrario varchar(255) DEFAULT '';
 "
 
 ########################################################################

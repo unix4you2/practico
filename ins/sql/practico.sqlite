@@ -328,7 +328,8 @@ CREATE TABLE core_informe_campos (
   valor_alias text,
   peso integer,
   visible integer DEFAULT 1,
-  editable integer DEFAULT 0
+  editable integer DEFAULT 0,
+  titulo_arbitrario text DEFAULT ''
 
 );
 

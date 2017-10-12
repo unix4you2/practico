@@ -319,6 +319,7 @@ CREATE TABLE core_informe_campos (
   peso integer,
   visible integer DEFAULT 1,
   editable integer DEFAULT 0,
+  titulo_arbitrario varchar(255) DEFAULT '',
   PRIMARY KEY (id)
 );
 

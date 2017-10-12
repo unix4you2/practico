@@ -5448,7 +5448,7 @@ function construir_consulta_informe($informe,$evitar_campos_ocultos=0)
 			$numero_columnas=0;
 			//Busca los CAMPOS definidos para el informe
 			$consulta="SELECT ";
-			$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY peso","$informe");
+			$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY peso,id","$informe");
 
 			while ($registro_campos = $consulta_campos->fetch())
 				{
@@ -5485,7 +5485,7 @@ function construir_consulta_informe($informe,$evitar_campos_ocultos=0)
 
 			// Busca las CONDICIONES para el informe
 			$consulta.=" WHERE ";
-			$consulta_condiciones=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_condiciones." FROM ".$TablasCore."informe_condiciones WHERE informe=? ORDER BY peso","$informe");
+			$consulta_condiciones=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_condiciones." FROM ".$TablasCore."informe_condiciones WHERE informe=? ORDER BY peso,id","$informe");
 			$hay_condiciones=0;
 			while ($registro_condiciones = $consulta_condiciones->fetch())
 				{
@@ -5609,7 +5609,7 @@ function campos_reales_informe($informe)
 			$ListaCampos_NombreSimple=array();		//Lado izquierdo solamente cuando se cuenta con Alias
 			$ListaTablas_NombreSimple=array();		//Nombre de la tabla de donde sale el campo
 			$ListaCampos_PermitirEdicion=array();	//Guarda los estados de edicion en linea para el campo
-			$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY peso","$informe");
+			$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY peso,id","$informe");
 			while ($registro_campos = $consulta_campos->fetch())
 				{
 					//Si tiene alias definido lo agrega
@@ -5839,8 +5839,21 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					$EtiquetasConsulta=generar_etiquetas_consulta($consulta,$informe); //Enviar el informe para que se determinen tambien sus columnas ocultas
 
 					//Genera HTML con las columnas
+                    //Busca los campos definidos en el informe como visibles y luego determina si el campo tiene o no titulo arbitrario
+        			$ListaCampos_TitutloArbitrario=array();
+        			$consulta_titulosarbitrarios=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? AND visible=1 ORDER BY peso,id","$informe");
+        			while ($registro_titulosarbitrarios = $consulta_titulosarbitrarios->fetch())
+        					$ListaCampos_TitutloArbitrario[]=$registro_titulosarbitrarios["titulo_arbitrario"];
+				    $ConteoPosicionColumna=0;   //Utilizado para conocer la columna actual y luego buscar si tiene titulo arbitrario
 					foreach($EtiquetasConsulta[0]["ColumnasVisibles"] as $EtiquetaColumna)
-						$SalidaFinalInforme.= '<th>'.$EtiquetaColumna.'</th>';
+					    {
+					        $TituloFinalColumna=$EtiquetaColumna;
+					        //Si la columna actual tiene un titulo arbitrario definido entonces lo agrega
+					        if ($ListaCampos_TitutloArbitrario[$ConteoPosicionColumna]!="")
+                                $TituloFinalColumna=PCO_ReemplazarVariablesPHPEnCadena($ListaCampos_TitutloArbitrario[$ConteoPosicionColumna]);
+						    $SalidaFinalInforme.= '<th>'.$TituloFinalColumna.'</th>';
+						    $ConteoPosicionColumna++;
+					    }
 
 					//Si el informe tiene botones entonces agrega columna adicional
 					if ($cadena_generica_botones!="")

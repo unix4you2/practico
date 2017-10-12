@@ -761,7 +761,7 @@ if ($PCO_Accion=="eliminar_informe_campo")
                     $peso=$registro_pesos["pesomaximo"]+1;
 					$campo_definitivo=$campo_manual.$campo_datos;
                     //Agrega el nuevo campo
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_campos (".$ListaCamposSinID_informe_campos.") VALUES (?,?,?,?,1,0)","$informe$_SeparadorCampos_$campo_definitivo$_SeparadorCampos_$alias_manual$_SeparadorCampos_$peso");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe_campos (".$ListaCamposSinID_informe_campos.") VALUES (?,?,?,?,1,0,?)","$informe$_SeparadorCampos_$campo_definitivo$_SeparadorCampos_$alias_manual$_SeparadorCampos_$peso$_SeparadorCampos_$titulo_arbitrario");
 					auditar("Agrega campo $campo_definitivo al informe $informe");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_informe">
 						<input type="Hidden" name="informe" value="'.$informe.'">
@@ -1052,7 +1052,7 @@ if ($PCO_Accion=="editar_informe")
 
 
             <!-- Modal Campos del informe -->
-            <?php abrir_dialogo_modal("myModalCamposInforme",$MULTILANG_InfAgregaCampo); ?>
+            <?php abrir_dialogo_modal("myModalCamposInforme",$MULTILANG_InfAgregaCampo,"modal-wide"); ?>
 
 				<form name="datosformc" id="datosformc" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
                     <input type="Hidden" name="PCO_Accion" value="guardar_informe_campo">
@@ -1106,6 +1106,16 @@ if ($PCO_Accion=="editar_informe")
                             <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesAliasManual2; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
                         </span>
                     </div>
+
+                    <div class="form-group input-group">
+                        <input name="titulo_arbitrario" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfTituloArbitrario; ?>">
+                        <span class="input-group-addon">
+                            (<?php echo $MULTILANG_Opcional; ?>)
+                        </span>
+                        <span class="input-group-addon">
+                            <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfTituloArbitrarioDes; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
+                        </span>
+                    </div>
                 </form>
             <a class="btn btn-success btn-block" href="javascript:document.datosformc.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_InfBtnAgregaCampo; ?></a>
 					
@@ -1116,6 +1126,7 @@ if ($PCO_Accion=="editar_informe")
                         <tr>
                             <td><b><?php echo $MULTILANG_Campo; ?></b></td>
                             <td><b><?php echo $MULTILANG_InfAlias; ?></b></td>
+                            <td><b><?php echo $MULTILANG_InfTituloArbitrario; ?></b></td>
                             <td><b><?php echo $MULTILANG_Peso; ?></b></td>
                             <td><b><?php echo $MULTILANG_FrmVisible; ?></b></td>
                             <td><b><?php echo $MULTILANG_InfEditableLinea; ?></b></td>
@@ -1134,6 +1145,7 @@ if ($PCO_Accion=="editar_informe")
 								echo '<tr>
 										<td><b>'.$registro["valor_campo"].'</b></td>
 										<td>'.$registro["valor_alias"].'</td>
+										<td>'.$registro["titulo_arbitrario"].'</td>
 										<td nowrap>
 											<form action="'.$ArchivoCORE.'" method="POST" name="caifoce'.$registro["id"].'" id="caifoce'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 												<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
@@ -2365,7 +2377,7 @@ if ($PCO_Accion=="guardar_informe")
 							//Determina cuantos tablas tiene la tabla
 							$ArregloCampos=explode(',',$ListaCamposSinID_informe_tablas);
 							$TotalCampos=count($ArregloCampos);
-							// Registros de formulario_boton
+							// Registros de informe_tablas
 							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
 							while($registro = $consulta->fetch())
 								{
@@ -2390,7 +2402,7 @@ if ($PCO_Accion=="guardar_informe")
 							//Determina cuantos campos tiene la tabla
 							$ArregloCampos=explode(',',$ListaCamposSinID_informe_campos);
 							$TotalCampos=count($ArregloCampos);
-							// Registros de formulario_boton
+							// Registros de informe_campos
 							$consulta=ejecutar_sql("SELECT * FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY peso,id","$informe");
 							while($registro = $consulta->fetch())
 								{

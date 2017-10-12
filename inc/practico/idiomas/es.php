@@ -817,6 +817,8 @@
 	$MULTILANG_InfSubtotalesColumnaDes='Indica el numero de la columna del informe que sera utilizada para calcular la funcion de autosuma automatica por pagina e informe.  DEJAR EN BLANCO PARA NO CALCULAR.';
 	$MULTILANG_InfSubtotalesFormato='Formato de AutoSuma';
 	$MULTILANG_InfSubtotalesFormatoDes='Indica el formato que sera utilizado para imprimir los resultados de la funcion autosuma al final del informe.  <b>Permite HTML basico y plantillas</b> asi: _TOTAL_PAGINA_ Presentara el total de la columna para la pagina actual, _TOTAL_INFORME_ presentara el total de registros de todos el informe, _COLUMNA_ presenta el numero de la columna del informe utilizada para la operacion de autosuma.  Por ejemplo el siguiente codigo HTML presentara el estado de la AutoSumna centrado y en negrita: < div align=center>< b>Total de pagina < i>(columna: _COLUMNA_)< /i> _TOTAL_PAGINA_ Total reporte: _TOTAL_INFORME_< /b>< /div>';
+	$MULTILANG_InfTituloArbitrario='Titulo arbitrario';
+	$MULTILANG_InfTituloArbitrarioDes='Permite ignorar el titulo de columna entregado por el motor de base de datos y en su lugar utilizar este valor como titulo en el informe presentado.  <b>Permite HTML basico y variables PHP</b>';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';

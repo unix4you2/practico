@@ -32,7 +32,7 @@
     $ListaCamposSinID_evento_objeto='objeto,evento,javascript';
     $ListaCamposSinID_formulario='titulo,ayuda_titulo,ayuda_texto,tabla_datos,columnas,javascript,borde_visible,estilo_pestanas,id_html';
 	$ListaCamposSinID_informe_condiciones='informe,valor_izq,operador,valor_der,peso';
-	$ListaCamposSinID_informe_campos='informe,valor_campo,valor_alias,peso,visible,editable';
+	$ListaCamposSinID_informe_campos='informe,valor_campo,valor_alias,peso,visible,editable,titulo_arbitrario';
 	$ListaCamposSinID_informe_tablas='informe,valor_tabla,valor_alias';
 	$ListaCamposSinID_informe_boton='titulo,estilo,informe,tipo_accion,accion_usuario,visible,peso,confirmacion_texto,destino,pantalla_completa,precargar_estilos,imagen';
 	$ListaCamposSinID_informe='titulo,descripcion,categoria,agrupamiento,ordenamiento,ancho,alto,formato_final,formato_grafico,genera_pdf,variables_filtro,soporte_datatable,formulario_filtrado,tamano_paginacion,subtotales_columna,subtotales_formato';
