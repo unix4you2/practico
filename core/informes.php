@@ -2595,8 +2595,6 @@ if ($PCO_Accion=="guardar_informe")
 							$Contenido_XML .= "
 </objetos_practicos>";
 
-							auditar("Crea copia $tipo_copia_objeto de informe $informe");
-							
 							//Guarda la cadena generada en el archivo XML
 							$PCO_NombreArchivoXML="RepID_".$informe."_".$PCO_FechaOperacion."_".$PCO_HoraOperacion.".xml";
 							$PCO_PunteroArchivo = fopen("tmp/".$PCO_NombreArchivoXML, "w");
@@ -2605,6 +2603,7 @@ if ($PCO_Accion=="guardar_informe")
 							fputs ($PCO_PunteroArchivo, $Contenido_XML);
 							fclose ($PCO_PunteroArchivo);
 
+							auditar("Crea copia $tipo_copia_objeto de informe $informe");
 							//Presenta la ventana con informacion y enlace de descarga
 							abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
 								<div align=center>

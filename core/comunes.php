@@ -1554,7 +1554,6 @@ function completar_parametros($string,$data) {
 			if($ConexionBD=="")
 				global $ConexionPDO;
 			else
-
 				$ConexionPDO=$ConexionBD;
 
 			global $ModoDepuracion;
@@ -5584,16 +5583,17 @@ function generar_etiquetas_consulta($ConsultaSQL="",$informe)
 		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
 
-		//Averigua cuales columnas estan definidas como ocultas
-		if ($informe!="")
-			$ColumnasOcultas=determinar_campos_ocultos($informe);
-
 		// Busca datos del informe
         if ($informe!="")
         	$registro_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe")->fetch();
 
+        //Si encuentra que el informe usa conexion alterna accesa la variable de conexion como global
+        if($registro_informe["conexion_origen_datos"]!="")
+    		global ${$registro_informe["conexion_origen_datos"]};
 
-
+		//Averigua cuales columnas estan definidas como ocultas
+		if ($informe!="")
+			$ColumnasOcultas=determinar_campos_ocultos($informe);
 
 		//Si se recibe un query sigue adelante
 		if ($ConsultaSQL!="")
@@ -5601,11 +5601,7 @@ function generar_etiquetas_consulta($ConsultaSQL="",$informe)
 				// Imprime encabezados de columna si encuentra al menos un registro
                 //Si el informe usa una conexion externa usa su configuracion
                 if($registro_informe["conexion_origen_datos"]!="")
-                    {
-                        //Si encuentra que el informe usa conexion alterna accesa la variable de conexion como global
-            			global ${$registro_informe["conexion_origen_datos"]};
-                        $resultado_columnas=@ejecutar_sql($ConsultaSQL,"",${$registro_informe["conexion_origen_datos"]},1); //${$registro_informe["conexion_origen_datos"]}
-                    }
+                    $resultado_columnas=@ejecutar_sql($ConsultaSQL,"",${$registro_informe["conexion_origen_datos"]},1); //${$registro_informe["conexion_origen_datos"]}
                 else
                     $resultado_columnas=@ejecutar_sql($ConsultaSQL);
 
@@ -5665,6 +5661,9 @@ function campos_reales_informe($informe)
             {
         		$consulta_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
         		$registro_informe=$consulta_informe->fetch();
+        		
+        		if ($registro_informe["conexion_origen_datos"]!="")
+        		    global ${$registro_informe["conexion_origen_datos"]};
             }
 
 			//Busca los CAMPOS definidos para el informe y sus TABLAS correspondientes
@@ -5805,7 +5804,10 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
         //Si el informe usa una conexion externa busca su configuracion
         if($registro_informe["conexion_origen_datos"]!="")
-		    $registro_conexiones=ejecutar_sql("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE nombre='".$registro_informe["conexion_origen_datos"]."' ")->fetch();
+            {
+		        $registro_conexiones=ejecutar_sql("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE nombre='".$registro_informe["conexion_origen_datos"]."' ")->fetch();
+            	global ${$registro_conexiones["nombre"]};
+            }
 
 		//Si no encuentra informe presenta error
 		if ($registro_informe["id"]=="") mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Informes." $informe)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
@@ -5946,10 +5948,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
                     //Si el informe usa una conexion externa usa su configuracion
                     if($registro_informe["conexion_origen_datos"]!="")
-                        {
-            		    	global ${$registro_conexiones["nombre"]};
-                            $consulta_ejecucion=ejecutar_sql($consulta,"",${$registro_conexiones["nombre"]});
-                        }
+                        $consulta_ejecucion=ejecutar_sql($consulta,"",${$registro_conexiones["nombre"]});
                     else
                         $consulta_ejecucion=ejecutar_sql($consulta);
 

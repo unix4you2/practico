@@ -65,7 +65,7 @@ LogCambios="
 * Added: Los correos de autoregistro enviados por el sistema ahora contienen un enlace para facilitar el acceso al mismo sin que el usuario deba redigitar los datos.
 * Enhan: El envio de correos ahora se hace utilizando como reply la direccion del host o nombre de servidor que hospeda la aplicacion. 
 * Added: Las columnas de informes permiten especificar títulos arbitrarios y no derivados de la consulta al motor de bases de datos.  Esto permite incluso agregar formatos HTML, imágenes, etc. a los títulos de columna.  Adicionalmente, este tipo de títulos soportan traducción y variables PHP en notacion {$Variable} para aplicaciones multi-idioma.
-* Enhan: Optimizacion en funciones de importacion de informes y formularios desde especificaciones XML.
+* Enhan: Optimizacion en funciones de importacion de informes y formularios desde especificaciones XML.  Funciones independientes pueden realizar ahora el trabajo de manera autonoma y sin verificaciones de versionamiento: PCO_ImportarXMLInforme($xml_importado), PCO_ImportarXMLFormulario($xml_importado)
 * Added: Ahora los informes permiten especificar conexiones y orígenes de datos alternos.  Ideal cuando se desean crear paneles unificados, informes y demás operaciones desde diferentes orígenes de datos, servidores o motores de bases de datos diferentes al predeterminado del framework.  Tenga en cuenta que cuando se utilizan motores externos se pueden tener tiempos de respuesta aumentados según su velocidad de conexión entre el sistema donde reside práctico y el origen de datos externo.
 * Enhan: Algunos mensajes de excepción de errores de ejecución de sentencias SQL presentan el archivo y la línea aproximada donde ocurren. 
 "
