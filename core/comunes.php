@@ -1549,15 +1549,16 @@ function completar_parametros($string,$data) {
 					Retorna mensaje en pantalla con la descripcion devuelta por el driver en caso de error
 					Retorna una variable con el arreglo de resultados en caso de ser exitosa la consulta
 			*/
-			
+
 			//Determina si se debe usar la conexion global del sistema o una especifica de usuario
 			if($ConexionBD=="")
 				global $ConexionPDO;
 			else
+
 				$ConexionPDO=$ConexionBD;
-			
+
 			global $ModoDepuracion;
-			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin;
+			global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin,$MULTILANG_Archivo;
 			global $PCO_Accion;
 			global $PCOSESS_LoginUsuario,$_SeparadorCampos_,$DepuracionSQL;
 			
@@ -1601,7 +1602,7 @@ function completar_parametros($string,$data) {
 				{
 					//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
 					if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-						$mensaje_final=$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.@completar_parametros($query,$parametros);
+						$mensaje_final=$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.@completar_parametros($query,$parametros)."<br><b>$MULTILANG_Archivo</b>: ".$ErrorPDO->getFile()." -> ".$ErrorPDO->getLine();
 					else
 						$mensaje_final='<b>'.$MULTILANG_Detalles.'</b>: '.$MULTILANG_ErrorSoloAdmin;
 					//Presenta el mensaje sobre el HTML y como Emergente JS
@@ -1913,9 +1914,11 @@ function completar_parametros($string,$data) {
 
 
 
+
+
 /* ################################################################## */
 /* ################################################################## */
-	function consultar_tablas($prefijo="")
+	function consultar_tablas($prefijo="",$ConexionAlterna="",$MotorAlterno="",$BaseDatosAlterna="")
 		{
 			/*
 				Function: consultar_tablas
@@ -1931,10 +1934,20 @@ function completar_parametros($string,$data) {
 				Ver tambien:
 				<Definicion de conexion PDO>
 			*/
-			global $ConexionPDO;
-			global $MotorBD;
-			global $BaseDatos;
 			global $MULTILANG_ErrorTiempoEjecucion;
+			//Determina si se debe usar la conexion global del sistema o una especifica de usuario
+			if($ConexionAlterna=="")
+			    {
+				    global $ConexionPDO;
+        			global $MotorBD;
+        			global $BaseDatos;
+			    }
+			else
+			    {
+				    $ConexionPDO=$ConexionAlterna;
+        			$MotorBD=$MotorAlterno;
+        			$BaseDatos=$BaseDatosAlterna;
+			    }
 
 			if($MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc")
 					$consulta = "SELECT name FROM sysobjects WHERE xtype='U';";
@@ -1951,7 +1964,7 @@ function completar_parametros($string,$data) {
 
 			try
 				{
-					$consulta_tablas=ejecutar_sql($consulta);
+					$consulta_tablas=ejecutar_sql($consulta,"",$ConexionPDO,1);
 					return $consulta_tablas;
 				}
 			catch( PDOException $ErrorPDO)
@@ -1962,10 +1975,9 @@ function completar_parametros($string,$data) {
 		}
 
 
-
 /* ################################################################## */
 /* ################################################################## */
-	function consultar_columnas($tabla)
+	function consultar_columnas($tabla,$ConexionAlterna="",$MotorAlterno="",$BaseDatosAlterna="")
 		{
 			/*
 				Function: consultar_nombres_columnas
@@ -1981,16 +1993,26 @@ function completar_parametros($string,$data) {
 				Ver tambien:
 				<consultar_tablas>
 			*/
-			global $ConexionPDO;
-			global $MotorBD;
-			global $BaseDatos;
 			global $MULTILANG_ErrorTiempoEjecucion;
+			//Determina si se debe usar la conexion global del sistema o una especifica de usuario
+			if($ConexionAlterna=="")
+			    {
+				    global $ConexionPDO;
+        			global $MotorBD;
+        			global $BaseDatos;
+			    }
+			else
+			    {
+				    $ConexionPDO=$ConexionAlterna;
+        			$MotorBD=$MotorAlterno;
+        			$BaseDatos=$BaseDatosAlterna;
+			    }
 
 			//Busca los campos dependiendo del motor de BD configurado actualmente
 			if ($MotorBD=="mysql" || $MotorBD=="sqlsrv" || $MotorBD=="mssql" || $MotorBD=="ibm" || $MotorBD=="dblib" || $MotorBD=="odbc" || $MotorBD=="oracle" || $MotorBD=="ifmx" || $MotorBD=="fbd")
 				{
 					$columna=0;
-					$resultado=ejecutar_sql("DESCRIBE $tabla ");
+					$resultado=ejecutar_sql("DESCRIBE $tabla ","",$ConexionPDO,1);
 					//echo $resultado;
 					//Evalua si se retorno 1 (error) por la funcion para saber si sigue o no
 					//if($resultado!="1")
@@ -2021,7 +2043,7 @@ function completar_parametros($string,$data) {
 			if ($MotorBD=="pgsql")
 				{
 					$columna=0;
-					$resultado=ejecutar_sql("SELECT * from INFORMATION_SCHEMA.COLUMNS where table_name = ? ","$tabla");
+					$resultado=ejecutar_sql("SELECT * from INFORMATION_SCHEMA.COLUMNS where table_name = ? ","$tabla",$ConexionPDO,1);
 					while($registro = $resultado->fetch())
 						{
 							$columnas[$columna]["nombre"] = $registro["column_name"];
@@ -2037,7 +2059,7 @@ function completar_parametros($string,$data) {
 			if ($MotorBD=="sqlite")
 				{
 					$columna=0;
-					$resultado=ejecutar_sql("SELECT * FROM sqlite_master WHERE type='table' AND name=? ","$tabla");
+					$resultado=ejecutar_sql("SELECT * FROM sqlite_master WHERE type='table' AND name=? ","$tabla",$ConexionPDO,1);
 					$registro = $resultado->fetch();
 					//Toma los campos encontrados en el SQL de la tabla, los separa y los depura para devolver valores
 					$campos=explode(",",$registro["sql"]);
@@ -2100,7 +2122,7 @@ function completar_parametros($string,$data) {
 
 /* ################################################################## */
 /* ################################################################## */
-	function existe_campo_tabla($campo,$tabla)
+	function existe_campo_tabla($campo,$tabla,$ConexionAlterna="",$MotorAlterno="",$BaseDatosAlterna="")
 		{
 			/*
 				Function: existe_campo_tabla
@@ -2117,12 +2139,30 @@ function completar_parametros($string,$data) {
 				Ver tambien:
 				<consultar_tablas>
 			*/
-			
+
+			//Determina si se debe usar la conexion global del sistema o una especifica de usuario
+			if($ConexionAlterna=="")
+			    {
+				    global $ConexionPDO;
+        			global $MotorBD;
+        			global $BaseDatos;
+			    }
+			else
+			    {
+				    $ConexionPDO=$ConexionAlterna;
+        			$MotorBD=$MotorAlterno;
+        			$BaseDatos=$BaseDatosAlterna;
+			    }
+
 			//Asume que el campo no existe
 			$estado=false;
 
 			//Busca todos los campos de la tabla
-			$resultadocampos=consultar_columnas($tabla);
+			if($ConexionAlterna!="")
+			    $resultadocampos=consultar_columnas($tabla,$ConexionPDO,$MotorBD,$BaseDatos);
+			else
+			    $resultadocampos=consultar_columnas($tabla);
+
 			for($i=0;$i<count($resultadocampos);$i++)
 				{
 					//Si el campo en el arreglo es igual al campo buscado cambia el estado a verdadero
@@ -5547,12 +5587,28 @@ function generar_etiquetas_consulta($ConsultaSQL="",$informe)
 		//Averigua cuales columnas estan definidas como ocultas
 		if ($informe!="")
 			$ColumnasOcultas=determinar_campos_ocultos($informe);
-		
+
+		// Busca datos del informe
+        if ($informe!="")
+        	$registro_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe")->fetch();
+
+
+
+
 		//Si se recibe un query sigue adelante
 		if ($ConsultaSQL!="")
 			{
 				// Imprime encabezados de columna si encuentra al menos un registro
-				$resultado_columnas=@ejecutar_sql($ConsultaSQL);
+                //Si el informe usa una conexion externa usa su configuracion
+                if($registro_informe["conexion_origen_datos"]!="")
+                    {
+                        //Si encuentra que el informe usa conexion alterna accesa la variable de conexion como global
+            			global ${$registro_informe["conexion_origen_datos"]};
+                        $resultado_columnas=@ejecutar_sql($ConsultaSQL,"",${$registro_informe["conexion_origen_datos"]},1); //${$registro_informe["conexion_origen_datos"]}
+                    }
+                else
+                    $resultado_columnas=@ejecutar_sql($ConsultaSQL);
+
 				//Procesa resultados solo si es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch(), rowCount() y demas metodos
 				if ($resultado_columnas!="1")
 					$ConteoRegistros=$resultado_columnas->rowCount();
@@ -5602,7 +5658,14 @@ function generar_etiquetas_consulta($ConsultaSQL="",$informe)
 function campos_reales_informe($informe)
 	{
 		global $ConexionPDO,$ArchivoCORE,$TablasCore;
-		global $ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas;
+		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas;
+
+		// Busca datos del informe
+        if ($informe!="")
+            {
+        		$consulta_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
+        		$registro_informe=$consulta_informe->fetch();
+            }
 
 			//Busca los CAMPOS definidos para el informe y sus TABLAS correspondientes
 			$ListaCampos_NombreCompleto=array();	//Nombre completo del campo
@@ -5665,8 +5728,17 @@ function campos_reales_informe($informe)
 									//Si no se ha encontrado la tabla entra a comparar frente a la actual
 									if ($nombre_tabla_simple=="")
 										{
-											if (existe_campo_tabla($nombre_campo_simple,$tabla_actual))
-												$nombre_tabla_simple=$tabla_actual;
+                                            //Si el informe usa una conexion externa usa su configuracion
+                                            if($registro_informe["conexion_origen_datos"]!="")
+                                                {
+                            						if (existe_campo_tabla($nombre_campo_simple,$tabla_actual,${$registro_informe["conexion_origen_datos"]},$registro_informe["motorbd"],$registro_informe["basedatos"]))
+                            							$nombre_tabla_simple=$tabla_actual;
+                                                }
+                                            else
+                                                {
+                            						if (existe_campo_tabla($nombre_campo_simple,$tabla_actual))
+                            							$nombre_tabla_simple=$tabla_actual;
+                                                }
 										}
 								}
 							$ListaTablas_NombreSimple[]=$nombre_tabla_simple;
@@ -5712,7 +5784,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
 		global $PCOSESS_LoginUsuario,$Nombre_usuario,$Descripcion_usuario,$Nivel_usuario,$Correo_usuario,$LlaveDePasoUsuario,$PCO_FechaOperacion;
 		// Carga variables de definicion de tablas
-		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
+		global $ListaCamposSinID_replicasbd,$ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
 		global $MULTILANG_Editar,$MULTILANG_Informes,$MULTILANG_Exportar,$MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano,$MULTILANG_MonCommSQL;
 		global $IdiomaPredeterminado;
         global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales;
@@ -5730,6 +5802,11 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 		$consulta_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
 		$registro_informe=$consulta_informe->fetch();
 		$Identificador_informe=$registro_informe["id"];
+
+        //Si el informe usa una conexion externa busca su configuracion
+        if($registro_informe["conexion_origen_datos"]!="")
+		    $registro_conexiones=ejecutar_sql("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE nombre='".$registro_informe["conexion_origen_datos"]."' ")->fetch();
+
 		//Si no encuentra informe presenta error
 		if ($registro_informe["id"]=="") mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Informes." $informe)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
@@ -5795,7 +5872,6 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 							{
 								 mensaje('<i class="fa fa-flag fa-fw"></i>',PCO_ReemplazarVariablesPHPEnCadena($registro_informe["descripcion"]), '', '', 'alert alert-success alert-dismissible');
 							}
-						
 					}
 
 				// Si se ha definido un tamano fijo entonces crea el marco
@@ -5834,7 +5910,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					
 					//Determina si el informe tiene o no campos ocultos
 					$PCO_ColumnasOcultas=determinar_campos_ocultos($informe);
-					
+				
 					//Obtiene ColumnasVisibles, NumerosColumnasOcultas, NumeroColumnas dentro de EtiquetasConsulta
 					$EtiquetasConsulta=generar_etiquetas_consulta($consulta,$informe); //Enviar el informe para que se determinen tambien sus columnas ocultas
 
@@ -5854,7 +5930,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 						    $SalidaFinalInforme.= '<th>'.$TituloFinalColumna.'</th>';
 						    $ConteoPosicionColumna++;
 					    }
-
+	
 					//Si el informe tiene botones entonces agrega columna adicional
 					if ($cadena_generica_botones!="")
 						{
@@ -5867,7 +5943,15 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 
 					// Imprime registros del resultado
 					$numero_filas=0;
-					$consulta_ejecucion=ejecutar_sql($consulta);
+
+                    //Si el informe usa una conexion externa usa su configuracion
+                    if($registro_informe["conexion_origen_datos"]!="")
+                        {
+            		    	global ${$registro_conexiones["nombre"]};
+                            $consulta_ejecucion=ejecutar_sql($consulta,"",${$registro_conexiones["nombre"]});
+                        }
+                    else
+                        $consulta_ejecucion=ejecutar_sql($consulta);
 
 					//Procesa resultados solo si es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch(), rowCount() y demas metodos
 					while($consulta_ejecucion!="1" && $registro_informe=$consulta_ejecucion->fetch())
@@ -5931,6 +6015,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 				// Si se ha definido un tamano fijo entonces cierra el marco
 				if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
 					echo '</DIV>';
+
 			} // Fin si informe es T (tabla)
 
 /*
@@ -6042,7 +6127,12 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
                             data: [
                             <?php
                                 //Inicia la generacion del arreglo con los datos
-                                $resultado_consulta=ejecutar_sql($consulta);
+                                //Si el informe usa una conexion externa usa su configuracion
+                                if($registro_informe["conexion_origen_datos"]!="")
+                                    $resultado_consulta=ejecutar_sql($consulta,"",${$registro_conexiones["nombre"]});
+                                else
+                                    $resultado_consulta=ejecutar_sql($consulta);
+                        
                                 $cadena_datos="";
                                 while ($registro_consulta = $resultado_consulta->fetch())
                                     {

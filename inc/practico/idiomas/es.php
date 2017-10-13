@@ -1223,6 +1223,10 @@
 	$MULTILANG_ReplicaTodo='Usar como replica espejo';
 	$MULTILANG_AyudaReplica='Determina si todas las operaciones realizadas sobre la base de datos del sistema deben ser replicadas sobre esta conexion.  Si asigna su valor en NO, Practico solamente creara la conexion y la dejara lista para ser usada por c&oacute;digo o por operaciones individuales cuando usted lo requiera.  Esto solo aplicara para operaciones de alteracion (Insertar,Actualizar,Eliminar) realizadas mediante la funcion ejecutar_sql_unaria()';
 	$MULTILANG_ConnAdicionales='Conexiones a bases de datos adicionales';
+	$MULTILANG_ConnPredeterminada='Predeterminado (Misma conexi&oacute;n usada por Practico)';
+	$MULTILANG_ConnOrigenDatos='Origen de datos';
+	$MULTILANG_ConnOrigenDatosDes='Determina desde d&oacute;nde ser&aacute;n tomados los datos para realizar el informe.  Por defecto utiliza la conexi&oacute;n y motor de base de datos configurado para trabajar con Pr&aacute;ctico; pero tambi&eacute;n puede seleccionar otros motores o conexiones externas y poder extraer desde all&iacute; datos.  Para agregar otros or&iacute;genes de datos utilice la opci&oacute;n de Conexiones extra y replicaci&oacute;n.';
+    $MULTILANG_ConnAdvCambioOrigen='CUIDADO: Alterar la conexi&oacute;n u origen de datos utilizado para un informe despu&eacute;s de su dise&ntilde;o puede generar errores en tiempo de ejecuci&oacute;n debido a que las estructuras de datos, tablas y campos pueden no ser encontradas en la nueva conexi&oacute;n seleccionada.  Sea cuidadoso.';
 	
 	//Eventos javascript
     $MULTILANG_EventosTit='Eventos y disparadores del objeto';

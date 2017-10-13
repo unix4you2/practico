@@ -1224,6 +1224,10 @@
 	$MULTILANG_ReplicaTodo='Use-o como um espelho';
 	$MULTILANG_AyudaReplica='Definir se todas as operações de banco de dados sobre o sistema principal deve ser replicado através desta ligação. Se este valus é NÃO, Practico vai definir a conexão e torná-lo pronto para ser usado por operações de código ou individual apenas quando quiser.   This applies for data upgrade operations (Insert,Update,Delete) that was maked by the ejecutar_sql_unaria() internal function';
 	$MULTILANG_ConnAdicionales='Conexões de banco de dados extras definidas';
+	$MULTILANG_ConnPredeterminada='Padrão (mesma conexão usada pelo Practico)';
+	$MULTILANG_ConnOrigenDatos='Fonte de dados';
+	$MULTILANG_ConnOrigenDatosDes='Determina onde os dados serão dados para fazer o relatório. Por padrão, ele usa o mecanismo de conexão e banco de dados configurado para funcionar com Prático; mas você também pode selecionar outros motores ou conexões externas e conseguir extrair dados a partir daí. Para adicionar outras fontes de dados, use a opção Conexões extras e Replicação.';
+    $MULTILANG_ConnAdvCambioOrigen='CUIDADO: A alteração da conexão ou da fonte de dados usada para um relatório após o projeto pode gerar erros em tempo de execução porque as estruturas de dados, tabelas e campos podem não ser encontrados na conexão recém-selecionada. Tenha cuidado.';
 
     //Eventos javascript
     $MULTILANG_EventosTit='Eventos e objeto Triggers';

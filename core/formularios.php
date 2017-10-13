@@ -3108,34 +3108,21 @@ if ($PCO_Accion=="definir_copia_formularios")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: confirmar_importacion_formulario
-	Lee el archivo cargado sobre /tmp y regenera el objeto alli existente
+	Function: PCO_ImportarXMLFormulario
+	Importa una cadena XML con la especificacion de un formulario al sistema
 
 	Variables de entrada:
 
-		archivo_cargado - Ruta absoluta hacia el archivo analizado en el paso anterior del asistente
+		xml_importado - Cadena en notacion XML con todos los componentes necesarios del formulario
 
 	Salida:
-		Objetos generados a partir de la definicion del archivo
+	
+		Objetos generados a partir de la definicion de la cadena
 */
-if ($PCO_Accion=="confirmar_importacion_formulario")
-	{
-		echo "<br>";
-		$mensaje_error="";
-		abrir_ventana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
-		if ($archivo_cargado=="")
-			$mensaje_error=$MULTILANG_ErrorTiempoEjecucion;
-		else
-			{
-                //Carga el archivo en una cadena
-                $cadena_xml_importado = file_get_contents($archivo_cargado);
-				// Usa SimpleXML Directamente para interpretar respuesta
-				$xml_importado = @simplexml_load_string($cadena_xml_importado);
-			}
-		if ($xml_importado->descripcion[0]->version_practico!=$PCO_VersionActual) $mensaje_error=$MULTILANG_ActErrGral;
+function PCO_ImportarXMLFormulario($xml_importado)
+    {
+        global $_SeparadorCampos_,$TablasCore,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
 
-		if ($mensaje_error=="")
-			{
 				//Si es tipo estatico elimina el formulario existente con el mismo ID
 				$ListaCamposParaID="";
 				$InterroganteParaID="";
@@ -3238,14 +3225,49 @@ if ($PCO_Accion=="confirmar_importacion_formulario")
 						ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton ($ListaCamposSinID_formulario_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 					}
 
+        return $idObjetoInsertado;
+    }
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: confirmar_importacion_formulario
+	Lee el archivo cargado sobre /tmp y regenera el objeto alli existente
+
+	Variables de entrada:
+
+		archivo_cargado - Ruta absoluta hacia el archivo analizado en el paso anterior del asistente
+
+	Salida:
+		Objetos generados a partir de la definicion del archivo
+*/
+if ($PCO_Accion=="confirmar_importacion_formulario")
+	{
+		echo "<br>";
+		$mensaje_error="";
+		abrir_ventana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
+		if ($archivo_cargado=="")
+			$mensaje_error=$MULTILANG_ErrorTiempoEjecucion;
+		else
+			{
+                //Carga el archivo en una cadena
+                $cadena_xml_importado = file_get_contents($archivo_cargado);
+				// Usa SimpleXML Directamente para interpretar respuesta
+				$xml_importado = @simplexml_load_string($cadena_xml_importado);
+			}
+		if ($xml_importado->descripcion[0]->version_practico!=$PCO_VersionActual) $mensaje_error=$MULTILANG_ActErrGral;
+
+		if ($mensaje_error=="")
+			{
+			    $ResultadoImportacion=PCO_ImportarXMLFormulario($xml_importado);
 				echo '
 				<b>'.$MULTILANG_FrmImportarGenerado.':</b><br>
-				<li>ID: '.$idObjetoInsertado.'</li>
-				<li>Titulo: '.$titulo.'</li>
+				<li>ID: '.$ResultadoImportacion.'</li>
+				<li>Titulo: '.base64_decode($xml_importado->core_formulario[0]->titulo).'</li>
 				<br>
 				<a class="btn btn-block btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
 				auditar("Importa $archivo_cargado en objeto $idObjetoInsertado");
-				
 			}
 		else
 			{

@@ -578,7 +578,7 @@ if ($PCO_Accion=="actualizar_informe")
 		if ($mensaje_error=="")
 			{
 				// Actualiza los datos 
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET subtotales_columna=?,subtotales_formato=?,tamano_paginacion=?, formulario_filtrado=?, soporte_datatable=?, variables_filtro=?, genera_pdf=?, formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=? WHERE id=? ","$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$id");
+				ejecutar_sql_unaria("UPDATE ".$TablasCore."informe SET conexion_origen_datos=?,subtotales_columna=?,subtotales_formato=?,tamano_paginacion=?, formulario_filtrado=?, soporte_datatable=?, variables_filtro=?, genera_pdf=?, formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=? WHERE id=? ","$conexion_origen_datos$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$id");
 				auditar("Actualiza informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="editar_informe">
@@ -958,6 +958,9 @@ if ($PCO_Accion=="editar_informe")
 		// Busca datos del informe
 		$resultado_informe=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
 		$registro_informe = $resultado_informe->fetch();
+        //Si el informe usa una conexion externa busca su configuracion
+        if($registro_informe["conexion_origen_datos"]!="")
+		    $registro_conexiones=ejecutar_sql("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE nombre='".$registro_informe["conexion_origen_datos"]."' ")->fetch();
   ?>
 
             <!-- Modal Tablas del informe -->
@@ -972,11 +975,21 @@ if ($PCO_Accion=="editar_informe")
                         <select id="tabla_datos" name="tabla_datos" class="form-control" >
                             <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                              <?php
-                                    $resultado=consultar_tablas();
+                                    //Si el informe usa una conexion externa usa su configuracion
+                                    if($registro_informe["conexion_origen_datos"]!="")
+                                        $resultado=consultar_tablas("",${$registro_conexiones["nombre"]},$registro_conexiones["motorbd"],$registro_conexiones["basedatos"]);
+                                    else
+                                        $resultado=consultar_tablas();
+                                    //Presenta las tablas encontradas en la BD
                                     while ($registro = $resultado->fetch())
                                         {
-                                            // Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
-                                            if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
+                                            // Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico cuando es la conexion predeterminada, sino para conexiones alternas imprime todo
+                                            if($registro_informe["conexion_origen_datos"]=="")
+                                                {
+                                                    if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
+                                                        echo '<option value="'.$registro[0].'" >'.str_replace($TablasApp,'',$registro[0]).'</option>';
+                                                }
+                                            else
                                                 echo '<option value="'.$registro[0].'" >'.str_replace($TablasApp,'',$registro[0]).'</option>';
                                         }
                             ?>
@@ -985,7 +998,6 @@ if ($PCO_Accion=="editar_informe")
                             <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
                         </span>
                     </div>
-
                     <div class="form-group input-group">
                         <input name="tabla_manual" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfTablaManual; ?>">
                         <span class="input-group-addon">
@@ -1021,7 +1033,6 @@ if ($PCO_Accion=="editar_informe")
                     </thead>
                     <tbody>
 				 <?php
-
 						$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe_tablas." FROM ".$TablasCore."informe_tablas WHERE informe=? ORDER BY valor_tabla","$informe");
 						while($registro = $consulta_forms->fetch())
 							{
@@ -1074,7 +1085,11 @@ if ($PCO_Accion=="editar_informe")
 															echo '<optgroup label="'.str_replace($TablasApp,'',$registro[0]).'" >';
 															$nombre_tabla=$registro[0];
 															//Busca los campos de la tabla
-															$resultadocampos=consultar_columnas(PCO_ReemplazarVariablesPHPEnCadena($registro[0]));
+                                                            //Si el informe usa una conexion externa usa su configuracion
+                                                            if($registro_informe["conexion_origen_datos"]!="")
+                                                                $resultadocampos=consultar_columnas(PCO_ReemplazarVariablesPHPEnCadena($registro[0]),${$registro_conexiones["nombre"]},$registro_conexiones["motorbd"],$registro_conexiones["basedatos"]);
+                                                            else
+                                                                $resultadocampos=consultar_columnas(PCO_ReemplazarVariablesPHPEnCadena($registro[0]));
 															for($i=0;$i<count($resultadocampos);$i++)
 																echo '<option value="'.$nombre_tabla.'.'.$resultadocampos[$i]["nombre"].'">'.$resultadocampos[$i]["nombre"].'</option>';
 															echo '</optgroup>';
@@ -2045,6 +2060,28 @@ if ($PCO_Accion=="editar_informe")
                 </span>
             </div>
 
+            <label for="conexion_origen_datos"><?php echo $MULTILANG_ConnOrigenDatos; ?>:</label>
+            <div class="form-group input-group">
+                <select id="conexion_origen_datos" name="conexion_origen_datos" class="form-control" >
+					<option value=""><?php echo $MULTILANG_ConnPredeterminada; ?></option>
+					<?php
+						$consulta_conexiones=ejecutar_sql("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE tipo_replica=0 ORDER BY nombre");
+						while($registro_conexiones = $consulta_conexiones->fetch())
+						    {
+						        $seleccion_campo="";
+								if (@$registro_informe["conexion_origen_datos"]==$registro_conexiones["nombre"])
+									$seleccion_campo="SELECTED";
+							    echo '<option value="'.$registro_conexiones["nombre"].'" '.$seleccion_campo.' >(Id.'.$registro_conexiones["id"].') '.$registro_conexiones["nombre"].' (Host:'.$registro_conexiones["servidorbd"].' BD:'.$registro_conexiones["basedatos"].')</option>';
+						    }
+					?>
+                </select>
+                <span class="input-group-addon">
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_ConnAdvCambioOrigen; ?>"><i class="fa fa-exclamation-triangle icon-red  fa-fw "></i></a>
+                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_ConnOrigenDatosDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                </span>
+            </div>
+
+
             <label for="genera_pdf"><?php echo $MULTILANG_InfGeneraPDF; ?>:</label>
             <div class="form-group input-group">
                 <select id="genera_pdf" name="genera_pdf" class="form-control" >
@@ -2273,7 +2310,7 @@ if ($PCO_Accion=="guardar_informe")
 			{
 				$agrupamiento='';
                 $ordenamiento='';
-                ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|false|false|false|||',?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtro$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato");
+                ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|false|false|false|||',?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtro$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos");
 				$id=obtener_ultimo_id_insertado($ConexionPDO);
 				auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -2343,9 +2380,10 @@ if ($PCO_Accion=="guardar_informe")
 							$tamano_paginacion=$registro["tamano_paginacion"];
 							$subtotales_columna=$registro["subtotales_columna"];
 							$subtotales_formato=$registro["subtotales_formato"];
+							$conexion_origen_datos=$registro["conexion_origen_datos"];
 
 							// Inserta el nuevo informe
-							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato");
+							ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos");
 							
 							$idObjetoInsertado=obtener_ultimo_id_insertado($ConexionPDO);
 
@@ -2685,9 +2723,10 @@ function PCO_ImportarXMLInforme($xml_importado)
 				$tamano_paginacion=base64_decode($xml_importado->core_informe[0]->tamano_paginacion);
 				$subtotales_columna=base64_decode($xml_importado->core_informe[0]->subtotales_columna);
 				$subtotales_formato=base64_decode($xml_importado->core_informe[0]->subtotales_formato);
+				$conexion_origen_datos=base64_decode($xml_importado->core_informe[0]->conexion_origen_datos);
 
 				// Inserta el nuevo informe
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposParaID.$ListaCamposSinID_informe.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato");
+				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposParaID.$ListaCamposSinID_informe.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos");
 				
 				//Determina el ID del registro
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
@@ -3128,6 +3167,22 @@ if ($PCO_Accion=="administrar_informes")
                 </select>
                 <span class="input-group-addon">
                     <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_InfTitFormato; ?></b><br><?php echo $MULTILANG_InfDesFormato; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                </span>
+            </div>
+
+            <label for="conexion_origen_datos"><?php echo $MULTILANG_ConnOrigenDatos; ?>:</label>
+            <div class="form-group input-group">
+                <select id="conexion_origen_datos" name="conexion_origen_datos" class="form-control" >
+					<option value=""><?php echo $MULTILANG_ConnPredeterminada; ?></option>
+					<?php
+						$consulta_conexiones=ejecutar_sql("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE tipo_replica=0 ORDER BY nombre");
+						while($registro_conexiones = $consulta_conexiones->fetch())
+							echo '<option value="'.$registro_conexiones["nombre"].'">(Id.'.$registro_conexiones["id"].') '.$registro_conexiones["nombre"].' (Host:'.$registro_conexiones["servidorbd"].' BD:'.$registro_conexiones["basedatos"].')</option>';
+					?>
+                </select>
+                <span class="input-group-addon">
+                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_ConnAdvCambioOrigen; ?>"><i class="fa fa-exclamation-triangle icon-red  fa-fw "></i></a>
+                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_ConnOrigenDatosDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                 </span>
             </div>
 

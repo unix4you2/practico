@@ -1224,7 +1224,11 @@
 	$MULTILANG_ReplicaTodo='Use it as a mirror';
 	$MULTILANG_AyudaReplica='Define if all database operations over the main system should be replicated over this connection.  If this valus is NO, Practico will define the connection and make it ready to be used by code or individual operations only when you want.  This applies for data upgrade operations (Insert,Update,Delete) that was maked by the ejecutar_sql_unaria() internal function';
 	$MULTILANG_ConnAdicionales='Extra database connections defined';
-	
+	$MULTILANG_ConnPredeterminada='Default (Same connection used by Practico)';
+	$MULTILANG_ConnOrigenDatos='Data origin';
+	$MULTILANG_ConnOrigenDatosDes='Determines where the data will be taken to make the report. By default it uses the connection and database engine configured to work with Practical; but you can also select other engines or external connections and be able to extract data from there. To add other data sources, use the Extra Connections and Replication option.';
+    $MULTILANG_ConnAdvCambioOrigen='CAUTION: Altering the connection or data source used for a report after its design can generate run-time errors because data structures, tables, and fields may not be found in the newly selected connection. Be careful.';
+
 	//Eventos javascript
     $MULTILANG_EventosTit='Object events & triggers';
     $MULTILANG_EventosPrevio='Before you can automate operations using events or triggers with an object or form control you must first create the base control and then enter edit it again to activate the options.';

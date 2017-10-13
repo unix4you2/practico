@@ -307,6 +307,7 @@ CREATE TABLE core_informe (
   tamano_paginacion integer DEFAULT '10',
   subtotales_columna varchar(255) DEFAULT '',
   subtotales_formato varchar(255) DEFAULT '',
+  conexion_origen_datos varchar(255) DEFAULT '',
   PRIMARY KEY  (id)
 );
 
