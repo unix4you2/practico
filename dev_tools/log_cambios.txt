@@ -68,6 +68,7 @@ LogCambios="
 * Enhan: Optimizacion en funciones de importacion de informes y formularios desde especificaciones XML.  Funciones independientes pueden realizar ahora el trabajo de manera autonoma y sin verificaciones de versionamiento: PCO_ImportarXMLInforme($xml_importado), PCO_ImportarXMLFormulario($xml_importado)
 * Added: Ahora los informes permiten especificar conexiones y orígenes de datos alternos.  Ideal cuando se desean crear paneles unificados, informes y demás operaciones desde diferentes orígenes de datos, servidores o motores de bases de datos diferentes al predeterminado del framework.  Tenga en cuenta que cuando se utilizan motores externos se pueden tener tiempos de respuesta aumentados según su velocidad de conexión entre el sistema donde reside práctico y el origen de datos externo.
 * Enhan: Algunos mensajes de excepción de errores de ejecución de sentencias SQL presentan el archivo y la línea aproximada donde ocurren. 
+* Added: Nunca antes el seguimiento al uso de sus aplicaciones fue tan simple.  Ahora el faro rastreador de Google Analytics envía además del uso de su aplicación la ubicación accedida y de esa manera podrá tener múltiples aplicaciones rastreadas a la vez con un solo código de GoogleAnalytics.  Para esto y el seguimiento que cada desarrollador puede hacer al uso de su aplicación a través de Analytics se dispuso la estructura de URL así: /Practico/[SuDominio]/ACT/[SuAccion]/SCR/[SuScript]
 "
 
 ########################################################################
