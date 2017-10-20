@@ -821,26 +821,26 @@ if ($PCO_Accion=="editar_formulario")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(46);
+					OcultarCampos(47);
 					// Muestra campos segun tipo de objeto
-					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,14,17,25,36,37,44,45,46");
-					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25,36,37,44,45,46");
-					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,5,6,7,8,9,10,14,15,17,36,37,44,45,46");
-					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17,36,37,46");
-					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,6,7,8,9,10,12,15,17,18,19,20,35,36,37,45,46");
-					if (tipo_objeto_activo=="lista_radio") VisualizarCampos("1,2,7,8,9,10,17,18,19,20,35,36,37,45,46");
-					if (tipo_objeto_activo=="casilla_check") VisualizarCampos("1,2,4,9,17,36,42,46");
-					if (tipo_objeto_activo=="etiqueta")   VisualizarCampos("9,17,21,36,46");
-					if (tipo_objeto_activo=="url_iframe")   VisualizarCampos("9,14,15,17,22,24,36,37,46");
-					if (tipo_objeto_activo=="informe")   VisualizarCampos("9,17,23,24,36,46");
-					if (tipo_objeto_activo=="deslizador")   VisualizarCampos("1,2,4,7,8,9,17,26,36,37,45,46");
-					if (tipo_objeto_activo=="campo_etiqueta")   VisualizarCampos("1,2,4,9,17,14,15,27,36,45,46");
-					if (tipo_objeto_activo=="archivo_adjunto")   VisualizarCampos("1,2,7,8,9,10,17,28,29,36,37,45,46");
-					if (tipo_objeto_activo=="objeto_canvas")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,30,31,36,45,46");
-					if (tipo_objeto_activo=="objeto_camara")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,31,36,45,46");
-                    if (tipo_objeto_activo=="form_consulta")   VisualizarCampos("9,17,24,32,33,34,36,46");
-                    if (tipo_objeto_activo=="boton_comando")   VisualizarCampos("1,9,36,37,38,39,40,41,43,46");
-					if (tipo_objeto_activo=="area_responsive") VisualizarCampos("1,2,6,9,15,16,17,36,46");
+					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,14,17,25,36,37,44,45,46,47");
+					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25,36,37,44,45,46,47");
+					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,5,6,7,8,9,10,14,15,17,36,37,44,45,46,47");
+					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17,36,37,46,47");
+					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,6,7,8,9,10,12,15,17,18,19,20,35,36,37,45,46,47");
+					if (tipo_objeto_activo=="lista_radio") VisualizarCampos("1,2,7,8,9,10,17,18,19,20,35,36,37,45,46,47");
+					if (tipo_objeto_activo=="casilla_check") VisualizarCampos("1,2,4,9,17,36,42,46,47");
+					if (tipo_objeto_activo=="etiqueta")   VisualizarCampos("9,17,21,36,46,47");
+					if (tipo_objeto_activo=="url_iframe")   VisualizarCampos("9,14,15,17,22,24,36,37,46,47");
+					if (tipo_objeto_activo=="informe")   VisualizarCampos("9,17,23,24,36,46,47");
+					if (tipo_objeto_activo=="deslizador")   VisualizarCampos("1,2,4,7,8,9,17,26,36,37,45,46,47");
+					if (tipo_objeto_activo=="campo_etiqueta")   VisualizarCampos("1,2,4,9,17,14,15,27,36,45,46,47");
+					if (tipo_objeto_activo=="archivo_adjunto")   VisualizarCampos("1,2,7,8,9,10,17,28,29,36,37,45,46,47");
+					if (tipo_objeto_activo=="objeto_canvas")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,30,31,36,45,46,47");
+					if (tipo_objeto_activo=="objeto_camara")   VisualizarCampos("1,2,7,8,9,10,14,15,17,24,31,36,45,46,47");
+                    if (tipo_objeto_activo=="form_consulta")   VisualizarCampos("9,17,24,32,33,34,36,46,47");
+                    if (tipo_objeto_activo=="boton_comando")   VisualizarCampos("1,9,36,37,38,39,40,41,43,46,47");
+					if (tipo_objeto_activo=="area_responsive") VisualizarCampos("1,2,6,9,15,16,17,36,46,47");
 					//Vuelve a centrar el formulario de acuerdo al nuevo contenido
 					AbrirPopUp("FormularioCampos");
 				}
@@ -1768,6 +1768,15 @@ if ($PCO_Accion=="editar_formulario")
                                 <input type="text" name="personalizacion_tag" class="form-control input-sm" value="<?php echo @$registro_campo_editar["personalizacion_tag"]; ?>" placeholder="<?php echo $MULTILANG_FrmTagPersonalizado; ?>: BootStrap o Customizado"  OnInput="ActualizarEstilo_botoncomando_vista_previa(); ActualizarEstilo_listaopciones_vista_previa(); ">
                                 <span class="input-group-addon">
                                     <a href="#"  data-toggle="tooltip" data-html="true" data-placement="auto" title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_FrmDesTagPersonalizado; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                                </span>
+                            </div>
+						</div>
+
+						<div id='campo47' style="display:none;">
+                            <div class="form-group input-group">
+                                <input type="text" name="clase_contenedor" class="form-control input-sm" value="<?php echo @$registro_campo_editar["clase_contenedor"]; ?>" placeholder="<?php echo $MULTILANG_FrmClaseContenedor; ?>">
+                                <span class="input-group-addon">
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmClaseContenedorDes; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>

@@ -644,6 +644,8 @@
 	$MULTILANG_FrmValida9='S&oacute;lo n&uacute;meros 0-9 (enteros)';
 	$MULTILANG_FrmValida10='S&oacute;lo los indicados en el campo de validaci&oacute;n extra';
 	$MULTILANG_FrmNombreHTML='Advertencia: Este valor es utilizado para generar el identificador &uacute;nico del elemento en HTML y a partir de &eacute;l generar autom&aacute;ticamente todos los eventos de los controles y herramientas vinculados a su formulario.  Si usted cambia este valor podr&iacute;a perder aquella programaci&oacute;n espec&iacute;fica de eventos y JavaScript en general que haya realizado con anterioridad a su cambio.';
+    $MULTILANG_FrmClaseContenedor='Clase CSS del Contenedor';
+    $MULTILANG_FrmClaseContenedorDes='Permite indicar si el contenedor del objeto cuenta con alguna clase CSS nativa o de bootstrap especifica para ser aplicada al momento de diagramar el control en pantalla.';
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

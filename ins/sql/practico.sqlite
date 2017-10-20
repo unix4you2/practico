@@ -153,7 +153,8 @@ CREATE TABLE core_formulario_objeto (
   valor_placeholder text DEFAULT '',
   ocultar_etiqueta integer DEFAULT 0,
   id_html text DEFAULT '',
-  validacion_extras text DEFAULT ''
+  validacion_extras text DEFAULT '',
+  clase_contenedor text DEFAULT ''
   
 );
 

@@ -4955,7 +4955,7 @@ $('#SampleElement').load('YourURL');
                                                                                     $ComplementoDisenoElemento=agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,"ComplementoDisenoElemento");
                                                                                     $ComplementoDisenoMarcoOpciones=agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,"ComplementoDisenoMarcoOpciones");
                                                                                 }
-                                                                            echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'"> '.$ComplementoDisenoMarcoOpciones;
+                                                                            echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'" class="'.$registro_campos["clase_contenedor"].'" > '.$ComplementoDisenoMarcoOpciones;
                                                                             // Formatea cada campo de acuerdo a su tipo
                                                                             // CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas abajo tambien
                                                                             $tipo_de_objeto=@$registro_campos["tipo"];
@@ -5044,7 +5044,7 @@ $('#SampleElement').load('YourURL');
                                                                 $ComplementoDisenoElemento=agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,"ComplementoDisenoElemento");
                                                                 $ComplementoDisenoMarcoOpciones=agregar_funciones_edicion_objeto($registro_campos,$registro_formulario,"ComplementoDisenoMarcoOpciones");
                                                             }
-                                                        echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'" class="table-responsive" style="border-width: 0px; margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;">'.$ComplementoDisenoMarcoOpciones.'
+                                                        echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'" class="'.$registro_campos["clase_contenedor"].'" >'.$ComplementoDisenoMarcoOpciones.'
                                                         <table class="table table-condensed btn-xs '.$estilo_bordes.'" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;  padding: 0px; border-spacing: 0px; width:100%; "><tr><td>';
                                                         $tipo_de_objeto=@$registro_campos["tipo"];
                                                         if ($tipo_de_objeto=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
