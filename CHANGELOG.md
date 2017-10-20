@@ -7,6 +7,76 @@
             |___/ 
 ```
 
+## Versión 18.1 (2017-10-22)
+* Added: Ahora los controles de formulario presentan informacion básica resumida en modo de diseño sobre tooltip asociado al íncono de información.
+* Added: Los controles embebidos en formularios del tipo informe o formulario de consulta permiten ahora saltar a la edición de éstos directamente desde la edición de su formulario padre mediante un botón en la barra de herramientas del control.
+* Added: Ahora los gráficos de Dona interpretan y agregan los valores pre y pos ingresados para las donas.
+* Added: Los controles de datos de tipo lista de seleccion ahora permiten establecer dentro de sus propiedades si el control inicia o no como solo lectura
+* Added: Ahora la pantalla de acceso puede ser configurada para utilizar captchas visuales, facilitando su uso en dispositivos moviles. 
+* Added: Los campos de tipo archivo adjunto sobre formularios ahora soportan las propiedades de Visible y Obligatorio.
+* Added: La personalización de logos en el encabezado y al momento de login puede ser realizada directamente por el panel de configuración.
+* Added: Los formularios permiten ahora especificar cuál será el nombre o id de HTML asignado al mismo.  De esa manera varios formularios pueden convivir en el mismo momento en pantalla manteniendo sus acciones separadas.
+* Added: Ahora los nombres de tabla en informes pueden soportar variables PHP en notacion {$Variable} lo que permite flexibilidad en construcción de consultas dinámicas desde variables del sistema o definidas por el usuario.
+* Added: Los botones de comando en informes permiten ahora establecer su etiqueta como una imágen y también el texto agregando la palabra especial _TEXTOIZQ_ _TEXTODER_ al campo de imagen donde dependiendo de la ubicacion de la palabra clave se mostrará el texto sobre el botón (Izquierda o derecha).
+* Added: Etiquetas de botones en acciones de informes y sus textos de confirmacion soportan ahora variables PHP en notacion {$Variable}
+* Added: Los correos de autoregistro enviados por el sistema ahora contienen un enlace para facilitar el acceso al mismo sin que el usuario deba redigitar los datos.
+* Added: Las columnas de informes permiten especificar títulos arbitrarios y no derivados de la consulta al motor de bases de datos.  Esto permite incluso agregar formatos HTML, imágenes, etc. a los títulos de columna.  Adicionalmente, este tipo de títulos soportan traducción y variables PHP en notacion {$Variable} para aplicaciones multi-idioma.
+* Added: Ahora los informes permiten especificar conexiones y orígenes de datos alternos.  Ideal cuando se desean crear paneles unificados, informes y demás operaciones desde diferentes orígenes de datos, servidores o motores de bases de datos diferentes al predeterminado del framework.  Tenga en cuenta que cuando se utilizan motores externos se pueden tener tiempos de respuesta aumentados según su velocidad de conexión entre el sistema donde reside práctico y el origen de datos externo.
+* Added: Nunca antes el seguimiento al uso de sus aplicaciones fue tan simple.  Ahora el faro rastreador de Google Analytics envía además del uso de su aplicación la ubicación accedida y de esa manera podrá tener múltiples aplicaciones rastreadas a la vez con un solo código de GoogleAnalytics.  Para esto y el seguimiento que cada desarrollador puede hacer al uso de su aplicación a través de Analytics se dispuso la estructura de URL así: /Practico/[SuDominio]/ACT/[SuAccion]/SCR/[SuScript]
+* Added: Agregado archivo inicial de soporte para idioma francés.
+* Added: Los controles de formulario permiten establecer una clase CSS personalizada o de bootstrap para sus contenedores.  Esto permite generar nuevos diseños enriquecidos de interfaz y maquetaciones sobre cada formulario.  Aquellos que presenten comportamientos de autoredimensionado de controles en fila unica pueden agregar la clase table-responsive para obtener compatibilidad hacia atrás.  Esto permite además redefinir y personalizar la maquetación completa de un formulario por columnas o cualquier otro estilo dado por la clase dinámicamente.  Ej:  col col-xs-4 col-md-4 col-sm-4
+* Enhan: Eliminados parámetros de ancho y alto de informes durante su diseño pues ahora se aplican sólo diseños responsive.
+* Enhan: Actualizada version de JavaScript Vector Library Raphael 2.1.2 a 2.2.1  
+* Enhan: Actualizada version de Morris Library v0.5.0 a v0.5.1
+* Enhan: La funcion PCOJS_ValidarCamposYProcesarFormulario ha cambiado para ofrecer otros escenarios con más posibilidades como formularios cohexistiendo en la misma página con diferentes acciones.  Ahora se deben enviar los parámetros de nombre del formulario (id html) y si se desea o no anular su envío cuando se hagan llamados manuales a esta función a través del código.  Programadores que deseen mantener compatibilidad hacia atrás con llamados manuales podrán cambiar su llamado de función a este formato PCOJS_ValidarCamposYProcesarFormulario(FormularioProcesar,AnularSubmit)
+* Enhan: Se simplifica el proceso de instalacion solicitando menos valores en configuracion que posteriormente serán configurados por el panel de aplicación.
+* Enhan: El envio de correos ahora se hace utilizando como reply la direccion del host o nombre de servidor que hospeda la aplicacion. 
+* Enhan: Optimizacion en funciones de importacion de informes y formularios desde especificaciones XML.  Funciones independientes pueden realizar ahora el trabajo de manera autonoma y sin verificaciones de versionamiento: PCO_ImportarXMLInforme($xml_importado), PCO_ImportarXMLFormulario($xml_importado)
+* Enhan: Algunos mensajes de excepción de errores de ejecución de sentencias SQL presentan el archivo y la línea aproximada donde ocurren. 
+* Fixed: Alineación vertical del botón de edicion en la barra de herramientas de controles de formularios.
+* Fixed: Clonacion de formularios e informes considera ahora los pesos y los id de los elementos a la hora de generar los nuevos objetos de manera que se conserve el orden de los mismos en el nuevo elemento.
+* Fixed: Se elimina retorno de valor para la función de validación de campos en el envío de formularios para evitar problemas de compatibilidad con Firefox.  Reportado por @rafaelposadaf
+* Fixed: Ahora los datatables respetan las posibles cláusulas ORDER BY incluidas en los Queries de los informes al evitar su ordenamiento inicial automáticamente.
+* Fixed: Procesos de actualización automática de valores sobre registros contemplan ahora escapar las cadenas correctamente para evitar caracteres especiales, interrogantes y similares.
+* Fixed: Eliminados parámetros innecesarios durante llamado a función de creación de botones de comando.
+
+## Versión 17.9 (2017-09-02)
+* Enhan:  Informes en modo de diseño presentan el ID en la parte superior por comodidad de Rafagol.
+* Added:  Información resumida de las tareas en el tablero de Kanban sobre el dashboard del admin. 
+* Enhan:  Los usuarios definidos como plantilla son ahora restringidos para hacer login al sistema.  Así se mantiene la integridad de permisos sobre los mismos.
+* Added:  Se agrega botón de acceso directo para edición de los formularios en usuarios diseñadores de aplicación o administradores.
+* Added:  Ahora los botones de edición de eventos sobre controles presentan un resúmen de los tipos de evento asociados al control actualmente.
+* Added:  Se agrega botón de acceso directo para edición de los informes en usuarios diseñadores de aplicación o administradores.
+* Added:  La generacion de eventos para controles de formulario incluye ahora un encabezado con plantillas de documentacion en notación NaturalDocs.
+* Added:  Ahora las pestanas de formulario con etiqueta PCO_NoVisible no seran presentadas a usuarios estandar.  Solamente apareceran a los diseñadores de aplicacion.
+* Added:  Se han unificado los campos de etiqueta de informes gráficos a sólo el campo de etiqueta para el eje X asignado por la primer serie de gráfico cuando se manejen múltiples series.
+* Enhan:  **ATENCION!!** Librería Practico Libchart ha sido reemplazada.  Ahora todos los gráficos del sistema son generados mediante librerías Morris y Raphael dando mayor interactividad y mejorando notablemente la presentación.  Los gráficos anteriores deberían conservar su compatibilidad, sin embargo tenga en cuenta que esto puede cambiar la apariencia de su aplicación por lo que se recomienda que verifique la operatividad de sus informes de tipo gráfico pues ya se ajustan además al tamaño de su contenedor.
+* Added:  Compatibilidad de gráficos y transparencias para diferentes temas de aplicación.
+* Enhan:  Mejorado el asistente para generación de informes gráficos.  Se agrega además la posibilidad de personalizar la apariencia de algunas partes del gráfico generado.
+* Enhan:  Se amplían los tipos de gráfico (algunos apilables) a Dona, Linea, Áreas y Barras.
+* Fixed:  Boton de ocultamiento de opciones sobre controles de formulario devuelve un [object Object] en navegadores Firefox y derivados.  Se convierten a función los métodos asociados.
+* Enhan:  Suprimirdas las librerías asociadas a Practico-Libchart. Ahorro de 392Kb por cada cargue.
+
+## Versión 17.8 (2017-08-02)
+* Added: Tema gráfico basado en Material Design de Google 0.5.10 para Bootstrap
+* Added: Marco de advertencia para aquellos usuarios que no se encuentren con JavaScript habilitado en sus navegadores 
+* Added: Los siguientes elementos soportan ahora variables en notación {$PHP} para facilitar el diseño de aplicaciones multi-idioma: botones en la barra de acciones de formulario, titulos de formulario, titulos de informes, titulos y textos de ayuda en formularios, descripción de informes, todos los titulos y textos de ayuda para controles de formulario, textos de confirmación en botones de comando, textos de confirmación sobre botones de acción en informes.
+* Added: Tema gráfico Amelia.
+* Fixed: Corrección en aplicación de estilos gráficos para fondos de aplicación.
+* Enhan: Al hacer clic sobre el icono home de la barra superior se limpia cualquier contenido de la URL redireccionando al index.php
+* Added: Nueva opcion de validacion de numeros sin punto decimal para controles de formulario
+* Added: Los controles con validaciones soportan ahora cadenas con caracteres extra permitidos para el ingreso de datos.
+* Enhan: A partir de ahora campos validados como solo letras no contendran el caracter punto.  Si se desea tener el caracter punto dentro del set permitido se deberá agregar a la personalización del control sobre los caracteres extra permitidos.
+* Enhan: Mejoradas algunas ayudas y tooltips del sistema.
+* Fixed: Agregado el parametro PCOJS_Evento por defecto a todos los eventos JS generados.
+* Added: Validacion de entrada para campos de texto largo (textareas).
+* Added: Nuevo módulo para manejo de tableros Kanban con el fin de apoyar procesos de desarrollo implicitos de la herramienta y las aplicaciones de cada usuario.
+* Enhan: Ahora la funcion existente de validacion de campos en formularios permite anular el envío del formulario mediante un parámetro extra que anula esa funcionalidad.  Util si se desea interceptar la operación o realizar validaciones de manera independiente.
+* Added: Durante la creación de informes se puede establecer ahora el tamaño de página predeterminado (cuántos registros presentar por página).
+* Added: Los botones de acción para registros en informes ahora permiten llamar a otros informes por su ID.
+* Added: Ahora se puede especificar cáculos de suma automáticos para alguna columna de los reportes que soportan datatables y presentarlos como resúmen al final de cada uno tanto por página como por total general.
+* Fixed: Acceso a mod/pcoder es ahora restringido para usuarios que no son tipo administrador o diseñador de aplicación.
+
 ## Versión 17.7 (2017-07-02)
 * Added: Posibilidad de seleccionar el tema grafico para el framework gracias a bootswatch
 * Enhan: Tema predeterminado de bootstrap es ahora tomado desde el archivo optimizado
