@@ -29,7 +29,6 @@ inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/bootstrap/js/practico*
 inc/bootstrap/js/plugins/morris/*
-inc/bootstrap/js/plugins/morris/raphael.min.js
 "
 
 #[ArchivosObligatorios] Separados por espacio

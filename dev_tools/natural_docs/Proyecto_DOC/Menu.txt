@@ -115,6 +115,7 @@ Group: Modulos Principales  {
       File: Idioma espanol  (inc/practico/idiomas/es.php)
       File: Idioma hindi  (inc/practico/idiomas/hi.php)
       File: Idioma ingles  (inc/practico/idiomas/en.php)
+      File: Idioma ingles  (inc/practico/idiomas/fr.php)
       File: Idioma portugues  (inc/practico/idiomas/pt.php)
       File: Libreria Definicion de base de datos  (inc/practico/def_basedatos.php)
       }  # Group: Inc
