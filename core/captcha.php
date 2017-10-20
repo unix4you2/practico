@@ -46,7 +46,7 @@
 		}
 	include("configuracion.php");
 
-	if ($TipoCaptchaLogin=="tradicional")
+	if ($TipoCaptchaLogin=="tradicional" || $TipoCaptchaLogin=="")
 	    {
         	$longitud=$CaracteresCaptcha; // A definir como parametro
         	$fuente=1;

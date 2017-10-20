@@ -45,10 +45,7 @@ LogCambios="
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-ALTER TABLE core_formulario ADD id_html varchar(255) DEFAULT 'datos';
-ALTER TABLE core_informe_campos ADD titulo_arbitrario varchar(255) DEFAULT '';
-ALTER TABLE core_informe ADD conexion_origen_datos varchar(255) DEFAULT '';
-ALTER TABLE core_formulario_objeto ADD clase_contenedor varchar(255) DEFAULT '';
+
 "
 
 ########################################################################
