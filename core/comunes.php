@@ -2636,7 +2636,7 @@ function ventana_login()
 
 									<?php
 									    //Si el captcha es tradicional
-										if ($CaracteresCaptcha>0 && $TipoCaptchaLogin=="tradicional")
+										if ($CaracteresCaptcha>0 && ($TipoCaptchaLogin=="tradicional" || $TipoCaptchaLogin==""))
 											{
 											    echo '<div class="well">
             										<div class="form-group col-xs-12">
