@@ -42,7 +42,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 * Added: Ahora los controles de formulario presentan informacion básica resumida en modo de diseño sobre tooltip asociado al íncono de información.
 * Added: Los controles embebidos en formularios del tipo informe o formulario de consulta permiten ahora saltar a la edición de éstos directamente desde la edición de su formulario padre mediante un botón en la barra de herramientas del control.
-* Added: Ahora los gráficos de Dona interpretan y agregan los valores pre y pos ingresados para la torta.
+* Added: Ahora los gráficos de Dona interpretan y agregan los valores pre y pos ingresados para las donas.
 * Added: Los controles de datos de tipo lista de seleccion ahora permiten establecer dentro de sus propiedades si el control inicia o no como solo lectura
 * Added: Ahora la pantalla de acceso puede ser configurada para utilizar captchas visuales, facilitando su uso en dispositivos moviles. 
 * Added: Los campos de tipo archivo adjunto sobre formularios ahora soportan las propiedades de Visible y Obligatorio.
@@ -56,6 +56,7 @@ LogCambios="
 * Added: Ahora los informes permiten especificar conexiones y orígenes de datos alternos.  Ideal cuando se desean crear paneles unificados, informes y demás operaciones desde diferentes orígenes de datos, servidores o motores de bases de datos diferentes al predeterminado del framework.  Tenga en cuenta que cuando se utilizan motores externos se pueden tener tiempos de respuesta aumentados según su velocidad de conexión entre el sistema donde reside práctico y el origen de datos externo.
 * Added: Nunca antes el seguimiento al uso de sus aplicaciones fue tan simple.  Ahora el faro rastreador de Google Analytics envía además del uso de su aplicación la ubicación accedida y de esa manera podrá tener múltiples aplicaciones rastreadas a la vez con un solo código de GoogleAnalytics.  Para esto y el seguimiento que cada desarrollador puede hacer al uso de su aplicación a través de Analytics se dispuso la estructura de URL así: /Practico/[SuDominio]/ACT/[SuAccion]/SCR/[SuScript]
 * Added: Agregado archivo inicial de soporte para idioma francés.
+* Added: Los controles de formulario permiten establecer una clase CSS personalizada o de bootstrap para sus contenedores.  Esto permite generar nuevos diseños enriquecidos de interfaz y maquetaciones sobre cada formulario.
 * Enhan: Eliminados parámetros de ancho y alto de informes durante su diseño pues ahora se aplican sólo diseños responsive.
 * Enhan: Actualizada version de JavaScript Vector Library Raphael 2.1.2 a 2.2.1  
 * Enhan: Actualizada version de Morris Library v0.5.0 a v0.5.1

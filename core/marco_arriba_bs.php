@@ -52,7 +52,7 @@
         
         if ($Tema_PracticoFramework!="material")
             {
-                echo '<link href="inc/bootstrap/css/tema_'.$Tema_PracticoFramework.'.min.css" rel="stylesheet"  media="screen">';
+                echo '<link href="inc/bootstrap/css/tema_'.$Tema_PracticoFramework.'.min.css" rel="stylesheet" id="tema-base-bootstrap" media="screen">';
                 //Si el tema es el predeterminado conserva efectos de controles en versiones previas a 17.4-001
                 if ($Tema_PracticoFramework=="bootstrap")
                     echo '<link href="inc/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"  media="screen">';
@@ -89,7 +89,6 @@
     <link href="inc/bootstrap/css/plugins/simple-sidebar.css" rel="stylesheet">
 
     <link href="inc/summernote/summernote.css" rel="stylesheet">
-
     <!-- CSS Personalizado (Plantilla y Practico) -->
     <?php 
         //Evita el cargue si se trata de una opcion especifica
