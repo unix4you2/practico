@@ -35,6 +35,7 @@
     chmod 777 bkp
     chmod 777 core
     chmod 777 tmp
+    chmod 777 xml
     chmod 777 ins
     chmod 777 mod/pcoder/demos/*
     chmod -R 777 mod/pcc_erp/*
