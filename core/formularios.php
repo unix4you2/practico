@@ -3130,7 +3130,7 @@ if ($PCO_Accion=="definir_copia_formularios")
 */
 function PCO_ImportarXMLFormulario($xml_importado)
     {
-        global $_SeparadorCampos_,$TablasCore,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
+        global $ListaCamposSinID_evento_objeto,$_SeparadorCampos_,$TablasCore,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
 
 				//Si es tipo estatico elimina el formulario existente con el mismo ID
 				$ListaCamposParaID="";
@@ -3205,7 +3205,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
                                 if ($RegistroEvento_objeto==$IDOriginalObjeto)
                                     {
     									$CadenaValoresEventos="{$idObjetoInsertadoParaEvento}{$_SeparadorCampos_}{$RegistroEvento_evento}{$_SeparadorCampos_}{$RegistroEvento_javascript}";
-    									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."evento_objeto ($ListaCamposSinID_evento_objeto) VALUES (?,?,?) ","$CadenaValoresEventos");    
+    									ejecutar_sql_unaria("INSERT INTO ".$TablasCore."evento_objeto ($ListaCamposSinID_evento_objeto) VALUES (?,?,?) ","$CadenaValoresEventos"); 
                                     }
         					}
 					}
