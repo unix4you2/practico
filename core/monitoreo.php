@@ -301,7 +301,14 @@
             $Palabras = explode(' ',trim($Sensor["comando"]));
             if (strtoupper($Palabras[0])=="SELECT")
                 {
-        			$registro_sensor=ejecutar_sql($Sensor["comando"])->fetch();
+                    //Si usa una conexion externa usa su configuracion
+                    if($Sensor["conexion_origen_datos"]!="")
+                        {
+                            global ${$Sensor["conexion_origen_datos"]};
+                            $registro_sensor=ejecutar_sql($Sensor["comando"],"",${$Sensor["conexion_origen_datos"]})->fetch();
+                        }
+                    else
+                        $registro_sensor=ejecutar_sql($Sensor["comando"])->fetch();
         			$valor_sensor=trim($registro_sensor[0]);
                 }
             else
@@ -399,39 +406,55 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	function PresentarEstadoSQL($ComandoSQL,$color_fondo_estado_sql,$color_texto_estado_sql)
+	function PresentarEstadoSQL($IDRegistroMonitor,$color_fondo_estado_sql,$color_texto_estado_sql)
 		{
 			/*
 				Function: PresentarEstadoSQL
 				Ejecuta un query SQL y presenta el resultado formateado como tabla
 			*/
-			global $Imagen_generica_sql,$Tamano_iconos,$MULTILANG_MonCommSQL;
-			$SalidaFinalInforme='<table class="table table-responsive table-condensed btn-xs table-unbordered table-hover" style="font-family: Monospace, Sans-serif, Terminal, Tahoma;">';
+			global $Imagen_generica_sql,$Tamano_iconos,$MULTILANG_MonCommSQL,$ListaCamposSinID_monitoreo,$TablasCore;
 
+			//Busca los datos del monitor
+			$ComandoSQL=ejecutar_sql("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
+
+            //Si usa una conexion externa usa su configuracion
+            if($ComandoSQL["conexion_origen_datos"]!="")
+                global ${$ComandoSQL["conexion_origen_datos"]};
+
+			$SalidaFinalInforme='<table class="table table-responsive table-condensed btn-xs table-unbordered table-hover" style="font-family: Monospace, Sans-serif, Terminal, Tahoma;">';
 			$estilo_caja_comandos="panel-warning";
 
 			// Busca e Imprime encabezados de columna si no se tienen que ocultar
-					$resultado_columnas=ejecutar_sql($ComandoSQL["Comando"]);
-					$numero_columnas=0;
-					$SalidaFinalInforme.='<thead><tr>';
-					foreach($resultado_columnas->fetch(PDO::FETCH_ASSOC) as $key=>$val)
-						{
-							if ($ComandoSQL["OcultarTitulos"]==0)
-								{
-									$SalidaFinalInforme.= '<th align="LEFT">'.ucwords(strtolower($key)).'</th>';
-								}
-							$numero_columnas++;
-						}
-					$SalidaFinalInforme.="</tr></thead>";
+                if($ComandoSQL["conexion_origen_datos"]!="")
+                    $resultado_columnas=ejecutar_sql($ComandoSQL["comando"],"",${$ComandoSQL["conexion_origen_datos"]});
+                else
+    			    $resultado_columnas=ejecutar_sql($ComandoSQL["comando"]);
+				$numero_columnas=0;
+				$SalidaFinalInforme.='<thead><tr>';
+				foreach($resultado_columnas->fetch(PDO::FETCH_ASSOC) as $key=>$val)
+					{
+						if ($ComandoSQL["ocultar_titulos"]==0)
+							{
+								$SalidaFinalInforme.= '<th align="LEFT">'.ucwords(strtolower($key)).'</th>';
+							}
+						$numero_columnas++;
+					}
+				$SalidaFinalInforme.="</tr></thead>";
 
 			//Ejecuta el query
-			$consulta_ejecucion=ejecutar_sql($ComandoSQL["Comando"]);
+            //Si usa una conexion externa usa su configuracion
+            if($ComandoSQL["conexion_origen_datos"]!="")
+                $consulta_ejecucion=ejecutar_sql($ComandoSQL["comando"],"",${$ComandoSQL["conexion_origen_datos"]});
+            else
+			    $consulta_ejecucion=ejecutar_sql($ComandoSQL["comando"]);
+			
+			//Presenta resultados
 			while($registro_informe=$consulta_ejecucion->fetch())
 				{
 					$SalidaFinalInforme.= '<tr>';
 					for ($i=0;$i<$numero_columnas;$i++)
 						{
-							$SalidaFinalInforme.= '<td style="font-family: Monospace, Sans-serif, Terminal, Tahoma; font-size: '.$ComandoSQL["TamanoResult"].'px;">'.$registro_informe[$i].'</td>';
+							$SalidaFinalInforme.= '<td style="font-family: Monospace, Sans-serif, Terminal, Tahoma; font-size: '.$ComandoSQL["tamano_resultado"].'px;">'.$registro_informe[$i].'</td>';
 						}
 					$SalidaFinalInforme.= '</tr>';
 				}
@@ -440,7 +463,7 @@
 			$icono_maquina=$Imagen_generica_sql;
 
 			echo '
-				<div class="col-lg-'.$ComandoSQL["Ancho"].' col-md-'.$ComandoSQL["Ancho"].'">
+				<div class="col-lg-'.$ComandoSQL["ancho"].' col-md-'.$ComandoSQL["ancho"].'">
 					<div class="panel '.$estilo_caja_comandos.'">
 						<div class="panel-heading">
 							<div class="row">
@@ -448,7 +471,7 @@
 									<i class="fa fa-database fa-2x "></i>					
 								</div>
 								<div class="col-xs-10 text-right">
-									<div>'.$ComandoSQL["Nombre"].'<br>
+									<div>'.$ComandoSQL["nombre"].'<br>
 									<font size=1>('.$MULTILANG_MonCommSQL.')</font>
 									</div>
 								</div>
@@ -684,7 +707,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
 			if ($mensaje_error=="")
 				{
 					// Guarda los datos del comando de monitoreo
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."monitoreo (".$ListaCamposSinID_monitoreo.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)","$tipo$_SeparadorCampos_$pagina$_SeparadorCampos_$peso$_SeparadorCampos_$nombre$_SeparadorCampos_$host$_SeparadorCampos_$puerto$_SeparadorCampos_$tipo_ping$_SeparadorCampos_$saltos$_SeparadorCampos_$comando$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$tamano_resultado$_SeparadorCampos_$ocultar_titulos$_SeparadorCampos_$path$_SeparadorCampos_$correo_alerta$_SeparadorCampos_$alerta_sonora$_SeparadorCampos_$milisegundos_lectura$_SeparadorCampos_$alerta_vibracion$_SeparadorCampos_$ultimo_estado$_SeparadorCampos_$valor_minimo$_SeparadorCampos_$valor_maximo");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."monitoreo (".$ListaCamposSinID_monitoreo.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)","$tipo$_SeparadorCampos_$pagina$_SeparadorCampos_$peso$_SeparadorCampos_$nombre$_SeparadorCampos_$host$_SeparadorCampos_$puerto$_SeparadorCampos_$tipo_ping$_SeparadorCampos_$saltos$_SeparadorCampos_$comando$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$tamano_resultado$_SeparadorCampos_$ocultar_titulos$_SeparadorCampos_$path$_SeparadorCampos_$correo_alerta$_SeparadorCampos_$alerta_sonora$_SeparadorCampos_$milisegundos_lectura$_SeparadorCampos_$alerta_vibracion$_SeparadorCampos_$ultimo_estado$_SeparadorCampos_$valor_minimo$_SeparadorCampos_$valor_maximo$_SeparadorCampos_$conexion_origen_datos");
 					auditar("Agrega en monitor: $nombre");
 					echo '
 					<form name="continuar_admin_mon" action="'.$ArchivoCORE.'" method="POST">
@@ -728,7 +751,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
 			if ($mensaje_error=="")
 				{
 					// Actualiza los datos del comando de monitoreo
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."monitoreo SET tipo='$tipo',pagina='$pagina',peso='$peso',nombre='$nombre',host='$host',puerto='$puerto',tipo_ping='$tipo_ping',saltos='$saltos',comando='$comando',ancho='$ancho',alto='$alto',tamano_resultado='$tamano_resultado',ocultar_titulos='$ocultar_titulos',path='$path',correo_alerta='$correo_alerta',alerta_sonora='$alerta_sonora',milisegundos_lectura='$milisegundos_lectura',alerta_vibracion='$alerta_vibracion' WHERE id='$IDRegistroMonitor'");
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."monitoreo SET tipo='$tipo',pagina='$pagina',peso='$peso',nombre='$nombre',host='$host',puerto='$puerto',tipo_ping='$tipo_ping',saltos='$saltos',comando='$comando',ancho='$ancho',alto='$alto',tamano_resultado='$tamano_resultado',ocultar_titulos='$ocultar_titulos',path='$path',correo_alerta='$correo_alerta',alerta_sonora='$alerta_sonora',milisegundos_lectura='$milisegundos_lectura',alerta_vibracion='$alerta_vibracion', conexion_origen_datos='$conexion_origen_datos', valor_minimo='$valor_minimo',valor_maximo='$valor_maximo' WHERE id='$IDRegistroMonitor'");
 					
 					auditar("Actualiza el monitor: $IDRegistroMonitor");
 					echo '
@@ -760,7 +783,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
 	function FormatoMonitor($IDRegistroMonitor)
 		{
 			global $ArchivoCORE,$ListaCamposSinID_monitoreo,$TablasCore,$MULTILANG_MonNuevo,$MULTILANG_Tipo,$MULTILANG_Etiqueta,$MULTILANG_Maquina,$MULTILANG_MonCommShell,$MULTILANG_MonCommSQL,$MULTILANG_Imagen,$MULTILANG_Embebido;
-			global $MULTILANG_Comando,$MULTILANG_MonSensorRango,$MULTILANG_FrmValorMinimo,$MULTILANG_FrmValorMaximo,$MULTILANG_Actualizar,$MULTILANG_Regresar,$MULTILANG_MnuURL,$MULTILANG_InfAlto,$MULTILANG_Ayuda,$MULTILANG_MonDesTipo,$MULTILANG_Pagina,$MULTILANG_Peso,$MULTILANG_Nombre,$MULTILANG_MonSaltos,$MULTILANG_MonMsLectura,$MULTILANG_Agregar,$MULTILANG_IrEscritorio,$MULTILANG_Maquina,$MULTILANG_AplicaPara,$MULTILANG_Tipo,$MULTILANG_Puerto,$MULTILANG_MonMetodo,$MULTILANG_MonCommSQL,$MULTILANG_MonCommShell,$MULTILANG_FrmAncho,$MULTILANG_Imagen,$MULTILANG_Embebido,$MULTILANG_MonTamano,$MULTILANG_Etiqueta,$MULTILANG_MonOcultaTit,$MULTILANG_No,$MULTILANG_Si,$MULTILANG_MonCorreoAlerta,$MULTILANG_MonAlertaSnd,$MULTILANG_MonAlertaVibrar;
+			global $TablasCore,$ListaCamposSinID_replicasbd,$MULTILANG_ConnOrigenDatosDes,$MULTILANG_ConnAdvCambioOrigen,$MULTILANG_ConnPredeterminada,$MULTILANG_ConnOrigenDatos,$MULTILANG_Comando,$MULTILANG_MonSensorRango,$MULTILANG_FrmValorMinimo,$MULTILANG_FrmValorMaximo,$MULTILANG_Actualizar,$MULTILANG_Regresar,$MULTILANG_MnuURL,$MULTILANG_InfAlto,$MULTILANG_Ayuda,$MULTILANG_MonDesTipo,$MULTILANG_Pagina,$MULTILANG_Peso,$MULTILANG_Nombre,$MULTILANG_MonSaltos,$MULTILANG_MonMsLectura,$MULTILANG_Agregar,$MULTILANG_IrEscritorio,$MULTILANG_Maquina,$MULTILANG_AplicaPara,$MULTILANG_Tipo,$MULTILANG_Puerto,$MULTILANG_MonMetodo,$MULTILANG_MonCommSQL,$MULTILANG_MonCommShell,$MULTILANG_FrmAncho,$MULTILANG_Imagen,$MULTILANG_Embebido,$MULTILANG_MonTamano,$MULTILANG_Etiqueta,$MULTILANG_MonOcultaTit,$MULTILANG_No,$MULTILANG_Si,$MULTILANG_MonCorreoAlerta,$MULTILANG_MonAlertaSnd,$MULTILANG_MonAlertaVibrar;
 			
 			//Busca los datos del monitor
 			if ($IDRegistroMonitor!="")
@@ -912,6 +935,25 @@ if ($PCO_Accion=="eliminar_monitoreo")
                         </span>
                     </div>
 
+                    <label for="conexion_origen_datos">'.$MULTILANG_ConnOrigenDatos.':</label>
+                    <div class="form-group input-group">
+                        <select id="conexion_origen_datos" name="conexion_origen_datos" class="form-control" >
+        					<option value="">'.$MULTILANG_ConnPredeterminada.'</option>';
+        						$consulta_conexiones=ejecutar_sql("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE tipo_replica=0 ORDER BY nombre");
+        						while($registro_conexiones = $consulta_conexiones->fetch())
+        						    {
+        						        $seleccion_campo="";
+        								if (@$Maquina["conexion_origen_datos"]==$registro_conexiones["nombre"])
+        									$seleccion_campo="SELECTED";
+        							    echo '<option value="'.$registro_conexiones["nombre"].'" '.$seleccion_campo.' >(Id.'.$registro_conexiones["id"].') '.$registro_conexiones["nombre"].' (Host:'.$registro_conexiones["servidorbd"].' BD:'.$registro_conexiones["basedatos"].')</option>';
+        						    }
+                    echo '
+                        </select>
+                        <span class="input-group-addon">
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_ConnOrigenDatosDes.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_MonCommSQL.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                        </span>
+                    </div>
 
 					<label for="ancho">'.$MULTILANG_FrmAncho.':</label>
 					<div class="form-group input-group">
@@ -1319,8 +1361,7 @@ if ($PCO_Accion=="ver_monitoreo")
 										//Evalua elementos tipo Consulta SQL
 										if ($registro["tipo"]=="ComandoSQL")
 											{
-												$ComandosSQL[]=array(Nombre => $registro["nombre"],	Comando=>$registro["comando"],	TamanoResult=>$registro["tamano_resultado"],	OcultarTitulos=>$registro["ocultar_titulos"],	Ancho=>$registro["ancho"]);
-												PresentarEstadoSQL($ComandosSQL[count($ComandosSQL)-1],$color_fondo_estado_sql,$color_texto_estado_sql);
+												PresentarEstadoSQL($registro["id"],$color_fondo_estado_sql,$color_texto_estado_sql);
 											}
 										//Evalua elementos tipo Imagen
 										if ($registro["tipo"]=="Imagen")

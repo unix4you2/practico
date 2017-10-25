@@ -40,5 +40,5 @@
 	$ListaCamposSinID_parametros='nombre_empresa_largo,nombre_empresa_corto,nombre_aplicacion,version,fecha_lanzamiento,licencia,creditos,funciones_personalizadas,federado_servidor,federado_usuario,federado_clave,federado_motor,federado_basedatos,federado_tabla,federado_campousuario,federado_campoclave,federado_encripcion,federado_puerto';
 	$ListaCamposSinID_llaves_api='nombre,llave,secreto,uri,dominio_autorizado,ip_autorizada,funciones_autorizadas';
 	$ListaCamposSinID_chat='from,to,message,sent,recd';
-	$ListaCamposSinID_monitoreo='tipo,pagina,peso,nombre,host,puerto,tipo_ping,saltos,comando,ancho,alto,tamano_resultado,ocultar_titulos,path,correo_alerta,alerta_sonora,milisegundos_lectura,alerta_vibracion,ultimo_estado,valor_minimo,valor_maximo';
+	$ListaCamposSinID_monitoreo='tipo,pagina,peso,nombre,host,puerto,tipo_ping,saltos,comando,ancho,alto,tamano_resultado,ocultar_titulos,path,correo_alerta,alerta_sonora,milisegundos_lectura,alerta_vibracion,ultimo_estado,valor_minimo,valor_maximo,conexion_origen_datos';
 	$ListaCamposSinID_replicasbd='nombre,servidorbd,basedatos,usuariobd,passwordbd,motorbd,puertobd,tipo_replica';
