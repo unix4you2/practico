@@ -573,7 +573,7 @@
         <script type="text/javascript">
             PCOJS_ListaCamposValidar="'.$POSTForm_ListaCamposObligatorios.'".split("|");
             PCOJS_ListaTitulosValidar="'.$POSTForm_ListaTitulosObligatorios.'".split("|");
-            function PCOJS_ValidarCamposYProcesarFormulario(FormularioProcesar,AnularSubmit=0)
+            function PCOJS_ValidarCamposYProcesarFormulario(FormularioProcesar="datos",AnularSubmit=0)
                 {
                     MensajeCamposObligatorios="";
                     //Recorre todos los campos de la lista en busca de sus valores

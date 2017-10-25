@@ -71,7 +71,7 @@
 */
 	function PCO_NuevaConexionBD($PCOConnMotorBD,$PCOConnPuertoBD,$PCOConnBaseDatos,$PCOConnServidorBD,$PCOConnUsuarioBD,$PCOConnPasswordBD)
 		{
-			global $MULTILANG_Detalles,$MULTILANG_Basedatos,$MULTILANG_ErrorTiempoEjecucion;
+			global $MULTILANG_Detalles,$MULTILANG_Basedatos,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_TipoMotor,$MULTILANG_Servidor;
 			try
 				{
 					// Crea la conexion de acuerdo al tipo de motor
@@ -144,8 +144,13 @@
 			catch( PDOException $ErrorPDO)
 				{
 					//@include_once("core/comunes.php"); //Incluye la libreria de base al menos para presentar mensaje de error
-					$mensaje_final=$MULTILANG_Basedatos.": ".$MULTILANG_ErrorTiempoEjecucion;
-					echo '<strong>'.$mensaje_final.'</strong><br>'.$MULTILANG_Detalles.':<i> '.$ErrorPDO->getMessage().'</i>';
+					$mensaje_final.="<div class='alert alert-danger alert-dismissible btn-xs' role='alert'>
+					  <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                      </button>
+					<i class='fa fa-database fa-fw fa-3x fa-pull-left text-danger '></i>";
+					$mensaje_final.="<strong>".$MULTILANG_ErrorTiempoEjecucion.":</strong> $MULTILANG_Basedatos <i>$PCOConnBaseDatos</i> $MULTILANG_Servidor <i>$PCOConnServidorBD</i> <br>";
+					echo $mensaje_final."<b>".$MULTILANG_Detalles.':</b><i> '.$ErrorPDO->getMessage().'</i></div>';
 					$hay_error=1; //usada globalmente durante el proceso de instalacion
 				}
 		}
