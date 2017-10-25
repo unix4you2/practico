@@ -379,6 +379,10 @@
                     grafico=Morris.Donut({
                         element: "grafico-sensor-'.$Sensor["id"].'",
                         data: [
+                        ';
+                    //Si el sensor tiene valor de igualdad en maximo y minimo solamente presenta el resultado
+                    if ($Sensor["valor_minimo"] != $Sensor["valor_maximo"])
+                        echo '
                                                 {
                                                     label: "Min",
                                                     value: "'.$Sensor["valor_minimo"].'"
@@ -386,7 +390,8 @@
                                                 {
                                                     label: "Max",
                                                     value: "'.$Sensor["valor_maximo"].'"
-                                                },
+                                                },';
+            echo '
                                                 {
                                                     label: "'.$Sensor["nombre"].'",
                                                     value: "'.$valor_sensor.'"
