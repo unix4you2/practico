@@ -146,7 +146,7 @@
 					//@include_once("core/comunes.php"); //Incluye la libreria de base al menos para presentar mensaje de error
 					$mensaje_final.="<div class='alert alert-danger alert-dismissible btn-xs' role='alert'>
 					  <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
+                        <span aria-hidden='true'><i class='fa fa-eye-slash fa-fw'></i></span>
                       </button>
 					<i class='fa fa-database fa-fw fa-3x fa-pull-left text-danger '></i>";
 					$mensaje_final.="<strong>".$MULTILANG_ErrorTiempoEjecucion.":</strong> $MULTILANG_Basedatos <i>$PCOConnBaseDatos</i> $MULTILANG_Servidor <i>$PCOConnServidorBD</i> <br>";
