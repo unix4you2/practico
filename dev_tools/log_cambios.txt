@@ -35,6 +35,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 * Added: Ahora las conexiones principal, extra o de replicación presentan información adicional de depuración cuando su configuración es incorrecta o no se logra hacer conexión al servidor.
 * Added: Ahora los elementos de monitoreo de tipo base de datos y rango de valores permiten especificar la conexión sobre la cuál realizan sus consultas.
+* Added: Ahora los monitores de tipo rango pueden ser presentados de manera alterna bajo el esquema de máquinas.
 * Enhan: Sensores de rango con valores iguales en máximos y mínimos presentan ahora una dona sin divisiones y su resultado.
 * Fixed: Clonacion de formularios desde XML ignoraba los eventos.
 * Fixed: Los objetos de monitoreo en rangos actualizan correctamente sus valores mínimo y máximo esperados.

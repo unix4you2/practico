@@ -169,6 +169,43 @@
 
 /* ################################################################## */
 /* ################################################################## */
+	function DibujarEstadoMaquina($Maquina,$estado_final,$Separador_DosPuntos,$estilo_caja_estado,$estilo_texto_estado)
+		{
+		    global $IconoAlertaSonora,$IconoAlertaVibracion;
+			echo '
+				<!--<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">-->
+				<div class="col-md-2 col-lg-2">
+					<div class="panel '.$estilo_caja_estado.'">
+						<div class="panel-heading">
+							<div class="row">
+								<!--<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">-->
+								<div class="col-md-1 col-lg-1">
+									<i class="fa fa-desktop fa-2x "></i>
+								</div>
+								<!--<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-right">-->
+								<div class="col-md-10 col-lg-10 text-right">
+									<div>'.$Maquina["nombre"].'<br>
+									<font size=1>('.$Maquina["host"].$Separador_DosPuntos.$Maquina["puerto"].')</font> 
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="#">
+							<div class="panel-footer">
+								<span class="pull-left '.$estilo_texto_estado.'" >
+									<font><b>'.$estado_final.'</b></font>
+								</span>
+								<span class="pull-right">  '.$IconoAlertaSonora.'  '.$IconoAlertaVibracion.'  <i class="fa fa-bar-chart '.$estilo_texto_estado.'"></i></span>
+								<div class="clearfix"></div>
+							</div>
+						</a>
+					</div>
+				</div>';
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
 	function PresentarEstadoMaquina($IDRegistroMonitor)
 		{
 			/*
@@ -243,42 +280,13 @@
 			if ($Maquina["alerta_vibracion"]==0)
 				$IconoAlertaVibracion='';
 
-			echo '
-				<!--<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">-->
-				<div class="col-md-2 col-lg-2">
-					<div class="panel '.$estilo_caja_estado.'">
-						<div class="panel-heading">
-							<div class="row">
-								<!--<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">-->
-								<div class="col-md-1 col-lg-1">
-									<i class="fa fa-desktop fa-2x "></i>
-								</div>
-								<!--<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-right">-->
-								<div class="col-md-10 col-lg-10 text-right">
-									<div>'.$Maquina["nombre"].'<br>
-									<font size=1>('.$Maquina["host"].$Separador_DosPuntos.$Maquina["puerto"].')</font> 
-									</div>
-								</div>
-							</div>
-						</div>
-						<a href="#">
-							<div class="panel-footer">
-								<span class="pull-left '.$estilo_texto_estado.'" >
-									<font><b>'.$estado_final.'</b></font>
-								</span>
-								<span class="pull-right">  '.$IconoAlertaSonora.'  '.$IconoAlertaVibracion.'  <i class="fa fa-bar-chart '.$estilo_texto_estado.'"></i></span>
-								<div class="clearfix"></div>
-							</div>
-						</a>
-					</div>
-				</div>
-			';
+            DibujarEstadoMaquina($Maquina,$estado_final,$Separador_DosPuntos,$estilo_caja_estado,$estilo_texto_estado);
 		}
 
 
 /* ################################################################## */
 /* ################################################################## */
-	function PresentarSensorRango($IDRegistroMonitor)
+	function PresentarSensorRango($IDRegistroMonitor,$PresentarEnFormatoMaquina=0)
 		{
 			/*
 				Function: PresentarSensorRango
@@ -323,6 +331,7 @@
                 {
         			if ($valor_sensor != $Sensor["valor_minimo"])
         				{
+        				    if ($valor_sensor=="") $valor_sensor=1;
         					$ErroresMonitoreoPractico=1;
         					$SensorFueraRango=1;
         					//Si tiene activada la alerta auditiva la agenda
@@ -365,47 +374,80 @@
             //Define cadena de colores cuando el sensor esta fuera de rango
             $CadenaColores=""; //Asume color predeterminado
             if ($SensorFueraRango)
-                $CadenaColores='colors: ["#FF1C00", "#D73B3E", "#B22222"]'; //Asume color predeterminado
-			
-			echo '
-                <!--Agrega marco para el grafico de dona-->
-				<div class="col-md-'.$Sensor["ancho"].' col-lg-'.$Sensor["ancho"].'">
-                    <div id="grafico-sensor-'.$Sensor["id"].'"></div>
-				</div>
-
-                <script language="JavaScript">
-                //Agrega la funcion para generar la dona con los datos
-                $(function() {
-                    grafico=Morris.Donut({
-                        element: "grafico-sensor-'.$Sensor["id"].'",
-                        data: [
-                        ';
-                    //Si el sensor tiene valor de igualdad en maximo y minimo solamente presenta el resultado
+                {
+                    //Si el sensor tiene valor diferente de maximo y minimo usa paleta de tres colores, sino una paleta simple
                     if ($Sensor["valor_minimo"] != $Sensor["valor_maximo"])
-                        echo '
-                                                {
-                                                    label: "Min",
-                                                    value: "'.$Sensor["valor_minimo"].'"
-                                                },
-                                                {
-                                                    label: "Max",
-                                                    value: "'.$Sensor["valor_maximo"].'"
-                                                },';
-            echo '
-                                                {
-                                                    label: "'.$Sensor["nombre"].'",
-                                                    value: "'.$valor_sensor.'"
-                                                },
-                        ],
-                        resize: false,
-                        labelColor: "#eeeeee",
-                        backgroundColor: "#FFFFFF",
-                        '.$CadenaColores.'
-                    });
-                    //Establece por defecto el item de grafico a mostrar
-                    grafico.select(2);
-                });
-                </script>';
+                        $CadenaColores='colors: ["#FF1C00", "#D73B3E", "#B22222"]';
+                    else
+                        $CadenaColores='colors: ["#B22222"]';
+                }
+			
+			if ($PresentarEnFormatoMaquina==0)
+			    {
+        			echo '
+                        <!--Agrega marco para el grafico de dona-->
+        				<div class="col-md-'.$Sensor["ancho"].' col-lg-'.$Sensor["ancho"].'">
+                            <div id="grafico-sensor-'.$Sensor["id"].'"></div>
+        				</div>
+        
+                        <script language="JavaScript">
+                        //Agrega la funcion para generar la dona con los datos
+                        $(function() {
+                            grafico_'.$Sensor["id"].'=Morris.Donut({
+                                element: "grafico-sensor-'.$Sensor["id"].'",
+                                data: [
+                                ';
+                            //Si el sensor tiene valor de igualdad en maximo y minimo solamente presenta el resultado
+                            if ($Sensor["valor_minimo"] != $Sensor["valor_maximo"])
+                                echo '
+                                                        {
+                                                            label: "Min",
+                                                            value: "'.$Sensor["valor_minimo"].'"
+                                                        },
+                                                        {
+                                                            label: "Max",
+                                                            value: "'.$Sensor["valor_maximo"].'"
+                                                        },';
+                    echo '
+                                                        {
+                                                            label: "'.$Sensor["nombre"].'",
+                                                            value: "'.$valor_sensor.'"
+                                                        },
+                                ],
+                                resize: false,
+                                labelColor: "#eeeeee",
+                                backgroundColor: "#FFFFFF",
+                                '.$CadenaColores.'
+                            });';
+                            //Establece por defecto el item de grafico a mostrar
+                            if ($Sensor["valor_minimo"] != $Sensor["valor_maximo"])
+                                echo 'grafico_'.$Sensor["id"].'.select(2);';
+                            else
+                                echo 'grafico_'.$Sensor["id"].'.select(0);';
+                    echo '
+                        });
+                        </script>';
+			    }
+            else
+                {
+        			$estilo_caja_estado="panel-primary";
+        			$estilo_texto_estado="text-primary";
+
+        			$Separador_DosPuntos = "";
+        			if ($Sensor["tipo_ping"]=="socket")
+        				$Separador_DosPuntos = ":";
+
+        			if ($SensorFueraRango==0)
+        				$estado_final="$Imagen_ok $MULTILANG_MonLinea";
+        			else
+        				{
+        					$estado_final="$Imagen_fallo $MULTILANG_MonCaido $Imagen_fallo";
+        					$estilo_caja_estado="panel-danger";
+        					$estilo_texto_estado="text-danger";
+        				}
+                    DibujarEstadoMaquina($Sensor,$estado_final,$Separador_DosPuntos,$estilo_caja_estado,$estilo_texto_estado);
+                }
+                
 		}
 
 
@@ -787,7 +829,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
 		*/
 	function FormatoMonitor($IDRegistroMonitor)
 		{
-			global $ArchivoCORE,$ListaCamposSinID_monitoreo,$TablasCore,$MULTILANG_MonNuevo,$MULTILANG_Tipo,$MULTILANG_Etiqueta,$MULTILANG_Maquina,$MULTILANG_MonCommShell,$MULTILANG_MonCommSQL,$MULTILANG_Imagen,$MULTILANG_Embebido;
+			global $MULTILANG_Apariencia,$MULTILANG_Maquina,$MULTILANG_Deshabilitado,$ArchivoCORE,$ListaCamposSinID_monitoreo,$TablasCore,$MULTILANG_MonNuevo,$MULTILANG_Tipo,$MULTILANG_Etiqueta,$MULTILANG_Maquina,$MULTILANG_MonCommShell,$MULTILANG_MonCommSQL,$MULTILANG_Imagen,$MULTILANG_Embebido;
 			global $TablasCore,$ListaCamposSinID_replicasbd,$MULTILANG_ConnOrigenDatosDes,$MULTILANG_ConnAdvCambioOrigen,$MULTILANG_ConnPredeterminada,$MULTILANG_ConnOrigenDatos,$MULTILANG_Comando,$MULTILANG_MonSensorRango,$MULTILANG_FrmValorMinimo,$MULTILANG_FrmValorMaximo,$MULTILANG_Actualizar,$MULTILANG_Regresar,$MULTILANG_MnuURL,$MULTILANG_InfAlto,$MULTILANG_Ayuda,$MULTILANG_MonDesTipo,$MULTILANG_Pagina,$MULTILANG_Peso,$MULTILANG_Nombre,$MULTILANG_MonSaltos,$MULTILANG_MonMsLectura,$MULTILANG_Agregar,$MULTILANG_IrEscritorio,$MULTILANG_Maquina,$MULTILANG_AplicaPara,$MULTILANG_Tipo,$MULTILANG_Puerto,$MULTILANG_MonMetodo,$MULTILANG_MonCommSQL,$MULTILANG_MonCommShell,$MULTILANG_FrmAncho,$MULTILANG_Imagen,$MULTILANG_Embebido,$MULTILANG_MonTamano,$MULTILANG_Etiqueta,$MULTILANG_MonOcultaTit,$MULTILANG_No,$MULTILANG_Si,$MULTILANG_MonCorreoAlerta,$MULTILANG_MonAlertaSnd,$MULTILANG_MonAlertaVibrar;
 			
 			//Busca los datos del monitor
@@ -829,9 +871,11 @@ if ($PCO_Accion=="eliminar_monitoreo")
 					if (@$Maquina["tipo"]=="Imagen") 		$Seleccion_Imagen="SELECTED";
 					if (@$Maquina["tipo"]=="Embebido") 		$Seleccion_Embebido="SELECTED";
 					if (@$Maquina["tipo"]=="SensorRango") 	$Seleccion_SensorRango="SELECTED";
+					if (@$Maquina["tipo"]=="SensorMaquina") $Seleccion_SensorMaquina="SELECTED";
 
 
              echo '
+                            <option value="'.$MULTILANG_Deshabilitado.'">'.$MULTILANG_Deshabilitado.'</option>
                             <option value="Etiqueta"		'.$Seleccion_Etiqueta.'>'.$MULTILANG_Etiqueta.'</option>
                             <option value="Maquina"			'.$Seleccion_Maquina.'>'.$MULTILANG_Maquina.'</option>
                             <option value="ComandoShell"	'.$Seleccion_ComandoShell.'>'.$MULTILANG_MonCommShell.'</option>
@@ -839,7 +883,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
                             <option value="Imagen"			'.$Seleccion_Imagen.'>'.$MULTILANG_Imagen.'</option>
                             <option value="Embebido"		'.$Seleccion_Embebido.'>'.$MULTILANG_Embebido.'</option>
                             <option value="SensorRango"		'.$Seleccion_SensorRango.'>'.$MULTILANG_MonSensorRango.'</option>
-
+                            <option value="SensorMaquina"	'.$Seleccion_SensorMaquina.'>'.$MULTILANG_MonSensorRango.' ('.$MULTILANG_Apariencia.' '.$MULTILANG_Maquina.') </option>
                         </select>
                         <span class="input-group-addon">
                             <a  href="#" data-toggle="tooltip" data-html="true"  title="<b>'.$MULTILANG_Ayuda.'</b><br>'.$MULTILANG_MonDesTipo.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
@@ -1383,6 +1427,11 @@ if ($PCO_Accion=="ver_monitoreo")
 										if ($registro["tipo"]=="SensorRango")
 											{
 												PresentarSensorRango($registro["id"]);
+											}
+										//Evalua elementos tipo SensorMaquina que es en esencia un sensor en rango presentado finalmente como formato de maquina
+										if ($registro["tipo"]=="SensorMaquina")
+											{
+												PresentarSensorRango($registro["id"],1);
 											}
 										//Agrega los saltos de linea
 										for ($i=0;$i<$registro["saltos"];$i++) echo "<br>";
