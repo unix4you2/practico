@@ -1202,6 +1202,7 @@
 	$MULTILANG_MonCaido='DOWN';
 	$MULTILANG_MonAlertaVibrar='Vibrate on mobile devices';
 	$MULTILANG_MonSensorRango='Sensor in a range';
+	$MULTILANG_MonModoCompacto='Use compact mode';
 
     //Modulo de correos
     $MULTILANG_MailIntro1='Automatic platform message';

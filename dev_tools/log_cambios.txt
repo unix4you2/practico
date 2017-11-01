@@ -36,6 +36,8 @@ LogCambios="
 * Added: Ahora las conexiones principal, extra o de replicación presentan información adicional de depuración cuando su configuración es incorrecta o no se logra hacer conexión al servidor.
 * Added: Ahora los elementos de monitoreo de tipo base de datos y rango de valores permiten especificar la conexión sobre la cuál realizan sus consultas.
 * Added: Ahora los monitores de tipo rango pueden ser presentados de manera alterna bajo el esquema de máquinas.
+* Added: Lo monitores permiten ahora ser visualizados en modo compacto.
+* Added: Los monitores de tipo máquina respetan ahora el ancho indicado por su parametrización.  Valor recomendado inicial: 2
 * Enhan: Sensores de rango con valores iguales en máximos y mínimos presentan ahora una dona sin divisiones y su resultado.
 * Fixed: Clonacion de formularios desde XML ignoraba los eventos.
 * Fixed: Los objetos de monitoreo en rangos actualizan correctamente sus valores mínimo y máximo esperados.
@@ -47,6 +49,7 @@ Nota: Quienes hayan aplicado parches previos pueden ver un error de creacion de 
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
 ALTER TABLE core_monitoreo ADD conexion_origen_datos varchar(255) DEFAULT '';
+ALTER TABLE core_monitoreo ADD modo_compacto int(10) DEFAULT 0;
 "
 
 ########################################################################

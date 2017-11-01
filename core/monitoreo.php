@@ -172,35 +172,52 @@
 	function DibujarEstadoMaquina($Maquina,$estado_final,$Separador_DosPuntos,$estilo_caja_estado,$estilo_texto_estado)
 		{
 		    global $IconoAlertaSonora,$IconoAlertaVibracion;
-			echo '
-				<!--<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">-->
-				<div class="col-md-2 col-lg-2">
-					<div class="panel '.$estilo_caja_estado.'">
-						<div class="panel-heading">
-							<div class="row">
-								<!--<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">-->
-								<div class="col-md-1 col-lg-1">
-									<i class="fa fa-desktop fa-2x "></i>
-								</div>
-								<!--<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-right">-->
-								<div class="col-md-10 col-lg-10 text-right">
-									<div>'.$Maquina["nombre"].'<br>
-									<font size=1>('.$Maquina["host"].$Separador_DosPuntos.$Maquina["puerto"].')</font> 
-									</div>
-								</div>
-							</div>
-						</div>
-						<a href="#">
-							<div class="panel-footer">
-								<span class="pull-left '.$estilo_texto_estado.'" >
-									<font><b>'.$estado_final.'</b></font>
-								</span>
-								<span class="pull-right">  '.$IconoAlertaSonora.'  '.$IconoAlertaVibracion.'  <i class="fa fa-bar-chart '.$estilo_texto_estado.'"></i></span>
-								<div class="clearfix"></div>
-							</div>
-						</a>
-					</div>
-				</div>';
+		    
+		    
+		    $AnchoControl=$Maquina["ancho"];
+		    
+		    //Define el esquema de presentacion dependiendo si el modo es compacto o no
+		    if($Maquina["modo_compacto"]==0)
+		        {
+        			echo '
+        				<div class="col-xs-'.$AnchoControl.' col-sm-'.$AnchoControl.' col-md-'.$AnchoControl.' col-lg-'.$AnchoControl.'">
+        					<div class="panel '.$estilo_caja_estado.'">
+        						<div class="panel-heading">
+        							<div class="row">
+        								<div class="col-md-1 col-lg-1">
+        									<i class="fa fa-desktop fa-2x "></i>
+        								</div>
+        								<div class="col-md-10 col-lg-10 text-right">
+        									<div>'.$Maquina["nombre"].'<br>
+        									<font size=1>('.$Maquina["host"].$Separador_DosPuntos.$Maquina["puerto"].')</font> 
+        									</div>
+        								</div>
+        							</div>
+        						</div>
+        						<a href="#">
+        							<div class="panel-footer">
+        								<span class="pull-left '.$estilo_texto_estado.'" >
+        									<font><b>'.$estado_final.'</b></font>
+        								</span>
+        								<span class="pull-right">  '.$IconoAlertaSonora.'  '.$IconoAlertaVibracion.'  <i class="fa fa-bar-chart '.$estilo_texto_estado.'"></i></span>
+        								<div class="clearfix"></div>
+        							</div>
+        						</a>
+        					</div>
+        				</div>';
+		        }
+		    else
+    		    {
+        			echo '
+        				<div class="col-xs-'.$AnchoControl.' col-sm-'.$AnchoControl.' col-md-'.$AnchoControl.' col-lg-'.$AnchoControl.'">
+        					<div class="panel '.$estilo_caja_estado.'">
+        						<div class="panel-heading">
+        							<i class="fa fa-desktop fa-1x pull-left" data-toggle="tooltip" data-html="true"  title="'.$Maquina["host"].$Separador_DosPuntos.$Maquina["puerto"].'"></i>'.$Maquina["nombre"].'
+        						</div>
+        					</div>
+        				</div>';
+    		    }
+
 		}
 
 
@@ -754,7 +771,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
 			if ($mensaje_error=="")
 				{
 					// Guarda los datos del comando de monitoreo
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."monitoreo (".$ListaCamposSinID_monitoreo.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)","$tipo$_SeparadorCampos_$pagina$_SeparadorCampos_$peso$_SeparadorCampos_$nombre$_SeparadorCampos_$host$_SeparadorCampos_$puerto$_SeparadorCampos_$tipo_ping$_SeparadorCampos_$saltos$_SeparadorCampos_$comando$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$tamano_resultado$_SeparadorCampos_$ocultar_titulos$_SeparadorCampos_$path$_SeparadorCampos_$correo_alerta$_SeparadorCampos_$alerta_sonora$_SeparadorCampos_$milisegundos_lectura$_SeparadorCampos_$alerta_vibracion$_SeparadorCampos_$ultimo_estado$_SeparadorCampos_$valor_minimo$_SeparadorCampos_$valor_maximo$_SeparadorCampos_$conexion_origen_datos");
+					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."monitoreo (".$ListaCamposSinID_monitoreo.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)","$tipo$_SeparadorCampos_$pagina$_SeparadorCampos_$peso$_SeparadorCampos_$nombre$_SeparadorCampos_$host$_SeparadorCampos_$puerto$_SeparadorCampos_$tipo_ping$_SeparadorCampos_$saltos$_SeparadorCampos_$comando$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$tamano_resultado$_SeparadorCampos_$ocultar_titulos$_SeparadorCampos_$path$_SeparadorCampos_$correo_alerta$_SeparadorCampos_$alerta_sonora$_SeparadorCampos_$milisegundos_lectura$_SeparadorCampos_$alerta_vibracion$_SeparadorCampos_$ultimo_estado$_SeparadorCampos_$valor_minimo$_SeparadorCampos_$valor_maximo$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$modo_compacto");
 					auditar("Agrega en monitor: $nombre");
 					echo '
 					<form name="continuar_admin_mon" action="'.$ArchivoCORE.'" method="POST">
@@ -798,7 +815,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
 			if ($mensaje_error=="")
 				{
 					// Actualiza los datos del comando de monitoreo
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."monitoreo SET tipo='$tipo',pagina='$pagina',peso='$peso',nombre='$nombre',host='$host',puerto='$puerto',tipo_ping='$tipo_ping',saltos='$saltos',comando='$comando',ancho='$ancho',alto='$alto',tamano_resultado='$tamano_resultado',ocultar_titulos='$ocultar_titulos',path='$path',correo_alerta='$correo_alerta',alerta_sonora='$alerta_sonora',milisegundos_lectura='$milisegundos_lectura',alerta_vibracion='$alerta_vibracion', conexion_origen_datos='$conexion_origen_datos', valor_minimo='$valor_minimo',valor_maximo='$valor_maximo' WHERE id='$IDRegistroMonitor'");
+					ejecutar_sql_unaria("UPDATE ".$TablasCore."monitoreo SET tipo='$tipo',pagina='$pagina',peso='$peso',nombre='$nombre',host='$host',puerto='$puerto',tipo_ping='$tipo_ping',saltos='$saltos',comando='$comando',ancho='$ancho',alto='$alto',tamano_resultado='$tamano_resultado',ocultar_titulos='$ocultar_titulos',path='$path',correo_alerta='$correo_alerta',alerta_sonora='$alerta_sonora',milisegundos_lectura='$milisegundos_lectura',alerta_vibracion='$alerta_vibracion', conexion_origen_datos='$conexion_origen_datos', valor_minimo='$valor_minimo',valor_maximo='$valor_maximo' ,modo_compacto='$modo_compacto' WHERE id='$IDRegistroMonitor'");
 					
 					auditar("Actualiza el monitor: $IDRegistroMonitor");
 					echo '
@@ -829,7 +846,7 @@ if ($PCO_Accion=="eliminar_monitoreo")
 		*/
 	function FormatoMonitor($IDRegistroMonitor)
 		{
-			global $MULTILANG_Apariencia,$MULTILANG_Maquina,$MULTILANG_Deshabilitado,$ArchivoCORE,$ListaCamposSinID_monitoreo,$TablasCore,$MULTILANG_MonNuevo,$MULTILANG_Tipo,$MULTILANG_Etiqueta,$MULTILANG_Maquina,$MULTILANG_MonCommShell,$MULTILANG_MonCommSQL,$MULTILANG_Imagen,$MULTILANG_Embebido;
+			global $MULTILANG_MonModoCompacto,$MULTILANG_Apariencia,$MULTILANG_Maquina,$MULTILANG_Deshabilitado,$ArchivoCORE,$ListaCamposSinID_monitoreo,$TablasCore,$MULTILANG_MonNuevo,$MULTILANG_Tipo,$MULTILANG_Etiqueta,$MULTILANG_Maquina,$MULTILANG_MonCommShell,$MULTILANG_MonCommSQL,$MULTILANG_Imagen,$MULTILANG_Embebido;
 			global $TablasCore,$ListaCamposSinID_replicasbd,$MULTILANG_ConnOrigenDatosDes,$MULTILANG_ConnAdvCambioOrigen,$MULTILANG_ConnPredeterminada,$MULTILANG_ConnOrigenDatos,$MULTILANG_Comando,$MULTILANG_MonSensorRango,$MULTILANG_FrmValorMinimo,$MULTILANG_FrmValorMaximo,$MULTILANG_Actualizar,$MULTILANG_Regresar,$MULTILANG_MnuURL,$MULTILANG_InfAlto,$MULTILANG_Ayuda,$MULTILANG_MonDesTipo,$MULTILANG_Pagina,$MULTILANG_Peso,$MULTILANG_Nombre,$MULTILANG_MonSaltos,$MULTILANG_MonMsLectura,$MULTILANG_Agregar,$MULTILANG_IrEscritorio,$MULTILANG_Maquina,$MULTILANG_AplicaPara,$MULTILANG_Tipo,$MULTILANG_Puerto,$MULTILANG_MonMetodo,$MULTILANG_MonCommSQL,$MULTILANG_MonCommShell,$MULTILANG_FrmAncho,$MULTILANG_Imagen,$MULTILANG_Embebido,$MULTILANG_MonTamano,$MULTILANG_Etiqueta,$MULTILANG_MonOcultaTit,$MULTILANG_No,$MULTILANG_Si,$MULTILANG_MonCorreoAlerta,$MULTILANG_MonAlertaSnd,$MULTILANG_MonAlertaVibrar;
 			
 			//Busca los datos del monitor
@@ -943,6 +960,19 @@ if ($PCO_Accion=="eliminar_monitoreo")
 				if (@$Maquina["milisegundos_lectura"]!="") $MilisengundosMonitor=@$Maquina["milisegundos_lectura"];
             echo '            
                         <input type="text" name="milisegundos_lectura" value="'.$MilisengundosMonitor.'" class="form-control" placeholder="'.$MULTILANG_MonMsLectura.'">
+                    </div>
+
+                    <label for="modo_compacto">'.$MULTILANG_MonModoCompacto.':</label>
+                    <div class="form-group input-group">
+                        <select id="modo_compacto" name="modo_compacto" class="form-control" >';
+					//Define los estados de seleccion para las listas
+					if (@$Maquina["modo_compacto"]=="0") 		$Seleccion_No="SELECTED";
+					if (@$Maquina["modo_compacto"]=="1") 		$Seleccion_Si="SELECTED";
+            echo '
+                            <option value="0" '.$Seleccion_No.'>'.$MULTILANG_No.'</option>
+                            <option value="1" '.$Seleccion_Si.'>'.$MULTILANG_Si.'</option>
+                        </select>
+
                     </div>
 
                     <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-save"></i> '.$TextoBotonFormulario.'</a>

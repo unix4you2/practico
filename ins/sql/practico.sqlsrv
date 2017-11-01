@@ -419,6 +419,8 @@ CREATE TABLE core_monitoreo (
   ultimo_estado varchar(250) DEFAULT '',
   valor_minimo int(11),
   valor_maximo int(11),
+  conexion_origen_datos varchar(255) DEFAULT '',
+  modo_compacto int(10) DEFAULT '0',
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

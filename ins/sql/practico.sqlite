@@ -428,7 +428,9 @@ CREATE TABLE core_monitoreo (
   alerta_vibracion integer default '0',
   ultimo_estado text DEFAULT '',
   valor_minimo integer,
-  valor_maximo integer
+  valor_maximo integer,
+  conexion_origen_datos text DEFAULT '',
+  modo_compacto integer DEFAULT '0'
 
 );
 

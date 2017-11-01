@@ -419,6 +419,8 @@ CREATE TABLE core_monitoreo (
   ultimo_estado VARCHAR(250) DEFAULT '',
   valor_minimo integer,
   valor_maximo integer,
+  conexion_origen_datos varchar(255) DEFAULT '',
+  modo_compacto integer DEFAULT '0',
   PRIMARY KEY (id)
 );
 

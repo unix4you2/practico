@@ -1200,6 +1200,7 @@
 	$MULTILANG_MonCaido='नीचे';
 	$MULTILANG_MonAlertaVibrar='मोबाइल उपकरणों पर कंपन';
 	$MULTILANG_MonSensorRango='किसी श्रेणी में सेंसर';
+	$MULTILANG_MonModoCompacto='कॉम्पैक्ट मोड का उपयोग करें';
 
     //Modulo de correos
     $MULTILANG_MailIntro1='स्वचालित मंच संदेश';

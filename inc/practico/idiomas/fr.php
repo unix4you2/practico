@@ -1200,6 +1200,7 @@
 	$MULTILANG_MonCaido='HORS LIGNE';
 	$MULTILANG_MonAlertaVibrar='Vibreur sur les appareils mobiles';
 	$MULTILANG_MonSensorRango='Capteur dans une plage';
+	$MULTILANG_MonModoCompacto='utiliser le mode compact';
 
     //Modulo de correos
     $MULTILANG_MailIntro1='Message de plate-forme automatique';
