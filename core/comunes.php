@@ -2574,8 +2574,9 @@ function ventana_login()
 
 
                 <!--Login Estandar-->
+                <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
                 <div id="EnfasisLoginZoom" class="EnfasisLoginZoom">
-                <div class="col-md-4 col-md-offset-4">
                     <div class="login-panel panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title"><?php echo $MULTILANG_TituloLogin; ?></h3>
@@ -2585,7 +2586,7 @@ function ventana_login()
                                 <form role="form" name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
                                 <input type="Hidden" name="PCO_Accion" value="Iniciar_login">
                                     <div class="form-group">
-                                        <img name="img_login" id="img_login" width="230" height="160" src="img/practico_login.png?<?php echo filemtime('img/practico_login.png'); ?>" alt="" border="0"><br><br>
+                                        <img name="img_login" id="img_login" width="100%" style="max-width:232px; max-height:160px;" src="img/practico_login.png?<?php echo filemtime('img/practico_login.png'); ?>" alt="" border="0"><br><br>
                                     </div>
                                     <div class="form-group input-group">
                                         <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
@@ -2738,8 +2739,9 @@ function ventana_login()
                         <script language="JavaScript"> login_usuario.uid.focus(); </script>
                         </div> <!-- /panel-body -->
                     </div>
-                </div>
-                </div>
+                </div>  <!--FIN Class EnfasisLoginZoom -->
+                </div>  <!--FIN Class col -->
+                </div>  <!--FIN Class row -->
                 <!--FIN Login Estandar-->
 <?php
     }

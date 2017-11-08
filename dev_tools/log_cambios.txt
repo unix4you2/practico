@@ -39,10 +39,11 @@ LogCambios="
 * Added: Ahora los monitores de tipo rango pueden ser presentados de manera alterna bajo el esquema de máquinas.
 * Added: Lo monitores permiten ahora ser visualizados en modo compacto.
 * Added: Los monitores de tipo máquina respetan ahora el ancho indicado por su parametrización.  Valor recomendado inicial: 2
-* Added> Agregado el soporte para convertir automaticamente las aplicaciones a Aplicaciones Web Progresivas desde el panel de configuracion.
+* Added: Agregado el soporte para convertir automaticamente las aplicaciones a Aplicaciones Web Progresivas desde el panel de configuracion.
 * Enhan: Sensores de rango con valores iguales en máximos y mínimos presentan ahora una dona sin divisiones y su resultado.
 * Fixed: Clonacion de formularios desde XML ignoraba los eventos.
 * Fixed: Los objetos de monitoreo en rangos actualizan correctamente sus valores mínimo y máximo esperados.
+* Fixed: La resolucion maxima del logo en pantallas de login ahora no supera los bordes de pantalla, se ajusta automaticamente segun el dispositivo y no supera su resolucion predeterminada en dispositivos de pantalla grande.
 
 Nota: Quienes hayan aplicado parches previos pueden ver un error de creacion de campo sobre la tabla de monitoreo.  Esto es normal.
 "
