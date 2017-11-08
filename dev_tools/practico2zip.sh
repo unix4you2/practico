@@ -46,7 +46,7 @@
 
 # PARAMETROS BASICOS DEL EMPAQUETADO
 	#Lista de archivos y carpetas a empaquetar (relativos a la raiz y separados por espacio)
-	ListaArchivos=" AUTHORS index.php LICENSE DEMO.md CHANGELOG.md README.md bkp core img inc ins mod skin tmp xml "
+	ListaArchivos=" AUTHORS index.php LICENSE DEMO.md CHANGELOG.md README.md bkp core img inc ins mod skin tmp pwa xml "
 	#Nombre del archivo resultante
 	NombreArchivo="Practico";
 	Version=`head -n 1 inc/version_actual.txt`
