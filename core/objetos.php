@@ -103,6 +103,41 @@
 				}
 		}
 
+
+/* ################################################################## */
+/* ################################################################## */
+function RedimensionarImagenPWA($ArchivoOrigen,$ArchivoDestino,$Ancho,$Alto)
+    {
+        $original = $ArchivoOrigen;
+        $destino = $ArchivoDestino; // La salida siempre será en PNG para no perder calidad
+      
+        $width_d = $Ancho; // ancho de salida en pixeles
+        $height_d = $Alto; // alto de salida en pixeles
+
+        //obtengo información del archivo
+        list($width_s, $height_s, $type, $attr) = getimagesize($original, $info2);
+
+        // crea el recurso gd para el origen
+        if(!$gd_s = imagecreatefromstring(file_get_contents($original)))
+         die('El archivo no es una imagen.'); // el archivo no es una imagen
+
+        //crea el recurso gd para la salida
+        if(!$gd_d = imagecreatetruecolor($width_d, $height_d))
+         die('El archivo no es una imagen.'); // No maneja GD o escala fuera del limite
+
+        imagealphablending($gd_d, false); // desactivo el procesamiento automatico de alpha
+        imagesavealpha($gd_d, true); // Alpha original se graba en el archivo destino
+
+        //Redimensiona
+        imagecopyresampled($gd_d, $gd_s, 0, 0, 0, 0, $width_d, $height_d, $width_s, $height_s);
+        //unlink($original); // Elimina el archivo original
+        if(!imagepng($gd_d, $destino)) // Graba la imagen
+         die('No tiene permisos de escritura sobre el directorio de imagenes.');
+        imagedestroy($gd_s); // Libera memoria
+        imagedestroy($gd_d); // Libera memoria
+    }
+
+
 /* ################################################################## */
 /* ################################################################## */
 	if ($PCO_Accion=="guardar_configuracion")
@@ -238,6 +273,13 @@ $salida=sprintf("<?php
 	// Especifica si desea activar o no el modulo de chat para usuarios asi:
 	// 0=No, 1=Solo usuarios internos, 2=Solo usuarios externos, 3=Todos los usuarios, 4=Exclusivo para admin (podra iniciar conversacion y chat con cualquier otro usuario aun con modulo desactivado)
 	\$Activar_ModuloChat=%s;
+	
+	// Especifica si desea activar o no el registro de la aplicacion como una Aplicacion web progresiva PWA
+	\$PWA_Activa=%s;
+	\$PWA_DireccionTexto='%s';
+	\$PWA_Display='%s';
+	\$PWA_Orientacion='%s';
+	\$PWA_GCMSenderID='%s';
 
 	// Define cadena usada para separar campos en operaciones de bases de datos
 	\$_SeparadorCampos_='%s';
@@ -246,7 +288,7 @@ $salida=sprintf("<?php
 	\$ModoDesarrolladorPractico=%s; // [0=Inactivo|-10000=Activo]
 
 	// Define cadena separada por comas con usuarios administradores de la aplicacion
-	\$PCOVAR_Administradores='%s';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$DepuracionSQLNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$IdiomaEnLoginNEW,$Tema_PracticoFrameworkNEW,$TipoCaptchaLoginNEW,$CaracteresCaptchaNEW,$CodigoGoogleAnalyticsNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_PermitirReseteoClavesNEW,$Auth_PermitirAutoRegistroNEW,$Auth_PlantillaAutoRegistroNEW,$Auth_PresentarOauthInicioNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW,$Activar_ModuloChatNEW,$_SeparadorCampos_NEW,$ModoDesarrolladorPracticoNEW,$PCOVAR_AdministradoresNEW);
+	\$PCOVAR_Administradores='%s';",$ServidorNEW,$BaseDatosNEW,$UsuarioBDNEW,$PasswordBDNEW,$MotorBDNEW,$PuertoBDNEW,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$DepuracionSQLNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$IdiomaEnLoginNEW,$Tema_PracticoFrameworkNEW,$TipoCaptchaLoginNEW,$CaracteresCaptchaNEW,$CodigoGoogleAnalyticsNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_PermitirReseteoClavesNEW,$Auth_PermitirAutoRegistroNEW,$Auth_PlantillaAutoRegistroNEW,$Auth_PresentarOauthInicioNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW,$Activar_ModuloChatNEW,$PWA_ActivaNEW,$PWA_DireccionTextoNEW,$PWA_DisplayNEW,$PWA_OrientacionNEW,$PWA_GCMSenderIDNEW,$_SeparadorCampos_NEW,$ModoDesarrolladorPracticoNEW,$PCOVAR_AdministradoresNEW);
 			// Escribe el archivo de configuracion
 			$archivo_config=fopen("core/configuracion.php","w");
 			if($archivo_config==null)
@@ -287,6 +329,130 @@ $salida=sprintf("<?php
         						$mensaje_error.=$nombre_archivo.'- '.$MULTILANG_FrmErrorCargaGeneral;
 					    }
                 }
+
+            //Procesa iconos de PWA
+            if ($_FILES["IconoPWANEW"]['name']!="")
+                {
+					// Procesa el archivo y lo almacena en el path
+					$nombre_archivo = $_FILES["IconoPWANEW"]['name']; //Contiene el nombre original
+					$nombre_archivo_temporal = $_FILES["IconoPWANEW"]['tmp_name']; //Nombre del archivo temporal en servidor
+					$extension_archivo=end(explode(".", $nombre_archivo));
+					//Si la extension es permitida sigue adelante
+					if ($extension_archivo=="png")
+					    {
+        					if (!move_uploaded_file($nombre_archivo_temporal, "pwa/launcher-icon-256.png" ))
+        						$mensaje_error.=$nombre_archivo.'- '.$MULTILANG_FrmErrorCargaGeneral;
+        					else
+        					    {
+        					        //Si pudo crear el archivo entonces hace de una vez la creacion de los demas iconos a partir de este
+        					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-192.png","192","192");
+        					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-144.png","144","144");
+        					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-96.png","96","96");
+        					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon.png","48","48");
+        					    }
+					    }
+                }
+
+            //Genera manifiesto para PWA en caso que se haya activado
+            if ($PWA_ActivaNEW=="1")
+                {
+                    //Define si se cuenta o no con ID de GCM
+                    $CadenaFinalGCM="";
+                    if ($PWA_GCMSenderIDNEW!="")
+                        $CadenaFinalGCM='"gcm_sender_id": "'.$PWA_GCMSenderIDNEW.'",';
+
+                    if ($Tema_PracticoFramework=="bootstrap") { $PCO_ColorFondoGeneral="#ffffff"; }
+                    if ($Tema_PracticoFramework=="cerulean") { $PCO_ColorFondoGeneral="#ffffff"; }
+                    if ($Tema_PracticoFramework=="cosmo") { $PCO_ColorFondoGeneral="#060606"; }
+                    if ($Tema_PracticoFramework=="cyborg") { $PCO_ColorFondoGeneral="#060606"; }
+                    if ($Tema_PracticoFramework=="darkly") { $PCO_ColorFondoGeneral="#222222"; }
+                    if ($Tema_PracticoFramework=="flatly") { $PCO_ColorFondoGeneral="#2f324a"; }
+                    if ($Tema_PracticoFramework=="journal") { $PCO_ColorFondoGeneral="#ffffff"; }
+                    if ($Tema_PracticoFramework=="lumen") { $PCO_ColorFondoGeneral="#ffffff"; }
+                    if ($Tema_PracticoFramework=="paper") { $PCO_ColorFondoGeneral="#ffffff"; }
+                    if ($Tema_PracticoFramework=="readable") { $PCO_ColorFondoGeneral="#ffffff"; }
+                    if ($Tema_PracticoFramework=="sandstone") { $PCO_ColorFondoGeneral="#1a221c"; }
+                    if ($Tema_PracticoFramework=="simplex") { $PCO_ColorFondoGeneral="#fcfcfc"; }
+                    if ($Tema_PracticoFramework=="slate") { $PCO_ColorFondoGeneral="#272b30"; }
+                    if ($Tema_PracticoFramework=="spacelab") { $PCO_ColorFondoGeneral="#ffffff"; }
+                    if ($Tema_PracticoFramework=="superhero") { $PCO_ColorFondoGeneral="#2b3e50"; }
+                    if ($Tema_PracticoFramework=="united") { $PCO_ColorFondoGeneral="#ffffff"; }
+                    if ($Tema_PracticoFramework=="yeti") { $PCO_ColorFondoGeneral="#2f2f2f"; }
+                    if ($Tema_PracticoFramework=="amelia") { $PCO_ColorFondoGeneral="#108a93"; }
+                    if ($Tema_PracticoFramework=="material") { $PCO_ColorFondoGeneral="#ffffff"; }
+
+			        // Crea la cadena de salida con el archivo de manifiesto
+$manifiesto=sprintf('{
+  "lang": "%s",
+  "short_name": "%s",
+  "name": "%s %s (%s)",
+  "description": "%s",
+  "icons": [
+    {
+      "src": "pwa/launcher-icon.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa/launcher-icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa/launcher-icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa/launcher-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa/launcher-icon-256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ],
+  "author": {
+    "name": "John F. Arroyave Gutierrez",
+    "website": "http://www.practico.org",
+    "github": "https://github.com/unix4you2",
+    "source-repo": "https://github.com/unix4you2/practico"
+  },
+  "screenshots": [{
+    "src": "pwa/screenshot-640x480.png",
+    "sizes": "640x480",
+    "type": "image/png"
+  },{
+    "src": "pwa/screenshot-1280x920.png",
+    "sizes": "1280x920",
+    "type": "image/png"
+  }],
+  %s
+  "scope": "pwa/",
+  "start_url": "./index.php",
+  "dir": "%s",
+  "display": "%s",
+  "orientation": "%s",
+  "theme_color": "%s",
+  "background_color": "%s"
+}',$IdiomaPredeterminado,$Nombre_Aplicacion,$Nombre_Aplicacion,$Version_Aplicacion,$Nombre_Empresa_Corto,$MULTILANG_PWADescripcion,$CadenaFinalGCM,$PWA_DireccionTextoNEW,$PWA_DisplayNEW,$PWA_OrientacionNEW,$PCO_ColorFondoGeneral,$PCO_ColorFondoGeneral);
+
+        			// Escribe el archivo de manifiesto
+        			$archivo_config_manifiesto=fopen("pwa/manifest.json","w");
+        			if($archivo_config_manifiesto==null)
+        				{
+        					$hay_error=1;
+        					$mensaje_error=$MULTILANG_ErrorEscribirConfig;
+        				}
+        			else
+        				{
+        					fwrite($archivo_config_manifiesto,$manifiesto,strlen($manifiesto)); 
+        					fclose($archivo_config_manifiesto);
+        				}
+                }
+
 
             //Presenta resultados de operacion de actualizacion de configuracion y de archivos de logo
 			if ($mensaje_error=="")

@@ -19,6 +19,9 @@ core/comunes.php
 core/conexiones.php
 core/formularios.php
 core/monitoreo.php
+core/marco_arriba_bs.php
+core/marco_conf.php
+core/objetos.php
 xml/*
 pwa/*
 inc/practico/idiomas/*
@@ -41,6 +44,7 @@ LogCambios="
 * Added: Los monitores de tipo máquina respetan ahora el ancho indicado por su parametrización.  Valor recomendado inicial: 2
 * Added: Agregado el soporte para convertir automaticamente las aplicaciones a Aplicaciones Web Progresivas desde el panel de configuracion.
 * Enhan: Sensores de rango con valores iguales en máximos y mínimos presentan ahora una dona sin divisiones y su resultado.
+* Enhan: Mejorada interfaz en paneles de configuración.
 * Fixed: Clonacion de formularios desde XML ignoraba los eventos.
 * Fixed: Los objetos de monitoreo en rangos actualizan correctamente sus valores mínimo y máximo esperados.
 * Fixed: La resolucion maxima del logo en pantallas de login ahora no supera los bordes de pantalla, se ajusta automaticamente segun el dispositivo y no supera su resolucion predeterminada en dispositivos de pantalla grande.

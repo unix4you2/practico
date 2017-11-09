@@ -1297,3 +1297,14 @@
     $MULTILANG_Documentar='Documentar';
     $MULTILANG_DocumentarDes='Agregar al comienzo del c&oacute;digo una plantilla de documentaci&oacute;n para funciones o procedimientos en notaci&oacute;n NaturalDocs';
     $MULTILANG_DocumentarLink='Abrir ayuda de documentaci&oacute;n extra para NaturalDocs';
+    
+    //PWA
+    $MULTILANG_PWAActivar='Activar el uso de Aplicaciones Web Progresivas';
+    $MULTILANG_PWAAyuda='Permite activar en la aplicación la tecnología PWA que permite que su aplicación haga una solicitud de instalación como aplicación móvil desde los navegadores en dispositivos que soporten dicha tecnología.   Para más información consulte los enlaces  https://w3c.github.io/manifest/  y  https://developers.google.com/web/progressive-web-apps/';
+    $MULTILANG_PWAIconos='Definición de iconos para la App';
+    $MULTILANG_PWADescripcion='Aplicacion Web Progresiva generada automaticamente por Practico Framework';
+    $MULTILANG_PWADireccionTexto='Dirección del texto';
+    $MULTILANG_PWADisplayPreferido='Modo de visualización preferido';
+    $MULTILANG_PWAOrientacionPantalla='Orientación de pantalla';
+    $MULTILANG_PWAGCM='Google Cloud Messaging ID';
+

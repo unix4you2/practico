@@ -42,11 +42,12 @@
 
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#configvarias-tab" data-toggle="tab"><?php echo $MULTILANG_ConfiguracionVarias; ?></a></li>
-                                <li><a href="#apariencia-tab" data-toggle="tab"><?php echo $MULTILANG_TituloLogin; ?> & <?php echo $MULTILANG_Apariencia; ?></a></li>
-                                <li><a href="#basedatos-tab" data-toggle="tab"><?php echo $MULTILANG_MotorBD; ?></a></li>
-                                <li><a href="#motorauth-tab" data-toggle="tab"><?php echo $MULTILANG_MotorAuth; ?></a></li>
-                                <li><a href="#estadophp-tab" data-toggle="tab"><?php echo $MULTILANG_EstadoPHP; ?></a></li>
+                                <li class="active"><a href="#configvarias-tab" data-toggle="tab"><i class="fa fa fa-wrench fa-2x text-danger" aria-hidden="true"></i> <?php echo $MULTILANG_ConfiguracionVarias; ?></a></li>
+                                <li><a href="#apariencia-tab" data-toggle="tab"><i class="fa fa-paint-brush fa-2x text-danger" aria-hidden="true"></i> <?php echo $MULTILANG_TituloLogin; ?> & <?php echo $MULTILANG_Apariencia; ?></a></li>
+                                <li><a href="#basedatos-tab" data-toggle="tab"><i class="fa fa fa-database fa-2x text-danger" aria-hidden="true"></i> <?php echo $MULTILANG_MotorBD; ?></a></li>
+                                <li><a href="#motorauth-tab" data-toggle="tab"><i class="fa fa fa-unlock-alt fa-2x text-danger" aria-hidden="true"></i> <?php echo $MULTILANG_MotorAuth; ?></a></li>
+                                <li><a href="#pwa-tab" data-toggle="tab"><i class="fa fa-mobile fa-2x text-danger" aria-hidden="true"></i> PWA</a></li>
+                                <li><a href="#estadophp-tab" data-toggle="tab"><i class="fa fa-info-circle fa-2x text-danger" aria-hidden="true"></i> <?php echo $MULTILANG_EstadoPHP; ?></a></li>
                             </ul>
 
                             <!-- INICIO de las pestanas -->
@@ -143,6 +144,78 @@
 										</span>
 									</div>
 
+                                </div>
+
+
+                                <div class="tab-pane fade" id="pwa-tab">
+									<div class="row">
+										<div class="col-md-6">
+
+											<label for="PWA_ActivaNEW"><i class="fa fa-mobile fa-2x fa-fw"></i> <?php echo $MULTILANG_PWAActivar; ?>:</label>
+											<div class="form-group input-group">
+												<select id="PWA_ActivaNEW" name="PWA_ActivaNEW" class="selectpicker btn-warning text-orange" >
+													<option value="1" <?php if (@$PWA_Activa=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?></option>
+													<option value="0" <?php if (@$PWA_Activa=="0" || @$PWA_Activa=="") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?></option>
+												</select>
+												<span class="input-group-addon">
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_PWAAyuda; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+											</div>
+
+											<div class="form-group input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-sliders fa-fw"></i> <?php echo $MULTILANG_PWADireccionTexto; ?>:
+                                                </span>
+												<select id="PWA_DireccionTextoNEW" name="PWA_DireccionTextoNEW" class="selectpicker" >
+													<option value="ltr">LTR - Left to Right</option>
+													<option value="rtl" <?php if (@$PWA_DireccionTexto=="rtl") echo "SELECTED"; ?> >RTL - Right to Left</option>
+													<option value="auto" <?php if (@$PWA_DireccionTexto=="auto") echo "SELECTED"; ?> >Auto</option>
+												</select>
+											</div>
+
+											<div class="form-group input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-sliders fa-fw"></i> <?php echo $MULTILANG_PWADisplayPreferido; ?>:
+                                                </span>
+												<select id="PWA_DisplayNEW" name="PWA_DisplayNEW" class="selectpicker" >
+													<option value="fullscreen">FullScreen</option>
+													<option value="standalone" <?php if (@$PWA_Display=="standalone") echo "SELECTED"; ?> >StandAlone</option>
+													<option value="minimal-ui" <?php if (@$PWA_Display=="minimal-ui") echo "SELECTED"; ?> >Minimal UI</option>
+													<option value="browser" <?php if (@$PWA_Display=="browser") echo "SELECTED"; ?> >Browser</option>
+												</select>
+											</div>
+
+											<div class="form-group input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-sliders fa-fw"></i> <?php echo $MULTILANG_PWAOrientacionPantalla; ?>:
+                                                </span>
+												<select id="PWA_OrientacionNEW" name="PWA_OrientacionNEW" class="selectpicker" >
+													<option value="portrait">Portrait</option>
+													<option value="landscape" <?php if (@$PWA_Orientacion=="landscape") echo "SELECTED"; ?> >LandScape</option>
+												</select>
+											</div>
+
+											<div class="form-group input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-sliders fa-fw"></i> <?php echo $MULTILANG_PWAGCM; ?>:
+                                                </span>
+                                                <input name="PWA_GCMSenderIDNEW" value="<?php echo $PWA_GCMSenderID; ?>" type="text" class="form-control">
+											</div>
+
+										</div>
+										<div class="col-md-6">
+										    
+										    <label for="IconoPWA"><i class="fa fa-picture-o fa-2x fa-fw" aria-hidden="true"></i> <?php echo $MULTILANG_PWAIconos; ?></label><br>
+										    <div class="well" align=center><img src="pwa/launcher-icon-256.png?<?php echo filemtime('pwa/launcher-icon-256.png'); ?>" border=1></div>
+										    <div class="form-group input-group">
+												<span class="input-group-addon">
+													256x256 pixels
+												</span>
+												<input name="IconoPWANEW" type="file" class="form-control btn btn-info">
+										    </div>
+
+										</div>
+									</div>
                                 </div>
 
 

@@ -1,57 +1,56 @@
 {
-  "lang": "en",
-  "dir": "ltr",
-  "short_name": "Arrivals",
-  "name": "Arrivals at Sky High",
-  "description": "Progressive Web Application demonstration",
+  "lang": "es",
+  "short_name": "App",
+  "name": "App 1.0 (Dev)",
+  "description": "Aplicacion Web Progresiva generada automaticamente por Practico Framework",
   "icons": [
     {
-      "src": "launcher-icon.png",
+      "src": "pwa/launcher-icon.png",
       "sizes": "48x48",
       "type": "image/png"
     },
     {
-      "src": "launcher-icon-96.png",
+      "src": "pwa/launcher-icon-96.png",
       "sizes": "96x96",
       "type": "image/png"
     },
     {
-      "src": "launcher-icon-144.png",
+      "src": "pwa/launcher-icon-144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "launcher-icon-192.png",
+      "src": "pwa/launcher-icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "launcher-icon-256.png",
+      "src": "pwa/launcher-icon-256.png",
       "sizes": "256x256",
       "type": "image/png"
     }
   ],
-  "start_url": "./?utm_source=web_app_manifest",
+  "author": {
+    "name": "John F. Arroyave Gutierrez",
+    "website": "http://www.practico.org",
+    "github": "https://github.com/unix4you2",
+    "source-repo": "https://github.com/unix4you2/practico"
+  },
+  "screenshots": [{
+    "src": "pwa/screenshot-640x480.png",
+    "sizes": "640x480",
+    "type": "image/png"
+  },{
+    "src": "pwa/screenshot-1280x920.png",
+    "sizes": "1280x920",
+    "type": "image/png"
+  }],
+  
+  "scope": "pwa/",
+  "start_url": "./index.php",
+  "dir": "ltr",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#29BDBB",
-  "background_color": "#29BDBB",
-  "scope": "/racer/",
-  "screenshots": [{
-    "src": "screenshots/in-game-1x.jpg",
-    "sizes": "640x480",
-    "type": "image/jpeg"
-  },{
-    "src": "screenshots/in-game-2x.jpg",
-    "sizes": "1280x920",
-    "type": "image/jpeg"
-  }],
-  "author": {
-    "name": "Gokulakrishnan Kalaikovan",
-    "website": "https://gokulkrishh.github.io",
-    "github": "https://github.com/gokulkrishh",
-    "source-repo": "https://github.com/gokulkrishh/demo-progressive-web-app"
-  },
-  "gcm_sender_id": "847244712742",
-  "gcm_user_visible_only": true
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff"
 }

@@ -143,4 +143,10 @@
     <!-- Morris Charts JavaScript -->
     <script src="inc/bootstrap/js/plugins/morris/raphael.min.js"></script>
     <script src="inc/bootstrap/js/plugins/morris/morris.min.js"></script>
+
+    <?php
+        // Agrega soporte para PWA si aplica
+        if ($PWA_Activa=="1")
+            echo '<link rel="manifest" href="pwa/manifest.json">';
+    ?>    
 </head>

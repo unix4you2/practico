@@ -104,12 +104,19 @@
 	// Especifica si desea activar o no el modulo de chat para usuarios asi:
 	// 0=No, 1=Solo usuarios internos, 2=Solo usuarios externos, 3=Todos los usuarios, 4=Exclusivo para admin (podra iniciar conversacion y chat con cualquier otro usuario aun con modulo desactivado)
 	$Activar_ModuloChat=4;
+	
+	// Especifica si desea activar o no el registro de la aplicacion como una Aplicacion web progresiva PWA
+	$PWA_Activa=1;
+	$PWA_DireccionTexto='ltr';
+	$PWA_Display='standalone';
+	$PWA_Orientacion='portrait';
+	$PWA_GCMSenderID='';
 
 	// Define cadena usada para separar campos en operaciones de bases de datos
 	$_SeparadorCampos_='||_||';
 	
 	// Define si la plataforma se encuentra activa para realizar desarrollo interno de PracticoFramework
-	$ModoDesarrolladorPractico=-10000;
+	$ModoDesarrolladorPractico=-10000; // [0=Inactivo|-10000=Activo]
 
 	// Define cadena separada por comas con usuarios administradores de la aplicacion
 	$PCOVAR_Administradores='admin,pepito';
