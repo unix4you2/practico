@@ -62,8 +62,8 @@
   }],
   
   
-  "scope": "/en/",
-  "start_url": "/en/",
+  "scope": "/",
+  "start_url": "/",
   "dir": "ltr",
   "display": "standalone",
   "orientation": "portrait",

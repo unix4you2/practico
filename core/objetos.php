@@ -340,19 +340,19 @@ $salida=sprintf("<?php
 					//Si la extension es permitida sigue adelante
 					if ($extension_archivo=="png")
 					    {
-        					if (!move_uploaded_file($nombre_archivo_temporal, "pwa/launcher-icon-256.png" ))
+        					if (!move_uploaded_file($nombre_archivo_temporal, "pwa/launcher-icon-512.png" ))
         						$mensaje_error.=$nombre_archivo.'- '.$MULTILANG_FrmErrorCargaGeneral;
         					else
         					    {
         					        //Si pudo crear el archivo entonces hace de una vez la creacion de los demas iconos a partir de este
-        					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-256.png","256","256");
-        					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-192.png","192","192");
-        					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-152.png","152","152");
-        					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-144.png","144","144");
-        					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-96.png","96","96");
-        					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-72.png","72","72");
-        					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-36.png","36","36");
-        					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon.png","48","48");
+        					        RedimensionarImagenPWA("pwa/launcher-icon-512.png","pwa/launcher-icon-256.png","256","256");
+        					        RedimensionarImagenPWA("pwa/launcher-icon-512.png","pwa/launcher-icon-192.png","192","192");
+        					        RedimensionarImagenPWA("pwa/launcher-icon-512.png","pwa/launcher-icon-152.png","152","152");
+        					        RedimensionarImagenPWA("pwa/launcher-icon-512.png","pwa/launcher-icon-144.png","144","144");
+        					        RedimensionarImagenPWA("pwa/launcher-icon-512.png","pwa/launcher-icon-96.png","96","96");
+        					        RedimensionarImagenPWA("pwa/launcher-icon-512.png","pwa/launcher-icon-72.png","72","72");
+        					        RedimensionarImagenPWA("pwa/launcher-icon-512.png","pwa/launcher-icon-36.png","36","36");
+        					        RedimensionarImagenPWA("pwa/launcher-icon-512.png","pwa/launcher-icon.png","48","48");
         					    }
 					    }
                 }
