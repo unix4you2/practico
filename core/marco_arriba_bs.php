@@ -42,6 +42,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="generator" content="Practico <?php  $PCO_VersionActual = file("inc/version_actual.txt"); $PCO_VersionActual = trim($PCO_VersionActual[0]); echo $PCO_VersionActual; ?>" />
 	<meta name="description" content="Generador de aplicaciones web - www.practico.org" />
+    <meta name="theme-color" content="<?php echo $PCO_ColorFondoGeneral; ?>"/>
     <meta name="author" content="John Arroyave G. - {www.practico.org} - {unix4you2 at gmail.com}">
 	<title><?php echo $NombreRAD; ?> <?php echo $PCO_VersionActual; ?></title>
 
@@ -143,10 +144,37 @@
     <!-- Morris Charts JavaScript -->
     <script src="inc/bootstrap/js/plugins/morris/raphael.min.js"></script>
     <script src="inc/bootstrap/js/plugins/morris/morris.min.js"></script>
-
     <?php
         // Agrega soporte para PWA si aplica
         if ($PWA_Activa=="1")
-            echo '<link rel="manifest" href="pwa/manifest.json">';
+            {
+                echo '<link rel="manifest" href="pwa/manifest.json?'.filemtime('pwa/manifest.json').'">';
+    ?>
+        	<script language="JavaScript">
+                if (!('serviceWorker' in navigator))
+                    {
+                        console.log('Practico Framework: Service worker not supported in your browser');
+                    }
+                else
+                    {
+                        navigator.serviceWorker.register('pwa/service-worker.js?<?php echo filemtime('pwa/service-worker.js'); ?>')
+                        .then(function() {
+                          console.log('Practico Framework: Service Worker REGISTERED');
+                        })
+                        .catch(function(error) {
+                          console.log('Practico Framework: Service Worker Registration failed:', error);
+                        });
+                    }
+        	</script>
+    <?php
+            } //Fin PWA_Activa
     ?>    
+
+  <!-- Agrega soporte para "Add to home screen" para Safari en iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="<?php echo $Nombre_Aplicacion; ?>">
+  <link rel="apple-touch-icon" href="pwa/launcher-icon-152.png">
+  <meta name="msapplication-TileImage" content="pwa/launcher-icon-144.png">
+  <meta name="msapplication-TileColor" content="#2F3BA2">
 </head>

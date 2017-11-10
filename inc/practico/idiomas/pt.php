@@ -1298,3 +1298,15 @@
     $MULTILANG_Documentar='Documento';
     $MULTILANG_DocumentarDes='Adicione ao início do código um modelo de documentação para funções ou procedimentos na notação NaturalDocs';
     $MULTILANG_DocumentarLink='Abra ajuda adicional de documentação para NaturalDocs';
+
+    //PWA
+    $MULTILANG_PWAActivar='Ative o uso de aplicativos da Web Progressivos';
+    $MULTILANG_PWAAyuda='Ele permite ativar no aplicativo a tecnologia PWA que permite que seu aplicativo faça uma solicitação de instalação como aplicativo móvel a partir de navegadores em dispositivos que ofereçam suporte a esta tecnologia. Para mais informações, veja os links  https://w3c.github.io/manifest/  y  https://developers.google.com/web/progressive-web-apps/';
+    $MULTILANG_PWAIconos='Definição de ícones para a aplicação';
+    $MULTILANG_PWADescripcion='Aplicação da Web progressiva gerada automaticamente pelo Practico Framework';
+    $MULTILANG_PWADireccionTexto='Direção de texto';
+    $MULTILANG_PWADisplayPreferido='Modo de exibição preferido';
+    $MULTILANG_PWAOrientacionPantalla='Orientação da tela';
+    $MULTILANG_PWAGCM='ID do Google Cloud Messaging';
+    $MULTILANG_PWAScope='Alcance (Scope)';
+    $MULTILANG_PWAScopeDes='Se a sua instalação do Practico reside na raiz do seu servidor web ou subdomínio, você pode deixar este espaço em branco. Se a sua instalação reside em qualquer pasta, indique /pasta/ para estabelecer o escopo do Operador de Serviço e do manifesto PWA.';

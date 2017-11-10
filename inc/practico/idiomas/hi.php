@@ -1296,3 +1296,15 @@
     $MULTILANG_Documentar='दस्तावेज़';
     $MULTILANG_DocumentarDes='नैसर्गिक दस्तावेज़ संकेतन में कार्य या कार्यविधियों के लिए कोड की शुरुआत में एक प्रलेखन टेम्पलेट जोड़ें';
     $MULTILANG_DocumentarLink='NaturalDocs के लिए अतिरिक्त दस्तावेज़ मदद खोलें';
+
+    //PWA
+    $MULTILANG_PWAActivar='प्रगतिशील वेब अनुप्रयोगों के उपयोग को सक्रिय करें';
+    $MULTILANG_PWAAyuda='यह पीडब्लूए प्रौद्योगिकी के आवेदन में सक्रिय करने की अनुमति देता है जो आपके एप्लिकेशन को इस तकनीक का समर्थन करने वाले उपकरणों में ब्राउज़रों से मोबाइल एप्लिकेशन के रूप में स्थापना के लिए अनुरोध करने की अनुमति देता है। अधिक जानकारी के लिए लिंक देखें  https://w3c.github.io/manifest/  y  https://developers.google.com/web/progressive-web-apps/';
+    $MULTILANG_PWAIconos='ऐप के लिए आइकन की परिभाषा';
+    $MULTILANG_PWADescripcion='प्रोग्रेसिव वेब एप्लिकेशन आधिकारिक रूपरेखा द्वारा स्वचालित रूप से तैयार किया गया';
+    $MULTILANG_PWADireccionTexto='पाठ दिशा';
+    $MULTILANG_PWADisplayPreferido='पसंदीदा डिस्प्ले मोड';
+    $MULTILANG_PWAOrientacionPantalla='स्क्रीन अभिविन्यास';
+    $MULTILANG_PWAGCM='Google क्लाउड मेसेजिंग आईडी';
+    $MULTILANG_PWAScope='क्षेत्र (Scope)';
+    $MULTILANG_PWAScopeDes='यदि आपका प्रैक्टिको इंस्टॉलेशन आपके वेब सर्वर या सबडोमेन की जड़ पर रहता है, तो आप इसे रिक्त छोड़ सकते हैं। यदि आपकी स्थापना किसी भी फ़ोल्डर पर मौजूद है तो सेवा कर्मचारी और पीडब्ल्यूए मैनिफेस्ट के दायरे को स्थापित करने के लिए संकेत / फ़ोल्डर दें।';

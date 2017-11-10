@@ -48,9 +48,6 @@
 ?>
 
 <?php
-    // Incluye encabezados, estilos y demas del HEAD
-    include_once("core/marco_arriba_bs.php");
-
     //Segun el tema actual asigna la variable body-bg del tema al background de los elementos principales y escritorio
     if ($Tema_PracticoFramework=="bootstrap") { $PCO_ColorFondoGeneral="#ffffff"; }
     if ($Tema_PracticoFramework=="cerulean") { $PCO_ColorFondoGeneral="#ffffff"; }
@@ -71,6 +68,9 @@
     if ($Tema_PracticoFramework=="yeti") { $PCO_ColorFondoGeneral="#2f2f2f"; }
     if ($Tema_PracticoFramework=="amelia") { $PCO_ColorFondoGeneral="#108a93"; }
     if ($Tema_PracticoFramework=="material") { $PCO_ColorFondoGeneral="#ffffff"; }
+
+    // Incluye encabezados, estilos y demas del HEAD
+    include_once("core/marco_arriba_bs.php");
 ?>
 
 <body oncontextmenu="return false;"  style="background-color: <?php echo $PCO_ColorFondoGeneral; ?>;">

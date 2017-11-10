@@ -197,6 +197,16 @@
 
 											<div class="form-group input-group">
                                                 <span class="input-group-addon">
+                                                    <i class="fa fa-sliders fa-fw"></i> <?php echo $MULTILANG_PWAScope; ?>:
+                                                </span>
+                                                <input name="PWA_ScopeNEW" value="<?php echo $PWA_Scope; ?>" type="text" class="form-control">
+												<span class="input-group-addon">
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_PWAScopeDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+											</div>
+
+											<div class="form-group input-group">
+                                                <span class="input-group-addon">
                                                     <i class="fa fa-sliders fa-fw"></i> <?php echo $MULTILANG_PWAGCM; ?>:
                                                 </span>
                                                 <input name="PWA_GCMSenderIDNEW" value="<?php echo $PWA_GCMSenderID; ?>" type="text" class="form-control">
@@ -206,10 +216,10 @@
 										<div class="col-md-6">
 										    
 										    <label for="IconoPWA"><i class="fa fa-picture-o fa-2x fa-fw" aria-hidden="true"></i> <?php echo $MULTILANG_PWAIconos; ?></label><br>
-										    <div class="well" align=center><img src="pwa/launcher-icon-256.png?<?php echo filemtime('pwa/launcher-icon-256.png'); ?>" border=1></div>
+										    <div class="well" align=center><img width="192" height="192" src="pwa/launcher-icon-512.png?<?php echo filemtime('pwa/launcher-icon-512.png'); ?>" border=1></div>
 										    <div class="form-group input-group">
 												<span class="input-group-addon">
-													256x256 pixels
+													<i class="fa fa-exclamation-triangle" aria-hidden="true"></i><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <b>512x512 pixels</b> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 												</span>
 												<input name="IconoPWANEW" type="file" class="form-control btn btn-info">
 										    </div>

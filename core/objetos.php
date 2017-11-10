@@ -345,9 +345,13 @@ $salida=sprintf("<?php
         					else
         					    {
         					        //Si pudo crear el archivo entonces hace de una vez la creacion de los demas iconos a partir de este
+        					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-256.png","256","256");
         					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-192.png","192","192");
+        					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-152.png","152","152");
         					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-144.png","144","144");
         					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-96.png","96","96");
+        					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-72.png","72","72");
+        					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon-36.png","36","36");
         					        RedimensionarImagenPWA("pwa/launcher-icon-256.png","pwa/launcher-icon.png","48","48");
         					    }
 					    }
@@ -359,7 +363,20 @@ $salida=sprintf("<?php
                     //Define si se cuenta o no con ID de GCM
                     $CadenaFinalGCM="";
                     if ($PWA_GCMSenderIDNEW!="")
-                        $CadenaFinalGCM='"gcm_sender_id": "'.$PWA_GCMSenderIDNEW.'",';
+                        $CadenaFinalGCM='"gcm_sender_id": "'.$PWA_GCMSenderIDNEW.'",
+    "gcm_user_visible_only": true,
+	"permissions": [
+	  "gcm", "storage"
+	],';
+
+                    //Define el Scope y la URL inicial
+                        $CadenaFinalScope='
+  "scope": "/",
+  "start_url": "/",';
+                    if ($PWA_ScopeNEW!="")
+                        $CadenaFinalScope='
+  "scope": "'.$PWA_ScopeNEW.'",
+  "start_url": "'.$PWA_ScopeNEW.'",';
 
                     if ($Tema_PracticoFramework=="bootstrap") { $PCO_ColorFondoGeneral="#ffffff"; }
                     if ($Tema_PracticoFramework=="cerulean") { $PCO_ColorFondoGeneral="#ffffff"; }
@@ -389,28 +406,43 @@ $manifiesto=sprintf('{
   "description": "%s",
   "icons": [
     {
-      "src": "pwa/launcher-icon.png",
+      "src": "launcher-icon.png",
       "sizes": "48x48",
       "type": "image/png"
     },
     {
-      "src": "pwa/launcher-icon-96.png",
+      "src": "launcher-icon-36.png",
+      "sizes": "36x36",
+      "type": "image/png"
+    },
+    {
+      "src": "launcher-icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "launcher-icon-96.png",
       "sizes": "96x96",
       "type": "image/png"
     },
     {
-      "src": "pwa/launcher-icon-144.png",
+      "src": "launcher-icon-144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "pwa/launcher-icon-192.png",
+      "src": "launcher-icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "pwa/launcher-icon-256.png",
+      "src": "launcher-icon-256.png",
       "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "launcher-icon-512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ],
@@ -421,23 +453,23 @@ $manifiesto=sprintf('{
     "source-repo": "https://github.com/unix4you2/practico"
   },
   "screenshots": [{
-    "src": "pwa/screenshot-640x480.png",
+    "src": "screenshot-640x480.png",
     "sizes": "640x480",
     "type": "image/png"
   },{
-    "src": "pwa/screenshot-1280x920.png",
+    "src": "screenshot-1280x920.png",
     "sizes": "1280x920",
     "type": "image/png"
   }],
   %s
-  "scope": "pwa/",
-  "start_url": "./index.php",
+  %s
   "dir": "%s",
   "display": "%s",
   "orientation": "%s",
+  "prefer_related_applications": false,
   "theme_color": "%s",
   "background_color": "%s"
-}',$IdiomaPredeterminado,$Nombre_Aplicacion,$Nombre_Aplicacion,$Version_Aplicacion,$Nombre_Empresa_Corto,$MULTILANG_PWADescripcion,$CadenaFinalGCM,$PWA_DireccionTextoNEW,$PWA_DisplayNEW,$PWA_OrientacionNEW,$PCO_ColorFondoGeneral,$PCO_ColorFondoGeneral);
+}',$IdiomaPredeterminado,$Nombre_Aplicacion,$Nombre_Aplicacion,$Version_Aplicacion,$Nombre_Empresa_Corto,$MULTILANG_PWADescripcion,$CadenaFinalGCM,$CadenaFinalScope,$PWA_DireccionTextoNEW,$PWA_DisplayNEW,$PWA_OrientacionNEW,$PCO_ColorFondoGeneral,$PCO_ColorFondoGeneral);
 
         			// Escribe el archivo de manifiesto
         			$archivo_config_manifiesto=fopen("pwa/manifest.json","w");

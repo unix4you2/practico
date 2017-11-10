@@ -1300,11 +1300,13 @@
     
     //PWA
     $MULTILANG_PWAActivar='Activar el uso de Aplicaciones Web Progresivas';
-    $MULTILANG_PWAAyuda='Permite activar en la aplicación la tecnología PWA que permite que su aplicación haga una solicitud de instalación como aplicación móvil desde los navegadores en dispositivos que soporten dicha tecnología.   Para más información consulte los enlaces  https://w3c.github.io/manifest/  y  https://developers.google.com/web/progressive-web-apps/';
-    $MULTILANG_PWAIconos='Definición de iconos para la App';
+    $MULTILANG_PWAAyuda='Permite activar en la aplicaci&oacute;n la tecnolog&iacute;a PWA que permite que su aplicaci&oacute;n haga una solicitud de instalaci&oacute;n como aplicaci&oacute;n m&oacute;vil desde los navegadores en dispositivos que soporten dicha tecnolog&iacute;a.   Para m&aacute;s informaci&oacute;n consulte los enlaces  https://w3c.github.io/manifest/  y  https://developers.google.com/web/progressive-web-apps/';
+    $MULTILANG_PWAIconos='Definici&oacute;n de iconos para la App';
     $MULTILANG_PWADescripcion='Aplicacion Web Progresiva generada automaticamente por Practico Framework';
-    $MULTILANG_PWADireccionTexto='Dirección del texto';
-    $MULTILANG_PWADisplayPreferido='Modo de visualización preferido';
-    $MULTILANG_PWAOrientacionPantalla='Orientación de pantalla';
-    $MULTILANG_PWAGCM='Google Cloud Messaging ID';
+    $MULTILANG_PWADireccionTexto='Direcci&oacute;n del texto';
+    $MULTILANG_PWADisplayPreferido='Modo de visualizaci&oacute;n preferido';
+    $MULTILANG_PWAOrientacionPantalla='Orientaci&oacute;n de pantalla';
+    $MULTILANG_PWAGCM='ID de Google Cloud Messaging';
+    $MULTILANG_PWAScope='Alcance (Scope)';
+    $MULTILANG_PWAScopeDes='Si su instalaci&oacute;n de Pr&aacute;ctico reside sobre la raiz de su servidor web o subdominio puede dejar esto en blanco.  Si su instalaci&oacute;n reside sobre alguna carpeta por favor indique /carpeta/ para establecer el alcance del Service Worker y el manifiesto de PWA.';
 

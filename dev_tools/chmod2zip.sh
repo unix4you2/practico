@@ -44,6 +44,7 @@
     #Permisos de archivos basicos de configuracion
     chmod 777 core/configuracion.php
     chmod 777 core/ws_oauth.php
+    chmod 777 pwa/manifest.json
 
     #chown -R www-data *
     #chown -R www *
