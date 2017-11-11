@@ -2843,6 +2843,34 @@ if ($PCO_Accion=="editar_formulario")
 */
 	if ($PCO_Accion=="copiar_formulario")
 		{
+            PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto);
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCO_ExportarXMLFormulario
+	Exporta las especificaciones de un formulario a una cadena XML valida dentro de un archivo especificado
+
+	Variables de entrada:
+
+		formulario - Identificador unico del formulario que se desea exportar
+		tipo_copia_objeto - Indica el tipo de copia que se hara del formulario: EnLinea|XML_IdEstatico|XML_IdDinamico
+
+	Salida:
+
+		Archivo con el elemento exportado
+
+	Ver tambien:
+		<administrar_formularios>
+*/
+function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$ArchivoDestinoXML="")
+    {
+        global $ArchivoCORE,$ListaCamposSinID_evento_objeto,$_SeparadorCampos_,$TablasCore,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
+        global $MULTILANG_ErrorDatos,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_FrmMsjCopia,$MULTILANG_FrmTipoCopiaExporta,$MULTILANG_FrmCopiaFinalizada,$MULTILANG_IrEscritorio,$MULTILANG_Descargar;
+        global $PCO_VersionActual,$Nombre_Aplicacion,$Version_Aplicacion,$PCOSESS_LoginUsuario,$PCO_FechaOperacionGuiones,$PCO_HoraOperacionPuntos,$PCO_FechaOperacion,$PCO_HoraOperacion;
+
 			$mensaje_error="";
 			if ($formulario=="")
 				$mensaje_error=$MULTILANG_ErrorTiempoEjecucion.".  No ingreso ID de Formulario / Form ID not entered";
@@ -3041,8 +3069,15 @@ if ($PCO_Accion=="editar_formulario")
 							auditar("Crea copia $tipo_copia_objeto de formulario $formulario");
 							
 							//Guarda la cadena generada en el archivo XML
-							$PCO_NombreArchivoXML="FormID_".$formulario."_".$PCO_FechaOperacion."_".$PCO_HoraOperacion.".xml";
-							$PCO_PunteroArchivo = fopen("tmp/".$PCO_NombreArchivoXML, "w");
+							if ($ArchivoDestinoXML=="")
+							    {
+        							$PCO_NombreArchivoXML="FormID_".$formulario."_".$PCO_FechaOperacion."_".$PCO_HoraOperacion.".xml";
+        							$PCO_PunteroArchivo = fopen("tmp/".$PCO_NombreArchivoXML, "w");
+							    }
+							else
+							    {
+        							$PCO_PunteroArchivo = fopen($ArchivoDestinoXML, "w");
+							    }
 							if($PCO_PunteroArchivo==false)
 								die("No se puede abrir el archivo de exportacion");
 							fputs ($PCO_PunteroArchivo, $Contenido_XML);
@@ -3070,7 +3105,7 @@ if ($PCO_Accion=="editar_formulario")
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
-		}
+    }
 
 
 /* ################################################################## */

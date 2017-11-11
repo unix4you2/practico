@@ -106,7 +106,7 @@
 	$Activar_ModuloChat=4;
 	
 	// Especifica si desea activar o no el registro de la aplicacion como una Aplicacion web progresiva PWA
-	$PWA_Activa=1;
+	$PWA_Activa=0;
 	$PWA_DireccionTexto='ltr';
 	$PWA_Display='standalone';
 	$PWA_Orientacion='portrait';
