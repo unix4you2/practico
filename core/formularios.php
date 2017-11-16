@@ -2159,8 +2159,24 @@ if ($PCO_Accion=="editar_formulario")
                         
                         $peso_aumentado=$registro["peso"]+1;
 						if ($registro["peso"]-1>=1) $peso_disminuido=$registro["peso"]-1; else $peso_disminuido=1;
+						
+                        //Si el elemento es un formulario o informe embebido busca ademas el nombre del mismo
+                        $Complemento_NombreEmbebido="";
+                        if ($registro["tipo"]=="informe")
+                            {
+                                $IdentificadorBusqueda=$registro["informe_vinculado"];
+                                $RegistroEmbebido=ejecutar_sql("SELECT titulo FROM ".$TablasCore."informe WHERE id=$IdentificadorBusqueda ")->fetch();
+                                $Complemento_NombreEmbebido="<br><i>".$RegistroEmbebido["titulo"]."</i>";
+                            }
+                        if ($registro["tipo"]=="form_consulta")
+                            {
+                                $IdentificadorBusqueda=$registro["formulario_vinculado"];
+                                $RegistroEmbebido=ejecutar_sql("SELECT titulo FROM ".$TablasCore."formulario WHERE id=$IdentificadorBusqueda ")->fetch();
+                                $Complemento_NombreEmbebido="<br><i>".$RegistroEmbebido["titulo"]."</i>";
+                            }
+						
 						echo '<tr>
-                                <td><b>'.$registro["titulo"].'</b> ('.$registro["tipo"].')</td>
+                                <td><b>'.$registro["titulo"].'</b> ('.$registro["tipo"].')'.$Complemento_NombreEmbebido.'</td>
 								<td><b>'.$registro["campo"].'</b></td>
 								<td align=center nowrap>
 									<form action="'.$ArchivoCORE.'" method="POST" name="ifoc'.$registro["id"].'" id="ifoc'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
