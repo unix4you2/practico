@@ -2337,13 +2337,58 @@ if ($PCO_Accion=="guardar_informe")
 	Agrega un informe a partir de otro para la aplicacion
 
 	Salida:
-		Registro agregado y paso al administrador de informes
+		Archivo con el elemento exportado
 
 	Ver tambien:
-		<administrar_informes>
+		<administrar_formularios>
 */
 	if ($PCO_Accion=="clonar_diseno_informe")
 		{
+				//Presenta la ventana con informacion y enlace de descarga
+				abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
+					<div align=center>
+					<?php
+				        echo $MULTILANG_FrmCopiaFinalizada."<hr>"; 
+                        PCO_ExportarXMLInforme($informe,$tipo_copia_objeto);
+					?>
+					</div>
+				<?php
+				cerrar_ventana();
+				?>
+    			<div align=center>
+    			<br><br>
+    			<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+    			</div>
+		    <?php
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCO_ExportarXMLInforme
+	Exporta las especificaciones de un informe a una cadena XML valida dentro de un archivo especificado
+
+	Variables de entrada:
+
+		informe - Identificador unico del informe que se desea exportar
+		tipo_copia_objeto - Indica el tipo de copia que se hara del informe: EnLinea|XML_IdEstatico|XML_IdDinamico
+
+	Salida:
+
+		Archivo con el elemento exportado
+
+	Ver tambien:
+		<administrar_formularios>
+*/
+function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXML="")
+    {
+        global $ArchivoCORE,$ListaCamposSinID_evento_objeto,$_SeparadorCampos_,$TablasCore,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
+        global $MULTILANG_ErrorDatos,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_FrmMsjCopia,$MULTILANG_FrmTipoCopiaExporta,$MULTILANG_FrmCopiaFinalizada,$MULTILANG_IrEscritorio,$MULTILANG_Descargar;
+        global $PCO_VersionActual,$Nombre_Aplicacion,$Version_Aplicacion,$PCOSESS_LoginUsuario,$PCO_FechaOperacionGuiones,$PCO_HoraOperacionPuntos,$PCO_FechaOperacion,$PCO_HoraOperacion;
+        global $ListaCamposSinID_informe,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_boton;
+
+
 			$mensaje_error="";
 			if ($informe=="")
 				$mensaje_error=$MULTILANG_ErrorTiempoEjecucion.".  No ingreso ID de Informe - Report ID not entered";
@@ -2493,7 +2538,8 @@ if ($PCO_Accion=="guardar_informe")
 							</form>
 							<script type="" language="JavaScript"> 
 							alert("'.$MULTILANG_FrmMsjCopia.$nuevo_titulo.' ID: '.$idObjetoInsertado.'");
-							document.cancelar.submit();  </script>';
+							document.cancelar.submit();  
+							</script>';
 						}
 
 
@@ -2595,26 +2641,21 @@ if ($PCO_Accion=="guardar_informe")
 							$Contenido_XML .= "
 </objetos_practicos>";
 
+							auditar("Crea copia $tipo_copia_objeto de informe $informe");
+
 							//Guarda la cadena generada en el archivo XML
-							$PCO_NombreArchivoXML="RepID_".$informe."_".$PCO_FechaOperacion."_".$PCO_HoraOperacion.".xml";
-							$PCO_PunteroArchivo = fopen("tmp/".$PCO_NombreArchivoXML, "w");
+							if ($PCO_NombreArchivoXML=="")
+        						$PCO_NombreArchivoXML="tmp/RepID_".$informe."_".$PCO_FechaOperacion."_".$PCO_HoraOperacion.".xml";
+							$PCO_PunteroArchivo = fopen($PCO_NombreArchivoXML, "w");
 							if($PCO_PunteroArchivo==false)
 								die("No se puede abrir el archivo de exportacion");
 							fputs ($PCO_PunteroArchivo, $Contenido_XML);
 							fclose ($PCO_PunteroArchivo);
-
-							auditar("Crea copia $tipo_copia_objeto de informe $informe");
+							
 							//Presenta la ventana con informacion y enlace de descarga
-							abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
-								<div align=center>
-								<?php echo $MULTILANG_FrmCopiaFinalizada; ?>
-								<br><br>
-								<a class="btn btn-success" href="tmp/<?php echo $PCO_NombreArchivoXML; ?>" target="_BLANK" download><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar; ?></a>
-								<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
-								</div>
-
+							?>
+								<a class="btn btn-success" href="<?php echo $PCO_NombreArchivoXML; ?>" target="_BLANK" download><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar." ".$PCO_NombreArchivoXML; ?></a>
 							<?php
-							cerrar_ventana();
 						}
 
 				}
@@ -2627,7 +2668,7 @@ if ($PCO_Accion=="guardar_informe")
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
-		}
+    }
 
 
 /* ################################################################## */

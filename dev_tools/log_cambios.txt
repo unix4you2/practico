@@ -50,6 +50,7 @@ LogCambios="
 * Added: En modo diseño de formularios se presenta el titulo de los elementos embebidos (informes o formularios) sobre su botón de edición.
 * Added: La lista de informes presenta clasificado el tipo de informe como tabla o gráfico para facilitar su identificación
 * Added: La edición general de campos para un formulario presenta el título en los elementos embebidos.
+* Added: Durante la edición de eventos ahora se presenta el ID HTML del objeto asociado.
 * Enhan: Sensores de rango con valores iguales en máximos y mínimos presentan ahora una dona sin divisiones y su resultado.
 * Enhan: Mejorada interfaz en paneles de configuración.
 * Enhan: Optimizada la forma en que se generan copias de formularios e informes para independizar procesos masivos
