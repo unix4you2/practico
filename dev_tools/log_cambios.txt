@@ -46,6 +46,7 @@ LogCambios="
 * Added: Agregado el soporte para convertir automaticamente las aplicaciones a Aplicaciones Web Progresivas desde el panel de configuracion.
 * Added: Agregado soporte para Add to Home en Safari para iOS
 * Added: Los informes embebidos presentan subtotales cuando se encuentran en formato datatable y además se han configurado columnas de subtotales para estos.
+* Added: En modo diseño de formularios se presenta el titulo de los elementos embebidos (informes o formularios) sobre su botón de edición.
 * Enhan: Sensores de rango con valores iguales en máximos y mínimos presentan ahora una dona sin divisiones y su resultado.
 * Enhan: Mejorada interfaz en paneles de configuración.
 * Enhan: Optimizada la forma en que se generan copias de formularios e informes para independizar procesos masivos
