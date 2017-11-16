@@ -3291,6 +3291,7 @@ if ($PCO_Accion=="administrar_informes")
 					<thead>
                     <tr>
 						<td><b>Id</b></td>
+						<td><b><?php echo $MULTILANG_Tipo; ?></b></td>
 						<td><b><?php echo $MULTILANG_Titulo; ?></b></td>
 						<td><b><?php echo $MULTILANG_InfCategoria; ?></b></td>
 						<td></td>
@@ -3303,8 +3304,14 @@ if ($PCO_Accion=="administrar_informes")
 				$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe ORDER BY titulo");
 				while($registro = $consulta_forms->fetch())
 					{
+					    //Determina si el informe es grafico o tabla para presentar un indicador en el listado
+					    $TipoInforme="<i class='fa fa-table fa-fw' aria-hidden='true'></i>";
+					    if ($registro["formato_final"]=="G")
+                            $TipoInforme="<i class='fa fa-pie-chart fa-fw' aria-hidden='true'></i>";
+					    
 						echo '<tr>
 								<td><b>'.$registro["id"].'</b></td>
+								<td>'.$TipoInforme.'</td>
 								<td>'.$registro["titulo"].'</td>
 								<td>'.$registro["categoria"].'</td>
 								<td align="center">
