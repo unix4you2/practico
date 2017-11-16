@@ -720,16 +720,20 @@
             $IdEventoPrevio=$registro_evento_previo["id"];
             $JavaScriptEventoPrevio=$registro_evento_previo["javascript"];
             
+            //Busca el ID_HTML del objeto
+			$registro_objeto=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE id=? ","$id_objeto_evento")->fetch();
+            
             $NaturalDocs_PlantillaFuncion="\n/*\nFunction: SUNOMBRE_$evento_objeto\n\tIngrese aqui la descripcion de su funcion, procedimiento o proceso realizado por este evento\n\n\tParametros:\n\n\t\tParametro1 - Descripcion del primer parametro de entrada\n\t\tParametro2 - Descripcion del segundo parametro de entrada\n\n\tProceso simplificado:\n\t\t(start code)\n\t\t\tInstrucciones especificas importantes, Scripts u operaciones de BD, Etc\n\t\t(end)\n\n\tSalida:\n\n\t\tDescriba la salida de esta funcion, procedimiento o proceso\n\n\tVea tambien:\n\n\t\t<FuncionRelacionada1> | <FuncionRelacionada2> | <FuncionRelacionada3>\n*/\n\n";
             //Agrega una plantilla base cuando se esta creando el evento
             if($JavaScriptEventoPrevio=="") $JavaScriptEventoPrevio=$NaturalDocs_PlantillaFuncion;
         ?>
             <iframe name="iframe_almacenamiento" src="about:blank" style="visibility: hidden; display: none;"></iframe>
-            <form name="form_evento" target="iframe_almacenamiento" action="<?php echo $ArchivoCORE; ?>" style="padding: 0px; margin: 0px;">
+            <form name="form_evento" target="iframe_almacenamiento" action="<?php echo $ArchivoCORE; ?>" style="padding: 0px; margin: 0px;" class="well btn-xs">
                 <input type="Hidden" name="PCO_Accion" value="actualizar_java_evento">
                 <?php echo $MULTILANG_Evento?>: <input type="text" name="evento_objeto" value="<?php echo $evento_objeto; ?>" readonly style="width:200px; background-color: transparent; border: 0px solid; font-weight: bold;  color: #0000FF;">
-                <?php echo $MULTILANG_Objeto?> ID: <input type="text" name="id_objeto_evento" value="<?php echo $id_objeto_evento; ?>" readonly style="width:40px; background-color: transparent; border: 0px solid; font-weight: bold; color: #0000FF;">
-                <?php echo $MULTILANG_Tipo?> <?php echo $MULTILANG_Objeto?>: <input type="text" name="tipo" value="<?php echo $tipo; ?>" readonly style="width:200px; background-color: transparent; border: 0px solid; font-weight: bold; color: #0000FF;">
+                ID_HTML: <input type="text" name="id_html_visual" value="<?php echo $registro_objeto["id_html"]; ?>" readonly style="width:200px; background-color: transparent; border: 0px solid; font-weight: bold; color: #0000FF;">
+                <br><?php echo $MULTILANG_Tipo?> <?php echo $MULTILANG_Objeto?>: <input type="text" name="tipo" value="<?php echo $tipo; ?>" readonly style="width:175px; background-color: transparent; border: 0px solid; font-weight: bold; color: #0000FF;">
+                <?php echo $MULTILANG_Objeto?> ID: <input type="text" name="id_objeto_evento" value="<?php echo $id_objeto_evento; ?>" readonly style="width:200px; background-color: transparent; border: 0px solid; font-weight: bold; color: #0000FF;">
                 <input type="Hidden" name="Presentar_FullScreen" value="1">
                 <input type="Hidden" name="Precarga_EstilosBS" value="0">
                 <div class="well" style="margin: 0px; padding: 0px;">
