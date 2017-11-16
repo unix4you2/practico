@@ -45,6 +45,7 @@ LogCambios="
 * Added: Los monitores de tipo máquina respetan ahora el ancho indicado por su parametrización.  Valor recomendado inicial: 2
 * Added: Agregado el soporte para convertir automaticamente las aplicaciones a Aplicaciones Web Progresivas desde el panel de configuracion.
 * Added: Agregado soporte para Add to Home en Safari para iOS
+* Added: Los informes embebidos presentan subtotales cuando se encuentran en formato datatable y además se han configurado columnas de subtotales para estos.
 * Enhan: Sensores de rango con valores iguales en máximos y mínimos presentan ahora una dona sin divisiones y su resultado.
 * Enhan: Mejorada interfaz en paneles de configuración.
 * Enhan: Optimizada la forma en que se generan copias de formularios e informes para independizar procesos masivos

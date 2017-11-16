@@ -2843,7 +2843,22 @@ if ($PCO_Accion=="editar_formulario")
 */
 	if ($PCO_Accion=="copiar_formulario")
 		{
-            PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto);
+				//Presenta la ventana con informacion y enlace de descarga
+				abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
+					<div align=center>
+					<?php
+				        echo $MULTILANG_FrmCopiaFinalizada."<hr>"; 
+                        PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto);
+					?>
+					</div>
+				<?php
+				cerrar_ventana();
+				?>
+    			<div align=center>
+    			<br><br>
+    			<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+    			</div>
+		    <?php
 		}
 
 
@@ -2865,7 +2880,7 @@ if ($PCO_Accion=="editar_formulario")
 	Ver tambien:
 		<administrar_formularios>
 */
-function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$ArchivoDestinoXML="")
+function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArchivoXML="")
     {
         global $ArchivoCORE,$ListaCamposSinID_evento_objeto,$_SeparadorCampos_,$TablasCore,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
         global $MULTILANG_ErrorDatos,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_FrmMsjCopia,$MULTILANG_FrmTipoCopiaExporta,$MULTILANG_FrmCopiaFinalizada,$MULTILANG_IrEscritorio,$MULTILANG_Descargar;
@@ -3069,31 +3084,18 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$ArchivoDestin
 							auditar("Crea copia $tipo_copia_objeto de formulario $formulario");
 							
 							//Guarda la cadena generada en el archivo XML
-							if ($ArchivoDestinoXML=="")
-							    {
-        							$PCO_NombreArchivoXML="FormID_".$formulario."_".$PCO_FechaOperacion."_".$PCO_HoraOperacion.".xml";
-        							$PCO_PunteroArchivo = fopen("tmp/".$PCO_NombreArchivoXML, "w");
-							    }
-							else
-							    {
-        							$PCO_PunteroArchivo = fopen($ArchivoDestinoXML, "w");
-							    }
+							if ($PCO_NombreArchivoXML=="")
+        						$PCO_NombreArchivoXML="tmp/FormID_".$formulario."_".$PCO_FechaOperacion."_".$PCO_HoraOperacion.".xml";
+							$PCO_PunteroArchivo = fopen($PCO_NombreArchivoXML, "w");
 							if($PCO_PunteroArchivo==false)
 								die("No se puede abrir el archivo de exportacion");
 							fputs ($PCO_PunteroArchivo, $Contenido_XML);
 							fclose ($PCO_PunteroArchivo);
 							
 							//Presenta la ventana con informacion y enlace de descarga
-							abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
-								<div align=center>
-								<?php echo $MULTILANG_FrmCopiaFinalizada; ?>
-								<br><br>
-								<a class="btn btn-success" href="tmp/<?php echo $PCO_NombreArchivoXML; ?>" target="_BLANK" download><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar; ?></a>
-								<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
-								</div>
-
+							?>
+								<a class="btn btn-success" href="tmp/<?php echo $PCO_NombreArchivoXML; ?>" target="_BLANK" download><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar." ".$PCO_NombreArchivoXML; ?></a>
 							<?php
-							cerrar_ventana();
 						}
 				}
 			else

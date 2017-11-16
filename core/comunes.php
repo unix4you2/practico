@@ -6004,7 +6004,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
 					$SalidaFinalInforme.= '</tbody><tfoot>';
 
 					//Cuando es embebido (=1) no agrega los totales de registro
-					if (!$embebido)
+					//if (!$embebido)
 						{
 							@$SalidaFinalInforme.= '
 								<tr><td colspan='.$numero_columnas.'>
