@@ -720,3 +720,93 @@ $salida=sprintf("<?php
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+	if ($PCO_Accion=="exportacion_masiva_objetos")
+		{
+			/*
+				Function: exportacion_masiva_objetos
+				Exporta de manera masiva varios elementos de un tipo de objeto 
+
+				Variables de entrada:
+
+					TipoElementos - Indica el tipo de elementos que deben ser exportados:  Inf o Frm
+					ListaElementos - Una lista de los elementos de ese tipo que deben ser exportados en un formato similar a la impresion  EJ: 1,2,5-6,8,12-30
+					tipo_copia_objeto - Indica si los objetos seran generados con ID estatico o dinamico: XML_IdEstatico | XML_IdDinamico
+
+				Salida:
+
+					Archivos generados para los elementos seleccionados
+
+				Ver tambien:
+					<PCO_ExportarXMLInforme> | <PCO_ImportarXMLInforme> | <PCO_ExportarXMLFormulario> | <PCO_ImportarXMLFormulario>
+			*/
+
+			$mensaje_error="";
+			//Verifica todas las variables obligatorias
+			if ($TipoElementos!="Frm" && $TipoElementos!="Inf")  $mensaje_error="Tipo de elementos a exportar incorrectos";
+			if ($ListaElementos=="")  $mensaje_error="No se ha provisto una lista de elementos a exportar valida";
+
+			if ($mensaje_error=="")
+				{
+				    abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary');
+				    echo $MULTILANG_FrmCopiaFinalizada."<hr>"; 
+				    
+                    $ArregloElementosExportacion=PCO_ParsearListasElementos($ListaElementos);
+                    foreach ($ArregloElementosExportacion as $ElementoExportar)
+                        {
+                            //Valida que sea un elemento exportable (de usuario o interno pero en modo desarrollador)
+                            if ($ElementoExportar>=$ModoDesarrolladorPractico)
+                                {
+                                    //Establece el prefijo del path final del archivo exportado segun el valor de ID asi como si llevara fecha y hora o no
+                                    $PrefijoPath="tmp/";
+                                    $InfijoPath="_".$PCO_FechaOperacion."_".$PCO_HoraOperacion;
+                                    if ($ElementoExportar<0)    
+                                        {
+                                            $PrefijoPath="xml/";
+                                            $InfijoPath=""; //Elimina fecha y hora dejando siempre un nombre de archivo fijo
+                                        }
+                                    //Exporta elementos tipo informe
+                                    if ($TipoElementos=="Inf")
+                                        {
+                                            //Verifica primero que si exista el ID de informe asociado antes de proceder
+                                            $RegistroElemento=@ejecutar_sql("SELECT id FROM ".$TablasCore."informe WHERE id = '$ElementoExportar' ")->fetch();
+                                            if ($RegistroElemento["id"]!="")
+                                                {
+                                                    $PCO_NombreArchivoXML=$PrefijoPath."RepID_".$ElementoExportar.$InfijoPath.".xml";
+                                                    PCO_ExportarXMLInforme($ElementoExportar,$tipo_copia_objeto,$PCO_NombreArchivoXML);
+                                                }
+                                        }
+                                    //Exporta elementos tipo formulario
+                                    if ($TipoElementos=="Frm")
+                                        {
+                                            //Verifica primero que si exista el ID de informe asociado antes de proceder
+                                            $RegistroElemento=@ejecutar_sql("SELECT id FROM ".$TablasCore."formulario WHERE id = '$ElementoExportar' ")->fetch();
+                                            if ($RegistroElemento["id"]!="")
+                                                {
+                                                    $PCO_NombreArchivoXML=$PrefijoPath."FormID_".$ElementoExportar.$InfijoPath.".xml";
+                                                    PCO_ExportarXMLFormulario($ElementoExportar,$tipo_copia_objeto,$PCO_NombreArchivoXML);
+                                                }
+                                        }
+                                }
+                        }
+                    ?>
+            			<div align=center>
+            			<br><br>
+            			<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+            			</div>
+                    <?php
+                        cerrar_ventana();
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+		}

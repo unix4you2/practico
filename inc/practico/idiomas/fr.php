@@ -295,6 +295,7 @@
     $MULTILANG_ErrorConexionInternet='Il semble que vous ne disposiez plus d Internet, la connexion au système sera restaurée lorsque votre connexion Internet est normale. <br> <br> Vérifiez que votre connexion réseau ou votre signal de données est actif.';
     $MULTILANG_NombreRADDes='Nom utilisé pour le générateur d application. Ceci est également utilisé pour les titres de fenêtres';
     $MULTILANG_SaltoEdicion='Vous êtes sur le point de fermer la modification de l élément en cours et de passer à la fenêtre d édition de l élément sélectionné. Souhaitez-vous continuer?';
+    $MULTILANG_ExportacionMasiva='Exportation massive';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Conception de l application';

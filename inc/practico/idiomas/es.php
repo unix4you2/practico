@@ -296,7 +296,8 @@
     $MULTILANG_ErrorConexionInternet='Parece que te has quedado sin conexion a Internet, la conexión al sistema será restablecida cuando tu conexión a Internet se encuentre normal.<br><br>Verifica que tu conexión de red o señal de datos se encuentren activos.';
     $MULTILANG_NombreRADDes='Nombre del generador de aplicaciones.  Utilizado adem&aacute;s como t&iacute;tulo de todas las ventanas en la aplicaci&oacute;n.';
     $MULTILANG_SaltoEdicion='Usted se dispone a cerrar la edicion del elemento actual y saltar a la ventana de edicion del elemento selecionado.  Desea continuar?';
-
+    $MULTILANG_ExportacionMasiva='Exportación masiva';
+    
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';
 	$MULTILANG_TitDisenador='Dise&ntilde;ar la aplicaci&oacute;n, <b>es simple y r&aacute;pido:</b>';
@@ -1309,4 +1310,3 @@
     $MULTILANG_PWAGCM='ID de Google Cloud Messaging';
     $MULTILANG_PWAScope='Alcance (Scope)';
     $MULTILANG_PWAScopeDes='Si su instalaci&oacute;n de Pr&aacute;ctico reside sobre la raiz de su servidor web o subdominio puede dejar esto en blanco.  Si su instalaci&oacute;n reside sobre alguna carpeta por favor indique /carpeta/ para establecer el alcance del Service Worker y el manifiesto de PWA.';
-

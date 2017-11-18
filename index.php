@@ -247,7 +247,7 @@
         include("core/formularios.php");
     if ($PCO_Accion=="Iniciar_login" || $PCO_Accion=="Terminar_sesion" || $PCO_Accion=="Mensaje_cierre_sesion")
         include("core/sesion.php");
-    if ($PCO_Accion=="cargar_objeto" || $PCO_Accion=="guardar_configuracion" || $PCO_Accion=="guardar_oauth")
+    if ($PCO_Accion=="cargar_objeto" || $PCO_Accion=="guardar_configuracion" || $PCO_Accion=="guardar_oauth" || $PCO_Accion=="exportacion_masiva_objetos")
         include("core/objetos.php");
     if ($PCO_Accion=="actualizar_practico" || $PCO_Accion=="cargar_archivo" || $PCO_Accion=="analizar_parche" || $PCO_Accion=="aplicar_parche")
         include("core/actualizacion.php");

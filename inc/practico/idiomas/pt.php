@@ -295,6 +295,7 @@
     $MULTILANG_ErrorConexionInternet='Parece que você está sem conexão com a internet, a conexão com o sistema será restaurado quando sua conexão com a Internet ser comum.<br><br>Verifique sua conexão de rede ou sinal de dados estão ativos.';
     $MULTILANG_NombreRADDes='Nome usado para o gerador de aplicativos. Isso também é usado para títulos de janelas';
     $MULTILANG_SaltoEdicion='Você está prestes a fechar a edição do elemento atual e pular para a janela de edição do elemento selecionado. Você deseja continuar?';
+    $MULTILANG_ExportacionMasiva='Exportação maciça';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Design do aplicativo';
