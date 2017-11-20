@@ -296,6 +296,7 @@
     $MULTILANG_NombreRADDes='Nome usado para o gerador de aplicativos. Isso também é usado para títulos de janelas';
     $MULTILANG_SaltoEdicion='Você está prestes a fechar a edição do elemento atual e pular para a janela de edição do elemento selecionado. Você deseja continuar?';
     $MULTILANG_ExportacionMasiva='Exportação maciça';
+    $MULTILANG_AgregarAExportacion='Adicionar item à lista de exportação em massa';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Design do aplicativo';

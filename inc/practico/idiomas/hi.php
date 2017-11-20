@@ -296,6 +296,7 @@
     $MULTILANG_NombreRADDes='नाम अनुप्रयोग जनरेटर के लिए इस्तेमाल किया। यह विंडो खिताब के लिए भी प्रयोग किया जाता है';
     $MULTILANG_SaltoEdicion='आप वर्तमान तत्व के संपादन को बंद करने वाले हैं और चयनित तत्व के संपादन विंडो पर कूदते हैं। क्या आप जारी रखना चाहते हैं?';
     $MULTILANG_ExportacionMasiva='भारी निर्यात';
+    $MULTILANG_AgregarAExportacion='थोक निर्यात सूची में आइटम जोड़ें';
 
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='आवेदन डिजाइन';

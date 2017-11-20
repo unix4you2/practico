@@ -6338,7 +6338,7 @@ function generar_botones_informe($informe)
 						$Cadena_Imagen="<i class='fa ".$registro_botones["imagen"]."'></i>";
 						$Cadena_BotonIzq="";
 						$Cadena_BotonDer="";
-						$Cadena_Ayuda='data-toggle="tooltip" data-html="true" data-placement="auto" title="'.$registro_botones["titulo"].'"';
+						$Cadena_Ayuda='data-toggle="tooltip" data-html="true" data-placement="auto" title="'.PCO_ReemplazarVariablesPHPEnCadena($registro_botones["titulo"]).'"';
 					    //Busca si dentro de la imagen se especifico la palabra clave _TEXTOIZQ_ o _TEXTODER_ para agregar ademas el texto
 					    if( strrpos ( $registro_botones["imagen"], "_TEXTOIZQ_" )!==false || strrpos ( $registro_botones["imagen"], "_TEXTODER_" )!==false )
 					        {

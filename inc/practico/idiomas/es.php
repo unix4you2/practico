@@ -297,6 +297,7 @@
     $MULTILANG_NombreRADDes='Nombre del generador de aplicaciones.  Utilizado adem&aacute;s como t&iacute;tulo de todas las ventanas en la aplicaci&oacute;n.';
     $MULTILANG_SaltoEdicion='Usted se dispone a cerrar la edicion del elemento actual y saltar a la ventana de edicion del elemento selecionado.  Desea continuar?';
     $MULTILANG_ExportacionMasiva='Exportación masiva';
+    $MULTILANG_AgregarAExportacion='Agregar elemento a lista de exportación masiva';
     
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Dise&ntilde;ar aplicaci&oacute;n';
