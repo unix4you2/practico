@@ -44,3 +44,15 @@ if ($PCO_Accion=="Mi_AccionPoscarga_XYZ")
 
 
 	}
+
+//Presenta lista de archivos en xml/
+$DirectorioXML = dir("xml/");
+while (false !== ($ArchivoXML = $DirectorioXML->read()))
+    {
+        //Considera solo los XML
+        if(strtolower(substr($ArchivoXML, -4))==".xml")
+            {
+                echo $ArchivoXML;
+            } 
+    }
+$DirectorioXML->close();

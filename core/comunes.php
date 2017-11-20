@@ -52,18 +52,47 @@ function PCO_ParsearListasElementos($ListaElementos)
                 //Por cada elemento analiza si se trata de un rango y lo genera, sino simplemente lo agrega
                 if (substr_count ( $Rango , "-" ) > 0)
                     {
+                        $RangoValido=false;
                         //Separa nuevamente por el guion y hace el ciclo de inclusion.  Solo analiza los dos primeros valores y descarta posibles rangos como 3-8-10
                         $RangoCompuesto=explode("-",$Rango);
-                        $InicioRango=trim($RangoCompuesto[0]);
-                        $FinRango=trim($RangoCompuesto[1]);
-                        //En caso que el primer elemento sea vacio puede que se trate de un rango negativo (Ej.  -10000-0  o -200-5) Por lo que toma el primer dato como primer rango y busca un segundo guion
-                        if ($InicioRango=="")
+
+                        //CASO 1: Analiza rangos normales con numeros enteros Ej. 4-8
+                        if (!$RangoValido)
+                            {
+                                $InicioRango=trim($RangoCompuesto[0]);
+                                $FinRango=trim($RangoCompuesto[1]);
+                                //Evalua si la operacion obtuvo un rango valido
+                                if (is_numeric($InicioRango) && is_numeric($FinRango)) $RangoValido=true;
+                            }
+                        //CASO 2: Analiza rangos donde el primero es negativo y el segundo positivo. Ej: -100-0 o -80-5
+                        if (!$RangoValido)
                             {
                                 $InicioRango="-".trim($RangoCompuesto[1]);
                                 $FinRango=trim($RangoCompuesto[2]);
+                                //Evalua si la operacion obtuvo un rango valido
+                                if (is_numeric($InicioRango) && is_numeric($FinRango)) $RangoValido=true;
                             }
-                        //Revisa que el rango si sea un numero antero antes de seguir
-                        if (is_numeric($InicioRango) && is_numeric($FinRango))
+                        //CASO 3: Analiza rangos donde el primero es negativo y el segundo tambien. Ej: -80--5
+                        if (!$RangoValido)
+                            {
+                                $InicioRango="-".trim($RangoCompuesto[1]);
+                                $FinRango   ="-".trim($RangoCompuesto[3]);
+                                //Evalua si la operacion obtuvo un rango valido
+                                if (is_numeric($InicioRango) && is_numeric($FinRango)) $RangoValido=true;
+                            }
+                        //CASO 4: Analiza Elementos unicos que a pesar de comenzar con guion se trata de un unico elemento. Ej: -5
+                        if (!$RangoValido)
+                            {
+                                $InicioRango="-".trim($RangoCompuesto[1]);
+                                //Evalua si la operacion obtuvo un rango valido
+                                if (is_numeric($InicioRango))
+                                    {
+                                        $ArregloElementos[]=$Rango;
+                                        $RangoValido=false;
+                                    }
+                            }
+                        //Revisa que el rango si sea valido (ambos numericos) antes de seguir
+                        if ($RangoValido)
                             {
                                 //Revisa que el rango no sea inverso, sino lo ignora
                                 if ($InicioRango<=$FinRango)
