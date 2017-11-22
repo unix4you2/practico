@@ -30,6 +30,120 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: PCOFUNC_eliminar_informe
+	Elimina un informe definido para la aplicacion incluyendo todos los objetos definidos en su interior
+
+	Variables de entrada:
+
+		informe - ID unico de identificacion del formulario a eliminar
+
+	(start code)
+		DELETE FROM ".$TablasCore."formulario WHERE id='$formulario'
+		DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario'
+		DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario
+	(end)
+
+	Salida:
+		Registro eliminado
+
+	Ver tambien:
+		<administrar_formularios>
+*/
+	function PCOFUNC_eliminar_informe($informe="")
+		{
+			global $TablasCore;
+			if ($informe!="")
+				{
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe WHERE id=? ","$informe");
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE informe=? ","$informe");
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_boton WHERE informe=? ","$informe");
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe=? ","$informe");
+					auditar("Elimina informe $informe");
+				}
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCOFUNC_eliminar_formulario
+	Elimina un formulario definido para la aplicacion incluyendo todos los objetos definidos en su interior
+
+	Variables de entrada:
+
+		formulario - ID unico de identificacion del formulario a eliminar
+
+	(start code)
+		DELETE FROM ".$TablasCore."formulario WHERE id='$formulario'
+		DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario'
+		DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario
+	(end)
+
+	Salida:
+		Registro eliminado
+
+	Ver tambien:
+		<administrar_formularios>
+*/
+	function PCOFUNC_eliminar_formulario($formulario="")
+		{
+			global $TablasCore;
+			if ($formulario!="")
+				{
+				    //Elimina los eventos relacionados con sus objetos
+					$EventosFormulario=ejecutar_sql("SELECT ".$TablasCore."evento_objeto.id FROM ".$TablasCore."evento_objeto,".$TablasCore."formulario_objeto WHERE ".$TablasCore."formulario_objeto.formulario=$formulario AND ".$TablasCore."formulario_objeto.id=".$TablasCore."evento_objeto.objeto ","");
+		            while($RegistroEventosFormulario=$EventosFormulario->fetch())
+			            ejecutar_sql_unaria("DELETE FROM ".$TablasCore."evento_objeto WHERE id=? ",$RegistroEventosFormulario["id"]);	
+			            
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
+					
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario=? ","$formulario");
+					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
+					auditar("Elimina formulario $formulario");
+				}				
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCO_ImportarDefinicionesXML
+	Busca definiciones de elementos XML almacenadas sobre xml/ y ejecuta el proceso de importacion de cada uno automaticamente durante cada cargue de pagina por algun usuario disenador de aplicacion.
+
+	Salida:
+	
+		Ejecucion automatica de los scripts residentes para la generacion de los elementos internos correspondientes 
+*/
+function PCO_ImportarDefinicionesXML()
+    {
+        $ArregloElementos = array();
+        //Obtiene lista de archivos en xml/ para ser ejecutados
+        $DirectorioXML = dir("xml/");
+        while (false !== ($ArchivoXML = $DirectorioXML->read()))
+            if(strtolower(substr($ArchivoXML, -4))==".xml") //Considera solo los XML
+                $ArregloElementos[]=$ArchivoXML;
+        $DirectorioXML->close();
+       
+        //Por cada archivo ejecuta el proceso de importacion correspondiente
+        foreach ($ArregloElementos as $ArchivoXML)
+            { 
+                //Identifica el tipo de elemento contenido en el archivo para saber como procesarlo
+                $cadena_xml_importado = file_get_contents("xml/".$ArchivoXML);
+				$xml_importado = @simplexml_load_string($cadena_xml_importado); // Usa SimpleXML Directamente para interpretar cadena
+                //Procesa el archivo segun su tipo
+                if ($xml_importado->descripcion[0]->tipo_objeto=="Informe")
+                    $ResultadoImportacion=PCO_ImportarXMLInforme($cadena_xml_importado);
+                //Una vez procesado el archivo lo elimina
+                unlink("xml/".$ArchivoXML);
+            }
+    }
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: PCO_ParsearListasElementos
 	Toma una cadena con la lista de elementos separados por comas y rangos por guiones y los genera uno a uno sobre un arreglo que se retorna luego para realizar operaciones individuales sobre ellos.  Ignora rangos invertidos o donde no sean numericos.
 
@@ -131,6 +245,7 @@ function PCO_ParsearListasElementos($ListaElementos)
 function PCO_ImportarXMLFormulario($xml_importado)
     {
         global $ListaCamposSinID_evento_objeto,$_SeparadorCampos_,$TablasCore,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
+        $xml_importado = @simplexml_load_string($xml_importado); // Usa SimpleXML Directamente para interpretar cadena
 
 				//Si es tipo estatico elimina el formulario existente con el mismo ID
 				$ListaCamposParaID="";
@@ -498,7 +613,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 
 	Variables de entrada:
 
-		xml_importado - Cadena en notacion XML con todos los componentes necesarios del informe
+		xml_importado - Cadena en notacion XML con todos los componentes necesarios del informe Formato: SimpleXMLElement
 
 	Salida:
 	
@@ -507,7 +622,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 function PCO_ImportarXMLInforme($xml_importado)
     {
         global $_SeparadorCampos_,$TablasCore,$ListaCamposSinID_informe,$ConexionPDO,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_boton;
-
+        $xml_importado = @simplexml_load_string($xml_importado); // Usa SimpleXML Directamente para interpretar cadena
 				//Si es tipo estatico elimina el informe existente con el mismo ID
 				$ListaCamposParaID="";
 				$InterroganteParaID="";
@@ -5685,7 +5800,7 @@ $('#SampleElement').load('YourURL');
                             <a class="btn btn-default btn-xs" href="index.php?PCO_Accion=editar_formulario&popup_activo=&formulario='.$formulario.'">
                                 <div><i class="fa fa-pencil-square"></i> '.$MULTILANG_Editar.' '.$MULTILANG_Formularios.' <i>[ID='.$formulario.']</i></div>
                             </a>';
-				if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
+				if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && $formulario>=0)
 				    $ComplementoIdObjetoEnTitulo="  $BotonSaltoEdicion";
 
 				echo '
@@ -6749,7 +6864,7 @@ function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes"
                     <a class="btn btn-default btn-xs" href="index.php?PCO_Accion=editar_informe&informe='.$informe.'">
                         <div><i class="fa fa-pencil-square"></i> '.$MULTILANG_Editar.' '.$MULTILANG_Informes.' <i>[ID='.$informe.']</i></div>
                     </a>';
-		if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
+		if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && $informe>=0)
 		    $ComplementoIdObjetoEnTitulo="  $BotonSaltoEdicion";
 
 		// Busca datos del informe

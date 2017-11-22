@@ -784,6 +784,7 @@
 /* ################################################################## */
 if ($PCO_Accion=="editar_formulario")
 	{
+	    if ($formulario=="") $formulario=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
 	    //Si no recibe un nombre de tabla intenta averiguarlo desde el formulario
 	    if ($nombre_tabla=="")
 	        {
@@ -2643,48 +2644,6 @@ if ($PCO_Accion=="editar_formulario")
 	}
 
 
-
-/* ################################################################## */
-/* ################################################################## */
-/*
-	Function: PCOFUNC_eliminar_formulario
-	Elimina un formulario definido para la aplicacion incluyendo todos los objetos definidos en su interior
-
-	Variables de entrada:
-
-		formulario - ID unico de identificacion del formulario a eliminar
-
-	(start code)
-		DELETE FROM ".$TablasCore."formulario WHERE id='$formulario'
-		DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario'
-		DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario
-	(end)
-
-	Salida:
-		Registro eliminado
-
-	Ver tambien:
-		<administrar_formularios>
-*/
-	function PCOFUNC_eliminar_formulario($formulario="")
-		{
-			global $TablasCore;
-			if ($formulario!="")
-				{
-				    //Elimina los eventos relacionados con sus objetos
-					$EventosFormulario=ejecutar_sql("SELECT ".$TablasCore."evento_objeto.id FROM ".$TablasCore."evento_objeto,".$TablasCore."formulario_objeto WHERE ".$TablasCore."formulario_objeto.formulario=$formulario AND ".$TablasCore."formulario_objeto.id=".$TablasCore."evento_objeto.objeto ","");
-		            while($RegistroEventosFormulario=$EventosFormulario->fetch())
-			            ejecutar_sql_unaria("DELETE FROM ".$TablasCore."evento_objeto WHERE id=? ",$RegistroEventosFormulario["id"]);	
-			            
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
-					
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario=? ","$formulario");
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
-					auditar("Elimina formulario $formulario");
-				}				
-		}
-
-
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -2703,6 +2662,7 @@ if ($PCO_Accion=="editar_formulario")
 */
 	if ($PCO_Accion=="eliminar_formulario")
 		{
+	        if ($formulario=="") $formulario=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
 			PCOFUNC_eliminar_formulario($formulario);
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_formularios"></form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -2890,6 +2850,7 @@ if ($PCO_Accion=="editar_formulario")
 */
 if ($PCO_Accion=="definir_copia_formularios")
 	{
+	    if ($formulario=="") $formulario=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
 		 ?>
 
         <form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
@@ -2954,7 +2915,7 @@ if ($PCO_Accion=="confirmar_importacion_formulario")
 
 		if ($mensaje_error=="")
 			{
-			    $ResultadoImportacion=PCO_ImportarXMLFormulario($xml_importado);
+			    $ResultadoImportacion=PCO_ImportarXMLFormulario($cadena_xml_importado);
 				echo '
 				<b>'.$MULTILANG_FrmImportarGenerado.':</b><br>
 				<li>ID: '.$ResultadoImportacion.'</li>
@@ -3337,67 +3298,9 @@ function FrmAutoRun()
 
   </div>    
   <div class="col-md-8">
-
-
 <?php
-
-		abrir_ventana($MULTILANG_FrmTitForms, 'panel-info');
-		?>
-				<table class="table table-condensed btn-xs table-unbordered ">
-					<thead>
-                    <tr>
-						<td><b>Id</b></td>
-						<td><b><?php echo $MULTILANG_Titulo; ?></b></td>
-						<td><b><?php echo $MULTILANG_TablaDatos; ?></b></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-                    </thead>
-                    <tbody>
-		 <?php
-
-				$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario ORDER BY titulo");
-				while($registro = $consulta_forms->fetch())
-					{
-						echo '<tr>
-								<td><b>'.$registro["id"].'</b></td>
-								<td>'.$registro["titulo"].'</td>
-								<td>'.str_replace($TablasApp,'',$registro["tabla_datos"]).'</td>
-								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST" name="dco'.$registro["id"].'" id="dco'.$registro["id"].'">
-												<input type="hidden" name="PCO_Accion" value="definir_copia_formularios">
-												<input type="hidden" name="formulario" value="'.$registro["id"].'">
-												<input type="hidden" name="titulo_formulario" value="'.$registro["titulo"].'">
-												<input type="hidden" name="nombre_tabla" value="'.$registro["tabla_datos"].'">
-                                                <a class="btn btn-default btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["id"].');"><i class="fa fa-code-fork"></i> '.$MULTILANG_FrmCopiar.'</a>
-										</form>
-								</td>
-								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
-												<input type="hidden" name="PCO_Accion" value="eliminar_formulario">
-												<input type="hidden" name="formulario" value="'.$registro["id"].'">
-                                                <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvDelForm.'\',df'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
-										</form>
-								</td>
-								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST" name="det'.$registro["id"].'" id="det'.$registro["id"].'">
-												<input type="hidden" name="PCO_Accion" value="editar_formulario">
-												<input type="Hidden" name="popup_activo" value="">
-												<input type="hidden" name="formulario" value="'.$registro["id"].'">
-												<input type="hidden" name="nombre_tabla" value="'.$registro["tabla_datos"].'">
-                                                <a class="btn btn-default btn-xs" href="javascript:document.det'.$registro["id"].'.submit();"><i class="fa fa-list-alt"></i> '.$MULTILANG_FrmCamposAcciones.'</a>
-										</form>
-								</td>
-							</tr>';
-					}
-				echo '
-                    </tbody>
-                </table>';			
-		?>
-
-<?php
-			cerrar_ventana();
+        //Carga informe interno con los elementos tipo formulario
+		cargar_informe(-2,1,"","",1);
 echo '
 
   </div>

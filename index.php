@@ -140,6 +140,11 @@
         $tiempo_inicio_script = obtener_microtime();
     }
 
+    // Importa autmaticamente definiciones de elementos internos en XML cuando encuentra alguna dentro de xml/
+    if(PCO_EsAdministrador(@$PCOSESS_LoginUsuario)) {
+        PCO_ImportarDefinicionesXML();
+    }
+
     // Incluye configuraciones OAuth
     include_once("core/ws_oauth.php");
 

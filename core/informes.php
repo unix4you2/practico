@@ -2222,44 +2222,6 @@ if ($PCO_Accion=="editar_informe")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: PCOFUNC_eliminar_informe
-	Elimina un informe definido para la aplicacion incluyendo todos los objetos definidos en su interior
-
-	Variables de entrada:
-
-		informe - ID unico de identificacion del formulario a eliminar
-
-	(start code)
-		DELETE FROM ".$TablasCore."formulario WHERE id='$formulario'
-		DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario'
-		DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario
-	(end)
-
-	Salida:
-		Registro eliminado
-
-	Ver tambien:
-		<administrar_formularios>
-*/
-	function PCOFUNC_eliminar_informe($informe="")
-		{
-			global $TablasCore;
-			if ($informe!="")
-				{
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe WHERE id=? ","$informe");
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE informe=? ","$informe");
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."informe_boton WHERE informe=? ","$informe");
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe=? ","$informe");
-					auditar("Elimina informe $informe");
-				}
-		}
-
-
-/* ################################################################## */
-/* ################################################################## */
-/*
 	Function: eliminar_informe
 	Elimina un informe de la aplicacion, incluyendo todos los registros asociados en otras tablas
 
@@ -2436,7 +2398,7 @@ if ($PCO_Accion=="confirmar_importacion_informe")
 
 		if ($mensaje_error=="")
 			{
-			    $ResultadoImportacion=PCO_ImportarXMLInforme($xml_importado);
+			    $ResultadoImportacion=PCO_ImportarXMLInforme($cadena_xml_importado);
 				echo '
 				<b>'.$MULTILANG_FrmImportarGenerado.':</b><br>
 				<li>ID: '.$ResultadoImportacion.'</li>
@@ -2874,72 +2836,9 @@ if ($PCO_Accion=="administrar_informes")
   </div>
   <div class="col-md-8">
 
-
 <?php
-
-		abrir_ventana($MULTILANG_InfDefinidos, 'panel-primary');
-		?>
-				<table class="table table-condensed btn-xs table-unbordered ">
-					<thead>
-                    <tr>
-						<td><b>Id</b></td>
-						<td><b><?php echo $MULTILANG_Tipo; ?></b></td>
-						<td><b><?php echo $MULTILANG_Titulo; ?></b></td>
-						<td><b><?php echo $MULTILANG_InfCategoria; ?></b></td>
-						<td></td>
-						<td></td>
-					</tr>
-                    </thead>
-                    <tbody>
-		 <?php
-
-				$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe ORDER BY titulo");
-				while($registro = $consulta_forms->fetch())
-					{
-					    //Determina si el informe es grafico o tabla para presentar un indicador en el listado
-					    $TipoInforme="<i class='fa fa-table fa-fw' aria-hidden='true'></i>";
-					    if ($registro["formato_final"]=="G")
-                            $TipoInforme="<i class='fa fa-pie-chart fa-fw' aria-hidden='true'></i>";
-					    
-						echo '<tr>
-								<td><b>'.$registro["id"].'</b></td>
-								<td>'.$TipoInforme.'</td>
-								<td>'.$registro["titulo"].'</td>
-								<td>'.$registro["categoria"].'</td>
-								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST" name="dco'.$registro["id"].'" id="dco'.$registro["id"].'">
-												<input type="hidden" name="PCO_Accion" value="definir_copia_informes">
-												<input type="hidden" name="informe" value="'.$registro["id"].'">
-												<input type="hidden" name="PCO_Valor" value="'.$registro["id"].'">
-												<input type="hidden" name="titulo_informe" value="'.$registro["titulo"].'">
-                                                <a class="btn btn-default btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["id"].');"><i class="fa fa-code-fork"></i> '.$MULTILANG_FrmCopiar.'</a>
-										</form>
-								</td>
-								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
-												<input type="hidden" name="PCO_Accion" value="eliminar_informe">
-												<input type="hidden" name="PCO_Valor" value="'.$registro["id"].'">
-												<input type="hidden" name="informe" value="'.$registro["id"].'">
-                                                <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvEliminar.'\',df'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
-										</form>
-								</td>
-								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="PCO_Accion" value="editar_informe">
-												<input type="hidden" name="informe" value="'.$registro["id"].'">
-												<input type="hidden" name="PCO_Valor" value="'.$registro["id"].'">
-                                                <button type="submit" class="btn btn-default btn-xs"><i class="fa fa-bars"></i> '.$MULTILANG_InfcamTabCond.'</button>
-										</form>
-								</td>
-							</tr>';
-					}
-				echo '</tbody>
-                </table>';
-		?>
-
-<?php
-			cerrar_ventana();
-			cargar_informe(-1,1,"","",1);
+        //Carga informe interno con los elementos tipo informe
+		cargar_informe(-1,1,"","",1);
 echo '
   </div>
 </div>
