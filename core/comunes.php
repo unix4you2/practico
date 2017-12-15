@@ -135,6 +135,8 @@ function PCO_ImportarDefinicionesXML()
                 //Procesa el archivo segun su tipo
                 if ($xml_importado->descripcion[0]->tipo_objeto=="Informe")
                     $ResultadoImportacion=PCO_ImportarXMLInforme($cadena_xml_importado);
+                if ($xml_importado->descripcion[0]->tipo_objeto=="Formulario")
+                    $ResultadoImportacion=PCO_ImportarXMLFormulario($cadena_xml_importado);
                 //Una vez procesado el archivo lo elimina
                 unlink("xml/".$ArchivoXML);
             }
