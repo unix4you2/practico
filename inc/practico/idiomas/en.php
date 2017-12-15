@@ -157,6 +157,7 @@
 	$MULTILANG_Predeterminado='Default';
     $MULTILANG_Previo='Previous';
 	$MULTILANG_Primero='First';
+    $MULTILANG_Prioridad='Priority';
     $MULTILANG_Procesando='Processing';
     $MULTILANG_ProcesoFin='Process completed';
 	$MULTILANG_Puerto='Port';
@@ -1295,6 +1296,13 @@
     $MULTILANG_Historia3Des='ID: ______BRAs ________ I need ___________ with the purpose of ________.BRBRScene: ________. In case _______ it should _______';
     $MULTILANG_ListaColumnas='Columns list';
     $MULTILANG_ListaCategorias='Category list';
+    $MULTILANG_ArchivarTarea='Archive task';
+    $MULTILANG_ArchivarTareaAdv='The task will be archived, it will leave the board and will go to the historical one. do you wish to continue?';
+    $MULTILANG_TareasArchivadas='Archived tasks';
+    $MULTILANG_CompartidosConmigo='Shared with me';
+    $MULTILANG_CrearTablero='Add board';
+    $MULTILANG_CompartirCon='Shared with';
+    $MULTILANG_NoTablero='There is not a Kanban board created by you or shared with you by another user';
 
     //Opciones de Documentacion
     $MULTILANG_Documentar='Document';

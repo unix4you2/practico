@@ -4083,7 +4083,7 @@ function selector_iconos_awesome()
 			// Especifica textos de placeholder si existen
 			$cadena_placeholder='';
 			if ($registro_campos["valor_placeholder"]!="")
-				$cadena_placeholder=' placeholder="'.$registro_campos["valor_placeholder"].'" ';
+				$cadena_placeholder=' placeholder="'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_placeholder"]).'" ';
 
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
@@ -6114,7 +6114,7 @@ $('#SampleElement').load('YourURL');
                                                         //Define el estilo del contenedor para el objeto
                                                         $ClaseCSSContenedor="";
                                                         if ($registro_campos["clase_contenedor"]!="") $ClaseCSSContenedor=$registro_campos["clase_contenedor"];
-                                                        echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'" class="'.$ClaseCSSContenedor.'" >'.$ComplementoDisenoMarcoOpciones.'
+                                                        echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'" class="'.$ClaseCSSContenedor.'" style="margin-top:0px; margin-bottom:0px; margin-left:0; margin-right:0;  padding: 0px; spacing: 0px;">'.$ComplementoDisenoMarcoOpciones.'
                                                         <table class="table table-condensed btn-xs '.$estilo_bordes.'" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;  padding: 0px; border-spacing: 0px; width:100%; "><tr><td>';
                                                         $tipo_de_objeto=@$registro_campos["tipo"];
                                                         if ($tipo_de_objeto=="texto_corto") $objeto_formateado = cargar_objeto_texto_corto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);

@@ -157,6 +157,7 @@
 	$MULTILANG_Predeterminado='Défaut';
     $MULTILANG_Previo='Précédent';
 	$MULTILANG_Primero='Premier';
+    $MULTILANG_Prioridad='Priorité';
     $MULTILANG_Procesando='En traitement';
     $MULTILANG_ProcesoFin='Processus terminé';
 	$MULTILANG_Puerto='Port';
@@ -1293,6 +1294,13 @@
     $MULTILANG_Historia3Des='ID: ______BRAs ________ J ai besoin de ___________ dans le but de ________.BRBRScene: ________. Dans le cas _______ il devrait _______';
     $MULTILANG_ListaColumnas='Liste des colonnes';
     $MULTILANG_ListaCategorias='Liste de catégories';
+    $MULTILANG_ArchivarTarea='Tâche d archivage';
+    $MULTILANG_ArchivarTareaAdv='La tâche sera archivée, elle quittera le forum et ira à l historique. Voulez-vous continuer?';
+    $MULTILANG_TareasArchivadas='Archived tasks';
+    $MULTILANG_CompartidosConmigo='Shared with me';
+    $MULTILANG_CrearTablero='Add board';
+    $MULTILANG_CompartirCon='Shared with';
+    $MULTILANG_NoTablero='There is not a Kanban board created by you or shared with you by another user';
 
     //Opciones de Documentacion
     $MULTILANG_Documentar='Document';

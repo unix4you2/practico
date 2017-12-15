@@ -2004,8 +2004,6 @@ if ($PCO_Accion=="editar_informe")
   </div>    
   <div class="col-md-8">
 
-
-
 			<?php abrir_ventana($MULTILANG_InfParam." <i>[ID=".$registro_informe['id']."]</i>", 'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="actualizar_informe">
@@ -2265,6 +2263,9 @@ if ($PCO_Accion=="eliminar_informe")
 */
 if ($PCO_Accion=="guardar_informe")
 	{
+	    //Establece valor por defecto cuando es el seleccionado
+	    if ($conexion_origen_datos==$MULTILANG_ConnPredeterminada) $conexion_origen_datos="";
+
 		$mensaje_error="";
 		if ($titulo=="") $mensaje_error.=$MULTILANG_InfErrInforme1."<br>";
 		if ($categoria=="") $mensaje_error.=$MULTILANG_InfErrInforme2."<br>";
@@ -2272,7 +2273,7 @@ if ($PCO_Accion=="guardar_informe")
 			{
 				$agrupamiento='';
                 $ordenamiento='';
-                ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|false|false|false|||',?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtro$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos");
+                ejecutar_sql_unaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|false|false|false|||',?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos");
 				$id=obtener_ultimo_id_insertado($ConexionPDO);
 				auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -2648,163 +2649,9 @@ if ($PCO_Accion=="administrar_informes")
 <div class="row">
   <div class="col-md-4">
 
-			<?php abrir_ventana($MULTILANG_InfTituloAgr, 'panel-primary'); ?>
-			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="guardar_informe">
-
-			<h4><?php echo $MULTILANG_InfDetalles; ?>:</h4>
-
-            <div class="form-group input-group">
-                <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> </span>
-                <input name="titulo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfTitulo; ?>">
-                <span class="input-group-addon">
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesTitulo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                </span>
-            </div>
-
-            <div class="form-group input-group">
-                <input name="descripcion" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfDescripcion; ?>">
-                <span class="input-group-addon">
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesDescrip; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                </span>
-            </div>
-
-            <div class="form-group input-group">
-                <input name="categoria" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfCategoria; ?>">
-                <span class="input-group-addon">
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesCateg; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                </span>
-            </div>
-
-            <div class="form-group input-group">
-                <input name="ancho" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmAncho; ?>">
-                <span class="input-group-addon">
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfTitAncho; ?>: <?php echo $MULTILANG_InfDesAncho; ?> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)"><i class="fa fa-question-circle fa-fw "></i></a>
-                </span>
-            </div>
-
-            <div class="form-group input-group">
-                <input name="alto" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfAlto; ?>">
-                <span class="input-group-addon">
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfTitAlto; ?>: <?php echo $MULTILANG_InfDesAlto; ?> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)"><i class="fa fa-question-circle fa-fw "></i></a>
-                </span>
-            </div>
-
-            <label for="formato_final"><?php echo $MULTILANG_InfFormato; ?>:</label>
-            <div class="form-group input-group">
-                <select id="formato_final" name="formato_final" class="form-control" >
-                    <option value="T"><?php echo $MULTILANG_TablaDatos; ?></option>
-                    <option value="G"><?php echo $MULTILANG_Grafico; ?></option>
-                </select>
-                <span class="input-group-addon">
-                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_InfTitFormato; ?></b><br><?php echo $MULTILANG_InfDesFormato; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                </span>
-            </div>
-
-            <label for="conexion_origen_datos"><?php echo $MULTILANG_ConnOrigenDatos; ?>:</label>
-            <div class="form-group input-group">
-                <select id="conexion_origen_datos" name="conexion_origen_datos" class="form-control" >
-					<option value=""><?php echo $MULTILANG_ConnPredeterminada; ?></option>
-					<?php
-						$consulta_conexiones=ejecutar_sql("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE tipo_replica=0 ORDER BY nombre");
-						while($registro_conexiones = $consulta_conexiones->fetch())
-							echo '<option value="'.$registro_conexiones["nombre"].'">(Id.'.$registro_conexiones["id"].') '.$registro_conexiones["nombre"].' (Host:'.$registro_conexiones["servidorbd"].' BD:'.$registro_conexiones["basedatos"].')</option>';
-					?>
-                </select>
-                <span class="input-group-addon">
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_ConnAdvCambioOrigen; ?>"><i class="fa fa-exclamation-triangle icon-red  fa-fw "></i></a>
-                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_ConnOrigenDatosDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                </span>
-            </div>
-
-            <label for="genera_pdf"><?php echo $MULTILANG_InfGeneraPDF; ?>:</label>
-            <div class="form-group input-group">
-                <select id="genera_pdf" name="genera_pdf" class="selectpicker" >
-                    <option value="S"><?php echo $MULTILANG_Si; ?></option>
-                    <option value="N" selected><?php echo $MULTILANG_No; ?></option>
-                </select>
-                <span class="input-group-addon">
-                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_InfGeneraPDFInfoTit; ?></b><br><?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><i class="fa fa-exclamation-triangle icon-orange fa-fw"></i></a>
-                </span>
-            </div>
-
-            <div class="form-group input-group">
-                <input name="variables_filtro" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfVblesFiltro; ?>">
-                <span class="input-group-addon">
-                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_InfVblesDesFiltro; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                </span>
-            </div>
-
-            <label for="formulario_filtrado"><?php echo $MULTILANG_InfFormFiltrado; ?>:</label>
-            <div class="form-group input-group">
-                <select id="formulario_filtrado" name="formulario_filtrado" class="form-control" >
-					<option value=""></option>
-					<?php
-						$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario ORDER BY titulo");
-						while($registro_formularios = $consulta_forms->fetch())
-							echo '<option value="'.$registro_formularios["id"].'">(Id.'.$registro_formularios["id"].') '.$registro_formularios["titulo"].'</option>';
-					?>
-                </select>
-                <span class="input-group-addon">
-                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_InfFormFiltradoDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                </span>
-            </div>
-
-            <div class="well">
-                <center><b><?php echo $MULTILANG_InfDataTableTit; ?></b></center>
-                <div class="row">
-                    <div class="col col-md-6">
-                        <label for="soporte_datatable"><?php echo $MULTILANG_Habilitar; ?>:</label>
-                        <div class="form-group input-group">
-                            <select id="soporte_datatable" name="soporte_datatable" class="selectpicker" style=btn-info>
-                                <option value="S"><?php echo $MULTILANG_Si; ?></option>
-                                <option value="N" selected><?php echo $MULTILANG_No; ?></option>
-                            </select>
-                            <span class="input-group-addon">
-                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_InfDataTableDes; ?>"><i class="fa fa-question-circle fa-fw"></i></a>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col col-md-6">
-                        <label for="tamano_paginacion"><?php echo $MULTILANG_InfPaginacionDatatable; ?>:</label>
-                        <div class="form-group input-group">
-                            <input name="tamano_paginacion" value="10" type="text" class="form-control" onkeypress="return PCOJS_ValidarTeclado(event, 'numerico_entero', '');">
-                            <span class="input-group-addon">
-                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_InfPaginacionDatatableDes; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col col-md-6">
-                        <label for="subtotales_columna"><?php echo $MULTILANG_InfSubtotalesColumna; ?>:</label>
-                        <div class="form-group input-group">
-                            <input name="subtotales_columna" value="" type="text" class="form-control" onkeypress="return PCOJS_ValidarTeclado(event, 'numerico_entero', '');">
-                            <span class="input-group-addon">
-                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_InfSubtotalesColumnaDes; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col col-md-6">
-                        <label for="subtotales_formato"><?php echo $MULTILANG_InfSubtotalesFormato; ?>:</label>
-                        <div class="form-group input-group">
-                            <input name="subtotales_formato" value="" type="text" class="form-control">
-                            <span class="input-group-addon">
-                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_InfSubtotalesFormatoDes; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            </form>
-
-            <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCreaDisena; ?></a>
-            <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
-
-		<?php cerrar_ventana(); ?>
+        <?php
+	        cargar_formulario(-1,1,"","",0,0);
+        ?>
 
 		<?php abrir_ventana($MULTILANG_Importar."/".$MULTILANG_Exportar." ($MULTILANG_Avanzado)", 'panel-default'); ?>
             <form name="importacion" id="importacion" action="<?php echo $ArchivoCORE; ?>" method="POST">

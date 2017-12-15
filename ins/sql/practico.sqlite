@@ -459,10 +459,29 @@ CREATE TABLE core_kanban (
   columna integer DEFAULT '0',
   peso integer DEFAULT '0',
   estilo text DEFAULT '',
-  fecha text DEFAULT ''
+  fecha text DEFAULT '',
+  archivado integer,
+  compartido_rw text,
+  tablero integer
 
 );
 ALTER TABLE core_kanban ADD INDEX columna(columna);
 ALTER TABLE core_kanban ADD INDEX login_admintablero(login_admintablero);
 INSERT INTO core_kanban (login_admintablero,titulo,descripcion,columna) VALUES ('admin','[PRACTICO][ColumnasTablero]', 'Analisis,Diseno,Desarrollo,Pruebas,Terminado,Produccion','-2');
 INSERT INTO core_kanban (login_admintablero,titulo,descripcion,columna) VALUES ('admin','[PRACTICO][CategoriasTareas]', 'FrontEnd,BackEnd,Documentacion','-2');
+
+DROP TABLE IF EXISTS core_opcionlista;
+CREATE TABLE core_opcionlista (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  identificador_lista text,
+  valor_interno text,
+  valor_visual text,
+  ordenamiento integer
+
+);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_grafico','T','{$MULTILANG_TablaDatos}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_grafico','G','{$MULTILANG_Grafico}',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_sino','S','{$MULTILANG_Si}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_sino','N','{$MULTILANG_No}',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_nosi','N','{$MULTILANG_No}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_nosi','S','{$MULTILANG_Si}',2);

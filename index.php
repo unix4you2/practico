@@ -264,7 +264,7 @@
 		include("core/mantenimiento.php");
     if ($PCO_Accion=="administrar_replicacion" || $PCO_Accion=="eliminar_replica" || $PCO_Accion=="detalles_replicacion" || $PCO_Accion=="guardar_replicacion" || $PCO_Accion=="actualizar_replicacion")
         include("core/replicacion.php");
-    if ($PCO_Accion=="ExplorarTablerosKanban" || $PCO_Accion=="GuardarTareaKanban" || $PCO_Accion=="EliminarTareaKanban" || $PCO_Accion=="GuardarPersonalizacionKanban")
+    if ($PCO_Accion=="EliminarTableroKanban" || $PCO_Accion=="GuardarCreacionKanban" || $PCO_Accion=="VerTareasArchivadas" || $PCO_Accion=="ArchivarTareaKanban" || $PCO_Accion=="ExplorarTablerosKanban" || $PCO_Accion=="GuardarTareaKanban" || $PCO_Accion=="EliminarTareaKanban" || $PCO_Accion=="GuardarPersonalizacionKanban")
         include("core/kanban.php");
 
 /* ################################################################## */

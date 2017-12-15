@@ -157,6 +157,7 @@
 	$MULTILANG_Predeterminado='Padrão';
     $MULTILANG_Previo='Anterior';
 	$MULTILANG_Primero='Primeiro';
+    $MULTILANG_Prioridad='Prioridade';
     $MULTILANG_Procesando='Processamento';
     $MULTILANG_ProcesoFin='Processo conclu&iacute;do';
 	$MULTILANG_Puerto='Porto';
@@ -1295,6 +1296,13 @@
     $MULTILANG_Historia3Des='ID: ______BRAs ________ I need ___________ with the purpose of ________.BRBRScene: ________. In case _______ it should _______';
     $MULTILANG_ListaColumnas='Columns list';
     $MULTILANG_ListaCategorias='Category list';
+    $MULTILANG_ArchivarTarea='Tarefa de arquivo';
+    $MULTILANG_ArchivarTareaAdv='A tarefa será arquivada, deixará o quadro e irá para o histórico. Você quer continuar?';
+    $MULTILANG_TareasArchivadas='Archived tasks';
+    $MULTILANG_CompartidosConmigo='Shared with me';
+    $MULTILANG_CrearTablero='Add board';
+    $MULTILANG_CompartirCon='Shared with';
+    $MULTILANG_NoTablero='There is not a Kanban board created by you or shared with you by another user';
 
     //Opciones de Documentacion
     $MULTILANG_Documentar='Documento';

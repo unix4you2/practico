@@ -158,6 +158,7 @@
 	$MULTILANG_Predeterminado='Predeterminado';
     $MULTILANG_Previo='Previo';
     $MULTILANG_Primero='Primero';
+    $MULTILANG_Prioridad='Prioridad';
 	$MULTILANG_Procesando='Procesando';
     $MULTILANG_ProcesoFin='Proceso finalizado';
 	$MULTILANG_Puerto='Puerto';
@@ -1294,6 +1295,13 @@
     $MULTILANG_Historia3Des='ID: ______BRComo ________ Se necesita ___________ con el fin de ________.BRBREscenario: ________. En caso que _______ se debe _______';
     $MULTILANG_ListaColumnas='Lista de columnas';
     $MULTILANG_ListaCategorias='Lista de categorias';
+    $MULTILANG_ArchivarTarea='Archivar tarea';
+    $MULTILANG_ArchivarTareaAdv='La tarea sera archivada, saldra del tablero y pasara al historico.  ¿Desea continuar?';
+    $MULTILANG_TareasArchivadas='Tareas archivadas';
+    $MULTILANG_CompartidosConmigo='Compartidos conmigo';
+    $MULTILANG_CrearTablero='Crear tablero';
+    $MULTILANG_CompartirCon='Compartir con';
+    $MULTILANG_NoTablero='No hay un tablero kanban asociado a su usuario o compartido por otro usuario con usted';
 
     //Opciones de Documentacion
     $MULTILANG_Documentar='Documentar';

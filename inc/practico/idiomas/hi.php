@@ -157,6 +157,7 @@
 	$MULTILANG_Predeterminado='चूक';
     $MULTILANG_Previo='पिछला';
 	$MULTILANG_Primero='पहले';
+    $MULTILANG_Prioridad='प्राथमिकता';
     $MULTILANG_Procesando='प्रसंस्करण';
     $MULTILANG_ProcesoFin='प्रक्रिया पूरी की';
 	$MULTILANG_Puerto='बंदरगाह';
@@ -1293,6 +1294,13 @@
     $MULTILANG_Historia3Des='ID: ______BRAs ________ I need ___________ with the purpose of ________.BRBRScene: ________. In case _______ it should _______';
     $MULTILANG_ListaColumnas='Columns list';
     $MULTILANG_ListaCategorias='Category list';
+    $MULTILANG_ArchivarTarea='पुरालेख कार्य';
+    $MULTILANG_ArchivarTareaAdv='यह कार्य संग्रहीत किया जाएगा, बोर्ड छोड़ जाएगा और ऐतिहासिक एक पर जाएंगे। क्या आप जारी रखना चाहते हैं?';
+    $MULTILANG_TareasArchivadas='Archived tasks';
+    $MULTILANG_CompartidosConmigo='Shared with me';
+    $MULTILANG_CrearTablero='Add board';
+    $MULTILANG_CompartirCon='Shared with';
+    $MULTILANG_NoTablero='There is not a Kanban board created by you or shared with you by another user';
 
     //Opciones de Documentacion
     $MULTILANG_Documentar='दस्तावेज़';

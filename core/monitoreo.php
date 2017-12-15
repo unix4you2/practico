@@ -164,6 +164,38 @@
 								return 1; //echo 'servidor con conectividad';
 							}
 				}				
+            //Lo monitores tipo curl:XX tienen dos puntos en el medio, los usa para identificarlos
+			if( strpos ( $tipo_monitor , ":" ))
+				{
+				    $TimeOut=explode(":",$tipo_monitor);
+				    $TimeOut=$TimeOut[1];
+				    //Inicia la conexion cURL al host
+                    $ConexioncURL = curl_init($maquina);
+                    curl_setopt($ConexioncURL,CURLOPT_CONNECTTIMEOUT,$TimeOut);
+                    curl_setopt($ConexioncURL,CURLOPT_HEADER,true);
+                    curl_setopt($ConexioncURL,CURLOPT_NOBODY,true);
+                    curl_setopt($ConexioncURL,CURLOPT_RETURNTRANSFER,true);
+                    $RespuestacURL = curl_exec($ConexioncURL);
+                    curl_close($ConexioncURL);
+                    if ($RespuestacURL) return 1;
+                    return 0;
+				}	
+			if($tipo_monitor=="headers")
+				{
+			        //$maquina deberia ser una URL completa ej http://www.google.com
+                    $ChequeoCabeceras = get_headers($maquina);
+                    $CodigoRespuestaHTTP = $ChequeoCabeceras[0];
+                    return $CodigoRespuestaHTTP; //Devuelve el codigo HTTP correspondiente, no necesariamente 1 o 0
+				}
+			//Solo por resolucion de IP para el nombre (DNS interno)  $maquina deberia ser un dominio  ej google.com
+			if($tipo_monitor=="dnssolve")
+				{
+				    //Puede retornar verdadero aun cuando el Host este abajo pues valida solo la resolucion del nombre, no el estado del host
+                    if(gethostbyname($maquina) != $maquina )
+                        return 1;
+                    else
+                        return 0;
+				}
 		}
 
 
@@ -998,9 +1030,21 @@ if ($PCO_Accion=="eliminar_monitoreo")
 					//Define los estados de seleccion para las listas
 					if (@$Maquina["tipo_ping"]=="socket") 		$Seleccion_socket="SELECTED";
 					if (@$Maquina["tipo_ping"]=="ping") 		$Seleccion_ping="SELECTED";
+					if (@$Maquina["tipo_ping"]=="curl:1") 		$Seleccion_curl1="SELECTED";
+					if (@$Maquina["tipo_ping"]=="curl:3") 		$Seleccion_curl3="SELECTED";
+					if (@$Maquina["tipo_ping"]=="curl:5") 		$Seleccion_curl5="SELECTED";
+					if (@$Maquina["tipo_ping"]=="curl:10") 		$Seleccion_curl10="SELECTED";
+					if (@$Maquina["tipo_ping"]=="curl:15") 		$Seleccion_curl15="SELECTED";
+					if (@$Maquina["tipo_ping"]=="curl:30") 		$Seleccion_curl30="SELECTED";
             echo '
-                            <option value="socket"	'.$Seleccion_socket.'>Socket</option>
-                            <option value="ping"  '.$Seleccion_ping.'>Ping</option>
+                            <option value="socket"	 '.$Seleccion_socket.'>Socket</option>
+                            <option value="ping"     '.$Seleccion_ping.'>Ping</option>
+                            <option value="curl:1"   '.$Seleccion_curl1.'>cURL (HTTP 01 sec. Timeout)</option>
+                            <option value="curl:3"   '.$Seleccion_curl3.'>cURL (HTTP 03 sec. Timeout)</option>
+                            <option value="curl:5"   '.$Seleccion_curl5.'>cURL (HTTP 05 sec. Timeout)</option>
+                            <option value="curl:10"  '.$Seleccion_curl10.'>cURL (HTTP 10 sec. Timeout)</option>
+                            <option value="curl:15"  '.$Seleccion_curl15.'>cURL (HTTP 15 sec. Timeout)</option>
+                            <option value="curl:30"  '.$Seleccion_curl30.'>cURL (HTTP 30 sec. Timeout)</option>
                         </select>
                         <span class="input-group-addon">
                             <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_AplicaPara.' '.$MULTILANG_Tipo.': '.$MULTILANG_Maquina.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
@@ -1473,7 +1517,11 @@ if ($PCO_Accion=="ver_monitoreo")
 										//Si alguno de los monitores con error tenia activada la alerta auditiva
 										if ($ErroresMonitoreoAlertaAuditiva==1)
 											{
-												$Ruta_Servidor="http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+                                    			if(empty($_SERVER["HTTPS"]))
+                                    				$protocolo_webservice="http://";
+                                    			else
+                                    				$protocolo_webservice="https://";
+												$Ruta_Servidor=$protocolo_webservice.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 												$Ruta_Servidor=str_replace(basename($_SERVER['PHP_SELF']),"",$Ruta_Servidor);
 												$Ruta_Servidor.=$Sonido_alarma;
 												//Tipos de reproduccion
