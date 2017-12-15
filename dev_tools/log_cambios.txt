@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno=""
-VersionCompatibleMes=""
+VersionCompatibleAno="18"
+VersionCompatibleMes="1"
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno=""
-VersionFinalMes=""
+VersionFinalAno="18"
+VersionFinalMes="2"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
@@ -25,8 +25,8 @@ core/marco_arriba.php
 core/marco_arriba_bs.php
 core/marco_conf.php
 core/objetos.php
-xml/*
 pwa/*
+xml/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/bootstrap/js/practico*

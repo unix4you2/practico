@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<objetos_practicos>
+	<descripcion>
+		<tipo_objeto>Formulario</tipo_objeto>
+		<version_practico>18.1</version_practico>
+		<tipo_exportacion>XML_IdEstatico</tipo_exportacion>
+		<sistema_origen>App</sistema_origen>
+		<version>1.0</version>
+		<usuario_generador>admin</usuario_generador>
+		<fecha_exportacion>2017-12-15</fecha_exportacion>
+		<hora_exportacion>08:40</hora_exportacion>
+	</descripcion>
+	<core_formulario>
+		<id>LTI=</id>
+		<titulo>W1N1YkZvcm1dIHtDcmVhY2lvbiBpbmZvcm1lc30=</titulo>
+		<ayuda_titulo></ayuda_titulo>
+		<ayuda_texto></ayuda_texto>
+		<tabla_datos>YXBwX2dob3N0X3RhYmxl</tabla_datos>
+		<columnas>Mg==</columnas>
+		<javascript>ZnVuY3Rpb24gRnJtQXV0b1J1bigpDQogICAgew0KICAgICAgICAvL0FxdWkgc3VzIGluc3RydWNjaW9uZXMNCiAgICB9DQo=</javascript>
+		<borde_visible>MA==</borde_visible>
+		<estilo_pestanas>bmF2LXRhYnM=</estilo_pestanas>
+		<id_html>ZGF0b3NzdWJpbmY=</id_html>
+	</core_formulario>
+	<total_core_formulario_objeto><cantidad_objetos>0</cantidad_objetos></total_core_formulario_objeto>
+	<total_core_evento_objeto><cantidad_objetos>0</cantidad_objetos></total_core_evento_objeto>
+	<total_core_formulario_boton><cantidad_objetos>0</cantidad_objetos></total_core_formulario_boton>
+</objetos_practicos>
