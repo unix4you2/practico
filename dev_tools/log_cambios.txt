@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno="18"
-VersionCompatibleMes="1"
+VersionCompatibleAno=""
+VersionCompatibleMes=""
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno="18"
-VersionFinalMes="2"
+VersionFinalAno=""
+VersionFinalMes=""
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
@@ -16,16 +16,6 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
-core/conexiones.php
-core/kanban.php
-core/formularios.php
-core/informes.php
-core/monitoreo.php
-core/marco_arriba.php
-core/marco_arriba_bs.php
-core/marco_conf.php
-core/objetos.php
-pwa/*
 xml/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
@@ -40,69 +30,12 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Ahora las conexiones principal, extra o de replicación presentan información adicional de depuración cuando su configuración es incorrecta o no se logra hacer conexión al servidor.
-* Added: Ahora los elementos de monitoreo de tipo base de datos y rango de valores permiten especificar la conexión sobre la cuál realizan sus consultas.
-* Added: Ahora los monitores de tipo rango pueden ser presentados de manera alterna bajo el esquema de máquinas.
-* Added: Lo monitores permiten ahora ser visualizados en modo compacto.
-* Added: Los monitores de tipo máquina respetan ahora el ancho indicado por su parametrización.  Valor recomendado inicial: 2
-* Added: Agregado el soporte para convertir automaticamente las aplicaciones a Aplicaciones Web Progresivas (WPA) desde el panel de configuracion!!!
-* Added: Agregado soporte para -Add to Home- en Safari sobre iOS
-* Added: Los informes embebidos presentan subtotales cuando se encuentran en formato datatable y además se han configurado columnas de subtotales para estos.
-* Added: En modo diseño de formularios se presenta el titulo de los elementos embebidos (informes o formularios) sobre su botón de edición.
-* Added: La lista de informes presenta clasificado el tipo de informe como tabla o gráfico para facilitar su identificación
-* Added: La edición general de campos para un formulario presenta el título en los elementos embebidos.
-* Added: Durante la edición de eventos ahora se presenta el ID HTML del objeto asociado.
-* Added: Se permite exportacion masiva de elementos tipo informe o formulario mediante la especificación de rangos de ID.
-* Added: Ahora se permite la traduccion de textos en placeholders a partir de variables bajo notacion { $Variable} en PHP
-* Added: Ahora se permite la traduccion de textos en tooltips a partir de variables bajo notacion { $Variable} en PHP
-* Added: Nuevos métodos de verificación para monitores tipo máquina basados en cURL (a diferentes timeout) funcionan extremadamente rapido en circunstancias donde los tipos Socket y Ping presentan lentitud y cuando se desea chequear el estado de URLs especificas.
-* Added: Agregadas funciones para verificacion del estado de un host o URL mediante GetHeaders y GetHostByName.  Complemento de la funcion interna ServicioOnline() aun en modo experimental.
-* Added: Tablero kanban: permite archivar tareas cuando estas se encuentran en la ultima columna definida de manera que pasen a un historico aquellas realizadas y mantengan despejado el tablero.
-* Added: Tablero kanban: multiples tableros!.  Ahora cada usuario con acceso al kanban puede crear tantos tableros como desee.  Solo se permite eliminar tableros completos al propietario del mismo.
-* Added: Tablero kanban: Se agrega Posibilidad de compartir con otros usuarios su tablero Kanban.  Por ahora, la lista de usuarios es manual y debe estar cada usuario encerrado por barras de canalizacion (pipes)
-* Added: Usuarios estandar del sistema pueden usar tableros Kanban propios.  Para esto simplemente se debe agregar un acceso a la accion interna ExplorarTablerosKanban para sus usuarios
-* Enhan: Sensores de rango con valores iguales en máximos y mínimos presentan ahora una dona sin divisiones y su resultado.
-* Enhan: Mejorada interfaz en paneles de configuración.
-* Enhan: Optimizada la forma en que se generan copias de formularios e informes para independizar procesos masivos
-* Enhan: La version de aplicacion en los titulos de ventana es tomada ahora desde la configuracion de la aplicacion.
-* Enhan: Se retira el nombre de la aplicación de todos los títulos de informes.
-* Enhan: Durante los procesos de exportación de elementos en linea se permite ahora saltar a la edición del elemento recién creado directamente.
-* Enhan: Ahora algunos listados y formularios internos del propio framework son presentados mediante elementos creados sobre el mismo Práctico, disminuyendo la cantidad de líneas de código y optimizando su ejecución.  Dichos elementos tendrán identificadores negativos dentro de las tablas de aplicación.
-* Enhan: Se dispone de nueva arquitectura que permitira generar funcionalidades de desarrolladores de Practico dentro del mismo framework.  Como complemento el entorno importa de manera automatica cualquier definicion XML de objetos, formularios o informes ubicada sobre la carpeta /xml de la instalacion.
-* Fixed: Clonacion de formularios desde XML ignoraba los eventos.
-* Fixed: Los objetos de monitoreo en rangos actualizan correctamente sus valores mínimo y máximo esperados.
-* Fixed: La resolucion maxima del logo en pantallas de login ahora no supera los bordes de pantalla, se ajusta automaticamente segun el dispositivo y no supera su resolucion predeterminada en dispositivos de pantalla grande.
-* Fixed: Los sistemas de monitoreo sobre conexiones seguras ahora redirigen correctamente las alertas auditivas.
 
-Nota: Quienes hayan aplicado parches previos de la misma version pueden ver un error de creacion de campos duplicados sobre la tabla de monitoreo.  Esto es normal.
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-ALTER TABLE core_monitoreo ADD conexion_origen_datos varchar(255) DEFAULT '';
-ALTER TABLE core_monitoreo ADD modo_compacto int(10) DEFAULT 0;
-CREATE TABLE core_opcionlista (
-  id int(10) NOT NULL AUTO_INCREMENT,
-  identificador_lista varchar(250),
-  valor_interno varchar(255),
-  valor_visual varchar(255),
-  ordenamiento int(11),
-  PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_grafico','T','{$MULTILANG_TablaDatos}',1);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_grafico','G','{$MULTILANG_Grafico}',2);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_sino','S','{$MULTILANG_Si}',1);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_sino','N','{$MULTILANG_No}',2);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_nosi','N','{$MULTILANG_No}',1);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_nosi','S','{$MULTILANG_Si}',2);
-ALTER TABLE core_kanban ADD archivado int(10) DEFAULT 0;
-UPDATE core_kanban SET categoria=titulo WHERE titulo='[PRACTICO][ColumnasTablero]';
-UPDATE core_kanban SET categoria=titulo WHERE titulo='[PRACTICO][CategoriasTareas]';
-UPDATE core_kanban SET titulo='Kanban01',id=1 WHERE titulo='[PRACTICO][ColumnasTablero]';
-ALTER TABLE core_kanban ADD compartido_rw TEXT;
-ALTER TABLE core_kanban ADD tablero int(11);
-UPDATE core_kanban SET tablero=1 WHERE 1=1;
 "
 
 ########################################################################
