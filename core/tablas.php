@@ -812,7 +812,7 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 		$RegistrosInsertados=0;
 		
 		//Si no recibe una condicion de filtrado fija entonces asigna una minima (1==1)
-		if ($PCO_condicion_fija_campo_unico=="") $PCO_condicion_fija_campo_unico=" 1==1 ";
+		if ($PCO_condicion_fija_campo_unico=="") $PCO_condicion_fija_campo_unico=" 1=1 ";
 		
 		echo "<br>";
 		$mensaje_error="";
@@ -848,7 +848,7 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 								$ListaCamposImportacion="";
 								$ListaValoresImportacion="";
 								$ListaCamposLlaveUnica="";
-								for($i=0;$i<count($CamposTabla);$i++)
+								for ($i=0;$i<count($CamposTabla);$i++)
 									{				
 										$CampoAProcesar = $CamposTabla[$i]["nombre"];
 										$VariableDinamicaNombreCampo="PCO_campoimportado_".$CampoAProcesar;
@@ -880,8 +880,8 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 								$ConsultaImportacionSQL="INSERT INTO $nombre_tabla ($ListaCamposImportacion) VALUES ($ListaValoresImportacion) ";
 								
 								//Verifica si el registro ya existe o no segun los campos de llave y si realmente recibio listas y campos para filtrar
-								if ($ListaCamposLlaveUnica=="") $ListaCamposLlaveUnica=" 1==1 AND ";
-								if ($ListaCamposLlaveUnica!=" 1==1 AND " || $PCO_condicion_fija_campo_unico!=" 1==1 ")
+								if ($ListaCamposLlaveUnica=="") $ListaCamposLlaveUnica=" 1=1 AND ";
+								if ($ListaCamposLlaveUnica!=" 1=1 AND " || $PCO_condicion_fija_campo_unico!=" 1=1 ")
 									{
 										$ConsultaUnicidad="SELECT id FROM $nombre_tabla WHERE $ListaCamposLlaveUnica $PCO_condicion_fija_campo_unico ";
 										$registro_existencia=ejecutar_sql($ConsultaUnicidad)->fetch();
@@ -1778,4 +1778,3 @@ if ($PCO_Accion=="importar_tabla")
     // REVISAR ADEMAS: http://www.sitepoint.com/forums/php-application-design-147/pdo-getcolumnmeta-bug-497257.html
     
 ?>
-
