@@ -16,6 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/tablas.php
 xml/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
@@ -31,6 +32,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 * Enhan: Actualización de PMyDB 17.2 a 17.9
+* Fixed: Procesos de importacion de tablas consideran los valores entregados por los parametros de complementa a condiciones de filtrado correctamente.
 "
 
 ########################################################################
