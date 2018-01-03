@@ -289,7 +289,7 @@
     $MULTILANG_ArchivosLimpiados='Archivos Limpiados/Purgados';
     $MULTILANG_EspacioLiberado='Espacio liberado en disco';
     $MULTILANG_TitDemo='La funcion solicitada no se encuentra disponible';
-    $MULTILANG_MsjDemo='Usted se encuentra en una instalacion en modo DEMO (o demostracion).  Este tipo de instalaciones no permiten interactuar libremente con todos los controles por seguridad.  Esto ayuda a garantizar que el acceso siempre este disponible para todos los usuarios que quieran probar la plataforma.';
+    $MULTILANG_MsjDemo='<b>Usted se encuentra en una instalacion en modo DEMO (o demostracion).</b>  Este tipo de instalaciones no permiten interactuar libremente con todos los controles por seguridad.  Esto ayuda a garantizar que el acceso siempre este disponible para todos los usuarios que quieran probar la plataforma.  <br><br>Si desea probar estas funciones haga una instalacion propia de Practico Framework.';
     $MULTILANG_SeparadorCampos='Cadena separadora de campos';
     $MULTILANG_SeparadorCamposDes='Utilizada para separar valores en Queries y consultas sobre el motor de base de datos.  Generalmente debe ser un valor poco comun que no pueda ser encontrado en las variables entradas por el usuario';
     $MULTILANG_SelectorIdioma='El usuario puede cambiar idioma en login';

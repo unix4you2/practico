@@ -128,6 +128,9 @@
 							
 								<?php
 									$PCO_EnlacePCODER="javascript:PCO_VentanaPopup('mod/pcoder','Pcoder','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=1024, height=700');";
+                        			//Verifica si esta o no en modo DEMO para hacer la operacion
+                        			if ($PCO_ModoDEMO==1)
+									   $PCO_EnlacePCODER="javascript:PCOJS_MostrarMensaje('".$MULTILANG_TitDemo."','".$MULTILANG_MsjDemo."');";
 								?>
 								<a class="btn btn-primary btn-block" href="<?php echo $PCO_EnlacePCODER; ?>"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: PCoder</a>
 								
@@ -152,7 +155,13 @@
 									<input type="hidden" name="auth[password]"	value="<?php echo $PasswordBD; ?>">
 									<input type="hidden" name="auth[db]"		value="<?php echo $BaseDatos; ?>">
 								</form><br>
-								<a class="btn btn-warning btn-block" href="javascript:if(confirm('<?php echo $MULTILANG_ConfirmaPMyDB; ?>'))document.PMyDB.submit();"><i class="fa fa-database fa-fw"></i> <?php echo $MULTILANG_DefPMyDB; ?>: PMyDB</a>
+								<?php
+									$PCO_EnlacePMyDB="javascript:if(confirm('<?php echo $MULTILANG_ConfirmaPMyDB; ?>'))document.PMyDB.submit();";
+                        			//Verifica si esta o no en modo DEMO para hacer la operacion
+                        			if ($PCO_ModoDEMO==1)
+									   $PCO_EnlacePMyDB="javascript:PCOJS_MostrarMensaje('".$MULTILANG_TitDemo."','".$MULTILANG_MsjDemo."');";
+								?>
+								<a class="btn btn-warning btn-block" href="<?php echo $PCO_EnlacePMyDB; ?>"><i class="fa fa-database fa-fw"></i> <?php echo $MULTILANG_DefPMyDB; ?>: PMyDB</a>
                                 <br>
 
 								<!-- Formulario para la carga directa de los tableros Kanban del usuario -->
