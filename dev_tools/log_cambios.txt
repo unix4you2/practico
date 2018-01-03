@@ -31,6 +31,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added: Ademas de las posbilidades de motores de autenticacion externos, OAuth y metodos similares disponibles para realizar el Login al framework, ahora se dispone de dos variables que al ser enviadas como parámetro permiten prediligenciar los campos de usuario y clave al momento de iniciar sesión.  Las variables son AUTO_uid y AUTO_clave
 * Enhan: Actualización de PMyDB 17.2 a 17.9
 * Enhan: Se protegen funciones adicionales para las instalaciones en modo de demostracion y se agregan mensajes aclaratorios. Se incluye Pcoder, PMyDB y Explorador de archivos.
 * Fixed: Procesos de importacion de tablas consideran los valores entregados por los parametros de complementa a condiciones de filtrado correctamente.
