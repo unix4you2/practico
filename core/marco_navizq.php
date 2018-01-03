@@ -69,12 +69,16 @@
                             </li>
 
                             <?php
+									$PCO_EnlaceExplorador="javascript:document.fileman_admin_embebido.submit();";
+                        			//Verifica si esta o no en modo DEMO para hacer la operacion
+                        			if ($PCO_ModoDEMO==1)
+									   $PCO_EnlaceExplorador="javascript:PCOJS_MostrarMensaje('".$MULTILANG_TitDemo."','".$MULTILANG_MsjDemo."');";
                                 //Siempre presenta el administrador de archivos al superusuario
                                 if($PCOSESS_SesionAbierta && PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion!="")
                                     {
                             ?>
                                         <li>
-                                            <a href="javascript:document.fileman_admin_embebido.submit();"><i class="fa fa fa-cloud-upload fa-fw"></i> <?php echo $MULTILANG_AdminArchivos; ?></a>
+                                            <a href="<?php echo $PCO_EnlaceExplorador; ?>"><i class="fa fa fa-cloud-upload fa-fw"></i> <?php echo $MULTILANG_AdminArchivos; ?></a>
                                         </li>
                             <?php
                                     }
