@@ -726,7 +726,7 @@
 	$MULTILANG_InfTitBotones='Agregar botones y acciones a cada registro';
 	$MULTILANG_InfDelReg='Eliminar registro';
 	$MULTILANG_InfCargaForm='Cargar un formulario por ID';
-	$MULTILANG_InfHlpAccion='Si desea cargar un formulario utilice la notaci&oacute;n  ID:1:CampoBusqueda<br>Si desea cargar un informe utilice la notaci&oacute;n  ID:1:CampoBusqueda (tomado como la primer columna del informe)<br>Si desea eliminar el registro asociado indique la tabla.campo usada para comparar con el valor de la primera columna';
+	$MULTILANG_InfHlpAccion='Si desea cargar un formulario simple utilice la notaci&oacute;n  <b>IDFormulario:1</b><br>Si desea cargar un formulario con busqueda de registro, utilice la notaci&oacute;n  <b>IDFormulario:1:CampoBusqueda</b><br>Si desea cargar un formulario transportando el valor de la primera columna sobre la variable $PCO_ValorBusquedaBD utilice la notaci&oacute;n  <b>IDFormulario:1:</b><br>Si desea cargar un informe utilice la notaci&oacute;n  <b>IDInforme:1:CampoBusqueda</b> (tomado como la primer columna del informe)<br>Si desea eliminar el registro asociado indique la <b>tabla.campo</b> usada para comparar con el valor de la primera columna';
 	$MULTILANG_InfVinculo='Campo de v&iacute;nculo';
 	$MULTILANG_InfDesVinculo='IMPORTANTE: Se asumir&aacute; el primer campo o columna como de valor &uacute;nico<br>
 				para realizar las operaciones de eliminaci&oacute;n o apertura de<br>

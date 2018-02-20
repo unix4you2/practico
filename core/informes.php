@@ -1746,10 +1746,7 @@ if ($PCO_Accion=="editar_informe")
                     </div>
                     
                     <div class="btn-xs">
-                    <?php echo $MULTILANG_InfHlpAccion; ?><br><br>
-                    
-                    <b><?php echo $MULTILANG_InfVinculo; ?>:</b>
-                    <br><?php echo $MULTILANG_InfDesVinculo; ?>
+                    <?php echo $MULTILANG_InfHlpAccion; ?>
                     </div>
 
 			</div>
@@ -1821,7 +1818,11 @@ if ($PCO_Accion=="editar_informe")
 							<option value="0"><?php echo $MULTILANG_No; ?></option>
                         </select>
                     </div>
-
+                    <div class="btn-xs">
+                        <br><br><br><br><br>
+                    <b><?php echo $MULTILANG_InfVinculo; ?>:</b>
+                    <br><?php echo $MULTILANG_InfDesVinculo; ?>
+                    </div>
 
 			</div>
 		</div>
