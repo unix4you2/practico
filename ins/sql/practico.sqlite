@@ -483,3 +483,26 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_sino','N','{$MULTILANG_No}',2);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_nosi','N','{$MULTILANG_No}',1);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_nosi','S','{$MULTILANG_Si}',2);
+
+DROP TABLE IF EXISTS core_bugtracker;
+CREATE TABLE core_bugtracker (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  fecha_apertura text,
+  fecha_actualizacion text,
+  fecha_cierre text,
+  proyecto text,
+  titulo text,
+  descripcion text,
+  categoria text,
+  estado text,
+  severidad text,
+  prioridad text,
+  reportado_por text,
+  asignado_a text,
+  pasos_reproduccion text,
+  sistema_origen text,
+  trazas text,
+  adjunto text,
+  historial_gestion text
+
+);

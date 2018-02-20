@@ -473,3 +473,26 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_sino','N','{$MULTILANG_No}',2);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_nosi','N','{$MULTILANG_No}',1);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_nosi','S','{$MULTILANG_Si}',2);
+
+DROP TABLE IF EXISTS core_bugtracker;
+CREATE TABLE core_bugtracker (
+  id serial,
+  fecha_apertura datetime,
+  fecha_actualizacion datetime,
+  fecha_cierre datetime,
+  proyecto varchar(255),
+  titulo varchar(255),
+  descripcion text,
+  categoria varchar(255),
+  estado varchar(20),
+  severidad varchar(20),
+  prioridad varchar(20),
+  reportado_por varchar(250),
+  asignado_a varchar(250),
+  pasos_reproduccion text,
+  sistema_origen varchar(255),
+  trazas text,
+  adjunto varchar(255),
+  historial_gestion text,
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

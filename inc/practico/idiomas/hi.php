@@ -1301,6 +1301,7 @@
     $MULTILANG_CrearTablero='Add board';
     $MULTILANG_CompartirCon='Shared with';
     $MULTILANG_NoTablero='There is not a Kanban board created by you or shared with you by another user';
+    $MULTILANG_ArrastrarTarea='Mueva tareas rapidamente arrastr&aacute;ndolas sobre este t&iacute;tulo.';
 
     //Opciones de Documentacion
     $MULTILANG_Documentar='दस्तावेज़';

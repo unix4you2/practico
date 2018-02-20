@@ -192,7 +192,7 @@
 	$MULTILANG_ZonaPeligro='Danger zone';
 	$MULTILANG_VistaImpresion='Printer view';
 	$MULTILANG_IDGABeacon='Google Analytics ID';
-	$MULTILANG_AyudaGABeacon='Those developers who want to have a full log or real time statistics about their software using Google Analytics can put here the unique ID from their Google Analytics Panel.  Practico will send all statistics tu your Analytics Panel in real time.';
+	$MULTILANG_AyudaGABeacon='Those developers who want to have a full log or real time statistics about their software using Google Analytics can put here the unique ID from their Google Analytics Panel.  Practico will send all statistics tu your Analytics Panel in real time and install statistics to Framework developers.';
 
 	//Ventana de login
 	$MULTILANG_TituloLogin='System Login';
@@ -1281,7 +1281,7 @@
     $MULTILANG_EventoTipoInternet='Internet Connection Events';
 
     //ModuloKanban
-    $MULTILANG_TablerosKanban='Kanban Board';
+    $MULTILANG_TablerosKanban='Kanban Boards';
     $MULTILANG_AgregarNuevaTarea='Add new task';
     $MULTILANG_DesTarea='General description of the task or activity to be added to the Kanban board. You can even use other description techniques such as user stories or any other methodology you want to document the activity.';
     $MULTILANG_AsignadoA='Assigned to';
@@ -1303,6 +1303,7 @@
     $MULTILANG_CrearTablero='Add board';
     $MULTILANG_CompartirCon='Shared with';
     $MULTILANG_NoTablero='There is not a Kanban board created by you or shared with you by another user';
+    $MULTILANG_ArrastrarTarea='Move tasks quickly draggind and dropping over this title.';
 
     //Opciones de Documentacion
     $MULTILANG_Documentar='Document';

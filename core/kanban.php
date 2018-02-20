@@ -302,6 +302,7 @@
             onmouseleave="$(this).css(\'border\', \'0px solid\'); $(\'#PCOEditorContenedor_Col'.$RegistroTareas["columna"].'_'.$RegistroTareas["id"].'\').css({\'visibility\':\'hidden\'}); $(\'#PCOEditorContenedor_Col'.$RegistroTareas["columna"].'_'.$RegistroTareas["id"].'\').css({\'display\':\'none\'});  "';
 
             $Salida = '
+                <div id="Dragable'.$RegistroTareas["id"].'" draggable="true" ondragstart="Arrastrar(event,'.$RegistroTareas["id"].')">
                 <div class="panel panel-'.$EstiloCuadro.'" '.$EventoComplemento.'>
                     <div class="panel-heading">
                         <div class="row">
@@ -326,7 +327,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>';
+
+//https://www.w3schools.com/html/html5_draganddrop.asp
             return $Salida;
 		}
 
@@ -383,6 +387,7 @@ if (@$PCO_Accion=="ExplorarTablerosKanban")
         $ArregloCategoriasTareas=explode(",",$ResultadoCategorias["descripcion"]);
     ?>
 		<script type="" language="JavaScript">
+		    var TareaArrastrarActiva=0;
 		    function CargarCreacionTablero()
 		        {
             		// Se muestra el cuadro modal
@@ -405,6 +410,28 @@ if (@$PCO_Accion=="ExplorarTablerosKanban")
                     $('#descripcion').val(ValorPlantilla);
                     $('#descripcion').val( $('#descripcion').val().replace(/BR/g,"\n") );
 		        }
+
+            function PermitirSoltar(ev,columna)
+                {
+                    ev.preventDefault();                                                            //Evita el evento predeterminado sobre el elemento
+                }
+            
+            function Arrastrar(ev,tarea)
+                {
+                    TareaArrastrarActiva=tarea;                                                     //Define la vble global con la tarea que se arrastra
+                    ev.dataTransfer.setData("text", ev.target.id);
+                }
+                
+            function Soltar(ev,columna)
+                {
+                    ev.preventDefault();
+                    var data = ev.dataTransfer.getData("text");                                     //Obtiene el elemento origen
+                    //ev.target.appendChild(document.getElementById(data));                         //Agrega el elemento al objetivo (generico)
+                    ColumnaDestino=document.getElementById("ColumnaKanbanMarcoArrastre"+columna);    //Asigna el elemento a la columna en cuestion
+                    ColumnaDestino.appendChild(document.getElementById(data));                      //Agrega el elemento a la columna destino
+                    //Realiza la operacion para cambiar la columna de la tarea
+                    VariableTransporte=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=cambiar_estado_campo&id="+TareaArrastrarActiva+"&tabla=kanban&campo=columna&valor="+columna); //Obtiene de manera sincrónica un valor
+                }
 		</script>
 
 
@@ -679,10 +706,11 @@ if (@$PCO_Accion=="ExplorarTablerosKanban")
                             $ColumnasDisponibles=count($ArregloColumnasTablero);
                             $AnchoColumnas=round(100/$ColumnasDisponibles);
                             foreach ($ArregloColumnasTablero as $NombreColumna) {
-                                echo "<td valign=top width='$AnchoColumnas%'>";
-                                echo "<div class='btn pull-left' id='MarcoBotonOcultar".$ConteoColumna."'><i class='fa-1x'><i class='fa fa-eye-slash'></i> <b>".$NombreColumna."</b></i></div>";
+                                echo "<td  valign=top width='$AnchoColumnas%'>";
+                                echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='".$MULTILANG_ArrastrarTarea."' class='btn pull-left' id='MarcoBotonOcultar".$ConteoColumna."' ondrop='Soltar(event,$ConteoColumna)' ondragover='PermitirSoltar(event,$ConteoColumna)'><i class='fa-1x'><i class='fa fa-stack-overflow'></i> <b>".$NombreColumna."</b></i></div>";
                                 echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='<b>".$MULTILANG_AgregarNuevaTarea.":</b> ".$NombreColumna."' class='btn text-primary btn-xs pull-right' onclick='CargarCrearTarea(".$ConteoColumna.");'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
-                                echo "<br><br><div id='MarcoTareasColumna$ConteoColumna'>";
+                                echo "<div id='MarcoTareasColumna$ConteoColumna'>
+                                <br><br><div id='ColumnaKanbanMarcoArrastre".$ConteoColumna."'></div>";
                                 //Busca las tarjetas de la columna siempre y cuando no esten ya archivadas
                                 $ResultadoTareas=ejecutar_sql("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND columna=$ConteoColumna AND tablero='$ID_TableroKanban' ORDER BY peso ASC ");
                                 while ($RegistroTareas=$ResultadoTareas->fetch())

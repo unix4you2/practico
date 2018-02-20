@@ -160,7 +160,7 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
                             <i class="fa fa-newspaper-o fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo ContarRegistros($TablasCore."formulario"); ?></div>
+                            <div class="huge"><?php echo ContarRegistros($TablasCore."formulario","id>".$ModoDesarrolladorPractico); ?></div>
                             <div><?php echo $MULTILANG_Formularios; ?>(s)</div>
                         </div>
                     </div>
@@ -183,7 +183,7 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
                             <i class="fa fa-file-text fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo ContarRegistros($TablasCore."informe"); ?></div>
+                            <div class="huge"><?php echo ContarRegistros($TablasCore."informe","id>".$ModoDesarrolladorPractico); ?></div>
                             <div><?php echo $MULTILANG_Informes; ?></div>
                         </div>
                     </div>

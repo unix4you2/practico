@@ -3483,18 +3483,31 @@ function completar_parametros($string,$data) {
 	}
 
 
-
 /* ################################################################## */
 /* ################################################################## */
-	function ContarRegistros($tabla)
+	function ContarRegistros($tabla,$condicion="")
 		{
+			/*
+				Function: ContarRegistros
+				Devuelve la cantidad de registros existentes dentro de una tabla con una condicion determinada
+
+				Salida:
+					Valor numerico que indica la cantidad de registros encontrados
+				
+				Ver tambien:
+				    <consultar_tablas> | <consultar_columnas>
+			*/
 			global $ConexionPDO;
-			$consulta = $ConexionPDO->prepare("SELECT count(*) FROM $tabla");
+			
+			//Si se recibe una concion la agrega a la consulta
+			$ComplementoConsultaConteo="";
+			if ($condicion!="") $ComplementoConsultaConteo=" WHERE $condicion ";
+			//Ejecuta la consulta
+			$consulta = $ConexionPDO->prepare("SELECT count(*) FROM $tabla $ComplementoConsultaConteo");
 			$consulta->execute();
 			$filas = $consulta->fetchColumn();
 			return $filas;
 		}
-
 
 
 /* ################################################################## */
@@ -4064,9 +4077,13 @@ function selector_iconos_awesome()
 */
 	function cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 		{
-			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
+			global $TablasCore,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
             global $funciones_activacion_datepickers;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+
+            //Busca datos del formulario
+            $RegistroDisenoFormulario=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario WHERE id=?", "$formulario")->fetch();
+            $IdHTMLFormulario=$RegistroDisenoFormulario["id_html"];
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
@@ -4183,7 +4200,7 @@ function selector_iconos_awesome()
 			if ($registro_campos["etiqueta_busqueda"]!="")
 				{
                     $salida.= '<span class="input-group-addon">';
-                        $salida.= '<input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.PCO_ValorBusquedaBD.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.PCO_Accion.value=\'cargar_objeto\';document.datos.submit()">';
+                        $salida.= '<input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.'.$IdHTMLFormulario.'.PCO_ValorBusquedaBD.value=document.'.$IdHTMLFormulario.'.'.$registro_campos["campo"].'.value;document.'.$IdHTMLFormulario.'.PCO_Accion.value=\'cargar_objeto\';document.'.$IdHTMLFormulario.'.submit()">';
                         $salida.= '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
                         $salida.= '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
                         $salida.= '<input type="Hidden" name="PCO_CampoBusquedaBD" value="'.$registro_campos["campo"].'" >';
@@ -4555,9 +4572,13 @@ function selector_iconos_awesome()
 */
 	function cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 		{
-			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
+			global $TablasCore,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_SeleccioneUno,$MULTILANG_FrmActualizaAjax;
 
+            //Busca datos del formulario
+            $RegistroDisenoFormulario=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario WHERE id=?", "$formulario")->fetch();
+            $IdHTMLFormulario=$RegistroDisenoFormulario["id_html"];
+            
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
 
@@ -4688,7 +4709,7 @@ function selector_iconos_awesome()
                     // Si se desea tomar los valores del combo desde una tabla hace la consulta
                     if ($registro_campos["origen_lista_opciones"]!="" && $registro_campos["origen_lista_valores"]!="")
                         {
-                            $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_opciones"]);
+                            $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_valores"]); //Usa el campo de valor de la lista que se asume es unico   
                             $nombre_tabla_opciones = $nombre_tabla_opciones[0];
                             $campo_valores=$registro_campos["origen_lista_valores"];
                             $campo_opciones=$registro_campos["origen_lista_opciones"];
@@ -4754,7 +4775,7 @@ function selector_iconos_awesome()
 			// Muestra boton de busqueda cuando el campo sea usado para esto
 			if ($registro_campos["etiqueta_busqueda"]!="")
 				{
-                    $salida.= '<span class="input-group-addon"><input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.datos.PCO_ValorBusquedaBD.value=document.datos.'.$registro_campos["campo"].'.value;document.datos.PCO_Accion.value=\'cargar_objeto\';document.datos.submit()"></span>';
+                    $salida.= '<span class="input-group-addon"><input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.'.$IdHTMLFormulario.'.PCO_ValorBusquedaBD.value=document.'.$IdHTMLFormulario.'.'.$registro_campos["campo"].'.value;document.'.$IdHTMLFormulario.'.PCO_Accion.value=\'cargar_objeto\';document.'.$IdHTMLFormulario.'.submit()"></span>';
 					$salida.= '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
 					$salida.= '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
 					$salida.= '<input type="Hidden" name="PCO_CampoBusquedaBD" value="'.$registro_campos["campo"].'" >';
@@ -5087,9 +5108,13 @@ $('#SampleElement').load('YourURL');
 */
 	function cargar_objeto_casilla_check($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 		{
-			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
+			global $TablasCore,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
             global $funciones_activacion_datepickers;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+
+            //Busca datos del formulario
+            $RegistroDisenoFormulario=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario WHERE id=?", "$formulario")->fetch();
+            $IdHTMLFormulario=$RegistroDisenoFormulario["id_html"];
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
@@ -5130,9 +5155,9 @@ $('#SampleElement').load('YourURL');
 						{
 							//Si es marcado asigna el valor, sino asigna el otro
 							if (objeto_checkbox.checked)
-								document.datos.'.$registro_campos["campo"].'.value="'.$registro_campos["valor_check_activo"].'";
+								document.'.$IdHTMLFormulario.'.'.$registro_campos["campo"].'.value="'.$registro_campos["valor_check_activo"].'";
 							else
-								document.datos.'.$registro_campos["campo"].'.value="'.$registro_campos["valor_check_inactivo"].'";
+								document.'.$IdHTMLFormulario.'.'.$registro_campos["campo"].'.value="'.$registro_campos["valor_check_inactivo"].'";
 						}
 				</script>
             ';
@@ -5317,9 +5342,13 @@ $('#SampleElement').load('YourURL');
 */
 	function cargar_objeto_canvas($registro_campos,$registro_datos_formulario)
 		{
-			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
+			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$TablasCore;
 			global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
             global $funciones_activacion_canvas;
+
+            //Busca datos del formulario
+            $RegistroDisenoFormulario=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario WHERE id=?", "$formulario")->fetch();
+            $IdHTMLFormulario=$RegistroDisenoFormulario["id_html"];
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
@@ -5400,7 +5429,7 @@ $('#SampleElement').load('YourURL');
 							// Pasa el valor del canvas al campo que se usa en almacenamiento
 							var oCanvas = document.getElementById("CANVAS_'.$registro_campos["campo"].'");
 							var strDataURI = oCanvas.toDataURL();
-							document.datos.'.$registro_campos["campo"].'.value=strDataURI;
+							document.'.$IdHTMLFormulario.'.'.$registro_campos["campo"].'.value=strDataURI;
 							window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);
 						}
 					window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1500);
@@ -5443,8 +5472,12 @@ $('#SampleElement').load('YourURL');
 */
 	function cargar_objeto_camara($registro_campos,$registro_datos_formulario)
 		{
-			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
+			global $TablasCore,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink,$MULTILANG_Capturar,$MULTILANG_FrmErrorCam,$MULTILANG_DesObligatorio,$MULTILANG_TitObligatorio;
+
+            //Busca datos del formulario
+            $RegistroDisenoFormulario=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario WHERE id=?", "$formulario")->fetch();
+            $IdHTMLFormulario=$RegistroDisenoFormulario["id_html"];
 
 			$salida='';
 			$nombre_campo=$registro_campos["campo"];
@@ -5540,7 +5573,7 @@ $('#SampleElement').load('YourURL');
 							// Pasa el valor del canvas al campo que se usa en almacenamiento
 							var oCanvas = document.getElementById("CANVAS_'.$registro_campos["campo"].'");
 							var strDataURI = oCanvas.toDataURL();
-							document.datos.'.$registro_campos["campo"].'.value=strDataURI;
+							document.'.$IdHTMLFormulario.'.'.$registro_campos["campo"].'.value=strDataURI;
 							window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);
 						}
 					window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);

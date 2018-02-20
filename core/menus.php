@@ -64,14 +64,14 @@ function selector_objetos_menu()
                             <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                             <optgroup label="<?php echo $MULTILANG_Formularios; ?>">
                                 <?php
-                                    $consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario ORDER BY titulo");
+                                    $consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id>=0 ORDER BY titulo");
                                     while($registro_forms = $consulta_forms->fetch())
                                         echo '<option value="frm:'.$registro_forms["id"].'">(Id.'.$registro_forms["id"].') '.$registro_forms["titulo"].'</option>';
                                 ?>
                             </optgroup>
                             <optgroup label="<?php echo $MULTILANG_Informes; ?>">
                                 <?php
-                                    $consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe ORDER BY titulo");
+                                    $consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id>=0 ORDER BY titulo");
                                     while($registro_informes = $consulta_informs->fetch())
                                         echo '<option value="inf:'.$registro_informes["id"].'">(Id.'.$registro_informes["id"].') '.$registro_informes["titulo"].'</option>';
                                 ?>

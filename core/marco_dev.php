@@ -156,7 +156,7 @@
 									<input type="hidden" name="auth[db]"		value="<?php echo $BaseDatos; ?>">
 								</form><br>
 								<?php
-									$PCO_EnlacePMyDB="javascript:if(confirm('<?php echo $MULTILANG_ConfirmaPMyDB; ?>'))document.PMyDB.submit();";
+									$PCO_EnlacePMyDB="javascript:if(confirm('$MULTILANG_ConfirmaPMyDB'))document.PMyDB.submit();";
                         			//Verifica si esta o no en modo DEMO para hacer la operacion
                         			if ($PCO_ModoDEMO==1)
 									   $PCO_EnlacePMyDB="javascript:PCOJS_MostrarMensaje('".$MULTILANG_TitDemo."','".$MULTILANG_MsjDemo."');";

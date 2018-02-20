@@ -788,8 +788,9 @@ if ($PCO_Accion=="editar_formulario")
 	    //Si no recibe un nombre de tabla intenta averiguarlo desde el formulario
 	    if ($nombre_tabla=="")
 	        {
-	           $RegistroFormulario=ejecutar_sql("SELECT tabla_datos FROM ".$TablasCore."formulario WHERE id=? ","$formulario")->fetch();
+	            $RegistroFormulario=ejecutar_sql("SELECT tabla_datos FROM ".$TablasCore."formulario WHERE id=? ","$formulario")->fetch();
                 $nombre_tabla=$RegistroFormulario["tabla_datos"];
+                //$nombre_tabla=PCO_ReemplazarVariablesPHPEnCadena($nombre_tabla);
 	        }
 	    
         //Prepara el selector de iconos para las opciones
@@ -1330,7 +1331,7 @@ if ($PCO_Accion=="editar_formulario")
                                 <select id="informe_vinculado" name="informe_vinculado" class="form-control input-sm">
                                 <option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                 <?php
-                                    $consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe ORDER BY titulo");
+                                    $consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id>=0 ORDER BY titulo");
                                     while($registro_informes = $consulta_informs->fetch())
                                         {
                                             $seleccion_campo="";
@@ -1350,7 +1351,7 @@ if ($PCO_Accion=="editar_formulario")
                                 <select id="formulario_vinculado" name="formulario_vinculado" class="form-control input-sm">
                                 <option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                 <?php
-                                    $consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario ORDER BY titulo");
+                                    $consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id>=0 ORDER BY titulo");
                                     while($registro_formularios = $consulta_forms->fetch())
                                         {
                                             $seleccion_campo="";
@@ -2560,7 +2561,7 @@ if ($PCO_Accion=="editar_formulario")
                                 </span>
                             </div>
                             <input type="text" name="tabla_datos_manual"  value="';
-                            if($es_tabla_manual==1) echo $registro_form["tabla_datos"];
+                            if($es_tabla_manual==1) $ContenidoBarraFlotante_EditForm.= $registro_form["tabla_datos"];
         $ContenidoBarraFlotante_EditForm.='" class="form-control" placeholder="'.$MULTILANG_InfTablaManual.'">
 						</td>
 					</tr>

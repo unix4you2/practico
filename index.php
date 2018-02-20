@@ -149,8 +149,6 @@
     include_once("core/ws_oauth.php");
 
     // Determina si al momento de ejecucion se encuentra activado el modo webservices
-    if (PCO_BuscarErroresSintaxisPHP("mod/personalizadas_ws.php")==0)
-        include("mod/personalizadas_ws.php"); 
     include_once("core/ws_nucleo.php");
 
     limpiar_entradas(); // Evita XSS

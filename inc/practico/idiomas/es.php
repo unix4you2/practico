@@ -193,7 +193,7 @@
 	$MULTILANG_ZonaPeligro='Zona de peligro';
 	$MULTILANG_VistaImpresion='Vista de impresion';
 	$MULTILANG_IDGABeacon='ID Google Analytics';
-	$MULTILANG_AyudaGABeacon='Aquellos desarrolladores que deseen tener un seguimiento historico detallado o incluso en tiempo real del uso de su herramienta a traves de Google Analytics pueden diligenciar aqui el ID obtenido en su panel de Google.  Practico reportara todo movimiento a su panel de Analytics';
+	$MULTILANG_AyudaGABeacon='Aquellos desarrolladores que deseen tener un seguimiento historico detallado o incluso en tiempo real del uso de su herramienta a traves de Google Analytics pueden diligenciar aqui el ID obtenido en su panel de Google.  Practico reportara todo movimiento a su panel de Analytics asi como registros de instalacion a los desarrolladores del Framework.';
 
 	//Ventana de login
 	$MULTILANG_TituloLogin='Ingreso al sistema';
@@ -726,7 +726,7 @@
 	$MULTILANG_InfTitBotones='Agregar botones y acciones a cada registro';
 	$MULTILANG_InfDelReg='Eliminar registro';
 	$MULTILANG_InfCargaForm='Cargar un formulario por ID';
-	$MULTILANG_InfHlpAccion='Si desea cargar un formulario utilice la notaci&oacute;n  ID:1:CampoBusqueda<br>Si desea cargar un informe utilice la notaci&oacute;n  ID:1<br>Si desea eliminar el registro asociado indique la tabla.campo usada para comparar';
+	$MULTILANG_InfHlpAccion='Si desea cargar un formulario utilice la notaci&oacute;n  ID:1:CampoBusqueda<br>Si desea cargar un informe utilice la notaci&oacute;n  ID:1:CampoBusqueda (tomado como la primer columna del informe)<br>Si desea eliminar el registro asociado indique la tabla.campo usada para comparar con el valor de la primera columna';
 	$MULTILANG_InfVinculo='Campo de v&iacute;nculo';
 	$MULTILANG_InfDesVinculo='IMPORTANTE: Se asumir&aacute; el primer campo o columna como de valor &uacute;nico<br>
 				para realizar las operaciones de eliminaci&oacute;n o apertura de<br>
@@ -1280,7 +1280,7 @@
     $MULTILANG_EventoTipoInternet='Eventos sobre la conexion a Internet';
     
     //ModuloKanban
-    $MULTILANG_TablerosKanban='Tablero Kanban';
+    $MULTILANG_TablerosKanban='Tableros Kanban';
     $MULTILANG_AgregarNuevaTarea='Agregar nueva tarea';
     $MULTILANG_DesTarea='Descripci&oacute;n general de la tarea o actividad que ser&aacute; agregada al tablero Kanban.   Puede incluso utilizar otras t&eacute;cnicas de descripci&oacute;n como historias de usuario o cualquier otra metodolog&iacute;a que desee para documentar la actividad.';
     $MULTILANG_AsignadoA='Asignada a';
@@ -1302,6 +1302,12 @@
     $MULTILANG_CrearTablero='Crear tablero';
     $MULTILANG_CompartirCon='Compartir con';
     $MULTILANG_NoTablero='No hay un tablero kanban asociado a su usuario o compartido por otro usuario con usted';
+    $MULTILANG_ArrastrarTarea='Mueva tareas rapidamente arrastr&aacute;ndolas sobre este t&iacute;tulo.';
+
+    //ModuloBugTracker
+    $MULTILANG_ReporteBugs='Reporte de errores';
+
+
 
     //Opciones de Documentacion
     $MULTILANG_Documentar='Documentar';

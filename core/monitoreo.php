@@ -172,6 +172,7 @@
 				    //Inicia la conexion cURL al host
                     $ConexioncURL = curl_init($maquina);
                     curl_setopt($ConexioncURL,CURLOPT_CONNECTTIMEOUT,$TimeOut);
+                    curl_setopt($ConexioncURL,CURLOPT_TIMEOUT,$TimeOut);
                     curl_setopt($ConexioncURL,CURLOPT_HEADER,true);
                     curl_setopt($ConexioncURL,CURLOPT_NOBODY,true);
                     curl_setopt($ConexioncURL,CURLOPT_RETURNTRANSFER,true);
