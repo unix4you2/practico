@@ -5344,7 +5344,7 @@ $('#SampleElement').load('YourURL');
 	Ver tambien:
 		<cargar_formulario>
 */
-	function cargar_objeto_canvas($registro_campos,$registro_datos_formulario)
+	function cargar_objeto_canvas($registro_campos,$registro_datos_formulario,$formulario)
 		{
 			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$TablasCore;
 			global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
@@ -5474,7 +5474,7 @@ $('#SampleElement').load('YourURL');
 	Ver tambien:
 		<cargar_formulario>
 */
-	function cargar_objeto_camara($registro_campos,$registro_datos_formulario)
+	function cargar_objeto_camara($registro_campos,$registro_datos_formulario,$formulario)
 		{
 			global $TablasCore,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink,$MULTILANG_Capturar,$MULTILANG_FrmErrorCam,$MULTILANG_DesObligatorio,$MULTILANG_TitObligatorio;
@@ -6071,15 +6071,15 @@ $('#SampleElement').load('YourURL');
                                                                             if ($tipo_de_objeto=="area_responsive") $objeto_formateado = @cargar_objeto_area_responsive($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = @cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                                             if ($tipo_de_objeto=="lista_radio") $objeto_formateado = @cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
-                                                                            if ($tipo_de_objeto=="casilla_check") $objeto_formateado = @cargar_objeto_casilla_check($registro_campos,@$registro_datos_formulario);
+                                                                            if ($tipo_de_objeto=="casilla_check") $objeto_formateado = @cargar_objeto_casilla_check($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                                             if ($tipo_de_objeto=="etiqueta") $objeto_formateado = @cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="url_iframe") $objeto_formateado = @cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="informe") @cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
                                                                             if ($tipo_de_objeto=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
-                                                                            if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
-                                                                            if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
+                                                                            if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario,$formulario);
+                                                                            if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario,$formulario);
                                                                             if ($tipo_de_objeto=="boton_comando") $objeto_formateado = @cargar_objeto_boton_comando($registro_campos,@$registro_datos_formulario,@$registro_formulario);
                                                                             //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
                                                                             
@@ -6163,15 +6163,15 @@ $('#SampleElement').load('YourURL');
                                                         if ($tipo_de_objeto=="area_responsive") $objeto_formateado = @cargar_objeto_area_responsive($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                         if ($tipo_de_objeto=="lista_radio") $objeto_formateado = cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
-                                                        if ($tipo_de_objeto=="casilla_check") $objeto_formateado = @cargar_objeto_casilla_check($registro_campos,@$registro_datos_formulario);
+                                                        if ($tipo_de_objeto=="casilla_check") $objeto_formateado = @cargar_objeto_casilla_check($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                         if ($tipo_de_objeto=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="informe") @cargar_informe($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
                                                         if ($tipo_de_objeto=="deslizador") $objeto_formateado = @cargar_objeto_deslizador($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @cargar_objeto_campoetiqueta($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @cargar_objeto_archivo_adjunto($registro_campos,@$registro_datos_formulario);
-                                                        if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario);
-                                                        if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario);
+                                                        if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @cargar_objeto_canvas($registro_campos,@$registro_datos_formulario,$formulario);
+                                                        if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @cargar_objeto_camara($registro_campos,@$registro_datos_formulario,$formulario);
                                                         if ($tipo_de_objeto=="boton_comando") $objeto_formateado = @cargar_objeto_boton_comando($registro_campos,@$registro_datos_formulario,@$registro_formulario);
                                                         //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
                                                         //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
