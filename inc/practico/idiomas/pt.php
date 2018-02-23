@@ -181,6 +181,7 @@
 	$MULTILANG_TipoMotor='Tipo de motor';
 	$MULTILANG_Titulo='T&iacute;tulo';
 	$MULTILANG_TotalRegistros='Total de registros gravados';
+	$MULTILANG_Trazabilidad='Traceability';
 	$MULTILANG_Truncar='Truncar';
 	$MULTILANG_Ultimo='Ultimo';
     $MULTILANG_Usuario='Do Utilizador';
@@ -1304,6 +1305,24 @@
     $MULTILANG_CompartirCon='Shared with';
     $MULTILANG_NoTablero='There is not a Kanban board created by you or shared with you by another user';
     $MULTILANG_ArrastrarTarea='Mueva tareas rapidamente arrastr&aacute;ndolas sobre este t&iacute;tulo.';
+
+    //ModuloBugTracker
+    $MULTILANG_BTReporteBugs='Report errors or improvements';
+    $MULTILANG_BTUltimaActualizacion='Last update date';
+    $MULTILANG_BTSeveridad='Severity';
+    $MULTILANG_BTUsuarioReporte='Reported by';
+    $MULTILANG_BTAsignadoA='Assigned to';
+    $MULTILANG_BTPasos='Steps to reproduce the problem';
+    $MULTILANG_BTOrigen='Origin system';
+    $MULTILANG_BTTrazas='Traces associated with the error';
+    $MULTILANG_BTVersion='Version of the project or product';
+    $MULTILANG_BTDescripcion='Description of the error or improvement';
+    $MULTILANG_BTFechaCierre='Deadline';
+    $MULTILANG_BTProyectoAsociado='Associated project';
+    $MULTILANG_BTFechaApertura='Date of opening of the case';
+    $MULTILANG_BTHistorial='Management history';
+    $MULTILANG_BTCategoriaDes='Please select if this is an application error, an enhancement or a question about Functionality';
+    $MULTILANG_BTComplementoDes='If applies, write the step by step procedure to reproduce the error over the sysmte.';
 
     //Opciones de Documentacion
     $MULTILANG_Documentar='Documento';

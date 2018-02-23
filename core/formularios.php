@@ -89,8 +89,8 @@
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 						<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
 						<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
-						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@$PCO_ErrorTitulo.'">
-						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@$PCO_ErrorDescripcion.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo).'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion).'">
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 		}
@@ -188,8 +188,8 @@
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 						<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
 						<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
-						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@$PCO_ErrorTitulo.'">
-						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@$PCO_ErrorDescripcion.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo).'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion).'">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -398,8 +398,8 @@
 						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 						<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
 						<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
-						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@$PCO_ErrorTitulo.'">
-						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@$PCO_ErrorDescripcion.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo).'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion).'">
                         <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 						</form>

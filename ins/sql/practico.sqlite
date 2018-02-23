@@ -491,6 +491,7 @@ CREATE TABLE core_bugtracker (
   fecha_actualizacion text,
   fecha_cierre text,
   proyecto text,
+  proyecto_version text,
   titulo text,
   descripcion text,
   categoria text,

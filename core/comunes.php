@@ -2309,15 +2309,15 @@ function RestaurarEtiquetasHTML($input)
 		$PCO_Accion = preg_replace("/[^A-Za-z0-9_]/", "", $PCO_Accion);
 		
 		// Escapa siempre los mensajes de error
-		$PCO_ErrorTitulo=escapar_contenido($PCO_ErrorTitulo);
+		$PCO_ErrorTitulo=escapar_contenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo));
 		$PCO_ErrorTitulo = preg_replace("/[^A-Za-z0-9_ ><]/", "", $PCO_ErrorTitulo);
-		$PCO_ErrorDescripcion=escapar_contenido($PCO_ErrorDescripcion);
+		$PCO_ErrorDescripcion=escapar_contenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion));
 		$PCO_ErrorDescripcion = preg_replace("/[^A-Za-z0-9_ ><]/", "", $PCO_ErrorDescripcion);
 		
 		// Escapa otras variables de uso comun
 		global $PCO_ErrorTitulo,$PCO_ErrorDescripcion;
-		$PCO_ErrorTitulo=escapar_contenido($PCO_ErrorTitulo);
-		$PCO_ErrorDescripcion=escapar_contenido($PCO_ErrorDescripcion);
+		$PCO_ErrorTitulo=escapar_contenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo));
+		$PCO_ErrorDescripcion=escapar_contenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion));
 
 		// Escapar algunas variables segun la accion recibida
 		if ($PCO_Accion=="ver_seguimiento_general")
@@ -2331,8 +2331,8 @@ function RestaurarEtiquetasHTML($input)
 		if ($PCO_Accion=="administrar_formularios")
 			{
 				global $PCO_ErrorDescripcion,$PCO_ErrorTitulo;
-				$PCO_ErrorDescripcion=escapar_contenido($PCO_ErrorDescripcion);
-				$PCO_ErrorTitulo=escapar_contenido($PCO_ErrorTitulo);
+				$PCO_ErrorDescripcion=escapar_contenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion));
+				$PCO_ErrorTitulo=escapar_contenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo));
 			}
 
 		if ($PCO_Accion=="actualizar_menu")
@@ -4107,7 +4107,10 @@ function selector_iconos_awesome()
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
 			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
+			//Reemplaza segundas variables sobre valores predeterminados 
+			$cadena_valor=' value="'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_predeterminado"]).'" ';
 			//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.
+			//Conserva compatibilidad hacia atras en versiones donde las variables comienzan solamente con el signo pesos y se permite solo una
 			if (substr($registro_campos["valor_predeterminado"], 0,1)=="$")
 				{
 					$nombre_variable = substr($registro_campos["valor_predeterminado"], 1);
@@ -4118,6 +4121,7 @@ function selector_iconos_awesome()
 							$cadena_valor=' value="'.$valor_variable.'" ';							
 						}
 				}
+				
 			$valor_variable_escapada=$registro_datos_formulario["$nombre_campo"];
 			//$valor_variable_escapada=addslashes ( '"'.$valor_variable_escapada.'"' );
 			//$valor_variable_escapada=htmlentities($valor_variable_escapada); //Presenta la cadena como caracteres especiales HTML para ayudar a presentar correctamente tildes, comillas y barras
@@ -5934,8 +5938,8 @@ $('#SampleElement').load('YourURL');
 						<input type="Hidden" name="PCO_Accion" value="guardar_datos_formulario">
 						<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
 						<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
-						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@$PCO_ErrorTitulo.'">
-						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@$PCO_ErrorDescripcion.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo).'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion).'">
                         <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
                         <input type="Hidden" name="objeto" value=""> <!--Requerido si se va a transferir el control a un objeto FRM o INF-->
@@ -5968,7 +5972,7 @@ $('#SampleElement').load('YourURL');
                         $pestana_activa=1;
                         while($registro_formulario_pestana = @$consulta_formulario_pestana->fetch())
                             {
-                                $titulo_pestana_formulario=$registro_formulario_pestana["pestana_objeto"];
+                                $titulo_pestana_formulario=PCO_ReemplazarVariablesPHPEnCadena($registro_formulario_pestana["pestana_objeto"]);
                                 if ($titulo_pestana_formulario=="") $titulo_pestana_formulario="<i class='fa fa-stack-overflow'></i>";
                                 //Presenta la pestana solamente si no es una oculta
                                 if ($titulo_pestana_formulario!="PCO_NoVisible" || PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))

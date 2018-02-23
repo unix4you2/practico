@@ -182,6 +182,7 @@
 	$MULTILANG_TipoMotor='Tipo de motor';
 	$MULTILANG_Titulo='T&iacute;tulo';
 	$MULTILANG_TotalRegistros='Total registros encontrados';
+	$MULTILANG_Trazabilidad='Trazabilidad';
 	$MULTILANG_Truncar='Truncar';
 	$MULTILANG_Ultimo='Ultimo';
     $MULTILANG_Usuario='Usuario';
@@ -1305,9 +1306,24 @@
     $MULTILANG_ArrastrarTarea='Mueva tareas rapidamente arrastr&aacute;ndolas sobre este t&iacute;tulo.';
 
     //ModuloBugTracker
-    $MULTILANG_ReporteBugs='Reporte de errores';
-
-
+    $MULTILANG_BTReporteBugs='Reporte de errores o mejoras';
+    $MULTILANG_BTUltimaActualizacion='Ultima fecha de actualizaci&oacute;n';
+    $MULTILANG_BTSeveridad='Severidad';
+    $MULTILANG_BTUsuarioReporte='Reportado por';
+    $MULTILANG_BTAsignadoA='Asignado a';
+    $MULTILANG_BTPasos='Pasos para reproducir el problema';
+    $MULTILANG_BTOrigen='Sistema origen';
+    $MULTILANG_BTTrazas='Trazas asociadas al error';
+    $MULTILANG_BTVersion='Versi&oacute;n del proyecto o producto';
+    $MULTILANG_BTDescripcion='Descripci&oacute;n del error o mejora';
+    $MULTILANG_BTFechaCierre='Fecha de cierre:';
+    $MULTILANG_BTProyectoAsociado='Proyecto asociado';
+    $MULTILANG_BTFechaApertura='Fecha de apertura del caso';
+    $MULTILANG_BTHistorial='Historial de gesti&oacute;n';
+    $MULTILANG_BTCategoriaDes='Por favor indique si el reporte que hace corresponde a un Error de aplicaci&oacute;n, una posible idea de mejora detectada o una pregunta sobre las funcionalidades';
+    $MULTILANG_BTComplementoDes='Si aplica, describa el paso a paso que se debería realizar para reproducir el problema.';
+    $MULTILANG_BTRetornoMsj='El reporte de error o posibilidad de mejora ha sido enviado al equipo de desarrollo.';
+    $MULTILANG_BTConfirmacionMsj='Esta a punto de reportar un Bug/Error/Mejora en el sistema.  Esta seguro que desea continuar?';
 
     //Opciones de Documentacion
     $MULTILANG_Documentar='Documentar';

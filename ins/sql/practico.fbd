@@ -481,6 +481,7 @@ CREATE TABLE core_bugtracker (
   fecha_actualizacion datetime,
   fecha_cierre datetime,
   proyecto varchar(255),
+  proyecto_version varchar(30),
   titulo varchar(255),
   descripcion text,
   categoria varchar(255),
