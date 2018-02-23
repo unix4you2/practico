@@ -5742,14 +5742,14 @@ $('#SampleElement').load('YourURL');
                     if ($registro_campos["tipo"]=="informe")
                         {
                             $IdentificadorBusqueda=$registro_campos["informe_vinculado"];
-                            $RegistroEmbebido=ejecutar_sql("SELECT titulo FROM ".$TablasCore."informe WHERE id=$IdentificadorBusqueda ")->fetch();
-                            $Complemento_NombreEmbebido="Inf: <b>".$RegistroEmbebido["titulo"]."</b>";
+                            $RegistroEmbebido=ejecutar_sql("SELECT id,titulo FROM ".$TablasCore."informe WHERE id=$IdentificadorBusqueda ")->fetch();
+                            $Complemento_NombreEmbebido="Inf ID ".$RegistroEmbebido["id"].": <b>".$RegistroEmbebido["titulo"]."</b>";
                         }
                     if ($registro_campos["tipo"]=="form_consulta")
                         {
                             $IdentificadorBusqueda=$registro_campos["formulario_vinculado"];
-                            $RegistroEmbebido=ejecutar_sql("SELECT titulo FROM ".$TablasCore."formulario WHERE id=$IdentificadorBusqueda ")->fetch();
-                            $Complemento_NombreEmbebido="Frm: <b>".$RegistroEmbebido["titulo"]."</b>";
+                            $RegistroEmbebido=ejecutar_sql("SELECT id,titulo FROM ".$TablasCore."formulario WHERE id=$IdentificadorBusqueda ")->fetch();
+                            $Complemento_NombreEmbebido="Frm ID ".$RegistroEmbebido["id"].": <b>".$RegistroEmbebido["titulo"]."</b>";
                         }
                         
                     //Pone controles
