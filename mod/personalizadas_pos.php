@@ -37,10 +37,10 @@
             Por favor considere la construccion de un nuevo modulo antes que implementar rutinas sobre este archivo
             Please consider to build a new module before to deploy rutines in this file
             */
-		
+
 
 if ($PCO_Accion=="Mi_AccionPoscarga_XYZ") 
 	{
-
-
+	    
+	    
 	}
