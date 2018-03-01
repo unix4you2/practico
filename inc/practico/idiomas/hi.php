@@ -1327,7 +1327,8 @@
     $MULTILANG_BTComplementoDes='If applies, write the step by step procedure to reproduce the error over the sysmte.';
     $MULTILANG_BTPanel='Panel de gesti&oacute;n de errores o bugs';
     $MULTILANG_BTBugtracking='Bugtracking';
-    
+    $MULTILANG_BTPermitirReporte='Allow users to send bug reports';
+
     //Opciones de Documentacion
     $MULTILANG_Documentar='दस्तावेज़';
     $MULTILANG_DocumentarDes='नैसर्गिक दस्तावेज़ संकेतन में कार्य या कार्यविधियों के लिए कोड की शुरुआत में एक प्रलेखन टेम्पलेट जोड़ें';

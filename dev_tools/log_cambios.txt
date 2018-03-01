@@ -25,6 +25,7 @@ core/marco_admin.php
 core/marco_arriba.php
 core/marco_dev.php
 core/marco_oauth.php
+core/marco_conf.php
 core/marco_forms.php
 core/marco_nav.php
 core/mantenimiento.php
@@ -54,6 +55,7 @@ LogCambios="
 * Added: Ahora los valores predeterminados en campos de texto permiten varias variables bajo notación {PHP} y también textos mezclados con éstas.  Por compatibilidad hacia atrás se conservan aquellas notaciones con un sólo signo de pesos al comienzo del valor. 
 * Added: La configuración de proveedores OAuth permite especificar la manera en que éstos serán presentados al usuario durante el login.
 * Added: Soporte para el uso de variables en notacion {PHP} para soportar traducciones automaticas y mensajes de validacion de formularios sobre campos obligatorios.
+* Added: Sistema básico para el reporte y trazabilidad de errores.
 * Enhan: Actualización de PMyDB 17.2 a 17.9
 * Enhan: Se protegen funciones adicionales para las instalaciones en modo de demostracion y se agregan mensajes aclaratorios. Se incluye Pcoder, PMyDB y Explorador de archivos.
 * Enhan: Las listas de seleccion en sus campos de opciones (visuales) permiten realizar operaciones SQL.  De ahora en adelante el nombre de la tabla para consulta será tomado exclusivamente del campo de lista de valores (que se supone es el mismo origen de lista de opciones para todas las versiones previas). 
@@ -61,6 +63,7 @@ LogCambios="
 * Enhan: Mejorada la precision y tiempos de caducidad para monitores tipo cURL.
 * Enhan: Mejorada la diagramación del panel de configuración para proveedores OAuth.  Optimización de código.
 * Enhan: Mejoras a ventana de login, distribución de elementos y opciones OAuth.
+* Enhan: Limpieza automatica de la barra de direccion del navegador despues de cada carga.
 * Fixed: Procesos de importacion de tablas consideran los valores entregados por los parametros de complementa a condiciones de filtrado correctamente.
 * Fixed: Validaciones de ejecucion sobre webservices.  Si los WS previos han sido creados bajo los estandares y requerimientos de operacion no se deberian tener problemas durante migraciones.  Se recomienda verificar que los llamados a WS previos se encuentren correctamente parametrizados.
 * Fixed: Retirados de la creacion y edicion de menues y los formularios los elementos internos de Práctico (Forms e informes) que no son necesarios para el usuario estándar.

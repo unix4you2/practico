@@ -3567,7 +3567,7 @@ function PCO_GenerarOpcionesProveedoresOAuth()
         return $AlMenosUnOAuth;
     }
 
-function ventana_login()
+function PCO_VentanaLogin()
     {
 		/*
 			Function: ventana_login

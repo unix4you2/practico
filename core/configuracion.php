@@ -74,6 +74,7 @@
 	$TablasApp='app_';  // Cuidado al cambiar: Prefijo para Tablas de datos definidas por el usuario
 	$LlaveDePaso='H76T9QFT7P';  // Valor unico para firmar los usuarios del aplicativo.  No debe ser cambiado despues de puesto en marcha a menos que se haga un update manual el usuario que no coincida con la llave no podra ingresar.
 	$ModoDepuracion=0;
+	$PermitirReporteBugs=1;
 	$DepuracionSQL=0;
 	$BuscarActualizaciones=0;
 

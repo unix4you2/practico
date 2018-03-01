@@ -235,7 +235,7 @@
 
 /* ################################################################## */
     // Cuando no se tiene ninguna accion para procesar se carga la pagina de inicio de sesion
-    if ($PCO_Accion=="" && $PCOSESS_SesionAbierta==0) ventana_login();
+    if ($PCO_Accion=="" && $PCOSESS_SesionAbierta==0) PCO_VentanaLogin();
     if ($PCO_Accion=="" && $PCOSESS_SesionAbierta==1 && @$Presentar_FullScreen!=1) echo '<script type="" language="JavaScript">    document.core_ver_menu.submit();  </script>';
     // Incluye los archivos necesarios dependiendo de las funciones requeridas
     if ($PCO_Accion=="exportar_informe" || $PCO_Accion=="confirmar_importacion_informe" || $PCO_Accion=="analizar_importacion_informe" || $PCO_Accion=="importar_informe" || $PCO_Accion=="definir_copia_informes" || $PCO_Accion=="clonar_diseno_informe" || $PCO_Accion=="administrar_informes" || $PCO_Accion=="guardar_informe" || $PCO_Accion=="editar_informe" || $PCO_Accion=="eliminar_informe" || $PCO_Accion=="actualizar_informe" || $PCO_Accion=="eliminar_informe_tabla" || $PCO_Accion=="guardar_informe_tabla" || $PCO_Accion=="eliminar_informe_campo" || $PCO_Accion=="guardar_informe_campo" || $PCO_Accion=="guardar_informe_condicion" || $PCO_Accion=="eliminar_informe_condicion" || $PCO_Accion=="mis_informes" || $PCO_Accion=="actualizar_grafico_informe" || $PCO_Accion=="actualizar_agrupamiento_informe" || $PCO_Accion=="guardar_accion_informe" || $PCO_Accion=="eliminar_registro_informe" || $PCO_Accion=="eliminar_accion_informe")

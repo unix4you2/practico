@@ -465,6 +465,19 @@
 												</span>
 											</div>
 
+
+                                            <label for="PermitirReporteBugsNEW"><i class="fa fa-exclamation-circle fa-2x fa-fw"></i>  <?php echo $MULTILANG_BTPermitirReporte; ?></label>
+        									<div class="form-group input-group">
+        										<select id="PermitirReporteBugsNEW" name="PermitirReporteBugsNEW" class="selectpicker" >
+        											<option value="0" <?php if ($PermitirReporteBugs=="0") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?></option>
+        											<option value="1" <?php if ($PermitirReporteBugs=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?></option>
+        										</select>
+        										<span class="input-group-addon">
+        											<a  href="#" data-toggle="tooltip" data-html="true"  title="Esto agrega un boton de reporte de errores en la barra superior para todos los usuarios / This add a bug report button in the top bar to all users"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+        										</span>
+        									</div>
+
+
 											<label for="BuscarActualizacionesNEW"><i class="fa fa-upload fa-2x fa-fw"></i> <?php echo $MULTILANG_BuscarActual; ?>:</label>
 											<div class="form-group input-group">
 												<select id="BuscarActualizacionesNEW" name="BuscarActualizacionesNEW" class="selectpicker" >

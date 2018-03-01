@@ -1330,6 +1330,7 @@
     $MULTILANG_BTConfirmacionMsj='Esta a punto de reportar un Bug/Error/Mejora en el sistema.  Esta seguro que desea continuar?';
     $MULTILANG_BTPanel='Panel de gesti&oacute;n de errores o bugs';
     $MULTILANG_BTBugtracking='Bugtracking';
+    $MULTILANG_BTPermitirReporte='Permitir a usuarios reportar errores';
 
     //Opciones de Documentacion
     $MULTILANG_Documentar='Documentar';

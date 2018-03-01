@@ -1329,7 +1329,8 @@
     $MULTILANG_BTComplementoDes='If applies, write the step by step procedure to reproduce the error over the sysmte.';
     $MULTILANG_BTPanel='Panel de gesti&oacute;n de errores o bugs';
     $MULTILANG_BTBugtracking='Bugtracking';
-    
+    $MULTILANG_BTPermitirReporte='Allow users to send bug reports';
+
     //Opciones de Documentacion
     $MULTILANG_Documentar='Document';
     $MULTILANG_DocumentarDes='Add to the beginning of the code a documentation template for functions or procedures in NaturalDocs notation';

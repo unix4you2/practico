@@ -45,7 +45,11 @@
 
 	<ul class="nav navbar-top-links navbar-right">
 
-
+		<?php 
+			//Agrega boton de reporte de Bugs si esta habilitado el sistema
+			if ($PermitirReporteBugs==1 && $PCOSESS_SesionAbierta)
+				echo '<a class="btn btn-xs" data-toggle="tooltip" data-html="true"  data-placement="auto" title="'.$MULTILANG_BTReporteBugs.'" href="javascript:document.location=\'index.php?PCO_Accion=cargar_objeto&objeto=frm:-3:1\';"><i class="fa fa-bug"></i>!</a>&nbsp;';
+		?>
 		<?php
 			//Presenta titulo de la aplicacion
 			if ($PCOSESS_SesionAbierta)
