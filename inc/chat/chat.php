@@ -21,6 +21,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 session_start();
 
+//Antes de seguir adelante valida una sesion activa
+if ($_SESSION['username']=="") die();
+
+
 //Incluye los archivos de configuracion de Practico y define vbles de conexion
 include_once("../../core/configuracion.php");
 

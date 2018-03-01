@@ -26,17 +26,17 @@
 	*/
 
 	// Ubicacion de las opciones al login
-	$UbicacionProveedoresOAuth='1';
+	$UbicacionProveedoresOAuth='0';
 
 	// Google
-	$APIGoogle_ClientId='123';
-	$APIGoogle_ClientSecret='456';
+	$APIGoogle_ClientId='';
+	$APIGoogle_ClientSecret='';
 	$APIGoogle_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=autenticacion_oauth&OAuthSrv=Google';
 	$APIGoogle_Template='';
 
 	// Facebook
-	$APIFacebook_ClientId='34';
-	$APIFacebook_ClientSecret='43';
+	$APIFacebook_ClientId='';
+	$APIFacebook_ClientSecret='';
 	$APIFacebook_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=autenticacion_oauth&OAuthSrv=Facebook';
 	$APIFacebook_Template='';
 

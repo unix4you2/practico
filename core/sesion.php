@@ -162,7 +162,6 @@
 				{
 					mensaje($MULTILANG_ErrorTitAuth,$MULTILANG_ErrorDesAuth,'','fa fa-ban fa-4x text-danger','alert alert-danger');
 					ventana_login();
-					@session_destroy();
 				}
 			else
 				{

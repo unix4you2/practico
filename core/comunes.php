@@ -3517,6 +3517,56 @@ function completar_parametros($string,$data) {
 	*/
 /* ################################################################## */
 /* ################################################################## */
+
+function PCO_CrearFormularioOauth($sitio)
+    {
+        global $ArchivoCORE;
+        // Crea el formulario correspondiente para llamar el login con el proveedor
+        $FormularioProveedor = '
+            <form name="login_'.$sitio.'" method="POST" action="'.$ArchivoCORE.'" style="margin: 2; display: inline!important;">
+            <input type="hidden" name="PCO_WSOn" value="1">
+            <input type="hidden" name="OAuthSrv" value="'.$sitio.'">
+            <input type="hidden" name="PCO_WSId" value="autenticacion_oauth">
+            <!--232x86|150x56|94x35|81x30-->
+            <button type="submit" class="btn btn-default  btn-default btn-lg" style="margin:10px; background-size: 100%; height: 56px; width:150px; background-position : center center; background-repeat:no-repeat; background-image : url(inc/oauth/logos/'.strtolower($sitio).'.png); ">&nbsp;</button>
+            </form>';
+        // Retorna valor de activacion a variable AlMenosUnOAuth
+        return $FormularioProveedor;
+    }    
+    
+
+function PCO_GenerarOpcionesProveedoresOAuth()
+    {
+        global $APIGoogle_ClientId,$APIGoogle_ClientSecret,$APIFacebook_ClientId,$APIFacebook_ClientSecret,$APILinkedIn_ClientId,$APILinkedIn_ClientSecret,$APIInstagram_ClientId,$APIInstagram_ClientSecret,$APIDropbox_ClientId,$APIDropbox_ClientSecret,$APIMicrosoft_ClientId,$APIMicrosoft_ClientSecret,$APIFlickr_ClientId,$APIFlickr_ClientSecret,$APITwitter_ClientId,$APITwitter_ClientSecret,$APIFoursquare_ClientId,$APIFoursquare_ClientSecret,$APIXING_ClientId,$APIXING_ClientSecret,$APISalesforce_ClientId,$APISalesforce_ClientSecret,$APIBitbucket_ClientId,$APIBitbucket_ClientSecret,$APIYahoo_ClientId,$APIYahoo_ClientSecret,$APIBox_ClientId,$APIBox_ClientSecret,$APIDisqus_ClientId,$APIDisqus_ClientSecret,$APIEventful_ClientId,$APIEventful_ClientSecret,$APISurveyMonkey_ClientId,$APISurveyMonkey_ClientSecret,$APIRightSignature_ClientId,$APIRightSignature_ClientSecret,$APIFitbit_ClientId,$APIFitbit_ClientSecret,$APIScoopIt_ClientId,$APIScoopIt_ClientSecret,$APITumblr_ClientId,$APITumblr_ClientSecret,$APIStockTwits_ClientId,$APIStockTwits_ClientSecret,$APIVK_ClientId,$APIVK_ClientSecret,$APIWithings_ClientId,$APIWithings_ClientSecret;
+        // Crea los formularios de redireccion segun proveedor
+        $CadenaProveedoresOAuthDisponibles="";
+        if ($APIGoogle_ClientId!=''			&& $APIGoogle_ClientSecret!='')			$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Google');
+        if ($APIFacebook_ClientId!=''		&& $APIFacebook_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Facebook');
+        if ($APILinkedIn_ClientId!=''		&& $APILinkedIn_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('LinkedIn');
+        if ($APIInstagram_ClientId!=''		&& $APIInstagram_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Instagram');
+        if ($APIDropbox_ClientId!=''		&& $APIDropbox_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Dropbox');
+        if ($APIMicrosoft_ClientId!=''		&& $APIMicrosoft_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Microsoft');
+        if ($APIFlickr_ClientId!=''			&& $APIFlickr_ClientSecret!='')			$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Flickr');
+        if ($APITwitter_ClientId!=''		&& $APITwitter_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Twitter');
+        if ($APIFoursquare_ClientId!=''		&& $APIFoursquare_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Foursquare');
+        if ($APIXING_ClientId!=''			&& $APIXING_ClientSecret!='')			$AlMenosUnOAuth.=PCO_CrearFormularioOauth('XING');
+        if ($APISalesforce_ClientId!=''		&& $APISalesforce_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Salesforce');
+        if ($APIBitbucket_ClientId!=''		&& $APIBitbucket_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Bitbucket');
+        if ($APIYahoo_ClientId!=''			&& $APIYahoo_ClientSecret!='')			$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Yahoo');
+        if ($APIBox_ClientId!=''			&& $APIBox_ClientSecret!='')			$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Box');
+        if ($APIDisqus_ClientId!=''			&& $APIDisqus_ClientSecret!='')			$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Disqus');
+        if ($APIEventful_ClientId!=''		&& $APIEventful_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Eventful');
+        if ($APISurveyMonkey_ClientId!=''	&& $APISurveyMonkey_ClientSecret!='')	$AlMenosUnOAuth.=PCO_CrearFormularioOauth('SurveyMonkey');
+        if ($APIRightSignature_ClientId!=''	&& $APIRightSignature_ClientSecret!='')	$AlMenosUnOAuth.=PCO_CrearFormularioOauth('RightSignature');
+        if ($APIFitbit_ClientId!=''			&& $APIFitbit_ClientSecret!='')			$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Fitbit');
+        if ($APIScoopIt_ClientId!=''		&& $APIScoopIt_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('ScoopIt');
+        if ($APITumblr_ClientId!=''			&& $APITumblr_ClientSecret!='')			$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Tumblr');
+        if ($APIStockTwits_ClientId!=''		&& $APIStockTwits_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('StockTwits');
+        if ($APIVK_ClientId!=''				&& $APIVK_ClientSecret!='')				$AlMenosUnOAuth.=PCO_CrearFormularioOauth('VK');
+        if ($APIWithings_ClientId!=''		&& $APIWithings_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Withings');
+        return $AlMenosUnOAuth;
+    }
+
 function ventana_login()
     {
 		/*
@@ -3525,7 +3575,7 @@ function ventana_login()
 		*/
 		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor,$MULTILANG_OauthButt,$NombreRAD,$Auth_PresentarOauthInicio,$TipoCaptchaLogin;
 		  global $Auth_PermitirAutoRegistro,$Auth_PermitirReseteoClaves,$CaracteresCaptcha,$IdiomaEnLogin;
-		  global $IdiomaPredeterminado,$MULTILANG_IdiomaPredeterminado,$MULTILANG_Cerrar,$MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes,$MULTILANG_Registrarme,$MULTILANG_OlvideClave;
+		  global $UbicacionProveedoresOAuth,$IdiomaPredeterminado,$MULTILANG_IdiomaPredeterminado,$MULTILANG_Cerrar,$MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes,$MULTILANG_Registrarme,$MULTILANG_OlvideClave;
 		  
 		  //Variables para el sistema de captcha
 		  global $MULTILANG_TipoCaptchaPrefijo,$MULTILANG_TipoCaptchaPosfijo;
@@ -3560,248 +3610,228 @@ function ventana_login()
 			global $APIVK_ClientId,$APIVK_ClientSecret;
 			global $APIWithings_ClientId,$APIWithings_ClientSecret;
 
-			// Variable que determina si se tiene activo al menos un proveedor OAuth
-			$AlMenosUnOAuth=0;
+            $CadenaProveedoresOAuthDisponibles=PCO_GenerarOpcionesProveedoresOAuth();
+			//Si se desea ubicar las opciones oAuth a traves de un boton genera el marco flotante correspondiente
+			if ($UbicacionProveedoresOAuth=='0')
+			    {
+			        ?>
+                        <!-- Modal LoginOauth -->
+                        <div class="modal fade" id="myModalLOGINOAUTH" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-body mdl-primary">
+        
+                                <?php
+                                    mensaje($MULTILANG_OauthButt,$MULTILANG_LoginOauthDes,'','fa fa-info-circle fa-3x text-info','alert alert-info');
+                                ?>
+                                <table class="table">
+                                        <tr><td align="center"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">
+                                            <?php
+                                                echo $CadenaProveedoresOAuthDisponibles;
+                                            ?>
+                                        </td></tr>
+                                </table>
+                              </div>
+                              <div class="modal-footer">
+                                <button class="btn btn-info" type="button" data-dismiss="modal">
+                                    <?php echo $MULTILANG_LoginClasico; ?> <?php echo $NombreRAD; ?>  
+                                    {<i class="fa fa-paypal"></i>}
+                                </button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+			        <?php
+			    }
 			?>
-
-                <!-- Modal LoginOauth -->
-                <div class="modal fade" id="myModalLOGINOAUTH" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-body mdl-primary">
-
-                        <?php
-                            mensaje($MULTILANG_OauthButt,$MULTILANG_LoginOauthDes,'','fa fa-info-circle fa-3x text-info','alert alert-info');
-                        ?>
-
-                        <table class="table">
-                                <tr><td align="center"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">
-
-                                    <?php
-                                        // Crea los formularios de redireccion segun proveedor
-                                        function CreaFormOauth($sitio)
-                                            {
-                                                global $ArchivoCORE;
-                                                // Crea el formulario correspondiente para llamar el login con el proveedor
-                                                echo '
-                                                    <form name="login_'.$sitio.'" method="POST" action="'.$ArchivoCORE.'" style="margin: 2; display: inline!important;">
-                                                    <input type="hidden" name="PCO_WSOn" value="1">
-                                                    <input type="hidden" name="OAuthSrv" value="'.$sitio.'">
-                                                    <input type="hidden" name="PCO_WSId" value="autenticacion_oauth">
-                                                    <input type="image" src="inc/oauth/logos/'.strtolower($sitio).'.png" border=0 width=94 height=35 style="background:#FFFFFF;"> <!--94x35|81x30-->
-                                                    </form>&nbsp;&nbsp;';
-                                                // Retorna valor de activacion a variable AlMenosUnOAuth
-                                                return 1;
-                                            }
-                                        if ($APIGoogle_ClientId!=''			&& $APIGoogle_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Google');
-                                        if ($APIFacebook_ClientId!=''		&& $APIFacebook_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Facebook');
-                                        if ($APILinkedIn_ClientId!=''		&& $APILinkedIn_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('LinkedIn');
-                                        if ($APIInstagram_ClientId!=''		&& $APIInstagram_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Instagram');
-                                        if ($APIDropbox_ClientId!=''		&& $APIDropbox_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Dropbox');
-                                        if ($APIMicrosoft_ClientId!=''		&& $APIMicrosoft_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Microsoft');
-                                        if ($APIFlickr_ClientId!=''			&& $APIFlickr_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Flickr');
-                                        if ($APITwitter_ClientId!=''		&& $APITwitter_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Twitter');
-                                        if ($APIFoursquare_ClientId!=''		&& $APIFoursquare_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Foursquare');
-                                        if ($APIXING_ClientId!=''			&& $APIXING_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('XING');
-                                        if ($APISalesforce_ClientId!=''		&& $APISalesforce_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Salesforce');
-                                        if ($APIBitbucket_ClientId!=''		&& $APIBitbucket_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Bitbucket');
-                                        if ($APIYahoo_ClientId!=''			&& $APIYahoo_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Yahoo');
-                                        if ($APIBox_ClientId!=''			&& $APIBox_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Box');
-                                        if ($APIDisqus_ClientId!=''			&& $APIDisqus_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Disqus');
-                                        if ($APIEventful_ClientId!=''		&& $APIEventful_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Eventful');
-                                        if ($APISurveyMonkey_ClientId!=''	&& $APISurveyMonkey_ClientSecret!='')	$AlMenosUnOAuth+=CreaFormOauth('SurveyMonkey');
-                                        if ($APIRightSignature_ClientId!=''	&& $APIRightSignature_ClientSecret!='')	$AlMenosUnOAuth+=CreaFormOauth('RightSignature');
-                                        if ($APIFitbit_ClientId!=''			&& $APIFitbit_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Fitbit');
-                                        if ($APIScoopIt_ClientId!=''		&& $APIScoopIt_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('ScoopIt');
-                                        if ($APITumblr_ClientId!=''			&& $APITumblr_ClientSecret!='')			$AlMenosUnOAuth+=CreaFormOauth('Tumblr');
-                                        if ($APIStockTwits_ClientId!=''		&& $APIStockTwits_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('StockTwits');
-                                        if ($APIVK_ClientId!=''				&& $APIVK_ClientSecret!='')				$AlMenosUnOAuth+=CreaFormOauth('VK');
-                                        if ($APIWithings_ClientId!=''		&& $APIWithings_ClientSecret!='')		$AlMenosUnOAuth+=CreaFormOauth('Withings');
-                                    ?>
-                                </td></tr>
-                        </table>
-
-                      </div>
-                      <div class="modal-footer">
-                        <button class="btn btn-info" type="button" data-dismiss="modal">
-                            <?php echo $MULTILANG_LoginClasico; ?> <?php echo $NombreRAD; ?>  
-                            {<i class="fa fa-paypal"></i>}
-                        </button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
 
                 <!--Login Estandar-->
                 <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
-                <div id="EnfasisLoginZoom" class="EnfasisLoginZoom">
-                    <div class="login-panel panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><?php echo $MULTILANG_TituloLogin; ?></h3>
-                        </div>
-                        <div align=center class="panel-body btn-xs">
-
-                                <form role="form" name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
-                                <input type="Hidden" name="PCO_Accion" value="Iniciar_login">
-                                    <div class="form-group">
-                                        <img name="img_login" id="img_login" width="100%" style="max-width:232px; max-height:160px;" src="img/practico_login.png?<?php echo filemtime('img/practico_login.png'); ?>" alt="" border="0"><br><br>
-                                    </div>
-                                    <div class="form-group input-group">
-                                        <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                                        <input name="uid" value="<?php echo $AUTO_uid; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Usuario; ?>">
-                                    </div>
-                                    <div class="form-group input-group">
-                                        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                                        <input name="clave" value="<?php echo $AUTO_clave; ?>" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
-                                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xs-offset-0 col-sm-offset-4 col-md-offset-4 col-lg-offset-4">
+                    <div id="EnfasisLoginZoom" class="EnfasisLoginZoom">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><?php echo $MULTILANG_TituloLogin; ?></h3>
+                            </div>
+                            <div align=center class="panel-body btn-xs">
+    
+                                    <form role="form" name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
+                                    <input type="Hidden" name="PCO_Accion" value="Iniciar_login">
+                                        <div class="form-group">
+                                            <img name="img_login" id="img_login" width="100%" style="max-width:232px; max-height:160px;" src="img/practico_login.png?<?php echo filemtime('img/practico_login.png'); ?>" alt="" border="0"><br><br>
+                                        </div>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                                            <input name="uid" value="<?php echo $AUTO_uid; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Usuario; ?>">
+                                        </div>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                                            <input name="clave" value="<?php echo $AUTO_clave; ?>" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
+                                        </div>
+                                        
+    									<?php
+    										//Presenta selector de idiomas si esta habilitado
+    										if ($IdiomaEnLogin==1)
+    											{
+    									?>
+        									<div class="form-group input-group">
+        									    <span class="input-group-addon"><i class="fa fa-language fa-fw"></i></span>
+        										<select id="idioma_login" name="idioma_login" class="selectpicker" >
+        											<?php
+        											// Incluye archivos de idioma para ser seleccionados
+        											$path_idiomas="inc/practico/idiomas/";
+        											$directorio_idiomas=opendir($path_idiomas);
+        											$IdiomaPredeterminadoActual=$IdiomaPredeterminado;
+        											while (($PCOVAR_Elemento=readdir($directorio_idiomas))!=false)
+        												{
+        													//Lo procesa solo si es un archivo diferente del index
+        													if (!is_dir($path_idiomas.$PCOVAR_Elemento) && $PCOVAR_Elemento!="." && $PCOVAR_Elemento!=".."  && $PCOVAR_Elemento!="index.html")
+        														{
+        															include($path_idiomas.$PCOVAR_Elemento);
+        															//Establece espanol como predeterminado
+        															$seleccion="";
+        															$valor_opcion=str_replace(".php","",$PCOVAR_Elemento);
+        															if ($valor_opcion==$IdiomaPredeterminadoActual) $seleccion="SELECTED";
+        															//Presenta la opcion
+        															echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$PCOVAR_Elemento.')</option>';
+        														}
+        												}		
+        											//Vuelve a cargar el predeterminado actual
+        											include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
+        											?>
+        										</select>
+        									</div>
+    										<?php
+    												}
+    										?>
+    
+    
+    									<?php
+    									    //Si el captcha es tradicional
+    										if ($CaracteresCaptcha>0 && ($TipoCaptchaLogin=="tradicional" || $TipoCaptchaLogin==""))
+    											{
+    											    echo '<div class="well">
+                										<div class="form-group col-xs-12">
+                											'.$MULTILANG_CodigoSeguridad.':
+                											<img src="core/captcha.php">
+                										</div>
+                										<div class="form-group input-group input-group-sm">
+                											<span class="input-group-addon"><i class="fa fa-hand-o-right fa-fw"></i></span>
+                											<input type="text" name="captcha" maxlength=6 class="form-control"  placeholder="'.$MULTILANG_IngreseCodigoSeguridad.'">
+                										</div>
+                										</div>';
+    											}
+    
+    									    //Si el captcha es visual
+    										if ($CaracteresCaptcha>0 && $TipoCaptchaLogin=="visual")
+    											{
+    											    //Llama de todas formas al archivo generador de captcha, solo que este se usa para la variable de sesion solamente
+    											    include ("core/captcha.php");
+    											}
+    									?>
+                                        
+                                        <div class="form-group input-group input-group-sm col-xs-12">
+                                            <a class="btn btn-success btn-block" href="javascript:document.login_usuario.submit();"><i class="fa fa-check-circle"></i> <?php echo $MULTILANG_Ingresar; ?></a>
+                                        </div>
+                                    </form>
                                     
                                     
-									<?php
-										//Presenta selector de idiomas si esta habilitado
-										if ($IdiomaEnLogin==1)
-											{
-									?>
-    									<div class="form-group input-group">
-    									    <span class="input-group-addon"><i class="fa fa-language fa-fw"></i></span>
-    										<select id="idioma_login" name="idioma_login" class="selectpicker" >
-    											<?php
-    											// Incluye archivos de idioma para ser seleccionados
-    											$path_idiomas="inc/practico/idiomas/";
-    											$directorio_idiomas=opendir($path_idiomas);
-    											$IdiomaPredeterminadoActual=$IdiomaPredeterminado;
-    											while (($PCOVAR_Elemento=readdir($directorio_idiomas))!=false)
-    												{
-    													//Lo procesa solo si es un archivo diferente del index
-    													if (!is_dir($path_idiomas.$PCOVAR_Elemento) && $PCOVAR_Elemento!="." && $PCOVAR_Elemento!=".."  && $PCOVAR_Elemento!="index.html")
-    														{
-    															include($path_idiomas.$PCOVAR_Elemento);
-    															//Establece espanol como predeterminado
-    															$seleccion="";
-    															$valor_opcion=str_replace(".php","",$PCOVAR_Elemento);
-    															if ($valor_opcion==$IdiomaPredeterminadoActual) $seleccion="SELECTED";
-    															//Presenta la opcion
-    															echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$PCOVAR_Elemento.')</option>';
-    														}
-    												}		
-    											//Vuelve a cargar el predeterminado actual
-    											include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
-    											?>
-    										</select>
-    									</div>
-										<?php
-												}
-										?>
-
-
-									<?php
-									    //Si el captcha es tradicional
-										if ($CaracteresCaptcha>0 && ($TipoCaptchaLogin=="tradicional" || $TipoCaptchaLogin==""))
-											{
-											    echo '<div class="well">
-            										<div class="form-group col-xs-12">
-            											'.$MULTILANG_CodigoSeguridad.':
-            											<img src="core/captcha.php">
-            										</div>
-            										<div class="form-group input-group input-group-sm">
-            											<span class="input-group-addon"><i class="fa fa-hand-o-right fa-fw"></i></span>
-            											<input type="text" name="captcha" maxlength=6 class="form-control"  placeholder="'.$MULTILANG_IngreseCodigoSeguridad.'">
-            										</div>
-            										</div>';
-											}
-
-									    //Si el captcha es visual
-										if ($CaracteresCaptcha>0 && $TipoCaptchaLogin=="visual")
-											{
-											    //Llama de todas formas al archivo generador de captcha, solo que este se usa para la variable de sesion solamente
-											    include ("core/captcha.php");
-											}
-									?>
-                                    
-                                    <div class="form-group input-group input-group-sm col-xs-12">
-                                        <a class="btn btn-success btn-block" href="javascript:document.login_usuario.submit();"><i class="fa fa-check-circle"></i> <?php echo $MULTILANG_Ingresar; ?></a>
-                                    </div>
-
+                                        <?php
+                                            // Muestra boton de login por red social si aplica
+                                            if ($CadenaProveedoresOAuthDisponibles!="")
+                                                {
+                                        			//Si se desea ubicar las opciones oAuth a traves de un boton genera el marco flotante correspondiente
+                                        			if ($UbicacionProveedoresOAuth=='0')
+                                        			    {
+                                                            echo '<hr>
+                                                                <a id="boton_login_oauth" data-toggle="modal" href="#myModalLOGINOAUTH" class="btn btn-info  btn-block">
+                                                                    <div>
+                                                                        '.$MULTILANG_OauthLogin.'<br>
+                                                                        <i class="fa fa-2x fa-facebook-square"></i>
+                                                                        <i class="fa fa-2x fa-google-plus-square"></i>
+                                                                        <i class="fa fa-2x fa-twitter"></i>
+                                                                        <i class="fa fa-2x fa-linkedin-square"></i>
+                                                                        <i class="fa fa-2x fa-dropbox"></i>
+                                                                    </div>
+                                                                </a>';
+                                                            
+                                                            //Si esta predeterminado mostrar las opciones al comienzo entonces hace el trigger sobre el enlace
+                                                            if ($Auth_PresentarOauthInicio==1)
+                                                                {
+                                                                    echo '<script language="JavaScript">
+                                                                    $( document ).ready(function() {
+                                                                        $("#boton_login_oauth").trigger("click");
+                                                                        });
+                                                                    </script>';
+                                                                }
+                                                        }
+                                                    
+                                                    //Si se desean las opciones directamente en el login
+                                                    if ($UbicacionProveedoresOAuth=='1')
+                                                        {
+                                                            mensaje($MULTILANG_OauthButt,$MULTILANG_LoginOauthDes,'','fa fa-info-circle fa-3x text-info','alert alert-info');
+                                                            echo '
+                                                                <table class="table">
+                                                                        <tr><td align="center"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">';
+                                                            echo $CadenaProveedoresOAuthDisponibles;
+                                                            echo '
+                                                                        </td></tr>
+                                                                </table>';
+                                                        }
+                                                }
+                                        ?>
                                     <?php
-                                        // Muestra boton de login por red social si aplica
-                                        if ($AlMenosUnOAuth>0)
-                                            {
-                                                echo '<hr>
-                                                    <a id="boton_login_oauth" data-toggle="modal" href="#myModalLOGINOAUTH" class="btn btn-info  btn-block">
-                                                        <div>
-                                                            '.$MULTILANG_OauthLogin.'<br>
-                                                            <i class="fa fa-2x fa-facebook-square"></i>
-                                                            <i class="fa fa-2x fa-google-plus-square"></i>
-                                                            <i class="fa fa-2x fa-twitter"></i>
-                                                            <i class="fa fa-2x fa-linkedin-square"></i>
-                                                            <i class="fa fa-2x fa-dropbox"></i>
-                                                        </div>
-                                                    </a>';
-                                                
-                                                //Si esta predeterminado mostrar las opciones al comienzo entonces hace el trigger sobre el enlace
-                                                if ($Auth_PresentarOauthInicio==1)
-                                                    {
-                                                        echo '<script language="JavaScript">
-                                                        $( document ).ready(function() {
-                                                            $("#boton_login_oauth").trigger("click");
-                                                            });
-                                                        </script>';
-                                                    }
-                                            }
+                                        //mensaje($MULTILANG_Importante,$MULTILANG_AccesoExclusivo,'','fa fa-info-circle fa-3x texto-azul','alert alert-info');
                                     ?>
-                                </form>
-                                <?php
-                                    //mensaje($MULTILANG_Importante,$MULTILANG_AccesoExclusivo,'','fa fa-info-circle fa-3x texto-azul','alert alert-info');
-                                ?>
-                                
-                                <div class="row">
-                                    <div class="col-md-6">
-										<?php
-											//Presenta opciones de recuperacion solamente cuando el motor de autenticacion sea practico
-											if ($Auth_TipoMotor=="practico" && $Auth_PermitirAutoRegistro==1)
-												{
-										?>
-													<br>
-													<form name="auto_registro" id="auto_registro" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-													<input type="Hidden" name="PCO_Accion" value="agregar_usuario_autoregistro">
-													</form>
-													<a class="btn btn-xs" onClick="document.auto_registro.submit();">
-														<i class="typcn fa typcn-user-add"></i>
-														<?php echo $MULTILANG_Registrarme; ?>
-													</a>
-										<?php
-												}
-										?>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+    										<?php
+    											//Presenta opciones de recuperacion solamente cuando el motor de autenticacion sea practico
+    											if ($Auth_TipoMotor=="practico" && $Auth_PermitirAutoRegistro==1)
+    												{
+    										?>
+    													<br>
+    													<form name="auto_registro" id="auto_registro" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+    													<input type="Hidden" name="PCO_Accion" value="agregar_usuario_autoregistro">
+    													</form>
+    													<a class="btn btn-xs" onClick="document.auto_registro.submit();">
+    														<i class="typcn fa typcn-user-add"></i>
+    														<?php echo $MULTILANG_Registrarme; ?>
+    													</a>
+    										<?php
+    												}
+    										?>
+                                        </div>
+                                        <div class="col-md-6">
+    										<?php
+    											//Presenta opciones de recuperacion solamente cuando el motor de autenticacion sea practico
+    											if ($Auth_TipoMotor=="practico" && $Auth_PermitirReseteoClaves==1)
+    												{
+    										?>
+    													<br>
+    													<form name="recuperacion" id="recuperacion" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+    													<input type="Hidden" name="PCO_Accion" value="recuperar_contrasena">
+    													<input type="Hidden" name="PCO_SubAccion" value="formulario_recuperacion">
+    													</form>
+    													<a class="btn btn-xs" onClick="document.recuperacion.submit();">
+    														<i class="fa fa-unlock-alt"></i>
+    														<?php echo $MULTILANG_OlvideClave; ?>
+    													</a>
+    										<?php
+    												}
+    										?>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-										<?php
-											//Presenta opciones de recuperacion solamente cuando el motor de autenticacion sea practico
-											if ($Auth_TipoMotor=="practico" && $Auth_PermitirReseteoClaves==1)
-												{
-										?>
-													<br>
-													<form name="recuperacion" id="recuperacion" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-													<input type="Hidden" name="PCO_Accion" value="recuperar_contrasena">
-													<input type="Hidden" name="PCO_SubAccion" value="formulario_recuperacion">
-													</form>
-													<a class="btn btn-xs" onClick="document.recuperacion.submit();">
-														<i class="fa fa-unlock-alt"></i>
-														<?php echo $MULTILANG_OlvideClave; ?>
-													</a>
-										<?php
-												}
-										?>
-                                    </div>
-                                </div>
-                                
-
-                        <script language="JavaScript"> login_usuario.uid.focus(); </script>
-                        </div> <!-- /panel-body -->
-                    </div>
-                </div>  <!--FIN Class EnfasisLoginZoom -->
-                </div>  <!--FIN Class col -->
+                                    
+    
+                            <script language="JavaScript"> login_usuario.uid.focus(); </script>
+                            </div> <!-- /panel-body -->
+                        </div>
+                    </div>  <!--FIN Class EnfasisLoginZoom -->
+                    </div>  <!--FIN Class col -->
                 </div>  <!--FIN Class row -->
                 <!--FIN Login Estandar-->
 <?php

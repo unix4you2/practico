@@ -500,8 +500,8 @@ CREATE TABLE core_bugtracker (
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-DROP TABLE IF EXISTS core_tablacomodin;
-CREATE TABLE core_tablacomodin (
+DROP TABLE IF EXISTS core_tabla_comodin;
+CREATE TABLE core_tabla_comodin (
   id int(10) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

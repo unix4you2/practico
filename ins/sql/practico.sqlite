@@ -510,8 +510,8 @@ CREATE TABLE core_bugtracker (
 
 );
 
-DROP TABLE IF EXISTS core_tablacomodin;
-CREATE TABLE core_tablacomodin (
+DROP TABLE IF EXISTS core_tabla_comodin;
+CREATE TABLE core_tabla_comodin (
   id INTEGER PRIMARY KEY AUTOINCREMENT
 
 );

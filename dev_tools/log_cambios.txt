@@ -30,7 +30,9 @@ core/marco_nav.php
 core/mantenimiento.php
 core/marco_abajo.php
 core/tablas.php
+core/sesion.php
 xml/*
+inc/chat/chat.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/bootstrap/js/practico*
@@ -58,18 +60,21 @@ LogCambios="
 * Enhan: Los botones de informes ahora transportan el valor de la variable correspondiente a la primera columna del informe cuando la acción de botón consisten en llamar a otro informe.  Esto es útil para realizar informes que requieren como insumo la selección de algún valor previo desde otro informe.
 * Enhan: Mejorada la precision y tiempos de caducidad para monitores tipo cURL.
 * Enhan: Mejorada la diagramación del panel de configuración para proveedores OAuth.  Optimización de código.
+* Enhan: Mejoras a ventana de login, distribución de elementos y opciones OAuth.
 * Fixed: Procesos de importacion de tablas consideran los valores entregados por los parametros de complementa a condiciones de filtrado correctamente.
 * Fixed: Validaciones de ejecucion sobre webservices.  Si los WS previos han sido creados bajo los estandares y requerimientos de operacion no se deberian tener problemas durante migraciones.  Se recomienda verificar que los llamados a WS previos se encuentren correctamente parametrizados.
 * Fixed: Retirados de la creacion y edicion de menues y los formularios los elementos internos de Práctico (Forms e informes) que no son necesarios para el usuario estándar.
 * Fixed: Botones de busqueda automaticos sobre campos de texto y listas de seleccion operan sin problema sobre formularios donde se ha personalizado su nombre.
 * Fixed: Texto de advertencia en lanzamiento de PMyDB
+* Fixed: Limpieza de sesion despues de un primer intento de usuario, clave o captcha inválido.  Al siguiente intento correcto pasará sin problemas la autenticación.
+* Fixed: Sistema de chat valida primero por sesión activa para evitar error 500 al tratar de buscar mensajes sin usuario definido.
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-DROP TABLE IF EXISTS core_tablacomodin;
-CREATE TABLE core_tablacomodin (
+DROP TABLE IF EXISTS core_tabla_comodin;
+CREATE TABLE core_tabla_comodin (
   id int(10) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
