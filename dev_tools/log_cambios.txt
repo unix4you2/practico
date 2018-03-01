@@ -22,7 +22,13 @@ core/formularios.php
 core/kanban.php
 core/menus.php
 core/marco_admin.php
+core/marco_arriba.php
 core/marco_dev.php
+core/marco_oauth.php
+core/marco_forms.php
+core/marco_nav.php
+core/mantenimiento.php
+core/marco_abajo.php
 core/tablas.php
 xml/*
 inc/practico/idiomas/*
@@ -44,11 +50,14 @@ LogCambios="
 * Added: Las pestañas de formularios de datos soportan ahora uso de variables en notación {PHP} para generar títulos dinámicamente, por ejemplo en aplicaciones multi-idioma.
 * Added: Los mensajes de retorno programados en botones de comando sobre formularios de datos soportan ahora variables en notacion {PHP} como soporte a aplicaciones multi-idioma.
 * Added: Ahora los valores predeterminados en campos de texto permiten varias variables bajo notación {PHP} y también textos mezclados con éstas.  Por compatibilidad hacia atrás se conservan aquellas notaciones con un sólo signo de pesos al comienzo del valor. 
+* Added: La configuración de proveedores OAuth permite especificar la manera en que éstos serán presentados al usuario durante el login.
+* Added: Soporte para el uso de variables en notacion {PHP} para soportar traducciones automaticas y mensajes de validacion de formularios sobre campos obligatorios.
 * Enhan: Actualización de PMyDB 17.2 a 17.9
 * Enhan: Se protegen funciones adicionales para las instalaciones en modo de demostracion y se agregan mensajes aclaratorios. Se incluye Pcoder, PMyDB y Explorador de archivos.
 * Enhan: Las listas de seleccion en sus campos de opciones (visuales) permiten realizar operaciones SQL.  De ahora en adelante el nombre de la tabla para consulta será tomado exclusivamente del campo de lista de valores (que se supone es el mismo origen de lista de opciones para todas las versiones previas). 
 * Enhan: Los botones de informes ahora transportan el valor de la variable correspondiente a la primera columna del informe cuando la acción de botón consisten en llamar a otro informe.  Esto es útil para realizar informes que requieren como insumo la selección de algún valor previo desde otro informe.
 * Enhan: Mejorada la precision y tiempos de caducidad para monitores tipo cURL.
+* Enhan: Mejorada la diagramación del panel de configuración para proveedores OAuth.  Optimización de código.
 * Fixed: Procesos de importacion de tablas consideran los valores entregados por los parametros de complementa a condiciones de filtrado correctamente.
 * Fixed: Validaciones de ejecucion sobre webservices.  Si los WS previos han sido creados bajo los estandares y requerimientos de operacion no se deberian tener problemas durante migraciones.  Se recomienda verificar que los llamados a WS previos se encuentren correctamente parametrizados.
 * Fixed: Retirados de la creacion y edicion de menues y los formularios los elementos internos de Práctico (Forms e informes) que no son necesarios para el usuario estándar.
@@ -59,6 +68,13 @@ LogCambios="
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
+DROP TABLE IF EXISTS core_tablacomodin;
+CREATE TABLE core_tablacomodin (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('visibilidad_oauth','1','{$MULTILANG_OauthOpcionBoton}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('visibilidad_oauth','0','{$MULTILANG_OauthOpcionDirecta}',2);
 "
 
 ########################################################################

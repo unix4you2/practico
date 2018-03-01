@@ -25,15 +25,18 @@
 		Ubicacion *[/core/ws_oauth.php]*.  Archivo que contiene la configuracion para autenticaciones externas con proveedores OAuth
 	*/
 
+	// Ubicacion de las opciones al login
+	$UbicacionProveedoresOAuth='1';
+
 	// Google
-	$APIGoogle_ClientId='';
-	$APIGoogle_ClientSecret='';
+	$APIGoogle_ClientId='123';
+	$APIGoogle_ClientSecret='456';
 	$APIGoogle_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=autenticacion_oauth&OAuthSrv=Google';
 	$APIGoogle_Template='';
 
 	// Facebook
-	$APIFacebook_ClientId='';
-	$APIFacebook_ClientSecret='';
+	$APIFacebook_ClientId='34';
+	$APIFacebook_ClientSecret='43';
 	$APIFacebook_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=autenticacion_oauth&OAuthSrv=Facebook';
 	$APIFacebook_Template='';
 

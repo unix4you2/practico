@@ -30,6 +30,31 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: PCO_EditarConfiguracionOAuth
+	Presenta las configuraciones OAuth disponibles y da la posibilidad de cambiarlas
+*/
+if ($PCO_Accion=="PCO_EditarConfiguracionOAuth")
+	{
+		// Determina si la conexion actual de Practico esta encriptada
+		if(empty($_SERVER["HTTPS"]))
+			$protocolo_webservice="http://";
+		else
+			$protocolo_webservice="https://";
+		// Construye la URI de retorno
+		$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
+		// Construye la URI de redireccion base para concatenar el servicio especifico
+		$URI = $protocolo_webservice.$prefijo_webservice."?PCO_WSOn=1&PCO_WSId=autenticacion_oauth&OAuthSrv=";
+		
+        //abrir_dialogo_modal("myModalOAUTH",$MULTILANG_ConfiguracionGeneral.": ".$MULTILANG_OauthButt,"modal-wide"); 
+        //Carga el formulario con el diseno para gestionar proveedores OAuth.  Deberia deshabilitarse su cargue en modo de diseno del mismo para permitir cambios.
+        cargar_formulario("-5",1);
+        //cerrar_dialogo_modal();
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: limpiar_backups
 	Limpia los archivos de backups contenidos en la carpeta /bkp y que normalmente son realizados despues de cada proceso de parcheo o actualizacion
 */
@@ -160,4 +185,3 @@ if ($PCO_Accion=="mantenimiento_tablas")
 		echo '<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
 		cerrar_barra_estado();
 	}
-

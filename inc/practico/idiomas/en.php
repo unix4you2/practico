@@ -160,6 +160,7 @@
     $MULTILANG_Prioridad='Priority';
     $MULTILANG_Procesando='Processing';
     $MULTILANG_ProcesoFin='Process completed';
+    $MULTILANG_Proveedores='Providers';
 	$MULTILANG_Puerto='Port';
     $MULTILANG_Recurrente='Recurrent';
     $MULTILANG_Registrarme='Sign In';
@@ -1144,6 +1145,9 @@
 	$MULTILANG_UsuarioAutoRegistro='Template user for self-sign up';
 	$MULTILANG_DesUsuarioAutoRegistro='Says which user will be used for the rights in the self-registered users';
 	$MULTILANG_NoRecomendado='Not recommended for security reasons';
+	$MULTILANG_UbicacionOauth='Prefered location for Oauth options at login time';
+	$MULTILANG_OauthOpcionBoton='As a button that open the OAuth providers';
+	$MULTILANG_OauthOpcionDirecta='As extra options directly over standar login window';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';
@@ -1323,7 +1327,9 @@
     $MULTILANG_BTHistorial='Management history';
     $MULTILANG_BTCategoriaDes='Please select if this is an application error, an enhancement or a question about Functionality';
     $MULTILANG_BTComplementoDes='If applies, write the step by step procedure to reproduce the error over the sysmte.';
-
+    $MULTILANG_BTPanel='Panel de gesti&oacute;n de errores o bugs';
+    $MULTILANG_BTBugtracking='Bugtracking';
+    
     //Opciones de Documentacion
     $MULTILANG_Documentar='Document';
     $MULTILANG_DocumentarDes='Add to the beginning of the code a documentation template for functions or procedures in NaturalDocs notation';

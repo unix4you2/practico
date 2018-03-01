@@ -160,6 +160,7 @@
     $MULTILANG_Prioridad='प्राथमिकता';
     $MULTILANG_Procesando='प्रसंस्करण';
     $MULTILANG_ProcesoFin='प्रक्रिया पूरी की';
+    $MULTILANG_Proveedores='Providers';
 	$MULTILANG_Puerto='बंदरगाह';
     $MULTILANG_Recurrente='Recurrent';
     $MULTILANG_Registrarme='साइन इन करें';
@@ -1142,6 +1143,9 @@
 	$MULTILANG_UsuarioAutoRegistro='के लिए खाका उपयोगकर्ता को आत्म हस्ताक्षर';
 	$MULTILANG_DesUsuarioAutoRegistro='कहते हैं जो उपयोगकर्ता आत्म-पंजीकृत उपयोगकर्ताओं में अधिकारों के लिए इस्तेमाल किया जाएगा';
 	$MULTILANG_NoRecomendado='सुरक्षा कारणों के लिए नहीं की सिफारिश की';
+	$MULTILANG_UbicacionOauth='Prefered location for Oauth options at login time';
+	$MULTILANG_OauthOpcionBoton='As a button that open the OAuth providers';
+	$MULTILANG_OauthOpcionDirecta='As extra options directly over standar login window';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - त्रुटि';
@@ -1321,7 +1325,9 @@
     $MULTILANG_BTHistorial='Management history';
     $MULTILANG_BTCategoriaDes='Please select if this is an application error, an enhancement or a question about Functionality';
     $MULTILANG_BTComplementoDes='If applies, write the step by step procedure to reproduce the error over the sysmte.';
-
+    $MULTILANG_BTPanel='Panel de gesti&oacute;n de errores o bugs';
+    $MULTILANG_BTBugtracking='Bugtracking';
+    
     //Opciones de Documentacion
     $MULTILANG_Documentar='दस्तावेज़';
     $MULTILANG_DocumentarDes='नैसर्गिक दस्तावेज़ संकेतन में कार्य या कार्यविधियों के लिए कोड की शुरुआत में एक प्रलेखन टेम्पलेट जोड़ें';

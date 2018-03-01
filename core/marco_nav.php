@@ -92,7 +92,7 @@
 							</li>
 							<li class="divider"></li>
 							<li>
-								<a data-toggle="modal" href="#myModalOAUTH">
+								<a href="javascript:document.PCO_EditarConfiguracionOAuth.submit();">
 									<div>
 										<i class="fa fa-soundcloud fa-fw"></i> <?php echo $MULTILANG_OauthButt; ?>
 										<span class="pull-right text-muted small">3</span>

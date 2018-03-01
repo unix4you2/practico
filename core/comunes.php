@@ -4990,7 +4990,7 @@ $('#SampleElement').load('YourURL');
 	Ver tambien:
 		<cargar_formulario>
 */
-	function cargar_objeto_lista_radio($registro_campos,$registro_datos_formulario)
+	function cargar_objeto_lista_radio($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 		{
 			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 			global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
@@ -5012,7 +5012,7 @@ $('#SampleElement').load('YourURL');
 			// Si se desea tomar los valores del combo desde una tabla hace la consulta
 			if ($registro_campos["origen_lista_opciones"]!="" && $registro_campos["origen_lista_valores"]!="")
 				{
-					$nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_opciones"]);
+					$nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_valores"]);
 					$nombre_tabla_opciones = $nombre_tabla_opciones[0];
 					$campo_valores=$registro_campos["origen_lista_valores"];
 					$campo_opciones=$registro_campos["origen_lista_opciones"];
@@ -6070,7 +6070,7 @@ $('#SampleElement').load('YourURL');
                                                                             if ($tipo_de_objeto=="texto_formato") { $objeto_formateado = @cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
                                                                             if ($tipo_de_objeto=="area_responsive") $objeto_formateado = @cargar_objeto_area_responsive($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = @cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                                            if ($tipo_de_objeto=="lista_radio") $objeto_formateado = @cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
+                                                                            if ($tipo_de_objeto=="lista_radio") $objeto_formateado = @cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                                             if ($tipo_de_objeto=="casilla_check") $objeto_formateado = @cargar_objeto_casilla_check($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                                             if ($tipo_de_objeto=="etiqueta") $objeto_formateado = @cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
                                                                             if ($tipo_de_objeto=="url_iframe") $objeto_formateado = @cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);
@@ -6162,7 +6162,7 @@ $('#SampleElement').load('YourURL');
                                                         if ($tipo_de_objeto=="texto_formato") { $objeto_formateado = cargar_objeto_texto_formato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
                                                         if ($tipo_de_objeto=="area_responsive") $objeto_formateado = @cargar_objeto_area_responsive($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = cargar_objeto_lista_seleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                        if ($tipo_de_objeto=="lista_radio") $objeto_formateado = cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario);
+                                                        if ($tipo_de_objeto=="lista_radio") $objeto_formateado = cargar_objeto_lista_radio($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                         if ($tipo_de_objeto=="casilla_check") $objeto_formateado = @cargar_objeto_casilla_check($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                         if ($tipo_de_objeto=="etiqueta") $objeto_formateado = cargar_objeto_etiqueta($registro_campos,@$registro_datos_formulario);
                                                         if ($tipo_de_objeto=="url_iframe") $objeto_formateado = cargar_objeto_iframe($registro_campos,@$registro_datos_formulario);

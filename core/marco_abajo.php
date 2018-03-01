@@ -572,7 +572,7 @@
         echo '
         <script type="text/javascript">
             PCOJS_ListaCamposValidar="'.$POSTForm_ListaCamposObligatorios.'".split("|");
-            PCOJS_ListaTitulosValidar="'.$POSTForm_ListaTitulosObligatorios.'".split("|");
+            PCOJS_ListaTitulosValidar="'.PCO_ReemplazarVariablesPHPEnCadena($POSTForm_ListaTitulosObligatorios).'".split("|");
             function PCOJS_ValidarCamposYProcesarFormulario(FormularioProcesar="datos",AnularSubmit=0)
                 {
                     MensajeCamposObligatorios="";
@@ -657,6 +657,10 @@
     ?>
 
     <script language="JavaScript">
+        //Limpia parametros de la URL si aplica
+        if(window.location.href.indexOf("?") > -1)
+            window.history.pushState({data:true}, "", window.location.href.split("?")[0].split("index.php")[0] );
+
         //Actualiza marco con el tiempo de carga JavaScript (tiempo de carga y transferencia)
         var tiempo_final_javascript = (new Date()).getTime();
         var tiempo_final_javascript_segs = (tiempo_final_javascript-tiempo_inicio_javascript)/1000;

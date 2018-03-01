@@ -161,6 +161,7 @@
     $MULTILANG_Prioridad='Prioridad';
 	$MULTILANG_Procesando='Procesando';
     $MULTILANG_ProcesoFin='Proceso finalizado';
+    $MULTILANG_Proveedores='Proveedores';
 	$MULTILANG_Puerto='Puerto';
     $MULTILANG_Recurrente='Recurrente';
 	$MULTILANG_Registrarme='Registrarme';
@@ -1142,6 +1143,9 @@
 	$MULTILANG_UsuarioAutoRegistro='Usuario plantilla auto-registros';
 	$MULTILANG_DesUsuarioAutoRegistro='Determina el usuario plantilla utilizado para inicializar los permisos a los usuarios que hacen un auto-registro en el sistema';
 	$MULTILANG_NoRecomendado='No recomendado por seguridad';
+	$MULTILANG_UbicacionOauth='Ubicacion de las opciones de OAuth durante el Login';
+	$MULTILANG_OauthOpcionBoton='Como boton separado que abre los proveedores disponibles';
+	$MULTILANG_OauthOpcionDirecta='Como opciones extra sobre la ventana de login estandar';
 
 	//API-Webservices
 	$MULTILANG_WSErrTitulo='Practico WebServices - Error';
@@ -1324,6 +1328,8 @@
     $MULTILANG_BTComplementoDes='Si aplica, describa el paso a paso que se debería realizar para reproducir el problema.';
     $MULTILANG_BTRetornoMsj='El reporte de error o posibilidad de mejora ha sido enviado al equipo de desarrollo.';
     $MULTILANG_BTConfirmacionMsj='Esta a punto de reportar un Bug/Error/Mejora en el sistema.  Esta seguro que desea continuar?';
+    $MULTILANG_BTPanel='Panel de gesti&oacute;n de errores o bugs';
+    $MULTILANG_BTBugtracking='Bugtracking';
 
     //Opciones de Documentacion
     $MULTILANG_Documentar='Documentar';

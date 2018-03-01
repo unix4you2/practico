@@ -37,6 +37,9 @@
 <form method="POST" name="cerrar_sesion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     <input type="Hidden" name="PCO_Accion" value="Terminar_sesion">
 </form>
+<form method="POST" name="PCO_EditarConfiguracionOAuth" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+    <input type="Hidden" name="PCO_Accion" value="PCO_EditarConfiguracionOAuth">
+</form>
 <form method="POST" name="actualizar_perfil" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     <input type="Hidden" name="PCO_Accion" value="actualizar_perfil_usuario">
 </form>

@@ -111,6 +111,10 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
 <form name="ver_tablero_kanban" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 	<input type="Hidden" name="PCO_Accion" value="ExplorarTablerosKanban">
 </form>
+<form name="ver_bugtracking" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="cargar_objeto">
+	<input type="Hidden" name="objeto" value="frm:-4:1">
+</form>
 
 <!-- Presenta DashBoard del admin -->
     <div class="row">
@@ -289,7 +293,30 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
                 </a>
             </div>
         </div>
-        
+
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-yellow" >
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-bug fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><?php echo ContarRegistros($TablasCore."bugtracker"); ?></div>
+                            <div><?php echo $MULTILANG_TblRegistros; ?></div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer" OnClick="document.ver_bugtracking.submit();">
+                        <span class="pull-left" ><?php echo $MULTILANG_BTBugtracking?></span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
     </div>
 
 <hr>
