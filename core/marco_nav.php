@@ -44,31 +44,48 @@
 
 
 <?php
-    function PCO_ImprimirExtensionesPHP()
+    function ImprimirArregloCompleto($Arreglo,$Separador)
         {
-            foreach (get_loaded_extensions() as $Extension)
-                echo $Extension.", ";
-        }
-    function PCO_ImprimirVariablesPHP()
-        {
-            foreach (array_keys($_REQUEST) as $Variable)
-                echo $Variable.", ";
-        }
-    function PCO_ImprimirConfiguracionesPHP()
-        {
-            foreach (ini_get_all() as $Variable)
+            $SalidaFuncion="";
+            foreach ($Arreglo as $Elemento)
                 {
-                    foreach ($Variable as $Elemento2)
-                        echo key($Variable[$Elemento2]).":".$Elemento2.", ";
+                    //Si el tipo de datos es arreglo llama a la funcion nuevamente, sino lo imprime
+                    if (strtolower(gettype ( $Elemento )) == "array")
+                        {
+                            $SalidaFuncion.=ImprimirArregloCompleto($Elemento,$Separador);
+                        }
+                    else
+                        {
+                            $SalidaFuncion.=$Separador;
+                            if (key($Elemento)!="")
+                                $SalidaFuncion.= key($Elemento).":";
+                            $SalidaFuncion.= $Elemento;
+                        }
                 }
+            return $SalidaFuncion;
         }
-    function PCO_ImprimirDebugPHP()
+    
+    function ImprimirArregloVariablesInternas($Funcion)
         {
-            foreach (debug_backtrace() as $Variable)
-                {
-                    foreach ($Variable as $Elemento2)
-                        echo "   ".key($Variable).$Elemento2."|";
-                }
+            if ($Funcion=="get_loaded_extensions")  echo ImprimirArregloCompleto(get_loaded_extensions(),", ");
+            if ($Funcion=="ini_get_all")            echo ImprimirArregloCompleto(ini_get_all(),", ");
+            if ($Funcion=="request")                echo ImprimirArregloCompleto(array_keys($_REQUEST),"\\n    ");
+            if ($Funcion=="debug_backtrace")        echo ImprimirArregloCompleto(debug_backtrace(),"\\n    ");
+            if ($Funcion=="get_browser")            echo ImprimirArregloCompleto(get_browser(null, true),"\\n    ");
+            if ($Funcion=="getallheaders")          echo ImprimirArregloCompleto(getallheaders(),"\\n    ");
+        }
+
+    function PCO_DetectarSistemaOperativoCliente()
+        {
+        	$SistemasABuscar=array("WIN","MAC","LINUX");
+        	# definimos unos valores por defecto para el navegador y el sistema operativo
+        	$SistemaDetectado = "OTHER";
+        	foreach($SistemasABuscar as $Sistema)
+        	{
+        		if (strpos(strtoupper($_SERVER['HTTP_USER_AGENT']),$Sistema)!==false)
+        			$SistemaDetectado = $Sistema;
+        	}
+        	return $SistemaDetectado;
         }
 ?>
 
@@ -90,10 +107,13 @@
                 document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="Inclusiones: <?php echo (count(get_included_files())); ?>"+"+1?\n";
                 document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="PHP_VERSION: <?php echo phpversion(); ?>   MEMORY_GET_USAGE: <?php echo memory_get_usage(); ?> bytes"+"\n";
                 document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="MEMORY_PEAK_USAGE: <?php echo memory_get_peak_usage(); ?> bytes"+"\n";
-                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_LOADED_EXTENSIONS: <?php PCO_ImprimirExtensionesPHP(); ?>"+"\n";
-                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nINI_GET_ALL: <?php PCO_ImprimirConfiguracionesPHP(); ?>"+"\n";
-                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nDEBUG_TRACE: <?php PCO_ImprimirDebugPHP(); ?>"+"\n";
-                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_DEFINED_VARS: <?php PCO_ImprimirVariablesPHP(); ?>"+"\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nOS CLIENTE: <?php echo PCO_DetectarSistemaOperativoCliente(); ?>"+"\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_BROWSER: <?php ImprimirArregloVariablesInternas("get_browser"); ?>"+"\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_DEFINED_VARS: <?php ImprimirArregloVariablesInternas("request"); ?>"+"\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_ALL_HEADERS: <?php ImprimirArregloVariablesInternas("getallheaders"); ?>"+"\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_LOADED_EXTENSIONS: <?php ImprimirArregloVariablesInternas("get_loaded_extensions"); ?>"+"\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nDEBUG_TRACE: <?php ImprimirArregloVariablesInternas("debug_backtrace"); ?>"+"\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nINI_GET_ALL: <?php ImprimirArregloVariablesInternas("ini_get_all"); ?>"+"\n";
                 //Captura pantallazo del navegador
                 CapturarCanvasPantallaAImagen('','PCO_ReportarBugsCapturaOculta','image/png',0,0,"PCO_ReportarBugs","PCO_CapturaPantalla");
             }
