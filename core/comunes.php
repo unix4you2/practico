@@ -26,6 +26,55 @@
 		Section: Funciones asociadas a las operaciones con bases de datos - Ejecucion de consultas
 	*/
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: ImprimirMarcoPanelAdmin
+	Imprime un marco generico con informacion para el panel del administrador
+	
+	Variables de entrada:
+
+		ClaseColumnas - Clases para la definicion del tamano del control en formato de columnas bootstrap.  Ej:  col-lg-3 col-md-6
+		EstiloPanel - Define el color del control bootstrap.  [primary | green | red | default | yellow | info | success | danger]
+		ClaseIconoFA - Clase con el icono en notacion FontAwesome para ser agregado al cuadro. Acepta modificadores FA.  Ej.  fa-table fa-4x fa-spin
+		Titulo - Texto a imprimir en formato grande sobre el cuadro.  Se recomienda una sola palabra.
+		SubTitulo - Texto corto explicativo del cuadro a ser impreso debajo del titulo en letra pequena.
+		EnlaceTexto - Texto a presentar al usuario para hacer clic sobre el.
+		EnlaceURL - URL para agregar al elemento Anchor.  Soporta los modificadores estandar de HTML.
+
+	Salida:
+		Impresion del codigo HTML correspondiente
+*/
+function PCO_ImprimirPanelSimpleDashboard($ClaseColumnas,$EstiloPanel,$ClaseIconoFA,$Titulo,$SubTitulo,$EnlaceTexto,$EnlaceURL)
+    {
+        $SalidaFuncion="
+            <div class='$ClaseColumnas'>
+                <div class='panel panel-$EstiloPanel'>
+                    <div class='panel-heading'>
+                        <div class='row'>
+                            <div class='col-xs-3'>
+                                <i class='fa $ClaseIconoFA'></i>
+                            </div>
+                            <div class='col-xs-9 text-right'>
+                                <div class='huge'>
+                                    $Titulo
+                                </div>
+                                <div>$SubTitulo</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href='$EnlaceURL'>
+                        <div class='panel-footer'>
+                            <span class='pull-left'>$EnlaceTexto</span>
+                            <span class='pull-right'><i class='fa fa-arrow-circle-right'></i></span>
+                            <div class='clearfix'></div>
+                        </div>
+                    </a>
+                </div>
+            </div>";
+        return $SalidaFuncion;
+    }
+
 
 /* ################################################################## */
 /* ################################################################## */

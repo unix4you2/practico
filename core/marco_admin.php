@@ -87,7 +87,6 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
             }
         return $EntradasGitHub;
     }
-
 ?>
 
 <form name="administrar_tablas" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
@@ -125,198 +124,21 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
     </div>
  
      <div class="row">
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-table fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">
-                                <?php
-                                    $resultado=consultar_tablas();
-                                    $cantidad_tablas=0;
-                                    while ($registro = $resultado->fetch())
-                                        $cantidad_tablas++;
-                                    echo $cantidad_tablas;
-                                ?>
-                            </div>
-                            <div><?php echo $MULTILANG_TablaDatos; ?></div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer" OnClick="document.administrar_tablas.submit();">
-                        <span class="pull-left"><?php echo $MULTILANG_Detalles?></span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-green">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-newspaper-o fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo ContarRegistros($TablasCore."formulario","id>".$ModoDesarrolladorPractico); ?></div>
-                            <div><?php echo $MULTILANG_Formularios; ?>(s)</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer" OnClick="document.administrar_formularios.submit();">
-                        <span class="pull-left" ><?php echo $MULTILANG_Detalles?></span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-red">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-file-text fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo ContarRegistros($TablasCore."informe","id>".$ModoDesarrolladorPractico); ?></div>
-                            <div><?php echo $MULTILANG_Informes; ?></div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer" OnClick="document.administrar_informes.submit();">
-                        <span class="pull-left" ><?php echo $MULTILANG_Detalles?></span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-external-link-square fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo ContarRegistros($TablasCore."menu"); ?></div>
-                            <div><?php echo $MULTILANG_OpcionesMenu; ?></div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer" OnClick="document.administrar_menu.submit();">
-                        <span class="pull-left" ><?php echo $MULTILANG_Detalles?></span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-yellow">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-users fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo ContarRegistros($TablasCore."usuario"); ?></div>
-                            <div><?php echo $MULTILANG_Usuario; ?>(s)</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer" OnClick="document.listar_usuarios.submit();">
-                        <span class="pull-left" ><?php echo $MULTILANG_Detalles?></span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-eye fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo ContarRegistros($TablasCore."auditoria"); ?></div>
-                            <div><?php echo $MULTILANG_UsrAuditoria; ?>(s)</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer" OnClick="document.ver_seguimiento_monitoreo.submit();">
-                        <span class="pull-left" ><?php echo $MULTILANG_Detalles?></span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary" >
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-thumb-tack fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo ContarRegistros($TablasCore."kanban"); ?></div>
-                            <div><?php echo $MULTILANG_Tareas; ?></div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer" OnClick="document.ver_tablero_kanban.submit();">
-                        <span class="pull-left" ><?php echo $MULTILANG_TablerosKanban?></span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-yellow" >
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-bug fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo ContarRegistros($TablasCore."bugtracker"); ?></div>
-                            <div><?php echo $MULTILANG_TblRegistros; ?></div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer" OnClick="document.ver_bugtracking.submit();">
-                        <span class="pull-left" ><?php echo $MULTILANG_BTBugtracking?></span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
+        <?php
+            //Presenta cantidad de tablas en el sistema
+            $resultado=consultar_tablas();
+            $cantidad_tablas=0;
+            while ($registro = $resultado->fetch())
+                $cantidad_tablas++;
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","primary","fa-table fa-4x","$cantidad_tablas","$MULTILANG_TablaDatos","$MULTILANG_Detalles","javascript:document.administrar_tablas.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","green",  "fa-newspaper-o fa-4x",ContarRegistros($TablasCore."formulario","id>".$ModoDesarrolladorPractico),"$MULTILANG_Formularios","$MULTILANG_Detalles","javascript:document.administrar_formularios.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","red","fa-file-text fa-4x",ContarRegistros($TablasCore."informe","id>".$ModoDesarrolladorPractico),"$MULTILANG_Informes","$MULTILANG_Detalles","javascript:document.administrar_informes.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","default","fa-external-link-square fa-4x",ContarRegistros($TablasCore."menu"),"$MULTILANG_OpcionesMenu","$MULTILANG_Detalles","javascript:document.administrar_menu.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","yellow","fa-users fa-4x",ContarRegistros($TablasCore."usuario"),"$MULTILANG_Usuario","$MULTILANG_Detalles","javascript:document.listar_usuarios.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","info","fa-eye fa-4x",ContarRegistros($TablasCore."auditoria"),"$MULTILANG_UsrAuditoria","$MULTILANG_Detalles","javascript:document.ver_seguimiento_monitoreo.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","success","fa-thumb-tack fa-4x",ContarRegistros($TablasCore."kanban"),"$MULTILANG_TablerosKanban","$MULTILANG_Detalles","javascript:document.ver_tablero_kanban.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","danger","fa-bug fa-4x",ContarRegistros($TablasCore."bugtracker"),"$MULTILANG_TblRegistros","$MULTILANG_BTBugtracking","javascript:document.ver_bugtracking.submit();");
+        ?>
     </div>
 
 <hr>
