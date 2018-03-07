@@ -258,7 +258,7 @@
         include("core/monitoreo.php");
     if ($PCO_Accion=="cambiar_estado_campo" || $PCO_Accion=="valor_campo_tabla" || $PCO_Accion=="opciones_combo_box")
         include("core/ajax.php");
-	if ($PCO_Accion=="PCO_EditarConfiguracionOAuth" || $PCO_Accion=="mantenimiento_tablas" || $PCO_Accion=="limpiar_temporales" || $PCO_Accion=="limpiar_backups")
+	if ($PCO_Accion=="PCO_ReportarBugs" || $PCO_Accion=="PCO_EditarConfiguracionOAuth" || $PCO_Accion=="mantenimiento_tablas" || $PCO_Accion=="limpiar_temporales" || $PCO_Accion=="limpiar_backups")
 		include("core/mantenimiento.php");
     if ($PCO_Accion=="administrar_replicacion" || $PCO_Accion=="eliminar_replica" || $PCO_Accion=="detalles_replicacion" || $PCO_Accion=="guardar_replicacion" || $PCO_Accion=="actualizar_replicacion")
         include("core/replicacion.php");

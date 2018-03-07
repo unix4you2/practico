@@ -43,12 +43,66 @@
 	<!-- /.navbar-header -->
 
 
+<?php
+    function PCO_ImprimirExtensionesPHP()
+        {
+            foreach (get_loaded_extensions() as $Extension)
+                echo $Extension.", ";
+        }
+    function PCO_ImprimirVariablesPHP()
+        {
+            foreach (array_keys($_REQUEST) as $Variable)
+                echo $Variable.", ";
+        }
+    function PCO_ImprimirConfiguracionesPHP()
+        {
+            foreach (ini_get_all() as $Variable)
+                {
+                    foreach ($Variable as $Elemento2)
+                        echo key($Variable[$Elemento2]).":".$Elemento2.", ";
+                }
+        }
+    function PCO_ImprimirDebugPHP()
+        {
+            foreach (debug_backtrace() as $Variable)
+                {
+                    foreach ($Variable as $Elemento2)
+                        echo "   ".key($Variable).$Elemento2."|";
+                }
+        }
+?>
+
+
 	<ul class="nav navbar-top-links navbar-right">
+    <script language="javascript">
+        function PCO_CargarReportarBugs()
+            {
+                //Activa el proceso de captura de trazas y demas informacion
+                $('#PCO_IconoBugTracker').addClass('fa fa-spin fa-spinner').removeClass('fa-bug');
+                $('#PCO_TextoBugTracker').text(' <?php echo $MULTILANG_Cargando; ?>...');
+                //Captura otros datos informativos de la aplicacion
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="TRAZAS DE APLICACION / APPLICATION DEBUG\n==================================================\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="<?php echo $MULTILANG_TiempoCarga; ?>:"+$('#PCO_TCarga').text()+" seg.";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="      <?php echo $MULTILANG_TiempoCarga; ?> JS:"+$('#PCO_TCargaJS').text()+" seg.\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="<?php echo $MULTILANG_Instante; ?>: <?php echo $PCO_FechaOperacionGuiones;?> <?php echo $PCO_HoraOperacionPuntos;?>"+"\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="<?php echo $MULTILANG_Accion; ?>: <?php echo $PCO_Accion;?>"+"\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="<?php echo $MULTILANG_Usuario; ?>:  <?php echo $PCOSESS_LoginUsuario;?>"+"\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="Inclusiones: <?php echo (count(get_included_files())); ?>"+"+1?\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="PHP_VERSION: <?php echo phpversion(); ?>   MEMORY_GET_USAGE: <?php echo memory_get_usage(); ?> bytes"+"\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="MEMORY_PEAK_USAGE: <?php echo memory_get_peak_usage(); ?> bytes"+"\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_LOADED_EXTENSIONS: <?php PCO_ImprimirExtensionesPHP(); ?>"+"\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nINI_GET_ALL: <?php PCO_ImprimirConfiguracionesPHP(); ?>"+"\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nDEBUG_TRACE: <?php PCO_ImprimirDebugPHP(); ?>"+"\n";
+                document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_DEFINED_VARS: <?php PCO_ImprimirVariablesPHP(); ?>"+"\n";
+                //Captura pantallazo del navegador
+                CapturarCanvasPantallaAImagen('','PCO_ReportarBugsCapturaOculta','image/png',0,0,"PCO_ReportarBugs","PCO_CapturaPantalla");
+            }
+    </script>
 
 		<?php 
 			//Agrega boton de reporte de Bugs si esta habilitado el sistema
-			if ($PermitirReporteBugs==1 && $PCOSESS_SesionAbierta)
-				echo '<a class="btn btn-xs" data-toggle="tooltip" data-html="true"  data-placement="auto" title="'.$MULTILANG_BTReporteBugs.'" href="javascript:document.location=\'index.php?PCO_Accion=cargar_objeto&objeto=frm:-3:1\';"><i class="fa fa-bug"></i>!</a>&nbsp;';
+			if ($PermitirReporteBugs==1 && $PCOSESS_SesionAbierta ) //&& $PCO_Accion!="PCO_ReportarBugs"
+				echo '<a class="btn btn-xs" href="javascript:PCO_CargarReportarBugs();" data-toggle="tooltip" data-html="true"  data-placement="auto" title="'.$MULTILANG_BTReporteBugs.'" href="javascript:document.location=\'index.php?PCO_Accion=cargar_objeto&objeto=frm:-3:1\';"><i id="PCO_IconoBugTracker" class="fa fa-bug"></i></a><i id="PCO_TextoBugTracker"></i>&nbsp;';
 		?>
 		<?php
 			//Presenta titulo de la aplicacion

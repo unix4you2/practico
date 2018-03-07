@@ -29,14 +29,14 @@
 	$UbicacionProveedoresOAuth='0';
 
 	// Google
-	$APIGoogle_ClientId='';
-	$APIGoogle_ClientSecret='';
+	$APIGoogle_ClientId='345';
+	$APIGoogle_ClientSecret='345';
 	$APIGoogle_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=autenticacion_oauth&OAuthSrv=Google';
 	$APIGoogle_Template='';
 
 	// Facebook
-	$APIFacebook_ClientId='';
-	$APIFacebook_ClientSecret='';
+	$APIFacebook_ClientId='345';
+	$APIFacebook_ClientSecret='345';
 	$APIFacebook_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=autenticacion_oauth&OAuthSrv=Facebook';
 	$APIFacebook_Template='';
 
@@ -47,8 +47,8 @@
 	$APITwitter_Template='';
 
 	// Dropbox
-	$APIDropbox_ClientId='';
-	$APIDropbox_ClientSecret='';
+	$APIDropbox_ClientId='345';
+	$APIDropbox_ClientSecret='345';
 	$APIDropbox_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=autenticacion_oauth&OAuthSrv=Dropbox';
 	$APIDropbox_Template='';
 
@@ -83,8 +83,8 @@
 	$APISalesforce_Template='';
 
 	// Yahoo
-	$APIYahoo_ClientId='';
-	$APIYahoo_ClientSecret='';
+	$APIYahoo_ClientId='345';
+	$APIYahoo_ClientSecret='345';
 	$APIYahoo_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=autenticacion_oauth&OAuthSrv=Yahoo';
 	$APIYahoo_Template='';
 
@@ -131,8 +131,8 @@
 	$APIStockTwits_Template='';
 
 	// LinkedIn
-	$APILinkedIn_ClientId='';
-	$APILinkedIn_ClientSecret='';
+	$APILinkedIn_ClientId='345';
+	$APILinkedIn_ClientSecret='345';
 	$APILinkedIn_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=autenticacion_oauth&OAuthSrv=LinkedIn';
 	$APILinkedIn_Template='';
 

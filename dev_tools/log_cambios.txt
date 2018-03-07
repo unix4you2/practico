@@ -34,6 +34,7 @@ core/tablas.php
 core/sesion.php
 xml/*
 inc/chat/chat.php
+inc/html2canvas/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/bootstrap/js/practico*
@@ -55,7 +56,10 @@ LogCambios="
 * Added: Ahora los valores predeterminados en campos de texto permiten varias variables bajo notación {PHP} y también textos mezclados con éstas.  Por compatibilidad hacia atrás se conservan aquellas notaciones con un sólo signo de pesos al comienzo del valor. 
 * Added: La configuración de proveedores OAuth permite especificar la manera en que éstos serán presentados al usuario durante el login.
 * Added: Soporte para el uso de variables en notacion {PHP} para soportar traducciones automaticas y mensajes de validacion de formularios sobre campos obligatorios.
-* Added: Sistema básico para el reporte y trazabilidad de errores.
+* Added: Sistema básico para el reporte y trazabilidad de errores incluyendo trazas y capturas de pantalla del usuario.  El desarrollador podrá gestionar y el usuario revisar detalles de gestión.
+* Added: Campos tipo etiqueta pueden definir ahora el ID HTML que los contiene en caso que luega deban ser manipulados en el DOM mediante JS.
+* Added: Campos de tipo texto libre permiten el reemplazo automatico de variables en notación {PHP} sobre sus valores predeterminados
+* Added: La impresion de valores de campos en formato de etiqueta es capaz de identificar si el contenido es una imagen bajo formatos data:image y la agrega como tal a la salida del formulario. 
 * Enhan: Actualización de PMyDB 17.2 a 17.9
 * Enhan: Se protegen funciones adicionales para las instalaciones en modo de demostracion y se agregan mensajes aclaratorios. Se incluye Pcoder, PMyDB y Explorador de archivos.
 * Enhan: Las listas de seleccion en sus campos de opciones (visuales) permiten realizar operaciones SQL.  De ahora en adelante el nombre de la tabla para consulta será tomado exclusivamente del campo de lista de valores (que se supone es el mismo origen de lista de opciones para todas las versiones previas). 
@@ -64,6 +68,9 @@ LogCambios="
 * Enhan: Mejorada la diagramación del panel de configuración para proveedores OAuth.  Optimización de código.
 * Enhan: Mejoras a ventana de login, distribución de elementos y opciones OAuth.
 * Enhan: Limpieza automatica de la barra de direccion del navegador despues de cada carga.
+* Enhan: Actualizada librería de HTML2Canvas de 0.5 a 1.0
+* Enhan: Aquellos campos con nombre manual sobre un formulario y no pertenecientes a la tabla asociada al formulario tomarán valores por defecto definidos para éstos en lugar de quedar en blanco ante la carga de un registro sobre el formulario.
+* Enhan: Por seguridad el panel de configuración de la herramienta no permite el cambio de motor directamente ya que puede ocasionar pérdida de control del sistema.  Quien desee migrar entre motores de bases de datos de diferente tipo deberá ajustar su valor manualmente sobre configuracion.php para hacerlo así de manera consciente.
 * Fixed: Procesos de importacion de tablas consideran los valores entregados por los parametros de complementa a condiciones de filtrado correctamente.
 * Fixed: Validaciones de ejecucion sobre webservices.  Si los WS previos han sido creados bajo los estandares y requerimientos de operacion no se deberian tener problemas durante migraciones.  Se recomienda verificar que los llamados a WS previos se encuentren correctamente parametrizados.
 * Fixed: Retirados de la creacion y edicion de menues y los formularios los elementos internos de Práctico (Forms e informes) que no son necesarios para el usuario estándar.
@@ -76,13 +83,36 @@ LogCambios="
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('visibilidad_oauth','1','{$MULTILANG_OauthOpcionBoton}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('visibilidad_oauth','0','{$MULTILANG_OauthOpcionDirecta}',2);
+DROP TABLE IF EXISTS core_bugtracker;
+CREATE TABLE core_bugtracker (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  fecha_apertura datetime,
+  fecha_actualizacion datetime,
+  fecha_cierre datetime,
+  proyecto varchar(255),
+  proyecto_version varchar(30),
+  titulo varchar(255),
+  descripcion text,
+  categoria varchar(255),
+  estado varchar(20),
+  severidad varchar(20),
+  prioridad varchar(20),
+  reportado_por varchar(250),
+  asignado_a varchar(250),
+  pasos_reproduccion text,
+  sistema_origen varchar(255),
+  trazas text,
+  adjunto longblob,
+  historial_gestion text,
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 DROP TABLE IF EXISTS core_tabla_comodin;
 CREATE TABLE core_tabla_comodin (
   id int(10) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('visibilidad_oauth','1','{$MULTILANG_OauthOpcionBoton}',1);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('visibilidad_oauth','0','{$MULTILANG_OauthOpcionDirecta}',2);
 "
 
 ########################################################################

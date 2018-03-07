@@ -1331,7 +1331,11 @@ if ($PCO_Accion=="editar_formulario")
                                 <select id="informe_vinculado" name="informe_vinculado" class="form-control input-sm">
                                 <option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                 <?php
-                                    $consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id>=0 ORDER BY titulo");
+                                    //Define desde donde filtrar informes cuando se esta en modo desarrollador de Practico
+                                    $LimiteInferiorBusqueda="-10000";
+                                    if ($ModoDesarrolladorPractico!="-10000")
+                                        $LimiteInferiorBusqueda=0;
+                                    $consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id>=$LimiteInferiorBusqueda ORDER BY titulo");
                                     while($registro_informes = $consulta_informs->fetch())
                                         {
                                             $seleccion_campo="";

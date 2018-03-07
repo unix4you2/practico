@@ -174,7 +174,7 @@
 								<!-- Formulario para la carga del sistema de BugTracking -->
 								<form action='index.php' method='post' name="BugTrackingForm" style="display:inline;">
 									<input type="hidden" name="PCO_Accion"	value="cargar_objeto">
-									<input type="hidden" name="objeto"	value="frm:-4:1">
+									<input type="hidden" name="objeto"	value="frm:-4:0">
 								</form>
 								<a class="btn btn-danger btn-block" href="javascript:document.BugTrackingForm.submit();"><i class="fa fa-bug fa-fw"></i> <?php echo $MULTILANG_BTPanel; ?></a>
 							</div> <!--well-->

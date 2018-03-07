@@ -495,7 +495,7 @@ CREATE TABLE core_bugtracker (
   pasos_reproduccion text,
   sistema_origen varchar(255),
   trazas text,
-  adjunto varchar(255),
+  adjunto bytea,
   historial_gestion text,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

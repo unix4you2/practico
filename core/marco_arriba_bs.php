@@ -115,7 +115,7 @@
 	<script type="text/javascript" src="inc/practico/javascript/html5slider.js"></script>
 
     <!-- JavaScript Conversiones HTML-Canvas -->
-	<script type="text/javascript" src="inc/html2canvas/dist/html2canvas.min.js"></script>
+	<script type="text/javascript" src="inc/html2canvas/0.5/html2canvas.min.js"></script>
 
 	<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/chat.css" />
 	<!--<link type="text/css" rel="stylesheet" media="all" href="inc/chat/css/screen.css" />-->

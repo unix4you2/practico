@@ -55,7 +55,7 @@
                                 <div class="tab-pane fade" id="basedatos-tab">
                                     <label for="MotorBDNEW"><i class="fa fa-database fa-2x fa-fw"></i> <?php echo $MULTILANG_TipoMotor; ?>:</label>
                                     <div class="form-group input-group">
-                                        <select id="MotorBDNEW" name="MotorBDNEW" class="selectpicker" >
+                                        <select id="MotorBDNEW" name="MotorBDNEW" class="selectpicker" disabled="true">
                                             <option value="mysql"	 <?php if ($MotorBD=="mysql") echo "SELECTED"; ?> >MySQL - MariaDB (3.x/4.x/5.x)</option>
                                             <option value="pgsql"	 <?php if ($MotorBD=="pgsql") echo "SELECTED"; ?> >PostgreSQL</option>
                                             <option value="sqlite"	 <?php if ($MotorBD=="sqlite") echo "SELECTED"; ?> >SQLite v2 - SQLite v3</option>

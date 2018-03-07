@@ -3620,9 +3620,8 @@ function PCO_VentanaLogin()
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-body mdl-primary">
-        
                                 <?php
-                                    mensaje($MULTILANG_OauthButt,$MULTILANG_LoginOauthDes,'','fa fa-info-circle fa-3x text-info','alert alert-info');
+                                        mensaje($MULTILANG_OauthButt,$MULTILANG_LoginOauthDes,'','fa fa-info-circle fa-3x text-info','alert alert-info');
                                 ?>
                                 <table class="table">
                                         <tr><td align="center"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">
@@ -3771,10 +3770,10 @@ function PCO_VentanaLogin()
                                                     //Si se desean las opciones directamente en el login
                                                     if ($UbicacionProveedoresOAuth=='1')
                                                         {
-                                                            mensaje($MULTILANG_OauthButt,$MULTILANG_LoginOauthDes,'','fa fa-info-circle fa-3x text-info','alert alert-info');
                                                             echo '
                                                                 <table class="table">
-                                                                        <tr><td align="center"><font face="Verdana,Tahoma, Arial" style="font-size: 9px;">';
+                                                                        <tr><td align="center">';
+                                                                        echo "<b><i><font color=lightgray>".$MULTILANG_OauthLogin.":</font></i></b><br>";
                                                             echo $CadenaProveedoresOAuthDisponibles;
                                                             echo '
                                                                         </td></tr>
@@ -4151,11 +4150,15 @@ function selector_iconos_awesome()
 							$cadena_valor=' value="'.$valor_variable.'" ';							
 						}
 				}
-				
-			$valor_variable_escapada=$registro_datos_formulario["$nombre_campo"];
-			//$valor_variable_escapada=addslashes ( '"'.$valor_variable_escapada.'"' );
-			//$valor_variable_escapada=htmlentities($valor_variable_escapada); //Presenta la cadena como caracteres especiales HTML para ayudar a presentar correctamente tildes, comillas y barras
-			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=' value="'.$valor_variable_escapada.'" ';
+
+            //Evalua si el campo en cuestion pertenece a la tabla.  Si es asi entonces intenta buscar su valor desde registro y cambiar el predeterminado.
+        	if (existe_campo_tabla($nombre_campo,$RegistroDisenoFormulario["tabla_datos"])==true)
+        	    {
+        			$valor_variable_escapada=$registro_datos_formulario["$nombre_campo"];
+        			//$valor_variable_escapada=addslashes ( '"'.$valor_variable_escapada.'"' );
+        			//$valor_variable_escapada=htmlentities($valor_variable_escapada); //Presenta la cadena como caracteres especiales HTML para ayudar a presentar correctamente tildes, comillas y barras
+        			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=' value="'.$valor_variable_escapada.'" ';
+        	    }
 
 			// Define cadenas en caso de tener validaciones
 			$cadena_validacion='';
@@ -4352,8 +4355,8 @@ function selector_iconos_awesome()
 
 			// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 			$cadena_valor='';
-			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=$registro_campos["valor_predeterminado"];
-			//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.
+			if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_predeterminado"]);
+			//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.  COMPATIBILIDAD HACIA ATRAS
 			if (substr($registro_campos["valor_predeterminado"], 0,1)=="$")
 				{
 					$nombre_variable = substr($registro_campos["valor_predeterminado"], 1);
@@ -4854,7 +4857,9 @@ function selector_iconos_awesome()
 	function cargar_objeto_etiqueta($registro_campos,$registro_datos_formulario)
 		{
 			global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
-			$salida=PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_etiqueta"]);
+            $salida.= '<div id="'.$registro_campos["id_html"].'">';
+			$salida.=PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_etiqueta"]);
+            $salida.= '</div>';
 			return $salida;
 		}
 
@@ -4930,6 +4935,13 @@ function selector_iconos_awesome()
 					else
 						$cadena_valor=CodigoQR($Contenido_BARRAS);
 				}
+
+			//Identifica si el contenido es una imagen y agrega el tag para esta sino pone el contenido crudo
+			if (substr ( $registro_datos_formulario["$nombre_campo"] , 0,10 )=="data:image")
+			    {
+			        $cadena_valor=$registro_datos_formulario["$nombre_campo"];
+			        $cadena_valor="<img src='$cadena_valor' border=0 width=100%>";
+			    }
 
 			//$salida=$cadena_valor;
 			//Agrega ademas el valor como hidden para disponer de el cuando se requiera en otro llamado o funcion personalizada

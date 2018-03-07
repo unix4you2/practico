@@ -1331,6 +1331,12 @@
     $MULTILANG_BTPanel='Panel de gesti&oacute;n de errores o bugs';
     $MULTILANG_BTBugtracking='Bugtracking';
     $MULTILANG_BTPermitirReporte='Permitir a usuarios reportar errores';
+    $MULTILANG_BTVistaUsuario='Vista del navegador del usuario al momento de enviar el reporte';
+    $MULTILANG_BTAccionRealizada='Accion o revision realizada para el caso';
+    $MULTILANG_BTEstadoNuevo='Nuevo';
+    $MULTILANG_BTEstadoProgreso='EnProgreso';
+    $MULTILANG_BTEstadoCerrado='Cerrado';
+    $MULTILANG_BTPrevios='Ver estado de reportes enviados anteriormente';
 
     //Opciones de Documentacion
     $MULTILANG_Documentar='Documentar';

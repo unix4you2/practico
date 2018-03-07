@@ -30,6 +30,21 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: PCO_ReportarBugs
+	Permite reportar errores o mejoras de la aplicacion por parte de los usuarios
+*/
+if ($PCO_Accion=="PCO_ReportarBugs")
+	{
+        //abrir_dialogo_modal("myModalOAUTH",$MULTILANG_ConfiguracionGeneral.": ".$MULTILANG_OauthButt,"modal-wide"); 
+        //Carga el formulario con el diseno para gestionar proveedores OAuth.  Deberia deshabilitarse su cargue en modo de diseno del mismo para permitir cambios.
+        cargar_formulario("-3",1);
+        //cerrar_dialogo_modal();
+	}
+	
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: PCO_EditarConfiguracionOAuth
 	Presenta las configuraciones OAuth disponibles y da la posibilidad de cambiarlas
 */

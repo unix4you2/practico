@@ -470,6 +470,45 @@ function PCO_HTMLSpecialChars_Decode(string, quote_style) {
 }
 
 
+function CapturarCanvasPantallaAImagen(MarcoOrigen,MarcoVistaPrevia,Formato,Ancho,Alto,FormularioSubmit,CampoAlmacenamiento)
+    {
+        //Si no especifica formato usa uno predeterminado
+        if (Formato=="") Formato='image/png';  //image/png|image/jpeg
+        
+        //Si no recibe el marco de origen usa todo el Body
+        if (MarcoOrigen=="") MarcoOrigen='wrapper';  //wrapper representa el div principal que contiene toda la app
+
+        //Si no recibe el marco de destino usa uno oculto por defecto
+        if (MarcoVistaPrevia=="") MarcoVistaPrevia='document.body';
+        
+        //Si no recibe ancho o alto entonces no los utiliza
+        if (Ancho=="" || Ancho==0)  Ancho=$( MarcoOrigen ).width();
+        if (Alto=="" || Alto==0)    Alto=$( MarcoOrigen ).height();      
+
+        var ContenidoPantalla = document.getElementById(MarcoOrigen);
+        var ContenedorVistaPrevia = document.getElementById(MarcoVistaPrevia);
+        html2canvas(ContenidoPantalla, {
+            onrendered: function(canvas) {
+                ContenedorVistaPrevia.appendChild(canvas);
+                ResultadoFinal=canvas;
+                //Si encuentra un formulario definido para autoenvio lo ejecuta
+                if (FormularioSubmit!="")
+                    {
+                        //Utiliza el campo de almacenamiento definido para llevar alli los datos.  El campo deberia estar dentro del formularioSubmit
+                        var CampoDatos=document.getElementById(CampoAlmacenamiento);
+                        ResultadoFinal=ResultadoFinal.toDataURL(); //Convierte el objeto a algo transportable
+                        CampoDatos.value=ResultadoFinal;
+                        //Envia datos
+                        Formulario=document.getElementById(FormularioSubmit);
+                        Formulario.submit();
+                    }
+            },
+            width:Ancho,
+            height:Alto
+        });
+    }
+
+
 /*
             function ImprimirMarco()
                 {

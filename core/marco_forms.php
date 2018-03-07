@@ -52,6 +52,14 @@
 <form method="POST" name="fileman_admin_embebido" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     <input type="Hidden" name="PCO_Accion" value="fileman_admin_embebido">
 </form>
+<form method="POST" id="PCO_ReportarBugs" name="PCO_ReportarBugs" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+    <div id="PCO_ReportarBugsCapturaOculta" class="oculto_impresion" style="visibility: hidden; display:none;">
+    </div>
+    <input type="Hidden" name="PCO_Accion" value="PCO_ReportarBugs">
+    <input type="Hidden" name="PCO_CapturaPantalla" id="PCO_CapturaPantalla" value="">
+    <input type="Hidden" name="PCO_CapturaTrazas" id="PCO_CapturaTrazas" value="">
+</form>
+
 <form name="FRMBASEINFORME" id="FRMBASEINFORME" action="<?php echo $ArchivoCORE; ?>" method="POST" target="_self">
     <input type="Hidden" name="PCO_Accion" value="">
     <input type="Hidden" name="tabla" value="">  <!-- Compatibilidad hacia atras -->
