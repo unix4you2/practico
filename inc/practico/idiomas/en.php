@@ -996,7 +996,7 @@
 	$MULTILANG_UsrDesInterno='An internal user is for people who work inside the company that deploy the ERP or system.  An external user is for example for people that is from a customer or another company that login to the system';
 	$MULTILANG_UsrTitNivel='Initial safety profile';
 	$MULTILANG_UsrDesNivel='Users security profile. CAUTION: This option is different to individual user permissions defined by the designer for the created objects. This page only applies to the internal operations of Practico';
-	$MULTILANG_UsrAudit1='Tracking operations (automatically updated every 5 seconds)';
+	$MULTILANG_UsrAudit1='Tracking operations';
 	$MULTILANG_UsrAudDes='Details of the action';
 	$MULTILANG_UsrAudUsrs='Monitoring transactions for all users';
 	$MULTILANG_UsrAudAccion='With the ACTION';

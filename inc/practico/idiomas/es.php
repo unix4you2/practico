@@ -994,7 +994,7 @@
 	$MULTILANG_UsrDesInterno='Un usuario interno es aquel diferenciado para tareas especificas de la organizacion o empresa que implementa el ERP.  Asi pues, los usuarios son clasificados como internos o externos, siendo estos ultimos los asociados a los clientes o usuarios de afuera de nuestra organizacion que acceden a los servicios';
 	$MULTILANG_UsrTitNivel='Perfil inicial de seguridad';
 	$MULTILANG_UsrDesNivel='Perfil de seguridad del usuario.  CUIDADO:  Esta opci&oacute;n es diferente a los permisos individuales de usuario definidos por el disenador para los objetos por el creados.  Este perfil solamente aplica para las operaciones internas de Pr&aacute;ctico';
-	$MULTILANG_UsrAudit1='Seguimiento de operaciones (actualizando autom&aacute;ticamente cada 5 segundos)';
+	$MULTILANG_UsrAudit1='Seguimiento de operaciones';
 	$MULTILANG_UsrAudDes='Descripci&oacute;n de la acci&oacute;n';
 	$MULTILANG_UsrAudUsrs='Seguimiento de operaciones para todos los usuarios';
 	$MULTILANG_UsrAudAccion='Con la siguiente ACCION';

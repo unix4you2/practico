@@ -996,7 +996,7 @@
 	$MULTILANG_UsrDesInterno='Um usu&aacute;rio interno &eacute; para pessoas que trabalham dentro da empresa que implantar o ERP ou sistema. Um usu&aacute;rio externo &eacute;, por exemplo, para pessoas que &eacute; de um cliente ou outra empresa que efetuar login no sistema';
 	$MULTILANG_UsrTitNivel='Perfil de segurança inicial';
 	$MULTILANG_UsrDesNivel='Usu&aacute;rios perfil de segurança. ATENÇÃO: Esta opção &eacute; diferente de permissões de usu&aacute;rio individuais definidas pelo designer para os objetos criados. Esta p&aacute;gina s&oacute; se aplica às operações internas de Practico';
-	$MULTILANG_UsrAudit1='Operações de rastreamento (atualizado automaticamente a cada 5 segundos)';
+	$MULTILANG_UsrAudit1='Operações de rastreamento';
 	$MULTILANG_UsrAudDes='Detalhes da ação';
 	$MULTILANG_UsrAudUsrs='Monitoramento de transações para todos os usu&aacute;rios';
 	$MULTILANG_UsrAudAccion='Com a ação';

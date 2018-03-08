@@ -1582,68 +1582,32 @@ if ($PCO_Accion=="agregar_usuario")
     }
 
 
-
 /* ################################################################## */
 /* ################################################################## */
-if ($PCO_Accion=="ver_seguimiento_monitoreo")
-				{
-			/*
-				Function: ver_seguimiento_monitoreo
-				Presenta las ultimas 30 acciones del sistema, permitiendo su actualizacion automatica cada 5 segundos
-
-				Proceso simplificado:
-					(start code)
-						SELECT * FROM ".$TablasCore."auditoria ORDER BY fecha DESC, hora DESC LIMIT 0,30
-					(end)
-
-				Salida de la funcion:
-					* Listado de operaciones realizadas actualizado automaticamente
-
-				Ver tambien:
-					<listar_usuarios> | <ver_seguimiento_especifico>
-			*/
-						echo '<div align="center"><br>';
-				abrir_ventana($MULTILANG_UsrAudit1, 'panel-info');
-					echo '<form name="datos" action="'.$ArchivoCORE.'" method="POST">
-						</form>';
-				echo '<table class="table table-hover table-condensed table-unbordered btn-xs">
-					<thead>
-                    <tr>
-						<td><b>ID</b></td>
-						<td><b>'.$MULTILANG_UsrLogin.'</b></td>
-						<td><b>'.$MULTILANG_UsrAudDes.'</b></td>
-						<td><b>'.$MULTILANG_Fecha.' (AAAA-MM-DD)</b></td>
-						<td><b>'.$MULTILANG_Hora.' (HH-MM-SS)</b></td>
-					</tr>
-                    </thead>
-                    </body>
-                    ';
+if ($PCO_Accion=="PCO_PanelAuditoriaMovimientos")
+	{
+        /*
+        	Function: PCO_PanelAuditoriaMovimientos
+        	Presenta un panel con informacion general acerca de las ultimas acciones del sistema las ultimas 30 acciones del sistema, permitiendo su actualizacion automatica cada 5 segundos
+        
+        	Proceso simplificado:
+        		(start code)
+        			SELECT core_auditoria.id as ID,core_auditoria.usuario_login,core_auditoria.accion,core_auditoria.fecha,core_auditoria.hora FROM ".$TablasCore."auditoria WHERE core_auditoria.fecha >= "" AND core_auditoria.fecha <= "" AND core_auditoria.accion LIKE "%%" AND core_auditoria.usuario_login LIKE "%%" ORDER BY fecha DESC, hora DESC LIMIT 0,30
+        		(end)
+        
+        	Salida de la funcion:
+        		* Listado de operaciones realizadas actualizado automaticamente segun los parametros dados
+        
+        	Ver tambien:
+        		<listar_usuarios> | <ver_seguimiento_especifico>
+        */
+			if ($FechaInicioAuditoria=="") $FechaInicioAuditoria=$PCO_FechaOperacionGuiones;
+			if ($FechaFinAuditoria=="") $FechaFinAuditoria=$PCO_FechaOperacionGuiones;
+			cargar_formulario("-7",1);
+	}
 
 
-				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria ORDER BY id DESC LIMIT 0,30");
-				while($registro = $resultado->fetch())
-					{
-						echo '<tr><td align="center">'.$registro["id"].'</td>
-								<td>'.$registro["usuario_login"].'</td>
-								<td>'.$registro["accion"].'</td>
-								<td align="center">'.$registro["fecha"].'</td>
-								<td align="center">'.$registro["hora"].'</td>
-							</tr>';
-					}
-				echo '</tbody>
-                </table>
-				<script type="text/JavaScript">
-					setTimeout("document.ver_auditoria_monitoreo.submit();",5000);
-				</script>
-				<form action="'.$ArchivoCORE.'" method="POST" name="ver_auditoria_monitoreo"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="hidden" name="PCO_Accion" value="ver_seguimiento_monitoreo">
-				</form>
-				';
-				abrir_barra_estado();
-				echo '<a class="btn btn-danger btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
-				cerrar_barra_estado();
-				cerrar_ventana();
-				 }
+/* ################################################################## */
 /* ################################################################## */
 if ($PCO_Accion=="ver_seguimiento_general")
 				{

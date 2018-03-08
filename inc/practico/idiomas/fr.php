@@ -994,7 +994,7 @@
 	$MULTILANG_UsrDesInterno='Un utilisateur interne est destiné aux personnes qui travaillent au sein de l entreprise et qui déploient l ERP ou le système. Un utilisateur externe est par exemple pour les personnes d un client ou d une autre entreprise qui se connecte au système';
 	$MULTILANG_UsrTitNivel='Profil de sécurité initial';
 	$MULTILANG_UsrDesNivel='Profil de sécurité des utilisateurs ATTENTION: cette option est différente des autorisations utilisateur individuelles définies par le concepteur pour les objets créés. Cette page ne s applique qu aux opérations internes de Practico';
-	$MULTILANG_UsrAudit1='Opérations de suivi (mises à jour automatiquement toutes les 5 secondes)';
+	$MULTILANG_UsrAudit1='Opérations de suivi';
 	$MULTILANG_UsrAudDes='Détails de l action';
 	$MULTILANG_UsrAudUsrs='Suivi des transactions pour tous les utilisateurs';
 	$MULTILANG_UsrAudAccion='Avec l ACTION';

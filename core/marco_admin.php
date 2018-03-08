@@ -104,8 +104,8 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
 <form name="listar_usuarios" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 	<input type="Hidden" name="PCO_Accion" value="listar_usuarios">
 </form>
-<form name="ver_seguimiento_monitoreo" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="PCO_Accion" value="ver_seguimiento_monitoreo">
+<form name="PCO_PanelAuditoriaMovimientos" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="PCO_PanelAuditoriaMovimientos">
 </form>
 <form name="ver_tablero_kanban" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 	<input type="Hidden" name="PCO_Accion" value="ExplorarTablerosKanban">
@@ -135,7 +135,7 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
             echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","red","fa-file-text fa-4x",ContarRegistros($TablasCore."informe","id>".$ModoDesarrolladorPractico),"$MULTILANG_Informes","$MULTILANG_Detalles","javascript:document.administrar_informes.submit();");
             echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","default","fa-external-link-square fa-4x",ContarRegistros($TablasCore."menu"),"$MULTILANG_OpcionesMenu","$MULTILANG_Detalles","javascript:document.administrar_menu.submit();");
             echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","yellow","fa-users fa-4x",ContarRegistros($TablasCore."usuario"),"$MULTILANG_Usuario","$MULTILANG_Detalles","javascript:document.listar_usuarios.submit();");
-            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","info","fa-eye fa-4x",ContarRegistros($TablasCore."auditoria"),"$MULTILANG_UsrAuditoria","$MULTILANG_Detalles","javascript:document.ver_seguimiento_monitoreo.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","info","fa-eye fa-4x",ContarRegistros($TablasCore."auditoria"),"$MULTILANG_UsrAuditoria","$MULTILANG_Detalles","javascript:document.PCO_PanelAuditoriaMovimientos.submit();");
             echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","success","fa-thumb-tack fa-4x",ContarRegistros($TablasCore."kanban"),"$MULTILANG_TablerosKanban","$MULTILANG_Detalles","javascript:document.ver_tablero_kanban.submit();");
             echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","danger","fa-bug fa-4x",ContarRegistros($TablasCore."bugtracker"),"$MULTILANG_TblRegistros","$MULTILANG_BTBugtracking","javascript:document.ver_bugtracking.submit();");
         ?>
