@@ -125,12 +125,7 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
  
      <div class="row">
         <?php
-            //Presenta cantidad de tablas en el sistema
-            $resultado=consultar_tablas();
-            $cantidad_tablas=0;
-            while ($registro = $resultado->fetch())
-                $cantidad_tablas++;
-            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","primary","fa-table fa-4x","$cantidad_tablas","$MULTILANG_TablaDatos","$MULTILANG_Detalles","javascript:document.administrar_tablas.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","primary","fa-table fa-4x",consultar_tablas()->rowCount(),"$MULTILANG_TablaDatos","$MULTILANG_Detalles","javascript:document.administrar_tablas.submit();");
             echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","green",  "fa-newspaper-o fa-4x",ContarRegistros($TablasCore."formulario","id>".$ModoDesarrolladorPractico),"$MULTILANG_Formularios","$MULTILANG_Detalles","javascript:document.administrar_formularios.submit();");
             echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","red","fa-file-text fa-4x",ContarRegistros($TablasCore."informe","id>".$ModoDesarrolladorPractico),"$MULTILANG_Informes","$MULTILANG_Detalles","javascript:document.administrar_informes.submit();");
             echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","default","fa-external-link-square fa-4x",ContarRegistros($TablasCore."menu"),"$MULTILANG_OpcionesMenu","$MULTILANG_Detalles","javascript:document.administrar_menu.submit();");

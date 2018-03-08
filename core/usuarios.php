@@ -1603,6 +1603,7 @@ if ($PCO_Accion=="PCO_PanelAuditoriaMovimientos")
         */
 			if ($FechaInicioAuditoria=="") $FechaInicioAuditoria=$PCO_FechaOperacionGuiones;
 			if ($FechaFinAuditoria=="") $FechaFinAuditoria=$PCO_FechaOperacionGuiones;
+			auditar("Carga modulo de auditoria");
 			cargar_formulario("-7",1);
 	}
 
