@@ -1576,6 +1576,7 @@ if ($PCO_Accion=="editar_formulario")
 
 
 						<div id='campo14' style="display:none;">
+                            <label for="ancho"><?php echo $MULTILANG_FrmAncho; ?>:</label>
                             <div class="form-group input-group">
                                 <input type="text" name="ancho" class="form-control input-sm" value="<?php if (@$registro_campo_editar["ancho"]!="") echo @$registro_campo_editar["ancho"]; else echo "0"; ?>" placeholder="<?php echo $MULTILANG_FrmAncho; ?>">
                                 <span class="input-group-addon">
@@ -1585,6 +1586,7 @@ if ($PCO_Accion=="editar_formulario")
 						</div>
 
 						<div id='campo15' style="display:none;">
+                            <label for="alto"><?php echo $MULTILANG_FrmAlto; ?>:</label>
                             <div class="form-group input-group">
                                 <input type="text" name="alto" class="form-control input-sm" value="<?php if (@$registro_campo_editar["alto"]!="") echo @$registro_campo_editar["alto"]; else echo "0"; ?>" placeholder="<?php echo $MULTILANG_FrmAlto; ?>">
                                 <span class="input-group-addon">

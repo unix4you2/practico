@@ -77,6 +77,7 @@ LogCambios="
 * Enhan: Accion interna ver_seguimiento_monitoreo ha sido cambiada a PCO_PanelAuditoriaMovimientos
 * Enhan: Centralizados los formularios comunes sobre un único archivo.
 * Enhan: Eliminados formularios innecesarios de acceso a opciones internas.
+* Enhan: Agregadas etiquetas de ancho y alto durante la edición de elementos de formularios para facilitar su identificación.
 * Fixed: Procesos de importacion de tablas consideran los valores entregados por los parametros de complementa a condiciones de filtrado correctamente.
 * Fixed: Validaciones de ejecucion sobre webservices.  Si los WS previos han sido creados bajo los estandares y requerimientos de operacion no se deberian tener problemas durante migraciones.  Se recomienda verificar que los llamados a WS previos se encuentren correctamente parametrizados.
 * Fixed: Retirados de la creacion y edicion de menues y los formularios los elementos internos de Práctico (Forms e informes) que no son necesarios para el usuario estándar.
