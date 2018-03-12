@@ -42,4 +42,3 @@
 
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='es';
-	

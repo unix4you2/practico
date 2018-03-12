@@ -2061,7 +2061,7 @@ if ($PCO_Accion=="listar_usuarios")
                     echo '<div align=center>
                         <a class="btn btn-default " href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>
                         <a class="btn btn-success " href="javascript:document.form_crear_usuario.submit();"><i class="fa fa-file-o"></i> '.$MULTILANG_UsrAgregar.'</a>
-                        <a class="btn btn-warning " href="javascript:document.ver_auditoria_general.submit();"><i class="fa fa-file-text"></i> '.$MULTILANG_UsrVerAudit.'</a>
+                        <a class="btn btn-warning " href="javascript:document.PCO_PanelAuditoriaMovimientos.submit();"><i class="fa fa-file-text"></i> '.$MULTILANG_UsrVerAudit.'</a>
                         <a class="btn btn-info " href="javascript:document.ver_auditoria_monitoreo.submit();"><i class="fa fa-file-text"></i> '.$MULTILANG_UsrAudMonit.'</a>
                         </div>';
 				cerrar_barra_estado();

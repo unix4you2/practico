@@ -73,3 +73,31 @@
     <input type="Hidden" name="Presentar_FullScreen" value="<?php echo $Presentar_FullScreen; ?>">
     <input type="Hidden" name="Precarga_EstilosBS" value="<?php echo $Precarga_EstilosBS; ?>">
 </form>
+
+
+<form name="administrar_tablas" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="administrar_tablas">
+</form>
+<form name="administrar_formularios" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
+</form>
+<form name="administrar_menu" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="administrar_menu">
+</form>
+<form name="administrar_informes" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="administrar_informes">
+</form>
+<form name="listar_usuarios" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="listar_usuarios">
+</form>
+<form name="PCO_PanelAuditoriaMovimientos" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="PCO_PanelAuditoriaMovimientos">
+</form>
+<form name="PCO_ExplorarTablerosKanban" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="PCO_ExplorarTablerosKanban">
+</form>
+<form name="PCO_BugTrackingForm" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="cargar_objeto">
+	<input type="Hidden" name="objeto" value="frm:-4:1">
+</form>
+

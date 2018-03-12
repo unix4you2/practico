@@ -53,12 +53,12 @@
 	Lleva al usuario hasta el tablero kanban
 
 	Ver tambien:
-		<ExplorarTablerosKanban>
+		<PCO_ExplorarTablerosKanban>
 */
 	function RedireccionATableroKanban($ID_TableroKanban="")
 		{
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-				<input type="Hidden" name="PCO_Accion" value="ExplorarTablerosKanban">
+				<input type="Hidden" name="PCO_Accion" value="PCO_ExplorarTablerosKanban">
                 <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                 <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 				<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
@@ -81,7 +81,7 @@
 		Registro actualizado en la tabla de aplicacion
 
 	Ver tambien:
-		<ExplorarTablerosKanban>
+		<PCO_ExplorarTablerosKanban>
 */
 	if ($PCO_Accion=="GuardarPersonalizacionKanban")
 		{
@@ -103,7 +103,7 @@
 		Registro eliminado en la tabla de aplicacion
 
 	Ver tambien:
-		<ExplorarTablerosKanban>
+		<PCO_ExplorarTablerosKanban>
 */
 	if ($PCO_Accion=="EliminarTareaKanban")
 		{
@@ -124,7 +124,7 @@
 		Registro de tarea actualizado, tablero visualizado sin la tarea indicada
 
 	Ver tambien:
-		<ExplorarTablerosKanban>
+		<PCO_ExplorarTablerosKanban>
 */
 	if ($PCO_Accion=="ArchivarTareaKanban")
 		{
@@ -145,7 +145,7 @@
 		Registro almacenado en la tabla de aplicacion
 
 	Ver tambien:
-		<ExplorarTablerosKanban>
+		<PCO_ExplorarTablerosKanban>
 */
 	if ($PCO_Accion=="GuardarTareaKanban")
 		{
@@ -168,7 +168,7 @@
 		Registro almacenado en la tabla de aplicacion
 
 	Ver tambien:
-		<ExplorarTablerosKanban>
+		<PCO_ExplorarTablerosKanban>
 */
 	if ($PCO_Accion=="GuardarCreacionKanban")
 		{
@@ -192,7 +192,7 @@
 		Registros eliminados
 
 	Ver tambien:
-		<ExplorarTablerosKanban>
+		<PCO_ExplorarTablerosKanban>
 */
 	if ($PCO_Accion=="EliminarTableroKanban")
 		{
@@ -215,11 +215,11 @@
 		Reporte ID -3
 
 	Ver tambien:
-		<ExplorarTablerosKanban>
+		<PCO_ExplorarTablerosKanban>
 */
 	if ($PCO_Accion=="VerTareasArchivadas")
 		{
-		    $BotonRetorno = '<a class="btn btn-info" data-toggle="tooltip" data-html="true" href=\''.$ArchivoCORE.'?PCO_Accion=ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'\'><i class="fa fa-arrow-left"></i> '.$MULTILANG_TablerosKanban.'</a><br><br>';
+		    $BotonRetorno = '<a class="btn btn-info" data-toggle="tooltip" data-html="true" href=\''.$ArchivoCORE.'?PCO_Accion=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'\'><i class="fa fa-arrow-left"></i> '.$MULTILANG_TablerosKanban.'</a><br><br>';
 		    echo $BotonRetorno;
 		    cargar_informe(-3,1,"","",1);
 		    echo $BotonRetorno;
@@ -266,10 +266,10 @@
             $salida='<div id="PCOEditorContenedor_Col'.$RegistroTareas["columna"].'_'.$RegistroTareas["id"].'" style="margin:2px; display:none; visibility:hidden; position: absolute; z-index:1000;">
                     <div align="center" style="display: inline-block">
                         <!--<a class="btn btn-xs btn-warning" data-toggle="tooltip" data-html="true" data-placement="top" title="'.$MULTILANG_Editar.'" href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&campo='.$RegistroTareas["id"].'&formulario='.$RegistroTareas["formulario"].'&popup_activo=FormularioCampos&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-fw fa-pencil"></i></a>-->
-                        <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverIzquierda.'"           data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Anterior.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=columna&accion_retorno=ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["columna"]-1).'\'><i class="fa fa-arrow-left"></i></a>
-                        <a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"           data-placement="top" title="'.$MULTILANG_FrmAumentaPeso.' a '.($RegistroTareas["peso"]+1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=peso&accion_retorno=ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["peso"]+1).'\'><i class="fa fa-arrow-down"></i></a>
-                        <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverArriba.'"              data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDisminuyePeso.' a '.($RegistroTareas["peso"]-1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=peso&accion_retorno=ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["peso"]-1).'\'><i class="fa fa-arrow-up"></i></a>
-                        <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'"             data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=columna&accion_retorno=ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["columna"]+1).'\'><i class="fa fa-arrow-right"></i></a>
+                        <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverIzquierda.'"           data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Anterior.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=columna&accion_retorno=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["columna"]-1).'\'><i class="fa fa-arrow-left"></i></a>
+                        <a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"           data-placement="top" title="'.$MULTILANG_FrmAumentaPeso.' a '.($RegistroTareas["peso"]+1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=peso&accion_retorno=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["peso"]+1).'\'><i class="fa fa-arrow-down"></i></a>
+                        <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverArriba.'"              data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDisminuyePeso.' a '.($RegistroTareas["peso"]-1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=peso&accion_retorno=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["peso"]-1).'\'><i class="fa fa-arrow-up"></i></a>
+                        <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'"             data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=columna&accion_retorno=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["columna"]+1).'\'><i class="fa fa-arrow-right"></i></a>
                         <a onclick=\'return confirm("'.$MULTILANG_DelKanban.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=EliminarTareaKanban&ID_TableroKanban='.$ID_TableroKanban.'&ID_TableroKanban='.$ID_TableroKanban.'&IdTareaKanban='.$RegistroTareas["id"].'\' class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-trash"></i></a>
                         '.$ComplementoArchivar.'
                     </div>
@@ -338,7 +338,7 @@
 //#################################################################################
 //#################################################################################
 /*
-	Function: ExplorarTablerosKanban
+	Function: PCO_ExplorarTablerosKanban
 	PResenta la lista de tableros kanban a los que el usuario tiene acceso y permite realizar operaciones en cada uno
 
 	Variables de entrada:
@@ -348,7 +348,7 @@
 	Salida:
 		Tablero predeterminado en pantalla, junto con lista de seleccion para cargar otros tableros
 */
-if (@$PCO_Accion=="ExplorarTablerosKanban")
+if (@$PCO_Accion=="PCO_ExplorarTablerosKanban")
     {
 
         //Busca la lista de tableros
@@ -684,7 +684,7 @@ if (@$PCO_Accion=="ExplorarTablerosKanban")
             <!-- Barra de herramientas del tablero -->
             <div class='row'>
                 <div class='col col-md-6 col-sm-6 col-lg-6 col-xs-6'>
-                    <div class='pull-left btn-xs'><form name='recarga_tablero_kanban' action='$ArchivoCORE' method='POST' style='display: inline!important;'><input type='Hidden' name='PCO_Accion' value='ExplorarTablerosKanban'>$MULTILANG_TablerosKanban: $CadenaTablerosDisponibles <a class='btn btn-inverse btn-xs' onclick='document.recarga_tablero_kanban.submit();'><i class='fa fa-refresh'></i> $MULTILANG_Actualizar</a>&nbsp;&nbsp;&nbsp;&nbsp;</form></div>
+                    <div class='pull-left btn-xs'><form name='recarga_tablero_kanban' action='$ArchivoCORE' method='POST' style='display: inline!important;'><input type='Hidden' name='PCO_Accion' value='PCO_ExplorarTablerosKanban'>$MULTILANG_TablerosKanban: $CadenaTablerosDisponibles <a class='btn btn-inverse btn-xs' onclick='document.recarga_tablero_kanban.submit();'><i class='fa fa-refresh'></i> $MULTILANG_Actualizar</a>&nbsp;&nbsp;&nbsp;&nbsp;</form></div>
                     $ComplementoHerramientasArchivadas
                 </div>
                 <div class='col col-md-6 col-sm-6 col-lg-6 col-xs-6'>

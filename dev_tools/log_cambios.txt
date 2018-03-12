@@ -75,6 +75,8 @@ LogCambios="
 * Enhan: Por seguridad el panel de configuración de la herramienta no permite el cambio de motor directamente ya que puede ocasionar pérdida de control del sistema.  Quien desee migrar entre motores de bases de datos de diferente tipo deberá ajustar su valor manualmente sobre configuracion.php para hacerlo así de manera consciente.
 * Enhan: Optimizado codigo en panel de administración.  Se generaliza función para dejarla disponible del lado de los desarrolladores como PCO_ImprimirPanelSimpleDashboard();
 * Enhan: Accion interna ver_seguimiento_monitoreo ha sido cambiada a PCO_PanelAuditoriaMovimientos
+* Enhan: Centralizados los formularios comunes sobre un único archivo.
+* Enhan: Eliminados formularios innecesarios de acceso a opciones internas.
 * Fixed: Procesos de importacion de tablas consideran los valores entregados por los parametros de complementa a condiciones de filtrado correctamente.
 * Fixed: Validaciones de ejecucion sobre webservices.  Si los WS previos han sido creados bajo los estandares y requerimientos de operacion no se deberian tener problemas durante migraciones.  Se recomienda verificar que los llamados a WS previos se encuentren correctamente parametrizados.
 * Fixed: Retirados de la creacion y edicion de menues y los formularios los elementos internos de Práctico (Forms e informes) que no son necesarios para el usuario estándar.
