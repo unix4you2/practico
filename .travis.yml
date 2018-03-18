@@ -100,11 +100,18 @@ before_script:
 
 # Comandos para construir.  Todos deben retornar cero, cualquier otra salida se considera una falla
 script:
-  - php dev_tools/tests/t_obsoletas.php
-  - php dev_tools/tests/t_archivos.php
-  - php dev_tools/tests/t_basedatos.php
-  - dev_tools/parche2zip.sh
-  - dev_tools/practico2zip.sh
+  - sh -c "echo  ############### CORRIENDO PRUEBAS:  FUNCIONES OBSOLETAS ###############"
+  - php dev_tools/tests/t_obsoletas.php     # Pruebas para verificar y depurar posibles funciones obsoletas
+
+  - sh -c "echo  ############### CORRIENDO PRUEBAS:  ARCHIVOS ESPECIFICOS ###############"
+  - php dev_tools/tests/t_archivos.php      # Pruebas de archivos especificos
+
+  - sh -c "echo  ############### CORRIENDO PRUEBAS:  BASE DE DATOS ###############"
+  - sh -c "mysql --version"
+  - php dev_tools/tests/t_basedatos.php     # Pruebas generales de base de datos
+
+#  - dev_tools/parche2zip.sh                 # Script para generacion de parches entre versiones
+#  - dev_tools/practico2zip.sh              # Script para empaquetado y distribución de nuevas versiones
 
 # Comandos a ejecutar cuando se finaliza la consutrccion sin problemas
 #after_success
