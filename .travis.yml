@@ -66,7 +66,8 @@ addons:
     packages:
       - mysql-server
 
-dist: trusty
+#Indica la distribucion a utilizar: trusty, precise, etc
+#dist: trusty
 
 sudo: required
 
@@ -95,13 +96,13 @@ before_script:
 
 # Comandos para construir.  Todos deben retornar cero, cualquier otra salida se considera una falla
 script:
-  - sh -c "echo  '\n\n\n############### [PRACTICO]: Corriendo pruebas de funciones obsoletas ###############'"
+  - sh -c "echo  'PRACTICO FRAMEWORK: Corriendo pruebas de funciones obsoletas'"
   - php dev_tools/tests/t_obsoletas.php
 
-  - sh -c "echo  '\n\n\n############### [PRACTICO]: Corriendo pruebas de archivos especificos ###############'"
+  - sh -c "echo  'PRACTICO FRAMEWORK: Corriendo pruebas de archivos especificos'"
   - php dev_tools/tests/t_archivos.php
 
-  - sh -c "echo  '\n\n\n############### [PRACTICO]: Corriendo pruebas de bases de datos ###############'"
+  - sh -c "echo  'PRACTICO FRAMEWORK: Corriendo pruebas de bases de datos'"
   - sh -c "mysql --version"
   - php dev_tools/tests/t_basedatos.php
 
