@@ -10,6 +10,8 @@ php:
   #- "5.5"
   # Alias de la version 5.6.x
   #- "5.6"
+  - "7.0"
+  - "7.1"
   # Alias lenguaje Hack de facebook
   #- hhvm
 
@@ -59,11 +61,26 @@ install:
   #Otra forma: pear install PHP_CodeSniffer-2.0.0RC4
   #Otra forma: pyrus install pear/PHP_CodeSniffer
 
+services:
+  - mysql
+
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
+
+dist: trusty
+
+sudo: required
+
 # Ejecuta scripts antes de correr las pruebas, puede utilizar variables de entorno
 before_script:
   
   #Creamos la base de datos para la instalacion de prueba
-  - sh -c "mysql -e 'create database practico;'"
+  - sh -c "mysql -e 'create database practico;'"    #Metodo 1
+  #- mysql -e 'create database antvel;'             #Metodo 2
 
   #Creamos el directorio de pruebas en caso de no existir
   #- mkdir dev_tools/tests
