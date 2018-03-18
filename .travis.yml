@@ -1,19 +1,14 @@
 language: php
 php:
-  # Alias de la version 5.2.17
-  #- "5.2"
-  # Alias de la version 5.3.x
-  #- "5.3"
-  # Alias de la version 5.4.x
+  # Seleccion de las versiones de lenguaje a probar: 5.2.17, 5.3.x, 5.4.x, Hack de face  etc
+  - "5.2"
+  - "5.3"
   - "5.4"
-  # Alias de la version 5.5.x
-  #- "5.5"
-  # Alias de la version 5.6.x
-  #- "5.6"
+  - "5.5"
+  - "5.6"
   - "7.0"
   - "7.1"
-  # Alias lenguaje Hack de facebook
-  #- hhvm
+  - "hhvm"
 
 # Especificacion opcional de variables de entorno, por ejemplo para bases de datos
 env:
@@ -100,15 +95,15 @@ before_script:
 
 # Comandos para construir.  Todos deben retornar cero, cualquier otra salida se considera una falla
 script:
-  - sh -c "echo  ############### CORRIENDO PRUEBAS:  FUNCIONES OBSOLETAS ###############"
-  - php dev_tools/tests/t_obsoletas.php     # Pruebas para verificar y depurar posibles funciones obsoletas
+  - sh -c "echo  '\n\n\n############### [PRACTICO]: Corriendo pruebas de funciones obsoletas ###############'"
+  - php dev_tools/tests/t_obsoletas.php
 
-  - sh -c "echo  ############### CORRIENDO PRUEBAS:  ARCHIVOS ESPECIFICOS ###############"
-  - php dev_tools/tests/t_archivos.php      # Pruebas de archivos especificos
+  - sh -c "echo  '\n\n\n############### [PRACTICO]: Corriendo pruebas de archivos especificos ###############'"
+  - php dev_tools/tests/t_archivos.php
 
-  - sh -c "echo  ############### CORRIENDO PRUEBAS:  BASE DE DATOS ###############"
+  - sh -c "echo  '\n\n\n############### [PRACTICO]: Corriendo pruebas de bases de datos ###############'"
   - sh -c "mysql --version"
-  - php dev_tools/tests/t_basedatos.php     # Pruebas generales de base de datos
+  - php dev_tools/tests/t_basedatos.php
 
 #  - dev_tools/parche2zip.sh                 # Script para generacion de parches entre versiones
 #  - dev_tools/practico2zip.sh              # Script para empaquetado y distribución de nuevas versiones
