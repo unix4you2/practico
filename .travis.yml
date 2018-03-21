@@ -1,14 +1,30 @@
-language: php
+#	Copyright (C) 2013  John F. Arroyave Gutiérrez
+#						unix4you2@gmail.com
+#
+#	This program is free software; you can redistribute it and/or
+#	modify it under the terms of the GNU General Public License
+#	as published by the Free Software Foundation; either version 2
+#	of the License, or (at your option) any later version.
+#
+#	This program is distributed in the hope that it will be useful,
+#	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#	GNU General Public License for more details.
+#
+#	You should have received a copy of the GNU General Public License
+#	along with this program; if not, write to the Free Software
+#	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#	
+#		Title: TravisCI
+#		Ubicacion *[/.travis.yml]*.  Archivo con definicion de pruebas automaticas
+#       PROBAR SINTAXIS MEDIANTE:    http://yaml-online-parser.appspot.com/
 
+
+language: php
 # Seleccion de las versiones de lenguaje a probar: 5.2.17, 5.3.x, 5.4.x, Hack de face  etc
 # TravisCI no soporta versiones 5.2.x and 5.3.x en Trusty. Se especifica distribucion Precise para esas versiones.
 matrix:
   include:
-    - php: 5.2
-      dist: precise
-      sudo: required
-      services: mysql
-
     - php: 5.3
       dist: precise
       sudo: required
@@ -78,6 +94,7 @@ matrix:
       dist: trusty
       sudo: required
       services: mysql
+      env: DB=pgsql
 
 
 # Especificacion opcional de variables de entorno, por ejemplo para bases de datos
@@ -134,7 +151,7 @@ install:
 
 
 
-# Activacion especifica para MySQL ver 5.7
+# Activacion especifica para MySQL ver 5.7 
     #addons:
     #  apt:
     #    sources:
