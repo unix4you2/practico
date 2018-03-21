@@ -103,16 +103,10 @@ before_script:
 
 # Comandos para construir.  Todos deben retornar cero, cualquier otra salida se considera una falla
 script:
-#  - sh -c "echo  'PRACTICO FRAMEWORK: Corriendo pruebas de funciones obsoletas'"
-#  - php dev_tools/tests/t_obsoletas.php
-
-#  - sh -c "echo  'PRACTICO FRAMEWORK: Corriendo pruebas de archivos especificos'"
-#  - php dev_tools/tests/t_archivos.php
-
-#  - sh -c "echo  'PRACTICO FRAMEWORK: Corriendo pruebas de bases de datos'"
+  - php dev_tools/tests/t_obsoletas.php
+  - php dev_tools/tests/t_archivos.php
   - sh -c "mysql --version"
   - php dev_tools/tests/t_basedatos.php
-
 #  - dev_tools/parche2zip.sh                 # Script para generacion de parches entre versiones
 #  - dev_tools/practico2zip.sh              # Script para empaquetado y distribución de nuevas versiones
 

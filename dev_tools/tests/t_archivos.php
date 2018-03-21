@@ -31,7 +31,8 @@
 	// Definicion de variables para almacenar resultado
 	$estado_final="0";
 	include_once("dev_tools/tests/z_consola.php");
-
+    //Presenta estado sobre TravisCI
+    PCOCLI_MensajeSimple(" EJECUTANDO PRUEBAS DE ARCHIVOS ESPECIFICOS ");
 
 
 	//if (!file_exists("core/configuracion.php")) $estado_final="1";

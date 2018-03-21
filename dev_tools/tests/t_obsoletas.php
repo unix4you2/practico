@@ -31,7 +31,8 @@
 	// Definicion de variables para almacenar resultado
 	$estado_final="0";
 	include_once("dev_tools/tests/z_consola.php");
-
+    //Presenta estado sobre TravisCI
+    PCOCLI_MensajeSimple(" EJECUTANDO PRUEBAS DE FUNCIONES OBSOLETAS ");
 	
 	
 	//ereg_replace()
