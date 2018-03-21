@@ -25,85 +25,98 @@ language: php
 # TravisCI no soporta versiones 5.2.x and 5.3.x en Trusty. Se especifica distribucion Precise para esas versiones.
 matrix:
   include:
+  # Pruebas sobre multiple version PHP y versiones MySQL 5.5 (php 5.3) y MySQL 5.6 (php 5.4+)
     - php: 5.3
       dist: precise
+      env: DB=mysql
       sudo: required
       services: mysql
       
     - php: 5.4
       dist: trusty
+      env: DB=mysql
       sudo: required
       services: mysql
       
     - php: 5.5
       dist: trusty
+      env: DB=mysql
       sudo: required
       services: mysql
       
     - php: 5.6
       dist: trusty
+      env: DB=mysql
       sudo: required
       services: mysql
       
     - php: 7.0
       dist: trusty
+      env: DB=mysql
       sudo: required
       services: mysql
       
     - php: 7.1
       dist: trusty
+      env: DB=mysql
       sudo: required
       services: mysql
       
     - php: hhvm
       dist: trusty
+      env: DB=mysql
       sudo: required
       services: mysql
       
     - php: hhvm-3.3
       dist: trusty
+      env: DB=mysql
       sudo: required
       services: mysql
       
     - php: hhvm-3.6
       dist: trusty
+      env: DB=mysql
       sudo: required
       services: mysql
       
     - php: hhvm-3.9
       dist: trusty
+      env: DB=mysql
       sudo: required
       services: mysql
       
     - php: hhvm-3.12
       dist: trusty
+      env: DB=mysql
       sudo: required
       services: mysql
       
     - php: hhvm-3.15
       dist: trusty
+      env: DB=mysql
       sudo: required
       services: mysql
       
     - php: hhvm-3.18
+      env: DB=mysql
       dist: trusty
       sudo: required
       services: mysql
       
     - php: hhvm-nightly
       dist: trusty
+      env: DB=mysql
       sudo: required
       services: mysql
+
+  # Pruebas sobre multiple version PHP y versiones Postgresql
+    - php: 5.4
+      dist: trusty
+      sudo: required
+      services: postgresql
       env: DB=pgsql
-
-
-# Especificacion opcional de variables de entorno, por ejemplo para bases de datos
-env:
-#  - SYMFONY_VERSION="2.0.*" DB=mysql
-#  - SYMFONY_VERSION="dev-master" DB=mysql
-#  - DB=pgsql
-#  - DB=mongodb
-  - DB=mysql
+      #env: DB=mongodb
 
 # Configura notificaciones (email, IRC, campfire etc)
 notifications:
