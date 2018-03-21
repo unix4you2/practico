@@ -28,15 +28,16 @@
 		Ubicacion *[dev_tools/tests/t_basedatos.php]*.  Pruebas para evaluacion de bases de datos al momento de instalacion
 	*/
 
-    echo "EJECUTANDO PRUEBAS DE BASE DE DATOS";
-
 	// Definicion de variables para almacenar resultado
 	$estado_final="0";
 	$accion="";
+	include_once("dev_tools/tests/z_consola.php");
 	include_once("dev_tools/tests/t_bdconfig.php");
 	include_once("core/conexiones.php");
 	include_once("core/comunes.php");
-	
+
+    //Presenta estado sobre TravisCI
+    PCOCLI_MensajeSimple(" EJECUTANDO PRUEBAS DE BASE DE DATOS ");
 
 	//PASO 1: Agrega las tablas y ejecuta consultas iniciales sobre la base de datos
 		$total_ejecutadas=0;

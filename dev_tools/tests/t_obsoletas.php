@@ -30,7 +30,8 @@
 
 	// Definicion de variables para almacenar resultado
 	$estado_final="0";
-	
+	include_once("dev_tools/tests/z_consola.php");
+
 	
 	
 	//ereg_replace()
