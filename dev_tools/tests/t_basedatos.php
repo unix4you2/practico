@@ -72,6 +72,7 @@
             $ConexionPDO=PCO_NuevaConexionBD($MotorBD,$PuertoBD,$BaseDatos,$ServidorBD,$UsuarioBD,$PasswordBD);
 
             $RegistroVersionMotor=ejecutar_sql($ConsultaVersionMotor)->fetch();
+            echo "\n\r";
             echo "  VERSION: ".$RegistroVersionMotor[0];
 
 
@@ -104,8 +105,7 @@
         
         	//PASO 2: Verifica las tablas creadas en la base de datos
                 echo "\n\r";
-                echo "\n\r";
-                PCOCLI_Mensaje("Resumen de operacion");
+                PCOCLI_Mensaje("Resumen de operaciones motor ".$MotorEvaluado);
         		$resultado=consultar_tablas();
                 $total_tablas=0;
         		while ($registro = $resultado->fetch())

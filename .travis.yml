@@ -200,8 +200,9 @@ install:
 before_script:
   
   #Creamos la base de datos para la instalacion de prueba
-  - sh -c "mysql -e 'create database practico;'"    #Metodo 1
-  #- mysql -e 'create database antvel;'             #Metodo 2
+  #- sh -c "mysql -e 'create database practico;'"    #Metodo 1
+  - mysql -e 'create database practico;'             #Metodo 2
+  - psql -c 'create database practico;' -U postgres
 
   #Creamos el directorio de pruebas en caso de no existir
   #- mkdir dev_tools/tests
