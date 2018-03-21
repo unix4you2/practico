@@ -61,7 +61,7 @@
 					{
 					    PCOCLI_Mensaje("ERROR DURANTE EJECUCION SQL:");
 					    echo "\n\r";
-						echo "SQL: ".$consulta." ==>> ".$ErrorPDO->getMessage();
+						echo "SQL EJECUTADO: ".$consulta." ==>> ".$ErrorPDO->getMessage();
 						$hay_error=1;
 					}
 			}
