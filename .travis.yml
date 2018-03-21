@@ -5,35 +5,79 @@ language: php
 matrix:
   include:
     - php: 5.2
-           dist: precise
+      dist: precise
+      sudo: required
+      services: mysql
+
     - php: 5.3
-           dist: precise
+      dist: precise
+      sudo: required
+      services: mysql
+      
     - php: 5.4
-           dist: trusty
+      dist: trusty
+      sudo: required
+      services: mysql
+      
     - php: 5.5
-           dist: trusty
+      dist: trusty
+      sudo: required
+      services: mysql
+      
     - php: 5.6
-           dist: trusty
+      dist: trusty
+      sudo: required
+      services: mysql
+      
     - php: 7.0
-           dist: trusty
+      dist: trusty
+      sudo: required
+      services: mysql
+      
     - php: 7.1
-           dist: trusty
+      dist: trusty
+      sudo: required
+      services: mysql
+      
     - php: hhvm
-           dist: trusty
+      dist: trusty
+      sudo: required
+      services: mysql
+      
     - php: hhvm-3.3
-           dist: trusty
+      dist: trusty
+      sudo: required
+      services: mysql
+      
     - php: hhvm-3.6
-           dist: trusty
+      dist: trusty
+      sudo: required
+      services: mysql
+      
     - php: hhvm-3.9
-           dist: trusty
+      dist: trusty
+      sudo: required
+      services: mysql
+      
     - php: hhvm-3.12
-           dist: trusty
+      dist: trusty
+      sudo: required
+      services: mysql
+      
     - php: hhvm-3.15
-           dist: trusty
+      dist: trusty
+      sudo: required
+      services: mysql
+      
     - php: hhvm-3.18
-           dist: trusty
+      dist: trusty
+      sudo: required
+      services: mysql
+      
     - php: hhvm-nightly
-           dist: trusty
+      dist: trusty
+      sudo: required
+      services: mysql
 
 
 # Especificacion opcional de variables de entorno, por ejemplo para bases de datos
@@ -88,8 +132,7 @@ install:
   #Otra forma: pear install PHP_CodeSniffer-2.0.0RC4
   #Otra forma: pyrus install pear/PHP_CodeSniffer
 
-services:
-  - mysql
+
 
 # Activacion especifica para MySQL ver 5.7
     #addons:
@@ -100,7 +143,7 @@ services:
     #      - mysql-server
     #      - mysql-client
 
-sudo: required
+
 
 # Ejecuta scripts antes de correr las pruebas, puede utilizar variables de entorno
 before_script:
