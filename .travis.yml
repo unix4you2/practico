@@ -1,20 +1,19 @@
 language: php
+
+# Seleccion de las versiones de lenguaje a probar: 5.2.17, 5.3.x, 5.4.x, Hack de face  etc
+# TravisCI no soporta versiones 5.2.x and 5.3.x en Trusty. Se especifica distribucion Precise para esas versiones.
+matrix:
+  include:
+    - php: 5.2
+      dist: precise
+    - php: 5.3
+      dist: precise
 php:
-  # Seleccion de las versiones de lenguaje a probar: 5.2.17, 5.3.x, 5.4.x, Hack de face  etc
-  - "5.2"
-    dist: precise
-  - "5.3"
-    dist: precise
   - "5.4"
-    dist: trusty
   - "5.5"
-    dist: trusty
   - "5.6"
-    dist: trusty
   - "7.0"
-    dist: trusty
   - "7.1"
-    dist: trusty
   - "hhvm"
 
 # Especificacion opcional de variables de entorno, por ejemplo para bases de datos
@@ -74,7 +73,7 @@ addons:
       - mysql-server
 
 #Indica la distribucion a utilizar: trusty, precise, etc
-#dist: trusty
+dist: trusty
 
 sudo: required
 
