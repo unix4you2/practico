@@ -81,10 +81,10 @@ services:
 
 addons:
   apt:
-    if: php != 5.3
         sources:
           - mysql-5.7-trusty
-
+            if: php != "5.3"
+    
     packages:
       - mysql-server
 
