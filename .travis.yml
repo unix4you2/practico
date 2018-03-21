@@ -31,6 +31,7 @@ matrix:
       env: DB=mysql
       sudo: required
       services: mysql
+      services: postgresql
       
     - php: 5.4
       dist: trusty
@@ -117,6 +118,7 @@ matrix:
       services: postgresql
       env: DB=pgsql
       #env: DB=mongodb
+
 
 # Configura notificaciones (email, IRC, campfire etc)
 notifications:
