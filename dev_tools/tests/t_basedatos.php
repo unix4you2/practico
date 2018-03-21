@@ -67,8 +67,9 @@
                     $TablasApp='app_';
                     $ConsultaVersionMotor="SELECT version()";
                 }
-            //Recarga archivo de conexiones para reescribir variables de conexion
-	        include("core/conexiones.php");
+            //Recarga archivo de conexiones para reescribir variables de conexion y redefine la misma justo despues segun el motor
+            include_once("core/conexiones.php");
+            $ConexionPDO=PCO_NuevaConexionBD($MotorBD,$PuertoBD,$BaseDatos,$ServidorBD,$UsuarioBD,$PasswordBD);
 
             $RegistroVersionMotor=ejecutar_sql($ConsultaVersionMotor)->fetch();
             echo "  VERSION: ".$RegistroVersionMotor[0];
