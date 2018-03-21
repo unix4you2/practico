@@ -8,6 +8,115 @@ matrix:
       dist: precise
     - php: 5.3
       dist: precise
+
+
+matrix:
+  include:
+    - php: 5.4
+        addons:
+          apt:
+            sources:
+              - mysql-5.7-trusty
+            
+            packages:
+              - mysql-server
+    - php: 5.5
+        addons:
+          apt:
+            sources:
+              - mysql-5.7-trusty
+            
+            packages:
+              - mysql-server
+    - php: 5.6
+        addons:
+          apt:
+            sources:
+              - mysql-5.7-trusty
+            
+            packages:
+              - mysql-server
+    - php: 7.0
+        addons:
+          apt:
+            sources:
+              - mysql-5.7-trusty
+            
+            packages:
+              - mysql-server
+    - php: 7.1
+        addons:
+          apt:
+            sources:
+              - mysql-5.7-trusty
+            
+            packages:
+              - mysql-server
+    - php: hhvm
+        addons:
+          apt:
+            sources:
+              - mysql-5.7-trusty
+            
+            packages:
+              - mysql-server
+    - php: hhvm-3.3
+        addons:
+          apt:
+            sources:
+              - mysql-5.7-trusty
+            
+            packages:
+              - mysql-server
+    - php: hhvm-3.6
+        addons:
+          apt:
+            sources:
+              - mysql-5.7-trusty
+            
+            packages:
+              - mysql-server
+    - php: hhvm-3.9
+        addons:
+          apt:
+            sources:
+              - mysql-5.7-trusty
+            
+            packages:
+              - mysql-server
+    - php: hhvm-3.12
+        addons:
+          apt:
+            sources:
+              - mysql-5.7-trusty
+            
+            packages:
+              - mysql-server
+    - php: hhvm-3.15
+        addons:
+          apt:
+            sources:
+              - mysql-5.7-trusty
+            
+            packages:
+              - mysql-server
+    - php: hhvm-3.18
+        addons:
+          apt:
+            sources:
+              - mysql-5.7-trusty
+            
+            packages:
+              - mysql-server
+    - php: hhvm-nightly
+        addons:
+          apt:
+            sources:
+              - mysql-5.7-trusty
+            
+            packages:
+              - mysql-server
+
 php:
   - 5.4
   - 5.5
@@ -79,14 +188,7 @@ install:
 services:
   - mysql
 
-addons:
-  apt:
-        sources:
-          - mysql-5.7-trusty
-            if: php != "5.3"
-    
-    packages:
-      - mysql-server
+
 
 #Indica la distribucion a utilizar: trusty, precise, etc
 dist: trusty
