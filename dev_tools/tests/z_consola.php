@@ -151,6 +151,7 @@ function PCOCLI_MensajeSimple($Mensaje)
 */
 function PCOCLI_Mensaje($Mensaje)
 	{
+		global $AnchoConsola;
 		PCOCLI_Separador("-",$AnchoConsola);
 		echo "\n\r";
 		echo $Mensaje;

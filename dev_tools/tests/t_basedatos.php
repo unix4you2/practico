@@ -60,20 +60,23 @@
 				catch( PDOException $ErrorPDO)
 					{
 					    PCOCLI_Mensaje("ERROR DURANTE EJECUCION SQL:");
-						echo "\n\rSQL: ".$consulta." ==>> ".$ErrorPDO->getMessage();
+					    echo "\n\r";
+						echo "SQL: ".$consulta." ==>> ".$ErrorPDO->getMessage();
 						$hay_error=1;
 					}
 			}
 
 	//PASO 2: Verifica las tablas creadas en la base de datos
-		echo '\n\r\n\r';
+        echo "\n\r";
+        echo "\n\r";
         PCOCLI_Mensaje("Resumen de operacion");
 		$resultado=consultar_tablas();
         $total_tablas=0;
 		while ($registro = $resultado->fetch())
 			{
 				$total_registros=ContarRegistros($registro["0"]);
-				echo '\n\r  Tabla: '.$registro[0].'='.$total_registros.' registros. ';
+				echo "\n\r";
+				echo 'Tabla: '.$registro[0].'='.$total_registros.' registros. ';
                 $total_tablas++;
 			}
         echo '  TOTAL TABLAS: '.$total_tablas;
