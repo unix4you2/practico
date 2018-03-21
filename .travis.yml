@@ -25,15 +25,17 @@ language: php
 # TravisCI no soporta versiones 5.2.x and 5.3.x en Trusty. Se especifica distribucion Precise para esas versiones.
 matrix:
   include:
-  # Pruebas sobre multiple version PHP y versiones MySQL 5.5 (php 5.3) y MySQL 5.6 (php 5.4+)
+  # Definicion de pruebas sobre multiples versiones de lenguaje y motor
     - php: 5.3
       dist: precise
-      env: DB=mysql
+      env:
+      - DB1=mysql
+      - DB2=pgsql
       sudo: required
       services:
       - mysql
       - postgresql
-      
+
     - php: 5.4
       dist: trusty
       env: DB=mysql
@@ -41,7 +43,24 @@ matrix:
       services:
       - mysql
       - postgresql
-      
+
+    - php: 5.4
+      dist: trusty
+      env:
+      - DB1=mysql57
+      - DB2=pgsql
+      sudo: required
+      services:
+      - mysql
+      - postgresql
+      addons:
+      apt:
+      sources:
+      - mysql-5.7-trusty
+      packages:
+      - mysql-server
+      - mysql-client
+
     - php: 5.5
       dist: trusty
       env: DB=mysql
@@ -184,36 +203,15 @@ install:
   #Otra forma: pyrus install pear/PHP_CodeSniffer
 
 
-
-# Activacion especifica para MySQL ver 5.7 
-    #addons:
-    #  apt:
-    #    sources:
-    #      - mysql-5.7-trusty
-    #    packages:
-    #      - mysql-server
-    #      - mysql-client
-
-
-
 # Ejecuta scripts antes de correr las pruebas, puede utilizar variables de entorno
 before_script:
   
-  #Creamos la base de datos para la instalacion de prueba
-  #- sh -c "mysql -e 'create database practico;'"    #Metodo 1
-  - mysql -e 'create database practico;'             #Metodo 2
+  #Creamos la base de datos para la instalacion de prueba sobre cada motor
+  - mysql -e 'create database practico;'
   - psql -c 'create database practico;' -U postgres
-
-  #Creamos el directorio de pruebas en caso de no existir
-  #- mkdir dev_tools/tests
 
   #Asegura permisos completos en la carpeta de pruebas
   - chmod -R 777 dev_tools/tests
-
-  #Ejecuta las pruebas para codigo PHP obsoleto de acuerdo la version de prueba utilizada
-  #- phpcs --standard=PEAR index.php
-  #Otra forma: phpcs --standard=Zend index.php
-  #Otra forma: phpcs --standard=PHP53Compatibility core/
 
   #  - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS hello_world_test;" -U postgres; fi
   #  - if [[ "$DB" == "pgsql" ]]; then psql -c "create database hello_world_test;" -U postgres; fi
@@ -223,7 +221,6 @@ before_script:
 script:
   - php dev_tools/tests/t_obsoletas.php
   - php dev_tools/tests/t_archivos.php
-  - sh -c "mysql --version"
   - php dev_tools/tests/t_basedatos.php
 #  - dev_tools/parche2zip.sh                 # Script para generacion de parches entre versiones
 #  - dev_tools/practico2zip.sh              # Script para empaquetado y distribución de nuevas versiones

@@ -104,8 +104,7 @@
         			}
         
         	//PASO 2: Verifica las tablas creadas en la base de datos
-                echo "\n\r";
-                PCOCLI_Mensaje("Resumen de operaciones motor ".$MotorEvaluado);
+                PCOCLI_Mensaje("RESUMEN DE OPERACIONES MOTOR: ".$MotorEvaluado);
         		$resultado=consultar_tablas();
                 $total_tablas=0;
         		while ($registro = $resultado->fetch())
