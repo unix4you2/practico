@@ -9,9 +9,6 @@ matrix:
     - php: 5.3
       dist: precise
 
-
-matrix:
-  include:
     - php: 5.4
         addons:
           apt:
