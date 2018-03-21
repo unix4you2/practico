@@ -375,41 +375,6 @@ if ($PCO_Accion=="aplicar_parche")
 				die();
 			}
 
-		//Divide los queries de un cadena
-		function split_sql($sql)
-			{
-				$sql = trim($sql);
-				$sql = preg_replace("/\n#[^\n]*\n/", "\n", $sql);
-
-				$buffer = array();
-				$ret = array();
-				$in_string = false;
-
-				for($i=0; $i<strlen($sql)-1; $i++) {
-					if($sql[$i] == ";" && !$in_string) {
-						$ret[] = substr($sql, 0, $i);
-						$sql = substr($sql, $i + 1);
-						$i = 0;
-					}
-
-					if($in_string && ($sql[$i] == $in_string) && $buffer[1] != "\\") {
-						$in_string = false;
-					}
-					elseif(!$in_string && ($sql[$i] == '"' || $sql[$i] == "'") && (!isset($buffer[0]) || $buffer[0] != "\\")) {
-						$in_string = $sql[$i];
-					}
-					if(isset($buffer[1])) {
-						$buffer[0] = $buffer[1];
-					}
-					$buffer[1] = $sql[$i];
-				}
-
-				if(!empty($sql)) {
-					$ret[] = $sql;
-				}
-				return($ret);
-			}
-
 		abrir_ventana($MULTILANG_Aplicando.': '.$archivo_cargado, 'panel-primary');
 		echo '<table class="table table-unbordered table-condensed"><tr><td>
 		<u>'.$MULTILANG_ActDesde.' '.$version_actual.' ---> '.$version_final.':</u><br><br>';
@@ -472,7 +437,7 @@ if ($PCO_Accion=="aplicar_parche")
 				$total_consultas= fread($archivo_consultas,filesize($RutaScriptSQL));
 				fclose($archivo_consultas);
 
-				$arreglo_consultas = split_sql($total_consultas);
+				$arreglo_consultas = PCO_SegmentarSQL($total_consultas);
 				foreach($arreglo_consultas as $consulta)
 					{
 						try
@@ -511,4 +476,3 @@ if ($PCO_Accion=="aplicar_parche")
 		cerrar_ventana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
-

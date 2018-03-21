@@ -50,7 +50,7 @@
 			$total_consultas= fread($archivo_consultas,filesize($RutaScriptSQL));
 			fclose($archivo_consultas);
  
-			$arreglo_consultas = split_sql($total_consultas);
+			$arreglo_consultas = PCO_SegmentarSQL($total_consultas);
 			foreach($arreglo_consultas as $consulta)
 				{
 					try

@@ -2724,6 +2724,10 @@ echo '
 */
 if ($PCO_Accion=="mis_informes")
 	{
+        $LimiteInferiorBusqueda="-10000";
+        if ($ModoDesarrolladorPractico!="-10000")
+            $LimiteInferiorBusqueda=0;
+
 			// Carga las opciones del ACORDEON DE INFORMES
 			echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 			// Si el usuario es diferente a un Administrador agrega condiciones al query
@@ -2732,7 +2736,7 @@ if ($PCO_Accion=="mis_informes")
 					$Complemento_tablas=",".$TablasCore."usuario_informe";
 					$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
-			$resultado=ejecutar_sql("SELECT COUNT(*) as conteo,categoria FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE 1 ".@$Complemento_condicion." GROUP BY categoria ORDER BY categoria");
+			$resultado=ejecutar_sql("SELECT COUNT(*) as conteo,categoria FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE id>=$LimiteInferiorBusqueda ".@$Complemento_condicion." GROUP BY categoria ORDER BY categoria");
 
 			// Imprime las categorias encontradas para el usuario
 			while($registro = $resultado->fetch())
@@ -2749,7 +2753,7 @@ if ($PCO_Accion=="mis_informes")
 							$Complemento_tablas=",".$TablasCore."usuario_informe";
 							$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 						}
-					$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE 1 AND categoria='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY titulo");
+					$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE id>=$LimiteInferiorBusqueda AND categoria='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY titulo");
 
 					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
 						{

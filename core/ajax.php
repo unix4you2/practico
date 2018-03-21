@@ -114,18 +114,12 @@ if ($PCO_Accion=="valor_campo_tabla")
     {
         if($condicion=="") $condicion="1=1";
         $registro=ejecutar_sql("SELECT $campo FROM $tabla WHERE $condicion ")->fetch();
+        @ob_clean();
         if ($registro[0]!="")
-            {
-                @ob_clean();
-                echo trim($registro[0]);
-            }
+            echo trim($registro[0]);
         else
-            {
-                echo "";
-            }
+            echo "";
     }
-
-
 
 
 /* ################################################################## */
@@ -199,4 +193,3 @@ if ($PCO_Accion=="valor_campo_tabla")
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 		}
-

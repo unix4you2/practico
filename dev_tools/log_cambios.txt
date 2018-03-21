@@ -15,10 +15,13 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 index.php
+core/ajax.php
+core/actualizacion.php
 core/comunes.php
 core/objetos.php
 core/monitoreo.php
 core/formularios.php
+core/informes.php
 core/kanban.php
 core/menus.php
 core/marco_admin.php
@@ -63,6 +66,7 @@ LogCambios="
 * Added: La impresion de valores de campos en formato de etiqueta es capaz de identificar si el contenido es una imagen bajo formatos data:image y la agrega como tal a la salida del formulario. 
 * Added: Mejorado el modulo de auditorias, ahora permite obtener movimientos filtrados e indicadores de movimientos por día, movimientos por usuarios y horas pico del sistema.
 * Enhan: Actualización de PMyDB 17.2 a 17.9
+* Enhan: Indicadores numéricos sobre el menu de configuración no son usados como numeración, ahora indican la cantidad real de elementos dentro del item. 
 * Enhan: Se protegen funciones adicionales para las instalaciones en modo de demostracion y se agregan mensajes aclaratorios. Se incluye Pcoder, PMyDB y Explorador de archivos.
 * Enhan: Las listas de seleccion en sus campos de opciones (visuales) permiten realizar operaciones SQL.  De ahora en adelante el nombre de la tabla para consulta será tomado exclusivamente del campo de lista de valores (que se supone es el mismo origen de lista de opciones para todas las versiones previas). 
 * Enhan: Los botones de informes ahora transportan el valor de la variable correspondiente a la primera columna del informe cuando la acción de botón consisten en llamar a otro informe.  Esto es útil para realizar informes que requieren como insumo la selección de algún valor previo desde otro informe.
@@ -77,12 +81,14 @@ LogCambios="
 * Enhan: Accion interna ver_seguimiento_monitoreo ha sido cambiada a PCO_PanelAuditoriaMovimientos
 * Enhan: Centralizados los formularios comunes sobre un único archivo.
 * Enhan: Eliminados formularios innecesarios de acceso a opciones internas.
+* Enhan: Mejorado codigo de segmentacion de SQL en funciones de instalación, actualización y guiones para pruebas de bases de datos en TravisCI.
 * Enhan: Agregadas etiquetas de ancho y alto durante la edición de elementos de formularios para facilitar su identificación.
 * Fixed: Procesos de importacion de tablas consideran los valores entregados por los parametros de complementa a condiciones de filtrado correctamente.
 * Fixed: Validaciones de ejecucion sobre webservices.  Si los WS previos han sido creados bajo los estandares y requerimientos de operacion no se deberian tener problemas durante migraciones.  Se recomienda verificar que los llamados a WS previos se encuentren correctamente parametrizados.
 * Fixed: Retirados de la creacion y edicion de menues y los formularios los elementos internos de Práctico (Forms e informes) que no son necesarios para el usuario estándar.
 * Fixed: Botones de busqueda automaticos sobre campos de texto y listas de seleccion operan sin problema sobre formularios donde se ha personalizado su nombre.
 * Fixed: Texto de advertencia en lanzamiento de PMyDB
+* Fixed: Opción de Mis Informes presenta ahora solamente los informes con acceso para el usuario, incluyendo cuando se tiene o no activado el modo de desarrollo del Framework.
 * Fixed: Limpieza de sesion despues de un primer intento de usuario, clave o captcha inválido.  Al siguiente intento correcto pasará sin problemas la autenticación.
 * Fixed: Sistema de chat valida primero por sesión activa para evitar error 500 al tratar de buscar mensajes sin usuario definido.
 "

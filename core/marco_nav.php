@@ -155,7 +155,6 @@
 								<a data-toggle="modal" href="#myModalCONFIGURACION">
 									<div>
 										<i class="fa fa-wrench fa-fw"></i> <?php echo $MULTILANG_ConfiguracionGeneral; ?>
-										<span class="pull-right text-muted small">1</span>
 									</div>
 								</a>
 							</li>
@@ -164,7 +163,6 @@
 								<a data-toggle="modal" href="#myModalPARAMETROS">
 									<div>
 										<i class="fa fa-tasks fa-fw"></i> <?php echo $MULTILANG_ParamApp; ?>
-										<span class="pull-right text-muted small">2</span>
 									</div>
 								</a>
 							</li>
@@ -173,7 +171,7 @@
 								<a href="javascript:document.PCO_EditarConfiguracionOAuth.submit();">
 									<div>
 										<i class="fa fa-soundcloud fa-fw"></i> <?php echo $MULTILANG_OauthButt; ?>
-										<span class="pull-right text-muted small">3</span>
+										<span class="pull-right text-muted small"><?php echo PCO_ContarProveedoresOAuthConfigurados(); ?></span>
 									</div>
 								</a>
 							</li>
@@ -182,7 +180,7 @@
 								<a data-toggle="modal" href="#myModalWEBSERVICES">
 									<div>
 										<i class="fa fa-link fa-fw"></i> <?php echo $MULTILANG_WSConfigButt; ?>
-										<span class="pull-right text-muted small">4</span>
+										<span class="pull-right text-muted small"><?php echo ContarRegistros($TablasCore."llaves_api",""); ?></span>
 									</div>
 								</a>
 							</li>
@@ -194,7 +192,7 @@
 											<input type="Hidden" name="PCO_Accion" value="administrar_replicacion">
 										</form>
 										<i class="fa fa-cubes fa-fw"></i> <?php echo $MULTILANG_ReplicaTitulo; ?>
-										<span class="pull-right text-muted small">5</span>
+										<span class="pull-right text-muted small"><?php echo ContarRegistros($TablasCore."replicasbd",""); ?></span>
 									</div>
 								</a>
 							</li>
@@ -206,7 +204,7 @@
 											<input type="Hidden" name="PCO_Accion" value="administrar_monitoreo">
 										</form>
 										<i class="fa fa-lightbulb-o fa-fw"></i> <?php echo $MULTILANG_MonTitulo; ?>
-										<span class="pull-right text-muted small">6</span>
+										<span class="pull-right text-muted small"><?php echo ContarRegistros($TablasCore."monitoreo",""); ?></span>
 									</div>
 								</a>
 							</li>
@@ -218,7 +216,6 @@
 											<input type="Hidden" name="PCO_Accion" value="actualizar_practico">
 										</form>
 										<i class="fa fa-download fa-fw"></i> <?php echo $MULTILANG_Actualizacion; ?>/<?php echo $MULTILANG_Copias; ?>
-										<span class="pull-right text-muted small">7</span>
 									</div>
 								</a>
 							</li>

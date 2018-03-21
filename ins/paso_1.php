@@ -49,6 +49,7 @@
                     //informar_prueba_escritura("../core/configuracion.php",2);
                     @informar_prueba_escritura("../tmp",1);
                     @informar_prueba_escritura("../ins",1);
+                    @informar_prueba_escritura("../xml",1);
                 ?>
 
 		</td>
@@ -91,4 +92,3 @@
 
 	cerrar_barra_estado();
 ?>
-

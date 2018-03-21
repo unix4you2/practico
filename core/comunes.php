@@ -3582,6 +3582,40 @@ function PCO_CrearFormularioOauth($sitio)
         // Retorna valor de activacion a variable AlMenosUnOAuth
         return $FormularioProveedor;
     }    
+
+
+function PCO_ContarProveedoresOAuthConfigurados()
+    {
+        $Conteo=0;
+        global $APIGoogle_ClientId,$APIGoogle_ClientSecret,$APIFacebook_ClientId,$APIFacebook_ClientSecret,$APILinkedIn_ClientId,$APILinkedIn_ClientSecret,$APIInstagram_ClientId,$APIInstagram_ClientSecret,$APIDropbox_ClientId,$APIDropbox_ClientSecret,$APIMicrosoft_ClientId,$APIMicrosoft_ClientSecret,$APIFlickr_ClientId,$APIFlickr_ClientSecret,$APITwitter_ClientId,$APITwitter_ClientSecret,$APIFoursquare_ClientId,$APIFoursquare_ClientSecret,$APIXING_ClientId,$APIXING_ClientSecret,$APISalesforce_ClientId,$APISalesforce_ClientSecret,$APIBitbucket_ClientId,$APIBitbucket_ClientSecret,$APIYahoo_ClientId,$APIYahoo_ClientSecret,$APIBox_ClientId,$APIBox_ClientSecret,$APIDisqus_ClientId,$APIDisqus_ClientSecret,$APIEventful_ClientId,$APIEventful_ClientSecret,$APISurveyMonkey_ClientId,$APISurveyMonkey_ClientSecret,$APIRightSignature_ClientId,$APIRightSignature_ClientSecret,$APIFitbit_ClientId,$APIFitbit_ClientSecret,$APIScoopIt_ClientId,$APIScoopIt_ClientSecret,$APITumblr_ClientId,$APITumblr_ClientSecret,$APIStockTwits_ClientId,$APIStockTwits_ClientSecret,$APIVK_ClientId,$APIVK_ClientSecret,$APIWithings_ClientId,$APIWithings_ClientSecret;
+        // Crea los formularios de redireccion segun proveedor
+        $CadenaProveedoresOAuthDisponibles="";
+        if ($APIGoogle_ClientId!=''			&& $APIGoogle_ClientSecret!='')			$Conteo++;
+        if ($APIFacebook_ClientId!=''		&& $APIFacebook_ClientSecret!='')		$Conteo++;
+        if ($APILinkedIn_ClientId!=''		&& $APILinkedIn_ClientSecret!='')		$Conteo++;
+        if ($APIInstagram_ClientId!=''		&& $APIInstagram_ClientSecret!='')		$Conteo++;
+        if ($APIDropbox_ClientId!=''		&& $APIDropbox_ClientSecret!='')		$Conteo++;
+        if ($APIMicrosoft_ClientId!=''		&& $APIMicrosoft_ClientSecret!='')		$Conteo++;
+        if ($APIFlickr_ClientId!=''			&& $APIFlickr_ClientSecret!='')			$Conteo++;
+        if ($APITwitter_ClientId!=''		&& $APITwitter_ClientSecret!='')		$Conteo++;
+        if ($APIFoursquare_ClientId!=''		&& $APIFoursquare_ClientSecret!='')		$Conteo++;
+        if ($APIXING_ClientId!=''			&& $APIXING_ClientSecret!='')			$Conteo++;
+        if ($APISalesforce_ClientId!=''		&& $APISalesforce_ClientSecret!='')		$Conteo++;
+        if ($APIBitbucket_ClientId!=''		&& $APIBitbucket_ClientSecret!='')		$Conteo++;
+        if ($APIYahoo_ClientId!=''			&& $APIYahoo_ClientSecret!='')			$Conteo++;
+        if ($APIBox_ClientId!=''			&& $APIBox_ClientSecret!='')			$Conteo++;
+        if ($APIDisqus_ClientId!=''			&& $APIDisqus_ClientSecret!='')			$Conteo++;
+        if ($APIEventful_ClientId!=''		&& $APIEventful_ClientSecret!='')		$Conteo++;
+        if ($APISurveyMonkey_ClientId!=''	&& $APISurveyMonkey_ClientSecret!='')	$Conteo++;
+        if ($APIRightSignature_ClientId!=''	&& $APIRightSignature_ClientSecret!='')	$Conteo++;
+        if ($APIFitbit_ClientId!=''			&& $APIFitbit_ClientSecret!='')			$Conteo++;
+        if ($APIScoopIt_ClientId!=''		&& $APIScoopIt_ClientSecret!='')		$Conteo++;
+        if ($APITumblr_ClientId!=''			&& $APITumblr_ClientSecret!='')			$Conteo++;
+        if ($APIStockTwits_ClientId!=''		&& $APIStockTwits_ClientSecret!='')		$Conteo++;
+        if ($APIVK_ClientId!=''				&& $APIVK_ClientSecret!='')				$Conteo++;
+        if ($APIWithings_ClientId!=''		&& $APIWithings_ClientSecret!='')		$Conteo++;
+        return $Conteo;
+    }
     
 
 function PCO_GenerarOpcionesProveedoresOAuth()
@@ -3619,7 +3653,7 @@ function PCO_GenerarOpcionesProveedoresOAuth()
 function PCO_VentanaLogin()
     {
 		/*
-			Function: ventana_login
+			Function: PCO_VentanaLogin
 			Despliega la ventana de ingreso al sistema con el formulario para usuario, contrasena y captcha.
 		*/
 		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor,$MULTILANG_OauthButt,$NombreRAD,$Auth_PresentarOauthInicio,$TipoCaptchaLogin;
