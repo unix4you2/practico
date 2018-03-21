@@ -111,14 +111,6 @@ matrix:
       sudo: required
       services: mysql
 
-  # Pruebas sobre multiple version PHP y versiones Postgresql
-    - php: 5.4
-      dist: trusty
-      sudo: required
-      services: postgresql
-      env: DB=pgsql
-      #env: DB=mongodb
-
 
 # Configura notificaciones (email, IRC, campfire etc)
 notifications:

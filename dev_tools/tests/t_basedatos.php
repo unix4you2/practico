@@ -31,21 +31,49 @@
 	// Definicion de variables para almacenar resultado
 	$estado_final="0";
 	include_once("dev_tools/tests/z_consola.php");
-	include_once("dev_tools/tests/t_bdconfig.php");
-	include_once("core/conexiones.php");
 	include_once("core/comunes.php");
 	$accion="";
 	$hay_error=0;
 
-    //Presenta estado sobre TravisCI
-    PCOCLI_MensajeSimple(" EJECUTANDO PRUEBAS DE BASE DE DATOS ");
-    
     //Define un arreglo con los motores a probar
     $MotoresPruebas=array("mysql", "pgsql");
 
     //Recorre el arreglo de motores y ejecuta el script en cada uno
     foreach ($MotoresPruebas as $MotorEvaluado)
         {
+            //Presenta estado sobre TravisCI
+            PCOCLI_MensajeSimple(" Pruebas sobre motor ".$MotorEvaluado);
+            if ($MotorEvaluado=="mysql")
+                {
+                    $ServidorBD='127.0.0.1';
+                    $BaseDatos='practico';
+                    $UsuarioBD='root';
+                    $PasswordBD='';
+                    $MotorBD=$MotorEvaluado;
+                    $PuertoBD='';
+                    $TablasCore='core_';
+                    $TablasApp='app_';
+                    $ConsultaVersionMotor="SELECT VERSION()";
+                }
+            if ($MotorEvaluado=="pgsql")
+                {
+                    $ServidorBD='127.0.0.1';
+                    $BaseDatos='practico';
+                    $UsuarioBD='postgres';
+                    $PasswordBD='';
+                    $MotorBD=$MotorEvaluado;
+                    $PuertoBD='';
+                    $TablasCore='core_';
+                    $TablasApp='app_';
+                    $ConsultaVersionMotor="SELECT version()";
+                }
+            //Recarga archivo de conexiones para reescribir variables de conexion
+	        include("core/conexiones.php");
+
+            $RegistroVersionMotor=ejecutar_sql($ConsultaVersionMotor)->fetch();
+            echo "  VERSION: ".$RegistroVersionMotor[0];
+
+
         	//PASO 1: Agrega las tablas y ejecuta consultas iniciales sobre la base de datos
         		$total_ejecutadas=0;
         		//Abre el archivo con los queries dependiendo del motor
