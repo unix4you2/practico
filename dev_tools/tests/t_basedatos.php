@@ -30,11 +30,12 @@
 
 	// Definicion de variables para almacenar resultado
 	$estado_final="0";
-	$accion="";
 	include_once("dev_tools/tests/z_consola.php");
 	include_once("dev_tools/tests/t_bdconfig.php");
 	include_once("core/conexiones.php");
 	include_once("core/comunes.php");
+	$accion="";
+	$hay_error=0;
 
     //Presenta estado sobre TravisCI
     PCOCLI_MensajeSimple(" EJECUTANDO PRUEBAS DE BASE DE DATOS ");
@@ -58,23 +59,26 @@
 					}
 				catch( PDOException $ErrorPDO)
 					{
-						echo "SQL: ".$consulta." ==>> ".$ErrorPDO->getMessage();
+					    PCOCLI_Mensaje("ERROR DURANTE EJECUCION SQL:");
+						echo "\n\rSQL: ".$consulta." ==>> ".$ErrorPDO->getMessage();
 						$hay_error=1;
 					}
 			}
 
 	//PASO 2: Verifica las tablas creadas en la base de datos
+		echo '\n\r\n\r';
+        PCOCLI_Mensaje("Resumen de operacion");
 		$resultado=consultar_tablas();
         $total_tablas=0;
 		while ($registro = $resultado->fetch())
 			{
 				$total_registros=ContarRegistros($registro["0"]);
-				echo 'Tabla: '.$registro[0].'='.$total_registros.' registros. ';
+				echo '\n\r  Tabla: '.$registro[0].'='.$total_registros.' registros. ';
                 $total_tablas++;
 			}
-        echo 'Total tablas: '.$total_tablas;
+        echo '  TOTAL TABLAS: '.$total_tablas;
 
-	if (@$hay_error)
+	if (@$hay_error==1)
 		$estado_final=1;
 
 	// Devuelve resultado final de las pruebas

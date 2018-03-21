@@ -68,7 +68,7 @@ branches:
 
 # Comandos para instalar prerequisitos o dependencias
 install:
-  - pear install pear/PHP_CodeSniffer
+  #- pear install pear/PHP_CodeSniffer
   - phpenv rehash
   #Verificamos la instalacion y el soporte de estandares
   #- phpcs -i

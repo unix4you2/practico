@@ -8,7 +8,7 @@ CREATE TABLE core_parametros (
   fecha_lanzamiento date,
   licencia text,
   creditos text,
-  funciones_personalizadas text NULL DEFAULT '',
+  funciones_personalizadas text,
   federado_servidor varchar(255) NULL DEFAULT '',
   federado_usuario varchar(255) NULL DEFAULT '',
   federado_clave varchar(255) NULL DEFAULT '',

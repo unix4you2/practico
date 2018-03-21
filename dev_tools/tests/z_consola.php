@@ -29,7 +29,7 @@ $AnchoConsola=80;	//Tamano deseado para entornos de ejecucion sobre consolas de 
 //######################################################################
 //######################################################################
 /*
-	Function: Separador
+	Function: PCOCLI_Separador
 	Para ejecucion sobre consolas (CLI), presenta una linea de separacion con determinado caracter
 
 	Variables minimas de entrada:
@@ -54,7 +54,7 @@ function PCOCLI_Separador($Caracter='-',$AnchoConsola)
 //######################################################################
 //######################################################################
 /*
-	Function: ColorTextoConsola
+	Function: PCOCLI_ColorTextoConsola
 	Para ejecucion sobre consolas (CLI), esteblece el color del texto para la consola mediante caracteres de escape BASH
 
 	Variables minimas de entrada:
@@ -111,7 +111,7 @@ function PCOCLI_ColorTextoConsola($Foreground="",$Background="")
 //######################################################################
 //######################################################################
 /*
-	Function: MensajeError
+	Function: PCOCLI_MensajeSimple
 	Presenta mensajes de error obtenidos durante la ejecucion de las operaciones sobre la API
 
 	Variables minimas de entrada:
@@ -134,3 +134,24 @@ function PCOCLI_MensajeSimple($Mensaje)
 	}
 
 
+//######################################################################
+//######################################################################
+/*
+	Function: MensajeError
+	Presenta mensajes de error obtenidos durante la ejecucion de las operaciones sobre la API
+
+	Variables minimas de entrada:
+		Mensaje - Cadena con todo el mensaje que se debe presentar al usuario
+
+	Salida de la funcion:
+		* Mensaje formateado en la terminal
+
+	Ver tambien:
+		<ColorTextoConsola> <Separador>
+*/
+function PCOCLI_Mensaje($Mensaje)
+	{
+		PCOCLI_Separador("-",$AnchoConsola);
+		echo "\n\r";
+		echo $Mensaje;
+	}
