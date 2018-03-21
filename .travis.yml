@@ -8,62 +8,19 @@ matrix:
       dist: precise
     - php: 5.3
       dist: precise
-
     - php: 5.4
-
-              - mysql-5.7-trusty
-              - mysql-server
     - php: 5.5
-              - mysql-5.7-trusty
-              - mysql-server
     - php: 5.6
-              - mysql-5.7-trusty
-              - mysql-server
     - php: 7.0
-              - mysql-5.7-trusty
-              - mysql-server
     - php: 7.1
-              - mysql-5.7-trusty
-              - mysql-server
     - php: hhvm
-              - mysql-5.7-trusty
-              - mysql-server
     - php: hhvm-3.3
-              - mysql-5.7-trusty
-              - mysql-server
     - php: hhvm-3.6
-              - mysql-5.7-trusty
-              - mysql-server
     - php: hhvm-3.9
-              - mysql-5.7-trusty
-              - mysql-server
     - php: hhvm-3.12
-              - mysql-5.7-trusty
-              - mysql-server
     - php: hhvm-3.15
-              - mysql-5.7-trusty
-              - mysql-server
     - php: hhvm-3.18
-              - mysql-5.7-trusty
-              - mysql-server
     - php: hhvm-nightly
-              - mysql-5.7-trusty
-              - mysql-server
-
-php:
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
-  - 7.1
-  - hhvm
-  - hhvm-3.3
-  - hhvm-3.6
-  - hhvm-3.9
-  - hhvm-3.12
-  - hhvm-3.15
-  - hhvm-3.18
-  - hhvm-nightly
 
 
 # Especificacion opcional de variables de entorno, por ejemplo para bases de datos
@@ -121,7 +78,13 @@ install:
 services:
   - mysql
 
-
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    
+    packages:
+      - mysql-server
 
 #Indica la distribucion a utilizar: trusty, precise, etc
 dist: trusty
