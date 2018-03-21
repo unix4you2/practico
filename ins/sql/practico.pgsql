@@ -8,7 +8,7 @@ CREATE TABLE core_parametros (
   fecha_lanzamiento date,
   licencia text,
   creditos text,
-  funciones_personalizadas text,
+  funciones_personalizadas text NULL DEFAULT '',
   federado_servidor varchar(255) NULL DEFAULT '',
   federado_usuario varchar(255) NULL DEFAULT '',
   federado_clave varchar(255) NULL DEFAULT '',
@@ -22,7 +22,7 @@ CREATE TABLE core_parametros (
   PRIMARY KEY  (id)
 );
 
-INSERT INTO core_parametros (id,nombre_empresa_largo,nombre_empresa_corto,nombre_aplicacion,version,fecha_lanzamiento,licencia,creditos,funciones_personalizadas) VALUES (0,'Nombre completo de su empresa','PAR_NombreCortoEmpresa','PAR_NombreAplicacion','PAR_VersionAplicacion','20120101','Texto de su licencia','Texto asociado a los creditos de su aplicacion','');
+INSERT INTO core_parametros (id,nombre_empresa_largo,nombre_empresa_corto,nombre_aplicacion,version,fecha_lanzamiento,licencia,creditos) VALUES (0,'Nombre completo de su empresa','PAR_NombreCortoEmpresa','PAR_NombreAplicacion','PAR_VersionApp','20120101','Texto de su licencia','Texto asociado a los creditos de su aplicacion');
 
 DROP TABLE IF EXISTS core_usuario;
 CREATE TABLE core_usuario (

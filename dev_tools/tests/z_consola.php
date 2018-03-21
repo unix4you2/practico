@@ -128,6 +128,7 @@ function PCOCLI_MensajeSimple($Mensaje)
 		global $AnchoConsola;
 		PCOCLI_ColorTextoConsola("yellow","black");
 		PCOCLI_Separador("#",$AnchoConsola);
+		echo "\n\r";
 		echo $Mensaje;
 		PCOCLI_Separador("#",$AnchoConsola);		
 	}

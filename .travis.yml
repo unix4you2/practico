@@ -9,12 +9,20 @@ matrix:
     - php: 5.3
       dist: precise
 php:
-  - "5.4"
-  - "5.5"
-  - "5.6"
-  - "7.0"
-  - "7.1"
-  - "hhvm"
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - 7.1
+  - hhvm
+  - hhvm-3.3
+  - hhvm-3.6
+  - hhvm-3.9
+  - hhvm-3.12
+  - hhvm-3.15
+  - hhvm-3.18
+  - hhvm-nightly
+
 
 # Especificacion opcional de variables de entorno, por ejemplo para bases de datos
 env:
@@ -39,14 +47,20 @@ branches:
     - SeguimientoGA
     - ImplementacionBootStrap
     - SubFormularios
-    - PruebasDeSoftware    
+    - PruebasDeSoftware
+    - GeneracionGraficosResponsive
+    - CaptchaVisual
+    - MaterialDesign
+    - EditorWYSIWYGResponsive
+    - SocialParser
+    - MaquetacionBootstrap
 
 # Ramas del repositorio a tener en cuenta
 branches:
   only:
     - master
-# Mediante expresiones regulares
-#    - /^deploy-.*$/
+    # Mediante expresiones regulares
+    #    - /^deploy-.*$/
 
 #before_install:
 # Comandos para preparar el sistema antes de las pruebas para instalar prerequisitos o dependencias
@@ -67,8 +81,8 @@ services:
 
 addons:
   apt:
-    sources:
-      - mysql-5.7-trusty
+    #sources:
+    #  - mysql-5.7-trusty
     packages:
       - mysql-server
 
@@ -94,11 +108,10 @@ before_script:
   #- phpcs --standard=PEAR index.php
   #Otra forma: phpcs --standard=Zend index.php
   #Otra forma: phpcs --standard=PHP53Compatibility core/
-  
 
-#  - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS hello_world_test;" -U postgres; fi
-#  - if [[ "$DB" == "pgsql" ]]; then psql -c "create database hello_world_test;" -U postgres; fi
-#  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS hello_world_test;" -uroot; fi
+  #  - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS hello_world_test;" -U postgres; fi
+  #  - if [[ "$DB" == "pgsql" ]]; then psql -c "create database hello_world_test;" -U postgres; fi
+  #  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS hello_world_test;" -uroot; fi
 
 # Comandos para construir.  Todos deben retornar cero, cualquier otra salida se considera una falla
 script:
