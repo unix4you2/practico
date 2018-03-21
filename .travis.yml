@@ -38,7 +38,9 @@ matrix:
 
     - php: 5.4
       dist: trusty
-      env: DB=mysql
+      env:
+      - DB1=mysql
+      - DB2=pgsql
       sudo: required
       services:
       - mysql
@@ -47,23 +49,23 @@ matrix:
     - php: 5.4
       dist: trusty
       env:
-      - DB1=mysql57
-      - DB2=pgsql
+      - DB=mysql
+      - VER=5.7
       sudo: required
       services:
       - mysql
-      - postgresql
       addons:
-      apt:
-      sources:
-      - mysql-5.7-trusty
-      packages:
-      - mysql-server
-      - mysql-client
+        apt:
+          sources:
+          - mysql-5.7-trusty
+          packages:
+          - mysql-server
 
     - php: 5.5
       dist: trusty
-      env: DB=mysql
+      env:
+      - DB1=mysql
+      - DB2=pgsql
       sudo: required
       services:
       - mysql
@@ -71,7 +73,9 @@ matrix:
       
     - php: 5.6
       dist: trusty
-      env: DB=mysql
+      env:
+      - DB1=mysql
+      - DB2=pgsql
       sudo: required
       services:
       - mysql
@@ -79,7 +83,9 @@ matrix:
       
     - php: 7.0
       dist: trusty
-      env: DB=mysql
+      env:
+      - DB1=mysql
+      - DB2=pgsql
       sudo: required
       services:
       - mysql
@@ -87,7 +93,9 @@ matrix:
       
     - php: 7.1
       dist: trusty
-      env: DB=mysql
+      env:
+      - DB1=mysql
+      - DB2=pgsql
       sudo: required
       services:
       - mysql
@@ -95,7 +103,9 @@ matrix:
       
     - php: hhvm
       dist: trusty
-      env: DB=mysql
+      env:
+      - DB1=mysql
+      - DB2=pgsql
       sudo: required
       services:
       - mysql
@@ -103,7 +113,9 @@ matrix:
       
     - php: hhvm-3.3
       dist: trusty
-      env: DB=mysql
+      env:
+      - DB1=mysql
+      - DB2=pgsql
       sudo: required
       services:
       - mysql
@@ -111,7 +123,9 @@ matrix:
       
     - php: hhvm-3.6
       dist: trusty
-      env: DB=mysql
+      env:
+      - DB1=mysql
+      - DB2=pgsql
       sudo: required
       services:
       - mysql
@@ -119,7 +133,9 @@ matrix:
       
     - php: hhvm-3.9
       dist: trusty
-      env: DB=mysql
+      env:
+      - DB1=mysql
+      - DB2=pgsql
       sudo: required
       services:
       - mysql
@@ -127,7 +143,9 @@ matrix:
       
     - php: hhvm-3.12
       dist: trusty
-      env: DB=mysql
+      env:
+      - DB1=mysql
+      - DB2=pgsql
       sudo: required
       services:
       - mysql
@@ -135,14 +153,18 @@ matrix:
       
     - php: hhvm-3.15
       dist: trusty
-      env: DB=mysql
+      env:
+      - DB1=mysql
+      - DB2=pgsql
       sudo: required
       services:
       - mysql
       - postgresql
       
     - php: hhvm-3.18
-      env: DB=mysql
+      env:
+      - DB1=mysql
+      - DB2=pgsql
       dist: trusty
       sudo: required
       services:
@@ -151,7 +173,9 @@ matrix:
       
     - php: hhvm-nightly
       dist: trusty
-      env: DB=mysql
+      env:
+      - DB1=mysql
+      - DB2=pgsql
       sudo: required
       services:
       - mysql
@@ -203,9 +227,8 @@ install:
   #Otra forma: pyrus install pear/PHP_CodeSniffer
 
 
-# Ejecuta scripts antes de correr las pruebas, puede utilizar variables de entorno
+# Ejecuta scripts antes de correr las pruebas, puede utilizar variables de entorno (env:)
 before_script:
-  
   #Creamos la base de datos para la instalacion de prueba sobre cada motor
   - mysql -e 'create database practico;'
   - psql -c 'create database practico;' -U postgres
