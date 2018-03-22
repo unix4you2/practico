@@ -479,9 +479,9 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 DROP TABLE IF EXISTS core_bugtracker;
 CREATE TABLE core_bugtracker (
   id serial,
-  fecha_apertura datetime,
-  fecha_actualizacion datetime,
-  fecha_cierre datetime,
+  fecha_apertura timestamp,
+  fecha_actualizacion timestamp,
+  fecha_cierre timestamp,
   proyecto varchar(255),
   proyecto_version varchar(30),
   titulo varchar(255),
