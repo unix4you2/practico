@@ -34,12 +34,9 @@
     //Presenta estado sobre TravisCI
     PCOCLI_MensajeSimple(" EJECUTANDO PRUEBAS DE FUNCIONES OBSOLETAS ");
 	
-	
-	//ereg_replace()
-	
-	
-	
-	
-	
+	//Funcion ereg_replace
+    $ResultadoEvaluacion=ereg_replace("( )valX", "\\1valY", "CADENA");
+
+
 	// Devuelve resultado final de las pruebas
 	return $estado_final;
