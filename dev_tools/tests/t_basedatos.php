@@ -132,4 +132,4 @@
         }
 
 	// Devuelve resultado final de las pruebas
-	return $estado_final;
+	exit($estado_final);
