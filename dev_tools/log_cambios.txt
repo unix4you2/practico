@@ -91,6 +91,7 @@ LogCambios="
 * Fixed: Opción de Mis Informes presenta ahora solamente los informes con acceso para el usuario, incluyendo cuando se tiene o no activado el modo de desarrollo del Framework.
 * Fixed: Limpieza de sesion despues de un primer intento de usuario, clave o captcha inválido.  Al siguiente intento correcto pasará sin problemas la autenticación.
 * Fixed: Sistema de chat valida primero por sesión activa para evitar error 500 al tratar de buscar mensajes sin usuario definido.
+* Fixed: Script de instalación para SQLite3
 "
 
 ########################################################################

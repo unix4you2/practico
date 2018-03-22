@@ -71,7 +71,7 @@ CREATE TABLE core_menu (
   posible_centro integer default '1',
   posible_escritorio integer default '0',
   seccion text default '',
-  imagen text default ''
+  imagen text default '',
   posible_izquierda integer default '0',
   
 );
@@ -314,7 +314,7 @@ CREATE TABLE core_informe (
   genera_pdf text,
   variables_filtro text,
   soporte_datatable text DEFAULT 'N',
-  formulario_filtrado text DEFAULT ''
+  formulario_filtrado text DEFAULT '',
   tamano_paginacion integer DEFAULT 10,
   subtotales_columna text DEFAULT '',
   subtotales_formato text DEFAULT '',
@@ -465,8 +465,8 @@ CREATE TABLE core_kanban (
   tablero integer
 
 );
-ALTER TABLE core_kanban ADD INDEX columna(columna);
-ALTER TABLE core_kanban ADD INDEX login_admintablero(login_admintablero);
+CREATE INDEX columna ON core_kanban (columna);
+CREATE INDEX login_admintablero ON core_kanban (login_admintablero);
 
 DROP TABLE IF EXISTS core_opcionlista;
 CREATE TABLE core_opcionlista (
