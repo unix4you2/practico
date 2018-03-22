@@ -72,7 +72,7 @@ CREATE TABLE core_menu (
   posible_escritorio integer default '0',
   seccion text default '',
   imagen text default '',
-  posible_izquierda integer default '0',
+  posible_izquierda integer default '0'
   
 );
 
