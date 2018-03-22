@@ -184,6 +184,8 @@ script:
   - php dev_tools/tests/t_obsoletas.php
   - php dev_tools/tests/t_archivos.php
   - php dev_tools/tests/t_basedatos.php
+  - php index.php
+  - php ins/index.php
 #  - dev_tools/parche2zip.sh                 # Script para generacion de parches entre versiones
 #  - dev_tools/practico2zip.sh              # Script para empaquetado y distribución de nuevas versiones
 

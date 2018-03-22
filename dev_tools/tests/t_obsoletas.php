@@ -35,7 +35,7 @@
     PCOCLI_MensajeSimple(" EJECUTANDO PRUEBAS DE FUNCIONES OBSOLETAS ");
 	
 	//Funcion ereg_replace
-    $ResultadoEvaluacion=ereg_replace("( )valX", "\\1valY", "CADENA");
+    //$ResultadoEvaluacion=ereg_replace("( )valX", "\\1valY", "CADENA");
 
 
 	// Devuelve resultado final de las pruebas
