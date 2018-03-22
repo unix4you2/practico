@@ -21,7 +21,7 @@
 
 
 language: php
-# Seleccion de las versiones de lenguaje a probar: 5.2.17, 5.3.x, 5.4.x, Hack de face  etc
+# Seleccion de las versiones de lenguaje a probar: 5.2.17, 5.3.x, 5.4.x, Hack de face (hhvm-3.3, hhvm-3.6, hhvm-3.9, hhvm-3.12, hhvm-3.15, hhvm-3.18, hhvm-nightly) etc
 # TravisCI no soporta versiones 5.2.x and 5.3.x en Trusty. Se especifica distribucion Precise para esas versiones.
 matrix:
   include:
@@ -34,6 +34,7 @@ matrix:
       sudo: required
       services:
       - mysql
+      - postgresql
       - postgresql
 
     - php: 5.4
@@ -110,77 +111,6 @@ matrix:
       services:
       - mysql
       - postgresql
-      
-    - php: hhvm-3.3
-      dist: trusty
-      env:
-      - DB1=mysql
-      - DB2=pgsql
-      sudo: required
-      services:
-      - mysql
-      - postgresql
-      
-    - php: hhvm-3.6
-      dist: trusty
-      env:
-      - DB1=mysql
-      - DB2=pgsql
-      sudo: required
-      services:
-      - mysql
-      - postgresql
-      
-    - php: hhvm-3.9
-      dist: trusty
-      env:
-      - DB1=mysql
-      - DB2=pgsql
-      sudo: required
-      services:
-      - mysql
-      - postgresql
-      
-    - php: hhvm-3.12
-      dist: trusty
-      env:
-      - DB1=mysql
-      - DB2=pgsql
-      sudo: required
-      services:
-      - mysql
-      - postgresql
-      
-    - php: hhvm-3.15
-      dist: trusty
-      env:
-      - DB1=mysql
-      - DB2=pgsql
-      sudo: required
-      services:
-      - mysql
-      - postgresql
-      
-    - php: hhvm-3.18
-      env:
-      - DB1=mysql
-      - DB2=pgsql
-      dist: trusty
-      sudo: required
-      services:
-      - mysql
-      - postgresql
-      
-    - php: hhvm-nightly
-      dist: trusty
-      env:
-      - DB1=mysql
-      - DB2=pgsql
-      sudo: required
-      services:
-      - mysql
-      - postgresql
-
 
 # Configura notificaciones (email, IRC, campfire etc)
 notifications:
@@ -232,6 +162,8 @@ before_script:
   #Creamos la base de datos para la instalacion de prueba sobre cada motor
   - mysql -e 'create database practico;'
   - psql -c 'create database practico;' -U postgres
+  #SQLite3:
+  - touch practico.db
 
   #Asegura permisos completos en la carpeta de pruebas
   - chmod -R 777 dev_tools/tests

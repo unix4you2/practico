@@ -36,7 +36,7 @@
 	$hay_error=0;
 
     //Define un arreglo con los motores a probar
-    $MotoresPruebas=array("mysql", "pgsql");
+    $MotoresPruebas=array("mysql", "pgsql", "sqlite");
 
     //Recorre el arreglo de motores y ejecuta el script en cada uno
     foreach ($MotoresPruebas as $MotorEvaluado)
@@ -67,7 +67,18 @@
                     $TablasApp='app_';
                     $ConsultaVersionMotor="SELECT version()";
                 }
-            //Recarga archivo de conexiones para reescribir variables de conexion y redefine la misma justo despues segun el motor
+            if ($MotorEvaluado=="sqlite")
+                {
+                    //$ServidorBD='127.0.0.1';
+                    $BaseDatos='practico.db';
+                    //$UsuarioBD='root';
+                    //$PasswordBD='';
+                    $MotorBD=$MotorEvaluado;
+                    //$PuertoBD='';
+                    $TablasCore='core_';
+                    $TablasApp='app_';
+                    $ConsultaVersionMotor="select sqlite_version()";
+                }            //Recarga archivo de conexiones para reescribir variables de conexion y redefine la misma justo despues segun el motor
             include_once("core/conexiones.php");
             $ConexionPDO=PCO_NuevaConexionBD($MotorBD,$PuertoBD,$BaseDatos,$ServidorBD,$UsuarioBD,$PasswordBD);
 
