@@ -165,7 +165,7 @@ CREATE TABLE core_evento_objeto (
   evento varchar(250) default '',
   javascript text,
   PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+);
 
 DROP TABLE IF EXISTS core_evento_inventario;
 CREATE TABLE core_evento_inventario (
@@ -174,7 +174,7 @@ CREATE TABLE core_evento_inventario (
   categoria varchar(250) default '',
   descripcion varchar(250) default '',
   PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+);
 
 INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onclick',                    '01. Raton (Mouse)',        '$MULTILANG_EventoClick');
 INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('ondblclick',                 '01. Raton (Mouse)',        '$MULTILANG_EventoDobleClick');
@@ -454,7 +454,7 @@ CREATE TABLE core_kanban (
   compartido_rw TEXT,
   tablero integer,
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+);
 ALTER TABLE core_kanban ADD INDEX columna(columna);
 ALTER TABLE core_kanban ADD INDEX login_admintablero(login_admintablero);
 
@@ -466,7 +466,7 @@ CREATE TABLE core_opcionlista (
   valor_visual varchar(255),
   ordenamiento integer,
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_grafico','T','{$MULTILANG_TablaDatos}',1);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_grafico','G','{$MULTILANG_Grafico}',2);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_sino','S','{$MULTILANG_Si}',1);
@@ -498,10 +498,10 @@ CREATE TABLE core_bugtracker (
   adjunto bytea,
   historial_gestion text,
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+);
 
 DROP TABLE IF EXISTS core_tabla_comodin;
 CREATE TABLE core_tabla_comodin (
   id serial,
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+);
