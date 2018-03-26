@@ -21,6 +21,7 @@
 # Establece que debe salirse al primer comando que retorne error
 set -e
 
+# Recorre recursivamente las carpetas en busca de scripts y prueba su sintaxis
 echo "##############################"
 echo " Verificando sintaxis general"
 echo "##############################"

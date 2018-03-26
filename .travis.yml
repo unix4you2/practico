@@ -181,8 +181,7 @@ before_script:
 
 # Comandos para construir.  Todos deben retornar cero, cualquier otra salida se considera una falla
 script:
-  - "sh dev_tools/tests/t_sintaxis.sh"
-
+  - sh  dev_tools/tests/t_sintaxis.sh
   - php dev_tools/tests/t_obsoletas.php
   - php dev_tools/tests/t_archivos.php
   - php dev_tools/tests/t_basedatos.php
