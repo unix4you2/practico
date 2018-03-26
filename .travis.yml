@@ -181,9 +181,13 @@ before_script:
 
 # Comandos para construir.  Todos deben retornar cero, cualquier otra salida se considera una falla
 script:
+  - "sh dev_tools/tests/t_sintaxis.sh"
+
   - php dev_tools/tests/t_obsoletas.php
   - php dev_tools/tests/t_archivos.php
   - php dev_tools/tests/t_basedatos.php
+
+#Para chequeos de sintaxis JS y CSS revisar repo https://github.com/elementary/website
 #  - dev_tools/parche2zip.sh                 # Script para generacion de parches entre versiones
 #  - dev_tools/practico2zip.sh              # Script para empaquetado y distribución de nuevas versiones
 
