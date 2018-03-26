@@ -23,6 +23,5 @@
 echo "##############################"
 echo " Verificando sintaxis general"
 echo "##############################"
-cd core
-find . -name "*.php" -print0 | xargs -0 -n1 -P8 php -l
-cd ..
+find core -name "*.php" -print0 | xargs -0 -n1 -P8 php -l
+find mod/pcoder -name "*.php" -print0 | xargs -0 -n1 -P8 php -l
