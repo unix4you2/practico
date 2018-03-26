@@ -17,12 +17,12 @@
 #	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 #   Ejecuta php -l en todos los archivos PHP para verifica su sintaxis
-
 # Establece que debe salirse al primer comando que retorne error
 #set -e
-
 # Recorre recursivamente las carpetas en busca de scripts y prueba su sintaxis
 echo "##############################"
 echo " Verificando sintaxis general"
 echo "##############################"
+cd core
 find . -name "*.php" -print0 | xargs -0 -n1 -P8 php -l
+cd ..
