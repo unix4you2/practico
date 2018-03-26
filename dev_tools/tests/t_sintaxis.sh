@@ -19,7 +19,7 @@
 #   Ejecuta php -l en todos los archivos PHP para verifica su sintaxis
 
 # Establece que debe salirse al primer comando que retorne error
-set -e
+#set -e
 
 # Recorre recursivamente las carpetas en busca de scripts y prueba su sintaxis
 echo "##############################"
