@@ -39,6 +39,7 @@
 					<form action="" enctype="multipart/form-data" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="hidden" name="PCO_Accion" value="guardar_configuracion">
                     <input name="ModoDesarrolladorPracticoNEW" value="<?php if ($ModoDesarrolladorPractico=="") echo "0"; else echo $ModoDesarrolladorPractico; ?>" type="hidden">
+                    <input name="MotorBDNEW" value="<?php echo $MotorBD; ?>" type="hidden">
 
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs">
@@ -53,9 +54,9 @@
                             <!-- INICIO de las pestanas -->
                             <div class="tab-content">
                                 <div class="tab-pane fade" id="basedatos-tab">
-                                    <label for="MotorBDNEW"><i class="fa fa-database fa-2x fa-fw"></i> <?php echo $MULTILANG_TipoMotor; ?>:</label>
+                                    <label for="MotorBDNEWfake"><i class="fa fa-database fa-2x fa-fw"></i> <?php echo $MULTILANG_TipoMotor; ?>:</label>
                                     <div class="form-group input-group">
-                                        <select id="MotorBDNEW" name="MotorBDNEW" class="selectpicker" disabled="true">
+                                        <select id="MotorBDNEWfake" name="MotorBDNEWfake" class="selectpicker" disabled="true">
                                             <option value="mysql"	 <?php if ($MotorBD=="mysql") echo "SELECTED"; ?> >MySQL - MariaDB (3.x/4.x/5.x)</option>
                                             <option value="pgsql"	 <?php if ($MotorBD=="pgsql") echo "SELECTED"; ?> >PostgreSQL</option>
                                             <option value="sqlite"	 <?php if ($MotorBD=="sqlite") echo "SELECTED"; ?> >SQLite v2 - SQLite v3</option>
