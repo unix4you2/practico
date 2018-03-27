@@ -55,18 +55,17 @@ Group: Modulos Principales  {
 
          File: t_basedatos  (dev_tools/tests/t_basedatos.php)
          File: t_basedatos  (dev_tools/tests/t_archivos.php)
-         File: t_bdconfig  (dev_tools/tests/t_bdconfig.php)
          File: t_obsoletas  (dev_tools/tests/t_obsoletas.php)
+         File: z_consola.php  (dev_tools/tests/z_consola.php)
          }  # Group: Dev_tools
 
       File: Documentacion para desarrolladores  (dev_tools/docs/variables.php)
 
       Group: Inc  {
 
-         File: Buffer  (inc/html2canvas/dist/html2canvas.svg.js)
          File: Check for symmetry, then construct the eigenvalue decomposition  (inc/phpexcel/Classes/PHPExcel/Shared/JAMA/EigenvalueDecomposition.php)
-         File: phpexcel/.../Excel5/Escher.php  (inc/phpexcel/Classes/PHPExcel/Reader/Excel5/Escher.php)
-         File: phpexcel/.../Reader/Excel5.php  (inc/phpexcel/Classes/PHPExcel/Reader/Excel5.php)
+         File: Reader/Excel5.php  (inc/phpexcel/Classes/PHPExcel/Reader/Excel5.php)
+         File: Reader/Excel5/Escher.php  (inc/phpexcel/Classes/PHPExcel/Reader/Excel5/Escher.php)
          }  # Group: Inc
 
       File: Libreria base  (core/comunes.php)
@@ -89,7 +88,6 @@ Group: Modulos Principales  {
       File: Seccion Configuracion WebServices  (core/marco_wscfg.php)
       File: Seccion marco de configuracion  (core/marco_conf.php)
       File: Seccion marco de desarrollo  (core/marco_dev.php)
-      File: Seccion Proveedores OAuth  (core/marco_oauth.php)
       File: Variables para aplicacion  (core/configuracion.php)
       File: WS_API  (core/ws_funciones.php)
       File: Libreria Generadores de Codigo de barras-Practico  (core/codigobarras.php)
@@ -190,3 +188,4 @@ Group: Mod  {
 
    }  # Group: Mod
 
+File: Buffer  (inc/html2canvas/0.5/html2canvas.svg.js)

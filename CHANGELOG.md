@@ -7,6 +7,95 @@
             |___/ 
 ```
 
+## Versión 18.3 (2018-03-29)
+* LEAME: ADVERTENCIA:  Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada a metodos y funciones internas, las siguientes funciones han cambiado de nombre:
+  cargar_informe() cambia a PCO_CargarInforme()
+  cargar_formulario() cambia a PCO_CargarFormulario()
+  ejecutar_sql_unaria() cambia a PCO_EjecutarSQLUnaria()
+  ejecutar_sql() cambia a PCO_EjecutarSQL()
+  ejecutar_nosql() cambia a PCO_EjecutarNoSQL()
+  ejecutar_sql_procedimiento() cambia a PCO_ProcedimientoSQL()
+  auditar() cambia a PCO_Auditar()
+  Se recomienda encarecidamente que si usted hace llamados manuales a este tipo de funciones primero haga un reemplazo de las mismas dentro de su codigo fuente para evitar conflictos. Lo cual podría llevar a cabo con un simple reemplazo de cadena en sus archivos (Ctrl+H en su {P}Coder).
+  Este cambio se hace necesario ademas para preparar el framework para la adopcion organizada de Bootstrap4 en futuras versiones.  Desarrolladores que no hagan llamado a estas funciones en su código y que sólo utilicen funciones nativas no tienen que hacer ajuste alguno.  Las funciones de advertencia serán mantenidas sólo hasta la versión 18.9.
+* Added: Ademas de las posbilidades de motores de autenticacion externos, OAuth y metodos similares disponibles para realizar el Login al framework, ahora se dispone de dos variables que al ser enviadas como parámetro permiten prediligenciar los campos de usuario y clave al momento de iniciar sesión.  Las variables son AUTO_uid y AUTO_clave
+* Added: Las tareas sobre tableros Kanban ahora pueden ser arrastradas a los nombres de cada columna del tablero cuando desean moverse rápidamente.  Conservarán su peso, prioridad y demás propiedades aún cuando se vean al final en cada adición inicialmente.
+* Added: La funcion de conteo de registros sobre tablas ContarRegistros($tabla,$condicion) ahora puede recibir un segundo parametro opcional llamado $condicion que indica el filtro de registros que se deberia tener en cuenta a la hora de realizar el conteo.  Si no se recibe una condicion la funcion seguirá retornando la totalidad de registros sobre la tabla.
+* Added: Las pestañas de formularios de datos soportan ahora uso de variables en notación {PHP} para generar títulos dinámicamente, por ejemplo en aplicaciones multi-idioma.
+* Added: Los mensajes de retorno programados en botones de comando sobre formularios de datos soportan ahora variables en notacion {PHP} como soporte a aplicaciones multi-idioma.
+* Added: Ahora los valores predeterminados en campos de texto permiten varias variables bajo notación {PHP} y también textos mezclados con éstas.  Por compatibilidad hacia atrás se conservan aquellas notaciones con un sólo signo de pesos al comienzo del valor. 
+* Added: La configuración de proveedores OAuth permite especificar la manera en que éstos serán presentados al usuario durante el login.
+* Added: Soporte para el uso de variables en notacion {PHP} para soportar traducciones automaticas y mensajes de validacion de formularios sobre campos obligatorios.
+* Added: Sistema básico para el reporte y trazabilidad de errores incluyendo trazas y capturas de pantalla del usuario.  El desarrollador podrá gestionar y el usuario revisar detalles de gestión.
+* Added: Campos tipo etiqueta pueden definir ahora el ID HTML que los contiene en caso que luega deban ser manipulados en el DOM mediante JS.
+* Added: Campos de tipo texto libre permiten el reemplazo automatico de variables en notación {PHP} sobre sus valores predeterminados
+* Added: La impresion de valores de campos en formato de etiqueta es capaz de identificar si el contenido es una imagen bajo formatos data:image y la agrega como tal a la salida del formulario. 
+* Added: Mejorado el modulo de auditorias, ahora permite obtener movimientos filtrados e indicadores de movimientos por día, movimientos por usuarios y horas pico del sistema.
+* Enhan: Actualización de PMyDB 17.2 a 17.9
+* Enhan: Indicadores numéricos sobre el menu de configuración no son usados como numeración, ahora indican la cantidad real de elementos dentro del item. 
+* Enhan: Se protegen funciones adicionales para las instalaciones en modo de demostracion y se agregan mensajes aclaratorios. Se incluye Pcoder, PMyDB y Explorador de archivos.
+* Enhan: Las listas de seleccion en sus campos de opciones (visuales) permiten realizar operaciones SQL.  De ahora en adelante el nombre de la tabla para consulta será tomado exclusivamente del campo de lista de valores (que se supone es el mismo origen de lista de opciones para todas las versiones previas). 
+* Enhan: Los botones de informes ahora transportan el valor de la variable correspondiente a la primera columna del informe cuando la acción de botón consisten en llamar a otro informe.  Esto es útil para realizar informes que requieren como insumo la selección de algún valor previo desde otro informe.
+* Enhan: Mejorada la precision y tiempos de caducidad para monitores tipo cURL.
+* Enhan: Mejorada la diagramación del panel de configuración para proveedores OAuth.  Optimización de código.
+* Enhan: Mejoras a ventana de login, distribución de elementos y opciones OAuth.
+* Enhan: Limpieza automatica de la barra de direccion del navegador despues de cada carga.
+* Enhan: Actualizada librería de HTML2Canvas de 0.5 a 1.0
+* Enhan: Aquellos campos con nombre manual sobre un formulario y no pertenecientes a la tabla asociada al formulario tomarán valores por defecto definidos para éstos en lugar de quedar en blanco ante la carga de un registro sobre el formulario.
+* Enhan: Por seguridad el panel de configuración de la herramienta no permite el cambio de motor directamente ya que puede ocasionar pérdida de control del sistema.  Quien desee migrar entre motores de bases de datos de diferente tipo deberá ajustar su valor manualmente sobre configuracion.php para hacerlo así de manera consciente.
+* Enhan: Optimizado codigo en panel de administración.  Se generaliza función para dejarla disponible del lado de los desarrolladores como PCO_ImprimirPanelSimpleDashboard();
+* Enhan: Accion interna ver_seguimiento_monitoreo ha sido cambiada a PCO_PanelAuditoriaMovimientos
+* Enhan: Centralizados los formularios comunes sobre un único archivo.
+* Enhan: Eliminados formularios innecesarios de acceso a opciones internas.
+* Enhan: Mejorado codigo de segmentacion de SQL en funciones de instalación, actualización y guiones para pruebas de bases de datos en TravisCI.
+* Enhan: Agregadas etiquetas de ancho y alto durante la edición de elementos de formularios para facilitar su identificación.
+* Enhan: Mejorada la velocidad de carga en algunos componentes.
+* Fixed: Procesos de importacion de tablas consideran los valores entregados por los parametros de complementa a condiciones de filtrado correctamente.
+* Fixed: Validaciones de ejecucion sobre webservices.  Si los WS previos han sido creados bajo los estandares y requerimientos de operacion no se deberian tener problemas durante migraciones.  Se recomienda verificar que los llamados a WS previos se encuentren correctamente parametrizados.
+* Fixed: Retirados de la creacion y edicion de menues y los formularios los elementos internos de Práctico (Forms e informes) que no son necesarios para el usuario estándar.
+* Fixed: Botones de busqueda automaticos sobre campos de texto y listas de seleccion operan sin problema sobre formularios donde se ha personalizado su nombre.
+* Fixed: Texto de advertencia en lanzamiento de PMyDB
+* Fixed: Opción de Mis Informes presenta ahora solamente los informes con acceso para el usuario, incluyendo cuando se tiene o no activado el modo de desarrollo del Framework.
+* Fixed: Limpieza de sesion despues de un primer intento de usuario, clave o captcha inválido.  Al siguiente intento correcto pasará sin problemas la autenticación.
+* Fixed: Sistema de chat valida primero por sesión activa para evitar error 500 al tratar de buscar mensajes sin usuario definido.
+* Fixed: Script de instalación para SQLite3
+* Fixed: Ajuste menor a librería PCoder para normalización de saltos de línea sobre servidores unix-like y la inetrpretación de guiones por BASH.
+
+## Versión 18.2 (2017-12-22)
+* Added: Ahora las conexiones principal, extra o de replicación presentan información adicional de depuración cuando su configuración es incorrecta o no se logra hacer conexión al servidor.
+* Added: Ahora los elementos de monitoreo de tipo base de datos y rango de valores permiten especificar la conexión sobre la cuál realizan sus consultas.
+* Added: Ahora los monitores de tipo rango pueden ser presentados de manera alterna bajo el esquema de máquinas.
+* Added: Lo monitores permiten ahora ser visualizados en modo compacto.
+* Added: Los monitores de tipo máquina respetan ahora el ancho indicado por su parametrización. Valor recomendado inicial: 2
+* Added: Agregado el soporte para convertir automaticamente las aplicaciones a Aplicaciones Web Progresivas (WPA) desde el panel de configuracion!!!
+* Added: Agregado soporte para -Add to Home- en Safari sobre iOS
+* Added: Los informes embebidos presentan subtotales cuando se encuentran en formato datatable y además se han configurado columnas de subtotales para estos.
+* Added: En modo diseño de formularios se presenta el titulo de los elementos embebidos (informes o formularios) sobre su botón de edición.
+* Added: La lista de informes presenta clasificado el tipo de informe como tabla o gráfico para facilitar su identificación
+* Added: La edición general de campos para un formulario presenta el título en los elementos embebidos.
+* Added: Durante la edición de eventos ahora se presenta el ID HTML del objeto asociado.
+* Added: Se permite exportacion masiva de elementos tipo informe o formulario mediante la especificación de rangos de ID.
+* Added: Ahora se permite la traduccion de textos en placeholders a partir de variables bajo notacion { $Variable} en PHP
+* Added: Ahora se permite la traduccion de textos en tooltips a partir de variables bajo notacion { $Variable} en PHP
+* Added: Nuevos métodos de verificación para monitores tipo máquina basados en cURL (a diferentes timeout) funcionan extremadamente rapido en circunstancias donde los tipos Socket y Ping presentan lentitud y cuando se desea chequear el estado de URLs especificas.
+* Added: Agregadas funciones para verificacion del estado de un host o URL mediante GetHeaders y GetHostByName. Complemento de la funcion interna ServicioOnline() aun en modo experimental.
+* Added: Tablero kanban: permite archivar tareas cuando estas se encuentran en la ultima columna definida de manera que pasen a un historico aquellas realizadas y mantengan despejado el tablero.
+* Added: Tablero kanban: multiples tableros!. Ahora cada usuario con acceso al kanban puede crear tantos tableros como desee. Solo se permite eliminar tableros completos al propietario del mismo.
+* Added: Tablero kanban: Se agrega Posibilidad de compartir con otros usuarios su tablero Kanban. Por ahora, la lista de usuarios es manual y debe estar cada usuario encerrado por barras de canalizacion (pipes)
+* Added: Usuarios estandar del sistema pueden usar tableros Kanban propios. Para esto simplemente se debe agregar un acceso a la accion interna ExplorarTablerosKanban para sus usuarios
+* Enhan: Sensores de rango con valores iguales en máximos y mínimos presentan ahora una dona sin divisiones y su resultado.
+* Enhan: Mejorada interfaz en paneles de configuración.
+* Enhan: Optimizada la forma en que se generan copias de formularios e informes para independizar procesos masivos
+* Enhan: La version de aplicacion en los titulos de ventana es tomada ahora desde la configuracion de la aplicacion.
+* Enhan: Se retira el nombre de la aplicación de todos los títulos de informes.
+* Enhan: Durante los procesos de exportación de elementos en linea se permite ahora saltar a la edición del elemento recién creado directamente.
+* Enhan: Ahora algunos listados y formularios internos del propio framework son presentados mediante elementos creados sobre el mismo Práctico, disminuyendo la cantidad de líneas de código y optimizando su ejecución. Dichos elementos tendrán identificadores negativos dentro de las tablas de aplicación.
+* Enhan: Se dispone de nueva arquitectura que permitira generar funcionalidades de desarrolladores de Practico dentro del mismo framework. Como complemento el entorno importa de manera automatica cualquier definicion XML de objetos, formularios o informes ubicada sobre la carpeta /xml de la instalacion.
+* Fixed: Clonacion de formularios desde XML ignoraba los eventos.
+* Fixed: Los objetos de monitoreo en rangos actualizan correctamente sus valores mínimo y máximo esperados.
+* Fixed: La resolucion maxima del logo en pantallas de login ahora no supera los bordes de pantalla, se ajusta automaticamente segun el dispositivo y no supera su resolucion predeterminada en dispositivos de pantalla grande.
+* Fixed: Los sistemas de monitoreo sobre conexiones seguras ahora redirigen correctamente las alertas auditivas.
+
 ## Versión 18.1 (2017-10-22)
 * Added: Ahora los controles de formulario presentan informacion básica resumida en modo de diseño sobre tooltip asociado al íncono de información.
 * Added: Los controles embebidos en formularios del tipo informe o formulario de consulta permiten ahora saltar a la edición de éstos directamente desde la edición de su formulario padre mediante un botón en la barra de herramientas del control.
