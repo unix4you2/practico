@@ -61,7 +61,7 @@
 							else
 								{
 									// Valida si la llave esta en la BD de API
-									$consulta_llave=ejecutar_sql("SELECT id,".$ListaCamposSinID_llaves_api." FROM ".$TablasCore."llaves_api WHERE llave=? ","$PCO_WSKey");
+									$consulta_llave=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_llaves_api." FROM ".$TablasCore."llaves_api WHERE llave=? ","$PCO_WSKey");
 									// Si no se retorno error en la consulta y tiene datos hace el fetch
 									if($consulta_llave!="1" && $consulta_llave!="")
 										$registro_llave = $consulta_llave->fetch();
@@ -111,7 +111,7 @@
 																	    include_once("mod/personalizadas_ws.php");
 																}
 															// Lleva a auditoria
-															auditar("$PCO_WSId","API.".$nombre_cliente);
+															PCO_Auditar("$PCO_WSId","API.".$nombre_cliente);
 														}
 													else
 														{

@@ -23,7 +23,7 @@
 		Ubicacion *[/core/marco_export.php]*.  Archivo que presenta las opciones de exportacion disponibles para los informes
 
 	Ver tambien:
-		<cargar_informe>
+		<PCO_CargarInforme>
 	*/
 
 	//Variables globales

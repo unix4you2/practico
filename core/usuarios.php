@@ -170,8 +170,8 @@
 			if ($mensaje_error=="")
 				{
 					// Actualiza datos del usuario
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET nombre=?,correo=? WHERE login='$PCOSESS_LoginUsuario' ","$nombre$_SeparadorCampos_$correo");
-					auditar("Actualiza su perfil");
+					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET nombre=?,correo=? WHERE login='$PCOSESS_LoginUsuario' ","$nombre$_SeparadorCampos_$correo");
+					PCO_Auditar("Actualiza su perfil");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_Actualizacion.': '.$MULTILANG_UsrPerfil.'">
@@ -211,7 +211,7 @@ if ($PCO_Accion=="actualizar_perfil_usuario")
         */
         
         //Busca datos del usuario actual
-        $registro_usuario=ejecutar_sql("SELECT * FROM ".$TablasCore."usuario WHERE login=? ","$PCOSESS_LoginUsuario")->fetch();
+        $registro_usuario=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."usuario WHERE login=? ","$PCOSESS_LoginUsuario")->fetch();
 ?>
 
                 <?php
@@ -296,7 +296,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="establecer_nueva_con
         //Busca si realmente el usuario ha solicitado un restablecimiento de clave
         // y compara con la llave recibida para que sea correcta y no haya caducado
         $Llave_esperada="PCO".substr(strtoupper(md5($PCO_UsuarioRestablecimiento.date("u"))),5,20);
-        $registro_usuario=ejecutar_sql("SELECT ".$ListaCamposSinID_usuario." FROM ".$TablasCore."usuario WHERE login=? AND llave_recuperacion=? AND llave_recuperacion=? ","$PCO_UsuarioRestablecimiento$_SeparadorCampos_$PCO_llave$_SeparadorCampos_$Llave_esperada")->fetch();
+        $registro_usuario=PCO_EjecutarSQL("SELECT ".$ListaCamposSinID_usuario." FROM ".$TablasCore."usuario WHERE login=? AND llave_recuperacion=? AND llave_recuperacion=? ","$PCO_UsuarioRestablecimiento$_SeparadorCampos_$PCO_llave$_SeparadorCampos_$Llave_esperada")->fetch();
         if ($registro_usuario["login"]=="")
             $PCO_MensajeError.=$MULTILANG_ErrorDatos.".<br>";
 		
@@ -306,10 +306,10 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="establecer_nueva_con
 				//Limpia de nuevo la llave de recuperacion
                 $LlaveRecuperacion="";
                 //Actualiza registros
-                ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET llave_recuperacion=? WHERE login=?","$LlaveRecuperacion$_SeparadorCampos_$PCO_UsuarioRestablecimiento");
-                ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login=? ","$PCO_UsuarioRestablecimiento");
+                PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET llave_recuperacion=? WHERE login=?","$LlaveRecuperacion$_SeparadorCampos_$PCO_UsuarioRestablecimiento");
+                PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login=? ","$PCO_UsuarioRestablecimiento");
                 mensaje($MULTILANG_UsrResetCuenta,$MULTILANG_UsrResetOK,'','fa fa-unlock-alt fa-4x','alert alert-info alert-dismissible');
-                auditar("Restablece clave de acceso desde $PCO_DireccionAuditoria",$PCO_UsuarioRestablecimiento);
+                PCO_Auditar("Restablece clave de acceso desde $PCO_DireccionAuditoria",$PCO_UsuarioRestablecimiento);
             }
         else
             {
@@ -409,10 +409,10 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_llave"
         if (existe_valor($TablasCore."usuario","login",$usuario) && $usuario!="")
             {
                 //Busca los datos del usuario
-                $registro=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login=?","$usuario")->fetch();
+                $registro=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login=?","$usuario")->fetch();
 				//Genera la llave unica de recuperacion y la lleva al usuario
                 $LlaveRecuperacion="PCO".substr(strtoupper(md5($usuario.date("u"))),5,20);
-                ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET llave_recuperacion=? WHERE login=?","$LlaveRecuperacion$_SeparadorCampos_$usuario");
+                PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET llave_recuperacion=? WHERE login=?","$LlaveRecuperacion$_SeparadorCampos_$usuario");
 
                 //Genera el enlace de recuperacion
                 // Determina si la conexion actual de Practico esta encriptada
@@ -457,7 +457,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_con_us
         if (existe_valor($TablasCore."usuario","correo",$correo) && $correo!="")
             {
                 //Busca los datos del usuario y los envia al correo registrado
-                $registro=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE correo=?","$correo")->fetch();
+                $registro=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE correo=?","$correo")->fetch();
 				
                 $remitente=$registro["correo"];
                 $destinatario=$registro["correo"];
@@ -549,7 +549,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="formulario_recuperac
 if ($PCO_Accion=="copiar_informes")
 	{
 		PCO_copiar_informes($usuarioo,$usuariod);
-		auditar("Copia informes de $usuarioo al usuario $usuariod");
+		PCO_Auditar("Copia informes de $usuarioo al usuario $usuariod");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="informes_usuario">
 			<input type="Hidden" name="usuario" value="'.$usuariod.'">
@@ -577,7 +577,7 @@ if ($PCO_Accion=="copiar_informes")
 if ($PCO_Accion=="copiar_permisos")
 	{
 		PCO_copiar_permisos($usuarioo,$usuariod);
-		auditar("Copia permisos de $usuarioo al usuario $usuariod");
+		PCO_Auditar("Copia permisos de $usuarioo al usuario $usuariod");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="permisos_usuario">
 			<input type="Hidden" name="usuario" value="'.$usuariod.'">
@@ -718,8 +718,8 @@ if ($PCO_Accion=="actualizar_clave")
 
 		if ($mensaje_error=="")
 			{
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login=? ","$PCOSESS_LoginUsuario");
-				auditar("Actualiza clave de acceso");
+				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login=? ","$PCOSESS_LoginUsuario");
+				PCO_Auditar("Actualiza clave de acceso");
 				echo '<script language="javascript"> document.core_ver_menu.submit(); </script>';
 			}
 		else
@@ -760,8 +760,8 @@ if ($PCO_Accion=="actualizar_clave")
 if ($PCO_Accion=="eliminar_informe_usuario")
 	{
 		// Elimina el informe
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe=? AND usuario=? ","$informe$_SeparadorCampos_$usuario");
-		auditar("Elimina informe $informe a $usuario");
+		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe=? AND usuario=? ","$informe$_SeparadorCampos_$usuario");
+		PCO_Auditar("Elimina informe $informe a $usuario");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="informes_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
@@ -794,7 +794,7 @@ if ($PCO_Accion=="eliminar_informe_usuario")
 		{
 			$mensaje_error="";
 			// Busca si existe ese permiso para el usuario
-			$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_informe." FROM ".$TablasCore."usuario_informe WHERE usuario=? AND informe=? ","$usuario$_SeparadorCampos_$informe");
+			$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_usuario_informe." FROM ".$TablasCore."usuario_informe WHERE usuario=? AND informe=? ","$usuario$_SeparadorCampos_$informe");
 			$registro_menu = $resultado->fetch();
 			if($registro_menu["informe"]!="")
 				$mensaje_error=$MULTILANG_UsrErrInf;
@@ -802,8 +802,8 @@ if ($PCO_Accion=="eliminar_informe_usuario")
 			if ($mensaje_error=="")
 				{
 					// Guarda el permiso para el usuario
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES (?,?)","$usuario$_SeparadorCampos_$informe");
-					auditar("Agrega informe $informe al usuario $usuario");
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES (?,?)","$usuario$_SeparadorCampos_$informe");
+					PCO_Auditar("Agrega informe $informe al usuario $usuario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 							<input type="Hidden" name="PCO_Accion" value="informes_usuario">
 							<input type="Hidden" name="usuario" value="'.$usuario.'">
@@ -859,7 +859,7 @@ if ($PCO_Accion=="informes_usuario")
 				<select name="usuarioo" class="selectpicker " data-live-search=true data-size=5 data-style="btn btn-default btn-xs ">
 						<option value=""><?php echo $MULTILANG_UsrDelPer; ?></option>
 						<?php
-							$resultado=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login<>? ORDER BY login","$usuario");
+							$resultado=PCO_EjecutarSQL("SELECT login FROM ".$TablasCore."usuario WHERE login<>? ORDER BY login","$usuario");
 							while($registro = $resultado->fetch())
 								{
 									echo '<option value="'.$registro["login"].'">'.$registro["login"].'</option>';
@@ -878,7 +878,7 @@ if ($PCO_Accion=="informes_usuario")
 					<?php
 						//Despliega opciones de informes para agregar, aunque solamente las que este por debajo del perfil del usuario
 						//No se permite agregar opciones por encima del perfil actual del usuario
-						$resultado=ejecutar_sql("SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe WHERE 1 ");
+						$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe WHERE 1 ");
 						while($registro = $resultado->fetch())
 							{
 								echo '<option  data-icon="glyphicon glyphicon-list-alt fa-fw"  value="'.$registro["id"].'">'.$registro["titulo"].'</option>';
@@ -907,7 +907,7 @@ if ($PCO_Accion=="informes_usuario")
                 <tbody>
                 ';
 
-			$resultado=ejecutar_sql("SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe,".$TablasCore."usuario_informe WHERE ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario=? ","$usuario");
+			$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe,".$TablasCore."usuario_informe WHERE ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario=? ","$usuario");
 			while($registro = $resultado->fetch())
 				{
 					echo '<tr>
@@ -955,8 +955,8 @@ if ($PCO_Accion=="informes_usuario")
 if ($PCO_Accion=="eliminar_permiso")
 	{
 		// Elimina los datos de la opcion
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? AND usuario=? ","$menu$_SeparadorCampos_$usuario");
-		auditar("Elimina permiso $menu a $usuario");
+		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? AND usuario=? ","$menu$_SeparadorCampos_$usuario");
+		PCO_Auditar("Elimina permiso $menu a $usuario");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="permisos_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
@@ -989,7 +989,7 @@ if ($PCO_Accion=="eliminar_permiso")
 		{
 			$mensaje_error="";
 			// Busca si existe ese permiso para el usuario
-			$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario=? AND menu=? ","$usuario$_SeparadorCampos_$menu");
+			$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario=? AND menu=? ","$usuario$_SeparadorCampos_$menu");
 			$registro_menu = $resultado->fetch();
 			if($registro_menu["menu"]!="")
 				$mensaje_error=$MULTILANG_UsrErrInf;
@@ -997,8 +997,8 @@ if ($PCO_Accion=="eliminar_permiso")
 			if ($mensaje_error=="")
 				{
 					// Guarda el permiso para el usuario
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuario$_SeparadorCampos_$menu");
-					auditar("Agrega permiso $menu al usuario $usuario");
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuario$_SeparadorCampos_$menu");
+					PCO_Auditar("Agrega permiso $menu al usuario $usuario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 							<input type="Hidden" name="PCO_Accion" value="permisos_usuario">
 							<input type="Hidden" name="usuario" value="'.$usuario.'">
@@ -1049,7 +1049,7 @@ if ($PCO_Accion=="permisos_usuario")
 				<select name="usuarioo" class="selectpicker " data-live-search=true data-size=5 data-style="btn btn-default btn-xs ">
 						<option value=""><?php echo $MULTILANG_UsrDelPer; ?></option>
 						<?php
-							$resultado=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login<>? ORDER BY login","$usuario");
+							$resultado=PCO_EjecutarSQL("SELECT login FROM ".$TablasCore."usuario WHERE login<>? ORDER BY login","$usuario");
 							while($registro = $resultado->fetch())
 								{
 									echo '<option value="'.$registro["login"].'">'.$registro["login"].'</option>';
@@ -1068,7 +1068,7 @@ if ($PCO_Accion=="permisos_usuario")
 					<?php
 						//Despliega opciones de menu para agregar, aunque solamente las que este por debajo del perfil del usuario
 						//No se permite agregar opciones por encima del perfil actual del usuario
-						$resultado=ejecutar_sql("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE 1 ");
+						$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE 1 ");
 						while($registro = $resultado->fetch())
 							{
 								echo '<option data-icon="'.$registro["imagen"].' fa-fw" value="'.$registro["id"].'">'.$registro["texto"].'</option>';
@@ -1099,7 +1099,7 @@ if ($PCO_Accion=="permisos_usuario")
                 <tbody>
                 ';
 
-			$resultado=ejecutar_sql("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu,".$TablasCore."usuario_menu WHERE ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario=? ","$usuario");
+			$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu,".$TablasCore."usuario_menu WHERE ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario=? ","$usuario");
 			while($registro = $resultado->fetch())
 				{
 					echo '<tr>
@@ -1155,10 +1155,10 @@ if ($PCO_Accion=="permisos_usuario")
 				Ver tambien:
 					<listar_usuarios> | <agregar_usuario> | <cambiar_estado_usuario>
 			*/
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario WHERE login=? ","$uid_especifico");
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$uid_especifico");
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_informe WHERE usuario=? ","$uid_especifico");
-			auditar("Elimina el usuario $uid_especifico");
+			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario WHERE login=? ","$uid_especifico");
+			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$uid_especifico");
+			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_informe WHERE usuario=? ","$uid_especifico");
+			PCO_Auditar("Elimina el usuario $uid_especifico");
 			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 		}
 
@@ -1191,10 +1191,10 @@ if ($PCO_Accion=="permisos_usuario")
 					<listar_usuarios> | <eliminar_usuario>
 			*/
 			if ($estado==1)
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET estado=0 WHERE login=? ","$uid_especifico");
+				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET estado=0 WHERE login=? ","$uid_especifico");
 			else
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET estado=1, ultimo_acceso=? WHERE login=? ","$PCO_FechaOperacion$_SeparadorCampos_$uid_especifico");
-			auditar("Cambia estado del usuario $uid_especifico");
+				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET estado=1, ultimo_acceso=? WHERE login=? ","$PCO_FechaOperacion$_SeparadorCampos_$uid_especifico");
+			PCO_Auditar("Cambia estado del usuario $uid_especifico");
 			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 		}
 
@@ -1217,8 +1217,8 @@ if ($PCO_Accion=="permisos_usuario")
 				Ver tambien:
 					<listar_usuarios> | <eliminar_usuario>
 			*/
-			ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$nueva_clave') WHERE login=? ","$uid_especifico");
-			auditar("Restablece clave de acceso para $uid_especifico");
+			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$nueva_clave') WHERE login=? ","$uid_especifico");
+			PCO_Auditar("Restablece clave de acceso para $uid_especifico");
 			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 		}
 
@@ -1254,7 +1254,7 @@ if ($PCO_Accion=="permisos_usuario")
 			// Verifica que no existe el usuario
 			if ($login!="")
 				{
-					$resultado_usuario=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login=? ","$login");
+					$resultado_usuario=PCO_EjecutarSQL("SELECT login FROM ".$TablasCore."usuario WHERE login=? ","$login");
 					$registro_usuario = $resultado_usuario->fetch();
 					if ($registro_usuario["login"]!="")
 						$mensaje_error=$MULTILANG_UsrErrCrea1;
@@ -1270,8 +1270,8 @@ if ($PCO_Accion=="permisos_usuario")
 					$clavemd5=MD5($clave);
 					$pasomd5=MD5($LlaveDePaso);
                     $Llave_recuperacion="";
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno$_SeparadorCampos_$Llave_recuperacion$_SeparadorCampos_$es_plantilla$_SeparadorCampos_$plantilla_permisos$_SeparadorCampos_$descripcion_usuario");
-					auditar("Agrega usuario $login para $nombre",$login);
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno$_SeparadorCampos_$Llave_recuperacion$_SeparadorCampos_$es_plantilla$_SeparadorCampos_$plantilla_permisos$_SeparadorCampos_$descripcion_usuario");
+					PCO_Auditar("Agrega usuario $login para $nombre",$login);
 
                     // Construye la URL del sistema para enviarla por correo
         			if(empty($_SERVER["HTTPS"]))
@@ -1400,7 +1400,7 @@ if ($PCO_Accion=="agregar_usuario_autoregistro")
 			// Verifica que no existe el usuario
 			if ($login!="")
             {
-                $resultado_usuario=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario WHERE login=? ","$login");
+                $resultado_usuario=PCO_EjecutarSQL("SELECT login FROM ".$TablasCore."usuario WHERE login=? ","$login");
                 $registro_usuario = $resultado_usuario->fetch();
                 if ($registro_usuario["login"]!="")
                     $mensaje_error=$MULTILANG_UsrErrCrea1;
@@ -1422,8 +1422,8 @@ if ($PCO_Accion=="agregar_usuario_autoregistro")
 					$clavemd5=MD5($clave);
 					$pasomd5=MD5($LlaveDePaso);
                     $Llave_recuperacion="";
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno$_SeparadorCampos_$Llave_recuperacion$_SeparadorCampos_$es_plantilla$_SeparadorCampos_$plantilla_permisos$_SeparadorCampos_$descripcion_usuario");
-					auditar("Agrega usuario $login para $nombre");
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno$_SeparadorCampos_$Llave_recuperacion$_SeparadorCampos_$es_plantilla$_SeparadorCampos_$plantilla_permisos$_SeparadorCampos_$descripcion_usuario");
+					PCO_Auditar("Agrega usuario $login para $nombre");
                     //Redirecciona a la lista de usuarios con el usuario prefiltrado por si se le quiere asignar permisos
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="listar_usuarios">
@@ -1558,7 +1558,7 @@ if ($PCO_Accion=="agregar_usuario")
 									<option value=""><?php echo $MULTILANG_Ninguno; ?> (<?php echo $MULTILANG_UsrPermisoManual; ?>)</option>
 									<?php
 										//Busca los usuarios definidos como plantilla
-										$usuarios_plantilla=ejecutar_sql("SELECT ".$ListaCamposSinID_usuario." FROM ".$TablasCore."usuario WHERE es_plantilla=1");
+										$usuarios_plantilla=PCO_EjecutarSQL("SELECT ".$ListaCamposSinID_usuario." FROM ".$TablasCore."usuario WHERE es_plantilla=1");
 										while ($registro_plantilla=$usuarios_plantilla->fetch())
 											echo '<option value="'.$registro_plantilla["login"].'">'.$registro_plantilla["login"].'</option>';									
 									?>
@@ -1603,8 +1603,8 @@ if ($PCO_Accion=="PCO_PanelAuditoriaMovimientos")
         */
 			if ($FechaInicioAuditoria=="") $FechaInicioAuditoria=$PCO_FechaOperacionGuiones;
 			if ($FechaFinAuditoria=="") $FechaFinAuditoria=$PCO_FechaOperacionGuiones;
-			auditar("Carga modulo de auditoria");
-			cargar_formulario("-7",1);
+			PCO_Auditar("Carga modulo de auditoria");
+			PCO_CargarFormulario("-7",1);
 	}
 
 
@@ -1648,7 +1648,7 @@ if ($PCO_Accion=="ver_seguimiento_general")
                         <select id="usuario" name="usuario" class="form-control" >
                             <option value=""><?php echo $MULTILANG_Cualquiera; ?></option>
                             <?php
-                                $resultado=ejecutar_sql("SELECT login FROM ".$TablasCore."usuario ORDER BY login");
+                                $resultado=PCO_EjecutarSQL("SELECT login FROM ".$TablasCore."usuario ORDER BY login");
                                 while($registro = $resultado->fetch())
                                     {
                                         echo '<option value="'.$registro["login"].'">'.$registro["login"].'</option>';
@@ -1795,7 +1795,7 @@ if ($PCO_Accion=="ver_seguimiento_general")
 				if (@$mesi=="") {$mesi=date("n"); $mesf=$mesi;}
 				if (@$diai=="") {$diai=date("j"); $diaf=$diai;}
 
-				$resultado=@ejecutar_sql("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria WHERE fecha>='$anoi$mesi$diai' AND fecha<= '$anof$mesf$diaf' AND accion LIKE '%$accionbuscar%' AND usuario_login LIKE '%$usuario%' ORDER BY id DESC LIMIT $inicio_reg,$fin_reg");
+				$resultado=@PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria WHERE fecha>='$anoi$mesi$diai' AND fecha<= '$anof$mesf$diaf' AND accion LIKE '%$accionbuscar%' AND usuario_login LIKE '%$usuario%' ORDER BY id DESC LIMIT $inicio_reg,$fin_reg");
 				while($registro = $resultado->fetch())
 					{
 						echo '<tr>
@@ -1864,7 +1864,7 @@ if ($PCO_Accion=="ver_seguimiento_especifico")
 						<td align="center" bgcolor="#d6d6d6"><b>'.$MULTILANG_Fecha.' (AAAA-MM-DD)</b></td>
 						<td align="center" bgcolor="#d6d6d6"><b>'.$MULTILANG_Hora.' (HH-MM-SS)</b></td>
 					</tr>';
-				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria WHERE usuario_login=? ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg","$uid_especifico");
+				$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria WHERE usuario_login=? ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg","$uid_especifico");
 				while($registro = $resultado->fetch())
 					{
 						echo '<tr><td align="center">'.$registro["id"].'</td>
@@ -1967,7 +1967,7 @@ if ($PCO_Accion=="listar_usuarios")
                     </thead>
                     </body>
 					';
-				$resultado=ejecutar_sql("SELECT ".$ListaCamposSinID_usuario." FROM ".$TablasCore."usuario WHERE (login LIKE '%$login_filtro%') AND (nombre LIKE '%$nombre_filtro%' ) ORDER BY login,nombre");
+				$resultado=PCO_EjecutarSQL("SELECT ".$ListaCamposSinID_usuario." FROM ".$TablasCore."usuario WHERE (login LIKE '%$login_filtro%') AND (nombre LIKE '%$nombre_filtro%' ) ORDER BY login,nombre");
 				$i=0;
 				while($registro = $resultado->fetch())
 					{

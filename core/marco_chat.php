@@ -38,7 +38,7 @@
     //Consulta los usuarios siempre y cuando tenga sesion activa
     if ($PCOSESS_SesionAbierta)
         {
-            $resultado=ejecutar_sql("SELECT $ListaCamposSinID_usuario from ".$TablasCore."usuario WHERE login<>'$PCOSESS_LoginUsuario' ");
+            $resultado=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario from ".$TablasCore."usuario WHERE login<>'$PCOSESS_LoginUsuario' ");
 
             //Presenta la lista de usuarios
             @$PCO_InformesDataTable.="TablaUsuariosChat|"; //Agrega la tabla a la lista de DataTables para ser convertida

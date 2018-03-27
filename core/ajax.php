@@ -74,7 +74,7 @@ if ($PCO_Accion=="opciones_combo_box")
                 $complemento_condicion_filtrado="";
                 if (@$condicion_filtrado_listas!="")
                     $complemento_condicion_filtrado=" AND ($condicion_filtrado_listas) ";
-                $consulta_registros_combo=ejecutar_sql("SELECT $origen_lista_opciones as opcion, $origen_lista_valores as valor FROM $origen_lista_tablas WHERE 1 $complemento_condicion_filtrado ");
+                $consulta_registros_combo=PCO_EjecutarSQL("SELECT $origen_lista_opciones as opcion, $origen_lista_valores as valor FROM $origen_lista_tablas WHERE 1 $complemento_condicion_filtrado ");
                 while ($registro_opciones_combo = $consulta_registros_combo->fetch())
                     {
                         $PCO_SalidaCombos.=$PCO_Prefijo.$registro_opciones_combo["valor"].$PCO_Infijo.$registro_opciones_combo["opcion"].$PCO_Posfijo;
@@ -113,7 +113,7 @@ if ($PCO_Accion=="opciones_combo_box")
 if ($PCO_Accion=="valor_campo_tabla") 
     {
         if($condicion=="") $condicion="1=1";
-        $registro=ejecutar_sql("SELECT $campo FROM $tabla WHERE $condicion ")->fetch();
+        $registro=PCO_EjecutarSQL("SELECT $campo FROM $tabla WHERE $condicion ")->fetch();
         @ob_clean();
         if ($registro[0]!="")
             echo trim($registro[0]);
@@ -165,8 +165,8 @@ if ($PCO_Accion=="valor_campo_tabla")
                     $PrefijoTablas=$TablasCore;
                     if ($PCO_CambioEstado_NoUsarCore==1) $PrefijoTablas="";
                     
-					ejecutar_sql_unaria("UPDATE ".$PrefijoTablas."$tabla SET $campo = '$valor' WHERE $PCO_CambioEstado_CampoLlave = ? ","$id");
-					@auditar("Cambia estado del campo $campo en objetoID $TipoCampo");
+					PCO_EjecutarSQLUnaria("UPDATE ".$PrefijoTablas."$tabla SET $campo = '$valor' WHERE $PCO_CambioEstado_CampoLlave = ? ","$id");
+					@PCO_Auditar("Cambia estado del campo $campo en objetoID $TipoCampo");
 					
 					if (@$PCO_CambioEstado_NegarRetorno=="")
 						echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">

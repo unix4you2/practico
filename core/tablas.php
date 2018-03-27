@@ -66,8 +66,8 @@
 			if ($mensaje_error=="")
 				{
 					// Realiza la operacion
-					ejecutar_sql_unaria("ALTER TABLE $nombre_tabla DROP COLUMN $nombre_campo");
-					auditar("Elimina campo $nombre_campo de tabla $nombre_tabla");
+					PCO_EjecutarSQLUnaria("ALTER TABLE $nombre_tabla DROP COLUMN $nombre_campo");
+					PCO_Auditar("Elimina campo $nombre_campo de tabla $nombre_tabla");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="editar_tabla">
 					<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -123,7 +123,7 @@
 					$consulta .= " DEFAULT $predeterminado_valor ";
 
 			// Realiza la operacion
-			ejecutar_sql_unaria($consulta);
+			PCO_EjecutarSQLUnaria($consulta);
 
 			$ultimo_error=$ConexionPDO->errorInfo();
 			$descripcion_ultimo_error=$ultimo_error[2];
@@ -139,7 +139,7 @@
 				}
 			else
 				{
-					auditar("Agrega campo $nombre_campo tipo $tipo a tabla $nombre_tabla");
+					PCO_Auditar("Agrega campo $nombre_campo tipo $tipo a tabla $nombre_tabla");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="editar_tabla">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -435,8 +435,8 @@ echo '
 			if ($mensaje_error=="")
 				{
 					// Realiza la operacion
-					ejecutar_sql_unaria("DROP TABLE $nombre_tabla");
-					auditar("Elimina tabla $nombre_tabla");
+					PCO_EjecutarSQLUnaria("DROP TABLE $nombre_tabla");
+					PCO_Auditar("Elimina tabla $nombre_tabla");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_tablas"></form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
@@ -481,61 +481,61 @@ echo '
 
 					if ($MotorBD=="mysql" && !$operacion_enviada)
 						{
-							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$error_consulta=PCO_EjecutarSQLUnaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
 							$operacion_enviada=1;
 						}
 
 					if ($MotorBD=="pgsql" && !$operacion_enviada)
 						{
-							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id serial, PRIMARY KEY  (id) )");
+							$error_consulta=PCO_EjecutarSQLUnaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id serial, PRIMARY KEY  (id) )");
 							$operacion_enviada=1;
 						}
 
 					if ($MotorBD=="sqlite" && !$operacion_enviada)
 						{
-							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id integer PRIMARY KEY AUTOINCREMENT)");
+							$error_consulta=PCO_EjecutarSQLUnaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id integer PRIMARY KEY AUTOINCREMENT)");
 							$operacion_enviada=1;
 						}
 
 					if ( ($MotorBD=="sqlsrv" || $MotorBD=="mssql") && !$operacion_enviada)
 						{
-							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$error_consulta=PCO_EjecutarSQLUnaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
 							$operacion_enviada=1;
 						}
 
 					if ($MotorBD=="ibm" && !$operacion_enviada)
 						{
-							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$error_consulta=PCO_EjecutarSQLUnaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
 							$operacion_enviada=1;
 						}
 
 					if ($MotorBD=="dblib" && !$operacion_enviada)
 						{
-							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$error_consulta=PCO_EjecutarSQLUnaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
 							$operacion_enviada=1;
 						}
 
 					if ($MotorBD=="odbc" && !$operacion_enviada)
 						{
-							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$error_consulta=PCO_EjecutarSQLUnaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
 							$operacion_enviada=1;
 						}
 
 					if ($MotorBD=="oracle" && !$operacion_enviada)
 						{
-							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$error_consulta=PCO_EjecutarSQLUnaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
 							$operacion_enviada=1;
 						}
 
 					if ($MotorBD=="ifmx" && !$operacion_enviada)
 						{
-							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$error_consulta=PCO_EjecutarSQLUnaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
 							$operacion_enviada=1;
 						}
 
 					if ($MotorBD=="fbd" && !$operacion_enviada)
 						{
-							$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$error_consulta=PCO_EjecutarSQLUnaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
 							$operacion_enviada=1;
 						}
 
@@ -551,7 +551,7 @@ echo '
 						}
 					else
 						{
-							auditar("Crea tabla $nombre_tabla");
+							PCO_Auditar("Crea tabla $nombre_tabla");
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_tablas"></form>
 									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 						}
@@ -758,7 +758,7 @@ if ($PCO_Accion=="confirmar_importacion_tabla")
 				foreach($arreglo_consultas as $consulta)
 					{
 						//Ejecuta el query
-						ejecutar_sql_unaria($consulta);
+						PCO_EjecutarSQLUnaria($consulta);
 						$total_ejecutadas++;
 					}
 				//Presenta mensaje de finalizacion
@@ -766,7 +766,7 @@ if ($PCO_Accion=="confirmar_importacion_tabla")
 				<b>'.$MULTILANG_FrmImportarGenerado.':</b><br>
 				<br>
 				<a class="btn btn-block btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
-				auditar("Importa $archivo_cargado en tablas de aplicacion");
+				PCO_Auditar("Importa $archivo_cargado en tablas de aplicacion");
 			}
 		else
 			{
@@ -884,7 +884,7 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 								if ($ListaCamposLlaveUnica!=" 1=1 AND " || $PCO_condicion_fija_campo_unico!=" 1=1 ")
 									{
 										$ConsultaUnicidad="SELECT id FROM $nombre_tabla WHERE $ListaCamposLlaveUnica $PCO_condicion_fija_campo_unico ";
-										$registro_existencia=ejecutar_sql($ConsultaUnicidad)->fetch();
+										$registro_existencia=PCO_EjecutarSQL($ConsultaUnicidad)->fetch();
 										if ($registro_existencia["id"]!="")
 											{
 												$RegistrosIgnorados++;
@@ -893,7 +893,7 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 										else
 											{
 												//Ejecuta la consulta
-												ejecutar_sql($ConsultaImportacionSQL);
+												PCO_EjecutarSQL($ConsultaImportacionSQL);
 												$RegistrosInsertados++;
 												$CadenaRegistrosInsertados.=$ListaCamposLlaveUnica;
 											}
@@ -938,7 +938,7 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 				//Presenta mensaje de finalizacion
 				echo '
 				<a class="btn btn-block btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
-				auditar("Importa tabla desde $archivo_cargado en $nombre_tabla");
+				PCO_Auditar("Importa tabla desde $archivo_cargado en $nombre_tabla");
 			}
 		else
 			{
@@ -1158,7 +1158,7 @@ if ($PCO_Accion=="importar_tabla")
                     <?php
                         // Busca por las auditorias asociadas a actualizacion de plataforma:
                         // Acciones:  Actualiza version de plataforma | _Actualizacion_ | Analiza archivo tmp/Practico | Carga archivo en carpeta tmp - Practico
-                        $resultado=@ejecutar_sql("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE accion LIKE '%Import%' AND accion LIKE '%.gz%' ORDER BY fecha DESC, hora DESC LIMIT 0,30");
+                        $resultado=@PCO_EjecutarSQL("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE accion LIKE '%Import%' AND accion LIKE '%.gz%' ORDER BY fecha DESC, hora DESC LIMIT 0,30");
                         while($registro = $resultado->fetch())
                             {
                                 echo '<tr>
@@ -1383,7 +1383,7 @@ if ($PCO_Accion=="importar_tabla")
 			if ($mensaje_error=="")
 				{
 					// Crea la tabla temporal
-					$error_consulta=ejecutar_sql_unaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+					$error_consulta=PCO_EjecutarSQLUnaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
 					if ($error_consulta!="")
 						{
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -1422,12 +1422,12 @@ if ($PCO_Accion=="importar_tabla")
 													if ($longitud!="")
 														$consulta .= "($longitud) ";
 													// Realiza la operacion
-													ejecutar_sql_unaria($consulta);
+													PCO_EjecutarSQLUnaria($consulta);
 												}
 										}
 									fclose($archivo);
 								}
-							auditar("Crea tabla $nombre_tabla");
+							PCO_Auditar("Crea tabla $nombre_tabla");
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 							<input type="Hidden" name="PCO_Accion" value="editar_tabla">
 							<input type="hidden" name="nombre_tabla" value="'.$TablasApp.''.$nombre_tabla.'">

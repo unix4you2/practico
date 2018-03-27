@@ -47,8 +47,8 @@
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."llaves_api (".$ListaCamposSinID_llaves_api.") VALUES (?,?,?,?,?,?,?)","$nombre$_SeparadorCampos_$llave$_SeparadorCampos_$secreto$_SeparadorCampos_$uri$_SeparadorCampos_$dominio_autorizado$_SeparadorCampos_$ip_autorizada$_SeparadorCampos_$funciones_autorizadas");
-					auditar("Agrega llave API para $nombre");
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."llaves_api (".$ListaCamposSinID_llaves_api.") VALUES (?,?,?,?,?,?,?)","$nombre$_SeparadorCampos_$llave$_SeparadorCampos_$secreto$_SeparadorCampos_$uri$_SeparadorCampos_$dominio_autorizado$_SeparadorCampos_$ip_autorizada$_SeparadorCampos_$funciones_autorizadas");
+					PCO_Auditar("Agrega llave API para $nombre");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit(); </script>';
 				}
 			else
@@ -77,8 +77,8 @@
 			$mensaje_error="";
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."llaves_api SET uri=?,dominio_autorizado=?,ip_autorizada=?,funciones_autorizadas=? WHERE id=? ","$uri$_SeparadorCampos_$dominio_autorizado$_SeparadorCampos_$ip_autorizada$_SeparadorCampos_$funciones_autorizadas$_SeparadorCampos_$id");
-					auditar("Actualiza llave API para $id");
+					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."llaves_api SET uri=?,dominio_autorizado=?,ip_autorizada=?,funciones_autorizadas=? WHERE id=? ","$uri$_SeparadorCampos_$dominio_autorizado$_SeparadorCampos_$ip_autorizada$_SeparadorCampos_$funciones_autorizadas$_SeparadorCampos_$id");
+					PCO_Auditar("Actualiza llave API para $id");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit(); </script>';
 				}
 			else
@@ -108,8 +108,8 @@
 			$mensaje_error="";
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("DELETE FROM ".$TablasCore."llaves_api WHERE id=? ","$id");
-					auditar("Elimina llave API para $id");
+					PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."llaves_api WHERE id=? ","$id");
+					PCO_Auditar("Elimina llave API para $id");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit(); </script>';
 				}
 			else
@@ -211,7 +211,7 @@
                     </thead>
                     <tbody>
 				<?php
-					$consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_llaves_api." FROM ".$TablasCore."llaves_api");
+					$consulta_forms=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_llaves_api." FROM ".$TablasCore."llaves_api");
 					while($registro = $consulta_forms->fetch())
 						{
 							echo '

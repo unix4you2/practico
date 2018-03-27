@@ -1103,7 +1103,6 @@ editor.setOptions({
 });
 
 editor.setAnimatedScroll(true);
-
 //Elimina la visualizacion de margen de impresion
 editor.setShowPrintMargin(0);
 CaracteresInvisiblesEditor(0);

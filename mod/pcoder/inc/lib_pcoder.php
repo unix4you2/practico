@@ -168,9 +168,11 @@ if ($PCO_Accion=="PCODER_CrearArchivo")
 if ($PCO_Accion=="PCOMOD_GuardarArchivo") 
 	{
         //Guarda el archivo
-        $PCODER_Respuesta = file_put_contents($PCODER_archivo, $_POST["PCODER_AreaTexto"]) or die("No se puede abrir el archivo para escritura");
+        $ContenidoArchivo=$_POST["PCODER_AreaTexto"];
+        $ContenidoArchivo = preg_replace('~\r\n?~', "\n", $ContenidoArchivo); //Normaliza los saltos de linea dentro del archivo
+        $PCODER_Respuesta = file_put_contents($PCODER_archivo, $ContenidoArchivo) or die("No se puede abrir el archivo para escritura");
         //Vuelve a cargar el archivo para continuar con su edicion
-        auditar("Modifica archivo $PCODER_archivo");
+        //PCO_Auditar("Modifica archivo $PCODER_archivo");
         //Continua presentando todo el editor solo si se pide el echo
         if ($PCO_ECHO==1)
             echo '

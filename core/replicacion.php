@@ -50,8 +50,8 @@ if ($PCO_Accion=="eliminar_replica")
 			<administrar_monitoreo> | <guardar_monitoreo>
 		*/
 		// Elimina los datos del servidor
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."replicasbd WHERE id=? ","$id");
-		auditar("Elimina replicacion para $id");
+		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."replicasbd WHERE id=? ","$id");
+		PCO_Auditar("Elimina replicacion para $id");
 					echo '
 					<form name="continuar_admin_mon" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="administrar_replicacion">
@@ -88,8 +88,8 @@ if ($PCO_Accion=="eliminar_replica")
 			if ($mensaje_error=="")
 				{
 					// Guarda los datos 
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."replicasbd (".$ListaCamposSinID_replicasbd.") VALUES (?,?,?,?,?,?,?,?)","$nombre$_SeparadorCampos_$servidorbd$_SeparadorCampos_$basedatos$_SeparadorCampos_$usuariobd$_SeparadorCampos_$passwordbd$_SeparadorCampos_$motorbd$_SeparadorCampos_$puertobd$_SeparadorCampos_$tipo_replica");
-					auditar("Agrega servidor de replica: $nombre");
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."replicasbd (".$ListaCamposSinID_replicasbd.") VALUES (?,?,?,?,?,?,?,?)","$nombre$_SeparadorCampos_$servidorbd$_SeparadorCampos_$basedatos$_SeparadorCampos_$usuariobd$_SeparadorCampos_$passwordbd$_SeparadorCampos_$motorbd$_SeparadorCampos_$puertobd$_SeparadorCampos_$tipo_replica");
+					PCO_Auditar("Agrega servidor de replica: $nombre");
 					echo '
 					<form name="continuar_admin_mon" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="administrar_replicacion">
@@ -132,8 +132,8 @@ if ($PCO_Accion=="eliminar_replica")
 			if ($mensaje_error=="")
 				{
 					// Actualiza los datos
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."replicasbd SET tipo_replica='$tipo_replica',nombre='$nombre',servidorbd='$servidorbd',basedatos='$basedatos',usuariobd='$usuariobd',passwordbd='$passwordbd',motorbd='$motorbd',puertobd='$puertobd' WHERE id='$IDRegistroReplica'");
-					auditar("Actualiza replica: $IDRegistroReplica");
+					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."replicasbd SET tipo_replica='$tipo_replica',nombre='$nombre',servidorbd='$servidorbd',basedatos='$basedatos',usuariobd='$usuariobd',passwordbd='$passwordbd',motorbd='$motorbd',puertobd='$puertobd' WHERE id='$IDRegistroReplica'");
+					PCO_Auditar("Actualiza replica: $IDRegistroReplica");
 					echo '
 					<form name="continuar_admin_mon" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="administrar_replicacion">
@@ -170,7 +170,7 @@ if ($PCO_Accion=="eliminar_replica")
 			
 			//Busca los datos del servidor de replica
 			if ($IDRegistroReplica!="")
-				$Maquina=ejecutar_sql("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE id='$IDRegistroReplica' ")->fetch();
+				$Maquina=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE id='$IDRegistroReplica' ")->fetch();
 
 			//Define la accion a ejecutar
 			if ($IDRegistroReplica=="")
@@ -354,7 +354,7 @@ if ($PCO_Accion=="administrar_replicacion")
 		
 		 <?php
 
-				$resultado_conteo=ejecutar_sql("SELECT COUNT(id) as conteo FROM ".$TablasCore."replicasbd WHERE tipo_replica=1 ")->fetch();
+				$resultado_conteo=PCO_EjecutarSQL("SELECT COUNT(id) as conteo FROM ".$TablasCore."replicasbd WHERE tipo_replica=1 ")->fetch();
 				if ($resultado_conteo["conteo"]>0)
 					{
 						echo '<h4><b><i class="fa fa-server" aria-hidden="true"></i> '.$MULTILANG_ReplicaDefinidos.'</b></h4>';
@@ -372,7 +372,7 @@ if ($PCO_Accion=="administrar_replicacion")
 							</thead>
 							<tbody>';
 
-						$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE tipo_replica=1 ");
+						$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE tipo_replica=1 ");
 						while($registro = $resultado->fetch())
 							{
 								echo '<tr>
@@ -401,7 +401,7 @@ if ($PCO_Accion=="administrar_replicacion")
 						</table>';
 					}
 
-				$resultado_conteo=ejecutar_sql("SELECT COUNT(id) as conteo FROM ".$TablasCore."replicasbd WHERE tipo_replica=0 ")->fetch();
+				$resultado_conteo=PCO_EjecutarSQL("SELECT COUNT(id) as conteo FROM ".$TablasCore."replicasbd WHERE tipo_replica=0 ")->fetch();
 				if ($resultado_conteo["conteo"]>0)
 					{
 						echo '<h4><b><i class="fa fa-server" aria-hidden="true"></i> '.$MULTILANG_ConnAdicionales.'</b></h4>';
@@ -419,7 +419,7 @@ if ($PCO_Accion=="administrar_replicacion")
 							</thead>
 							<tbody>';
 
-						$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE tipo_replica=0 ");
+						$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE tipo_replica=0 ");
 						while($registro = $resultado->fetch())
 							{
 								echo '<tr>
@@ -452,4 +452,3 @@ if ($PCO_Accion=="administrar_replicacion")
         cerrar_ventana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
     } //Fin administrar_replicacion
-

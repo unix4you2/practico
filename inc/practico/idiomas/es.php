@@ -1232,7 +1232,7 @@
 	$MULTILANG_ReplicaDefinidos='Servidores de replicaci&oacute;n autom&aacute;tica definidos';
 	$MULTILANG_AgregarReplica='Agregar nueva conexion';
 	$MULTILANG_ReplicaTodo='Usar como replica espejo';
-	$MULTILANG_AyudaReplica='Determina si todas las operaciones realizadas sobre la base de datos del sistema deben ser replicadas sobre esta conexion.  Si asigna su valor en NO, Practico solamente creara la conexion y la dejara lista para ser usada por c&oacute;digo o por operaciones individuales cuando usted lo requiera.  Esto solo aplicara para operaciones de alteracion (Insertar,Actualizar,Eliminar) realizadas mediante la funcion ejecutar_sql_unaria()';
+	$MULTILANG_AyudaReplica='Determina si todas las operaciones realizadas sobre la base de datos del sistema deben ser replicadas sobre esta conexion.  Si asigna su valor en NO, Practico solamente creara la conexion y la dejara lista para ser usada por c&oacute;digo o por operaciones individuales cuando usted lo requiera.  Esto solo aplicara para operaciones de alteracion (Insertar,Actualizar,Eliminar) realizadas mediante la funcion PCO_EjecutarSQLUnaria()';
 	$MULTILANG_ConnAdicionales='Conexiones a bases de datos adicionales';
 	$MULTILANG_ConnPredeterminada='Predeterminado (Misma conexi&oacute;n usada por Practico)';
 	$MULTILANG_ConnOrigenDatos='Origen de datos';

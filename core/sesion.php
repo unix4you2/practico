@@ -70,7 +70,7 @@
 					$ok_captcha=0;
 					// Lleva auditoria con query manual por la falta de $Login_Usuario y solamente si no hay un posible sqlinjection
 					if ($uid_orig==$uid && $clave_orig==$clave)
-						auditar("Elimina sesiones activas al intentar acceso con CAPTCHA incorrecto desde $PCO_DireccionAuditoria",$uid);
+						PCO_Auditar("Elimina sesiones activas al intentar acceso con CAPTCHA incorrecto desde $PCO_DireccionAuditoria",$uid);
 				}
 			session_destroy();
 
@@ -109,11 +109,11 @@
 				  {
 
 						// Busca datos del usuario Practico, sin importar metodo de autenticacion para tener configuraciones de permisos y parametros propios de la herramienta
-						$resultado_usuario=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login='$uid' AND es_plantilla=0 ");
+						$resultado_usuario=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login='$uid' AND es_plantilla=0 ");
 						$registro = $resultado_usuario->fetch();
 						
 						// Se buscan datos de la aplicacion
-						$consulta_parametros=ejecutar_sql("SELECT id,".$ListaCamposSinID_parametros." FROM ".$TablasCore."parametros");
+						$consulta_parametros=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_parametros." FROM ".$TablasCore."parametros");
 						$registro_parametros = $consulta_parametros->fetch();
 
 						// Actualiza las variables de sesion con el registro
@@ -143,15 +143,15 @@
 						if (!isset($_SESSION["PCOSESS_IdiomaUsuario"])) $_SESSION["PCOSESS_IdiomaUsuario"]=$idioma_login;
 
 						// Lleva a auditoria con query manual por la falta de $Login_Usuario
-						auditar("Ingresa al sistema desde $PCO_DireccionAuditoria",$uid);
+						PCO_Auditar("Ingresa al sistema desde $PCO_DireccionAuditoria",$uid);
 						// Actualiza fecha del ultimo ingreso para el usuario
-						ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login=? ","$PCO_FechaOperacion$_SeparadorCampos_$uid");
+						PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login=? ","$PCO_FechaOperacion$_SeparadorCampos_$uid");
 
 						//Copia permisos de la plantilla si aplica
 						if ($registro["plantilla_permisos"]!="")
 							{
 								$plantilla_origen=$registro["plantilla_permisos"];
-								auditar("Carga permisos a su perfil desde plantilla $plantilla_origen",$uid);
+								PCO_Auditar("Carga permisos a su perfil desde plantilla $plantilla_origen",$uid);
 								PCO_copiar_permisos($plantilla_origen,$uid);
 								PCO_copiar_informes($plantilla_origen,$uid);
 							}
@@ -182,7 +182,7 @@
 */
 	if ($PCO_Accion=="Terminar_sesion")
 	{
-		auditar("Cierra sesion desde $PCO_DireccionAuditoria");
+		PCO_Auditar("Cierra sesion desde $PCO_DireccionAuditoria");
 		session_destroy();
 		echo '<form name="Redireccion" method="POST"><input type="Hidden" name="PCO_Accion" value="Mensaje_cierre_sesion"></form><script type="" language="JavaScript">	document.Redireccion.submit();  </script>';
 	}

@@ -82,7 +82,7 @@
             include_once("core/conexiones.php");
             $ConexionPDO=PCO_NuevaConexionBD($MotorBD,$PuertoBD,$BaseDatos,$ServidorBD,$UsuarioBD,$PasswordBD);
 
-            $RegistroVersionMotor=ejecutar_sql($ConsultaVersionMotor)->fetch();
+            $RegistroVersionMotor=PCO_EjecutarSQL($ConsultaVersionMotor)->fetch();
             echo "\n\r";
             echo "  VERSION: ".$RegistroVersionMotor[0];
 

@@ -62,11 +62,11 @@
 		{
 			$mensaje_error="";
 			// Busca datos del formulario
-			$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
+			$consulta_formulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
 			$registro_formulario = $consulta_formulario->fetch();
 			$tabla=$registro_formulario["tabla_datos"];
 
-			$consulta_campos_unicos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND valor_unico=1","$formulario");
+			$consulta_campos_unicos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND valor_unico=1","$formulario");
 			while ($registro_campos_unicos = $consulta_campos_unicos->fetch())
 				{
 					$campo=$registro_campos_unicos["campo"];
@@ -74,11 +74,11 @@
 					// Busca si el campo cuenta con el valor en la tabla
 
 					// Elimina los datos
-					ejecutar_sql_unaria("DELETE FROM ".$tabla." WHERE $campo = '$valor' ");
+					PCO_EjecutarSQLUnaria("DELETE FROM ".$tabla." WHERE $campo = '$valor' ");
 					
-					//POSIBILIDAD DE REEMPLAZAR POR ESTE QUERY SI LA TABLA MANEJA CAMPO ID:  ejecutar_sql_unaria("DELETE FROM ".$tabla." WHERE id=$id_registro_datos ");
+					//POSIBILIDAD DE REEMPLAZAR POR ESTE QUERY SI LA TABLA MANEJA CAMPO ID:  PCO_EjecutarSQLUnaria("DELETE FROM ".$tabla." WHERE id=$id_registro_datos ");
 					
-					auditar("Elimina registro donde ".$campo." = ".$valor." en ".$tabla);
+					PCO_Auditar("Elimina registro donde ".$campo." = ".$valor." en ".$tabla);
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_AccionDEPRECATED" value="editar_formulario">
 						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
@@ -121,19 +121,19 @@
 			$mensaje_error="";
 
 			// Busca datos del formulario
-			$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
+			$consulta_formulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
 			$registro_formulario = $consulta_formulario->fetch();
 
 /*
 			// Busca los campos del form marcados como valor unico y verifica que no existan valores en la tabla
 			$tabla=$registro_formulario["tabla_datos"];
-			$consulta_campos_unicos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1 AND valor_unico=1");
+			$consulta_campos_unicos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1 AND valor_unico=1");
 			while ($registro_campos_unicos = $consulta_campos_unicos->fetch())
 				{
 					$campo=$registro_campos_unicos["campo"];
 					$valor=${$campo};
 					// Busca si el campo cuenta con el valor en la tabla
-					$consulta_existente=ejecutar_sql("SELECT id FROM ".$tabla." WHERE $campo='$valor'");
+					$consulta_existente=PCO_EjecutarSQL("SELECT id FROM ".$tabla." WHERE $campo='$valor'");
 					$registro_existente = $consulta_existente->fetch();
 					if ($registro_existente["id"]!="")
 						$mensaje_error.=$MULTILANG_ErrFrmDuplicado.$campo.'<br>';
@@ -142,7 +142,7 @@
 
 			// Busca los campos del form marcados como obligatorios a los que no se les ingreso valor
 			$tabla=$registro_formulario["tabla_datos"];
-			$consulta_campos_obligatorios=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND obligatorio=1","$formulario");
+			$consulta_campos_obligatorios=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND obligatorio=1","$formulario");
 			while ($registro_campos_obligatorios = $consulta_campos_obligatorios->fetch())
 				{
 					$campo=$registro_campos_obligatorios["campo"];
@@ -163,7 +163,7 @@
                     //Agregar el campo a la lista solamente si es de datos y si es diferente al campo ID que es usado para la actualizacion (objetos de tipo etiqueta o iframes son pasados por alto)
                     $cadena_tipos_excluidos=" AND tipo<>'etiqueta' AND tipo<>'url_iframe' AND tipo<>'informe' AND tipo<>'form_consulta' AND tipo<>'campo_etiqueta' AND tipo<>'archivo_adjunto' AND tipo<>'boton_comando' ";
 					
-                    $consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND campo<>'id' $cadena_tipos_excluidos ","$formulario");
+                    $consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND campo<>'id' $cadena_tipos_excluidos ","$formulario");
 					while ($registro_campos = $consulta_campos->fetch())
 						{
                             //Verifica que el campo se encuentre dentro de la tabla, para descartar campos manuales mal escritos o usados para javascripts y otros fines.
@@ -177,8 +177,8 @@
 					$cadena_campos_interrogantes=substr($cadena_campos_interrogantes, 0, strlen($cadena_campos_interrogantes)-1);
 
 					// Actualiza los datos
-					ejecutar_sql_unaria("UPDATE ".$registro_formulario["tabla_datos"]." SET $cadena_campos_interrogantes WHERE id=? ",$cadena_nuevos_valores.$id_registro_datos);
-					auditar("Actualiza registro $id_registro_datos en ".$registro_formulario["tabla_datos"]);
+					PCO_EjecutarSQLUnaria("UPDATE ".$registro_formulario["tabla_datos"]." SET $cadena_campos_interrogantes WHERE id=? ",$cadena_nuevos_valores.$id_registro_datos);
+					PCO_Auditar("Actualiza registro $id_registro_datos en ".$registro_formulario["tabla_datos"]);
 					//echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
@@ -242,18 +242,18 @@
 			$mensaje_error="";
 
 			// Busca datos del formulario
-			$consulta_formulario=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
+			$consulta_formulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
 			$registro_formulario = $consulta_formulario->fetch();
 
 			// Busca los campos del form marcados como valor unico y verifica que no existan valores en la tabla
 			$tabla=$registro_formulario["tabla_datos"];
-			$consulta_campos_unicos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND valor_unico=1","$formulario");
+			$consulta_campos_unicos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND valor_unico=1","$formulario");
 			while ($registro_campos_unicos = $consulta_campos_unicos->fetch())
 				{
 					$campo=$registro_campos_unicos["campo"];
 					$valor=${$campo};
 					// Busca si el campo cuenta con el valor en la tabla
-					$consulta_existente=ejecutar_sql("SELECT id FROM ".$tabla." WHERE $campo='$valor'");
+					$consulta_existente=PCO_EjecutarSQL("SELECT id FROM ".$tabla." WHERE $campo='$valor'");
 					$registro_existente = $consulta_existente->fetch();
 					if ($registro_existente["id"]!="")
 						$mensaje_error.=$MULTILANG_ErrFrmDuplicado.$campo.'<br>';
@@ -261,7 +261,7 @@
 
 			// Busca los campos del form marcados como obligatorios a los que no se les ingreso valor
 			$tabla=$registro_formulario["tabla_datos"];
-			$consulta_campos_obligatorios=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND obligatorio=1","$formulario");
+			$consulta_campos_obligatorios=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND obligatorio=1","$formulario");
 			while ($registro_campos_obligatorios = $consulta_campos_obligatorios->fetch())
 				{
 					$campo=$registro_campos_obligatorios["campo"];
@@ -281,7 +281,7 @@
 					$lista_valores_interrogantes="";
 					$lista_valores_concatenados="";
 
-					$consulta_campos=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1","$formulario");
+					$consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1","$formulario");
 					while ($registro_campos = $consulta_campos->fetch())
 						{
 							//Hace la operacion con el campo solamente si es de datos (objetos de tipo etiqueta o iframes son pasados por alto)
@@ -389,8 +389,8 @@
 					$lista_valores_concatenados=substr($lista_valores_concatenados, 0, strlen($lista_valores_concatenados)-strlen($_SeparadorCampos_));					
 
 					//Inserta los datos del registro en BD
-					ejecutar_sql_unaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores_interrogantes.")",$lista_valores_concatenados);
-					auditar("Inserta registro en ".$registro_formulario["tabla_datos"]);
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores_interrogantes.")",$lista_valores_concatenados);
+					PCO_Auditar("Inserta registro en ".$registro_formulario["tabla_datos"]);
 					//Si no hay errores en carga de archivos redirecciona normal, sino redirecciona con los errores
 					if ($errores_de_carga=="")
 						//echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
@@ -456,8 +456,8 @@
 */
 	if ($PCO_Accion=="eliminar_accion_formulario")
 		{
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_boton WHERE id=? ","$boton");
-			auditar("Elimina accion del formulario $formulario");
+			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."formulario_boton WHERE id=? ","$boton");
+			PCO_Auditar("Elimina accion del formulario $formulario");
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="editar_formulario">
 			<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -492,10 +492,10 @@
 	if ($PCO_Accion=="eliminar_campo_formulario")
 		{
 		    //Elimina los eventos relacionados
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."evento_objeto WHERE objeto=? ","$campo");
+			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."evento_objeto WHERE objeto=? ","$campo");
             //Elimina el control como tal
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE id=? ","$campo");
-			auditar("Elimina campo del formulario $formulario");
+			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE id=? ","$campo");
+			PCO_Auditar("Elimina campo del formulario $formulario");
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="editar_formulario">
 			<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -555,8 +555,8 @@
                         }
 					$ListaCamposyValores.="id=id"; //Agregado para evitar coma final
 
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario_objeto SET ".$ListaCamposyValores." WHERE id=?","$idcampomodificado");
-					auditar("Modifica diseno campo $idcampomodificado para formulario $formulario");
+					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."formulario_objeto SET ".$ListaCamposyValores." WHERE id=?","$idcampomodificado");
+					PCO_Auditar("Modifica diseno campo $idcampomodificado para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					    <input type="Hidden" name="PCO_Accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -629,9 +629,9 @@
 					$ListaCamposyValores = substr ($ListaCamposyValores, 0, strlen($_SeparadorCampos_)*(-1));
 					// Define la consulta de insercion del nuevo campo
 					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (".$ListaInterrogantes.")";
-					ejecutar_sql_unaria($consulta_insercion,"$ListaCamposyValores");
+					PCO_EjecutarSQLUnaria($consulta_insercion,"$ListaCamposyValores");
 					$id=obtener_ultimo_id_insertado($ConexionPDO);
-					auditar("Crea campo $id para formulario $formulario");
+					PCO_Auditar("Crea campo $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					    <input type="Hidden" name="PCO_Accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -683,9 +683,9 @@
 			if ($mensaje_error=="")
 				{
 					//$accion_usuario=addslashes($accion_usuario); //DEPRECATED Version 15.1-
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$formulario$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$retorno_titulo$_SeparadorCampos_$retorno_texto$_SeparadorCampos_$confirmacion_texto$_SeparadorCampos_$retorno_icono$_SeparadorCampos_$retorno_estilo");
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$formulario$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$retorno_titulo$_SeparadorCampos_$retorno_texto$_SeparadorCampos_$confirmacion_texto$_SeparadorCampos_$retorno_icono$_SeparadorCampos_$retorno_estilo");
 					$id=obtener_ultimo_id_insertado($ConexionPDO);
-					auditar("Crea boton $id para formulario $formulario");
+					PCO_Auditar("Crea boton $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
@@ -716,12 +716,12 @@
 	if ($PCO_Accion=="editar_evento_objeto")
 		{
 			//Busca si ya existe un evento del mismo tipo para ese objeto
-			$registro_evento_previo=ejecutar_sql("SELECT * FROM ".$TablasCore."evento_objeto WHERE objeto=? AND evento=? ","$id_objeto_evento$_SeparadorCampos_$evento_objeto")->fetch();
+			$registro_evento_previo=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."evento_objeto WHERE objeto=? AND evento=? ","$id_objeto_evento$_SeparadorCampos_$evento_objeto")->fetch();
             $IdEventoPrevio=$registro_evento_previo["id"];
             $JavaScriptEventoPrevio=$registro_evento_previo["javascript"];
             
             //Busca el ID_HTML del objeto
-			$registro_objeto=ejecutar_sql("SELECT * FROM ".$TablasCore."formulario_objeto WHERE id=? ","$id_objeto_evento")->fetch();
+			$registro_objeto=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario_objeto WHERE id=? ","$id_objeto_evento")->fetch();
             
             $NaturalDocs_PlantillaFuncion="\n/*\nFunction: SUNOMBRE_$evento_objeto\n\tIngrese aqui la descripcion de su funcion, procedimiento o proceso realizado por este evento\n\n\tParametros:\n\n\t\tParametro1 - Descripcion del primer parametro de entrada\n\t\tParametro2 - Descripcion del segundo parametro de entrada\n\n\tProceso simplificado:\n\t\t(start code)\n\t\t\tInstrucciones especificas importantes, Scripts u operaciones de BD, Etc\n\t\t(end)\n\n\tSalida:\n\n\t\tDescriba la salida de esta funcion, procedimiento o proceso\n\n\tVea tambien:\n\n\t\t<FuncionRelacionada1> | <FuncionRelacionada2> | <FuncionRelacionada3>\n*/\n\n";
             //Agrega una plantilla base cuando se esta creando el evento
@@ -788,7 +788,7 @@ if ($PCO_Accion=="editar_formulario")
 	    //Si no recibe un nombre de tabla intenta averiguarlo desde el formulario
 	    if ($nombre_tabla=="")
 	        {
-	            $RegistroFormulario=ejecutar_sql("SELECT tabla_datos FROM ".$TablasCore."formulario WHERE id=? ","$formulario")->fetch();
+	            $RegistroFormulario=PCO_EjecutarSQL("SELECT tabla_datos FROM ".$TablasCore."formulario WHERE id=? ","$formulario")->fetch();
                 $nombre_tabla=$RegistroFormulario["tabla_datos"];
                 //$nombre_tabla=PCO_ReemplazarVariablesPHPEnCadena($nombre_tabla);
 	        }
@@ -870,7 +870,7 @@ if ($PCO_Accion=="editar_formulario")
 				//Si se trata de la edicion de un campo entonces busca su registro para agregar valores al form
 				if (@$popup_activo=="FormularioCampos")
 					{
-						$consulta_campo_editar=@ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE id=? ","$campo");
+						$consulta_campo_editar=@PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE id=? ","$campo");
 						$registro_campo_editar = $consulta_campo_editar->fetch();
 					}
 				?>
@@ -1335,7 +1335,7 @@ if ($PCO_Accion=="editar_formulario")
                                     $LimiteInferiorBusqueda="-10000";
                                     if ($ModoDesarrolladorPractico!="-10000")
                                         $LimiteInferiorBusqueda=0;
-                                    $consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id>=$LimiteInferiorBusqueda ORDER BY titulo");
+                                    $consulta_informs=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id>=$LimiteInferiorBusqueda ORDER BY titulo");
                                     while($registro_informes = $consulta_informs->fetch())
                                         {
                                             $seleccion_campo="";
@@ -1355,7 +1355,7 @@ if ($PCO_Accion=="editar_formulario")
                                 <select id="formulario_vinculado" name="formulario_vinculado" class="form-control input-sm">
                                 <option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                 <?php
-                                    $consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id>=0 ORDER BY titulo");
+                                    $consulta_forms=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id>=0 ORDER BY titulo");
                                     while($registro_formularios = $consulta_forms->fetch())
                                         {
                                             $seleccion_campo="";
@@ -1517,7 +1517,7 @@ if ($PCO_Accion=="editar_formulario")
                                             <select id="columna" name="columna" class="form-control input-sm" >
                                                 <?php
                                                     // Obtiene numero de columnas para el formulario
-                                                    $consulta_columnas=ejecutar_sql("SELECT columnas FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
+                                                    $consulta_columnas=PCO_EjecutarSQL("SELECT columnas FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
                                                     $registro_columnas = $consulta_columnas->fetch();
                                                     $columnas_formulario=$registro_columnas["columnas"];
                                                     for ($i=1;$i<=$columnas_formulario;$i++)
@@ -1830,7 +1830,7 @@ if ($PCO_Accion=="editar_formulario")
                                                 <?php
                                                     //Presenta los tipos de evento disponibles para controles (01,02 y 03)
                                                     $CategoriaEvento="";
-                                                    $resultado_eventos = ejecutar_sql("SELECT * FROM ".$TablasCore."evento_inventario WHERE (categoria LIKE '01%' or categoria LIKE '02%' or categoria LIKE '03%') ORDER BY categoria");
+                                                    $resultado_eventos = PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."evento_inventario WHERE (categoria LIKE '01%' or categoria LIKE '02%' or categoria LIKE '03%') ORDER BY categoria");
                                                     while ($registro_eventos = $resultado_eventos->fetch())
                                                         {
                                                             if ($CategoriaEvento!=$registro_eventos["categoria"])
@@ -1866,7 +1866,7 @@ if ($PCO_Accion=="editar_formulario")
                                         <tbody>
                     		 <?php
                                     $IdentificadorObjeto=$registro_campo_editar["id"];
-                    				$consulta_eventos_definidos=ejecutar_sql("SELECT id,".$ListaCamposSinID_evento_objeto." FROM ".$TablasCore."evento_objeto WHERE objeto='$IdentificadorObjeto' ");
+                    				$consulta_eventos_definidos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_evento_objeto." FROM ".$TablasCore."evento_objeto WHERE objeto='$IdentificadorObjeto' ");
                     				while($registro_eventos_definidos = $consulta_eventos_definidos->fetch())
                     					{
                     						echo '<tr>
@@ -2156,7 +2156,7 @@ if ($PCO_Accion=="editar_formulario")
                 //Determina cual es la pestana para agregar el titulo cada que cambie en el listado
                 $pestana_actual="";
 				//Busca los controles
-                $consulta=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER BY pestana_objeto,columna,peso","$formulario");
+                $consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER BY pestana_objeto,columna,peso","$formulario");
 				while($registro = $consulta->fetch())
 					{
 						//Si el registro cambia de pestana entonces agrega el titulo
@@ -2177,13 +2177,13 @@ if ($PCO_Accion=="editar_formulario")
                         if ($registro["tipo"]=="informe")
                             {
                                 $IdentificadorBusqueda=$registro["informe_vinculado"];
-                                $RegistroEmbebido=ejecutar_sql("SELECT titulo FROM ".$TablasCore."informe WHERE id=$IdentificadorBusqueda ")->fetch();
+                                $RegistroEmbebido=PCO_EjecutarSQL("SELECT titulo FROM ".$TablasCore."informe WHERE id=$IdentificadorBusqueda ")->fetch();
                                 $Complemento_NombreEmbebido="<br><i>".$RegistroEmbebido["titulo"]."</i>";
                             }
                         if ($registro["tipo"]=="form_consulta")
                             {
                                 $IdentificadorBusqueda=$registro["formulario_vinculado"];
-                                $RegistroEmbebido=ejecutar_sql("SELECT titulo FROM ".$TablasCore."formulario WHERE id=$IdentificadorBusqueda ")->fetch();
+                                $RegistroEmbebido=PCO_EjecutarSQL("SELECT titulo FROM ".$TablasCore."formulario WHERE id=$IdentificadorBusqueda ")->fetch();
                                 $Complemento_NombreEmbebido="<br><i>".$RegistroEmbebido["titulo"]."</i>";
                             }
 						
@@ -2348,7 +2348,7 @@ if ($PCO_Accion=="editar_formulario")
                         </thead>
                         <tbody>
 			 <?php
-				$consulta_botones=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario_boton." FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario' ORDER BY peso,id");
+				$consulta_botones=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_boton." FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario' ORDER BY peso,id");
 				while($registro = $consulta_botones->fetch())
 					{
 						$peso_aumentado=$registro["peso"]+1;
@@ -2434,7 +2434,7 @@ if ($PCO_Accion=="editar_formulario")
 
     <?php
 		// Inicia presentacion de ventana de edicion de formulario
-		$consulta_form=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
+		$consulta_form=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
 		$registro_form = $consulta_form->fetch();
 
         //Barra basica de edicion de contenidos y controles
@@ -2641,8 +2641,8 @@ if ($PCO_Accion=="editar_formulario")
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
             <?php
-            	//function cargar_formulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno=0)
-                cargar_formulario($formulario,1,"","",0,1); //Cargar el form en modo de diseno
+            	//function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno=0)
+                PCO_CargarFormulario($formulario,1,"","",0,1); //Cargar el form en modo de diseno
             ?>
         </div>
     </div>
@@ -2687,8 +2687,8 @@ if ($PCO_Accion=="editar_formulario")
 */
 	if ($PCO_Accion=="eliminar_evento_objeto")
 		{
-			ejecutar_sql_unaria("DELETE FROM ".$TablasCore."evento_objeto WHERE id=? ","$evento");
-			auditar("Elimina evento javascript $evento");
+			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."evento_objeto WHERE id=? ","$evento");
+			PCO_Auditar("Elimina evento javascript $evento");
 			echo '<script TYPE="text/javascript" LANGUAGE="JavaScript">
     			alert("'.$MULTILANG_Eliminar.' '.$MULTILANG_Evento.' '.$MULTILANG_Finalizado.'");
     			window.close();
@@ -2708,16 +2708,16 @@ if ($PCO_Accion=="editar_formulario")
 	if ($PCO_Accion=="actualizar_java_evento")
 		{
 			//Busca si ya existe un evento del mismo tipo para ese objeto
-			$registro_evento_previo=ejecutar_sql("SELECT * FROM ".$TablasCore."evento_objeto WHERE objeto=? AND evento=? ","$id_objeto_evento$_SeparadorCampos_$evento_objeto")->fetch();
+			$registro_evento_previo=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."evento_objeto WHERE objeto=? AND evento=? ","$id_objeto_evento$_SeparadorCampos_$evento_objeto")->fetch();
 			if ($registro_evento_previo["id"]=="")
 			    {
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."evento_objeto (".$ListaCamposSinID_evento_objeto.") VALUES (?,?,?)","$id_objeto_evento$_SeparadorCampos_$evento_objeto$_SeparadorCampos_$javascript_eventos");
-					auditar("Agrega evento javascript para $id_objeto_evento");
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."evento_objeto (".$ListaCamposSinID_evento_objeto.") VALUES (?,?,?)","$id_objeto_evento$_SeparadorCampos_$evento_objeto$_SeparadorCampos_$javascript_eventos");
+					PCO_Auditar("Agrega evento javascript para $id_objeto_evento");
 			    }
 			else
 			    {
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."evento_objeto SET javascript=? WHERE objeto=? AND evento=? ","$javascript_eventos$_SeparadorCampos_$id_objeto_evento$_SeparadorCampos_$evento_objeto");
-					auditar("Actualiza evento javascript para $id_objeto_evento");
+					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."evento_objeto SET javascript=? WHERE objeto=? AND evento=? ","$javascript_eventos$_SeparadorCampos_$id_objeto_evento$_SeparadorCampos_$evento_objeto");
+					PCO_Auditar("Actualiza evento javascript para $id_objeto_evento");
 			    }
 			die();
 		}
@@ -2744,8 +2744,8 @@ if ($PCO_Accion=="editar_formulario")
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("UPDATE ".$TablasCore."formulario SET titulo=?,ayuda_titulo=?,ayuda_texto=?,tabla_datos=?,columnas=?,javascript=?,borde_visible=?,estilo_pestanas=?,id_html=? WHERE id= ? ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$formulario");
-					auditar("Actualiza formulario $formulario para $tabla_datos");
+					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."formulario SET titulo=?,ayuda_titulo=?,ayuda_texto=?,tabla_datos=?,columnas=?,javascript=?,borde_visible=?,estilo_pestanas=?,id_html=? WHERE id= ? ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$formulario");
+					PCO_Auditar("Actualiza formulario $formulario para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
 					<input type="Hidden" name="PCO_Accion" value="editar_formulario">
@@ -2793,9 +2793,9 @@ if ($PCO_Accion=="editar_formulario")
 
 			if ($mensaje_error=="")
 				{
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html");
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html");
 					$id=obtener_ultimo_id_insertado($ConexionPDO);
-					auditar("Crea formulario $id para $tabla_datos");
+					PCO_Auditar("Crea formulario $id para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
 					<input type="Hidden" name="PCO_Accion" value="editar_formulario">
@@ -2929,7 +2929,7 @@ if ($PCO_Accion=="confirmar_importacion_formulario")
 				<li>Titulo: '.base64_decode($xml_importado->core_formulario[0]->titulo).'</li>
 				<br>
 				<a class="btn btn-block btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
-				auditar("Importa $archivo_cargado en objeto $idObjetoInsertado");
+				PCO_Auditar("Importa $archivo_cargado en objeto $idObjetoInsertado");
 			}
 		else
 			{
@@ -3113,7 +3113,7 @@ if ($PCO_Accion=="importar_formulario")
                     <?php
                         // Busca por las auditorias asociadas a actualizacion de plataforma:
                         // Acciones:  Actualiza version de plataforma | _Actualizacion_ | Analiza archivo tmp/Practico | Carga archivo en carpeta tmp - Practico
-                        $resultado=@ejecutar_sql("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE accion LIKE '%Import%' AND accion LIKE '%.xml en objeto%' ORDER BY fecha DESC, hora DESC LIMIT 0,30");
+                        $resultado=@PCO_EjecutarSQL("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE accion LIKE '%Import%' AND accion LIKE '%.xml en objeto%' ORDER BY fecha DESC, hora DESC LIMIT 0,30");
                         while($registro = $resultado->fetch())
                             {
                                 echo '<tr>
@@ -3307,7 +3307,7 @@ function FrmAutoRun()
   <div class="col-md-8">
 <?php
         //Carga informe interno con los elementos tipo formulario
-		cargar_informe(-2,1,"","",1);
+		PCO_CargarInforme(-2,1,"","",1);
 echo '
 
   </div>

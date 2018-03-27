@@ -47,7 +47,7 @@
 /* ################################################################## */
 
 	//Busca conexiones adicionales definidas y genera la variable correspondiente
-	$PCO_ConexionesExtra=ejecutar_sql("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE 1=1 ");
+	$PCO_ConexionesExtra=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE 1=1 ");
 	while($registro = $PCO_ConexionesExtra->fetch())
 		{
 			$ConexExtra_id=$registro["id"];

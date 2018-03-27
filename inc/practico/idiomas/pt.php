@@ -1233,7 +1233,7 @@
 	$MULTILANG_ReplicaDefinidos='Servidores de replicação automática definida';
 	$MULTILANG_AgregarReplica='Adicionar uma nova conexão';
 	$MULTILANG_ReplicaTodo='Use-o como um espelho';
-	$MULTILANG_AyudaReplica='Definir se todas as operações de banco de dados sobre o sistema principal deve ser replicado através desta ligação. Se este valus é NÃO, Practico vai definir a conexão e torná-lo pronto para ser usado por operações de código ou individual apenas quando quiser.   This applies for data upgrade operations (Insert,Update,Delete) that was maked by the ejecutar_sql_unaria() internal function';
+	$MULTILANG_AyudaReplica='Definir se todas as operações de banco de dados sobre o sistema principal deve ser replicado através desta ligação. Se este valus é NÃO, Practico vai definir a conexão e torná-lo pronto para ser usado por operações de código ou individual apenas quando quiser.   This applies for data upgrade operations (Insert,Update,Delete) that was maked by the PCO_EjecutarSQLUnaria() internal function';
 	$MULTILANG_ConnAdicionales='Conexões de banco de dados extras definidas';
 	$MULTILANG_ConnPredeterminada='Padrão (mesma conexão usada pelo Practico)';
 	$MULTILANG_ConnOrigenDatos='Fonte de dados';

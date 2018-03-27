@@ -97,7 +97,7 @@ if ($PCO_Accion=="actualizar_practico")
                     <?php
                         // Busca por las auditorias asociadas a actualizacion de plataforma:
                         // Acciones:  Actualiza version de plataforma | _Actualizacion_ | Analiza archivo tmp/Practico | Carga archivo en carpeta tmp - Practico
-                        $resultado=@ejecutar_sql("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE (accion LIKE '%Actualiza version de plataforma%' OR accion LIKE '%_Actualizacion_%' OR accion LIKE '%Analiza archivo tmp/Practico%' OR accion LIKE '%Carga archivo en carpeta tmp - Practico%') ORDER BY fecha DESC, hora DESC LIMIT 0,30");
+                        $resultado=@PCO_EjecutarSQL("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE (accion LIKE '%Actualiza version de plataforma%' OR accion LIKE '%_Actualizacion_%' OR accion LIKE '%Analiza archivo tmp/Practico%' OR accion LIKE '%Carga archivo en carpeta tmp - Practico%') ORDER BY fecha DESC, hora DESC LIMIT 0,30");
                         while($registro = $resultado->fetch())
                             {
                                 echo '<tr>
@@ -174,7 +174,7 @@ if ($PCO_Accion=="cargar_archivo")
 						<input type="Hidden" name="PCO_Accion" value="'.$siguiente_accion.'">
                         <button type="submit" class="btn btn-success btn-block"><i class="fa fa-list"></i> '.$texto_boton_siguiente.'</button>
 					</form>';
-				auditar("Carga archivo en carpeta $carpeta - $nombre_archivo");
+				PCO_Auditar("Carga archivo en carpeta $carpeta - $nombre_archivo");
 			}
 		else
 			{
@@ -325,7 +325,7 @@ if ($PCO_Accion=="analizar_parche")
 					</form>';
                 else
                     mensaje('<i class="fa fa-warning fa-2x text-red texto-blink"></i> '.$MULTILANG_Error, $MULTILANG_ActDesEscritura, '', '', 'alert alert-danger alert-dismissible');
-				auditar("Analiza archivo $archivo_cargado");
+				PCO_Auditar("Analiza archivo $archivo_cargado");
 			}
 		else
 			{
@@ -459,7 +459,7 @@ if ($PCO_Accion=="aplicar_parche")
 				<hr><font color=blue>- '.$MULTILANG_ActMsj4.'. -</font></b>
 				<hr>
 				<b>'.$MULTILANG_ProcesoFin.'<br>';
-				auditar("Actualiza version de plataforma desde $version_actual hacia $version_final");
+				PCO_Auditar("Actualiza version de plataforma desde $version_actual hacia $version_final");
 			}
 		else
 			{

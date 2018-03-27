@@ -61,7 +61,7 @@
 					Objeto indicado por la variable de entrada cargado en pantalla mediante llamado a la funcion correspondiente.
 
 				Ver tambien:
-					<cargar_formulario> | <cargar_informe>
+					<PCO_CargarFormulario> | <PCO_CargarInforme>
 			*/
 
 			$mensaje_error="";
@@ -81,7 +81,7 @@
 						{
 							//Evalua si fueron enviados parametros adicionales
 							if (@$partes_objeto[2]!="") $en_ventana=$partes_objeto[2];
-							cargar_formulario($partes_objeto[1],@$en_ventana,@$PCO_CampoBusquedaBD,@$PCO_ValorBusquedaBD);
+							PCO_CargarFormulario($partes_objeto[1],@$en_ventana,@$PCO_CampoBusquedaBD,@$PCO_ValorBusquedaBD);
 						}
 					//Si es un informe lo llama con sus parámetros
 					if ($partes_objeto[0]=="inf")
@@ -90,7 +90,7 @@
 							if (@$partes_objeto[3]!="") $formato =$partes_objeto[3];
 							if (@$partes_objeto[4]!="") $estilo =$partes_objeto[4];
 							if (@$partes_objeto[5]!="") $embebido =$partes_objeto[5];
-							cargar_informe($partes_objeto[1],@$en_ventana);
+							PCO_CargarInforme($partes_objeto[1],@$en_ventana);
 						}
 				}
 			else
@@ -777,7 +777,7 @@ $salida=sprintf("<?php
                                     if ($TipoElementos=="Inf")
                                         {
                                             //Verifica primero que si exista el ID de informe asociado antes de proceder
-                                            $RegistroElemento=@ejecutar_sql("SELECT id FROM ".$TablasCore."informe WHERE id = '$ElementoExportar' ")->fetch();
+                                            $RegistroElemento=@PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."informe WHERE id = '$ElementoExportar' ")->fetch();
                                             if ($RegistroElemento["id"]!="")
                                                 {
                                                     $PCO_NombreArchivoXML=$PrefijoPath."RepID_".$ElementoExportar.$InfijoPath.".xml";
@@ -788,7 +788,7 @@ $salida=sprintf("<?php
                                     if ($TipoElementos=="Frm")
                                         {
                                             //Verifica primero que si exista el ID de informe asociado antes de proceder
-                                            $RegistroElemento=@ejecutar_sql("SELECT id FROM ".$TablasCore."formulario WHERE id = '$ElementoExportar' ")->fetch();
+                                            $RegistroElemento=@PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."formulario WHERE id = '$ElementoExportar' ")->fetch();
                                             if ($RegistroElemento["id"]!="")
                                                 {
                                                     $PCO_NombreArchivoXML=$PrefijoPath."FormID_".$ElementoExportar.$InfijoPath.".xml";

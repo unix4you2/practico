@@ -24,7 +24,7 @@
 		{
 			// Llama las funciones de BD definidas por Practico
 			// No hay que definir conexiones ni validar excepciones pues Practico lo hace
-			$resultado = ejecutar_sql("SELECT id,usuario_login,accion,fecha,hora FROM core_auditoria WHERE 1=1");
+			$resultado = PCO_EjecutarSQL("SELECT id,usuario_login,accion,fecha,hora FROM core_auditoria WHERE 1=1");
 
 			// Define variable $registros para guardar los resultados
 			$registros = array();
@@ -46,11 +46,11 @@ estructuras de bases de datos diferentes.
 
 Asi por ejemplo, teniendo como base el archivo inc/practico/def_basedatos.php podria usar la variable
 que describe la lista de campos de una tabla para garantizar su funcionamiento en cualqueir version asi:
-	$resultado = ejecutar_sql("SELECT id,$ListaCamposSinID_auditoria FROM core_auditoria WHERE 1=1");
+	$resultado = PCO_EjecutarSQL("SELECT id,$ListaCamposSinID_auditoria FROM core_auditoria WHERE 1=1");
 
 Tambien podria utilizar la variable que indica los prefijos configurados durante la instalacion
 y hacer compatible su modulo o aplicacion con diferentes configuraciones de la siguiente manera:
-	$resultado = ejecutar_sql("SELECT id,$ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE 1=1");
+	$resultado = PCO_EjecutarSQL("SELECT id,$ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE 1=1");
 
 El query o consulta anterior es equivalente al definido en la linea 27 de este archivo.  Solo que mas compatible
 */

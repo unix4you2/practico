@@ -37,7 +37,7 @@ if ($PCO_Accion=="PCO_ReportarBugs")
 	{
         //abrir_dialogo_modal("myModalOAUTH",$MULTILANG_ConfiguracionGeneral.": ".$MULTILANG_OauthButt,"modal-wide"); 
         //Carga el formulario con el diseno para gestionar proveedores OAuth.  Deberia deshabilitarse su cargue en modo de diseno del mismo para permitir cambios.
-        cargar_formulario("-3",1);
+        PCO_CargarFormulario("-3",1);
         //cerrar_dialogo_modal();
 	}
 	
@@ -62,7 +62,7 @@ if ($PCO_Accion=="PCO_EditarConfiguracionOAuth")
 		
         //abrir_dialogo_modal("myModalOAUTH",$MULTILANG_ConfiguracionGeneral.": ".$MULTILANG_OauthButt,"modal-wide"); 
         //Carga el formulario con el diseno para gestionar proveedores OAuth.  Deberia deshabilitarse su cargue en modo de diseno del mismo para permitir cambios.
-        cargar_formulario("-5",1);
+        PCO_CargarFormulario("-5",1);
         //cerrar_dialogo_modal();
 	}
 
@@ -170,7 +170,7 @@ if ($PCO_Accion=="mantenimiento_tablas")
 						//Si la tabla es de aplicacion hace la operacion
 						if (@strpos($nombre_tabla,$PCO_PrefijoTablas)!==FALSE)
 							{
-								$registro_conteos_tablas=ejecutar_sql("$PCO_TipoOperacion TABLE $nombre_tabla")->fetch();
+								$registro_conteos_tablas=PCO_EjecutarSQL("$PCO_TipoOperacion TABLE $nombre_tabla")->fetch();
 								echo '
 									<tr>
 										<td>'.$registro_conteos_tablas[0].'</td>
@@ -183,10 +183,10 @@ if ($PCO_Accion=="mantenimiento_tablas")
 			}
 
 		if ($PCO_TipoOperacion=="TRUNCATE")
-			$resultado_consulta=ejecutar_sql("TRUNCATE TABLE $PCO_PrefijoTablas");
+			$resultado_consulta=PCO_EjecutarSQL("TRUNCATE TABLE $PCO_PrefijoTablas");
 
 		if ($PCO_TipoOperacion=="DELETE")
-			$resultado_consulta=ejecutar_sql("DELETE FROM $PCO_PrefijoTablas");
+			$resultado_consulta=PCO_EjecutarSQL("DELETE FROM $PCO_PrefijoTablas");
 
 		echo '
 			<tr>

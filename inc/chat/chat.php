@@ -55,7 +55,7 @@ function chatHeartbeat() {
 	global $TablasCore,$ZonaHoraria;
 	
 	$usuario_chat=$_SESSION['username'];
-	$consulta=ejecutar_sql("select * from ".$TablasCore."chat where (".$TablasCore."chat.destinatario = ? AND recd = 0) order by id ASC","$usuario_chat");
+	$consulta=PCO_EjecutarSQL("select * from ".$TablasCore."chat where (".$TablasCore."chat.destinatario = ? AND recd = 0) order by id ASC","$usuario_chat");
 	
 	$items = '';
 
@@ -128,7 +128,7 @@ EOD;
 }
 
 	$usuario_chat=$_SESSION['username'];
-	ejecutar_sql_unaria("UPDATE ".$TablasCore."chat SET recd = 1 WHERE ".$TablasCore."chat.destinatario = ? and recd = 0","$usuario_chat");
+	PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."chat SET recd = 1 WHERE ".$TablasCore."chat.destinatario = ? and recd = 0","$usuario_chat");
 
 	if ($items != '') {
 		$items = substr($items, 0, -1);
@@ -209,7 +209,7 @@ EOD;
 
 	unset($_SESSION['tsChatBoxes'][$_POST['destinatario']]);
 
-	ejecutar_sql_unaria("INSERT INTO ".$TablasCore."chat (".$TablasCore."chat.remitente,".$TablasCore."chat.destinatario,message,sent) values (?,?,?,NOW());","$remitente$_SeparadorCampos_$destinatario$_SeparadorCampos_$message");
+	PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."chat (".$TablasCore."chat.remitente,".$TablasCore."chat.destinatario,message,sent) values (?,?,?,NOW());","$remitente$_SeparadorCampos_$destinatario$_SeparadorCampos_$message");
 	echo "1";
 	exit(0);
 }

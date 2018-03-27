@@ -265,7 +265,7 @@ function PresentarEstadoMaquina($IDRegistroMonitor)
 		global $MULTILANG_MonLinea,$MULTILANG_MonCaido;
 		
 		//Busca los datos del monitor
-		$Maquina=ejecutar_sql("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
+		$Maquina=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
 		
 		//Verifica estado de la maquina y servicio
 		$estado_actual=ServicioOnline($Maquina["host"],$Maquina["puerto"],$Maquina["tipo_ping"]);
@@ -301,7 +301,7 @@ function PresentarEstadoMaquina($IDRegistroMonitor)
 					PCO_EnviarCorreo("noreply@practico.org",$Maquina["correo_alerta"],$Maquina["nombre"]." $EstadoMonitor [$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos] ",$Maquina["nombre"]." [".$Maquina["host"].":".$Maquina["puerto"]."] -> ".$Maquina["tipo_ping"]);
 			
 				//Actualiza el estado actual del monitor
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."monitoreo SET ultimo_estado='$EstadoMonitor' WHERE id='$IDRegistroMonitor' ");
+				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."monitoreo SET ultimo_estado='$EstadoMonitor' WHERE id='$IDRegistroMonitor' ");
 			}
 		
 		//Determina si a la maquina o servicio es validado por socket
@@ -342,7 +342,7 @@ function PresentarSensorRango($IDRegistroMonitor,$PresentarEnFormatoMaquina=0)
 		global $MULTILANG_FrmValorMinimo,$MULTILANG_FrmValorMaximo;
 		
 		//Busca los datos del monitor
-		$Sensor=ejecutar_sql("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
+		$Sensor=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
 
         //Obtiene el valor de acuerdo al tipo de comando
         $Palabras = explode(' ',trim($Sensor["comando"]));
@@ -352,10 +352,10 @@ function PresentarSensorRango($IDRegistroMonitor,$PresentarEnFormatoMaquina=0)
                 if($Sensor["conexion_origen_datos"]!="")
                     {
                         global ${$Sensor["conexion_origen_datos"]};
-                        $registro_sensor=ejecutar_sql($Sensor["comando"],"",${$Sensor["conexion_origen_datos"]})->fetch();
+                        $registro_sensor=PCO_EjecutarSQL($Sensor["comando"],"",${$Sensor["conexion_origen_datos"]})->fetch();
                     }
                 else
-                    $registro_sensor=ejecutar_sql($Sensor["comando"])->fetch();
+                    $registro_sensor=PCO_EjecutarSQL($Sensor["comando"])->fetch();
     			$valor_sensor=trim($registro_sensor[0]);
             }
         else
@@ -407,7 +407,7 @@ function PresentarSensorRango($IDRegistroMonitor,$PresentarEnFormatoMaquina=0)
 					PCO_EnviarCorreo("noreply@practico.org",$Sensor["correo_alerta"],$Sensor["nombre"]." $EstadoMonitor [$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos] ",$Sensor["nombre"]);
 			
 				//Actualiza el estado actual del monitor
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."monitoreo SET ultimo_estado='$EstadoMonitor' WHERE id='$IDRegistroMonitor' ");
+				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."monitoreo SET ultimo_estado='$EstadoMonitor' WHERE id='$IDRegistroMonitor' ");
 			}
 
         //Define cadena de colores cuando el sensor esta fuera de rango
@@ -501,7 +501,7 @@ function PresentarEstadoSQL($IDRegistroMonitor,$color_fondo_estado_sql,$color_te
 		global $Imagen_generica_sql,$Tamano_iconos,$MULTILANG_MonCommSQL,$ListaCamposSinID_monitoreo,$TablasCore;
 
 		//Busca los datos del monitor
-		$ComandoSQL=ejecutar_sql("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
+		$ComandoSQL=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
 
         //Si usa una conexion externa usa su configuracion
         if($ComandoSQL["conexion_origen_datos"]!="")
@@ -512,9 +512,9 @@ function PresentarEstadoSQL($IDRegistroMonitor,$color_fondo_estado_sql,$color_te
 
 		// Busca e Imprime encabezados de columna si no se tienen que ocultar
             if($ComandoSQL["conexion_origen_datos"]!="")
-                $resultado_columnas=ejecutar_sql($ComandoSQL["comando"],"",${$ComandoSQL["conexion_origen_datos"]});
+                $resultado_columnas=PCO_EjecutarSQL($ComandoSQL["comando"],"",${$ComandoSQL["conexion_origen_datos"]});
             else
-			    $resultado_columnas=ejecutar_sql($ComandoSQL["comando"]);
+			    $resultado_columnas=PCO_EjecutarSQL($ComandoSQL["comando"]);
 			$numero_columnas=0;
 			$SalidaFinalInforme.='<thead><tr>';
 			foreach($resultado_columnas->fetch(PDO::FETCH_ASSOC) as $key=>$val)
@@ -530,9 +530,9 @@ function PresentarEstadoSQL($IDRegistroMonitor,$color_fondo_estado_sql,$color_te
 		//Ejecuta el query
         //Si usa una conexion externa usa su configuracion
         if($ComandoSQL["conexion_origen_datos"]!="")
-            $consulta_ejecucion=ejecutar_sql($ComandoSQL["comando"],"",${$ComandoSQL["conexion_origen_datos"]});
+            $consulta_ejecucion=PCO_EjecutarSQL($ComandoSQL["comando"],"",${$ComandoSQL["conexion_origen_datos"]});
         else
-		    $consulta_ejecucion=ejecutar_sql($ComandoSQL["comando"]);
+		    $consulta_ejecucion=PCO_EjecutarSQL($ComandoSQL["comando"]);
 		
 		//Presenta resultados
 		while($registro_informe=$consulta_ejecucion->fetch())
@@ -751,8 +751,8 @@ function PresentarEtiqueta($texto_etiqueta,$ancho_etiqueta)
 if ($PCO_Accion=="eliminar_monitoreo")
 	{
 		// Elimina los datos del monitor
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."monitoreo WHERE id=? ","$id");
-		auditar("Elimina monitor $id");
+		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."monitoreo WHERE id=? ","$id");
+		PCO_Auditar("Elimina monitor $id");
 					echo '
 					<form name="continuar_admin_mon" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="administrar_monitoreo">
@@ -790,8 +790,8 @@ if ($PCO_Accion=="guardar_monitoreo")
 		if ($mensaje_error=="")
 			{
 				// Guarda los datos del comando de monitoreo
-				ejecutar_sql_unaria("INSERT INTO ".$TablasCore."monitoreo (".$ListaCamposSinID_monitoreo.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)","$tipo$_SeparadorCampos_$pagina$_SeparadorCampos_$peso$_SeparadorCampos_$nombre$_SeparadorCampos_$host$_SeparadorCampos_$puerto$_SeparadorCampos_$tipo_ping$_SeparadorCampos_$saltos$_SeparadorCampos_$comando$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$tamano_resultado$_SeparadorCampos_$ocultar_titulos$_SeparadorCampos_$path$_SeparadorCampos_$correo_alerta$_SeparadorCampos_$alerta_sonora$_SeparadorCampos_$milisegundos_lectura$_SeparadorCampos_$alerta_vibracion$_SeparadorCampos_$ultimo_estado$_SeparadorCampos_$valor_minimo$_SeparadorCampos_$valor_maximo$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$modo_compacto");
-				auditar("Agrega en monitor: $nombre");
+				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."monitoreo (".$ListaCamposSinID_monitoreo.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)","$tipo$_SeparadorCampos_$pagina$_SeparadorCampos_$peso$_SeparadorCampos_$nombre$_SeparadorCampos_$host$_SeparadorCampos_$puerto$_SeparadorCampos_$tipo_ping$_SeparadorCampos_$saltos$_SeparadorCampos_$comando$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$tamano_resultado$_SeparadorCampos_$ocultar_titulos$_SeparadorCampos_$path$_SeparadorCampos_$correo_alerta$_SeparadorCampos_$alerta_sonora$_SeparadorCampos_$milisegundos_lectura$_SeparadorCampos_$alerta_vibracion$_SeparadorCampos_$ultimo_estado$_SeparadorCampos_$valor_minimo$_SeparadorCampos_$valor_maximo$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$modo_compacto");
+				PCO_Auditar("Agrega en monitor: $nombre");
 				echo '
 				<form name="continuar_admin_mon" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="administrar_monitoreo">
@@ -834,9 +834,9 @@ if ($PCO_Accion=="actualizar_monitoreo")
 		if ($mensaje_error=="")
 			{
 				// Actualiza los datos del comando de monitoreo
-				ejecutar_sql_unaria("UPDATE ".$TablasCore."monitoreo SET tipo='$tipo',pagina='$pagina',peso='$peso',nombre='$nombre',host='$host',puerto='$puerto',tipo_ping='$tipo_ping',saltos='$saltos',comando='$comando',ancho='$ancho',alto='$alto',tamano_resultado='$tamano_resultado',ocultar_titulos='$ocultar_titulos',path='$path',correo_alerta='$correo_alerta',alerta_sonora='$alerta_sonora',milisegundos_lectura='$milisegundos_lectura',alerta_vibracion='$alerta_vibracion', conexion_origen_datos='$conexion_origen_datos', valor_minimo='$valor_minimo',valor_maximo='$valor_maximo' ,modo_compacto='$modo_compacto' WHERE id='$IDRegistroMonitor'");
+				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."monitoreo SET tipo='$tipo',pagina='$pagina',peso='$peso',nombre='$nombre',host='$host',puerto='$puerto',tipo_ping='$tipo_ping',saltos='$saltos',comando='$comando',ancho='$ancho',alto='$alto',tamano_resultado='$tamano_resultado',ocultar_titulos='$ocultar_titulos',path='$path',correo_alerta='$correo_alerta',alerta_sonora='$alerta_sonora',milisegundos_lectura='$milisegundos_lectura',alerta_vibracion='$alerta_vibracion', conexion_origen_datos='$conexion_origen_datos', valor_minimo='$valor_minimo',valor_maximo='$valor_maximo' ,modo_compacto='$modo_compacto' WHERE id='$IDRegistroMonitor'");
 				
-				auditar("Actualiza el monitor: $IDRegistroMonitor");
+				PCO_Auditar("Actualiza el monitor: $IDRegistroMonitor");
 				echo '
 				<form name="continuar_admin_mon" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="administrar_monitoreo">
@@ -870,7 +870,7 @@ function FormatoMonitor($IDRegistroMonitor)
 		
 		//Busca los datos del monitor
 		if ($IDRegistroMonitor!="")
-			$Maquina=ejecutar_sql("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
+			$Maquina=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
 
 		//Define la accion a ejecutar
 		if ($IDRegistroMonitor=="")
@@ -1049,7 +1049,7 @@ function FormatoMonitor($IDRegistroMonitor)
                 <div class="form-group input-group">
                     <select id="conexion_origen_datos" name="conexion_origen_datos" class="form-control" >
     					<option value="">'.$MULTILANG_ConnPredeterminada.'</option>';
-    						$consulta_conexiones=ejecutar_sql("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE tipo_replica=0 ORDER BY nombre");
+    						$consulta_conexiones=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE tipo_replica=0 ORDER BY nombre");
     						while($registro_conexiones = $consulta_conexiones->fetch())
     						    {
     						        $seleccion_campo="";
@@ -1260,7 +1260,7 @@ if ($PCO_Accion=="administrar_monitoreo")
                     </thead>
                     <tbody>';
 
-				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE 1=1 ORDER BY pagina,peso ");
+				$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE 1=1 ORDER BY pagina,peso ");
 				while($registro = $resultado->fetch())
 					{
 						echo '<tr>
@@ -1345,7 +1345,7 @@ if ($PCO_Accion=="ver_monitoreo")
 		
 		<?php
 			//Busa la mayor y menor pagina definida
-			$resultado=ejecutar_sql("SELECT MIN(pagina) as minimo,MAX(pagina) as maximo FROM ".$TablasCore."monitoreo ");
+			$resultado=PCO_EjecutarSQL("SELECT MIN(pagina) as minimo,MAX(pagina) as maximo FROM ".$TablasCore."monitoreo ");
 			$registro = $resultado->fetch();
 			$PaginaInicio=$registro["minimo"];
 			$MaximoPaginas=$registro["maximo"];
@@ -1360,7 +1360,7 @@ if ($PCO_Accion=="ver_monitoreo")
 			if($PaginaRecuerrente!="") $SiguientePagina=$PaginaMonitoreo;
 			
 			//Busca cuantos milisegundos esperar segun la pagina definida y sus elementos
-			$resultado=ejecutar_sql("SELECT SUM(milisegundos_lectura) as total_espera FROM ".$TablasCore."monitoreo WHERE pagina='$PaginaMonitoreo' ");
+			$resultado=PCO_EjecutarSQL("SELECT SUM(milisegundos_lectura) as total_espera FROM ".$TablasCore."monitoreo WHERE pagina='$PaginaMonitoreo' ");
 			$registro = $resultado->fetch();
 			$MilisegundosPagina=$registro["total_espera"]+1;			
 		?>
@@ -1446,7 +1446,7 @@ if ($PCO_Accion=="ver_monitoreo")
 								unset($ComandosSQL);
 								unset($Imagenes);
 								//Recorre la pagina en cuestion
-								$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE pagina='$PaginaMonitoreo' ORDER BY peso ");
+								$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE pagina='$PaginaMonitoreo' ORDER BY peso ");
 								while($registro = $resultado->fetch())
 									{
 										//Evalua elementos tipo Etiqueta

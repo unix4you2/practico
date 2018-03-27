@@ -43,16 +43,16 @@ $(function() {
         data: [
         <?php
             //Inicia la generacion del arreglo con los datos
-            $resultado_auditoria=ejecutar_sql("SELECT fecha,count(*) as cantidad FROM ".$TablasCore."auditoria WHERE fecha>=date_sub(date(now()),INTERVAL 30 DAY) GROUP BY fecha ORDER BY fecha");
+            $resultado_auditoria=PCO_EjecutarSQL("SELECT fecha,count(*) as cantidad FROM ".$TablasCore."auditoria WHERE fecha>=date_sub(date(now()),INTERVAL 30 DAY) GROUP BY fecha ORDER BY fecha");
             $cadena_datos="";
             while ($registro_auditoria = $resultado_auditoria->fetch())
                 {
                     //Cuenta ingresos unicos de usuarios
-                    $registro_auditoria_usuarios=ejecutar_sql("SELECT count(*) as cantidad FROM ".$TablasCore."auditoria WHERE fecha='".$registro_auditoria["fecha"]."' GROUP BY usuario_login")->fetch();
+                    $registro_auditoria_usuarios=PCO_EjecutarSQL("SELECT count(*) as cantidad FROM ".$TablasCore."auditoria WHERE fecha='".$registro_auditoria["fecha"]."' GROUP BY usuario_login")->fetch();
                     $total_usuarios_unicos=$registro_auditoria_usuarios["cantidad"];
                     if ($total_usuarios_unicos=="") $total_usuarios_unicos=0;
                     //Cuenta registros de la API
-                    $registro_auditoria_api=ejecutar_sql("SELECT count(*) as cantidad FROM ".$TablasCore."auditoria WHERE fecha='".$registro_auditoria["fecha"]."' AND usuario_login LIKE 'API.%' GROUP BY usuario_login")->fetch();
+                    $registro_auditoria_api=PCO_EjecutarSQL("SELECT count(*) as cantidad FROM ".$TablasCore."auditoria WHERE fecha='".$registro_auditoria["fecha"]."' AND usuario_login LIKE 'API.%' GROUP BY usuario_login")->fetch();
                     $total_uso_api=$registro_auditoria_api["cantidad"];
                     if ($total_uso_api=="") $total_uso_api=0;
                     //Agrega datos al arreglo
@@ -84,7 +84,7 @@ $(function() {
         data: [
         <?php
             //Inicia la generacion del arreglo con los datos
-            //$resultado_auditoria=ejecutar_sql("SELECT fecha,count(*) as cantidad FROM ".$TablasCore."auditoria WHERE fecha>=date_sub(date(now()),INTERVAL 30 DAY) GROUP BY fecha ORDER BY fecha");
+            //$resultado_auditoria=PCO_EjecutarSQL("SELECT fecha,count(*) as cantidad FROM ".$TablasCore."auditoria WHERE fecha>=date_sub(date(now()),INTERVAL 30 DAY) GROUP BY fecha ORDER BY fecha");
             $resultado_conteos_tablas=consultar_tablas($TablasApp);
             $cadena_datos="";
             while ($registro_conteos_tablas = $resultado_conteos_tablas->fetch())
@@ -94,7 +94,7 @@ $(function() {
                     if (@strpos($nombre_tabla,$TablasApp)!==FALSE)
                         {
                             $total_registros_tabla=0;
-                            $registro_conteos_tablas=ejecutar_sql("SELECT count(*) FROM ".$nombre_tabla."")->fetch();
+                            $registro_conteos_tablas=PCO_EjecutarSQL("SELECT count(*) FROM ".$nombre_tabla."")->fetch();
                             $registro_conteos_tablas[0];
                             $cadena_datos.= "
                                 {

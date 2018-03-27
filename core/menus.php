@@ -64,14 +64,14 @@ function selector_objetos_menu()
                             <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                             <optgroup label="<?php echo $MULTILANG_Formularios; ?>">
                                 <?php
-                                    $consulta_forms=ejecutar_sql("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id>=0 ORDER BY titulo");
+                                    $consulta_forms=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id>=0 ORDER BY titulo");
                                     while($registro_forms = $consulta_forms->fetch())
                                         echo '<option value="frm:'.$registro_forms["id"].'">(Id.'.$registro_forms["id"].') '.$registro_forms["titulo"].'</option>';
                                 ?>
                             </optgroup>
                             <optgroup label="<?php echo $MULTILANG_Informes; ?>">
                                 <?php
-                                    $consulta_informs=ejecutar_sql("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id>=0 ORDER BY titulo");
+                                    $consulta_informs=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id>=0 ORDER BY titulo");
                                     while($registro_informes = $consulta_informs->fetch())
                                         echo '<option value="inf:'.$registro_informes["id"].'">(Id.'.$registro_informes["id"].') '.$registro_informes["titulo"].'</option>';
                                 ?>
@@ -123,8 +123,8 @@ function selector_objetos_menu()
 if ($PCO_Accion=="actualizar_menu")
 	{
 		// Actualiza los datos del item
-		ejecutar_sql_unaria("UPDATE ".$TablasCore."menu SET posible_izquierda=?,texto=?,peso=?,url=?,destino=?,tipo_comando=?,comando=?,nivel_usuario=?,posible_arriba=?,posible_centro=?,posible_escritorio=?,seccion=?,imagen=? WHERE id=? ","$posible_izquierda$_SeparadorCampos_$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$id");
-		auditar("Actualiza menu item $texto c&oacute;digo $id");
+		PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."menu SET posible_izquierda=?,texto=?,peso=?,url=?,destino=?,tipo_comando=?,comando=?,nivel_usuario=?,posible_arriba=?,posible_centro=?,posible_escritorio=?,seccion=?,imagen=? WHERE id=? ","$posible_izquierda$_SeparadorCampos_$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$id");
+		PCO_Auditar("Actualiza menu item $texto c&oacute;digo $id");
 		echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 	}
 
@@ -152,7 +152,7 @@ if ($PCO_Accion=="detalles_menu")
 		abrir_ventana($MULTILANG_MnuTitEditar,'panel-danger');
 
 		// Busca detalles del item
-		$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE id=? ","$id");
+		$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE id=? ","$id");
 		$registro = $resultado->fetch();
 		
         selector_iconos_awesome();
@@ -339,10 +339,10 @@ if ($PCO_Accion=="eliminar_menu")
 			<administrar_menu> | <detalles_menu>
 		*/
 		// Elimina los datos de la opcion
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."menu WHERE id=? ","$id");
+		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."menu WHERE id=? ","$id");
 		// Elimina el enlace para todos los usuarios que utilizan esa opcion
-		ejecutar_sql_unaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? ","$id");
-		auditar("Elimina en menu $id");
+		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? ","$id");
+		PCO_Auditar("Elimina en menu $id");
 		echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 	}
 
@@ -384,8 +384,8 @@ if ($PCO_Accion=="eliminar_menu")
 			if ($mensaje_error=="")
 				{
 					// Guarda los datos del comando o item de menu
-					ejecutar_sql_unaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)","$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$posible_izquierda");
-					auditar("Agrega en menu: $texto");
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)","$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$posible_izquierda");
+					PCO_Auditar("Agrega en menu: $texto");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
 			else
@@ -597,7 +597,7 @@ if ($PCO_Accion=="administrar_menu")
                     <tbody>
                     	';
 
-				$resultado=ejecutar_sql("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE 1=1");
+				$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE 1=1");
 				while($registro = $resultado->fetch())
 					{
 						echo '<tr>
@@ -705,7 +705,7 @@ if ($PCO_Accion=="administrar_menu")
 									$Complemento_tablas=",".$TablasCore."usuario_menu";
 									$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";
 								}
-							$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE 1 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
+							$resultado=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE 1 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
 
 							// Imprime las opciones con sus formularios
 							$conteo_opciones=0;
@@ -759,7 +759,7 @@ if ($PCO_Accion=="administrar_menu")
 									$Complemento_tablas=",".$TablasCore."usuario_informe";
 									$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario'";
 								}
-							$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE 1 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
+							$resultado=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE 1 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
 
 							// Imprime las opciones con sus formularios
 							while($registro = $resultado->fetch())
@@ -842,7 +842,7 @@ if ($PCO_Accion=="administrar_menu")
 					$Complemento_tablas=",".$TablasCore."usuario_menu";
 					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
-			$resultado=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_escritorio=1 ".@$Complemento_condicion." ORDER BY peso");
+			$resultado=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_escritorio=1 ".@$Complemento_condicion." ORDER BY peso");
 
 			// Imprime las opciones con sus formularios
 			while($registro = $resultado->fetch())
@@ -893,7 +893,7 @@ if ($PCO_Accion=="administrar_menu")
 					$Complemento_tablas=",".$TablasCore."usuario_menu";
 					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
-			$resultado=ejecutar_sql("SELECT COUNT(*) as conteo,seccion FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_centro=1 ".@$Complemento_condicion." GROUP BY seccion ORDER BY seccion");
+			$resultado=PCO_EjecutarSQL("SELECT COUNT(*) as conteo,seccion FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_centro=1 ".@$Complemento_condicion." GROUP BY seccion ORDER BY seccion");
 			// Imprime las secciones encontradas para el usuario
 			while($registro = $resultado->fetch())
 				{
@@ -909,7 +909,7 @@ if ($PCO_Accion=="administrar_menu")
 							$Complemento_tablas=",".$TablasCore."usuario_menu";
 							$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 						}
-					$resultado_opciones_acordeon=ejecutar_sql("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_centro=1 AND seccion='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY peso");
+					$resultado_opciones_acordeon=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_centro=1 AND seccion='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY peso");
 
 					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
 						{

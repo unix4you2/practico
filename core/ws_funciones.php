@@ -76,7 +76,7 @@ if (@$PCO_WSId=="verificar_credenciales")
 		if (!$error_parametros && ($Auth_TipoMotor=="practico" || PCO_EsAdministrador($uid)))
 			{
 				$ClaveEnMD5=hash("md5", $clave);
-				$registro=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE estado=1 AND login=? AND clave=? ","$uid$_SeparadorCampos_$ClaveEnMD5")->fetch();
+				$registro=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE estado=1 AND login=? AND clave=? ","$uid$_SeparadorCampos_$ClaveEnMD5")->fetch();
 				if ($registro["login"]!="")
 					$ok_login_verifica='1';
 			}
@@ -105,7 +105,7 @@ if (@$PCO_WSId=="verificar_credenciales")
                     mensaje($MULTILANG_Error.': '.$MULTILANG_AuthLDAP,$MULTILANG_ErrorConnLDAP, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 				// Si logra el acceso por LDAP consulta datos del usuario sobre Practico para llenar el XML pero
 				// Si el usuario no existe se devolvera el valor de aceptacion solamente y el resto vacios
-				$registro=ejecutar_sql("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login=? ","$uid")->fetch();
+				$registro=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login=? ","$uid")->fetch();
 				if ($DepuracionLDAP)
                     echo "<script language='JavaScript'> alert('$auth_ldap_cadena'); </script>";
 			}
@@ -114,7 +114,7 @@ if (@$PCO_WSId=="verificar_credenciales")
 		if (!$error_parametros && ($Auth_TipoMotor=="federado" && !PCO_EsAdministrador($uid)))
 			{
 				//Busca parametros de configuracion para el motor federado
-				$Param_MotorFederado=ejecutar_sql("SELECT $ListaCamposSinID_parametros FROM ".$TablasCore."parametros ")->fetch();
+				$Param_MotorFederado=PCO_EjecutarSQL("SELECT $ListaCamposSinID_parametros FROM ".$TablasCore."parametros ")->fetch();
 				
 				//Crea la nueva conexion al motor de autenticacion remoto segun los parametros encontrados
 				$PCO_ConexionFederada=PCO_NuevaConexionBD($Param_MotorFederado["federado_motor"],$Param_MotorFederado["federado_puerto"],$Param_MotorFederado["federado_basedatos"],$Param_MotorFederado["federado_servidor"],$Param_MotorFederado["federado_usuario"],$Param_MotorFederado["federado_clave"]);
@@ -126,7 +126,7 @@ if (@$PCO_WSId=="verificar_credenciales")
 					$ClaveEnMD5=hash($Param_MotorFederado["federado_encripcion"], $clave);
 
 				//Ejecuta el Query sobre la conexion federada
-				$registro=ejecutar_sql("SELECT ".$Param_MotorFederado["federado_campousuario"]." as login, ".$Param_MotorFederado["federado_campousuario"]." as nombre, 5 as nivel FROM ".$Param_MotorFederado["federado_tabla"]." WHERE ".$Param_MotorFederado["federado_campousuario"]."=? AND ".$Param_MotorFederado["federado_campoclave"]."=? ","$uid$_SeparadorCampos_$ClaveEnMD5",$PCO_ConexionFederada)->fetch();
+				$registro=PCO_EjecutarSQL("SELECT ".$Param_MotorFederado["federado_campousuario"]." as login, ".$Param_MotorFederado["federado_campousuario"]." as nombre, 5 as nivel FROM ".$Param_MotorFederado["federado_tabla"]." WHERE ".$Param_MotorFederado["federado_campousuario"]."=? AND ".$Param_MotorFederado["federado_campoclave"]."=? ","$uid$_SeparadorCampos_$ClaveEnMD5",$PCO_ConexionFederada)->fetch();
 				if ($registro["login"]!="")
 					{
 						$ok_login_verifica='1';
@@ -179,8 +179,8 @@ if (@$PCO_WSId=="verificar_credenciales")
 			//Agrega el registro de usuario si aun no existe
 			if (!existe_valor($TablasCore."usuario","login",$login_chk))
 				{
-					@ejecutar_sql_unaria("INSERT INTO ".$TablasCore."usuario (login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno,plantilla_permisos,descripcion) VALUES ('$login_chk','$clavemd5','$nombre_chk',1,'$correo_chk','$PCO_FechaOperacion','$pasomd5','$interno_chk','$plantilla_permisos_chk','$descripcion')");
-					auditar("OAuth:Agregado usuario $login_chk para ".$OAuth_servicio);
+					@PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."usuario (login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno,plantilla_permisos,descripcion) VALUES ('$login_chk','$clavemd5','$nombre_chk',1,'$correo_chk','$PCO_FechaOperacion','$pasomd5','$interno_chk','$plantilla_permisos_chk','$descripcion')");
+					PCO_Auditar("OAuth:Agregado usuario $login_chk para ".$OAuth_servicio);
 				}
 		}
 
@@ -241,27 +241,27 @@ if (@$PCO_WSId=="verificar_credenciales")
 
 			// Busca datos del usuario Practico, segun tipo de servicio OAuth para tener configuraciones de permisos y parametros propios de la herramienta
 			$consulta_busqueda_usuario_oauth="SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login='$login_chk' AND descripcion LIKE '%Auth:$OAuth_servicio%' ";
-			$registro=ejecutar_sql($consulta_busqueda_usuario_oauth)->fetch();
+			$registro=PCO_EjecutarSQL($consulta_busqueda_usuario_oauth)->fetch();
 
 			// Agrega el usuario cuando es primer login desde el servicio
 			if ($registro["login"]=="")
 				{
 					oauth_crear_usuario($OAuth_servicio,$login_chk,$nombre_chk,$correo_chk,0,$plantilla_origen_permisos);
 					// Actualiza el registro desde nueva consulta
-					$resultado_usuario=ejecutar_sql($consulta_busqueda_usuario_oauth);
+					$resultado_usuario=PCO_EjecutarSQL($consulta_busqueda_usuario_oauth);
 					$registro = $resultado_usuario->fetch();
 				}
 
 			//Copia permisos de la plantilla si aplica
 			if ($registro["plantilla_permisos"]!="")
 				{
-					auditar("Carga permisos a su perfil desde plantilla $plantilla_origen_permisos",$login_chk);
+					PCO_Auditar("Carga permisos a su perfil desde plantilla $plantilla_origen_permisos",$login_chk);
 					PCO_copiar_permisos($plantilla_origen_permisos,$login_chk);
 					PCO_copiar_informes($plantilla_origen_permisos,$login_chk);
 				}
 
 			// Se buscan datos de la aplicacion
-			$consulta_parametros=ejecutar_sql("SELECT id,".$ListaCamposSinID_parametros." FROM ".$TablasCore."parametros");
+			$consulta_parametros=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_parametros." FROM ".$TablasCore."parametros");
 			$registro_parametros = $consulta_parametros->fetch();
 
 			// Actualiza las variables de sesion con el registro
@@ -285,10 +285,10 @@ if (@$PCO_WSId=="verificar_credenciales")
 			if (!isset($_SESSION["Version_Aplicacion"])) $_SESSION["Version_Aplicacion"]=$registro_parametros["version"];
 
 			// Lleva a auditoria con query manual por la falta de $PCOSESS_LoginUsuario
-			ejecutar_sql_unaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('".$registro["login"]."','Ingresa al sistema desde $PCO_DireccionAuditoria','$PCO_FechaOperacion','$PCO_HoraOperacion')");
-			auditar("Ingresa al sistema desde $PCO_DireccionAuditoria",$_SESSION["PCOSESS_LoginUsuario"]);
+			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('".$registro["login"]."','Ingresa al sistema desde $PCO_DireccionAuditoria','$PCO_FechaOperacion','$PCO_HoraOperacion')");
+			PCO_Auditar("Ingresa al sistema desde $PCO_DireccionAuditoria",$_SESSION["PCOSESS_LoginUsuario"]);
 			// Actualiza fecha del ultimo ingreso para el usuario
-			ejecutar_sql_unaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login='".$registro["login"]."'","$PCO_FechaOperacion");
+			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login='".$registro["login"]."'","$PCO_FechaOperacion");
 
 			// Redirecciona al menu
 			header("Location: index.php");

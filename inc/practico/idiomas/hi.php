@@ -1231,7 +1231,7 @@
 	$MULTILANG_ReplicaDefinidos='स्वचालित प्रतिकृति सर्वर परिभाषित';
 	$MULTILANG_AgregarReplica='एक नए कनेक्शन जोड़े';
 	$MULTILANG_ReplicaTodo='एक दर्पण के रूप में प्रयोग करें';
-	$MULTILANG_AyudaReplica='परिभाषित मुख्य प्रणाली पर सभी डेटाबेस कार्रवाई इस कनेक्शन पर दोहराया जाना चाहिए। इस valus नहीं है, तो Practico कनेक्शन को परिभाषित करने और इसे तैयार कोड या व्यक्ति के संचालन के द्वारा इस्तेमाल किया जा केवल जब आप चाहते कर देगा।.   This applies for data upgrade operations (Insert,Update,Delete) that was maked by the ejecutar_sql_unaria() internal function';
+	$MULTILANG_AyudaReplica='परिभाषित मुख्य प्रणाली पर सभी डेटाबेस कार्रवाई इस कनेक्शन पर दोहराया जाना चाहिए। इस valus नहीं है, तो Practico कनेक्शन को परिभाषित करने और इसे तैयार कोड या व्यक्ति के संचालन के द्वारा इस्तेमाल किया जा केवल जब आप चाहते कर देगा।.   This applies for data upgrade operations (Insert,Update,Delete) that was maked by the PCO_EjecutarSQLUnaria() internal function';
 	$MULTILANG_ConnAdicionales='अतिरिक्त डेटाबेस कनेक्शन परिभाषित';
 	$MULTILANG_ConnPredeterminada='डिफ़ॉल्ट (व्यावहारिक द्वारा प्रयोग किया गया समान कनेक्शन)';
 	$MULTILANG_ConnOrigenDatos='डेटा स्रोत';
