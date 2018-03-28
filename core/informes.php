@@ -2736,7 +2736,7 @@ if ($PCO_Accion=="mis_informes")
 					$Complemento_tablas=",".$TablasCore."usuario_informe";
 					$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
-			$resultado=PCO_EjecutarSQL("SELECT COUNT(*) as conteo,categoria FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE id>=$LimiteInferiorBusqueda ".@$Complemento_condicion." GROUP BY categoria ORDER BY categoria");
+			$resultado=PCO_EjecutarSQL("SELECT COUNT(*) as conteo,categoria FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE ".$TablasCore."informe.id>=$LimiteInferiorBusqueda ".@$Complemento_condicion." GROUP BY categoria ORDER BY categoria");
 
 			// Imprime las categorias encontradas para el usuario
 			while($registro = $resultado->fetch())
@@ -2753,7 +2753,7 @@ if ($PCO_Accion=="mis_informes")
 							$Complemento_tablas=",".$TablasCore."usuario_informe";
 							$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 						}
-					$resultado_opciones_acordeon=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE id>=$LimiteInferiorBusqueda AND categoria='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY titulo");
+					$resultado_opciones_acordeon=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE ".$TablasCore."informe.id>=$LimiteInferiorBusqueda AND categoria='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY titulo");
 
 					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
 						{
