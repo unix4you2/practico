@@ -16,6 +16,9 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/marco_conf.php
+core/informes.php
+core/objetos.php
 xml/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
@@ -30,7 +33,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-
+* Se protege la edicion de parametros basicos de configiracion para el motor.  Estos deberan ser tocados solo por archivo para hacer de manera más consciente esa tarea para los usuarios administradores avanzados que por error involuntario o de navegador podrían dejar inactiva la aplicación.
 "
 
 ########################################################################

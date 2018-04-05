@@ -79,11 +79,11 @@
                                         <span class="input-group-addon">
                                             <i class="fa fa-laptop fa-fw"></i> <?php echo $MULTILANG_Servidor; ?>:
                                         </span>
-                                        <input name="ServidorNEW" value="<?php echo $ServidorBD; ?>" type="text" class="form-control">
+                                        <input name="ServidorNEW" value="<?php echo $ServidorBD; ?>" type="text" class="form-control" readonly>
                                         <span class="input-group-addon">
                                             <i class="fa fa-plug fa-fw"></i> <?php echo $MULTILANG_Puerto; ?>:
                                         </span>
-                                        <input name="PuertoBDNEW" value="<?php echo $PuertoBD; ?>" type="text" class="form-control">
+                                        <input name="PuertoBDNEW" value="<?php echo $PuertoBD; ?>" type="text" class="form-control" readonly>
                                         <span class="input-group-addon">
                                             <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_PuertoNoPredeterminado; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                         </span>
@@ -93,25 +93,25 @@
                                         <span class="input-group-addon">
                                             <i class="fa fa-database fa-fw"></i> <?php echo $MULTILANG_Basedatos; ?>:
                                         </span>
-                                        <input name="BaseDatosNEW" value="<?php echo $BaseDatos; ?>" type="text" class="form-control">
+                                        <input name="BaseDatosNEW" value="<?php echo $BaseDatos; ?>" type="text" class="form-control" readonly>
                                         <span class="input-group-addon">
                                             <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_AyudaTitBD; ?></b><br><?php echo $MULTILANG_AyudaDesBD; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                         </span>
                                         <span class="input-group-addon">
                                             <i class="fa fa-user fa-fw"></i> <?php echo $MULTILANG_Usuario; ?>:
                                         </span>
-                                        <input name="UsuarioBDNEW" value="<?php echo $UsuarioBD; ?>" type="text" class="form-control">
+                                        <input name="UsuarioBDNEW" value="<?php echo $UsuarioBD; ?>" type="text" class="form-control" readonly>
                                         <span class="input-group-addon">
                                             <i class="fa fa-key fa-fw"></i> <?php echo $MULTILANG_Contrasena; ?>:
                                         </span>
-                                        <input name="PasswordBDNEW" value="<?php echo $PasswordBD; ?>" type="password" class="form-control">
+                                        <input name="PasswordBDNEW" value="<?php echo TextoAleatorio(10); ?>" type="password" class="form-control" readonly>
                                     </div>
                                     
                                     <div class="form-group input-group">
                                         <span class="input-group-addon">
                                             <?php echo $MULTILANG_PrefijoCore; ?>:
                                         </span>
-                                        <input name="TablasCoreNEW" value="<?php echo $TablasCore; ?>" type="text" class="form-control">
+                                        <input name="TablasCoreNEW" value="<?php echo $TablasCore; ?>" type="text" class="form-control" readonly>
                                         <span class="input-group-addon">
                                             <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_AyudaTitPreCore; ?></b><br><?php echo $MULTILANG_AyudaDesPreCore; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw"></i></a>
                                         </span>
@@ -128,7 +128,7 @@
                                         <span class="input-group-addon">
                                             <i class="fa fa-random fa-fw"></i> <?php echo $MULTILANG_LlavePaso; ?>:
                                         </span>
-                                        <input name="LlaveDePasoNEW" value="<?php echo $LlaveDePaso; ?>" type="text" class="form-control">
+                                        <input name="LlaveDePasoNEW" value="<?php echo $LlaveDePaso; ?>" type="text" class="form-control" readonly>
                                         <span class="input-group-addon">
                                             <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_AyudaLlave; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
                                         </span>
