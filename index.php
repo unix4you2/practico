@@ -99,9 +99,7 @@
             $PCO_ValoresParametros = array_values($_REQUEST);// obtiene los valores de las varibles
             // crea las variables y les asigna el valor
             for($i=0;$i<$PCO_NumeroParametros;$i++)
-                {
-                    ${$PCO_NombresParametros[$i]}=$PCO_ValoresParametros[$i];
-                }
+				${$PCO_NombresParametros[$i]}=$PCO_ValoresParametros[$i];
             // Agrega ademas las variables de sesion
             if (!empty($_SESSION)) extract($_SESSION);
         }
