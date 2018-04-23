@@ -91,6 +91,7 @@
 	$MULTILANG_PCODER_Ver='Visão';
 
 	//Mensajes de error y varios
+	$MULTILANG_PCODER_Minimap='Code Minimap';
 	$MULTILANG_PCODER_AumSangria='Aumenta o travessão';
 	$MULTILANG_PCODER_DisSangria='Diminuir travessão';
 	$MULTILANG_PCODER_ConvMay='Converter para mai&uacute;sculas';

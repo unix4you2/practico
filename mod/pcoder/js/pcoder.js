@@ -132,6 +132,8 @@ function CambiarFuenteEditor(tamano)
 			}
 		catch(error) {}
 	}
+
+
 function CambiarTemaEditor(tema)
 	{
 		//Cambia la apariencia grafica del editor
@@ -142,6 +144,8 @@ function CambiarTemaEditor(tema)
 			}
 		catch(error) {}
 	}
+
+
 function CambiarModoEditor(modo)
 	{
 		var ModoFiltrado = modo.replace(/_/g, " ");
@@ -158,6 +162,8 @@ function CambiarModoEditor(modo)
 			}
 		catch(error) {}
 	}
+
+
 function CaracteresInvisiblesEditor(estado)
 	{
 		//Cambia el modo del editor para mostrar (true) u ocultar (false) los caracteres invisibles
@@ -166,6 +172,7 @@ function CaracteresInvisiblesEditor(estado)
 		else
 			editor.setShowInvisibles(true);
 	}
+
 
 function IntercambiarAutocompletadoEditor(estado)
 	{
@@ -184,6 +191,8 @@ function IntercambiarAutocompletadoEditor(estado)
 				editor.session.setOption("enableLiveAutocompletion", true);
 			}
 	}
+
+
 function IntercambiarEstadoCaracteresInvisibles()
 	{
 		//InterCambia el modo del editor para mostrar (true) u ocultar (false) los caracteres invisibles segun su estado actual
@@ -198,6 +207,8 @@ function IntercambiarEstadoCaracteresInvisibles()
 				EditorClonado.setShowInvisibles(true);
 			}
 	}
+
+
 function VerificarSintaxisEditor()
 	{
 		//Cambia la verificacion de sintaxis del editor
@@ -216,6 +227,8 @@ function VerificarSintaxisEditor()
 				$('#Check_VerificarSintaxisEditor').prop('checked', true);
 			}
 	}
+
+
 function VerificarAutocompletado()
 	{
 		//Cambia el autocompletado del editor
@@ -236,6 +249,8 @@ function VerificarAutocompletado()
 				$('#Check_VerificarAutocompletado').prop('checked', true);
 			}
 	}
+
+
 function IntercambiarVisibilidadNumerosDeLinea()
 	{
 		//InterCambia el modo del editor para mostrar (true) u ocultar (false) los numeros de linea
@@ -250,6 +265,8 @@ function IntercambiarVisibilidadNumerosDeLinea()
 				EditorClonado.renderer.setShowGutter(true);
 			}
 	}
+
+
 function ActivarBuscadorArchivos()
 	{
 		//InterCambia la visibilidad del buscador
@@ -268,6 +285,8 @@ function ActivarBuscadorArchivos()
 				BuscadorArchivosVisible=1;
 			}
 	}
+
+
 function LanzarBusquedaArchivos()
 	{
 		//Verifica que se tenga un Path para buscar, en caso que la ultima selecciona haya sido sobre un archivo asigna el path del combo
@@ -285,12 +304,16 @@ function LanzarBusquedaArchivos()
 		//$('#resultados_buscador_archivo').html("<ul>"+ResultadoBuscador+"</ul>");
 		$('#resultados_buscador_archivo').html(ResultadoBuscador);
 	}
+
+
 function ActualizarTituloEditor(titulo)
 	{
 		//Cambia el titulo presentado en la ventada del editor
 		document.title = titulo;
 		$(document).attr('title',titulo);
 	}
+
+
 function SaltarALinea()
 	{
 		//Salta a una linea especifica del editor
@@ -302,6 +325,8 @@ function SaltarALinea()
 				document.getElementById("linea_salto").value="";			
 			}
 	}
+
+
 function QuitarAvisoAlmacenamiento()
 	{
 		//Deja el mensaje de almacenamiento al menos un segundo (para archivos pequenos almacenados rapido), luego lo oculta
@@ -311,6 +336,7 @@ function QuitarAvisoAlmacenamiento()
 		//editor.focus();											//Establece el foco al editor
 		//$('#editor_codigo').trigger('click');
 	}
+
 
 function Guardar()
 	{
@@ -325,6 +351,14 @@ function Guardar()
 		//Ejecuta el proceso de almacenamiento
 		if (MensajeErrorAlmacenamiento == "")
 			{
+                //Actualiza el textareacon el valor del textarea a enviar con el valor del textarea en el indice
+                // 			document.getElementById("PCODER_AreaTexto"+IndiceArchivoActual).value=editor.getSession().getValue();
+                
+                // 		//Actualiza el Textarea y formulario base del editor
+                // 		document.form_archivo_editado.PCODER_archivo.value=ListaArchivos[IndiceRecibido].RutaDocumento;
+                // 		document.form_archivo_editado.PCODER_TokenEdicion.value=ListaArchivos[IndiceRecibido].TokenEdicion;
+                // 		document.form_archivo_editado.PCODER_AreaTexto.value=document.getElementById("PCODER_AreaTexto"+IndiceRecibido).value;
+			
 				//Metodo estandar, envia todo sobre el iframe para evitar recargar la pagina
 				PCO_MostrarMensajeCargandoSimple();
 				document.form_archivo_editado.submit();
@@ -334,10 +368,14 @@ function Guardar()
 				PCOJS_MostrarMensaje(MULTILANG_PCODER_Guardando+": "+MULTILANG_PCODER_Error,MensajeErrorAlmacenamiento);			
 			}
 	}
+
+
 function PCO_VentanaPopup(theURL,winName,features)
 	{ 
 		window.open(theURL,winName,features);
 	}
+
+
 function PCO_AgregarElementoDiv(marco,elemento)
 	{
 		//carga dinamicamente objetos html a marcos
@@ -346,6 +384,8 @@ function PCO_AgregarElementoDiv(marco,elemento)
 		zona.innerHTML = elemento;
 		capa.appendChild(zona);
 	}
+
+
 //###################################################################################################################
 //###################################################################################################################
 function EjecutarOperacionFS()
@@ -442,6 +482,7 @@ function EjecutarOperacionFS()
 				}
 	}
 
+
 function OperacionFS_CrearArchivo()
 	{
 		//Presenta el cuadro de dialogo
@@ -462,6 +503,7 @@ function OperacionFS_CrearArchivo()
 		$("#cuadro_entrada_nombre_elemento").show();
 		$("#cuadro_entrada_permisos_elemento").hide();
 	}
+
 
 function OperacionFS_CrearCarpeta()
 	{
@@ -484,6 +526,7 @@ function OperacionFS_CrearCarpeta()
 		$("#cuadro_entrada_permisos_elemento").hide();
 	}
 
+
 function OperacionFS_EditarPermisos()
 	{
 		//Presenta el cuadro de dialogo
@@ -505,6 +548,7 @@ function OperacionFS_EditarPermisos()
 		$("#cuadro_entrada_permisos_elemento").show();
 	}
 
+
 function OperacionFS_EliminarElemento()
 	{
 		//Presenta el cuadro de dialogo
@@ -525,6 +569,8 @@ function OperacionFS_EliminarElemento()
 		$("#cuadro_entrada_nombre_elemento").hide();
 		$("#cuadro_entrada_permisos_elemento").hide();
 	}
+
+
 function PCODER_DesactivarPanelIzquierdo()
 	{
 		AnchoPanelIzquierdo=0;
@@ -532,6 +578,8 @@ function PCODER_DesactivarPanelIzquierdo()
 		$("#panel_izquierdo").hide();
 		PCODER_RecalcularMaquetacion();
 	}
+
+
 function PCODER_DesactivarPanelDerecho()
 	{
 		AnchoPanelDerecho=0;
@@ -539,6 +587,8 @@ function PCODER_DesactivarPanelDerecho()
 		$("#panel_derecho").hide();
 		PCODER_RecalcularMaquetacion();
 	}
+
+
 function PCODER_RecalcularPanelesLaterales()  //AjustarPanelesLaterales();
 	{
 		//Redimensiona, ajusta y aplica clases al editor segun el estado de visualizacion las barras laterales
@@ -571,6 +621,8 @@ function PCODER_RecalcularPanelesLaterales()  //AjustarPanelesLaterales();
 		var AltoDisponible_PanelesLateralIzq = $("#panel_central_medio").height() - AltoBotonOcultacionPI - AltoComboSeleccionPath - AltoOperacionesArchivos;
 		$('#marco_explorador').height( AltoDisponible_PanelesLateralIzq+"px" ).css({ });		
 	}
+
+
 function PCODER_ActivarPanelIzquierdo()
 	{
 		AnchoPanelIzquierdo=2;
@@ -579,6 +631,8 @@ function PCODER_ActivarPanelIzquierdo()
 		$("#panel_izquierdo").addClass("col-md-"+AnchoPanelIzquierdo);
 		PCODER_RecalcularMaquetacion();
 	}	
+
+
 function PCODER_ActivarPanelDerecho()
 	{
 		AnchoPanelDerecho=2;
@@ -587,6 +641,8 @@ function PCODER_ActivarPanelDerecho()
 		$("#panel_derecho").addClass("col-md-"+AnchoPanelDerecho);
 		PCODER_RecalcularMaquetacion();
 	}
+
+
 function PCODER_RecalcularPanelesEditores()
 	{
 		//Define el ALTO Y ANCHO DE LOS EDITORES segun la disposicion visual (splits) y el tamano del panel_central_medio
@@ -638,6 +694,8 @@ function PCODER_RecalcularPanelesEditores()
 				//document.getElementById("demo").innerHTML = err.message;
 			}
 	}
+
+
 function PCODER_DividirPantalla_NO()
 	{
 		//Ejecuta la operacion si ya no esta dividido
@@ -648,6 +706,8 @@ function PCODER_DividirPantalla_NO()
 				PCODER_RecalcularMaquetacion();
 			}
 	}
+
+
 function PCODER_DividirPantalla_Horizontal()
 	{
 		//Ejecuta la operacion si ya no esta dividido
@@ -659,6 +719,8 @@ function PCODER_DividirPantalla_Horizontal()
 				PCODER_RecalcularMaquetacion();
 			}
 	}
+
+
 function PCODER_DividirPantalla_Vertical()
 	{
 		//Ejecuta la operacion si ya no esta dividido
@@ -670,6 +732,7 @@ function PCODER_DividirPantalla_Vertical()
 				PCODER_RecalcularMaquetacion();
 			}
 	}
+
 
 function PCODER_RecalcularPanelesExtensiones()
 	{
@@ -691,6 +754,7 @@ function PCODER_RecalcularPanelesExtensiones()
 		$('#frame_diferencias').css('height', AltoPanelIFramesDiff+'px');
 		$('#frame_diferencias').css('width', '100%');
 	}
+
 
 function PCODER_RecalcularMaquetacion()   //RedimensionarEditor();
 	{
@@ -716,6 +780,8 @@ function PCODER_RecalcularMaquetacion()   //RedimensionarEditor();
 		PCODER_RecalcularPanelesEditores();
 		PCODER_RecalcularPanelesExtensiones();
 	}
+
+
 function IntercambiarPantallaCompleta()
 	{
 		if (!document.fullscreenElement &&    // alternative standard method
@@ -741,6 +807,8 @@ function IntercambiarPantallaCompleta()
 			}
 		}
 	}
+
+
 function AumentarTamanoFuente()
 	{
 		tamano=editor.getFontSize();
@@ -748,6 +816,8 @@ function AumentarTamanoFuente()
 		tamano=parseInt(tamano)+2;
 		CambiarFuenteEditor(tamano+"px");
 	}
+
+
 function DisminuirTamanoFuente()
 	{
 		tamano=editor.getFontSize();
@@ -755,6 +825,8 @@ function DisminuirTamanoFuente()
 		tamano=parseInt(tamano)-2;
 		CambiarFuenteEditor(tamano+"px");
 	}
+
+
 function ExplorarPath(DesdeOnChange)
 	{
 		//Si viene desde el OnChange del panel izquierdo asigna la ultima carpeta seleccionada como esta.
@@ -780,6 +852,7 @@ function ExplorarPath(DesdeOnChange)
 			});
 		});
 	}
+
 
 function ActualizarPathActual()
 	{
@@ -810,6 +883,8 @@ function ActualizarBarraEstado()
 		//Llama periodicamente la rutina de actualizacion de la barra
 		window.setTimeout(ActualizarBarraEstado, 1000);
 	}
+
+
 function AgregarNuevoTextarea(nombre_formulario,nombre_textarea,valor_predeterminado)
 	{
 		//contenedor.innerHTML = '<textarea name="pepe" rows="5" cols="30"></textarea>';
@@ -820,15 +895,21 @@ function AgregarNuevoTextarea(nombre_formulario,nombre_textarea,valor_predetermi
 		elemento_textarea.id = nombre_textarea;	
 		elemento_textarea.value = valor_predeterminado;
 		nombre_formulario.appendChild(elemento_textarea);
-	} 
+	}
+
+
+function PCODER_Log(Mensaje)
+    {
+        console.log(Mensaje);
+    }
 
 
 function PCODER_CambiarArchivoActual(IndiceRecibido,VieneDesdeApertura)
 	{
 		//Si viene en valor 1 se trata de una apertura de archivo, por lo que no se requiere guardar valores previos.  Si viene en 0 se trata de un cambio de archivo desde la barra y guarda valores previos.
 		if(VieneDesdeApertura==0)
-			document.getElementById("PCODER_AreaTexto"+IndiceArchivoActual).value=editor.getSession().getValue();
-		
+	        document.getElementById("PCODER_AreaTexto"+IndiceArchivoActual).value=editor.getSession().getValue();
+
 		//Actualiza el Textarea y formulario base del editor
 		document.form_archivo_editado.PCODER_archivo.value=ListaArchivos[IndiceRecibido].RutaDocumento;
 		document.form_archivo_editado.PCODER_TokenEdicion.value=ListaArchivos[IndiceRecibido].TokenEdicion;
@@ -854,9 +935,16 @@ function PCODER_CambiarArchivoActual(IndiceRecibido,VieneDesdeApertura)
 		else
 			contenedor_mensajes_superior.innerHTML = '';
 
+	    //Establece de nuevo el historial de deshacer desde la version guardada para el archivo
+        editor.getSession().setUndoManager(ListaArchivos[IndiceRecibido].AdministradorDeshacer);
+        
+        //Actualiza minimap y sus indices de desplazamiento a la ultima ubicacion del archivo
+        PCODER_ActualizarMinimap();
+        
 		//Despues de haber agregado el archivo al arreglo procede a presentarlo en las pestanas
 		ActualizarPestanasArchivos();
 	}
+
 
 function PCODER_CerrarArchivo(IndiceRecibido)
 	{
@@ -872,6 +960,7 @@ function PCODER_CerrarArchivo(IndiceRecibido)
 		ListaArchivos[IndiceRecibido].PermisosRW="";
 		ListaArchivos[IndiceRecibido].PermisosArchivo="";
 		ListaArchivos[IndiceRecibido].VistaSplit="";
+		ListaArchivos[IndiceRecibido].AdministradorDeshacer="";
 
 		//Verifica si se trata del archivo actual, si es asi entonces se mueve al primero.Si es el primero entonces se mueve al demo
 		if(IndiceRecibido==1)
@@ -888,10 +977,12 @@ function PCODER_CerrarArchivo(IndiceRecibido)
 		PCODER_CambiarArchivoActual(IndiceArchivoActual,1);
 	}
 
+
 function PCODER_CerrarArchivoActual()
 	{
 		PCODER_CerrarArchivo(IndiceArchivoActual);
 	}
+
 
 function PCODER_BuscarArchivoAbierto(path_archivo)
 	{
@@ -906,6 +997,7 @@ function PCODER_BuscarArchivoAbierto(path_archivo)
 		//Retorna el estado de variable si fue o no encontrado el archivo
 		return Encontrado;
 	}
+
 
 function PCODER_ActualizarListaArchivosDiff()
 	{
@@ -932,6 +1024,7 @@ function PCODER_ActualizarListaArchivosDiff()
 		PCOJS_ActualizarComboBox("archivo_diff_2");
     }
 
+
 function PCODER_EjecutarDiff()
 	{
 		//Construye la URL de comparacion de archivos
@@ -946,6 +1039,7 @@ function PCODER_EjecutarDiff()
 			PCODER_CargarIframeURL("frame_diferencias", URL_Diff);
     }
 
+
 function PCODER_CargarIframeURL(iframeName, url)
 	{
 		//url=url+'&output=embed';
@@ -957,6 +1051,21 @@ function PCODER_CargarIframeURL(iframeName, url)
 			}
 		return true;
 	}
+
+
+function PCODER_DeshacerEdicion()
+	{
+        //editor.undo(true);
+        editor.getSession().getUndoManager().undo(false); //Si true deshabilita seleccion del texto
+    }
+
+
+function PCODER_RehacerEdicion()
+	{
+        //editor.redo(true);
+        editor.getSession().getUndoManager().redo(false); //Si true deshabilita seleccion del texto
+    }
+
 
 function ActualizarPestanasArchivos()
 	{
@@ -1001,6 +1110,7 @@ function ActualizarPestanasArchivos()
 		PCODER_RecalcularMaquetacion();
 	}
 
+
 function PCODER_CargarArchivo(path_archivo)
 	{
 		if (typeof path_archivo == 'undefined') path_archivo="demos/demo.txt";
@@ -1031,9 +1141,25 @@ function PCODER_CargarArchivo(path_archivo)
 						ValorPermisosRW=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_VerificarPermisosRW&PCODER_archivo="+path_archivo);
 						ValorPermisosArchivo=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerPermisosArchivo&PCODER_archivo="+path_archivo);
 						ValorVistaSplit=""; //Valor inicial de la vista dividida (sin dividir)
+						ValorAdministradorDeshacer=new ace.UndoManager(); //Inicia un administrador de Deshacer/Hacer especifico para el archivo
+						ValorInicioLineaRenderizadaMiniMap=0; //Inicia un administrador de Deshacer/Hacer especifico para el archivo
 
 						//Agrega nuevo elemento al arreglo
-						ListaArchivos[IndiceAperturaArchivo] = { TipoDocumento: ValorTipoElemento, TamanoDocumento: ValorTamanoDocumento, FechaModificadoDocumento: ValorFechaModificadoDocumento, RutaDocumento: path_archivo, TokenEdicion: ValorTokenEdicion, ModoEditor: ValorModoEditor, NombreArchivo: ValorNombreArchivo, LineaActual: 1, ColumnaActual: 0 , PermisosRW: ValorPermisosRW, PermisosArchivo: ValorPermisosArchivo, VistaSplit: ValorVistaSplit};
+						ListaArchivos[IndiceAperturaArchivo] = {    TipoDocumento: ValorTipoElemento, 
+						                                            TamanoDocumento: ValorTamanoDocumento,
+						                                            FechaModificadoDocumento: ValorFechaModificadoDocumento,
+						                                            RutaDocumento: path_archivo,
+						                                            TokenEdicion: ValorTokenEdicion,
+						                                            ModoEditor: ValorModoEditor,
+						                                            NombreArchivo: ValorNombreArchivo,
+						                                            LineaActual: 1,
+						                                            ColumnaActual: 0,
+						                                            PermisosRW: ValorPermisosRW,
+						                                            PermisosArchivo: ValorPermisosArchivo,
+						                                            VistaSplit: ValorVistaSplit,
+						                                            AdministradorDeshacer: ValorAdministradorDeshacer,
+						                                            InicioLineaRenderizadaMiniMap: ValorInicioLineaRenderizadaMiniMap
+						                                       };
 						
 						//Crea dinamicamente el textarea con el numero de indice y con su valor predeterminado
 						AgregarNuevoTextarea(document.form_textareas_archivos,"PCODER_AreaTexto"+IndiceAperturaArchivo,ValorContenidoArchivo);
@@ -1054,9 +1180,81 @@ function PCODER_CargarArchivo(path_archivo)
 			}
 		else
 			{
+			    //Guarda el estado actual de deshacer para el archivo
 				PCODER_CambiarArchivoActual(BusquedaArchivoAbierto,0);
 			}
 	}
+
+
+function PCODER_ActualizarMinimap()
+    {
+        //Verifica si realmente se quiere o no usar minimap pues en archivos extensos puede tardar
+		if ($('#Check_ActivarMinimap').is(":checked"))
+			{
+                var AnchoMinimap=320;
+                var AltoMinimap=400;
+                var LimiteLineasRenderizar=Math.round(AltoMinimap/3);
+                var posicion_cursor=editor.getCursorPosition();
+                var LineaActualDocumento=posicion_cursor.row;
+                var NroLineasDocumentoMinimap=editor.session.getLength();
+                var Contexto2DCanvas = document.getElementById('TextoCanvasMinimap').getContext('2d');
+        
+                //Limpia minimap actual para volver a dibujarlo
+                Contexto2DCanvas.clearRect(0, 0, AnchoMinimap, AltoMinimap);
+                Contexto2DCanvas.beginPath();
+                
+                //Determina la linea inicial para renderizar en minimap
+                InicioLineaRenderizada=Math.round(LineaActualDocumento-(LimiteLineasRenderizar/2));
+                if (InicioLineaRenderizada<0) InicioLineaRenderizada=0;
+                else LimiteLineasRenderizar=LimiteLineasRenderizar+(InicioLineaRenderizada);
+        
+                //Guarda la linea renderizada en minimap en caso de cambiar de archivo
+                ListaArchivos[IndiceArchivoActual].InicioLineaRenderizadaMiniMap=InicioLineaRenderizada;
+        
+                //Lee las lineas deseadas del archivo actual para el minimap
+                for (LineaMinimap=0;LineaMinimap<LimiteLineasRenderizar && LineaMinimap<NroLineasDocumentoMinimap;LineaMinimap++)
+                    {
+                        LineaCodigoMinimap=editor.session.getLine(LineaMinimap+InicioLineaRenderizada);
+                        LongitudLinea=LineaCodigoMinimap.length;
+                        Contexto2DCanvas.moveTo(5               ,(LineaMinimap)*3);
+                        Contexto2DCanvas.lineTo(7               ,(LineaMinimap)*3);
+                        if (LongitudLinea>0)
+                            {
+                                Contexto2DCanvas.moveTo(10                 ,(LineaMinimap)*3);
+                                Contexto2DCanvas.lineTo(LongitudLinea+10   ,(LineaMinimap)*3);
+                            }
+                        Contexto2DCanvas.stroke();
+                    }
+			}
+    }
+
+
+function PCODER_ObtenerLineaMinimap(Minimap,e)
+    {
+        var NroLineasDocumentoMinimap=editor.session.getLength();
+        var posX = $(Minimap).offset().left, posY = $(Minimap).offset().top;
+        //Calcula las coordenadas donde se hizo clic con el raton
+        CoordenadaX=e.pageX - posX;
+        CoordenadaY=e.pageY - posY;
+        //Divide para obtener un numero de linea valido
+        LineaMinimap=Math.round(CoordenadaY/3)+1;
+        if (LineaMinimap > NroLineasDocumentoMinimap) LineaMinimap = NroLineasDocumentoMinimap;
+        return LineaMinimap;
+    }
+
+    //Agrega evento basico para realizar desplazamientos segun las coordenadas (solo la Y) donde se haga clic en el minimap 
+    $('#TextoCanvasMinimap').click(function(e) {
+        //Salta a la linea seleccionada
+        editor.gotoLine(PCODER_ObtenerLineaMinimap(this,e)+ListaArchivos[IndiceArchivoActual].InicioLineaRenderizadaMiniMap, 0, true);
+        PCODER_ActualizarMinimap();
+    });
+
+    //Agrega evento para presentar informacion de salto para el minimap
+    $('#TextoCanvasMinimap').mousemove(function(e) {
+        var LineaSaltoCalculada=PCODER_ObtenerLineaMinimap(this,e)+ListaArchivos[IndiceArchivoActual].InicioLineaRenderizadaMiniMap;
+        //Presenta informacion de linea
+        $("#LineaSaltoMinimap").html(LineaSaltoCalculada);
+    });
 
 
 //##############################################################
@@ -1072,7 +1270,7 @@ var UltimoArchivoSeleccionado="";															//Utilizado en modificacion de c
 AnchoPanelIzquierdo=0;
 AnchoPanelDerecho=0;
 BuscadorArchivosVisible=0;
-			
+
 //Evento que quita la barra de progreso de carga para el explorador cada que finaliza el cargue de su IFrame
 $('#iframe_marco_explorador').load(function(){
 	$('#progreso_marco_explorador').hide();
@@ -1084,11 +1282,17 @@ ace.require("ace/ext/language_tools");
 editor = ace.edit("editor_codigo");
 editor.getSession().setUseWorker(true); //Llevar a false para evitar el error 404 para "worker-php.js Failed to load resource: the server responded with a status of 404 (Not Found)"
 editor.resize(true);
+editor.getSession().setNewLineMode("unix");
 
+//Genera el administrador de deshacer y rehacer por defecto
+editor.getSession().setUndoManager(new ace.UndoManager());
+
+//ace.$blockScrolling = Infinity;
+//ace.$blockScrolling = 1;
+//editor.blockScrolling = Infinity;
 
 //Inicia el primer archivo del arreglo (como demo.txt)
 PCODER_CargarArchivo();
-
 
 // Inicia el editor de codigo con las opciones predeterminadas
 CambiarFuenteEditor("13px");
@@ -1103,21 +1307,21 @@ editor.setOptions({
 });
 
 editor.setAnimatedScroll(true);
+
 //Elimina la visualizacion de margen de impresion
 editor.setShowPrintMargin(0);
 CaracteresInvisiblesEditor(0);
 
-
 //En cada evento de cambio actualiza el textarea
 editor.getSession().on('change', function(){
   document.getElementById("PCODER_AreaTexto").value=editor.getSession().getValue();
+  PCODER_ActualizarMinimap();
 });
 
 //Ajusta tamano del editor en cada cambio de tamano de la ventana
 $( window ).resize(function() {
 	PCODER_RecalcularMaquetacion();
 });
-
 
 // CAPTURA DE EVENTOS DE TECLADO DESDE LA VENTANA  #############################################################
 //Captura el evento de Ctrl+S para guardar el archivo
@@ -1147,13 +1351,26 @@ $(window).bind('keydown', function(event) {
 	}
 });
 
+
+// CAPTURA DE EVENTOS DE RATON DESDE EL EDITOR  #############################################################
+editor.on("click", function(ev){
+    PCODER_ActualizarMinimap();
+    });
+
 // CAPTURA DE EVENTOS DE TECLADO DESDE EL EDITOR  #############################################################
-/*
+editor.commands.addCommand({
+		name: 'vermarcoderecho',
+		bindKey: {win: 'Ctrl-M', mac: 'Command-Option-M'},
+		exec: function(editor) {
+			PCODER_ActivarPanelDerecho();
+			},
+		readOnly: true
+	});
 editor.commands.addCommand({
 		name: 'deshacer',
 		bindKey: {win: 'Ctrl-Z', mac: 'Command-Option-Z'},
 		exec: function(editor) {
-			//MiComando
+			PCODER_DeshacerEdicion();
 			},
 		readOnly: true
 	});
@@ -1161,11 +1378,10 @@ editor.commands.addCommand({
 		name: 'rehacer',
 		bindKey: {win: 'Ctrl-Y', mac: 'Command-Option-Y'},
 		exec: function(editor) {
-			//MiComando
+			PCODER_RehacerEdicion();
 			},
 		readOnly: true
 	});
-*/
 editor.commands.addCommand({
 		name: 'aumentarfuenteeditor',
 		bindKey: {win: 'Ctrl-+', mac: 'Command-Option-+'},
@@ -1184,7 +1400,6 @@ editor.commands.addCommand({
 	});
 
 
-
 //Genera una nueva sesion del editor ACE
 function ClonarSesionEditor(session)
 	{
@@ -1192,6 +1407,7 @@ function ClonarSesionEditor(session)
 		s.$foldData = session.$cloneFoldData();
 		return s;
 	}
+
 
 //Toma las propiedades del editor principal y las copia en el editor clonado
 function ClonarPropiedadesEditor()
@@ -1215,7 +1431,8 @@ function ClonarPropiedadesEditor()
 		//Cambia el modo de sintaxis y errores resaltado por el editor
 		EditorClonado.getSession().setMode(ModoFiltrado);
 	}
-	
+
+
 //Clona el editor hacia uno nuevo para permitir los split
 var NuevaSessionEditor = editor.getSession();
 var editor_actual = document.getElementById("editor_codigo");

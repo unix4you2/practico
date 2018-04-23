@@ -70,11 +70,11 @@
 							<li class="dropdown">
 								<a style="cursor:pointer;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $MULTILANG_PCODER_Editar; ?> <span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<!--
-									<li><a style="cursor:pointer;" OnClick="editor.undo();"><i class="fa fa-undo fa-fw"></i> <?php echo $MULTILANG_PCODER_Deshacer; ?>		<span class="pull-right text-muted small"><i>Ctrl+Z</i></span></a></li>
-									<li><a style="cursor:pointer;" OnClick="editor.redo();"><i class="fa fa-repeat fa-fw"></i> <?php echo $MULTILANG_PCODER_Rehacer; ?>	<span class="pull-right text-muted small"><i>Ctrl+Y</i></span></a></li>
+									
+									<li><a style="cursor:pointer;" OnClick="PCODER_DeshacerEdicion();"><i class="fa fa-undo fa-fw"></i> <?php echo $MULTILANG_PCODER_Deshacer; ?>		<span class="pull-right text-muted small"><i>Ctrl+Z</i></span></a></li>
+									<li><a style="cursor:pointer;" OnClick="PCODER_RehacerEdicion();"><i class="fa fa-repeat fa-fw"></i> <?php echo $MULTILANG_PCODER_Rehacer; ?>	<span class="pull-right text-muted small"><i>Ctrl+Y</i></span></a></li>
 									<li role="separator" class="divider"></li>
-									-->
+									
 									<li><a style="cursor:pointer;" OnClick="editor.selectAll();"><i class="fa fa-file-text fa-fw"></i> <?php echo $MULTILANG_PCODER_SeleccionarTodo; ?>	<span class="pull-right text-muted small"><i>Ctrl+A</i></span></a></li>
 									<li role="separator" class="divider"></li>
 									<!--
@@ -152,6 +152,7 @@
 								<a style="cursor:pointer;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $MULTILANG_PCODER_Herramientas; ?> <span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li><a style="cursor:pointer;" OnClick="PCODER_ActivarPanelDerecho();"><i class="fa fa-paint-brush fa-fw"></i> <?php echo $MULTILANG_PCODER_ExploradorColores; ?></a></li>
+									<li><a style="cursor:pointer;" OnClick="PCODER_ActivarPanelDerecho();"><i class="fa fa-map-signs fa-fw"></i> <?php echo $MULTILANG_PCODER_Minimap; ?></a></li>
 									<li><a style="cursor:pointer;" OnClick="$('#pestana_diferencias').trigger('click');"><i class="fa fa-eye-slash fa-fw"></i> <?php echo $MULTILANG_PCODER_HerramientaDiferencias; ?></a></li>
 									<li><a id="boton_buscador_archivos2" style="cursor:pointer;" OnClick="BuscadorArchivosVisible=0; PCODER_ActivarPanelIzquierdo(); ActivarBuscadorArchivos();">		<i class="fa fa-search fa-fw"></i> <?php echo $MULTILANG_PCODER_Buscar; ?> <?php echo $MULTILANG_PCODER_Archivo; ?>			</a></li>
 								</ul>

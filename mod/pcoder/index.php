@@ -39,7 +39,6 @@
             error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_DEPRECATED | E_STRICT | E_USER_DEPRECATED | E_USER_ERROR | E_USER_WARNING); //Otras disponibles | E_PARSE | E_CORE_ERROR | E_CORE_WARNING |
         }
 
-
     //Incluye archivo inicial de configuracion
 	include_once("inc/configuracion.php");
 
@@ -57,7 +56,7 @@
 					die();
 				}
 		}
-
+		
 	// Determina si es un usuario administrador para poder abrir el editor
 	if ($PCO_PCODER_StandAlone==0)
 		{
@@ -77,7 +76,7 @@
 					die();
 				}
 		}
-
+		
 	//Crea variable se sesion usada por la consola de comandos
 	$_SESSION['PCONSOLE_KEY']="23456789abcdefghijkmnpqrstuvwxyz";
 	$_SESSION['PEXPLORER_KEY']="23456789abcdefghijkmnpqrstuvwxyz";
@@ -178,7 +177,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
     <link href="../../inc/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 	<!-- Estilos especificos PCoder -->
-    <link href="css/pcoder.min.css" rel="stylesheet" type="text/css">
+    <link href="css/pcoder.min.css?<?php echo filemtime('css/pcoder.min.css'); ?>" rel="stylesheet" type="text/css">
     
     <!-- Estilos selector de color -->
     <link rel="stylesheet" href="../../inc/jquery/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
@@ -376,7 +375,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 		var MULTILANG_PCODER_Eliminado="<?php echo $MULTILANG_PCODER_Eliminado; ?>";
 		var MULTILANG_PCODER_ExtensionNoSoportada="<?php echo $MULTILANG_PCODER_ExtensionNoSoportada; ?>";
 	</script>
-	<script type="text/javascript" src="js/pcoder.min.js"></script>
+	<script type="text/javascript" src="js/pcoder.min.js?<?php echo filemtime('js/pcoder.min.js'); ?>"></script>
 
 	<script language="JavaScript">
 		function RecargarToolTipsEnlaces()

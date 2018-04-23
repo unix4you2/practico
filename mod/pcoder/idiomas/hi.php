@@ -91,6 +91,7 @@
 	$MULTILANG_PCODER_Ver='राय';
 
 	//Mensajes de error y varios
+	$MULTILANG_PCODER_Minimap='Code Minimap';
 	$MULTILANG_PCODER_AumSangria='बढ़ते हुए अंतर में';
 	$MULTILANG_PCODER_DisSangria='समान का आर्डर कम करें';
 	$MULTILANG_PCODER_ConvMay='अपरकेस कन्वर्ट';

@@ -92,6 +92,7 @@
 	$MULTILANG_PCODER_Ver='Ver';
 
 	//Mensajes de error y varios
+	$MULTILANG_PCODER_Minimap='Minimapa de c&oacute;digo';
 	$MULTILANG_PCODER_AumSangria='Aumentar sangr&iacute;a';
 	$MULTILANG_PCODER_DisSangria='Disminuir sangr&iacute;a';
 	$MULTILANG_PCODER_ConvMay='Convertir a may&uacute;scula';
@@ -156,4 +157,3 @@
 	$MULTILANG_PCODER_HerramientaDiferencias='Visor de diferencias';
 	$MULTILANG_PCODER_SensibleMayusculas='Distinguir May&uacute;sculas / Min&uacute;sculas';
 	$MULTILANG_PCODER_Autocompletado='Autocompletado mientras se escribe';
-

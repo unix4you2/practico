@@ -22,7 +22,7 @@
 
     // AYUDA DE TECLADO
     abrir_dialogo_modal("AtajosTeclado",$MULTILANG_PCODER_Ayuda.': <b>'.$MULTILANG_PCODER_AtajosTitPcoder.'</b>',"modal-wide"); ?>
-        <DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 600px">
+        <DIV style="DISPLAY: block; OVERFLOW: auto; WIDTH: 100%; POSITION: relative; HEIGHT: 400px">
             <?php Presentar_KeyBindings(); ?>
         </DIV>
 

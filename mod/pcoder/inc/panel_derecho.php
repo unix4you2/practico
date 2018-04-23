@@ -31,7 +31,7 @@
 
 		<!-- ################# SELECTOR DE COLORES ##################-->
 			<br>
-			<div id="SelectorColores" align="center" class="alert alert-info" style="margin-right:25px;">
+			<div id="SelectorColores" align="center" class="alert alert-info btn-xs" style="margin-right:25px;">
 				<?php echo $MULTILANG_PCODER_ExploradorColores; ?>:<br>
 				<input type="text" id="ValorSelectorColores" class="btn btn-primary btn-xs" value="" placeholder="<?php echo $MULTILANG_PCODER_ClicSeleccionar; ?>"/>
 				<style>
@@ -70,6 +70,13 @@
 				</script>
 			</div>
 
-
+		<!-- ################# MINIMAP DE CODIGO ##################-->
+	    <div id="HerramientaMinimap" align="center" class="btn-xs alert alert-danger" style="background-color:#000000; margin-right:25px; padding:0x;">
+		    <div align="left">
+		        &nbsp;&nbsp;&nbsp;<font color=gray><input type="checkbox" id="Check_ActivarMinimap" value="0"> <?php echo $MULTILANG_PCODER_Activar; ?> <?php echo $MULTILANG_PCODER_Minimap; ?></font><br>
+		        &nbsp;<a class="btn btn-xs text-info"><i class="fa fa-code"></i> <?php echo $MULTILANG_PCODER_SaltarLinea; ?> <div id="LineaSaltoMinimap" style="display:inline;">1</div>  </a>
+		    </div>
+            <canvas id="TextoCanvasMinimap" width="100%" height="400" style="width:100%; height:400px; background-color: #333333; border:1px solid #878787; border-radius: 10px; box-shadow: 2px 2px 5px black; margin:0px;">Your browser does not support the HTML5 canvas tag.</canvas>
+		</div>
 
 	</div>

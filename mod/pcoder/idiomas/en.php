@@ -91,6 +91,7 @@
 	$MULTILANG_PCODER_Ver='View';
 
 	//Mensajes de error y varios
+	$MULTILANG_PCODER_Minimap='Code Minimap';
 	$MULTILANG_PCODER_AumSangria='Increase indent';
 	$MULTILANG_PCODER_DisSangria='Decrease indent';
 	$MULTILANG_PCODER_ConvMay='Convert to uppercase';
@@ -155,4 +156,3 @@
 	$MULTILANG_PCODER_HerramientaDiferencias='Differences tool';
 	$MULTILANG_PCODER_SensibleMayusculas='Case sensitive';
 	$MULTILANG_PCODER_Autocompletado='Autocomplete as you type';
-
