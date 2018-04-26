@@ -99,6 +99,8 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
  
      <div class="row">
         <?php
+            if ($ModoDesarrolladorPractico!="-10000")
+                $ModoDesarrolladorPractico=0;
             echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","primary","fa-table fa-4x",consultar_tablas()->rowCount(),"$MULTILANG_TablaDatos","$MULTILANG_Detalles","javascript:document.administrar_tablas.submit();");
             echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","green",  "fa-newspaper-o fa-4x",ContarRegistros($TablasCore."formulario","id>".$ModoDesarrolladorPractico),"$MULTILANG_Formularios","$MULTILANG_Detalles","javascript:document.administrar_formularios.submit();");
             echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","red","fa-file-text fa-4x",ContarRegistros($TablasCore."informe","id>".$ModoDesarrolladorPractico),"$MULTILANG_Informes","$MULTILANG_Detalles","javascript:document.administrar_informes.submit();");
