@@ -828,6 +828,7 @@
 	$MULTILANG_InfSubtotalesFormatoDes='Tells Practico what is the output format for the autosum results.  <b>This allow basic HTML and templates</b> Example: _TOTAL_PAGINA_ show the total for the actual page, _TOTAL_INFORME_ shows the total of all report, _COLUMNA_ show the column number used for totalize values.  For example this HTML code shows the results centered and in bold: < div align=center>< b>Total page < i>(column: _COLUMNA_)< /i> _TOTAL_PAGINA_ Total report: _TOTAL_INFORME_< /b>< /div>';
 	$MULTILANG_InfTituloArbitrario='Arbitrary title';
 	$MULTILANG_InfTituloArbitrarioDes='Allows you to ignore the column title delivered by the database engine and instead use this value as a title in the submitted report. <b> Allows basic HTML and PHP variables </b>';
+	$MULTILANG_InfSQL='If you add any content greater than 5 characters to this SQL script field, the report generator will omit any configuration of tables, fields, conditions or any other query definition that you have defined and will try to directly execute this Script and from it generate the results table. You can use PHP variables in notation {$ Variable} to include environment variables.';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';

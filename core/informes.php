@@ -578,7 +578,7 @@ if ($PCO_Accion=="actualizar_informe")
 		if ($mensaje_error=="")
 			{
 				// Actualiza los datos 
-				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."informe SET conexion_origen_datos=?,subtotales_columna=?,subtotales_formato=?,tamano_paginacion=?, formulario_filtrado=?, soporte_datatable=?, variables_filtro=?, genera_pdf=?, formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=? WHERE id=? ","$conexion_origen_datos$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$id");
+				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."informe SET script_sql=?, conexion_origen_datos=?,subtotales_columna=?,subtotales_formato=?,tamano_paginacion=?, formulario_filtrado=?, soporte_datatable=?, variables_filtro=?, genera_pdf=?, formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=? WHERE id=? ","$script_sql$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$id");
 				PCO_Auditar("Actualiza informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="editar_informe">
@@ -1058,8 +1058,6 @@ if ($PCO_Accion=="editar_informe")
                 <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
             cerrar_dialogo_modal($barra_herramientas_modal);
         ?>
-
-
 
 
             <!-- Modal Campos del informe -->
@@ -1993,7 +1991,11 @@ if ($PCO_Accion=="editar_informe")
 						}// Fin si es grafico
 				?>
 
-				<br><br>
+                <hr>
+				<?php echo $MULTILANG_MonCommSQL; ?> (<?php echo $MULTILANG_Avanzado; ?>)<br>
+				<b><a data-toggle="modal" href='#myModalActualizaSQL' title="<?php echo $MULTILANG_FrmAdvScriptForm; ?>" name=" "><i class="fa fa-code fa-3x"></i></a></b>
+				<hr>
+
 				<form action="<?php echo $ArchivoCORE; ?>" method="POST" name="cancelar"><input type="Hidden" name="PCO_Accion" value="administrar_informes"></form>
                 <a class="btn btn-warning btn-block" href="javascript:document.cancelar.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_InfVolver; ?></a>
 
@@ -2010,6 +2012,23 @@ if ($PCO_Accion=="editar_informe")
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="actualizar_informe">
 			<input type="Hidden" name="id" value="<?php echo $registro_informe['id']; ?>">
+
+
+            <!-- Modal EditorJavascript -->
+            <?php
+                abrir_dialogo_modal("myModalActualizaSQL",$MULTILANG_MonCommSQL,"modal-wide");
+            ?>
+                    <div class="well" style="color:#000000;"><?php echo $MULTILANG_InfSQL; ?>
+                    <textarea name="script_sql" id="script_sql" data-editor="sql" class="form-control" style="width: 950px; height: 450px;"><?php echo $registro_informe['script_sql']; ?></textarea>
+                    </div>
+            <?php
+                $barra_herramientas_modal='
+        			<button type="button" class="btn btn-success" onclick="javascript:document.datos.submit();">'.$MULTILANG_Actualizar.' SQL <i class="fa fa-floppy-o"></i></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+                cerrar_dialogo_modal($barra_herramientas_modal);
+            ?>
+            <!-- Fin Modal EditorJavascript -->
+
 
             <div class="form-group input-group">
                 <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> </span>
@@ -2202,7 +2221,13 @@ if ($PCO_Accion=="editar_informe")
 			<br>
             <div class="well well-sm btn-xs" style="color:Blue;">
 				<font color="#FF0000"><b><?php echo strtoupper($MULTILANG_VistaPrev); ?> </b>(<?php echo $MULTILANG_MonCommSQL?>, <i>variables reemplazadas/vars replaced</i>):<br></font>
-				<?php echo construir_consulta_informe($registro_informe['id'],0); ?>
+				<?php 
+            		//Si no hay SQL explicito entonces Genera la consulta en SQL para el informe a partir de los parametros
+            		if (strlen($registro_informe["script_sql"])<5)
+            		    echo construir_consulta_informe($registro_informe['id'],0);
+            		else
+            		    echo PCO_ReemplazarVariablesPHPEnCadena($registro_informe["script_sql"]);
+				 ?>
             </div>
             
 
@@ -2275,7 +2300,7 @@ if ($PCO_Accion=="guardar_informe")
 			{
 				$agrupamiento='';
                 $ordenamiento='';
-                PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|false|false|false|||',?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos");
+                PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|false|false|false|||',?,?,?,?,?,?,?,?,'')","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos");
 				$id=obtener_ultimo_id_insertado($ConexionPDO);
 				PCO_Auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">

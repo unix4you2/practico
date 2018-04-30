@@ -826,6 +826,7 @@
 	$MULTILANG_InfSubtotalesFormatoDes='Indica el formato que sera utilizado para imprimir los resultados de la funcion autosuma al final del informe.  <b>Permite HTML basico y plantillas</b> asi: _TOTAL_PAGINA_ Presentara el total de la columna para la pagina actual, _TOTAL_INFORME_ presentara el total de registros de todos el informe, _COLUMNA_ presenta el numero de la columna del informe utilizada para la operacion de autosuma.  Por ejemplo el siguiente codigo HTML presentara el estado de la AutoSumna centrado y en negrita: < div align=center>< b>Total de pagina < i>(columna: _COLUMNA_)< /i> _TOTAL_PAGINA_ Total reporte: _TOTAL_INFORME_< /b>< /div>';
 	$MULTILANG_InfTituloArbitrario='Titulo arbitrario';
 	$MULTILANG_InfTituloArbitrarioDes='Permite ignorar el titulo de columna entregado por el motor de base de datos y en su lugar utilizar este valor como titulo en el informe presentado.  <b>Permite HTML basico y variables PHP</b>';
+	$MULTILANG_InfSQL='Si usted agrega cualquier contenido mayor a 5 caracteres a este campo de script SQL el generador de informes omitir&aacute; cualquier configuraci&oacute;n de tablas, campos, condiciones o cualquier otra definici&oacute;n de consulta que usted tenga definida e intentar&aacute; ejecutar directamente este Script y a partir de &eacute;l generar la tabla de resultados.  Puede utilizar variables PHP en notaci&oacute;n {$ Variable} para incluir variables de entorno.';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';
