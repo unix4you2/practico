@@ -1210,6 +1210,24 @@ function PCO_BuscarErroresSintaxisPHP($ArchivoFuente)
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: PCO_CallBack_ReemplazarVariablesPHPEnCadena
+	Devuelve una cadena evaluada donde se reemplazan las expresiones de variables PHP con el formato {$variable} por su valor definido
+
+	Ver tambien:
+		<PCO_ReemplazarVariablesPHPEnCadena>
+*/
+function PCO_CallBack_ReemplazarVariablesPHPEnCadena($ocurrencia)
+	{
+        //Declara la variable como global, pues no se sabe qué variable y en qué ambito se encuentra
+        global ${$ocurrencia[1]};
+        //Obtiene el valor de la variable
+        return eval('return $' . $ocurrencia[1] . ';');
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: PCO_ReemplazarVariablesPHPEnCadena
 	Devuelve una cadena evaluada donde se reemplazan las expresiones de variables PHP con el formato {$variable} por su valor definido
 
@@ -1222,21 +1240,12 @@ function PCO_BuscarErroresSintaxisPHP($ArchivoFuente)
 		Cadena con las variables reemplazadas
 
 	Ver tambien:
-		<construir_consulta_informe>
+		<construir_consulta_informe> | <PCO_CallBack_ReemplazarVariablesPHPEnCadena>
 */
 function PCO_ReemplazarVariablesPHPEnCadena($cadena_original)
 	{
 	    //Reemplaza todas las ocurrencias de variables por el valor de la misma en su variable global
-        $cadena_final = preg_replace_callback(
-            '~\{\$(.*?)\}~si',
-            function($ocurrencia)
-            {
-                //Declara la variable como global, pues no se sabe qué variable y en qué ambito se encuentra
-                global ${$ocurrencia[1]};
-                //Obtiene el valor de la variable
-                return eval('return $' . $ocurrencia[1] . ';');
-            },
-            $cadena_original);
+        $cadena_final = preg_replace_callback('~\{\$(.*?)\}~si',"PCO_CallBack_ReemplazarVariablesPHPEnCadena",$cadena_original);
 		return $cadena_final;
 	}
 

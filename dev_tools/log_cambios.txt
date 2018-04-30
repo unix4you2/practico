@@ -41,6 +41,7 @@ LogCambios="
 * Enhan: Actualizacion {P}Coder 18.4
 * Enhan: Se protege la edicion de parametros basicos de configuracion para el motor.  Estos deberan ser tocados solo por archivo para hacer de manera más consciente esa tarea para los usuarios administradores avanzados que por error involuntario o de navegador podrían dejar inactiva la aplicación.
 * Fixed: Usuarios que no han guardado configuraciones en su panel de admin despues de actualizar no pueden ver graficos del panel
+* Fixed: Mejorada funcion callback de reemplazo de variables para versiones muy obsoletas de PHP que no soportan llamado recursivo. 
 "
 
 ########################################################################
