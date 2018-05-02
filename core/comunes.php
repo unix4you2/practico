@@ -26,6 +26,164 @@
 		Section: Funciones asociadas a las operaciones con bases de datos - Ejecucion de consultas
 	*/
 
+
+/*#################################################################################
+###################################################################################*/
+function PCO_CodificarCadena_UUEncode($string)
+    {
+        // Sanity check
+        if (!is_scalar($string)) {
+            user_error('convert_uuencode() expects parameter 1 to be'
+                . ' string, ' . gettype($string) . ' given', 
+                E_USER_WARNING);
+            return false;
+        }
+
+        $u = 0;
+        $encoded = '';
+        
+        while ($c = count($bytes = unpack('c*', 
+            substr($string, $u, 45)))) {
+            $u += 45;
+            $encoded .= pack('c', $c + 0x20);
+
+            while ($c % 3) {
+                $bytes[++$c] = 0;
+            }
+
+            foreach (array_chunk($bytes, 3) as $b) {
+                $b0 = ($b[0] & 0xFC) >> 2;
+                $b1 = (($b[0] & 0x03) << 4) + (($b[1] & 0xF0) >> 4);
+                $b2 = (($b[1] & 0x0F) << 2) + (($b[2] & 0xC0) >> 6);
+                $b3 = $b[2] & 0x3F;
+                
+                $b0 = $b0 ? $b0 + 0x20 : 0x60;
+                $b1 = $b1 ? $b1 + 0x20 : 0x60;
+                $b2 = $b2 ? $b2 + 0x20 : 0x60;
+                $b3 = $b3 ? $b3 + 0x20 : 0x60;
+                
+                $encoded .= pack('c*', $b0, $b1, $b2, $b3);
+            }
+
+            $encoded .= "\n";
+        }
+        
+        // Add termination characters
+        $encoded .= "\x60\n";
+        return $encoded;
+    }
+
+
+/*#################################################################################
+###################################################################################*/
+function PCO_DecodificarCadena_UUEncode($string)
+    {
+        // Sanity check
+        if (!is_scalar($string)) {
+            user_error('convert_uuencode() expects parameter 1 to be'
+                . ' string, ' . gettype($string) . ' given', 
+                E_USER_WARNING);
+            return false;
+        }
+
+        if (strlen($string) < 8) {
+            user_error('convert_uuencode() The given parameter is not'
+                . ' a valid uuencoded string', E_USER_WARNING);
+            return false;
+        }
+
+        $decoded = '';
+        foreach (explode("\n", $string) as $line) {
+
+            $c = count($bytes = unpack('c*', substr(trim($line), 1)));
+
+            while ($c % 4) {
+                $bytes[++$c] = 0;
+            }
+
+            foreach (array_chunk($bytes, 4) as $b) {
+                $b0 = $b[0] == 0x60 ? 0 : $b[0] - 0x20;
+                $b1 = $b[1] == 0x60 ? 0 : $b[1] - 0x20;
+                $b2 = $b[2] == 0x60 ? 0 : $b[2] - 0x20;
+                $b3 = $b[3] == 0x60 ? 0 : $b[3] - 0x20;
+                
+                $b0 <<= 2;
+                $b0 |= ($b1 >> 4) & 0x03;
+                $b1 <<= 4;
+                $b1 |= ($b2 >> 2) & 0x0F;
+                $b2 <<= 6;
+                $b2 |= $b3 & 0x3F;
+                
+                $decoded .= pack('c*', $b0, $b1, $b2);
+            }
+        }
+        return rtrim($decoded, "\0");
+    }
+
+
+/*#################################################################################
+###################################################################################*/
+function PCO_CodificarCadena_Binario($input)
+    {
+        if (!is_string($input))
+            return false;
+        $input = unpack('H*', $input);
+        $chunks = str_split($input[1], 2);
+        $ret = '';
+        foreach ($chunks as $chunk)
+            {
+                $temp = base_convert($chunk, 16, 2);
+                $ret .= str_repeat("0", 8 - strlen($temp)) . $temp;
+            }
+
+        //RETORNO DE HEXADECIMAL TOMADO DEL BINARIO
+        {
+            //$ret = bin2hex ($ret);  
+        }
+        //RETORNO DE DECIMAL TOMADO DEL BINARIO CON ADICION DE CEROS A LA IZQUIERDA
+        /*
+        {
+            //Busca primer uno
+            $PrimerUno=stripos ( $ret , "1");
+            $CadenaCeros="";
+            for ($i=0;$i<$PrimerUno;$i++)
+                $CadenaCeros.="0";
+            $ret = $CadenaCeros."_".bindec($ret);   //Retorna por ejemplo  00_6552311
+        }
+        */
+        return $ret;
+    }
+
+
+/*#################################################################################
+###################################################################################*/
+function PCO_DecodificarCadena_Binario($input)
+    {
+        //RETOMA UN HEXADECIMAL Y DEVUELVE EL BINARIO A PROCESAR
+        {
+            //$ret = hex2bin ($ret);  
+        }
+        //RETOMA UN DECIMAL Y DEVUELVE EL BINARIO A PROCESAR AGREGANDO LOS CEROS EXTRA
+        /*
+        {
+            $PartesNumero=explode("_",$input);
+            $input = $PartesNumero[0].decbin($PartesNumero[1]);   //Analiza por ejemplo una entrada como 00_6552311  para devolver su parte decimal en binaria antecedida por los ceros dados
+        }
+        */
+
+        if (!is_string($input))
+            return false;
+        $chunks = str_split($input,8);
+        $ret = '';
+        foreach ($chunks as $chunk)
+        {
+            $temp = base_convert($chunk, 2, 16);
+            $ret .= pack('H*',str_repeat("0", 2 - strlen($temp)) . $temp);
+        }
+        return $ret;
+    }
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*
