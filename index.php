@@ -175,27 +175,23 @@
     if (@$Precarga_EstilosBS!=1) $Precarga_EstilosBS="";
     if (@$Presentar_FullScreen!=1) 
         include 'core/marco_arriba.php';
-    else
-        {
-            //Valida si el FullScreen al menos requiere de estilos BootStrap basicos
-            if (@$Precarga_EstilosBS==1) 
-                {
-                    include 'core/marco_arriba_bs.php';
-                    //Inicia lo basico de la pagina
-                    echo '<body oncontextmenu="return false;">';
+    else if (@$Precarga_EstilosBS==1) //Valida si el FullScreen al menos requiere de estilos BootStrap basicos
+		{
+			include 'core/marco_arriba_bs.php';
+			//Inicia lo basico de la pagina
+			echo '<body oncontextmenu="return false;">';
 
-                    //Incluye formularios de uso comun para transporte de datos
-                    include_once 'core/marco_forms.php';
+			//Incluye formularios de uso comun para transporte de datos
+			include_once 'core/marco_forms.php';
 
-                    echo '    <div id="wrapper">
-                        <!-- CONTENIDO DE APLICACION -->
-                        <div id="page-wrapper">  <!-- ANTES page-wrapper-->
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <br>';
-                }
-        }
+			echo '    <div id="wrapper">
+				<!-- CONTENIDO DE APLICACION -->
+				<div id="page-wrapper">  <!-- ANTES page-wrapper-->
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-12">
+								<br>';
+		}
 
 
     // Prueba que todas las extensiones requeridas se encuentren habilitadas
@@ -215,13 +211,12 @@
     }
 
     // Si existe el directorio de instalacion y no es modo fullscreen presenta un mensaje constante de advertencia en el escritorio
-    if (@file_exists('ins') && PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$Presentar_FullScreen!=1 && $PCO_Accion=="Ver_menu") {
+    if (@file_exists('ins') && PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$Presentar_FullScreen!=1 && $PCO_Accion=="Ver_menu")
         mensaje($MULTILANG_TituloInsExiste, $MULTILANG_TextoInsExiste, '', 'fa fa-exclamation-triangle fa-5x texto-rojo texto-blink', 'alert alert-warning alert-dismissible');
-    }
 
 	//Despliega escritorio de los Administradores
     if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCOSESS_SesionAbierta && $PCO_Accion=="Ver_menu")
-        include_once "core/marco_admin.php";
+        include_once 'core/marco_admin.php';
 
 
 /* ################################################################## */
