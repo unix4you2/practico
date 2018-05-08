@@ -483,6 +483,10 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_sino','N','{$MULTILANG_No}',2);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_nosi','N','{$MULTILANG_No}',1);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_nosi','S','{$MULTILANG_Si}',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('booleano_nosi','0','{$MULTILANG_No}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('booleano_nosi','1','{$MULTILANG_Si}',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('booleano_sino','1','{$MULTILANG_Si}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('booleano_sino','0','{$MULTILANG_No}',2);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('visibilidad_oauth','1','{$MULTILANG_OauthOpcionBoton}',1);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('visibilidad_oauth','0','{$MULTILANG_OauthOpcionDirecta}',2);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','mysql','MySQL - MariaDB (3.x/4.x/5.x)',1);

@@ -51,9 +51,9 @@ LogCambios="
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
+# RECORDAR ANTE OPCIONES MULTI-IDIOMA:  UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 ScriptBasedatos="
 ALTER TABLE core_informe ADD script_sql text;
-
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','mysql','MySQL - MariaDB (3.x/4.x/5.x)',1);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','pgsql','PostgreSQL',2);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','sqlite','SQLite v2 - SQLite v3',3);
@@ -65,6 +65,11 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','oracle','ORACLE (OCI Oracle Call Interface)',9);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','ifmx','Informix (IBM Informix Dynamic Server)',10);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','fbd','Firebird (Firebird/Interbase 6)',11);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('booleano_nosi','0','{ $ MULTILANG_No}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('booleano_nosi','1','{ $ MULTILANG_Si}',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('booleano_sino','1','{ $ MULTILANG_Si}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('booleano_sino','0','{ $ MULTILANG_No}',2);
+UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 "
 
 ########################################################################
