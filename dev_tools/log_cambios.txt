@@ -21,6 +21,7 @@ core/marco_conf.php
 core/informes.php
 core/objetos.php
 xml/*
+inc/jquery/plugins/jquery.fileTree-1.01/connectors/*
 inc/ace/*
 mod/pcoder/*
 inc/practico/idiomas/*
@@ -38,10 +39,12 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 * Added: Se permite seleccion del operador NOT LIKE durante las condiciones de informes.
 * Added: Consultas avanzadas sobre los informes.  Se permite ingresar código específico para las consultas, aunque éstas no se beneficiarán de algunas propiedades de las definidas internamente por el Framework pero permitirá la generación de consultas SQL o llamados a procedimientos almacenados directamente.
-* Enhan: Actualizacion {P}Coder 18.4
+* Enhan: Actualizacion {P}Coder 18.6
 * Enhan: Se protege la edicion de parametros basicos de configuracion para el motor.  Estos deberan ser tocados solo por archivo para hacer de manera más consciente esa tarea para los usuarios administradores avanzados que por error involuntario o de navegador podrían dejar inactiva la aplicación.
 * Fixed: Usuarios que no han guardado configuraciones en su panel de admin despues de actualizar no pueden ver graficos del panel
 * Fixed: Mejorada funcion callback de reemplazo de variables para versiones muy obsoletas de PHP que no soportan llamado recursivo. 
+* Fixed: Supresion de las funciones de verificacion automatica de sintaxis en servidores windows, ya que estos no soportan el comando de PHP sobre el PATH general a menos que se especifique su path especifico.
+* Fixed: Corrección a la librería de exploración de archivos para {P}Coder sobre servidores windows que no soportan una raiz establecida por defecto.
 "
 
 ########################################################################

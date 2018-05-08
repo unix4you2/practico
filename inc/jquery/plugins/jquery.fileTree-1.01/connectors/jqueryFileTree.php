@@ -18,6 +18,9 @@
 
 $_POST['dir'] = urldecode($_POST['dir']);
 
+//Practico Framework: Evita mensaje de advertencia sobre plataformas windows
+if (!defined("root")) $root="";
+
 if( file_exists($root . $_POST['dir']) ) {
 	$files = scandir($root . $_POST['dir']);
 	natcasesort($files);
@@ -30,7 +33,7 @@ if( file_exists($root . $_POST['dir']) ) {
 			}
 		}
 		// All files, only if not hidden flag is received
-		if($_GET['nofiles']!="true")
+		if(@$_GET['nofiles']!="true")
 		{
 			foreach( $files as $file ) {
 				if( file_exists($root . $_POST['dir'] . $file) && $file != '.' && $file != '..' && !is_dir($root . $_POST['dir'] . $file) ) {

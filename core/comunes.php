@@ -1353,15 +1353,24 @@ function PCO_ManejadorErrores($DetalleExcepcion)
 */
 function PCO_BuscarErroresSintaxisPHP($ArchivoFuente)
     {
-        global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles;
-        $SalidaFuncion=0;
-        @exec('php -l '.escapeshellarg($ArchivoFuente), $Salida, $Codigo);
-        if ($Codigo)  //Si se tiene un valor diferente de cero retornado por el comando
-            {
-                mensaje($MULTILANG_ErrorTiempoEjecucion,"<b>".$MULTILANG_Detalles."</b>: Se deberia evitar la inclusion del archivo $ArchivoFuente pues PHP retorna el mensaje: <i>".$Salida[0].$Salida[1].$Salida[2]."<i>.  Se recomienda validar su sintaxis para que pueda ser incluido sin problemas.", '', 'fa fa-exclamation-triangle fa-3x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
-                $SalidaFuncion=1;
-            }
-        return $SalidaFuncion;
+		//Hace el proceso de verificacion solamente en plataformas diferentes a Windows.  Windows no lo permite a menos que se especifique el path completo de PHP
+		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
+			{
+				//Se omite verificacion de sintaxis
+				return 0;
+			}
+		else
+			{
+				global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles;
+				$SalidaFuncion=0;
+				@exec('php -l '.escapeshellarg($ArchivoFuente), $Salida, $Codigo);
+				if ($Codigo)  //Si se tiene un valor diferente de cero retornado por el comando
+					{
+						mensaje($MULTILANG_ErrorTiempoEjecucion,"<b>".$MULTILANG_Detalles."</b>: Se deberia evitar la inclusion del archivo $ArchivoFuente pues PHP retorna el mensaje: <i>".$Salida[0].$Salida[1].$Salida[2]."<i>.  Se recomienda validar su sintaxis para que pueda ser incluido sin problemas.", '', 'fa fa-exclamation-triangle fa-3x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
+						$SalidaFuncion=1;
+					}
+				return $SalidaFuncion;
+			}
     }
 
 

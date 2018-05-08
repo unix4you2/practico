@@ -39,7 +39,6 @@
     chmod 777 pwa
     chmod 777 ins
     chmod 777 mod/pcoder/demos/*
-    chmod -R 777 mod/pcc_erp/*
     
     #Permisos de archivos basicos de configuracion
     chmod 777 core/configuracion.php
