@@ -44,6 +44,9 @@
 	<meta name="description" content="Generador de aplicaciones web - www.practico.org" />
     <meta name="theme-color" content="<?php echo $PCO_ColorFondoGeneral; ?>"/>
     <meta name="author" content="John Arroyave G. - {www.practico.org} - {unix4you2 at gmail.com}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+
 	<title><?php echo $NombreRAD; ?> <?php echo $Version_Aplicacion; ?></title>
 
     <!-- CSS Core de Bootstrap -->
