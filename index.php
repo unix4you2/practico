@@ -1,6 +1,6 @@
 <?php
-    /*
-	 _										  
+/*
+	 _
 	|_) _ _  _ _|_. _ _					  	Copyright (C) 2013
 	|  | (_|(_  | |(_(_) 				  	John F. Arroyave Gutiérrez
 	  www.practico.org					  	unix4you2@gmail.com
@@ -40,7 +40,7 @@
 			Inclusion de funciones personalizadas
 			Inclusion de marco inferior
 		(end)
-    */
+*/
     
     //Permite WebServices propios mediante el acceso a este script en solicitudes Cross-Domain
     header('Access-Control-Allow-Origin: *');
@@ -50,28 +50,28 @@
     @session_start();
  
     //Determina si es un primer inicio o no hay configuracion
-    if (!file_exists("core/configuracion.php")) {
-            header("Location: ins/");
-            die();
+    if (!file_exists('core/configuracion.php')) {
+		header('Location: ins/');
+		die();
     }
-    else include "core/configuracion.php";
+    else include 'core/configuracion.php';
 
     //Incluye idioma espanol, o sobreescribe vbles por configuracion de usuario
-    include "inc/practico/idiomas/es.php";
-    include "inc/practico/idiomas/".$IdiomaPredeterminado.".php";
+    include 'inc/practico/idiomas/es.php';
+    include 'inc/practico/idiomas/'.$IdiomaPredeterminado.'.php';
 
     //Determina si la plataforma se encuentra en modo DEMO
     $PCO_ModoDEMO=0;
-    if (file_exists("DEMO") && @$PCO_WSOn!=1)
-        { $PCO_ModoDEMO=1; echo "<script language='JavaScript'> PCO_ModoDEMO=1; </script>"; }
+    if (file_exists('DEMO') && @$PCO_WSOn!=1)
+        { $PCO_ModoDEMO=1; echo '<script language="JavaScript"> PCO_ModoDEMO=1; </script>'; }
 
     //Activa errores del preprocesador en modo de depuracion (configuracion.php)
     if ($ModoDepuracion && $_SESSION['PCOSESS_SesionAbierta'])
         {
-            include_once "core/comunes.php";
+            include_once 'core/comunes.php';
             if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
                 {
-                    ini_set("display_errors", 1);
+                    ini_set('display_errors', 1);
                     error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_DEPRECATED | E_STRICT | E_USER_DEPRECATED | E_USER_ERROR | E_USER_WARNING); //Otras disponibles | E_PARSE | E_CORE_ERROR | E_CORE_WARNING |
                 }
         }
@@ -82,11 +82,11 @@
     date_default_timezone_set($ZonaHoraria);
 
     // Datos de fecha, hora y direccion IP para algunas operaciones
-    $PCO_FechaOperacion=date("Ymd");
-    $PCO_FechaOperacionGuiones=date("Y-m-d");
-    $PCO_HoraOperacion=date("His");
-    $PCO_HoraOperacionPuntos=date("H:i");
-    $PCO_DireccionAuditoria=$_SERVER["REMOTE_ADDR"];
+    $PCO_FechaOperacion=date('Ymd');
+    $PCO_FechaOperacionGuiones=date('Y-m-d');
+    $PCO_HoraOperacion=date('His');
+    $PCO_HoraOperacionPuntos=date('H:i');
+    $PCO_DireccionAuditoria=$_SERVER['REMOTE_ADDR'];
 
     // Define cadena con usuarios Administradores/disenadores.  Obsoleta desde 16.2  Confirmada eliminacion en 17.1
     if (!isset($PCOVAR_Administradores)) $PCOVAR_Administradores="admin";
@@ -106,30 +106,30 @@
     
     //Si el idioma seleccionado por el usuario es diferente al predeterminado lo incluye
     if($PCOSESS_IdiomaUsuario!=$IdiomaPredeterminado && $PCOSESS_IdiomaUsuario!="")
-        include "inc/practico/idiomas/".$PCOSESS_IdiomaUsuario.".php";
+        include 'inc/practico/idiomas/'.$PCOSESS_IdiomaUsuario.'.php';
 
     // Verifica algunas variables minimas de trabajo en el primer inicio para evitar NOTICE y WARNINGs
     if (!isset($PCO_Accion)) $PCO_Accion="";
     if (!isset($PCOSESS_SesionAbierta)) $PCOSESS_SesionAbierta=0;
 
     // Inicia las conexiones con la BD y las deja listas para las operaciones
-    include_once "core/conexiones.php";
+    include_once 'core/conexiones.php';
 
     // Incluye definiciones comunes de la base de datos
-    include_once "inc/practico/def_basedatos.php";
+    include_once 'inc/practico/def_basedatos.php';
 
     // Incluye archivo con algunas funciones comunes usadas por la herramienta
-    include_once "core/comunes.php";
+    include_once 'core/comunes.php';
 
     // Genera conexiones individuales o conexiones para replicacion de transacciones
-    include_once "core/conexiones_extra.php";
+    include_once 'core/conexiones_extra.php';
 
     // Incluye archivo con funciones de correo electronico
-    include_once "core/correos.php";
+    include_once 'core/correos.php';
 
     // Establece funciones propias para el manejo de errores y excepciones
-    set_exception_handler("PCO_ManejadorExcepciones");
-    set_error_handler("PCO_ManejadorErrores");
+    set_exception_handler('PCO_ManejadorExcepciones');
+    set_error_handler('PCO_ManejadorErrores');
 
     // Almacena tiempo de inicio para calculo de tiempos de ejecucion del script (informados a los Administradores)
     if(PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion!="")
@@ -140,52 +140,52 @@
         PCO_ImportarDefinicionesXML();
 
     // Incluye configuraciones OAuth
-    include_once("core/ws_oauth.php");
+    include_once 'core/ws_oauth.php';
 
     // Determina si al momento de ejecucion se encuentra activado el modo webservices
-    include_once "core/ws_nucleo.php";
+    include_once 'core/ws_nucleo.php';
 
     limpiar_entradas(); // Evita XSS
 
     // Incluye clases para procesar archivos en csv, xls, ods, pdf, otros
-    require_once "inc/phpexcel/Classes/PHPExcel.php";
+    require_once 'inc/phpexcel/Classes/PHPExcel.php';
 
     // Valida llaves de paso y permisos de accion
     if ($PCO_Accion!= "" && $PCO_Accion!="Iniciar_login" && $PCO_Accion!="Terminar_sesion" && $PCO_Accion!="Mensaje_cierre_sesion" && $PCO_Accion!="ver_monitoreo" && $PCO_Accion!="recuperar_contrasena" && $PCO_Accion!="agregar_usuario_autoregistro" && $PCO_Accion!="guardar_usuario_autoregistro")
         {
             // Verifica autenticidad de la sesion mediante llave de paso
             if (MD5($LlaveDePaso)!=$LlaveDePasoUsuario) {
-                header("Location: index.php?accion=Terminar_sesion");
+                header('Location: index.php?accion=Terminar_sesion');
                 exit(1);
             }
             // Valida permisos asignados al usuario actual para la accion llamada a ejecutar
             if (!permiso_accion($PCO_Accion)) {
-                echo $MULTILANG_SecErrorTit."<hr>".$MULTILANG_SecErrorDes."<hr>[US=<b>$PCOSESS_LoginUsuario</b>|CMD=<b>$PCO_Accion</b>|IP=<b>$PCO_DireccionAuditoria</b>|DTE=<b>$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos</b>]";
+                echo $MULTILANG_SecErrorTit.'<hr>'.$MULTILANG_SecErrorDes.'<hr>[US=<b>'.$PCOSESS_LoginUsuario.'</b>|CMD=<b>'.$PCO_Accion.'</b>|IP=<b>'.$PCO_DireccionAuditoria.'</b>|DTE=<b>'.$PCO_FechaOperacionGuiones.' '.$PCO_HoraOperacionPuntos.'</b>]';
                 PCO_Auditar("SEC: Intento de acceso no autorizado CMD=$PCO_Accion");
                 exit(1);
             }
         }
 
     // Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios
-    if (PCO_BuscarErroresSintaxisPHP("mod/personalizadas_pre.php")==0)
-        include "mod/personalizadas_pre.php";
+    if (PCO_BuscarErroresSintaxisPHP('mod/personalizadas_pre.php')==0)
+        include 'mod/personalizadas_pre.php';
 
     // Inicia la presentacion de la pagina si no esta activado el fullscreen
     if (@$Presentar_FullScreen!=1) $Presentar_FullScreen="";
     if (@$Precarga_EstilosBS!=1) $Precarga_EstilosBS="";
     if (@$Presentar_FullScreen!=1) 
-        include "core/marco_arriba.php";
+        include 'core/marco_arriba.php';
     else
         {
             //Valida si el FullScreen al menos requiere de estilos BootStrap basicos
             if (@$Precarga_EstilosBS==1) 
                 {
-                    include "core/marco_arriba_bs.php";
+                    include 'core/marco_arriba_bs.php';
                     //Inicia lo basico de la pagina
                     echo '<body oncontextmenu="return false;">';
 
                     //Incluye formularios de uso comun para transporte de datos
-                    include_once "core/marco_forms.php";
+                    include_once 'core/marco_forms.php';
 
                     echo '    <div id="wrapper">
                         <!-- CONTENIDO DE APLICACION -->
@@ -215,7 +215,7 @@
     }
 
     // Si existe el directorio de instalacion y no es modo fullscreen presenta un mensaje constante de advertencia en el escritorio
-    if (@file_exists("ins") && PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$Presentar_FullScreen!=1 && $PCO_Accion=="Ver_menu") {
+    if (@file_exists('ins') && PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$Presentar_FullScreen!=1 && $PCO_Accion=="Ver_menu") {
         mensaje($MULTILANG_TituloInsExiste, $MULTILANG_TextoInsExiste, '', 'fa fa-exclamation-triangle fa-5x texto-rojo texto-blink', 'alert alert-warning alert-dismissible');
     }
 
@@ -229,52 +229,171 @@
     if ($PCO_Accion=="" && $PCOSESS_SesionAbierta==0) PCO_VentanaLogin();
     if ($PCO_Accion=="" && $PCOSESS_SesionAbierta==1 && @$Presentar_FullScreen!=1) echo '<script type="" language="JavaScript">    document.core_ver_menu.submit();  </script>';
     // Incluye los archivos necesarios dependiendo de las funciones requeridas
-    if ($PCO_Accion=="exportar_informe" || $PCO_Accion=="confirmar_importacion_informe" || $PCO_Accion=="analizar_importacion_informe" || $PCO_Accion=="importar_informe" || $PCO_Accion=="definir_copia_informes" || $PCO_Accion=="clonar_diseno_informe" || $PCO_Accion=="administrar_informes" || $PCO_Accion=="guardar_informe" || $PCO_Accion=="editar_informe" || $PCO_Accion=="eliminar_informe" || $PCO_Accion=="actualizar_informe" || $PCO_Accion=="eliminar_informe_tabla" || $PCO_Accion=="guardar_informe_tabla" || $PCO_Accion=="eliminar_informe_campo" || $PCO_Accion=="guardar_informe_campo" || $PCO_Accion=="guardar_informe_condicion" || $PCO_Accion=="eliminar_informe_condicion" || $PCO_Accion=="mis_informes" || $PCO_Accion=="actualizar_grafico_informe" || $PCO_Accion=="actualizar_agrupamiento_informe" || $PCO_Accion=="guardar_accion_informe" || $PCO_Accion=="eliminar_registro_informe" || $PCO_Accion=="eliminar_accion_informe")
-        include "core/informes.php";
-    if ($PCO_Accion=="guardar_usuario_autoregistro" || $PCO_Accion=="agregar_usuario_autoregistro" || $PCO_Accion=="copiar_informes" || $PCO_Accion=="guardar_perfil_usuario" || $PCO_Accion=="actualizar_perfil_usuario" || $PCO_Accion=="recuperar_contrasena" || $PCO_Accion=="resetear_clave" || $PCO_Accion=="PCO_PanelAuditoriaMovimientos" || $PCO_Accion=="ver_seguimiento_general" || $PCO_Accion=="ver_seguimiento_especifico" || $PCO_Accion=="actualizar_clave" || $PCO_Accion=="cambiar_clave" || $PCO_Accion=="agregar_usuario" || $PCO_Accion=="guardar_usuario" || $PCO_Accion=="listar_usuarios" || $PCO_Accion=="eliminar_usuario" || $PCO_Accion=="cambiar_estado_usuario" || $PCO_Accion=="permisos_usuario" || $PCO_Accion=="agregar_permiso" || $PCO_Accion=="eliminar_permiso" || $PCO_Accion=="informes_usuario" || $PCO_Accion=="agregar_informe_usuario" || $PCO_Accion=="eliminar_informe_usuario" || $PCO_Accion=="copiar_permisos")
-        include "core/usuarios.php";
-    if ($PCO_Accion=="buscar_permisos_practico" || $PCO_Accion=="Ver_menu" || $PCO_Accion=="administrar_menu" || $PCO_Accion=="guardar_menu" || $PCO_Accion=="eliminar_menu" || $PCO_Accion=="detalles_menu" || $PCO_Accion=="actualizar_menu")
-        include "core/menus.php";
-    if ($PCO_Accion=="ejecutar_importacion_csv" || $PCO_Accion=="escogertabla_importacion_csv" || $PCO_Accion=="analizar_importacion_csv" || $PCO_Accion== "confirmar_importacion_tabla" || $PCO_Accion== "importar_tabla" || $PCO_Accion== "copiar_tabla" || $PCO_Accion== "definir_copia_tablas" || $PCO_Accion=="guardar_crear_tabla_asistente" || $PCO_Accion=="asistente_tablas" || $PCO_Accion=="administrar_tablas" || $PCO_Accion=="guardar_crear_tabla" || $PCO_Accion=="eliminar_tabla" || $PCO_Accion=="editar_tabla" || $PCO_Accion=="guardar_crear_campo" || $PCO_Accion=="eliminar_campo")
-        include "core/tablas.php";
-    if ($PCO_Accion=="eliminar_evento_objeto" || $PCO_Accion=="editar_evento_objeto" || $PCO_Accion=="actualizar_java_evento" || $PCO_Accion=="confirmar_importacion_formulario" || $PCO_Accion=="analizar_importacion_formulario" || $PCO_Accion=="importar_formulario" || $PCO_Accion=="definir_copia_formularios" || $PCO_Accion=="actualizar_datos_formulario" || $PCO_Accion=="actualizar_formulario" || $PCO_Accion=="copiar_formulario" || $PCO_Accion=="actualizar_campo_formulario" || $PCO_Accion=="administrar_formularios" || $PCO_Accion=="guardar_formulario" || $PCO_Accion=="eliminar_formulario" || $PCO_Accion=="editar_formulario" || $PCO_Accion=="guardar_campo_formulario" || $PCO_Accion=="eliminar_campo_formulario" || $PCO_Accion=="guardar_accion_formulario" || $PCO_Accion=="eliminar_accion_formulario" || $PCO_Accion=="guardar_datos_formulario" || $PCO_Accion=="eliminar_datos_formulario")
-        include "core/formularios.php";
-    if ($PCO_Accion=="Iniciar_login" || $PCO_Accion=="Terminar_sesion" || $PCO_Accion=="Mensaje_cierre_sesion")
-        include "core/sesion.php";
-    if ($PCO_Accion=="cargar_objeto" || $PCO_Accion=="guardar_configuracion" || $PCO_Accion=="PCO_GuardarConfiguracionOAuth" || $PCO_Accion=="exportacion_masiva_objetos")
-        include "core/objetos.php";
-    if ($PCO_Accion=="actualizar_practico" || $PCO_Accion=="cargar_archivo" || $PCO_Accion=="analizar_parche" || $PCO_Accion=="aplicar_parche")
-        include "core/actualizacion.php";
-    if ($PCO_Accion=="actualizar_monitoreo" || $PCO_Accion=="detalles_monitoreo" || $PCO_Accion=="administrar_monitoreo" || $PCO_Accion=="guardar_monitoreo" || $PCO_Accion=="eliminar_monitoreo" || $PCO_Accion=="ver_monitoreo")
-        include "core/monitoreo.php";
-    if ($PCO_Accion=="cambiar_estado_campo" || $PCO_Accion=="valor_campo_tabla" || $PCO_Accion=="opciones_combo_box")
-        include "core/ajax.php";
-    if ($PCO_Accion=="PCO_ReportarBugs" || $PCO_Accion=="PCO_EditarConfiguracionOAuth" || $PCO_Accion=="mantenimiento_tablas" || $PCO_Accion=="limpiar_temporales" || $PCO_Accion=="limpiar_backups")
-        include "core/mantenimiento.php";
-    if ($PCO_Accion=="administrar_replicacion" || $PCO_Accion=="eliminar_replica" || $PCO_Accion=="detalles_replicacion" || $PCO_Accion=="guardar_replicacion" || $PCO_Accion=="actualizar_replicacion")
-        include "core/replicacion.php";
-    if ($PCO_Accion=="EliminarTableroKanban" || $PCO_Accion=="GuardarCreacionKanban" || $PCO_Accion=="VerTareasArchivadas" || $PCO_Accion=="ArchivarTareaKanban" || $PCO_Accion=="PCO_ExplorarTablerosKanban" || $PCO_Accion=="GuardarTareaKanban" || $PCO_Accion=="EliminarTareaKanban" || $PCO_Accion=="GuardarPersonalizacionKanban")
-        include "core/kanban.php";
+    switch ($PCO_Accion)
+	{
+		case "exportar_informe":
+		case "confirmar_importacion_informe":
+		case "analizar_importacion_informe":
+		case "importar_informe":
+		case "definir_copia_informes":
+		case "clonar_diseno_informe":
+		case "administrar_informes":
+		case "guardar_informe":
+		case "editar_informe":
+		case "eliminar_informe":
+		case "actualizar_informe":
+		case "eliminar_informe_tabla":
+		case "guardar_informe_tabla":
+		case "eliminar_informe_campo":
+		case "guardar_informe_campo":
+		case "guardar_informe_condicion":
+		case "eliminar_informe_condicion":
+		case "mis_informes":
+		case "actualizar_grafico_informe":
+		case "actualizar_agrupamiento_informe":
+		case "guardar_accion_informe":
+		case "eliminar_registro_informe":
+		case "eliminar_accion_informe":
+			include 'core/informes.php'; break;
+		case "guardar_usuario_autoregistro":
+		case "agregar_usuario_autoregistro":
+		case "copiar_informes":
+		case "guardar_perfil_usuario":
+		case "actualizar_perfil_usuario":
+		case "recuperar_contrasena":
+		case "resetear_clave":
+		case "PCO_PanelAuditoriaMovimientos":
+		case "ver_seguimiento_general":
+		case "ver_seguimiento_especifico":
+		case "actualizar_clave":
+		case "cambiar_clave":
+		case "agregar_usuario":
+		case "guardar_usuario":
+		case "listar_usuarios":
+		case "eliminar_usuario":
+		case "cambiar_estado_usuario":
+		case "permisos_usuario":
+		case "agregar_permiso":
+		case "eliminar_permiso":
+		case "informes_usuario":
+		case "agregar_informe_usuario":
+		case "eliminar_informe_usuario":
+		case "copiar_permisos":
+			include 'core/usuarios.php'; break;
+		case "buscar_permisos_practico":
+		case "Ver_menu":
+		case "administrar_menu":
+		case "guardar_menu":
+		case "eliminar_menu":
+		case "detalles_menu":
+		case "actualizar_menu":
+			include 'core/menus.php'; break;
+		case "ejecutar_importacion_csv":
+		case "escogertabla_importacion_csv":
+		case "analizar_importacion_csv":
+		case "confirmar_importacion_tabla":
+		case "importar_tabla":
+		case "copiar_tabla":
+		case "definir_copia_tablas":
+		case "guardar_crear_tabla_asistente":
+		case "asistente_tablas":
+		case "administrar_tablas":
+		case "guardar_crear_tabla":
+		case "eliminar_tabla":
+		case "editar_tabla":
+		case "guardar_crear_campo":
+		case "eliminar_campo":
+			include 'core/tablas.php'; break;
+		case "eliminar_evento_objeto":
+		case "editar_evento_objeto":
+		case "actualizar_java_evento":
+		case "confirmar_importacion_formulario":
+		case "analizar_importacion_formulario":
+		case "importar_formulario":
+		case "definir_copia_formularios":
+		case "actualizar_datos_formulario":
+		case "actualizar_formulario":
+		case "copiar_formulario":
+		case "actualizar_campo_formulario":
+		case "administrar_formularios":
+		case "guardar_formulario":
+		case "eliminar_formulario":
+		case "editar_formulario":
+		case "guardar_campo_formulario":
+		case "eliminar_campo_formulario":
+		case "guardar_accion_formulario":
+		case "eliminar_accion_formulario":
+		case "guardar_datos_formulario":
+		case "eliminar_datos_formulario":
+			include 'core/formularios.php'; break;
+		case "Iniciar_login":
+		case "Terminar_sesion":
+		case "Mensaje_cierre_sesion":
+			include 'core/sesion.php'; break;
+		case "cargar_objeto":
+		case "guardar_Somethingiswronguracion":
+		case "PCO_GuardarSomethingiswronguracionOAuth":
+		case "exportacion_masiva_objetos":
+			include 'core/objetos.php'; break;
+		case "actualizar_practico":
+		case "cargar_archivo":
+		case "analizar_parche":
+		case "aplicar_parche":
+			include 'core/actualizacion.php'; break;
+		case "actualizar_monitoreo":
+		case "detalles_monitoreo":
+		case "administrar_monitoreo":
+		case "guardar_monitoreo":
+		case "eliminar_monitoreo":
+		case "ver_monitoreo":
+			include 'core/monitoreo.php'; break;
+		case "cambiar_estado_campo":
+		case "valor_campo_tabla":
+		case "opciones_combo_box":
+			include 'core/ajax.php'; break;
+		case "PCO_ReportarBugs":
+		case "PCO_EditarSomethingiswronguracionOAuth":
+		case "mantenimiento_tablas":
+		case "limpiar_temporales":
+		case "limpiar_backups":
+			include 'core/mantenimiento.php'; break;
+		case "administrar_replicacion":
+		case "eliminar_replica":
+		case "detalles_replicacion":
+		case "guardar_replicacion":
+		case "actualizar_replicacion":
+			include 'core/replicacion.php'; break;
+		case "EliminarTableroKanban":
+		case "GuardarCreacionKanban":
+		case "VerTareasArchivadas":
+		case "ArchivarTareaKanban":
+		case "PCO_ExplorarTablerosKanban":
+		case "GuardarTareaKanban":
+		case "EliminarTareaKanban":
+		case "GuardarPersonalizacionKanban":
+			include 'core/kanban.php'; break;
+		default: break;			
+	}
 
 /* ################################################################## */
     // Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios. Incluye compatibilidad hacia atras en personalizadas.php
-    if (file_exists("mod/personalizadas.php")) include "mod/personalizadas.php";
-    if (PCO_BuscarErroresSintaxisPHP("mod/personalizadas_pos.php")==0)
-        include "mod/personalizadas_pos.php";
+    if (file_exists('mod/personalizadas.php')) include 'mod/personalizadas.php';
+    if (PCO_BuscarErroresSintaxisPHP('mod/personalizadas_pos.php')==0)
+        include 'mod/personalizadas_pos.php';
 
     // Incluye otros modulos que residan sobre carpetas en mod/* cuya entrada es index.php
-    $directorio_modulos=opendir("mod");
+    $directorio_modulos=opendir('mod');
     while (($PCOVAR_Elemento=readdir($directorio_modulos))!=false) {
         //Lo procesa solo si es directorio
-        if (is_dir("mod/".$PCOVAR_Elemento) && $PCOVAR_Elemento!="." && $PCOVAR_Elemento!="..") {
+        if (is_dir('mod/'.$PCOVAR_Elemento) && $PCOVAR_Elemento!="." && $PCOVAR_Elemento!="..") {
             //Busca la entrada del modulo sino muestra error
-            if (file_exists("mod/".$PCOVAR_Elemento."/index.php"))
+            if (file_exists('mod/'.$PCOVAR_Elemento.'/index.php'))
                 {
                     //Incluye el archivo menos algunos modulos especiales de la herramienta que se ejecutan por separado
                     if ($PCOVAR_Elemento!="pcoder" && $PCOVAR_Elemento!="pmydb")
                         {
-                            if (PCO_BuscarErroresSintaxisPHP("mod/".$PCOVAR_Elemento."/index.php")==0)
-                                include "mod/".$PCOVAR_Elemento."/index.php";
+                            if (PCO_BuscarErroresSintaxisPHP('mod/'.$PCOVAR_Elemento.'/index.php')==0)
+                                include 'mod/'.$PCOVAR_Elemento.'/index.php';
                         }
                 }
             else
@@ -286,4 +405,4 @@
     // Finaliza el contenido central y presenta el pie de pagina de aplicacion
     // siempre y cuando no se esta en fullscreen.  Si la precarga esta activa tambien lo incluye
     if (@$Presentar_FullScreen!=1 || @$Precarga_EstilosBS==1)
-        include "core/marco_abajo.php";
+        include 'core/marco_abajo.php';
