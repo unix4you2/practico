@@ -51,6 +51,18 @@ LogCambios="
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
 ALTER TABLE core_informe ADD script_sql text;
+
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','mysql','MySQL - MariaDB (3.x/4.x/5.x)',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','pgsql','PostgreSQL',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','sqlite','SQLite v2 - SQLite v3',3);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','sqlsrv','FreeTDS/Microsoft SQL Server: Win32 [max version 2008]',4);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','mssql','FreeTDS/Microsoft SQL Server: Win32&Linux, [max version 2000]',5);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','ibm','IBM (DB2)',6);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','dblib','DBLIB',7);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','odbc','Microsoft Access (ODBC v3: IBM DB2, unixODBC, Win32 ODBC)',8);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','oracle','ORACLE (OCI Oracle Call Interface)',9);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','ifmx','Informix (IBM Informix Dynamic Server)',10);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','fbd','Firebird (Firebird/Interbase 6)',11);
 "
 
 ########################################################################
