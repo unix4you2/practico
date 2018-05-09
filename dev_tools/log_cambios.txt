@@ -19,6 +19,8 @@ core/comunes.php
 core/marco_admin.php
 core/marco_arriba_bs.php
 core/marco_conf.php
+core/marco_forms.php
+core/marco_nav.php
 core/informes.php
 core/objetos.php
 xml/*

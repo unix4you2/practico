@@ -352,12 +352,6 @@
 		case "limpiar_temporales":
 		case "limpiar_backups":
 			include 'core/mantenimiento.php'; break;
-		case "administrar_replicacion":
-		case "eliminar_replica":
-		case "detalles_replicacion":
-		case "guardar_replicacion":
-		case "actualizar_replicacion":
-			include 'core/replicacion.php'; break;
 		case "EliminarTableroKanban":
 		case "GuardarCreacionKanban":
 		case "VerTareasArchivadas":

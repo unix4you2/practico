@@ -186,11 +186,8 @@
 							</li>
 							<li class="divider"></li>
 							<li>
-								<a data-toggle="modal" href="javascript:document.ver_replicaciones.submit();">
+								<a data-toggle="modal" href="javascript:document.PCO_VerReplicaciones.submit();">
 									<div>
-										<form name="ver_replicaciones" action="<?php echo $ArchivoCORE; ?>" method="POST">
-											<input type="Hidden" name="PCO_Accion" value="administrar_replicacion">
-										</form>
 										<i class="fa fa-cubes fa-fw"></i> <?php echo $MULTILANG_ReplicaTitulo; ?>
 										<span class="pull-right text-muted small"><?php echo ContarRegistros($TablasCore."replicasbd",""); ?></span>
 									</div>
