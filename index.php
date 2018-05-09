@@ -224,145 +224,31 @@
     if ($PCO_Accion=="" && $PCOSESS_SesionAbierta==0) PCO_VentanaLogin();
     if ($PCO_Accion=="" && $PCOSESS_SesionAbierta==1 && @$Presentar_FullScreen!=1) echo '<script type="" language="JavaScript">    document.core_ver_menu.submit();  </script>';
     // Incluye los archivos necesarios dependiendo de las funciones requeridas
-    switch ($PCO_Accion)
-	{
-		case "exportar_informe":
-		case "confirmar_importacion_informe":
-		case "analizar_importacion_informe":
-		case "importar_informe":
-		case "definir_copia_informes":
-		case "clonar_diseno_informe":
-		case "administrar_informes":
-		case "guardar_informe":
-		case "editar_informe":
-		case "eliminar_informe":
-		case "actualizar_informe":
-		case "eliminar_informe_tabla":
-		case "guardar_informe_tabla":
-		case "eliminar_informe_campo":
-		case "guardar_informe_campo":
-		case "guardar_informe_condicion":
-		case "eliminar_informe_condicion":
-		case "mis_informes":
-		case "actualizar_grafico_informe":
-		case "actualizar_agrupamiento_informe":
-		case "guardar_accion_informe":
-		case "eliminar_registro_informe":
-		case "eliminar_accion_informe":
-			include 'core/informes.php'; break;
-		case "guardar_usuario_autoregistro":
-		case "agregar_usuario_autoregistro":
-		case "copiar_informes":
-		case "guardar_perfil_usuario":
-		case "actualizar_perfil_usuario":
-		case "recuperar_contrasena":
-		case "resetear_clave":
-		case "PCO_PanelAuditoriaMovimientos":
-		case "ver_seguimiento_general":
-		case "ver_seguimiento_especifico":
-		case "actualizar_clave":
-		case "cambiar_clave":
-		case "agregar_usuario":
-		case "guardar_usuario":
-		case "listar_usuarios":
-		case "eliminar_usuario":
-		case "cambiar_estado_usuario":
-		case "permisos_usuario":
-		case "agregar_permiso":
-		case "eliminar_permiso":
-		case "informes_usuario":
-		case "agregar_informe_usuario":
-		case "eliminar_informe_usuario":
-		case "copiar_permisos":
-			include 'core/usuarios.php'; break;
-		case "buscar_permisos_practico":
-		case "Ver_menu":
-		case "administrar_menu":
-		case "guardar_menu":
-		case "eliminar_menu":
-		case "detalles_menu":
-		case "actualizar_menu":
-			include 'core/menus.php'; break;
-		case "ejecutar_importacion_csv":
-		case "escogertabla_importacion_csv":
-		case "analizar_importacion_csv":
-		case "confirmar_importacion_tabla":
-		case "importar_tabla":
-		case "copiar_tabla":
-		case "definir_copia_tablas":
-		case "guardar_crear_tabla_asistente":
-		case "asistente_tablas":
-		case "administrar_tablas":
-		case "guardar_crear_tabla":
-		case "eliminar_tabla":
-		case "editar_tabla":
-		case "guardar_crear_campo":
-		case "eliminar_campo":
-			include 'core/tablas.php'; break;
-		case "eliminar_evento_objeto":
-		case "editar_evento_objeto":
-		case "actualizar_java_evento":
-		case "confirmar_importacion_formulario":
-		case "analizar_importacion_formulario":
-		case "importar_formulario":
-		case "definir_copia_formularios":
-		case "actualizar_datos_formulario":
-		case "actualizar_formulario":
-		case "copiar_formulario":
-		case "actualizar_campo_formulario":
-		case "administrar_formularios":
-		case "guardar_formulario":
-		case "eliminar_formulario":
-		case "editar_formulario":
-		case "guardar_campo_formulario":
-		case "eliminar_campo_formulario":
-		case "guardar_accion_formulario":
-		case "eliminar_accion_formulario":
-		case "guardar_datos_formulario":
-		case "eliminar_datos_formulario":
-			include 'core/formularios.php'; break;
-		case "Iniciar_login":
-		case "Terminar_sesion":
-		case "Mensaje_cierre_sesion":
-			include 'core/sesion.php'; break;
-		case "cargar_objeto":
-		case "guardar_Somethingiswronguracion":
-		case "PCO_GuardarSomethingiswronguracionOAuth":
-		case "exportacion_masiva_objetos":
-			include 'core/objetos.php'; break;
-		case "actualizar_practico":
-		case "cargar_archivo":
-		case "analizar_parche":
-		case "aplicar_parche":
-			include 'core/actualizacion.php'; break;
-		case "actualizar_monitoreo":
-		case "detalles_monitoreo":
-		case "administrar_monitoreo":
-		case "guardar_monitoreo":
-		case "eliminar_monitoreo":
-		case "ver_monitoreo":
-			include 'core/monitoreo.php'; break;
-		case "cambiar_estado_campo":
-		case "valor_campo_tabla":
-		case "opciones_combo_box":
-			include 'core/ajax.php'; break;
-		case "PCO_ReportarBugs":
-		case "PCO_EditarSomethingiswronguracionOAuth":
-		case "mantenimiento_tablas":
-		case "limpiar_temporales":
-		case "limpiar_backups":
-			include 'core/mantenimiento.php'; break;
-		case "EliminarTableroKanban":
-		case "GuardarCreacionKanban":
-		case "VerTareasArchivadas":
-		case "ArchivarTareaKanban":
-		case "PCO_ExplorarTablerosKanban":
-		case "GuardarTareaKanban":
-		case "EliminarTareaKanban":
-		case "GuardarPersonalizacionKanban":
-			include 'core/kanban.php'; break;
-		default: break;			
-	}
+    if ($PCO_Accion=="exportar_informe" || $PCO_Accion=="confirmar_importacion_informe" || $PCO_Accion=="analizar_importacion_informe" || $PCO_Accion=="importar_informe" || $PCO_Accion=="definir_copia_informes" || $PCO_Accion=="clonar_diseno_informe" || $PCO_Accion=="administrar_informes" || $PCO_Accion=="guardar_informe" || $PCO_Accion=="editar_informe" || $PCO_Accion=="eliminar_informe" || $PCO_Accion=="actualizar_informe" || $PCO_Accion=="eliminar_informe_tabla" || $PCO_Accion=="guardar_informe_tabla" || $PCO_Accion=="eliminar_informe_campo" || $PCO_Accion=="guardar_informe_campo" || $PCO_Accion=="guardar_informe_condicion" || $PCO_Accion=="eliminar_informe_condicion" || $PCO_Accion=="mis_informes" || $PCO_Accion=="actualizar_grafico_informe" || $PCO_Accion=="actualizar_agrupamiento_informe" || $PCO_Accion=="guardar_accion_informe" || $PCO_Accion=="eliminar_registro_informe" || $PCO_Accion=="eliminar_accion_informe")
+        include "core/informes.php";
+    if ($PCO_Accion=="guardar_usuario_autoregistro" || $PCO_Accion=="agregar_usuario_autoregistro" || $PCO_Accion=="copiar_informes" || $PCO_Accion=="guardar_perfil_usuario" || $PCO_Accion=="actualizar_perfil_usuario" || $PCO_Accion=="recuperar_contrasena" || $PCO_Accion=="resetear_clave" || $PCO_Accion=="PCO_PanelAuditoriaMovimientos" || $PCO_Accion=="ver_seguimiento_general" || $PCO_Accion=="ver_seguimiento_especifico" || $PCO_Accion=="actualizar_clave" || $PCO_Accion=="cambiar_clave" || $PCO_Accion=="agregar_usuario" || $PCO_Accion=="guardar_usuario" || $PCO_Accion=="listar_usuarios" || $PCO_Accion=="eliminar_usuario" || $PCO_Accion=="cambiar_estado_usuario" || $PCO_Accion=="permisos_usuario" || $PCO_Accion=="agregar_permiso" || $PCO_Accion=="eliminar_permiso" || $PCO_Accion=="informes_usuario" || $PCO_Accion=="agregar_informe_usuario" || $PCO_Accion=="eliminar_informe_usuario" || $PCO_Accion=="copiar_permisos")
+        include "core/usuarios.php";
+    if ($PCO_Accion=="buscar_permisos_practico" || $PCO_Accion=="Ver_menu" || $PCO_Accion=="administrar_menu" || $PCO_Accion=="guardar_menu" || $PCO_Accion=="eliminar_menu" || $PCO_Accion=="detalles_menu" || $PCO_Accion=="actualizar_menu")
+        include "core/menus.php";
+    if ($PCO_Accion=="ejecutar_importacion_csv" || $PCO_Accion=="escogertabla_importacion_csv" || $PCO_Accion=="analizar_importacion_csv" || $PCO_Accion== "confirmar_importacion_tabla" || $PCO_Accion== "importar_tabla" || $PCO_Accion== "copiar_tabla" || $PCO_Accion== "definir_copia_tablas" || $PCO_Accion=="guardar_crear_tabla_asistente" || $PCO_Accion=="asistente_tablas" || $PCO_Accion=="administrar_tablas" || $PCO_Accion=="guardar_crear_tabla" || $PCO_Accion=="eliminar_tabla" || $PCO_Accion=="editar_tabla" || $PCO_Accion=="guardar_crear_campo" || $PCO_Accion=="eliminar_campo")
+        include "core/tablas.php";
+    if ($PCO_Accion=="eliminar_evento_objeto" || $PCO_Accion=="editar_evento_objeto" || $PCO_Accion=="actualizar_java_evento" || $PCO_Accion=="confirmar_importacion_formulario" || $PCO_Accion=="analizar_importacion_formulario" || $PCO_Accion=="importar_formulario" || $PCO_Accion=="definir_copia_formularios" || $PCO_Accion=="actualizar_datos_formulario" || $PCO_Accion=="actualizar_formulario" || $PCO_Accion=="copiar_formulario" || $PCO_Accion=="actualizar_campo_formulario" || $PCO_Accion=="administrar_formularios" || $PCO_Accion=="guardar_formulario" || $PCO_Accion=="eliminar_formulario" || $PCO_Accion=="editar_formulario" || $PCO_Accion=="guardar_campo_formulario" || $PCO_Accion=="eliminar_campo_formulario" || $PCO_Accion=="guardar_accion_formulario" || $PCO_Accion=="eliminar_accion_formulario" || $PCO_Accion=="guardar_datos_formulario" || $PCO_Accion=="eliminar_datos_formulario")
+        include "core/formularios.php";
+    if ($PCO_Accion=="Iniciar_login" || $PCO_Accion=="Terminar_sesion" || $PCO_Accion=="Mensaje_cierre_sesion")
+        include "core/sesion.php";
+    if ($PCO_Accion=="cargar_objeto" || $PCO_Accion=="guardar_configuracion" || $PCO_Accion=="PCO_GuardarConfiguracionOAuth" || $PCO_Accion=="exportacion_masiva_objetos")
+        include "core/objetos.php";
+    if ($PCO_Accion=="actualizar_practico" || $PCO_Accion=="cargar_archivo" || $PCO_Accion=="analizar_parche" || $PCO_Accion=="aplicar_parche")
+        include "core/actualizacion.php";
+    if ($PCO_Accion=="actualizar_monitoreo" || $PCO_Accion=="detalles_monitoreo" || $PCO_Accion=="administrar_monitoreo" || $PCO_Accion=="guardar_monitoreo" || $PCO_Accion=="eliminar_monitoreo" || $PCO_Accion=="ver_monitoreo")
+        include "core/monitoreo.php";
+    if ($PCO_Accion=="cambiar_estado_campo" || $PCO_Accion=="valor_campo_tabla" || $PCO_Accion=="opciones_combo_box")
+        include "core/ajax.php";
+    if ($PCO_Accion=="PCO_ReportarBugs" || $PCO_Accion=="mantenimiento_tablas" || $PCO_Accion=="limpiar_temporales" || $PCO_Accion=="limpiar_backups")
+        include "core/mantenimiento.php";
+    if ($PCO_Accion=="EliminarTableroKanban" || $PCO_Accion=="GuardarCreacionKanban" || $PCO_Accion=="VerTareasArchivadas" || $PCO_Accion=="ArchivarTareaKanban" || $PCO_Accion=="PCO_ExplorarTablerosKanban" || $PCO_Accion=="GuardarTareaKanban" || $PCO_Accion=="EliminarTareaKanban" || $PCO_Accion=="GuardarPersonalizacionKanban")
+        include "core/kanban.php";
+
 
 /* ################################################################## */
     // Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios. Incluye compatibilidad hacia atras en personalizadas.php
