@@ -195,11 +195,8 @@
 							</li>
 							<li class="divider"></li>
 							<li>
-								<a data-toggle="modal" href="javascript:document.ver_monitoreo.submit();">
+								<a data-toggle="modal" href="javascript:document.PCO_VerMonitoreo.submit();">
 									<div>
-										<form name="ver_monitoreo" action="<?php echo $ArchivoCORE; ?>" method="POST">
-											<input type="Hidden" name="PCO_Accion" value="administrar_monitoreo">
-										</form>
 										<i class="fa fa-lightbulb-o fa-fw"></i> <?php echo $MULTILANG_MonTitulo; ?>
 										<span class="pull-right text-muted small"><?php echo ContarRegistros($TablasCore."monitoreo",""); ?></span>
 									</div>

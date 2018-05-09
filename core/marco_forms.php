@@ -104,3 +104,7 @@
 	<input type="Hidden" name="PCO_Accion" value="cargar_objeto">
 	<input type="Hidden" name="objeto" value="frm:-10:1">
 </form>
+<form name="PCO_VerMonitoreo" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="cargar_objeto">
+	<input type="Hidden" name="objeto" value="frm:-11:1">
+</form>
