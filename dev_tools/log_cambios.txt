@@ -45,6 +45,7 @@ LogCambios="
 * Added: Soporte para ejecucion de la aplicacion en fullscreen sobre iOS y Safari.
 * Enhan: Actualizacion {P}Coder 18.6
 * Enhan: Se protege la edicion de parametros basicos de configuracion para el motor.  Estos deberan ser tocados solo por archivo para hacer de manera más consciente esa tarea para los usuarios administradores avanzados que por error involuntario o de navegador podrían dejar inactiva la aplicación.
+* Enhan: Reemplazo de archivos asociados a gestión de conexiones extra y replicación por funciones internas del Framework.
 * Fixed: Usuarios que no han guardado configuraciones en su panel de admin despues de actualizar no pueden ver graficos del panel
 * Fixed: Mejorada funcion callback de reemplazo de variables para versiones muy obsoletas de PHP que no soportan llamado recursivo. 
 * Fixed: Supresion de las funciones de verificacion automatica de sintaxis en servidores windows, ya que estos no soportan el comando de PHP sobre el PATH general a menos que se especifique su path especifico.
@@ -53,7 +54,7 @@ LogCambios="
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
-# RECORDAR ANTE OPCIONES MULTI-IDIOMA:  UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
+# RECORDAR EN OPCIONES MULTI-IDIOMA:  UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 ScriptBasedatos="
 ALTER TABLE core_informe ADD script_sql text;
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','mysql','MySQL - MariaDB (3.x/4.x/5.x)',1);
@@ -71,6 +72,16 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('booleano_nosi','1','{ $ MULTILANG_Si}',2);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('booleano_sino','1','{ $ MULTILANG_Si}',1);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('booleano_sino','0','{ $ MULTILANG_No}',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','{ $ MULTILANG_Deshabilitado}','{ $ MULTILANG_Deshabilitado}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','Etiqueta','{ $ MULTILANG_Etiqueta}',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','Maquina','{ $ MULTILANG_Maquina}',3);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','ComandoShell','{ $ MULTILANG_MonCommShell}',4);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','ComandoSQL','{ $ MULTILANG_MonCommSQL}',5);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','Imagen','{ $ MULTILANG_Imagen}',6);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','Embebido','{ $ MULTILANG_Embebido}',7);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','SensorRango','{ $ MULTILANG_MonSensorRango}',8);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','SensorMaquina','{ $ MULTILANG_MonSensorRango} ({ $ MULTILANG_Apariencia} { $ MULTILANG_Maquina})',9);
+
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 "
 

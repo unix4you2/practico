@@ -490,6 +490,15 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','oracle','ORACLE (OCI Oracle Call Interface)',9);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','ifmx','Informix (IBM Informix Dynamic Server)',10);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','fbd','Firebird (Firebird/Interbase 6)',11);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','{$MULTILANG_Deshabilitado}','{$MULTILANG_Deshabilitado}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','Etiqueta','{$MULTILANG_Etiqueta}',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','Maquina','{$MULTILANG_Maquina}',3);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','ComandoShell','{$MULTILANG_MonCommShell}',4);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','ComandoSQL','{$MULTILANG_MonCommSQL}',5);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','Imagen','{$MULTILANG_Imagen}',6);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','Embebido','{$MULTILANG_Embebido}',7);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','SensorRango','{$MULTILANG_MonSensorRango}',8);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','SensorMaquina','{$MULTILANG_MonSensorRango} ({$MULTILANG_Apariencia} {$MULTILANG_Maquina})',9);
 
 DROP TABLE IF EXISTS core_bugtracker;
 CREATE TABLE core_bugtracker (
