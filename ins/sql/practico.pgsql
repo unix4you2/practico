@@ -499,6 +499,14 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','Embebido','{$MULTILANG_Embebido}',7);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','SensorRango','{$MULTILANG_MonSensorRango}',8);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','SensorMaquina','{$MULTILANG_MonSensorRango} ({$MULTILANG_Apariencia} {$MULTILANG_Maquina})',9);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','socket','Socket',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','ping','Ping',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','curl:1','cURL (HTTP 01 sec. Timeout)',3);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','curl:3','cURL (HTTP 03 sec. Timeout)',4);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','curl:5','cURL (HTTP 05 sec. Timeout)',5);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','curl:10','cURL (HTTP 10 sec. Timeout)',6);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','curl:15','cURL (HTTP 15 sec. Timeout)',7);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','curl:30','cURL (HTTP 30 sec. Timeout)',8);
 
 DROP TABLE IF EXISTS core_bugtracker;
 CREATE TABLE core_bugtracker (
