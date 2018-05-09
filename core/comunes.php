@@ -4618,7 +4618,7 @@ function cargar_objeto_texto_largo($registro_campos,$registro_datos_formulario)
 		// Especifica textos de placeholder si existen
 		$cadena_placeholder='';
 		if ($registro_campos["valor_placeholder"]!="")
-			$cadena_placeholder=' placeholder="'.$registro_campos["valor_placeholder"].'" ';
+			$cadena_placeholder=' placeholder="'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_placeholder"]).'" ';
 
 		// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 		$cadena_valor='';
