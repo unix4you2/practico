@@ -309,6 +309,7 @@ CREATE TABLE core_informe (
   subtotales_columna varchar(255) DEFAULT '',
   subtotales_formato varchar(255) DEFAULT '',
   conexion_origen_datos varchar(255) DEFAULT '',
+  script_sql text,
   PRIMARY KEY  (id)
 );
 

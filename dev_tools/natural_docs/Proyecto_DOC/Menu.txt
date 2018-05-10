@@ -103,7 +103,6 @@ Group: Modulos Principales  {
       File: Seccion superior  (core/marco_nav.php)
       File: Modulo mantenimientos  (core/mantenimiento.php)
       File: Conexiones PDO  (core/conexiones_extra.php)
-      File: Modulo replicacion de operaciones  (core/replicacion.php)
       File: Seccion con formularios comunes  (core/marco_forms.php)
       File: Modulo kanban  (core/kanban.php)
       }  # Group: Modulos
@@ -189,3 +188,4 @@ Group: Mod  {
    }  # Group: Mod
 
 File: Buffer  (inc/html2canvas/0.5/html2canvas.svg.js)
+File: Modulo replicacion de operaciones  (dep/core/replicacion.php)

@@ -309,6 +309,7 @@ CREATE TABLE core_informe (
   subtotales_columna varchar(255) DEFAULT '',
   subtotales_formato varchar(255) DEFAULT '',
   conexion_origen_datos varchar(255) DEFAULT '',
+  script_sql text,
   PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -520,9 +521,6 @@ DROP TABLE IF EXISTS core_tabla_comodin;
 CREATE TABLE core_tabla_comodin (
   id int(10) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci; imagen varchar(250) default '',
-  posible_izquierda int(1) default '0',
-  PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_usuario_menu;

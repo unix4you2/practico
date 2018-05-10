@@ -318,7 +318,8 @@ CREATE TABLE core_informe (
   tamano_paginacion integer DEFAULT 10,
   subtotales_columna text DEFAULT '',
   subtotales_formato text DEFAULT '',
-  conexion_origen_datos text DEFAULT ''
+  conexion_origen_datos text DEFAULT '',
+  script_sql text
 
 );
 
