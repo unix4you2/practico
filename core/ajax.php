@@ -1,5 +1,5 @@
 <?php
-	/*
+/*
 	Copyright (C) 2013  John F. Arroyave Gutiérrez
 						unix4you2@gmail.com
 
@@ -16,19 +16,16 @@
 	You should have received a copy of the GNU General Public License
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-	*/
+*/
 
-	/*
-		Title: Modulo ajax
-		Ubicacion *[/core/ajax.php]*.  Archivo de funciones utilizadas para el retorno de informacion mediante peticiones asincronas
+/*
+	Title: Modulo ajax
+	Ubicacion *[/core/ajax.php]*.  Archivo de funciones utilizadas para el retorno de informacion mediante peticiones asincronas
 
-		Section: Controles de datos
-		Funciones asociadas a generacion de controles de datos basados en los parametros recibidos
-	*/
-?>
+	Section: Controles de datos
+	Funciones asociadas a generacion de controles de datos basados en los parametros recibidos
+*/
 
-
-<?php
 
 
 /* ################################################################## */
@@ -58,10 +55,10 @@ if ($PCO_Accion=="opciones_combo_box")
         //Valida variables minimas para la consulta
         if (@$origen_lista_tablas=="" || @$origen_lista_opciones=="" || @$origen_lista_valores=="")
             {
-                $PCO_MensajeError.="<option>[Error] Parametros de seleccion</option>";
-                if (@$origen_lista_tablas=="") $PCO_MensajeError.="<option>[Causa] Falta origen_lista_tablas</option>";
-                if (@$origen_lista_opciones=="") $PCO_MensajeError.="<option>[Causa] Falta origen_lista_opciones</option>";
-                if (@$origen_lista_valores=="") $PCO_MensajeError.="<option>[Causa] Falta origen_lista_valores</option>";
+                $PCO_MensajeError.='<option>[Error] Parametros de seleccion</option>';
+                if (@$origen_lista_tablas=="") $PCO_MensajeError.='<option>[Causa] Falta origen_lista_tablas</option>';
+                if (@$origen_lista_opciones=="") $PCO_MensajeError.='<option>[Causa] Falta origen_lista_opciones</option>';
+                if (@$origen_lista_valores=="") $PCO_MensajeError.='<option>[Causa] Falta origen_lista_valores</option>';
             }
 
         //Pendiente proteger tablas o campos CORE
@@ -72,13 +69,10 @@ if ($PCO_Accion=="opciones_combo_box")
             {
                 // Se buscan los registros para el combo
                 $complemento_condicion_filtrado="";
-                if (@$condicion_filtrado_listas!="")
-                    $complemento_condicion_filtrado=" AND ($condicion_filtrado_listas) ";
+                if (@$condicion_filtrado_listas!="") $complemento_condicion_filtrado=" AND ($condicion_filtrado_listas) ";
                 $consulta_registros_combo=PCO_EjecutarSQL("SELECT $origen_lista_opciones as opcion, $origen_lista_valores as valor FROM $origen_lista_tablas WHERE 1 $complemento_condicion_filtrado ");
                 while ($registro_opciones_combo = $consulta_registros_combo->fetch())
-                    {
-                        $PCO_SalidaCombos.=$PCO_Prefijo.$registro_opciones_combo["valor"].$PCO_Infijo.$registro_opciones_combo["opcion"].$PCO_Posfijo;
-                    }
+					$PCO_SalidaCombos.=$PCO_Prefijo.$registro_opciones_combo['valor'].$PCO_Infijo.$registro_opciones_combo['opcion'].$PCO_Posfijo;
             }
 
         //echo '<select class="selectpicker show-tick">';
@@ -124,72 +118,71 @@ if ($PCO_Accion=="valor_campo_tabla")
 
 /* ################################################################## */
 /* ################################################################## */
-	/*
-		Section: Acciones a ser ejecutadas (si aplica) en cada cargue de la herramienta
-	*/
+/*
+	Section: Acciones a ser ejecutadas (si aplica) en cada cargue de la herramienta
+*/
+
 /* ################################################################## */
 /* ################################################################## */
-	if (@$PCO_Accion=="cambiar_estado_campo")
-		{		
-			/*
-				Function: cambiar_estado_campo
-				Abre los espacios de trabajo dinamicos sobre el contenedor principal donde se despliega informacion
+/*
+	Function: cambiar_estado_campo
+	Abre los espacios de trabajo dinamicos sobre el contenedor principal donde se despliega informacion
 
-				Variables de entrada:
+	Variables de entrada:
 
-					tabla - Nombre de la tabla que contiene el registro a actualizar.
-					campo - Nombre del campo que sera actualizado.
-					id - Valor Identificador unico del campo a ser actualizado.
-					PCO_CambioEstado_CampoLlave - Nombre del campo que sera utulizado para comparar.  Si no se recibe se asume id
-					valor - Valor a ser asignado en el campo del registro cuyo identificador coincida con el recibido.
-					PCO_CambioEstado_NegarRetorno - Determina si se debe o no retornar despues de un cambio.  Valor vacio hace que se ejecute la operacion por defecto y retorne.
-					PCO_CambioEstado_NoUsarCore - Determina si anular o no el prefijo de tablas Core de la operacion. 1=anula, otros valores dejaran el prefijo core
+		tabla - Nombre de la tabla que contiene el registro a actualizar.
+		campo - Nombre del campo que sera actualizado.
+		id - Valor Identificador unico del campo a ser actualizado.
+		PCO_CambioEstado_CampoLlave - Nombre del campo que sera utulizado para comparar.  Si no se recibe se asume id
+		valor - Valor a ser asignado en el campo del registro cuyo identificador coincida con el recibido.
+		PCO_CambioEstado_NegarRetorno - Determina si se debe o no retornar despues de un cambio.  Valor vacio hace que se ejecute la operacion por defecto y retorne.
+		PCO_CambioEstado_NoUsarCore - Determina si anular o no el prefijo de tablas Core de la operacion. 1=anula, otros valores dejaran el prefijo core
 
-				Salida:
+	Salida:
 
-					Valor actualizado en el campo y retorno al escritorio de la aplicacion.  En caso de error se retorna al escritorio sin realizar cambios ante el fallo del query.
-			*/
-
-			$mensaje_error="";
-			if ($mensaje_error=="")
-				{
-                    //Determina el tipo de objeto sobre el que se hace el cambio
-                    $TipoCampo="";
-                    if (@$formulario!="") $TipoCampo.="Frm:".$formulario;
-                    if (@$informe!="") $TipoCampo.="Inf:".$informe;
-                    
-                    //Define el campo sobre el cual se hace la operacion
-                    if (@$PCO_CambioEstado_CampoLlave=="")	$PCO_CambioEstado_CampoLlave="id";
-                    
-                    //Algunas operaciones requieren por defecto usar los prefijos Core.  Si se desea pueden anularse con el parametro en 1
-                    $PrefijoTablas=$TablasCore;
-                    if ($PCO_CambioEstado_NoUsarCore==1) $PrefijoTablas="";
-                    
-					PCO_EjecutarSQLUnaria("UPDATE ".$PrefijoTablas."$tabla SET $campo = '$valor' WHERE $PCO_CambioEstado_CampoLlave = ? ","$id");
-					@PCO_Auditar("Cambia estado del campo $campo en objetoID $TipoCampo");
-					
-					if (@$PCO_CambioEstado_NegarRetorno=="")
-						echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+		Valor actualizado en el campo y retorno al escritorio de la aplicacion.  En caso de error se retorna al escritorio sin realizar cambios ante el fallo del query.
+*/
+if (@$PCO_Accion=="cambiar_estado_campo")
+	{		
+		$mensaje_error="";
+		if ($mensaje_error=="")
+			{
+				//Determina el tipo de objeto sobre el que se hace el cambio
+				$TipoCampo="";
+				if (@$formulario!="") $TipoCampo.="Frm:".$formulario;
+				if (@$informe!="") $TipoCampo.="Inf:".$informe;
+				
+				//Define el campo sobre el cual se hace la operacion
+				if (@$PCO_CambioEstado_CampoLlave=="")	$PCO_CambioEstado_CampoLlave="id";
+				
+				//Algunas operaciones requieren por defecto usar los prefijos Core.  Si se desea pueden anularse con el parametro en 1
+				$PrefijoTablas=$TablasCore;
+				if ($PCO_CambioEstado_NoUsarCore==1) $PrefijoTablas="";
+				
+				PCO_EjecutarSQLUnaria("UPDATE ".$PrefijoTablas."$tabla SET $campo = '$valor' WHERE $PCO_CambioEstado_CampoLlave = ? ","$id");
+				@PCO_Auditar("Cambia estado del campo $campo en objetoID $TipoCampo");
+				
+				if (@$PCO_CambioEstado_NegarRetorno=="")
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 							<input type="Hidden" name="PCO_Accion" value="'.$accion_retorno.'">
 							<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 							<input type="Hidden" name="formulario" value="'.@$formulario.'">
 							<input type="Hidden" name="informe" value="'.@$informe.'">
 							<input type="Hidden" name="popup_activo" value="'.$popup_activo.'">
-							<script type="" language="JavaScript">
-							//setTimeout ("document.cancelar.submit();", 10); 
-							document.cancelar.submit();
-							</script>';
-				}
-			else
-				{
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="editar_formulario">
-						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="formulario" value="'.$formulario.'">
-						<input type="Hidden" name="informe" value="'.$informe.'">
-						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
-						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
-						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-				}
-		}
+						<script type="" language="JavaScript">
+						//setTimeout ("document.cancelar.submit();", 10); 
+						document.cancelar.submit();
+						</script>';
+			}
+		else
+			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="PCO_Accion" value="editar_formulario">
+					<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+					<input type="Hidden" name="formulario" value="'.$formulario.'">
+					<input type="Hidden" name="informe" value="'.$informe.'">
+					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
+					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+				</form>
+				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+	}
