@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
 VersionCompatibleAno="18"
-VersionCompatibleMes="3"
+VersionCompatibleMes="5"
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
 VersionFinalAno="18"
-VersionFinalMes="5"
+VersionFinalMes="7"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
@@ -16,18 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
-core/marco_admin.php
-core/marco_arriba_bs.php
-core/marco_conf.php
-core/marco_forms.php
-core/marco_nav.php
-core/monitoreo.php
-core/informes.php
-core/objetos.php
 xml/*
-inc/jquery/plugins/jquery.fileTree-1.01/connectors/*
-inc/ace/*
-mod/pcoder/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/bootstrap/js/practico*
@@ -41,58 +30,15 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Se permite seleccion del operador NOT LIKE durante las condiciones de informes.
-* Added: Consultas avanzadas sobre los informes.  Se permite ingresar código específico para las consultas, aunque éstas no se beneficiarán de algunas propiedades de las definidas internamente por el Framework pero permitirá la generación de consultas SQL o llamados a procedimientos almacenados directamente.
-* Added: Soporte para ejecucion de la aplicacion en fullscreen sobre iOS y Safari.
-* Enhan: Actualizacion {P}Coder 18.6
-* Enhan: Se protege la edicion de parametros basicos de configuracion para el motor.  Estos deberan ser tocados solo por archivo para hacer de manera más consciente esa tarea para los usuarios administradores avanzados que por error involuntario o de navegador podrían dejar inactiva la aplicación.
-* Enhan: Reemplazo de archivos asociados a gestión de conexiones extra y replicación por funciones internas del Framework.
-* Enhan: Reemplazo de funciones asociados a al sistema de monitoreo por funciones internas del Framework.
-* Enhan: Valores de placeholder para campos de tipo texto soportan ahora reemplazo de variables en formato {PHP} para facilitar aplicaciones multi-idioma.
-* Fixed: Usuarios que no han guardado configuraciones en su panel de admin despues de actualizar no pueden ver graficos del panel
-* Fixed: Mejorada funcion callback de reemplazo de variables para versiones muy obsoletas de PHP que no soportan llamado recursivo. 
-* Fixed: Supresion de las funciones de verificacion automatica de sintaxis en servidores windows, ya que estos no soportan el comando de PHP sobre el PATH general a menos que se especifique su path especifico.
-* Fixed: Corrección a la librería de exploración de archivos para {P}Coder sobre servidores windows que no soportan una raiz establecida por defecto.
+
+* Enhan: Las conexiones de bases de datos (SQL, NoSQL y replicaciones) presentan detalles de su nombre o identificador cuando su ejecución devuelve un error.  De esa manera se depura de manera se facilita la depuración sobre aplicaciones que utilizan múltiples motores.
+
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 # RECORDAR EN OPCIONES MULTI-IDIOMA:  UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 ScriptBasedatos="
-ALTER TABLE core_informe ADD script_sql text;
-
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','mysql','MySQL - MariaDB (3.x/4.x/5.x)',1);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','pgsql','PostgreSQL',2);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','sqlite','SQLite v2 - SQLite v3',3);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','sqlsrv','FreeTDS/Microsoft SQL Server: Win32 [max version 2008]',4);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','mssql','FreeTDS/Microsoft SQL Server: Win32&Linux, [max version 2000]',5);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','ibm','IBM (DB2)',6);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','dblib','DBLIB',7);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','odbc','Microsoft Access (ODBC v3: IBM DB2, unixODBC, Win32 ODBC)',8);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','oracle','ORACLE (OCI Oracle Call Interface)',9);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','ifmx','Informix (IBM Informix Dynamic Server)',10);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','fbd','Firebird (Firebird/Interbase 6)',11);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('booleano_nosi','0','{ $ MULTILANG_No}',1);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('booleano_nosi','1','{ $ MULTILANG_Si}',2);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('booleano_sino','1','{ $ MULTILANG_Si}',1);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('booleano_sino','0','{ $ MULTILANG_No}',2);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','{ $ MULTILANG_Deshabilitado}','{ $ MULTILANG_Deshabilitado}',1);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','Etiqueta','{ $ MULTILANG_Etiqueta}',2);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','Maquina','{ $ MULTILANG_Maquina}',3);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','ComandoShell','{ $ MULTILANG_MonCommShell}',4);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','ComandoSQL','{ $ MULTILANG_MonCommSQL}',5);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','Imagen','{ $ MULTILANG_Imagen}',6);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','Embebido','{ $ MULTILANG_Embebido}',7);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','SensorRango','{ $ MULTILANG_MonSensorRango}',8);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipo_monitor','SensorMaquina','{ $ MULTILANG_MonSensorRango} ({ $ MULTILANG_Apariencia} { $ MULTILANG_Maquina})',9);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','socket','Socket',1);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','ping','Ping',2);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','curl:1','cURL (HTTP 01 sec. Timeout)',3);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','curl:3','cURL (HTTP 03 sec. Timeout)',4);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','curl:5','cURL (HTTP 05 sec. Timeout)',5);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','curl:10','cURL (HTTP 10 sec. Timeout)',6);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','curl:15','cURL (HTTP 15 sec. Timeout)',7);
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','curl:30','cURL (HTTP 30 sec. Timeout)',8);
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 "

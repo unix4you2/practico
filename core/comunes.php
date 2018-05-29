@@ -2877,11 +2877,14 @@ function PCO_EjecutarSQL($query,$lista_parametros="",$ConexionBD="",$EvitarLogSQ
 			}
 		catch( PDOException $ErrorPDO)
 			{
+			    $mensaje_final='';
+			    $detalles_conexion=' (CNX='.$ConexionPDO->getAttribute(PDO::ATTR_CONNECTION_STATUS).') ';
 				//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
 				if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-					$mensaje_final=$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.@completar_parametros($query,$parametros)."<br><b>$MULTILANG_Archivo</b>: ".$ErrorPDO->getFile()." -> ".$ErrorPDO->getLine();
+					$mensaje_final.=$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.@completar_parametros($query,$parametros).$detalles_conexion."<br><b>$MULTILANG_Archivo</b>: ".$ErrorPDO->getFile()." -> ".$ErrorPDO->getLine();
 				else
-					$mensaje_final='<b>'.$MULTILANG_Detalles.'</b>: '.$MULTILANG_ErrorSoloAdmin;
+					$mensaje_final.='<b>'.$MULTILANG_Detalles.'</b>: '.$detalles_conexion.$MULTILANG_ErrorSoloAdmin;
+
 				//Presenta el mensaje sobre el HTML y como Emergente JS
                 mensaje($MULTILANG_ErrorTiempoEjecucion,$mensaje_final, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 				echo '<script type="" language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\\n\\n'.$mensaje_final.'");</script>';
@@ -3031,11 +3034,12 @@ function PCO_EjecutarSQLUnaria($query,$lista_parametros="",$ConexionBD="",$Repli
 			}
 		catch( PDOException $ErrorPDO)
 			{
+			    $detalles_conexion=' (CNX='.$ConexionPDO->getAttribute(PDO::ATTR_CONNECTION_STATUS).') ';
 				//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
 				if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-                    echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.completar_parametros($query,$parametros).'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
+                    echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.completar_parametros($query,$parametros).'\n\n'.$detalles_conexion.'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
 				else
-					echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$MULTILANG_ErrorSoloAdmin.'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
+					echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$detalles_conexion.'\n\n'.$MULTILANG_ErrorSoloAdmin.'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
 				return $MULTILANG_ErrorTiempoEjecucion;
 			}
 	}
