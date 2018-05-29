@@ -653,6 +653,9 @@
 	$MULTILANG_FrmNombreHTML='Aviso: este valor é usado para gerar o identificador exclusivo do elemento em HTML e gerar automaticamente todos os eventos dos controles e ferramentas vinculados ao seu formulário. Se você alterar esse valor, poderá perder a programação de eventos específicos e o JavaScript em geral que você fez antes da sua alteração.';
     $MULTILANG_FrmClaseContenedor='Classe CSS de Recipiente';
     $MULTILANG_FrmClaseContenedorDes='Indica se o contêiner do objeto tem algum CSS nativo ou bootstrap especifica para ser aplicado no momento do controle de exibição de diagrama.';
+    $MULTILANG_FrmHuerfanos='Foram encontrados campos órfãos (fora do design visível do formulário).';
+    $MULTILANG_FrmIDHTMDuplicado='Campos com ID HTML ou nome de campo no banco de dados duplicado foram encontrados.';
+    $MULTILANG_FrmCamposAProposito='Esses campos estão lá e podem afetar a funcionalidade do formulário em JS ou ao processar seus dados. Se você tiver gerado campos desse tipo de campo de propósito, ignore essa mensagem. Os campos encontrados são:';
 
 	//Informes
 	$MULTILANG_InfErr1='Você deve especificar valores para os campos correspondentes a, pelo menos, uma s&eacute;rie de dados. <br> Se você não quer gerar um gr&aacute;fico, em seguida, você deve alterar o tipo de relat&oacute;rio a tabela de dados';

@@ -653,6 +653,9 @@
 	$MULTILANG_FrmNombreHTML='Warning: This value is used to generate the unique identifier of the element in HTML and from it automatically generate all the events of the controls and tools linked to your form. If you change this value you may lose that specific event programming and JavaScript in general that you made prior to your change.';
     $MULTILANG_FrmClaseContenedor='CSS Class of Container';
     $MULTILANG_FrmClaseContenedorDes='It indicates whether the container of the object has some native CSS or bootstrap specifies to be applied at the time of the on-screen control.';
+    $MULTILANG_FrmHuerfanos='Orphaned fields have been found (outside the visible design of the form).';
+    $MULTILANG_FrmIDHTMDuplicado='Fields with HTML ID or field name in database dupicated have been found.';
+    $MULTILANG_FrmCamposAProposito='These fields are there and can affect the functionality of the form in JS gions or when processing your data. If you have generated fields of this type of field on purpose then ignore this message. The fields found are:';
 
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';

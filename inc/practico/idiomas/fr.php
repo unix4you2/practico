@@ -651,6 +651,11 @@
 	$MULTILANG_FrmValida9='Numéros seulement 0-9 (entier)';
 	$MULTILANG_FrmValida10='Seulement charset dans le champ de validation supplémentaire';
 	$MULTILANG_FrmNombreHTML='Attention: cette valeur est utilisée pour générer l identifiant unique de l élément en HTML et générer automatiquement tous les événements des contrôles et outils liés à votre formulaire. Si vous changez cette valeur, vous risquez de perdre cette programmation d événement spécifique et JavaScript en général que vous avez fait avant votre changement.';
+    $MULTILANG_FrmClaseContenedor='Classe CSS du conteneur';
+    $MULTILANG_FrmClaseContenedorDes='Cela permet d indiquer si le conteneur de l objet possède une classe CSS native ou un bootstrap spécifique à appliquer au moment de la création de diagramme sur le contrôle à l écran.';
+    $MULTILANG_FrmHuerfanos='Des champs orphelins ont été trouvés (en dehors du design visible du formulaire).';
+    $MULTILANG_FrmIDHTMDuplicado='Des champs avec un identifiant HTML ou un nom de champ dans une base de données en double ont été trouvés.';
+    $MULTILANG_FrmCamposAProposito='Ces champs sont là et peuvent affecter la fonctionnalité du formulaire dans JS gions ou lors du traitement de vos données. Si vous avez généré des champs de ce type de champ, ignorez ce message. Les champs trouvés sont:';
 
 	//Informes
 	$MULTILANG_InfErr1='Vous devez spécifier des valeurs pour les champs correspondant à au moins une série de données. <br> Si vous ne voulez pas générer de graphique, vous devez changer le type de rapport en tableau de données';

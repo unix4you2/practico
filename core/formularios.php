@@ -2641,6 +2641,23 @@ if ($PCO_Accion=="editar_formulario")
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
             <?php
+                //Busca posibles campos huerfanos para presentar advertencia si aplica
+                $MensajeCamposHuerfanos='';
+                $CantidadColumnasDiseno=$registro_form["columnas"];
+                $ConsultaCamposHuerfanos=PCO_EjecutarSQL("SELECT id,$ListaCamposSinID_formulario_objeto FROM ".$TablasCore."formulario_objeto WHERE formulario=$formulario AND (columna>$CantidadColumnasDiseno OR columna<1) ");
+                while ($RegistroCamposHuerfanos=$ConsultaCamposHuerfanos->fetch())
+                    $MensajeCamposHuerfanos.='<li style="padding-left: 50px;">ID:<b>'.$RegistroCamposHuerfanos["id"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Titulo.':<b>'.$RegistroCamposHuerfanos["titulo"].'</b>&nbsp;&nbsp;&nbsp; Campo:<b>'.$RegistroCamposHuerfanos["campo"].'</b>&nbsp;&nbsp;&nbsp; ID_HTML:<b>'.$RegistroCamposHuerfanos["id_html"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Columna.':<b>'.$RegistroCamposHuerfanos["columna"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Pestana.':<b>'.$RegistroCamposHuerfanos["pestana_objeto"].'</b></li>';
+                if ($MensajeCamposHuerfanos!='')
+                    mensaje($MULTILANG_FrmHuerfanos,"$MULTILANG_FrmCamposAProposito $MensajeCamposHuerfanos","","fa fa-fw fa-2x fa-info-circle","alert alert-dismissible alert-warning btn-xs");
+
+                //Busca posibles campos con nombre o IDHTML duplicado para presentar advertencia si aplica
+                $MensajeCamposDuplicados='';
+                $ConsultaCamposDuplicados=PCO_EjecutarSQL("SELECT * FROM (SELECT id,$ListaCamposSinID_formulario_objeto FROM ".$TablasCore."formulario_objeto WHERE formulario=$formulario GROUP BY id_html UNION ALL SELECT id,$ListaCamposSinID_formulario_objeto FROM ".$TablasCore."formulario_objeto WHERE formulario=$formulario GROUP BY campo) as UnionRegistros");
+                while ($RegistroCamposDuplicados=$ConsultaCamposDuplicados->fetch())
+                    $MensajeCamposDuplicados.='<li style="padding-left: 50px;">ID:<b>'.$RegistroCamposDuplicados["id"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Titulo.':<b>'.$RegistroCamposDuplicados["titulo"].'</b>&nbsp;&nbsp;&nbsp; Campo:<b>'.$RegistroCamposDuplicados["campo"].'</b>&nbsp;&nbsp;&nbsp; ID_HTML:<b>'.$RegistroCamposDuplicados["id_html"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Columna.':<b>'.$RegistroCamposDuplicados["columna"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Pestana.':<b>'.$RegistroCamposDuplicados["pestana_objeto"].'</b></li>';
+                if ($MensajeCamposDuplicados!='')
+                    mensaje($MULTILANG_FrmIDHTMDuplicado,"$MULTILANG_FrmCamposAProposito $MensajeCamposDuplicados","","fa fa-fw fa-2x fa-info-circle","alert alert-dismissible alert-warning btn-xs");
+
             	//function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno=0)
                 PCO_CargarFormulario($formulario,1,"","",0,1); //Cargar el form en modo de diseno
             ?>

@@ -30,9 +30,10 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-
+* Added: Ahora se advierte acerca de la existencia de campos con ID HTML duplicado o nombre de campo vinculado en base de datos duplicado durante el diseño de formularios.
+* Added: Ahora se valida la existencia de campos huerfanos durante el diseño de formularios.  Esto evita que el programador olvide la existencia de posibles campos por fuera del esquema del formulario; pero sin privarlo de sus funcionalidades derivadas.
 * Enhan: Las conexiones de bases de datos (SQL, NoSQL y replicaciones) presentan detalles de su nombre o identificador cuando su ejecución devuelve un error.  De esa manera se depura de manera se facilita la depuración sobre aplicaciones que utilizan múltiples motores.
-
+* Fixed: Cadenas faltantes en idioma francés.
 "
 
 ########################################################################
