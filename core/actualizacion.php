@@ -1,5 +1,5 @@
 <?php
-	/*
+/*
 	Copyright (C) 2013  John F. Arroyave Gutiérrez
 						unix4you2@gmail.com
 
@@ -16,15 +16,13 @@
 	You should have received a copy of the GNU General Public License
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-	*/
+*/
 
-			/*
-				Title: Modulo actualizar
-				Ubicacion *[/core/actualizacion.php]*.  Archivo de funciones para el proceso de actualizacion de la plataforma mediante parches incrementales
-			*/
-?>
+/*
+	Title: Modulo actualizar
+	Ubicacion *[/core/actualizacion.php]*.  Archivo de funciones para el proceso de actualizacion de la plataforma mediante parches incrementales
+*/
 
-<?php
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -54,19 +52,19 @@ if ($PCO_Accion=="actualizar_practico")
                 <br>
                 <i class="fa fa-inbox fa-2x fa-fw"></i><b> <?php echo $MULTILANG_ActUsando; ?>: <?php include("inc/version_actual.txt"); ?></b><br>
                 <hr>
-                        <form name="form_carga_actualizacion" action="<?php echo $ArchivoCORE; ?>" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="extension_archivo" value=".zip">
-                            <input type="hidden" name="MAX_FILE_SIZE" value="8192000">
-                            <input type="Hidden" name="PCO_Accion" value="cargar_archivo">
-                            <input type="Hidden" name="siguiente_accion" value="analizar_parche">
-                            <input type="Hidden" name="texto_boton_siguiente" value="Continuar con la revisi&oacute;n">
-                            <input type="Hidden" name="carpeta" value="tmp">
-                            <b><?php echo $MULTILANG_ActPaquete; ?>: </b><br>
-                            <input name="archivo" type="file" class="form-control btn btn-info">
-                            <br>
-                            <button OnClick="form_carga_actualizacion.submit();"  class="btn btn-success"><i class="fa fa-upload"></i> <?php echo $MULTILANG_CargarArchivo; ?></button> (<?php echo $MULTILANG_ActSobreescritos; ?>)
-                        </form> 
-                        <hr>
+					<form name="form_carga_actualizacion" action="<?php echo $ArchivoCORE; ?>" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="extension_archivo" value=".zip">
+						<input type="hidden" name="MAX_FILE_SIZE" value="8192000">
+						<input type="Hidden" name="PCO_Accion" value="cargar_archivo">
+						<input type="Hidden" name="siguiente_accion" value="analizar_parche">
+						<input type="Hidden" name="texto_boton_siguiente" value="Continuar con la revisi&oacute;n">
+						<input type="Hidden" name="carpeta" value="tmp">
+						<b><?php echo $MULTILANG_ActPaquete; ?>: </b><br>
+						<input name="archivo" type="file" class="form-control btn btn-info">
+						<br>
+						<button OnClick="form_carga_actualizacion.submit();"  class="btn btn-success"><i class="fa fa-upload"></i> <?php echo $MULTILANG_CargarArchivo; ?></button> (<?php echo $MULTILANG_ActSobreescritos; ?>)
+					</form> 
+				<hr>
 
             </div>
         </div>
@@ -83,33 +81,33 @@ if ($PCO_Accion=="actualizar_practico")
 
         <!-- INICIO TAB HISTORICO DE ACTUALIZACIONES -->
         <div class="tab-pane fade" id="historico_actualizaciones">
-                <div class="well well-sm"><b>Ultimos 30 registros / Last 30 records</b></div>
-                <table id="TablaAcciones" class="table table-condensed table-hover table-unbordered btn-xs table-striped">
-                    <thead>
-					<tr>
-						<th><b><?php echo $MULTILANG_UsrLogin; ?></b></th>
-						<th><b><?php echo $MULTILANG_UsrAudDes; ?></b></th>
-						<th><b><?php echo $MULTILANG_Fecha; ?></b></th>
-						<th><b><?php echo $MULTILANG_Hora; ?></b></th>
-					</tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                        // Busca por las auditorias asociadas a actualizacion de plataforma:
-                        // Acciones:  Actualiza version de plataforma | _Actualizacion_ | Analiza archivo tmp/Practico | Carga archivo en carpeta tmp - Practico
-                        $resultado=@PCO_EjecutarSQL("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE (accion LIKE '%Actualiza version de plataforma%' OR accion LIKE '%_Actualizacion_%' OR accion LIKE '%Analiza archivo tmp/Practico%' OR accion LIKE '%Carga archivo en carpeta tmp - Practico%') ORDER BY fecha DESC, hora DESC LIMIT 0,30");
-                        while($registro = $resultado->fetch())
-                            {
-                                echo '<tr>
-                                        <td>'.$registro["usuario_login"].'</td>
-                                        <td>'.$registro["accion"].'</td>
-                                        <td>'.$registro["fecha"].'</td>
-                                        <td>'.$registro["hora"].'</td>
-                                    </tr>';
-                            }
-                    ?>
-                    </tbody>
-                </table>
+			<div class="well well-sm"><b>Ultimos 30 registros / Last 30 records</b></div>
+			<table id="TablaAcciones" class="table table-condensed table-hover table-unbordered btn-xs table-striped">
+				<thead>
+				<tr>
+					<th><b><?php echo $MULTILANG_UsrLogin; ?></b></th>
+					<th><b><?php echo $MULTILANG_UsrAudDes; ?></b></th>
+					<th><b><?php echo $MULTILANG_Fecha; ?></b></th>
+					<th><b><?php echo $MULTILANG_Hora; ?></b></th>
+				</tr>
+				</thead>
+				<tbody>
+				<?php
+					// Busca por las auditorias asociadas a actualizacion de plataforma:
+					// Acciones:  Actualiza version de plataforma | _Actualizacion_ | Analiza archivo tmp/Practico | Carga archivo en carpeta tmp - Practico
+					$resultado=@PCO_EjecutarSQL("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE (accion LIKE '%Actualiza version de plataforma%' OR accion LIKE '%_Actualizacion_%' OR accion LIKE '%Analiza archivo tmp/Practico%' OR accion LIKE '%Carga archivo en carpeta tmp - Practico%') ORDER BY fecha DESC, hora DESC LIMIT 0,30");
+					while($registro = $resultado->fetch())
+						{
+							echo '<tr>
+									<td>'.$registro['usuario_login'].'</td>
+									<td>'.$registro['accion'].'</td>
+									<td>'.$registro['fecha'].'</td>
+									<td>'.$registro['hora'].'</td>
+								</tr>';
+						}
+				?>
+				</tbody>
+			</table>
 
         </div>
         <!-- FIN TAB HISTORICO DE ACTUALIZACIONES -->
@@ -155,11 +153,9 @@ if ($PCO_Accion=="cargar_archivo")
 		$tamano_permitido=$MAX_FILE_SIZE/1000;
 
 		//Comprueba si las características del archivo son las deseadas
-		if ($tamano_archivo > $MAX_FILE_SIZE)
-			$mensaje_error.=$MULTILANG_ErrorTamano.' ('.$tamano_permitido.' Bytes).';
+		if ($tamano_archivo > $MAX_FILE_SIZE) $mensaje_error.=$MULTILANG_ErrorTamano.' ('.$tamano_permitido.' Bytes).';
 
-		if (strpos($nombre_archivo, $extension_archivo)===FALSE)
-			$mensaje_error.=$MULTILANG_ErrorFormato;
+		if (strpos($nombre_archivo, $extension_archivo)===FALSE) $mensaje_error.=$MULTILANG_ErrorFormato;
 
 		// Solo intenta la carga del archivo si cumple las condiciones
 		if ($mensaje_error=="")
@@ -177,14 +173,12 @@ if ($PCO_Accion=="cargar_archivo")
 				PCO_Auditar("Carga archivo en carpeta $carpeta - $nombre_archivo");
 			}
 		else
-			{
-				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
-					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_Actualizacion.' - '.$MULTILANG_Error.'">
-					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
-					</form>
-					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-			}
+			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+				<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+				<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_Actualizacion.' - '.$MULTILANG_Error.'">
+				<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+				</form>
+				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 
 
 		echo '<br><a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
@@ -233,8 +227,8 @@ if ($PCO_Accion=="analizar_parche")
 		$mensaje_error="";
 
 		//Lee la version actualmente instalada de practico
-		$archivo_origen="inc/version_actual.txt";
-		$archivo = fopen($archivo_origen, "r");
+		$archivo_origen='inc/version_actual.txt';
+		$archivo = fopen($archivo_origen, 'r');
 		if ($archivo)
 			{
 				$version_actual = trim(fgets($archivo, 1024));
@@ -244,62 +238,55 @@ if ($PCO_Accion=="analizar_parche")
 			$mensaje_error.='<br>'.$MULTILANG_ErrorVerAct.' <b>inc/version_actual.txt</b>';
 
 		//Libreria necesaria para extraer el archivo
-		include("inc/pclzip/pclzip.lib.php");
+		include 'inc/pclzip/pclzip.lib.php';
 		$archivo = new PclZip($archivo_cargado);
         $carpeta_destino=""; //Define donde se descomprime el archivo.  Por defecto es la ruta vacia para tomar la actual o raiz
 		//Obtiene archivo compat.txt con el numero de version compatible del parche
-		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "tmp/par_compat.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
+		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, 'tmp/par_compat.txt',PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
 		$version_compatible=trim($lista_contenido[0]['content']);
-		if ($lista_contenido == 0 || $version_compatible=="")
-			$mensaje_error.='<br>'.$MULTILANG_ErrorActualiza.' tmp/par_compat.txt <br>';
+		if ($lista_contenido == 0 || $version_compatible=="") $mensaje_error.='<br>'.$MULTILANG_ErrorActualiza.' tmp/par_compat.txt <br>';
 
 		//Obtiene archivo version.txt con la version que se aplicaria al sistema
 		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "inc/version_actual.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
 		$version_final=trim($lista_contenido[0]['content']);
-		if ($lista_contenido == 0 || $version_final=="")
-			$mensaje_error.='<br>'.$MULTILANG_ErrorActualiza.' inc/version_actual.txt <br>';
+		if ($lista_contenido == 0 || $version_final=="") $mensaje_error.='<br>'.$MULTILANG_ErrorActualiza.' inc/version_actual.txt <br>';
 
 		//Obtiene archivo cambios.txt con la informacion de funcionalidades implementadas por el parche
 		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "tmp/par_cambios.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
 		$resumen_cambios=$lista_contenido[0]['content'];
-		if ($lista_contenido == 0 || $resumen_cambios=="")
-			$mensaje_error.='<br>'.$MULTILANG_ErrorActualiza.' tmp/par_cambios.txt <br>';
+		if ($lista_contenido == 0 || $resumen_cambios=="") $mensaje_error.='<br>'.$MULTILANG_ErrorActualiza.' tmp/par_cambios.txt <br>';
 
 		//Obtiene archivo sql.txt con las instrucciones a ejecutar
 		$lista_contenido = $archivo->extract(PCLZIP_OPT_BY_NAME, "tmp/par_sql.txt",PCLZIP_OPT_PATH, $carpeta_destino,PCLZIP_OPT_EXTRACT_AS_STRING);
 		$resumen_sql=$lista_contenido[0]['content'];
-		if ($lista_contenido == 0)
-			$mensaje_error.='<br>'.$MULTILANG_ErrorActualiza.' tmp/par_sql.txt <br>';
+		if ($lista_contenido == 0) $mensaje_error.='<br>'.$MULTILANG_ErrorActualiza.' tmp/par_sql.txt <br>';
 
 		//Hace verificaciones adicionales cuando la version compatible es diferente de un punto (. = cualquiera)
 		if ($version_compatible!=".")
 			{
 				//Verifica que no sea un parche mas viejo que la version actual
 				if ($mensaje_error=="")
-					if ($version_final < $version_actual)
-						$mensaje_error.='<br>'.$MULTILANG_ErrorAntigua.' Ver:'.$version_final.' <= Ver:'.$version_actual;
+					if ($version_final < $version_actual) $mensaje_error.='<br>'.$MULTILANG_ErrorAntigua.' Ver:'.$version_final.' <= Ver:'.$version_actual;
 
 				//Verifica si la version actualmente instalada es la requerida por el parche
 				if ($mensaje_error=="")
-					if ($version_compatible != $version_actual)
-						$mensaje_error.="<br>".$MULTILANG_ErrorVersion." ".$version_compatible."<br>".$MULTILANG_AvisoIncremental;
+					if ($version_compatible != $version_actual) $mensaje_error.="<br>".$MULTILANG_ErrorVersion." ".$version_compatible."<br>".$MULTILANG_AvisoIncremental;
 			}
 
 		if ($mensaje_error=="")
 			{
 				$errores_permisos_escritura=0;
                 //Presenta contenido del archivo
-				if (($lista_contenido = $archivo->listContent()) == 0)
-					echo $MULTILANG_Error.": ".$archivo->errorInfo(true);
+				if (($lista_contenido = $archivo->listContent()) == 0) echo $MULTILANG_Error.": ".$archivo->errorInfo(true);
 				echo '<OL>';
 				for ($i=0; $i<sizeof($lista_contenido); $i++)
                     {
-                        echo "<li><font color=blue>".@$lista_contenido[$i][filename]."</font> ... ".$MULTILANG_Integridad.": <b>".@$lista_contenido[$i][status]."</b>";  /*Propiedades adicionales:  filename, stored_filename, size, compressed_size, mtime, comment, folder, index, status*/
+                        echo '<li><font color=blue>'.@$lista_contenido[$i][filename].'</font> ... '.$MULTILANG_Integridad.': <b>'.@$lista_contenido[$i][status].'</b>';  /*Propiedades adicionales:  filename, stored_filename, size, compressed_size, mtime, comment, folder, index, status*/
                         //Verifica que pueda ser escrito el archivo de destino
                         $archivo_a_escribir=@$lista_contenido[$i][filename];
                         if (!is_writable($archivo_a_escribir) && file_exists ($archivo_a_escribir))
                             {
-                                echo " <font color=red><b>[$MULTILANG_ActErrEscritura]</b></font>";
+                                echo ' <font color=red><b>['.$MULTILANG_ActErrEscritura.']</b></font>';
                                 $errores_permisos_escritura=1;
                             }
                     }
@@ -328,17 +315,15 @@ if ($PCO_Accion=="analizar_parche")
 				PCO_Auditar("Analiza archivo $archivo_cargado");
 			}
 		else
-			{
-				echo '
+			echo '
 				</form> <!-- Cierra Form de curso normal -->
 				
 				<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ActErrGral.'">
 					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
-					</form>
-					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-			}
+				</form>
+				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 		echo '</center>';
 		echo '<br><a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 
@@ -383,7 +368,7 @@ if ($PCO_Accion=="aplicar_parche")
 		//VERIFICAR PERMISOS DE ESCRITURA EN CADA RUTA DEL PARCHE
 
 		//Libreria necesaria para extraer el archivo
-		include("inc/pclzip/pclzip.lib.php");
+		include 'inc/pclzip/pclzip.lib.php';
 		$archivo = new PclZip($archivo_cargado);
 		
 		if ($mensaje_error=="")
@@ -391,7 +376,7 @@ if ($PCO_Accion=="aplicar_parche")
 				//Hace una copia de seguridad de los archivos a reemplazar por el parche
 				if ($PCO_TipoBackup=="Archivos" || $PCO_TipoBackup=="Archivos+Basedatos")
 					{
-						$archivo_destino_backup_app="bkp/bkp_".$PCO_FechaOperacion."-".date("Hi")."_app.zip";
+						$archivo_destino_backup_app="bkp/bkp_".$PCO_FechaOperacion."-".date('Hi')."_app.zip";
 						$archivo_backup = new PclZip($archivo_destino_backup_app);
 
 						if (($lista_contenido = $archivo->listContent()) == 0)
@@ -404,7 +389,7 @@ if ($PCO_Accion=="aplicar_parche")
 								if (@file_exists($lista_contenido[$i][filename]) && @!is_dir($lista_contenido[$i][filename]))
 									{
 										@$lista_archivos_a_comprimir.=$lista_contenido[$i][filename].",";
-										echo "<li> ".$MULTILANG_HaciendoBkp.": ".@$lista_contenido[$i][filename];
+										echo '<li> '.$MULTILANG_HaciendoBkp.': '.@$lista_contenido[$i][filename];
 									}
 							}
 						$lista_archivos_a_comprimir=substr($lista_archivos_a_comprimir, 0, strlen($lista_archivos_a_comprimir)-1);
@@ -414,26 +399,24 @@ if ($PCO_Accion=="aplicar_parche")
 				//Hace copia de seguridad de la base de datos
 				if ($PCO_TipoBackup=="Archivos+Basedatos")
 					{
-						$archivo_destino_backup_bdd="bkp/bkp_".$PCO_FechaOperacion."-".date("Hi")."_bdd.gz";
+						$archivo_destino_backup_bdd="bkp/bkp_".$PCO_FechaOperacion."-".date('Hi')."_bdd.gz";
 						//Hace copia de seguridad de la base de datos
 						if (PCO_Backup("*",$archivo_destino_backup_bdd,"Estructura+Datos"))
 							{
 							}
 						else
-							{
-								echo '<hr><b>'.$MULTILANG_ErrBkpBD.'.</b>';
-							}
+							echo '<hr><b>'.$MULTILANG_ErrBkpBD.'.</b>';
 					}
 
 				//Descomprime el archivo de parche
 				$carpeta_destino='';
 				//Extrae el archivo
 				if ($archivo->extract(PCLZIP_OPT_PATH, $carpeta_destino, PCLZIP_OPT_REPLACE_NEWER) == 0)
-					echo $MULTILANG_Error.": ".$archivo->errorInfo(true)."<br>";
+					echo $MULTILANG_Error.': '.$archivo->errorInfo(true).'<br>';
 
 				//Abre el archivo con los queries
 				$RutaScriptSQL="tmp/par_sql.txt";
-				$archivo_consultas=fopen($RutaScriptSQL,"r");
+				$archivo_consultas=fopen($RutaScriptSQL,'r');
 				$total_consultas= fread($archivo_consultas,filesize($RutaScriptSQL));
 				fclose($archivo_consultas);
 
@@ -443,14 +426,14 @@ if ($PCO_Accion=="aplicar_parche")
 						try
 							{
 								//Cambia el prefijo predeterminado en caso que haya sido personalizado en la instalacion
-								$consulta=str_replace("core_",$TablasCore,$consulta);
+								$consulta=str_replace('core_',$TablasCore,$consulta);
 								//Ejecuta el query
 								$consulta_enviar = $ConexionPDO->prepare($consulta);
 								$estado_ok = $consulta_enviar->execute();
 							}
 						catch( PDOException $ErrorPDO)
 							{
-								echo "<hr><b><font color=red>".$MULTILANG_ErrorTiempoEjecucion.": </font><br>".$MULTILANG_Detalles.":</b> $consulta <b><br>".$MULTILANG_MotorBD.": ".$ErrorPDO->getMessage()."</b>";
+								echo '<hr><b><font color=red>'.$MULTILANG_ErrorTiempoEjecucion.': </font><br>'.$MULTILANG_Detalles.':</b> $consulta <b><br>'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'</b>';
 								$hay_error=1; //usada globalmente durante el proceso de instalacion
 							}
 					}
@@ -462,14 +445,12 @@ if ($PCO_Accion=="aplicar_parche")
 				PCO_Auditar("Actualiza version de plataforma desde $version_actual hacia $version_final");
 			}
 		else
-			{
-				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
 					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ActMsj5.'">
 					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
-					</form>
-					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-			}
+				</form>
+				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 		echo '</center></td></tr></table>';
 
 		echo '<br><a class="btn btn-success btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
