@@ -472,6 +472,7 @@ echo '
 */
 	if ($PCO_Accion=="guardar_crear_tabla")
 		{
+		    $error_consulta="";
 			$mensaje_error="";
 			if ($nombre_tabla=="") $mensaje_error=$MULTILANG_TblErrCrear;
 			if ($mensaje_error=="")
@@ -481,7 +482,7 @@ echo '
 
 					if ($MotorBD=="mysql" && !$operacion_enviada)
 						{
-							$error_consulta=PCO_EjecutarSQLUnaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id))");
+							$error_consulta=PCO_EjecutarSQLUnaria("CREATE TABLE ".$TablasApp."$nombre_tabla (id int(11) AUTO_INCREMENT,PRIMARY KEY  (id));");
 							$operacion_enviada=1;
 						}
 
@@ -540,19 +541,25 @@ echo '
 						}
 
 					//Valida si hubo errores
-					if ($error_consulta!="")
+					if (strlen($error_consulta)>5)
 						{
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 								<input type="Hidden" name="PCO_Accion" value="administrar_tablas">
 								<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_TblError2.'">
 								<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$MULTILANG_TblError3.' <i>'.$error_mysql.'</i>">
+								<input type="hidden" name="nombre_tabla" value="'.$TablasApp.$nombre_tabla.'">
 								</form>
 									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 						}
 					else
 						{
 							PCO_Auditar("Crea tabla $nombre_tabla");
-							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_tablas"></form>
+							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+								<input type="Hidden" name="PCO_Accion" value="editar_tabla">
+								<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_TblError2.'">
+								<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$MULTILANG_TblError3.' <i>'.$error_mysql.'</i>">
+								<input type="hidden" name="nombre_tabla" value="'.$TablasApp.$nombre_tabla.'">
+							    </form>
 									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 						}
 				}
