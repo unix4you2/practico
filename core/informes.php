@@ -578,7 +578,7 @@ if ($PCO_Accion=="actualizar_informe")
 		if ($mensaje_error=="")
 			{
 				// Actualiza los datos 
-				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."informe SET script_sql=?, conexion_origen_datos=?,subtotales_columna=?,subtotales_formato=?,tamano_paginacion=?, formulario_filtrado=?, soporte_datatable=?, variables_filtro=?, genera_pdf=?, formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=? WHERE id=? ","$script_sql$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$id");
+				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."informe SET consulta_sql=?, conexion_origen_datos=?,subtotales_columna=?,subtotales_formato=?,tamano_paginacion=?, formulario_filtrado=?, soporte_datatable=?, variables_filtro=?, genera_pdf=?, formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=? WHERE id=? ","$consulta_sql$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$id");
 				PCO_Auditar("Actualiza informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="editar_informe">
@@ -2019,7 +2019,7 @@ if ($PCO_Accion=="editar_informe")
                 abrir_dialogo_modal("myModalActualizaSQL",$MULTILANG_MonCommSQL,"modal-wide");
             ?>
                     <div class="well" style="color:#000000;"><?php echo $MULTILANG_InfSQL; ?>
-                    <textarea name="script_sql" id="script_sql" data-editor="sql" class="form-control" style="width: 950px; height: 450px;"><?php echo $registro_informe['script_sql']; ?></textarea>
+                    <textarea name="consulta_sql" id="consulta_sql" data-editor="sql" class="form-control" style="width: 950px; height: 450px;"><?php echo $registro_informe['consulta_sql']; ?></textarea>
                     </div>
             <?php
                 $barra_herramientas_modal='
@@ -2223,10 +2223,10 @@ if ($PCO_Accion=="editar_informe")
 				<font color="#FF0000"><b><?php echo strtoupper($MULTILANG_VistaPrev); ?> </b>(<?php echo $MULTILANG_MonCommSQL?>, <i>variables reemplazadas/vars replaced</i>):<br></font>
 				<?php 
             		//Si no hay SQL explicito entonces Genera la consulta en SQL para el informe a partir de los parametros
-            		if (strlen($registro_informe["script_sql"])<5)
+            		if (strlen($registro_informe["consulta_sql"])<5)
             		    echo construir_consulta_informe($registro_informe['id'],0);
             		else
-            		    echo PCO_ReemplazarVariablesPHPEnCadena($registro_informe["script_sql"]);
+            		    echo PCO_ReemplazarVariablesPHPEnCadena($registro_informe["consulta_sql"]);
 				 ?>
             </div>
             
