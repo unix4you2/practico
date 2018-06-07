@@ -41,7 +41,7 @@
 			<input type="Hidden" name="PCO_Accion" value="exportar_informe">
 			<input type="Hidden" name="PCO_Titulo" value="<?php echo $registro_informe["titulo"]; ?>">
 			<input type="Hidden" name="PCO_IDInforme" value="<?php echo $informe; ?>">
-			<input type="Hidden" name="PCO_Consulta" value="<?php echo base64_encode(construir_consulta_informe($informe,1)); ?>">
+			<input type="Hidden" name="PCO_Consulta" value="<?php echo base64_encode(PCO_ConstruirConsultaInforme($informe,1)); ?>">
 			<input type="Hidden" name="Precarga_EstilosBS" value="0">
 			<input type="Hidden" name="Presentar_FullScreen" value="1">
 

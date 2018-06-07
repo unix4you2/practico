@@ -17,7 +17,9 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/tablas.php
+core/informes.php
 core/formularios.php
+core/marco_export.php
 xml/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php

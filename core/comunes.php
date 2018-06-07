@@ -1407,7 +1407,7 @@ function PCO_CallBack_ReemplazarVariablesPHPEnCadena($ocurrencia)
 		Cadena con las variables reemplazadas
 
 	Ver tambien:
-		<construir_consulta_informe> | <PCO_CallBack_ReemplazarVariablesPHPEnCadena>
+		<PCO_ConstruirConsultaInforme> | <PCO_CallBack_ReemplazarVariablesPHPEnCadena>
 */
 function PCO_ReemplazarVariablesPHPEnCadena($cadena_original)
 	{
@@ -6869,7 +6869,7 @@ function determinar_campos_ocultos($informe)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: construir_consulta_informe
+	Function: PCO_ConstruirConsultaInforme
 	Genera el codigo SQL correspondiente a informe especifico por ID, es la consulta cruda de los datos para ser aplicada posteriormente a otra operacion
 
 	Variables de entrada:
@@ -6884,7 +6884,7 @@ function determinar_campos_ocultos($informe)
 	Ver tambien:
 		<PCO_CargarInforme>
 */
-function construir_consulta_informe($informe,$evitar_campos_ocultos=0)
+function PCO_ConstruirConsultaInforme($informe,$evitar_campos_ocultos=0)
 	{
 		global $ConexionPDO,$ArchivoCORE,$TablasCore,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
 		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
@@ -7188,7 +7188,7 @@ function campos_reales_informe($informe)
 		HTML, CSS y Javascript asociado al formulario
 
 	Ver tambien:
-		<PCO_CargarFormulario> | <construir_consulta_informe>
+		<PCO_CargarFormulario> | <PCO_ConstruirConsultaInforme>
 */
     //Funcion para compatibilidad hacia atras.  Desaparecera en la version 18.9
     function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0)
@@ -7261,7 +7261,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 
 		//Si no hay SQL explicito entonces Genera la consulta en SQL para el informe a partir de los parametros
 		if (strlen($registro_informe["consulta_sql"])<5)
-		    $consulta=construir_consulta_informe($informe,0); //Construye query del informe sin evitar campos ocultos (0)
+		    $consulta=PCO_ConstruirConsultaInforme($informe,0); //Construye query del informe sin evitar campos ocultos (0)
 		else
 		    $consulta=PCO_ReemplazarVariablesPHPEnCadena($registro_informe["consulta_sql"]);
 

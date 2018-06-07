@@ -2224,7 +2224,7 @@ if ($PCO_Accion=="editar_informe")
 				<?php 
             		//Si no hay SQL explicito entonces Genera la consulta en SQL para el informe a partir de los parametros
             		if (strlen($registro_informe["consulta_sql"])<5)
-            		    echo construir_consulta_informe($registro_informe['id'],0);
+            		    echo PCO_ConstruirConsultaInforme($registro_informe['id'],0);
             		else
             		    echo PCO_ReemplazarVariablesPHPEnCadena($registro_informe["consulta_sql"]);
 				 ?>
