@@ -82,6 +82,7 @@
 	$IdiomaPredeterminado='es';
 	$IdiomaEnLogin=0;
 	$Tema_PracticoFramework='bootstrap';
+	$PCO_ArchivoImagenFondo='img/fondo.jpg';
 
 	$TipoCaptchaLogin='visual';
 	$CaracteresCaptcha=4;

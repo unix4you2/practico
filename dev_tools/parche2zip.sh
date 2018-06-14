@@ -84,6 +84,8 @@ de parches para la herramienta puede ser encontrada en el siguiente
 enlace:  http://www.unixlandia.org/index.php/Politicas_envio_de_parches
 ------------------------------------------------------------------------
 "
+#Genera algunos elementos internos
+php objeto2xml.php
 
 # Mensajes de inicio e introduccion al script
 #	clear

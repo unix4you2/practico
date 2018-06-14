@@ -44,17 +44,21 @@
         </span>
         <select id="MotorBDNEW" name="MotorBDNEW" class="form-control" >
 				<option value="mysql">MySQL - MariaDB (3.x/4.x/5.x)</option>
-				<option value="pgsql">PostgreSQL</option>
-				<option value="sqlite">SQLite v2 - SQLite v3</option>
-				<option value="sqlsrv">FreeTDS/Microsoft SQL Server: Win32 [max version 2008]</option>
-				<option value="mssql">FreeTDS/Microsoft SQL Server: Win32&Linux, [max version 2000]</option>
-				<option value="dblib_mssql">DBLIB: Microsoft SQL Server via FreeTDS (requiere indicar puerto)</option>
-				<option value="dblib">DBLIB: Sybase</option>
-				<option value="ibm">IBM (DB2)</option>
-				<option value="odbc">Microsoft Access (ODBC v3: IBM DB2, unixODBC, Win32 ODBC)</option>
-				<option value="oracle">ORACLE (OCI Oracle Call Interface)</option>
-				<option value="ifmx">Informix (IBM Informix Dynamic Server)</option>
-				<option value="fbd">Firebird (Firebird/Interbase 6)</option>
+				<optgroup label="Soporte de segundo nivel / Second level support">
+    				<option value="pgsql">PostgreSQL</option>
+    				<option value="sqlite">SQLite v2 - SQLite v3</option>
+				</optgroup>
+				<optgroup label="Disponibles despues de instalar / Available after install">
+    				<option value="sqlsrv" disabled>FreeTDS/Microsoft SQL Server: Win32 [max version 2008]</option>
+    				<option value="mssql" disabled>FreeTDS/Microsoft SQL Server: Win32&Linux, [max version 2000]</option>
+    				<option value="dblib_mssql" disabled>DBLIB: Microsoft SQL Server via FreeTDS (requiere indicar puerto)</option>
+    				<option value="dblib" disabled>DBLIB: Sybase</option>
+    				<option value="ibm" disabled>IBM (DB2)</option>
+    				<option value="odbc" disabled>Microsoft Access (ODBC v3: IBM DB2, unixODBC, Win32 ODBC)</option>
+    				<option value="oracle" disabled>ORACLE (OCI Oracle Call Interface)</option>
+    				<option value="ifmx" disabled>Informix (IBM Informix Dynamic Server)</option>
+    				<option value="fbd" disabled>Firebird (Firebird/Interbase 6)</option>
+				</optgroup>
         </select>
         <span class="input-group-addon">
             <a href="#" title="<?php echo $MULTILANG_AyudaTitMotor; ?>: <?php echo $MULTILANG_AyudaDesMotor; ?>"><i class="fa fa-question-circle fa-fw"></i></a>

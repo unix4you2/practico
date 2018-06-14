@@ -300,7 +300,10 @@
     $MULTILANG_SaltoEdicion='Vous êtes sur le point de fermer la modification de l élément en cours et de passer à la fenêtre d édition de l élément sélectionné. Souhaitez-vous continuer?';
     $MULTILANG_ExportacionMasiva='Exportation massive';
     $MULTILANG_AgregarAExportacion='Ajouter un élément à la liste d exportation en masse';
-
+    $MULTILANG_ImagenFondo='Background image';
+    $MULTILANG_ImagenFondoDes='Define a background image to customize your application. It is recommended wide but light. Recommendation: You should combine theme colors and controls with the image palette to harmonize your design. By default the value is img/fondo.jpg but you can change it to any relative path from the root of the system, even to animated files.';
+    $MULTILANG_ImagenDefecto='Empty for nothing or relative path';
+    
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='Conception de l application';
 	$MULTILANG_TitDisenador='La conception de l application <b> est simple et rapide: </ b>';

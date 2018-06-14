@@ -252,6 +252,7 @@ $salida=sprintf("<?php
 	\$IdiomaPredeterminado='%s';
 	\$IdiomaEnLogin=%s;
 	\$Tema_PracticoFramework='%s';
+	\$PCO_ArchivoImagenFondo='%s';
 
 	\$TipoCaptchaLogin='%s';
 	\$CaracteresCaptcha=%s;
@@ -290,7 +291,7 @@ $salida=sprintf("<?php
 	\$ModoDesarrolladorPractico=%s; // [0=Inactivo|-10000=Activo]
 
 	// Define cadena separada por comas con usuarios administradores de la aplicacion
-	\$PCOVAR_Administradores='%s';",$Servidor,$BaseDatos,$UsuarioBD,$PasswordBD,$MotorBD,$PuertoBD,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$PermitirReporteBugsNEW,$DepuracionSQLNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$IdiomaEnLoginNEW,$Tema_PracticoFrameworkNEW,$TipoCaptchaLoginNEW,$CaracteresCaptchaNEW,$CodigoGoogleAnalyticsNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_PermitirReseteoClavesNEW,$Auth_PermitirAutoRegistroNEW,$Auth_PlantillaAutoRegistroNEW,$Auth_PresentarOauthInicioNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW,$Activar_ModuloChatNEW,$PWA_ActivaNEW,$PWA_DireccionTextoNEW,$PWA_DisplayNEW,$PWA_OrientacionNEW,$PWA_GCMSenderIDNEW,$_SeparadorCampos_NEW,$ModoDesarrolladorPracticoNEW,$PCOVAR_AdministradoresNEW);
+	\$PCOVAR_Administradores='%s';",$Servidor,$BaseDatos,$UsuarioBD,$PasswordBD,$MotorBD,$PuertoBD,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$PermitirReporteBugsNEW,$DepuracionSQLNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$IdiomaEnLoginNEW,$Tema_PracticoFrameworkNEW,$PCO_ArchivoImagenFondoNEW,$TipoCaptchaLoginNEW,$CaracteresCaptchaNEW,$CodigoGoogleAnalyticsNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_PermitirReseteoClavesNEW,$Auth_PermitirAutoRegistroNEW,$Auth_PlantillaAutoRegistroNEW,$Auth_PresentarOauthInicioNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW,$Activar_ModuloChatNEW,$PWA_ActivaNEW,$PWA_DireccionTextoNEW,$PWA_DisplayNEW,$PWA_OrientacionNEW,$PWA_GCMSenderIDNEW,$_SeparadorCampos_NEW,$ModoDesarrolladorPracticoNEW,$PCOVAR_AdministradoresNEW);
 			// Escribe el archivo de configuracion
 			$archivo_config=fopen("core/configuracion.php","w");
 			if($archivo_config==null)
@@ -758,45 +759,7 @@ $salida=sprintf("<?php
 				{
 				    abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary');
 				    echo $MULTILANG_FrmCopiaFinalizada."<hr>"; 
-				    
-                    $ArregloElementosExportacion=PCO_ParsearListasElementos($ListaElementos);
-                    foreach ($ArregloElementosExportacion as $ElementoExportar)
-                        {
-                            //Valida que sea un elemento exportable (de usuario o interno pero en modo desarrollador)
-                            if ($ElementoExportar>=$ModoDesarrolladorPractico)
-                                {
-                                    //Establece el prefijo del path final del archivo exportado segun el valor de ID asi como si llevara fecha y hora o no
-                                    $PrefijoPath="tmp/";
-                                    $InfijoPath="_".$PCO_FechaOperacion."_".$PCO_HoraOperacion;
-                                    if ($ElementoExportar<0)    
-                                        {
-                                            $PrefijoPath="xml/";
-                                            $InfijoPath=""; //Elimina fecha y hora dejando siempre un nombre de archivo fijo
-                                        }
-                                    //Exporta elementos tipo informe
-                                    if ($TipoElementos=="Inf")
-                                        {
-                                            //Verifica primero que si exista el ID de informe asociado antes de proceder
-                                            $RegistroElemento=@PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."informe WHERE id = '$ElementoExportar' ")->fetch();
-                                            if ($RegistroElemento["id"]!="")
-                                                {
-                                                    $PCO_NombreArchivoXML=$PrefijoPath."RepID_".$ElementoExportar.$InfijoPath.".xml";
-                                                    PCO_ExportarXMLInforme($ElementoExportar,$tipo_copia_objeto,$PCO_NombreArchivoXML);
-                                                }
-                                        }
-                                    //Exporta elementos tipo formulario
-                                    if ($TipoElementos=="Frm")
-                                        {
-                                            //Verifica primero que si exista el ID de informe asociado antes de proceder
-                                            $RegistroElemento=@PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."formulario WHERE id = '$ElementoExportar' ")->fetch();
-                                            if ($RegistroElemento["id"]!="")
-                                                {
-                                                    $PCO_NombreArchivoXML=$PrefijoPath."FormID_".$ElementoExportar.$InfijoPath.".xml";
-                                                    PCO_ExportarXMLFormulario($ElementoExportar,$tipo_copia_objeto,$PCO_NombreArchivoXML);
-                                                }
-                                        }
-                                }
-                        }
+				    PCO_ExportarDefinicionesXML($TipoElementos,$ListaElementos,$tipo_copia_objeto);
                     ?>
             			<div align=center>
             			<br><br>

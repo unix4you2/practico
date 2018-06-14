@@ -261,6 +261,17 @@
 										</div>
 										<div class="col-md-6">
 
+											<label for="Auth_PresentarOauthInicioNEW"><i class="fa fa-shield fa-2x fa-fw"></i> <?php echo $MULTILANG_PreferirOauth; ?>:</label>
+											<div class="form-group input-group">
+												<select id="Auth_PresentarOauthInicioNEW" name="Auth_PresentarOauthInicioNEW" class="selectpicker" >
+													<option value="1" <?php if (@$Auth_PresentarOauthInicio=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?></option>
+													<option value="0" <?php if (@$Auth_PresentarOauthInicio=="0" || @$Auth_PresentarOauthInicio=="") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?></option>
+												</select>
+												<span class="input-group-addon">
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_OauthPredeterminado; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+											</div>
+
 											<label for="Tema_PracticoFrameworkNEW"><i class="fa fa-low-vision fa-2x fa-fw"></i>  <?php echo $MULTILANG_FrmDesEstilo; ?>:</label>
 											<div class="form-group input-group">
 												<select id="Tema_PracticoFrameworkNEW" name="Tema_PracticoFrameworkNEW" class="selectpicker" data-size=7>
@@ -289,14 +300,13 @@
 												</span>
 											</div>
 
-											<label for="Auth_PresentarOauthInicioNEW"><i class="fa fa-shield fa-2x fa-fw"></i> <?php echo $MULTILANG_PreferirOauth; ?>:</label>
 											<div class="form-group input-group">
-												<select id="Auth_PresentarOauthInicioNEW" name="Auth_PresentarOauthInicioNEW" class="selectpicker" >
-													<option value="1" <?php if (@$Auth_PresentarOauthInicio=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?></option>
-													<option value="0" <?php if (@$Auth_PresentarOauthInicio=="0" || @$Auth_PresentarOauthInicio=="") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?></option>
-												</select>
 												<span class="input-group-addon">
-													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_OauthPredeterminado; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+													<i class="fa fa-picture-o fa-fw"></i> <?php echo $MULTILANG_ImagenFondo; ?>:
+												</span>
+												<input name="PCO_ArchivoImagenFondoNEW" value="<?php if (@$PCO_ArchivoImagenFondo!="") echo $PCO_ArchivoImagenFondo; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_ImagenDefecto; ?>">
+												<span class="input-group-addon">
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_ImagenFondoDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 												</span>
 											</div>
 
@@ -305,19 +315,6 @@
                                     
                                     <hr>
 									<div class="row">
-										<div class="col-md-6">
-											    <label for="LogoSuperiorNEW"><i class="fa fa-picture-o fa-2x fa-fw" aria-hidden="true"></i> <?php echo $MULTILANG_LogoParteSuperior; ?> (PNG 115x30 pixel)</label><br>
-												<div class="well" align=center><img src="img/logo.png?<?php echo filemtime('img/logo.png'); ?>" border=1></div>
-											    <div class="form-group input-group">
-    												<span class="input-group-addon">
-    													<i class="fa fa-upload fa-fw" aria-hidden="true"></i> <?php echo $MULTILANG_Actualizar; ?>
-    												</span>
-    												<input name="LogoSuperiorNEW" type="file" class="form-control btn btn-info">
-    												<span class="input-group-addon">
-    													<a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_ResolucionLogos; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-    												</span>
-											    </div>
-										</div>
 										<div class="col-md-6">
 											    <label for="LogoLoginNEW"><i class="fa fa-picture-o fa-2x fa-fw" aria-hidden="true"></i> <?php echo $MULTILANG_LogoDuranteLogin; ?> (PNG 230x160 pixel)</label><br>
 												<div class="well" align=center><img src="img/practico_login.png?<?php echo filemtime('img/logo.png'); ?>" border=1></div>
@@ -330,6 +327,19 @@
     													<a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_ResolucionLogos; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
     												</span>
     											</div>
+										</div>
+										<div class="col-md-6">
+											    <label for="LogoSuperiorNEW"><i class="fa fa-picture-o fa-2x fa-fw" aria-hidden="true"></i> <?php echo $MULTILANG_LogoParteSuperior; ?> (PNG 115x30 pixel)</label><br>
+												<div class="well" align=center><img src="img/logo.png?<?php echo filemtime('img/logo.png'); ?>" border=1></div>
+											    <div class="form-group input-group">
+    												<span class="input-group-addon">
+    													<i class="fa fa-upload fa-fw" aria-hidden="true"></i> <?php echo $MULTILANG_Actualizar; ?>
+    												</span>
+    												<input name="LogoSuperiorNEW" type="file" class="form-control btn btn-info">
+    												<span class="input-group-addon">
+    													<a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_ResolucionLogos; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+    												</span>
+											    </div>
 										</div>
 									</div>
                                 </div>

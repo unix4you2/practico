@@ -103,10 +103,22 @@
 		<?php
 			// Incluye marcos con barras de navegacion
 			include_once("core/marco_nav.php");
+
+            //Establece ruta estatica para la carga de imagen de fondo (si aplica)
+			if(empty($_SERVER["HTTPS"]))
+				$protocolo_sitioweb="http://";
+			else
+				$protocolo_sitioweb="https://";
+			// Si se tiene un protocolo preferido sobreescribe lo auto-detectado
+			if (@$Auth_ProtoTransporte=="http" || @$Auth_ProtoTransporte=="https")
+				$protocolo_sitioweb=$Auth_ProtoTransporte."://";
+			// Construye la URL para solicitar el webservice.  La URL se debe poder resolver por el servidor web correctamente, ya sea por dominio o IP (interna o publica).  Ver /etc/hosts si algo.
+			$prefijo_sitioweb=$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].str_replace("index.php","",$_SERVER['PHP_SELF']);
+			$url_imagen_fondo = $protocolo_sitioweb.$prefijo_sitioweb."/".$PCO_ArchivoImagenFondo."?".filemtime($PCO_ArchivoImagenFondo);
 		?>
 
         <!-- CONTENIDO DE APLICACION -->
-        <div id="page-wrapper" style="background-color: <?php echo $PCO_ColorFondoGeneral; ?>;">  <!-- page-content-wrapper -->
+        <div id="page-wrapper" style="background-color: <?php echo $PCO_ColorFondoGeneral; ?>; background-image: url('<?php echo $url_imagen_fondo; ?>'); background-repeat: no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">  <!-- page-content-wrapper -->
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">

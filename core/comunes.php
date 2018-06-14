@@ -353,6 +353,69 @@ function PCO_ImportarDefinicionesXML()
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: PCO_ExportarDefinicionesXML
+	Exporta masivamente a XML las definiciones de elementos de un tipo dado
+
+	Variables de entrada:
+
+		TipoElementos - Indica el tipo de elementos que deben ser exportados:  Inf o Frm
+		ListaElementos - Una lista de los elementos de ese tipo que deben ser exportados en un formato similar a la impresion  EJ: 1,2,5-6,8,12-30
+		tipo_copia_objeto - Indica si los objetos seran generados con ID estatico o dinamico: XML_IdEstatico | XML_IdDinamico
+
+	Salida:
+
+		Archivos generados para los elementos seleccionados
+
+	Ver tambien:
+		<PCO_ExportarXMLInforme> | <PCO_ImportarXMLInforme> | <PCO_ExportarXMLFormulario> | <PCO_ImportarXMLFormulario>
+*/
+function PCO_ExportarDefinicionesXML($TipoElementos,$ListaElementos,$tipo_copia_objeto)
+    {
+        global $ModoDesarrolladorPractico,$PCO_FechaOperacion,$PCO_HoraOperacion,$TablasCore;
+        $ArregloElementosExportacion=PCO_ParsearListasElementos($ListaElementos);
+        foreach ($ArregloElementosExportacion as $ElementoExportar)
+            {
+                //Valida que sea un elemento exportable (de usuario o interno pero en modo desarrollador)
+                if ($ElementoExportar>=$ModoDesarrolladorPractico)
+                    {
+                        //Establece el prefijo del path final del archivo exportado segun el valor de ID asi como si llevara fecha y hora o no
+                        $PrefijoPath="tmp/";
+                        $InfijoPath="_".$PCO_FechaOperacion."_".$PCO_HoraOperacion;
+                        if ($ElementoExportar<0)    
+                            {
+                                $PrefijoPath="xml/";
+                                $InfijoPath=""; //Elimina fecha y hora dejando siempre un nombre de archivo fijo
+                            }
+                        //Exporta elementos tipo informe
+                        if ($TipoElementos=="Inf")
+                            {
+                                //Verifica primero que si exista el ID de informe asociado antes de proceder
+                                $RegistroElemento=@PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."informe WHERE id = '$ElementoExportar' ")->fetch();
+                                if ($RegistroElemento["id"]!="")
+                                    {
+                                        $PCO_NombreArchivoXML=$PrefijoPath."RepID_".$ElementoExportar.$InfijoPath.".xml";
+                                        PCO_ExportarXMLInforme($ElementoExportar,$tipo_copia_objeto,$PCO_NombreArchivoXML);
+                                    }
+                            }
+                        //Exporta elementos tipo formulario
+                        if ($TipoElementos=="Frm")
+                            {
+                                //Verifica primero que si exista el ID de informe asociado antes de proceder
+                                $RegistroElemento=@PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."formulario WHERE id = '$ElementoExportar' ")->fetch();
+                                if ($RegistroElemento["id"]!="")
+                                    {
+                                        $PCO_NombreArchivoXML=$PrefijoPath."FormID_".$ElementoExportar.$InfijoPath.".xml";
+                                        PCO_ExportarXMLFormulario($ElementoExportar,$tipo_copia_objeto,$PCO_NombreArchivoXML);
+                                    }
+                            }
+                    }
+            }
+    }
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: PCO_ParsearListasElementos
 	Toma una cadena con la lista de elementos separados por comas y rangos por guiones y los genera uno a uno sobre un arreglo que se retorna luego para realizar operaciones individuales sobre ellos.  Ignora rangos invertidos o donde no sean numericos.
 
@@ -3921,8 +3984,8 @@ function PCO_VentanaLogin()
 
                 <!--Login Estandar-->
                 <div class="row">
-                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xs-offset-0 col-sm-offset-4 col-md-offset-4 col-lg-offset-4">
-                    <div id="EnfasisLoginZoom" class="EnfasisLoginZoom">
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xs-offset-0 col-sm-offset-4 col-md-offset-4 col-lg-offset-4" >
+                    <div id="EnfasisLoginZoom" class="EnfasisLoginZoom" style="box-shadow: 3px 3px 3px gray;">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><?php echo $MULTILANG_TituloLogin; ?></h3>

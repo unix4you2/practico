@@ -300,7 +300,10 @@
     $MULTILANG_SaltoEdicion='आप वर्तमान तत्व के संपादन को बंद करने वाले हैं और चयनित तत्व के संपादन विंडो पर कूदते हैं। क्या आप जारी रखना चाहते हैं?';
     $MULTILANG_ExportacionMasiva='भारी निर्यात';
     $MULTILANG_AgregarAExportacion='थोक निर्यात सूची में आइटम जोड़ें';
-
+    $MULTILANG_ImagenFondo='Background image';
+    $MULTILANG_ImagenFondoDes='Define a background image to customize your application. It is recommended wide but light. Recommendation: You should combine theme colors and controls with the image palette to harmonize your design. By default the value is img/fondo.jpg but you can change it to any relative path from the root of the system, even to animated files.';
+    $MULTILANG_ImagenDefecto='Empty for nothing or relative path';
+    
 	//Asistente disenador aplicaciones
 	$MULTILANG_DesAppBoton='आवेदन डिजाइन';
 	$MULTILANG_TitDisenador='आवेदन डिजाइन <b>सरल और तेज है:</b>';

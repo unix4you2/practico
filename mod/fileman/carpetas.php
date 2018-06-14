@@ -120,6 +120,19 @@
 									'alias' 		=> 'Cargas por formulario',
 									'accessControl' => 'access'             // disable and hide dot starting files (OPTIONAL)
 								)
+                    // 		// Trash volume
+                    // 		,
+                    // 		array(
+                    // 			'id'            => '1',
+                    // 			'driver'        => 'Trash',
+                    // 			'path'          => '../../archivos/.trash/',         // path to files (REQUIRED)
+                    // 			'winHashFix'    => DIRECTORY_SEPARATOR !== '/', // to make hash same to Linux one on windows too
+                    // 			'uploadDeny'    => array('all'),                // Recomend the same settings as the original volume that uses the trash
+                    // 			'uploadAllow'   => array('image', 'text/plain'),// Same as above
+                    // 			'uploadOrder'   => array('deny', 'allow'),      // Same as above
+                    // 			'accessControl' => 'access',                    // Same as above
+                    // 		)
+
 						)
 				);
 		}
