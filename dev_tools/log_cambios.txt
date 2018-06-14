@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
 VersionCompatibleAno="18"
-VersionCompatibleMes="5"
+VersionCompatibleMes="7"
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
 VersionFinalAno="18"
-VersionFinalMes="7"
+VersionFinalMes="10"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
@@ -16,15 +16,6 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
-core/formularios.php
-core/informes.php
-core/objetos.php
-core/tablas.php
-core/marco_conf.php
-core/marco_arriba.php
-core/marco_export.php
-mod/fileman/elfinder/*
-img/fondo.jpg
 xml/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
@@ -39,18 +30,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Ahora se advierte acerca de la existencia de campos con ID HTML duplicado o nombre de campo vinculado en base de datos duplicado durante el diseño de formularios.
-* Added: Ahora se valida la existencia de campos huerfanos durante el diseño de formularios.  Esto evita que el programador olvide la existencia de posibles campos por fuera del esquema del formulario; pero sin privarlo de sus funcionalidades derivadas.
-* Added: Posibilidad de establecer imagenes de fondo de aplicacion.
-* Enhan: Las conexiones de bases de datos (SQL, NoSQL y replicaciones) presentan detalles de su nombre o identificador cuando su ejecución devuelve un error.  De esa manera se depura de manera se facilita la depuración sobre aplicaciones que utilizan múltiples motores.
-* Enhan: Después de la creación de tablas se redirige al editor de la misma para que el programador agregue los campos que correspondan.
-* Enhan: Ventanas de login ajustadas
-* Enhan: Optimizado proceso de exportacion de elementos
-* Enhan: Procesos de empaquetado son ahora automatizados para aquellos usuarios con modo de desarrollador interno activado.
-* Enhan: Actualización del explorador de archivos (ver 2.1.39)
-* Fixed: Cadenas faltantes en idioma francés.
-* Fixed: Mensajes de error al crear tablas.  Eran falsos positivos, la operación de creación en realidad se ejecutaba sin problemas.
-* Fixed: Scripts duplicados de SQL en tiempo de instalacion
+
 "
 
 ########################################################################
