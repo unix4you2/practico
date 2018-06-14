@@ -7,6 +7,34 @@
             |___/ 
 ```
 
+## Versión 18.7 (2018-07-01)
+* Added: Ahora se advierte acerca de la existencia de campos con ID HTML duplicado o nombre de campo vinculado en base de datos duplicado durante el diseño de formularios.
+* Added: Ahora se valida la existencia de campos huerfanos durante el diseño de formularios.  Esto evita que el programador olvide la existencia de posibles campos por fuera del esquema del formulario; pero sin privarlo de sus funcionalidades derivadas.
+* Added: Posibilidad de establecer imagenes de fondo de aplicacion.
+* Enhan: Las conexiones de bases de datos (SQL, NoSQL y replicaciones) presentan detalles de su nombre o identificador cuando su ejecución devuelve un error.  De esa manera se depura de manera se facilita la depuración sobre aplicaciones que utilizan múltiples motores.
+* Enhan: Después de la creación de tablas se redirige al editor de la misma para que el programador agregue los campos que correspondan.
+* Enhan: Ventanas de login ajustadas
+* Enhan: Optimizado proceso de exportacion de elementos
+* Enhan: Procesos de empaquetado son ahora automatizados para aquellos usuarios con modo de desarrollador interno activado.
+* Enhan: Actualización del explorador de archivos (ver 2.1.39)
+* Fixed: Cadenas faltantes en idioma francés.
+* Fixed: Mensajes de error al crear tablas.  Eran falsos positivos, la operación de creación en realidad se ejecutaba sin problemas.
+* Fixed: Scripts duplicados de SQL en tiempo de instalacion
+
+## Versión 18.5 (2018-05-01)
+* Added: Se permite seleccion del operador NOT LIKE durante las condiciones de informes.
+* Added: Consultas avanzadas sobre los informes.  Se permite ingresar código específico para las consultas, aunque éstas no se beneficiarán de algunas propiedades de las definidas internamente por el Framework pero permitirá la generación de consultas SQL o llamados a procedimientos almacenados directamente.
+* Added: Soporte para ejecucion de la aplicacion en fullscreen sobre iOS y Safari.
+* Enhan: Actualizacion {P}Coder 18.6
+* Enhan: Se protege la edicion de parametros basicos de configuracion para el motor.  Estos deberan ser tocados solo por archivo para hacer de manera más consciente esa tarea para los usuarios administradores avanzados que por error involuntario o de navegador podrían dejar inactiva la aplicación.
+* Enhan: Reemplazo de archivos asociados a gestión de conexiones extra y replicación por funciones internas del Framework.
+* Enhan: Reemplazo de funciones asociados a al sistema de monitoreo por funciones internas del Framework.
+* Enhan: Valores de placeholder para campos de tipo texto soportan ahora reemplazo de variables en formato {PHP} para facilitar aplicaciones multi-idioma.
+* Fixed: Usuarios que no han guardado configuraciones en su panel de admin despues de actualizar no pueden ver graficos del panel
+* Fixed: Mejorada funcion callback de reemplazo de variables para versiones muy obsoletas de PHP que no soportan llamado recursivo. 
+* Fixed: Supresion de las funciones de verificacion automatica de sintaxis en servidores windows, ya que estos no soportan el comando de PHP sobre el PATH general a menos que se especifique su path especifico.
+* Fixed: Corrección a la librería de exploración de archivos para {P}Coder sobre servidores windows que no soportan una raiz establecida por defecto.
+
 ## Versión 18.3 (2018-03-29)
 * LEAME: ADVERTENCIA:  Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada a metodos y funciones internas, las siguientes funciones han cambiado de nombre:
   cargar_informe() cambia a PCO_CargarInforme()

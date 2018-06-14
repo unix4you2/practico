@@ -50,6 +50,7 @@ LogCambios="
 * Enhan: Actualización del explorador de archivos (ver 2.1.39)
 * Fixed: Cadenas faltantes en idioma francés.
 * Fixed: Mensajes de error al crear tablas.  Eran falsos positivos, la operación de creación en realidad se ejecutaba sin problemas.
+* Fixed: Scripts duplicados de SQL en tiempo de instalacion
 "
 
 ########################################################################
