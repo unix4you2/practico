@@ -139,6 +139,7 @@ Link: [John F. Arroyave Gutierrez]  (mailto:unix4you2@gmail.com)
 
 Group: Mod  {
 
+   File: /js/elFinder.js  (mod/fileman/elfinder/js/elfinder.full.js)
    File: convertidor_pdf_funcion_predeterminada  (mod/pdf/index.php)
    File: fileman_admin_embebido  (mod/fileman/index.php)
    File: Funciones personalizadas  (mod/personalizadas_pos.php)

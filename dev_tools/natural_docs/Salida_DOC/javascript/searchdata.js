@@ -90,7 +90,7 @@ var indexSectionsWithContent = {
       "Z": false
       },
    "Files": {
-      "Symbols": false,
+      "Symbols": true,
       "Numbers": false,
       "A": false,
       "B": false,
