@@ -2143,6 +2143,7 @@ if ($PCO_Accion=="editar_formulario")
                         <tr>
                             <td><b><?php echo $MULTILANG_Titulo; ?> (<?php echo $MULTILANG_Tipo?>)</b></td>
 							<td><b><?php echo $MULTILANG_Campo; ?></b></td>
+							<td><b>ID_HTML</b></td>
 							<td><b><?php echo $MULTILANG_Columna; ?></b></td>
 							<td><b><?php echo $MULTILANG_Peso; ?></b></td>
 							<td><b><?php echo $MULTILANG_FrmObligatorio; ?></b> <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Importante; ?></b><br><?php echo $MULTILANG_FrmDesObliga; ?>"><i class="fa fa-question-circle"></i></a></td>
@@ -2190,6 +2191,7 @@ if ($PCO_Accion=="editar_formulario")
 						echo '<tr>
                                 <td><b>'.$registro["titulo"].'</b> ('.$registro["tipo"].')'.$Complemento_NombreEmbebido.'</td>
 								<td><b>'.$registro["campo"].'</b></td>
+								<td><b>'.$registro["id_html"].'</b></td>
 								<td align=center nowrap>
 									<form action="'.$ArchivoCORE.'" method="POST" name="ifoc'.$registro["id"].'" id="ifoc'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 										<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
@@ -2652,9 +2654,10 @@ if ($PCO_Accion=="editar_formulario")
 
                 //Busca posibles campos con nombre o IDHTML duplicado para presentar advertencia si aplica
                 $MensajeCamposDuplicados='';
-                $ConsultaCamposDuplicados=PCO_EjecutarSQL("SELECT * FROM (SELECT id,$ListaCamposSinID_formulario_objeto FROM ".$TablasCore."formulario_objeto WHERE formulario=$formulario GROUP BY id_html UNION ALL SELECT id,$ListaCamposSinID_formulario_objeto FROM ".$TablasCore."formulario_objeto WHERE formulario=$formulario GROUP BY campo) as UnionRegistros");
-                while ($RegistroCamposDuplicados=$ConsultaCamposDuplicados->fetch())
-                    $MensajeCamposDuplicados.='<li style="padding-left: 50px;">ID:<b>'.$RegistroCamposDuplicados["id"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Titulo.':<b>'.$RegistroCamposDuplicados["titulo"].'</b>&nbsp;&nbsp;&nbsp; Campo:<b>'.$RegistroCamposDuplicados["campo"].'</b>&nbsp;&nbsp;&nbsp; ID_HTML:<b>'.$RegistroCamposDuplicados["id_html"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Columna.':<b>'.$RegistroCamposDuplicados["columna"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Pestana.':<b>'.$RegistroCamposDuplicados["pestana_objeto"].'</b></li>';
+                $ConsultaCamposDuplicadosIDHTML=PCO_EjecutarSQL("SELECT * FROM (SELECT COUNT(*) AS ConteoDuplicados, id,$ListaCamposSinID_formulario_objeto FROM ".$TablasCore."formulario_objeto WHERE formulario=$formulario GROUP BY id_html UNION ALL SELECT COUNT(*) AS ConteoDuplicados, id,$ListaCamposSinID_formulario_objeto FROM ".$TablasCore."formulario_objeto WHERE formulario=$formulario GROUP BY campo) as UnionRegistros");
+                while ($RegistroCamposDuplicados=$ConsultaCamposDuplicadosIDHTML->fetch())
+                    if ($RegistroCamposDuplicados["ConteoDuplicados"]>1) $MensajeCamposDuplicados.='<li style="padding-left: 50px;">ID:<b>'.$RegistroCamposDuplicados["id"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Titulo.':<b>'.$RegistroCamposDuplicados["titulo"].'</b>&nbsp;&nbsp;&nbsp; Campo:<b>'.$RegistroCamposDuplicados["campo"].'</b>&nbsp;&nbsp;&nbsp; ID_HTML:<b>'.$RegistroCamposDuplicados["id_html"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Columna.':<b>'.$RegistroCamposDuplicados["columna"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Pestana.':<b>'.$RegistroCamposDuplicados["pestana_objeto"].'</b></li>';
+
                 if ($MensajeCamposDuplicados!='')
                     mensaje($MULTILANG_FrmIDHTMDuplicado,"$MULTILANG_FrmCamposAProposito $MensajeCamposDuplicados","","fa fa-fw fa-2x fa-info-circle","alert alert-dismissible alert-warning btn-xs");
 
