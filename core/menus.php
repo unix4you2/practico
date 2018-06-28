@@ -39,7 +39,7 @@
 
 	Ver tambien:
 
-		<administrar_menu> | <detalles_menu>
+		<PCOFUNC_AdministrarMenu> | <detalles_menu>
 */
 function selector_objetos_menu()
     {
@@ -336,7 +336,7 @@ if ($PCO_Accion=="eliminar_menu")
 				Entradas de menu actualizadas.
 
 			Ver tambien:
-			<administrar_menu> | <detalles_menu>
+			<PCOFUNC_AdministrarMenu> | <detalles_menu>
 		*/
 		// Elimina los datos de la opcion
 		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."menu WHERE id=? ","$id");
@@ -372,7 +372,7 @@ if ($PCO_Accion=="eliminar_menu")
 				Entradas de menu actualizadas.
 
 			Ver tambien:
-			<administrar_menu> | <detalles_menu> | <eliminar_menu>
+			<PCOFUNC_AdministrarMenu> | <detalles_menu> | <eliminar_menu>
 		*/
 	if ($PCO_Accion=="guardar_menu")
 		{
@@ -391,7 +391,7 @@ if ($PCO_Accion=="eliminar_menu")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="administrar_menu">
+						<input type="Hidden" name="PCO_Accion" value="PCOFUNC_AdministrarMenu">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
@@ -404,7 +404,7 @@ if ($PCO_Accion=="eliminar_menu")
 /* ################################################################## */
 /* ################################################################## */
 		/*
-			Function: administrar_menu
+			Function: PCOFUNC_AdministrarMenu
 			Presenta la lista de todas las opciones definidas para el menu de usuarios con la posibilidad de agregar nuevas o de administrar las existentes. Incluye la carga de imagenes dentro de marco oculto para su seleccion como iconos.
 
 			(start code)
@@ -417,7 +417,7 @@ if ($PCO_Accion=="eliminar_menu")
 			Ver tambien:
 			<guardar_menu> | <detalles_menu> | <eliminar_menu>
 		*/
-if ($PCO_Accion=="administrar_menu")
+if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 	{
 		$PCO_Accion=escapar_contenido($PCO_Accion); //Limpia cadena para evitar XSS
 		echo '<div align="center"><br>';
@@ -441,7 +441,19 @@ if ($PCO_Accion=="administrar_menu")
                 <div class="row">
                     <div class="col-md-6">
 
-                            [<?php echo $MULTILANG_MnuApariencia; ?>]
+                            [<?php echo $MULTILANG_MnuApariencia; ?>]<br>
+    
+                            <label for="tipo_menu"><?php echo $MULTILANG_FrmTipoObjeto; ?>:</label>
+                            <div class="form-group input-group">
+                                <select  id="tipo_menu" name="tipo_menu" class="selectpicker"  data-style="btn-info" OnChange="CambiarCamposVisibles(this.options[this.selectedIndex].value);">
+                                    <option value=""><?php echo $MULTILANG_Opcion; ?></option>
+                                    <option value="grp"><?php echo $MULTILANG_Agrupador; ?></option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_AgrupadorDes; ?>"><i class="fa fa-info-circle icon-info"></i></a>
+                                </span>
+                            </div>
+
 
                             <div class="form-group input-group">
                                 <input name="texto"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuTexto; ?>">
@@ -826,7 +838,7 @@ if ($PCO_Accion=="administrar_menu")
 		La funcion agrega un filtrado para aquellos usuarios diferentes del administrador.  El usuario administrador mostrara siempre todas las opciones existentes por defecto.
 
 	Ver tambien:
-		<administrar_menu>
+		<PCOFUNC_AdministrarMenu>
 */
 
 	if ($PCO_Accion=="Ver_menu" && $PCOSESS_SesionAbierta)

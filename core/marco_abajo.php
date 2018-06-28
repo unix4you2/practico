@@ -354,7 +354,7 @@
 
     <?php
         //Si se requiere selector de iconos genera los eventos
-        if (@$PCO_Accion=="administrar_menu" || @$PCO_Accion=="detalles_menu")
+        if (@$PCO_Accion=="PCOFUNC_AdministrarMenu" || @$PCO_Accion=="detalles_menu")
             {
     ?>
         <script language="JavaScript">

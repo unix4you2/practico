@@ -86,7 +86,7 @@
                         </td>
                         <td>
                             <form action="" method="post">
-                                <input type="hidden" name="PCO_Accion" value="administrar_menu">
+                                <input type="hidden" name="PCO_Accion" value="PCOFUNC_AdministrarMenu">
                                 <button type="submit" class="btn btn-warning"><i class="fa fa-external-link-square fa-fw fa-4x"></i></button>
                             </form>
                         </td>

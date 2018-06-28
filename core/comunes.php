@@ -2264,10 +2264,10 @@ function permiso_heredado_accion($PCO_Accion)
 		// Funciones en core/menus.php
 		if ($PCO_Accion== "Ver_menu")							$retorno = 1;
 		if ($PCO_Accion== "buscar_permisos_practico")			$retorno = 1;
-        if ($PCO_Accion== "guardar_menu")						$retorno = permiso_agregado_accion("administrar_menu");
-		if ($PCO_Accion== "eliminar_menu")						$retorno = permiso_agregado_accion("administrar_menu");
-		if ($PCO_Accion== "detalles_menu")						$retorno = permiso_agregado_accion("administrar_menu");
-		if ($PCO_Accion== "actualizar_menu")					$retorno = permiso_agregado_accion("administrar_menu");
+        if ($PCO_Accion== "guardar_menu")						$retorno = permiso_agregado_accion("PCOFUNC_AdministrarMenu");
+		if ($PCO_Accion== "eliminar_menu")						$retorno = permiso_agregado_accion("PCOFUNC_AdministrarMenu");
+		if ($PCO_Accion== "detalles_menu")						$retorno = permiso_agregado_accion("PCOFUNC_AdministrarMenu");
+		if ($PCO_Accion== "actualizar_menu")					$retorno = permiso_agregado_accion("PCOFUNC_AdministrarMenu");
 		// Funciones en core/tablas.php
 		if ($PCO_Accion== "asistente_tablas")					$retorno = permiso_agregado_accion("administrar_tablas");
 		if ($PCO_Accion== "guardar_crear_tabla_asistente")		$retorno = permiso_agregado_accion("administrar_tablas");
@@ -2446,7 +2446,7 @@ function permiso_raiz_admin($PCO_Accion)
 						case "administrar_tablas":
 						case "administrar_formularios":
 						case "administrar_informes":
-						case "administrar_menu":
+						case "PCOFUNC_AdministrarMenu":
 						case "listar_usuarios":
 						case "actualizar_practico":
 							$retorno = 1;
@@ -4369,7 +4369,7 @@ function mensaje($titulo,$texto,$DEPRECATED_ancho="",$icono,$estilo)
 
 	Ver tambien:
 
-		<administrar_menu> | <detalles_menu>
+		<PCOFUNC_AdministrarMenu> | <detalles_menu>
 */
 function selector_iconos_awesome()
 	{

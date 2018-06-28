@@ -883,6 +883,8 @@
     $MULTILANG_MnuTgtTop='Todo el cuerpo de la ventana actual';
     $MULTILANG_MnuTgt='Destino (S&oacute;lo opciones con URL o comandos Javascript:)';
     $MULTILANG_ImagenMenu='Imagen: Seleccione un icono o indique la ruta relativa';
+    $MULTILANG_Agrupador='Agrupador de opciones';
+    $MULTILANG_AgrupadorDes='Define si la opcion sera presentada directamente en la ubicacion indicada o si se desea generar un menu desplegable (dropdown) con mas opciones dentro.';
 
 	//Objetos, seguridad y otros
 	$MULTILANG_ObjError='El tipo de objeto recibido en este comando es desconocido';
