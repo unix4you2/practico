@@ -36,7 +36,7 @@
 	$ListaCamposSinID_informe_tablas='informe,valor_tabla,valor_alias';
 	$ListaCamposSinID_informe_boton='titulo,estilo,informe,tipo_accion,accion_usuario,visible,peso,confirmacion_texto,destino,pantalla_completa,precargar_estilos,imagen';
 	$ListaCamposSinID_informe='titulo,descripcion,categoria,agrupamiento,ordenamiento,ancho,alto,formato_final,formato_grafico,genera_pdf,variables_filtro,soporte_datatable,formulario_filtrado,tamano_paginacion,subtotales_columna,subtotales_formato,conexion_origen_datos,consulta_sql';
-	$ListaCamposSinID_menu='texto,peso,url,destino,tipo_comando,comando,nivel_usuario,posible_arriba,posible_centro,posible_escritorio,seccion,imagen,posible_izquierda,tipo_menu,formulario';
+	$ListaCamposSinID_menu='texto,padre,peso,url,destino,tipo_comando,comando,nivel_usuario,posible_arriba,posible_centro,posible_escritorio,seccion,imagen,posible_izquierda,tipo_menu,formulario';
 	$ListaCamposSinID_parametros='nombre_empresa_largo,nombre_empresa_corto,nombre_aplicacion,version,fecha_lanzamiento,licencia,creditos,funciones_personalizadas,federado_servidor,federado_usuario,federado_clave,federado_motor,federado_basedatos,federado_tabla,federado_campousuario,federado_campoclave,federado_encripcion,federado_puerto';
 	$ListaCamposSinID_llaves_api='nombre,llave,secreto,uri,dominio_autorizado,ip_autorizada,funciones_autorizadas';
 	$ListaCamposSinID_chat='from,to,message,sent,recd';

@@ -384,7 +384,7 @@ if ($PCO_Accion=="eliminar_menu")
 			if ($mensaje_error=="")
 				{
 					// Guarda los datos del comando o item de menu
-					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,0)","$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$posible_izquierda$_SeparadorCampos_$tipo_menu");
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0)","$texto$_SeparadorCampos_$padre$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$posible_izquierda$_SeparadorCampos_$tipo_menu");
 					PCO_Auditar("Agrega en menu: $texto");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
@@ -398,7 +398,6 @@ if ($PCO_Accion=="eliminar_menu")
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 		}
-
 
 
 /* ################################################################## */
@@ -460,9 +459,9 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(9);
+					OcultarCampos(10);
 					// Muestra campos segun tipo de objeto
-					if (tipo_objeto_activo=="opc")   VisualizarCampos("1,2,3,4,5,6,7,8,9");
+					if (tipo_objeto_activo=="opc")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10");
 					if (tipo_objeto_activo=="grp")   VisualizarCampos("1,2,3,4,5,9");
 				}
 		</script>
@@ -489,6 +488,20 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
                                     <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_AgrupadorDes; ?>"><i class="fa fa-info-circle icon-info"></i></a>
                                 </span>
                             </div>
+
+						<div id='campo10' style="display:none;">
+                            <label for="padre"><?php echo $MULTILANG_MnuPadre; ?>:</label>
+                            <div class="form-group input-group">
+                                <select id="padre" name="padre" class="form-control input-sm">
+                                <option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                                <?php
+                                    $consulta_opciones_agrupadoras=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE tipo_menu='grp' ORDER BY texto");
+                                    while($registro_opcion_agrupadora = $consulta_opciones_agrupadoras->fetch())
+                                        echo '<option value="'.$registro_opcion_agrupadora["id"].'" >'.$registro_opcion_agrupadora["texto"].'</option>';
+                                ?>
+                                </select>
+                            </div>
+                        </div>
 
 						<div id='campo1' style="display:none;">
                             [<?php echo $MULTILANG_MnuApariencia; ?>]<br>
