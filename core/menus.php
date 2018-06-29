@@ -384,7 +384,7 @@ if ($PCO_Accion=="eliminar_menu")
 			if ($mensaje_error=="")
 				{
 					// Guarda los datos del comando o item de menu
-					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)","$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$posible_izquierda");
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,0)","$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$posible_izquierda$_SeparadorCampos_$tipo_menu");
 					PCO_Auditar("Agrega en menu: $texto");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}
@@ -478,8 +478,6 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
                 <div class="row">
                     <div class="col-md-6">
 
-                            [<?php echo $MULTILANG_MnuApariencia; ?>]<br>
-    
                             <label for="tipo_menu"><?php echo $MULTILANG_FrmTipoObjeto; ?>:</label>
                             <div class="form-group input-group">
                                 <select  id="tipo_menu" name="tipo_menu" class="selectpicker"  data-style="btn-info" OnChange="CambiarCamposVisibles(this.options[this.selectedIndex].value);">
@@ -493,6 +491,8 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
                             </div>
 
 						<div id='campo1' style="display:none;">
+                            [<?php echo $MULTILANG_MnuApariencia; ?>]<br>
+
                             <div class="form-group input-group">
                                 <input name="texto"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuTexto; ?>">
                                 <span class="input-group-addon">
@@ -632,9 +632,11 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
                             </div>
                         </div>
 
+                        <br>
 						<div id='campo9' style="display:none;">  
                             <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Agregar; ?></a>
                         </div>
+
                             <a class="btn btn-block btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> <?php echo $MULTILANG_Cancelar; ?></a>
 
 

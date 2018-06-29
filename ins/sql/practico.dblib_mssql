@@ -73,6 +73,8 @@ CREATE TABLE core_menu (
   seccion varchar(250) default '',  #Cuando Posible centro=1 define la seccion donde va por agrupacion
   imagen varchar(250) default '',
   posible_izquierda int(1) default '0',
+  tipo_menu varchar(10) default 'opc',
+  formulario int(11) default '0',
   PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -539,4 +541,3 @@ CREATE TABLE core_tabla_comodin (
   id int(10) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-

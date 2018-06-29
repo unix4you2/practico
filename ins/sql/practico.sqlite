@@ -72,8 +72,10 @@ CREATE TABLE core_menu (
   posible_escritorio integer default '0',
   seccion text default '',
   imagen text default '',
-  posible_izquierda integer default '0'
-  
+  posible_izquierda integer default '0',
+  tipo_menu text default 'opc',
+  formulario integer default '0'
+
 );
 
 DROP TABLE IF EXISTS core_usuario_menu;

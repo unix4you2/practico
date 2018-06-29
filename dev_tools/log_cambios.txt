@@ -45,7 +45,8 @@ LogCambios="
 # RECORDAR EN OPCIONES MULTI-IDIOMA:  UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 ScriptBasedatos="
 
-ALTER TABLE core_informe CHANGE script_sql consulta_sql text;
+ALTER TABLE core_menu ADD tipo_menu varchar(10) default 'opc';
+ALTER TABLE core_menu ADD formulario int(11) default '0';
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 "
 

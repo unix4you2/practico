@@ -73,6 +73,8 @@ CREATE TABLE core_menu (
   seccion varchar(250) default '', 
   imagen varchar(250) default '',
   posible_izquierda integer default '0',
+  tipo_menu varchar(10) default 'opc',
+  formulario integer default '0',
   PRIMARY KEY  (id)
 );
 
