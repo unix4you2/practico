@@ -425,10 +425,47 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
         
         selector_iconos_awesome();
         selector_objetos_menu();
+
+
+
 ?>
           
             
+		<script TYPE="text/javascript" LANGUAGE="JavaScript">
+			function OcultarCampos(cantidad_campos_existentes)
+				{
+					for (i=1;i<=cantidad_campos_existentes;i++)
+						{
+							//Hace la operacion para elementos no eliminados previamente.  Algunos eliminados:
+                            //13 - Teclado virtual
+                            if (i!=13)
+                                {
+                                    var formdiv = document.getElementById("campo"+i);
+                                    formdiv.style.display="none";
+                                }
+						}
+				}
+			function VisualizarCampos(formdiv_ids)
+				{
+					var parametros = formdiv_ids;
+					var lista_campos = parametros.split(',');
 
+					for (i=0;i<lista_campos.length;i++)
+						{
+							var formdiv = document.getElementById("campo"+lista_campos[i]);
+							formdiv.style.display="block";
+						}
+				}
+			//Cambia los campos visibles en el formulario segun el select
+			function CambiarCamposVisibles(tipo_objeto_activo)
+				{
+					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
+					OcultarCampos(9);
+					// Muestra campos segun tipo de objeto
+					if (tipo_objeto_activo=="opc")   VisualizarCampos("1,2,3,4,5,6,7,8,9");
+					if (tipo_objeto_activo=="grp")   VisualizarCampos("1,2,3,4,5,9");
+				}
+		</script>
 
 
 
@@ -446,7 +483,8 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
                             <label for="tipo_menu"><?php echo $MULTILANG_FrmTipoObjeto; ?>:</label>
                             <div class="form-group input-group">
                                 <select  id="tipo_menu" name="tipo_menu" class="selectpicker"  data-style="btn-info" OnChange="CambiarCamposVisibles(this.options[this.selectedIndex].value);">
-                                    <option value=""><?php echo $MULTILANG_Opcion; ?></option>
+                                    <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                                    <option value="opc"><?php echo $MULTILANG_Opcion; ?></option>
                                     <option value="grp"><?php echo $MULTILANG_Agrupador; ?></option>
                                 </select>
                                 <span class="input-group-addon">
@@ -454,14 +492,16 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
                                 </span>
                             </div>
 
-
+						<div id='campo1' style="display:none;">
                             <div class="form-group input-group">
                                 <input name="texto"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuTexto; ?>">
                                 <span class="input-group-addon">
                                     <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
                                 </span>
                             </div>
-
+                        </div>
+                        
+						<div id='campo2' style="display:none;">
                             <label for="peso"><?php echo $MULTILANG_Peso; ?>:</label>
                             <select id="peso" name="peso" class="form-control" >
                                 <?php
@@ -471,7 +511,9 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
                                         }
                                 ?>
                             </select>
-
+                        </div>
+                        
+						<div id='campo3' style="display:none;">
                             <div class="row">
                                 <div class="col-md-3">
                                         <label for="posible_arriba"><?php echo $MULTILANG_MnuArriba; ?>:</label>
@@ -522,15 +564,18 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
                                         </div>
                                 </div>
                             </div>
-
-
+                        </div>
+                        
+						<div id='campo4' style="display:none;">
                             <div class="form-group input-group">
                                 <input name="seccion"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuSeccion; ?>">
                                 <span class="input-group-addon">
                                     <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
                                 </span>
                             </div>
-
+                        </div>
+                        
+						<div id='campo5' style="display:none;">
                             <div class="form-group input-group">
                                 <input name="imagen"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_ImagenMenu; ?>">
                                 <span class="input-group-addon">
@@ -539,13 +584,15 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
                                     </a>
                                 </span>
                             </div>
-
+                        </div>
 
                     </div>    
                     <div class="col-md-6">
-                            
+						<div id='campo6' style="display:none;">
                             [<?php echo $MULTILANG_MnuComandos; ?>]
-                            
+                        </div>
+                        
+						<div id='campo7' style="display:none;">
                             <br><label for="destino"><?php echo $MULTILANG_MnuTgt; ?>:</label>
                             <select id="destino" name="destino" class="form-control" >
                                 <option value="_self"><?php echo $MULTILANG_MnuTgtSelf; ?></option>
@@ -560,7 +607,9 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
                                     <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuTitURL; ?></b><br><?php echo $MULTILANG_MnuDesURL; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
                                 </span>
                             </div>
-                            
+                        </div>
+                        
+						<div id='campo8' style="display:none;">
                             <label for="tipo_comando"><?php echo $MULTILANG_MnuTipo; ?>:</label>
                             <div class="form-group input-group">
                                 <select id="tipo_comando" name="tipo_comando" class="form-control" >
@@ -581,8 +630,11 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
                                     </a>
                                 </span>
                             </div>
+                        </div>
 
+						<div id='campo9' style="display:none;">  
                             <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Agregar; ?></a>
+                        </div>
                             <a class="btn btn-block btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> <?php echo $MULTILANG_Cancelar; ?></a>
 
 
