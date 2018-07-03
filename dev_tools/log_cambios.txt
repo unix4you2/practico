@@ -18,8 +18,10 @@ index.php
 core/comunes.php
 core/marco_abajo.php
 core/marco_admin.php
+core/marco_arriba.php
 core/marco_dev.php
 core/marco_forms.php
+core/marco_navizq.php
 core/menus.php
 core/comunes.php
 xml/*
@@ -38,6 +40,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 * Added: Posibilidad de menues desplegables agrupadores de opciones a un nivel en cualquiera de las ubicaciones.
 * Enhan: Renombrado de funciones internas
+* Enhan: Generalizacion y optimizacion de funcion encargada de la impresion de opciones de menu.
 "
 
 ########################################################################

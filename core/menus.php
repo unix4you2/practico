@@ -925,44 +925,8 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 
 			// Imprime las opciones con sus formularios
 			while($registro = $resultado->fetch())
-				{
-                    echo '<form action="'.$ArchivoCORE.'" method="post" name="desk_'.$registro["id"].'" id="desk_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
-                    // Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
-                    if ($registro["tipo_comando"]=="Interno" || $registro["tipo_comando"]=="Personal")
-                        {
-                            echo '<input type="hidden" name="PCO_Accion" value="'.$registro["comando"].'"></form>';
-                        }
-                    // Verifica si se trata de una opcion para cargar un objeto de practico
-                    if ($registro["tipo_comando"]=="Objeto")
-                        {
-                            echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
-                                 <input type="hidden" name="objeto" value="'.$registro["comando"].'"></form>';
-                        }
-                    
-                    // Imprime la imagen
-                    //Si tiene una URL trata la opcion como enlace estandar, sino como opcion de menu especial
-                    if ($registro["url"]!="")
-                        echo '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($registro["texto"]).'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
-                    else
-                        echo '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($registro["texto"]).'" href="javascript:document.desk_'.$registro["id"].'.submit();">';
-
-                    //Determina si la opcion es una imagen o no
-                    $PCO_EsImagen=0;
-                    if (strpos($registro["imagen"],".png") || strpos($registro["imagen"],".jpg") || strpos($registro["imagen"],".gif"))
-						$PCO_EsImagen=1;
-                    //Si no detecta ninguna extension de archivo de imagen entonces pone boton en bootstrap
-                    if (!$PCO_EsImagen)
-						echo '<button class="btn btn-default">
-							<i class="'.$registro["imagen"].' fa-3x fa-fw"></i><br>
-							<span class="btn-xs">'.PCO_ReemplazarVariablesPHPEnCadena($registro["texto"]).'</span>
-							</button>';
-                    else
-						echo '<img src="'.$registro["imagen"].'" border="0" />';
-                    echo '</a>';
-				}
+				PCO_ImprimirOpcionMenu($registro,'escritorio');
 			echo '</td></tr></table><br>';
-
-
 
 			// Carga las opciones del ACORDEON
 			echo '<div align="center">';
@@ -991,39 +955,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 					$resultado_opciones_acordeon=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_centro=1 AND seccion='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY peso");
 
 					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
-						{
-                            echo '<form action="'.$ArchivoCORE.'" method="post" name="acorde_'.$registro_opciones_acordeon["id"].'" id="acorde_'.$registro_opciones_acordeon["id"].'"
-                             style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
-                            // Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
-                            if ($registro_opciones_acordeon["tipo_comando"]=="Interno" || $registro_opciones_acordeon["tipo_comando"]=="Personal")
-                                {
-                                    echo '<input type="hidden" name="PCO_Accion" value="'.$registro_opciones_acordeon["comando"].'"></form>';
-                                }
-                            // Verifica si se trata de una opcion para cargar un objeto de practico
-                            if ($registro_opciones_acordeon["tipo_comando"]=="Objeto")
-                                {
-                                    echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
-                                         <input type="hidden" name="objeto" value="'.$registro_opciones_acordeon["comando"].'"></form>';
-                                }
-                            //Si tiene una URL trata la opcion como enlace estandar, sino como opcion de menu especial
-                            if ($registro_opciones_acordeon["url"]!="")
-                                echo '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($registro_opciones_acordeon["texto"]).'" href="'.$registro_opciones_acordeon["url"].'" target="'.$registro_opciones_acordeon["destino"].'">';
-                            else
-                                echo '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($registro_opciones_acordeon["texto"]).'" href="javascript:document.acorde_'.$registro_opciones_acordeon["id"].'.submit();">';
-
-							//Determina si la opcion es una imagen o no
-							$PCO_EsImagen=0;
-							if (strpos($registro_opciones_acordeon["imagen"],".png") || strpos($registro_opciones_acordeon["imagen"],".jpg") || strpos($registro_opciones_acordeon["imagen"],".gif"))
-								$PCO_EsImagen=1;
-							//Si no detecta ninguna extension de archivo de imagen entonces pone boton en bootstrap
-							if (!$PCO_EsImagen)
-                            echo '<button type="button" class="btn btn-default btn-outline"><i class="'.$registro_opciones_acordeon["imagen"].' fa-fw"></i>
-                                    <span class="btn-xs">'.PCO_ReemplazarVariablesPHPEnCadena($registro_opciones_acordeon["texto"]).'</span>
-                                    </button>';
-							else
-								echo '<img src="'.$registro_opciones_acordeon["imagen"].'" border="0" />';
-                            echo '</a>&nbsp;';
-						}
+						PCO_ImprimirOpcionMenu($registro_opciones_acordeon,'centro');
 					cerrar_ventana();
 				}
 			echo '</div>';

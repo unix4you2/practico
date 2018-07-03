@@ -168,43 +168,7 @@
 						$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_arriba=1 ".@$Complemento_condicion." ORDER BY peso");
 
 						while($registro = $resultado->fetch())
-							{
-								echo '<li role="presentation">';
-									echo '<form action="'.$ArchivoCORE.'" method="post" name="top_'.$registro["id"].'" id="top_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
-										// Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
-										if ($registro["tipo_comando"]=="Interno" || $registro["tipo_comando"]=="Personal")
-											{
-												echo '<input type="hidden" name="PCO_Accion" value="'.$registro["comando"].'">';
-											}
-										// Verifica si se trata de una opcion para cargar un objeto de practico
-										if ($registro["tipo_comando"]=="Objeto")
-											{
-												echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
-													 <input type="hidden" name="objeto" value="'.$registro["comando"].'">';
-											}
-									echo '</form>';
-									
-									//Si tiene una URL trata la opcion como enlace estandar, sino como opcion de menu especial
-									if ($registro["url"]!="")
-										echo '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($registro["texto"]).'" href="'.$registro["url"].'" target="'.$registro["destino"].'">';
-									else
-										echo '<a href="javascript:document.top_'.$registro["id"].'.submit();">';
-
-											//Determina si la opcion es una imagen o no
-											$PCO_EsImagen=0;
-											if (strpos($registro["imagen"],".png") || strpos($registro["imagen"],".jpg") || strpos($registro["imagen"],".gif"))
-												$PCO_EsImagen=1;
-											//Si no detecta ninguna extension de archivo de imagen entonces pone boton en bootstrap
-											if (!$PCO_EsImagen)
-												echo '<button class="btn-circle btn-info btn-xs">
-												<i class="'.$registro["imagen"].'"></i>
-												</button> '.PCO_ReemplazarVariablesPHPEnCadena($registro["texto"]);
-											else
-												echo '<img src="'.$registro["imagen"].'" border="0" />';
-									
-									echo '</a>';
-                                echo '</li>';
-							}
+							PCO_ImprimirOpcionMenu($registro,'arriba');
                         echo '</ul>';
 					}
 
