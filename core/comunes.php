@@ -41,7 +41,7 @@
 	Salida:
 		Impresion del codigo HTML correspondiente
 */
-function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='')
+function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
     {
         global $ArchivoCORE,$PCOSESS_LoginUsuario,$TablasCore;
 
@@ -55,24 +55,53 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='')
     					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
     				}
     			$ResultadoOpcionesAnidadas=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE padre='".$RegistroOpcion['id']."' ".@$Complemento_condicion." ORDER BY peso");
-
+    			//Crea el elemento para dropdown con las opciones
                 echo '
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Action <span class="caret"></span>
+                  <button type="button" class="btn dropdown-toggle '.$RegistroOpcion["clase_contenedor"].'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="'.$RegistroOpcion["imagen"].' fa-fw"></i> '.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).' <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu">';
-
-    			// Imprime las opciones con sus formularios
-    			while($RegistroOpcionAnidada = $ResultadoOpcionesAnidadas->fetch())
-    				PCO_ImprimirOpcionMenu($RegistroOpcionAnidada,'submenu');
-
+                        // Imprime las opciones con sus formularios
+                        while($RegistroOpcionAnidada = $ResultadoOpcionesAnidadas->fetch())
+                        	PCO_ImprimirOpcionMenu($RegistroOpcionAnidada,'submenu',$Ubicacion);
                 echo '
                   </ul>
-                </div>
-                ';
+                </div>';
 			}
 
+        //Genera el formulario que sera llamado en la opcion de menu
+		echo '<form action="'.$ArchivoCORE.'" method="post" name="'.$PreUbicacion.'_'.$Ubicacion.'_'.$RegistroOpcion["id"].'" id="'.$PreUbicacion.'_'.$Ubicacion.'_'.$RegistroOpcion["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
+		// Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
+		if ($RegistroOpcion["tipo_comando"]=="Interno" || $RegistroOpcion["tipo_comando"]=="Personal")
+            echo '<input type="hidden" name="PCO_Accion" value="'.$RegistroOpcion["comando"].'">';
+		// Verifica si se trata de una opcion para cargar un objeto de practico
+		if ($RegistroOpcion["tipo_comando"]=="Objeto")
+			echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto"><input type="hidden" name="objeto" value="'.$RegistroOpcion["comando"].'">';
+		echo '</form>';
+
+        //Define la cadena a imprimir como accion para el menu
+        $CadenaPreOpcion='';
+        $CadenaPosOpcion='</a>';
+		//Si tiene una URL trata la opcion como enlace estandar, sino como opcion de menu especial
+		if ($RegistroOpcion["url"]!="")
+		    {
+		        if ($Ubicacion=='submenu')
+		        	$CadenaPreOpcion= '<a href="'.$RegistroOpcion["url"].'" target="'.$RegistroOpcion["destino"].'"><i class="'.$RegistroOpcion["imagen"].' fa-fw"></i> '.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]);
+		        else
+		        	$CadenaPreOpcion= '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).'" href="'.$RegistroOpcion["url"].'" target="'.$RegistroOpcion["destino"].'">';
+		    }
+		else
+			{
+			    if ($Ubicacion=='arriba' || $Ubicacion=='lateral')
+                    $CadenaPreOpcion= '<a href="javascript:document.'.$PreUbicacion.'_'.$Ubicacion.'_'.$RegistroOpcion["id"].'.submit();">';
+			    if ($Ubicacion=='centro' || $Ubicacion=='escritorio')
+			        $CadenaPreOpcion= '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).'" href="javascript:document.'.$PreUbicacion.'_'.$Ubicacion.'_'.$RegistroOpcion["id"].'.submit();">';
+			    if ($Ubicacion=='submenu')
+			        $CadenaPreOpcion= '<a href="javascript:document.'.$PreUbicacion.'_'.$Ubicacion.'_'.$RegistroOpcion["id"].'.submit();"><i class="'.$RegistroOpcion["imagen"].' fa-fw"></i> '.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).' '.$TextoAccesoDirecto;
+			}
+
+        //Imprime opciones de submenus
 		if ($RegistroOpcion['tipo_menu']=='opc' && $Ubicacion=="submenu")
 			{
 			    //Define el texto a ubicar al lado derecho de la opcion cuando se ha indicadu su valor de acceso directo
@@ -81,42 +110,21 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='')
 			    
 			    //Si la imagen definida para el menu es la palabra clave _SEPARADOR_ entonces lo trata como tal, en caso contrario presenta la opcion
 			    if ($RegistroOpcion["imagen"]=="_SEPARADOR_")
-			        {
-			            echo '<li role="separator" class="divider"></li>';
-			        }
+			        echo '<li role="separator" class="divider"></li>';
 			    else
 			        {
         			    //Imprime el item de menu
-        			    echo '<li><a href="#"> <i class="'.$RegistroOpcion["imagen"].' fa-fw"></i> '.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).'  '.$TextoAccesoDirecto.'  </a></li>';
+        				echo '<li>';
+        				echo $CadenaPreOpcion;
+        				echo $CadenaInOpcion;
+        				echo $CadenaPosOpcion;
+                        echo '</li>';
 			        }
 			}
 
+        //Imprime opciones estandar de menu
 		if ($RegistroOpcion['tipo_menu']=='opc' && $Ubicacion!="submenu")
 			{
-                //Genera el formulario que sera llamado en la opcion de menu
-        		echo '<form action="'.$ArchivoCORE.'" method="post" name="'.$Ubicacion.'_'.$RegistroOpcion["id"].'" id="'.$Ubicacion.'_'.$RegistroOpcion["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
-        		// Verifica si se trata de un comando interno o personal y crea formulario y enlace correspondiente (ambos funcionan igual)
-        		if ($RegistroOpcion["tipo_comando"]=="Interno" || $RegistroOpcion["tipo_comando"]=="Personal")
-                    echo '<input type="hidden" name="PCO_Accion" value="'.$RegistroOpcion["comando"].'">';
-        		// Verifica si se trata de una opcion para cargar un objeto de practico
-        		if ($RegistroOpcion["tipo_comando"]=="Objeto")
-        			echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto"><input type="hidden" name="objeto" value="'.$RegistroOpcion["comando"].'">';
-        		echo '</form>';
-        
-                //Define la cadena a imprimir como accion para el menu
-                $CadenaPreOpcion='';
-                $CadenaPosOpcion='</a>';
-        		//Si tiene una URL trata la opcion como enlace estandar, sino como opcion de menu especial
-        		if ($RegistroOpcion["url"]!="")
-        			$CadenaPreOpcion= '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).'" href="'.$RegistroOpcion["url"].'" target="'.$RegistroOpcion["destino"].'">';
-        		else
-        			{
-        			    if ($Ubicacion=='arriba' || $Ubicacion=='lateral')
-                            $CadenaPreOpcion= '<a href="javascript:document.'.$Ubicacion.'_'.$RegistroOpcion["id"].'.submit();">';
-        			    if ($Ubicacion=='centro' || $Ubicacion=='escritorio')
-        			        $CadenaPreOpcion= '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).'" href="javascript:document.'.$Ubicacion.'_'.$RegistroOpcion["id"].'.submit();">';
-        			}
-        
         		//Determina si la opcion es una imagen o no
         		$PCO_EsImagen=0;
         		if (strpos($RegistroOpcion["imagen"],".png") || strpos($RegistroOpcion["imagen"],".jpg") || strpos($RegistroOpcion["imagen"],".gif"))

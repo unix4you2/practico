@@ -459,10 +459,10 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 			function CambiarCamposVisibles(tipo_objeto_activo)
 				{
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(10);
+					OcultarCampos(11);
 					// Muestra campos segun tipo de objeto
 					if (tipo_objeto_activo=="opc")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10");
-					if (tipo_objeto_activo=="grp")   VisualizarCampos("1,2,3,4,5,9");
+					if (tipo_objeto_activo=="grp")   VisualizarCampos("1,2,3,4,5,9,11");
 				}
 		</script>
 
@@ -596,6 +596,13 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
                                            <i class="fa fa-hand-o-right"></i> <i class="fa fa-picture-o"></i>
                                     </a>
                                 </span>
+                            </div>
+                        </div>
+
+						<div id='campo11' style="display:none;">
+                            <label for="clase_contenedor"><?php echo $MULTILANG_FrmClaseContenedor; ?>:</label>
+                            <div class="form-group input-group">
+                                <input name="clase_contenedor" id="clase_contenedor" value="btn-default btn-sm" maxlength="250" type="text" class="form-control">
                             </div>
                         </div>
 
