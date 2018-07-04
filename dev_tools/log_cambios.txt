@@ -41,6 +41,7 @@ LogCambios="
 * Added: Posibilidad de menues desplegables agrupadores de opciones a un nivel en cualquiera de las ubicaciones.
 * Enhan: Renombrado de funciones internas
 * Enhan: Generalizacion y optimizacion de funcion encargada de la impresion de opciones de menu.
+* Enhan: Por defecto se deja oculta la barra de navegacion izquierda para mejorar la maquetacion responsive.  Se deja el boton para su despliegue manual cuando sea necesario.
 "
 
 ########################################################################

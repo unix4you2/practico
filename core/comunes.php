@@ -58,7 +58,7 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
     			//Crea el elemento para dropdown con las opciones
                 echo '
                 <div class="btn-group">
-                  <button type="button" class="btn dropdown-toggle '.$RegistroOpcion["clase_contenedor"].'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button type="button" class="btn dropdown-toggle '.$RegistroOpcion["clase_contenedor"].' " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="'.$RegistroOpcion["imagen"].' fa-fw"></i> '.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).' <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu">';
@@ -114,7 +114,7 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
 			    else
 			        {
         			    //Imprime el item de menu
-        				echo '<li>';
+        				echo '<li class="'.$RegistroOpcion["clase_contenedor"].'">';
         				echo $CadenaPreOpcion;
         				echo $CadenaInOpcion;
         				echo $CadenaPosOpcion;

@@ -602,7 +602,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 						<div id='campo11' style="display:none;">
                             <label for="clase_contenedor"><?php echo $MULTILANG_FrmClaseContenedor; ?>:</label>
                             <div class="form-group input-group">
-                                <input name="clase_contenedor" id="clase_contenedor" value="btn-default btn-sm" maxlength="250" type="text" class="form-control">
+                                <input name="clase_contenedor" id="clase_contenedor" placeholder="Ej: btn-default btn-sm" maxlength="250" type="text" class="form-control">
                             </div>
                         </div>
 
@@ -658,7 +658,6 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
                         </div>
 
                             <a class="btn btn-block btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> <?php echo $MULTILANG_Cancelar; ?></a>
-
 
                     </div>
                 </div>

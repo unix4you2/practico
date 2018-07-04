@@ -175,7 +175,8 @@
 
     <?php
         //Si el usuario es admin por defecto presenta la barra lateral activa
-        if ((PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$PCOSESS_SesionAbierta && @$PCO_Accion=="Ver_menu") || (@$PCOSESS_LoginUsuario!="" && @$PCOSESS_SesionAbierta && @$VerNavegacionIzquierdaResponsive==1))
+        // DEPRECATED: (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$PCOSESS_SesionAbierta && @$PCO_Accion=="Ver_menu") || 
+        if ((@$PCOSESS_LoginUsuario!="" && @$PCOSESS_SesionAbierta && @$VerNavegacionIzquierdaResponsive==1))
             echo '<script language="JavaScript">
                     ver_navegacion_izquierda_responsive();
                 </script>';
