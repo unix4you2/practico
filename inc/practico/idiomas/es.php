@@ -852,7 +852,7 @@
 	$MULTILANG_MnuDesEscritorio='Se debe habilitar esta opci&oacute;n para ser desplegada como un icono en el escritorio del usuario?';
 	$MULTILANG_MnuDesCentro='Se debe habilitar esta opci&oacute;n para ser desplegada en la parte central del aplicativo, dentro de ventanas clasificadas/agrupadas por el valor definido en el campo Seccion?';
     $MULTILANG_MnuDesIzquierdo='Se debe habilitar esta opci&oacute;n para ser desplegada en la barra lateral izquierda del aplicativo?';
-	$MULTILANG_MnuDesImagen='Desplegar una lista de im&aacute;genes disponibles en el sistema';
+	$MULTILANG_MnuDesImagen='Desplegar una lista de im&aacute;genes disponibles en el sistema.  En opciones de submenus desplegables utilice la palabra clave _SEPARADOR_ en lugar de una imagen para generar separadores de opciones dentro del submenu.';
 	$MULTILANG_MnuComandos='CONFIGURACION DE COMANDOS Y ACCIONES';
 	$MULTILANG_MnuClic='Posible hacer clic?';
 	$MULTILANG_MnuURL='URL est&aacute;tica o comando en formato javascript:comando()';
