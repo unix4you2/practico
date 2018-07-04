@@ -675,6 +675,10 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 						<td></td>
 						<td><b>'.$MULTILANG_MnuTexto.'</b></td>
 						<td><b>'.$MULTILANG_MnuComando.'</b></td>
+						<td><b>'.$MULTILANG_MnuArriba.'</b></td>
+						<td><b>'.$MULTILANG_MnuEscritorio.'</b></td>
+						<td><b>'.$MULTILANG_MnuCentro.'</b></td>
+						<td><b>'.$MULTILANG_MnuIzquierda.'</b></td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -690,6 +694,18 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 								<td><i class="'.$registro["imagen"].'"></i></td>
 								<td><strong>'.$registro["texto"].'</strong></td>
 								<td>'.$registro["comando"].'</td>
+								<td align=center>';
+								    if ($registro["posible_arriba"]==1) echo '<i class="fa fa-check fa-fw"></i>';
+						echo    '</td>
+						         <td align=center>';
+								    if ($registro["posible_escritorio"]==1) echo '<i class="fa fa-check fa-fw"></i>';
+						echo    '</td>
+						         <td align=center>';
+								    if ($registro["posible_centro"]==1) echo '<i class="fa fa-check fa-fw"></i>';
+						echo    '</td>
+						          <td align=center>';
+								    if ($registro["posible_izquierda"]==1) echo '<i class="fa fa-check fa-fw"></i>';
+						echo    '</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
 												<input type="hidden" name="PCO_Accion" value="eliminar_menu">
@@ -709,8 +725,6 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 				echo '</tbody>
                 </table>';
 		 ?>
-
-
 
 		 <?php
 		 				cerrar_ventana();
