@@ -122,6 +122,7 @@ function selector_objetos_menu()
 */
 if ($PCO_Accion=="actualizar_menu")
 	{
+	    if (@$nivel_usuario=="") $nivel_usuario="-1";
 		// Actualiza los datos del item
 		PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."menu SET posible_izquierda=?,texto=?,peso=?,url=?,destino=?,tipo_comando=?,comando=?,nivel_usuario=?,posible_arriba=?,posible_centro=?,posible_escritorio=?,seccion=?,imagen=? WHERE id=? ","$posible_izquierda$_SeparadorCampos_$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$id");
 		PCO_Auditar("Actualiza menu item $texto c&oacute;digo $id");
@@ -383,6 +384,7 @@ if ($PCO_Accion=="eliminar_menu")
 
 			if ($mensaje_error=="")
 				{
+				    if (@$nivel_usuario=="") $nivel_usuario="-1";
 					// Guarda los datos del comando o item de menu
 					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0)","$texto$_SeparadorCampos_$padre$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$posible_izquierda$_SeparadorCampos_$tipo_menu");
 					PCO_Auditar("Agrega en menu: $texto");
@@ -420,252 +422,16 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 	{
 		$PCO_Accion=escapar_contenido($PCO_Accion); //Limpia cadena para evitar XSS
 		echo '<div align="center"><br>';
-		abrir_ventana($MULTILANG_MnuAdmin, 'panel-primary');
-        
+
         selector_iconos_awesome();
         selector_objetos_menu();
 
+    	//function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno=0)
+        PCO_CargarFormulario("-12",1,"","",0,0); //Cargar el form en modo de diseno
 
-
+		abrir_ventana($MULTILANG_MnuDefinidos, 'panel-warning');
 ?>
-          
-            
-		<script TYPE="text/javascript" LANGUAGE="JavaScript">
-			function OcultarCampos(cantidad_campos_existentes)
-				{
-					for (i=1;i<=cantidad_campos_existentes;i++)
-						{
-							//Hace la operacion para elementos no eliminados previamente.  Algunos eliminados:
-                            //13 - Teclado virtual
-                            if (i!=13)
-                                {
-                                    var formdiv = document.getElementById("campo"+i);
-                                    formdiv.style.display="none";
-                                }
-						}
-				}
-			function VisualizarCampos(formdiv_ids)
-				{
-					var parametros = formdiv_ids;
-					var lista_campos = parametros.split(',');
 
-					for (i=0;i<lista_campos.length;i++)
-						{
-							var formdiv = document.getElementById("campo"+lista_campos[i]);
-							formdiv.style.display="block";
-						}
-				}
-			//Cambia los campos visibles en el formulario segun el select
-			function CambiarCamposVisibles(tipo_objeto_activo)
-				{
-					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
-					OcultarCampos(11);
-					// Muestra campos segun tipo de objeto
-					if (tipo_objeto_activo=="opc")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10");
-					if (tipo_objeto_activo=="grp")   VisualizarCampos("1,2,3,4,5,9,11");
-				}
-		</script>
-
-
-
-			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="hidden" name="PCO_Accion" value="guardar_menu">
-			<input type="hidden" name="nivel_usuario" value="-1">
-			<h4><b><?php echo $MULTILANG_MnuAgregar; ?></b></h4>
-
-
-                <div class="row">
-                    <div class="col-md-6">
-
-                            <label for="tipo_menu"><?php echo $MULTILANG_FrmTipoObjeto; ?>:</label>
-                            <div class="form-group input-group">
-                                <select  id="tipo_menu" name="tipo_menu" class="selectpicker"  data-style="btn-info" OnChange="CambiarCamposVisibles(this.options[this.selectedIndex].value);">
-                                    <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
-                                    <option value="opc"><?php echo $MULTILANG_Opcion; ?></option>
-                                    <option value="grp"><?php echo $MULTILANG_Agrupador; ?></option>
-                                </select>
-                                <span class="input-group-addon">
-                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_AgrupadorDes; ?>"><i class="fa fa-info-circle icon-info"></i></a>
-                                </span>
-                            </div>
-
-						<div id='campo10' style="display:none;">
-                            <label for="padre"><?php echo $MULTILANG_MnuPadre; ?>:</label>
-                            <div class="form-group input-group">
-                                <select id="padre" name="padre" class="form-control input-sm">
-                                <option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
-                                <?php
-                                    $consulta_opciones_agrupadoras=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE tipo_menu='grp' ORDER BY texto");
-                                    while($registro_opcion_agrupadora = $consulta_opciones_agrupadoras->fetch())
-                                        echo '<option value="'.$registro_opcion_agrupadora["id"].'" >'.$registro_opcion_agrupadora["texto"].'</option>';
-                                ?>
-                                </select>
-                            </div>
-                        </div>
-
-						<div id='campo1' style="display:none;">
-                            [<?php echo $MULTILANG_MnuApariencia; ?>]<br>
-
-                            <div class="form-group input-group">
-                                <input name="texto"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuTexto; ?>">
-                                <span class="input-group-addon">
-                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
-                                </span>
-                            </div>
-                        </div>
-                        
-						<div id='campo2' style="display:none;">
-                            <label for="peso"><?php echo $MULTILANG_Peso; ?>:</label>
-                            <select id="peso" name="peso" class="form-control" >
-                                <?php
-                                    for ($i=1;$i<=100;$i++)
-                                        {
-                                                echo '<option value="'.$i.'">'.$i.'</option>';
-                                        }
-                                ?>
-                            </select>
-                        </div>
-                        
-						<div id='campo3' style="display:none;">
-                            <div class="row">
-                                <div class="col-md-3">
-                                        <label for="posible_arriba"><?php echo $MULTILANG_MnuArriba; ?>:</label>
-                                        <div class="form-group input-group">
-                                            <select id="posible_arriba" name="posible_arriba" class="form-control" >
-                                                <option value="0"><?php echo $MULTILANG_No; ?></option>
-                                                <option value="1"><?php echo $MULTILANG_Si; ?></option>
-                                            </select>
-                                            <span class="input-group-addon">
-                                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuUbicacion; ?></b><br><?php echo $MULTILANG_MnuDesArriba; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                                            </span>
-                                        </div>
-                                </div>    
-                                <div class="col-md-3">
-                                        <label for="posible_escritorio"><?php echo $MULTILANG_MnuEscritorio; ?>:</label>
-                                        <div class="form-group input-group">
-                                            <select id="posible_escritorio" name="posible_escritorio" class="form-control" >
-                                                <option value="0"><?php echo $MULTILANG_No; ?></option>
-                                                <option value="1" selected><?php echo $MULTILANG_Si; ?></option>
-                                            </select>
-                                            <span class="input-group-addon">
-                                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuUbicacion; ?></b><br><?php echo $MULTILANG_MnuDesEscritorio; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                                            </span>
-                                        </div>
-                                </div>    
-                                <div class="col-md-3">
-                                        <label for="posible_centro"><?php echo $MULTILANG_MnuCentro; ?>:</label>
-                                        <div class="form-group input-group">
-                                            <select id="posible_centro" name="posible_centro" class="form-control" >
-                                                <option value="0"><?php echo $MULTILANG_No; ?></option>
-                                                <option value="1"><?php echo $MULTILANG_Si; ?></option>
-                                            </select>
-                                            <span class="input-group-addon">
-                                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuUbicacion; ?></b><br><?php echo $MULTILANG_MnuDesCentro; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                                            </span>
-                                        </div>
-                                </div>
-                                <div class="col-md-3">
-                                        <label for="posible_izquierda"><?php echo $MULTILANG_MnuIzquierda; ?>:</label>
-                                        <div class="form-group input-group">
-                                            <select id="posible_izquierda" name="posible_izquierda" class="form-control" >
-                                                <option value="0"><?php echo $MULTILANG_No; ?></option>
-                                                <option value="1"><?php echo $MULTILANG_Si; ?></option>
-                                            </select>
-                                            <span class="input-group-addon">
-                                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuUbicacion; ?></b><br><?php echo $MULTILANG_MnuDesIzquierdo; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                                            </span>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-						<div id='campo4' style="display:none;">
-                            <div class="form-group input-group">
-                                <input name="seccion"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuSeccion; ?>">
-                                <span class="input-group-addon">
-                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
-                                </span>
-                            </div>
-                        </div>
-                        
-						<div id='campo5' style="display:none;">
-                            <div class="form-group input-group">
-                                <input name="imagen"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_ImagenMenu; ?>">
-                                <span class="input-group-addon">
-                                    <a data-toggle="modal" href="#myModalSelectorIconos" title="<?php echo $MULTILANG_MnuDesImagen; ?>">
-                                           <i class="fa fa-hand-o-right"></i> <i class="fa fa-picture-o"></i>
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
-
-						<div id='campo11' style="display:none;">
-                            <label for="clase_contenedor"><?php echo $MULTILANG_FrmClaseContenedor; ?>:</label>
-                            <div class="form-group input-group">
-                                <input name="clase_contenedor" id="clase_contenedor" placeholder="Ej: btn-default btn-sm" maxlength="250" type="text" class="form-control">
-                            </div>
-                        </div>
-
-                    </div>    
-                    <div class="col-md-6">
-						<div id='campo6' style="display:none;">
-                            [<?php echo $MULTILANG_MnuComandos; ?>]
-                        </div>
-                        
-						<div id='campo7' style="display:none;">
-                            <br><label for="destino"><?php echo $MULTILANG_MnuTgt; ?>:</label>
-                            <select id="destino" name="destino" class="form-control" >
-                                <option value="_self"><?php echo $MULTILANG_MnuTgtSelf; ?></option>
-                                <option value="_blank"><?php echo $MULTILANG_MnuTgtBlank; ?></option>
-                                <option value="_parent"><?php echo $MULTILANG_MnuTgtParent; ?></option>
-                                <option value="_top"><?php echo $MULTILANG_MnuTgtTop; ?></option>
-                            </select>
-                            
-                            <div class="form-group input-group">
-                                <input name="url" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuURL; ?>">
-                                <span class="input-group-addon">
-                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuTitURL; ?></b><br><?php echo $MULTILANG_MnuDesURL; ?>"><i class="fa fa-exclamation-triangle fa-fw icon-orange"></i></a>
-                                </span>
-                            </div>
-                        </div>
-                        
-						<div id='campo8' style="display:none;">
-                            <label for="tipo_comando"><?php echo $MULTILANG_MnuTipo; ?>:</label>
-                            <div class="form-group input-group">
-                                <select id="tipo_comando" name="tipo_comando" class="form-control" >
-                                    <option value="Objeto">1. <?php echo $MULTILANG_MnuObjeto; ?></option>
-                                    <option value="Interno">2. <?php echo $MULTILANG_MnuInterno; ?></option>
-                                    <option value="Personal">3. <?php echo $MULTILANG_MnuPersonal; ?></option>
-                                </select>
-                                <span class="input-group-addon">
-                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_MnuTitAccion; ?></b><br><?php echo $MULTILANG_MnuDesAccion; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                                </span>
-                            </div>
-                            
-                            <div class="form-group input-group">
-                                <input name="comando"  maxlength="250" type="text" class="form-control" placeholder="<?php echo $MULTILANG_MnuAccion; ?>">
-                                <span class="input-group-addon">
-                                    <a data-toggle="modal" href="#myModalSelectorObjetos" title="<?php echo $MULTILANG_SeleccioneUno; ?> <?php echo $MULTILANG_MnuObjeto; ?> o <?php echo $MULTILANG_MnuTitAccion; ?> <?php echo $MULTILANG_MnuDesAccion; ?>">
-                                           <i class="fa fa-hand-o-right"></i> <i class="fa fa-folder-open"></i>
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
-
-                        <br>
-						<div id='campo9' style="display:none;">  
-                            <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Agregar; ?></a>
-                        </div>
-
-                            <a class="btn btn-block btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> <?php echo $MULTILANG_Cancelar; ?></a>
-
-                    </div>
-                </div>
-            </form>
-
-        <hr>
-
-		<h4><b><?php echo $MULTILANG_MnuDefinidos; ?></b></h4>
 		 <?php
 				echo '
 				<table class="table table-condensed btn-xs table-unbordered table-hover">

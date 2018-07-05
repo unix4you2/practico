@@ -48,6 +48,18 @@ LogCambios="
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 # RECORDAR EN OPCIONES MULTI-IDIOMA:  UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 ScriptBasedatos="
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('opciones_menu','opc','{ $ MULTILANG_Opcion}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('opciones_menu','grp','{ $ MULTILANG_Agrupador}',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('destino_menu','_self','{ $ MULTILANG_MnuTgtSelf}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('destino_menu','_blank','{ $ MULTILANG_MnuTgtBlank}',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('destino_menu','_parent','{ $ MULTILANG_MnuTgtParent}',3);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('destino_menu','_top','{ $ MULTILANG_MnuTgtTop}',4);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('comando_menu','Objeto','1. { $ MULTILANG_MnuObjeto}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('comando_menu','Interno','2. { $ MULTILANG_MnuInterno}',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('comando_menu','Personal','3. { $ MULTILANG_MnuPersonal}',3);
+
+
+
 
 ALTER TABLE core_menu ADD tipo_menu varchar(10) default 'opc';
 ALTER TABLE core_menu ADD formulario int(11) default '0';
