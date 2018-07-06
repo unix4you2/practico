@@ -74,7 +74,8 @@ CREATE TABLE core_menu (
   imagen text default '',
   posible_izquierda integer default '0',
   tipo_menu text default 'opc',
-  formulario integer default '0'
+  formulario integer default '0',
+  clase_contenedor text default ''
 
 );
 
@@ -520,6 +521,15 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','curl:10','cURL (HTTP 10 sec. Timeout)',6);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','curl:15','cURL (HTTP 15 sec. Timeout)',7);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('metodos_monitor','curl:30','cURL (HTTP 30 sec. Timeout)',8);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('opciones_menu','opc','{$MULTILANG_Opcion}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('opciones_menu','grp','{$MULTILANG_Agrupador}',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('destino_menu','_self','{$MULTILANG_MnuTgtSelf}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('destino_menu','_blank','{$MULTILANG_MnuTgtBlank}',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('destino_menu','_parent','{$MULTILANG_MnuTgtParent}',3);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('destino_menu','_top','{$MULTILANG_MnuTgtTop}',4);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('comando_menu','Objeto','1. {$MULTILANG_MnuObjeto}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('comando_menu','Interno','2. {$MULTILANG_MnuInterno}',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('comando_menu','Personal','3. {$MULTILANG_MnuPersonal}',3);
 
 DROP TABLE IF EXISTS core_bugtracker;
 CREATE TABLE core_bugtracker (
