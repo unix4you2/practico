@@ -5323,6 +5323,10 @@ function cargar_objeto_lista_seleccion($registro_campos,$registro_datos_formular
             }
         //Cierra marco del control de datos
         $salida.= '</div>';
+
+        //Mejora velocidad de carga para listas de seleccion
+        //$salida.= '<script type="text/javascript">$("#'.$registro_campos["id_html"].'").selectpicker("render");</script>';
+
 		return $salida;
 	}
 

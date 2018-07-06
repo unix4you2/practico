@@ -144,6 +144,8 @@
 
     <!-- jQuery -->
 	<script type="text/javascript" src="inc/jquery/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="inc/bootstrap/js/plugins/select/bootstrap-select.min.js"></script>
+
     <!-- Morris Charts JavaScript -->
     <script src="inc/bootstrap/js/plugins/morris/raphael.min.js"></script>
     <script src="inc/bootstrap/js/plugins/morris/morris.min.js"></script>

@@ -24,6 +24,9 @@ core/marco_forms.php
 core/marco_navizq.php
 core/menus.php
 core/comunes.php
+inc/bootstrap/css/plugins/select/*
+inc/bootstrap/js/plugins/select/*
+
 xml/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
@@ -44,6 +47,9 @@ LogCambios="
 * Enhan: Por defecto se deja oculta la barra de navegacion izquierda para mejorar la maquetacion responsive.  Se deja el boton para su despliegue manual cuando sea necesario.
 * Enhan: Pestañas de etiqueta PCO_NoVisible presentes sólo en modo de diseño para desarrolladores de funciones internas.
 * Enhan: Reduccion de código en administracion de menues
+* Enhan: Actualizacion de plugin Bootstrap-select a version 1.12.4
+* Enhan: Aumentada la velocidad de carga de aplicación durante la conversion de listas HTML a BootStrap
+
 "
 
 ########################################################################

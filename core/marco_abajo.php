@@ -131,7 +131,6 @@
     <script type="text/javascript" src="inc/bootstrap/js/plugins/transition.js"></script>
     <script type="text/javascript" src="inc/bootstrap/js/plugins/collapse.js"></script>
     <script type="text/javascript" src="inc/bootstrap/js/plugins/slider/bootstrap-slider.js"></script>
-    <script type="text/javascript" src="inc/bootstrap/js/plugins/select/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="inc/bootstrap/js/plugins/metisMenu/metisMenu.min.js"></script>
     <!-- Bootstrap-Iconpicker Fuentes de iconos -->
     <script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.2.0.min.js"></script>
