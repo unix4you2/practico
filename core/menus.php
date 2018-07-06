@@ -131,6 +131,65 @@ if ($PCO_Accion=="eliminar_menu")
 	}
 
 
+/*
+	Function: PCO_PresentarOpcionesArbolMenu
+	Funcion utilizada para la construccion recursiva del arbol de menues y submenues del sistema
+
+	Variables de entrada:
+
+		CondicionFiltrado - Condicion que permite filtrar unicamente ciertas opciones.  Util para llamadas recursivas donde ya se conoce la opcion padre.
+
+	Salida:
+		Codigo HTML de una fila con el elemento encontrado
+
+	Ver tambien:
+	<PCOFUNC_AdministrarMenu>
+*/
+function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0)
+    {
+        global $TablasCore,$ListaCamposSinID_menu,$MULTILANG_MnuAdvElimina,$MULTILANG_Editar,$MULTILANG_Eliminar,$ArchivoCORE;
+		$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE 1=1 AND $CondicionFiltrado ");
+		while($registro = $resultado->fetch())
+			{
+				echo '<tr>';
+				echo '	<td><font color=lightgray>'.$registro["id"].'</font></td>
+						<td style="padding-left:'.$Sangria.'px;" nowrap><i class="'.$registro["imagen"].' fa-2x"></i> <strong>'.$registro["texto"].'</strong></td>
+						<td>'.$registro["comando"].'</td>
+						<td align=center>';
+						    if ($registro["posible_arriba"]==1) echo '<i class="fa fa-check-circle fa-fw fa-2x text-info"></i>';
+				echo    '</td>
+				         <td align=center>';
+						    if ($registro["posible_escritorio"]==1) echo '<i class="fa fa-check-circle fa-fw fa-2x text-info"></i>';
+				echo    '</td>
+				         <td align=center>';
+						    if ($registro["posible_centro"]==1) echo '<i class="fa fa-check-circle fa-fw fa-2x text-info"></i>';
+				echo    '</td>
+				          <td align=center>';
+						    if ($registro["posible_izquierda"]==1) echo '<i class="fa fa-check-circle fa-fw fa-2x text-info"></i>';
+				echo    '</td>
+						<td align="center">
+							<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
+								<input type="hidden" name="PCO_Accion" value="eliminar_menu">
+								<input type="hidden" name="id" value="'.$registro["id"].'">
+                                <a href="javascript:confirmar_evento(\''.$MULTILANG_MnuAdvElimina.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
+							</form>
+						</td>
+						<td align="center">
+							<form action="'.$ArchivoCORE.'" method="POST">
+								<input type="hidden" name="PCO_Accion" value="cargar_objeto">
+								<input type="hidden" name="objeto" value="frm:-12:1:id:'.$registro["id"].'">
+								<input type="hidden" name="id" value="'.$registro["id"].'">
+                                <button type="submit" class="btn btn-warning btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i></button>
+							</form>
+						</td>
+					</tr>';
+				//Si la opcion es una agrupadora busca sus opciones hijas
+				if ($registro["tipo_menu"]=='grp')
+				    PCO_PresentarOpcionesArbolMenu('padre='.$registro["id"],40);
+			}
+    }
+
+
 /* ################################################################## */
 /* ################################################################## */
 		/*
@@ -156,76 +215,30 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
         selector_objetos_menu();
 
     	//function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno=0)
-        PCO_CargarFormulario("-12",1,"","",0,0); //Cargar el form en modo de diseno
+        PCO_CargarFormulario("-12",1,"","",0,0); //Cargar el form
 
 		abrir_ventana($MULTILANG_MnuDefinidos, 'panel-warning');
-?>
-
-		 <?php
-				echo '
-				<table class="table table-condensed btn-xs table-unbordered table-hover">
-					<thead>
-                    <tr>
-						<td><b>Id</b></td>
-						<td></td>
-						<td><b>'.$MULTILANG_MnuTexto.'</b></td>
-						<td><b>'.$MULTILANG_MnuComando.'</b></td>
-						<td><b>'.$MULTILANG_MnuArriba.'</b></td>
-						<td><b>'.$MULTILANG_MnuEscritorio.'</b></td>
-						<td><b>'.$MULTILANG_MnuCentro.'</b></td>
-						<td><b>'.$MULTILANG_MnuIzquierda.'</b></td>
-						<td></td>
-						<td></td>
-					</tr>
-                    </thead>
-                    <tbody>
-                    	';
-
-				$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE 1=1");
-				while($registro = $resultado->fetch())
-					{
-						echo '<tr>
-								<td>'.$registro["id"].'</td>
-								<td><i class="'.$registro["imagen"].'"></i></td>
-								<td><strong>'.$registro["texto"].'</strong></td>
-								<td>'.$registro["comando"].'</td>
-								<td align=center>';
-								    if ($registro["posible_arriba"]==1) echo '<i class="fa fa-check fa-fw"></i>';
-						echo    '</td>
-						         <td align=center>';
-								    if ($registro["posible_escritorio"]==1) echo '<i class="fa fa-check fa-fw"></i>';
-						echo    '</td>
-						         <td align=center>';
-								    if ($registro["posible_centro"]==1) echo '<i class="fa fa-check fa-fw"></i>';
-						echo    '</td>
-						          <td align=center>';
-								    if ($registro["posible_izquierda"]==1) echo '<i class="fa fa-check fa-fw"></i>';
-						echo    '</td>
-								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
-												<input type="hidden" name="PCO_Accion" value="eliminar_menu">
-												<input type="hidden" name="id" value="'.$registro["id"].'">
-                                                <a href="javascript:confirmar_evento(\''.$MULTILANG_MnuAdvElimina.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
-										</form>
-								</td>
-								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="PCO_Accion" value="cargar_objeto">
-												<input type="hidden" name="objeto" value="frm:-12:1:id:'.$registro["id"].'">
-												<input type="hidden" name="id" value="'.$registro["id"].'">
-                                                <button type="submit" class="btn btn-warning btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i></button>
-										</form>
-								</td>
-							</tr>';
-					}
-				echo '</tbody>
-                </table>';
-		 ?>
-
-		 <?php
-		 				cerrar_ventana();
-		 		}
-
+		echo '
+		<table class="table table-condensed btn-xs  table-hover table-unbordered">
+			<thead>
+            <tr>
+				<td><b>Id</b></td>
+				<td nowrap><b>'.$MULTILANG_MnuTexto.'</b></td>
+				<td><b>'.$MULTILANG_MnuComando.'</b></td>
+				<td align=center><b>'.$MULTILANG_MnuArriba.'</b></td>
+				<td align=center><b>'.$MULTILANG_MnuEscritorio.'</b></td>
+				<td align=center><b>'.$MULTILANG_MnuCentro.'</b></td>
+				<td align=center><b>'.$MULTILANG_MnuIzquierda.'</b></td>
+				<td></td>
+				<td></td>
+			</tr>
+            </thead>
+            <tbody>';
+                PCO_PresentarOpcionesArbolMenu('padre=0',0);
+		echo '</tbody>
+        </table>';
+		 cerrar_ventana();
+	}
 
 
 /* ################################################################## */
