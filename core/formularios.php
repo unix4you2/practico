@@ -1908,6 +1908,7 @@ if ($PCO_Accion=="editar_formulario")
                     </form>
     <?php 
         $barra_herramientas_modal='
+            <a href="javascript:  $(\'#myModalElementoFormulario\').modal(\'hide\'); $(\'#myModalDisenoFormulario\').modal(\'show\');"><button type="button" class="btn btn-info">'.$MULTILANG_FrmDisCampos.'</button></a>
             <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
         cerrar_dialogo_modal($barra_herramientas_modal);
     ?>
