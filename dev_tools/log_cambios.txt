@@ -43,6 +43,7 @@ LogCambios="
 * Enhan: Generalizacion y optimizacion de funcion encargada de la impresion de opciones de menu.
 * Enhan: Por defecto se deja oculta la barra de navegacion izquierda para mejorar la maquetacion responsive.  Se deja el boton para su despliegue manual cuando sea necesario.
 * Enhan: Pestañas de etiqueta PCO_NoVisible presentes sólo en modo de diseño para desarrolladores de funciones internas.
+* Enhan: Reduccion de código en administracion de menues
 "
 
 ########################################################################
