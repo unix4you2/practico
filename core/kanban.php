@@ -152,7 +152,7 @@
 			$mensaje_error="";
 
 			// Elimina los datos
-			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."kanban (login_admintablero,titulo,descripcion,asignado_a,categoria,columna,peso,estilo,fecha,archivado,compartido_rw,tablero) VALUES ('$PCOSESS_LoginUsuario','$titulo','$descripcion','$asignado_a','$categoria','$columna','$peso','$estilo','$fecha','0','',$ID_TableroKanban) ");
+			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."kanban (login_admintablero,titulo,descripcion,asignado_a,categoria,columna,peso,estilo,fecha,archivado,compartido_rw,tablero,porcentaje) VALUES ('$PCOSESS_LoginUsuario','$titulo','$descripcion','$asignado_a','$categoria','$columna','$peso','$estilo','$fecha','0','',$ID_TableroKanban,'$porcentaje') ");
 			PCO_Auditar("Agrega tarea Kanban a tablero $ID_TableroKanban");
 			RedireccionATableroKanban($ID_TableroKanban);
 		}
@@ -285,7 +285,7 @@
 	function PresentarTareaKanban($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban)
 		{
 		    global $PCO_FechaOperacion;
-		    global $MULTILANG_FechaLimite,$MULTILANG_AsignadoA,$MULTILANG_InfCategoria,$MULTILANG_DelKanban;
+		    global $MULTILANG_FechaLimite,$MULTILANG_AsignadoA,$MULTILANG_InfCategoria,$MULTILANG_DelKanban,$MULTILANG_Finalizado;
             
             $EtiquetaIconoTareas=  "<i href='javascript:return false;' class='fa fa-fw fa-thumb-tack' data-toggle='tooltip' data-placement='top' title='".$RegistroTareas["categoria"]."' ></i>";
             $EtiquetaPersonas=  "<i href='javascript:return false;' class='fa fa-fw fa-users' data-toggle='tooltip' data-placement='top' title='".$MULTILANG_AsignadoA.": ".$RegistroTareas["asignado_a"]."' ></i>";
@@ -310,6 +310,16 @@
                                 '.$EtiquetaIconoTareas.'
                                 '.$EtiquetaCalendario.'
                                 '.$EtiquetaPersonas.'
+                                &nbsp;&nbsp;<i>'.$MULTILANG_Finalizado.'</i>
+                                <select id="porcentaje" name="porcentaje" style="color:darkblue; font-weight: bold; border:0px; background-color: transparent;" onchange="document.location=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=porcentaje&accion_retorno=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor=\'+this.value;">';
+                                for ($i=0;$i<=100;$i++)
+                                    {
+                                        $EstadoSeleccion="";
+                                        if ($i==$RegistroTareas["porcentaje"])
+                                            $EstadoSeleccion="SELECTED";
+                                        $Salida .= '<option value="'.$i.'" '.$EstadoSeleccion.'>'.$i.'%</option>';
+                                    }
+            $Salida .='         </select>
                             </div>
                             <div class="text-center">
                                 <div class="btn-xs">
@@ -654,7 +664,23 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanban")
                                     </div>
                                 </div>
                             </div>
-        
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="porcentaje"><?php echo $MULTILANG_Finalizado; ?> (%)</label>
+                                    <div class="form-group input-group">
+                                        <select id="porcentaje" name="porcentaje" class="form-control" data-style="btn-warning">
+                                            <?php
+                                                for ($i=0;$i<=100;$i++)
+                                                    echo '<option value="'.$i.'">'.$i.' %</option>';
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+
         			</div>
         		</div>
             </form>

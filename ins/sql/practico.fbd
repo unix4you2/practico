@@ -457,6 +457,7 @@ CREATE TABLE core_kanban (
   archivado int(11),
   compartido_rw TEXT,
   tablero int(11),
+  porcentaje int(11) default '0',
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 ALTER TABLE core_kanban ADD INDEX columna(columna);

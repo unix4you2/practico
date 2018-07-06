@@ -16,6 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/kanban.php
 core/marco_abajo.php
 core/marco_admin.php
 core/marco_arriba.php
@@ -42,6 +43,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 * Added: Posibilidad de menues desplegables agrupadores de opciones a un nivel en cualquiera de las ubicaciones.
+* Added: Tareas sobre tableros Kanban soportan ahora definición de porcentajes de avance particular.
 * Enhan: Renombrado de funciones internas
 * Enhan: Generalizacion y optimizacion de funcion encargada de la impresion de opciones de menu.
 * Enhan: Por defecto se deja oculta la barra de navegacion izquierda para mejorar la maquetacion responsive.  Se deja el boton para su despliegue manual cuando sea necesario.
@@ -69,6 +71,7 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 ALTER TABLE core_menu ADD tipo_menu varchar(10) default 'opc';
 ALTER TABLE core_menu ADD formulario int(11) default '0';
 ALTER TABLE core_menu ADD clase_contenedor varchar(250) default '';
+ALTER TABLE core_kanban ADD porcentaje int(11) default '0';
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 "
 

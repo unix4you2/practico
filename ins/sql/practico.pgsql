@@ -457,6 +457,7 @@ CREATE TABLE core_kanban (
   archivado integer,
   compartido_rw TEXT,
   tablero integer,
+  porcentaje integer default '0',
   PRIMARY KEY (id)
 );
 ALTER TABLE core_kanban ADD INDEX columna(columna);

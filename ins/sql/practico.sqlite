@@ -466,7 +466,8 @@ CREATE TABLE core_kanban (
   fecha text DEFAULT '',
   archivado integer,
   compartido_rw text,
-  tablero integer
+  tablero integer,
+  porcentaje integer default '0'
 
 );
 CREATE INDEX columna ON core_kanban (columna);
