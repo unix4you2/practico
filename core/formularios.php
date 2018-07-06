@@ -555,7 +555,8 @@
                         }
 					$ListaCamposyValores.="id=id"; //Agregado para evitar coma final
 
-					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."formulario_objeto SET ".$ListaCamposyValores." WHERE id=?","$idcampomodificado");
+					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."formulario_objeto SET ".$ListaCamposyValores." WHERE id='$idcampomodificado'");
+					
 					PCO_Auditar("Modifica diseno campo $idcampomodificado para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					    <input type="Hidden" name="PCO_Accion" value="editar_formulario">

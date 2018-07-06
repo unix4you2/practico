@@ -53,6 +53,7 @@ LogCambios="
 * Enhan: Reduccion de código en administracion de menues
 * Enhan: Actualizacion de plugin Bootstrap-select a version 1.12.4
 * Enhan: Aumentada la velocidad de carga de aplicación durante la conversion de listas HTML a BootStrap
+* Fixed: Edicion de URLS con interrogantes sobre IFrames en formularios
 
 "
 
