@@ -122,7 +122,6 @@ function selector_objetos_menu()
 */
 if ($PCO_Accion=="actualizar_menu")
 	{
-	    if (@$nivel_usuario=="") $nivel_usuario="-1";
 		// Actualiza los datos del item
 		PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."menu SET posible_izquierda=?,texto=?,peso=?,url=?,destino=?,tipo_comando=?,comando=?,nivel_usuario=?,posible_arriba=?,posible_centro=?,posible_escritorio=?,seccion=?,imagen=? WHERE id=? ","$posible_izquierda$_SeparadorCampos_$texto$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$id");
 		PCO_Auditar("Actualiza menu item $texto c&oacute;digo $id");
@@ -384,9 +383,8 @@ if ($PCO_Accion=="eliminar_menu")
 
 			if ($mensaje_error=="")
 				{
-				    if (@$nivel_usuario=="") $nivel_usuario="-1";
 					// Guarda los datos del comando o item de menu
-					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0)","$texto$_SeparadorCampos_$padre$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$posible_izquierda$_SeparadorCampos_$tipo_menu");
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."menu (".$ListaCamposSinID_menu.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,?)","$texto$_SeparadorCampos_$padre$_SeparadorCampos_$peso$_SeparadorCampos_$url$_SeparadorCampos_$destino$_SeparadorCampos_$tipo_comando$_SeparadorCampos_$comando$_SeparadorCampos_$nivel_usuario$_SeparadorCampos_$posible_arriba$_SeparadorCampos_$posible_centro$_SeparadorCampos_$posible_escritorio$_SeparadorCampos_$seccion$_SeparadorCampos_$imagen$_SeparadorCampos_$posible_izquierda$_SeparadorCampos_$tipo_menu$_SeparadorCampos_$clase_contenedor");
 					PCO_Auditar("Agrega en menu: $texto");
 					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 				}

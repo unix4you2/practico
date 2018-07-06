@@ -6478,7 +6478,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
         while($registro_conteo_pestanas = @$consulta_conteo_pestanas->fetch())
             {
                 $titulo_pestana_formulario=$registro_conteo_pestanas["pestana_objeto"];
-                if ($titulo_pestana_formulario!="PCO_NoVisible" || PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
+                if ($titulo_pestana_formulario!="PCO_NoVisible" || (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && $formulario>=0)  ||  (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && $formulario<0 && $modo_diseno_formulario==1)   )
                     {
                         $conteo_pestanas++;
                         $ultimo_nombre_pestanas=$registro_conteo_pestanas["pestana_objeto"];
@@ -6501,7 +6501,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                         $titulo_pestana_formulario=PCO_ReemplazarVariablesPHPEnCadena($registro_formulario_pestana["pestana_objeto"]);
                         if ($titulo_pestana_formulario=="") $titulo_pestana_formulario="<i class='fa fa-stack-overflow'></i>";
                         //Presenta la pestana solamente si no es una oculta
-                        if ($titulo_pestana_formulario!="PCO_NoVisible" || PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
+                        if ($titulo_pestana_formulario!="PCO_NoVisible" || (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && $formulario>=0)   ||  (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && $formulario<0 && $modo_diseno_formulario==1)   )
                             echo '<li '.$estado_activa_primera_pestana.'  ><a  href="#PCO_PestanaFormulario_'.$pestana_activa.'" data-toggle="tab" id="PCO_LinkPestanaFormulario_'.$pestana_activa.'">'.$titulo_pestana_formulario.'</a></li>';
                         //Limpia para las siguientes pestanas
                         $estado_activa_primera_pestana='';
