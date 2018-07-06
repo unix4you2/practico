@@ -1328,7 +1328,7 @@ if ($PCO_Accion=="editar_formulario")
 						<div id='campo23' style="display:none;">
                             <label for="informe_vinculado"><?php echo $MULTILANG_FrmInforme; ?></label>
                             <div class="form-group input-group">
-                                <select id="informe_vinculado" name="informe_vinculado" class="form-control input-sm">
+                                <select id="informe_vinculado" name="informe_vinculado" class="selectpicker combo-informe_vinculado show-tick form-control input-sm" data-live-search=true>
                                 <option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                 <?php
                                     //Define desde donde filtrar informes cuando se esta en modo desarrollador de Practico

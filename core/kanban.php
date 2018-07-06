@@ -256,7 +256,6 @@
             if($RegistroTareas["columna"]+1>$ColumnasDisponibles) $EstadoDeshabilitadoMoverDerecha="disabled";
             if($RegistroTareas["peso"]-1<=0) $EstadoDeshabilitadoMoverArriba="disabled";
 
-
             //Determina si la tarea esta en la ultima columna (candidata a ser archivada)
             $ComplementoArchivar="";
             if ($RegistroTareas["columna"]==$ColumnasDisponibles)
@@ -339,8 +338,6 @@
                     </div>
                 </div>
                 </div>';
-
-//https://www.w3schools.com/html/html5_draganddrop.asp
             return $Salida;
 		}
 
