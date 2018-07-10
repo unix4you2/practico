@@ -77,10 +77,10 @@ if ($PCO_Accion=="limpiar_backups")
 	{
 
 		//Presenta el listado de archivos
-		echo listado_visual_exploracion_archivos("bkp/","",$MULTILANG_ArchivosLimpiados,0);
+		echo PCO_ListadoExploracionArchivosVisual("bkp/","",$MULTILANG_ArchivosLimpiados,0);
 		
 		//Elimina los archivos presentados, menos el index
-		$ListadoArchivosEliminar=listado_exploracion_archivos("bkp/","");
+		$ListadoArchivosEliminar=PCO_ListadoExploracionArchivos("bkp/","");
 		$TotalAhorro=0;
 		foreach ($ListadoArchivosEliminar as $Archivo)
 			{
@@ -108,10 +108,10 @@ if ($PCO_Accion=="limpiar_temporales")
 	{
 
 		//Presenta el listado de archivos
-		echo listado_visual_exploracion_archivos("tmp/","",$MULTILANG_ArchivosLimpiados,0);
+		echo PCO_ListadoExploracionArchivosVisual("tmp/","",$MULTILANG_ArchivosLimpiados,0);
 		
 		//Elimina los archivos presentados, menos el index
-		$ListadoArchivosEliminar=listado_exploracion_archivos("tmp/","");
+		$ListadoArchivosEliminar=PCO_ListadoExploracionArchivos("tmp/","");
 		$TotalAhorro=0;
 		foreach ($ListadoArchivosEliminar as $Archivo)
 			{

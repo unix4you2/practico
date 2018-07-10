@@ -88,7 +88,7 @@
 			$prefijo_webservice=$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$_SERVER['PHP_SELF'];
 			$webservice_validacion = $protocolo_webservice.$prefijo_webservice."?PCO_WSOn=1&PCO_WSKey=".$LlaveDePaso."&PCO_WSSecret=".$LlaveDePaso."&PCO_WSId=verificar_credenciales&uid=".$uid."&clave=".$clave;
 			// Carga el contenido en una variable para validar la conexion
-			$contenido_url = @cargar_url($webservice_validacion);
+			$contenido_url = @PCO_CargarURL($webservice_validacion);
 			// Valida si se logro cargar o no el contenido
 			if ($contenido_url!="")
 				{
@@ -152,8 +152,8 @@
 							{
 								$plantilla_origen=$registro["plantilla_permisos"];
 								PCO_Auditar("Carga permisos a su perfil desde plantilla $plantilla_origen",$uid);
-								PCO_copiar_permisos($plantilla_origen,$uid);
-								PCO_copiar_informes($plantilla_origen,$uid);
+								PCO_CopiarPermisos($plantilla_origen,$uid);
+								PCO_CopiarInformes($plantilla_origen,$uid);
 							}
 				  }
 

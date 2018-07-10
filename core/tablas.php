@@ -802,7 +802,7 @@ if ($PCO_Accion=="confirmar_importacion_tabla")
 
 		archivo_cargado - Ruta absoluta hacia el archivo analizado en el paso anterior del asistente
 		nombre_tabla - Nombre de la tabla donde se hace la importacion
-		lista_campos_apareados (arreglo) - Una lista de posibles variables definidas (o no) con los campos hacia los cuales debe apuntar cada una.  Los campos obedecen al patron generado por la funcion aparear_campostabla_vs_hojacalculo() asi: PCO_campoimportado_XXXXXX donde XXXXXX es el nombre del campo en la tabla y su valor es el numero de la columna en el archivo cargado
+		lista_campos_apareados (arreglo) - Una lista de posibles variables definidas (o no) con los campos hacia los cuales debe apuntar cada una.  Los campos obedecen al patron generado por la funcion PCO_AparearCamposTabla_vs_HojaCalculo() asi: PCO_campoimportado_XXXXXX donde XXXXXX es el nombre del campo en la tabla y su valor es el numero de la columna en el archivo cargado
 
 	Salida:
 		Consultas SQL generadas y ejecutadas para la adicion de registros en la base de datos
@@ -982,7 +982,7 @@ if ($PCO_Accion=="analizar_importacion_csv")
 			<div class="col col-md-12">
 				<?php
 					abrir_ventana($MULTILANG_InfCargaPrev.' '.str_replace("tmp/","",$archivo_cargado).' (primeras 50 lineas - first 50 lines)', 'panel-primary'); 
-					echo datatable_desde_hojacalculo($archivo_cargado,50);
+					echo PCO_DatatableDesdeHojaCalculo($archivo_cargado,50);
 				?>
 				<?php cerrar_ventana(); ?>
 			</div>
@@ -1003,7 +1003,7 @@ if ($PCO_Accion=="analizar_importacion_csv")
 						<input type="Hidden" name="PCO_condicion_fija_campo_unico" value="<?php echo $PCO_condicion_fija_campo_unico; ?>">
 						<input type="Hidden" name="PCO_condicion_variable_campos_llave" value="<?php echo $PCO_condicion_variable_campos_llave; ?>">
 						<?php
-							echo aparear_campostabla_vs_hojacalculo($nombre_tabla,$archivo_cargado);
+							echo PCO_AparearCamposTabla_vs_HojaCalculo($nombre_tabla,$archivo_cargado);
 						?>
 
 				<?php cerrar_ventana(); ?>

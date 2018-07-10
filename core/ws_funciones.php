@@ -256,8 +256,8 @@ if (@$PCO_WSId=="verificar_credenciales")
 			if ($registro["plantilla_permisos"]!="")
 				{
 					PCO_Auditar("Carga permisos a su perfil desde plantilla $plantilla_origen_permisos",$login_chk);
-					PCO_copiar_permisos($plantilla_origen_permisos,$login_chk);
-					PCO_copiar_informes($plantilla_origen_permisos,$login_chk);
+					PCO_CopiarPermisos($plantilla_origen_permisos,$login_chk);
+					PCO_CopiarInformes($plantilla_origen_permisos,$login_chk);
 				}
 
 			// Se buscan datos de la aplicacion

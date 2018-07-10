@@ -73,8 +73,8 @@ if ($PCO_Accion=="actualizar_practico")
         <!-- INICIO TAB COPIAS DE SEGURIDAD -->
         <div class="tab-pane fade" id="pestana_copias">
             <?php
-                listado_visual_exploracion_archivos("bkp/","_bdd.gz","Base de datos",1);
-                listado_visual_exploracion_archivos("bkp/","_app.zip","Archivos y Scripts de Pr&aacute;ctico",1);
+                PCO_ListadoExploracionArchivosVisual("bkp/","_bdd.gz","Base de datos",1);
+                PCO_ListadoExploracionArchivosVisual("bkp/","_app.zip","Archivos y Scripts de Pr&aacute;ctico",1);
             ?>
         </div>
         <!-- FIN TAB COPIAS DE SEGURIDAD -->

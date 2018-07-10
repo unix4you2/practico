@@ -50,7 +50,7 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
         if ($ID_Usuario!="")
             {
                 $URL_Recuperacion="https://github.com/$ID_Usuario.atom";
-                $contenido_url = @cargar_url($URL_Recuperacion);
+                $contenido_url = @PCO_CargarURL($URL_Recuperacion);
                 //Si se ha obtenido respuesta entonces procesa entradas
                 if ($contenido_url!="")
                     {

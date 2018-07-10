@@ -548,7 +548,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="formulario_recuperac
 */
 if ($PCO_Accion=="copiar_informes")
 	{
-		PCO_copiar_informes($usuarioo,$usuariod);
+		PCO_CopiarInformes($usuarioo,$usuariod);
 		PCO_Auditar("Copia informes de $usuarioo al usuario $usuariod");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="informes_usuario">
@@ -576,7 +576,7 @@ if ($PCO_Accion=="copiar_informes")
 */
 if ($PCO_Accion=="copiar_permisos")
 	{
-		PCO_copiar_permisos($usuarioo,$usuariod);
+		PCO_CopiarPermisos($usuarioo,$usuariod);
 		PCO_Auditar("Copia permisos de $usuarioo al usuario $usuariod");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="permisos_usuario">

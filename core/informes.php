@@ -2264,7 +2264,7 @@ if ($PCO_Accion=="editar_informe")
 if ($PCO_Accion=="eliminar_informe")
 	{
 	    if ($informe=="") $informe=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
-		PCOFUNC_eliminar_informe($informe);
+		PCO_EliminarInforme($informe);
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_informes"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}

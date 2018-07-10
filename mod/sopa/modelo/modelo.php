@@ -50,7 +50,7 @@ function ObtenerEntradas_FacebookFanPage($Nombre_FanPage="", $ID_FanPage="", $Ca
         if ($ID_FanPage!="")
             {
                 $URL_Recuperacion="https://www.facebook.com/feeds/page.php?id=$ID_FanPage&format=$FormatoProveedor";
-                $contenido_url = @cargar_url($URL_Recuperacion);
+                $contenido_url = @PCO_CargarURL($URL_Recuperacion);
                 //Si se ha obtenido respuesta entonces procesa entradas
                 if ($contenido_url!="")
                     {
@@ -87,4 +87,3 @@ function ObtenerEntradas_FacebookFanPage($Nombre_FanPage="", $ID_FanPage="", $Ca
             }
         return $EntradasFanPage;
     }
-

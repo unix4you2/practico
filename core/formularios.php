@@ -2677,7 +2677,7 @@ if ($PCO_Accion=="editar_formulario")
 /* ################################################################## */
 /*
 	Function: eliminar_formulario
-	Alias de paso para PCOFUNC_eliminar_formulario
+	Alias de paso para PCO_EliminarFormulario
 
 	Variables de entrada:
 
@@ -2692,7 +2692,7 @@ if ($PCO_Accion=="editar_formulario")
 	if ($PCO_Accion=="eliminar_formulario")
 		{
 	        if ($formulario=="") $formulario=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
-			PCOFUNC_eliminar_formulario($formulario);
+			PCO_EliminarFormulario($formulario);
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_formularios"></form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 		}

@@ -396,7 +396,7 @@ function PCO_ImprimirPanelSimpleDashboard($ClaseColumnas,$EstiloPanel,$ClaseIcon
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: PCOFUNC_eliminar_informe
+	Function: PCO_EliminarInforme
 	Elimina un informe definido para la aplicacion incluyendo todos los objetos definidos en su interior
 
 	Variables de entrada:
@@ -415,7 +415,7 @@ function PCO_ImprimirPanelSimpleDashboard($ClaseColumnas,$EstiloPanel,$ClaseIcon
 	Ver tambien:
 		<administrar_formularios>
 */
-function PCOFUNC_eliminar_informe($informe="")
+function PCO_EliminarInforme($informe="")
 	{
 		global $TablasCore;
 		if ($informe!="")
@@ -434,7 +434,7 @@ function PCOFUNC_eliminar_informe($informe="")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: PCOFUNC_eliminar_formulario
+	Function: PCO_EliminarFormulario
 	Elimina un formulario definido para la aplicacion incluyendo todos los objetos definidos en su interior
 
 	Variables de entrada:
@@ -453,7 +453,7 @@ function PCOFUNC_eliminar_informe($informe="")
 	Ver tambien:
 		<administrar_formularios>
 */
-function PCOFUNC_eliminar_formulario($formulario="")
+function PCO_EliminarFormulario($formulario="")
 	{
 		global $TablasCore;
 		if ($formulario!="")
@@ -687,7 +687,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
 						$ListaCamposParaID="id,";
 						$InterroganteParaID="?,";
 						$ValorInsercionParaID=base64_decode($xml_importado->core_formulario[0]->id).$_SeparadorCampos_;
-						PCOFUNC_eliminar_formulario(base64_decode($xml_importado->core_formulario[0]->id));
+						PCO_EliminarFormulario(base64_decode($xml_importado->core_formulario[0]->id));
 					}
 
 				// Establece valores para cada campo a insertar en el nuevo form
@@ -947,7 +947,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							// Busca datos y genera XML de cada registro
 							$consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
 							$registro = $consulta->fetch();
-							$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_formulario);
+							$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_formulario);
 							$Contenido_XML .= "
 	</core_formulario>";
 							// Registros de formulario_objeto
@@ -958,7 +958,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 									//Exporta la tabla de core_formulario_objeto
 									$Contenido_XML .= "
 	<core_formulario_objeto>";
-									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_formulario_objeto);                        
+									$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_formulario_objeto);                        
 							$Contenido_XML .= "
 	</core_formulario_objeto>";
 									$conteo_elementos_xml++;
@@ -976,7 +976,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 									//Exporta la tabla de core_formulario_objeto
 									$Contenido_XML .= "
 	<core_evento_objeto>";
-									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_evento_objeto);                        
+									$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_evento_objeto);                        
 							$Contenido_XML .= "
 	</core_evento_objeto>";
 									$conteo_elementos_xml++;
@@ -993,7 +993,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 									//Exporta la tabla de core_formulario_objeto
 									$Contenido_XML .= "
 	<core_formulario_boton>";
-									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_formulario_boton);                        
+									$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_formulario_boton);                        
 							$Contenido_XML .= "
 	</core_formulario_boton>";
 									$conteo_elementos_xml++;
@@ -1063,7 +1063,7 @@ function PCO_ImportarXMLInforme($xml_importado)
 						$ListaCamposParaID="id,";
 						$InterroganteParaID="?,";
 						$ValorInsercionParaID=base64_decode($xml_importado->core_informe[0]->id).$_SeparadorCampos_;
-						PCOFUNC_eliminar_informe(base64_decode($xml_importado->core_informe[0]->id));
+						PCO_EliminarInforme(base64_decode($xml_importado->core_informe[0]->id));
 					}
 
 				// Establece valores para cada campo a insertar en el nuevo informe
@@ -1402,7 +1402,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 							// Busca datos y genera XML de cada registro
 							$consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=?","$informe");
 							$registro = $consulta->fetch();
-							$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_informe);
+							$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_informe);
 							$Contenido_XML .= "
 	</core_informe>";
 							// Registros de informe_boton
@@ -1413,7 +1413,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 									//Exporta la tabla de core_informe_boton
 									$Contenido_XML .= "
 	<core_informe_boton>";
-									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_informe_boton);
+									$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_informe_boton);
 							$Contenido_XML .= "
 	</core_informe_boton>";
 									$conteo_elementos_xml++;
@@ -1430,7 +1430,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 									//Exporta la tabla de core_informe_campos
 									$Contenido_XML .= "
 	<core_informe_campos>";
-									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_informe_campos);
+									$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_informe_campos);
 							$Contenido_XML .= "
 	</core_informe_campos>";
 									$conteo_elementos_xml++;
@@ -1447,7 +1447,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 									//Exporta la tabla de core_informe_condiciones
 									$Contenido_XML .= "
 	<core_informe_condiciones>";
-									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_informe_condiciones);
+									$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_informe_condiciones);
 							$Contenido_XML .= "
 	</core_informe_condiciones>";
 									$conteo_elementos_xml++;
@@ -1464,7 +1464,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 									//Exporta la tabla de core_informe_tablas
 									$Contenido_XML .= "
 	<core_informe_tablas>";
-									$Contenido_XML .=registro_a_xml($registro,"id,".$ListaCamposSinID_informe_tablas);
+									$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_informe_tablas);
 							$Contenido_XML .= "
 	</core_informe_tablas>";
 									$conteo_elementos_xml++;
@@ -1657,7 +1657,7 @@ function PCO_ReemplazarVariablesPHPEnCadena($cadena_original)
 function PCO_DireccionPorCoordenas($Latitud, $Longitud, $APIKey_GoogleMaps)
 	{
 		$URLMaps = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".$Latitud.",".$Longitud."&key=".$APIKey_GoogleMaps."&language=es";
-		$DatosRecibidos = @cargar_url($URLMaps);
+		$DatosRecibidos = @PCO_CargarURL($URLMaps);
 		return json_decode($DatosRecibidos, true);
 	}
 
@@ -1679,7 +1679,7 @@ function PCO_DireccionPorCoordenas($Latitud, $Longitud, $APIKey_GoogleMaps)
 function PCO_DireccionPorIDSitio($PlaceID, $APIKey_GoogleMaps)
 	{
 		$URLMaps = "https://maps.googleapis.com/maps/api/geocode/json?place_id=".$PlaceID."&key=".$APIKey_GoogleMaps."&language=es";
-		$DatosRecibidos = @cargar_url($URLMaps);
+		$DatosRecibidos = @PCO_CargarURL($URLMaps);
 		return json_decode($DatosRecibidos, true);
 	}
 
@@ -1988,7 +1988,7 @@ function PCO_SegmentarSQL($sql)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: PCO_copiar_permisos
+	Function: PCO_CopiarPermisos
 	Copia los permisos definidos para un usuario origen en otro especificado por destino
 
 	Variables de entrada:
@@ -1999,7 +1999,7 @@ function PCO_SegmentarSQL($sql)
 	Salida:
 		Registros de permisos actualizados en BD
 */
-function PCO_copiar_permisos($usuario_origen="",$usuario_destino="")
+function PCO_CopiarPermisos($usuario_origen="",$usuario_destino="")
     {
 		global $TablasCore,$ListaCamposSinID_usuario_menu,$_SeparadorCampos_;
 		// Elimina opciones existentes
@@ -2020,7 +2020,7 @@ function PCO_copiar_permisos($usuario_origen="",$usuario_destino="")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: PCO_copiar_informes
+	Function: PCO_CopiarInformes
 	Copia los informes definidos para un usuario origen en otro especificado por destino
 
 	Variables de entrada:
@@ -2031,7 +2031,7 @@ function PCO_copiar_permisos($usuario_origen="",$usuario_destino="")
 	Salida:
 		Registros de permisos actualizados en BD
 */
-function PCO_copiar_informes($usuario_origen="",$usuario_destino="")
+function PCO_CopiarInformes($usuario_origen="",$usuario_destino="")
     {
 		global $TablasCore,$ListaCamposSinID_usuario_informe,$_SeparadorCampos_;
 		// Elimina opciones existentes
@@ -2052,7 +2052,7 @@ function PCO_copiar_informes($usuario_origen="",$usuario_destino="")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: listado_exploracion_archivos
+	Function: PCO_ListadoExploracionArchivos
 	Construye una lista de los archivos contenidos en una carpeta y que coinciden con un flitro determinado
 
 	Variables de entrada:
@@ -2063,7 +2063,7 @@ function PCO_copiar_informes($usuario_origen="",$usuario_destino="")
 	Salida:
 		Arreglo de elementos asociados a cada archivo encontrado
 */
-function listado_exploracion_archivos($RutaExploracion="",$Filtro_contenido="")
+function PCO_ListadoExploracionArchivos($RutaExploracion="",$Filtro_contenido="")
     {
         $PCO_ListadoArchivos=array();
         //Si la ruta de exploracion es diferente de vacio hace el proceso de busqueda de archivos
@@ -2091,10 +2091,10 @@ function listado_exploracion_archivos($RutaExploracion="",$Filtro_contenido="")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: listado_exploracion_archivos
+	Function: PCO_ListadoExploracionArchivosVisual
 	Presenta una lista de los archivos contenidos en una carpeta con modificadores para las opciones
 */
-function listado_visual_exploracion_archivos($RutaExploracion="",$Filtro_contenido="",$TituloExploracion="",$PermitirDescarga=1)
+function PCO_ListadoExploracionArchivosVisual($RutaExploracion="",$Filtro_contenido="",$TituloExploracion="",$PermitirDescarga=1)
     {
         global $MULTILANG_TotalRegistros,$MULTILANG_Explorar,$MULTILANG_Filtro,$MULTILANG_Descargar,$MULTILANG_Tipo,$MULTILANG_Fecha,$MULTILANG_Peso;
         //Si la ruta de exploracion es diferente de vacio hace el proceso de busqueda de archivos
@@ -2113,7 +2113,7 @@ function listado_visual_exploracion_archivos($RutaExploracion="",$Filtro_conteni
                 $TotalTamanoElementos=0;
                 
                 //Obtiene la lista de archivos
-                $ListadoArchivos=listado_exploracion_archivos($RutaExploracion,$Filtro_contenido);
+                $ListadoArchivos=PCO_ListadoExploracionArchivos($RutaExploracion,$Filtro_contenido);
                 
                 //Recorre el arreglo de archivos encontrados para presentarlo
                 $ContenidoDirectorio = opendir($RutaExploracion);
@@ -2161,10 +2161,10 @@ function listado_visual_exploracion_archivos($RutaExploracion="",$Filtro_conteni
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: opciones_combo_desdecsv
+	Function: PCO_OpcionesComboDesdeCSV
 	Genera una lista de seleccion con la variable recibida y los items separados por un caracter especifico
 */
-function opciones_combo_desdecsv($lista_opciones,$caracter_separador,$valor_comparacion="",$usar_indice=0)
+function PCO_OpcionesComboDesdeCSV($lista_opciones,$caracter_separador,$valor_comparacion="",$usar_indice=0)
 	{
 		$SalidaFormateada="";
 		$campos = explode($caracter_separador, $lista_opciones);
@@ -2187,7 +2187,7 @@ function opciones_combo_desdecsv($lista_opciones,$caracter_separador,$valor_comp
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: aparear_campostabla_vs_hojacalculo
+	Function: PCO_AparearCamposTabla_vs_HojaCalculo
 	Abre un archivo de hoja de cálculo y lo compara frente a los campos de una tabla de datos para ver si existen, tipos de dato, etc.
 	
 	Variables de entrada:
@@ -2195,7 +2195,7 @@ function opciones_combo_desdecsv($lista_opciones,$caracter_separador,$valor_comp
 		PathArchivo - Ruta completa al archivo que se desea cargar
 		NombreTabla - Nombre de la tabla a revisar campos
 */
-function aparear_campostabla_vs_hojacalculo($NombreTabla,$PathArchivo)
+function PCO_AparearCamposTabla_vs_HojaCalculo($NombreTabla,$PathArchivo)
 	{
 		global $MULTILANG_Campo,$MULTILANG_Columna,$MULTILANG_Tablas,$MULTILANG_Archivo,$_SeparadorCampos_,$MULTILANG_Campo,$MULTILANG_Deshabilitado,$MULTILANG_FrmPredeterminado;
 		//Obtiene posibles variables de filtro globales
@@ -2211,7 +2211,7 @@ function aparear_campostabla_vs_hojacalculo($NombreTabla,$PathArchivo)
 			</tr></thead><tbody>';
 
 		//Busca las columnas definidas en el archivo
-		$ColumnasArchivo = columnas_desde_hojacalculo($PathArchivo);
+		$ColumnasArchivo = PCO_ColumnasDesdeHojaCalculo($PathArchivo);
 		//Genera la lista en minuscula para ser pasada a los combos
 		$ListaColumnas="";
 		foreach ($ColumnasArchivo as $ColumnaLista)
@@ -2227,7 +2227,7 @@ function aparear_campostabla_vs_hojacalculo($NombreTabla,$PathArchivo)
 					$SalidaFormateada.= '<td>'.$CamposTabla[$i]["nombre"].'</td>';
 					$SalidaFormateada.= '<td><i class="fa fa-exchange"></i></td>';
 					//Genera combo de columnas de archivo preseleccionando uno si aplica
-					$OpcionesCombo=opciones_combo_desdecsv($ListaColumnas,"|",strtolower($CamposTabla[$i]["nombre"]),1); //Solicita el indice en lugar del valor
+					$OpcionesCombo=PCO_OpcionesComboDesdeCSV($ListaColumnas,"|",strtolower($CamposTabla[$i]["nombre"]),1); //Solicita el indice en lugar del valor
 					
 					//Si el campo es un campo ignorado deja un combo vacio
 					if (  in_array($CamposTabla[$i]["nombre"],$ArregloCamposIgnorados)  )
@@ -2250,7 +2250,7 @@ function aparear_campostabla_vs_hojacalculo($NombreTabla,$PathArchivo)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: columnas_desde_hojacalculo
+	Function: PCO_ColumnasDesdeHojaCalculo
 	Abre un archivo de hoja de cálculo y busca las columnas definidas en la primera fila de la primera hoja
 	
 	Variables de entrada:
@@ -2261,7 +2261,7 @@ function aparear_campostabla_vs_hojacalculo($NombreTabla,$PathArchivo)
 
 		ArregloColumnas - Variable con la lista de columas encontradas
 */
-function columnas_desde_hojacalculo($PathArchivo)
+function PCO_ColumnasDesdeHojaCalculo($PathArchivo)
 	{
 		$ArregloColumnas=array();
 
@@ -2288,7 +2288,7 @@ function columnas_desde_hojacalculo($PathArchivo)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: datatable_desde_hojacalculo
+	Function: PCO_DatatableDesdeHojaCalculo
 	Abre un archivo de hoja de cálculo y lo presenta en formato DataTable
 	
 	Variables de entrada:
@@ -2296,7 +2296,7 @@ function columnas_desde_hojacalculo($PathArchivo)
 		PathArchivo - Ruta completa al archivo que se desea cargar
 		NroLineas - Cantidad de lineas para ser agregadas al DataTable.  Cero para ilimitado
 */
-function datatable_desde_hojacalculo($PathArchivo,$NroLineas)
+function PCO_DatatableDesdeHojaCalculo($PathArchivo,$NroLineas)
 	{
 		global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales;
 		
@@ -2318,7 +2318,7 @@ function datatable_desde_hojacalculo($PathArchivo,$NroLineas)
 		$MaximaColumna=0;
 
 		//Determina el numero de columna maxima y genera la primera fila como encabezados
-		$ColumnasEncabezado=columnas_desde_hojacalculo($PathArchivo);
+		$ColumnasEncabezado=PCO_ColumnasDesdeHojaCalculo($PathArchivo);
 		foreach ($ColumnasEncabezado as $TituloColuma)
 			{
 				//$SalidaFormateada.= '<th>COL_'.($MaximaColumna+1).'<br>'.$TituloColuma.'</th>';
@@ -2354,7 +2354,7 @@ function datatable_desde_hojacalculo($PathArchivo,$NroLineas)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: permiso_accion
+	Function: PCO_PermisoHeredadoAccion
 	Busca dentro de los permisos del usuario la accion a ejecutar cuando no se encuentra directamente como una opcion del usuario sino como una subrutina de otra de la que si tiene agregada de manera que valida si puede ingresar o no a ella.
 	
 	Variables de entrada:
@@ -2365,7 +2365,7 @@ function datatable_desde_hojacalculo($PathArchivo,$NroLineas)
 		Retorna 1 en caso de encontrar el permiso
 		Retorna 0 cuando no se encuentra un permiso
 */
-function permiso_heredado_accion($PCO_Accion)
+function PCO_PermisoHeredadoAccion($PCO_Accion)
 	{
 		global $PCOSESS_LoginUsuario;
 		// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
@@ -2374,93 +2374,93 @@ function permiso_heredado_accion($PCO_Accion)
 		// Verifica mapeo de permisos para acciones que llaman a otras, heredadas.  Valores en = 1  son funciones publicas:
 		// FUNCION_solicitada_por_el_usuario				FUNCION_madre_de_entrada_a_funcion_solicitada
 		if ($PCO_Accion== "mis_informes")						$retorno = 1;
-		if ($PCO_Accion== "guardar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
-		if ($PCO_Accion== "editar_informe")						$retorno = permiso_agregado_accion("administrar_informes");
-		if ($PCO_Accion== "clonar_diseno_informe")				$retorno = permiso_agregado_accion("administrar_informes");
-		if ($PCO_Accion== "definir_copia_informes")				$retorno = permiso_agregado_accion("administrar_informes");
-		if ($PCO_Accion== "eliminar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
-		if ($PCO_Accion== "actualizar_informe")					$retorno = permiso_agregado_accion("administrar_informes");
-		if ($PCO_Accion== "eliminar_informe_tabla")				$retorno = permiso_agregado_accion("administrar_informes");
-		if ($PCO_Accion== "guardar_informe_tabla")				$retorno = permiso_agregado_accion("administrar_informes");
-		if ($PCO_Accion== "eliminar_informe_campo")				$retorno = permiso_agregado_accion("administrar_informes");
-		if ($PCO_Accion== "guardar_informe_campo")				$retorno = permiso_agregado_accion("administrar_informes");
-		if ($PCO_Accion== "guardar_informe_condicion")			$retorno = permiso_agregado_accion("administrar_informes");
-		if ($PCO_Accion== "eliminar_informe_condicion")			$retorno = permiso_agregado_accion("administrar_informes");
-		if ($PCO_Accion== "actualizar_grafico_informe")			$retorno = permiso_agregado_accion("administrar_informes");
-		if ($PCO_Accion== "actualizar_agrupamiento_informe")	$retorno = permiso_agregado_accion("administrar_informes");
-		if ($PCO_Accion== "guardar_accion_informe")				$retorno = permiso_agregado_accion("administrar_informes");
+		if ($PCO_Accion== "guardar_informe")					$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "editar_informe")						$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "clonar_diseno_informe")				$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "definir_copia_informes")				$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "eliminar_informe")					$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "actualizar_informe")					$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "eliminar_informe_tabla")				$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "guardar_informe_tabla")				$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "eliminar_informe_campo")				$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "guardar_informe_campo")				$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "guardar_informe_condicion")			$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "eliminar_informe_condicion")			$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "actualizar_grafico_informe")			$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "actualizar_agrupamiento_informe")	$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "guardar_accion_informe")				$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
 		if ($PCO_Accion== "eliminar_registro_informe")			$retorno = 1;
-		if ($PCO_Accion== "eliminar_accion_informe")			$retorno = permiso_agregado_accion("administrar_informes");
+		if ($PCO_Accion== "eliminar_accion_informe")			$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
 		if ($PCO_Accion== "exportar_informe")					$retorno = 1;
 		if ($PCO_Accion== "importar_informe")					$retorno = 1;
-		if ($PCO_Accion== "analizar_importacion_informe")		$retorno = permiso_agregado_accion("administrar_informes");
-		if ($PCO_Accion== "confirmar_importacion_informe")		$retorno = permiso_agregado_accion("administrar_informes");
+		if ($PCO_Accion== "analizar_importacion_informe")		$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "confirmar_importacion_informe")		$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
 		
 		// Funciones en core/usuarios.php
 		if ($PCO_Accion== "cambiar_clave")						$retorno = 1;
         if ($PCO_Accion== "actualizar_perfil_usuario")			$retorno = 1;
         if ($PCO_Accion== "guardar_perfil_usuario")				$retorno = 1;
-        if ($PCO_Accion== "ver_seguimiento_monitoreo")			$retorno = permiso_agregado_accion("listar_usuarios");
-		if ($PCO_Accion== "resetear_clave")						$retorno = permiso_agregado_accion("listar_usuarios");
-		if ($PCO_Accion== "ver_seguimiento_general")			$retorno = permiso_agregado_accion("listar_usuarios");
-		if ($PCO_Accion== "ver_seguimiento_especifico")			$retorno = permiso_agregado_accion("listar_usuarios");
-		if ($PCO_Accion== "actualizar_clave")					$retorno = permiso_heredado_accion("cambiar_clave");
-		if ($PCO_Accion== "agregar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
-		if ($PCO_Accion== "guardar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
-		if ($PCO_Accion== "eliminar_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
-		if ($PCO_Accion== "cambiar_estado_usuario")				$retorno = permiso_agregado_accion("listar_usuarios");
-		if ($PCO_Accion== "permisos_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
-		if ($PCO_Accion== "agregar_permiso")					$retorno = permiso_agregado_accion("listar_usuarios");
-		if ($PCO_Accion== "eliminar_permiso")					$retorno = permiso_agregado_accion("listar_usuarios");
-		if ($PCO_Accion== "informes_usuario")					$retorno = permiso_agregado_accion("listar_usuarios");
-		if ($PCO_Accion== "agregar_informe_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
-		if ($PCO_Accion== "eliminar_informe_usuario")			$retorno = permiso_agregado_accion("listar_usuarios");
-        if ($PCO_Accion== "copiar_permisos")					$retorno = permiso_agregado_accion("listar_usuarios");
-        if ($PCO_Accion== "copiar_informes")					$retorno = permiso_agregado_accion("listar_usuarios");
+        if ($PCO_Accion== "ver_seguimiento_monitoreo")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "resetear_clave")						$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "ver_seguimiento_general")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "ver_seguimiento_especifico")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "actualizar_clave")					$retorno = PCO_PermisoHeredadoAccion("cambiar_clave");
+		if ($PCO_Accion== "agregar_usuario")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "guardar_usuario")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "eliminar_usuario")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "cambiar_estado_usuario")				$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "permisos_usuario")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "agregar_permiso")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "eliminar_permiso")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "informes_usuario")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "agregar_informe_usuario")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "eliminar_informe_usuario")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+        if ($PCO_Accion== "copiar_permisos")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+        if ($PCO_Accion== "copiar_informes")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
         if ($PCO_Accion== "agregar_usuario_autoregistro")		$retorno = 1;
         if ($PCO_Accion== "guardar_usuario_autoregistro")		$retorno = 1;
         
 		// Funciones en core/menus.php
 		if ($PCO_Accion== "Ver_menu")							$retorno = 1;
 		if ($PCO_Accion== "buscar_permisos_practico")			$retorno = 1;
-		if ($PCO_Accion== "eliminar_menu")						$retorno = permiso_agregado_accion("PCOFUNC_AdministrarMenu");
+		if ($PCO_Accion== "eliminar_menu")						$retorno = PCO_PermisoAgregadoAccion("PCOFUNC_AdministrarMenu");
 		// Funciones en core/tablas.php
-		if ($PCO_Accion== "asistente_tablas")					$retorno = permiso_agregado_accion("administrar_tablas");
-		if ($PCO_Accion== "guardar_crear_tabla_asistente")		$retorno = permiso_agregado_accion("administrar_tablas");
-		if ($PCO_Accion== "editar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
-		if ($PCO_Accion== "eliminar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
-		if ($PCO_Accion== "eliminar_campo")						$retorno = permiso_agregado_accion("administrar_tablas");
-		if ($PCO_Accion== "guardar_crear_campo")				$retorno = permiso_agregado_accion("administrar_tablas");
-		if ($PCO_Accion== "guardar_crear_tabla")				$retorno = permiso_agregado_accion("administrar_tablas");
-		if ($PCO_Accion== "definir_copia_tablas")				$retorno = permiso_agregado_accion("administrar_tablas");
-		if ($PCO_Accion== "copiar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
-		if ($PCO_Accion== "importar_tabla")						$retorno = permiso_agregado_accion("administrar_tablas");
-		if ($PCO_Accion== "confirmar_importacion_tabla")		$retorno = permiso_agregado_accion("administrar_tablas");
-		if ($PCO_Accion== "analizar_importacion_csv")			$retorno = permiso_agregado_accion("administrar_tablas");
-		if ($PCO_Accion== "escogertabla_importacion_csv")		$retorno = permiso_agregado_accion("administrar_tablas");
-		if ($PCO_Accion== "ejecutar_importacion_csv")			$retorno = permiso_agregado_accion("administrar_tablas");
+		if ($PCO_Accion== "asistente_tablas")					$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
+		if ($PCO_Accion== "guardar_crear_tabla_asistente")		$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
+		if ($PCO_Accion== "editar_tabla")						$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
+		if ($PCO_Accion== "eliminar_tabla")						$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
+		if ($PCO_Accion== "eliminar_campo")						$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
+		if ($PCO_Accion== "guardar_crear_campo")				$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
+		if ($PCO_Accion== "guardar_crear_tabla")				$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
+		if ($PCO_Accion== "definir_copia_tablas")				$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
+		if ($PCO_Accion== "copiar_tabla")						$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
+		if ($PCO_Accion== "importar_tabla")						$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
+		if ($PCO_Accion== "confirmar_importacion_tabla")		$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
+		if ($PCO_Accion== "analizar_importacion_csv")			$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
+		if ($PCO_Accion== "escogertabla_importacion_csv")		$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
+		if ($PCO_Accion== "ejecutar_importacion_csv")			$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
 
 		// Funciones en core/formularios.php
 		if ($PCO_Accion== "guardar_datos_formulario")			$retorno = 1;
 		if ($PCO_Accion== "eliminar_datos_formulario")			$retorno = 1;
 		if ($PCO_Accion== "actualizar_datos_formulario")		$retorno = 1;
-		if ($PCO_Accion== "actualizar_java_evento")		        $retorno = permiso_agregado_accion("administrar_formularios");
-		if ($PCO_Accion== "editar_evento_objeto")		        $retorno = permiso_agregado_accion("administrar_formularios");
-		if ($PCO_Accion== "eliminar_evento_objeto")		        $retorno = permiso_agregado_accion("administrar_formularios");
-		if ($PCO_Accion== "actualizar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
-		if ($PCO_Accion== "copiar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
-		if ($PCO_Accion== "definir_copia_formularios")			$retorno = permiso_agregado_accion("administrar_formularios");
-		if ($PCO_Accion== "actualizar_campo_formulario")		$retorno = permiso_agregado_accion("administrar_formularios");
-		if ($PCO_Accion== "guardar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
-		if ($PCO_Accion== "eliminar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
-		if ($PCO_Accion== "editar_formulario")					$retorno = permiso_agregado_accion("administrar_formularios");
-		if ($PCO_Accion== "guardar_campo_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
-		if ($PCO_Accion== "eliminar_campo_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
-		if ($PCO_Accion== "guardar_accion_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
-		if ($PCO_Accion== "eliminar_accion_formulario")			$retorno = permiso_agregado_accion("editar_formulario");
-		if ($PCO_Accion== "confirmar_importacion_formulario")	$retorno = permiso_agregado_accion("administrar_formularios");
-		if ($PCO_Accion== "analizar_importacion_formulario")	$retorno = permiso_agregado_accion("administrar_formularios");
-		if ($PCO_Accion== "importar_formulario")				$retorno = permiso_agregado_accion("administrar_formularios");
+		if ($PCO_Accion== "actualizar_java_evento")		        $retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "editar_evento_objeto")		        $retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "eliminar_evento_objeto")		        $retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "actualizar_formulario")				$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "copiar_formulario")					$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "definir_copia_formularios")			$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "actualizar_campo_formulario")		$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "guardar_formulario")					$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "eliminar_formulario")				$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "editar_formulario")					$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "guardar_campo_formulario")			$retorno = PCO_PermisoAgregadoAccion("editar_formulario");
+		if ($PCO_Accion== "eliminar_campo_formulario")			$retorno = PCO_PermisoAgregadoAccion("editar_formulario");
+		if ($PCO_Accion== "guardar_accion_formulario")			$retorno = PCO_PermisoAgregadoAccion("editar_formulario");
+		if ($PCO_Accion== "eliminar_accion_formulario")			$retorno = PCO_PermisoAgregadoAccion("editar_formulario");
+		if ($PCO_Accion== "confirmar_importacion_formulario")	$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "analizar_importacion_formulario")	$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "importar_formulario")				$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
 		// Funciones en core/sesion.php
 		if ($PCO_Accion== "Iniciar_login")						$retorno = 1;
 		if ($PCO_Accion== "Terminar_sesion")					$retorno = 1;
@@ -2468,9 +2468,9 @@ function permiso_heredado_accion($PCO_Accion)
 		// Funciones en core/objetos.php
 		if ($PCO_Accion== "cargar_objeto")						$retorno = 1;
 		// Funciones en core/actualizacion.php
-		if ($PCO_Accion== "cargar_archivo")						$retorno = permiso_agregado_accion("actualizar_practico");
-		if ($PCO_Accion== "analizar_parche")					$retorno = permiso_agregado_accion("actualizar_practico");
-		if ($PCO_Accion== "aplicar_parche")						$retorno = permiso_agregado_accion("actualizar_practico");
+		if ($PCO_Accion== "cargar_archivo")						$retorno = PCO_PermisoAgregadoAccion("actualizar_practico");
+		if ($PCO_Accion== "analizar_parche")					$retorno = PCO_PermisoAgregadoAccion("actualizar_practico");
+		if ($PCO_Accion== "aplicar_parche")						$retorno = PCO_PermisoAgregadoAccion("actualizar_practico");
 		// Funciones en core/ajax.php
 		if ($PCO_Accion== "opciones_combo_box")					$retorno = 1;
 		if ($PCO_Accion== "valor_campo_tabla")					$retorno = 1;
@@ -2540,7 +2540,7 @@ function RestaurarEtiquetasHTML($input)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: permiso_agregado_accion
+	Function: PCO_PermisoAgregadoAccion
 	Busca dentro de los permisos agregados de manera explicita al usuario.
 	
 	Variables de entrada:
@@ -2552,7 +2552,7 @@ function RestaurarEtiquetasHTML($input)
 		Retorna 1 en caso de encontrar el permiso
 		Retorna 0 cuando no se encuentra un permiso
 */
-function permiso_agregado_accion($PCO_Accion)
+function PCO_PermisoAgregadoAccion($PCO_Accion)
 	{
 		// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 		$retorno=0;
@@ -2573,60 +2573,13 @@ function permiso_agregado_accion($PCO_Accion)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	EN DESUSO - EN DESUSO - EN DESUSO: Ahora las acciones para admin siempre son ejecutadas.  Ver funcion permiso_accion
-	Function: permiso_raiz_admin
-	El super usuario no cuenta con ninguna entrada dentro de la tabla de permisos pues por defecto las ve todas.  En el caso de las funciones administrativas se agregan en el mapeo para el admin de manera que siempre le deje entrar.
-	
-	Variables de entrada:
-
-		accion - Accion a ser ejectudada
-		
-	Salida:
-		Retorna 1 en caso de encontrar el permiso
-		Retorna 0 cuando no se encuentra un permiso
-*/
-function permiso_raiz_admin($PCO_Accion)
-	{
-		global $PCOSESS_LoginUsuario;
-		// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
-		$retorno=0;
-		// Permisos o acciones raiz para el admin
-		if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-			{
-				switch ($PCO_Accion)
-					{
-						case "cambiar_clave":
-						case "guardar_configuracion":
-						case "guardar_configws":
-						case "guardar_params":
-						case "administrar_tablas":
-						case "administrar_formularios":
-						case "administrar_informes":
-						case "PCOFUNC_AdministrarMenu":
-						case "listar_usuarios":
-						case "actualizar_practico":
-							$retorno = 1;
-							break;
-						default:
-							$retorno = 0;
-							break;
-					}
-			}
-		//echo $PCOSESS_LoginUsuario.':Permiso raiz admin='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
-		return $retorno;
-	}
-
-
-/* ################################################################## */
-/* ################################################################## */
-/*
-	Function: registro_a_xml
+	Function: PCO_ConvertirRegistroXML
 	Traduce un registro de base de datos a notacion XML y retorna su cadena equivalente
 
 	Ver tambien:
 		<copiar_formulario> | <copiar_informe>
 */
-function registro_a_xml($Registro_BD,$ListaCampos,$CodificarBase64=1)
+function PCO_ConvertirRegistroXML($Registro_BD,$ListaCampos,$CodificarBase64=1)
 	{
 		//Inicializa la variable de retorno
 		$Contenido_XML="";
@@ -2670,19 +2623,18 @@ function permiso_accion($PCO_Accion)
 		$retorno=0;
 
 		// Evalua inicialmente permisos para el admin (evita queries)
-		// $retorno=permiso_raiz_admin($PCO_Accion);
 		if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario)) $retorno=1;
 
 		// Si es un usuario estandar siempre entra, si es el admin entra si no es permiso raiz
 		if (!$retorno)
 			{
 				// Busca permisos agregados directamente al usuario
-				$retorno=permiso_agregado_accion($PCO_Accion);
+				$retorno=PCO_PermisoAgregadoAccion($PCO_Accion);
 				// Si no encuentra permisos directos, busca en los heredados de los directos
 				if (!$retorno)
 					{
 						// Si no encuentra el permiso directo llama los heredados
-						$retorno=permiso_heredado_accion($PCO_Accion);
+						$retorno=PCO_PermisoHeredadoAccion($PCO_Accion);
 					}
 				//Si no encuentra en los heredados busca en preautorizados por configuracion
 				if (!$retorno)
@@ -3683,13 +3635,13 @@ function existe_campo_tabla($campo,$tabla,$ConexionAlterna="",$MotorAlterno="",$
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: file_get_contents_curl
+	Function: PCO_FileGetContents_CURL
 	Un reemplazo para la funcion file_get_contents utilizando cURL
 
 	Salida:
 		Contenido de la URL recibida
 */
-function file_get_contents_curl($url)
+function PCO_FileGetContents_CURL($url)
 	{
 		global $MULTILANG_ErrExtension,$MULTILANG_ErrCURL;
 		//Verifica soporte para cURL
@@ -3714,10 +3666,10 @@ function file_get_contents_curl($url)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: file_get_contents_socket
+	Function: PCO_FileGetContents_SOCKET
 	Un reemplazo para la funcion file_get_contents utilizando Sockets
 */
-function file_get_contents_socket($url)
+function PCO_FileGetContents_SOCKET($url)
 	{
 		$url_parsed = parse_url($url);
 		$host = $url_parsed["host"];
@@ -3750,13 +3702,13 @@ function file_get_contents_socket($url)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: file_get_contents_nativo
+	Function: PCO_FileGetContents_NATIVO
 	Una personalizacion para la funcion file_get_contents de PHP agregando Agente de navegador y otros.
 
 	Salida:
 		Contenido de la URL recibida
 */
-function file_get_contents_nativo($url)
+function PCO_FileGetContents_NATIVO($url)
 	{
         //ORIGINAL$contenido_url = trim(file_get_contents($url));
         //Define el contexto de navegacion
@@ -3779,10 +3731,10 @@ function file_get_contents_nativo($url)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: cargar_url
+	Function: PCO_CargarURL
 	Recibe una URL y pasa su contenido a una cadena de texto
 */
-function cargar_url($url)
+function PCO_CargarURL($url)
 	{
 		$contenido_url="";
 
@@ -3790,17 +3742,17 @@ function cargar_url($url)
 		$funcion_evaluada='curl_init'; $valor_esperado='1';
 		if (@$contenido_url=="")
 			if (ini_get($funcion_evaluada)==$valor_esperado)
-				$contenido_url = trim(file_get_contents_curl($url));
+				$contenido_url = trim(PCO_FileGetContents_CURL($url));
 
 		$funcion_evaluada='allow_url_fopen'; $valor_esperado='1';
 		//Intenta con la funcion nativa de PHP si esta habilitada y no se pudo obtener nada con cURL
 		if (@$contenido_url=="")
 			if (ini_get($funcion_evaluada)==$valor_esperado)
-				$contenido_url = trim(file_get_contents_nativo($url));
+				$contenido_url = trim(PCO_FileGetContents_NATIVO($url));
 
 		//Intenta con funciones de socket si no se pudo obtener nada con file_get_contents
 		if (@$contenido_url=="")
-			$contenido_url = trim(file_get_contents_socket($url));
+			$contenido_url = trim(PCO_FileGetContents_SOCKET($url));
 
 		//Retorna el resultado
 		return $contenido_url;
@@ -3883,7 +3835,7 @@ function buscar_actualizaciones($PCOSESS_LoginUsuario='',$PCO_Accion)
 		if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion=="Ver_menu" && $buscar==1)
 			{
 				$path_ultima_version="https://raw.githubusercontent.com/unix4you2/practico/master/dev_tools/version_publicada.txt";
-				$version_actualizada = @cargar_url($path_ultima_version);
+				$version_actualizada = @PCO_CargarURL($path_ultima_version);
 				$archivo_origen="inc/version_actual.txt";
 				$archivo = fopen($archivo_origen, "r");
 				if ($archivo)

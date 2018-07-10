@@ -45,7 +45,7 @@ function Obtener_IDFanPage($Nombre_FanPage="")
     {
         $ID_Obtenido="";
         $URL_Recuperacion="https://graph.facebook.com/$Nombre_FanPage";
-        $contenido_url = @cargar_url($URL_Recuperacion);
+        $contenido_url = @PCO_CargarURL($URL_Recuperacion);
         //Si se ha obtenido respuesta entonces procesa el JSON
         if ($contenido_url!="")
             {
