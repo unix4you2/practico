@@ -120,7 +120,7 @@
                 $total_tablas=0;
         		while ($registro = $resultado->fetch())
         			{
-        				$total_registros=ContarRegistros($registro["0"]);
+        				$total_registros=PCO_ContarRegistrosTabla($registro["0"]);
         				echo "\n\r";
         				echo 'Tabla: '.$registro[0].'='.$total_registros.' registros. ';
                         $total_tablas++;
