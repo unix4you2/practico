@@ -1949,8 +1949,9 @@ if ($PCO_Accion=="editar_informe")
 		?>
 
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-3">
 			<?php 
+			    PCO_CargarFormulario("-13",1);
 				PCO_AbrirVentana($MULTILANG_BarraHtas, 'panel-primary'); 
 			?>
 				<div align=center>
@@ -2006,7 +2007,7 @@ if ($PCO_Accion=="editar_informe")
 			
 
   </div>    
-  <div class="col-md-8">
+  <div class="col-md-9">
 
 			<?php PCO_AbrirVentana($MULTILANG_InfParam." <i>[ID=".$registro_informe['id']."]</i>", 'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
