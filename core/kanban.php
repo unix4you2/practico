@@ -49,13 +49,13 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: RedireccionATableroKanban
+	Function: PCO_RedireccionATableroKanban
 	Lleva al usuario hasta el tablero kanban
 
 	Ver tambien:
 		<PCO_ExplorarTablerosKanban>
 */
-	function RedireccionATableroKanban($ID_TableroKanban="")
+	function PCO_RedireccionATableroKanban($ID_TableroKanban="")
 		{
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 				<input type="Hidden" name="PCO_Accion" value="PCO_ExplorarTablerosKanban">
@@ -89,7 +89,7 @@
 			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."kanban SET descripcion='$titulos_columnas',compartido_rw='$compartido_rw'    WHERE categoria='[PRACTICO][ColumnasTablero]' AND id='$ID_TableroKanban'  ");
 			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."kanban SET descripcion='$titulos_categorias'  WHERE categoria='[PRACTICO][CategoriasTareas]' AND tablero='$ID_TableroKanban' ");
 			PCO_Auditar("Actualiza propiedades de tablero Kanban $ID_TableroKanban");
-			RedireccionATableroKanban($ID_TableroKanban);
+			PCO_RedireccionATableroKanban($ID_TableroKanban);
 		}
 
 
@@ -110,7 +110,7 @@
 			// Elimina los datos
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."kanban WHERE id=?","$IdTareaKanban");
 			PCO_Auditar("Elimina tarea Kanban $IdTareaKanban");
-			RedireccionATableroKanban($ID_TableroKanban);
+			PCO_RedireccionATableroKanban($ID_TableroKanban);
 		}
 
 
@@ -131,7 +131,7 @@
 			// Elimina los datos
 			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."kanban SET archivado=1 WHERE id=?","$IdTareaKanban");
 			PCO_Auditar("Archiva tarea Kanban $IdTareaKanban");
-			RedireccionATableroKanban($ID_TableroKanban);
+			PCO_RedireccionATableroKanban($ID_TableroKanban);
 		}
 
 
@@ -154,7 +154,7 @@
 			// Elimina los datos
 			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."kanban (login_admintablero,titulo,descripcion,asignado_a,categoria,columna,peso,estilo,fecha,archivado,compartido_rw,tablero,porcentaje) VALUES ('$PCOSESS_LoginUsuario','$titulo','$descripcion','$asignado_a','$categoria','$columna','$peso','$estilo','$fecha','0','',$ID_TableroKanban,'$porcentaje') ");
 			PCO_Auditar("Agrega tarea Kanban a tablero $ID_TableroKanban");
-			RedireccionATableroKanban($ID_TableroKanban);
+			PCO_RedireccionATableroKanban($ID_TableroKanban);
 		}
 
 
@@ -178,7 +178,7 @@
 			$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."kanban (login_admintablero,titulo,descripcion,asignado_a,categoria,columna,peso,estilo,fecha,archivado,compartido_rw,tablero) VALUES ('$PCOSESS_LoginUsuario','','$titulos_categorias','','[PRACTICO][CategoriasTareas]','-2','0','','20000101','0','',$idObjetoInsertado) ");
 			PCO_Auditar("Agrega Tablero Kanban $titulo_tablero Id:$idObjetoInsertado");
-			RedireccionATableroKanban($idObjetoInsertado);
+			PCO_RedireccionATableroKanban($idObjetoInsertado);
 		}
 
 
@@ -201,7 +201,7 @@
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."kanban WHERE id=$ID_TableroKanban ");
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."kanban WHERE tablero=$ID_TableroKanban ");
 			PCO_Auditar("Elimina Tablero Kanban $ID_TableroKanban");
-			RedireccionATableroKanban("");
+			PCO_RedireccionATableroKanban("");
 		}
 
 
@@ -281,7 +281,7 @@
 //#################################################################################
 //#################################################################################
 //Presenta una tarea especifica tomando la informacion desde un registro de BD
-	function PresentarTareaKanban($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban)
+	function PCO_PresentarTareaKanban($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban)
 		{
 		    global $PCO_FechaOperacion;
 		    global $MULTILANG_FechaLimite,$MULTILANG_AsignadoA,$MULTILANG_InfCategoria,$MULTILANG_DelKanban,$MULTILANG_Finalizado;
@@ -737,7 +737,7 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanban")
                                 //Busca las tarjetas de la columna siempre y cuando no esten ya archivadas
                                 $ResultadoTareas=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND columna=$ConteoColumna AND tablero='$ID_TableroKanban' ORDER BY peso ASC ");
                                 while ($RegistroTareas=$ResultadoTareas->fetch())
-                                    echo PresentarTareaKanban($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban);
+                                    echo PCO_PresentarTareaKanban($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban);
                                 echo "</div></td>";
                                 $ConteoColumna++;
                             }
