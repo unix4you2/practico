@@ -156,7 +156,7 @@
 			//Verifica si esta o no en modo DEMO para hacer la operacion
 			if ($PCO_ModoDEMO==1)
 				{
-					mensaje($MULTILANG_TitDemo, $MULTILANG_MsjDemo, '', 'fa fa-fw fa-2x fa-thumbs-down', 'alert alert-dismissible alert-danger');
+					PCO_Mensaje($MULTILANG_TitDemo, $MULTILANG_MsjDemo, '', 'fa fa-fw fa-2x fa-thumbs-down', 'alert alert-dismissible alert-danger');
 					echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 					die();
 				}
@@ -264,7 +264,7 @@ if ($PCO_Accion=="actualizar_perfil_usuario")
                         }
                     else
                         {
-                            mensaje($MULTILANG_Atencion, $MULTILANG_UsrHlpNoPW.' (<b>'.$MULTILANG_TipoMotor.': '.$Auth_TipoMotor.'</b>)', '', 'fa fa-remove fa-5x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
+                            PCO_Mensaje($MULTILANG_Atencion, $MULTILANG_UsrHlpNoPW.' (<b>'.$MULTILANG_TipoMotor.': '.$Auth_TipoMotor.'</b>)', '', 'fa fa-remove fa-5x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
                         }
     }
 
@@ -308,12 +308,12 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="establecer_nueva_con
                 //Actualiza registros
                 PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET llave_recuperacion=? WHERE login=?","$LlaveRecuperacion$_SeparadorCampos_$PCO_UsuarioRestablecimiento");
                 PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login=? ","$PCO_UsuarioRestablecimiento");
-                mensaje($MULTILANG_UsrResetCuenta,$MULTILANG_UsrResetOK,'','fa fa-unlock-alt fa-4x','alert alert-info alert-dismissible');
+                PCO_Mensaje($MULTILANG_UsrResetCuenta,$MULTILANG_UsrResetOK,'','fa fa-unlock-alt fa-4x','alert alert-info alert-dismissible');
                 PCO_Auditar("Restablece clave de acceso desde $PCO_DireccionAuditoria",$PCO_UsuarioRestablecimiento);
             }
         else
             {
-                mensaje($MULTILANG_Error,$PCO_MensajeError,'','fa fa-exclamation-triangle fa-4x','alert alert-danger alert-dismissible');
+                PCO_Mensaje($MULTILANG_Error,$PCO_MensajeError,'','fa fa-exclamation-triangle fa-4x','alert alert-danger alert-dismissible');
             }
         echo '<a class="btn btn-default btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
         PCO_CerrarVentana();
@@ -334,7 +334,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="ingresar_clave_nueva
 ?>
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<?php
-				mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'60%','fa fa-exclamation-triangle fa-5x','TextosEscritorio');
+				PCO_Mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'60%','fa fa-exclamation-triangle fa-5x','TextosEscritorio');
 
                 //Continua las Banderas recibidas para el tipo de carga de contenido
                 if (@$Presentar_FullScreen==1)  echo '<input type="Hidden" name="Presentar_FullScreen" value="1">';
@@ -429,11 +429,11 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_llave"
                 $asunto="[".$NombreRAD."] ".$MULTILANG_UsrAsuntoReset;
                 $cuerpo_mensaje="<br><br>".$MULTILANG_UsrResetLink.":<br><b><a href=$EnlaceRecuperacion>$EnlaceRecuperacion</a></b>";
                 PCO_EnviarCorreo($remitente,$destinatario,$asunto,$cuerpo_mensaje);
-                mensaje("$MULTILANG_UsrResetCuenta: $cuenta_destinatario",$MULTILANG_UsrMensajeReset,'','fa fa-unlock-alt fa-4x','alert alert-info alert-dismissible');
+                PCO_Mensaje("$MULTILANG_UsrResetCuenta: $cuenta_destinatario",$MULTILANG_UsrMensajeReset,'','fa fa-unlock-alt fa-4x','alert alert-info alert-dismissible');
             }
         else
             {
-                mensaje($MULTILANG_Error,$MULTILANG_UsrErrorReset,'','fa fa-exclamation-triangle fa-4x','alert alert-danger alert-dismissible');
+                PCO_Mensaje($MULTILANG_Error,$MULTILANG_UsrErrorReset,'','fa fa-exclamation-triangle fa-4x','alert alert-danger alert-dismissible');
             }
         echo '<a class="btn btn-default btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
         PCO_CerrarVentana();
@@ -464,11 +464,11 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_con_us
                 $asunto="[".$NombreRAD."] ".$MULTILANG_UsrAsuntoReset;
                 $cuerpo_mensaje="<br><br>".$MULTILANG_Usuario." ".$NombreRAD.": <b>".$registro["login"]."</b>";
                 PCO_EnviarCorreo($remitente,$destinatario,$asunto,$cuerpo_mensaje);
-                mensaje($MULTILANG_Atencion,$MULTILANG_UsrMensajeReset,'','fa fa-unlock-alt fa-4x','alert alert-info alert-dismissible');
+                PCO_Mensaje($MULTILANG_Atencion,$MULTILANG_UsrMensajeReset,'','fa fa-unlock-alt fa-4x','alert alert-info alert-dismissible');
             }
         else
             {
-                mensaje($MULTILANG_Error,$MULTILANG_UsrErrorReset,'','fa fa-exclamation-triangle fa-4x','alert alert-danger alert-dismissible');
+                PCO_Mensaje($MULTILANG_Error,$MULTILANG_UsrErrorReset,'','fa fa-exclamation-triangle fa-4x','alert alert-danger alert-dismissible');
             }
         echo '<a class="btn btn-default btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
         PCO_CerrarVentana();
@@ -488,7 +488,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="formulario_recuperac
                 <listar_usuarios> | <recuperar_contrasena>
         */
 		PCO_AbrirVentana($MULTILANG_OlvideClave, 'panel-info');
-        mensaje($MULTILANG_Importante,$MULTILANG_UsrResetAdmin,'','fa fa-key fa-4x','alert alert-info alert-dismissible');
+        PCO_Mensaje($MULTILANG_Importante,$MULTILANG_UsrResetAdmin,'','fa fa-key fa-4x','alert alert-info alert-dismissible');
 ?>
                 <?php echo $MULTILANG_Opcion; ?> <span class="badge">1</span>
 				<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
@@ -613,7 +613,7 @@ if ($PCO_Accion=="cambiar_clave")
 
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<?php
-				mensaje($MULTILANG_Importante, $MULTILANG_UsrDesPW, '', 'fa fa-info fa-4x', 'alert alert-info alert-dismissible');
+				PCO_Mensaje($MULTILANG_Importante, $MULTILANG_UsrDesPW, '', 'fa fa-info fa-4x', 'alert alert-info alert-dismissible');
 
                 //Continua las Banderas recibidas para el tipo de carga de contenido
                 if (@$Presentar_FullScreen==1)  echo '<input type="Hidden" name="Presentar_FullScreen" value="1">';
@@ -666,7 +666,7 @@ if ($PCO_Accion=="cambiar_clave")
                         }
                     else
                         {
-                            mensaje($MULTILANG_Atencion, $MULTILANG_UsrHlpNoPW.' (<b>'.$MULTILANG_TipoMotor.': '.$Auth_TipoMotor.'</b>)', '', 'fa fa-remove fa-5x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
+                            PCO_Mensaje($MULTILANG_Atencion, $MULTILANG_UsrHlpNoPW.' (<b>'.$MULTILANG_TipoMotor.': '.$Auth_TipoMotor.'</b>)', '', 'fa fa-remove fa-5x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
                         }
                 ?>
             </div>
@@ -700,7 +700,7 @@ if ($PCO_Accion=="actualizar_clave")
 		//Verifica si esta o no en modo DEMO para hacer la operacion
 		if ($PCO_ModoDEMO==1)
 			{
-				mensaje($MULTILANG_TitDemo, $MULTILANG_MsjDemo, '', 'fa fa-fw fa-2x fa-thumbs-down', 'alert alert-dismissible alert-danger');
+				PCO_Mensaje($MULTILANG_TitDemo, $MULTILANG_MsjDemo, '', 'fa fa-fw fa-2x fa-thumbs-down', 'alert alert-dismissible alert-danger');
 				echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 				die();
 			}
@@ -1287,14 +1287,14 @@ if ($PCO_Accion=="permisos_usuario")
 					PCO_EnviarCorreo("noreply@".$_SERVER["SERVER_NAME"],$correo,$MULTILANG_Bienvenido." [$NombreRAD]",$cuerpo_mensaje);
                     //Presenta mensaje final
 					echo "<br>";
-					mensaje($MULTILANG_Atencion, $MULTILANG_UsrFinRegistro, '', 'fa fa-fw fa-2x fa-info-circle', 'alert alert-success');
+					PCO_Mensaje($MULTILANG_Atencion, $MULTILANG_UsrFinRegistro, '', 'fa fa-fw fa-2x fa-info-circle', 'alert alert-success');
 					echo "<center>";
 					echo '<a class="btn btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-sign-in"></i> '.$MULTILANG_Ingresar.'</a>';
 				}
 			else
 				{
 					echo "<br>";
-					mensaje($MULTILANG_ErrorDatos, $mensaje_error, '', 'fa fa-fw fa-3x fa-exclamation-circle', 'alert alert-danger');
+					PCO_Mensaje($MULTILANG_ErrorDatos, $mensaje_error, '', 'fa fa-fw fa-3x fa-exclamation-circle', 'alert alert-danger');
 					echo "<center>";
 					echo '<a class="btn btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> '.$MULTILANG_Cancelar.'</a>';
 				}
@@ -1317,7 +1317,7 @@ if ($PCO_Accion=="agregar_usuario_autoregistro")
         */
 		echo "<br>";
 		PCO_AbrirVentana($MULTILANG_UsrAdicion, 'panel-info');
-        mensaje($MULTILANG_Importante,$MULTILANG_UsrDesClaveACorreo,'','fa fa-info-circle fa-5x texto-azul','alert alert-default alert-dismissible');
+        PCO_Mensaje($MULTILANG_Importante,$MULTILANG_UsrDesClaveACorreo,'','fa fa-info-circle fa-5x texto-azul','alert alert-default alert-dismissible');
 
 ?>
 
@@ -1462,7 +1462,7 @@ if ($PCO_Accion=="agregar_usuario")
                 <listar_usuarios> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario> | <muestra_seguridad_clave> | <seguridad_clave>
         */
 		PCO_AbrirVentana($MULTILANG_UsrAdicion, 'panel-info');
-        mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'','fa fa-info-circle fa-5x texto-azul','alert alert-default alert-dismissible');
+        PCO_Mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'','fa fa-info-circle fa-5x texto-azul','alert alert-default alert-dismissible');
 ?>
 
 		<!-- VALOR MD5 PARA VACIO:  d41d8cd98f00b204e9800998ecf8427e-->
@@ -1812,10 +1812,10 @@ if ($PCO_Accion=="ver_seguimiento_general")
 					<input type="hidden" name="PCO_Accion" value="ver_seguimiento_monitoreo">
 				</form>';
 
-				abrir_barra_estado();
+				PCO_AbrirBarraEstado();
 				echo '<a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
 				echo '<a class="btn btn-warning btn-block" href="javascript:document.ver_auditoria_monitoreo.submit();"><i class="fa fa-home"></i> '.$MULTILANG_UsrAudMonit.'</a>';
-				cerrar_barra_estado();
+				PCO_CerrarBarraEstado();
 				PCO_CerrarVentana();
 				 }
 /* ################################################################## */
@@ -1875,9 +1875,9 @@ if ($PCO_Accion=="ver_seguimiento_especifico")
 							</tr>';
 					}
 				echo '</table>';
-				abrir_barra_estado();
+				PCO_AbrirBarraEstado();
 				echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" << '.$MULTILANG_IrEscritorio.' " class="BotonesEstado">';
-				cerrar_barra_estado();
+				PCO_CerrarBarraEstado();
 				PCO_CerrarVentana();
 				echo '<br>';
 				 }
@@ -2057,14 +2057,14 @@ if ($PCO_Accion=="listar_usuarios")
 					<input type="hidden" name="PCO_Accion" value="ver_seguimiento_monitoreo">
 				</form>
 		';
-				abrir_barra_estado();
+				PCO_AbrirBarraEstado();
                     echo '<div align=center>
                         <a class="btn btn-default " href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>
                         <a class="btn btn-success " href="javascript:document.form_crear_usuario.submit();"><i class="fa fa-file-o"></i> '.$MULTILANG_UsrAgregar.'</a>
                         <a class="btn btn-warning " href="javascript:document.PCO_PanelAuditoriaMovimientos.submit();"><i class="fa fa-file-text"></i> '.$MULTILANG_UsrVerAudit.'</a>
                         <a class="btn btn-info " href="javascript:document.ver_auditoria_monitoreo.submit();"><i class="fa fa-file-text"></i> '.$MULTILANG_UsrAudMonit.'</a>
                         </div>';
-				cerrar_barra_estado();
+				PCO_CerrarBarraEstado();
 				PCO_CerrarVentana();
 			 }
 			//$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto

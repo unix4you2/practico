@@ -283,10 +283,10 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 
 						//Encabezados (primera fila)
 							//Determina si el informe tiene o no campos ocultos
-							$PCO_ColumnasOcultas=determinar_campos_ocultos($PCO_IDInforme);
+							$PCO_ColumnasOcultas=PCO_DeterminarCamposOcultos($PCO_IDInforme);
 							
 							//Obtiene ColumnasVisibles, NumerosColumnasOcultas, NumeroColumnas dentro de EtiquetasConsulta
-							$EtiquetasConsulta=generar_etiquetas_consulta($PCO_Consulta,$PCO_IDInforme); //Enviar el informe para que se determinen tambien sus columnas ocultas
+							$EtiquetasConsulta=PCO_GenerarEtiquetasConsulta($PCO_Consulta,$PCO_IDInforme); //Enviar el informe para que se determinen tambien sus columnas ocultas
 
 							//Genera columnas del encabezado
 							$ConteoColumna=1;
@@ -964,7 +964,7 @@ if ($PCO_Accion=="editar_informe")
   ?>
 
             <!-- Modal Tablas del informe -->
-            <?php abrir_dialogo_modal("myModalTablaInforme",$MULTILANG_InfAgregaTabla); ?>
+            <?php PCO_AbrirDialogoModal("myModalTablaInforme",$MULTILANG_InfAgregaTabla); ?>
 
 				<form name="datosform" id="datosform" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
                     <input type="Hidden" name="PCO_Accion" value="guardar_informe_tabla">
@@ -1056,12 +1056,12 @@ if ($PCO_Accion=="editar_informe")
         <?php 
             $barra_herramientas_modal='
                 <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-            cerrar_dialogo_modal($barra_herramientas_modal);
+            PCO_CerrarDialogoModal($barra_herramientas_modal);
         ?>
 
 
             <!-- Modal Campos del informe -->
-            <?php abrir_dialogo_modal("myModalCamposInforme",$MULTILANG_InfAgregaCampo,"modal-wide"); ?>
+            <?php PCO_AbrirDialogoModal("myModalCamposInforme",$MULTILANG_InfAgregaCampo,"modal-wide"); ?>
 
 				<form name="datosformc" id="datosformc" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
                     <input type="Hidden" name="PCO_Accion" value="guardar_informe_campo">
@@ -1242,12 +1242,12 @@ if ($PCO_Accion=="editar_informe")
         <?php 
             $barra_herramientas_modal='
                 <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-            cerrar_dialogo_modal($barra_herramientas_modal);
+            PCO_CerrarDialogoModal($barra_herramientas_modal);
         ?>
 
 
             <!-- Modal Condiciones del informe -->
-            <?php abrir_dialogo_modal("myModalCondicionesInforme",$MULTILANG_InfAddCondicion,"modal-wide"); ?>
+            <?php PCO_AbrirDialogoModal("myModalCondicionesInforme",$MULTILANG_InfAddCondicion,"modal-wide"); ?>
 
 				<form name="datosformco" id="datosformco" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="Hidden" name="PCO_Accion" value="guardar_informe_condicion">
@@ -1423,13 +1423,13 @@ if ($PCO_Accion=="editar_informe")
                 <?php 
                     $barra_herramientas_modal='
                         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-                    cerrar_dialogo_modal($barra_herramientas_modal);
+                    PCO_CerrarDialogoModal($barra_herramientas_modal);
                 ?>
 
 
 
             <!-- Modal Graficos del informe -->
-            <?php abrir_dialogo_modal("myModalGraficosInforme",$MULTILANG_InfTitGrafico,"modal-wide"); ?>
+            <?php PCO_AbrirDialogoModal("myModalGraficosInforme",$MULTILANG_InfTitGrafico,"modal-wide"); ?>
 
 				<form name="datosformcograf" id="datosformcograf" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="Hidden" name="PCO_Accion" value="actualizar_grafico_informe">
@@ -1566,13 +1566,13 @@ if ($PCO_Accion=="editar_informe")
                     $barra_herramientas_modal='
                         <button class="btn btn-success" onClick="document.datosformcograf.submit()"><i class="fa fa-save"></i> '.$MULTILANG_InfActGraf.'</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-                    cerrar_dialogo_modal($barra_herramientas_modal);
+                    PCO_CerrarDialogoModal($barra_herramientas_modal);
                 ?>
 
 
 
             <!-- Modal Agrupacion y ordenamiento del informe -->
-            <?php abrir_dialogo_modal("myModalAgrupacionInforme",$MULTILANG_InfAgrupa); ?>
+            <?php PCO_AbrirDialogoModal("myModalAgrupacionInforme",$MULTILANG_InfAgrupa); ?>
 
                         <?php
                         $consulta_agrupacion=PCO_EjecutarSQL("SELECT ordenamiento,agrupamiento FROM ".$TablasCore."informe WHERE id=? ","$informe");
@@ -1609,13 +1609,13 @@ if ($PCO_Accion=="editar_informe")
                 <?php 
                     $barra_herramientas_modal='
                         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-                    cerrar_dialogo_modal($barra_herramientas_modal);
+                    PCO_CerrarDialogoModal($barra_herramientas_modal);
                 ?>
 
 
 
             <!-- Modal Agregar acciones del informe -->
-            <?php abrir_dialogo_modal("myModalAgregaAccionesInforme",$MULTILANG_InfTitBotones,"modal-wide"); ?>
+            <?php PCO_AbrirDialogoModal("myModalAgregaAccionesInforme",$MULTILANG_InfTitBotones,"modal-wide"); ?>
 
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="PCO_Accion" value="guardar_accion_informe">
@@ -1663,7 +1663,7 @@ if ($PCO_Accion=="editar_informe")
 						<span class="input-group-addon">
 							<!--
 							<?php 
-								selector_iconos_awesome();
+								PCO_SelectorIconosAwesome();
 							?>
 							<a data-toggle="modal" href="#myModalSelectorIconos" title="<?php echo $MULTILANG_MnuDesImagen; ?>">
 								   <i class="fa fa-hand-o-right"></i> <i class="fa fa-picture-o"></i>
@@ -1831,7 +1831,7 @@ if ($PCO_Accion=="editar_informe")
             <?php 
                 $barra_herramientas_modal='
                     <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-                cerrar_dialogo_modal($barra_herramientas_modal);
+                PCO_CerrarDialogoModal($barra_herramientas_modal);
             ?>
 
 
@@ -1839,7 +1839,7 @@ if ($PCO_Accion=="editar_informe")
 
 
             <!-- Modal Agregar acciones del informe -->
-            <?php abrir_dialogo_modal("myModalEditaAccionesInforme",$MULTILANG_FrmTitComandos); ?>
+            <?php PCO_AbrirDialogoModal("myModalEditaAccionesInforme",$MULTILANG_FrmTitComandos); ?>
 					<table class="table table-condensed table-unbordered table-hover">
 						<thead>
                         <tr>
@@ -1932,7 +1932,7 @@ if ($PCO_Accion=="editar_informe")
             <?php 
                 $barra_herramientas_modal='
                     <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-                cerrar_dialogo_modal($barra_herramientas_modal);
+                PCO_CerrarDialogoModal($barra_herramientas_modal);
             ?>
 
 
@@ -2016,7 +2016,7 @@ if ($PCO_Accion=="editar_informe")
 
             <!-- Modal EditorJavascript -->
             <?php
-                abrir_dialogo_modal("myModalActualizaSQL",$MULTILANG_MonCommSQL,"modal-wide");
+                PCO_AbrirDialogoModal("myModalActualizaSQL",$MULTILANG_MonCommSQL,"modal-wide");
             ?>
                     <div class="well" style="color:#000000;"><?php echo $MULTILANG_InfSQL; ?>
                     <textarea name="consulta_sql" id="consulta_sql" data-editor="sql" class="form-control" style="width: 950px; height: 450px;"><?php echo $registro_informe['consulta_sql']; ?></textarea>
@@ -2025,7 +2025,7 @@ if ($PCO_Accion=="editar_informe")
                 $barra_herramientas_modal='
         			<button type="button" class="btn btn-success" onclick="javascript:document.datos.submit();">'.$MULTILANG_Actualizar.' SQL <i class="fa fa-floppy-o"></i></button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-                cerrar_dialogo_modal($barra_herramientas_modal);
+                PCO_CerrarDialogoModal($barra_herramientas_modal);
             ?>
             <!-- Fin Modal EditorJavascript -->
 
@@ -2481,7 +2481,7 @@ if ($PCO_Accion=="analizar_importacion_informe")
                 //Presenta alerta cuando encuentra otro elemento con el mismo ID y se trata de una importacion estatica
                 if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
 					if (PCO_ExisteValor($TablasCore."informe","id",base64_decode($xml_importado->core_informe[0]->id)))
-						mensaje($MULTILANG_Atencion, $MULTILANG_FrmImportarAlerta, '', 'fa fa-fw fa-2x fa-warning', 'alert alert-dismissible alert-danger');
+						PCO_Mensaje($MULTILANG_Atencion, $MULTILANG_FrmImportarAlerta, '', 'fa fa-fw fa-2x fa-warning', 'alert alert-dismissible alert-danger');
                 
                 //Presenta contenido del archivo
                 echo "<b>$MULTILANG_Detalles $MULTILANG_Archivo</b>:<br>
@@ -2549,7 +2549,7 @@ if ($PCO_Accion=="analizar_importacion_informe")
                         <button type="submit" class="btn btn-danger btn-block"><i class="fa fa-warning texto-blink icon-yellow"></i> '.$MULTILANG_Importar.' <i class="fa fa-warning texto-blink icon-yellow"></i></button>
 					</form>';
                 else
-                    mensaje('<i class="fa fa-warning fa-2x text-red texto-blink"></i> '.$MULTILANG_Error, $MULTILANG_FrmImportarConflicto, '', '', 'alert alert-danger alert-dismissible');
+                    PCO_Mensaje('<i class="fa fa-warning fa-2x text-red texto-blink"></i> '.$MULTILANG_Error, $MULTILANG_FrmImportarConflicto, '', '', 'alert alert-danger alert-dismissible');
 			}
 		else
 			{
@@ -2645,9 +2645,9 @@ if ($PCO_Accion=="importar_informe")
     </div>
 
 <?php
-		abrir_barra_estado();
+		PCO_AbrirBarraEstado();
 		echo '<a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
-		cerrar_barra_estado();
+		PCO_CerrarBarraEstado();
 		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}

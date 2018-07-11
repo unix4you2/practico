@@ -46,7 +46,7 @@ if ($PCO_Accion=="actualizar_practico")
         <div class="tab-pane fadein active" id="pestana_actualizacion">
             <br><br>
             <?php
-                mensaje($MULTILANG_ActMsj1,$MULTILANG_ActMsj2,'100%','fa fa-exclamation-triangle fa-5x','TextosVentana');
+                PCO_Mensaje($MULTILANG_ActMsj1,$MULTILANG_ActMsj2,'100%','fa fa-exclamation-triangle fa-5x','TextosVentana');
             ?>
             <div align="center">
                 <br>
@@ -115,9 +115,9 @@ if ($PCO_Accion=="actualizar_practico")
     </div>
 
 <?php
-		abrir_barra_estado();
+		PCO_AbrirBarraEstado();
 		echo '<a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
-		cerrar_barra_estado();
+		PCO_CerrarBarraEstado();
 		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
@@ -311,7 +311,7 @@ if ($PCO_Accion=="analizar_parche")
                         <button type="submit" class="btn btn-danger btn-block"><i class="fa fa-warning texto-blink icon-yellow"></i> '.$MULTILANG_Continuar.' <i class="fa fa-warning texto-blink icon-yellow"></i></button>
 					</form>';
                 else
-                    mensaje('<i class="fa fa-warning fa-2x text-red texto-blink"></i> '.$MULTILANG_Error, $MULTILANG_ActDesEscritura, '', '', 'alert alert-danger alert-dismissible');
+                    PCO_Mensaje('<i class="fa fa-warning fa-2x text-red texto-blink"></i> '.$MULTILANG_Error, $MULTILANG_ActDesEscritura, '', '', 'alert alert-danger alert-dismissible');
 				PCO_Auditar("Analiza archivo $archivo_cargado");
 			}
 		else
@@ -355,7 +355,7 @@ if ($PCO_Accion=="aplicar_parche")
 		//Verifica si esta o no en modo DEMO para hacer la operacion
 		if ($PCO_ModoDEMO==1)
 			{
-				mensaje($MULTILANG_TitDemo, $MULTILANG_MsjDemo, '', 'fa fa-fw fa-2x fa-thumbs-down', 'alert alert-dismissible alert-danger');
+				PCO_Mensaje($MULTILANG_TitDemo, $MULTILANG_MsjDemo, '', 'fa fa-fw fa-2x fa-thumbs-down', 'alert alert-dismissible alert-danger');
 				echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 				die();
 			}

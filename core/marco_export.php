@@ -35,7 +35,7 @@
 
     <div class="oculto_impresion">
     <!-- Modal Configuracion -->
-    <?php abrir_dialogo_modal("myModalEXPORTACION",$MULTILANG_Exportar,"oculto_impresion"); ?>
+    <?php PCO_AbrirDialogoModal("myModalEXPORTACION",$MULTILANG_Exportar,"oculto_impresion"); ?>
 
 		<form  name="exportacion_informe" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 			<input type="Hidden" name="PCO_Accion" value="exportar_informe">
@@ -286,5 +286,5 @@
     $barra_herramientas_modal='
         <button type="button" class="btn btn-success" OnClick="document.forms.exportacion_informe.submit();">'.$MULTILANG_Exportar.' <i class="fa fa-floppy-o"></i></button>
         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-    cerrar_dialogo_modal($barra_herramientas_modal);
+    PCO_CerrarDialogoModal($barra_herramientas_modal);
     echo '</div>';

@@ -70,12 +70,12 @@
 
 
 <?php
-	abrir_barra_estado();
+	PCO_AbrirBarraEstado();
 	$anterior=$paso-1;
 	$siguiente=$paso+1;
 	echo '
             <button onclick="document.continuar.submit();" type="button" class="btn btn-primary navbar-btn">Continuar / Next <i class="fa fa-caret-square-o-right texto-amarillo"></i></button>
 			<input type="Hidden" name="paso" value="'.$siguiente.'">
 		</form>';
-	cerrar_barra_estado();
+	PCO_CerrarBarraEstado();
 ?>

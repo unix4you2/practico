@@ -58,12 +58,12 @@
 
 <?php
 	if ($hay_error)
-        mensaje('<i class="fa fa-warning fa-2x text-danger texto-blink"></i> ', $MULTILANG_ErrorEscritura, '', '', 'alert alert-danger alert-dismissible');
+        PCO_Mensaje('<i class="fa fa-warning fa-2x text-danger texto-blink"></i> ', $MULTILANG_ErrorEscritura, '', '', 'alert alert-danger alert-dismissible');
 ?>
 </div>
 
 <?php
-	abrir_barra_estado();
+	PCO_AbrirBarraEstado();
 
 	$anterior=$paso-1;
 	$siguiente=$paso+1;
@@ -90,5 +90,5 @@
 		}
 	echo '</form>';
 
-	cerrar_barra_estado();
+	PCO_CerrarBarraEstado();
 ?>

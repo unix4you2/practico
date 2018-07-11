@@ -31,7 +31,7 @@
 		(start code)
 			if(PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion!="")
 				{
-					$tiempo_final_script = obtener_microtime();
+					$tiempo_final_script = PCO_ObtenerMicrotime();
 					$tiempo_total_script = $tiempo_final_script - $tiempo_inicio_script;
 				}
 		(end)
@@ -342,7 +342,7 @@
 
     <?php
         // Calcula tiempos de ejecucion del script
-        $tiempo_final_script = obtener_microtime();
+        $tiempo_final_script = PCO_ObtenerMicrotime();
         $tiempo_total_script = $tiempo_final_script - @$tiempo_inicio_script;
         $tiempo_total_script = round($tiempo_total_script,3);
     ?>

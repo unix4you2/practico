@@ -125,7 +125,7 @@
 ?>
     <div class="oculto_impresion">
     <!-- Modal WebServices -->
-    <?php abrir_dialogo_modal("myModalWEBSERVICES",$NombreRAD.' - '.$MULTILANG_WSLlavesNuevo,"modal-wide"); ?>
+    <?php PCO_AbrirDialogoModal("myModalWEBSERVICES",$NombreRAD.' - '.$MULTILANG_WSLlavesNuevo,"modal-wide"); ?>
 
 
             <form name="nuevallave" action="" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
@@ -245,7 +245,7 @@
         <?php 
             $barra_herramientas_modal='
                 <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-            cerrar_dialogo_modal($barra_herramientas_modal);
+            PCO_CerrarDialogoModal($barra_herramientas_modal);
         ?>
 
     </div>

@@ -795,7 +795,7 @@ if ($PCO_Accion=="editar_formulario")
 	        }
 	    
         //Prepara el selector de iconos para las opciones
-        selector_iconos_awesome();
+        PCO_SelectorIconosAwesome();
 
 		  ?>
 
@@ -865,7 +865,7 @@ if ($PCO_Accion=="editar_formulario")
         </script>
 
     <!-- INICIO MODAL ADICION DE CAMPOS -->
-    <?php abrir_dialogo_modal("myModalElementoFormulario",$MULTILANG_FrmMsj1,"modal-wide oculto_impresion"); ?>
+    <?php PCO_AbrirDialogoModal("myModalElementoFormulario",$MULTILANG_FrmMsj1,"modal-wide oculto_impresion"); ?>
 
 				<?php			
 				//Si se trata de la edicion de un campo entonces busca su registro para agregar valores al form
@@ -1288,14 +1288,14 @@ if ($PCO_Accion=="editar_formulario")
                                 <input type="color" name="color_trazo" value="<?php if (@$registro_campo_editar["color_trazo"]!="") echo $registro_campo_editar["color_trazo"]; else echo '#000000'; ?>" class="form-control" placeholder="<?php echo $MULTILANG_FrmTipoColor; ?> (Hex)">
                             </div>
                             <?php
-                                mensaje('<i class="fa fa-info fa-2x text-info texto-blink"></i> '.$MULTILANG_Ayuda, $MULTILANG_FrmImagenDes, '', '', 'alert alert-info alert-dismissible');
+                                PCO_Mensaje('<i class="fa fa-info fa-2x text-info texto-blink"></i> '.$MULTILANG_Ayuda, $MULTILANG_FrmImagenDes, '', '', 'alert alert-info alert-dismissible');
                             ?>
 						</div>
 
 
 						<div id='campo31' style="display:none;">
                             <?php
-                                mensaje('<i class="fa fa-warning fa-2x text-danger texto-blink"></i> '.$MULTILANG_Atencion, $MULTILANG_FrmTipoAdvertencia, '', '', 'alert alert-warning alert-dismissible');
+                                PCO_Mensaje('<i class="fa fa-warning fa-2x text-danger texto-blink"></i> '.$MULTILANG_Atencion, $MULTILANG_FrmTipoAdvertencia, '', '', 'alert alert-warning alert-dismissible');
                             ?>
 						</div>
 
@@ -1698,7 +1698,7 @@ if ($PCO_Accion=="editar_formulario")
                                 </span>
                             </div>
                             <?php
-                                mensaje('<i class="fa fa-info fa-2x text-info texto-blink"></i> '.$MULTILANG_Ayuda, '<font size=1>'.$MULTILANG_FrmPlantillaEjemplos.'</font>', '', '', 'alert alert-info alert-dismissible');
+                                PCO_Mensaje('<i class="fa fa-info fa-2x text-info texto-blink"></i> '.$MULTILANG_Ayuda, '<font size=1>'.$MULTILANG_FrmPlantillaEjemplos.'</font>', '', '', 'alert alert-info alert-dismissible');
                             ?>
 						</div>
 
@@ -1910,13 +1910,13 @@ if ($PCO_Accion=="editar_formulario")
         $barra_herramientas_modal='
             <a href="javascript:  $(\'#myModalElementoFormulario\').modal(\'hide\'); $(\'#myModalDisenoFormulario\').modal(\'show\');"><button type="button" class="btn btn-info">'.$MULTILANG_FrmDisCampos.'</button></a>
             <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-        cerrar_dialogo_modal($barra_herramientas_modal);
+        PCO_CerrarDialogoModal($barra_herramientas_modal);
     ?>
     <!-- FIN MODAL ADICION DE CAMPOS -->
 
 
     <!-- INICIO MODAL ADICION DE BOTONES -->
-    <?php abrir_dialogo_modal("myModalBotonFormulario",$MULTILANG_FrmAgregaBot,"modal-wide"); ?>
+    <?php PCO_AbrirDialogoModal("myModalBotonFormulario",$MULTILANG_FrmAgregaBot,"modal-wide"); ?>
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="PCO_Accion" value="guardar_accion_formulario">
 				<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
@@ -2132,14 +2132,14 @@ if ($PCO_Accion=="editar_formulario")
         $barra_herramientas_modal='
             <input type="Button" class="btn btn-success" value="'.$MULTILANG_FrmBtnGuardarBut.'" onClick="document.datosfield.submit()">
             <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-        cerrar_dialogo_modal($barra_herramientas_modal);
+        PCO_CerrarDialogoModal($barra_herramientas_modal);
     ?>
     <!-- FIN MODAL ADICION DE BOTONES -->
 
 
 
     <!-- INICIO MODAL DISENO DE FORMULARIO -->
-    <?php abrir_dialogo_modal("myModalDisenoFormulario",$MULTILANG_FrmDisCampos,"modal-wide"); ?>
+    <?php PCO_AbrirDialogoModal("myModalDisenoFormulario",$MULTILANG_FrmDisCampos,"modal-wide"); ?>
 					<table class="table table-condensed table-hover btn-xs">
 						<thead>
                         <tr>
@@ -2330,14 +2330,14 @@ if ($PCO_Accion=="editar_formulario")
     <?php 
         $barra_herramientas_modal='
             <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-        cerrar_dialogo_modal($barra_herramientas_modal);
+        PCO_CerrarDialogoModal($barra_herramientas_modal);
     ?>
     <!-- FIN MODAL DISENO DE FORMULARIO -->
 
 
 
     <!-- INICIO MODAL DISENO DE FORMULARIO -->
-    <?php abrir_dialogo_modal("myModalDisenoBotones",$MULTILANG_FrmTitComandos,"modal-wide"); ?>
+    <?php PCO_AbrirDialogoModal("myModalDisenoBotones",$MULTILANG_FrmTitComandos,"modal-wide"); ?>
 					<table class="table table-hover table-condensed">
 						<thead>
                         <tr>
@@ -2431,7 +2431,7 @@ if ($PCO_Accion=="editar_formulario")
     <?php 
         $barra_herramientas_modal='
             <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-        cerrar_dialogo_modal($barra_herramientas_modal);
+        PCO_CerrarDialogoModal($barra_herramientas_modal);
     ?>
     <!-- FIN MODAL DISENO DE BOTONES -->
         
@@ -2480,7 +2480,7 @@ if ($PCO_Accion=="editar_formulario")
 
 
                     <!-- Modal EditorJavascript -->';
-                    $ContenidoBarraFlotante_EditForm.=abrir_dialogo_modal("myModalActualizaJAVASCRIPT",$MULTILANG_FrmTitComandos,"modal-wide",0);
+                    $ContenidoBarraFlotante_EditForm.=PCO_AbrirDialogoModal("myModalActualizaJAVASCRIPT",$MULTILANG_FrmTitComandos,"modal-wide",0);
                     $ContenidoBarraFlotante_EditForm.='
                         <div class="well" style="color:#000000;">'.$MULTILANG_FrmHlpFunciones.'
                         <textarea name="javascript" id="javascript" data-editor="javascript" class="form-control" style="width: 950px; height: 450px;"></textarea>
@@ -2488,7 +2488,7 @@ if ($PCO_Accion=="editar_formulario")
                         $barra_herramientas_modal='
                 			<button type="button" class="btn btn-success" onclick="javascript:document.datosact.submit();">'.$MULTILANG_Actualizar.' JS <i class="fa fa-floppy-o"></i></button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-                    $ContenidoBarraFlotante_EditForm.=cerrar_dialogo_modal($barra_herramientas_modal,0);
+                    $ContenidoBarraFlotante_EditForm.=PCO_CerrarDialogoModal($barra_herramientas_modal,0);
         $ContenidoBarraFlotante_EditForm.='
                     <!-- Fin Modal EditorJavascript -->
 
@@ -2652,7 +2652,7 @@ if ($PCO_Accion=="editar_formulario")
                 while ($RegistroCamposHuerfanos=$ConsultaCamposHuerfanos->fetch())
                     $MensajeCamposHuerfanos.='<li style="padding-left: 50px;">ID:<b>'.$RegistroCamposHuerfanos["id"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Titulo.':<b>'.$RegistroCamposHuerfanos["titulo"].'</b>&nbsp;&nbsp;&nbsp; Campo:<b>'.$RegistroCamposHuerfanos["campo"].'</b>&nbsp;&nbsp;&nbsp; ID_HTML:<b>'.$RegistroCamposHuerfanos["id_html"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Columna.':<b>'.$RegistroCamposHuerfanos["columna"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Pestana.':<b>'.$RegistroCamposHuerfanos["pestana_objeto"].'</b></li>';
                 if ($MensajeCamposHuerfanos!='')
-                    mensaje($MULTILANG_FrmHuerfanos,"$MULTILANG_FrmCamposAProposito $MensajeCamposHuerfanos","","fa fa-fw fa-2x fa-info-circle","alert alert-dismissible alert-warning btn-xs");
+                    PCO_Mensaje($MULTILANG_FrmHuerfanos,"$MULTILANG_FrmCamposAProposito $MensajeCamposHuerfanos","","fa fa-fw fa-2x fa-info-circle","alert alert-dismissible alert-warning btn-xs");
 
                 //Busca posibles campos con nombre o IDHTML duplicado para presentar advertencia si aplica
                 $MensajeCamposDuplicados='';
@@ -2661,7 +2661,7 @@ if ($PCO_Accion=="editar_formulario")
                     if ($RegistroCamposDuplicados["ConteoDuplicados"]>1) $MensajeCamposDuplicados.='<li style="padding-left: 50px;">ID:<b>'.$RegistroCamposDuplicados["id"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Titulo.':<b>'.$RegistroCamposDuplicados["titulo"].'</b>&nbsp;&nbsp;&nbsp; Campo:<b>'.$RegistroCamposDuplicados["campo"].'</b>&nbsp;&nbsp;&nbsp; ID_HTML:<b>'.$RegistroCamposDuplicados["id_html"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Columna.':<b>'.$RegistroCamposDuplicados["columna"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Pestana.':<b>'.$RegistroCamposDuplicados["pestana_objeto"].'</b></li>';
 
                 if ($MensajeCamposDuplicados!='')
-                    mensaje($MULTILANG_FrmIDHTMDuplicado,"$MULTILANG_FrmCamposAProposito $MensajeCamposDuplicados","","fa fa-fw fa-2x fa-info-circle","alert alert-dismissible alert-warning btn-xs");
+                    PCO_Mensaje($MULTILANG_FrmIDHTMDuplicado,"$MULTILANG_FrmCamposAProposito $MensajeCamposDuplicados","","fa fa-fw fa-2x fa-info-circle","alert alert-dismissible alert-warning btn-xs");
 
             	//function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno=0)
                 PCO_CargarFormulario($formulario,1,"","",0,1); //Cargar el form en modo de diseno
@@ -2999,7 +2999,7 @@ if ($PCO_Accion=="analizar_importacion_formulario")
                 //Presenta alerta cuando encuentra otro elemento con el mismo ID y se trata de una importacion estatica
                 if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
 					if (PCO_ExisteValor($TablasCore."formulario","id",base64_decode($xml_importado->core_formulario[0]->id)))
-						mensaje($MULTILANG_Atencion, $MULTILANG_FrmImportarAlerta, '', 'fa fa-fw fa-2x fa-warning', 'alert alert-dismissible alert-danger');
+						PCO_Mensaje($MULTILANG_Atencion, $MULTILANG_FrmImportarAlerta, '', 'fa fa-fw fa-2x fa-warning', 'alert alert-dismissible alert-danger');
                 
                 //Presenta contenido del archivo
                 echo "<b>$MULTILANG_Detalles $MULTILANG_Archivo</b>:<br>
@@ -3059,7 +3059,7 @@ if ($PCO_Accion=="analizar_importacion_formulario")
                         <button type="submit" class="btn btn-danger btn-block"><i class="fa fa-warning texto-blink icon-yellow"></i> '.$MULTILANG_Importar.' <i class="fa fa-warning texto-blink icon-yellow"></i></button>
 					</form>';
                 else
-                    mensaje('<i class="fa fa-warning fa-2x text-red texto-blink"></i> '.$MULTILANG_Error, $MULTILANG_FrmImportarConflicto, '', '', 'alert alert-danger alert-dismissible');
+                    PCO_Mensaje('<i class="fa fa-warning fa-2x text-red texto-blink"></i> '.$MULTILANG_Error, $MULTILANG_FrmImportarConflicto, '', '', 'alert alert-danger alert-dismissible');
 			}
 		else
 			{
@@ -3155,9 +3155,9 @@ if ($PCO_Accion=="importar_formulario")
     </div>
 
 <?php
-		abrir_barra_estado();
+		PCO_AbrirBarraEstado();
 		echo '<a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
-		cerrar_barra_estado();
+		PCO_CerrarBarraEstado();
 		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
@@ -3183,7 +3183,7 @@ if ($PCO_Accion=="administrar_formularios")
 
 
             <!-- Modal EditorJavascript -->
-            <?php abrir_dialogo_modal("myModalJAVASCRIPT",$MULTILANG_FrmTitComandos,"modal-wide"); ?>
+            <?php PCO_AbrirDialogoModal("myModalJAVASCRIPT",$MULTILANG_FrmTitComandos,"modal-wide"); ?>
                       <?php echo $MULTILANG_FrmHlpFunciones; ?>
                     <div class="well">
 <textarea name="javascript" data-editor="javascript" class="form-control" rows="20" style="width: 800px; height: 450px;">
@@ -3197,7 +3197,7 @@ function FrmAutoRun()
                     $barra_herramientas_modal='
                         <i class="btn-xs">'.$MULTILANG_FrmHlpFinalFunciones.'</i>
                         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-                    cerrar_dialogo_modal($barra_herramientas_modal);
+                    PCO_CerrarDialogoModal($barra_herramientas_modal);
                 ?>
 
 <div class="row">

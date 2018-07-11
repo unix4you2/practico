@@ -101,7 +101,7 @@
 			else
 				{
 					PCO_LimpiarEntradas();
-					mensaje($MULTILANG_LoginNoWSTit,$MULTILANG_LoginNoWSDes."<br>Test URL=<a href='".$webservice_validacion."' target=_BLANK>Auth WebService</a> (entradas filtradas)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+					PCO_Mensaje($MULTILANG_LoginNoWSTit,$MULTILANG_LoginNoWSDes."<br>Test URL=<a href='".$webservice_validacion."' target=_BLANK>Auth WebService</a> (entradas filtradas)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 				}
 
 			$clave_correcta=0;
@@ -160,7 +160,7 @@
 			// Si la clave es incorrecta muestra de nuevo la ventana de ingreso
 			if (!$clave_correcta)
 				{
-					mensaje($MULTILANG_ErrorTitAuth,$MULTILANG_ErrorDesAuth,'','fa fa-ban fa-4x text-danger','alert alert-danger');
+					PCO_Mensaje($MULTILANG_ErrorTitAuth,$MULTILANG_ErrorDesAuth,'','fa fa-ban fa-4x text-danger','alert alert-danger');
 					PCO_VentanaLogin();
 				}
 			else

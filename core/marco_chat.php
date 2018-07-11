@@ -32,7 +32,7 @@
 
     echo '<div class="oculto_impresion">';
     // Modal Ventana de chat
-    abrir_dialogo_modal("Dialogo_Chat",$MULTILANG_UsrLista,"modal-wide");
+    PCO_AbrirDialogoModal("Dialogo_Chat",$MULTILANG_UsrLista,"modal-wide");
 
     echo $MULTILANG_UsuariosChat;
     //Consulta los usuarios siempre y cuando tenga sesion activa
@@ -101,6 +101,6 @@
 
     $barra_herramientas_modal='
         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-    cerrar_dialogo_modal($barra_herramientas_modal);
+    PCO_CerrarDialogoModal($barra_herramientas_modal);
 
     echo '</div>';

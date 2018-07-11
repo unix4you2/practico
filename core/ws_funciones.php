@@ -102,7 +102,7 @@ if (@$PCO_WSId=="verificar_credenciales")
 				if (  ldap_bind( $auth_ldap_conexion, $auth_ldap_cadena, $clave )  )
 					$ok_login_verifica='1';
                 else
-                    mensaje($MULTILANG_Error.': '.$MULTILANG_AuthLDAP,$MULTILANG_ErrorConnLDAP, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+                    PCO_Mensaje($MULTILANG_Error.': '.$MULTILANG_AuthLDAP,$MULTILANG_ErrorConnLDAP, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 				// Si logra el acceso por LDAP consulta datos del usuario sobre Practico para llenar el XML pero
 				// Si el usuario no existe se devolvera el valor de aceptacion solamente y el resto vacios
 				$registro=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login=? ","$uid")->fetch();
@@ -308,7 +308,7 @@ if (@$PCO_WSId=="verificar_credenciales")
 function error_oauth($client,$OAuth_servicio)
 	{
 		global $MULTILANG_WSErrTitulo;
-		mensaje($MULTILANG_WSErrTitulo,'OAuth '.$OAuth_servicio.' error: '.HtmlSpecialChars($client->error), '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+		PCO_Mensaje($MULTILANG_WSErrTitulo,'OAuth '.$OAuth_servicio.' error: '.HtmlSpecialChars($client->error), '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
     }
 
 
@@ -634,7 +634,7 @@ if (@$PCO_WSId=="autenticacion_oauth")
 		// Si no se dan los parametros basicos presenta error
 		if(strlen($client->client_id) == 0 || strlen($client->client_secret) == 0)
 			{
-				mensaje($MULTILANG_WSErrTitulo,'<b>'.$OAuth_servicio.'</b>: '.$OAuth_Mensaje, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+				PCO_Mensaje($MULTILANG_WSErrTitulo,'<b>'.$OAuth_servicio.'</b>: '.$OAuth_Mensaje, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
                 die();
 			}
 

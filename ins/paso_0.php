@@ -35,7 +35,7 @@
 </div>
 
 <?php
-	abrir_barra_estado();
+	PCO_AbrirBarraEstado();
 	$anterior=$paso-1;
 	$siguiente=$paso+1;
 	echo '
@@ -44,5 +44,5 @@
 			<input type="Hidden" name="Idioma" value="'.$Idioma.'">
             <button onclick="document.continuar.submit();" type="button" class="btn btn-primary navbar-btn">'.$MULTILANG_Continuar.' <i class="fa fa-caret-square-o-right texto-amarillo"></i></button>
 		</form>';
-	cerrar_barra_estado();
+	PCO_CerrarBarraEstado();
 ?>

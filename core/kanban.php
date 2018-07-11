@@ -229,7 +229,7 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: agregar_funciones_edicion_objeto
+	Function: PCO_AgregarFuncionesEdicionTarea
 	Genera el codigo HTML y CSS correspondiente los botones y demas elementos para la edicion en caliente de un objeto
 
 	Variables de entrada:
@@ -244,7 +244,7 @@
 	Ver tambien:
 		<PCO_CargarFormulario>
 */
-	function AgregarFuncionesEdicionTarea($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban)
+	function PCO_AgregarFuncionesEdicionTarea($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban)
 		{
 		    global $MULTILANG_ArchivarTareaAdv,$MULTILANG_ArchivarTarea,$MULTILANG_DelKanban,$MULTILANG_Evento,$TablasCore,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
 			$salida='';
@@ -293,7 +293,7 @@
 		    //Determina el estilo por defecto para el cuadro
 		    $EstiloCuadro=$RegistroTareas["estilo"];
             //Genera la salida
-            $AccionesTarea=AgregarFuncionesEdicionTarea($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban);
+            $AccionesTarea=PCO_AgregarFuncionesEdicionTarea($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban);
 
             $EventoComplemento='onmouseenter="$(this).css(\'border\', \'1px solid\'); $(this).css(\'border-color\', \'#ff0000\');  //c2a7a7
             $(\'#PCOEditorContenedor_Col'.$RegistroTareas["columna"].'_'.$RegistroTareas["id"].'\').css({\'visibility\':\'visible\'});
@@ -443,7 +443,7 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanban")
 
 
         <!-- INICIO MODAL  PERSONALIZACION COLUMNAS Y CATEGORIAS -->
-            <?php abrir_dialogo_modal("myModalPersonalizarKanban",$MULTILANG_TablerosKanban." ".$MULTILANG_Personalizado); ?>
+            <?php PCO_AbrirDialogoModal("myModalPersonalizarKanban",$MULTILANG_TablerosKanban." ".$MULTILANG_Personalizado); ?>
     			<form name="datospersonalizacion" id="datospersonalizacion" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     				<input type="Hidden" name="PCO_Accion" value="GuardarPersonalizacionKanban">
     				<input type="Hidden" name="ID_TableroKanban" value="<?php echo $ID_TableroKanban; ?>">
@@ -480,13 +480,13 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanban")
                 $barra_herramientas_modal='
                     <input type="Button" class="btn btn-success" value="'.$MULTILANG_Guardar.'" onClick="document.datospersonalizacion.submit()">
                     <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-                cerrar_dialogo_modal($barra_herramientas_modal);
+                PCO_CerrarDialogoModal($barra_herramientas_modal);
             ?>
         <!-- FIN MODAL PERSONALIZACION COLUMNAS Y CATEGORIAS -->
 
 
         <!-- INICIO MODAL CREACION DE TABLERO -->
-            <?php abrir_dialogo_modal("myModalCreacionTablero",$MULTILANG_TablerosKanban." ".$MULTILANG_Personalizado); ?>
+            <?php PCO_AbrirDialogoModal("myModalCreacionTablero",$MULTILANG_TablerosKanban." ".$MULTILANG_Personalizado); ?>
     			<form name="datoscreacion" id="datoscreacion" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     				<input type="Hidden" name="PCO_Accion" value="GuardarCreacionKanban">
     				<input type="Hidden" name="ID_TableroKanban" value="<?php echo $ID_TableroKanban; ?>">
@@ -523,13 +523,13 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanban")
                 $barra_herramientas_modal='
                     <input type="Button" class="btn btn-success" value="'.$MULTILANG_Guardar.'" onClick="document.datoscreacion.submit()">
                     <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-                cerrar_dialogo_modal($barra_herramientas_modal);
+                PCO_CerrarDialogoModal($barra_herramientas_modal);
             ?>
         <!-- FIN MODAL CREACION DE TABLERO -->
 
 
         <!-- INICIO MODAL ADICION DE TAREAS -->
-        <?php abrir_dialogo_modal("myModalActividadKanban",$MULTILANG_AgregarNuevaTarea,"modal-wide"); ?>
+        <?php PCO_AbrirDialogoModal("myModalActividadKanban",$MULTILANG_AgregarNuevaTarea,"modal-wide"); ?>
 			<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="PCO_Accion" value="GuardarTareaKanban">
 				<input type="Hidden" name="ID_TableroKanban" value="<?php echo $ID_TableroKanban; ?>">
@@ -685,7 +685,7 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanban")
         $barra_herramientas_modal='
             <input type="Button" class="btn btn-success" value="'.$MULTILANG_AgregarNuevaTarea.'" onClick="document.datosfield.submit()">
             <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-        cerrar_dialogo_modal($barra_herramientas_modal);
+        PCO_CerrarDialogoModal($barra_herramientas_modal);
     ?>
     <!-- FIN MODAL ADICION DE TAREAS -->
 

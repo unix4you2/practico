@@ -46,9 +46,9 @@
 
 <?php
 	//Crea una barra de estado (opcional)
-	abrir_barra_estado();
+	PCO_AbrirBarraEstado();
 		echo '<input type="Button"  class="BotonesEstadoCuidado" value="'.$MULTILANG_Cerrar.'" onClick="document.core_ver_menu.submit();">';
-	cerrar_barra_estado();
+	PCO_CerrarBarraEstado();
 ?>
 
 <?php

@@ -34,7 +34,7 @@
 
     <div class="oculto_impresion">
     <!-- Modal Configuracion -->
-    <?php abrir_dialogo_modal("myModalCONFIGURACION",$NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral,"modal-wide oculto_impresion"); ?>
+    <?php PCO_AbrirDialogoModal("myModalCONFIGURACION",$NombreRAD.' - '.$MULTILANG_ConfiguracionGeneral,"modal-wide oculto_impresion"); ?>
 
 					<form action="" enctype="multipart/form-data" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="hidden" name="PCO_Accion" value="guardar_configuracion">
@@ -822,7 +822,7 @@
         $barra_herramientas_modal='
             <button type="submit" class="btn btn-success">'.$MULTILANG_Guardar.' <i class="fa fa-save"></i></button>
             <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-        cerrar_dialogo_modal($barra_herramientas_modal);
+        PCO_CerrarDialogoModal($barra_herramientas_modal);
     ?>
 
     </form>

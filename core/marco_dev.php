@@ -32,7 +32,7 @@
 
     echo '<div class="oculto_impresion">';
     //Modal Botones de Desarrollo
-    abrir_dialogo_modal("myModalDESARROLLO",$MULTILANG_TitDisenador,"modal-wide"); ?>
+    PCO_AbrirDialogoModal("myModalDESARROLLO",$MULTILANG_TitDisenador,"modal-wide"); ?>
 
 
 		<div class="row">
@@ -219,5 +219,5 @@
 <?php 
     $barra_herramientas_modal='
         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-    cerrar_dialogo_modal($barra_herramientas_modal);
+    PCO_CerrarDialogoModal($barra_herramientas_modal);
     echo '</div>';

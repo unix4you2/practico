@@ -211,7 +211,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 		$PCO_Accion=PCO_EscaparContenido($PCO_Accion); //Limpia cadena para evitar XSS
 		echo '<div align="center"><br>';
 
-        selector_iconos_awesome();
+        PCO_SelectorIconosAwesome();
         selector_objetos_menu();
 
     	//function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno=0)
@@ -410,7 +410,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 				} //Fin si realmente recibio un criterio
 			else
 				{
-					mensaje($MULTILANG_Resultados, $MULTILANG_BuscaCriterios.'<br>'.$MULTILANG_InfDataTableNoRegistros, '', 'fa fa-search fa-3x', 'alert alert-warning alert-dismissible');
+					PCO_Mensaje($MULTILANG_Resultados, $MULTILANG_BuscaCriterios.'<br>'.$MULTILANG_InfDataTableNoRegistros, '', 'fa fa-search fa-3x', 'alert alert-warning alert-dismissible');
 				}
 
 	} 

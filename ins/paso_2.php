@@ -193,7 +193,7 @@
     <input type="hidden" name="VersionAplicacion" value="1.0">
 
 <?php
-	abrir_barra_estado();
+	PCO_AbrirBarraEstado();
 
 	$anterior=$paso-1;
 	$siguiente=$paso+1;
@@ -216,5 +216,5 @@
 			<input type="Hidden" name="Idioma" value="'.$Idioma.'">
 			<button onclick="document.regresar.submit();" type="button" class="btn btn-primary navbar-btn"><i class="fa fa-caret-square-o-left"></i> '.$MULTILANG_Anterior.'</button>
 		  </form>';
-	cerrar_barra_estado();
+	PCO_CerrarBarraEstado();
 ?>

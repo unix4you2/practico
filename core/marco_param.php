@@ -64,7 +64,7 @@
 
     echo '<div class="oculto_impresion">';
     // Modal Parametros
-    abrir_dialogo_modal("myModalPARAMETROS",$NombreRAD.' - '.$MULTILANG_ParametrosApp);
+    PCO_AbrirDialogoModal("myModalPARAMETROS",$NombreRAD.' - '.$MULTILANG_ParametrosApp);
 
 				//Consulta parametros de la aplicacion
 				$resultado=PCO_EjecutarSQL("SELECT id,$ListaCamposSinID_parametros from ".$TablasCore."parametros ");
@@ -262,7 +262,7 @@
                     $barra_herramientas_modal='
                         <button type="submit" class="btn btn-success">'.$MULTILANG_Guardar.' <i class="fa fa-save"></i></button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-                    cerrar_dialogo_modal($barra_herramientas_modal);
+                    PCO_CerrarDialogoModal($barra_herramientas_modal);
                 ?>
 
 

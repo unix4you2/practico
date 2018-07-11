@@ -133,7 +133,7 @@
 
     // Almacena tiempo de inicio para calculo de tiempos de ejecucion del script (informados a los Administradores)
     if(PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion!="")
-        $tiempo_inicio_script = obtener_microtime();
+        $tiempo_inicio_script = PCO_ObtenerMicrotime();
 
     // Importa autmaticamente definiciones de elementos internos en XML cuando encuentra alguna dentro de xml/
     if(PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
@@ -204,7 +204,7 @@
     if (@$PCO_ErrorTitulo!="") {
         if (@$PCO_ErrorIcono=="") $PCO_ErrorIcono='fa-thumbs-down';
         if (@$PCO_ErrorEstilo=="") $PCO_ErrorEstilo='alert-danger';
-        mensaje($PCO_ErrorTitulo, $PCO_ErrorDescripcion, '', 'fa fa-fw fa-2x '.$PCO_ErrorIcono, 'alert alert-dismissible '.$PCO_ErrorEstilo);
+        PCO_Mensaje($PCO_ErrorTitulo, $PCO_ErrorDescripcion, '', 'fa fa-fw fa-2x '.$PCO_ErrorIcono, 'alert alert-dismissible '.$PCO_ErrorEstilo);
         //Detiene ejecucion del script (util despues de popups de solo mensajes en operaciones)
         if (@$PCO_ErrorAutoclose=="1") echo '<script type="" language="JavaScript"> window.close();  </script>';
         if (@$PCO_ErrorDetener=="1") die();
@@ -212,7 +212,7 @@
 
     // Si existe el directorio de instalacion y no es modo fullscreen presenta un mensaje constante de advertencia en el escritorio
     if (@file_exists('ins') && PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$Presentar_FullScreen!=1 && $PCO_Accion=="Ver_menu")
-        mensaje($MULTILANG_TituloInsExiste, $MULTILANG_TextoInsExiste, '', 'fa fa-exclamation-triangle fa-5x texto-rojo texto-blink', 'alert alert-warning alert-dismissible');
+        PCO_Mensaje($MULTILANG_TituloInsExiste, $MULTILANG_TextoInsExiste, '', 'fa fa-exclamation-triangle fa-5x texto-rojo texto-blink', 'alert alert-warning alert-dismissible');
 
 	//Despliega escritorio de los Administradores
     if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCOSESS_SesionAbierta && $PCO_Accion=="Ver_menu")
@@ -272,7 +272,7 @@
                         }
                 }
             else
-                mensaje($MULTILANG_ErrorTiempoEjecucion, $MULTILANG_ErrorModulo.'<br><b>'.$MULTILANG_Detalles.': '.$PCOVAR_Elemento.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+                PCO_Mensaje($MULTILANG_ErrorTiempoEjecucion, $MULTILANG_ErrorModulo.'<br><b>'.$MULTILANG_Detalles.': '.$PCOVAR_Elemento.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
         }
     }
 

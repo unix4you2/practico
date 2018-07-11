@@ -61,9 +61,9 @@ function DemoVista_SOPA_Facebook($EntradasFaceBook)
             </table>';
 
         //Crea una barra de estado (opcional)
-        abrir_barra_estado();
+        PCO_AbrirBarraEstado();
             echo '<button type="button" class="btn btn-danger" OnClick="document.core_ver_menu.submit();">'.$MULTILANG_IrEscritorio.'</button>';
-        cerrar_barra_estado();
+        PCO_CerrarBarraEstado();
         //Cierra el contenedor (Obligatorio si se ha abierto alguno)
         PCO_CerrarVentana();
     }

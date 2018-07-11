@@ -214,6 +214,6 @@
 				{
 					@include_once("core/comunes.php"); //Incluye la libreria de base al menos para presentar mensaje de error
 					$mensaje_final="Error de conexion con la base de datos NoSQL. Verifique la disponibilidad de modulos asociados a su motor NoSQL en su <b>php.ini</b>.";
-					mensaje('<i class="fa fa-warning fa-3x text-danger texto-blink"></i> '.$mensaje_final, "<li><b>Detalles:</b> ".$CODError->getMessage(), '', '', 'alert alert-danger alert-dismissible');
+					PCO_Mensaje('<i class="fa fa-warning fa-3x text-danger texto-blink"></i> '.$mensaje_final, "<li><b>Detalles:</b> ".$CODError->getMessage(), '', '', 'alert alert-danger alert-dismissible');
 				}
 		}

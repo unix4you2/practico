@@ -35,10 +35,10 @@
 */
 if ($PCO_Accion=="PCO_ReportarBugs")
 	{
-        //abrir_dialogo_modal("myModalOAUTH",$MULTILANG_ConfiguracionGeneral.": ".$MULTILANG_OauthButt,"modal-wide"); 
+        //PCO_AbrirDialogoModal("myModalOAUTH",$MULTILANG_ConfiguracionGeneral.": ".$MULTILANG_OauthButt,"modal-wide"); 
         //Carga el formulario con el diseno para gestionar proveedores OAuth.  Deberia deshabilitarse su cargue en modo de diseno del mismo para permitir cambios.
         PCO_CargarFormulario("-3",1);
-        //cerrar_dialogo_modal();
+        //PCO_CerrarDialogoModal();
 	}
 	
 
@@ -60,10 +60,10 @@ if ($PCO_Accion=="PCO_EditarConfiguracionOAuth")
 		// Construye la URI de redireccion base para concatenar el servicio especifico
 		$URI = $protocolo_webservice.$prefijo_webservice."?PCO_WSOn=1&PCO_WSId=autenticacion_oauth&OAuthSrv=";
 		
-        //abrir_dialogo_modal("myModalOAUTH",$MULTILANG_ConfiguracionGeneral.": ".$MULTILANG_OauthButt,"modal-wide"); 
+        //PCO_AbrirDialogoModal("myModalOAUTH",$MULTILANG_ConfiguracionGeneral.": ".$MULTILANG_OauthButt,"modal-wide"); 
         //Carga el formulario con el diseno para gestionar proveedores OAuth.  Deberia deshabilitarse su cargue en modo de diseno del mismo para permitir cambios.
         PCO_CargarFormulario("-5",1);
-        //cerrar_dialogo_modal();
+        //PCO_CerrarDialogoModal();
 	}
 
 
@@ -91,10 +91,10 @@ if ($PCO_Accion=="limpiar_backups")
 					}
 			}
 
-		abrir_barra_estado();
+		PCO_AbrirBarraEstado();
 		echo '<div align=center><h3>'.$MULTILANG_EspacioLiberado.': <b>'.$TotalAhorro.' Kb</b></h3></div>
 		<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
-		cerrar_barra_estado();
+		PCO_CerrarBarraEstado();
 	}
 
 
@@ -122,10 +122,10 @@ if ($PCO_Accion=="limpiar_temporales")
 					}
 			}
 
-		abrir_barra_estado();
+		PCO_AbrirBarraEstado();
 		echo '<div align=center><h3>'.$MULTILANG_EspacioLiberado.': <b>'.$TotalAhorro.' Kb</b></h3></div>
 		<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
-		cerrar_barra_estado();
+		PCO_CerrarBarraEstado();
 	}
 
 
@@ -196,7 +196,7 @@ if ($PCO_Accion=="mantenimiento_tablas")
         //Finaliza tabla de resultados
 		echo '</tbody>
 			</table>';
-		abrir_barra_estado();
+		PCO_AbrirBarraEstado();
 		echo '<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
-		cerrar_barra_estado();
+		PCO_CerrarBarraEstado();
 	}

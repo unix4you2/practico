@@ -96,7 +96,7 @@
 	<textarea rows="7" class="form-control">'.$total_consultas.'</textarea>
 	</td></tr></table>';
 
-	abrir_barra_estado();
+	PCO_AbrirBarraEstado();
 	if (!$hay_error)
 		{
             //Intenta renombrar carpeta de instalacion
@@ -115,5 +115,5 @@
 				<input type="Submit" class="btn btn-success" value=" '.$MULTILANG_IrInstalacion.' " onclick="document.continuar.submit();">
 				</form>';
 		}
-	cerrar_barra_estado();
+	PCO_CerrarBarraEstado();
 ?>

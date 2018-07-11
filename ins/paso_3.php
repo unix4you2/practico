@@ -164,7 +164,7 @@
 
 	// Si no se encontro ningun error muestra mensaje OK
 	if (!$hay_error)
-        mensaje('<i class="fa fa-check-circle-o fa-4x text-info"></i> ', $MULTILANG_InfoPaso3, '', '', 'alert alert-info alert-dismissible');
+        PCO_Mensaje('<i class="fa fa-check-circle-o fa-4x text-info"></i> ', $MULTILANG_InfoPaso3, '', '', 'alert alert-info alert-dismissible');
 
 ?>
 
@@ -172,7 +172,7 @@
 </div>
 
 <?php
-	abrir_barra_estado();
+	PCO_AbrirBarraEstado();
 
 	$anterior=$paso-1;
 	$siguiente=$paso+1;
@@ -201,5 +201,5 @@
 				<input type="Submit" class="btn btn-info" value=" '.$MULTILANG_BtnNoAplicarBD.' >>> "  onclick="document.continuar.submit();">
 				</form>';
 		}
-	cerrar_barra_estado();
+	PCO_CerrarBarraEstado();
 ?>

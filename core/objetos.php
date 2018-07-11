@@ -159,7 +159,7 @@ function RedimensionarImagenPWA($ArchivoOrigen,$ArchivoDestino,$Ancho,$Alto)
 			//Verifica si esta o no en modo DEMO para hacer la operacion
 			if ($PCO_ModoDEMO==1)
 				{
-					mensaje($MULTILANG_TitDemo, $MULTILANG_MsjDemo, '', 'fa fa-fw fa-2x fa-thumbs-down', 'alert alert-dismissible alert-danger');
+					PCO_Mensaje($MULTILANG_TitDemo, $MULTILANG_MsjDemo, '', 'fa fa-fw fa-2x fa-thumbs-down', 'alert alert-dismissible alert-danger');
 					echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 					die();
 				}
