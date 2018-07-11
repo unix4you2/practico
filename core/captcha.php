@@ -21,7 +21,7 @@
 	session_start();
 
 /*
-	Function: TextoAleatorio
+	Function: TextoAleatorioCaptcha
 	Genera un texto aleatorio de una longitud determinada y basado en los caracteres suministrados en $plantilla
 
 	Variables de entrada:

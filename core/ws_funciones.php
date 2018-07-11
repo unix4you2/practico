@@ -62,8 +62,8 @@
 */
 if (@$PCO_WSId=="verificar_credenciales") 
 	{
-		$uid=filtrar_cadena_sql(@$uid);
-		$clave=filtrar_cadena_sql(@$clave);
+		$uid=PCO_FiltrarCadenaSQL(@$uid);
+		$clave=PCO_FiltrarCadenaSQL(@$clave);
 		$salida_xml="";
 		$ok_login_verifica='0';
 		$error_parametros=0;		
@@ -173,11 +173,11 @@ if (@$PCO_WSId=="verificar_credenciales")
 		{
 			global $TablasCore,$LlaveDePaso,$PCO_FechaOperacion,$ListaCamposSinID_usuario;
 			// Inserta datos del usuario
-			$clavemd5=MD5(TextoAleatorio(20));
+			$clavemd5=MD5(PCO_TextoAleatorio(20));
 			$pasomd5=MD5($LlaveDePaso);
 			$descripcion="Auth:$OAuth_servicio";
 			//Agrega el registro de usuario si aun no existe
-			if (!existe_valor($TablasCore."usuario","login",$login_chk))
+			if (!PCO_ExisteValor($TablasCore."usuario","login",$login_chk))
 				{
 					@PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."usuario (login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno,plantilla_permisos,descripcion) VALUES ('$login_chk','$clavemd5','$nombre_chk',1,'$correo_chk','$PCO_FechaOperacion','$pasomd5','$interno_chk','$plantilla_permisos_chk','$descripcion')");
 					PCO_Auditar("OAuth:Agregado usuario $login_chk para ".$OAuth_servicio);

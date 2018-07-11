@@ -208,7 +208,7 @@ function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0)
 		*/
 if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 	{
-		$PCO_Accion=escapar_contenido($PCO_Accion); //Limpia cadena para evitar XSS
+		$PCO_Accion=PCO_EscaparContenido($PCO_Accion); //Limpia cadena para evitar XSS
 		echo '<div align="center"><br>';
 
         selector_iconos_awesome();
@@ -217,7 +217,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
     	//function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno=0)
         PCO_CargarFormulario("-12",1,"","",0,0); //Cargar el form
 
-		abrir_ventana($MULTILANG_MnuDefinidos, 'panel-warning');
+		PCO_AbrirVentana($MULTILANG_MnuDefinidos, 'panel-warning');
 		echo '
 		<table class="table table-condensed btn-xs  table-hover table-unbordered">
 			<thead>
@@ -237,7 +237,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
                 PCO_PresentarOpcionesArbolMenu('padre=0',0);
 		echo '</tbody>
         </table>';
-		 cerrar_ventana();
+		 PCO_CerrarVentana();
 	}
 
 
@@ -472,7 +472,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 					//Crea la seccion en el acordeon
 					$seccion_menu_activa=$registro["seccion"];
 					$conteo_opciones=$registro["conteo"];
-					abrir_ventana($seccion_menu_activa.' ('.$conteo_opciones.')', 'panel-primary');
+					PCO_AbrirVentana($seccion_menu_activa.' ('.$conteo_opciones.')', 'panel-primary');
 					// Busca las opciones dentro de la seccion
 
 					// Si el usuario es diferente al administrador agrega condiciones al query
@@ -485,7 +485,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 
 					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
 						PCO_ImprimirOpcionMenu($registro_opciones_acordeon,'centro');
-					cerrar_ventana();
+					PCO_CerrarVentana();
 				}
 			echo '</div>';
 

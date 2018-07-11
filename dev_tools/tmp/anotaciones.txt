@@ -1,7 +1,6 @@
-
-crear funcion similar a la de $resultado=consultar_tablas();  pero para campos pues esta bajo mysql solamente
+crear funcion similar a la de $resultado=PCO_ConsultarTablas();  pero para campos pues esta bajo mysql solamente
 actualizar esa funcion en tablas->editar_tabla e informes->editar_informe
-PILAS: la funcion ya existe en comunes como  function consultar_columnas($tabla)
+PILAS: la funcion ya existe en comunes como  function PCO_ConsultarColumnas($tabla)
 
 esto valida si existe la constante...
 	defined( '_VALID_MOS' ) or die( 'Direct Access to this location is not allowed.' );
@@ -424,16 +423,3 @@ foreach($rs as $row){
 
 
 */
-
-
-
-
-
-
-
-
-
-
-
-
-

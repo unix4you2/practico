@@ -144,14 +144,14 @@
                             <span class="input-group-addon">
                                 <?php echo $MULTILANG_WSLlavesLlave; ?>:
                             </span>
-                            <input name="llave" type="text" class="form-control" value="<?php echo TextoAleatorio(10); ?>" readonly>
+                            <input name="llave" type="text" class="form-control" value="<?php echo PCO_TextoAleatorio(10); ?>" readonly>
                         </div>
 
                         <div class="form-group input-group">
                             <span class="input-group-addon">
                                 <?php echo $MULTILANG_WSLlavesSecreto; ?>:
                             </span>
-                            <input name="secreto" type="text" class="form-control" value="<?php echo TextoAleatorio(10); ?>" readonly>
+                            <input name="secreto" type="text" class="form-control" value="<?php echo PCO_TextoAleatorio(10); ?>" readonly>
                         </div>
 
                         <div class="form-group input-group">

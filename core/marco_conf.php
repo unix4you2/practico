@@ -104,7 +104,7 @@
                                         <span class="input-group-addon">
                                             <i class="fa fa-key fa-fw"></i> <?php echo $MULTILANG_Contrasena; ?>:
                                         </span>
-                                        <input name="PasswordBDNEW" value="<?php echo TextoAleatorio(10); ?>" type="password" class="form-control" readonly>
+                                        <input name="PasswordBDNEW" value="<?php echo PCO_TextoAleatorio(10); ?>" type="password" class="form-control" readonly>
                                     </div>
                                     
                                     <div class="form-group input-group">

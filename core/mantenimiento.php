@@ -162,7 +162,7 @@ if ($PCO_Accion=="mantenimiento_tablas")
 		if ($PCO_TipoOperacion=="ANALYZE" || $PCO_TipoOperacion=="OPTIMIZE" || $PCO_TipoOperacion=="REPAIR")
 			{
 				//Busca las tablas son el prefijo especificado
-				$resultado_conteos_tablas=consultar_tablas($PCO_PrefijoTablas);
+				$resultado_conteos_tablas=PCO_ConsultarTablas($PCO_PrefijoTablas);
 				//Recorre las tablas y presenta resultados de la operacion con cada una
 				while ($registro_conteos_tablas = $resultado_conteos_tablas->fetch())
 					{

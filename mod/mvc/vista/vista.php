@@ -21,7 +21,7 @@
 
 <?php
 	//Abre un contenedor (Opcional)
-	abrir_ventana('Registros de auditoria', 'panel-primary');
+	PCO_AbrirVentana('Registros de auditoria', 'panel-primary');
 ?>
 
 	<h1>Listado de acciones encontradas</h1>
@@ -53,7 +53,7 @@
 
 <?php
 	//Cierra el contenedor (Obligatorio si se ha abierto alguno)
-	cerrar_ventana();
+	PCO_CerrarVentana();
 ?>
 
 <?php
@@ -76,4 +76,3 @@ incluso hacer uso de las constantes de idioma predefinidas en Practico
 como se muestra en el boton y elementos y formularios preexistentes como
 se ve en su evento onclick.
 */
-

@@ -100,7 +100,7 @@
 	if (!$hay_error)
 		{
             //Intenta renombrar carpeta de instalacion
-            $nueva_carpeta="../ins_".TextoAleatorio(10);
+            $nueva_carpeta="../ins_".PCO_TextoAleatorio(10);
             $estado_renombrado = @rename("../ins/" , $nueva_carpeta);
             //Si hay un error intenta un exec
             if (!$estado_renombrado)

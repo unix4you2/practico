@@ -145,7 +145,7 @@
 							<a data-toggle="modal" href="#myModalWEBSERVICES">
 								<div>
 									<i class="fa fa-link fa-fw"></i> <?php echo $MULTILANG_WSConfigButt; ?>
-									<span class="pull-right text-muted small"><?php echo ContarRegistros($TablasCore."llaves_api",""); ?></span>
+									<span class="pull-right text-muted small"><?php echo PCO_ContarRegistrosTabla($TablasCore."llaves_api",""); ?></span>
 								</div>
 							</a>
 						</li>
@@ -154,7 +154,7 @@
 							<a data-toggle="modal" href="javascript:document.PCO_VerReplicaciones.submit();">
 								<div>
 									<i class="fa fa-cubes fa-fw"></i> <?php echo $MULTILANG_ReplicaTitulo; ?>
-									<span class="pull-right text-muted small"><?php echo ContarRegistros($TablasCore."replicasbd",""); ?></span>
+									<span class="pull-right text-muted small"><?php echo PCO_ContarRegistrosTabla($TablasCore."replicasbd",""); ?></span>
 								</div>
 							</a>
 						</li>
@@ -163,7 +163,7 @@
 							<a data-toggle="modal" href="javascript:document.PCO_VerMonitoreo.submit();">
 								<div>
 									<i class="fa fa-lightbulb-o fa-fw"></i> <?php echo $MULTILANG_MonTitulo; ?>
-									<span class="pull-right text-muted small"><?php echo ContarRegistros($TablasCore."monitoreo",""); ?></span>
+									<span class="pull-right text-muted small"><?php echo PCO_ContarRegistrosTabla($TablasCore."monitoreo",""); ?></span>
 								</div>
 							</a>
 						</li>

@@ -280,7 +280,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="establecer_nueva_con
             Ver tambien:
                 <recuperar_contrasena>
         */
-        abrir_ventana($MULTILANG_OlvideClave, 'panel-primary');
+        PCO_AbrirVentana($MULTILANG_OlvideClave, 'panel-primary');
 
         $PCO_MensajeError="";
 		// Verifica campos nulos
@@ -316,7 +316,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="establecer_nueva_con
                 mensaje($MULTILANG_Error,$PCO_MensajeError,'','fa fa-exclamation-triangle fa-4x','alert alert-danger alert-dismissible');
             }
         echo '<a class="btn btn-default btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
-        cerrar_ventana();
+        PCO_CerrarVentana();
     }
 
 
@@ -404,9 +404,9 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_llave"
             Ver tambien:
                 <recuperar_contrasena>
         */
-		abrir_ventana($MULTILANG_OlvideClave, 'panel-primary');
+		PCO_AbrirVentana($MULTILANG_OlvideClave, 'panel-primary');
         //Busca si realmente hay un usuario registrado con ese login y le envia el mensaje
-        if (existe_valor($TablasCore."usuario","login",$usuario) && $usuario!="")
+        if (PCO_ExisteValor($TablasCore."usuario","login",$usuario) && $usuario!="")
             {
                 //Busca los datos del usuario
                 $registro=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login=?","$usuario")->fetch();
@@ -436,7 +436,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_llave"
                 mensaje($MULTILANG_Error,$MULTILANG_UsrErrorReset,'','fa fa-exclamation-triangle fa-4x','alert alert-danger alert-dismissible');
             }
         echo '<a class="btn btn-default btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
-        cerrar_ventana();
+        PCO_CerrarVentana();
     }
 
 
@@ -452,9 +452,9 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_con_us
             Ver tambien:
                 <recuperar_contrasena> | <enviar_correo_llave>
         */
-		abrir_ventana($MULTILANG_OlvideClave, 'panel-info');
+		PCO_AbrirVentana($MULTILANG_OlvideClave, 'panel-info');
         //Busca si realmente hay un usuario registrado con ese correo y le envia el mensaje
-        if (existe_valor($TablasCore."usuario","correo",$correo) && $correo!="")
+        if (PCO_ExisteValor($TablasCore."usuario","correo",$correo) && $correo!="")
             {
                 //Busca los datos del usuario y los envia al correo registrado
                 $registro=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE correo=?","$correo")->fetch();
@@ -471,7 +471,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_con_us
                 mensaje($MULTILANG_Error,$MULTILANG_UsrErrorReset,'','fa fa-exclamation-triangle fa-4x','alert alert-danger alert-dismissible');
             }
         echo '<a class="btn btn-default btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
-        cerrar_ventana();
+        PCO_CerrarVentana();
     }
 
 
@@ -487,7 +487,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="formulario_recuperac
             Ver tambien:
                 <listar_usuarios> | <recuperar_contrasena>
         */
-		abrir_ventana($MULTILANG_OlvideClave, 'panel-info');
+		PCO_AbrirVentana($MULTILANG_OlvideClave, 'panel-info');
         mensaje($MULTILANG_Importante,$MULTILANG_UsrResetAdmin,'','fa fa-key fa-4x','alert alert-info alert-dismissible');
 ?>
                 <?php echo $MULTILANG_Opcion; ?> <span class="badge">1</span>
@@ -525,7 +525,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="formulario_recuperac
 
 		 <?php
             echo '<br><br><a class="btn btn-default btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
-            cerrar_ventana();
+            PCO_CerrarVentana();
     }
 
 
@@ -844,7 +844,7 @@ if ($PCO_Accion=="eliminar_informe_usuario")
 */
 if ($PCO_Accion=="informes_usuario")
     {
-        abrir_ventana($MULTILANG_UsrAdmInf,'panel-info');
+        PCO_AbrirVentana($MULTILANG_UsrAdmInf,'panel-info');
 ?>
 			<form name="salto" action="<?php echo $ArchivoCORE; ?>" method="POST">
                 <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
@@ -927,7 +927,7 @@ if ($PCO_Accion=="informes_usuario")
 			echo '</tbody>
             </table>';
 
-        cerrar_ventana();
+        PCO_CerrarVentana();
 	}
 
 
@@ -1034,7 +1034,7 @@ if ($PCO_Accion=="eliminar_permiso")
 */
 if ($PCO_Accion=="permisos_usuario")
     {
-        abrir_ventana($MULTILANG_UsrAdmPer, 'panel-info');
+        PCO_AbrirVentana($MULTILANG_UsrAdmPer, 'panel-info');
 ?>
 			<form name="salto" action="<?php echo $ArchivoCORE; ?>" method="POST">
                 <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
@@ -1121,7 +1121,7 @@ if ($PCO_Accion=="permisos_usuario")
 			echo '</tbody>
             </table>';
 
-        cerrar_ventana();
+        PCO_CerrarVentana();
     }
 
 
@@ -1244,7 +1244,7 @@ if ($PCO_Accion=="permisos_usuario")
 			*/
 			$mensaje_error="";
 
-			$clave=TextoAleatorio(10);
+			$clave=PCO_TextoAleatorio(10);
 			$plantilla_permisos=$Auth_PlantillaAutoRegistro;
 			$usuario_interno=0;
 			$estado=1;
@@ -1316,7 +1316,7 @@ if ($PCO_Accion=="agregar_usuario_autoregistro")
                 <listar_usuarios> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario> | <muestra_seguridad_clave> | <seguridad_clave>
         */
 		echo "<br>";
-		abrir_ventana($MULTILANG_UsrAdicion, 'panel-info');
+		PCO_AbrirVentana($MULTILANG_UsrAdicion, 'panel-info');
         mensaje($MULTILANG_Importante,$MULTILANG_UsrDesClaveACorreo,'','fa fa-info-circle fa-5x texto-azul','alert alert-default alert-dismissible');
 
 ?>
@@ -1365,7 +1365,7 @@ if ($PCO_Accion=="agregar_usuario_autoregistro")
             <a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> <?php echo $MULTILANG_Cancelar; ?></a>
 
 		 <?php
-            cerrar_ventana();
+            PCO_CerrarVentana();
 			$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
     }
 
@@ -1461,7 +1461,7 @@ if ($PCO_Accion=="agregar_usuario")
             Ver tambien:
                 <listar_usuarios> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario> | <muestra_seguridad_clave> | <seguridad_clave>
         */
-		abrir_ventana($MULTILANG_UsrAdicion, 'panel-info');
+		PCO_AbrirVentana($MULTILANG_UsrAdicion, 'panel-info');
         mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'','fa fa-info-circle fa-5x texto-azul','alert alert-default alert-dismissible');
 ?>
 
@@ -1577,7 +1577,7 @@ if ($PCO_Accion=="agregar_usuario")
             <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 
 		 <?php
-            cerrar_ventana();
+            PCO_CerrarVentana();
 			$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
     }
 
@@ -1629,7 +1629,7 @@ if ($PCO_Accion=="ver_seguimiento_general")
 					<listar_usuarios> | <ver_seguimiento_especifico> | <ver_seguimiento_monitoreo>
 			*/
 
-            abrir_ventana($MULTILANG_UsrAudUsrs, 'panel-info');
+            PCO_AbrirVentana($MULTILANG_UsrAudUsrs, 'panel-info');
             if (@$inicio_reg=="") $inicio_reg=0;
             if (@$fin_reg=="") $fin_reg=50;
                 ?>
@@ -1816,7 +1816,7 @@ if ($PCO_Accion=="ver_seguimiento_general")
 				echo '<a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
 				echo '<a class="btn btn-warning btn-block" href="javascript:document.ver_auditoria_monitoreo.submit();"><i class="fa fa-home"></i> '.$MULTILANG_UsrAudMonit.'</a>';
 				cerrar_barra_estado();
-				cerrar_ventana();
+				PCO_CerrarVentana();
 				 }
 /* ################################################################## */
 if ($PCO_Accion=="ver_seguimiento_especifico")
@@ -1842,7 +1842,7 @@ if ($PCO_Accion=="ver_seguimiento_especifico")
 					<listar_usuarios> | <ver_seguimiento_general>
 			*/
 						echo '<div align="center"><br>';
-				abrir_ventana($MULTILANG_UsrAudHisto, 'panel-info');
+				PCO_AbrirVentana($MULTILANG_UsrAudHisto, 'panel-info');
 				if ($inicio_reg=="") $inicio_reg=0;
 				if ($fin_reg=="") $fin_reg=50;
 					echo ' <br><div align="right">
@@ -1878,7 +1878,7 @@ if ($PCO_Accion=="ver_seguimiento_especifico")
 				abrir_barra_estado();
 				echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" << '.$MULTILANG_IrEscritorio.' " class="BotonesEstado">';
 				cerrar_barra_estado();
-				cerrar_ventana();
+				PCO_CerrarVentana();
 				echo '<br>';
 				 }
 /* ################################################################## */
@@ -1905,7 +1905,7 @@ if ($PCO_Accion=="listar_usuarios")
 				Ver tambien:
 					<agregar_usuario> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario>
 			*/
-				abrir_ventana($MULTILANG_UsrLista, 'panel-info');
+				PCO_AbrirVentana($MULTILANG_UsrLista, 'panel-info');
                 ?>
                 
 
@@ -2034,7 +2034,7 @@ if ($PCO_Accion=="listar_usuarios")
                                                     <span class="input-group-addon">
                                                         '.$MULTILANG_UsrNuevoPW.' <b>'.$registro["login"].'</b>:
                                                     </span>
-                                                    <input type="text" name="nueva_clave" size=12 class="form-control" value="'.TextoAleatorio(10).'">
+                                                    <input type="text" name="nueva_clave" size=12 class="form-control" value="'.PCO_TextoAleatorio(10).'">
                                                     <span class="input-group-addon">
                                                         <button type="submit" class="btn btn-success btn-xs">'.$MULTILANG_UsrReset.' <i class="fa fa-refresh"></i></button>
                                                     </span>
@@ -2065,7 +2065,7 @@ if ($PCO_Accion=="listar_usuarios")
                         <a class="btn btn-info " href="javascript:document.ver_auditoria_monitoreo.submit();"><i class="fa fa-file-text"></i> '.$MULTILANG_UsrAudMonit.'</a>
                         </div>';
 				cerrar_barra_estado();
-				cerrar_ventana();
+				PCO_CerrarVentana();
 			 }
 			//$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 		?>

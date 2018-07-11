@@ -118,7 +118,7 @@
         <span class="input-group-addon">
             <?php echo $MULTILANG_LlavePaso; ?>:
         </span>
-        <input name="LlaveDePasoNEW" value="<?php echo TextoAleatorio(10); ?>" type="text" class="form-control">
+        <input name="LlaveDePasoNEW" value="<?php echo PCO_TextoAleatorio(10); ?>" type="text" class="form-control">
         <span class="input-group-addon">
             <a href="#" title="<?php echo $MULTILANG_AyudaLlave; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
         </span>

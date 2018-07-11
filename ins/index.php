@@ -106,9 +106,9 @@
 	//Determina paso actual de instalacion
 	if(!isset($paso)) $paso=-1;
 
-	abrir_ventana($MULTILANG_Instalacion.' - '.$MULTILANG_Paso.' '.$paso);
+	PCO_AbrirVentana($MULTILANG_Instalacion.' - '.$MULTILANG_Paso.' '.$paso);
 	include("paso_".$paso.".php");
-	cerrar_ventana();
+	PCO_CerrarVentana();
 
 	include("core/marco_abajo.php");
 ?>

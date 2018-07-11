@@ -85,7 +85,7 @@ $(function() {
         <?php
             //Inicia la generacion del arreglo con los datos
             //$resultado_auditoria=PCO_EjecutarSQL("SELECT fecha,count(*) as cantidad FROM ".$TablasCore."auditoria WHERE fecha>=date_sub(date(now()),INTERVAL 30 DAY) GROUP BY fecha ORDER BY fecha");
-            $resultado_conteos_tablas=consultar_tablas($TablasApp);
+            $resultado_conteos_tablas=PCO_ConsultarTablas($TablasApp);
             $cadena_datos="";
             while ($registro_conteos_tablas = $resultado_conteos_tablas->fetch())
                 {

@@ -145,7 +145,7 @@
     // Determina si al momento de ejecucion se encuentra activado el modo webservices
     include_once 'core/ws_nucleo.php';
 
-    limpiar_entradas(); // Evita XSS
+    PCO_LimpiarEntradas(); // Evita XSS
 
     // Incluye clases para procesar archivos en csv, xls, ods, pdf, otros
     require_once 'inc/phpexcel/Classes/PHPExcel.php';
@@ -159,7 +159,7 @@
                 exit(1);
             }
             // Valida permisos asignados al usuario actual para la accion llamada a ejecutar
-            if (!permiso_accion($PCO_Accion)) {
+            if (!PCO_PermisoAccion($PCO_Accion)) {
                 echo $MULTILANG_SecErrorTit.'<hr>'.$MULTILANG_SecErrorDes.'<hr>[US=<b>'.$PCOSESS_LoginUsuario.'</b>|CMD=<b>'.$PCO_Accion.'</b>|IP=<b>'.$PCO_DireccionAuditoria.'</b>|DTE=<b>'.$PCO_FechaOperacionGuiones.' '.$PCO_HoraOperacionPuntos.'</b>]';
                 PCO_Auditar("SEC: Intento de acceso no autorizado CMD=$PCO_Accion");
                 exit(1);
@@ -195,10 +195,10 @@
 
 
     // Prueba que todas las extensiones requeridas se encuentren habilitadas
-    verificar_extensiones();
+    PCO_VerificarExtensionesPHP();
 
     // Valida existencia de versiones nuevas cuando un Administrador esta logueado
-    buscar_actualizaciones(@$PCOSESS_LoginUsuario,$PCO_Accion);
+    PCO_BuscarActualizaciones(@$PCOSESS_LoginUsuario,$PCO_Accion);
 
     // Presenta mensajes con errores generales cuando son encontrados durante la ejecucion
     if (@$PCO_ErrorTitulo!="") {

@@ -757,7 +757,7 @@ $salida=sprintf("<?php
 
 			if ($mensaje_error=="")
 				{
-				    abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary');
+				    PCO_AbrirVentana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary');
 				    echo $MULTILANG_FrmCopiaFinalizada."<hr>"; 
 				    PCO_ExportarDefinicionesXML($TipoElementos,$ListaElementos,$tipo_copia_objeto);
                     ?>
@@ -766,7 +766,7 @@ $salida=sprintf("<?php
             			<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
             			</div>
                     <?php
-                        cerrar_ventana();
+                        PCO_CerrarVentana();
 				}
 			else
 				{

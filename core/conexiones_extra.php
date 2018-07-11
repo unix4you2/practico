@@ -39,7 +39,7 @@
 			Variable lista para ser utilizada
 
 		Ver tambien:
-		<Definicion de conexion PDO> | <Configuracion base> | <informacion_conexion>
+		<Definicion de conexion PDO> | <Configuracion base> | <PCO_InformacionConexionBD>
 	*/
 
 

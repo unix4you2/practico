@@ -977,9 +977,9 @@ if ($PCO_Accion=="editar_informe")
                              <?php
                                     //Si el informe usa una conexion externa usa su configuracion
                                     if($registro_informe["conexion_origen_datos"]!="")
-                                        $resultado=consultar_tablas("",${$registro_conexiones["nombre"]},$registro_conexiones["motorbd"],$registro_conexiones["basedatos"]);
+                                        $resultado=PCO_ConsultarTablas("",${$registro_conexiones["nombre"]},$registro_conexiones["motorbd"],$registro_conexiones["basedatos"]);
                                     else
-                                        $resultado=consultar_tablas();
+                                        $resultado=PCO_ConsultarTablas();
                                     //Presenta las tablas encontradas en la BD
                                     while ($registro = $resultado->fetch())
                                         {
@@ -1074,7 +1074,7 @@ if ($PCO_Accion=="editar_informe")
 									<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
 									<?php
 											$resultado=PCO_EjecutarSQL("SELECT valor_tabla FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
-											//$resultado=consultar_tablas(); //Presenta todas las tablas
+											//$resultado=PCO_ConsultarTablas(); //Presenta todas las tablas
 											while ($registro = $resultado->fetch())
 												{
 													// Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
@@ -1085,9 +1085,9 @@ if ($PCO_Accion=="editar_informe")
 															//Busca los campos de la tabla
                                                             //Si el informe usa una conexion externa usa su configuracion
                                                             if($registro_informe["conexion_origen_datos"]!="")
-                                                                $resultadocampos=consultar_columnas(PCO_ReemplazarVariablesPHPEnCadena($registro[0]),${$registro_conexiones["nombre"]},$registro_conexiones["motorbd"],$registro_conexiones["basedatos"]);
+                                                                $resultadocampos=PCO_ConsultarColumnas(PCO_ReemplazarVariablesPHPEnCadena($registro[0]),${$registro_conexiones["nombre"]},$registro_conexiones["motorbd"],$registro_conexiones["basedatos"]);
                                                             else
-                                                                $resultadocampos=consultar_columnas(PCO_ReemplazarVariablesPHPEnCadena($registro[0]));
+                                                                $resultadocampos=PCO_ConsultarColumnas(PCO_ReemplazarVariablesPHPEnCadena($registro[0]));
 															for($i=0;$i<count($resultadocampos);$i++)
 																echo '<option value="'.$nombre_tabla.'.'.$resultadocampos[$i]["nombre"].'">'.$resultadocampos[$i]["nombre"].'</option>';
 															echo '</optgroup>';
@@ -1951,7 +1951,7 @@ if ($PCO_Accion=="editar_informe")
 <div class="row">
   <div class="col-md-4">
 			<?php 
-				abrir_ventana($MULTILANG_BarraHtas, 'panel-primary'); 
+				PCO_AbrirVentana($MULTILANG_BarraHtas, 'panel-primary'); 
 			?>
 				<div align=center>
 				<?php echo $MULTILANG_InfTablasOrigen; ?><br>
@@ -2001,14 +2001,14 @@ if ($PCO_Accion=="editar_informe")
 
 				</div><br>
 			<?php
-				cerrar_ventana();
+				PCO_CerrarVentana();
 			?>
 			
 
   </div>    
   <div class="col-md-8">
 
-			<?php abrir_ventana($MULTILANG_InfParam." <i>[ID=".$registro_informe['id']."]</i>", 'panel-primary'); ?>
+			<?php PCO_AbrirVentana($MULTILANG_InfParam." <i>[ID=".$registro_informe['id']."]</i>", 'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="actualizar_informe">
 			<input type="Hidden" name="id" value="<?php echo $registro_informe['id']; ?>">
@@ -2194,11 +2194,11 @@ if ($PCO_Accion=="editar_informe")
             <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa  fa-floppy-o"></i> <?php echo $MULTILANG_InfActualizar; ?></a>
 
 			<?php
-				cerrar_ventana();
+				PCO_CerrarVentana();
 			?>
 
 
-			<?php abrir_ventana($MULTILANG_InfVistaPrev, 'panel-primary'); ?>
+			<?php PCO_AbrirVentana($MULTILANG_InfVistaPrev, 'panel-primary'); ?>
 
 			<form action="<?php echo $ArchivoCORE; ?>" method="post" name="datosprevios" id="datosprevios" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 			
@@ -2232,7 +2232,7 @@ if ($PCO_Accion=="editar_informe")
             
 
 			<?php
-				cerrar_ventana();
+				PCO_CerrarVentana();
 			?>
 
 	<?php
@@ -2301,7 +2301,7 @@ if ($PCO_Accion=="guardar_informe")
 				$agrupamiento='';
                 $ordenamiento='';
                 PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,'|!|!|!|false|false|false|||',?,?,?,?,?,?,?,?,'')","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos");
-				$id=obtener_ultimo_id_insertado($ConexionPDO);
+				$id=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 				PCO_Auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 				<input type="Hidden" name="PCO_Accion" value="editar_informe">
@@ -2335,7 +2335,7 @@ if ($PCO_Accion=="guardar_informe")
 	if ($PCO_Accion=="clonar_diseno_informe")
 		{
 				//Presenta la ventana con informacion y enlace de descarga
-				abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
+				PCO_AbrirVentana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
 					<div align=center>
 					<?php
 				        echo $MULTILANG_FrmCopiaFinalizada."<hr>"; 
@@ -2343,7 +2343,7 @@ if ($PCO_Accion=="guardar_informe")
 					?>
 					</div>
 				<?php
-				cerrar_ventana();
+				PCO_CerrarVentana();
 				?>
     			<div align=center>
     			<br><br>
@@ -2369,7 +2369,7 @@ if ($PCO_Accion=="definir_copia_informes")
 			<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
             <br>
-			<?php abrir_ventana($MULTILANG_FrmTipoObjeto, 'panel-primary'); ?>
+			<?php PCO_AbrirVentana($MULTILANG_FrmTipoObjeto, 'panel-primary'); ?>
 			<h4><?php echo $MULTILANG_FrmTipoCopiaExporta; ?>: <b><?php echo $titulo_informe; ?></b> (ID=<?php echo $informe; ?>)</h4>
             <label for="tipo_copia_objeto"><?php echo $MULTILANG_FrmTipoCopia; ?>:</label>
             <select id="tipo_copia_objeto" name="tipo_copia_objeto" class="form-control btn-warning" >
@@ -2391,7 +2391,7 @@ if ($PCO_Accion=="definir_copia_informes")
             </div>
 
 		<?php
-		cerrar_ventana();
+		PCO_CerrarVentana();
 	}
 
 
@@ -2412,7 +2412,7 @@ if ($PCO_Accion=="confirmar_importacion_informe")
 	{
 		echo "<br>";
 		$mensaje_error="";
-		abrir_ventana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
+		PCO_AbrirVentana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
 		if ($archivo_cargado=="")
 			$mensaje_error=$MULTILANG_ErrorTiempoEjecucion;
 		else
@@ -2447,7 +2447,7 @@ if ($PCO_Accion=="confirmar_importacion_informe")
 			}
 		echo '</center>';
 
-		cerrar_ventana();
+		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 
@@ -2468,7 +2468,7 @@ if ($PCO_Accion=="confirmar_importacion_informe")
 if ($PCO_Accion=="analizar_importacion_informe")
 	{
 		echo "<br>";
-		abrir_ventana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
+		PCO_AbrirVentana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
 
 		if ($mensaje_error=="")
 			{
@@ -2480,7 +2480,7 @@ if ($PCO_Accion=="analizar_importacion_informe")
 
                 //Presenta alerta cuando encuentra otro elemento con el mismo ID y se trata de una importacion estatica
                 if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
-					if (existe_valor($TablasCore."informe","id",base64_decode($xml_importado->core_informe[0]->id)))
+					if (PCO_ExisteValor($TablasCore."informe","id",base64_decode($xml_importado->core_informe[0]->id)))
 						mensaje($MULTILANG_Atencion, $MULTILANG_FrmImportarAlerta, '', 'fa fa-fw fa-2x fa-warning', 'alert alert-dismissible alert-danger');
                 
                 //Presenta contenido del archivo
@@ -2564,7 +2564,7 @@ if ($PCO_Accion=="analizar_importacion_informe")
 		echo '</center>';
 		echo '<br><a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 
-		cerrar_ventana();
+		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 
@@ -2578,7 +2578,7 @@ if ($PCO_Accion=="analizar_importacion_informe")
 if ($PCO_Accion=="importar_informe")
 	{
 		echo "<br>";
-		abrir_ventana($NombreRAD.' - '.$MULTILANG_FrmImportar,'panel-info');
+		PCO_AbrirVentana($NombreRAD.' - '.$MULTILANG_FrmImportar,'panel-info');
 ?>
 
     <ul class="nav nav-tabs nav-justified">
@@ -2648,7 +2648,7 @@ if ($PCO_Accion=="importar_informe")
 		abrir_barra_estado();
 		echo '<a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 		cerrar_barra_estado();
-		cerrar_ventana();
+		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 
@@ -2680,7 +2680,7 @@ if ($PCO_Accion=="administrar_informes")
 	        PCO_CargarFormulario(-1,1,"","",0,0);
         ?>
 
-		<?php abrir_ventana($MULTILANG_Importar."/".$MULTILANG_Exportar." ($MULTILANG_Avanzado)", 'panel-default'); ?>
+		<?php PCO_AbrirVentana($MULTILANG_Importar."/".$MULTILANG_Exportar." ($MULTILANG_Avanzado)", 'panel-default'); ?>
             <form name="importacion" id="importacion" action="<?php echo $ArchivoCORE; ?>" method="POST">
     			<input type="Hidden" name="PCO_Accion" value="importar_informe">
             </form>
@@ -2705,7 +2705,7 @@ if ($PCO_Accion=="administrar_informes")
                     </div>
             </form>
             <a class="btn btn-primary btn-block" href="javascript:document.exportacion_masiva.submit();"><i class="fa fa-download"></i> <?php echo $MULTILANG_Exportar; ?></a>
-		<?php	cerrar_ventana();	?>
+		<?php	PCO_CerrarVentana();	?>
 
   </div>
   <div class="col-md-8">
@@ -2770,7 +2770,7 @@ if ($PCO_Accion=="mis_informes")
 					//Crea la categoria en el acordeon
 					$seccion_menu_activa=$registro["categoria"];
 					$conteo_opciones=$registro["conteo"];
-					abrir_ventana($MULTILANG_Informes.': '.$seccion_menu_activa.' ('.$conteo_opciones.')', 'panel-primary');
+					PCO_AbrirVentana($MULTILANG_Informes.': '.$seccion_menu_activa.' ('.$conteo_opciones.')', 'panel-primary');
 					// Busca las opciones dentro de la categoria
 
 					// Si el usuario es diferente a un Administrador agrega condiciones al query
@@ -2802,7 +2802,7 @@ if ($PCO_Accion=="mis_informes")
 									</form>
 								</div>';
 						}
-					cerrar_ventana();
+					PCO_CerrarVentana();
 				}
 	}
 ?>

@@ -176,7 +176,7 @@ if ($PCO_Accion=="editar_tabla")
 <div class="row">
   <div class="col-md-4">
       
-			<?php abrir_ventana($MULTILANG_TblAgrCampo,'panel-danger'); ?>
+			<?php PCO_AbrirVentana($MULTILANG_TblAgrCampo,'panel-danger'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="guardar_crear_campo">
 			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
@@ -332,7 +332,7 @@ if ($PCO_Accion=="editar_tabla")
 
 
 		<?php
-		cerrar_ventana();
+		PCO_CerrarVentana();
 
 ?>
       
@@ -341,7 +341,7 @@ if ($PCO_Accion=="editar_tabla")
 
 <?php
 
-		abrir_ventana($MULTILANG_TblCamposDef,'panel-primary');
+		PCO_AbrirVentana($MULTILANG_TblCamposDef,'panel-primary');
 		?>
 				<div class="table-responsive">
                 <table class="table table-condensed btn-xs table-unbordered table-hover table-responsive">
@@ -358,7 +358,7 @@ if ($PCO_Accion=="editar_tabla")
                     <thead>
                     <tbody>
 		 <?php
-				$registro=consultar_columnas($nombre_tabla);
+				$registro=PCO_ConsultarColumnas($nombre_tabla);
 				for($i=0;$i<count($registro);$i++)
 					{
 						$imagen="";
@@ -397,7 +397,7 @@ if ($PCO_Accion=="editar_tabla")
                 </div>
                 ';
 
-			cerrar_ventana();
+			PCO_CerrarVentana();
 
 echo '
 
@@ -597,7 +597,7 @@ echo '
 					if (PCO_Backup($nombre_tabla,$archivo_destino_backup_bdd,$tipo_copia_objeto,$codificacion_actual,$codificacion_destino))
 						{
 							//Presenta la ventana con informacion y enlace de descarga
-							abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
+							PCO_AbrirVentana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
 								<div align=center>
 								<?php echo $MULTILANG_FrmCopiaFinalizada; ?>
 								<br><br>
@@ -605,7 +605,7 @@ echo '
 								<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 								</div>
 							<?php
-							cerrar_ventana();
+							PCO_CerrarVentana();
 						}
 					else
 						{
@@ -637,7 +637,7 @@ if ($PCO_Accion=="definir_copia_tablas")
 		<div class="row">
 			<div class="col col-md-12">
 
-				<?php abrir_ventana($MULTILANG_FrmTipoObjeto, 'panel-primary'); ?>
+				<?php PCO_AbrirVentana($MULTILANG_FrmTipoObjeto, 'panel-primary'); ?>
 				<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="copiar_tabla">
 					<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
@@ -720,14 +720,14 @@ if ($PCO_Accion=="definir_copia_tablas")
 				<a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCopiar; ?></a>
 				<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 				</div>
-				<?php cerrar_ventana(); ?>
+				<?php PCO_CerrarVentana(); ?>
 
 			</div>
 
 		</div>
 
 		<?php
-		cerrar_ventana();
+		PCO_CerrarVentana();
 	}
 
 
@@ -748,7 +748,7 @@ if ($PCO_Accion=="confirmar_importacion_tabla")
 	{
 		echo "<br>";
 		$mensaje_error="";
-		abrir_ventana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
+		PCO_AbrirVentana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
 		
 		if ($archivo_cargado=="") $mensaje_error=$MULTILANG_ErrorTiempoEjecucion;
 
@@ -787,7 +787,7 @@ if ($PCO_Accion=="confirmar_importacion_tabla")
 			}
 		echo '</center>';
 
-		cerrar_ventana();
+		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 
@@ -823,7 +823,7 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 		
 		echo "<br>";
 		$mensaje_error="";
-		abrir_ventana($MULTILANG_Importar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
+		PCO_AbrirVentana($MULTILANG_Importar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
 		
 		if ($archivo_cargado=="") $mensaje_error=$MULTILANG_ErrorTiempoEjecucion;
 		
@@ -849,7 +849,7 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 						if ($objPHPExcel->getActiveSheet()->getCellByColumnAndRow($ColumnaDeLlave, $Fila)->getFormattedValue()!="")
 							{
 								//Busca las columnas definidas en la tabla
-								$CamposTabla=consultar_columnas($nombre_tabla);
+								$CamposTabla=PCO_ConsultarColumnas($nombre_tabla);
 
 								//Busca por cada campo de tabla algun equivalente en las columnas
 								$ListaCamposImportacion="";
@@ -959,7 +959,7 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 			}
 		echo '</center>';
 
-		cerrar_ventana();
+		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 
@@ -981,10 +981,10 @@ if ($PCO_Accion=="analizar_importacion_csv")
 		<div class="row">
 			<div class="col col-md-12">
 				<?php
-					abrir_ventana($MULTILANG_InfCargaPrev.' '.str_replace("tmp/","",$archivo_cargado).' (primeras 50 lineas - first 50 lines)', 'panel-primary'); 
+					PCO_AbrirVentana($MULTILANG_InfCargaPrev.' '.str_replace("tmp/","",$archivo_cargado).' (primeras 50 lineas - first 50 lines)', 'panel-primary'); 
 					echo PCO_DatatableDesdeHojaCalculo($archivo_cargado,50);
 				?>
-				<?php cerrar_ventana(); ?>
+				<?php PCO_CerrarVentana(); ?>
 			</div>
 		</div>
 		
@@ -992,7 +992,7 @@ if ($PCO_Accion=="analizar_importacion_csv")
 		<div class="row">
 			<div class="col col-md-6">
 				<?php
-					abrir_ventana($MULTILANG_TblCorrespondencia, 'panel-danger'); 
+					PCO_AbrirVentana($MULTILANG_TblCorrespondencia, 'panel-danger'); 
 				?>
 						<input type="Hidden" name="PCO_Accion" value="ejecutar_importacion_csv">
 						<input type="Hidden" name="archivo_cargado" value="<?php echo $archivo_cargado; ?>">
@@ -1006,7 +1006,7 @@ if ($PCO_Accion=="analizar_importacion_csv")
 							echo PCO_AparearCamposTabla_vs_HojaCalculo($nombre_tabla,$archivo_cargado);
 						?>
 
-				<?php cerrar_ventana(); ?>
+				<?php PCO_CerrarVentana(); ?>
 			</div>
 			<div class="col col-md-6">
 					<div align="center">
@@ -1034,7 +1034,7 @@ if ($PCO_Accion=="analizar_importacion_csv")
 
 
 		<?php
-		cerrar_ventana();
+		PCO_CerrarVentana();
 	}
 
 
@@ -1046,7 +1046,7 @@ if ($PCO_Accion=="analizar_importacion_csv")
 */
 if ($PCO_Accion=="escogertabla_importacion_csv")
 	{
-		abrir_ventana($MULTILANG_Seleccionar, 'panel-primary'); ?>
+		PCO_AbrirVentana($MULTILANG_Seleccionar, 'panel-primary'); ?>
 				<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 					<input type="Hidden" name="PCO_Accion" value="analizar_importacion_csv">
 					<input type="Hidden" name="archivo_cargado" value="<?php echo $archivo_cargado; ?>">
@@ -1057,7 +1057,7 @@ if ($PCO_Accion=="escogertabla_importacion_csv")
 					<select id="nombre_tabla" name="nombre_tabla" class="form-control btn-warning">
 					<option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
 						 <?php
-								$resultado=consultar_tablas();
+								$resultado=PCO_ConsultarTablas();
 								while ($registro = $resultado->fetch())
 									{
 										// Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
@@ -1074,7 +1074,7 @@ if ($PCO_Accion=="escogertabla_importacion_csv")
 				<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 				</div>
 		<?php
-		cerrar_ventana();
+		PCO_CerrarVentana();
 	}
 
 
@@ -1087,7 +1087,7 @@ if ($PCO_Accion=="escogertabla_importacion_csv")
 if ($PCO_Accion=="importar_tabla")
 	{
 		echo "<br>";
-		abrir_ventana($NombreRAD.' - '.$MULTILANG_TblImportar,'panel-info');
+		PCO_AbrirVentana($NombreRAD.' - '.$MULTILANG_TblImportar,'panel-info');
 ?>
 
     <ul class="nav nav-tabs nav-justified">
@@ -1188,7 +1188,7 @@ if ($PCO_Accion=="importar_tabla")
 		abrir_barra_estado();
 		echo '<a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 		cerrar_barra_estado();
-		cerrar_ventana();
+		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 
@@ -1197,14 +1197,14 @@ if ($PCO_Accion=="importar_tabla")
 /* ################################################################## */
 /*
 	Function: administrar_tablas
-	Detecta las tablas existentes en la base de datos enlazada y permite realizar operaciones basicas con ellas, asi como la creacion de nuevas tablas de aplicacion.  Esta funciona hace uso de la funcion generalizada <consultar_tablas>
+	Detecta las tablas existentes en la base de datos enlazada y permite realizar operaciones basicas con ellas, asi como la creacion de nuevas tablas de aplicacion.  Esta funciona hace uso de la funcion generalizada <PCO_ConsultarTablas>
 
 	Ver tambien:
-		<asistente_tablas> | <consultar_tablas>
+		<asistente_tablas> | <PCO_ConsultarTablas>
 */
 	if ($PCO_Accion=="administrar_tablas")
 		{
-			abrir_ventana($MULTILANG_TblCrearListar,'panel-primary'); ?>
+			PCO_AbrirVentana($MULTILANG_TblCrearListar,'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="guardar_crear_tabla">
 			<div align=center>
@@ -1269,11 +1269,11 @@ if ($PCO_Accion=="importar_tabla")
                     </thead>
                     <tbody>
 		<?php
-			$resultado=consultar_tablas();
+			$resultado=PCO_ConsultarTablas();
 
 			while ($registro = $resultado->fetch())
 				{
-					$total_registros=ContarRegistros($registro["0"]);
+					$total_registros=PCO_ContarRegistrosTabla($registro["0"]);
 
 					if (strpos($registro[0],$TablasCore)!==FALSE) // Booleana requiere === o !==
 						{
@@ -1354,7 +1354,7 @@ if ($PCO_Accion=="importar_tabla")
 				}
 				echo '</tbody>
                     </table>';	
-			cerrar_ventana();
+			PCO_CerrarVentana();
 			$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 
@@ -1473,7 +1473,7 @@ if ($PCO_Accion=="importar_tabla")
 */
 	if ($PCO_Accion=="asistente_tablas")
 		{
-			abrir_ventana($MULTILANG_TblAsistente,'panel-primary'); ?>
+			PCO_AbrirVentana($MULTILANG_TblAsistente,'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="guardar_crear_tabla_asistente">
 			<div align=center>
@@ -1568,7 +1568,7 @@ if ($PCO_Accion=="importar_tabla")
 
 <?php
 			$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
-            cerrar_ventana();
+            PCO_CerrarVentana();
 	}
 ?>
 
@@ -1586,7 +1586,7 @@ if ($PCO_Accion=="importar_tabla")
 /* AQUI EMPIEZA CODIGO DE VERSIONES ANTERIORES ESPECIFICAS PARA MYSQL y MARIADB ------ EN DESUSO-----   */
  if ($PCO_Accion=="administrar_tablas_solo_mysql")
 	{
-			abrir_ventana('Crear/Listar tablas de datos definidias en el sistema','panel-warning'); ?>
+			PCO_AbrirVentana('Crear/Listar tablas de datos definidias en el sistema','panel-warning'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="guardar_crear_tabla">
 			<div align=center>
@@ -1712,7 +1712,7 @@ if ($PCO_Accion=="importar_tabla")
 				
 			</div>
 <?php
-			cerrar_ventana();
+			PCO_CerrarVentana();
 	}
 ?>
 

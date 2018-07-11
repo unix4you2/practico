@@ -710,7 +710,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
 					$idObjetoInsertado=base64_decode($xml_importado->core_formulario[0]->id);
 				else
-					$idObjetoInsertado=obtener_ultimo_id_insertado($ConexionPDO);
+					$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 
 				// Busca los elementos que componen el formulario para hacerles la copia
 				//Determina cuantos campos tiene la tabla
@@ -737,7 +737,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
 						PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario_objeto ($ListaCamposSinID_formulario_objeto) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 						
                         //Determina cual fue el ID para el ultimo elemento insertado
-						$idObjetoInsertadoParaEvento=obtener_ultimo_id_insertado($ConexionPDO);
+						$idObjetoInsertadoParaEvento=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
                         //Averigua el ID ORIGINAL del objeto recien insertado
                         $IDOriginalObjeto=base64_decode($xml_importado->core_formulario_objeto[$PCO_i]->id);
                         //Recorre la lista de todos los eventos en el XML
@@ -840,7 +840,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							$id_html=$registro["id_html"];
 							// Inserta el nuevo objeto al form
 							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html");
-							$idObjetoInsertado=obtener_ultimo_id_insertado($ConexionPDO);
+							$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 
 							// Busca los elementos que componen el formulario para hacerles la copia
 							//Determina cuantos campos tiene la tabla
@@ -867,7 +867,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario_objeto ($ListaCamposSinID_formulario_objeto) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 
 									//Por cada elemento busca si tiene eventos y los copia tambien
-									$idObjetoInsertadoParaEvento=obtener_ultimo_id_insertado($ConexionPDO);
+									$idObjetoInsertadoParaEvento=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 									$ArregloCamposEvento=explode(',',$ListaCamposSinID_evento_objeto);
 							        $TotalCamposEvento=count($ArregloCamposEvento);
         							$consulta_eventos=PCO_EjecutarSQL("SELECT ".$TablasCore."evento_objeto.* FROM ".$TablasCore."evento_objeto WHERE ".$TablasCore."evento_objeto.objeto=? ",$registro["id"]);
@@ -1096,7 +1096,7 @@ function PCO_ImportarXMLInforme($xml_importado)
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
 					$idObjetoInsertado=base64_decode($xml_importado->core_informe[0]->id);
 				else
-					$idObjetoInsertado=obtener_ultimo_id_insertado($ConexionPDO);
+					$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 
 				// Busca los elementos que componen el informe para hacerles la copia
 				//Determina cuantos campos tiene la tabla
@@ -1266,7 +1266,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 							// Inserta el nuevo informe
 							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql");
 							
-							$idObjetoInsertado=obtener_ultimo_id_insertado($ConexionPDO);
+							$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 
 							// Busca los elementos que componen el informe para hacerles la copia
 							//Determina cuantos condiciones tiene la tabla
@@ -2218,7 +2218,7 @@ function PCO_AparearCamposTabla_vs_HojaCalculo($NombreTabla,$PathArchivo)
 			$ListaColumnas.="|".strtolower($ColumnaLista);
 		
 		//Busca las columnas definidas en la tabla
-		$CamposTabla=consultar_columnas($NombreTabla);
+		$CamposTabla=PCO_ConsultarColumnas($NombreTabla);
 
 		//Busca por cada campo de tabla algun equivalente en las columnas
 		for($i=0;$i<count($CamposTabla);$i++)
@@ -2484,10 +2484,10 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: RestaurarEtiquetasHTML
+	Function: PCO_RestaurarEtiquetasHTML
 	Determina si hay etiquetas sin cerrar o abrir en un arbol de elementos HTML y las genera.
 */
-function RestaurarEtiquetasHTML($input)
+function PCO_RestaurarEtiquetasHTML($input)
 	{
 		$opened = array();
 		$closed = array();
@@ -2605,7 +2605,7 @@ function PCO_ConvertirRegistroXML($Registro_BD,$ListaCampos,$CodificarBase64=1)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: permiso_accion
+	Function: PCO_PermisoAccion
 	Busca dentro de los permisos del usuario la accion a ejecutar de manera que valida si puede ingresar o no a ella.
 
 	Variables de entrada:
@@ -2616,7 +2616,7 @@ function PCO_ConvertirRegistroXML($Registro_BD,$ListaCampos,$CodificarBase64=1)
 		Retorna 1 en caso de encontrar el permiso
 		Retorna 0 cuando no se encuentra un permiso
 */
-function permiso_accion($PCO_Accion)
+function PCO_PermisoAccion($PCO_Accion)
 	{
 		global $PCOSESS_LoginUsuario,$TablasCore;
 		// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
@@ -2655,7 +2655,7 @@ function permiso_accion($PCO_Accion)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: escapar_url
+	Function: PCO_EscaparContenido
 	Limpia cadenas y URLs a ser impresas para evitar posibles ataques por XSS
 	En general, se debe limpiar cualquier variable enviada por el usuario y que vaya a ser impresa en su navegador para evitar que al imprimirla se puedan enviar javascripts o similares
 
@@ -2666,7 +2666,7 @@ function permiso_accion($PCO_Accion)
 	Salida:
 		Cadena filtrada
 */
-function escapar_contenido($texto)
+function PCO_EscaparContenido($texto)
 	{
 		//$texto = preg_replace('|[^a-z0-9-~+_.?#=!&;,/:%@$\|*\'()\\x80-\\xff]|i', '', $texto); // Muy estricto
 		$texto = str_ireplace("script","",$texto);
@@ -2693,90 +2693,90 @@ if (!function_exists('gzdecode'))
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: limpiar_entradas
+	Function: PCO_LimpiarEntradas
 	Limpia cadenas y URLs a ser impresas segun acciones para evitar XSS
 
 	Salida:
 		Cadenas y variables filtradas sobre sus valores globales
 */
-function limpiar_entradas()
+function PCO_LimpiarEntradas()
 	{
 		global $PCO_Accion,$PCO_ErrorTitulo,$PCO_ErrorDescripcion;
 		// Escapar siempre las acciones pues deberian tener solo letras, numeros y underlines.
-		$PCO_Accion=escapar_contenido($PCO_Accion);
+		$PCO_Accion=PCO_EscaparContenido($PCO_Accion);
 		$PCO_Accion = preg_replace("/[^A-Za-z0-9_]/", "", $PCO_Accion);
 		
 		// Escapa siempre los mensajes de error
-		$PCO_ErrorTitulo=escapar_contenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo));
+		$PCO_ErrorTitulo=PCO_EscaparContenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo));
 		$PCO_ErrorTitulo = preg_replace("/[^A-Za-z0-9_ ><]/", "", $PCO_ErrorTitulo);
-		$PCO_ErrorDescripcion=escapar_contenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion));
+		$PCO_ErrorDescripcion=PCO_EscaparContenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion));
 		$PCO_ErrorDescripcion = preg_replace("/[^A-Za-z0-9_ ><]/", "", $PCO_ErrorDescripcion);
 		
 		// Escapa otras variables de uso comun
 		global $PCO_ErrorTitulo,$PCO_ErrorDescripcion;
-		$PCO_ErrorTitulo=escapar_contenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo));
-		$PCO_ErrorDescripcion=escapar_contenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion));
+		$PCO_ErrorTitulo=PCO_EscaparContenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo));
+		$PCO_ErrorDescripcion=PCO_EscaparContenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion));
 
 		// Escapar algunas variables segun la accion recibida
 		if ($PCO_Accion=="ver_seguimiento_general")
 			{
 				global $accionbuscar,$fin_reg,$inicio_reg;
-				$accionbuscar=escapar_contenido($accionbuscar);
-				$inicio_reg=escapar_contenido($inicio_reg);
-				$fin_reg=escapar_contenido($fin_reg);
+				$accionbuscar=PCO_EscaparContenido($accionbuscar);
+				$inicio_reg=PCO_EscaparContenido($inicio_reg);
+				$fin_reg=PCO_EscaparContenido($fin_reg);
 			}
 
 		if ($PCO_Accion=="administrar_formularios")
 			{
 				global $PCO_ErrorDescripcion,$PCO_ErrorTitulo;
-				$PCO_ErrorDescripcion=escapar_contenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion));
-				$PCO_ErrorTitulo=escapar_contenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo));
+				$PCO_ErrorDescripcion=PCO_EscaparContenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion));
+				$PCO_ErrorTitulo=PCO_EscaparContenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo));
 			}
 
 		if ($PCO_Accion=="actualizar_menu")
 			{
 				global $id;
-				$id=escapar_contenido($id);
+				$id=PCO_EscaparContenido($id);
 			}
 
 		if ($PCO_Accion=="detalles_menu")
 			{
 				global $id;
-				$id=escapar_contenido($id);
+				$id=PCO_EscaparContenido($id);
 			}
 
 		if ($PCO_Accion=="editar_informe")
 			{
 				// 
 				global $informe;
-				$informe=escapar_contenido($informe);
+				$informe=PCO_EscaparContenido($informe);
 			}
 
 		if ($PCO_Accion=="listar_usuarios")
 			{
 				global $login_filtro,$nombre_filtro;
-				$login_filtro=escapar_contenido($login_filtro);
-				$nombre_filtro=escapar_contenido($nombre_filtro);
+				$login_filtro=PCO_EscaparContenido($login_filtro);
+				$nombre_filtro=PCO_EscaparContenido($nombre_filtro);
 			}
 			
 		if ($PCO_Accion=="cargar_objeto")
 			{
 				global $objeto;
-				$objeto=escapar_contenido($objeto);
+				$objeto=PCO_EscaparContenido($objeto);
 			}
 
 		if ($PCO_Accion=="guardar_formulario")
 			{
 				global $tabla_datos;
-				$tabla_datos=escapar_contenido($tabla_datos); // Revisar si afecta el script de autorun
+				$tabla_datos=PCO_EscaparContenido($tabla_datos); // Revisar si afecta el script de autorun
 			}
 			
 		if ($PCO_Accion=="Iniciar_login")
 			{
 				global $uid,$clave,$captcha;
-				$uid=escapar_contenido($uid);
-				$clave=escapar_contenido($clave);
-				$captcha=escapar_contenido($captcha);
+				$uid=PCO_EscaparContenido($uid);
+				$clave=PCO_EscaparContenido($clave);
+				$captcha=PCO_EscaparContenido($captcha);
 			}
 	}
 
@@ -2784,7 +2784,7 @@ function limpiar_entradas()
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: TextoAleatorio
+	Function: PCO_TextoAleatorio
 	Genera un texto alfanumerico aleatorio de una longitud determinada
 
 	Variables de entrada:
@@ -2794,7 +2794,7 @@ function limpiar_entradas()
 	Salida:
 		Cadena aleatoria
 */
-function TextoAleatorio($longitud)
+function PCO_TextoAleatorio($longitud)
 	{
 		$plantilla = "23456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		$clave="";
@@ -2809,7 +2809,7 @@ function TextoAleatorio($longitud)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: CodigoQR
+	Function: PCO_CodigoQR
 	Genera un codigo QR a partir de los parametros recibidos
 
 	Variables de entrada:
@@ -2824,11 +2824,11 @@ function TextoAleatorio($longitud)
 	Salida:
 		Imagen generada para el codigo QR
 */
-function CodigoQR($contenido,$recuperacion_errores="L",$ancho_pixeles=3,$margen_pixeles=1,$ruta_almacenamiento="tmp/",$archivo="")
+function PCO_CodigoQR($contenido,$recuperacion_errores="L",$ancho_pixeles=3,$margen_pixeles=1,$ruta_almacenamiento="tmp/",$archivo="")
 	{
 		include_once("inc/qrcode/qrcode.php");
 		//Si no se recibe un archivo entonces genera uno aleatorio
-		if ($archivo=="") $archivo="QR".TextoAleatorio(15);
+		if ($archivo=="") $archivo="QR".PCO_TextoAleatorio(15);
 		//Genera el archivo con el QR
 		$Ruta_QRC=$ruta_almacenamiento.$archivo.".png";
 		QRcode::png($contenido, $Ruta_QRC, $recuperacion_errores, $ancho_pixeles, $margen_pixeles);
@@ -2840,7 +2840,7 @@ function CodigoQR($contenido,$recuperacion_errores="L",$ancho_pixeles=3,$margen_
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: filtrar_cadena_sql
+	Function: PCO_FiltrarCadenaSQL
 	Filtra los caracteres existentes en una cadena de manera que no permita comillas sencillas, backslash o cualquier otro caracter que genere problemas en las consultas o posibles fallos de seguridad derivados de un SQLInjection
 
 	Variables de entrada:
@@ -2863,7 +2863,7 @@ function CodigoQR($contenido,$recuperacion_errores="L",$ancho_pixeles=3,$margen_
 		1' and ''=' 
 		' OR 'A'='A
 */
-function filtrar_cadena_sql($cadena)
+function PCO_FiltrarCadenaSQL($cadena)
 	{
 		global $PCO_Accion;
 
@@ -2892,8 +2892,8 @@ function filtrar_cadena_sql($cadena)
 		$cadena = str_ireplace("BENCHMARK","",$cadena);
 
 		/*
-		array_walk($_POST, 'filtrar_cadena_sql');
-		array_walk($_GET, 'filtrar_cadena_sql');
+		array_walk($_POST, 'PCO_FiltrarCadenaSQL');
+		array_walk($_GET, 'PCO_FiltrarCadenaSQL');
 		//$cadena = str_ireplace("SELECT","",$cadena);
 		//$cadena = str_ireplace("=","",$cadena);
 		*/
@@ -2903,7 +2903,7 @@ function filtrar_cadena_sql($cadena)
 
 /* ##################################################################
    ##################################################################
-    Function: completar_parametros
+    Function: PCO_CompletarParametros
     reemplaza los parametros, solo se usa para depuracion
 
     Variables de entrada:
@@ -2914,7 +2914,7 @@ function filtrar_cadena_sql($cadena)
     Salida:
         Retorna la cadena de consulta con valores formateada para impresion
 */
-function completar_parametros($string,$data)
+function PCO_CompletarParametros($string,$data)
     {
         $indexed=$data==array_values($data);
         foreach($data as $k=>$v) {
@@ -2941,7 +2941,7 @@ function completar_parametros($string,$data)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: obtener_ultimo_id_insertado
+	Function: PCO_ObtenerUltimoIDInsertado
 	Segun el motor, obtiene el ultimo ID de registro insertado en la conexion especificada
 
 	Variables de entrada:
@@ -2951,7 +2951,7 @@ function completar_parametros($string,$data)
 	Salida:
 		Retorna valor de ID de registro o vacio si no se encuentra alguno
 */
-function obtener_ultimo_id_insertado($ConexionBD="")
+function PCO_ObtenerUltimoIDInsertado($ConexionBD="")
 	{
 		global $MotorBD;
 
@@ -3011,7 +3011,7 @@ function PCO_EjecutarSQL($query,$lista_parametros="",$ConexionBD="",$EvitarLogSQ
 		global $PCOSESS_LoginUsuario,$_SeparadorCampos_,$DepuracionSQL;
 		
 		// Filtra la cadena antes de ser ejecutada
-		$query=filtrar_cadena_sql($query);
+		$query=PCO_FiltrarCadenaSQL($query);
 
 		try
 			{
@@ -3052,7 +3052,7 @@ function PCO_EjecutarSQL($query,$lista_parametros="",$ConexionBD="",$EvitarLogSQ
 			    $detalles_conexion=' (CNX='.$ConexionPDO->getAttribute(PDO::ATTR_CONNECTION_STATUS).') ';
 				//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
 				if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-					$mensaje_final.=$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.@completar_parametros($query,$parametros).$detalles_conexion."<br><b>$MULTILANG_Archivo</b>: ".$ErrorPDO->getFile()." -> ".$ErrorPDO->getLine();
+					$mensaje_final.=$ErrorPDO->getMessage().'<br><b>'.$MULTILANG_Detalles.'</b>: '.@PCO_CompletarParametros($query,$parametros).$detalles_conexion."<br><b>$MULTILANG_Archivo</b>: ".$ErrorPDO->getFile()." -> ".$ErrorPDO->getLine();
 				else
 					$mensaje_final.='<b>'.$MULTILANG_Detalles.'</b>: '.$detalles_conexion.$MULTILANG_ErrorSoloAdmin;
 
@@ -3208,7 +3208,7 @@ function PCO_EjecutarSQLUnaria($query,$lista_parametros="",$ConexionBD="",$Repli
 			    $detalles_conexion=' (CNX='.$ConexionPDO->getAttribute(PDO::ATTR_CONNECTION_STATUS).') ';
 				//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
 				if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-                    echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.completar_parametros($query,$parametros).'\n\n'.$detalles_conexion.'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
+                    echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.PCO_CompletarParametros($query,$parametros).'\n\n'.$detalles_conexion.'\n\n'.$MULTILANG_MotorBD.': '.$ErrorPDO->getMessage().'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
 				else
 					echo '<script language="JavaScript"> alert("'.$MULTILANG_ErrorTiempoEjecucion.'\n'.$MULTILANG_Detalles.': '.$detalles_conexion.'\n\n'.$MULTILANG_ErrorSoloAdmin.'.\n\n'.$MULTILANG_ContacteAdmin.'");  </script>';
 				return $MULTILANG_ErrorTiempoEjecucion;
@@ -3292,7 +3292,7 @@ function PCO_Auditar($PCO_Accion,$usuario="")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: existe_valor
+	Function: PCO_ExisteValor
 	Busca dentro de alguna tabla para verificar si existe o no un valor determinado.  Funcion utilizada para validacion de unicidad de valores en formularios de datos.
 	
 	Variables de entrada:
@@ -3305,7 +3305,7 @@ function PCO_Auditar($PCO_Accion,$usuario="")
 		Retorna 1 en caso de encontrar un valor dentro de la tabla y campo especificadas y que coincida con el parametro buscado
 		Retorna 0 cuando no se encuentra un valor en la tabla que coincida con el buscado
 */
-function existe_valor($tabla,$campo,$valor)
+function PCO_ExisteValor($tabla,$campo,$valor)
 	{
 		global $ConexionPDO;
 		$consulta = $ConexionPDO->prepare("SELECT $campo FROM $tabla WHERE $campo='$valor'");
@@ -3331,13 +3331,13 @@ function existe_valor($tabla,$campo,$valor)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: informacion_conexion
+	Function: PCO_InformacionConexionBD
 	Imprime la informacion asociada a la conexion establecida mediante PDO.
 
 	Ver tambien:
-	<imprimir_drivers_disponibles> | <Definicion de conexion PDO>
+	<PCO_ImprimirDriversDisponiblesnBD> | <Definicion de conexion PDO>
 */
-function informacion_conexion()
+function PCO_InformacionConexionBD()
 	{
 		echo "<hr><center><blink><b><font color=yellow>".$MULTILANG_Detalles.":</font></b></blink><br>";
 		echo $MULTILANG_Controlador.': '.$ConexionPDO->getAttribute(PDO::ATTR_DRIVER_NAME).'<br>';
@@ -3352,16 +3352,16 @@ function informacion_conexion()
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: imprimir_drivers_disponibles
+	Function: PCO_ImprimirDriversDisponiblesnBD
 	Imprime el arreglo devuelto por la funcion getAvailableDrivers() para conocer los drivers soportados por la instalacion actual de PHP del lado del servidor.
 
 	Salida:
 		Listado de drivers PDO soportados
 	
 	Ver tambien:
-	<informacion_conexion>
+	<PCO_InformacionConexionBD>
 */
-function imprimir_drivers_disponibles()
+function PCO_ImprimirDriversDisponiblesnBD()
 	{
 		/*foreach(PDO::getAvailableDrivers() as $driver)
 			{
@@ -3377,7 +3377,7 @@ function imprimir_drivers_disponibles()
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: consultar_tablas
+	Function: PCO_ConsultarTablas
 	Determina las tablas en la base de datos activa para la conexion dependiendo del motor utilizado.
 
 	Variables de entrada:
@@ -3390,7 +3390,7 @@ function imprimir_drivers_disponibles()
 	Ver tambien:
 	<Definicion de conexion PDO>
 */
-function consultar_tablas($prefijo="",$ConexionAlterna="",$MotorAlterno="",$BaseDatosAlterna="")
+function PCO_ConsultarTablas($prefijo="",$ConexionAlterna="",$MotorAlterno="",$BaseDatosAlterna="")
 	{
 		global $MULTILANG_ErrorTiempoEjecucion;
 		//Determina si se debe usar la conexion global del sistema o una especifica de usuario
@@ -3447,9 +3447,9 @@ function consultar_tablas($prefijo="",$ConexionAlterna="",$MotorAlterno="",$Base
 		Vector de campos/columnas
 	
 	Ver tambien:
-	<consultar_tablas>
+	<PCO_ConsultarTablas>
 */
-function consultar_columnas($tabla,$ConexionAlterna="",$MotorAlterno="",$BaseDatosAlterna="")
+function PCO_ConsultarColumnas($tabla,$ConexionAlterna="",$MotorAlterno="",$BaseDatosAlterna="")
 	{
 		global $MULTILANG_ErrorTiempoEjecucion;
 		//Determina si se debe usar la conexion global del sistema o una especifica de usuario
@@ -3581,7 +3581,7 @@ function consultar_columnas($tabla,$ConexionAlterna="",$MotorAlterno="",$BaseDat
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: existe_campo_tabla
+	Function: PCO_ExisteCampoTabla
 	Determina si un campo dado existe dentro de una tabla especifica
 
 	Variables de entrada:
@@ -3593,9 +3593,9 @@ function consultar_columnas($tabla,$ConexionAlterna="",$MotorAlterno="",$BaseDat
 		verdadero o falso dependiendo de si existe o no el campo en la tabla
 	
 	Ver tambien:
-	<consultar_tablas>
+	<PCO_ConsultarTablas>
 */
-function existe_campo_tabla($campo,$tabla,$ConexionAlterna="",$MotorAlterno="",$BaseDatosAlterna="")
+function PCO_ExisteCampoTabla($campo,$tabla,$ConexionAlterna="",$MotorAlterno="",$BaseDatosAlterna="")
 	{
 		//Determina si se debe usar la conexion global del sistema o una especifica de usuario
 		if($ConexionAlterna=="")
@@ -3616,9 +3616,9 @@ function existe_campo_tabla($campo,$tabla,$ConexionAlterna="",$MotorAlterno="",$
 
 		//Busca todos los campos de la tabla
 		if($ConexionAlterna!="")
-		    $resultadocampos=consultar_columnas($tabla,$ConexionPDO,$MotorBD,$BaseDatos);
+		    $resultadocampos=PCO_ConsultarColumnas($tabla,$ConexionPDO,$MotorBD,$BaseDatos);
 		else
-		    $resultadocampos=consultar_columnas($tabla);
+		    $resultadocampos=PCO_ConsultarColumnas($tabla);
 
 		for($i=0;$i<count($resultadocampos);$i++)
 			{
@@ -3762,13 +3762,13 @@ function PCO_CargarURL($url)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: verificar_extensiones
+	Function: PCO_VerificarExtensionesPHP
 	Verifica si las extensiones minimas requeridas por la herramienta se encuentran activadas y despliega mensaje de error si aplica.
 		
 	Salida:
 		Mensajes de error asociados a la no activacion de cada extension
 */
-function verificar_extensiones()
+function PCO_VerificarExtensionesPHP()
 	{
 		global $MotorBD;
 		global $Auth_TipoMotor;
@@ -3827,7 +3827,14 @@ function verificar_extensiones()
 
 /* ################################################################## */
 /* ################################################################## */
-function buscar_actualizaciones($PCOSESS_LoginUsuario='',$PCO_Accion)
+/*
+	Function: PCO_BuscarActualizaciones
+	Compara la version actual del sistema frente a la ultima version publicada para determinar si existen o no actualizaciones
+		
+	Salida:
+		Mensaje informativo en pantalla cuando se encuentren actualizaciones disponibles
+*/
+function PCO_BuscarActualizaciones($PCOSESS_LoginUsuario='',$PCO_Accion)
 	{
 		global $MULTILANG_Atencion,$MULTILANG_ActAlertaVersion;
 		// Genera un aleatorio entre 1 y 10 para no sacar siempre el aviso y buscar nuevas versiones.
@@ -3852,16 +3859,16 @@ function buscar_actualizaciones($PCOSESS_LoginUsuario='',$PCO_Accion)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: consultar_bases_de_datos
+	Function: PCO_ConsultarBasesDeDatos
 	Determina las bases de datos existentes dependiendo del motor utilizado.
 
 	Salida:
 		Resultado de un query con las bases de datos o falso en caso de error
 	
 	Ver tambien:
-	<Definicion de conexion PDO> | <consultar_tablas>
+	<Definicion de conexion PDO> | <PCO_ConsultarTablas>
 */
-function consultar_bases_de_datos()
+function PCO_ConsultarBasesDeDatos()
 	{
 		global $ConexionPDO;
 		global $MotorBD;
@@ -3896,16 +3903,16 @@ function consultar_bases_de_datos()
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: ContarRegistros
+	Function: PCO_ContarRegistrosTabla
 	Devuelve la cantidad de registros existentes dentro de una tabla con una condicion determinada
 
 	Salida:
 		Valor numerico que indica la cantidad de registros encontrados
 	
 	Ver tambien:
-	    <consultar_tablas> | <consultar_columnas>
+	    <PCO_ConsultarTablas> | <PCO_ConsultarColumnas>
 */
-function ContarRegistros($tabla,$condicion="")
+function PCO_ContarRegistrosTabla($tabla,$condicion="")
 	{
 		global $ConexionPDO;
 		
@@ -4285,7 +4292,7 @@ function PCO_VentanaLogin()
 /* ################################################################## */
 /* ################################################################## */
 /*
-    Procedure: abrir_ventana
+    Procedure: PCO_AbrirVentana
     Abre los espacios de trabajo dinamicos sobre el contenedor principal donde se despliega informacion
 
     Variables de entrada:
@@ -4300,9 +4307,9 @@ function PCO_VentanaLogin()
     barra_herramientas - Lista de barras de herramientas a ser impresas
 
     Ver tambien:
-    <cerrar_ventana>
+    <PCO_CerrarVentana>
 */
-function abrir_ventana($titulo,$tipo_panel="panel-default",$css_personalizado='',$barra_herramientas='')
+function PCO_AbrirVentana($titulo,$tipo_panel="panel-default",$css_personalizado='',$barra_herramientas='')
     {
         echo '
             <div class="panel '.$tipo_panel.'" style="'.$css_personalizado.'">
@@ -4318,13 +4325,13 @@ function abrir_ventana($titulo,$tipo_panel="panel-default",$css_personalizado=''
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: cerrar_ventana
-	Cierra los espacios de trabajo dinamicos generados por <abrir_ventana>	
+	Function: PCO_CerrarVentana
+	Cierra los espacios de trabajo dinamicos generados por <PCO_AbrirVentana>	
 
 	Ver tambien:
-	<abrir_ventana>	
+	<PCO_AbrirVentana>	
 */
-function cerrar_ventana()
+function PCO_CerrarVentana()
     {
         echo '
           </div>  <!-- CIERRA panel-body -->
@@ -4594,7 +4601,7 @@ function cargar_objeto_texto_corto($registro_campos,$registro_datos_formulario,$
 			}
 
         //Evalua si el campo en cuestion pertenece a la tabla.  Si es asi entonces intenta buscar su valor desde registro y cambiar el predeterminado.
-    	if (existe_campo_tabla($nombre_campo,$RegistroDisenoFormulario["tabla_datos"])==true)
+    	if (PCO_ExisteCampoTabla($nombre_campo,$RegistroDisenoFormulario["tabla_datos"])==true)
     	    {
     			$valor_variable_escapada=$registro_datos_formulario["$nombre_campo"];
     			//$valor_variable_escapada=addslashes ( '"'.$valor_variable_escapada.'"' );
@@ -5380,7 +5387,7 @@ function cargar_objeto_campoetiqueta($registro_campos,$registro_datos_formulario
 				if ($Tipo_BARRAS!="qrcode")
 					$cadena_valor='<img src="core/codigobarras.php?Cadena='.$Contenido_BARRAS.'&Tipo='.$Tipo_BARRAS.'&AnchoCodigo=2&AltoCodigo='.($Alto_BARRAS-6).'&AnchoImagen='.$Ancho_BARRAS.'&AltoImagen='.$Alto_BARRAS.'" border=0>';
 				else
-					$cadena_valor=CodigoQR($Contenido_BARRAS);
+					$cadena_valor=PCO_CodigoQR($Contenido_BARRAS);
 			}
 
 		//Identifica si el contenido es una imagen y agrega el tag para esta sino pone el contenido crudo
@@ -6400,7 +6407,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
             }
 		
 		// Crea ventana si aplica para el form
-		if ($en_ventana) abrir_ventana(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["titulo"]).$ComplementoTituloFormulario.$ComplementoIdObjetoEnTitulo,'panel-primary','',$barra_herramientas_mini);
+		if ($en_ventana) PCO_AbrirVentana(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["titulo"]).$ComplementoTituloFormulario.$ComplementoIdObjetoEnTitulo,'panel-primary','',$barra_herramientas_mini);
 		// Muestra ayuda en caso de tenerla
 		$imagen_ayuda='fa fa-info-circle fa-5x texto-azul';
 		if ($registro_formulario["ayuda_titulo"]!="" || $registro_formulario["ayuda_texto"]!="")
@@ -6565,7 +6572,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                                     //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
                                                                     //padre el valor del campo foraneo del form hijo para llamar a buscar form con
                                                                     //el valor de Id correspondiente. Ademas valida si el form existe
-                                                                    if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario && existe_valor($TablasCore."formulario","id",$registro_campos["formulario_vinculado"]))
+                                                                    if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario && PCO_ExisteValor($TablasCore."formulario","id",$registro_campos["formulario_vinculado"]))
                                                                         {
                                                                             //Busca la tabla principal del subformulario anidado
                                                                             $PCO_ValorCampoBind=$registro_campos["formulario_vinculado"];
@@ -6656,7 +6663,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                 //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
                                                 //padre el valor del campo foraneo del form hijo para llamar a buscar form con
                                                 //el valor de Id correspondiente. Ademas valida si el form existe
-                                                if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario && existe_valor($TablasCore."formulario","id",$registro_campos["formulario_vinculado"]))
+                                                if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario && PCO_ExisteValor($TablasCore."formulario","id",$registro_campos["formulario_vinculado"]))
                                                     {
                                                         //Busca la tabla principal del subformulario anidado
                                                         $PCO_ValorCampoBind=$registro_campos["formulario_vinculado"];
@@ -6849,7 +6856,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
         $POSTForm_ListaCamposObligatorios.=$ListaCamposObligatorios;
         $POSTForm_ListaTitulosObligatorios.=$ListaTitulosObligatorios;
         
-        if ($en_ventana) cerrar_ventana();
+        if ($en_ventana) PCO_CerrarVentana();
   }
 
 
@@ -7318,12 +7325,12 @@ function campos_reales_informe($informe)
                                             //Si el informe usa una conexion externa usa su configuracion
                                             if($registro_informe["conexion_origen_datos"]!="")
                                                 {
-                            						if (existe_campo_tabla($nombre_campo_simple,$tabla_actual,${$registro_informe["conexion_origen_datos"]},$registro_informe["motorbd"],$registro_informe["basedatos"]))
+                            						if (PCO_ExisteCampoTabla($nombre_campo_simple,$tabla_actual,${$registro_informe["conexion_origen_datos"]},$registro_informe["motorbd"],$registro_informe["basedatos"]))
                             							$nombre_tabla_simple=$tabla_actual;
                                                 }
                                             else
                                                 {
-                            						if (existe_campo_tabla($nombre_campo_simple,$tabla_actual))
+                            						if (PCO_ExisteCampoTabla($nombre_campo_simple,$tabla_actual))
                             							$nombre_tabla_simple=$tabla_actual;
                                                 }
 										}
@@ -7461,7 +7468,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 							}
 
 						//Carga la ventana con el informe
-						abrir_ventana($TituloVentanaInforme.$ComplementoIdObjetoEnTitulo,'panel panel-info',$registro_informe["ancho"]);
+						PCO_AbrirVentana($TituloVentanaInforme.$ComplementoIdObjetoEnTitulo,'panel panel-info',$registro_informe["ancho"]);
 						
 						//Agrega la descripcion del informe en caso de contar con ella
 						if ($registro_informe["descripcion"]!='')
@@ -7817,7 +7824,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 					
 			} // Fin si informe es G (grafico)
 
-		if ($en_ventana) cerrar_ventana();
+		if ($en_ventana) PCO_CerrarVentana();
 
         //Si el usuario es admin le muestra el query generador.
         if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $ModoDepuracion)

@@ -116,7 +116,7 @@
         
         	//PASO 2: Verifica las tablas creadas en la base de datos
                 PCOCLI_Mensaje("RESUMEN DE OPERACIONES MOTOR: ".$MotorEvaluado);
-        		$resultado=consultar_tablas();
+        		$resultado=PCO_ConsultarTablas();
                 $total_tablas=0;
         		while ($registro = $resultado->fetch())
         			{

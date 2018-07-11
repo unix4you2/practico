@@ -59,9 +59,9 @@
 			$uid_orig=$uid;
 			$clave_orig=$clave;
 			$captcha_orig=$captcha;
-			$uid=filtrar_cadena_sql($uid);
-			$clave=filtrar_cadena_sql($clave);
-			$captcha=filtrar_cadena_sql($captcha);
+			$uid=PCO_FiltrarCadenaSQL($uid);
+			$clave=PCO_FiltrarCadenaSQL($clave);
+			$captcha=PCO_FiltrarCadenaSQL($captcha);
 
 			//Verifica el captcha ingresado por el usuario
 			$ok_captcha=1;
@@ -100,7 +100,7 @@
 				}
 			else
 				{
-					limpiar_entradas();
+					PCO_LimpiarEntradas();
 					mensaje($MULTILANG_LoginNoWSTit,$MULTILANG_LoginNoWSDes."<br>Test URL=<a href='".$webservice_validacion."' target=_BLANK>Auth WebService</a> (entradas filtradas)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 				}
 
@@ -203,7 +203,7 @@
 */
 	if ($PCO_Accion=="Mensaje_cierre_sesion")
 	{
-		abrir_ventana($MULTILANG_Atencion, 'panel-primary');
+		PCO_AbrirVentana($MULTILANG_Atencion, 'panel-primary');
 			echo '<strong><font size="3">'.$MULTILANG_SesionCerrada.'</font>
 			<table class="table"><tr>
 				<td class="texto-gris">
@@ -220,5 +220,5 @@
                 <a class="btn btn-info" href="javascript:document.Again.submit();"><i class="fa fa-refresh fa-spin"></i> '.$MULTILANG_Ingresar.'</a>
 			</form></center>';
 		@session_destroy();
-		cerrar_ventana();
+		PCO_CerrarVentana();
 	}

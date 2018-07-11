@@ -167,7 +167,7 @@
 					while ($registro_campos = $consulta_campos->fetch())
 						{
                             //Verifica que el campo se encuentre dentro de la tabla, para descartar campos manuales mal escritos o usados para javascripts y otros fines.
-                            if (existe_campo_tabla($registro_campos["campo"],$registro_formulario["tabla_datos"]))
+                            if (PCO_ExisteCampoTabla($registro_campos["campo"],$registro_formulario["tabla_datos"]))
                                 {
                                     $cadena_campos_interrogantes.=$registro_campos["campo"]."=?,";
                                     $cadena_nuevos_valores.=${$registro_campos["campo"]}.$_SeparadorCampos_;
@@ -288,7 +288,7 @@
 							if ($registro_campos["tipo"]!="url_iframe" && $registro_campos["tipo"]!="etiqueta" && $registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta" && $registro_campos["tipo"]!="campo_etiqueta" && $registro_campos["tipo"]!="boton_comando")
 								{
 									//Verifica que el campo se encuentre dentro de la tabla, para descartar campos manuales mal escritos o usados para javascripts y otros fines.
-									if (existe_campo_tabla($registro_campos["campo"],$registro_formulario["tabla_datos"]))
+									if (PCO_ExisteCampoTabla($registro_campos["campo"],$registro_formulario["tabla_datos"]))
 										{
 											// Si el tipos de campo es archivo lo procesa como adjunto, sino lo pasa al insert
 											if ($registro_campos["tipo"]=="archivo_adjunto")
@@ -631,7 +631,7 @@
 					// Define la consulta de insercion del nuevo campo
 					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (".$ListaInterrogantes.")";
 					PCO_EjecutarSQLUnaria($consulta_insercion,"$ListaCamposyValores");
-					$id=obtener_ultimo_id_insertado($ConexionPDO);
+					$id=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 					PCO_Auditar("Crea campo $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					    <input type="Hidden" name="PCO_Accion" value="editar_formulario">
@@ -685,7 +685,7 @@
 				{
 					//$accion_usuario=addslashes($accion_usuario); //DEPRECATED Version 15.1-
 					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$formulario$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$retorno_titulo$_SeparadorCampos_$retorno_texto$_SeparadorCampos_$confirmacion_texto$_SeparadorCampos_$retorno_icono$_SeparadorCampos_$retorno_estilo");
-					$id=obtener_ultimo_id_insertado($ConexionPDO);
+					$id=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 					PCO_Auditar("Crea boton $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_formulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -980,7 +980,7 @@ if ($PCO_Accion=="editar_formulario")
                                     <select id="campo" name="campo" onchange="document.datosform.id_html.value=document.datosform.campo.value+document.datosform.campo_manual.value;" class="form-control input-sm" >
                                     <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                     <?php
-                                        $resultadocampos=consultar_columnas($nombre_tabla);
+                                        $resultadocampos=PCO_ConsultarColumnas($nombre_tabla);
                                         for($i=0;$i<count($resultadocampos);$i++)
                                             {
                                                 $seleccion_campo="";
@@ -1001,7 +1001,7 @@ if ($PCO_Accion=="editar_formulario")
                             </div>
 
                             <div class="form-group input-group">
-                                <input name="campo_manual" onchange="document.datosform.id_html.value=document.datosform.campo.value+document.datosform.campo_manual.value;" value="<?php if (!@existe_campo_tabla($registro_campo_editar["campo"],$nombre_tabla)) echo @$registro_campo_editar["campo"]; ?>" type="text" class="form-control input-sm" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>">
+                                <input name="campo_manual" onchange="document.datosform.id_html.value=document.datosform.campo.value+document.datosform.campo_manual.value;" value="<?php if (!@PCO_ExisteCampoTabla($registro_campo_editar["campo"],$nombre_tabla)) echo @$registro_campo_editar["campo"]; ?>" type="text" class="form-control input-sm" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>">
                                 <span class="input-group-addon">
                                 </span>
                             </div>
@@ -1133,7 +1133,7 @@ if ($PCO_Accion=="editar_formulario")
                                 <select id="origen_lista_opciones" name="origen_lista_opciones" class="form-control input-sm" >
                                     <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                     <?php
-                                        $resultado=consultar_tablas();
+                                        $resultado=PCO_ConsultarTablas();
                                         while ($registro = $resultado->fetch())
                                             {
                                                 // Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
@@ -1142,7 +1142,7 @@ if ($PCO_Accion=="editar_formulario")
                                                         echo '<optgroup label="'.str_replace($TablasApp,'',$registro[0]).'" >';
                                                         //Busca los campos de la tabla
                                                         $nombre_tabla_opc=$registro[0];
-                                                        $resultadocampos=consultar_columnas($nombre_tabla_opc);
+                                                        $resultadocampos=PCO_ConsultarColumnas($nombre_tabla_opc);
                                                         for($i=0;$i<count($resultadocampos);$i++)
                                                             {
                                                                 $seleccion_campo="";
@@ -1169,7 +1169,7 @@ if ($PCO_Accion=="editar_formulario")
                                 <select id="origen_lista_valores" name="origen_lista_valores" class="form-control input-sm" >
                                     <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                     <?php
-                                        $resultado=consultar_tablas();
+                                        $resultado=PCO_ConsultarTablas();
                                         while ($registro = $resultado->fetch())
                                             {
                                                 // Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
@@ -1178,7 +1178,7 @@ if ($PCO_Accion=="editar_formulario")
                                                         echo '<optgroup label="'.str_replace($TablasApp,'',$registro[0]).'" >';
                                                         //Busca los campos de la tabla
                                                         $nombre_tabla_val=$registro[0];
-                                                        $resultadocampos=consultar_columnas($nombre_tabla_val);
+                                                        $resultadocampos=PCO_ConsultarColumnas($nombre_tabla_val);
                                                         for($i=0;$i<count($resultadocampos);$i++)
                                                             {
                                                                 $seleccion_campo="";
@@ -1854,7 +1854,7 @@ if ($PCO_Accion=="editar_formulario")
         						<hr>
                             
                             <?php
-                    		        abrir_ventana($MULTILANG_Existentes, 'panel-primary');
+                    		        PCO_AbrirVentana($MULTILANG_Existentes, 'panel-primary');
                     		?>
                     				<table class="table table-condensed btn-xs table-hover table-unbordered ">
                     					<thead>
@@ -1883,7 +1883,7 @@ if ($PCO_Accion=="editar_formulario")
                     					}
                     				echo '</tbody>
                                     </table>';
-                    			cerrar_ventana();
+                    			PCO_CerrarVentana();
                         }
                 ?>
                 
@@ -2548,7 +2548,7 @@ if ($PCO_Accion=="editar_formulario")
 										//Asumimos que la tabla es manual
 										$es_tabla_manual=1;
 										//Recorre las tablas definidas
-										$resultado=consultar_tablas();
+										$resultado=PCO_ConsultarTablas();
 										while ($registro = $resultado->fetch())
 											{
 												// Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
@@ -2816,7 +2816,7 @@ if ($PCO_Accion=="editar_formulario")
 			if ($mensaje_error=="")
 				{
 					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html");
-					$id=obtener_ultimo_id_insertado($ConexionPDO);
+					$id=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 					PCO_Auditar("Crea formulario $id para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
@@ -2853,7 +2853,7 @@ if ($PCO_Accion=="editar_formulario")
 	if ($PCO_Accion=="copiar_formulario")
 		{
 				//Presenta la ventana con informacion y enlace de descarga
-				abrir_ventana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
+				PCO_AbrirVentana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
 					<div align=center>
 					<?php
 				        echo $MULTILANG_FrmCopiaFinalizada."<hr>"; 
@@ -2861,7 +2861,7 @@ if ($PCO_Accion=="editar_formulario")
 					?>
 					</div>
 				<?php
-				cerrar_ventana();
+				PCO_CerrarVentana();
 				?>
     			<div align=center>
     			<br><br>
@@ -2887,7 +2887,7 @@ if ($PCO_Accion=="definir_copia_formularios")
 			<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">
 
             <br>
-			<?php abrir_ventana($MULTILANG_FrmTipoObjeto, 'panel-primary'); ?>
+			<?php PCO_AbrirVentana($MULTILANG_FrmTipoObjeto, 'panel-primary'); ?>
 			<h4><?php echo $MULTILANG_FrmTipoCopiaExporta; ?>: <b><?php echo $titulo_formulario; ?></b> (ID=<?php echo $formulario; ?>)</h4>
             <label for="tipo_copia_objeto"><?php echo $MULTILANG_FrmTipoCopia; ?>:</label>
             <select id="tipo_copia_objeto" name="tipo_copia_objeto" class="form-control btn-warning" >
@@ -2909,7 +2909,7 @@ if ($PCO_Accion=="definir_copia_formularios")
             </div>
 
 		<?php
-		cerrar_ventana();
+		PCO_CerrarVentana();
 	}
 
 
@@ -2930,7 +2930,7 @@ if ($PCO_Accion=="confirmar_importacion_formulario")
 	{
 		echo "<br>";
 		$mensaje_error="";
-		abrir_ventana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
+		PCO_AbrirVentana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
 		if ($archivo_cargado=="")
 			$mensaje_error=$MULTILANG_ErrorTiempoEjecucion;
 		else
@@ -2965,7 +2965,7 @@ if ($PCO_Accion=="confirmar_importacion_formulario")
 			}
 		echo '</center>';
 
-		cerrar_ventana();
+		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 
@@ -2986,7 +2986,7 @@ if ($PCO_Accion=="confirmar_importacion_formulario")
 if ($PCO_Accion=="analizar_importacion_formulario")
 	{
 		echo "<br>";
-		abrir_ventana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
+		PCO_AbrirVentana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
 
 		if ($mensaje_error=="")
 			{
@@ -2998,7 +2998,7 @@ if ($PCO_Accion=="analizar_importacion_formulario")
 
                 //Presenta alerta cuando encuentra otro elemento con el mismo ID y se trata de una importacion estatica
                 if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
-					if (existe_valor($TablasCore."formulario","id",base64_decode($xml_importado->core_formulario[0]->id)))
+					if (PCO_ExisteValor($TablasCore."formulario","id",base64_decode($xml_importado->core_formulario[0]->id)))
 						mensaje($MULTILANG_Atencion, $MULTILANG_FrmImportarAlerta, '', 'fa fa-fw fa-2x fa-warning', 'alert alert-dismissible alert-danger');
                 
                 //Presenta contenido del archivo
@@ -3074,7 +3074,7 @@ if ($PCO_Accion=="analizar_importacion_formulario")
 		echo '</center>';
 		echo '<br><a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 
-		cerrar_ventana();
+		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 
@@ -3088,7 +3088,7 @@ if ($PCO_Accion=="analizar_importacion_formulario")
 if ($PCO_Accion=="importar_formulario")
 	{
 		echo "<br>";
-		abrir_ventana($NombreRAD.' - '.$MULTILANG_FrmImportar,'panel-info');
+		PCO_AbrirVentana($NombreRAD.' - '.$MULTILANG_FrmImportar,'panel-info');
 ?>
 
     <ul class="nav nav-tabs nav-justified">
@@ -3158,7 +3158,7 @@ if ($PCO_Accion=="importar_formulario")
 		abrir_barra_estado();
 		echo '<a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 		cerrar_barra_estado();
-		cerrar_ventana();
+		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}
 
@@ -3204,7 +3204,7 @@ function FrmAutoRun()
   <div class="col-md-4">
       
       
-			<?php abrir_ventana($MULTILANG_FrmAgregar, 'panel-primary'); ?>
+			<?php PCO_AbrirVentana($MULTILANG_FrmAgregar, 'panel-primary'); ?>
 						
 			<h4><?php echo $MULTILANG_FrmDetalles; ?>:</h4>
 
@@ -3245,7 +3245,7 @@ function FrmAutoRun()
                 <select id="tabla_datos" name="tabla_datos" class="form-control" >
                     <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                     <?php
-                            $resultado=consultar_tablas();
+                            $resultado=PCO_ConsultarTablas();
                             while ($registro = $resultado->fetch())
                                 {
                                     // Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
@@ -3296,9 +3296,9 @@ function FrmAutoRun()
             <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCreaDisena; ?></a>
             <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 
-		<?php	cerrar_ventana();	?>
+		<?php	PCO_CerrarVentana();	?>
 
-		<?php abrir_ventana($MULTILANG_Importar."/".$MULTILANG_Exportar." ($MULTILANG_Avanzado)", 'panel-default'); ?>
+		<?php PCO_AbrirVentana($MULTILANG_Importar."/".$MULTILANG_Exportar." ($MULTILANG_Avanzado)", 'panel-default'); ?>
             <form name="importacion" id="importacion" action="<?php echo $ArchivoCORE; ?>" method="POST">
     			<input type="Hidden" name="PCO_Accion" value="importar_formulario">
             </form>
@@ -3323,7 +3323,7 @@ function FrmAutoRun()
                     </div>
             </form>
             <a class="btn btn-primary btn-block" href="javascript:document.exportacion_masiva.submit();"><i class="fa fa-download"></i> <?php echo $MULTILANG_Exportar; ?></a>
-		<?php	cerrar_ventana();	?>
+		<?php	PCO_CerrarVentana();	?>
 
   </div>    
   <div class="col-md-8">

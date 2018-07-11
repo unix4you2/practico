@@ -45,7 +45,7 @@
 			Retorna un mensaje de error en la parte superior del aplicativo cuando no se alcanza una conexion exitosa.
 
 		Ver tambien:
-		<Definicion de conexion PDO> | <Configuracion base> | <informacion_conexion>
+		<Definicion de conexion PDO> | <Configuracion base> | <PCO_InformacionConexionBD>
 	*/
 
 

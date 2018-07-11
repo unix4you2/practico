@@ -175,7 +175,7 @@
 			$mensaje_error="";
 			// Agrega los datos
 			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."kanban (login_admintablero,titulo,descripcion,asignado_a,categoria,columna,peso,estilo,fecha,archivado,compartido_rw) VALUES ('$PCOSESS_LoginUsuario','$titulo_tablero','$titulos_columnas','','[PRACTICO][ColumnasTablero]','-2','0','','20000101','0','') ");
-			$idObjetoInsertado=obtener_ultimo_id_insertado($ConexionPDO);
+			$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."kanban (login_admintablero,titulo,descripcion,asignado_a,categoria,columna,peso,estilo,fecha,archivado,compartido_rw,tablero) VALUES ('$PCOSESS_LoginUsuario','','$titulos_categorias','','[PRACTICO][CategoriasTareas]','-2','0','','20000101','0','',$idObjetoInsertado) ");
 			PCO_Auditar("Agrega Tablero Kanban $titulo_tablero Id:$idObjetoInsertado");
 			RedireccionATableroKanban($idObjetoInsertado);

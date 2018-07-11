@@ -101,14 +101,14 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
         <?php
             if ($ModoDesarrolladorPractico!="-10000")
                 $ModoDesarrolladorPractico=0;
-            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","primary","fa-table fa-4x",consultar_tablas()->rowCount(),"$MULTILANG_TablaDatos","$MULTILANG_Detalles","javascript:document.administrar_tablas.submit();");
-            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","green",  "fa-newspaper-o fa-4x",ContarRegistros($TablasCore."formulario","id>".$ModoDesarrolladorPractico),"$MULTILANG_Formularios","$MULTILANG_Detalles","javascript:document.administrar_formularios.submit();");
-            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","red","fa-file-text fa-4x",ContarRegistros($TablasCore."informe","id>".$ModoDesarrolladorPractico),"$MULTILANG_Informes","$MULTILANG_Detalles","javascript:document.administrar_informes.submit();");
-            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","default","fa-external-link-square fa-4x",ContarRegistros($TablasCore."menu"),"$MULTILANG_OpcionesMenu","$MULTILANG_Detalles","javascript:document.PCOFUNC_AdministrarMenu.submit();");
-            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","yellow","fa-users fa-4x",ContarRegistros($TablasCore."usuario"),"$MULTILANG_Usuario","$MULTILANG_Detalles","javascript:document.listar_usuarios.submit();");
-            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","info","fa-eye fa-4x",ContarRegistros($TablasCore."auditoria"),"$MULTILANG_UsrAuditoria","$MULTILANG_Detalles","javascript:document.PCO_PanelAuditoriaMovimientos.submit();");
-            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","success","fa-thumb-tack fa-4x",ContarRegistros($TablasCore."kanban"),"$MULTILANG_TablerosKanban","$MULTILANG_Detalles","javascript:document.PCO_ExplorarTablerosKanban.submit();");
-            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","danger","fa-bug fa-4x",ContarRegistros($TablasCore."bugtracker"),"$MULTILANG_TblRegistros","$MULTILANG_BTBugtracking","javascript:document.PCO_BugTrackingForm.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","primary","fa-table fa-4x",PCO_ConsultarTablas()->rowCount(),"$MULTILANG_TablaDatos","$MULTILANG_Detalles","javascript:document.administrar_tablas.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","green",  "fa-newspaper-o fa-4x",PCO_ContarRegistrosTabla($TablasCore."formulario","id>".$ModoDesarrolladorPractico),"$MULTILANG_Formularios","$MULTILANG_Detalles","javascript:document.administrar_formularios.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","red","fa-file-text fa-4x",PCO_ContarRegistrosTabla($TablasCore."informe","id>".$ModoDesarrolladorPractico),"$MULTILANG_Informes","$MULTILANG_Detalles","javascript:document.administrar_informes.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","default","fa-external-link-square fa-4x",PCO_ContarRegistrosTabla($TablasCore."menu"),"$MULTILANG_OpcionesMenu","$MULTILANG_Detalles","javascript:document.PCOFUNC_AdministrarMenu.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","yellow","fa-users fa-4x",PCO_ContarRegistrosTabla($TablasCore."usuario"),"$MULTILANG_Usuario","$MULTILANG_Detalles","javascript:document.listar_usuarios.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","info","fa-eye fa-4x",PCO_ContarRegistrosTabla($TablasCore."auditoria"),"$MULTILANG_UsrAuditoria","$MULTILANG_Detalles","javascript:document.PCO_PanelAuditoriaMovimientos.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","success","fa-thumb-tack fa-4x",PCO_ContarRegistrosTabla($TablasCore."kanban"),"$MULTILANG_TablerosKanban","$MULTILANG_Detalles","javascript:document.PCO_ExplorarTablerosKanban.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","danger","fa-bug fa-4x",PCO_ContarRegistrosTabla($TablasCore."bugtracker"),"$MULTILANG_TblRegistros","$MULTILANG_BTBugtracking","javascript:document.PCO_BugTrackingForm.submit();");
         ?>
     </div>
 
@@ -157,7 +157,7 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
             //Despliegue de resultados
 
             //Abre un contenedor (Opcional)
-            abrir_ventana('Ultimas '.count($EntradasGitHub).' Entradas ATOM', 'panel-primary');
+            PCO_AbrirVentana('Ultimas '.count($EntradasGitHub).' Entradas ATOM', 'panel-primary');
 
             //Encabezados de la tabla
             echo '
@@ -182,7 +182,7 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
             echo '  </tbody>
                 </table>';
             //Cierra el contenedor (Obligatorio si se ha abierto alguno)
-            cerrar_ventana();
+            PCO_CerrarVentana();
 
         }
 
