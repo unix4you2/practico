@@ -234,7 +234,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 			</tr>
             </thead>
             <tbody>';
-                PCO_PresentarOpcionesArbolMenu('padre=0',0);
+                PCO_PresentarOpcionesArbolMenu('padre=0 AND formulario=0',0);
 		echo '</tbody>
         </table>';
 		 PCO_CerrarVentana();
