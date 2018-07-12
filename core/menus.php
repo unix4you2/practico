@@ -450,7 +450,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 					$Complemento_tablas=",".$TablasCore."usuario_menu";
 					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
-			$resultado=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_escritorio=1 ".@$Complemento_condicion." ORDER BY peso");
+			$resultado=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_escritorio=1 AND formulario=0 ".@$Complemento_condicion." ORDER BY peso");
 
 			// Imprime las opciones con sus formularios
 			while($registro = $resultado->fetch())
@@ -465,7 +465,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 					$Complemento_tablas=",".$TablasCore."usuario_menu";
 					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
-			$resultado=PCO_EjecutarSQL("SELECT COUNT(*) as conteo,seccion FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_centro=1 ".@$Complemento_condicion." GROUP BY seccion ORDER BY seccion");
+			$resultado=PCO_EjecutarSQL("SELECT COUNT(*) as conteo,seccion FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_centro=1 AND formulario=0 ".@$Complemento_condicion." GROUP BY seccion ORDER BY seccion");
 			// Imprime las secciones encontradas para el usuario
 			while($registro = $resultado->fetch())
 				{
@@ -481,7 +481,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 							$Complemento_tablas=",".$TablasCore."usuario_menu";
 							$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 						}
-					$resultado_opciones_acordeon=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_centro=1 AND seccion='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY peso");
+					$resultado_opciones_acordeon=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE posible_centro=1 AND formulario=0 AND seccion='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY peso");
 
 					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
 						PCO_ImprimirOpcionMenu($registro_opciones_acordeon,'centro');
