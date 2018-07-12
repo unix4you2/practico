@@ -6445,18 +6445,19 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
         $RegistroCantidadMenues=PCO_EjecutarSQL("SELECT COUNT(*) as CantidadMenues FROM ".$TablasCore."menu WHERE formulario='$formulario'")->fetch();
         if ($RegistroCantidadMenues["CantidadMenues"]>0)
             {
-        		echo '
-					<!-- Boton expansible para menu en dispositivos moviles -->
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#MENU_FORMULARIO_'.$formulario.'" aria-expanded="false">
-						    <i class="fa fa-2x fa-bars fa-border"></i>
-						</button>
-					</div>
-        		    <div class="collapse navbar-collapse" id="MENU_FORMULARIO_'.$formulario.'">';
-                        $resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu WHERE formulario='$formulario' ORDER BY peso");
-                        while($registro = $resultado->fetch())
-                            PCO_ImprimirOpcionMenu($registro,'formulario');
-        		echo '</div>';
+        		echo '<!-- Boton expansible para menu en dispositivos moviles -->
+        			<nav class="navbar navbar-default" style="min-height:30px !important; margin:0px !important; padding:0px !important;"> <!--  navbar-xs navbar-fixed-top  navbar-inverse navbar-fixed-bottom navbar-static-top  -->
+    					<div class="navbar-header">
+    						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#MENU_FORMULARIO_'.$formulario.'" aria-expanded="false">
+    						    <i class="fa fa-bars"></i>
+    						</button>
+    					</div>
+            		    <div class="collapse navbar-collapse" id="MENU_FORMULARIO_'.$formulario.'">';
+                            $resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu WHERE formulario='$formulario' ORDER BY peso");
+                            while($registro = $resultado->fetch())
+                                PCO_ImprimirOpcionMenu($registro,'formulario');
+        		echo '  </div>
+        		    </nav>';
             }
 
 		// Muestra ayuda en caso de tenerla
