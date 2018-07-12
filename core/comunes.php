@@ -36,7 +36,7 @@
 	Variables de entrada:
 
 		RegistroOpcion - Registro completo de la opcion de menu
-		Ubicacion - Ubicacion sobre la cual se desea ubicar la opcion y que obedece a las mismas disponibles cuando esta es creada. Posibilidades: [arriba,escritorio,centro,lateral]
+		Ubicacion - Ubicacion sobre la cual se desea ubicar la opcion y que obedece a las mismas disponibles cuando esta es creada. Posibilidades: [arriba,escritorio,centro,lateral,formulario]
 
 	Salida:
 		Impresion del codigo HTML correspondiente
@@ -55,19 +55,36 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
     					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
     				}
     			$ResultadoOpcionesAnidadas=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE padre='".$RegistroOpcion['id']."' ".@$Complemento_condicion." ORDER BY peso");
+    			$CadenaPreOpcion='
+                    <div class="btn-group">
+                      <button type="button" class="btn dropdown-toggle '.$RegistroOpcion["clase_contenedor"].' " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="'.$RegistroOpcion["imagen"].' fa-fw"></i> '.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).' <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu">';
+                $CadenaPosOpcion='
+                      </ul>
+                    </div>';
+    			
+    			//Si la posicion es un formulario cambia el estilo de presentacion del grupo
+    			if ($Ubicacion=="formulario")
+    			    {
+            			$CadenaPreOpcion='
+                            <div class="btn-group">
+                              <li class="btn dropdown-toggle '.$RegistroOpcion["clase_contenedor"].' " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="'.$RegistroOpcion["imagen"].' fa-fw"></i> '.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).' <span class="caret"></span>
+                              </li>
+                              <ul class="dropdown-menu">';
+                        $CadenaPosOpcion='
+                              </ul>
+                            </div>';
+    			    }
+
     			//Crea el elemento para dropdown con las opciones
-                echo '
-                <div class="btn-group">
-                  <button type="button" class="btn dropdown-toggle '.$RegistroOpcion["clase_contenedor"].' " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="'.$RegistroOpcion["imagen"].' fa-fw"></i> '.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).' <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu">';
+                echo $CadenaPreOpcion;
                         // Imprime las opciones con sus formularios
                         while($RegistroOpcionAnidada = $ResultadoOpcionesAnidadas->fetch())
                         	PCO_ImprimirOpcionMenu($RegistroOpcionAnidada,'submenu',$Ubicacion);
-                echo '
-                  </ul>
-                </div>';
+                echo $CadenaPosOpcion;
 			}
 
         //Genera el formulario que sera llamado en la opcion de menu
@@ -95,7 +112,7 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
 			{
 			    if ($Ubicacion=='arriba' || $Ubicacion=='lateral')
                     $CadenaPreOpcion= '<a href="javascript:document.'.$PreUbicacion.'_'.$Ubicacion.'_'.$RegistroOpcion["id"].'.submit();">';
-			    if ($Ubicacion=='centro' || $Ubicacion=='escritorio')
+			    if ($Ubicacion=='centro' || $Ubicacion=='escritorio' || $Ubicacion=='formulario')
 			        $CadenaPreOpcion= '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).'" href="javascript:document.'.$PreUbicacion.'_'.$Ubicacion.'_'.$RegistroOpcion["id"].'.submit();">';
 			    if ($Ubicacion=='submenu')
 			        $CadenaPreOpcion= '<a href="javascript:document.'.$PreUbicacion.'_'.$Ubicacion.'_'.$RegistroOpcion["id"].'.submit();"><i class="'.$RegistroOpcion["imagen"].' fa-fw"></i> '.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).' '.$TextoAccesoDirecto;
@@ -138,6 +155,8 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
                             $CadenaInOpcion= '<button class="btn-circle btn-info btn-xs"><i class="'.$RegistroOpcion["imagen"].'"></i></button> '.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]);
         			    if ($Ubicacion=='centro')
                             $CadenaInOpcion= '<button type="button" class="btn btn-default btn-outline"><i class="'.$RegistroOpcion["imagen"].' fa-fw"></i><span class="btn-xs">'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).'</span></button>';
+        			    if ($Ubicacion=='formulario')
+                            $CadenaInOpcion= '<ul type="button" class="btn '.$RegistroOpcion["clase_contenedor"].'"><i class="'.$RegistroOpcion["imagen"].' fa-fw"></i><span>'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).'</span></ul>';
         			    if ($Ubicacion=='escritorio')
                             $CadenaInOpcion= '<button class="btn btn-default"><i class="'.$RegistroOpcion["imagen"].' fa-3x fa-fw"></i><br><span class="btn-xs">'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).'</span></button>';
         			    if ($Ubicacion=='lateral')
@@ -163,7 +182,15 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
                         echo $CadenaInOpcion;
                         echo $CadenaPosOpcion.'&nbsp;';
                     }
-                    
+
+                //Imprime opciones ubicadas en ventanas o acordeones en el centro de la aplicacion
+                if ($Ubicacion=='formulario')
+                    {
+                        echo $CadenaPreOpcion;
+                        echo $CadenaInOpcion;
+                        echo $CadenaPosOpcion.'&nbsp;';
+                    }
+
                 //Imprime opciones ubicadas en el escritorio de la aplicacion (iconos grandes sin categorizar)
                 if ($Ubicacion=='escritorio')
                     {
@@ -6317,7 +6344,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
         global $PCO_InformeFiltro,$PCO_FuncionesJSInternasFORM;
 		global $_SeparadorCampos_;
 		// Carga variables de definicion de tablas
-		global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
+		global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton,$ListaCamposSinID_menu;
 		global $MULTILANG_Formularios,$MULTILANG_Editar,$MULTILANG_Elementos,$MULTILANG_Agregar,$MULTILANG_Configuracion,$MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
         global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales;
         global $POSTForm_ListaCamposObligatorios,$POSTForm_ListaTitulosObligatorios;
@@ -6413,6 +6440,18 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		
 		// Crea ventana si aplica para el form
 		if ($en_ventana) PCO_AbrirVentana(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["titulo"]).$ComplementoTituloFormulario.$ComplementoIdObjetoEnTitulo,'panel-primary','',$barra_herramientas_mini);
+
+        //Busca las posibles opciones de menu agregadas al formulario
+        $RegistroCantidadMenues=PCO_EjecutarSQL("SELECT COUNT(*) as CantidadMenues FROM ".$TablasCore."menu WHERE formulario='$formulario'")->fetch();
+        if ($RegistroCantidadMenues["CantidadMenues"]>0)
+            {
+        		echo '<div class="well well-sm" id="MENU_FORMULARIO_'.$formulario.'">';
+                $resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu WHERE formulario='$formulario' ORDER BY peso");
+                while($registro = $resultado->fetch())
+                    PCO_ImprimirOpcionMenu($registro,'formulario');
+        		echo '</div>';
+            }
+		
 		// Muestra ayuda en caso de tenerla
 		$imagen_ayuda='fa fa-info-circle fa-5x texto-azul';
 		if ($registro_formulario["ayuda_titulo"]!="" || $registro_formulario["ayuda_texto"]!="")
