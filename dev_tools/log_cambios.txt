@@ -105,6 +105,7 @@ use function PCO_AbrirVentana as abrir_ventana;  Aunque en la práctica esto ser
 * Added: Tareas sobre tableros Kanban soportan ahora definición de porcentajes de avance particular.
 * Added: Durante la selección de informes para inserción en formularios se permite la búsqueda por su ID o nombre, para falicitar los casos donde la cantidad de informes es numerosa.
 * Added: Se permite saltar entre el diseño de un campo y el diseño general del formulario mediante un botón en la barra de herramientas inferior.
+* Added: Posibilidad de agregar subtítulos como parámetros extra sobre la función de diálogos modales.
 * Enhan: Los contenedores de pestañas (tab-pane) en formularios son generados unicamente cuando se tiene más de una pestaña.  En los otros casos no es necesario.  Con eso se evita la creacion innecesaria de elementos con ID html PCO_PestanaFormulario_XX innecesarios.
 * Enhan: Renombrado de funciones internas
 * Enhan: Generalizacion y optimizacion de funcion encargada de la impresion de opciones de menu.

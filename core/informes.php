@@ -1429,8 +1429,7 @@ if ($PCO_Accion=="editar_informe")
 
 
             <!-- Modal Graficos del informe -->
-            <?php PCO_AbrirDialogoModal("myModalGraficosInforme",$MULTILANG_InfTitGrafico,"modal-wide"); 
-            echo $MULTILANG_InfDesGraf;
+            <?php PCO_AbrirDialogoModal("myModalGraficosInforme",$MULTILANG_InfTitGrafico,"modal-wide",1,$MULTILANG_InfDesGraf); 
             ?>
 
 				<form name="datosformcograf" id="datosformcograf" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
@@ -1574,12 +1573,11 @@ if ($PCO_Accion=="editar_informe")
 
 
             <!-- Modal Agrupacion y ordenamiento del informe -->
-            <?php PCO_AbrirDialogoModal("myModalAgrupacionInforme",$MULTILANG_InfAgrupa); ?>
+            <?php PCO_AbrirDialogoModal("myModalAgrupacionInforme",$MULTILANG_InfAgrupa,"",1,$MULTILANG_InfCampoAgrupa); ?>
 
                         <?php
                         $consulta_agrupacion=PCO_EjecutarSQL("SELECT ordenamiento,agrupamiento FROM ".$TablasCore."informe WHERE id=? ","$informe");
                         $registro_agrupacion = $consulta_agrupacion->fetch();
-                        echo $MULTILANG_InfCampoAgrupa;
                         ?>
                         <form name="datosformcogrup" id="datosformcogrup" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
                             <input type="Hidden" name="PCO_Accion" value="actualizar_agrupamiento_informe">
@@ -1618,8 +1616,8 @@ if ($PCO_Accion=="editar_informe")
 
 
             <!-- Modal Agregar acciones del informe -->
-            <?php PCO_AbrirDialogoModal("myModalAgregaAccionesInforme",$MULTILANG_InfTitBotones,"modal-wide"); 
-            echo $MULTILANG_InfDesAccion;
+            <?php
+                PCO_AbrirDialogoModal("myModalAgregaAccionesInforme",$MULTILANG_InfTitBotones,"modal-wide",1,$MULTILANG_InfDesAccion); 
             ?>
 
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
@@ -1976,7 +1974,7 @@ if ($PCO_Accion=="editar_informe")
     						<td>
     						</td>
     						<td align=center > <font size=2>
-    							<?php echo $MULTILANG_InfHlpCarga; ?>: <br></font>
+    							<?php echo $MULTILANG_InfHlpCarga; ?>: <br><br></font>
                                 <a class="btn btn-info btn-block" href="javascript:document.datosprevios.submit();"><i class="fa fa-print"></i> <?php echo $MULTILANG_InfCargaPrev; ?></a>
     						</td>
     					</tr>

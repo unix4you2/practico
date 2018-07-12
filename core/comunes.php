@@ -4390,7 +4390,7 @@ function PCO_CerrarBarraEstado()
     Ver tambien:
     <PCO_CerrarDialogoModal>
 */
-function PCO_AbrirDialogoModal($identificador,$titulo="",$estilo_modal="",$impresion_directa=1)
+function PCO_AbrirDialogoModal($identificador,$titulo="",$estilo_modal="",$impresion_directa=1,$subtitulo="")
     {
         $salida= '
             <div class="modal fade '.$estilo_modal.'" id="'.$identificador.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -4398,8 +4398,13 @@ function PCO_AbrirDialogoModal($identificador,$titulo="",$estilo_modal="",$impre
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" id="myModalLabel">'.$titulo.'</h4>
-                        </div>
+                            <h4 class="modal-title" id="myModalLabel">'.$titulo.'</h4>';
+        
+        //Si se recibe un subtitulo lo agrega al modal
+        if ($subtitulo!="")
+            $salida.='<h6 id="myModalLabelSubtitulo"><i>'.$subtitulo.'</i></h6>';
+        
+        $salida.='                </div>
                         <div class="modal-body mdl-primary">';
         if($impresion_directa==1)
             echo $salida;
