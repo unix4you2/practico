@@ -6445,20 +6445,27 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
         $RegistroCantidadMenues=PCO_EjecutarSQL("SELECT COUNT(*) as CantidadMenues FROM ".$TablasCore."menu WHERE formulario='$formulario'")->fetch();
         if ($RegistroCantidadMenues["CantidadMenues"]>0)
             {
-        		echo '<div class="well well-sm" id="MENU_FORMULARIO_'.$formulario.'">';
-                $resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu WHERE formulario='$formulario' ORDER BY peso");
-                while($registro = $resultado->fetch())
-                    PCO_ImprimirOpcionMenu($registro,'formulario');
+        		echo '
+					<!-- Boton expansible para menu en dispositivos moviles -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#MENU_FORMULARIO_'.$formulario.'" aria-expanded="false">
+						    <i class="fa fa-2x fa-bars fa-border"></i>
+						</button>
+					</div>
+        		    <div class="collapse navbar-collapse" id="MENU_FORMULARIO_'.$formulario.'">';
+                        $resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu WHERE formulario='$formulario' ORDER BY peso");
+                        while($registro = $resultado->fetch())
+                            PCO_ImprimirOpcionMenu($registro,'formulario');
         		echo '</div>';
             }
-		
+
 		// Muestra ayuda en caso de tenerla
 		$imagen_ayuda='fa fa-info-circle fa-5x texto-azul';
 		if ($registro_formulario["ayuda_titulo"]!="" || $registro_formulario["ayuda_texto"]!="")
 			PCO_Mensaje(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["ayuda_titulo"]),PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["ayuda_texto"]),'100%',$imagen_ayuda,'alert alert-info alert-dismissible');
 
 		//Inicia el formulario de datos
-		echo '<div id="MARCO_IMPRESION">';
+		echo '<div id="PCO_MarcoImpresion'.$formulario.'">';
 		//Si se quiere anular el formulario y su accion cuando se trata de un sub-formulario de consulta
 		if (!$anular_form)
 			echo'<form id="'.$registro_formulario["id_html"].'" name="'.$registro_formulario["id_html"].'" action="'.$ArchivoCORE.'" method="POST" enctype="multipart/form-data" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
@@ -6762,7 +6769,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                 echo '</div>';
             } //Fin Si conteo pestanas > 0
 
-		echo '</div> <!-- cierra MARCO_IMPRESION -->';
+		echo '</div> <!-- cierra PCO_MarcoImpresion'.$formulario.' -->';
 
 	//Busca los campos definidos como visilbe=0 (o NO) para agregarlos como hidden
 	$consulta_ocultos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=0 ","$formulario");
