@@ -6487,6 +6487,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
         //Cuenta las pestanas segun los objetos del form y ademas mira si es solo una con valor vacio (sin pestanas)
         $consulta_conteo_pestanas=      PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
         $conteo_pestanas=0;
+        $conteo_pestanas_ocultas=0;
         while($registro_conteo_pestanas = @$consulta_conteo_pestanas->fetch())
             {
                 $titulo_pestana_formulario=$registro_conteo_pestanas["pestana_objeto"];
@@ -6495,6 +6496,9 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                         $conteo_pestanas++;
                         $ultimo_nombre_pestanas=$registro_conteo_pestanas["pestana_objeto"];
                     }
+                //Lleva el conteo de las ocultas en caso que las deba crear aunque solo exista una visible pero se requieran los tab-pane para separar la oculta
+                if ($titulo_pestana_formulario=="PCO_NoVisible")
+                    $conteo_pestanas_ocultas=1;
             }
         //Presenta barra de navegacion de pestanas si se encuentra al menos una
         if ($conteo_pestanas>0 && ($ultimo_nombre_pestanas!=""))
@@ -6536,7 +6540,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                     {
                         $titulo_pestana_formulario=$registro_formulario_pestana["pestana_objeto"];
                         //Genera el contenedor de la pestana.  Se considera necesario crear contenedores solo cuando hay mas de una pestana, si hay una solamente entonces no hay que crear el contenedor
-                        if ($conteo_pestanas>1)
+                        if ($conteo_pestanas>1 || $conteo_pestanas_ocultas==1)
                         echo '
                         <!-- INICIO de las pestanas No '.$pestana_activa.' -->
                             <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="PCO_PestanaFormulario_'.$pestana_activa.'" >';
@@ -6757,7 +6761,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                         $limite_inferior=$registro_obj_fila_unica["peso"];
                                     }
 
-                        if ($conteo_pestanas>1)
+                        if ($conteo_pestanas>1  || $conteo_pestanas_ocultas==1)
                         echo '
                             </div>
                         <!-- FIN de las pestanas No '.$pestana_activa.'-->';
