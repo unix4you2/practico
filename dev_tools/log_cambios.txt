@@ -112,6 +112,7 @@ use function PCO_AbrirVentana as abrir_ventana;  Aunque en la práctica esto ser
 * Enhan: Reduccion de código en administracion de menues
 * Enhan: Actualizacion de plugin Bootstrap-select a version 1.12.4
 * Enhan: Aumentada la velocidad de carga de aplicación durante la conversion de listas HTML a BootStrap
+* Enhan: Reemplazo de funciones de informes por objetos internos
 * Fixed: Edicion de URLS con interrogantes sobre IFrames en formularios
 "
 

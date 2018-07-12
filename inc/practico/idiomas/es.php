@@ -722,7 +722,7 @@
 	$MULTILANG_InfGrafico5='Linea';
 	$MULTILANG_InfGrafico7='Dona (solo una serie)';
 	$MULTILANG_InfActGraf='Actualizar formato del gr&aacute;fico';
-	$MULTILANG_InfAgrupa='Especifica criterios de agrupaci&oacute;n y ordenamiento';
+	$MULTILANG_InfAgrupa='Agrupaci&oacute;n y ordenamiento';
 	$MULTILANG_InfReco3='Utilice solamente campos definidos en su consulta.';
 	$MULTILANG_InfCriterioAgrupa='Criterio de agrupamiento';
 	$MULTILANG_InfCriterioOrdena='Criterio de ordenamiento';
@@ -731,7 +731,7 @@
 	$MULTILANG_InfTitOrdena='Como se ordenan los resultados?';
 	$MULTILANG_InfDesOrdena='Permite ordenar los resultados por alguno de los desplegados.  Indique por cu&aacute;l o cuales campos separados por coma se debe ordenar los resultados, si lo desea despu&eacute;s de cada campo puede utilizar el modificador ASC o DESC para indicar si es ascedente o descendente';
 	$MULTILANG_InfActCriterios='Actualizar criterios de agrupaci&oacute;n y ordenamiento';
-	$MULTILANG_InfTitBotones='Agregar botones y acciones a cada registro';
+	$MULTILANG_InfTitBotones='Acciones por registro';
 	$MULTILANG_InfDelReg='Eliminar registro';
 	$MULTILANG_InfCargaForm='Cargar un formulario por ID';
 	$MULTILANG_InfHlpAccion='Si desea cargar un formulario simple utilice la notaci&oacute;n  <b>IDFormulario:1</b><br>Si desea cargar un formulario con busqueda de registro, utilice la notaci&oacute;n  <b>IDFormulario:1:CampoBusqueda</b><br>Si desea cargar un formulario transportando el valor de la primera columna sobre la variable $PCO_ValorBusquedaBD utilice la notaci&oacute;n  <b>IDFormulario:1:</b><br>Si desea cargar un informe utilice la notaci&oacute;n  <b>IDInforme:1:CampoBusqueda</b> (tomado como la primer columna del informe)<br>Si desea eliminar el registro asociado indique la <b>tabla.campo</b> usada para comparar con el valor de la primera columna';

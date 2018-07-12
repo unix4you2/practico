@@ -1429,7 +1429,9 @@ if ($PCO_Accion=="editar_informe")
 
 
             <!-- Modal Graficos del informe -->
-            <?php PCO_AbrirDialogoModal("myModalGraficosInforme",$MULTILANG_InfTitGrafico,"modal-wide"); ?>
+            <?php PCO_AbrirDialogoModal("myModalGraficosInforme",$MULTILANG_InfTitGrafico,"modal-wide"); 
+            echo $MULTILANG_InfDesGraf;
+            ?>
 
 				<form name="datosformcograf" id="datosformcograf" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="Hidden" name="PCO_Accion" value="actualizar_grafico_informe">
@@ -1577,6 +1579,7 @@ if ($PCO_Accion=="editar_informe")
                         <?php
                         $consulta_agrupacion=PCO_EjecutarSQL("SELECT ordenamiento,agrupamiento FROM ".$TablasCore."informe WHERE id=? ","$informe");
                         $registro_agrupacion = $consulta_agrupacion->fetch();
+                        echo $MULTILANG_InfCampoAgrupa;
                         ?>
                         <form name="datosformcogrup" id="datosformcogrup" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
                             <input type="Hidden" name="PCO_Accion" value="actualizar_agrupamiento_informe">
@@ -1615,7 +1618,9 @@ if ($PCO_Accion=="editar_informe")
 
 
             <!-- Modal Agregar acciones del informe -->
-            <?php PCO_AbrirDialogoModal("myModalAgregaAccionesInforme",$MULTILANG_InfTitBotones,"modal-wide"); ?>
+            <?php PCO_AbrirDialogoModal("myModalAgregaAccionesInforme",$MULTILANG_InfTitBotones,"modal-wide"); 
+            echo $MULTILANG_InfDesAccion;
+            ?>
 
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<input type="Hidden" name="PCO_Accion" value="guardar_accion_informe">
@@ -1951,61 +1956,8 @@ if ($PCO_Accion=="editar_informe")
 <div class="row">
   <div class="col-md-3">
 			<?php 
-			    PCO_CargarFormulario("-13",1);
-				PCO_AbrirVentana($MULTILANG_BarraHtas, 'panel-primary'); 
+			    PCO_CargarFormulario("-13",1,"","",1,0);
 			?>
-				<div align=center>
-				<?php echo $MULTILANG_InfTablasOrigen; ?><br>
-				<a data-toggle="modal" href='#myModalTablaInforme' title="<?php echo $MULTILANG_InfAgregaTabla; ?>" name=" "><i class="fa fa-database fa-3x"></i></a>
-				<hr>
-				<?php echo $MULTILANG_InfCamposOrigen; ?><br>
-				<a data-toggle="modal" href='#myModalCamposInforme' title="<?php echo $MULTILANG_InfAgregaCampo; ?>" name=" "><i class="fa fa-th-list fa-3x"></i></a>
-				<hr>
-				<?php echo $MULTILANG_InfCondiciones; ?><br>
-				<a data-toggle="modal" href='#myModalCondicionesInforme' title="<?php echo $MULTILANG_InfFiltrar; ?>"><i class="fa fa-filter fa-3x"></i></a>
-				<hr>
-				<?php echo $MULTILANG_InfAgrupa; ?><br>
-				<a data-toggle="modal" href='#myModalAgrupacionInforme' title="<?php echo $MULTILANG_InfCampoAgrupa; ?>"><i class="fa fa-plus fa-3x fa-fw"></i><i class="fa fa-sort-alpha-asc fa-3x fa-fw"></i></a>
-
-				<?php
-					// Si se trata de un informe con grafico como resultado agrega el boton de graficos
-					if ($registro_informe['formato_final']=='G')
-						{
-				?>
-					<hr>
-					<?php echo $MULTILANG_InfPropGraf; ?><br>
-					<a data-toggle="modal" href='#myModalGraficosInforme' title="<?php echo $MULTILANG_InfDesGraf; ?>"><i class="fa fa-pie-chart fa-3x"></i></a>
-				<?php
-						}// Fin si es grafico
-				?>
-
-				<?php
-					// Si se trata de un informe tabular permite agregarle acciones a los registros
-					if ($registro_informe['formato_final']=='T')
-						{
-				?>
-					<hr>
-					Acciones para cada registro<br>
-					<a data-toggle="modal" href='#myModalAgregaAccionesInforme' title="<?php echo $MULTILANG_InfDesAccion; ?>"><i class="fa fa-bolt fa-3x fa-fw icon-red"></i></a>
-					<a data-toggle="modal" href='#myModalEditaAccionesInforme' title="<?php echo $MULTILANG_FrmDesAcciones; ?>"><i class="fa fa-pencil-square-o fa-3x fa-fw"></i></a>
-				<?php
-						}// Fin si es grafico
-				?>
-
-                <hr>
-				<?php echo $MULTILANG_MonCommSQL; ?> (<?php echo $MULTILANG_Avanzado; ?>)<br>
-				<b><a data-toggle="modal" href='#myModalActualizaSQL' title="<?php echo $MULTILANG_FrmAdvScriptForm; ?>" name=" "><i class="fa fa-code fa-3x"></i></a></b>
-				<hr>
-
-				<form action="<?php echo $ArchivoCORE; ?>" method="POST" name="cancelar"><input type="Hidden" name="PCO_Accion" value="administrar_informes"></form>
-                <a class="btn btn-warning btn-block" href="javascript:document.cancelar.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_InfVolver; ?></a>
-
-				</div><br>
-			<?php
-				PCO_CerrarVentana();
-			?>
-			
-
   </div>    
   <div class="col-md-9">
 

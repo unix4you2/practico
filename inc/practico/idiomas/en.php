@@ -724,7 +724,7 @@
 	$MULTILANG_InfGrafico5='Bar';
 	$MULTILANG_InfGrafico7='Donut (only one series)';
 	$MULTILANG_InfActGraf='Update chart format';
-	$MULTILANG_InfAgrupa='Specifies sorting criteria and grouping';
+	$MULTILANG_InfAgrupa='Sorting and grouping';
 	$MULTILANG_InfReco3='Use only fields defined in your query.';
 	$MULTILANG_InfCriterioAgrupa='Grouping criteria';
 	$MULTILANG_InfCriterioOrdena='Ordering criteria';

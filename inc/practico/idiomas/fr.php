@@ -724,7 +724,7 @@
 	$MULTILANG_InfGrafico5='Bar';
 	$MULTILANG_InfGrafico7='Donut (une seule série)';
 	$MULTILANG_InfActGraf='Mettre à jour le format';
-	$MULTILANG_InfAgrupa='Spécifie les critères de tri et le regroupement';
+	$MULTILANG_InfAgrupa='Tri et le regroupement';
 	$MULTILANG_InfReco3='Utilisez uniquement les champs définis dans votre requête.';
 	$MULTILANG_InfCriterioAgrupa='Critères de regroupement';
 	$MULTILANG_InfCriterioOrdena='Critères de commande';

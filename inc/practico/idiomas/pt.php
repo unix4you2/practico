@@ -724,7 +724,7 @@
 	$MULTILANG_InfGrafico5='Linha';
 	$MULTILANG_InfGrafico7='Dona (apenas uma s&eacute;rie)';
 	$MULTILANG_InfActGraf='Formato de gr&aacute;fico atualização';
-	$MULTILANG_InfAgrupa='Especifica crit&eacute;rios de classificação e agrupamento';
+	$MULTILANG_InfAgrupa='Classificação e agrupamento';
 	$MULTILANG_InfReco3='Utilize apenas os campos definidos na consulta.';
 	$MULTILANG_InfCriterioAgrupa='Agrupamento de crit&eacute;rios';
 	$MULTILANG_InfCriterioOrdena='Crit&eacute;rios de ordenação';
