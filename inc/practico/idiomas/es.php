@@ -773,7 +773,7 @@
 	$MULTILANG_InfActualizar='Actualizar informe';
 	$MULTILANG_InfVistaPrev='Vista previa del informe';
 	$MULTILANG_InfCargaPrev='Cargar vista previa';
-	$MULTILANG_InfHlpCarga='Esta opci&oacute;n cerrar&aacute; el modo de dise&ntilde;o<br> y cargar&aacute; el informe tal y como ser&aacute; visualizado<br> por un usuario de la aplicaci&oacute;n';
+	$MULTILANG_InfHlpCarga='Esta opci&oacute;n cerrar&aacute; el modo de dise&ntilde;o y cargar&aacute; el informe tal y como ser&aacute; visualizado por un usuario de la aplicaci&oacute;n';
 	$MULTILANG_InfErrInforme1='Debe indicar un t&iacute;tulo v&aacute;lido para el informe.';
 	$MULTILANG_InfErrInforme2='Debe indicar un nombre v&aacute;lido para la categor&iacute;a asociada al informe.';
 	$MULTILANG_InfTituloAgr='Agregar nuevo informe o gr&aacute;fico';

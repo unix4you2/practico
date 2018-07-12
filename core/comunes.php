@@ -6483,7 +6483,8 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                 while($registro_formulario_pestana = @$consulta_formulario_pestana->fetch())
                     {
                         $titulo_pestana_formulario=$registro_formulario_pestana["pestana_objeto"];
-                        //Genera el contenedor de la pestana
+                        //Genera el contenedor de la pestana.  Se considera necesario crear contenedores solo cuando hay mas de una pestana, si hay una solamente entonces no hay que crear el contenedor
+                        if ($conteo_pestanas>1)
                         echo '
                         <!-- INICIO de las pestanas No '.$pestana_activa.' -->
                             <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="PCO_PestanaFormulario_'.$pestana_activa.'" >';
@@ -6704,9 +6705,11 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                         $limite_inferior=$registro_obj_fila_unica["peso"];
                                     }
 
+                        if ($conteo_pestanas>1)
                         echo '
                             </div>
                         <!-- FIN de las pestanas No '.$pestana_activa.'-->';
+                        
                         //Limpia para las siguientes pestanas
                         $estado_activa_primera_pestana='';
                         $pestana_activa++;

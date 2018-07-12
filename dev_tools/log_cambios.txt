@@ -105,6 +105,7 @@ use function PCO_AbrirVentana as abrir_ventana;  Aunque en la práctica esto ser
 * Added: Tareas sobre tableros Kanban soportan ahora definición de porcentajes de avance particular.
 * Added: Durante la selección de informes para inserción en formularios se permite la búsqueda por su ID o nombre, para falicitar los casos donde la cantidad de informes es numerosa.
 * Added: Se permite saltar entre el diseño de un campo y el diseño general del formulario mediante un botón en la barra de herramientas inferior.
+* Enhan: Los contenedores de pestañas (tab-pane) en formularios son generados unicamente cuando se tiene más de una pestaña.  En los otros casos no es necesario.  Con eso se evita la creacion innecesaria de elementos con ID html PCO_PestanaFormulario_XX innecesarios.
 * Enhan: Renombrado de funciones internas
 * Enhan: Generalizacion y optimizacion de funcion encargada de la impresion de opciones de menu.
 * Enhan: Por defecto se deja oculta la barra de navegacion izquierda para mejorar la maquetacion responsive.  Se deja el boton para su despliegue manual cuando sea necesario.
@@ -129,6 +130,7 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('comando_menu','Objeto','1. { $ MULTILANG_MnuObjeto}',1);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('comando_menu','Interno','2. { $ MULTILANG_MnuInterno}',2);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('comando_menu','Personal','3. { $ MULTILANG_MnuPersonal}',3);
+
 
 ALTER TABLE core_menu ADD tipo_menu varchar(10) default 'opc';
 ALTER TABLE core_menu ADD formulario int(11) default '0';

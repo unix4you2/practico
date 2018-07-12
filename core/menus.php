@@ -374,7 +374,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 								{
 									echo '<form action="'.$ArchivoCORE.'" method="post" name="deskinf_'.$registro["id"].'" id="deskinf_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
 									echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
-										 <input type="hidden" name="objeto" value="inf:'.$registro["id"].'"></form>';
+										 <input type="hidden" name="objeto" value="inf:'.$registro["id"].':1"></form>';
 									//Presenta la opcion de menu
 									echo '
 										<li class="left clearfix">

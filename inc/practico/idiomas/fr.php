@@ -775,7 +775,7 @@
 	$MULTILANG_InfActualizar='Actualiser le rapport';
 	$MULTILANG_InfVistaPrev='Aperçu du rapport';
 	$MULTILANG_InfCargaPrev='Charger l aperçu';
-	$MULTILANG_InfHlpCarga='Cette option fermera le mode de conception <br> et vous montrera le rapport tel qu il sera affiché <br> à un utilisateur de l application';
+	$MULTILANG_InfHlpCarga='Cette option fermera le mode de conception et vous montrera le rapport tel qu il sera affiché à un utilisateur de l application';
 	$MULTILANG_InfErrInforme1='Vous devez entrer un titre valide pour le rapport.';
 	$MULTILANG_InfErrInforme2='Veuillez spécifier un nom valide pour la catégorie associée au rapport.';
 	$MULTILANG_InfTituloAgr='Ajouter un nouveau rapport ou graphique';

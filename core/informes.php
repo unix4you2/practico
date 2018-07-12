@@ -1955,235 +1955,44 @@ if ($PCO_Accion=="editar_informe")
 
 <div class="row">
   <div class="col-md-3">
-			<?php 
-			    PCO_CargarFormulario("-13",1,"","",1,0);
-			?>
+	<?php 
+	    PCO_CargarFormulario("-13",1,"","",1,0);
+	?>
   </div>    
   <div class="col-md-9">
-
-			<?php PCO_AbrirVentana($MULTILANG_InfParam." <i>[ID=".$registro_informe['id']."]</i>", 'panel-primary'); ?>
-			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="actualizar_informe">
-			<input type="Hidden" name="id" value="<?php echo $registro_informe['id']; ?>">
-
-
-            <!-- Modal EditorJavascript -->
-            <?php
-                PCO_AbrirDialogoModal("myModalActualizaSQL",$MULTILANG_MonCommSQL,"modal-wide");
-            ?>
-                    <div class="well" style="color:#000000;"><?php echo $MULTILANG_InfSQL; ?>
-                    <textarea name="consulta_sql" id="consulta_sql" data-editor="sql" class="form-control" style="width: 950px; height: 450px;"><?php echo $registro_informe['consulta_sql']; ?></textarea>
-                    </div>
-            <?php
-                $barra_herramientas_modal='
-        			<button type="button" class="btn btn-success" onclick="javascript:document.datos.submit();">'.$MULTILANG_Actualizar.' SQL <i class="fa fa-floppy-o"></i></button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-                PCO_CerrarDialogoModal($barra_herramientas_modal);
-            ?>
-            <!-- Fin Modal EditorJavascript -->
-
-
-            <div class="form-group input-group">
-                <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> </span>
-                <input name="titulo" value="<?php echo $registro_informe['titulo']; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfTitulo; ?>">
-                <span class="input-group-addon">
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesTitulo; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                </span>
-            </div>
-
-            <div class="form-group input-group">
-                <input name="descripcion" type="text" value="<?php echo $registro_informe['descripcion']; ?>" class="form-control" placeholder="<?php echo $MULTILANG_InfDescripcion; ?>">
-                <span class="input-group-addon">
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesDescrip; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                </span>
-            </div>
-
-            <div class="form-group input-group">
-                <input name="categoria" type="text" value="<?php echo $registro_informe['categoria']; ?>" class="form-control" placeholder="<?php echo $MULTILANG_InfCategoria; ?>">
-                <span class="input-group-addon">
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfDesCateg; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                </span>
-            </div>
-
-            <div class="form-group input-group">
-                <input name="ancho" type="text" value="<?php echo $registro_informe['ancho']; ?>" class="form-control" placeholder="<?php echo $MULTILANG_FrmAncho; ?>">
-                <span class="input-group-addon">
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfTitAncho; ?>: <?php echo $MULTILANG_InfDesAncho; ?> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)"><i class="fa fa-question-circle fa-fw "></i></a>
-                </span>
-            </div>
-
-            <div class="form-group input-group">
-                <input name="alto" type="text" value="<?php echo $registro_informe['alto']; ?>" class="form-control" placeholder="<?php echo $MULTILANG_InfAlto; ?>">
-                <span class="input-group-addon">
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_InfTitAlto; ?>: <?php echo $MULTILANG_InfDesAlto; ?> (<?php echo $MULTILANG_InfHlpAnchoalto; ?>)"><i class="fa fa-question-circle fa-fw "></i></a>
-                </span>
-            </div>
-
-            <label for="formato_final"><?php echo $MULTILANG_InfFormato; ?>:</label>
-            <div class="form-group input-group">
-                <select id="formato_final" name="formato_final" class="form-control" >
-                    <option value="T"  <?php if ($registro_informe["formato_final"]=="T") echo 'selected'; ?> ><?php echo $MULTILANG_TablaDatos; ?></option>
-                    <option value="G"  <?php if ($registro_informe["formato_final"]=="G") echo 'selected'; ?> ><?php echo $MULTILANG_Grafico; ?></option>
-                </select>
-                <span class="input-group-addon">
-                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_InfTitFormato; ?></b><br><?php echo $MULTILANG_InfDesFormato; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                </span>
-            </div>
-
-            <label for="conexion_origen_datos"><?php echo $MULTILANG_ConnOrigenDatos; ?>:</label>
-            <div class="form-group input-group">
-                <select id="conexion_origen_datos" name="conexion_origen_datos" class="form-control" >
-					<option value=""><?php echo $MULTILANG_ConnPredeterminada; ?></option>
-					<?php
-						$consulta_conexiones=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE tipo_replica=0 ORDER BY nombre");
-						while($registro_conexiones = $consulta_conexiones->fetch())
-						    {
-						        $seleccion_campo="";
-								if (@$registro_informe["conexion_origen_datos"]==$registro_conexiones["nombre"])
-									$seleccion_campo="SELECTED";
-							    echo '<option value="'.$registro_conexiones["nombre"].'" '.$seleccion_campo.' >(Id.'.$registro_conexiones["id"].') '.$registro_conexiones["nombre"].' (Host:'.$registro_conexiones["servidorbd"].' BD:'.$registro_conexiones["basedatos"].')</option>';
-						    }
-					?>
-                </select>
-                <span class="input-group-addon">
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_ConnAdvCambioOrigen; ?>"><i class="fa fa-exclamation-triangle icon-red  fa-fw "></i></a>
-                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_ConnOrigenDatosDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                </span>
-            </div>
-
-
-            <label for="genera_pdf"><?php echo $MULTILANG_InfGeneraPDF; ?>:</label>
-            <div class="form-group input-group">
-                <select id="genera_pdf" name="genera_pdf" class="form-control" >
-                    <option value="S" <?php if ($registro_informe["genera_pdf"]=="S") echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
-                    <option value="N" <?php if ($registro_informe["genera_pdf"]=="N") echo 'selected'; ?> ><?php echo $MULTILANG_No; ?></option>
-                </select>
-                <span class="input-group-addon">
-                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_InfGeneraPDFInfoTit; ?></b><br><?php echo $MULTILANG_InfGeneraPDFInfoDesc; ?>"><i class="fa fa-exclamation-triangle icon-orange fa-fw"></i></a>
-                </span>
-            </div>
-            
-            <label for="variables_filtro"><?php echo $MULTILANG_InfVblesFiltro; ?>:</label>
-            <div class="form-group input-group">
-                <input name="variables_filtro" id="variables_filtro" value="<?php echo $registro_informe['variables_filtro']; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_InfVblesFiltro; ?>">
-                <span class="input-group-addon">
-                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_InfVblesDesFiltro; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                </span>
-            </div>
-
-            <label for="formulario_filtrado"><?php echo $MULTILANG_InfFormFiltrado; ?>:</label>
-            <div class="form-group input-group">
-                <select id="formulario_filtrado" name="formulario_filtrado" class="form-control" >
-					<option value=""></option>
-					<?php
-						$consulta_forms=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario ORDER BY titulo");
-						while($registro_formularios = $consulta_forms->fetch())
-							{
-								$seleccion_campo="";
-								if (@$registro_informe["formulario_filtrado"]==$registro_formularios["id"])
-									$seleccion_campo="SELECTED";
-								echo '<option value="'.$registro_formularios["id"].'" '.$seleccion_campo.'>(Id.'.$registro_formularios["id"].') '.$registro_formularios["titulo"].'</option>';
-							}
-					?>
-                </select>
-                <span class="input-group-addon">
-                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_InfFormFiltradoDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                </span>
-            </div>
-
-
-            <div class="well">
-                <center><b><?php echo $MULTILANG_InfDataTableTit; ?></b></center>
-                <div class="row">
-                    <div class="col col-md-6">
-                        <label for="soporte_datatable"><?php echo $MULTILANG_Habilitar; ?>:</label>
-                        <div class="form-group input-group">
-                            <select id="soporte_datatable" name="soporte_datatable" class="form-control" >
-                                <option value="S" <?php if ($registro_informe["soporte_datatable"]=="S") echo 'selected'; ?> ><?php echo $MULTILANG_Si; ?></option>
-                                <option value="N" <?php if ($registro_informe["soporte_datatable"]=="N") echo 'selected'; ?> ><?php echo $MULTILANG_No; ?></option>
-                            </select>
-                            <span class="input-group-addon">
-                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_InfDataTableDes; ?>"><i class="fa fa-question-circle fa-fw"></i></a>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col col-md-6">
-                        <label for="tamano_paginacion"><?php echo $MULTILANG_InfPaginacionDatatable; ?>:</label>
-                        <div class="form-group input-group">
-                            <input name="tamano_paginacion" value="<?php echo $registro_informe['tamano_paginacion']; ?>" type="text" class="form-control">
-                            <span class="input-group-addon">
-                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_InfPaginacionDatatableDes; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col col-md-6">
-                        <label for="subtotales_columna"><?php echo $MULTILANG_InfSubtotalesColumna; ?>:</label>
-                        <div class="form-group input-group">
-                            <input name="subtotales_columna" value="<?php echo $registro_informe['subtotales_columna']; ?>" type="text" class="form-control" onkeypress="return PCOJS_ValidarTeclado(event, 'numerico_entero', '');">
-                            <span class="input-group-addon">
-                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_InfSubtotalesColumnaDes; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col col-md-6">
-                        <label for="subtotales_formato"><?php echo $MULTILANG_InfSubtotalesFormato; ?>:</label>
-                        <div class="form-group input-group">
-                            <input name="subtotales_formato" value="<?php echo $registro_informe['subtotales_formato']; ?>" type="text" class="form-control">
-                            <span class="input-group-addon">
-                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_InfSubtotalesFormatoDes; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-            </form>
-            <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa  fa-floppy-o"></i> <?php echo $MULTILANG_InfActualizar; ?></a>
-
-			<?php
-				PCO_CerrarVentana();
-			?>
-
+	<?php 
+	    $PCO_CampoBusquedaBD="id";
+	    $PCO_ValorBusquedaBD=$informe;
+	    PCO_CargarFormulario("-14",1,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,0,0);
+	?>
 
 			<?php PCO_AbrirVentana($MULTILANG_InfVistaPrev, 'panel-primary'); ?>
-
-			<form action="<?php echo $ArchivoCORE; ?>" method="post" name="datosprevios" id="datosprevios" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-			
-			<input type="hidden" name="PCO_Accion" value="cargar_objeto">
-			<input type="hidden" name="objeto" value="inf:<?php echo $registro_informe['id']; ?>:1:htm:Informes:0">
-			</form>
-
-				<table width="100%" class="TextosVentana">
-					<tr>
-						<td>
-							</form>
-						</td>
-						<td align=center>
-							<?php echo $MULTILANG_InfHlpCarga; ?>: <br>
-                            <a class="btn btn-info btn-block" href="javascript:document.datosprevios.submit();"><i class="fa fa-print"></i> <?php echo $MULTILANG_InfCargaPrev; ?></a>
-						</td>
-					</tr>
-				</table>
-				
-			<br>
-            <div class="well well-sm btn-xs" style="color:Blue;">
-				<font color="#FF0000"><b><?php echo strtoupper($MULTILANG_VistaPrev); ?> </b>(<?php echo $MULTILANG_MonCommSQL?>, <i>variables reemplazadas/vars replaced</i>):<br></font>
-				<?php 
-            		//Si no hay SQL explicito entonces Genera la consulta en SQL para el informe a partir de los parametros
-            		if (strlen($registro_informe["consulta_sql"])<5)
-            		    echo PCO_ConstruirConsultaInforme($registro_informe['id'],0);
-            		else
-            		    echo PCO_ReemplazarVariablesPHPEnCadena($registro_informe["consulta_sql"]);
-				 ?>
-            </div>
-            
-
+    			<form action="<?php echo $ArchivoCORE; ?>" method="post" name="datosprevios" id="datosprevios" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+        			<input type="hidden" name="PCO_Accion" value="cargar_objeto">
+        			<input type="hidden" name="objeto" value="inf:<?php echo $registro_informe['id']; ?>:1:htm:Informes:0">
+    			</form>
+    				<table width="100%" class="TextosVentana">
+    					<tr>
+    						<td>
+    						</td>
+    						<td align=center > <font size=2>
+    							<?php echo $MULTILANG_InfHlpCarga; ?>: <br></font>
+                                <a class="btn btn-info btn-block" href="javascript:document.datosprevios.submit();"><i class="fa fa-print"></i> <?php echo $MULTILANG_InfCargaPrev; ?></a>
+    						</td>
+    					</tr>
+    				</table>
+    			<br>
+    			
+                <div class="well well-sm btn-xs" style="color:Blue;">
+    				<font color="#FF0000"><b><?php echo strtoupper($MULTILANG_VistaPrev); ?> </b>(<?php echo $MULTILANG_MonCommSQL?>, <i>variables reemplazadas/vars replaced</i>):<br></font>
+    				<?php 
+                		//Si no hay SQL explicito entonces Genera la consulta en SQL para el informe a partir de los parametros
+                		if (strlen($registro_informe["consulta_sql"])<5)
+                		    echo PCO_ConstruirConsultaInforme($registro_informe['id'],0);
+                		else
+                		    echo PCO_ReemplazarVariablesPHPEnCadena($registro_informe["consulta_sql"]);
+    				 ?>
+                </div>
 			<?php
 				PCO_CerrarVentana();
 			?>

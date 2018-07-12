@@ -775,7 +775,7 @@
 	$MULTILANG_InfActualizar='Refresh Report';
 	$MULTILANG_InfVistaPrev='Report Preview';
 	$MULTILANG_InfCargaPrev='Load preview';
-	$MULTILANG_InfHlpCarga='This option will close the design mode <br> and will show you the report as it will be displayed <br> to a user of the application';
+	$MULTILANG_InfHlpCarga='This option will close the design mode and will show you the report as it will be displayed to a user of the application';
 	$MULTILANG_InfErrInforme1='You must enter a valid title for the report.';
 	$MULTILANG_InfErrInforme2='Please specify a valid name for the category associated with report.';
 	$MULTILANG_InfTituloAgr='Add new report or chart';

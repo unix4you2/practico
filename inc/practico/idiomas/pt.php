@@ -775,7 +775,7 @@
 	$MULTILANG_InfActualizar='Atualizar relat&oacute;rio';
 	$MULTILANG_InfVistaPrev='Antevisão';
 	$MULTILANG_InfCargaPrev='Carga de pr&eacute;-visualização';
-	$MULTILANG_InfHlpCarga='Esta opção ir&aacute; fechar o modo de design <br> e ir&aacute; mostrar-lhe o relat&oacute;rio como ele ser&aacute; exibido <br> a um utilizador da aplicação';
+	$MULTILANG_InfHlpCarga='Esta opção ir&aacute; fechar o modo de design e ir&aacute; mostrar-lhe o relat&oacute;rio como ele ser&aacute; exibido a um utilizador da aplicação';
 	$MULTILANG_InfErrInforme1='Você deve digitar um t&iacute;tulo v&aacute;lido para o relat&oacute;rio.';
 	$MULTILANG_InfErrInforme2='Por favor, indique um nome v&aacute;lido para a categoria associada com o relat&oacute;rio.';
 	$MULTILANG_InfTituloAgr='Adicionar um novo relat&oacute;rio ou gr&aacute;fico';
