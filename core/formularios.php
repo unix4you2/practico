@@ -241,10 +241,10 @@
 			
 			//Define valores de postacciones y campos de transporte de datos adicionales para redireccion de flujos de aplicacion cuando aplica 
 			if (@$PCO_PostAccion=="" || !defined('PCO_PostAccion')) $PCO_PostAccion="Ver_menu"; //Por defecto va al menu principal si no hay postaccion definida
-			if (@$PCO_NombreCampoTransporte1=="" || !defined('PCO_NombreCampoTransporte1')) $PCO_PostAccion="PCO_NombreCampoTransporte1"; //Por defecto va al menu principal si no hay postaccion definida
-			if (@$PCO_ValorCampoTransporte1==""  || !defined('PCO_ValorCampoTransporte1'))  $PCO_PostAccion="PCO_ValorCampoTransporte1"; //Por defecto va al menu principal si no hay postaccion definida
-			if (@$PCO_NombreCampoTransporte2=="" || !defined('PCO_NombreCampoTransporte2')) $PCO_PostAccion="PCO_NombreCampoTransporte2"; //Por defecto va al menu principal si no hay postaccion definida
-			if (@$PCO_ValorCampoTransporte2==""  || !defined('PCO_ValorCampoTransporte2'))  $PCO_PostAccion="PCO_ValorCampoTransporte2"; //Por defecto va al menu principal si no hay postaccion definida
+			if (@$PCO_NombreCampoTransporte1=="" || !defined('PCO_NombreCampoTransporte1')) $PCO_NombreCampoTransporte1="PCO_NombreCampoTransporte1";
+			if (@$PCO_ValorCampoTransporte1==""  || !defined('PCO_ValorCampoTransporte1'))  $PCO_ValorCampoTransporte1="PCO_ValorCampoTransporte1";
+			if (@$PCO_NombreCampoTransporte2=="" || !defined('PCO_NombreCampoTransporte2')) $PCO_NombreCampoTransporte2="PCO_NombreCampoTransporte2";
+			if (@$PCO_ValorCampoTransporte2==""  || !defined('PCO_ValorCampoTransporte2'))  $PCO_ValorCampoTransporte2="PCO_ValorCampoTransporte2";
 
 			$mensaje_error="";
 
@@ -402,7 +402,7 @@
 
 					if ($errores_de_carga=="")
 						//echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
-						echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						echo '<form name="PCO_FormContinuarFlujo_GuardarDatos" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
 						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
 						<input type="Hidden" name="'.$PCO_NombreCampoTransporte2.'" value="'.$PCO_ValorCampoTransporte2.'">
@@ -412,10 +412,9 @@
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion).'">
                         <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
-						</form>
-						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+						</form>';
 					else
-						echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						echo '<form name="PCO_FormContinuarFlujo_GuardarDatos" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
 						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
 						<input type="Hidden" name="'.$PCO_NombreCampoTransporte2.'" value="'.$PCO_ValorCampoTransporte2.'">
@@ -425,12 +424,11 @@
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
                         <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
-						</form>
-						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+						</form>';
 				}
 			else
 				{
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					echo '<form name="PCO_FormContinuarFlujo_GuardarDatos" action="'.$ArchivoCORE.'" method="POST">
 						<!-- <input type="Hidden" name="PCO_Accion" value="editar_formulario"> -->
 						<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
 						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
@@ -441,9 +439,10 @@
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
                         <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
-						</form>
-						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+						</form>';
 				}
+            //Redirecciona al siguiente flujo de aplicacion
+			echo '<script type="" language="JavaScript"> document.PCO_FormContinuarFlujo_GuardarDatos.submit();  </script>';
 		}
 
 
