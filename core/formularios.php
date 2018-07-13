@@ -238,13 +238,13 @@
 	if ($PCO_Accion=="guardar_datos_formulario")
 		{
 			// POR CORREGIR:  Si el diseno cuenta con varios campos que ven hacia un mismo campo de base de datos el query no es valido
-			
+
 			//Define valores de postacciones y campos de transporte de datos adicionales para redireccion de flujos de aplicacion cuando aplica 
-			if (@$PCO_PostAccion=="" || !defined('PCO_PostAccion')) $PCO_PostAccion="Ver_menu"; //Por defecto va al menu principal si no hay postaccion definida
-			if (@$PCO_NombreCampoTransporte1=="" || !defined('PCO_NombreCampoTransporte1')) $PCO_NombreCampoTransporte1="PCO_NombreCampoTransporte1";
-			if (@$PCO_ValorCampoTransporte1==""  || !defined('PCO_ValorCampoTransporte1'))  $PCO_ValorCampoTransporte1="PCO_ValorCampoTransporte1";
-			if (@$PCO_NombreCampoTransporte2=="" || !defined('PCO_NombreCampoTransporte2')) $PCO_NombreCampoTransporte2="PCO_NombreCampoTransporte2";
-			if (@$PCO_ValorCampoTransporte2==""  || !defined('PCO_ValorCampoTransporte2'))  $PCO_ValorCampoTransporte2="PCO_ValorCampoTransporte2";
+			if (@$PCO_PostAccion=="") $PCO_PostAccion="Ver_menu"; //Por defecto va al menu principal si no hay postaccion definida
+			if (@$PCO_NombreCampoTransporte1=="") $PCO_NombreCampoTransporte1="PCO_NombreCampoTransporte1";
+			if (@$PCO_ValorCampoTransporte1=="" )  $PCO_ValorCampoTransporte1="PCO_ValorCampoTransporte1";
+			if (@$PCO_NombreCampoTransporte2=="") $PCO_NombreCampoTransporte2="PCO_NombreCampoTransporte2";
+			if (@$PCO_ValorCampoTransporte2=="" )  $PCO_ValorCampoTransporte2="PCO_ValorCampoTransporte2";
 
 			$mensaje_error="";
 
