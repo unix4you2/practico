@@ -81,6 +81,13 @@
 						{
 							//Evalua si fueron enviados parametros adicionales
 							if (@$partes_objeto[2]!="") $en_ventana=$partes_objeto[2];
+
+                            //Si detecta que se trata del form interno para edicion de menues agrega funciones extra
+                            if ($partes_objeto[1]=="-12")
+                                {
+                                    PCO_SelectorIconosAwesome();
+                                    selector_objetos_menu();
+                                }
 							PCO_CargarFormulario($partes_objeto[1],@$en_ventana,@$PCO_CampoBusquedaBD,@$PCO_ValorBusquedaBD);
 						}
 					//Si es un informe lo llama con sus parámetros

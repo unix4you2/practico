@@ -33,74 +33,6 @@
 
 /* ################################################################## */
 /* ################################################################## */
-/*
-	Function: selector_objetos_menu
-	Despliega marco para seleccionar objetos de formulario e informes durante creacion de menues
-
-	Ver tambien:
-
-		<PCOFUNC_AdministrarMenu> | <detalles_menu>
-*/
-function selector_objetos_menu()
-    {
-        global $MULTILANG_SeleccioneUno,$MULTILANG_Formularios,$MULTILANG_MnuHlpComandoInf,$MULTILANG_Si,$MULTILANG_No,$MULTILANG_Informes,$MULTILANG_FrmVentana,$MULTILANG_Guardar,$MULTILANG_Cerrar;
-        global $ListaCamposSinID_formulario,$ListaCamposSinID_informe,$TablasCore;
-        global $registro_informes;
-        ?>
-            <!-- Modal Selector de objetos -->
-            <div class="modal fade" id="myModalSelectorObjetos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_SeleccioneUno; ?></h4>
-                  </div>
-                  <div class="modal-body mdl-primary">
-                      
-                    <form name="selector_objetos" method="POST">
-
-                        <label for="objeto_seleccionado"><?php echo $MULTILANG_Formularios; ?> / <?php echo $MULTILANG_Informes; ?>:</label>
-                        <select id="objeto_seleccionado" name="objeto_seleccionado" class="form-control" >
-                            <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
-                            <optgroup label="<?php echo $MULTILANG_Formularios; ?>">
-                                <?php
-                                    $consulta_forms=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id>=0 ORDER BY titulo");
-                                    while($registro_forms = $consulta_forms->fetch())
-                                        echo '<option value="frm:'.$registro_forms["id"].'">(Id.'.$registro_forms["id"].') '.$registro_forms["titulo"].'</option>';
-                                ?>
-                            </optgroup>
-                            <optgroup label="<?php echo $MULTILANG_Informes; ?>">
-                                <?php
-                                    $consulta_informs=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id>=0 ORDER BY titulo");
-                                    while($registro_informes = $consulta_informs->fetch())
-                                        echo '<option value="inf:'.$registro_informes["id"].'">(Id.'.$registro_informes["id"].') '.$registro_informes["titulo"].'</option>';
-                                ?>
-                            </optgroup>
-                        </select>
-
-                        <label for="definir_ventana_propia"><?php echo $MULTILANG_FrmVentana; ?></label>
-                        <select id="definir_ventana_propia" name="definir_ventana_propia" class="form-control" >
-                            <option value=":1"><?php echo $MULTILANG_Si; ?></option>
-                            <option value=":0"><?php echo $MULTILANG_No; ?></option>
-                        </select>
-                        <br>
-                        <?php echo $MULTILANG_MnuHlpComandoInf; ?>
-                    </form>
-            
-                  </div>
-                  <div class="modal-footer">
-                    <button onClick="document.datos.comando.value=document.selector_objetos.objeto_seleccionado.options[document.selector_objetos.objeto_seleccionado.selectedIndex].value + document.selector_objetos.definir_ventana_propia.options[document.selector_objetos.definir_ventana_propia.selectedIndex].value;" type="button" class="btn btn-success" data-dismiss="modal"><?php echo $MULTILANG_Guardar; ?></button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-<?php        
-    }
-
-
-/* ################################################################## */
-/* ################################################################## */
 if ($PCO_Accion=="eliminar_menu")
 	{
 		/*
@@ -224,12 +156,11 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
             PCO_FormularioActivoEdicionMenu="'.$PCO_FormularioActivoEdicionMenu.'";
         </script>';
 
-
-		$PCO_Accion=PCO_EscaparContenido($PCO_Accion); //Limpia cadena para evitar XSS
-		echo '<div align="center"><br>';
-
         PCO_SelectorIconosAwesome();
         selector_objetos_menu();
+        
+		$PCO_Accion=PCO_EscaparContenido($PCO_Accion); //Limpia cadena para evitar XSS
+		echo '<div align="center"><br>';
 
     	//Si encuentra un formulario activo agrega enlace para navegar hasta el
     	if ($PCO_FormularioActivoEdicionMenu!="" && $PCO_FormularioActivoEdicionMenu!="0")

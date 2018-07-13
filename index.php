@@ -218,7 +218,6 @@
     if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCOSESS_SesionAbierta && $PCO_Accion=="Ver_menu")
         include_once 'core/marco_admin.php';
 
-
 /* ################################################################## */
     // Cuando no se tiene ninguna accion para procesar se carga la pagina de inicio de sesion
     if ($PCO_Accion=="" && $PCOSESS_SesionAbierta==0) PCO_VentanaLogin();
@@ -228,12 +227,12 @@
         include "core/informes.php";
     if ($PCO_Accion=="guardar_usuario_autoregistro" || $PCO_Accion=="agregar_usuario_autoregistro" || $PCO_Accion=="copiar_informes" || $PCO_Accion=="guardar_perfil_usuario" || $PCO_Accion=="actualizar_perfil_usuario" || $PCO_Accion=="recuperar_contrasena" || $PCO_Accion=="resetear_clave" || $PCO_Accion=="PCO_PanelAuditoriaMovimientos" || $PCO_Accion=="ver_seguimiento_general" || $PCO_Accion=="ver_seguimiento_especifico" || $PCO_Accion=="actualizar_clave" || $PCO_Accion=="cambiar_clave" || $PCO_Accion=="agregar_usuario" || $PCO_Accion=="guardar_usuario" || $PCO_Accion=="listar_usuarios" || $PCO_Accion=="eliminar_usuario" || $PCO_Accion=="cambiar_estado_usuario" || $PCO_Accion=="permisos_usuario" || $PCO_Accion=="agregar_permiso" || $PCO_Accion=="eliminar_permiso" || $PCO_Accion=="informes_usuario" || $PCO_Accion=="agregar_informe_usuario" || $PCO_Accion=="eliminar_informe_usuario" || $PCO_Accion=="copiar_permisos")
         include "core/usuarios.php";
-    if ($PCO_Accion=="buscar_permisos_practico" || $PCO_Accion=="Ver_menu" || $PCO_Accion=="PCOFUNC_AdministrarMenu" || $PCO_Accion=="eliminar_menu")
-        include "core/menus.php";
     if ($PCO_Accion=="ejecutar_importacion_csv" || $PCO_Accion=="escogertabla_importacion_csv" || $PCO_Accion=="analizar_importacion_csv" || $PCO_Accion== "confirmar_importacion_tabla" || $PCO_Accion== "importar_tabla" || $PCO_Accion== "copiar_tabla" || $PCO_Accion== "definir_copia_tablas" || $PCO_Accion=="guardar_crear_tabla_asistente" || $PCO_Accion=="asistente_tablas" || $PCO_Accion=="administrar_tablas" || $PCO_Accion=="guardar_crear_tabla" || $PCO_Accion=="eliminar_tabla" || $PCO_Accion=="editar_tabla" || $PCO_Accion=="guardar_crear_campo" || $PCO_Accion=="eliminar_campo")
         include "core/tablas.php";
     if ($PCO_Accion=="eliminar_evento_objeto" || $PCO_Accion=="editar_evento_objeto" || $PCO_Accion=="actualizar_java_evento" || $PCO_Accion=="confirmar_importacion_formulario" || $PCO_Accion=="analizar_importacion_formulario" || $PCO_Accion=="importar_formulario" || $PCO_Accion=="definir_copia_formularios" || $PCO_Accion=="actualizar_datos_formulario" || $PCO_Accion=="actualizar_formulario" || $PCO_Accion=="copiar_formulario" || $PCO_Accion=="actualizar_campo_formulario" || $PCO_Accion=="administrar_formularios" || $PCO_Accion=="guardar_formulario" || $PCO_Accion=="eliminar_formulario" || $PCO_Accion=="editar_formulario" || $PCO_Accion=="guardar_campo_formulario" || $PCO_Accion=="eliminar_campo_formulario" || $PCO_Accion=="guardar_accion_formulario" || $PCO_Accion=="eliminar_accion_formulario" || $PCO_Accion=="guardar_datos_formulario" || $PCO_Accion=="eliminar_datos_formulario")
         include "core/formularios.php";
+    if ($PCO_Accion=="buscar_permisos_practico" || $PCO_Accion=="Ver_menu" || $PCO_Accion=="PCOFUNC_AdministrarMenu" || $PCO_Accion=="eliminar_menu")
+        include "core/menus.php";
     if ($PCO_Accion=="Iniciar_login" || $PCO_Accion=="Terminar_sesion" || $PCO_Accion=="Mensaje_cierre_sesion")
         include "core/sesion.php";
     if ($PCO_Accion=="cargar_objeto" || $PCO_Accion=="guardar_configuracion" || $PCO_Accion=="PCO_GuardarConfiguracionOAuth" || $PCO_Accion=="exportacion_masiva_objetos")
