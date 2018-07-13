@@ -497,6 +497,7 @@ function PCO_EliminarFormulario($formulario="")
 				
 				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario=? ","$formulario");
 				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
+				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."menu WHERE formulario_vinculado=? ","$formulario");
 				PCO_Auditar("Elimina formulario $formulario");
 			}				
 	}
@@ -2482,7 +2483,7 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "definir_copia_formularios")			$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
 		if ($PCO_Accion== "actualizar_campo_formulario")		$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
 		if ($PCO_Accion== "guardar_formulario")					$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "eliminar_formulario")				$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "PCO_EliminarFormulario")				$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
 		if ($PCO_Accion== "editar_formulario")					$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
 		if ($PCO_Accion== "guardar_campo_formulario")			$retorno = PCO_PermisoAgregadoAccion("editar_formulario");
 		if ($PCO_Accion== "eliminar_campo_formulario")			$retorno = PCO_PermisoAgregadoAccion("editar_formulario");
@@ -7960,4 +7961,3 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
             PCO_Mensaje($MULTILANG_MonCommSQL, $consulta, '', 'fa fa-fw fa-2x fa-database', 'alert alert-info alert-dismissible ');
 
 	}
-	

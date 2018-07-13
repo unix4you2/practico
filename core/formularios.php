@@ -2681,7 +2681,7 @@ if ($PCO_Accion=="editar_formulario")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: eliminar_formulario
+	Function: PCO_EliminarFormulario
 	Alias de paso para PCO_EliminarFormulario
 
 	Variables de entrada:
@@ -2694,7 +2694,7 @@ if ($PCO_Accion=="editar_formulario")
 	Ver tambien:
 		<administrar_formularios>
 */
-	if ($PCO_Accion=="eliminar_formulario")
+	if ($PCO_Accion=="PCO_EliminarFormulario")
 		{
 	        if ($formulario=="") $formulario=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
 			PCO_EliminarFormulario($formulario);
