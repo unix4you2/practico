@@ -6442,7 +6442,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		if ($en_ventana) PCO_AbrirVentana(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["titulo"]).$ComplementoTituloFormulario.$ComplementoIdObjetoEnTitulo,'panel-primary','',$barra_herramientas_mini);
 
         //Busca las posibles opciones de menu agregadas al formulario
-        $RegistroCantidadMenues=PCO_EjecutarSQL("SELECT COUNT(*) as CantidadMenues FROM ".$TablasCore."menu WHERE formulario='$formulario'")->fetch();
+        $RegistroCantidadMenues=PCO_EjecutarSQL("SELECT COUNT(*) as CantidadMenues FROM ".$TablasCore."menu WHERE formulario_vinculado='$formulario'")->fetch();
         if ($RegistroCantidadMenues["CantidadMenues"]>0)
             {
         		echo '<!-- Boton expansible para menu en dispositivos moviles -->
@@ -6453,7 +6453,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
     						</button>
     					</div>
             		    <div class="collapse navbar-collapse" id="MENU_FORMULARIO_'.$formulario.'">';
-                            $resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu WHERE formulario='$formulario' ORDER BY peso");
+                            $resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu WHERE formulario_vinculado='$formulario' ORDER BY peso");
                             while($registro = $resultado->fetch())
                                 PCO_ImprimirOpcionMenu($registro,'formulario');
         		echo '  </div>
