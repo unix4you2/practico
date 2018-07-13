@@ -354,34 +354,34 @@
 
     <?php
         //Si se requiere selector de iconos genera los eventos
-        if (@$PCO_Accion=="PCOFUNC_AdministrarMenu" || @$PCO_Accion=="detalles_menu")
+        if (@$PCO_Accion=="PCOFUNC_AdministrarMenu")
             {
     ?>
         <script language="JavaScript">
             //Crea evento para el selector de iconos (cuando aplica)
             $('#lib_glyphicon').iconpicker().on('change', function(e) {
-                document.datos.imagen.value='glyphicon '+e.icon;
+                document.PCO_FormItemMenu.imagen.value='glyphicon '+e.icon;
             });
             $('#lib_ionicon').iconpicker().on('change', function(e) {
-                document.datos.imagen.value='fa '+e.icon;
+                document.PCO_FormItemMenu.imagen.value='fa '+e.icon;
             });
             $('#lib_fontawesome').iconpicker().on('change', function(e) {
-                document.datos.imagen.value='fa '+e.icon;
+                document.PCO_FormItemMenu.imagen.value='fa '+e.icon;
             });
             $('#lib_weathericon').iconpicker().on('change', function(e) {
-                document.datos.imagen.value='wi fa '+e.icon;
+                document.PCO_FormItemMenu.imagen.value='wi fa '+e.icon;
             });
             $('#lib_mapicon').iconpicker().on('change', function(e) {
-                document.datos.imagen.value=e.icon;
+                document.PCO_FormItemMenu.imagen.value=e.icon;
             });
             $('#lib_octicon').iconpicker().on('change', function(e) {
-                document.datos.imagen.value='octicon '+e.icon;
+                document.PCO_FormItemMenu.imagen.value='octicon '+e.icon;
             });
             $('#lib_typicon').iconpicker().on('change', function(e) {
-                document.datos.imagen.value='typcn fa '+e.icon;
+                document.PCO_FormItemMenu.imagen.value='typcn fa '+e.icon;
             });
             $('#lib_elusiveicon').iconpicker().on('change', function(e) {
-                document.datos.imagen.value=e.icon;
+                document.PCO_FormItemMenu.imagen.value=e.icon;
             });
         </script>
     <?php
