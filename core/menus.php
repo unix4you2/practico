@@ -91,18 +91,32 @@ function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0)
 				echo '	<td><font color=lightgray>'.$registro["id"].'</font></td>
 						<td style="padding-left:'.$Sangria.'px;" nowrap><i class="'.$registro["imagen"].' fa-2x"></i> <strong>'.$registro["texto"].'</strong></td>
 						<td>'.$registro["comando"].'</td>
-						<td align=center>';
-						    if ($registro["posible_arriba"]==1) echo '<i class="fa fa-check-circle fa-fw fa-2x text-info"></i>';
-				echo    '</td>
-				         <td align=center>';
-						    if ($registro["posible_escritorio"]==1) echo '<i class="fa fa-check-circle fa-fw fa-2x text-info"></i>';
-				echo    '</td>
-				         <td align=center>';
-						    if ($registro["posible_centro"]==1) echo '<i class="fa fa-check-circle fa-fw fa-2x text-info"></i>';
-				echo    '</td>
-				          <td align=center>';
-						    if ($registro["posible_izquierda"]==1) echo '<i class="fa fa-check-circle fa-fw fa-2x text-info"></i>';
-				echo    '</td>
+						<td align=center>'.$registro["peso"].'</td>';
+						
+				if ($PCO_FormularioActivoEdicionMenu=="0" && $Sangria==0)
+				    {
+				        echo '<td align=center>';
+        						    if ($registro["posible_arriba"]==1) echo '<i class="fa fa-check-circle fa-fw fa-2x text-info"></i>';
+        				echo    '</td>
+        				         <td align=center>';
+        						    if ($registro["posible_escritorio"]==1) echo '<i class="fa fa-check-circle fa-fw fa-2x text-info"></i>';
+        				echo    '</td>
+        				         <td align=center>';
+        						    if ($registro["posible_centro"]==1) echo '<i class="fa fa-check-circle fa-fw fa-2x text-info"></i>';
+        				echo    '</td>
+        				          <td align=center>';
+        						    if ($registro["posible_izquierda"]==1) echo '<i class="fa fa-check-circle fa-fw fa-2x text-info"></i>';
+        				echo    '</td>';
+				    }
+				if ($PCO_FormularioActivoEdicionMenu=="0" && $Sangria!=0)
+				    {
+				        echo '<td align=center style="font-size:9px; color:gray;">Ver padre/See parent</td>
+        				      <td align=center style="font-size:9px; color:gray;">Ver padre/See parent</td>
+        				      <td align=center style="font-size:9px; color:gray;">Ver padre/See parent</td>
+        				      <td align=center style="font-size:9px; color:gray;">Ver padre/See parent</td>';
+				    }
+
+				echo '
 						<td align="center">
 							<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
 								<input type="hidden" name="PCO_Accion" value="eliminar_menu">
@@ -178,10 +192,13 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 				<td><b>Id</b></td>
 				<td nowrap><b>'.$MULTILANG_MnuTexto.'</b></td>
 				<td><b>'.$MULTILANG_MnuComando.'</b></td>
-				<td align=center><b>'.$MULTILANG_MnuArriba.'</b></td>
-				<td align=center><b>'.$MULTILANG_MnuEscritorio.'</b></td>
-				<td align=center><b>'.$MULTILANG_MnuCentro.'</b></td>
-				<td align=center><b>'.$MULTILANG_MnuIzquierda.'</b></td>
+				<td align=center><b>'.$MULTILANG_Peso.'</b></td>';
+				if ($PCO_FormularioActivoEdicionMenu=="0")
+        			echo '<td align=center><b>'.$MULTILANG_MnuArriba.'</b></td>
+        				<td align=center><b>'.$MULTILANG_MnuEscritorio.'</b></td>
+        				<td align=center><b>'.$MULTILANG_MnuCentro.'</b></td>
+        				<td align=center><b>'.$MULTILANG_MnuIzquierda.'</b></td>';
+		        echo '		
 				<td></td>
 				<td></td>
 			</tr>
