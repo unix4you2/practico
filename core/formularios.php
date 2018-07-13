@@ -2460,6 +2460,11 @@ if ($PCO_Accion=="editar_formulario")
                             <i class="fa fa-pencil-square-o fa-3x fa-fw"></i>
                     </a>
     			<br>
+    			Menu(s)<br>
+                    <a data-toggle="modal" href="javascript:document.PCOFUNC_AdministrarMenu.PCO_FormularioActivoEdicionMenu.value='.$formulario.'; document.PCOFUNC_AdministrarMenu.submit();" title="'.$MULTILANG_Editar.'">
+                            <i class="fa fa-bars fa-3x fa-fw"></i>
+                    </a>
+    			<br>
     			<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="PCO_Accion" value="administrar_formularios"></form>
                 <button type="button" class="btn btn-danger btn-xs" onclick="document.cancelar.submit()">'.$MULTILANG_FrmVolverLista.'</button>
                 <br><br>

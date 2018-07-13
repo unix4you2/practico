@@ -127,7 +127,11 @@ if ($PCO_Accion=="eliminar_menu")
 		// Elimina el enlace para todos los usuarios que utilizan esa opcion
 		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? ","$id");
 		PCO_Auditar("Elimina en menu $id");
-		echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+        //Redirecciona nuevamente a la edicion del menu
+		echo '<script type="" language="JavaScript">
+		    document.PCOFUNC_AdministrarMenu.PCO_FormularioActivoEdicionMenu.value='.$PCO_FormularioActivoEdicionMenu.';
+		    document.PCOFUNC_AdministrarMenu.submit();
+		    </script>';
 	}
 
 
@@ -147,7 +151,7 @@ if ($PCO_Accion=="eliminar_menu")
 */
 function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0)
     {
-        global $TablasCore,$ListaCamposSinID_menu,$MULTILANG_MnuAdvElimina,$MULTILANG_Editar,$MULTILANG_Eliminar,$ArchivoCORE;
+        global $PCO_FormularioActivoEdicionMenu,$TablasCore,$ListaCamposSinID_menu,$MULTILANG_MnuAdvElimina,$MULTILANG_Editar,$MULTILANG_Eliminar,$ArchivoCORE;
 		$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE 1=1 AND $CondicionFiltrado ");
 		while($registro = $resultado->fetch())
 			{
@@ -170,6 +174,7 @@ function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0)
 						<td align="center">
 							<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
 								<input type="hidden" name="PCO_Accion" value="eliminar_menu">
+								<input type="hidden" name="PCO_FormularioActivoEdicionMenu" value="'.$PCO_FormularioActivoEdicionMenu.'">
 								<input type="hidden" name="id" value="'.$registro["id"].'">
                                 <a href="javascript:confirmar_evento(\''.$MULTILANG_MnuAdvElimina.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
 							</form>
@@ -178,6 +183,7 @@ function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0)
 							<form action="'.$ArchivoCORE.'" method="POST">
 								<input type="hidden" name="PCO_Accion" value="cargar_objeto">
 								<input type="hidden" name="objeto" value="frm:-12:1:id:'.$registro["id"].'">
+								<input type="hidden" name="PCO_FormularioActivoEdicionMenu" value="'.$PCO_FormularioActivoEdicionMenu.'">
 								<input type="hidden" name="id" value="'.$registro["id"].'">
                                 <button type="submit" class="btn btn-warning btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i></button>
 							</form>
@@ -196,6 +202,9 @@ function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0)
 			Function: PCOFUNC_AdministrarMenu
 			Presenta la lista de todas las opciones definidas para el menu de usuarios con la posibilidad de agregar nuevas o de administrar las existentes. Incluye la carga de imagenes dentro de marco oculto para su seleccion como iconos.
 
+			FormularioActivo:
+				Identificador del formulario del cual se esta editando las entradas del menu
+
 			(start code)
 				SELECT * FROM ".$TablasCore."menu WHERE 1
 			(end)
@@ -208,13 +217,26 @@ function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0)
 		*/
 if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 	{
+        //Determina el filtro a aplicar dependiendo si es edicion de menu general o de un formulario especifico
+        if ($PCO_FormularioActivoEdicionMenu=="") $PCO_FormularioActivoEdicionMenu=0;
+        //Genera equivalente JS para validaciones
+        echo '<script language="javascript">
+            PCO_FormularioActivoEdicionMenu="'.$PCO_FormularioActivoEdicionMenu.'";
+        </script>';
+
+
 		$PCO_Accion=PCO_EscaparContenido($PCO_Accion); //Limpia cadena para evitar XSS
 		echo '<div align="center"><br>';
 
         PCO_SelectorIconosAwesome();
         selector_objetos_menu();
 
-    	//function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno=0)
+    	//Si encuentra un formulario activo agrega enlace para navegar hasta el
+    	if ($PCO_FormularioActivoEdicionMenu!="" && $PCO_FormularioActivoEdicionMenu!="0")
+            echo '<a class="btn btn-warning btn-lg" href="index.php?PCO_Accion=editar_formulario&popup_activo=&formulario='.$PCO_FormularioActivoEdicionMenu.'">
+                    <div><i class="fa fa-pencil-square"></i> <b>'.$MULTILANG_Ir.'</b>: '.$MULTILANG_Editar.' '.$MULTILANG_Formularios.' <i>[ID='.$PCO_FormularioActivoEdicionMenu.']</i> >>></div>
+                </a><br><br>';
+    	
         PCO_CargarFormulario("-12",1,"","",0,0); //Cargar el form
 
 		PCO_AbrirVentana($MULTILANG_MnuDefinidos, 'panel-warning');
@@ -234,7 +256,8 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 			</tr>
             </thead>
             <tbody>';
-                PCO_PresentarOpcionesArbolMenu('padre=0 AND formulario=0',0);
+        
+                PCO_PresentarOpcionesArbolMenu('padre=0 AND formulario='.$PCO_FormularioActivoEdicionMenu,0);
 		echo '</tbody>
         </table>';
 		 PCO_CerrarVentana();
