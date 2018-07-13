@@ -106,6 +106,7 @@ El nombre del marco especial sobre formularios llamado MARCO_IMPRESION ha sido g
 * Added: Se permite saltar entre el diseño de un campo y el diseño general del formulario mediante un botón en la barra de herramientas inferior.
 * Added: Posibilidad de agregar subtítulos como parámetros extra sobre la función de diálogos modales.
 * Added: Generalizacion del nombre de marco de impresion de cada formulario a PCO_MarcoImpresionXX permitiendo múltiples marcos sobre una misma carga de página.
+* Added: Durante el almacenamiento de datos de formulario se permite definir variables y valores para redireccionar el flujo de la aplicacion bajo los siguientes nombres: PCO_PostAccion, PCO_NombreCampoTransporte1, PCO_ValorCampoTransporte1, PCO_NombreCampoTransporte2, PCO_ValorCampoTransporte2
 * Enhan: Los contenedores de pestañas (tab-pane) en formularios son generados unicamente cuando se tiene más de una pestaña.  En los otros casos no es necesario.  Con eso se evita la creacion innecesaria de elementos con ID html PCO_PestanaFormulario_XX innecesarios.
 * Enhan: Renombrado de funciones internas
 * Enhan: Generalizacion y optimizacion de funcion encargada de la impresion de opciones de menu.

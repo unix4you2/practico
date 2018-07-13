@@ -238,6 +238,13 @@
 	if ($PCO_Accion=="guardar_datos_formulario")
 		{
 			// POR CORREGIR:  Si el diseno cuenta con varios campos que ven hacia un mismo campo de base de datos el query no es valido
+			
+			//Define valores de postacciones y campos de transporte de datos adicionales para redireccion de flujos de aplicacion cuando aplica 
+			if (@$PCO_PostAccion=="" || !defined('PCO_PostAccion')) $PCO_PostAccion="Ver_menu"; //Por defecto va al menu principal si no hay postaccion definida
+			if (@$PCO_NombreCampoTransporte1=="" || !defined('PCO_NombreCampoTransporte1')) $PCO_PostAccion="PCO_NombreCampoTransporte1"; //Por defecto va al menu principal si no hay postaccion definida
+			if (@$PCO_ValorCampoTransporte1==""  || !defined('PCO_ValorCampoTransporte1'))  $PCO_PostAccion="PCO_ValorCampoTransporte1"; //Por defecto va al menu principal si no hay postaccion definida
+			if (@$PCO_NombreCampoTransporte2=="" || !defined('PCO_NombreCampoTransporte2')) $PCO_PostAccion="PCO_NombreCampoTransporte2"; //Por defecto va al menu principal si no hay postaccion definida
+			if (@$PCO_ValorCampoTransporte2==""  || !defined('PCO_ValorCampoTransporte2'))  $PCO_PostAccion="PCO_ValorCampoTransporte2"; //Por defecto va al menu principal si no hay postaccion definida
 
 			$mensaje_error="";
 
@@ -392,10 +399,13 @@
 					PCO_EjecutarSQLUnaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores_interrogantes.")",$lista_valores_concatenados);
 					PCO_Auditar("Inserta registro en ".$registro_formulario["tabla_datos"]);
 					//Si no hay errores en carga de archivos redirecciona normal, sino redirecciona con los errores
+
 					if ($errores_de_carga=="")
 						//echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
 						echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
+						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
+						<input type="Hidden" name="'.$PCO_NombreCampoTransporte2.'" value="'.$PCO_ValorCampoTransporte2.'">
 						<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
 						<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo).'">
@@ -406,7 +416,9 @@
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 					else
 						echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
+						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
+						<input type="Hidden" name="'.$PCO_NombreCampoTransporte2.'" value="'.$PCO_ValorCampoTransporte2.'">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$errores_de_carga.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -420,7 +432,9 @@
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 						<!-- <input type="Hidden" name="PCO_Accion" value="editar_formulario"> -->
-						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
+						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
+						<input type="Hidden" name="'.$PCO_NombreCampoTransporte2.'" value="'.$PCO_ValorCampoTransporte2.'">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">

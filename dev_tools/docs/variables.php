@@ -50,6 +50,12 @@
         $PCO_ErrorEstilo - Estilo BootStrap deseado [alert-info|alert-warning|alert-default|alert-primary|alert-success|alert-danger].  Cuando no se recibe un valor por defecto se utiliza el estilo CSS alert-danger
         $PCO_ErrorAutoclose - Intenta cerrar la ventana de trabajo actual despues de presentar un mensaje de error o informacion deterimnado en el escritorio.
         $PCO_ErrorDetener - Detiene la ejecucion del script justo despues de presentar un mensaje en el escritorio.  Util para presentar mensajes en fullscreen despues de ejecutar una operacion.
-        
-    */
 
+    Section: Variables de control de flujo del programa
+    Las variables se encuentran disponibles en el entorno global para ser utilizadas en diferentes funciones asi como pueden ser definidas mediante campos visibles u ocultos dentro de formularios para ser transportadas en su siguiente llamado.
+
+		$PCO_Accion - Define la accion que sera ejecutada en el momento.  Puede ser interna o personalizada
+		$PCO_PostAccion - Disponible en almacenamiento de datos de formulario permite redireccionar el flujo a otra accion diferente despues que la operacion es realizada.  Es decir, se convierte posteriormente en PCO_Accion
+		$PCO_ValorCampoTransporte1, $PCO_ValorCampoTransporte1, $PCO_NombreCampoTransporte2, $PCO_ValorCampoTransporte2 - Disponible en almacenamiento de datos de formulario permiten definir variables adicionales que serán pasadas a la siguiente acción. 
+
+    */
