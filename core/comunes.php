@@ -706,7 +706,7 @@ function PCO_ParsearListasElementos($ListaElementos)
 */
 function PCO_ImportarXMLFormulario($xml_importado)
     {
-        global $ListaCamposSinID_evento_objeto,$_SeparadorCampos_,$TablasCore,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
+        global $ListaCamposSinID_menu,$ListaCamposSinID_evento_objeto,$_SeparadorCampos_,$TablasCore,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
         $xml_importado = @simplexml_load_string($xml_importado); // Usa SimpleXML Directamente para interpretar cadena
 
 				//Si es tipo estatico elimina el formulario existente con el mismo ID
@@ -811,6 +811,30 @@ function PCO_ImportarXMLFormulario($xml_importado)
 						PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario_boton ($ListaCamposSinID_formulario_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 					}
 
+				//Determina cuantos campos tiene la tabla
+				$ArregloCampos=explode(',',$ListaCamposSinID_menu);
+				$TotalCampos=count($ArregloCampos);
+				// Registros de formulario_boton
+				for ($PCO_i=0;$PCO_i<$xml_importado->total_core_menu[0]->cantidad_objetos;$PCO_i++)
+					{
+						//Genera cadena de interrogantes y valores segun cantidad de campos
+						$CadenaInterrogantes='?'; //Agrega el primer interrogante
+						$CadenaValores=base64_decode($xml_importado->core_menu[$PCO_i]->texto);
+
+						for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
+							{
+								//Cadena de interrogantes
+								$CadenaInterrogantes.=',?';
+								//Cadena de valores (el campo No 2 corresponde al ID de formulario nuevo)
+								if ($PCOCampo!=16)
+									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_menu[$PCO_i]->$ArregloCampos[$PCOCampo]);
+								else
+									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
+							}
+						//Inserta el nuevo objeto al form
+						PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."menu ($ListaCamposSinID_menu) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+					}
+
         return $idObjetoInsertado;
     }
 
@@ -835,7 +859,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
 */
 function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArchivoXML="")
     {
-        global $ArchivoCORE,$ListaCamposSinID_evento_objeto,$_SeparadorCampos_,$TablasCore,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
+        global $ArchivoCORE,$ListaCamposSinID_evento_objeto,$_SeparadorCampos_,$TablasCore,$ListaCamposSinID_menu,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
         global $MULTILANG_ErrorDatos,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_FrmMsjCopia,$MULTILANG_FrmTipoCopiaExporta,$MULTILANG_FrmCopiaFinalizada,$MULTILANG_IrEscritorio,$MULTILANG_Descargar;
         global $PCO_VersionActual,$Nombre_Aplicacion,$Version_Aplicacion,$PCOSESS_LoginUsuario,$PCO_FechaOperacionGuiones,$PCO_HoraOperacionPuntos,$PCO_FechaOperacion,$PCO_HoraOperacion;
         global $MULTILANG_Editar,$MULTILANG_Objeto;
@@ -942,6 +966,33 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 									//Inserta el nuevo objeto al form
 									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario_boton ($ListaCamposSinID_formulario_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 								}
+							
+
+							//Determina cuantos campos tiene la tabla
+							$ArregloCampos=explode(',',$ListaCamposSinID_menu);
+							$TotalCampos=count($ArregloCampos);
+							// Registros de formulario_boton
+							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu WHERE formulario_vinculado=? AND padre=0 ORDER BY peso,id","$formulario");
+							while($registro = $consulta->fetch())
+								{
+									//Genera cadena de interrogantes y valores segun cantidad de campos
+									$CadenaInterrogantes='?'; //Agrega el primer interrogante
+									$CadenaValores=$registro[1];
+									for ($PCOCampo=1;$PCOCampo<$TotalCampos;$PCOCampo++)
+										{
+											//Cadena de interrogantes
+											$CadenaInterrogantes.=',?';
+											//Cadena de valores (el campo No 16 corresponde al ID de formulario nuevo)
+											if ($PCOCampo!=16)
+												$CadenaValores.=$_SeparadorCampos_.$registro[$PCOCampo+1];
+											else
+												$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
+										}
+									//Inserta los menues correspondientes al form
+									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."menu ($ListaCamposSinID_menu) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+								}
+
+							
 							PCO_Auditar("Crea copia $tipo_copia_objeto de formulario $formulario");
 							
 							//Presenta la ventana con informacion y enlace de descarga
@@ -1032,6 +1083,23 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							//Agrega el total de elementos y resetea contador para el siguiente
 									$Contenido_XML .= "
 	<total_core_formulario_boton><cantidad_objetos>$conteo_elementos_xml</cantidad_objetos></total_core_formulario_boton>";
+							$conteo_elementos_xml=0;
+
+							// Registros de menu
+							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu WHERE formulario_vinculado=? ORDER BY peso,id","$formulario");
+							while($registro = $consulta->fetch())
+								{
+									//Exporta la tabla de core_menu
+									$Contenido_XML .= "
+	<core_menu>";
+									$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_menu);                        
+							$Contenido_XML .= "
+	</core_menu>";
+									$conteo_elementos_xml++;
+								}
+							//Agrega el total de elementos y resetea contador para el siguiente
+									$Contenido_XML .= "
+	<total_core_menu><cantidad_objetos>$conteo_elementos_xml</cantidad_objetos></total_core_menu>";
 							$conteo_elementos_xml=0;
 
 							// Finaliza el archivo XML
@@ -2454,7 +2522,7 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		// Funciones en core/menus.php
 		if ($PCO_Accion== "Ver_menu")							$retorno = 1;
 		if ($PCO_Accion== "buscar_permisos_practico")			$retorno = 1;
-		if ($PCO_Accion== "eliminar_menu")						$retorno = PCO_PermisoAgregadoAccion("PCOFUNC_AdministrarMenu");
+		if ($PCO_Accion== "PCO_EliminarMenu")					$retorno = PCO_PermisoAgregadoAccion("PCOFUNC_AdministrarMenu");
 		// Funciones en core/tablas.php
 		if ($PCO_Accion== "asistente_tablas")					$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
 		if ($PCO_Accion== "guardar_crear_tabla_asistente")		$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
@@ -6513,7 +6581,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		if ($en_ventana) PCO_AbrirVentana(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["titulo"]).$ComplementoTituloFormulario.$ComplementoIdObjetoEnTitulo,'panel-primary','',$barra_herramientas_mini);
 
         //Busca las posibles opciones de menu agregadas al formulario
-        $RegistroCantidadMenues=PCO_EjecutarSQL("SELECT COUNT(*) as CantidadMenues FROM ".$TablasCore."menu WHERE formulario_vinculado='$formulario'")->fetch();
+        $RegistroCantidadMenues=PCO_EjecutarSQL("SELECT COUNT(*) as CantidadMenues FROM ".$TablasCore."menu WHERE formulario_vinculado='$formulario' AND padre=0")->fetch();
         if ($RegistroCantidadMenues["CantidadMenues"]>0)
             {
         		echo '<!-- Boton expansible para menu en dispositivos moviles -->
@@ -6524,7 +6592,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
     						</button>
     					</div>
             		    <div class="collapse navbar-collapse" id="MENU_FORMULARIO_'.$formulario.'">';
-                            $resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu WHERE formulario_vinculado='$formulario' ORDER BY peso");
+                            $resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu WHERE formulario_vinculado='$formulario' AND padre=0 ORDER BY peso");
                             while($registro = $resultado->fetch())
                                 PCO_ImprimirOpcionMenu($registro,'formulario');
         		echo '  </div>

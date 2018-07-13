@@ -33,10 +33,10 @@
 
 /* ################################################################## */
 /* ################################################################## */
-if ($PCO_Accion=="eliminar_menu")
+if ($PCO_Accion=="PCO_EliminarMenu")
 	{
 		/*
-			Function: eliminar_menu
+			Function: PCO_EliminarMenu
 			Elimina una opcion del menu, escritorio o demas ubicaciones definidas por el administrador incluyendo el vinculo a todos los usuarios que la tengan.
 
 			Variables de entrada:
@@ -56,8 +56,13 @@ if ($PCO_Accion=="eliminar_menu")
 		*/
 		// Elimina los datos de la opcion
 		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."menu WHERE id=? ","$id");
+
+		// Elimina opciones hijas
+		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."menu WHERE padre=? ","$id");
+		
 		// Elimina el enlace para todos los usuarios que utilizan esa opcion
 		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? ","$id");
+
 		PCO_Auditar("Elimina en menu $id");
         //Redirecciona nuevamente a la edicion del menu
 		echo '<script type="" language="JavaScript">
@@ -119,7 +124,7 @@ function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0)
 				echo '
 						<td align="center">
 							<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
-								<input type="hidden" name="PCO_Accion" value="eliminar_menu">
+								<input type="hidden" name="PCO_Accion" value="PCO_EliminarMenu">
 								<input type="hidden" name="PCO_FormularioActivoEdicionMenu" value="'.$PCO_FormularioActivoEdicionMenu.'">
 								<input type="hidden" name="id" value="'.$registro["id"].'">
                                 <a href="javascript:confirmar_evento(\''.$MULTILANG_MnuAdvElimina.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
@@ -159,7 +164,7 @@ function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0)
 				Listado de opciones de menu y formulario para creacion de nuevas
 
 			Ver tambien:
-			<guardar_menu> | <detalles_menu> | <eliminar_menu>
+			<guardar_menu> | <detalles_menu> | <PCO_EliminarMenu>
 		*/
 if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 	{

@@ -231,7 +231,7 @@
         include "core/tablas.php";
     if ($PCO_Accion=="eliminar_evento_objeto" || $PCO_Accion=="editar_evento_objeto" || $PCO_Accion=="actualizar_java_evento" || $PCO_Accion=="confirmar_importacion_formulario" || $PCO_Accion=="analizar_importacion_formulario" || $PCO_Accion=="importar_formulario" || $PCO_Accion=="definir_copia_formularios" || $PCO_Accion=="actualizar_datos_formulario" || $PCO_Accion=="actualizar_formulario" || $PCO_Accion=="copiar_formulario" || $PCO_Accion=="actualizar_campo_formulario" || $PCO_Accion=="administrar_formularios" || $PCO_Accion=="guardar_formulario" || $PCO_Accion=="PCO_EliminarFormulario" || $PCO_Accion=="editar_formulario" || $PCO_Accion=="guardar_campo_formulario" || $PCO_Accion=="eliminar_campo_formulario" || $PCO_Accion=="guardar_accion_formulario" || $PCO_Accion=="eliminar_accion_formulario" || $PCO_Accion=="guardar_datos_formulario" || $PCO_Accion=="eliminar_datos_formulario")
         include "core/formularios.php";
-    if ($PCO_Accion=="buscar_permisos_practico" || $PCO_Accion=="Ver_menu" || $PCO_Accion=="PCOFUNC_AdministrarMenu" || $PCO_Accion=="eliminar_menu")
+    if ($PCO_Accion=="buscar_permisos_practico" || $PCO_Accion=="Ver_menu" || $PCO_Accion=="PCOFUNC_AdministrarMenu" || $PCO_Accion=="PCO_EliminarMenu")
         include "core/menus.php";
     if ($PCO_Accion=="Iniciar_login" || $PCO_Accion=="Terminar_sesion" || $PCO_Accion=="Mensaje_cierre_sesion")
         include "core/sesion.php";

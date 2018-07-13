@@ -3085,6 +3085,15 @@ if ($PCO_Accion=="analizar_importacion_formulario")
 						</i></a>';
 				echo '</ul>';
 
+				//Recorre los core_menu
+				echo '<div class="btn btn-block btn-primary">'.$MULTILANG_OpcionesMenu.'</div><ul class="list-group">';
+				for ($PCO_i=0;$PCO_i<$xml_importado->total_core_menu[0]->cantidad_objetos;$PCO_i++)
+					echo '<a class="list-group-item">
+						<span class="badge">ID '.$MULTILANG_Objeto.': '.base64_decode($xml_importado->core_menu[$PCO_i]->id).'</span>
+						<b>'.base64_decode($xml_importado->core_menu[$PCO_i]->texto).'</b><i>
+						</i></a>';
+				echo '</ul>';
+
                 echo "<br><hr>";
                 //Agrega el boton de continuar solamente si no hay conflictos entre IDs
                 if ($existen_conflictos_entre_ids==0)
