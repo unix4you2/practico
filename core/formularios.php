@@ -60,6 +60,13 @@
 */
 	if ($PCO_Accion=="eliminar_datos_formulario")
 		{
+			//Define valores de postacciones y campos de transporte de datos adicionales para redireccion de flujos de aplicacion cuando aplica 
+			if (@$PCO_PostAccion=="") $PCO_PostAccion="Ver_menu"; //Por defecto va al menu principal si no hay postaccion definida
+			if (@$PCO_NombreCampoTransporte1=="") $PCO_NombreCampoTransporte1="PCO_NombreCampoTransporte1";
+			if (@$PCO_ValorCampoTransporte1=="" )  $PCO_ValorCampoTransporte1="PCO_ValorCampoTransporte1";
+			if (@$PCO_NombreCampoTransporte2=="") $PCO_NombreCampoTransporte2="PCO_NombreCampoTransporte2";
+			if (@$PCO_ValorCampoTransporte2=="" )  $PCO_ValorCampoTransporte2="PCO_ValorCampoTransporte2";
+			
 			$mensaje_error="";
 			// Busca datos del formulario
 			$consulta_formulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
@@ -79,9 +86,10 @@
 					//POSIBILIDAD DE REEMPLAZAR POR ESTE QUERY SI LA TABLA MANEJA CAMPO ID:  PCO_EjecutarSQLUnaria("DELETE FROM ".$tabla." WHERE id=$id_registro_datos ");
 					
 					PCO_Auditar("Elimina registro donde ".$campo." = ".$valor." en ".$tabla);
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_AccionDEPRECATED" value="editar_formulario">
-						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+						echo '<form name="PCO_FormContinuarFlujo_EliminarDatos" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
+						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
+						<input type="Hidden" name="'.$PCO_NombreCampoTransporte2.'" value="'.$PCO_ValorCampoTransporte2.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="popup_activo" value="FormularioCampos">
@@ -91,7 +99,7 @@
 						<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo).'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion).'">
-					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+					<script type="" language="JavaScript"> document.PCO_FormContinuarFlujo_EliminarDatos.submit();  </script>';
 				}
 		}
 
@@ -117,6 +125,13 @@
 	if ($PCO_Accion=="actualizar_datos_formulario")
 		{
 			// POR CORREGIR:  Si el diseno cuenta con varios campos que ven hacia un mismo campo de base de datos el query PUEDE no ser valido
+
+			//Define valores de postacciones y campos de transporte de datos adicionales para redireccion de flujos de aplicacion cuando aplica 
+			if (@$PCO_PostAccion=="") $PCO_PostAccion="Ver_menu"; //Por defecto va al menu principal si no hay postaccion definida
+			if (@$PCO_NombreCampoTransporte1=="") $PCO_NombreCampoTransporte1="PCO_NombreCampoTransporte1";
+			if (@$PCO_ValorCampoTransporte1=="" )  $PCO_ValorCampoTransporte1="PCO_ValorCampoTransporte1";
+			if (@$PCO_NombreCampoTransporte2=="") $PCO_NombreCampoTransporte2="PCO_NombreCampoTransporte2";
+			if (@$PCO_ValorCampoTransporte2=="" )  $PCO_ValorCampoTransporte2="PCO_ValorCampoTransporte2";
 
 			$mensaje_error="";
 
@@ -180,8 +195,10 @@
 					PCO_EjecutarSQLUnaria("UPDATE ".$registro_formulario["tabla_datos"]." SET $cadena_campos_interrogantes WHERE id=? ",$cadena_nuevos_valores.$id_registro_datos);
 					PCO_Auditar("Actualiza registro $id_registro_datos en ".$registro_formulario["tabla_datos"]);
 					//echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+						echo '<form name="PCO_FormContinuarFlujo_ActualizarDatos" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
+						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
+						<input type="Hidden" name="'.$PCO_NombreCampoTransporte2.'" value="'.$PCO_ValorCampoTransporte2.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
                         <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
@@ -190,23 +207,24 @@
 						<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo).'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion).'">
-						</form>
-						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+						</form>';
 				}
 			else
 				{
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<!-- <input type="Hidden" name="PCO_Accion" value="editar_formulario"> -->
-						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+						echo '<form name="PCO_FormContinuarFlujo_ActualizarDatos" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
+						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
+						<input type="Hidden" name="'.$PCO_NombreCampoTransporte2.'" value="'.$PCO_ValorCampoTransporte2.'">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
                         <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
-						</form>
-						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+						</form>';
 				}
+            //Redirecciona al siguiente flujo de aplicacion
+			echo '<script type="" language="JavaScript"> document.PCO_FormContinuarFlujo_ActualizarDatos.submit();  </script>';
 		}
 
 

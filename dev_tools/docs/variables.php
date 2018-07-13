@@ -56,6 +56,6 @@
 
 		$PCO_Accion - Define la accion que sera ejecutada en el momento.  Puede ser interna o personalizada
 		$PCO_PostAccion - Disponible en almacenamiento de datos de formulario permite redireccionar el flujo a otra accion diferente despues que la operacion es realizada.  Es decir, se convierte posteriormente en PCO_Accion
-		$PCO_ValorCampoTransporte1, $PCO_ValorCampoTransporte1, $PCO_NombreCampoTransporte2, $PCO_ValorCampoTransporte2 - Disponible en almacenamiento de datos de formulario permiten definir variables adicionales que serán pasadas a la siguiente acción. 
+		$PCO_NombreCampoTransporte1, $PCO_ValorCampoTransporte1, $PCO_NombreCampoTransporte2, $PCO_ValorCampoTransporte2 - Disponible en almacenamiento de datos de formulario permiten definir variables adicionales que serán pasadas a la siguiente acción. 
 
     */
