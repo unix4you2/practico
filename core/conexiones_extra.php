@@ -50,6 +50,7 @@
 	$PCO_ConexionesExtra=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE 1=1 ");
 	while($registro = $PCO_ConexionesExtra->fetch())
 		{
+		    //Obtiene los datos de configuracion para la conexion sin importar su tipo
 			$ConexExtra_id=$registro["id"];
 			$ConexExtra_nombre=$registro["nombre"];
 			$ConexExtra_servidorbd=$registro["servidorbd"];
@@ -59,6 +60,12 @@
 			$ConexExtra_motorbd=$registro["motorbd"];
 			$ConexExtra_puertobd=$registro["puertobd"];
 			$ConexExtra_tipo_replica=$registro["tipo_replica"];
-			//Genera la variable de conexion
-			${$ConexExtra_nombre}=PCO_NuevaConexionBD($ConexExtra_motorbd,$ConexExtra_puertobd,$ConexExtra_basedatos,$ConexExtra_servidorbd,$ConexExtra_usuariobd,$ConexExtra_passwordbd);
+			
+		    //Determina si la conexion es para motores estandar o NoSQL y genera la variable de conexion
+		    if ($ConexExtra_motorbd=$registro["motorbd"]!="couchbase")
+        		${$ConexExtra_nombre}=PCO_NuevaConexionBD($ConexExtra_motorbd,$ConexExtra_puertobd,$ConexExtra_basedatos,$ConexExtra_servidorbd,$ConexExtra_usuariobd,$ConexExtra_passwordbd);
+		    else
+                ${$ConexExtra_nombre}=PCO_ConexionNoSQL($ConexExtra_motorbd,$ConexExtra_servidorbd,$ConexExtra_puertobd,$ConexExtra_basedatos,$ConexExtra_usuariobd,$ConexExtra_passwordbd);
 		}
+		
+		
