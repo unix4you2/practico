@@ -86,7 +86,7 @@
                             if ($partes_objeto[1]=="-12")
                                 {
                                     PCO_SelectorIconosAwesome();
-                                    selector_objetos_menu();
+                                    PCO_SelectorObjetosMenu();
                                 }
 							PCO_CargarFormulario($partes_objeto[1],@$en_ventana,@$PCO_CampoBusquedaBD,@$PCO_ValorBusquedaBD);
 						}

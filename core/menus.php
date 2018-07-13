@@ -157,7 +157,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
         </script>';
 
         PCO_SelectorIconosAwesome();
-        selector_objetos_menu();
+        PCO_SelectorObjetosMenu();
         
 		$PCO_Accion=PCO_EscaparContenido($PCO_Accion); //Limpia cadena para evitar XSS
 		echo '<div align="center"><br>';

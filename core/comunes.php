@@ -4513,14 +4513,14 @@ function PCO_Mensaje($titulo,$texto,$DEPRECATED_ancho="",$icono,$estilo)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: selector_objetos_menu
+	Function: PCO_SelectorObjetosMenu
 	Despliega marco para seleccionar objetos de formulario e informes durante creacion de menues
 
 	Ver tambien:
 
 		<PCOFUNC_AdministrarMenu> | <detalles_menu>
 */
-function selector_objetos_menu()
+function PCO_SelectorObjetosMenu()
     {
         global $MULTILANG_SeleccioneUno,$MULTILANG_Formularios,$MULTILANG_MnuHlpComandoInf,$MULTILANG_Si,$MULTILANG_No,$MULTILANG_Informes,$MULTILANG_FrmVentana,$MULTILANG_Guardar,$MULTILANG_Cerrar;
         global $ListaCamposSinID_formulario,$ListaCamposSinID_informe,$TablasCore;
