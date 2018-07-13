@@ -62,7 +62,7 @@
 			$ConexExtra_tipo_replica=$registro["tipo_replica"];
 			
 		    //Determina si la conexion es para motores estandar o NoSQL y genera la variable de conexion
-		    if ($ConexExtra_motorbd=$registro["motorbd"]!="couchbase")
+		    if ($ConexExtra_motorbd!="couchbase")
         		${$ConexExtra_nombre}=PCO_NuevaConexionBD($ConexExtra_motorbd,$ConexExtra_puertobd,$ConexExtra_basedatos,$ConexExtra_servidorbd,$ConexExtra_usuariobd,$ConexExtra_passwordbd);
 		    else
                 ${$ConexExtra_nombre}=PCO_ConexionNoSQL($ConexExtra_motorbd,$ConexExtra_servidorbd,$ConexExtra_puertobd,$ConexExtra_basedatos,$ConexExtra_usuariobd,$ConexExtra_passwordbd);
