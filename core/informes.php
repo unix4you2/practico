@@ -2025,7 +2025,7 @@ if ($PCO_Accion=="eliminar_informe")
 	{
 	    if ($informe=="") $informe=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
 		PCO_EliminarInforme($informe);
-		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_informes"></form>
+		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_AdministrarInformes"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
 
@@ -2071,7 +2071,7 @@ if ($PCO_Accion=="guardar_informe")
 		else
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="administrar_informes">
+					<input type="Hidden" name="PCO_Accion" value="PCO_AdministrarInformes">
 					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 					</form>
@@ -2416,7 +2416,7 @@ if ($PCO_Accion=="importar_informe")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: administrar_informes
+	Function: PCO_AdministrarInformes
 	Presenta la lista de todos los informes definidos en el sistema con la posibilidad de agregar nuevos o de administrar los existentes.
 
 	(start code)
@@ -2429,7 +2429,7 @@ if ($PCO_Accion=="importar_informe")
 	Ver tambien:
 	<guardar_informe> | <eliminar_informe>
 */
-if ($PCO_Accion=="administrar_informes")
+if ($PCO_Accion=="PCO_AdministrarInformes")
 	{
 		 ?>
 
@@ -2506,7 +2506,7 @@ echo '
 		Listado de informes disponibles para el usuario organizados por Categoria en ventanas independientes
 
 	Ver tambien:
-	<administrar_informes>
+	<PCO_AdministrarInformes>
 */
 if ($PCO_Accion=="mis_informes")
 	{

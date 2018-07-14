@@ -86,8 +86,8 @@
 	<input type="Hidden" name="PCO_Accion" value="PCOFUNC_AdministrarMenu">
 	<input type="Hidden" name="PCO_FormularioActivoEdicionMenu" value="">
 </form>
-<form name="administrar_informes" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="PCO_Accion" value="administrar_informes">
+<form name="PCO_AdministrarInformes" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="PCO_AdministrarInformes">
 </form>
 <form name="listar_usuarios" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 	<input type="Hidden" name="PCO_Accion" value="listar_usuarios">

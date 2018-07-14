@@ -1598,7 +1598,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="administrar_informes">
+						<input type="Hidden" name="PCO_Accion" value="PCO_AdministrarInformes">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
@@ -2473,27 +2473,27 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		// Verifica mapeo de permisos para acciones que llaman a otras, heredadas.  Valores en = 1  son funciones publicas:
 		// FUNCION_solicitada_por_el_usuario				FUNCION_madre_de_entrada_a_funcion_solicitada
 		if ($PCO_Accion== "mis_informes")						$retorno = 1;
-		if ($PCO_Accion== "guardar_informe")					$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
-		if ($PCO_Accion== "editar_informe")						$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
-		if ($PCO_Accion== "clonar_diseno_informe")				$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
-		if ($PCO_Accion== "definir_copia_informes")				$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
-		if ($PCO_Accion== "eliminar_informe")					$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
-		if ($PCO_Accion== "actualizar_informe")					$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
-		if ($PCO_Accion== "eliminar_informe_tabla")				$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
-		if ($PCO_Accion== "guardar_informe_tabla")				$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
-		if ($PCO_Accion== "eliminar_informe_campo")				$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
-		if ($PCO_Accion== "guardar_informe_campo")				$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
-		if ($PCO_Accion== "guardar_informe_condicion")			$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
-		if ($PCO_Accion== "eliminar_informe_condicion")			$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
-		if ($PCO_Accion== "actualizar_grafico_informe")			$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
-		if ($PCO_Accion== "actualizar_agrupamiento_informe")	$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
-		if ($PCO_Accion== "guardar_accion_informe")				$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "guardar_informe")					$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "editar_informe")						$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "clonar_diseno_informe")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "definir_copia_informes")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "eliminar_informe")					$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "actualizar_informe")					$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "eliminar_informe_tabla")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "guardar_informe_tabla")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "eliminar_informe_campo")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "guardar_informe_campo")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "guardar_informe_condicion")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "eliminar_informe_condicion")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "actualizar_grafico_informe")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "actualizar_agrupamiento_informe")	$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "guardar_accion_informe")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
 		if ($PCO_Accion== "eliminar_registro_informe")			$retorno = 1;
-		if ($PCO_Accion== "eliminar_accion_informe")			$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "eliminar_accion_informe")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
 		if ($PCO_Accion== "exportar_informe")					$retorno = 1;
 		if ($PCO_Accion== "importar_informe")					$retorno = 1;
-		if ($PCO_Accion== "analizar_importacion_informe")		$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
-		if ($PCO_Accion== "confirmar_importacion_informe")		$retorno = PCO_PermisoAgregadoAccion("administrar_informes");
+		if ($PCO_Accion== "analizar_importacion_informe")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "confirmar_importacion_informe")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
 		
 		// Funciones en core/usuarios.php
 		if ($PCO_Accion== "cambiar_clave")						$retorno = 1;

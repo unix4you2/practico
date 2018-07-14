@@ -73,7 +73,7 @@
                         </td>
                         <td>
                             <form action="" method="post">
-                                <input type="hidden" name="PCO_Accion" value="administrar_informes">
+                                <input type="hidden" name="PCO_Accion" value="PCO_AdministrarInformes">
                                 <button type="submit" class="btn btn-info"><i class="fa fa-file-text fa-fw fa-4x"></i></button>
                             </form>
                         </td>
