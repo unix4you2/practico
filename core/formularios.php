@@ -885,11 +885,11 @@ if ($PCO_Accion=="editar_formulario")
 		</script>
 
         <script language="JavaScript">
-            function PopUpEventosJavascript()
+            function PCOJS_PopUpEventosJavascript()
                 {
                     //Verifica que se haya seleccionado un evento y abre el popup, sino muestra error
-                    if (document.datosform.tipo_evento.value!="")
-                        PCO_VentanaPopup('index.php?PCO_Accion=editar_evento_objeto&id_objeto_evento='+document.datosform.idcampomodificado.value+'&evento_objeto='+document.datosform.tipo_evento.value+'&tipo='+document.datosform.tipo.value+'&Presentar_FullScreen=1&Precarga_EstilosBS=1','Evento_'+document.datosform.tipo_evento.value+'_ID'+document.datosform.idcampomodificado.value,'toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=no, fullscreen=no, width=850, height=600');
+                    if ($("#tipo_evento").val()!="")
+                        PCO_VentanaPopup('index.php?PCO_Accion=editar_evento_objeto&id_objeto_evento='+document.datosform.idcampomodificado.value+'&evento_objeto='+$("#tipo_evento").val()+'&tipo='+document.datosform.tipo.value+'&Presentar_FullScreen=1&Precarga_EstilosBS=1','Evento_'+$("#tipo_evento").val()+'_ID'+document.datosform.idcampomodificado.value,'toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=no, fullscreen=no, width=850, height=600');
                     else
                         alert("<?php echo $MULTILANG_Seleccionar; ?> <?php echo $MULTILANG_Evento; ?> !!!");
                 }
@@ -1877,7 +1877,7 @@ if ($PCO_Accion=="editar_formulario")
                                             </select>
 
                                             <span class="input-group-addon">
-                                                <a class="btn btn-primary btn-xs"  onclick="PopUpEventosJavascript();">
+                                                <a class="btn btn-primary btn-xs"  onclick="PCOJS_PopUpEventosJavascript();">
                                                     <i class="fa fa-plus"></i> <?php echo $MULTILANG_Agregar; ?> <?php echo $MULTILANG_Evento; ?>
                                                 </a>
                                             </span>
