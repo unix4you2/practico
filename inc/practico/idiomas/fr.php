@@ -835,6 +835,7 @@
 	$MULTILANG_InfTituloArbitrario='Titre arbitraire';
 	$MULTILANG_InfTituloArbitrarioDes='Vous permet d ignorer le titre de colonne fourni par le moteur de base de données et d utiliser à la place cette valeur comme titre dans le rapport soumis. <b> Autorise les variables HTML et PHP de base </b>';
 	$MULTILANG_InfSQL='Si vous ajoutez un contenu supérieur à 5 caractères à ce champ de script SQL, le générateur de rapports omettra toute configuration de tables, champs, conditions ou toute autre définition de requête que vous avez définie et essaiera d exécuter directement ce script et de générer le tableau de résultats. Vous pouvez utiliser des variables PHP dans la notation {$ Variable} pour inclure des variables d environnement.';
+	$MULTILANG_InfFormsUsan='Formulaires détectés qui utilisent ce rapport de manière intégrée';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Modifier l élément de menu';
