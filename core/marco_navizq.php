@@ -39,7 +39,8 @@
                 <i class="fa fa-indent fa-border texto-negro texto-blink" OnClick="javascript:barra_navegacion_izquierda_toggle('<?php if (@$ModoBarraMenuRecibido=="flotante") echo "flotante"; else echo "responsive"; ?>');"></i>
             </div>
             <div id="barra_navegacion_izquierda" class="navbar-default sidebar" role="navigation">
-                <!-- DEPRECATED <div class="sidebar-nav navbar-collapse">-->
+                <!-- DEPRECATED para el marco inferior <div class="sidebar-nav navbar-collapse">-->
+                <div id="PCO_BarraNavegacionIzquierda">
                     <!--INICIO DE OPCIONES BARRA LATERAL-->
                         <ul class="nav" id="side-menu">
                             
@@ -121,7 +122,7 @@
 							<font size=1><i class="fa fa-copyright"></i> <i><?php echo $MULTILANG_GeneradoPor; ?> <a href="http://www.practico.org" target="_BLANK">Pr&aacute;ctico</a></i></font>
                         </div>
                     </div>
-
+                </div>
                 <!-- DEPRECATED </div> FIN DEL /.sidebar-collapse -->
             </div>
             <!-- FIN DEL /.navbar-static-side -->
