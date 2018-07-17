@@ -177,7 +177,7 @@ if (@$PCO_Accion=="cambiar_estado_campo")
 			}
 		else
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="editar_formulario">
+					<input type="Hidden" name="PCO_Accion" value="PCO_EditarFormulario">
 					<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 					<input type="Hidden" name="formulario" value="'.$formulario.'">
 					<input type="Hidden" name="informe" value="'.$informe.'">

@@ -60,7 +60,7 @@
                         </td>
                         <td>
                             <form action="" method="post">
-                                <input type="hidden" name="PCO_Accion" value="administrar_formularios">
+                                <input type="hidden" name="PCO_Accion" value="PCO_AdministrarFormularios">
 								<button type="submit" class="btn btn-success"><i class="fa fa-list-alt fa-fw fa-4x"></i></button>
                             </form>
                         </td>

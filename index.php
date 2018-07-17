@@ -211,11 +211,11 @@
     }
 
     // Si existe el directorio de instalacion y no es modo fullscreen presenta un mensaje constante de advertencia en el escritorio
-    if (@file_exists('ins') && PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$Presentar_FullScreen!=1 && $PCO_Accion=="Ver_menu")
+    if (@file_exists('ins') && PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$Presentar_FullScreen!=1 && $PCO_Accion=="PCO_VerMenu")
         PCO_Mensaje($MULTILANG_TituloInsExiste, $MULTILANG_TextoInsExiste, '', 'fa fa-exclamation-triangle fa-5x texto-rojo texto-blink', 'alert alert-warning alert-dismissible');
 
 	//Despliega escritorio de los Administradores
-    if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCOSESS_SesionAbierta && $PCO_Accion=="Ver_menu")
+    if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCOSESS_SesionAbierta && $PCO_Accion=="PCO_VerMenu")
         include_once 'core/marco_admin.php';
 
 /* ################################################################## */
@@ -229,9 +229,9 @@
         include "core/usuarios.php";
     if ($PCO_Accion=="PCO_EjecutarImportacionCSV" || $PCO_Accion=="PCO_EscogerTablaImportacionCSV" || $PCO_Accion=="PCO_AnalizarImportacionCSV" || $PCO_Accion== "PCO_ConfirmarImportacionTabla" || $PCO_Accion== "PCO_ImportarTabla" || $PCO_Accion== "PCO_CopiarTabla" || $PCO_Accion== "PCO_DefinirCopiaTablas" || $PCO_Accion=="PCO_GuardarCrearTablaAsistente" || $PCO_Accion=="PCO_AsistenteTablas" || $PCO_Accion=="PCO_AdministrarTablas" || $PCO_Accion=="PCO_GuardarCrearTabla" || $PCO_Accion=="PCO_EliminarTabla" || $PCO_Accion=="PCO_EditarTabla" || $PCO_Accion=="PCO_GuardarCrearCampo" || $PCO_Accion=="PCO_EliminarCampoTabla")
         include "core/tablas.php";
-    if ($PCO_Accion=="PCO_EliminarEventoObjeto" || $PCO_Accion=="PCO_EditarEventoObjeto" || $PCO_Accion=="PCO_ActualizarJavaEvento" || $PCO_Accion=="PCO_ConfirmarImportacionFormulario" || $PCO_Accion=="PCO_AnalizarImportacionFormulario" || $PCO_Accion=="PCO_ImportarFormulario" || $PCO_Accion=="PCO_DefinirCopiaFormularios" || $PCO_Accion=="PCO_ActualizarDatosFormulario" || $PCO_Accion=="PCO_ActualizarFormulario" || $PCO_Accion=="PCO_CopiarFormulario" || $PCO_Accion=="PCO_ActualizarCampoFormulario" || $PCO_Accion=="administrar_formularios" || $PCO_Accion=="guardar_formulario" || $PCO_Accion=="PCO_EliminarFormulario" || $PCO_Accion=="editar_formulario" || $PCO_Accion=="guardar_campo_formulario" || $PCO_Accion=="PCO_EliminarCampoFormulario" || $PCO_Accion=="guardar_accion_formulario" || $PCO_Accion=="eliminar_accion_formulario" || $PCO_Accion=="guardar_datos_formulario" || $PCO_Accion=="eliminar_datos_formulario")
+    if ($PCO_Accion=="PCO_EliminarEventoObjeto" || $PCO_Accion=="PCO_EditarEventoObjeto" || $PCO_Accion=="PCO_ActualizarJavaEvento" || $PCO_Accion=="PCO_ConfirmarImportacionFormulario" || $PCO_Accion=="PCO_AnalizarImportacionFormulario" || $PCO_Accion=="PCO_ImportarFormulario" || $PCO_Accion=="PCO_DefinirCopiaFormularios" || $PCO_Accion=="PCO_ActualizarDatosFormulario" || $PCO_Accion=="PCO_ActualizarFormulario" || $PCO_Accion=="PCO_CopiarFormulario" || $PCO_Accion=="PCO_ActualizarCampoFormulario" || $PCO_Accion=="PCO_AdministrarFormularios" || $PCO_Accion=="PCO_GuardarFormulario" || $PCO_Accion=="PCO_EliminarFormulario" || $PCO_Accion=="PCO_EditarFormulario" || $PCO_Accion=="PCO_GuardarCampoFormulario" || $PCO_Accion=="PCO_EliminarCampoFormulario" || $PCO_Accion=="PCO_GuardarAccionFormulario" || $PCO_Accion=="PCO_EliminarAccionFormulario" || $PCO_Accion=="PCO_GuardarDatosFormulario" || $PCO_Accion=="PCO_EliminarDatosFormulario")
         include "core/formularios.php";
-    if ($PCO_Accion=="PCO_BuscarPermisosPractico" || $PCO_Accion=="Ver_menu" || $PCO_Accion=="PCOFUNC_AdministrarMenu" || $PCO_Accion=="PCO_EliminarMenu")
+    if ($PCO_Accion=="PCO_BuscarPermisosPractico" || $PCO_Accion=="PCO_VerMenu" || $PCO_Accion=="PCOFUNC_AdministrarMenu" || $PCO_Accion=="PCO_EliminarMenu")
         include "core/menus.php";
     if ($PCO_Accion=="Iniciar_login" || $PCO_Accion=="Terminar_sesion" || $PCO_Accion=="Mensaje_cierre_sesion")
         include "core/sesion.php";

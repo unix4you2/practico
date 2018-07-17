@@ -103,7 +103,7 @@
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_Accion" value="PCO_VerMenu">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
@@ -504,7 +504,7 @@ $manifiesto=sprintf('{
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_Accion" value="PCO_VerMenu">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
@@ -726,7 +726,7 @@ $salida=sprintf("<?php
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_Accion" value="PCO_VerMenu">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
@@ -778,7 +778,7 @@ $salida=sprintf("<?php
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_Accion" value="PCO_VerMenu">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorTiempoEjecucion.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>

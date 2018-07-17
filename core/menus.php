@@ -183,7 +183,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 
     	//Si encuentra un formulario activo agrega enlace para navegar hasta el
     	if ($PCO_FormularioActivoEdicionMenu!="" && $PCO_FormularioActivoEdicionMenu!="0")
-            echo '<a class="btn btn-warning btn-lg" href="index.php?PCO_Accion=editar_formulario&popup_activo=&formulario='.$PCO_FormularioActivoEdicionMenu.'">
+            echo '<a class="btn btn-warning btn-lg" href="index.php?PCO_Accion=PCO_EditarFormulario&popup_activo=&formulario='.$PCO_FormularioActivoEdicionMenu.'">
                     <div><i class="fa fa-pencil-square"></i> <b>'.$MULTILANG_Ir.'</b>: '.$MULTILANG_Editar.' '.$MULTILANG_Formularios.' <i>[ID='.$PCO_FormularioActivoEdicionMenu.']</i> >>></div>
                 </a><br><br>';
     	
@@ -234,7 +234,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 		Se retornan unicamente aquellos permisos e informes asignados al usuario
 
 	Ver tambien:
-		<Ver_menu>
+		<PCO_VerMenu>
 */
 	if ($PCO_Accion=="PCO_BuscarPermisosPractico" && $PCOSESS_SesionAbierta)
 		{ 
@@ -395,7 +395,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: Ver_menu
+	Function: PCO_VerMenu
 	Despliega el escritorio de un usuario, incluyendo el menu superior, iconos de escritorio y opciones agrupadas en el acordeon central
 
 	Variables de entrada:
@@ -413,7 +413,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 		<PCOFUNC_AdministrarMenu>
 */
 
-	if ($PCO_Accion=="Ver_menu" && $PCOSESS_SesionAbierta)
+	if ($PCO_Accion=="PCO_VerMenu" && $PCOSESS_SesionAbierta)
 		{ 
 			
 			// Carga las opciones del ESCRITORIO

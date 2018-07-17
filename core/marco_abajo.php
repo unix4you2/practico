@@ -149,7 +149,7 @@
     <!-- Morris Charts JavaScript -->
     <?php
         //Carga solo Morris cuando es pagina principal por ahora para evitar conflictos con DatePicker
-        if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$PCOSESS_SesionAbierta && @$PCO_Accion=="Ver_menu")
+        if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$PCOSESS_SesionAbierta && @$PCO_Accion=="PCO_VerMenu")
         // Incluye archivo con las consultas y datos para ser diagramados por Morris
             include_once("core/marco_admin_morris.php");
     ?>
@@ -174,7 +174,7 @@
 
     <?php
         //Si el usuario es admin por defecto presenta la barra lateral activa
-        // DEPRECATED: (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$PCOSESS_SesionAbierta && @$PCO_Accion=="Ver_menu") || 
+        // DEPRECATED: (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$PCOSESS_SesionAbierta && @$PCO_Accion=="PCO_VerMenu") || 
         if ((@$PCOSESS_LoginUsuario!="" && @$PCOSESS_SesionAbierta && @$VerNavegacionIzquierdaResponsive==1))
             echo '<script language="JavaScript">
                     ver_navegacion_izquierda_responsive();
@@ -503,7 +503,7 @@
 					}
 					
 				//Activa el summernote para la edicion de controles de texto como etiqueta en formularios si se esta en esa accion
-				if ($PCO_Accion=="editar_formulario")
+				if ($PCO_Accion=="PCO_EditarFormulario")
 					{
 						echo "
 							$('#Summer_valor_etiqueta').summernote({

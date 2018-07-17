@@ -165,7 +165,7 @@
 				}
 			else
 				{
-					echo '<form name="Acceso" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="Ver_menu"></form><script type="" language="JavaScript">	document.Acceso.submit();  </script>';
+					echo '<form name="Acceso" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_VerMenu"></form><script type="" language="JavaScript">	document.Acceso.submit();  </script>';
 				}
 		}
 

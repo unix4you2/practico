@@ -615,7 +615,7 @@ echo '
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
+						<input type="Hidden" name="PCO_Accion" value="PCO_AdministrarFormularios">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
@@ -779,7 +779,7 @@ if ($PCO_Accion=="PCO_ConfirmarImportacionTabla")
 			{
 				echo '			
 				<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_Accion" value="PCO_VerMenu">
 					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ActErrGral.'">
 					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 					</form>
@@ -951,7 +951,7 @@ if ($PCO_Accion=="PCO_EjecutarImportacionCSV")
 			{
 				echo '			
 				<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_Accion" value="PCO_VerMenu">
 					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ActErrGral.'">
 					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 					</form>

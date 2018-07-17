@@ -104,7 +104,7 @@
 				echo '<a data-toggle="modal" class="btn btn-danger btn-xs" href="#myModalDESARROLLO"><i class="fa fa-puzzle-piece"></i> '.$MULTILANG_DesAppBoton.'</a>&nbsp;';
 
 			//Agrega boton de retorno al inicio si la accion es diferente al escritorio
-			if ($PCO_Accion!="Ver_menu")
+			if ($PCO_Accion!="PCO_VerMenu")
 				echo '<a class="btn btn-success btn-xs" href="javascript:document.location=\'index.php\';"><i class="fa fa-home"></i></a>&nbsp;';
 
 			//Despliega opciones de configuracion

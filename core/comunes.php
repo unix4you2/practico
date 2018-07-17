@@ -443,7 +443,7 @@ function PCO_ImprimirPanelSimpleDashboard($ClaseColumnas,$EstiloPanel,$ClaseIcon
 		Registro eliminado
 
 	Ver tambien:
-		<administrar_formularios>
+		<PCO_AdministrarFormularios>
 */
 function PCOFUNC_EliminarInforme($informe="")
 	{
@@ -481,7 +481,7 @@ function PCOFUNC_EliminarInforme($informe="")
 		Registro eliminado
 
 	Ver tambien:
-		<administrar_formularios>
+		<PCO_AdministrarFormularios>
 */
 function PCO_EliminarFormulario($formulario="")
 	{
@@ -855,7 +855,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
 		Archivo con el elemento exportado
 
 	Ver tambien:
-		<administrar_formularios>
+		<PCO_AdministrarFormularios>
 */
 function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArchivoXML="")
     {
@@ -998,7 +998,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							//Presenta la ventana con informacion y enlace de descarga
 							?>
 								<form action="<?php echo $ArchivoCORE; ?>" method="POST" name="det<?php echo $idObjetoInsertado; ?>" id="det<?php echo $idObjetoInsertado; ?>">
-										<input type="hidden" name="PCO_Accion" value="editar_formulario">
+										<input type="hidden" name="PCO_Accion" value="PCO_EditarFormulario">
 										<input type="Hidden" name="popup_activo" value="">
 										<input type="hidden" name="formulario" value="<?php echo $idObjetoInsertado; ?>">
 										<input type="hidden" name="nombre_tabla" value="<?php echo $tabla_datos; ?>">
@@ -1126,7 +1126,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
+						<input type="Hidden" name="PCO_Accion" value="PCO_AdministrarFormularios">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
@@ -1313,7 +1313,7 @@ function PCO_ImportarXMLInforme($xml_importado)
 		Archivo con el elemento exportado
 
 	Ver tambien:
-		<administrar_formularios>
+		<PCO_AdministrarFormularios>
 */
 function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXML="")
     {
@@ -2517,7 +2517,7 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
         if ($PCO_Accion== "PCO_GuardarUsuarioAutoregistro")		$retorno = 1;
         
 		// Funciones en core/menus.php
-		if ($PCO_Accion== "Ver_menu")							$retorno = 1;
+		if ($PCO_Accion== "PCO_VerMenu")							$retorno = 1;
 		if ($PCO_Accion== "PCO_BuscarPermisosPractico")			$retorno = 1;
 		if ($PCO_Accion== "PCO_EliminarMenu")					$retorno = PCO_PermisoAgregadoAccion("PCOFUNC_AdministrarMenu");
 		// Funciones en core/tablas.php
@@ -2537,26 +2537,26 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "PCO_EjecutarImportacionCSV")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarTablas");
 
 		// Funciones en core/formularios.php
-		if ($PCO_Accion== "guardar_datos_formulario")			$retorno = 1;
-		if ($PCO_Accion== "eliminar_datos_formulario")			$retorno = 1;
+		if ($PCO_Accion== "PCO_GuardarDatosFormulario")			$retorno = 1;
+		if ($PCO_Accion== "PCO_EliminarDatosFormulario")		$retorno = 1;
 		if ($PCO_Accion== "PCO_ActualizarDatosFormulario")		$retorno = 1;
-		if ($PCO_Accion== "PCO_ActualizarJavaEvento")		    $retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "PCO_EditarEventoObjeto")		        $retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "PCO_EliminarEventoObjeto")		    $retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "PCO_ActualizarFormulario")			$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "PCO_CopiarFormulario")				$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "PCO_DefinirCopiaFormularios")		$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "PCO_ActualizarCampoFormulario")		$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "guardar_formulario")					$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "PCO_EliminarFormulario")				$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "editar_formulario")					$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "guardar_campo_formulario")			$retorno = PCO_PermisoAgregadoAccion("editar_formulario");
-		if ($PCO_Accion== "PCO_EliminarCampoFormulario")		$retorno = PCO_PermisoAgregadoAccion("editar_formulario");
-		if ($PCO_Accion== "guardar_accion_formulario")			$retorno = PCO_PermisoAgregadoAccion("editar_formulario");
-		if ($PCO_Accion== "eliminar_accion_formulario")			$retorno = PCO_PermisoAgregadoAccion("editar_formulario");
-		if ($PCO_Accion== "PCO_ConfirmarImportacionFormulario")	$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "PCO_AnalizarImportacionFormulario")	$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "PCO_ImportarFormulario")				$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "PCO_ActualizarJavaEvento")		    $retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
+		if ($PCO_Accion== "PCO_EditarEventoObjeto")		        $retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
+		if ($PCO_Accion== "PCO_EliminarEventoObjeto")		    $retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
+		if ($PCO_Accion== "PCO_ActualizarFormulario")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
+		if ($PCO_Accion== "PCO_CopiarFormulario")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
+		if ($PCO_Accion== "PCO_DefinirCopiaFormularios")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
+		if ($PCO_Accion== "PCO_ActualizarCampoFormulario")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
+		if ($PCO_Accion== "PCO_GuardarFormulario")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
+		if ($PCO_Accion== "PCO_EliminarFormulario")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
+		if ($PCO_Accion== "PCO_EditarFormulario")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
+		if ($PCO_Accion== "PCO_GuardarCampoFormulario")			$retorno = PCO_PermisoAgregadoAccion("PCO_EditarFormulario");
+		if ($PCO_Accion== "PCO_EliminarCampoFormulario")		$retorno = PCO_PermisoAgregadoAccion("PCO_EditarFormulario");
+		if ($PCO_Accion== "PCO_GuardarAccionFormulario")		$retorno = PCO_PermisoAgregadoAccion("PCO_EditarFormulario");
+		if ($PCO_Accion== "PCO_EliminarAccionFormulario")		$retorno = PCO_PermisoAgregadoAccion("PCO_EditarFormulario");
+		if ($PCO_Accion== "PCO_ConfirmarImportacionFormulario")	$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
+		if ($PCO_Accion== "PCO_AnalizarImportacionFormulario")	$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
+		if ($PCO_Accion== "PCO_ImportarFormulario")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
 		// Funciones en core/sesion.php
 		if ($PCO_Accion== "Iniciar_login")						$retorno = 1;
 		if ($PCO_Accion== "Terminar_sesion")					$retorno = 1;
@@ -2815,7 +2815,7 @@ function PCO_LimpiarEntradas()
 
 		// Escapar algunas variables segun la accion recibida
 
-		if ($PCO_Accion=="administrar_formularios")
+		if ($PCO_Accion=="PCO_AdministrarFormularios")
 			{
 				global $PCO_ErrorDescripcion,$PCO_ErrorTitulo;
 				$PCO_ErrorDescripcion=PCO_EscaparContenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion));
@@ -2854,7 +2854,7 @@ function PCO_LimpiarEntradas()
 				$objeto=PCO_EscaparContenido($objeto);
 			}
 
-		if ($PCO_Accion=="guardar_formulario")
+		if ($PCO_Accion=="PCO_GuardarFormulario")
 			{
 				global $tabla_datos;
 				$tabla_datos=PCO_EscaparContenido($tabla_datos); // Revisar si afecta el script de autorun
@@ -3928,7 +3928,7 @@ function PCO_BuscarActualizaciones($PCOSESS_LoginUsuario='',$PCO_Accion)
 		global $MULTILANG_Atencion,$MULTILANG_ActAlertaVersion;
 		// Genera un aleatorio entre 1 y 10 para no sacar siempre el aviso y buscar nuevas versiones.
 		$buscar=rand(0,7);
-		if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion=="Ver_menu" && $buscar==1)
+		if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion=="PCO_VerMenu" && $buscar==1)
 			{
 				$path_ultima_version="https://raw.githubusercontent.com/unix4you2/practico/master/dev_tools/version_publicada.txt";
 				$version_actualizada = @PCO_CargarURL($path_ultima_version);
@@ -6288,7 +6288,7 @@ function PCO_CargarObjetoBotonComando($registro_campos,$registro_datos_formulari
         if ($registro_campos["tipo_accion"]=="interna_actualizar")
             $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_ActualizarDatosFormulario'; PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."'); ";
         if ($registro_campos["tipo_accion"]=="interna_eliminar")
-            $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='eliminar_datos_formulario';document.".$registro_formulario["id_html"].".submit();";
+            $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_EliminarDatosFormulario';document.".$registro_formulario["id_html"].".submit();";
         if ($registro_campos["tipo_accion"]=="interna_cargar")
             $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='cargar_objeto';document.".$registro_formulario["id_html"].".objeto.value='".$registro_campos["accion_usuario"]."';document.".$registro_formulario["id_html"].".submit();";
         if ($registro_campos["tipo_accion"]=="externa_formulario")
@@ -6377,7 +6377,7 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                                 $CadenaDetalleEventos.="<li><b>".$RegistroEventos["evento"]."</b> (".$RegistroEventos["bytes_codigo"]." bytes)";
                                 $ConteoEventos++;
                             }
-                        $ComplementoBotonEventos='<br><a class="btn btn-xs btn-default" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Evento.'(s)'.$CadenaDetalleEventos.'" href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&pestana_activa_editor=eventos_objeto-tab&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-bolt fa-fw texto-blink"></i></a>
+                        $ComplementoBotonEventos='<br><a class="btn btn-xs btn-default" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Evento.'(s)'.$CadenaDetalleEventos.'" href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarFormulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&pestana_activa_editor=eventos_objeto-tab&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-bolt fa-fw texto-blink"></i></a>
                         ';
                     }
                 
@@ -6399,25 +6399,25 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                 //Pone controles
                 $salida='<div id="PCOEditorContenedor_'.$registro_campos["id"].'" style="margin:2px; display:none; visibility:hidden; position: absolute; z-index:1000;">
                             <div style="display: inline-block; vertical-align:top;">
-                                <a class="btn btn-xs btn-warning" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'" href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-fw fa-pencil"></i></a>
+                                <a class="btn btn-xs btn-warning" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'" href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarFormulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-fw fa-pencil"></i></a>
                                 '.$ComplementoBotonEventos.'
                             </div>
                             <div style="display: inline-block;">
-                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverIzquierda.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Anterior.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-left"></i></a>
+                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverIzquierda.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Anterior.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["columna"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-left"></i></a>
                             </div>
                             <div style="display: inline-block;">
-                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverArriba.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDisminuyePeso.' a '.($registro_campos["peso"]-1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["peso"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-up"></i></a>
+                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverArriba.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDisminuyePeso.' a '.($registro_campos["peso"]-1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["peso"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-up"></i></a>
                                 <br>
-                                <a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmAumentaPeso.' a '.($registro_campos["peso"]+1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["peso"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-down"></i></a>
+                                <a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmAumentaPeso.' a '.($registro_campos["peso"]+1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["peso"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-down"></i></a>
                             </div>
                             <div style="display: inline-block;">
-                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-right"></i></a>
+                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-right"></i></a>
                             </div>
                             <div style="display: inline-block; vertical-align:top;">
-                                <a class="btn btn-xs" data-toggle="tooltip" data-html="true"  data-placement="top" title="<div align=left><font color=yellow>'.$MULTILANG_Detalles.' <i>('.$MULTILANG_MnuPropiedad.')</i></font><br>ID HTML: <b>'.$registro_campos["id_html"].'</b><br>'.$MULTILANG_FrmCampo.': <b>'.$registro_campos["campo"].'</b><br>'.$MULTILANG_FrmPredeterminado.': <b>'.$registro_campos["valor_predeterminado"].'</b><br>'.$MULTILANG_FrmValida.': <b>'.$registro_campos["validacion_datos"].'</b> Extra: <b>'.$registro_campos["validacion_extras"].'</b></div>" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=editar_formulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-info-circle"></i></a>';
+                                <a class="btn btn-xs" data-toggle="tooltip" data-html="true"  data-placement="top" title="<div align=left><font color=yellow>'.$MULTILANG_Detalles.' <i>('.$MULTILANG_MnuPropiedad.')</i></font><br>ID HTML: <b>'.$registro_campos["id_html"].'</b><br>'.$MULTILANG_FrmCampo.': <b>'.$registro_campos["campo"].'</b><br>'.$MULTILANG_FrmPredeterminado.': <b>'.$registro_campos["valor_predeterminado"].'</b><br>'.$MULTILANG_FrmValida.': <b>'.$registro_campos["validacion_datos"].'</b> Extra: <b>'.$registro_campos["validacion_extras"].'</b></div>" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-info-circle"></i></a>';
                             //Si el objeto es un formulario o informe embebido agrega enlace para su edicion directa
                             if ($registro_campos["tipo"]=="form_consulta")
-                                $salida.='<br><a onclick=\'return confirm("'.$MULTILANG_SaltoEdicion.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&formulario='.$registro_campos["formulario_vinculado"].'&popup_activo=\' class="btn btn-primary btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.' '.$MULTILANG_Embebido.'<br>'.$Complemento_NombreEmbebido.'"><i class="fa fa fa-object-ungroup"></i></a>';
+                                $salida.='<br><a onclick=\'return confirm("'.$MULTILANG_SaltoEdicion.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarFormulario&formulario='.$registro_campos["formulario_vinculado"].'&popup_activo=\' class="btn btn-primary btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.' '.$MULTILANG_Embebido.'<br>'.$Complemento_NombreEmbebido.'"><i class="fa fa fa-object-ungroup"></i></a>';
                             if ($registro_campos["tipo"]=="informe")
                                 $salida.='<br><a onclick=\'return confirm("'.$MULTILANG_SaltoEdicion.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarInforme&informe='.$registro_campos["informe_vinculado"].'&popup_activo=\' class="btn btn-primary btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.' '.$MULTILANG_Embebido.'<br>'.$Complemento_NombreEmbebido.'"><i class="fa fa fa-object-ungroup"></i></a>';
                 $salida.='</div>
@@ -6483,7 +6483,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 
         //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa y un boton de salto a edicion
         $BotonSaltoEdicion='
-                    <a class="btn btn-default btn-xs" href="index.php?PCO_Accion=editar_formulario&popup_activo=&formulario='.$formulario.'">
+                    <a class="btn btn-default btn-xs" href="index.php?PCO_Accion=PCO_EditarFormulario&popup_activo=&formulario='.$formulario.'">
                         <div><i class="fa fa-pencil-square"></i> '.$MULTILANG_Editar.' '.$MULTILANG_Formularios.' <i>[ID='.$formulario.']</i></div>
                     </a>';
 		if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && $formulario>=0)
@@ -6602,7 +6602,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 				<input type="Hidden" name="formulario" value="'.$formulario.'">
 				<input type="Hidden" name="id_registro_datos" value="'.@$registro_datos_formulario["id"].'">
 				<input type="Hidden" name="PCO_FormularioActivo" value="'.$formulario.'">
-				<input type="Hidden" name="PCO_Accion" value="guardar_datos_formulario">
+				<input type="Hidden" name="PCO_Accion" value="PCO_GuardarDatosFormulario">
 				<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
 				<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
 				<input type="Hidden" name="PCO_ErrorTitulo" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo).'">
@@ -6940,7 +6940,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 					if ($registro_botones["tipo_accion"]=="interna_actualizar")
 						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_ActualizarDatosFormulario'; PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."');";
 					if ($registro_botones["tipo_accion"]=="interna_eliminar")
-						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='eliminar_datos_formulario';document.".$registro_formulario["id_html"].".submit();";
+						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_EliminarDatosFormulario';document.".$registro_formulario["id_html"].".submit();";
 					if ($registro_botones["tipo_accion"]=="interna_cargar")
 						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='cargar_objeto';document.".$registro_formulario["id_html"].".objeto.value='".$registro_botones["accion_usuario"]."';document.".$registro_formulario["id_html"].".submit();";
 					if ($registro_botones["tipo_accion"]=="externa_formulario")
@@ -7811,7 +7811,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 		if ($registro_informe["formato_final"]=="G" && ( $registro_informe["ancho"]=="" || $registro_informe["alto"]=="" ))
 			{
 				echo '<form name="cancelarXTamano" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_Accion" value="PCO_VerMenu">
 					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$MULTILANG_InfErrTamano.'">
 					</form>

@@ -2090,7 +2090,7 @@ if ($PCO_Accion=="PCO_GuardarInforme")
 		Archivo con el elemento exportado
 
 	Ver tambien:
-		<administrar_formularios>
+		<PCO_AdministrarFormularios>
 */
 	if ($PCO_Accion=="PCO_ClonarDisenoInforme")
 		{
@@ -2199,7 +2199,7 @@ if ($PCO_Accion=="PCO_ConfirmarImportacionInforme")
 			{
 				echo '			
 				<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_Accion" value="PCO_VerMenu">
 					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ActErrGral.'">
 					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 					</form>
@@ -2315,7 +2315,7 @@ if ($PCO_Accion=="PCO_AnalizarImportacionInforme")
 			{
 				echo '			
 				<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_Accion" value="PCO_VerMenu">
 					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ActErrGral.'">
 					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 					</form>

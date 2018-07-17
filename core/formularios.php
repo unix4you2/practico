@@ -36,7 +36,7 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: eliminar_datos_formulario
+	Function: PCO_EliminarDatosFormulario
 	Elimina los datos asociados sobre las tablas de aplicacion para un registro determinado.  Esta funcion es utilizada por los botones de Eliminar registro definidos como accion en un formulario
 
 	Variables de entrada:
@@ -55,13 +55,13 @@
 		Registro eliminado de la tabla de aplicacion
 
 	Ver tambien:
-		<guardar_datos_formulario>
+		<PCO_GuardarDatosFormulario>
 
 */
-	if ($PCO_Accion=="eliminar_datos_formulario")
+	if ($PCO_Accion=="PCO_EliminarDatosFormulario")
 		{
 			//Define valores de postacciones y campos de transporte de datos adicionales para redireccion de flujos de aplicacion cuando aplica 
-			if (@$PCO_PostAccion=="") $PCO_PostAccion="Ver_menu"; //Por defecto va al menu principal si no hay postaccion definida
+			if (@$PCO_PostAccion=="") $PCO_PostAccion="PCO_VerMenu"; //Por defecto va al menu principal si no hay postaccion definida
 			if (@$PCO_NombreCampoTransporte1=="") $PCO_NombreCampoTransporte1="PCO_NombreCampoTransporte1";
 			if (@$PCO_ValorCampoTransporte1=="" )  $PCO_ValorCampoTransporte1="PCO_ValorCampoTransporte1";
 			if (@$PCO_NombreCampoTransporte2=="") $PCO_NombreCampoTransporte2="PCO_NombreCampoTransporte2";
@@ -120,14 +120,14 @@
 		Registro agregado a la tabla de aplicacion
 
 	Ver tambien:
-		<eliminar_datos_formulario> | <guardar_datos_formulario>
+		<PCO_EliminarDatosFormulario> | <PCO_GuardarDatosFormulario>
 */
 	if ($PCO_Accion=="PCO_ActualizarDatosFormulario")
 		{
 			// POR CORREGIR:  Si el diseno cuenta con varios campos que ven hacia un mismo campo de base de datos el query PUEDE no ser valido
 
 			//Define valores de postacciones y campos de transporte de datos adicionales para redireccion de flujos de aplicacion cuando aplica 
-			if (@$PCO_PostAccion=="") $PCO_PostAccion="Ver_menu"; //Por defecto va al menu principal si no hay postaccion definida
+			if (@$PCO_PostAccion=="") $PCO_PostAccion="PCO_VerMenu"; //Por defecto va al menu principal si no hay postaccion definida
 			if (@$PCO_NombreCampoTransporte1=="") $PCO_NombreCampoTransporte1="PCO_NombreCampoTransporte1";
 			if (@$PCO_ValorCampoTransporte1=="" )  $PCO_ValorCampoTransporte1="PCO_ValorCampoTransporte1";
 			if (@$PCO_NombreCampoTransporte2=="") $PCO_NombreCampoTransporte2="PCO_NombreCampoTransporte2";
@@ -231,7 +231,7 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: guardar_datos_formulario
+	Function: PCO_GuardarDatosFormulario
 	Guarda un registro sobre la tabla de aplicacion cuando es llamada la accion de guardar datos sobre un formulario.  Tomando todos los datos del formulario construye un query valido en SQL para hacer la insercion de los datos que debieron recibirse por metodo POST desde el formulario
 
 	Variables de entrada:
@@ -251,14 +251,14 @@
 		Registro agregado a la tabla de aplicacion
 
 	Ver tambien:
-		<eliminar_datos_formulario>
+		<PCO_EliminarDatosFormulario>
 */
-	if ($PCO_Accion=="guardar_datos_formulario")
+	if ($PCO_Accion=="PCO_GuardarDatosFormulario")
 		{
 			// POR CORREGIR:  Si el diseno cuenta con varios campos que ven hacia un mismo campo de base de datos el query no es valido
 
 			//Define valores de postacciones y campos de transporte de datos adicionales para redireccion de flujos de aplicacion cuando aplica 
-			if (@$PCO_PostAccion=="") $PCO_PostAccion="Ver_menu"; //Por defecto va al menu principal si no hay postaccion definida
+			if (@$PCO_PostAccion=="") $PCO_PostAccion="PCO_VerMenu"; //Por defecto va al menu principal si no hay postaccion definida
 			if (@$PCO_NombreCampoTransporte1=="") $PCO_NombreCampoTransporte1="PCO_NombreCampoTransporte1";
 			if (@$PCO_ValorCampoTransporte1=="" )  $PCO_ValorCampoTransporte1="PCO_ValorCampoTransporte1";
 			if (@$PCO_NombreCampoTransporte2=="") $PCO_NombreCampoTransporte2="PCO_NombreCampoTransporte2";
@@ -447,7 +447,7 @@
 			else
 				{
 					echo '<form name="PCO_FormContinuarFlujo_GuardarDatos" action="'.$ArchivoCORE.'" method="POST">
-						<!-- <input type="Hidden" name="PCO_Accion" value="editar_formulario"> -->
+						<!-- <input type="Hidden" name="PCO_Accion" value="PCO_EditarFormulario"> -->
 						<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
 						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
 						<input type="Hidden" name="'.$PCO_NombreCampoTransporte2.'" value="'.$PCO_ValorCampoTransporte2.'">
@@ -468,7 +468,7 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: eliminar_accion_formulario
+	Function: PCO_EliminarAccionFormulario
 	Elimina un boton creado para un formulario
 
 	Variables de entrada:
@@ -485,12 +485,12 @@
 	Ver tambien:
 		<PCO_EliminarCampoFormulario>
 */
-	if ($PCO_Accion=="eliminar_accion_formulario")
+	if ($PCO_Accion=="PCO_EliminarAccionFormulario")
 		{
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."formulario_boton WHERE id=? ","$boton");
 			PCO_Auditar("Elimina accion del formulario $formulario");
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="editar_formulario">
+			<input type="Hidden" name="PCO_Accion" value="PCO_EditarFormulario">
 			<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 			<input type="Hidden" name="formulario" value="'.$formulario.'">
 			<input type="Hidden" name="popup_activo" value="'.$popup_activo.'">
@@ -518,7 +518,7 @@
 		Registro de campo eliminado y formulario actualizado en pantalla
 
 	Ver tambien:
-		<eliminar_accion_formulario>
+		<PCO_EliminarAccionFormulario>
 */
 	if ($PCO_Accion=="PCO_EliminarCampoFormulario")
 		{
@@ -528,7 +528,7 @@
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE id=? ","$campo");
 			PCO_Auditar("Elimina campo del formulario $formulario");
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="editar_formulario">
+			<input type="Hidden" name="PCO_Accion" value="PCO_EditarFormulario">
 			<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 			<input type="Hidden" name="formulario" value="'.$formulario.'">
 			<input type="Hidden" name="popup_activo" value="'.$popup_activo.'">
@@ -590,7 +590,7 @@
 					
 					PCO_Auditar("Modifica diseno campo $idcampomodificado para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					    <input type="Hidden" name="PCO_Accion" value="editar_formulario">
+					    <input type="Hidden" name="PCO_Accion" value="PCO_EditarFormulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="popup_activo" value="">
@@ -599,7 +599,7 @@
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="editar_formulario">
+						<input type="Hidden" name="PCO_Accion" value="PCO_EditarFormulario">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
@@ -615,7 +615,7 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: guardar_campo_formulario
+	Function: PCO_GuardarCampoFormulario
 	Agrega un campo de datos, etiqueta, marco externo o informe a un formulario
 
 	Variables de entrada:
@@ -632,7 +632,7 @@
 	Ver tambien:
 		<PCO_EliminarCampoFormulario>
 */
-	if ($PCO_Accion=="guardar_campo_formulario")
+	if ($PCO_Accion=="PCO_GuardarCampoFormulario")
 		{
 			$mensaje_error="";
 			$tipo_objeto=$tipo;
@@ -665,7 +665,7 @@
 					$id=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 					PCO_Auditar("Crea campo $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					    <input type="Hidden" name="PCO_Accion" value="editar_formulario">
+					    <input type="Hidden" name="PCO_Accion" value="PCO_EditarFormulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="popup_activo" value="">
@@ -674,7 +674,7 @@
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="editar_formulario">
+						<input type="Hidden" name="PCO_Accion" value="PCO_EditarFormulario">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
@@ -690,7 +690,7 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: guardar_accion_formulario
+	Function: PCO_GuardarAccionFormulario
 	Agrega un boton con una accion determinada para un formulario
 
 	Variables de entrada:
@@ -705,9 +705,9 @@
 		Registro agregado y formulario actualizado en pantalla
 
 	Ver tambien:
-		<eliminar_accion_formulario>
+		<PCO_EliminarAccionFormulario>
 */
-	if ($PCO_Accion=="guardar_accion_formulario")
+	if ($PCO_Accion=="PCO_GuardarAccionFormulario")
 		{
 			$mensaje_error="";
 			if ($titulo=="") $mensaje_error=$MULTILANG_ErrFrmCampo3;
@@ -718,7 +718,7 @@
 					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$formulario$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$retorno_titulo$_SeparadorCampos_$retorno_texto$_SeparadorCampos_$confirmacion_texto$_SeparadorCampos_$retorno_icono$_SeparadorCampos_$retorno_estilo");
 					$id=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 					PCO_Auditar("Crea boton $id para formulario $formulario");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_formulario">
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_EditarFormulario">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="formulario" value="'.$formulario.'">
 						<input type="Hidden" name="popup_activo" value="FormularioBotones">
@@ -727,7 +727,7 @@
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="editar_formulario">
+						<input type="Hidden" name="PCO_Accion" value="PCO_EditarFormulario">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -799,7 +799,7 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: editar_formulario
+	Function: PCO_EditarFormulario
 	Despliega las ventanas requeridas para agregar los diferentes elementos al formulario como campos, etiquetas, marcos y acciones
 
 	Variables de entrada:
@@ -814,7 +814,7 @@
 		Ventanas con herramientas de edicion y vista previa del formulario en pantalla
 */
 /* ################################################################## */
-if ($PCO_Accion=="editar_formulario")
+if ($PCO_Accion=="PCO_EditarFormulario")
 	{
 	    if ($formulario=="") $formulario=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
 	    //Si no recibe un nombre de tabla intenta averiguarlo desde el formulario
@@ -933,7 +933,7 @@ if ($PCO_Accion=="editar_formulario")
 					if (@$popup_activo=="FormularioCampos")
 						echo '<input type="Hidden" name="PCO_Accion" value="PCO_ActualizarCampoFormulario">';
 					else
-						echo '<input type="Hidden" name="PCO_Accion" value="guardar_campo_formulario">';
+						echo '<input type="Hidden" name="PCO_Accion" value="PCO_GuardarCampoFormulario">';
 				?>
 				<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 				<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">
@@ -1949,7 +1949,7 @@ if ($PCO_Accion=="editar_formulario")
     <!-- INICIO MODAL ADICION DE BOTONES -->
     <?php PCO_AbrirDialogoModal("myModalBotonFormulario",$MULTILANG_FrmAgregaBot,"modal-wide"); ?>
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-				<input type="Hidden" name="PCO_Accion" value="guardar_accion_formulario">
+				<input type="Hidden" name="PCO_Accion" value="PCO_GuardarAccionFormulario">
 				<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 				<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">
 
@@ -2233,7 +2233,7 @@ if ($PCO_Accion=="editar_formulario")
 										<input type="hidden" name="campo" value="columna">
 										<input type="hidden" name="formulario" value="'.$formulario.'">
 										<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-										<input type="hidden" name="accion_retorno" value="editar_formulario">
+										<input type="hidden" name="accion_retorno" value="PCO_EditarFormulario">
 										<input type="Hidden" name="popup_activo" value="FormularioDiseno">
 								';
 								echo '
@@ -2263,7 +2263,7 @@ if ($PCO_Accion=="editar_formulario")
 											<input type="hidden" name="campo" value="peso">
 											<input type="hidden" name="formulario" value="'.$formulario.'">
 											<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-											<input type="hidden" name="accion_retorno" value="editar_formulario">
+											<input type="hidden" name="accion_retorno" value="PCO_EditarFormulario">
 											<input type="hidden" name="valor" value="'.$peso_aumentado.'">
 											<input type="Hidden" name="popup_activo" value="FormularioDiseno">
 										</form>
@@ -2274,7 +2274,7 @@ if ($PCO_Accion=="editar_formulario")
 											<input type="hidden" name="campo" value="peso">
 											<input type="hidden" name="formulario" value="'.$formulario.'">
 											<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-											<input type="hidden" name="accion_retorno" value="editar_formulario">
+											<input type="hidden" name="accion_retorno" value="PCO_EditarFormulario">
 											<input type="hidden" name="valor" value="'.$peso_disminuido.'">
 											<input type="Hidden" name="popup_activo" value="FormularioDiseno">
 										</form>
@@ -2297,7 +2297,7 @@ if ($PCO_Accion=="editar_formulario")
 											<input type="hidden" name="campo" value="obligatorio">
 											<input type="hidden" name="formulario" value="'.$formulario.'">
 											<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-											<input type="hidden" name="accion_retorno" value="editar_formulario">	
+											<input type="hidden" name="accion_retorno" value="PCO_EditarFormulario">	
 											<input type="Hidden" name="popup_activo" value="FormularioDiseno">								
 											';
 									if ($registro["campo"]!="id")
@@ -2315,7 +2315,7 @@ if ($PCO_Accion=="editar_formulario")
 												<input type="hidden" name="campo" value="visible">
 												<input type="hidden" name="formulario" value="'.$formulario.'">
 												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-												<input type="hidden" name="accion_retorno" value="editar_formulario">
+												<input type="hidden" name="accion_retorno" value="PCO_EditarFormulario">
 												<input type="Hidden" name="popup_activo" value="FormularioDiseno">
 											';
 									if ($registro["visible"])
@@ -2338,7 +2338,7 @@ if ($PCO_Accion=="editar_formulario")
 
 										<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-														<input type="hidden" name="PCO_Accion" value="editar_formulario">
+														<input type="hidden" name="PCO_Accion" value="PCO_EditarFormulario">
 														<input type="hidden" name="campo" value="'.$registro["id"].'">
 														<input type="hidden" name="formulario" value="'.$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -2400,7 +2400,7 @@ if ($PCO_Accion=="editar_formulario")
 											<input type="hidden" name="campo" value="peso">
 											<input type="hidden" name="formulario" value="'.$formulario.'">
 											<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-											<input type="hidden" name="accion_retorno" value="editar_formulario">
+											<input type="hidden" name="accion_retorno" value="PCO_EditarFormulario">
 											<input type="hidden" name="valor" value="'.$peso_aumentado.'">
 											<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 										</form>
@@ -2411,7 +2411,7 @@ if ($PCO_Accion=="editar_formulario")
 											<input type="hidden" name="campo" value="peso">
 											<input type="hidden" name="formulario" value="'.$formulario.'">
 											<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-											<input type="hidden" name="accion_retorno" value="editar_formulario">
+											<input type="hidden" name="accion_retorno" value="PCO_EditarFormulario">
 											<input type="hidden" name="valor" value="'.@$peso_disminuido.'">
 											<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 										</form>
@@ -2433,7 +2433,7 @@ if ($PCO_Accion=="editar_formulario")
 												<input type="hidden" name="campo" value="visible">
 												<input type="hidden" name="formulario" value="'.$formulario.'">
 												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-												<input type="hidden" name="accion_retorno" value="editar_formulario">
+												<input type="hidden" name="accion_retorno" value="PCO_EditarFormulario">
 												<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 											';
 									if ($registro["visible"])
@@ -2443,7 +2443,7 @@ if ($PCO_Accion=="editar_formulario")
 								echo '</form></td>';
 										echo '<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" name="bf'.$registro["id"].'" id="bf'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-														<input type="hidden" name="PCO_Accion" value="eliminar_accion_formulario">
+														<input type="hidden" name="PCO_Accion" value="PCO_EliminarAccionFormulario">
 														<input type="hidden" name="boton" value="'.$registro["id"].'">
 														<input type="hidden" name="formulario" value="'.$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -2496,7 +2496,7 @@ if ($PCO_Accion=="editar_formulario")
                             <i class="fa fa-bars fa-3x fa-fw"></i>
                     </a>
     			<br>
-    			<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="PCO_Accion" value="administrar_formularios"></form>
+    			<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="PCO_Accion" value="PCO_AdministrarFormularios"></form>
                 <button type="button" class="btn btn-danger btn-xs" onclick="document.cancelar.submit()">'.$MULTILANG_FrmVolverLista.'</button>
                 <br><br>
                 <button class="btn btn-xs btn-warning" onclick="PCOJS_OcultarBarraFlotanteIzquierda();">'.$MULTILANG_Cerrar.' '.$MULTILANG_BarraHtas.'</button>
@@ -2723,13 +2723,13 @@ if ($PCO_Accion=="editar_formulario")
 		Registro eliminado
 
 	Ver tambien:
-		<administrar_formularios>
+		<PCO_AdministrarFormularios>
 */
 	if ($PCO_Accion=="PCO_EliminarFormulario")
 		{
 	        if ($formulario=="") $formulario=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
 			PCO_EliminarFormulario($formulario);
-			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_formularios"></form>
+			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_AdministrarFormularios"></form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 		}
 
@@ -2791,7 +2791,7 @@ if ($PCO_Accion=="editar_formulario")
 		Registro de formulario actualizado
 
 	Ver tambien:
-		<administrar_formularios>
+		<PCO_AdministrarFormularios>
 */
 	if ($PCO_Accion=="PCO_ActualizarFormulario")
 		{
@@ -2806,7 +2806,7 @@ if ($PCO_Accion=="editar_formulario")
 					PCO_Auditar("Actualiza formulario $formulario para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
-					<input type="Hidden" name="PCO_Accion" value="editar_formulario">
+					<input type="Hidden" name="PCO_Accion" value="PCO_EditarFormulario">
 					<input type="Hidden" name="popup_activo" value="">
 					<input type="Hidden" name="formulario" value="'.$formulario.'"></form>
 								<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -2814,7 +2814,7 @@ if ($PCO_Accion=="editar_formulario")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
+						<input type="Hidden" name="PCO_Accion" value="PCO_AdministrarFormularios">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 					    <input type="Hidden" name="popup_activo" value="">
@@ -2827,7 +2827,7 @@ if ($PCO_Accion=="editar_formulario")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: guardar_formulario
+	Function: PCO_GuardarFormulario
 	Agrega un formulario vacio para la aplicacion
 
 	(start code)
@@ -2838,9 +2838,9 @@ if ($PCO_Accion=="editar_formulario")
 		Registro agregado y paso a las ventanas de edicion de formulario para agregar los elementos internos
 
 	Ver tambien:
-		<administrar_formularios>
+		<PCO_AdministrarFormularios>
 */
-	if ($PCO_Accion=="guardar_formulario")
+	if ($PCO_Accion=="PCO_GuardarFormulario")
 		{
 			$mensaje_error="";
 			if ($titulo=="") $mensaje_error.=$MULTILANG_FrmErr1.'<br>';
@@ -2856,7 +2856,7 @@ if ($PCO_Accion=="editar_formulario")
 					PCO_Auditar("Crea formulario $id para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
-					<input type="Hidden" name="PCO_Accion" value="editar_formulario">
+					<input type="Hidden" name="PCO_Accion" value="PCO_EditarFormulario">
 					<input type="Hidden" name="popup_activo" value="">
 					<input type="Hidden" name="formulario" value="'.$id.'"></form>
 								<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -2864,7 +2864,7 @@ if ($PCO_Accion=="editar_formulario")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
+						<input type="Hidden" name="PCO_Accion" value="PCO_AdministrarFormularios">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						<input type="Hidden" name="popup_activo" value="">
@@ -2884,7 +2884,7 @@ if ($PCO_Accion=="editar_formulario")
 		Archivo con el elemento exportado
 
 	Ver tambien:
-		<administrar_formularios>
+		<PCO_AdministrarFormularios>
 */
 	if ($PCO_Accion=="PCO_CopiarFormulario")
 		{
@@ -2993,7 +2993,7 @@ if ($PCO_Accion=="PCO_ConfirmarImportacionFormulario")
 			{
 				echo '			
 				<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_Accion" value="PCO_VerMenu">
 					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ActErrGral.'">
 					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 					</form>
@@ -3110,7 +3110,7 @@ if ($PCO_Accion=="PCO_AnalizarImportacionFormulario")
 			{
 				echo '			
 				<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+					<input type="Hidden" name="PCO_Accion" value="PCO_VerMenu">
 					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ActErrGral.'">
 					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 					</form>
@@ -3211,19 +3211,19 @@ if ($PCO_Accion=="PCO_ImportarFormulario")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: administrar_formularios
+	Function: PCO_AdministrarFormularios
 	Presenta ventanas con la posibilidad de agregar nuevo formulario a la aplicacion y el listado para administrar o editar los existentes
 
 	(start code)
 		SELECT * FROM ".$TablasCore."formulario ORDER BY titulo
 	(end)
 */
-if ($PCO_Accion=="administrar_formularios")
+if ($PCO_Accion=="PCO_AdministrarFormularios")
 	{
 		 ?>
 
         <form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="guardar_formulario">
+			<input type="Hidden" name="PCO_Accion" value="PCO_GuardarFormulario">
 			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 
 

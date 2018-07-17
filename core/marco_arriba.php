@@ -155,7 +155,7 @@
 
 
 				<?php
-					if ($PCOSESS_SesionAbierta && $PCO_Accion=="Ver_menu") {
+					if ($PCOSESS_SesionAbierta && $PCO_Accion=="PCO_VerMenu") {
 						echo '<ul class="nav nav-pills btn-xs">';
 						// Carga las opciones del menu superior
 
@@ -173,7 +173,7 @@
 					}
 
                     // Si el usuario es administrador valida que ya haya cambiado al menos su correo
-                    if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$Presentar_FullScreen!=1 && $PCO_Accion=="Ver_menu")
+                    if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$Presentar_FullScreen!=1 && $PCO_Accion=="PCO_VerMenu")
                         {
                             $registro_usuario=PCO_EjecutarSQL("SELECT correo FROM ".$TablasCore."usuario WHERE login=? ","$PCOSESS_LoginUsuario")->fetch();
                             if ($registro_usuario["correo"]=="sucorreo@dominio.com" || $registro_usuario["correo"]=="unix4you2@gmail.com")

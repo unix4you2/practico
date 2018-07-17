@@ -173,7 +173,7 @@
 					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET nombre=?,correo=? WHERE login='$PCOSESS_LoginUsuario' ","$nombre$_SeparadorCampos_$correo");
 					PCO_Auditar("Actualiza su perfil");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="Ver_menu">
+						<input type="Hidden" name="PCO_Accion" value="PCO_VerMenu">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_Actualizacion.': '.$MULTILANG_UsrPerfil.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$MULTILANG_ProcesoFin.'">
                         <input type="Hidden" name="PCO_ErrorIcono" value="fa-thumbs-o-up">
