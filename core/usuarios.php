@@ -140,17 +140,17 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	if ($PCO_Accion=="guardar_perfil_usuario")
+	if ($PCO_Accion=="PCO_GuardarPerfilUsuario")
 		{
 			/*
-				Function: guardar_perfil_usuario
+				Function: PCO_GuardarPerfilUsuario
 				Actualiza la informacion del perfil de usuario en su registro
 
 				Salida de la funcion:
 					* Usuario actualizado en el sistema.
 
 				Ver tambien:
-					<actualizar_perfil_usuario> | <listar_usuarios>
+					<PCO_ActualizarPerfilUsuario> | <listar_usuarios>
 			*/
 
 			//Verifica si esta o no en modo DEMO para hacer la operacion
@@ -185,7 +185,7 @@
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="actualizar_perfil_usuario">
+						<input type="Hidden" name="PCO_Accion" value="PCO_ActualizarPerfilUsuario">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
@@ -197,10 +197,10 @@
 
 /* ################################################################## */
 /* ################################################################## */
-if ($PCO_Accion=="actualizar_perfil_usuario")
+if ($PCO_Accion=="PCO_ActualizarPerfilUsuario")
 	{
         /*
-            Function: actualizar_perfil_usuario
+            Function: PCO_ActualizarPerfilUsuario
             Presenta el formulario con los datos del usuario actual para actualizar su informacion basica
 
             Salida de la funcion:
@@ -221,7 +221,7 @@ if ($PCO_Accion=="actualizar_perfil_usuario")
                 ?>
 
 				<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-					<input type="hidden" name="PCO_Accion" value="guardar_perfil_usuario">
+					<input type="hidden" name="PCO_Accion" value="PCO_GuardarPerfilUsuario">
 
                     <div class="form-group input-group">
                         <span class="input-group-addon">
@@ -271,14 +271,14 @@ if ($PCO_Accion=="actualizar_perfil_usuario")
 
 /* ################################################################## */
 /* ################################################################## */
-if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="establecer_nueva_contrasena")
+if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="establecer_nueva_contrasena")
 	{
         /*
             Function: establecer_nueva_contrasena
             Establece la nueva contrasena para un usuario.
 
             Ver tambien:
-                <recuperar_contrasena>
+                <PCO_RecuperarContrasena>
         */
         PCO_AbrirVentana($MULTILANG_OlvideClave, 'panel-primary');
 
@@ -322,7 +322,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="establecer_nueva_con
 
 /* ################################################################## */
 /* ################################################################## */
-if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="ingresar_clave_nueva")
+if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="ingresar_clave_nueva")
 	{
         /*
             Function: ingresar_clave_nueva
@@ -340,7 +340,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="ingresar_clave_nueva
                 if (@$Presentar_FullScreen==1)  echo '<input type="Hidden" name="Presentar_FullScreen" value="1">';
                 if (@$Precarga_EstilosBS==1)    echo '<input type="Hidden" name="Precarga_EstilosBS" value="1">';
 			?>
-                <input type="hidden" name="PCO_Accion" value="recuperar_contrasena">
+                <input type="hidden" name="PCO_Accion" value="PCO_RecuperarContrasena">
                 <input type="hidden" name="PCO_SubAccion" value="establecer_nueva_contrasena">
                 <input type="hidden" name="PCO_UsuarioRestablecimiento" value="<?php echo $usuario?>">
                 <input type="hidden" name="PCO_llave" value="<?php echo $llave?>">
@@ -395,14 +395,14 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="ingresar_clave_nueva
 
 /* ################################################################## */
 /* ################################################################## */
-if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_llave")
+if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="enviar_correo_llave")
 	{
         /*
             Function: enviar_correo_llave
             Envia un correo para un usuario con un enlace de restablecimiento de contrasena
 
             Ver tambien:
-                <recuperar_contrasena>
+                <PCO_RecuperarContrasena>
         */
 		PCO_AbrirVentana($MULTILANG_OlvideClave, 'panel-primary');
         //Busca si realmente hay un usuario registrado con ese login y le envia el mensaje
@@ -421,7 +421,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_llave"
                 else
                     $EnlaceRecuperacion="https://";
                 $EnlaceRecuperacion.=$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$_SERVER['PHP_SELF'];
-                $EnlaceRecuperacion.="?PCO_Accion=recuperar_contrasena&PCO_SubAccion=ingresar_clave_nueva&usuario=$usuario&llave=".$LlaveRecuperacion;
+                $EnlaceRecuperacion.="?PCO_Accion=PCO_RecuperarContrasena&PCO_SubAccion=ingresar_clave_nueva&usuario=$usuario&llave=".$LlaveRecuperacion;
                 //Datos para el correo
                 $cuenta_destinatario="___".substr($registro["correo"],3,strlen($registro["correo"])-6)."_____";
                 $remitente=$registro["correo"];
@@ -443,14 +443,14 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_llave"
 
 /* ################################################################## */
 /* ################################################################## */
-if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_con_usuario")
+if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="enviar_correo_con_usuario")
 	{
         /*
             Function: enviar_correo_con_usuario
             Busca un usuario por su correo electronico y le hace llegar su nombre de usuario al correo
 
             Ver tambien:
-                <recuperar_contrasena> | <enviar_correo_llave>
+                <PCO_RecuperarContrasena> | <enviar_correo_llave>
         */
 		PCO_AbrirVentana($MULTILANG_OlvideClave, 'panel-info');
         //Busca si realmente hay un usuario registrado con ese correo y le envia el mensaje
@@ -478,21 +478,21 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="enviar_correo_con_us
 
 /* ################################################################## */
 /* ################################################################## */
-if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="formulario_recuperacion")
+if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="formulario_recuperacion")
 	{
         /*
             Function: formulario_recuperacion
             Presenta el formulario para recuperacion de contrasenas
 
             Ver tambien:
-                <listar_usuarios> | <recuperar_contrasena>
+                <listar_usuarios> | <PCO_RecuperarContrasena>
         */
 		PCO_AbrirVentana($MULTILANG_OlvideClave, 'panel-info');
         PCO_Mensaje($MULTILANG_Importante,$MULTILANG_UsrResetAdmin,'','fa fa-key fa-4x','alert alert-info alert-dismissible');
 ?>
                 <?php echo $MULTILANG_Opcion; ?> <span class="badge">1</span>
 				<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-					<input type="hidden" name="PCO_Accion" value="recuperar_contrasena">
+					<input type="hidden" name="PCO_Accion" value="PCO_RecuperarContrasena">
                     <input type="hidden" name="PCO_SubAccion" value="enviar_correo_llave">
                     <label for="usuario"><?php echo $MULTILANG_UsrOlvideClave; ?>:</label>
                     <div class="form-group input-group">
@@ -509,7 +509,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="formulario_recuperac
                 <hr>
                 <?php echo $MULTILANG_Opcion; ?> <span class="badge">2</span>
 				<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-					<input type="hidden" name="PCO_Accion" value="recuperar_contrasena">
+					<input type="hidden" name="PCO_Accion" value="PCO_RecuperarContrasena">
                     <input type="hidden" name="PCO_SubAccion" value="enviar_correo_con_usuario">
                     <label for="correo"><?php echo $MULTILANG_UsrOlvideUsuario; ?>:</label>
                     <div class="form-group input-group">
@@ -532,7 +532,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="formulario_recuperac
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: copiar_informes
+	Function: PCO_CopiarInformes
 	Elimina los permisos definidos en informes para un usuario y los reemplaza  con los permisos definidos actualmente para otro usuario
 
 	Variables de entrada:
@@ -546,7 +546,7 @@ if ($PCO_Accion=="recuperar_contrasena" && $PCO_SubAccion=="formulario_recuperac
 	Ver tambien:
 		<permisos_usuario> | <informes_usuario>
 */
-if ($PCO_Accion=="copiar_informes")
+if ($PCO_Accion=="PCO_CopiarInformes")
 	{
 		PCO_CopiarInformes($usuarioo,$usuariod);
 		PCO_Auditar("Copia informes de $usuarioo al usuario $usuariod");
@@ -739,7 +739,7 @@ if ($PCO_Accion=="actualizar_clave")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: eliminar_informe_usuario
+	Function: PCO_EliminarInformeUsuario
 	Elimina un informe a un usuario determinado.
 
 	Variables de entrada:
@@ -757,7 +757,7 @@ if ($PCO_Accion=="actualizar_clave")
 	Ver tambien:
 		<informes_usuario> | <agregar_informe_usuario>
 */
-if ($PCO_Accion=="eliminar_informe_usuario")
+if ($PCO_Accion=="PCO_EliminarInformeUsuario")
 	{
 		// Elimina el informe
 		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe=? AND usuario=? ","$informe$_SeparadorCampos_$usuario");
@@ -788,7 +788,7 @@ if ($PCO_Accion=="eliminar_informe_usuario")
 		Tabla de permisos actualizada al agregar el registro correspondiente
 
 	Ver tambien:
-		<eliminar_informe_usuario> | <informes_usuario>
+		<PCO_EliminarInformeUsuario> | <informes_usuario>
 */
 	if ($PCO_Accion=="agregar_informe_usuario")
 		{
@@ -840,7 +840,7 @@ if ($PCO_Accion=="eliminar_informe_usuario")
 		Listado de informes disponibles en el perfil del usuario
 
 	Ver tambien:
-		<eliminar_informe_usuario> | <agregar_informe_usuario>
+		<PCO_EliminarInformeUsuario> | <agregar_informe_usuario>
 */
 if ($PCO_Accion=="informes_usuario")
     {
@@ -853,7 +853,7 @@ if ($PCO_Accion=="informes_usuario")
             
 			<form name="datoscopia" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="hidden" name="usuariod" value="<?php echo $usuario; ?>">
-			<input type="hidden" name="PCO_Accion" value="copiar_informes">
+			<input type="hidden" name="PCO_Accion" value="PCO_CopiarInformes">
 
 			<font face="" size="3" color="#971515"><b><?php echo $MULTILANG_UsrCopiaPer; ?>: </b></font>
 				<select name="usuarioo" class="selectpicker " data-live-search=true data-size=5 data-style="btn btn-default btn-xs ">
@@ -916,7 +916,7 @@ if ($PCO_Accion=="informes_usuario")
 							<td>'.$registro["categoria"].'</td>
 							<td align="center">
 									<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
-											<input type="hidden" name="PCO_Accion" value="eliminar_informe_usuario">
+											<input type="hidden" name="PCO_Accion" value="PCO_EliminarInformeUsuario">
 											<input type="hidden" name="usuario" value="'.$usuario.'">
 											<input type="hidden" name="informe" value="'.$registro["id"].'">
                                             <a  href="javascript:confirmar_evento(\''.$MULTILANG_UsrAdvDel.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs"><i class="fa fa-times fa-fw"></i> '.$MULTILANG_Eliminar.'</a>
@@ -1201,10 +1201,10 @@ if ($PCO_Accion=="permisos_usuario")
 
 /* ################################################################## */
 /* ################################################################## */
-	if ($PCO_Accion=="resetear_clave")
+	if ($PCO_Accion=="PCO_ResetearContrasena")
 		{
 			/*
-				Function: resetear_clave
+				Function: PCO_ResetearContrasena
 				Restablece la contrasena de un usuario por la nueva ingresada
 
 				Variables minimas de entrada:
@@ -1225,10 +1225,10 @@ if ($PCO_Accion=="permisos_usuario")
 
 /* ################################################################## */
 /* ################################################################## */
-	if ($PCO_Accion=="guardar_usuario_autoregistro")
+	if ($PCO_Accion=="PCO_GuardarUsuarioAutoregistro")
 		{
 			/*
-				Function: guardar_usuario_autoregistro
+				Function: PCO_GuardarUsuarioAutoregistro
 				Almacena la informacion basica de un usuario en la base de datos
 
 				Variables minimas de entrada:
@@ -1240,7 +1240,7 @@ if ($PCO_Accion=="permisos_usuario")
 					* Usuario registrado en el sistema.  El proceso agrega ademas las claves en MD5 y la llave de paso definida en el archivo de <Libreria base> 
 
 				Ver tambien:
-					<agregar_usuario_autoregistro> | <eliminar_usuario>
+					<PCO_AgregarUsuarioAutoregistro> | <eliminar_usuario>
 			*/
 			$mensaje_error="";
 
@@ -1303,14 +1303,14 @@ if ($PCO_Accion=="permisos_usuario")
 
 /* ################################################################## */
 /* ################################################################## */
-if ($PCO_Accion=="agregar_usuario_autoregistro")
+if ($PCO_Accion=="PCO_AgregarUsuarioAutoregistro")
 	{
         /*
-            Function: agregar_usuario_autoregistro
+            Function: PCO_AgregarUsuarioAutoregistro
             Presenta el formulario base para la adicion de usuarios al sistema en modo de auto-registro
 
             Salida de la funcion:
-                * Llamada al proceso <guardar_usuario_autoregistro> para almacenar la informacion correspondiente al nuevo usuario.
+                * Llamada al proceso <PCO_GuardarUsuarioAutoregistro> para almacenar la informacion correspondiente al nuevo usuario.
 
             Ver tambien:
                 <listar_usuarios> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario> | <muestra_seguridad_clave> | <seguridad_clave>
@@ -1323,7 +1323,7 @@ if ($PCO_Accion=="agregar_usuario_autoregistro")
 
 		<!-- VALOR MD5 PARA VACIO:  d41d8cd98f00b204e9800998ecf8427e-->
 				<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-					<input type="hidden" name="PCO_Accion" value="guardar_usuario_autoregistro">
+					<input type="hidden" name="PCO_Accion" value="PCO_GuardarUsuarioAutoregistro">
 
 					<div class="row">
 						<div class="col-md-12">
@@ -2028,7 +2028,7 @@ if ($PCO_Accion=="listar_usuarios")
 								</td>
 								<td colspan=5 align=center>
 										<form action="'.$ArchivoCORE.'" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-												<input type="hidden" name="PCO_Accion" value="resetear_clave">
+												<input type="hidden" name="PCO_Accion" value="PCO_ResetearContrasena">
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
                                                 <div class="form-group input-group">
                                                     <span class="input-group-addon">

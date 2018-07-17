@@ -42,13 +42,13 @@
 	<input type="Hidden" name="objeto" value="frm:-5:1">
 </form>
 <form method="POST" name="actualizar_perfil" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    <input type="Hidden" name="PCO_Accion" value="actualizar_perfil_usuario">
+    <input type="Hidden" name="PCO_Accion" value="PCO_ActualizarPerfilUsuario">
 </form>
 <form method="POST" name="reseteo_clave" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     <input type="Hidden" name="PCO_Accion" value="cambiar_clave">
 </form>
-<form method="POST" name="mis_informes" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    <input type="Hidden" name="PCO_Accion" value="mis_informes">
+<form method="POST" name="PCO_MisInformes" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+    <input type="Hidden" name="PCO_Accion" value="PCO_MisInformes">
 </form>
 <form method="POST" name="fileman_admin_embebido" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     <input type="Hidden" name="PCO_Accion" value="fileman_admin_embebido">

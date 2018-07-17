@@ -87,7 +87,7 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: exportar_informe
+	Function: PCO_ExportarInforme
 	Elimina un boton creado para los registros desplegados por un informe tabular
 
 	Variables de entrada:
@@ -165,7 +165,7 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 	Salida:
 		Datos del informe en archivo entregado para descarga
 */
-	if ($PCO_Accion=="exportar_informe")
+	if ($PCO_Accion=="PCO_ExportarInforme")
 		{
 
 			//Devuelve la consulta a su valor inicial
@@ -418,7 +418,7 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: eliminar_accion_informe
+	Function: PCO_EliminarAccionInforme
 	Elimina un boton creado para los registros desplegados por un informe tabular
 
 	Variables de entrada:
@@ -432,12 +432,12 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 	Salida:
 		Registro de boton eliminado e informe actualizado
 */
-	if ($PCO_Accion=="eliminar_accion_informe")
+	if ($PCO_Accion=="PCO_EliminarAccionInforme")
 		{
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."informe_boton WHERE id=? ","$boton");
 			PCO_Auditar("Elimina accion del informe $informe");
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="editar_informe">
+			<input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 			<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 			<input type="Hidden" name="informe" value="'.$informe.'">
 			<input type="Hidden" name="popup_activo" value="InformeAcciones">
@@ -449,7 +449,7 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: actualizar_agrupamiento_informe
+	Function: PCO_ActualizarAgrupamientoInforme
 	Cambia el registro asociado a un informe de la aplicacion para el campo de agrupamiento y ordenamiento
 
 	Variables de entrada:
@@ -467,16 +467,16 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 
 	Ver tambien:
 
-		<editar_informe>
+		<PCO_EditarInforme>
 */
-if ($PCO_Accion=="actualizar_agrupamiento_informe")
+if ($PCO_Accion=="PCO_ActualizarAgrupamientoInforme")
 	{
 		// Actualiza los datos
 		PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."informe SET agrupamiento=?,ordenamiento=? WHERE id=? ","$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$informe");
 		PCO_Auditar("Actualiza agrupamiento/ordenamiento informe $informe");
 		echo '
 			<form name="regresar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="editar_informe">
+			<input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 			<input type="Hidden" name="informe" value="'.$informe.'">
 			</form>
 		<script type="" language="JavaScript">
@@ -487,7 +487,7 @@ if ($PCO_Accion=="actualizar_agrupamiento_informe")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: actualizar_grafico_informe
+	Function: PCO_ActualizarGraficoInforme
 	Cambia el registro asociado a un informe de la aplicacion para el campo de formato de graficos
 
 	Variables de entrada:
@@ -504,9 +504,9 @@ if ($PCO_Accion=="actualizar_agrupamiento_informe")
 
 	Ver tambien:
 
-		<editar_informe>
+		<PCO_EditarInforme>
 */
-if ($PCO_Accion=="actualizar_grafico_informe")
+if ($PCO_Accion=="PCO_ActualizarGraficoInforme")
 	{
 		$mensaje_error="";
 		if ($nombre_serie_1=="" || $campo_etiqueta_serie_1=="" || $campo_valor_serie_1=="") $mensaje_error.=$MULTILANG_InfErr1;
@@ -529,7 +529,7 @@ if ($PCO_Accion=="actualizar_grafico_informe")
 				PCO_Auditar("Actualiza informe grafico $informe");
 				echo '
 					<form name="regresar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="editar_informe">
+					<input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 					<input type="Hidden" name="informe" value="'.$informe.'">
 					</form>
 				<script type="" language="JavaScript">
@@ -538,7 +538,7 @@ if ($PCO_Accion=="actualizar_grafico_informe")
 		else
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="editar_informe">
+					<input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 					<input type="Hidden" name="informe" value="'.$informe.'">
 					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
@@ -551,7 +551,7 @@ if ($PCO_Accion=="actualizar_grafico_informe")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: actualizar_informe
+	Function: PCO_ActualizarInforme
 	Cambia el registro asociado a un informe de la aplicacion
 
 	Variables de entrada:
@@ -568,9 +568,9 @@ if ($PCO_Accion=="actualizar_grafico_informe")
 
 	Ver tambien:
 
-		<editar_informe> | <actualizar_grafico_informe> | <actualizar_agrupamiento_informe>
+		<PCO_EditarInforme> | <PCO_ActualizarGraficoInforme> | <PCO_ActualizarAgrupamientoInforme>
 */
-if ($PCO_Accion=="actualizar_informe")
+if ($PCO_Accion=="PCO_ActualizarInforme")
 	{
 		$mensaje_error="";
 		if ($titulo=="") $mensaje_error.=$MULTILANG_InfErr2.'<br>';
@@ -581,7 +581,7 @@ if ($PCO_Accion=="actualizar_informe")
 				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."informe SET consulta_sql=?, conexion_origen_datos=?,subtotales_columna=?,subtotales_formato=?,tamano_paginacion=?, formulario_filtrado=?, soporte_datatable=?, variables_filtro=?, genera_pdf=?, formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=? WHERE id=? ","$consulta_sql$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$id");
 				PCO_Auditar("Actualiza informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="editar_informe">
+					<input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 					<input type="Hidden" name="informe" value="'.$id.'">
 					</form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -590,7 +590,7 @@ if ($PCO_Accion=="actualizar_informe")
 		else
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="editar_informe">
+					<input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 					<input type="Hidden" name="informe" value="'.$id.'">
 					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
@@ -603,7 +603,7 @@ if ($PCO_Accion=="actualizar_informe")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: eliminar_informe_condicion
+	Function: PCO_EliminarInformeCondicion
 	Elimina una condicion de filtrado para un informe de la aplicacion
 
 	Variables de entrada:
@@ -619,14 +619,14 @@ if ($PCO_Accion=="actualizar_informe")
 
 	Ver tambien:
 
-		<editar_informe> | <guardar_informe_condicion>
+		<PCO_EditarInforme> | <PCO_GuardarInformeCondicion>
 */
-if ($PCO_Accion=="eliminar_informe_condicion")
+if ($PCO_Accion=="PCO_EliminarInformeCondicion")
 	{
 		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE id=? ","$condicion");
 		@PCO_Auditar("Elimina condicion $condicion");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="editar_informe">
+			<input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 			<input type="Hidden" name="informe" value="'.$informe.'">
 			<input type="Hidden" name="popup_activo" value="InformeCondiciones">
 			</form>
@@ -637,7 +637,7 @@ if ($PCO_Accion=="eliminar_informe_condicion")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: guardar_informe_condicion
+	Function: PCO_GuardarInformeCondicion
 	Agrega una condicion de filtrado para un informe de la aplicacion
 
 	Variables de entrada:
@@ -654,9 +654,9 @@ if ($PCO_Accion=="eliminar_informe_condicion")
 
 	Ver tambien:
 
-		<editar_informe> | <eliminar_informe_condicion>
+		<PCO_EditarInforme> | <PCO_EliminarInformeCondicion>
 */
-	if ($PCO_Accion=="guardar_informe_condicion")
+	if ($PCO_Accion=="PCO_GuardarInformeCondicion")
 		{
 			$mensaje_error="";
 			$valor_i=$valor_izq.$valor_izq_manual.$operador_logico;
@@ -673,7 +673,7 @@ if ($PCO_Accion=="eliminar_informe_condicion")
 					//Agrega la condicion
 					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_condiciones (".$ListaCamposSinID_informe_condiciones.") VALUES (?,?,?,?,?)","$informe$_SeparadorCampos_$valor_i$_SeparadorCampos_$valor_o$_SeparadorCampos_$valor_d$_SeparadorCampos_$peso");
 					PCO_Auditar("Agrega condicion al informe $informe");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_informe">
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="popup_activo" value="InformeCondiciones">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -681,7 +681,7 @@ if ($PCO_Accion=="eliminar_informe_condicion")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="editar_informe">
+						<input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
@@ -694,7 +694,7 @@ if ($PCO_Accion=="eliminar_informe_condicion")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: eliminar_informe_campo
+	Function: PCO_EliminarInformeCampo
 	Elimina un campo definido para un informe de la aplicacion
 
 	Variables de entrada:
@@ -710,14 +710,14 @@ if ($PCO_Accion=="eliminar_informe_condicion")
 
 	Ver tambien:
 
-		<editar_informe>
+		<PCO_EditarInforme>
 */
-if ($PCO_Accion=="eliminar_informe_campo")
+if ($PCO_Accion=="PCO_EliminarInformeCampo")
 	{
 		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."informe_campos WHERE id=? ","$campo");
 		PCO_Auditar("Elimina campo $campo del informe $informe");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="editar_informe">
+			<input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 			<input type="Hidden" name="informe" value="'.$informe.'">
 			<input type="Hidden" name="popup_activo" value="InformeCampos">
 			</form>
@@ -728,7 +728,7 @@ if ($PCO_Accion=="eliminar_informe_campo")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: guardar_informe_campo
+	Function: PCO_GuardarInformeCampo
 	Agrega un campo definido para un informe de la aplicacion
 
 	Variables de entrada:
@@ -748,9 +748,9 @@ if ($PCO_Accion=="eliminar_informe_campo")
 
 	Ver tambien:
 
-		<editar_informe> | <eliminar_informe_campo>
+		<PCO_EditarInforme> | <PCO_EliminarInformeCampo>
 */
-	if ($PCO_Accion=="guardar_informe_campo")
+	if ($PCO_Accion=="PCO_GuardarInformeCampo")
 		{
 			$mensaje_error="";
 			if ($campo_manual.$campo_datos=="") $mensaje_error=$MULTILANG_InfErrCampo;
@@ -763,7 +763,7 @@ if ($PCO_Accion=="eliminar_informe_campo")
                     //Agrega el nuevo campo
 					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_campos (".$ListaCamposSinID_informe_campos.") VALUES (?,?,?,?,1,0,?)","$informe$_SeparadorCampos_$campo_definitivo$_SeparadorCampos_$alias_manual$_SeparadorCampos_$peso$_SeparadorCampos_$titulo_arbitrario");
 					PCO_Auditar("Agrega campo $campo_definitivo al informe $informe");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_informe">
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="popup_activo" value="InformeCampos">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -771,7 +771,7 @@ if ($PCO_Accion=="eliminar_informe_campo")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="editar_informe">
+						<input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
@@ -784,7 +784,7 @@ if ($PCO_Accion=="eliminar_informe_campo")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: eliminar_informe_tabla
+	Function: PCO_EliminarInformeTabla
 	Elimina una tabla de datos definida para un informe de la aplicacion
 
 	Variables de entrada:
@@ -800,14 +800,14 @@ if ($PCO_Accion=="eliminar_informe_campo")
 
 	Ver tambien:
 
-		<editar_informe> | <eliminar_informe_campo>
+		<PCO_EditarInforme> | <PCO_EliminarInformeCampo>
 */
-if ($PCO_Accion=="eliminar_informe_tabla")
+if ($PCO_Accion=="PCO_EliminarInformeTabla")
 	{
 		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."informe_tablas WHERE id=? ","$tabla");
 		PCO_Auditar("Elimina tabla $tabla del informe $informe");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="editar_informe">
+			<input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 			<input type="Hidden" name="informe" value="'.$informe.'">
 			<input type="Hidden" name="popup_activo" value="InformeTablas">
 			</form>
@@ -818,7 +818,7 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: guardar_informe_tabla
+	Function: PCO_GuardarInformeTabla
 	Agrega una tabla de datos para un informe de la aplicacion
 
 	Variables de entrada:
@@ -838,9 +838,9 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 
 	Ver tambien:
 
-		<editar_informe>
+		<PCO_EditarInforme>
 */
-	if ($PCO_Accion=="guardar_informe_tabla")
+	if ($PCO_Accion=="PCO_GuardarInformeTabla")
 		{
 			$mensaje_error="";
 			if ($tabla_manual.$tabla_datos=="") $mensaje_error=$MULTILANG_InfErrTabla;
@@ -849,7 +849,7 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 					$tabla_definitiva=$tabla_manual.$tabla_datos;
 					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_tablas (".$ListaCamposSinID_informe_tablas.") VALUES (?,?,?)","$informe$_SeparadorCampos_$tabla_definitiva$_SeparadorCampos_$alias_manual");
 					PCO_Auditar("Agrega tabla $tabla_definitiva al informe $informe");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_informe">
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="popup_activo" value="InformeTablas">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -857,7 +857,7 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="editar_informe">
+						<input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
@@ -870,7 +870,7 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: guardar_accion_informe
+	Function: PCO_GuardarAccionInforme
 	Agrega un boton con una accion determinada para un registro desplegado por un informe tabular
 
 	Variables de entrada:
@@ -885,9 +885,9 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 		Registro agregado y formulario actualizado en pantalla
 
 	Ver tambien:
-		<eliminar_accion_informe>
+		<PCO_EliminarAccionInforme>
 */
-	if ($PCO_Accion=="guardar_accion_informe")
+	if ($PCO_Accion=="PCO_GuardarAccionInforme")
 		{
 			$mensaje_error="";
 			if ($titulo=="" && $imagen=="") $mensaje_error=$MULTILANG_InfErr4;
@@ -896,7 +896,7 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 				{
 					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_boton (".$ListaCamposSinID_informe_boton.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$informe$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$confirmacion_texto$_SeparadorCampos_$destino$_SeparadorCampos_$pantalla_completa$_SeparadorCampos_$precargar_estilos$_SeparadorCampos_$imagen");
 					PCO_Auditar("Crea boton $titulo para informe $informe");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="editar_informe">
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 						<input type="Hidden" name="informe" value="'.$informe.'">
 						<input type="Hidden" name="popup_activo" value="FormularioBotones">
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -904,7 +904,7 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="editar_informe">
+						<input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						<input type="Hidden" name="informe" value="'.$informe.'">
@@ -917,7 +917,7 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: eliminar_registro_informe
+	Function: PCO_EliminarRegistroInforme
 	Elimina los registros coincidentes con los datos de un boton de accion sobre un informe tabular
 
 	Variables de entrada:
@@ -934,7 +934,7 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 		Registro eliminado de la tabla de aplicacion
 
 */
-	if ($PCO_Accion=="eliminar_registro_informe")
+	if ($PCO_Accion=="PCO_EliminarRegistroInforme")
 		{
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$tabla." WHERE $campo='$valor'");
 			PCO_Auditar("Elimina registro donde $campo = $valor en $tabla");
@@ -945,14 +945,14 @@ if ($PCO_Accion=="eliminar_informe_tabla")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: editar_informe
+	Function: PCO_EditarInforme
 	Actualiza la informacion asociada a un informe mediante dos ventanas.  En una se cargan los datos basicos y que pueden ser actualizados directamente.  En otra se cargan accesos a ventanas emergentes que permiten cambiar otros parámetros mas especificos.
 
 	Salida:
 		Ventanas con los campos y enlaces requeridos para la edicion
 
 */
-if ($PCO_Accion=="editar_informe")
+if ($PCO_Accion=="PCO_EditarInforme")
 	{
 	    if ($informe=="") $informe=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
 		// Busca datos del informe
@@ -967,7 +967,7 @@ if ($PCO_Accion=="editar_informe")
             <?php PCO_AbrirDialogoModal("myModalTablaInforme",$MULTILANG_InfAgregaTabla); ?>
 
 				<form name="datosform" id="datosform" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-                    <input type="Hidden" name="PCO_Accion" value="guardar_informe_tabla">
+                    <input type="Hidden" name="PCO_Accion" value="PCO_GuardarInformeTabla">
                     <input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
                     <label for="tabla_datos"><?php echo $MULTILANG_TablaDatos; ?>:</label>
@@ -1041,7 +1041,7 @@ if ($PCO_Accion=="editar_informe")
 										<td>'.$registro["valor_alias"].'</td>
 										<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" name="df'.$registro["id"].'" id="df'.$registro["id"].'">
-														<input type="hidden" name="PCO_Accion" value="eliminar_informe_tabla">
+														<input type="hidden" name="PCO_Accion" value="PCO_EliminarInformeTabla">
 														<input type="hidden" name="tabla" value="'.$registro["id"].'">
 														<input type="hidden" name="informe" value="'.$informe.'">
                                                         <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvBorrado.'\',df'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
@@ -1064,7 +1064,7 @@ if ($PCO_Accion=="editar_informe")
             <?php PCO_AbrirDialogoModal("myModalCamposInforme",$MULTILANG_InfAgregaCampo,"modal-wide"); ?>
 
 				<form name="datosformc" id="datosformc" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-                    <input type="Hidden" name="PCO_Accion" value="guardar_informe_campo">
+                    <input type="Hidden" name="PCO_Accion" value="PCO_GuardarInformeCampo">
                     <input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
 
@@ -1167,7 +1167,7 @@ if ($PCO_Accion=="editar_informe")
 												<input type="hidden" name="campo" value="peso">
 												<input type="hidden" name="informe" value="'.$informe.'">
 												<input type="hidden" name="nombre_tabla" value="'.@$nombre_tabla.'">
-												<input type="hidden" name="accion_retorno" value="editar_informe">
+												<input type="hidden" name="accion_retorno" value="PCO_EditarInforme">
 												<input type="hidden" name="valor" value="'.$peso_aumentado.'">
 												<input type="Hidden" name="popup_activo" value="InformeCampos">
 											</form>
@@ -1178,7 +1178,7 @@ if ($PCO_Accion=="editar_informe")
 												<input type="hidden" name="campo" value="peso">
 												<input type="hidden" name="informe" value="'.$informe.'">
 												<input type="hidden" name="nombre_tabla" value="'.@$nombre_tabla.'">
-												<input type="hidden" name="accion_retorno" value="editar_informe">
+												<input type="hidden" name="accion_retorno" value="PCO_EditarInforme">
 												<input type="hidden" name="valor" value="'.$peso_disminuido.'">
 												<input type="Hidden" name="popup_activo" value="InformeCampos">
 											</form>';
@@ -1199,7 +1199,7 @@ if ($PCO_Accion=="editar_informe")
 												<input type="hidden" name="campo" value="visible">
 												<input type="hidden" name="informe" value="'.$informe.'">
 												<input type="hidden" name="nombre_tabla" value="'.@$nombre_tabla.'">
-												<input type="hidden" name="accion_retorno" value="editar_informe">
+												<input type="hidden" name="accion_retorno" value="PCO_EditarInforme">
 												<input type="Hidden" name="popup_activo" value="InformeCampos">
 											';
 									if ($registro["visible"])
@@ -1216,7 +1216,7 @@ if ($PCO_Accion=="editar_informe")
 												<input type="hidden" name="campo" value="editable">
 												<input type="hidden" name="informe" value="'.$informe.'">
 												<input type="hidden" name="nombre_tabla" value="'.@$nombre_tabla.'">
-												<input type="hidden" name="accion_retorno" value="editar_informe">
+												<input type="hidden" name="accion_retorno" value="PCO_EditarInforme">
 												<input type="Hidden" name="popup_activo" value="InformeCampos">
 											';
 									if ($registro["editable"])
@@ -1227,7 +1227,7 @@ if ($PCO_Accion=="editar_informe")
 
 								echo '		<td>
 												<form action="'.$ArchivoCORE.'" method="POST" name="cadfc'.$registro["id"].'" id="cadfc'.$registro["id"].'">
-														<input type="hidden" name="PCO_Accion" value="eliminar_informe_campo">
+														<input type="hidden" name="PCO_Accion" value="PCO_EliminarInformeCampo">
 														<input type="hidden" name="campo" value="'.$registro["id"].'">
 														<input type="hidden" name="informe" value="'.$informe.'">
                                                         <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvBorrado.'\',cadfc'.$registro["id"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
@@ -1250,7 +1250,7 @@ if ($PCO_Accion=="editar_informe")
             <?php PCO_AbrirDialogoModal("myModalCondicionesInforme",$MULTILANG_InfAddCondicion,"modal-wide"); ?>
 
 				<form name="datosformco" id="datosformco" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="Hidden" name="PCO_Accion" value="guardar_informe_condicion">
+					<input type="Hidden" name="PCO_Accion" value="PCO_GuardarInformeCondicion">
 					<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
                     <div class="row">
@@ -1385,7 +1385,7 @@ if ($PCO_Accion=="editar_informe")
 												<input type="hidden" name="campo" value="peso">
 												<input type="hidden" name="informe" value="'.$informe.'">
 												<input type="hidden" name="nombre_tabla" value="'.@$nombre_tabla.'">
-												<input type="hidden" name="accion_retorno" value="editar_informe">
+												<input type="hidden" name="accion_retorno" value="PCO_EditarInforme">
 												<input type="hidden" name="valor" value="'.$peso_aumentado.'">
 												<input type="Hidden" name="popup_activo" value="InformeCondiciones">
 											</form>
@@ -1396,7 +1396,7 @@ if ($PCO_Accion=="editar_informe")
 												<input type="hidden" name="campo" value="peso">
 												<input type="hidden" name="informe" value="'.$informe.'">
 												<input type="hidden" name="nombre_tabla" value="'.@$nombre_tabla.'">
-												<input type="hidden" name="accion_retorno" value="editar_informe">
+												<input type="hidden" name="accion_retorno" value="PCO_EditarInforme">
 												<input type="hidden" name="valor" value="'.$peso_disminuido.'">
 												<input type="Hidden" name="popup_activo" value="InformeCondiciones">
 											</form>';
@@ -1410,7 +1410,7 @@ if ($PCO_Accion=="editar_informe")
 										</td>
 										<td>
 												<form action="'.$ArchivoCORE.'" method="POST" name="dfco'.$registro["id"].'" id="dfco'.$registro["id"].'">
-														<input type="hidden" name="PCO_Accion" value="eliminar_informe_condicion">
+														<input type="hidden" name="PCO_Accion" value="PCO_EliminarInformeCondicion">
 														<input type="hidden" name="condicion" value="'.$registro["id"].'">
 														<input type="hidden" name="informe" value="'.$informe.'">
                                                         <a href="javascript:confirmar_evento(\''.$MULTILANG_InfAdvBorrado.'\',dfco'.$registro["id"].');" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
@@ -1433,7 +1433,7 @@ if ($PCO_Accion=="editar_informe")
             ?>
 
 				<form name="datosformcograf" id="datosformcograf" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="Hidden" name="PCO_Accion" value="actualizar_grafico_informe">
+					<input type="Hidden" name="PCO_Accion" value="PCO_ActualizarGraficoInforme">
 					<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
 				<!-- SELECCION DE SERIES  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
@@ -1580,7 +1580,7 @@ if ($PCO_Accion=="editar_informe")
                         $registro_agrupacion = $consulta_agrupacion->fetch();
                         ?>
                         <form name="datosformcogrup" id="datosformcogrup" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-                            <input type="Hidden" name="PCO_Accion" value="actualizar_agrupamiento_informe">
+                            <input type="Hidden" name="PCO_Accion" value="PCO_ActualizarAgrupamientoInforme">
                             <input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
                                 <div class="form-group input-group">
@@ -1621,7 +1621,7 @@ if ($PCO_Accion=="editar_informe")
             ?>
 
 				<form name="datosfield" id="datosfield" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-				<input type="Hidden" name="PCO_Accion" value="guardar_accion_informe">
+				<input type="Hidden" name="PCO_Accion" value="PCO_GuardarAccionInforme">
 				<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
 				<script language="JavaScript">
@@ -1874,7 +1874,7 @@ if ($PCO_Accion=="editar_informe")
 											<input type="hidden" name="campo" value="peso">
 											<input type="hidden" name="informe" value="'.$informe.'">
 											<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-											<input type="hidden" name="accion_retorno" value="editar_informe">
+											<input type="hidden" name="accion_retorno" value="PCO_EditarInforme">
 											<input type="hidden" name="valor" value="'.$peso_aumentado.'">
 											<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 										</form>
@@ -1885,7 +1885,7 @@ if ($PCO_Accion=="editar_informe")
 											<input type="hidden" name="campo" value="peso">
 											<input type="hidden" name="informe" value="'.$informe.'">
 											<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-											<input type="hidden" name="accion_retorno" value="editar_informe">
+											<input type="hidden" name="accion_retorno" value="PCO_EditarInforme">
 											<input type="hidden" name="valor" value="'.@$peso_disminuido.'">
 											<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 										</form>
@@ -1907,7 +1907,7 @@ if ($PCO_Accion=="editar_informe")
 												<input type="hidden" name="campo" value="visible">
 												<input type="hidden" name="informe" value="'.$informe.'">
 												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-												<input type="hidden" name="accion_retorno" value="editar_informe">
+												<input type="hidden" name="accion_retorno" value="PCO_EditarInforme">
 												<input type="Hidden" name="popup_activo" value="FormularioAcciones">
 											';
 									if ($registro["visible"])
@@ -1917,7 +1917,7 @@ if ($PCO_Accion=="editar_informe")
 								echo '</form></td>';
 										echo '<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" name="bf'.$registro["id"].'" id="bf'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-														<input type="hidden" name="PCO_Accion" value="eliminar_accion_informe">
+														<input type="hidden" name="PCO_Accion" value="PCO_EliminarAccionInforme">
 														<input type="hidden" name="boton" value="'.$registro["id"].'">
 														<input type="hidden" name="informe" value="'.$informe.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -2007,7 +2007,7 @@ if ($PCO_Accion=="editar_informe")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: eliminar_informe
+	Function: PCO_EliminarInforme
 	Elimina un informe de la aplicacion, incluyendo todos los registros asociados en otras tablas
 
 	Variables de entrada:
@@ -2019,12 +2019,12 @@ if ($PCO_Accion=="editar_informe")
 
 	Ver tambien:
 
-		<editar_informe>
+		<PCO_EditarInforme>
 */
-if ($PCO_Accion=="eliminar_informe")
+if ($PCO_Accion=="PCO_EliminarInforme")
 	{
 	    if ($informe=="") $informe=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
-		PCO_EliminarInforme($informe);
+		PCOFUNC_EliminarInforme($informe);
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_AdministrarInformes"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
@@ -2034,7 +2034,7 @@ if ($PCO_Accion=="eliminar_informe")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: guardar_informe
+	Function: PCO_GuardarInforme
 	Agrega un informe a la aplicacion
 
 		(start code)
@@ -2046,9 +2046,9 @@ if ($PCO_Accion=="eliminar_informe")
 
 	Ver tambien:
 
-		<editar_informe>
+		<PCO_EditarInforme>
 */
-if ($PCO_Accion=="guardar_informe")
+if ($PCO_Accion=="PCO_GuardarInforme")
 	{
 	    //Establece valor por defecto cuando es el seleccionado
 	    if ($conexion_origen_datos==$MULTILANG_ConnPredeterminada) $conexion_origen_datos="";
@@ -2064,7 +2064,7 @@ if ($PCO_Accion=="guardar_informe")
 				$id=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 				PCO_Auditar("Crea informe $id");
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-				<input type="Hidden" name="PCO_Accion" value="editar_informe">
+				<input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 				<input type="Hidden" name="informe" value="'.$id.'"></form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 			}
@@ -2083,7 +2083,7 @@ if ($PCO_Accion=="guardar_informe")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: clonar_diseno_informe
+	Function: PCO_ClonarDisenoInforme
 	Agrega un informe a partir de otro para la aplicacion
 
 	Salida:
@@ -2092,7 +2092,7 @@ if ($PCO_Accion=="guardar_informe")
 	Ver tambien:
 		<administrar_formularios>
 */
-	if ($PCO_Accion=="clonar_diseno_informe")
+	if ($PCO_Accion=="PCO_ClonarDisenoInforme")
 		{
 				//Presenta la ventana con informacion y enlace de descarga
 				PCO_AbrirVentana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
@@ -2116,16 +2116,16 @@ if ($PCO_Accion=="guardar_informe")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: definir_copia_informes
+	Function: PCO_DefinirCopiaInformes
 	Presenta opciones para generar una copia del informe seleccionado usando diferentes formatos
 */
-if ($PCO_Accion=="definir_copia_informes")
+if ($PCO_Accion=="PCO_DefinirCopiaInformes")
 	{
 	    if ($informe=="") $informe=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
 		 ?>
 
         <form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="clonar_diseno_informe">
+			<input type="Hidden" name="PCO_Accion" value="PCO_ClonarDisenoInforme">
 			<input type="Hidden" name="informe" value="<?php echo $informe; ?>">
 
             <br>
@@ -2158,7 +2158,7 @@ if ($PCO_Accion=="definir_copia_informes")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: confirmar_importacion_informe
+	Function: PCO_ConfirmarImportacionInforme
 	Lee el archivo cargado sobre /tmp y regenera el objeto alli existente
 
 	Variables de entrada:
@@ -2168,7 +2168,7 @@ if ($PCO_Accion=="definir_copia_informes")
 	Salida:
 		Objetos generados a partir de la definicion del archivo
 */
-if ($PCO_Accion=="confirmar_importacion_informe")
+if ($PCO_Accion=="PCO_ConfirmarImportacionInforme")
 	{
 		echo "<br>";
 		$mensaje_error="";
@@ -2215,7 +2215,7 @@ if ($PCO_Accion=="confirmar_importacion_informe")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: analizar_importacion_informe
+	Function: PCO_AnalizarImportacionInforme
 	Revisa el archivo cargado sobre /tmp para validar si se trata de un objeto definido correctamente
 
 	Variables de entrada:
@@ -2225,7 +2225,7 @@ if ($PCO_Accion=="confirmar_importacion_informe")
 	Salida:
 		Analisis del archivo y detalles del objeto
 */
-if ($PCO_Accion=="analizar_importacion_informe")
+if ($PCO_Accion=="PCO_AnalizarImportacionInforme")
 	{
 		echo "<br>";
 		PCO_AbrirVentana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
@@ -2304,7 +2304,7 @@ if ($PCO_Accion=="analizar_importacion_informe")
                 if ($existen_conflictos_entre_ids==0)
                     echo '
                     <form name="goahead" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="confirmar_importacion_informe">
+						<input type="Hidden" name="PCO_Accion" value="PCO_ConfirmarImportacionInforme">
 						<input type="Hidden" name="archivo_cargado" value="'.$archivo_cargado.'">
                         <button type="submit" class="btn btn-danger btn-block"><i class="fa fa-warning texto-blink icon-yellow"></i> '.$MULTILANG_Importar.' <i class="fa fa-warning texto-blink icon-yellow"></i></button>
 					</form>';
@@ -2332,10 +2332,10 @@ if ($PCO_Accion=="analizar_importacion_informe")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: importar_informe
+	Function: PCO_ImportarInforme
 	Presenta el paso 1 de importacion de informes
 */
-if ($PCO_Accion=="importar_informe")
+if ($PCO_Accion=="PCO_ImportarInforme")
 	{
 		echo "<br>";
 		PCO_AbrirVentana($NombreRAD.' - '.$MULTILANG_FrmImportar,'panel-info');
@@ -2356,7 +2356,7 @@ if ($PCO_Accion=="importar_informe")
                             <input type="hidden" name="extension_archivo" value=".xml">
                             <input type="hidden" name="MAX_FILE_SIZE" value="8192000">
                             <input type="Hidden" name="PCO_Accion" value="cargar_archivo">
-                            <input type="Hidden" name="siguiente_accion" value="analizar_importacion_informe">
+                            <input type="Hidden" name="siguiente_accion" value="PCO_AnalizarImportacionInforme">
                             <input type="Hidden" name="texto_boton_siguiente" value="Continuar con la revisi&oacute;n">
                             <input type="Hidden" name="carpeta" value="tmp">
                             <input name="archivo" type="file" class="form-control btn btn-info">
@@ -2427,7 +2427,7 @@ if ($PCO_Accion=="importar_informe")
 		Listado de informes y formulario para creacion de nuevos
 
 	Ver tambien:
-	<guardar_informe> | <eliminar_informe>
+	<PCO_GuardarInforme> | <PCO_EliminarInforme>
 */
 if ($PCO_Accion=="PCO_AdministrarInformes")
 	{
@@ -2442,7 +2442,7 @@ if ($PCO_Accion=="PCO_AdministrarInformes")
 
 		<?php PCO_AbrirVentana($MULTILANG_Importar."/".$MULTILANG_Exportar." ($MULTILANG_Avanzado)", 'panel-default'); ?>
             <form name="importacion" id="importacion" action="<?php echo $ArchivoCORE; ?>" method="POST">
-    			<input type="Hidden" name="PCO_Accion" value="importar_informe">
+    			<input type="Hidden" name="PCO_Accion" value="PCO_ImportarInforme">
             </form>
             <a class="btn btn-warning btn-block" href="javascript:document.importacion.submit();"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_FrmImportar; ?></a>
     
@@ -2489,7 +2489,7 @@ echo '
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: mis_informes
+	Function: PCO_MisInformes
 	Presenta las ventanas organizando los informes por categoria segun los permisos del usuario.  Para el usuario administrador se visualizan todos los informes.
 
 	Variables de entrada:
@@ -2508,7 +2508,7 @@ echo '
 	Ver tambien:
 	<PCO_AdministrarInformes>
 */
-if ($PCO_Accion=="mis_informes")
+if ($PCO_Accion=="PCO_MisInformes")
 	{
         $LimiteInferiorBusqueda="-10000";
         if ($ModoDesarrolladorPractico!="-10000")

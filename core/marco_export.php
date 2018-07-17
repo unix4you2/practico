@@ -38,7 +38,7 @@
     <?php PCO_AbrirDialogoModal("myModalEXPORTACION",$MULTILANG_Exportar,"oculto_impresion"); ?>
 
 		<form  name="exportacion_informe" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-			<input type="Hidden" name="PCO_Accion" value="exportar_informe">
+			<input type="Hidden" name="PCO_Accion" value="PCO_ExportarInforme">
 			<input type="Hidden" name="PCO_Titulo" value="<?php echo $registro_informe["titulo"]; ?>">
 			<input type="Hidden" name="PCO_IDInforme" value="<?php echo $informe; ?>">
 			<input type="Hidden" name="PCO_Consulta" value="<?php echo base64_encode(PCO_ConstruirConsultaInforme($informe,1)); ?>">

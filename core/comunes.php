@@ -426,7 +426,7 @@ function PCO_ImprimirPanelSimpleDashboard($ClaseColumnas,$EstiloPanel,$ClaseIcon
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: PCO_EliminarInforme
+	Function: PCOFUNC_EliminarInforme
 	Elimina un informe definido para la aplicacion incluyendo todos los objetos definidos en su interior
 
 	Variables de entrada:
@@ -445,7 +445,7 @@ function PCO_ImprimirPanelSimpleDashboard($ClaseColumnas,$EstiloPanel,$ClaseIcon
 	Ver tambien:
 		<administrar_formularios>
 */
-function PCO_EliminarInforme($informe="")
+function PCOFUNC_EliminarInforme($informe="")
 	{
 		global $TablasCore;
 		if ($informe!="")
@@ -1162,7 +1162,7 @@ function PCO_ImportarXMLInforme($xml_importado)
 						$ListaCamposParaID="id,";
 						$InterroganteParaID="?,";
 						$ValorInsercionParaID=base64_decode($xml_importado->core_informe[0]->id).$_SeparadorCampos_;
-						PCO_EliminarInforme(base64_decode($xml_importado->core_informe[0]->id));
+						PCOFUNC_EliminarInforme(base64_decode($xml_importado->core_informe[0]->id));
 					}
 
 				// Establece valores para cada campo a insertar en el nuevo informe
@@ -1470,7 +1470,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 							//Presenta la ventana con informacion y enlace de descarga
 							?>
 								<form action="<?php echo $ArchivoCORE; ?>" method="POST" name="det<?php echo $idObjetoInsertado; ?>" id="det<?php echo $idObjetoInsertado; ?>">
-										<input type="hidden" name="PCO_Accion" value="editar_informe">
+										<input type="hidden" name="PCO_Accion" value="PCO_EditarInforme">
 										<input type="hidden" name="informe" value="<?php echo $idObjetoInsertado; ?>">
 										<input type="hidden" name="PCO_Valor" value="<?php echo $idObjetoInsertado; ?>">
 								        <a class="btn btn-success btn-block" href="javascript:document.det<?php echo $idObjetoInsertado; ?>.submit();"><i class="fa fa-pencil"></i> <?php echo $MULTILANG_Editar." <b>".$titulo."</b>"; ?></a>
@@ -2472,35 +2472,35 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 
 		// Verifica mapeo de permisos para acciones que llaman a otras, heredadas.  Valores en = 1  son funciones publicas:
 		// FUNCION_solicitada_por_el_usuario				FUNCION_madre_de_entrada_a_funcion_solicitada
-		if ($PCO_Accion== "mis_informes")						$retorno = 1;
-		if ($PCO_Accion== "guardar_informe")					$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "editar_informe")						$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "clonar_diseno_informe")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "definir_copia_informes")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "eliminar_informe")					$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "actualizar_informe")					$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "eliminar_informe_tabla")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "guardar_informe_tabla")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "eliminar_informe_campo")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "guardar_informe_campo")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "guardar_informe_condicion")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "eliminar_informe_condicion")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "actualizar_grafico_informe")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "actualizar_agrupamiento_informe")	$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "guardar_accion_informe")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "eliminar_registro_informe")			$retorno = 1;
-		if ($PCO_Accion== "eliminar_accion_informe")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "exportar_informe")					$retorno = 1;
-		if ($PCO_Accion== "importar_informe")					$retorno = 1;
-		if ($PCO_Accion== "analizar_importacion_informe")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "confirmar_importacion_informe")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_MisInformes")					$retorno = 1;
+		if ($PCO_Accion== "PCO_GuardarInforme")					$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_EditarInforme")					$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_ClonarDisenoInforme")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_DefinirCopiaInformes")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_EliminarInforme")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_ActualizarInforme")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_EliminarInformeTabla")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_GuardarInformeTabla")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_EliminarInformeCampo")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_GuardarInformeCampo")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_GuardarInformeCondicion")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_EliminarInformeCondicion")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_ActualizarGraficoInforme")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_ActualizarAgrupamientoInforme")	$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_GuardarAccionInforme")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_EliminarRegistroInforme")		$retorno = 1;
+		if ($PCO_Accion== "PCO_EliminarAccionInforme")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_ExportarInforme")				$retorno = 1;
+		if ($PCO_Accion== "PCO_ImportarInforme")				$retorno = 1;
+		if ($PCO_Accion== "PCO_AnalizarImportacionInforme")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
+		if ($PCO_Accion== "PCO_ConfirmarImportacionInforme")	$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
 		
 		// Funciones en core/usuarios.php
 		if ($PCO_Accion== "cambiar_clave")						$retorno = 1;
-        if ($PCO_Accion== "actualizar_perfil_usuario")			$retorno = 1;
-        if ($PCO_Accion== "guardar_perfil_usuario")				$retorno = 1;
+        if ($PCO_Accion== "PCO_ActualizarPerfilUsuario")		$retorno = 1;
+        if ($PCO_Accion== "PCO_GuardarPerfilUsuario")			$retorno = 1;
         if ($PCO_Accion== "ver_seguimiento_monitoreo")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "resetear_clave")						$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "PCO_ResetearContrasena")				$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
 		if ($PCO_Accion== "ver_seguimiento_general")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
 		if ($PCO_Accion== "ver_seguimiento_especifico")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
 		if ($PCO_Accion== "actualizar_clave")					$retorno = PCO_PermisoHeredadoAccion("cambiar_clave");
@@ -2513,11 +2513,11 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "eliminar_permiso")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
 		if ($PCO_Accion== "informes_usuario")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
 		if ($PCO_Accion== "agregar_informe_usuario")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "eliminar_informe_usuario")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "PCO_EliminarInformeUsuario")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
         if ($PCO_Accion== "copiar_permisos")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-        if ($PCO_Accion== "copiar_informes")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-        if ($PCO_Accion== "agregar_usuario_autoregistro")		$retorno = 1;
-        if ($PCO_Accion== "guardar_usuario_autoregistro")		$retorno = 1;
+        if ($PCO_Accion== "PCO_CopiarInformes")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+        if ($PCO_Accion== "PCO_AgregarUsuarioAutoregistro")		$retorno = 1;
+        if ($PCO_Accion== "PCO_GuardarUsuarioAutoregistro")		$retorno = 1;
         
 		// Funciones en core/menus.php
 		if ($PCO_Accion== "Ver_menu")							$retorno = 1;
@@ -2844,7 +2844,7 @@ function PCO_LimpiarEntradas()
 				$id=PCO_EscaparContenido($id);
 			}
 
-		if ($PCO_Accion=="editar_informe")
+		if ($PCO_Accion=="PCO_EditarInforme")
 			{
 				// 
 				global $informe;
@@ -4344,7 +4344,7 @@ function PCO_VentanaLogin()
     										?>
     													<br>
     													<form name="auto_registro" id="auto_registro" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    													<input type="Hidden" name="PCO_Accion" value="agregar_usuario_autoregistro">
+    													<input type="Hidden" name="PCO_Accion" value="PCO_AgregarUsuarioAutoregistro">
     													</form>
     													<a class="btn btn-xs" onClick="document.auto_registro.submit();">
     														<i class="typcn fa typcn-user-add"></i>
@@ -4362,7 +4362,7 @@ function PCO_VentanaLogin()
     										?>
     													<br>
     													<form name="recuperacion" id="recuperacion" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    													<input type="Hidden" name="PCO_Accion" value="recuperar_contrasena">
+    													<input type="Hidden" name="PCO_Accion" value="PCO_RecuperarContrasena">
     													<input type="Hidden" name="PCO_SubAccion" value="formulario_recuperacion">
     													</form>
     													<a class="btn btn-xs" onClick="document.recuperacion.submit();">
@@ -6429,7 +6429,7 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                             if ($registro_campos["tipo"]=="form_consulta")
                                 $salida.='<br><a onclick=\'return confirm("'.$MULTILANG_SaltoEdicion.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=editar_formulario&formulario='.$registro_campos["formulario_vinculado"].'&popup_activo=\' class="btn btn-primary btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.' '.$MULTILANG_Embebido.'<br>'.$Complemento_NombreEmbebido.'"><i class="fa fa fa-object-ungroup"></i></a>';
                             if ($registro_campos["tipo"]=="informe")
-                                $salida.='<br><a onclick=\'return confirm("'.$MULTILANG_SaltoEdicion.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=editar_informe&informe='.$registro_campos["informe_vinculado"].'&popup_activo=\' class="btn btn-primary btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.' '.$MULTILANG_Embebido.'<br>'.$Complemento_NombreEmbebido.'"><i class="fa fa fa-object-ungroup"></i></a>';
+                                $salida.='<br><a onclick=\'return confirm("'.$MULTILANG_SaltoEdicion.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarInforme&informe='.$registro_campos["informe_vinculado"].'&popup_activo=\' class="btn btn-primary btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.' '.$MULTILANG_Embebido.'<br>'.$Complemento_NombreEmbebido.'"><i class="fa fa fa-object-ungroup"></i></a>';
                 $salida.='</div>
                             <div style="display: inline-block;">
                                 <a class="btn btn-xs " data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Cerrar.'" href="javascript:OcultarOpcionesEdicion(this,\'#PCOEditorContenedor_'.$registro_campos["id"].'\');"><i class="fa fa-times"></i></a>
@@ -7106,7 +7106,7 @@ function PCO_GenerarBotonesInforme($informe)
 							}
 
 						$comando_javascript="
-							document.FRMBASEINFORME.PCO_Accion.value='eliminar_registro_informe';
+							document.FRMBASEINFORME.PCO_Accion.value='PCO_EliminarRegistroInforme';
 							document.FRMBASEINFORME.tabla.value='".@$tabla_vinculada."';
 							document.FRMBASEINFORME.campo.value='".@$campo_vinculado."';
 							document.FRMBASEINFORME.valor.value='DELFRMVALVALOR';
@@ -7587,7 +7587,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 
         //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa y un boton de salto a edicion
         $BotonSaltoEdicion='
-                    <a class="btn btn-default btn-xs" href="index.php?PCO_Accion=editar_informe&informe='.$informe.'">
+                    <a class="btn btn-default btn-xs" href="index.php?PCO_Accion=PCO_EditarInforme&informe='.$informe.'">
                         <div><i class="fa fa-pencil-square"></i> '.$MULTILANG_Editar.' '.$MULTILANG_Informes.' <i>[ID='.$informe.']</i></div>
                     </a>';
 		if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && $informe>=0)
