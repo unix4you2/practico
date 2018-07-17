@@ -154,6 +154,7 @@
 									<input type="hidden" name="auth[username]"	value="<?php echo $UsuarioBD; ?>">
 									<input type="hidden" name="auth[password]"	value="<?php echo $PasswordBD; ?>">
 									<input type="hidden" name="auth[db]"		value="<?php echo $BaseDatos; ?>">
+									<input type="hidden" name="auth[lang]"		value="en">
 								</form><br>
 								<?php
 									$PCO_EnlacePMyDB="javascript:if(confirm('$MULTILANG_ConfirmaPMyDB'))document.PMyDB.submit();";

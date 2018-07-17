@@ -112,6 +112,7 @@ El nombre del marco especial sobre formularios llamado MARCO_IMPRESION ha sido g
 * Enhan: Mejorada barra de navegación responsive para menu lateral.
 * Enhan: Los contenedores de pestañas (tab-pane) en formularios son generados unicamente cuando se tiene más de una pestaña.  En los otros casos no es necesario.  Con eso se evita la creacion innecesaria de elementos con ID html PCO_PestanaFormulario_XX innecesarios.
 * Enhan: Renombrado de funciones internas
+* Enhan: Presentado el numero de elementos internos de cada formulario en la lista de formularios.
 * Enhan: Generalizacion y optimizacion de funcion encargada de la impresion de opciones de menu.
 * Enhan: Por defecto se deja oculta la barra de navegacion izquierda para mejorar la maquetacion responsive.  Se deja el boton para su despliegue manual cuando sea necesario.
 * Enhan: Pestañas de etiqueta PCO_NoVisible presentes sólo en modo de diseño para desarrolladores de funciones internas.
