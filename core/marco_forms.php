@@ -45,7 +45,7 @@
     <input type="Hidden" name="PCO_Accion" value="PCO_ActualizarPerfilUsuario">
 </form>
 <form method="POST" name="reseteo_clave" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    <input type="Hidden" name="PCO_Accion" value="cambiar_clave">
+    <input type="Hidden" name="PCO_Accion" value="PCO_CambiarContrasena">
 </form>
 <form method="POST" name="PCO_MisInformes" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     <input type="Hidden" name="PCO_Accion" value="PCO_MisInformes">

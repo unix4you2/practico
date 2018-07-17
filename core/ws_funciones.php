@@ -58,7 +58,7 @@
 		Complemento del archivo XML con datos generales del usuario como login, nombre, descripcion, nivel, correo y fecha de ultimo acceso
 
 	Ver tambien:
-		<Iniciar_login> | <cambiar_clave>
+		<Iniciar_login> | <PCO_CambiarContrasena>
 */
 if (@$PCO_WSId=="verificar_credenciales") 
 	{

@@ -84,7 +84,7 @@
 		Valor de la variable entera llamada seguridad.
 		
 			Ver tambien:
-				<muestra_seguridad_clave> | <cambiar_clave>
+				<muestra_seguridad_clave> | <PCO_CambiarContrasena>
 */
 	function seguridad_clave(clave){
 		var seguridad = 0;
@@ -124,7 +124,7 @@
 		Campo (visual del formulario) actualizado
 		
 	Ver tambien:
-		<seguridad_clave> | <cambiar_clave>
+		<seguridad_clave> | <PCO_CambiarContrasena>
 */
 	function muestra_seguridad_clave(clave,formulario){
 		seguridad=seguridad_clave(clave);
@@ -591,17 +591,17 @@ if ($PCO_Accion=="copiar_permisos")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: cambiar_clave
+	Function: PCO_CambiarContrasena
 	Presenta formulario para actualizar la clave de un usuario
 
 	Salida:
-		Variables pasadas a la accion <actualizar_clave>
+		Variables pasadas a la accion <PCO_ActualizarContrasena>
 
 	Ver tambien:
-		<actualizar_clave> | <muestra_seguridad_clave> | <seguridad_clave>
+		<PCO_ActualizarContrasena> | <muestra_seguridad_clave> | <seguridad_clave>
 
 */
-if ($PCO_Accion=="cambiar_clave")
+if ($PCO_Accion=="PCO_CambiarContrasena")
 	{
 ?>
                 <?php
@@ -619,7 +619,7 @@ if ($PCO_Accion=="cambiar_clave")
                 if (@$Presentar_FullScreen==1)  echo '<input type="Hidden" name="Presentar_FullScreen" value="1">';
                 if (@$Precarga_EstilosBS==1)    echo '<input type="Hidden" name="Precarga_EstilosBS" value="1">';
 			?>
-                <input type="hidden" name="PCO_Accion" value="actualizar_clave">
+                <input type="hidden" name="PCO_Accion" value="PCO_ActualizarContrasena">
                 <br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrCambioPW; ?></b></font>
 
                 <div class="form-group input-group">
@@ -678,7 +678,7 @@ if ($PCO_Accion=="cambiar_clave")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: actualizar_clave
+	Function: PCO_ActualizarContrasena
 	Actualiza la clave de un usuario determinado
 
 	Variables de entrada:
@@ -694,7 +694,7 @@ if ($PCO_Accion=="cambiar_clave")
 	Salida:
 		Tabla de usuarios actualizada en el registro correspondiente
 */
-if ($PCO_Accion=="actualizar_clave")
+if ($PCO_Accion=="PCO_ActualizarContrasena")
 	{
 
 		//Verifica si esta o no en modo DEMO para hacer la operacion
@@ -725,7 +725,7 @@ if ($PCO_Accion=="actualizar_clave")
 		else
 			{
 				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="cambiar_clave">
+					<input type="Hidden" name="PCO_Accion" value="PCO_CambiarContrasena">
 					<input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
 					<input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
@@ -1599,7 +1599,7 @@ if ($PCO_Accion=="PCO_PanelAuditoriaMovimientos")
         		* Listado de operaciones realizadas actualizado automaticamente segun los parametros dados
         
         	Ver tambien:
-        		<listar_usuarios> | <ver_seguimiento_especifico>
+        		<listar_usuarios> | <PCO_VerSeguimientoEspecifico>
         */
 			if ($FechaInicioAuditoria=="") $FechaInicioAuditoria=$PCO_FechaOperacionGuiones;
 			if ($FechaFinAuditoria=="") $FechaFinAuditoria=$PCO_FechaOperacionGuiones;
@@ -1610,10 +1610,10 @@ if ($PCO_Accion=="PCO_PanelAuditoriaMovimientos")
 
 /* ################################################################## */
 /* ################################################################## */
-if ($PCO_Accion=="ver_seguimiento_general")
+if ($PCO_Accion=="PCO_VerSeguimientoGeneral")
 				{
 			/*
-				Function: ver_seguimiento_general
+				Function: PCO_VerSeguimientoGeneral
 				Presenta un filtro para navegar tablas de auditoria con todas las operaciones sobre el sistema
 
 				Proceso simplificado:
@@ -1626,7 +1626,7 @@ if ($PCO_Accion=="ver_seguimiento_general")
 					* Listado de operaciones realizadas que cumple el filtro de busqueda
 
 				Ver tambien:
-					<listar_usuarios> | <ver_seguimiento_especifico> | <ver_seguimiento_monitoreo>
+					<listar_usuarios> | <PCO_VerSeguimientoEspecifico> | <ver_seguimiento_monitoreo>
 			*/
 
             PCO_AbrirVentana($MULTILANG_UsrAudUsrs, 'panel-info');
@@ -1638,7 +1638,7 @@ if ($PCO_Accion=="ver_seguimiento_general")
 
 
                 <form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-                    <input type="hidden" name="PCO_Accion" value="ver_seguimiento_general">
+                    <input type="hidden" name="PCO_Accion" value="PCO_VerSeguimientoGeneral">
                 
                     <div class="form-group input-group">
                         <input name="accionbuscar" value="<?php echo @$accionbuscar; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrAudAccion; ?>">
@@ -1819,10 +1819,10 @@ if ($PCO_Accion=="ver_seguimiento_general")
 				PCO_CerrarVentana();
 				 }
 /* ################################################################## */
-if ($PCO_Accion=="ver_seguimiento_especifico")
+if ($PCO_Accion=="PCO_VerSeguimientoEspecifico")
 				{
 			/*
-				Function: ver_seguimiento_especifico
+				Function: PCO_VerSeguimientoEspecifico
 				Presenta las ultimas operaciones realizadas por un usuario.  Por defecto las ultimas 50 acciones.
 
 				Variables minimas de entrada:
@@ -1839,7 +1839,7 @@ if ($PCO_Accion=="ver_seguimiento_especifico")
 					* Listado de operaciones realizadas por el usuario
 
 				Ver tambien:
-					<listar_usuarios> | <ver_seguimiento_general>
+					<listar_usuarios> | <PCO_VerSeguimientoGeneral>
 			*/
 						echo '<div align="center"><br>';
 				PCO_AbrirVentana($MULTILANG_UsrAudHisto, 'panel-info');
@@ -1847,7 +1847,7 @@ if ($PCO_Accion=="ver_seguimiento_especifico")
 				if ($fin_reg=="") $fin_reg=50;
 					echo ' <br><div align="right">
 								<form name="datos" action="'.$ArchivoCORE.'" method="POST">
-								<input type="hidden" name="PCO_Accion" value="ver_seguimiento_especifico">
+								<input type="hidden" name="PCO_Accion" value="PCO_VerSeguimientoEspecifico">
 								<input type="hidden" name="uid_especifico" value="'.$uid_especifico.'">
 								&nbsp;&nbsp;'.$MULTILANG_UsrAudIniReg.'
 								<input type="text" class="CampoTexto" name="inicio_reg" value="'.$inicio_reg.'" size="4" maxlength="6">
@@ -2014,7 +2014,7 @@ if ($PCO_Accion=="listar_usuarios")
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="PCO_Accion" value="ver_seguimiento_especifico">
+												<input type="hidden" name="PCO_Accion" value="PCO_VerSeguimientoEspecifico">
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
                                                 <button type="submit" class="btn btn-default btn-xs">'.$MULTILANG_UsrAuditoria.'</button>
 										</form>
@@ -2051,7 +2051,7 @@ if ($PCO_Accion=="listar_usuarios")
 
 	echo '
 				<form action="'.$ArchivoCORE.'" method="POST" name="ver_auditoria_general"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="hidden" name="PCO_Accion" value="ver_seguimiento_general">
+					<input type="hidden" name="PCO_Accion" value="PCO_VerSeguimientoGeneral">
 				</form>
 				<form action="'.$ArchivoCORE.'" method="POST" name="ver_auditoria_monitoreo"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 					<input type="hidden" name="PCO_Accion" value="ver_seguimiento_monitoreo">

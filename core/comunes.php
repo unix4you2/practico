@@ -2496,14 +2496,14 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "PCO_ConfirmarImportacionInforme")	$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
 		
 		// Funciones en core/usuarios.php
-		if ($PCO_Accion== "cambiar_clave")						$retorno = 1;
+		if ($PCO_Accion== "PCO_CambiarContrasena")				$retorno = 1;
         if ($PCO_Accion== "PCO_ActualizarPerfilUsuario")		$retorno = 1;
         if ($PCO_Accion== "PCO_GuardarPerfilUsuario")			$retorno = 1;
         if ($PCO_Accion== "ver_seguimiento_monitoreo")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
 		if ($PCO_Accion== "PCO_ResetearContrasena")				$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "ver_seguimiento_general")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "ver_seguimiento_especifico")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "actualizar_clave")					$retorno = PCO_PermisoHeredadoAccion("cambiar_clave");
+		if ($PCO_Accion== "PCO_VerSeguimientoGeneral")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "PCO_VerSeguimientoEspecifico")		$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "PCO_ActualizarContrasena")			$retorno = PCO_PermisoHeredadoAccion("PCO_CambiarContrasena");
 		if ($PCO_Accion== "agregar_usuario")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
 		if ($PCO_Accion== "guardar_usuario")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
 		if ($PCO_Accion== "eliminar_usuario")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
@@ -2817,7 +2817,7 @@ function PCO_LimpiarEntradas()
 		$PCO_ErrorDescripcion=PCO_EscaparContenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion));
 
 		// Escapar algunas variables segun la accion recibida
-		if ($PCO_Accion=="ver_seguimiento_general")
+		if ($PCO_Accion=="PCO_VerSeguimientoGeneral")
 			{
 				global $accionbuscar,$fin_reg,$inicio_reg;
 				$accionbuscar=PCO_EscaparContenido($accionbuscar);

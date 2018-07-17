@@ -51,7 +51,7 @@
 		Aceptacion o rechazo del inicio de sesion con la redireccion al lugar correspondiente
 
 	Ver tambien:
-		<seguridad_clave> | <cambiar_clave>
+		<seguridad_clave> | <PCO_CambiarContrasena>
 */
 	if ($PCO_Accion=="Iniciar_login") 
 		{
