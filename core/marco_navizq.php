@@ -51,7 +51,7 @@
                             <li class="sidebar-search">
                                 <div class="input-group custom-search-form">
                                     <input name="PCO_BusquedaPermisos" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Buscar; ?>...">
-                                    <input type="hidden" name="PCO_Accion" value="buscar_permisos_practico">
+                                    <input type="hidden" name="PCO_Accion" value="PCO_BuscarPermisosPractico">
                                     <span class="input-group-btn">
                                         <button type="submit" class="btn btn-default" type="button">
                                             <i class="fa fa-search"></i>

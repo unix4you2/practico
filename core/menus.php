@@ -220,7 +220,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: buscar_permisos_practico
+	Function: PCO_BuscarPermisosPractico
 	Busca dentro de los permisos asignados al usuario aquellos que puedan coincidir dentro de los menues y los informes a la busqueda realizada
 
 	Variables de entrada:
@@ -236,14 +236,14 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 	Ver tambien:
 		<Ver_menu>
 */
-	if ($PCO_Accion=="buscar_permisos_practico" && $PCOSESS_SesionAbierta)
+	if ($PCO_Accion=="PCO_BuscarPermisosPractico" && $PCOSESS_SesionAbierta)
 		{ 
 			echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 
             //Presenta el buscador nuevamente
             echo '
                 <form name="datos_busqueda_home" action="'.$ArchivoCORE.'" method="POST">
-                <input type="hidden" name="PCO_Accion" value="buscar_permisos_practico">
+                <input type="hidden" name="PCO_Accion" value="PCO_BuscarPermisosPractico">
                 <div class="chat-panel panel panel-default">
                     <div class="panel-heading">
                         <div class="input-group">

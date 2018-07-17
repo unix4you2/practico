@@ -47,7 +47,7 @@
                         </td>
                         <td>
                         <form action="" method="post">
-                        <input type="hidden" name="PCO_Accion" value="administrar_tablas">
+                        <input type="hidden" name="PCO_Accion" value="PCO_AdministrarTablas">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-table fa-fw fa-4x"></i></button>
                         </form>
                         </td>
@@ -99,7 +99,7 @@
                         </td>
                         <td>
                             <form action="" method="post">
-                                <input type="hidden" name="PCO_Accion" value="listar_usuarios">
+                                <input type="hidden" name="PCO_Accion" value="PCO_ListarUsuarios">
                                 <button type="submit" class="btn btn-danger"><i class="fa fa-user fa-fw fa-4x"></i></button>
                             </form>
                         </td>

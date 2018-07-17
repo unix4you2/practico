@@ -150,7 +150,7 @@
 					* Usuario actualizado en el sistema.
 
 				Ver tambien:
-					<PCO_ActualizarPerfilUsuario> | <listar_usuarios>
+					<PCO_ActualizarPerfilUsuario> | <PCO_ListarUsuarios>
 			*/
 
 			//Verifica si esta o no en modo DEMO para hacer la operacion
@@ -207,7 +207,7 @@ if ($PCO_Accion=="PCO_ActualizarPerfilUsuario")
                 * Registro del usuario actualizado en el sistema
 
             Ver tambien:
-                <listar_usuarios> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario> | <muestra_seguridad_clave> | <seguridad_clave>
+                <PCO_ListarUsuarios> | <PCO_PermisosUsuario> | <PCO_EliminarUsuario> | <PCO_CambiarEstadoUsuario> | <muestra_seguridad_clave> | <seguridad_clave>
         */
         
         //Busca datos del usuario actual
@@ -485,7 +485,7 @@ if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="formulario_recupe
             Presenta el formulario para recuperacion de contrasenas
 
             Ver tambien:
-                <listar_usuarios> | <PCO_RecuperarContrasena>
+                <PCO_ListarUsuarios> | <PCO_RecuperarContrasena>
         */
 		PCO_AbrirVentana($MULTILANG_OlvideClave, 'panel-info');
         PCO_Mensaje($MULTILANG_Importante,$MULTILANG_UsrResetAdmin,'','fa fa-key fa-4x','alert alert-info alert-dismissible');
@@ -544,14 +544,14 @@ if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="formulario_recupe
 		Informes del usuario destino actualizados
 
 	Ver tambien:
-		<permisos_usuario> | <informes_usuario>
+		<PCO_PermisosUsuario> | <PCO_InformesUsuario>
 */
 if ($PCO_Accion=="PCO_CopiarInformes")
 	{
 		PCO_CopiarInformes($usuarioo,$usuariod);
 		PCO_Auditar("Copia informes de $usuarioo al usuario $usuariod");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="informes_usuario">
+			<input type="Hidden" name="PCO_Accion" value="PCO_InformesUsuario">
 			<input type="Hidden" name="usuario" value="'.$usuariod.'">
 			</form>
 			<script type="" language="JavaScript">
@@ -563,7 +563,7 @@ if ($PCO_Accion=="PCO_CopiarInformes")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: copiar_permisos
+	Function: PCO_CopiarPermisos
 	Llama a la funcion interna de copia de permisos
 
 	Variables de entrada:
@@ -572,14 +572,14 @@ if ($PCO_Accion=="PCO_CopiarInformes")
 		usuarioo - Usuario oorigen (del que se toman los permisos como base para ser copiados)
 
 	Ver tambien:
-		<permisos_usuario> | <informes_usuario>
+		<PCO_PermisosUsuario> | <PCO_InformesUsuario>
 */
-if ($PCO_Accion=="copiar_permisos")
+if ($PCO_Accion=="PCO_CopiarPermisos")
 	{
 		PCO_CopiarPermisos($usuarioo,$usuariod);
 		PCO_Auditar("Copia permisos de $usuarioo al usuario $usuariod");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="permisos_usuario">
+			<input type="Hidden" name="PCO_Accion" value="PCO_PermisosUsuario">
 			<input type="Hidden" name="usuario" value="'.$usuariod.'">
 			</form>
 			<script type="" language="JavaScript">
@@ -755,14 +755,14 @@ if ($PCO_Accion=="PCO_ActualizarContrasena")
 		Tabla de permisos actualizada al eliminar el registro correspondiente
 	
 	Ver tambien:
-		<informes_usuario> | <agregar_informe_usuario>
+		<PCO_InformesUsuario> | <PCO_AgregarInformeUsuario>
 */
 if ($PCO_Accion=="PCO_EliminarInformeUsuario")
 	{
 		// Elimina el informe
 		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe=? AND usuario=? ","$informe$_SeparadorCampos_$usuario");
 		PCO_Auditar("Elimina informe $informe a $usuario");
-		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="informes_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
+		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_InformesUsuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
 
@@ -771,7 +771,7 @@ if ($PCO_Accion=="PCO_EliminarInformeUsuario")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: agregar_informe_usuario
+	Function: PCO_AgregarInformeUsuario
 	Agrega un informe definido en el sistema a un usuario determinado.
 
 	Variables de entrada:
@@ -788,9 +788,9 @@ if ($PCO_Accion=="PCO_EliminarInformeUsuario")
 		Tabla de permisos actualizada al agregar el registro correspondiente
 
 	Ver tambien:
-		<PCO_EliminarInformeUsuario> | <informes_usuario>
+		<PCO_EliminarInformeUsuario> | <PCO_InformesUsuario>
 */
-	if ($PCO_Accion=="agregar_informe_usuario")
+	if ($PCO_Accion=="PCO_AgregarInformeUsuario")
 		{
 			$mensaje_error="";
 			// Busca si existe ese permiso para el usuario
@@ -805,14 +805,14 @@ if ($PCO_Accion=="PCO_EliminarInformeUsuario")
 					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES (?,?)","$usuario$_SeparadorCampos_$informe");
 					PCO_Auditar("Agrega informe $informe al usuario $usuario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-							<input type="Hidden" name="PCO_Accion" value="informes_usuario">
+							<input type="Hidden" name="PCO_Accion" value="PCO_InformesUsuario">
 							<input type="Hidden" name="usuario" value="'.$usuario.'">
 							</form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
 				{
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="informes_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_InformesUsuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 							<script type="" language="JavaScript"> 
 							window.alert("'.$mensaje_error.'");
 							document.cancelar.submit();  </script>';
@@ -824,7 +824,7 @@ if ($PCO_Accion=="PCO_EliminarInformeUsuario")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: informes_usuario
+	Function: PCO_InformesUsuario
 	Despliega una lista con los informes definidos para un usuario determinado con la posibilidad de agregar mas informes
 
 	Variables de entrada:
@@ -840,15 +840,15 @@ if ($PCO_Accion=="PCO_EliminarInformeUsuario")
 		Listado de informes disponibles en el perfil del usuario
 
 	Ver tambien:
-		<PCO_EliminarInformeUsuario> | <agregar_informe_usuario>
+		<PCO_EliminarInformeUsuario> | <PCO_AgregarInformeUsuario>
 */
-if ($PCO_Accion=="informes_usuario")
+if ($PCO_Accion=="PCO_InformesUsuario")
     {
         PCO_AbrirVentana($MULTILANG_UsrAdmInf,'panel-info');
 ?>
 			<form name="salto" action="<?php echo $ArchivoCORE; ?>" method="POST">
                 <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
-                <input type="hidden" name="PCO_Accion" value="permisos_usuario">
+                <input type="hidden" name="PCO_Accion" value="PCO_PermisosUsuario">
             </form>
             
 			<form name="datoscopia" action="<?php echo $ArchivoCORE; ?>" method="POST">
@@ -871,7 +871,7 @@ if ($PCO_Accion=="informes_usuario")
 
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
                 <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
-                <input type="hidden" name="PCO_Accion" value="agregar_informe_usuario">
+                <input type="hidden" name="PCO_Accion" value="PCO_AgregarInformeUsuario">
                 <font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrAgreInf; ?>: <?php echo $usuario; ?></b></font>
                 <br>
 				<select name="informe"  class="selectpicker " data-live-search=true data-size=10 data-style="btn btn-default btn-xs ">
@@ -934,7 +934,7 @@ if ($PCO_Accion=="informes_usuario")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: eliminar_permiso
+	Function: PCO_EliminarPermiso
 	Elimina un permiso a un usuario determinado.
 
 	Variables de entrada:
@@ -950,14 +950,14 @@ if ($PCO_Accion=="informes_usuario")
 		Tabla de permisos actualizada al eliminar el registro correspondiente
 	
 	Ver tambien:
-		<agregar_permiso>
+		<PCO_AgregarPermiso>
 */
-if ($PCO_Accion=="eliminar_permiso")
+if ($PCO_Accion=="PCO_EliminarPermiso")
 	{
 		// Elimina los datos de la opcion
 		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? AND usuario=? ","$menu$_SeparadorCampos_$usuario");
 		PCO_Auditar("Elimina permiso $menu a $usuario");
-		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="permisos_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
+		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_PermisosUsuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
 
@@ -966,7 +966,7 @@ if ($PCO_Accion=="eliminar_permiso")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: agregar_permiso
+	Function: PCO_AgregarPermiso
 	Agrega un permiso a un usuario determinado.
 
 	Variables de entrada:
@@ -983,9 +983,9 @@ if ($PCO_Accion=="eliminar_permiso")
 		Tabla de permisos actualizada al agregar el registro correspondiente
 	
 	Ver tambien:
-		<eliminar_permiso>
+		<PCO_EliminarPermiso>
 */
-	if ($PCO_Accion=="agregar_permiso")
+	if ($PCO_Accion=="PCO_AgregarPermiso")
 		{
 			$mensaje_error="";
 			// Busca si existe ese permiso para el usuario
@@ -1000,14 +1000,14 @@ if ($PCO_Accion=="eliminar_permiso")
 					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuario$_SeparadorCampos_$menu");
 					PCO_Auditar("Agrega permiso $menu al usuario $usuario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-							<input type="Hidden" name="PCO_Accion" value="permisos_usuario">
+							<input type="Hidden" name="PCO_Accion" value="PCO_PermisosUsuario">
 							<input type="Hidden" name="usuario" value="'.$usuario.'">
 							</form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
 				{
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="permisos_usuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_PermisosUsuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 							<script type="" language="JavaScript"> 
 							window.alert("'.$mensaje_error.'");
 							document.cancelar.submit();  </script>';
@@ -1019,7 +1019,7 @@ if ($PCO_Accion=="eliminar_permiso")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: permisos_usuario
+	Function: PCO_PermisosUsuario
 	Despliega una lista con las opciones de menu definidas para un usuario determinado con la posibilidad de agregar o eliminar
 
 	Variables de entrada:
@@ -1030,20 +1030,20 @@ if ($PCO_Accion=="eliminar_permiso")
 		Listado de opciones de menu disponibles en el perfil del usuario
 
 	Ver tambien:
-		<informes_usuario>
+		<PCO_InformesUsuario>
 */
-if ($PCO_Accion=="permisos_usuario")
+if ($PCO_Accion=="PCO_PermisosUsuario")
     {
         PCO_AbrirVentana($MULTILANG_UsrAdmPer, 'panel-info');
 ?>
 			<form name="salto" action="<?php echo $ArchivoCORE; ?>" method="POST">
                 <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
-                <input type="hidden" name="PCO_Accion" value="informes_usuario">
+                <input type="hidden" name="PCO_Accion" value="PCO_InformesUsuario">
             </form>
 
 			<form name="datoscopia" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="hidden" name="usuariod" value="<?php echo $usuario; ?>">
-			<input type="hidden" name="PCO_Accion" value="copiar_permisos">
+			<input type="hidden" name="PCO_Accion" value="PCO_CopiarPermisos">
 
 			<font face="" size="3" color="#971515"><b><?php echo $MULTILANG_UsrCopiaPer; ?>: </b></font>
 				<select name="usuarioo" class="selectpicker " data-live-search=true data-size=5 data-style="btn btn-default btn-xs ">
@@ -1061,7 +1061,7 @@ if ($PCO_Accion=="permisos_usuario")
 
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
                 <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
-                <input type="hidden" name="PCO_Accion" value="agregar_permiso">
+                <input type="hidden" name="PCO_Accion" value="PCO_AgregarPermiso">
                 <font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrAgreOpc; ?>: <?php echo $usuario; ?></b></font>
 				<br>
                 <select name="menu"  class="selectpicker " data-live-search=true data-size=10 data-style="btn btn-default btn-xs ">
@@ -1110,7 +1110,7 @@ if ($PCO_Accion=="permisos_usuario")
 							<td>'.$registro["comando"].'</td>
 							<td align="center">
 									<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
-											<input type="hidden" name="PCO_Accion" value="eliminar_permiso">
+											<input type="hidden" name="PCO_Accion" value="PCO_EliminarPermiso">
 											<input type="hidden" name="usuario" value="'.$usuario.'">
 											<input type="hidden" name="menu" value="'.$registro["id"].'">
                                             <a  href="javascript:confirmar_evento(\''.$MULTILANG_UsrAdvDel.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs"><i class="fa fa-times fa-fw"></i> '.$MULTILANG_Eliminar.'</a>
@@ -1134,10 +1134,10 @@ if ($PCO_Accion=="permisos_usuario")
 			*/
 /* ################################################################## */
 /* ################################################################## */
-	if ($PCO_Accion=="eliminar_usuario")
+	if ($PCO_Accion=="PCO_EliminarUsuario")
 		{
 			/*
-				Function: eliminar_usuario
+				Function: PCO_EliminarUsuario
 				Elimina completamente un usuario del sistema.   Tambien elimina todos los permisos que puedan haber sido definidos para el.
 
 				Variables minimas de entrada:
@@ -1153,7 +1153,7 @@ if ($PCO_Accion=="permisos_usuario")
 					* Tabla de usuarios actualizada al eliminar el registro asociado
 
 				Ver tambien:
-					<listar_usuarios> | <agregar_usuario> | <cambiar_estado_usuario>
+					<PCO_ListarUsuarios> | <PCO_AgregarUsuario> | <PCO_CambiarEstadoUsuario>
 			*/
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario WHERE login=? ","$uid_especifico");
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$uid_especifico");
@@ -1166,10 +1166,10 @@ if ($PCO_Accion=="permisos_usuario")
 
 /* ################################################################## */
 /* ################################################################## */
-	if ($PCO_Accion=="cambiar_estado_usuario")
+	if ($PCO_Accion=="PCO_CambiarEstadoUsuario")
 		{
 			/*
-				Function: cambiar_estado_usuario
+				Function: PCO_CambiarEstadoUsuario
 				Permite inhabilitar un usuario en el sistema sin tener que eliminarlo completamente o habilitarlo cuando ya se encuentre inhabilitado previamente.   Al actualizar el estado del usuario como Habilitado tambien se actualiza la ultima fecha de ingreso como la actual para controles de login posteriores.
 
 				Variables minimas de entrada:
@@ -1188,7 +1188,7 @@ if ($PCO_Accion=="permisos_usuario")
 					* Usuario con estado diferente (contrario) al recibido
 
 				Ver tambien:
-					<listar_usuarios> | <eliminar_usuario>
+					<PCO_ListarUsuarios> | <PCO_EliminarUsuario>
 			*/
 			if ($estado==1)
 				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET estado=0 WHERE login=? ","$uid_especifico");
@@ -1215,7 +1215,7 @@ if ($PCO_Accion=="permisos_usuario")
 					* Usuario con su clave actualizada
 
 				Ver tambien:
-					<listar_usuarios> | <eliminar_usuario>
+					<PCO_ListarUsuarios> | <PCO_EliminarUsuario>
 			*/
 			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$nueva_clave') WHERE login=? ","$uid_especifico");
 			PCO_Auditar("Restablece clave de acceso para $uid_especifico");
@@ -1240,7 +1240,7 @@ if ($PCO_Accion=="permisos_usuario")
 					* Usuario registrado en el sistema.  El proceso agrega ademas las claves en MD5 y la llave de paso definida en el archivo de <Libreria base> 
 
 				Ver tambien:
-					<PCO_AgregarUsuarioAutoregistro> | <eliminar_usuario>
+					<PCO_AgregarUsuarioAutoregistro> | <PCO_EliminarUsuario>
 			*/
 			$mensaje_error="";
 
@@ -1313,7 +1313,7 @@ if ($PCO_Accion=="PCO_AgregarUsuarioAutoregistro")
                 * Llamada al proceso <PCO_GuardarUsuarioAutoregistro> para almacenar la informacion correspondiente al nuevo usuario.
 
             Ver tambien:
-                <listar_usuarios> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario> | <muestra_seguridad_clave> | <seguridad_clave>
+                <PCO_ListarUsuarios> | <PCO_PermisosUsuario> | <PCO_EliminarUsuario> | <PCO_CambiarEstadoUsuario> | <muestra_seguridad_clave> | <seguridad_clave>
         */
 		echo "<br>";
 		PCO_AbrirVentana($MULTILANG_UsrAdicion, 'panel-info');
@@ -1372,10 +1372,10 @@ if ($PCO_Accion=="PCO_AgregarUsuarioAutoregistro")
 
 /* ################################################################## */
 /* ################################################################## */
-	if ($PCO_Accion=="guardar_usuario")
+	if ($PCO_Accion=="PCO_GuardarUsuario")
 		{
 			/*
-				Function: guardar_usuario
+				Function: PCO_GuardarUsuario
 				Almacena la informacion basica de un usuario en la base de datos
 
 				Variables minimas de entrada:
@@ -1393,7 +1393,7 @@ if ($PCO_Accion=="PCO_AgregarUsuarioAutoregistro")
 					* Usuario registrado en el sistema.  El proceso agrega ademas las claves en MD5 y la llave de paso definida en el archivo de <Libreria base> 
 
 				Ver tambien:
-					<agregar_usuario> | <eliminar_usuario>
+					<PCO_AgregarUsuario> | <PCO_EliminarUsuario>
 			*/
 			$mensaje_error="";
 
@@ -1426,7 +1426,7 @@ if ($PCO_Accion=="PCO_AgregarUsuarioAutoregistro")
 					PCO_Auditar("Agrega usuario $login para $nombre");
                     //Redirecciona a la lista de usuarios con el usuario prefiltrado por si se le quiere asignar permisos
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="listar_usuarios">
+						<input type="Hidden" name="PCO_Accion" value="PCO_ListarUsuarios">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_AvisoSistema.'">
                         <input type="Hidden" name="PCO_ErrorDescripcion" value="'.$MULTILANG_UsrCreacionOK.'">
                         <input type="Hidden" name="PCO_ErrorIcono" value="fa-info-circle">
@@ -1438,7 +1438,7 @@ if ($PCO_Accion=="PCO_AgregarUsuarioAutoregistro")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="agregar_usuario">
+						<input type="Hidden" name="PCO_Accion" value="PCO_AgregarUsuario">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
@@ -1449,17 +1449,17 @@ if ($PCO_Accion=="PCO_AgregarUsuarioAutoregistro")
 
 /* ################################################################## */
 /* ################################################################## */
-if ($PCO_Accion=="agregar_usuario")
+if ($PCO_Accion=="PCO_AgregarUsuario")
 	{
         /*
-            Function: agregar_usuario
+            Function: PCO_AgregarUsuario
             Presenta el formulario base para la adicion de usuarios al sistema.
 
             Salida de la funcion:
-                * Llamada al proceso <guardar_usuario> para almacenar la informacion correspondiente al nuevo usuario.
+                * Llamada al proceso <PCO_GuardarUsuario> para almacenar la informacion correspondiente al nuevo usuario.
 
             Ver tambien:
-                <listar_usuarios> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario> | <muestra_seguridad_clave> | <seguridad_clave>
+                <PCO_ListarUsuarios> | <PCO_PermisosUsuario> | <PCO_EliminarUsuario> | <PCO_CambiarEstadoUsuario> | <muestra_seguridad_clave> | <seguridad_clave>
         */
 		PCO_AbrirVentana($MULTILANG_UsrAdicion, 'panel-info');
         PCO_Mensaje($MULTILANG_Importante,$MULTILANG_UsrDesPW,'','fa fa-info-circle fa-5x texto-azul','alert alert-default alert-dismissible');
@@ -1467,7 +1467,7 @@ if ($PCO_Accion=="agregar_usuario")
 
 		<!-- VALOR MD5 PARA VACIO:  d41d8cd98f00b204e9800998ecf8427e-->
 				<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-					<input type="hidden" name="PCO_Accion" value="guardar_usuario">
+					<input type="hidden" name="PCO_Accion" value="PCO_GuardarUsuario">
 
 					<div class="row">
 						<div class="col-md-6">
@@ -1599,7 +1599,7 @@ if ($PCO_Accion=="PCO_PanelAuditoriaMovimientos")
         		* Listado de operaciones realizadas actualizado automaticamente segun los parametros dados
         
         	Ver tambien:
-        		<listar_usuarios> | <PCO_VerSeguimientoEspecifico>
+        		<PCO_ListarUsuarios>
         */
 			if ($FechaInicioAuditoria=="") $FechaInicioAuditoria=$PCO_FechaOperacionGuiones;
 			if ($FechaFinAuditoria=="") $FechaFinAuditoria=$PCO_FechaOperacionGuiones;
@@ -1610,289 +1610,16 @@ if ($PCO_Accion=="PCO_PanelAuditoriaMovimientos")
 
 /* ################################################################## */
 /* ################################################################## */
-if ($PCO_Accion=="PCO_VerSeguimientoGeneral")
-				{
-			/*
-				Function: PCO_VerSeguimientoGeneral
-				Presenta un filtro para navegar tablas de auditoria con todas las operaciones sobre el sistema
-
-				Proceso simplificado:
-					(start code)
-						SELECT login FROM ".$TablasCore."usuario ORDER BY login
-						SELECT * FROM ".$TablasCore."auditoria WHERE fecha>='$anoi$mesi$diai' AND fecha<= '$anof$mesf$diaf' AND accion LIKE '%$accionbuscar%' AND usuario_login LIKE '%$usuario%' ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg
-					(end)
-
-				Salida de la funcion:
-					* Listado de operaciones realizadas que cumple el filtro de busqueda
-
-				Ver tambien:
-					<listar_usuarios> | <PCO_VerSeguimientoEspecifico> | <ver_seguimiento_monitoreo>
-			*/
-
-            PCO_AbrirVentana($MULTILANG_UsrAudUsrs, 'panel-info');
-            if (@$inicio_reg=="") $inicio_reg=0;
-            if (@$fin_reg=="") $fin_reg=50;
-                ?>
-
-
-
-
-                <form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-                    <input type="hidden" name="PCO_Accion" value="PCO_VerSeguimientoGeneral">
-                
-                    <div class="form-group input-group">
-                        <input name="accionbuscar" value="<?php echo @$accionbuscar; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_UsrAudAccion; ?>">
-                        <span class="input-group-addon">
-                            <?php echo $MULTILANG_UsrAudUsuario; ?>
-                        </span>
-                        <select id="usuario" name="usuario" class="form-control" >
-                            <option value=""><?php echo $MULTILANG_Cualquiera; ?></option>
-                            <?php
-                                $resultado=PCO_EjecutarSQL("SELECT login FROM ".$TablasCore."usuario ORDER BY login");
-                                while($registro = $resultado->fetch())
-                                    {
-                                        echo '<option value="'.$registro["login"].'">'.$registro["login"].'</option>';
-                                    }	
-                            ?>
-                        </select>
-                    </div>
-
-                    <?php
-					echo '		
-								&nbsp;&nbsp;'.$MULTILANG_UsrAudDesde.' <select name="diai" class="selector_01" >';
-													for ($i=1;$i<=date("j")-1;$i++)
-														{
-																if ($i<10)
-																		echo '<option value="0'.$i.'">0'.$i.'</option>';
-																else
-																		echo '<option value="'.$i.'">'.$i.'</option>';
-														}
-													if ($i<10)
-															echo '<option value="0'.date("j").'" selected>0'.date("j").'</option>';
-													else
-															echo '<option value="'.date("j").'" selected>'.date("j").'</option>';
-													for ($i=date("j")+1;$i<=31;$i++)
-														{
-																if ($i<10)
-																		echo '<option value="0'.$i.'">0'.$i.'</option>';
-																else
-																		echo '<option value="'.$i.'">'.$i.'</option>';
-														}
-													echo '</select>
-														<select name="mesi" class="selector_01" >';
-													for ($i=1;$i<=date("n")-1;$i++)
-														{
-																if ($i<10)
-																		echo '<option value="0'.$i.'">0'.$i.'</option>';
-																else
-																		echo '<option value="'.$i.'">'.$i.'</option>';
-														}
-													if ($i<10)
-															echo '<option value="0'.date("n").'" selected>0'.date("n").'</option>';
-													else
-															echo '<option value="'.date("n").'" selected>'.date("n").'</option>';
-													for ($i=date("n")+1;$i<=12;$i++)
-														{
-																if ($i<10)
-																		echo '<option value="0'.$i.'">0'.$i.'</option>';
-																else
-																		echo '<option value="'.$i.'">'.$i.'</option>';
-														}
-													echo '</select>';
-									
-								echo ' &nbsp;'.$MULTILANG_UsrAudHasta.' &nbsp;&nbsp;<select name="diaf" class="selector_01" >';
-													for ($i=1;$i<=date("j")-1;$i++)
-														{
-																if ($i<10)
-																		echo '<option value="0'.$i.'">0'.$i.'</option>';
-																else
-																		echo '<option value="'.$i.'">'.$i.'</option>';
-														}
-													if ($i<10)
-															echo '<option value="0'.date("j").'" selected>0'.date("j").'</option>';
-													else
-															echo '<option value="'.date("j").'" selected>'.date("j").'</option>';
-													for ($i=date("j")+1;$i<=31;$i++)
-														{
-																if ($i<10)
-																		echo '<option value="0'.$i.'">0'.$i.'</option>';
-																else
-																		echo '<option value="'.$i.'">'.$i.'</option>';
-														}
-													echo '</select>
-														<select name="mesf" class="selector_01" >';
-													for ($i=1;$i<=date("n")-1;$i++)
-														{
-																if ($i<10)
-																		echo '<option value="0'.$i.'">0'.$i.'</option>';
-																else
-																		echo '<option value="'.$i.'">'.$i.'</option>';
-														}
-													if ($i<10)
-															echo '<option value="0'.date("n").'" selected>0'.date("n").'</option>';
-													else
-															echo '<option value="'.date("n").'" selected>'.date("n").'</option>';
-													for ($i=date("n")+1;$i<=12;$i++)
-														{
-																if ($i<10)
-																		echo '<option value="0'.$i.'">0'.$i.'</option>';
-																else
-																		echo '<option value="'.$i.'">'.$i.'</option>';
-														}
-														
-														
-													echo '</select><br> '.$MULTILANG_UsrAudAno.': 
-														<select name="ano" class="selector_01" >';
-													for ($i=2003;$i<=date("Y")-1;$i++)
-														{
-																echo '<option value="'.$i.'">'.$i.'</option>';
-														}
-															echo '<option value="'.date("Y").'" selected>'.date("Y").'</option>';
-													for ($i=date("Y")+1;$i<=2005;$i++)
-														{
-																		echo '<option value="'.$i.'">'.$i.'</option>';
-														}
-							echo '
-									</select>'; ?>
-
-                    <div class="form-group input-group">
-                        <span class="input-group-addon">
-                            <?php echo $MULTILANG_UsrAudIniReg; ?>
-                        </span>
-                        <input name="inicio_reg" value="<?php echo @$inicio_reg; ?>" type="text" class="form-control">
-                        <span class="input-group-addon">
-                            <?php echo $MULTILANG_UsrAudVisual; ?>
-                        </span>
-                        <input name="fin_reg" value="<?php echo @$fin_reg; ?>" type="text" class="form-control">
-                        <span class="input-group-addon">
-                            <?php echo $MULTILANG_TblRegistros; ?>
-                        </span>
-                    </div>
-
-
-                    <button type="submit" class="btn btn-success btn-block"><?php echo $MULTILANG_Ejecutar; ?></button>
-                </form>
-                <hr>
-
-<?php
-				echo '
-                <table id="TablaAcciones" class="table table-condensed table-hover table-unbordered btn-xs table-striped">
-                    <thead>
-					<tr>
-						<th><b>ID</b></th>
-						<th><b>'.$MULTILANG_UsrLogin.'</b></th>
-						<th><b>'.$MULTILANG_UsrAudDes.'</b></th>
-						<th><b>'.$MULTILANG_Fecha.'</b></th>
-						<th><b>'.$MULTILANG_Hora.'</b></th>
-					</tr>
-                    </thead>
-                    <tbody>
-                    ';
-
-				@$anoi = $ano;
-				@$anof = $ano;
-				if ($anoi=="") {$anoi=date("Y"); $anof=$anoi;}
-				if (@$mesi=="") {$mesi=date("n"); $mesf=$mesi;}
-				if (@$diai=="") {$diai=date("j"); $diaf=$diai;}
-
-				$resultado=@PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria WHERE fecha>='$anoi$mesi$diai' AND fecha<= '$anof$mesf$diaf' AND accion LIKE '%$accionbuscar%' AND usuario_login LIKE '%$usuario%' ORDER BY id DESC LIMIT $inicio_reg,$fin_reg");
-				while($registro = $resultado->fetch())
-					{
-						echo '<tr>
-                                <td>'.$registro["id"].'</td>
-								<td>'.$registro["usuario_login"].'</td>
-								<td>'.$registro["accion"].'</td>
-								<td>'.$registro["fecha"].'</td>
-								<td>'.$registro["hora"].'</td>
-							</tr>';
-					}
-				echo '</tbody>
-                </table>
-				<form action="'.$ArchivoCORE.'" method="POST" name="ver_auditoria_monitoreo"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="hidden" name="PCO_Accion" value="ver_seguimiento_monitoreo">
-				</form>';
-
-				PCO_AbrirBarraEstado();
-				echo '<a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
-				echo '<a class="btn btn-warning btn-block" href="javascript:document.ver_auditoria_monitoreo.submit();"><i class="fa fa-home"></i> '.$MULTILANG_UsrAudMonit.'</a>';
-				PCO_CerrarBarraEstado();
-				PCO_CerrarVentana();
-				 }
-/* ################################################################## */
-if ($PCO_Accion=="PCO_VerSeguimientoEspecifico")
-				{
-			/*
-				Function: PCO_VerSeguimientoEspecifico
-				Presenta las ultimas operaciones realizadas por un usuario.  Por defecto las ultimas 50 acciones.
-
-				Variables minimas de entrada:
-					uid_especifico - Login del usuario
-					inicio_reg - Numero de registro de inicio
-					fin_reg - Numero de registros a visualizar
-
-				Proceso simplificado:
-					(start code)
-						SELECT * FROM ".$TablasCore."auditoria WHERE usuario_login='$uid_especifico' ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg"
-					(end)
-
-				Salida de la funcion:
-					* Listado de operaciones realizadas por el usuario
-
-				Ver tambien:
-					<listar_usuarios> | <PCO_VerSeguimientoGeneral>
-			*/
-						echo '<div align="center"><br>';
-				PCO_AbrirVentana($MULTILANG_UsrAudHisto, 'panel-info');
-				if ($inicio_reg=="") $inicio_reg=0;
-				if ($fin_reg=="") $fin_reg=50;
-					echo ' <br><div align="right">
-								<form name="datos" action="'.$ArchivoCORE.'" method="POST">
-								<input type="hidden" name="PCO_Accion" value="PCO_VerSeguimientoEspecifico">
-								<input type="hidden" name="uid_especifico" value="'.$uid_especifico.'">
-								&nbsp;&nbsp;'.$MULTILANG_UsrAudIniReg.'
-								<input type="text" class="CampoTexto" name="inicio_reg" value="'.$inicio_reg.'" size="4" maxlength="6">
-								'.$MULTILANG_UsrAudVisual.'
-								<input type="text" class="CampoTexto" name="fin_reg" value="'.$fin_reg.'" size="4" maxlength="6"> '.$MULTILANG_TblRegistros.'
-								&nbsp;&nbsp;<input type="submit" value="'.$MULTILANG_Ejecutar.' >>>" class="Botones">&nbsp;&nbsp;
-						</form>
-					</div>';
-				echo '<table width="100%" border="0" cellspacing="0" align="CENTER" class="TextosVentana">
-					<tr>
-						<td align="center" bgcolor="#d6d6d6"><b>ID</b></td>
-						<td align="left" bgcolor="#d6d6d6"><b>'.$MULTILANG_UsrLogin.'</b></td>
-						<td align="left" bgcolor="#d6d6d6"><b>'.$MULTILANG_UsrAudDes.'</b></td>
-						<td align="center" bgcolor="#d6d6d6"><b>'.$MULTILANG_Fecha.' (AAAA-MM-DD)</b></td>
-						<td align="center" bgcolor="#d6d6d6"><b>'.$MULTILANG_Hora.' (HH-MM-SS)</b></td>
-					</tr>';
-				$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_auditoria." FROM ".$TablasCore."auditoria WHERE usuario_login=? ORDER BY fecha DESC, hora DESC LIMIT $inicio_reg,$fin_reg","$uid_especifico");
-				while($registro = $resultado->fetch())
-					{
-						echo '<tr><td align="center">'.$registro["id"].'</td>
-								<td>'.$registro["usuario_login"].'</td>
-								<td>'.$registro["accion"].'</td>
-								<td align="center">'.$registro["fecha"].'</td>
-								<td align="center">'.$registro["hora"].'</td>
-							</tr>';
-					}
-				echo '</table>';
-				PCO_AbrirBarraEstado();
-				echo '<input type="Button" onclick="document.core_ver_menu.submit()" value=" << '.$MULTILANG_IrEscritorio.' " class="BotonesEstado">';
-				PCO_CerrarBarraEstado();
-				PCO_CerrarVentana();
-				echo '<br>';
-				 }
-/* ################################################################## */
-/* ################################################################## */
 			/*
 				Section: Informes
 				Funciones que presentan informacion de los usuarios o permisos como listados.
 			*/
 /* ################################################################## */
 /* ################################################################## */
-if ($PCO_Accion=="listar_usuarios")
+if ($PCO_Accion=="PCO_ListarUsuarios")
 				{
 			/*
-				Function: listar_usuarios
+				Function: PCO_ListarUsuarios
 				Presenta el listado de usuarios (excluido el usuario admin) con posibilidad de filtrado y operaciones basicas.
 
 				Variables minimas de entrada:
@@ -1903,7 +1630,7 @@ if ($PCO_Accion=="listar_usuarios")
 					* Listado de usuarios filtrado por algun criterio y ordenado por login y nombre
 
 				Ver tambien:
-					<agregar_usuario> | <permisos_usuario> | <eliminar_usuario> | <cambiar_estado_usuario>
+					<PCO_AgregarUsuario> | <PCO_PermisosUsuario> | <PCO_EliminarUsuario> | <PCO_CambiarEstadoUsuario>
 			*/
 				PCO_AbrirVentana($MULTILANG_UsrLista, 'panel-info');
                 ?>
@@ -1911,7 +1638,7 @@ if ($PCO_Accion=="listar_usuarios")
 
 
             <form action="<?php echo $ArchivoCORE; ?>" method="POST">
-                <input type="hidden" name="PCO_Accion" value="listar_usuarios">
+                <input type="hidden" name="PCO_Accion" value="PCO_ListarUsuarios">
                 <div class="form-group input-group">
                     <span class="input-group-addon">
                         <i class="fa fa-users"></i>
@@ -1924,7 +1651,7 @@ if ($PCO_Accion=="listar_usuarios")
 			</form>
 
             <form action="<?php echo $ArchivoCORE; ?>" method="POST">
-                <input type="hidden" name="PCO_Accion" value="listar_usuarios">
+                <input type="hidden" name="PCO_Accion" value="PCO_ListarUsuarios">
                 <div class="form-group input-group">
                     <span class="input-group-addon">
                         <i class="fa fa-users"></i>
@@ -1940,7 +1667,7 @@ if ($PCO_Accion=="listar_usuarios")
 <?php
 				echo '
 			<form name="form_crear_usuario" action="'.$ArchivoCORE.'" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-				<input type="hidden" name="PCO_Accion" value="agregar_usuario">
+				<input type="hidden" name="PCO_Accion" value="PCO_AgregarUsuario">
 			</form>
 
 		';
@@ -1981,7 +1708,7 @@ if ($PCO_Accion=="listar_usuarios")
 						if (!PCO_EsAdministrador($registro["login"]))
 								echo '
 										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="PCO_Accion" value="cambiar_estado_usuario">
+												<input type="hidden" name="PCO_Accion" value="PCO_CambiarEstadoUsuario">
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
 												<input type="hidden" name="estado" value="'.$registro["estado"].'">
                                                 <button type="submit" class="btn btn-warning btn-xs">'.$TextoBotonCambioEstado.'</button>
@@ -1992,7 +1719,7 @@ if ($PCO_Accion=="listar_usuarios")
 						if (!PCO_EsAdministrador($registro["login"]))	
 								echo '		
 										<form action="'.$ArchivoCORE.'" method="POST"  name="f'.$i.'">
-												<input type="hidden" name="PCO_Accion" value="eliminar_usuario">
+												<input type="hidden" name="PCO_Accion" value="PCO_EliminarUsuario">
 												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
                                                 <a class="btn btn-danger btn-xs" href="javascript:confirmar_evento(\''.$MULTILANG_UsrAdvSupr.'\',f'.$i.');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
 										</form>';
@@ -2000,23 +1727,16 @@ if ($PCO_Accion=="listar_usuarios")
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="PCO_Accion" value="permisos_usuario">
+												<input type="hidden" name="PCO_Accion" value="PCO_PermisosUsuario">
 												<input type="hidden" name="usuario" value="'.$registro["login"].'">
                                                 <button type="submit" class="btn btn-info btn-xs">'.$MULTILANG_UsrAddMenu.'</button>
 										</form>
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="PCO_Accion" value="informes_usuario">
+												<input type="hidden" name="PCO_Accion" value="PCO_InformesUsuario">
 												<input type="hidden" name="usuario" value="'.$registro["login"].'">
                                                 <button type="submit" class="btn btn-default btn-xs">'.$MULTILANG_UsrAddInfo.'</button>
-										</form>
-								</td>
-								<td align="center">
-										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="PCO_Accion" value="PCO_VerSeguimientoEspecifico">
-												<input type="hidden" name="uid_especifico" value="'.$registro["login"].'">
-                                                <button type="submit" class="btn btn-default btn-xs">'.$MULTILANG_UsrAuditoria.'</button>
 										</form>
 								</td>
 							</tr>';
@@ -2049,20 +1769,11 @@ if ($PCO_Accion=="listar_usuarios")
 
 			} // Fin sino filtro
 
-	echo '
-				<form action="'.$ArchivoCORE.'" method="POST" name="ver_auditoria_general"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="hidden" name="PCO_Accion" value="PCO_VerSeguimientoGeneral">
-				</form>
-				<form action="'.$ArchivoCORE.'" method="POST" name="ver_auditoria_monitoreo"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-					<input type="hidden" name="PCO_Accion" value="ver_seguimiento_monitoreo">
-				</form>
-		';
 				PCO_AbrirBarraEstado();
                     echo '<div align=center>
                         <a class="btn btn-default " href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>
                         <a class="btn btn-success " href="javascript:document.form_crear_usuario.submit();"><i class="fa fa-file-o"></i> '.$MULTILANG_UsrAgregar.'</a>
                         <a class="btn btn-warning " href="javascript:document.PCO_PanelAuditoriaMovimientos.submit();"><i class="fa fa-file-text"></i> '.$MULTILANG_UsrVerAudit.'</a>
-                        <a class="btn btn-info " href="javascript:document.ver_auditoria_monitoreo.submit();"><i class="fa fa-file-text"></i> '.$MULTILANG_UsrAudMonit.'</a>
                         </div>';
 				PCO_CerrarBarraEstado();
 				PCO_CerrarVentana();

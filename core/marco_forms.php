@@ -76,8 +76,8 @@
 </form>
 
 
-<form name="administrar_tablas" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="PCO_Accion" value="administrar_tablas">
+<form name="PCO_AdministrarTablas" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="PCO_AdministrarTablas">
 </form>
 <form name="administrar_formularios" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 	<input type="Hidden" name="PCO_Accion" value="administrar_formularios">
@@ -89,8 +89,8 @@
 <form name="PCO_AdministrarInformes" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 	<input type="Hidden" name="PCO_Accion" value="PCO_AdministrarInformes">
 </form>
-<form name="listar_usuarios" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="PCO_Accion" value="listar_usuarios">
+<form name="PCO_ListarUsuarios" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="PCO_ListarUsuarios">
 </form>
 <form name="PCO_PanelAuditoriaMovimientos" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 	<input type="Hidden" name="PCO_Accion" value="PCO_PanelAuditoriaMovimientos">

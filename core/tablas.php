@@ -36,7 +36,7 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: eliminar_campo
+	Function: PCO_EliminarCampoTabla
 	Elimina un campo de una tabla de datos durante su proceso de edicion
 
 	Variables de entrada:
@@ -52,9 +52,9 @@
 		Campo eliminado de la tabla.
 		
 	Ver tambien:
-		<editar_tabla> | <guardar_crear_campo>
+		<PCO_EditarTabla> | <PCO_GuardarCrearCampo>
 */
-	if ($PCO_Accion=="eliminar_campo")
+	if ($PCO_Accion=="PCO_EliminarCampoTabla")
 		{ 
 			$mensaje_error="";
 			
@@ -69,7 +69,7 @@
 					PCO_EjecutarSQLUnaria("ALTER TABLE $nombre_tabla DROP COLUMN $nombre_campo");
 					PCO_Auditar("Elimina campo $nombre_campo de tabla $nombre_tabla");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="editar_tabla">
+					<input type="Hidden" name="PCO_Accion" value="PCO_EditarTabla">
 					<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 					</form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -77,7 +77,7 @@
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="editar_tabla">
+						<input type="Hidden" name="PCO_Accion" value="PCO_EditarTabla">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_TblError.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
@@ -90,7 +90,7 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: guardar_crear_campo
+	Function: PCO_GuardarCrearCampo
 	Agrega un nuevo campo a una tabla de datos durante su proceso de edicion
 
 	Variables de entrada:
@@ -107,9 +107,9 @@
 		Nuevo campo creado en la tabla.  Algunos parametros adicionales pueden ser usados durante el proceso de creacion del campo.
 		
 	Ver tambien:
-		<editar_tabla>
+		<PCO_EditarTabla>
 */
-	if ($PCO_Accion=="guardar_crear_campo")
+	if ($PCO_Accion=="PCO_GuardarCrearCampo")
 		{
 			// Construye la consulta para la creacion del campo (sintaxis mysql por ahora)
 			$consulta = "ALTER TABLE $nombre_tabla ADD COLUMN $nombre_campo $tipo";
@@ -130,7 +130,7 @@
 			if ($descripcion_ultimo_error!="")
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="editar_tabla">
+						<input type="Hidden" name="PCO_Accion" value="PCO_EditarTabla">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_TblError2.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$MULTILANG_TblError3.': <i>'.$descripcion_ultimo_error.'</i>">
@@ -141,7 +141,7 @@
 				{
 					PCO_Auditar("Agrega campo $nombre_campo tipo $tipo a tabla $nombre_tabla");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="editar_tabla">
+						<input type="Hidden" name="PCO_Accion" value="PCO_EditarTabla">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 						</form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -152,7 +152,7 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: editar_tabla
+	Function: PCO_EditarTabla
 	Permite agregar o eliminar campos en una tabla de datos de aplicacion mediante sentencias ALTER despues de haber consultado su estructura
 
 	Variables de entrada:
@@ -167,9 +167,9 @@
 		Tabla con sus campos editados
 
 	Ver tambien:
-		<asistente_tablas>
+		<PCO_AsistenteTablas>
 */
-if ($PCO_Accion=="editar_tabla")
+if ($PCO_Accion=="PCO_EditarTabla")
 	{
 		 ?>
 
@@ -178,7 +178,7 @@ if ($PCO_Accion=="editar_tabla")
       
 			<?php PCO_AbrirVentana($MULTILANG_TblAgrCampo,'panel-danger'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="guardar_crear_campo">
+			<input type="Hidden" name="PCO_Accion" value="PCO_GuardarCrearCampo">
 			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 
 			<h4><?php echo $MULTILANG_TblAgrCampoTabla; ?>: <b><?php echo $nombre_tabla; ?></b>:</h4>
@@ -375,7 +375,7 @@ if ($PCO_Accion=="editar_tabla")
 							echo '
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro[$i]["nombre"].'" id="f'.$registro[$i]["nombre"].'">
-												<input type="hidden" name="PCO_Accion" value="eliminar_campo">
+												<input type="hidden" name="PCO_Accion" value="PCO_EliminarCampoTabla">
 												<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 												<input type="hidden" name="nombre_campo" value="'.$registro[$i]["nombre"].'">
                                                 <a href="#" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelCampo.'\',f'.$registro[$i]["nombre"].');"><i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</a>
@@ -412,7 +412,7 @@ echo '
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: eliminar_tabla
+	Function: PCO_EliminarTabla
 	Elimina una tabla de aplicacion
 
 	Variables de entrada:
@@ -427,9 +427,9 @@ echo '
 		Tabla eliminada
 
 	Ver tambien:
-		<administrar_tablas>
+		<PCO_AdministrarTablas>
 */
-	if ($PCO_Accion=="eliminar_tabla")
+	if ($PCO_Accion=="PCO_EliminarTabla")
 		{
 			$mensaje_error="";
 			if ($mensaje_error=="")
@@ -437,13 +437,13 @@ echo '
 					// Realiza la operacion
 					PCO_EjecutarSQLUnaria("DROP TABLE $nombre_tabla");
 					PCO_Auditar("Elimina tabla $nombre_tabla");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="administrar_tablas"></form>
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_AdministrarTablas"></form>
 							<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 				}
 			else
 				{
                     PCO_Mensaje('<blink>'.$MULTILANG_TblErrDel1.'</blink>',$MULTILANG_TblErrDel2, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-					echo '<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="PCO_Accion" value="administrar_tablas"></form>
+					echo '<form action="'.$ArchivoCORE.'" method="POST" name="cancelar"><input type="Hidden" name="PCO_Accion" value="PCO_AdministrarTablas"></form>
 						<br /><input type="Button" onclick="document.cancelar.submit()" name="" value="Cerrar" class="Botones">';
 				}
 		}
@@ -453,7 +453,7 @@ echo '
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: guardar_crear_tabla
+	Function: PCO_GuardarCrearTabla
 	Crea una nueva tabla de aplicacion
 
 	Variables de entrada:
@@ -468,9 +468,9 @@ echo '
 		Nueva tabla creada con el prefijo de aplicacion y nombre especificado
 
 	Ver tambien:
-		<administrar_tablas>
+		<PCO_AdministrarTablas>
 */
-	if ($PCO_Accion=="guardar_crear_tabla")
+	if ($PCO_Accion=="PCO_GuardarCrearTabla")
 		{
 		    $error_consulta="";
 			$mensaje_error="";
@@ -544,7 +544,7 @@ echo '
 					if (strlen($error_consulta)>5)
 						{
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-								<input type="Hidden" name="PCO_Accion" value="administrar_tablas">
+								<input type="Hidden" name="PCO_Accion" value="PCO_AdministrarTablas">
 								<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_TblError2.'">
 								<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$MULTILANG_TblError3.' <i>'.$error_mysql.'</i>">
 								<input type="hidden" name="nombre_tabla" value="'.$TablasApp.$nombre_tabla.'">
@@ -555,7 +555,7 @@ echo '
 						{
 							PCO_Auditar("Crea tabla $nombre_tabla");
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-								<input type="Hidden" name="PCO_Accion" value="editar_tabla">
+								<input type="Hidden" name="PCO_Accion" value="PCO_EditarTabla">
 								<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_TblError2.'">
 								<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$MULTILANG_TblError3.' <i>'.$error_mysql.'</i>">
 								<input type="hidden" name="nombre_tabla" value="'.$TablasApp.$nombre_tabla.'">
@@ -566,7 +566,7 @@ echo '
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="administrar_tablas">
+						<input type="Hidden" name="PCO_Accion" value="PCO_AdministrarTablas">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_TblError1.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
@@ -578,13 +578,13 @@ echo '
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: copiar_tabla
+	Function: PCO_CopiarTabla
 	Genera el archivo de copia de una tabla
 
 	Ver tambien:
-		<administrar_tablas>
+		<PCO_AdministrarTablas>
 */
-	if ($PCO_Accion=="copiar_tabla")
+	if ($PCO_Accion=="PCO_CopiarTabla")
 		{
 			$mensaje_error="";
 			if ($nombre_tabla=="")
@@ -627,10 +627,10 @@ echo '
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: definir_copia_tablas
+	Function: PCO_DefinirCopiaTablas
 	Presenta opciones para generar una copia de la tabla seleccionada
 */
-if ($PCO_Accion=="definir_copia_tablas")
+if ($PCO_Accion=="PCO_DefinirCopiaTablas")
 	{
 		 ?>
 
@@ -639,7 +639,7 @@ if ($PCO_Accion=="definir_copia_tablas")
 
 				<?php PCO_AbrirVentana($MULTILANG_FrmTipoObjeto, 'panel-primary'); ?>
 				<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="copiar_tabla">
+					<input type="Hidden" name="PCO_Accion" value="PCO_CopiarTabla">
 					<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
 
 					<br>
@@ -734,7 +734,7 @@ if ($PCO_Accion=="definir_copia_tablas")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: confirmar_importacion_tabla
+	Function: PCO_ConfirmarImportacionTabla
 	Lee el archivo cargado sobre /tmp y ejecuta los scripts SQL
 
 	Variables de entrada:
@@ -744,7 +744,7 @@ if ($PCO_Accion=="definir_copia_tablas")
 	Salida:
 		Tablas generadas a partir de la definicion del archivo
 */
-if ($PCO_Accion=="confirmar_importacion_tabla")
+if ($PCO_Accion=="PCO_ConfirmarImportacionTabla")
 	{
 		echo "<br>";
 		$mensaje_error="";
@@ -795,7 +795,7 @@ if ($PCO_Accion=="confirmar_importacion_tabla")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: ejecutar_importacion_csv
+	Function: PCO_EjecutarImportacionCSV
 	Pasa los registros desde la hoja de calculo a una tabla de datos
 
 	Variables de entrada:
@@ -807,7 +807,7 @@ if ($PCO_Accion=="confirmar_importacion_tabla")
 	Salida:
 		Consultas SQL generadas y ejecutadas para la adicion de registros en la base de datos
 */
-if ($PCO_Accion=="ejecutar_importacion_csv")
+if ($PCO_Accion=="PCO_EjecutarImportacionCSV")
 	{
 		//Define los arreglos con campos fijos, sus valores y campos ignorados
 		$ArregloCamposIgnorados=explode($_SeparadorCampos_,$PCO_lista_campos_ignorados);
@@ -967,10 +967,10 @@ if ($PCO_Accion=="ejecutar_importacion_csv")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: analizar_importacion_csv
+	Function: PCO_AnalizarImportacionCSV
 	Revisa los archivos de hoja de calculo cargados antes de subirlos a la tabla de datos
 */
-if ($PCO_Accion=="analizar_importacion_csv")
+if ($PCO_Accion=="PCO_AnalizarImportacionCSV")
 	{
 
 		//Determina el tipo de archivo detectado
@@ -994,7 +994,7 @@ if ($PCO_Accion=="analizar_importacion_csv")
 				<?php
 					PCO_AbrirVentana($MULTILANG_TblCorrespondencia, 'panel-danger'); 
 				?>
-						<input type="Hidden" name="PCO_Accion" value="ejecutar_importacion_csv">
+						<input type="Hidden" name="PCO_Accion" value="PCO_EjecutarImportacionCSV">
 						<input type="Hidden" name="archivo_cargado" value="<?php echo $archivo_cargado; ?>">
 						<input type="Hidden" name="PCO_lista_campos_fijos" value="<?php echo $PCO_lista_campos_fijos; ?>">
 						<input type="Hidden" name="PCO_lista_valores_fijos" value="<?php echo $PCO_lista_valores_fijos; ?>">
@@ -1041,14 +1041,14 @@ if ($PCO_Accion=="analizar_importacion_csv")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: analizar_importacion_csv
+	Function: PCO_AnalizarImportacionCSV
 	Revisa los archivos de hoja de calculo cargados antes de subirlos a la tabla de datos
 */
-if ($PCO_Accion=="escogertabla_importacion_csv")
+if ($PCO_Accion=="PCO_EscogerTablaImportacionCSV")
 	{
 		PCO_AbrirVentana($MULTILANG_Seleccionar, 'panel-primary'); ?>
 				<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="analizar_importacion_csv">
+					<input type="Hidden" name="PCO_Accion" value="PCO_AnalizarImportacionCSV">
 					<input type="Hidden" name="archivo_cargado" value="<?php echo $archivo_cargado; ?>">
 
 					<h4><label for="nombre_tabla"><?php echo $MULTILANG_TablaDatos; ?>:</label></h4>
@@ -1081,10 +1081,10 @@ if ($PCO_Accion=="escogertabla_importacion_csv")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: importar_tabla
+	Function: PCO_ImportarTabla
 	Presenta el paso 1 de importacion de tablas
 */
-if ($PCO_Accion=="importar_tabla")
+if ($PCO_Accion=="PCO_ImportarTabla")
 	{
 		echo "<br>";
 		PCO_AbrirVentana($NombreRAD.' - '.$MULTILANG_TblImportar,'panel-info');
@@ -1110,7 +1110,7 @@ if ($PCO_Accion=="importar_tabla")
 							</select>
                             <input type="hidden" name="MAX_FILE_SIZE" value="8192000">
                             <input type="Hidden" name="PCO_Accion" value="cargar_archivo">
-                            <input type="Hidden" name="siguiente_accion" value="confirmar_importacion_tabla">
+                            <input type="Hidden" name="siguiente_accion" value="PCO_ConfirmarImportacionTabla">
                             <input type="Hidden" name="texto_boton_siguiente" value="<?php echo $MULTILANG_TblEjecutarSQL; ?>">
                             <input type="Hidden" name="carpeta" value="tmp">
                             <input name="archivo" type="file" class="form-control btn btn-info">
@@ -1137,7 +1137,7 @@ if ($PCO_Accion=="importar_tabla")
 							<br>
                             <input type="hidden" name="MAX_FILE_SIZE" value="8192000">
                             <input type="Hidden" name="PCO_Accion" value="cargar_archivo">
-                            <input type="Hidden" name="siguiente_accion" value="escogertabla_importacion_csv">
+                            <input type="Hidden" name="siguiente_accion" value="PCO_EscogerTablaImportacionCSV">
                             <input type="Hidden" name="texto_boton_siguiente" value="<?php echo $MULTILANG_Continuar; ?>">
                             <input type="Hidden" name="carpeta" value="tmp">
                             <input name="archivo" type="file" class="form-control btn btn-info">
@@ -1196,17 +1196,17 @@ if ($PCO_Accion=="importar_tabla")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: administrar_tablas
+	Function: PCO_AdministrarTablas
 	Detecta las tablas existentes en la base de datos enlazada y permite realizar operaciones basicas con ellas, asi como la creacion de nuevas tablas de aplicacion.  Esta funciona hace uso de la funcion generalizada <PCO_ConsultarTablas>
 
 	Ver tambien:
-		<asistente_tablas> | <PCO_ConsultarTablas>
+		<PCO_AsistenteTablas> | <PCO_ConsultarTablas>
 */
-	if ($PCO_Accion=="administrar_tablas")
+	if ($PCO_Accion=="PCO_AdministrarTablas")
 		{
 			PCO_AbrirVentana($MULTILANG_TblCrearListar,'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="guardar_crear_tabla">
+			<input type="Hidden" name="PCO_Accion" value="PCO_GuardarCrearTabla">
 			<div align=center>
 			<h3><?php echo $MULTILANG_TblCreaTabla; ?>:<b><?php echo $BaseDatos; ?></b>:</h3>
 			<table class="TextosVentana" cellspacing=10>
@@ -1240,7 +1240,7 @@ if ($PCO_Accion=="importar_tabla")
 			<td width=50></td>
 			<td align=center>
 				<form name="datosasis" id="datosasis" action="<?php echo $ArchivoCORE; ?>" method="POST">
-				<input type="Hidden" name="PCO_Accion" value="asistente_tablas">
+				<input type="Hidden" name="PCO_Accion" value="PCO_AsistenteTablas">
 				<?php echo $MULTILANG_Asistente; ?><br>
 				<a href="javascript:document.datosasis.submit();"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<b><?php echo $MULTILANG_TblTitAsis; ?></b><br><?php echo $MULTILANG_TblDesAsis; ?>"><i class="btn fa fa-magic fa-5x texto-naranja"></i></a>
 				</form>
@@ -1248,7 +1248,7 @@ if ($PCO_Accion=="importar_tabla")
 			<td width=50></td>
 			<td align=center>
 				<form name="importacion" id="importacion" action="<?php echo $ArchivoCORE; ?>" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="importar_tabla">
+					<input type="Hidden" name="PCO_Accion" value="PCO_ImportarTabla">
 				</form>
 				<a class="btn btn-warning btn-block" href="javascript:document.importacion.submit();"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_TblImportar; ?></a>
 			</td>
@@ -1291,7 +1291,7 @@ if ($PCO_Accion=="importar_tabla")
 						
 								//Boton de copiar tabla
 								echo '<form action="'.$ArchivoCORE.'" method="POST" name="dco'.$registro["0"].'" id="dco'.$registro["0"].'" style="display:inline;">
-										<input type="hidden" name="PCO_Accion" value="definir_copia_tablas">
+										<input type="hidden" name="PCO_Accion" value="PCO_DefinirCopiaTablas">
 										<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
 										<a class="btn btn-default btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmCopiar.'" href="javascript:confirmar_evento(\''.$MULTILANG_FrmAdvCopiar.'\',dco'.$registro["0"].');"><i class="fa fa-code-fork fa-fw"></i></a>
 									</form>';					
@@ -1299,7 +1299,7 @@ if ($PCO_Accion=="importar_tabla")
 								//Determina si activa o no el boton de editar
 								if ($PrefijoRegistro!=$TablasCore)
 									echo '<form action="'.$ArchivoCORE.'" method="POST" style="display:inline;">
-											<input type="hidden" name="PCO_Accion" value="editar_tabla">
+											<input type="hidden" name="PCO_Accion" value="PCO_EditarTabla">
 											<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
 											<button type="submit" class="btn btn-warning btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o fa-fw"></i></button>
 										</form>';
@@ -1338,7 +1338,7 @@ if ($PCO_Accion=="importar_tabla")
 								//Determina si activar o no el boton de eliminar
 								if ($PrefijoRegistro!=$TablasCore && $total_registros==0)							
 									echo '<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["0"].'" id="f'.$registro["0"].'" style="display:inline;">
-											<input type="hidden" name="PCO_Accion" value="eliminar_tabla">
+											<input type="hidden" name="PCO_Accion" value="PCO_EliminarTabla">
 											<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
 											<a href="#" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'" onClick="confirmar_evento(\''.$MULTILANG_TblAdvDelTabla.'\',f'.$registro["0"].');"><i class="fa fa-times fa-fw"></i></a>
 										</form>';
@@ -1363,7 +1363,7 @@ if ($PCO_Accion=="importar_tabla")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: guardar_crear_tabla_asistente
+	Function: PCO_GuardarCrearTablaAsistente
 	Genera una nueva tabla a partir de la plantilla seleccionada en el asistente
 
 	Variables de entrada:
@@ -1380,9 +1380,9 @@ if ($PCO_Accion=="importar_tabla")
 		Nueva tabla creada con el prefijo de aplicacion y nombre especificado
 
 	Ver tambien:
-		<asistente_tablas>
+		<PCO_AsistenteTablas>
 */
-	if ($PCO_Accion=="guardar_crear_tabla_asistente")
+	if ($PCO_Accion=="PCO_GuardarCrearTablaAsistente")
 		{
 			$mensaje_error="";
 			if ($nombre_tabla=="") $mensaje_error=$MULTILANG_TblErrCrear;
@@ -1394,7 +1394,7 @@ if ($PCO_Accion=="importar_tabla")
 					if ($error_consulta!="")
 						{
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-								<input type="Hidden" name="PCO_Accion" value="asistente_tablas">
+								<input type="Hidden" name="PCO_Accion" value="PCO_AsistenteTablas">
 								<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_TblError2.'">
 								<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$MULTILANG_TblError3.': <i>'.$error_mysql.'</i>">
 								</form>
@@ -1436,7 +1436,7 @@ if ($PCO_Accion=="importar_tabla")
 								}
 							PCO_Auditar("Crea tabla $nombre_tabla");
 							echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-							<input type="Hidden" name="PCO_Accion" value="editar_tabla">
+							<input type="Hidden" name="PCO_Accion" value="PCO_EditarTabla">
 							<input type="hidden" name="nombre_tabla" value="'.$TablasApp.''.$nombre_tabla.'">
 							</form>
 									<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -1445,7 +1445,7 @@ if ($PCO_Accion=="importar_tabla")
 			else
 				{
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="asistente_tablas">
+						<input type="Hidden" name="PCO_Accion" value="PCO_AsistenteTablas">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_TblError1.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						</form>
@@ -1458,7 +1458,7 @@ if ($PCO_Accion=="importar_tabla")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: asistente_tablas
+	Function: PCO_AsistenteTablas
 	Despliega el asistente para creacion de tablas basado en los archivos inc/practico/asistentes/*
 
 	Variables de entrada:
@@ -1469,13 +1469,13 @@ if ($PCO_Accion=="importar_tabla")
 		Tabla seleccionada para su creacion
 		
 	Ver tambien:
-		<guardar_crear_tabla_asistente>
+		<PCO_GuardarCrearTablaAsistente>
 */
-	if ($PCO_Accion=="asistente_tablas")
+	if ($PCO_Accion=="PCO_AsistenteTablas")
 		{
 			PCO_AbrirVentana($MULTILANG_TblAsistente,'panel-primary'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="guardar_crear_tabla_asistente">
+			<input type="Hidden" name="PCO_Accion" value="PCO_GuardarCrearTablaAsistente">
 			<div align=center>
 			<h3><?php echo $MULTILANG_TblCreaTabla; ?> <b><?php echo $BaseDatos; ?></b>:</h3>
 				<table class="table table-unbordered">
@@ -1588,7 +1588,7 @@ if ($PCO_Accion=="importar_tabla")
 	{
 			PCO_AbrirVentana('Crear/Listar tablas de datos definidias en el sistema','panel-warning'); ?>
 			<form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="guardar_crear_tabla">
+			<input type="Hidden" name="PCO_Accion" value="PCO_GuardarCrearTabla">
 			<div align=center>
 			<br>Crear una nueva tabla de datos en <b><?php echo $BaseDatos; ?></b>:
 				<table class="TextosVentana">
@@ -1647,7 +1647,7 @@ if ($PCO_Accion=="importar_tabla")
 								<td>'.$registro[14].'</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["Name"].'" id="f'.$registro["Name"].'">
-												<input type="hidden" name="PCO_Accion" value="eliminar_tabla">
+												<input type="hidden" name="PCO_Accion" value="PCO_EliminarTabla">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["Name"].'">
 												<input type="button" value="Eliminar"  class="BotonesCuidado" onClick="confirmar_evento(\'IMPORTANTE:  Al eliminar la tabla de datos '.$registro["Name"].' se eliminar&aacute;n tambi&eacute;n todos los registros en ella almacenados y luego no podr&aacute; deshacer esta operaci&oacute;n.\nEst&aacute; seguro que desea continuar ?\',f'.$registro["Name"].');">
 												&nbsp;&nbsp;
@@ -1655,7 +1655,7 @@ if ($PCO_Accion=="importar_tabla")
 								</td>
 								<td align="center">
 										<form action="'.$ArchivoCORE.'" method="POST">
-												<input type="hidden" name="PCO_Accion" value="editar_tabla">
+												<input type="hidden" name="PCO_Accion" value="PCO_EditarTabla">
 												<input type="hidden" name="nombre_tabla" value="'.$registro["Name"].'">
 												<input type="Submit" value="Editar"  class="Botones">
 												&nbsp;&nbsp;

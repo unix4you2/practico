@@ -2499,67 +2499,64 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "PCO_CambiarContrasena")				$retorno = 1;
         if ($PCO_Accion== "PCO_ActualizarPerfilUsuario")		$retorno = 1;
         if ($PCO_Accion== "PCO_GuardarPerfilUsuario")			$retorno = 1;
-        if ($PCO_Accion== "ver_seguimiento_monitoreo")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "PCO_ResetearContrasena")				$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "PCO_VerSeguimientoGeneral")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "PCO_VerSeguimientoEspecifico")		$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "PCO_ResetearContrasena")				$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
 		if ($PCO_Accion== "PCO_ActualizarContrasena")			$retorno = PCO_PermisoHeredadoAccion("PCO_CambiarContrasena");
-		if ($PCO_Accion== "agregar_usuario")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "guardar_usuario")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "eliminar_usuario")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "cambiar_estado_usuario")				$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "permisos_usuario")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "agregar_permiso")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "eliminar_permiso")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "informes_usuario")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "agregar_informe_usuario")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-		if ($PCO_Accion== "PCO_EliminarInformeUsuario")			$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-        if ($PCO_Accion== "copiar_permisos")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
-        if ($PCO_Accion== "PCO_CopiarInformes")					$retorno = PCO_PermisoAgregadoAccion("listar_usuarios");
+		if ($PCO_Accion== "PCO_AgregarUsuario")					$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
+		if ($PCO_Accion== "PCO_GuardarUsuario")					$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
+		if ($PCO_Accion== "PCO_EliminarUsuario")				$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
+		if ($PCO_Accion== "PCO_CambiarEstadoUsuario")			$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
+		if ($PCO_Accion== "PCO_PermisosUsuario")				$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
+		if ($PCO_Accion== "PCO_AgregarPermiso")					$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
+		if ($PCO_Accion== "PCO_EliminarPermiso")				$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
+		if ($PCO_Accion== "PCO_InformesUsuario")				$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
+		if ($PCO_Accion== "PCO_AgregarInformeUsuario")			$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
+		if ($PCO_Accion== "PCO_EliminarInformeUsuario")			$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
+        if ($PCO_Accion== "PCO_CopiarPermisos")					$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
+        if ($PCO_Accion== "PCO_CopiarInformes")					$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
         if ($PCO_Accion== "PCO_AgregarUsuarioAutoregistro")		$retorno = 1;
         if ($PCO_Accion== "PCO_GuardarUsuarioAutoregistro")		$retorno = 1;
         
 		// Funciones en core/menus.php
 		if ($PCO_Accion== "Ver_menu")							$retorno = 1;
-		if ($PCO_Accion== "buscar_permisos_practico")			$retorno = 1;
+		if ($PCO_Accion== "PCO_BuscarPermisosPractico")			$retorno = 1;
 		if ($PCO_Accion== "PCO_EliminarMenu")					$retorno = PCO_PermisoAgregadoAccion("PCOFUNC_AdministrarMenu");
 		// Funciones en core/tablas.php
-		if ($PCO_Accion== "asistente_tablas")					$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
-		if ($PCO_Accion== "guardar_crear_tabla_asistente")		$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
-		if ($PCO_Accion== "editar_tabla")						$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
-		if ($PCO_Accion== "eliminar_tabla")						$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
-		if ($PCO_Accion== "eliminar_campo")						$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
-		if ($PCO_Accion== "guardar_crear_campo")				$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
-		if ($PCO_Accion== "guardar_crear_tabla")				$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
-		if ($PCO_Accion== "definir_copia_tablas")				$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
-		if ($PCO_Accion== "copiar_tabla")						$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
-		if ($PCO_Accion== "importar_tabla")						$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
-		if ($PCO_Accion== "confirmar_importacion_tabla")		$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
-		if ($PCO_Accion== "analizar_importacion_csv")			$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
-		if ($PCO_Accion== "escogertabla_importacion_csv")		$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
-		if ($PCO_Accion== "ejecutar_importacion_csv")			$retorno = PCO_PermisoAgregadoAccion("administrar_tablas");
+		if ($PCO_Accion== "PCO_AsistenteTablas")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarTablas");
+		if ($PCO_Accion== "PCO_GuardarCrearTablaAsistente")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarTablas");
+		if ($PCO_Accion== "PCO_EditarTabla")					$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarTablas");
+		if ($PCO_Accion== "PCO_EliminarTabla")					$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarTablas");
+		if ($PCO_Accion== "PCO_EliminarCampoTabla")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarTablas");
+		if ($PCO_Accion== "PCO_GuardarCrearCampo")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarTablas");
+		if ($PCO_Accion== "PCO_GuardarCrearTabla")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarTablas");
+		if ($PCO_Accion== "PCO_DefinirCopiaTablas")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarTablas");
+		if ($PCO_Accion== "PCO_CopiarTabla")					$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarTablas");
+		if ($PCO_Accion== "PCO_ImportarTabla")					$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarTablas");
+		if ($PCO_Accion== "PCO_ConfirmarImportacionTabla")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarTablas");
+		if ($PCO_Accion== "PCO_AnalizarImportacionCSV")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarTablas");
+		if ($PCO_Accion== "PCO_EscogerTablaImportacionCSV")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarTablas");
+		if ($PCO_Accion== "PCO_EjecutarImportacionCSV")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarTablas");
 
 		// Funciones en core/formularios.php
 		if ($PCO_Accion== "guardar_datos_formulario")			$retorno = 1;
 		if ($PCO_Accion== "eliminar_datos_formulario")			$retorno = 1;
-		if ($PCO_Accion== "actualizar_datos_formulario")		$retorno = 1;
-		if ($PCO_Accion== "actualizar_java_evento")		        $retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "editar_evento_objeto")		        $retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "eliminar_evento_objeto")		        $retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "actualizar_formulario")				$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "copiar_formulario")					$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "definir_copia_formularios")			$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "actualizar_campo_formulario")		$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "PCO_ActualizarDatosFormulario")		$retorno = 1;
+		if ($PCO_Accion== "PCO_ActualizarJavaEvento")		    $retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "PCO_EditarEventoObjeto")		        $retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "PCO_EliminarEventoObjeto")		    $retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "PCO_ActualizarFormulario")			$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "PCO_CopiarFormulario")				$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "PCO_DefinirCopiaFormularios")		$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "PCO_ActualizarCampoFormulario")		$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
 		if ($PCO_Accion== "guardar_formulario")					$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
 		if ($PCO_Accion== "PCO_EliminarFormulario")				$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
 		if ($PCO_Accion== "editar_formulario")					$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
 		if ($PCO_Accion== "guardar_campo_formulario")			$retorno = PCO_PermisoAgregadoAccion("editar_formulario");
-		if ($PCO_Accion== "eliminar_campo_formulario")			$retorno = PCO_PermisoAgregadoAccion("editar_formulario");
+		if ($PCO_Accion== "PCO_EliminarCampoFormulario")		$retorno = PCO_PermisoAgregadoAccion("editar_formulario");
 		if ($PCO_Accion== "guardar_accion_formulario")			$retorno = PCO_PermisoAgregadoAccion("editar_formulario");
 		if ($PCO_Accion== "eliminar_accion_formulario")			$retorno = PCO_PermisoAgregadoAccion("editar_formulario");
-		if ($PCO_Accion== "confirmar_importacion_formulario")	$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "analizar_importacion_formulario")	$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
-		if ($PCO_Accion== "importar_formulario")				$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "PCO_ConfirmarImportacionFormulario")	$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "PCO_AnalizarImportacionFormulario")	$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
+		if ($PCO_Accion== "PCO_ImportarFormulario")				$retorno = PCO_PermisoAgregadoAccion("administrar_formularios");
 		// Funciones en core/sesion.php
 		if ($PCO_Accion== "Iniciar_login")						$retorno = 1;
 		if ($PCO_Accion== "Terminar_sesion")					$retorno = 1;
@@ -2676,7 +2673,7 @@ function PCO_PermisoAgregadoAccion($PCO_Accion)
 	Traduce un registro de base de datos a notacion XML y retorna su cadena equivalente
 
 	Ver tambien:
-		<copiar_formulario> | <copiar_informe>
+		<PCO_CopiarFormulario> | <copiar_informe>
 */
 function PCO_ConvertirRegistroXML($Registro_BD,$ListaCampos,$CodificarBase64=1)
 	{
@@ -2817,13 +2814,6 @@ function PCO_LimpiarEntradas()
 		$PCO_ErrorDescripcion=PCO_EscaparContenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion));
 
 		// Escapar algunas variables segun la accion recibida
-		if ($PCO_Accion=="PCO_VerSeguimientoGeneral")
-			{
-				global $accionbuscar,$fin_reg,$inicio_reg;
-				$accionbuscar=PCO_EscaparContenido($accionbuscar);
-				$inicio_reg=PCO_EscaparContenido($inicio_reg);
-				$fin_reg=PCO_EscaparContenido($fin_reg);
-			}
 
 		if ($PCO_Accion=="administrar_formularios")
 			{
@@ -2851,7 +2841,7 @@ function PCO_LimpiarEntradas()
 				$informe=PCO_EscaparContenido($informe);
 			}
 
-		if ($PCO_Accion=="listar_usuarios")
+		if ($PCO_Accion=="PCO_ListarUsuarios")
 			{
 				global $login_filtro,$nombre_filtro;
 				$login_filtro=PCO_EscaparContenido($login_filtro);
@@ -6296,7 +6286,7 @@ function PCO_CargarObjetoBotonComando($registro_campos,$registro_datos_formulari
         if ($registro_campos["tipo_accion"]=="interna_escritorio")
             $comando_javascript.="document.core_ver_menu.submit();";
         if ($registro_campos["tipo_accion"]=="interna_actualizar")
-            $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='actualizar_datos_formulario'; PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."'); ";
+            $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_ActualizarDatosFormulario'; PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."'); ";
         if ($registro_campos["tipo_accion"]=="interna_eliminar")
             $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='eliminar_datos_formulario';document.".$registro_formulario["id_html"].".submit();";
         if ($registro_campos["tipo_accion"]=="interna_cargar")
@@ -6434,7 +6424,7 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                             <div style="display: inline-block;">
                                 <a class="btn btn-xs " data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Cerrar.'" href="javascript:OcultarOpcionesEdicion(this,\'#PCOEditorContenedor_'.$registro_campos["id"].'\');"><i class="fa fa-times"></i></a>
                                 <br>
-                                <a onclick=\'return confirm("'.$MULTILANG_FrmAdvDelCampo.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=eliminar_campo_formulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&nombre_tabla='.$registro_formulario["tabla_datos"].'\' class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-trash"></i></a>
+                                <a onclick=\'return confirm("'.$MULTILANG_FrmAdvDelCampo.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EliminarCampoFormulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&nombre_tabla='.$registro_formulario["tabla_datos"].'\' class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-trash"></i></a>
                             </div>
                             </div>';
             }
@@ -6948,7 +6938,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                     if ($registro_botones["tipo_accion"]=="interna_escritorio")
                         $comando_javascript.="document.core_ver_menu.submit();";
 					if ($registro_botones["tipo_accion"]=="interna_actualizar")
-						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='actualizar_datos_formulario'; PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."');";
+						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_ActualizarDatosFormulario'; PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."');";
 					if ($registro_botones["tipo_accion"]=="interna_eliminar")
 						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='eliminar_datos_formulario';document.".$registro_formulario["id_html"].".submit();";
 					if ($registro_botones["tipo_accion"]=="interna_cargar")

@@ -107,7 +107,7 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: actualizar_datos_formulario
+	Function: PCO_ActualizarDatosFormulario
 	Actualiza un registro sobre la tabla de aplicacion cuando es llamada la accion de actualizar datos sobre un formulario.
 	Tomando todos los datos del formulario construye un query valido en SQL para hacer la actualizacion de los datos que debieron recibirse por metodo POST desde el formulario
 
@@ -122,7 +122,7 @@
 	Ver tambien:
 		<eliminar_datos_formulario> | <guardar_datos_formulario>
 */
-	if ($PCO_Accion=="actualizar_datos_formulario")
+	if ($PCO_Accion=="PCO_ActualizarDatosFormulario")
 		{
 			// POR CORREGIR:  Si el diseno cuenta con varios campos que ven hacia un mismo campo de base de datos el query PUEDE no ser valido
 
@@ -483,7 +483,7 @@
 		Registro de boton eliminado y formulario actualizado en pantalla
 
 	Ver tambien:
-		<eliminar_campo_formulario>
+		<PCO_EliminarCampoFormulario>
 */
 	if ($PCO_Accion=="eliminar_accion_formulario")
 		{
@@ -503,7 +503,7 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: eliminar_campo_formulario
+	Function: PCO_EliminarCampoFormulario
 	Elimina un campo de datos, etiqueta, marco externo o informe creado para un formulario
 
 	Variables de entrada:
@@ -520,7 +520,7 @@
 	Ver tambien:
 		<eliminar_accion_formulario>
 */
-	if ($PCO_Accion=="eliminar_campo_formulario")
+	if ($PCO_Accion=="PCO_EliminarCampoFormulario")
 		{
 		    //Elimina los eventos relacionados
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."evento_objeto WHERE objeto=? ","$campo");
@@ -541,7 +541,7 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: actualizar_campo_formulario
+	Function: PCO_ActualizarCampoFormulario
 	Actualiza un campo de datos, etiqueta, marco externo o informe en un formulario
 
 	Variables de entrada:
@@ -556,9 +556,9 @@
 		Registro de campo alterado y formulario actualizado en pantalla
 
 	Ver tambien:
-		<eliminar_campo_formulario> | <agregar_campo_formulario>
+		<PCO_EliminarCampoFormulario> | <agregar_campo_formulario>
 */
-	if ($PCO_Accion=="actualizar_campo_formulario")
+	if ($PCO_Accion=="PCO_ActualizarCampoFormulario")
 		{
 			$mensaje_error="";
 
@@ -630,7 +630,7 @@
 		Registro agregado y formulario actualizado en pantalla
 
 	Ver tambien:
-		<eliminar_campo_formulario>
+		<PCO_EliminarCampoFormulario>
 */
 	if ($PCO_Accion=="guardar_campo_formulario")
 		{
@@ -742,10 +742,10 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: editar_evento_objeto
+	Function: PCO_EditarEventoObjeto
 	Edita el evento asociado a un objeto determinado en una ventana independiente que se lanza como popup
 */
-	if ($PCO_Accion=="editar_evento_objeto")
+	if ($PCO_Accion=="PCO_EditarEventoObjeto")
 		{
 			//Busca si ya existe un evento del mismo tipo para ese objeto
 			$registro_evento_previo=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."evento_objeto WHERE objeto=? AND evento=? ","$id_objeto_evento$_SeparadorCampos_$evento_objeto")->fetch();
@@ -761,7 +761,7 @@
         ?>
             <iframe name="iframe_almacenamiento" src="about:blank" style="visibility: hidden; display: none;"></iframe>
             <form name="form_evento" target="iframe_almacenamiento" action="<?php echo $ArchivoCORE; ?>" style="padding: 0px; margin: 0px;" class="well btn-xs">
-                <input type="Hidden" name="PCO_Accion" value="actualizar_java_evento">
+                <input type="Hidden" name="PCO_Accion" value="PCO_ActualizarJavaEvento">
                 <?php echo $MULTILANG_Evento?>: <input type="text" name="evento_objeto" value="<?php echo $evento_objeto; ?>" readonly style="width:200px; background-color: transparent; border: 0px solid; font-weight: bold;  color: #0000FF;">
                 ID_HTML: <input type="text" name="id_html_visual" value="<?php echo $registro_objeto["id_html"]; ?>" readonly style="width:200px; background-color: transparent; border: 0px solid; font-weight: bold; color: #0000FF;">
                 <br><?php echo $MULTILANG_Tipo?> <?php echo $MULTILANG_Objeto?>: <input type="text" name="tipo" value="<?php echo $tipo; ?>" readonly style="width:175px; background-color: transparent; border: 0px solid; font-weight: bold; color: #0000FF;">
@@ -773,7 +773,7 @@
                 </div>
             </form>
             <form name="form_evento_eliminar" action="<?php echo $ArchivoCORE; ?>" style="padding: 0px; margin: 0px;">
-                <input type="Hidden" name="PCO_Accion" value="eliminar_evento_objeto">
+                <input type="Hidden" name="PCO_Accion" value="PCO_EliminarEventoObjeto">
                 <input type="Hidden" name="evento" value="<?php echo $IdEventoPrevio; ?>">
                 <input type="Hidden" name="Presentar_FullScreen" value="1">
                 <input type="Hidden" name="Precarga_EstilosBS" value="0">
@@ -889,7 +889,7 @@ if ($PCO_Accion=="editar_formulario")
                 {
                     //Verifica que se haya seleccionado un evento y abre el popup, sino muestra error
                     if ($("#tipo_evento").val()!="")
-                        PCO_VentanaPopup('index.php?PCO_Accion=editar_evento_objeto&id_objeto_evento='+document.datosform.idcampomodificado.value+'&evento_objeto='+$("#tipo_evento").val()+'&tipo='+document.datosform.tipo.value+'&Presentar_FullScreen=1&Precarga_EstilosBS=1','Evento_'+$("#tipo_evento").val()+'_ID'+document.datosform.idcampomodificado.value,'toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=no, fullscreen=no, width=850, height=600');
+                        PCO_VentanaPopup('index.php?PCO_Accion=PCO_EditarEventoObjeto&id_objeto_evento='+document.datosform.idcampomodificado.value+'&evento_objeto='+$("#tipo_evento").val()+'&tipo='+document.datosform.tipo.value+'&Presentar_FullScreen=1&Precarga_EstilosBS=1','Evento_'+$("#tipo_evento").val()+'_ID'+document.datosform.idcampomodificado.value,'toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=no, fullscreen=no, width=850, height=600');
                     else
                         alert("<?php echo $MULTILANG_Seleccionar; ?> <?php echo $MULTILANG_Evento; ?> !!!");
                 }
@@ -931,7 +931,7 @@ if ($PCO_Accion=="editar_formulario")
 				<?php 
 					//Define tipo de accion si se trata de creacion o modificacion
 					if (@$popup_activo=="FormularioCampos")
-						echo '<input type="Hidden" name="PCO_Accion" value="actualizar_campo_formulario">';
+						echo '<input type="Hidden" name="PCO_Accion" value="PCO_ActualizarCampoFormulario">';
 					else
 						echo '<input type="Hidden" name="PCO_Accion" value="guardar_campo_formulario">';
 				?>
@@ -1908,7 +1908,7 @@ if ($PCO_Accion=="editar_formulario")
                     										</form>
                     								</td>
                     								<td align="right">
-                                                            <button class="btn btn-default btn-xs" onclick="PCO_VentanaPopup(\'index.php?PCO_Accion=editar_evento_objeto&id_objeto_evento='.$registro_eventos_definidos["objeto"].'&evento_objeto='.$registro_eventos_definidos["evento"].'&tipo=\'+document.datosform.tipo.value+\'&Presentar_FullScreen=1&Precarga_EstilosBS=1\',\'Evento_'.$registro_eventos_definidos["evento"].'_ID'.$registro_eventos_definidos["id"].'\',\'toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=no, fullscreen=no, width=850, height=600\');"><i class="fa fa-pencil"></i> '.$MULTILANG_Editar.' / <i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</button>
+                                                            <button class="btn btn-default btn-xs" onclick="PCO_VentanaPopup(\'index.php?PCO_Accion=PCO_EditarEventoObjeto&id_objeto_evento='.$registro_eventos_definidos["objeto"].'&evento_objeto='.$registro_eventos_definidos["evento"].'&tipo=\'+document.datosform.tipo.value+\'&Presentar_FullScreen=1&Precarga_EstilosBS=1\',\'Evento_'.$registro_eventos_definidos["evento"].'_ID'.$registro_eventos_definidos["id"].'\',\'toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=no, fullscreen=no, width=850, height=600\');"><i class="fa fa-pencil"></i> '.$MULTILANG_Editar.' / <i class="fa fa-times"></i> '.$MULTILANG_Eliminar.'</button>
                     								</td>
                     							</tr>';
                     					}
@@ -2327,7 +2327,7 @@ if ($PCO_Accion=="editar_formulario")
 									{
 										echo '<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-														<input type="hidden" name="PCO_Accion" value="eliminar_campo_formulario">
+														<input type="hidden" name="PCO_Accion" value="PCO_EliminarCampoFormulario">
 														<input type="hidden" name="campo" value="'.$registro["id"].'">
 														<input type="hidden" name="formulario" value="'.$formulario.'">
 														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
@@ -2510,7 +2510,7 @@ if ($PCO_Accion=="editar_formulario")
                 <b>'.$MULTILANG_FrmDetalles.'</b>
 
 			<form name="datosact" id="datosact" action="'.$ArchivoCORE.'" method="POST">
-                <input type="Hidden" name="PCO_Accion" value="actualizar_formulario">
+                <input type="Hidden" name="PCO_Accion" value="PCO_ActualizarFormulario">
                 <input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
                 <input type="Hidden" name="formulario" value="'.$registro_form["id"].'">
 
@@ -2737,13 +2737,13 @@ if ($PCO_Accion=="editar_formulario")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: eliminar_evento_objeto
+	Function: PCO_EliminarEventoObjeto
 	Elimina el script asociado a un evento javascript de un control de formulario
 
 	Salida:
 		Elimina un evento asociado a un objeto
 */
-	if ($PCO_Accion=="eliminar_evento_objeto")
+	if ($PCO_Accion=="PCO_EliminarEventoObjeto")
 		{
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."evento_objeto WHERE id=? ","$evento");
 			PCO_Auditar("Elimina evento javascript $evento");
@@ -2757,13 +2757,13 @@ if ($PCO_Accion=="editar_formulario")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: actualizar_java_evento
+	Function: PCO_ActualizarJavaEvento
 	Actualiza el script asociado a un evento javascript de un control de formulario
 
 	Salida:
 		Registro de evento creado o actualizado
 */
-	if ($PCO_Accion=="actualizar_java_evento")
+	if ($PCO_Accion=="PCO_ActualizarJavaEvento")
 		{
 			//Busca si ya existe un evento del mismo tipo para ese objeto
 			$registro_evento_previo=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."evento_objeto WHERE objeto=? AND evento=? ","$id_objeto_evento$_SeparadorCampos_$evento_objeto")->fetch();
@@ -2784,7 +2784,7 @@ if ($PCO_Accion=="editar_formulario")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: actualizar_formulario
+	Function: PCO_ActualizarFormulario
 	Actualiza los datos basicos de un formulario
 
 	Salida:
@@ -2793,7 +2793,7 @@ if ($PCO_Accion=="editar_formulario")
 	Ver tambien:
 		<administrar_formularios>
 */
-	if ($PCO_Accion=="actualizar_formulario")
+	if ($PCO_Accion=="PCO_ActualizarFormulario")
 		{
 			$mensaje_error="";
 			if ($titulo=="") $mensaje_error.=$MULTILANG_FrmErr1.'<br>';
@@ -2877,7 +2877,7 @@ if ($PCO_Accion=="editar_formulario")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: copiar_formulario
+	Function: PCO_CopiarFormulario
 	Agrega un formulario a partir de otro para la aplicacion
 
 	Salida:
@@ -2886,7 +2886,7 @@ if ($PCO_Accion=="editar_formulario")
 	Ver tambien:
 		<administrar_formularios>
 */
-	if ($PCO_Accion=="copiar_formulario")
+	if ($PCO_Accion=="PCO_CopiarFormulario")
 		{
 				//Presenta la ventana con informacion y enlace de descarga
 				PCO_AbrirVentana($MULTILANG_FrmTipoCopiaExporta, 'panel-primary'); ?>
@@ -2910,16 +2910,16 @@ if ($PCO_Accion=="editar_formulario")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: definir_copia_formularios
+	Function: PCO_DefinirCopiaFormularios
 	Presenta opciones para generar una copia del formulario seleccionado usando diferentes formatos
 */
-if ($PCO_Accion=="definir_copia_formularios")
+if ($PCO_Accion=="PCO_DefinirCopiaFormularios")
 	{
 	    if ($formulario=="") $formulario=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
 		 ?>
 
         <form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<input type="Hidden" name="PCO_Accion" value="copiar_formulario">
+			<input type="Hidden" name="PCO_Accion" value="PCO_CopiarFormulario">
 			<input type="Hidden" name="formulario" value="<?php echo $formulario; ?>">
 
             <br>
@@ -2952,7 +2952,7 @@ if ($PCO_Accion=="definir_copia_formularios")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: confirmar_importacion_formulario
+	Function: PCO_ConfirmarImportacionFormulario
 	Lee el archivo cargado sobre /tmp y regenera el objeto alli existente
 
 	Variables de entrada:
@@ -2962,7 +2962,7 @@ if ($PCO_Accion=="definir_copia_formularios")
 	Salida:
 		Objetos generados a partir de la definicion del archivo
 */
-if ($PCO_Accion=="confirmar_importacion_formulario")
+if ($PCO_Accion=="PCO_ConfirmarImportacionFormulario")
 	{
 		echo "<br>";
 		$mensaje_error="";
@@ -3009,7 +3009,7 @@ if ($PCO_Accion=="confirmar_importacion_formulario")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: analizar_importacion_formulario
+	Function: PCO_AnalizarImportacionFormulario
 	Revisa el archivo cargado sobre /tmp para validar si se trata de un objeto definido correctamente
 
 	Variables de entrada:
@@ -3019,7 +3019,7 @@ if ($PCO_Accion=="confirmar_importacion_formulario")
 	Salida:
 		Analisis del archivo y detalles del objeto
 */
-if ($PCO_Accion=="analizar_importacion_formulario")
+if ($PCO_Accion=="PCO_AnalizarImportacionFormulario")
 	{
 		echo "<br>";
 		PCO_AbrirVentana($MULTILANG_FrmImportar.' <b>'.$archivo_cargado.'</b>', 'panel-info');
@@ -3099,7 +3099,7 @@ if ($PCO_Accion=="analizar_importacion_formulario")
                 if ($existen_conflictos_entre_ids==0)
                     echo '
                     <form name="goahead" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="confirmar_importacion_formulario">
+						<input type="Hidden" name="PCO_Accion" value="PCO_ConfirmarImportacionFormulario">
 						<input type="Hidden" name="archivo_cargado" value="'.$archivo_cargado.'">
                         <button type="submit" class="btn btn-danger btn-block"><i class="fa fa-warning texto-blink icon-yellow"></i> '.$MULTILANG_Importar.' <i class="fa fa-warning texto-blink icon-yellow"></i></button>
 					</form>';
@@ -3127,10 +3127,10 @@ if ($PCO_Accion=="analizar_importacion_formulario")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: importar_formulario
+	Function: PCO_ImportarFormulario
 	Presenta el paso 1 de importacion de formularios
 */
-if ($PCO_Accion=="importar_formulario")
+if ($PCO_Accion=="PCO_ImportarFormulario")
 	{
 		echo "<br>";
 		PCO_AbrirVentana($NombreRAD.' - '.$MULTILANG_FrmImportar,'panel-info');
@@ -3151,7 +3151,7 @@ if ($PCO_Accion=="importar_formulario")
                             <input type="hidden" name="extension_archivo" value=".xml">
                             <input type="hidden" name="MAX_FILE_SIZE" value="8192000">
                             <input type="Hidden" name="PCO_Accion" value="cargar_archivo">
-                            <input type="Hidden" name="siguiente_accion" value="analizar_importacion_formulario">
+                            <input type="Hidden" name="siguiente_accion" value="PCO_AnalizarImportacionFormulario">
                             <input type="Hidden" name="texto_boton_siguiente" value="Continuar con la revisi&oacute;n">
                             <input type="Hidden" name="carpeta" value="tmp">
                             <input name="archivo" type="file" class="form-control btn btn-info">
@@ -3345,7 +3345,7 @@ function FrmAutoRun()
 
 		<?php PCO_AbrirVentana($MULTILANG_Importar."/".$MULTILANG_Exportar." ($MULTILANG_Avanzado)", 'panel-default'); ?>
             <form name="importacion" id="importacion" action="<?php echo $ArchivoCORE; ?>" method="POST">
-    			<input type="Hidden" name="PCO_Accion" value="importar_formulario">
+    			<input type="Hidden" name="PCO_Accion" value="PCO_ImportarFormulario">
             </form>
             <a class="btn btn-warning btn-block" href="javascript:document.importacion.submit();"><i class="fa fa-cloud-upload"></i> <?php echo $MULTILANG_FrmImportar; ?></a>
     
