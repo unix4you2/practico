@@ -343,7 +343,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 									$Complemento_tablas=",".$TablasCore."usuario_informe";
 									$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario'";
 								}
-							$resultado=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE 1 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
+							$resultado=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE ".$TablasCore."informe.id>0 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
 
 							// Imprime las opciones con sus formularios
 							while($registro = $resultado->fetch())
