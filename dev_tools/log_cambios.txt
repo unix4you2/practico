@@ -120,6 +120,7 @@ El nombre del marco especial sobre formularios llamado MARCO_IMPRESION ha sido g
 * Enhan: Actualizacion de plugin Bootstrap-select a version 1.12.4
 * Enhan: Aumentada la velocidad de carga de aplicación durante la conversion de listas HTML a BootStrap
 * Enhan: Reemplazo de funciones de informes por objetos internos
+* Enhan: Actualizacion a PMyDB 18.7: Seleccion de idiomas en caliente, cambio de tema por defecto, copiado de hablas incluye ahora sus triggers, soporte elastic search, prohibicion de usar bases de datos sin clave, etc.
 * Fixed: Edicion de URLS con interrogantes sobre IFrames en formularios
 "
 
