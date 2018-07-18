@@ -63,7 +63,7 @@
                             </form>
                             
                             <li>
-                                <a href="javascript:document.core_ver_menu.submit();"><i class="fa fa-dashboard fa-fw"></i> <?php echo $MULTILANG_Escritorio; ?></a>
+                                <a href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-dashboard fa-fw"></i> <?php echo $MULTILANG_Escritorio; ?></a>
                             </li>
                             <li>
                                 <a href="javascript:document.PCO_MisInformes.submit();"><i class="fa fa-pie-chart fa-fw"></i> <?php echo $MULTILANG_UsrInfDisp; ?></a>

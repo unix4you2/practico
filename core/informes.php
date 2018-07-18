@@ -585,7 +585,7 @@ if ($PCO_Accion=="PCO_ActualizarInforme")
 					<input type="Hidden" name="informe" value="'.$id.'">
 					</form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-				//echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+				//echo '<script type="" language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';
 			}
 		else
 			{
@@ -938,7 +938,7 @@ if ($PCO_Accion=="PCO_EliminarInformeTabla")
 		{
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$tabla." WHERE $campo='$valor'");
 			PCO_Auditar("Elimina registro donde $campo = $valor en $tabla");
-			echo '<script language="JavaScript"> document.core_ver_menu.submit();  </script>';
+			echo '<script language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';
 		}
 
 
@@ -2107,7 +2107,7 @@ if ($PCO_Accion=="PCO_GuardarInforme")
 				?>
     			<div align=center>
     			<br><br>
-    			<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+    			<a class="btn btn-default" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
     			</div>
 		    <?php
 		}
@@ -2147,7 +2147,7 @@ if ($PCO_Accion=="PCO_DefinirCopiaInformes")
             <br>
             <div align=center>
             <a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCopiar; ?></a>
-            <a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+            <a class="btn btn-default" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
             </div>
 
 		<?php
@@ -2192,7 +2192,7 @@ if ($PCO_Accion=="PCO_ConfirmarImportacionInforme")
 				<li>ID: '.$ResultadoImportacion.'</li>
 				<li>Titulo: '.base64_decode($xml_importado->core_informe[0]->titulo).'</li>
 				<br>
-				<a class="btn btn-block btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
+				<a class="btn btn-block btn-success" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
 				PCO_Auditar("Importa $archivo_cargado en objeto $idObjetoInsertado");
 			}
 		else
@@ -2322,7 +2322,7 @@ if ($PCO_Accion=="PCO_AnalizarImportacionInforme")
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 			}
 		echo '</center>';
-		echo '<br><a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
+		echo '<br><a class="btn btn-default btn-block" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 
 		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
@@ -2406,7 +2406,7 @@ if ($PCO_Accion=="PCO_ImportarInforme")
 
 <?php
 		PCO_AbrirBarraEstado();
-		echo '<a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
+		echo '<a class="btn btn-warning btn-block" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 		PCO_CerrarBarraEstado();
 		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
@@ -2515,7 +2515,7 @@ if ($PCO_Accion=="PCO_MisInformes")
             $LimiteInferiorBusqueda=0;
 
 			// Carga las opciones del ACORDEON DE INFORMES
-			echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
+			echo '<div align="center"><button onclick="document.PCO_FormVerMenu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 			// Si el usuario es diferente a un Administrador agrega condiciones al query
 			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 				{

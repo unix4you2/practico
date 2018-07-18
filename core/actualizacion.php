@@ -116,7 +116,7 @@ if ($PCO_Accion=="actualizar_practico")
 
 <?php
 		PCO_AbrirBarraEstado();
-		echo '<a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
+		echo '<a class="btn btn-warning btn-block" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 		PCO_CerrarBarraEstado();
 		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
@@ -181,7 +181,7 @@ if ($PCO_Accion=="cargar_archivo")
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 
 
-		echo '<br><a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
+		echo '<br><a class="btn btn-default btn-block" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 
 		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
@@ -325,7 +325,7 @@ if ($PCO_Accion=="analizar_parche")
 				</form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 		echo '</center>';
-		echo '<br><a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
+		echo '<br><a class="btn btn-default btn-block" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 
 		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
@@ -356,7 +356,7 @@ if ($PCO_Accion=="aplicar_parche")
 		if ($PCO_ModoDEMO==1)
 			{
 				PCO_Mensaje($MULTILANG_TitDemo, $MULTILANG_MsjDemo, '', 'fa fa-fw fa-2x fa-thumbs-down', 'alert alert-dismissible alert-danger');
-				echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
+				echo '<div align="center"><button onclick="document.PCO_FormVerMenu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 				die();
 			}
 
@@ -453,7 +453,7 @@ if ($PCO_Accion=="aplicar_parche")
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 		echo '</center></td></tr></table>';
 
-		echo '<br><a class="btn btn-success btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
+		echo '<br><a class="btn btn-success btn-block" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
 		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
 	}

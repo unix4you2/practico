@@ -194,7 +194,7 @@
 					// Actualiza los datos
 					PCO_EjecutarSQLUnaria("UPDATE ".$registro_formulario["tabla_datos"]." SET $cadena_campos_interrogantes WHERE id=? ",$cadena_nuevos_valores.$id_registro_datos);
 					PCO_Auditar("Actualiza registro $id_registro_datos en ".$registro_formulario["tabla_datos"]);
-					//echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+					//echo '<script type="" language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';
 						echo '<form name="PCO_FormContinuarFlujo_ActualizarDatos" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
 						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
@@ -419,7 +419,7 @@
 					//Si no hay errores en carga de archivos redirecciona normal, sino redirecciona con los errores
 
 					if ($errores_de_carga=="")
-						//echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+						//echo '<script type="" language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';
 						echo '<form name="PCO_FormContinuarFlujo_GuardarDatos" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
 						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
@@ -2901,7 +2901,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 				?>
     			<div align=center>
     			<br><br>
-    			<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+    			<a class="btn btn-default" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
     			</div>
 		    <?php
 		}
@@ -2941,7 +2941,7 @@ if ($PCO_Accion=="PCO_DefinirCopiaFormularios")
             <br>
             <div align=center>
             <a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCopiar; ?></a>
-            <a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+            <a class="btn btn-default" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
             </div>
 
 		<?php
@@ -2986,7 +2986,7 @@ if ($PCO_Accion=="PCO_ConfirmarImportacionFormulario")
 				<li>ID: '.$ResultadoImportacion.'</li>
 				<li>Titulo: '.base64_decode($xml_importado->core_formulario[0]->titulo).'</li>
 				<br>
-				<a class="btn btn-block btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
+				<a class="btn btn-block btn-success" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
 				PCO_Auditar("Importa $archivo_cargado en objeto $idObjetoInsertado");
 			}
 		else
@@ -3117,7 +3117,7 @@ if ($PCO_Accion=="PCO_AnalizarImportacionFormulario")
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 			}
 		echo '</center>';
-		echo '<br><a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
+		echo '<br><a class="btn btn-default btn-block" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 
 		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
@@ -3201,7 +3201,7 @@ if ($PCO_Accion=="PCO_ImportarFormulario")
 
 <?php
 		PCO_AbrirBarraEstado();
-		echo '<a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
+		echo '<a class="btn btn-warning btn-block" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 		PCO_CerrarBarraEstado();
 		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
@@ -3339,7 +3339,7 @@ function FrmAutoRun()
                 </div>
             </a>
             <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCreaDisena; ?></a>
-            <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+            <a class="btn btn-default btn-block" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 
 		<?php	PCO_CerrarVentana();	?>
 

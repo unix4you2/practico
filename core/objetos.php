@@ -167,7 +167,7 @@ function RedimensionarImagenPWA($ArchivoOrigen,$ArchivoDestino,$Ancho,$Alto)
 			if ($PCO_ModoDEMO==1)
 				{
 					PCO_Mensaje($MULTILANG_TitDemo, $MULTILANG_MsjDemo, '', 'fa fa-fw fa-2x fa-thumbs-down', 'alert alert-dismissible alert-danger');
-					echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
+					echo '<div align="center"><button onclick="document.PCO_FormVerMenu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 					die();
 				}
 
@@ -499,7 +499,7 @@ $manifiesto=sprintf('{
             //Presenta resultados de operacion de actualizacion de configuracion y de archivos de logo
 			if ($mensaje_error=="")
 				{
-					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+					echo '<script type="" language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';
 				}
 			else
 				{
@@ -721,7 +721,7 @@ $salida=sprintf("<?php
 				}
 			if ($mensaje_error=="")
 				{
-					echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+					echo '<script type="" language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';
 				}
 			else
 				{
@@ -770,7 +770,7 @@ $salida=sprintf("<?php
                     ?>
             			<div align=center>
             			<br><br>
-            			<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+            			<a class="btn btn-default" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
             			</div>
                     <?php
                         PCO_CerrarVentana();

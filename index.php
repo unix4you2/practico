@@ -221,7 +221,7 @@
 /* ################################################################## */
     // Cuando no se tiene ninguna accion para procesar se carga la pagina de inicio de sesion
     if ($PCO_Accion=="" && $PCOSESS_SesionAbierta==0) PCO_VentanaLogin();
-    if ($PCO_Accion=="" && $PCOSESS_SesionAbierta==1 && @$Presentar_FullScreen!=1) echo '<script type="" language="JavaScript">    document.core_ver_menu.submit();  </script>';
+    if ($PCO_Accion=="" && $PCOSESS_SesionAbierta==1 && @$Presentar_FullScreen!=1) echo '<script type="" language="JavaScript">    document.PCO_FormVerMenu.submit();  </script>';
     // Incluye los archivos necesarios dependiendo de las funciones requeridas
     if ($PCO_Accion=="PCO_ExportarInforme" || $PCO_Accion=="PCO_ConfirmarImportacionInforme" || $PCO_Accion=="PCO_AnalizarImportacionInforme" || $PCO_Accion=="PCO_ImportarInforme" || $PCO_Accion=="PCO_DefinirCopiaInformes" || $PCO_Accion=="PCO_ClonarDisenoInforme" || $PCO_Accion=="PCO_AdministrarInformes" || $PCO_Accion=="PCO_GuardarInforme" || $PCO_Accion=="PCO_EditarInforme" || $PCO_Accion=="PCO_EliminarInforme" || $PCO_Accion=="PCO_ActualizarInforme" || $PCO_Accion=="PCO_EliminarInformeTabla" || $PCO_Accion=="PCO_GuardarInformeTabla" || $PCO_Accion=="PCO_EliminarInformeCampo" || $PCO_Accion=="PCO_GuardarInformeCampo" || $PCO_Accion=="PCO_GuardarInformeCondicion" || $PCO_Accion=="PCO_EliminarInformeCondicion" || $PCO_Accion=="PCO_MisInformes" || $PCO_Accion=="PCO_ActualizarGraficoInforme" || $PCO_Accion=="PCO_ActualizarAgrupamientoInforme" || $PCO_Accion=="PCO_GuardarAccionInforme" || $PCO_Accion=="PCO_EliminarRegistroInforme" || $PCO_Accion=="PCO_EliminarAccionInforme")
         include "core/informes.php";

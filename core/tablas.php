@@ -328,7 +328,7 @@ if ($PCO_Accion=="PCO_EditarTabla")
 				</table>
                 </form>
                 <button type="button" class="btn btn-success btn-block" OnClick="document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_TblAgregando; ?></button>
-                <button type="button" class="btn btn-default btn-block" OnClick="document.core_ver_menu.submit();"><i class="fa fa-desktop"></i> <?php echo $MULTILANG_IrEscritorio; ?></button>
+                <button type="button" class="btn btn-default btn-block" OnClick="document.PCO_FormVerMenu.submit();"><i class="fa fa-desktop"></i> <?php echo $MULTILANG_IrEscritorio; ?></button>
 
 
 		<?php
@@ -602,7 +602,7 @@ echo '
 								<?php echo $MULTILANG_FrmCopiaFinalizada; ?>
 								<br><br>
 								<a class="btn btn-success" href="<?php echo $archivo_destino_backup_bdd; ?>" target="_BLANK" download><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar; ?></a>
-								<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+								<a class="btn btn-default" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 								</div>
 							<?php
 							PCO_CerrarVentana();
@@ -718,7 +718,7 @@ if ($PCO_Accion=="PCO_DefinirCopiaTablas")
 				<br>
 				<div align=center>
 				<a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCopiar; ?></a>
-				<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+				<a class="btn btn-default" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 				</div>
 				<?php PCO_CerrarVentana(); ?>
 
@@ -772,7 +772,7 @@ if ($PCO_Accion=="PCO_ConfirmarImportacionTabla")
 				echo '
 				<b>'.$MULTILANG_FrmImportarGenerado.':</b><br>
 				<br>
-				<a class="btn btn-block btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
+				<a class="btn btn-block btn-success" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
 				PCO_Auditar("Importa $archivo_cargado en tablas de aplicacion");
 			}
 		else
@@ -944,7 +944,7 @@ if ($PCO_Accion=="PCO_EjecutarImportacionCSV")
 		<?php
 				//Presenta mensaje de finalizacion
 				echo '
-				<a class="btn btn-block btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
+				<a class="btn btn-block btn-success" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-thumbs-up"></i> '.$MULTILANG_Finalizado.'</a>';
 				PCO_Auditar("Importa tabla desde $archivo_cargado en $nombre_tabla");
 			}
 		else
@@ -1024,7 +1024,7 @@ if ($PCO_Accion=="PCO_AnalizarImportacionCSV")
 							
 							<a class="btn btn-danger" href="javascript:document.datos.submit();"><i class="fa fa-arrow-circle-right"></i> <?php echo $MULTILANG_Si; ?>, <?php echo $MULTILANG_Importar; ?></a>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> <?php echo $MULTILANG_No; ?>, <?php echo $MULTILANG_Cancelar; ?></a>
+							<a class="btn btn-default" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-times"></i> <?php echo $MULTILANG_No; ?>, <?php echo $MULTILANG_Cancelar; ?></a>
 							<br><br>
 						</div>
 					</div>
@@ -1071,7 +1071,7 @@ if ($PCO_Accion=="PCO_EscogerTablaImportacionCSV")
 				<br>
 				<div align=center>
 				<a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-arrow-circle-right"></i> <?php echo $MULTILANG_Continuar; ?></a>
-				<a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+				<a class="btn btn-default" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 				</div>
 		<?php
 		PCO_CerrarVentana();
@@ -1186,7 +1186,7 @@ if ($PCO_Accion=="PCO_ImportarTabla")
 
 <?php
 		PCO_AbrirBarraEstado();
-		echo '<a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
+		echo '<a class="btn btn-warning btn-block" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_Cancelar.'</a>';
 		PCO_CerrarBarraEstado();
 		PCO_CerrarVentana();
         $VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
@@ -1232,7 +1232,7 @@ if ($PCO_Accion=="PCO_ImportarTabla")
 						</td>
 						<td>
                             <button type="button" class="btn btn-success" OnClick="document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_TblCreaTabCampos; ?></button>
-							<button type="button" class="btn btn-default" OnClick="document.core_ver_menu.submit();"><i class="fa fa-desktop"></i> <?php echo $MULTILANG_IrEscritorio; ?></button>
+							<button type="button" class="btn btn-default" OnClick="document.PCO_FormVerMenu.submit();"><i class="fa fa-desktop"></i> <?php echo $MULTILANG_IrEscritorio; ?></button>
 						</td>
 					</tr>
 				</table>
@@ -1564,7 +1564,7 @@ if ($PCO_Accion=="PCO_ImportarTabla")
                 </form>
 
                 <button class="btn btn-success btn-block" OnClick="document.datos.submit()"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_TblCreaTabCampos; ?></button>
-                <button type="button" class="btn btn-default btn-block" OnClick="document.core_ver_menu.submit();"><i class="fa fa-desktop"></i> <?php echo $MULTILANG_IrEscritorio; ?></button>
+                <button type="button" class="btn btn-default btn-block" OnClick="document.PCO_FormVerMenu.submit();"><i class="fa fa-desktop"></i> <?php echo $MULTILANG_IrEscritorio; ?></button>
 
 <?php
 			$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
@@ -1604,7 +1604,7 @@ if ($PCO_Accion=="PCO_ImportarTabla")
 						</td>
 						<td>
 							<input type="Button"  class="Botones" value="Crear tabla y definir campos" onClick="document.datos.submit()">
-							&nbsp;&nbsp;<input type="Button" onclick="document.core_ver_menu.submit()" value="Volver al menu" class="Botones">
+							&nbsp;&nbsp;<input type="Button" onclick="document.PCO_FormVerMenu.submit()" value="Volver al menu" class="Botones">
 						</td>
 					</tr>
 				</table>

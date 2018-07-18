@@ -238,7 +238,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 */
 	if ($PCO_Accion=="PCO_BuscarPermisosPractico" && $PCOSESS_SesionAbierta)
 		{ 
-			echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
+			echo '<div align="center"><button onclick="document.PCO_FormVerMenu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 
             //Presenta el buscador nuevamente
             echo '

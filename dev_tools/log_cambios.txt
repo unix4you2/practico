@@ -102,6 +102,7 @@ Accion analizar_importacion_csv cambia a PCO_AnalizarImportacionCSV
 Accion confirmar_importacion_tabla cambia a PCO_ConfirmarImportacionTabla
 Accion importar_tabla cambia a PCO_ImportarTabla
 Accion Ver_menu cambia a PCO_VerMenu
+Formulario interno core_ver_menu cambia a PCO_FormVerMenu
 
 Se recomienda encarecidamente que si usted hace llamados manuales a este tipo de funciones primero haga un reemplazo de las mismas dentro de su codigo fuente para evitar conflictos. Lo cual podría llevar a cabo con un simple reemplazo de cadena en sus archivos (Ctrl+H en su {P}Coder).
 Desarrolladores que no hagan llamado a estas funciones en su código y que sólo utilicen funciones nativas no tienen que hacer ajuste alguno. Las funciones de advertencia serán mantenidas sólo hasta la versión 18.9.

@@ -157,7 +157,7 @@
 			if ($PCO_ModoDEMO==1)
 				{
 					PCO_Mensaje($MULTILANG_TitDemo, $MULTILANG_MsjDemo, '', 'fa fa-fw fa-2x fa-thumbs-down', 'alert alert-dismissible alert-danger');
-					echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
+					echo '<div align="center"><button onclick="document.PCO_FormVerMenu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 					die();
 				}
 
@@ -180,7 +180,7 @@
                         <input type="Hidden" name="PCO_ErrorEstilo" value="alert-info">
 						</form>
 						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-					//echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+					//echo '<script type="" language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';
 				}
 			else
 				{
@@ -259,7 +259,7 @@ if ($PCO_Accion=="PCO_ActualizarPerfilUsuario")
                 <?php
                             echo '
                                 <a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> '.$MULTILANG_Actualizar.'</a>
-                                <a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
+                                <a class="btn btn-default" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
 
                         }
                     else
@@ -315,7 +315,7 @@ if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="establecer_nueva_
             {
                 PCO_Mensaje($MULTILANG_Error,$PCO_MensajeError,'','fa fa-exclamation-triangle fa-4x','alert alert-danger alert-dismissible');
             }
-        echo '<a class="btn btn-default btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
+        echo '<a class="btn btn-default btn-warning" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
         PCO_CerrarVentana();
     }
 
@@ -435,7 +435,7 @@ if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="enviar_correo_lla
             {
                 PCO_Mensaje($MULTILANG_Error,$MULTILANG_UsrErrorReset,'','fa fa-exclamation-triangle fa-4x','alert alert-danger alert-dismissible');
             }
-        echo '<a class="btn btn-default btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
+        echo '<a class="btn btn-default btn-warning" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
         PCO_CerrarVentana();
     }
 
@@ -470,7 +470,7 @@ if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="enviar_correo_con
             {
                 PCO_Mensaje($MULTILANG_Error,$MULTILANG_UsrErrorReset,'','fa fa-exclamation-triangle fa-4x','alert alert-danger alert-dismissible');
             }
-        echo '<a class="btn btn-default btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
+        echo '<a class="btn btn-default btn-warning" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
         PCO_CerrarVentana();
     }
 
@@ -524,7 +524,7 @@ if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="formulario_recupe
                 </form>
 
 		 <?php
-            echo '<br><br><a class="btn btn-default btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
+            echo '<br><br><a class="btn btn-default btn-warning" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-arrow-circle-left"></i> '.$MULTILANG_Regresar.'</a>';
             PCO_CerrarVentana();
     }
 
@@ -662,7 +662,7 @@ if ($PCO_Accion=="PCO_CambiarContrasena")
                 <?php
                             echo '
                                 <a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> '.$MULTILANG_Actualizar.'</a>
-                                <a class="btn btn-default" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
+                                <a class="btn btn-default" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
                         }
                     else
                         {
@@ -701,7 +701,7 @@ if ($PCO_Accion=="PCO_ActualizarContrasena")
 		if ($PCO_ModoDEMO==1)
 			{
 				PCO_Mensaje($MULTILANG_TitDemo, $MULTILANG_MsjDemo, '', 'fa fa-fw fa-2x fa-thumbs-down', 'alert alert-dismissible alert-danger');
-				echo '<div align="center"><button onclick="document.core_ver_menu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
+				echo '<div align="center"><button onclick="document.PCO_FormVerMenu.submit()" class="btn btn-warning"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 				die();
 			}
 
@@ -720,7 +720,7 @@ if ($PCO_Accion=="PCO_ActualizarContrasena")
 			{
 				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login=? ","$PCOSESS_LoginUsuario");
 				PCO_Auditar("Actualiza clave de acceso");
-				echo '<script language="javascript"> document.core_ver_menu.submit(); </script>';
+				echo '<script language="javascript"> document.PCO_FormVerMenu.submit(); </script>';
 			}
 		else
 			{
@@ -887,7 +887,7 @@ if ($PCO_Accion=="PCO_InformesUsuario")
 				</select>
                 <button class="btn btn-success btn-xs"  onClick="document.datos.submit()"><i class="fa fa-plus fa-fw"></i> <?php echo $MULTILANG_Agregar; ?></button>
 				<br><br>
-                <a href="javascript:document.core_ver_menu.submit();" class="btn btn-default btn-xs"><i class="fa fa-home"></i> <?php echo $MULTILANG_FrmAccionRegresar; ?></a>
+                <a href="javascript:document.PCO_FormVerMenu.submit();" class="btn btn-default btn-xs"><i class="fa fa-home"></i> <?php echo $MULTILANG_FrmAccionRegresar; ?></a>
                 <a href="javascript:document.salto.submit();" class="btn btn-warning btn-xs"><i class="fa fa-external-link-square"></i> <?php echo $MULTILANG_UsrSaltarMenues; ?></a>
 
             </form>
@@ -1077,7 +1077,7 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 				</select>
                 <button class="btn btn-success btn-xs"  onClick="document.datos.submit()"><i class="fa fa-plus fa-fw"></i> <?php echo $MULTILANG_Agregar; ?></button>
 				<br><br>
-                <a href="javascript:document.core_ver_menu.submit();" class="btn btn-default btn-xs"><i class="fa fa-home"></i> <?php echo $MULTILANG_FrmAccionRegresar; ?></a>
+                <a href="javascript:document.PCO_FormVerMenu.submit();" class="btn btn-default btn-xs"><i class="fa fa-home"></i> <?php echo $MULTILANG_FrmAccionRegresar; ?></a>
                 <a href="javascript:document.salto.submit();" class="btn btn-warning btn-xs"><i class="fa fa-external-link-square"></i> <?php echo $MULTILANG_UsrSaltarInformes; ?></a>
             </form>
             <hr>
@@ -1159,7 +1159,7 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$uid_especifico");
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_informe WHERE usuario=? ","$uid_especifico");
 			PCO_Auditar("Elimina el usuario $uid_especifico");
-			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+			echo '<script type="" language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';
 		}
 
 
@@ -1195,7 +1195,7 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 			else
 				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET estado=1, ultimo_acceso=? WHERE login=? ","$PCO_FechaOperacion$_SeparadorCampos_$uid_especifico");
 			PCO_Auditar("Cambia estado del usuario $uid_especifico");
-			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+			echo '<script type="" language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';
 		}
 
 
@@ -1219,7 +1219,7 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 			*/
 			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$nueva_clave') WHERE login=? ","$uid_especifico");
 			PCO_Auditar("Restablece clave de acceso para $uid_especifico");
-			echo '<script type="" language="JavaScript"> document.core_ver_menu.submit();  </script>';
+			echo '<script type="" language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';
 		}
 
 
@@ -1289,14 +1289,14 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 					echo "<br>";
 					PCO_Mensaje($MULTILANG_Atencion, $MULTILANG_UsrFinRegistro, '', 'fa fa-fw fa-2x fa-info-circle', 'alert alert-success');
 					echo "<center>";
-					echo '<a class="btn btn-success" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-sign-in"></i> '.$MULTILANG_Ingresar.'</a>';
+					echo '<a class="btn btn-success" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-sign-in"></i> '.$MULTILANG_Ingresar.'</a>';
 				}
 			else
 				{
 					echo "<br>";
 					PCO_Mensaje($MULTILANG_ErrorDatos, $mensaje_error, '', 'fa fa-fw fa-3x fa-exclamation-circle', 'alert alert-danger');
 					echo "<center>";
-					echo '<a class="btn btn-warning" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> '.$MULTILANG_Cancelar.'</a>';
+					echo '<a class="btn btn-warning" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-times"></i> '.$MULTILANG_Cancelar.'</a>';
 				}
 		}
 
@@ -1362,7 +1362,7 @@ if ($PCO_Accion=="PCO_AgregarUsuarioAutoregistro")
 
             <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Registrarme; ?></a>
             <br>
-            <a class="btn btn-warning btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-times"></i> <?php echo $MULTILANG_Cancelar; ?></a>
+            <a class="btn btn-warning btn-block" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-times"></i> <?php echo $MULTILANG_Cancelar; ?></a>
 
 		 <?php
             PCO_CerrarVentana();
@@ -1574,7 +1574,7 @@ if ($PCO_Accion=="PCO_AgregarUsuario")
                 </form>
 
             <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Guardar; ?></a>
-            <a class="btn btn-default btn-block" href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
+            <a class="btn btn-default btn-block" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
 
 		 <?php
             PCO_CerrarVentana();
@@ -1771,7 +1771,7 @@ if ($PCO_Accion=="PCO_ListarUsuarios")
 
 				PCO_AbrirBarraEstado();
                     echo '<div align=center>
-                        <a class="btn btn-default " href="javascript:document.core_ver_menu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>
+                        <a class="btn btn-default " href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>
                         <a class="btn btn-success " href="javascript:document.form_crear_usuario.submit();"><i class="fa fa-file-o"></i> '.$MULTILANG_UsrAgregar.'</a>
                         <a class="btn btn-warning " href="javascript:document.PCO_PanelAuditoriaMovimientos.submit();"><i class="fa fa-file-text"></i> '.$MULTILANG_UsrVerAudit.'</a>
                         </div>';
