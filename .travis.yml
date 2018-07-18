@@ -107,7 +107,18 @@ matrix:
       services:
       - mysql
       - postgresql
-      
+
+    - php: 7.2
+      dist: trusty
+      env:
+      - DB1=MySQL
+      - DB2=PostgreSQL
+      - DB3=SQLite3
+      sudo: required
+      services:
+      - mysql
+      - postgresql
+
     - php: hhvm
       dist: trusty
       env:
