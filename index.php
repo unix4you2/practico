@@ -151,7 +151,7 @@
     require_once 'inc/phpexcel/Classes/PHPExcel.php';
 
     // Valida llaves de paso y permisos de accion
-    if ($PCO_Accion!= "" && $PCO_Accion!="Iniciar_login" && $PCO_Accion!="Terminar_sesion" && $PCO_Accion!="Mensaje_cierre_sesion" && $PCO_Accion!="ver_monitoreo" && $PCO_Accion!="PCO_RecuperarContrasena" && $PCO_Accion!="PCO_AgregarUsuarioAutoregistro" && $PCO_Accion!="PCO_GuardarUsuarioAutoregistro")
+    if ($PCO_Accion!= "" && $PCO_Accion!="Iniciar_login" && $PCO_Accion!="Terminar_sesion" && $PCO_Accion!="Mensaje_cierre_sesion" && $PCO_Accion!="PCO_VerMonitoreo" && $PCO_Accion!="PCO_RecuperarContrasena" && $PCO_Accion!="PCO_AgregarUsuarioAutoregistro" && $PCO_Accion!="PCO_GuardarUsuarioAutoregistro")
         {
             // Verifica autenticidad de la sesion mediante llave de paso
             if (MD5($LlaveDePaso)!=$LlaveDePasoUsuario) {
@@ -239,7 +239,7 @@
         include "core/objetos.php";
     if ($PCO_Accion=="actualizar_practico" || $PCO_Accion=="cargar_archivo" || $PCO_Accion=="analizar_parche" || $PCO_Accion=="aplicar_parche")
         include "core/actualizacion.php";
-    if ($PCO_Accion=="actualizar_monitoreo" || $PCO_Accion=="detalles_monitoreo" || $PCO_Accion=="administrar_monitoreo" || $PCO_Accion=="guardar_monitoreo" || $PCO_Accion=="eliminar_monitoreo" || $PCO_Accion=="ver_monitoreo")
+    if ($PCO_Accion=="PCO_VerMonitoreo")
         include "core/monitoreo.php";
     if ($PCO_Accion=="cambiar_estado_campo" || $PCO_Accion=="valor_campo_tabla" || $PCO_Accion=="opciones_combo_box")
         include "core/ajax.php";

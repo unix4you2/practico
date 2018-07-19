@@ -35,6 +35,8 @@ core/marco_navizq.php
 core/marco_param.php
 core/marco_wscfg.php
 core/menus.php
+core/monitoreo.php
+core/monitoreo_superior.php
 core/formularios.php
 core/informes.php
 core/objetos.php

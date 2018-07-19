@@ -53,7 +53,7 @@
 									<?php
 										//Genera opciones de menu para las paginas
 										for ($IndicePagina=$PaginaInicio;$IndicePagina<=$MaximoPaginas;$IndicePagina++)
-											echo '<li><a id="boton_navegador_archivos" style="cursor:pointer;" OnClick="document.location=\'index.php?PCO_Accion=ver_monitoreo&Presentar_FullScreen=1&Pagina='.$IndicePagina.'\';">		<i class="fa fa-file-o fa-fw"></i> '.$MULTILANG_Pagina.' #'.$IndicePagina.'</a></li>';
+											echo '<li><a id="boton_navegador_archivos" style="cursor:pointer;" OnClick="document.location=\'index.php?PCO_Accion=PCO_VerMonitoreo&Presentar_FullScreen=1&Pagina='.$IndicePagina.'\';">		<i class="fa fa-file-o fa-fw"></i> '.$MULTILANG_Pagina.' #'.$IndicePagina.'</a></li>';
 									?>
 									<li role="separator" class="divider"></li>
 									<li><a style="cursor:pointer;" OnClick="self.close();"><i class="fa fa-sign-out fa-fw"></i> <?php echo $MULTILANG_Cerrar; ?></a></li>

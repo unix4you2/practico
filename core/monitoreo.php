@@ -731,16 +731,13 @@ function PresentarEtiqueta($texto_etiqueta,$ancho_etiqueta)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: ver_monitoreo
+	Function: PCO_VerMonitoreo
 	Presenta las diferentes pantallas de monitoreo
 
 	Salida:
 		Pagina web con el sistema de monitoreo
-
-	Ver tambien:
-	<guardar_monitoreo>
 */
-if ($PCO_Accion=="ver_monitoreo")
+if ($PCO_Accion=="PCO_VerMonitoreo")
 	{
     // Incluye encabezados, estilos y demas del HEAD
     include_once("core/configuracion.php");
@@ -800,7 +797,7 @@ if ($PCO_Accion=="ver_monitoreo")
 		?>
 
         <form name="formulario_monitoreo" action="index.php" style="visibility: hidden; display: none;">
-            <input type="hidden" name="PCO_Accion" value="ver_monitoreo">
+            <input type="hidden" name="PCO_Accion" value="PCO_VerMonitoreo">
             <input type="hidden" name="Presentar_FullScreen" value="1">
             <input type="hidden" name="Pagina" value="<?php echo $SiguientePagina; ?>">
             <input type="hidden" name="PaginaRecuerrente" value="<?php if($PaginaRecuerrente!="") echo $PaginaMonitoreo; ?>">
@@ -813,7 +810,7 @@ if ($PCO_Accion=="ver_monitoreo")
 				{
 					if (EstadoPausa==0)
 					    document.formulario_monitoreo.submit();
-						//document.location="index.php?PCO_Accion=ver_monitoreo&Presentar_FullScreen=1&Pagina=<?php echo $SiguientePagina; ?>";
+						//document.location="index.php?PCO_Accion=PCO_VerMonitoreo&Presentar_FullScreen=1&Pagina=<?php echo $SiguientePagina; ?>";
 				}
 			window.setTimeout("actualizar()",<?php echo $MilisegundosPagina; ?>);
 
@@ -1015,4 +1012,4 @@ if ($PCO_Accion=="ver_monitoreo")
 		</body>
 		</html>
 <?php
-	} //Fin ver_monitoreo
+	} //Fin PCO_VerMonitoreo
