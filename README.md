@@ -4,6 +4,7 @@
 [![Stories in Ready](https://badge.waffle.io/unix4you2/practico.svg?label=ready&title=Ready)](http://waffle.io/unix4you2/practico)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/unix4you2/practico?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Estadisticas del proyecto](https://www.openhub.net/p/practicoframework/widgets/project_thin_badge.gif)](https://www.openhub.net/p/practicoframework)
+[![Da las gracias!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/unix4you2)
 
 Practico es una herramienta de codigo abierto para el diseño automatico de aplicaciones web de manera agil y sin digitar codigo
 
