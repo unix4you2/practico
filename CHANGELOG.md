@@ -7,6 +7,83 @@
             |___/ 
 ```
 
+## Versión 18.8 (2018-07-29)
+LEAME: ADVERTENCIA: Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada a metodos y funciones internas, las siguientes funciones han cambiado de nombre:
+file_get_contents_curl() cambia a PCO_FileGetContents_CURL()
+file_get_contents_socket() cambia a PCO_FileGetContents_SOCKET()
+file_get_contents_nativo() cambia a PCO_FileGetContents_NATIVO()
+cargar_url() cambia a PCO_CargarURL()
+registro_a_xml() cambia a PCO_ConvertirRegistroXML()
+PCOFUNC_eliminar_formulario() cambia a PCO_EliminarFormulario()
+PCO_copiar_permisos() cambia a PCO_CopiarPermisos()
+PCO_copiar_informes() cambia a PCO_CopiarInformes()
+listado_exploracion_archivos() cambia a PCO_ListadoExploracionArchivos()
+listado_visual_exploracion_archivos() cambia a PCO_ListadoExploracionArchivosVisual()
+opciones_combo_desdecsv() cambia a PCO_OpcionesComboDesdeCSV()
+aparear_campostabla_vs_hojacalculo() cambia a PCO_AparearCamposTabla_vs_HojaCalculo()
+columnas_desde_hojacalculo() cambia a PCO_ColumnasDesdeHojaCalculo()
+datatable_desde_hojacalculo() cambia a PCO_DatatableDesdeHojaCalculo()
+TextoAleatorio() cambia a PCO_TextoAleatorio()
+CodigoQR() cambia a PCO_CodigoQR()
+obtener_ultimo_id_insertado() cambia a PCO_ObtenerUltimoIDInsertado()
+existe_valor() cambia a PCO_ExisteValor()
+ContarRegistros() cambia a PCO_ContarRegistrosTabla()
+abrir_ventana() cambia a PCO_AbrirVentana()
+cerrar_ventana() cambia a PCO_CerrarVentana()
+abrir_barra_estado() cambia a PCO_AbrirBarraEstado()
+cerrar_barra_estado() cambia a PCO_CerrarBarraEstado()
+abrir_dialogo_modal() cambia a PCO_AbrirDialogoModal()
+cerrar_dialogo_modal() cambia a PCO_CerrarDialogoModal()
+mensaje() cambia a PCO_Mensaje()
+cargar_objeto_texto_corto() cambia a PCO_CargarObjetoTextoCorto()
+cargar_objeto_texto_largo() cambia a PCO_CargarObjetoTextoLargo()
+cargar_objeto_lista_seleccion() cambia a PCO_CargarObjetoListaSeleccion()
+
+LEAME: ADVERTENCIA: Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada de acciones internas, las siguientes acciones han cambiado de nombre:
+Accion actualizar_clave cambia a  PCO_ActualizarContrasena
+Accion cambiar_clave cambia a  PCO_CambiarContrasena
+Accion ejecutar_importacion_csv cambia a PCO_EjecutarImportacionCSV
+Accion escogertabla_importacion_csv cambia a PCO_EscogerTablaImportacionCSV
+Accion analizar_importacion_csv cambia a PCO_AnalizarImportacionCSV
+Accion confirmar_importacion_tabla cambia a PCO_ConfirmarImportacionTabla
+Accion importar_tabla cambia a PCO_ImportarTabla
+Accion Ver_menu cambia a PCO_VerMenu
+Formulario interno core_ver_menu cambia a PCO_FormVerMenu
+
+Se recomienda encarecidamente que si usted hace llamados manuales a este tipo de funciones primero haga un reemplazo de las mismas dentro de su codigo fuente para evitar conflictos. Lo cual podría llevar a cabo con un simple reemplazo de cadena en sus archivos (Ctrl+H en su {P}Coder).
+Desarrolladores que no hagan llamado a estas funciones en su código y que sólo utilicen funciones nativas no tienen que hacer ajuste alguno. Las funciones de advertencia serán mantenidas sólo hasta la versión 18.9.
+
+A partir de PHP 5.6 aquellos desarrolladores que deseen utilizar sus funciones anteriores "Tal como están" podrán utilizar un alias para ellas agregando las definiciones correspondientes en las primeras lineas de su archivo personalizadas_pre.php, por ejemplo:
+use function PCO_AbrirVentana as abrir_ventana;  Aunque en la práctica esto sería una mala idea pues más adelante puede que sean totalmente obsoletas dichas funciones.
+
+El nombre del marco especial sobre formularios llamado MARCO_IMPRESION ha sido generalizado a PCO_MarcoImpresionXX  donde XX representa el ID del formulario que lo contiene.  De esa manera se pueden tener diferentes acciones de impresión cuando se tienen varios formularios anidados o sobre la misma página al tiempo.
+
+* Added: Posibilidad de menues desplegables agrupadores de opciones a un nivel en cualquiera de las ubicaciones.
+* Added: Tareas sobre tableros Kanban soportan ahora definición de porcentajes de avance particular.
+* Added: Durante la selección de informes para inserción en formularios se permite la búsqueda por su ID o nombre, para falicitar los casos donde la cantidad de informes es numerosa.
+* Added: Se permite saltar entre el diseño de un campo y el diseño general del formulario mediante un botón en la barra de herramientas inferior.
+* Added: Posibilidad de agregar subtítulos como parámetros extra sobre la función de diálogos modales.
+* Added: Generalizacion del nombre de marco de impresion de cada formulario a PCO_MarcoImpresionXX permitiendo múltiples marcos sobre una misma carga de página.
+* Added: Durante el almacenamiento, actualizacion o eliminación de datos de formulario se permite definir variables y valores para redireccionar el flujo de la aplicacion bajo los siguientes nombres: PCO_PostAccion, PCO_NombreCampoTransporte1, PCO_ValorCampoTransporte1, PCO_NombreCampoTransporte2, PCO_ValorCampoTransporte2
+* Added: Posibilidad de crear conexiones a motores NoSQL directamente desde la opción de Conexiones extra y replicación
+* Added: Adicion de recortes de codigo propios de Practico Framework sobre el editor para facilitar la autocompletacion de código en variables y funciones propias.
+* Added: Sistema de monitoreo para máquinas en modo compacto presenta ahora información extendida del monitor al pasar el ratón sobre la máquina.
+* Enhan: Mejorada barra de navegación responsive para menu lateral.
+* Enhan: Los contenedores de pestañas (tab-pane) en formularios son generados unicamente cuando se tiene más de una pestaña.  En los otros casos no es necesario.  Con eso se evita la creacion innecesaria de elementos con ID html PCO_PestanaFormulario_XX innecesarios.
+* Enhan: Renombrado de funciones internas
+* Enhan: Presentado el numero de elementos internos de cada formulario en la lista de formularios.
+* Enhan: Generalizacion y optimizacion de funcion encargada de la impresion de opciones de menu.
+* Enhan: Por defecto se deja oculta la barra de navegacion izquierda para mejorar la maquetacion responsive.  Se deja el boton para su despliegue manual cuando sea necesario.
+* Enhan: Pestañas de etiqueta PCO_NoVisible presentes sólo en modo de diseño para desarrolladores de funciones internas.
+* Enhan: Reduccion de código en administracion de menues
+* Enhan: Actualizacion de plugin Bootstrap-select a version 1.12.4
+* Enhan: Aumentada la velocidad de carga de aplicación durante la conversion de listas HTML a BootStrap
+* Enhan: Reemplazo de funciones de informes por objetos internos
+* Enhan: Actualizacion a PMyDB 18.7: Seleccion de idiomas en caliente, cambio de tema por defecto, copiado de hablas incluye ahora sus triggers, soporte elastic search, prohibicion de usar bases de datos sin clave, etc.
+* Enhan: Optimizadas funciones de auditoria de usuarios.  Supresion de funciones y codigo obsoleto.
+* Fixed: Edicion de URLS con interrogantes sobre IFrames en formularios
+* Fixed: Buscador de permisos evita presentar informes de desarrollo del framework (negativos)
+
 ## Versión 18.7 (2018-07-01)
 * Added: Ahora se advierte acerca de la existencia de campos con ID HTML duplicado o nombre de campo vinculado en base de datos duplicado durante el diseño de formularios.
 * Added: Ahora se valida la existencia de campos huerfanos durante el diseño de formularios.  Esto evita que el programador olvide la existencia de posibles campos por fuera del esquema del formulario; pero sin privarlo de sus funcionalidades derivadas.

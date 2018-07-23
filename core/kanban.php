@@ -150,7 +150,6 @@
 	if ($PCO_Accion=="GuardarTareaKanban")
 		{
 			$mensaje_error="";
-
 			// Elimina los datos
 			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."kanban (login_admintablero,titulo,descripcion,asignado_a,categoria,columna,peso,estilo,fecha,archivado,compartido_rw,tablero,porcentaje) VALUES ('$PCOSESS_LoginUsuario','$titulo','$descripcion','$asignado_a','$categoria','$columna','$peso','$estilo','$fecha','0','',$ID_TableroKanban,'$porcentaje') ");
 			PCO_Auditar("Agrega tarea Kanban a tablero $ID_TableroKanban");
