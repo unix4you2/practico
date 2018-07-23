@@ -231,10 +231,10 @@ function DibujarEstadoMaquina($Maquina,$estado_final,$Separador_DosPuntos,$estil
 	    else
 		    {
     			echo '
-    				<div class="col-xs-'.$AnchoControl.' col-sm-'.$AnchoControl.' col-md-'.$AnchoControl.' col-lg-'.$AnchoControl.'">
+    				<div data-toggle="tooltip" data-html="true" data-placement="auto" title="'.$Maquina["host"].$Separador_DosPuntos.$Maquina["puerto"].'" class="col-xs-'.$AnchoControl.' col-sm-'.$AnchoControl.' col-md-'.$AnchoControl.' col-lg-'.$AnchoControl.'">
     					<div class="panel '.$estilo_caja_estado.'">
     						<div class="panel-heading">
-    							<i class="fa fa-desktop fa-1x pull-left" data-toggle="tooltip" data-html="true"  title="'.$Maquina["host"].$Separador_DosPuntos.$Maquina["puerto"].'"></i>'.$Maquina["nombre"].'
+    							<i class="fa fa-desktop fa-1x pull-left"></i>'.$Maquina["nombre"].'
     						</div>
     					</div>
     				</div>';
