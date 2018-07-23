@@ -49,6 +49,8 @@ inc/bootstrap/css/plugins/select/*
 inc/bootstrap/js/plugins/select/*
 mod/mvc/*
 mod/sopa/*
+inc/ace_practico/*
+
 
 xml/*
 inc/practico/idiomas/*
@@ -122,6 +124,7 @@ El nombre del marco especial sobre formularios llamado MARCO_IMPRESION ha sido g
 * Added: Generalizacion del nombre de marco de impresion de cada formulario a PCO_MarcoImpresionXX permitiendo múltiples marcos sobre una misma carga de página.
 * Added: Durante el almacenamiento, actualizacion o eliminación de datos de formulario se permite definir variables y valores para redireccionar el flujo de la aplicacion bajo los siguientes nombres: PCO_PostAccion, PCO_NombreCampoTransporte1, PCO_ValorCampoTransporte1, PCO_NombreCampoTransporte2, PCO_ValorCampoTransporte2
 * Added: Posibilidad de crear conexiones a motores NoSQL directamente desde la opción de Conexiones extra y replicación
+* Added: Adicion de recortes de codigo propios de Practico Framework sobre el editor para facilitar la autocompletacion de código en variables y funciones propias.
 * Enhan: Mejorada barra de navegación responsive para menu lateral.
 * Enhan: Los contenedores de pestañas (tab-pane) en formularios son generados unicamente cuando se tiene más de una pestaña.  En los otros casos no es necesario.  Con eso se evita la creacion innecesaria de elementos con ID html PCO_PestanaFormulario_XX innecesarios.
 * Enhan: Renombrado de funciones internas
