@@ -83,7 +83,7 @@ Group: Modulos Principales  {
       File: Usuarios  (no auto-title, core/usuarios.php)
       File: Seccion inferior  (core/marco_abajo.php)
       File: Seccion superior  (core/marco_arriba.php)
-      File: TextoAleatorio  (core/captcha.php)
+      File: TextoAleatorioCaptcha  (core/captcha.php)
       File: Nucleo de WebServices  (core/ws_nucleo.php)
       File: Seccion Configuracion WebServices  (core/marco_wscfg.php)
       File: Seccion marco de configuracion  (core/marco_conf.php)
