@@ -30,9 +30,10 @@
 
 
 
-
 <!-- Navigation -->
 <nav id="BarraNavegacionSuperior" class="navbar navbar-default navbar-static-top oculto_impresion" role="navigation" style="margin-bottom: 0">
+
+
 	
 	<div class="navbar-header">
 		<button OnClick="document.getElementById('barra_navegacion_izquierda').style.visibility='visible';" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#PCO_BarraNavegacionIzquierda">
@@ -214,6 +215,16 @@
 	</ul>
 	<!-- CIERRA /.navbar-top-links -->
 
+
+<?php
+//Presenta barra de navegacion superior solamente cuando hay una accion
+if ($PCO_Accion!="")
+{
+?>
+<?php
+} // FIN if ($PCO_Accion!="")
+?>
+
 </nav>
 <script language="javascript">
     function PCO_CargarReportarBugs()
@@ -242,6 +253,9 @@
             CapturarCanvasPantallaAImagen('','PCO_ReportarBugsCapturaOculta','image/png',0,0,'PCO_ReportarBugs','PCO_CapturaPantalla');
         }
 </script>
+
+
+
 <?php
 	// Incluye marcos con barras de navegacion
 	include_once 'core/marco_navizq.php';

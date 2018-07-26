@@ -47,6 +47,13 @@
 		//foreach($HTTP_GET_VARS as $getvar => $getval){ ${$getvar} = $getval; }		  
 	}
 
+	// Valida si se esta en modo desarrollador y protege carpetas de instalacion
+    if (file_exists('../core/configuracion.php')) {
+        include '../core/configuracion.php';
+        if ($ModoDesarrolladorPractico=="-10000")
+            die ("Modo desarrollador de Practico Framework activado. Cualquier instalacion es suspendida.");
+    }
+
 	//Crea un archivo para probar acceso de escritura, luego lo elimina
 	function temp_file($archivo)
 		{

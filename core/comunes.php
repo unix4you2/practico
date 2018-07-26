@@ -6290,7 +6290,7 @@ function PCO_CargarObjetoBotonComando($registro_campos,$registro_datos_formulari
         if ($registro_campos["tipo_accion"]=="interna_eliminar")
             $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_EliminarDatosFormulario';document.".$registro_formulario["id_html"].".submit();";
         if ($registro_campos["tipo_accion"]=="interna_cargar")
-            $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='cargar_objeto';document.".$registro_formulario["id_html"].".objeto.value='".$registro_campos["accion_usuario"]."';document.".$registro_formulario["id_html"].".submit();";
+            $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_CargarObjeto';document.".$registro_formulario["id_html"].".PCO_Objeto.value='".$registro_campos["accion_usuario"]."';document.".$registro_formulario["id_html"].".submit();";
         if ($registro_campos["tipo_accion"]=="externa_formulario")
             $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='".$registro_campos["accion_usuario"]."';document.".$registro_formulario["id_html"].".submit();";
         if ($registro_campos["tipo_accion"]=="externa_javascript")
@@ -6609,7 +6609,8 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 				<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion).'">
                 <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                 <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
-                <input type="Hidden" name="objeto" value=""> <!--Requerido si se va a transferir el control a un objeto FRM o INF-->
+                <input type="Hidden" name="PCO_Objeto" value="">  <!--Requerido si se va a transferir el control a un objeto FRM o INF-->
+                <input type="Hidden" name="objeto" value="">      <!--COMPATIBILIDAD: Requerido si se va a transferir el control a un objeto FRM o INF-->
 				';
 
         // Inicio de la generacion de encabezados pestanas
@@ -6942,7 +6943,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 					if ($registro_botones["tipo_accion"]=="interna_eliminar")
 						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_EliminarDatosFormulario';document.".$registro_formulario["id_html"].".submit();";
 					if ($registro_botones["tipo_accion"]=="interna_cargar")
-						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='cargar_objeto';document.".$registro_formulario["id_html"].".objeto.value='".$registro_botones["accion_usuario"]."';document.".$registro_formulario["id_html"].".submit();";
+						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_CargarObjeto';document.".$registro_formulario["id_html"].".PCO_Objeto.value='".$registro_botones["accion_usuario"]."';document.".$registro_formulario["id_html"].".submit();";
 					if ($registro_botones["tipo_accion"]=="externa_formulario")
 						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='".$registro_botones["accion_usuario"]."';document.".$registro_formulario["id_html"].".submit();";
 					if ($registro_botones["tipo_accion"]=="externa_javascript")
@@ -7108,8 +7109,8 @@ function PCO_GenerarBotonesInforme($informe)
 				if ($registro_botones["tipo_accion"]=="interna_cargar")
 					{
 						$comando_javascript="
-							document.FRMBASEINFORME.PCO_Accion.value='cargar_objeto';
-							document.FRMBASEINFORME.objeto.value='frm:".$registro_botones["accion_usuario"].":DETFRMVALBASE';
+							document.FRMBASEINFORME.PCO_Accion.value='PCO_CargarObjeto';
+							document.FRMBASEINFORME.PCO_Objeto.value='frm:".$registro_botones["accion_usuario"].":DETFRMVALBASE';
 							document.FRMBASEINFORME.Precarga_EstilosBS.value='".@$precargar_estilos_formulario."';
 							document.FRMBASEINFORME.Presentar_FullScreen.value='".@$pantalla_completa_formulario."';
 							document.FRMBASEINFORME.target = '".@$destino_formulario."';
@@ -7118,8 +7119,8 @@ function PCO_GenerarBotonesInforme($informe)
 				if ($registro_botones["tipo_accion"]=="interna_cargar_informe")
 					{
 						$comando_javascript="
-							document.FRMBASEINFORME.PCO_Accion.value='cargar_objeto';
-							document.FRMBASEINFORME.objeto.value='inf:".$registro_botones["accion_usuario"].":DETFRMVALBASE';
+							document.FRMBASEINFORME.PCO_Accion.value='PCO_CargarObjeto';
+							document.FRMBASEINFORME.PCO_Objeto.value='inf:".$registro_botones["accion_usuario"].":DETFRMVALBASE';
 							document.FRMBASEINFORME.Precarga_EstilosBS.value='".@$precargar_estilos_formulario."';
 							document.FRMBASEINFORME.Presentar_FullScreen.value='".@$pantalla_completa_formulario."';
 							document.FRMBASEINFORME.target = '".@$destino_formulario."';

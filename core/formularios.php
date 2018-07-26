@@ -66,7 +66,6 @@
 			if (@$PCO_ValorCampoTransporte1=="" )  $PCO_ValorCampoTransporte1="PCO_ValorCampoTransporte1";
 			if (@$PCO_NombreCampoTransporte2=="") $PCO_NombreCampoTransporte2="PCO_NombreCampoTransporte2";
 			if (@$PCO_ValorCampoTransporte2=="" )  $PCO_ValorCampoTransporte2="PCO_ValorCampoTransporte2";
-			
 			$mensaje_error="";
 			// Busca datos del formulario
 			$consulta_formulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
@@ -82,25 +81,25 @@
 
 					// Elimina los datos
 					PCO_EjecutarSQLUnaria("DELETE FROM ".$tabla." WHERE $campo = '$valor' ");
-					
+
 					//POSIBILIDAD DE REEMPLAZAR POR ESTE QUERY SI LA TABLA MANEJA CAMPO ID:  PCO_EjecutarSQLUnaria("DELETE FROM ".$tabla." WHERE id=$id_registro_datos ");
-					
-					PCO_Auditar("Elimina registro donde ".$campo." = ".$valor." en ".$tabla);
-						echo '<form name="PCO_FormContinuarFlujo_EliminarDatos" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
-						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
-						<input type="Hidden" name="'.$PCO_NombreCampoTransporte2.'" value="'.$PCO_ValorCampoTransporte2.'">
-						<input type="Hidden" name="nombre_tabla" value="'.$tabla.'">
-						<input type="Hidden" name="formulario" value="'.$formulario.'">
-						<input type="Hidden" name="popup_activo" value="FormularioCampos">
-                        <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
-                        <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
-						<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
-						<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
-						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo).'">
-						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion).'">
-					<script type="" language="JavaScript"> document.PCO_FormContinuarFlujo_EliminarDatos.submit();  </script>';
+        			PCO_Auditar("Elimina registro donde ".$campo." = ".$valor." en ".$tabla);
 				}
+
+			echo '<form name="PCO_FormContinuarFlujo_EliminarDatos" action="'.$ArchivoCORE.'" method="POST">
+				<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
+				<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
+				<input type="Hidden" name="'.$PCO_NombreCampoTransporte2.'" value="'.$PCO_ValorCampoTransporte2.'">
+				<input type="Hidden" name="nombre_tabla" value="'.$tabla.'">
+				<input type="Hidden" name="formulario" value="'.$formulario.'">
+				<input type="Hidden" name="popup_activo" value="FormularioCampos">
+                <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+                <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
+				<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
+				<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
+				<input type="Hidden" name="PCO_ErrorTitulo" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo).'">
+				<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion).'">
+			<script type="" language="JavaScript"> document.PCO_FormContinuarFlujo_EliminarDatos.submit();  </script>';
 		}
 
 

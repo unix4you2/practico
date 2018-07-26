@@ -27,7 +27,7 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	if ($PCO_Accion=="cargar_objeto")
+	if ($PCO_Accion=="cargar_objeto" || $PCO_Accion=="PCO_CargarObjeto")
 		{
 			/*
 				Function: cargar_objeto
@@ -35,7 +35,7 @@
 
 				Variables de entrada:
 
-					objeto - Cadena con la representacion del objeto en formato frm:xxx  inf:xxx   o similares donde se pueden tener multiples parametros separados por el caracter de *dos puntos*.  El primer parametro indicado despues del tipo de objeto indica el ID interno del objeto creado por practico.
+					PCO_Objeto (alias de objeto) - Cadena con la representacion del objeto en formato frm:xxx  inf:xxx   o similares donde se pueden tener multiples parametros separados por el caracter de *dos puntos*.  El primer parametro indicado despues del tipo de objeto indica el ID interno del objeto creado por practico.
 
 				Codigo de ejemplo para llamadas a objetos comunes:
 
@@ -65,9 +65,12 @@
 			*/
 
 			$mensaje_error="";
+			
+			//Verifica si llego o no el objeto
+			if ($PCO_Objeto=="") $PCO_Objeto=$objeto;
 
 			//Divide la cadena de objeto en partes conocidas
-			$partes_objeto = explode(":", $objeto);
+			$partes_objeto = explode(":", $PCO_Objeto);
 			if ($partes_objeto[0]!="frm" && $partes_objeto[0]!="inf")
 				$mensaje_error=$MULTILANG_ObjError.": ".$partes_objeto[0];
 
