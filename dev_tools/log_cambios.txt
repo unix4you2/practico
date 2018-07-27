@@ -51,6 +51,7 @@ inc/bootstrap/js/plugins/select/*
 mod/mvc/*
 mod/sopa/*
 mod/pcoder/index.php
+mod/pmydb/adminer.css
 inc/ace_practico/*
 
 
