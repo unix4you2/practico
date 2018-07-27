@@ -237,7 +237,7 @@ JavaScript
 /mnt/datos/webserver/practico/inc/summernote/lang/summernote-pl-PL.js	1507213860	0	/mnt/datos/webserver/practico/inc/summernote/lang/summernote-pl-PL.js
 /mnt/datos/webserver/practico/inc/bootstrap/js/plugins/flot/excanvas.min.js	1507213860	0	/mnt/datos/webserver/practico/inc/bootstrap/js/plugins/flot/excanvas.min.js
 /mnt/datos/webserver/practico/inc/jquery/jquery-1.7.2.min.js	1507213860	0	/mnt/datos/webserver/practico/inc/jquery/jquery-1.7.2.min.js
-/mnt/datos/webserver/practico/core/marco_nav.php	1531937223	1	Seccion superior
+/mnt/datos/webserver/practico/core/marco_nav.php	1532631501	1	Seccion superior
 /mnt/datos/webserver/practico/inc/ckeditor/plugins/pastefromword/filter/default.js	1507213860	0	/mnt/datos/webserver/practico/inc/ckeditor/plugins/pastefromword/filter/default.js
 /mnt/datos/webserver/practico/inc/ace/src-min-noconflict/mode-ada.js	1525818912	0	/mnt/datos/webserver/practico/inc/ace/src-min-noconflict/mode-ada.js
 /mnt/datos/webserver/practico/inc/ace/src-min-noconflict/mode-less.js	1525818912	0	/mnt/datos/webserver/practico/inc/ace/src-min-noconflict/mode-less.js
@@ -446,7 +446,7 @@ JavaScript
 /mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Chart/Properties.php	1507213860	0	/mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Chart/Properties.php
 /mnt/datos/webserver/practico/mod/pdf/html2pdf/_read_me.txt	1507213860	0	/mnt/datos/webserver/practico/mod/pdf/html2pdf/_read_me.txt
 /mnt/datos/webserver/practico/inc/ace/src-min-noconflict/snippets/mysql.js	1525818913	0	/mnt/datos/webserver/practico/inc/ace/src-min-noconflict/snippets/mysql.js
-/mnt/datos/webserver/practico/core/comunes.php	1532372752	1	Libreria base
+/mnt/datos/webserver/practico/core/comunes.php	1532627212	1	Libreria base
 /mnt/datos/webserver/practico/inc/octicons/LICENSE.txt	1507213860	0	/mnt/datos/webserver/practico/inc/octicons/LICENSE.txt
 /mnt/datos/webserver/practico/dep/inc/practico/javascript/tooltips.js	1507213859	0	/mnt/datos/webserver/practico/dep/inc/practico/javascript/tooltips.js
 /mnt/datos/webserver/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/js/jscalendar/lang/calendar-pl-utf8.js	1507213860	0	/mnt/datos/webserver/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/js/jscalendar/lang/calendar-pl-utf8.js
@@ -507,7 +507,7 @@ JavaScript
 /mnt/datos/webserver/practico/mod/fileman/elfinder/php/elFinderSession.php	1528184211	0	/mnt/datos/webserver/practico/mod/fileman/elfinder/php/elFinderSession.php
 /mnt/datos/webserver/practico/inc/ace/src-min-noconflict/mode-java.js	1525818912	0	/mnt/datos/webserver/practico/inc/ace/src-min-noconflict/mode-java.js
 /mnt/datos/webserver/practico/inc/bootstrap/js/plugins/select/i18n/defaults-nb_NO.min.js	1500490670	0	/mnt/datos/webserver/practico/inc/bootstrap/js/plugins/select/i18n/defaults-nb_NO.min.js
-/mnt/datos/webserver/practico/ins/index.php	1531309744	0	/mnt/datos/webserver/practico/ins/index.php
+/mnt/datos/webserver/practico/ins/index.php	1532632297	0	/mnt/datos/webserver/practico/ins/index.php
 /mnt/datos/webserver/practico/inc/ckeditor/plugins/specialchar/dialogs/lang/lv.js	1507213860	0	/mnt/datos/webserver/practico/inc/ckeditor/plugins/specialchar/dialogs/lang/lv.js
 /mnt/datos/webserver/practico/inc/ckeditor/plugins/forms/dialogs/hiddenfield.js	1507213860	0	/mnt/datos/webserver/practico/inc/ckeditor/plugins/forms/dialogs/hiddenfield.js
 /mnt/datos/webserver/practico/mod/ldap/phpldapadmin-1.2.3/lib/AJAXTree.php	1507213860	0	/mnt/datos/webserver/practico/mod/ldap/phpldapadmin-1.2.3/lib/AJAXTree.php
@@ -673,7 +673,7 @@ JavaScript
 /mnt/datos/webserver/practico/inc/ace/src-min-noconflict/snippets/haml.js	1525818913	0	/mnt/datos/webserver/practico/inc/ace/src-min-noconflict/snippets/haml.js
 /mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Calculation/ExceptionHandler.php	1507213860	0	/mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Calculation/ExceptionHandler.php
 /mnt/datos/webserver/practico/mod/fileman/elfinder/php/elFinderFlysystemGoogleDriveNetmount.php	1528184211	0	/mnt/datos/webserver/practico/mod/fileman/elfinder/php/elFinderFlysystemGoogleDriveNetmount.php
-/mnt/datos/webserver/practico/core/ws_oauth.php	1522165853	0	/mnt/datos/webserver/practico/core/ws_oauth.php
+/mnt/datos/webserver/practico/core/ws_oauth.php	1532632321	0	/mnt/datos/webserver/practico/core/ws_oauth.php
 /mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/CachedObjectStorage/SQLite.php	1507213860	0	/mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/CachedObjectStorage/SQLite.php
 /mnt/datos/webserver/practico/inc/ace/src-min-noconflict/mode-perl.js	1525818912	0	/mnt/datos/webserver/practico/inc/ace/src-min-noconflict/mode-perl.js
 /mnt/datos/webserver/practico/mod/ldap/phpldapadmin-1.2.3/lib/DnAttribute.php	1507213860	0	/mnt/datos/webserver/practico/mod/ldap/phpldapadmin-1.2.3/lib/DnAttribute.php
@@ -685,7 +685,7 @@ JavaScript
 /mnt/datos/webserver/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pt_PT.js	1500490670	0	/mnt/datos/webserver/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pt_PT.js
 /mnt/datos/webserver/practico/inc/ckeditor/plugins/dialog/dialogDefinition.js	1507213860	0	/mnt/datos/webserver/practico/inc/ckeditor/plugins/dialog/dialogDefinition.js
 /mnt/datos/webserver/practico/inc/ace/src-min-noconflict/theme-tomorrow_night.js	1525818913	0	/mnt/datos/webserver/practico/inc/ace/src-min-noconflict/theme-tomorrow_night.js
-/mnt/datos/webserver/practico/inc/bootstrap/js/practico.min.js	1532376314	0	/mnt/datos/webserver/practico/inc/bootstrap/js/practico.min.js
+/mnt/datos/webserver/practico/inc/bootstrap/js/practico.min.js	1532639121	0	/mnt/datos/webserver/practico/inc/bootstrap/js/practico.min.js
 /mnt/datos/webserver/practico/inc/ace/src-min-noconflict/theme-cobalt.js	1525818913	0	/mnt/datos/webserver/practico/inc/ace/src-min-noconflict/theme-cobalt.js
 /mnt/datos/webserver/practico/inc/ace/src-min-noconflict/snippets/d.js	1525818913	0	/mnt/datos/webserver/practico/inc/ace/src-min-noconflict/snippets/d.js
 /mnt/datos/webserver/practico/inc/jquery/plugins/sketch.js	1507213860	0	/mnt/datos/webserver/practico/inc/jquery/plugins/sketch.js
@@ -827,7 +827,7 @@ JavaScript
 /mnt/datos/webserver/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/js/date_selector.js	1507213860	0	/mnt/datos/webserver/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/js/date_selector.js
 /mnt/datos/webserver/practico/inc/ace/src-min-noconflict/mode-gherkin.js	1525818912	0	/mnt/datos/webserver/practico/inc/ace/src-min-noconflict/mode-gherkin.js
 /mnt/datos/webserver/practico/mod/ldap/phpldapadmin-1.2.3/lib/HTMLTree.php	1507213860	0	/mnt/datos/webserver/practico/mod/ldap/phpldapadmin-1.2.3/lib/HTMLTree.php
-/mnt/datos/webserver/practico/core/configuracion.php	1531532155	1	Variables para aplicacion
+/mnt/datos/webserver/practico/core/configuracion.php	1532632256	1	Variables para aplicacion
 /mnt/datos/webserver/practico/inc/summernote/lang/summernote-fr-FR.js	1507213860	0	/mnt/datos/webserver/practico/inc/summernote/lang/summernote-fr-FR.js
 /mnt/datos/webserver/practico/inc/ace/src-min-noconflict/snippets/swig.js	1525818913	0	/mnt/datos/webserver/practico/inc/ace/src-min-noconflict/snippets/swig.js
 /mnt/datos/webserver/practico/inc/ckeditor/plugins/specialchar/dialogs/lang/hr.js	1507213860	0	/mnt/datos/webserver/practico/inc/ckeditor/plugins/specialchar/dialogs/lang/hr.js
@@ -848,7 +848,7 @@ JavaScript
 /mnt/datos/webserver/practico/mod/pcoder/inc/panel_centralsuperior.php	1488372430	0	/mnt/datos/webserver/practico/mod/pcoder/inc/panel_centralsuperior.php
 /mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Style/Alignment.php	1507213860	0	/mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Style/Alignment.php
 /mnt/datos/webserver/practico/inc/ace/src-min-noconflict/snippets/c9search.js	1525818912	0	/mnt/datos/webserver/practico/inc/ace/src-min-noconflict/snippets/c9search.js
-/mnt/datos/webserver/practico/core/sesion.php	1531860990	1	Modulo sesion
+/mnt/datos/webserver/practico/core/sesion.php	1532378095	1	Modulo sesion
 /mnt/datos/webserver/practico/mod/fileman/elfinder/js/proxy/elFinderSupportVer1.js	1528184211	0	/mnt/datos/webserver/practico/mod/fileman/elfinder/js/proxy/elFinderSupportVer1.js
 /mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Cell/IValueBinder.php	1507213860	0	/mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Cell/IValueBinder.php
 /mnt/datos/webserver/practico/inc/practico/def_basedatos.php	1531510241	1	Libreria Definicion de base de datos
@@ -987,7 +987,7 @@ JavaScript
 /mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Writer/OpenDocument/Cell/Comment.php	1507213860	0	/mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Writer/OpenDocument/Cell/Comment.php
 /mnt/datos/webserver/practico/inc/bootstrap/js/plugins/metisMenu/metisMenu.min.js	1507213860	0	/mnt/datos/webserver/practico/inc/bootstrap/js/plugins/metisMenu/metisMenu.min.js
 /mnt/datos/webserver/practico/mod/fileman/elfinder/js/i18n/elfinder.pt_BR.js	1528184211	0	/mnt/datos/webserver/practico/mod/fileman/elfinder/js/i18n/elfinder.pt_BR.js
-/mnt/datos/webserver/practico/core/objetos.php	1531937141	1	Modulo objetos
+/mnt/datos/webserver/practico/core/objetos.php	1532627279	1	Modulo objetos
 /mnt/datos/webserver/practico/inc/ace/src-min-noconflict/mode-plain_text.js	1525818912	0	/mnt/datos/webserver/practico/inc/ace/src-min-noconflict/mode-plain_text.js
 /mnt/datos/webserver/practico/mod/pcoder/inc/configuracion.php	1525818913	0	/mnt/datos/webserver/practico/mod/pcoder/inc/configuracion.php
 /mnt/datos/webserver/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/login_form.php	1507213860	0	/mnt/datos/webserver/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/login_form.php
@@ -1040,7 +1040,7 @@ JavaScript
 /mnt/datos/webserver/practico/inc/ckeditor/plugins/specialchar/dialogs/lang/fr.js	1507213860	0	/mnt/datos/webserver/practico/inc/ckeditor/plugins/specialchar/dialogs/lang/fr.js
 /mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Chart.php	1507213860	0	/mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Chart.php
 /mnt/datos/webserver/practico/core/marco_arriba.php	1531861038	1	Seccion superior
-/mnt/datos/webserver/practico/index.php	1532019883	0	/mnt/datos/webserver/practico/index.php
+/mnt/datos/webserver/practico/index.php	1532626250	0	/mnt/datos/webserver/practico/index.php
 /mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Worksheet/RowIterator.php	1507213860	0	/mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Worksheet/RowIterator.php
 /mnt/datos/webserver/practico/mod/fileman/elfinder/php/elFinderVolumeDriver.class.php	1528184211	0	/mnt/datos/webserver/practico/mod/fileman/elfinder/php/elFinderVolumeDriver.class.php
 /mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Worksheet/BaseDrawing.php	1507213860	0	/mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Worksheet/BaseDrawing.php
@@ -1087,7 +1087,7 @@ JavaScript
 /mnt/datos/webserver/practico/mod/pcoder/mod/buscador/index.php	1488372430	0	/mnt/datos/webserver/practico/mod/pcoder/mod/buscador/index.php
 /mnt/datos/webserver/practico/inc/bootstrap/js/plugins/select/i18n/defaults-id_ID.min.js	1500490670	0	/mnt/datos/webserver/practico/inc/bootstrap/js/plugins/select/i18n/defaults-id_ID.min.js
 /mnt/datos/webserver/practico/inc/ace/src-min-noconflict/mode-latex.js	1525818912	0	/mnt/datos/webserver/practico/inc/ace/src-min-noconflict/mode-latex.js
-/mnt/datos/webserver/practico/core/formularios.php	1531937256	1	Modulo formularios
+/mnt/datos/webserver/practico/core/formularios.php	1532621685	1	Modulo formularios
 /mnt/datos/webserver/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/js/jscalendar/lang/calendar-jp.js	1507213860	0	/mnt/datos/webserver/practico/mod/ldap/phpldapadmin-1.2.3/htdocs/js/jscalendar/lang/calendar-jp.js
 /mnt/datos/webserver/practico/inc/ace/src-min-noconflict/snippets/cirru.js	1525818913	0	/mnt/datos/webserver/practico/inc/ace/src-min-noconflict/snippets/cirru.js
 /mnt/datos/webserver/practico/inc/ace/src-min-noconflict/snippets/elm.js	1525818913	0	/mnt/datos/webserver/practico/inc/ace/src-min-noconflict/snippets/elm.js
@@ -1286,7 +1286,7 @@ JavaScript
 /mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Writer/Excel2007/RelsVBA.php	1507213860	0	/mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Writer/Excel2007/RelsVBA.php
 /mnt/datos/webserver/practico/inc/oauth/NUEVO/login_with_buffer.php	1507213860	0	/mnt/datos/webserver/practico/inc/oauth/NUEVO/login_with_buffer.php
 /mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Writer/PDF/Core.php	1507213860	0	/mnt/datos/webserver/practico/inc/phpexcel/Classes/PHPExcel/Writer/PDF/Core.php
-/mnt/datos/webserver/practico/dev_tools/log_cambios.txt	1532373120	0	/mnt/datos/webserver/practico/dev_tools/log_cambios.txt
+/mnt/datos/webserver/practico/dev_tools/log_cambios.txt	1532631939	0	/mnt/datos/webserver/practico/dev_tools/log_cambios.txt
 /mnt/datos/webserver/practico/inc/html2canvas/0.5/html2canvas.min.js	1525818913	0	/mnt/datos/webserver/practico/inc/html2canvas/0.5/html2canvas.min.js
 /mnt/datos/webserver/practico/inc/ckeditor/plugins/specialchar/dialogs/lang/ca.js	1507213860	0	/mnt/datos/webserver/practico/inc/ckeditor/plugins/specialchar/dialogs/lang/ca.js
 /mnt/datos/webserver/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-weathericon-1.2.0.min.js	1507213860	0	/mnt/datos/webserver/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-weathericon-1.2.0.min.js
