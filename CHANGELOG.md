@@ -40,6 +40,7 @@ cargar_objeto_texto_largo() cambia a PCO_CargarObjetoTextoLargo()
 cargar_objeto_lista_seleccion() cambia a PCO_CargarObjetoListaSeleccion()
 
 LEAME: ADVERTENCIA: Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada de acciones internas, las siguientes acciones han cambiado de nombre:
+Accion cargar_objeto cambia a  PCO_CargarObjeto
 Accion actualizar_clave cambia a  PCO_ActualizarContrasena
 Accion cambiar_clave cambia a  PCO_CambiarContrasena
 Accion ejecutar_importacion_csv cambia a PCO_EjecutarImportacionCSV
@@ -48,6 +49,9 @@ Accion analizar_importacion_csv cambia a PCO_AnalizarImportacionCSV
 Accion confirmar_importacion_tabla cambia a PCO_ConfirmarImportacionTabla
 Accion importar_tabla cambia a PCO_ImportarTabla
 Accion Ver_menu cambia a PCO_VerMenu
+
+LEAME: ADVERTENCIA: Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar nombres de variables internas, las siguientes variables han cambiado de nombre:
+Variable objeto (usada en las acciones de cargar_objeto) cambia a  PCO_Objeto
 Formulario interno core_ver_menu cambia a PCO_FormVerMenu
 
 Se recomienda encarecidamente que si usted hace llamados manuales a este tipo de funciones primero haga un reemplazo de las mismas dentro de su codigo fuente para evitar conflictos. Lo cual podría llevar a cabo con un simple reemplazo de cadena en sus archivos (Ctrl+H en su {P}Coder).
@@ -81,6 +85,7 @@ El nombre del marco especial sobre formularios llamado MARCO_IMPRESION ha sido g
 * Enhan: Reemplazo de funciones de informes por objetos internos
 * Enhan: Actualizacion a PMyDB 18.7: Seleccion de idiomas en caliente, cambio de tema por defecto, copiado de hablas incluye ahora sus triggers, soporte elastic search, prohibicion de usar bases de datos sin clave, etc.
 * Enhan: Optimizadas funciones de auditoria de usuarios.  Supresion de funciones y codigo obsoleto.
+* Enhan: Para desarrolladores del framework se protege las carpetas de instalación automáticamente.
 * Fixed: Edicion de URLS con interrogantes sobre IFrames en formularios
 * Fixed: Buscador de permisos evita presentar informes de desarrollo del framework (negativos)
 

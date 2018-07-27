@@ -15,8 +15,15 @@
 ## COMO ACTIVARLO:
 * Forma 1: Renombre este archivo a DEMO (retire su extension)
 * Forma 2: Cree un archivo llamado DEMO en la raiz de su instalacion
+* Ajuste los permisos: Convierta en inmutables los archivos mediante: chattr +i -R *
 
 ## COMO DESACTIVAR:
 * Forma 1: Renombre el archivo DEMO a su nombre original DEMO.md
 * Forma 2: Elimine cualquier archivo llamado DEMO en su carpeta raiz
+* Ajuste los permisos: Convierta en inmutables los archivos mediante: chattr -i -R *
+
+## COMO ACTUALIZAR:
+* En entornos de Virtualhost restringidos no olvide desactivar la variable:
+  open_basedir   /supath/hasta/WebServer/www.sudominio.com  temporalmente para
+  permitir cargue de archivos.
 */
