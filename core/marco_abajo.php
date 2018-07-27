@@ -429,6 +429,7 @@
                         editor.getSession().on('change', function(){
                           textarea.val(editor.getSession().getValue());
                         });
+                        
                     });
                 });
             </script>

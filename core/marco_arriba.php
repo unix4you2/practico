@@ -99,8 +99,10 @@
         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="display: none; visibility:hidden;"></a>
         <!-- /#sidebar-wrapper oculto al lado izquierdo-->
 
-
 		<?php
+            //Presenta barra de navegacion superior solamente cuando hay una accion
+            if ($PCO_Accion!="") { }
+            
 			// Incluye marcos con barras de navegacion
 			include_once("core/marco_nav.php");
 

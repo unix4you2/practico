@@ -216,15 +216,6 @@
 	<!-- CIERRA /.navbar-top-links -->
 
 
-<?php
-//Presenta barra de navegacion superior solamente cuando hay una accion
-if ($PCO_Accion!="")
-{
-?>
-<?php
-} // FIN if ($PCO_Accion!="")
-?>
-
 </nav>
 <script language="javascript">
     function PCO_CargarReportarBugs()
