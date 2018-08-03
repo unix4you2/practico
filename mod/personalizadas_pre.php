@@ -24,7 +24,7 @@
 			IMPORTANTE:
 			Estas funciones son ejecutadas despues de las inclusiones basicas pero antes de las inclusiones de marcos superiores y estilos de bootstrap en modo fullscreen
             */
-
+	
 if ($PCO_Accion=="Mi_AccionPrecarga_XYZ") 
 	{
 

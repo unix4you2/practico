@@ -38,8 +38,8 @@
     <input type="Hidden" name="PCO_Accion" value="Terminar_sesion">
 </form>
 <form method="POST" name="PCO_EditarConfiguracionOAuth" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="PCO_Accion" value="cargar_objeto">
-	<input type="Hidden" name="objeto" value="frm:-5:1">
+	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
+	<input type="Hidden" name="PCO_Objeto" value="frm:-5:1">
 </form>
 <form method="POST" name="actualizar_perfil" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     <input type="Hidden" name="PCO_Accion" value="PCO_ActualizarPerfilUsuario">
@@ -99,14 +99,14 @@
 	<input type="Hidden" name="PCO_Accion" value="PCO_ExplorarTablerosKanban">
 </form>
 <form name="PCO_BugTrackingForm" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="PCO_Accion" value="cargar_objeto">
-	<input type="Hidden" name="objeto" value="frm:-4:1">
+	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
+	<input type="Hidden" name="PCO_Objeto" value="frm:-4:1">
 </form>
 <form name="PCO_VerReplicaciones" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="PCO_Accion" value="cargar_objeto">
-	<input type="Hidden" name="objeto" value="frm:-10:1">
+	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
+	<input type="Hidden" name="PCO_Objeto" value="frm:-10:1">
 </form>
 <form name="PCO_VerMonitoreo" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="PCO_Accion" value="cargar_objeto">
-	<input type="Hidden" name="objeto" value="frm:-11:1">
+	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
+	<input type="Hidden" name="PCO_Objeto" value="frm:-11:1">
 </form>

@@ -30,7 +30,7 @@
 	if ($PCO_Accion=="cargar_objeto" || $PCO_Accion=="PCO_CargarObjeto")
 		{
 			/*
-				Function: cargar_objeto
+				Function: PCO_CargarObjeto
 				Abre los objetos creados con practico como formularios, informes, etc.
 
 				Variables de entrada:

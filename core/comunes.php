@@ -97,7 +97,7 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
             echo '<input type="hidden" name="PCO_Accion" value="'.$RegistroOpcion["comando"].'">';
 		// Verifica si se trata de una opcion para cargar un objeto de practico
 		if ($RegistroOpcion["tipo_comando"]=="Objeto")
-			echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto"><input type="hidden" name="objeto" value="'.$RegistroOpcion["comando"].'">';
+			echo'<input type="hidden" name="PCO_Accion" value="PCO_CargarObjeto"><input type="hidden" name="PCO_Objeto" value="'.$RegistroOpcion["comando"].'">';
 		echo '</form>';
 
         //Define la cadena a imprimir como accion para el menu
@@ -2562,7 +2562,8 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "Terminar_sesion")					$retorno = 1;
 		if ($PCO_Accion== "Mensaje_cierre_sesion")				$retorno = 1;
 		// Funciones en core/objetos.php
-		if ($PCO_Accion== "cargar_objeto")						$retorno = 1;
+		if ($PCO_Accion== "PCO_CargarObjeto")					$retorno = 1;
+		if ($PCO_Accion== "cargar_objeto")						$retorno = 1; //Eliminar despues de version 18.9
 		// Funciones en core/actualizacion.php
 		if ($PCO_Accion== "cargar_archivo")						$retorno = PCO_PermisoAgregadoAccion("actualizar_practico");
 		if ($PCO_Accion== "analizar_parche")					$retorno = PCO_PermisoAgregadoAccion("actualizar_practico");
@@ -2848,10 +2849,10 @@ function PCO_LimpiarEntradas()
 				$nombre_filtro=PCO_EscaparContenido($nombre_filtro);
 			}
 			
-		if ($PCO_Accion=="cargar_objeto")
+		if ($PCO_Accion=="PCO_CargarObjeto")
 			{
-				global $objeto;
-				$objeto=PCO_EscaparContenido($objeto);
+				global $PCO_Objeto;
+				$PCO_Objeto=PCO_EscaparContenido($PCO_Objeto);
 			}
 
 		if ($PCO_Accion=="PCO_GuardarFormulario")
@@ -4847,8 +4848,8 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
 		if ($registro_campos["etiqueta_busqueda"]!="")
 			{
                 $salida.= '<span class="input-group-addon">';
-                    $salida.= '<input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.'.$IdHTMLFormulario.'.PCO_ValorBusquedaBD.value=document.'.$IdHTMLFormulario.'.'.$registro_campos["campo"].'.value;document.'.$IdHTMLFormulario.'.PCO_Accion.value=\'cargar_objeto\';document.'.$IdHTMLFormulario.'.submit()">';
-                    $salida.= '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
+                    $salida.= '<input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.'.$IdHTMLFormulario.'.PCO_ValorBusquedaBD.value=document.'.$IdHTMLFormulario.'.'.$registro_campos["campo"].'.value;document.'.$IdHTMLFormulario.'.PCO_Accion.value=\'PCO_CargarObjeto\';document.'.$IdHTMLFormulario.'.submit()">';
+                    $salida.= '<input type="hidden" name="PCO_Objeto" value="frm:'.$formulario.'">';
                     $salida.= '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
                     $salida.= '<input type="Hidden" name="PCO_CampoBusquedaBD" value="'.$registro_campos["campo"].'" >';
                     $salida.= '<input type="Hidden" name="PCO_ValorBusquedaBD" '.$cadena_valor.'>';
@@ -5422,8 +5423,8 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
 		// Muestra boton de busqueda cuando el campo sea usado para esto
 		if ($registro_campos["etiqueta_busqueda"]!="")
 			{
-                $salida.= '<span class="input-group-addon"><input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.'.$IdHTMLFormulario.'.PCO_ValorBusquedaBD.value=document.'.$IdHTMLFormulario.'.'.$registro_campos["campo"].'.value;document.'.$IdHTMLFormulario.'.PCO_Accion.value=\'cargar_objeto\';document.'.$IdHTMLFormulario.'.submit()"></span>';
-				$salida.= '<input type="hidden" name="objeto" value="frm:'.$formulario.'">';
+                $salida.= '<span class="input-group-addon"><input type="Button" class="btn btn-default btn-xs" value="'.$registro_campos["etiqueta_busqueda"].'" onclick="document.'.$IdHTMLFormulario.'.PCO_ValorBusquedaBD.value=document.'.$IdHTMLFormulario.'.'.$registro_campos["campo"].'.value;document.'.$IdHTMLFormulario.'.PCO_Accion.value=\'PCO_CargarObjeto\';document.'.$IdHTMLFormulario.'.submit()"></span>';
+				$salida.= '<input type="hidden" name="PCO_Objeto" value="frm:'.$formulario.'">';
 				$salida.= '<input type="Hidden" name="en_ventana" value="'.$en_ventana.'" >';
 				$salida.= '<input type="Hidden" name="PCO_CampoBusquedaBD" value="'.$registro_campos["campo"].'" >';
 				$salida.= '<input type="Hidden" name="PCO_ValorBusquedaBD" '.$cadena_valor.'>';
@@ -6971,7 +6972,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 			if ($PCO_InformeFiltro!="")
 				{
 					//Si se encuentra que el form viene llamado desde un informe que lo requiere para filtro agrega un boton de retorno al informe automaticamente
-					$comando_javascript="document.".$registro_formulario["id_html"].".PCO_Accion.value='cargar_objeto';document.".$registro_formulario["id_html"].".objeto.value='inf:".$PCO_InformeFiltro.":1';document.".$registro_formulario["id_html"].".submit();";
+					$comando_javascript="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_CargarObjeto';document.".$registro_formulario["id_html"].".PCO_Objeto.value='inf:".$PCO_InformeFiltro.":1';document.".$registro_formulario["id_html"].".submit();";
 					$cadena_javascript='href="javascript:'.@$comando_javascript.'"';
 					echo '<a class="'.$estilo_basico_boton.' btn btn-warning" '.@$cadena_javascript.'>'.$MULTILANG_InfRetornoFormFiltrado.'</a>';
 				}
@@ -7607,9 +7608,9 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 				if ($registro_informe["formulario_filtrado"]!=$PCO_FormularioActivo)
 					{
 						echo '<form name="precarga_form_filtro" action="'.$ArchivoCORE.'" method="POST" target="_self">
-							<input type="Hidden" name="PCO_Accion" value="cargar_objeto">
+							<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
 							<input type="Hidden" name="PCO_InformeFiltro" value="'.$registro_informe["id"].'">
-							<input type="Hidden" name="objeto" value="frm:'.$registro_informe["formulario_filtrado"].':1">
+							<input type="Hidden" name="PCO_Objeto" value="frm:'.$registro_informe["formulario_filtrado"].':1">
 							<input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
 							<input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 							</form>

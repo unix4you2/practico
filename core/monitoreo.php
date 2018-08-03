@@ -822,8 +822,10 @@ if ($PCO_Accion=="PCO_VerMonitoreo")
 						window.setTimeout("actualizar_reloj()",1000);
 					if (EstadoPausa==0)
 						ValorCronometro--;	
+					if (ValorCronometro<=-10)
+					    document.formulario_monitoreo.submit();
 				}
-			actualizar_reloj()
+			actualizar_reloj();
 		</script>
 
 

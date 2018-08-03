@@ -132,8 +132,8 @@ function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0)
 						</td>
 						<td align="center">
 							<form action="'.$ArchivoCORE.'" method="POST">
-								<input type="hidden" name="PCO_Accion" value="cargar_objeto">
-								<input type="hidden" name="objeto" value="frm:-12:1:id:'.$registro["id"].'">
+								<input type="hidden" name="PCO_Accion" value="PCO_CargarObjeto">
+								<input type="hidden" name="PCO_Objeto" value="frm:-12:1:id:'.$registro["id"].'">
 								<input type="hidden" name="PCO_FormularioActivoEdicionMenu" value="'.$PCO_FormularioActivoEdicionMenu.'">
 								<input type="hidden" name="id" value="'.$registro["id"].'">
                                 <button type="submit" class="btn btn-warning btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i></button>
@@ -304,8 +304,8 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 									// Verifica si se trata de una opcion para cargar un objeto de practico
 									if ($registro["tipo_comando"]=="Objeto")
 										{
-											echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
-												 <input type="hidden" name="objeto" value="'.$registro["comando"].'"></form>';
+											echo'<input type="hidden" name="PCO_Accion" value="PCO_CargarObjeto">
+												 <input type="hidden" name="PCO_Objeto" value="'.$registro["comando"].'"></form>';
 										}
 									//Presenta la opcion de menu
 									echo '
@@ -349,8 +349,8 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 							while($registro = $resultado->fetch())
 								{
 									echo '<form action="'.$ArchivoCORE.'" method="post" name="deskinf_'.$registro["id"].'" id="deskinf_'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">';
-									echo'<input type="hidden" name="PCO_Accion" value="cargar_objeto">
-										 <input type="hidden" name="objeto" value="inf:'.$registro["id"].':1"></form>';
+									echo'<input type="hidden" name="PCO_Accion" value="PCO_CargarObjeto">
+										 <input type="hidden" name="PCO_Objeto" value="inf:'.$registro["id"].':1"></form>';
 									//Presenta la opcion de menu
 									echo '
 										<li class="left clearfix">
