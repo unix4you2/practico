@@ -33,7 +33,7 @@
 
 	// Bypass para casos de URI de redireccion por Oauth
 	$ByPassWS=0;
-	if (@$PCO_WSId=='autenticacion_oauth')
+	if (@$PCO_WSId=='PCO_AutenticacionOauth')
 		$ByPassWS=1;
 
 	// Verifica si se trata de un llamado por web-services
@@ -54,7 +54,7 @@
 									$llave_ws_valida=1;
 									// Define valores para la llave de instalacion
 									$nombre_cliente="Practico";
-									$funciones_autorizadas='verificar_credenciales,autenticacion_oauth';
+									$funciones_autorizadas='verificar_credenciales,PCO_AutenticacionOauth';
 									$ip_autorizada="*";
 									$dominio_autorizado="*";
 								}

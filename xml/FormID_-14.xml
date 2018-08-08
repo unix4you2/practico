@@ -7,8 +7,8 @@
 		<sistema_origen></sistema_origen>
 		<version></version>
 		<usuario_generador></usuario_generador>
-		<fecha_exportacion>2018-08-03</fecha_exportacion>
-		<hora_exportacion>09:59</hora_exportacion>
+		<fecha_exportacion>2018-08-08</fecha_exportacion>
+		<hora_exportacion>13:06</hora_exportacion>
 	</descripcion>
 	<core_formulario>
 	<id>LTE0</id>
@@ -23,7 +23,7 @@
 	<id_html>ZGF0b3M=</id_html>
 	</core_formulario>
 	<core_formulario_objeto>
-	<id>NjU1Nw==</id>
+	<id>Njc4NQ==</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
 	<titulo>SUQ=</titulo>
 	<campo>aWQ=</campo>
@@ -79,7 +79,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU1OA==</id>
+	<id>Njc4Ng==</id>
 	<tipo>ZXRpcXVldGE=</tipo>
 	<titulo></titulo>
 	<campo></campo>
@@ -135,7 +135,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU1OQ==</id>
+	<id>Njc4Nw==</id>
 	<tipo>ZXRpcXVldGE=</tipo>
 	<titulo></titulo>
 	<campo></campo>
@@ -191,7 +191,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU2MA==</id>
+	<id>Njc4OA==</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
 	<titulo>eyRNVUxUSUxBTkdfSW5mVGl0dWxvfQ==</titulo>
 	<campo>dGl0dWxv</campo>
@@ -247,7 +247,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU2MQ==</id>
+	<id>Njc4OQ==</id>
 	<tipo>dGV4dG9fbGFyZ28=</tipo>
 	<titulo>eyRNVUxUSUxBTkdfSW5mU1FMfQ==</titulo>
 	<campo>Y29uc3VsdGFfc3Fs</campo>
@@ -303,7 +303,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU2Mg==</id>
+	<id>Njc5MA==</id>
 	<tipo>aW5mb3JtZQ==</tipo>
 	<titulo></titulo>
 	<campo></campo>
@@ -359,7 +359,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU2Mw==</id>
+	<id>Njc5MQ==</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
 	<titulo>eyRNVUxUSUxBTkdfSW5mRGVzY3JpcGNpb259</titulo>
 	<campo>ZGVzY3JpcGNpb24=</campo>
@@ -415,7 +415,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU2NA==</id>
+	<id>Njc5Mg==</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
 	<titulo>eyRNVUxUSUxBTkdfSW5mQ2F0ZWdvcmlhfQ==</titulo>
 	<campo>Y2F0ZWdvcmlh</campo>
@@ -471,7 +471,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU2NQ==</id>
+	<id>Njc5Mw==</id>
 	<tipo>bGlzdGFfc2VsZWNjaW9u</tipo>
 	<titulo>eyRNVUxUSUxBTkdfSW5mRm9ybWF0b30=</titulo>
 	<campo>Zm9ybWF0b19maW5hbA==</campo>
@@ -527,7 +527,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU2Ng==</id>
+	<id>Njc5NA==</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
 	<titulo>eyRNVUxUSUxBTkdfRnJtQW5jaG99</titulo>
 	<campo>YW5jaG8=</campo>
@@ -583,7 +583,7 @@
 	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU2Nw==</id>
+	<id>Njc5NQ==</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
 	<titulo>eyRNVUxUSUxBTkdfSW5mQWx0b30=</titulo>
 	<campo>YWx0bw==</campo>
@@ -639,7 +639,7 @@
 	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU2OA==</id>
+	<id>Njc5Ng==</id>
 	<tipo>bGlzdGFfc2VsZWNjaW9u</tipo>
 	<titulo>eyRNVUxUSUxBTkdfQ29ubk9yaWdlbkRhdG9zfQ==</titulo>
 	<campo>Y29uZXhpb25fb3JpZ2VuX2RhdG9z</campo>
@@ -695,7 +695,7 @@
 	<clase_contenedor>Y29sLWxnLTEyIGNvbC1tZC0xMiBjb2wtc20tMTIgY29sLXhzLTEy</clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU2OQ==</id>
+	<id>Njc5Nw==</id>
 	<tipo>bGlzdGFfc2VsZWNjaW9u</tipo>
 	<titulo>eyRNVUxUSUxBTkdfSW5mR2VuZXJhUERGfQ==</titulo>
 	<campo>Z2VuZXJhX3BkZg==</campo>
@@ -751,7 +751,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU3MA==</id>
+	<id>Njc5OA==</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
 	<titulo>eyRNVUxUSUxBTkdfSW5mVmJsZXNGaWx0cm99</titulo>
 	<campo>dmFyaWFibGVzX2ZpbHRybw==</campo>
@@ -807,7 +807,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU3MQ==</id>
+	<id>Njc5OQ==</id>
 	<tipo>bGlzdGFfc2VsZWNjaW9u</tipo>
 	<titulo>eyRNVUxUSUxBTkdfSW5mRm9ybUZpbHRyYWRvfQ==</titulo>
 	<campo>Zm9ybXVsYXJpb19maWx0cmFkbw==</campo>
@@ -863,7 +863,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU3Mg==</id>
+	<id>NjgwMA==</id>
 	<tipo>ZXRpcXVldGE=</tipo>
 	<titulo></titulo>
 	<campo></campo>
@@ -919,7 +919,7 @@
 	<clase_contenedor>Y29sLWxnLTEyIGNvbC1tZC0xMiBjb2wtc20tMTIgY29sLXhzLTEy</clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU3Mw==</id>
+	<id>NjgwMQ==</id>
 	<tipo>bGlzdGFfc2VsZWNjaW9u</tipo>
 	<titulo>eyRNVUxUSUxBTkdfSGFiaWxpdGFyfQ==</titulo>
 	<campo>c29wb3J0ZV9kYXRhdGFibGU=</campo>
@@ -975,7 +975,7 @@
 	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU3NA==</id>
+	<id>NjgwMg==</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
 	<titulo>eyRNVUxUSUxBTkdfSW5mUGFnaW5hY2lvbkRhdGF0YWJsZX0=</titulo>
 	<campo>dGFtYW5vX3BhZ2luYWNpb24=</campo>
@@ -1031,7 +1031,7 @@
 	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU3NQ==</id>
+	<id>NjgwMw==</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
 	<titulo>eyRNVUxUSUxBTkdfSW5mU3VidG90YWxlc0NvbHVtbmF9</titulo>
 	<campo>c3VidG90YWxlc19jb2x1bW5h</campo>
@@ -1087,7 +1087,7 @@
 	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjU3Ng==</id>
+	<id>NjgwNA==</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
 	<titulo>eyRNVUxUSUxBTkdfSW5mU3VidG90YWxlc0Zvcm1hdG99</titulo>
 	<campo>c3VidG90YWxlc19mb3JtYXRv</campo>
@@ -1145,7 +1145,7 @@
 	<total_core_formulario_objeto><cantidad_objetos>20</cantidad_objetos></total_core_formulario_objeto>
 	<total_core_evento_objeto><cantidad_objetos>0</cantidad_objetos></total_core_evento_objeto>
 	<core_formulario_boton>
-	<id>MzUz</id>
+	<id>MzU2</id>
 	<titulo>eyRNVUxUSUxBTkdfSW5mQWN0dWFsaXphcn0=</titulo>
 	<estilo>IGJ0biBidG4tc3VjY2VzcyA=</estilo>
 	<formulario>LTE0</formulario>

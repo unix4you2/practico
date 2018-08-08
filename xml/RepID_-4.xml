@@ -7,8 +7,8 @@
 		<sistema_origen></sistema_origen>
 		<version></version>
 		<usuario_generador></usuario_generador>
-		<fecha_exportacion>2018-08-03</fecha_exportacion>
-		<hora_exportacion>09:59</hora_exportacion>
+		<fecha_exportacion>2018-08-08</fecha_exportacion>
+		<hora_exportacion>13:06</hora_exportacion>
 	</descripcion>
 	<core_informe>
 	<id>LTQ=</id>
@@ -32,7 +32,7 @@
 	<consulta_sql></consulta_sql>
 	</core_informe>
 	<core_informe_boton>
-	<id>MzQw</id>
+	<id>MzU3</id>
 	<titulo>eyRNVUxUSUxBTkdfRGV0YWxsZXN9</titulo>
 	<estilo>IGJ0biBidG4taW5mbyAgYnRuLXhzIA==</estilo>
 	<informe>LTQ=</informe>
@@ -48,7 +48,7 @@
 	</core_informe_boton>
 	<total_core_informe_boton><cantidad_objetos>1</cantidad_objetos></total_core_informe_boton>
 	<core_informe_campos>
-	<id>MTQ2Ng==</id>
+	<id>MTU1Ng==</id>
 	<informe>LTQ=</informe>
 	<valor_campo>Y29yZV9idWd0cmFja2VyLmlk</valor_campo>
 	<valor_alias></valor_alias>
@@ -58,7 +58,7 @@
 	<titulo_arbitrario></titulo_arbitrario>
 	</core_informe_campos>
 	<core_informe_campos>
-	<id>MTQ2Nw==</id>
+	<id>MTU1Nw==</id>
 	<informe>LTQ=</informe>
 	<valor_campo>Y29yZV9idWd0cmFja2VyLmZlY2hhX2FwZXJ0dXJh</valor_campo>
 	<valor_alias></valor_alias>
@@ -68,7 +68,7 @@
 	<titulo_arbitrario>eyRNVUxUSUxBTkdfQlRGZWNoYUFwZXJ0dXJhfQ==</titulo_arbitrario>
 	</core_informe_campos>
 	<core_informe_campos>
-	<id>MTQ2OA==</id>
+	<id>MTU1OA==</id>
 	<informe>LTQ=</informe>
 	<valor_campo>Y29yZV9idWd0cmFja2VyLnByb3llY3Rv</valor_campo>
 	<valor_alias></valor_alias>
@@ -78,7 +78,7 @@
 	<titulo_arbitrario>eyRNVUxUSUxBTkdfQlRQcm95ZWN0b0Fzb2NpYWRvfQ==</titulo_arbitrario>
 	</core_informe_campos>
 	<core_informe_campos>
-	<id>MTQ2OQ==</id>
+	<id>MTU1OQ==</id>
 	<informe>LTQ=</informe>
 	<valor_campo>Y29yZV9idWd0cmFja2VyLnRpdHVsbw==</valor_campo>
 	<valor_alias></valor_alias>
@@ -88,7 +88,7 @@
 	<titulo_arbitrario>eyRNVUxUSUxBTkdfVGl0dWxvfQ==</titulo_arbitrario>
 	</core_informe_campos>
 	<core_informe_campos>
-	<id>MTQ3MA==</id>
+	<id>MTU2MA==</id>
 	<informe>LTQ=</informe>
 	<valor_campo>Y29yZV9idWd0cmFja2VyLnJlcG9ydGFkb19wb3I=</valor_campo>
 	<valor_alias></valor_alias>
@@ -99,7 +99,7 @@
 	</core_informe_campos>
 	<total_core_informe_campos><cantidad_objetos>5</cantidad_objetos></total_core_informe_campos>
 	<core_informe_condiciones>
-	<id>NjU2</id>
+	<id>NzAy</id>
 	<informe>LTQ=</informe>
 	<valor_izq>Y29yZV9idWd0cmFja2VyLmVzdGFkbw==</valor_izq>
 	<operador>PD4=</operador>
@@ -108,7 +108,7 @@
 	</core_informe_condiciones>
 	<total_core_informe_condiciones><cantidad_objetos>1</cantidad_objetos></total_core_informe_condiciones>
 	<core_informe_tablas>
-	<id>MzQx</id>
+	<id>MzYx</id>
 	<informe>LTQ=</informe>
 	<valor_tabla>Y29yZV9idWd0cmFja2Vy</valor_tabla>
 	<valor_alias></valor_alias>

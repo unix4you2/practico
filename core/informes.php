@@ -1961,6 +1961,16 @@ if ($PCO_Accion=="PCO_EditarInforme")
 	<?php 
 	    $PCO_CampoBusquedaBD="id";
 	    $PCO_ValorBusquedaBD=$informe;
+	    
+	    
+	    //Busca si el informe tiene campos editables y a la vez datatables para presentar advertencia
+	    if ($registro_informe["soporte_datatable"]=="S")
+	        {
+	            $RegistroCamposEditables=PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."informe_campos WHERE informe=$PCO_ValorBusquedaBD AND editable=1 LIMIT 0,1")->fetch();
+	            if ($RegistroCamposEditables["id"]!="")
+                    PCO_Mensaje("Advertencia", "Se han detectado campos editables en informes con DataTables activado.  Esto puede generar conflictos con DataTables que relacionen registros sobre paginacion.  La edicion en caliente puede no ser efectiva.", '', 'fa fa-fw fa-2x fa-warning', 'alert alert-dismissible alert-warning');
+	        }
+	    
 	    PCO_CargarFormulario("-14",1,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,0,0);
 	?>
 
@@ -1989,6 +1999,9 @@ if ($PCO_Accion=="PCO_EditarInforme")
                 		    echo PCO_ConstruirConsultaInforme($registro_informe['id'],0);
                 		else
                 		    echo PCO_ReemplazarVariablesPHPEnCadena($registro_informe["consulta_sql"]);
+                		    
+                		//$a=PCO_GenerarEtiquetasConsulta(PCO_ReemplazarVariablesPHPEnCadena($registro_informe["consulta_sql"]));
+    				    //print_r($a);
     				 ?>
                 </div>
 			<?php

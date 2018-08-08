@@ -40,31 +40,6 @@ if ($PCO_Accion=="PCO_ReportarBugs")
         PCO_CargarFormulario("-3",1);
         //PCO_CerrarDialogoModal();
 	}
-	
-
-/* ################################################################## */
-/* ################################################################## */
-/*
-	Function: PCO_EditarConfiguracionOAuth
-	Presenta las configuraciones OAuth disponibles y da la posibilidad de cambiarlas
-*/
-if ($PCO_Accion=="PCO_EditarConfiguracionOAuth")
-	{
-		// Determina si la conexion actual de Practico esta encriptada
-		if(empty($_SERVER["HTTPS"]))
-			$protocolo_webservice="http://";
-		else
-			$protocolo_webservice="https://";
-		// Construye la URI de retorno
-		$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
-		// Construye la URI de redireccion base para concatenar el servicio especifico
-		$URI = $protocolo_webservice.$prefijo_webservice."?PCO_WSOn=1&PCO_WSId=autenticacion_oauth&OAuthSrv=";
-		
-        //PCO_AbrirDialogoModal("myModalOAUTH",$MULTILANG_ConfiguracionGeneral.": ".$MULTILANG_OauthButt,"modal-wide"); 
-        //Carga el formulario con el diseno para gestionar proveedores OAuth.  Deberia deshabilitarse su cargue en modo de diseno del mismo para permitir cambios.
-        PCO_CargarFormulario("-5",1);
-        //PCO_CerrarDialogoModal();
-	}
 
 
 /* ################################################################## */

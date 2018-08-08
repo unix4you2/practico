@@ -31,143 +31,143 @@
 	// Google
 	$APIGoogle_ClientId='';
 	$APIGoogle_ClientSecret='';
-	$APIGoogle_RedirectUri='Google';
+	$APIGoogle_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Google';
 	$APIGoogle_Template='';
 
 	// Facebook
 	$APIFacebook_ClientId='';
 	$APIFacebook_ClientSecret='';
-	$APIFacebook_RedirectUri='Facebook';
+	$APIFacebook_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Facebook';
 	$APIFacebook_Template='';
 
 	// Twitter
 	$APITwitter_ClientId='';
 	$APITwitter_ClientSecret='';
-	$APITwitter_RedirectUri='Twitter';
+	$APITwitter_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Twitter';
 	$APITwitter_Template='';
 
 	// Dropbox
 	$APIDropbox_ClientId='';
 	$APIDropbox_ClientSecret='';
-	$APIDropbox_RedirectUri='Dropbox';
+	$APIDropbox_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Dropbox';
 	$APIDropbox_Template='';
 
 	// Flickr
 	$APIFlickr_ClientId='';
 	$APIFlickr_ClientSecret='';
-	$APIFlickr_RedirectUri='Flickr';
+	$APIFlickr_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Flickr';
 	$APIFlickr_Template='';
 
 	// Microsoft
 	$APIMicrosoft_ClientId='';
 	$APIMicrosoft_ClientSecret='';
-	$APIMicrosoft_RedirectUri='Microsoft';
+	$APIMicrosoft_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Microsoft';
 	$APIMicrosoft_Template='';
 
 	// Foursquare
 	$APIFoursquare_ClientId='';
 	$APIFoursquare_ClientSecret='';
-	$APIFoursquare_RedirectUri='Foursquare';
+	$APIFoursquare_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Foursquare';
 	$APIFoursquare_Template='';
 
 	// Bitbucket
 	$APIBitbucket_ClientId='';
 	$APIBitbucket_ClientSecret='';
-	$APIBitbucket_RedirectUri='Bitbucket';
+	$APIBitbucket_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Bitbucket';
 	$APIBitbucket_Template='';
 
 	// Salesforce
 	$APISalesforce_ClientId='';
 	$APISalesforce_ClientSecret='';
-	$APISalesforce_RedirectUri='Salesforce';
+	$APISalesforce_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Salesforce';
 	$APISalesforce_Template='';
 
 	// Yahoo
 	$APIYahoo_ClientId='';
 	$APIYahoo_ClientSecret='';
-	$APIYahoo_RedirectUri='Yahoo';
+	$APIYahoo_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Yahoo';
 	$APIYahoo_Template='';
 
 	// Box
 	$APIBox_ClientId='';
 	$APIBox_ClientSecret='';
-	$APIBox_RedirectUri='Box';
+	$APIBox_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Box';
 	$APIBox_Template='';
 
 	// Disqus
 	$APIDisqus_ClientId='';
 	$APIDisqus_ClientSecret='';
-	$APIDisqus_RedirectUri='Disqus';
+	$APIDisqus_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Disqus';
 	$APIDisqus_Template='';
 
 	// RightSignature
 	$APIRightSignature_ClientId='';
 	$APIRightSignature_ClientSecret='';
-	$APIRightSignature_RedirectUri='RightSignature';
+	$APIRightSignature_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=RightSignature';
 	$APIRightSignature_Template='';
 
 	// Fitbit
 	$APIFitbit_ClientId='';
 	$APIFitbit_ClientSecret='';
-	$APIFitbit_RedirectUri='Fitbit';
+	$APIFitbit_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Fitbit';
 	$APIFitbit_Template='';
 
 	// ScoopIt
 	$APIScoopIt_ClientId='';
 	$APIScoopIt_ClientSecret='';
-	$APIScoopIt_RedirectUri='ScoopIt';
+	$APIScoopIt_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=ScoopIt';
 	$APIScoopIt_Template='';
 
 	// Tumblr
 	$APITumblr_ClientId='';
 	$APITumblr_ClientSecret='';
-	$APITumblr_RedirectUri='Tumblr';
+	$APITumblr_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Tumblr';
 	$APITumblr_Template='';
 
 	// StockTwits
 	$APIStockTwits_ClientId='';
 	$APIStockTwits_ClientSecret='';
-	$APIStockTwits_RedirectUri='StockTwits';
+	$APIStockTwits_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=StockTwits';
 	$APIStockTwits_Template='';
 
 	// LinkedIn
 	$APILinkedIn_ClientId='';
 	$APILinkedIn_ClientSecret='';
-	$APILinkedIn_RedirectUri='LinkedIn';
+	$APILinkedIn_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=LinkedIn';
 	$APILinkedIn_Template='';
 
 	// Instagram
 	$APIInstagram_ClientId='';
 	$APIInstagram_ClientSecret='';
-	$APIInstagram_RedirectUri='Instagram';
+	$APIInstagram_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Instagram';
 	$APIInstagram_Template='';
 
 	// SurveyMonkey
 	$APISurveyMonkey_ClientId='';
 	$APISurveyMonkey_ClientSecret='';
-	$APISurveyMonkey_RedirectUri='SurveyMonkey';
+	$APISurveyMonkey_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=SurveyMonkey';
 	$APISurveyMonkey_Template='';
 
 	// Eventful
 	$APIEventful_ClientId='';
 	$APIEventful_ClientSecret='';
-	$APIEventful_RedirectUri='Eventful';
+	$APIEventful_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Eventful';
 	$APIEventful_Template='';
 
 	// XING
 	$APIXING_ClientId='';
 	$APIXING_ClientSecret='';
-	$APIXING_RedirectUri='XING';
+	$APIXING_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=XING';
 	$APIXING_Template='';
 	
 	// VK
 	$APIVK_ClientId='';
 	$APIVK_ClientSecret='';
-	$APIVK_RedirectUri='VK';
+	$APIVK_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=VK';
 	$APIVK_Template='';
 	
 	// Withings
 	$APIWithings_ClientId='';
 	$APIWithings_ClientSecret='';
-	$APIWithings_RedirectUri='Withings';
+	$APIWithings_RedirectUri='http://dev.practico.org/practico/index.php?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=Withings';
 	$APIWithings_Template='';

@@ -7,8 +7,8 @@
 		<sistema_origen></sistema_origen>
 		<version></version>
 		<usuario_generador></usuario_generador>
-		<fecha_exportacion>2018-08-03</fecha_exportacion>
-		<hora_exportacion>09:59</hora_exportacion>
+		<fecha_exportacion>2018-08-08</fecha_exportacion>
+		<hora_exportacion>13:06</hora_exportacion>
 	</descripcion>
 	<core_formulario>
 	<id>LTEw</id>
@@ -23,7 +23,7 @@
 	<id_html>ZGF0b3M=</id_html>
 	</core_formulario>
 	<core_formulario_objeto>
-	<id>NjI0MA==</id>
+	<id>NjcxNw==</id>
 	<tipo>ZXRpcXVldGE=</tipo>
 	<titulo></titulo>
 	<campo></campo>
@@ -79,7 +79,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI0MQ==</id>
+	<id>NjcxOA==</id>
 	<tipo>ZXRpcXVldGE=</tipo>
 	<titulo></titulo>
 	<campo></campo>
@@ -135,7 +135,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI0Mg==</id>
+	<id>NjcxOQ==</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
 	<titulo>eyRNVUxUSUxBTkdfTm9tYnJlfQ==</titulo>
 	<campo>bm9tYnJl</campo>
@@ -191,7 +191,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI0Mw==</id>
+	<id>NjcyMA==</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
 	<titulo>eyRNVUxUSUxBTkdfU2Vydmlkb3J9</titulo>
 	<campo>c2Vydmlkb3JiZA==</campo>
@@ -247,7 +247,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI0NA==</id>
+	<id>NjcyMQ==</id>
 	<tipo>bGlzdGFfc2VsZWNjaW9u</tipo>
 	<titulo>eyRNVUxUSUxBTkdfVGlwb01vdG9yfQ==</titulo>
 	<campo>bW90b3JiZA==</campo>
@@ -303,7 +303,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI0NQ==</id>
+	<id>NjcyMg==</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
 	<titulo>eyRNVUxUSUxBTkdfQmFzZWRhdG9zfT8=</titulo>
 	<campo>YmFzZWRhdG9z</campo>
@@ -359,7 +359,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI0Ng==</id>
+	<id>NjcyMw==</id>
 	<tipo>bGlzdGFfc2VsZWNjaW9u</tipo>
 	<titulo>eyRNVUxUSUxBTkdfUmVwbGljYVRvZG99</titulo>
 	<campo>dGlwb19yZXBsaWNh</campo>
@@ -415,7 +415,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI0Nw==</id>
+	<id>NjcyNA==</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
 	<titulo>eyRNVUxUSUxBTkdfVXN1YXJpb30=</titulo>
 	<campo>dXN1YXJpb2Jk</campo>
@@ -471,7 +471,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI0OA==</id>
+	<id>NjcyNQ==</id>
 	<tipo>Ym90b25fY29tYW5kbw==</tipo>
 	<titulo>eyRNVUxUSUxBTkdfR3VhcmRhcn0=</titulo>
 	<campo></campo>
@@ -527,7 +527,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI0OQ==</id>
+	<id>NjcyNg==</id>
 	<tipo>dGV4dG9fY2xhdmU=</tipo>
 	<titulo>eyRNVUxUSUxBTkdfQ29udHJhc2VuYX0=</titulo>
 	<campo>cGFzc3dvcmRiZA==</campo>
@@ -583,7 +583,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI1MA==</id>
+	<id>NjcyNw==</id>
 	<tipo>Ym90b25fY29tYW5kbw==</tipo>
 	<titulo>eyRNVUxUSUxBTkdfQWN0dWFsaXphcn0=</titulo>
 	<campo></campo>
@@ -639,7 +639,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI1MQ==</id>
+	<id>NjcyOA==</id>
 	<tipo>Ym90b25fY29tYW5kbw==</tipo>
 	<titulo>eyRNVUxUSUxBTkdfSXJFc2NyaXRvcmlvfQ==</titulo>
 	<campo></campo>
@@ -695,7 +695,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI1Mg==</id>
+	<id>NjcyOQ==</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
 	<titulo>eyRNVUxUSUxBTkdfUHVlcnRvfQ==</titulo>
 	<campo>cHVlcnRvYmQ=</campo>
@@ -751,7 +751,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI1Mw==</id>
+	<id>NjczMA==</id>
 	<tipo>ZXRpcXVldGE=</tipo>
 	<titulo></titulo>
 	<campo></campo>
@@ -807,7 +807,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI1NA==</id>
+	<id>NjczMQ==</id>
 	<tipo>ZXRpcXVldGE=</tipo>
 	<titulo></titulo>
 	<campo></campo>
@@ -863,7 +863,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI1NQ==</id>
+	<id>NjczMg==</id>
 	<tipo>ZXRpcXVldGE=</tipo>
 	<titulo></titulo>
 	<campo></campo>
@@ -919,7 +919,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI1Ng==</id>
+	<id>NjczMw==</id>
 	<tipo>aW5mb3JtZQ==</tipo>
 	<titulo></titulo>
 	<campo></campo>
@@ -975,7 +975,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjI1Nw==</id>
+	<id>NjczNA==</id>
 	<tipo>aW5mb3JtZQ==</tipo>
 	<titulo></titulo>
 	<campo></campo>

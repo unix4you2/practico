@@ -858,7 +858,7 @@ if ($PCO_Accion=="PCO_VerMonitoreo")
 								$Tamano_iconos=" width=20 heigth=20 ";
 								$Imagen_generica_sql='<i class="fa fa-database"></i>';
 								$Imagen_generica_shell='<i class="fa fa-terminal"></i>';
-								$Sonido_alarma="inc/practico/sonidos/alarma.mp3";
+								$Sonido_alarma="inc/practico/sonidos/alarma.ogg";
 
 								// Valores de presentacion predeterminados
 								$color_fondo_estado="#CAF9CB";

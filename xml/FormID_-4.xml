@@ -7,8 +7,8 @@
 		<sistema_origen></sistema_origen>
 		<version></version>
 		<usuario_generador></usuario_generador>
-		<fecha_exportacion>2018-08-03</fecha_exportacion>
-		<hora_exportacion>09:59</hora_exportacion>
+		<fecha_exportacion>2018-08-08</fecha_exportacion>
+		<hora_exportacion>13:06</hora_exportacion>
 	</descripcion>
 	<core_formulario>
 	<id>LTQ=</id>
@@ -23,7 +23,7 @@
 	<id_html>UGFuZWxHZXN0aW9uQnVncw==</id_html>
 	</core_formulario>
 	<core_formulario_objeto>
-	<id>NjUxMQ==</id>
+	<id>Njk4OA==</id>
 	<tipo>aW5mb3JtZQ==</tipo>
 	<titulo></titulo>
 	<campo></campo>
@@ -79,7 +79,7 @@
 	<clase_contenedor>Y29sLWxnLTEyIGNvbC1tZC0xMiBjb2wtc20tMTIgY29sLXhzLTEy</clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjUxMg==</id>
+	<id>Njk4OQ==</id>
 	<tipo>ZXRpcXVldGE=</tipo>
 	<titulo></titulo>
 	<campo></campo>
@@ -135,7 +135,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjUxMw==</id>
+	<id>Njk5MA==</id>
 	<tipo>aW5mb3JtZQ==</tipo>
 	<titulo></titulo>
 	<campo></campo>
@@ -191,7 +191,7 @@
 	<clase_contenedor></clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjUxNA==</id>
+	<id>Njk5MQ==</id>
 	<tipo>aW5mb3JtZQ==</tipo>
 	<titulo></titulo>
 	<campo></campo>
@@ -247,7 +247,7 @@
 	<clase_contenedor>Y29sLWxnLTEyIGNvbC1tZC0xMiBjb2wtc20tMTIgY29sLXhzLTEy</clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjUxNQ==</id>
+	<id>Njk5Mg==</id>
 	<tipo>aW5mb3JtZQ==</tipo>
 	<titulo></titulo>
 	<campo></campo>
@@ -303,7 +303,7 @@
 	<clase_contenedor>Y29sLWxnLTQgY29sLW1kLTQgY29sLXNtLTQgY29sLXhzLTQ=</clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjUxNg==</id>
+	<id>Njk5Mw==</id>
 	<tipo>aW5mb3JtZQ==</tipo>
 	<titulo></titulo>
 	<campo></campo>
@@ -359,7 +359,7 @@
 	<clase_contenedor>Y29sLWxnLTQgY29sLW1kLTQgY29sLXNtLTQgY29sLXhzLTQ=</clase_contenedor>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>NjUxNw==</id>
+	<id>Njk5NA==</id>
 	<tipo>aW5mb3JtZQ==</tipo>
 	<titulo></titulo>
 	<campo></campo>

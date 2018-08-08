@@ -7,8 +7,8 @@
 		<sistema_origen></sistema_origen>
 		<version></version>
 		<usuario_generador></usuario_generador>
-		<fecha_exportacion>2018-08-03</fecha_exportacion>
-		<hora_exportacion>09:59</hora_exportacion>
+		<fecha_exportacion>2018-08-08</fecha_exportacion>
+		<hora_exportacion>13:06</hora_exportacion>
 	</descripcion>
 	<core_informe>
 	<id>LTE4</id>
@@ -32,7 +32,7 @@
 	<consulta_sql></consulta_sql>
 	</core_informe>
 	<core_informe_boton>
-	<id>MzM2</id>
+	<id>MzUz</id>
 	<titulo>eyRNVUxUSUxBTkdfRWxpbWluYXJ9</titulo>
 	<estilo>IGJ0biBidG4tZGFuZ2VyICBidG4teHMg</estilo>
 	<informe>LTE4</informe>
@@ -47,7 +47,7 @@
 	<imagen>ZmEgZmEtdHJhc2g=</imagen>
 	</core_informe_boton>
 	<core_informe_boton>
-	<id>MzM3</id>
+	<id>MzU0</id>
 	<titulo>eyRNVUxUSUxBTkdfRGV0YWxsZXN9</titulo>
 	<estilo>IGJ0biBidG4taW5mbyAgYnRuLXhzIA==</estilo>
 	<informe>LTE4</informe>
@@ -63,7 +63,7 @@
 	</core_informe_boton>
 	<total_core_informe_boton><cantidad_objetos>2</cantidad_objetos></total_core_informe_boton>
 	<core_informe_campos>
-	<id>MTQzMw==</id>
+	<id>MTUyMw==</id>
 	<informe>LTE4</informe>
 	<valor_campo>aWQ=</valor_campo>
 	<valor_alias></valor_alias>
@@ -73,7 +73,7 @@
 	<titulo_arbitrario></titulo_arbitrario>
 	</core_informe_campos>
 	<core_informe_campos>
-	<id>MTQzNA==</id>
+	<id>MTUyNA==</id>
 	<informe>LTE4</informe>
 	<valor_campo>cGFnaW5h</valor_campo>
 	<valor_alias></valor_alias>
@@ -83,7 +83,7 @@
 	<titulo_arbitrario>eyRNVUxUSUxBTkdfUGFnaW5hfQ==</titulo_arbitrario>
 	</core_informe_campos>
 	<core_informe_campos>
-	<id>MTQzNQ==</id>
+	<id>MTUyNQ==</id>
 	<informe>LTE4</informe>
 	<valor_campo>cGVzbw==</valor_campo>
 	<valor_alias></valor_alias>
@@ -93,7 +93,7 @@
 	<titulo_arbitrario>eyRNVUxUSUxBTkdfUGVzb30=</titulo_arbitrario>
 	</core_informe_campos>
 	<core_informe_campos>
-	<id>MTQzNg==</id>
+	<id>MTUyNg==</id>
 	<informe>LTE4</informe>
 	<valor_campo>dGlwbw==</valor_campo>
 	<valor_alias></valor_alias>
@@ -103,7 +103,7 @@
 	<titulo_arbitrario>eyRNVUxUSUxBTkdfVGlwb30=</titulo_arbitrario>
 	</core_informe_campos>
 	<core_informe_campos>
-	<id>MTQzNw==</id>
+	<id>MTUyNw==</id>
 	<informe>LTE4</informe>
 	<valor_campo>bm9tYnJl</valor_campo>
 	<valor_alias></valor_alias>
@@ -113,7 +113,7 @@
 	<titulo_arbitrario>eyRNVUxUSUxBTkdfTm9tYnJlfQ==</titulo_arbitrario>
 	</core_informe_campos>
 	<core_informe_campos>
-	<id>MTQzOA==</id>
+	<id>MTUyOA==</id>
 	<informe>LTE4</informe>
 	<valor_campo>bWlsaXNlZ3VuZG9zX2xlY3R1cmE=</valor_campo>
 	<valor_alias></valor_alias>
@@ -125,7 +125,7 @@
 	<total_core_informe_campos><cantidad_objetos>6</cantidad_objetos></total_core_informe_campos>
 	<total_core_informe_condiciones><cantidad_objetos>0</cantidad_objetos></total_core_informe_condiciones>
 	<core_informe_tablas>
-	<id>MzMz</id>
+	<id>MzUz</id>
 	<informe>LTE4</informe>
 	<valor_tabla>Y29yZV9tb25pdG9yZW8=</valor_tabla>
 	<valor_alias></valor_alias>

@@ -20,8 +20,12 @@ core/informes.php
 core/marco_forms.php
 core/marco_nav.php
 core/menus.php
+core/mantenimiento.php
 core/monitoreo.php
 core/objetos.php
+core/ws_funciones.php
+core/ws_nucleo.php
+inc/practico/sonidos/alarma.ogg
 
 xml/*
 inc/practico/idiomas/*
@@ -40,6 +44,12 @@ LogCambios="
 * Enhan: Actualizada alarma de monitoreo a formato OGG para compatibilidad con reproduccion automatica en navegadores sin necesidad de codecs extra.
 * Fixed: Cuando valores de cronometro en monitoreo sobrepasan el limite cero (negativos en conteo) autoenvia formulario de monitoreo al bajar de -10 segundos.
 * Fixed: Preautorización de funcion interna PCO_CargarObjeto para evitar su registro en funciones autorizadas
+* Fixed: Los valores de URI de redireccion para configuraciones OAuth son ahora calculados nuevamente de manera automática.  Los campos en configuración quedan como solo lectura con ayudas de formato.
+
+LEAME: ADVERTENCIA: Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada de acciones internas, las siguientes acciones han cambiado de nombre:
+Accion autenticacion_oauth cambia a PCO_AutenticacionOauth  Esto puede implicar cambiar sus API de redireccion con los proveedores asociados.
+
+
 "
 
 ########################################################################

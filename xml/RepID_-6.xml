@@ -7,8 +7,8 @@
 		<sistema_origen></sistema_origen>
 		<version></version>
 		<usuario_generador></usuario_generador>
-		<fecha_exportacion>2018-08-03</fecha_exportacion>
-		<hora_exportacion>09:59</hora_exportacion>
+		<fecha_exportacion>2018-08-08</fecha_exportacion>
+		<hora_exportacion>13:06</hora_exportacion>
 	</descripcion>
 	<core_informe>
 	<id>LTY=</id>
@@ -33,7 +33,7 @@
 	</core_informe>
 	<total_core_informe_boton><cantidad_objetos>0</cantidad_objetos></total_core_informe_boton>
 	<core_informe_campos>
-	<id>MTQ1Nw==</id>
+	<id>MTU0Nw==</id>
 	<informe>LTY=</informe>
 	<valor_campo>Y29yZV9idWd0cmFja2VyLmNhdGVnb3JpYQ==</valor_campo>
 	<valor_alias>Q2F0ZWdvcmlh</valor_alias>
@@ -43,7 +43,7 @@
 	<titulo_arbitrario></titulo_arbitrario>
 	</core_informe_campos>
 	<core_informe_campos>
-	<id>MTQ1OA==</id>
+	<id>MTU0OA==</id>
 	<informe>LTY=</informe>
 	<valor_campo>Q09VTlQoY29yZV9idWd0cmFja2VyLmlkKQ==</valor_campo>
 	<valor_alias>Q29udGVv</valor_alias>
@@ -55,7 +55,7 @@
 	<total_core_informe_campos><cantidad_objetos>2</cantidad_objetos></total_core_informe_campos>
 	<total_core_informe_condiciones><cantidad_objetos>0</cantidad_objetos></total_core_informe_condiciones>
 	<core_informe_tablas>
-	<id>MzM4</id>
+	<id>MzU4</id>
 	<informe>LTY=</informe>
 	<valor_tabla>Y29yZV9idWd0cmFja2Vy</valor_tabla>
 	<valor_alias></valor_alias>

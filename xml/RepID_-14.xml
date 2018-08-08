@@ -7,8 +7,8 @@
 		<sistema_origen></sistema_origen>
 		<version></version>
 		<usuario_generador></usuario_generador>
-		<fecha_exportacion>2018-08-03</fecha_exportacion>
-		<hora_exportacion>09:59</hora_exportacion>
+		<fecha_exportacion>2018-08-08</fecha_exportacion>
+		<hora_exportacion>13:06</hora_exportacion>
 	</descripcion>
 	<core_informe>
 	<id>LTE0</id>
@@ -33,7 +33,7 @@
 	</core_informe>
 	<total_core_informe_boton><cantidad_objetos>0</cantidad_objetos></total_core_informe_boton>
 	<core_informe_campos>
-	<id>MTQ4Ng==</id>
+	<id>MTU3Ng==</id>
 	<informe>LTE0</informe>
 	<valor_campo>Y29yZV9hdWRpdG9yaWEuaWQ=</valor_campo>
 	<valor_alias>SUQ=</valor_alias>
@@ -43,7 +43,7 @@
 	<titulo_arbitrario></titulo_arbitrario>
 	</core_informe_campos>
 	<core_informe_campos>
-	<id>MTQ4Nw==</id>
+	<id>MTU3Nw==</id>
 	<informe>LTE0</informe>
 	<valor_campo>Y29yZV9hdWRpdG9yaWEudXN1YXJpb19sb2dpbg==</valor_campo>
 	<valor_alias></valor_alias>
@@ -53,7 +53,7 @@
 	<titulo_arbitrario>eyRNVUxUSUxBTkdfVXNyTG9naW59</titulo_arbitrario>
 	</core_informe_campos>
 	<core_informe_campos>
-	<id>MTQ4OA==</id>
+	<id>MTU3OA==</id>
 	<informe>LTE0</informe>
 	<valor_campo>Y29yZV9hdWRpdG9yaWEuZmVjaGE=</valor_campo>
 	<valor_alias></valor_alias>
@@ -63,7 +63,7 @@
 	<titulo_arbitrario>eyRNVUxUSUxBTkdfRmVjaGF9</titulo_arbitrario>
 	</core_informe_campos>
 	<core_informe_campos>
-	<id>MTQ4OQ==</id>
+	<id>MTU3OQ==</id>
 	<informe>LTE0</informe>
 	<valor_campo>Y29yZV9hdWRpdG9yaWEuaG9yYQ==</valor_campo>
 	<valor_alias></valor_alias>
@@ -73,7 +73,7 @@
 	<titulo_arbitrario>eyRNVUxUSUxBTkdfSG9yYX0=</titulo_arbitrario>
 	</core_informe_campos>
 	<core_informe_campos>
-	<id>MTQ5MA==</id>
+	<id>MTU4MA==</id>
 	<informe>LTE0</informe>
 	<valor_campo>Q09VTlQoY29yZV9hdWRpdG9yaWEuaWQp</valor_campo>
 	<valor_alias>Q29udGVv</valor_alias>
@@ -83,7 +83,7 @@
 	<titulo_arbitrario></titulo_arbitrario>
 	</core_informe_campos>
 	<core_informe_campos>
-	<id>MTQ5MQ==</id>
+	<id>MTU4MQ==</id>
 	<informe>LTE0</informe>
 	<valor_campo>SE9VUihjb3JlX2F1ZGl0b3JpYS5ob3JhKQ==</valor_campo>
 	<valor_alias>SG9yYVBpY28=</valor_alias>
@@ -94,7 +94,7 @@
 	</core_informe_campos>
 	<total_core_informe_campos><cantidad_objetos>6</cantidad_objetos></total_core_informe_campos>
 	<core_informe_condiciones>
-	<id>NjY1</id>
+	<id>NzEx</id>
 	<informe>LTE0</informe>
 	<valor_izq>Y29yZV9hdWRpdG9yaWEuZmVjaGE=</valor_izq>
 	<operador>Pj0=</operador>
@@ -102,7 +102,7 @@
 	<peso>MQ==</peso>
 	</core_informe_condiciones>
 	<core_informe_condiciones>
-	<id>NjY2</id>
+	<id>NzEy</id>
 	<informe>LTE0</informe>
 	<valor_izq>QU5E</valor_izq>
 	<operador></operador>
@@ -110,7 +110,7 @@
 	<peso>Mg==</peso>
 	</core_informe_condiciones>
 	<core_informe_condiciones>
-	<id>NjY3</id>
+	<id>NzEz</id>
 	<informe>LTE0</informe>
 	<valor_izq>Y29yZV9hdWRpdG9yaWEuZmVjaGE=</valor_izq>
 	<operador>PD0=</operador>
@@ -118,7 +118,7 @@
 	<peso>Mw==</peso>
 	</core_informe_condiciones>
 	<core_informe_condiciones>
-	<id>NjY4</id>
+	<id>NzE0</id>
 	<informe>LTE0</informe>
 	<valor_izq>QU5E</valor_izq>
 	<operador></operador>
@@ -126,7 +126,7 @@
 	<peso>NA==</peso>
 	</core_informe_condiciones>
 	<core_informe_condiciones>
-	<id>NjY5</id>
+	<id>NzE1</id>
 	<informe>LTE0</informe>
 	<valor_izq>Y29yZV9hdWRpdG9yaWEuYWNjaW9u</valor_izq>
 	<operador>TElLRQ==</operador>
@@ -134,7 +134,7 @@
 	<peso>NQ==</peso>
 	</core_informe_condiciones>
 	<core_informe_condiciones>
-	<id>Njcw</id>
+	<id>NzE2</id>
 	<informe>LTE0</informe>
 	<valor_izq>QU5E</valor_izq>
 	<operador></operador>
@@ -142,7 +142,7 @@
 	<peso>Ng==</peso>
 	</core_informe_condiciones>
 	<core_informe_condiciones>
-	<id>Njcx</id>
+	<id>NzE3</id>
 	<informe>LTE0</informe>
 	<valor_izq>Y29yZV9hdWRpdG9yaWEudXN1YXJpb19sb2dpbg==</valor_izq>
 	<operador>TElLRQ==</operador>
@@ -151,7 +151,7 @@
 	</core_informe_condiciones>
 	<total_core_informe_condiciones><cantidad_objetos>7</cantidad_objetos></total_core_informe_condiciones>
 	<core_informe_tablas>
-	<id>MzQ0</id>
+	<id>MzY0</id>
 	<informe>LTE0</informe>
 	<valor_tabla>Y29yZV9hdWRpdG9yaWE=</valor_tabla>
 	<valor_alias></valor_alias>

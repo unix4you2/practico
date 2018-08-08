@@ -167,7 +167,7 @@ if (@$PCO_WSId=="verificar_credenciales")
 	Agrega usuarios de manera automatica cuando son autenticados por OAuth
 
 	Ver tambien:
-		<autenticacion_oauth> | <ejecutar_login_oauth>
+		<PCO_AutenticacionOauth> | <ejecutar_login_oauth>
 */
 	function oauth_crear_usuario($OAuth_servicio,$login_chk='',$nombre_chk='',$correo_chk='',$interno_chk=0,$plantilla_permisos_chk='')
 		{
@@ -303,7 +303,7 @@ if (@$PCO_WSId=="verificar_credenciales")
 	Presenta mensajes de error durante la autenticacion
 
 	Ver tambien:
-		<autenticacion_oauth> | <aprobar_oauth>
+		<PCO_AutenticacionOauth> | <aprobar_oauth>
 */
 function error_oauth($client,$OAuth_servicio)
 	{
@@ -315,7 +315,7 @@ function error_oauth($client,$OAuth_servicio)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: autenticacion_oauth
+	Function: PCO_AutenticacionOauth
 	Realiza proceso de autenticacion hacia servidores OAuth 1.0 y 2.0
 
 	Variables de entrada:
@@ -328,7 +328,7 @@ function error_oauth($client,$OAuth_servicio)
 	Ver tambien:
 		<Iniciar_login>
 */
-if (@$PCO_WSId=="autenticacion_oauth") 
+if (@$PCO_WSId=="PCO_AutenticacionOauth") 
 	{
 		require('inc/http/http.php');			// Incluye funciones del cliente HTTP para conexiones desde PHP
 		require('inc/oauth/oauth_client.php');	// Incluye las librerias del modulo OAuth 1.0 y 2.0

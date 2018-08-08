@@ -4033,7 +4033,7 @@ function PCO_CrearFormularioOauth($sitio)
             <form name="login_'.$sitio.'" method="POST" action="'.$ArchivoCORE.'" style="margin: 2; display: inline!important;">
             <input type="hidden" name="PCO_WSOn" value="1">
             <input type="hidden" name="OAuthSrv" value="'.$sitio.'">
-            <input type="hidden" name="PCO_WSId" value="autenticacion_oauth">
+            <input type="hidden" name="PCO_WSId" value="PCO_AutenticacionOauth">
             <!--232x86|150x56|94x35|81x30-->
             <button type="submit" class="btn btn-default  btn-default btn-lg" style="margin:10px; background-size: 100%; height: 56px; width:150px; background-position : center center; background-repeat:no-repeat; background-image : url(inc/oauth/logos/'.strtolower($sitio).'.png); ">&nbsp;</button>
             </form>';
