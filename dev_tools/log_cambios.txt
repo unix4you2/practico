@@ -26,6 +26,7 @@ core/objetos.php
 core/ws_funciones.php
 core/ws_nucleo.php
 inc/practico/sonidos/alarma.ogg
+inc/http/http.php
 
 xml/*
 inc/practico/idiomas/*
@@ -42,6 +43,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 * Enhan: Actualizada alarma de monitoreo a formato OGG para compatibilidad con reproduccion automatica en navegadores sin necesidad de codecs extra.
+* Enhan: Actualizacion de version 1.92 a 1.94 del cliente HTTP para PHP.
 * Fixed: Cuando valores de cronometro en monitoreo sobrepasan el limite cero (negativos en conteo) autoenvia formulario de monitoreo al bajar de -10 segundos.
 * Fixed: Preautorización de funcion interna PCO_CargarObjeto para evitar su registro en funciones autorizadas
 * Fixed: Los valores de URI de redireccion para configuraciones OAuth son ahora calculados nuevamente de manera automática.  Los campos en configuración quedan como solo lectura con ayudas de formato.
