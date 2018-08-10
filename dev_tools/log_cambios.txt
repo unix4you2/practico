@@ -28,6 +28,7 @@ core/ws_nucleo.php
 inc/practico/sonidos/alarma.ogg
 inc/http/http.php
 inc/oauth/oauth_client.php
+inc/oauth/logos/*
 
 xml/*
 inc/practico/idiomas/*
@@ -43,7 +44,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Ahora se soportan más de XXX proveedores OAuth.  Agregados: 
+* Added: Ahora se soportan más de 60 proveedores OAuth.  Agregados: 37Signals,Amazon,AOL,Bitly,Buffer,Copy,Dailymotion,Discogs,Etsy,Fitbit2,Garmin,Garmin2Legged,Google1,iHealth,imgur,Infusionsoft,Intuit,Jawbone,LinkedIn2,Livecoding,MailChimp,Mavenlink,mail.ru,Meetup,MicrosoftOpenIDConnect,Misfit,oDesk,Odnoklassniki,Paypal,PaypalSandbox,PaypalApplication,Pinterest,Rdio,Reddit,RunKeeper,Uber,TeamViewer,Twitter2,Vimeo,Wordpress,Xero,Yammer,Yandex
 * Enhan: Actualizada alarma de monitoreo a formato OGG para compatibilidad con reproduccion automatica en navegadores sin necesidad de codecs extra.
 * Enhan: Actualizacion de version 1.92 a 1.94 del cliente HTTP para PHP.
 * Enhan: Actualizacion de version 1.109 a 1.165 del cliente OAuth para PHP.
@@ -53,6 +54,8 @@ LogCambios="
 
 LEAME: ADVERTENCIA: Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada de acciones internas, las siguientes acciones han cambiado de nombre:
 Accion autenticacion_oauth cambia a PCO_AutenticacionOauth  Esto puede implicar cambiar sus API de redireccion con los proveedores asociados.
+
+
 
 
 "

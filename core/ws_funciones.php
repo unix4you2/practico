@@ -620,6 +620,475 @@ if (@$PCO_WSId=="PCO_AutenticacionOauth")
 				$OAuth_DepuracionHttp=true;
 			}
 
+		// 37Signals
+		if ($OAuth_servicio=='37Signals')	
+			{
+				$OAuth_URIRedireccion=$API37Signals_RedirectUri;
+				$OAuth_IDCliente=$API37Signals_ClientId;
+				$OAuth_SecretoCliente=$API37Signals_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de 37Signals https://integrate.37signals.com/apps/new y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Amazon
+		if ($OAuth_servicio=='Amazon')	
+			{
+				$OAuth_URIRedireccion=$APIAmazon_RedirectUri;
+				$OAuth_IDCliente=$APIAmazon_ClientId;
+				$OAuth_SecretoCliente=$APIAmazon_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Amazon https://sellercentral.amazon.com/gp/homepage.html y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// AOL
+		if ($OAuth_servicio=='AOL')	
+			{
+				$OAuth_URIRedireccion=$APIAOL_RedirectUri;
+				$OAuth_IDCliente=$APIAOL_ClientId;
+				$OAuth_SecretoCliente=$APIAOL_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de AOL y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Bitly
+		if ($OAuth_servicio=='Bitly')	
+			{
+				$OAuth_URIRedireccion=$APIBitly_RedirectUri;
+				$OAuth_IDCliente=$APIBitly_ClientId;
+				$OAuth_SecretoCliente=$APIBitly_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Bitly https://bitly.com/a/oauth_apps y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Buffer
+		if ($OAuth_servicio=='Buffer')	
+			{
+				$OAuth_URIRedireccion=$APIBuffer_RedirectUri;
+				$OAuth_IDCliente=$APIBuffer_ClientId;
+				$OAuth_SecretoCliente=$APIBuffer_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Buffer https://bufferapp.com/developers/apps/create y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Copy
+		if ($OAuth_servicio=='Copy')	
+			{
+				$OAuth_URIRedireccion=$APICopy_RedirectUri;
+				$OAuth_IDCliente=$APICopy_ClientId;
+				$OAuth_SecretoCliente=$APICopy_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Copy https://developers.copy.com/applications/create y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Dailymotion
+		if ($OAuth_servicio=='Dailymotion')	
+			{
+				$OAuth_URIRedireccion=$APIDailymotion_RedirectUri;
+				$OAuth_IDCliente=$APIDailymotion_ClientId;
+				$OAuth_SecretoCliente=$APIDailymotion_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Dailymotion http://www.dailymotion.com/profile/developer/new y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Discogs
+		if ($OAuth_servicio=='Discogs')	
+			{
+				$OAuth_URIRedireccion=$APIDiscogs_RedirectUri;
+				$OAuth_IDCliente=$APIDiscogs_ClientId;
+				$OAuth_SecretoCliente=$APIDiscogs_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Discogs http://www.discogs.com/applications/edit y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Etsy
+		if ($OAuth_servicio=='Etsy')	
+			{
+				$OAuth_URIRedireccion=$APIEtsy_RedirectUri;
+				$OAuth_IDCliente=$APIEtsy_ClientId;
+				$OAuth_SecretoCliente=$APIEtsy_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Etsy https://www.etsy.com/developers/register y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Fitbit2
+		if ($OAuth_servicio=='Fitbit2')	
+			{
+				$OAuth_URIRedireccion=$APIFitbit2_RedirectUri;
+				$OAuth_IDCliente=$APIFitbit2_ClientId;
+				$OAuth_SecretoCliente=$APIFitbit2_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Fitbit2 https://dev.fitbit.com/apps/new y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Garmin
+		if ($OAuth_servicio=='Garmin')	
+			{
+				$OAuth_URIRedireccion=$APIGarmin_RedirectUri;
+				$OAuth_IDCliente=$APIGarmin_ClientId;
+				$OAuth_SecretoCliente=$APIGarmin_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Garmin y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Garmin2Legged
+		if ($OAuth_servicio=='Garmin2Legged')	
+			{
+				$OAuth_URIRedireccion=$APIGarmin2Legged_RedirectUri;
+				$OAuth_IDCliente=$APIGarmin2Legged_ClientId;
+				$OAuth_SecretoCliente=$APIGarmin2Legged_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Garmin2Legged y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// iHealth
+		if ($OAuth_servicio=='iHealth')	
+			{
+				$OAuth_URIRedireccion=$APIiHealth_RedirectUri;
+				$OAuth_IDCliente=$APIiHealth_ClientId;
+				$OAuth_SecretoCliente=$APIiHealth_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de iHealth http://developer.ihealthlabs.com/developerappaddpage.htm y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// imgur
+		if ($OAuth_servicio=='imgur')	
+			{
+				$OAuth_URIRedireccion=$APIimgur_RedirectUri;
+				$OAuth_IDCliente=$APIimgur_ClientId;
+				$OAuth_SecretoCliente=$APIimgur_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de imgur https://api.imgur.com/oauth2/addclient y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Infusionsoft
+		if ($OAuth_servicio=='Infusionsoft')	
+			{
+				$OAuth_URIRedireccion=$APIInfusionsoft_RedirectUri;
+				$OAuth_IDCliente=$APIInfusionsoft_ClientId;
+				$OAuth_SecretoCliente=$APIInfusionsoft_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Infusionsoft https://keys.developer.infusionsoft.com/apps/register y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Intuit
+		if ($OAuth_servicio=='Intuit')	
+			{
+				$OAuth_URIRedireccion=$APIIntuit_RedirectUri;
+				$OAuth_IDCliente=$APIIntuit_ClientId;
+				$OAuth_SecretoCliente=$APIIntuit_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Intuit https://developer.intuit.com/ y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Jawbone
+		if ($OAuth_servicio=='Jawbone')	
+			{
+				$OAuth_URIRedireccion=$APIJawbone_RedirectUri;
+				$OAuth_IDCliente=$APIJawbone_ClientId;
+				$OAuth_SecretoCliente=$APIJawbone_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Jawbone https://jawbone.com/up/developer/account/ y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// LinkedIn2
+		if ($OAuth_servicio=='LinkedIn2')	
+			{
+				$OAuth_URIRedireccion=$APILinkedIn2_RedirectUri;
+				$OAuth_IDCliente=$APILinkedIn2_ClientId;
+				$OAuth_SecretoCliente=$APILinkedIn2_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de LinkedIn2 https://www.linkedin.com/secure/developer?newapp= y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Livecoding
+		if ($OAuth_servicio=='Livecoding')	
+			{
+				$OAuth_URIRedireccion=$APILivecoding_RedirectUri;
+				$OAuth_IDCliente=$APILivecoding_ClientId;
+				$OAuth_SecretoCliente=$APILivecoding_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Livecoding https://www.livecoding.tv/developer/applications/register/ y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// MailChimp
+		if ($OAuth_servicio=='MailChimp')	
+			{
+				$OAuth_URIRedireccion=$APIMailChimp_RedirectUri;
+				$OAuth_IDCliente=$APIMailChimp_ClientId;
+				$OAuth_SecretoCliente=$APIMailChimp_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de MailChimp https://admin.mailchimp.com/account/api/ y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Mavenlink
+		if ($OAuth_servicio=='Mavenlink')	
+			{
+				$OAuth_URIRedireccion=$APIMavenlink_RedirectUri;
+				$OAuth_IDCliente=$APIMavenlink_ClientId;
+				$OAuth_SecretoCliente=$APIMavenlink_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Mavenlink https://app.mavenlink.com/oauth/applications/new y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Meetup
+		if ($OAuth_servicio=='Meetup')	
+			{
+				$OAuth_URIRedireccion=$APIMeetup_RedirectUri;
+				$OAuth_IDCliente=$APIMeetup_ClientId;
+				$OAuth_SecretoCliente=$APIMeetup_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Meetup https://secure.meetup.com/meetup_api/oauth_consumers/ y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// MicrosoftOpenIDConnect
+		if ($OAuth_servicio=='MicrosoftOpenIDConnect')	
+			{
+				$OAuth_URIRedireccion=$APIMicrosoftOpenIDConnect_RedirectUri;
+				$OAuth_IDCliente=$APIMicrosoftOpenIDConnect_ClientId;
+				$OAuth_SecretoCliente=$APIMicrosoftOpenIDConnect_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de MicrosoftOpenIDConnect https://apps.dev.microsoft.com/ y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Misfit
+		if ($OAuth_servicio=='Misfit')	
+			{
+				$OAuth_URIRedireccion=$APIMisfit_RedirectUri;
+				$OAuth_IDCliente=$APIMisfit_ClientId;
+				$OAuth_SecretoCliente=$APIMisfit_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Misfit https://developers.misfit.com/apps y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// oDesk
+		if ($OAuth_servicio=='oDesk')	
+			{
+				$OAuth_URIRedireccion=$APIoDesk_RedirectUri;
+				$OAuth_IDCliente=$APIoDesk_ClientId;
+				$OAuth_SecretoCliente=$APIoDesk_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de oDesk https://www.odesk.com/services/api/apply y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Odnoklassniki
+		if ($OAuth_servicio=='Odnoklassniki')	
+			{
+				$OAuth_URIRedireccion=$APIOdnoklassniki_RedirectUri;
+				$OAuth_IDCliente=$APIOdnoklassniki_ClientId;
+				$OAuth_SecretoCliente=$APIOdnoklassniki_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Odnoklassniki https://ok.ru/dk?st.cmd=appEditBasic&st._aid=Apps_Info_MyDev_AddApp&st.vpl.mini=false y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Paypal
+		if ($OAuth_servicio=='Paypal')	
+			{
+				$OAuth_URIRedireccion=$APIPaypal_RedirectUri;
+				$OAuth_IDCliente=$APIPaypal_ClientId;
+				$OAuth_SecretoCliente=$APIPaypal_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Paypal https://developer.paypal.com/webapps/developer/applications/myapps y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Pinterest
+		if ($OAuth_servicio=='Pinterest')	
+			{
+				$OAuth_URIRedireccion=$APIPinterest_RedirectUri;
+				$OAuth_IDCliente=$APIPinterest_ClientId;
+				$OAuth_SecretoCliente=$APIPinterest_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Pinterest https://developers.pinterest.com/apps/ y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Rdio
+		if ($OAuth_servicio=='Rdio')	
+			{
+				$OAuth_URIRedireccion=$APIRdio_RedirectUri;
+				$OAuth_IDCliente=$APIRdio_ClientId;
+				$OAuth_SecretoCliente=$APIRdio_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Rdio http://rdio.mashery.com/apps/register y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Reddit
+		if ($OAuth_servicio=='Reddit')	
+			{
+				$OAuth_URIRedireccion=$APIReddit_RedirectUri;
+				$OAuth_IDCliente=$APIReddit_ClientId;
+				$OAuth_SecretoCliente=$APIReddit_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Reddit https://ssl.reddit.com/prefs/apps y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// RunKeeper
+		if ($OAuth_servicio=='RunKeeper')	
+			{
+				$OAuth_URIRedireccion=$APIRunKeeper_RedirectUri;
+				$OAuth_IDCliente=$APIRunKeeper_ClientId;
+				$OAuth_SecretoCliente=$APIRunKeeper_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de RunKeeper http://runkeeper.com/partner/applications/register y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Uber
+		if ($OAuth_servicio=='Uber')	
+			{
+				$OAuth_URIRedireccion=$APIUber_RedirectUri;
+				$OAuth_IDCliente=$APIUber_ClientId;
+				$OAuth_SecretoCliente=$APIUber_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Uber https://developer.uber.com/dashboard/create y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// TeamViewer
+		if ($OAuth_servicio=='TeamViewer')	
+			{
+				$OAuth_URIRedireccion=$APITeamViewer_RedirectUri;
+				$OAuth_IDCliente=$APITeamViewer_ClientId;
+				$OAuth_SecretoCliente=$APITeamViewer_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de TeamViewer https://login.teamviewer.com/nav/api y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Twitter2
+		if ($OAuth_servicio=='Twitter2')	
+			{
+				$OAuth_URIRedireccion=$APITwitter2_RedirectUri;
+				$OAuth_IDCliente=$APITwitter2_ClientId;
+				$OAuth_SecretoCliente=$APITwitter2_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Twitter2 https://dev.twitter.com/apps/new y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Vimeo
+		if ($OAuth_servicio=='Vimeo')	
+			{
+				$OAuth_URIRedireccion=$APIVimeo_RedirectUri;
+				$OAuth_IDCliente=$APIVimeo_ClientId;
+				$OAuth_SecretoCliente=$APIVimeo_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Vimeo https://developer.vimeo.com/apps/new y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Wordpress
+		if ($OAuth_servicio=='Wordpress')	
+			{
+				$OAuth_URIRedireccion=$APIWordpress_RedirectUri;
+				$OAuth_IDCliente=$APIWordpress_ClientId;
+				$OAuth_SecretoCliente=$APIWordpress_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Wordpress https://developer.wordpress.com/apps/new/ y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Xero
+		if ($OAuth_servicio=='Xero')	
+			{
+				$OAuth_URIRedireccion=$APIXero_RedirectUri;
+				$OAuth_IDCliente=$APIXero_ClientId;
+				$OAuth_SecretoCliente=$APIXero_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Xero https://api.xero.com/Application/Add y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Yammer
+		if ($OAuth_servicio=='Yammer')	
+			{
+				$OAuth_URIRedireccion=$APIYammer_RedirectUri;
+				$OAuth_IDCliente=$APIYammer_ClientId;
+				$OAuth_SecretoCliente=$APIYammer_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Yammer https://www.yammer.com/client_applications y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+		// Yandex
+		if ($OAuth_servicio=='Yandex')	
+			{
+				$OAuth_URIRedireccion=$APIYandex_RedirectUri;
+				$OAuth_IDCliente=$APIYandex_ClientId;
+				$OAuth_SecretoCliente=$APIYandex_ClientSecret;
+				$OAuth_Mensaje="Vaya a APIs de Yandex https://oauth.yandex.com/client/new y agregue una aplicacion para obtener el ID, Secreto y URI";
+				$OAuth_Alcance='';
+				$OAuth_Depuracion=false;
+				$OAuth_DepuracionHttp=true;
+			}
+
+
 		// Define parametros del cliente segun el servicio detectado
 		$client->server = $OAuth_servicio;
 		// Establecerlo solo si se necesita llamar al API sin el usuario presente y el token puede expirar
