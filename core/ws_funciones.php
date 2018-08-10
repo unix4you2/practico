@@ -225,7 +225,7 @@ if (@$PCO_WSId=="verificar_credenciales")
 			if ($OAuth_servicio=='Facebook')
 				{
 					// Otros disponibles: id,name,first_name,middle_name,last_name, link, username, education(arreglo:school[id,name],type),gender (male|female),email, timezone,locale (es_LA...),verified,updated_time
-					$login_chk=$user->username;
+					$login_chk=$user->id;
 					$nombre_chk=$user->name;
 					$correo_chk=$user->email;
 					$plantilla_origen_permisos=$APIFacebook_Template;
