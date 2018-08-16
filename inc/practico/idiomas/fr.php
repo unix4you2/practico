@@ -496,7 +496,7 @@
 	$MULTILANG_FrmTitFila='Est-ce que Practico doit utiliser une ligne complète pour l objet?';
 	$MULTILANG_FrmDesFila='Permet d afficher l objet dans une ligne unique de la table utilisée dans le formulaire';
 	$MULTILANG_FrmLista='Liste des options';
-	$MULTILANG_FrmTitLista='Quelles options doivent être choisies. Entrez un caractère virgule uniquement pour dire Practico qui a mis une valeur vide au début. Laissez en blanc pour utiliser par défaut le premier enregistrement créé.';
+	$MULTILANG_FrmTitLista='Quelles options doivent être choisies. Entrez un caractère virgule uniquement pour dire Practico qui a mis une valeur vide au début. Laissez en blanc pour utiliser par défaut le premier enregistrement créé.      Enter _OPTGROUP_|Label to group some options and _OPTGROUP_ only to close groups of options.';
 	$MULTILANG_FrmDesLista='Entrez une liste d options séparées par des virgules. Si vous avez besoin de prendre dynamiquement la table d options à partir d une autre application pour utiliser les champs Source de données pour les options. Doit remplir les deux options (liste fixe et source de données), le résultat sera la combinaison';
 	$MULTILANG_FrmDesLista2='Virgules séparées';
 	$MULTILANG_FrmOrigen='Source de la liste d options';
@@ -505,7 +505,7 @@
 	$MULTILANG_FrmTitOrigen2='Qu est-ce que c est?';
 	$MULTILANG_FrmOrigenVal='Liste des valeurs source';
 	$MULTILANG_FrmTitOrigenVal='Vous devez spécifier la même source (table) dans la liste des options';
-	$MULTILANG_FrmDesOrigenVal='Champ à partir duquel les valeurs sont prises en interne (à traiter) pour chaque option de la liste';
+	$MULTILANG_FrmDesOrigenVal='Champ à partir duquel les valeurs sont prises en interne (à traiter) pour chaque option de la liste.    If the field value contains _OPTGROUP_|Label this will create a group of options and if the value is  _OPTGROUP_ only then this will close the group of options.';
 	$MULTILANG_FrmEtiqueta='Valeur de l étiquette (elle sera imprimée sur le formulaire au format HTML)';
 	$MULTILANG_FrmURL='URL IFrame';
 	$MULTILANG_FrmDesURL='Entrez l adresse de la page qui sera incorporée dans l IFrame';

@@ -494,7 +494,7 @@
 	$MULTILANG_FrmTitFila='Se debe utilizar una fila completa para el objeto?';
 	$MULTILANG_FrmDesFila='Permite desplegar el objeto en una fila exclusiva de la tabla usada en el formulario';
 	$MULTILANG_FrmLista='Lista de opciones';
-	$MULTILANG_FrmTitLista='Qu&eacute; opciones aparecen para ser escogidas.  Ingrese una coma solamente para indicar que se desea el valor predeterminado como vacio.  Dejar vacio para que se tome el primer valor del registro.';
+	$MULTILANG_FrmTitLista='Qu&eacute; opciones aparecen para ser escogidas.  Ingrese una coma solamente para indicar que se desea el valor predeterminado como vacio.  Dejar vacio para que se tome el primer valor del registro.  Ingrese _OPTGROUP_|Etiqueta para generar grupos de opciones y _OPTGROUP_ solo para cerrar grupos de opciones.';
 	$MULTILANG_FrmDesLista='Ingrese una lista de opciones separadas por coma.  Si requiere tomar las opciones din&aacute;micamente desde otra tabla de la aplicaci&oacute;n utilice los campos de Origen de datos para opciones.  En caso de llenar ambas opciones (lista fija y origen de datos) el resultado ser&aacute; su combinaci&oacute;n';
 	$MULTILANG_FrmDesLista2='Separadas por coma';
 	$MULTILANG_FrmOrigen='Origen de la lista de opciones';
@@ -503,7 +503,7 @@
 	$MULTILANG_FrmTitOrigen2='Que es esto?';
 	$MULTILANG_FrmOrigenVal='Origen de la lista de valores';
 	$MULTILANG_FrmTitOrigenVal='Debe especificar el mismo origen (tabla) de la lista de opciones';
-	$MULTILANG_FrmDesOrigenVal='Campo desde el cual se toman los valores internos (a ser procesados) para cada opcion de la lista';
+	$MULTILANG_FrmDesOrigenVal='Campo desde el cual se toman los valores internos (a ser procesados) para cada opcion de la lista.    Si el campo contiene _OPTGROUP_|Etiqueta se genera un grupo de opciones y  si contiene _OPTGROUP_ solo se cierra un grupo de opciones.';
 	$MULTILANG_FrmEtiqueta='Valor de la etiqueta (ser&aacute; impresa en el formulario en formato HTML)';
 	$MULTILANG_FrmURL='URL para IFrame';
 	$MULTILANG_FrmDesURL='Ingrese la direcci&oacute;n de la p&aacute;gina que sera embebida en el marco';

@@ -5412,7 +5412,17 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                         $cadena_predeterminado='';
                         if ($valores_lista[$i]==@$cadena_valor)
                             $cadena_predeterminado=' SELECTED ';
-                        $salida.= "<option value='".PCO_ReemplazarVariablesPHPEnCadena($valores_lista[$i])."' ".$cadena_predeterminado.">".PCO_ReemplazarVariablesPHPEnCadena($opciones_lista[$i])."</option>";
+
+                        //Determina si la opcion es una agrupadora o no
+                        //Busca el valor de etiqueta para el grupo
+                        $PartesOpcionCombo= explode ( "|" , $valores_lista[$i] );
+                        if ( strpos ( $valores_lista[$i] , "_OPTGROUP_" ) !== FALSE ) 
+                            if ( $PartesOpcionCombo[1]!="") 
+                                $salida.= "<optgroup label='".$PartesOpcionCombo[1]."'>";
+                            else
+                                $salida.= "</optgroup>";  //Si no se encuentra valor de etiqueta alguno entonces cierra el grupo
+                        else
+                            $salida.= "<option value='".PCO_ReemplazarVariablesPHPEnCadena($valores_lista[$i])."' ".$cadena_predeterminado.">".PCO_ReemplazarVariablesPHPEnCadena($opciones_lista[$i])."</option>";
                     }
 
             //Cierra DIV para cambio de opciones en caliente

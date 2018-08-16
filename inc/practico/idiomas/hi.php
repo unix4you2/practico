@@ -496,7 +496,7 @@
 	$MULTILANG_FrmTitFila='Practico वस्तु के लिए एक पूर्ण पंक्ति उपयोग करना चाहिए?';
 	$MULTILANG_FrmDesFila='के रूप में प्रयोग तालिका का एक अनूठा पंक्ति में वस्तु प्रदर्शित करने के लिए अनुमति देता है';
 	$MULTILANG_FrmLista='विकल्पों की सूची';
-	$MULTILANG_FrmTitLista='क्या विकल्प चुना जा रहे हैं। शुरुआत में एक खाली मान रखा है कि Practico कहने के लिए केवल एक अल्पविराम चरित्र दर्ज करें। स्थापित पहले रिकॉर्ड डिफ़ॉल्ट के रूप में उपयोग करने के लिए रिक्त में छोड़ दो.';
+	$MULTILANG_FrmTitLista='क्या विकल्प चुना जा रहे हैं। शुरुआत में एक खाली मान रखा है कि Practico कहने के लिए केवल एक अल्पविराम चरित्र दर्ज करें। स्थापित पहले रिकॉर्ड डिफ़ॉल्ट के रूप में उपयोग करने के लिए रिक्त में छोड़ दो.      Enter _OPTGROUP_|Label to group some options and _OPTGROUP_ only to close groups of options.';
 	$MULTILANG_FrmDesLista='अल्पविराम के द्वारा अलग विकल्पों की सूची दर्ज करें। आप विकल्प के लिए डेटा स्रोत क्षेत्रों का उपयोग करने के लिए किसी अन्य अनुप्रयोग से गतिशील रूप विकल्पों तालिका लेने की जरूरत है। परिणाम संयोजन किया जाएगा (फिक्स्ड सूची और डेटा स्रोत) दोनों विकल्प भरने चाहिए';
 	$MULTILANG_FrmDesLista2='अल्पविराम अलग किया';
 	$MULTILANG_FrmOrigen='विकल्पों की सूची स्रोत';
@@ -505,7 +505,7 @@
 	$MULTILANG_FrmTitOrigen2='यह क्या है?';
 	$MULTILANG_FrmOrigenVal='मूल्यों स्रोत की सूची';
 	$MULTILANG_FrmTitOrigenVal='आप विकल्पों की सूची से एक ही स्रोत (टेबल) निर्दिष्ट करना होगा';
-	$MULTILANG_FrmDesOrigenVal='फील्ड जहाँ से मूल्यों की सूची में प्रत्येक विकल्प के लिए (संसाधित करने के लिए) आंतरिक रूप से लिया जाता है';
+	$MULTILANG_FrmDesOrigenVal='फील्ड जहाँ से मूल्यों की सूची में प्रत्येक विकल्प के लिए (संसाधित करने के लिए) आंतरिक रूप से लिया जाता है.     If the field value contains _OPTGROUP_|Label this will create a group of options and if the value is  _OPTGROUP_ only then this will close the group of options.';
 	$MULTILANG_FrmEtiqueta='लेबल के मूल्य (यह एचटीएमएल प्रारूप में फार्म पर मुद्रित किया जाएगा)';
 	$MULTILANG_FrmURL='आईफ्रेम यूआरएल';
 	$MULTILANG_FrmDesURL='Iframe में एम्बेडेड हो जाएगा कि पेज के पते दर्ज करें';

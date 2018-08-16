@@ -496,7 +496,7 @@
 	$MULTILANG_FrmTitFila='Practico deve usar uma linha completa para o objeto?';
 	$MULTILANG_FrmDesFila='Permite visualizar o objecto numa &uacute;nica linha da tabela utilizada sob a forma';
 	$MULTILANG_FrmLista='Lista de opções';
-	$MULTILANG_FrmTitLista='Quais são as opções a serem escolhidas. Digite um caractere v&iacute;rgula s&oacute; para dizer Practico que colocar um valor vazio no in&iacute;cio. Deixe em branco para usar como padrão o primeiro registro fundada.';
+	$MULTILANG_FrmTitLista='Quais são as opções a serem escolhidas. Digite um caractere v&iacute;rgula s&oacute; para dizer Practico que colocar um valor vazio no in&iacute;cio. Deixe em branco para usar como padrão o primeiro registro fundada.      Enter _OPTGROUP_|Label to group some options and _OPTGROUP_ only to close groups of options.';
 	$MULTILANG_FrmDesLista='Digite uma lista de opções separadas por v&iacute;rgulas. Se você precisa tomar a tabela de opções dinamicamente a partir de outra aplicação para utilizar os campos de fonte de dados para opções. Deve preencher as duas opções (lista fixa e fonte de dados), o resultado ser&aacute; a combinação';
 	$MULTILANG_FrmDesLista2='V&iacute;rgulas separados';
 	$MULTILANG_FrmOrigen='Origem da lista de opções';
@@ -505,7 +505,7 @@
 	$MULTILANG_FrmTitOrigen2='O que &eacute; isto?';
 	$MULTILANG_FrmOrigenVal='Lista de fonte de valores';
 	$MULTILANG_FrmTitOrigenVal='Você deve especificar a mesma fonte (tabela) a partir da lista de opções';
-	$MULTILANG_FrmDesOrigenVal='O campo a partir do qual os valores são tomadas internamente (a ser processada) para cada opção na lista';
+	$MULTILANG_FrmDesOrigenVal='O campo a partir do qual os valores são tomadas internamente (a ser processada) para cada opção na lista.     If the field value contains _OPTGROUP_|Label this will create a group of options and if the value is  _OPTGROUP_ only then this will close the group of options.';
 	$MULTILANG_FrmEtiqueta='Valor da etiqueta (ser&aacute; impressa no formul&aacute;rio em formato HTML)';
 	$MULTILANG_FrmURL='IFrame URL';
 	$MULTILANG_FrmDesURL='Digite o endereço da p&aacute;gina que ser&aacute; incorporado no IFrame';

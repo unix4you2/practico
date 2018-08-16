@@ -496,7 +496,7 @@
 	$MULTILANG_FrmTitFila='Must Practico use a full row for the object?';
 	$MULTILANG_FrmDesFila='Allows to display the object in a unique row of the table used in the form';
 	$MULTILANG_FrmLista='Options list';
-	$MULTILANG_FrmTitLista='What options are to be chosen.  Enter a comma character only to say Practico that put an empty value at the beginning.  Leave in blank to use as default the first record founded.';
+	$MULTILANG_FrmTitLista='What options are to be chosen.  Enter a comma character only to say Practico that put an empty value at the beginning.  Leave in blank to use as default the first record founded.    Enter _OPTGROUP_|Label to group some options and _OPTGROUP_ only to close groups of options.';
 	$MULTILANG_FrmDesLista='Enter a list of options separated by commas. If you need to take the options table dynamically from another application to use the Data Source fields for options. Should fill both options (fixed list and data source) the result will be the combination';
 	$MULTILANG_FrmDesLista2='Commas separated';
 	$MULTILANG_FrmOrigen='Options list source';
@@ -505,7 +505,7 @@
 	$MULTILANG_FrmTitOrigen2='What is this?';
 	$MULTILANG_FrmOrigenVal='List of values source';
 	$MULTILANG_FrmTitOrigenVal='You must specify the same source (table) from the list of options';
-	$MULTILANG_FrmDesOrigenVal='Field from which values ​​are taken internally (to be processed) for each option in the list';
+	$MULTILANG_FrmDesOrigenVal='Field from which values ​​are taken internally (to be processed) for each option in the list.    If the field value contains _OPTGROUP_|Label this will create a group of options and if the value is  _OPTGROUP_ only then this will close the group of options.';
 	$MULTILANG_FrmEtiqueta='Value of the label (it will be printed on the form in HTML format)';
 	$MULTILANG_FrmURL='IFrame URL';
 	$MULTILANG_FrmDesURL='Enter the address of the page that will be embedded in the IFrame';
