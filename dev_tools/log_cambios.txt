@@ -18,8 +18,10 @@ index.php
 core/comunes.php
 core/formularios.php
 core/informes.php
+core/marco_arriba.php
 core/marco_forms.php
 core/marco_nav.php
+core/marco_navizq.php
 core/menus.php
 core/mantenimiento.php
 core/monitoreo.php

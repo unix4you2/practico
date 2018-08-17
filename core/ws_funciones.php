@@ -39,6 +39,9 @@
 		Recomendacion:  La generacion de avisos de tipo Notice, Warning, Error o similares de PHP puede ocasionar la emision
 		de valores previos a la respuesta del WebService, se recomienda tener el modo de depuracion desactivado o verificar que los
 		parametros y funciones utilizadas por cada webservice generen una salida limpia en caso de tener la depuracion activada.
+
+
+https://www.phpclasses.org/browse/package/7700/download/zip.html
 	*/
 
 
@@ -327,6 +330,8 @@ function error_oauth($client,$OAuth_servicio)
 
 	Ver tambien:
 		<Iniciar_login>
+		
+		
 */
 if (@$PCO_WSId=="PCO_AutenticacionOauth") 
 	{
