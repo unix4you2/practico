@@ -52,7 +52,7 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
         if ($RegistroOpcion['tipo_menu']=='grp')
 			{
     			// Si el usuario es diferente al administrador agrega condiciones al query
-    			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+    			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $Ubicacion!='formulario')
     				{
     					$Complemento_tablas=",".$TablasCore."usuario_menu";
     					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
