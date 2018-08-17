@@ -45,14 +45,18 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Ahora se soportan más de 60 proveedores OAuth.  Agregados: 37Signals,Amazon,AOL,Bitly,Buffer,Copy,Dailymotion,Discogs,Etsy,Fitbit2,Garmin,Garmin2Legged,Google1,iHealth,imgur,Infusionsoft,Intuit,Jawbone,LinkedIn2,Livecoding,MailChimp,Mavenlink,mail.ru,Meetup,MicrosoftOpenIDConnect,Misfit,oDesk,Odnoklassniki,Paypal,PaypalSandbox,PaypalApplication,Pinterest,Rdio,Reddit,RunKeeper,Uber,TeamViewer,Twitter2,Vimeo,Wordpress,Xero,Yammer,Yandex
-* Added: Ahora las listas de seleccion (combobox) soportan elementos para agrupacion de opciones.  Para tal fin se debera contar con la palabra clave _OPTGROUP_|EtiquetaDeseada como *valor* en la apertura del elemento. Elementos que carezcan de una etiqueta seran considerados automaticamente como elementos de cierre de grupo.  Aplica tanto para opciones fijas como opciones tomadas desde base de datos.
-* Enhan: Actualizada alarma de monitoreo a formato OGG para compatibilidad con reproduccion automatica en navegadores sin necesidad de codecs extra.
-* Enhan: Actualizacion de version 1.92 a 1.94 del cliente HTTP para PHP.
-* Enhan: Actualizacion de version 1.109 a 1.165 del cliente OAuth para PHP.
-* Fixed: Cuando valores de cronometro en monitoreo sobrepasan el limite cero (negativos en conteo) autoenvia formulario de monitoreo al bajar de -10 segundos.
-* Fixed: Preautorización de funcion interna PCO_CargarObjeto para evitar su registro en funciones autorizadas
-* Fixed: Los valores de URI de redireccion para configuraciones OAuth son ahora calculados nuevamente de manera automática.  Los campos en configuración quedan como solo lectura con ayudas de formato.
+* Added: [OAUTH] Ahora se soportan más de 60 proveedores OAuth.  Agregados: 37Signals,Amazon,AOL,Bitly,Buffer,Copy,Dailymotion,Discogs,Etsy,Fitbit2,Garmin,Garmin2Legged,Google1,iHealth,imgur,Infusionsoft,Intuit,Jawbone,LinkedIn2,Livecoding,MailChimp,Mavenlink,mail.ru,Meetup,MicrosoftOpenIDConnect,Misfit,oDesk,Odnoklassniki,Paypal,PaypalSandbox,PaypalApplication,Pinterest,Rdio,Reddit,RunKeeper,Uber,TeamViewer,Twitter2,Vimeo,Wordpress,Xero,Yammer,Yandex
+* Added: [FORMS] Ahora las listas de seleccion (combobox) soportan elementos para agrupacion de opciones.  Para tal fin se debera contar con la palabra clave _OPTGROUP_|EtiquetaDeseada como *valor* en la apertura del elemento. Elementos que carezcan de una etiqueta seran considerados automaticamente como elementos de cierre de grupo.  Aplica tanto para opciones fijas como opciones tomadas desde base de datos.
+* Added: [MENU] Se agrega la columna informativa de seccion a la administracion de menues, ordenando las opciones de acuerdo a su sección y peso.
+* Enhan: [MONITOREO] Actualizada alarma de monitoreo a formato OGG para compatibilidad con reproduccion automatica en navegadores sin necesidad de codecs extra.
+* Enhan: [LIBS] Actualizacion de version 1.92 a 1.94 del cliente HTTP para PHP.
+* Enhan: [LIBS] Actualizacion de version 1.109 a 1.165 del cliente OAuth para PHP.
+* Enhan: [MENU] Al igual que las pestanas de formulario, ahora las opciones de menu definidas dentro de una sección con nombre PCO_NoVisible no serán presentadas al usuario.
+* Fixed: [MONITOREO] Cuando valores de cronometro en monitoreo sobrepasan el limite cero (negativos en conteo) autoenvia formulario de monitoreo al bajar de -10 segundos.
+* Fixed: [INTERNO] Preautorización de funcion interna PCO_CargarObjeto para evitar su registro en funciones autorizadas
+* Fixed: [OAUTH] Los valores de URI de redireccion para configuraciones OAuth son ahora calculados nuevamente de manera automática.  Los campos en configuración quedan como solo lectura con ayudas de formato.
+* Fixed: [MENU] Se evita limpieza automática de secciones durante la edición de opciones de menú que no se encuentran agrupadas por otra.
+* Fixed: [MENU] Opciones hijas de otra que están ubicadas en la sección central son evitadas por defecto, ya que dependen de la ubicación de su padre.
 
 LEAME: ADVERTENCIA: Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada de acciones internas, las siguientes acciones han cambiado de nombre:
 Accion autenticacion_oauth cambia a PCO_AutenticacionOauth  Esto puede implicar cambiar sus API de redireccion con los proveedores asociados.
@@ -66,6 +70,7 @@ Accion autenticacion_oauth cambia a PCO_AutenticacionOauth  Esto puede implicar 
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 # RECORDAR EN OPCIONES MULTI-IDIOMA:  UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 ScriptBasedatos="
+UPDATE core_menu SET seccion='PCO_NoVisible' WHERE seccion='_NO_APLICA_';
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 "
