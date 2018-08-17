@@ -124,10 +124,11 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
         //Imprime opciones de submenus
 		if ($RegistroOpcion['tipo_menu']=='opc' && $Ubicacion=="submenu")
 			{
+			    
 			    //Define el texto a ubicar al lado derecho de la opcion cuando se ha indicadu su valor de acceso directo
 			    $TextoAccesoDirecto='<span class="pull-right text-muted small"><i>Ctrl+O</i></span>';
 			    $TextoAccesoDirecto='';
-			    
+
 			    //Si la imagen definida para el menu es la palabra clave _SEPARADOR_ entonces lo trata como tal, en caso contrario presenta la opcion
 			    if ($RegistroOpcion["imagen"]=="_SEPARADOR_")
 			        echo '<li role="separator" class="divider"></li>';
