@@ -1220,9 +1220,9 @@ if ($PCO_Accion=="PCO_EditarInforme")
 												<input type="Hidden" name="popup_activo" value="InformeCampos">
 											';
 									if ($registro["editable"])
-										echo '<input type="hidden" name="valor" value="0"><a href="javascript:caife'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'. Cuidado: El query de actualizacion corre para cambiar el valor de acuerdo a la primer columna en el informe, Esto puede representar cambios unitarios o masivos!" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>';
+										echo '<input type="hidden" name="valor" value="0"><a href="javascript:caife'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'. Cuidado: El query de actualizacion corre para cambiar el valor de acuerdo a la primer columna en el informe aun cuando este oculta, Esto puede representar cambios unitarios o masivos!" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>';
 									else
-										echo '<input type="hidden" name="valor" value="1"><a href="javascript:caife'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'. Cuidado: El query de actualizacion corre para cambiar el valor de acuerdo a la primer columna en el informe, Esto puede representar cambios unitarios o masivos!" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></a>';
+										echo '<input type="hidden" name="valor" value="1"><a href="javascript:caife'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'. Cuidado: El query de actualizacion corre para cambiar el valor de acuerdo a la primer columna en el informe aun cuando este oculta, Esto puede representar cambios unitarios o masivos!" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></a>';
 								echo '</form></td>';
 
 								echo '		<td>
