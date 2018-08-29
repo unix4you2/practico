@@ -63,6 +63,7 @@ LogCambios="
 * Enhan: [KANBAN] Sólo los usuarios propietarios de untablero pueden eliminar o archivar tareas sobre éste.
 * Enhan: [KANBAN] Sólo los usuarios propietarios de un tablero lo pueden personalizar, configurar o compartir.
 * Enhan: [CHAT] Suprimido codigo interno a cambio de objeto en Práctico para marco de chat.
+* Enhan: [INFORMES] Ayuda de complemento en activacion de campos editables sobre informes.
 * Fixed: [MONITOREO] Cuando valores de cronometro en monitoreo sobrepasan el limite cero (negativos en conteo) autoenvia formulario de monitoreo al bajar de -10 segundos.
 * Fixed: [INTERNO] Preautorización de funcion interna PCO_CargarObjeto para evitar su registro en funciones autorizadas
 * Fixed: [OAUTH] Los valores de URI de redireccion para configuraciones OAuth son ahora calculados nuevamente de manera automática.  Los campos en configuración quedan como solo lectura con ayudas de formato.
