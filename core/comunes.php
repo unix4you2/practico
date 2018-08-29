@@ -1862,6 +1862,27 @@ function PCO_EsDispositivoMovil()
 /* ################################################################## */
 /* ################################################################## */
 /*
+	// Function: PCO_EsUsuarioInterno
+	Determina si un login de usuario es corresponde a un usuario interno o no
+	
+	Variables de entrada:
+
+		Usuario - Login de usuario a verificar
+
+	Salida:
+		Cero (0) o uno (1) segun la pertenencia o no del usuario
+*/
+function PCO_EsUsuarioInterno($Usuario)
+	{
+	    global $ListaCamposSinID_usuario,$TablasCore;
+	    $RegistroUsuario=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login='$Usuario' ")->fetch();
+	    return $RegistroUsuario["usuario_interno"];
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	// Function: PCO_EsAdministrador
 	Determina si un login de usuario es administrador de plataforma o no (si es super usuario)
 	

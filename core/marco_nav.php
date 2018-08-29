@@ -195,15 +195,33 @@
 						<li><a href="javascript:document.actualizar_perfil.submit();"><i class="fa fa-user fa-fw"></i> <?php echo $Nombre_usuario;?></a></li>
 						<li><a href="javascript:document.reseteo_clave.submit();"><i class="fa fa-key fa-fw"></i> <?php echo $MULTILANG_UsrReset; ?></a></li>
 	                    <?php
-							//Carga opcion de chat solamente si esta habilitado
+							/*Carga opcion de chat solamente si esta habilitado
+							  0=Apagado
+							  1=Solo entre usuarios internos
+							  2=Solo entre usuarios externos
+							  3=Entre todos los usuarios
+							  4=Exclusivo admin             */
 							if (isset($Activar_ModuloChat) && $Activar_ModuloChat>0)
-							{
-	                    ?>	
-								<li><a data-toggle="modal" href="#Dialogo_Chat"><i class="fa fa-comment fa-fw"></i> Chat</a></li>
-	                    <?php
-							}
-	                    ?>
-                        <?php
+    							{
+    							    $ComplementoOpcionMenu='<li><a data-toggle="modal" href="#Dialogo_Chat"><i class="fa fa-comment fa-fw"></i> Chat</a></li>';
+    							    //Verifica si el chat es activo solo para admin
+							        if ($Activar_ModuloChat==4 && PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+    								    echo $ComplementoOpcionMenu;
+
+    							    //Verifica si el chat es activo para todos
+							        if ($Activar_ModuloChat==3)
+    								    echo $ComplementoOpcionMenu;
+
+    							    //Verifica si el chat es activo para usuarios externos y el usuario lo es
+							        if ($Activar_ModuloChat==2 && !PCO_EsUsuarioInterno(@$PCOSESS_LoginUsuario))
+    								    echo $ComplementoOpcionMenu;
+
+    							    //Verifica si el chat es activo para usuarios internos y el usuario lo es
+							        if ($Activar_ModuloChat==1 && PCO_EsUsuarioInterno(@$PCOSESS_LoginUsuario))
+    								    echo $ComplementoOpcionMenu;
+    							}
+    					?>
+    					<?php
                             //Busca si tiene tableros kanban o le han compartido alguno
                             $RegistroTableros=PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND (login_admintablero='$PCOSESS_LoginUsuario' OR compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%') LIMIT 0,1 ")->fetch();
                             if ($RegistroTableros["id"]!="")

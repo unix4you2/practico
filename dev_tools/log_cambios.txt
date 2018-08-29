@@ -20,6 +20,7 @@ core/formularios.php
 core/informes.php
 core/kanban.php
 core/marco_arriba.php
+core/marco_chat.php
 core/marco_forms.php
 core/marco_nav.php
 core/marco_navizq.php
@@ -53,12 +54,14 @@ LogCambios="
 * Added: [MENU] Se agrega la columna informativa de seccion a la administracion de menues, ordenando las opciones de acuerdo a su sección y peso.
 * Added: [MENU] Ayuda extra para el campo de imagen durante la creacion de menues.
 * Added: [KANBAN] Usuarios con tableros propios o compartidos cuentan con acceso automático a éstos a través del menú de perfil.
+* Added: [CHAT] El sistema de chat diferencia entre los niveles de chat configurados para presentar la opción de menu al usuario y la lista de usuarios disponibles para chat.
 * Enhan: [MONITOREO] Actualizada alarma de monitoreo a formato OGG para compatibilidad con reproduccion automatica en navegadores sin necesidad de codecs extra.
 * Enhan: [LIBS] Actualizacion de version 1.92 a 1.94 del cliente HTTP para PHP.
 * Enhan: [LIBS] Actualizacion de version 1.109 a 1.165 del cliente OAuth para PHP.
 * Enhan: [MENU] Al igual que las pestanas de formulario, ahora las opciones de menu definidas dentro de una sección con nombre PCO_NoVisible no serán presentadas al usuario.
 * Enhan: [KANBAN] Sólo los usuarios propietarios de untablero pueden eliminar o archivar tareas sobre éste.
 * Enhan: [KANBAN] Sólo los usuarios propietarios de un tablero lo pueden personalizar, configurar o compartir.
+* Enhan: [CHAT] Suprimido codigo interno a cambio de objeto en Práctico para marco de chat.
 * Fixed: [MONITOREO] Cuando valores de cronometro en monitoreo sobrepasan el limite cero (negativos en conteo) autoenvia formulario de monitoreo al bajar de -10 segundos.
 * Fixed: [INTERNO] Preautorización de funcion interna PCO_CargarObjeto para evitar su registro en funciones autorizadas
 * Fixed: [OAUTH] Los valores de URI de redireccion para configuraciones OAuth son ahora calculados nuevamente de manera automática.  Los campos en configuración quedan como solo lectura con ayudas de formato.
@@ -68,8 +71,6 @@ LogCambios="
 
 LEAME: ADVERTENCIA: Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada de acciones internas, las siguientes acciones han cambiado de nombre:
 Accion autenticacion_oauth cambia a PCO_AutenticacionOauth  Esto puede implicar cambiar sus API de redireccion con los proveedores asociados.
-
-
 
 
 "

@@ -31,76 +31,26 @@
 /* ################################################################## */
 
     echo '<div class="oculto_impresion">';
-    // Modal Ventana de chat
-    PCO_AbrirDialogoModal("Dialogo_Chat",$MULTILANG_UsrLista,"modal-wide");
+        // Modal Ventana de chat
+        PCO_AbrirDialogoModal("Dialogo_Chat",$MULTILANG_UsrLista,"modal-wide");
 
-    echo $MULTILANG_UsuariosChat;
-    //Consulta los usuarios siempre y cuando tenga sesion activa
-    if ($PCOSESS_SesionAbierta)
-        {
-            $resultado=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario from ".$TablasCore."usuario WHERE login<>'$PCOSESS_LoginUsuario' ");
+			/*Determina el tipo de filtro a aplicar al informe segun el nivel de chat activado
+			  1=Solo entre usuarios internos
+			  2=Solo entre usuarios externos  */
+			$PCOVAR_FiltroUsuariosChat="";  //$Activar_ModuloChat==3
+			if ($Activar_ModuloChat==1)
+			    $PCOVAR_FiltroUsuariosChat="1";
+			if ($Activar_ModuloChat==2)
+			    $PCOVAR_FiltroUsuariosChat="0";
+			    
+            echo $MULTILANG_UsuariosChat;
+            //Consulta los usuarios siempre y cuando tenga sesion activa
+            if ($PCOSESS_SesionAbierta)
+            	PCO_CargarInforme(-20,0,"","",1);
 
-            //Presenta la lista de usuarios
-            @$PCO_InformesDataTable.="TablaUsuariosChat|"; //Agrega la tabla a la lista de DataTables para ser convertida
-            @$PCO_InformesDataTablePaginaciones.="15|";
-            @$PCO_InformesDataTableTotales.="|"; //Vacio. No necesita calculo de subtotales
-            @$PCO_InformesDataTableFormatoTotales.="|"; //Vacio. No necesita formato de subtotales
-            echo '<hr><table width="100%" class="table table-condensed table-hover btn-xs table-responsive  table-unbordered  table-striped " id="TablaUsuariosChat">
-							<thead>
-								<tr>
-									<th valign=middle align=center  bgcolor=darkgray>
-										<font size=2 color=black>
-											<b>'.$MULTILANG_Usuario.'</b>
-										</font>
-									</th>
-									<th valign=middle align=center  bgcolor=darkgray>
-										<font size=2 color=black>
-											'.$MULTILANG_Nombre.'
-										</font>
-									</th>
-									<th  bgcolor=darkgray valign=middle align=center>
-										<font size=2 color=black>
-											'.$MULTILANG_UsrAcceso.'
-										</font>
-									</th>
-									<th bgcolor=darkgray></th>
-								</tr>
-							</thead>
-                        <tbody>';
-            while($usuarios_chat = $resultado->fetch())
-                {
-                    $NombreUsuarioChat = preg_replace("/[^a-zA-Z0-9]/", "_", $usuarios_chat["login"] );
-                    echo '
-                        <tr>
-                            <td valign=middle align=left>
-                                <i class="fa fa-user texto-azul"></i>
-                                <font size=2 color=black>
-                                    <b>'.$NombreUsuarioChat.'</b>
-                                </font>
-                            </td>
-                            <td valign=middle align=left>
-                                <font size=2 color=black>
-                                    '.$usuarios_chat["nombre"].'
-                                </font>
-                            </td>
-                            <td valign=middle align=left>
-                                <font size=2 color=black>
-                                    '.$usuarios_chat["ultimo_acceso"].'
-                                </font>
-                            </td>
-                            <td valign=middle>
-                                <button type="button" class="btn btn-success btn-xs" onClick="chatWith(\''.$NombreUsuarioChat.'\'); PCOJS_OcultarVentanaChat(); "><i class="fa fa-weixin "></i> Chat</button>
-                            </td>
-                        </tr>
-                    ';
-                }
-            echo '
-				</tbody>
-				</table>';
-        }
+            $barra_herramientas_modal='
+                <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
 
-    $barra_herramientas_modal='
-        <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-    PCO_CerrarDialogoModal($barra_herramientas_modal);
+        PCO_CerrarDialogoModal($barra_herramientas_modal);
 
     echo '</div>';
