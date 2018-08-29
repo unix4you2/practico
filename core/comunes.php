@@ -2573,7 +2573,16 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "opciones_combo_box")					$retorno = 1;
 		if ($PCO_Accion== "valor_campo_tabla")					$retorno = 1;
 		
-		
+		// Funciones en core/kanban.php
+        if ($PCO_Accion=="PCO_ExplorarTablerosKanban")          $retorno = 1;
+        if ($PCO_Accion=="EliminarTableroKanban")               $retorno = 1; //PCO_PermisoAgregadoAccion("PCO_ExplorarTablerosKanban")
+        if ($PCO_Accion=="GuardarCreacionKanban")               $retorno = 1;
+        if ($PCO_Accion=="VerTareasArchivadas")                 $retorno = 1;
+        if ($PCO_Accion=="ArchivarTareaKanban")                 $retorno = 1;
+        if ($PCO_Accion=="GuardarTareaKanban")                  $retorno = 1;
+        if ($PCO_Accion=="EliminarTareaKanban")                 $retorno = 1;
+        if ($PCO_Accion=="GuardarPersonalizacionKanban")        $retorno = 1;
+
 		//echo $PCOSESS_LoginUsuario.':Permiso heredado accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
 		return $retorno;
 	}
