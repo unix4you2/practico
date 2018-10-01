@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
 VersionCompatibleAno="18"
-VersionCompatibleMes="8"
+VersionCompatibleMes="9"
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno=""
-VersionFinalMes=""
+VersionFinalAno="19"
+VersionFinalMes="1"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
@@ -55,6 +55,9 @@ LogCambios="
 * Added: [MENU] Ayuda extra para el campo de imagen durante la creacion de menues.
 * Added: [KANBAN] Usuarios con tableros propios o compartidos cuentan con acceso automático a éstos a través del menú de perfil.
 * Added: [CHAT] El sistema de chat diferencia entre los niveles de chat configurados para presentar la opción de menu al usuario y la lista de usuarios disponibles para chat.
+* Added: [AUDIT] Ahora cualquier consulta al motor de base de datos que genere algún error será llevada automáticamente al log de auditoría bajo el usuario SQLog:error
+* Added: [AUDIT] Agregadas nuevas opciones de filtro de usuario en módulo de auditorías para permitir filtrar operaciones realizadas por funciones internas del framework.
+* Added: [AUDIT] Se agrega a la opción general de auditoría un gráfico que presenta de manera automática los errores SQL generados internamente para el rango de fechas establecido.
 * Enhan: [MONITOREO] Actualizada alarma de monitoreo a formato OGG para compatibilidad con reproduccion automatica en navegadores sin necesidad de codecs extra.
 * Enhan: [LIBS] Actualizacion de version 1.92 a 1.94 del cliente HTTP para PHP.
 * Enhan: [LIBS] Actualizacion de version 1.109 a 1.165 del cliente OAuth para PHP.
@@ -70,6 +73,7 @@ LogCambios="
 * Fixed: [MENU] Se evita limpieza automática de secciones durante la edición de opciones de menú que no se encuentran agrupadas por otra.
 * Fixed: [MENU] Opciones hijas de otra que están ubicadas en la sección central son evitadas por defecto, ya que dependen de la ubicación de su padre.
 * Fixed: [MENU] Permisos extendidos sobre submenues.
+* Fixed: [AUDIT] Corregido el orden de los campos de fecha para filtros de auditoría y evitar confusiones en su uso.
 
 LEAME: ADVERTENCIA: Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada de acciones internas, las siguientes acciones han cambiado de nombre:
 Accion autenticacion_oauth cambia a PCO_AutenticacionOauth  Esto puede implicar cambiar sus API de redireccion con los proveedores asociados.

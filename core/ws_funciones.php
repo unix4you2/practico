@@ -644,7 +644,7 @@ if (@$PCO_WSId=="PCO_AutenticacionOauth")
 				$OAuth_IDCliente=$APIAmazon_ClientId;
 				$OAuth_SecretoCliente=$APIAmazon_ClientSecret;
 				$OAuth_Mensaje="Vaya a APIs de Amazon https://sellercentral.amazon.com/gp/homepage.html y agregue una aplicacion para obtener el ID, Secreto y URI";
-				$OAuth_Alcance='';
+				$OAuth_Alcance='profile';
 				$OAuth_Depuracion=false;
 				$OAuth_DepuracionHttp=true;
 			}
@@ -704,8 +704,8 @@ if (@$PCO_WSId=="PCO_AutenticacionOauth")
 				$OAuth_IDCliente=$APIDailymotion_ClientId;
 				$OAuth_SecretoCliente=$APIDailymotion_ClientSecret;
 				$OAuth_Mensaje="Vaya a APIs de Dailymotion http://www.dailymotion.com/profile/developer/new y agregue una aplicacion para obtener el ID, Secreto y URI";
-				$OAuth_Alcance='';
-				$OAuth_Depuracion=false;
+				$OAuth_Alcance='read userinfo email';
+				$OAuth_Depuracion=true;
 				$OAuth_DepuracionHttp=true;
 			}
 
@@ -728,19 +728,7 @@ if (@$PCO_WSId=="PCO_AutenticacionOauth")
 				$OAuth_IDCliente=$APIEtsy_ClientId;
 				$OAuth_SecretoCliente=$APIEtsy_ClientSecret;
 				$OAuth_Mensaje="Vaya a APIs de Etsy https://www.etsy.com/developers/register y agregue una aplicacion para obtener el ID, Secreto y URI";
-				$OAuth_Alcance='';
-				$OAuth_Depuracion=false;
-				$OAuth_DepuracionHttp=true;
-			}
-
-		// Fitbit2
-		if ($OAuth_servicio=='Fitbit2')	
-			{
-				$OAuth_URIRedireccion=$APIFitbit2_RedirectUri;
-				$OAuth_IDCliente=$APIFitbit2_ClientId;
-				$OAuth_SecretoCliente=$APIFitbit2_ClientSecret;
-				$OAuth_Mensaje="Vaya a APIs de Fitbit2 https://dev.fitbit.com/apps/new y agregue una aplicacion para obtener el ID, Secreto y URI";
-				$OAuth_Alcance='';
+				$OAuth_Alcance='email_r';
 				$OAuth_Depuracion=false;
 				$OAuth_DepuracionHttp=true;
 			}
@@ -829,18 +817,6 @@ if (@$PCO_WSId=="PCO_AutenticacionOauth")
 				$OAuth_DepuracionHttp=true;
 			}
 
-		// LinkedIn2
-		if ($OAuth_servicio=='LinkedIn2')	
-			{
-				$OAuth_URIRedireccion=$APILinkedIn2_RedirectUri;
-				$OAuth_IDCliente=$APILinkedIn2_ClientId;
-				$OAuth_SecretoCliente=$APILinkedIn2_ClientSecret;
-				$OAuth_Mensaje="Vaya a APIs de LinkedIn2 https://www.linkedin.com/secure/developer?newapp= y agregue una aplicacion para obtener el ID, Secreto y URI";
-				$OAuth_Alcance='';
-				$OAuth_Depuracion=false;
-				$OAuth_DepuracionHttp=true;
-			}
-
 		// Livecoding
 		if ($OAuth_servicio=='Livecoding')	
 			{
@@ -896,7 +872,7 @@ if (@$PCO_WSId=="PCO_AutenticacionOauth")
 				$OAuth_IDCliente=$APIMicrosoftOpenIDConnect_ClientId;
 				$OAuth_SecretoCliente=$APIMicrosoftOpenIDConnect_ClientSecret;
 				$OAuth_Mensaje="Vaya a APIs de MicrosoftOpenIDConnect https://apps.dev.microsoft.com/ y agregue una aplicacion para obtener el ID, Secreto y URI";
-				$OAuth_Alcance='';
+				$OAuth_Alcance='wl.basic wl.emails';
 				$OAuth_Depuracion=false;
 				$OAuth_DepuracionHttp=true;
 			}
@@ -969,7 +945,7 @@ if (@$PCO_WSId=="PCO_AutenticacionOauth")
 				$OAuth_SecretoCliente=$APIRdio_ClientSecret;
 				$OAuth_Mensaje="Vaya a APIs de Rdio http://rdio.mashery.com/apps/register y agregue una aplicacion para obtener el ID, Secreto y URI";
 				$OAuth_Alcance='';
-				$OAuth_Depuracion=false;
+				$OAuth_Depuracion=true;
 				$OAuth_DepuracionHttp=true;
 			}
 
@@ -980,7 +956,7 @@ if (@$PCO_WSId=="PCO_AutenticacionOauth")
 				$OAuth_IDCliente=$APIReddit_ClientId;
 				$OAuth_SecretoCliente=$APIReddit_ClientSecret;
 				$OAuth_Mensaje="Vaya a APIs de Reddit https://ssl.reddit.com/prefs/apps y agregue una aplicacion para obtener el ID, Secreto y URI";
-				$OAuth_Alcance='';
+				$OAuth_Alcance='identity';
 				$OAuth_Depuracion=false;
 				$OAuth_DepuracionHttp=true;
 			}
@@ -1021,18 +997,6 @@ if (@$PCO_WSId=="PCO_AutenticacionOauth")
 				$OAuth_DepuracionHttp=true;
 			}
 
-		// Twitter2
-		if ($OAuth_servicio=='Twitter2')	
-			{
-				$OAuth_URIRedireccion=$APITwitter2_RedirectUri;
-				$OAuth_IDCliente=$APITwitter2_ClientId;
-				$OAuth_SecretoCliente=$APITwitter2_ClientSecret;
-				$OAuth_Mensaje="Vaya a APIs de Twitter2 https://dev.twitter.com/apps/new y agregue una aplicacion para obtener el ID, Secreto y URI";
-				$OAuth_Alcance='';
-				$OAuth_Depuracion=false;
-				$OAuth_DepuracionHttp=true;
-			}
-
 		// Vimeo
 		if ($OAuth_servicio=='Vimeo')	
 			{
@@ -1041,7 +1005,7 @@ if (@$PCO_WSId=="PCO_AutenticacionOauth")
 				$OAuth_SecretoCliente=$APIVimeo_ClientSecret;
 				$OAuth_Mensaje="Vaya a APIs de Vimeo https://developer.vimeo.com/apps/new y agregue una aplicacion para obtener el ID, Secreto y URI";
 				$OAuth_Alcance='';
-				$OAuth_Depuracion=false;
+				$OAuth_Depuracion=true;
 				$OAuth_DepuracionHttp=true;
 			}
 
@@ -1053,7 +1017,7 @@ if (@$PCO_WSId=="PCO_AutenticacionOauth")
 				$OAuth_SecretoCliente=$APIWordpress_ClientSecret;
 				$OAuth_Mensaje="Vaya a APIs de Wordpress https://developer.wordpress.com/apps/new/ y agregue una aplicacion para obtener el ID, Secreto y URI";
 				$OAuth_Alcance='';
-				$OAuth_Depuracion=false;
+				$OAuth_Depuracion=true;
 				$OAuth_DepuracionHttp=true;
 			}
 
@@ -1447,6 +1411,415 @@ if (@$PCO_WSId=="PCO_AutenticacionOauth")
 									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
 							}
 						}
+
+					// 37Signals
+					if ($OAuth_servicio=='37Signals')
+						{
+							if(strlen($client->access_token))
+							{
+                				$success = $client->CallAPI(
+                					'https://launchpad.37signals.com/authorization.json',
+                					'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+					
+					// Amazon
+					if ($OAuth_servicio=='Amazon')
+						{
+							if(strlen($client->access_token))
+							{
+                				$success = $client->CallAPI(
+                					'https://api.amazon.com/user/profile',
+                					'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// AOL
+					if ($OAuth_servicio=='AOL')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// Bitly
+					if ($OAuth_servicio=='Bitly')
+						{
+							if(strlen($client->access_token))
+							{
+                				$success = $client->CallAPI(
+                					'https://api-ssl.bitly.com/v3/user/info',
+                					'GET', array(), array(
+                						'FailOnAccessError'=>true,
+                						'FollowRedirection'=>true
+                					), $user);
+							}
+						}
+
+					// Buffer
+					if ($OAuth_servicio=='Buffer')
+						{
+							if(strlen($client->access_token))
+							{
+                				$success = $client->CallAPI(
+                					'https://api.bufferapp.com/1/user.json', 
+                					'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Copy
+					if ($OAuth_servicio=='Copy')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// Dailymotion
+					if ($OAuth_servicio=='Dailymotion')
+						{
+							if(strlen($client->access_token))
+							{
+                				$success = $client->CallAPI(
+                					'https://api.dailymotion.com/user/me?fields=fullname,email', 
+                					'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Discogs
+					if ($OAuth_servicio=='Discogs')
+						{
+							if(strlen($client->access_token))
+							{
+                				$success = $client->CallAPI(
+                					'http://api.discogs.com/oauth/identity', 
+                					'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Etsy
+					if ($OAuth_servicio=='Etsy')
+						{
+							if(strlen($client->access_token))
+							{
+                				$success = $client->CallAPI(
+                					'https://openapi.etsy.com/v2/users/__SELF__', 
+                					'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Garmin
+					if ($OAuth_servicio=='Garmin')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// Garmin2Legged
+					if ($OAuth_servicio=='Garmin2Legged')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// iHealth
+					if ($OAuth_servicio=='iHealth')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// imgur
+					if ($OAuth_servicio=='imgur')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// Infusionsoft
+					if ($OAuth_servicio=='Infusionsoft')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// Intuit
+					if ($OAuth_servicio=='Intuit')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// Jawbone
+					if ($OAuth_servicio=='Jawbone')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// Livecoding
+					if ($OAuth_servicio=='Livecoding')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// MailChimp
+					if ($OAuth_servicio=='MailChimp')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// Mavenlink
+					if ($OAuth_servicio=='Mavenlink')
+						{
+							if(strlen($client->access_token))
+							{
+                				$success = $client->CallAPI(
+                					'https://api.mavenlink.com/api/v1/users/me.json',
+                					'GET', array(), array(
+                						'FailOnAccessError'=>true,
+                						'FollowRedirection'=>true
+                					), $user);
+							}
+						}
+
+					// Meetup
+					if ($OAuth_servicio=='Meetup')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// MicrosoftOpenIDConnect
+					if ($OAuth_servicio=='MicrosoftOpenIDConnect')
+						{
+							if(strlen($client->access_token))
+							{
+                				$success = $client->CallAPI(
+                					'https://apis.live.net/v5.0/me',
+                					'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Misfit
+					if ($OAuth_servicio=='Misfit')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// oDesk
+					if ($OAuth_servicio=='oDesk')
+						{
+							if(strlen($client->access_token))
+							{
+                				$success = $client->CallAPI(
+                					'https://www.odesk.com/api/auth/v1/info.json',
+                					'GET', array(), array(
+                						'FailOnAccessError'=>true,
+                						'FollowRedirection'=>true
+                					), $user);
+							}
+						}
+
+					// Odnoklassniki
+					if ($OAuth_servicio=='Odnoklassniki')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// Paypal
+					if ($OAuth_servicio=='Paypal')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// Pinterest
+					if ($OAuth_servicio=='Pinterest')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// Rdio
+					if ($OAuth_servicio=='Rdio')
+						{
+							if(strlen($client->access_token))
+							{
+                				$success = $client->CallAPI(
+                					'http://api.rdio.com/1/', 
+                					'POST', array('method'=>'currentUser'), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Reddit
+					if ($OAuth_servicio=='Reddit')
+						{
+							if(strlen($client->access_token))
+							{
+                				$success = $client->CallAPI(
+                					'https://oauth.reddit.com/api/v1/me.json',
+                					'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// RunKeeper
+					if ($OAuth_servicio=='RunKeeper')
+						{
+							if(strlen($client->access_token))
+							{
+                				$success = $client->CallAPI(
+                					'https://api.runkeeper.com/profile/',
+                					'GET', array(), array(
+                						'FailOnAccessError'=>true,
+                						'FollowRedirection'=>true
+                					), $user);
+							}
+						}
+
+					// Uber
+					if ($OAuth_servicio=='Uber')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// TeamViewer
+					if ($OAuth_servicio=='TeamViewer')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// Vimeo
+					if ($OAuth_servicio=='Vimeo')
+						{
+							if(strlen($client->access_token))
+							{
+                				$success = $client->CallAPI(
+                					'https://api.vimeo.com/me/?format=json', 
+                					'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Wordpress
+					if ($OAuth_servicio=='Wordpress')
+						{
+							if(strlen($client->access_token))
+							{
+                				$success = $client->CallAPI(
+                					'https://public-api.wordpress.com/rest/v1/me', 
+                					'GET', array(), array('FailOnAccessError'=>true), $user);
+							}
+						}
+
+					// Xero
+					if ($OAuth_servicio=='Xero')
+						{
+							if(strlen($client->access_token))
+							{
+                				$success = $client->CallAPI(
+                					'https://api.xero.com/api.xro/2.0/Users', 
+                					'GET', array(), array('FailOnAccessError'=>true, 'DecodeXMLResponse'=>'simplexml'), $user);
+							}
+						}
+
+					// Yammer
+					if ($OAuth_servicio=='Yammer')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
+					// Yandex
+					if ($OAuth_servicio=='Yandex')
+						{
+							if(strlen($client->access_token))
+							{
+								$success = $client->CallAPI(
+									'http://servicio.desconocido/user?action=getbyuserid&userid=0', 
+									'GET', array(), array('FailOnAccessError'=>true, 'ResponseContentType'=>'application/json'), $user);
+							}
+						}
+
 					// FIN DEL PROCESAMIENTO POR SERVICIO
 				}
 				$success = $client->Finalize($success);

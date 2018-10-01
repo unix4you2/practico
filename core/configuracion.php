@@ -90,7 +90,7 @@
 	
 	// Tipo de motor usado para la autenticacion de usuarios
 	$Auth_TipoMotor='practico';
-	$Auth_ProtoTransporte='http';
+	$Auth_ProtoTransporte='';
 	$Auth_PermitirReseteoClaves='0';
 	$Auth_PermitirAutoRegistro='0';
 	$Auth_PlantillaAutoRegistro='';

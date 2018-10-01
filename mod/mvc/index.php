@@ -79,10 +79,8 @@
 	Salida:
 		Listado de acciones de auditoria utilizando MVC y algunos estilos y funciones de Practico
 */
-
 if ($PCO_Accion=="probar_ejemplo_mvc") 
 	{
 		//Llamar al controlador inicial de la aplicacion o modulo
 		require($ruta_controladores.'controlador.php');
 	}
-

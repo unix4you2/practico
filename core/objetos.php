@@ -721,7 +721,224 @@ $salida=sprintf("<?php
 	\$APIWithings_ClientId='%s';
 	\$APIWithings_ClientSecret='%s';
 	\$APIWithings_RedirectUri='%s';
-	\$APIWithings_Template='%s';",$UbicacionProveedoresOAuthNEW,$APIGoogle_ClientIdNEW,$APIGoogle_ClientSecretNEW,$APIGoogle_RedirectUriNEW,$APIGoogle_TemplateNEW,$APIFacebook_ClientIdNEW,$APIFacebook_ClientSecretNEW,$APIFacebook_RedirectUriNEW,$APIFacebook_TemplateNEW,$APITwitter_ClientIdNEW,$APITwitter_ClientSecretNEW,$APITwitter_RedirectUriNEW,$APITwitter_TemplateNEW,$APIDropbox_ClientIdNEW,$APIDropbox_ClientSecretNEW,$APIDropbox_RedirectUriNEW,$APIDropbox_TemplateNEW,$APIFlickr_ClientIdNEW,$APIFlickr_ClientSecretNEW,$APIFlickr_RedirectUriNEW,$APIFlickr_TemplateNEW,$APIMicrosoft_ClientIdNEW,$APIMicrosoft_ClientSecretNEW,$APIMicrosoft_RedirectUriNEW,$APIMicrosoft_TemplateNEW,$APIFoursquare_ClientIdNEW,$APIFoursquare_ClientSecretNEW,$APIFoursquare_RedirectUriNEW,$APIFoursquare_TemplateNEW,$APIBitbucket_ClientIdNEW,$APIBitbucket_ClientSecretNEW,$APIBitbucket_RedirectUriNEW,$APIBitbucket_TemplateNEW,$APISalesforce_ClientIdNEW,$APISalesforce_ClientSecretNEW,$APISalesforce_RedirectUriNEW,$APISalesforce_TemplateNEW,$APIYahoo_ClientIdNEW,$APIYahoo_ClientSecretNEW,$APIYahoo_RedirectUriNEW,$APIYahoo_TemplateNEW,$APIBox_ClientIdNEW,$APIBox_ClientSecretNEW,$APIBox_RedirectUriNEW,$APIBox_TemplateNEW,$APIDisqus_ClientIdNEW,$APIDisqus_ClientSecretNEW,$APIDisqus_RedirectUriNEW,$APIDisqus_TemplateNEW,$APIRightSignature_ClientIdNEW,$APIRightSignature_ClientSecretNEW,$APIRightSignature_RedirectUriNEW,$APIRightSignature_TemplateNEW,$APIFitbit_ClientIdNEW,$APIFitbit_ClientSecretNEW,$APIFitbit_RedirectUriNEW,$APIFitbit_TemplateNEW,$APIScoopIt_ClientIdNEW,$APIScoopIt_ClientSecretNEW,$APIScoopIt_RedirectUriNEW,$APIScoopIt_TemplateNEW,$APITumblr_ClientIdNEW,$APITumblr_ClientSecretNEW,$APITumblr_RedirectUriNEW,$APITumblr_TemplateNEW,$APIStockTwits_ClientIdNEW,$APIStockTwits_ClientSecretNEW,$APIStockTwits_RedirectUriNEW,$APIStockTwits_TemplateNEW,$APILinkedIn_ClientIdNEW,$APILinkedIn_ClientSecretNEW,$APILinkedIn_RedirectUriNEW,$APILinkedIn_TemplateNEW,$APIInstagram_ClientIdNEW,$APIInstagram_ClientSecretNEW,$APIInstagram_RedirectUriNEW,$APIInstagram_TemplateNEW,$APISurveyMonkey_ClientIdNEW,$APISurveyMonkey_ClientSecretNEW,$APISurveyMonkey_RedirectUriNEW,$APISurveyMonkey_TemplateNEW,$APIEventful_ClientIdNEW,$APIEventful_ClientSecretNEW,$APIEventful_RedirectUriNEW,$APIEventful_TemplateNEW,$APIXING_ClientIdNEW,$APIXING_ClientSecretNEW,$APIXING_RedirectUriNEW,$APIXING_TemplateNEW,$APIVK_ClientIdNEW,$APIVK_ClientSecretNEW,$APIVK_RedirectUriNEW,$APIVK_TemplateNEW,$APIWithings_ClientIdNEW,$APIWithings_ClientSecretNEW,$APIWithings_RedirectUriNEW,$APIWithings_TemplateNEW);
+	\$APIWithings_Template='%s';
+	
+	// 37Signals
+	\$API37Signals_ClientId='%s';
+	\$API37Signals_ClientSecret='%s';
+	\$API37Signals_RedirectUri='%s';
+	\$API37Signals_Template='%s';
+	
+	// Amazon
+	\$APIAmazon_ClientId='%s';
+	\$APIAmazon_ClientSecret='%s';
+	\$APIAmazon_RedirectUri='%s';
+	\$APIAmazon_Template='%s';
+	
+	// AOL
+	\$APIAOL_ClientId='%s';
+	\$APIAOL_ClientSecret='%s';
+	\$APIAOL_RedirectUri='%s';
+	\$APIAOL_Template='%s';
+	
+	// Bitly
+	\$APIBitly_ClientId='%s';
+	\$APIBitly_ClientSecret='%s';
+	\$APIBitly_RedirectUri='%s';
+	\$APIBitly_Template='%s';
+	
+	// Buffer
+	\$APIBuffer_ClientId='%s';
+	\$APIBuffer_ClientSecret='%s';
+	\$APIBuffer_RedirectUri='%s';
+	\$APIBuffer_Template='%s';
+	
+	// Copy
+	\$APICopy_ClientId='%s';
+	\$APICopy_ClientSecret='%s';
+	\$APICopy_RedirectUri='%s';
+	\$APICopy_Template='%s';
+	
+	// Dailymotion
+	\$APIDailymotion_ClientId='%s';
+	\$APIDailymotion_ClientSecret='%s';
+	\$APIDailymotion_RedirectUri='%s';
+	\$APIDailymotion_Template='%s';
+	
+	// Discogs
+	\$APIDiscogs_ClientId='%s';
+	\$APIDiscogs_ClientSecret='%s';
+	\$APIDiscogs_RedirectUri='%s';
+	\$APIDiscogs_Template='%s';
+	
+	// Etsy
+	\$APIEtsy_ClientId='%s';
+	\$APIEtsy_ClientSecret='%s';
+	\$APIEtsy_RedirectUri='%s';
+	\$APIEtsy_Template='%s';
+	
+	// Garmin
+	\$APIGarmin_ClientId='%s';
+	\$APIGarmin_ClientSecret='%s';
+	\$APIGarmin_RedirectUri='%s';
+	\$APIGarmin_Template='%s';
+	
+	// Garmin2Legged
+	\$APIGarmin2Legged_ClientId='%s';
+	\$APIGarmin2Legged_ClientSecret='%s';
+	\$APIGarmin2Legged_RedirectUri='%s';
+	\$APIGarmin2Legged_Template='%s';
+	
+	// iHealth
+	\$APIiHealth_ClientId='%s';
+	\$APIiHealth_ClientSecret='%s';
+	\$APIiHealth_RedirectUri='%s';
+	\$APIiHealth_Template='%s';
+	
+	// imgur
+	\$APIimgur_ClientId='%s';
+	\$APIimgur_ClientSecret='%s';
+	\$APIimgur_RedirectUri='%s';
+	\$APIimgur_Template='%s';
+	
+	// Infusionsoft
+	\$APIInfusionsoft_ClientId='%s';
+	\$APIInfusionsoft_ClientSecret='%s';
+	\$APIInfusionsoft_RedirectUri='%s';
+	\$APIInfusionsoft_Template='%s';
+	
+	// Intuit
+	\$APIIntuit_ClientId='%s';
+	\$APIIntuit_ClientSecret='%s';
+	\$APIIntuit_RedirectUri='%s';
+	\$APIIntuit_Template='%s';
+	
+	// Jawbone
+	\$APIJawbone_ClientId='%s';
+	\$APIJawbone_ClientSecret='%s';
+	\$APIJawbone_RedirectUri='%s';
+	\$APIJawbone_Template='%s';
+	
+	// Livecoding
+	\$APILivecoding_ClientId='%s';
+	\$APILivecoding_ClientSecret='%s';
+	\$APILivecoding_RedirectUri='%s';
+	\$APILivecoding_Template='%s';
+	
+	// MailChimp
+	\$APIMailChimp_ClientId='%s';
+	\$APIMailChimp_ClientSecret='%s';
+	\$APIMailChimp_RedirectUri='%s';
+	\$APIMailChimp_Template='%s';
+	
+	// Mavenlink
+	\$APIMavenlink_ClientId='%s';
+	\$APIMavenlink_ClientSecret='%s';
+	\$APIMavenlink_RedirectUri='%s';
+	\$APIMavenlink_Template='%s';
+	
+	// Meetup
+	\$APIMeetup_ClientId='%s';
+	\$APIMeetup_ClientSecret='%s';
+	\$APIMeetup_RedirectUri='%s';
+	\$APIMeetup_Template='%s';
+	
+	// MicrosoftOpenIDConnect
+	\$APIMicrosoftOpenIDConnect_ClientId='%s';
+	\$APIMicrosoftOpenIDConnect_ClientSecret='%s';
+	\$APIMicrosoftOpenIDConnect_RedirectUri='%s';
+	\$APIMicrosoftOpenIDConnect_Template='%s';
+	
+	// Misfit
+	\$APIMisfit_ClientId='%s';
+	\$APIMisfit_ClientSecret='%s';
+	\$APIMisfit_RedirectUri='%s';
+	\$APIMisfit_Template='%s';
+	
+	// oDesk
+	\$APIoDesk_ClientId='%s';
+	\$APIoDesk_ClientSecret='%s';
+	\$APIoDesk_RedirectUri='%s';
+	\$APIoDesk_Template='%s';
+	
+	// Odnoklassniki
+	\$APIOdnoklassniki_ClientId='%s';
+	\$APIOdnoklassniki_ClientSecret='%s';
+	\$APIOdnoklassniki_RedirectUri='%s';
+	\$APIOdnoklassniki_Template='%s';
+	
+	// Paypal
+	\$APIPaypal_ClientId='%s';
+	\$APIPaypal_ClientSecret='%s';
+	\$APIPaypal_RedirectUri='%s';
+	\$APIPaypal_Template='%s';
+	
+	// Pinterest
+	\$APIPinterest_ClientId='%s';
+	\$APIPinterest_ClientSecret='%s';
+	\$APIPinterest_RedirectUri='%s';
+	\$APIPinterest_Template='%s';
+	
+	// Rdio
+	\$APIRdio_ClientId='%s';
+	\$APIRdio_ClientSecret='%s';
+	\$APIRdio_RedirectUri='%s';
+	\$APIRdio_Template='%s';
+	
+	// Reddit
+	\$APIReddit_ClientId='%s';
+	\$APIReddit_ClientSecret='%s';
+	\$APIReddit_RedirectUri='%s';
+	\$APIReddit_Template='%s';
+	
+	// RunKeeper
+	\$APIRunKeeper_ClientId='%s';
+	\$APIRunKeeper_ClientSecret='%s';
+	\$APIRunKeeper_RedirectUri='%s';
+	\$APIRunKeeper_Template='%s';
+	
+	// Uber
+	\$APIUber_ClientId='%s';
+	\$APIUber_ClientSecret='%s';
+	\$APIUber_RedirectUri='%s';
+	\$APIUber_Template='%s';
+	
+	// TeamViewer
+	\$APITeamViewer_ClientId='%s';
+	\$APITeamViewer_ClientSecret='%s';
+	\$APITeamViewer_RedirectUri='%s';
+	\$APITeamViewer_Template='%s';
+	
+	// Vimeo
+	\$APIVimeo_ClientId='%s';
+	\$APIVimeo_ClientSecret='%s';
+	\$APIVimeo_RedirectUri='%s';
+	\$APIVimeo_Template='%s';
+	
+	// Wordpress
+	\$APIWordpress_ClientId='%s';
+	\$APIWordpress_ClientSecret='%s';
+	\$APIWordpress_RedirectUri='%s';
+	\$APIWordpress_Template='%s';
+	
+	// Xero
+	\$APIXero_ClientId='%s';
+	\$APIXero_ClientSecret='%s';
+	\$APIXero_RedirectUri='%s';
+	\$APIXero_Template='%s';
+	
+	// Yammer
+	\$APIYammer_ClientId='%s';
+	\$APIYammer_ClientSecret='%s';
+	\$APIYammer_RedirectUri='%s';
+	\$APIYammer_Template='%s';
+	
+	// Yandex
+	\$APIYandex_ClientId='%s';
+	\$APIYandex_ClientSecret='%s';
+	\$APIYandex_RedirectUri='%s';
+	\$APIYandex_Template='%s';
+	",$UbicacionProveedoresOAuthNEW,$APIGoogle_ClientIdNEW,$APIGoogle_ClientSecretNEW,$APIGoogle_RedirectUriNEW,$APIGoogle_TemplateNEW,$APIFacebook_ClientIdNEW,$APIFacebook_ClientSecretNEW,$APIFacebook_RedirectUriNEW,$APIFacebook_TemplateNEW,$APITwitter_ClientIdNEW,$APITwitter_ClientSecretNEW,$APITwitter_RedirectUriNEW,$APITwitter_TemplateNEW,$APIDropbox_ClientIdNEW,$APIDropbox_ClientSecretNEW,$APIDropbox_RedirectUriNEW,$APIDropbox_TemplateNEW,$APIFlickr_ClientIdNEW,$APIFlickr_ClientSecretNEW,$APIFlickr_RedirectUriNEW,$APIFlickr_TemplateNEW,$APIMicrosoft_ClientIdNEW,$APIMicrosoft_ClientSecretNEW,$APIMicrosoft_RedirectUriNEW,$APIMicrosoft_TemplateNEW,$APIFoursquare_ClientIdNEW,$APIFoursquare_ClientSecretNEW,$APIFoursquare_RedirectUriNEW,$APIFoursquare_TemplateNEW,$APIBitbucket_ClientIdNEW,$APIBitbucket_ClientSecretNEW,$APIBitbucket_RedirectUriNEW,$APIBitbucket_TemplateNEW,$APISalesforce_ClientIdNEW,$APISalesforce_ClientSecretNEW,$APISalesforce_RedirectUriNEW,$APISalesforce_TemplateNEW,$APIYahoo_ClientIdNEW,$APIYahoo_ClientSecretNEW,$APIYahoo_RedirectUriNEW,$APIYahoo_TemplateNEW,$APIBox_ClientIdNEW,$APIBox_ClientSecretNEW,$APIBox_RedirectUriNEW,$APIBox_TemplateNEW,$APIDisqus_ClientIdNEW,$APIDisqus_ClientSecretNEW,$APIDisqus_RedirectUriNEW,$APIDisqus_TemplateNEW,$APIRightSignature_ClientIdNEW,$APIRightSignature_ClientSecretNEW,$APIRightSignature_RedirectUriNEW,$APIRightSignature_TemplateNEW,$APIFitbit_ClientIdNEW,$APIFitbit_ClientSecretNEW,$APIFitbit_RedirectUriNEW,$APIFitbit_TemplateNEW,$APIScoopIt_ClientIdNEW,$APIScoopIt_ClientSecretNEW,$APIScoopIt_RedirectUriNEW,$APIScoopIt_TemplateNEW,$APITumblr_ClientIdNEW,$APITumblr_ClientSecretNEW,$APITumblr_RedirectUriNEW,$APITumblr_TemplateNEW,$APIStockTwits_ClientIdNEW,$APIStockTwits_ClientSecretNEW,$APIStockTwits_RedirectUriNEW,$APIStockTwits_TemplateNEW,$APILinkedIn_ClientIdNEW,$APILinkedIn_ClientSecretNEW,$APILinkedIn_RedirectUriNEW,$APILinkedIn_TemplateNEW,$APIInstagram_ClientIdNEW,$APIInstagram_ClientSecretNEW,$APIInstagram_RedirectUriNEW,$APIInstagram_TemplateNEW,$APISurveyMonkey_ClientIdNEW,$APISurveyMonkey_ClientSecretNEW,$APISurveyMonkey_RedirectUriNEW,$APISurveyMonkey_TemplateNEW,$APIEventful_ClientIdNEW,$APIEventful_ClientSecretNEW,$APIEventful_RedirectUriNEW,$APIEventful_TemplateNEW,$APIXING_ClientIdNEW,$APIXING_ClientSecretNEW,$APIXING_RedirectUriNEW,$APIXING_TemplateNEW,$APIVK_ClientIdNEW,$APIVK_ClientSecretNEW,$APIVK_RedirectUriNEW,$APIVK_TemplateNEW,$APIWithings_ClientIdNEW,$APIWithings_ClientSecretNEW,$APIWithings_RedirectUriNEW,$APIWithings_TemplateNEW,$API37Signals_ClientIdNEW,$API37Signals_ClientSecretNEW,$API37Signals_RedirectUriNEW,$API37Signals_TemplateNEW,$APIAmazon_ClientIdNEW,$APIAmazon_ClientSecretNEW,$APIAmazon_RedirectUriNEW,$APIAmazon_TemplateNEW,$APIAOL_ClientIdNEW,$APIAOL_ClientSecretNEW,$APIAOL_RedirectUriNEW,$APIAOL_TemplateNEW,$APIBitly_ClientIdNEW,$APIBitly_ClientSecretNEW,$APIBitly_RedirectUriNEW,$APIBitly_TemplateNEW,$APIBuffer_ClientIdNEW,$APIBuffer_ClientSecretNEW,$APIBuffer_RedirectUriNEW,$APIBuffer_TemplateNEW,$APICopy_ClientIdNEW,$APICopy_ClientSecretNEW,$APICopy_RedirectUriNEW,$APICopy_TemplateNEW,$APIDailymotion_ClientIdNEW,$APIDailymotion_ClientSecretNEW,$APIDailymotion_RedirectUriNEW,$APIDailymotion_TemplateNEW,$APIDiscogs_ClientIdNEW,$APIDiscogs_ClientSecretNEW,$APIDiscogs_RedirectUriNEW,$APIDiscogs_TemplateNEW,$APIEtsy_ClientIdNEW,$APIEtsy_ClientSecretNEW,$APIEtsy_RedirectUriNEW,$APIEtsy_TemplateNEW,$APIGarmin_ClientIdNEW,$APIGarmin_ClientSecretNEW,$APIGarmin_RedirectUriNEW,$APIGarmin_TemplateNEW,$APIGarmin2Legged_ClientIdNEW,$APIGarmin2Legged_ClientSecretNEW,$APIGarmin2Legged_RedirectUriNEW,$APIGarmin2Legged_TemplateNEW,$APIiHealth_ClientIdNEW,$APIiHealth_ClientSecretNEW,$APIiHealth_RedirectUriNEW,$APIiHealth_TemplateNEW,$APIimgur_ClientIdNEW,$APIimgur_ClientSecretNEW,$APIimgur_RedirectUriNEW,$APIimgur_TemplateNEW,$APIInfusionsoft_ClientIdNEW,$APIInfusionsoft_ClientSecretNEW,$APIInfusionsoft_RedirectUriNEW,$APIInfusionsoft_TemplateNEW,$APIIntuit_ClientIdNEW,$APIIntuit_ClientSecretNEW,$APIIntuit_RedirectUriNEW,$APIIntuit_TemplateNEW,$APIJawbone_ClientIdNEW,$APIJawbone_ClientSecretNEW,$APIJawbone_RedirectUriNEW,$APIJawbone_TemplateNEW,$APILivecoding_ClientIdNEW,$APILivecoding_ClientSecretNEW,$APILivecoding_RedirectUriNEW,$APILivecoding_TemplateNEW,$APIMailChimp_ClientIdNEW,$APIMailChimp_ClientSecretNEW,$APIMailChimp_RedirectUriNEW,$APIMailChimp_TemplateNEW,$APIMavenlink_ClientIdNEW,$APIMavenlink_ClientSecretNEW,$APIMavenlink_RedirectUriNEW,$APIMavenlink_TemplateNEW,$APIMeetup_ClientIdNEW,$APIMeetup_ClientSecretNEW,$APIMeetup_RedirectUriNEW,$APIMeetup_TemplateNEW,$APIMicrosoftOpenIDConnect_ClientIdNEW,$APIMicrosoftOpenIDConnect_ClientSecretNEW,$APIMicrosoftOpenIDConnect_RedirectUriNEW,$APIMicrosoftOpenIDConnect_TemplateNEW,$APIMisfit_ClientIdNEW,$APIMisfit_ClientSecretNEW,$APIMisfit_RedirectUriNEW,$APIMisfit_TemplateNEW,$APIoDesk_ClientIdNEW,$APIoDesk_ClientSecretNEW,$APIoDesk_RedirectUriNEW,$APIoDesk_TemplateNEW,$APIOdnoklassniki_ClientIdNEW,$APIOdnoklassniki_ClientSecretNEW,$APIOdnoklassniki_RedirectUriNEW,$APIOdnoklassniki_TemplateNEW,$APIPaypal_ClientIdNEW,$APIPaypal_ClientSecretNEW,$APIPaypal_RedirectUriNEW,$APIPaypal_TemplateNEW,$APIPinterest_ClientIdNEW,$APIPinterest_ClientSecretNEW,$APIPinterest_RedirectUriNEW,$APIPinterest_TemplateNEW,$APIRdio_ClientIdNEW,$APIRdio_ClientSecretNEW,$APIRdio_RedirectUriNEW,$APIRdio_TemplateNEW,$APIReddit_ClientIdNEW,$APIReddit_ClientSecretNEW,$APIReddit_RedirectUriNEW,$APIReddit_TemplateNEW,$APIRunKeeper_ClientIdNEW,$APIRunKeeper_ClientSecretNEW,$APIRunKeeper_RedirectUriNEW,$APIRunKeeper_TemplateNEW,$APIUber_ClientIdNEW,$APIUber_ClientSecretNEW,$APIUber_RedirectUriNEW,$APIUber_TemplateNEW,$APITeamViewer_ClientIdNEW,$APITeamViewer_ClientSecretNEW,$APITeamViewer_RedirectUriNEW,$APITeamViewer_TemplateNEW,$APIVimeo_ClientIdNEW,$APIVimeo_ClientSecretNEW,$APIVimeo_RedirectUriNEW,$APIVimeo_TemplateNEW,$APIWordpress_ClientIdNEW,$APIWordpress_ClientSecretNEW,$APIWordpress_RedirectUriNEW,$APIWordpress_TemplateNEW,$APIXero_ClientIdNEW,$APIXero_ClientSecretNEW,$APIXero_RedirectUriNEW,$APIXero_TemplateNEW,$APIYammer_ClientIdNEW,$APIYammer_ClientSecretNEW,$APIYammer_RedirectUriNEW,$APIYammer_TemplateNEW,$APIYandex_ClientIdNEW,$APIYandex_ClientSecretNEW,$APIYandex_RedirectUriNEW,$APIYandex_TemplateNEW);
 
 			$mensaje_error="";
 

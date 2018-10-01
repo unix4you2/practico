@@ -3169,6 +3169,8 @@ function PCO_EjecutarSQL($query,$lista_parametros="",$ConexionBD="",$EvitarLogSQ
 			}
 		catch( PDOException $ErrorPDO)
 			{
+			    //Lleva el log de errores
+			    PCO_Auditar($query,"SQLog:error");
 			    $mensaje_final='';
 			    $detalles_conexion=' (CNX='.$ConexionPDO->getAttribute(PDO::ATTR_CONNECTION_STATUS).') ';
 				//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
@@ -3326,6 +3328,8 @@ function PCO_EjecutarSQLUnaria($query,$lista_parametros="",$ConexionBD="",$Repli
 			}
 		catch( PDOException $ErrorPDO)
 			{
+			    //Lleva el log de errores
+			    PCO_Auditar($query,"SQLog:error");
 			    $detalles_conexion=' (CNX='.$ConexionPDO->getAttribute(PDO::ATTR_CONNECTION_STATUS).') ';
 				//Muestra detalles del query solo al admin y si el modo de depuracion se encuentra activo
 				if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
@@ -4079,30 +4083,67 @@ function PCO_ContarProveedoresOAuthConfigurados()
         global $APIGoogle_ClientId,$APIGoogle_ClientSecret,$APIFacebook_ClientId,$APIFacebook_ClientSecret,$APILinkedIn_ClientId,$APILinkedIn_ClientSecret,$APIInstagram_ClientId,$APIInstagram_ClientSecret,$APIDropbox_ClientId,$APIDropbox_ClientSecret,$APIMicrosoft_ClientId,$APIMicrosoft_ClientSecret,$APIFlickr_ClientId,$APIFlickr_ClientSecret,$APITwitter_ClientId,$APITwitter_ClientSecret,$APIFoursquare_ClientId,$APIFoursquare_ClientSecret,$APIXING_ClientId,$APIXING_ClientSecret,$APISalesforce_ClientId,$APISalesforce_ClientSecret,$APIBitbucket_ClientId,$APIBitbucket_ClientSecret,$APIYahoo_ClientId,$APIYahoo_ClientSecret,$APIBox_ClientId,$APIBox_ClientSecret,$APIDisqus_ClientId,$APIDisqus_ClientSecret,$APIEventful_ClientId,$APIEventful_ClientSecret,$APISurveyMonkey_ClientId,$APISurveyMonkey_ClientSecret,$APIRightSignature_ClientId,$APIRightSignature_ClientSecret,$APIFitbit_ClientId,$APIFitbit_ClientSecret,$APIScoopIt_ClientId,$APIScoopIt_ClientSecret,$APITumblr_ClientId,$APITumblr_ClientSecret,$APIStockTwits_ClientId,$APIStockTwits_ClientSecret,$APIVK_ClientId,$APIVK_ClientSecret,$APIWithings_ClientId,$APIWithings_ClientSecret;
         // Crea los formularios de redireccion segun proveedor
         $CadenaProveedoresOAuthDisponibles="";
-        if ($APIGoogle_ClientId!=''			&& $APIGoogle_ClientSecret!='')			$Conteo++;
-        if ($APIFacebook_ClientId!=''		&& $APIFacebook_ClientSecret!='')		$Conteo++;
-        if ($APILinkedIn_ClientId!=''		&& $APILinkedIn_ClientSecret!='')		$Conteo++;
-        if ($APIInstagram_ClientId!=''		&& $APIInstagram_ClientSecret!='')		$Conteo++;
-        if ($APIDropbox_ClientId!=''		&& $APIDropbox_ClientSecret!='')		$Conteo++;
-        if ($APIMicrosoft_ClientId!=''		&& $APIMicrosoft_ClientSecret!='')		$Conteo++;
-        if ($APIFlickr_ClientId!=''			&& $APIFlickr_ClientSecret!='')			$Conteo++;
-        if ($APITwitter_ClientId!=''		&& $APITwitter_ClientSecret!='')		$Conteo++;
-        if ($APIFoursquare_ClientId!=''		&& $APIFoursquare_ClientSecret!='')		$Conteo++;
-        if ($APIXING_ClientId!=''			&& $APIXING_ClientSecret!='')			$Conteo++;
-        if ($APISalesforce_ClientId!=''		&& $APISalesforce_ClientSecret!='')		$Conteo++;
-        if ($APIBitbucket_ClientId!=''		&& $APIBitbucket_ClientSecret!='')		$Conteo++;
-        if ($APIYahoo_ClientId!=''			&& $APIYahoo_ClientSecret!='')			$Conteo++;
-        if ($APIBox_ClientId!=''			&& $APIBox_ClientSecret!='')			$Conteo++;
-        if ($APIDisqus_ClientId!=''			&& $APIDisqus_ClientSecret!='')			$Conteo++;
-        if ($APIEventful_ClientId!=''		&& $APIEventful_ClientSecret!='')		$Conteo++;
-        if ($APISurveyMonkey_ClientId!=''	&& $APISurveyMonkey_ClientSecret!='')	$Conteo++;
-        if ($APIRightSignature_ClientId!=''	&& $APIRightSignature_ClientSecret!='')	$Conteo++;
-        if ($APIFitbit_ClientId!=''			&& $APIFitbit_ClientSecret!='')			$Conteo++;
-        if ($APIScoopIt_ClientId!=''		&& $APIScoopIt_ClientSecret!='')		$Conteo++;
-        if ($APITumblr_ClientId!=''			&& $APITumblr_ClientSecret!='')			$Conteo++;
-        if ($APIStockTwits_ClientId!=''		&& $APIStockTwits_ClientSecret!='')		$Conteo++;
-        if ($APIVK_ClientId!=''				&& $APIVK_ClientSecret!='')				$Conteo++;
-        if ($APIWithings_ClientId!=''		&& $APIWithings_ClientSecret!='')		$Conteo++;
+        if ($APIGoogle_ClientId!=''			            && $APIGoogle_ClientSecret!='')			            $Conteo++;
+        if ($APIFacebook_ClientId!=''		            && $APIFacebook_ClientSecret!='')		            $Conteo++;
+        if ($APILinkedIn_ClientId!=''		            && $APILinkedIn_ClientSecret!='')		            $Conteo++;
+        if ($APIInstagram_ClientId!=''		            && $APIInstagram_ClientSecret!='')		            $Conteo++;
+        if ($APIDropbox_ClientId!=''		            && $APIDropbox_ClientSecret!='')		            $Conteo++;
+        if ($APIMicrosoft_ClientId!=''		            && $APIMicrosoft_ClientSecret!='')		            $Conteo++;
+        if ($APIFlickr_ClientId!=''			            && $APIFlickr_ClientSecret!='')			            $Conteo++;
+        if ($APITwitter_ClientId!=''		            && $APITwitter_ClientSecret!='')		            $Conteo++;
+        if ($APIFoursquare_ClientId!=''		            && $APIFoursquare_ClientSecret!='')		            $Conteo++;
+        if ($APIXING_ClientId!=''			            && $APIXING_ClientSecret!='')			            $Conteo++;
+        if ($APISalesforce_ClientId!=''		            && $APISalesforce_ClientSecret!='')		            $Conteo++;
+        if ($APIBitbucket_ClientId!=''		            && $APIBitbucket_ClientSecret!='')		            $Conteo++;
+        if ($APIYahoo_ClientId!=''			            && $APIYahoo_ClientSecret!='')			            $Conteo++;
+        if ($APIBox_ClientId!=''			            && $APIBox_ClientSecret!='')			            $Conteo++;
+        if ($APIDisqus_ClientId!=''			            && $APIDisqus_ClientSecret!='')			            $Conteo++;
+        if ($APIEventful_ClientId!=''		            && $APIEventful_ClientSecret!='')		            $Conteo++;
+        if ($APISurveyMonkey_ClientId!=''	            && $APISurveyMonkey_ClientSecret!='')	            $Conteo++;
+        if ($APIRightSignature_ClientId!=''	            && $APIRightSignature_ClientSecret!='')	            $Conteo++;
+        if ($APIFitbit_ClientId!=''			            && $APIFitbit_ClientSecret!='')			            $Conteo++;
+        if ($APIScoopIt_ClientId!=''		            && $APIScoopIt_ClientSecret!='')		            $Conteo++;
+        if ($APITumblr_ClientId!=''			            && $APITumblr_ClientSecret!='')			            $Conteo++;
+        if ($APIStockTwits_ClientId!=''	            	&& $APIStockTwits_ClientSecret!='')		            $Conteo++;
+        if ($APIVK_ClientId!=''				            && $APIVK_ClientSecret!='')				            $Conteo++;
+        if ($APIWithings_ClientId!=''		            && $APIWithings_ClientSecret!='')		            $Conteo++;
+        if ($API37Signals_ClientId!=''		            && $API37Signals_ClientSecret!='')		            $Conteo++;
+        if ($APIAmazon_ClientId!=''		                && $APIAmazon_ClientSecret!='')		                $Conteo++;
+        if ($APIAOL_ClientId!=''		                && $APIAOL_ClientSecret!='')		                $Conteo++;
+        if ($APIBitly_ClientId!=''		                && $APIBitly_ClientSecret!='')		                $Conteo++;
+        if ($APIBuffer_ClientId!=''		                && $APIBuffer_ClientSecret!='')		                $Conteo++;
+        if ($APICopy_ClientId!=''		                && $APICopy_ClientSecret!='')		                $Conteo++;
+        if ($APIDailymotion_ClientId!=''		        && $APIDailymotion_ClientSecret!='')		        $Conteo++;
+        if ($APIDiscogs_ClientId!=''		            && $APIDiscogs_ClientSecret!='')		            $Conteo++;
+        if ($APIEtsy_ClientId!=''		                && $APIEtsy_ClientSecret!='')		                $Conteo++;
+        if ($APIGarmin_ClientId!=''		                && $APIGarmin_ClientSecret!='')		                $Conteo++;
+        if ($APIGarmin2Legged_ClientId!=''		        && $APIGarmin2Legged_ClientSecret!='')		        $Conteo++;
+        if ($APIiHealth_ClientId!=''		            && $APIiHealth_ClientSecret!='')		            $Conteo++;
+        if ($APIimgur_ClientId!=''		                && $APIimgur_ClientSecret!='')		                $Conteo++;
+        if ($APIInfusionsoft_ClientId!=''		        && $APIInfusionsoft_ClientSecret!='')		        $Conteo++;
+        if ($APIIntuit_ClientId!=''		                && $APIIntuit_ClientSecret!='')		                $Conteo++;
+        if ($APIJawbone_ClientId!=''		            && $APIJawbone_ClientSecret!='')		            $Conteo++;
+        if ($APILivecoding_ClientId!=''		            && $APILivecoding_ClientSecret!='')		            $Conteo++;
+        if ($APIMailChimp_ClientId!=''		            && $APIMailChimp_ClientSecret!='')		            $Conteo++;
+        if ($APIMavenlink_ClientId!=''		            && $APIMavenlink_ClientSecret!='')		            $Conteo++;
+        if ($APIMeetup_ClientId!=''		                && $APIMeetup_ClientSecret!='')		                $Conteo++;
+        if ($APIMicrosoftOpenIDConnect_ClientId!=''		&& $APIMicrosoftOpenIDConnect_ClientSecret!='')		$Conteo++;
+        if ($APIMisfit_ClientId!=''		                && $APIMisfit_ClientSecret!='')		                $Conteo++;
+        if ($APIoDesk_ClientId!=''		                && $APIoDesk_ClientSecret!='')		                $Conteo++;
+        if ($APIOdnoklassniki_ClientId!=''		        && $APIOdnoklassniki_ClientSecret!='')	            $Conteo++;
+        if ($APIPaypal_ClientId!=''		                && $APIPaypal_ClientSecret!='')		                $Conteo++;
+        if ($APIPinterest_ClientId!=''		            && $APIPinterest_ClientSecret!='')		            $Conteo++;
+        if ($APIRdio_ClientId!=''		                && $APIRdio_ClientSecret!='')		                $Conteo++;
+        if ($APIReddit_ClientId!=''		                && $APIReddit_ClientSecret!='')		                $Conteo++;
+        if ($APIRunKeeper_ClientId!=''		            && $APIRunKeeper_ClientSecret!='')		            $Conteo++;
+        if ($APIUber_ClientId!=''		                && $APIUber_ClientSecret!='')		                $Conteo++;
+        if ($APITeamViewer_ClientId!=''		            && $APITeamViewer_ClientSecret!='')		            $Conteo++;
+        if ($APIVimeo_ClientId!=''		                && $APIVimeo_ClientSecret!='')		                $Conteo++;
+        if ($APIWordpress_ClientId!=''		            && $APIWordpress_ClientSecret!='')		            $Conteo++;
+        if ($APIXero_ClientId!=''		                && $APIXero_ClientSecret!='')		                $Conteo++;
+        if ($APIYammer_ClientId!=''		                && $APIYammer_ClientSecret!='')		                $Conteo++;
+        if ($APIYandex_ClientId!=''		                && $APIYandex_ClientSecret!='')		                $Conteo++;
+
         return $Conteo;
     }
     
@@ -4110,32 +4151,70 @@ function PCO_ContarProveedoresOAuthConfigurados()
 function PCO_GenerarOpcionesProveedoresOAuth()
     {
         global $APIGoogle_ClientId,$APIGoogle_ClientSecret,$APIFacebook_ClientId,$APIFacebook_ClientSecret,$APILinkedIn_ClientId,$APILinkedIn_ClientSecret,$APIInstagram_ClientId,$APIInstagram_ClientSecret,$APIDropbox_ClientId,$APIDropbox_ClientSecret,$APIMicrosoft_ClientId,$APIMicrosoft_ClientSecret,$APIFlickr_ClientId,$APIFlickr_ClientSecret,$APITwitter_ClientId,$APITwitter_ClientSecret,$APIFoursquare_ClientId,$APIFoursquare_ClientSecret,$APIXING_ClientId,$APIXING_ClientSecret,$APISalesforce_ClientId,$APISalesforce_ClientSecret,$APIBitbucket_ClientId,$APIBitbucket_ClientSecret,$APIYahoo_ClientId,$APIYahoo_ClientSecret,$APIBox_ClientId,$APIBox_ClientSecret,$APIDisqus_ClientId,$APIDisqus_ClientSecret,$APIEventful_ClientId,$APIEventful_ClientSecret,$APISurveyMonkey_ClientId,$APISurveyMonkey_ClientSecret,$APIRightSignature_ClientId,$APIRightSignature_ClientSecret,$APIFitbit_ClientId,$APIFitbit_ClientSecret,$APIScoopIt_ClientId,$APIScoopIt_ClientSecret,$APITumblr_ClientId,$APITumblr_ClientSecret,$APIStockTwits_ClientId,$APIStockTwits_ClientSecret,$APIVK_ClientId,$APIVK_ClientSecret,$APIWithings_ClientId,$APIWithings_ClientSecret;
+        global $API37Signals_ClientId,$API37Signals_ClientSecret,$APIAmazon_ClientId,$APIAmazon_ClientSecret,$APIAOL_ClientId,$APIAOL_ClientSecret,$APIBitly_ClientId,$APIBitly_ClientSecret,$APIBuffer_ClientId,$APIBuffer_ClientSecret,$APICopy_ClientId,$APICopy_ClientSecret,$APIDailymotion_ClientId,$APIDailymotion_ClientSecret,$APIDiscogs_ClientId,$APIDiscogs_ClientSecret,$APIEtsy_ClientId,$APIEtsy_ClientSecret,$APIGarmin_ClientId,$APIGarmin_ClientSecret,$APIGarmin2Legged_ClientId,$APIGarmin2Legged_ClientSecret,$APIiHealth_ClientId,$APIiHealth_ClientSecret,$APIimgur_ClientId,$APIimgur_ClientSecret,$APIInfusionsoft_ClientId,$APIInfusionsoft_ClientSecret,$APIIntuit_ClientId,$APIIntuit_ClientSecret,$APIJawbone_ClientId,$APIJawbone_ClientSecret,$APILivecoding_ClientId,$APILivecoding_ClientSecret,$APIMailChimp_ClientId,$APIMailChimp_ClientSecret,$APIMavenlink_ClientId,$APIMavenlink_ClientSecret,$APIMeetup_ClientId,$APIMeetup_ClientSecret,$APIMicrosoftOpenIDConnect_ClientId,$APIMicrosoftOpenIDConnect_ClientSecret,$APIMisfit_ClientId,$APIMisfit_ClientSecret,$APIoDesk_ClientId,$APIoDesk_ClientSecret,$APIOdnoklassniki_ClientId,$APIOdnoklassniki_ClientSecret,$APIPaypal_ClientId,$APIPaypal_ClientSecret,$APIPinterest_ClientId,$APIPinterest_ClientSecret,$APIRdio_ClientId,$APIRdio_ClientSecret,$APIReddit_ClientId,$APIReddit_ClientSecret,$APIRunKeeper_ClientId,$APIRunKeeper_ClientSecret,$APIUber_ClientId,$APIUber_ClientSecret,$APITeamViewer_ClientId,$APITeamViewer_ClientSecret,$APIVimeo_ClientId,$APIVimeo_ClientSecret,$APIWordpress_ClientId,$APIWordpress_ClientSecret,$APIXero_ClientId,$APIXero_ClientSecret,$APIYammer_ClientId,$APIYammer_ClientSecret,$APIYandex_ClientId,$APIYandex_ClientSecret;
         // Crea los formularios de redireccion segun proveedor
         $CadenaProveedoresOAuthDisponibles="";
-        if ($APIGoogle_ClientId!=''			&& $APIGoogle_ClientSecret!='')			$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Google');
-        if ($APIFacebook_ClientId!=''		&& $APIFacebook_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Facebook');
-        if ($APILinkedIn_ClientId!=''		&& $APILinkedIn_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('LinkedIn');
-        if ($APIInstagram_ClientId!=''		&& $APIInstagram_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Instagram');
-        if ($APIDropbox_ClientId!=''		&& $APIDropbox_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Dropbox');
-        if ($APIMicrosoft_ClientId!=''		&& $APIMicrosoft_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Microsoft');
-        if ($APIFlickr_ClientId!=''			&& $APIFlickr_ClientSecret!='')			$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Flickr');
-        if ($APITwitter_ClientId!=''		&& $APITwitter_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Twitter');
-        if ($APIFoursquare_ClientId!=''		&& $APIFoursquare_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Foursquare');
-        if ($APIXING_ClientId!=''			&& $APIXING_ClientSecret!='')			$AlMenosUnOAuth.=PCO_CrearFormularioOauth('XING');
-        if ($APISalesforce_ClientId!=''		&& $APISalesforce_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Salesforce');
-        if ($APIBitbucket_ClientId!=''		&& $APIBitbucket_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Bitbucket');
-        if ($APIYahoo_ClientId!=''			&& $APIYahoo_ClientSecret!='')			$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Yahoo');
-        if ($APIBox_ClientId!=''			&& $APIBox_ClientSecret!='')			$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Box');
-        if ($APIDisqus_ClientId!=''			&& $APIDisqus_ClientSecret!='')			$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Disqus');
-        if ($APIEventful_ClientId!=''		&& $APIEventful_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Eventful');
-        if ($APISurveyMonkey_ClientId!=''	&& $APISurveyMonkey_ClientSecret!='')	$AlMenosUnOAuth.=PCO_CrearFormularioOauth('SurveyMonkey');
-        if ($APIRightSignature_ClientId!=''	&& $APIRightSignature_ClientSecret!='')	$AlMenosUnOAuth.=PCO_CrearFormularioOauth('RightSignature');
-        if ($APIFitbit_ClientId!=''			&& $APIFitbit_ClientSecret!='')			$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Fitbit');
-        if ($APIScoopIt_ClientId!=''		&& $APIScoopIt_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('ScoopIt');
-        if ($APITumblr_ClientId!=''			&& $APITumblr_ClientSecret!='')			$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Tumblr');
-        if ($APIStockTwits_ClientId!=''		&& $APIStockTwits_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('StockTwits');
-        if ($APIVK_ClientId!=''				&& $APIVK_ClientSecret!='')				$AlMenosUnOAuth.=PCO_CrearFormularioOauth('VK');
-        if ($APIWithings_ClientId!=''		&& $APIWithings_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('Withings');
+        if ($APIGoogle_ClientId!=''			            && $APIGoogle_ClientSecret!='')			            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Google');
+        if ($APIFacebook_ClientId!=''		            && $APIFacebook_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Facebook');
+        if ($APILinkedIn_ClientId!=''		            && $APILinkedIn_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('LinkedIn');
+        if ($APIInstagram_ClientId!=''		            && $APIInstagram_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Instagram');
+        if ($APIDropbox_ClientId!=''		            && $APIDropbox_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Dropbox');
+        if ($APIMicrosoft_ClientId!=''		            && $APIMicrosoft_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Microsoft');
+        if ($APIFlickr_ClientId!=''			            && $APIFlickr_ClientSecret!='')			            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Flickr');
+        if ($APITwitter_ClientId!=''		            && $APITwitter_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Twitter');
+        if ($APIFoursquare_ClientId!=''		            && $APIFoursquare_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Foursquare');
+        if ($APIXING_ClientId!=''			            && $APIXING_ClientSecret!='')			            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('XING');
+        if ($APISalesforce_ClientId!=''		            && $APISalesforce_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Salesforce');
+        if ($APIBitbucket_ClientId!=''		            && $APIBitbucket_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Bitbucket');
+        if ($APIYahoo_ClientId!=''			            && $APIYahoo_ClientSecret!='')			            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Yahoo');
+        if ($APIBox_ClientId!=''			            && $APIBox_ClientSecret!='')			            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Box');
+        if ($APIDisqus_ClientId!=''			            && $APIDisqus_ClientSecret!='')			            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Disqus');
+        if ($APIEventful_ClientId!=''		            && $APIEventful_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Eventful');
+        if ($APISurveyMonkey_ClientId!=''	            && $APISurveyMonkey_ClientSecret!='')	            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('SurveyMonkey');
+        if ($APIRightSignature_ClientId!=''	            && $APIRightSignature_ClientSecret!='')	            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('RightSignature');
+        if ($APIFitbit_ClientId!=''			            && $APIFitbit_ClientSecret!='')			            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Fitbit');
+        if ($APIScoopIt_ClientId!=''		            && $APIScoopIt_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('ScoopIt');
+        if ($APITumblr_ClientId!=''			            && $APITumblr_ClientSecret!='')			            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Tumblr');
+        if ($APIStockTwits_ClientId!=''		            && $APIStockTwits_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('StockTwits');
+        if ($APIVK_ClientId!=''				            && $APIVK_ClientSecret!='')				            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('VK');
+        if ($APIWithings_ClientId!=''		            && $APIWithings_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Withings');
+        if ($API37Signals_ClientId!=''		            && $API37Signals_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('37Signals');
+        if ($APIAmazon_ClientId!=''		                && $APIAmazon_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Amazon');
+        if ($APIAOL_ClientId!=''		                && $APIAOL_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('AOL');
+        if ($APIBitly_ClientId!=''		                && $APIBitly_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Bitly');
+        if ($APIBuffer_ClientId!=''		                && $APIBuffer_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Buffer');
+        if ($APICopy_ClientId!=''		                && $APICopy_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Copy');
+        if ($APIDailymotion_ClientId!=''		        && $APIDailymotion_ClientSecret!='')		        $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Dailymotion');
+        if ($APIDiscogs_ClientId!=''		            && $APIDiscogs_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Discogs');
+        if ($APIEtsy_ClientId!=''		                && $APIEtsy_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Etsy');
+        if ($APIGarmin_ClientId!=''		                && $APIGarmin_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Garmin');
+        if ($APIGarmin2Legged_ClientId!=''		        && $APIGarmin2Legged_ClientSecret!='')		        $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Garmin2Legged');
+        if ($APIiHealth_ClientId!=''		            && $APIiHealth_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('iHealth');
+        if ($APIimgur_ClientId!=''		                && $APIimgur_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('imgur');
+        if ($APIInfusionsoft_ClientId!=''		        && $APIInfusionsoft_ClientSecret!='')		        $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Infusionsoft');
+        if ($APIIntuit_ClientId!=''		                && $APIIntuit_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Intuit');
+        if ($APIJawbone_ClientId!=''		            && $APIJawbone_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Jawbone');
+        if ($APILivecoding_ClientId!=''		            && $APILivecoding_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Livecoding');
+        if ($APIMailChimp_ClientId!=''		            && $APIMailChimp_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('MailChimp');
+        if ($APIMavenlink_ClientId!=''		            && $APIMavenlink_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Mavenlink');
+        if ($APIMeetup_ClientId!=''		                && $APIMeetup_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Meetup');
+        if ($APIMicrosoftOpenIDConnect_ClientId!=''		&& $APIMicrosoftOpenIDConnect_ClientSecret!='')		$AlMenosUnOAuth.=PCO_CrearFormularioOauth('MicrosoftOpenIDConnect');
+        if ($APIMisfit_ClientId!=''		                && $APIMisfit_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Misfit');
+        if ($APIoDesk_ClientId!=''		                && $APIoDesk_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('oDesk');
+        if ($APIOdnoklassniki_ClientId!=''		        && $APIOdnoklassniki_ClientSecret!='')	            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Odnoklassniki');
+        if ($APIPaypal_ClientId!=''		                && $APIPaypal_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Paypal');
+        if ($APIPinterest_ClientId!=''		            && $APIPinterest_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Pinterest');
+        if ($APIRdio_ClientId!=''		                && $APIRdio_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Rdio');
+        if ($APIReddit_ClientId!=''		                && $APIReddit_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Reddit');
+        if ($APIRunKeeper_ClientId!=''		            && $APIRunKeeper_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('RunKeeper');
+        if ($APIUber_ClientId!=''		                && $APIUber_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Uber');
+        if ($APITeamViewer_ClientId!=''		            && $APITeamViewer_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('TeamViewer');
+        if ($APIVimeo_ClientId!=''		                && $APIVimeo_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Vimeo');
+        if ($APIWordpress_ClientId!=''		            && $APIWordpress_ClientSecret!='')		            $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Wordpress');
+        if ($APIXero_ClientId!=''		                && $APIXero_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Xero');
+        if ($APIYammer_ClientId!=''		                && $APIYammer_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Yammer');
+        if ($APIYandex_ClientId!=''		                && $APIYandex_ClientSecret!='')		                $AlMenosUnOAuth.=PCO_CrearFormularioOauth('Yandex');
+
         return $AlMenosUnOAuth;
     }
 
@@ -4181,6 +4260,42 @@ function PCO_VentanaLogin()
 			global $APIStockTwits_ClientId,$APIStockTwits_ClientSecret;
 			global $APIVK_ClientId,$APIVK_ClientSecret;
 			global $APIWithings_ClientId,$APIWithings_ClientSecret;
+			global $API37Signals_ClientId,$API37Signals_ClientSecret;
+			global $APIAmazon_ClientId,$APIAmazon_ClientSecret;
+			global $APIAOL_ClientId,$APIAOL_ClientSecret;
+			global $APIBitly_ClientId,$APIBitly_ClientSecret;
+			global $APIBuffer_ClientId,$APIBuffer_ClientSecret;
+			global $APICopy_ClientId,$APICopy_ClientSecret;
+			global $APIDailymotion_ClientId,$APIDailymotion_ClientSecret;
+			global $APIDiscogs_ClientId,$APIDiscogs_ClientSecret;
+			global $APIEtsy_ClientId,$APIEtsy_ClientSecret;
+			global $APIGarmin_ClientId,$APIGarmin_ClientSecret;
+			global $APIGarmin2Legged_ClientId,$APIGarmin2Legged_ClientSecret;
+			global $APIiHealth_ClientId,$APIiHealth_ClientSecret;
+			global $APIimgur_ClientId,$APIimgur_ClientSecret;
+			global $APIInfusionsoft_ClientId,$APIInfusionsoft_ClientSecret;
+			global $APIIntuit_ClientId,$APIIntuit_ClientSecret;
+			global $APIJawbone_ClientId,$APIJawbone_ClientSecret;
+			global $APILivecoding_ClientId,$APILivecoding_ClientSecret;
+			global $APIMailChimp_ClientId,$APIMailChimp_ClientSecret;
+			global $APIMavenlink_ClientId,$APIMavenlink_ClientSecret;
+			global $APIMeetup_ClientId,$APIMeetup_ClientSecret;
+			global $APIMicrosoftOpenIDConnect_ClientId,$APIMicrosoftOpenIDConnect_ClientSecret;
+			global $APIMisfit_ClientId,$APIMisfit_ClientSecret;
+			global $APIoDesk_ClientId,$APIoDesk_ClientSecret;
+			global $APIOdnoklassniki_ClientId,$APIOdnoklassniki_ClientSecret;
+			global $APIPaypal_ClientId,$APIPaypal_ClientSecret;
+			global $APIPinterest_ClientId,$APIPinterest_ClientSecret;
+			global $APIRdio_ClientId,$APIRdio_ClientSecret;
+			global $APIReddit_ClientId,$APIReddit_ClientSecret;
+			global $APIRunKeeper_ClientId,$APIRunKeeper_ClientSecret;
+			global $APIUber_ClientId,$APIUber_ClientSecret;
+			global $APITeamViewer_ClientId,$APITeamViewer_ClientSecret;
+			global $APIVimeo_ClientId,$APIVimeo_ClientSecret;
+			global $APIWordpress_ClientId,$APIWordpress_ClientSecret;
+			global $APIXero_ClientId,$APIXero_ClientSecret;
+			global $APIYammer_ClientId,$APIYammer_ClientSecret;
+			global $APIYandex_ClientId,$APIYandex_ClientSecret;
 
             $CadenaProveedoresOAuthDisponibles=PCO_GenerarOpcionesProveedoresOAuth();
 			//Si se desea ubicar las opciones oAuth a traves de un boton genera el marco flotante correspondiente
