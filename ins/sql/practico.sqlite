@@ -322,7 +322,8 @@ CREATE TABLE core_informe (
   subtotales_columna text DEFAULT '',
   subtotales_formato text DEFAULT '',
   conexion_origen_datos text DEFAULT '',
-  consulta_sql text
+  consulta_sql text,
+  tooltip_titulo text DEFAULT 'N'
 
 );
 

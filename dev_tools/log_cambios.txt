@@ -51,6 +51,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 * Added: [OAUTH] Ahora se soportan más de 60 proveedores OAuth.  Agregados: 37Signals,Amazon,AOL,Bitly,Buffer,Copy,Dailymotion,Discogs,Etsy,Fitbit2,Garmin,Garmin2Legged,Google1,iHealth,imgur,Infusionsoft,Intuit,Jawbone,LinkedIn2,Livecoding,MailChimp,Mavenlink,mail.ru,Meetup,MicrosoftOpenIDConnect,Misfit,oDesk,Odnoklassniki,Paypal,PaypalSandbox,PaypalApplication,Pinterest,Rdio,Reddit,RunKeeper,Uber,TeamViewer,Twitter2,Vimeo,Wordpress,Xero,Yammer,Yandex
 * Added: [FORMS] Ahora las listas de seleccion (combobox) soportan elementos para agrupacion de opciones.  Para tal fin se debera contar con la palabra clave _OPTGROUP_|EtiquetaDeseada como *valor* en la apertura del elemento. Elementos que carezcan de una etiqueta seran considerados automaticamente como elementos de cierre de grupo.  Aplica tanto para opciones fijas como opciones tomadas desde base de datos.
+* Added: [INFORMES] En los reportes/informes de tipo grafico se permite ahora generar un tootip con el título del reporte sobre el resultado final activando dicha bandera en su diseño.
 * Added: [MENU] Se agrega la columna informativa de seccion a la administracion de menues, ordenando las opciones de acuerdo a su sección y peso.
 * Added: [MENU] Ayuda extra para el campo de imagen durante la creacion de menues.
 * Added: [KANBAN] Usuarios con tableros propios o compartidos cuentan con acceso automático a éstos a través del menú de perfil.
@@ -142,6 +143,8 @@ INSERT INTO core_opcionlista (id, identificador_lista, valor_interno, valor_visu
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
+
+ALTER TABLE core_informe ADD tooltip_titulo char(1) DEFAULT 'N';
 "
 
 ########################################################################

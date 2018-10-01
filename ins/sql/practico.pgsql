@@ -313,6 +313,7 @@ CREATE TABLE core_informe (
   subtotales_formato varchar(255) DEFAULT '',
   conexion_origen_datos varchar(255) DEFAULT '',
   consulta_sql text,
+  tooltip_titulo char(1) DEFAULT 'N',
   PRIMARY KEY  (id)
 );
 

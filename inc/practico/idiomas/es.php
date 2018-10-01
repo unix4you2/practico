@@ -834,6 +834,7 @@
 	$MULTILANG_InfTituloArbitrarioDes='Permite ignorar el titulo de columna entregado por el motor de base de datos y en su lugar utilizar este valor como titulo en el informe presentado.  <b>Permite HTML basico y variables PHP</b>';
 	$MULTILANG_InfSQL='Si usted agrega cualquier contenido mayor a 5 caracteres a este campo de script SQL el generador de informes omitir&aacute; cualquier configuraci&oacute;n de tablas, campos, condiciones o cualquier otra definici&oacute;n de consulta que usted tenga definida e intentar&aacute; ejecutar directamente este Script y a partir de &eacute;l generar la tabla de resultados.  Puede utilizar variables PHP en notaci&oacute;n {$ Variable} para incluir variables de entorno.';
 	$MULTILANG_InfFormsUsan='Formularios detectados que utilizan este informe de manera embebida';
+	$MULTILANG_InfTootipTitulo='Generar tooltip para informes gr&aacute;ficos con el t&iacute;tulo del informe';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';

@@ -836,6 +836,7 @@
 	$MULTILANG_InfTituloArbitrarioDes='Allows you to ignore the column title delivered by the database engine and instead use this value as a title in the submitted report. <b> Allows basic HTML and PHP variables </b>';
 	$MULTILANG_InfSQL='If you add any content greater than 5 characters to this SQL script field, the report generator will omit any configuration of tables, fields, conditions or any other query definition that you have defined and will try to directly execute this Script and from it generate the results table. You can use PHP variables in notation {$ Variable} to include environment variables.';
 	$MULTILANG_InfFormsUsan='Detected forms that use this report in an embedded manner';
+	$MULTILANG_InfTootipTitulo='Create a tooltip for graphic reports using the reports title';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';
