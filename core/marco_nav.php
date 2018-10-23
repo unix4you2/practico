@@ -31,16 +31,23 @@
 
 
 <!-- Navigation -->
-<nav id="BarraNavegacionSuperior" class="navbar navbar-default navbar-static-top oculto_impresion" role="navigation" style="margin-bottom: 0">
-
+<?php
+// Establece cadenas usadas para ocultar la barra superior al momento de login
+$CadenaOcultamientoBarraNavSuperior='';
+if ($PCO_Accion=="" && !$PCOSESS_SesionAbierta)
+    $CadenaOcultamientoBarraNavSuperior='style="visibility: hidden; display:inline; display: none;"';
+?>
+<nav <?php echo $CadenaOcultamientoBarraNavSuperior; ?> id="BarraNavegacionSuperior" class="navbar navbar-default navbar-static-top oculto_impresion" role="navigation" style="margin-bottom: 0">
 
 	
-	<div class="navbar-header">
+	<div class="navbar-header" >
 		<button OnClick="document.getElementById('barra_navegacion_izquierda').style.visibility='visible';" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#PCO_BarraNavegacionIzquierda">
 			<i class="fa fa-bars"></i>
 		</button>
 		<a class="navbar-brand" href="javascript:document.PCO_FormVerMenu.submit();"><img width="115" height="30" src="img/logo.png?<?php echo filemtime('img/logo.png'); ?>" border="0" ALT="Practico"></a>
 	</div>
+
+
 	<!-- /.navbar-header -->
 
 <?php
@@ -241,6 +248,8 @@
 
 
 </nav>
+
+
 <script language="javascript">
     function PCO_CargarReportarBugs()
         {

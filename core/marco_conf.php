@@ -210,7 +210,27 @@
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-sliders fa-fw"></i> <?php echo $MULTILANG_PWAGCM; ?>:
                                                 </span>
-                                                <input name="PWA_GCMSenderIDNEW" value="<?php echo $PWA_GCMSenderID; ?>" type="text" class="form-control">
+                                                <input name="PWA_FCMSenderIDNEW" value="<?php echo $PWA_FCMSenderID; ?><?php if (@$PWA_FCMSenderID=="") echo "103953800507"; ?>" type="text" class="form-control" placeholder="Por defecto (by default) 103953800507">
+											</div>
+
+											<div class="form-group input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-sliders fa-fw"></i> <?php echo $MULTILANG_PWAAutorizarGPS; ?>:
+                                                </span>
+												<select id="PWA_AutorizacionGPSNEW" name="PWA_AutorizacionGPSNEW" class="selectpicker" >
+													<option value="1" <?php if (@$PWA_AutorizacionGPS=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?></option>
+													<option value="0" <?php if (@$PWA_AutorizacionGPS=="0" || @$PWA_AutorizacionGPS=="") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?></option>
+												</select>
+											</div>
+
+											<div class="form-group input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-sliders fa-fw"></i> <?php echo $MULTILANG_PWAAutorizarFCM; ?>:
+                                                </span>
+												<select id="PWA_AutorizacionFCMNEW" name="PWA_AutorizacionFCMNEW" class="selectpicker" >
+													<option value="1" <?php if (@$PWA_AutorizacionFCM=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?></option>
+													<option value="0" <?php if (@$PWA_AutorizacionFCM=="0" || @$PWA_AutorizacionFCM=="") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?></option>
+												</select>
 											</div>
 
 										</div>

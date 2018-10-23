@@ -1353,6 +1353,8 @@
     $MULTILANG_PWADireccionTexto='Text direction';
     $MULTILANG_PWADisplayPreferido='Preferred display mode';
     $MULTILANG_PWAOrientacionPantalla='Screen orientation';
-    $MULTILANG_PWAGCM='Google Cloud Messaging ID';
+    $MULTILANG_PWAGCM='Firebase Cloud Messaging ID';
     $MULTILANG_PWAScope='Scope';
     $MULTILANG_PWAScopeDes='If your Practico installation resides on the root of your web server or subdomain, you can leave this blank. If your installation resides on any folder please indicate /folder/ to establish the scope of the Service Worker and the PWA manifest.';
+    $MULTILANG_PWAAutorizarGPS='Request authorization to obtain location (GPS)';
+    $MULTILANG_PWAAutorizarFCM='Request authorization of sending notifications (PUSH)';

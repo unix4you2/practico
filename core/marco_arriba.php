@@ -115,12 +115,17 @@
 			if (@$Auth_ProtoTransporte=="http" || @$Auth_ProtoTransporte=="https")
 				$protocolo_sitioweb=$Auth_ProtoTransporte."://";
 			// Construye la URL para solicitar el webservice.  La URL se debe poder resolver por el servidor web correctamente, ya sea por dominio o IP (interna o publica).  Ver /etc/hosts si algo.
-			$prefijo_sitioweb=$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].str_replace("index.php","",$_SERVER['PHP_SELF']);
-			$url_imagen_fondo = $protocolo_sitioweb.$prefijo_sitioweb."/".$PCO_ArchivoImagenFondo."?".filemtime($PCO_ArchivoImagenFondo);
+			$PCOVAR_CadenaImagenFondo=""; //Define cadena vacia en caso que no se haya definido una imagen para el fondo
+			if ($PCO_ArchivoImagenFondo!="")
+			    {
+        			$prefijo_sitioweb=$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].str_replace("index.php","",$_SERVER['PHP_SELF']);
+        			$PCOVAR_UrlImagenFondo = $protocolo_sitioweb.$prefijo_sitioweb."/".$PCO_ArchivoImagenFondo."?".filemtime($PCO_ArchivoImagenFondo);
+        			$PCOVAR_CadenaImagenFondo="background-image: url('$PCOVAR_UrlImagenFondo'); background-repeat: no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
+			    }
 		?>
 
         <!-- CONTENIDO DE APLICACION -->
-        <div id="page-wrapper" style="background-color: <?php echo $PCO_ColorFondoGeneral; ?>; background-image: url('<?php echo $url_imagen_fondo; ?>'); background-repeat: no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">  <!-- page-content-wrapper -->
+        <div id="page-wrapper" style="background-color: <?php echo $PCO_ColorFondoGeneral; ?>; <?php echo $PCOVAR_CadenaImagenFondo; ?> ">  <!-- page-content-wrapper -->
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">

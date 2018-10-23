@@ -302,12 +302,15 @@ $salida=sprintf("<?php
 	// 0=No, 1=Solo usuarios internos, 2=Solo usuarios externos, 3=Todos los usuarios, 4=Exclusivo para admin (podra iniciar conversacion y chat con cualquier otro usuario aun con modulo desactivado)
 	\$Activar_ModuloChat=%s;
 	
-	// Especifica si desea activar o no el registro de la aplicacion como una Aplicacion web progresiva PWA
+	// Especifica si desea activar o no el registro de la aplicacion como una Aplicacion web progresiva PWA y algunos permisos de usuario
 	\$PWA_Activa=%s;
 	\$PWA_DireccionTexto='%s';
 	\$PWA_Display='%s';
 	\$PWA_Orientacion='%s';
-	\$PWA_GCMSenderID='%s';
+	\$PWA_FCMSenderID='%s';
+	\$PWA_Scope='%s';
+	\$PWA_AutorizacionGPS='%s';
+	\$PWA_AutorizacionFCM='%s';
 
 	// Define cadena usada para separar campos en operaciones de bases de datos
 	\$_SeparadorCampos_='%s';
@@ -316,7 +319,7 @@ $salida=sprintf("<?php
 	\$ModoDesarrolladorPractico=%s; // [0=Inactivo|-10000=Activo]
 
 	// Define cadena separada por comas con usuarios administradores de la aplicacion
-	\$PCOVAR_Administradores='%s';",$Servidor,$BaseDatos,$UsuarioBD,$PasswordBD,$MotorBD,$PuertoBD,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$PermitirReporteBugsNEW,$DepuracionSQLNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$IdiomaEnLoginNEW,$Tema_PracticoFrameworkNEW,$PCO_ArchivoImagenFondoNEW,$TipoCaptchaLoginNEW,$CaracteresCaptchaNEW,$CodigoGoogleAnalyticsNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_PermitirReseteoClavesNEW,$Auth_PermitirAutoRegistroNEW,$Auth_PlantillaAutoRegistroNEW,$Auth_PresentarOauthInicioNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW,$Activar_ModuloChatNEW,$PWA_ActivaNEW,$PWA_DireccionTextoNEW,$PWA_DisplayNEW,$PWA_OrientacionNEW,$PWA_GCMSenderIDNEW,$_SeparadorCampos_NEW,$ModoDesarrolladorPracticoNEW,$PCOVAR_AdministradoresNEW);
+	\$PCOVAR_Administradores='%s';",$Servidor,$BaseDatos,$UsuarioBD,$PasswordBD,$MotorBD,$PuertoBD,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$PermitirReporteBugsNEW,$DepuracionSQLNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$IdiomaEnLoginNEW,$Tema_PracticoFrameworkNEW,$PCO_ArchivoImagenFondoNEW,$TipoCaptchaLoginNEW,$CaracteresCaptchaNEW,$CodigoGoogleAnalyticsNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_PermitirReseteoClavesNEW,$Auth_PermitirAutoRegistroNEW,$Auth_PlantillaAutoRegistroNEW,$Auth_PresentarOauthInicioNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW,$Activar_ModuloChatNEW,$PWA_ActivaNEW,$PWA_DireccionTextoNEW,$PWA_DisplayNEW,$PWA_OrientacionNEW,$PWA_FCMSenderIDNEW,$PWA_ScopeNEW,$PWA_AutorizacionGPSNEW,$PWA_AutorizacionFCMNEW,$_SeparadorCampos_NEW,$ModoDesarrolladorPracticoNEW,$PCOVAR_AdministradoresNEW);
 			// Escribe el archivo de configuracion
 			$archivo_config=fopen("core/configuracion.php","w");
 			if($archivo_config==null)
@@ -388,10 +391,10 @@ $salida=sprintf("<?php
             //Genera manifiesto para PWA en caso que se haya activado
             if ($PWA_ActivaNEW=="1")
                 {
-                    //Define si se cuenta o no con ID de GCM
-                    $CadenaFinalGCM="";
-                    if ($PWA_GCMSenderIDNEW!="")
-                        $CadenaFinalGCM='"gcm_sender_id": "'.$PWA_GCMSenderIDNEW.'",
+                    //Define si se cuenta o no con ID de FirebaseCloudMessagin
+                    $CadenaFinalFCM="";
+                    if ($PWA_FCMSenderIDNEW!="")
+                        $CadenaFinalFCM='"gcm_sender_id": "'.$PWA_FCMSenderIDNEW.'",
     "gcm_user_visible_only": true,
 	"permissions": [
 	  "gcm", "storage"
@@ -497,7 +500,7 @@ $manifiesto=sprintf('{
   "prefer_related_applications": false,
   "theme_color": "%s",
   "background_color": "%s"
-}',$IdiomaPredeterminado,$Nombre_Aplicacion,$Nombre_Aplicacion,$Version_Aplicacion,$Nombre_Empresa_Corto,$MULTILANG_PWADescripcion,$CadenaFinalGCM,$CadenaFinalScope,$PWA_DireccionTextoNEW,$PWA_DisplayNEW,$PWA_OrientacionNEW,$PCO_ColorFondoGeneral,$PCO_ColorFondoGeneral);
+}',$IdiomaPredeterminado,$Nombre_Aplicacion,$Nombre_Aplicacion,$Version_Aplicacion,$Nombre_Empresa_Corto,$MULTILANG_PWADescripcion,$CadenaFinalFCM,$CadenaFinalScope,$PWA_DireccionTextoNEW,$PWA_DisplayNEW,$PWA_OrientacionNEW,$PCO_ColorFondoGeneral,$PCO_ColorFondoGeneral);
 
         			// Escribe el archivo de manifiesto
         			$archivo_config_manifiesto=fopen("pwa/manifest.json","w");

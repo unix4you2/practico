@@ -644,6 +644,16 @@
             }
 	?>
 
+	<?php
+	    //Solicita autorizacion de ubicar al usuario de acuerdo a la configuracion actual
+        if ($PWA_AutorizacionGPS=="1")
+            {
+                echo '<script language="JavaScript">
+                        PCOJS.GeoLocalizarUsuario();
+                    </script>';
+            }
+	?>
+
     <?php
         // Estadisticas de uso anonimo con GABeacon
         $PrefijoGA='<img src="https://rastreador-visitas.appspot.com/';

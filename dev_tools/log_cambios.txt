@@ -19,8 +19,10 @@ core/comunes.php
 core/formularios.php
 core/informes.php
 core/kanban.php
+core/marco_abajo.php
 core/marco_arriba.php
 core/marco_chat.php
+core/marco_conf.php
 core/marco_forms.php
 core/marco_nav.php
 core/marco_navizq.php
@@ -49,6 +51,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+*IMPORTANTE:*  Quienes actualizan desde versiones 18.8 requiere que se aplique a éstas el último parche de actualización de dicha versión (Practico_18.8-Actualizacion_002) que las convierte a versión 18.9.
 * Added: [OAUTH] Ahora se soportan más de 60 proveedores OAuth.  Agregados: 37Signals,Amazon,AOL,Bitly,Buffer,Copy,Dailymotion,Discogs,Etsy,Fitbit2,Garmin,Garmin2Legged,Google1,iHealth,imgur,Infusionsoft,Intuit,Jawbone,LinkedIn2,Livecoding,MailChimp,Mavenlink,mail.ru,Meetup,MicrosoftOpenIDConnect,Misfit,oDesk,Odnoklassniki,Paypal,PaypalSandbox,PaypalApplication,Pinterest,Rdio,Reddit,RunKeeper,Uber,TeamViewer,Twitter2,Vimeo,Wordpress,Xero,Yammer,Yandex
 * Added: [FORMS] Ahora las listas de seleccion (combobox) soportan elementos para agrupacion de opciones.  Para tal fin se debera contar con la palabra clave _OPTGROUP_|EtiquetaDeseada como *valor* en la apertura del elemento. Elementos que carezcan de una etiqueta seran considerados automaticamente como elementos de cierre de grupo.  Aplica tanto para opciones fijas como opciones tomadas desde base de datos.
 * Added: [INFORMES] En los reportes/informes de tipo grafico se permite ahora generar un tootip con el título del reporte sobre el resultado final activando dicha bandera en su diseño.
@@ -64,10 +67,16 @@ LogCambios="
 * Enhan: [LIBS] Actualizacion de version 1.109 a 1.165 del cliente OAuth para PHP.
 * Enhan: [LIBS] Actualizacion del plugin DataTables a la versión 1.10.18
 * Enhan: [MENU] Al igual que las pestanas de formulario, ahora las opciones de menu definidas dentro de una sección con nombre PCO_NoVisible no serán presentadas al usuario.
-* Enhan: [KANBAN] Sólo los usuarios propietarios de untablero pueden eliminar o archivar tareas sobre éste.
+* Enhan: [KANBAN] Sólo los usuarios propietarios de un tablero pueden eliminar o archivar tareas sobre éste.
 * Enhan: [KANBAN] Sólo los usuarios propietarios de un tablero lo pueden personalizar, configurar o compartir.
 * Enhan: [CHAT] Suprimido codigo interno a cambio de objeto en Práctico para marco de chat.
 * Enhan: [INFORMES] Ayuda de complemento en activacion de campos editables sobre informes.
+* Enhan: [LOGIN] Se oculta barra superior cuando no se tiene sesion y se va a pantalla de login ahorrando así espacio cuando se trata de aplicaciones móviles.
+* Enhan: [GENERAL] Se evita errores 404 al buscar imagen de fondo de aplicación cuando esta realmente no ha sido definida en la configuración.
+* Enhan: [PWA] Se migra de servicios GCM a Firebase cloud messaging para notificaciones push.
+* Enhan: [PWA] Se permite control de configuración para solicitar el envío de notificaciones al usuario.
+* Enhan: [PWA] Se agrega control de configuración para solicitar al usuario el envío automático de su ubicación geográfica estimada por GPS o WiFi cercanas.
+* Fixed: [PWA] Se conservan valores de scope (alcance) para aplicaciones móviles que residen sobre carpetas del dominio en lugar de su raíz.
 * Fixed: [MONITOREO] Cuando valores de cronometro en monitoreo sobrepasan el limite cero (negativos en conteo) autoenvia formulario de monitoreo al bajar de -10 segundos.
 * Fixed: [INTERNO] Preautorización de funcion interna PCO_CargarObjeto para evitar su registro en funciones autorizadas
 * Fixed: [OAUTH] Los valores de URI de redireccion para configuraciones OAuth son ahora calculados nuevamente de manera automática.  Los campos en configuración quedan como solo lectura con ayudas de formato.
