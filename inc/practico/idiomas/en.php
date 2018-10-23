@@ -1318,6 +1318,7 @@
     $MULTILANG_CompartirCon='Shared with';
     $MULTILANG_NoTablero='There is not a Kanban board created by you or shared with you by another user';
     $MULTILANG_ArrastrarTarea='Move tasks quickly draggind and dropping over this title.';
+    $MULTILANG_TodosLosTableros='All Kanban boards';
 
     //ModuloBugTracker
     $MULTILANG_BTReporteBugs='Report errors or improvements';

@@ -1319,6 +1319,7 @@
     $MULTILANG_CompartirCon='Compartir con';
     $MULTILANG_NoTablero='No hay un tablero kanban asociado a su usuario o compartido por otro usuario con usted';
     $MULTILANG_ArrastrarTarea='Mueva tareas rapidamente arrastr&aacute;ndolas sobre este t&iacute;tulo.';
+    $MULTILANG_TodosLosTableros='Todos los tableros kanban';
 
     //ModuloBugTracker
     $MULTILANG_BTReporteBugs='Reporte de errores o mejoras';

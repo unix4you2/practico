@@ -154,6 +154,7 @@
         if ($PWA_Activa=="1")
             {
                 echo '<link rel="manifest" href="pwa/manifest.json?'.filemtime('pwa/manifest.json').'">';
+
     ?>
         	<script language="JavaScript">
                 if (!('serviceWorker' in navigator))

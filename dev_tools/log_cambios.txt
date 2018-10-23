@@ -58,6 +58,7 @@ LogCambios="
 * Added: [MENU] Se agrega la columna informativa de seccion a la administracion de menues, ordenando las opciones de acuerdo a su sección y peso.
 * Added: [MENU] Ayuda extra para el campo de imagen durante la creacion de menues.
 * Added: [KANBAN] Usuarios con tableros propios o compartidos cuentan con acceso automático a éstos a través del menú de perfil.
+* Added: [KANBAN] El explorador de tableros ahora permite visualizarlos todos al tiempo.
 * Added: [CHAT] El sistema de chat diferencia entre los niveles de chat configurados para presentar la opción de menu al usuario y la lista de usuarios disponibles para chat.
 * Added: [AUDIT] Ahora cualquier consulta al motor de base de datos que genere algún error será llevada automáticamente al log de auditoría bajo el usuario SQLog:error
 * Added: [AUDIT] Agregadas nuevas opciones de filtro de usuario en módulo de auditorías para permitir filtrar operaciones realizadas por funciones internas del framework.
