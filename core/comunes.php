@@ -5953,11 +5953,14 @@ function PCO_CargarObjetoCasillaCheck($registro_campos,$registro_datos_formulari
 			}
 
         // Muestra el campo
+        $CadenaEtiquetaCheck=PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]);
+        if($registro_campos["ocultar_etiqueta"]=="1") $CadenaEtiquetaCheck="";
+        
         $salida.= '
 			<input type="hidden" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor_almacenada.'">
 			<div class="checkbox">
 				<label>
-					<input onchange="JSFUNC_Actualizar_'.$registro_campos["campo"].'(this);" type="checkbox" id="JSVAR_'.$registro_campos["campo"].'" name="JSVAR_'.$registro_campos["campo"].'" '.$cadena_valor.' '.$registro_campos["personalizacion_tag"].' > '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).'
+					<input onchange="JSFUNC_Actualizar_'.$registro_campos["campo"].'(this);" type="checkbox" id="JSVAR_'.$registro_campos["campo"].'" name="JSVAR_'.$registro_campos["campo"].'" '.$cadena_valor.' '.$registro_campos["personalizacion_tag"].' > '.$CadenaEtiquetaCheck.'
 				</label>
 			</div>
 			<script language="JavaScript">
