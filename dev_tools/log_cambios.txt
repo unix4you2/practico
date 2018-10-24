@@ -21,6 +21,7 @@ core/informes.php
 core/kanban.php
 core/marco_abajo.php
 core/marco_arriba.php
+core/marco_arriba_bs.php
 core/marco_chat.php
 core/marco_conf.php
 core/marco_forms.php
@@ -36,6 +37,8 @@ inc/practico/sonidos/alarma.ogg
 inc/http/http.php
 inc/oauth/oauth_client.php
 inc/oauth/logos/*
+inc/bootstrap/css/plugins/toggle/*
+inc/bootstrap/js/plugins/toggle/*
 
 xml/*
 inc/practico/idiomas/*
@@ -54,6 +57,7 @@ LogCambios="
 *IMPORTANTE:*  Quienes actualizan desde versiones 18.8 requiere que se aplique a éstas el último parche de actualización de dicha versión (Practico_18.8-Actualizacion_002) que las convierte a versión 18.9.
 * Added: [OAUTH] Ahora se soportan más de 60 proveedores OAuth.  Agregados: 37Signals,Amazon,AOL,Bitly,Buffer,Copy,Dailymotion,Discogs,Etsy,Fitbit2,Garmin,Garmin2Legged,Google1,iHealth,imgur,Infusionsoft,Intuit,Jawbone,LinkedIn2,Livecoding,MailChimp,Mavenlink,mail.ru,Meetup,MicrosoftOpenIDConnect,Misfit,oDesk,Odnoklassniki,Paypal,PaypalSandbox,PaypalApplication,Pinterest,Rdio,Reddit,RunKeeper,Uber,TeamViewer,Twitter2,Vimeo,Wordpress,Xero,Yammer,Yandex
 * Added: [FORMS] Ahora las listas de seleccion (combobox) soportan elementos para agrupacion de opciones.  Para tal fin se debera contar con la palabra clave _OPTGROUP_|EtiquetaDeseada como *valor* en la apertura del elemento. Elementos que carezcan de una etiqueta seran considerados automaticamente como elementos de cierre de grupo.  Aplica tanto para opciones fijas como opciones tomadas desde base de datos.
+* Added: [FORMS] NUEVO TIPO DE CONTROL: Los controles de datos tipo checkbox pueden ser fácilmente transformados a controles de boton tipo Toggle.  Para esto puede ser utilizado el campo de personalización del TAG disponible ahora sobre estos controles.  Vease ayuda del campo para amplias posibilidades de personalizaciones completas!
 * Added: [INFORMES] En los reportes/informes de tipo grafico se permite ahora generar un tootip con el título del reporte sobre el resultado final activando dicha bandera en su diseño.
 * Added: [MENU] Se agrega la columna informativa de seccion a la administracion de menues, ordenando las opciones de acuerdo a su sección y peso.
 * Added: [MENU] Ayuda extra para el campo de imagen durante la creacion de menues.
@@ -67,6 +71,7 @@ LogCambios="
 * Enhan: [LIBS] Actualizacion de version 1.92 a 1.94 del cliente HTTP para PHP.
 * Enhan: [LIBS] Actualizacion de version 1.109 a 1.165 del cliente OAuth para PHP.
 * Enhan: [LIBS] Actualizacion del plugin DataTables a la versión 1.10.18
+* Enhan: [FORMS] Las ayudas de personalizacion de etiquetas son tan amplias que ahora se imprimen directamente sobre el disenador de campos facilitando además su copy-paste
 * Enhan: [MENU] Al igual que las pestanas de formulario, ahora las opciones de menu definidas dentro de una sección con nombre PCO_NoVisible no serán presentadas al usuario.
 * Enhan: [KANBAN] Sólo los usuarios propietarios de un tablero pueden eliminar o archivar tareas sobre éste.
 * Enhan: [KANBAN] Sólo los usuarios propietarios de un tablero lo pueden personalizar, configurar o compartir.

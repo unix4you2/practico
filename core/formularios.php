@@ -866,7 +866,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 					if (tipo_objeto_activo=="texto_formato") VisualizarCampos("1,2,6,7,8,9,10,14,15,16,17,36,37,46,47");
 					if (tipo_objeto_activo=="lista_seleccion") VisualizarCampos("1,2,6,7,8,9,10,12,15,17,18,19,20,35,36,37,45,46,47");
 					if (tipo_objeto_activo=="lista_radio") VisualizarCampos("1,2,7,8,9,10,17,18,19,20,35,36,37,45,46,47");
-					if (tipo_objeto_activo=="casilla_check") VisualizarCampos("1,2,4,9,17,36,42,46,47");
+					if (tipo_objeto_activo=="casilla_check") VisualizarCampos("1,2,4,9,17,36,37,42,46,47");
 					if (tipo_objeto_activo=="etiqueta")   VisualizarCampos("9,17,21,36,46,47");
 					if (tipo_objeto_activo=="url_iframe")   VisualizarCampos("9,14,15,17,22,24,36,37,46,47");
 					if (tipo_objeto_activo=="informe")   VisualizarCampos("9,17,23,24,36,46,47");
@@ -1813,6 +1813,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                                     <a href="#"  data-toggle="tooltip" data-html="true" data-placement="auto" title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_FrmDesTagPersonalizado; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
+                            <div class='alert alert-info btn-xs'><?php echo $MULTILANG_FrmDesTagPersonalizado; ?></div>
 						</div>
 
 						<div id='campo47' style="display:none;">

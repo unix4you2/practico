@@ -608,7 +608,6 @@
     $MULTILANG_FrmDesPestana='Assign the tab for this object in the form.  Practico automatically creates tabs according to the values entered in each object.  If you specify a PCO_NoVisible tab the eyelash will not appear to standard users (it will be hidden) but its elements will normally be added to the form in order to process them.';
     $MULTILANG_FrmTagPersonalizado='HTML Custom Tag';
     $MULTILANG_FrmDesTagPersonalizado='Allow to add parameters to the HTML Tag created over the form by Practico. 
-            <hr>Some examples according to the data control type:
             <br><b>Select lists (combo-box):</b>
                 <li><u>data-live-search=true</u> Enable search field in a list.</li>
                 <li><u>multiple</u> Enable multiple select.</li>
@@ -619,7 +618,18 @@
                 <li><u>disabled</u> Disables the control</li>
                 <BR>
                 <b>Buttons (command button):</b>
-                <li><u>btn-group btn-group-justified</u> Expand the button to its containers width.</li>';
+                <li><u>btn-group btn-group-justified</u> Expand the button to its containers width.</li>
+                <BR>
+                <b>Checkboxes (checkbox):</b>
+                <li><u>data-toggle=toggle</u> Convert this control to toggle button</li>
+                <li><u>data-on=Text</u> Set text when the control is on. It could have HTML code and even icon declarations.</li>
+                <li><u>data-off=Text</u> Same that previous property when control is off</li>
+                <li><u>data-onstyle=Style</u> Set the style for the button: primary|info|warning|danger|success|default</li>
+                <li><u>data-offstyle=Style</u> Same that previous property when control is off</li>
+                <li><u>data-style=ControlType</u> Visual appearance:  ninguno|ios|android</li>
+                <li><u>data-size=Size</u> Size of the control: large|normal|small|mini</li>
+                <li><u>data-width=Width</u> Width of the control in pixels</li>
+                <li><u>data-height=Height</u> Height of the control in pixels</li>';
     $MULTILANG_FrmBtnFull='Load in FullScreen';
     $MULTILANG_FrmBtnObjetivo='HTML Target';
     $MULTILANG_FrmActualizaAjax='Dynamic reload';

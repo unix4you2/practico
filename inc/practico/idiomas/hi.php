@@ -608,7 +608,6 @@
     $MULTILANG_FrmDesPestana='फार्म में इस उद्देश्य के लिए टैब निरुपित। Practico स्वचालित रूप से प्रत्येक वस्तु में दर्ज किए गए मूल्यों के अनुसार टैब बनाता है.  यदि आप एक पीसीओ_निवेब टैब निर्दिष्ट करते हैं, तो बरौनी मानक उपयोगकर्ताओं को प्रकट नहीं होगी (यह छिपाई जाएगी) लेकिन उनके तत्वों को सामान्य रूप से उन्हें प्रोसेस करने के लिए फ़ॉर्म में जोड़ा जाएगा।';
     $MULTILANG_FrmTagPersonalizado='एचटीएमएल कस्टम टैग';
     $MULTILANG_FrmDesTagPersonalizado='Practico द्वारा फार्म खत्म बनाया एचटीएमएल टैग करने के लिए मापदंडों को जोड़ने की अनुमति. 
-            <hr>कुछ उदाहरण डेटा नियंत्रण के प्रकार के अनुसार:
             <br><b>का चयन सूची (कॉम्बो-बॉक्स):</b>
                 <li><u>data-live-search=true</u> एक सूची में खोज क्षेत्र सक्षम करें.</li>
                 <li><u>multiple</u> चयन के लिए कई सक्षम करें.</li>
@@ -619,7 +618,18 @@
                 <li><u>disabled</u> नियंत्रण अक्षम</li>
                 <BR>
                 <b>Botones (command button):</b>
-                <li><u>btn-group btn-group-justified</u> Expande control al ancho del contenedor.</li>';
+                <li><u>btn-group btn-group-justified</u> Expande control al ancho del contenedor.</li>
+                <BR>
+                <b>Checkboxes (checkbox):</b>
+                <li><u>data-toggle=toggle</u> Convert this control to toggle button</li>
+                <li><u>data-on=Text</u> Set text when the control is on. It could have HTML code and even icon declarations.</li>
+                <li><u>data-off=Text</u> Same that previous property when control is off</li>
+                <li><u>data-onstyle=Style</u> Set the style for the button: primary|info|warning|danger|success|default</li>
+                <li><u>data-offstyle=Style</u> Same that previous property when control is off</li>
+                <li><u>data-style=ControlType</u> Visual appearance:  ninguno|ios|android</li>
+                <li><u>data-size=Size</u> Size of the control: large|normal|small|mini</li>
+                <li><u>data-width=Width</u> Width of the control in pixels</li>
+                <li><u>data-height=Height</u> Height of the control in pixels</li>';
     $MULTILANG_FrmBtnFull='फुल स्क्रीन में लोड';
     $MULTILANG_FrmBtnObjetivo='एचटीएमएल लक्ष्य';
     $MULTILANG_FrmActualizaAjax='गतिशील पुनः लोड';

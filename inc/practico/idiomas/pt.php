@@ -608,7 +608,6 @@
     $MULTILANG_FrmDesPestana='Atribuir a guia para este objeto no formul&aacute;rio. Practico automaticamente cria guias de acordo com os valores inseridos em cada objeto.  Se você especificar uma guia PCO_NoVisible, o eyelash não aparecerá para usuários padrão (será oculto), mas seus elementos serão normalmente adicionados ao formulário para processá-los.';
     $MULTILANG_FrmTagPersonalizado='Tag HTML personalizada';
     $MULTILANG_FrmDesTagPersonalizado='Permitir para adicionar parâmetros para o Tag HTML criado atrav&eacute;s do formul&aacute;rio por Practico. 
-            <hr>Alguns exemplos de acordo com o tipo de controlo de dados:
             <br><b>Seleccione listas (combo-box):</b>
                 <li><u>data-live-search=true</u> Ativar campo de pesquisa em uma lista.</li>
                 <li><u>multiple</u> Ativar m&uacute;ltipla escolha.</li>
@@ -619,7 +618,18 @@
                 <li><u>disabled</u> Desabilita o controle</li>
                 <BR>
                 <b>Botones (command button):</b>
-                <li><u>btn-group btn-group-justified</u> Expande control al ancho del contenedor.</li>';
+                <li><u>btn-group btn-group-justified</u> Expande control al ancho del contenedor.</li>
+                <BR>
+                <b>Checkboxes (checkbox):</b>
+                <li><u>data-toggle=toggle</u> Convert this control to toggle button</li>
+                <li><u>data-on=Text</u> Set text when the control is on. It could have HTML code and even icon declarations.</li>
+                <li><u>data-off=Text</u> Same that previous property when control is off</li>
+                <li><u>data-onstyle=Style</u> Set the style for the button: primary|info|warning|danger|success|default</li>
+                <li><u>data-offstyle=Style</u> Same that previous property when control is off</li>
+                <li><u>data-style=ControlType</u> Visual appearance:  ninguno|ios|android</li>
+                <li><u>data-size=Size</u> Size of the control: large|normal|small|mini</li>
+                <li><u>data-width=Width</u> Width of the control in pixels</li>
+                <li><u>data-height=Height</u> Height of the control in pixels</li>';
     $MULTILANG_FrmBtnFull='Carga em FullScreen';
     $MULTILANG_FrmBtnObjetivo='HTML alvo';
     $MULTILANG_FrmActualizaAjax='recarregamento dinâmico';

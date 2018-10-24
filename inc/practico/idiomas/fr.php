@@ -608,7 +608,6 @@
     $MULTILANG_FrmDesPestana='Attribuez l onglet pour cet objet dans le formulaire. Practico crée automatiquement des onglets en fonction des valeurs saisies dans chaque objet. Si vous spécifiez un onglet PCO_NoVisible, le cil n apparaîtra pas aux utilisateurs standard (il sera masqué) mais ses éléments seront normalement ajoutés au formulaire afin de les traiter.';
     $MULTILANG_FrmTagPersonalizado='Balise personnalisée HTML';
     $MULTILANG_FrmDesTagPersonalizado='Permet d ajouter des paramètres à la balise HTML créée sur le formulaire par Practico.
-            <hr> Quelques exemples selon le type de contrôle de données:
             <br><b>Sélection de listes (combo-box): </b>
                 <li><u>data-live-search=true</u> Activer le champ de recherche dans une liste.</li>
                 <li><u>multiple</u> Activer la sélection multiple.</li>
@@ -619,7 +618,18 @@
                 <li><u>disabled</u> Désactive le contrôle</li>
                 <BR>
                 <b>Boutons (bouton de commande):</b>
-                <li><u>btn-group btn-group-justified</u> Développer le bouton à la largeur de ses conteneurs.</li>';
+                <li><u>btn-group btn-group-justified</u> Développer le bouton à la largeur de ses conteneurs.</li>
+                <BR>
+                <b>Checkboxes (checkbox):</b>
+                <li><u>data-toggle=toggle</u> Convert this control to toggle button</li>
+                <li><u>data-on=Text</u> Set text when the control is on. It could have HTML code and even icon declarations.</li>
+                <li><u>data-off=Text</u> Same that previous property when control is off</li>
+                <li><u>data-onstyle=Style</u> Set the style for the button: primary|info|warning|danger|success|default</li>
+                <li><u>data-offstyle=Style</u> Same that previous property when control is off</li>
+                <li><u>data-style=ControlType</u> Visual appearance:  ninguno|ios|android</li>
+                <li><u>data-size=Size</u> Size of the control: large|normal|small|mini</li>
+                <li><u>data-width=Width</u> Width of the control in pixels</li>
+                <li><u>data-height=Height</u> Height of the control in pixels</li>';
     $MULTILANG_FrmBtnFull='Charger en plein écran';
     $MULTILANG_FrmBtnObjetivo='Cible HTML';
     $MULTILANG_FrmActualizaAjax='Rechargement dynamique';

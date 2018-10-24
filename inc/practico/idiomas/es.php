@@ -605,8 +605,7 @@
     $MULTILANG_FrmPestana='T&iacute;tulo de la Pesta&ntilde;a a que pertenece en el formulario';
     $MULTILANG_FrmDesPestana='Indica la pesta&ntilde;a a la que pertenece el elemento dentro del formulario.  Practico genera automaticamente las pesta&ntilde;as de acuerdo a los valores ingresados en cada objeto.  Si especifica una pestana <b>PCO_NoVisible</b> la pestana no aparecera a los usuarios estandar (quedara oculta) pero sus elementos seran agregados normalmente al form para poder procesarlos.';
     $MULTILANG_FrmTagPersonalizado='Personalizaci&oacute;n del Tag HTML';
-    $MULTILANG_FrmDesTagPersonalizado='Permite agregar par&aacute;metros y otras configuraciones HTML a la etiqeuta generada por Pr&aacute;ctico. 
-            <hr>Ejemplos para algunos tipos de control:
+    $MULTILANG_FrmDesTagPersonalizado='Permite agregar par&aacute;metros y otras configuraciones HTML a la etiqueta generada por Pr&aacute;ctico as&iacute;:
             <br><b>Listas de selecci&oacute;n (combo-box):</b>
                 <li><u>data-live-search=true</u> Busqueda dinamica sobre la lista.</li>
                 <li>Beta <u>multiple</u> Selecciones multiples sobre la lista. Cuidado: Almacena el primer valor seleccionado.</li>
@@ -617,7 +616,18 @@
                 <li><u>disabled</u> Deshabilita el control.</li>
                 <BR>
                 <b>Botones (command button):</b>
-                <li><u>btn-group btn-group-justified</u> Expande control al ancho del contenedor.</li>';
+                <li><u>btn-group btn-group-justified</u> Expande control al ancho del contenedor.</li>
+                <BR>
+                <b>Casillas de verificacion (checkbox):</b>
+                <li><u>data-toggle=toggle</u> Convierte control a tipo boton deslizador</li>
+                <li><u>data-on=SuTexto</u> Define el texto a presentar cuando esta encendido. Puede contener HTML e incluso declaraciones de iconos.</li>
+                <li><u>data-off=SuTexto</u> Igual que propiedad anterior para control apagado</li>
+                <li><u>data-onstyle=Estilo</u> Define estilo del boton: primary|info|warning|danger|success|default</li>
+                <li><u>data-offstyle=Estilo</u> Igual que propiedad anterior para control apagado</li>
+                <li><u>data-style=TipoControl</u> Define apariencia grafica:  ninguno|ios|android</li>
+                <li><u>data-size=Tamano</u> Tamano del control: large|normal|small|mini</li>
+                <li><u>data-width=Ancho</u> Ancho del control en pixeles</li>
+                <li><u>data-height=Alto</u> Alto del control en pixeles</li>';
     $MULTILANG_FrmBtnFull='Cargar en pantalla completa';
     $MULTILANG_FrmBtnObjetivo='Objetivo HTML';
     $MULTILANG_FrmActualizaAjax='Actualizar din&aacute;micamente';
