@@ -305,6 +305,14 @@
                         ';
                     }
             ?>
+            
+            //Ejecucion de algunas funciones para correcion de estilos y responsive sobre datatables
+            //Ref: https://www.gyrocode.com/articles/jquery-datatables-column-width-issues-with-bootstrap-tabs/
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+               $($.fn.dataTable.tables(true)).DataTable()
+                  .columns.adjust();
+            });
+
         });
 
 		//Si hay tablas con propiedad de editables espera por eventos sobre sus campos

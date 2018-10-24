@@ -92,6 +92,7 @@ LogCambios="
 * Fixed: [MENU] Opciones hijas de otra que están ubicadas en la sección central son evitadas por defecto, ya que dependen de la ubicación de su padre.
 * Fixed: [MENU] Permisos extendidos sobre submenues.
 * Fixed: [AUDIT] Corregido el orden de los campos de fecha para filtros de auditoría y evitar confusiones en su uso.
+* Fixed: [FORMS] Informes de tipo dataTable embebidos en pestañas diferentes a la inicial del formulario autoajustan sus encabezados de columnas
 
 LEAME: ADVERTENCIA: Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada de acciones internas, las siguientes acciones han cambiado de nombre:
 Accion autenticacion_oauth cambia a PCO_AutenticacionOauth  Esto puede implicar cambiar sus API de redireccion con los proveedores asociados.
