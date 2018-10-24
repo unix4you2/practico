@@ -155,6 +155,11 @@ ESTILOS ADICIONALES PARA BOOTSTRAP
 	font-size: 11px;
 }
 
+/* Estilos especiales para apariencia en controles tipo toggle */
+.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+.toggle.ios .toggle-handle { border-radius: 20px; }
+.toggle.android { border-radius: 0px;}
+.toggle.android .toggle-handle { border-radius: 0px; }
 
 /*
 body {

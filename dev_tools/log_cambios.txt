@@ -44,6 +44,7 @@ xml/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/bootstrap/js/practico*
+inc/bootstrap/css/practico*
 "
  
 #[ArchivosObligatorios] Separados por espacio
