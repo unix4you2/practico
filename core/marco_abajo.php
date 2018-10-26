@@ -312,7 +312,6 @@
                $($.fn.dataTable.tables(true)).DataTable()
                   .columns.adjust();
             });
-
         });
 
 		//Si hay tablas con propiedad de editables espera por eventos sobre sus campos

@@ -128,3 +128,14 @@
             <!-- FIN DEL /.navbar-static-side -->
 <?php
 		} //Fin Presentar opciones de la barra a usuarios
+?>
+
+<script language="JavaScript">
+    //Oculta la barra de navegacion superior a los usuarios estandar segun la configuracion y en algunas secciones fijas del sistema
+    //VEASE FUNCION HERMANA EN MARCO_NAV.PHP QUE SE ENCARGA DE OCULTAR LA BARRA SUPERIOR
+    <?php
+        if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PWA_OcultarBarrasHerramientas=="1" )
+            echo '$("#boton_menu_izquierdo").hide();';
+    ?>
+</script>
+

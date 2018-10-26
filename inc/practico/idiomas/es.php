@@ -1381,4 +1381,5 @@
     $MULTILANG_PWAAutorizarFCM='Solicitar autorizaci&oacute;n de env&iacute;o notificaciones (PUSH)';
     $MULTILANG_PWAAutorizarCAM='Solicitar autorizaci&oacute;n para dispositivo de video (CAMARA)';
     $MULTILANG_PWAAutorizarMIC='Solicitar autorizaci&oacute;n para dispositivo de audio (MICROFONO)';
-
+    $MULTILANG_PWAOcultarBarrasExtra='Ocultar barras de navegacion a usuarios estandar?';
+    $MULTILANG_PWAOcultarBarrasExtraDes='Permite ahorrar espacio para la aplicacion de escritoio o movil mediante el ocultamiento de dichos elementos.  Aplica solo para usuarios estandar (no disenadores).  El desarrollador deberia garantizar acceso a ciertas funcionalidades ocultas de la barra mediante controles propios pues el usuario ya no podra verlos en las opciones por defecto, como por ejemplo el cierre de sesion entre otros.';

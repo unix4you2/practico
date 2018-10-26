@@ -76,6 +76,7 @@ LogCambios="
 * Added: [PWA] Se permite control de configuración para solicitar el envío de notificaciones al usuario.
 * Added: [PWA] Se agrega control de configuración para solicitar al usuario el envío automático de su ubicación geográfica estimada por GPS o WiFi cercanas.
 * Added: [PWA] Se agregan controles de configuración para solicitar al usuario permiso para el uso de camara y/o microfono.
+* Added: [GENERAL] Ahora desde la configuracion de apariencia de la aplicacion se permite ocultar la barra superior a los usuarios estandar, lo que permite mayor espacio para las aplicaciones.  El programador deberá garantizar por sus medios algunas acciones comunes como cierre de sesión o similares.
 * Enhan: [MONITOREO] Actualizada alarma de monitoreo a formato OGG para compatibilidad con reproduccion automatica en navegadores sin necesidad de codecs extra.
 * Enhan: [LIBS] Actualizacion de version 1.92 a 1.94 del cliente HTTP para PHP.
 * Enhan: [LIBS] Actualizacion de version 1.109 a 1.165 del cliente OAuth para PHP.
@@ -92,6 +93,7 @@ LogCambios="
 * Enhan: [PWA] Se migra de servicios GCM a Firebase cloud messaging para notificaciones push.
 * Enhan: [LOGIN] Por seguridad se evita el autocompletado o almacenamiento en campos de login.
 * Enhan: [SE] Ahora cualquier versión estándar puede ser convertida a versión SE.
+* Enhan: [GENERAL] Ahora se pueden correr multiples funciones AutoRun de formularios cuando están definidas al mismo tiempo.  Por defecto se ejecutan primero las funciones AutoRun de formularios embebidos y luego las de sus formularios contenedores.
 * Fixed: [PWA] Se conservan valores de scope (alcance) para aplicaciones móviles que residen sobre carpetas del dominio en lugar de su raíz.
 * Fixed: [MONITOREO] Cuando valores de cronometro en monitoreo sobrepasan el limite cero (negativos en conteo) autoenvia formulario de monitoreo al bajar de -10 segundos.
 * Fixed: [INTERNO] Preautorización de funcion interna PCO_CargarObjeto para evitar su registro en funciones autorizadas

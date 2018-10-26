@@ -118,6 +118,7 @@
 	$PWA_AutorizacionFCM='0';
 	$PWA_AutorizacionCAM='0';
 	$PWA_AutorizacionMIC='0';
+	$PWA_OcultarBarrasHerramientas='1';
 
 	// Define cadena usada para separar campos en operaciones de bases de datos
 	$_SeparadorCampos_='||_||';

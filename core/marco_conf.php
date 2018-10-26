@@ -298,6 +298,17 @@
 												</span>
 											</div>
 
+											<label for="PWA_OcultarBarrasHerramientasNEW"><i class="fa fa-low-vision fa-2x fa-fw text-info"></i> <?php echo $MULTILANG_PWAOcultarBarrasExtra; ?>:</label>
+											<div class="form-group input-group">
+												<select id="PWA_OcultarBarrasHerramientasNEW" name="PWA_OcultarBarrasHerramientasNEW" class="selectpicker" >
+													<option value="1" <?php if (@$PWA_OcultarBarrasHerramientas=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?></option>
+													<option value="0" <?php if (@$PWA_OcultarBarrasHerramientas=="0" || @$PWA_OcultarBarrasHerramientas=="") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?></option>
+												</select>
+												<span class="input-group-addon">
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_PWAOcultarBarrasExtraDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+											</div>
+
 										</div>
 										<div class="col-md-6">
 

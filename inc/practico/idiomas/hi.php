@@ -1370,3 +1370,5 @@
     $MULTILANG_PWAAutorizarFCM='अधिसूचनाएं भेजने का प्राधिकरण अनुरोध (पुश)';
     $MULTILANG_PWAAutorizarCAM='Request authorization to use video device (CAMERA)';
     $MULTILANG_PWAAutorizarMIC='Request authorization to use audio device (MICROPHONE)';
+    $MULTILANG_PWAOcultarBarrasExtra='Hide navigation bars to standard users?';
+    $MULTILANG_PWAOcultarBarrasExtraDes='It saves space for the application of writing or mobile. Applies only to standard users (non-designers). The developer should guarantee access to certain hidden functions of the bar by means of its own controls, such as, for example, session closing, among others.';

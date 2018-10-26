@@ -313,6 +313,7 @@ $salida=sprintf("<?php
 	\$PWA_AutorizacionFCM='%s';
 	\$PWA_AutorizacionCAM='%s';
 	\$PWA_AutorizacionMIC='%s';
+	\$PWA_OcultarBarrasHerramientas='%s';
 
 	// Define cadena usada para separar campos en operaciones de bases de datos
 	\$_SeparadorCampos_='%s';
@@ -321,7 +322,7 @@ $salida=sprintf("<?php
 	\$ModoDesarrolladorPractico=%s; // [0=Inactivo|-10000=Activo]
 
 	// Define cadena separada por comas con usuarios administradores de la aplicacion
-	\$PCOVAR_Administradores='%s';",$Servidor,$BaseDatos,$UsuarioBD,$PasswordBD,$MotorBD,$PuertoBD,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$PermitirReporteBugsNEW,$DepuracionSQLNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$IdiomaEnLoginNEW,$Tema_PracticoFrameworkNEW,$PCO_ArchivoImagenFondoNEW,$TipoCaptchaLoginNEW,$CaracteresCaptchaNEW,$CodigoGoogleAnalyticsNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_PermitirReseteoClavesNEW,$Auth_PermitirAutoRegistroNEW,$Auth_PlantillaAutoRegistroNEW,$Auth_PresentarOauthInicioNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW,$Activar_ModuloChatNEW,$PWA_ActivaNEW,$PWA_DireccionTextoNEW,$PWA_DisplayNEW,$PWA_OrientacionNEW,$PWA_FCMSenderIDNEW,$PWA_ScopeNEW,$PWA_AutorizacionGPSNEW,$PWA_AutorizacionFCMNEW,$PWA_AutorizacionCAMNEW,$PWA_AutorizacionMICNEW,$_SeparadorCampos_NEW,$ModoDesarrolladorPracticoNEW,$PCOVAR_AdministradoresNEW);
+	\$PCOVAR_Administradores='%s';",$Servidor,$BaseDatos,$UsuarioBD,$PasswordBD,$MotorBD,$PuertoBD,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$PermitirReporteBugsNEW,$DepuracionSQLNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$IdiomaEnLoginNEW,$Tema_PracticoFrameworkNEW,$PCO_ArchivoImagenFondoNEW,$TipoCaptchaLoginNEW,$CaracteresCaptchaNEW,$CodigoGoogleAnalyticsNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_PermitirReseteoClavesNEW,$Auth_PermitirAutoRegistroNEW,$Auth_PlantillaAutoRegistroNEW,$Auth_PresentarOauthInicioNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW,$Activar_ModuloChatNEW,$PWA_ActivaNEW,$PWA_DireccionTextoNEW,$PWA_DisplayNEW,$PWA_OrientacionNEW,$PWA_FCMSenderIDNEW,$PWA_ScopeNEW,$PWA_AutorizacionGPSNEW,$PWA_AutorizacionFCMNEW,$PWA_AutorizacionCAMNEW,$PWA_AutorizacionMICNEW,$PWA_OcultarBarrasHerramientasNEW,$_SeparadorCampos_NEW,$ModoDesarrolladorPracticoNEW,$PCOVAR_AdministradoresNEW);
 			// Escribe el archivo de configuracion
 			$archivo_config=fopen("core/configuracion.php","w");
 			if($archivo_config==null)

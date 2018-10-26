@@ -31,13 +31,7 @@
 
 
 <!-- Navigation -->
-<?php
-// Establece cadenas usadas para ocultar la barra superior al momento de login
-$CadenaOcultamientoBarraNavSuperior='';
-if ( $PCO_Accion=="" && !$PCOSESS_SesionAbierta )
-    $CadenaOcultamientoBarraNavSuperior='style="visibility: hidden;"';
-?>
-<nav <?php echo $CadenaOcultamientoBarraNavSuperior; ?> id="BarraNavegacionSuperior" class="navbar navbar-default navbar-static-top oculto_impresion" role="navigation" style="margin-bottom: 0">
+<nav id="BarraNavegacionSuperior" class="navbar navbar-default navbar-static-top oculto_impresion" role="navigation" style="margin-bottom: 0">
 
 	
 	<div class="navbar-header" >
@@ -249,6 +243,20 @@ if ( $PCO_Accion=="" && !$PCOSESS_SesionAbierta )
 
 </nav>
 
+<script language="JavaScript">
+    //Oculta la barra de navegacion superior a los usuarios estandar segun la configuracion y en algunas secciones fijas del sistema
+    //VEASE FUNCION HERMANA AL FINAL DE MARCO_NAVIZQ PARA OCULTAR BOTON DE DESPLIEGUE DE BARRA IZQUIERDA
+    <?php
+        if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PWA_OcultarBarrasHerramientas=="1" )
+            echo '$("#BarraNavegacionSuperior").hide();';
+        else
+            {
+                //oculta la barra en acciones especificas sin importar el tipo de usuario
+                if ( ( $PCO_Accion=="" && !$PCOSESS_SesionAbierta ) )
+                    echo '$("#BarraNavegacionSuperior").hide();';
+            }
+    ?>
+</script>
 
 <script language="javascript">
     function PCO_CargarReportarBugs()
