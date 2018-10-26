@@ -107,7 +107,7 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
             echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","default","fa-external-link-square fa-4x",PCO_ContarRegistrosTabla($TablasCore."menu"),"$MULTILANG_OpcionesMenu","$MULTILANG_Detalles","javascript:document.PCOFUNC_AdministrarMenu.submit();");
             echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","yellow","fa-users fa-4x",PCO_ContarRegistrosTabla($TablasCore."usuario"),"$MULTILANG_Usuario","$MULTILANG_Detalles","javascript:document.PCO_ListarUsuarios.submit();");
             echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","info","fa-eye fa-4x",PCO_ContarRegistrosTabla($TablasCore."auditoria"),"$MULTILANG_UsrAuditoria","$MULTILANG_Detalles","javascript:document.PCO_PanelAuditoriaMovimientos.submit();");
-            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","success","fa-thumb-tack fa-4x",PCO_ContarRegistrosTabla($TablasCore."kanban"),"$MULTILANG_TablerosKanban","$MULTILANG_Detalles","javascript:document.PCO_ExplorarTablerosKanban.submit();");
+            echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","success","fa-thumb-tack fa-4x",PCO_ContarRegistrosTabla($TablasCore."kanban"),"$MULTILANG_Tareas","$MULTILANG_Detalles","javascript:document.PCO_ExplorarTablerosKanban.submit();");
             echo PCO_ImprimirPanelSimpleDashboard("col-lg-3 col-md-6","danger","fa-bug fa-4x",PCO_ContarRegistrosTabla($TablasCore."bugtracker"),"$MULTILANG_TblRegistros","$MULTILANG_BTBugtracking","javascript:document.PCO_BugTrackingForm.submit();");
         ?>
     </div>

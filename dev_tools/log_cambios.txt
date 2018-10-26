@@ -21,6 +21,7 @@ core/formularios.php
 core/informes.php
 core/kanban.php
 core/marco_abajo.php
+core/marco_admin.php
 core/marco_arriba.php
 core/marco_arriba_bs.php
 core/marco_chat.php
@@ -89,6 +90,7 @@ LogCambios="
 * Enhan: [GENERAL] Se evita errores 404 al buscar imagen de fondo de aplicación cuando esta realmente no ha sido definida en la configuración.
 * Enhan: [PWA] Se migra de servicios GCM a Firebase cloud messaging para notificaciones push.
 * Enhan: [LOGIN] Por seguridad se evita el autocompletado o almacenamiento en campos de login.
+* Enhan: [SE] Ahora cualquier versión estándar puede ser convertida a versión SE.
 * Fixed: [PWA] Se conservan valores de scope (alcance) para aplicaciones móviles que residen sobre carpetas del dominio en lugar de su raíz.
 * Fixed: [MONITOREO] Cuando valores de cronometro en monitoreo sobrepasan el limite cero (negativos en conteo) autoenvia formulario de monitoreo al bajar de -10 segundos.
 * Fixed: [INTERNO] Preautorización de funcion interna PCO_CargarObjeto para evitar su registro en funciones autorizadas
