@@ -80,6 +80,7 @@ LogCambios="
 * Enhan: [LIBS] Actualizacion de version 1.92 a 1.94 del cliente HTTP para PHP.
 * Enhan: [LIBS] Actualizacion de version 1.109 a 1.165 del cliente OAuth para PHP.
 * Enhan: [LIBS] Actualizacion del plugin DataTables a la versión 1.10.18
+* Enhan: [LIBS] Ahora la funcion interna de PCOJS_MostrarMensaje soporta un tercer parámetro que indica la clases adicionales para personalizar el dialogo modal.
 * Enhan: [FORMS] Las ayudas de personalizacion de etiquetas son tan amplias que ahora se imprimen directamente sobre el disenador de campos facilitando además su copy-paste
 * Enhan: [MENU] Al igual que las pestanas de formulario, ahora las opciones de menu definidas dentro de una sección con nombre PCO_NoVisible no serán presentadas al usuario.
 * Enhan: [KANBAN] Sólo los usuarios propietarios de un tablero pueden eliminar o archivar tareas sobre éste.

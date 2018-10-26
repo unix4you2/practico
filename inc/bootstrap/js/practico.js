@@ -155,11 +155,37 @@ function PCOJS_StrReplace(busca_por, reemplaza_por, cadena_original)
     	return str;
     }
 
-function PCOJS_MostrarMensaje(TituloPopUp, Mensaje)
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCOJS_MostrarMensaje
+	Presenta un mensaje emergente en pantalla utilizando JavaScript y un marco preconstruido para tal fin
+	
+	Variables de entrada:
+
+		TituloPopUp - El titulo del mensaje
+		Mensaje - El mensaje completo que sera desplegado en el modal, puede incluir HTML.
+		ClasesAdicionales - Por defecto la funcion retira cualquier clase previa, asigna por defecto las clases modal fade oculto_impresion y luego agrega cualquier otra clase personalizada definida por esta cadena, puede incluir varias clases separadas por espacios.
+
+	Salida:
+		Dialogo modal visualizado en la patanlla del usuario
+*/
+function PCOJS_MostrarMensaje(TituloPopUp, Mensaje, ClasesAdicionales)
 	{
 		//Lleva los valores a cada parte del dialogo modal
 		$('#PCO_Modal_MensajeTitulo').html(TituloPopUp);
 		$('#PCO_Modal_MensajeCuerpo').html(Mensaje);
+
+        //Retira cualquier clase preexistente o remanente de cualquier personalizacion previa y agrega las clases base
+        $("#PCO_Modal_Mensaje").removeClass();
+        $( "#PCO_Modal_Mensaje" ).addClass( "modal" );
+        $( "#PCO_Modal_Mensaje" ).addClass( "fade" );
+        $( "#PCO_Modal_Mensaje" ).addClass( "oculto_impresion" );
+
+        //Agrega las clases personalizadas por el usuario
+        if (ClasesAdicionales!="")
+            $( "#PCO_Modal_Mensaje" ).addClass( ClasesAdicionales );
 
 		// Se muestra el cuadro modal
 		$('#PCO_Modal_Mensaje').modal('show');
