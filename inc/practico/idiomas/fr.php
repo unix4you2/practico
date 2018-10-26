@@ -616,6 +616,7 @@
                 <li><u>data-size=auto|#</u> Combien de lignes sont affichées dans la liste d éléments.</li>
                 <li><u>data-style=btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u> Style graphique
                 <li><u>disabled</u> Désactive le contrôle</li>
+                <li><u>PCO_Delayed</u> If this keyword is found the load of the value is charged at onready time by javascript. Usefull when you have manual items in your combobox and you need to recover its value from the database on form load.</li>
                 <BR>
                 <b>Boutons (bouton de commande):</b>
                 <li><u>btn-group btn-group-justified</u> Développer le bouton à la largeur de ses conteneurs.</li>

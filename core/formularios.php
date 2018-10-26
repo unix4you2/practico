@@ -184,7 +184,12 @@
                             if (PCO_ExisteCampoTabla($registro_campos["campo"],$registro_formulario["tabla_datos"]))
                                 {
                                     $cadena_campos_interrogantes.=$registro_campos["campo"]."=?,";
-                                    $cadena_nuevos_valores.=${$registro_campos["campo"]}.$_SeparadorCampos_;
+                                    
+                                    //Si el campo es combo multiple formatea el valor de acuerdo al campo extra para datos sanitizados, sino toma valor normal
+									if ($registro_campos["tipo"]=="lista_seleccion" && strstr($registro_campos["personalizacion_tag"],"multiple")!=FALSE)
+									    $cadena_nuevos_valores.=${"PCO_ComboMultiple_".$registro_campos["campo"]}.$_SeparadorCampos_;
+									else
+                                        $cadena_nuevos_valores.=${$registro_campos["campo"]}.$_SeparadorCampos_;
                                 }
 						}
 					// Elimina comas al final de las listas
@@ -392,6 +397,11 @@
 													$nombre_de_campo_query=$registro_campos["campo"].",";
 													//ANTES DE QUERY CON PARAMETROS $valor_de_campo_query="'".${$registro_campos["campo"]}."',";
 													$valor_de_campo_query=${$registro_campos["campo"]};
+													
+													//Si el campo es combo multiple formatea el valor de acuerdo al campo extra para datos sanitizados
+													if ($registro_campos["tipo"]=="lista_seleccion" && strstr($registro_campos["personalizacion_tag"],"multiple")!=FALSE)
+													    $valor_de_campo_query=${"PCO_ComboMultiple_".$registro_campos["campo"]};
+
 													//Compresion previa para campos especiales (MUY experimental por cuanto puede generar errores de query)
 														if ($registro_campos["tipo"]=="objeto_canvas" || $registro_campos["tipo"]=="objeto_camara")
 															$valor_de_campo_query=gzencode($valor_de_campo_query,9);

@@ -608,12 +608,13 @@
     $MULTILANG_FrmDesTagPersonalizado='Permite agregar par&aacute;metros y otras configuraciones HTML a la etiqueta generada por Pr&aacute;ctico as&iacute;:
             <br><b>Listas de selecci&oacute;n (combo-box):</b>
                 <li><u>data-live-search=true</u> Busqueda dinamica sobre la lista.</li>
-                <li>Beta <u>multiple</u> Selecciones multiples sobre la lista. Cuidado: Almacena el primer valor seleccionado.</li>
+                <li><u>multiple</u> Selecciones multiples sobre la lista. Guarda las selecciones separadas por coma.  Por defecto las listas multiples son tratadas posteriormente como PCO_Delayed.</li>
                 <li>Beta <u>data-selected-text-format=count</u> Combinado con multiple, cuenta las opciones seleccionadas en lugar de sus valores. Cuidado: Solamente cuenta, pero almacena el primer valor seleccionado.</li>
                 <li><u>data-max-options=#</u> Combinado con multiple, determina el maximo de elementos a ser seleccionados.
                 <li><u>data-size=auto|#</u> Determina cuantas opciones presentar en la lista. Por defecto es auto.</li>
                 <li><u>data-style=btn-primary|btn-info|btn-success|btn-warning|btn-danger|btn-inverse</u> Cambia el estilo grafico del control
                 <li><u>disabled</u> Deshabilita el control.</li>
+                <li><u>PCO_Delayed</u> Si se encuentra hara una carga/actualizacion posterior (en el onready) del valor del control mediante javascript. Util en listas con opciones cargadas manualmente que requieren recuperar su valor desde BD posteriormente.</li>
                 <BR>
                 <b>Botones (command button):</b>
                 <li><u>btn-group btn-group-justified</u> Expande control al ancho del contenedor.</li>

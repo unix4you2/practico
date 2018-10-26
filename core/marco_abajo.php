@@ -582,6 +582,7 @@
         echo '
         <script type="text/javascript">
             PCOJS_ListaCamposValidar="'.$POSTForm_ListaCamposObligatorios.'".split("|");
+            PCOJS_ListaCombosMultiplesJoin="'.@$PCO_ListaCombosMultiplesJoin.'".split("|");
             PCOJS_ListaTitulosValidar="'.PCO_ReemplazarVariablesPHPEnCadena($POSTForm_ListaTitulosObligatorios).'".split("|");
             function PCOJS_ValidarCamposYProcesarFormulario(FormularioProcesar="datos",AnularSubmit=0)
                 {
@@ -605,7 +606,30 @@
                     else
                         {
                             if (AnularSubmit==0)
-                                document.getElementById(FormularioProcesar).submit();
+                                {
+                                    //Antes de hacer el submit definitivo sanitiza valores de combos multiples
+                                    for (var ComboMultiple of PCOJS_ListaCombosMultiplesJoin) 
+                                        {
+                                            ComboMultiple=ComboMultiple.trim();             //Elimina posibles espacios en el id del elemento
+                                            ValorComboMultiple=$("#"+ComboMultiple).val();
+                                            if (ComboMultiple!="")
+                                                {
+                                                    if (ValorComboMultiple!=null)
+                                                        {
+                                                            ValorSanitizadoComboMultiple=$("#"+ComboMultiple).val().join(",");
+                                                            //Asigna al campo extra del combo multiple los valores sanitizados
+                                                            $("#PCO_ComboMultiple_"+ComboMultiple).val(ValorSanitizadoComboMultiple);
+                                                        }
+                                                    else
+                                                        {
+                                                            //Si el combo es null porque se dejo sin valores entonces limpia campo sanitizado
+                                                            $("#PCO_ComboMultiple_"+ComboMultiple).val("");
+                                                        }
+                                                }
+                                        }
+                                    //Hace el envio del formulario
+                                    document.getElementById(FormularioProcesar).submit();
+                                }
                         }
                 }
         </script> ';
@@ -680,6 +704,11 @@
         //Limpia parametros de la URL si aplica
         if(window.location.href.indexOf("?") > -1)
             window.history.pushState({data:true}, "", window.location.href.split("?")[0].split("index.php")[0] );
+
+        <?php
+            //Agrega scripts de postcarga para listas de seleccion si aplica
+            echo $PCO_ScriptsListaCombosPostCarga;
+        ?>
 
         //Actualiza marco con el tiempo de carga JavaScript (tiempo de carga y transferencia)
         var tiempo_final_javascript = (new Date()).getTime();

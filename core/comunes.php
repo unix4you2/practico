@@ -5369,6 +5369,7 @@ function PCO_CargarObjetoTextoFormato($registro_campos,$registro_datos_formulari
 function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 	{
 		global $TablasCore,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
+		global $PCO_ScriptsListaCombosPostCarga,$PCO_ListaCombosMultiplesJoin;
 		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_SeleccioneUno,$MULTILANG_FrmActualizaAjax;
 
         //Busca datos del formulario
@@ -5385,7 +5386,11 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                 if ($registro_datos_formulario["$nombre_campo"]!="")
                     $cadena_valor=$registro_datos_formulario["$nombre_campo"];
                 else
-                    $cadena_valor=$PCO_ValorBusquedaBD;
+                    {
+                        //Asigna el valor solo si no se trata de una lista multiple, pues listas multiples no son validas para recuperar registros unicos.
+                        if (!strstr($registro_campos["personalizacion_tag"],"multiple")!=FALSE)
+                            $cadena_valor=$PCO_ValorBusquedaBD;
+                    }
             }
 
 		// Define si el control es un ComboBox o un ListBox dependiendo de su altura (!=0 es listbox)
@@ -5602,6 +5607,23 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
             }
         //Cierra marco del control de datos
         $salida.= '</div>';
+
+        //Si es multiple carga sus valores indepediente si es delayed o no
+        if (strstr($registro_campos["personalizacion_tag"],"multiple")!=FALSE)
+            {
+                //$CadenaAsignacionMultiples="['".str_replace(',',"','",$cadena_valor)."']";
+                $PCO_ScriptsListaCombosPostCarga.='$("#'.$registro_campos["id_html"].'").val("'.$cadena_valor.'".split(",")); PCOJS_ActualizarComboBox("'.$registro_campos["id_html"].'");';
+                $PCO_ListaCombosMultiplesJoin.=$registro_campos["id_html"]."|";
+                //Agrega un campo hidden para el combo multiple para trasportar luego sus datos sanitizados.
+		        $salida.= '<input type=hidden value="'.$cadena_valor.'" id="PCO_ComboMultiple_'.$registro_campos["id_html"].'" name="PCO_ComboMultiple_'.$registro_campos["id_html"].'" >';
+            }
+
+        //Si es delayed porque el usuario asi lo quiere pero que no sea multiple, que por defecto ya es delayed
+        if (strstr($registro_campos["personalizacion_tag"],"PCO_Delayed")!=FALSE ) // && strstr($registro_campos["personalizacion_tag"],"multiple")!=FALSE
+            {
+                if (!strstr($registro_campos["personalizacion_tag"],"multiple")!=FALSE)
+                    $PCO_ScriptsListaCombosPostCarga.='$("#'.$registro_campos["id_html"].'").val("'.$cadena_valor.'"); PCOJS_ActualizarComboBox("'.$registro_campos["id_html"].'");';
+            }
 
         //Mejora velocidad de carga para listas de seleccion
         //$salida.= '<script type="text/javascript">$("#'.$registro_campos["id_html"].'").selectpicker("render");</script>';

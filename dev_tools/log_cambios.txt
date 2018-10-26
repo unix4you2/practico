@@ -60,6 +60,7 @@ LogCambios="
 * Added: [FORMS] Ahora las listas de seleccion (combobox) soportan elementos para agrupacion de opciones.  Para tal fin se debera contar con la palabra clave _OPTGROUP_|EtiquetaDeseada como *valor* en la apertura del elemento. Elementos que carezcan de una etiqueta seran considerados automaticamente como elementos de cierre de grupo.  Aplica tanto para opciones fijas como opciones tomadas desde base de datos.
 * Added: [FORMS] NUEVO TIPO DE CONTROL: Los controles de datos tipo checkbox pueden ser fácilmente transformados a controles de boton tipo Toggle.  Para esto puede ser utilizado el campo de personalización del TAG disponible ahora sobre estos controles.  Vease ayuda del campo para amplias posibilidades de personalizaciones completas!
 * Added: [FORMS] Los controles de datos tipo checkbox permiten la ocultación de su etiqueta sobre los formularios para adecuarse ante textos predefinidos en controles nuevos como los tipo toggle.
+* Added: [FORMS] Almacenamiento y recuperación automática de listas de selección múltiple que almacenan sus valores separados únicamente por comas.
 * Added: [INFORMES] En los reportes/informes de tipo grafico se permite ahora generar un tootip con el título del reporte sobre el resultado final activando dicha bandera en su diseño.
 * Added: [MENU] Se agrega la columna informativa de seccion a la administracion de menues, ordenando las opciones de acuerdo a su sección y peso.
 * Added: [MENU] Ayuda extra para el campo de imagen durante la creacion de menues.
