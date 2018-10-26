@@ -212,11 +212,4 @@ function PCO_EnviarCorreo($remitente,$destinatario,$asunto,$cuerpo_mensaje,$dest
 		return $estado_envio;
 	}
 
-function enviar_correo($remitente,$destinatario,$asunto,$cuerpo_mensaje,$destinatario_cc="",$destinatario_bcc="")
-	{
-		//DEPRECATED
-		$estado_envio=PCO_EnviarCorreo($remitente,$destinatario,$asunto,$cuerpo_mensaje,$destinatario_cc,$destinatario_bcc);
-		return $estado_envio;
-	}
-
 ?>

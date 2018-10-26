@@ -16,6 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/correos.php
 core/formularios.php
 core/informes.php
 core/kanban.php
@@ -45,6 +46,7 @@ inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/bootstrap/js/practico*
 inc/bootstrap/css/practico*
+inc/practico_se/*
 "
  
 #[ArchivosObligatorios] Separados por espacio
@@ -97,8 +99,10 @@ LogCambios="
 * Fixed: [AUDIT] Corregido el orden de los campos de fecha para filtros de auditoría y evitar confusiones en su uso.
 * Fixed: [FORMS] Informes de tipo dataTable embebidos en pestañas diferentes a la inicial del formulario autoajustan sus encabezados de columnas
 
+
 LEAME: ADVERTENCIA: Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada de acciones internas, las siguientes acciones han cambiado de nombre:
 Accion autenticacion_oauth cambia a PCO_AutenticacionOauth  Esto puede implicar cambiar sus API de redireccion con los proveedores asociados.
+Funcion enviar_correo cambia a PCO_EnviarCorreo
 
 
 "

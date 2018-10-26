@@ -69,6 +69,7 @@
     if ($ModoDepuracion && $_SESSION['PCOSESS_SesionAbierta'])
         {
             include_once 'core/comunes.php';
+            include_once 'inc/practico_se/core/comunes.php';
             if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
                 {
                     ini_set('display_errors', 1);
@@ -120,12 +121,14 @@
 
     // Incluye archivo con algunas funciones comunes usadas por la herramienta
     include_once 'core/comunes.php';
+    include_once 'inc/practico_se/core/comunes.php';
 
     // Genera conexiones individuales o conexiones para replicacion de transacciones
     include_once 'core/conexiones_extra.php';
 
     // Incluye archivo con funciones de correo electronico
     include_once 'core/correos.php';
+    include_once 'inc/practico_se/core/correos.php';
 
     // Establece funciones propias para el manejo de errores y excepciones
     set_exception_handler('PCO_ManejadorExcepciones');
@@ -144,6 +147,7 @@
 
     // Determina si al momento de ejecucion se encuentra activado el modo webservices
     include_once 'core/ws_nucleo.php';
+    include_once 'inc/practico_se/core/ws_nucleo.php';
 
     PCO_LimpiarEntradas(); // Evita XSS
 
@@ -173,16 +177,22 @@
     // Inicia la presentacion de la pagina si no esta activado el fullscreen
     if (@$Presentar_FullScreen!=1) $Presentar_FullScreen="";
     if (@$Precarga_EstilosBS!=1) $Precarga_EstilosBS="";
-    if (@$Presentar_FullScreen!=1) 
-        include 'core/marco_arriba.php';
+    if (@$Presentar_FullScreen!=1)
+        {
+            include 'core/marco_arriba.php';
+            include 'inc/practico_se/core/marco_arriba.php';
+        }
     else if (@$Precarga_EstilosBS==1) //Valida si el FullScreen al menos requiere de estilos BootStrap basicos
 		{
 			include 'core/marco_arriba_bs.php';
+			include 'inc/practico_se/core/marco_arriba_bs.php';
+
 			//Inicia lo basico de la pagina
 			echo '<body oncontextmenu="return false;">';
 
 			//Incluye formularios de uso comun para transporte de datos
 			include_once 'core/marco_forms.php';
+            include_once 'inc/practico_se/core/marco_forms.php';
 
 			echo '    <div id="wrapper">
 				<!-- CONTENIDO DE APLICACION -->
@@ -217,6 +227,7 @@
 	//Despliega escritorio de los Administradores
     if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCOSESS_SesionAbierta && $PCO_Accion=="PCO_VerMenu")
         include_once 'core/marco_admin.php';
+        include_once 'inc/practico_se/core/marco_admin.php';
 
 /* ################################################################## */
     // Cuando no se tiene ninguna accion para procesar se carga la pagina de inicio de sesion
@@ -224,29 +235,29 @@
     if ($PCO_Accion=="" && $PCOSESS_SesionAbierta==1 && @$Presentar_FullScreen!=1) echo '<script type="" language="JavaScript">    document.PCO_FormVerMenu.submit();  </script>';
     // Incluye los archivos necesarios dependiendo de las funciones requeridas
     if ($PCO_Accion=="PCO_ExportarInforme" || $PCO_Accion=="PCO_ConfirmarImportacionInforme" || $PCO_Accion=="PCO_AnalizarImportacionInforme" || $PCO_Accion=="PCO_ImportarInforme" || $PCO_Accion=="PCO_DefinirCopiaInformes" || $PCO_Accion=="PCO_ClonarDisenoInforme" || $PCO_Accion=="PCO_AdministrarInformes" || $PCO_Accion=="PCO_GuardarInforme" || $PCO_Accion=="PCO_EditarInforme" || $PCO_Accion=="PCO_EliminarInforme" || $PCO_Accion=="PCO_ActualizarInforme" || $PCO_Accion=="PCO_EliminarInformeTabla" || $PCO_Accion=="PCO_GuardarInformeTabla" || $PCO_Accion=="PCO_EliminarInformeCampo" || $PCO_Accion=="PCO_GuardarInformeCampo" || $PCO_Accion=="PCO_GuardarInformeCondicion" || $PCO_Accion=="PCO_EliminarInformeCondicion" || $PCO_Accion=="PCO_MisInformes" || $PCO_Accion=="PCO_ActualizarGraficoInforme" || $PCO_Accion=="PCO_ActualizarAgrupamientoInforme" || $PCO_Accion=="PCO_GuardarAccionInforme" || $PCO_Accion=="PCO_EliminarRegistroInforme" || $PCO_Accion=="PCO_EliminarAccionInforme")
-        include "core/informes.php";
+        { include "core/informes.php";  include "inc/practico_se/core/informes.php"; }
     if ($PCO_Accion=="PCO_GuardarUsuarioAutoregistro" || $PCO_Accion=="PCO_AgregarUsuarioAutoregistro" || $PCO_Accion=="PCO_CopiarInformes" || $PCO_Accion=="PCO_GuardarPerfilUsuario" || $PCO_Accion=="PCO_ActualizarPerfilUsuario" || $PCO_Accion=="PCO_RecuperarContrasena" || $PCO_Accion=="PCO_ResetearContrasena" || $PCO_Accion=="PCO_PanelAuditoriaMovimientos" || $PCO_Accion=="PCO_ActualizarContrasena" || $PCO_Accion=="PCO_CambiarContrasena" || $PCO_Accion=="PCO_AgregarUsuario" || $PCO_Accion=="PCO_GuardarUsuario" || $PCO_Accion=="PCO_ListarUsuarios" || $PCO_Accion=="PCO_EliminarUsuario" || $PCO_Accion=="PCO_CambiarEstadoUsuario" || $PCO_Accion=="PCO_PermisosUsuario" || $PCO_Accion=="PCO_AgregarPermiso" || $PCO_Accion=="PCO_EliminarPermiso" || $PCO_Accion=="PCO_InformesUsuario" || $PCO_Accion=="PCO_AgregarInformeUsuario" || $PCO_Accion=="PCO_EliminarInformeUsuario" || $PCO_Accion=="PCO_CopiarPermisos")
-        include "core/usuarios.php";
+        { include "core/usuarios.php";  include "inc/practico_se/core/usuarios.php"; }
     if ($PCO_Accion=="PCO_EjecutarImportacionCSV" || $PCO_Accion=="PCO_EscogerTablaImportacionCSV" || $PCO_Accion=="PCO_AnalizarImportacionCSV" || $PCO_Accion== "PCO_ConfirmarImportacionTabla" || $PCO_Accion== "PCO_ImportarTabla" || $PCO_Accion== "PCO_CopiarTabla" || $PCO_Accion== "PCO_DefinirCopiaTablas" || $PCO_Accion=="PCO_GuardarCrearTablaAsistente" || $PCO_Accion=="PCO_AsistenteTablas" || $PCO_Accion=="PCO_AdministrarTablas" || $PCO_Accion=="PCO_GuardarCrearTabla" || $PCO_Accion=="PCO_EliminarTabla" || $PCO_Accion=="PCO_EditarTabla" || $PCO_Accion=="PCO_GuardarCrearCampo" || $PCO_Accion=="PCO_EliminarCampoTabla")
-        include "core/tablas.php";
+        { include "core/tablas.php";  include "inc/practico_se/core/tablas.php"; }
     if ($PCO_Accion=="PCO_EliminarEventoObjeto" || $PCO_Accion=="PCO_EditarEventoObjeto" || $PCO_Accion=="PCO_ActualizarJavaEvento" || $PCO_Accion=="PCO_ConfirmarImportacionFormulario" || $PCO_Accion=="PCO_AnalizarImportacionFormulario" || $PCO_Accion=="PCO_ImportarFormulario" || $PCO_Accion=="PCO_DefinirCopiaFormularios" || $PCO_Accion=="PCO_ActualizarDatosFormulario" || $PCO_Accion=="PCO_ActualizarFormulario" || $PCO_Accion=="PCO_CopiarFormulario" || $PCO_Accion=="PCO_ActualizarCampoFormulario" || $PCO_Accion=="PCO_AdministrarFormularios" || $PCO_Accion=="PCO_GuardarFormulario" || $PCO_Accion=="PCO_EliminarFormulario" || $PCO_Accion=="PCO_EditarFormulario" || $PCO_Accion=="PCO_GuardarCampoFormulario" || $PCO_Accion=="PCO_EliminarCampoFormulario" || $PCO_Accion=="PCO_GuardarAccionFormulario" || $PCO_Accion=="PCO_EliminarAccionFormulario" || $PCO_Accion=="PCO_GuardarDatosFormulario" || $PCO_Accion=="PCO_EliminarDatosFormulario")
-        include "core/formularios.php";
+        { include "core/formularios.php";  include "inc/practico_se/core/formularios.php"; }
     if ($PCO_Accion=="PCO_BuscarPermisosPractico" || $PCO_Accion=="PCO_VerMenu" || $PCO_Accion=="PCOFUNC_AdministrarMenu" || $PCO_Accion=="PCO_EliminarMenu")
-        include "core/menus.php";
+        { include "core/menus.php";  include "inc/practico_se/core/menus.php"; }
     if ($PCO_Accion=="Iniciar_login" || $PCO_Accion=="Terminar_sesion" || $PCO_Accion=="Mensaje_cierre_sesion")
-        include "core/sesion.php";
+        { include "core/sesion.php";  include "inc/practico_se/core/sesion.php"; }
     if ($PCO_Accion=="PCO_CargarObjeto" || $PCO_Accion=="cargar_objeto" || $PCO_Accion=="guardar_configuracion" || $PCO_Accion=="PCO_GuardarConfiguracionOAuth" || $PCO_Accion=="exportacion_masiva_objetos")
-        include "core/objetos.php";
+        { include "core/objetos.php";  include "inc/practico_se/core/objetos.php"; }
     if ($PCO_Accion=="actualizar_practico" || $PCO_Accion=="cargar_archivo" || $PCO_Accion=="analizar_parche" || $PCO_Accion=="aplicar_parche")
-        include "core/actualizacion.php";
+        { include "core/actualizacion.php";  include "inc/practico_se/core/actualizacion.php"; }
     if ($PCO_Accion=="PCO_VerMonitoreo")
-        include "core/monitoreo.php";
+        { include "core/monitoreo.php";  include "inc/practico_se/core/monitoreo.php"; }
     if ($PCO_Accion=="cambiar_estado_campo" || $PCO_Accion=="valor_campo_tabla" || $PCO_Accion=="opciones_combo_box")
-        include "core/ajax.php";
+        { include "core/ajax.php";  include "inc/practico_se/core/ajax.php"; }
     if ($PCO_Accion=="PCO_ReportarBugs" || $PCO_Accion=="mantenimiento_tablas" || $PCO_Accion=="limpiar_temporales" || $PCO_Accion=="limpiar_backups")
-        include "core/mantenimiento.php";
+        { include "core/mantenimiento.php";  include "inc/practico_se/core/mantenimiento.php"; }
     if ($PCO_Accion=="EliminarTableroKanban" || $PCO_Accion=="GuardarCreacionKanban" || $PCO_Accion=="VerTareasArchivadas" || $PCO_Accion=="ArchivarTareaKanban" || $PCO_Accion=="PCO_ExplorarTablerosKanban" || $PCO_Accion=="GuardarTareaKanban" || $PCO_Accion=="EliminarTareaKanban" || $PCO_Accion=="GuardarPersonalizacionKanban")
-        include "core/kanban.php";
+        { include "core/kanban.php";  include "inc/practico_se/core/kanban.php"; }
 
 
 /* ################################################################## */
@@ -279,4 +290,7 @@
     // Finaliza el contenido central y presenta el pie de pagina de aplicacion
     // siempre y cuando no se esta en fullscreen.  Si la precarga esta activa tambien lo incluye
     if (@$Presentar_FullScreen!=1 || @$Precarga_EstilosBS==1)
-        include 'core/marco_abajo.php';
+        {
+            include 'core/marco_abajo.php';
+            include 'inc/practico_se/core/marco_abajo.php';
+        }
