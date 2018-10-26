@@ -1370,3 +1370,5 @@
     $MULTILANG_PWAScopeDes='If your Practico installation resides on the root of your web server or subdomain, you can leave this blank. If your installation resides on any folder please indicate /folder/ to establish the scope of the Service Worker and the PWA manifest.';
     $MULTILANG_PWAAutorizarGPS='Request authorization to obtain location (GPS)';
     $MULTILANG_PWAAutorizarFCM='Request authorization of sending notifications (PUSH)';
+    $MULTILANG_PWAAutorizarCAM='Request authorization to use video device (CAMERA)';
+    $MULTILANG_PWAAutorizarMIC='Request authorization to use audio device (MICROPHONE)';

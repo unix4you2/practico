@@ -685,6 +685,38 @@
                         PCOJS.GeoLocalizarUsuario();
                     </script>';
             }
+
+	    //Solicita autorizacion para uso de camara y microfono de acuerdo a la configuracion actual
+        if ($PWA_AutorizacionCAM=="1" || $PWA_AutorizacionMIC=="1")
+            {
+                $PCO_SolicitudCAM='false';
+                $PCO_SolicitudMIC='false';
+                if ($PWA_AutorizacionCAM==1) $PCO_SolicitudCAM='true';
+                if ($PWA_AutorizacionMIC==1) $PCO_SolicitudMIC='true';
+                echo '<script language="JavaScript">
+                        navigator.getUserMedia = ( navigator.getUserMedia ||
+                                               navigator.webkitGetUserMedia ||
+                                               navigator.mozGetUserMedia ||
+                                               navigator.msGetUserMedia);
+                        navigator.getUserMedia (
+
+                           // Indica el tipo de medio al que se solicita el acceso
+                               {
+                                  video: '.$PCO_SolicitudCAM.',
+                                  audio: '.$PCO_SolicitudMIC.'
+                               },
+                           // Si no hay error, es devuelto en el objeto LocalMediaStream en un tag video:
+                               function(localMediaStream) {
+                                  var video = document.querySelector(video);
+                                  video.src = window.URL.createObjectURL(localMediaStream);
+                               },
+                           // Si hay errores lleva log a consola de depuracion
+                               function(err) {
+                                console.log("Practico Framework: No autorizado el uso de dispositivo de video/audio: " + err);
+                               }
+                        );
+                    </script>';
+            }
 	?>
 
     <?php

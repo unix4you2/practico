@@ -70,6 +70,9 @@ LogCambios="
 * Added: [AUDIT] Ahora cualquier consulta al motor de base de datos que genere algún error será llevada automáticamente al log de auditoría bajo el usuario SQLog:error
 * Added: [AUDIT] Agregadas nuevas opciones de filtro de usuario en módulo de auditorías para permitir filtrar operaciones realizadas por funciones internas del framework.
 * Added: [AUDIT] Se agrega a la opción general de auditoría un gráfico que presenta de manera automática los errores SQL generados internamente para el rango de fechas establecido.
+* Added: [PWA] Se permite control de configuración para solicitar el envío de notificaciones al usuario.
+* Added: [PWA] Se agrega control de configuración para solicitar al usuario el envío automático de su ubicación geográfica estimada por GPS o WiFi cercanas.
+* Added: [PWA] Se agregan controles de configuración para solicitar al usuario permiso para el uso de camara y/o microfono.
 * Enhan: [MONITOREO] Actualizada alarma de monitoreo a formato OGG para compatibilidad con reproduccion automatica en navegadores sin necesidad de codecs extra.
 * Enhan: [LIBS] Actualizacion de version 1.92 a 1.94 del cliente HTTP para PHP.
 * Enhan: [LIBS] Actualizacion de version 1.109 a 1.165 del cliente OAuth para PHP.
@@ -83,8 +86,6 @@ LogCambios="
 * Enhan: [LOGIN] Se oculta barra superior cuando no se tiene sesion y se va a pantalla de login ahorrando así espacio cuando se trata de aplicaciones móviles.
 * Enhan: [GENERAL] Se evita errores 404 al buscar imagen de fondo de aplicación cuando esta realmente no ha sido definida en la configuración.
 * Enhan: [PWA] Se migra de servicios GCM a Firebase cloud messaging para notificaciones push.
-* Enhan: [PWA] Se permite control de configuración para solicitar el envío de notificaciones al usuario.
-* Enhan: [PWA] Se agrega control de configuración para solicitar al usuario el envío automático de su ubicación geográfica estimada por GPS o WiFi cercanas.
 * Enhan: [LOGIN] Por seguridad se evita el autocompletado o almacenamiento en campos de login.
 * Fixed: [PWA] Se conservan valores de scope (alcance) para aplicaciones móviles que residen sobre carpetas del dominio en lugar de su raíz.
 * Fixed: [MONITOREO] Cuando valores de cronometro en monitoreo sobrepasan el limite cero (negativos en conteo) autoenvia formulario de monitoreo al bajar de -10 segundos.

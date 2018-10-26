@@ -1379,4 +1379,6 @@
     $MULTILANG_PWAScopeDes='Si su instalaci&oacute;n de Pr&aacute;ctico reside sobre la raiz de su servidor web o subdominio puede dejar esto en blanco.  Si su instalaci&oacute;n reside sobre alguna carpeta por favor indique /carpeta/ para establecer el alcance del Service Worker y el manifiesto de PWA.';
     $MULTILANG_PWAAutorizarGPS='Solicitar autorizaci&oacute;n para obtener ubicaci&oacute;n (GPS)';
     $MULTILANG_PWAAutorizarFCM='Solicitar autorizaci&oacute;n de env&iacute;o notificaciones (PUSH)';
+    $MULTILANG_PWAAutorizarCAM='Solicitar autorizaci&oacute;n para dispositivo de video (CAMARA)';
+    $MULTILANG_PWAAutorizarMIC='Solicitar autorizaci&oacute;n para dispositivo de audio (MICROFONO)';
 

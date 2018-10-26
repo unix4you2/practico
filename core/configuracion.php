@@ -116,6 +116,8 @@
 	$PWA_Scope='/practico/';
 	$PWA_AutorizacionGPS='0';
 	$PWA_AutorizacionFCM='0';
+	$PWA_AutorizacionCAM='0';
+	$PWA_AutorizacionMIC='0';
 
 	// Define cadena usada para separar campos en operaciones de bases de datos
 	$_SeparadorCampos_='||_||';

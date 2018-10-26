@@ -233,6 +233,26 @@
 												</select>
 											</div>
 
+											<div class="form-group input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-sliders fa-fw"></i> <?php echo $MULTILANG_PWAAutorizarCAM; ?>:
+                                                </span>
+												<select id="PWA_AutorizacionCAMNEW" name="PWA_AutorizacionCAMNEW" class="selectpicker" >
+													<option value="1" <?php if (@$PWA_AutorizacionCAM=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?></option>
+													<option value="0" <?php if (@$PWA_AutorizacionCAM=="0" || @$PWA_AutorizacionCAM=="") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?></option>
+												</select>
+											</div>
+
+											<div class="form-group input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-sliders fa-fw"></i> <?php echo $MULTILANG_PWAAutorizarMIC; ?>:
+                                                </span>
+												<select id="PWA_AutorizacionMICNEW" name="PWA_AutorizacionMICNEW" class="selectpicker" >
+													<option value="1" <?php if (@$PWA_AutorizacionMIC=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?></option>
+													<option value="0" <?php if (@$PWA_AutorizacionMIC=="0" || @$PWA_AutorizacionMIC=="") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?></option>
+												</select>
+											</div>
+
 										</div>
 										<div class="col-md-6">
 										    
