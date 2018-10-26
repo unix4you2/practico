@@ -190,3 +190,4 @@ Group: Mod  {
 
 File: Buffer  (inc/html2canvas/0.5/html2canvas.svg.js)
 File: Modulo replicacion de operaciones  (dep/core/replicacion.php)
+File: PCOJS_MostrarMensaje  (inc/bootstrap/js/practico.js)
