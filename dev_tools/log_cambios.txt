@@ -85,6 +85,7 @@ LogCambios="
 * Enhan: [PWA] Se migra de servicios GCM a Firebase cloud messaging para notificaciones push.
 * Enhan: [PWA] Se permite control de configuración para solicitar el envío de notificaciones al usuario.
 * Enhan: [PWA] Se agrega control de configuración para solicitar al usuario el envío automático de su ubicación geográfica estimada por GPS o WiFi cercanas.
+* Enhan: [LOGIN] Por seguridad se evita el autocompletado o almacenamiento en campos de login.
 * Fixed: [PWA] Se conservan valores de scope (alcance) para aplicaciones móviles que residen sobre carpetas del dominio en lugar de su raíz.
 * Fixed: [MONITOREO] Cuando valores de cronometro en monitoreo sobrepasan el limite cero (negativos en conteo) autoenvia formulario de monitoreo al bajar de -10 segundos.
 * Fixed: [INTERNO] Preautorización de funcion interna PCO_CargarObjeto para evitar su registro en funciones autorizadas

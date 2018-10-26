@@ -34,8 +34,8 @@
 <?php
 // Establece cadenas usadas para ocultar la barra superior al momento de login
 $CadenaOcultamientoBarraNavSuperior='';
-if ($PCO_Accion=="" && !$PCOSESS_SesionAbierta)
-    $CadenaOcultamientoBarraNavSuperior='style="visibility: hidden; display:inline; display: none;"';
+if ( $PCO_Accion=="" && !$PCOSESS_SesionAbierta )
+    $CadenaOcultamientoBarraNavSuperior='style="visibility: hidden;"';
 ?>
 <nav <?php echo $CadenaOcultamientoBarraNavSuperior; ?> id="BarraNavegacionSuperior" class="navbar navbar-default navbar-static-top oculto_impresion" role="navigation" style="margin-bottom: 0">
 
