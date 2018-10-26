@@ -2490,7 +2490,7 @@ function PCO_DatatableDesdeHojaCalculo($PathArchivo,$NroLineas)
 */
 function PCO_PermisoHeredadoAccion($PCO_Accion)
 	{
-		global $PCOSESS_LoginUsuario;
+		global $PCOSESS_LoginUsuario,$TablasCore;
 		// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 		$retorno=0;
 
@@ -2605,6 +2605,17 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
         if ($PCO_Accion=="GuardarTareaKanban")                  $retorno = 1;
         if ($PCO_Accion=="EliminarTareaKanban")                 $retorno = 1;
         if ($PCO_Accion=="GuardarPersonalizacionKanban")        $retorno = 1;
+        
+        //VALIDA OTRAS ACCOIONES ESPECIALES
+        
+        //Verifica cambios de estado en tableros kanban de usuarios razo
+        if ($PCO_Accion=="cambiar_estado_campo")
+            {
+                //Valida si el usuario tiene  al menos un kanban, si la accion es sobre la tabla de kanban
+                $RegistroTableros=PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND (login_admintablero='$PCOSESS_LoginUsuario' OR compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%') LIMIT 0,1 ")->fetch();
+                if ($RegistroTableros["id"]!="" && $tabla="kanban")
+                    $retorno = 1;
+            }
 
 		//echo $PCOSESS_LoginUsuario.':Permiso heredado accion='.$PCO_Accion.':'.$retorno.'<br>'; //Activar para depuracion permisos
 		return $retorno;
