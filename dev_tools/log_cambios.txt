@@ -59,6 +59,11 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 *IMPORTANTE:*  Quienes actualizan desde versiones 18.8 requiere que se aplique a éstas el último parche de actualización de dicha versión (Practico_18.8-Actualizacion_002) que las convierte a versión 18.9.
+
+LEAME: ADVERTENCIA: Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada de acciones internas, las siguientes acciones han cambiado de nombre:
+Accion autenticacion_oauth cambia a PCO_AutenticacionOauth  Esto puede implicar cambiar sus API de redireccion con los proveedores asociados.
+Funcion enviar_correo cambia a PCO_EnviarCorreo
+
 * Added: [OAUTH] Ahora se soportan más de 60 proveedores OAuth.  Agregados: 37Signals,Amazon,AOL,Bitly,Buffer,Copy,Dailymotion,Discogs,Etsy,Fitbit2,Garmin,Garmin2Legged,Google1,iHealth,imgur,Infusionsoft,Intuit,Jawbone,LinkedIn2,Livecoding,MailChimp,Mavenlink,mail.ru,Meetup,MicrosoftOpenIDConnect,Misfit,oDesk,Odnoklassniki,Paypal,PaypalSandbox,PaypalApplication,Pinterest,Rdio,Reddit,RunKeeper,Uber,TeamViewer,Twitter2,Vimeo,Wordpress,Xero,Yammer,Yandex
 * Added: [FORMS] Ahora las listas de seleccion (combobox) soportan elementos para agrupacion de opciones.  Para tal fin se debera contar con la palabra clave _OPTGROUP_|EtiquetaDeseada como *valor* en la apertura del elemento. Elementos que carezcan de una etiqueta seran considerados automaticamente como elementos de cierre de grupo.  Aplica tanto para opciones fijas como opciones tomadas desde base de datos.
 * Added: [FORMS] NUEVO TIPO DE CONTROL: Los controles de datos tipo checkbox pueden ser fácilmente transformados a controles de boton tipo Toggle.  Para esto puede ser utilizado el campo de personalización del TAG disponible ahora sobre estos controles.  Vease ayuda del campo para amplias posibilidades de personalizaciones completas!
@@ -103,13 +108,6 @@ LogCambios="
 * Fixed: [MENU] Permisos extendidos sobre submenues.
 * Fixed: [AUDIT] Corregido el orden de los campos de fecha para filtros de auditoría y evitar confusiones en su uso.
 * Fixed: [FORMS] Informes de tipo dataTable embebidos en pestañas diferentes a la inicial del formulario autoajustan sus encabezados de columnas
-
-
-LEAME: ADVERTENCIA: Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada de acciones internas, las siguientes acciones han cambiado de nombre:
-Accion autenticacion_oauth cambia a PCO_AutenticacionOauth  Esto puede implicar cambiar sus API de redireccion con los proveedores asociados.
-Funcion enviar_correo cambia a PCO_EnviarCorreo
-
-
 "
 
 ########################################################################

@@ -7,6 +7,59 @@
             |___/ 
 ```
 
+
+## Versión 19.1 (2018-10-28)
+*IMPORTANTE:*  Quienes actualizan desde versiones 18.8 requiere que se aplique a éstas el último parche de actualización de dicha versión (Practico_18.8-Actualizacion_002) que las convierte a versión 18.9.
+
+LEAME: ADVERTENCIA: Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada de acciones internas, las siguientes acciones han cambiado de nombre:
+Accion autenticacion_oauth cambia a PCO_AutenticacionOauth  Esto puede implicar cambiar sus API de redireccion con los proveedores asociados.
+Funcion enviar_correo cambia a PCO_EnviarCorreo
+
+* Added: [OAUTH] Ahora se soportan más de 60 proveedores OAuth.  Agregados: 37Signals,Amazon,AOL,Bitly,Buffer,Copy,Dailymotion,Discogs,Etsy,Fitbit2,Garmin,Garmin2Legged,Google1,iHealth,imgur,Infusionsoft,Intuit,Jawbone,LinkedIn2,Livecoding,MailChimp,Mavenlink,mail.ru,Meetup,MicrosoftOpenIDConnect,Misfit,oDesk,Odnoklassniki,Paypal,PaypalSandbox,PaypalApplication,Pinterest,Rdio,Reddit,RunKeeper,Uber,TeamViewer,Twitter2,Vimeo,Wordpress,Xero,Yammer,Yandex
+* Added: [FORMS] Ahora las listas de seleccion (combobox) soportan elementos para agrupacion de opciones.  Para tal fin se debera contar con la palabra clave _OPTGROUP_|EtiquetaDeseada como *valor* en la apertura del elemento. Elementos que carezcan de una etiqueta seran considerados automaticamente como elementos de cierre de grupo.  Aplica tanto para opciones fijas como opciones tomadas desde base de datos.
+* Added: [FORMS] NUEVO TIPO DE CONTROL: Los controles de datos tipo checkbox pueden ser fácilmente transformados a controles de boton tipo Toggle.  Para esto puede ser utilizado el campo de personalización del TAG disponible ahora sobre estos controles.  Vease ayuda del campo para amplias posibilidades de personalizaciones completas!
+* Added: [FORMS] Los controles de datos tipo checkbox permiten la ocultación de su etiqueta sobre los formularios para adecuarse ante textos predefinidos en controles nuevos como los tipo toggle.
+* Added: [FORMS] Almacenamiento y recuperación automática de listas de selección múltiple que almacenan sus valores separados únicamente por comas.
+* Added: [INFORMES] En los reportes/informes de tipo grafico se permite ahora generar un tootip con el título del reporte sobre el resultado final activando dicha bandera en su diseño.
+* Added: [MENU] Se agrega la columna informativa de seccion a la administracion de menues, ordenando las opciones de acuerdo a su sección y peso.
+* Added: [MENU] Ayuda extra para el campo de imagen durante la creacion de menues.
+* Added: [KANBAN] Usuarios con tableros propios o compartidos cuentan con acceso automático a éstos a través del menú de perfil.
+* Added: [KANBAN] El explorador de tableros ahora permite visualizarlos todos al tiempo.
+* Added: [CHAT] El sistema de chat diferencia entre los niveles de chat configurados para presentar la opción de menu al usuario y la lista de usuarios disponibles para chat.
+* Added: [AUDIT] Ahora cualquier consulta al motor de base de datos que genere algún error será llevada automáticamente al log de auditoría bajo el usuario SQLog:error
+* Added: [AUDIT] Agregadas nuevas opciones de filtro de usuario en módulo de auditorías para permitir filtrar operaciones realizadas por funciones internas del framework.
+* Added: [AUDIT] Se agrega a la opción general de auditoría un gráfico que presenta de manera automática los errores SQL generados internamente para el rango de fechas establecido.
+* Added: [PWA] Se permite control de configuración para solicitar el envío de notificaciones al usuario.
+* Added: [PWA] Se agrega control de configuración para solicitar al usuario el envío automático de su ubicación geográfica estimada por GPS o WiFi cercanas.
+* Added: [PWA] Se agregan controles de configuración para solicitar al usuario permiso para el uso de camara y/o microfono.
+* Added: [GENERAL] Ahora desde la configuracion de apariencia de la aplicacion se permite ocultar la barra superior a los usuarios estandar, lo que permite mayor espacio para las aplicaciones.  El programador deberá garantizar por sus medios algunas acciones comunes como cierre de sesión o similares.
+* Enhan: [MONITOREO] Actualizada alarma de monitoreo a formato OGG para compatibilidad con reproduccion automatica en navegadores sin necesidad de codecs extra.
+* Enhan: [LIBS] Actualizacion de version 1.92 a 1.94 del cliente HTTP para PHP.
+* Enhan: [LIBS] Actualizacion de version 1.109 a 1.165 del cliente OAuth para PHP.
+* Enhan: [LIBS] Actualizacion del plugin DataTables a la versión 1.10.18
+* Enhan: [LIBS] Ahora la funcion interna de PCOJS_MostrarMensaje soporta un tercer parámetro que indica la clases adicionales para personalizar el dialogo modal.
+* Enhan: [FORMS] Las ayudas de personalizacion de etiquetas son tan amplias que ahora se imprimen directamente sobre el disenador de campos facilitando además su copy-paste
+* Enhan: [MENU] Al igual que las pestanas de formulario, ahora las opciones de menu definidas dentro de una sección con nombre PCO_NoVisible no serán presentadas al usuario.
+* Enhan: [KANBAN] Sólo los usuarios propietarios de un tablero pueden eliminar o archivar tareas sobre éste.
+* Enhan: [KANBAN] Sólo los usuarios propietarios de un tablero lo pueden personalizar, configurar o compartir.
+* Enhan: [CHAT] Suprimido codigo interno a cambio de objeto en Práctico para marco de chat.
+* Enhan: [INFORMES] Ayuda de complemento en activacion de campos editables sobre informes.
+* Enhan: [LOGIN] Se oculta barra superior cuando no se tiene sesion y se va a pantalla de login ahorrando así espacio cuando se trata de aplicaciones móviles.
+* Enhan: [GENERAL] Se evita errores 404 al buscar imagen de fondo de aplicación cuando esta realmente no ha sido definida en la configuración.
+* Enhan: [PWA] Se migra de servicios GCM a Firebase cloud messaging para notificaciones push.
+* Enhan: [LOGIN] Por seguridad se evita el autocompletado o almacenamiento en campos de login.
+* Enhan: [SE] Ahora cualquier versión estándar puede ser convertida a versión SE.
+* Enhan: [GENERAL] Ahora se pueden correr multiples funciones AutoRun de formularios cuando están definidas al mismo tiempo.  Por defecto se ejecutan primero las funciones AutoRun de formularios embebidos y luego las de sus formularios contenedores.
+* Fixed: [PWA] Se conservan valores de scope (alcance) para aplicaciones móviles que residen sobre carpetas del dominio en lugar de su raíz.
+* Fixed: [MONITOREO] Cuando valores de cronometro en monitoreo sobrepasan el limite cero (negativos en conteo) autoenvia formulario de monitoreo al bajar de -10 segundos.
+* Fixed: [INTERNO] Preautorización de funcion interna PCO_CargarObjeto para evitar su registro en funciones autorizadas
+* Fixed: [OAUTH] Los valores de URI de redireccion para configuraciones OAuth son ahora calculados nuevamente de manera automática.  Los campos en configuración quedan como solo lectura con ayudas de formato.
+* Fixed: [MENU] Se evita limpieza automática de secciones durante la edición de opciones de menú que no se encuentran agrupadas por otra.
+* Fixed: [MENU] Opciones hijas de otra que están ubicadas en la sección central son evitadas por defecto, ya que dependen de la ubicación de su padre.
+* Fixed: [MENU] Permisos extendidos sobre submenues.
+* Fixed: [AUDIT] Corregido el orden de los campos de fecha para filtros de auditoría y evitar confusiones en su uso.
+* Fixed: [FORMS] Informes de tipo dataTable embebidos en pestañas diferentes a la inicial del formulario autoajustan sus encabezados de columnas
+
 ## Versión 18.8 (2018-07-29)
 LEAME: ADVERTENCIA: Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada a metodos y funciones internas, las siguientes funciones han cambiado de nombre:
 file_get_contents_curl() cambia a PCO_FileGetContents_CURL()
