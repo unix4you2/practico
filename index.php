@@ -100,7 +100,12 @@
             $PCO_ValoresParametros = array_values($_REQUEST);// obtiene los valores de las varibles
             // crea las variables y les asigna el valor
             for($i=0;$i<$PCO_NumeroParametros;$i++)
-                ${$PCO_NombresParametros[$i]}=$PCO_ValoresParametros[$i];
+                {
+                    ${$PCO_NombresParametros[$i]}=$PCO_ValoresParametros[$i];
+                    //Si alguna de las variables proviene de un combo multiple la transforma a su variable original
+					if (strstr($PCO_NombresParametros[$i],"PCO_ComboMultiple_")!=FALSE)
+					    ${substr($PCO_NombresParametros[$i], strlen("PCO_ComboMultiple_"))}=$PCO_ValoresParametros[$i];
+                }
             // Agrega ademas las variables de sesion
             if (!empty($_SESSION)) extract($_SESSION);
         }
