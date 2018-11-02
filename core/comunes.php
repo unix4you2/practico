@@ -5396,7 +5396,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                 else
                     {
                         //Asigna el valor solo si no se trata de una lista multiple, pues listas multiples no son validas para recuperar registros unicos.
-                        if (!strstr($registro_campos["personalizacion_tag"],"multiple")!=FALSE)
+                        if (!strstr($registro_campos["personalizacion_tag"],"multiple")!=FALSE && $nombre_campo==$PCO_CampoBusquedaBD)
                             $cadena_valor=$PCO_ValorBusquedaBD;
                     }
             }
@@ -5619,11 +5619,15 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
         //Si es multiple carga sus valores indepediente si es delayed o no
         if (strstr($registro_campos["personalizacion_tag"],"multiple")!=FALSE)
             {
-                //$CadenaAsignacionMultiples="['".str_replace(',',"','",$cadena_valor)."']";
-                $PCO_ScriptsListaCombosPostCarga.='$("#'.$registro_campos["id_html"].'").val("'.$cadena_valor.'".split(",")); PCOJS_ActualizarComboBox("'.$registro_campos["id_html"].'");';
-                $PCO_ListaCombosMultiplesJoin.=$registro_campos["id_html"]."|";
-                //Agrega un campo hidden para el combo multiple para trasportar luego sus datos sanitizados.
-		        $salida.= '<input type=hidden value="'.$cadena_valor.'" id="PCO_ComboMultiple_'.$registro_campos["id_html"].'" name="PCO_ComboMultiple_'.$registro_campos["id_html"].'" >';
+                //Evita la carga atrasada del valor de la lista cuando es multiple y su nombre EXISTE en base de datos
+                if (PCO_ExisteCampoTabla($registro_campos["campo"],$RegistroDisenoFormulario["tabla_datos"]))
+                    {
+                        //$CadenaAsignacionMultiples="['".str_replace(',',"','",$cadena_valor)."']";
+                        $PCO_ScriptsListaCombosPostCarga.='$("#'.$registro_campos["id_html"].'").val("'.$cadena_valor.'".split(",")); PCOJS_ActualizarComboBox("'.$registro_campos["id_html"].'");';
+                        $PCO_ListaCombosMultiplesJoin.=$registro_campos["id_html"]."|";
+                        //Agrega un campo hidden para el combo multiple para trasportar luego sus datos sanitizados.
+        		        $salida.= '<input type=hidden value="'.$cadena_valor.'" id="PCO_ComboMultiple_'.$registro_campos["id_html"].'" name="PCO_ComboMultiple_'.$registro_campos["id_html"].'" >';
+                    }
             }
 
         //Si es delayed porque el usuario asi lo quiere pero que no sea multiple, que por defecto ya es delayed
@@ -5990,7 +5994,7 @@ function PCO_CargarObjetoCasillaCheck($registro_campos,$registro_datos_formulari
 			<input type="hidden" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor_almacenada.'">
 			<div class="checkbox">
 				<label>
-					<input onchange="JSFUNC_Actualizar_'.$registro_campos["campo"].'(this);" type="checkbox" id="JSVAR_'.$registro_campos["campo"].'" name="JSVAR_'.$registro_campos["campo"].'" '.$cadena_valor.' '.$registro_campos["personalizacion_tag"].' > '.$CadenaEtiquetaCheck.'
+					<input onchange="JSFUNC_Actualizar_'.$registro_campos["campo"].'(this);" type="checkbox" id="JSVAR_'.$registro_campos["campo"].'" name="JSVAR_'.$registro_campos["campo"].'" '.$cadena_valor.' '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["personalizacion_tag"]).' > '.$CadenaEtiquetaCheck.'
 				</label>
 			</div>
 			<script language="JavaScript">

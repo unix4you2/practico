@@ -628,7 +628,7 @@
                 <li><u>data-style=TipoControl</u> Define apariencia grafica:  ninguno|ios|android</li>
                 <li><u>data-size=Tamano</u> Tamano del control: large|normal|small|mini</li>
                 <li><u>data-width=Ancho</u> Ancho del control en pixeles</li>
-                <li><u>data-height=Alto</u> Alto del control en pixeles</li>';
+                <li><u>data-height=Alto</u> Alto del control en pixeles</li><br><i>Parametros que requieran cadenas con espacios pueden ser encerrados en comilla doble.</i>';
     $MULTILANG_FrmBtnFull='Cargar en pantalla completa';
     $MULTILANG_FrmBtnObjetivo='Objetivo HTML';
     $MULTILANG_FrmActualizaAjax='Actualizar din&aacute;micamente';

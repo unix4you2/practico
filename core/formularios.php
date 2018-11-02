@@ -1393,10 +1393,14 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 						<div id='campo32' style="display:none;">
                             <label for="formulario_vinculado"><?php echo $MULTILANG_FrmFormulario; ?></label>
                             <div class="form-group input-group">
-                                <select id="formulario_vinculado" name="formulario_vinculado" class="form-control input-sm">
+                                <select id="formulario_vinculado" name="formulario_vinculado" class="selectpicker combo-informe_vinculado show-tick form-control input-sm" data-live-search=true>
                                 <option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                 <?php
-                                    $consulta_forms=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id>=0 ORDER BY titulo");
+                                    //Define desde donde filtrar informes cuando se esta en modo desarrollador de Practico
+                                    $LimiteInferiorBusqueda="-10000";
+                                    if ($ModoDesarrolladorPractico!="-10000")
+                                        $LimiteInferiorBusqueda=0;
+                                    $consulta_forms=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id>=$LimiteInferiorBusqueda ORDER BY titulo");
                                     while($registro_formularios = $consulta_forms->fetch())
                                         {
                                             $seleccion_campo="";
@@ -1818,7 +1822,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 						<div id='campo37' style="display:none;">
 							<label for="personalizacion_tag"><?php echo $MULTILANG_Personalizado; ?>:</label>
                             <div class="form-group input-group">
-                                <input type="text" name="personalizacion_tag" class="form-control input-sm" value="<?php echo @$registro_campo_editar["personalizacion_tag"]; ?>" placeholder="<?php echo $MULTILANG_FrmTagPersonalizado; ?>: BootStrap o Customizado"  OnInput="ActualizarEstilo_botoncomando_vista_previa(); ActualizarEstilo_listaopciones_vista_previa(); ">
+                                <input type="text" name="personalizacion_tag" class="form-control input-sm" value="<?php echo @htmlspecialchars($registro_campo_editar["personalizacion_tag"]); ?>" placeholder="<?php echo $MULTILANG_FrmTagPersonalizado; ?>: BootStrap o Customizado"  OnInput="ActualizarEstilo_botoncomando_vista_previa(); ActualizarEstilo_listaopciones_vista_previa(); ">
                                 <span class="input-group-addon">
                                     <a href="#"  data-toggle="tooltip" data-html="true" data-placement="auto" title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_FrmDesTagPersonalizado; ?>"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>

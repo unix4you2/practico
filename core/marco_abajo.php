@@ -594,7 +594,7 @@
                             if (PCOJS_ListaCamposValidar[Campo]!="")
                                 {
                                     //Valida su valor actual
-                                    if ($("#"+PCOJS_ListaCamposValidar[Campo]).val() == "" )
+                                    if ($("#"+PCOJS_ListaCamposValidar[Campo]).val() == "" || $("#"+PCOJS_ListaCamposValidar[Campo]).val() == null )
                                         MensajeCamposObligatorios+="<br><i class=\'fa fa-info-circle\'></i> '.$MULTILANG_ErrFrmObligatorio.' <b>"+PCOJS_ListaTitulosValidar[ConteoCamposValidacion]+"</b>";
                                 }
                             ConteoCamposValidacion++;
