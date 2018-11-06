@@ -6486,9 +6486,9 @@ function PCO_CargarObjetoBotonComando($registro_campos,$registro_datos_formulari
         if ($registro_campos["tipo_accion"]=="interna_eliminar")
             $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_EliminarDatosFormulario';document.".$registro_formulario["id_html"].".submit();";
         if ($registro_campos["tipo_accion"]=="interna_cargar")
-            $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_CargarObjeto';document.".$registro_formulario["id_html"].".PCO_Objeto.value='".$registro_campos["accion_usuario"]."';  PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."'); ";
+            $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_CargarObjeto';document.".$registro_formulario["id_html"].".PCO_Objeto.value='".$registro_campos["accion_usuario"]."';  PCOJS_SanitizarValoresListaMultiple(); document.".$registro_formulario["id_html"].".submit(); ";
         if ($registro_campos["tipo_accion"]=="externa_formulario")
-            $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='".$registro_campos["accion_usuario"]."'; PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."');";
+            $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='".$registro_campos["accion_usuario"]."'; PCOJS_SanitizarValoresListaMultiple(); document.".$registro_formulario["id_html"].".submit();";
         if ($registro_campos["tipo_accion"]=="externa_javascript")
             $comando_javascript.=$registro_campos["accion_usuario"];
 
@@ -7139,9 +7139,9 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 					if ($registro_botones["tipo_accion"]=="interna_eliminar")
 						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_EliminarDatosFormulario';document.".$registro_formulario["id_html"].".submit();";
 					if ($registro_botones["tipo_accion"]=="interna_cargar")
-						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_CargarObjeto';document.".$registro_formulario["id_html"].".PCO_Objeto.value='".$registro_botones["accion_usuario"]."'; PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."');";
+						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_CargarObjeto';document.".$registro_formulario["id_html"].".PCO_Objeto.value='".$registro_botones["accion_usuario"]."'; PCOJS_SanitizarValoresListaMultiple(); document.".$registro_formulario["id_html"].".submit(); ";
 					if ($registro_botones["tipo_accion"]=="externa_formulario")
-						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='".$registro_botones["accion_usuario"]."';  PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."');";
+						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='".$registro_botones["accion_usuario"]."';  PCOJS_SanitizarValoresListaMultiple(); document.".$registro_formulario["id_html"].".submit(); ";
 					if ($registro_botones["tipo_accion"]=="externa_javascript")
 						$comando_javascript.=$registro_botones["accion_usuario"];
 

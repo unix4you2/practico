@@ -583,6 +583,32 @@
             PCOJS_ListaCamposValidar="'.$POSTForm_ListaCamposObligatorios.'".split("|");
             PCOJS_ListaCombosMultiplesJoin="'.@$PCO_ListaCombosMultiplesJoin.'".split("|");
             PCOJS_ListaTitulosValidar="'.PCO_ReemplazarVariablesPHPEnCadena($POSTForm_ListaTitulosObligatorios).'".split("|");
+            
+            function PCOJS_SanitizarValoresListaMultiple()
+                {
+                    //Antes de hacer el submit definitivo sanitiza valores de combos multiples
+                    for (var ComboMultiple of PCOJS_ListaCombosMultiplesJoin) 
+                        {
+                            ComboMultiple=ComboMultiple.trim();             //Elimina posibles espacios en el id del elemento
+                            ValorComboMultiple=$("#"+ComboMultiple).val();
+                            if (ComboMultiple!="")
+                                {
+                                    if (ValorComboMultiple!=null)
+                                        {
+                                            ValorSanitizadoComboMultiple=$("#"+ComboMultiple).val().join(",");
+                                            //Asigna al campo extra del combo multiple los valores sanitizados
+                                            $("#PCO_ComboMultiple_"+ComboMultiple).val(ValorSanitizadoComboMultiple);
+                                        }
+                                    else
+                                        {
+                                            //Si el combo es null porque se dejo sin valores entonces limpia campo sanitizado
+                                            $("#PCO_ComboMultiple_"+ComboMultiple).val("");
+                                        }
+                                }
+                        }
+                }
+            
+            
             function PCOJS_ValidarCamposYProcesarFormulario(FormularioProcesar="datos",AnularSubmit=0)
                 {
                     MensajeCamposObligatorios="";
@@ -606,26 +632,7 @@
                         {
                             if (AnularSubmit==0)
                                 {
-                                    //Antes de hacer el submit definitivo sanitiza valores de combos multiples
-                                    for (var ComboMultiple of PCOJS_ListaCombosMultiplesJoin) 
-                                        {
-                                            ComboMultiple=ComboMultiple.trim();             //Elimina posibles espacios en el id del elemento
-                                            ValorComboMultiple=$("#"+ComboMultiple).val();
-                                            if (ComboMultiple!="")
-                                                {
-                                                    if (ValorComboMultiple!=null)
-                                                        {
-                                                            ValorSanitizadoComboMultiple=$("#"+ComboMultiple).val().join(",");
-                                                            //Asigna al campo extra del combo multiple los valores sanitizados
-                                                            $("#PCO_ComboMultiple_"+ComboMultiple).val(ValorSanitizadoComboMultiple);
-                                                        }
-                                                    else
-                                                        {
-                                                            //Si el combo es null porque se dejo sin valores entonces limpia campo sanitizado
-                                                            $("#PCO_ComboMultiple_"+ComboMultiple).val("");
-                                                        }
-                                                }
-                                        }
+                                    PCOJS_SanitizarValoresListaMultiple();
                                     //Hace el envio del formulario
                                     document.getElementById(FormularioProcesar).submit();
                                 }
