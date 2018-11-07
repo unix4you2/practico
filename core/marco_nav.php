@@ -188,6 +188,14 @@
 								</div>
 							</a>
 						</li>
+						<li class="divider"></li>
+						<li>
+							<a data-toggle="modal" href="https://gitter.im/unix4you2/practico/" target="_blank">
+								<div>
+									<i class="fa fa-comment-o fa-fw"></i> <?php echo $MULTILANG_ChatDevel; ?>
+								</div>
+							</a>
+						</li>
 
 					</ul>
 					<!-- /.dropdown-alerts -->

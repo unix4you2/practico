@@ -1245,6 +1245,7 @@
 	$MULTILANG_ChatTipo2='केवल बाहरी उपयोगकर्ताओं के बीच';
 	$MULTILANG_ChatTipo3='सभी उपयोगकर्ताओं के लिए';
 	$MULTILANG_ChatTipo4='केवल व्यवस्थापक के लिए';
+	$MULTILANG_ChatDevel='Developers chat';
 
 	//Modulo de replicas
 	$MULTILANG_ReplicaTitulo='अतिरिक्त कनेक्शन और प्रतिकृति';

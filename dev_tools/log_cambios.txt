@@ -53,6 +53,7 @@ Funcion enviar_correo cambia a PCO_EnviarCorreo
 * Enhan: [LIBS]  Cambio de version en libreria select-boostrap de  version 1.12.4 a 1.6.5
 * Enhan: [FORMS] Mejorada aun mas la velocidad de carga de los controles tipo lista bajo version 1.6.5 haciendo render anticipado del control.
 * Enhan: [GRAL] Agregado enlace al proyecto SayThanks.
+* Enhan: [GRAL] Agregado enlace al chat de desarrolladores en Gitter para facilitar interacción.
 * Fixed: [FORMS] Cuando se trate de campos no existentes dentro de la base de datos asociada al formulario, no se intentará hacer una carga del dato desde el registro pues siempre será vacío.
 * Fixed: [INFORMES] Asignacion automática de formularios de filtrado derivados del mismo ID de informe.
 "

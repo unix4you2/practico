@@ -1247,6 +1247,7 @@
 	$MULTILANG_ChatTipo2='Seulement entre utilisateurs externes';
 	$MULTILANG_ChatTipo3='Pour tous les utilisateurs';
 	$MULTILANG_ChatTipo4='Seulement pour admin';
+	$MULTILANG_ChatDevel='Developers chat';
 
 	//Modulo de replicas
 	$MULTILANG_ReplicaTitulo='Connexions supplémentaires et réplication';
