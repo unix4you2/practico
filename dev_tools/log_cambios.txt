@@ -52,6 +52,7 @@ Funcion enviar_correo cambia a PCO_EnviarCorreo
 * Enhan: [FORMS] Automáticamente en cada llamado al framework se hace la reasignación de variables que provienen de listas múltiples a sus variables estandar para su uso de manera tradicional.
 * Enhan: [LIBS]  Cambio de version en libreria select-boostrap de  version 1.12.4 a 1.6.5
 * Enhan: [FORMS] Mejorada aun mas la velocidad de carga de los controles tipo lista bajo version 1.6.5 haciendo render anticipado del control.
+* Enhan: [AUDIT] Redistribucion de elementos en auditoria.
 * Enhan: [GRAL] Agregado enlace al proyecto SayThanks.
 * Enhan: [GRAL] Agregado enlace al chat de desarrolladores en Gitter para facilitar interacción.
 * Fixed: [FORMS] Cuando se trate de campos no existentes dentro de la base de datos asociada al formulario, no se intentará hacer una carga del dato desde el registro pues siempre será vacío.
