@@ -5638,7 +5638,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
             }
 
         //Mejora velocidad de carga para listas de seleccion
-        //$salida.= '<script type="text/javascript">$("#'.$registro_campos["id_html"].'").selectpicker("render");</script>';
+        $salida.= '<script type="text/javascript">$("#'.$registro_campos["id_html"].'").selectpicker("render");</script>';
 
 		return $salida;
 	}

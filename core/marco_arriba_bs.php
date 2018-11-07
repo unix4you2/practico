@@ -87,7 +87,7 @@
     <link href="inc/bootstrap/css/plugins/timeline.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/slider/slider.css" rel="stylesheet">
-    <link href="inc/bootstrap/css/plugins/select/bootstrap-select.min.css" rel="stylesheet">
+    <link href="inc/bootstrap/css/plugins/select/bootstrap-select.min.css?<?php echo filemtime('inc/bootstrap/css/plugins/select/bootstrap-select.min.css'); ?>" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/iconpicker/bootstrap-iconpicker.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/simple-sidebar.css" rel="stylesheet">
@@ -145,7 +145,7 @@
 
     <!-- jQuery -->
 	<script type="text/javascript" src="inc/jquery/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" src="inc/bootstrap/js/plugins/select/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="inc/bootstrap/js/plugins/select/bootstrap-select.min.js?<?php echo filemtime('inc/bootstrap/js/plugins/select/bootstrap-select.min.js'); ?>"></script>
     <script type="text/javascript" src="inc/bootstrap/js/plugins/toggle/bootstrap-toggle.min.js"></script>
 
     <!-- Morris Charts JavaScript -->
