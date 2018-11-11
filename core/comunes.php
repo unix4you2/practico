@@ -3908,7 +3908,7 @@ function PCO_VerificarExtensionesPHP()
 		global $MotorBD;
 		global $Auth_TipoMotor;
 		global $Auth_TipoEncripcion;
-		global $MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,$MULTILANG_ErrCURL,$MULTILANG_ErrLDAP,$MULTILANG_ErrHASH,$MULTILANG_ErrSESS,$MULTILANG_ErrGD,$MULTILANG_ErrPDO,$MULTILANG_ErrDriverPDO,$MULTILANG_ErrGoogleAPIMod,$MULTILANG_ErrFuncion,$MULTILANG_ErrDirectiva;
+		global $MULTILANG_ErrExtensionGenerica,$MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML,$MULTILANG_ErrCURL,$MULTILANG_ErrLDAP,$MULTILANG_ErrHASH,$MULTILANG_ErrSESS,$MULTILANG_ErrGD,$MULTILANG_ErrPDO,$MULTILANG_ErrDriverPDO,$MULTILANG_ErrGoogleAPIMod,$MULTILANG_ErrFuncion,$MULTILANG_ErrDirectiva;
 
 		//Verifica estado de configuraciones PHP
 		$funcion_evaluada='allow_url_fopen'; $valor_esperado='1';
@@ -3945,7 +3945,11 @@ function PCO_VerificarExtensionesPHP()
 		//Verifica soporte para SimpleXML
 		if (!extension_loaded('SimpleXML'))
 			PCO_Mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrSimpleXML, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-		
+
+		//Verifica soporte para Multibyte strings
+		if (!extension_loaded('mbstring'))
+			PCO_Mensaje($MULTILANG_ErrExtension,'<b>mbstring:</b> '.$MULTILANG_ErrExtensionGenerica, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+
 		// Bloqueos por IP/pais http://stackoverflow.com/questions/15835274/file-get-contents-failed-to-open-stream-connection-refused
 		
 		// Verifica el soporte para funciones especificas PHP

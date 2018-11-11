@@ -51,6 +51,7 @@ Funcion enviar_correo cambia a PCO_EnviarCorreo
 * Enhan: [FORMS] Llamado de funciones personalizadas u bjetos internos desde formularios se hace ahora a través de la función de validación de campos de formularios para unificar su uso con los botones de almacenamiento y actualización de datos.
 * Enhan: [FORMS] Automáticamente en cada llamado al framework se hace la reasignación de variables que provienen de listas múltiples a sus variables estandar para su uso de manera tradicional.
 * Enhan: [LIBS]  Cambio de version en libreria select-boostrap de  version 1.12.4 a 1.6.5
+* Enhan: [LIBS] Se valida la previa instalacion/disponibilidad de la extension mbstring de PHP sobre el servidor.
 * Enhan: [FORMS] Mejorada aun mas la velocidad de carga de los controles tipo lista bajo version 1.6.5 haciendo render anticipado del control.
 * Enhan: [AUDIT] Redistribucion de elementos en auditoria.
 * Enhan: [GRAL] Agregado enlace al proyecto SayThanks.

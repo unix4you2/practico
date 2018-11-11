@@ -265,6 +265,7 @@
 	$MULTILANG_ErrGD=$MULTILANG_PHPSinSoporte.' para librer&iacute;a gr&aacute;fica GD &oacute; GD2 activado.<br>Aquellos utilizando debian, ubuntu o sus derivados pueden intentar un <b>apt-get install php5-gd</b> para agregarlo. Usuarios de Redhat/CentOS <b>yum install php-gd</b>.  Usuarios de otros sistemas revisar su documentacion.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrCURL=$MULTILANG_PHPSinSoporte.' para librer&iacute;a cURL activado.<br>Aquellos utilizando debian, ubuntu o sus derivados pueden intentar un <b>apt-get install php5-curl</b> para agregarlo.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrSimpleXML=$MULTILANG_PHPSinSoporte.' para librer&iacute;a SimpleXML activado.<br>'.$MULTILANG_ReinicieWeb;
+	$MULTILANG_ErrExtensionGenerica=$MULTILANG_PHPSinSoporte.' activado para esta librer&iacute;a o extensi&oacute;n.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrPDO=$MULTILANG_PHPSinSoporte.' para PDO activado.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrDriverPDO=$MULTILANG_PHPSinSoporte.' para PDO activado. '.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ObjetoNoExiste='El objeto asociado a esta solicitud no existe.';

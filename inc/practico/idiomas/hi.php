@@ -264,6 +264,7 @@
 	$MULTILANG_ErrGD=$MULTILANG_PHPSinSoporte.' जी डी ग्राफिक्स पुस्तकालय की आवश्यकता है.<br>डेबियन उपयोग कर रहे हैं जो लोग, Ubuntu या उसके डेरिवेटिव एक कोशिश कर सकते हैं <b> apt-get install php5-gd </ b> to add it. RedHat or CentOS users <b> yum install php-gd </ b>. अन्य platfroms से उपयोगकर्ता अपने प्रलेखन Chech चाहिए.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrCURL=$MULTILANG_PHPSinSoporte.' कर्ल पुस्तकालय की आवश्यकता है.<br>डेबियन उपयोग कर रहे हैं जो लोग, Ubuntu या उसके डेरिवेटिव एक कोशिश कर सकते हैं <b> apt-get install php5-gd </ b> इसे जोड़ने के लिए.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrSimpleXML=$MULTILANG_PHPSinSoporte.' SimpleXML पुस्तकालय की आवश्यकता है.<br>'.$MULTILANG_ReinicieWeb;
+	$MULTILANG_ErrExtensionGenerica=$MULTILANG_PHPSinSoporte.' activated for this library or extension.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrPDO=$MULTILANG_PHPSinSoporte.' पीडीओ समर्थन की आवश्यकता है.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrDriverPDO=$MULTILANG_PHPSinSoporte.' for PDO. '.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ObjetoNoExiste='इस अनुरोध के साथ जुड़े वस्तु मौजूद नहीं है.';

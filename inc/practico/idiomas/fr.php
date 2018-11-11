@@ -264,6 +264,7 @@
 	$MULTILANG_ErrGD=$MULTILANG_PHPSinSoporte.' GD Graphics Library est nécessaire. <br> Ceux qui utilisent debian, ubuntu ou ses dérivés peuvent essayer un <b> apt-get install php5-gd </ b> pour l ajouter. Utilisateurs RedHat ou CentOS <b> yum install php-gd </ b>. Les utilisateurs d autres plateformes doivent vérifier leur documentation.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrCURL=$MULTILANG_PHPSinSoporte.' La bibliothèque cURL est requise. <br> Ceux qui utilisent debian, ubuntu ou ses dérivés peuvent essayer <b> apt-get install php5-gd </ b> pour l ajouter.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrSimpleXML=$MULTILANG_PHPSinSoporte.' La bibliothèque SimpleXML est requise.<br>'.$MULTILANG_ReinicieWeb;
+	$MULTILANG_ErrExtensionGenerica=$MULTILANG_PHPSinSoporte.' activated for this library or extension.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrPDO=$MULTILANG_PHPSinSoporte.' Un support PDO est requis.<br>'.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ErrDriverPDO=$MULTILANG_PHPSinSoporte.' pour PDO. '.$MULTILANG_ReinicieWeb;
 	$MULTILANG_ObjetoNoExiste='L objet associé à cette requête n existe pas.';
