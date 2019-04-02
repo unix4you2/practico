@@ -66,7 +66,7 @@
         { $PCO_ModoDEMO=1; echo '<script language="JavaScript"> PCO_ModoDEMO=1; </script>'; }
 
     //Activa errores del preprocesador en modo de depuracion (configuracion.php)
-    if ($ModoDepuracion && $_SESSION['PCOSESS_SesionAbierta'])
+    if ($ModoDepuracion && isset($_SESSION['PCOSESS_SesionAbierta']) &&  $_SESSION['PCOSESS_SesionAbierta'])
         {
             include_once 'core/comunes.php';
             include_once 'inc/practico_se/core/comunes.php';
@@ -111,7 +111,7 @@
         }
     
     //Si el idioma seleccionado por el usuario es diferente al predeterminado lo incluye
-    if($PCOSESS_IdiomaUsuario!=$IdiomaPredeterminado && $PCOSESS_IdiomaUsuario!="")
+    if(isset($PCOSESS_IdiomaUsuario) && @$PCOSESS_IdiomaUsuario!=$IdiomaPredeterminado && @$PCOSESS_IdiomaUsuario!="")
         include 'inc/practico/idiomas/'.$PCOSESS_IdiomaUsuario.'.php';
 
     // Verifica algunas variables minimas de trabajo en el primer inicio para evitar NOTICE y WARNINGs
@@ -159,6 +159,10 @@
     // Incluye clases para procesar archivos en csv, xls, ods, pdf, otros
     require_once 'inc/phpexcel/Classes/PHPExcel.php';
 
+    // Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios
+    if (PCO_BuscarErroresSintaxisPHP('mod/personalizadas_pre.php')==0)
+        include 'mod/personalizadas_pre.php';
+
     // Valida llaves de paso y permisos de accion
     if ($PCO_Accion!= "" && $PCO_Accion!="Iniciar_login" && $PCO_Accion!="Terminar_sesion" && $PCO_Accion!="Mensaje_cierre_sesion" && $PCO_Accion!="PCO_VerMonitoreo" && $PCO_Accion!="PCO_RecuperarContrasena" && $PCO_Accion!="PCO_AgregarUsuarioAutoregistro" && $PCO_Accion!="PCO_GuardarUsuarioAutoregistro")
         {
@@ -174,10 +178,6 @@
                 exit(1);
             }
         }
-
-    // Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios
-    if (PCO_BuscarErroresSintaxisPHP('mod/personalizadas_pre.php')==0)
-        include 'mod/personalizadas_pre.php';
 
     // Inicia la presentacion de la pagina si no esta activado el fullscreen
     if (@$Presentar_FullScreen!=1) $Presentar_FullScreen="";

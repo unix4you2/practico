@@ -18,11 +18,14 @@ index.php
 core/comunes.php
 core/formularios.php
 core/marco_abajo.php
+core/marco_arriba.php
 core/marco_arriba_bs.php
 core/marco_nav.php
+core/monitoreo.php
+core/monitoreo_superior.php
+core/sesion.php
 inc/bootstrap/css/plugins/select/*
 inc/bootstrap/js/plugins/select/*
-
 xml/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
@@ -48,6 +51,9 @@ Funcion enviar_correo cambia a PCO_EnviarCorreo
 * Added: [FORMS] La personalizacion de tags soporta ahora parámetros que requieran espacios encerrados por comillas dobles.
 * Added: [FORMS] Controles de tipo checkbox convertidos a boton tipo toggle mediante personalización de Tag soportan ahora traducción de variables en notacion PHP {$} para multiples idiomas y otros usos.
 * Added: [FORMS] Durante la adicion de formularios embebidos se permite realizar busqueda sobre la lista para proyectos con gran cantidad de formularios.
+* Added: [MONIT] Los monitores tipo máquina sobre el sistema de monitoreo soportan ahora un modo Ultra compacto que consume sólo una unidad de la rejilla; pero que se expande automáticamente a modo compacto cuando el monitor está caído para facilitar su visualización.
+* Added: [MONIT] El sistema de monitoreo permite intercambiar entre pantallas fullscreen o normal mediante botón en su barra superior.
+* Fixed: [MONIT] Error de tipado en variable de página recurrente.
 * Enhan: [FORMS] Llamado de funciones personalizadas u bjetos internos desde formularios se hace ahora a través de la función de validación de campos de formularios para unificar su uso con los botones de almacenamiento y actualización de datos.
 * Enhan: [FORMS] Automáticamente en cada llamado al framework se hace la reasignación de variables que provienen de listas múltiples a sus variables estandar para su uso de manera tradicional.
 * Enhan: [LIBS]  Cambio de version en libreria select-boostrap de  version 1.12.4 a 1.6.5
@@ -56,8 +62,12 @@ Funcion enviar_correo cambia a PCO_EnviarCorreo
 * Enhan: [AUDIT] Redistribucion de elementos en auditoria.
 * Enhan: [GRAL] Agregado enlace al proyecto SayThanks.
 * Enhan: [GRAL] Agregado enlace al chat de desarrolladores en Gitter para facilitar interacción.
+* Enhan: [GRAL] Limpieza de algunas advertencias para variables de sesion e idioma no definidas.
+* Enhan: [VIEW] Ajustes a presentacion de imagenes de fondo
 * Fixed: [FORMS] Cuando se trate de campos no existentes dentro de la base de datos asociada al formulario, no se intentará hacer una carga del dato desde el registro pues siempre será vacío.
 * Fixed: [INFORMES] Asignacion automática de formularios de filtrado derivados del mismo ID de informe.
+* Enhan: [INFORMES] Ampliada la longitud del campo de descripcion para los informes.
+* Added: [SESION] Ahora por defecto la autenticacion de la plataforma se hace mediante comparacion directa con las tablas de sistema.  Si se desea activar el modo heredado o anterior de servicios web internos se puede utilizar la variable Auth_MotorWS=1 en el archivo de configuracion
 "
 
 ########################################################################
@@ -117,12 +127,17 @@ INSERT INTO core_opcionlista (id, identificador_lista, valor_interno, valor_visu
 (50,	'comando_menu',	'Interno',	'2. { $ MULTILANG_MnuInterno}',	2),
 (51,	'comando_menu',	'Personal',	'3. { $ MULTILANG_MnuPersonal}',	3),
 (54,	'motores_bd',	'---------------',	'-------------------------------------- NoSQL -------------------------------------',	12),
-(55,	'motores_bd',	'couchbase',	'CouchBase',	13);
+(55,	'motores_bd',	'couchbase',	'CouchBase',	13),
+(56,	'modo_monitor',	'0',	'{ $ MULTILANG_No}',	1),
+(57,	'modo_monitor',	'1',	'{ $ MULTILANG_Si}',	2),
+(58,	'modo_monitor',	'2',	'Ultra',	3);
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
 
 ALTER TABLE core_informe ADD tooltip_titulo char(1) DEFAULT 'N';
+
+ALTER TABLE core_informe CHANGE descripcion descripcion text;
 "
 
 ########################################################################

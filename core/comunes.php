@@ -4947,28 +4947,28 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
 					{
 						$cadena_ID_datepickerEspecifica="
 								pickTime: false";
-						$cadena_complementaria_datepicker=' data-date-format="YYYY-MM-DD" ';
+						$cadena_complementaria_datepicker=' data="DateTimePicker" data-date-format="YYYY-MM-DD" ';
 					}
 				if ($registro_campos["validacion_datos"]=="fechaxanos")
 					{
 						$cadena_ID_datepickerEspecifica="
 								viewMode: 'years',
 								pickTime: false";
-						$cadena_complementaria_datepicker=' data-date-format="YYYY-MM-DD" ';
+						$cadena_complementaria_datepicker=' data="DateTimePicker" data-date-format="YYYY-MM-DD" ';
 					}
 				if ($registro_campos["validacion_datos"]=="hora")
 					{
 						$cadena_ID_datepickerEspecifica="
 								pickDate: false,
 								pickTime: true";
-						$cadena_complementaria_datepicker=' data-date-format="HH:mm:ss" ';
+						$cadena_complementaria_datepicker=' data="DateTimePicker" data-date-format="HH:mm:ss" ';
 					}
 				if ($registro_campos["validacion_datos"]=="fechahora")
 					{
 						$cadena_ID_datepickerEspecifica="
 								pickDate: true,
 								pickTime: true";
-						$cadena_complementaria_datepicker=' data-date-format="YYYY-MM-DD HH:mm:ss" ';
+						$cadena_complementaria_datepicker=' data="DateTimePicker" data-date-format="YYYY-MM-DD HH:mm:ss" ';
 					}
 				if ($registro_campos["validacion_datos"]=="fechahorafull")
 					{
@@ -4976,7 +4976,7 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
 								sideBySide: true,
 								pickDate: true,
 								pickTime: true";
-						$cadena_complementaria_datepicker=' data-date-format="YYYY-MM-DD HH:mm:ss" ';
+						$cadena_complementaria_datepicker=' data="DateTimePicker" data-date-format="YYYY-MM-DD HH:mm:ss" ';
 					}
 				//Genera parametros finales para los datepicker
 				$cadena_ID_datepicker=' id="DatePicker_'.$registro_campos["campo"].'" ';

@@ -24,6 +24,34 @@
     // BARRA DE MENU DEL MONITOREO
 ?>
 
+<script language="JavaScript">
+function IntercambiarPantallaCompleta()
+	{
+		if (!document.fullscreenElement &&    // alternative standard method
+		  !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+			if (document.documentElement.requestFullscreen) {
+			  document.documentElement.requestFullscreen();
+			} else if (document.documentElement.msRequestFullscreen) {
+			  document.documentElement.msRequestFullscreen();
+			} else if (document.documentElement.mozRequestFullScreen) {
+			  document.documentElement.mozRequestFullScreen();
+			} else if (document.documentElement.webkitRequestFullscreen) {
+			  document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+			}
+		} else {
+			if (document.exitFullscreen) {
+			  document.exitFullscreen();
+			} else if (document.msExitFullscreen) {
+			  document.msExitFullscreen();
+			} else if (document.mozCancelFullScreen) {
+			  document.mozCancelFullScreen();
+			} else if (document.webkitExitFullscreen) {
+			  document.webkitExitFullscreen();
+			}
+		}
+	}
+</script>
+
 <div class="row">
 	<div class="col-md-12">
 
@@ -58,12 +86,15 @@
 									<li role="separator" class="divider"></li>
 									<li><a style="cursor:pointer;" OnClick="self.close();"><i class="fa fa-sign-out fa-fw"></i> <?php echo $MULTILANG_Cerrar; ?></a></li>
 								</ul>
+
+
 							</li>
 
 							<!-- BOTONES INDEPENDIENTES -->
 							<li><a style="cursor:pointer;" OnClick="EstadoPausa=1;" data-toggle="tooltip" data-placement="bottom" title="Pausa en esta ventana / Pause this window"><i class="fa fa-pause fa-fw text-danger "></i> <?php echo $MULTILANG_Pausar; ?></a></li>
-							<li><a style="cursor:pointer;" OnClick="document.formulario_monitoreo.Pagina.value='<?php echo $PaginaMonitoreo; ?>'; document.formulario_monitoreo.PaginaRecuerrente.value='<?php echo $PaginaMonitoreo; ?>';" data-toggle="tooltip" data-placement="bottom" title="Permanecer y actualizar solo esta pagina / Stay and upgrade only this page"><i class="fa fa-refresh fa-fw text-warning "></i> <?php echo $MULTILANG_Recurrente; ?></a></li>
-							<li><a style="cursor:pointer;" OnClick="document.formulario_monitoreo.Pagina.value=(document.formulario_monitoreo.Pagina.value)*1-1; EstadoPausa=0; document.formulario_monitoreo.PaginaRecuerrente.value=''; actualizar();" data-toggle="tooltip" data-placement="bottom" title="Continuar monitoreo / Resume monitoring"><i class="fa fa-play fa-fw text-success"></i> <?php echo $MULTILANG_Continuar; ?></a></li>
+							<li><a style="cursor:pointer;" OnClick="document.formulario_monitoreo.Pagina.value='<?php echo $PaginaMonitoreo; ?>'; document.formulario_monitoreo.PaginaRecurrente.value='<?php echo $PaginaMonitoreo; ?>';" data-toggle="tooltip" data-placement="bottom" title="Permanecer y actualizar solo esta pagina / Stay and upgrade only this page"><i class="fa fa-refresh fa-fw text-warning "></i> <?php echo $MULTILANG_Recurrente; ?></a></li>
+							<li><a style="cursor:pointer;" OnClick="document.formulario_monitoreo.Pagina.value=(document.formulario_monitoreo.Pagina.value)*1-1; EstadoPausa=0; document.formulario_monitoreo.PaginaRecurrente.value=''; actualizar();" data-toggle="tooltip" data-placement="bottom" title="Continuar monitoreo / Resume monitoring"><i class="fa fa-play fa-fw text-success"></i> <?php echo $MULTILANG_Continuar; ?></a></li>
+							<li><a style="cursor:pointer;" OnClick="IntercambiarPantallaCompleta();" data-toggle="tooltip" data-placement="bottom" title="Pantalla completa / FullScreen"> <i class="fa fa-desktop fa-fw text-default"></i>&nbsp;</a></li>
 
 							<li><a data-toggle="tooltip" data-placement="bottom" title="Tiempo antes de saltar / Time before jump"><i class="fa fa-clock-o fa-fw text-info"></i> <div id="MarcoCronometro" style="display: inline!important;">0s</div></a></li>
 
@@ -76,6 +107,7 @@
 									<li><a style="cursor:pointer;"><i class="fa fa-info fa-fw"></i> <?php echo $MULTILANG_Ayuda; ?></a></li>
 								</ul>
 							</li>
+
 						</ul>
 
 					</div><!-- /.navbar-collapse -->

@@ -75,34 +75,65 @@
 			session_destroy();
 
 			$ok_login=0;
-			// Inicia la autenticacion como una solicitud de webservices interna
-			// Determina si la conexion actual de Practico esta encriptada
-			if(empty($_SERVER["HTTPS"]))
-				$protocolo_webservice="http://";
-			else
-				$protocolo_webservice="https://";
-			// Si se tiene un protocolo preferido sobreescribe lo auto-detectado
-			if (@$Auth_ProtoTransporte=="http" || @$Auth_ProtoTransporte=="https")
-				$protocolo_webservice=$Auth_ProtoTransporte."://";
-			// Construye la URL para solicitar el webservice.  La URL se debe poder resolver por el servidor web correctamente, ya sea por dominio o IP (interna o publica).  Ver /etc/hosts si algo.
-			$prefijo_webservice=$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$_SERVER['PHP_SELF'];
-			$webservice_validacion = $protocolo_webservice.$prefijo_webservice."?PCO_WSOn=1&PCO_WSKey=".$LlaveDePaso."&PCO_WSSecret=".$LlaveDePaso."&PCO_WSId=verificar_credenciales&uid=".$uid."&clave=".$clave;
-			// Carga el contenido en una variable para validar la conexion
-			$contenido_url = @PCO_CargarURL($webservice_validacion);
-			// Valida si se logro cargar o no el contenido
-			if ($contenido_url!="")
-				{
-					// Usa SimpleXML Directamente para interpretar respuesta
-					$resultado_webservice = @simplexml_load_string($contenido_url);
-					// Analiza la respuesta recibida en el XML
-					if(@$resultado_webservice->credencial[0]->aceptacion==1)
-						$ok_login=1;
-				}
-			else
-				{
-					PCO_LimpiarEntradas();
-					PCO_Mensaje($MULTILANG_LoginNoWSTit,$MULTILANG_LoginNoWSDes."<br>Test URL=<a href='".$webservice_validacion."' target=_BLANK>Auth WebService</a> (entradas filtradas)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-				}
+			// Inicia la autenticacion frente a tablas de sistema
+			if ($Auth_MotorWS!=1)
+    		    {
+    				$ClaveEnMD5=hash("md5", $clave);
+    				$RegistroUsuario=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE estado=1 AND login='$uid' AND clave='$ClaveEnMD5' ")->fetch();
+    				//Si encuentra el usuario activa bandera y genera XML de datos correspondiente
+    				if ($RegistroUsuario["login"]!="")
+    				    {
+    				        $ok_login=1;
+                    		// Inicia el XML de salida basico solamente con el estado de aceptacion
+                    		$salida_xml .= "<?xml version=\"1.0\" encoding=\"utf-8\" ?>
+                            <credenciales>
+                            	<credencial>
+                            		<aceptacion>1</aceptacion>
+                            		<login>".$RegistroUsuario["login"]."</login>
+                            		<nombre>".$RegistroUsuario["nombre"]."</nombre>
+                            		<descripcion>".$RegistroUsuario["descripcion"]."</descripcion>
+                            		<nivel>".$RegistroUsuario["nivel"]."</nivel>
+                            		<correo>".$RegistroUsuario["correo"]."</correo>
+                            		<ultimo_acceso>".$RegistroUsuario["ultimo_acceso"]."</ultimo_acceso>";
+                            		// Finaliza el archivo XML
+                            		$salida_xml .= "
+                            	</credencial>
+                            </credenciales>";
+                            $resultado_webservice = @simplexml_load_string($salida_xml);
+    				    }
+    		    }
+
+			// Inicia la autenticacion como una solicitud de webservices interna SI ESTA ACTIVADO EN LA CONFIGURACION
+			if ($Auth_MotorWS==1)
+    		    {
+        			// Determina si la conexion actual de Practico esta encriptada
+        			if(empty($_SERVER["HTTPS"]))
+        				$protocolo_webservice="http://";
+        			else
+        				$protocolo_webservice="https://";
+        			// Si se tiene un protocolo preferido sobreescribe lo auto-detectado
+        			if (@$Auth_ProtoTransporte=="http" || @$Auth_ProtoTransporte=="https")
+        				$protocolo_webservice=$Auth_ProtoTransporte."://";
+        			// Construye la URL para solicitar el webservice.  La URL se debe poder resolver por el servidor web correctamente, ya sea por dominio o IP (interna o publica).  Ver /etc/hosts si algo.
+        			$prefijo_webservice=$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$_SERVER['PHP_SELF'];
+        			$webservice_validacion = $protocolo_webservice.$prefijo_webservice."?PCO_WSOn=1&PCO_WSKey=".$LlaveDePaso."&PCO_WSSecret=".$LlaveDePaso."&PCO_WSId=verificar_credenciales&uid=".$uid."&clave=".$clave;
+        			// Carga el contenido en una variable para validar la conexion
+        			$contenido_url = @PCO_CargarURL($webservice_validacion);
+        			// Valida si se logro cargar o no el contenido
+        			if ($contenido_url!="")
+        				{
+        					// Usa SimpleXML Directamente para interpretar respuesta
+        					$resultado_webservice = @simplexml_load_string($contenido_url);
+        					// Analiza la respuesta recibida en el XML
+        					if(@$resultado_webservice->credencial[0]->aceptacion==1)
+        						$ok_login=1;
+        				}
+        			else
+        				{
+        					PCO_LimpiarEntradas();
+        					PCO_Mensaje($MULTILANG_LoginNoWSTit,$MULTILANG_LoginNoWSDes."<br>Test URL=<a href='".$webservice_validacion."' target=_BLANK>Auth WebService</a> (entradas filtradas)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+        				}
+    		    }
 
 			$clave_correcta=0;
 			if ($clave!="" && $ok_login==1 && $ok_captcha==1)

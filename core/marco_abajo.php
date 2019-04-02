@@ -204,6 +204,27 @@
             echo '<script type="text/javascript"> $(window).load(function(){ $(\'.nav-tabs a[href="#eventos_objeto-tab"]\').tab(\'show\'); }); </script>';
     ?>
 
+    <script language="JavaScript">
+        //Actualiza tamano del marco principal para garantizar siempre un tamano adecuado de fondo
+        //TODO: Verificar consistencia en paginas grades como la administrativa
+        $( document ).ready(function() {
+            var PCOJSVAR_HayScroll=false;
+            //Verifica si hay scroll  METODO 1
+            if (document.getElementById("page-wrapper").scrollHeight==$(document).height())
+                PCOJSVAR_HayScroll=true;
+            //Si hay scroll el alto debe tener !important para que se estire hasta abajo en la página.  Si no hay scroll solo 100%
+            if( PCOJSVAR_HayScroll )
+                {
+                    //$("#page-wrapper").css({ 'height': "100% !important" }); //SI Hay scroll  
+                    console.log("Scroll detectado");
+                }
+            else
+                {
+                    $("#page-wrapper").css({ 'height': "100%" }); // NO Hay scroll  
+                    console.log("Scroll NO detectado");
+                }
+        });
+    </script>
 
     <script language="JavaScript">
         //Carga los tooltips programados en la hoja.  Por defecto todos los elementos con data-toggle=tootip

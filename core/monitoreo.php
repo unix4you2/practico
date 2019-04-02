@@ -198,7 +198,7 @@ function DibujarEstadoMaquina($Maquina,$estado_final,$Separador_DosPuntos,$estil
 	    
 	    $AnchoControl=$Maquina["ancho"];
 	    
-	    //Define el esquema de presentacion dependiendo si el modo es compacto o no
+	    //Si el modo de presentacion es NORMAL
 	    if($Maquina["modo_compacto"]==0)
 	        {
     			echo '
@@ -228,13 +228,39 @@ function DibujarEstadoMaquina($Maquina,$estado_final,$Separador_DosPuntos,$estil
     					</div>
     				</div>';
 	        }
-	    else
+
+	    //Si el modo de presentacion es COMPACTO
+	    if($Maquina["modo_compacto"]==1)
 		    {
     			echo '
     				<div data-toggle="tooltip" data-html="true" data-placement="auto" title="'.$Maquina["host"].$Separador_DosPuntos.$Maquina["puerto"].'" class="col-xs-'.$AnchoControl.' col-sm-'.$AnchoControl.' col-md-'.$AnchoControl.' col-lg-'.$AnchoControl.'">
     					<div class="panel '.$estilo_caja_estado.'">
     						<div class="panel-heading">
     							<i class="fa fa-desktop fa-1x pull-left"></i>'.$Maquina["nombre"].'
+    						</div>
+    					</div>
+    				</div>';
+		    }
+
+	    //Si el modo de presentacion es ULTRA-COMPACTO
+	    if($Maquina["modo_compacto"]==2)
+		    {
+		        $NombreMonitor=$Maquina["nombre"][0];
+		        $AnchoControl=1;
+		        $IconoMonitor="fa-check";
+		        //Aun para el modo Ultra-Compacto SI EL MONITOR ESTA CAIDO amplia su nombre para visualizacion rapida
+		        if ($estilo_caja_estado=="panel-danger")
+		            {
+		                $NombreMonitor=$Maquina["nombre"];
+		                $AnchoControl=$Maquina["ancho"];
+		                $IconoMonitor="fa-times";
+		            }
+		        
+    			echo '
+    				<div data-toggle="tooltip" data-html="true" data-placement="auto" title="<b>'.$Maquina["nombre"].'</b><br>'.$Maquina["host"].$Separador_DosPuntos.$Maquina["puerto"].'" class="col-xs-'.$AnchoControl.' col-sm-'.$AnchoControl.' col-md-'.$AnchoControl.' col-lg-'.$AnchoControl.'">
+    					<div class="panel '.$estilo_caja_estado.'">
+    						<div class="panel-heading">
+    							<i class="fa '.$IconoMonitor.' fa-1x pull-left"></i>'.$NombreMonitor.'
     						</div>
     					</div>
     				</div>';
@@ -788,7 +814,7 @@ if ($PCO_Accion=="PCO_VerMonitoreo")
 			if($SiguientePagina>$MaximoPaginas) $SiguientePagina=$PaginaInicio;
 			
 			//Si esta encendido el itinerador entonces la pagina siguiente sera la misma pagina siempre
-			if($PaginaRecuerrente!="") $SiguientePagina=$PaginaMonitoreo;
+			if($PaginaRecurrente!="") $SiguientePagina=$PaginaMonitoreo;
 			
 			//Busca cuantos milisegundos esperar segun la pagina definida y sus elementos
 			$resultado=PCO_EjecutarSQL("SELECT SUM(milisegundos_lectura) as total_espera FROM ".$TablasCore."monitoreo WHERE pagina='$PaginaMonitoreo' ");
@@ -800,7 +826,7 @@ if ($PCO_Accion=="PCO_VerMonitoreo")
             <input type="hidden" name="PCO_Accion" value="PCO_VerMonitoreo">
             <input type="hidden" name="Presentar_FullScreen" value="1">
             <input type="hidden" name="Pagina" value="<?php echo $SiguientePagina; ?>">
-            <input type="hidden" name="PaginaRecuerrente" value="<?php if($PaginaRecuerrente!="") echo $PaginaMonitoreo; ?>">
+            <input type="hidden" name="PaginaRecurrente" value="<?php if($PaginaRecurrente!="") echo $PaginaMonitoreo; ?>">
         </form>
 
 		<script language="JavaScript">
