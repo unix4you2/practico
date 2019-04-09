@@ -98,7 +98,9 @@ CREATE TABLE core_formulario (
   javascript text,
   borde_visible integer default '0',
   estilo_pestanas text default 'nav-tabs',
-  id_html text DEFAULT ''
+  id_html text DEFAULT '',
+  tipo_maquetacion text DEFAULT 'tradicional',
+  css_columnas text
 
 );
 
@@ -534,6 +536,14 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('comando_menu','Personal','3. {$MULTILANG_MnuPersonal}',3);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','---------------','-------------------------------------- NoSQL -------------------------------------',12);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('motores_bd','couchbase','CouchBase',13);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('modo_monitor','0','{$MULTILANG_No}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('modo_monitor','1','{$MULTILANG_Si}',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('modo_monitor','2','Ultra',3);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_maquetacion','tradicional','{$MULTILANG_FrmTradicional}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_maquetacion','responsive','Responsive',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_pestanas','nav-tabs','{$MULTILANG_FrmEstiloTabs}',1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_pestanas','nav-pills','{$MULTILANG_FrmEstiloPills}',2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_pestanas','','{$MULTILANG_FrmEstiloOculto}',3);
 
 DROP TABLE IF EXISTS core_bugtracker;
 CREATE TABLE core_bugtracker (

@@ -6897,19 +6897,40 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                     {
                                         $limite_superior=$registro_obj_fila_unica["peso"];
                                         $ultimo_id=$registro_obj_fila_unica["id"];
-                                        // Inicia la tabla con los campos
-                                        echo '
-                                            <div class="table-responsive" style="border-width: 0px; margin-top:0; margin-bottom:0; margin-left:0; margin-right:0; ">
-                                            <table class="table table-responsive '.$estilo_bordes.' table-condensed btn-xs" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0; padding: 0px; border-spacing: 0px; "><tr>';
+                                        
+                                        //Define tipo_maquetacion
+                                        if($registro_formulario["tipo_maquetacion"]=="responsive")
+                                            {
+                                                echo '<div class="row">';
+                                            }
+                                        //Define tipo_maquetacion
+                                        if($registro_formulario["tipo_maquetacion"]=="tradicional")
+                                            {
+                                                // Inicia la tabla con los campos
+                                                echo '
+                                                    <div class="table-responsive" style="border-width: 0px; margin-top:0; margin-bottom:0; margin-left:0; margin-right:0; ">
+                                                    <table class="table table-responsive '.$estilo_bordes.' table-condensed btn-xs" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0; padding: 0px; border-spacing: 0px; "><tr>';
+                                            }
+                                        
                                         //Recorre todas las comunas definidas para el formulario buscando objetos
                                         for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
                                             {
                                                 //Busca los elementos de la coumna actual del formulario con peso menor o igual al peso del objeto fila_unica de la fila unica_actual pero que no son fila_unica
                                                 $consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND columna=? AND visible=1 AND peso >? AND peso <=? ORDER BY peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario$_SeparadorCampos_$cl$_SeparadorCampos_$limite_inferior$_SeparadorCampos_$limite_superior");
-                                                
-                                                    //Inicia columna de formulario
-                                                    $PCO_AnchoColumnas=round(100 / $registro_formulario["columnas"]);
-                                                    echo '<td width="'.$PCO_AnchoColumnas.'%" >';
+
+                                                    //Define tipo_maquetacion JJJ
+                                                    if($registro_formulario["tipo_maquetacion"]=="responsive")
+                                                        {
+                                                            echo '<div class="col col-xs-3 col-sm-3 col-md-3 col-lg-3">';
+                                                        }
+                                                    //Define tipo_maquetacion
+                                                    if($registro_formulario["tipo_maquetacion"]=="tradicional")
+                                                        {
+                                                            //Inicia columna de formulario
+                                                            $PCO_AnchoColumnas=round(100 / $registro_formulario["columnas"]);
+                                                            echo '<td width="'.$PCO_AnchoColumnas.'%" >';
+                                                        }
+                              
                                                     // Crea los campos definidos por cada columna de formulario
                                                     while ($registro_campos = $consulta_campos->fetch())
                                                         {
@@ -6998,11 +7019,31 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                             //Cierra el marco para el estilo inline del objeto
                                                             echo '</div>';
                                                         }
-                                                    echo '</td>'; //Fin columna de formulario
+                                                        
+                                                    //Define tipo_maquetacion
+                                                    if($registro_formulario["tipo_maquetacion"]=="responsive")
+                                                        {
+                                                            echo '</div>'; //Fin class=col
+                                                        }                                                        
+                                                    //Define tipo_maquetacion
+                                                    if($registro_formulario["tipo_maquetacion"]=="tradicional")
+                                                        {
+                                                            echo '</td>'; //Fin columna de formulario
+                                                        }
                                             }
-                                        // Finaliza la tabla con los campos
-                                        echo '</tr></table>
-                                            </div>';
+                                            
+                                        //Define tipo_maquetacion
+                                        if($registro_formulario["tipo_maquetacion"]=="responsive")
+                                            {
+                                                echo '</div>'; //Fin class=row
+                                            }
+                                        //Define tipo_maquetacion
+                                        if($registro_formulario["tipo_maquetacion"]=="tradicional")
+                                            {
+                                                // Finaliza la tabla con los campos
+                                                echo '</tr></table>
+                                                    </div>';
+                                            }
 
                                         //Busca datos del registro de fila_unica
                                         $consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND id=? ","$formulario$_SeparadorCampos_$ultimo_id");
@@ -7026,8 +7067,21 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                 //Define el estilo del contenedor para el objeto
                                                 $ClaseCSSContenedor="";
                                                 if ($registro_campos["clase_contenedor"]!="") $ClaseCSSContenedor=$registro_campos["clase_contenedor"];
-                                                echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'" class="'.$ClaseCSSContenedor.'" style="margin-top:0px; margin-bottom:0px; margin-left:0; margin-right:0;  padding: 0px; spacing: 0px;">'.$ComplementoDisenoMarcoOpciones.'
-                                                <table class="table table-condensed btn-xs '.$estilo_bordes.'" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;  padding: 0px; border-spacing: 0px; width:100%; "><tr><td>';
+                                                
+                                                echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'" class="'.$ClaseCSSContenedor.'" style="margin-top:0px; margin-bottom:0px; margin-left:0; margin-right:0;  padding: 0px; spacing: 0px;">'.$ComplementoDisenoMarcoOpciones.'';
+
+                                                //Define tipo_maquetacion
+                                                if($registro_formulario["tipo_maquetacion"]=="responsive")
+                                                    {
+                                                        echo '<div class="row"><div class="col col-xs-12 col-sm-12 col-md-12 col-lg-12">';
+                                                    }
+                                                //Define tipo_maquetacion
+                                                if($registro_formulario["tipo_maquetacion"]=="tradicional")
+                                                    {
+                                                        echo '<table class="table table-condensed btn-xs '.$estilo_bordes.'" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0;  padding: 0px; border-spacing: 0px; width:100%; "><tr><td>';
+                                                    }
+
+
                                                 $tipo_de_objeto=@$registro_campos["tipo"];
                                                 if ($tipo_de_objeto=="texto_corto") $objeto_formateado = PCO_CargarObjetoTextoCorto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
                                                 if ($tipo_de_objeto=="texto_clave") $objeto_formateado = PCO_CargarObjetoTextoCorto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
@@ -7083,8 +7137,19 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                 //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
                                                 if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
                                                     echo $objeto_formateado;
-                                                echo '</td></tr></table>
-                                                </div>';
+
+                                                //Define tipo_maquetacion
+                                                if($registro_formulario["tipo_maquetacion"]=="responsive")
+                                                    {
+                                                        echo '</div></div>'; //Fin class=row y class=col
+                                                    }                                                
+                                                //Define tipo_maquetacion
+                                                if($registro_formulario["tipo_maquetacion"]=="tradicional")
+                                                    {
+                                                        echo '</td></tr></table>';
+                                                    }
+
+                                                echo '</div>';
                                             }
 
                                         //Actualiza limite inferior para siguiente lista de campos

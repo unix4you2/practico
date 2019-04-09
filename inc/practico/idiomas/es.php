@@ -669,6 +669,10 @@
     $MULTILANG_FrmHuerfanos='Se han encontrado campos hu&eacute;rfanos (por fuera del dise&ntilde;o visible del formulario).';
     $MULTILANG_FrmIDHTMDuplicado='Se han encontrado campos con ID HTML o nombre de campo en base de datos duplicado.';
     $MULTILANG_FrmCamposAProposito='Esos campos se encuentran all&iacute; y pueden afectar la funcionalidad del formulario en giones JS o al procesar sus datos. Si usted ha generado campos de este tipo a prop&oacute;sito entonces ignore este mensaje.  Los campos encontrados son:';
+    $MULTILANG_FrmTipoMaquetacion='Tipo de maquetaci&oacute;n';
+    $MULTILANG_FrmTipoMaquetacionDes='Determina la forma en que Practico maquetara formularios de multiples columnas.  Tradicional: utiliza tablas y columnas estandar en HTML.  Responsive: utiliza columnas basadas en clases col de bootstrap, para las cuales debera especificar la clase de cada una en los campos correspondientes.';
+    $MULTILANG_FrmTradicional='Tradicional';
+
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

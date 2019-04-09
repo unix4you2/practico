@@ -671,7 +671,10 @@
     $MULTILANG_FrmHuerfanos='Des champs orphelins ont été trouvés (en dehors du design visible du formulaire).';
     $MULTILANG_FrmIDHTMDuplicado='Des champs avec un identifiant HTML ou un nom de champ dans une base de données en double ont été trouvés.';
     $MULTILANG_FrmCamposAProposito='Ces champs sont là et peuvent affecter la fonctionnalité du formulaire dans JS gions ou lors du traitement de vos données. Si vous avez généré des champs de ce type de champ, ignorez ce message. Les champs trouvés sont:';
-
+    $MULTILANG_FrmTipoMaquetacion='Type of layout';
+    $MULTILANG_FrmTipoMaquetacionDes='Determine how Practico will make multi-column forms. Traditional: use tables and standard columns in HTML. Responsive: use columns based on bootstrap col classes, for which you must specify the class of each in the corresponding fields.';
+    $MULTILANG_FrmTradicional='Traditional';
+    
 	//Informes
 	$MULTILANG_InfErr1='Vous devez spécifier des valeurs pour les champs correspondant à au moins une série de données. <br> Si vous ne voulez pas générer de graphique, vous devez changer le type de rapport en tableau de données';
 	$MULTILANG_InfErr2='Vous devez entrer un titre valide pour le rapport.';

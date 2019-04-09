@@ -51,23 +51,32 @@ Funcion enviar_correo cambia a PCO_EnviarCorreo
 * Added: [FORMS] La personalizacion de tags soporta ahora parámetros que requieran espacios encerrados por comillas dobles.
 * Added: [FORMS] Controles de tipo checkbox convertidos a boton tipo toggle mediante personalización de Tag soportan ahora traducción de variables en notacion PHP {$} para multiples idiomas y otros usos.
 * Added: [FORMS] Durante la adicion de formularios embebidos se permite realizar busqueda sobre la lista para proyectos con gran cantidad de formularios.
+* Added: [FORMS] Ahora se permite establecer el tipo de maquetacion para columnas de formularios como tradicional (Tablas HTML) o responsive (Cols de bootstrap) lo que permite hcaer más fluido y responsive el contenido diagramado para ciertos dispositivos.  Esto permitirá convertir de manera automática maquetaciones tradicionales a otras más fluidas y responsives.
+* Added: [FORMS] Para cada columna de formulario se permite definir su clase para aplicación de estilos CSS y responsive.  Cuando el número de clases especificadas es menor al número de columnas éstas serán aplicadas en orden y la última será utilizada para aplicar a las columnas restantes permitiendo definir una sola cadena de clases para formularios con múltiples columnas.
 * Added: [MONIT] Los monitores tipo máquina sobre el sistema de monitoreo soportan ahora un modo Ultra compacto que consume sólo una unidad de la rejilla; pero que se expande automáticamente a modo compacto cuando el monitor está caído para facilitar su visualización.
 * Added: [MONIT] El sistema de monitoreo permite intercambiar entre pantallas fullscreen o normal mediante botón en su barra superior.
 * Fixed: [MONIT] Error de tipado en variable de página recurrente.
 * Enhan: [FORMS] Llamado de funciones personalizadas u bjetos internos desde formularios se hace ahora a través de la función de validación de campos de formularios para unificar su uso con los botones de almacenamiento y actualización de datos.
 * Enhan: [FORMS] Automáticamente en cada llamado al framework se hace la reasignación de variables que provienen de listas múltiples a sus variables estandar para su uso de manera tradicional.
+* Enhan: [FORMS] La opción para definición de scripts de un formulario es elimnada desde su creación.  Esto ahorra espacio en diseño; pero seguirá estando disponible a través del diseño detallado de formulario pues una vez creado es que generalmente se definen comportamientos extra.
+* Enhan: [FORMS] Mejorada aun mas la velocidad de carga de los controles tipo lista bajo version 1.6.5 haciendo render anticipado del control.
+* Enhan: [FORMS] Reducción de código en módulo de formularios por cambio a formulario dinámico
 * Enhan: [LIBS]  Cambio de version en libreria select-boostrap de  version 1.12.4 a 1.6.5
 * Enhan: [LIBS] Se valida la previa instalacion/disponibilidad de la extension mbstring de PHP sobre el servidor.
-* Enhan: [FORMS] Mejorada aun mas la velocidad de carga de los controles tipo lista bajo version 1.6.5 haciendo render anticipado del control.
 * Enhan: [AUDIT] Redistribucion de elementos en auditoria.
 * Enhan: [GRAL] Agregado enlace al proyecto SayThanks.
 * Enhan: [GRAL] Agregado enlace al chat de desarrolladores en Gitter para facilitar interacción.
 * Enhan: [GRAL] Limpieza de algunas advertencias para variables de sesion e idioma no definidas.
 * Enhan: [VIEW] Ajustes a presentacion de imagenes de fondo
+* Enhan: [VIEW] Actualizacion del logo de plataforma
 * Fixed: [FORMS] Cuando se trate de campos no existentes dentro de la base de datos asociada al formulario, no se intentará hacer una carga del dato desde el registro pues siempre será vacío.
 * Fixed: [INFORMES] Asignacion automática de formularios de filtrado derivados del mismo ID de informe.
 * Enhan: [INFORMES] Ampliada la longitud del campo de descripcion para los informes.
 * Added: [SESION] Ahora por defecto la autenticacion de la plataforma se hace mediante comparacion directa con las tablas de sistema.  Si se desea activar el modo heredado o anterior de servicios web internos se puede utilizar la variable Auth_MotorWS=1 en el archivo de configuracion
+
+
+Frances ÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ
+Portugues: ÁáÀàÂâÃãÉéÊêÍíÓóÔôÕõÚú
 "
 
 ########################################################################
@@ -130,7 +139,13 @@ INSERT INTO core_opcionlista (id, identificador_lista, valor_interno, valor_visu
 (55,	'motores_bd',	'couchbase',	'CouchBase',	13),
 (56,	'modo_monitor',	'0',	'{ $ MULTILANG_No}',	1),
 (57,	'modo_monitor',	'1',	'{ $ MULTILANG_Si}',	2),
-(58,	'modo_monitor',	'2',	'Ultra',	3);
+(58,	'modo_monitor',	'2',	'Ultra',	3),
+(59,	'tipos_maquetacion',	'tradicional',	'{ $ MULTILANG_FrmTradicional}',	1),
+(60,	'tipos_maquetacion',	'responsive',	'Responsive',	2),
+(61,	'estilos_pestanas',	'nav-tabs',	'{ $ MULTILANG_FrmEstiloTabs}',	1),
+(62,	'estilos_pestanas',	'nav-pills',	'{ $ MULTILANG_FrmEstiloPills}',	2),
+(63,	'estilos_pestanas',	'',	'{ $ MULTILANG_FrmEstiloOculto}',	3);
+
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
@@ -138,6 +153,10 @@ UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$')
 ALTER TABLE core_informe ADD tooltip_titulo char(1) DEFAULT 'N';
 
 ALTER TABLE core_informe CHANGE descripcion descripcion text;
+
+ALTER TABLE core_formulario ADD tipo_maquetacion varchar(11) NULL DEFAULT 'tradicional';
+ALTER TABLE core_formulario ADD css_columnas text;
+
 "
 
 ########################################################################

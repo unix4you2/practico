@@ -2526,9 +2526,14 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 			<form name="datosact" id="datosact" action="'.$ArchivoCORE.'" method="POST">
                 <input type="Hidden" name="PCO_Accion" value="PCO_ActualizarFormulario">
                 <input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-                <input type="Hidden" name="formulario" value="'.$registro_form["id"].'">
+                <input type="Hidden" name="formulario" value="'.$registro_form["id"].'">';
 
 
+                //PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno_formulario=0)
+	            //$ContenidoBarraFlotante_EditForm.=''.PCO_CargarFormulario("-15",0,"","",1,0);
+
+
+$ContenidoBarraFlotante_EditForm.='
                     <!-- Modal EditorJavascript -->';
                     $ContenidoBarraFlotante_EditForm.=PCO_AbrirDialogoModal("myModalActualizaJAVASCRIPT",$MULTILANG_FrmTitComandos,"modal-wide",0);
                     $ContenidoBarraFlotante_EditForm.='
@@ -2641,6 +2646,36 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                                 </select>
                                 <span class="input-group-addon">
                                     <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_FrmDesNumeroCols.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                </span>
+                            </div>
+						</td>
+					</tr>
+					<tr>
+						<td align=center>
+                            <label for="tipo_maquetacion">'.$MULTILANG_FrmTipoMaquetacion.':</label>
+                            <div class="form-group input-group">
+                                <select id="tipo_maquetacion" name="tipo_maquetacion" class="form-control">';
+                                    $ContenidoBarraFlotante_EditForm.='<option value="tradicional">'.$MULTILANG_FrmTradicional.'</option>';
+
+                                    $estado_seleccion_cols="";
+                                    if ($registro_form["tipo_maquetacion"]=="responsive")
+                                        $estado_seleccion_cols="SELECTED";
+                                    $ContenidoBarraFlotante_EditForm.='<option value="responsive" '.$estado_seleccion_cols.'>Responsive</option>';
+        $ContenidoBarraFlotante_EditForm.='
+                                </select>
+                                <span class="input-group-addon">
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_FrmTipoMaquetacionDes.'"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+                                </span>
+                            </div>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top">
+                            <label for="css_columnas">Clases CSS de columnas:</label>
+                            <div class="form-group input-group">
+                                <textarea name="css_columnas"  class="form-control input-sm" placeholder="Clases CSS o anchos para columnas separados por pipes. Ej: col-xs-2 col-sm-4 col-md-12 col-lg-6 | col-xs-6 col-sm-6 col-md-6 col-lg-6" rows="3">'.$registro_form["css_columnas"].'</textarea>
+                                <span class="input-group-addon">
+                                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="Para maquetacion tipo responsive no sólo puede incluir clases de columna, también puede aplicar clases con estilos gráficos.  Para maquetaciones tipo tabla puede indicar anchos de columna.  En todo caso, si el número de clases indicado es menor al número de columnas del formulario se aplicarán en orden y se tomará el último para aplicar a las columnas restantes."><i class="fa fa-question-circle  fa-fw "></i></a>
                                 </span>
                             </div>
 						</td>
@@ -2816,7 +2851,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 
 			if ($mensaje_error=="")
 				{
-					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."formulario SET titulo=?,ayuda_titulo=?,ayuda_texto=?,tabla_datos=?,columnas=?,javascript=?,borde_visible=?,estilo_pestanas=?,id_html=? WHERE id= ? ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$formulario");
+					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."formulario SET titulo=?,ayuda_titulo=?,ayuda_texto=?,tabla_datos=?,columnas=?,javascript=?,borde_visible=?,estilo_pestanas=?,id_html=?,tipo_maquetacion=?,css_columnas=? WHERE id= ? ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$formulario");
 					PCO_Auditar("Actualiza formulario $formulario para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
@@ -2865,7 +2900,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 
 			if ($mensaje_error=="")
 				{
-					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html");
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas");
 					$id=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 					PCO_Auditar("Crea formulario $id para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
@@ -3239,65 +3274,17 @@ if ($PCO_Accion=="PCO_AdministrarFormularios")
         <form name="datos" id="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="PCO_GuardarFormulario">
 			<input type="Hidden" name="nombre_tabla" value="<?php echo $nombre_tabla; ?>">
-
-
-            <!-- Modal EditorJavascript -->
-            <?php PCO_AbrirDialogoModal("myModalJAVASCRIPT",$MULTILANG_FrmTitComandos,"modal-wide"); ?>
-                      <?php echo $MULTILANG_FrmHlpFunciones; ?>
-                    <div class="well">
-<textarea name="javascript" data-editor="javascript" class="form-control" rows="20" style="width: 800px; height: 450px;">
+            <input type="Hidden" name="javascript" value="
 function FrmAutoRun()
     {
         //Aqui sus instrucciones
-    }
-</textarea>
-                    </div>
-                <?php
-                    $barra_herramientas_modal='
-                        <i class="btn-xs">'.$MULTILANG_FrmHlpFinalFunciones.'</i>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-                    PCO_CerrarDialogoModal($barra_herramientas_modal);
-                ?>
+    }">
 
 <div class="row">
   <div class="col-md-4">
-      
-      
+
 			<?php PCO_AbrirVentana($MULTILANG_FrmAgregar, 'panel-primary'); ?>
-						
 			<h4><?php echo $MULTILANG_FrmDetalles; ?>:</h4>
-
-            <div class="form-group input-group">
-                <span class="input-group-addon"><i class="fa fa-magic fa-fw"></i> </span>
-                <input name="titulo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmTitVen; ?>">
-                <span class="input-group-addon">
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmDesTit; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                </span>
-            </div>
-
-            <div class="form-group input-group">
-                <input name="ayuda_titulo" type="text" class="form-control" placeholder="<?php echo $MULTILANG_FrmHlp; ?>">
-                <span class="input-group-addon">
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmDesHlp; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                </span>
-            </div>
-
-            <div class="form-group input-group">
-                <textarea name="ayuda_texto"  class="form-control" placeholder="<?php echo $MULTILANG_FrmTxt; ?>" rows="3"></textarea>
-                <span class="input-group-addon">
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmDesTxt; ?>: <?php echo $MULTILANG_TblDesNombre; ?>"><i class="fa fa-question-circle  fa-fw "></i></a>
-                </span>
-            </div>
-
-            <div class="form-group input-group">
-                <input name="id_html" value="datos" type="text" class="form-control" placeholder="ID HTML">
-                <span class="input-group-addon">
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmIdHTML; ?>"><i class="fa fa-question-circle fa-fw "></i></a>
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                    <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_FrmNombreHTML; ?>"><i class="fa fa-exclamation-triangle icon-red  fa-fw "></i></a>
-                </span>
-            </div>
 
             <label for="tabla_datos"><?php echo $MULTILANG_TablaDatos; ?>:</label>
             <div class="form-group input-group">
@@ -3317,45 +3304,19 @@ function FrmAutoRun()
                     <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle  fa-fw icon-orange"></i></a>
                 </span>
             </div>
-            <input type="text" name="tabla_datos_manual" class="form-control" placeholder="<?php echo $MULTILANG_InfTablaManual; ?>">
+            <input type="text" name="tabla_datos_manual" class="form-control" placeholder="<?php echo $MULTILANG_InfTablaManual; ?>"><br>
 
-            <label for="columnas"><?php echo $MULTILANG_FrmNumeroCols; ?>:</label>
-            <div class="form-group input-group">
-                <select id="columnas" name="columnas" class="form-control" >
-                    <?php
-                        for ($i=1;$i<=12;$i++)
-                            echo '<option value="'.$i.'">'.$i.'</option>';
-                    ?>
-                </select>
-                <span class="input-group-addon">
-                    <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesNumeroCols; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
-                </span>
-            </div>
-
-            <label for="borde_visible"><?php echo $MULTILANG_FrmBordesVisibles; ?>:</label>
-            <select id="borde_visible" name="borde_visible" class="form-control" >
-                <option value="0"><?php echo $MULTILANG_No; ?></option>
-                <option value="1"><?php echo $MULTILANG_Si; ?></option>
-            </select>
-
-			<label for="estilo_pestanas"><?php echo $MULTILANG_FrmEstiloPestanas; ?>:</label>
-			<select id="estilo_pestanas" name="estilo_pestanas" class="form-control">
-				<option value="nav-tabs"><?php echo $MULTILANG_FrmEstiloTabs; ?></option>
-				<option value="nav-pills"><?php echo $MULTILANG_FrmEstiloPills; ?></option>
-				<option value=""><?php echo $MULTILANG_FrmEstiloOculto; ?></option>
-			</select>
-
+            <?php
+                //PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno_formulario=0)
+	            PCO_CargarFormulario("-15",0,"","",1,0);
+            ?>
             </form>
+            
             <br>
-            <a class="btn btn-primary btn-block" data-toggle="modal" href="#myModalJAVASCRIPT">
-                <div>
-                    <i class="fa fa-file-code-o"></i> <?php echo $MULTILANG_FrmAdvScriptForm; ?>
-                </div>
-            </a>
             <a class="btn btn-success btn-block" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_FrmCreaDisena; ?></a>
             <a class="btn btn-default btn-block" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> <?php echo $MULTILANG_IrEscritorio; ?></a>
-
 		<?php	PCO_CerrarVentana();	?>
+
 
 		<?php PCO_AbrirVentana($MULTILANG_Importar."/".$MULTILANG_Exportar." ($MULTILANG_Avanzado)", 'panel-default'); ?>
             <form name="importacion" id="importacion" action="<?php echo $ArchivoCORE; ?>" method="POST">

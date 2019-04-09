@@ -671,7 +671,10 @@
     $MULTILANG_FrmHuerfanos='अनाथ क्षेत्रों पाए गए हैं (फॉर्म के दृश्य डिजाइन के बाहर)।';
     $MULTILANG_FrmIDHTMDuplicado='डुप्लिकेट डेटाबेस में HTML आईडी या फ़ील्ड नाम वाले फ़ील्ड पाए गए हैं।';
     $MULTILANG_FrmCamposAProposito='ये फ़ील्ड वहां हैं और जेएस गियंस में फॉर्म की कार्यक्षमता को प्रभावित कर सकते हैं या आपके डेटा को प्रोसेस करते समय। यदि आपने उद्देश्य के इस क्षेत्र के फ़ील्ड को उद्देश्य पर जनरेट किया है तो इस संदेश को अनदेखा करें। पाए गए फ़ील्ड हैं:';
-
+    $MULTILANG_FrmTipoMaquetacion='Type of layout';
+    $MULTILANG_FrmTipoMaquetacionDes='Determine how Practico will make multi-column forms. Traditional: use tables and standard columns in HTML. Responsive: use columns based on bootstrap col classes, for which you must specify the class of each in the corresponding fields.';
+    $MULTILANG_FrmTradicional='Traditional';
+    
 	//Informes
 	$MULTILANG_InfErr1='आप कम से कम एक डेटा श्रृंखला के लिए इसी क्षेत्रों के लिए मूल्यों को निर्दिष्ट करना होगा। यदि आप एक ग्राफ उत्पन्न करने के लिए चाहते हैं न तो हिन्दी तो आप डेटा तालिका करने के लिए रिपोर्ट प्रकार में परिवर्तन करना होगा';
 	$MULTILANG_InfErr2='आप रिपोर्ट के लिए एक वैध शीर्षक दर्ज करना होगा.';

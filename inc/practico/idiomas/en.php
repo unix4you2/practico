@@ -671,7 +671,10 @@
     $MULTILANG_FrmHuerfanos='Orphaned fields have been found (outside the visible design of the form).';
     $MULTILANG_FrmIDHTMDuplicado='Fields with HTML ID or field name in database dupicated have been found.';
     $MULTILANG_FrmCamposAProposito='These fields are there and can affect the functionality of the form in JS gions or when processing your data. If you have generated fields of this type of field on purpose then ignore this message. The fields found are:';
-
+    $MULTILANG_FrmTipoMaquetacion='Type of layout';
+    $MULTILANG_FrmTipoMaquetacionDes='Determine how Practico will make multi-column forms. Traditional: use tables and standard columns in HTML. Responsive: use columns based on bootstrap col classes, for which you must specify the class of each in the corresponding fields.';
+    $MULTILANG_FrmTradicional='Traditional';
+    
 	//Informes
 	$MULTILANG_InfErr1='You must specify values ​​for the fields corresponding to at least one data series. <br> If you dont want to generate a graph then you must change the report type to data table';
 	$MULTILANG_InfErr2='You must enter a valid title for the report.';
