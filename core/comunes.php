@@ -6858,6 +6858,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
         // Fin de la generacion de encabezados pestanas
 
         //Genera las pestanas con su contenido
+        $UltimaClaseColumna="";
         if ($conteo_pestanas>0)
             {
                 $consulta_formulario_pestana=   PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
@@ -6921,7 +6922,13 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                     //Define tipo_maquetacion JJJ
                                                     if($registro_formulario["tipo_maquetacion"]=="responsive")
                                                         {
-                                                            echo '<div class="col col-xs-3 col-sm-3 col-md-3 col-lg-3">';
+                                                            //Busca la clase asociada a la columna. Si no hay utiliza la ultima clase definida
+                                                            $ArregloClasesColumnas=explode("|",$registro_formulario["css_columnas"]);
+                                                            $ClaseColumna=$ArregloClasesColumnas[$cl-1];
+                                                            if ($ClaseColumna!="") $UltimaClaseColumna=$ClaseColumna;
+                                                            else $ClaseColumna=$UltimaClaseColumna;
+                                                            //echo $ClaseColumna;
+                                                            echo '<div class="'.$ClaseColumna.'">'; //col col-xs-3 col-sm-3 col-md-3 col-lg-3
                                                         }
                                                     //Define tipo_maquetacion
                                                     if($registro_formulario["tipo_maquetacion"]=="tradicional")
