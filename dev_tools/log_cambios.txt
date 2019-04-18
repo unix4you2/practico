@@ -27,6 +27,7 @@ core/sesion.php
 inc/bootstrap/css/plugins/select/*
 inc/bootstrap/js/plugins/select/*
 mod/pmydb/*
+inc/ace/*
 xml/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
