@@ -26,6 +26,7 @@ core/monitoreo_superior.php
 core/sesion.php
 inc/bootstrap/css/plugins/select/*
 inc/bootstrap/js/plugins/select/*
+mod/pmydb/*
 xml/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
@@ -67,7 +68,9 @@ Funcion enviar_correo cambia a PCO_EnviarCorreo
 * Enhan: [GRAL] Agregado enlace al proyecto SayThanks.
 * Enhan: [GRAL] Agregado enlace al chat de desarrolladores en Gitter para facilitar interacción.
 * Enhan: [GRAL] Limpieza de algunas advertencias para variables de sesion e idioma no definidas.
-* Enhan: [GRAL] Actualizada versión de PMyDB a 19.1 incluyendo entre otras, las siguientes mejoras: automcompletacion de atributos en login, compatibilidad con Clickhouse, SQLite oculta el servidor al login, permitir deshabilitación de campos booleanos en postgresql, permitir almacenar queries en favoritos, permitir agregar más de dos índices en campos foráneaos al tiempo, evitar sobreescribir tablas existentes durante copias, se incremente el login a maximo 80 caracteres, permite que las tablas se puedan desplazar horizontalmente, corrige índices descendentes, reconoce disparadores ON UPDATE en funciones current_timestamp()
+* Enhan: [GRAL] Actualizada versión de PMyDB a 19.1 incluyendo entre otras, las siguientes mejoras: automcompletacion de atributos en login, compatibilidad con Clickhouse, SQLite oculta el servidor al login, permitir deshabilitación de campos booleanos en postgresql, permitir almacenar queries en favoritos, permitir agregar más de dos índices en campos foráneaos al tiempo, evitar sobreescribir tablas existentes durante copias, se incremente el login a maximo 80 caracteres, permite que las tablas se puedan desplazar horizontalmente, corrige índices descendentes, reconoce disparadores ON UPDATE en funciones current_timestamp(), otros.
+* Enhan: [GRAL] Actualizada versión de PCoder a 19.2 incluyendo entre otras, las siguientes mejoras: agregados atajos de teclas de sublime, agregada la opción de rtl, corregidas las opciones de regrsión para vim, mejorada la captura de eventos de teclado para internet explorer y ipads, nuevos elementos de resaltado de sintaxis, se remueve el uso de innerhtml, se agrega soporte para números de líneas relativas, se mejora el sistema de popups de autocompletacion, se usa css para la animación del cursor, otros.
+* Enhan: [GRAL] Se eliminan pruebas automatizadas de Travis para la máquina HHVM
 * Enhan: [VIEW] Ajustes a presentacion de imagenes de fondo
 * Enhan: [VIEW] Actualizacion del logo de plataforma
 * Fixed: [FORMS] Cuando se trate de campos no existentes dentro de la base de datos asociada al formulario, no se intentará hacer una carga del dato desde el registro pues siempre será vacío.
