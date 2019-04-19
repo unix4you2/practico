@@ -574,3 +574,15 @@ CREATE TABLE core_tabla_comodin (
   id INTEGER PRIMARY KEY AUTOINCREMENT
 
 );
+
+DROP TABLE IF EXISTS core_tareascron;
+CREATE TABLE core_tareascron (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  fecha_creacion text,
+  codigo_tarea text,
+  titulo text,
+  script_php text,
+  habilitado integer,
+  historial_ejecucion text
+
+);

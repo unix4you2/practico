@@ -565,3 +565,15 @@ CREATE TABLE core_tabla_comodin (
   id int(10) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS core_tareascron;
+CREATE TABLE core_tareascron (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  titulo varchar(255),
+  fecha_creacion date,
+  codigo_tarea varchar(255),
+  script_php text,
+  habilitado int(1),
+  historial_ejecucion text,
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

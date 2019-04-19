@@ -57,6 +57,7 @@ Funcion enviar_correo cambia a PCO_EnviarCorreo
 * Added: [FORMS] Para cada columna de formulario se permite definir su clase para aplicación de estilos CSS y responsive.  Cuando el número de clases especificadas es menor al número de columnas éstas serán aplicadas en orden y la última será utilizada para aplicar a las columnas restantes permitiendo definir una sola cadena de clases para formularios con múltiples columnas.
 * Added: [MONIT] Los monitores tipo máquina sobre el sistema de monitoreo soportan ahora un modo Ultra compacto que consume sólo una unidad de la rejilla; pero que se expande automáticamente a modo compacto cuando el monitor está caído para facilitar su visualización.
 * Added: [MONIT] El sistema de monitoreo permite intercambiar entre pantallas fullscreen o normal mediante botón en su barra superior.
+* Added: [CRON] Agregado modulo que permite generar planificacion de tareas.
 * Fixed: [MONIT] Error de tipado en variable de página recurrente.
 * Enhan: [FORMS] Llamado de funciones personalizadas u bjetos internos desde formularios se hace ahora a través de la función de validación de campos de formularios para unificar su uso con los botones de almacenamiento y actualización de datos.
 * Enhan: [FORMS] Automáticamente en cada llamado al framework se hace la reasignación de variables que provienen de listas múltiples a sus variables estandar para su uso de manera tradicional.
@@ -79,9 +80,6 @@ Funcion enviar_correo cambia a PCO_EnviarCorreo
 * Enhan: [INFORMES] Ampliada la longitud del campo de descripcion para los informes.
 * Added: [SESION] Ahora por defecto la autenticacion de la plataforma se hace mediante comparacion directa con las tablas de sistema.  Si se desea activar el modo heredado o anterior de servicios web internos se puede utilizar la variable Auth_MotorWS=1 en el archivo de configuracion
 
-
-Frances ÀàÂâÆæÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜüŸÿ
-Portugues: ÁáÀàÂâÃãÉéÊêÍíÓóÔôÕõÚú
 "
 
 ########################################################################
@@ -161,6 +159,18 @@ ALTER TABLE core_informe CHANGE descripcion descripcion text;
 
 ALTER TABLE core_formulario ADD tipo_maquetacion varchar(11) NULL DEFAULT 'tradicional';
 ALTER TABLE core_formulario ADD css_columnas text;
+
+DROP TABLE IF EXISTS core_tareascron;
+CREATE TABLE core_tareascron (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  titulo varchar(255),
+  fecha_creacion date,
+  codigo_tarea varchar(255),
+  script_php text,
+  habilitado int(1),
+  historial_ejecucion text,
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 "
 

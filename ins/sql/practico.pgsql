@@ -564,3 +564,15 @@ CREATE TABLE core_tabla_comodin (
   id serial,
   PRIMARY KEY (id)
 );
+
+DROP TABLE IF EXISTS core_tareascron;
+CREATE TABLE core_tareascron (
+  id serial,
+  fecha_creacion date,
+  codigo_tarea varchar(255),
+  titulo varchar(255),
+  script_php text,
+  habilitado int(1),
+  historial_ejecucion text,
+  PRIMARY KEY (id)
+);

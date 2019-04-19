@@ -535,6 +535,7 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_pestanas','nav-pills','{$MULTILANG_FrmEstiloPills}',2);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_pestanas','','{$MULTILANG_FrmEstiloOculto}',3);
 
+
 DROP TABLE IF EXISTS core_bugtracker;
 CREATE TABLE core_bugtracker (
   id int(10) NOT NULL AUTO_INCREMENT,
@@ -562,5 +563,17 @@ CREATE TABLE core_bugtracker (
 DROP TABLE IF EXISTS core_tabla_comodin;
 CREATE TABLE core_tabla_comodin (
   id int(10) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS core_tareascron;
+CREATE TABLE core_tareascron (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  fecha_creacion date,
+  fecha_actualizacion datetime,
+  titulo varchar(255),
+  script_php text,
+  habilitado int(1),
+  historial_ejecucion text,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
