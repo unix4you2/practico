@@ -1389,3 +1389,12 @@
     $MULTILANG_PWAAutorizarMIC='Solicitar autorizaci&oacute;n para dispositivo de audio (MICROFONO)';
     $MULTILANG_PWAOcultarBarrasExtra='Ocultar barras de navegacion a usuarios estandar?';
     $MULTILANG_PWAOcultarBarrasExtraDes='Permite ahorrar espacio para la aplicacion de escritoio o movil mediante el ocultamiento de dichos elementos.  Aplica solo para usuarios estandar (no disenadores).  El desarrollador deberia garantizar acceso a ciertas funcionalidades ocultas de la barra mediante controles propios pues el usuario ya no podra verlos en las opciones por defecto, como por ejemplo el cierre de sesion entre otros.';
+    
+    //Planificador de tareas
+    $MULTILANG_CronTitulo='Planificador de tareas';
+    $MULTILANG_CronComando='Comando cron';
+    $MULTILANG_CronComando='URL absoluta';
+    $MULTILANG_CronPlanificacion='Tipo de planificaci&oacute;n';
+    $MULTILANG_CronAyuda='Puede programar la ejecuci&oacute;n de su tarea programada mediante el demonio cron y el comando indicado o el uso de herramientas externas gratuitas como CloudScheduler de GCP y la URL absoluta indicada. Recuerde no revelar el c&oacute;digo de seguridad o la ejecuci&oacute;n de la tarea podria ser realizada por cualquiera que lo conozca.';
+
+    

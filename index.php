@@ -263,7 +263,8 @@
         { include "core/mantenimiento.php";  include "inc/practico_se/core/mantenimiento.php"; }
     if ($PCO_Accion=="EliminarTableroKanban" || $PCO_Accion=="GuardarCreacionKanban" || $PCO_Accion=="VerTareasArchivadas" || $PCO_Accion=="ArchivarTareaKanban" || $PCO_Accion=="PCO_ExplorarTablerosKanban" || $PCO_Accion=="GuardarTareaKanban" || $PCO_Accion=="EliminarTareaKanban" || $PCO_Accion=="GuardarPersonalizacionKanban")
         { include "core/kanban.php";  include "inc/practico_se/core/kanban.php"; }
-
+    if ($PCO_Accion=="PCO_EjecutarCron")
+        { include "core/cron.php";  include "inc/practico_se/core/cron.php"; }
 
 /* ################################################################## */
     // Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios. Incluye compatibilidad hacia atras en personalizadas.php

@@ -1377,3 +1377,10 @@
     $MULTILANG_PWAAutorizarMIC='Request authorization to use audio device (MICROPHONE)';
     $MULTILANG_PWAOcultarBarrasExtra='Hide navigation bars to standard users?';
     $MULTILANG_PWAOcultarBarrasExtraDes='It saves space for the application of writing or mobile. Applies only to standard users (non-designers). The developer should guarantee access to certain hidden functions of the bar by means of its own controls, such as, for example, session closing, among others.';
+    
+    //Planificador de tareas
+    $MULTILANG_CronTitulo='Task scheduler';
+    $MULTILANG_CronComando='Cron command';
+    $MULTILANG_CronComando='Absolute URL';
+    $MULTILANG_CronPlanificacion='Type of schedule';
+    $MULTILANG_CronAyuda='You can schedule the execution of your scheduled task using the cron daemon and the indicated command or the use of free external tools such as GCP CloudScheduler and the indicated absolute URL. Remember not to disclose the safety code or the execution of the task could be done by anyone who knows it.';

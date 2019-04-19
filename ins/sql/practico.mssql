@@ -534,6 +534,25 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_pestanas','nav-tabs','{$MULTILANG_FrmEstiloTabs}',1);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_pestanas','nav-pills','{$MULTILANG_FrmEstiloPills}',2);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_pestanas','','{$MULTILANG_FrmEstiloOculto}',3);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'_OPTGROUP_|Planificacion simple / Simple schedule',	'',	1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'@reboot',	'Al inicio del sistema / At system boot',	2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'@annually',	'Una vez al ano / Once per year',	3);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'@monthly',	'Una vez al mes / Once per month',	4);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'@weekly',	'Una vez a la semana / Once per week',	5);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'@daily',	'Una vez al dia / Once per day',	6);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'@hourly',	'Una vez por hora / Once per hour',	7);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'_OPTGROUP_',	'',	8);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'_OPTGROUP_|Ejemplos de otras combinaciones / Other schedules examples',	'',	9);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'15 10 * * *',	'Diario a las 10:15 AM / Daily at 10:15 AM',	10);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'15 22 * * *',	'Diario a las 10:15 PM / Daily at 10:15 PM',	11);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'00 10 * * 0',	'Domingos a las 10:00 AM / Sundays at 10:00 AM',	12);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'30 7 20 11 *',	'Noviembre 20 a las 7:30 AM / November 20th 7:30AM',	13);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'01 * * * *',	'Cada minuto / Each minute',	14);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'_OPTGROUP_',	'',	15);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'_OPTGROUP_|Ejemplos de uso de rangos / Interval examples',	'',	16);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'30 17 * * 1,2,3,4,5',	'De lunes a viernes, 5:30 PM / Lun-Fri 5:30PM',	17);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'00 12 1,15 * *',	'Dias 1 y 15 a las 12M / Days 1 and 5 at 12M',	18);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'_OPTGROUP_',	'',	19);
 
 
 DROP TABLE IF EXISTS core_bugtracker;
@@ -569,9 +588,9 @@ CREATE TABLE core_tabla_comodin (
 DROP TABLE IF EXISTS core_tareascron;
 CREATE TABLE core_tareascron (
   id int(10) NOT NULL AUTO_INCREMENT,
-  fecha_creacion date,
-  fecha_actualizacion datetime,
   titulo varchar(255),
+  fecha_creacion date,
+  codigo_tarea varchar(255),
   script_php text,
   habilitado int(1),
   historial_ejecucion text,
