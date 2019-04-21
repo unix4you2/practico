@@ -4,3 +4,4 @@ practico.sqlite3
 core/configuracion.php
 mod/colmedicos_sgsst/*
 mod/couch
+inc/practico_se/*

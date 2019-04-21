@@ -1737,7 +1737,8 @@ function PCO_CallBack_ReemplazarVariablesPHPEnCadena($ocurrencia)
         //Declara la variable como global, pues no se sabe qué variable y en qué ambito se encuentra
         global ${$ocurrencia[1]};
         //Obtiene el valor de la variable
-        return eval('return $' . $ocurrencia[1] . ';');
+        //return eval('return $' . $ocurrencia[1] . ';');  //Funcion eval reemplazada por seguridad
+        return ${$ocurrencia[1]};
 	}
 
 
