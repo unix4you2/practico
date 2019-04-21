@@ -46,12 +46,6 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-*IMPORTANTE:*  Quienes actualizan desde versiones 18.8 requiere que se aplique a éstas el último parche de actualización de dicha versión (Practico_18.8-Actualizacion_002) que las convierte a versión 18.9.
-
-LEAME: ADVERTENCIA: Para quienes actualizan desde versiones previas con el fin de evitar colisiones y estandarizar la llamada de acciones internas, las siguientes acciones han cambiado de nombre:
-Accion autenticacion_oauth cambia a PCO_AutenticacionOauth  Esto puede implicar cambiar sus API de redireccion con los proveedores asociados.
-Funcion enviar_correo cambia a PCO_EnviarCorreo
-
 * Added: [FORMS] La personalizacion de tags soporta ahora parámetros que requieran espacios encerrados por comillas dobles.
 * Added: [FORMS] Controles de tipo checkbox convertidos a boton tipo toggle mediante personalización de Tag soportan ahora traducción de variables en notacion PHP {$} para multiples idiomas y otros usos.
 * Added: [FORMS] Durante la adicion de formularios embebidos se permite realizar busqueda sobre la lista para proyectos con gran cantidad de formularios.

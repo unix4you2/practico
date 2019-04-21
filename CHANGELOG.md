@@ -7,6 +7,41 @@
             |___/ 
 ```
 
+## Versión 19.2 (2019-02-01)
+
+* Added: [FORMS] La personalizacion de tags soporta ahora parámetros que requieran espacios encerrados por comillas dobles.
+* Added: [FORMS] Controles de tipo checkbox convertidos a boton tipo toggle mediante personalización de Tag soportan ahora traducción de variables en notacion PHP {$} para multiples idiomas y otros usos.
+* Added: [FORMS] Durante la adicion de formularios embebidos se permite realizar busqueda sobre la lista para proyectos con gran cantidad de formularios.
+* Added: [FORMS] Ahora se permite establecer el tipo de maquetacion para columnas de formularios como tradicional (Tablas HTML) o responsive (Cols de bootstrap) lo que permite hcaer más fluido y responsive el contenido diagramado para ciertos dispositivos.  Esto permitirá convertir de manera automática maquetaciones tradicionales a otras más fluidas y responsives.
+* Added: [FORMS] Para cada columna de formulario se permite definir su clase para aplicación de estilos CSS y responsive.  Cuando el número de clases especificadas es menor al número de columnas éstas serán aplicadas en orden y la última será utilizada para aplicar a las columnas restantes permitiendo definir una sola cadena de clases para formularios con múltiples columnas.
+* Added: [MONIT] Los monitores tipo máquina sobre el sistema de monitoreo soportan ahora un modo Ultra compacto que consume sólo una unidad de la rejilla; pero que se expande automáticamente a modo compacto cuando el monitor está caído para facilitar su visualización.
+* Added: [MONIT] El sistema de monitoreo permite intercambiar entre pantallas fullscreen o normal mediante botón en su barra superior.
+* Added: [CRON] Agregado modulo que permite generar planificacion de tareas.
+* Fixed: [MONIT] Error de tipado en variable de página recurrente.
+* Enhan: [FORMS] Llamado de funciones personalizadas u bjetos internos desde formularios se hace ahora a través de la función de validación de campos de formularios para unificar su uso con los botones de almacenamiento y actualización de datos.
+* Enhan: [FORMS] Automáticamente en cada llamado al framework se hace la reasignación de variables que provienen de listas múltiples a sus variables estandar para su uso de manera tradicional.
+* Enhan: [FORMS] La opción para definición de scripts de un formulario es elimnada desde su creación.  Esto ahorra espacio en diseño; pero seguirá estando disponible a través del diseño detallado de formulario pues una vez creado es que generalmente se definen comportamientos extra.
+* Enhan: [FORMS] Mejorada aun mas la velocidad de carga de los controles tipo lista bajo version 1.6.5 haciendo render anticipado del control.
+* Enhan: [FORMS] Reducción de código en módulo de formularios por cambio a formulario dinámico
+* Enhan: [LIBS]  Cambio de version en libreria select-boostrap de  version 1.12.4 a 1.6.5
+* Enhan: [LIBS] Se valida la previa instalacion/disponibilidad de la extension mbstring de PHP sobre el servidor.
+* Enhan: [AUDIT] Redistribucion de elementos en auditoria.
+* Added: [AUDIT] Posibilidad de hacer seguimiento a eventos de tareas programadas bajo el usuario PCO.Cron
+* Added: [GRAL] Agregada nueva funcion PCO_EvaluarCodigo permite reemplazar funciones inseguras eval de PHP mediante la generación de archivos temporales de inclusión de código.  Se depura todo el codigo de aplicacion reemplazando el uso de la funcion eval por otras alternativas.
+* Enhan: [GRAL] Agregado enlace al proyecto SayThanks.
+* Enhan: [GRAL] Agregado enlace al chat de desarrolladores en Gitter para facilitar interacción.
+* Enhan: [GRAL] Limpieza de algunas advertencias para variables de sesion e idioma no definidas.
+* Enhan: [GRAL] Actualizada versión de PMyDB a 19.1 incluyendo entre otras, las siguientes mejoras: automcompletacion de atributos en login, compatibilidad con Clickhouse, SQLite oculta el servidor al login, permitir deshabilitación de campos booleanos en postgresql, permitir almacenar queries en favoritos, permitir agregar más de dos índices en campos foráneaos al tiempo, evitar sobreescribir tablas existentes durante copias, se incremente el login a maximo 80 caracteres, permite que las tablas se puedan desplazar horizontalmente, corrige índices descendentes, reconoce disparadores ON UPDATE en funciones current_timestamp(), otros.
+* Enhan: [GRAL] Actualizada versión de PCoder a 19.2 incluyendo entre otras, las siguientes mejoras: agregados atajos de teclas de sublime, agregada la opción de rtl, corregidas las opciones de regrsión para vim, mejorada la captura de eventos de teclado para internet explorer y ipads, nuevos elementos de resaltado de sintaxis, se remueve el uso de innerhtml, se agrega soporte para números de líneas relativas, se mejora el sistema de popups de autocompletacion, se usa css para la animación del cursor, otros.
+* Enhan: [GRAL] Se eliminan pruebas automatizadas de Travis para la máquina HHVM
+* Enhan: [GRAL] Se eliminan modulos adicionales de gestor embebido de servidores LDAP y modulo de ejemplo de Social Parser de Práctico.  En adelante quien lo requiera lo podrá agregar manualmente utilizando sus fuentes sobre /dep ahorrando así mas de 4.5 MB de codigo en mas de 6100 archivos.
+* Enhan: [VIEW] Ajustes a presentacion de imagenes de fondo
+* Enhan: [VIEW] Actualizacion del logo de plataforma
+* Fixed: [FORMS] Cuando se trate de campos no existentes dentro de la base de datos asociada al formulario, no se intentará hacer una carga del dato desde el registro pues siempre será vacío.
+* Fixed: [INFORMES] Asignacion automática de formularios de filtrado derivados del mismo ID de informe.
+* Enhan: [INFORMES] Ampliada la longitud del campo de descripcion para los informes.
+* Added: [SESION] Ahora por defecto la autenticacion de la plataforma se hace mediante comparacion directa con las tablas de sistema.  Si se desea activar el modo heredado o anterior de servicios web internos se puede utilizar la variable Auth_MotorWS=1 en el archivo de configuracion
+
 
 ## Versión 19.1 (2018-10-28)
 *IMPORTANTE:*  Quienes actualizan desde versiones 18.8 requiere que se aplique a éstas el último parche de actualización de dicha versión (Practico_18.8-Actualizacion_002) que las convierte a versión 18.9.
