@@ -153,6 +153,15 @@
 						</li>
 						<li class="divider"></li>
 						<li>
+							<a data-toggle="modal" href="javascript:document.PCO_VerTareasCron.submit();">
+								<div>
+									<i class="fa fa-clock-o fa-fw"></i> <?php echo $MULTILANG_CronTitulo; ?>
+									<span class="pull-right text-muted small"><?php echo PCO_ContarRegistrosTabla($TablasCore."tareascron",""); ?></span>
+								</div>
+							</a>
+						</li>
+						<li class="divider"></li>
+						<li>
 							<a data-toggle="modal" href="javascript:document.PCO_VerReplicaciones.submit();">
 								<div>
 									<i class="fa fa-cubes fa-fw"></i> <?php echo $MULTILANG_ReplicaTitulo; ?>

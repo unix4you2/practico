@@ -30,6 +30,30 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: PCO_EvaluarCodigo
+	Ejecuta codigo PHP recibido dentro de una cadena.  Reemplazo para la funcion eval que pasa a ser obsoleta por seguridad
+	
+	Variables de entrada:
+
+		CadenaCodigoPHP - Cadena con todo el codigo a evaluar TIENE que comenzar con el tag <?php si se desea interpretar
+
+	Salida:
+		Evaluacion y ejecucion del codigo correspondiente mediante la inclusion de un archivo temporal con su contenido
+*/
+function PCO_EvaluarCodigo($CadenaCodigoPHP) {
+    $ArchivoInclusionTemporal = tmpfile(); //Crea un archivo temporal
+    $MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
+    $RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
+    fwrite ( $ArchivoInclusionTemporal, $CadenaCodigoPHP );
+    $ResultadoInclusion = include ($RutaArchivoTemporal);
+    fclose ( $ArchivoInclusionTemporal );
+    return $ResultadoInclusion;
+}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: PCO_ImprimirOpcionMenu
 	Imprime en pantalla una opcion de menu, de acuerdo a su configuracion recibida en el registro y la ubicacion definida.
 	

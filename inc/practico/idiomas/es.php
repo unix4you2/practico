@@ -1395,6 +1395,4 @@
     $MULTILANG_CronComando='Comando cron';
     $MULTILANG_CronComando='URL absoluta';
     $MULTILANG_CronPlanificacion='Tipo de planificaci&oacute;n';
-    $MULTILANG_CronAyuda='Puede programar la ejecuci&oacute;n de su tarea programada mediante el demonio cron y el comando indicado o el uso de herramientas externas gratuitas como CloudScheduler de GCP y la URL absoluta indicada. Recuerde no revelar el c&oacute;digo de seguridad o la ejecuci&oacute;n de la tarea podria ser realizada por cualquiera que lo conozca.';
-
-    
+    $MULTILANG_CronAyuda='Puede programar la ejecuci&oacute;n de su tarea mediante el demonio cron de su sistema operativo y el comando correspondiente o mediante el uso de herramientas externas gratuitas como CloudScheduler de GCP y la URL absoluta indicada. Recuerde no revelar el c&oacute;digo de tarea pues su ejecuci&oacute;n podria ser realizada por cualquiera que lo conozca, lo que a su vez puede ser &uacute;til para la creaci&oacute;n de tareas totalmente p&uacute;blicas con ejecuci&oacute;n sin control de usuario, llaves o similares.';

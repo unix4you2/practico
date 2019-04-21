@@ -102,6 +102,10 @@
 	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
 	<input type="Hidden" name="PCO_Objeto" value="frm:-4:1">
 </form>
+<form name="PCO_VerTareasCron"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
+	<input type="Hidden" name="PCO_Objeto" value="frm:-16:1">
+</form>
 <form name="PCO_VerReplicaciones"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
 	<input type="Hidden" name="PCO_Objeto" value="frm:-10:1">

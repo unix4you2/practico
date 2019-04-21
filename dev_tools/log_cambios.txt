@@ -21,6 +21,7 @@ core/formularios.php
 core/marco_abajo.php
 core/marco_arriba.php
 core/marco_arriba_bs.php
+core/marco_forms.php
 core/marco_nav.php
 core/monitoreo.php
 core/monitoreo_superior.php
@@ -68,6 +69,7 @@ Funcion enviar_correo cambia a PCO_EnviarCorreo
 * Enhan: [LIBS]  Cambio de version en libreria select-boostrap de  version 1.12.4 a 1.6.5
 * Enhan: [LIBS] Se valida la previa instalacion/disponibilidad de la extension mbstring de PHP sobre el servidor.
 * Enhan: [AUDIT] Redistribucion de elementos en auditoria.
+* Added: [AUDIT] Posibilidad de hacer seguimiento a eventos de tareas programadas bajo el usuario PCO.Cron
 * Enhan: [GRAL] Agregado enlace al proyecto SayThanks.
 * Enhan: [GRAL] Agregado enlace al chat de desarrolladores en Gitter para facilitar interacción.
 * Enhan: [GRAL] Limpieza de algunas advertencias para variables de sesion e idioma no definidas.
