@@ -3302,6 +3302,7 @@ function FrmAutoRun()
                 </select>
                 <span class="input-group-addon">
                     <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle  fa-fw icon-orange"></i></a>
+                    <a  href="#" data-toggle="tooltip" data-html="true"  title="Puede usar la tabla manual llamada core_tabla_comodin si no necesita asociar una tabla / You can use a manual table called core_tabla_comodin if you dont need to associate a table to this form. "><i class="fa fa-question-circle  fa-fw icon-blue"></i></a>
                 </span>
             </div>
             <input type="text" name="tabla_datos_manual" class="form-control" placeholder="<?php echo $MULTILANG_InfTablaManual; ?>"><br>
