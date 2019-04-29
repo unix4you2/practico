@@ -1703,9 +1703,22 @@ function PCO_ManejadorErrores($DetalleExcepcion)
 function PCO_BuscarErroresSintaxisPHP($ArchivoFuente)
     {
 		//Hace el proceso de verificacion solamente en plataformas diferentes a Windows.  Windows no lo permite a menos que se especifique el path completo de PHP
-		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
+		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' || strtoupper(PHP_OS) === 'FREEBSD' || strtoupper(PHP_OS) === 'OPENBSD')
 			{
 				//Se omite verificacion de sintaxis
+				/*Otros posibles hosts
+				CYGWIN_NT-5.1
+                Darwin
+                FreeBSD
+                HP-UX
+                IRIX64
+                Linux
+                NetBSD
+                OpenBSD
+                SunOS
+                Unix
+				*/
+				
 				return 0;
 			}
 		else

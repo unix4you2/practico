@@ -1,9 +1,12 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# VAGRANT PARA PEREZOSOS  1) apt install vagrant   2) git clone https://github.com/unix4you2/practico   3) cd practico
+# ADICION MANUAL DE CAJA  4) vagrant box add CentOS7_Practico https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.1/vagrant-centos-7.1.box
+# EJECUCION DE LA CAJA    5) vagrant up 
+
 Vagrant.configure("2") do |config|
 
-  #Caja utilizada:  vagrant box add CentOS7_Practico https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.1/vagrant-centos-7.1.box 
   config.vm.box = "CentOS7_Practico"
 
   # Redireccion del puerto apache en la VM para su uso local sobre el puerto 81 del anfitrion

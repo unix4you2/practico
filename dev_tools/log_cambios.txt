@@ -32,7 +32,8 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-
+ENHAN: Se evita rutinas de chequeo de sintaxis en sistemas FreeBSD
+ENHAN: Ayudas de uso extra para entornos de desarrollo en Vagrant
 "
 
 ########################################################################
