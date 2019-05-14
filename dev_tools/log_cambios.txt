@@ -32,6 +32,9 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+ADDED: Se ha cambiado la libreria por defecto para la generación de gráficos de Morris 0.5.1 (Olly Smith) a su versión mejorada 0.6.2 (mantenida por @pierresh) permitiendo otras variedades de gráficos, etiquetas y demás.  Es posible experimentar algunos cambios en color de gráfico pero esto no altera su presentación, maquetación o representación de datos.
+ENHAN: Actualizada versión de Rapahel de Dmitry Baranovskiy a 2.2.8
+ENHAN: Agregada librería Regression 1.4.0 de Tom Alexander para soportar nuevos tipos de gráfico sobre Morris (líneas de tendencia polinomiales, logarítimcas y exponenciales)
 ENHAN: Se evita rutinas de chequeo de sintaxis en sistemas FreeBSD
 ENHAN: Ayudas de uso extra para entornos de desarrollo en Vagrant
 "

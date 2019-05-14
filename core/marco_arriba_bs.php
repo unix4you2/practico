@@ -83,7 +83,7 @@
 
     <!-- CSS Plugins BootStrap -->
     <link href="inc/bootstrap/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-    <link href="inc/bootstrap/css/plugins/morris.css" rel="stylesheet">
+    <link href="inc/bootstrap/css/plugins/morris.css?<?php echo filemtime('inc/bootstrap/css/plugins/morris.css'); ?>" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/timeline.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/slider/slider.css" rel="stylesheet">
@@ -149,8 +149,9 @@
     <script type="text/javascript" src="inc/bootstrap/js/plugins/toggle/bootstrap-toggle.min.js"></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="inc/bootstrap/js/plugins/morris/raphael.min.js"></script>
-    <script src="inc/bootstrap/js/plugins/morris/morris.min.js"></script>
+    <script src="inc/bootstrap/js/plugins/morris/raphael.min.js?<?php echo filemtime('inc/bootstrap/js/plugins/morris/raphael.min.js'); ?>"></script>
+    <script src="inc/bootstrap/js/plugins/morris/regression.min.js?<?php echo filemtime('inc/bootstrap/js/plugins/morris/regression.min.js'); ?>"></script>
+    <script src="inc/bootstrap/js/plugins/morris/morris.min.js?<?php echo filemtime('inc/bootstrap/js/plugins/morris/morris.min.js'); ?>"></script>
     <?php
         // Agrega soporte para PWA si aplica
         if ($PWA_Activa=="1")
