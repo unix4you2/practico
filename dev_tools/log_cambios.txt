@@ -37,6 +37,7 @@ ENHAN: Actualizada versión de Rapahel de Dmitry Baranovskiy a 2.2.8
 ENHAN: Agregada librería Regression 1.4.0 de Tom Alexander para soportar nuevos tipos de gráfico sobre Morris (líneas de tendencia polinomiales, logarítimcas y exponenciales)
 ENHAN: Se evita rutinas de chequeo de sintaxis en sistemas FreeBSD
 ENHAN: Ayudas de uso extra para entornos de desarrollo en Vagrant
+ADDED: Posibilidad de importar automaticamente scripts de ejecucion única de PHP sobre la carpeta xml/ donde se almacenan las definiciones de archivos que se corren una unica vez en procesos de actualización de framework.
 "
 
 ########################################################################

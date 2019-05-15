@@ -565,6 +565,38 @@ function PCO_ImportarDefinicionesXML()
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: PCO_ImportarScriptsPHP
+	Busca definiciones de scripts PHP almacenadas sobre xml/ (carpeta del sistema para importar elementos y ejecuta cada uno automaticamente durante cada cargue de pagina por algun usuario disenador de aplicacion.
+
+	Salida:
+	
+		Ejecucion automatica de los scripts residentes y renombrado de los mismos para evitar su posterior ejecucion
+*/
+function PCO_ImportarScriptsPHP()
+    {
+        global $PCO_FechaOperacion,$PCO_HoraOperacion;
+        $ArregloElementos = array();
+        //Obtiene lista de archivos en xml/ para ser ejecutados
+        $DirectorioScripts = dir("xml/");
+        while (false !== ($ArchivoPHP = $DirectorioScripts->read()))
+            if(strtolower(substr($ArchivoPHP, -4))==".php") //Considera solo los PHP
+                $ArregloElementos[]=$ArchivoPHP;
+        $DirectorioScripts->close();
+
+        //Por cada archivo ejecuta el proceso de ejecucion correspondiente
+        foreach ($ArregloElementos as $ArchivoPHP)
+            { 
+                //Incluye el codigo
+                include_once("xml/".$ArchivoPHP);
+                //Una vez procesado el archivo lo renombra para no ser ejecutado mas
+                rename("xml/".$ArchivoPHP, "xml/".$ArchivoPHP.".Run_".$PCO_FechaOperacion."-".$PCO_HoraOperacion);
+            }
+    }
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: PCO_ExportarDefinicionesXML
 	Exporta masivamente a XML las definiciones de elementos de un tipo dado
 
