@@ -816,7 +816,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
 								$CadenaInterrogantes.=',?';
 								//Cadena de valores (el campo No 5 corresponde al ID de formulario nuevo)
 								if ($PCOCampo!=5)
-									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_formulario_objeto[$PCO_i]->$ArregloCampos[$PCOCampo]);
+									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_formulario_objeto[$PCO_i]->{$ArregloCampos[$PCOCampo]});
 								else
 									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 							}
@@ -859,7 +859,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
 								$CadenaInterrogantes.=',?';
 								//Cadena de valores (el campo No 2 corresponde al ID de formulario nuevo)
 								if ($PCOCampo!=2)
-									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_formulario_boton[$PCO_i]->$ArregloCampos[$PCOCampo]);
+									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_formulario_boton[$PCO_i]->{$ArregloCampos[$PCOCampo]});
 								else
 									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 							}
@@ -883,7 +883,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
 								$CadenaInterrogantes.=',?';
 								//Cadena de valores (el campo No 2 corresponde al ID de formulario nuevo)
 								if ($PCOCampo!=16)
-									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_menu[$PCO_i]->$ArregloCampos[$PCOCampo]);
+									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_menu[$PCO_i]->{$ArregloCampos[$PCOCampo]});
 								else
 									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 							}
@@ -1273,7 +1273,7 @@ function PCO_ImportarXMLInforme($xml_importado)
 								$CadenaInterrogantes.=',?';
 								//Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
 								if ($PCOCampo!=0)
-									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_informe_condiciones[$PCO_i]->$ArregloCampos[$PCOCampo]);
+									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_informe_condiciones[$PCO_i]->{$ArregloCampos[$PCOCampo]});
 								else
 									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 							}
@@ -1297,7 +1297,7 @@ function PCO_ImportarXMLInforme($xml_importado)
 								$CadenaInterrogantes.=',?';
 								//Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
 								if ($PCOCampo!=0)
-									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_informe_tablas[$PCO_i]->$ArregloCampos[$PCOCampo]);
+									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_informe_tablas[$PCO_i]->{$ArregloCampos[$PCOCampo]});
 								else
 									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 							}
@@ -1321,7 +1321,7 @@ function PCO_ImportarXMLInforme($xml_importado)
 								$CadenaInterrogantes.=',?';
 								//Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
 								if ($PCOCampo!=0)
-									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_informe_campos[$PCO_i]->$ArregloCampos[$PCOCampo]);
+									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_informe_campos[$PCO_i]->{$ArregloCampos[$PCOCampo]});
 								else
 									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 							}
@@ -1345,7 +1345,7 @@ function PCO_ImportarXMLInforme($xml_importado)
 								$CadenaInterrogantes.=',?';
 								//Cadena de valores (el campo No 0 corresponde al ID de informe nuevo)
 								if ($PCOCampo!=2)
-									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_informe_boton[$PCO_i]->$ArregloCampos[$PCOCampo]);
+									$CadenaValores.=$_SeparadorCampos_.base64_decode($xml_importado->core_informe_boton[$PCO_i]->{$ArregloCampos[$PCOCampo]});
 								else
 									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 							}

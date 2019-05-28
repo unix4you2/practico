@@ -17,6 +17,7 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/formularios.php
+core/informes.php
 xml/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
@@ -38,6 +39,9 @@ ENHAN: Agregada librería Regression 1.4.0 de Tom Alexander para soportar nuevos
 ENHAN: Se evita rutinas de chequeo de sintaxis en sistemas FreeBSD
 ENHAN: Ayudas de uso extra para entornos de desarrollo en Vagrant
 ADDED: Posibilidad de importar automaticamente scripts de ejecucion única de PHP sobre la carpeta xml/ donde se almacenan las definiciones de archivos que se corren una unica vez en procesos de actualización de framework.
+FIXED: Eliminado cierre de sesion que impedía los inicios de sesion en servidores windows y fedora debido a un no mantenimiento de la sesion activa por parte del servidor web.
+FIXED: actualización a Pcoder en Asignacion de variables tipo variables compatible con versiones nuevas de PHP
+Fixed: Ajustada la sintaxis en procesos de importacion de definiciones XML para sistemas windows que impedían retornar los valores de manera adecuada al revisar los nodos generados por SimpleXML
 "
 
 ########################################################################

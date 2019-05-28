@@ -72,7 +72,6 @@
 					if ($uid_orig==$uid && $clave_orig==$clave)
 						PCO_Auditar("Elimina sesiones activas al intentar acceso con CAPTCHA incorrecto desde $PCO_DireccionAuditoria",$uid);
 				}
-			session_destroy();
 
 			$ok_login=0;
 			// Inicia la autenticacion frente a tablas de sistema
