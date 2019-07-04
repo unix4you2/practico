@@ -18,6 +18,8 @@ index.php
 core/comunes.php
 core/formularios.php
 core/informes.php
+core/marco_abajo.php
+core/marco_nav.php
 xml/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
@@ -42,6 +44,11 @@ ADDED: Posibilidad de importar automaticamente scripts de ejecucion única de PH
 FIXED: Eliminado cierre de sesion que impedía los inicios de sesion en servidores windows y fedora debido a un no mantenimiento de la sesion activa por parte del servidor web.
 FIXED: actualización a Pcoder en Asignacion de variables tipo variables compatible con versiones nuevas de PHP
 Fixed: Ajustada la sintaxis en procesos de importacion de definiciones XML para sistemas windows que impedían retornar los valores de manera adecuada al revisar los nodos generados por SimpleXML
+Added: Ahora durante el almacenamiento de datos de un formulario se permite utilizar variables de postaccion para capturar el valor del ID de registro asociado a los datos almacenados.  Para esto el VALOR de la variable de postaccion debe ser establecido a _OBTENER_ULTIMO_ID_ y con esto en la siguiente acción se contará con dicho valor en el nombre de variable transportado para trabajar.
+Fixed: Icono de información de elemento sobre la barra de herramientas flotante durante el diseño de formularios contaba con la misma acción que el botón de cambio de columna.  Se elimina la acción y se deja sólo como botón informativo.
+Added: Agregado un identificador único PCO_LogoAplicacion a la imágen de logo utilizada en la barra de navegación de la plataforma.  De esta manera el desarrollador podrá cambiarla de manera dinámica.
+Added: A partir de ahora los informes cuentan con dos parametros adicionales que permiten ocultar de raiz sus botones de comando por registro y sus pie de pagina con conteo de resultados.
+Added:  Ahora los mensajes modales generados mediante PCOJS_MostrarMensaje permiten la modificación del contenido del marco que incluye los botones inferiores mediante el identificador de HTML PCO_Modal_MensajeBotones
 "
 
 ########################################################################

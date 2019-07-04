@@ -6688,7 +6688,7 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                                 <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-right"></i></a>
                             </div>
                             <div style="display: inline-block; vertical-align:top;">
-                                <a class="btn btn-xs" data-toggle="tooltip" data-html="true"  data-placement="top" title="<div align=left><font color=yellow>'.$MULTILANG_Detalles.' <i>('.$MULTILANG_MnuPropiedad.')</i></font><br>ID HTML: <b>'.$registro_campos["id_html"].'</b><br>'.$MULTILANG_FrmCampo.': <b>'.$registro_campos["campo"].'</b><br>'.$MULTILANG_FrmPredeterminado.': <b>'.$registro_campos["valor_predeterminado"].'</b><br>'.$MULTILANG_FrmValida.': <b>'.$registro_campos["validacion_datos"].'</b> Extra: <b>'.$registro_campos["validacion_extras"].'</b></div>" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-info-circle"></i></a>';
+                                <a class="btn btn-xs" data-toggle="tooltip" data-html="true"  data-placement="top" title="<div align=left><font color=yellow>'.$MULTILANG_Detalles.' <i>('.$MULTILANG_MnuPropiedad.')</i></font><br>ID HTML: <b>'.$registro_campos["id_html"].'</b><br>'.$MULTILANG_FrmCampo.': <b>'.$registro_campos["campo"].'</b><br>'.$MULTILANG_FrmPredeterminado.': <b>'.$registro_campos["valor_predeterminado"].'</b><br>'.$MULTILANG_FrmValida.': <b>'.$registro_campos["validacion_datos"].'</b> Extra: <b>'.$registro_campos["validacion_extras"].'</b></div>" href=\'#\'><i class="fa fa-info-circle"></i></a>';
                             //Si el objeto es un formulario o informe embebido agrega enlace para su edicion directa
                             if ($registro_campos["tipo"]=="form_consulta")
                                 $salida.='<br><a onclick=\'return confirm("'.$MULTILANG_SaltoEdicion.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarFormulario&formulario='.$registro_campos["formulario_vinculado"].'&popup_activo=\' class="btn btn-primary btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.' '.$MULTILANG_Embebido.'<br>'.$Complemento_NombreEmbebido.'"><i class="fa fa fa-object-ungroup"></i></a>';
@@ -7910,7 +7910,7 @@ function PCO_CamposRealesInforme($informe)
     //Funcion para compatibilidad hacia atras.  Desaparecera en la version 18.9
     function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0)
     { echo "ERROR: Llamado a funcion obsoleta del framework cargar_informe().  En su lugar utilice PCO_CargarInforme() "; }
-function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0)
+function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0,$anular_acciones=0,$anular_piepagina=0)
 	{
 		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
 		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
@@ -8044,8 +8044,11 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                         <tr>';
 
 					//Busca si tiene acciones (botones) para cada registro y los genera
-					$cadena_generica_botones=PCO_GenerarBotonesInforme($informe);
-					
+					if (!$anular_acciones)
+					    $cadena_generica_botones=PCO_GenerarBotonesInforme($informe);
+					else
+					    $cadena_generica_botones="";
+					    
 					//Determina si el informe tiene o no campos ocultos
 					$PCO_ColumnasOcultas=PCO_DeterminarCamposOcultos($informe);
 				
@@ -8132,6 +8135,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 
 					//Cuando es embebido (=1) no agrega los totales de registro
 					//if (!$embebido)
+                    if (!$anular_piepagina)
 						{
 							@$SalidaFinalInforme.= '
 								<tr><td colspan='.$numero_columnas.'>

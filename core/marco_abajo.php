@@ -72,7 +72,7 @@
 						<p id="PCO_Modal_MensajeCuerpo"></p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-outline btn-info" data-dismiss="modal">Cerrar</button>
+						<div id="PCO_Modal_MensajeBotones"><button type="button" class="btn btn-outline btn-info" data-dismiss="modal">Cerrar</button></div>
 					</div>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->

@@ -424,8 +424,13 @@
 
 					//Inserta los datos del registro en BD
 					PCO_EjecutarSQLUnaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores_interrogantes.")",$lista_valores_concatenados);
+					$UltimoIDRegistroInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 					PCO_Auditar("Inserta registro en ".$registro_formulario["tabla_datos"]);
 					//Si no hay errores en carga de archivos redirecciona normal, sino redirecciona con los errores
+
+                    //Valida si alguno de los valores de campo de transporte requiere el ultimo id de registro afectado
+        			if (@$PCO_ValorCampoTransporte1=="_OBTENER_ULTIMO_ID_" )  $PCO_ValorCampoTransporte1=$UltimoIDRegistroInsertado;
+        			if (@$PCO_ValorCampoTransporte2=="_OBTENER_ULTIMO_ID_" )  $PCO_ValorCampoTransporte2=$UltimoIDRegistroInsertado;
 
 					if ($errores_de_carga=="")
 						//echo '<script type="" language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';

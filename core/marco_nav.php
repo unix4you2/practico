@@ -38,7 +38,7 @@
 		<button OnClick="document.getElementById('barra_navegacion_izquierda').style.visibility='visible';" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#PCO_BarraNavegacionIzquierda">
 			<i class="fa fa-bars"></i>
 		</button>
-		<a class="navbar-brand" href="javascript:document.PCO_FormVerMenu.submit();"><img width="115" height="30" src="img/logo.png?<?php echo filemtime('img/logo.png'); ?>" border="0" ALT="Practico"></a>
+		<a class="navbar-brand" href="javascript:document.PCO_FormVerMenu.submit();"><img id="PCO_LogoAplicacion" width="115" height="30" src="img/logo.png?<?php echo filemtime('img/logo.png'); ?>" border="0" ALT="Practico"></a>
 	</div>
 
 
