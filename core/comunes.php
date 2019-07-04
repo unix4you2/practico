@@ -30,6 +30,46 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+    Function: PCO_GenerarNombreAdjunto
+	Busca ocurrencias de las cadenas de formato de nombre de un archivo adjunto y las reemplaza por los valores correspondientes
+
+	Salida:
+
+		Nombre final del path del archivo adjunto
+
+	Vea tambien:
+
+		<PCO_GuardarDatosFormulario> | <PCO_ActualizarDatosFormulario>
+*/
+function PCO_GenerarNombreAdjunto($nombre_archivo,$campo_tabla,$extension_archivo,$path_final_archivo)
+{
+    global $PCO_FechaOperacion,$PCO_HoraOperacion,$PCOSESS_LoginUsuario;
+
+    $valores_buscar_rem_array = array
+        (
+              array("_ORIGINAL_",$nombre_archivo),
+              array("_CAMPOTABLA_",$campo_tabla),
+              array("_FECHA_",$PCO_FechaOperacion),
+              array("_HORA_",$PCO_HoraOperacion),
+              array("_HORAINTERNET_",date('B')),
+              array("_USUARIO_",$PCOSESS_LoginUsuario),
+              array("_MICRO_",date('u')),
+              array("_EXTENSION_",$extension_archivo)
+        );
+
+    foreach ($valores_buscar_rem_array as $valores_buscar_rem) {
+
+        if (strpos($path_final_archivo,$valores_buscar_rem[0])!==FALSE) $path_final_archivo=str_replace($valores_buscar_rem[0], $valores_buscar_rem[1], $path_final_archivo); // Booleana requiere === o !==
+    }
+
+	return $path_final_archivo;
+}
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: PCO_EvaluarCodigo
 	Ejecuta codigo PHP recibido dentro de una cadena.  Reemplazo para la funcion eval que pasa a ser obsoleta por seguridad
 	
@@ -7375,8 +7415,11 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		}
 
         //Carga las funciones JavaScript asociadas al formulario y llama la funcion FrmAutoRun()
-        	$PCO_FuncionesJSInternasFORM .= '<script type="text/javascript">'.$registro_formulario["javascript"].' 
-        		if (typeof FrmAutoRun === "function") { FrmAutoRun(); }
+        $JavaScriptFormulario=$registro_formulario["javascript"];
+        //Reemplaza la funcion de FrmAutoRun() del formulario por FrmAutoRun_IDFormulario() para garantizar que es unica
+        $JavaScriptFormulario=str_replace("FrmAutoRun()","FrmAutoRun_IDForm".$registro_formulario["id"]."()",$JavaScriptFormulario);
+        	$PCO_FuncionesJSInternasFORM .= '<script type="text/javascript">'.$JavaScriptFormulario.' 
+        		if (typeof FrmAutoRun_IDForm'.$registro_formulario["id"].' === "function") { FrmAutoRun_IDForm'.$registro_formulario["id"].'(); }
         		</script>';
         
         //Busca la lista de campos marcados como obligatorios sobre el form
@@ -7910,7 +7953,7 @@ function PCO_CamposRealesInforme($informe)
     //Funcion para compatibilidad hacia atras.  Desaparecera en la version 18.9
     function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0)
     { echo "ERROR: Llamado a funcion obsoleta del framework cargar_informe().  En su lugar utilice PCO_CargarInforme() "; }
-function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0,$anular_acciones=0,$anular_piepagina=0)
+function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0,$anular_acciones=0,$anular_piepagina=0,$SQLPuro="")
 	{
 		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
 		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe

@@ -1992,17 +1992,25 @@ if ($PCO_Accion=="PCO_EditarInforme")
     			<br>
     			
                 <div class="well well-sm btn-xs" style="color:Blue;">
-    				<font color="#FF0000"><b><?php echo strtoupper($MULTILANG_VistaPrev); ?> </b>(<?php echo $MULTILANG_MonCommSQL?>, <i>variables reemplazadas/vars replaced</i>):<br></font>
+    				<font color="#FF0000"><b><?php echo strtoupper($MULTILANG_VistaPrev); ?> 1 </b>(<?php echo $MULTILANG_MonCommSQL?>, <i>variables reemplazadas/vars replaced</i>):<br></font>
     				<?php 
                 		//Si no hay SQL explicito entonces Genera la consulta en SQL para el informe a partir de los parametros
                 		if (strlen($registro_informe["consulta_sql"])<5)
                 		    echo PCO_ConstruirConsultaInforme($registro_informe['id'],0);
                 		else
                 		    echo PCO_ReemplazarVariablesPHPEnCadena($registro_informe["consulta_sql"]);
-                		    
                 		//$a=PCO_GenerarEtiquetasConsulta(PCO_ReemplazarVariablesPHPEnCadena($registro_informe["consulta_sql"]));
     				    //print_r($a);
     				 ?>
+
+    				<br><br><font color="#FF0000"><b><?php echo strtoupper($MULTILANG_VistaPrev); ?> 2 </b> (CODIGO PURO SIN REEMPLAZOS / CODE WITHOUT REPLACEs):<br></font>
+    			    <textarea width="100%" class="textinput" style="color:black; width:100%; height:150px; background:transparent;" name="VistaPreviaPuro" readonly><?php 
+                		//Si no hay SQL explicito entonces Genera la consulta en SQL para el informe a partir de los parametros
+                		if (strlen($registro_informe["consulta_sql"])<5)
+                		    echo PCO_ConstruirConsultaInforme($registro_informe['id'],0);
+                		else
+                		    echo PCO_ReemplazarVariablesPHPEnCadena($registro_informe["consulta_sql"]);
+    				?></textarea>
                 </div>
 			<?php
 				PCO_CerrarVentana();

@@ -66,7 +66,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td valign=top><h2><span class="label label-info">3</span></h2></td>
+                        <td valign=top><h2><span class="label label-danger">3</span></h2></td>
                         <td align=left valign=top>
                         <?php echo $MULTILANG_Disene; ?> <u><b><?php echo strtoupper($MULTILANG_Informes); ?></b> </u> <?php echo $MULTILANG_DefInformes; ?>
                         <br><?php echo $MULTILANG_DesInformes; ?>
@@ -74,12 +74,12 @@
                         <td>
                             <form action="" method="post">
                                 <input type="hidden" name="PCO_Accion" value="PCO_AdministrarInformes">
-                                <button type="submit" class="btn btn-info"><i class="fa fa-file-text fa-fw fa-4x"></i></button>
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-file-text fa-fw fa-4x"></i></button>
                             </form>
                         </td>
                     </tr>
                     <tr>
-                        <td valign=top><h2><span class="label label-warning">4</span></h2></td>
+                        <td valign=top><h2><span class="label label-default">4</span></h2></td>
                         <td align=left valign=top>
                         <?php echo $MULTILANG_Administre; ?> <u><b><?php echo strtoupper($MULTILANG_OpcionesMenu); ?></b> </u> <?php echo $MULTILANG_DefMenus; ?>
                         <br><?php echo $MULTILANG_DesMenus; ?>
@@ -87,12 +87,12 @@
                         <td>
                             <form action="" method="post">
                                 <input type="hidden" name="PCO_Accion" value="PCOFUNC_AdministrarMenu">
-                                <button type="submit" class="btn btn-warning"><i class="fa fa-external-link-square fa-fw fa-4x"></i></button>
+                                <button type="submit" class="btn btn-default"><i class="fa fa-external-link-square fa-fw fa-4x"></i></button>
                             </form>
                         </td>
                     </tr>
                     <tr>
-                        <td valign=top><h2><span class="label label-danger">5</span></h2></td>
+                        <td valign=top><h2><span class="label label-warning">5</span></h2></td>
                         <td align=left valign=top>
                         <?php echo $MULTILANG_Defina; ?> <u><b><?php echo strtoupper($MULTILANG_UsuariosPermisos); ?></b> </u> <?php echo $MULTILANG_DefUsuarios; ?>
                         <br><?php echo $MULTILANG_DesUsuarios; ?>
@@ -100,7 +100,7 @@
                         <td>
                             <form action="" method="post">
                                 <input type="hidden" name="PCO_Accion" value="PCO_ListarUsuarios">
-                                <button type="submit" class="btn btn-danger"><i class="fa fa-user fa-fw fa-4x"></i></button>
+                                <button type="submit" class="btn btn-warning"><i class="fa fa-user fa-fw fa-4x"></i></button>
                             </form>
                         </td>
                     </tr>

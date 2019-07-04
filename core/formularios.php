@@ -77,7 +77,21 @@
 				{
 					$campo=$registro_campos_unicos["campo"];
 					$valor=${$campo};
-					// Busca si el campo cuenta con el valor en la tabla
+
+				    //Busca todos los campos tipo adjunto para eliminar el arachivo correspondiente
+				    $consulta_campos_adjuntos=PCO_EjecutarSQL("SELECT campo FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND tipo='archivo_adjunto' ","$formulario");
+                    while ($registro_campos_adjuntos=$consulta_campos_adjuntos->fetch())
+                        {
+                            //Busca nombre del archivo
+                            $RutaArchivo=PCO_EjecutarSQL("SELECT ".$registro_campos_adjuntos["campo"]." FROM $tabla WHERE $campo=$valor ")->fetchColumn();
+                            $RutaArchivo=explode("|",$RutaArchivo);
+                            $RutaArchivo=$RutaArchivo[0];
+                            if ($RutaArchivo!="")
+                                {
+                                    PCO_Auditar("Elimina archivo $RutaArchivo asociado a registro donde ".$campo." = ".$valor." en ".$tabla);
+                                    unlink($RutaArchivo);
+                                }
+                        }
 
 					// Elimina los datos
 					PCO_EjecutarSQLUnaria("DELETE FROM ".$tabla." WHERE $campo = '$valor' ");
@@ -85,7 +99,6 @@
 					//POSIBILIDAD DE REEMPLAZAR POR ESTE QUERY SI LA TABLA MANEJA CAMPO ID:  PCO_EjecutarSQLUnaria("DELETE FROM ".$tabla." WHERE id=$id_registro_datos ");
         			PCO_Auditar("Elimina registro donde ".$campo." = ".$valor." en ".$tabla);
 				}
-
 			echo '<form name="PCO_FormContinuarFlujo_EliminarDatos" action="'.$ArchivoCORE.'" method="POST">
 				<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
 				<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
@@ -175,30 +188,116 @@
 					$lista_valores="";
                     //Define los tipos de control que no son tenidos en cuenta en procesos de actualizacion
                     //Agregar el campo a la lista solamente si es de datos y si es diferente al campo ID que es usado para la actualizacion (objetos de tipo etiqueta o iframes son pasados por alto)
-                    $cadena_tipos_excluidos=" AND tipo<>'etiqueta' AND tipo<>'url_iframe' AND tipo<>'informe' AND tipo<>'form_consulta' AND tipo<>'campo_etiqueta' AND tipo<>'archivo_adjunto' AND tipo<>'boton_comando' ";
+                    $cadena_tipos_excluidos=" AND tipo<>'etiqueta' AND tipo<>'url_iframe' AND tipo<>'informe' AND tipo<>'campo_etiqueta' AND tipo<>'boton_comando' ";
 					
                     $consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND campo<>'id' $cadena_tipos_excluidos ","$formulario");
 					while ($registro_campos = $consulta_campos->fetch())
 						{
-                            //Verifica que el campo se encuentre dentro de la tabla, para descartar campos manuales mal escritos o usados para javascripts y otros fines.
-                            if (PCO_ExisteCampoTabla($registro_campos["campo"],$registro_formulario["tabla_datos"]))
-                                {
-                                    $cadena_campos_interrogantes.=$registro_campos["campo"]."=?,";
-                                    
-                                    //Si el campo es combo multiple formatea el valor de acuerdo al campo extra para datos sanitizados, sino toma valor normal
-									if ($registro_campos["tipo"]=="lista_seleccion" && strstr($registro_campos["personalizacion_tag"],"multiple")!=FALSE)
-									    $cadena_nuevos_valores.=${"PCO_ComboMultiple_".$registro_campos["campo"]}.$_SeparadorCampos_;
-									else
-                                        $cadena_nuevos_valores.=${$registro_campos["campo"]}.$_SeparadorCampos_;
-                                }
+					        if ($registro_campos["tipo"]!="form_consulta")
+					            {
+                                    //Verifica que el campo se encuentre dentro de la tabla, para descartar campos manuales mal escritos o usados para javascripts y otros fines.
+                                    if (PCO_ExisteCampoTabla($registro_campos["campo"],$registro_formulario["tabla_datos"]))
+                                        {
+											// Si el tipos de campo es archivo lo procesa como adjunto, sino lo pasa al insert
+											if ($registro_campos["tipo"]=="archivo_adjunto" )
+												{
+        											$variable_de_archivo=$registro_campos["campo"];
+        											$nombre_archivo = $_FILES[$variable_de_archivo]['name']; //Contiene el nombre original
+												    if ($nombre_archivo!="")
+												        {
+        													// Procesa el archivo y lo almacena en el path de acuerdo a la plantilla definida
+        													$tipo_archivo = $_FILES[$variable_de_archivo]['type']; //Contiene el tipo original, ej: application/octet-stream, application/x-php, image/jpeg
+        													$tamano_archivo = $_FILES[$variable_de_archivo]['size']; //Tamano del archivo cargado
+        													$nombre_archivo_temporal = $_FILES[$variable_de_archivo]['tmp_name']; //Nombre del archivo temporal en servidor
+        													$peso_final_permitido=$registro_campos["peso_archivo"]*1024;
+        													//Determina la extension del archivo
+        													$extension_archivo=end(explode(".", $nombre_archivo));
+        													if ($extension_archivo==$nombre_archivo) $extension_archivo="";
+        													
+        													// Comprueba tamano del archivo
+        													if ($tamano_archivo > $peso_final_permitido)
+        														{
+        															$errores_de_carga.=$nombre_archivo.'- '.$MULTILANG_FrmErrorCargaTamano;
+        														}
+        													else
+        														{
+        															// Crea el path definitivo del archivo
+        															$path_final_archivo="mod/fileman/cargas/"; // Path predeterminado
+        															//En caso de no tener plantilla intentara cargarlo con su nombre original
+        															if ($registro_campos["plantilla_archivo"]=="")
+        																$path_final_archivo.=$nombre_archivo;
+        															else
+        															    {
+            																$path_final_archivo.=$registro_campos["plantilla_archivo"];
+            															    $path_final_archivo=PCO_GenerarNombreAdjunto($nombre_archivo,$registro_campos["campo"],$extension_archivo,$path_final_archivo);
+        															    }
+        																
+        															// Intenta la carga del archivo solo si realmente se recibio uno
+        															if($nombre_archivo!="")
+        																if (!move_uploaded_file($nombre_archivo_temporal, $path_final_archivo ))
+        																	$errores_de_carga.=$nombre_archivo.'- '.$MULTILANG_FrmErrorCargaGeneral;
+        																else
+        																    {
+        																        //Busca el archivo anterior asociado en el registro y lo elimina
+        																        $RutaArchivoAnterior=PCO_EjecutarSQL("SELECT ".$registro_campos["campo"]." FROM ".$registro_formulario["tabla_datos"]." WHERE id=$id_registro_datos")->fetchColumn();
+        																        $RutaArchivoAnterior=explode("|",$RutaArchivoAnterior);
+        																        $RutaArchivoAnterior=$RutaArchivoAnterior[0];
+        																        unlink($RutaArchivoAnterior);
+        																        
+                    															//Agrega el campo y su path a la lista de campos para el query
+                    															$cadena_campos_interrogantes.=$registro_campos["campo"]."=?,";
+                    															$cadena_nuevos_valores.=  $path_final_archivo."|".$tipo_archivo.$_SeparadorCampos_;
+        																    }
+        														}
+												        }
+												}
+											else
+												{
+                                                    $cadena_campos_interrogantes.=$registro_campos["campo"]."=?,";
+                                                    
+                                                    //Si el campo es combo multiple formatea el valor de acuerdo al campo extra para datos sanitizados, sino toma valor normal
+                									if ($registro_campos["tipo"]=="lista_seleccion" && strstr($registro_campos["personalizacion_tag"],"multiple")!=FALSE)
+                									    $cadena_nuevos_valores.=${"PCO_ComboMultiple_".$registro_campos["campo"]}.$_SeparadorCampos_;
+                									else
+                                                        $cadena_nuevos_valores.=${$registro_campos["campo"]}.$_SeparadorCampos_;
+												}
+					                    }
+					            }
+					        else
+					            {
+                                    $IdSubformulario=$registro_campos["formulario_vinculado"];
+                                    $consulta_campos_subformulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND campo<>'id' $cadena_tipos_excluidos AND tipo<>'form_consulta' ","$IdSubformulario");
+                					while ($registro_campos_subformulario = $consulta_campos_subformulario->fetch())
+                						{
+							                // #############################################################
+							                // TODO:  Unificar en una sola funcion con lo de arriba PILAS!!!
+							                // #############################################################
+                                            //Verifica que el campo se encuentre dentro de la tabla, para descartar campos manuales mal escritos o usados para javascripts y otros fines.
+                                            if (PCO_ExisteCampoTabla($registro_campos_subformulario["campo"],$registro_formulario["tabla_datos"]))
+                                                {
+                                                    $cadena_campos_interrogantes.=$registro_campos_subformulario["campo"]."=?,";
+                                                    
+                                                    //Si el campo es combo multiple formatea el valor de acuerdo al campo extra para datos sanitizados, sino toma valor normal
+                									if ($registro_campos_subformulario["tipo"]=="lista_seleccion" && strstr($registro_campos_subformulario["personalizacion_tag"],"multiple")!=FALSE)
+                									    $cadena_nuevos_valores.=${"PCO_ComboMultiple_".$registro_campos_subformulario["campo"]}.$_SeparadorCampos_;
+                									else
+                                                        $cadena_nuevos_valores.=${$registro_campos_subformulario["campo"]}.$_SeparadorCampos_;
+                                                }
+                						}
+					            }
+
 						}
+
 					// Elimina comas al final de las listas
 					$cadena_campos_interrogantes=substr($cadena_campos_interrogantes, 0, strlen($cadena_campos_interrogantes)-1);
 
 					// Actualiza los datos
 					PCO_EjecutarSQLUnaria("UPDATE ".$registro_formulario["tabla_datos"]." SET $cadena_campos_interrogantes WHERE id=? ",$cadena_nuevos_valores.$id_registro_datos);
+
 					PCO_Auditar("Actualiza registro $id_registro_datos en ".$registro_formulario["tabla_datos"]);
 					//echo '<script type="" language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';
+
+					if ($errores_de_carga=="")
 						echo '<form name="PCO_FormContinuarFlujo_ActualizarDatos" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
 						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
@@ -211,6 +310,20 @@
 						<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo).'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion).'">
+						</form>';
+					else
+						echo '<form name="PCO_FormContinuarFlujo_ActualizarDatos" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
+						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
+						<input type="Hidden" name="'.$PCO_NombreCampoTransporte2.'" value="'.$PCO_ValorCampoTransporte2.'">
+						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+						<input type="Hidden" name="formulario" value="'.$formulario.'">
+                        <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+                        <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
+						<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
+						<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$errores_de_carga.'">
 						</form>';
 				}
 			else
@@ -260,7 +373,6 @@
 	if ($PCO_Accion=="PCO_GuardarDatosFormulario")
 		{
 			// POR CORREGIR:  Si el diseno cuenta con varios campos que ven hacia un mismo campo de base de datos el query no es valido
-
 			//Define valores de postacciones y campos de transporte de datos adicionales para redireccion de flujos de aplicacion cuando aplica 
 			if (@$PCO_PostAccion=="") $PCO_PostAccion="PCO_VerMenu"; //Por defecto va al menu principal si no hay postaccion definida
 			if (@$PCO_NombreCampoTransporte1=="") $PCO_NombreCampoTransporte1="PCO_NombreCampoTransporte1";
@@ -325,72 +437,50 @@
 													// Procesa el archivo y lo almacena en el path de acuerdo a la plantilla definida
 													$variable_de_archivo=$registro_campos["campo"];
 													$nombre_archivo = $_FILES[$variable_de_archivo]['name']; //Contiene el nombre original
-													$tipo_archivo = $_FILES[$variable_de_archivo]['type']; //Contiene el tipo original, ej: application/octet-stream, application/x-php, image/jpeg
-													$tamano_archivo = $_FILES[$variable_de_archivo]['size']; //Tamano del archivo cargado
-													$nombre_archivo_temporal = $_FILES[$variable_de_archivo]['tmp_name']; //Nombre del archivo temporal en servidor
-													$peso_final_permitido=$registro_campos["peso_archivo"]*1024;
-													//Determina la extension del archivo
-													$extension_archivo=end(explode(".", $nombre_archivo));
-													if ($extension_archivo==$nombre_archivo) $extension_archivo="";
 													
-													// Comprueba tamano del archivo
-													if ($tamano_archivo > $peso_final_permitido)
-														{
-															$errores_de_carga.=$nombre_archivo.'- '.$MULTILANG_FrmErrorCargaTamano;
-														}
-													else
-														{
-															// Crea el path definitivo del archivo
-															$path_final_archivo="mod/fileman/cargas/"; // Path predeterminado
-															//En caso de no tener plantilla intentara cargarlo con su nombre original
-															if ($registro_campos["plantilla_archivo"]=="")
-																$path_final_archivo.=$nombre_archivo;
-															else
-																$path_final_archivo.=$registro_campos["plantilla_archivo"];
-															// Busca ocurrencias de las cadenas de formato y las reemplaza
-															$cadena_formato_a_buscar="_ORIGINAL_";
-															$cadena_formato_a_reemplazar=$nombre_archivo;
-															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
-																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
-															$cadena_formato_a_buscar="_CAMPOTABLA_";
-															$cadena_formato_a_reemplazar=$registro_campos["campo"];
-															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
-																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
-															$cadena_formato_a_buscar="_FECHA_";
-															$cadena_formato_a_reemplazar=$PCO_FechaOperacion;
-															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
-																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
-															$cadena_formato_a_buscar="_HORA_";
-															$cadena_formato_a_reemplazar=$PCO_HoraOperacion;
-															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
-																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
-															$cadena_formato_a_buscar="_HORAINTERNET_";
-															$cadena_formato_a_reemplazar=date("B");
-															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
-																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
-															$cadena_formato_a_buscar="_USUARIO_";
-															$cadena_formato_a_reemplazar=$PCOSESS_LoginUsuario;
-															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
-																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
-															$cadena_formato_a_buscar="_MICRO_";
-															$cadena_formato_a_reemplazar=date("u");
-															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
-																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
-															$cadena_formato_a_buscar="_EXTENSION_";
-															$cadena_formato_a_reemplazar=$extension_archivo;
-															if (strpos($path_final_archivo,$cadena_formato_a_buscar)!==FALSE) // Booleana requiere === o !==
-																$path_final_archivo=str_replace($cadena_formato_a_buscar,$cadena_formato_a_reemplazar,$path_final_archivo);
-															// Intenta la carga del archivo solo si realmente se recibio uno
-															if($nombre_archivo!="")
-																if (!move_uploaded_file($nombre_archivo_temporal, $path_final_archivo ))
-																	$errores_de_carga.=$nombre_archivo.'- '.$MULTILANG_FrmErrorCargaGeneral;
-															//Agrega el campo y su path a la lista de campos para el query
-															$lista_campos.=$registro_campos["campo"].",";
-															$lista_valores.="'".$path_final_archivo."|".$tipo_archivo."',";
-															//Cadenas de valores usados para hacer consultas Binded con PDO
-															$lista_valores_interrogantes.="?,";
-															$lista_valores_concatenados.=$path_final_archivo."|".$tipo_archivo.$_SeparadorCampos_;
-														}
+													if ($nombre_archivo!="")
+													    {
+        													$tipo_archivo = $_FILES[$variable_de_archivo]['type']; //Contiene el tipo original, ej: application/octet-stream, application/x-php, image/jpeg
+        													$tamano_archivo = $_FILES[$variable_de_archivo]['size']; //Tamano del archivo cargado
+        													$nombre_archivo_temporal = $_FILES[$variable_de_archivo]['tmp_name']; //Nombre del archivo temporal en servidor
+        													$peso_final_permitido=$registro_campos["peso_archivo"]*1024;
+        													//Determina la extension del archivo
+        													$extension_archivo=end(explode(".", $nombre_archivo));
+        													if ($extension_archivo==$nombre_archivo) $extension_archivo="";
+        													
+        													// Comprueba tamano del archivo
+        													if ($tamano_archivo > $peso_final_permitido)
+        														{
+        															$errores_de_carga.=$nombre_archivo.'- '.$MULTILANG_FrmErrorCargaTamano;
+        														}
+        													else
+        														{
+        															// Crea el path definitivo del archivo
+        															$path_final_archivo="mod/fileman/cargas/"; // Path predeterminado
+        															//En caso de no tener plantilla intentara cargarlo con su nombre original
+        															if ($registro_campos["plantilla_archivo"]=="")
+        																$path_final_archivo.=$nombre_archivo;
+        															else
+        															    {
+            																$path_final_archivo.=$registro_campos["plantilla_archivo"];
+            															    $path_final_archivo=PCO_GenerarNombreAdjunto($nombre_archivo,$registro_campos["campo"],$extension_archivo,$path_final_archivo);
+        															    }
+        																
+        															// Intenta la carga del archivo
+    																if (!move_uploaded_file($nombre_archivo_temporal, $path_final_archivo ))
+    																	$errores_de_carga.=$nombre_archivo.'- '.$MULTILANG_FrmErrorCargaGeneral;
+    																else
+    																    {
+    																        //OPERACION DE ALMACENADO DE ARCHIVO EXITOSA, LUEGO GUARDA LAS RUTAS.
+                															//Agrega el campo y su path a la lista de campos para el query
+                															$lista_campos.=$registro_campos["campo"].",";
+                															$lista_valores.="'".$path_final_archivo."|".$tipo_archivo."',";
+                															//Cadenas de valores usados para hacer consultas Binded con PDO
+                															$lista_valores_interrogantes.="?,";
+                															$lista_valores_concatenados.=$path_final_archivo."|".$tipo_archivo.$_SeparadorCampos_;
+    																    }
+        														}
+													    }
 												}
 											else
 												{
@@ -413,6 +503,94 @@
 												}
 										}
 								}
+							else
+							    {
+							        if ($registro_campos["tipo"]=="form_consulta")
+							            {
+							                // #############################################################
+							                // TODO:  Unificar en una sola funcion con lo de arriba PILAS!!!
+							                // #############################################################
+                                            $IdSubformulario=$registro_campos["formulario_vinculado"];
+                        					$consulta_campos_subformulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='{$IdSubformulario}' AND visible=1");
+                        					while ($registro_campos_subformulario = $consulta_campos_subformulario->fetch())
+                        						{
+                        							//Hace la operacion con el campo solamente si es de datos (objetos de tipo etiqueta o iframes son pasados por alto)
+                        							if ($registro_campos_subformulario["tipo"]!="url_iframe" && $registro_campos_subformulario["tipo"]!="etiqueta" && $registro_campos_subformulario["tipo"]!="informe" && $registro_campos_subformulario["tipo"]!="form_consulta" && $registro_campos_subformulario["tipo"]!="campo_etiqueta" && $registro_campos_subformulario["tipo"]!="boton_comando")
+                        								{
+                        									//Verifica que el campo se encuentre dentro de la tabla, para descartar campos manuales mal escritos o usados para javascripts y otros fines.
+                        									if (PCO_ExisteCampoTabla($registro_campos_subformulario["campo"],$tabla))
+                        										{
+                        											// Si el tipos de campo es archivo lo procesa como adjunto, sino lo pasa al insert
+                        											if ($registro_campos_subformulario["tipo"]=="archivo_adjunto")
+                        												{
+                        													// Procesa el archivo y lo almacena en el path de acuerdo a la plantilla definida
+                        													$variable_de_archivo=$registro_campos_subformulario["campo"];
+                        													$nombre_archivo = $_FILES[$variable_de_archivo]['name']; //Contiene el nombre original
+                        													if ($nombre_archivo!="")
+                            													{
+                                													$tipo_archivo = $_FILES[$variable_de_archivo]['type']; //Contiene el tipo original, ej: application/octet-stream, application/x-php, image/jpeg
+                                													$tamano_archivo = $_FILES[$variable_de_archivo]['size']; //Tamano del archivo cargado
+                                													$nombre_archivo_temporal = $_FILES[$variable_de_archivo]['tmp_name']; //Nombre del archivo temporal en servidor
+                                													$peso_final_permitido=$registro_campos_subformulario["peso_archivo"]*1024;
+                                													//Determina la extension del archivo
+                                													if ($extension_archivo==$nombre_archivo) $extension_archivo="";
+                                													
+                                													// Comprueba tamano del archivo
+                                													if ($tamano_archivo > $peso_final_permitido)
+                                														{
+                                															$errores_de_carga.=$nombre_archivo.'- '.$MULTILANG_FrmErrorCargaTamano;
+                                														}
+                                													else
+                                														{
+                                															// Crea el path definitivo del archivo
+                                															$path_final_archivo="mod/fileman/cargas/"; // Path predeterminado
+                                															//En caso de no tener plantilla intentara cargarlo con su nombre original
+                                															if ($registro_campos_subformulario["plantilla_archivo"]=="")
+                                																$path_final_archivo.=$nombre_archivo;
+                                															else
+                                															    {
+                                    																$path_final_archivo.=$registro_campos_subformulario["plantilla_archivo"];
+                                    															    $path_final_archivo=PCO_GenerarNombreAdjunto($nombre_archivo,$registro_campos_subformulario["campo"],$extension_archivo,$path_final_archivo);
+                                															    }
+
+                            																if (!move_uploaded_file($nombre_archivo_temporal, $path_final_archivo ))
+                            																	$errores_de_carga.=$nombre_archivo.'- '.$MULTILANG_FrmErrorCargaGeneral;
+                            																else
+                            																    {
+                                        															//Agrega el campo y su path a la lista de campos para el query
+                                        															$lista_campos.=$registro_campos_subformulario["campo"].",";
+                                        															$lista_valores.="'".$path_final_archivo."|".$tipo_archivo."',";
+                                        															//Cadenas de valores usados para hacer consultas Binded con PDO
+                                        															$lista_valores_interrogantes.="?,";
+                                        															$lista_valores_concatenados.=$path_final_archivo."|".$tipo_archivo.$_SeparadorCampos_;
+                            																    }
+                                														}
+                            													}
+                        												}
+                        											else
+                        												{
+                        													$nombre_de_campo_query=$registro_campos_subformulario["campo"].",";
+                        													//ANTES DE QUERY CON PARAMETROS $valor_de_campo_query="'".${$registro_campos_subformulario["campo"]}."',";
+                        													$valor_de_campo_query=${$registro_campos_subformulario["campo"]};
+                        													
+                        													//Si el campo es combo multiple formatea el valor de acuerdo al campo extra para datos sanitizados
+                        													if ($registro_campos_subformulario["tipo"]=="lista_seleccion" && strstr($registro_campos_subformulario["personalizacion_tag"],"multiple")!=FALSE)
+                        													    $valor_de_campo_query=${"PCO_ComboMultiple_".$registro_campos_subformulario["campo"]};
+                        
+                        													//Compresion previa para campos especiales (MUY experimental por cuanto puede generar errores de query)
+                        														if ($registro_campos_subformulario["tipo"]=="objeto_canvas" || $registro_campos_subformulario["tipo"]=="objeto_camara")
+                        															$valor_de_campo_query=gzencode($valor_de_campo_query,9);
+                        													//Agrega el campo y su valor a la lista de campos para el query
+                        													$lista_campos.=$nombre_de_campo_query;
+                        													$lista_valores.=$valor_de_campo_query;
+                        													$lista_valores_interrogantes.="?,";
+                        													$lista_valores_concatenados.=$valor_de_campo_query.$_SeparadorCampos_;
+                        												}
+                        										}
+                        								}
+                        						} //Fin while que recorre campos subform
+							            } //Fin si es objeto subformulario
+							    }
 						}
 
 					// Elimina comas al final de las listas
@@ -2752,6 +2930,35 @@ $ContenidoBarraFlotante_EditForm.='
 
                 if ($MensajeCamposDuplicados!='')
                     PCO_Mensaje($MULTILANG_FrmIDHTMDuplicado,"$MULTILANG_FrmCamposAProposito $MensajeCamposDuplicados","","fa fa-fw fa-2x fa-info-circle","alert alert-dismissible alert-warning btn-xs");
+
+                //Busca posibles campos en la tabla que no han sido agregados al formulario para presentarlos como advertencia
+        		$CamposTabla=PCO_ConsultarColumnas($registro_form["tabla_datos"]);
+        
+        		//Busca por cada campo de tabla algun equivalente en las columnas
+        		$MensajeCamposdeTablaHuerfanos='';
+        		for($i=0;$i<count($CamposTabla);$i++)
+        			{
+        			    //Evita el campo de ID
+        			    if ($CamposTabla[$i]["nombre"]!="id")
+        			        {
+        			            //Busca si el campo esta definido dentro de alguno de los campos del form
+        			            $ConsultaCamposEnForm=PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."formulario_objeto WHERE formulario='".$registro_form["id"]."' AND campo='".$CamposTabla[$i]["nombre"]."' ")->fetch();
+                                if ($ConsultaCamposEnForm["id"]=="")
+                                    {
+                                        //Busca posibles formularios embebidos y sus campos
+        			                    $ConsultaSubformularios=PCO_EjecutarSQL("SELECT formulario_vinculado as id FROM ".$TablasCore."formulario_objeto WHERE formulario='".$registro_form["id"]."' AND tipo='form_consulta' ");
+                                        while ($RegistroSubformularios=$ConsultaSubformularios->fetch())
+                                            {
+        			                            $ConsultaCamposEnFormEmbebido=PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."formulario_objeto WHERE formulario='".$RegistroSubformularios["id"]."' AND campo='".$CamposTabla[$i]["nombre"]."' ")->fetch();
+                                                if ($ConsultaCamposEnFormEmbebido["id"]=="")
+                                                    $MensajeCamposdeTablaHuerfanos.='<li style="padding-left: 50px;">Campo en tabla '.$registro_form["tabla_datos"].': <b>'.$CamposTabla[$i]["nombre"].'</b></li>';
+                                            }
+                                    }
+        			        }
+        			}
+
+                if ($MensajeCamposdeTablaHuerfanos!='')
+                    PCO_Mensaje($MULTILANG_FrmCampoHuerfano,"$MensajeCamposdeTablaHuerfanos","","fa fa-fw fa-2x fa-info-circle","alert alert-dismissible alert-info btn-xs");
 
             	//function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno=0)
                 PCO_CargarFormulario($formulario,1,"","",0,1); //Cargar el form en modo de diseno

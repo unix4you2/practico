@@ -674,7 +674,9 @@
     $MULTILANG_FrmTipoMaquetacion='Type of layout';
     $MULTILANG_FrmTipoMaquetacionDes='Determine how Practico will make multi-column forms. Traditional: use tables and standard columns in HTML. Responsive: use columns based on bootstrap col classes, for which you must specify the class of each in the corresponding fields.';
     $MULTILANG_FrmTradicional='Traditional';
-    
+    $MULTILANG_FrmCampoHuerfano='This fields exists in the table linked to the form and doesnt have any field or object linked to them in the form or embeded forms';
+
+
 	//Informes
 	$MULTILANG_InfErr1='Vous devez spécifier des valeurs pour les champs correspondant à au moins une série de données. <br> Si vous ne voulez pas générer de graphique, vous devez changer le type de rapport en tableau de données';
 	$MULTILANG_InfErr2='Vous devez entrer un titre valide pour le rapport.';

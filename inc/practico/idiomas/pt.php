@@ -674,7 +674,9 @@
     $MULTILANG_FrmTipoMaquetacion='Type of layout';
     $MULTILANG_FrmTipoMaquetacionDes='Determine how Practico will make multi-column forms. Traditional: use tables and standard columns in HTML. Responsive: use columns based on bootstrap col classes, for which you must specify the class of each in the corresponding fields.';
     $MULTILANG_FrmTradicional='Traditional';
-    
+    $MULTILANG_FrmCampoHuerfano='This fields exists in the table linked to the form and doesnt have any field or object linked to them in the form or embeded forms';
+
+
 	//Informes
 	$MULTILANG_InfErr1='Você deve especificar valores para os campos correspondentes a, pelo menos, uma s&eacute;rie de dados. <br> Se você não quer gerar um gr&aacute;fico, em seguida, você deve alterar o tipo de relat&oacute;rio a tabela de dados';
 	$MULTILANG_InfErr2='Você deve digitar um t&iacute;tulo v&aacute;lido para o relat&oacute;rio.';
