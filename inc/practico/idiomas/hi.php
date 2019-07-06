@@ -854,6 +854,8 @@
 	$MULTILANG_InfSQL='यदि आप इस SQL स्क्रिप्ट फ़ील्ड में 5 वर्णों से अधिक सामग्री जोड़ते हैं, तो रिपोर्ट जनरेटर टेबल, फ़ील्ड, शर्तों या किसी अन्य क्वेरी परिभाषा के किसी भी कॉन्फ़िगरेशन को छोड़ देगा जिसे आपने परिभाषित किया है और सीधे इस स्क्रिप्ट को निष्पादित करने का प्रयास करेगा और इससे उत्पन्न होगा परिणाम तालिका पर्यावरण चर शामिल करने के लिए आप {चर परिवर्तनीय} नोटेशन में PHP चर का उपयोग कर सकते हैं।';
 	$MULTILANG_InfFormsUsan='पता लगाए गए फॉर्म जो इस रिपोर्ट का उपयोग एम्बेडेड तरीके से करते हैं';
 	$MULTILANG_InfTootipTitulo='Create a tooltip for graphic reports using the reports title';
+    $MULTILANG_InfBotonPpio='Put in the first column';
+
 
 	//Menus
 	$MULTILANG_MnuTitEditar='संपादन मेनू आइटम';

@@ -894,7 +894,7 @@ if ($PCO_Accion=="PCO_EliminarInformeTabla")
 			if ($tipo_accion=="") $mensaje_error=$MULTILANG_InfErr5;
 			if ($mensaje_error=="")
 				{
-					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_boton (".$ListaCamposSinID_informe_boton.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$informe$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$confirmacion_texto$_SeparadorCampos_$destino$_SeparadorCampos_$pantalla_completa$_SeparadorCampos_$precargar_estilos$_SeparadorCampos_$imagen");
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_boton (".$ListaCamposSinID_informe_boton.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$informe$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$confirmacion_texto$_SeparadorCampos_$destino$_SeparadorCampos_$pantalla_completa$_SeparadorCampos_$precargar_estilos$_SeparadorCampos_$imagen$_SeparadorCampos_$ubicar_principio");
 					PCO_Auditar("Crea boton $titulo para informe $informe");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
 						<input type="Hidden" name="informe" value="'.$informe.'">
@@ -1820,6 +1820,15 @@ if ($PCO_Accion=="PCO_EditarInforme")
 							<option value="0"><?php echo $MULTILANG_No; ?></option>
                         </select>
                     </div>
+
+                    <label for="ubicar_principio"><?php echo $MULTILANG_InfBotonPpio; ?>:</label>
+                    <div class="form-group input-group">
+                        <select id="ubicar_principio" name="ubicar_principio" class="form-control">
+							<option value="0"><?php echo $MULTILANG_No; ?></option>
+							<option value="1"><?php echo $MULTILANG_Si; ?></option>
+                        </select>
+                    </div>
+                    
                     <div class="btn-xs">
                         <br><br><br><br><br>
                     <b><?php echo $MULTILANG_InfVinculo; ?>:</b>

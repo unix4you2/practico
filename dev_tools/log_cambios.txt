@@ -19,6 +19,7 @@ core/comunes.php
 core/formularios.php
 core/informes.php
 core/marco_abajo.php
+core/marco_admin.php
 core/marco_nav.php
 core/marco_dev.php
 xml/*
@@ -57,12 +58,16 @@ Added: Los diseñadores de formularios advierten al desarrollador cuando por alg
 Enhan: Los colores en los botones del modal de desarrollo han sido cambiados para que coincidan con los colores de los controles de acceso a los mismos modulos disponibles en el escritorio
 Enhan: Optimizado código de reemplazo de nombres de archivo durante operaciones de almacenamiento de adjuntos gracias a @rafaelposadaf 
 Added: La actualizacion y eliminacion de registros que incluyan archivos adjuntos ahora hacen la actualización o eliminación de los archivos correspondientes.  SOLAMENTE para campos de tipo adjunto sobre el formulario principal, no se contemplan los campos de este tipo en formularios emebebidos.  Gracias a @rafaelposadaf
+Added: Ahora durante la creacion de botones de informes se puede decidir si estos estaran ubicados al comienzo del informe
+Added: Ahora los botones de acción agregados a los informes permiten definir si su ubicación será al principio de las columnas o al final
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 # RECORDAR EN OPCIONES MULTI-IDIOMA:  UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 ScriptBasedatos="
+ALTER TABLE core_informe_boton ADD ubicar_principio int(1) NULL DEFAULT '0';
+
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
 "

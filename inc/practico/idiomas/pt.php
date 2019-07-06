@@ -854,6 +854,8 @@
 	$MULTILANG_InfSQL='Se você adicionar qualquer conteúdo maior que 5 caracteres a este campo de script SQL, o gerador de relatórios omitirá qualquer configuração de tabelas, campos, condições ou qualquer outra definição de consulta que você tenha definido e tentará executar diretamente este Script e, a partir dele, gerar tabela de resultados. Você pode usar variáveis PHP na notação {$ Variable} para incluir variáveis de ambiente.';
 	$MULTILANG_InfFormsUsan='Formulários detectados que usam esse relatório de maneira incorporada';
 	$MULTILANG_InfTootipTitulo='Create a tooltip for graphic reports using the reports title';
+    $MULTILANG_InfBotonPpio='Put in the first column';
+
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Editar item de menu';

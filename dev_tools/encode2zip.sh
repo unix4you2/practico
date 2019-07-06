@@ -19,4 +19,27 @@
 #	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
-bencoder -f -q -t -o /mnt/datos/bencoder/salida  -s /mnt/datos/webserver/practico/core -c -r
+#bencoder [-f] [-q] [-t] -o FILE    file1.php
+#bencoder [-f] [-q] [-t] -o OUTDIR  file1.php file2.php ...
+#bencoder [-f] [-q] [-t] -o OUTDIR  -s SRCDIR  [-e SUFFIX] [-r] [-c] [-l]
+
+#  -o FILE   : the file name to write the encoded script
+#                (default to '-encoded.XXX' suffix)
+#                  -o OUTDIR : the directory to write all encoded files
+                  
+#                    -s SRCDIR
+#                      -a SRCDIR : encode all files from this source directory
+                      
+#                        -r        : encode directories recursively (no by default)
+#                          -f        : force overwriting even if the target exists
+#                            -t        : truncate/keep only the basename of the file into the bytecode
+#                              -e SUFFIX : encode the files with the SUFFIX extension only (default: php)
+#                                            (regular expression allowed, ex: "php|inc")
+#                                              -c        : copy files those shouldn't be encoded (no by default)
+#                                                -l        : follow symbolic link (no by default)
+#                                                  -q        : do not print the file name while encoding or copying
+#                                                    -b
+#                                                      -bz2      : compress the encoded files with bz2 (needs bzip2-extension)
+
+
+bencoder -e php -f -q -t -o /mnt/datos/bencoder/salida  -s /mnt/datos/webserver/practico/core -c -r

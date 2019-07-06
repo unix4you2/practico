@@ -7455,17 +7455,21 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 	Ver tambien:
 		<PCO_CargarInforme>
 */
-function PCO_GenerarBotonesInforme($informe)
+function PCO_GenerarBotonesInforme($informe,$Ubicacion)
 	{
 		global $ConexionPDO,$ArchivoCORE,$TablasCore,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
 		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
 		
+		$ComplementoUbicacion=' AND ubicar_principio=0 ';
+		if ($Ubicacion==1)
+		    $ComplementoUbicacion=' AND ubicar_principio=1 ';
+		
 		//Inicializa la cadena de botones vacia
 		$cadena_generica_botones='';
 
 		// Busca si el informe tiene acciones (botones), los cuenta y prepara dentro de un arreglo para repetir en cada registro
-		$consulta_botones=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_boton." FROM ".$TablasCore."informe_boton WHERE informe=? AND visible=1 ORDER BY peso","$informe");
+		$consulta_botones=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_boton." FROM ".$TablasCore."informe_boton WHERE informe=? AND visible=1 $ComplementoUbicacion ORDER BY peso","$informe");
 		while($registro_botones=$consulta_botones->fetch())
 			{
 				$destino_formulario=$registro_botones["destino"];
@@ -8088,10 +8092,22 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 
 					//Busca si tiene acciones (botones) para cada registro y los genera
 					if (!$anular_acciones)
-					    $cadena_generica_botones=PCO_GenerarBotonesInforme($informe);
+					    {
+    					    $cadena_generica_botones_principio=PCO_GenerarBotonesInforme($informe,1);
+    					    $cadena_generica_botones=PCO_GenerarBotonesInforme($informe);
+					    }
 					else
-					    $cadena_generica_botones="";
-					    
+					    {
+					        $cadena_generica_botones_principio='';
+					        $cadena_generica_botones="";
+					    }
+
+					//Si el informe tiene botones al comienzo entonces agrega columna adicional
+					if ($cadena_generica_botones_principio!="")
+						{
+							$SalidaFinalInforme.= '<th></th>';
+						}
+
 					//Determina si el informe tiene o no campos ocultos
 					$PCO_ColumnasOcultas=PCO_DeterminarCamposOcultos($informe);
 				
@@ -8115,7 +8131,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 						    $ConteoPosicionColumna++;
 					    }
 	
-					//Si el informe tiene botones entonces agrega columna adicional
+					//Si el informe tiene botones al final entonces agrega columna adicional
 					if ($cadena_generica_botones!="")
 						{
 							$SalidaFinalInforme.= '<th></th>';
@@ -8138,6 +8154,17 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 					while($consulta_ejecucion!="1" && $registro_informe=$consulta_ejecucion->fetch())
 						{
 							$SalidaFinalInforme.= '<tr>';
+
+							//Si el informe tiene botones al comienzo los agrega
+							if ($cadena_generica_botones_principio!="")
+								{
+									//Transforma la cadena generica con los datos especificos del registro, toma por ahora el primer campo (OCULTO O NO)
+									$cadena_botones_registro=str_replace("DELFRMVALVALOR",$registro_informe[0],$cadena_generica_botones_principio);
+									$cadena_botones_registro=str_replace("DETFRMVALBASE",$registro_informe[0],$cadena_botones_registro);
+									//Muestra los botones preparados para el registro
+									$SalidaFinalInforme.= '<td>'.$cadena_botones_registro.'</td>';
+								}
+
 							for ($i=0;$i<$EtiquetasConsulta[0]["NumeroColumnas"];$i++)
 								{
 									//Muestra la columna solo si no se trata de una de las ocultas
@@ -8161,15 +8188,17 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 												<td '.$CadenaActivadora_Edicion.'>'.$ValorVisibleFinal.'</td>';
 										}
 								}
-							//Si el informe tiene botones los agrega
+								
+							//Si el informe tiene botones al final los agrega
 							if ($cadena_generica_botones!="")
 								{
 									//Transforma la cadena generica con los datos especificos del registro, toma por ahora el primer campo (OCULTO O NO)
 									$cadena_botones_registro=str_replace("DELFRMVALVALOR",$registro_informe[0],$cadena_generica_botones);
 									$cadena_botones_registro=str_replace("DETFRMVALBASE",$registro_informe[0],$cadena_botones_registro);
 									//Muestra los botones preparados para el registro
-									$SalidaFinalInforme.= '<th>'.$cadena_botones_registro.'</th>';
+									$SalidaFinalInforme.= '<td>'.$cadena_botones_registro.'</td>';
 								}
+								
 							$SalidaFinalInforme.= '</tr>';
 							$numero_filas++;
 						}
@@ -8396,6 +8425,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                             preUnits: '<?php echo $unidades_pre; ?>',
                             postUnits: '<?php echo $unidades_pos; ?>',
                             grid: <?php echo $ocultar_grilla; ?>,
+                            horizontal: false,
                             <?php
                                 //Agrega las unidades para los tipos de grafico Donut
                                 if ($TipoObjetoGraficoMorris=="Morris.Donut")
