@@ -1527,7 +1527,8 @@ if ($PCO_Accion=="PCO_EditarInforme")
 									<select name="tipo_grafico" id="tipo_grafico" class="form-control input-sm btn-danger" >
 											<option value="area" <?php if ($tipo_grafico_leido=="area") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico1; ?></option>
 											<option value="linea" <?php if ($tipo_grafico_leido=="linea") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico5; ?></option>
-											<option value="barra" <?php if ($tipo_grafico_leido=="barra") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico3; ?></option>
+											<option value="barra" <?php if ($tipo_grafico_leido=="barra") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico3; ?> (<?php echo $MULTILANG_Vertical; ?>)</option>
+											<option value="barrah" <?php if ($tipo_grafico_leido=="barrah") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico3; ?> (<?php echo $MULTILANG_Horizontal; ?>)</option>
 											<option value="dona" <?php if ($tipo_grafico_leido=="dona") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico7; ?></option>
 									</select>
 
