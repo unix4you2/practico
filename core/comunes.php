@@ -8264,7 +8264,15 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 	            $barras_horizontales="false";  //Asume barras verticales por defecto
 				if ($tipo_grafico=="barrah")  $barras_horizontales="true";
 	            $tipo_grafico_circular="donut";  //Asume barras verticales por defecto
-				if ($tipo_grafico=="torta")  $tipo_grafico_circular="pie";
+				if ($tipo_grafico=="torta" || $tipo_grafico=="tortap")  $tipo_grafico_circular="pie";
+	            $presentar_porcentaje="false";  //Asume que el grafico no es con porcentajes en tortas
+				if ($tipo_grafico=="donap" || $tipo_grafico=="tortap")  $presentar_porcentaje="true";
+				
+				$presentar_datalabels="false";  //Asume que no se presentan las etiquetas con valores de datos
+				$cadenaubicacion_datalabels="";
+				if($formato_base[9]!="false" && $formato_base[9]!="") $presentar_datalabels="true";
+				if($formato_base[9]=="true_outside") $cadenaubicacion_datalabels="dataLabelsPosition: 'outside',";
+				if($formato_base[9]=="true_inside") $cadenaubicacion_datalabels="dataLabelsPosition: 'inside',";
 
 				//Elimina los nombres de tabla en caso de tener punto y usa los alias si los tiene
 				for ($i=0;$i<5;$i++)
@@ -8315,7 +8323,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 					$TipoObjetoGraficoMorris = "Morris.Bar";
 				if ($tipo_grafico=="linea" || $tipo_grafico=="linea_multiples")
 					$TipoObjetoGraficoMorris = "Morris.Line";
-				if ($tipo_grafico=="dona"  || $tipo_grafico=="torta")
+				if ($tipo_grafico=="dona"  || $tipo_grafico=="donap" || $tipo_grafico=="torta" || $tipo_grafico=="tortap")
 					$TipoObjetoGraficoMorris = "Morris.Donut";
 					
 				//Define la cadena de llaves para el grafico
@@ -8430,9 +8438,11 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                             postUnits: '<?php echo $unidades_pos; ?>',
                             grid: <?php echo $ocultar_grilla; ?>,
                             horizontal: <?php echo $barras_horizontales; ?>,
-                            dataLabels: true,
-                            // dataLabelsPosition: 'outside', //inside
-                            //showPercentage: true,
+                            
+                            dataLabels: <?php echo $presentar_datalabels; ?>,
+                            <?php echo $cadenaubicacion_datalabels; ?>  // EJ: dataLabelsPosition: 'outside', //inside
+                            
+                            showPercentage: <?php echo $presentar_porcentaje; ?>,
                             donutType: '<?php echo $tipo_grafico_circular; ?>',
                             <?php
                                 //Agrega las unidades para los tipos de grafico Donut

@@ -523,6 +523,7 @@ if ($PCO_Accion=="PCO_ActualizarGraficoInforme")
 				$cadena_formato.=$ocultar_ejes."|";
 				$cadena_formato.=$unidades_pre."|";
 				$cadena_formato.=$unidades_pos."|";
+				$cadena_formato.=$ocultar_valores."|";
 
 				// Actualiza los datos
 				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."informe SET formato_grafico=? WHERE id=? ","$cadena_formato$_SeparadorCampos_$informe");
@@ -1454,6 +1455,7 @@ if ($PCO_Accion=="PCO_EditarInforme")
 				            $ocultar_ejes_leido=$formato_base[6];
 				            $unidades_pre_leido=$formato_base[7];
 				            $unidades_pos_leido=$formato_base[8];
+				            $ocultar_valores=$formato_base[9];
 							//Crea las series
 							$numero_series=5;
 							for ($cs=1;$cs<=$numero_series;$cs++)
@@ -1530,7 +1532,9 @@ if ($PCO_Accion=="PCO_EditarInforme")
 											<option value="barra" <?php if ($tipo_grafico_leido=="barra") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico3; ?> (<?php echo $MULTILANG_Vertical; ?>)</option>
 											<option value="barrah" <?php if ($tipo_grafico_leido=="barrah") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico3; ?> (<?php echo $MULTILANG_Horizontal; ?>)</option>
 											<option value="dona" <?php if ($tipo_grafico_leido=="dona") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico7; ?></option>
+											<option value="donap" <?php if ($tipo_grafico_leido=="donap") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico7; ?> (con porcentajes)</option>
 											<option value="torta" <?php if ($tipo_grafico_leido=="torta") echo "SELECTED"; ?>>Torta (solo una serie)</option>
+											<option value="tortap" <?php if ($tipo_grafico_leido=="tortap") echo "SELECTED"; ?>>Torta (solo una serie) (con porcentajes)</option>
 									</select>
 
 									<label for="barra_apilada">Apilar (aplica solo barras):</label>
@@ -1552,6 +1556,12 @@ if ($PCO_Accion=="PCO_EditarInforme")
 									<select name="ocultar_ejes" id="ocultar_ejes" class="form-control input-sm btn-warning" >
 											<option value="true" <?php if ($ocultar_ejes_leido=="true") echo "SELECTED"; ?>><?php echo $MULTILANG_No; ?></option>
 											<option value="false" <?php if ($ocultar_ejes_leido=="false") echo "SELECTED"; ?>><?php echo $MULTILANG_Si; ?></option>
+									</select>
+									<label for="ocultar_valores">Ocultar valores:</label>
+									<select name="ocultar_valores" id="ocultar_valores" class="form-control input-sm btn-warning" >
+											<option value="false" <?php if ($ocultar_valores=="false") echo "SELECTED"; ?>><?php echo $MULTILANG_Si; ?></option>
+											<option value="true_outside" <?php if ($ocultar_valores=="true_outside") echo "SELECTED"; ?>><?php echo $MULTILANG_No; ?> (Presentarlos Fuera)</option>
+											<option value="true_inside" <?php if ($ocultar_valores=="true_inside") echo "SELECTED"; ?>><?php echo $MULTILANG_No; ?> (Presentarlos Dentro)</option>
 									</select>
 								</td>
 								<td align="LEFT" valign="TOP">
