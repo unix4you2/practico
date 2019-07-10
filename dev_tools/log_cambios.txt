@@ -51,6 +51,7 @@ Added: [FORMS] Los diseñadores de formularios advierten al desarrollador cuando
 Added: [GRAL] La actualizacion y eliminacion de registros que incluyan archivos adjuntos ahora hacen la actualización o eliminación de los archivos correspondientes.  SOLAMENTE para campos de tipo adjunto sobre el formulario principal, no se contemplan los campos de este tipo en formularios emebebidos.  Gracias a @rafaelposadaf
 Added: [INFORMES] Ahora los botones de acción agregados a los informes permiten definir si su ubicación será al principio de las columnas o al final
 Added: [INFORMES] Ahora los gráficos de barra pueden ser diagramados en sentido horizontal y vertical de acuerdo a lo configurado en sus propiedades.
+Added: [INFORMES] Agregados los tipos de gráfico de torta completa tradicionales como una transformación de los gráficos tipo dona.
 Enhan: [LIBS] Actualizada versión de Rapahel de Dmitry Baranovskiy a 2.2.8
 Enhan: [LIBS] Agregada librería Regression 1.4.0 de Tom Alexander para soportar nuevos tipos de gráfico sobre Morris (líneas de tendencia polinomiales, logarítimcas y exponenciales)
 Enhan: [GRAL] Se evita rutinas de chequeo de sintaxis en sistemas FreeBSD

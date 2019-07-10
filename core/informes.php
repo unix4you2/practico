@@ -1530,6 +1530,7 @@ if ($PCO_Accion=="PCO_EditarInforme")
 											<option value="barra" <?php if ($tipo_grafico_leido=="barra") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico3; ?> (<?php echo $MULTILANG_Vertical; ?>)</option>
 											<option value="barrah" <?php if ($tipo_grafico_leido=="barrah") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico3; ?> (<?php echo $MULTILANG_Horizontal; ?>)</option>
 											<option value="dona" <?php if ($tipo_grafico_leido=="dona") echo "SELECTED"; ?>><?php echo $MULTILANG_InfGrafico7; ?></option>
+											<option value="torta" <?php if ($tipo_grafico_leido=="torta") echo "SELECTED"; ?>>Torta (solo una serie)</option>
 									</select>
 
 									<label for="barra_apilada">Apilar (aplica solo barras):</label>

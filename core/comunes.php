@@ -8263,6 +8263,8 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 	            $unidades_pos=$formato_base[8];     if ($unidades_pos=="") $unidades_pos="";
 	            $barras_horizontales="false";  //Asume barras verticales por defecto
 				if ($tipo_grafico=="barrah")  $barras_horizontales="true";
+	            $tipo_grafico_circular="donut";  //Asume barras verticales por defecto
+				if ($tipo_grafico=="torta")  $tipo_grafico_circular="pie";
 
 				//Elimina los nombres de tabla en caso de tener punto y usa los alias si los tiene
 				for ($i=0;$i<5;$i++)
@@ -8428,6 +8430,10 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                             postUnits: '<?php echo $unidades_pos; ?>',
                             grid: <?php echo $ocultar_grilla; ?>,
                             horizontal: <?php echo $barras_horizontales; ?>,
+                            dataLabels: true,
+                            // dataLabelsPosition: 'outside', //inside
+                            //showPercentage: true,
+                            donutType: '<?php echo $tipo_grafico_circular; ?>',
                             <?php
                                 //Agrega las unidades para los tipos de grafico Donut
                                 if ($TipoObjetoGraficoMorris=="Morris.Donut")
