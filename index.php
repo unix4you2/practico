@@ -162,6 +162,8 @@
 
     // Incluye clases para procesar archivos en csv, xls, ods, pdf, otros
     require_once 'inc/phpexcel/Classes/PHPExcel.php';
+    //require_once 'inc/phpspreadsheet/src/Bootstrap.php';
+    //require_once 'inc/phpspreadsheet/src/PhpSpreadsheet/Spreadsheet.php';
 
     // Incluye archivo que puede tener funciones personalizadas llamadas mediante acciones de formularios
     if (PCO_BuscarErroresSintaxisPHP('mod/personalizadas_pre.php')==0)

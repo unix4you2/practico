@@ -55,6 +55,7 @@ Added: [INFORMES] Ahora los gráficos de barra pueden ser diagramados en sentido
 Added: [INFORMES] Agregados los tipos de gráfico de torta completa tradicionales como una transformación de los gráficos tipo dona.
 Enhan: [LIBS] Actualizada versión de Rapahel de Dmitry Baranovskiy a 2.2.8
 Enhan: [LIBS] Agregada librería Regression 1.4.0 de Tom Alexander para soportar nuevos tipos de gráfico sobre Morris (líneas de tendencia polinomiales, logarítimcas y exponenciales)
+Enhan: [INFORMES] Actualizacion de la librería PHPExcel a la versión 1.8.2
 Enhan: [GRAL] Se evita rutinas de chequeo de sintaxis en sistemas FreeBSD
 Enhan: [GRAL] Ayudas de uso extra para entornos de desarrollo en Vagrant
 Enhan: [GRAL] Los colores en los botones del modal de desarrollo han sido cambiados para que coincidan con los colores de los controles de acceso a los mismos modulos disponibles en el escritorio

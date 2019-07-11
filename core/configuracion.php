@@ -38,7 +38,7 @@
 		(end)
 	*/
 
-	$ServidorBD='';	// Direccion IP o nombre de host
+	$ServidorBD='localhost';	// Direccion IP o nombre de host
 	$BaseDatos='practico';   // Path completo cuando se trata de sqlite2, ej: '/path/to/database.sdb'
 	$UsuarioBD='root';
 	$PasswordBD='mypass';
