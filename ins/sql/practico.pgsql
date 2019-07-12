@@ -367,6 +367,7 @@ CREATE TABLE core_informe_boton (
   pantalla_completa integer default '0',
   precargar_estilos integer default '1',
   imagen varchar(250) DEFAULT '',
+  ubicar_principio integer default '0',
   PRIMARY KEY  (id)
 );
 

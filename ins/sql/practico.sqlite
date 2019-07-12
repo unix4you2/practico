@@ -376,7 +376,8 @@ CREATE TABLE core_informe_boton (
   destino text default '_self',
   pantalla_completa integer default '0',
   precargar_estilos integer default '1',
-  imagen text DEFAULT ''
+  imagen text DEFAULT '',
+  ubicar_principio integer default '0'
 
 );
 
