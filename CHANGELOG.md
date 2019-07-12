@@ -9,33 +9,33 @@
 
 ## Versión 19.5 (2019-07-10)
 
-Added: [FORMS] Ahora durante el almacenamiento de datos de un formulario se permite utilizar variables de postaccion para capturar el valor del ID de registro asociado a los datos almacenados.  Para esto el VALOR de la variable de postaccion debe ser establecido a _OBTENER_ULTIMO_ID_ y con esto en la siguiente acción se contará con dicho valor en el nombre de variable transportado para trabajar.
-Added: [GRAL] Agregado un identificador único PCO_LogoAplicacion a la imágen de logo utilizada en la barra de navegación de la plataforma.  De esta manera el desarrollador podrá cambiarla de manera dinámica.
-Added: [GRAL] Ahora los mensajes modales generados mediante PCOJS_MostrarMensaje permiten la modificación del contenido del marco que incluye los botones inferiores mediante el identificador de HTML PCO_Modal_MensajeBotones
-Added: [LIBS] Se ha cambiado la libreria por defecto para la generación de gráficos de Morris 0.5.1 (Olly Smith) a su versión mejorada 0.6.2 (mantenida por @pierresh) permitiendo otras variedades de gráficos, etiquetas y demás.  Es posible experimentar algunos cambios en color de gráfico pero esto no altera su presentación, maquetación o representación de datos.
-Added: [GRAL] Posibilidad de importar automaticamente scripts de ejecucion única de PHP sobre la carpeta xml/ donde se almacenan las definiciones de archivos que se corren una unica vez en procesos de actualización de framework.
-Added: [INFORMES] A partir de ahora los informes cuentan con dos parametros adicionales que permiten ocultar de raiz sus botones de comando por registro y sus pie de pagina con conteo de resultados cuando son llamados desde código mediante la función PCO_CargarInforme
-Added: [INFORMES] Ahora el diseñador de informes presenta la vista previa de la consulta de dos maneras diferentes: Vista previa con reemplazos de variables y estilos y vista previa sin los reemplazos para ser utilizada en pruebas directamente sobre el motor.
-Added: [INFORMES] El diseñador de informes permite especificar si por defecto se presentan o no los valores asociados a cada elemento del gráfico, además de permitir definir si dichos valores se ubican dentro o fuera del elemento (casco, torta, barra, etc)
-Added: [INFORMES] Se permite a los diseñadores agregar los arreglos de colores que desean utilizar para cada uno de sus gráficos.
-Added: [FORMS] Los diseñadores de formularios advierten al desarrollador cuando por algún motivo se encuentren campos sobre la tabla vinculada que aún no han sido agregados al formulario o cualquier otro formulario embebido.
-Added: [GRAL] La actualizacion y eliminacion de registros que incluyan archivos adjuntos ahora hacen la actualización o eliminación de los archivos correspondientes.  SOLAMENTE para campos de tipo adjunto sobre el formulario principal, no se contemplan los campos de este tipo en formularios emebebidos.  Gracias a @rafaelposadaf
-Added: [INFORMES] Ahora los botones de acción agregados a los informes permiten definir si su ubicación será al principio de las columnas o al final
-Added: [INFORMES] Ahora los gráficos de barra pueden ser diagramados en sentido horizontal y vertical de acuerdo a lo configurado en sus propiedades.
-Added: [INFORMES] Agregados los tipos de gráfico de torta completa tradicionales como una transformación de los gráficos tipo dona.
-Enhan: [LIBS] Actualizada versión de Rapahel de Dmitry Baranovskiy a 2.2.8
-Enhan: [LIBS] Agregada librería Regression 1.4.0 de Tom Alexander para soportar nuevos tipos de gráfico sobre Morris (líneas de tendencia polinomiales, logarítimcas y exponenciales)
-Enhan: [INFORMES] Actualizacion de la librería PHPExcel a la versión 1.8.2
-Enhan: [GRAL] Se evita rutinas de chequeo de sintaxis en sistemas FreeBSD
-Enhan: [GRAL] Ayudas de uso extra para entornos de desarrollo en Vagrant
-Enhan: [GRAL] Los colores en los botones del modal de desarrollo han sido cambiados para que coincidan con los colores de los controles de acceso a los mismos modulos disponibles en el escritorio
-Enhan: [GRAL] Optimizado código de reemplazo de nombres de archivo durante operaciones de almacenamiento de adjuntos gracias a @rafaelposadaf 
-Fixed: [LIBS] Actualización a Pcoder en Asignacion de variables tipo variables compatible con versiones nuevas de PHP
-Fixed: [GRAL] Ajustada la sintaxis en procesos de importacion de definiciones XML para sistemas windows que impedían retornar los valores de manera adecuada al revisar los nodos generados por SimpleXML
-Fixed: [FORMS] Formularios embebidos en otros y con funciones autorun son reemplazadas por nombres unicos para evitar duplicidad de nombres de funciones en JS
-Fixed: [FORMS] Campos de subformularios tenidos en cuenta durante almacenamiento y actualizacion en tablas de formulario padre
-Fixed: [FORMS] Icono de información de elemento sobre la barra de herramientas flotante durante el diseño de formularios contaba con la misma acción que el botón de cambio de columna.  Se elimina la acción y se deja sólo como botón informativo.
-Fixed: [SESION] Eliminado cierre de sesion que impedía los inicios de sesion en servidores windows y fedora debido a un no mantenimiento de la sesion activa por parte del servidor web.
+* Added: [FORMS] Ahora durante el almacenamiento de datos de un formulario se permite utilizar variables de postaccion para capturar el valor del ID de registro asociado a los datos almacenados.  Para esto el VALOR de la variable de postaccion debe ser establecido a _OBTENER_ULTIMO_ID_ y con esto en la siguiente acción se contará con dicho valor en el nombre de variable transportado para trabajar.
+* Added: [GRAL] Agregado un identificador único PCO_LogoAplicacion a la imágen de logo utilizada en la barra de navegación de la plataforma.  De esta manera el desarrollador podrá cambiarla de manera dinámica.
+* Added: [GRAL] Ahora los mensajes modales generados mediante PCOJS_MostrarMensaje permiten la modificación del contenido del marco que incluye los botones inferiores mediante el identificador de HTML PCO_Modal_MensajeBotones
+* Added: [LIBS] Se ha cambiado la libreria por defecto para la generación de gráficos de Morris 0.5.1 (Olly Smith) a su versión mejorada 0.6.2 (mantenida por @pierresh) permitiendo otras variedades de gráficos, etiquetas y demás.  Es posible experimentar algunos cambios en color de gráfico pero esto no altera su presentación, maquetación o representación de datos.
+* Added: [GRAL] Posibilidad de importar automaticamente scripts de ejecucion única de PHP sobre la carpeta xml/ donde se almacenan las definiciones de archivos que se corren una unica vez en procesos de actualización de framework.
+* Added: [INFORMES] A partir de ahora los informes cuentan con dos parametros adicionales que permiten ocultar de raiz sus botones de comando por registro y sus pie de pagina con conteo de resultados cuando son llamados desde código mediante la función PCO_CargarInforme
+* Added: [INFORMES] Ahora el diseñador de informes presenta la vista previa de la consulta de dos maneras diferentes: Vista previa con reemplazos de variables y estilos y vista previa sin los reemplazos para ser utilizada en pruebas directamente sobre el motor.
+* Added: [INFORMES] El diseñador de informes permite especificar si por defecto se presentan o no los valores asociados a cada elemento del gráfico, además de permitir definir si dichos valores se ubican dentro o fuera del elemento (casco, torta, barra, etc)
+* Added: [INFORMES] Se permite a los diseñadores agregar los arreglos de colores que desean utilizar para cada uno de sus gráficos.
+* Added: [FORMS] Los diseñadores de formularios advierten al desarrollador cuando por algún motivo se encuentren campos sobre la tabla vinculada que aún no han sido agregados al formulario o cualquier otro formulario embebido.
+* Added: [GRAL] La actualizacion y eliminacion de registros que incluyan archivos adjuntos ahora hacen la actualización o eliminación de los archivos correspondientes.  SOLAMENTE para campos de tipo adjunto sobre el formulario principal, no se contemplan los campos de este tipo en formularios emebebidos.  Gracias a @rafaelposadaf
+* Added: [INFORMES] Ahora los botones de acción agregados a los informes permiten definir si su ubicación será al principio de las columnas o al final
+* Added: [INFORMES] Ahora los gráficos de barra pueden ser diagramados en sentido horizontal y vertical de acuerdo a lo configurado en sus propiedades.
+* Added: [INFORMES] Agregados los tipos de gráfico de torta completa tradicionales como una transformación de los gráficos tipo dona.
+* Enhan: [LIBS] Actualizada versión de Rapahel de Dmitry Baranovskiy a 2.2.8
+* Enhan: [LIBS] Agregada librería Regression 1.4.0 de Tom Alexander para soportar nuevos tipos de gráfico sobre Morris (líneas de tendencia polinomiales, logarítimcas y exponenciales)
+* Enhan: [INFORMES] Actualizacion de la librería PHPExcel a la versión 1.8.2
+* Enhan: [GRAL] Se evita rutinas de chequeo de sintaxis en sistemas FreeBSD
+* Enhan: [GRAL] Ayudas de uso extra para entornos de desarrollo en Vagrant
+* Enhan: [GRAL] Los colores en los botones del modal de desarrollo han sido cambiados para que coincidan con los colores de los controles de acceso a los mismos modulos disponibles en el escritorio
+* Enhan: [GRAL] Optimizado código de reemplazo de nombres de archivo durante operaciones de almacenamiento de adjuntos gracias a @rafaelposadaf 
+* Fixed: [LIBS] Actualización a Pcoder en Asignacion de variables tipo variables compatible con versiones nuevas de PHP
+* Fixed: [GRAL] Ajustada la sintaxis en procesos de importacion de definiciones XML para sistemas windows que impedían retornar los valores de manera adecuada al revisar los nodos generados por SimpleXML
+* Fixed: [FORMS] Formularios embebidos en otros y con funciones autorun son reemplazadas por nombres unicos para evitar duplicidad de nombres de funciones en JS
+* Fixed: [FORMS] Campos de subformularios tenidos en cuenta durante almacenamiento y actualizacion en tablas de formulario padre
+* Fixed: [FORMS] Icono de información de elemento sobre la barra de herramientas flotante durante el diseño de formularios contaba con la misma acción que el botón de cambio de columna.  Se elimina la acción y se deja sólo como botón informativo.
+* Fixed: [SESION] Eliminado cierre de sesion que impedía los inicios de sesion en servidores windows y fedora debido a un no mantenimiento de la sesion activa por parte del servidor web.
 
 
 ## Versión 19.2 (2019-02-01)
