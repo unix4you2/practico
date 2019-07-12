@@ -8274,6 +8274,9 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 				if($formato_base[9]=="true_outside") $cadenaubicacion_datalabels="dataLabelsPosition: 'outside',";
 				if($formato_base[9]=="true_inside") $cadenaubicacion_datalabels="dataLabelsPosition: 'inside',";
 
+                $cadena_arreglo_colores="";
+				if($formato_base[10]!="") $cadena_arreglo_colores="colors: ".$formato_base[10].",";
+
 				//Elimina los nombres de tabla en caso de tener punto y usa los alias si los tiene
 				for ($i=0;$i<5;$i++)
 					{
@@ -8438,7 +8441,8 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                             postUnits: '<?php echo $unidades_pos; ?>',
                             grid: <?php echo $ocultar_grilla; ?>,
                             horizontal: <?php echo $barras_horizontales; ?>,
-                            
+                            <?php echo $cadena_arreglo_colores; ?> 
+
                             dataLabels: <?php echo $presentar_datalabels; ?>,
                             <?php echo $cadenaubicacion_datalabels; ?>  // EJ: dataLabelsPosition: 'outside', //inside
                             

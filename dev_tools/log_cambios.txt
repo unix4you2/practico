@@ -24,6 +24,7 @@ core/marco_nav.php
 core/marco_dev.php
 inc/bootstrap/js/plugins/morris/*
 inc/bootstrap/css/plugins/*
+inc/phpexcel/*
 
 xml/*
 inc/practico/idiomas/*
@@ -48,6 +49,7 @@ Added: [GRAL] Posibilidad de importar automaticamente scripts de ejecucion únic
 Added: [INFORMES] A partir de ahora los informes cuentan con dos parametros adicionales que permiten ocultar de raiz sus botones de comando por registro y sus pie de pagina con conteo de resultados cuando son llamados desde código mediante la función PCO_CargarInforme
 Added: [INFORMES] Ahora el diseñador de informes presenta la vista previa de la consulta de dos maneras diferentes: Vista previa con reemplazos de variables y estilos y vista previa sin los reemplazos para ser utilizada en pruebas directamente sobre el motor.
 Added: [INFORMES] El diseñador de informes permite especificar si por defecto se presentan o no los valores asociados a cada elemento del gráfico, además de permitir definir si dichos valores se ubican dentro o fuera del elemento (casco, torta, barra, etc)
+Added: [INFORMES] Se permite a los diseñadores agregar los arreglos de colores que desean utilizar para cada uno de sus gráficos.
 Added: [FORMS] Los diseñadores de formularios advierten al desarrollador cuando por algún motivo se encuentren campos sobre la tabla vinculada que aún no han sido agregados al formulario o cualquier otro formulario embebido.
 Added: [GRAL] La actualizacion y eliminacion de registros que incluyan archivos adjuntos ahora hacen la actualización o eliminación de los archivos correspondientes.  SOLAMENTE para campos de tipo adjunto sobre el formulario principal, no se contemplan los campos de este tipo en formularios emebebidos.  Gracias a @rafaelposadaf
 Added: [INFORMES] Ahora los botones de acción agregados a los informes permiten definir si su ubicación será al principio de las columnas o al final

@@ -347,7 +347,7 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 											if (!in_array($i,$EtiquetasConsulta[0]["NumerosColumnasOcultas"]))
 												{											
 													$ColumnaSalida=calcular_columna_hojacalculo($i+1);
-													$PCO_ObjetoPHPExcel->setActiveSheetIndex(0)->setCellValue("$ColumnaSalida$FilaActiva", $registro_informe[$i]);
+													$PCO_ObjetoPHPExcel->setActiveSheetIndex(0)->setCellValue("$ColumnaSalida$FilaActiva", $registro_informe[$i]); //$registro_informe[$i]
 												
 													//Dibuja los bordes si aplica
 													if ($PCO_BordesCelda!="")
@@ -524,6 +524,7 @@ if ($PCO_Accion=="PCO_ActualizarGraficoInforme")
 				$cadena_formato.=$unidades_pre."|";
 				$cadena_formato.=$unidades_pos."|";
 				$cadena_formato.=$ocultar_valores."|";
+				$cadena_formato.=$arreglo_colores."|";
 
 				// Actualiza los datos
 				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."informe SET formato_grafico=? WHERE id=? ","$cadena_formato$_SeparadorCampos_$informe");
@@ -1456,6 +1457,7 @@ if ($PCO_Accion=="PCO_EditarInforme")
 				            $unidades_pre_leido=$formato_base[7];
 				            $unidades_pos_leido=$formato_base[8];
 				            $ocultar_valores=$formato_base[9];
+				            $arreglo_colores_leido=$formato_base[10];
 							//Crea las series
 							$numero_series=5;
 							for ($cs=1;$cs<=$numero_series;$cs++)
@@ -1542,6 +1544,9 @@ if ($PCO_Accion=="PCO_EditarInforme")
 											<option value="false" <?php if ($barra_apilada_leido=="false") echo "SELECTED"; ?>><?php echo $MULTILANG_No; ?></option>
 											<option value="true" <?php if ($barra_apilada_leido=="true") echo "SELECTED"; ?>><?php echo $MULTILANG_Si; ?></option>
 									</select>
+
+									<label for="arreglo_colores">Arreglo de colores:</label>
+									<input placeholder="Ej: ['#34495E', '#26B99A',  '#666']" type="text" name="arreglo_colores" id="arreglo_colores" value="<?php echo @$arreglo_colores_leido; ?>" class="form-control input-sm">
 								</td>
 								<td align="center">
 									<img src="img/tipos_grafico.png?<?php echo filemtime('img/tipos_grafico.png'); ?>" border=0 alt="">
