@@ -851,7 +851,7 @@ if ($PCO_Accion=="PCO_InformesUsuario")
                 <input type="hidden" name="PCO_Accion" value="PCO_PermisosUsuario">
             </form>
             
-			<form name="datoscopia" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<form name="datoscopia" id="datoscopia"  action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="hidden" name="usuariod" value="<?php echo $usuario; ?>">
 			<input type="hidden" name="PCO_Accion" value="PCO_CopiarInformes">
 
@@ -878,7 +878,7 @@ if ($PCO_Accion=="PCO_InformesUsuario")
 					<?php
 						//Despliega opciones de informes para agregar, aunque solamente las que este por debajo del perfil del usuario
 						//No se permite agregar opciones por encima del perfil actual del usuario
-						$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe WHERE 1 ");
+						$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe WHERE id>=0 ");
 						while($registro = $resultado->fetch())
 							{
 								echo '<option  data-icon="glyphicon glyphicon-list-alt fa-fw"  value="'.$registro["id"].'">'.$registro["titulo"].'</option>';
@@ -888,7 +888,7 @@ if ($PCO_Accion=="PCO_InformesUsuario")
                 <button class="btn btn-success btn-xs"  onClick="document.datos.submit()"><i class="fa fa-plus fa-fw"></i> <?php echo $MULTILANG_Agregar; ?></button>
 				<br><br>
                 <a href="javascript:document.PCO_FormVerMenu.submit();" class="btn btn-default btn-xs"><i class="fa fa-home"></i> <?php echo $MULTILANG_FrmAccionRegresar; ?></a>
-                <a href="javascript:document.salto.submit();" class="btn btn-warning btn-xs"><i class="fa fa-external-link-square"></i> <?php echo $MULTILANG_UsrSaltarMenues; ?></a>
+                <a id="btn_salto_permisos" href="javascript:document.salto.submit();" class="btn btn-warning btn-xs"><i class="fa fa-external-link-square"></i> <?php echo $MULTILANG_UsrSaltarMenues; ?></a>
 
             </form>
         <hr>
@@ -1041,7 +1041,7 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
                 <input type="hidden" name="PCO_Accion" value="PCO_InformesUsuario">
             </form>
 
-			<form name="datoscopia" action="<?php echo $ArchivoCORE; ?>" method="POST">
+			<form name="datoscopia" id="datoscopia"  action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="hidden" name="usuariod" value="<?php echo $usuario; ?>">
 			<input type="hidden" name="PCO_Accion" value="PCO_CopiarPermisos">
 
@@ -1078,7 +1078,7 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
                 <button class="btn btn-success btn-xs"  onClick="document.datos.submit()"><i class="fa fa-plus fa-fw"></i> <?php echo $MULTILANG_Agregar; ?></button>
 				<br><br>
                 <a href="javascript:document.PCO_FormVerMenu.submit();" class="btn btn-default btn-xs"><i class="fa fa-home"></i> <?php echo $MULTILANG_FrmAccionRegresar; ?></a>
-                <a href="javascript:document.salto.submit();" class="btn btn-warning btn-xs"><i class="fa fa-external-link-square"></i> <?php echo $MULTILANG_UsrSaltarInformes; ?></a>
+                <a id="btn_salto_permisos" href="javascript:document.salto.submit();" class="btn btn-warning btn-xs"><i class="fa fa-external-link-square"></i> <?php echo $MULTILANG_UsrSaltarInformes; ?></a>
             </form>
             <hr>
 

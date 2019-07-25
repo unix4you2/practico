@@ -158,6 +158,15 @@
     <script src="inc/bootstrap/js/plugins/dataTables/jquery.dataTables.min.js"></script>
     <script src="inc/bootstrap/js/plugins/dataTables/dataTables.bootstrap.min.js"></script>
 
+
+
+
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.bootstrap.min.js"></script>
+
+
+
+
 	<!-- Canvas -->
     <script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>
     
@@ -265,7 +274,12 @@
                             //alert(" '.$TablasDataTable[$i].' Paginacion:'.$Paginacion.'  ColumnaTotales:'.$ColumnaTotales.'  CadenaFormateadaTotales:'.$CadenaFormateadaTotales.'  "); //Depuracion solamente
                             var oTable'.$i.' = $("#'.$TablasDataTable[$i].'").dataTable(
                                 {
+         dom: "Bfrtip",
+
                                     "pageLength": '.$Paginacion.',
+        buttons: [
+        "copy", "excel", "pdf"
+    ],
                                     "scrollX": true,
                                     "bAutoWidth": true,
                                     //"bSort": false,
