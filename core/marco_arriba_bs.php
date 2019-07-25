@@ -93,6 +93,20 @@
     <link href="inc/bootstrap/css/plugins/simple-sidebar.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/toggle/bootstrap-toggle.css" rel="stylesheet">
 
+
+
+
+    <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.bootstrap.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+
+
     <link href="inc/summernote/summernote.css" rel="stylesheet">
     <!-- CSS Personalizado (Plantilla y Practico) -->
     <?php 
