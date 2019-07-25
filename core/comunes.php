@@ -19,7 +19,7 @@
 	*/
 
 	/*
-		Title: Libreria base 
+		Title: Libreria base
 		Ubicacion *[/core/comunes.php]*.  Archivo que contiene las funciones de uso global.
 	*/
 	/*
@@ -72,7 +72,7 @@ function PCO_GenerarNombreAdjunto($nombre_archivo,$campo_tabla,$extension_archiv
 /*
 	Function: PCO_EvaluarCodigo
 	Ejecuta codigo PHP recibido dentro de una cadena.  Reemplazo para la funcion eval que pasa a ser obsoleta por seguridad
-	
+
 	Variables de entrada:
 
 		CadenaCodigoPHP - Cadena con todo el codigo a evaluar TIENE que comenzar con el tag <?php si se desea interpretar
@@ -96,7 +96,7 @@ function PCO_EvaluarCodigo($CadenaCodigoPHP) {
 /*
 	Function: PCO_ImprimirOpcionMenu
 	Imprime en pantalla una opcion de menu, de acuerdo a su configuracion recibida en el registro y la ubicacion definida.
-	
+
 	Variables de entrada:
 
 		RegistroOpcion - Registro completo de la opcion de menu
@@ -128,7 +128,7 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
                 $CadenaPosOpcion='
                       </ul>
                     </div>';
-    			
+
     			//Si la posicion es un formulario cambia el estilo de presentacion del grupo
     			if ($Ubicacion=="formulario")
     			    {
@@ -185,7 +185,7 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
         //Imprime opciones de submenus
 		if ($RegistroOpcion['tipo_menu']=='opc' && $Ubicacion=="submenu")
 			{
-			    
+
 			    //Define el texto a ubicar al lado derecho de la opcion cuando se ha indicadu su valor de acceso directo
 			    $TextoAccesoDirecto='<span class="pull-right text-muted small"><i>Ctrl+O</i></span>';
 			    $TextoAccesoDirecto='';
@@ -211,7 +211,7 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
         		$PCO_EsImagen=0;
         		if (strpos($RegistroOpcion["imagen"],".png") || strpos($RegistroOpcion["imagen"],".jpg") || strpos($RegistroOpcion["imagen"],".gif"))
         			$PCO_EsImagen=1;
-        
+
         		//Si no detecta ninguna extension de archivo de imagen entonces agrega codigo en bootstrap para representarla
         		$CadenaInOpcion='';
         		if (!$PCO_EsImagen)
@@ -229,7 +229,7 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
         			}
         		else
         			$CadenaInOpcion= '<img src="'.$RegistroOpcion["imagen"].'" border="0" />';
-        
+
                 //Imprime opciones ubicadas en la barra superior de la aplicacion
                 if ($Ubicacion=='arriba')
                     {
@@ -239,7 +239,7 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
         				echo $CadenaPosOpcion;
                         echo '</li>';
                     }
-        
+
                 //Imprime opciones ubicadas en ventanas o acordeones en el centro de la aplicacion
                 if ($Ubicacion=='centro')
                     {
@@ -264,7 +264,7 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
                         echo $CadenaInOpcion;
                         echo $CadenaPosOpcion;
                     }
-        
+
                 //Imprime opciones ubicadas en la barra lateral de navegacion (izquierda)
                 if ($Ubicacion=='lateral')
                     {
@@ -285,15 +285,15 @@ function PCO_CodificarCadena_UUEncode($string)
         // Sanity check
         if (!is_scalar($string)) {
             user_error('convert_uuencode() expects parameter 1 to be'
-                . ' string, ' . gettype($string) . ' given', 
+                . ' string, ' . gettype($string) . ' given',
                 E_USER_WARNING);
             return false;
         }
 
         $u = 0;
         $encoded = '';
-        
-        while ($c = count($bytes = unpack('c*', 
+
+        while ($c = count($bytes = unpack('c*',
             substr($string, $u, 45)))) {
             $u += 45;
             $encoded .= pack('c', $c + 0x20);
@@ -307,18 +307,18 @@ function PCO_CodificarCadena_UUEncode($string)
                 $b1 = (($b[0] & 0x03) << 4) + (($b[1] & 0xF0) >> 4);
                 $b2 = (($b[1] & 0x0F) << 2) + (($b[2] & 0xC0) >> 6);
                 $b3 = $b[2] & 0x3F;
-                
+
                 $b0 = $b0 ? $b0 + 0x20 : 0x60;
                 $b1 = $b1 ? $b1 + 0x20 : 0x60;
                 $b2 = $b2 ? $b2 + 0x20 : 0x60;
                 $b3 = $b3 ? $b3 + 0x20 : 0x60;
-                
+
                 $encoded .= pack('c*', $b0, $b1, $b2, $b3);
             }
 
             $encoded .= "\n";
         }
-        
+
         // Add termination characters
         $encoded .= "\x60\n";
         return $encoded;
@@ -332,7 +332,7 @@ function PCO_DecodificarCadena_UUEncode($string)
         // Sanity check
         if (!is_scalar($string)) {
             user_error('convert_uuencode() expects parameter 1 to be'
-                . ' string, ' . gettype($string) . ' given', 
+                . ' string, ' . gettype($string) . ' given',
                 E_USER_WARNING);
             return false;
         }
@@ -357,14 +357,14 @@ function PCO_DecodificarCadena_UUEncode($string)
                 $b1 = $b[1] == 0x60 ? 0 : $b[1] - 0x20;
                 $b2 = $b[2] == 0x60 ? 0 : $b[2] - 0x20;
                 $b3 = $b[3] == 0x60 ? 0 : $b[3] - 0x20;
-                
+
                 $b0 <<= 2;
                 $b0 |= ($b1 >> 4) & 0x03;
                 $b1 <<= 4;
                 $b1 |= ($b2 >> 2) & 0x0F;
                 $b2 <<= 6;
                 $b2 |= $b3 & 0x3F;
-                
+
                 $decoded .= pack('c*', $b0, $b1, $b2);
             }
         }
@@ -389,7 +389,7 @@ function PCO_CodificarCadena_Binario($input)
 
         //RETORNO DE HEXADECIMAL TOMADO DEL BINARIO
         {
-            //$ret = bin2hex ($ret);  
+            //$ret = bin2hex ($ret);
         }
         //RETORNO DE DECIMAL TOMADO DEL BINARIO CON ADICION DE CEROS A LA IZQUIERDA
         /*
@@ -412,7 +412,7 @@ function PCO_DecodificarCadena_Binario($input)
     {
         //RETOMA UN HEXADECIMAL Y DEVUELVE EL BINARIO A PROCESAR
         {
-            //$ret = hex2bin ($ret);  
+            //$ret = hex2bin ($ret);
         }
         //RETOMA UN DECIMAL Y DEVUELVE EL BINARIO A PROCESAR AGREGANDO LOS CEROS EXTRA
         /*
@@ -440,7 +440,7 @@ function PCO_DecodificarCadena_Binario($input)
 /*
 	Function: ImprimirMarcoPanelAdmin
 	Imprime un marco generico con informacion para el panel del administrador
-	
+
 	Variables de entrada:
 
 		ClaseColumnas - Clases para la definicion del tamano del control en formato de columnas bootstrap.  Ej:  col-lg-3 col-md-6
@@ -553,15 +553,15 @@ function PCO_EliminarFormulario($formulario="")
 			    //Elimina los eventos relacionados con sus objetos
 				$EventosFormulario=PCO_EjecutarSQL("SELECT ".$TablasCore."evento_objeto.id FROM ".$TablasCore."evento_objeto,".$TablasCore."formulario_objeto WHERE ".$TablasCore."formulario_objeto.formulario=$formulario AND ".$TablasCore."formulario_objeto.id=".$TablasCore."evento_objeto.objeto ","");
 	            while($RegistroEventosFormulario=$EventosFormulario->fetch())
-		            PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."evento_objeto WHERE id=? ",$RegistroEventosFormulario["id"]);	
-		            
+		            PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."evento_objeto WHERE id=? ",$RegistroEventosFormulario["id"]);
+
 				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
-				
+
 				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario=? ","$formulario");
 				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
 				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."menu WHERE formulario_vinculado=? ","$formulario");
 				PCO_Auditar("Elimina formulario $formulario");
-			}				
+			}
 	}
 
 
@@ -572,8 +572,8 @@ function PCO_EliminarFormulario($formulario="")
 	Busca definiciones de elementos XML almacenadas sobre xml/ y ejecuta el proceso de importacion de cada uno automaticamente durante cada cargue de pagina por algun usuario disenador de aplicacion.
 
 	Salida:
-	
-		Ejecucion automatica de los scripts residentes para la generacion de los elementos internos correspondientes 
+
+		Ejecucion automatica de los scripts residentes para la generacion de los elementos internos correspondientes
 */
 function PCO_ImportarDefinicionesXML()
     {
@@ -584,10 +584,10 @@ function PCO_ImportarDefinicionesXML()
             if(strtolower(substr($ArchivoXML, -4))==".xml") //Considera solo los XML
                 $ArregloElementos[]=$ArchivoXML;
         $DirectorioXML->close();
-       
+
         //Por cada archivo ejecuta el proceso de importacion correspondiente
         foreach ($ArregloElementos as $ArchivoXML)
-            { 
+            {
                 //Identifica el tipo de elemento contenido en el archivo para saber como procesarlo
                 $cadena_xml_importado = file_get_contents("xml/".$ArchivoXML);
 				$xml_importado = @simplexml_load_string($cadena_xml_importado); // Usa SimpleXML Directamente para interpretar cadena
@@ -609,7 +609,7 @@ function PCO_ImportarDefinicionesXML()
 	Busca definiciones de scripts PHP almacenadas sobre xml/ (carpeta del sistema para importar elementos y ejecuta cada uno automaticamente durante cada cargue de pagina por algun usuario disenador de aplicacion.
 
 	Salida:
-	
+
 		Ejecucion automatica de los scripts residentes y renombrado de los mismos para evitar su posterior ejecucion
 */
 function PCO_ImportarScriptsPHP()
@@ -625,7 +625,7 @@ function PCO_ImportarScriptsPHP()
 
         //Por cada archivo ejecuta el proceso de ejecucion correspondiente
         foreach ($ArregloElementos as $ArchivoPHP)
-            { 
+            {
                 //Incluye el codigo
                 include_once("xml/".$ArchivoPHP);
                 //Una vez procesado el archivo lo renombra para no ser ejecutado mas
@@ -665,7 +665,7 @@ function PCO_ExportarDefinicionesXML($TipoElementos,$ListaElementos,$tipo_copia_
                         //Establece el prefijo del path final del archivo exportado segun el valor de ID asi como si llevara fecha y hora o no
                         $PrefijoPath="tmp/";
                         $InfijoPath="_".$PCO_FechaOperacion."_".$PCO_HoraOperacion;
-                        if ($ElementoExportar<0)    
+                        if ($ElementoExportar<0)
                             {
                                 $PrefijoPath="xml/";
                                 $InfijoPath=""; //Elimina fecha y hora dejando siempre un nombre de archivo fijo
@@ -708,7 +708,7 @@ function PCO_ExportarDefinicionesXML($TipoElementos,$ListaElementos,$tipo_copia_
 		ListaElementos - Lista de elementos a parsear en formato similar al de impresion. EJ: 1,2,5-6,8,12-30
 
 	Salida:
-	
+
 		Arreglo con todos los elementos parseados para ser procesado posteriormente por quien llame la funcion
 */
 function PCO_ParsearListasElementos($ListaElementos)
@@ -795,7 +795,7 @@ function PCO_ParsearListasElementos($ListaElementos)
 		xml_importado - Cadena en notacion XML con todos los componentes necesarios del formulario
 
 	Salida:
-	
+
 		Objetos generados a partir de la definicion de la cadena
 */
 function PCO_ImportarXMLFormulario($xml_importado)
@@ -832,7 +832,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
 				$css_columnas=base64_decode($xml_importado->core_formulario[0]->css_columnas);
 				// Inserta el nuevo objeto al form
 				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposParaID.$ListaCamposSinID_formulario.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas");
-				
+
 				//Determina el ID del registro
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
 					$idObjetoInsertado=base64_decode($xml_importado->core_formulario[0]->id);
@@ -862,7 +862,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
 							}
 						//Inserta el nuevo objeto al form
 						PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario_objeto ($ListaCamposSinID_formulario_objeto) VALUES ($CadenaInterrogantes) ","$CadenaValores");
-						
+
                         //Determina cual fue el ID para el ultimo elemento insertado
 						$idObjetoInsertadoParaEvento=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
                         //Averigua el ID ORIGINAL del objeto recien insertado
@@ -878,7 +878,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
                                 if ($RegistroEvento_objeto==$IDOriginalObjeto)
                                     {
     									$CadenaValoresEventos="{$idObjetoInsertadoParaEvento}{$_SeparadorCampos_}{$RegistroEvento_evento}{$_SeparadorCampos_}{$RegistroEvento_javascript}";
-    									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."evento_objeto ($ListaCamposSinID_evento_objeto) VALUES (?,?,?) ","$CadenaValoresEventos"); 
+    									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."evento_objeto ($ListaCamposSinID_evento_objeto) VALUES (?,?,?) ","$CadenaValoresEventos");
                                     }
         					}
 					}
@@ -972,7 +972,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 				{
 					//Hace la copia del objeto segun el tipo solicitado
 					if ($tipo_copia_objeto=="EnLinea")
-						{	
+						{
 							// Busca datos y Crea copia del formulario
 							$consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
 							$registro = $consulta->fetch();
@@ -1037,9 +1037,9 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
         											$CadenaValoresEventos.=$_SeparadorCampos_.$registro_eventos[$PCOCampoEvento+1];
         										}
         									//Inserta el nuevo objeto al form
-        									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."evento_objeto ($ListaCamposSinID_evento_objeto) VALUES ($CadenaInterrogantesEventos) ","$CadenaValoresEventos");    
+        									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."evento_objeto ($ListaCamposSinID_evento_objeto) VALUES ($CadenaInterrogantesEventos) ","$CadenaValoresEventos");
         								}
-								}				
+								}
 
 							//Determina cuantos campos tiene la tabla
 							$ArregloCampos=explode(',',$ListaCamposSinID_formulario_boton);
@@ -1064,7 +1064,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 									//Inserta el nuevo objeto al form
 									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario_boton ($ListaCamposSinID_formulario_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 								}
-							
+
 
 							//Determina cuantos campos tiene la tabla
 							$ArregloCampos=explode(',',$ListaCamposSinID_menu);
@@ -1090,9 +1090,9 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."menu ($ListaCamposSinID_menu) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 								}
 
-							
+
 							PCO_Auditar("Crea copia $tipo_copia_objeto de formulario $formulario");
-							
+
 							//Presenta la ventana con informacion y enlace de descarga
 							?>
 								<form action="<?php echo $ArchivoCORE; ?>" method="POST" name="det<?php echo $idObjetoInsertado; ?>" id="det<?php echo $idObjetoInsertado; ?>">
@@ -1138,7 +1138,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 									//Exporta la tabla de core_formulario_objeto
 									$Contenido_XML .= "
 	<core_formulario_objeto>";
-									$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_formulario_objeto);                        
+									$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_formulario_objeto);
 							$Contenido_XML .= "
 	</core_formulario_objeto>";
 									$conteo_elementos_xml++;
@@ -1156,7 +1156,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 									//Exporta la tabla de core_formulario_objeto
 									$Contenido_XML .= "
 	<core_evento_objeto>";
-									$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_evento_objeto);                        
+									$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_evento_objeto);
 							$Contenido_XML .= "
 	</core_evento_objeto>";
 									$conteo_elementos_xml++;
@@ -1173,7 +1173,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 									//Exporta la tabla de core_formulario_objeto
 									$Contenido_XML .= "
 	<core_formulario_boton>";
-									$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_formulario_boton);                        
+									$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_formulario_boton);
 							$Contenido_XML .= "
 	</core_formulario_boton>";
 									$conteo_elementos_xml++;
@@ -1190,7 +1190,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 									//Exporta la tabla de core_menu
 									$Contenido_XML .= "
 	<core_menu>";
-									$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_menu);                        
+									$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_menu);
 							$Contenido_XML .= "
 	</core_menu>";
 									$conteo_elementos_xml++;
@@ -1205,7 +1205,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 </objetos_practicos>";
 
 							PCO_Auditar("Crea copia $tipo_copia_objeto de formulario $formulario");
-							
+
 							//Guarda la cadena generada en el archivo XML
 							if ($PCO_NombreArchivoXML=="")
         						$PCO_NombreArchivoXML="tmp/FormID_".$formulario."_".$PCO_FechaOperacion."_".$PCO_HoraOperacion.".xml";
@@ -1214,7 +1214,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 								die("No se puede abrir el archivo de exportacion");
 							fputs ($PCO_PunteroArchivo, $Contenido_XML);
 							fclose ($PCO_PunteroArchivo);
-							
+
 							//Presenta la ventana con informacion y enlace de descarga
 							?>
 								<a class="btn btn-success btn-block" href="<?php echo $PCO_NombreArchivoXML; ?>" target="_BLANK" download><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar." ".$PCO_NombreArchivoXML; ?></a>
@@ -1244,7 +1244,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 		xml_importado - Cadena en notacion XML con todos los componentes necesarios del informe Formato: SimpleXMLElement
 
 	Salida:
-	
+
 		Objetos generados a partir de la definicion de la cadena
 */
 function PCO_ImportarXMLInforme($xml_importado)
@@ -1289,7 +1289,7 @@ function PCO_ImportarXMLInforme($xml_importado)
 
 				// Inserta el nuevo informe
 				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposParaID.$ListaCamposSinID_informe.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo");
-				
+
 				//Determina el ID del registro
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
 					$idObjetoInsertado=base64_decode($xml_importado->core_informe[0]->id);
@@ -1394,7 +1394,7 @@ function PCO_ImportarXMLInforme($xml_importado)
 					}
         return $idObjetoInsertado;
     }
-    
+
 
 /* ################################################################## */
 /* ################################################################## */
@@ -1427,14 +1427,14 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 				$mensaje_error=$MULTILANG_ErrorTiempoEjecucion.".  No ingreso ID de Informe - Report ID not entered";
 			if ($tipo_copia_objeto=="")
 				$mensaje_error=$MULTILANG_ErrorTiempoEjecucion.".  No indicado modo de copia - Copy mode not entered";
-				
+
 			$Contenido_XML="";
 
 			if ($mensaje_error=="")
 				{
 					//Hace la copia del objeto segun el tipo solicitado
 					if ($tipo_copia_objeto=="EnLinea")
-						{	
+						{
 							// Busca datos y Crea copia del informe
 							$consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=?","$informe");
 							$registro = $consulta->fetch();
@@ -1464,7 +1464,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 
 							// Inserta el nuevo informe
 							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo");
-							
+
 							$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 
 							// Busca los elementos que componen el informe para hacerles la copia
@@ -1489,8 +1489,8 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 												$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 										}
 									//Inserta el nuevo objeto al informe
-									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_condiciones ($ListaCamposSinID_informe_condiciones) VALUES ($CadenaInterrogantes) ","$CadenaValores");                            
-								}				
+									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_condiciones ($ListaCamposSinID_informe_condiciones) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+								}
 
 							//Determina cuantos tablas tiene la tabla
 							$ArregloCampos=explode(',',$ListaCamposSinID_informe_tablas);
@@ -1515,8 +1515,8 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 									//Inserta el nuevo objeto al informe
 									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_tablas ($ListaCamposSinID_informe_tablas) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 								}
-								
-								
+
+
 							//Determina cuantos campos tiene la tabla
 							$ArregloCampos=explode(',',$ListaCamposSinID_informe_campos);
 							$TotalCampos=count($ArregloCampos);
@@ -1687,7 +1687,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 								die("No se puede abrir el archivo de exportacion");
 							fputs ($PCO_PunteroArchivo, $Contenido_XML);
 							fclose ($PCO_PunteroArchivo);
-							
+
 							//Presenta la ventana con informacion y enlace de descarga
 							?>
 								<a class="btn btn-success btn-block" href="<?php echo $PCO_NombreArchivoXML; ?>" target="_BLANK" download><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar." ".$PCO_NombreArchivoXML; ?></a>
@@ -1762,10 +1762,10 @@ function PCO_ManejadorErrores($DetalleExcepcion)
 /*
 	// Function: PCO_BuscarErroresSintaxisPHP
 	Verifica la sintaxis de un archivo PHP.  Utilizada normalmente antes de cualquier inclusion para evitar que se incluyan archivos con errores del lado del usuario.
-	
+
 	Variables de entrada:
 
-		ArchivoFuente - Archivo que se desea verificar sintaxis 
+		ArchivoFuente - Archivo que se desea verificar sintaxis
 		Funcion exec - Activada en PHP
 
 	Salida:
@@ -1790,7 +1790,7 @@ function PCO_BuscarErroresSintaxisPHP($ArchivoFuente)
                 SunOS
                 Unix
 				*/
-				
+
 				return 0;
 			}
 		else
@@ -1857,7 +1857,7 @@ function PCO_ReemplazarVariablesPHPEnCadena($cadena_original)
 /*
 	// Function: PCO_DistanciaDosCoordenadas
 	Retorna el nombre legible de una direccion (en lenguaje natural) indicados por latitud y longitud
-	
+
 	Variables de entrada:
 
 		Latitud - Asociada al punto deseado			Ejemplos Furatena: 6.249326, -75.565550    Castropol:  6.217010, -75.566734
@@ -1880,7 +1880,7 @@ function PCO_DireccionPorCoordenas($Latitud, $Longitud, $APIKey_GoogleMaps)
 /*
 	// Function: PCO_DireccionPorIDSitio
 	Retorna el nombre legible de una direccion (en lenguaje natural) indicados por el PlaceID usado por Google
-	
+
 	Variables de entrada:
 
 		PlaceID - Asociada al punto deseado			Ejemplo Castropol:  EkNDbC4gMTcgIzM3YS05NiBhIDM3YS0xNzIsIE1lZGVsbMOtbiwgTWVkZWxsw61uLCBBbnRpb3F1aWEsIENvbG9tYmlh
@@ -1903,7 +1903,7 @@ function PCO_DireccionPorIDSitio($PlaceID, $APIKey_GoogleMaps)
 /*
 	// Function: PCO_DistanciaDosCoordenadas
 	Retorna la distancia entre dos puntos indicados por latitud y longitud
-	
+
 	Variables de entrada:
 
 		Punto1 - Determinado por latitud1 y longitud1
@@ -1929,7 +1929,7 @@ function PCO_DistanciaCoordenadasSimple($Latitud1, $Longitud1, $Latitud2, $Longi
 			return $Millas;
 		$Kilometros = $Millas * 1.609344;
 		if ($UnidadMedida=="km")
-			return $Kilometros;				
+			return $Kilometros;
 		return $Kilometros/1000;//retorna metros
 	}
 
@@ -1939,7 +1939,7 @@ function PCO_DistanciaCoordenadasSimple($Latitud1, $Longitud1, $Latitud2, $Longi
 /*
 	// Function: PCO_EsDispositivoMovil
 	Determina si la aplicacion esta corriendo en un dispositivo movil o PC de escritorio segun el agente reportado
-	
+
 	Variables de entrada:
 
 		HTTP_USER_AGENT - Tomada desde el entorno
@@ -1951,11 +1951,11 @@ function PCO_DistanciaCoordenadasSimple($Latitud1, $Longitud1, $Latitud2, $Longi
 function PCO_EsDispositivoMovil()
 	{
 		$aMobileUA = array(
-			'/iphone/i' => 'iPhone', 
-			'/ipod/i' => 'iPod', 
-			'/ipad/i' => 'iPad', 
-			'/android/i' => 'Android', 
-			'/blackberry/i' => 'BlackBerry', 
+			'/iphone/i' => 'iPhone',
+			'/ipod/i' => 'iPod',
+			'/ipad/i' => 'iPad',
+			'/android/i' => 'Android',
+			'/blackberry/i' => 'BlackBerry',
 			'/webos/i' => 'Mobile'
 			);
 
@@ -1967,7 +1967,7 @@ function PCO_EsDispositivoMovil()
 						return true;
 					}
 			}
-		//En otro caso retorna falso 
+		//En otro caso retorna falso
 		return false;
 	}
 
@@ -1977,7 +1977,7 @@ function PCO_EsDispositivoMovil()
 /*
 	// Function: PCO_EsUsuarioInterno
 	Determina si un login de usuario es corresponde a un usuario interno o no
-	
+
 	Variables de entrada:
 
 		Usuario - Login de usuario a verificar
@@ -1998,7 +1998,7 @@ function PCO_EsUsuarioInterno($Usuario)
 /*
 	// Function: PCO_EsAdministrador
 	Determina si un login de usuario es administrador de plataforma o no (si es super usuario)
-	
+
 	Variables de entrada:
 
 		Usuario - Login de usuario a verificar
@@ -2028,7 +2028,7 @@ function PCO_EsAdministrador($Usuario)
 /*
 	// Function: PCO_BackupObtenerDatosTabla
 	Recupera los datos en formato Insert asociados a una tabla
-	
+
 	Variables de entrada:
 
 		PCO_NombreTabla - Nombre de la tabla de la que se desea obtener los datos
@@ -2071,7 +2071,7 @@ function PCO_BackupObtenerDatosTabla($PCO_NombreTabla="",$codificacion_actual,$c
 /*
 	// Function: PCO_BackupObtenerColumnasTabla
 	Recupera los campos asociados a una tabla de datos
-	
+
 	Variables de entrada:
 
 		PCO_NombreTabla - Nombre de la tabla de la que se desea obtener la estructura
@@ -2092,7 +2092,7 @@ function PCO_BackupObtenerColumnasTabla($PCO_NombreTabla="")
 /*
 	// Function: PCO_BackupObtenerTablasBD
 	Recupera las tablas desde la base de datos
-	
+
 	Variables de entrada:
 
 		PCO_ListaTablas - Lista de tablas separadas por coma o simbolo * para todas las tablas
@@ -2128,7 +2128,7 @@ function PCO_BackupObtenerTablasBD($PCO_ListaTablas="",$TipoDeCopia="Estructura"
 /*
 	// Function: PCO_Backup
 	Ejecuta un respaldo parcial o total de la base de datos sobre un archivo determinado
-	
+
 	Variables de entrada:
 
 		PCO_ListaTablas - Lista de tablas separadas por coma o simbolo * para todas las tablas
@@ -2144,7 +2144,7 @@ function PCO_Backup($PCO_ListaTablas,$ArchivoDestino="",$TipoDeCopia="Estructura
 		$EstadoOperacion=1;  //Asume que no hay errores
 		$ContenidoBackup="";
 		if ($ArchivoDestino=="") $EstadoOperacion=0;
-		
+
 		//Si no hay errores continua con el proceso
 		if ($EstadoOperacion==1)
 			{
@@ -2316,7 +2316,7 @@ function PCO_ListadoExploracionArchivos($RutaExploracion="",$Filtro_contenido=""
                             }
                     }
             }
-		
+
 		//Retorna la lista de archivos construida
 		return $PCO_ListadoArchivos;
     }
@@ -2345,10 +2345,10 @@ function PCO_ListadoExploracionArchivosVisual($RutaExploracion="",$Filtro_conten
 
                 $ConteoElementos=0;
                 $TotalTamanoElementos=0;
-                
+
                 //Obtiene la lista de archivos
                 $ListadoArchivos=PCO_ListadoExploracionArchivos($RutaExploracion,$Filtro_contenido);
-                
+
                 //Recorre el arreglo de archivos encontrados para presentarlo
                 $ContenidoDirectorio = opendir($RutaExploracion);
                 foreach ($ListadoArchivos as $Archivo)
@@ -2360,7 +2360,7 @@ function PCO_ListadoExploracionArchivosVisual($RutaExploracion="",$Filtro_conten
 							</span>
 							<div class="chat-body clearfix">
 								<div class="header">
-									<strong class="primary-font">'.$Archivo["Nombre"].'</strong> 
+									<strong class="primary-font">'.$Archivo["Nombre"].'</strong>
 									<small class="pull-right text-muted">';
 										//Si se debe presentar el boton de descarga lo agrega (por defecto), sino no lo muestra
 										if($PermitirDescarga==1)
@@ -2378,7 +2378,7 @@ function PCO_ListadoExploracionArchivosVisual($RutaExploracion="",$Filtro_conten
 									</i>
 								</p>
 							</div>
-						</li>';    
+						</li>';
 						$ConteoElementos++;
 						$TotalTamanoElementos+=$Archivo["Tamano"];
                     }
@@ -2407,7 +2407,7 @@ function PCO_OpcionesComboDesdeCSV($lista_opciones,$caracter_separador,$valor_co
 				$cadena_seleccion="";
 				if ($campos[$i]==$valor_comparacion)
 				$cadena_seleccion=" selected ";
-				
+
 				$cadena_valor=$campos[$i];
 				//Si se indica que se debe utilizar el indice se retorna el numero de item, en lugar de su valor
 				if ($usar_indice==1)
@@ -2423,7 +2423,7 @@ function PCO_OpcionesComboDesdeCSV($lista_opciones,$caracter_separador,$valor_co
 /*
 	Function: PCO_AparearCamposTabla_vs_HojaCalculo
 	Abre un archivo de hoja de cálculo y lo compara frente a los campos de una tabla de datos para ver si existen, tipos de dato, etc.
-	
+
 	Variables de entrada:
 
 		PathArchivo - Ruta completa al archivo que se desea cargar
@@ -2450,23 +2450,23 @@ function PCO_AparearCamposTabla_vs_HojaCalculo($NombreTabla,$PathArchivo)
 		$ListaColumnas="";
 		foreach ($ColumnasArchivo as $ColumnaLista)
 			$ListaColumnas.="|".strtolower($ColumnaLista);
-		
+
 		//Busca las columnas definidas en la tabla
 		$CamposTabla=PCO_ConsultarColumnas($NombreTabla);
 
 		//Busca por cada campo de tabla algun equivalente en las columnas
 		for($i=0;$i<count($CamposTabla);$i++)
-			{				
+			{
 				$SalidaFormateada.= '<tr>';
 					$SalidaFormateada.= '<td>'.$CamposTabla[$i]["nombre"].'</td>';
 					$SalidaFormateada.= '<td><i class="fa fa-exchange"></i></td>';
 					//Genera combo de columnas de archivo preseleccionando uno si aplica
 					$OpcionesCombo=PCO_OpcionesComboDesdeCSV($ListaColumnas,"|",strtolower($CamposTabla[$i]["nombre"]),1); //Solicita el indice en lugar del valor
-					
+
 					//Si el campo es un campo ignorado deja un combo vacio
 					if (  in_array($CamposTabla[$i]["nombre"],$ArregloCamposIgnorados)  )
 						$OpcionesCombo='<option value="">'.$MULTILANG_Campo.' '.strtoupper($CamposTabla[$i]["nombre"]).' '.$MULTILANG_Deshabilitado.'</option>';
-						
+
 					//Si el campo es un campo de valor fijo lo indica en el combo pero como valor queda ignorado
 					if (  in_array($CamposTabla[$i]["nombre"],$ArregloCamposFijos)  )
 						$OpcionesCombo='<option value="">'.$MULTILANG_Campo.' '.strtoupper($CamposTabla[$i]["nombre"]).' '.$MULTILANG_FrmPredeterminado.'='.$ArregloValoresFijos[array_search($CamposTabla[$i]["nombre"], $ArregloCamposFijos)].'</option>';
@@ -2486,7 +2486,7 @@ function PCO_AparearCamposTabla_vs_HojaCalculo($NombreTabla,$PathArchivo)
 /*
 	Function: PCO_ColumnasDesdeHojaCalculo
 	Abre un archivo de hoja de cálculo y busca las columnas definidas en la primera fila de la primera hoja
-	
+
 	Variables de entrada:
 
 		PathArchivo - Ruta completa al archivo que se desea analizar
@@ -2524,7 +2524,7 @@ function PCO_ColumnasDesdeHojaCalculo($PathArchivo)
 /*
 	Function: PCO_DatatableDesdeHojaCalculo
 	Abre un archivo de hoja de cálculo y lo presenta en formato DataTable
-	
+
 	Variables de entrada:
 
 		PathArchivo - Ruta completa al archivo que se desea cargar
@@ -2533,7 +2533,7 @@ function PCO_ColumnasDesdeHojaCalculo($PathArchivo)
 function PCO_DatatableDesdeHojaCalculo($PathArchivo,$NroLineas)
 	{
 		global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales;
-		
+
 		@$PCO_InformesDataTable.="TablaArchivoCSV_Importado|"; //Agrega la tabla a la lista de DataTables para ser convertida
         @$PCO_InformesDataTablePaginaciones.="10|";
         @$PCO_InformesDataTableTotales.="|";
@@ -2590,7 +2590,7 @@ function PCO_DatatableDesdeHojaCalculo($PathArchivo,$NroLineas)
 /*
 	Function: PCO_PermisoHeredadoAccion
 	Busca dentro de los permisos del usuario la accion a ejecutar cuando no se encuentra directamente como una opcion del usuario sino como una subrutina de otra de la que si tiene agregada de manera que valida si puede ingresar o no a ella.
-	
+
 	Variables de entrada:
 
 		accion - Accion a ser ejectudada, de la que se desea buscar permiso heredado por otra
@@ -2629,7 +2629,7 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "PCO_ImportarInforme")				$retorno = 1;
 		if ($PCO_Accion== "PCO_AnalizarImportacionInforme")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
 		if ($PCO_Accion== "PCO_ConfirmarImportacionInforme")	$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		
+
 		// Funciones en core/usuarios.php
 		if ($PCO_Accion== "PCO_CambiarContrasena")				$retorno = 1;
         if ($PCO_Accion== "PCO_ActualizarPerfilUsuario")		$retorno = 1;
@@ -2650,7 +2650,7 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
         if ($PCO_Accion== "PCO_CopiarInformes")					$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
         if ($PCO_Accion== "PCO_AgregarUsuarioAutoregistro")		$retorno = 1;
         if ($PCO_Accion== "PCO_GuardarUsuarioAutoregistro")		$retorno = 1;
-        
+
 		// Funciones en core/menus.php
 		if ($PCO_Accion== "PCO_VerMenu")							$retorno = 1;
 		if ($PCO_Accion== "PCO_BuscarPermisosPractico")			$retorno = 1;
@@ -2706,7 +2706,7 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		// Funciones en core/ajax.php
 		if ($PCO_Accion== "opciones_combo_box")					$retorno = 1;
 		if ($PCO_Accion== "valor_campo_tabla")					$retorno = 1;
-		
+
 		// Funciones en core/kanban.php
         if ($PCO_Accion=="PCO_ExplorarTablerosKanban")          $retorno = 1;
         if ($PCO_Accion=="EliminarTableroKanban")               $retorno = 1; //PCO_PermisoAgregadoAccion("PCO_ExplorarTablerosKanban")
@@ -2716,9 +2716,9 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
         if ($PCO_Accion=="GuardarTareaKanban")                  $retorno = 1;
         if ($PCO_Accion=="EliminarTareaKanban")                 $retorno = 1;
         if ($PCO_Accion=="GuardarPersonalizacionKanban")        $retorno = 1;
-        
+
         //VALIDA OTRAS ACCOIONES ESPECIALES
-        
+
         //Verifica cambios de estado en tableros kanban de usuarios razo
         if ($PCO_Accion=="cambiar_estado_campo")
             {
@@ -2767,7 +2767,7 @@ function PCO_RestaurarEtiquetasHTML($input)
 								}
 					}
 			}
-				
+
 		// close tags that are still open
 		if($opened)
 			{
@@ -2776,7 +2776,7 @@ function PCO_RestaurarEtiquetasHTML($input)
 					$input .= "";
 			}
 		$input1='';
-		
+
 		// open tags that are still close
 		if($closed)
 			{
@@ -2784,7 +2784,7 @@ function PCO_RestaurarEtiquetasHTML($input)
 				foreach($tagstoopen as $tag)
 					$input1 .= $tag;
 			}
-			
+
 		return $input1.''.$input;
 	}
 
@@ -2794,12 +2794,12 @@ function PCO_RestaurarEtiquetasHTML($input)
 /*
 	Function: PCO_PermisoAgregadoAccion
 	Busca dentro de los permisos agregados de manera explicita al usuario.
-	
+
 	Variables de entrada:
 
 		accion - Accion a ser ejectudada
 		estado_aceptacion - Si el usuario cuenta o no con el permiso solicitado
-		
+
 	Salida:
 		Retorna 1 en caso de encontrar el permiso
 		Retorna 0 cuando no se encuentra un permiso
@@ -2809,7 +2809,7 @@ function PCO_PermisoAgregadoAccion($PCO_Accion)
 		// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 		$retorno=0;
 		global $ConexionPDO,$TablasCore,$PCOSESS_LoginUsuario;
-		
+
 		$consulta = $ConexionPDO->prepare("SELECT ".$TablasCore."menu.id FROM ".$TablasCore."usuario_menu,".$TablasCore."menu WHERE ".$TablasCore."menu.id=".$TablasCore."usuario_menu.menu AND usuario='$PCOSESS_LoginUsuario' AND ".$TablasCore."menu.comando='$PCO_Accion' ");
 		$consulta->execute();
 		$registro = $consulta->fetch();
@@ -2837,7 +2837,7 @@ function PCO_ConvertirRegistroXML($Registro_BD,$ListaCampos,$CodificarBase64=1)
 		$Contenido_XML="";
 		// Busca datos y genera XML de cada registro
 		$Elementos_tabla=explode(",",$ListaCampos);
-		
+
 		foreach ($Elementos_tabla as $ElementoExportar)
 			{
 				$EtiquetaAperturaXML="<$ElementoExportar>";
@@ -2847,8 +2847,8 @@ function PCO_ConvertirRegistroXML($Registro_BD,$ListaCampos,$CodificarBase64=1)
 					$ValorEtiqueta=base64_encode($ValorEtiqueta);
 				$Contenido_XML .= "
 	".$EtiquetaAperturaXML.$ValorEtiqueta.$EtiquetaCierreXML;
-			}	
-		
+			}
+
 		//Retorna la cadena equivalente
 		return $Contenido_XML;
 	}
@@ -2957,13 +2957,13 @@ function PCO_LimpiarEntradas()
 		// Escapar siempre las acciones pues deberian tener solo letras, numeros y underlines.
 		$PCO_Accion=PCO_EscaparContenido($PCO_Accion);
 		$PCO_Accion = preg_replace("/[^A-Za-z0-9_]/", "", $PCO_Accion);
-		
+
 		// Escapa siempre los mensajes de error
 		$PCO_ErrorTitulo=PCO_EscaparContenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo));
 		$PCO_ErrorTitulo = preg_replace("/[^A-Za-z0-9_ ><]/", "", $PCO_ErrorTitulo);
 		$PCO_ErrorDescripcion=PCO_EscaparContenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion));
 		$PCO_ErrorDescripcion = preg_replace("/[^A-Za-z0-9_ ><]/", "", $PCO_ErrorDescripcion);
-		
+
 		// Escapa otras variables de uso comun
 		global $PCO_ErrorTitulo,$PCO_ErrorDescripcion;
 		$PCO_ErrorTitulo=PCO_EscaparContenido(PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo));
@@ -2992,7 +2992,7 @@ function PCO_LimpiarEntradas()
 
 		if ($PCO_Accion=="PCO_EditarInforme")
 			{
-				// 
+				//
 				global $informe;
 				$informe=PCO_EscaparContenido($informe);
 			}
@@ -3003,7 +3003,7 @@ function PCO_LimpiarEntradas()
 				$login_filtro=PCO_EscaparContenido($login_filtro);
 				$nombre_filtro=PCO_EscaparContenido($nombre_filtro);
 			}
-			
+
 		if ($PCO_Accion=="PCO_CargarObjeto")
 			{
 				global $PCO_Objeto;
@@ -3015,7 +3015,7 @@ function PCO_LimpiarEntradas()
 				global $tabla_datos;
 				$tabla_datos=PCO_EscaparContenido($tabla_datos); // Revisar si afecta el script de autorun
 			}
-			
+
 		if ($PCO_Accion=="Iniciar_login")
 			{
 				global $uid,$clave,$captcha;
@@ -3105,7 +3105,7 @@ function PCO_CodigoQR($contenido,$recuperacion_errores="L",$ancho_pixeles=3,$mar
 		' or 1=1/*
 		') or '1'='1--
 		') or ('1'='1--
-		1' and ''=' 
+		1' and ''='
 		' OR 'A'='A
 */
 function PCO_FiltrarCadenaSQL($cadena)
@@ -3132,8 +3132,8 @@ function PCO_FiltrarCadenaSQL($cadena)
 				$cadena = str_ireplace("?","",$cadena);
 				$cadena = str_ireplace("&","",$cadena);
 			}
-			
-		// Expresiones que siempre deben ser filtradas	
+
+		// Expresiones que siempre deben ser filtradas
 		$cadena = str_ireplace("BENCHMARK","",$cadena);
 
 		/*
@@ -3153,9 +3153,9 @@ function PCO_FiltrarCadenaSQL($cadena)
 
     Variables de entrada:
 
-        string - 
-        data - 
-        
+        string -
+        data -
+
     Salida:
         Retorna la cadena de consulta con valores formateada para impresion
 */
@@ -3163,12 +3163,12 @@ function PCO_CompletarParametros($string,$data)
     {
         $indexed=$data==array_values($data);
         foreach($data as $k=>$v) {
-            if(is_string($v)) 
+            if(is_string($v))
 	      if($v =='')
 		$v="NULL";
 	      else
 	        $v="'$v'";
-            if($indexed) 
+            if($indexed)
               if($v =='')
 		$string=preg_replace('/\?/','NULL',$string,1);
 	      else
@@ -3192,7 +3192,7 @@ function PCO_CompletarParametros($string,$data)
 	Variables de entrada:
 
 		ConexionBD - Determina si la consulta debe ser ejecutada en otra conexion o motor.  Se hace obligatorio enviar parametros cuando se envia otra conexion
-		
+
 	Salida:
 		Retorna valor de ID de registro o vacio si no se encuentra alguno
 */
@@ -3234,7 +3234,7 @@ function PCO_ObtenerUltimoIDInsertado($ConexionBD="")
 		query - Consulta preformateada para ser ejecutada en el motor
 		lista_parametros - Lista de variables PHP con parametros que deben ser preparados para el query separados por $_SeparadorCampos_
 		ConexionBD - Determina si la consulta debe ser ejecutada en otra conexion o motor.  Se hace obligatorio enviar parametros cuando se envia otra conexion
-		
+
 	Salida:
 		Retorna mensaje en pantalla con la descripcion devuelta por el driver en caso de error
 		Retorna una variable con el arreglo de resultados en caso de ser exitosa la consulta
@@ -3254,7 +3254,7 @@ function PCO_EjecutarSQL($query,$lista_parametros="",$ConexionBD="",$EvitarLogSQ
 		global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin,$MULTILANG_Archivo;
 		global $PCO_Accion;
 		global $PCOSESS_LoginUsuario,$_SeparadorCampos_,$DepuracionSQL;
-		
+
 		// Filtra la cadena antes de ser ejecutada
 		$query=PCO_FiltrarCadenaSQL($query);
 
@@ -3324,7 +3324,7 @@ function PCO_EjecutarSQL($query,$lista_parametros="",$ConexionBD="",$EvitarLogSQ
 
 		ConexionNoSQL - Variable de conexion previamente creada
 		LlaveRegistro - Consulta preformateada para ser ejecutada en el motor
-		
+
 	Salida:
 		Retorna mensaje en pantalla con la descripcion devuelta por el driver en caso de error
 		Retorna una variable con el arreglo de resultados en caso de ser exitosa la consulta
@@ -3408,7 +3408,7 @@ function PCO_EjecutarSQLUnaria($query,$lista_parametros="",$ConexionBD="",$Repli
 			global $ConexionPDO;
 		else
 			$ConexionPDO=$ConexionBD;
-		
+
 		global $ModoDepuracion;
 		global $PCOSESS_LoginUsuario,$_SeparadorCampos_;
 		global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin,$MULTILANG_ContacteAdmin,$MULTILANG_MotorBD;
@@ -3543,13 +3543,13 @@ function PCO_Auditar($PCO_Accion,$usuario="")
 /*
 	Function: PCO_ExisteValor
 	Busca dentro de alguna tabla para verificar si existe o no un valor determinado.  Funcion utilizada para validacion de unicidad de valores en formularios de datos.
-	
+
 	Variables de entrada:
 
 		tabla - Nombre de la tabla donde se desea buscar.
 		campo - Campo de la tabla sobre el cual se desea comparar la existencia del valor.
 		valor - Valor a buscar dentro del campo.
-		
+
 	Salida:
 		Retorna 1 en caso de encontrar un valor dentro de la tabla y campo especificadas y que coincida con el parametro buscado
 		Retorna 0 cuando no se encuentra un valor en la tabla que coincida con el buscado
@@ -3606,7 +3606,7 @@ function PCO_InformacionConexionBD()
 
 	Salida:
 		Listado de drivers PDO soportados
-	
+
 	Ver tambien:
 	<PCO_InformacionConexionBD>
 */
@@ -3635,7 +3635,7 @@ function PCO_ImprimirDriversDisponiblesnBD()
 
 	Salida:
 		Resultado de un query con las tablas  o falso en caso de error
-	
+
 	Ver tambien:
 	<Definicion de conexion PDO>
 */
@@ -3691,10 +3691,10 @@ function PCO_ConsultarTablas($prefijo="",$ConexionAlterna="",$MotorAlterno="",$B
 	Variables de entrada:
 
 		tabla - Nombre de la tabla de la que se desea consultar los nombre de columnas o campos
-		
+
 	Salida:
 		Vector de campos/columnas
-	
+
 	Ver tambien:
 	<PCO_ConsultarTablas>
 */
@@ -3733,7 +3733,7 @@ function PCO_ConsultarColumnas($tabla,$ConexionAlterna="",$MotorAlterno="",$Base
 								$columnas[$columna]["predefinido"] = $registro["Default"];
 								$columnas[$columna]["extras"] = $registro["Extra"];
 								$columna++;
-							}							
+							}
 					}
 				/*else
 					{
@@ -3837,10 +3837,10 @@ function PCO_ConsultarColumnas($tabla,$ConexionAlterna="",$MotorAlterno="",$Base
 
 		tabla - Nombre de la tabla de la que se desea buscar el campo
 		campo - Nombre del campo a verificar
-		
+
 	Salida:
 		verdadero o falso dependiendo de si existe o no el campo en la tabla
-	
+
 	Ver tambien:
 	<PCO_ConsultarTablas>
 */
@@ -3966,7 +3966,7 @@ function PCO_FileGetContents_NATIVO($url)
             'method'=>"GET",
             'header'=>"Accept-language: en\r\n" .
                       "Cookie: foo=bar\r\n" .  // check function.stream-context-create on php.net
-                      "User-Agent: Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.102011-10-16 20:23:10\r\n" // i.e. An iPad 
+                      "User-Agent: Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.102011-10-16 20:23:10\r\n" // i.e. An iPad
           )
         );
         //$opciones_navegacion  = array('http' => array('user_agent' => 'custom user agent string'));
@@ -4013,7 +4013,7 @@ function PCO_CargarURL($url)
 /*
 	Function: PCO_VerificarExtensionesPHP
 	Verifica si las extensiones minimas requeridas por la herramienta se encuentran activadas y despliega mensaje de error si aplica.
-		
+
 	Salida:
 		Mensajes de error asociados a la no activacion de cada extension
 */
@@ -4031,7 +4031,7 @@ function PCO_VerificarExtensionesPHP()
 			//Verifica si pudo ser encendida en tiempo de ejecucion, sino muestra mensaje y solamente si no hay cURL pues es un sustituto
 			if (ini_get($funcion_evaluada)!=$valor_esperado && !extension_loaded('curl'))
 				PCO_Mensaje($MULTILANG_ErrFuncion,$funcion_evaluada.': '.$MULTILANG_ErrDirectiva, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-		
+
 		//Verifica soporte para LDAP cuando esta activado en la herramienta
 		if ($Auth_TipoMotor=='ldap' &&  !extension_loaded('ldap'))
 			PCO_Mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrLDAP, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
@@ -4065,7 +4065,7 @@ function PCO_VerificarExtensionesPHP()
 			PCO_Mensaje($MULTILANG_ErrExtension,'<b>mbstring:</b> '.$MULTILANG_ErrExtensionGenerica, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
 		// Bloqueos por IP/pais http://stackoverflow.com/questions/15835274/file-get-contents-failed-to-open-stream-connection-refused
-		
+
 		// Verifica el soporte para funciones especificas PHP
 		$funcion_evaluada='file_get_contents';
 		if (!function_exists($funcion_evaluada))
@@ -4083,7 +4083,7 @@ function PCO_VerificarExtensionesPHP()
 /*
 	Function: PCO_BuscarActualizaciones
 	Compara la version actual del sistema frente a la ultima version publicada para determinar si existen o no actualizaciones
-		
+
 	Salida:
 		Mensaje informativo en pantalla cuando se encuentren actualizaciones disponibles
 */
@@ -4117,7 +4117,7 @@ function PCO_BuscarActualizaciones($PCOSESS_LoginUsuario='',$PCO_Accion)
 
 	Salida:
 		Resultado de un query con las bases de datos o falso en caso de error
-	
+
 	Ver tambien:
 	<Definicion de conexion PDO> | <PCO_ConsultarTablas>
 */
@@ -4161,14 +4161,14 @@ function PCO_ConsultarBasesDeDatos()
 
 	Salida:
 		Valor numerico que indica la cantidad de registros encontrados
-	
+
 	Ver tambien:
 	    <PCO_ConsultarTablas> | <PCO_ConsultarColumnas>
 */
 function PCO_ContarRegistrosTabla($tabla,$condicion="")
 	{
 		global $ConexionPDO;
-		
+
 		//Si se recibe una concion la agrega a la consulta
 		$ComplementoConsultaConteo="";
 		if ($condicion!="") $ComplementoConsultaConteo=" WHERE $condicion ";
@@ -4202,7 +4202,7 @@ function PCO_CrearFormularioOauth($sitio)
             </form>';
         // Retorna valor de activacion a variable AlMenosUnOAuth
         return $FormularioProveedor;
-    }    
+    }
 
 
 function PCO_ContarProveedoresOAuthConfigurados()
@@ -4274,7 +4274,7 @@ function PCO_ContarProveedoresOAuthConfigurados()
 
         return $Conteo;
     }
-    
+
 
 function PCO_GenerarOpcionesProveedoresOAuth()
     {
@@ -4355,11 +4355,11 @@ function PCO_VentanaLogin()
 		  global $ArchivoCORE,$LlaveDePaso,$Auth_TipoMotor,$MULTILANG_OauthButt,$NombreRAD,$Auth_PresentarOauthInicio,$TipoCaptchaLogin;
 		  global $Auth_PermitirAutoRegistro,$Auth_PermitirReseteoClaves,$CaracteresCaptcha,$IdiomaEnLogin;
 		  global $UbicacionProveedoresOAuth,$IdiomaPredeterminado,$MULTILANG_IdiomaPredeterminado,$MULTILANG_Cerrar,$MULTILANG_Usuario,$MULTILANG_Contrasena,$MULTILANG_CodigoSeguridad,$MULTILANG_IngreseCodigoSeguridad,$MULTILANG_TituloLogin,$MULTILANG_Importante,$MULTILANG_AccesoExclusivo,$MULTILANG_Ingresar,$MULTILANG_OauthLogin,$MULTILANG_LoginClasico,$MULTILANG_LoginOauthDes,$MULTILANG_Registrarme,$MULTILANG_OlvideClave;
-		  
+
 		  //Variables para el sistema de captcha
 		  global $MULTILANG_TipoCaptchaPrefijo,$MULTILANG_TipoCaptchaPosfijo;
           global $MULTILANG_SimboloCaptchaCarro,    $MULTILANG_SimboloCaptchaTijeras,    $MULTILANG_SimboloCaptchaCalculadora,    $MULTILANG_SimboloCaptchaBomba,    $MULTILANG_SimboloCaptchaLibro,    $MULTILANG_SimboloCaptchaPastel,    $MULTILANG_SimboloCaptchaCafe,    $MULTILANG_SimboloCaptchaNube,    $MULTILANG_SimboloCaptchaDiamante,    $MULTILANG_SimboloCaptchaMujer,    $MULTILANG_SimboloCaptchaHombre,    $MULTILANG_SimboloCaptchaBalon,    $MULTILANG_SimboloCaptchaControl,    $MULTILANG_SimboloCaptchaCasa,    $MULTILANG_SimboloCaptchaCelular,    $MULTILANG_SimboloCaptchaArbol,    $MULTILANG_SimboloCaptchaTrofeo,    $MULTILANG_SimboloCaptchaSombrilla,    $MULTILANG_SimboloCaptchaUniversidad,    $MULTILANG_SimboloCaptchaCamara,    $MULTILANG_SimboloCaptchaAmbulancia,    $MULTILANG_SimboloCaptchaAvion,    $MULTILANG_SimboloCaptchaTren,    $MULTILANG_SimboloCaptchaBicicleta,    $MULTILANG_SimboloCaptchaCamion,    $MULTILANG_SimboloCaptchaCorazon;
-            
+
             //Variables posiblemente recibidas desde un autoregistro
             global $AUTO_uid,$AUTO_clave;
 
@@ -4448,7 +4448,7 @@ function PCO_VentanaLogin()
                               </div>
                               <div class="modal-footer">
                                 <button class="btn btn-info" type="button" data-dismiss="modal">
-                                    <?php echo $MULTILANG_LoginClasico; ?> <?php echo $NombreRAD; ?>  
+                                    <?php echo $MULTILANG_LoginClasico; ?> <?php echo $NombreRAD; ?>
                                     {<i class="fa fa-paypal"></i>}
                                 </button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
@@ -4470,7 +4470,7 @@ function PCO_VentanaLogin()
                                 <h3 class="panel-title"><?php echo $MULTILANG_TituloLogin; ?></h3>
                             </div>
                             <div align=center class="panel-body btn-xs">
-    
+
                                     <form role="form" name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
                                     <input type="Hidden" name="PCO_Accion" value="Iniciar_login">
                                         <div class="form-group">
@@ -4484,7 +4484,7 @@ function PCO_VentanaLogin()
                                             <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
                                             <input name="clave" value="<?php echo $AUTO_clave; ?>" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>" AutoCompleteType="Disabled" autocomplete="Off">
                                         </div>
-                                        
+
     									<?php
     										//Presenta selector de idiomas si esta habilitado
     										if ($IdiomaEnLogin==1)
@@ -4511,7 +4511,7 @@ function PCO_VentanaLogin()
         															//Presenta la opcion
         															echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$PCOVAR_Elemento.')</option>';
         														}
-        												}		
+        												}
         											//Vuelve a cargar el predeterminado actual
         											include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
         											?>
@@ -4520,8 +4520,8 @@ function PCO_VentanaLogin()
     										<?php
     												}
     										?>
-    
-    
+
+
     									<?php
     									    //Si el captcha es tradicional
     										if ($CaracteresCaptcha>0 && ($TipoCaptchaLogin=="tradicional" || $TipoCaptchaLogin==""))
@@ -4537,7 +4537,7 @@ function PCO_VentanaLogin()
                 										</div>
                 										</div>';
     											}
-    
+
     									    //Si el captcha es visual
     										if ($CaracteresCaptcha>0 && $TipoCaptchaLogin=="visual")
     											{
@@ -4545,13 +4545,13 @@ function PCO_VentanaLogin()
     											    include ("core/captcha.php");
     											}
     									?>
-                                        
+
                                         <div class="form-group input-group input-group-sm col-xs-12">
                                             <a class="btn btn-success btn-block" href="javascript:document.login_usuario.submit();"><i class="fa fa-check-circle"></i> <?php echo $MULTILANG_Ingresar; ?></a>
                                         </div>
                                     </form>
-                                    
-                                    
+
+
                                         <?php
                                             // Muestra boton de login por red social si aplica
                                             if ($CadenaProveedoresOAuthDisponibles!="")
@@ -4570,7 +4570,7 @@ function PCO_VentanaLogin()
                                                                         <i class="fa fa-2x fa-dropbox"></i>
                                                                     </div>
                                                                 </a>';
-                                                            
+
                                                             //Si esta predeterminado mostrar las opciones al comienzo entonces hace el trigger sobre el enlace
                                                             if ($Auth_PresentarOauthInicio==1)
                                                                 {
@@ -4581,7 +4581,7 @@ function PCO_VentanaLogin()
                                                                     </script>';
                                                                 }
                                                         }
-                                                    
+
                                                     //Si se desean las opciones directamente en el login
                                                     if ($UbicacionProveedoresOAuth=='1')
                                                         {
@@ -4599,7 +4599,7 @@ function PCO_VentanaLogin()
                                     <?php
                                         //PCO_Mensaje($MULTILANG_Importante,$MULTILANG_AccesoExclusivo,'','fa fa-info-circle fa-3x texto-azul','alert alert-info');
                                     ?>
-                                    
+
                                     <div class="row">
                                         <div class="col-md-6">
     										<?php
@@ -4639,8 +4639,8 @@ function PCO_VentanaLogin()
     										?>
                                         </div>
                                     </div>
-                                    
-    
+
+
                             <script language="JavaScript"> login_usuario.uid.focus(); </script>
                             </div> <!-- /panel-body -->
                         </div>
@@ -4662,12 +4662,12 @@ function PCO_VentanaLogin()
     Variables de entrada:
 
     titulo - Nombre de la ventana a visualizar en la parte superior.
-    tipo_panel - Recibe el tipo de panel bootstrap a crear: 
+    tipo_panel - Recibe el tipo de panel bootstrap a crear:
 
     * panel-primary,panel-success,panel-info,panel-warning,panel-danger
     * col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-
     * Otros asociados a clases de bootstrap
-    
+
     barra_herramientas - Lista de barras de herramientas a ser impresas
 
     Ver tambien:
@@ -4690,10 +4690,10 @@ function PCO_AbrirVentana($titulo,$tipo_panel="panel-default",$css_personalizado
 /* ################################################################## */
 /*
 	Function: PCO_CerrarVentana
-	Cierra los espacios de trabajo dinamicos generados por <PCO_AbrirVentana>	
+	Cierra los espacios de trabajo dinamicos generados por <PCO_AbrirVentana>
 
 	Ver tambien:
-	<PCO_AbrirVentana>	
+	<PCO_AbrirVentana>
 */
 function PCO_CerrarVentana()
     {
@@ -4711,7 +4711,7 @@ function PCO_CerrarVentana()
 	Abre los espacios para despliegue de informacion en la parte inferior de los objetos tales como botones o mensajes
 
 	Ver tambien:
-	<PCO_CerrarBarraEstado>	
+	<PCO_CerrarBarraEstado>
 */
 function PCO_AbrirBarraEstado($DEPRECATED_alineacion="CENTER")
     {
@@ -4727,7 +4727,7 @@ function PCO_AbrirBarraEstado($DEPRECATED_alineacion="CENTER")
 	Cierra los espacios de trabajo dinamicos generados por <PCO_AbrirBarraEstado>
 
 	Ver tambien:
-	<PCO_AbrirBarraEstado>	
+	<PCO_AbrirBarraEstado>
 */
 function PCO_CerrarBarraEstado()
   {
@@ -4741,16 +4741,16 @@ function PCO_CerrarBarraEstado()
 /*
     Procedure: PCO_AbrirDialogoModal
     Crea un dialogo modal que puede ser activado luego por un anchor <a>
-    
+
     Variables de entrada:
-    
+
     titulo - Nombre de la ventana a visualizar en la parte superior.
-    tipo_panel - Recibe el tipo de panel bootstrap a crear: 
-    
+    tipo_panel - Recibe el tipo de panel bootstrap a crear:
+
     * panel-primary,panel-success,panel-info,panel-warning,panel-danger
     * col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-
     * Otros asociados a clases de bootstrap
-    
+
     Ver tambien:
     <PCO_CerrarDialogoModal>
 */
@@ -4763,11 +4763,11 @@ function PCO_AbrirDialogoModal($identificador,$titulo="",$estilo_modal="",$impre
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                             <h4 class="modal-title" id="myModalLabel">'.$titulo.'</h4>';
-        
+
         //Si se recibe un subtitulo lo agrega al modal
         if ($subtitulo!="")
             $salida.='<h6 id="myModalLabelSubtitulo"><i>'.$subtitulo.'</i></h6>';
-        
+
         $salida.='                </div>
                         <div class="modal-body mdl-primary">';
         if($impresion_directa==1)
@@ -4782,10 +4782,10 @@ function PCO_AbrirDialogoModal($identificador,$titulo="",$estilo_modal="",$impre
 /* ################################################################## */
 /*
 	Function: PCO_CerrarDialogoModal
-	Cierra los espacios de trabajo por <abrir_modal>	
+	Cierra los espacios de trabajo por <abrir_modal>
 
 	Ver tambien:
-	<abrir_modal>	
+	<abrir_modal>
 */
 function PCO_CerrarDialogoModal($contenido_piepagina,$impresion_directa=1)
     {
@@ -4869,7 +4869,7 @@ function PCO_SelectorObjetosMenu()
                     <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_SeleccioneUno; ?></h4>
                   </div>
                   <div class="modal-body mdl-primary">
-                      
+
                     <form name="selector_objetos" method="POST">
 
                         <label for="objeto_seleccionado"><?php echo $MULTILANG_Formularios; ?> / <?php echo $MULTILANG_Informes; ?>:</label>
@@ -4899,7 +4899,7 @@ function PCO_SelectorObjetosMenu()
                         <br>
                         <?php echo $MULTILANG_MnuHlpComandoInf; ?>
                     </form>
-            
+
                   </div>
                   <div class="modal-footer">
                     <button onClick="document.PCO_FormItemMenu.comando.value=document.selector_objetos.objeto_seleccionado.options[document.selector_objetos.objeto_seleccionado.selectedIndex].value + document.selector_objetos.definir_ventana_propia.options[document.selector_objetos.definir_ventana_propia.selectedIndex].value;" type="button" class="btn btn-success" data-dismiss="modal"><?php echo $MULTILANG_Guardar; ?></button>
@@ -4908,7 +4908,7 @@ function PCO_SelectorObjetosMenu()
                 </div>
               </div>
             </div>
-<?php        
+<?php
     }
 
 
@@ -4935,7 +4935,7 @@ function PCO_SelectorIconosAwesome()
                     <h4 class="modal-title" id="myModalLabel"><?php echo $MULTILANG_MnuSelImagen; ?></h4>
                   </div>
                   <div class="modal-body mdl-primary">
-                   
+
                     <table class="table table-responsive table-unbordered btn-xs">
                         <tr>
                             <td>GlyphIcon</td>
@@ -4958,7 +4958,7 @@ function PCO_SelectorIconosAwesome()
                             <td><button id="lib_elusiveicon" class="btn btn-default" data-iconset="elusiveicon" role="iconpicker" data-search="false" data-search-text="Buscar..." data-rows="5" data-cols="8"></button></td>
                         </tr>
                     </table>
-            
+
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-success" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
@@ -5021,7 +5021,7 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
 		// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 		$cadena_valor='';
 		if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
-		//Reemplaza segundas variables sobre valores predeterminados 
+		//Reemplaza segundas variables sobre valores predeterminados
 		$cadena_valor=' value="'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_predeterminado"]).'" ';
 		//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.
 		//Conserva compatibilidad hacia atras en versiones donde las variables comienzan solamente con el signo pesos y se permite solo una
@@ -5032,7 +5032,7 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
 				if (isset($nombre_variable))
 					{
 						$valor_variable=${$nombre_variable};
-						$cadena_valor=' value="'.$valor_variable.'" ';							
+						$cadena_valor=' value="'.$valor_variable.'" ';
 					}
 			}
 
@@ -5049,7 +5049,7 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
 		$cadena_validacion='';
 		if ($registro_campos["validacion_datos"]!="" && $registro_campos["validacion_datos"]!="fecha" && $registro_campos["validacion_datos"]!="hora" && $registro_campos["validacion_datos"]!="fechahora" && $registro_campos["validacion_datos"]!="fechaxanos" && $registro_campos["validacion_datos"]!="fechahorafull")
 			$cadena_validacion=' onkeypress="return PCOJS_ValidarTeclado(event, \''.$registro_campos["validacion_datos"].'\', \''.$registro_campos["validacion_extras"].'\');" ';
-		
+
         $cadena_complementaria_datepicker='';
         $cadena_ID_datepicker='';
         $cadena_clase_datepicker='';
@@ -5249,7 +5249,7 @@ function PCO_CargarObjetoTextoLargo($registro_campos,$registro_datos_formulario)
 				if (isset($nombre_variable))
 					{
 						$valor_variable=${$nombre_variable};
-						$cadena_valor=' value="'.$valor_variable.'" ';							
+						$cadena_valor=' value="'.$valor_variable.'" ';
 					}
 			}
 		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
@@ -5319,14 +5319,14 @@ function PCO_CargarObjetoAreaResponsive($registro_campos,$registro_datos_formula
 				if (isset($nombre_variable))
 					{
 						$valor_variable=${$nombre_variable};
-						$cadena_valor=' value="'.$valor_variable.'" ';							
+						$cadena_valor=' value="'.$valor_variable.'" ';
 					}
 			}
 		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 		// Muestra el campo
 		$salida.= '<div id="Summer_'.$registro_campos["campo"].'" class="summernote" ></div>';
-		
+
 		//Agrega el campo a la lista de campos de este tipo para ser activados al final
 		$PCO_CamposSummerNote.=$registro_campos["campo"]."|";
 		$PCO_AlturasCamposSummerNote.=$registro_campos["alto"]."|";
@@ -5382,14 +5382,14 @@ function PCO_CargarObjetoTextoFormato($registro_campos,$registro_datos_formulari
 				if (isset($nombre_variable))
 					{
 						$valor_variable=${$nombre_variable};
-						$cadena_valor=' value="'.$valor_variable.'" ';							
+						$cadena_valor=' value="'.$valor_variable.'" ';
 					}
 			}
 		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 		// Muestra el campo
 		$salida.= '<textarea id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="ckeditor" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].'  >'.$cadena_valor.'</textarea>';
-		
+
 		// Define las barras posibles para el editor
 		$barra_documento="['Source','-','NewPage','DocProps','Preview','Print','-','Templates']";
 		$barra_basica="['Bold', 'Italic', 'Underline', 'Strike', 'Subscript','Superscript','-','RemoveFormat']";
@@ -5467,7 +5467,7 @@ function PCO_CargarObjetoTextoFormato($registro_campos,$registro_datos_formulari
 		// Muestra indicadores de obligatoriedad o ayuda
 		if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto"  title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
 		if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto"  title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
-		
+
 		//Activa booleana de existencia de tipo de campo para evitar doble inclusion de javascript
 		$existe_campo_textoformato=1;
 		return $salida;
@@ -5501,7 +5501,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
         //Busca datos del formulario
         $RegistroDisenoFormulario=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario WHERE id=?", "$formulario")->fetch();
         $IdHTMLFormulario=$RegistroDisenoFormulario["id_html"];
-        
+
 		$salida='';
 		$nombre_campo=$registro_campos["campo"];
 
@@ -5536,7 +5536,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
 		$salida.='<div class="form-group input-group">';
 		// Muestra el campo
 		$salida.= '<select id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" data-container="body" class="selectpicker combo-'.$registro_campos["campo"].' show-tick" '.@$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'" '.$registro_campos["personalizacion_tag"].' '.$EstadoLecturaControl.' >';
-        
+
             //Genera Script Ajax y DIV para cambio de opciones en caliente
             $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_opciones"]);
             $nombre_tabla_opciones = $nombre_tabla_opciones[0];
@@ -5576,13 +5576,13 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                                             contenido_recibido=xmlhttp.responseText;
                                             contenido_recibido = contenido_recibido.trim();
                                             arreglo_opciones = contenido_recibido.split("!");
-                                            
+
                                             //Agrega la primera opcion vacia
                                             var etiqueta_option = document.createElement("option");
                                             etiqueta_option.value = "";
                                             etiqueta_option.text = "";
                                             variablecombo_'.$registro_campos["campo"].'.add(etiqueta_option);
-                                            
+
                                             //Recorre el arreglo de opciones y las agrega al combo
                                             for (x=0;x<arreglo_opciones.length-1;x++)
                                                 {
@@ -5613,7 +5613,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                             xmlhttp.send("PCO_Accion=opciones_combo_box&Presentar_FullScreen=1&origen_lista_tablas='.$nombre_tabla_opciones.'&origen_lista_opciones='.$registro_campos["origen_lista_opciones"].'&origen_lista_valores='.$registro_campos["origen_lista_valores"].'&condicion_filtrado_listas='.$registro_campos["condicion_filtrado_listas"].'&PCO_Prefijo='.$PCO_Prefijo.'&PCO_Infijo='.$PCO_Infijo.'&PCO_Posfijo='.$PCO_Posfijo.'");
                         }
                 </script>
-            
+
             <div id="PCO_ListaOpciones_'.$registro_campos["campo"].'" style="display: inline-table;">';
 
                 // Toma los valores desde la lista de opciones (cuando es estatico)
@@ -5632,11 +5632,11 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                                 $valores_lista = explode(",", $registro_campos["lista_opciones"]);
                             }
                     }
-                
+
                 // Si se desea tomar los valores del combo desde una tabla hace la consulta
                 if ($registro_campos["origen_lista_opciones"]!="" && $registro_campos["origen_lista_valores"]!="")
                     {
-                        $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_valores"]); //Usa el campo de valor de la lista que se asume es unico   
+                        $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_valores"]); //Usa el campo de valor de la lista que se asume es unico
                         $nombre_tabla_opciones = $nombre_tabla_opciones[0];
                         $campo_valores=$registro_campos["origen_lista_valores"];
                         $campo_opciones=$registro_campos["origen_lista_opciones"];
@@ -5664,7 +5664,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
 													{
 														$ValorVariable=${$NombreVariable};
 														//Reemplaza el valor encontrado en la cadena de valor original
-														$condicion_filtrado_listas=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$condicion_filtrado_listas);								
+														$condicion_filtrado_listas=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$condicion_filtrado_listas);
 													}
 												else
 													{
@@ -5695,8 +5695,8 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                         //Determina si la opcion es una agrupadora o no
                         //Busca el valor de etiqueta para el grupo
                         $PartesOpcionCombo= explode ( "|" , $valores_lista[$i] );
-                        if ( strpos ( $valores_lista[$i] , "_OPTGROUP_" ) !== FALSE ) 
-                            if ( $PartesOpcionCombo[1]!="") 
+                        if ( strpos ( $valores_lista[$i] , "_OPTGROUP_" ) !== FALSE )
+                            if ( $PartesOpcionCombo[1]!="")
                                 $salida.= "<optgroup label='".$PartesOpcionCombo[1]."'>";
                             else
                                 $salida.= "</optgroup>";  //Si no se encuentra valor de etiqueta alguno entonces cierra el grupo
@@ -5825,18 +5825,18 @@ function PCO_CargarObjetoCampoEtiqueta($registro_campos,$registro_datos_formular
 				if (isset($nombre_variable))
 					{
 						$valor_variable=${$nombre_variable};
-						$cadena_valor=$valor_variable;							
+						$cadena_valor=$valor_variable;
 					}
 			}
 		//Si viene de una busqueda de registro pone el valor de registro
-		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") 
+		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="")
 			{
 				$cadena_valor=$registro_datos_formulario["$nombre_campo"];
 				$Contenido_BARRAS=$cadena_valor; //En caso que se requiera para imprimir en formato especial
 			}
 
 		//Si el formato de salida es especial entonces muestra lo que corresponda
-		if ($registro_campos["formato_salida"]!="") 
+		if ($registro_campos["formato_salida"]!="")
 			{
 				$Tipo_BARRAS=$registro_campos["formato_salida"];
 
@@ -5854,7 +5854,7 @@ function PCO_CargarObjetoCampoEtiqueta($registro_campos,$registro_datos_formular
 						$Ancho_BARRAS=$registro_campos["ancho"];
 						$Alto_BARRAS=$registro_campos["alto"];
 					}
-				
+
 				//Si es un codigo desde la libreria de codigos de barras lo muestra, si es un QR usa la otra funcion
 				if ($Tipo_BARRAS!="qrcode")
 					$cadena_valor='<img src="core/codigobarras.php?Cadena='.$Contenido_BARRAS.'&Tipo='.$Tipo_BARRAS.'&AnchoCodigo=2&AltoCodigo='.($Alto_BARRAS-6).'&AnchoImagen='.$Ancho_BARRAS.'&AltoImagen='.$Alto_BARRAS.'" border=0>';
@@ -5915,15 +5915,15 @@ function PCO_CargarObjetoIFrame($registro_campos,$registro_datos_formulario)
             <embed src="http://www.web-source.net" width="600" height="400"> </embed>
             Error: Embedded data could not be displayed.
         </object>
-        
+
         ALTERNATIVA 2:
         <div id="divId"></div>
         <script type='text/javascript'>
             $(document).ready(function (){
-                $('#divId').load(URL of target);     
+                $('#divId').load(URL of target);
             });
         </script>
-        
+
         ALTERNATIVA 3:
         $('#SampleElement').load('YourURL');
         */
@@ -5962,7 +5962,7 @@ function PCO_CargarObjetoListaRadio($registro_campos,$registro_datos_formulario,
 		// Toma los valores desde la lista de opciones (cuando es estatico)
 		$opciones_lista = explode(",", $registro_campos["lista_opciones"]);
 		$valores_lista = explode(",", $registro_campos["lista_opciones"]);
-		
+
 		//Elimina los elementos vacios de los arreglos
 		$opciones_lista = array_filter($opciones_lista);
 		$valores_lista = array_filter($valores_lista);
@@ -5998,7 +5998,7 @@ function PCO_CargarObjetoListaRadio($registro_campos,$registro_datos_formulario,
 											{
 												$ValorVariable=${$NombreVariable};
 												//Reemplaza el valor encontrado en la cadena de valor original
-												$condicion_filtrado_listas=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$condicion_filtrado_listas);								
+												$condicion_filtrado_listas=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$condicion_filtrado_listas);
 											}
 										else
 											{
@@ -6083,14 +6083,14 @@ function PCO_CargarObjetoCasillaCheck($registro_campos,$registro_datos_formulari
 
 		// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 		$cadena_valor='';
-		
-		
+
+
 		//Toma el valor predeterminado y lo asigna
 		$cadena_valor_almacenada=$registro_campos["valor_predeterminado"];
 		//Si el valor predeterminado es el mismo de valor check activo entonces activa el control
 		if ($registro_campos["valor_predeterminado"]==$registro_campos["valor_check_activo"])
 			$cadena_valor="checked";
-		
+
 		//Reemplaza el valor del campo en caso de tener alguno viniendo del registro
 		$nombre_campo=$registro_campos["campo"];
 		$valor_de_registro=$registro_datos_formulario["$nombre_campo"];
@@ -6107,7 +6107,7 @@ function PCO_CargarObjetoCasillaCheck($registro_campos,$registro_datos_formulari
         // Muestra el campo
         $CadenaEtiquetaCheck=PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]);
         if($registro_campos["ocultar_etiqueta"]=="1") $CadenaEtiquetaCheck="";
-        
+
         $salida.= '
 			<input type="hidden" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor_almacenada.'">
 			<div class="checkbox">
@@ -6251,7 +6251,7 @@ function PCO_CargarObjetoArchivoAdjunto($registro_campos,$registro_datos_formula
 				if (isset($nombre_variable))
 					{
 						$valor_variable=${$nombre_variable};
-						$cadena_valor=' value="'.$valor_variable.'" ';							
+						$cadena_valor=' value="'.$valor_variable.'" ';
 					}
 			}
 
@@ -6347,14 +6347,14 @@ function PCO_CargarObjetoCanvas($registro_campos,$registro_datos_formulario,$for
 			<a href="javascript:limpiar_CANVAS_'.$registro_campos["campo"].'();"><i class="fa fa-times fa-2x"></i></a>
 
 			<script type="text/javascript">';
-        
+
         //Prepara la funcion de reactivacion del canvas para el final del script
         $funciones_activacion_canvas.='
                 $(function ()
 					{
 						$(\'#CANVAS_'.$registro_campos["campo"].'\').sketch({defaultColor: "'.$registro_campos["color_trazo"].'", defaultSize: "'.$registro_campos["tamano_pincel"].'"});
 					});';
-        
+
         $salida.='
 				/*
 				// Genera el vinculo entre el enlace de upload y la funcion
@@ -6491,7 +6491,7 @@ function PCO_CargarObjetoCamara($registro_campos,$registro_datos_formulario,$for
 				var video = document.querySelector("#videoElement");
 				navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
 
-				if (navigator.getUserMedia) {       
+				if (navigator.getUserMedia) {
 					navigator.getUserMedia({video: true}, handleVideo, videoError);
 				}
 
@@ -6593,22 +6593,18 @@ function PCO_CargarObjetoBotonComando($registro_campos,$registro_datos_formulari
 			$comando_javascript="document.".$registro_formulario["id_html"].".PCO_ErrorTitulo.value='".$registro_botones["retorno_titulo"]."'; document.".$registro_formulario["id_html"].".PCO_ErrorDescripcion.value='".$registro_botones["retorno_texto"]."'; document.".$registro_formulario["id_html"].".PCO_ErrorIcono.value='".$registro_botones["retorno_icono"]."'; document.".$registro_formulario["id_html"].".PCO_ErrorEstilo.value='".$registro_botones["retorno_estilo"]."';";
 
         //Define el tipo de boton de acuerdo al tipo de accion
-        if ($registro_campos["tipo_accion"]=="interna_guardar")
-            $comando_javascript.="PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."'); ";    
-        if ($registro_campos["tipo_accion"]=="interna_limpiar")
-            $comando_javascript.="document.getElementById('".$registro_formulario["id_html"]."').reset();";
-        if ($registro_campos["tipo_accion"]=="interna_escritorio")
-            $comando_javascript.="document.PCO_FormVerMenu.submit();";
-        if ($registro_campos["tipo_accion"]=="interna_actualizar")
-            $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_ActualizarDatosFormulario'; PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."'); ";
-        if ($registro_campos["tipo_accion"]=="interna_eliminar")
-            $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_EliminarDatosFormulario';document.".$registro_formulario["id_html"].".submit();";
-        if ($registro_campos["tipo_accion"]=="interna_cargar")
-            $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_CargarObjeto';document.".$registro_formulario["id_html"].".PCO_Objeto.value='".$registro_campos["accion_usuario"]."';  PCOJS_SanitizarValoresListaMultiple(); document.".$registro_formulario["id_html"].".submit(); ";
-        if ($registro_campos["tipo_accion"]=="externa_formulario")
-            $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='".$registro_campos["accion_usuario"]."'; PCOJS_SanitizarValoresListaMultiple(); document.".$registro_formulario["id_html"].".submit();";
-        if ($registro_campos["tipo_accion"]=="externa_javascript")
-            $comando_javascript.=$registro_campos["accion_usuario"];
+        switch ($registro_campos["tipo_accion"]) {
+
+            case 'interna_guardar':    $comando_javascript.="PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."'); ";     break;
+            case 'interna_limpiar':    $comando_javascript.="document.getElementById('".$registro_formulario["id_html"]."').reset();"; break;
+            case 'interna_escritorio': $comando_javascript.="document.PCO_FormVerMenu.submit();"; break;
+            case 'interna_actualizar': $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_ActualizarDatosFormulario'; PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."'); "; break;
+            case 'interna_eliminar':   $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_EliminarDatosFormulario';document.".$registro_formulario["id_html"].".submit();"; break;
+            case 'interna_cargar':     $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_CargarObjeto';document.".$registro_formulario["id_html"].".PCO_Objeto.value='".$registro_campos["accion_usuario"]."';  PCOJS_SanitizarValoresListaMultiple(); document.".$registro_formulario["id_html"].".submit(); "; break;
+            case 'externa_formulario': $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='".$registro_campos["accion_usuario"]."'; PCOJS_SanitizarValoresListaMultiple(); document.".$registro_formulario["id_html"].".submit();"; break;
+            case 'externa_javascript': $comando_javascript.=$registro_campos["accion_usuario"];
+        }
+
 
 		//Verifica si el registro de botones presenta algun texto de confirmacion y lo antepone al script
 		$cadena_confirmacion_accion_pre="";
@@ -6633,7 +6629,7 @@ function PCO_CargarObjetoBotonComando($registro_campos,$registro_datos_formulari
 		$salida.='<a id="'.$registro_campos["id_html"].'" class="btn '.$registro_campos["personalizacion_tag"].'" '.@$cadena_javascript.'><i class="'.$registro_campos["imagen"].'"></i> '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).'</a>';
         //Cierra marco del control de datos
         $salida.= '</div>';
-        
+
 		return $salida;
 	}
 
@@ -6676,7 +6672,7 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                 if($registro_campos["columna"]-1<=0) $EstadoDeshabilitadoMoverIzquierda="disabled";
                 if($registro_campos["columna"]+1>$registro_formulario["columnas"]) $EstadoDeshabilitadoMoverDerecha="disabled";
                 if($registro_campos["peso"]-1<=0) $EstadoDeshabilitadoMoverArriba="disabled";
-                
+
                 //Busca si el elemento tiene o no eventos para poner un boton de enlace
                 $ComplementoBotonEventos="";
                 $RegistroConteoEventos=PCO_EjecutarSQL("SELECT COUNT(*) as conteo_eventos FROM ".$TablasCore."evento_objeto WHERE objeto=? ",$registro_campos["id"])->fetch();
@@ -6687,14 +6683,14 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                         $CadenaDetalleEventos="";
                         $ConteoEventos=1;
                         while ($RegistroEventos=$ResultadoEventos->fetch())
-                            {   
+                            {
                                 $CadenaDetalleEventos.="<li><b>".$RegistroEventos["evento"]."</b> (".$RegistroEventos["bytes_codigo"]." bytes)";
                                 $ConteoEventos++;
                             }
                         $ComplementoBotonEventos='<br><a class="btn btn-xs btn-default" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Evento.'(s)'.$CadenaDetalleEventos.'" href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarFormulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&pestana_activa_editor=eventos_objeto-tab&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-bolt fa-fw texto-blink"></i></a>
                         ';
                     }
-                
+
                 //Si el elemento es un formulario o informe embebido busca ademas el nombre del mismo
                 $Complemento_NombreEmbebido="";
                 if ($registro_campos["tipo"]=="informe")
@@ -6709,7 +6705,7 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                         $RegistroEmbebido=PCO_EjecutarSQL("SELECT id,titulo FROM ".$TablasCore."formulario WHERE id=$IdentificadorBusqueda ")->fetch();
                         $Complemento_NombreEmbebido="Frm ID ".$RegistroEmbebido["id"].": <b>".$RegistroEmbebido["titulo"]."</b>";
                     }
-                    
+
                 //Pone controles
                 $salida='<div id="PCOEditorContenedor_'.$registro_campos["id"].'" style="margin:2px; display:none; visibility:hidden; position: absolute; z-index:1000;">
                             <div style="display: inline-block; vertical-align:top;">
@@ -6818,24 +6814,24 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 				{
 				  var marco_contenidos = document.getElementById(nombre);
 				  var ventana_impresion = window.open(" ", "PopUpImpresion");
-				  
+
 				  //Agrega estilos basicos
                     //ventana_impresion.document.write( \'<link rel="stylesheet" type="text/css" href="general.css">\' );
-				  
+
 				  //Agrega titulo del formulario
 					//ventana_impresion.document.write( \'<div align=CENTER><b>'.$registro_formulario["titulo"].'</b></div><hr>\' );
 
 				  //Agrega el concenito del DIV al documento
 					ventana_impresion.document.write( marco_contenidos.innerHTML );
 					ventana_impresion.document.close();
-				  
+
 				  //Abre ventana de impresion
 					ventana_impresion.print( );
-				  
+
 				  //Cierra ventana de impresion
 					ventana_impresion.close();
 				}
-			
+
 			function OcultarOpcionesEdicion(ObjetoEnlazado,NombreMarcoOpciones)
 			    {
 				    BasuritaVar1=$(ObjetoEnlazado).css(\'border\', \'0px solid\');
@@ -6865,7 +6861,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 
 		// Establece color de fondo para el form
 		$color_fondo="#f2f2f2";
-		
+
 		//Determina si esta en modo diseno para agregar algunos elementos extra al titulo del form
         if ($modo_diseno_formulario)
             {
@@ -6880,7 +6876,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 					</a>
 				</div>';
             }
-		
+
 		// Crea ventana si aplica para el form
 		if ($en_ventana) PCO_AbrirVentana(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["titulo"]).$ComplementoTituloFormulario.$ComplementoIdObjetoEnTitulo,'panel-primary','',$barra_herramientas_mini);
 
@@ -6989,7 +6985,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                         echo '
                         <!-- INICIO de las pestanas No '.$pestana_activa.' -->
                             <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="PCO_PestanaFormulario_'.$pestana_activa.'" >';
-                            
+
                                 //Booleana que determina si se debe incluir el javascript de ckeditor
                                 $existe_campo_textoformato=0;
 
@@ -7012,7 +7008,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                     {
                                         $limite_superior=$registro_obj_fila_unica["peso"];
                                         $ultimo_id=$registro_obj_fila_unica["id"];
-                                        
+
                                         //Define tipo_maquetacion
                                         if($registro_formulario["tipo_maquetacion"]=="responsive")
                                             {
@@ -7026,7 +7022,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                     <div class="table-responsive" style="border-width: 0px; margin-top:0; margin-bottom:0; margin-left:0; margin-right:0; ">
                                                     <table class="table table-responsive '.$estilo_bordes.' table-condensed btn-xs" style="'.$ancho_bordes.' margin-top:0; margin-bottom:0; margin-left:0; margin-right:0; padding: 0px; border-spacing: 0px; "><tr>';
                                             }
-                                        
+
                                         //Recorre todas las comunas definidas para el formulario buscando objetos
                                         for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
                                             {
@@ -7051,7 +7047,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                             $PCO_AnchoColumnas=round(100 / $registro_formulario["columnas"]);
                                                             echo '<td width="'.$PCO_AnchoColumnas.'%" >';
                                                         }
-                              
+
                                                     // Crea los campos definidos por cada columna de formulario
                                                     while ($registro_campos = $consulta_campos->fetch())
                                                         {
@@ -7079,25 +7075,29 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                                     // Formatea cada campo de acuerdo a su tipo
                                                                     // CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas abajo tambien
                                                                     $tipo_de_objeto=@$registro_campos["tipo"];
-                                                                    if ($tipo_de_objeto=="texto_corto") $objeto_formateado = @PCO_CargarObjetoTextoCorto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                                    if ($tipo_de_objeto=="texto_clave") $objeto_formateado = @PCO_CargarObjetoTextoCorto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                                    if ($tipo_de_objeto=="texto_largo") $objeto_formateado = @PCO_CargarObjetoTextoLargo($registro_campos,@$registro_datos_formulario);
-                                                                    if ($tipo_de_objeto=="texto_formato") { $objeto_formateado = @PCO_CargarObjetoTextoFormato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
-                                                                    if ($tipo_de_objeto=="area_responsive") $objeto_formateado = @PCO_CargarObjetoAreaResponsive($registro_campos,@$registro_datos_formulario);
-                                                                    if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = @PCO_CargarObjetoListaSeleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                                    if ($tipo_de_objeto=="lista_radio") $objeto_formateado = @PCO_CargarObjetoListaRadio($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                                    if ($tipo_de_objeto=="casilla_check") $objeto_formateado = @PCO_CargarObjetoCasillaCheck($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                                    if ($tipo_de_objeto=="etiqueta") $objeto_formateado = @PCO_CargarObjetoEtiqueta($registro_campos,@$registro_datos_formulario);
-                                                                    if ($tipo_de_objeto=="url_iframe") $objeto_formateado = @PCO_CargarObjetoIFrame($registro_campos,@$registro_datos_formulario);
-                                                                    if ($tipo_de_objeto=="informe") @PCO_CargarInforme($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
-                                                                    if ($tipo_de_objeto=="deslizador") $objeto_formateado = @PCO_CargarObjetoDeslizador($registro_campos,@$registro_datos_formulario);
-                                                                    if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @PCO_CargarObjetoCampoEtiqueta($registro_campos,@$registro_datos_formulario);
-                                                                    if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @PCO_CargarObjetoArchivoAdjunto($registro_campos,@$registro_datos_formulario);
-                                                                    if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @PCO_CargarObjetoCanvas($registro_campos,@$registro_datos_formulario,$formulario);
-                                                                    if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @PCO_CargarObjetoCamara($registro_campos,@$registro_datos_formulario,$formulario);
-                                                                    if ($tipo_de_objeto=="boton_comando") $objeto_formateado = @PCO_CargarObjetoBotonComando($registro_campos,@$registro_datos_formulario,@$registro_formulario);
+                                                                    switch ($tipo_de_objeto) {
+
+                                                                        case 'texto_corto': $objeto_formateado = @PCO_CargarObjetoTextoCorto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana); break;
+                                                                        case 'texto_clave': $objeto_formateado = @PCO_CargarObjetoTextoCorto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana); break;
+                                                                        case 'texto_largo': $objeto_formateado = @PCO_CargarObjetoTextoLargo($registro_campos,@$registro_datos_formulario); break;
+                                                                        case 'texto_formato': { $objeto_formateado = @PCO_CargarObjetoTextoFormato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; } break;
+                                                                        case 'area_responsive': $objeto_formateado = @PCO_CargarObjetoAreaResponsive($registro_campos,@$registro_datos_formulario); break;
+                                                                        case 'lista_seleccion': $objeto_formateado = @PCO_CargarObjetoListaSeleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana); break;
+                                                                        case 'lista_radio': $objeto_formateado = @PCO_CargarObjetoListaRadio($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana); break;
+                                                                        case 'casilla_check': $objeto_formateado = @PCO_CargarObjetoCasillaCheck($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana); break;
+                                                                        case 'etiqueta': $objeto_formateado = @PCO_CargarObjetoEtiqueta($registro_campos,@$registro_datos_formulario); break;
+                                                                        case 'url_iframe': $objeto_formateado = @PCO_CargarObjetoIFrame($registro_campos,@$registro_datos_formulario); break;
+                                                                        case 'informe': @PCO_CargarInforme($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1); break;
+                                                                        case 'deslizador': $objeto_formateado = @PCO_CargarObjetoDeslizador($registro_campos,@$registro_datos_formulario); break;
+                                                                        case 'campo_etiqueta': $objeto_formateado = @PCO_CargarObjetoCampoEtiqueta($registro_campos,@$registro_datos_formulario); break;
+                                                                        case 'archivo_adjunto': $objeto_formateado = @PCO_CargarObjetoArchivoAdjunto($registro_campos,@$registro_datos_formulario); break;
+                                                                        case 'objeto_canvas': $objeto_formateado = @PCO_CargarObjetoCanvas($registro_campos,@$registro_datos_formulario,$formulario); break;
+                                                                        case 'objeto_camara': $objeto_formateado = @PCO_CargarObjetoCamara($registro_campos,@$registro_datos_formulario,$formulario); break;
+                                                                        case 'boton_comando': $objeto_formateado = @PCO_CargarObjetoBotonComando($registro_campos,@$registro_datos_formulario,@$registro_formulario);
+                                                                    }
+
                                                                     //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
-                                                                    
+
                                                                     //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
                                                                     //padre el valor del campo foraneo del form hijo para llamar a buscar form con
                                                                     //el valor de Id correspondiente. Ademas valida si el form existe
@@ -7108,7 +7108,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                                             if($PCO_ValorCampoBind=="") $PCO_ValorCampoBind="";
                                                                             $consulta_tabla_subform=PCO_EjecutarSQL("SELECT tabla_datos FROM ".$TablasCore."formulario WHERE id=? ","$PCO_ValorCampoBind")->fetch();
                                                                             $PCO_TablaSubform=$consulta_tabla_subform["tabla_datos"];
-                                                                            
+
                                                                             //Determina el valor del campo a vincular en el registro padre (el actual).  Deberia dar el id que se va a buscar
                                                                             $PCO_ValorCampoPadre=@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]];
                                                                             //Si no se encuentra el dato o registro entonces mira si vienen desde un boton de busqueda y usa su valor
@@ -7128,7 +7128,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 																		{
 																			//Presenta mensaje de error al no poder empotrar subformulario
 																			if($tipo_de_objeto=="form_consulta")
-																				PCO_Mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste.'.  FormID: '.$registro_campos["formulario_vinculado"], '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');																				
+																				PCO_Mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste.'.  FormID: '.$registro_campos["formulario_vinculado"], '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 																		}
 
                                                                     //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
@@ -7136,23 +7136,23 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                                         echo $objeto_formateado;
                                                                     echo '</div>'; //Marco contenedor
                                                                 }
-                                                            
+
                                                             //Cierra el marco para el estilo inline del objeto
                                                             echo '</div>';
                                                         }
-                                                        
+
                                                     //Define tipo_maquetacion
                                                     if($registro_formulario["tipo_maquetacion"]=="responsive")
                                                         {
                                                             echo '</div>'; //Fin class=col
-                                                        }                                                        
+                                                        }
                                                     //Define tipo_maquetacion
                                                     if($registro_formulario["tipo_maquetacion"]=="tradicional")
                                                         {
                                                             echo '</td>'; //Fin columna de formulario
                                                         }
                                             }
-                                            
+
                                         //Define tipo_maquetacion
                                         if($registro_formulario["tipo_maquetacion"]=="responsive")
                                             {
@@ -7184,11 +7184,11 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                         $ComplementoDisenoElemento=PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario,"ComplementoDisenoElemento");
                                                         $ComplementoDisenoMarcoOpciones=PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario,"ComplementoDisenoMarcoOpciones");
                                                     }
-                                                
+
                                                 //Define el estilo del contenedor para el objeto
                                                 $ClaseCSSContenedor="";
                                                 if ($registro_campos["clase_contenedor"]!="") $ClaseCSSContenedor=$registro_campos["clase_contenedor"];
-                                                
+
                                                 echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'" class="'.$ClaseCSSContenedor.'" style="margin-top:0px; margin-bottom:0px; margin-left:0; margin-right:0;  padding: 0px; spacing: 0px;">'.$ComplementoDisenoMarcoOpciones.'';
 
                                                 //Define tipo_maquetacion
@@ -7204,23 +7204,27 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 
 
                                                 $tipo_de_objeto=@$registro_campos["tipo"];
-                                                if ($tipo_de_objeto=="texto_corto") $objeto_formateado = PCO_CargarObjetoTextoCorto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                if ($tipo_de_objeto=="texto_clave") $objeto_formateado = PCO_CargarObjetoTextoCorto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                if ($tipo_de_objeto=="texto_largo") $objeto_formateado = PCO_CargarObjetoTextoLargo($registro_campos,@$registro_datos_formulario);
-                                                if ($tipo_de_objeto=="texto_formato") { $objeto_formateado = PCO_CargarObjetoTextoFormato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; }
-                                                if ($tipo_de_objeto=="area_responsive") $objeto_formateado = @PCO_CargarObjetoAreaResponsive($registro_campos,@$registro_datos_formulario);
-                                                if ($tipo_de_objeto=="lista_seleccion") $objeto_formateado = PCO_CargarObjetoListaSeleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                if ($tipo_de_objeto=="lista_radio") $objeto_formateado = PCO_CargarObjetoListaRadio($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                if ($tipo_de_objeto=="casilla_check") $objeto_formateado = @PCO_CargarObjetoCasillaCheck($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana);
-                                                if ($tipo_de_objeto=="etiqueta") $objeto_formateado = PCO_CargarObjetoEtiqueta($registro_campos,@$registro_datos_formulario);
-                                                if ($tipo_de_objeto=="url_iframe") $objeto_formateado = PCO_CargarObjetoIFrame($registro_campos,@$registro_datos_formulario);
-                                                if ($tipo_de_objeto=="informe") @PCO_CargarInforme($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1);
-                                                if ($tipo_de_objeto=="deslizador") $objeto_formateado = @PCO_CargarObjetoDeslizador($registro_campos,@$registro_datos_formulario);
-                                                if ($tipo_de_objeto=="campo_etiqueta") $objeto_formateado = @PCO_CargarObjetoCampoEtiqueta($registro_campos,@$registro_datos_formulario);
-                                                if ($tipo_de_objeto=="archivo_adjunto") $objeto_formateado = @PCO_CargarObjetoArchivoAdjunto($registro_campos,@$registro_datos_formulario);
-                                                if ($tipo_de_objeto=="objeto_canvas") $objeto_formateado = @PCO_CargarObjetoCanvas($registro_campos,@$registro_datos_formulario,$formulario);
-                                                if ($tipo_de_objeto=="objeto_camara") $objeto_formateado = @PCO_CargarObjetoCamara($registro_campos,@$registro_datos_formulario,$formulario);
-                                                if ($tipo_de_objeto=="boton_comando") $objeto_formateado = @PCO_CargarObjetoBotonComando($registro_campos,@$registro_datos_formulario,@$registro_formulario);
+                                                switch ($tipo_de_objeto) {
+
+                                                    case 'texto_corto': $objeto_formateado = PCO_CargarObjetoTextoCorto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana); break;
+                                                    case 'texto_clave': $objeto_formateado = PCO_CargarObjetoTextoCorto($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana); break;
+                                                    case 'texto_largo': $objeto_formateado = PCO_CargarObjetoTextoLargo($registro_campos,@$registro_datos_formulario); break;
+                                                    case 'texto_formato': { $objeto_formateado = PCO_CargarObjetoTextoFormato($registro_campos,@$registro_datos_formulario,$existe_campo_textoformato); $existe_campo_textoformato=1; } break;
+                                                    case 'area_responsive': $objeto_formateado = @PCO_CargarObjetoAreaResponsive($registro_campos,@$registro_datos_formulario); break;
+                                                    case 'lista_seleccion': $objeto_formateado = PCO_CargarObjetoListaSeleccion($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana); break;
+                                                    case 'lista_radio': $objeto_formateado = PCO_CargarObjetoListaRadio($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana); break;
+                                                    case 'casilla_check': $objeto_formateado = @PCO_CargarObjetoCasillaCheck($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana); break;
+                                                    case 'etiqueta': $objeto_formateado = PCO_CargarObjetoEtiqueta($registro_campos,@$registro_datos_formulario); break;
+                                                    case 'url_iframe': $objeto_formateado = PCO_CargarObjetoIFrame($registro_campos,@$registro_datos_formulario); break;
+                                                    case 'informe': @PCO_CargarInforme($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1); break;
+                                                    case 'deslizador': $objeto_formateado = @PCO_CargarObjetoDeslizador($registro_campos,@$registro_datos_formulario); break;
+                                                    case 'campo_etiqueta': $objeto_formateado = @PCO_CargarObjetoCampoEtiqueta($registro_campos,@$registro_datos_formulario); break;
+                                                    case 'archivo_adjunto': $objeto_formateado = @PCO_CargarObjetoArchivoAdjunto($registro_campos,@$registro_datos_formulario); break;
+                                                    case 'objeto_canvas': $objeto_formateado = @PCO_CargarObjetoCanvas($registro_campos,@$registro_datos_formulario,$formulario); break;
+                                                    case 'objeto_camara': $objeto_formateado = @PCO_CargarObjetoCamara($registro_campos,@$registro_datos_formulario,$formulario); break;
+                                                    case 'boton_comando': $objeto_formateado = @PCO_CargarObjetoBotonComando($registro_campos,@$registro_datos_formulario,@$registro_formulario);
+                                                }
+
                                                 //Carga SubFormulario solo si no es el mismo actual para evitar ciclos infinitos
                                                 //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
                                                 //padre el valor del campo foraneo del form hijo para llamar a buscar form con
@@ -7232,7 +7236,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                         if($PCO_ValorCampoBind=="") $PCO_ValorCampoBind="";
                                                         $consulta_tabla_subform=PCO_EjecutarSQL("SELECT tabla_datos FROM ".$TablasCore."formulario WHERE id=? ","$PCO_ValorCampoBind")->fetch();
                                                         $PCO_TablaSubform=$consulta_tabla_subform["tabla_datos"];
-                                                        
+
                                                         //Determina el valor del campo a vincular en el registro padre (el actual).  Deberia dar el id que se va a buscar
                                                         $PCO_ValorCampoPadre=@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]];
                                                         //Si no se encuentra el dato o registro entonces mira si vienen desde un boton de busqueda y usa su valor
@@ -7252,7 +7256,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 													{
 														//Presenta mensaje de error al no poder empotrar subformulario
 														if($tipo_de_objeto=="form_consulta")
-															PCO_Mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste.'.  FormID: '.$registro_campos["formulario_vinculado"], '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');																				
+															PCO_Mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste.'.  FormID: '.$registro_campos["formulario_vinculado"], '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 													}
 
                                                 //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
@@ -7263,7 +7267,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                 if($registro_formulario["tipo_maquetacion"]=="responsive")
                                                     {
                                                         echo '</div></div>'; //Fin class=row y class=col
-                                                    }                                                
+                                                    }
                                                 //Define tipo_maquetacion
                                                 if($registro_formulario["tipo_maquetacion"]=="tradicional")
                                                     {
@@ -7281,7 +7285,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                         echo '
                             </div>
                         <!-- FIN de las pestanas No '.$pestana_activa.'-->';
-                        
+
                         //Limpia para las siguientes pestanas
                         $estado_activa_primera_pestana='';
                         $pestana_activa++;
@@ -7305,7 +7309,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 
 	// Si tiene botones agrega barra de estado y los ubica
 	$consulta_botones = PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_boton." FROM ".$TablasCore."formulario_boton WHERE formulario=? AND visible=1 ORDER BY peso","$formulario");
-	
+
 	if($consulta_botones->rowCount()>0 || $PCO_InformeFiltro!="") //Crea la barra incluso si no hay botones en diseno pero se encuentra que el llamado es desde un informe que requiere filtro
 		{
 			PCO_AbrirBarraEstado();
@@ -7315,25 +7319,21 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 					//Transfiere variables de mensajes de retorno asociadas al boton
 					$comando_javascript="";
 					if ($registro_botones["retorno_titulo"]!="")
-						$comando_javascript="document.".$registro_formulario["id_html"].".PCO_ErrorTitulo.value='".$registro_botones["retorno_titulo"]."'; document.".$registro_formulario["id_html"].".PCO_ErrorDescripcion.value='".$registro_botones["retorno_texto"]."'; document.".$registro_formulario["id_html"].".PCO_ErrorIcono.value='".$registro_botones["retorno_icono"]."'; document.".$registro_formulario["id_html"].".PCO_ErrorEstilo.value='".$registro_botones["retorno_estilo"]."';";							
-					
+						$comando_javascript="document.".$registro_formulario["id_html"].".PCO_ErrorTitulo.value='".$registro_botones["retorno_titulo"]."'; document.".$registro_formulario["id_html"].".PCO_ErrorDescripcion.value='".$registro_botones["retorno_texto"]."'; document.".$registro_formulario["id_html"].".PCO_ErrorIcono.value='".$registro_botones["retorno_icono"]."'; document.".$registro_formulario["id_html"].".PCO_ErrorEstilo.value='".$registro_botones["retorno_estilo"]."';";
+
 					//Define el tipo de boton de acuerdo al tipo de accion
-					if ($registro_botones["tipo_accion"]=="interna_guardar")
-                        $comando_javascript.="PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."');";    
-					if ($registro_botones["tipo_accion"]=="interna_limpiar")
-                        $comando_javascript.="document.getElementById('".$registro_formulario["id_html"]."').reset();";
-                    if ($registro_botones["tipo_accion"]=="interna_escritorio")
-                        $comando_javascript.="document.PCO_FormVerMenu.submit();";
-					if ($registro_botones["tipo_accion"]=="interna_actualizar")
-						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_ActualizarDatosFormulario'; PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."');";
-					if ($registro_botones["tipo_accion"]=="interna_eliminar")
-						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_EliminarDatosFormulario';document.".$registro_formulario["id_html"].".submit();";
-					if ($registro_botones["tipo_accion"]=="interna_cargar")
-						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_CargarObjeto';document.".$registro_formulario["id_html"].".PCO_Objeto.value='".$registro_botones["accion_usuario"]."'; PCOJS_SanitizarValoresListaMultiple(); document.".$registro_formulario["id_html"].".submit(); ";
-					if ($registro_botones["tipo_accion"]=="externa_formulario")
-						$comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='".$registro_botones["accion_usuario"]."';  PCOJS_SanitizarValoresListaMultiple(); document.".$registro_formulario["id_html"].".submit(); ";
-					if ($registro_botones["tipo_accion"]=="externa_javascript")
-						$comando_javascript.=$registro_botones["accion_usuario"];
+          switch ($registro_botones["tipo_accion"]) {
+
+                case 'interna_guardar':    $comando_javascript.="PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."');";     break;
+                case 'interna_limpiar':    $comando_javascript.="document.getElementById('".$registro_formulario["id_html"]."').reset();"; break;
+                case 'interna_escritorio': $comando_javascript.="document.PCO_FormVerMenu.submit();"; break;
+                case 'interna_actualizar': $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_ActualizarDatosFormulario'; PCOJS_ValidarCamposYProcesarFormulario('".$registro_formulario["id_html"]."');"; break;
+                case 'interna_eliminar':   $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_EliminarDatosFormulario';document.".$registro_formulario["id_html"].".submit();"; break;
+                case 'interna_cargar':     $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='PCO_CargarObjeto';document.".$registro_formulario["id_html"].".PCO_Objeto.value='".$registro_botones["accion_usuario"]."'; PCOJS_SanitizarValoresListaMultiple(); document.".$registro_formulario["id_html"].".submit(); "; break;
+                case 'externa_formulario': $comando_javascript.="document.".$registro_formulario["id_html"].".PCO_Accion.value='".$registro_botones["accion_usuario"]."';  PCOJS_SanitizarValoresListaMultiple(); document.".$registro_formulario["id_html"].".submit(); "; break;
+                case 'externa_javascript': $comando_javascript.=$registro_botones["accion_usuario"];
+          }
+
 
                     //Verifica si el registro de botones presenta algun texto de confirmacion y lo antepone al script
                     $cadena_confirmacion_accion_pre="";
@@ -7346,7 +7346,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 
                     //Genera la cadena del enlace
                     $cadena_javascript='href="javascript:  '.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.'  "';
-                    
+
 					//Si no se especifica un estilo para el boton entonces se usa el predeterminado
                     $estilo_basico_boton="btn btn-default";
                     echo '<a class="'.$estilo_basico_boton.' '.$registro_botones["estilo"].'" '.@$cadena_javascript.'>'.PCO_ReemplazarVariablesPHPEnCadena($registro_botones["titulo"]).'</a>';
@@ -7371,37 +7371,42 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 	//Si se quiere anular el formulario y su accion cuando se trata de un sub-formulario de consulta
 	if (!$anular_form)
 		echo '</form>';
-	
+
 	//Carga todos los eventos asociados a los controles de formulario
 	$eventos_controles_formulario=PCO_EjecutarSQL("SELECT ".$TablasCore."evento_objeto.*,".$TablasCore."formulario_objeto.id_html FROM ".$TablasCore."evento_objeto,".$TablasCore."formulario_objeto WHERE ".$TablasCore."evento_objeto.objeto=".$TablasCore."formulario_objeto.id  AND ".$TablasCore."formulario_objeto.formulario=$formulario ");
 	while($registro_eventos_definidos = $eventos_controles_formulario->fetch())
 		{
 		    //Limpia el metodo, asume no conocerlo
-		    $MetodoJQuery="";
-            //1-Raton
-            if ($registro_eventos_definidos["evento"]=="onclick") $MetodoJQuery="click";
-            if ($registro_eventos_definidos["evento"]=="ondblclick") $MetodoJQuery="dblclick";
-            if ($registro_eventos_definidos["evento"]=="onmousedown") $MetodoJQuery="mousedown";
-            if ($registro_eventos_definidos["evento"]=="onmouseenter") $MetodoJQuery="mouseenter";
-            if ($registro_eventos_definidos["evento"]=="onmouseleave") $MetodoJQuery="mouseleave";
-            if ($registro_eventos_definidos["evento"]=="onmousemove") $MetodoJQuery="mousemove";
-            if ($registro_eventos_definidos["evento"]=="onmouseover") $MetodoJQuery="mouseover";
-            if ($registro_eventos_definidos["evento"]=="onmouseout") $MetodoJQuery="mouseout";
-            if ($registro_eventos_definidos["evento"]=="onmouseup") $MetodoJQuery="mouseup";
-            if ($registro_eventos_definidos["evento"]=="contextmenu") $MetodoJQuery="contextmenu";
-            //2-Teclado
-            if ($registro_eventos_definidos["evento"]=="onkeydown") $MetodoJQuery="keydown";
-            if ($registro_eventos_definidos["evento"]=="onkeypress") $MetodoJQuery="keypress";
-            if ($registro_eventos_definidos["evento"]=="onkeyup") $MetodoJQuery="keyup";
-            //3-Formularios
-            if ($registro_eventos_definidos["evento"]=="onfocus") $MetodoJQuery="focus";
-            if ($registro_eventos_definidos["evento"]=="onblur") $MetodoJQuery="blur";
-            if ($registro_eventos_definidos["evento"]=="onchange") $MetodoJQuery="change";
-            if ($registro_eventos_definidos["evento"]=="onselect") $MetodoJQuery="select";
-            if ($registro_eventos_definidos["evento"]=="onsubmit") $MetodoJQuery="submit";
-            if ($registro_eventos_definidos["evento"]=="oncut") $MetodoJQuery="reset";
-            if ($registro_eventos_definidos["evento"]=="oncopy") $MetodoJQuery="click";
-            if ($registro_eventos_definidos["evento"]=="onpaste") $MetodoJQuery="click";
+
+        switch ($registro_eventos_definidos["evento"]) {
+          //1-Raton
+          case 'onclick': $MetodoJQuery="click"; break;
+          case 'ondblclick': $MetodoJQuery="dblclick"; break;
+          case 'onmousedown': $MetodoJQuery="mousedown"; break;
+          case 'onmouseenter': $MetodoJQuery="mouseenter"; break;
+          case 'onmouseleave': $MetodoJQuery="mouseleave"; break;
+          case 'onmousemove': $MetodoJQuery="mousemove"; break;
+          case 'onmouseover': $MetodoJQuery="mouseover"; break;
+          case 'onmouseout': $MetodoJQuery="mouseout"; break;
+          case 'onmouseup': $MetodoJQuery="mouseup"; break;
+          case 'contextmenu': $MetodoJQuery="contextmenu"; break;
+          //2-Teclado
+          case 'onkeydown': $MetodoJQuery="keydown"; break;
+          case 'onkeypress': $MetodoJQuery="keypress"; break;
+          case 'onkeyup': $MetodoJQuery="keyup"; break;
+          //3-Formularios
+          case 'onfocus': $MetodoJQuery="focus"; break;
+          case 'onblur': $MetodoJQuery="blur"; break;
+          case 'onchange': $MetodoJQuery="change"; break;
+          case 'onselect': $MetodoJQuery="select"; break;
+          case 'onsubmit': $MetodoJQuery="submit"; break;
+          case 'oncut': $MetodoJQuery="reset"; break;
+          case 'oncopy': $MetodoJQuery="click"; break;
+          case 'onpaste': $MetodoJQuery="click"; break;
+          default:
+            $MetodoJQuery="";
+        }
+
 			//Imprime el script asociado al evento siempre y cuando la funcion sea reconocida
 			if ($MetodoJQuery!="")
 			    {
@@ -7418,10 +7423,10 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
         $JavaScriptFormulario=$registro_formulario["javascript"];
         //Reemplaza la funcion de FrmAutoRun() del formulario por FrmAutoRun_IDFormulario() para garantizar que es unica
         $JavaScriptFormulario=str_replace("FrmAutoRun()","FrmAutoRun_IDForm".$registro_formulario["id"]."()",$JavaScriptFormulario);
-        	$PCO_FuncionesJSInternasFORM .= '<script type="text/javascript">'.$JavaScriptFormulario.' 
+        	$PCO_FuncionesJSInternasFORM .= '<script type="text/javascript">'.$JavaScriptFormulario.'
         		if (typeof FrmAutoRun_IDForm'.$registro_formulario["id"].' === "function") { FrmAutoRun_IDForm'.$registro_formulario["id"].'(); }
         		</script>';
-        
+
         //Busca la lista de campos marcados como obligatorios sobre el form
         $consulta_campos_obligatorios=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND obligatorio=1","$formulario");
         $ListaCamposObligatorios="";
@@ -7433,7 +7438,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
             }
         $POSTForm_ListaCamposObligatorios.=$ListaCamposObligatorios;
         $POSTForm_ListaTitulosObligatorios.=$ListaTitulosObligatorios;
-        
+
         if ($en_ventana) PCO_CerrarVentana();
   }
 
@@ -7460,11 +7465,11 @@ function PCO_GenerarBotonesInforme($informe,$Ubicacion)
 		global $ConexionPDO,$ArchivoCORE,$TablasCore,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
 		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
-		
+
 		$ComplementoUbicacion=' AND ubicar_principio=0 ';
 		if ($Ubicacion==1)
 		    $ComplementoUbicacion=' AND ubicar_principio=1 ';
-		
+
 		//Inicializa la cadena de botones vacia
 		$cadena_generica_botones='';
 
@@ -7481,7 +7486,7 @@ function PCO_GenerarBotonesInforme($informe,$Ubicacion)
 						$valores = explode(".",$registro_botones["accion_usuario"]);
 						$tabla_vinculada=@$valores[0];
 						$campo_vinculado=@$valores[1];
-					
+
 						//Si solo se indico el campo, sin la tabla, intenta usar solo el campo
 						if ($campo_vinculado=="" && $tabla_vinculada!="")
 							{
@@ -7546,7 +7551,7 @@ function PCO_GenerarBotonesInforme($informe,$Ubicacion)
 						$cadena_confirmacion_accion_pre=" if (confirm('".PCO_ReemplazarVariablesPHPEnCadena($registro_botones["confirmacion_texto"])."')) {";
 						$cadena_confirmacion_accion_pos=" } else {} ";
 					}
-				
+
 				//Genera la cadena del enlace
 				$cadena_javascript='onclick="'.$cadena_confirmacion_accion_pre.'  '.@$comando_javascript.'  '.$cadena_confirmacion_accion_pos.' "';
 				//Determina si el boton llevara texto o si el texto se usa como ayuda.  Por defecto siempre se agrega el texto por defecto.
@@ -7659,7 +7664,7 @@ function PCO_ConstruirConsultaInforme($informe,$evitar_campos_ocultos=0)
 		//Si se desea evitar los campos ocultos entonces los busca
 		if ($evitar_campos_ocultos==1)
 			$PCO_ColumnasOcultas=PCO_DeterminarCamposOcultos($informe);
-			
+
 			// Inicia CONSTRUCCION DE CONSULTA DINAMICA
 			$numero_columnas=0;
 			//Busca los CAMPOS definidos para el informe
@@ -7671,7 +7676,7 @@ function PCO_ConstruirConsultaInforme($informe,$evitar_campos_ocultos=0)
 					//Si tiene alias definido lo agrega
 					$posfijo_campo="";
 					if ($registro_campos["valor_alias"]!="") $posfijo_campo=" as ".$registro_campos["valor_alias"];
-					
+
 					$OrigenValorCampo=$registro_campos["valor_campo"];
 					//Evalua casos donde se tienen variables PHP escapadas por llaves.  Ej  "%{$Variable}%" si fuera para una operacion cualquiera sobre el campo.
                     $OrigenValorCampo=PCO_ReemplazarVariablesPHPEnCadena($OrigenValorCampo);
@@ -7838,7 +7843,7 @@ function PCO_CamposRealesInforme($informe)
             {
         		$consulta_informe=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
         		$registro_informe=$consulta_informe->fetch();
-        		
+
         		if ($registro_informe["conexion_origen_datos"]!="")
         		    global ${$registro_informe["conexion_origen_datos"]};
             }
@@ -7858,10 +7863,10 @@ function PCO_CamposRealesInforme($informe)
 
 					//Agrega el campo a la lista de nombres completos
 					$ListaCampos_NombreCompleto[]=$nombre_campo;
-					
+
 					//Agrega el estado de edicion o no para el campo
 					$ListaCampos_PermitirEdicion[]=$registro_campos["editable"];
-					
+
 					//Establece el nombre del campo simple (el real en base de datos)
 						//Elimina la posibilidad de un alias " as " tomando la primera parte solamente
 						$PartesListaCampos_NombreCompleto=explode(" as ",$nombre_campo);
@@ -7875,7 +7880,7 @@ function PCO_CamposRealesInforme($informe)
 
 					//Agrega el campo a la lista de nombres simples
 					$ListaCampos_NombreSimple[]=$nombre_campo_simple;
-					
+
 					//Determina la tabla a la que pertenece el campo
 					//Se verifica inicialmente si el campo ya indica la tabla para evitar ambiguedades en consultas de varias tablas
 					$PartesListaCampos_NombreCompleto=explode(" as ",$nombre_campo);
@@ -8051,7 +8056,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 
 						//Carga la ventana con el informe
 						PCO_AbrirVentana($TituloVentanaInforme.$ComplementoIdObjetoEnTitulo,'panel panel-info',$registro_informe["ancho"]);
-						
+
 						//Agrega la descripcion del informe en caso de contar con ella
 						if ($registro_informe["descripcion"]!='')
 							{
@@ -8062,7 +8067,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 				// Si se ha definido un tamano fijo entonces crea el marco
 				if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="")
 					echo '<DIV style="DISPLAY: block; OVERFLOW: auto; POSITION: relative; WIDTH: '.$registro_informe["ancho"].' !important; HEIGHT: '.$registro_informe["alto"].' !important">';
-					
+
 				//Genera enlaces a las opciones de descarga
 				if ($registro_informe["genera_pdf"]=='S'  && $embebido!=1)
 					include_once("core/marco_export.php");
@@ -8110,7 +8115,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 
 					//Determina si el informe tiene o no campos ocultos
 					$PCO_ColumnasOcultas=PCO_DeterminarCamposOcultos($informe);
-				
+
 					//Obtiene ColumnasVisibles, NumerosColumnasOcultas, NumeroColumnas dentro de EtiquetasConsulta
 					$EtiquetasConsulta=PCO_GenerarEtiquetasConsulta($consulta,$informe); //Enviar el informe para que se determinen tambien sus columnas ocultas
 
@@ -8130,7 +8135,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 						    $SalidaFinalInforme.= '<th>'.$TituloFinalColumna.'</th>';
 						    $ConteoPosicionColumna++;
 					    }
-	
+
 					//Si el informe tiene botones al final entonces agrega columna adicional
 					if ($cadena_generica_botones!="")
 						{
@@ -8175,12 +8180,12 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 											$Nombre_CampoEditable=$CamposReales[0]["ListaCampos_NombreSimple"][$i];
 											$Nombre_TablaEditable=$CamposReales[0]["ListaTablas_NombreSimple"][$i];
 											$IdentificadorDeCampoEditable="$Nombre_TablaEditable:$Nombre_CampoEditable:$Nombre_CampoLlave:$ValorCampoIdentificador";
-											
+
 											//Determina la activacion o no de la cadena de edicion del campo
 											$CadenaActivadora_Edicion="";
 											if ($CamposReales[0]["ListaCampos_PermitirEdicion"][$i]==1)
 												$CadenaActivadora_Edicion=' id="'.$IdentificadorDeCampoEditable.'" contenteditable="true" ';
-											
+
 											$ValorVisibleFinal=$registro_informe[$i];
 											if ($ModoDesarrolladorPractico==1) $ValorVisibleFinal=PCO_ReemplazarVariablesPHPEnCadena($ValorVisibleFinal);
 
@@ -8188,7 +8193,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 												<td '.$CadenaActivadora_Edicion.'>'.$ValorVisibleFinal.'</td>';
 										}
 								}
-								
+
 							//Si el informe tiene botones al final los agrega
 							if ($cadena_generica_botones!="")
 								{
@@ -8198,11 +8203,11 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 									//Muestra los botones preparados para el registro
 									$SalidaFinalInforme.= '<td>'.$cadena_botones_registro.'</td>';
 								}
-								
+
 							$SalidaFinalInforme.= '</tr>';
 							$numero_filas++;
 						}
-						
+
 					$SalidaFinalInforme.= '</tbody><tfoot>';
 
 					//Cuando es embebido (=1) no agrega los totales de registro
@@ -8247,7 +8252,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 				// Si se ha definido un tamano fijo entonces crea el marco
 				if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="" && $registro_informe["ancho"]!="0" && $registro_informe["alto"]!="0")
 					echo '<DIV style="DISPLAY: block; OVERFLOW: no; POSITION: relative; WIDTH: '.$registro_informe["ancho"].' !important; HEIGHT: '.$registro_informe["alto"].' !important">';
-			
+
 				//Consulta el formato de grafico y datos de series para ponerlo en los campos
 				//Dado por: Tipo|Nombre1!NombreN|Etiqueta1!EtiquetaN|Valor1!ValorN|
 				$formato_base=explode("|",$registro_informe["formato_grafico"]);
@@ -8267,7 +8272,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 				if ($tipo_grafico=="torta" || $tipo_grafico=="tortap")  $tipo_grafico_circular="pie";
 	            $presentar_porcentaje="false";  //Asume que el grafico no es con porcentajes en tortas
 				if ($tipo_grafico=="donap" || $tipo_grafico=="tortap")  $presentar_porcentaje="true";
-				
+
 				$presentar_datalabels="false";  //Asume que no se presentan las etiquetas con valores de datos
 				$cadenaubicacion_datalabels="";
 				if($formato_base[9]!="false" && $formato_base[9]!="") $presentar_datalabels="true";
@@ -8291,7 +8296,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 								$tmp=explode(".",$lista_valor_series[$i]);
 								$lista_valor_series[$i]=$tmp[1];
 							}
-						// Prefiere los alias sobre los nombres de campo cuando encuentra un AS 
+						// Prefiere los alias sobre los nombres de campo cuando encuentra un AS
 						if (strpos($lista_etiqueta_series[$i], " AS "))
 							{
 								$tmp=explode(" AS ",$lista_etiqueta_series[$i]);
@@ -8302,7 +8307,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 								$tmp=explode(" AS ",$lista_valor_series[$i]);
 								$lista_valor_series[$i]=$tmp[1];
 							}
-					} 
+					}
 				$nombre_serie_1=preg_replace('~[^a-zA-Z0-9_]~', '', str_replace ( " " , "_", $lista_nombre_series[0] ) );
 				$nombre_serie_2=preg_replace('~[^a-zA-Z0-9_]~', '', str_replace ( " " , "_", $lista_nombre_series[1] ) );
 				$nombre_serie_3=preg_replace('~[^a-zA-Z0-9_]~', '', str_replace ( " " , "_", $lista_nombre_series[2] ) );
@@ -8321,21 +8326,21 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 				// CREA OBJETO SEGUN TIPO DE GRAFICO
 				$TipoObjetoGraficoMorris     = "Morris.Area";  //Por defecto define tipo Area para cualquiera de los definidos sin compatibilidad conocida
 				if ($tipo_grafico=="area")
-                    $TipoObjetoGraficoMorris = "Morris.Area"; 
+                    $TipoObjetoGraficoMorris = "Morris.Area";
 				if ($tipo_grafico=="barra" || $tipo_grafico=="barrah" || $tipo_grafico=="barrav" || $tipo_grafico=="barrah_multiples" || $tipo_grafico=="barrav_multiples")
 					$TipoObjetoGraficoMorris = "Morris.Bar";
 				if ($tipo_grafico=="linea" || $tipo_grafico=="linea_multiples")
 					$TipoObjetoGraficoMorris = "Morris.Line";
 				if ($tipo_grafico=="dona"  || $tipo_grafico=="donap" || $tipo_grafico=="torta" || $tipo_grafico=="tortap")
 					$TipoObjetoGraficoMorris = "Morris.Donut";
-					
+
 				//Define la cadena de llaves para el grafico
 				$CadenaLlaves="'$nombre_serie_1'";                //'Operaciones','Usuarios','UsoAPI'
 				if ($nombre_serie_2!="") $CadenaLlaves.=",'$nombre_serie_2'";
 				if ($nombre_serie_3!="") $CadenaLlaves.=",'$nombre_serie_3'";
 				if ($nombre_serie_4!="") $CadenaLlaves.=",'$nombre_serie_4'";
 				if ($nombre_serie_5!="") $CadenaLlaves.=",'$nombre_serie_5'";
-				
+
 				//Define la cadena de etiquetas para el grafico
 				$CadenaEtiquetas="'$nombre_serie_1'";     //'Operaciones','Usuarios','UsoAPI'
 				if ($nombre_serie_2!="") $CadenaEtiquetas.=",'$nombre_serie_2'";
@@ -8364,7 +8369,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                                     $resultado_consulta=PCO_EjecutarSQL($consulta,"",${$registro_conexiones["nombre"]});
                                 else
                                     $resultado_consulta=PCO_EjecutarSQL($consulta);
-                        
+
                                 $cadena_datos="";
                                 while ($registro_consulta = $resultado_consulta->fetch())
                                     {
@@ -8441,11 +8446,11 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                             postUnits: '<?php echo $unidades_pos; ?>',
                             grid: <?php echo $ocultar_grilla; ?>,
                             horizontal: <?php echo $barras_horizontales; ?>,
-                            <?php echo $cadena_arreglo_colores; ?> 
+                            <?php echo $cadena_arreglo_colores; ?>
 
                             dataLabels: <?php echo $presentar_datalabels; ?>,
                             <?php echo $cadenaubicacion_datalabels; ?>  // EJ: dataLabelsPosition: 'outside', //inside
-                            
+
                             showPercentage: <?php echo $presentar_porcentaje; ?>,
                             donutType: '<?php echo $tipo_grafico_circular; ?>',
                             <?php
@@ -8461,7 +8466,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 			// Si se ha definido un tamano fijo entonces cierra el marco
 			if ($registro_informe["ancho"]!="" && $registro_informe["alto"]!="" && $registro_informe["ancho"]!="0" && $registro_informe["alto"]!="0")
 				echo '</DIV>';
-					
+
 			} // Fin si informe es G (grafico)
 
 		if ($en_ventana) PCO_CerrarVentana();
