@@ -93,10 +93,67 @@
     <link href="inc/bootstrap/css/plugins/simple-sidebar.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/toggle/bootstrap-toggle.css" rel="stylesheet">
 
+<!--
+    <link href="inc/bootstrap/css/plugins/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="inc/bootstrap/css/plugins/buttons.bootstrap.min.css" rel="stylesheet">
+
+
+-->
+    <link href="inc/bootstrap/css/plugins/buttons.dataTables.min.css" rel="stylesheet">
+
+    <!-- Estilos especificos para botones de exportacion de informes y paginador -->
+    <style>
+        .dataTables_length{
+            float:left;
+            }
+
+        div.dt-buttons{
+            margin:2px;
+            position:relative;
+            float:right;
+            font-size:11px;
+            font-weight: bold;
+
+            }
+
+        .InformeBotonCopiar{
+            margin-left:10px !important;
+            padding: 5px !important;
+            color:gray !important;
+            }
+        .InformeBotonCsv{
+            padding: 5px !important;
+            color:black !important;
+            }
+        .InformeBotonExcel{
+            padding: 5px !important;
+            color:green !important;
+            }
+        .InformeBotonPdf{
+            padding: 5px !important;
+            color:red !important;
+            }
+    </style>
 
 
 
-    <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.bootstrap.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -161,6 +218,10 @@
 	<script type="text/javascript" src="inc/jquery/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="inc/bootstrap/js/plugins/select/bootstrap-select.min.js?<?php echo filemtime('inc/bootstrap/js/plugins/select/bootstrap-select.min.js'); ?>"></script>
     <script type="text/javascript" src="inc/bootstrap/js/plugins/toggle/bootstrap-toggle.min.js"></script>
+
+    <script src="inc/jquery/plugins/jszip.min.js"></script>
+    <script src="inc/jquery/plugins/pdfmake.min.js"></script>
+    <script src="inc/jquery/plugins/vfs_fonts.js"></script>
 
     <!-- Morris Charts JavaScript -->
     <script src="inc/bootstrap/js/plugins/morris/raphael.min.js?<?php echo filemtime('inc/bootstrap/js/plugins/morris/raphael.min.js'); ?>"></script>

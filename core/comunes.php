@@ -6777,7 +6777,7 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
     //Funcion para compatibilidad hacia atras.  Desaparecera en la version 18.9
     function cargar_formulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno_formulario=0)
     { echo "ERROR: Llamado a funcion obsoleta del framework cargar_formulario().  En su lugar utilice PCO_CargarFormulario() "; }
-function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno_formulario=0)
+function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno_formulario=0,$ComplementoPestanas="")
   {
         global $ConexionPDO,$ArchivoCORE,$TablasCore;
         global $PCO_InformeFiltro,$PCO_FuncionesJSInternasFORM;
@@ -6949,7 +6949,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 					$CadenaEstiloPestanas="visibility:hidden; height:0px;"; //Oculta las pestanas
 
                 $consulta_formulario_pestana=   PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
-                echo '<ul class="nav '.$registro_formulario["estilo_pestanas"].' nav-justified" style="'.$CadenaEstiloPestanas.'">';
+                echo '<ul class="nav '.$registro_formulario["estilo_pestanas"].' nav-justified oculto_impresion" style="'.$CadenaEstiloPestanas.'">';
                 $estado_activa_primera_pestana=' class="active" ';
                 $pestana_activa=1;
                 while($registro_formulario_pestana = @$consulta_formulario_pestana->fetch())
@@ -6958,7 +6958,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                         if ($titulo_pestana_formulario=="") $titulo_pestana_formulario="<i class='fa fa-stack-overflow'></i>";
                         //Presenta la pestana solamente si no es una oculta
                         if ($titulo_pestana_formulario!="PCO_NoVisible" || (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && $formulario>=0)   ||  (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && $formulario<0 && $modo_diseno_formulario==1)   )
-                            echo '<li '.$estado_activa_primera_pestana.'  ><a  href="#PCO_PestanaFormulario_'.$pestana_activa.'" data-toggle="tab" id="PCO_LinkPestanaFormulario_'.$pestana_activa.'">'.$titulo_pestana_formulario.'</a></li>';
+                            echo '<li '.$estado_activa_primera_pestana.'  ><a  href="#PCO_Pestana'.$ComplementoPestanas.'Formulario_'.$pestana_activa.'" data-toggle="tab" id="PCO_LinkPestanaFormulario_'.$pestana_activa.'">'.$titulo_pestana_formulario.'</a></li>';
                         //Limpia para las siguientes pestanas
                         $estado_activa_primera_pestana='';
                         $pestana_activa++;
@@ -6979,12 +6979,16 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                 echo '<div class="tab-content" >';
                 while($registro_formulario_pestana = @$consulta_formulario_pestana->fetch())
                     {
+                        //Si la pestana es PCO_NoVisible entonces agrega la clase de oculta en impresion
+                        $ComplementoClaseOcultaImpresion="";
+                        if ($registro_formulario_pestana["pestana_objeto"]=="PCO_NoVisible") $ComplementoClaseOcultaImpresion="oculto_impresion";
+
                         $titulo_pestana_formulario=$registro_formulario_pestana["pestana_objeto"];
                         //Genera el contenedor de la pestana.  Se considera necesario crear contenedores solo cuando hay mas de una pestana, si hay una solamente entonces no hay que crear el contenedor
                         if ($conteo_pestanas>1 || $conteo_pestanas_ocultas==1)
                         echo '
                         <!-- INICIO de las pestanas No '.$pestana_activa.' -->
-                            <div class="tab-pane fade '.$estado_activa_primera_pestana.'" id="PCO_PestanaFormulario_'.$pestana_activa.'" >';
+                            <div class="tab-pane fade '.$estado_activa_primera_pestana.' '.$ComplementoClaseOcultaImpresion.' " id="PCO_Pestana'.$ComplementoPestanas.'Formulario_'.$pestana_activa.'" >';
 
                                 //Booleana que determina si se debe incluir el javascript de ckeditor
                                 $existe_campo_textoformato=0;
@@ -7122,7 +7126,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                                             //Busca el ID de registro correspondiente en la tabla de datos para llamar con el valor coincidente
                                                                             $consulta_registro_subform=PCO_EjecutarSQL("SELECT $PCO_CampoForaneoSubform FROM $PCO_TablaSubform WHERE $PCO_CampoForaneoSubform=? ","$PCO_ValorCampoPadre")->fetch();
 
-                                                                            @PCO_CargarFormulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorCampoPadre,1);
+                                                                            @PCO_CargarFormulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorCampoPadre,1,0,"Sub");
                                                                         }
                                                                     else
 																		{
@@ -7250,7 +7254,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                         //Busca el ID de registro correspondiente en la tabla de datos para llamar con el valor coincidente
                                                         $consulta_registro_subform=PCO_EjecutarSQL("SELECT $PCO_CampoForaneoSubform FROM $PCO_TablaSubform WHERE $PCO_CampoForaneoSubform=? ","$PCO_ValorCampoPadre")->fetch();
 
-                                                        @PCO_CargarFormulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorCampoPadre,1);
+                                                        @PCO_CargarFormulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorCampoPadre,1,0,"Sub");
                                                     }
 												else
 													{

@@ -154,15 +154,32 @@
             include_once("core/marco_admin_morris.php");
     ?>
 
+
+
+
+
+
     <!-- DataTables JavaScript -->
     <script src="inc/bootstrap/js/plugins/dataTables/jquery.dataTables.min.js"></script>
+    <script src="inc/bootstrap/js/plugins/dataTables/dataTables.buttons.min.js"></script><!--N-->
+    <!-- <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>--> <!--N-->
+    <script src="inc/bootstrap/js/plugins/dataTables/buttons.html5.min.js"></script><!--N-->
+
+
+<!--
+    <script src="http://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>--><!--N-->
+
+
+
+
     <script src="inc/bootstrap/js/plugins/dataTables/dataTables.bootstrap.min.js"></script>
 
+<!--
+    <script src="inc/bootstrap/js/plugins/dataTables/buttons.bootstrap.min.js"></script>
+-->
 
 
 
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.bootstrap.min.js"></script>
 
 
 
@@ -274,12 +291,17 @@
                             //alert(" '.$TablasDataTable[$i].' Paginacion:'.$Paginacion.'  ColumnaTotales:'.$ColumnaTotales.'  CadenaFormateadaTotales:'.$CadenaFormateadaTotales.'  "); //Depuracion solamente
                             var oTable'.$i.' = $("#'.$TablasDataTable[$i].'").dataTable(
                                 {
-         dom: "Bfrtip",
+                                    dom: "Blfrtip",  //Ej:  Blfrtip  Da formato a la tabla: Ver https://datatables.net/reference/option/dom
+                                    buttons: [
+                                        { extend: "copy",    className: "InformeBotonCopiar" },
+                                        { extend: "csv",     className: "InformeBotonCsv" },
+                                        { extend: "excel",   className: "InformeBotonExcel" },
+                                        { extend: "pdf",     className: "InformeBotonPdf" }
+                                        //{ extend: "print", className: "InformeBotonPrint" }
+                                    ],
 
                                     "pageLength": '.$Paginacion.',
-        buttons: [
-        "copy", "excel", "pdf"
-    ],
+
                                     "scrollX": true,
                                     "bAutoWidth": true,
                                     //"bSort": false,
@@ -290,6 +312,7 @@
                                     "fnInitComplete": function() {
                                     this.fnAdjustColumnSizing(true);
                                     },';
+
                         //Agrega al datatable el footer con autosuma cuando aplica
                         if (trim($TablasDataTableTotales[$i])!="" && $CadenaFormateadaTotales!="")
                             echo '
@@ -337,6 +360,13 @@
                                         }
                                 }
                             );
+
+
+//$("#'.$TablasDataTable[$i].'").on("click", function() {
+//    table.button( ".buttons-csv" ).trigger();
+//});
+
+
                         ';
                     }
             ?>
@@ -369,6 +399,33 @@
 		});
 
     </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <?php
         //Carga las funciones activadoras de diferentes tipos de control (si fue encontrado algun campo de ese tipo)

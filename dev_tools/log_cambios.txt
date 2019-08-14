@@ -16,6 +16,14 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/marco_abajo.php
+core/marco_arriba_bs.php
+inc/bootstrap/css/images/*
+inc/bootstrap/css/plugins/*
+inc/bootstrap/js/plugins/dataTables/*
+inc/jquery/plugins/jszip.min.js
+inc/jquery/plugins/pdfmake.min.js
+inc/jquery/plugins/vfs_fonts.js
 
 xml/*
 inc/practico/idiomas/*
@@ -32,7 +40,11 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added [INFORMES]: Los informes permiten ahora ser exportados directamente del lado del usuario en diferentes formatos (Portapapeles, CSV, XLS y PDF)
 * Fixed [USUARIOS]:  La asignacion de permisos de informes de usuarios evita los informes internos del framework
+* Fixed [FORM]:  Los formularios que contengan otros formularios embebidos y con multiples pestanas cada uno ahora diferencian sus pestanas en los embebidos como PCO_PestanaSubFormulario_X 
+* Enhan [FORM]: Ahora los elementos como pestañas de formulario, botones de comando inferiores y contenidos de pestañas con nombre PCO_NoVisible son ocultadas en formatos de impresión. 
+
 "
 
 ########################################################################
