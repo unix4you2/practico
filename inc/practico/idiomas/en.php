@@ -800,9 +800,9 @@
 	$MULTILANG_InfcamTabCond='Fields, Tables and Conditions';
 	$MULTILANG_InfAdvEliminar='IMPORTANT: Deleting this report users can not access it again. You can not undo this operation. This also eliminates any internal design of the report.\n'.$MULTILANG_Confirma;
 	$MULTILANG_InfErrTamano='The report you are trying to generate is a graph type  report but the designer did not specify the height and width of the resulting graph.<br>Should provide an valid size of graphic to generate an image.';
-	$MULTILANG_InfGeneraPDF='Allow to export this report?';
+	$MULTILANG_InfGeneraPDF='Allow native export for this report?';
 	$MULTILANG_InfGeneraPDFInfoTit='Available for tabular reports only';
-	$MULTILANG_InfGeneraPDFInfoDesc='This option requires php_xml and php_zip extensions if you want to export LibreOffice, OpenOffice or Office 2007 files.  If you activate this option the report time could be more than a normal report when you have a lot of records in your results because user will launch the query to see the records on screen, and then launch the same query if he wants to export them.';
+	$MULTILANG_InfGeneraPDFInfoDesc='This option requires php_xml and php_zip extensions if you want to export LibreOffice, OpenOffice or Office 2007 files.  If you activate this option the report time could be more than a normal report when you have a lot of records in your results because user will launch the query to see the records on screen, and then launch the same query if he wants to export them.  OTHER WAYS TO EXPORT ARE AVAILABLE ACTIVATING THE DATATABLE SUPPORT FOR THIS REPORT.';
     $MULTILANG_InfVblesFiltro='Global variables required for filter';
     $MULTILANG_InfVblesDesFiltro='PHP variables (without dollar character $ and comma separated only) that should be taked from global environment to be available for filter in the condittions option while you build a query';
     $MULTILANG_InfDataTableResXPag='records per page';
@@ -854,6 +854,8 @@
 	$MULTILANG_InfFormsUsan='Detected forms that use this report in an embedded manner';
 	$MULTILANG_InfTootipTitulo='Create a tooltip for graphic reports using the reports title';
     $MULTILANG_InfBotonPpio='Put in the first column';
+    $MULTILANG_ExportaDT=' client side export tools?';
+    $MULTILANG_ExportaDTDes='Allow to enable some options to this report to export its data in different formats.  The process will take only the data filtered by the user in the data table.';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';

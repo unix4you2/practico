@@ -803,7 +803,7 @@
 	$MULTILANG_InfErrTamano='आप उत्पन्न करने के लिए कोशिश कर रहे हैं रिपोर्ट एक ग्राफ प्रकार की रिपोर्ट है लेकिन डिजाइनर जिसके परिणामस्वरूप ग्राफ की ऊंचाई और चौड़ाई निर्दिष्ट नहीं किया। <br> एक छवि उत्पन्न करने के लिए ग्राफिक का एक मान्य आकार प्रदान करना चाहिए.';
 	$MULTILANG_InfGeneraPDF='इस रिपोर्ट को निर्यात करने की अनुमति?';
 	$MULTILANG_InfGeneraPDFInfoTit='सारणीबद्ध रिपोर्टों के लिए ही उपलब्ध';
-	$MULTILANG_InfGeneraPDFInfoDesc='आप लिब्रे ऑफिस, ओपेन आफिस या कार्यालय 2007 फ़ाइलों को निर्यात करना चाहते हैं तो यह विकल्प php_xml और php_zip एक्सटेंशन की आवश्यकता है। यदि आप इस विकल्प को सक्रिय करें यदि उपयोगकर्ता को स्क्रीन पर अभिलेखों को देखने के लिए क्वेरी का शुभारंभ करेंगे क्योंकि आप अपने परिणामों में अभिलेखों का एक बहुत कुछ है जब रिपोर्ट समय एक सामान्य रिपोर्ट से भी अधिक हो सकता है, और वह उन्हें निर्यात करना चाहता है तो एक ही प्रश्न का शुभारंभ.';
+	$MULTILANG_InfGeneraPDFInfoDesc='आप लिब्रे ऑफिस, ओपेन आफिस या कार्यालय 2007 फ़ाइलों को निर्यात करना चाहते हैं तो यह विकल्प php_xml और php_zip एक्सटेंशन की आवश्यकता है। यदि आप इस विकल्प को सक्रिय करें यदि उपयोगकर्ता को स्क्रीन पर अभिलेखों को देखने के लिए क्वेरी का शुभारंभ करेंगे क्योंकि आप अपने परिणामों में अभिलेखों का एक बहुत कुछ है जब रिपोर्ट समय एक सामान्य रिपोर्ट से भी अधिक हो सकता है, और वह उन्हें निर्यात करना चाहता है तो एक ही प्रश्न का शुभारंभ.    OTHER WAYS TO EXPORT ARE AVAILABLE ACTIVATING THE DATATABLE SUPPORT FOR THIS REPORT.';
     $MULTILANG_InfVblesFiltro='फिल्टर के लिए आवश्यक ग्लोबल चर';
     $MULTILANG_InfVblesDesFiltro='यदि आप एक क्वेरी का निर्माण, जबकि वैश्विक वातावरण से taked जाना चाहिए कि (डॉलर चरित्र $ और केवल अलग हो अल्पविराम के बिना) PHP चर condittions विकल्प में फिल्टर करने के लिए उपलब्ध होने की';
     $MULTILANG_InfDataTableResXPag='प्रति पृष्ठ अभिलेखॉ';
@@ -855,6 +855,8 @@
 	$MULTILANG_InfFormsUsan='पता लगाए गए फॉर्म जो इस रिपोर्ट का उपयोग एम्बेडेड तरीके से करते हैं';
 	$MULTILANG_InfTootipTitulo='Create a tooltip for graphic reports using the reports title';
     $MULTILANG_InfBotonPpio='Put in the first column';
+    $MULTILANG_ExportaDT=' client side export tools?';
+    $MULTILANG_ExportaDTDes='Allow to enable some options to this report to export its data in different formats.  The process will take only the data filtered by the user in the data table.';
 
 
 	//Menus

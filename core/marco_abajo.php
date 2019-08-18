@@ -275,12 +275,20 @@
                 $TablasDataTablePaginaciones=@explode("|",$PCO_InformesDataTablePaginaciones);
                 $TablasDataTableTotales=@explode("|",$PCO_InformesDataTableTotales);
                 $TablasDataTableFormatosTotales=@explode("|",$PCO_InformesDataTableFormatoTotales);
+                $TablasDataTableExportaCLP=@explode("|",$PCO_InformesDataTableExrpotaCLP);
+                $TablasDataTableExportaCSV=@explode("|",$PCO_InformesDataTableExrpotaCSV);
+                $TablasDataTableExportaXLS=@explode("|",$PCO_InformesDataTableExrpotaXLS);
+                $TablasDataTableExportaPDF=@explode("|",$PCO_InformesDataTableExrpotaPDF);
                 for ($i=0; $i<count($TablasDataTable);$i++)
                     {
                         $Paginacion=trim($TablasDataTablePaginaciones[$i]);
                         $ColumnaTotales=trim($TablasDataTableTotales[$i])-1;
                         $ColumnaTotalesVisual=trim($TablasDataTableTotales[$i]);
                         $CadenaFormateadaTotales=trim($TablasDataTableFormatosTotales[$i]);
+                        $CadenaExportaCLP=trim($TablasDataTableExportaCLP[$i]); if ($CadenaExportaCLP=="S") $CadenaExportaCLP='{ extend: "copy",    className: "InformeBotonCopiar" },'; else $CadenaExportaCLP='';
+                        $CadenaExportaCSV=trim($TablasDataTableExportaCSV[$i]); if ($CadenaExportaCSV=="S") $CadenaExportaCSV='{ extend: "csv",     className: "InformeBotonCsv" },   '; else $CadenaExportaCSV='';
+                        $CadenaExportaXLS=trim($TablasDataTableExportaXLS[$i]); if ($CadenaExportaXLS=="S") $CadenaExportaXLS='{ extend: "excel",   className: "InformeBotonExcel" }, '; else $CadenaExportaXLS='';
+                        $CadenaExportaPDF=trim($TablasDataTableExportaPDF[$i]); if ($CadenaExportaPDF=="S") $CadenaExportaPDF='{ extend: "pdf",     className: "InformeBotonPdf" },   '; else $CadenaExportaPDF='';
                         //Realiza operaciones de reemplazo de patrones sobre la cadena de formato de Totales si aplica
                         $CadenaFormateadaTotales=str_replace("_TOTAL_PAGINA_","'+pageTotal +'",$CadenaFormateadaTotales);
                         $CadenaFormateadaTotales=str_replace("_TOTAL_INFORME_","'+total +'",$CadenaFormateadaTotales);
@@ -293,10 +301,10 @@
                                 {
                                     dom: "Blfrtip",  //Ej:  Blfrtip  Da formato a la tabla: Ver https://datatables.net/reference/option/dom
                                     buttons: [
-                                        { extend: "copy",    className: "InformeBotonCopiar" },
-                                        { extend: "csv",     className: "InformeBotonCsv" },
-                                        { extend: "excel",   className: "InformeBotonExcel" },
-                                        { extend: "pdf",     className: "InformeBotonPdf" }
+                                        '.$CadenaExportaCLP.'
+                                        '.$CadenaExportaCSV.'
+                                        '.$CadenaExportaXLS.'
+                                        '.$CadenaExportaPDF.'
                                         //{ extend: "print", className: "InformeBotonPrint" }
                                     ],
 
@@ -360,13 +368,6 @@
                                         }
                                 }
                             );
-
-
-//$("#'.$TablasDataTable[$i].'").on("click", function() {
-//    table.button( ".buttons-csv" ).trigger();
-//});
-
-
                         ';
                     }
             ?>

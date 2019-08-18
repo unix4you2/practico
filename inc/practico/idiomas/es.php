@@ -798,9 +798,9 @@
 	$MULTILANG_InfcamTabCond='Campos, Tablas y Condiciones';
 	$MULTILANG_InfAdvEliminar='IMPORTANTE:  Al eliminar el informe los usuarios no podr&aacute;n accesarlo nuevamente para operaciones de consulta definidas en &eacute;l y no podr&aacute; deshacer esta operaci&oacute;n. Esto tambien elimina cualquier dise&ntilde;o interno del informe.\n'.$MULTILANG_Confirma;
 	$MULTILANG_InfErrTamano='El informe que intenta generar es de tipo gr&aacute;fico pero el dise&ntilde;ador no ha indicado el alto y ancho del gr&aacute;fico resultante.<br>Debe indicarse un tama&ntilde;o v&aacute;lido de gr&aacute;fico para poder generarse una im&aacute;gen.';
-	$MULTILANG_InfGeneraPDF='Permitir exportar este reporte?';
+	$MULTILANG_InfGeneraPDF='Permitir exportaci&oacute;n nativa de este reporte?';
 	$MULTILANG_InfGeneraPDFInfoTit='Aplica s&oacute;lo para informes tabulares';
-	$MULTILANG_InfGeneraPDFInfoDesc='El uso de esta opci&oacute;n con archivos LibreOffice, OpenOffice u Office 2007 o superiores requiere que su instalacion de PHP cuente con las extensiones php_zip, php_xml, php_gd2.  Activar esta opci&oacute;n puede represetar tiempos adicionales en la generaci&oacute;n de su informe cuando el vol&uacute;men de resultados es alto ya que el usuario podria lanzar dos veces la consulta, una para visualizar el resultado en pantalla y otra para descargarlo.';
+	$MULTILANG_InfGeneraPDFInfoDesc='El uso de esta opci&oacute;n con archivos LibreOffice, OpenOffice u Office 2007 o superiores requiere que su instalacion de PHP cuente con las extensiones php_zip, php_xml, php_gd2.  Activar esta opci&oacute;n puede representar tiempos adicionales en la generaci&oacute;n de su informe cuando el vol&uacute;men de resultados es alto ya que el usuario podria lanzar dos veces la consulta, una para visualizar el resultado en pantalla y otra para descargarlo.  OTRAS FORMAS DE EXPORTACION ESTAN DISPONIBLES MEDIANTE DATATABLES.';
     $MULTILANG_InfVblesFiltro='Variables globales requeridas para filtro';
     $MULTILANG_InfVblesDesFiltro='Variables PHP (Sin el signo pesos $ y separadas unicamente por una coma) que deberan ser tomadas del ambito global para estar disponibles en la opcion de Condiciones durante la construcci&oacute;n de querys';
     $MULTILANG_InfDataTableResXPag='resultados por p&aacute;gina';
@@ -852,6 +852,8 @@
 	$MULTILANG_InfFormsUsan='Formularios detectados que utilizan este informe de manera embebida';
 	$MULTILANG_InfTootipTitulo='Generar tooltip para informes gr&aacute;ficos con el t&iacute;tulo del informe';
     $MULTILANG_InfBotonPpio='Ubicar en la primera columna';
+    $MULTILANG_ExportaDT=' Exportaci&oacute;n del lado del cliente?';
+    $MULTILANG_ExportaDTDes='Permite habilitar opciones adicionales en la parte superior derecha del informe para que el usuario pueda exportar sus datos en diferentes formatos.  La exportaci&oacute;n se hace solamente sobre los datos contenidos por la tabla.  Si el usuario realiza alg&uacute;n filtro o b&uacute;squeda din&aacute;mica sobre &eacute;sta los datos a exportar ser&aacute;n los filtrados por el usuario solamente.';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';

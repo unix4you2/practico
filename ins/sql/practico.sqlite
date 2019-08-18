@@ -325,7 +325,11 @@ CREATE TABLE core_informe (
   subtotales_formato text DEFAULT '',
   conexion_origen_datos text DEFAULT '',
   consulta_sql text,
-  tooltip_titulo text DEFAULT 'N'
+  tooltip_titulo text DEFAULT 'N',
+  exportar_dtclp char(1) DEFAULT 'N',
+  exportar_dtcsv char(1) DEFAULT 'N',
+  exportar_dtxls char(1) DEFAULT 'N',
+  exportar_dtpdf char(1) DEFAULT 'N'
 
 );
 

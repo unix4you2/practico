@@ -803,7 +803,7 @@
 	$MULTILANG_InfErrTamano='O relat&oacute;rio que você est&aacute; tentando gerar um relat&oacute;rio tipo de gr&aacute;fico, mas o designer não especificar a altura ea largura do gr&aacute;fico resultante.<br>Deve fornecer um tamanho v&aacute;lido de gr&aacute;fico para gerar uma imagem.';
 	$MULTILANG_InfGeneraPDF='Permitir para exportar este relat&oacute;rio?';
 	$MULTILANG_InfGeneraPDFInfoTit='Dispon&iacute;vel somente para relat&oacute;rios tabulares';
-	$MULTILANG_InfGeneraPDFInfoDesc='Esta opção requer php_xml e php_zip extensões se você deseja exportar LibreOffice, OpenOffice ou arquivos do Office 2007. Se você ativar esta opção, o tempo de relat&oacute;rio poderia ser mais do que um relat&oacute;rio normal quando você tem um monte de registros em seus resultados, pois o usu&aacute;rio vai lançar a consulta para ver os registros na tela, e em seguida, lançar a mesma consulta, se ele quer export&aacute;-los.';
+	$MULTILANG_InfGeneraPDFInfoDesc='Esta opção requer php_xml e php_zip extensões se você deseja exportar LibreOffice, OpenOffice ou arquivos do Office 2007. Se você ativar esta opção, o tempo de relat&oacute;rio poderia ser mais do que um relat&oacute;rio normal quando você tem um monte de registros em seus resultados, pois o usu&aacute;rio vai lançar a consulta para ver os registros na tela, e em seguida, lançar a mesma consulta, se ele quer export&aacute;-los.    OTHER WAYS TO EXPORT ARE AVAILABLE ACTIVATING THE DATATABLE SUPPORT FOR THIS REPORT.';
     $MULTILANG_InfVblesFiltro='As vari&aacute;veis globais necess&aacute;rias para filtro';
     $MULTILANG_InfVblesDesFiltro='Vari&aacute;veis PHP (sem car&aacute;ter d&oacute;lar $ e apenas separados por v&iacute;rgula) que devem ser taked do ambiente global para estar dispon&iacute;vel para o filtro na opção condittions enquanto você construir uma consulta';
     $MULTILANG_InfDataTableResXPag='registros por p&aacute;gina';
@@ -855,6 +855,8 @@
 	$MULTILANG_InfFormsUsan='Formulários detectados que usam esse relatório de maneira incorporada';
 	$MULTILANG_InfTootipTitulo='Create a tooltip for graphic reports using the reports title';
     $MULTILANG_InfBotonPpio='Put in the first column';
+    $MULTILANG_ExportaDT=' client side export tools?';
+    $MULTILANG_ExportaDTDes='Allow to enable some options to this report to export its data in different formats.  The process will take only the data filtered by the user in the data table.';
 
 
 	//Menus

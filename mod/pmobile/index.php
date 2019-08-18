@@ -65,7 +65,7 @@ if ($PCO_Accion=="PCOMOD_SimularMovil")
 		if ($Ancho=="")			$Ancho=400;
 		if ($Alto=="")			$Alto=770;
 		if ($Orientacion=="")	$Orientacion="V";
-		if ($URL=="")			$URL="http://www.practico.org";
+		if ($URL=="")			$URL="https://www.practico.org";
 ?>
  <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
@@ -162,6 +162,3 @@ if ($PCO_Accion=="PCOMOD_SimularMovil")
 </html>
 <?php
 	} // Fin $PCO_Accion=="PCOMOD_SimularMovil"
-
-
-
