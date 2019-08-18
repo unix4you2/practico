@@ -47,6 +47,7 @@ LogCambios="
 * Fixed [USUARIOS]: La asignacion de permisos de informes de usuarios evita los informes internos del framework
 * Fixed [FORM]: Los formularios que contengan otros formularios embebidos y con multiples pestanas cada uno ahora diferencian sus pestanas en los embebidos como PCO_PestanaSubFormulario_X 
 * Enhan [FORM]: Ahora los elementos como pestañas de formulario, botones de comando inferiores y contenidos de pestañas con nombre PCO_NoVisible son ocultadas en formatos de impresión. 
+* Fixed [FORM]: La generacion de formularios internos y sus funciones de AutoRun son ahora etiquetadas como LTZ y su signo negativo es restirado para evitar errores de JavaScript
 
 "
 

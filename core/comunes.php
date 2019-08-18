@@ -7426,9 +7426,11 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
         //Carga las funciones JavaScript asociadas al formulario y llama la funcion FrmAutoRun()
         $JavaScriptFormulario=$registro_formulario["javascript"];
         //Reemplaza la funcion de FrmAutoRun() del formulario por FrmAutoRun_IDFormulario() para garantizar que es unica
-        $JavaScriptFormulario=str_replace("FrmAutoRun()","FrmAutoRun_IDForm".$registro_formulario["id"]."()",$JavaScriptFormulario);
+        $NumeroIdFormulario=$registro_formulario["id"];
+        if ($NumeroIdFormulario<0) $NumeroIdFormulario="LTZ".($NumeroIdFormulario*-1);
+        $JavaScriptFormulario=str_replace("FrmAutoRun()","FrmAutoRun_IDForm".$NumeroIdFormulario."()",$JavaScriptFormulario);
         	$PCO_FuncionesJSInternasFORM .= '<script type="text/javascript">'.$JavaScriptFormulario.'
-        		if (typeof FrmAutoRun_IDForm'.$registro_formulario["id"].' === "function") { FrmAutoRun_IDForm'.$registro_formulario["id"].'(); }
+        		if (typeof FrmAutoRun_IDForm'.$NumeroIdFormulario.' === "function") { FrmAutoRun_IDForm'.$NumeroIdFormulario.'(); }
         		</script>';
 
         //Busca la lista de campos marcados como obligatorios sobre el form
