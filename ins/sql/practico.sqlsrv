@@ -320,6 +320,9 @@ CREATE TABLE core_informe (
   exportar_dtcsv char(1) DEFAULT 'N',
   exportar_dtxls char(1) DEFAULT 'N',
   exportar_dtpdf char(1) DEFAULT 'N',
+  ocultar_encabezado int(1) DEFAULT '0',
+  ocultar_piepagina int(1) DEFAULT '0',
+  anular_acciones int(1) DEFAULT '0',
   PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

@@ -1465,9 +1465,12 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 							$exportar_dtcsv=$registro["exportar_dtcsv"];
 							$exportar_dtxls=$registro["exportar_dtxls"];
 							$exportar_dtpdf=$registro["exportar_dtpdf"];
+							$ocultar_encabezado=$registro["ocultar_encabezado"];
+							$ocultar_piepagina=$registro["ocultar_piepagina"];
+							$anular_acciones=$registro["anular_acciones"];
 
 							// Inserta el nuevo informe
-							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf");
+							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones");
 
 							$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 
@@ -7095,7 +7098,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                                         case 'casilla_check': $objeto_formateado = @PCO_CargarObjetoCasillaCheck($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana); break;
                                                                         case 'etiqueta': $objeto_formateado = @PCO_CargarObjetoEtiqueta($registro_campos,@$registro_datos_formulario); break;
                                                                         case 'url_iframe': $objeto_formateado = @PCO_CargarObjetoIFrame($registro_campos,@$registro_datos_formulario); break;
-                                                                        case 'informe': @PCO_CargarInforme($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1); break;
+                                                                        case 'informe': @PCO_CargarInforme($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1,$registro_campos["anular_acciones"],$registro_campos["anular_piepagina"],$registro_campos["anular_encabezado"]); break;
                                                                         case 'deslizador': $objeto_formateado = @PCO_CargarObjetoDeslizador($registro_campos,@$registro_datos_formulario); break;
                                                                         case 'campo_etiqueta': $objeto_formateado = @PCO_CargarObjetoCampoEtiqueta($registro_campos,@$registro_datos_formulario); break;
                                                                         case 'archivo_adjunto': $objeto_formateado = @PCO_CargarObjetoArchivoAdjunto($registro_campos,@$registro_datos_formulario); break;
@@ -7224,7 +7227,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                     case 'casilla_check': $objeto_formateado = @PCO_CargarObjetoCasillaCheck($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana); break;
                                                     case 'etiqueta': $objeto_formateado = PCO_CargarObjetoEtiqueta($registro_campos,@$registro_datos_formulario); break;
                                                     case 'url_iframe': $objeto_formateado = PCO_CargarObjetoIFrame($registro_campos,@$registro_datos_formulario); break;
-                                                    case 'informe': @PCO_CargarInforme($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1); break;
+                                                    case 'informe': @PCO_CargarInforme($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1,$registro_campos["anular_acciones"],$registro_campos["anular_piepagina"],$registro_campos["anular_encabezado"]); break;
                                                     case 'deslizador': $objeto_formateado = @PCO_CargarObjetoDeslizador($registro_campos,@$registro_datos_formulario); break;
                                                     case 'campo_etiqueta': $objeto_formateado = @PCO_CargarObjetoCampoEtiqueta($registro_campos,@$registro_datos_formulario); break;
                                                     case 'archivo_adjunto': $objeto_formateado = @PCO_CargarObjetoArchivoAdjunto($registro_campos,@$registro_datos_formulario); break;
@@ -7972,7 +7975,7 @@ function PCO_CamposRealesInforme($informe)
     //Funcion para compatibilidad hacia atras.  Desaparecera en la version 18.9
     function cargar_informe($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0)
     { echo "ERROR: Llamado a funcion obsoleta del framework cargar_informe().  En su lugar utilice PCO_CargarInforme() "; }
-function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0,$anular_acciones=0,$anular_piepagina=0,$SQLPuro="")
+function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0,$anular_acciones=0,$anular_piepagina=0,$anular_encabezado=0,$SQLPuro="")
 	{
 		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
 		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
@@ -7983,7 +7986,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 		global $IdiomaPredeterminado;
         global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales,$PCO_InformesDataTableExrpotaCLP,$PCO_InformesDataTableExrpotaCSV,$PCO_InformesDataTableExrpotaXLS,$PCO_InformesDataTableExrpotaPDF;
         global $ModoDepuracion,$ModoDesarrolladorPractico;
-
+        
         //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa y un boton de salto a edicion
         $BotonSaltoEdicion='
                     <a class="btn btn-default btn-xs" href="index.php?PCO_Accion=PCO_EditarInforme&informe='.$informe.'">
@@ -7996,6 +7999,13 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 		$consulta_informe=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
 		$registro_informe=$consulta_informe->fetch();
 		$Identificador_informe=$registro_informe["id"];
+
+        //Determina si se deben ocultar elementos por banderas o porque el informe asi lo obliga
+        $ComplementoAnulacionPiePagina='';
+        if ($anular_piepagina==1 || $registro_informe["ocultar_piepagina"]==1) $ComplementoAnulacionPiePagina=' style="visibility:hidden;" ';
+        $ComplementoAnulacionEncabezado='';
+        if ($anular_encabezado==1 || $registro_informe["ocultar_encabezado"]==1) $ComplementoAnulacionEncabezado=' style="visibility:hidden;" ';
+        if ($anular_acciones==0 && $registro_informe["anular_acciones"]==1) $anular_acciones=1;
 
         //Si el informe usa una conexion externa busca su configuracion
         if($registro_informe["conexion_origen_datos"]!="")
@@ -8097,7 +8107,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 						    @$PCO_InformesDataTableExrpotaPDF.=$registro_informe["exportar_dtpdf"]."|";
 					    }
 					$SalidaFinalInforme.= '<!--<div class="table-responsive">-->
-											<table width="100%" class="btn-xs table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead>';
+											<table width="100%" class="btn-xs table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead '.$ComplementoAnulacionEncabezado.'>';
 
                     //if ($registro_informe["personalizacion_encabezados"]!="")
 					$SalidaFinalInforme.= '
@@ -8222,17 +8232,15 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 							$numero_filas++;
 						}
 
-					$SalidaFinalInforme.= '</tbody><tfoot>';
+					$SalidaFinalInforme.= '</tbody><tfoot '.$ComplementoAnulacionPiePagina.'>';
 
 					//Cuando es embebido (=1) no agrega los totales de registro
 					//if (!$embebido)
-                    if (!$anular_piepagina)
-						{
-							@$SalidaFinalInforme.= '
-								<tr><td colspan='.$numero_columnas.'>
-									<b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
-								</td></tr>';
-						}
+					@$SalidaFinalInforme.= '
+						<tr><td colspan='.$numero_columnas.'>
+							<b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
+						</td></tr>';
+
 					//Cierra pie de pagina, tabla y marco responsive para la tabla
 					$SalidaFinalInforme.= '</tfoot>
 							</table>

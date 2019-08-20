@@ -44,6 +44,7 @@ LogCambios="
 * Added [INFORMES]: Los informes con DataTables activado permiten ahora ser exportados directamente del lado del usuario en diferentes formatos (Portapapeles, CSV, XLS y PDF)
 * Enhan [INFORMES]: El disenador de informes presenta opciones de datatables solamente cuando estan activadas.
 * Enhan [INFORMES]: Durante la generacion de informes se pregunta solamente por los datos básicos.  Sus opciones avanzadas y personalización serán configurados posteriormente en el paso siguiente a su creación.
+* Enhan [INFORMES]: Ahora se puede personalizar en la configuracion de informes si se desea presentar o no sus encabezados de olumna o pie de paginas por separado.
 * Fixed [USUARIOS]: La asignacion de permisos de informes de usuarios evita los informes internos del framework
 * Fixed [FORM]: Los formularios que contengan otros formularios embebidos y con multiples pestanas cada uno ahora diferencian sus pestanas en los embebidos como PCO_PestanaSubFormulario_X 
 * Enhan [FORM]: Ahora los elementos como pestañas de formulario, botones de comando inferiores y contenidos de pestañas con nombre PCO_NoVisible son ocultadas en formatos de impresión. 
@@ -60,6 +61,9 @@ ALTER TABLE core_informe ADD exportar_dtclp char(1) DEFAULT 'N';
 ALTER TABLE core_informe ADD exportar_dtcsv char(1) DEFAULT 'N';
 ALTER TABLE core_informe ADD exportar_dtxls char(1) DEFAULT 'N';
 ALTER TABLE core_informe ADD exportar_dtpdf char(1) DEFAULT 'N';
+ALTER TABLE core_informe ADD ocultar_encabezado int(1) DEFAULT '0';
+ALTER TABLE core_informe ADD ocultar_piepagina int(1) DEFAULT '0';
+ALTER TABLE core_informe ADD anular_acciones int(1) DEFAULT '0';
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
@@ -68,5 +72,5 @@ UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$')
 ########################################################################
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
-
+Objetos de tipo informe en formulario se encuentran listos para aplicar propiedades de ocultamiento de elementos.
 "

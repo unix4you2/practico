@@ -320,6 +320,9 @@ CREATE TABLE core_informe (
   exportar_dtcsv char(1) DEFAULT 'N',
   exportar_dtxls char(1) DEFAULT 'N',
   exportar_dtpdf char(1) DEFAULT 'N',
+  ocultar_encabezado integer DEFAULT '0',
+  ocultar_piepagina integer DEFAULT '0',
+  anular_acciones integer DEFAULT '0',
   PRIMARY KEY  (id)
 );
 
