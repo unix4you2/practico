@@ -72,6 +72,7 @@
 	function PCO_NuevaConexionBD($PCOConnMotorBD,$PCOConnPuertoBD,$PCOConnBaseDatos,$PCOConnServidorBD,$PCOConnUsuarioBD,$PCOConnPasswordBD)
 		{
 			global $MULTILANG_Detalles,$MULTILANG_Basedatos,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_TipoMotor,$MULTILANG_Servidor;
+			global $PCOVAR_Administradores,$ZonaHoraria;
 			try
 				{
 					// Crea la conexion de acuerdo al tipo de motor
@@ -132,6 +133,14 @@
 							$ConexionPDO->exec("SET NAMES utf8;"); //Forzado UTF8 - Collation recomendada: utf8_general_ci
 							//Evita el "General error: 2014 Cannot execute queries while other unbuffered queries are active"
 							$ConexionPDO->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
+
+                			//Establece algunas variables para estar disponibles sobre el motor
+                			$ConexionPDO->exec("SET @PCOVAR_Administradores='$PCOVAR_Administradores';");
+                			
+                			//Establece zona horaria por defecto
+                			//NOTA: Se pùede establecer sobre el my.cnf mediante  default-time-zone='SuZona/Horaria'  PERO primero debe llenar las zonas horarias sobre el motor asi:   mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p
+                			$ConexionPDO->exec("SET @PCOVAR_ZonaHoraria='$ZonaHoraria';");
+							$ConexionPDO->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, "SET time_zone='$ZonaHoraria'");
 						}
 
 					//$this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
