@@ -464,7 +464,8 @@
 	$MULTILANG_FrmLblBusqueda='रिकॉर्ड खोज के लिए प्रयोग करें? लेबल';
 	$MULTILANG_FrmTitBusqueda='क्षेत्र के रिकॉर्ड के लिए खोज करने के लिए प्रयोग किया जाता है कि क्या यह बताता है';
 	$MULTILANG_FrmDesBusqueda='यह एक सामान्य क्षेत्र संकेत मिलता है कि या रिकॉर्ड के लिए खोज करने के लिए सही पक्ष पर स्थित कमांड बटन में जाना चाहिए कि लेबल दर्ज करने के लिए खाली छोड़ें';
-	$MULTILANG_FrmAjax='खोज करने के लिए AJAX का उपयोग';
+	$MULTILANG_FrmAjax='खोज करने के लिए AJAX का उपयोग (all items)';
+	$MULTILANG_FrmAjaxDinamico='Use AJAX to retrieve items dinamically when you type';
 	$MULTILANG_FrmTitAjax='रिकॉर्ड वसूली मोड';
 	$MULTILANG_FrmDesAjax='बॉक्स पर दिया जाता है, तो Practico AJAX का उपयोग कर फार्म के लिए प्रवेश जानकारी को पुनः प्राप्त करने के लिए प्रयास करता है। एक मेज से अपनी मान लेता है कि किसी कॉम्बो बॉक्स में आप ऑनलाइन अपनी सामग्री को ताज़ा करने के लिए एक बटन जोड़ने के लिए इसका इस्तेमाल कर सकते.';
 	$MULTILANG_FrmTeclado='वर्चुअल कीबोर्ड जोड़ें';

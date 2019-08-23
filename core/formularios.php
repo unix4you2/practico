@@ -599,6 +599,7 @@
 					$lista_valores_interrogantes=substr($lista_valores_interrogantes, 0, strlen($lista_valores_interrogantes)-1);
 					//Elimina separador de campo al final de valores concatenados
 					$lista_valores_concatenados=substr($lista_valores_concatenados, 0, strlen($lista_valores_concatenados)-strlen($_SeparadorCampos_));					
+					$lista_valores_concatenados=substr($lista_valores_concatenados, 0, -strlen($_SeparadorCampos_));					
 
 					//Inserta los datos del registro en BD
 					PCO_EjecutarSQLUnaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores_interrogantes.")",$lista_valores_concatenados);
@@ -1710,6 +1711,12 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                                     <input type="checkbox" id="ajax_busqueda" name="ajax_busqueda" <?php if (@$registro_campo_editar["ajax_busqueda"]==1) echo 'checked'; ?> > <?php echo $MULTILANG_FrmAjax; ?>
                                 </label>
                                 <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTitAjax; ?></b><br><?php echo $MULTILANG_FrmDesAjax; ?>" name="<?php echo $MULTILANG_FrmDesUnico; ?>"><i class="fa fa-question-circle"></i></a>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="ajax_busqueda_dinamica" name="ajax_busqueda_dinamica" <?php if (@$registro_campo_editar["ajax_busqueda_dinamica"]==1) echo 'checked'; ?> > <?php echo $MULTILANG_FrmAjaxDinamico; ?>
+                                </label>
+                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTitAjax; ?></b><br>Util en recuperacion de registros sobre tablas con datos masivos. Usefull to retrieve record from tables with massive info"><i class="fa fa-question-circle"></i></a>
                             </div>
 						</div>
 

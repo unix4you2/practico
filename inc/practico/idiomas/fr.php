@@ -464,7 +464,8 @@
 	$MULTILANG_FrmLblBusqueda='Utiliser pour la recherche d enregistrements? Étiquette';
 	$MULTILANG_FrmTitBusqueda='Indique si le champ est utilisé pour rechercher des enregistrements';
 	$MULTILANG_FrmDesBusqueda='Laissez vide pour indiquer qu il s agit d un champ normal ou entrez l étiquette qui devrait aller dans le bouton de commande situé sur le côté droit pour faire la recherche d enregistrements';
-	$MULTILANG_FrmAjax='Utilisez AJAX pour rechercher';
+	$MULTILANG_FrmAjax='Utilisez AJAX pour rechercher (all items)';
+	$MULTILANG_FrmAjaxDinamico='Use AJAX to retrieve items dinamically when you type';
 	$MULTILANG_FrmTitAjax='Mode de récupération d enregistrement';
 	$MULTILANG_FrmDesAjax='Lorsque la boîte est activée, Practico tente de récupérer les informations de journal dans le formulaire en utilisant AJAX. Dans une zone de liste déroulante qui prend ses valeurs à partir d une table, vous pouvez l utiliser pour ajouter un bouton pour actualiser son contenu en ligne.';
 	$MULTILANG_FrmTeclado='Ajouter un clavier virtuel';

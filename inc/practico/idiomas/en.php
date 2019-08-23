@@ -464,7 +464,8 @@
 	$MULTILANG_FrmLblBusqueda='Use for record search? Label';
 	$MULTILANG_FrmTitBusqueda='Indicates whether the field is used to search for records';
 	$MULTILANG_FrmDesBusqueda='Leave blank to indicate that it is a normal field or enter the label that should go in the command button located on the right side to make the search for records';
-	$MULTILANG_FrmAjax='Use AJAX to search';
+	$MULTILANG_FrmAjax='Use AJAX to reload all item list';
+	$MULTILANG_FrmAjaxDinamico='Use AJAX to retrieve items dinamically when you type';
 	$MULTILANG_FrmTitAjax='Record Recovery Mode';
 	$MULTILANG_FrmDesAjax='When the box is turned on, Practico attempts to retrieve the log information to the form using AJAX. In a combo box that takes its values from a table you can use it to add a button to refresh its contents online.';
 	$MULTILANG_FrmTeclado='Add virtual keyboard';

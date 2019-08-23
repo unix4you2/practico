@@ -464,7 +464,8 @@
 	$MULTILANG_FrmLblBusqueda='O uso para pesquisa de registro? etiqueta';
 	$MULTILANG_FrmTitBusqueda='Indica se o campo &eacute; usado para procurar por registros';
 	$MULTILANG_FrmDesBusqueda='Deixe em branco para indicar que &eacute; um campo normal ou digite o r&oacute;tulo que deve ir para o botão de comando localizado no lado direito para fazer a busca por registros';
-	$MULTILANG_FrmAjax='Use AJAX para pesquisa';
+	$MULTILANG_FrmAjax='Use AJAX para pesquisa (all items)';
+	$MULTILANG_FrmAjaxDinamico='Use AJAX to retrieve items dinamically when you type';
 	$MULTILANG_FrmTitAjax='Modo de Recuperação registro';
 	$MULTILANG_FrmDesAjax='Quando a caixa estiver ligada, Practico tenta recuperar as informações de log para o formul&aacute;rio usando AJAX. Em uma caixa de combinação que leva seus valores de uma tabela que você pode us&aacute;-lo para adicionar um botão para atualizar o seu conte&uacute;do on-line.';
 	$MULTILANG_FrmTeclado='Adicionar teclado virtual';

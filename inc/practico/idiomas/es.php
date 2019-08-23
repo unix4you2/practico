@@ -462,7 +462,8 @@
 	$MULTILANG_FrmLblBusqueda='Utilizar para b&uacute;squedas? Etiqueta';
 	$MULTILANG_FrmTitBusqueda='Indica si el campo es usado para buscar registros';
 	$MULTILANG_FrmDesBusqueda='Deje el espacio en blanco para indicar que es un campo normal o ingrese la etiqueta que debe ir en el boton de comando ubicado al lado derecho del campo para realizar la busqueda de registros';
-	$MULTILANG_FrmAjax='Usar AJAX para buscar';
+	$MULTILANG_FrmAjax='Usar AJAX para recargar la lista completa de opciones';
+	$MULTILANG_FrmAjaxDinamico='Usar AJAX para recuperar items din&aacute;micamente mientras digita';
 	$MULTILANG_FrmTitAjax='Modo de recuperaci&oacute;n de registros';
 	$MULTILANG_FrmDesAjax='Cuando la casilla se encuentra activada Practico intenta recuperar la informaci&oacute;n del registro para el formulario mediante AJAX, En listas de seleccion cuyo valor es obtenido desde tablas esto crea un boton de actualizacion dinamico de la lista.';
 	$MULTILANG_FrmTeclado='Agregar teclado virtual';

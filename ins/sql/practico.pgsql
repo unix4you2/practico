@@ -160,6 +160,7 @@ CREATE TABLE core_formulario_objeto (
   id_html varchar(255) DEFAULT '',
   validacion_extras varchar(255) DEFAULT '',
   clase_contenedor varchar(255) DEFAULT '',
+  ajax_busqueda_dinamica integer default '0',
   PRIMARY KEY  (id)
 );
 

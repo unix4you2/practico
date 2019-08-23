@@ -159,8 +159,9 @@ CREATE TABLE core_formulario_objeto (
   ocultar_etiqueta integer DEFAULT 0,
   id_html text DEFAULT '',
   validacion_extras text DEFAULT '',
-  clase_contenedor text DEFAULT ''
-  
+  clase_contenedor text DEFAULT '',
+  ajax_busqueda_dinamica integer default '0'
+
 );
 
 
