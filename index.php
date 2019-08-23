@@ -263,7 +263,7 @@
         { include "core/actualizacion.php";  @include "inc/practico_se/core/actualizacion.php"; }
     if ($PCO_Accion=="PCO_VerMonitoreo")
         { include "core/monitoreo.php";  @include "inc/practico_se/core/monitoreo.php"; }
-    if ($PCO_Accion=="cambiar_estado_campo" || $PCO_Accion=="valor_campo_tabla" || $PCO_Accion=="opciones_combo_box")
+    if ($PCO_Accion=="cambiar_estado_campo" || $PCO_Accion=="valor_campo_tabla" || $PCO_Accion=="opciones_combo_box" || $PCO_Accion=="PCO_ObtenerOpcionesAjaxSelect")
         { include "core/ajax.php";  @include "inc/practico_se/core/ajax.php"; }
     if ($PCO_Accion=="PCO_ReportarBugs" || $PCO_Accion=="mantenimiento_tablas" || $PCO_Accion=="limpiar_temporales" || $PCO_Accion=="limpiar_backups")
         { include "core/mantenimiento.php";  @include "inc/practico_se/core/mantenimiento.php"; }

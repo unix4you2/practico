@@ -2713,6 +2713,7 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		// Funciones en core/ajax.php
 		if ($PCO_Accion== "opciones_combo_box")					$retorno = 1;
 		if ($PCO_Accion== "valor_campo_tabla")					$retorno = 1;
+		if ($PCO_Accion== "PCO_ObtenerOpcionesAjaxSelect")		$retorno = 1;
 
 		// Funciones en core/kanban.php
         if ($PCO_Accion=="PCO_ExplorarTablerosKanban")          $retorno = 1;

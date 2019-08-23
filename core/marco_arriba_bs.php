@@ -227,6 +227,11 @@
     <script src="inc/bootstrap/js/plugins/morris/raphael.min.js?<?php echo filemtime('inc/bootstrap/js/plugins/morris/raphael.min.js'); ?>"></script>
     <script src="inc/bootstrap/js/plugins/morris/regression.min.js?<?php echo filemtime('inc/bootstrap/js/plugins/morris/regression.min.js'); ?>"></script>
     <script src="inc/bootstrap/js/plugins/morris/morris.min.js?<?php echo filemtime('inc/bootstrap/js/plugins/morris/morris.min.js'); ?>"></script>
+
+    <!-- AJAX para Boostrap-Select -->
+    <link  href="inc/bootstrap/css/plugins/ajax-bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <script src="inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.js?<?php echo filemtime('inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.js'); ?>"></script>
+
     <?php
         // Agrega soporte para PWA si aplica
         if ($PWA_Activa=="1")

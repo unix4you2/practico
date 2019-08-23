@@ -16,6 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/ajax.php
 core/conexiones.php
 core/informes.php
 core/marco_abajo.php
@@ -23,6 +24,8 @@ core/marco_arriba_bs.php
 inc/bootstrap/css/images/*
 inc/bootstrap/css/plugins/*
 inc/bootstrap/js/plugins/dataTables/*
+inc/bootstrap/css/plugins/ajax-bootstrap-select/*
+inc/bootstrap/js/plugins/ajax-bootstrap-select/*
 inc/jquery/plugins/jszip.min.js
 inc/jquery/plugins/pdfmake.min.js
 inc/jquery/plugins/vfs_fonts.js

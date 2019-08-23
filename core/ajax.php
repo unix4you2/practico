@@ -186,3 +186,68 @@ if (@$PCO_Accion=="cambiar_estado_campo")
 				</form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
+	
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCO_ObtenerOpcionesAjaxSelect
+	Consulta de manera dinamica los elementos requeridos para una lista de seleccion
+
+	Variables de entrada:
+
+		PCO_TablaConsulta - Nombre de la tabla que contiene los datos.  Puede ser combinacion de tablas separadas por coma sin olvidar agregar la condicion de llaves foraneas
+		PCO_ListaCamposRetorno - Lista de campos separados por coma que seran devueltos por el query
+		PCO_ListaCamposBusqueda - Lista de campos separados unicamente por coma y que son utilizados para la consulta tipo LIKE con el valor recibido
+		PCO_ParametrosOrdenamientoYLimite - OPCIONAL Lista de parametros para ser agregados a la consulta tales como ORDER BY, GROUP BY o LIMIT
+		PCO_CondicionFiltrado - Condicion a ser agregada a la clausula WHERE de la consulta que filtra resultados
+
+	Salida:
+
+		Objeto JSON con los resultados o registros coincidentes o un mensaje de error formateado como JSON ante cualquier eventualidad
+*/
+if (@$PCO_Accion=="PCO_ObtenerOpcionesAjaxSelect")
+	{		
+        //Construye la cadena de filtrado para la consulta
+        $ListaCamposArray=explode ("," , $PCO_ListaCamposBusqueda );
+        foreach ($ListaCamposArray as $CampoBusqueda)
+            $CadenaCondicionCamposFiltro.=" $CampoBusqueda LIKE '%$q%' OR ";
+        $CadenaCondicionCamposFiltro = substr($CadenaCondicionCamposFiltro, 0, -3);
+        
+        $HayResultados=0;
+        //Valida que se reciban todos los parametros requeridos
+        if ($PCO_ListaCamposRetorno!="" && $PCO_ListaCamposBusqueda!="" && $PCO_TablaConsulta!="")
+            {
+                $Resultados='[';
+                $Consulta=PCO_EjecutarSQL("SELECT $PCO_ListaCamposRetorno FROM $PCO_TablaConsulta WHERE $PCO_CondicionFiltrado ($CadenaCondicionCamposFiltro) $PCO_ParametrosOrdenamientoYLimite ");
+                while ($Registro=$Consulta->fetch())
+                    {
+                        $Resultados.='
+                            {
+                                "V": "'.$Registro[0].'",
+                                "T": "'.$Registro[1].'",
+                                "S": "'.$Registro[2].'",
+                                "I": "'.$Registro[3].'"
+                            },';
+                        $HayResultados=1;
+                    }
+                $Resultados = substr($Resultados, 0, -1);
+                $Resultados.=']';
+            }
+        
+        if (!$HayResultados)
+            $Resultados='
+                [
+                    {
+                        "V": "",
+                        "T": "Error:SinParametros",
+                        "S": "(Consulte a su desarrollador)",
+                        "I": "glyphicon glyphicon-ban-circle"
+                    }
+                ]';
+        
+        //Devuelve el JSON generado con los resultados
+        echo $Resultados;
+	}
+
