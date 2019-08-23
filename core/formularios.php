@@ -760,6 +760,7 @@
 
 			if (@$valor_unico=="on") $valor_unico=1; else $valor_unico=0;
 			if (@$ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
+			if (@$ajax_busqueda_dinamica=="on") $ajax_busqueda_dinamica=1; else $ajax_busqueda_dinamica=0;
 			$tipo_objeto=$tipo;
 			if ($titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm" && $tipo_objeto!="form_consulta") ) $mensaje_error=$MULTILANG_ErrFrmCampo1;
 			if ($campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm" && $tipo_objeto!="form_consulta" && $tipo_objeto!="boton_comando") ) $mensaje_error=$MULTILANG_ErrFrmCampo2;
@@ -835,6 +836,7 @@
 
 			if (@$valor_unico=="on") $valor_unico=1; else $valor_unico=0;
 			if (@$ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
+			if (@$ajax_busqueda_dinamica=="on") $ajax_busqueda_dinamica=1; else $ajax_busqueda_dinamica=0;
 			if (@$titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm" && $tipo_objeto!="form_consulta") ) $mensaje_error=$MULTILANG_ErrFrmCampo1;
 			if (@$campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm" && $tipo_objeto!="form_consulta" && $tipo_objeto!="boton_comando" ) ) $mensaje_error=$MULTILANG_ErrFrmCampo2;
 
