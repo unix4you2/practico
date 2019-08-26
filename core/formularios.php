@@ -592,14 +592,13 @@
 							            } //Fin si es objeto subformulario
 							    }
 						}
-
 					// Elimina comas al final de las listas
 					$lista_campos=substr($lista_campos, 0, strlen($lista_campos)-1);
 					$lista_valores=substr($lista_valores, 0, strlen($lista_valores)-1);
 					$lista_valores_interrogantes=substr($lista_valores_interrogantes, 0, strlen($lista_valores_interrogantes)-1);
 					//Elimina separador de campo al final de valores concatenados
 					$lista_valores_concatenados=substr($lista_valores_concatenados, 0, strlen($lista_valores_concatenados)-strlen($_SeparadorCampos_));					
-					$lista_valores_concatenados=substr($lista_valores_concatenados, 0, -strlen($_SeparadorCampos_));					
+					//$lista_valores_concatenados=substr($lista_valores_concatenados, 0, -strlen($_SeparadorCampos_));					
 
 					//Inserta los datos del registro en BD
 					PCO_EjecutarSQLUnaria("INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores_interrogantes.")",$lista_valores_concatenados);

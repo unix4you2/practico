@@ -5540,10 +5540,19 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
 		if ($registro_campos["solo_lectura"]=='READONLY')
 			$EstadoLecturaControl=' disabled ';
 
+        //Si la lista tiene activada la recuperacion por AJAX mientras se escribe agrega el modificador
+        $EstadoRecuperacionDinamica="";
+        $EstadoObligadoLiveSerachRecuperacionDinamica="";
+        if ($registro_campos["ajax_busqueda_dinamica"]=="1")
+            {
+                $EstadoRecuperacionDinamica=" with-ajax ";                
+                $EstadoObligadoLiveSerachRecuperacionDinamica=" data-live-search=true ";
+            }
+
 		//Abre el marco del control de datos
 		$salida.='<div class="form-group input-group">';
 		// Muestra el campo
-		$salida.= '<select id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" data-container="body" class="selectpicker combo-'.$registro_campos["campo"].' show-tick" '.@$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'" '.$registro_campos["personalizacion_tag"].' '.$EstadoLecturaControl.' >';
+		$salida.= '<select id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" data-container="body" class="selectpicker '.$EstadoRecuperacionDinamica.' combo-'.$registro_campos["campo"].' show-tick" '.@$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'" '.$registro_campos["personalizacion_tag"].' '.$EstadoObligadoLiveSerachRecuperacionDinamica.' '.$EstadoLecturaControl.' >';
 
             //Genera Script Ajax y DIV para cambio de opciones en caliente
             $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_opciones"]);
@@ -5624,6 +5633,10 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
 
             <div id="PCO_ListaOpciones_'.$registro_campos["campo"].'" style="display: inline-table;">';
 
+
+
+
+
                 // Toma los valores desde la lista de opciones (cuando es estatico)
                 //Si el campo es una simple coma entonces es para agregar el vacio al comienzo, sino hace la lista
                 if ($registro_campos["lista_opciones"]!='')
@@ -5642,56 +5655,90 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                     }
 
                 // Si se desea tomar los valores del combo desde una tabla hace la consulta
-                if ($registro_campos["origen_lista_opciones"]!="" && $registro_campos["origen_lista_valores"]!="")
-                    {
-                        $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_valores"]); //Usa el campo de valor de la lista que se asume es unico
-                        $nombre_tabla_opciones = $nombre_tabla_opciones[0];
-                        $campo_valores=$registro_campos["origen_lista_valores"];
-                        $campo_opciones=$registro_campos["origen_lista_opciones"];
-                        //Define si los registros a mostrar en la lista deben estar filtrados por alguna condicion
-                        $condicion_filtrado_listas=$registro_campos["condicion_filtrado_listas"];
-                        if ($condicion_filtrado_listas=="")
-							$condicion_filtrado_listas="1";
-                        else
-							{
-								//Mientras existan llaves abriendo y cerrando dentro de la condicion intenta establecer valor de variables
-								$SalidaFiltradoBypass=0;
-								while(strpos($condicion_filtrado_listas,"{")!==FALSE && strpos($condicion_filtrado_listas,"}")!==FALSE && $SalidaFiltradoBypass==0)
-									{
-										//Evalua casos donde se tienen variables PHP escapadas por llaves.  Ej  "%{$Variable}%" si fuera para un LIKE, por ejemplo o para una variable en un where  campo="{$Variable}"
-										if (strpos($condicion_filtrado_listas,"{")!==FALSE && strpos($condicion_filtrado_listas,"}")!==FALSE)
-											{
-												//Determina las posiciones de las llaves en la cadena
-												$PosLlaveIzquierda=strpos($condicion_filtrado_listas,"{");
-												$PosLlaveDerecha=strpos($condicion_filtrado_listas,"}");
-												//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
-												$NombreVariable=substr($condicion_filtrado_listas,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
-												//Si la variable no esta definida la busca en el entorno global
-												global ${$NombreVariable};
-												if (@isset($NombreVariable))
-													{
-														$ValorVariable=${$NombreVariable};
-														//Reemplaza el valor encontrado en la cadena de valor original
-														$condicion_filtrado_listas=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$condicion_filtrado_listas);
-													}
-												else
-													{
-														//Puede que no se logre reemplazar nada porque la variable no esta definida entonces sale por ByPass para evitar ciclo infinito
-														$SalidaFiltradoBypass=1;
-													}
-											}
-									}
-							}
+                    if ($registro_campos["origen_lista_opciones"]!="" && $registro_campos["origen_lista_valores"]!="")
+                        {
+                            $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_valores"]); //Usa el campo de valor de la lista que se asume es unico
+                            $nombre_tabla_opciones = $nombre_tabla_opciones[0];
+                            $campo_valores=$registro_campos["origen_lista_valores"];
+                            $campo_opciones=$registro_campos["origen_lista_opciones"];
+                            //Define si los registros a mostrar en la lista deben estar filtrados por alguna condicion
+                            $condicion_filtrado_listas=$registro_campos["condicion_filtrado_listas"];
+                            if ($condicion_filtrado_listas=="")
+    							$condicion_filtrado_listas="1";
+                            else
+    							{
+    								//Mientras existan llaves abriendo y cerrando dentro de la condicion intenta establecer valor de variables
+    								$SalidaFiltradoBypass=0;
+    								while(strpos($condicion_filtrado_listas,"{")!==FALSE && strpos($condicion_filtrado_listas,"}")!==FALSE && $SalidaFiltradoBypass==0)
+    									{
+    										//Evalua casos donde se tienen variables PHP escapadas por llaves.  Ej  "%{$Variable}%" si fuera para un LIKE, por ejemplo o para una variable en un where  campo="{$Variable}"
+    										if (strpos($condicion_filtrado_listas,"{")!==FALSE && strpos($condicion_filtrado_listas,"}")!==FALSE)
+    											{
+    												//Determina las posiciones de las llaves en la cadena
+    												$PosLlaveIzquierda=strpos($condicion_filtrado_listas,"{");
+    												$PosLlaveDerecha=strpos($condicion_filtrado_listas,"}");
+    												//Toma solo el pedazo entre llaves para intentar ubicar el valor de la variable por su nombre
+    												$NombreVariable=substr($condicion_filtrado_listas,$PosLlaveIzquierda+2,$PosLlaveDerecha-$PosLlaveIzquierda-2);
+    												//Si la variable no esta definida la busca en el entorno global
+    												global ${$NombreVariable};
+    												if (@isset($NombreVariable))
+    													{
+    														$ValorVariable=${$NombreVariable};
+    														//Reemplaza el valor encontrado en la cadena de valor original
+    														$condicion_filtrado_listas=str_replace('{$'.$NombreVariable.'}',$ValorVariable,$condicion_filtrado_listas);
+    													}
+    												else
+    													{
+    														//Puede que no se logre reemplazar nada porque la variable no esta definida entonces sale por ByPass para evitar ciclo infinito
+    														$SalidaFiltradoBypass=1;
+    													}
+    											}
+    									}
+    							}
+    
+                            //Recupera los datos para la lista.  En listas de llenado estandar recupera todo SINO solo los posibles valores ya seleccionados
+                            if ($registro_campos["ajax_busqueda_dinamica"]=="0")
+                                {
+                                    // Consulta los campos para el tag select
+                                    $resultado_opciones=PCO_EjecutarSQL("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE $condicion_filtrado_listas");   //Deprecated.  ORDER BY $campo_opciones
+                                    // Muestra resultados solo si $resultado_opciones es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch()
+                                    while ($resultado_opciones!="1" && $registro_opciones = $resultado_opciones->fetch())
+                                        {
+                                            $opciones_lista[] = $registro_opciones["opciones"];
+                                            $valores_lista[] = $registro_opciones["valores"];
+                                        }
+                                }
+                            else
+                                {
+                                    //Solo si tiene datos intenta recuperar registros coincidentes
+                                    if ($registro_datos_formulario["$nombre_campo"]!="")
+                                        {
+                                            $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_valores"]); //Usa el campo de valor de la lista que se asume es unico
+                                            $nombre_tabla_opciones = $nombre_tabla_opciones[0];
+                                            $campo_valores=$registro_campos["origen_lista_valores"];
+                                            $campo_opciones=$registro_campos["origen_lista_opciones"];
 
-                        // Consulta los campos para el tag select
-                        $resultado_opciones=PCO_EjecutarSQL("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE $condicion_filtrado_listas");   //Deprecated.  ORDER BY $campo_opciones
-                        // Muestra resultados solo si $resultado_opciones es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch()
-                        while ($resultado_opciones!="1" && $registro_opciones = $resultado_opciones->fetch())
-                            {
-                                $opciones_lista[] = $registro_opciones["opciones"];
-                                $valores_lista[] = $registro_opciones["valores"];
-                            }
-                    }
+                    						//Construye el comentento de la condicion para obtener como minimo aquellos registros seleccionados y no traer todos los datos
+                                            $ComplementoValoresYaSeleccionados=" ( ";
+                                            //$ComplementoValoresYaSeleccionados="  (documento='1128282578' OR documento='52,965,018' OR documento='71782341' OR documento='52305908' OR documento='55180918') AND ";  //,
+                                            $ListaPosiblesValores=explode(",",$registro_datos_formulario["$nombre_campo"]);
+                                            foreach ($ListaPosiblesValores as $PosibleValor)
+                                                if (trim($PosibleValor)!="")
+                                                    $ComplementoValoresYaSeleccionados.= " $campo_valores='$PosibleValor' OR ";
+                                            $ComplementoValoresYaSeleccionados=substr($ComplementoValoresYaSeleccionados, 0, strlen($ComplementoValoresYaSeleccionados)-3);
+                                            $ComplementoValoresYaSeleccionados.=" )  ";  //AND
+
+                                            // Consulta los campos para el tag select
+                                            $resultado_opciones=PCO_EjecutarSQL("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE $ComplementoValoresYaSeleccionados  ");  
+                                            // Muestra resultados solo si $resultado_opciones es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch()
+                                            while ($resultado_opciones!="1" && $registro_opciones = $resultado_opciones->fetch())
+                                                {
+                                                    $opciones_lista[] = $registro_opciones["opciones"];
+                                                    $valores_lista[] = $registro_opciones["valores"];
+                                                }
+                                        }
+                                }
+                        }
 
                 for ($i=0;$i<count(@$opciones_lista);$i++)
                     {
@@ -5716,6 +5763,88 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
             echo '</div>';
 
 		$salida.= '</select>';
+
+            //Si la lista tiene activada la recuperacion por AJAX mientras se escribe construye las variables y define funcion de recuperacion
+            if ($registro_campos["ajax_busqueda_dinamica"]=="1")
+                {
+                    //Determina la tabla y campos desde los valores de lista definidos para usarlos como parametros en el AJAX
+                    //Obtiene PCO_TablaConsulta
+                    $TablaRecuperacionDinamica=explode(".",$registro_campos["origen_lista_opciones"]);
+                    $TablaRecuperacionDinamica=$TablaRecuperacionDinamica[0];
+                    //Obtiene PCO_ListaCamposRetorno (Campo de valor)
+                    $CampoValorRecuperacionDinamica=explode(".",$registro_campos["origen_lista_valores"]);
+                    $CampoValorRecuperacionDinamica=$CampoValorRecuperacionDinamica[1];
+                    //Obtiene PCO_ListaCamposRetorno (Campo de texto)
+                    $CampoBusquedaRecuperacionDinamica=explode(".",$registro_campos["origen_lista_opciones"]);
+                    $CampoBusquedaRecuperacionDinamica=$CampoBusquedaRecuperacionDinamica[1];
+                    //Obtiene la condicion de filtrado si aplica
+                    $CondicionFiltradoConsulta=$registro_campos["condicion_filtrado_listas"];
+                    if (trim($CondicionFiltradoConsulta)!="")
+                        {
+                            $CondicionFiltradoConsulta=" AND ".$CondicionFiltradoConsulta;
+                            //Si encuentra comillas dobles las reemplaza por simples pues son las aceptadas en JS
+                            $CondicionFiltradoConsulta=str_replace('"',"'",$CondicionFiltradoConsulta);
+                            $CondicionFiltradoConsulta=PCO_ReemplazarVariablesPHPEnCadena($CondicionFiltradoConsulta);
+                        }
+                    
+                    echo '<script type="text/javascript">
+                            var OrigenListaOpciones'.$registro_campos["id_html"].' = {
+                              values: "a, b, c",
+                              ajax: {
+                                url: "index.php",
+                                type: "POST",
+                                dataType: "json",
+                                // Use "{{{q}}}" as a placeholder and Ajax Bootstrap Select will automatically replace it with the value of the search query.
+                                data: {
+                                  q: "{{{q}}}",
+                                  PCO_Accion: "PCO_ObtenerOpcionesAjaxSelect",
+                                  Presentar_FullScreen: "1",
+                                  PCO_TablaConsulta: "'.$TablaRecuperacionDinamica.'",
+                                  PCO_ListaCamposRetorno: "'.$CampoValorRecuperacionDinamica.','.$CampoBusquedaRecuperacionDinamica.'", //Campos en el siguiente orden: Valor, Texto o etiqueta, Subtexto, Icono tipo glyphicon
+                                  PCO_ListaCamposBusqueda: "'.$CampoBusquedaRecuperacionDinamica.'",
+                                  PCO_CondicionFiltrado: "'.$CondicionFiltradoConsulta.'"
+                                }
+                              },
+                              locale: {
+                                emptyTitle: "Seleccione y digite para buscar"
+                              },
+                              log: 0, //Nivel de console.log del combo
+                              preprocessData: function(data) {
+                                  //data=JSON.parse(data);
+                                var i,
+                                  l = data.length,
+                                  array = [];
+                                if (l) {
+                                  for (i = 0; i < l; i++) {
+                                    array.push(
+                                      $.extend(true, data[i], {
+                                        text: data[i].T,
+                                        value: data[i].V,
+                                        data: {
+                                          subtext: data[i].S,
+                                          icon:  data[i].I,
+                                          //thumbnail: "pwa/launcher-icon-36.png"
+                                        }
+                                      })
+                                    );
+                                  }
+                                }
+                                // You must always return a valid array when processing data. The data argument passed is a clone and cannot be modified directly.
+                                return array;
+                              }
+                            };
+
+                            $( document ).ready(function() {
+                                $("#'.$registro_campos["id_html"].'").selectpicker().filter(".with-ajax").ajaxSelectPicker(OrigenListaOpciones'.$registro_campos["id_html"].');
+                                $("#'.$registro_campos["id_html"].'").trigger("change");
+                            });
+                            //  function chooseSelectpicker(index, selectpicker) {
+                            //   $(selectpicker).val(index);
+                            //   $(selectpicker).selectpicker("refresh");
+                            //  }
+                        </script>';
+                }
+
 
 		// Muestra boton de busqueda cuando el campo sea usado para esto
 		if ($registro_campos["etiqueta_busqueda"]!="")

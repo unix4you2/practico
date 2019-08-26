@@ -200,8 +200,7 @@ if (@$PCO_Accion=="cambiar_estado_campo")
 		PCO_TablaConsulta - Nombre de la tabla que contiene los datos.  Puede ser combinacion de tablas separadas por coma sin olvidar agregar la condicion de llaves foraneas
 		PCO_ListaCamposRetorno - Lista de campos separados por coma que seran devueltos por el query
 		PCO_ListaCamposBusqueda - Lista de campos separados unicamente por coma y que son utilizados para la consulta tipo LIKE con el valor recibido
-		PCO_ParametrosOrdenamientoYLimite - OPCIONAL Lista de parametros para ser agregados a la consulta tales como ORDER BY, GROUP BY o LIMIT
-		PCO_CondicionFiltrado - Condicion a ser agregada a la clausula WHERE de la consulta que filtra resultados
+		PCO_CondicionFiltrado - OPCIONAL Condicion a ser agregada a la clausula WHERE de la consulta que filtra resultados
 
 	Salida:
 
@@ -220,7 +219,7 @@ if (@$PCO_Accion=="PCO_ObtenerOpcionesAjaxSelect")
         if ($PCO_ListaCamposRetorno!="" && $PCO_ListaCamposBusqueda!="" && $PCO_TablaConsulta!="")
             {
                 $Resultados='[';
-                $Consulta=PCO_EjecutarSQL("SELECT $PCO_ListaCamposRetorno FROM $PCO_TablaConsulta WHERE $PCO_CondicionFiltrado ($CadenaCondicionCamposFiltro) $PCO_ParametrosOrdenamientoYLimite ");
+                $Consulta=PCO_EjecutarSQL("SELECT $PCO_ListaCamposRetorno FROM $PCO_TablaConsulta WHERE  ($CadenaCondicionCamposFiltro) $PCO_CondicionFiltrado ");
                 while ($Registro=$Consulta->fetch())
                     {
                         $Resultados.='
@@ -250,4 +249,3 @@ if (@$PCO_Accion=="PCO_ObtenerOpcionesAjaxSelect")
         //Devuelve el JSON generado con los resultados
         echo $Resultados;
 	}
-
