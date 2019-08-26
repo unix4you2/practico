@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno="19"
-VersionCompatibleMes="5"
+VersionCompatibleAno=""
+VersionCompatibleMes=""
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno="19"
-VersionFinalMes="6"
+VersionFinalAno=""
+VersionFinalMes=""
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
@@ -17,20 +17,6 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/ajax.php
-core/conexiones.php
-core/informes.php
-core/formularios.php
-core/marco_abajo.php
-core/marco_arriba_bs.php
-core/objetos.php
-inc/bootstrap/css/images/*
-inc/bootstrap/css/plugins/*
-inc/bootstrap/js/plugins/dataTables/*
-inc/bootstrap/css/plugins/ajax-bootstrap-select/*
-inc/bootstrap/js/plugins/ajax-bootstrap-select/*
-inc/jquery/plugins/jszip.min.js
-inc/jquery/plugins/pdfmake.min.js
-inc/jquery/plugins/vfs_fonts.js
 
 xml/*
 inc/practico/idiomas/*
@@ -47,32 +33,13 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added [INFORMES]: Los informes con DataTables activado permiten ahora ser exportados directamente del lado del usuario en diferentes formatos (Portapapeles, CSV, XLS y PDF)
-* Enhan [INFORMES]: El disenador de informes presenta opciones de datatables solamente cuando estan activadas.
-* Enhan [INFORMES]: Durante la generacion de informes se pregunta solamente por los datos básicos.  Sus opciones avanzadas y personalización serán configurados posteriormente en el paso siguiente a su creación.
-* Enhan [INFORMES]: Ahora se puede personalizar en la configuracion de informes si se desea presentar o no sus encabezados de olumna o pie de paginas por separado.
-* Enhan [INFORMES]: Las variables que contienen los administradores del sistema y la zona horaria son ahora transferidos a cada consulta realizada por el motor bajo los nombres @PCOVAR_Administradores y @PCOVAR_ZonaHoraria en caso de ser requeridos por el programador y adicionalmente el motor asigna la zona horaria indicada por defecto.
-* Added [FORM]: Ahora se permite crear listas desplegables que recuperan sus datos dinamicamente mientras se escribe.  Util cuando se manejan tablas con una cantidad alta de registros para poblar la tabla.  Para tal fin se utilizan los mismos parametros de lista donde se definen las tablas y campos de origen así como las condiciones de filtrado
-* Fixed [FORM]: Los formularios que contengan otros formularios embebidos y con multiples pestanas cada uno ahora diferencian sus pestanas en los embebidos como PCO_PestanaSubFormulario_X 
-* Enhan [FORM]: Ahora los elementos como pestañas de formulario, botones de comando inferiores y contenidos de pestañas con nombre PCO_NoVisible son ocultadas en formatos de impresión. 
-* Fixed [FORM]: La generacion de formularios internos y sus funciones de AutoRun son ahora etiquetadas como LTZ y su signo negativo es restirado para evitar errores de JavaScript
-* Fixed [USUARIOS]: La asignacion de permisos de informes de usuarios evita los informes internos del framework
+
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 # RECORDAR EN OPCIONES MULTI-IDIOMA:  UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 ScriptBasedatos="
-
-ALTER TABLE core_informe ADD exportar_dtclp char(1) DEFAULT 'N';
-ALTER TABLE core_informe ADD exportar_dtcsv char(1) DEFAULT 'N';
-ALTER TABLE core_informe ADD exportar_dtxls char(1) DEFAULT 'N';
-ALTER TABLE core_informe ADD exportar_dtpdf char(1) DEFAULT 'N';
-ALTER TABLE core_informe ADD ocultar_encabezado int(1) DEFAULT '0';
-ALTER TABLE core_informe ADD ocultar_piepagina int(1) DEFAULT '0';
-ALTER TABLE core_informe ADD anular_acciones int(1) DEFAULT '0';
-
-ALTER TABLE core_formulario_objeto ADD ajax_busqueda_dinamica int(1) NULL DEFAULT '0';
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');

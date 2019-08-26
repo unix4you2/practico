@@ -7,6 +7,20 @@
             |___/ 
 ```
 
+## Versión 19.6 (2019-08-15)
+
+* Added [INFORMES]: Los informes con DataTables activado permiten ahora ser exportados directamente del lado del usuario en diferentes formatos (Portapapeles, CSV, XLS y PDF)
+* Enhan [INFORMES]: El disenador de informes presenta opciones de datatables solamente cuando estan activadas.
+* Enhan [INFORMES]: Durante la generacion de informes se pregunta solamente por los datos básicos.  Sus opciones avanzadas y personalización serán configurados posteriormente en el paso siguiente a su creación.
+* Enhan [INFORMES]: Ahora se puede personalizar en la configuracion de informes si se desea presentar o no sus encabezados de olumna o pie de paginas por separado.
+* Enhan [INFORMES]: Las variables que contienen los administradores del sistema y la zona horaria son ahora transferidos a cada consulta realizada por el motor bajo los nombres @PCOVAR_Administradores y @PCOVAR_ZonaHoraria en caso de ser requeridos por el programador y adicionalmente el motor asigna la zona horaria indicada por defecto.
+* Added [FORM]: Ahora se permite crear listas desplegables que recuperan sus datos dinamicamente mientras se escribe.  Util cuando se manejan tablas con una cantidad alta de registros para poblar la tabla.  Para tal fin se utilizan los mismos parametros de lista donde se definen las tablas y campos de origen así como las condiciones de filtrado
+* Fixed [FORM]: Los formularios que contengan otros formularios embebidos y con multiples pestanas cada uno ahora diferencian sus pestanas en los embebidos como PCO_PestanaSubFormulario_X 
+* Enhan [FORM]: Ahora los elementos como pestañas de formulario, botones de comando inferiores y contenidos de pestañas con nombre PCO_NoVisible son ocultadas en formatos de impresión. 
+* Fixed [FORM]: La generacion de formularios internos y sus funciones de AutoRun son ahora etiquetadas como LTZ y su signo negativo es restirado para evitar errores de JavaScript
+* Fixed [USUARIOS]: La asignacion de permisos de informes de usuarios evita los informes internos del framework
+
+
 ## Versión 19.5 (2019-07-10)
 
 * Added: [FORMS] Ahora durante el almacenamiento de datos de un formulario se permite utilizar variables de postaccion para capturar el valor del ID de registro asociado a los datos almacenados.  Para esto el VALOR de la variable de postaccion debe ser establecido a _OBTENER_ULTIMO_ID_ y con esto en la siguiente acción se contará con dicho valor en el nombre de variable transportado para trabajar.
